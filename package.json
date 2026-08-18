@@ -38,8 +38,8 @@
   },
   "scripts": {
     "start": "expo start",
-    "update:preview": "eas update --branch preview --message \"$(git log -1 --pretty=%s)\"",
-    "update:production": "eas update --branch production --message \"$(git log -1 --pretty=%s)\"",
+    "update:preview": "eas update --branch preview --environment preview --message \"$(git log -1 --pretty=%s)\"",
+    "update:production": "eas update --branch production --environment production --message \"$(git log -1 --pretty=%s)\"",
     "reset-project": "node ./scripts/reset-project.js",
     "android": "expo start --android",
     "ios": "expo start --ios",

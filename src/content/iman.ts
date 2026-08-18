@@ -7,10 +7,9 @@ import type { Pillar } from './types';
  * written by a model and have not been checked by a qualified person. The
  * vocalisation marks in particular need verifying against a printed source.
  *
- * This is the Sunni enumeration, taken from the hadith of Jibril, because it
- * is the one that matches the salah the rest of the app teaches. Shia Islam
- * organises its principles differently. Saying that here would hand a
- * first-timer a comparison table when what they need is one clear account.
+ * The enumeration is the one in the hadith of Jibril (Bukhari and Muslim).
+ * The app is Sunni and argues from authenticated hadith — see CLAUDE.md; that
+ * is settled and this file does not re-open it.
  *
  * The English is deliberately plain and deliberately shallow. Each article
  * has centuries of theology behind it; this page gives someone the shape of

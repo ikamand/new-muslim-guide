@@ -64,11 +64,17 @@ different class of mistake from a layout bug.
 - **Never invent, paraphrase from memory, or "improve" an Arabic text, a
   transliteration or a translation.** Recitations live in one file,
   `src/content/recitations.ts`, so a correction lands everywhere.
+- **The app is Sunni, and its evidence is authenticated hadith.** This is
+  settled, not a per-file decision. Don't hedge it in prose, don't present
+  Sunni practice as one option among several, and don't reach for a weak or
+  disputed narration because it makes a nicer sentence. If the only support
+  for something is a narration you can't place as authentic, leave it out.
 - **Schools of thought differ** on details — hand position, saying the
-  intention aloud, the number of times something is wiped. The app teaches
-  **one clear way**, because a first-timer needs a path, not a comparison
-  table. Where a difference is one a beginner will actually encounter, say so
-  in the step's `note` in a single plain sentence.
+  intention aloud, the number of times something is wiped. That is *within*
+  Sunni Islam and is untouched by the rule above. The app teaches **one clear
+  way**, because a first-timer needs a path, not a comparison table. Where a
+  difference is one a beginner will actually encounter, say so in the step's
+  `note` in a single plain sentence.
 - **All content needs review by a qualified person before release.** Nothing
   written by a model ships unreviewed. Say this out loud rather than assuming
   it is understood.

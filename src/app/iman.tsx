@@ -2,30 +2,23 @@ import { Stack } from 'expo-router';
 import { ScrollView, StyleSheet, View } from 'react-native';
 
 import { PillarCard } from '@/components/pillar-card';
-import { RecitationCard } from '@/components/recitation-card';
 import { ThemedText } from '@/components/themed-text';
-import { PILLARS, SHAHADA } from '@/content';
+import { IMAN_PILLARS } from '@/content';
 import { MaxContentWidth, Spacing } from '@/constants/theme';
 
-export default function PillarsScreen() {
+export default function ImanScreen() {
   return (
     <ScrollView contentContainerStyle={styles.content}>
-      <Stack.Screen options={{ title: 'The Five Pillars' }} />
+      <Stack.Screen options={{ title: 'The Six Articles of Faith' }} />
 
       <ThemedText type="default" themeColor="textSecondary">
-        The five things Islam is built on. Only the first two ask anything of you today — the
-        rest arrive in their own time, and two of them may never apply to you at all.
+        The five pillars are what you do. These six are what you believe while doing it. You
+        already accepted them when you said the shahada — this page is only putting names to
+        them, and nothing here is something you need to memorise.
       </ThemedText>
 
-      <View style={styles.section}>
-        <ThemedText type="smallBold" themeColor="textSecondary" style={styles.sectionTitle}>
-          The testimony
-        </ThemedText>
-        <RecitationCard recitation={SHAHADA} />
-      </View>
-
       <View style={styles.list}>
-        {PILLARS.map((pillar, index) => (
+        {IMAN_PILLARS.map((pillar, index) => (
           <PillarCard key={pillar.id} pillar={pillar} index={index} />
         ))}
       </View>
@@ -41,13 +34,6 @@ const styles = StyleSheet.create({
     width: '100%',
     maxWidth: MaxContentWidth,
     alignSelf: 'center',
-  },
-  section: {
-    gap: Spacing.two,
-  },
-  sectionTitle: {
-    textTransform: 'uppercase',
-    letterSpacing: 1,
   },
   list: {
     gap: Spacing.three,

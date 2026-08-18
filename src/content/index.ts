@@ -1,3 +1,4 @@
+import { IMAN_PILLARS } from './iman';
 import { PILLARS } from './pillars';
 import { PRAYERS } from './prayers';
 import type { Guide } from './types';
@@ -9,6 +10,7 @@ export function getGuide(id: string): Guide | undefined {
   return GUIDES.find((guide) => guide.id === id);
 }
 
+export { getImanPillar } from './iman';
 export { getPillar, SHAHADA } from './pillars';
-export { PILLARS, PRAYERS, WUDU };
+export { IMAN_PILLARS, PILLARS, PRAYERS, WUDU };
 export * from './types';

@@ -44,7 +44,11 @@ export type Guide = {
 };
 
 /**
- * One of the five pillars — reference reading, not a thing you step through.
+ * One of the pillars — reference reading, not a thing you step through.
+ *
+ * Shared by the five pillars of Islam and the six articles of faith. They are
+ * the same shape: a named thing you read about once, not a sequence you follow
+ * mid-motion.
  *
  * Deliberately not a `Guide`: a pillar is something you learn about, a guide
  * is something you follow while holding the phone. Different shape, different
@@ -62,4 +66,6 @@ export type Pillar = {
   detail: string;
   /** Where the app already teaches this, if it does. */
   guideId?: string;
+  /** Anything a first-timer would otherwise take the wrong way. */
+  note?: string;
 };

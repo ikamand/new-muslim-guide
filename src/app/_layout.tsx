@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { DisplaySettingsProvider, useDisplaySettings } from '@/hooks/use-display-settings';
+import { LocationProvider } from '@/hooks/use-location';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -40,6 +41,7 @@ function RootStack() {
         name="pillars"
         options={{ title: 'The Five Pillars', headerBackTitle: 'Learn' }}
       />
+      <Stack.Screen name="qibla" options={{ title: 'Qibla', headerBackTitle: 'Back' }} />
     </Stack>
   );
 }
@@ -47,7 +49,9 @@ function RootStack() {
 export default function RootLayout() {
   return (
     <DisplaySettingsProvider>
-      <RootStack />
+      <LocationProvider>
+        <RootStack />
+      </LocationProvider>
     </DisplaySettingsProvider>
   );
 }

@@ -2,12 +2,14 @@ import { Link } from 'expo-router';
 import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { PrayerTimesCard } from '@/components/prayer-times-card';
 import { ThemedText } from '@/components/themed-text';
 import { PRAYERS, WUDU, type Guide } from '@/content';
 import { BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
+import { usePrayerTimes } from '@/hooks/use-prayer-times';
 import { useTheme } from '@/hooks/use-theme';
 
-function GuideCard({ guide }: { guide: Guide }) {
+function GuideCard({ guide, isNext }: { guide: Guide; isNext?: boolean }) {
   const theme = useTheme();
 
   return (
@@ -28,8 +30,8 @@ function GuideCard({ guide }: { guide: Guide }) {
             {guide.subtitle}
           </ThemedText>
         </View>
-        <ThemedText type="small" themeColor="accent">
-          {guide.steps.length} steps
+        <ThemedText type="small" themeColor={isNext ? 'accent' : 'textSecondary'}>
+          {isNext ? 'Next' : `${guide.steps.length} steps`}
         </ThemedText>
       </Pressable>
     </Link>
@@ -38,17 +40,12 @@ function GuideCard({ guide }: { guide: Guide }) {
 
 export default function HomeScreen() {
   const theme = useTheme();
+  const { next } = usePrayerTimes();
 
   return (
     <SafeAreaView style={[styles.safeArea, { backgroundColor: theme.background }]} edges={['top']}>
       <ScrollView contentContainerStyle={styles.content}>
-        <View style={styles.header}>
-          <ThemedText type="subtitle">How to pray</ThemedText>
-          <ThemedText type="default" themeColor="textSecondary">
-            One step at a time, with the words written out. Nothing to set up, nothing to sign
-            into — start wherever you are.
-          </ThemedText>
-        </View>
+        <PrayerTimesCard />
 
         <View style={styles.section}>
           <ThemedText type="smallBold" themeColor="textSecondary" style={styles.sectionTitle}>
@@ -62,7 +59,7 @@ export default function HomeScreen() {
             The five prayers
           </ThemedText>
           {PRAYERS.map((prayer) => (
-            <GuideCard key={prayer.id} guide={prayer} />
+            <GuideCard key={prayer.id} guide={prayer} isNext={prayer.id === next?.id} />
           ))}
         </View>
       </ScrollView>
@@ -76,15 +73,12 @@ const styles = StyleSheet.create({
   },
   content: {
     padding: Spacing.four,
+    paddingTop: Spacing.three,
     paddingBottom: BottomTabInset + Spacing.four,
     gap: Spacing.five,
     width: '100%',
     maxWidth: MaxContentWidth,
     alignSelf: 'center',
-  },
-  header: {
-    gap: Spacing.two,
-    paddingTop: Spacing.four,
   },
   section: {
     gap: Spacing.two,

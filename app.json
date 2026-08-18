@@ -35,6 +35,14 @@
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 76
         }
+      ],
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Prayer times and the qibla are worked out from where you are. Your location stays on this device and is never sent anywhere.",
+          "isIosBackgroundLocationEnabled": false,
+          "isAndroidBackgroundLocationEnabled": false
+        }
       ]
     ],
     "experiments": {

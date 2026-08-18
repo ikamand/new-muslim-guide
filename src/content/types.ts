@@ -42,3 +42,24 @@ export type Guide = {
   subtitle: string;
   steps: Step[];
 };
+
+/**
+ * One of the five pillars — reference reading, not a thing you step through.
+ *
+ * Deliberately not a `Guide`: a pillar is something you learn about, a guide
+ * is something you follow while holding the phone. Different shape, different
+ * screen.
+ */
+export type Pillar = {
+  id: string;
+  /** English name: "Prayer". */
+  title: string;
+  arabic: string;
+  transliteration: string;
+  /** One line under the title — what it is, in the fewest words. */
+  summary: string;
+  /** Two or three plain sentences. No jargon a first-timer wouldn't know. */
+  detail: string;
+  /** Where the app already teaches this, if it does. */
+  guideId?: string;
+};

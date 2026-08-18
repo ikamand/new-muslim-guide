@@ -2,6 +2,7 @@ import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 import { useRef, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 
+import { RecitationCard } from '@/components/recitation-card';
 import { ThemedText } from '@/components/themed-text';
 import { getGuide, type Posture } from '@/content';
 import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
@@ -73,25 +74,7 @@ export default function GuideScreen() {
           {step.instruction}
         </ThemedText>
 
-        {step.says && (
-          <View
-            style={[
-              styles.saysCard,
-              { backgroundColor: theme.backgroundElement, borderColor: theme.border },
-            ]}>
-            <ThemedText style={styles.arabic}>{step.says.arabic}</ThemedText>
-            <ThemedText type="small" themeColor="textSecondary" style={styles.transliteration}>
-              {step.says.transliteration}
-            </ThemedText>
-            <View style={[styles.divider, { backgroundColor: theme.border }]} />
-            <ThemedText type="small">{step.says.translation}</ThemedText>
-            {step.says.times && (
-              <ThemedText type="small" themeColor="accent">
-                {step.says.times}
-              </ThemedText>
-            )}
-          </View>
-        )}
+        {step.says && <RecitationCard recitation={step.says} />}
 
         {step.note && (
           <View style={[styles.note, { borderLeftColor: theme.accent }]}>
@@ -174,25 +157,6 @@ const styles = StyleSheet.create({
   },
   instruction: {
     lineHeight: 26,
-  },
-  saysCard: {
-    gap: Spacing.two,
-    padding: Spacing.three,
-    borderRadius: Radius.medium,
-    borderWidth: StyleSheet.hairlineWidth,
-  },
-  arabic: {
-    fontSize: 26,
-    lineHeight: 48,
-    textAlign: 'right',
-    writingDirection: 'rtl',
-  },
-  transliteration: {
-    fontStyle: 'italic',
-  },
-  divider: {
-    height: StyleSheet.hairlineWidth,
-    marginVertical: Spacing.one,
   },
   note: {
     borderLeftWidth: 3,

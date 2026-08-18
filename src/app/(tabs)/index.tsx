@@ -3,8 +3,8 @@ import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ThemedText } from '@/components/themed-text';
-import { GUIDES, PRAYERS, WUDU, type Guide } from '@/content';
-import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
+import { PRAYERS, WUDU, type Guide } from '@/content';
+import { BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 function GuideCard({ guide }: { guide: Guide }) {
@@ -43,9 +43,6 @@ export default function HomeScreen() {
     <SafeAreaView style={[styles.safeArea, { backgroundColor: theme.background }]} edges={['top']}>
       <ScrollView contentContainerStyle={styles.content}>
         <View style={styles.header}>
-          <ThemedText type="small" themeColor="accent" style={styles.eyebrow}>
-            New Muslim Guide
-          </ThemedText>
           <ThemedText type="subtitle">How to pray</ThemedText>
           <ThemedText type="default" themeColor="textSecondary">
             One step at a time, with the words written out. Nothing to set up, nothing to sign
@@ -68,10 +65,6 @@ export default function HomeScreen() {
             <GuideCard key={prayer.id} guide={prayer} />
           ))}
         </View>
-
-        <ThemedText type="small" themeColor="textSecondary" style={styles.footnote}>
-          {GUIDES.length} guides · everything stays on this device
-        </ThemedText>
       </ScrollView>
     </SafeAreaView>
   );
@@ -83,7 +76,7 @@ const styles = StyleSheet.create({
   },
   content: {
     padding: Spacing.four,
-    paddingBottom: Spacing.six,
+    paddingBottom: BottomTabInset + Spacing.four,
     gap: Spacing.five,
     width: '100%',
     maxWidth: MaxContentWidth,
@@ -92,10 +85,6 @@ const styles = StyleSheet.create({
   header: {
     gap: Spacing.two,
     paddingTop: Spacing.four,
-  },
-  eyebrow: {
-    textTransform: 'uppercase',
-    letterSpacing: 1.2,
   },
   section: {
     gap: Spacing.two,
@@ -121,8 +110,5 @@ const styles = StyleSheet.create({
   cardTitle: {
     fontSize: 17,
     lineHeight: 24,
-  },
-  footnote: {
-    textAlign: 'center',
   },
 });

@@ -5,7 +5,7 @@ import { RecitationCard } from '@/components/recitation-card';
 import { ThemedText } from '@/components/themed-text';
 import { Recitations } from '@/content/recitations';
 import { BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
-import { useDisplaySettings, type DisplaySettings } from '@/hooks/use-display-settings';
+import { useSettings, type Settings } from '@/hooks/use-settings';
 import { useLocale } from '@/hooks/use-locale';
 import { LOCALE_NAMES, LOCALES } from '@/i18n/locales';
 import { useTheme } from '@/hooks/use-theme';
@@ -18,12 +18,12 @@ function SettingRow({
 }: {
   label: string;
   description: string;
-  settingKey: keyof DisplaySettings;
+  settingKey: keyof Settings;
   /** The divider separates rows; the last row has nothing to separate from. */
   isLast?: boolean;
 }) {
   const theme = useTheme();
-  const settings = useDisplaySettings();
+  const settings = useSettings();
   const value = settings[settingKey];
 
   return (
@@ -95,9 +95,7 @@ export default function SettingsScreen() {
       <ScrollView contentContainerStyle={styles.content}>
         <View style={styles.header}>
           <ThemedText type="subtitle">{t('settings.title')}</ThemedText>
-          <ThemedText type="default" themeColor="textSecondary">
-            What you see under the Arabic. Turn them off as you stop needing them.
-          </ThemedText>
+          <ThemedText type="default" themeColor="textSecondary">{t('settings.intro')}</ThemedText>
         </View>
 
         <View style={styles.section}>
@@ -110,15 +108,33 @@ export default function SettingsScreen() {
         <View style={[styles.group, { backgroundColor: theme.backgroundElement, borderColor: theme.border }]}>
           <SettingRow
             label={t('settings.transliteration')}
-            description="The Arabic spelled out in English letters"
+            description={t('settings.transliteration.help')}
             settingKey="transliteration"
           />
           <SettingRow
             label={t('settings.translation')}
-            description="What the words mean in English"
+            description={t('settings.translation.help')}
             settingKey="translation"
             isLast
           />
+        </View>
+
+        <View style={styles.section}>
+          <ThemedText type="smallBold" themeColor="textSecondary" style={styles.sectionTitle}>
+            {t('settings.duringPrayer')}
+          </ThemedText>
+          <View
+            style={[
+              styles.group,
+              { backgroundColor: theme.backgroundElement, borderColor: theme.border },
+            ]}>
+            <SettingRow
+              label={t('settings.keepAwake')}
+              description={t('settings.keepAwake.help')}
+              settingKey="keepAwake"
+              isLast
+            />
+          </View>
         </View>
 
         <View style={styles.section}>

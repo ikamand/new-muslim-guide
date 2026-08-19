@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import { ThemedText } from '@/components/themed-text';
 import type { Recitation } from '@/content';
 import { Radius, Spacing } from '@/constants/theme';
-import { useDisplaySettings } from '@/hooks/use-display-settings';
+import { useSettings } from '@/hooks/use-settings';
 import { useTheme } from '@/hooks/use-theme';
 
 /**
@@ -14,7 +14,7 @@ import { useTheme } from '@/hooks/use-theme';
  */
 export function RecitationCard({ recitation }: { recitation: Recitation }) {
   const theme = useTheme();
-  const { transliteration, translation } = useDisplaySettings();
+  const { transliteration, translation } = useSettings();
 
   return (
     <View

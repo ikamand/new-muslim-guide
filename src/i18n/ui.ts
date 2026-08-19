@@ -53,10 +53,17 @@ export const EN = {
 
   'qibla.title': 'Qibla',
   'settings.title': 'Settings',
+  'settings.intro': 'How the app reads, and how it behaves while you pray.',
   'settings.language': 'Language',
   'settings.display': 'Display',
   'settings.transliteration': 'Transliteration',
   'settings.translation': 'Translation',
+  'settings.transliteration.help': 'The Arabic spelled out in English letters',
+  'settings.translation.help': 'What the words mean in English',
+  'settings.duringPrayer': 'During prayer',
+  'settings.keepAwake': 'Keep the screen on',
+  'settings.keepAwake.help':
+    'Stops the screen going dark while you are part-way through a prayer',
 
   'common.back': 'Back',
   'common.times': 'times',
@@ -82,10 +89,13 @@ const AR: Overrides = {
   'iman.title': 'أركان الإيمان',
   'qibla.title': 'القبلة',
   'settings.title': 'الإعدادات',
+  'settings.intro': 'كيف يُقرأ التطبيق، وكيف يتصرّف أثناء الصلاة.',
   'settings.language': 'اللغة',
   'settings.display': 'العرض',
   'settings.transliteration': 'النقحرة',
   'settings.translation': 'الترجمة',
+  'settings.duringPrayer': 'أثناء الصلاة',
+  'settings.keepAwake': 'إبقاء الشاشة مضاءة',
   'common.back': 'رجوع',
 };
 
@@ -107,10 +117,13 @@ const FR: Overrides = {
   'iman.title': 'Les six piliers de la foi',
   'qibla.title': 'Qibla',
   'settings.title': 'Réglages',
+  'settings.intro': 'Comment l’application se lit, et comment elle se comporte pendant la prière.',
   'settings.language': 'Langue',
   'settings.display': 'Affichage',
   'settings.transliteration': 'Translittération',
   'settings.translation': 'Traduction',
+  'settings.duringPrayer': 'Pendant la prière',
+  'settings.keepAwake': 'Garder l’écran allumé',
   'common.back': 'Retour',
 };
 
@@ -130,10 +143,13 @@ const ES: Overrides = {
   'iman.title': 'Los seis pilares de la fe',
   'qibla.title': 'Alquibla',
   'settings.title': 'Ajustes',
+  'settings.intro': 'Cómo se lee la aplicación y cómo se comporta mientras rezas.',
   'settings.language': 'Idioma',
   'settings.display': 'Visualización',
   'settings.transliteration': 'Transliteración',
   'settings.translation': 'Traducción',
+  'settings.duringPrayer': 'Durante la oración',
+  'settings.keepAwake': 'Mantener la pantalla encendida',
   'common.back': 'Atrás',
 };
 

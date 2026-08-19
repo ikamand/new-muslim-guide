@@ -9,6 +9,7 @@ import { getGuide, type Posture } from '@/content';
 import { localiseGuide } from '@/i18n/localise';
 import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
+import { useSettings } from '@/hooks/use-settings';
 import { useTheme } from '@/hooks/use-theme';
 
 const POSTURE_LABEL: Record<Posture, string> = {
@@ -20,6 +21,17 @@ const POSTURE_LABEL: Record<Posture, string> = {
   washing: 'At the tap',
 };
 
+/**
+ * Holds the screen on while it is mounted.
+ *
+ * A component rather than a call, because the hook cannot be conditional and
+ * the setting can. Rendering or not rendering this is how the switch works.
+ */
+function ScreenAwake() {
+  useKeepAwake();
+  return null;
+}
+
 export default function GuideScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const router = useRouter();
@@ -27,12 +39,8 @@ export default function GuideScreen() {
   const scrollRef = useRef<ScrollView>(null);
   const [index, setIndex] = useState(0);
 
-  // The screen must not sleep here. Someone mid-prayer has both hands occupied
-  // and cannot tap to wake it, and losing the step means losing their place.
-  // Scoped to this screen only — the hook releases when it unmounts.
-  useKeepAwake();
-
   const { locale } = useLocale();
+  const { keepAwake } = useSettings();
   const source = getGuide(id);
   const guide = source ? localiseGuide(source, locale) : undefined;
 
@@ -57,6 +65,7 @@ export default function GuideScreen() {
   return (
     <View style={[styles.screen, { backgroundColor: theme.background }]}>
       <Stack.Screen options={{ title: guide.title }} />
+      {keepAwake && <ScreenAwake />}
 
       <View style={[styles.progressTrack, { backgroundColor: theme.backgroundElement }]}>
         <View

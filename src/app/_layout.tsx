@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 
 import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
-import { DisplaySettingsProvider, useDisplaySettings } from '@/hooks/use-display-settings';
+import { SettingsProvider, useSettings } from '@/hooks/use-settings';
 import { LocaleProvider } from '@/hooks/use-locale';
 import { LocationProvider } from '@/hooks/use-location';
 
@@ -13,7 +13,7 @@ SplashScreen.preventAutoHideAsync();
 function RootStack() {
   const scheme = useColorScheme();
   const theme = Colors[scheme === 'dark' ? 'dark' : 'light'];
-  const { loaded } = useDisplaySettings();
+  const { loaded } = useSettings();
 
   // Hold the splash until the stored settings are in. Otherwise the first
   // frame shows the defaults and then visibly corrects itself for anyone who
@@ -55,11 +55,11 @@ function RootStack() {
 export default function RootLayout() {
   return (
     <LocaleProvider>
-      <DisplaySettingsProvider>
+      <SettingsProvider>
         <LocationProvider>
           <RootStack />
         </LocationProvider>
-      </DisplaySettingsProvider>
+      </SettingsProvider>
     </LocaleProvider>
   );
 }

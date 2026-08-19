@@ -44,6 +44,12 @@ function PlayerClipRow({
   const status = useAudioPlayerStatus(player);
 
   useEffect(() => {
+    // `loop` is a settable property in expo-audio — there is no setLoop() and
+    // no creation-time option, so assignment is the documented API. The lint
+    // rule reads this as mutating a hook's return value, but `player` is a
+    // handle to a native player rather than React state, and pushing state out
+    // to an external system is what an effect is for.
+    // eslint-disable-next-line react-hooks/immutability
     player.loop = loop;
   }, [player, loop]);
 

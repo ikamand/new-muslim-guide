@@ -1,5 +1,4 @@
-import type { Locale } from '../locales';
-import type { ContentDict } from '../locales';
+import type { ContentDict, Locale } from '../locales';
 import { AR } from './ar';
 import { ES } from './es';
 import { FR } from './fr';

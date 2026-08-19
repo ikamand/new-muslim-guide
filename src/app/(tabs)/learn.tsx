@@ -3,7 +3,7 @@ import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ThemedText } from '@/components/themed-text';
-import { getPracticeClipCount, IMAN_PILLARS, PILLARS, SHAHADA_GUIDE } from '@/content';
+import { DUAS, getPracticeClipCount, IMAN_PILLARS, PILLARS, SHAHADA_GUIDE } from '@/content';
 import { BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { useTheme } from '@/hooks/use-theme';
@@ -86,6 +86,12 @@ export default function LearnScreen() {
             {t('learn.section.everyDay')}
           </ThemedText>
           <View style={styles.list}>
+            <LearnCard
+              href="/duas"
+              title={t('learn.duas.title')}
+              subtitle={t('learn.duas.subtitle')}
+              count={DUAS.length}
+            />
             <LearnCard
               href="/practice"
               title={t('learn.practice.title')}

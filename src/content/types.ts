@@ -44,6 +44,12 @@ export type Recitation = {
   /** Key into the audio map in `src/content/audio.ts`. */
   audioId?: string;
   /**
+   * Where the wording was taken from — "Sahih al-Bukhari 6087". Set on texts
+   * copied from a named collection, so a reviewer can check the source rather
+   * than take the app's word for it.
+   */
+  source?: string;
+  /**
    * Set where the text is long enough to memorise in pieces. The whole-text
    * fields above are derived from these, so a correction to a verse lands in
    * both the practice screen and the step player.

@@ -5,6 +5,7 @@ import { SHAHADA_GUIDE } from './shahada';
 import { WUDU } from './wudu';
 
 export { AUDIO, getAudio, hasAnyAudio } from './audio';
+export { DUAS, type Dua } from './duas';
 export { getGuide, GUIDES, PURIFICATION } from './guides';
 export { getImanPillar } from './iman';
 export { getPillar, SHAHADA } from './pillars';

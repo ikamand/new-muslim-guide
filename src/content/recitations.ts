@@ -192,4 +192,88 @@ export const Recitations = {
     translation: 'In the name of Allah.',
     audioId: 'bismillah',
   },
+
+  duaSleep: {
+    title: 'Going to sleep',
+    arabic:
+      'بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا',
+    transliteration:
+      'Bismika Allāhumma amūtu wa aḥyā',
+    translation:
+      'In Your name, O Allah, I die and I live.',
+    source: 'Sahih al-Bukhari 6087',
+    audioId: 'dua-sleep',
+  },
+
+  duaWake: {
+    title: 'Waking up',
+    arabic:
+      'الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ',
+    transliteration:
+      'Al-ḥamdu li-llāhi-lladhī aḥyānā baʿda mā amātanā wa ilayhi-n-nushūr',
+    translation:
+      'All praise is for Allah, who gave us life after taking it, and to Him is the return.',
+    source: 'Sahih al-Bukhari 6075',
+    audioId: 'dua-wake',
+  },
+
+  duaLeaveHome: {
+    title: 'Leaving the house',
+    arabic:
+      'بِسْمِ اللَّهِ تَوَكَّلْتُ عَلَى اللَّهِ لاَ حَوْلَ وَلاَ قُوَّةَ إِلاَّ بِاللَّهِ',
+    transliteration:
+      'Bismi-llāh, tawakkaltu ʿala-llāh, lā ḥawla wa lā quwwata illā bi-llāh',
+    translation:
+      'In the name of Allah. I place my trust in Allah. There is no power and no strength except with Allah.',
+    source: 'Sunan Abi Dawud 5097',
+    audioId: 'dua-leave-home',
+  },
+
+  duaEnterToilet: {
+    title: 'Going into the bathroom',
+    arabic:
+      'اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْخُبُثِ وَالْخَبَائِثِ',
+    transliteration:
+      'Allāhumma innī aʿūdhu bika mina-l-khubthi wa-l-khabāʾith',
+    translation:
+      'O Allah, I seek refuge with You from all that is foul and from all evil.',
+    source: 'Sahih al-Bukhari 142',
+    audioId: 'dua-enter-toilet',
+  },
+
+  duaLeaveToilet: {
+    title: 'Coming out of the bathroom',
+    arabic:
+      'غُفْرَانَكَ',
+    transliteration:
+      'Ghufrānak',
+    translation:
+      'I ask Your forgiveness.',
+    source: 'Sunan Abi Dawud 30',
+    audioId: 'dua-leave-toilet',
+  },
+
+  duaAfterEating: {
+    title: 'After eating',
+    arabic:
+      'الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنَا وَسَقَانَا وَجَعَلَنَا مُسْلِمِينَ',
+    transliteration:
+      'Al-ḥamdu li-llāhi-lladhī aṭʿamanā wa saqānā wa jaʿalanā muslimīn',
+    translation:
+      'All praise is for Allah, who fed us and gave us drink, and made us Muslims.',
+    source: 'Sunan Abi Dawud 3851',
+    audioId: 'dua-after-eating',
+  },
+
+  duaTravel: {
+    title: 'Setting off on a journey',
+    arabic:
+      'سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ وَإِنَّا إِلَى رَبِّنَا لَمُنْقَلِبُونَ اللَّهُمَّ إِنَّا نَسْأَلُكَ فِي سَفَرِنَا هَذَا الْبِرَّ وَالتَّقْوَى وَمِنَ الْعَمَلِ مَا تَرْضَى اللَّهُمَّ هَوِّنْ عَلَيْنَا سَفَرَنَا هَذَا وَاطْوِ عَنَّا بُعْدَهُ اللَّهُمَّ أَنْتَ الصَّاحِبُ فِي السَّفَرِ وَالْخَلِيفَةُ فِي الأَهْلِ اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ وَعْثَاءِ السَّفَرِ وَكَآبَةِ الْمَنْظَرِ وَسُوءِ الْمُنْقَلَبِ فِي الْمَالِ وَالأَهْلِ',
+    transliteration:
+      'Subḥāna-lladhī sakhkhara lanā hādhā wa mā kunnā lahu muqrinīn, wa innā ilā rabbinā la-munqalibūn. Allāhumma innā nasʾaluka fī safarinā hādha-l-birra wa-t-taqwā, wa mina-l-ʿamali mā tarḍā. Allāhumma hawwin ʿalaynā safaranā hādhā wa-ṭwi ʿannā buʿdah. Allāhumma anta-ṣ-ṣāḥibu fi-s-safar, wa-l-khalīfatu fi-l-ahl. Allāhumma innī aʿūdhu bika min waʿthāʾi-s-safar, wa kaʾābati-l-manẓar, wa sūʾi-l-munqalabi fi-l-māl wa-l-ahl',
+    translation:
+      'Glory to Him who has made this subject to us, when we could never have managed it ourselves, and to our Lord we are returning. O Allah, we ask You on this journey of ours for righteousness and piety, and for deeds that please You. O Allah, make this journey easy for us and fold up its distance. O Allah, You are the companion on the journey and the guardian of the family. O Allah, I seek refuge with You from the hardship of travel, from a sight that grieves, and from an ill turn in property and family.',
+    source: 'Sahih Muslim 3153',
+    audioId: 'dua-travel',
+  },
 } satisfies Record<string, Recitation>;

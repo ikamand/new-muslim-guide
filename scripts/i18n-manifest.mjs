@@ -25,6 +25,7 @@ const { GUIDES } = await load('src/content/guides.ts');
 const { PILLARS } = await load('src/content/pillars.ts');
 const { IMAN_PILLARS } = await load('src/content/iman.ts');
 const { REFERENCES } = await load('src/content/references.ts');
+const { DUAS } = await load('src/content/duas.ts');
 const { CONTENT_DICTS } = await load('src/i18n/content/index.ts');
 const { LOCALES, LOCALE_NAMES, SOURCE_LOCALE } = await load('src/i18n/locales.ts');
 
@@ -70,6 +71,11 @@ for (const [label, list] of [['Five Pillars', PILLARS], ['Six Articles', IMAN_PI
       add(where, pillar[field]);
     }
   }
+}
+
+for (const dua of DUAS) {
+  add(`Duʿa: ${dua.when}`, dua.when);
+  add(`Duʿa: ${dua.when}`, dua.note);
 }
 
 for (const reference of REFERENCES) {

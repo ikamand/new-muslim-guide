@@ -3,9 +3,11 @@ import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ThemedText } from '@/components/themed-text';
-import { IMAN_PILLARS, PILLARS } from '@/content';
+import { IMAN_PILLARS, PILLARS, Recitations } from '@/content';
 import { BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
+
+const FATIHA_VERSE_COUNT = Recitations.fatiha.verses?.length ?? 0;
 
 function LearnCard({
   href,
@@ -66,6 +68,12 @@ export default function LearnScreen() {
             shahada has already accepted all six of these; naming them is
             reassurance, where the five pillars are a list of things still to do.
           */}
+          <LearnCard
+            href="/practice"
+            title="Practice Al-Fatiha"
+            subtitle="Hear it ayah by ayah, and repeat until it holds"
+            count={FATIHA_VERSE_COUNT}
+          />
           <LearnCard
             href="/iman"
             title="The Six Articles of Faith"

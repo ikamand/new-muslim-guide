@@ -1,6 +1,6 @@
 # Audio recording brief — New Muslim Guide
 
-**19 clips.** Generated from `src/content/recitations.ts`; regenerate rather
+**12 clips.** Generated from `src/content/recitations.ts`; regenerate rather
 than editing by hand, so the text a reciter reads is the text the app shows.
 
 ## What this is for
@@ -11,11 +11,17 @@ clip is looped on its own, often twenty or thirty times in a row, by someone
 hearing the words for the first time.
 
 That decides the register: **teaching pace, not performance.** Clear
-articulation over beauty. No mujawwad melisma, no echo, no music bed.
+articulation over beauty. No echo, no music bed.
+
+These twelve are said in prayer rather than recited from the Qur'an, so
+ordinary clear speech is right — not Qur'anic recitation style.
+
+**Al-Fatiha is already covered** by Al-Husary's muʿallim recitation from
+everyayah.com and is not part of this brief.
 
 ## Before recording
 
-**Check the written Arabic against a printed muṣḥaf first.** The text below was
+**Check the written Arabic against a printed source first.** The text below was
 prepared with a model and has not been verified by a qualified person. If
 anything is wrong — a vowel mark, a missing letter — correct it before the
 session, not after, or every affected clip is re-recorded.
@@ -26,127 +32,31 @@ Corrections should come back as a marked-up copy of this document.
 
 | | |
 |---|---|
-| Container | `.m4a` (AAC) |
-| Bitrate | 48 kbps |
+| Container | `.mp3` or `.m4a` |
+| Bitrate | 48–128 kbps |
 | Channels | Mono |
 | Sample rate | 44.1 kHz |
 | Leading/trailing silence | Trimmed to ~150 ms |
 | Naming | Exactly the filename shown above each clip, lowercase |
 
 One take per clip, one file per clip. Do not concatenate. A quiet room matters
-more than an expensive microphone; avoid rooms with hard parallel walls.
+more than an expensive microphone.
 
 The app slows playback to 0.75× for learners, so record at a natural teaching
-pace and let the app handle the slow version — do not record a second slow take.
+pace — do not record a second slow take.
 
 ## Rights
 
-Recording is commissioned for this app: the recordings are used in a free app
-that will never be paid or carry advertising, distributed on the App Store and
-Google Play, and bundled offline on the device. Please confirm permission in
-writing before the session. Credit can be included in the app if wanted.
+Recording is commissioned for this app: a free app that will never be paid or
+carry advertising, distributed on the App Store and Google Play, and bundled
+offline on the device. Please confirm permission in writing before the session.
+Credit can be included in the app if wanted.
 
 ---
 
 ## The clips
 
-### Al-Fatiha — one file per ayah
-
-Recorded ayah by ayah because that is how it is memorised. Each file must stand
-alone: begin and end cleanly, with no run-on into the next ayah.
-
-#### `fatiha-1.m4a`
-
-<div dir="rtl" lang="ar">
-
-## بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
-
-</div>
-
-*Bismi-llāhi-r-raḥmāni-r-raḥīm*
-
-> In the name of Allah, the Most Merciful, the Most Compassionate.
-
-#### `fatiha-2.m4a`
-
-<div dir="rtl" lang="ar">
-
-## الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ
-
-</div>
-
-*Al-ḥamdu li-llāhi rabbi-l-ʿālamīn*
-
-> All praise is for Allah, Lord of all worlds.
-
-#### `fatiha-3.m4a`
-
-<div dir="rtl" lang="ar">
-
-## الرَّحْمَٰنِ الرَّحِيمِ
-
-</div>
-
-*Ar-raḥmāni-r-raḥīm*
-
-> The Most Merciful, the Most Compassionate.
-
-#### `fatiha-4.m4a`
-
-<div dir="rtl" lang="ar">
-
-## مَالِكِ يَوْمِ الدِّينِ
-
-</div>
-
-*Māliki yawmi-d-dīn*
-
-> Master of the Day of Judgement.
-
-#### `fatiha-5.m4a`
-
-<div dir="rtl" lang="ar">
-
-## إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ
-
-</div>
-
-*Iyyāka naʿbudu wa iyyāka nastaʿīn*
-
-> You alone we worship, and You alone we ask for help.
-
-#### `fatiha-6.m4a`
-
-<div dir="rtl" lang="ar">
-
-## اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ
-
-</div>
-
-*Ihdinā-ṣ-ṣirāṭa-l-mustaqīm*
-
-> Guide us along the straight path.
-
-#### `fatiha-7.m4a`
-
-<div dir="rtl" lang="ar">
-
-## صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ
-
-</div>
-
-*Ṣirāṭa-lladhīna anʿamta ʿalayhim ghayri-l-maghḍūbi ʿalayhim wa lā-ḍ-ḍāllīn*
-
-> The path of those You have blessed — not of those who have earned Your anger, nor of those who have gone astray.
-
----
-
-### The rest of the prayer
-
-Said in prayer rather than recited from the Qur'an, so ordinary clear speech is
-right here — not Qur'anic recitation style.
-
-#### `takbir.m4a`
+#### `takbir.mp3`
 
 <div dir="rtl" lang="ar">
 
@@ -158,7 +68,7 @@ right here — not Qur'anic recitation style.
 
 > Allah is the greatest.
 
-#### `opening.m4a`
+#### `opening.mp3`
 
 <div dir="rtl" lang="ar">
 
@@ -170,7 +80,7 @@ right here — not Qur'anic recitation style.
 
 > Glory be to You, O Allah, and praise. Blessed is Your name, exalted is Your majesty, and there is no god but You.
 
-#### `taawwudh.m4a`
+#### `taawwudh.mp3`
 
 <div dir="rtl" lang="ar">
 
@@ -182,7 +92,7 @@ right here — not Qur'anic recitation style.
 
 > I seek refuge in Allah from Satan, the rejected.
 
-#### `ruku-tasbih.m4a`
+#### `ruku-tasbih.mp3`
 
 <div dir="rtl" lang="ar">
 
@@ -194,7 +104,7 @@ right here — not Qur'anic recitation style.
 
 > Glory be to my Lord, the Most Great.
 
-#### `rising.m4a`
+#### `rising.mp3`
 
 <div dir="rtl" lang="ar">
 
@@ -206,7 +116,7 @@ right here — not Qur'anic recitation style.
 
 > Allah hears the one who praises Him. Our Lord, to You belongs all praise.
 
-#### `sujud-tasbih.m4a`
+#### `sujud-tasbih.mp3`
 
 <div dir="rtl" lang="ar">
 
@@ -218,7 +128,7 @@ right here — not Qur'anic recitation style.
 
 > Glory be to my Lord, the Most High.
 
-#### `between-prostrations.m4a`
+#### `between-prostrations.mp3`
 
 <div dir="rtl" lang="ar">
 
@@ -230,7 +140,7 @@ right here — not Qur'anic recitation style.
 
 > My Lord, forgive me.
 
-#### `tashahhud.m4a`
+#### `tashahhud.mp3`
 
 <div dir="rtl" lang="ar">
 
@@ -242,7 +152,7 @@ right here — not Qur'anic recitation style.
 
 > All greetings, prayers and good things are for Allah. Peace be upon you, O Prophet, and the mercy of Allah and His blessings. Peace be upon us and upon the righteous servants of Allah. I bear witness that there is no god but Allah, and I bear witness that Muhammad is His servant and His messenger.
 
-#### `salawat.m4a`
+#### `salawat.mp3`
 
 <div dir="rtl" lang="ar">
 
@@ -254,7 +164,7 @@ right here — not Qur'anic recitation style.
 
 > O Allah, send prayers upon Muhammad and the family of Muhammad, as You sent prayers upon Abraham and the family of Abraham. You are indeed Praiseworthy, Glorious. O Allah, bless Muhammad and the family of Muhammad, as You blessed Abraham and the family of Abraham. You are indeed Praiseworthy, Glorious.
 
-#### `taslim.m4a`
+#### `taslim.mp3`
 
 <div dir="rtl" lang="ar">
 
@@ -266,7 +176,7 @@ right here — not Qur'anic recitation style.
 
 > Peace be upon you, and the mercy of Allah.
 
-#### `shahada-after-wudu.m4a`
+#### `shahada-after-wudu.mp3`
 
 <div dir="rtl" lang="ar">
 
@@ -278,7 +188,7 @@ right here — not Qur'anic recitation style.
 
 > I bear witness that there is no god but Allah alone, with no partner, and I bear witness that Muhammad is His servant and His messenger.
 
-#### `bismillah.m4a`
+#### `bismillah.mp3`
 
 <div dir="rtl" lang="ar">
 
@@ -294,8 +204,8 @@ right here — not Qur'anic recitation style.
 
 ## Checklist before handing files back
 
-- [ ] 19 files, named exactly as above
-- [ ] Arabic verified against a printed muṣḥaf, corrections marked on this document
+- [ ] 12 files, named exactly as above
+- [ ] Arabic verified against a printed source, corrections marked on this document
 - [ ] Each file plays alone with no run-on
 - [ ] No background noise, hum, or clipping
 - [ ] Written permission provided

@@ -18,7 +18,7 @@ import type { Locale } from './locales';
  */
 export const EN = {
   'tab.pray': 'Pray',
-  'home.beforeYouPray': 'Before you pray',
+  'home.beforeYouPray': 'Getting clean first',
   'home.fivePrayers': 'The five prayers',
   'tab.learn': 'Learn',
   'tab.settings': 'Settings',
@@ -131,7 +131,7 @@ const AR: Overrides = {
 
 const FR: Overrides = {
   'tab.pray': 'Pray',
-  'home.beforeYouPray': 'Before you pray',
+  'home.beforeYouPray': 'Getting clean first',
   'home.fivePrayers': 'The five prayers',
   'tab.learn': 'Apprendre',
   'tab.settings': 'Réglages',

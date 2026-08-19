@@ -5,7 +5,7 @@ import { SHAHADA_GUIDE } from './shahada';
 import { WUDU } from './wudu';
 
 export { AUDIO, getAudio, hasAnyAudio } from './audio';
-export { getGuide, GUIDES } from './guides';
+export { getGuide, GUIDES, PURIFICATION } from './guides';
 export { getImanPillar } from './iman';
 export { getPillar, SHAHADA } from './pillars';
 export { AUDIO_SOURCE_BY_ID, creditLine, getAudioSource, SOURCES } from './audio-sources';

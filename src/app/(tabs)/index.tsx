@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { PrayerTimesCard } from '@/components/prayer-times-card';
 import { ThemedText } from '@/components/themed-text';
-import { PRAYERS, WUDU, type Guide } from '@/content';
+import { PRAYERS, PURIFICATION, type Guide } from '@/content';
 import { BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { usePrayerTimes } from '@/hooks/use-prayer-times';
 import { useLocale } from '@/hooks/use-locale';
@@ -54,7 +54,9 @@ export default function HomeScreen() {
           <ThemedText type="smallBold" themeColor="textSecondary" style={styles.sectionTitle}>
             {t('home.beforeYouPray')}
           </ThemedText>
-          <GuideCard guide={localiseGuide(WUDU, locale)} />
+          {PURIFICATION.map((guide) => (
+            <GuideCard key={guide.id} guide={localiseGuide(guide, locale)} />
+          ))}
         </View>
 
         <View style={styles.section}>

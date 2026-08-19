@@ -1,5 +1,7 @@
+import { GHUSL } from './ghusl';
 import { PRAYERS } from './prayers';
 import { SHAHADA_GUIDE } from './shahada';
+import { TAYAMMUM } from './tayammum';
 import type { Guide } from './types';
 import { WUDU } from './wudu';
 
@@ -15,7 +17,10 @@ import { WUDU } from './wudu';
  * screen — someone already praying does not need it daily — but it is a guide,
  * so `getGuide` has to find it.
  */
-export const GUIDES: Guide[] = [SHAHADA_GUIDE, WUDU, ...PRAYERS];
+export const GUIDES: Guide[] = [SHAHADA_GUIDE, WUDU, GHUSL, TAYAMMUM, ...PRAYERS];
+
+/** The three ways of purifying, in the order someone needs them. */
+export const PURIFICATION: Guide[] = [WUDU, GHUSL, TAYAMMUM];
 
 export function getGuide(id: string): Guide | undefined {
   return GUIDES.find((guide) => guide.id === id);

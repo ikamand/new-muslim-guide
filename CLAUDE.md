@@ -178,6 +178,9 @@ anyone cared.
 - expo-router file routes under `src/app/`. Typed routes are on.
 - Path alias `@/*` → `src/*`, `@/assets/*` → `assets/*`.
 - Avoid `any` — prefer a specific cast with a comment.
+- Audio attribution is data in `src/content/audio-sources.ts`, never a string
+  typed into a screen — it is a licence obligation, and a credit written by
+  hand gets forgotten when a clip moves.
 - Asset paths live only in `src/content/audio.ts`. Metro resolves `require` at
   build time, so a path can't be built from a variable, and a `require` for a
   missing file fails the whole bundle rather than one screen.
@@ -190,6 +193,11 @@ anyone cared.
   statically renders every route, catching runtime errors a typecheck can't.
 - Reproduce before fixing, and re-check after.
 - Never leave the tree with a failing typecheck.
+- Touched audio or added a recitation? `npm run audio:manifest`. It regenerates
+  `docs/audio-manifest.csv` — the sheet of every clip, what it says, which step
+  says it, whether it exists and who recorded it. `-- --check` fails if the
+  committed sheet is stale, and either mode fails loudly if a clip is wired to
+  a file that isn't there, which would otherwise break the whole bundle.
 
 ## Shipping
 

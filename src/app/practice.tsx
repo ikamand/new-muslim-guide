@@ -6,7 +6,7 @@ import { Platform, Pressable, ScrollView, StyleSheet, View } from 'react-native'
 
 import { RecitationCard } from '@/components/recitation-card';
 import { ThemedText } from '@/components/themed-text';
-import { getAudio, getPracticeItems, type PracticeClip } from '@/content';
+import { getAudio, getPracticeCredits, getPracticeItems, type PracticeClip } from '@/content';
 import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
@@ -171,6 +171,7 @@ export default function PracticeScreen() {
   const [slow, setSlow] = useState(false);
 
   const items = getPracticeItems();
+  const credits = getPracticeCredits(items);
 
   return (
     <ScrollView contentContainerStyle={styles.content}>
@@ -206,10 +207,11 @@ export default function PracticeScreen() {
         </View>
       ))}
 
-      <ThemedText type="small" themeColor="textSecondary">
-        Recitation by Mahmoud Khalil Al-Husary (muʿallim), from everyayah.com, used under
-        CC BY-NC.
-      </ThemedText>
+      {credits.map((credit) => (
+        <ThemedText key={credit} type="small" themeColor="textSecondary">
+          {credit}
+        </ThemedText>
+      ))}
     </ScrollView>
   );
 }

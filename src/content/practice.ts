@@ -1,4 +1,5 @@
 import { getAudio } from './audio';
+import { creditLine, getAudioSource } from './audio-sources';
 import { Recitations } from './recitations';
 import type { Recitation } from './types';
 
@@ -55,6 +56,31 @@ export function getPracticeItems(): PracticeItem[] {
   }
 
   return items;
+}
+
+/**
+ * The credits owed by a given set of items, one line per distinct source.
+ *
+ * Derived rather than written down, so removing the last clip from a source
+ * also removes its credit, and adding one cannot forget it.
+ */
+export function getPracticeCredits(items: PracticeItem[]): string[] {
+  const seen = new Set<string>();
+  const lines: string[] = [];
+
+  for (const item of items) {
+    for (const clip of item.clips) {
+      const source = getAudioSource(clip.audioId);
+      if (!source) continue;
+      const line = creditLine(source);
+      if (!seen.has(line)) {
+        seen.add(line);
+        lines.push(line);
+      }
+    }
+  }
+
+  return lines;
 }
 
 /** How many clips can be played right now — the count shown on the Learn card. */

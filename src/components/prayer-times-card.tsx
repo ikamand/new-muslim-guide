@@ -1,6 +1,7 @@
 import { Link } from 'expo-router';
 import { Pressable, StyleSheet, View } from 'react-native';
 
+import { DayArc, MihrabArch } from '@/components/illustrations';
 import { ThemedText } from '@/components/themed-text';
 import { Radius, Spacing } from '@/constants/theme';
 import { useLocation } from '@/hooks/use-location';
@@ -20,6 +21,13 @@ function Shell({ children }: { children: React.ReactNode }) {
     </View>
   );
 }
+
+/**
+ * The card takes an `action` rather than building one, so it stays about times
+ * and the screen stays about where tapping goes. It doesn't know what a rakʿah
+ * is and shouldn't start now.
+ */
+export type PrayerTimesCardProps = { action?: React.ReactNode };
 
 /**
  * Asking for location is the first thing this app ever asks of anyone, so the
@@ -76,7 +84,7 @@ function TimeCell({ prayer, isNext }: { prayer: PrayerTime; isNext: boolean }) {
   );
 }
 
-export function PrayerTimesCard() {
+export function PrayerTimesCard({ action }: PrayerTimesCardProps) {
   const theme = useTheme();
   const { status, coords } = useLocation();
   const { today, next, profile, timezoneSuspect } = usePrayerTimes();
@@ -97,8 +105,13 @@ export function PrayerTimesCard() {
 
   return (
     <Shell>
+      {/* The niche that marks the qibla, framing the prayer you face it for. */}
+      <View style={styles.arch} pointerEvents="none">
+        <MihrabArch color={theme.accent} width={200} opacity={0.16} />
+      </View>
+
       <View style={styles.next}>
-        <ThemedText type="small" themeColor="textSecondary">
+        <ThemedText type="smallBold" themeColor="textSecondary" style={styles.nextLabel}>
           {next.isTomorrow ? 'Next, tomorrow' : 'Next'}
         </ThemedText>
         <View style={styles.nextLine}>
@@ -109,12 +122,28 @@ export function PrayerTimesCard() {
             {formatTime(next.time)}
           </ThemedText>
         </View>
+        {/*
+          Sunrise closes Fajr's window, so it is worth a line while Fajr is what
+          is next and is noise for the other twenty hours of the day.
+        */}
         <ThemedText type="small" themeColor="textSecondary">
-          {formatCountdown(next.msUntil)} · Fajr ends at sunrise, {formatTime(today.sunrise)}
+          {next.id === 'fajr'
+            ? `${formatCountdown(next.msUntil)} · ends at sunrise, ${formatTime(today.sunrise)}`
+            : formatCountdown(next.msUntil)}
         </ThemedText>
       </View>
 
+      {action}
+
       <View style={[styles.divider, { backgroundColor: theme.border }]} />
+
+      {/* Where each prayer actually falls on the sun's path. */}
+      <DayArc
+        today={today}
+        color={theme.accent}
+        mutedColor={theme.backgroundElement}
+        highlight={next.isTomorrow ? null : next.id}
+      />
 
       <View style={styles.row}>
         {today.prayers.map((prayer) => (
@@ -157,6 +186,15 @@ const styles = StyleSheet.create({
     padding: Spacing.four,
     borderRadius: Radius.medium,
     borderWidth: StyleSheet.hairlineWidth,
+    position: 'relative',
+    overflow: 'hidden',
+  },
+  arch: {
+    position: 'absolute',
+    top: Spacing.half,
+    left: 0,
+    right: 0,
+    alignItems: 'center',
   },
   cardTitle: {
     fontSize: 17,
@@ -171,11 +209,17 @@ const styles = StyleSheet.create({
   },
   next: {
     gap: Spacing.one,
+    alignItems: 'center',
+    paddingTop: Spacing.four + Spacing.four,
+  },
+  nextLabel: {
+    textTransform: 'uppercase',
+    letterSpacing: 1,
   },
   nextLine: {
     flexDirection: 'row',
     alignItems: 'baseline',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     gap: Spacing.three,
   },
   nextName: {
@@ -189,6 +233,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     gap: Spacing.one,
+    marginTop: -Spacing.two,
   },
   cell: {
     flex: 1,

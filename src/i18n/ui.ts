@@ -18,9 +18,29 @@ import type { Locale } from './locales';
  */
 export const EN = {
   'tab.pray': 'Pray',
-  'home.beforeYouPray': 'Getting clean first',
-  'home.fivePrayers': 'The five prayers',
+  'home.prayNow': 'Pray',
+  'home.notInWudu': 'Not in wudu yet?',
+  'home.washFirst': 'Wash first',
+  'home.ifWuduNotEnough': 'If wudu is not enough',
+  'home.noWater': 'No water',
   'home.different': 'If something is different',
+
+  /**
+   * Units for the counts on cards. A bare "14" tells a beginner nothing — it
+   * could be minutes, pages, or things they are expected to have memorised.
+   *
+   * ⚠️ Arabic counted nouns inflect with the number (3–10 takes the plural,
+   * 11–99 the singular), and `ui()` has no interpolation, so one string per
+   * unit cannot be right for both "3 steps" and "37 steps". The plural is used
+   * throughout and reads slightly off above ten.
+   */
+  'count.steps': 'steps',
+  'count.sections': 'sections',
+  'count.phrases': 'phrases',
+  'count.duas': 'duʿas',
+  'count.clips': 'clips',
+  'count.articles': 'articles',
+  'count.pillars': 'pillars',
   'tab.learn': 'Learn',
   'tab.settings': 'Settings',
 
@@ -151,9 +171,19 @@ const AR: Overrides = {
   'welcome.title': 'السلام عليكم',
   'welcome.man': 'رجل',
   'welcome.woman': 'امرأة',
-  'home.beforeYouPray': 'الطهارة أولاً',
-  'home.fivePrayers': 'الصلوات الخمس',
+  'home.prayNow': 'صَلِّ',
+  'home.notInWudu': 'لست على وضوء؟',
+  'home.washFirst': 'توضّأ أولاً',
+  'home.ifWuduNotEnough': 'إذا لم يكفِ الوضوء',
+  'home.noWater': 'بلا ماء',
   'home.different': 'إذا اختلف الأمر',
+  'count.steps': 'خطوات',
+  'count.sections': 'أقسام',
+  'count.phrases': 'عبارة',
+  'count.duas': 'أدعية',
+  'count.clips': 'مقاطع',
+  'count.articles': 'أركان',
+  'count.pillars': 'أركان',
   'settings.guidance': 'إرشادات الصلاة لـ',
   'common.back': 'رجوع',
 };
@@ -191,9 +221,19 @@ const FR: Overrides = {
   'welcome.title': 'Que la paix soit sur vous',
   'welcome.man': 'Homme',
   'welcome.woman': 'Femme',
-  'home.beforeYouPray': 'D’abord se purifier',
-  'home.fivePrayers': 'Les cinq prières',
+  'home.prayNow': 'Prier',
+  'home.notInWudu': 'Pas encore en état de wudu ?',
+  'home.washFirst': 'Se laver d’abord',
+  'home.ifWuduNotEnough': 'Si le wudu ne suffit pas',
+  'home.noWater': 'Sans eau',
   'home.different': 'Si quelque chose change',
+  'count.steps': 'étapes',
+  'count.sections': 'sections',
+  'count.phrases': 'phrases',
+  'count.duas': 'invocations',
+  'count.clips': 'extraits',
+  'count.articles': 'piliers',
+  'count.pillars': 'piliers',
   'settings.guidance': 'Conseils de prière pour',
   'common.back': 'Retour',
 };
@@ -231,9 +271,19 @@ const ES: Overrides = {
   'welcome.title': 'La paz sea contigo',
   'welcome.man': 'Hombre',
   'welcome.woman': 'Mujer',
-  'home.beforeYouPray': 'Primero, purificarse',
-  'home.fivePrayers': 'Las cinco oraciones',
+  'home.prayNow': 'Rezar',
+  'home.notInWudu': '¿Aún sin wudu?',
+  'home.washFirst': 'Purifícate primero',
+  'home.ifWuduNotEnough': 'Si el wudu no basta',
+  'home.noWater': 'Sin agua',
   'home.different': 'Si algo es distinto',
+  'count.steps': 'pasos',
+  'count.sections': 'secciones',
+  'count.phrases': 'frases',
+  'count.duas': 'súplicas',
+  'count.clips': 'fragmentos',
+  'count.articles': 'pilares',
+  'count.pillars': 'pilares',
   'settings.guidance': 'Guía de oración para',
   'common.back': 'Atrás',
 };

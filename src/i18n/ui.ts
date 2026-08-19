@@ -17,7 +17,7 @@ import type { Locale } from './locales';
  * so a missing string is a fallback and a misspelled key is a type error.
  */
 export const EN = {
-  'tab.guide': 'Guide',
+  'tab.pray': 'Pray',
   'home.beforeYouPray': 'Before you pray',
   'home.fivePrayers': 'The five prayers',
   'tab.learn': 'Learn',
@@ -74,7 +74,7 @@ export type UIKey = keyof typeof EN;
 type Overrides = Partial<Record<UIKey, string>>;
 
 const AR: Overrides = {
-  'tab.guide': 'الدليل',
+  'tab.pray': 'الصلاة',
   'tab.learn': 'تعلّم',
   'tab.settings': 'الإعدادات',
   'learn.title': 'تعلّم',
@@ -100,7 +100,7 @@ const AR: Overrides = {
 };
 
 const FR: Overrides = {
-  'tab.guide': 'Guide',
+  'tab.pray': 'Pray',
   'home.beforeYouPray': 'Before you pray',
   'home.fivePrayers': 'The five prayers',
   'tab.learn': 'Apprendre',
@@ -128,7 +128,7 @@ const FR: Overrides = {
 };
 
 const ES: Overrides = {
-  'tab.guide': 'Guía',
+  'tab.pray': 'Rezar',
   'tab.learn': 'Aprender',
   'tab.settings': 'Ajustes',
   'learn.title': 'Aprender',

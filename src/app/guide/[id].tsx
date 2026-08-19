@@ -4,6 +4,7 @@ import { useRef, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 
 import { RecitationCard } from '@/components/recitation-card';
+import { ContentNoteCard } from '@/components/content-note';
 import { ThemedText } from '@/components/themed-text';
 import { getGuide, resolveNotes, type Posture } from '@/content';
 import { localiseGuide } from '@/i18n/localise';
@@ -96,13 +97,7 @@ export default function GuideScreen() {
         {step.says && <RecitationCard recitation={step.says} />}
 
         {resolveNotes(step.note, step.notes).map((entry, position) => (
-          <View
-            key={`${entry.kind}-${position}`}
-            style={[styles.note, { borderLeftColor: theme.accent }]}>
-            <ThemedText type="small" themeColor="textSecondary">
-              {entry.text}
-            </ThemedText>
-          </View>
+          <ContentNoteCard key={`${entry.kind}-${position}`} entry={entry} />
         ))}
       </ScrollView>
 
@@ -178,11 +173,6 @@ const styles = StyleSheet.create({
   },
   instruction: {
     lineHeight: 26,
-  },
-  note: {
-    borderLeftWidth: 3,
-    paddingLeft: Spacing.three,
-    paddingVertical: Spacing.one,
   },
   footer: {
     flexDirection: 'row',

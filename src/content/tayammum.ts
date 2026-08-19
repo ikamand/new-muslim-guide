@@ -1,4 +1,5 @@
 import { note } from './model';
+import { hadith } from './sources';
 import type { Guide } from './types';
 
 /**
@@ -57,6 +58,19 @@ export const TAYAMMUM: Guide = {
         note(
           'differs',
           'Some schools wipe the arms to the elbows instead of stopping at the wrists. Both are taught by scholars; you will see people do it either way.',
+          {
+            // The method this guide teaches — one stroke, the backs of the
+            // hands, then the face — is the one `Ammar ibn Yasir describes.
+            sources: [
+              hadith('bukhari', '347', {
+                book: 7,
+                bookName: 'Rubbing hands and feet with dust (Tayammum)',
+                inBookReference: 'Book 7, Hadith 8',
+              }),
+            ],
+            additionalExplanation:
+              'The wording of the narration is that the Prophet ﷺ struck the earth once, blew the dust off, wiped the back of each hand, and then his face. Schools that teach wiping to the elbows argue from other narrations and from the wudu verse. Nobody will think you have prayed invalidly either way.',
+          },
         ),
       ],
     },

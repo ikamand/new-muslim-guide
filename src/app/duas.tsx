@@ -2,12 +2,12 @@ import { Stack } from 'expo-router';
 import { ScrollView, StyleSheet, View } from 'react-native';
 
 import { RecitationCard } from '@/components/recitation-card';
+import { ContentNoteCard } from '@/components/content-note';
 import { ThemedText } from '@/components/themed-text';
 import { DUAS, resolveNotes } from '@/content';
 import { MaxContentWidth, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { localiseDua } from '@/i18n/localise';
-import { useTheme } from '@/hooks/use-theme';
 
 /**
  * The day's supplications, in the order the day happens.
@@ -16,7 +16,6 @@ import { useTheme } from '@/hooks/use-theme';
  * someone can read down the list and recognise their own morning.
  */
 export default function DuasScreen() {
-  const theme = useTheme();
   const { locale, t } = useLocale();
 
   return (
@@ -35,13 +34,7 @@ export default function DuasScreen() {
             </ThemedText>
             <RecitationCard recitation={dua.says} />
             {resolveNotes(dua.note, dua.meta?.notes).map((entry, position) => (
-              <View
-                key={`${entry.kind}-${position}`}
-                style={[styles.note, { borderLeftColor: theme.accent }]}>
-                <ThemedText type="small" themeColor="textSecondary">
-                  {entry.text}
-                </ThemedText>
-              </View>
+              <ContentNoteCard key={`${entry.kind}-${position}`} entry={entry} />
             ))}
           </View>
         ))}
@@ -68,10 +61,5 @@ const styles = StyleSheet.create({
   when: {
     textTransform: 'uppercase',
     letterSpacing: 1,
-  },
-  note: {
-    borderLeftWidth: 3,
-    paddingLeft: Spacing.three,
-    paddingVertical: Spacing.one,
   },
 });

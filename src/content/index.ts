@@ -18,6 +18,7 @@ export { getGuide, GUIDES, PURIFICATION } from './guides';
 export {
   asNote,
   byBeginnerPriority,
+  hasMore,
   note,
   ref,
   resolveNotes,
@@ -40,10 +41,14 @@ export {
   hadith,
   HADITH_COLLECTIONS,
   isAuthenticated,
+  MADHHABS,
   quran,
   scholarly,
+  sourceUrl,
+  type Attribution,
   type HadithCollection,
   type HadithGrading,
+  type Madhhab,
   type Source,
 } from './sources';
 export { getImanPillar } from './iman';

@@ -1,5 +1,6 @@
 import { Recitations } from './recitations';
 import { ref } from './model';
+import { quran } from './sources';
 import type { Guide } from './types';
 
 /**
@@ -17,6 +18,7 @@ export const WUDU: Guide = {
     estimatedMinutes: 4,
     beginnerPriority: 1,
     tags: ['first-day'],
+    sources: [quran(5, 6, { surahName: "Al-Ma'idah" })],
     relatedContent: [
       ref('guide', 'ghusl'),
       ref('guide', 'tayammum'),

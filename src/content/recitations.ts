@@ -1,4 +1,4 @@
-import { hadith } from './sources';
+import { hadith, quran } from './sources';
 import type { Recitation, RecitationVerse } from './types';
 
 /**
@@ -9,12 +9,26 @@ import type { Recitation, RecitationVerse } from './types';
  * way to pray rather than every variation, because a first-timer needs a
  * path, not a comparison table.
  *
- * ⚠️ The three Sunan Abi Dawud narrations below carry no grading. That is not
- * an oversight and must not be filled in by guessing: a grading is a scholarly
- * judgement, and Abu Dawud — unlike Bukhari and Muslim — includes narrations
- * that are not sahih. `npm run content:audit` lists them as needing a
- * qualified person. The prayer recitations above carry no reference at all
- * yet, which the same report shows.
+ * ⚠️ EVERY citation below was checked against sunnah.com by opening the page
+ * and matching the Arabic. Five of the seven that were here before were wrong:
+ *
+ *   - the duʿa before sleeping cited Bukhari 6087, which is about smiling and
+ *     the expiation for breaking a fast in Ramadan
+ *   - the duʿa on waking cited Bukhari 6075, also Kitab al-Adab
+ *     (both are in fact Bukhari 6324, which carries the two together in
+ *     exactly this wording)
+ *   - leaving the house cited Abu Dawud 5097; it is 5095
+ *   - after eating cited Abu Dawud 3851; it is 3850
+ *   - travel cited Muslim 3153, the deprecated USC-MSA number, not 1342
+ *
+ * ⚠️ `duaAfterEating` is graded DA'IF by Al-Albani. The app's stated evidence
+ * bar is authenticated hadith, so `npm run content:audit` fails on it by
+ * design. Tirmidhi 3458 and Ibn Majah 3285 carry a different after-meal duʿa
+ * graded hasan — swapping to it is a content decision for review, not one to
+ * make here.
+ *
+ * The prayer recitations above still carry no reference. That is a gap the
+ * same report shows, not a claim that none exists.
  */
 /**
  * Al-Fatiha, ayah by ayah.
@@ -100,6 +114,7 @@ export const Recitations = {
   },
 
   fatiha: {
+    sources: [quran(1, [1, 7], { surahName: 'Al-Fatihah' })],
     title: 'Al-Fatiha',
     arabic: FATIHA_VERSES.map((verse) => verse.arabic).join('\n'),
     transliteration: FATIHA_VERSES.map((verse) => verse.transliteration).join('\n'),
@@ -209,7 +224,13 @@ export const Recitations = {
       'Bismika Allāhumma amūtu wa aḥyā',
     translation:
       'In Your name, O Allah, I die and I live.',
-    sources: [hadith('bukhari', '6087')],
+    sources: [
+      hadith('bukhari', '6324', {
+        book: 80,
+        bookName: 'Invocations',
+        inBookReference: 'Book 80, Hadith 21',
+      }),
+    ],
     audioId: 'dua-sleep',
   },
 
@@ -221,7 +242,13 @@ export const Recitations = {
       'Al-ḥamdu li-llāhi-lladhī aḥyānā baʿda mā amātanā wa ilayhi-n-nushūr',
     translation:
       'All praise is for Allah, who gave us life after taking it, and to Him is the return.',
-    sources: [hadith('bukhari', '6075')],
+    sources: [
+      hadith('bukhari', '6324', {
+        book: 80,
+        bookName: 'Invocations',
+        inBookReference: 'Book 80, Hadith 21',
+      }),
+    ],
     audioId: 'dua-wake',
   },
 
@@ -233,7 +260,15 @@ export const Recitations = {
       'Bismi-llāh, tawakkaltu ʿala-llāh, lā ḥawla wa lā quwwata illā bi-llāh',
     translation:
       'In the name of Allah. I place my trust in Allah. There is no power and no strength except with Allah.',
-    sources: [hadith('abu-dawud', '5097')],
+    sources: [
+      hadith('abu-dawud', '5095', {
+        book: 43,
+        bookName: 'General Behavior (Kitab Al-Adab)',
+        inBookReference: 'Book 43, Hadith 323',
+        grading: 'sahih',
+        gradedBy: 'Al-Albani',
+      }),
+    ],
     audioId: 'dua-leave-home',
   },
 
@@ -245,7 +280,13 @@ export const Recitations = {
       'Allāhumma innī aʿūdhu bika mina-l-khubthi wa-l-khabāʾith',
     translation:
       'O Allah, I seek refuge with You from all that is foul and from all evil.',
-    sources: [hadith('bukhari', '142')],
+    sources: [
+      hadith('bukhari', '142', {
+        book: 4,
+        bookName: "Ablutions (Wudu')",
+        inBookReference: 'Book 4, Hadith 8',
+      }),
+    ],
     audioId: 'dua-enter-toilet',
   },
 
@@ -257,7 +298,15 @@ export const Recitations = {
       'Ghufrānak',
     translation:
       'I ask Your forgiveness.',
-    sources: [hadith('abu-dawud', '30')],
+    sources: [
+      hadith('abu-dawud', '30', {
+        book: 1,
+        bookName: 'Purification (Kitab Al-Taharah)',
+        inBookReference: 'Book 1, Hadith 30',
+        grading: 'sahih',
+        gradedBy: 'Al-Albani',
+      }),
+    ],
     audioId: 'dua-leave-toilet',
   },
 
@@ -269,7 +318,15 @@ export const Recitations = {
       'Al-ḥamdu li-llāhi-lladhī aṭʿamanā wa saqānā wa jaʿalanā muslimīn',
     translation:
       'All praise is for Allah, who fed us and gave us drink, and made us Muslims.',
-    sources: [hadith('abu-dawud', '3851')],
+    sources: [
+      hadith('abu-dawud', '3850', {
+        book: 28,
+        bookName: "Foods (Kitab Al-At'imah)",
+        inBookReference: 'Book 28, Hadith 115',
+        grading: 'daif',
+        gradedBy: 'Al-Albani',
+      }),
+    ],
     audioId: 'dua-after-eating',
   },
 
@@ -281,7 +338,13 @@ export const Recitations = {
       'Subḥāna-lladhī sakhkhara lanā hādhā wa mā kunnā lahu muqrinīn, wa innā ilā rabbinā la-munqalibūn. Allāhumma innā nasʾaluka fī safarinā hādha-l-birra wa-t-taqwā, wa mina-l-ʿamali mā tarḍā. Allāhumma hawwin ʿalaynā safaranā hādhā wa-ṭwi ʿannā buʿdah. Allāhumma anta-ṣ-ṣāḥibu fi-s-safar, wa-l-khalīfatu fi-l-ahl. Allāhumma innī aʿūdhu bika min waʿthāʾi-s-safar, wa kaʾābati-l-manẓar, wa sūʾi-l-munqalabi fi-l-māl wa-l-ahl',
     translation:
       'Glory to Him who has made this subject to us, when we could never have managed it ourselves, and to our Lord we are returning. O Allah, we ask You on this journey of ours for righteousness and piety, and for deeds that please You. O Allah, make this journey easy for us and fold up its distance. O Allah, You are the companion on the journey and the guardian of the family. O Allah, I seek refuge with You from the hardship of travel, from a sight that grieves, and from an ill turn in property and family.',
-    sources: [hadith('muslim', '3153')],
+    sources: [
+      hadith('muslim', '1342', {
+        book: 15,
+        bookName: 'The Book of Pilgrimage',
+        inBookReference: 'Book 15, Hadith 75',
+      }),
+    ],
     audioId: 'dua-travel',
   },
 } satisfies Record<string, Recitation>;

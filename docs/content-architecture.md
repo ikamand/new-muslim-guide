@@ -59,13 +59,42 @@ Provenance is data, in `sources.ts`. Four kinds, because there are four honest
 answers to "how do you know":
 
 ```ts
-quran(2, 255)                       // Qur'an 2:255
-quran(2, [255, 257])                // a range
-hadith('bukhari', '6087')           // Bukhari and Muslim need no grading
-hadith('abu-dawud', '5097', 'hasan') // everywhere else does
-scholarly({ work: 'Al-Mughni', author: 'Ibn Qudamah', locator: '1/234' })
+quran(2, 255)
+quran(1, [1, 7], { surahName: 'Al-Fatihah' })
+
+hadith('bukhari', '6324', {          // Bukhari and Muslim need no grading
+  book: 80,
+  bookName: 'Invocations',
+  inBookReference: 'Book 80, Hadith 21',
+})
+
+hadith('abu-dawud', '5095', {        // everywhere else does
+  book: 43,
+  bookName: 'General Behavior (Kitab Al-Adab)',
+  inBookReference: 'Book 43, Hadith 323',
+  grading: 'sahih',
+  gradedBy: 'Al-Albani',             // a grading without a grader says nothing
+})
+
+scholarly({ work: 'Al-Mughni', author: 'Ibn Qudamah', volume: '1', page: '234', school: 'Hanbali' })
 general('Ordinary description of what happens, claiming no textual authority.')
 ```
+
+`sourceUrl(source)` resolves a page a reviewer can open — `quran.com/5/6`,
+`sunnah.com/bukhari:6324`. Both patterns were confirmed against the live sites,
+and every sunnah.com collection slug was verified by requesting it. Muwatta
+Malik has none: it is not addressable as `malik:<n>`, and a link that 404s is
+worse than no link. Set `url` explicitly to override.
+
+### Verify before you cite — this is not optional
+
+The first pass at this file cited **Sahih al-Bukhari 6087** for the duʿa before
+sleeping. Bukhari 6087 is about smiling, and the expiation for breaking a fast
+in Ramadan. Five of the seven citations originally in the app were wrong in the
+same way — plausible numbers, real collections, wrong hadith.
+
+A citation written from memory looks exactly like one that was checked. Open the
+page, match the Arabic, copy the book and in-book reference from what you see.
 
 **`general` is a real answer, not a cop-out.** "The mosque will be busier on
 Friday" needs no isnad. Most of what this app says about walking into a building
@@ -96,21 +125,33 @@ things in one field, so no way to render them differently.
 ```ts
 notes: [
   note('agreed', 'You wash before you pray.'),
-  note('differs', 'Some schools wipe the arms to the elbows instead of stopping at the wrists.', {
-    positions: [
-      { school: 'Hanafi', position: '…' },
-      { school: 'Shafi`i', position: '…' },
-    ],
+  note('differs', 'Some schools wipe the arms to the elbows rather than stopping at the wrists.', {
+    sources: [hadith('bukhari', '347', { book: 7, inBookReference: 'Book 7, Hadith 8' })],
+    additionalExplanation: 'The wording of the narration is that the Prophet ﷺ struck the earth once…',
+    positions: [{ school: 'Hanafi', position: '…' }],
   }),
   note('practical', 'Nobody minds if you get the movements wrong at first.'),
 ]
 ```
 
-**The UI still shows one line.** A first-timer needs a path, not a comparison
-table — that has not changed. `positions` is held so the app *can* answer
-someone who asks, and so a reviewer can see what was decided. Holding the
-disagreement is what stops the app either flattening a real difference or
-dumping it on someone in their third week.
+One record holds all four things a beginner-facing app has to carry at once:
+
+| Field | Who it is for |
+|---|---|
+| `text` | the straightforward beginner answer — **always shown** |
+| `positions` | the scholarly difference, with typed attribution |
+| `sources` | where any of it comes from |
+| `additionalExplanation` | the depth, for whoever asks |
+
+**Only `text` renders by default.** Everything else sits behind "Learn more" in
+`ContentNoteCard`. Someone three weeks into Islam who is told four schools
+disagree about wiping their arms has not been informed, they have been stalled —
+but flattening the difference is its own kind of lie, and they will meet someone
+who does it the other way.
+
+`school` is typed (`Attribution`) rather than free text, so "Hanafi", "hanafi"
+and "the Hanafis" cannot all appear. Never state a position as its holders would
+not state it.
 
 The plain `note?: string` field still works and still renders. It is read as
 `practical`, which is what nearly all 74 existing ones are. Migrate one when you
@@ -144,6 +185,23 @@ reasoning is in `src/i18n/locales.ts` and has not changed.
 glosses where the right word depends on the term rather than the English.
 "Fear" and "awe" are both `taqwa`; a table keyed on a word as generic as
 "mindfulness" cannot tell a translator which is meant. `ArabicTerm` uses this.
+
+An absent `es` or `fr` is not a placeholder — it falls back to English, which is
+the documented behaviour for all 321 strings. A placeholder would be `es: 'TODO'`,
+and there are none.
+
+### `ArabicTerm` has no registry, deliberately
+
+It is the declared shape for a glossary of the words a beginner hears — iqamah,
+niyyah, sunnah. Inventing fourteen of them so the type does not look lonely
+would be exactly the placeholder content this app must not carry, so
+`ContentKind` has no `'term'` member and nothing can point at a record that does
+not exist.
+
+The app's Arabic learning content **today** is `Phrase` and `Recitation`. Both
+already carry script, transliteration and an English meaning, with Spanish and
+French arriving through `src/i18n/content/`. Adding a glossary is a content task
+with a reviewer attached.
 
 Either way: **never machine-translate content.** A wrong French tashahhud is the
 same class of mistake as a wrong Arabic one and harder to notice. All three
@@ -181,5 +239,11 @@ npx tsc --noEmit && npm run lint && npm run i18n:manifest && npm run content:aud
 | `npm run audio:manifest` | The sheet of every clip and who recorded it. |
 
 `content:audit` is the one that answers "what does this app claim, and what
-backs it up". Today: 7 of 48 entries cite anything at all. That number is the
-point of the whole exercise.
+backs it up". It prints every citation with a link, and **fails** on a narration
+graded `daif` or a broken pointer.
+
+It fails right now, on purpose: the after-eating duʿa rests on Sunan Abi Dawud
+3850, graded da'if by Al-Albani, which contradicts the evidence bar in
+CLAUDE.md. Tirmidhi 3458 and Ibn Majah 3285 carry a different after-meal duʿa
+graded hasan. Which way that goes is a content decision with a reviewer
+attached, not one the tooling should quietly paper over.

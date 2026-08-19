@@ -48,6 +48,7 @@ const add = (context, english) => {
 const addNotes = (context, notes) => {
   for (const note of notes ?? []) {
     add(context, note.text);
+    add(context, note.additionalExplanation);
     for (const position of note.positions ?? []) add(context, position.position);
   }
 };

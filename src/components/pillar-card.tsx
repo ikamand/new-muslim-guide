@@ -1,6 +1,7 @@
 import { Link } from 'expo-router';
 import { Pressable, StyleSheet, View } from 'react-native';
 
+import { ContentNoteCard } from '@/components/content-note';
 import { ThemedText } from '@/components/themed-text';
 import { resolveNotes, type Pillar } from '@/content';
 import { Radius, Spacing } from '@/constants/theme';
@@ -47,13 +48,7 @@ export function PillarCard({ pillar, index }: { pillar: Pillar; index: number })
       </ThemedText>
 
       {resolveNotes(pillar.note, pillar.meta?.notes).map((entry, position) => (
-        <View
-          key={`${entry.kind}-${position}`}
-          style={[styles.note, { borderLeftColor: theme.accent }]}>
-          <ThemedText type="small" themeColor="textSecondary">
-            {entry.text}
-          </ThemedText>
-        </View>
+        <ContentNoteCard key={`${entry.kind}-${position}`} entry={entry} />
       ))}
 
       {pillar.guideId && (
@@ -104,11 +99,6 @@ const styles = StyleSheet.create({
     fontSize: 22,
     lineHeight: 36,
     writingDirection: 'rtl',
-  },
-  note: {
-    borderLeftWidth: 3,
-    paddingLeft: Spacing.three,
-    paddingVertical: Spacing.one,
   },
   link: {
     alignSelf: 'flex-start',

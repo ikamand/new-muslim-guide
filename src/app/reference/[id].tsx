@@ -1,6 +1,7 @@
 import { Stack, useLocalSearchParams } from 'expo-router';
 import { ScrollView, StyleSheet, View } from 'react-native';
 
+import { ContentNoteCard } from '@/components/content-note';
 import { ThemedText } from '@/components/themed-text';
 import { getReference, resolveNotes } from '@/content';
 import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
@@ -55,13 +56,7 @@ export default function ReferenceScreen() {
             </ThemedText>
             <ThemedText type="default">{section.body}</ThemedText>
             {resolveNotes(section.note, section.notes).map((entry, position) => (
-              <View
-                key={`${entry.kind}-${position}`}
-                style={[styles.note, { borderLeftColor: theme.accent }]}>
-                <ThemedText type="small" themeColor="textSecondary">
-                  {entry.text}
-                </ThemedText>
-              </View>
+              <ContentNoteCard key={`${entry.kind}-${position}`} entry={entry} />
             ))}
           </View>
         ))}
@@ -97,11 +92,5 @@ const styles = StyleSheet.create({
   heading: {
     fontSize: 17,
     lineHeight: 24,
-  },
-  note: {
-    borderLeftWidth: 3,
-    paddingLeft: Spacing.three,
-    paddingVertical: Spacing.one,
-    marginTop: Spacing.one,
   },
 });

@@ -15,7 +15,7 @@
  * content must not import the i18n layer, or the dependency runs in a circle.
  */
 
-import type { Source } from './sources';
+import type { Attribution, Source } from './sources';
 
 /**
  * What a piece of content is about.
@@ -81,7 +81,7 @@ export type ContentTag =
  * Ids are only unique within a kind — 'shahada' is a guide *and* a pillar
  * today — so anything pointing at content has to carry both.
  */
-export type ContentKind = 'guide' | 'reference' | 'pillar' | 'article' | 'dua' | 'phrase' | 'term';
+export type ContentKind = 'guide' | 'reference' | 'pillar' | 'article' | 'dua' | 'phrase';
 
 export type ContentRef = {
   kind: ContentKind;
@@ -108,27 +108,58 @@ export const ref = (kind: ContentKind, id: string): ContentRef => ({ kind, id })
  */
 export type Consensus = 'agreed' | 'differs' | 'practical';
 
-/** One named position within a `differs` note. Held, not necessarily shown. */
+/**
+ * One named position within a `differs` note. Held, not necessarily shown.
+ *
+ * `school` is a typed attribution rather than free text, so "Hanafi",
+ * "hanafi" and "the Hanafis" cannot all appear. Never a strawman: a position
+ * is stated as those who hold it would state it, or it is left out.
+ */
 export type ScholarlyPosition = {
-  /** "Hanafi", "the majority", "some scholars". Plain, and never a strawman. */
-  school: string;
+  school: Attribution;
   position: string;
   sources?: readonly Source[];
 };
 
+/**
+ * A note, and how much weight it carries.
+ *
+ * The four things a beginner-facing app has to hold at once, in one record:
+ *
+ *   `text`                  the straightforward beginner answer — always shown
+ *   `positions`             the scholarly difference, with attribution
+ *   `sources`               where any of it comes from
+ *   `additionalExplanation` the depth, for whoever asks for it
+ *
+ * Only `text` is shown by default. Everything else sits behind "Learn more",
+ * because a first-timer needs a path rather than a comparison table — and
+ * because the alternative to holding the difference is flattening it, which
+ * is worse.
+ */
 export type ContentNote = {
   kind: Consensus;
   /** The sentence a reader sees. English; translated like any other content. */
   text: string;
   sources?: readonly Source[];
   /**
-   * Only meaningful on a `differs` note. The UI shows `text` — one plain
-   * sentence — and can offer these behind a disclosure for anyone who wants
-   * them. Holding them is what stops the app either flattening a real
-   * difference or dumping it on someone in their third week.
+   * Only meaningful on a `differs` note. Holding these is what stops the app
+   * either flattening a real difference or dumping it on someone in their
+   * third week.
    */
   positions?: readonly ScholarlyPosition[];
+  /**
+   * The fuller answer, revealed on request. Prose, in the same plain register
+   * as everything else — depth is not licence to start writing like a manual.
+   */
+  additionalExplanation?: string;
 };
+
+/** Whether a note has anything to show beyond its one-line answer. */
+export function hasMore(entry: ContentNote): boolean {
+  return Boolean(
+    entry.additionalExplanation || entry.positions?.length || entry.sources?.length,
+  );
+}
 
 export const note = (
   kind: Consensus,
@@ -171,6 +202,17 @@ export type LocalisedText = {
  * Script and transliteration are never translated. A Latin-script crutch is
  * the same crutch in French as in English, and the Arabic is what is being
  * said rather than a rendering of it.
+ *
+ * ⚠️ NO REGISTRY YET, deliberately. This is the declared shape for a glossary
+ * of the words a beginner hears — iqamah, niyyah, sunnah — and inventing
+ * fourteen of them to stop the type looking lonely would be exactly the
+ * placeholder content this app must not carry. `ContentKind` therefore has no
+ * 'term' member: nothing can point at a record that does not exist.
+ *
+ * The app's Arabic learning content today is `Phrase` and `Recitation`, and
+ * both already carry script, transliteration and an English meaning, with
+ * Spanish and French coming through `src/i18n/content/`. Adding a glossary is
+ * a content task with a reviewer attached, not a typing task.
  */
 export type ArabicTerm = {
   id: string;

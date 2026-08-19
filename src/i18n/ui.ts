@@ -41,6 +41,15 @@ export const EN = {
   'count.clips': 'clips',
   'count.articles': 'articles',
   'count.pillars': 'pillars',
+
+  /**
+   * The disclosure on a note. A beginner sees one plain sentence; the schools
+   * that differ and the narrations behind them open only if they ask for them.
+   */
+  'note.more': 'Learn more',
+  'note.less': 'Show less',
+  'note.positions': 'What the schools say',
+  'note.sources': 'Where this comes from',
   'tab.learn': 'Learn',
   'tab.settings': 'Settings',
 
@@ -184,6 +193,10 @@ const AR: Overrides = {
   'count.clips': 'مقاطع',
   'count.articles': 'أركان',
   'count.pillars': 'أركان',
+  'note.more': 'اعرف المزيد',
+  'note.less': 'إخفاء',
+  'note.positions': 'أقوال المذاهب',
+  'note.sources': 'المصدر',
   'settings.guidance': 'إرشادات الصلاة لـ',
   'common.back': 'رجوع',
 };
@@ -234,6 +247,10 @@ const FR: Overrides = {
   'count.clips': 'extraits',
   'count.articles': 'piliers',
   'count.pillars': 'piliers',
+  'note.more': 'En savoir plus',
+  'note.less': 'Réduire',
+  'note.positions': 'Ce que disent les écoles',
+  'note.sources': 'D’où cela vient',
   'settings.guidance': 'Conseils de prière pour',
   'common.back': 'Retour',
 };
@@ -284,6 +301,10 @@ const ES: Overrides = {
   'count.clips': 'fragmentos',
   'count.articles': 'pilares',
   'count.pillars': 'pilares',
+  'note.more': 'Saber más',
+  'note.less': 'Mostrar menos',
+  'note.positions': 'Lo que dicen las escuelas',
+  'note.sources': 'De dónde viene',
   'settings.guidance': 'Guía de oración para',
   'common.back': 'Atrás',
 };

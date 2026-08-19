@@ -24,7 +24,7 @@ const load = (p) => import(join(root, p));
 // Via catalog.ts rather than index.ts: index pulls in the audio map, whose
 // `require` calls only Metro resolves.
 const { CATALOG, danglingRefs } = await load('src/content/catalog.ts');
-const { formatSource, isAuthenticated, HADITH_COLLECTIONS } = await load('src/content/sources.ts');
+const { formatSource, sourceUrl, HADITH_COLLECTIONS } = await load('src/content/sources.ts');
 const { GUIDES } = await load('src/content/guides.ts');
 const { REFERENCES } = await load('src/content/references.ts');
 const { PILLARS } = await load('src/content/pillars.ts');
@@ -90,18 +90,40 @@ say(`Narrations — ${narrations.length}`);
 if (ungraded.length) {
   say(`  ${ungraded.length} from a collection that also carries weak narrations, with no grading:`);
   for (const { entry, source } of ungraded) {
-    say(`    ${pad(formatSource(source), 26)} ${entry.title}`);
+    say(`    ${pad(formatSource(source), 34)} ${entry.title}`);
+    say(`      ${sourceUrl(source) ?? '(no verified link for this collection)'}`);
   }
-  say('  A grading is a scholarly judgement. Leave these blank rather than guessing.');
+  say('  A grading is a scholarly judgement. Take it from the page or leave it off.');
 }
 if (weak.length) {
   say(`  ${weak.length} graded daif — the app argues from authenticated hadith:`);
   for (const { entry, source } of weak) {
-    say(`    ${pad(formatSource(source), 26)} ${entry.title}`);
+    say(`    ${pad(formatSource(source), 34)} ${entry.title}`);
+    say(`      ${sourceUrl(source) ?? ''}`);
   }
 }
-if (!ungraded.length && !weak.length) say('  All graded or from Bukhari/Muslim.');
+if (!ungraded.length && !weak.length) say('  All graded, or from Bukhari and Muslim.');
 say();
+
+/* ---------- every citation, for a reviewer to check ---------- */
+
+// Deduplicated: the five generated prayers each recite Al-Fatiha once per
+// rakʿah, so one citation would otherwise print seventeen times.
+const distinct = new Map();
+for (const { entry, source } of allSources) {
+  const line = `${label(entry)}\u0000${formatSource(source)}`;
+  if (!distinct.has(line)) distinct.set(line, { entry, source });
+}
+
+if (distinct.size) {
+  say(`Citations (${distinct.size} distinct, ${allSources.length} uses)`);
+  for (const { entry, source } of distinct.values()) {
+    const url = sourceUrl(source);
+    say(`  ${pad(label(entry), 24)} ${formatSource(source)}`);
+    if (url) say(`  ${' '.repeat(24)} ${url}`);
+  }
+  say();
+}
 
 /* ---------- notes by standing ---------- */
 
@@ -137,7 +159,13 @@ if (dangling.length) {
 console.log(out.join('\n'));
 
 const failures = [];
-if (weak.length) failures.push(`${weak.length} narration(s) graded daif`);
+if (weak.length) {
+  failures.push(
+    `${weak.length} narration(s) graded daif — CLAUDE.md settles that the app argues ` +
+      'from authenticated hadith, so this needs a content decision: a different ' +
+      'narration, or dropping the text',
+  );
+}
 if (dangling.length) failures.push(`${dangling.length} broken relatedContent pointer(s)`);
 if (strict && unsourced.length) failures.push(`${unsourced.length} entries citing nothing`);
 

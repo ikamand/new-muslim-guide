@@ -55,7 +55,12 @@ export type Step = {
   id: string;
   /** Short name for the step: "Takbir", "Wash your face". */
   title: string;
-  posture: Posture;
+  /**
+   * Absent where a step is not a bodily position at all — saying the shahada
+   * is something you do sitting anywhere, and labelling it would be inventing
+   * a posture to fill a field.
+   */
+  posture?: Posture;
   /** What you physically do. Second person, plain language. */
   instruction: string;
   /** What you say, if anything. */

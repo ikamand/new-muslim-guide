@@ -1,3 +1,4 @@
+import { Recitations } from './recitations';
 import type { Pillar } from './types';
 
 /**
@@ -13,12 +14,14 @@ import type { Pillar } from './types';
  * rather than half-teaching them.
  */
 
-/** The testimony of faith, said to become Muslim and said in every prayer. */
-export const SHAHADA = {
-  arabic: 'لَا إِلَٰهَ إِلَّا اللَّهُ مُحَمَّدٌ رَسُولُ اللَّهِ',
-  transliteration: 'Lā ilāha illā-llāh, Muḥammadun rasūlu-llāh',
-  translation: 'There is no god but Allah, and Muhammad is the Messenger of Allah.',
-} as const;
+/**
+ * The testimony of faith, said to become Muslim and said in every prayer.
+ *
+ * Re-exported rather than written here: it is now said in two places in the
+ * app — this page and the guide to becoming Muslim — and a recitation that
+ * appears twice has to be stored once.
+ */
+export const SHAHADA = Recitations.shahada;
 
 export const PILLARS: Pillar[] = [
   {
@@ -27,6 +30,7 @@ export const PILLARS: Pillar[] = [
     arabic: 'الشَّهَادَة',
     transliteration: 'Ash-shahāda',
     summary: 'Saying, and meaning, that there is no god but Allah and that Muhammad is His Messenger.',
+    guideId: 'shahada',
     detail:
       'This is the pillar the other four rest on. Saying it sincerely is what makes a person Muslim, and it is repeated in every prayer for the rest of your life. It is two statements held together: that worship belongs to Allah alone, and that Muhammad ﷺ is the one who conveyed how.',
   },

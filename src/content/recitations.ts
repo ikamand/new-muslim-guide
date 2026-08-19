@@ -166,6 +166,14 @@ export const Recitations = {
     audioId: 'taslim',
   },
 
+  shahada: {
+    title: 'The testimony of faith',
+    arabic: 'لَا إِلَٰهَ إِلَّا اللَّهُ مُحَمَّدٌ رَسُولُ اللَّهِ',
+    transliteration: 'Lā ilāha illā-llāh, Muḥammadun rasūlu-llāh',
+    translation: 'There is no god but Allah, and Muhammad is the Messenger of Allah.',
+    audioId: 'shahada',
+  },
+
   shahadaAfterWudu: {
     title: 'After wudu',
     arabic:

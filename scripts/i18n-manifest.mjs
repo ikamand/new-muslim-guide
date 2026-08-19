@@ -19,8 +19,9 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const load = (p) => import(join(root, p));
 
 const { Recitations } = await load('src/content/recitations.ts');
-const { WUDU } = await load('src/content/wudu.ts');
-const { PRAYERS } = await load('src/content/prayers.ts');
+// Every guide, not a list repeated here — a new guide was silently missed
+// from the sheet the first time one was added.
+const { GUIDES } = await load('src/content/guides.ts');
 const { PILLARS } = await load('src/content/pillars.ts');
 const { IMAN_PILLARS } = await load('src/content/iman.ts');
 const { CONTENT_DICTS } = await load('src/i18n/content/index.ts');
@@ -38,7 +39,7 @@ const add = (context, english) => {
   byText.set(english, row);
 };
 
-for (const guide of [WUDU, ...PRAYERS]) {
+for (const guide of GUIDES) {
   add(`Guide: ${guide.title}`, guide.title);
   add(`Guide: ${guide.title}`, guide.subtitle);
   for (const step of guide.steps) {

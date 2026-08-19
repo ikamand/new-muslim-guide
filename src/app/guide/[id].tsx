@@ -77,7 +77,7 @@ export default function GuideScreen() {
         <View style={styles.meta}>
           <View style={[styles.pill, { backgroundColor: theme.accentMuted }]}>
             <ThemedText type="small" themeColor="accent">
-              {POSTURE_LABEL[step.posture]}
+              {step.posture ? POSTURE_LABEL[step.posture] : null}
             </ThemedText>
           </View>
           <ThemedText type="small" themeColor="textSecondary">

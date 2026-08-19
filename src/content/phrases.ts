@@ -15,6 +15,8 @@
  * the reverse of everywhere else in the app, where the Arabic is the thing
  * being said and the transliteration is the crutch.
  */
+import type { ContentMeta } from './model';
+
 export type Phrase = {
   id: string;
   /** How it sounds — what someone actually hears. */
@@ -25,6 +27,7 @@ export type Phrase = {
   when: string;
   /** What to say back, where there is a set answer. */
   reply?: string;
+  meta?: ContentMeta;
 };
 
 export const PHRASES: Phrase[] = [

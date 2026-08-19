@@ -1,3 +1,4 @@
+import type { ContentMeta } from './model';
 import { Recitations } from './recitations';
 import type { Recitation } from './types';
 
@@ -10,7 +11,7 @@ import type { Recitation } from './types';
  *
  * ⚠️ PARTIAL REVIEW. The Arabic was taken verbatim from Sahih al-Bukhari,
  * Sahih Muslim and Sunan Abi Dawud — each text carries its reference in
- * `source` — rather than written from memory, which is why these differ from
+ * `sources` — rather than written from memory, which is why these differ from
  * the older recitations in the app. The transliterations and English
  * translations are still model-written and need checking, and a reviewer
  * should confirm each text is the one its `when` claims.
@@ -25,6 +26,7 @@ export type Dua = {
   when: string;
   says: Recitation;
   note?: string;
+  meta?: ContentMeta;
 };
 
 export const DUAS: Dua[] = [

@@ -1,3 +1,4 @@
+import { note, ref } from './model';
 import type { Reference } from './types';
 
 /**
@@ -103,7 +104,12 @@ export const LOST_COUNT: Reference = {
       heading: 'Then two extra prostrations',
       body:
         'Finish the prayer as normal. Before or after the final taslim, make two prostrations just as you do in the prayer itself, saying the takbir as you go down and as you come up, then give the taslim.',
-      note: 'Schools differ on whether these come before or after the taslim. Either is taught by scholars; do it the way whoever taught you does it.',
+      notes: [
+        note(
+          'differs',
+          'Schools differ on whether these come before or after the taslim. Either is taught by scholars; do it the way whoever taught you does it.',
+        ),
+      ],
     },
     {
       id: 'also',
@@ -236,6 +242,20 @@ export const SEATED: Reference = {
  */
 export const MOSQUE: Reference = {
   id: 'mosque',
+  /**
+   * The metadata layer, on one reference as a worked example. Everything here
+   * is an editorial judgement about the app rather than a claim about the
+   * religion — how long a read is, how soon someone needs it — so it needed no
+   * scholarly review, only Iyad's eye on whether the estimates ring true.
+   */
+  meta: {
+    category: 'community',
+    difficulty: 'foundational',
+    estimatedMinutes: 6,
+    beginnerPriority: 2,
+    tags: ['mosque', 'first-day', 'etiquette'],
+    relatedContent: [ref('guide', 'wudu'), ref('pillar', 'salah')],
+  },
   surface: 'learn',
   title: 'Your first time at a mosque',
   subtitle: 'What actually happens, so none of it is a surprise',

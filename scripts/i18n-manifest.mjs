@@ -42,14 +42,26 @@ const add = (context, english) => {
   byText.set(english, row);
 };
 
+// Structured notes carry prose in `text`, and a `differs` note carries more of
+// it in each position. A note's `kind` and a school's name are not translated:
+// one is a classification, the other is "Hanafi" in every language.
+const addNotes = (context, notes) => {
+  for (const note of notes ?? []) {
+    add(context, note.text);
+    for (const position of note.positions ?? []) add(context, position.position);
+  }
+};
+
 for (const guide of GUIDES) {
   add(`Guide: ${guide.title}`, guide.title);
   add(`Guide: ${guide.title}`, guide.subtitle);
+  addNotes(`Guide: ${guide.title}`, guide.meta?.notes);
   for (const step of guide.steps) {
     const where = `${guide.title} — ${step.title}`;
     add(where, step.title);
     add(where, step.instruction);
     add(where, step.note);
+    addNotes(where, step.notes);
   }
 }
 
@@ -71,6 +83,7 @@ for (const [label, list] of [['Five Pillars', PILLARS], ['Six Articles', IMAN_PI
     for (const field of ['title', 'summary', 'detail', 'note']) {
       add(where, pillar[field]);
     }
+    addNotes(where, pillar.meta?.notes);
   }
 }
 
@@ -79,21 +92,26 @@ for (const phrase of PHRASES) {
   add(where, phrase.meaning);
   add(where, phrase.when);
   add(where, phrase.reply);
+  addNotes(where, phrase.meta?.notes);
 }
 
 for (const dua of DUAS) {
   add(`Duʿa: ${dua.when}`, dua.when);
   add(`Duʿa: ${dua.when}`, dua.note);
+  addNotes(`Duʿa: ${dua.when}`, dua.meta?.notes);
 }
 
 for (const reference of REFERENCES) {
   const where = `Reference: ${reference.title}`;
   add(where, reference.title);
   add(where, reference.subtitle);
+  addNotes(where, reference.meta?.notes);
   for (const section of reference.sections) {
-    add(`${reference.title} — ${section.heading}`, section.heading);
-    add(`${reference.title} — ${section.heading}`, section.body);
-    add(`${reference.title} — ${section.heading}`, section.note);
+    const inner = `${reference.title} — ${section.heading}`;
+    add(inner, section.heading);
+    add(inner, section.body);
+    add(inner, section.note);
+    addNotes(inner, section.notes);
   }
 }
 

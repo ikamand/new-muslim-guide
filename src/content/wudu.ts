@@ -1,4 +1,5 @@
 import { Recitations } from './recitations';
+import { ref } from './model';
 import type { Guide } from './types';
 
 /**
@@ -10,6 +11,18 @@ export const WUDU: Guide = {
   id: 'wudu',
   title: 'Wudu',
   subtitle: 'Washing before prayer',
+  meta: {
+    category: 'purification',
+    difficulty: 'foundational',
+    estimatedMinutes: 4,
+    beginnerPriority: 1,
+    tags: ['first-day'],
+    relatedContent: [
+      ref('guide', 'ghusl'),
+      ref('guide', 'tayammum'),
+      ref('guide', 'fajr'),
+    ],
+  },
   steps: [
     {
       id: 'intention',

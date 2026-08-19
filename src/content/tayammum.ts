@@ -1,3 +1,4 @@
+import { note } from './model';
 import type { Guide } from './types';
 
 /**
@@ -49,7 +50,15 @@ export const TAYAMMUM: Guide = {
       title: 'Wipe your hands',
       instruction:
         'Wipe the back of your right hand to the wrist with your left palm, then the back of your left hand with your right. You are finished and may pray.',
-      note: 'Some schools wipe the arms to the elbows instead of stopping at the wrists. Both are taught by scholars; you will see people do it either way.',
+      // Classified rather than reworded: the sentence a reader sees is
+      // unchanged, and the app now knows this is a genuine difference between
+      // schools rather than a practical tip.
+      notes: [
+        note(
+          'differs',
+          'Some schools wipe the arms to the elbows instead of stopping at the wrists. Both are taught by scholars; you will see people do it either way.',
+        ),
+      ],
     },
     {
       id: 'ends',

@@ -5,8 +5,12 @@
  *
  * Read straight out of `src/content/`, never maintained by hand, because a
  * hand-kept spreadsheet and the code disagree within a week and the sheet is
- * what a reciter works from. Node strips the TypeScript, so the recitations
- * are the real objects rather than a regex's guess at them.
+ * what a reciter works from. `scripts/ts-resolve.mjs` loads the TypeScript, so
+ * the recitations are the real objects rather than a regex's guess at them.
+ *
+ * It used to rely on Node's own type-stripping, which resolves no extensions —
+ * so the first extensionless value import anywhere in the content graph broke
+ * it. The loader the other content scripts already used does resolve them.
  *
  * `--check` exits non-zero if the committed manifest is out of date, so a new
  * duʿa cannot land without its rows.

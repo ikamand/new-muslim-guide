@@ -5,7 +5,7 @@ import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 
 import { RecitationCard } from '@/components/recitation-card';
 import { ThemedText } from '@/components/themed-text';
-import { getGuide, type Posture } from '@/content';
+import { getGuide, resolveNotes, type Posture } from '@/content';
 import { localiseGuide } from '@/i18n/localise';
 import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
@@ -95,13 +95,15 @@ export default function GuideScreen() {
 
         {step.says && <RecitationCard recitation={step.says} />}
 
-        {step.note && (
-          <View style={[styles.note, { borderLeftColor: theme.accent }]}>
+        {resolveNotes(step.note, step.notes).map((entry, position) => (
+          <View
+            key={`${entry.kind}-${position}`}
+            style={[styles.note, { borderLeftColor: theme.accent }]}>
             <ThemedText type="small" themeColor="textSecondary">
-              {step.note}
+              {entry.text}
             </ThemedText>
           </View>
-        )}
+        ))}
       </ScrollView>
 
       <View style={[styles.footer, { borderTopColor: theme.border }]}>

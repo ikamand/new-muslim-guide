@@ -3,10 +3,10 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 
 import { RecitationCard } from '@/components/recitation-card';
 import { ThemedText } from '@/components/themed-text';
-import { DUAS } from '@/content';
+import { DUAS, resolveNotes } from '@/content';
 import { MaxContentWidth, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
-import { localiseRecitation } from '@/i18n/localise';
+import { localiseDua } from '@/i18n/localise';
 import { useTheme } from '@/hooks/use-theme';
 
 /**
@@ -28,19 +28,21 @@ export default function DuasScreen() {
       </ThemedText>
 
       <View style={styles.list}>
-        {DUAS.map((dua) => (
+        {DUAS.map((entry) => localiseDua(entry, locale)).map((dua) => (
           <View key={dua.id} style={styles.item}>
             <ThemedText type="smallBold" themeColor="textSecondary" style={styles.when}>
               {dua.when}
             </ThemedText>
-            <RecitationCard recitation={localiseRecitation(dua.says, locale)} />
-            {dua.note && (
-              <View style={[styles.note, { borderLeftColor: theme.accent }]}>
+            <RecitationCard recitation={dua.says} />
+            {resolveNotes(dua.note, dua.meta?.notes).map((entry, position) => (
+              <View
+                key={`${entry.kind}-${position}`}
+                style={[styles.note, { borderLeftColor: theme.accent }]}>
                 <ThemedText type="small" themeColor="textSecondary">
-                  {dua.note}
+                  {entry.text}
                 </ThemedText>
               </View>
-            )}
+            ))}
           </View>
         ))}
       </View>

@@ -2,7 +2,7 @@ import { Stack, useLocalSearchParams } from 'expo-router';
 import { ScrollView, StyleSheet, View } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
-import { getReference } from '@/content';
+import { getReference, resolveNotes } from '@/content';
 import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { localiseReference } from '@/i18n/localise';
@@ -54,13 +54,15 @@ export default function ReferenceScreen() {
               {section.heading}
             </ThemedText>
             <ThemedText type="default">{section.body}</ThemedText>
-            {section.note && (
-              <View style={[styles.note, { borderLeftColor: theme.accent }]}>
+            {resolveNotes(section.note, section.notes).map((entry, position) => (
+              <View
+                key={`${entry.kind}-${position}`}
+                style={[styles.note, { borderLeftColor: theme.accent }]}>
                 <ThemedText type="small" themeColor="textSecondary">
-                  {section.note}
+                  {entry.text}
                 </ThemedText>
               </View>
-            )}
+            ))}
           </View>
         ))}
       </View>

@@ -3,7 +3,16 @@
  *
  * A guide is a sequence of steps. A step is one thing you do, held on screen
  * on its own: what to do with your body, and what to say while you do it.
+ *
+ * Each shape can carry a `meta` block — category, difficulty, how soon a
+ * beginner needs it, what it relates to, where its claims come from. It is
+ * optional on purpose: the metadata layer is adoptable one file at a time
+ * rather than in a single migration that has to be right first go. See
+ * `./model.ts`.
  */
+
+import type { ContentMeta, ContentNote } from './model';
+import type { Source } from './sources';
 
 /** Drives the posture illustration and the "you are here" cue. */
 export type Posture =
@@ -44,11 +53,16 @@ export type Recitation = {
   /** Key into the audio map in `src/content/audio.ts`. */
   audioId?: string;
   /**
-   * Where the wording was taken from — "Sahih al-Bukhari 6087". Set on texts
-   * copied from a named collection, so a reviewer can check the source rather
-   * than take the app's word for it.
+   * Where the wording was taken from. Set on texts copied from a named
+   * collection, so a reviewer can check the source rather than take the app's
+   * word for it — and so `npm run content:audit` can report the ones that
+   * carry nothing.
+   *
+   * Was a free-text string. Structured now because a string cannot be checked:
+   * it could not tell a graded-weak narration from a sahih one, and it drifted
+   * between "Bukhari" and "Sahih al-Bukhari" spellings.
    */
-  source?: string;
+  sources?: readonly Source[];
   /**
    * Set where the text is long enough to memorise in pieces. The whole-text
    * fields above are derived from these, so a correction to a verse lands in
@@ -71,8 +85,18 @@ export type Step = {
   instruction: string;
   /** What you say, if anything. */
   says?: Recitation;
-  /** Anything a first-timer would otherwise get wrong. */
+  /**
+   * Anything a first-timer would otherwise get wrong.
+   *
+   * Untouched, and still the right field for most of what it holds. Where a
+   * note is actually a school-of-thought difference or needs a citation, use
+   * `notes` instead — a bare string cannot say which of the three it is.
+   */
   note?: string;
+  /** Notes that carry their standing: agreed, differs, or practical advice. */
+  notes?: readonly ContentNote[];
+  /** Where this step's instruction comes from, where it is more than method. */
+  sources?: readonly Source[];
 };
 
 export type Guide = {
@@ -81,6 +105,7 @@ export type Guide = {
   /** One line under the title on the home screen. */
   subtitle: string;
   steps: Step[];
+  meta?: ContentMeta;
 };
 
 /**
@@ -108,6 +133,7 @@ export type Pillar = {
   guideId?: string;
   /** Anything a first-timer would otherwise take the wrong way. */
   note?: string;
+  meta?: ContentMeta;
 };
 
 /**
@@ -124,6 +150,13 @@ export type ReferenceSection = {
   body: string;
   /** Anything a first-timer would otherwise take the wrong way. */
   note?: string;
+  /**
+   * Notes that carry their standing. A reference is where the app most often
+   * has to say "scholars differ here", and this is where that becomes data a
+   * screen can choose how much of to show.
+   */
+  notes?: readonly ContentNote[];
+  sources?: readonly Source[];
 };
 
 export type Reference = {
@@ -145,4 +178,5 @@ export type Reference = {
    */
   audience?: 'man' | 'woman';
   sections: ReferenceSection[];
+  meta?: ContentMeta;
 };

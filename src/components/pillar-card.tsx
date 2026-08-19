@@ -2,7 +2,7 @@ import { Link } from 'expo-router';
 import { Pressable, StyleSheet, View } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
-import type { Pillar } from '@/content';
+import { resolveNotes, type Pillar } from '@/content';
 import { Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { useTheme } from '@/hooks/use-theme';
@@ -46,13 +46,15 @@ export function PillarCard({ pillar, index }: { pillar: Pillar; index: number })
         {pillar.detail}
       </ThemedText>
 
-      {pillar.note && (
-        <View style={[styles.note, { borderLeftColor: theme.accent }]}>
+      {resolveNotes(pillar.note, pillar.meta?.notes).map((entry, position) => (
+        <View
+          key={`${entry.kind}-${position}`}
+          style={[styles.note, { borderLeftColor: theme.accent }]}>
           <ThemedText type="small" themeColor="textSecondary">
-            {pillar.note}
+            {entry.text}
           </ThemedText>
         </View>
-      )}
+      ))}
 
       {pillar.guideId && (
         <Link href={{ pathname: '/guide/[id]', params: { id: pillar.guideId } }} asChild>

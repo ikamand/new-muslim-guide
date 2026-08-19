@@ -18,12 +18,20 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const load = (p) => import(join(root, p));
 
 const { Recitations } = await load('src/content/recitations.ts');
+const { formatSource } = await load('src/content/sources.ts');
 const { PHRASES } = await load('src/content/phrases.ts');
 const { PILLARS } = await load('src/content/pillars.ts');
 const { IMAN_PILLARS } = await load('src/content/iman.ts');
 const { DUAS } = await load('src/content/duas.ts');
 
 const whenSaid = new Map(DUAS.map((d) => [d.says, d.when]));
+
+/**
+ * The citation, as one cell. Was a free-text `source` string on the recitation;
+ * structured as `sources` now, so it is formatted rather than read straight.
+ * Verses inherit their parent's citation, as they did before.
+ */
+const cite = (r) => (r.sources ?? []).map(formatSource).join('; ');
 const rows = [];
 
 for (const [key, r] of Object.entries(Recitations)) {
@@ -35,7 +43,7 @@ for (const [key, r] of Object.entries(Recitations)) {
         arabic: v.arabic,
         translit: v.transliteration,
         english: v.translation,
-        source: r.source ?? '',
+        source: cite(r),
         file: 'recitations.ts',
       }),
     );
@@ -45,7 +53,7 @@ for (const [key, r] of Object.entries(Recitations)) {
       arabic: r.arabic,
       translit: r.transliteration,
       english: r.translation,
-      source: r.source ?? '',
+      source: cite(r),
       file: 'recitations.ts',
     });
   }

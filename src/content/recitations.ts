@@ -1,12 +1,20 @@
+import { hadith } from './sources';
 import type { Recitation, RecitationVerse } from './types';
 
 /**
  * The words said in prayer, in one place so a correction lands everywhere.
  *
  * These are the widely agreed wordings. Where schools of thought differ the
- * step that uses them carries a `note` saying so — the app teaches one clear
+ * step that uses them carries a note saying so — the app teaches one clear
  * way to pray rather than every variation, because a first-timer needs a
  * path, not a comparison table.
+ *
+ * ⚠️ The three Sunan Abi Dawud narrations below carry no grading. That is not
+ * an oversight and must not be filled in by guessing: a grading is a scholarly
+ * judgement, and Abu Dawud — unlike Bukhari and Muslim — includes narrations
+ * that are not sahih. `npm run content:audit` lists them as needing a
+ * qualified person. The prayer recitations above carry no reference at all
+ * yet, which the same report shows.
  */
 /**
  * Al-Fatiha, ayah by ayah.
@@ -201,7 +209,7 @@ export const Recitations = {
       'Bismika Allāhumma amūtu wa aḥyā',
     translation:
       'In Your name, O Allah, I die and I live.',
-    source: 'Sahih al-Bukhari 6087',
+    sources: [hadith('bukhari', '6087')],
     audioId: 'dua-sleep',
   },
 
@@ -213,7 +221,7 @@ export const Recitations = {
       'Al-ḥamdu li-llāhi-lladhī aḥyānā baʿda mā amātanā wa ilayhi-n-nushūr',
     translation:
       'All praise is for Allah, who gave us life after taking it, and to Him is the return.',
-    source: 'Sahih al-Bukhari 6075',
+    sources: [hadith('bukhari', '6075')],
     audioId: 'dua-wake',
   },
 
@@ -225,7 +233,7 @@ export const Recitations = {
       'Bismi-llāh, tawakkaltu ʿala-llāh, lā ḥawla wa lā quwwata illā bi-llāh',
     translation:
       'In the name of Allah. I place my trust in Allah. There is no power and no strength except with Allah.',
-    source: 'Sunan Abi Dawud 5097',
+    sources: [hadith('abu-dawud', '5097')],
     audioId: 'dua-leave-home',
   },
 
@@ -237,7 +245,7 @@ export const Recitations = {
       'Allāhumma innī aʿūdhu bika mina-l-khubthi wa-l-khabāʾith',
     translation:
       'O Allah, I seek refuge with You from all that is foul and from all evil.',
-    source: 'Sahih al-Bukhari 142',
+    sources: [hadith('bukhari', '142')],
     audioId: 'dua-enter-toilet',
   },
 
@@ -249,7 +257,7 @@ export const Recitations = {
       'Ghufrānak',
     translation:
       'I ask Your forgiveness.',
-    source: 'Sunan Abi Dawud 30',
+    sources: [hadith('abu-dawud', '30')],
     audioId: 'dua-leave-toilet',
   },
 
@@ -261,7 +269,7 @@ export const Recitations = {
       'Al-ḥamdu li-llāhi-lladhī aṭʿamanā wa saqānā wa jaʿalanā muslimīn',
     translation:
       'All praise is for Allah, who fed us and gave us drink, and made us Muslims.',
-    source: 'Sunan Abi Dawud 3851',
+    sources: [hadith('abu-dawud', '3851')],
     audioId: 'dua-after-eating',
   },
 
@@ -273,7 +281,7 @@ export const Recitations = {
       'Subḥāna-lladhī sakhkhara lanā hādhā wa mā kunnā lahu muqrinīn, wa innā ilā rabbinā la-munqalibūn. Allāhumma innā nasʾaluka fī safarinā hādha-l-birra wa-t-taqwā, wa mina-l-ʿamali mā tarḍā. Allāhumma hawwin ʿalaynā safaranā hādhā wa-ṭwi ʿannā buʿdah. Allāhumma anta-ṣ-ṣāḥibu fi-s-safar, wa-l-khalīfatu fi-l-ahl. Allāhumma innī aʿūdhu bika min waʿthāʾi-s-safar, wa kaʾābati-l-manẓar, wa sūʾi-l-munqalabi fi-l-māl wa-l-ahl',
     translation:
       'Glory to Him who has made this subject to us, when we could never have managed it ourselves, and to our Lord we are returning. O Allah, we ask You on this journey of ours for righteousness and piety, and for deeds that please You. O Allah, make this journey easy for us and fold up its distance. O Allah, You are the companion on the journey and the guardian of the family. O Allah, I seek refuge with You from the hardship of travel, from a sight that grieves, and from an ill turn in property and family.',
-    source: 'Sahih Muslim 3153',
+    sources: [hadith('muslim', '3153')],
     audioId: 'dua-travel',
   },
 } satisfies Record<string, Recitation>;

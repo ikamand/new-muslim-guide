@@ -5,6 +5,7 @@ import { ThemedText } from '@/components/themed-text';
 import { PHRASES } from '@/content';
 import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
+import { localisePhrase } from '@/i18n/localise';
 import { useTheme } from '@/hooks/use-theme';
 
 /**
@@ -17,7 +18,7 @@ import { useTheme } from '@/hooks/use-theme';
  */
 export default function PhrasesScreen() {
   const theme = useTheme();
-  const { t } = useLocale();
+  const { locale, t } = useLocale();
 
   return (
     <ScrollView contentContainerStyle={styles.content}>
@@ -28,7 +29,7 @@ export default function PhrasesScreen() {
       </ThemedText>
 
       <View style={styles.list}>
-        {PHRASES.map((phrase) => (
+        {PHRASES.map((entry) => localisePhrase(entry, locale)).map((phrase) => (
           <View
             key={phrase.id}
             style={[

@@ -55,8 +55,9 @@
     "lint": "expo lint",
     "arabic": "node --import ./scripts/ts-resolve.mjs scripts/arabic-proof.mjs",
     "icons": "node scripts/make-icons.mjs",
-    "audio:manifest": "node scripts/audio-manifest.mjs",
-    "i18n:manifest": "node --import ./scripts/ts-resolve.mjs scripts/i18n-manifest.mjs"
+    "audio:manifest": "node --import ./scripts/ts-resolve.mjs scripts/audio-manifest.mjs",
+    "i18n:manifest": "node --import ./scripts/ts-resolve.mjs scripts/i18n-manifest.mjs",
+    "content:audit": "node --import ./scripts/ts-resolve.mjs scripts/content-audit.mjs"
   },
   "private": true
 }

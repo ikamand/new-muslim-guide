@@ -16,7 +16,9 @@ import {
 } from '@/content';
 import { BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
+import { useRecommendations } from '@/hooks/use-recommendations';
 import { useTheme } from '@/hooks/use-theme';
+import { routeFor } from '@/lib/content-routes';
 import type { UIKey } from '@/i18n/ui';
 import { localiseReference } from '@/i18n/localise';
 
@@ -133,6 +135,58 @@ function ShahadaCard() {
   );
 }
 
+/**
+ * What onboarding pointed this reader at, if they answered.
+ *
+ * Absent entirely for anyone who skipped, rather than falling back to a generic
+ * list under a personal heading — a section called "Where to start" that is the
+ * same for everybody is worse than no section at all.
+ *
+ * Rendered from whatever resolves, so it shortens and lengthens on its own as
+ * content is written. Nothing here names a lesson that does not exist.
+ */
+function RecommendedSection() {
+  const theme = useTheme();
+  const { t } = useLocale();
+  const recommended = useRecommendations();
+
+  if (recommended.length === 0) return null;
+
+  return (
+    <View style={styles.section}>
+      <ThemedText type="smallBold" themeColor="textSecondary" style={styles.sectionTitle}>
+        {t('learn.recommended')}
+      </ThemedText>
+      <View style={styles.list}>
+        {recommended.map((entry) => (
+          <Link key={`${entry.kind}:${entry.id}`} href={routeFor(entry)} asChild>
+            <Pressable
+              accessibilityRole="link"
+              accessibilityLabel={`${entry.title}. ${entry.shortDescription}`}
+              style={({ pressed }) => [
+                styles.card,
+                {
+                  backgroundColor: pressed ? theme.backgroundSelected : theme.backgroundElement,
+                  borderColor: theme.border,
+                },
+              ]}>
+              <View style={styles.cardText}>
+                <ThemedText type="smallBold" style={styles.cardTitle}>
+                  {entry.title}
+                </ThemedText>
+                <ThemedText type="small" themeColor="textSecondary">
+                  {entry.shortDescription}
+                </ThemedText>
+              </View>
+              <Ionicons name="arrow-forward" size={18} color={theme.accent} />
+            </Pressable>
+          </Link>
+        ))}
+      </View>
+    </View>
+  );
+}
+
 export default function LearnScreen() {
   const theme = useTheme();
   const { locale, t } = useLocale();
@@ -149,6 +203,8 @@ export default function LearnScreen() {
           <ThemedText type="subtitle">{t('learn.title')}</ThemedText>
           <ThemedText type="default" themeColor="textSecondary">{t('learn.intro')}</ThemedText>
         </View>
+
+        <RecommendedSection />
 
         <View style={styles.section}>
           <ThemedText type="smallBold" themeColor="textSecondary" style={styles.sectionTitle}>

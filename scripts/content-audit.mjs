@@ -24,6 +24,7 @@ const load = (p) => import(join(root, p));
 // Via catalog.ts rather than index.ts: index pulls in the audio map, whose
 // `require` calls only Metro resolves.
 const { CATALOG, danglingRefs } = await load('src/content/catalog.ts');
+const { pendingRecommendations } = await load('src/content/recommendations.ts');
 const { formatSource, sourceUrl, HADITH_COLLECTIONS } = await load('src/content/sources.ts');
 const { GUIDES } = await load('src/content/guides.ts');
 const { REFERENCES } = await load('src/content/references.ts');
@@ -144,6 +145,18 @@ say(`  differs    ${counts.differs}`);
 say(`  practical  ${counts.practical}`);
 say(`  unclassified ${plain.length}  (plain \`note\` strings — read as practical advice)`);
 say();
+
+/* ---------- what onboarding promises and the app cannot yet answer ---------- */
+
+const pending = pendingRecommendations();
+if (pending.length) {
+  say(`Recommendations awaiting content (${pending.length})`);
+  say('  Onboarding points at these; nothing resolves, so nothing is shown. Not a');
+  say('  failure — naming what should exist is how the gap stays countable, and is');
+  say('  the alternative to inventing a record so a list looks full.');
+  for (const entry of pending) say(`    ${entry.kind}:${entry.id}`);
+  say();
+}
 
 /* ---------- pointers ---------- */
 

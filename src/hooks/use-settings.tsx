@@ -1,5 +1,11 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import {
+  isInitialInterest,
+  isUserStage,
+  type InitialInterest,
+  type UserStage,
+} from '@/lib/onboarding';
 import { DEFAULT_REMINDERS, LEAD_CHOICES, type ReminderSettings } from '@/lib/reminders';
 import { PRAYER_IDS } from '@/lib/prayer-times';
 import { createContext, use, useCallback, useEffect, useMemo, useState, type ReactNode } from 'react';
@@ -32,8 +38,23 @@ export type Settings = {
   translation: boolean;
   keepAwake: boolean;
   audience: Audience;
-  /** False until the first-run questions have been seen. */
+  /**
+   * The gate the root layout reads: false sends someone to `/welcome`.
+   *
+   * Set by both finishing and skipping, and kept under its original name so an
+   * install from before onboarding was rebuilt is not asked again. The two
+   * flags below record *how* it became true, which is what personalisation
+   * needs to know and what a single boolean could never say.
+   */
   onboarded: boolean;
+  /** They answered the questions. */
+  onboardingCompleted: boolean;
+  /** They chose to skip. Not a lesser state — the app works the same either way. */
+  onboardingSkipped: boolean;
+  /** Where they said they are. Null when skipped, or from an older install. */
+  userStage: UserStage | null;
+  /** What they said they wanted help with first. */
+  initialInterest: InitialInterest | null;
   /** Which prayers to be reminded of, and how long before. All off by default. */
   reminders: ReminderSettings;
 };
@@ -44,6 +65,10 @@ const DEFAULTS: Settings = {
   keepAwake: true,
   audience: null,
   onboarded: false,
+  onboardingCompleted: false,
+  onboardingSkipped: false,
+  userStage: null,
+  initialInterest: null,
   reminders: DEFAULT_REMINDERS,
 };
 
@@ -73,6 +98,21 @@ function parseStored(raw: string | null): Settings {
         stored.audience === 'man' || stored.audience === 'woman' ? stored.audience : null,
       onboarded:
         typeof stored.onboarded === 'boolean' ? stored.onboarded : DEFAULTS.onboarded,
+      onboardingCompleted:
+        typeof stored.onboardingCompleted === 'boolean'
+          ? stored.onboardingCompleted
+          : DEFAULTS.onboardingCompleted,
+      onboardingSkipped:
+        typeof stored.onboardingSkipped === 'boolean'
+          ? stored.onboardingSkipped
+          : DEFAULTS.onboardingSkipped,
+      // A stage written by a future build, or corrupted, reads as unanswered
+      // rather than throwing — an unrecognised value should cost someone their
+      // recommendations, not their app.
+      userStage: isUserStage(stored.userStage) ? stored.userStage : null,
+      initialInterest: isInitialInterest(stored.initialInterest)
+        ? stored.initialInterest
+        : null,
       reminders: parseReminders(stored.reminders),
     };
   } catch {
@@ -110,6 +150,8 @@ type SettingsContext = Settings & {
   toggle: (key: 'transliteration' | 'translation' | 'keepAwake') => void;
   /** For the settings that are not switches. */
   set: <K extends keyof Settings>(key: K, value: Settings[K]) => void;
+  /** Several settings at once, in one write. */
+  setMany: (values: Partial<Settings>) => void;
   /** False until the stored value has been read — the splash waits on this. */
   loaded: boolean;
 };
@@ -155,9 +197,22 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
     });
   }, []);
 
+  /**
+   * Onboarding finishes with four values that have to land together. Four
+   * `set` calls would each be computed from state captured before the others
+   * applied, and the app would gate on whichever wrote last.
+   */
+  const setMany = useCallback((values: Partial<Settings>) => {
+    setSettings((current) => {
+      const next = { ...current, ...values };
+      void AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+      return next;
+    });
+  }, []);
+
   const value = useMemo(
-    () => ({ ...settings, toggle, set, loaded }),
-    [settings, toggle, set, loaded],
+    () => ({ ...settings, toggle, set, setMany, loaded }),
+    [settings, toggle, set, setMany, loaded],
   );
 
   return <Context value={value}>{children}</Context>;

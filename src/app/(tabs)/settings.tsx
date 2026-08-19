@@ -1,3 +1,4 @@
+import { useRouter } from 'expo-router';
 import { Pressable, ScrollView, StyleSheet, Switch, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -233,6 +234,46 @@ function RemindersGroup() {
   );
 }
 
+/**
+ * A way back into onboarding.
+ *
+ * The two questions decide what the Learn tab suggests first, and someone's
+ * answer to "where are you right now" is exactly the kind of thing that stops
+ * being true after a few months. Reopening prefills what they chose last time,
+ * and skipping out of a revisit changes nothing.
+ */
+function OnboardingGroup() {
+  const theme = useTheme();
+  const router = useRouter();
+  const { t } = useLocale();
+
+  return (
+    <View style={styles.section}>
+      <ThemedText type="smallBold" themeColor="textSecondary" style={styles.sectionTitle}>
+        {t('settings.onboarding')}
+      </ThemedText>
+      <ThemedText type="small" themeColor="textSecondary">
+        {t('settings.onboarding.help')}
+      </ThemedText>
+      <Pressable
+        onPress={() => router.push('/welcome')}
+        accessibilityRole="button"
+        accessibilityLabel={t('settings.onboarding.redo')}
+        style={({ pressed }) => [
+          styles.redo,
+          {
+            backgroundColor: pressed ? theme.backgroundSelected : theme.backgroundElement,
+            borderColor: theme.border,
+          },
+        ]}>
+        <ThemedText type="smallBold" themeColor="accent">
+          {t('settings.onboarding.redo')}
+        </ThemedText>
+      </Pressable>
+    </View>
+  );
+}
+
 export default function SettingsScreen() {
   const theme = useTheme();
   const { t } = useLocale();
@@ -244,6 +285,8 @@ export default function SettingsScreen() {
           <ThemedText type="subtitle">{t('settings.title')}</ThemedText>
           <ThemedText type="default" themeColor="textSecondary">{t('settings.intro')}</ThemedText>
         </View>
+
+        <OnboardingGroup />
 
         <View style={styles.section}>
           <ThemedText type="smallBold" themeColor="textSecondary" style={styles.sectionTitle}>
@@ -348,6 +391,15 @@ const styles = StyleSheet.create({
   },
   section: {
     gap: Spacing.two,
+  },
+  redo: {
+    alignSelf: 'flex-start',
+    justifyContent: 'center',
+    minHeight: 44,
+    paddingHorizontal: Spacing.four,
+    borderRadius: Radius.small,
+    borderWidth: StyleSheet.hairlineWidth,
+    marginTop: Spacing.one,
   },
   sectionTitle: {
     textTransform: 'uppercase',

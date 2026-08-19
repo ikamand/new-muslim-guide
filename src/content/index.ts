@@ -16,6 +16,16 @@ export {
 } from './catalog';
 export { getGuide, GUIDES, PURIFICATION } from './guides';
 export {
+  INITIAL_INTERESTS,
+  PLANNED,
+  pendingRecommendations,
+  recommendationsFor,
+  recommendedRefs,
+  USER_STAGES,
+  type InitialInterest,
+  type UserStage,
+} from './recommendations';
+export {
   asNote,
   byBeginnerPriority,
   hasMore,

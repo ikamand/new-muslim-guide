@@ -5,7 +5,10 @@ import { RecitationCard } from '@/components/recitation-card';
 import { ThemedText } from '@/components/themed-text';
 import { Recitations } from '@/content/recitations';
 import { BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
+import { useReminders } from '@/hooks/use-reminders';
 import { useSettings, type Audience } from '@/hooks/use-settings';
+import { PRAYER_IDS, PRAYER_LABEL } from '@/lib/prayer-times';
+import { LEAD_CHOICES } from '@/lib/reminders';
 import { useLocale } from '@/hooks/use-locale';
 import { LOCALE_NAMES, LOCALES } from '@/i18n/locales';
 import { useTheme } from '@/hooks/use-theme';
@@ -132,6 +135,104 @@ function AudienceGroup() {
   );
 }
 
+/**
+ * Prayer reminders.
+ *
+ * Every prayer is off until someone turns it on, and the permission prompt
+ * comes at that moment rather than on launch — a prompt before anyone has
+ * asked for anything is how an app gets refused once and permanently.
+ *
+ * The lead time only appears once at least one prayer is on. It is a setting
+ * about a thing that is not happening yet otherwise.
+ */
+function RemindersGroup() {
+  const theme = useTheme();
+  const { t } = useLocale();
+  const { reminders, toggle, setLead, granted, anyOn } = useReminders();
+
+  const leadLabel = (minutes: number) =>
+    minutes === 0
+      ? t('settings.reminders.atTime')
+      : t('settings.reminders.minutesBefore').replace('{n}', String(minutes));
+
+  return (
+    <View style={styles.section}>
+      <ThemedText type="smallBold" themeColor="textSecondary" style={styles.sectionTitle}>
+        {t('settings.reminders')}
+      </ThemedText>
+      <ThemedText type="small" themeColor="textSecondary">
+        {t('settings.reminders.help')}
+      </ThemedText>
+
+      {granted === false && (
+        <View style={[styles.notice, { borderLeftColor: theme.accent }]}>
+          <ThemedText type="small" themeColor="textSecondary">
+            {t('settings.reminders.denied')}
+          </ThemedText>
+        </View>
+      )}
+
+      <View
+        style={[styles.group, { backgroundColor: theme.backgroundElement, borderColor: theme.border }]}>
+        {PRAYER_IDS.map((id, index) => (
+          <View
+            key={id}
+            style={[
+              styles.row,
+              index < PRAYER_IDS.length - 1 && {
+                borderBottomWidth: StyleSheet.hairlineWidth,
+                borderBottomColor: theme.border,
+              },
+            ]}>
+            <ThemedText type="default">{PRAYER_LABEL[id]}</ThemedText>
+            <Switch
+              value={reminders.prayers[id]}
+              onValueChange={() => void toggle(id)}
+              trackColor={{ false: theme.backgroundSelected, true: theme.accent }}
+              thumbColor={theme.background}
+            />
+          </View>
+        ))}
+      </View>
+
+      {anyOn && (
+        <>
+          <ThemedText type="smallBold" themeColor="textSecondary" style={styles.sectionTitle}>
+            {t('settings.reminders.lead')}
+          </ThemedText>
+          <View
+            style={[
+              styles.group,
+              { backgroundColor: theme.backgroundElement, borderColor: theme.border },
+            ]}>
+            {LEAD_CHOICES.map((minutes, index) => (
+              <Pressable
+                key={minutes}
+                onPress={() => setLead(minutes)}
+                accessibilityRole="radio"
+                accessibilityState={{ selected: reminders.leadMinutes === minutes }}
+                style={[
+                  styles.row,
+                  index < LEAD_CHOICES.length - 1 && {
+                    borderBottomWidth: StyleSheet.hairlineWidth,
+                    borderBottomColor: theme.border,
+                  },
+                ]}>
+                <ThemedText type="default">{leadLabel(minutes)}</ThemedText>
+                {reminders.leadMinutes === minutes && (
+                  <ThemedText type="smallBold" themeColor="accent">
+                    ✓
+                  </ThemedText>
+                )}
+              </Pressable>
+            ))}
+          </View>
+        </>
+      )}
+    </View>
+  );
+}
+
 export default function SettingsScreen() {
   const theme = useTheme();
   const { t } = useLocale();
@@ -164,6 +265,8 @@ export default function SettingsScreen() {
             isLast
           />
         </View>
+
+        <RemindersGroup />
 
         <View style={styles.section}>
           <ThemedText type="smallBold" themeColor="textSecondary" style={styles.sectionTitle}>
@@ -221,6 +324,11 @@ const styles = StyleSheet.create({
   header: {
     gap: Spacing.two,
     paddingTop: Spacing.four,
+  },
+  notice: {
+    borderLeftWidth: 3,
+    paddingLeft: Spacing.three,
+    paddingVertical: Spacing.one,
   },
   group: {
     borderRadius: Radius.medium,

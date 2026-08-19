@@ -1,4 +1,5 @@
 import { Stack, useRouter } from 'expo-router';
+import * as Notifications from 'expo-notifications';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 
@@ -9,6 +10,18 @@ import { LocaleProvider } from '@/hooks/use-locale';
 import { LocationProvider } from '@/hooks/use-location';
 
 SplashScreen.preventAutoHideAsync();
+
+// Without this a reminder that fires while the app is open is swallowed —
+// which is exactly when someone is most likely to be looking at the prayer
+// times and least likely to forgive a missed alert.
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowBanner: true,
+    shouldShowList: true,
+    shouldPlaySound: true,
+    shouldSetBadge: false,
+  }),
+});
 
 function RootStack() {
   const scheme = useColorScheme();

@@ -1,4 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import { DEFAULT_REMINDERS, LEAD_CHOICES, type ReminderSettings } from '@/lib/reminders';
+import { PRAYER_IDS } from '@/lib/prayer-times';
 import { createContext, use, useCallback, useEffect, useMemo, useState, type ReactNode } from 'react';
 
 /**
@@ -31,6 +34,8 @@ export type Settings = {
   audience: Audience;
   /** False until the first-run questions have been seen. */
   onboarded: boolean;
+  /** Which prayers to be reminded of, and how long before. All off by default. */
+  reminders: ReminderSettings;
 };
 
 const DEFAULTS: Settings = {
@@ -39,6 +44,7 @@ const DEFAULTS: Settings = {
   keepAwake: true,
   audience: null,
   onboarded: false,
+  reminders: DEFAULT_REMINDERS,
 };
 
 /** Unchanged from when this held only display settings, so nobody's choices reset. */
@@ -67,10 +73,37 @@ function parseStored(raw: string | null): Settings {
         stored.audience === 'man' || stored.audience === 'woman' ? stored.audience : null,
       onboarded:
         typeof stored.onboarded === 'boolean' ? stored.onboarded : DEFAULTS.onboarded,
+      reminders: parseReminders(stored.reminders),
     };
   } catch {
     return DEFAULTS;
   }
+}
+
+/**
+ * Narrowed field by field like everything else here, because this one is nested
+ * and a half-written object would otherwise schedule notifications for prayers
+ * nobody asked about.
+ */
+function parseReminders(raw: unknown): ReminderSettings {
+  if (typeof raw !== 'object' || raw === null) return DEFAULT_REMINDERS;
+  const stored = raw as { prayers?: unknown; leadMinutes?: unknown };
+
+  const prayers = { ...DEFAULT_REMINDERS.prayers };
+  if (typeof stored.prayers === 'object' && stored.prayers !== null) {
+    const flags = stored.prayers as Record<string, unknown>;
+    for (const id of PRAYER_IDS) {
+      if (typeof flags[id] === 'boolean') prayers[id] = flags[id];
+    }
+  }
+
+  const lead = stored.leadMinutes;
+  const leadMinutes =
+    typeof lead === 'number' && (LEAD_CHOICES as readonly number[]).includes(lead)
+      ? lead
+      : DEFAULT_REMINDERS.leadMinutes;
+
+  return { prayers, leadMinutes };
 }
 
 type SettingsContext = Settings & {

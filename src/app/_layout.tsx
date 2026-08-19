@@ -1,4 +1,4 @@
-import { Stack } from 'expo-router';
+import { Stack, useRouter } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 
@@ -13,14 +13,19 @@ SplashScreen.preventAutoHideAsync();
 function RootStack() {
   const scheme = useColorScheme();
   const theme = Colors[scheme === 'dark' ? 'dark' : 'light'];
-  const { loaded } = useSettings();
+  const { loaded, onboarded } = useSettings();
+  const router = useRouter();
 
   // Hold the splash until the stored settings are in. Otherwise the first
   // frame shows the defaults and then visibly corrects itself for anyone who
   // has turned a line off.
+  // The redirect happens under the splash, so the first frame anyone sees is
+  // already the right screen rather than the app briefly showing through.
   useEffect(() => {
-    if (loaded) SplashScreen.hideAsync();
-  }, [loaded]);
+    if (!loaded) return;
+    if (!onboarded) router.replace('/welcome');
+    SplashScreen.hideAsync();
+  }, [loaded, onboarded, router]);
 
   return (
     <Stack
@@ -32,6 +37,7 @@ function RootStack() {
         contentStyle: { backgroundColor: theme.background },
       }}>
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      <Stack.Screen name="welcome" options={{ headerShown: false, gestureEnabled: false }} />
       {/*
         The step player sits outside the tabs on purpose. Someone mid-prayer is
         holding the phone in one hand — a tab bar there is wasted space and a

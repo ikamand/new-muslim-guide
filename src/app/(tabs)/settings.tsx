@@ -5,7 +5,7 @@ import { RecitationCard } from '@/components/recitation-card';
 import { ThemedText } from '@/components/themed-text';
 import { Recitations } from '@/content/recitations';
 import { BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
-import { useSettings, type Settings } from '@/hooks/use-settings';
+import { useSettings, type Audience } from '@/hooks/use-settings';
 import { useLocale } from '@/hooks/use-locale';
 import { LOCALE_NAMES, LOCALES } from '@/i18n/locales';
 import { useTheme } from '@/hooks/use-theme';
@@ -18,7 +18,7 @@ function SettingRow({
 }: {
   label: string;
   description: string;
-  settingKey: keyof Settings;
+  settingKey: 'transliteration' | 'translation' | 'keepAwake';
   /** The divider separates rows; the last row has nothing to separate from. */
   isLast?: boolean;
 }) {
@@ -86,6 +86,52 @@ function LanguageGroup() {
   );
 }
 
+/**
+ * Which rulings the app shows.
+ *
+ * Changeable, and "Show everything" is a real option rather than a fallback —
+ * someone who declined the question at first run should not be nagged, and
+ * someone curious about the other set is entitled to read it.
+ */
+function AudienceGroup() {
+  const theme = useTheme();
+  const { t } = useLocale();
+  const { audience, set } = useSettings();
+
+  const options: { value: Audience; label: string }[] = [
+    { value: 'man', label: t('settings.audience.man') },
+    { value: 'woman', label: t('settings.audience.woman') },
+    { value: null, label: t('settings.audience.both') },
+  ];
+
+  return (
+    <View
+      style={[styles.group, { backgroundColor: theme.backgroundElement, borderColor: theme.border }]}>
+      {options.map((option, index) => (
+        <Pressable
+          key={option.label}
+          onPress={() => set('audience', option.value)}
+          accessibilityRole="radio"
+          accessibilityState={{ selected: audience === option.value }}
+          style={[
+            styles.row,
+            index < options.length - 1 && {
+              borderBottomWidth: StyleSheet.hairlineWidth,
+              borderBottomColor: theme.border,
+            },
+          ]}>
+          <ThemedText type="default">{option.label}</ThemedText>
+          {audience === option.value && (
+            <ThemedText type="smallBold" themeColor="accent">
+              ✓
+            </ThemedText>
+          )}
+        </Pressable>
+      ))}
+    </View>
+  );
+}
+
 export default function SettingsScreen() {
   const theme = useTheme();
   const { t } = useLocale();
@@ -117,6 +163,13 @@ export default function SettingsScreen() {
             settingKey="translation"
             isLast
           />
+        </View>
+
+        <View style={styles.section}>
+          <ThemedText type="smallBold" themeColor="textSecondary" style={styles.sectionTitle}>
+            {t('settings.guidance')}
+          </ThemedText>
+          <AudienceGroup />
         </View>
 
         <View style={styles.section}>

@@ -14,16 +14,31 @@ import { createContext, use, useCallback, useEffect, useMemo, useState, type Rea
  * a setting. It is here to be turned off by someone who leaves the app open on
  * a table, not to be found by someone who needs it.
  */
+/**
+ * Which set of rulings applies to the reader.
+ *
+ * Not a profile field and not demographics. Some instruction genuinely differs
+ * — what must be covered in prayer, whether Friday prayer is obligatory, and
+ * what changes during a period — and the app cannot infer it. `null` means
+ * unanswered, and unanswered shows everything rather than guessing.
+ */
+export type Audience = 'man' | 'woman' | null;
+
 export type Settings = {
   transliteration: boolean;
   translation: boolean;
   keepAwake: boolean;
+  audience: Audience;
+  /** False until the first-run questions have been seen. */
+  onboarded: boolean;
 };
 
 const DEFAULTS: Settings = {
   transliteration: true,
   translation: true,
   keepAwake: true,
+  audience: null,
+  onboarded: false,
 };
 
 /** Unchanged from when this held only display settings, so nobody's choices reset. */
@@ -48,6 +63,10 @@ function parseStored(raw: string | null): Settings {
         typeof stored.translation === 'boolean' ? stored.translation : DEFAULTS.translation,
       keepAwake:
         typeof stored.keepAwake === 'boolean' ? stored.keepAwake : DEFAULTS.keepAwake,
+      audience:
+        stored.audience === 'man' || stored.audience === 'woman' ? stored.audience : null,
+      onboarded:
+        typeof stored.onboarded === 'boolean' ? stored.onboarded : DEFAULTS.onboarded,
     };
   } catch {
     return DEFAULTS;
@@ -55,7 +74,9 @@ function parseStored(raw: string | null): Settings {
 }
 
 type SettingsContext = Settings & {
-  toggle: (key: keyof Settings) => void;
+  toggle: (key: 'transliteration' | 'translation' | 'keepAwake') => void;
+  /** For the settings that are not switches. */
+  set: <K extends keyof Settings>(key: K, value: Settings[K]) => void;
   /** False until the stored value has been read — the splash waits on this. */
   loaded: boolean;
 };
@@ -83,7 +104,7 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
     };
   }, []);
 
-  const toggle = useCallback((key: keyof Settings) => {
+  const toggle = useCallback((key: 'transliteration' | 'translation' | 'keepAwake') => {
     setSettings((current) => {
       const next = { ...current, [key]: !current[key] };
       // Fire and forget: the UI already reflects `next`, and a failed write
@@ -93,7 +114,18 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
     });
   }, []);
 
-  const value = useMemo(() => ({ ...settings, toggle, loaded }), [settings, toggle, loaded]);
+  const set = useCallback(<K extends keyof Settings>(key: K, value: Settings[K]) => {
+    setSettings((current) => {
+      const next = { ...current, [key]: value };
+      void AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+      return next;
+    });
+  }, []);
+
+  const value = useMemo(
+    () => ({ ...settings, toggle, set, loaded }),
+    [settings, toggle, set, loaded],
+  );
 
   return <Context value={value}>{children}</Context>;
 }

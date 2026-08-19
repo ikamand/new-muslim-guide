@@ -70,6 +70,24 @@ export const EN = {
   'settings.keepAwake.help':
     'Stops the screen going dark while you are part-way through a prayer',
 
+  'welcome.title': 'Peace be upon you',
+  'welcome.intro': 'Two quick questions, then the app gets out of your way.',
+  'welcome.where': 'Where are you?',
+  'welcome.becoming': 'I want to become Muslim',
+  'welcome.becoming.help': 'Start with the shahada — what it means and how to say it',
+  'welcome.already': 'I have become Muslim',
+  'welcome.already.help': 'Start with wudu and the prayer',
+  'welcome.audience': 'Which applies to you?',
+  'welcome.audience.why':
+    'A few things genuinely differ — what has to be covered in prayer, whether Friday prayer is obligatory, and what changes during a period. Nothing is stored anywhere but this phone.',
+  'welcome.man': 'Man',
+  'welcome.woman': 'Woman',
+  'welcome.skip': 'Rather not say — show me everything',
+  'settings.guidance': 'Prayer guidance for',
+  'settings.audience.man': 'Men',
+  'settings.audience.woman': 'Women',
+  'settings.audience.both': 'Show everything',
+
   'common.back': 'Back',
   'common.times': 'times',
 } as const;
@@ -104,6 +122,10 @@ const AR: Overrides = {
   'settings.translation': 'الترجمة',
   'settings.duringPrayer': 'أثناء الصلاة',
   'settings.keepAwake': 'إبقاء الشاشة مضاءة',
+  'welcome.title': 'السلام عليكم',
+  'welcome.man': 'رجل',
+  'welcome.woman': 'امرأة',
+  'settings.guidance': 'إرشادات الصلاة لـ',
   'common.back': 'رجوع',
 };
 
@@ -135,6 +157,10 @@ const FR: Overrides = {
   'settings.translation': 'Traduction',
   'settings.duringPrayer': 'Pendant la prière',
   'settings.keepAwake': 'Garder l’écran allumé',
+  'welcome.title': 'Que la paix soit sur vous',
+  'welcome.man': 'Homme',
+  'welcome.woman': 'Femme',
+  'settings.guidance': 'Conseils de prière pour',
   'common.back': 'Retour',
 };
 
@@ -164,6 +190,10 @@ const ES: Overrides = {
   'settings.translation': 'Traducción',
   'settings.duringPrayer': 'Durante la oración',
   'settings.keepAwake': 'Mantener la pantalla encendida',
+  'welcome.title': 'La paz sea contigo',
+  'welcome.man': 'Hombre',
+  'welcome.woman': 'Mujer',
+  'settings.guidance': 'Guía de oración para',
   'common.back': 'Atrás',
 };
 

@@ -78,7 +78,9 @@ export default function HomeScreen() {
   // declined the question sees everything — the honest fallback, since the app
   // would otherwise withhold something on a guess.
   const topics = REFERENCES.filter(
-    (reference) => !reference.audience || !audience || reference.audience === audience,
+    (reference) =>
+      reference.surface === 'pray' &&
+      (!reference.audience || !audience || reference.audience === audience),
   );
 
   return (

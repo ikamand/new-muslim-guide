@@ -132,6 +132,13 @@ export type Reference = {
   /** One line under the title. */
   subtitle: string;
   /**
+   * Which tab lists it. `pray` for something you look up in the middle of
+   * praying or deciding whether to; `learn` for something you read once in a
+   * quiet minute. The distinction is when you reach for it, not what it is
+   * about.
+   */
+  surface: 'pray' | 'learn';
+  /**
    * Who this applies to. Absent means everyone. Where it is set, the app hides
    * the topic from the other audience — a man has no reason to be shown what
    * changes during a period — and shows it to anyone who declined the question.

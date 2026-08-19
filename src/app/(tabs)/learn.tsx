@@ -3,10 +3,19 @@ import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ThemedText } from '@/components/themed-text';
-import { DUAS, getPracticeClipCount, IMAN_PILLARS, PHRASES, PILLARS, SHAHADA_GUIDE } from '@/content';
+import {
+  DUAS,
+  getPracticeClipCount,
+  IMAN_PILLARS,
+  PHRASES,
+  PILLARS,
+  REFERENCES,
+  SHAHADA_GUIDE,
+} from '@/content';
 import { BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { useTheme } from '@/hooks/use-theme';
+import { localiseReference } from '@/i18n/localise';
 
 const PRACTICE_CLIP_COUNT = getPracticeClipCount();
 const SHAHADA_STEP_COUNT = SHAHADA_GUIDE.steps.length;
@@ -52,7 +61,12 @@ function LearnCard({
 
 export default function LearnScreen() {
   const theme = useTheme();
-  const { t } = useLocale();
+  const { locale, t } = useLocale();
+
+  // Topics meant for a quiet minute rather than for mid-prayer.
+  const learnTopics = REFERENCES.filter((reference) => reference.surface === 'learn').map(
+    (reference) => localiseReference(reference, locale),
+  );
 
   return (
     <SafeAreaView style={[styles.safeArea, { backgroundColor: theme.background }]} edges={['top']}>
@@ -78,6 +92,15 @@ export default function LearnScreen() {
               subtitle={t('learn.shahada.subtitle')}
               count={SHAHADA_STEP_COUNT}
             />
+            {learnTopics.map((topic) => (
+              <LearnCard
+                key={topic.id}
+                href={{ pathname: '/reference/[id]', params: { id: topic.id } }}
+                title={topic.title}
+                subtitle={topic.subtitle}
+                count={topic.sections.length}
+              />
+            ))}
           </View>
         </View>
 

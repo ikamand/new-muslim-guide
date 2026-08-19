@@ -19,6 +19,7 @@ import type { Reference } from './types';
  */
 export const PERIODS: Reference = {
   id: 'periods',
+  surface: 'pray',
   title: 'Periods and prayer',
   subtitle: 'What changes, and what does not',
   audience: 'woman',
@@ -86,6 +87,7 @@ export const PERIODS: Reference = {
  */
 export const LOST_COUNT: Reference = {
   id: 'lost-count',
+  surface: 'pray',
   title: 'Losing count in prayer',
   subtitle: 'What to do when you are not sure where you are',
   sections: [
@@ -124,6 +126,7 @@ export const LOST_COUNT: Reference = {
  */
 export const MISSED: Reference = {
   id: 'missed',
+  surface: 'pray',
   title: 'Missing a prayer',
   subtitle: 'Sleeping through it, forgetting, or running out of time',
   sections: [
@@ -152,6 +155,7 @@ export const MISSED: Reference = {
 /** Travel and illness concessions are under-used because people do not know they exist. */
 export const TRAVELLING: Reference = {
   id: 'travelling',
+  surface: 'pray',
   title: 'Praying while travelling',
   subtitle: 'Shortening and combining on a journey',
   sections: [
@@ -181,6 +185,7 @@ export const TRAVELLING: Reference = {
 /** Written to remove the idea that a seated prayer is a lesser prayer. */
 export const SEATED: Reference = {
   id: 'seated',
+  surface: 'pray',
   title: 'Praying when you cannot stand',
   subtitle: 'Illness, injury, pain, or no room to stand',
   sections: [
@@ -211,7 +216,79 @@ export const SEATED: Reference = {
   ],
 };
 
-export const REFERENCES: Reference[] = [LOST_COUNT, MISSED, TRAVELLING, SEATED, PERIODS];
+
+/**
+ * The first visit to a mosque.
+ *
+ * The research behind the app's roadmap is blunt: isolation, not ignorance, is
+ * what pushes converts away — most have never been inside another Muslim's
+ * home. An offline app cannot hand anyone a community. What it can do is
+ * remove the specific fear of doing something embarrassing in public, which is
+ * what keeps people out of the one building where that community is.
+ *
+ * So this is written to lower the stakes rather than to teach etiquette. The
+ * last section matters more than the rest of it.
+ *
+ * ⚠️ REVIEW REQUIRED — model-written and unchecked. Customs vary between
+ * mosques and between countries far more here than anywhere else in the app,
+ * so a reviewer should read this as "is any of it wrong enough to embarrass
+ * someone" rather than as a ruling.
+ */
+export const MOSQUE: Reference = {
+  id: 'mosque',
+  surface: 'learn',
+  title: 'Your first time at a mosque',
+  subtitle: 'What actually happens, so none of it is a surprise',
+  sections: [
+    {
+      id: 'when',
+      heading: 'Pick a quiet prayer, not Friday',
+      body:
+        'Friday midday is the busiest hour of the week. For a first visit, go for a normal prayer — Dhuhr in the early afternoon, or ʿIshaʾ at night. Fewer people, more room to watch what everyone else does.',
+      note: 'Friday prayer is obligatory for men, so you will need to go eventually. It is easier once the building is already familiar.',
+    },
+    {
+      id: 'before',
+      heading: 'Before you leave',
+      body:
+        'Do your wudu at home if you can — it is one less thing to work out when you arrive. Wear clean clothes that cover you from the navel to the knees at minimum; loose trousers and a long top are entirely normal. Women cover the hair, arms and legs.',
+    },
+    {
+      id: 'arriving',
+      heading: 'Walking in',
+      body:
+        'There will be a shoe rack by the door. Take your shoes off there and carry them in if the rack is full. Step in with your right foot. There are usually separate entrances or areas for men and women — look for the signs, or ask; nobody minds being asked.',
+    },
+    {
+      id: 'inside',
+      heading: 'Once you are inside',
+      body:
+        'Pray two short rakʿah before you sit down — it is what everyone does on entering. Then sit anywhere on the carpet. There is no reserved seating and no collection.',
+      note: 'If a prayer is already in progress, join the line where you are and follow along from wherever the imam has got to.',
+    },
+    {
+      id: 'prayer',
+      heading: 'The prayer itself',
+      body:
+        'People stand shoulder to shoulder in straight lines, filling from the front. Stand in a line, follow the imam, and do what the row does. You do not say anything aloud and nobody is watching you.',
+    },
+    {
+      id: 'after',
+      heading: 'Afterwards',
+      body:
+        'People turn and greet whoever is beside them. Say salam back. Someone will very likely ask if you are new — this is the moment the whole trip is actually for, and it is worth staying ten minutes for it.',
+    },
+    {
+      id: 'nobody-minds',
+      heading: 'Things nobody minds',
+      body:
+        'Being a beat behind in the movements. Not knowing where to stand. Your phone going off. Asking a stranger what to do. Leaving straight after. Getting the words wrong under your breath.',
+      note: 'Everyone in that room was new once, including the imam. Nobody is grading you, and the ones who notice you are new are almost always pleased about it.',
+    },
+  ],
+};
+
+export const REFERENCES: Reference[] = [MOSQUE, LOST_COUNT, MISSED, TRAVELLING, SEATED, PERIODS];
 
 export function getReference(id: string): Reference | undefined {
   return REFERENCES.find((reference) => reference.id === id);

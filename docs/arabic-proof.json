@@ -1,0 +1,418 @@
+[
+ {
+  "where": "The takbir",
+  "arabic": "اللَّهُ أَكْبَرُ",
+  "translit": "Allāhu akbar",
+  "english": "Allah is the greatest.",
+  "source": "",
+  "file": "recitations.ts"
+ },
+ {
+  "where": "The opening supplication",
+  "arabic": "سُبْحَانَكَ اللَّهُمَّ وَبِحَمْدِكَ، وَتَبَارَكَ اسْمُكَ، وَتَعَالَى جَدُّكَ، وَلَا إِلَهَ غَيْرُكَ",
+  "translit": "Subḥānaka-llāhumma wa biḥamdika, wa tabāraka-smuka, wa taʿālā jadduka, wa lā ilāha ghayruk",
+  "english": "Glory be to You, O Allah, and praise. Blessed is Your name, exalted is Your majesty, and there is no god but You.",
+  "source": "",
+  "file": "recitations.ts"
+ },
+ {
+  "where": "Seeking refuge",
+  "arabic": "أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ",
+  "translit": "Aʿūdhu bi-llāhi mina-sh-shayṭāni-r-rajīm",
+  "english": "I seek refuge in Allah from Satan, the rejected.",
+  "source": "",
+  "file": "recitations.ts"
+ },
+ {
+  "where": "Al-Fatiha — ayah 1",
+  "arabic": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
+  "translit": "Bismi-llāhi-r-raḥmāni-r-raḥīm",
+  "english": "In the name of Allah, the Most Merciful, the Most Compassionate.",
+  "source": "",
+  "file": "recitations.ts"
+ },
+ {
+  "where": "Al-Fatiha — ayah 2",
+  "arabic": "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ",
+  "translit": "Al-ḥamdu li-llāhi rabbi-l-ʿālamīn",
+  "english": "All praise is for Allah, Lord of all worlds.",
+  "source": "",
+  "file": "recitations.ts"
+ },
+ {
+  "where": "Al-Fatiha — ayah 3",
+  "arabic": "الرَّحْمَٰنِ الرَّحِيمِ",
+  "translit": "Ar-raḥmāni-r-raḥīm",
+  "english": "The Most Merciful, the Most Compassionate.",
+  "source": "",
+  "file": "recitations.ts"
+ },
+ {
+  "where": "Al-Fatiha — ayah 4",
+  "arabic": "مَالِكِ يَوْمِ الدِّينِ",
+  "translit": "Māliki yawmi-d-dīn",
+  "english": "Master of the Day of Judgement.",
+  "source": "",
+  "file": "recitations.ts"
+ },
+ {
+  "where": "Al-Fatiha — ayah 5",
+  "arabic": "إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ",
+  "translit": "Iyyāka naʿbudu wa iyyāka nastaʿīn",
+  "english": "You alone we worship, and You alone we ask for help.",
+  "source": "",
+  "file": "recitations.ts"
+ },
+ {
+  "where": "Al-Fatiha — ayah 6",
+  "arabic": "اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ",
+  "translit": "Ihdinā-ṣ-ṣirāṭa-l-mustaqīm",
+  "english": "Guide us along the straight path.",
+  "source": "",
+  "file": "recitations.ts"
+ },
+ {
+  "where": "Al-Fatiha — ayah 7",
+  "arabic": "صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ",
+  "translit": "Ṣirāṭa-lladhīna anʿamta ʿalayhim ghayri-l-maghḍūbi ʿalayhim wa lā-ḍ-ḍāllīn",
+  "english": "The path of those You have blessed — not of those who have earned Your anger, nor of those who have gone astray.",
+  "source": "",
+  "file": "recitations.ts"
+ },
+ {
+  "where": "In rukuʿ",
+  "arabic": "سُبْحَانَ رَبِّيَ الْعَظِيمِ",
+  "translit": "Subḥāna rabbiya-l-ʿaẓīm",
+  "english": "Glory be to my Lord, the Most Great.",
+  "source": "",
+  "file": "recitations.ts"
+ },
+ {
+  "where": "Rising from rukuʿ",
+  "arabic": "سَمِعَ اللَّهُ لِمَنْ حَمِدَهُ ، رَبَّنَا وَلَكَ الْحَمْدُ",
+  "translit": "Samiʿa-llāhu liman ḥamidah — Rabbanā wa laka-l-ḥamd",
+  "english": "Allah hears the one who praises Him. Our Lord, to You belongs all praise.",
+  "source": "",
+  "file": "recitations.ts"
+ },
+ {
+  "where": "In sujud",
+  "arabic": "سُبْحَانَ رَبِّيَ الْأَعْلَى",
+  "translit": "Subḥāna rabbiya-l-aʿlā",
+  "english": "Glory be to my Lord, the Most High.",
+  "source": "",
+  "file": "recitations.ts"
+ },
+ {
+  "where": "Between the prostrations",
+  "arabic": "رَبِّ اغْفِرْ لِي",
+  "translit": "Rabbi-ghfir lī",
+  "english": "My Lord, forgive me.",
+  "source": "",
+  "file": "recitations.ts"
+ },
+ {
+  "where": "The tashahhud",
+  "arabic": "التَّحِيَّاتُ لِلَّهِ وَالصَّلَوَاتُ وَالطَّيِّبَاتُ، السَّلَامُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ، السَّلَامُ عَلَيْنَا وَعَلَى عِبَادِ اللَّهِ الصَّالِحِينَ، أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ",
+  "translit": "At-taḥiyyātu li-llāhi wa-ṣ-ṣalawātu wa-ṭ-ṭayyibāt. As-salāmu ʿalayka ayyuha-n-nabiyyu wa raḥmatu-llāhi wa barakātuh. As-salāmu ʿalaynā wa ʿalā ʿibādi-llāhi-ṣ-ṣāliḥīn. Ash-hadu an lā ilāha illa-llāh, wa ash-hadu anna Muḥammadan ʿabduhu wa rasūluh.",
+  "english": "All greetings, prayers and good things are for Allah. Peace be upon you, O Prophet, and the mercy of Allah and His blessings. Peace be upon us and upon the righteous servants of Allah. I bear witness that there is no god but Allah, and I bear witness that Muhammad is His servant and His messenger.",
+  "source": "",
+  "file": "recitations.ts"
+ },
+ {
+  "where": "The salawat",
+  "arabic": "اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ. اللَّهُمَّ بَارِكْ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا بَارَكْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ",
+  "translit": "Allāhumma ṣalli ʿalā Muḥammadin wa ʿalā āli Muḥammad, kamā ṣallayta ʿalā Ibrāhīma wa ʿalā āli Ibrāhīm, innaka ḥamīdun majīd. Allāhumma bārik ʿalā Muḥammadin wa ʿalā āli Muḥammad, kamā bārakta ʿalā Ibrāhīma wa ʿalā āli Ibrāhīm, innaka ḥamīdun majīd.",
+  "english": "O Allah, send prayers upon Muhammad and the family of Muhammad, as You sent prayers upon Abraham and the family of Abraham. You are indeed Praiseworthy, Glorious. O Allah, bless Muhammad and the family of Muhammad, as You blessed Abraham and the family of Abraham. You are indeed Praiseworthy, Glorious.",
+  "source": "",
+  "file": "recitations.ts"
+ },
+ {
+  "where": "The taslim",
+  "arabic": "السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللَّهِ",
+  "translit": "As-salāmu ʿalaykum wa raḥmatu-llāh",
+  "english": "Peace be upon you, and the mercy of Allah.",
+  "source": "",
+  "file": "recitations.ts"
+ },
+ {
+  "where": "The testimony of faith",
+  "arabic": "لَا إِلَٰهَ إِلَّا اللَّهُ مُحَمَّدٌ رَسُولُ اللَّهِ",
+  "translit": "Lā ilāha illā-llāh, Muḥammadun rasūlu-llāh",
+  "english": "There is no god but Allah, and Muhammad is the Messenger of Allah.",
+  "source": "",
+  "file": "recitations.ts"
+ },
+ {
+  "where": "After wudu",
+  "arabic": "أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ",
+  "translit": "Ash-hadu an lā ilāha illa-llāhu waḥdahu lā sharīka lah, wa ash-hadu anna Muḥammadan ʿabduhu wa rasūluh",
+  "english": "I bear witness that there is no god but Allah alone, with no partner, and I bear witness that Muhammad is His servant and His messenger.",
+  "source": "",
+  "file": "recitations.ts"
+ },
+ {
+  "where": "Before eating",
+  "arabic": "بِسْمِ اللَّهِ",
+  "translit": "Bismillāh",
+  "english": "In the name of Allah.",
+  "source": "",
+  "file": "recitations.ts"
+ },
+ {
+  "where": "Phrase — As-salāmu ʿalaykum",
+  "arabic": "السَّلَامُ عَلَيْكُمْ",
+  "translit": "As-salāmu ʿalaykum",
+  "english": "Peace be upon you.",
+  "source": "",
+  "file": "phrases.ts"
+ },
+ {
+  "where": "Phrase — Jazāka-llāhu khayran",
+  "arabic": "جَزَاكَ اللَّهُ خَيْرًا",
+  "translit": "Jazāka-llāhu khayran",
+  "english": "May Allah reward you with good.",
+  "source": "",
+  "file": "phrases.ts"
+ },
+ {
+  "where": "Phrase — Bāraka-llāhu fīk",
+  "arabic": "بَارَكَ اللَّهُ فِيكَ",
+  "translit": "Bāraka-llāhu fīk",
+  "english": "May Allah bless you.",
+  "source": "",
+  "file": "phrases.ts"
+ },
+ {
+  "where": "Phrase — Al-ḥamdu li-llāh",
+  "arabic": "الْحَمْدُ لِلَّهِ",
+  "translit": "Al-ḥamdu li-llāh",
+  "english": "All praise is for Allah.",
+  "source": "",
+  "file": "phrases.ts"
+ },
+ {
+  "where": "Phrase — In shāʾa-llāh",
+  "arabic": "إِنْ شَاءَ اللَّهُ",
+  "translit": "In shāʾa-llāh",
+  "english": "If Allah wills.",
+  "source": "",
+  "file": "phrases.ts"
+ },
+ {
+  "where": "Phrase — Mā shāʾa-llāh",
+  "arabic": "مَا شَاءَ اللَّهُ",
+  "translit": "Mā shāʾa-llāh",
+  "english": "What Allah has willed.",
+  "source": "",
+  "file": "phrases.ts"
+ },
+ {
+  "where": "Phrase — Subḥāna-llāh",
+  "arabic": "سُبْحَانَ اللَّهِ",
+  "translit": "Subḥāna-llāh",
+  "english": "Glory be to Allah.",
+  "source": "",
+  "file": "phrases.ts"
+ },
+ {
+  "where": "Phrase — Astaghfiru-llāh",
+  "arabic": "أَسْتَغْفِرُ اللَّهَ",
+  "translit": "Astaghfiru-llāh",
+  "english": "I seek Allah’s forgiveness.",
+  "source": "",
+  "file": "phrases.ts"
+ },
+ {
+  "where": "Phrase — Innā li-llāhi wa innā ilayhi rājiʿūn",
+  "arabic": "إِنَّا لِلَّهِ وَإِنَّا إِلَيْهِ رَاجِعُونَ",
+  "translit": "Innā li-llāhi wa innā ilayhi rājiʿūn",
+  "english": "To Allah we belong, and to Him we return.",
+  "source": "",
+  "file": "phrases.ts"
+ },
+ {
+  "where": "Phrase — Ṣalla-llāhu ʿalayhi wa sallam",
+  "arabic": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+  "translit": "Ṣalla-llāhu ʿalayhi wa sallam",
+  "english": "May Allah’s prayers and peace be upon him.",
+  "source": "",
+  "file": "phrases.ts"
+ },
+ {
+  "where": "Phrase — Raḍiya-llāhu ʿanhu",
+  "arabic": "رَضِيَ اللَّهُ عَنْهُ",
+  "translit": "Raḍiya-llāhu ʿanhu",
+  "english": "May Allah be pleased with him.",
+  "source": "",
+  "file": "phrases.ts"
+ },
+ {
+  "where": "Phrase — Akhī · Ukhtī",
+  "arabic": "أَخِي · أُخْتِي",
+  "translit": "Akhī · Ukhtī",
+  "english": "My brother · my sister.",
+  "source": "",
+  "file": "phrases.ts"
+ },
+ {
+  "where": "Phrase — ʿĪd Mubārak",
+  "arabic": "عِيد مُبَارَك",
+  "translit": "ʿĪd Mubārak",
+  "english": "A blessed Eid.",
+  "source": "",
+  "file": "phrases.ts"
+ },
+ {
+  "where": "Phrase — Taqabbala-llāhu minnā wa minkum",
+  "arabic": "تَقَبَّلَ اللَّهُ مِنَّا وَمِنْكُمْ",
+  "translit": "Taqabbala-llāhu minnā wa minkum",
+  "english": "May Allah accept it from us and from you.",
+  "source": "",
+  "file": "phrases.ts"
+ },
+ {
+  "where": "Pillar — The testimony of faith",
+  "arabic": "الشَّهَادَة",
+  "translit": "Ash-shahāda",
+  "english": "Saying, and meaning, that there is no god but Allah and that Muhammad is His Messenger.",
+  "source": "",
+  "file": "pillars.ts"
+ },
+ {
+  "where": "Pillar — Prayer",
+  "arabic": "الصَّلَاة",
+  "translit": "Aṣ-ṣalāh",
+  "english": "Five prayers a day, at set times, facing the Kaʿbah in Mecca.",
+  "source": "",
+  "file": "pillars.ts"
+ },
+ {
+  "where": "Pillar — Obligatory charity",
+  "arabic": "الزَّكَاة",
+  "translit": "Az-zakāh",
+  "english": "A yearly share of the wealth you have held onto, given to those entitled to it.",
+  "source": "",
+  "file": "pillars.ts"
+ },
+ {
+  "where": "Pillar — Fasting in Ramadan",
+  "arabic": "الصَّوْم",
+  "translit": "Aṣ-ṣawm",
+  "english": "No food, drink or intimacy from dawn until sunset, for the month of Ramadan.",
+  "source": "",
+  "file": "pillars.ts"
+ },
+ {
+  "where": "Pillar — Pilgrimage",
+  "arabic": "الحَجّ",
+  "translit": "Al-ḥajj",
+  "english": "The pilgrimage to Mecca, once in a lifetime, for those able to make it.",
+  "source": "",
+  "file": "pillars.ts"
+ },
+ {
+  "where": "Article of faith — Belief in Allah",
+  "arabic": "الإِيمَانُ بِاللَّه",
+  "translit": "Al-īmān bi-llāh",
+  "english": "That Allah is one, without partner, and that nothing else deserves worship.",
+  "source": "",
+  "file": "iman.ts"
+ },
+ {
+  "where": "Article of faith — Belief in the angels",
+  "arabic": "الإِيمَانُ بِالمَلَائِكَة",
+  "translit": "Al-īmān bi-l-malāʾikah",
+  "english": "That Allah created angels, who carry out what He commands.",
+  "source": "",
+  "file": "iman.ts"
+ },
+ {
+  "where": "Article of faith — Belief in the revealed books",
+  "arabic": "الإِيمَانُ بِالكُتُب",
+  "translit": "Al-īmān bi-l-kutub",
+  "english": "That Allah sent scripture to guide people, and that the Qur’an is the last of it.",
+  "source": "",
+  "file": "iman.ts"
+ },
+ {
+  "where": "Article of faith — Belief in the messengers",
+  "arabic": "الإِيمَانُ بِالرُّسُل",
+  "translit": "Al-īmān bi-r-rusul",
+  "english": "That Allah sent prophets to every people, and that Muhammad ﷺ is the last of them.",
+  "source": "",
+  "file": "iman.ts"
+ },
+ {
+  "where": "Article of faith — Belief in the Last Day",
+  "arabic": "الإِيمَانُ بِاليَوْمِ الآخِر",
+  "translit": "Al-īmān bi-l-yawmi-l-ākhir",
+  "english": "That this life ends, everyone is raised, and each person answers for what they did.",
+  "source": "",
+  "file": "iman.ts"
+ },
+ {
+  "where": "Article of faith — Belief in divine decree",
+  "arabic": "الإِيمَانُ بِالقَدَر",
+  "translit": "Al-īmān bi-l-qadar",
+  "english": "That nothing happens outside Allah’s knowledge and will — the good and the hard alike.",
+  "source": "",
+  "file": "iman.ts"
+ },
+ {
+  "where": "Going to sleep",
+  "arabic": "بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا",
+  "translit": "Bismika Allāhumma amūtu wa aḥyā",
+  "english": "In Your name, O Allah, I die and I live.",
+  "source": "Sahih al-Bukhari 6087",
+  "file": "recitations.ts"
+ },
+ {
+  "where": "When you wake up",
+  "arabic": "الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ",
+  "translit": "Al-ḥamdu li-llāhi-lladhī aḥyānā baʿda mā amātanā wa ilayhi-n-nushūr",
+  "english": "All praise is for Allah, who gave us life after taking it, and to Him is the return.",
+  "source": "Sahih al-Bukhari 6075",
+  "file": "recitations.ts"
+ },
+ {
+  "where": "Leaving the house",
+  "arabic": "بِسْمِ اللَّهِ تَوَكَّلْتُ عَلَى اللَّهِ لاَ حَوْلَ وَلاَ قُوَّةَ إِلاَّ بِاللَّهِ",
+  "translit": "Bismi-llāh, tawakkaltu ʿala-llāh, lā ḥawla wa lā quwwata illā bi-llāh",
+  "english": "In the name of Allah. I place my trust in Allah. There is no power and no strength except with Allah.",
+  "source": "Sunan Abi Dawud 5097",
+  "file": "recitations.ts"
+ },
+ {
+  "where": "Going into the bathroom",
+  "arabic": "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْخُبُثِ وَالْخَبَائِثِ",
+  "translit": "Allāhumma innī aʿūdhu bika mina-l-khubthi wa-l-khabāʾith",
+  "english": "O Allah, I seek refuge with You from all that is foul and from all evil.",
+  "source": "Sahih al-Bukhari 142",
+  "file": "recitations.ts"
+ },
+ {
+  "where": "Coming out of the bathroom",
+  "arabic": "غُفْرَانَكَ",
+  "translit": "Ghufrānak",
+  "english": "I ask Your forgiveness.",
+  "source": "Sunan Abi Dawud 30",
+  "file": "recitations.ts"
+ },
+ {
+  "where": "After eating",
+  "arabic": "الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنَا وَسَقَانَا وَجَعَلَنَا مُسْلِمِينَ",
+  "translit": "Al-ḥamdu li-llāhi-lladhī aṭʿamanā wa saqānā wa jaʿalanā muslimīn",
+  "english": "All praise is for Allah, who fed us and gave us drink, and made us Muslims.",
+  "source": "Sunan Abi Dawud 3851",
+  "file": "recitations.ts"
+ },
+ {
+  "where": "Setting off on a journey",
+  "arabic": "سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ وَإِنَّا إِلَى رَبِّنَا لَمُنْقَلِبُونَ اللَّهُمَّ إِنَّا نَسْأَلُكَ فِي سَفَرِنَا هَذَا الْبِرَّ وَالتَّقْوَى وَمِنَ الْعَمَلِ مَا تَرْضَى اللَّهُمَّ هَوِّنْ عَلَيْنَا سَفَرَنَا هَذَا وَاطْوِ عَنَّا بُعْدَهُ اللَّهُمَّ أَنْتَ الصَّاحِبُ فِي السَّفَرِ وَالْخَلِيفَةُ فِي الأَهْلِ اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ وَعْثَاءِ السَّفَرِ وَكَآبَةِ الْمَنْظَرِ وَسُوءِ الْمُنْقَلَبِ فِي الْمَالِ وَالأَهْلِ",
+  "translit": "Subḥāna-lladhī sakhkhara lanā hādhā wa mā kunnā lahu muqrinīn, wa innā ilā rabbinā la-munqalibūn. Allāhumma innā nasʾaluka fī safarinā hādha-l-birra wa-t-taqwā, wa mina-l-ʿamali mā tarḍā. Allāhumma hawwin ʿalaynā safaranā hādhā wa-ṭwi ʿannā buʿdah. Allāhumma anta-ṣ-ṣāḥibu fi-s-safar, wa-l-khalīfatu fi-l-ahl. Allāhumma innī aʿūdhu bika min waʿthāʾi-s-safar, wa kaʾābati-l-manẓar, wa sūʾi-l-munqalabi fi-l-māl wa-l-ahl",
+  "english": "Glory to Him who has made this subject to us, when we could never have managed it ourselves, and to our Lord we are returning. O Allah, we ask You on this journey of ours for righteousness and piety, and for deeds that please You. O Allah, make this journey easy for us and fold up its distance. O Allah, You are the companion on the journey and the guardian of the family. O Allah, I seek refuge with You from the hardship of travel, from a sight that grieves, and from an ill turn in property and family.",
+  "source": "Sahih Muslim 3153",
+  "file": "recitations.ts"
+ }
+]

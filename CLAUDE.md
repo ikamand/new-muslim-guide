@@ -147,9 +147,16 @@ cannot check by looking at the screen.
   untouched by the rule above. The app teaches one clear way, because a
   first-timer needs a path, not a comparison table. Where a difference is one a
   beginner will actually meet, say so in the step's `note` in one plain sentence.
-- **All content needs review by a qualified person before release.** Nothing
-  written by a model ships unreviewed. Say this out loud rather than assuming it
-  is understood. Mark unreviewed content with a ⚠️ comment in its source file.
+- **Prefer copying a text to writing one.** Where a wording exists in a hadith
+  collection, extract it verbatim and record where it came from in `source`, as
+  `src/content/duas.ts` does. `npm run arabic` lists every Arabic string in the
+  app with the copied ones separated from the model-written ones.
+- **Review is two jobs, not one.** Iyad reads and writes Arabic fluently and can
+  clear the *text* — spelling, vowel marks, grammar. He cannot clear the
+  *substance*: whether a ruling is right, whether a narration is authentic,
+  whether this is the wording a text should have. That still needs a qualified
+  person before release. Nothing written by a model ships unreviewed on either
+  count. Mark unreviewed content with a ⚠️ comment in its source file.
 
 ## It has to be beautiful
 

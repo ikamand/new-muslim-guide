@@ -49,6 +49,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "lint": "expo lint",
+    "arabic": "node --import ./scripts/ts-resolve.mjs scripts/arabic-proof.mjs",
     "icons": "node scripts/make-icons.mjs",
     "audio:manifest": "node scripts/audio-manifest.mjs",
     "i18n:manifest": "node --import ./scripts/ts-resolve.mjs scripts/i18n-manifest.mjs"

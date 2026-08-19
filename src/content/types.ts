@@ -30,6 +30,12 @@ export type RecitationVerse = {
 };
 
 export type Recitation = {
+  /**
+   * What to call this when it is listed on its own, away from the step that
+   * uses it — "The tashahhud", "In rukuʿ". A step already has a title; a
+   * recitation needs its own once it appears in a practice list.
+   */
+  title?: string;
   arabic: string;
   transliteration: string;
   translation: string;

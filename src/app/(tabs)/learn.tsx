@@ -3,11 +3,11 @@ import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ThemedText } from '@/components/themed-text';
-import { IMAN_PILLARS, PILLARS, Recitations } from '@/content';
+import { getPracticeClipCount, IMAN_PILLARS, PILLARS } from '@/content';
 import { BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-const FATIHA_VERSE_COUNT = Recitations.fatiha.verses?.length ?? 0;
+const PRACTICE_CLIP_COUNT = getPracticeClipCount();
 
 function LearnCard({
   href,
@@ -70,9 +70,9 @@ export default function LearnScreen() {
           */}
           <LearnCard
             href="/practice"
-            title="Practice Al-Fatiha"
-            subtitle="Hear it ayah by ayah, and repeat until it holds"
-            count={FATIHA_VERSE_COUNT}
+            title="Practice the recitations"
+            subtitle="Hear them line by line, and repeat until they hold"
+            count={PRACTICE_CLIP_COUNT}
           />
           <LearnCard
             href="/iman"

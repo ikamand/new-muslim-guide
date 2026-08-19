@@ -2,11 +2,11 @@ import { Ionicons } from '@expo/vector-icons';
 import { useAudioPlayer, useAudioPlayerStatus } from 'expo-audio';
 import { Stack } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { Platform, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 
 import { RecitationCard } from '@/components/recitation-card';
 import { ThemedText } from '@/components/themed-text';
-import { getAudio, Recitations, type RecitationVerse } from '@/content';
+import { getAudio, getPracticeItems, type PracticeClip } from '@/content';
 import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
@@ -21,23 +21,21 @@ const SLOW_RATE = 0.75;
  * clips cost less than getting that wrong. Only one plays at a time — a row
  * pauses itself the moment another becomes active.
  */
-function VerseRow({
-  verse,
-  index,
+function PlayerClipRow({
+  clip,
   isActive,
   onActivate,
   loop,
   slow,
 }: {
-  verse: RecitationVerse;
-  index: number;
+  clip: PracticeClip;
   isActive: boolean;
   onActivate: (audioId: string | null) => void;
   loop: boolean;
   slow: boolean;
 }) {
   const theme = useTheme();
-  const source = getAudio(verse.audioId);
+  const source = getAudio(clip.audioId);
   const player = useAudioPlayer(source ?? null);
   const status = useAudioPlayerStatus(player);
 
@@ -73,19 +71,23 @@ function VerseRow({
     }
     player.seekTo(0);
     player.play();
-    onActivate(verse.audioId);
+    onActivate(clip.audioId);
   };
 
   return (
     <View style={styles.verse}>
       <View style={styles.verseHead}>
-        <ThemedText type="small" themeColor="textSecondary" style={styles.ayahLabel}>
-          Ayah {index + 1}
-        </ThemedText>
+        {clip.label ? (
+          <ThemedText type="small" themeColor="textSecondary" style={styles.ayahLabel}>
+            {clip.label}
+          </ThemedText>
+        ) : (
+          <View />
+        )}
         <Pressable
           onPress={toggle}
           accessibilityRole="button"
-          accessibilityLabel={`${status.playing ? 'Pause' : 'Play'} ayah ${index + 1}`}
+          accessibilityLabel={`${status.playing ? 'Pause' : 'Play'} ${clip.label ?? 'recitation'}`}
           hitSlop={Spacing.two}
           style={({ pressed }) => [
             styles.playButton,
@@ -101,10 +103,36 @@ function VerseRow({
           />
         </Pressable>
       </View>
-      <RecitationCard recitation={verse} />
+      <RecitationCard recitation={clip.display} />
     </View>
   );
 }
+
+/**
+ * The same row with no player attached.
+ *
+ * `useAudioPlayer` throws during static web rendering, and expo-router's
+ * prerender swallows it — the whole screen came out blank with no error, which
+ * silently cost us `expo export` as a check on this file. The app is phone-first
+ * and web is the verification harness, so web gets the text without the audio
+ * rather than nothing at all.
+ */
+function SilentClipRow({ clip }: { clip: PracticeClip }) {
+  if (!getAudio(clip.audioId)) return null;
+
+  return (
+    <View style={styles.verse}>
+      {clip.label && (
+        <ThemedText type="small" themeColor="textSecondary" style={styles.ayahLabel}>
+          {clip.label}
+        </ThemedText>
+      )}
+      <RecitationCard recitation={clip.display} />
+    </View>
+  );
+}
+
+const ClipRow = Platform.OS === 'web' ? SilentClipRow : PlayerClipRow;
 
 function Toggle({
   label,
@@ -142,16 +170,15 @@ export default function PracticeScreen() {
   const [loop, setLoop] = useState(false);
   const [slow, setSlow] = useState(false);
 
-  const verses = Recitations.fatiha.verses ?? [];
+  const items = getPracticeItems();
 
   return (
     <ScrollView contentContainerStyle={styles.content}>
       <Stack.Screen options={{ title: 'Practice' }} />
 
       <ThemedText type="default" themeColor="textSecondary">
-        Al-Fatiha, one ayah at a time. Play a line, turn on repeat, and say it with the
-        reciter until it holds. This is for learning beforehand — in prayer you recite it
-        yourself, not from a recording.
+        Play a line, turn on repeat, and say it with the reciter until it holds. This is
+        for learning beforehand — in prayer you recite yourself, not from a recording.
       </ThemedText>
 
       <View style={styles.controls}>
@@ -159,19 +186,25 @@ export default function PracticeScreen() {
         <Toggle label="Slower" on={slow} onPress={() => setSlow((v) => !v)} />
       </View>
 
-      <View style={styles.list}>
-        {verses.map((verse, index) => (
-          <VerseRow
-            key={verse.audioId}
-            verse={verse}
-            index={index}
-            isActive={activeId === verse.audioId}
-            onActivate={setActiveId}
-            loop={loop}
-            slow={slow}
-          />
-        ))}
-      </View>
+      {items.map((item) => (
+        <View key={item.key} style={styles.section}>
+          <ThemedText type="smallBold" themeColor="textSecondary" style={styles.sectionTitle}>
+            {item.title}
+          </ThemedText>
+          <View style={styles.list}>
+            {item.clips.map((clip) => (
+              <ClipRow
+                key={clip.audioId}
+                clip={clip}
+                isActive={activeId === clip.audioId}
+                onActivate={setActiveId}
+                loop={loop}
+                slow={slow}
+              />
+            ))}
+          </View>
+        </View>
+      ))}
 
       <ThemedText type="small" themeColor="textSecondary">
         Recitation by Mahmoud Khalil Al-Husary (muʿallim), from everyayah.com, used under
@@ -199,6 +232,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.three,
     borderRadius: Radius.small,
     borderWidth: StyleSheet.hairlineWidth,
+  },
+  section: {
+    gap: Spacing.three,
+  },
+  sectionTitle: {
+    textTransform: 'uppercase',
+    letterSpacing: 1,
   },
   list: {
     gap: Spacing.four,

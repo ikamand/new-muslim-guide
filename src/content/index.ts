@@ -13,6 +13,8 @@ export function getGuide(id: string): Guide | undefined {
 export { AUDIO, getAudio, hasAnyAudio } from './audio';
 export { getImanPillar } from './iman';
 export { getPillar, SHAHADA } from './pillars';
+export { getPracticeClipCount, getPracticeItems } from './practice';
+export type { PracticeClip, PracticeItem } from './practice';
 export { Recitations } from './recitations';
 export { IMAN_PILLARS, PILLARS, PRAYERS, WUDU };
 export * from './types';

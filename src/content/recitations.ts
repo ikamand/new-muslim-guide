@@ -65,6 +65,7 @@ const FATIHA_VERSES: RecitationVerse[] = [
 
 export const Recitations = {
   takbir: {
+    title: 'The takbir',
     arabic: 'اللَّهُ أَكْبَرُ',
     transliteration: 'Allāhu akbar',
     translation: 'Allah is the greatest.',
@@ -72,6 +73,7 @@ export const Recitations = {
   },
 
   opening: {
+    title: 'The opening supplication',
     arabic:
       'سُبْحَانَكَ اللَّهُمَّ وَبِحَمْدِكَ، وَتَبَارَكَ اسْمُكَ، وَتَعَالَى جَدُّكَ، وَلَا إِلَهَ غَيْرُكَ',
     transliteration:
@@ -82,6 +84,7 @@ export const Recitations = {
   },
 
   taawwudh: {
+    title: 'Seeking refuge',
     arabic: 'أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ',
     transliteration: 'Aʿūdhu bi-llāhi mina-sh-shayṭāni-r-rajīm',
     translation: 'I seek refuge in Allah from Satan, the rejected.',
@@ -89,6 +92,7 @@ export const Recitations = {
   },
 
   fatiha: {
+    title: 'Al-Fatiha',
     arabic: FATIHA_VERSES.map((verse) => verse.arabic).join('\n'),
     transliteration: FATIHA_VERSES.map((verse) => verse.transliteration).join('\n'),
     translation: FATIHA_VERSES.map((verse) => verse.translation).join(' '),
@@ -97,6 +101,7 @@ export const Recitations = {
   },
 
   rukuTasbih: {
+    title: 'In rukuʿ',
     arabic: 'سُبْحَانَ رَبِّيَ الْعَظِيمِ',
     transliteration: 'Subḥāna rabbiya-l-ʿaẓīm',
     translation: 'Glory be to my Lord, the Most Great.',
@@ -105,6 +110,7 @@ export const Recitations = {
   },
 
   rising: {
+    title: 'Rising from rukuʿ',
     arabic: 'سَمِعَ اللَّهُ لِمَنْ حَمِدَهُ ، رَبَّنَا وَلَكَ الْحَمْدُ',
     transliteration: 'Samiʿa-llāhu liman ḥamidah — Rabbanā wa laka-l-ḥamd',
     translation:
@@ -113,6 +119,7 @@ export const Recitations = {
   },
 
   sujudTasbih: {
+    title: 'In sujud',
     arabic: 'سُبْحَانَ رَبِّيَ الْأَعْلَى',
     transliteration: 'Subḥāna rabbiya-l-aʿlā',
     translation: 'Glory be to my Lord, the Most High.',
@@ -121,6 +128,7 @@ export const Recitations = {
   },
 
   betweenProstrations: {
+    title: 'Between the prostrations',
     arabic: 'رَبِّ اغْفِرْ لِي',
     transliteration: 'Rabbi-ghfir lī',
     translation: 'My Lord, forgive me.',
@@ -128,6 +136,7 @@ export const Recitations = {
   },
 
   tashahhud: {
+    title: 'The tashahhud',
     arabic:
       'التَّحِيَّاتُ لِلَّهِ وَالصَّلَوَاتُ وَالطَّيِّبَاتُ، السَّلَامُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ، السَّلَامُ عَلَيْنَا وَعَلَى عِبَادِ اللَّهِ الصَّالِحِينَ، أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ',
     transliteration:
@@ -138,6 +147,7 @@ export const Recitations = {
   },
 
   salawat: {
+    title: 'The salawat',
     arabic:
       'اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ. اللَّهُمَّ بَارِكْ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا بَارَكْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ',
     transliteration:
@@ -148,6 +158,7 @@ export const Recitations = {
   },
 
   taslim: {
+    title: 'The taslim',
     arabic: 'السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللَّهِ',
     transliteration: 'As-salāmu ʿalaykum wa raḥmatu-llāh',
     translation: 'Peace be upon you, and the mercy of Allah.',
@@ -156,6 +167,7 @@ export const Recitations = {
   },
 
   shahadaAfterWudu: {
+    title: 'After wudu',
     arabic:
       'أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ',
     transliteration:
@@ -166,6 +178,7 @@ export const Recitations = {
   },
 
   bismillah: {
+    title: 'Before wudu',
     arabic: 'بِسْمِ اللَّهِ',
     transliteration: 'Bismillāh',
     translation: 'In the name of Allah.',

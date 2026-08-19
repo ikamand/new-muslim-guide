@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, Switch, View } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, Switch, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { RecitationCard } from '@/components/recitation-card';
@@ -6,6 +6,8 @@ import { ThemedText } from '@/components/themed-text';
 import { Recitations } from '@/content/recitations';
 import { BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useDisplaySettings, type DisplaySettings } from '@/hooks/use-display-settings';
+import { useLocale } from '@/hooks/use-locale';
+import { LOCALE_NAMES, LOCALES } from '@/i18n/locales';
 import { useTheme } from '@/hooks/use-theme';
 
 function SettingRow({
@@ -46,27 +48,73 @@ function SettingRow({
   );
 }
 
+/**
+ * Language, named in each language.
+ *
+ * A list rather than a picker: four options fit on screen, and a modal to
+ * choose between four things is a step nobody needs.
+ */
+function LanguageGroup() {
+  const theme = useTheme();
+  const { locale, setLocale } = useLocale();
+
+  return (
+    <View
+      style={[styles.group, { backgroundColor: theme.backgroundElement, borderColor: theme.border }]}>
+      {LOCALES.map((option, index) => (
+        <Pressable
+          key={option}
+          onPress={() => setLocale(option)}
+          accessibilityRole="radio"
+          accessibilityState={{ selected: locale === option }}
+          style={[
+            styles.row,
+            index < LOCALES.length - 1 && {
+              borderBottomWidth: StyleSheet.hairlineWidth,
+              borderBottomColor: theme.border,
+            },
+          ]}>
+          <ThemedText type="default">{LOCALE_NAMES[option]}</ThemedText>
+          {locale === option && (
+            <ThemedText type="smallBold" themeColor="accent">
+              ✓
+            </ThemedText>
+          )}
+        </Pressable>
+      ))}
+    </View>
+  );
+}
+
 export default function SettingsScreen() {
   const theme = useTheme();
+  const { t } = useLocale();
 
   return (
     <SafeAreaView style={[styles.safeArea, { backgroundColor: theme.background }]} edges={['top']}>
       <ScrollView contentContainerStyle={styles.content}>
         <View style={styles.header}>
-          <ThemedText type="subtitle">Settings</ThemedText>
+          <ThemedText type="subtitle">{t('settings.title')}</ThemedText>
           <ThemedText type="default" themeColor="textSecondary">
             What you see under the Arabic. Turn them off as you stop needing them.
           </ThemedText>
         </View>
 
+        <View style={styles.section}>
+          <ThemedText type="smallBold" themeColor="textSecondary" style={styles.sectionTitle}>
+            {t('settings.language')}
+          </ThemedText>
+          <LanguageGroup />
+        </View>
+
         <View style={[styles.group, { backgroundColor: theme.backgroundElement, borderColor: theme.border }]}>
           <SettingRow
-            label="Transliteration"
+            label={t('settings.transliteration')}
             description="The Arabic spelled out in English letters"
             settingKey="transliteration"
           />
           <SettingRow
-            label="Translation"
+            label={t('settings.translation')}
             description="What the words mean in English"
             settingKey="translation"
             isLast

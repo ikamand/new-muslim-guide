@@ -173,6 +173,13 @@ anyone cared.
 
 ## Engineering
 
+- English is the source language. Content is written in English in
+  `src/content/`; `src/i18n/content/{ar,fr,es}.ts` hold translations keyed by
+  the English text, and anything missing falls back to English. Never
+  machine-translate content — a wrong French translation of the tashahhud is
+  the same class of mistake as a wrong Arabic text, and harder to notice.
+- UI chrome lives in `src/i18n/ui.ts`, apart from religious content, because
+  getting "Repeat" wrong is a bug and getting a dhikr wrong is not.
 - Content is typed data in `src/content/`, never inline JSX strings. A screen
   renders a `Step`; it doesn't know what a rakʿah is.
 - expo-router file routes under `src/app/`. Typed routes are on.
@@ -193,6 +200,12 @@ anyone cared.
   statically renders every route, catching runtime errors a typecheck can't.
 - Reproduce before fixing, and re-check after.
 - Never leave the tree with a failing typecheck.
+- Touched or added content? `npm run i18n:manifest`. It regenerates
+  `docs/i18n-manifest.csv` — every translatable string with its English and each
+  language's version — and fails if a locale file still translates wording that
+  no longer exists. Translations are keyed by the English text, so editing an
+  English sentence correctly drops its translations back to English until they
+  are redone.
 - Touched audio or added a recitation? `npm run audio:manifest`. It regenerates
   `docs/audio-manifest.csv` — the sheet of every clip, what it says, which step
   says it, whether it exists and who recorded it. `-- --check` fails if the

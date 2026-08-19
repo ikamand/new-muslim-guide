@@ -5,7 +5,9 @@ import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { RecitationCard } from '@/components/recitation-card';
 import { ThemedText } from '@/components/themed-text';
 import { getGuide, type Posture } from '@/content';
+import { localiseGuide } from '@/i18n/localise';
 import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
+import { useLocale } from '@/hooks/use-locale';
 import { useTheme } from '@/hooks/use-theme';
 
 const POSTURE_LABEL: Record<Posture, string> = {
@@ -24,7 +26,9 @@ export default function GuideScreen() {
   const scrollRef = useRef<ScrollView>(null);
   const [index, setIndex] = useState(0);
 
-  const guide = getGuide(id);
+  const { locale } = useLocale();
+  const source = getGuide(id);
+  const guide = source ? localiseGuide(source, locale) : undefined;
 
   if (!guide) {
     return (

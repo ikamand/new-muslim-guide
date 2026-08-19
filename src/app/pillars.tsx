@@ -6,27 +6,28 @@ import { RecitationCard } from '@/components/recitation-card';
 import { ThemedText } from '@/components/themed-text';
 import { PILLARS, SHAHADA } from '@/content';
 import { MaxContentWidth, Spacing } from '@/constants/theme';
+import { useLocale } from '@/hooks/use-locale';
+import { localisePillar, localiseRecitation } from '@/i18n/localise';
 
 export default function PillarsScreen() {
+  const { locale, t } = useLocale();
+
   return (
     <ScrollView contentContainerStyle={styles.content}>
-      <Stack.Screen options={{ title: 'The Five Pillars' }} />
+      <Stack.Screen options={{ title: t('pillars.title') }} />
 
-      <ThemedText type="default" themeColor="textSecondary">
-        The five things Islam is built on. Only the first two ask anything of you today — the
-        rest arrive in their own time, and two of them may never apply to you at all.
-      </ThemedText>
+      <ThemedText type="default" themeColor="textSecondary">{t('pillars.intro')}</ThemedText>
 
       <View style={styles.section}>
         <ThemedText type="smallBold" themeColor="textSecondary" style={styles.sectionTitle}>
-          The testimony
+          {t('pillars.testimony')}
         </ThemedText>
-        <RecitationCard recitation={SHAHADA} />
+        <RecitationCard recitation={localiseRecitation(SHAHADA, locale)} />
       </View>
 
       <View style={styles.list}>
         {PILLARS.map((pillar, index) => (
-          <PillarCard key={pillar.id} pillar={pillar} index={index} />
+          <PillarCard key={pillar.id} pillar={localisePillar(pillar, locale)} index={index} />
         ))}
       </View>
     </ScrollView>

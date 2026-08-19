@@ -7,7 +7,9 @@ import { Platform, Pressable, ScrollView, StyleSheet, View } from 'react-native'
 import { RecitationCard } from '@/components/recitation-card';
 import { ThemedText } from '@/components/themed-text';
 import { getAudio, getPracticeCredits, getPracticeItems, type PracticeClip } from '@/content';
+import { localiseRecitation } from '@/i18n/localise';
 import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
+import { useLocale } from '@/hooks/use-locale';
 import { useTheme } from '@/hooks/use-theme';
 
 /** Slow enough to copy, fast enough to still sound like recitation. */
@@ -35,7 +37,9 @@ function PlayerClipRow({
   slow: boolean;
 }) {
   const theme = useTheme();
+  const { t } = useLocale();
   const source = getAudio(clip.audioId);
+  const label = clip.part ? `${t('practice.ayah')} ${clip.part}` : null;
   const player = useAudioPlayer(source ?? null);
   const status = useAudioPlayerStatus(player);
 
@@ -77,9 +81,9 @@ function PlayerClipRow({
   return (
     <View style={styles.verse}>
       <View style={styles.verseHead}>
-        {clip.label ? (
+        {label ? (
           <ThemedText type="small" themeColor="textSecondary" style={styles.ayahLabel}>
-            {clip.label}
+            {label}
           </ThemedText>
         ) : (
           <View />
@@ -87,7 +91,7 @@ function PlayerClipRow({
         <Pressable
           onPress={toggle}
           accessibilityRole="button"
-          accessibilityLabel={`${status.playing ? 'Pause' : 'Play'} ${clip.label ?? 'recitation'}`}
+          accessibilityLabel={`${status.playing ? t('practice.pause') : t('practice.play')} ${label ?? ''}`.trim()}
           hitSlop={Spacing.two}
           style={({ pressed }) => [
             styles.playButton,
@@ -118,13 +122,14 @@ function PlayerClipRow({
  * rather than nothing at all.
  */
 function SilentClipRow({ clip }: { clip: PracticeClip }) {
+  const { t } = useLocale();
   if (!getAudio(clip.audioId)) return null;
 
   return (
     <View style={styles.verse}>
-      {clip.label && (
+      {clip.part && (
         <ThemedText type="small" themeColor="textSecondary" style={styles.ayahLabel}>
-          {clip.label}
+          {t('practice.ayah')} {clip.part}
         </ThemedText>
       )}
       <RecitationCard recitation={clip.display} />
@@ -166,6 +171,7 @@ function Toggle({
 }
 
 export default function PracticeScreen() {
+  const { locale, t } = useLocale();
   const [activeId, setActiveId] = useState<string | null>(null);
   const [loop, setLoop] = useState(false);
   const [slow, setSlow] = useState(false);
@@ -175,16 +181,13 @@ export default function PracticeScreen() {
 
   return (
     <ScrollView contentContainerStyle={styles.content}>
-      <Stack.Screen options={{ title: 'Practice' }} />
+      <Stack.Screen options={{ title: t('practice.title') }} />
 
-      <ThemedText type="default" themeColor="textSecondary">
-        Play a line, turn on repeat, and say it with the reciter until it holds. This is
-        for learning beforehand — in prayer you recite yourself, not from a recording.
-      </ThemedText>
+      <ThemedText type="default" themeColor="textSecondary">{t('practice.intro')}</ThemedText>
 
       <View style={styles.controls}>
-        <Toggle label="Repeat" on={loop} onPress={() => setLoop((v) => !v)} />
-        <Toggle label="Slower" on={slow} onPress={() => setSlow((v) => !v)} />
+        <Toggle label={t('practice.repeat')} on={loop} onPress={() => setLoop((v) => !v)} />
+        <Toggle label={t('practice.slower')} on={slow} onPress={() => setSlow((v) => !v)} />
       </View>
 
       {items.map((item) => (
@@ -196,7 +199,7 @@ export default function PracticeScreen() {
             {item.clips.map((clip) => (
               <ClipRow
                 key={clip.audioId}
-                clip={clip}
+                clip={{ ...clip, display: localiseRecitation(clip.display, locale) }}
                 isActive={activeId === clip.audioId}
                 onActivate={setActiveId}
                 loop={loop}

@@ -4,6 +4,7 @@ import { Pressable, StyleSheet, View } from 'react-native';
 import { ThemedText } from '@/components/themed-text';
 import type { Pillar } from '@/content';
 import { Radius, Spacing } from '@/constants/theme';
+import { useLocale } from '@/hooks/use-locale';
 import { useTheme } from '@/hooks/use-theme';
 
 /**
@@ -14,6 +15,7 @@ import { useTheme } from '@/hooks/use-theme';
  */
 export function PillarCard({ pillar, index }: { pillar: Pillar; index: number }) {
   const theme = useTheme();
+  const { t } = useLocale();
 
   return (
     <View
@@ -60,7 +62,7 @@ export function PillarCard({ pillar, index }: { pillar: Pillar; index: number })
               { borderColor: theme.border, opacity: pressed ? 0.6 : 1 },
             ]}>
             <ThemedText type="smallBold" themeColor="accent">
-              The app teaches this →
+              {t('pillars.taughtHere')}
             </ThemedText>
           </Pressable>
         </Link>

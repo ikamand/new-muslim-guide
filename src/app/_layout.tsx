@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { DisplaySettingsProvider, useDisplaySettings } from '@/hooks/use-display-settings';
+import { LocaleProvider } from '@/hooks/use-locale';
 import { LocationProvider } from '@/hooks/use-location';
 
 SplashScreen.preventAutoHideAsync();
@@ -53,10 +54,12 @@ function RootStack() {
 
 export default function RootLayout() {
   return (
-    <DisplaySettingsProvider>
-      <LocationProvider>
-        <RootStack />
-      </LocationProvider>
-    </DisplaySettingsProvider>
+    <LocaleProvider>
+      <DisplaySettingsProvider>
+        <LocationProvider>
+          <RootStack />
+        </LocationProvider>
+      </DisplaySettingsProvider>
+    </LocaleProvider>
   );
 }

@@ -8,8 +8,12 @@ export type PracticeClip = {
   audioId: string;
   /** What the card renders. */
   display: Recitation;
-  /** "Ayah 3", where a text is split. Absent where the whole text is one clip. */
-  label?: string;
+  /**
+   * Which piece of a split text this is, 1-based. Absent where the whole text
+   * is one clip. A number rather than "Ayah 3" because the word is translated
+   * and this file has no locale.
+   */
+  part?: number;
 };
 
 export type PracticeItem = {
@@ -43,7 +47,7 @@ export function getPracticeItems(): PracticeItem[] {
       // some ayat have been recorded.
       recitation.verses.forEach((verse, index) => {
         if (getAudio(verse.audioId)) {
-          clips.push({ audioId: verse.audioId, display: verse, label: `Ayah ${index + 1}` });
+          clips.push({ audioId: verse.audioId, display: verse, part: index + 1 });
         }
       });
     } else if (recitation.audioId && getAudio(recitation.audioId)) {

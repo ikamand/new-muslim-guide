@@ -5,6 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { ThemedText } from '@/components/themed-text';
 import { getPracticeClipCount, IMAN_PILLARS, PILLARS } from '@/content';
 import { BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
+import { useLocale } from '@/hooks/use-locale';
 import { useTheme } from '@/hooks/use-theme';
 
 const PRACTICE_CLIP_COUNT = getPracticeClipCount();
@@ -50,16 +51,14 @@ function LearnCard({
 
 export default function LearnScreen() {
   const theme = useTheme();
+  const { t } = useLocale();
 
   return (
     <SafeAreaView style={[styles.safeArea, { backgroundColor: theme.background }]} edges={['top']}>
       <ScrollView contentContainerStyle={styles.content}>
         <View style={styles.header}>
-          <ThemedText type="subtitle">Learn</ThemedText>
-          <ThemedText type="default" themeColor="textSecondary">
-            Background for what you are already doing. Read it when you have a quiet minute —
-            none of it is needed before you pray.
-          </ThemedText>
+          <ThemedText type="subtitle">{t('learn.title')}</ThemedText>
+          <ThemedText type="default" themeColor="textSecondary">{t('learn.intro')}</ThemedText>
         </View>
 
         <View style={styles.list}>
@@ -70,20 +69,20 @@ export default function LearnScreen() {
           */}
           <LearnCard
             href="/practice"
-            title="Practice the recitations"
-            subtitle="Hear them line by line, and repeat until they hold"
+            title={t('learn.practice.title')}
+            subtitle={t('learn.practice.subtitle')}
             count={PRACTICE_CLIP_COUNT}
           />
           <LearnCard
             href="/iman"
-            title="The Six Articles of Faith"
-            subtitle="What you believe, now that you have said the shahada"
+            title={t('learn.iman.title')}
+            subtitle={t('learn.iman.subtitle')}
             count={IMAN_PILLARS.length}
           />
           <LearnCard
             href="/pillars"
-            title="The Five Pillars of Islam"
-            subtitle="What Islam asks of you, and in what order it arrives"
+            title={t('learn.pillars.title')}
+            subtitle={t('learn.pillars.subtitle')}
             count={PILLARS.length}
           />
         </View>

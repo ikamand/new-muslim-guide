@@ -7,6 +7,8 @@ import { ThemedText } from '@/components/themed-text';
 import { PRAYERS, WUDU, type Guide } from '@/content';
 import { BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { usePrayerTimes } from '@/hooks/use-prayer-times';
+import { useLocale } from '@/hooks/use-locale';
+import { localiseGuide } from '@/i18n/localise';
 import { useTheme } from '@/hooks/use-theme';
 
 function GuideCard({ guide, isNext }: { guide: Guide; isNext?: boolean }) {
@@ -41,6 +43,7 @@ function GuideCard({ guide, isNext }: { guide: Guide; isNext?: boolean }) {
 export default function HomeScreen() {
   const theme = useTheme();
   const { next } = usePrayerTimes();
+  const { locale, t } = useLocale();
 
   return (
     <SafeAreaView style={[styles.safeArea, { backgroundColor: theme.background }]} edges={['top']}>
@@ -49,17 +52,21 @@ export default function HomeScreen() {
 
         <View style={styles.section}>
           <ThemedText type="smallBold" themeColor="textSecondary" style={styles.sectionTitle}>
-            Before you pray
+            {t('home.beforeYouPray')}
           </ThemedText>
-          <GuideCard guide={WUDU} />
+          <GuideCard guide={localiseGuide(WUDU, locale)} />
         </View>
 
         <View style={styles.section}>
           <ThemedText type="smallBold" themeColor="textSecondary" style={styles.sectionTitle}>
-            The five prayers
+            {t('home.fivePrayers')}
           </ThemedText>
           {PRAYERS.map((prayer) => (
-            <GuideCard key={prayer.id} guide={prayer} isNext={prayer.id === next?.id} />
+            <GuideCard
+              key={prayer.id}
+              guide={localiseGuide(prayer, locale)}
+              isNext={prayer.id === next?.id}
+            />
           ))}
         </View>
       </ScrollView>

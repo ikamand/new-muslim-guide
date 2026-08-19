@@ -52,6 +52,10 @@ function RootStack() {
         name="iman"
         options={{ title: 'The Six Articles of Faith', headerBackTitle: 'Learn' }}
       />
+      <Stack.Screen
+        name="phrases"
+        options={{ title: 'What people say to you', headerBackTitle: 'Learn' }}
+      />
       <Stack.Screen name="duas" options={{ title: 'Everyday duʿas', headerBackTitle: 'Learn' }} />
       <Stack.Screen name="practice" options={{ title: 'Practice', headerBackTitle: 'Learn' }} />
       <Stack.Screen name="qibla" options={{ title: 'Qibla', headerBackTitle: 'Back' }} />

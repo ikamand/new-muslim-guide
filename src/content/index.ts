@@ -13,6 +13,7 @@ export { AUDIO_SOURCE_BY_ID, creditLine, getAudioSource, SOURCES } from './audio
 export type { AudioSource } from './audio-sources';
 export { getPracticeClipCount, getPracticeCredits, getPracticeItems } from './practice';
 export type { PracticeClip, PracticeItem } from './practice';
+export { PHRASES, type Phrase } from './phrases';
 export { Recitations } from './recitations';
 export {
   getReference,

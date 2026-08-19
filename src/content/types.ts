@@ -103,3 +103,33 @@ export type Pillar = {
   /** Anything a first-timer would otherwise take the wrong way. */
   note?: string;
 };
+
+/**
+ * A reference topic — headed answers, not a sequence you follow.
+ *
+ * Distinct from a `Guide` because nobody works through this holding a phone
+ * mid-motion. Someone opens it with a question and wants the answer to that
+ * question, so it is written as headings you can skim rather than steps you
+ * advance through.
+ */
+export type ReferenceSection = {
+  id: string;
+  heading: string;
+  body: string;
+  /** Anything a first-timer would otherwise take the wrong way. */
+  note?: string;
+};
+
+export type Reference = {
+  id: string;
+  title: string;
+  /** One line under the title. */
+  subtitle: string;
+  /**
+   * Who this applies to. Absent means everyone. Where it is set, the app hides
+   * the topic from the other audience — a man has no reason to be shown what
+   * changes during a period — and shows it to anyone who declined the question.
+   */
+  audience?: 'man' | 'woman';
+  sections: ReferenceSection[];
+};

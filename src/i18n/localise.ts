@@ -1,4 +1,4 @@
-import type { Guide, Pillar, Recitation, Step } from '@/content';
+import type { Guide, Pillar, Recitation, Reference, Step } from '@/content';
 
 import { CONTENT_DICTS } from './content';
 import { SOURCE_LOCALE, type ContentDict, type Locale } from './locales';
@@ -77,5 +77,22 @@ export function localisePillar(pillar: Pillar, locale: Locale): Pillar {
     summary: tr(dict, pillar.summary),
     detail: tr(dict, pillar.detail),
     note: tr(dict, pillar.note),
+  };
+}
+
+export function localiseReference(reference: Reference, locale: Locale): Reference {
+  if (locale === SOURCE_LOCALE) return reference;
+  const dict = CONTENT_DICTS[locale];
+
+  return {
+    ...reference,
+    title: tr(dict, reference.title),
+    subtitle: tr(dict, reference.subtitle),
+    sections: reference.sections.map((section) => ({
+      ...section,
+      heading: tr(dict, section.heading),
+      body: tr(dict, section.body),
+      note: tr(dict, section.note),
+    })),
   };
 }

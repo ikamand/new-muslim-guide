@@ -24,6 +24,7 @@ const { Recitations } = await load('src/content/recitations.ts');
 const { GUIDES } = await load('src/content/guides.ts');
 const { PILLARS } = await load('src/content/pillars.ts');
 const { IMAN_PILLARS } = await load('src/content/iman.ts');
+const { REFERENCES } = await load('src/content/references.ts');
 const { CONTENT_DICTS } = await load('src/i18n/content/index.ts');
 const { LOCALES, LOCALE_NAMES, SOURCE_LOCALE } = await load('src/i18n/locales.ts');
 
@@ -68,6 +69,17 @@ for (const [label, list] of [['Five Pillars', PILLARS], ['Six Articles', IMAN_PI
     for (const field of ['title', 'summary', 'detail', 'note']) {
       add(where, pillar[field]);
     }
+  }
+}
+
+for (const reference of REFERENCES) {
+  const where = `Reference: ${reference.title}`;
+  add(where, reference.title);
+  add(where, reference.subtitle);
+  for (const section of reference.sections) {
+    add(`${reference.title} — ${section.heading}`, section.heading);
+    add(`${reference.title} — ${section.heading}`, section.body);
+    add(`${reference.title} — ${section.heading}`, section.note);
   }
 }
 

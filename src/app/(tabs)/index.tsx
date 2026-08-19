@@ -4,11 +4,12 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { PrayerTimesCard } from '@/components/prayer-times-card';
 import { ThemedText } from '@/components/themed-text';
-import { PRAYERS, PURIFICATION, type Guide } from '@/content';
+import { PRAYERS, PURIFICATION, REFERENCES, type Guide, type Reference } from '@/content';
 import { BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { usePrayerTimes } from '@/hooks/use-prayer-times';
 import { useLocale } from '@/hooks/use-locale';
-import { localiseGuide } from '@/i18n/localise';
+import { useSettings } from '@/hooks/use-settings';
+import { localiseGuide, localiseReference } from '@/i18n/localise';
 import { useTheme } from '@/hooks/use-theme';
 
 function GuideCard({ guide, isNext }: { guide: Guide; isNext?: boolean }) {
@@ -40,10 +41,45 @@ function GuideCard({ guide, isNext }: { guide: Guide; isNext?: boolean }) {
   );
 }
 
+/** Same shape as a guide card, but it opens a page you read rather than steps. */
+function ReferenceCard({ reference }: { reference: Reference }) {
+  const theme = useTheme();
+
+  return (
+    <Link href={{ pathname: '/reference/[id]', params: { id: reference.id } }} asChild>
+      <Pressable
+        style={({ pressed }) => [
+          styles.card,
+          {
+            backgroundColor: pressed ? theme.backgroundSelected : theme.backgroundElement,
+            borderColor: theme.border,
+          },
+        ]}>
+        <View style={styles.cardText}>
+          <ThemedText type="smallBold" style={styles.cardTitle}>
+            {reference.title}
+          </ThemedText>
+          <ThemedText type="small" themeColor="textSecondary">
+            {reference.subtitle}
+          </ThemedText>
+        </View>
+      </Pressable>
+    </Link>
+  );
+}
+
 export default function HomeScreen() {
   const theme = useTheme();
   const { next } = usePrayerTimes();
   const { locale, t } = useLocale();
+  const { audience } = useSettings();
+
+  // A topic marked for one audience is hidden from the other. Someone who
+  // declined the question sees everything — the honest fallback, since the app
+  // would otherwise withhold something on a guess.
+  const topics = REFERENCES.filter(
+    (reference) => !reference.audience || !audience || reference.audience === audience,
+  );
 
   return (
     <SafeAreaView style={[styles.safeArea, { backgroundColor: theme.background }]} edges={['top']}>
@@ -71,6 +107,17 @@ export default function HomeScreen() {
             />
           ))}
         </View>
+
+        {topics.length > 0 && (
+          <View style={styles.section}>
+            <ThemedText type="smallBold" themeColor="textSecondary" style={styles.sectionTitle}>
+              {t('home.different')}
+            </ThemedText>
+            {topics.map((topic) => (
+              <ReferenceCard key={topic.id} reference={localiseReference(topic, locale)} />
+            ))}
+          </View>
+        )}
       </ScrollView>
     </SafeAreaView>
   );

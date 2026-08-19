@@ -20,6 +20,7 @@ export const EN = {
   'tab.pray': 'Pray',
   'home.beforeYouPray': 'Getting clean first',
   'home.fivePrayers': 'The five prayers',
+  'home.different': 'If something is different',
   'tab.learn': 'Learn',
   'tab.settings': 'Settings',
 
@@ -125,14 +126,15 @@ const AR: Overrides = {
   'welcome.title': 'السلام عليكم',
   'welcome.man': 'رجل',
   'welcome.woman': 'امرأة',
+  'home.beforeYouPray': 'الطهارة أولاً',
+  'home.fivePrayers': 'الصلوات الخمس',
+  'home.different': 'إذا اختلف الأمر',
   'settings.guidance': 'إرشادات الصلاة لـ',
   'common.back': 'رجوع',
 };
 
 const FR: Overrides = {
-  'tab.pray': 'Pray',
-  'home.beforeYouPray': 'Getting clean first',
-  'home.fivePrayers': 'The five prayers',
+  'tab.pray': 'Prier',
   'tab.learn': 'Apprendre',
   'tab.settings': 'Réglages',
   'learn.title': 'Apprendre',
@@ -160,6 +162,9 @@ const FR: Overrides = {
   'welcome.title': 'Que la paix soit sur vous',
   'welcome.man': 'Homme',
   'welcome.woman': 'Femme',
+  'home.beforeYouPray': 'D’abord se purifier',
+  'home.fivePrayers': 'Les cinq prières',
+  'home.different': 'Si quelque chose change',
   'settings.guidance': 'Conseils de prière pour',
   'common.back': 'Retour',
 };
@@ -193,6 +198,9 @@ const ES: Overrides = {
   'welcome.title': 'La paz sea contigo',
   'welcome.man': 'Hombre',
   'welcome.woman': 'Mujer',
+  'home.beforeYouPray': 'Primero, purificarse',
+  'home.fivePrayers': 'Las cinco oraciones',
+  'home.different': 'Si algo es distinto',
   'settings.guidance': 'Guía de oración para',
   'common.back': 'Atrás',
 };

@@ -13,5 +13,6 @@ export type { AudioSource } from './audio-sources';
 export { getPracticeClipCount, getPracticeCredits, getPracticeItems } from './practice';
 export type { PracticeClip, PracticeItem } from './practice';
 export { Recitations } from './recitations';
+export { getReference, PERIODS, REFERENCES } from './references';
 export { IMAN_PILLARS, PILLARS, PRAYERS, SHAHADA_GUIDE, WUDU };
 export * from './types';

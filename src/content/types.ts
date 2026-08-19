@@ -14,12 +14,35 @@ export type Posture =
   | 'sitting'
   | 'washing';
 
+/**
+ * One piece of a recitation that can be memorised on its own.
+ *
+ * Only texts long enough to learn a piece at a time carry these. The unit is
+ * whatever someone would loop twenty times in a row — for Al-Fatiha that is
+ * the ayah.
+ */
+export type RecitationVerse = {
+  arabic: string;
+  transliteration: string;
+  translation: string;
+  /** Key into the audio map in `src/content/audio.ts`. */
+  audioId: string;
+};
+
 export type Recitation = {
   arabic: string;
   transliteration: string;
   translation: string;
   /** "Three times", "In every rak'ah" — shown under the translation. */
   times?: string;
+  /** Key into the audio map in `src/content/audio.ts`. */
+  audioId?: string;
+  /**
+   * Set where the text is long enough to memorise in pieces. The whole-text
+   * fields above are derived from these, so a correction to a verse lands in
+   * both the practice screen and the step player.
+   */
+  verses?: RecitationVerse[];
 };
 
 export type Step = {

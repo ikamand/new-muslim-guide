@@ -1,4 +1,4 @@
-import type { Recitation } from './types';
+import type { Recitation, RecitationVerse } from './types';
 
 /**
  * The words said in prayer, in one place so a correction lands everywhere.
@@ -8,11 +8,67 @@ import type { Recitation } from './types';
  * way to pray rather than every variation, because a first-timer needs a
  * path, not a comparison table.
  */
+/**
+ * Al-Fatiha, ayah by ayah.
+ *
+ * Held as verses rather than one block because memorising it means looping a
+ * single ayah until it sticks. The whole-surah strings below are derived from
+ * this, so there is still one place to correct.
+ */
+const FATIHA_VERSES: RecitationVerse[] = [
+  {
+    arabic: 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ',
+    transliteration: 'Bismi-llāhi-r-raḥmāni-r-raḥīm',
+    translation: 'In the name of Allah, the Most Merciful, the Most Compassionate.',
+    audioId: 'fatiha-1',
+  },
+  {
+    arabic: 'الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ',
+    transliteration: 'Al-ḥamdu li-llāhi rabbi-l-ʿālamīn',
+    translation: 'All praise is for Allah, Lord of all worlds.',
+    audioId: 'fatiha-2',
+  },
+  {
+    arabic: 'الرَّحْمَٰنِ الرَّحِيمِ',
+    transliteration: 'Ar-raḥmāni-r-raḥīm',
+    translation: 'The Most Merciful, the Most Compassionate.',
+    audioId: 'fatiha-3',
+  },
+  {
+    arabic: 'مَالِكِ يَوْمِ الدِّينِ',
+    transliteration: 'Māliki yawmi-d-dīn',
+    translation: 'Master of the Day of Judgement.',
+    audioId: 'fatiha-4',
+  },
+  {
+    arabic: 'إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ',
+    transliteration: 'Iyyāka naʿbudu wa iyyāka nastaʿīn',
+    translation: 'You alone we worship, and You alone we ask for help.',
+    audioId: 'fatiha-5',
+  },
+  {
+    arabic: 'اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ',
+    transliteration: 'Ihdinā-ṣ-ṣirāṭa-l-mustaqīm',
+    translation: 'Guide us along the straight path.',
+    audioId: 'fatiha-6',
+  },
+  {
+    arabic:
+      'صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ',
+    transliteration:
+      'Ṣirāṭa-lladhīna anʿamta ʿalayhim ghayri-l-maghḍūbi ʿalayhim wa lā-ḍ-ḍāllīn',
+    translation:
+      'The path of those You have blessed — not of those who have earned Your anger, nor of those who have gone astray.',
+    audioId: 'fatiha-7',
+  },
+];
+
 export const Recitations = {
   takbir: {
     arabic: 'اللَّهُ أَكْبَرُ',
     transliteration: 'Allāhu akbar',
     translation: 'Allah is the greatest.',
+    audioId: 'takbir',
   },
 
   opening: {
@@ -22,36 +78,22 @@ export const Recitations = {
       'Subḥānaka-llāhumma wa biḥamdika, wa tabāraka-smuka, wa taʿālā jadduka, wa lā ilāha ghayruk',
     translation:
       'Glory be to You, O Allah, and praise. Blessed is Your name, exalted is Your majesty, and there is no god but You.',
+    audioId: 'opening',
   },
 
   taawwudh: {
     arabic: 'أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ',
     transliteration: 'Aʿūdhu bi-llāhi mina-sh-shayṭāni-r-rajīm',
     translation: 'I seek refuge in Allah from Satan, the rejected.',
+    audioId: 'taawwudh',
   },
 
   fatiha: {
-    arabic: [
-      'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ',
-      'الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ',
-      'الرَّحْمَٰنِ الرَّحِيمِ',
-      'مَالِكِ يَوْمِ الدِّينِ',
-      'إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ',
-      'اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ',
-      'صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ',
-    ].join('\n'),
-    transliteration: [
-      'Bismi-llāhi-r-raḥmāni-r-raḥīm',
-      'Al-ḥamdu li-llāhi rabbi-l-ʿālamīn',
-      'Ar-raḥmāni-r-raḥīm',
-      'Māliki yawmi-d-dīn',
-      'Iyyāka naʿbudu wa iyyāka nastaʿīn',
-      'Ihdinā-ṣ-ṣirāṭa-l-mustaqīm',
-      'Ṣirāṭa-lladhīna anʿamta ʿalayhim ghayri-l-maghḍūbi ʿalayhim wa lā-ḍ-ḍāllīn',
-    ].join('\n'),
-    translation:
-      'In the name of Allah, the Most Merciful, the Most Compassionate. All praise is for Allah, Lord of all worlds — the Most Merciful, the Most Compassionate, Master of the Day of Judgement. You alone we worship, and You alone we ask for help. Guide us along the straight path, the path of those You have blessed — not of those who have earned Your anger, nor of those who have gone astray.',
+    arabic: FATIHA_VERSES.map((verse) => verse.arabic).join('\n'),
+    transliteration: FATIHA_VERSES.map((verse) => verse.transliteration).join('\n'),
+    translation: FATIHA_VERSES.map((verse) => verse.translation).join(' '),
     times: 'In every rakʿah, without exception',
+    verses: FATIHA_VERSES,
   },
 
   rukuTasbih: {
@@ -59,6 +101,7 @@ export const Recitations = {
     transliteration: 'Subḥāna rabbiya-l-ʿaẓīm',
     translation: 'Glory be to my Lord, the Most Great.',
     times: 'Three times',
+    audioId: 'ruku-tasbih',
   },
 
   rising: {
@@ -66,6 +109,7 @@ export const Recitations = {
     transliteration: 'Samiʿa-llāhu liman ḥamidah — Rabbanā wa laka-l-ḥamd',
     translation:
       'Allah hears the one who praises Him. Our Lord, to You belongs all praise.',
+    audioId: 'rising',
   },
 
   sujudTasbih: {
@@ -73,12 +117,14 @@ export const Recitations = {
     transliteration: 'Subḥāna rabbiya-l-aʿlā',
     translation: 'Glory be to my Lord, the Most High.',
     times: 'Three times',
+    audioId: 'sujud-tasbih',
   },
 
   betweenProstrations: {
     arabic: 'رَبِّ اغْفِرْ لِي',
     transliteration: 'Rabbi-ghfir lī',
     translation: 'My Lord, forgive me.',
+    audioId: 'between-prostrations',
   },
 
   tashahhud: {
@@ -88,6 +134,7 @@ export const Recitations = {
       'At-taḥiyyātu li-llāhi wa-ṣ-ṣalawātu wa-ṭ-ṭayyibāt. As-salāmu ʿalayka ayyuha-n-nabiyyu wa raḥmatu-llāhi wa barakātuh. As-salāmu ʿalaynā wa ʿalā ʿibādi-llāhi-ṣ-ṣāliḥīn. Ash-hadu an lā ilāha illa-llāh, wa ash-hadu anna Muḥammadan ʿabduhu wa rasūluh.',
     translation:
       'All greetings, prayers and good things are for Allah. Peace be upon you, O Prophet, and the mercy of Allah and His blessings. Peace be upon us and upon the righteous servants of Allah. I bear witness that there is no god but Allah, and I bear witness that Muhammad is His servant and His messenger.',
+    audioId: 'tashahhud',
   },
 
   salawat: {
@@ -97,6 +144,7 @@ export const Recitations = {
       'Allāhumma ṣalli ʿalā Muḥammadin wa ʿalā āli Muḥammad, kamā ṣallayta ʿalā Ibrāhīma wa ʿalā āli Ibrāhīm, innaka ḥamīdun majīd. Allāhumma bārik ʿalā Muḥammadin wa ʿalā āli Muḥammad, kamā bārakta ʿalā Ibrāhīma wa ʿalā āli Ibrāhīm, innaka ḥamīdun majīd.',
     translation:
       'O Allah, send prayers upon Muhammad and the family of Muhammad, as You sent prayers upon Abraham and the family of Abraham. You are indeed Praiseworthy, Glorious. O Allah, bless Muhammad and the family of Muhammad, as You blessed Abraham and the family of Abraham. You are indeed Praiseworthy, Glorious.',
+    audioId: 'salawat',
   },
 
   taslim: {
@@ -104,6 +152,7 @@ export const Recitations = {
     transliteration: 'As-salāmu ʿalaykum wa raḥmatu-llāh',
     translation: 'Peace be upon you, and the mercy of Allah.',
     times: 'Once to the right, then once to the left',
+    audioId: 'taslim',
   },
 
   shahadaAfterWudu: {
@@ -113,11 +162,13 @@ export const Recitations = {
       'Ash-hadu an lā ilāha illa-llāhu waḥdahu lā sharīka lah, wa ash-hadu anna Muḥammadan ʿabduhu wa rasūluh',
     translation:
       'I bear witness that there is no god but Allah alone, with no partner, and I bear witness that Muhammad is His servant and His messenger.',
+    audioId: 'shahada-after-wudu',
   },
 
   bismillah: {
     arabic: 'بِسْمِ اللَّهِ',
     transliteration: 'Bismillāh',
     translation: 'In the name of Allah.',
+    audioId: 'bismillah',
   },
 } satisfies Record<string, Recitation>;

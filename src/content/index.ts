@@ -10,6 +10,7 @@ export function getGuide(id: string): Guide | undefined {
   return GUIDES.find((guide) => guide.id === id);
 }
 
+export { AUDIO, getAudio, hasAnyAudio } from './audio';
 export { getImanPillar } from './iman';
 export { getPillar, SHAHADA } from './pillars';
 export { IMAN_PILLARS, PILLARS, PRAYERS, WUDU };

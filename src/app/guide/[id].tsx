@@ -1,3 +1,4 @@
+import { useKeepAwake } from 'expo-keep-awake';
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 import { useRef, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
@@ -25,6 +26,11 @@ export default function GuideScreen() {
   const theme = useTheme();
   const scrollRef = useRef<ScrollView>(null);
   const [index, setIndex] = useState(0);
+
+  // The screen must not sleep here. Someone mid-prayer has both hands occupied
+  // and cannot tap to wake it, and losing the step means losing their place.
+  // Scoped to this screen only — the hook releases when it unmounts.
+  useKeepAwake();
 
   const { locale } = useLocale();
   const source = getGuide(id);

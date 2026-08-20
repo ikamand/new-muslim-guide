@@ -27,8 +27,10 @@ const load = (p) => import(join(root, p));
 
 // Via catalog.ts rather than index.ts: index pulls in the audio map, whose
 // `require` calls only Metro resolves.
-const { CATALOG, danglingRefs } = await load('src/content/catalog.ts');
+const { CATALOG, danglingRefs, resolveRef } = await load('src/content/catalog.ts');
 const { pendingRecommendations } = await load('src/content/recommendations.ts');
+const { helpRefs } = await load('src/content/help.ts');
+const { SEASONS } = await load('src/content/seasons.ts');
 const { formatSource, sourceUrl, assessEvidence } = await load('src/content/sources.ts');
 const { GUIDES } = await load('src/content/guides.ts');
 const { REFERENCES } = await load('src/content/references.ts');
@@ -193,6 +195,27 @@ if (pending.length) {
   say();
 }
 
+/* ---------- what the home screen offers ---------- */
+
+/**
+ * "I need help with…" and the seasonal windows both drop a pointer that
+ * resolves to nothing, so a chip can never lead somewhere empty. That silence
+ * is right on the screen and wrong here: an unresolved pointer means a topic
+ * quietly got shorter, and this is where that should be visible.
+ */
+const homeRefs = [
+  ...helpRefs().map((entry) => ({ from: 'help', ref: entry })),
+  ...SEASONS.map((season) => ({ from: `season:${season.id}`, ref: season.ref })),
+];
+const homeMissing = homeRefs.filter(({ ref }) => !resolveRef(ref));
+
+if (homeMissing.length) {
+  say(`Home pointers resolving to nothing (${homeMissing.length})`);
+  say('  Dropped silently on screen — a chip must never open an empty page.');
+  for (const { from, ref } of homeMissing) say(`    ${pad(from, 20)} → ${ref.kind}:${ref.id}`);
+  say();
+}
+
 /* ---------- pointers ---------- */
 
 const dangling = danglingRefs();
@@ -217,6 +240,7 @@ if (byVerdict['below-bar'].length) {
   );
 }
 if (dangling.length) failures.push(`${dangling.length} broken relatedContent pointer(s)`);
+if (homeMissing.length) failures.push(`${homeMissing.length} home pointer(s) resolving to nothing`);
 if (strict && unsourced.length) failures.push(`${unsourced.length} entries citing nothing`);
 
 if (failures.length) {

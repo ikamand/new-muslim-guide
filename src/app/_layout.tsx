@@ -64,6 +64,8 @@ function RootStack() {
       */}
       <Stack.Screen name="journey/index" options={{ title: '', headerBackTitle: 'Learn' }} />
       <Stack.Screen name="journey/[stage]" options={{ title: '', headerBackTitle: 'Back' }} />
+      {/* Titled from the topic itself, in the reader's language. */}
+      <Stack.Screen name="help/[topic]" options={{ title: '', headerBackTitle: 'Back' }} />
       <Stack.Screen
         name="pillars"
         options={{ title: 'The Five Pillars', headerBackTitle: 'Learn' }}

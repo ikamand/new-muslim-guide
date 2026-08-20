@@ -1,8 +1,9 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { Link, Stack, useLocalSearchParams } from 'expo-router';
+import { Stack, useLocalSearchParams } from 'expo-router';
 import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 
 import { JourneyProgress } from '@/components/journey-progress';
+import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
 import { STAGE_IDS, type StageId } from '@/content/journey';
 import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
@@ -31,27 +32,30 @@ function LessonRow({ step }: { step: ResolvedStep }) {
 
   return (
     <View style={[styles.row, { backgroundColor: theme.backgroundElement, borderColor: theme.border }]}>
-      <Link href={routeFor(step.entry)} asChild>
-        <Pressable
-          accessibilityRole="link"
-          accessibilityLabel={label}
-          accessibilityHint={step.entry.shortDescription}
-          style={({ pressed }) => [styles.rowMain, { opacity: pressed ? 0.6 : 1 }]}>
-          <View style={styles.rowText}>
-            <ThemedText type="smallBold" style={styles.rowTitle}>
-              {label}
+      {/*
+        `rowMain` carries `flex: 1` and the row's padding. Both were being
+        dropped on every platform because the style was a function — see
+        `PressableLink`, which is where that is now handled once.
+      */}
+      <PressableLink
+        href={routeFor(step.entry)}
+        accessibilityLabel={`${label}. ${step.entry.shortDescription}`}
+        style={styles.rowMain}
+        pressedStyle={{ opacity: 0.6 }}>
+        <View style={styles.rowText}>
+          <ThemedText type="smallBold" style={styles.rowTitle}>
+            {label}
+          </ThemedText>
+          <ThemedText type="small" themeColor="textSecondary">
+            {step.entry.shortDescription}
+          </ThemedText>
+          <View style={[styles.chip, { backgroundColor: theme.accentMuted }]}>
+            <ThemedText type="smallBold" themeColor="accent" style={styles.chipText}>
+              {t(`journey.requirement.${step.requirement}` as UIKey)}
             </ThemedText>
-            <ThemedText type="small" themeColor="textSecondary">
-              {step.entry.shortDescription}
-            </ThemedText>
-            <View style={[styles.chip, { backgroundColor: theme.accentMuted }]}>
-              <ThemedText type="smallBold" themeColor="accent" style={styles.chipText}>
-                {t(`journey.requirement.${step.requirement}` as UIKey)}
-              </ThemedText>
-            </View>
           </View>
-        </Pressable>
-      </Link>
+        </View>
+      </PressableLink>
 
       <Pressable
         onPress={() => toggleLesson(step.key)}

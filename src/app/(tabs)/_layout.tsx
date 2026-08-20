@@ -19,10 +19,17 @@ export default function TabsLayout() {
           borderTopColor: theme.border,
         },
       }}>
+      {/*
+        Named for the day rather than for one act on it. The tab still opens on
+        the prayer times and the button that starts the next prayer — salah is
+        still the spine — but the screen below them now answers "what should I
+        do now" as well as "when", and calling that "Pray" would be a small lie
+        about where the journey and the help row live.
+      */}
       <Tabs.Screen
         name="index"
         options={{
-          title: t('tab.pray'),
+          title: t('tab.today'),
           tabBarIcon: ({ color, size }) => <Ionicons name="moon-outline" size={size} color={color} />,
         }}
       />

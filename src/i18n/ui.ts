@@ -17,13 +17,97 @@ import type { Locale } from './locales';
  * so a missing string is a fallback and a misspelled key is a type error.
  */
 export const EN = {
-  'tab.pray': 'Pray',
+  'tab.today': 'Today',
   'home.prayNow': 'Pray',
   'home.notInWudu': 'Not in wudu yet?',
   'home.washFirst': 'Wash first',
-  'home.ifWuduNotEnough': 'If wudu is not enough',
-  'home.noWater': 'No water',
-  'home.different': 'If something is different',
+
+  /**
+   * The home screen, in the order someone reads down it: who they are, what
+   * they were part-way through, what is worth today, and the plain-language
+   * way in for a question they cannot name yet.
+   */
+  'home.welcome': 'Welcome',
+  'home.welcomeBack': 'Welcome back',
+  'home.continue': 'Continue your journey',
+  'home.start': 'Start your journey',
+  'home.journeyDone': 'You have been through every lesson',
+  'home.journeyDone.help':
+    'Nothing is locked and nothing expires. Go back over anything you want, or keep these two in your week.',
+  'home.today': 'Today',
+  'home.help': 'I need help with…',
+  'home.helpElse': 'Something else',
+
+  /** Why a Today row is there. One word, so the row itself stays the point. */
+  'today.reason.prayer': 'Prayer',
+  'today.reason.suggested': 'Suggested',
+
+  /**
+   * The times of year the app has something to say about. Never a single named
+   * day — see `src/content/seasons.ts` for why the calculation cannot carry one.
+   */
+  'season.ramadan': 'Ramadan',
+  'season.last-ten-nights': 'The last ten nights',
+  'season.before-ramadan': 'Ramadan is close',
+  'season.dhul-hijjah': 'Dhul-Hijjah',
+  'season.muharram': 'A new Islamic year',
+
+  /**
+   * The Islamic months.
+   *
+   * Transliterated once and left that way in French and Spanish, on the same
+   * rule as `Recitation.transliteration`: a Latin-script rendering of an Arabic
+   * name is the same rendering whichever European language you read it in.
+   * Arabic gets the script itself, because a reader of the Arabic app has no
+   * use for a crutch spelling.
+   */
+  'hijri.month.1': 'Muharram',
+  'hijri.month.2': 'Safar',
+  'hijri.month.3': 'Rabiʿ al-Awwal',
+  'hijri.month.4': 'Rabiʿ al-Thani',
+  'hijri.month.5': 'Jumada al-Ula',
+  'hijri.month.6': 'Jumada al-Akhirah',
+  'hijri.month.7': 'Rajab',
+  'hijri.month.8': 'Shaʿban',
+  'hijri.month.9': 'Ramadan',
+  'hijri.month.10': 'Shawwal',
+  'hijri.month.11': 'Dhul-Qaʿdah',
+  'hijri.month.12': 'Dhul-Hijjah',
+
+  /**
+   * "I need help with…" in the words someone would actually use. None of these
+   * is the name of an Islamic discipline, on purpose — a beginner does not know
+   * that what they want is filed under purification.
+   */
+  'help.topic.prayer': 'Praying',
+  'help.topic.washing': 'Washing before prayer',
+  'help.topic.mistakes': 'When something goes wrong',
+  'help.topic.quran': 'The Qur’an',
+  'help.topic.words': 'What to say',
+  'help.topic.food': 'What I can eat',
+  'help.topic.clothing': 'What to wear',
+  'help.topic.people': 'Family, work and people',
+  'help.topic.ramadan': 'Ramadan and fasting',
+  'help.topic.new': 'I’ve just become Muslim',
+
+  /**
+   * The prayer times card. These were written into the component in English
+   * and stayed English in every language until the home screen was rebuilt
+   * around them.
+   */
+  'times.next': 'Next',
+  'times.nextTomorrow': 'Next, tomorrow',
+  'times.endsAtSunrise': 'ends at sunrise,',
+  'times.needLocation': 'Prayer times need to know where you are',
+  'times.needLocation.why':
+    'The times are worked out from the position of the sun where you are standing. Your location is used on this device and never sent anywhere — there is no server to send it to.',
+  'times.locationOff':
+    'Location services are turned off, so the times can’t be worked out. Turn them on in your phone’s settings and come back.',
+  'times.useLocation': 'Use my location',
+  'times.working': 'Working out today’s times…',
+  'times.clockSuspect':
+    'Your phone’s clock is set a long way from where you seem to be. These times follow the clock, so check your date and time settings if they look wrong.',
+  'times.onThisPhone': 'worked out on this phone',
 
   /**
    * Units for the counts on cards. A bare "14" tells a beginner nothing — it
@@ -41,6 +125,8 @@ export const EN = {
   'count.clips': 'clips',
   'count.articles': 'articles',
   'count.pillars': 'pillars',
+  /** Reading or doing time on a lesson. Not a target — see `estimatedMinutes`. */
+  'count.minutes': 'min',
 
   /**
    * The disclosure on a note. A beginner sees one plain sentence; the schools
@@ -240,7 +326,7 @@ export type UIKey = keyof typeof EN;
 type Overrides = Partial<Record<UIKey, string>>;
 
 const AR: Overrides = {
-  'tab.pray': 'الصلاة',
+  'tab.today': 'اليوم',
   'tab.learn': 'تعلّم',
   'tab.settings': 'الإعدادات',
   'learn.title': 'تعلّم',
@@ -345,9 +431,58 @@ const AR: Overrides = {
   'home.prayNow': 'صَلِّ',
   'home.notInWudu': 'لست على وضوء؟',
   'home.washFirst': 'توضّأ أولاً',
-  'home.ifWuduNotEnough': 'إذا لم يكفِ الوضوء',
-  'home.noWater': 'بلا ماء',
-  'home.different': 'إذا اختلف الأمر',
+  'home.welcome': 'أهلاً بك',
+  'home.welcomeBack': 'أهلاً بعودتك',
+  'home.continue': 'واصل طريقك',
+  'home.start': 'ابدأ طريقك',
+  'home.journeyDone': 'أتممت كل الدروس',
+  'home.journeyDone.help': 'لا شيء مُقفل ولا شيء ينتهي. عُد إلى ما تشاء، أو اجعل هذين جزءًا من أسبوعك.',
+  'home.today': 'اليوم',
+  'home.help': 'أحتاج مساعدة في…',
+  'home.helpElse': 'شيء آخر',
+  'today.reason.prayer': 'الصلاة',
+  'today.reason.suggested': 'مقترح',
+  'season.ramadan': 'رمضان',
+  'season.last-ten-nights': 'العشر الأواخر',
+  'season.before-ramadan': 'رمضان يقترب',
+  'season.dhul-hijjah': 'ذو الحجة',
+  'season.muharram': 'عام هجري جديد',
+  'hijri.month.1': 'محرّم',
+  'hijri.month.2': 'صفر',
+  'hijri.month.3': 'ربيع الأول',
+  'hijri.month.4': 'ربيع الآخر',
+  'hijri.month.5': 'جمادى الأولى',
+  'hijri.month.6': 'جمادى الآخرة',
+  'hijri.month.7': 'رجب',
+  'hijri.month.8': 'شعبان',
+  'hijri.month.9': 'رمضان',
+  'hijri.month.10': 'شوّال',
+  'hijri.month.11': 'ذو القعدة',
+  'hijri.month.12': 'ذو الحجة',
+  'help.topic.prayer': 'الصلاة',
+  'help.topic.washing': 'الطهارة قبل الصلاة',
+  'help.topic.mistakes': 'إذا حدث خطأ',
+  'help.topic.quran': 'القرآن',
+  'help.topic.words': 'ماذا تقول',
+  'help.topic.food': 'ماذا آكل',
+  'help.topic.clothing': 'اللباس',
+  'help.topic.people': 'الأسرة والعمل والناس',
+  'help.topic.ramadan': 'رمضان والصيام',
+  'help.topic.new': 'أسلمتُ حديثًا',
+  'times.next': 'التالية',
+  'times.nextTomorrow': 'التالية، غدًا',
+  'times.endsAtSunrise': 'ينتهي وقتها بشروق الشمس،',
+  'times.needLocation': 'مواقيت الصلاة تحتاج معرفة مكانك',
+  'times.needLocation.why':
+    'تُحسب المواقيت من موضع الشمس حيث تقف. يُستخدم موقعك على هذا الجهاز ولا يُرسل إلى أي مكان — فلا خادم يُرسل إليه.',
+  'times.locationOff':
+    'خدمات الموقع مُعطّلة، فلا يمكن حساب المواقيت. فعّلها من إعدادات هاتفك ثم عُد.',
+  'times.useLocation': 'استخدم موقعي',
+  'times.working': 'يجري حساب مواقيت اليوم…',
+  'times.clockSuspect':
+    'ساعة هاتفك مضبوطة بعيدًا عن المكان الذي يبدو أنك فيه. تتبع هذه المواقيت الساعة، فراجع إعدادات التاريخ والوقت إن بدت خاطئة.',
+  'times.onThisPhone': 'محسوبة على هذا الهاتف',
+  'count.minutes': 'دقيقة',
   'count.steps': 'خطوات',
   'count.sections': 'أقسام',
   'count.phrases': 'عبارة',
@@ -367,7 +502,7 @@ const AR: Overrides = {
 };
 
 const FR: Overrides = {
-  'tab.pray': 'Prier',
+  'tab.today': 'Aujourd’hui',
   'tab.learn': 'Apprendre',
   'tab.settings': 'Réglages',
   'learn.title': 'Apprendre',
@@ -478,9 +613,46 @@ const FR: Overrides = {
   'home.prayNow': 'Prier',
   'home.notInWudu': 'Pas encore en état de wudu ?',
   'home.washFirst': 'Se laver d’abord',
-  'home.ifWuduNotEnough': 'Si le wudu ne suffit pas',
-  'home.noWater': 'Sans eau',
-  'home.different': 'Si quelque chose change',
+  'home.welcome': 'Bienvenue',
+  'home.welcomeBack': 'Bon retour',
+  'home.continue': 'Continuez votre parcours',
+  'home.start': 'Commencez votre parcours',
+  'home.journeyDone': 'Vous avez parcouru toutes les leçons',
+  'home.journeyDone.help':
+    'Rien n’est verrouillé et rien n’expire. Revenez sur ce que vous voulez, ou gardez ces deux-là dans votre semaine.',
+  'home.today': 'Aujourd’hui',
+  'home.help': 'J’ai besoin d’aide pour…',
+  'home.helpElse': 'Autre chose',
+  'today.reason.prayer': 'Prière',
+  'today.reason.suggested': 'Suggestion',
+  'season.ramadan': 'Ramadan',
+  'season.last-ten-nights': 'Les dix dernières nuits',
+  'season.before-ramadan': 'Le Ramadan approche',
+  'season.muharram': 'Une nouvelle année musulmane',
+  'help.topic.prayer': 'Prier',
+  'help.topic.washing': 'Se purifier avant la prière',
+  'help.topic.mistakes': 'Quand quelque chose ne va pas',
+  'help.topic.quran': 'Le Coran',
+  'help.topic.words': 'Quoi dire',
+  'help.topic.food': 'Ce que je peux manger',
+  'help.topic.clothing': 'Comment s’habiller',
+  'help.topic.people': 'Famille, travail et entourage',
+  'help.topic.ramadan': 'Le Ramadan et le jeûne',
+  'help.topic.new': 'Je viens d’embrasser l’islam',
+  'times.next': 'Prochaine',
+  'times.nextTomorrow': 'Prochaine, demain',
+  'times.endsAtSunrise': 'se termine au lever du soleil,',
+  'times.needLocation': 'Les horaires de prière ont besoin de savoir où vous êtes',
+  'times.needLocation.why':
+    'Les horaires sont calculés à partir de la position du soleil là où vous vous trouvez. Votre position est utilisée sur cet appareil et n’est jamais envoyée ailleurs — il n’y a aucun serveur où l’envoyer.',
+  'times.locationOff':
+    'La localisation est désactivée, les horaires ne peuvent donc pas être calculés. Activez-la dans les réglages de votre téléphone et revenez.',
+  'times.useLocation': 'Utiliser ma position',
+  'times.working': 'Calcul des horaires du jour…',
+  'times.clockSuspect':
+    'L’horloge de votre téléphone est réglée très loin de l’endroit où vous semblez être. Ces horaires suivent l’horloge : vérifiez la date et l’heure si elles semblent fausses.',
+  'times.onThisPhone': 'calculés sur ce téléphone',
+  'count.minutes': 'min',
   'count.steps': 'étapes',
   'count.sections': 'sections',
   'count.phrases': 'phrases',
@@ -500,7 +672,7 @@ const FR: Overrides = {
 };
 
 const ES: Overrides = {
-  'tab.pray': 'Rezar',
+  'tab.today': 'Hoy',
   'tab.learn': 'Aprender',
   'tab.settings': 'Ajustes',
   'learn.title': 'Aprender',
@@ -609,9 +781,46 @@ const ES: Overrides = {
   'home.prayNow': 'Rezar',
   'home.notInWudu': '¿Aún sin wudu?',
   'home.washFirst': 'Purifícate primero',
-  'home.ifWuduNotEnough': 'Si el wudu no basta',
-  'home.noWater': 'Sin agua',
-  'home.different': 'Si algo es distinto',
+  'home.welcome': 'Bienvenida',
+  'home.welcomeBack': 'Hola de nuevo',
+  'home.continue': 'Continúa tu camino',
+  'home.start': 'Empieza tu camino',
+  'home.journeyDone': 'Has pasado por todas las lecciones',
+  'home.journeyDone.help':
+    'Nada está bloqueado y nada caduca. Vuelve a lo que quieras, o guarda estas dos cosas para tu semana.',
+  'home.today': 'Hoy',
+  'home.help': 'Necesito ayuda con…',
+  'home.helpElse': 'Otra cosa',
+  'today.reason.prayer': 'Oración',
+  'today.reason.suggested': 'Sugerencia',
+  'season.ramadan': 'Ramadán',
+  'season.last-ten-nights': 'Las diez últimas noches',
+  'season.before-ramadan': 'Ramadán está cerca',
+  'season.muharram': 'Un nuevo año islámico',
+  'help.topic.prayer': 'Rezar',
+  'help.topic.washing': 'Purificarse antes de rezar',
+  'help.topic.mistakes': 'Cuando algo sale mal',
+  'help.topic.quran': 'El Corán',
+  'help.topic.words': 'Qué decir',
+  'help.topic.food': 'Qué puedo comer',
+  'help.topic.clothing': 'Qué ponerse',
+  'help.topic.people': 'Familia, trabajo y gente',
+  'help.topic.ramadan': 'Ramadán y el ayuno',
+  'help.topic.new': 'Acabo de abrazar el islam',
+  'times.next': 'Siguiente',
+  'times.nextTomorrow': 'Siguiente, mañana',
+  'times.endsAtSunrise': 'termina al amanecer,',
+  'times.needLocation': 'Los horarios de oración necesitan saber dónde estás',
+  'times.needLocation.why':
+    'Los horarios se calculan a partir de la posición del sol donde estás. Tu ubicación se usa en este dispositivo y nunca se envía a ningún sitio: no hay ningún servidor al que enviarla.',
+  'times.locationOff':
+    'La ubicación está desactivada, así que no se pueden calcular los horarios. Actívala en los ajustes de tu teléfono y vuelve.',
+  'times.useLocation': 'Usar mi ubicación',
+  'times.working': 'Calculando los horarios de hoy…',
+  'times.clockSuspect':
+    'El reloj de tu teléfono está ajustado muy lejos de donde pareces estar. Estos horarios siguen al reloj, así que revisa la fecha y la hora si algo parece mal.',
+  'times.onThisPhone': 'calculados en este teléfono',
+  'count.minutes': 'min',
   'count.steps': 'pasos',
   'count.sections': 'secciones',
   'count.phrases': 'frases',

@@ -1,9 +1,10 @@
-import { Link } from 'expo-router';
 import { Pressable, StyleSheet, View } from 'react-native';
 
 import { DayArc, MihrabArch } from '@/components/illustrations';
+import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
 import { Radius, Spacing } from '@/constants/theme';
+import { useLocale } from '@/hooks/use-locale';
 import { useLocation } from '@/hooks/use-location';
 import { usePrayerTimes } from '@/hooks/use-prayer-times';
 import { formatCountdown, formatTime, type PrayerTime } from '@/lib/prayer-times';
@@ -37,17 +38,16 @@ export type PrayerTimesCardProps = { action?: React.ReactNode };
  */
 function NeedsLocation({ status }: { status: 'denied' | 'unavailable' }) {
   const theme = useTheme();
+  const { t } = useLocale();
   const { request } = useLocation();
 
   return (
     <Shell>
       <ThemedText type="smallBold" style={styles.cardTitle}>
-        Prayer times need to know where you are
+        {t('times.needLocation')}
       </ThemedText>
       <ThemedText type="small" themeColor="textSecondary">
-        {status === 'denied'
-          ? 'The times are worked out from the position of the sun where you are standing. Your location is used on this device and never sent anywhere — there is no server to send it to.'
-          : 'Location services are turned off, so the times can’t be worked out. Turn them on in your phone’s settings and come back.'}
+        {status === 'denied' ? t('times.needLocation.why') : t('times.locationOff')}
       </ThemedText>
       {status === 'denied' && (
         <Pressable
@@ -57,7 +57,7 @@ function NeedsLocation({ status }: { status: 'denied' | 'unavailable' }) {
             { backgroundColor: theme.accent, opacity: pressed ? 0.85 : 1 },
           ]}>
           <ThemedText type="smallBold" themeColor="textOnAccent">
-            Use my location
+            {t('times.useLocation')}
           </ThemedText>
         </Pressable>
       )}
@@ -86,6 +86,7 @@ function TimeCell({ prayer, isNext }: { prayer: PrayerTime; isNext: boolean }) {
 
 export function PrayerTimesCard({ action }: PrayerTimesCardProps) {
   const theme = useTheme();
+  const { t } = useLocale();
   const { status, coords } = useLocation();
   const { today, next, profile, timezoneSuspect } = usePrayerTimes();
 
@@ -97,7 +98,7 @@ export function PrayerTimesCard({ action }: PrayerTimesCardProps) {
     return (
       <Shell>
         <ThemedText type="small" themeColor="textSecondary">
-          Working out today’s times…
+          {t('times.working')}
         </ThemedText>
       </Shell>
     );
@@ -112,7 +113,7 @@ export function PrayerTimesCard({ action }: PrayerTimesCardProps) {
 
       <View style={styles.next}>
         <ThemedText type="smallBold" themeColor="textSecondary" style={styles.nextLabel}>
-          {next.isTomorrow ? 'Next, tomorrow' : 'Next'}
+          {next.isTomorrow ? t('times.nextTomorrow') : t('times.next')}
         </ThemedText>
         <View style={styles.nextLine}>
           <ThemedText type="subtitle" style={styles.nextName}>
@@ -128,7 +129,7 @@ export function PrayerTimesCard({ action }: PrayerTimesCardProps) {
         */}
         <ThemedText type="small" themeColor="textSecondary">
           {next.id === 'fajr'
-            ? `${formatCountdown(next.msUntil)} · ends at sunrise, ${formatTime(today.sunrise)}`
+            ? `${formatCountdown(next.msUntil)} · ${t('times.endsAtSunrise')} ${formatTime(today.sunrise)}`
             : formatCountdown(next.msUntil)}
         </ThemedText>
       </View>
@@ -154,27 +155,23 @@ export function PrayerTimesCard({ action }: PrayerTimesCardProps) {
       {timezoneSuspect && (
         <View style={[styles.warning, { borderLeftColor: theme.accent }]}>
           <ThemedText type="small" themeColor="textSecondary">
-            Your phone’s clock is set a long way from where you seem to be. These times follow
-            the clock, so check your date and time settings if they look wrong.
+            {t('times.clockSuspect')}
           </ThemedText>
         </View>
       )}
 
       <View style={styles.footer}>
         <ThemedText type="small" themeColor="textSecondary" style={styles.method}>
-          {profile.label} · worked out on this phone
+          {profile.label} · {t('times.onThisPhone')}
         </ThemedText>
-        <Link href="/qibla" asChild>
-          <Pressable
-            style={({ pressed }) => [
-              styles.qibla,
-              { borderColor: theme.border, opacity: pressed ? 0.6 : 1 },
-            ]}>
-            <ThemedText type="smallBold" themeColor="accent">
-              Qibla
-            </ThemedText>
-          </Pressable>
-        </Link>
+        <PressableLink
+          href="/qibla"
+          style={[styles.qibla, { borderColor: theme.border }]}
+          pressedStyle={{ opacity: 0.6 }}>
+          <ThemedText type="smallBold" themeColor="accent">
+            {t('qibla.title')}
+          </ThemedText>
+        </PressableLink>
       </View>
     </Shell>
   );

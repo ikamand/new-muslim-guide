@@ -1,4 +1,5 @@
 import { Recitations } from './recitations';
+import { ref } from './model';
 import type { Guide } from './types';
 
 /**
@@ -24,6 +25,13 @@ export const GHUSL: Guide = {
   id: 'ghusl',
   title: 'Ghusl',
   subtitle: 'The full wash, and when you need it',
+  meta: {
+    category: 'purification',
+    difficulty: 'building',
+    estimatedMinutes: 4,
+    beginnerPriority: 2,
+    relatedContent: [ref('guide', 'wudu'), ref('guide', 'tayammum')],
+  },
   steps: [
     {
       id: 'when',

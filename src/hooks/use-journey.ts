@@ -1,7 +1,14 @@
 import { useMemo } from 'react';
 
 import { resolveRef, type CatalogEntry } from '@/content';
-import { JOURNEY, stepKey, type JourneyStep, type Stage, type StageId } from '@/content/journey';
+import {
+  entryStageIndex,
+  JOURNEY,
+  stepKey,
+  type JourneyStep,
+  type Stage,
+  type StageId,
+} from '@/content/journey';
 import { useLocale } from '@/hooks/use-locale';
 import { useSettings } from '@/hooks/use-settings';
 import { localiseCatalogEntry } from '@/i18n/localise';
@@ -21,21 +28,42 @@ export type ResolvedStage = {
   next: ResolvedStep | undefined;
 };
 
+export type JourneyState = {
+  stages: readonly ResolvedStage[];
+  done: number;
+  total: number;
+  /** The next thing to do. See the note on ordering below. */
+  next: ResolvedStep | undefined;
+  /** Which stage `next` sits in, 0-based. -1 once everything is done. */
+  nextStageIndex: number;
+  /** Nothing has been marked done yet — the journey has not been started. */
+  fresh: boolean;
+};
+
 /**
  * The journey with progress applied.
  *
  * Steps whose content does not resolve are dropped rather than shown as broken,
  * so the totals a reader sees always match the lessons they can actually open.
  * `content:audit` is where an unresolved step surfaces.
+ *
+ * ## What "next" means
+ *
+ * The first unfinished step at or after the reader's entry stage, and only then
+ * the first unfinished step anywhere. Onboarding decides the entry stage — see
+ * `entryStageIndex` — so someone who said they wanted help with prayer is
+ * offered the stage that gets them praying tonight rather than being marched
+ * back to "What is Islam?" every time they open the app.
+ *
+ * The earlier stages are not skipped, hidden or marked done. Once the reader
+ * finishes everything from their entry stage on, `next` falls back to whatever
+ * they passed over, and the count has always been over the whole journey.
+ *
+ * Home and the journey screen both read this, so the two cannot offer different
+ * "continue" lessons — which they would the moment either kept its own rule.
  */
-export function useJourney(): {
-  stages: readonly ResolvedStage[];
-  done: number;
-  total: number;
-  /** The next thing to do anywhere in the journey, earliest stage first. */
-  next: ResolvedStep | undefined;
-} {
-  const { completedLessons } = useSettings();
+export function useJourney(): JourneyState {
+  const { completedLessons, userStage, initialInterest } = useSettings();
   const { locale } = useLocale();
 
   return useMemo(() => {
@@ -71,11 +99,18 @@ export function useJourney(): {
     }
     const distinct = [...seen.values()];
 
+    const entry = entryStageIndex(userStage, initialInterest);
+    const fromEntry = stages.findIndex((stage, index) => index >= entry && stage.next);
+    const anywhere = stages.findIndex((stage) => stage.next);
+    const nextStageIndex = fromEntry === -1 ? anywhere : fromEntry;
+
     return {
       stages,
       done: distinct.filter((step) => step.done).length,
       total: distinct.length,
-      next: stages.flatMap((stage) => stage.steps).find((step) => !step.done),
+      next: nextStageIndex === -1 ? undefined : stages[nextStageIndex].next,
+      nextStageIndex,
+      fresh: distinct.every((step) => !step.done),
     };
-  }, [completedLessons, locale]);
+  }, [completedLessons, userStage, initialInterest, locale]);
 }

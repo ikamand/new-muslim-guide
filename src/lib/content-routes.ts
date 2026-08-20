@@ -1,6 +1,7 @@
 import type { Href } from 'expo-router';
 
 import type { CatalogEntry } from '@/content';
+import type { HelpScreen, HelpTopicId } from '@/content/help';
 
 /**
  * Where a catalogue entry opens.
@@ -28,4 +29,26 @@ export function routeFor(entry: CatalogEntry): Href {
     case 'phrase':
       return '/phrases';
   }
+}
+
+/**
+ * Where a help topic's screen entry opens.
+ *
+ * The topics in `src/content/help.ts` list screens by name rather than by
+ * route, for the same reason the catalogue does: that file has to load in node
+ * scripts, where a route means nothing.
+ */
+export function routeForHelpScreen(screen: HelpScreen): Href {
+  switch (screen) {
+    case 'duas':
+      return '/duas';
+    case 'phrases':
+      return '/phrases';
+    case 'practice':
+      return '/practice';
+  }
+}
+
+export function routeForHelpTopic(topic: HelpTopicId): Href {
+  return { pathname: '/help/[topic]', params: { topic } };
 }

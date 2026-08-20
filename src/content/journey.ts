@@ -22,6 +22,8 @@
  * they tapped "The Five Pillars" would be a small lie about where they are.
  */
 
+import type { InitialInterest, UserStage } from '@/lib/onboarding';
+
 import type { ContentRef } from './model';
 import { ref } from './model';
 
@@ -144,6 +146,43 @@ export const JOURNEY: readonly Stage[] = [
     ],
   },
 ];
+
+/**
+ * Where the journey opens for someone, given what onboarding heard.
+ *
+ * Not a gate and not a skip: every stage stays open, and nothing before the
+ * entry point is marked done or hidden. It only decides which stage the app
+ * *offers* first, because pointing someone who said "help me with prayer" at
+ * "What is Islam?" is answering a question they did not ask.
+ *
+ * Interest leads over stage, on the same reasoning as the recommendation
+ * tables: "prayer" is a narrower answer than "I just became Muslim".
+ */
+const ENTRY_BY_INTEREST: Record<InitialInterest, StageId> = {
+  // "Enough to pray tonight" — the stage, not the syllabus about it.
+  prayer: 'first-days',
+  basics: 'start-here',
+  'daily-life': 'living',
+  understanding: 'start-here',
+  unsure: 'start-here',
+};
+
+const ENTRY_BY_STAGE: Record<UserStage, StageId> = {
+  'new-muslim': 'first-days',
+  exploring: 'start-here',
+  returning: 'learning-to-pray',
+  helping: 'start-here',
+};
+
+/** Index into `JOURNEY`. Zero for anyone who skipped or answered nothing. */
+export function entryStageIndex(
+  stage: UserStage | null,
+  interest: InitialInterest | null,
+): number {
+  const id = (interest && ENTRY_BY_INTEREST[interest]) ?? (stage && ENTRY_BY_STAGE[stage]);
+  const found = id ? JOURNEY.findIndex((entry) => entry.id === id) : -1;
+  return found === -1 ? 0 : found;
+}
 
 /** A stable key for progress, unique across kinds. */
 export const stepKey = (entry: ContentRef): string => `${entry.kind}:${entry.id}`;

@@ -1,4 +1,4 @@
-import { note } from './model';
+import { note, ref } from './model';
 import { hadith } from './sources';
 import type { Guide } from './types';
 
@@ -20,6 +20,14 @@ export const TAYAMMUM: Guide = {
   id: 'tayammum',
   title: 'Tayammum',
   subtitle: 'When you cannot use water',
+  meta: {
+    category: 'purification',
+    difficulty: 'building',
+    estimatedMinutes: 3,
+    beginnerPriority: 3,
+    tags: ['travel', 'health'],
+    relatedContent: [ref('guide', 'wudu'), ref('guide', 'ghusl')],
+  },
   steps: [
     {
       id: 'when',

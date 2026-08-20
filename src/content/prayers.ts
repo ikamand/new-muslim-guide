@@ -1,3 +1,4 @@
+import { ref } from './model';
 import { Recitations } from './recitations';
 import type { Guide, Step } from './types';
 
@@ -188,6 +189,18 @@ function buildPrayer(spec: PrayerSpec): Guide {
     id: spec.id,
     title: spec.title,
     subtitle: `${spec.rakahs} rakʿah · ${spec.when}`,
+    // Derived like everything else here, so a sixth prayer added to
+    // PRAYER_SPECS is classified without anyone remembering to.
+    meta: {
+      category: 'salah',
+      difficulty: 'foundational',
+      // Doing time, not reading time: roughly a minute a rakʿah once the words
+      // are known, plus settling and the closing. Not a target.
+      estimatedMinutes: spec.rakahs + 2,
+      beginnerPriority: 1,
+      tags: ['first-day', 'arabic'],
+      relatedContent: [ref('guide', 'wudu'), ref('reference', 'al-fatihah')],
+    },
     steps,
   };
 }

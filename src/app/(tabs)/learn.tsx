@@ -1,10 +1,11 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { Link, type Href } from 'expo-router';
-import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { type Href } from 'expo-router';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { GirihBand, Glyph, type GlyphName } from '@/components/illustrations';
 import { JourneyProgress } from '@/components/journey-progress';
+import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
 import {
   DUAS,
@@ -53,43 +54,40 @@ function LearnCard({
   const { t } = useLocale();
 
   return (
-    <Link href={href} asChild>
-      <Pressable
-        style={({ pressed }) => [
-          styles.card,
-          {
-            backgroundColor: pressed ? theme.backgroundSelected : theme.backgroundElement,
-            borderColor: theme.border,
-          },
-        ]}>
-        {glyph && (
-          <View style={[styles.tile, { backgroundColor: theme.accentMuted }]}>
-            <Glyph name={glyph} color={theme.accent} />
-          </View>
-        )}
-        <View style={styles.cardText}>
-          <ThemedText type="smallBold" style={styles.cardTitle}>
-            {title}
-          </ThemedText>
-          <ThemedText type="small" themeColor="textSecondary">
-            {subtitle}
-          </ThemedText>
+    <PressableLink
+      href={href}
+      style={[
+        styles.card,
+        { backgroundColor: theme.backgroundElement, borderColor: theme.border },
+      ]}
+      pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
+      {glyph && (
+        <View style={[styles.tile, { backgroundColor: theme.accentMuted }]}>
+          <Glyph name={glyph} color={theme.accent} />
         </View>
-        {/*
-          The count used to be a bare accent number. "14" on its own tells you
-          nothing; a beginner cannot tell whether it means minutes, pages or
-          items they are expected to memorise.
-        */}
-        <View style={styles.count}>
-          <ThemedText type="smallBold" themeColor="accent">
-            {count}
-          </ThemedText>
-          <ThemedText type="small" themeColor="textSecondary" style={styles.unit}>
-            {t(unit)}
-          </ThemedText>
-        </View>
-      </Pressable>
-    </Link>
+      )}
+      <View style={styles.cardText}>
+        <ThemedText type="smallBold" style={styles.cardTitle}>
+          {title}
+        </ThemedText>
+        <ThemedText type="small" themeColor="textSecondary">
+          {subtitle}
+        </ThemedText>
+      </View>
+      {/*
+        The count used to be a bare accent number. "14" on its own tells you
+        nothing; a beginner cannot tell whether it means minutes, pages or
+        items they are expected to memorise.
+      */}
+      <View style={styles.count}>
+        <ThemedText type="smallBold" themeColor="accent">
+          {count}
+        </ThemedText>
+        <ThemedText type="small" themeColor="textSecondary" style={styles.unit}>
+          {t(unit)}
+        </ThemedText>
+      </View>
+    </PressableLink>
   );
 }
 
@@ -104,36 +102,33 @@ function ShahadaCard() {
   const { t } = useLocale();
 
   return (
-    <Link href={{ pathname: '/guide/[id]', params: { id: 'shahada' } }} asChild>
-      <Pressable
-        style={({ pressed }) => [
-          styles.featured,
-          {
-            backgroundColor: pressed ? theme.backgroundSelected : theme.backgroundElement,
-            borderColor: theme.border,
-          },
-        ]}>
-        <View style={[styles.band, { backgroundColor: theme.accentMuted }]}>
-          <GirihBand color={theme.accent} height={76} />
+    <PressableLink
+      href={{ pathname: '/guide/[id]', params: { id: 'shahada' } }}
+      style={[
+        styles.featured,
+        { backgroundColor: theme.backgroundElement, borderColor: theme.border },
+      ]}
+      pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
+      <View style={[styles.band, { backgroundColor: theme.accentMuted }]}>
+        <GirihBand color={theme.accent} height={76} />
+      </View>
+      <View style={styles.featuredBody}>
+        <View style={styles.cardText}>
+          <ThemedText type="smallBold" style={styles.cardTitle}>
+            {t('learn.shahada.title')}
+          </ThemedText>
+          <ThemedText type="small" themeColor="textSecondary">
+            {t('learn.shahada.subtitle')}
+          </ThemedText>
         </View>
-        <View style={styles.featuredBody}>
-          <View style={styles.cardText}>
-            <ThemedText type="smallBold" style={styles.cardTitle}>
-              {t('learn.shahada.title')}
-            </ThemedText>
-            <ThemedText type="small" themeColor="textSecondary">
-              {t('learn.shahada.subtitle')}
-            </ThemedText>
-          </View>
-          <View style={[styles.featuredAction, { backgroundColor: theme.accent }]}>
-            <ThemedText type="smallBold" themeColor="textOnAccent">
-              {SHAHADA_STEP_COUNT} {t('count.steps')}
-            </ThemedText>
-            <Ionicons name="arrow-forward" size={14} color={theme.textOnAccent} />
-          </View>
+        <View style={[styles.featuredAction, { backgroundColor: theme.accent }]}>
+          <ThemedText type="smallBold" themeColor="textOnAccent">
+            {SHAHADA_STEP_COUNT} {t('count.steps')}
+          </ThemedText>
+          <Ionicons name="arrow-forward" size={14} color={theme.textOnAccent} />
         </View>
-      </Pressable>
-    </Link>
+      </View>
+    </PressableLink>
   );
 }
 
@@ -152,33 +147,26 @@ function JourneyCard() {
   const { done, total } = useJourney();
 
   return (
-    <Link href="/journey" asChild>
-      <Pressable
-        accessibilityRole="link"
-        accessibilityLabel={`${t('journey.title')}. ${t('journey.progress')
-          .replace('{done}', String(done))
-          .replace('{total}', String(total))}`}
-        style={({ pressed }) => [
-          styles.journey,
-          {
-            backgroundColor: pressed ? theme.backgroundSelected : theme.accentMuted,
-            borderColor: theme.accent,
-          },
-        ]}>
-        <View style={styles.journeyText}>
-          <ThemedText type="smallBold" style={styles.cardTitle}>
-            {t('journey.title')}
-          </ThemedText>
-          <ThemedText type="small" themeColor="textSecondary">
-            {t('journey.intro')}
-          </ThemedText>
-          <View style={styles.journeyProgress}>
-            <JourneyProgress done={done} total={total} />
-          </View>
+    <PressableLink
+      href="/journey"
+      accessibilityLabel={`${t('journey.title')}. ${t('journey.progress')
+        .replace('{done}', String(done))
+        .replace('{total}', String(total))}`}
+      style={[styles.journey, { backgroundColor: theme.accentMuted, borderColor: theme.accent }]}
+      pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
+      <View style={styles.journeyText}>
+        <ThemedText type="smallBold" style={styles.cardTitle}>
+          {t('journey.title')}
+        </ThemedText>
+        <ThemedText type="small" themeColor="textSecondary">
+          {t('journey.intro')}
+        </ThemedText>
+        <View style={styles.journeyProgress}>
+          <JourneyProgress done={done} total={total} />
         </View>
-        <Ionicons name="arrow-forward" size={20} color={theme.accent} />
-      </Pressable>
-    </Link>
+      </View>
+      <Ionicons name="arrow-forward" size={20} color={theme.accent} />
+    </PressableLink>
   );
 }
 
@@ -206,28 +194,25 @@ function RecommendedSection() {
       </ThemedText>
       <View style={styles.list}>
         {recommended.map((entry) => (
-          <Link key={`${entry.kind}:${entry.id}`} href={routeFor(entry)} asChild>
-            <Pressable
-              accessibilityRole="link"
-              accessibilityLabel={`${entry.title}. ${entry.shortDescription}`}
-              style={({ pressed }) => [
-                styles.card,
-                {
-                  backgroundColor: pressed ? theme.backgroundSelected : theme.backgroundElement,
-                  borderColor: theme.border,
-                },
-              ]}>
-              <View style={styles.cardText}>
-                <ThemedText type="smallBold" style={styles.cardTitle}>
-                  {entry.title}
-                </ThemedText>
-                <ThemedText type="small" themeColor="textSecondary">
-                  {entry.shortDescription}
-                </ThemedText>
-              </View>
-              <Ionicons name="arrow-forward" size={18} color={theme.accent} />
-            </Pressable>
-          </Link>
+          <PressableLink
+            key={`${entry.kind}:${entry.id}`}
+            href={routeFor(entry)}
+            accessibilityLabel={`${entry.title}. ${entry.shortDescription}`}
+            style={[
+              styles.card,
+              { backgroundColor: theme.backgroundElement, borderColor: theme.border },
+            ]}
+            pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
+            <View style={styles.cardText}>
+              <ThemedText type="smallBold" style={styles.cardTitle}>
+                {entry.title}
+              </ThemedText>
+              <ThemedText type="small" themeColor="textSecondary">
+                {entry.shortDescription}
+              </ThemedText>
+            </View>
+            <Ionicons name="arrow-forward" size={18} color={theme.accent} />
+          </PressableLink>
         ))}
       </View>
     </View>

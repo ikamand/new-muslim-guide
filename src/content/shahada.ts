@@ -1,4 +1,5 @@
 import { Recitations } from './recitations';
+import { ref } from './model';
 import type { Guide } from './types';
 
 /**
@@ -21,6 +22,14 @@ export const SHAHADA_GUIDE: Guide = {
   id: 'shahada',
   title: 'Becoming Muslim',
   subtitle: 'What to say, and what it means',
+  meta: {
+    category: 'becoming-muslim',
+    difficulty: 'foundational',
+    estimatedMinutes: 3,
+    beginnerPriority: 1,
+    tags: ['first-day', 'arabic'],
+    relatedContent: [ref('reference', 'what-is-islam'), ref('guide', 'wudu')],
+  },
   steps: [
     {
       id: 'understand',

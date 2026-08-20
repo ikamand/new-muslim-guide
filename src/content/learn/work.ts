@@ -55,26 +55,23 @@ export const WORK: Reference = {
       id: 'job',
       heading: 'If your job touches something forbidden',
       body:
-        'Directly producing or selling what is prohibited is the clear case. What is less clear is indirect involvement — a supermarket cashier who occasionally scans wine, a delivery driver, an accountant at a bank. That distance is exactly what scholars weigh.',
+        'Directly producing or selling what is prohibited is the clear case — the Prophet ﷺ said the curse on wine falls on ten, its seller and the one who lives off its price among them. What is less clear is indirect involvement — a supermarket cashier who occasionally scans wine, a delivery driver, an accountant at a bank. That distance is exactly what scholars weigh.',
+      sources: [
+        hadith('tirmidhi', '1295', {
+          book: 14,
+          bookName: 'The Book on Business',
+          inBookReference: 'Book 14, Hadith 97',
+          grading: 'hasan',
+          gradedBy: 'Darussalam',
+        }),
+      ],
       notes: [
         note(
           'differs',
           'Scholars differ on how much distance from a prohibited thing is enough, so answers vary by how central it is to the job.',
           {
             additionalExplanation:
-              'The usual reasoning looks at whether the forbidden thing is the point of the work or incidental to it, and at what leaving would cost you. Someone whose whole income is from selling alcohol is in a different position from someone who occasionally rings it through a till. Scholars have discussed this in more detail; describe your actual job to someone qualified rather than deciding from a general rule.',
-            positions: [
-              {
-                school: 'the majority',
-                position:
-                  'Treat direct production or sale of a prohibited thing as impermissible, and judge incidental involvement by how central it is.',
-              },
-              {
-                school: 'contemporary scholarship',
-                position:
-                  'Weighs necessity and the availability of other work, particularly for someone who cannot simply leave.',
-              },
-            ],
+              'The usual reasoning looks at whether the forbidden thing is the point of the work or incidental to it, at how much of your income depends on it, and at what leaving would cost you. Someone whose whole income is from selling alcohol is in a different position from someone who occasionally rings it through a till, and someone who cannot simply leave is in a different position again. This note used to set out two positions and attribute one to the majority and one to contemporary scholarship, which stated a count nobody has taken — and the first of them was not a disagreement at all, since the clear case is agreed. Where scholars actually differ is on the line, and the line moves with the facts, which is why the answer here is to describe your actual job to someone qualified rather than to read a general rule off a page.',
           },
         ),
         note(

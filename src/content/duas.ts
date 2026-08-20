@@ -1,6 +1,6 @@
-import type { ContentMeta } from './model';
+import { note, type ContentMeta } from './model';
 import { Recitations } from './recitations';
-import { hadith } from './sources';
+import { hadith, scholarly } from './sources';
 import type { Recitation } from './types';
 
 /**
@@ -47,7 +47,40 @@ export const DUAS: Dua[] = [
     id: 'enter-toilet',
     when: 'Going into the bathroom',
     says: Recitations.duaEnterToilet,
-    note: 'Said before you step in, and step in with your left foot.',
+    note: 'Said before you step in.',
+    /**
+     * The left foot used to be part of the note above, phrased as though a
+     * narration said so. None does. It is a recommendation scholars draw from
+     * the general habit `Aisha describes — the right first for everything
+     * good — so it is stated here as what it is, with the two sources it
+     * actually has.
+     */
+    meta: {
+      category: 'daily-life',
+      difficulty: 'foundational',
+      estimatedMinutes: 1,
+      beginnerPriority: 2,
+      tags: ['etiquette'],
+      notes: [
+        note('practical', 'Scholars recommend stepping in with the left foot, and stepping out with the right.', {
+          sources: [
+            hadith('bukhari', '168', {
+              book: 4,
+              bookName: "Ablutions (Wudu')",
+              inBookReference: 'Book 4, Hadith 34',
+              role: 'practice',
+            }),
+            scholarly({
+              work: 'The Sunnah concerning entering and leaving the house, fatwa 289249',
+              author: 'IslamWeb',
+              url: 'https://www.islamweb.net/en/fatwa/289249/the-sunnah-concerning-entering-and-leaving-the-house',
+            }),
+          ],
+          additionalExplanation:
+            'There is no narration about the bathroom itself. What there is instead is `Aisha’s report that the Prophet ﷺ liked to start on the right in everything — his sandals, his hair, his wudu — and scholars read the bathroom as the one place that runs the other way. Khalil ibn Ishaq states it for the Maliki school, and IslamWeb, quoting him, says plainly that there is no specific evidence for it and that it rests on `Aisha’s general statement. Worth doing; not worth worrying about if you forget.',
+        }),
+      ],
+    },
   },
   {
     id: 'leave-toilet',

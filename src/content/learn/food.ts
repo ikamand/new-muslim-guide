@@ -1,5 +1,5 @@
 import { note, ref } from '../model';
-import { quran } from '../sources';
+import { quran, scholarly } from '../sources';
 import type { Reference } from '../types';
 
 /**
@@ -11,6 +11,13 @@ import type { Reference } from '../types';
  * both positions, because a convert meets it in their first week and will be
  * told opposite things by people who are each sincerely reporting what they
  * were taught.
+ *
+ * That note carries no `positions` rows on purpose. The four schools agree
+ * both that the meat of the People of the Book is lawful and that strangling
+ * or electrocution is not slaughter; what is disputed is whether a modern
+ * slaughterhouse meets the second, which is contemporary application rather
+ * than a split between schools. Rows would have had to invent an attribution
+ * for a difference that has none.
  *
  * ⚠️ The two positions in that note are attributed to `contemporary
  * scholarship` and `a minority`, and those labels are the weakest thing in
@@ -62,21 +69,21 @@ export const FOOD: Reference = {
           'differs',
           'Muslims in Western countries genuinely differ on supermarket meat, and you will be told opposite things with equal confidence.',
           {
-            sources: [quran(5, 5, { surahName: 'Al-Ma’idah' })],
-            additionalExplanation:
-              'Buying certified halal meat satisfies every position, which is why most converts start there and settle the question later. Nobody is doing anything strange by taking the cautious route while they learn, and nobody is being lax by relying on the verse. Scholars have discussed this in considerable detail; the specifics of stunning, mechanical slaughter and pronouncing the name are worth asking someone locally about rather than resolving from an article.',
-            positions: [
-              {
-                school: 'contemporary scholarship',
-                position:
-                  'Some hold that the verse permitting the food of the People of the Book still applies, so ordinary supermarket meat may be eaten.',
-              },
-              {
-                school: 'a minority',
-                position:
-                  'Others hold that industrial slaughter no longer resembles what the verse describes, and restrict meat to what is certified.',
-              },
+            sources: [
+              quran(5, 5, { surahName: 'Al-Ma’idah' }),
+              scholarly({
+                work: 'Rulings on eating meat of the People of the Book according to the madhhabs, fatwa 82899',
+                author: 'IslamWeb',
+                url: 'https://www.islamweb.net/en/fatwa/82899/rulings-on-eating-meat-of-people-of-the-book-according-madhabs',
+              }),
+              scholarly({
+                work: 'Permissibility of eating meat slaughtered by Christians and Jews, fatwa 103',
+                author: 'Islam Question & Answer',
+                url: 'https://islamqa.info/en/answers/103',
+              }),
             ],
+            additionalExplanation:
+              'The starting point is not in dispute. All four schools hold that meat slaughtered by Jews and Christians is lawful, and all four hold that an animal killed by strangling, electrocution or anything other than cutting the throat was not lawfully slaughtered at all. What people disagree about is whether a modern slaughterhouse still meets that second condition — stunning, mechanical blades and who is actually doing the slaughtering are all part of it. That makes it a question about how agreed rules apply today rather than a split between the schools, which is why this note names no school and counts nobody: some scholars hold the verse still covers ordinary supermarket meat, and others hold that industrial slaughter no longer resembles what it describes and restrict meat to what is certified. Buying certified halal meat satisfies every position, which is why most converts start there and settle the question later. Nobody is doing anything strange by taking the cautious route while they learn, and nobody is being lax by relying on the verse. The specifics are worth asking someone locally about rather than resolving from an article.',
           },
         ),
       ],

@@ -211,6 +211,13 @@ export const RAMADAN: Reference = {
                 bookName: 'Obligatory Charity Tax (Zakat)',
                 inBookReference: 'Book 24, Hadith 103',
               }),
+              // Named schools rather than "the majority" counting itself: this
+              // article states the three and the Hanafi position side by side.
+              scholarly({
+                work: 'Rulings of Zakat al-Fitr — I',
+                author: 'IslamWeb',
+                url: 'https://www.islamweb.net/en/ramadan/article/135768/rulings-of-zakat-al-fitr-i',
+              }),
             ],
             positions: [
               {
@@ -220,7 +227,7 @@ export const RAMADAN: Reference = {
               {
                 school: 'the majority',
                 position:
-                  'Hold that it is the staple food the narration names, given as food.',
+                  'Malik, ash-Shafi`i and Ahmad hold that it is the staple food the narration names, given as food rather than as its value.',
               },
             ],
             additionalExplanation:

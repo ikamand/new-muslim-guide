@@ -5,9 +5,9 @@ exactly they need to clear about it.
 
 This is not "the model wrote it, please check". Every Qur'an reference and every
 narration in the app has been opened, read, and matched against the sentence it
-sits under — 52 Qur'an references and now **96 distinct narrations**, listed in
+sits under — 52 Qur'an references and now **97 distinct narrations**, listed in
 full by `npm run content:audit`. Three citations did not say what they were
-being used to say and were corrected; eight factual errors have now been fixed.
+being used to say and were corrected; ten factual errors have now been fixed.
 What is left is what a script cannot settle: whether a ruling is right, whether
 a wording is the one a text should have, and whether an attribution to a school
 is true.
@@ -61,6 +61,34 @@ reasoning is in §1.5a, and it is short — every one of the three positions res
 on contested or indirect evidence, all three are valid, and swapping one
 contested position for another would churn the app's most-followed instruction
 for nothing a reader would gain.
+
+**Fourth pass — the attributions, 20 August 2026.** The vague attributions and
+the actionable Priority 2 items. Nothing in the worship path moved. What moved
+was the app's habit of counting scholars it had not counted: every remaining
+`the majority` / `a minority` pair that was not itself a list of named schools
+is gone, replaced either by the schools, from a source stating each school's
+position, or by nothing at all where the disagreement is not between schools.
+
+Two things this pass found that were **wrong**, not merely thin:
+
+1. **The intention note put an agreed point on one side of a disagreement.**
+   It gave "the intention is in the heart and does not need to be spoken" as
+   the majority view, against a minority who voice it. The imams agree the
+   intention's place is the heart — Ibn Taymiyyah says no one has reported a
+   difference on it. The open question is only whether *voicing* it is
+   recommended, and on that the app's labels were also the wrong way round:
+   scholars among the followers of Abu Hanifah, ash-Shafi`i **and** Ahmad held
+   it recommended. This is the same error the third pass fixed on the periods
+   page, in the other direction.
+2. **A sentence in `learn/sunnah.ts` cited a narration for four examples it
+   does not contain.** Bukhari 6018 is the neighbour, the guest, and the good
+   word or silence. The sentence listed greeting first, the right hand, words
+   before sleeping and smiling. The sentence was rewritten to the narrations,
+   rather than narrations found to fit the sentence.
+
+One item the pass **declined to settle**: whether `ahl` in Tirmidhi 3895 should
+read "family" or "wives". §2.9 carries what was found and why it is still a
+question for someone else.
 
 **How far the checking went — first pass.** Every Qur'an reference was fetched
 and read.
@@ -761,11 +789,75 @@ The app types an attribution rather than writing free text, so a position can be
   - **The prayer's raising note** used a single "the majority" row for
     everything that is not Hanafi. It now states the Maliki, Shafi`i and
     Hanbali positions separately, which are not the same as each other.
-- **Still outstanding**, and the original four remain the work: the supermarket
-  meat note, the face-covering note, the distance-from-a-prohibited-thing note,
-  and the intention-aloud note.
-- **Reviewer** Replace the remaining four with attributions that can be
-  sourced, or drop the counting and say only that scholars differ.
+- **FOURTH PASS — ALL FOUR ARE DONE, AND NONE BY SOFTENING A LABEL.** Either
+  the schools could be named from a source that states each school's position,
+  or the rows came out because the disagreement is not between schools.
+
+  | File | Was | Now |
+  |---|---|---|
+  | `learn/clothing.ts` | `the majority` need not cover / `a minority` must | four rows, one per school |
+  | `learn/before-prayer.ts` | `the majority` / `a minority` | `Hanafi` and `Maliki`, from Ibn Taymiyyah's account of the difference |
+  | `learn/food.ts` | `contemporary scholarship` / `a minority` | no rows — the split is not between schools |
+  | `learn/work.ts` | `the majority` / `contemporary scholarship` | no rows — the first was not a disagreement at all |
+
+- **Covering the face — the count was backwards, or at any rate unprovable in
+  the direction the app took it.** The app said the majority hold the face and
+  hands need not be covered. The Dorar Encyclopedia of Fiqh says the opposite
+  in as many words: covering the whole body including the face and hands in
+  front of men a woman could marry is "the opinion of the majority of scholars:
+  the Hanafi Madhab, the most predominant opinion of the Shafi'i Madhhab and
+  the most correct opinion of the Hanbali Madhab", with some of the Malikis.
+  Summaries written from inside the Hanafi and Maliki schools put it the other
+  way. When two reference works disagree about which side *is* the majority,
+  this app is not the place that settles it. The note now names the four
+  schools and counts nobody:
+
+  | | Position |
+  |---|---|
+  | Maliki | The face and hands are what ordinarily shows — covering them is not required in itself, but the school calls for it where there is real fear of harassment |
+  | Hanafi | The face is not itself among the parts that must be covered, but the position recorded in the school from early on is that it is covered, because of the harm of not doing so |
+  | Shafi`i | Two positions in the school; the more predominant is that the face is covered |
+  | Hanbali | The position the school takes as most correct is that the face and hands are covered |
+
+  **Sources** Dorar al-Saniyyah, Encyclopedia of Fiqh, "Parts of the Body We
+  Are Obliged to Cover" (dorar.net/en/feqhia/499) for the Shafi`i and Hanbali
+  rows and for the majority claim it makes · SeekersGuidance, "The Lawful
+  Nature of Niqab (Face Veiling)" for the Maliki and Hanafi rows ·
+  SeekersGuidance's Hanafi answer, "Is It Necessary for Women to Wear the
+  Niqab in the Hanafi School?", read from inside the school, for the Hanafi
+  row's two halves — the face is not `awrah, and covering it is still the
+  school's recorded position.
+- **The intention aloud — one row was not a position at all.** See the fourth
+  pass note at the top of this file. `Al-Fatawa al-Kubra` 1/214–215, via Islam
+  Question & Answer fatwa 13337, is now cited on the note, and it is the source
+  for both rows: scholars among the followers of Abu Hanifah, ash-Shafi`i and
+  Ahmad held voicing it recommended; scholars among the followers of Malik and
+  Ahmad held it is not, "because that is an innovation". The note's own
+  sentence — that nobody holds the prayer fails without it — was already right
+  and is untouched.
+- **Supermarket meat — the rows came out, because there is no split between
+  schools to put in them.** All four schools hold that meat slaughtered by Jews
+  and Christians is lawful, and all four hold that an animal killed by
+  strangling, electrocution or anything other than cutting the throat was not
+  lawfully slaughtered. What people actually disagree about is whether a modern
+  slaughterhouse meets the second condition. That is a question about applying
+  agreed rules, and both answers are held by contemporary scholars, so the note
+  now states both in prose and attributes neither to a body of opinion it
+  cannot count. **Sources** IslamWeb fatwa 82899, "Rulings on eating meat of
+  the People of the Book according to the madhhabs" · Islam Question & Answer
+  fatwa 103.
+- **Distance from a prohibited job — the first row was the agreed case.** "Treat
+  direct production or sale of a prohibited thing as impermissible" is not a
+  majority position held against a minority; it is the clear case, and the
+  section body already said so. It now carries **Jami` at-Tirmidhi 1295** (Book
+  14, Hadith 97, hasan — Darussalam), the curse on ten involved in wine, the
+  seller and the one who lives off its price among them. The rows are gone and
+  the reasoning — how central the forbidden thing is, how much of the income
+  depends on it, what leaving would cost — stays in the explanation, where it
+  was already stated and where it does not pretend to be a count.
+- **Reviewer** Confirm the four clothing rows, which are the substantial
+  change here, and confirm that Tirmidhi 1295 is right for the clear case and
+  is not being stretched to the delivery driver.
 
 ### 2.4 Zakat al-fitr in money or in food
 
@@ -776,6 +868,14 @@ The app types an attribution rather than writing free text, so a position can be
   the majority (the staple food the narration names).
 - **Source** Sahih al-Bukhari 1503 — one sa` of dates or barley, before the Eid
   prayer.
+- **FOURTH PASS — THE ATTRIBUTION IS NAMED.** "The majority" now names who:
+  "Malik, ash-Shafi`i and Ahmad hold that it is the staple food the narration
+  names, given as food rather than as its value." IslamWeb's "Rulings of Zakat
+  al-Fitr — I" states the two side by side — the classical Maliki, Shafi`i and
+  Hanbali positions discuss the payment only in foodstuffs, and the Hanafi
+  position permits the price — and it is now cited on the note. The row keeps
+  the `the majority` label because the label is a summary of a list the row
+  itself gives, which is how the travel and periods notes already work.
 - **Reviewer** Confirm the two attributions, and confirm the practical advice
   ("give it through whoever your mosque collects for, in the form they ask for").
 
@@ -855,20 +955,46 @@ four schools agree.**
 
 ### 2.8 "Step in with your left foot"
 
-- **File** `src/content/duas.ts`, `enter-toilet` note
-- **Source** None. It is the inverse of the general pattern in Sahih al-Bukhari
-  168 (starting from the right in wearing shoes, combing, purification and all
-  his affairs), not an explicit instruction.
-- **Reviewer** Keep, soften, or drop.
+**RESOLVED — softened and sourced. Kept, because it is a real recommendation;
+softened, because the app was stating it as though a narration said so.**
+
+- **File** `src/content/duas.ts`, `enter-toilet`
+- **Was** "Said before you step in, and step in with your left foot." One
+  sentence, no source, in the imperative.
+- **Now** The duʿa note is "Said before you step in." The foot is a separate
+  `practical` note: "Scholars recommend stepping in with the left foot, and
+  stepping out with the right", with its own explanation saying there is no
+  narration about the bathroom itself.
+- **Source** IslamWeb fatwa 289249 quotes the Maliki jurist **Khalil ibn
+  Ishaq** — "It is recommended to enter with the left foot and leave with the
+  right foot, unlike entering and leaving the mosque and house" — and then says
+  in its own voice: "There is no specific evidence for this; rather, it is based
+  on the general statement of `Aa'ishah", which is **Sahih al-Bukhari 168**,
+  already in the app. Both are cited on the note, the narration with
+  `role: 'practice'` because that is what it is doing here.
+- **Reviewer** Confirm that a named Maliki recommendation resting openly on a
+  general principle is the right standing to give this, rather than dropping it.
 
 ### 2.9 "The best of you is the best to his family"
 
 - **File** `src/content/learn/family.ts`, section `marriage`
 - **Source** Jami` at-Tirmidhi 3895 (sahih — Darussalam). The Arabic is
   `khayrukum khayrukum li-ahlihi`; Darussalam renders ahl as "wives", the app
-  renders it "families".
-- **Reviewer** Which rendering should stand? The app's is more literal and
-  broader; Darussalam's is narrower and is what the printed edition says.
+  renders it "family".
+- **FOURTH PASS — HALF OF THIS IS FIXED AND HALF IS STILL A QUESTION.** The app
+  said "the best of people are those best to their families". The narration
+  says *khayrukum* — the best **of you**, addressed to the listener — so the
+  sentence now reads "the best of you is the best to his family". That half was
+  a misquotation and is corrected.
+- **The half left open, with one thing added to it.** Tirmidhi files this
+  hadith under **باب فَضْلِ أَزْوَاجِ النَّبِيِّ — "The Virtue Of The Wives Of
+  The Prophet"** — which is evidence for Darussalam's narrower reading that was
+  not in front of the reviewer before. Against it: `ahl` is the broader word,
+  and the app uses the line in a section about a household rather than about
+  wives specifically. This is a translation judgement, so it stays here.
+- **Reviewer** Which rendering should stand, given the chapter heading? The
+  app's is more literal and broader; Darussalam's is narrower, is what the
+  printed edition says, and is what Tirmidhi's own chapter title points at.
 
 ### 2.10 Bukhari 6018 is doing more work than it can
 
@@ -878,20 +1004,36 @@ four schools agree.**
 - **Source** Sahih al-Bukhari 6018 — the neighbour, the guest, and saying
   something good or staying silent. It carries the section's thesis and none of
   the four examples.
-- **Status** Two of the four are cited elsewhere in the app (Bukhari 5376 for
-  the right hand, Bukhari 6324 for the words before sleeping). They were not
-  copied here, because adding citations to a sentence they only half-fit is how
-  a bibliography starts looking better than the content.
-- **Reviewer** Reword the examples to what is cited, or accept the looser fit.
+- **RESOLVED — the sentence was reworded to the narrations, not the other way
+  round.** The body now reads: "not harming a neighbour, making a guest
+  welcome, saying something good or staying quiet, eating with the right hand,
+  a few words before sleeping". The first three are Bukhari 6018 itself, read
+  on the page — it is filed under "Whosoever believes in Allah and the Last Day
+  should not harm his neighbor". The last two keep the citations the app
+  already carries for them: **Bukhari 5376** (Book 70, Hadith 4) for the right
+  hand, in `duas.ts`, and **Bukhari 6324** (Book 80, Hadith 21) for the words
+  before sleeping, in `recitations.ts`. All three are now on the section.
+- **What came out** "Greeting people first" and "smiling". Both are taught in
+  Islam and neither had a narration in this app, so they were removed rather
+  than given one this audit had not opened. The section is one example shorter
+  and every example in it is now cited.
+- **Reviewer** Confirm the reworded sentence still says what the section is
+  for — that much of the Sunnah is ordinary decency.
 
 ### 2.11 What a woman wears to a mosque
 
 - **File** `src/content/references.ts`, `MOSQUE`, section `before`
-- **Claim** "Women cover the hair, arms and legs."
-- **Source** None here. `learn/clothing.ts` holds the subject properly, with
-  Qur'an 24:31 and 33:59 and a `differs` note on the face and hands.
-- **Reviewer** Is a flat sentence right in a page about not being embarrassed,
-  given that the clothing lesson treats the same subject with more care?
+- **Was** "Women cover the hair, arms and legs." A flat rule with nothing
+  behind it, in a page about not being embarrassed.
+- **RESOLVED — it points at the lesson that holds the subject instead.** The
+  sentence is now "What a woman covers is no different here from anywhere else
+  in front of men outside the family, and the clothing guide sets it out with
+  the verses behind it", and `clothing` was added to the page's
+  `relatedContent`. No ruling was restated, none was softened, and the subject
+  now lives in one file — `learn/clothing.ts`, with Qur'an 24:31 and 33:59 and
+  the `differs` note rewritten at §2.3.
+- **Reviewer** Confirm that sending the reader to the lesson is right here,
+  rather than repeating a short version of it.
 
 ### 2.12 Every English translation of an Arabic text
 
@@ -1076,3 +1218,52 @@ time should not be spent re-deriving it.
   had no source for; the comment now says so and §1.10 carries it.
 - **No audio was added, replaced or re-pointed.** §3.7 is unchanged and remains
   a listening task nobody has done.
+
+
+---
+
+## What the fourth pass changed rather than queued
+
+| Where | Was | Now |
+|---|---|---|
+| `learn/before-prayer.ts` | "the majority" hold the intention is in the heart, against "a minority" who voice it | `Hanafi` and `Maliki` rows from Ibn Taymiyyah's account. The first row was not a position — the imams agree the intention's place is the heart; what differs is only whether voicing it is recommended, and on that the labels were also reversed |
+| `learn/clothing.ts` | "the majority" hold the face need not be covered, "a minority" hold it must | four rows, one per school, from Dorar and two SeekersGuidance answers. Dorar states the opposite count in as many words, so the app names schools and counts nobody |
+| `learn/food.ts` | `contemporary scholarship` against `a minority` on supermarket meat | no rows. All four schools agree the meat of the People of the Book is lawful and that strangling or electrocution is not slaughter; the disagreement is about whether a slaughterhouse meets the second condition, which is not a split between schools |
+| `learn/work.ts` | "the majority" treat direct sale of a prohibited thing as impermissible | that is the agreed clear case, not a majority view. The rows came out and the body gained **Tirmidhi 1295** (hasan — Darussalam), the curse on ten involved in wine |
+| `learn/ramadan.ts` | "the majority" hold zakat al-fitr is given as food | "Malik, ash-Shafi`i and Ahmad hold…", with IslamWeb's article stating the three against the Hanafi position |
+| `learn/sunnah.ts` | four examples under Bukhari 6018, which names none of them | the three the narration does name, plus the right hand and the words before sleeping with the citations the app already held. Greeting first and smiling came out rather than being given a narration nobody had opened |
+| `learn/family.ts` | "the best of people are those best to their families" | "the best of you is the best to his family". *Khayrukum* is addressed to the listener |
+| `references.ts` `MOSQUE` | "Women cover the hair, arms and legs", flat and unsourced | points at `learn/clothing.ts`, which holds the subject with its verses and its `differs` note, and `clothing` added to `relatedContent` |
+| `duas.ts` `enter-toilet` | "step in with your left foot", in the imperative, no source | a `practical` note saying scholars recommend it, with Khalil ibn Ishaq via IslamWeb 289249 and Bukhari 168 at `role: 'practice'`, and the explanation saying plainly that no narration is about the bathroom |
+
+Fifteen Spanish and fifteen French translations were **deleted** rather than
+retranslated, for the reason set in the first pass: the English they were keyed
+to had changed, and a stale translation of a corrected sentence is worse than
+the English fallback. They were the two clothing rows and their explanation, the
+two intention rows and their explanation, the two meat rows and their
+explanation, the two work rows, their explanation and the job paragraph, the
+`learn/sunnah.ts` sentence, and the marriage paragraph in `learn/family.ts`.
+Nothing was machine-translated to replace them.
+
+### What the fourth pass looked at and deliberately left alone
+
+- **Every other `the majority` in the app.** They survive because in each case
+  the row itself names the schools it is summarising — the periods note, the
+  travel note, the hand-placement note, the zakat al-fitr note as corrected
+  above. A label that summarises a list the reader can see is not the same
+  claim as a label standing on its own.
+- **`learn/islamic-calendar.ts`.** Its moon-sighting note still carries
+  `the majority` against `contemporary scholarship` and cites nothing. It was
+  not on §2.3's list of four and is not in Priority 2, so it stays as it is
+  and is recorded here as the one attribution of this kind left in the app.
+- **§2.1 travel, §2.2 sujud al-sahw, §2.5 bismillah in wudu, §2.6 Friday
+  ghusl.** All four were changed in earlier passes and their remaining
+  questions are judgement calls for a reviewer, not gaps a source can fill.
+  Nothing was touched.
+- **§2.12, the English of the recitations.** Untouched. It needs a reader, not
+  a search.
+- **No hadith grading was changed, no Arabic text was touched, and no audio was
+  added, replaced or re-pointed.**
+- **The taught path did not move anywhere.** No school's position was swapped
+  for another's, and nothing a reader is told to do changed except the
+  softening of the left foot at §2.8.

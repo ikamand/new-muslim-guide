@@ -51,12 +51,6 @@ export const ES: ContentDict = {
     "El Corán ordena a las mujeres creyentes guardar su modestia, llevar el velo sobre el pecho y cubrirse con sus mantos. Lo que se enseña habitualmente es ropa holgada que cubra el cuerpo, con la cabeza cubierta, ante hombres ajenos a la familia inmediata.",
   "Whether the face and hands must also be covered is a long-standing point of scholarly difference, not a settled question.":
     "Si el rostro y las manos deben cubrirse también es un punto de diferencia entre los sabios desde hace siglos, no una cuestión zanjada.",
-  "You will meet Muslims on both sides who are each following scholarship they trust. Scholars have discussed this in more detail than a beginner guide can carry, and the specific attributions are worth hearing from someone qualified rather than reading in a summary.":
-    "Encontrarás musulmanes en ambos lados, cada uno siguiendo a sabios en los que confía. Los sabios han tratado esto con más detalle del que cabe en una guía para principiantes, y conviene escuchar las atribuciones concretas de alguien cualificado en vez de leerlas en un resumen.",
-  "Hold that the face and hands need not be covered.":
-    "Sostienen que el rostro y las manos no tienen que cubrirse.",
-  "Hold that covering the face is required as well.":
-    "Sostienen que cubrir el rostro también es obligatorio.",
   "Nobody has the right to pressure you, and starting is often gradual. If covering would put you in danger or out you before you are ready, that is a real circumstance to discuss with someone knowledgeable rather than a rule you are breaking.":
     "Nadie tiene derecho a presionarte, y empezar suele ser gradual. Si cubrirte te pondría en peligro o te expondría antes de que estés preparada, eso es una circunstancia real que hablar con alguien con conocimiento, no una regla que estés incumpliendo.",
   "It starts with everyone":
@@ -97,8 +91,6 @@ export const ES: ContentDict = {
     "Hacerse musulmán no anula una familia. A veces se dice a los conversos que se distancien de sus parientes no musulmanes; no es lo que dice el texto.",
   "Marriage and your own household":
     "El matrimonio y tu propio hogar",
-  "The Qur’an describes marriage as a place of tranquillity, affection and mercy — that is the standard being aimed at. The Prophet ﷺ said the best of people are those best to their families, and he said it about himself first.":
-    "El Corán describe el matrimonio como un lugar de sosiego, afecto y misericordia — ese es el listón al que se apunta. El Profeta ﷺ dijo que los mejores son los mejores con su familia, y lo dijo de sí mismo primero.",
   "Who you may marry, and what a valid marriage requires, has real detail to it and depends on your circumstances. Scholars have discussed this in more detail — this is a question to take to someone locally rather than settle from a page.":
     "Con quién puedes casarte y qué requiere un matrimonio válido tiene detalle real y depende de tus circunstancias. Los sabios han tratado esto con más detalle — es una pregunta para llevar a alguien de tu zona, no para resolver desde una página.",
   "Parents come very high":
@@ -123,12 +115,6 @@ export const ES: ContentDict = {
     "El Corán permite expresamente la comida de la Gente del Libro — judíos y cristianos. Lo que los sabios contemporáneos discuten es si la carne de los mataderos industriales modernos en un país no musulmán entra en ese permiso, dado cómo se sacrifica a los animales y que no se pronuncia sobre ellos el nombre de Dios.",
   "Muslims in Western countries genuinely differ on supermarket meat, and you will be told opposite things with equal confidence.":
     "Los musulmanes en países occidentales difieren de verdad sobre la carne del supermercado, y te dirán cosas opuestas con la misma seguridad.",
-  "Buying certified halal meat satisfies every position, which is why most converts start there and settle the question later. Nobody is doing anything strange by taking the cautious route while they learn, and nobody is being lax by relying on the verse. Scholars have discussed this in considerable detail; the specifics of stunning, mechanical slaughter and pronouncing the name are worth asking someone locally about rather than resolving from an article.":
-    "Comprar carne con certificación halal satisface todas las posturas, y por eso la mayoría de los conversos empieza ahí y zanja la cuestión más adelante. Nadie hace nada raro por tomar la vía prudente mientras aprende, y nadie es laxo por apoyarse en el versículo. Los sabios han tratado esto con bastante detalle; lo concreto sobre el aturdimiento, el sacrificio mecánico y la pronunciación del nombre conviene preguntarlo a alguien de tu zona en vez de resolverlo con un artículo.",
-  "Some hold that the verse permitting the food of the People of the Book still applies, so ordinary supermarket meat may be eaten.":
-    "Algunos sostienen que el versículo que permite la comida de la Gente del Libro sigue vigente, de modo que puede comerse la carne corriente del supermercado.",
-  "Others hold that industrial slaughter no longer resembles what the verse describes, and restrict meat to what is certified.":
-    "Otros sostienen que el sacrificio industrial ya no se parece a lo que describe el versículo, y limitan la carne a la certificada.",
   "The short list":
     "La lista corta",
   "The Qur’an names what is forbidden: pork, blood, animals that died without being slaughtered, and anything dedicated to something other than God. Alcohol and other intoxicants are forbidden separately. That is the core of it — everything else on the shelf is fine.":
@@ -275,8 +261,6 @@ export const ES: ContentDict = {
     "Sahih al-Bujari y Sahih Muslim son las dos colecciones que los sabios sunníes consideran las más rigurosamente autentificadas. Otras colecciones contienen relatos fuertes y débiles, y por eso allí importa la clasificación y en estas dos no.",
   "What it looks like day to day":
     "Cómo se ve en el día a día",
-  "Much of it is small and human: greeting people first, eating with the right hand, saying a few words before sleeping, smiling. Following the Sunnah is not an extra layer of difficulty on top of the religion — a lot of it is simply how a decent person moves through a day.":
-    "Buena parte es pequeña y humana: saludar primero, comer con la mano derecha, decir unas palabras antes de dormir, sonreír. Seguir la Sunna no es una capa extra de dificultad sobre la religión — mucho de ello es sencillamente cómo una persona decente atraviesa un día.",
   "Sunnah means a way or a path — specifically the way the Prophet ﷺ lived: what he said, what he did, and what he approved of in others. It reaches us through hadith, which are reports of those things recorded with the chain of people who passed each one down.":
     "Sunna significa camino o vía — en concreto, el modo en que vivió el Profeta ﷺ: lo que dijo, lo que hizo y lo que aprobó en otros. Nos llega a través de los hadices, que son relatos de esas cosas registrados junto con la cadena de personas que los transmitieron.",
   "Why it sits beside the Qur’an":
@@ -319,16 +303,8 @@ export const ES: ContentDict = {
     "Amarlo y seguirlo no es lo mismo que adorarlo. La distinción importa a los musulmanes y conviene tenerla clara pronto.",
   "If your job touches something forbidden":
     "Si tu trabajo roza algo prohibido",
-  "Directly producing or selling what is prohibited is the clear case. What is less clear is indirect involvement — a supermarket cashier who occasionally scans wine, a delivery driver, an accountant at a bank. That distance is exactly what scholars weigh.":
-    "Producir o vender directamente lo prohibido es el caso claro. Menos claro es el trato indirecto — un cajero de supermercado que a veces pasa una botella de vino, un repartidor, un contable en un banco. Esa distancia es justo lo que sopesan los sabios.",
   "Scholars differ on how much distance from a prohibited thing is enough, so answers vary by how central it is to the job.":
     "Los sabios difieren sobre cuánta distancia de lo prohibido basta, así que las respuestas varían según lo central que sea en el trabajo.",
-  "The usual reasoning looks at whether the forbidden thing is the point of the work or incidental to it, and at what leaving would cost you. Someone whose whole income is from selling alcohol is in a different position from someone who occasionally rings it through a till. Scholars have discussed this in more detail; describe your actual job to someone qualified rather than deciding from a general rule.":
-    "El razonamiento habitual mira si lo prohibido es el objeto del trabajo o algo incidental, y qué te costaría dejarlo. Alguien cuyo ingreso entero viene de vender alcohol está en una posición distinta de quien a veces lo pasa por caja. Los sabios han tratado esto con más detalle; describe tu trabajo real a alguien cualificado en vez de decidir con una regla general.",
-  "Treat direct production or sale of a prohibited thing as impermissible, and judge incidental involvement by how central it is.":
-    "Consideran no permitido producir o vender directamente algo prohibido, y juzgan la implicación incidental por lo central que sea.",
-  "Weighs necessity and the availability of other work, particularly for someone who cannot simply leave.":
-    "Sopesa la necesidad y la disponibilidad de otro trabajo, sobre todo para quien no puede simplemente marcharse.",
   "Do not quit your job the week you become Muslim. Find out what your options are first.":
     "No dejes tu trabajo la semana en que te haces musulmán. Averigua primero qué opciones tienes.",
   "Interest":
@@ -485,12 +461,6 @@ export const ES: ContentDict = {
     "La intención es un pensamiento, no una frase: saber qué oración estás a punto de hacer. No se dice en voz alta y no hace falta una fórmula. Si estás de pie sobre una esterilla a punto de rezar el Magrib, ya la has intentado.",
   "Some people are taught to say the intention aloud. Scholars differ on whether that is recommended, and nobody holds that the prayer fails without it.":
     "A algunas personas se les enseña a decir la intención en voz alta. Los sabios difieren sobre si eso es recomendable, y ninguno sostiene que la oración falle sin ello.",
-  "The intention itself is agreed to be a condition of the prayer; what differs is only whether voicing it adds anything. If you were taught to say it, saying it harms nothing. Scholars have discussed this in more detail.":
-    "La intención misma se admite como condición de la oración; lo que difiere es solo si decirla en voz alta añade algo. Si te enseñaron a decirla, decirla no daña nada. Los sabios han tratado esto con más detalle.",
-  "Hold that the intention is in the heart and does not need to be spoken.":
-    "Sostienen que la intención está en el corazón y no hace falta decirla.",
-  "Consider saying it aloud a recommended way of settling the heart on it.":
-    "Consideran decirla en voz alta una manera recomendable de asentar el corazón en ella.",
   "How it is received":
     "Cómo se recibe",
   "The Prophet ﷺ described God as more pleased with a person’s repentance than someone would be who lost their camel in the desert and then found it. The image is not of a grudging pardon. It is relief and delight.":

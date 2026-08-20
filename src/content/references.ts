@@ -487,7 +487,7 @@ export const MOSQUE: Reference = {
     estimatedMinutes: 6,
     beginnerPriority: 2,
     tags: ['mosque', 'first-day', 'etiquette'],
-    relatedContent: [ref('guide', 'wudu'), ref('pillar', 'salah')],
+    relatedContent: [ref('guide', 'wudu'), ref('pillar', 'salah'), ref('reference', 'clothing')],
   },
   surface: 'learn',
   title: 'Your first time at a mosque',
@@ -514,8 +514,11 @@ export const MOSQUE: Reference = {
     {
       id: 'before',
       heading: 'Before you leave',
+      // "Women cover the hair, arms and legs" used to sit here as a flat rule
+      // with nothing behind it, next to a lesson that treats the same subject
+      // with its verses and its `differs` note. One subject, one place.
       body:
-        'Do your wudu at home if you can — it is one less thing to work out when you arrive. Wear clean clothes that cover you from the navel to the knees at minimum; loose trousers and a long top are entirely normal. Women cover the hair, arms and legs.',
+        'Do your wudu at home if you can — it is one less thing to work out when you arrive. Wear clean clothes that cover you from the navel to the knees at minimum; loose trousers and a long top are entirely normal. What a woman covers is no different here from anywhere else in front of men outside the family, and the clothing guide sets it out with the verses behind it.',
     },
     {
       id: 'arriving',

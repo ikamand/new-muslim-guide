@@ -68,7 +68,7 @@ export const FAMILY: Reference = {
       id: 'marriage',
       heading: 'Marriage and your own household',
       body:
-        'The Qur’an describes marriage as a place of tranquillity, affection and mercy — that is the standard being aimed at. The Prophet ﷺ said the best of people are those best to their families, and he said it about himself first.',
+        'The Qur’an describes marriage as a place of tranquillity, affection and mercy — that is the standard being aimed at. The Prophet ﷺ said the best of you is the best to his family, and he said it about himself first.',
       sources: [
         quran(30, 21, { surahName: 'Ar-Rum' }),
         hadith('tirmidhi', '3895', {

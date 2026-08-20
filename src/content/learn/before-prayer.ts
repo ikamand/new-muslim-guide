@@ -1,5 +1,5 @@
 import { note, ref } from '../model';
-import { hadith, quran } from '../sources';
+import { hadith, quran, scholarly } from '../sources';
 import type { Reference } from '../types';
 
 /** ⚠️ REVIEW REQUIRED — model-written English, checked citations. */
@@ -86,11 +86,26 @@ export const BEFORE_PRAYER: Reference = {
           'differs',
           'Some people are taught to say the intention aloud. Scholars differ on whether that is recommended, and nobody holds that the prayer fails without it.',
           {
+            sources: [
+              scholarly({
+                work: 'Al-Fatawa al-Kubra, 1/214-215',
+                author: 'Ibn Taymiyyah, via Islam Question & Answer, fatwa 13337',
+                url: 'https://islamqa.info/en/answers/13337/ruling-on-uttering-the-intention-niyyah-in-acts-of-worship',
+              }),
+            ],
             additionalExplanation:
-              'The intention itself is agreed to be a condition of the prayer; what differs is only whether voicing it adds anything. If you were taught to say it, saying it harms nothing. Scholars have discussed this in more detail.',
+              'Most of this is agreed and only one part of it is open. The imams agree that the place of the intention is the heart and that the prayer never asks you to speak it — so that is not one side of an argument. What they differ on is whether voicing it is recommended. Ibn Taymiyyah, who records both views, reports that scholars among the followers of Abu Hanifah, ash-Shafi`i and Ahmad held it recommended as a way of making the intention firmer, and that scholars among the followers of Malik and Ahmad held it is not, because neither the Prophet ﷺ nor his Companions did it; he takes the second view. This note used to give the first row as the majority and the second as a minority, which counted scholars nobody has counted and put an agreed point on one side of a disagreement. If you were taught to say it, saying it harms nothing.',
             positions: [
-              { school: 'the majority', position: 'Hold that the intention is in the heart and does not need to be spoken.' },
-              { school: 'a minority', position: 'Consider saying it aloud a recommended way of settling the heart on it.' },
+              {
+                school: 'Hanafi',
+                position:
+                  'Scholars of the school held that voicing the intention is recommended, as a way of making it firmer. The same view is found among Shafi`i and Hanbali scholars.',
+              },
+              {
+                school: 'Maliki',
+                position:
+                  'Scholars of the school held that voicing it is not recommended, since neither the Prophet ﷺ nor his Companions did it. The same view is found among Hanbali scholars.',
+              },
             ],
           },
         ),

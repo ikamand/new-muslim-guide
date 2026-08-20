@@ -5,14 +5,15 @@ import type { Reference } from '../types';
 /**
  * ⚠️ REVIEW REQUIRED — model-written English, checked citations.
  *
- * One citation is a looser fit than it looks. The last section lists four
- * examples — greeting first, eating with the right hand, words before sleeping,
- * smiling — and cites Bukhari 6018, which is the neighbour, the guest and
- * saying something good or staying quiet. It carries the section's thesis, that
- * much of the Sunnah is ordinary decency, and none of the four examples. Two of
- * them are sourced elsewhere in the app (Bukhari 5376 and Bukhari 6324); the
- * other two were left uncited rather than given a narration this audit had not
- * opened. Kept as it is, and named here, rather than quietly padded.
+ * The last section used to list four examples — greeting first, eating with
+ * the right hand, words before sleeping, smiling — under Bukhari 6018, which
+ * names none of them: it is the neighbour, the guest, and saying something
+ * good or staying quiet. The sentence was rewritten to the examples the
+ * narrations actually give, rather than the citations being padded to reach
+ * the sentence. Greeting first and smiling came out; the neighbour, the guest
+ * and the good word came in from 6018 itself, and the right hand and the words
+ * before sleeping keep the citations the app already carries for them
+ * elsewhere (Bukhari 5376 in `duas.ts`, Bukhari 6324 in `recitations.ts`).
  */
 export const SUNNAH: Reference = {
   id: 'sunnah',
@@ -56,12 +57,22 @@ export const SUNNAH: Reference = {
       id: 'everyday',
       heading: 'What it looks like day to day',
       body:
-        'Much of it is small and human: greeting people first, eating with the right hand, saying a few words before sleeping, smiling. Following the Sunnah is not an extra layer of difficulty on top of the religion — a lot of it is simply how a decent person moves through a day.',
+        'Much of it is small and human: not harming a neighbour, making a guest welcome, saying something good or staying quiet, eating with the right hand, a few words before sleeping. Following the Sunnah is not an extra layer of difficulty on top of the religion — a lot of it is simply how a decent person moves through a day.',
       sources: [
         hadith('bukhari', '6018', {
           book: 78,
           bookName: 'Good Manners and Form (Al-Adab)',
           inBookReference: 'Book 78, Hadith 49',
+        }),
+        hadith('bukhari', '5376', {
+          book: 70,
+          bookName: 'Food, Meals',
+          inBookReference: 'Book 70, Hadith 4',
+        }),
+        hadith('bukhari', '6324', {
+          book: 80,
+          bookName: 'Invocations',
+          inBookReference: 'Book 80, Hadith 21',
         }),
       ],
     },

@@ -1,6 +1,6 @@
 import { Recitations } from './recitations';
-import { ref } from './model';
-import { hadith } from './sources';
+import { note, ref } from './model';
+import { hadith, scholarly } from './sources';
 import type { Guide } from './types';
 
 /**
@@ -18,10 +18,20 @@ import type { Guide } from './types';
  * Abi Dawud 355, which the ghusl guide now holds with the school difference
  * beside it.
  *
- * ⚠️ REVIEW REQUIRED — that witnesses are not a condition of validity. It is
- * the settled position and it matters pastorally, but it is a negative: no
- * text makes witnesses a condition, and an app cannot cite the absence of one.
- * A qualified reader should confirm the sentence rather than the citation.
+ * ⚠️ THE WITNESS SENTENCE NOW CARRIES SOURCES, AND SPLITS TWO QUESTIONS.
+ *
+ * It said "no witnesses are needed for this to count, and no imam has to be
+ * present", with nothing behind it, because it is a negative and an app cannot
+ * cite the absence of a text. What it can cite is scholars answering the exact
+ * question, and two independent ones now sit on the step — Islam Question &
+ * Answer, and SeekersGuidance, which is a Hanafi-tradition answer rather than
+ * the same school twice. Both say the same thing: the testimony is valid said
+ * alone, and documentation is worth having without being a condition.
+ *
+ * The step now separates RELIGIOUS VALIDITY from ADMINISTRATIVE PROOF, because
+ * they are different questions with different answers and running them into
+ * one sentence is what made this the riskiest claim in the app. A reviewer is
+ * still being asked to confirm both halves.
  *
  * Deliberately short. Someone reading this is not looking for theology; they
  * are looking for what to do in the next ten minutes.
@@ -60,7 +70,46 @@ export const SHAHADA_GUIDE: Guide = {
       instruction:
         'Say it aloud, in Arabic if you can manage it. If the Arabic is beyond you today, say it in your own language and meaning it — then learn the Arabic, because you will say it in every prayer for the rest of your life.',
       says: Recitations.shahada,
-      note: 'No witnesses are needed for this to count, and no imam has to be present. Many people do say it in front of others, and a mosque can give you a certificate if you ever need to prove it — for a pilgrimage visa, or a Muslim marriage.',
+      note: 'You are Muslim from the moment you say it and mean it. Nobody has to be there, and no imam has to be present.',
+      // Thumamah ibn Uthal said it standing in the mosque with people around;
+      // that is not what makes it count, and the app does not cite him for
+      // that. The scholarly answers are what carry the negative — no text
+      // makes witnesses a condition, so the citation has to be to people whose
+      // job is to say what the texts require and do not require.
+      sources: [
+        scholarly({
+          work: 'Do You Need Witnesses to Take Shahadah?',
+          author: 'Islam Question & Answer, fatwa 49715',
+          url: 'https://islamqa.info/en/answers/49715',
+        }),
+        scholarly({
+          work: 'Does Taking Shahada Require Witnesses?',
+          author: 'Abdullah Anik Misra, SeekersGuidance',
+          url: 'https://seekersguidance.org/answers/calling-to-islam/does-taking-shahada-require-witnesses/',
+        }),
+      ],
+      notes: [
+        note(
+          'agreed',
+          'Getting it written down is a separate question, and worth doing when you can. A mosque or Islamic centre can record it and give you a certificate — not because your Islam needs one, but because other people\'s paperwork sometimes does.',
+          {
+            sources: [
+              scholarly({
+                work: 'Do You Need Witnesses to Take Shahadah?',
+                author: 'Islam Question & Answer, fatwa 49715',
+                url: 'https://islamqa.info/en/answers/49715',
+              }),
+              scholarly({
+                work: 'Does Taking Shahada Require Witnesses?',
+                author: 'Abdullah Anik Misra, SeekersGuidance',
+                url: 'https://seekersguidance.org/answers/calling-to-islam/does-taking-shahada-require-witnesses/',
+              }),
+            ],
+            additionalExplanation:
+              'These are two different things and the app keeps them apart on purpose. Whether you are Muslim is settled between you and Allah the moment you say it and mean it, and both answers cited here say so plainly — one of them in the words "Islam is a matter that is between a person and his Lord". Whether a registrar, a mosque, a Hajj visa office or a marriage contract will take your word for it later is a paperwork question with a paperwork answer. Historically witnesses were asked for in Muslim courts because inheritance and marriage law followed a person\'s religion, which is where the idea that they are required comes from. If you are not ready to walk into a mosque, that is fine — none of this expires, and the certificate is available whenever you want it.',
+          },
+        ),
+      ],
     },
     {
       id: 'after',

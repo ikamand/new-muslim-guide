@@ -1,17 +1,25 @@
 import { note, ref } from '../model';
-import { hadith } from '../sources';
+import { hadith, quran, scholarly } from '../sources';
 import type { Reference } from '../types';
 
 /**
  * ⚠️ REVIEW REQUIRED — model-written English, checked citations.
  *
- * The specific thing to look at: the first section lists four things that
- * break the prayer and cites none of them there. Two are evidenced further
- * down — speaking by Muslim 537a, and the doubt case by Bukhari 137 — but
- * "eating or drinking" and "turning away from the qibla" are stated flat, and
- * this is a list a beginner will act on directly. It is also the shortest
- * possible version of a subject with real detail behind it; whether that
- * shortness is a kindness or a half-teaching is a judgement for a reviewer.
+ * ⚠️ ONE FACTUAL CORRECTION LANDED HERE, and it was in the sentence this page
+ * exists for. The `speaking` section said that speaking by mistake means "you
+ * simply repeat the prayer". Sahih Muslim 537a says the opposite of that by
+ * omission: the Prophet ﷺ taught Mu`awiya ibn al-Hakam the rule and did not
+ * send him back to pray again, and that silence is the classical evidence that
+ * speech out of ignorance or forgetfulness does not invalidate. The app was
+ * citing the narration and then stating the reverse of what it establishes.
+ *
+ * ⚠️ THE LIST WAS ALSO WRONG-SHAPED. Four items, none cited where they were
+ * listed, one of them ("turning away from the qibla") stated flatly when
+ * Bukhari's own chapter heading on 403 is that someone who prays the wrong way
+ * by mistake does not repeat. Laughing out loud — which is agreed to
+ * invalidate, and which a beginner praying beside a friend will actually meet
+ * — was missing entirely. The list is now five, each sourced, and each carries
+ * the exception that makes it survivable.
  */
 export const WHAT_BREAKS_PRAYER: Reference = {
   id: 'what-breaks-prayer',
@@ -31,18 +39,129 @@ export const WHAT_BREAKS_PRAYER: Reference = {
       id: 'breaks',
       heading: 'What does break it',
       body:
-        'Losing your wudu. Speaking on purpose. Eating or drinking. Turning away from the qibla, or leaving the prayer entirely. If one of these happens, stop, put it right, and start the prayer again — that is the whole remedy.',
+        'Losing your wudu. Speaking on purpose to someone. Eating or drinking. Laughing out loud. Turning your body right away from the qibla, or deciding to stop. If one of these happens, put it right and pray it again from the beginning — but read the rest of this page first, because almost every one of them has an exception, and most of what a beginner worries about is on the other list.',
+      sources: [
+        hadith('bukhari', '135', {
+          book: 4,
+          bookName: "Ablutions (Wudu')",
+          inBookReference: 'Book 4, Hadith 1',
+        }),
+        hadith('muslim', '537a', {
+          book: 5,
+          bookName: 'The Book of Mosques and Places of Prayer',
+          inBookReference: 'Book 5, Hadith 39',
+        }),
+        quran(2, 144, { surahName: 'Al-Baqarah' }),
+        scholarly({
+          work: 'What Invalidates the Prayer?',
+          author: 'Islam Question & Answer, fatwa 87749',
+          url: 'https://islamqa.info/en/answers/87749/what-invalidates-the-prayer',
+        }),
+      ],
+      notes: [
+        note(
+          'agreed',
+          'Smiling is not laughing, and nobody has ever held that it breaks a prayer. What is meant is laughing aloud.',
+          {
+            sources: [
+              scholarly({
+                work: 'Smiling does not invalidate the prayer but boisterous laughing does',
+                author: 'IslamWeb, fatwa 298021',
+                url: 'https://www.islamweb.net/en/fatwa/298021/smiling-does-not-invalidate-the-prayer-but-boisterous-laughing-does',
+              }),
+            ],
+            additionalExplanation:
+              'Ibn al-Mundhir recorded the scholars as agreed that laughing aloud ends the prayer, and an-Nawawi and Ibn Qudamah both record that most of them held smiling does not. It is one of the few things on this page nobody argues about.',
+          },
+        ),
+      ],
     },
     {
       id: 'speaking',
       heading: 'Speaking',
       body:
-        'A companion spoke during the prayer without knowing he could not, and the Prophet ﷺ corrected him afterwards without anger — telling him this prayer is not the place for ordinary speech. Doing it by mistake, before you knew, is not a sin. You simply repeat the prayer.',
+        'A companion said "Allah have mercy on you" to a man who sneezed mid-prayer, not knowing he could not. Afterwards the Prophet ﷺ taught him — without scolding him, and by his own account better than anyone had ever taught him anything — that this prayer is not the place for ordinary speech. He was not told to pray it again. Deliberate speech ends the prayer; speech before you knew the rule, or in a moment of forgetfulness, does not.',
       sources: [
         hadith('muslim', '537a', {
           book: 5,
           bookName: 'The Book of Mosques and Places of Prayer',
           inBookReference: 'Book 5, Hadith 39',
+        }),
+        hadith('bukhari', '1200', {
+          book: 21,
+          bookName: 'Actions while Praying',
+          inBookReference: 'Book 21, Hadith 4',
+        }),
+      ],
+      notes: [
+        note(
+          'agreed',
+          'This was not always the rule. People used to speak to each other in prayer and were told to stop, which is why the narrations about it read the way they do.',
+          {
+            sources: [
+              hadith('bukhari', '1200', {
+                book: 21,
+                bookName: 'Actions while Praying',
+                inBookReference: 'Book 21, Hadith 4',
+              }),
+              hadith('muslim', '538a', {
+                book: 5,
+                bookName: 'The Book of Mosques and Places of Prayer',
+                inBookReference: 'Book 5, Hadith 41',
+              }),
+            ],
+            additionalExplanation:
+              'Zayd ibn Arqam: "we used to speak while praying, and one of us would tell his companion what he needed, until the verse was revealed and we were ordered to be silent." Ibn Mas`ud used to greet the Prophet ﷺ mid-prayer and be answered, and returned from Abyssinia to find that he was not — "there is occupation enough in the prayer".',
+          },
+        ),
+      ],
+    },
+    {
+      id: 'qibla',
+      heading: 'Facing the wrong way',
+      body:
+        'This one is narrower than it sounds. What ends the prayer is turning your whole body away from the qibla with no reason to. Getting the direction wrong — in a hotel room, on a plane, in a city you do not know — does not, as long as you worked it out as best you could. If you find out afterwards that you were off, the prayer stands.',
+      sources: [
+        quran(2, 144, { surahName: 'Al-Baqarah' }),
+        hadith('bukhari', '403', {
+          book: 8,
+          bookName: 'Prayers (Salat)',
+          inBookReference: 'Book 8, Hadith 55',
+        }),
+      ],
+      notes: [
+        note(
+          'agreed',
+          'A whole congregation once turned right around in the middle of Fajr, and their prayer counted.',
+          {
+            sources: [
+              hadith('bukhari', '403', {
+                book: 8,
+                bookName: 'Prayers (Salat)',
+                inBookReference: 'Book 8, Hadith 55',
+              }),
+            ],
+            additionalExplanation:
+              'The people of Quba were praying facing Jerusalem when someone arrived to say the direction had been changed to the Ka`bah that night — so they turned mid-prayer and carried on. Bukhari puts the narration under a chapter heading that includes those who held there is no need to repeat a prayer offered by mistake in the wrong direction.',
+          },
+        ),
+      ],
+    },
+    {
+      id: 'moving',
+      heading: 'Moving',
+      body:
+        'Scratching, shifting your weight, stepping forward to close a gap, picking up a child — none of this ends the prayer. What is meant by movement breaking it is a lot of it, continuously, for no reason connected to praying. The Prophet ﷺ prayed while carrying his granddaughter, putting her down to prostrate and picking her back up.',
+      sources: [
+        hadith('bukhari', '516', {
+          book: 8,
+          bookName: 'Prayers (Salat)',
+          inBookReference: 'Book 8, Hadith 163',
+        }),
+        scholarly({
+          work: 'What Invalidates the Prayer?',
+          author: 'Islam Question & Answer, fatwa 87749',
+          url: 'https://islamqa.info/en/answers/87749/what-invalidates-the-prayer',
         }),
       ],
     },

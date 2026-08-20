@@ -19,14 +19,24 @@ import type { ContentDict } from '../locales';
  * speaker's eye. It is proofreading rather than scholarly review: the claims
  * and their citations were settled in English.
  *
- * ⚠️ TWO ENTRIES WERE DELETED in the content audit, not retranslated. The
- * Ramadan lesson used to say the fast ends "at nightfall" and that zakat
- * al-fitr is "food or its value"; the first is late by roughly an hour and the
- * second states one school's position as the ruling. Both errors had been
- * carried faithfully into French. Removing the entries drops those two
- * sections back to the corrected English rather than replacing a wrong
- * translation with a fresh machine-written one — which is what the fallback is
- * for, and the only honest move without a French reader.
+ * ⚠️ FIVE ENTRIES HAVE NOW BEEN DELETED rather than retranslated, each time
+ * because the English they were keyed to turned out to be wrong.
+ *
+ * The first two, in the content audit: the Ramadan lesson said the fast ends
+ * "at nightfall" and that zakat al-fitr is "food or its value" — the first is
+ * late by roughly an hour, the second states one school's position as the
+ * ruling.
+ *
+ * Three more in the worship-content pass: the sentence saying speech in prayer
+ * by mistake means you repeat the prayer (Sahih Muslim 537a shows the opposite
+ * — Mu`awiya ibn al-Hakam was not sent back), the four-item list of what
+ * breaks the prayer, and the wudu paragraph in `before-prayer` that carried a
+ * three-item nullifier list the wudu guide now holds properly.
+ *
+ * Removing an entry drops that section back to the corrected English rather
+ * than replacing a wrong translation with a fresh machine-written one — which
+ * is what the fallback is for, and the only honest move without a French
+ * reader.
  *
  * Anything absent falls back to English, so partial delivery is safe to ship.
  */
@@ -449,12 +459,8 @@ export const FR: ContentDict = {
     "L’erreur la plus courante du débutant est de recommencer la prière. Presque rien ne l’exige, et recommencer transforme un petit écart en un long.",
   "Speaking":
     "Parler",
-  "A companion spoke during the prayer without knowing he could not, and the Prophet ﷺ corrected him afterwards without anger — telling him this prayer is not the place for ordinary speech. Doing it by mistake, before you knew, is not a sin. You simply repeat the prayer.":
-    "Un compagnon a parlé pendant la prière sans savoir qu’il ne pouvait pas, et le Prophète ﷺ l’a corrigé ensuite sans colère — en lui disant que cette prière n’est pas le lieu de la parole ordinaire. Le faire par erreur, avant de le savoir, n’est pas un péché. On refait simplement la prière.",
   "What does break it":
     "Ce qui la rompt",
-  "Losing your wudu. Speaking on purpose. Eating or drinking. Turning away from the qibla, or leaving the prayer entirely. If one of these happens, stop, put it right, and start the prayer again — that is the whole remedy.":
-    "Perdre son wudu. Parler exprès. Manger ou boire. Se détourner de la qibla, ou quitter la prière. Si cela arrive, arrêtez, remettez les choses en ordre et recommencez la prière — c’est tout le remède.",
   "What does not break it":
     "Ce qui ne la rompt pas",
   "Doubt does not. Someone asked the Prophet ﷺ about feeling as though they had passed wind mid-prayer, and he said not to leave the prayer unless they heard a sound or smelled something. Uncertainty is not enough. Carry on.":
@@ -477,8 +483,6 @@ export const FR: ContentDict = {
     "Les musulmans se tournent vers la Kaʿba à La Mecque, et le Coran donne cette consigne directement. L’écran Qibla de cette application indique la direction depuis l’endroit où vous êtes. Si vous ne pouvez pas la déterminer — en avion, dans un lieu inconnu — tournez-vous selon votre meilleure estimation et priez ; cela est accepté.",
   "You are in wudu":
     "Vous êtes en état de wudu",
-  "Wudu is the short wash before prayer. The Prophet ﷺ said the prayer of someone who has broken it is not accepted until they wash again. It lasts until something breaks it — using the toilet, passing wind, or deep sleep — so one wudu often covers several prayers.":
-    "Le wudu est la brève ablution avant la prière. Le Prophète ﷺ a dit que la prière de celui qui l’a rompu n’est pas acceptée avant qu’il ne se lave à nouveau. Il dure jusqu’à ce que quelque chose le rompe — aller aux toilettes, un gaz, un sommeil profond — de sorte qu’un seul wudu couvre souvent plusieurs prières.",
   "You intend it":
     "Vous en formez l’intention",
   "The intention is a thought, not a sentence: knowing which prayer you are about to pray. You do not say it out loud, and you do not need a formula. If you are standing on a mat about to pray Maghrib, you have already intended it.":

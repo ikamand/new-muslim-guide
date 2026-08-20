@@ -84,7 +84,12 @@ general('Ordinary description of what happens, claiming no textual authority.')
 `sunnah.com/bukhari:6324`. Both patterns were confirmed against the live sites,
 and every sunnah.com collection slug was verified by requesting it. Muwatta
 Malik has none: it is not addressable as `malik:<n>`, and a link that 404s is
-worse than no link. Set `url` explicitly to override.
+worse than no link. Set `url` explicitly to override — the worked example is
+Ibn `Umar's Eid ghusl in `ghusl.ts`, which carries
+`url: 'https://sunnah.com/malik/10'`, the book page that does resolve and does
+contain it. It has no grading either, because sunnah.com prints none on the
+Muwatta, and the audit reports it as ungraded rather than the file inventing
+one.
 
 ### Verify before you cite — this is not optional
 

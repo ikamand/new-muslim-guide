@@ -112,7 +112,11 @@ const line = ({ entry, source }) => {
   if (url) say(`      ${url}`);
 };
 
-say(`Narrations — ${narrations.length}`);
+// Uses and distinct narrations are different numbers and a reviewer wants the
+// second: the five generated prayers each carry the same method citations, so
+// one narration checked once can account for a dozen uses.
+const distinctNarrations = new Set(narrations.map(({ source }) => formatSource(source)));
+say(`Narrations — ${distinctNarrations.size} distinct, ${narrations.length} uses`);
 
 if (byVerdict.unusable.length) {
   say(`  ${byVerdict.unusable.length} FABRICATED. Never usable, for anything:`);

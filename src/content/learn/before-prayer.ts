@@ -28,12 +28,21 @@ export const BEFORE_PRAYER: Reference = {
       id: 'wudu',
       heading: 'You are in wudu',
       body:
-        'Wudu is the short wash before prayer. The Prophet ﷺ said the prayer of someone who has broken it is not accepted until they wash again. It lasts until something breaks it — using the toilet, passing wind, or deep sleep — so one wudu often covers several prayers.',
+        'Wudu is the short wash before prayer. The Prophet ﷺ said the prayer of someone who has broken it is not accepted until they wash again. One wudu covers several prayers — it lasts until something breaks it, and the wudu guide sets out what does and what only feels as though it does.',
+      // Deliberately no list here. This page used to name three things that
+      // break wudu, and the wudu guide named the same three; keeping one list
+      // in two files is how two files end up disagreeing. The guide holds it,
+      // including the two the schools handle differently.
       sources: [
         hadith('bukhari', '135', {
           book: 4,
           bookName: "Ablutions (Wudu')",
           inBookReference: 'Book 4, Hadith 1',
+        }),
+        hadith('bukhari', '214', {
+          book: 4,
+          bookName: "Ablutions (Wudu')",
+          inBookReference: 'Book 4, Hadith 80',
         }),
       ],
     },

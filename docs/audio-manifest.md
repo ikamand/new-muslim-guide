@@ -9,7 +9,7 @@ has an `audioId`.
 | File | Recitation | Part | Used in | Status | Source |
 |---|---|---|---|---|---|
 | `takbir.mp3` | The takbir | — | Prayer — Opening takbir; Prayer — Stand for the … rakʿah | Not recorded | To be commissioned |
-| `opening.mp3` | The opening supplication | — | Prayer — Opening supplication | Not recorded | To be commissioned |
+| `opening.mp3` | The opening supplication | — | Prayer — Fold your hands, and open | Not recorded | To be commissioned |
 | `taawwudh.mp3` | Seeking refuge | — | Prayer — Seek refuge | Not recorded | To be commissioned |
 | `fatiha-1.mp3` | Al-Fatiha | Ayah 1 | Prayer — Recite Al-Fatiha | Ready | Mahmoud Khalil Al-Husary — muʿallim (teaching) recitation |
 | `fatiha-2.mp3` | Al-Fatiha | Ayah 2 | Prayer — Recite Al-Fatiha | Ready | Mahmoud Khalil Al-Husary — muʿallim (teaching) recitation |

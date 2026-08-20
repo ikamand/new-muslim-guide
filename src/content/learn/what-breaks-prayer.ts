@@ -69,9 +69,16 @@ export const WHAT_BREAKS_PRAYER: Reference = {
                 author: 'IslamWeb, fatwa 298021',
                 url: 'https://www.islamweb.net/en/fatwa/298021/smiling-does-not-invalidate-the-prayer-but-boisterous-laughing-does',
               }),
+              // For the second half of the explanation — that three schools
+              // leave the wudu standing and one does not.
+              scholarly({
+                work: 'Encyclopedia of Fiqh — Nullifiers of Ablution',
+                author: 'Dorar al-Saniyyah',
+                url: 'https://dorar.net/en/feqhia/44',
+              }),
             ],
             additionalExplanation:
-              'Ibn al-Mundhir recorded the scholars as agreed that laughing aloud ends the prayer, and an-Nawawi and Ibn Qudamah both record that most of them held smiling does not. It is one of the few things on this page nobody argues about.',
+              'Ibn al-Mundhir recorded the scholars as agreed that laughing aloud ends the prayer, and an-Nawawi and Ibn Qudamah both record that most of them held smiling does not. It is one of the few things on this page nobody argues about. One thing they do differ on is what else it costs you: the Maliki, Shafi`i and Hanbali schools hold that laughing aloud ends the prayer but leaves your wudu intact, so you stand up and pray again. The Hanafi school holds that it ends the wudu too, so someone following that school washes first. If you are not sure which applies to you, washing again costs a minute.',
           },
         ),
       ],

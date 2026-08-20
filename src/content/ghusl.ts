@@ -1,6 +1,6 @@
 import { Recitations } from './recitations';
 import { note, ref } from './model';
-import { hadith, quran } from './sources';
+import { hadith, quran, scholarly } from './sources';
 import type { Guide } from './types';
 
 /**
@@ -40,6 +40,23 @@ import type { Guide } from './types';
  * method satisfies every school, so a first-timer following it is safe
  * whichever they later learn from. That is a deliberate choice and worth a
  * reviewer's attention.
+ *
+ * THE THREE RECOMMENDED WASHES WERE RE-AUDITED AND TWO NOTES CHANGED SHAPE.
+ *
+ *   - Friday was filed as a `differs` note weighing "the majority" against
+ *     "a minority". That was vaguer than the evidence needs: all four schools
+ *     hold the Friday ghusl a sunnah, so it is now an `agreed` note that says
+ *     so, and the obligatory reading is described as sitting outside them.
+ *     Vague labels where a real attribution exists were the complaint at
+ *     `docs/scholarly-review.md` §2.3, and this is one of them answered.
+ *   - Becoming Muslim gains the Hanafi position, which the last pass had found
+ *     and left out rather than assert. It also gains the more interesting
+ *     half: the recommended view is not merely the non-Hanbali one — a group
+ *     of Hanbalis report it from Ahmad, and al-Mardawi, whose job in that
+ *     school was to say where it settles, chose it.
+ *   - Eid is unchanged. It was resolved in the last pass and rests on Ibn
+ *     `Umar's practice in the Muwatta, with the weak marfu` narration kept,
+ *     labelled, and explicitly not what the recommendation stands on.
  *
  * Deliberately plain about what makes it necessary. This is a subject people
  * are too embarrassed to ask about, which is exactly why an app should say it.
@@ -178,25 +195,37 @@ export const GHUSL: Guide = {
                 gradedBy: 'Al-Albani',
                 role: 'practice',
               }),
+              // Where the school attributions below were read. It also states
+              // the thing this app most wants said on the subject: the wash is
+              // not a condition of anyone's conversion being valid.
+              scholarly({
+                work: 'Ruling on Ghusl for those embracing Islam',
+                author: 'IslamWeb, fatwa 11140',
+                url: 'https://www.islamweb.net/en/fatwa/11140/ruling-on-ghusl-for-those-embracing-islam',
+              }),
             ],
             positions: [
               {
                 school: 'Hanbali',
-                position: 'Hold the full wash obligatory on entering Islam.',
+                position: 'The well-known position of the school holds the full wash obligatory on entering Islam.',
               },
               {
                 school: 'Shafi`i',
                 position:
                   'Hold it recommended, unless something else — such as intimacy beforehand — had already made a ghusl due.',
               },
+              {
+                school: 'Hanafi',
+                position: 'Hold it recommended rather than owed.',
+              },
             ],
             additionalExplanation:
-              'Two reports carry it. Thumamah ibn Uthal, released from the pillar of the mosque, went to a nearby grove, washed, came back and said the shahada — Bukhari files that under a chapter headed "taking a bath on embracing Islam". And Qays ibn `Asim came intending to accept Islam and was told to wash. Scholars read the second differently: some as a command, some as guidance. Nobody holds that your Islam is incomplete without it, and nobody thinks less of you for doing it a week later than the day itself.',
+              'Two reports carry it. Thumamah ibn Uthal, released from the pillar of the mosque, went to a nearby grove, washed, came back and said the shahada — Bukhari files that under a chapter headed "taking a bath on embracing Islam". And Qays ibn `Asim came intending to accept Islam and was told to wash. Scholars read the second differently: some as a command, some as guidance. The recommended reading is the more common one, and it is not only held outside the Hanbali school — a group of Hanbalis report it from Ahmad himself, and al-Mardawi, whose job in that school was to say which position it settles on, chose it. What nobody holds is that your Islam is incomplete without it, and nobody thinks less of you for doing it a week later than the day itself.',
           },
         ),
         note(
-          'differs',
-          'The Friday wash is strongly encouraged rather than owed. The narration that settles it says a wudu on Friday is fine and good, and a ghusl is better.',
+          'agreed',
+          'The Friday wash is strongly encouraged rather than owed — all four schools treat it as a sunnah. The narration that settles it says a wudu on Friday is fine and good, and a ghusl is better.',
           {
             sources: [
               hadith('bukhari', '877', {
@@ -211,21 +240,14 @@ export const GHUSL: Guide = {
                 grading: 'hasan',
                 gradedBy: 'Darussalam',
               }),
-            ],
-            positions: [
-              {
-                school: 'the majority',
-                position:
-                  'Strongly recommended. Missing it does not invalidate the Friday prayer.',
-              },
-              {
-                school: 'a minority',
-                position:
-                  'Obligatory, reading the wording in Bukhari 877 — "anyone of you attending the Friday prayer should take a bath" — as a command.',
-              },
+              scholarly({
+                work: 'Encyclopedia of Fiqh — Proper Mannerisms on Friday',
+                author: 'Dorar al-Saniyyah',
+                url: 'https://dorar.net/en/feqhia/125',
+              }),
             ],
             additionalExplanation:
-              'Tirmidhi records ash-Shafi`i\'s own argument for the first reading: `Umar was addressing the congregation when `Uthman arrived having only done wudu, and `Umar reproached him without sending him back to wash. Neither of them treated it as a condition, and both knew the instruction.',
+              'This used to be filed here as a difference between "the majority" and "a minority", which was vaguer than the evidence needs. All four schools hold the Friday ghusl a sunnah; the obligatory reading of Bukhari 877 — "anyone of you attending the Friday prayer should take a bath" — is held outside them. Tirmidhi records ash-Shafi`i\'s own argument for the first reading: `Umar was addressing the congregation when `Uthman arrived having only done wudu, and `Umar reproached him without sending him back to wash. Neither of them treated it as a condition, and both knew the instruction. One practical point the schools also agree on: it only counts as the Friday wash if it is done before the prayer.',
           },
         ),
         note(

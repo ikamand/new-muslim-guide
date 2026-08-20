@@ -173,12 +173,8 @@ export const FR: ContentDict = {
     "Le neuvième mois du calendrier lunaire islamique, et le mois où la révélation du Coran a commencé. Comme le calendrier est lunaire, il avance d’environ onze jours chaque année — il traverse donc toutes les saisons au cours d’une vie.",
   "Who does not fast":
     "Qui ne jeûne pas",
-  "The Qur’an exempts anyone ill or travelling, who makes the days up later. In practice this also covers pregnancy, breastfeeding, menstruation, and conditions where fasting would cause harm. If you are on medication or managing an illness, ask a doctor and someone knowledgeable before your first Ramadan rather than during it.":
-    "Le Coran dispense toute personne malade ou en voyage, qui rattrape les jours plus tard. En pratique, cela couvre aussi la grossesse, l’allaitement, les règles et les situations où jeûner causerait un préjudice. Si vous prenez un traitement ou gérez une maladie, parlez-en à un médecin et à quelqu’un de compétent avant votre premier Ramadan, et non pendant.",
   "Not fasting when you are exempt is not a failure and not something to feel guilty about. The exemption is part of the instruction, not a loophole in it.":
     "Ne pas jeûner quand vous en êtes dispensé n’est pas un échec et n’a pas à vous culpabiliser. La dispense fait partie de la consigne, ce n’est pas une faille dedans.",
-  "The details of who makes days up, who feeds someone instead, and what happens with a long-term illness are worked out case by case. Scholars have discussed this in more detail — ask someone locally about your own situation.":
-    "Les détails — qui rattrape les jours, qui nourrit quelqu’un à la place, et ce qu’il advient en cas de maladie de longue durée — se règlent au cas par cas. Les savants ont traité cela plus en détail : posez la question à quelqu’un près de chez vous pour votre propre situation.",
   "Why":
     "Pourquoi",
   "The Qur’an gives the reason directly: so that you may become mindful of God. It is not endurance for its own sake, and it is not a diet. Being hungry at four in the afternoon is a reminder of who provides, and of people for whom that hunger is not a choice.":

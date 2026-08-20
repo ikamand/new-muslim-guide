@@ -173,12 +173,8 @@ export const ES: ContentDict = {
     "El noveno mes del calendario lunar islámico, y el mes en que empezó a revelarse el Corán. Como el calendario es lunar, se adelanta unos once días cada año — así que a lo largo de una vida pasa por todas las estaciones.",
   "Who does not fast":
     "Quién no ayuna",
-  "The Qur’an exempts anyone ill or travelling, who makes the days up later. In practice this also covers pregnancy, breastfeeding, menstruation, and conditions where fasting would cause harm. If you are on medication or managing an illness, ask a doctor and someone knowledgeable before your first Ramadan rather than during it.":
-    "El Corán exime a quien esté enfermo o de viaje, que recupera los días después. En la práctica esto cubre también el embarazo, la lactancia, la menstruación y las situaciones en que ayunar causaría daño. Si tomas medicación o llevas una enfermedad, pregunta a un médico y a alguien con conocimiento antes de tu primer Ramadán, no durante.",
   "Not fasting when you are exempt is not a failure and not something to feel guilty about. The exemption is part of the instruction, not a loophole in it.":
     "No ayunar cuando estás exento no es un fracaso ni algo por lo que sentirse culpable. La exención forma parte de la indicación, no es un resquicio en ella.",
-  "The details of who makes days up, who feeds someone instead, and what happens with a long-term illness are worked out case by case. Scholars have discussed this in more detail — ask someone locally about your own situation.":
-    "Los detalles de quién recupera días, quién alimenta a alguien en su lugar y qué ocurre con una enfermedad crónica se resuelven caso por caso. Los sabios han tratado esto con más detalle — pregunta a alguien de tu zona por tu propia situación.",
   "Why":
     "Por qué",
   "The Qur’an gives the reason directly: so that you may become mindful of God. It is not endurance for its own sake, and it is not a diet. Being hungry at four in the afternoon is a reminder of who provides, and of people for whom that hunger is not a choice.":

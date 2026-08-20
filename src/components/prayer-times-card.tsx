@@ -161,9 +161,23 @@ export function PrayerTimesCard({ action }: PrayerTimesCardProps) {
       )}
 
       <View style={styles.footer}>
-        <ThemedText type="small" themeColor="textSecondary" style={styles.method}>
-          {profile.label} · {t('times.onThisPhone')}
-        </ThemedText>
+        {/*
+          The method line names what these times are. The line under it names
+          what they are not: an authority. These are astronomical times for a
+          convention, and a mosque's printed timetable is a decision by people
+          — it may round, it may hold Isha back, it may follow a different
+          angle. Where the two disagree the mosque wins, and a beginner has no
+          way to know that unless the app says so on the screen showing the
+          times rather than in a lesson they may never open.
+        */}
+        <View style={styles.method}>
+          <ThemedText type="small" themeColor="textSecondary">
+            {profile.label} · {t('times.onThisPhone')}
+          </ThemedText>
+          <ThemedText type="small" themeColor="textSecondary">
+            {t('times.followLocal')}
+          </ThemedText>
+        </View>
         <PressableLink
           href="/qibla"
           style={[styles.qibla, { borderColor: theme.border }]}
@@ -253,6 +267,7 @@ const styles = StyleSheet.create({
   },
   method: {
     flex: 1,
+    gap: 2,
   },
   qibla: {
     paddingVertical: Spacing.two,

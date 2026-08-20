@@ -5,9 +5,9 @@ exactly they need to clear about it.
 
 This is not "the model wrote it, please check". Every Qur'an reference and every
 narration in the app has been opened, read, and matched against the sentence it
-sits under — 52 Qur'an references and now **90 distinct narrations**, listed in
+sits under — 52 Qur'an references and now **96 distinct narrations**, listed in
 full by `npm run content:audit`. Three citations did not say what they were
-being used to say and were corrected; four factual errors have now been fixed.
+being used to say and were corrected; eight factual errors have now been fixed.
 What is left is what a script cannot settle: whether a ruling is right, whether
 a wording is the one a text should have, and whether an attribution to a school
 is true.
@@ -21,6 +21,46 @@ Prophet ﷺ did not send that man back, and it told them a full wash was due
 after madhi when Sahih al-Bukhari 132 says wudu. Items 1.1 through 1.5, 1.8,
 2.6 and 2.7 below carry what changed; one item (2.7) is **resolved**, one new
 one (1.5a) was **opened**, and none was struck without an answer.
+
+**Third pass — the open questions, 20 August 2026.** The seven items the second
+pass could not settle were worked through: hand placement, the rest of the
+prayer method, the wudu nullifiers, ghusl, the shahada, what breaks the prayer,
+periods, the Ramadan exemptions, zakat, travel and the prayer-time regions.
+Six narrations were added, each opened on its collection page. Nine scholarly
+works and fatwas were added, because most of what was missing was not a
+narration but an **attribution** — the app was stating what schools hold and
+citing nothing for it, which is the same class of unsupported claim the whole
+of this document exists to stop.
+
+Four things this pass found and fixed that were **wrong**, not merely thin:
+
+1. **The app's own account of its hand placement was wrong.** §1.5a said the
+   chest rested on a single mursal report and was therefore contemporary rather
+   than classical. It missed that Wa`il ibn Hujr's report naming the chest is
+   musnad, that Ibn `Uthaymin — writing inside the school whose well-known
+   position is *below* the navel — calls it the best report on the question,
+   and that the narration usually quoted for below the navel is graded weak by
+   an-Nawawi and Ibn Hajar. The taught position has not changed. Its stated
+   basis has, because the stated basis was inaccurate.
+2. **The periods page called two agreed questions open.** It said scholars
+   differ on reciting Qur'an, touching a muṣḥaf and sitting in a prayer hall.
+   Only the first is genuinely open; the four schools agree on the other two.
+   Calling an agreement a disagreement is the more dangerous direction of the
+   two, because it invites someone to act on latitude that is not there.
+3. **The Ramadan lesson gave one school's answer as the ruling** on pregnancy
+   and breastfeeding, and never mentioned fidyah — so it had no answer at all
+   for a permanent condition, where "make the days up later" is not one.
+4. **Two prayer-time regions claimed places they should not.** Amman and
+   Jerusalem were being served Umm al-Qura, whose Isha is a fixed ninety
+   minutes after Maghrib rather than an angle; Baghdad was being served Tehran,
+   which does not treat Maghrib as sunset. Both are now unclaimed and fall
+   through to the Muslim World League default.
+
+One item the pass **declined to change**: the hands stay on the chest. The
+reasoning is in §1.5a, and it is short — every one of the three positions rests
+on contested or indirect evidence, all three are valid, and swapping one
+contested position for another would churn the app's most-followed instruction
+for nothing a reader would gain.
 
 **How far the checking went — first pass.** Every Qur'an reference was fetched
 and read.
@@ -78,10 +118,32 @@ Wrong answers here change how someone worships.
     to be considered a Muslim", with the historical note that witnesses were
     asked for in Muslim courts because inheritance and marriage law followed a
     person's religion.
-- **Reviewer** Both halves still want confirming, and the split itself is worth
-  a judgement: is separating religious validity from administrative proof the
-  right thing to put in front of someone in their first ten minutes, or does
-  mentioning paperwork at all plant a doubt?
+- **THIRD PASS — "SAY IT AND MEAN IT" WAS RE-EXAMINED AND KEPT, WITH TWO
+  SOURCES ADDED.** The question put to this pass was whether the sentence needs
+  qualifying for belief, sincerity, understanding or intention. It does, and it
+  already did — spread across the screen rather than gathered into a list of
+  conditions. What was missing was evidence for each piece:
+  - **Understanding** is the `understand` step, unchanged.
+  - **Sincerity** is that step's note — "saying the words to please someone
+    else, or to marry, does not make a person Muslim" — which now cites **Sahih
+    al-Bukhari 1** (Book 1, Hadith 1, opened and read). It is an unusually
+    close fit rather than a general appeal to intention: the narration's own
+    example is a man who emigrated "for a woman to marry", and it says his
+    emigration was for what he emigrated for.
+  - **Conviction** is "and mean it", which now cites **IslamWeb fatwa 11140**,
+    whose wording is that what suffices is the testimony plus "firm conviction,
+    free from any doubt, in what he declares".
+- **What was deliberately not done** The seven or nine "conditions of the
+  shahada" are a real and widely taught framework, and putting them on this
+  screen as a list would be a worse answer than the true one — a person about
+  to become Muslim would read a checklist as a test they might already have
+  failed. The conditions are carried; they are not enumerated.
+- **Reviewer** Three sources now say the same thing about witnesses, which is
+  as much as an app can do with a negative. Both halves still want confirming,
+  and the split itself is worth a judgement: is separating religious validity
+  from administrative proof the right thing to put in front of someone in their
+  first ten minutes, or does mentioning paperwork at all plant a doubt? And is
+  carrying the conditions implicitly, as above, the right call?
 
 ### 1.2 What makes ghusl obligatory
 
@@ -136,10 +198,29 @@ Wrong answers here change how someone worships.
   Uthal was released, went to a grove of date-palms, washed, came back into the
   mosque and said the shahada. That moves the practice out of the Sunan and
   into the Sahih, which matters for how much weight the recommendation carries.
-- **Reviewer** Unchanged question: are the two attributions correct as stated?
-  Sources consulted also place Malik with the obligatory view and Abu Hanifa
-  with the recommended one; those were left out rather than asserted. Should
-  they be in?
+- **THIRD PASS — THE HANAFI POSITION IS IN, THE MALIKI ONE IS STILL OUT.**
+  **IslamWeb fatwa 11140** states it directly: "The predominant opinion is that
+  it is merely recommended. This is the opinion of the Hanafi and Shaafi`i
+  scholars and has also been reported on the authority of Ahmad by a group of
+  Hanbali scholars. In addition, it is the opinion chosen by Al-Mardaawi
+  Al-Hanbali." Two things follow. The Hanafi row can now be stated with a
+  source behind it. And the recommended view is not simply the non-Hanbali one
+  — al-Mardawi, whose `Al-Insaf` exists precisely to say where the Hanbali
+  school settles, chose it, which makes the app's flat "Hanbali: obligatory"
+  row true of the well-known position but not of the whole school. The row now
+  says "the well-known position of the school".
+  The **Maliki** position was still not found stated in a source that names the
+  school, so it is still out rather than asserted.
+- **One sentence from the same fatwa is now doing work in two files**, because
+  it is the cleanest statement of it anywhere consulted: "It is sufficient for
+  he who embraces Islam to declare the Two Testimonies of Faith and to have
+  firm conviction, free from any doubt, in what he declares. Performing Ghusl
+  and praying two Rak`ahs after this verbal declaration of faith are not
+  conditions for the validity of his conversion to Islam." It is cited on the
+  ghusl note and on the shahada step — see 1.1.
+- **Reviewer** Are the three attributions correct as stated? And is the Maliki
+  position what the sources say — one summary consulted places Malik with the
+  obligatory view, which is why it is not in the app.
 
 ### 1.4 The wudu nullifiers
 
@@ -188,11 +269,31 @@ Wrong answers here change how someone worships.
   and which is the Hanbali position. It is real and it is authentic; it is also
   something the app's reader will almost never encounter, and every item added
   to this list costs attention that the two contested ones need more.
+- **THIRD PASS — THE TABLE NOW CARRIES ITS SOURCE, AND ONE THING WAS ADDED.**
+  - **The eight cells were checked against a work that states them**, the
+    Dorar Encyclopedia of Fiqh section on the nullifiers, which is now cited on
+    the note. Every cell held. The Hanafi row is confirmed there directly
+    ("touching a woman does not nullify ablution, even if it is with arousal —
+    this is the position of the Hanafis"), and the same page adds that a
+    narration from Ahmad agrees with it. Previously the table was
+    cross-checked but cited nothing, which is the exact shape of claim this
+    document exists to stop.
+  - **Losing consciousness was missing and is now in.** Fainting, an
+    anaesthetic, intoxication — all four schools agree these end wudu, and the
+    `agreed` note named only sleep. It is one clause rather than a new list
+    item because it is the same idea as sleep: you stopped being aware.
+  - **Two more deliberate omissions recorded**, alongside camel meat, so the
+    absence is a decision and not a gap: vomiting and bleeding from anywhere
+    other than the two passages (the Hanafi school counts a mouthful of vomit
+    and flowing blood; the Maliki, Shafi`i and — on one position — Hanbali
+    schools do not), and apostasy. The vomiting-and-bleeding one is the closest
+    call of the three, because a nosebleed is something a reader will actually
+    meet; it was left out to keep the contested list at two items.
 - **Reviewer** Are the eight cells of that table right? Is the `A'isha
   narration safe to cite there — Abu Dawud himself notes the chain is broken
   (Ibrahim at-Taymi did not hear from her) while Al-Albani grades it sahih, and
-  the app shows the grading without the caveat. And was leaving camel meat out
-  the right call?
+  the app shows the grading without the caveat. And were camel meat and the
+  bleeding/vomiting difference right to leave out?
 
 ### 1.5 The prayer method as a whole
 
@@ -233,37 +334,117 @@ Wrong answers here change how someone worships.
   over the left **forearm**. It names no place on the body. That is why the
   hand-placement note exists and why it lists five positions rather than
   asserting one.
-- **⚠️ THE ONE THING THIS PASS COULD NOT SETTLE — see 1.5a below.**
+- **THIRD PASS — THE METHOD IS NOW NAMED, AND ONE MOVEMENT WAS ADDED.**
+  - **It was never named, and that is most of why it looked like a composite.**
+    Taking each movement from the narration that describes it *is* a method: it
+    is the one set out in Al-Albani's `Sifat Salat an-Nabi ﷺ` and taught by Ibn
+    Baz and Ibn `Uthaymin. In form it is closest to the **Hanbali** school —
+    shoulders at the takbir, hands raised again at the bow and on rising, the
+    left foot slid across only in a prayer with two sittings — and it parts
+    from that school on where the folded hands rest. The file header now says
+    this in as many words.
+  - **The fourth raising of the hands was added.** The app followed three of
+    Ibn `Umar's four raisings and dropped the one on standing up from the first
+    sitting, which was arbitrary rather than a position: **Sahih al-Bukhari
+    739** (Book 10, Hadith 133, opened and read) carries it, Ibn `Umar traces
+    it to the Prophet ﷺ, and Bukhari gives it its own chapter — "To raise one's
+    hands after finishing the second Rak`a". It applies to the third rakʿah of
+    Dhuhr, `Asr, Maghrib and `Isha and to nothing else, because that is the
+    only rakʿah anyone stands up for out of a sitting.
+  - **The final-sitting note now names which school the app follows.** It
+    stated the Shafi`i and Hanbali positions correctly and then quietly took
+    the Hanbali one for Fajr without saying so. The difference is exactly Fajr:
+    the Shafi`i school slides the foot across in the final sitting of any
+    prayer, the Hanbali school only where there are two sittings.
+  - **The raising note gained the Maliki and Shafi`i positions** in place of a
+    single "the majority" row, and Bukhari 739 as a source.
+  - **One cross-file contradiction closed.** The prayer's `intention` step said
+    "You do not say it out loud" while `learn/before-prayer.ts` carried a
+    `differs` note saying scholars disagree about whether saying it aloud is
+    recommended. The step now says "you do not need to", which is true on both
+    views.
+  - **Everything else was read end to end and left alone** — the opening
+    takbir, the folding, Al-Fatiha and the added surah, the bow, the rising,
+    both prostrations, the sitting between them, both tashahhuds, the index
+    finger, the salawat, the taslim, stillness, and the rakʿah counts and
+    aloud/silent pattern of all five prayers. No contradiction or unsupported
+    claim was found in any of them.
+- **⚠️ THE HAND PLACEMENT — see 1.5a below, now answered.**
 - **Reviewer** Is anchoring the method to Abu Humayd's narration the right
-  editorial choice for an app with no madhhab? Is the resulting prayer one a
-  named school would recognise?
+  editorial choice for an app with no madhhab, and is naming it as above an
+  accurate description of what results? Is the resulting prayer one a named
+  school would recognise?
 
 ### 1.5a The hands on the chest
 
-**REVIEW REQUIRED — this is the one open decision in the prayer.**
+**CHANGED — SCHOLAR REVIEW STILL REQUIRED.** The decision this item asked for
+has been taken: the chest stays. What changed is the app's account of why,
+which was wrong.
 
 - **File** `src/content/prayers.ts`, step `opening`, `handPlacementNote`
-- **What the app teaches** "Rest your right hand over your left forearm, on
-  your chest."
-- **What backs it** **Sunan Abi Dawud 759**, graded **sahih by Al-Albani**:
-  Tawus said the Prophet ﷺ placed his right hand on his left and folded them on
-  his chest in prayer. It is what a great many people are taught today.
-- **The problem, stated plainly** Tawus is a Successor, so the report is
-  *mursal* — the companion is missing from the chain. And no classical school
-  places a man's hands on the chest: Hanafi and Hanbali say below the navel,
-  Shafi`i below the chest and above the navel, and the best-known Maliki
-  position is not to fold them at all in an obligatory prayer. The app is
-  therefore teaching, as its default, a position that is contemporary rather
-  than classical — while the `differs` note names all five, says so, and tells
-  the reader to follow whoever taught them.
-- **Reviewer, and this is the question** Should the default stay on the chest,
-  or move to a named school's position? Whichever way it goes it is a product
-  decision as much as a religious one, and it is Iyad's to take with an answer
-  in hand rather than the model's to take quietly.
+- **What the app teaches** Unchanged: "Rest your right hand over your left
+  forearm, on your chest."
+- **What this item said was wrong with that** That the chest rested on Sunan
+  Abi Dawud 759 alone — Tawus, a Successor, so *mursal* — and that no classical
+  school places a man's hands there, making the app's default contemporary
+  rather than classical.
+- **What was missed, and it changes the picture**
+  - The chest is not carried by the mursal report alone. **Wa'il ibn Hujr**'s
+    report naming the chest is *musnad* — a companion in the chain. Ibn
+    `Uthaymin calls it "the best report concerning this issue, even though
+    there is some debate concerning it".
+  - **Ibn `Uthaymin holds the chest to be the most correct view** — and he is
+    writing inside the Hanbali school, whose well-known position he states
+    plainly in the same passage as "placing the hands beneath the navel". A
+    scholar preferring the position against his own school's is a stronger
+    attribution than a contemporary consensus claim, and the app had neither.
+  - **The competing narration is weak.** The report from `Ali, "it is sunnah to
+    place the right hand over the left beneath the navel", is graded
+    **inauthentic by an-Nawawi and Ibn Hajar** (Ibn `Uthaymin, same passage),
+    and as-Sindi records the scholars as agreed on that.
+  - So **no position here rests on an agreed, authentic, explicit narration**.
+    That is why the schools differ, and it is the single most useful sentence
+    for a reader, which the note now carries.
+- **What remains true from the original objection** None of the four schools'
+  well-known positions puts a man's hands on the chest itself — *Badhl
+  al-Majhud* says the three positions are below the navel, above the navel and
+  below the chest, or at the sides. The note still says so.
+- **Why not change it anyway** All three positions are valid and nobody holds
+  the prayer fails over it, so the reader gains nothing from a move. Moving to
+  below the navel would make the whole method cleanly Hanbali, which was the
+  strongest argument for changing — but it would rest the default on the
+  narration graded weak rather than the one graded sound, and it would rewrite
+  the app's most-followed instruction and drop its translations, to swap one
+  contested position for another.
+- **What the app now says instead** The `positions` list no longer attributes
+  the chest to bare "contemporary scholarship, from the report of Tawus". It
+  names Ibn `Uthaymin, Ibn Baz and Al-Albani. The `additionalExplanation`
+  states the evidential position of all three views rather than only the app's
+  own.
+- **One name written and then struck** Ishaq ibn Rahawayh was going to be
+  named as a classical scholar reported to have prayed with his hands on or
+  just under the chest, which would have answered the "no classical holder"
+  objection directly. One source consulted lists him instead among those who
+  held *below the navel*. Two sources disagreeing about a man's position is
+  not an attribution, so he is not in the app. A reviewer who can settle it
+  would be adding the strongest single piece of support this position has.
+- **Sources added** `Ash-Sharh al-Mumti`` 3/36–37 (Ibn `Uthaymin), `Al-Mughni`
+  1/281 (Ibn Qudamah), `Badhl al-Majhud` (Khalil Ahmad as-Saharanpuri).
+- **⚠️ Read in quotation, not in the printed editions.** The first two were
+  read as quoted on Islam Question & Answer fatwa 59957, the third as quoted in
+  the SeekersGuidance answer linked on the source. That is recorded here rather
+  than hidden behind a citation that looks like a library visit, and it is the
+  one thing about this item a reviewer should not take on trust.
+- **Reviewer** Three questions. Is the reading of Ibn `Uthaymin's passage
+  right? Is Ishaq ibn Rahawayh correctly reported as praying with his hands on
+  or just below the chest — one source consulted lists him instead among those
+  who held *below the navel*, and the app has not been able to resolve which,
+  so a reviewer should either confirm him or strike him from the note. And is
+  keeping the chest the right editorial call for an app with no madhhab?
 
 ### 1.6 Periods — the whole topic, and one section in particular
 
-**REVIEW REQUIRED — untouched by the core-worship pass.**
+**CHANGED — SCHOLAR REVIEW STILL REQUIRED. One error corrected.**
 
 - **File** `src/content/references.ts`, `PERIODS`
 - **Claim** Prayers missed are not made up; fasts are. Ghusl when it ends.
@@ -276,14 +457,45 @@ Wrong answers here change how someone worships.
   sources** — it names a disagreement without describing either side. The
   section `irregular` (istihada) sends the reader to a knowledgeable person,
   which is right, but states the rule first.
+- **THIRD PASS — THE GAP IS CLOSED, AND CLOSING IT FOUND AN ERROR.**
+  - **The error.** Two of the three things `differences` called disagreements
+    are not. Per the **Dorar Encyclopedia of Fiqh**, section on menstruation:
+    touching the muṣḥaf is "haram for the menstruating woman… by agreement of
+    the four schools of jurisprudence", and remaining in the mosque is "not
+    permissible… by agreement of the four schools". Only reciting the Qur'an is
+    genuinely open. Presenting an agreement as an open question is worse than
+    the reverse here, because it invites someone to act on latitude that is not
+    there — on the most sensitive page in the app.
+  - **What it now says.** The body separates the one open question from the two
+    settled ones and says which is which. A `differs` note carries the actual
+    positions on reciting: permitted by the **Malikis**, al-Shafi`i's earlier
+    position and a narration from Ahmad, and chosen by **Ibn Taymiyyah, Ibn
+    al-Qayyim, Ibn `Uthaymin** and the Permanent Committee; the settled
+    positions of the **Hanafi, Shafi`i and Hanbali** schools hold back. The
+    note's explanation adds the two nuances that actually matter to a reader —
+    that the muṣḥaf agreement is about *touching* and that a barrier is treated
+    differently, and that the mosque agreement is about *remaining*, with the
+    Shafi`i and Hanbali schools permitting passing through.
+  - **`irregular` no longer stands alone.** It had no source at all. It now
+    carries **Sahih al-Bukhari 228** (Book 4, Hadith 94, opened and read) —
+    Fatima bint Abi Hubaysh asking "shall I give up my prayers?" and being told
+    "no, because it is from a blood vessel and not the menses". The same
+    narration supplied a practical detail the section was missing: "perform
+    ablution for every prayer", so the wudu is renewed each prayer rather than
+    lasting.
+  - **`after-birth` gained Sunan Abi Dawud 311**, the narration already used
+    for nifas in `ghusl.ts`, cited here where the claim is actually made.
+  - **The tone was left alone deliberately.** Plain, no euphemism, explicit
+    that this is a concession and not a punishment.
 - **Reviewer** This is the most sensitive content in the app and the only place
-  it tells someone to stop praying. Read it whole. Specifically: should
-  `differences` carry the actual positions, and is the istihada sentence safe
-  standing alone?
+  it tells someone to stop praying. Read it whole. Specifically: are the
+  agreement claims right, is the reciting note's list of positions fair to both
+  sides, and does the section now read as informative rather than restrictive
+  to the person it is written for?
 
 ### 1.7 The Ramadan exemptions
 
-**REVIEW REQUIRED — untouched by the core-worship pass.**
+**CHANGED — SCHOLAR REVIEW STILL REQUIRED. The gap named here was real.**
 
 - **File** `src/content/learn/ramadan.ts`, section `exempt`
 - **Claim** "The Qur'an exempts anyone ill or travelling, who makes the days up
@@ -296,8 +508,41 @@ Wrong answers here change how someone worships.
   days up later" and then, in a note, that the details are worked out case by
   case. The section is deliberately permissive — a first Ramadan is more often
   damaged by someone fasting who should not have.
-- **Reviewer** Is the permissive framing right, and does "makes the days up
-  later" mislead for the pregnancy and breastfeeding cases?
+- **THIRD PASS — YES, IT MISLED, AND THERE WAS A SECOND HOLE BESIDE IT.**
+  - **"Makes the days up later" is one school's answer stated as the ruling.**
+    The four schools give three different answers, and the Maliki one splits
+    pregnancy from breastfeeding. All four are now in a `differs` note:
+
+    | | Pregnant | Breastfeeding |
+    |---|---|---|
+    | Hanafi | make the days up | make the days up |
+    | Maliki | make the days up | make them up **and** feed a poor person a day |
+    | Shafi`i | fear for herself: make up · fear for the child alone: make up **and** feed | same |
+    | Hanbali | as Shafi`i | as Shafi`i |
+
+    A fifth position, older than all four, is in the note's explanation: **Ibn
+    `Abbas and Ibn `Umar** held that she feeds and does not make the days up.
+    **Ibn Baz, Ibn `Uthaymin and the Permanent Committee** held make-up only.
+  - **The second hole: the lesson had no word for fidyah anywhere in it.** It
+    cited Qur'an 2:185, which names illness and travel and the make-up, and
+    never 2:184, which is where feeding a poor person for each day comes from.
+    So the lesson had **no answer at all** for a chronic or permanent
+    condition, where "make the days up later" is not an answer — it is a debt
+    that will never be paid. 2:184 is now cited and the route is described.
+  - **Menstruation was quietly miscategorised** as something the exemption
+    "also covers in practice". It is not a permission that may be taken; a
+    woman does not fast and makes the days up. One clause, corrected.
+  - **The permissive framing is kept, and is the right bias for a first
+    Ramadan.** What changed is that it is now permissive with the differences
+    shown, rather than permissive by flattening them.
+  - **Sources** Qur'an 2:184 · Islam Question & Answer fatwa 49794, which
+    states the three classical positions with their holders · Islam21c's
+    summary, used only to corroborate the Maliki split, which fatwa 49794 does
+    not give.
+- **Reviewer** Are the four school rows right, and in particular is the Maliki
+  split between pregnancy and breastfeeding correctly stated? Is the fidyah
+  route described accurately enough for someone with a chronic condition to act
+  on, or should it say less and send them to a person sooner?
 
 ### 1.8 What breaks the prayer
 
@@ -334,33 +579,102 @@ Wrong answers here change how someone worships.
   for the shape of the list, which states the exceptions the app now carries
   ("if one speaks by mistake or out of ignorance of the ruling, the prayer is
   not invalidated"; "merely smiling does not invalidate the prayer").
+- **THIRD PASS — AUDITED ITEM BY ITEM, ONE THING ADDED.** Each of the five was
+  checked for whether it genuinely invalidates, whether it has an exception,
+  whether the remedy is really to repeat, and whether it differs by school.
+  Four came through unchanged. The fifth did not:
+  - **Laughing aloud costs more in one school than the page said.** The page
+    tells the reader to "put it right and pray it again from the beginning",
+    which for laughing means standing up and praying again on their existing
+    wudu. That is right for the **Maliki, Shafi`i and Hanbali** schools, which
+    hold that laughing aloud ends the prayer but leaves wudu intact. The
+    **Hanafi** school holds that it ends the wudu too, so someone following it
+    washes first. One sentence, in the note that already handles laughing,
+    sourced to the Dorar Encyclopedia of Fiqh.
 - **Reviewer** Is the five-item list right and sufficient for a beginner? Is
   "put it right and pray it again from the beginning" the right remedy for all
-  five? And is the app right to lean on two fatwa sites for the shape of a
-  list, where no single narration gives one?
+  five? Is the Hanafi wudu point stated correctly? And is the app right to lean
+  on two fatwa sites for the shape of a list, where no single narration gives
+  one?
 
 ### 1.9 The zakat threshold and the lunar year
 
-**REVIEW REQUIRED — untouched by the core-worship pass.**
+**RESEARCHED — SCHOLAR REVIEW STILL REQUIRED. The wording was confirmed and
+kept; the missing citations are now there.**
 
 - **File** `src/content/pillars.ts`, `zakat`
 - **Claim** "It applies only above a threshold, and only to wealth you have held
-  for a full lunar year."
-- **Source** Sahih al-Bukhari 8 for the pillar. Nothing for the nisab or the
-  hawl — both are real, both come from narrations this audit did not open.
-- **Reviewer** The record already sends the reader to someone local rather than
-  to a number, which may be enough. Confirm, or say what the sentence should be.
+  for a full lunar year." **Unchanged** — it was checked against the sources and
+  is accurate.
+- **Was** Sahih al-Bukhari 8 for the pillar. Nothing for the nisab or the hawl.
+- **Now** Both halves carry a narration, each opened and read:
+  - **Sahih al-Bukhari 1484** (Book 24, Hadith 84) — "there is no Zakat on less
+    than five Awsuq, or on less than five camels, or on less than five Awaq of
+    silver". Three kinds of wealth, three different thresholds, in one
+    sentence. That is also the argument for the record printing no number: the
+    threshold is not one figure.
+  - **Sunan Abi Dawud 1573** (Book 9, Hadith 18, **sahih** — Al-Albani) —
+    carries both halves: two hundred dirhams and twenty dinars as the
+    thresholds for silver and gold, and "no zakat is payable on property till a
+    year passes on it".
+- **One narration deliberately not used** **Jami` at-Tirmidhi 631** is the
+  better-known wording of the year rule — "whoever acquired wealth, there is no
+  Zakat on it until the Hawl has passed" — and Darussalam grades it **Da'if**.
+  A threshold is a ruling, so a weak narration cannot carry it, and
+  `assessEvidence` would have failed the audit if it had been used. Recorded
+  here because it is the citation anyone reaching for this would reach for
+  first.
+- **Reviewer** Confirm the two narrations support the sentence as written, and
+  confirm that naming no figure is right. The argument for naming none is that
+  the modern equivalent of a silver or gold measure moves with the market and
+  an app cannot keep it current; the argument against is that a beginner who
+  hears "a threshold" and cannot find out what it is may assume they owe
+  nothing.
 
 ### 1.10 Prayer time calculation by region
 
-**REVIEW REQUIRED — untouched by the core-worship pass.**
+**CHANGED — SCHOLAR REVIEW STILL REQUIRED. Two boxes claimed places they
+should not have.**
 
-- **File** `src/lib/prayer-times.ts`
+- **File** `src/lib/prayer-times.ts`, `src/components/prayer-times-card.tsx`
 - **Claim** A set of geographic boxes, each mapped to a calculation method.
-- **Source** Flagged in the file as model-written. Not content, but it decides
-  when the app tells someone to pray, which makes it a worship question.
-- **Reviewer** Are the regional defaults the ones the mosques in those regions
-  actually use, and is the Fajr/Isha angle right for high latitudes?
+- **What the audit checked** Every box was compared against the angles the
+  `adhan` library actually uses for the method it maps to, read out of
+  `node_modules/adhan/lib/cjs/CalculationMethod.js` rather than assumed.
+- **Two wrong mappings, both fixed by unclaiming rather than remapping**
+  - **The Levant sat inside the Saudi box**, so Amman and Jerusalem were served
+    **Umm al-Qura** — whose Isha is not an angle at all but a fixed **ninety
+    minutes after Maghrib**. That is a Saudi convention; nowhere in Jordan or
+    Palestine prints it. A Levant box now sits ahead of Saudi Arabia and routes
+    to the Muslim World League default (18°/17°). It costs the far north-west
+    corner of Saudi Arabia, which is close to empty.
+  - **Iraq sat inside the Iran box**, so Baghdad was served **Tehran** — Isha
+    at 14°, and, more consequentially, a Maghrib that is *not sunset*: Tehran
+    waits for the sun to reach 4.5° below the horizon. For a Sunni user that is
+    the wrong Maghrib, and in Ramadan the wrong iftar by roughly a quarter of
+    an hour. The Iran box now starts at 46°E, east of the Iraqi border, at the
+    cost of a strip of north-western Iran.
+- **One box left wrong on purpose, and flagged instead** The Karachi box runs
+  from 5°N and applies the **Hanafi ʿAsr** to all of it. That is right for
+  Pakistan, north India, Bangladesh and Afghanistan and wrong for **Kerala,
+  Tamil Nadu, Sri Lanka and the Maldives**, which are largely Shafi`i — ʿAsr
+  there runs about an hour later than their mosques print. Narrowing the box is
+  a mapping decision this audit has no source for, so the comment now says what
+  is true and this item carries it.
+- **High latitudes: defensible.** `HighLatitudeRule.recommended` is the
+  library's own recommendation and resolves to *seventh of the night* above 48°
+  and *middle of the night* below it, with `PolarCircleResolution.AqrabBalad`
+  above the polar circle. That is a standard configuration, not an invention.
+- **The change that matters more than either box** The times card now carries a
+  second line under the method name: *"If your mosque's timetable differs,
+  follow the mosque."* The app was presenting computed times with no indication
+  that a mosque timetable outranks them, which is a worship-correctness problem
+  independent of whether any given box is right. `learn/before-prayer.ts` gains
+  the same point as content, with the explanation of *why* they differ.
+- **Reviewer** Are the remaining regional defaults the ones the mosques in
+  those regions actually use? Is Muslim World League the right fallback for the
+  Levant and Iraq, or is there a better-attested convention for either? And is
+  the Karachi box's southern reach worth fixing?
 
 ---
 
@@ -370,14 +684,41 @@ Real questions, but a wrong answer here misinforms rather than invalidates.
 
 ### 2.1 The distance that counts as a journey
 
+**CHANGED — SCHOLAR REVIEW STILL REQUIRED.**
+
 - **File** `src/content/references.ts`, `TRAVELLING`, section `howfar`
-- **Claim** "scholars put the line at roughly eighty kilometres, and differ on
-  it and on how long you may keep shortening once you arrive"
-- **Source** Deliberately none. No verse or narration gives a distance; the
-  figure descends from the classical four burud, which the schools convert
-  differently. A `differs` note now says so on the page.
-- **Reviewer** Is eighty kilometres the right number to put in front of a
-  beginner, or is naming any number worse than naming none?
+- **Was** "scholars put the line at roughly eighty kilometres, and differ on it
+  and on how long you may keep shortening once you arrive", with a `differs`
+  note carrying no positions and no source.
+- **The problem** Naming a single number made a scholarly conversion look like
+  a reported figure, and the note that said otherwise was one line below it
+  with nothing behind it.
+- **Now** The body says there is no distance in the Qur'an or any narration,
+  that scholars have therefore drawn the line themselves and draw it in
+  different places, and gives a range — "somewhere around eighty to ninety
+  kilometres" — rather than a figure. The `differs` note carries the positions:
+
+  | | Where the line falls |
+  |---|---|
+  | Maliki, Shafi`i, Hanbali | four burud ≈ 88 km |
+  | Hanafi | a journey of about three days, which the school gives as 48 miles ≈ 77 km |
+  | Ibn Taymiyyah, Ibn al-Qayyim, Ibn `Uthaymin | no fixed distance — anything ordinarily called travelling |
+
+  The explanation adds what a barid is, why conversions land on slightly
+  different numbers, and the second difference the old sentence gestured at
+  without answering: how long you keep shortening after arriving — four days
+  (Maliki, Shafi`i), fifteen (Hanafi), or no limit while you have not settled.
+- **One thing added that is agreed and practical** You start shortening once
+  you have actually left the place you live, not when you decide to go. All
+  four schools agree, and it now carries **Sahih al-Bukhari 1089** (Book 18,
+  Hadith 10, opened and read) — Anas praying Dhuhr as four in Madinah and two
+  at Dhul-Hulayfa, which Bukhari files under exactly that chapter heading.
+- **Sources** Dorar Encyclopedia of Fiqh, "How Travellers Pray", for the
+  majority and no-fixed-distance positions · SeekersGuidance's Hanafi answer
+  for the Hanafi figures, read from a Hanafi source rather than a summary of
+  one, which is the rule for a school attribution.
+- **Reviewer** Is a range better than a number here, or is naming any figure
+  worse than naming none? And are the three rows right?
 
 ### 2.2 Sujud al-sahw before or after the taslim
 
@@ -405,8 +746,26 @@ The app types an attribution rather than writing free text, so a position can be
   view, and nothing in the app establishes any of them. The labels were chosen
   to avoid naming a madhhab without a source, which was the right instinct, but
   they are not free of claim.
-- **Reviewer** Replace with attributions that can be sourced, or drop the
-  counting and say only that scholars differ.
+- **THIRD PASS — TWO OF THESE ARE NOW ANSWERED, AND ONE MORE THAT WAS NOT ON
+  THE LIST.** The fix in each case was to find a work that states the position,
+  not to soften the label:
+  - **Ghusl before Friday prayer** (2.6) weighed "the majority" against "a
+    minority". The Dorar Encyclopedia of Fiqh states it flatly: the Friday
+    ghusl is a sunnah "by agreement of the four schools of jurisprudence". So
+    it is not a difference between two bodies of opinion at all — it is agreed
+    among the four, with the obligatory reading held outside them. It has been
+    reclassified from `differs` to `agreed` and says so.
+  - **The travel distance** (2.1) had a `differs` note with no positions. It
+    now names Maliki, Shafi`i, Hanbali, Hanafi and three contemporary scholars,
+    each from a source.
+  - **The prayer's raising note** used a single "the majority" row for
+    everything that is not Hanafi. It now states the Maliki, Shafi`i and
+    Hanbali positions separately, which are not the same as each other.
+- **Still outstanding**, and the original four remain the work: the supermarket
+  meat note, the face-covering note, the distance-from-a-prohibited-thing note,
+  and the intention-aloud note.
+- **Reviewer** Replace the remaining four with attributions that can be
+  sourced, or drop the counting and say only that scholars differ.
 
 ### 2.4 Zakat al-fitr in money or in food
 
@@ -432,7 +791,8 @@ The app types an attribution rather than writing free text, so a position can be
 
 ### 2.6 Ghusl before Friday prayer
 
-**RESEARCHED — SCHOLAR REVIEW STILL REQUIRED.**
+**CHANGED — SCHOLAR REVIEW STILL REQUIRED. It is not a `differs` note; the
+four schools agree.**
 
 - **File** `src/content/ghusl.ts`, step `when`, third `differs` note
 - **Was** A flat "recommended — not required — before Friday prayer", resting
@@ -449,9 +809,19 @@ The app types an attribution rather than writing free text, so a position can be
   obligation — because `Umar was addressing the congregation when `Uthman
   arrived having done only wudu, reproached him, and did not send him back to
   wash. The app's `additionalExplanation` now carries that story.
-- **Reviewer** Confirm the reading, and confirm whether `the majority` /
-  `a minority` are the right labels here or whether the four schools should be
-  named — see 2.3, which is the same problem.
+- **THIRD PASS — THE LABELS WERE THE PROBLEM AND THEY ARE GONE.** The Dorar
+  Encyclopedia of Fiqh states it directly: "It is sunnah to perform ghusl on
+  Friday by agreement of the four schools of jurisprudence. It is also the
+  position of the overwhelming majority of scholars." So this was never a
+  majority-versus-minority split *within* the four schools — they agree, and
+  the obligatory reading of Bukhari 877 is held outside them. The note is now
+  `agreed` rather than `differs`, says the four schools agree, and keeps
+  ash-Shafi`i's argument as Tirmidhi records it in the explanation. One
+  practical point was added from the same source, also agreed by the four: it
+  only counts as the Friday wash if it is done **before** the prayer.
+- **Reviewer** Confirm the reading, and confirm that reclassifying this from a
+  difference to an agreement is right — it is the one place in this pass where
+  an item moved in that direction.
 
 ### 2.7 Ghusl for the two Eids rests on a weak narration
 
@@ -565,16 +935,24 @@ of all seven ayat exactly. The English rendering of each is the app's own.
 
 ### 3.5 French and Spanish
 
-`src/i18n/content/fr.ts`, `src/i18n/content/es.ts` — 252 of 625 strings each,
+`src/i18n/content/fr.ts`, `src/i18n/content/es.ts` — 250 of 645 strings each,
 model-written, needing a native speaker. Qur'an, dhikr and the prayer
 instructions are deliberately absent and fall back to English.
 
-Five entries have now been **deleted** rather than retranslated, each because
+Seven entries have now been **deleted** rather than retranslated, each because
 the English they were keyed to turned out to be wrong. Two in the first audit
 (the fast ending "at nightfall", zakat al-fitr as "food or its value"); three in
 the core-worship pass (speech in prayer by mistake meaning you repeat it, the
 four-item list of what breaks the prayer, and the wudu paragraph in
-`before-prayer`). All five now fall back to the corrected English.
+`before-prayer`); two in the third pass, both in `learn/ramadan.ts` — the
+exemptions paragraph that said everyone "makes the days up later", and the note
+that sent the details of fidyah to a local scholar without ever saying what
+fidyah was. All seven now fall back to the corrected English.
+
+Nothing new was translated. The rule has not changed and is not a shortage of
+effort: a wrong French rendering of a ruling about pregnancy and fasting is the
+same class of mistake as a wrong Arabic text and harder to notice, so new
+English content falls back to English until a native speaker takes it.
 
 ### 3.6 Arabic UI
 
@@ -640,3 +1018,61 @@ keyed to had changed, and a stale translation of a corrected sentence is worse
 than the English fallback. They were the speech-by-mistake sentence, the
 four-item list of what breaks the prayer, and the wudu paragraph in
 `before-prayer`.
+
+---
+
+## What the third pass changed rather than queued
+
+| Where | Was | Now |
+|---|---|---|
+| `references.ts` `PERIODS` | "scholars differ" on reciting Qur'an, touching a muṣḥaf **and** sitting in a prayer hall | only the first is open. The four schools agree on the other two, and saying otherwise invited someone to act on latitude that is not there |
+| `references.ts` `PERIODS` | the `differences` section named a disagreement and gave no positions and no source | a `differs` note with the Maliki, Hanafi/Shafi`i/Hanbali and contemporary positions, from the Dorar Encyclopedia of Fiqh |
+| `references.ts` `PERIODS` | istihada stated with no source at all | **Bukhari 228** — "it is from a blood vessel and not the menses" — which also supplied the missing detail that wudu is renewed for each prayer |
+| `references.ts` `TRAVELLING` | "scholars put the line at roughly eighty kilometres" | there is no distance in any text; a range, and a `differs` note with four burud ≈ 88 km (Maliki, Shafi`i, Hanbali), 48 miles ≈ 77 km (Hanafi), and no fixed distance (Ibn Taymiyyah, Ibn al-Qayyim, Ibn `Uthaymin) |
+| `references.ts` `TRAVELLING` | nothing on when shortening starts | you start once you have left the place you live — agreed by all four schools, with **Bukhari 1089** behind it |
+| `learn/ramadan.ts` | pregnancy and breastfeeding covered by "makes the days up later" | a `differs` note with all four schools, which give three different answers, plus Ibn `Abbas's older fifth position |
+| `learn/ramadan.ts` | no mention of fidyah anywhere in the lesson | **Qur'an 2:184** cited, and the feeding route described — the lesson had no answer for a permanent condition, where making days up later is a debt that will never be paid |
+| `learn/ramadan.ts` | menstruation listed as something the exemption "also covers in practice" | stated as what it is: she does not fast, and the days are made up |
+| `prayers.ts` | hands not raised on standing up from the first sitting | raised, per **Bukhari 739**, which Bukhari gives its own chapter. The app kept three of Ibn `Umar's four raisings and dropped one, which was arbitrary rather than a position |
+| `prayers.ts` | the chest attributed to "contemporary scholarship… from the report of Tawus" | Ibn `Uthaymin, Ibn Baz and Al-Albani named, with `Ash-Sharh al-Mumti`` and `Al-Mughni` cited, and the honest summary that no position here rests on an agreed authentic narration |
+| `prayers.ts` | the method unnamed, which is most of why it read as a composite | named: each movement from the narration that describes it, closest in form to the Hanbali school, parting from it on hand placement |
+| `prayers.ts` | the final-sitting note stated both positions and then quietly took the Hanbali one for Fajr | says which one it follows and why |
+| `prayers.ts` | "The intention is a thought… You do not say it out loud" | "you do not need to say it out loud" — `learn/before-prayer.ts` carries a `differs` note on saying it aloud, and two files stating the same thing one flatly and one with a difference is how the app comes to contradict itself |
+| `wudu.ts` | the four-school table cross-checked but citing nothing | the Dorar Encyclopedia of Fiqh section on the nullifiers, which states each position as a school's |
+| `wudu.ts` | only sleep named as loss of awareness | fainting and anything else that takes the senses away, which all four schools agree ends wudu |
+| `ghusl.ts` | Friday wash a `differs` note weighing "the majority" against "a minority" | an `agreed` note: all four schools hold it a sunnah, and the obligatory reading sits outside them |
+| `ghusl.ts` | conversion wash: Hanbali and Shafi`i positions only | the Hanafi position added, and the Hanbali row corrected to "the well-known position of the school" — al-Mardawi, whose job was to say where that school settles, chose the recommended view |
+| `pillars.ts` | zakat's threshold and lunar year, both uncited | **Bukhari 1484** and **Abu Dawud 1573**. The wording was checked and kept — naming no figure is right, because the threshold differs by the kind of wealth |
+| `learn/what-breaks-prayer.ts` | "pray it again from the beginning" for laughing, on your existing wudu | true for three schools; the Hanafi school holds laughing aloud ends the wudu too, so it now says so |
+| `lib/prayer-times.ts` | the Levant inside the Saudi box → Umm al-Qura's fixed ninety-minute Isha | a Levant box ahead of it, routing to the Muslim World League default |
+| `lib/prayer-times.ts` | Iraq inside the Iran box → Tehran, whose Maghrib is not sunset | the Iran box starts at 46°E, east of the border. In Ramadan this was the wrong iftar by about fifteen minutes |
+| `prayer-times-card.tsx` | computed times shown with nothing saying a mosque timetable outranks them | a second line under the method: "If your mosque's timetable differs, follow the mosque" |
+| `learn/before-prayer.ts` | "the Pray tab works the times out… so you do not have to calculate anything" | the same, plus a note on why a mosque's timetable differs and why you follow it |
+
+Two Spanish and two French translations were **deleted** rather than
+retranslated, for the reason set in the first pass: the English they were keyed
+to had changed. Both were in `learn/ramadan.ts` — the exemptions paragraph, and
+the note that sent the details of fidyah to a local scholar without ever saying
+what fidyah was.
+
+### What the third pass looked at and deliberately left alone
+
+Recorded because "we checked and it was fine" is a result, and a reviewer's
+time should not be spent re-deriving it.
+
+- **The hands stay on the chest.** §1.5a.
+- **The whole prayer method apart from the fourth raising.** Every step was read
+  against its narration; nothing else was inaccurate, contradictory or
+  unsupported.
+- **The zakat wording.** Accurate and appropriately limited; it gained citations
+  and not a rewrite.
+- **The ghusl occasions.** The list corrected in the second pass held. Eid was
+  resolved then and is untouched.
+- **Vomiting, bleeding and camel meat as wudu nullifiers**, and apostasy. All
+  real, all left out of the beginner-facing list on purpose, all recorded at
+  §1.4 so the omission is a decision.
+- **The Karachi prayer-time box's southern reach**, which applies the Hanafi
+  ʿAsr to largely Shafi`i regions. Narrowing it is a mapping decision this pass
+  had no source for; the comment now says so and §1.10 carries it.
+- **No audio was added, replaced or re-pointed.** §3.7 is unchanged and remains
+  a listening task nobody has done.

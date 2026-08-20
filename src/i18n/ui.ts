@@ -108,6 +108,10 @@ export const EN = {
   'times.clockSuspect':
     'Your phone’s clock is set a long way from where you seem to be. These times follow the clock, so check your date and time settings if they look wrong.',
   'times.onThisPhone': 'worked out on this phone',
+  // These are astronomical times, not an authority. A mosque timetable is a
+  // decision by people and may differ by a few minutes; where they disagree,
+  // the mosque is what you follow.
+  'times.followLocal': 'If your mosque’s timetable differs, follow the mosque.',
 
   /**
    * Units for the counts on cards. A bare "14" tells a beginner nothing — it
@@ -482,6 +486,7 @@ const AR: Overrides = {
   'times.clockSuspect':
     'ساعة هاتفك مضبوطة بعيدًا عن المكان الذي يبدو أنك فيه. تتبع هذه المواقيت الساعة، فراجع إعدادات التاريخ والوقت إن بدت خاطئة.',
   'times.onThisPhone': 'محسوبة على هذا الهاتف',
+  'times.followLocal': 'إن اختلف جدول مسجدك عنها، فاتبع المسجد.',
   'count.minutes': 'دقيقة',
   'count.steps': 'خطوات',
   'count.sections': 'أقسام',
@@ -652,6 +657,7 @@ const FR: Overrides = {
   'times.clockSuspect':
     'L’horloge de votre téléphone est réglée très loin de l’endroit où vous semblez être. Ces horaires suivent l’horloge : vérifiez la date et l’heure si elles semblent fausses.',
   'times.onThisPhone': 'calculés sur ce téléphone',
+  'times.followLocal': 'Si les horaires de votre mosquée diffèrent, suivez la mosquée.',
   'count.minutes': 'min',
   'count.steps': 'étapes',
   'count.sections': 'sections',
@@ -820,6 +826,7 @@ const ES: Overrides = {
   'times.clockSuspect':
     'El reloj de tu teléfono está ajustado muy lejos de donde pareces estar. Estos horarios siguen al reloj, así que revisa la fecha y la hora si algo parece mal.',
   'times.onThisPhone': 'calculados en este teléfono',
+  'times.followLocal': 'Si el horario de tu mezquita es distinto, sigue el de la mezquita.',
   'count.minutes': 'min',
   'count.steps': 'pasos',
   'count.sections': 'secciones',

@@ -23,6 +23,16 @@ export const BEFORE_PRAYER: Reference = {
       body:
         'Each prayer has a window, and you pray inside it rather than whenever you like — the Qur’an calls prayer a decree of specified times. The Pray tab works the times out from where you are, on the phone, so you do not have to calculate anything.',
       sources: [quran(4, 103, { surahName: 'An-Nisa' })],
+      notes: [
+        note(
+          'practical',
+          'If your local mosque prints a timetable and it differs from the app by a few minutes, follow the mosque.',
+          {
+            additionalExplanation:
+              'The app works the times out from the position of the sun, which is arithmetic. A mosque timetable is a decision: which twilight angle to use for Fajr and Isha, whether to round to the nearest five minutes, whether to hold Isha back in summer so people can get there. Both are honest answers to the same question and they land a few minutes apart. Praying with the congregation you actually pray with matters more than the arithmetic, and the differences are almost always small enough that either time falls inside the window anyway. The one place it is worth checking is high summer in a northern country, where Fajr and Isha can crowd together and mosques handle it in noticeably different ways.',
+          },
+        ),
+      ],
     },
     {
       id: 'wudu',

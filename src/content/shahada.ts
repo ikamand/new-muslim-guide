@@ -33,6 +33,19 @@ import type { Guide } from './types';
  * one sentence is what made this the riskiest claim in the app. A reviewer is
  * still being asked to confirm both halves.
  *
+ * ⚠️ "SAY IT AND MEAN IT" WAS RE-EXAMINED AND KEPT. The question asked was
+ * whether it needs qualifying for belief, sincerity, understanding or
+ * intention. It does, and it already does it — in three places rather than in
+ * a list of conditions a beginner would read as a test they might fail. The
+ * `understand` step carries knowing what the words mean; its note carries
+ * sincerity, and now cites Bukhari 1, which names saying something for a
+ * marriage as the example of an act ruined by its intention; and this step's
+ * "mean it" carries conviction, which is the word the sources actually use —
+ * IslamWeb 11140 says what is sufficient is to declare the testimony "and to
+ * have firm conviction, free from any doubt, in what he declares". Turning
+ * that into a checklist on the screen where somebody is about to become Muslim
+ * would be a worse answer than the true one.
+ *
  * Deliberately short. Someone reading this is not looking for theology; they
  * are looking for what to do in the next ten minutes.
  */
@@ -56,11 +69,22 @@ export const SHAHADA_GUIDE: Guide = {
         'Becoming Muslim is one sentence, said and meant. Before you say it, be clear on both halves: that worship belongs to Allah alone and nothing shares that with Him, and that Muhammad ﷺ was sent by Him to convey how.',
       note: 'It has to be meant. Saying the words to please someone else, or to marry, does not make a person Muslim.',
       // The first of the five, and the two halves stated as two halves.
+      //
+      // Bukhari 1 is the citation for the note rather than for the step: "the
+      // reward of deeds depends upon the intentions… whoever emigrated for
+      // worldly benefits or for a woman to marry, his emigration was for what
+      // he emigrated for." It names the marriage case the note names, which is
+      // why it is here and not a general appeal to sincerity.
       sources: [
         hadith('bukhari', '8', {
           book: 2,
           bookName: 'Belief',
           inBookReference: 'Book 2, Hadith 1',
+        }),
+        hadith('bukhari', '1', {
+          book: 1,
+          bookName: 'Revelation',
+          inBookReference: 'Book 1, Hadith 1',
         }),
       ],
     },
@@ -86,6 +110,16 @@ export const SHAHADA_GUIDE: Guide = {
           work: 'Does Taking Shahada Require Witnesses?',
           author: 'Abdullah Anik Misra, SeekersGuidance',
           url: 'https://seekersguidance.org/answers/calling-to-islam/does-taking-shahada-require-witnesses/',
+        }),
+        // A third answer, and the one that states the qualification most
+        // exactly: what is required beside the words is conviction, not a
+        // ceremony. "It is sufficient for he who embraces Islam to declare the
+        // Two Testimonies of Faith and to have firm conviction, free from any
+        // doubt, in what he declares." The step's "and mean it" is that.
+        scholarly({
+          work: 'Ruling on Ghusl for those embracing Islam',
+          author: 'IslamWeb, fatwa 11140',
+          url: 'https://www.islamweb.net/en/fatwa/11140/ruling-on-ghusl-for-those-embracing-islam',
         }),
       ],
       notes: [

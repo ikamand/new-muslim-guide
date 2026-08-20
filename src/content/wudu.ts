@@ -1,6 +1,6 @@
 import { Recitations } from './recitations';
 import { note, ref } from './model';
-import { hadith, quran } from './sources';
+import { hadith, quran, scholarly } from './sources';
 import type { Guide } from './types';
 
 /**
@@ -23,6 +23,25 @@ import type { Guide } from './types';
  * genuinely contested nullifiers a beginner will actually meet — touching your
  * own private parts, and skin contact with the opposite sex — are held in a
  * `differs` note with all four schools named, rather than silently omitted.
+ *
+ * ⚠️ THE FOUR-SCHOOL TABLE NOW CARRIES THE WORK IT CAME FROM. It was written
+ * from cross-checked reading with nothing cited, which is exactly the shape of
+ * claim this app is not allowed to make. It now cites the Dorar Encyclopedia
+ * of Fiqh section on the nullifiers, which states each position as a school's
+ * and names who else holds it.
+ *
+ * ONE THING ADDED. Losing consciousness — fainting, an anaesthetic — ends wudu
+ * by agreement of all four schools, and the note named only sleep. It is one
+ * clause rather than a new item because it is the same idea: you stopped being
+ * aware of yourself.
+ *
+ * THREE THINGS DELIBERATELY LEFT OUT, recorded so the omission is a decision
+ * rather than a gap: vomiting and bleeding from anywhere other than the two
+ * passages (the Hanafi school counts a mouthful of vomit and flowing blood,
+ * the other three do not); eating camel meat (the Hanbali position, on Sahih
+ * Muslim 360a, which the other three do not hold); and apostasy. Each is real.
+ * None is something this app's reader meets often enough to be worth the
+ * attention the two contested ones need more. See `docs/scholarly-review.md`.
  */
 export const WUDU: Guide = {
   id: 'wudu',
@@ -79,7 +98,7 @@ export const WUDU: Guide = {
       notes: [
         note(
           'agreed',
-          'What certainly breaks it: anything that leaves you from the front or the back — using the toilet, passing wind — and sleep deep enough that you would not have noticed if it had.',
+          'What certainly breaks it: anything that leaves you from the front or the back — using the toilet, passing wind — and losing awareness, whether through sleep deep enough that you would not have noticed, fainting, or anything else that takes your senses away.',
           {
             sources: [
               quran(5, 6, { surahName: "Al-Ma'idah" }),
@@ -97,7 +116,7 @@ export const WUDU: Guide = {
               }),
             ],
             additionalExplanation:
-              'Bukhari 135 is the Prophet\'s ﷺ words that the prayer of someone who breaks their wudu is not accepted until they wash again — and Abu Huraira, asked what breaking it meant, answered: passing wind. On sleep the wording is "the eyes are the drawstring of the backside, so whoever sleeps should perform wudu". Schools qualify that by how deeply and in what position, but nobody disagrees that sleep you were not aware of ends it.',
+              'Bukhari 135 is the Prophet\'s ﷺ words that the prayer of someone who breaks their wudu is not accepted until they wash again — and Abu Huraira, asked what breaking it meant, answered: passing wind. On sleep the wording is "the eyes are the drawstring of the backside, so whoever sleeps should perform wudu". Schools qualify that by how deeply and in what position, but all four agree that heavy sleep ends it, and all four agree that losing your senses another way — fainting, anaesthetic, being drunk — ends it too, which is why this note names that rather than only sleep.',
           },
         ),
         note(
@@ -126,6 +145,14 @@ export const WUDU: Guide = {
                 inBookReference: 'Book 1, Hadith 178',
                 grading: 'sahih',
                 gradedBy: 'Al-Albani',
+              }),
+              // Where the four positions below were read, rather than
+              // assembled. It states each as a school's and names who else
+              // holds it, which is what an attribution needs behind it.
+              scholarly({
+                work: 'Encyclopedia of Fiqh — Nullifiers of Ablution',
+                author: 'Dorar al-Saniyyah',
+                url: 'https://dorar.net/en/feqhia/44',
               }),
             ],
             positions: [

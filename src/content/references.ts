@@ -1,6 +1,6 @@
 import { LEARN_TOPICS } from './learn';
 import { note, ref } from './model';
-import { hadith, quran } from './sources';
+import { hadith, quran, scholarly } from './sources';
 import type { Reference } from './types';
 
 /**
@@ -20,12 +20,27 @@ import type { Reference } from './types';
  * carry it, and Muslim files it under a chapter heading that states the
  * asymmetry outright.
  *
- * Two things a reviewer should weigh. The rules on reciting Qur'an and
- * entering a mosque during a period genuinely differ between schools, and are
- * given here as a difference rather than a ruling. And the tone is deliberate:
- * plain words, no euphemism, and explicit that this is a concession rather
- * than a punishment — that framing matters more to a new Muslim than the
- * rulings do.
+ * ⚠️ THE `differences` SECTION WAS WRONG-SHAPED AND IS NOW REBUILT. It named
+ * three things — reciting the Qur'an, touching a muṣḥaf, sitting in a prayer
+ * hall — said scholars differ on all three, and gave no positions and no
+ * source. Only the first of the three is genuinely open. On the other two the
+ * four schools agree: it is not permitted to touch a muṣḥaf, and not permitted
+ * to remain in the prayer hall, with passing through allowed by the Shafi`i
+ * and Hanbali schools. Calling those open questions was the more dangerous
+ * error of the two directions, because it invited someone to act on a
+ * disagreement that is not there. The section now separates them and the
+ * `differs` note carries the actual positions on the one that is real, read
+ * from the Dorar Encyclopedia of Fiqh rather than assembled.
+ *
+ * TWO SECTIONS THAT STATED A RULE WITH NOTHING BEHIND IT NOW CARRY ONE.
+ * `irregular` has Sahih al-Bukhari 228 — Fatima bint Abi Hubaysh told not to
+ * give up her prayers because the bleeding is "from a blood vessel and not the
+ * menses" — which also supplies the detail the section was missing, that the
+ * wudu is renewed for each prayer. `after-birth` has Sunan Abi Dawud 311.
+ *
+ * The tone is deliberate and unchanged: plain words, no euphemism, and
+ * explicit that this is a concession rather than a punishment — that framing
+ * matters more to a new Muslim than the rulings do.
  */
 export const PERIODS: Reference = {
   id: 'periods',
@@ -87,21 +102,78 @@ export const PERIODS: Reference = {
       id: 'differences',
       heading: 'Where you will hear different answers',
       body:
-        'Whether you may recite the Qur’an from memory or a screen, touch a printed muṣḥaf, or sit inside the prayer hall of a mosque — scholars differ on all three, and you will meet people who are certain of opposite answers.',
-      note: 'None of them is being difficult with you. If it matters to your week, ask someone knowledgeable which position your local mosque follows.',
+        'One question here is genuinely open and two are not, and it saves a lot of confusion to know which is which. Reciting the Qur’an during a period is the open one: scholars divide on it, and you will meet people certain of opposite answers. Holding a printed muṣḥaf is not open in the same way — all four schools say not to. Nor is sitting in the prayer hall of a mosque, which all four treat as somewhere not to stay through a period, though several allow walking through.',
+      note: 'None of this touches what the last section said. Listening, duʿa, dhikr and learning are open on every account, and nobody who tells you one of these is being difficult with you.',
+      notes: [
+        note(
+          'differs',
+          'On reciting the Qur’an there is no settled answer, and both sides are held by people who know exactly what they are doing.',
+          {
+            sources: [
+              scholarly({
+                work: 'Encyclopedia of Fiqh — Rulings of Menstruation',
+                author: 'Dorar al-Saniyyah',
+                url: 'https://dorar.net/en/feqhia/58',
+              }),
+            ],
+            positions: [
+              {
+                school: 'Maliki',
+                position:
+                  'Permit reciting during a period, which is also al-Shafi`i’s earlier position and one narration from Ahmad.',
+              },
+              {
+                school: 'the majority',
+                position:
+                  'The settled positions of the Hanafi, Shafi`i and Hanbali schools hold back from reciting until the period ends.',
+              },
+              {
+                school: 'contemporary scholarship',
+                position:
+                  'Ibn Taymiyyah, Ibn al-Qayyim and Ibn `Uthaymin took the permitting view, and it is the verdict of the Permanent Committee.',
+              },
+            ],
+            additionalExplanation:
+              'This section used to say scholars differ on all three of these and give no positions, which put a question all four schools agree on next to one they genuinely split over. On the muṣḥaf the agreement is about touching it; scholars treat a barrier between hand and page differently, so if you need to carry one or turn its pages, that is the thing to ask about. On the mosque the agreement is about remaining there — the Shafi`i and Hanbali schools permit passing through, and several contemporary scholars go further. If any of it affects your week, ask someone knowledgeable which position your local mosque follows.',
+          },
+        ),
+      ],
     },
     {
       id: 'irregular',
       heading: 'Bleeding that is not a period',
       body:
-        'Bleeding outside your normal pattern, or lasting far beyond it, is treated differently — it does not stop you praying, and you continue as normal with wudu.',
+        'Bleeding outside your normal pattern, or lasting far beyond it, is treated differently — it does not stop you praying. A woman asked the Prophet ﷺ exactly this and was told not to give up her prayers, because that bleeding comes from a blood vessel rather than being a period. You wash, do wudu, and pray; the wudu is done afresh for each prayer.',
       note: 'Telling the two apart is genuinely a question for someone knowledgeable, not for an app. Do not guess, and do not stop praying on a guess.',
+      // The section stated the rule with nothing behind it. This is the
+      // narration the rule comes from, and it carries the wudu detail the
+      // section was missing as well.
+      sources: [
+        hadith('bukhari', '228', {
+          book: 4,
+          bookName: "Ablutions (Wudu')",
+          inBookReference: 'Book 4, Hadith 94',
+        }),
+      ],
     },
     {
       id: 'after-birth',
       heading: 'After giving birth',
       body:
         'Bleeding after childbirth follows the same rules as a period: you do not pray, you do not make those prayers up, and you take a ghusl when it ends.',
+      // Umm Salama: women refrained from prayer for forty days after
+      // childbirth. The ghusl that ends it is drawn by the books from the
+      // parallel with menstruation rather than from a text naming it — noted
+      // in `docs/scholarly-review.md` §1.2 and true here too.
+      sources: [
+        hadith('abu-dawud', '311', {
+          book: 1,
+          bookName: 'Purification (Kitab Al-Taharah)',
+          inBookReference: 'Book 1, Hadith 311',
+          grading: 'hasan',
+          gradedBy: 'Al-Albani',
+        }),
+      ],
     },
   ],
 };
@@ -268,17 +340,59 @@ export const TRAVELLING: Reference = {
       id: 'howfar',
       heading: 'How far counts as a journey',
       body:
-        'Far enough that you would ordinarily call it travelling — scholars put the line at roughly eighty kilometres, and differ on it and on how long you may keep shortening once you arrive.',
+        'Far enough that you would ordinarily call it travelling. There is no distance in the Qur’an or in any narration, so scholars have had to draw the line themselves, and they draw it in different places — the most common answer works out at somewhere around eighty to ninety kilometres. What everyone agrees on is when it starts: not when you decide to go, but once you have actually left the place you live.',
       note: 'A daily commute is not a journey, however long it feels. If you are unsure, ask someone locally rather than deciding alone.',
-      // ⚠️ REVIEW REQUIRED — the eighty kilometres. No verse or narration gives
-      // a distance; the figure comes from the classical `four burud`, which
-      // different schools convert differently, and the sentence already says
-      // scholars differ on it. Deliberately left without a citation rather
-      // than given one that does not say what it is being used to say.
+      // The "once you have left" sentence is the one thing here that is agreed
+      // and it now carries the narration Bukhari files under exactly that
+      // chapter heading. The distance still carries no hadith, because none
+      // gives one — that is the point of the note.
+      sources: [
+        hadith('bukhari', '1089', {
+          book: 18,
+          bookName: 'Shortening the Prayers (At-Taqseer)',
+          inBookReference: 'Book 18, Hadith 10',
+        }),
+      ],
       notes: [
         note(
           'differs',
-          'There is no distance in the Qur’an or in a narration. The number scholars use comes from a classical measure, and they differ over both the distance and how long you may keep shortening after arriving.',
+          'No verse and no narration gives a distance. The figure most scholars use is a conversion of a classical measure, and a second position holds there is no fixed distance at all — if it is a journey, you may shorten.',
+          {
+            sources: [
+              scholarly({
+                work: 'Encyclopedia of Fiqh — How Travellers Pray',
+                author: 'Dorar al-Saniyyah',
+                url: 'https://dorar.net/en/feqhia/116',
+              }),
+              // The Hanafi figures read from a Hanafi source rather than from
+              // a summary of one, which is the rule for a school attribution.
+              scholarly({
+                work: 'When Is a Person Considered a Traveler Who Can Shorten Their Prayers?',
+                author: 'SeekersGuidance',
+                school: 'Hanafi',
+                url: 'https://seekersguidance.org/answers/hanafi-fiqh/when-is-a-person-considered-a-traveler-who-can-shorten-their-prayers/',
+              }),
+            ],
+            positions: [
+              {
+                school: 'the majority',
+                position:
+                  'The Maliki, Shafi`i and Hanbali schools put it at four burud, which converts to roughly eighty-eight kilometres.',
+              },
+              {
+                school: 'Hanafi',
+                position:
+                  'Reckon it from a journey of about three days at the pace people travelled then, which the school gives as forty-eight miles — roughly seventy-seven kilometres.',
+              },
+              {
+                school: 'contemporary scholarship',
+                position:
+                  'Ibn Taymiyyah, Ibn al-Qayyim and Ibn `Uthaymin held there is no fixed distance: anything ordinarily called travelling counts.',
+              },
+            ],
+            additionalExplanation:
+              'The app used to say "roughly eighty kilometres" without saying where the number came from, which made a scholarly conversion look like a reported figure. A barid is a classical measure of distance, and four of them is two days of loaded-camel travel; converted into modern units it lands near eighty-eight kilometres, and different conversions give slightly different numbers, which is most of why you will hear eighty from one person and ninety from another. How long you may keep shortening once you arrive is a second difference again — the Maliki and Shafi`i schools stop at four days, the Hanafi school at fifteen, and some hold there is no limit while you have not settled.',
+          },
         ),
       ],
     },

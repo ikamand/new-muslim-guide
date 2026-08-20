@@ -5,12 +5,16 @@ import type { Pillar } from './types';
 /**
  * The five pillars, as reference reading.
  *
- * ⚠️ REVIEW REQUIRED, two things by name. First, the Arabic names below were
- * written by a model and have not been checked by a qualified person; the
- * vocalisation marks in particular need verifying against a printed source.
- * Second, the zakat record states a threshold and a full lunar year and cites
- * neither — both are real, both come from narrations this audit did not open,
- * and the sentence is doing more work than its citation supports.
+ * ⚠️ REVIEW REQUIRED — the Arabic names below were written by a model and have
+ * not been checked by a qualified person; the vocalisation marks in particular
+ * need verifying against a printed source.
+ *
+ * The zakat record used to be the second thing flagged here: it stated a
+ * threshold and a full lunar year and cited neither. Both now carry the
+ * narration that gives them, and the wording itself was checked and kept —
+ * naming no figure is the right answer for an app, because the threshold
+ * differs by the kind of wealth and the modern equivalent of a silver or gold
+ * measure moves with the market.
  *
  * (The shahada wording is no longer in that category: it is
  * `Recitations.shahada`, and the guide that teaches it now cites Bukhari 8.)
@@ -101,15 +105,38 @@ export const PILLARS: Pillar[] = [
       estimatedMinutes: 2,
       beginnerPriority: 3,
       tags: ['money'],
-      // ⚠️ Bukhari 8 covers that zakat is one of the five, and nothing more.
-      // The threshold and the lunar year are real and are not cited here —
-      // they come from narrations this audit did not open, and the record
-      // already sends the reader to someone local rather than to a number.
+      // The wording here was checked and left alone — it states a threshold
+      // and a lunar year and sends the reader to someone local rather than to
+      // a number, which is right, because the number depends on the kind of
+      // wealth. What it lacked was evidence, and both halves now have it.
+      //
+      // Bukhari 1484 is the threshold: "there is no zakat on less than five
+      // awsuq, or less than five camels, or less than five awaq of silver" —
+      // three different kinds of wealth with three different thresholds, in
+      // one sentence, which is exactly why this record does not print a
+      // number. Abu Dawud 1573 carries both halves: two hundred dirhams and
+      // twenty dinars as the thresholds for silver and gold, and "no zakat is
+      // payable on property till a year passes on it" for the lunar year.
+      //
+      // Tirmidhi 631 is the better-known wording of the year rule and is NOT
+      // used: Darussalam grades it daif, and a threshold is a ruling.
       sources: [
         hadith('bukhari', '8', {
           book: 2,
           bookName: 'Belief',
           inBookReference: 'Book 2, Hadith 1',
+        }),
+        hadith('bukhari', '1484', {
+          book: 24,
+          bookName: 'Obligatory Charity Tax (Zakat)',
+          inBookReference: 'Book 24, Hadith 84',
+        }),
+        hadith('abu-dawud', '1573', {
+          book: 9,
+          bookName: 'Zakat (Kitab Al-Zakat)',
+          inBookReference: 'Book 9, Hadith 18',
+          grading: 'sahih',
+          gradedBy: 'Al-Albani',
         }),
       ],
     },

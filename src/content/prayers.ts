@@ -1,7 +1,7 @@
 import { note, ref } from './model';
 import type { ContentNote } from './model';
 import { Recitations } from './recitations';
-import { general, hadith, quran } from './sources';
+import { general, hadith, quran, scholarly } from './sources';
 import type { Source } from './sources';
 import type { Guide, Step } from './types';
 
@@ -47,11 +47,29 @@ import type { Guide, Step } from './types';
  *     Bukhari 735 states plainly and the app had simply omitted. The Hanafi
  *     position is in the note.
  *
- * ⚠️ REVIEW REQUIRED — the hands on the chest. Sunan Abi Dawud 759 is graded
- * sahih by Al-Albani and says the chest, and it is what a great many people
- * are taught today, but it is a mursal report from Tawus and no classical
- * school places a man's hands there. See the `differs` note on the opening
- * step, and `docs/scholarly-review.md` §1.5.
+ * WHAT METHOD IS THIS, THEN? Named here because the last pass left it unnamed
+ * and that is what made it look like a composite.
+ *
+ * This guide takes each movement from the narration that describes it, which
+ * is the method set out in Al-Albani's `Sifat Salat an-Nabi ﷺ` and taught by
+ * Ibn Baz and Ibn `Uthaymin. In form it is closest to the HANBALI school —
+ * hands to the shoulders, raised again at the bow and on rising, the left foot
+ * slid across only in a prayer that has two sittings — and it parts from that
+ * school on one detail: where the folded hands rest. Every step that differs
+ * from a school carries a `differs` note naming who holds what.
+ *
+ * ⚠️ THE HANDS ON THE CHEST — RESOLVED, AND THE APP'S OWN ACCOUNT OF IT WAS
+ * WRONG. The previous note said the chest rested only on a mursal report from
+ * Tawus (Abu Dawud 759) and that this made it contemporary rather than
+ * classical. Two things were missed. Wa'il ibn Hujr's report naming the chest
+ * is musnad, not mursal, and Ibn `Uthaymin — writing inside the school whose
+ * well-known position is BELOW the navel — calls it the best report on the
+ * question and the chest "the most correct view". And the competing narration,
+ * `Ali's "it is sunnah to place the right hand over the left beneath the
+ * navel", is graded weak by an-Nawawi and Ibn Hajar. No position here rests on
+ * an agreed authentic text, which is why the schools split three ways. The
+ * chest therefore stays, and the note below now describes the evidence
+ * honestly instead of understating it. See `docs/scholarly-review.md` §1.5a.
  */
 type PrayerSpec = {
   id: string;
@@ -101,6 +119,19 @@ const RAISING_HANDS = hadith('bukhari', '735', {
   inBookReference: 'Book 10, Hadith 129',
 });
 
+/**
+ * The fourth raising: standing up from the first tashahhud.
+ *
+ * Nafi` from Ibn `Umar, who attributes it to the Prophet ﷺ. Bukhari gives it
+ * its own chapter — "To raise one's hands after finishing the second Rak`a".
+ * The app followed three of Ibn `Umar's four raisings and dropped this one,
+ * which was arbitrary rather than a position.
+ */
+const RAISING_FROM_TASHAHHUD = hadith('bukhari', '739', {
+  ...ADHAN_BOOK,
+  inBookReference: 'Book 10, Hadith 133',
+});
+
 /** Malik b. al-Huwayrith: raised until level with the ears. */
 const RAISING_TO_EARS = hadith('muslim', '391b', {
   book: 4,
@@ -131,6 +162,41 @@ const RAISED_FINGER = hadith('muslim', '579a', {
 });
 
 /**
+ * The three scholarly works the hand-placement note leans on.
+ *
+ * A position about a school is a claim about people, and the app's rule is
+ * that such a claim carries the work it came from rather than being asserted.
+ *
+ * ⚠️ All three were read in quotation on the pages linked, not in their printed
+ * editions. That is recorded in `docs/scholarly-review.md` §1.5a rather than
+ * hidden behind a citation that looks like a library visit.
+ */
+const AL_MUGHNI_HANDS = scholarly({
+  work: 'Al-Mughni',
+  author: 'Ibn Qudamah',
+  volume: '1',
+  page: '281',
+  url: 'https://islamqa.info/en/answers/59957',
+});
+
+/** Ibn `Uthaymin weighing the evidence from inside the Hanbali school. */
+const SHARH_MUMTI_HANDS = scholarly({
+  work: 'Ash-Sharh al-Mumti`',
+  author: 'Ibn `Uthaymin',
+  volume: '3',
+  page: '36–37',
+  school: 'Hanbali',
+  url: 'https://islamqa.info/en/answers/59957',
+});
+
+/** Where the "no school places them on the chest itself" statement comes from. */
+const BADHL_AL_MAJHUD = scholarly({
+  work: 'Badhl al-Majhud',
+  author: 'Khalil Ahmad as-Saharanpuri',
+  url: 'https://seekersguidance.org/answers/shafii-fiqh/can-pray-hands-navel-shafii/',
+});
+
+/**
  * How high the hands go, and whether they are raised more than once.
  *
  * Both heights are in the two Sahihs, so neither can be called the mistake.
@@ -141,7 +207,7 @@ const raisingNote: ContentNote = note(
   'differs',
   'You will see hands raised to the shoulders and to the ears, and you will see people raise them only once. All of it is narrated, and none of it affects whether your prayer counts.',
   {
-    sources: [RAISING_HANDS, RAISING_TO_EARS, ABU_HUMAYD],
+    sources: [RAISING_HANDS, RAISING_FROM_TASHAHHUD, RAISING_TO_EARS, ABU_HUMAYD],
     positions: [
       {
         school: 'Hanafi',
@@ -149,13 +215,23 @@ const raisingNote: ContentNote = note(
           'Raise the hands to the level of the ears for men, and to the shoulders for women, and only at the opening takbir.',
       },
       {
-        school: 'the majority',
+        school: 'Maliki',
         position:
-          'Raise them to the level of the shoulders, and raise them again when bowing and when rising from the bow.',
+          'The best-known position of the school is to raise them at the opening takbir only.',
+      },
+      {
+        school: 'Shafi`i',
+        position:
+          'Raise them to the shoulders at the opening takbir, when bowing, when rising from the bow, and again when standing up from the first sitting.',
+      },
+      {
+        school: 'Hanbali',
+        position:
+          'Raise them to the shoulders at the opening takbir, when bowing, and when rising from the bow.',
       },
     ],
     additionalExplanation:
-      'Ibn `Umar and Abu Humayd both describe the hands going up to the shoulders; Malik ibn al-Huwayrith describes them going up level with the ears. Ibn `Umar adds that they are raised again at the bow and on rising from it, and not in prostration. This guide follows the shoulders because that is what Abu Humayd described in front of the companions who agreed with him.',
+      'Ibn `Umar and Abu Humayd both describe the hands going up to the shoulders; Malik ibn al-Huwayrith describes them going up level with the ears. This guide follows the shoulders because that is what Abu Humayd described in front of the companions who agreed with him. Ibn `Umar is also the source for how often: Salim reports three raisings from him and that the hands are not raised in prostration, and Nafi` reports a fourth on standing up from the first sitting, which Ibn `Umar traced back to the Prophet ﷺ and which Bukhari gives its own chapter. This guide teaches all four, and leaving any of them out does not affect whether the prayer counts.',
   },
 );
 
@@ -164,13 +240,14 @@ const raisingNote: ContentNote = note(
  *
  * Bukhari 740 establishes that the right hand goes over the left forearm and
  * says nothing about where on the body. Every position below is a reading of
- * other evidence, which is why the four schools split four ways.
+ * other evidence, which is why the schools split three ways — and why none of
+ * them can be called the mistake.
  */
 const handPlacementNote: ContentNote = note(
   'differs',
   'Where the folded hands rest is the one detail you will most obviously see Muslims doing differently. Every position below is taught by scholars, and the prayer is valid in any of them.',
   {
-    sources: [RIGHT_OVER_LEFT, HANDS_ON_CHEST],
+    sources: [RIGHT_OVER_LEFT, HANDS_ON_CHEST, SHARH_MUMTI_HANDS, AL_MUGHNI_HANDS, BADHL_AL_MAJHUD],
     positions: [
       { school: 'Hanafi', position: 'Below the navel for men, and on the chest for women.' },
       {
@@ -183,11 +260,11 @@ const handPlacementNote: ContentNote = note(
       {
         school: 'contemporary scholarship',
         position:
-          'On the chest, which is what this guide teaches, from the report of Tawus in Sunan Abi Dawud 759.',
+          'On the chest, which is what this guide teaches. Ibn `Uthaymin calls it the most correct view, and it is what Ibn Baz and Al-Albani taught.',
       },
     ],
     additionalExplanation:
-      'What Sahih al-Bukhari establishes is only that the right hand goes over the left forearm — the narration names no place on the body. The report naming the chest is graded sahih by Al-Albani but comes through Tawus, who did not meet the Prophet ﷺ, and no classical school places a man\'s hands there. Follow whichever you are taught locally; nobody holds that the prayer fails over it.',
+      'What Sahih al-Bukhari establishes is only that the right hand goes over the left forearm — the narration names no place on the body, and Ibn Qudamah records the folding itself as agreed by the majority. After that everyone is reading indirect evidence. The report naming the chest that Ibn `Uthaymin calls the best on the question is Wa\'il ibn Hujr\'s, and he judges the chest the most correct view even though the well-known position of his own school is below the navel; the narration usually quoted for below the navel, from `Ali, is graded weak by an-Nawawi and Ibn Hajar. Set against that, none of the four schools\' well-known positions puts a man\'s hands on the chest itself. So the honest summary is that no position here rests on an agreed, authentic, explicit narration, and that is exactly why the schools differ. Follow whichever you are taught locally; nobody holds that the prayer fails over it.',
   },
 );
 
@@ -219,11 +296,11 @@ const finalSittingNote: ContentNote = note(
       {
         school: 'Hanbali',
         position:
-          'The same distinction as the Shafi`i school, in a prayer that has two sittings.',
+          'The same distinction, but only in a prayer that has two sittings — so Fajr keeps the ordinary sitting.',
       },
     ],
     additionalExplanation:
-      'Abu Humayd\'s description contrasts the two: "on sitting in the second rakʿah he sat on his left foot and propped up the right one; and in the last rakʿah he pushed his left foot forward and kept the other foot propped up and sat over the buttocks." Because the contrast is between two sittings, this guide keeps Fajr — which has only one — on the left foot.',
+      'Abu Humayd\'s description contrasts the two: "on sitting in the second rakʿah he sat on his left foot and propped up the right one; and in the last rakʿah he pushed his left foot forward and kept the other foot propped up and sat over the buttocks." The Shafi`i and Hanbali schools part company over what to do with a prayer that has only one sitting: the Shafi`i school slides the foot across at the end of Fajr too, the Hanbali school does not, because the contrast Abu Humayd draws is between two sittings. This guide follows the Hanbali reading and keeps Fajr on the left foot.',
   },
 );
 
@@ -253,7 +330,11 @@ function rakahSteps(rakah: number, spec: PrayerSpec): Step[] {
       posture: 'standing',
       instruction:
         `Stand facing the qibla, feet roughly shoulder-width apart, and intend in your heart that you are praying ${spec.title}.`,
-      note: 'The intention is a thought, not a sentence. You do not say it out loud.',
+      // "Do not need to" rather than "do not": `reference:before-prayer` holds
+      // this properly and carries a `differs` note on saying it aloud. Two
+      // files stating the same thing one flatly and one with a difference is
+      // how the app comes to contradict itself.
+      note: 'The intention is a thought, not a sentence. You do not need to say it out loud.',
       sources: [quran(2, 144, { surahName: 'Al-Baqarah' })],
     });
     step({
@@ -285,13 +366,22 @@ function rakahSteps(rakah: number, spec: PrayerSpec): Step[] {
       says: Recitations.taawwudh,
     });
   } else {
+    /**
+     * The one rakʿah you stand up for out of a sitting rather than out of a
+     * prostration, and the fourth place the hands are raised — Bukhari 739,
+     * which has its own chapter for it. A middle sitting only happens after
+     * the second rakʿah, so this is the third and never any other.
+     */
+    const risesFromSitting = rakah === 3 && spec.rakahs > 2;
     step({
       key: 'stand',
       title: `Stand for the ${ordinal} rakʿah`,
       posture: 'standing',
-      instruction:
-        'Rise to standing, saying the takbir as you rise, and rest your right hand over your left forearm again.',
+      instruction: risesFromSitting
+        ? 'Rise to standing, saying the takbir and raising your hands to shoulder level as you rise, then rest your right hand over your left forearm again.'
+        : 'Rise to standing, saying the takbir as you rise, and rest your right hand over your left forearm again.',
       says: Recitations.takbir,
+      sources: risesFromSitting ? [RAISING_FROM_TASHAHHUD] : undefined,
     });
   }
 

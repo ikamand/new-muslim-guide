@@ -1,5 +1,5 @@
 import { note, ref } from '../model';
-import { hadith, quran } from '../sources';
+import { hadith, quran, scholarly } from '../sources';
 import type { Reference } from '../types';
 
 /**
@@ -17,6 +17,24 @@ import type { Reference } from '../types';
  * citation is gone rather than replaced. And the fast was described as ending
  * "at nightfall", which for a beginner reads as later than it is: it ends at
  * sunset, which is what the rest of this lesson and the prayer times both say.
+ *
+ * ⚠️ THE EXEMPTIONS ARE NOW SHAPED THE WAY THE EVIDENCE IS. The section swept
+ * everything into "the Qur'an exempts anyone ill or travelling, who makes the
+ * days up later. In practice this also covers pregnancy, breastfeeding…" —
+ * which takes one school's answer on pregnancy and breastfeeding and states it
+ * as the ruling, and never mentions the other route the Qur'an itself gives.
+ * Three changes:
+ *
+ *   - Qur'an 2:184 is cited beside 2:185. It is where feeding a poor person
+ *     for each day comes from, and it is the whole answer for a chronic or
+ *     permanent condition — for which "make the days up later" is not an
+ *     answer at all. The lesson had no word for fidyah anywhere in it.
+ *   - Pregnancy and breastfeeding move into a `differs` note with all four
+ *     schools stated separately, because the four give three different answers
+ *     and the Maliki one splits pregnancy from breastfeeding.
+ *   - The permissive framing is deliberately kept. It is the right bias for a
+ *     first Ramadan and it is now permissive with the differences shown rather
+ *     than permissive by flattening them.
  */
 export const RAMADAN: Reference = {
   id: 'ramadan',
@@ -60,16 +78,59 @@ export const RAMADAN: Reference = {
       id: 'exempt',
       heading: 'Who does not fast',
       body:
-        'The Qur’an exempts anyone ill or travelling, who makes the days up later. In practice this also covers pregnancy, breastfeeding, menstruation, and conditions where fasting would cause harm. If you are on medication or managing an illness, ask a doctor and someone knowledgeable before your first Ramadan rather than during it.',
-      sources: [quran(2, 185, { surahName: 'Al-Baqarah' })],
+        'The Qur’an names two: anyone ill, and anyone travelling. Both make the days up afterwards, at their own pace, before the next Ramadan. It also gives a second route for someone who could only fast with real hardship — feeding a poor person for each day instead of fasting it. That second route is the answer for a long-term or permanent condition, where making the days up later is not something that is ever going to happen. During a period a woman does not fast either, and those days are made up.',
+      note: 'If you are on medication or managing an illness, ask a doctor and someone knowledgeable before your first Ramadan rather than during it. A first Ramadan is far more often damaged by someone fasting who should not have than by someone taking an exemption they were given.',
+      // 2:185 for illness and travel and the make-up; 2:184 for the feeding
+      // route, which the lesson never mentioned and which is the whole answer
+      // for a chronic condition.
+      sources: [
+        quran(2, 185, { surahName: 'Al-Baqarah' }),
+        quran(2, 184, { surahName: 'Al-Baqarah' }),
+      ],
       notes: [
         note(
           'agreed',
           'Not fasting when you are exempt is not a failure and not something to feel guilty about. The exemption is part of the instruction, not a loophole in it.',
         ),
         note(
+          'differs',
+          'Pregnancy and breastfeeding are the case scholars genuinely divide over. That you may stop fasting where there is real risk to you or the baby is agreed; what you owe afterwards is not, and the answer can turn on whether the worry was for you or for the child.',
+          {
+            sources: [
+              quran(2, 184, { surahName: 'Al-Baqarah' }),
+              scholarly({
+                work: 'Fidyah for Missed Fasts Due to Pregnancy and Breastfeeding',
+                author: 'Islam Question & Answer, fatwa 49794',
+                url: 'https://islamqa.info/en/answers/49794',
+              }),
+            ],
+            positions: [
+              {
+                school: 'Hanafi',
+                position: 'Make the days up, and nothing else is owed.',
+              },
+              {
+                school: 'Maliki',
+                position:
+                  'A pregnant woman makes the days up. A breastfeeding woman makes them up and also feeds a poor person for each day.',
+              },
+              {
+                school: 'Shafi`i',
+                position:
+                  'If she stopped fasting out of fear for herself, she makes the days up. If out of fear for the child alone, she makes them up and feeds a poor person for each day.',
+              },
+              {
+                school: 'Hanbali',
+                position: 'The same distinction as the Shafi`i school.',
+              },
+            ],
+            additionalExplanation:
+              'This lesson used to say the exemptions were covered by "makes the days up later", which is one of these four answers stated as though it were the ruling. There is a fifth position that is older than all of them: Ibn `Abbas and Ibn `Umar held that a pregnant or breastfeeding woman feeds a poor person for each day and does not make the days up at all, which is the gentlest of the answers and is still taught. Among contemporary scholars, Ibn Baz, Ibn `Uthaymin and the Permanent Committee held that the days are made up. Nothing here needs deciding in the abstract: work out with someone knowledgeable what applies to your own situation, and do it before Ramadan rather than in the middle of it.',
+          },
+        ),
+        note(
           'practical',
-          'The details of who makes days up, who feeds someone instead, and what happens with a long-term illness are worked out case by case. Scholars have discussed this in more detail — ask someone locally about your own situation.',
+          'Feeding a poor person for each missed day is what "fidyah" means when you hear the word. Most mosques and Muslim charities collect it and will tell you the amount they use locally.',
         ),
       ],
     },

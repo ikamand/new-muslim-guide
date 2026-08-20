@@ -78,8 +78,38 @@ function withMadhab(params: CalculationParameters, madhab: (typeof Madhab)[keyof
  * ⚠️ REVIEW REQUIRED — these regional boxes and the method each maps to were
  * written by a model. They are deliberately coarse: a box only has to be right
  * about which convention the mosques in it print.
+ *
+ * ORDER IS SIGNIFICANT. `inferProfile` takes the first box that contains the
+ * point, so a narrow region has to come before the wide one that overlaps it.
+ *
+ * TWO WRONG MAPPINGS WERE FOUND AND REMOVED rather than replaced, because the
+ * honest fix for "this box claims somewhere it should not" is to stop claiming
+ * it and let the point fall through to the Muslim World League default:
+ *
+ *   - The Levant sat inside the Saudi box, so Amman and Jerusalem were served
+ *     Umm al-Qura — whose Isha is not an angle at all but a fixed ninety
+ *     minutes after Maghrib. That is a Saudi convention and nowhere else
+ *     prints it. A Levant box now sits ahead of Saudi Arabia and routes to the
+ *     default. It costs the far north-west corner of Saudi Arabia, which is
+ *     close to empty; it fixes several million people's Isha.
+ *   - Iraq sat inside the Iran box, so Baghdad was served Tehran — which puts
+ *     Isha at 14° and, more consequentially, does not treat Maghrib as sunset:
+ *     it waits for the sun to reach 4.5° below the horizon. For a Sunni user
+ *     that is the wrong Maghrib and, in Ramadan, the wrong iftar by a quarter
+ *     of an hour. The Iran box now starts at 46°E, east of the Iraqi border.
  */
 const REGIONS: { box: Box; profile: MethodProfile }[] = [
+  {
+    // Jordan, Palestine, Lebanon and southern Syria. No box of its own in the
+    // sense the others have one — it exists to keep this region OUT of the
+    // Saudi box below, and routes to the same default as anywhere unmapped.
+    box: { minLat: 29, maxLat: 34.7, minLon: 34, maxLon: 39.5 },
+    profile: {
+      id: 'muslim-world-league',
+      label: 'Muslim World League',
+      build: CalculationMethod.MuslimWorldLeague,
+    },
+  },
   {
     // Saudi Arabia
     box: { minLat: 16, maxLat: 32.5, minLon: 34, maxLon: 56 },
@@ -101,8 +131,10 @@ const REGIONS: { box: Box; profile: MethodProfile }[] = [
     profile: { id: 'kuwait', label: 'Kuwait', build: CalculationMethod.Kuwait },
   },
   {
-    // Iran
-    box: { minLat: 25, maxLat: 40, minLon: 44, maxLon: 63.5 },
+    // Iran. Starts at 46°E rather than 44°E so it does not reach across the
+    // border into Iraq — see the note above the list. The cost is a strip of
+    // north-western Iran, which falls through to the default.
+    box: { minLat: 25, maxLat: 40, minLon: 46, maxLon: 63.5 },
     profile: { id: 'tehran', label: 'Tehran', build: CalculationMethod.Tehran },
   },
   {
@@ -116,8 +148,16 @@ const REGIONS: { box: Box; profile: MethodProfile }[] = [
     profile: { id: 'egyptian', label: 'Egyptian General Authority', build: CalculationMethod.Egyptian },
   },
   {
-    // Pakistan, India, Bangladesh, Afghanistan — Hanafi ʿAsr is near-universal
-    // here, and the Karachi angles assume it.
+    // Pakistan, India, Bangladesh, Afghanistan. The Karachi angles assume the
+    // Hanafi ʿAsr, which is what the great majority of this box prays.
+    //
+    // ⚠️ NOT ALL OF IT, and the box is honest about being coarse rather than
+    // right. Kerala, Tamil Nadu, Sri Lanka and the Maldives are at the
+    // southern end of it and are largely Shafi`i, so ʿAsr here runs about an
+    // hour later than their mosques print. Left as it is deliberately: making
+    // the box smaller is a mapping decision this audit has no source for, and
+    // the times card now tells everyone to follow their local mosque where the
+    // two disagree. Flagged in `docs/scholarly-review.md` §1.10.
     box: { minLat: 5, maxLat: 38, minLon: 60, maxLon: 93 },
     profile: {
       id: 'karachi',

@@ -29,7 +29,7 @@ export const IMAN_PILLARS: Pillar[] = [
   {
     id: 'allah',
     title: 'Belief in Allah',
-    arabic: 'الإِيمَانُ بِاللَّه',
+    arabic: 'الْإِيمَانُ بِاللَّه',
     transliteration: 'Al-īmān bi-llāh',
     summary: 'That Allah is one, without partner, and that nothing else deserves worship.',
     detail:
@@ -52,7 +52,7 @@ export const IMAN_PILLARS: Pillar[] = [
   {
     id: 'angels',
     title: 'Belief in the angels',
-    arabic: 'الإِيمَانُ بِالمَلَائِكَة',
+    arabic: 'الْإِيمَانُ بِالْمَلَائِكَة',
     transliteration: 'Al-īmān bi-l-malāʾikah',
     summary: 'That Allah created angels, who carry out what He commands.',
     detail:
@@ -74,7 +74,7 @@ export const IMAN_PILLARS: Pillar[] = [
   {
     id: 'books',
     title: 'Belief in the revealed books',
-    arabic: 'الإِيمَانُ بِالكُتُب',
+    arabic: 'الْإِيمَانُ بِالْكُتُب',
     transliteration: 'Al-īmān bi-l-kutub',
     summary: 'That Allah sent scripture to guide people, and that the Qur’an is the last of it.',
     detail:
@@ -96,7 +96,7 @@ export const IMAN_PILLARS: Pillar[] = [
   {
     id: 'messengers',
     title: 'Belief in the messengers',
-    arabic: 'الإِيمَانُ بِالرُّسُل',
+    arabic: 'الْإِيمَانُ بِالرُّسُل',
     transliteration: 'Al-īmān bi-r-rusul',
     summary: 'That Allah sent prophets to every people, and that Muhammad ﷺ is the last of them.',
     detail:
@@ -118,7 +118,7 @@ export const IMAN_PILLARS: Pillar[] = [
   {
     id: 'last-day',
     title: 'Belief in the Last Day',
-    arabic: 'الإِيمَانُ بِاليَوْمِ الآخِر',
+    arabic: 'الْإِيمَانُ بِالْيَوْمِ الْآخِر',
     transliteration: 'Al-īmān bi-l-yawmi-l-ākhir',
     summary: 'That this life ends, everyone is raised, and each person answers for what they did.',
     detail:
@@ -140,7 +140,7 @@ export const IMAN_PILLARS: Pillar[] = [
   {
     id: 'qadar',
     title: 'Belief in divine decree',
-    arabic: 'الإِيمَانُ بِالقَدَر',
+    arabic: 'الْإِيمَانُ بِالْقَدَر',
     transliteration: 'Al-īmān bi-l-qadar',
     summary: 'That nothing happens outside Allah’s knowledge and will — the good and the hard alike.',
     detail:

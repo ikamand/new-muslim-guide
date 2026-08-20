@@ -45,7 +45,7 @@ export const PILLARS: Pillar[] = [
     id: 'shahada',
     title: 'The testimony of faith',
     arabic: 'الشَّهَادَة',
-    transliteration: 'Ash-shahāda',
+    transliteration: 'Ash-shahādah',
     summary: 'Saying, and meaning, that there is no god but Allah and that Muhammad is His Messenger.',
     guideId: 'shahada',
     detail:
@@ -172,7 +172,7 @@ export const PILLARS: Pillar[] = [
   {
     id: 'hajj',
     title: 'Pilgrimage',
-    arabic: 'الحَجّ',
+    arabic: 'الْحَجّ',
     transliteration: 'Al-ḥajj',
     summary: 'The pilgrimage to Mecca, once in a lifetime, for those able to make it.',
     detail:

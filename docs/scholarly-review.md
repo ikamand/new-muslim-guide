@@ -1044,6 +1044,23 @@ softened, because the app was stating it as though a narration said so.**
 - **Reviewer** These are said in every prayer. Read them as translations, not as
   prose.
 
+### 2.13 `الْخُبُثِ` — which reading, and which English goes with it
+
+- **File** `src/content/recitations.ts`, `duaEnterToilet` (Bukhari 142)
+- **Status** The Arabic in the app carries a ḍamma on the bāʾ — *al-khubuth*,
+  the plural of *khabīth*, read by Ibn al-Athīr and al-Khaṭṭābī as the male
+  devils paired with *al-khabāʾith*, the female ones. The other narrated
+  reading is *al-khubth*, with a sukūn, meaning foulness or evil in the
+  abstract. The transliteration said `khubthi` while the Arabic said
+  *khubuth*; the fifth pass corrected the transliteration to the Arabic, which
+  is the reading the app already had.
+- **What is still open** The English beside it — "all that is foul and from all
+  evil" — is a gloss of *al-khubth*, not of the reading the Arabic carries. One
+  of the two has to move, and which one is not a language question.
+- **Reviewer** Settle the reading first, then the English to match it. Nothing
+  here was decided by this pass beyond making the transliteration honest to the
+  Arabic already on the page.
+
 ---
 
 ## PRIORITY 3 — nice to review
@@ -1054,6 +1071,12 @@ softened, because the app was stating it as though a narration said so.**
 transliterations are model-written and unchecked. They are labels rather than
 words anyone says in worship, which is why they sit here; the vowel marks in
 particular want a printed source.
+
+The fifth pass closed the mechanical half of that: the definite article was
+missing its sukūn before a moon letter in eight of these labels — `الحَجّ` and
+all six `الإِيمَانُ`, plus the article inside four of them — while every other
+Arabic string in the app carries it. Those are now `الْحَجّ`, `الْإِيمَانُ`,
+`بِالْمَلَائِكَة` and the rest. That is spelling, not sourcing; the entry stays open.
 
 ### 3.2 The everyday phrases
 
@@ -1069,6 +1092,9 @@ The app uses academic transliteration with macrons and dots (`ṣalāh`, `wuḍ�
 in recitations, and plain forms in prose (`Salah`, `wudu`). That split is
 deliberate — the marked forms are a pronunciation crutch, the plain forms are
 English words now. Worth one pass for consistency.
+
+That pass has now run, and is recorded below. The prose/marked split was left
+exactly as it is — it is the architecture, not an inconsistency.
 
 ### 3.4 Al-Fatiha, verse by verse
 
@@ -1267,3 +1293,59 @@ Nothing was machine-translated to replace them.
 - **The taught path did not move anywhere.** No school's position was swapped
   for another's, and nothing a reader is told to do changed except the
   softening of the left foot at §2.8.
+
+---
+
+## What the fifth pass changed rather than queued
+
+An Arabic, transliteration and recitation-presentation pass. No religious text
+was replaced, no ruling moved, no recitation or duʿa was added, and nothing was
+re-sourced. Everything below is spelling, vowel marks, or one romanisation
+disagreeing with another inside the same file.
+
+### Arabic
+
+| Where | Was | Now |
+|---|---|---|
+| `recitations.ts` — opening supplication, tashahhud, shahada after wudu | `إِلَهَ`, a bare fatḥa where the transliteration says `ilāha` | `إِلَٰهَ`, the dagger alif the shahada entry already carried. As written it told a beginner to say a short *a* |
+| `recitations.ts` — after-eating (provision) and travel, 4× | `هَذَا` against `hādhā` | `هَٰذَا`, same correction |
+| `recitations.ts` — leaving the house | `لاَ` ×2 and `إِلاَّ`, with the fatḥa and the shadda sitting on the alif instead of the lām — a sunnah.com copy artefact | `لَا` and `إِلَّا`, as everywhere else. A shadda cannot sit on an alif of prolongation |
+| `recitations.ts` — travel duʿa, 2× | `الأَهْلِ`, no sukūn on the lām, in a string that spells `الْمَنْظَرِ` and `الْمَالِ` with one | `الْأَهْلِ` |
+| `recitations.ts` — rising from rukuʿ | a space before the Arabic comma | closed up |
+| `pillars.ts`, `iman.ts` — 8 labels | `الحَجّ`, `الإِيمَانُ`, `بِالمَلَائِكَة`, `بِالكُتُب`, `بِاليَوْمِ`, `الآخِر`, `بِالقَدَر` | the sukūn added, per §3.1 |
+| `recitations.ts` — 6 strings | shadda encoded before the vowel, so the bytes differed from the other 47 while rendering identically | NFC. All 53 Arabic strings in the app now normalise identically |
+
+### Transliteration
+
+| Where | Was | Now |
+|---|---|---|
+| `recitations.ts` — Fatiha 6, Fatiha 7, shahada | `Ihdinā-ṣ-ṣirāṭa`, `wa lā-ḍ-ḍāllīn`, `illā-llāh` | `Ihdina-`, `wa la-`, `illa-`. A final long vowel drops before hamzat al-waṣl, and the file already does this in `fi-s-safar`, `hādha-l-birra`, `ʿala-llāh`, `tabāraka-smuka` and — for the same three words — in the tashahhud and the shahada after wudu. These three were the only places it did not |
+| `recitations.ts` — `bismillah` | `Bismillāh`, against `Bismi-llāh` for the identical two words when leaving the house | `Bismi-llāh` |
+| `recitations.ts` — sleeping | `Bismika Allāhumma`, against `Subḥānaka-llāhumma` for the identical construction | `Bismika-llāhumma` |
+| `recitations.ts` — entering the bathroom | `khubthi`, against Arabic vocalised `الْخُبُثِ` | `khubuthi`. The English still glosses the other reading — queued at §2.13 |
+| `pillars.ts` | `Ash-shahāda`, against `Aṣ-ṣalāh`, `Az-zakāh` and `bi-l-malāʾikah` | `Ash-shahādah`. Same letter, four labels, one rendering |
+
+### What the fifth pass looked at and deliberately left alone
+
+- **Al-Fatiha.** Seven verses, in order, none duplicated, none missing, each
+  wired to its own clip `fatiha-1`…`fatiha-7`. The Arabic matches the
+  standard-orthography text and each transliteration matches its own Arabic.
+  Only the two elisions above moved. No eighth copy exists anywhere in the app.
+- **`phrases.ts`.** Read letter by letter and changed in nothing. The fourteen
+  phrases are correctly vowelled and their transliterations match. §3.2 stays
+  open for a native speaker, which is a different question.
+- **`duas.ts`, `shahada.ts`.** Neither holds any Arabic. `duas.ts` composes from
+  `recitations.ts` and `pillars.ts` re-exports `Recitations.shahada`, so the
+  corrections above reached them without either file being touched. There is
+  exactly one copy of every Arabic string in the app outside `i18n/ui.ts`.
+- **The prose/marked transliteration split.** `wudu` in a sentence and `wuḍūʾ`
+  in a pronunciation field stay as they are. That is §3.3's architecture.
+- **Every hadith wording, grading and citation.** Untouched. Adding a vowel mark
+  is not editing a text, and no consonant in the app changed.
+- **The audio.** Nothing added, replaced, renamed or re-pointed. All 27 clips
+  resolve; the 7 Al-Fatiha files are byte-identical to before this pass.
+  **§3.7 is unchanged and still needs an ear** — no one has listened to them,
+  and this pass could not.
+- **French and Spanish.** Nothing went stale: the translation manifest keys on
+  English, and no English string changed. `i18n:manifest --check` passes at 645
+  strings with nothing deleted.

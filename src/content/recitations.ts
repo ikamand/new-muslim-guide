@@ -90,7 +90,7 @@ const FATIHA_VERSES: RecitationVerse[] = [
   },
   {
     arabic: 'اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ',
-    transliteration: 'Ihdinā-ṣ-ṣirāṭa-l-mustaqīm',
+    transliteration: 'Ihdina-ṣ-ṣirāṭa-l-mustaqīm',
     translation: 'Guide us along the straight path.',
     audioId: 'fatiha-6',
   },
@@ -98,7 +98,7 @@ const FATIHA_VERSES: RecitationVerse[] = [
     arabic:
       'صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ',
     transliteration:
-      'Ṣirāṭa-lladhīna anʿamta ʿalayhim ghayri-l-maghḍūbi ʿalayhim wa lā-ḍ-ḍāllīn',
+      'Ṣirāṭa-lladhīna anʿamta ʿalayhim ghayri-l-maghḍūbi ʿalayhim wa la-ḍ-ḍāllīn',
     translation:
       'The path of those You have blessed — not of those who have earned Your anger, nor of those who have gone astray.',
     audioId: 'fatiha-7',
@@ -126,7 +126,7 @@ export const Recitations = {
   opening: {
     title: 'The opening supplication',
     arabic:
-      'سُبْحَانَكَ اللَّهُمَّ وَبِحَمْدِكَ، وَتَبَارَكَ اسْمُكَ، وَتَعَالَى جَدُّكَ، وَلَا إِلَهَ غَيْرُكَ',
+      'سُبْحَانَكَ اللَّهُمَّ وَبِحَمْدِكَ، وَتَبَارَكَ اسْمُكَ، وَتَعَالَى جَدُّكَ، وَلَا إِلَٰهَ غَيْرُكَ',
     transliteration:
       'Subḥānaka-llāhumma wa biḥamdika, wa tabāraka-smuka, wa taʿālā jadduka, wa lā ilāha ghayruk',
     translation:
@@ -182,7 +182,7 @@ export const Recitations = {
 
   rising: {
     title: 'Rising from rukuʿ',
-    arabic: 'سَمِعَ اللَّهُ لِمَنْ حَمِدَهُ ، رَبَّنَا وَلَكَ الْحَمْدُ',
+    arabic: 'سَمِعَ اللَّهُ لِمَنْ حَمِدَهُ، رَبَّنَا وَلَكَ الْحَمْدُ',
     transliteration: 'Samiʿa-llāhu liman ḥamidah — Rabbanā wa laka-l-ḥamd',
     translation:
       'Allah hears the one who praises Him. Our Lord, to You belongs all praise.',
@@ -235,7 +235,7 @@ export const Recitations = {
   tashahhud: {
     title: 'The tashahhud',
     arabic:
-      'التَّحِيَّاتُ لِلَّهِ وَالصَّلَوَاتُ وَالطَّيِّبَاتُ، السَّلَامُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ، السَّلَامُ عَلَيْنَا وَعَلَى عِبَادِ اللَّهِ الصَّالِحِينَ، أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ',
+      'التَّحِيَّاتُ لِلَّهِ وَالصَّلَوَاتُ وَالطَّيِّبَاتُ، السَّلَامُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ، السَّلَامُ عَلَيْنَا وَعَلَى عِبَادِ اللَّهِ الصَّالِحِينَ، أَشْهَدُ أَنْ لَا إِلَٰهَ إِلَّا اللَّهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ',
     transliteration:
       'At-taḥiyyātu li-llāhi wa-ṣ-ṣalawātu wa-ṭ-ṭayyibāt. As-salāmu ʿalayka ayyuha-n-nabiyyu wa raḥmatu-llāhi wa barakātuh. As-salāmu ʿalaynā wa ʿalā ʿibādi-llāhi-ṣ-ṣāliḥīn. Ash-hadu an lā ilāha illa-llāh, wa ash-hadu anna Muḥammadan ʿabduhu wa rasūluh.',
     translation:
@@ -293,7 +293,7 @@ export const Recitations = {
   shahada: {
     title: 'The testimony of faith',
     arabic: 'لَا إِلَٰهَ إِلَّا اللَّهُ مُحَمَّدٌ رَسُولُ اللَّهِ',
-    transliteration: 'Lā ilāha illā-llāh, Muḥammadun rasūlu-llāh',
+    transliteration: 'Lā ilāha illa-llāh, Muḥammadun rasūlu-llāh',
     translation: 'There is no god but Allah, and Muhammad is the Messenger of Allah.',
     audioId: 'shahada',
   },
@@ -301,7 +301,7 @@ export const Recitations = {
   shahadaAfterWudu: {
     title: 'After wudu',
     arabic:
-      'أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ',
+      'أَشْهَدُ أَنْ لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ',
     transliteration:
       'Ash-hadu an lā ilāha illa-llāhu waḥdahu lā sharīka lah, wa ash-hadu anna Muḥammadan ʿabduhu wa rasūluh',
     translation:
@@ -326,7 +326,7 @@ export const Recitations = {
   bismillah: {
     title: 'Before wudu',
     arabic: 'بِسْمِ اللَّهِ',
-    transliteration: 'Bismillāh',
+    transliteration: 'Bismi-llāh',
     translation: 'In the name of Allah.',
     /**
      * The same two words serve the meal in `duas.ts`; the citation for that
@@ -348,9 +348,9 @@ export const Recitations = {
   duaSleep: {
     title: 'Going to sleep',
     arabic:
-      'بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا',
+      'بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا',
     transliteration:
-      'Bismika Allāhumma amūtu wa aḥyā',
+      'Bismika-llāhumma amūtu wa aḥyā',
     translation:
       'In Your name, O Allah, I die and I live.',
     sources: [
@@ -366,7 +366,7 @@ export const Recitations = {
   duaWake: {
     title: 'Waking up',
     arabic:
-      'الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ',
+      'الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ',
     transliteration:
       'Al-ḥamdu li-llāhi-lladhī aḥyānā baʿda mā amātanā wa ilayhi-n-nushūr',
     translation:
@@ -384,7 +384,7 @@ export const Recitations = {
   duaLeaveHome: {
     title: 'Leaving the house',
     arabic:
-      'بِسْمِ اللَّهِ تَوَكَّلْتُ عَلَى اللَّهِ لاَ حَوْلَ وَلاَ قُوَّةَ إِلاَّ بِاللَّهِ',
+      'بِسْمِ اللَّهِ تَوَكَّلْتُ عَلَى اللَّهِ لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ',
     transliteration:
       'Bismi-llāh, tawakkaltu ʿala-llāh, lā ḥawla wa lā quwwata illā bi-llāh',
     translation:
@@ -405,9 +405,9 @@ export const Recitations = {
   duaEnterToilet: {
     title: 'Going into the bathroom',
     arabic:
-      'اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْخُبُثِ وَالْخَبَائِثِ',
+      'اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْخُبُثِ وَالْخَبَائِثِ',
     transliteration:
-      'Allāhumma innī aʿūdhu bika mina-l-khubthi wa-l-khabāʾith',
+      'Allāhumma innī aʿūdhu bika mina-l-khubuthi wa-l-khabāʾith',
     translation:
       'O Allah, I seek refuge with You from all that is foul and from all evil.',
     sources: [
@@ -444,7 +444,7 @@ export const Recitations = {
   duaAfterEating: {
     title: 'After eating',
     arabic:
-      'الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنَا وَسَقَانَا وَجَعَلَنَا مُسْلِمِينَ',
+      'الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنَا وَسَقَانَا وَجَعَلَنَا مُسْلِمِينَ',
     transliteration:
       'Al-ḥamdu li-llāhi-lladhī aṭʿamanā wa saqānā wa jaʿalanā muslimīn',
     translation:
@@ -503,7 +503,7 @@ export const Recitations = {
   duaAfterEatingProvision: {
     title: 'After eating',
     arabic:
-      'الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنِي هَذَا وَرَزَقَنِيهِ مِنْ غَيْرِ حَوْلٍ مِنِّي وَلَا قُوَّةٍ',
+      'الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنِي هَٰذَا وَرَزَقَنِيهِ مِنْ غَيْرِ حَوْلٍ مِنِّي وَلَا قُوَّةٍ',
     transliteration:
       'Al-ḥamdu li-llāhi-lladhī aṭʿamanī hādhā wa razaqanīhi min ghayri ḥawlin minnī wa lā quwwah',
     translation:
@@ -531,7 +531,7 @@ export const Recitations = {
   duaTravel: {
     title: 'Setting off on a journey',
     arabic:
-      'سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ وَإِنَّا إِلَى رَبِّنَا لَمُنْقَلِبُونَ اللَّهُمَّ إِنَّا نَسْأَلُكَ فِي سَفَرِنَا هَذَا الْبِرَّ وَالتَّقْوَى وَمِنَ الْعَمَلِ مَا تَرْضَى اللَّهُمَّ هَوِّنْ عَلَيْنَا سَفَرَنَا هَذَا وَاطْوِ عَنَّا بُعْدَهُ اللَّهُمَّ أَنْتَ الصَّاحِبُ فِي السَّفَرِ وَالْخَلِيفَةُ فِي الأَهْلِ اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ وَعْثَاءِ السَّفَرِ وَكَآبَةِ الْمَنْظَرِ وَسُوءِ الْمُنْقَلَبِ فِي الْمَالِ وَالأَهْلِ',
+      'سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَٰذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ وَإِنَّا إِلَى رَبِّنَا لَمُنْقَلِبُونَ اللَّهُمَّ إِنَّا نَسْأَلُكَ فِي سَفَرِنَا هَٰذَا الْبِرَّ وَالتَّقْوَى وَمِنَ الْعَمَلِ مَا تَرْضَى اللَّهُمَّ هَوِّنْ عَلَيْنَا سَفَرَنَا هَٰذَا وَاطْوِ عَنَّا بُعْدَهُ اللَّهُمَّ أَنْتَ الصَّاحِبُ فِي السَّفَرِ وَالْخَلِيفَةُ فِي الْأَهْلِ اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ وَعْثَاءِ السَّفَرِ وَكَآبَةِ الْمَنْظَرِ وَسُوءِ الْمُنْقَلَبِ فِي الْمَالِ وَالْأَهْلِ',
     transliteration:
       'Subḥāna-lladhī sakhkhara lanā hādhā wa mā kunnā lahu muqrinīn, wa innā ilā rabbinā la-munqalibūn. Allāhumma innā nasʾaluka fī safarinā hādha-l-birra wa-t-taqwā, wa mina-l-ʿamali mā tarḍā. Allāhumma hawwin ʿalaynā safaranā hādhā wa-ṭwi ʿannā buʿdah. Allāhumma anta-ṣ-ṣāḥibu fi-s-safar, wa-l-khalīfatu fi-l-ahl. Allāhumma innī aʿūdhu bika min waʿthāʾi-s-safar, wa kaʾābati-l-manẓar, wa sūʾi-l-munqalabi fi-l-māl wa-l-ahl',
     translation:

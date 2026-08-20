@@ -530,4 +530,10 @@ export const ES: ContentDict = {
     "Ghusl",
   "Tayammum":
     "Tayammum",
+  "After eating":
+    "Después de comer",
+  "Two wordings are commonly said after a meal. This one carries the stronger grading; the other is below. Either is said, and many people know only one of them.":
+    "Después de comer se dicen habitualmente dos fórmulas. Esta tiene la clasificación más fuerte; la otra está debajo. Se dice cualquiera de las dos, y mucha gente solo conoce una.",
+  "All praise is for Allah, who fed me this and provided it for me, with no strength or power of my own.":
+    "Toda alabanza es para Allah, que me dio de comer esto y me lo proveyó, sin fuerza ni poder míos.",
 };

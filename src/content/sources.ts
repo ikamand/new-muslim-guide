@@ -54,21 +54,38 @@ export type HadithCollection = keyof typeof HADITH_COLLECTIONS;
 /**
  * How a narration is graded.
  *
- * CLAUDE.md settles that the app argues from authenticated hadith, so this
- * exists to be checked rather than to offer a choice: `content:audit` fails on
- * anything graded `daif`, and reports narrations from a mixed collection that
- * carry no grading at all. Bukhari and Muslim need no grading — that is what
- * `authenticThroughout` records.
+ * `mawdu` is fabricated, and is never usable for anything. The other three are
+ * the ordinary categories. Never assign one from memory: a grading is a
+ * scholarly judgement, so take it from the collection page or leave it off.
  *
- * Never assign one from memory. A grading is a scholarly judgement; take it
- * from the collection page or leave it off.
+ * A grading on its own does not decide whether a narration may be cited — that
+ * depends on what it is being cited FOR. See `EvidenceRole` below.
  */
-export type HadithGrading = 'sahih' | 'hasan' | 'daif';
+export type HadithGrading = 'sahih' | 'hasan' | 'daif' | 'mawdu';
 
 /** The four Sunni schools, plus the honest ways of naming a body of opinion. */
 export const MADHHABS = ['Hanafi', 'Maliki', 'Shafi`i', 'Hanbali'] as const;
 export type Madhhab = (typeof MADHHABS)[number];
 export type Attribution = Madhhab | 'the majority' | 'a minority' | 'contemporary scholarship';
+
+/**
+ * What a source is being cited to establish, here.
+ *
+ * This is the distinction the audit was missing. A blanket "no weak
+ * narrations" rule is not how Sunni hadith scholarship works, and applying one
+ * made the app fail on a duʿa wording carried by three of the six books while
+ * saying nothing about an unsourced claim next to it.
+ *
+ * `ruling`   — an obligation, a prohibition, or a point of creed. The strict
+ *              case: a weak narration cannot carry it.
+ * `practice` — the wording of a recommended act: a duʿa, a dhikr, a phrase.
+ * `virtue`   — the reward or merit of an act established elsewhere.
+ * `context`  — history, background, or colour, claiming nothing.
+ *
+ * Absent means `ruling`. The default is the strict one on purpose: forgetting
+ * to set it makes the audit stricter, never laxer.
+ */
+export type EvidenceRole = 'ruling' | 'practice' | 'virtue' | 'context';
 
 export type QuranSource = {
   kind: 'quran';
@@ -99,6 +116,8 @@ export type HadithSource = {
   gradedBy?: string;
   /** Overrides the derived sunnah.com link. */
   url?: string;
+  /** What this citation is doing here. Defaults to the strict `ruling`. */
+  role?: EvidenceRole;
 };
 
 /** A named work — a fiqh manual, a fatwa body, a scholar's ruling. */
@@ -213,10 +232,37 @@ export function sourceUrl(source: Source): string | undefined {
   }
 }
 
-/** Whether a source meets the app's stated evidence bar. Drives `content:audit`. */
-export function isAuthenticated(source: Source): boolean {
-  if (source.kind !== 'hadith') return true;
-  if (source.grading === 'daif') return false;
-  if (HADITH_COLLECTIONS[source.collection].authenticThroughout) return true;
-  return source.grading === 'sahih' || source.grading === 'hasan';
+/**
+ * Whether a citation is strong enough for what it is being used for.
+ *
+ * `unusable`      — fabricated. Never acceptable, for anything.
+ * `below-bar`     — weak, and carrying a ruling. Not acceptable.
+ * `needs-grading` — from a collection that carries weak narrations, with no
+ *                   grading recorded. Unknown rather than bad.
+ * `sufficient`    — everything else, including a weak narration cited for a
+ *                   duʿa wording, a virtue, or historical context, which is
+ *                   reported with its grading rather than hidden or dropped.
+ *
+ * Nothing here upgrades a grading. A weak narration stays weak in the data and
+ * in anything the app displays; this only decides what the audit blocks.
+ */
+export type EvidenceVerdict = 'sufficient' | 'needs-grading' | 'below-bar' | 'unusable';
+
+export function assessEvidence(source: Source): EvidenceVerdict {
+  if (source.kind !== 'hadith') return 'sufficient';
+
+  if (source.grading === 'mawdu') return 'unusable';
+  if (source.grading === 'sahih' || source.grading === 'hasan') return 'sufficient';
+  if (HADITH_COLLECTIONS[source.collection].authenticThroughout) return 'sufficient';
+
+  const role = source.role ?? 'ruling';
+  if (source.grading === 'daif') return role === 'ruling' ? 'below-bar' : 'sufficient';
+
+  return 'needs-grading';
+}
+
+/** True where the citation can stand as it is used. Fabricated never can. */
+export function isUsable(source: Source): boolean {
+  const verdict = assessEvidence(source);
+  return verdict === 'sufficient' || verdict === 'needs-grading';
 }

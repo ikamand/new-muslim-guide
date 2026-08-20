@@ -59,6 +59,12 @@ export const DUAS: Dua[] = [
     note: 'If you forget and have already started, say it when you remember.',
   },
   {
+    id: 'after-eating-provision',
+    when: 'After eating',
+    says: Recitations.duaAfterEatingProvision,
+    note: 'Two wordings are commonly said after a meal. This one carries the stronger grading; the other is below. Either is said, and many people know only one of them.',
+  },
+  {
     id: 'after-eating',
     when: 'After eating',
     says: Recitations.duaAfterEating,

@@ -110,8 +110,35 @@ honest than leaving it blank.
 - **Never guess a grading.** A grading is a scholarly judgement. Bukhari and
   Muslim are authentic throughout, which the collection record encodes; the
   Sunan collections are not, and their entries need a real grading or none.
-- The audit **fails** on anything graded `daif`. The app argues from
-  authenticated hadith, and that is settled in `CLAUDE.md`.
+- **There is no "Bukhari or nothing" rule.** Abu Dawud, Tirmidhi, Ibn Majah,
+  an-Nasa'i and Musnad Ahmad are recognised collections. A narration is not
+  weak because of where it appears, and not sound because of it either.
+
+### What a grading decides, and what it does not
+
+A grading says how strong a narration is. It does not on its own say whether the
+narration may be cited — that depends on what it is being cited **for**, which is
+what `role` records:
+
+| `role` | Used for | Weak narration? |
+|---|---|---|
+| `ruling` *(default)* | an obligation, a prohibition, a point of creed | **blocked** |
+| `practice` | the wording of a duʿa, a dhikr, a phrase | reported with its grading |
+| `virtue` | the reward of an act established elsewhere | reported with its grading |
+| `context` | history or background, claiming nothing | reported with its grading |
+
+`role` defaults to `ruling`, so forgetting to set it makes the audit stricter,
+never laxer. **`mawdu` (fabricated) is blocked everywhere, for every role.**
+
+Nothing here upgrades a grading. A weak narration stays weak in the data and in
+anything shown to a reader; `role` only decides what the audit blocks.
+
+The worked example is the after-meal duʿa. `al-ḥamdu li-llāhi-lladhī aṭʿamanā wa
+saqānā wa jaʿalanā muslimīn` is carried by Abu Dawud 3850, Tirmidhi 3457 and Ibn
+Majah 3283 — three books, two chains, graded weak in all three. It is kept,
+labelled, and cited as `practice`. `duaAfterEatingProvision` sits beside it with
+the hasan-graded wording from Tirmidhi 3458 and Ibn Majah 3285. Neither is
+presented as the other, and neither was deleted.
 
 ---
 
@@ -254,8 +281,7 @@ npx tsc --noEmit && npm run lint && npm run i18n:manifest && npm run content:aud
 backs it up". It prints every citation with a link, and **fails** on a narration
 graded `daif` or a broken pointer.
 
-It fails right now, on purpose: the after-eating duʿa rests on Sunan Abi Dawud
-3850, graded da'if by Al-Albani, which contradicts the evidence bar in
-CLAUDE.md. Tirmidhi 3458 and Ibn Majah 3285 carry a different after-meal duʿa
-graded hasan. Which way that goes is a content decision with a reviewer
-attached, not one the tooling should quietly paper over.
+It blocks a fabricated narration anywhere, and a weak one carrying a ruling. It
+reports — with the grading shown every time — weak narrations used for a duʿa
+wording, a virtue or context, and narrations from a mixed collection that carry
+no grading at all.

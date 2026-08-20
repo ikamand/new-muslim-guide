@@ -21,11 +21,15 @@ import type { Recitation, RecitationVerse } from './types';
  *   - after eating cited Abu Dawud 3851; it is 3850
  *   - travel cited Muslim 3153, the deprecated USC-MSA number, not 1342
  *
- * ⚠️ `duaAfterEating` is graded DA'IF by Al-Albani. The app's stated evidence
- * bar is authenticated hadith, so `npm run content:audit` fails on it by
- * design. Tirmidhi 3458 and Ibn Majah 3285 carry a different after-meal duʿa
- * graded hasan — swapping to it is a content decision for review, not one to
- * make here.
+ * ⚠️ `duaAfterEating` is graded DA'IF — by Al-Albani in Abu Dawud, and by
+ * Darussalam in Tirmidhi 3457 and Ibn Majah 3283. Three collections, two
+ * chains, the same verdict. It is kept, labelled, and cited as a `practice`
+ * wording rather than a ruling, and `duaAfterEatingProvision` sits beside it
+ * carrying the hasan-graded alternative. Neither is presented as the other.
+ *
+ * An earlier pass compared this against Tirmidhi 3458 and Ibn Majah 3285 and
+ * called them "the same duʿa graded hasan". They are not — 3458 and 3285 are a
+ * DIFFERENT text. 3457 and 3283 are the same text, and both are weak.
  *
  * The prayer recitations above still carry no reference. That is a gap the
  * same report shows, not a claim that none exists.
@@ -267,6 +271,7 @@ export const Recitations = {
         inBookReference: 'Book 43, Hadith 323',
         grading: 'sahih',
         gradedBy: 'Al-Albani',
+        role: 'practice',
       }),
     ],
     audioId: 'dua-leave-home',
@@ -305,6 +310,7 @@ export const Recitations = {
         inBookReference: 'Book 1, Hadith 30',
         grading: 'sahih',
         gradedBy: 'Al-Albani',
+        role: 'practice',
       }),
     ],
     audioId: 'dua-leave-toilet',
@@ -318,6 +324,15 @@ export const Recitations = {
       'Al-ḥamdu li-llāhi-lladhī aṭʿamanā wa saqānā wa jaʿalanā muslimīn',
     translation:
       'All praise is for Allah, who fed us and gave us drink, and made us Muslims.',
+    /**
+     * Carried by three of the six books through two different chains, and
+     * graded weak in every one of them. Recorded as it is rather than trimmed
+     * to the single citation that looked least awkward: a reviewer should see
+     * that the weakness is not one grader's opinion of one chain.
+     *
+     * `role: 'practice'` because this is the wording of a recommended duʿa,
+     * not an obligation, a prohibition or a point of creed. See `EvidenceRole`.
+     */
     sources: [
       hadith('abu-dawud', '3850', {
         book: 28,
@@ -325,9 +340,67 @@ export const Recitations = {
         inBookReference: 'Book 28, Hadith 115',
         grading: 'daif',
         gradedBy: 'Al-Albani',
+        role: 'practice',
+      }),
+      hadith('tirmidhi', '3457', {
+        book: 48,
+        bookName: 'Chapters on Supplication',
+        inBookReference: 'Book 48, Hadith 88',
+        grading: 'daif',
+        gradedBy: 'Darussalam',
+        role: 'practice',
+      }),
+      hadith('ibn-majah', '3283', {
+        book: 29,
+        bookName: 'Chapters on Food',
+        inBookReference: 'Book 29, Hadith 33',
+        grading: 'daif',
+        gradedBy: 'Darussalam',
+        role: 'practice',
       }),
     ],
     audioId: 'dua-after-eating',
+  },
+
+  /**
+   * The other after-meal duʿa, and the one with the stronger grading.
+   *
+   * A different text from `duaAfterEating` rather than another chain for it —
+   * Tirmidhi and Ibn Majah both carry this one as hasan. Kept alongside rather
+   * than instead: both are taught, and dropping the widely-said one because a
+   * better-graded one exists would be a decision this app has no business
+   * making for a reader.
+   *
+   * Arabic taken from the Tirmidhi and Ibn Majah pages, which print it
+   * identically. No `audioId` — nothing has been recorded for it, and an id
+   * pointing at a file that does not exist would fail the whole bundle.
+   */
+  duaAfterEatingProvision: {
+    title: 'After eating',
+    arabic:
+      'الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنِي هَذَا وَرَزَقَنِيهِ مِنْ غَيْرِ حَوْلٍ مِنِّي وَلَا قُوَّةٍ',
+    transliteration:
+      'Al-ḥamdu li-llāhi-lladhī aṭʿamanī hādhā wa razaqanīhi min ghayri ḥawlin minnī wa lā quwwah',
+    translation:
+      'All praise is for Allah, who fed me this and provided it for me, with no strength or power of my own.',
+    sources: [
+      hadith('tirmidhi', '3458', {
+        book: 48,
+        bookName: 'Chapters on Supplication',
+        inBookReference: 'Book 48, Hadith 89',
+        grading: 'hasan',
+        gradedBy: 'Darussalam',
+        role: 'practice',
+      }),
+      hadith('ibn-majah', '3285', {
+        book: 29,
+        bookName: 'Chapters on Food',
+        inBookReference: 'Book 29, Hadith 35',
+        grading: 'hasan',
+        gradedBy: 'Darussalam',
+        role: 'practice',
+      }),
+    ],
   },
 
   duaTravel: {

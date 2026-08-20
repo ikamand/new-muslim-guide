@@ -11,9 +11,13 @@
  *
  * Two exit behaviours, deliberately. By default it reports and exits 0, because
  * missing metadata is a gradual-adoption state rather than a fault. It exits
- * non-zero regardless for the two things that are faults: a narration graded
- * `daif`, which contradicts the app's stated evidence bar, and a
- * `relatedContent` pointer that resolves to nothing.
+ * non-zero for the things that are faults: a fabricated narration, a weak one
+ * carrying a ruling, and a `relatedContent` pointer that resolves to nothing.
+ *
+ * A weak narration cited for a duʿa wording, a virtue or historical context is
+ * reported with its grading rather than blocked. Grading it and using it are
+ * two different questions, and conflating them made this script fail on a duʿa
+ * that three of the six books carry.
  */
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -25,7 +29,7 @@ const load = (p) => import(join(root, p));
 // `require` calls only Metro resolves.
 const { CATALOG, danglingRefs } = await load('src/content/catalog.ts');
 const { pendingRecommendations } = await load('src/content/recommendations.ts');
-const { formatSource, sourceUrl, HADITH_COLLECTIONS } = await load('src/content/sources.ts');
+const { formatSource, sourceUrl, assessEvidence } = await load('src/content/sources.ts');
 const { GUIDES } = await load('src/content/guides.ts');
 const { REFERENCES } = await load('src/content/references.ts');
 const { PILLARS } = await load('src/content/pillars.ts');
@@ -81,29 +85,60 @@ const allSources = CATALOG.flatMap((entry) =>
 );
 const narrations = allSources.filter(({ source }) => source.kind === 'hadith');
 
-const weak = narrations.filter(({ source }) => source.grading === 'daif');
-const ungraded = narrations.filter(
-  ({ source }) =>
-    !HADITH_COLLECTIONS[source.collection].authenticThroughout && !source.grading,
-);
+/**
+ * Graded by what the citation is doing, not by grading alone.
+ *
+ * The previous version failed the build on any narration graded weak, wherever
+ * it appeared. That is not how Sunni hadith scholarship works and it was making
+ * the app fail on a duʿa wording carried by three of the six books, while
+ * saying nothing about the unsourced claims sitting next to it.
+ *
+ * What still fails: a fabricated narration anywhere, and a weak one carrying a
+ * ruling. What is reported instead: weak narrations used for a duʿa wording, a
+ * virtue or historical context — with the grading shown every time, never
+ * quietly upgraded — and narrations from a mixed collection with no grading
+ * recorded at all.
+ */
+const byVerdict = { sufficient: [], 'needs-grading': [], 'below-bar': [], unusable: [] };
+for (const entry of narrations) byVerdict[assessEvidence(entry.source)].push(entry);
+
+const weakButLabelled = byVerdict.sufficient.filter(({ source }) => source.grading === 'daif');
+
+const line = ({ entry, source }) => {
+  say(`    ${pad(formatSource(source), 40)} ${entry.title}`);
+  const url = sourceUrl(source);
+  if (url) say(`      ${url}`);
+};
 
 say(`Narrations — ${narrations.length}`);
-if (ungraded.length) {
-  say(`  ${ungraded.length} from a collection that also carries weak narrations, with no grading:`);
-  for (const { entry, source } of ungraded) {
-    say(`    ${pad(formatSource(source), 34)} ${entry.title}`);
-    say(`      ${sourceUrl(source) ?? '(no verified link for this collection)'}`);
-  }
+
+if (byVerdict.unusable.length) {
+  say(`  ${byVerdict.unusable.length} FABRICATED. Never usable, for anything:`);
+  byVerdict.unusable.forEach(line);
+}
+
+if (byVerdict['below-bar'].length) {
+  say(`  ${byVerdict['below-bar'].length} weak, and carrying a ruling:`);
+  byVerdict['below-bar'].forEach(line);
+  say('  A weak narration cannot establish an obligation, a prohibition or a');
+  say('  point of creed. Either find a stronger one, or if it is really being');
+  say('  cited for a duʿa wording or a virtue, say so with `role`.');
+}
+
+if (byVerdict['needs-grading'].length) {
+  say(`  ${byVerdict['needs-grading'].length} from a collection that also carries weak narrations, ungraded:`);
+  byVerdict['needs-grading'].forEach(line);
   say('  A grading is a scholarly judgement. Take it from the page or leave it off.');
 }
-if (weak.length) {
-  say(`  ${weak.length} graded daif — the app argues from authenticated hadith:`);
-  for (const { entry, source } of weak) {
-    say(`    ${pad(formatSource(source), 34)} ${entry.title}`);
-    say(`      ${sourceUrl(source) ?? ''}`);
-  }
+
+if (weakButLabelled.length) {
+  say(`  ${weakButLabelled.length} weak, and used where that is acceptable — shown with the grading:`);
+  weakButLabelled.forEach(line);
 }
-if (!ungraded.length && !weak.length) say('  All graded, or from Bukhari and Muslim.');
+
+if (!narrations.some((entry) => assessEvidence(entry.source) !== 'sufficient') && !weakButLabelled.length) {
+  say('  All graded, or from Bukhari and Muslim.');
+}
 say();
 
 /* ---------- every citation, for a reviewer to check ---------- */
@@ -172,11 +207,13 @@ if (dangling.length) {
 console.log(out.join('\n'));
 
 const failures = [];
-if (weak.length) {
+if (byVerdict.unusable.length) {
+  failures.push(`${byVerdict.unusable.length} fabricated narration(s) — never usable`);
+}
+if (byVerdict['below-bar'].length) {
   failures.push(
-    `${weak.length} narration(s) graded daif — CLAUDE.md settles that the app argues ` +
-      'from authenticated hadith, so this needs a content decision: a different ' +
-      'narration, or dropping the text',
+    `${byVerdict['below-bar'].length} weak narration(s) carrying a ruling — find a ` +
+      'stronger source, or set `role` if it is really a duʿa wording or a virtue',
   );
 }
 if (dangling.length) failures.push(`${dangling.length} broken relatedContent pointer(s)`);

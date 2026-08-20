@@ -1,0 +1,65 @@
+import { note, ref } from '../model';
+import { hadith, quran } from '../sources';
+import type { Reference } from '../types';
+
+/** ⚠️ REVIEW REQUIRED — model-written English, checked citations. */
+export const DUA_AND_DHIKR: Reference = {
+  id: 'dua-and-dhikr',
+  surface: 'learn',
+  title: 'Duʿa and dhikr',
+  subtitle: 'Talking to God outside the prayer',
+  meta: {
+    category: 'belief',
+    difficulty: 'foundational',
+    estimatedMinutes: 4,
+    beginnerPriority: 2,
+    tags: ['arabic', 'audio'],
+    relatedContent: [ref('dua', 'wake'), ref('reference', 'what-is-the-quran')],
+  },
+  sections: [
+    {
+      id: 'dua',
+      heading: 'Duʿa is asking',
+      body:
+        'Duʿa is simply asking God for something. It has no set form, no required language and no appointed time — the Qur’an says He is near and answers the one who calls. You can make duʿa in English, in your own words, in the car, and it is the same duʿa.',
+      sources: [quran(2, 186, { surahName: 'Al-Baqarah' })],
+      notes: [
+        note(
+          'agreed',
+          'You do not need Arabic for this. The memorised duʿas are worth learning because they are the Prophet’s ﷺ wording, not because your own words would be rejected.',
+        ),
+      ],
+    },
+    {
+      id: 'dhikr',
+      heading: 'Dhikr is remembering',
+      body:
+        'Dhikr means remembrance — short phrases repeated through the day. Subḥān Allāh (glory be to God), al-ḥamdu li-llāh (all praise is God’s), Allāhu akbar (God is greatest). The Qur’an says hearts settle by the remembrance of God, and that is closer to what it does than anything a description manages.',
+      sources: [quran(13, 28, { surahName: 'Ar-Ra`d' })],
+    },
+    {
+      id: 'why',
+      heading: 'Why it is given so much weight',
+      body:
+        'The Prophet ﷺ compared the person who remembers their Lord to the living, and the one who does not to the dead. He also said that whoever says subḥān Allāhi wa bi-ḥamdih a hundred times in a day has their sins forgiven though they were like the foam of the sea.',
+      sources: [
+        hadith('bukhari', '6407', {
+          book: 80,
+          bookName: 'Invocations',
+          inBookReference: 'Book 80, Hadith 102',
+        }),
+        hadith('bukhari', '6405', {
+          book: 80,
+          bookName: 'Invocations',
+          inBookReference: 'Book 80, Hadith 100',
+        }),
+      ],
+    },
+    {
+      id: 'start',
+      heading: 'Where to start',
+      body:
+        'Pick one phrase and one moment — waking, or the walk to work. The Everyday duʿas screen has short ones with the Arabic, how it sounds and what it means. The shortest is a single word, which is a deliberate place to begin rather than a compromise.',
+    },
+  ],
+};

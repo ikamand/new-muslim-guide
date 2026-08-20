@@ -1,10 +1,17 @@
+import { AL_FATIHAH } from './al-fatihah';
+import { BEFORE_PRAYER } from './before-prayer';
 import { CLOTHING } from './clothing';
+import { DUA_AND_DHIKR } from './dua-and-dhikr';
 import { FAMILY } from './family';
 import { FOOD } from './food';
 import { HALAL_AND_HARAM } from './halal-and-haram';
+import { ISLAMIC_CALENDAR } from './islamic-calendar';
 import { MANNERS } from './manners';
+import { PATIENCE_AND_GRATITUDE } from './patience-and-gratitude';
 import { RAMADAN } from './ramadan';
+import { REPENTANCE } from './repentance';
 import { SUNNAH } from './sunnah';
+import { WHAT_BREAKS_PRAYER } from './what-breaks-prayer';
 import { WHAT_IS_ISLAM } from './what-is-islam';
 import { WHAT_IS_THE_QURAN } from './what-is-the-quran';
 import { WHO_IS_ALLAH } from './who-is-allah';
@@ -29,16 +36,25 @@ export const LEARN_TOPICS: Reference[] = [
   WHO_IS_MUHAMMAD,
   WHAT_IS_THE_QURAN,
   SUNNAH,
+  BEFORE_PRAYER,
+  AL_FATIHAH,
+  WHAT_BREAKS_PRAYER,
   HALAL_AND_HARAM,
   FOOD,
   CLOTHING,
   FAMILY,
   WORK,
   MANNERS,
+  DUA_AND_DHIKR,
+  REPENTANCE,
+  PATIENCE_AND_GRATITUDE,
+  ISLAMIC_CALENDAR,
   RAMADAN,
 ];
 
 export {
-  CLOTHING, FAMILY, FOOD, HALAL_AND_HARAM, MANNERS, RAMADAN, SUNNAH,
-  WHAT_IS_ISLAM, WHAT_IS_THE_QURAN, WHO_IS_ALLAH, WHO_IS_MUHAMMAD, WORK,
+  AL_FATIHAH, BEFORE_PRAYER, CLOTHING, DUA_AND_DHIKR, FAMILY, FOOD,
+  HALAL_AND_HARAM, ISLAMIC_CALENDAR, MANNERS, PATIENCE_AND_GRATITUDE, RAMADAN,
+  REPENTANCE, SUNNAH, WHAT_BREAKS_PRAYER, WHAT_IS_ISLAM, WHAT_IS_THE_QURAN,
+  WHO_IS_ALLAH, WHO_IS_MUHAMMAD, WORK,
 };

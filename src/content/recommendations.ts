@@ -28,15 +28,18 @@ export { INITIAL_INTERESTS, USER_STAGES };
 export type { InitialInterest, UserStage };
 
 /**
- * Content the app does not have yet.
+ * The beginner explanations, by name.
  *
- * Named here rather than scattered through the tables so the gap is countable.
- * Each is a real thing a beginner asks for and the app cannot currently answer;
- * none of them has a record, and none should be invented to make a list look
- * full. When one is written with its sources, it starts appearing here on its
- * own.
+ * These were forward references once — the tables named what the app should
+ * eventually show, and `pendingRecommendations` listed the twelve that resolved
+ * to nothing. All twelve now exist in `src/content/learn/`, so the name is kept
+ * only because the tables below read better with it than with a wall of
+ * `ref('reference', '…')`.
+ *
+ * `pendingRecommendations` still exists and still reports anything unresolved,
+ * which is what keeps a future addition honest.
  */
-export const PLANNED = {
+export const TOPICS = {
   whatIsIslam: ref('reference', 'what-is-islam'),
   whoIsAllah: ref('reference', 'who-is-allah'),
   whoIsMuhammad: ref('reference', 'who-is-muhammad'),
@@ -49,7 +52,18 @@ export const PLANNED = {
   family: ref('reference', 'family'),
   work: ref('reference', 'work'),
   manners: ref('reference', 'manners'),
+  // Added with the journey.
+  beforePrayer: ref('reference', 'before-prayer'),
+  alFatihah: ref('reference', 'al-fatihah'),
+  whatBreaksPrayer: ref('reference', 'what-breaks-prayer'),
+  duaAndDhikr: ref('reference', 'dua-and-dhikr'),
+  repentance: ref('reference', 'repentance'),
+  patienceAndGratitude: ref('reference', 'patience-and-gratitude'),
+  islamicCalendar: ref('reference', 'islamic-calendar'),
 } as const satisfies Record<string, ContentRef>;
+
+/** Kept so existing imports of the old name keep working. */
+export const PLANNED = TOPICS;
 
 /** The five pillars and six articles, as they are listed in the app. */
 const FIVE_PILLARS = ref('pillar', 'salah');
@@ -66,29 +80,31 @@ const SIX_ARTICLES = ref('article', 'allah');
 const BY_STAGE: Record<UserStage, readonly ContentRef[]> = {
   'new-muslim': [
     ref('guide', 'shahada'),
-    PLANNED.whatIsIslam,
-    FIVE_PILLARS,
+    TOPICS.whatIsIslam,
     ref('guide', 'wudu'),
+    TOPICS.beforePrayer,
     ref('guide', 'fajr'),
+    TOPICS.alFatihah,
+    FIVE_PILLARS,
   ],
   exploring: [
-    PLANNED.whatIsIslam,
-    PLANNED.whoIsAllah,
-    PLANNED.whoIsMuhammad,
-    PLANNED.whatIsTheQuran,
+    TOPICS.whatIsIslam,
+    TOPICS.whoIsAllah,
+    TOPICS.whoIsMuhammad,
+    TOPICS.whatIsTheQuran,
     FIVE_PILLARS,
     ref('guide', 'shahada'),
   ],
   returning: [
     ref('guide', 'fajr'),
     ref('guide', 'wudu'),
-    PLANNED.whatIsTheQuran,
-    PLANNED.sunnah,
-    PLANNED.ramadan,
+    TOPICS.whatIsTheQuran,
+    TOPICS.sunnah,
+    TOPICS.ramadan,
     ref('reference', 'mosque'),
   ],
   helping: [
-    PLANNED.whatIsIslam,
+    TOPICS.whatIsIslam,
     ref('guide', 'shahada'),
     FIVE_PILLARS,
     SIX_ARTICLES,
@@ -100,34 +116,38 @@ const BY_STAGE: Record<UserStage, readonly ContentRef[]> = {
 const BY_INTEREST: Record<InitialInterest, readonly ContentRef[]> = {
   prayer: [
     ref('guide', 'wudu'),
+    TOPICS.beforePrayer,
     ref('guide', 'fajr'),
-    ref('reference', 'mosque'),
+    TOPICS.alFatihah,
+    TOPICS.whatBreaksPrayer,
     ref('reference', 'lost-count'),
     ref('reference', 'missed'),
+    ref('reference', 'mosque'),
   ],
   basics: [
-    PLANNED.whatIsIslam,
+    TOPICS.whatIsIslam,
     ref('guide', 'shahada'),
     FIVE_PILLARS,
     SIX_ARTICLES,
-    PLANNED.whatIsTheQuran,
-    PLANNED.whoIsMuhammad,
+    TOPICS.whatIsTheQuran,
+    TOPICS.whoIsMuhammad,
   ],
   'daily-life': [
-    PLANNED.halalAndHaram,
-    PLANNED.food,
-    PLANNED.clothing,
+    TOPICS.halalAndHaram,
+    TOPICS.food,
+    TOPICS.clothing,
     ref('reference', 'mosque'),
-    PLANNED.family,
-    PLANNED.work,
-    PLANNED.manners,
+    TOPICS.family,
+    TOPICS.work,
+    TOPICS.manners,
   ],
   understanding: [
-    PLANNED.whatIsIslam,
-    PLANNED.whoIsAllah,
-    PLANNED.whoIsMuhammad,
-    PLANNED.whatIsTheQuran,
-    PLANNED.sunnah,
+    TOPICS.whatIsIslam,
+    TOPICS.duaAndDhikr,
+    TOPICS.whoIsAllah,
+    TOPICS.whoIsMuhammad,
+    TOPICS.whatIsTheQuran,
+    TOPICS.sunnah,
     FIVE_PILLARS,
   ],
   /**

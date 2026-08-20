@@ -57,6 +57,13 @@ function RootStack() {
         mis-tap away from losing their place.
       */}
       <Stack.Screen name="guide/[id]" options={{ title: '', headerBackTitle: 'Back' }} />
+      {/*
+        Titles for these are set inside the screens, from the UI dictionary, so
+        the journey reads in the user's language. The older routes below still
+        carry English titles here — a pre-existing gap, not one this adds to.
+      */}
+      <Stack.Screen name="journey/index" options={{ title: '', headerBackTitle: 'Learn' }} />
+      <Stack.Screen name="journey/[stage]" options={{ title: '', headerBackTitle: 'Back' }} />
       <Stack.Screen
         name="pillars"
         options={{ title: 'The Five Pillars', headerBackTitle: 'Learn' }}

@@ -4,6 +4,7 @@ import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { GirihBand, Glyph, type GlyphName } from '@/components/illustrations';
+import { JourneyProgress } from '@/components/journey-progress';
 import { ThemedText } from '@/components/themed-text';
 import {
   DUAS,
@@ -16,6 +17,7 @@ import {
 } from '@/content';
 import { BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
+import { useJourney } from '@/hooks/use-journey';
 import { useRecommendations } from '@/hooks/use-recommendations';
 import { useTheme } from '@/hooks/use-theme';
 import { routeFor } from '@/lib/content-routes';
@@ -136,6 +138,51 @@ function ShahadaCard() {
 }
 
 /**
+ * The way into the beginner path.
+ *
+ * Above the recommendations rather than beside them: the recommendations answer
+ * "what should I read next", and this answers "is there an order to any of
+ * this" — which is the question someone has in their first week. It carries its
+ * progress so returning to the tab shows where they left off without opening
+ * anything.
+ */
+function JourneyCard() {
+  const theme = useTheme();
+  const { t } = useLocale();
+  const { done, total } = useJourney();
+
+  return (
+    <Link href="/journey" asChild>
+      <Pressable
+        accessibilityRole="link"
+        accessibilityLabel={`${t('journey.title')}. ${t('journey.progress')
+          .replace('{done}', String(done))
+          .replace('{total}', String(total))}`}
+        style={({ pressed }) => [
+          styles.journey,
+          {
+            backgroundColor: pressed ? theme.backgroundSelected : theme.accentMuted,
+            borderColor: theme.accent,
+          },
+        ]}>
+        <View style={styles.journeyText}>
+          <ThemedText type="smallBold" style={styles.cardTitle}>
+            {t('journey.title')}
+          </ThemedText>
+          <ThemedText type="small" themeColor="textSecondary">
+            {t('journey.intro')}
+          </ThemedText>
+          <View style={styles.journeyProgress}>
+            <JourneyProgress done={done} total={total} />
+          </View>
+        </View>
+        <Ionicons name="arrow-forward" size={20} color={theme.accent} />
+      </Pressable>
+    </Link>
+  );
+}
+
+/**
  * What onboarding pointed this reader at, if they answered.
  *
  * Absent entirely for anyone who skipped, rather than falling back to a generic
@@ -203,6 +250,8 @@ export default function LearnScreen() {
           <ThemedText type="subtitle">{t('learn.title')}</ThemedText>
           <ThemedText type="default" themeColor="textSecondary">{t('learn.intro')}</ThemedText>
         </View>
+
+        <JourneyCard />
 
         <RecommendedSection />
 
@@ -350,6 +399,21 @@ const styles = StyleSheet.create({
   unit: {
     fontSize: 12,
     lineHeight: 16,
+  },
+  journey: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.three,
+    padding: Spacing.three,
+    borderRadius: Radius.medium,
+    borderWidth: 1,
+  },
+  journeyText: {
+    flex: 1,
+    gap: Spacing.one,
+  },
+  journeyProgress: {
+    paddingTop: Spacing.one,
   },
   featured: {
     borderRadius: Radius.medium,

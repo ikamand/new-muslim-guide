@@ -1,4 +1,5 @@
 import type {
+  CatalogEntry,
   ContentNote,
   Dua,
   Guide,
@@ -188,5 +189,28 @@ export function localisePhrase(phrase: Phrase, locale: Locale): Phrase {
     when: tr(dict, phrase.when),
     reply: tr(dict, phrase.reply),
     meta: phrase.meta && { ...phrase.meta, notes: localiseNotes(phrase.meta.notes, dict) },
+  };
+}
+
+/**
+ * A catalogue entry in the reader's language.
+ *
+ * `CATALOG` is built once at module load, from the raw records, with no locale —
+ * it has to be, because the node scripts read it too. So anything rendering an
+ * entry has to localise it here, and the journey and the recommendations both
+ * showed English lesson names inside an otherwise Spanish screen until they did.
+ *
+ * Only `title` and `shortDescription` are rendered from an entry. `sources` are
+ * citations and are never translated; `notes` are localised by whichever screen
+ * renders the real record.
+ */
+export function localiseCatalogEntry(entry: CatalogEntry, locale: Locale): CatalogEntry {
+  if (locale === SOURCE_LOCALE) return entry;
+  const dict = CONTENT_DICTS[locale];
+
+  return {
+    ...entry,
+    title: tr(dict, entry.title),
+    shortDescription: tr(dict, entry.shortDescription),
   };
 }

@@ -1,7 +1,9 @@
 import { useMemo } from 'react';
 
 import { recommendationsFor, type CatalogEntry } from '@/content';
+import { useLocale } from '@/hooks/use-locale';
 import { useSettings } from '@/hooks/use-settings';
+import { localiseCatalogEntry } from '@/i18n/localise';
 
 /**
  * What to put in front of this reader, resolved to content that exists.
@@ -16,9 +18,15 @@ import { useSettings } from '@/hooks/use-settings';
  */
 export function useRecommendations(limit = 5): readonly CatalogEntry[] {
   const { onboardingCompleted, userStage, initialInterest } = useSettings();
+  const { locale } = useLocale();
 
   return useMemo(
-    () => (onboardingCompleted ? recommendationsFor(userStage, initialInterest, limit) : []),
-    [onboardingCompleted, userStage, initialInterest, limit],
+    () =>
+      onboardingCompleted
+        ? recommendationsFor(userStage, initialInterest, limit).map((entry) =>
+            localiseCatalogEntry(entry, locale),
+          )
+        : [],
+    [onboardingCompleted, userStage, initialInterest, limit, locale],
   );
 }

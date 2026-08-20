@@ -102,6 +102,20 @@ export const RAMADAN: Reference = {
       ],
     },
     {
+      id: 'laylat-al-qadr',
+      heading: 'The night in the last ten',
+      body:
+        'One night in Ramadan is called Laylat al-Qadr, the Night of Decree — the night the Qur’an began to be revealed, which the Qur’an says is better than a thousand months. Nobody is told which night it is. The Prophet ﷺ said to look for it in the odd nights of the last ten, which is why mosques fill up at the end of the month.',
+      sources: [
+        quran(97, [1, 5], { surahName: 'Al-Qadr' }),
+        hadith('bukhari', '2017', {
+          book: 32,
+          bookName: 'Virtues of the Night of Qadr',
+          inBookReference: 'Book 32, Hadith 4',
+        }),
+      ],
+    },
+    {
       id: 'eid',
       heading: 'Eid al-Fitr',
       body:

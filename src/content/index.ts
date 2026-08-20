@@ -18,6 +18,7 @@ export { getGuide, GUIDES, PURIFICATION } from './guides';
 export {
   INITIAL_INTERESTS,
   PLANNED,
+  TOPICS,
   pendingRecommendations,
   recommendationsFor,
   recommendedRefs,

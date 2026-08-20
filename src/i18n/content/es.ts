@@ -330,4 +330,204 @@ export const ES: ContentDict = {
     "El trabajo se honra, no se tolera",
   "There is no ideal of poverty here. The Prophet ﷺ said nobody has eaten better food than what he earned by his own hands, and noted that the Prophet Dawud ate from his own labour. The Qur’an tells people to disperse and seek God’s bounty as soon as the Friday prayer ends.":
     "Aquí no hay un ideal de pobreza. El Profeta ﷺ dijo que nadie ha comido mejor alimento que el que ganó con sus propias manos, y señaló que el profeta Dawud comía de su propio trabajo. El Corán dice a la gente que se disperse y busque el favor de Dios en cuanto termina la oración del viernes.",
+  "Learning it":
+    "Aprenderla",
+  "Take one verse at a time, listening and repeating rather than reading. The Practice screen has all seven with a recording against each, and a repeat button — play a line, say it with the reciter, and move on when it holds. Most people need days, not minutes.":
+    "Toma un versículo a la vez, escuchando y repitiendo en vez de leer. La pantalla de práctica tiene los siete con una grabación para cada uno y un botón de repetición: pon una línea, dila con el recitador y pasa a la siguiente cuando la tengas. A la mayoría le lleva días, no minutos.",
+  "Until you have it, say what you know and keep going. Nobody expects a first-week Muslim to have memorised it, and the prayer you pray while learning is still your prayer.":
+    "Hasta que la tengas, di lo que sepas y sigue. Nadie espera que un musulmán de su primera semana la haya memorizado, y la oración que haces mientras aprendes sigue siendo tu oración.",
+  "The opening chapter of the Qur’an — seven short verses. Its name means \"The Opening\". It is the most repeated passage in the world: every Muslim says it in every unit of every prayer, which for most people is seventeen times a day.":
+    "El capítulo que abre el Corán — siete versículos breves. Su nombre significa «La Apertura». Es el pasaje más repetido del mundo: cada musulmán lo dice en cada unidad de cada oración, que para la mayoría son diecisiete veces al día.",
+  "What you are saying":
+    "Lo que estás diciendo",
+  "It opens by praising God as the Lord of everything and the source of mercy, then turns and speaks to Him directly: You alone we worship, and You alone we ask for help. The rest is a request — guide us along the straight path. It is a prayer for guidance, said before anything else is asked for.":
+    "Empieza alabando a Dios como Señor de todo y fuente de la misericordia, y luego se dirige a Él directamente: a Ti solo adoramos y a Ti solo pedimos ayuda. El resto es una petición — guíanos por el camino recto. Es una oración por la guía, dicha antes de pedir cualquier otra cosa.",
+  "Why it comes first":
+    "Por qué va primero",
+  "Because without it there is no prayer. The Prophet ﷺ said that whoever does not recite Al-Fatihah in their prayer, their prayer is invalid. Of everything a new Muslim could memorise, this is the one that changes what they are able to do today.":
+    "Porque sin ella no hay oración. El Profeta ﷺ dijo que quien no recita Al-Fatiha en su oración, su oración es inválida. De todo lo que un musulmán nuevo podría memorizar, esta es la que cambia lo que puede hacer hoy.",
+  "Dhikr is remembering":
+    "El dhikr es recordar",
+  "Dhikr means remembrance — short phrases repeated through the day. Subḥān Allāh (glory be to God), al-ḥamdu li-llāh (all praise is God’s), Allāhu akbar (God is greatest). The Qur’an says hearts settle by the remembrance of God, and that is closer to what it does than anything a description manages.":
+    "Dhikr significa recuerdo — frases breves repetidas a lo largo del día. Subḥān Allāh (gloria a Dios), al-ḥamdu li-llāh (toda alabanza es de Dios), Allāhu akbar (Dios es el más grande). El Corán dice que los corazones se sosiegan con el recuerdo de Dios, y eso se acerca más a lo que hace que cualquier descripción.",
+  "Duʿa is asking":
+    "El duʿa es pedir",
+  "Duʿa is simply asking God for something. It has no set form, no required language and no appointed time — the Qur’an says He is near and answers the one who calls. You can make duʿa in English, in your own words, in the car, and it is the same duʿa.":
+    "El duʿa es simplemente pedirle algo a Dios. No tiene forma fija, ni lengua obligatoria, ni hora señalada — el Corán dice que Él está cerca y responde a quien le llama. Puedes hacer duʿa en español, con tus propias palabras, en el coche, y es el mismo duʿa.",
+  "You do not need Arabic for this. The memorised duʿas are worth learning because they are the Prophet’s ﷺ wording, not because your own words would be rejected.":
+    "No necesitas árabe para esto. Los duʿas memorizados merecen aprenderse porque son las palabras del Profeta ﷺ, no porque las tuyas fueran a ser rechazadas.",
+  "Where to start":
+    "Por dónde empezar",
+  "Pick one phrase and one moment — waking, or the walk to work. The Everyday duʿas screen has short ones with the Arabic, how it sounds and what it means. The shortest is a single word, which is a deliberate place to begin rather than a compromise.":
+    "Elige una frase y un momento — al despertar, o el camino al trabajo. La pantalla de súplicas diarias tiene algunas cortas con el árabe, cómo suena y qué significa. La más breve es una sola palabra, que es un punto de partida deliberado y no un apaño.",
+  "Why it is given so much weight":
+    "Por qué se le da tanto peso",
+  "The Prophet ﷺ compared the person who remembers their Lord to the living, and the one who does not to the dead. He also said that whoever says subḥān Allāhi wa bi-ḥamdih a hundred times in a day has their sins forgiven though they were like the foam of the sea.":
+    "El Profeta ﷺ comparó a quien recuerda a su Señor con los vivos, y a quien no lo hace con los muertos. También dijo que quien dice subḥān Allāhi wa bi-ḥamdih cien veces al día tiene sus faltas perdonadas aunque fueran como la espuma del mar.",
+  "For someone new":
+    "Para alguien nuevo",
+  "The first year often costs something real — family who do not understand, friends who drift, a life that has to be rearranged. That difficulty is not a sign you chose wrongly, and it is exactly the situation the word sabr is for.":
+    "El primer año suele costar algo real — familia que no entiende, amistades que se alejan, una vida que hay que reordenar. Esa dificultad no es señal de que elegiste mal, y es justo la situación para la que existe la palabra sabr.",
+  "Gratitude is noticing":
+    "La gratitud es darse cuenta",
+  "The Qur’an says that if you are grateful, He will increase you. Much of gratitude in practice is simply naming things — which is why al-ḥamdu li-llāh is said constantly, over small things, out loud. It is a habit of attention rather than a feeling you wait for.":
+    "El Corán dice que si eres agradecido, Él te dará más. Buena parte de la gratitud en la práctica es simplemente nombrar las cosas — por eso se dice al-ḥamdu li-llāh constantemente, por cosas pequeñas, en voz alta. Es un hábito de atención más que un sentimiento que se espera.",
+  "Patience is not passivity":
+    "La paciencia no es pasividad",
+  "Sabr means holding steady — carrying on doing the right thing while something is hard, rather than accepting whatever happens. The Qur’an pairs it with prayer as the two things to seek help through, which is a practical instruction more than a moral one: when it is bad, pray.":
+    "Sabr significa mantenerse firme — seguir haciendo lo correcto mientras algo es difícil, no aceptar cualquier cosa que pase. El Corán la une a la oración como las dos cosas por las que buscar ayuda, que es una indicación práctica más que moral: cuando va mal, reza.",
+  "Two responses, one attitude":
+    "Dos respuestas, una actitud",
+  "The Prophet ﷺ said the believer’s situation is remarkable, because everything that happens to them is good: when something pleasant comes they are grateful and that is good for them, and when something painful comes they are patient and that is good for them. Nobody else, he said, is in that position.":
+    "El Profeta ﷺ dijo que la situación del creyente es admirable, porque todo lo que le ocurre es bueno: cuando llega algo agradable da gracias y eso es bueno para él, y cuando llega algo doloroso tiene paciencia y eso es bueno para él. Nadie más, dijo, está en esa posición.",
+  "The night in the last ten":
+    "La noche en los últimos diez",
+  "One night in Ramadan is called Laylat al-Qadr, the Night of Decree — the night the Qur’an began to be revealed, which the Qur’an says is better than a thousand months. Nobody is told which night it is. The Prophet ﷺ said to look for it in the odd nights of the last ten, which is why mosques fill up at the end of the month.":
+    "Una noche de Ramadán se llama Laylat al-Qadr, la Noche del Decreto — la noche en que empezó a revelarse el Corán, que el Corán dice que es mejor que mil meses. A nadie se le dice qué noche es. El Profeta ﷺ dijo que se busque en las noches impares de los últimos diez días, y por eso las mezquitas se llenan al final del mes.",
+  "Al-Fatihah":
+    "Al-Fatiha",
+  "The one thing the prayer cannot do without":
+    "Lo único sin lo que la oración no puede ser",
+  "Duʿa and dhikr":
+    "Duʿa y dhikr",
+  "Talking to God outside the prayer":
+    "Hablar con Dios fuera de la oración",
+  "Patience and gratitude":
+    "Paciencia y gratitud",
+  "The two halves of getting through a life":
+    "Las dos mitades de atravesar una vida",
+  "The Muslim year":
+    "El año musulmán",
+  "Why the dates move, and what falls where":
+    "Por qué se mueven las fechas y qué cae dónde",
+  "What breaks the prayer":
+    "Qué rompe la oración",
+  "And what only feels like it does":
+    "Y qué solo lo parece",
+  "What you need before you pray":
+    "Qué necesitas antes de rezar",
+  "The five things to have in place":
+    "Las cinco cosas que deben estar en su sitio",
+  "When you get it wrong":
+    "Cuando te equivocas",
+  "Repentance, and why it is not a big ceremony":
+    "El arrepentimiento, y por qué no es una gran ceremonia",
+  "Four sacred months":
+    "Cuatro meses sagrados",
+  "The Qur’an says four of the twelve are sacred, and the Prophet ﷺ named them in his farewell sermon: three consecutive — Dhul-Qaʿdah, Dhul-Hijjah and Muharram — and Rajab. Fighting is prohibited in them, and wrongdoing in them is treated as more serious.":
+    "El Corán dice que cuatro de los doce son sagrados, y el Profeta ﷺ los nombró en su sermón de despedida: tres seguidos — Dhul-Qaʿda, Dhul-Hiyya y Muharram — y Rayab. En ellos está prohibido combatir, y las malas obras en ellos se tratan como más graves.",
+  "In practice":
+    "En la práctica",
+  "You will find out when Ramadan starts from the people around you rather than from a calculation, because the start of a month is announced locally and mosques in the same city can differ by a day. That is normal and not worth worrying about.":
+    "Sabrás cuándo empieza Ramadán por la gente de tu alrededor más que por un cálculo, porque el inicio del mes se anuncia localmente y mezquitas de la misma ciudad pueden diferir en un día. Eso es normal y no merece preocupación.",
+  "Whether a month begins by sighting the moon locally or by astronomical calculation is a live question, and communities in the same country sometimes start Ramadan on different days.":
+    "Si un mes empieza por la observación local de la luna o por cálculo astronómico es una cuestión viva, y comunidades del mismo país empiezan Ramadán a veces en días distintos.",
+  "Both approaches are argued from evidence and neither community is being careless. As a beginner the practical answer is to follow the mosque or community you pray with. Scholars have discussed this in more detail.":
+    "Ambos enfoques se argumentan con pruebas y ninguna comunidad está siendo descuidada. Para un principiante la respuesta práctica es seguir a la mezquita o comunidad con la que reza. Los sabios han tratado esto con más detalle.",
+  "Follow the sighting of the moon, as reported locally or regionally.":
+    "Seguir la observación de la luna, según se informe localmente o en la región.",
+  "Some bodies accept astronomical calculation to fix the date in advance.":
+    "Algunos organismos aceptan el cálculo astronómico para fijar la fecha por adelantado.",
+  "It follows the moon":
+    "Sigue a la luna",
+  "Twelve months, each beginning with a new moon, making a year about eleven days shorter than the solar one. That is why Ramadan and the two Eids move earlier every year rather than falling on fixed dates — over a lifetime they pass through every season.":
+    "Doce meses, cada uno empezando con una luna nueva, lo que hace un año unos once días más corto que el solar. Por eso Ramadán y los dos Eids se adelantan cada año en vez de caer en fechas fijas — a lo largo de una vida pasan por todas las estaciones.",
+  "What to have in your head":
+    "Qué tener en la cabeza",
+  "Ramadan is the month of fasting and ends with Eid al-Fitr. Dhul-Hijjah is the month of Hajj, and its tenth day is Eid al-Adha, the second of the two Eids — marked by those not on pilgrimage as well. Muharram opens the year.":
+    "Ramadán es el mes del ayuno y termina con el Eid al-Fitr. Dhul-Hiyya es el mes del Hach, y su décimo día es el Eid al-Adha, la segunda de las dos fiestas — celebrada también por quienes no están en peregrinación. Muharram abre el año.",
+  "Ordinary mistakes":
+    "Errores corrientes",
+  "Losing count, forgetting a sitting, adding a movement, saying something in the wrong place — none of these break the prayer. They are fixed with two extra prostrations at the end, which the app covers separately. A beginner will do all of these, and none of them is a disaster.":
+    "Perder la cuenta, olvidar un sentado, añadir un movimiento, decir algo en el lugar equivocado — nada de esto rompe la oración. Se arregla con dos postraciones extra al final, que la aplicación cubre por separado. Un principiante hará todas estas cosas, y ninguna es un desastre.",
+  "The most common beginner mistake is starting the prayer over. Almost nothing requires that, and restarting turns a small slip into a long one.":
+    "El error más común del principiante es volver a empezar la oración. Casi nada lo exige, y reiniciar convierte un desliz pequeño en uno largo.",
+  "Speaking":
+    "Hablar",
+  "A companion spoke during the prayer without knowing he could not, and the Prophet ﷺ corrected him afterwards without anger — telling him this prayer is not the place for ordinary speech. Doing it by mistake, before you knew, is not a sin. You simply repeat the prayer.":
+    "Un compañero habló durante la oración sin saber que no podía, y el Profeta ﷺ lo corrigió después sin enfado — diciéndole que esta oración no es lugar para el habla corriente. Hacerlo por error, antes de saberlo, no es pecado. Simplemente se repite la oración.",
+  "What does break it":
+    "Qué la rompe",
+  "Losing your wudu. Speaking on purpose. Eating or drinking. Turning away from the qibla, or leaving the prayer entirely. If one of these happens, stop, put it right, and start the prayer again — that is the whole remedy.":
+    "Perder el wudu. Hablar a propósito. Comer o beber. Girarse de la qibla, o abandonar la oración. Si ocurre alguna de estas, para, arréglalo y vuelve a empezar la oración — ese es todo el remedio.",
+  "What does not break it":
+    "Qué no la rompe",
+  "Doubt does not. Someone asked the Prophet ﷺ about feeling as though they had passed wind mid-prayer, and he said not to leave the prayer unless they heard a sound or smelled something. Uncertainty is not enough. Carry on.":
+    "La duda no. Alguien preguntó al Profeta ﷺ sobre la sensación de haber expulsado gases en plena oración, y dijo que no dejara la oración a menos que oyera un sonido u oliera algo. La incertidumbre no basta. Sigue.",
+  "This is the hadith to remember if you find yourself checking constantly. The rule is deliberately strict about certainty, because doubt would otherwise end every prayer.":
+    "Este es el hadiz que recordar si te encuentras comprobándolo constantemente. La regla es deliberadamente estricta con la certeza, porque de otro modo la duda acabaría con cada oración.",
+  "The time has come in":
+    "Ha entrado la hora",
+  "Each prayer has a window, and you pray inside it rather than whenever you like — the Qur’an calls prayer a decree of specified times. The Pray tab works the times out from where you are, on the phone, so you do not have to calculate anything.":
+    "Cada oración tiene una ventana, y se reza dentro de ella y no cuando uno quiere — el Corán llama a la oración un decreto de tiempos señalados. La pestaña de oración calcula las horas desde donde estás, en el teléfono, para que no tengas que calcular nada.",
+  "You are covered, and so is the place":
+    "Estás cubierto, y el sitio también",
+  "The Qur’an tells people to take their adornment at every place of prayer — dress as you would to meet someone you respect. Your clothes and the ground you pray on should be clean. A carpet, a towel or a mat is fine; a prayer mat is convenient, not required.":
+    "El Corán dice a la gente que tome su adorno en cada lugar de oración — vístete como para ver a alguien a quien respetas. Tu ropa y el suelo donde reces deben estar limpios. Una alfombra, una toalla o una esterilla sirven; una alfombra de oración es cómoda, no obligatoria.",
+  "How much has to be covered differs a little between men and women and is set out in the clothing guide. Ordinary loose clothes cover it for most people.":
+    "Cuánto hay que cubrir varía un poco entre hombres y mujeres y está explicado en la guía de ropa. La ropa holgada corriente lo cubre para la mayoría.",
+  "You are facing the qibla":
+    "Estás orientado a la qibla",
+  "Muslims face the Kaʿbah in Mecca, and the Qur’an gives that instruction directly. The Qibla screen in this app points the way from where you are. If you cannot work it out — on a plane, in an unfamiliar place — face your best guess and pray; that is accepted.":
+    "Los musulmanes se orientan a la Kaaba en La Meca, y el Corán da esa indicación directamente. La pantalla de qibla de esta aplicación señala la dirección desde donde estés. Si no puedes averiguarlo — en un avión, en un sitio desconocido — orienta tu mejor estimación y reza; eso se acepta.",
+  "You are in wudu":
+    "Estás en wudu",
+  "Wudu is the short wash before prayer. The Prophet ﷺ said the prayer of someone who has broken it is not accepted until they wash again. It lasts until something breaks it — using the toilet, passing wind, or deep sleep — so one wudu often covers several prayers.":
+    "El wudu es el lavado breve antes de la oración. El Profeta ﷺ dijo que la oración de quien lo ha roto no se acepta hasta que se lave de nuevo. Dura hasta que algo lo rompe — ir al baño, expulsar gases o un sueño profundo — así que un wudu cubre a menudo varias oraciones.",
+  "You intend it":
+    "Lo intentas",
+  "The intention is a thought, not a sentence: knowing which prayer you are about to pray. You do not say it out loud, and you do not need a formula. If you are standing on a mat about to pray Maghrib, you have already intended it.":
+    "La intención es un pensamiento, no una frase: saber qué oración estás a punto de hacer. No se dice en voz alta y no hace falta una fórmula. Si estás de pie sobre una esterilla a punto de rezar el Magrib, ya la has intentado.",
+  "Some people are taught to say the intention aloud. Scholars differ on whether that is recommended, and nobody holds that the prayer fails without it.":
+    "A algunas personas se les enseña a decir la intención en voz alta. Los sabios difieren sobre si eso es recomendable, y ninguno sostiene que la oración falle sin ello.",
+  "The intention itself is agreed to be a condition of the prayer; what differs is only whether voicing it adds anything. If you were taught to say it, saying it harms nothing. Scholars have discussed this in more detail.":
+    "La intención misma se admite como condición de la oración; lo que difiere es solo si decirla en voz alta añade algo. Si te enseñaron a decirla, decirla no daña nada. Los sabios han tratado esto con más detalle.",
+  "Hold that the intention is in the heart and does not need to be spoken.":
+    "Sostienen que la intención está en el corazón y no hace falta decirla.",
+  "Consider saying it aloud a recommended way of settling the heart on it.":
+    "Consideran decirla en voz alta una manera recomendable de asentar el corazón en ella.",
+  "How it is received":
+    "Cómo se recibe",
+  "The Prophet ﷺ described God as more pleased with a person’s repentance than someone would be who lost their camel in the desert and then found it. The image is not of a grudging pardon. It is relief and delight.":
+    "El Profeta ﷺ describió a Dios como más complacido con el arrepentimiento de una persona que alguien que perdió su camello en el desierto y luego lo encontró. La imagen no es de un perdón a regañadientes. Es alivio y alegría.",
+  "If it happens again":
+    "Si vuelve a pasar",
+  "You repent again. People expect to fail once and be finished; that is not how it works, and a habit that takes a year to break took a year for everybody else too. Keep praying while you work on it — stopping the prayer because you feel unworthy of it is the one move that makes things worse.":
+    "Te arrepientes de nuevo. La gente espera fallar una vez y darse por acabada; no funciona así, y un hábito que cuesta un año romper le costó un año a todo el mundo. Sigue rezando mientras trabajas en ello — dejar la oración porque te sientes indigno de ella es el único movimiento que empeora las cosas.",
+  "Nobody is owed an account of your sins. You do not have to tell an imam, a friend, or anyone at the mosque.":
+    "A nadie se le debe un relato de tus faltas. No tienes que contárselo a un imán, a un amigo ni a nadie de la mezquita.",
+  "The door does not close":
+    "La puerta no se cierra",
+  "The Qur’an addresses people who have wronged themselves and tells them not to despair of God’s mercy, because He forgives all sins. That verse is worth knowing early, because the thing most likely to end someone’s practice is not a sin — it is deciding afterwards that they are past helping.":
+    "El Corán se dirige a quienes se han perjudicado a sí mismos y les dice que no desesperen de la misericordia de Dios, porque Él perdona todas las faltas. Ese versículo conviene conocerlo pronto, porque lo que más probablemente acaba con la práctica de alguien no es una falta — es decidir después que ya no tiene remedio.",
+  "What repentance actually is":
+    "Qué es el arrepentimiento en realidad",
+  "Stopping, meaning it, and asking. There is no ritual, no witness, and nobody to confess to — you turn to God directly. The Qur’an calls it turning to Him with sincere repentance, and that is the whole procedure.":
+    "Parar, decirlo de verdad y pedir. No hay rito, ni testigo, ni nadie a quien confesarse — te diriges a Dios directamente. El Corán lo llama volverse a Él con arrepentimiento sincero, y ese es todo el procedimiento.",
+  "Washing before prayer":
+    "El lavado antes de la oración",
+  "The full wash, and when you need it":
+    "El lavado completo, y cuándo hace falta",
+  "When you cannot use water":
+    "Cuando no puedes usar agua",
+  "Becoming Muslim":
+    "Hacerse musulmán",
+  "What to say, and what it means":
+    "Qué decir y qué significa",
+  "2 rakʿah · Dawn, before sunrise":
+    "2 rakʿas · Al alba, antes del amanecer",
+  "4 rakʿah · After midday":
+    "4 rakʿas · Después del mediodía",
+  "4 rakʿah · Late afternoon":
+    "4 rakʿas · A media tarde",
+  "3 rakʿah · Just after sunset":
+    "3 rakʿas · Justo después de la puesta del sol",
+  "4 rakʿah · Night":
+    "4 rakʿas · De noche",
+  "Wudu":
+    "Wudu",
+  "Ghusl":
+    "Ghusl",
+  "Tayammum":
+    "Tayammum",
 };

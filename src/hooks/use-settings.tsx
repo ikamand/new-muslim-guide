@@ -55,6 +55,14 @@ export type Settings = {
   userStage: UserStage | null;
   /** What they said they wanted help with first. */
   initialInterest: InitialInterest | null;
+  /**
+   * Lessons marked done, as `kind:id`.
+   *
+   * A record of where someone has been, not a gate on where they can go — the
+   * journey never locks a step. Kept as a plain list rather than a count so a
+   * lesson added later cannot retroactively change what someone has finished.
+   */
+  completedLessons: readonly string[];
   /** Which prayers to be reminded of, and how long before. All off by default. */
   reminders: ReminderSettings;
 };
@@ -69,6 +77,7 @@ const DEFAULTS: Settings = {
   onboardingSkipped: false,
   userStage: null,
   initialInterest: null,
+  completedLessons: [],
   reminders: DEFAULT_REMINDERS,
 };
 
@@ -113,6 +122,13 @@ function parseStored(raw: string | null): Settings {
       initialInterest: isInitialInterest(stored.initialInterest)
         ? stored.initialInterest
         : null,
+      // Filtered rather than trusted: a malformed entry would otherwise mark a
+      // lesson complete that does not exist, and the total would never add up.
+      completedLessons: Array.isArray(stored.completedLessons)
+        ? stored.completedLessons.filter(
+            (entry): entry is string => typeof entry === 'string' && entry.includes(':'),
+          )
+        : [],
       reminders: parseReminders(stored.reminders),
     };
   } catch {
@@ -152,6 +168,8 @@ type SettingsContext = Settings & {
   set: <K extends keyof Settings>(key: K, value: Settings[K]) => void;
   /** Several settings at once, in one write. */
   setMany: (values: Partial<Settings>) => void;
+  /** Marks a lesson done, or undoes it. Reversible on purpose. */
+  toggleLesson: (key: string) => void;
   /** False until the stored value has been read — the splash waits on this. */
   loaded: boolean;
 };
@@ -202,6 +220,22 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
    * `set` calls would each be computed from state captured before the others
    * applied, and the app would gate on whichever wrote last.
    */
+  /**
+   * Completion is reversible. Someone who taps it by mistake, or who wants to
+   * go back through a lesson properly, should not be stuck with a tick they
+   * cannot remove — and nothing in the app treats a lesson as done-forever.
+   */
+  const toggleLesson = useCallback((key: string) => {
+    setSettings((current) => {
+      const done = new Set(current.completedLessons);
+      if (done.has(key)) done.delete(key);
+      else done.add(key);
+      const next = { ...current, completedLessons: [...done] };
+      void AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+      return next;
+    });
+  }, []);
+
   const setMany = useCallback((values: Partial<Settings>) => {
     setSettings((current) => {
       const next = { ...current, ...values };
@@ -211,8 +245,8 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const value = useMemo(
-    () => ({ ...settings, toggle, set, setMany, loaded }),
-    [settings, toggle, set, setMany, loaded],
+    () => ({ ...settings, toggle, set, setMany, toggleLesson, loaded }),
+    [settings, toggle, set, setMany, toggleLesson, loaded],
   );
 
   return <Context value={value}>{children}</Context>;

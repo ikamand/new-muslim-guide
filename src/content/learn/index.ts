@@ -29,6 +29,18 @@ import type { Reference } from '../types';
  * ⚠️ Every file here is model-written English over citations that were each
  * verified by opening the page. The prose still needs a qualified reader; the
  * numbers have been checked.
+ *
+ * Checked again in the content audit, this time against the text of every page
+ * rather than only its existence — 45 Qur'an references and 61 narrations, and
+ * for each one whether it says what the sentence beside it claims. Three did
+ * not, and were corrected in place: Bukhari 1899 for the Prophet's ﷺ
+ * generosity in Ramadan, Bukhari 3197 for the farewell sermon, and Bukhari
+ * 5828 for gold and silk. See the file comments where those sit.
+ *
+ * What a reviewer still owns, per claim rather than per file, is listed in
+ * `docs/scholarly-review.md`. The flag on each file below stays because the
+ * English is still model-written, which is a different question from whether
+ * the citation under it is right.
  */
 export const LEARN_TOPICS: Reference[] = [
   WHAT_IS_ISLAM,

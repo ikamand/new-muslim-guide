@@ -19,6 +19,15 @@ import type { ContentDict } from '../locales';
  * speaker's eye. It is proofreading rather than scholarly review: the claims
  * and their citations were settled in English.
  *
+ * ⚠️ TWO ENTRIES WERE DELETED in the content audit, not retranslated. The
+ * Ramadan lesson used to say the fast ends "at nightfall" and that zakat
+ * al-fitr is "food or its value"; the first is late by roughly an hour and the
+ * second states one school's position as the ruling. Both errors had been
+ * carried faithfully into French. Removing the entries drops those two
+ * sections back to the corrected English rather than replacing a wrong
+ * translation with a fresh machine-written one — which is what the fallback is
+ * for, and the only honest move without a French reader.
+ *
  * Anything absent falls back to English, so partial delivery is safe to ship.
  */
 export const FR: ContentDict = {
@@ -138,16 +147,12 @@ export const FR: ContentDict = {
     "Demandez à quelqu’un de qualifié, et posez la question sur votre situation réelle plutôt que sur le cas général — les circonstances changent les réponses. Vous rencontrerez aussi des musulmans sûrs de réponses opposées à la même question. Cela signifie généralement qu’il s’agit d’une véritable divergence entre savants, non que l’un d’eux vous ment.",
   "Eid al-Fitr":
     "Aïd el-Fitr",
-  "The month ends with Eid — a morning prayer, new or good clothes, and visiting people. Before that prayer, every Muslim gives a small fixed amount of food or its value so that nobody is left out of the day. It is called zakat al-fitr and it is due for every member of a household.":
-    "Le mois se termine par l’Aïd — une prière le matin, des vêtements neufs ou soignés, et des visites. Avant cette prière, chaque musulman donne une petite quantité fixe de nourriture ou sa valeur pour que personne ne soit laissé de côté ce jour-là. Cela s’appelle zakat al-fitr et c’est dû pour chaque membre du foyer.",
   "Suhoor and iftar":
     "Souhour et iftar",
   "Suhoor is the meal before dawn — the Prophet ﷺ said to take it, because there is blessing in it, and skipping it makes a long day much harder. Iftar is breaking the fast at sunset, traditionally with dates and water, and he taught not to delay it once the sun is down.":
     "Le souhour est le repas d’avant l’aube — le Prophète ﷺ a dit de le prendre, car il y a une bénédiction dedans, et le sauter rend une longue journée bien plus dure. L’iftar est la rupture du jeûne au coucher du soleil, traditionnellement avec des dattes et de l’eau, et il a enseigné à ne pas la retarder une fois le soleil couché.",
   "The fast itself":
     "Le jeûne lui-même",
-  "From first light until sunset, no food, no drink — not even water — and no sexual intimacy. The Qur’an marks the start of the fast as the moment dawn becomes distinguishable, and the end at nightfall. Outside those hours you eat and drink normally.":
-    "De la première lueur jusqu’au coucher du soleil : pas de nourriture, pas de boisson — pas même de l’eau — et pas d’intimité. Le Coran marque le début du jeûne au moment où l’aube se distingue, et la fin à la tombée de la nuit. En dehors de ces heures, vous mangez et buvez normalement.",
   "The rest of the month":
     "Le reste du mois",
   "Mosques fill up for taraweeh, a long optional night prayer, and many people read far more Qur’an than usual — Jibril would go through the Qur’an with the Prophet ﷺ each night of Ramadan. There is also more giving: he was described as at his most generous this month.":

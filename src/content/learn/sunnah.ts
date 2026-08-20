@@ -2,7 +2,18 @@ import { note, ref } from '../model';
 import { hadith, quran } from '../sources';
 import type { Reference } from '../types';
 
-/** ⚠️ REVIEW REQUIRED — model-written English, checked citations. */
+/**
+ * ⚠️ REVIEW REQUIRED — model-written English, checked citations.
+ *
+ * One citation is a looser fit than it looks. The last section lists four
+ * examples — greeting first, eating with the right hand, words before sleeping,
+ * smiling — and cites Bukhari 6018, which is the neighbour, the guest and
+ * saying something good or staying quiet. It carries the section's thesis, that
+ * much of the Sunnah is ordinary decency, and none of the four examples. Two of
+ * them are sourced elsewhere in the app (Bukhari 5376 and Bukhari 6324); the
+ * other two were left uncited rather than given a narration this audit had not
+ * opened. Kept as it is, and named here, rather than quietly padded.
+ */
 export const SUNNAH: Reference = {
   id: 'sunnah',
   surface: 'learn',

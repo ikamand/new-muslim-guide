@@ -2,7 +2,13 @@ import { note, ref } from '../model';
 import { hadith, quran } from '../sources';
 import type { Reference } from '../types';
 
-/** ⚠️ REVIEW REQUIRED — model-written English, checked citations. */
+/**
+ * ⚠️ REVIEW REQUIRED — model-written English, checked citations.
+ *
+ * The four sacred months cited Bukhari 3197, which has the wording but not the
+ * occasion; the sentence says "in his farewell sermon", and that is Bukhari
+ * 4406 — the same narration, in the chapter on the Farewell Pilgrimage.
+ */
 export const ISLAMIC_CALENDAR: Reference = {
   id: 'islamic-calendar',
   surface: 'learn',
@@ -31,10 +37,14 @@ export const ISLAMIC_CALENDAR: Reference = {
         'The Qur’an says four of the twelve are sacred, and the Prophet ﷺ named them in his farewell sermon: three consecutive — Dhul-Qaʿdah, Dhul-Hijjah and Muharram — and Rajab. Fighting is prohibited in them, and wrongdoing in them is treated as more serious.',
       sources: [
         quran(9, 36, { surahName: 'At-Tawbah' }),
-        hadith('bukhari', '3197', {
-          book: 59,
-          bookName: 'Beginning of Creation',
-          inBookReference: 'Book 59, Hadith 8',
+        // Was Bukhari 3197, which carries the same words but is filed under
+        // the Beginning of Creation and says nothing about when they were
+        // said. 4406 is the same narration in the chapter on the Farewell
+        // Pilgrimage, which is what the sentence claims.
+        hadith('bukhari', '4406', {
+          book: 64,
+          bookName: 'Military Expeditions led by the Prophet (pbuh) (Al-Maghaazi)',
+          inBookReference: 'Book 64, Hadith 428',
         }),
       ],
     },

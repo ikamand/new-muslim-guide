@@ -3,6 +3,7 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 
 import { RecitationCard } from '@/components/recitation-card';
 import { ContentNoteCard } from '@/components/content-note';
+import { SourceDisclosure } from '@/components/source-list';
 import { ThemedText } from '@/components/themed-text';
 import { DUAS, resolveNotes } from '@/content';
 import { MaxContentWidth, Spacing } from '@/constants/theme';
@@ -36,6 +37,14 @@ export default function DuasScreen() {
             {resolveNotes(dua.note, dua.meta?.notes).map((entry, position) => (
               <ContentNoteCard key={`${entry.kind}-${position}`} entry={entry} />
             ))}
+            {/*
+              This is where the grading finally becomes visible. The two
+              after-meal duʿas sit next to each other on this screen, one weak
+              and one hasan, and until now nothing on it said so.
+            */}
+            <SourceDisclosure
+              sources={[...(dua.says.sources ?? []), ...(dua.meta?.sources ?? [])]}
+            />
           </View>
         ))}
       </View>

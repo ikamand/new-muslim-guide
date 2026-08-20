@@ -46,11 +46,21 @@ export const CLOTHING: Reference = {
       heading: 'For men',
       body:
         'Cover at least from the navel to the knee, keep clothing loose enough not to be revealing, and avoid pure silk and gold jewellery, which the Prophet ﷺ restricted for men. In ordinary Western dress this changes very little in practice.',
+      /**
+       * Was Bukhari 5828, which is `Umar's letter about how much silk
+       * embroidery is allowed — it never mentions gold, and it is about the
+       * exception rather than the rule. Abu Dawud 4057 is `Ali's narration of
+       * the Prophet ﷺ holding silk in one hand and gold in the other and
+       * naming both as forbidden to the men of his community, which is the
+       * sentence this section actually makes.
+       */
       sources: [
-        hadith('bukhari', '5828', {
-          book: 77,
-          bookName: 'Dress',
-          inBookReference: 'Book 77, Hadith 45',
+        hadith('abu-dawud', '4057', {
+          book: 34,
+          bookName: 'Clothing (Kitab Al-Libas)',
+          inBookReference: 'Book 34, Hadith 38',
+          grading: 'sahih',
+          gradedBy: 'Al-Albani',
         }),
       ],
     },

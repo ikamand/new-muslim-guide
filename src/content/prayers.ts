@@ -1,5 +1,6 @@
 import { ref } from './model';
 import { Recitations } from './recitations';
+import { hadith } from './sources';
 import type { Guide, Step } from './types';
 
 /**
@@ -92,6 +93,17 @@ function rakahSteps(rakah: number, spec: PrayerSpec): Step[] {
     note: isFirst
       ? 'This is the one recitation the prayer cannot do without. Learn it first, a verse at a time.'
       : undefined,
+    // The note states a condition of the prayer's validity, so it carries the
+    // narration that states it — the same one `reference:al-fatihah` cites.
+    sources: isFirst
+      ? [
+          hadith('bukhari', '756', {
+            book: 10,
+            bookName: 'Call to Prayers (Adhaan)',
+            inBookReference: 'Book 10, Hadith 150',
+          }),
+        ]
+      : undefined,
   });
 
   if (addsSurah) {
@@ -102,7 +114,10 @@ function rakahSteps(rakah: number, spec: PrayerSpec): Step[] {
       instruction: aloud
         ? 'Recite any other short passage of the Qur’an aloud.'
         : 'Recite any other short passage of the Qur’an quietly.',
-      note: 'Al-Ikhlas is three verses and is where most people start. Until you know one, Al-Fatiha alone is enough.',
+      // Al-Ikhlas has four ayat, not three. The app said three here and
+      // "Four lines that answer the question" in `learn/who-is-allah.ts`,
+      // which cites Qur'an 112:1-4 — two screens, one surah, two numbers.
+      note: 'Al-Ikhlas is four short verses and is where most people start. Until you know one, Al-Fatiha alone is enough.',
     });
   }
 

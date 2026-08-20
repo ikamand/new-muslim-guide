@@ -22,8 +22,13 @@
  * screen — beside the audio rather than buried in Settings. Do not remove it
  * while these files are bundled.
  *
- * ⚠️ REVIEW REQUIRED — nobody qualified has yet listened to these seven files
- * to confirm each one is the ayah its filename claims.
+ * ⚠️ REVIEW REQUIRED — nobody qualified has yet listened to these seven files.
+ * Three things need an ear, not a script: that `fatiha-3` really is the third
+ * ayah and not the first repeated, that the recitation is complete rather than
+ * clipped at either end, and that the tajwid is sound enough to copy, since
+ * these are chosen for a learner to imitate. The content audit can confirm the
+ * file exists and that its id is wired to the right verse record; it cannot
+ * confirm what is on the recording, and no pass of it ever will.
  *
  * The recording brief in `docs/audio-recording-brief.md` covers the twelve
  * clips still to be recorded.

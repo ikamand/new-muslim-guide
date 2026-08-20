@@ -1,12 +1,16 @@
 import { note, ref } from './model';
-import { hadith } from './sources';
+import { hadith, quran } from './sources';
 import type { Guide } from './types';
 
 /**
  * Purification without water.
  *
- * ⚠️ REVIEW REQUIRED — model-written and unchecked, and this file has the
- * app's clearest school-of-thought split in it.
+ * ⚠️ PARTIAL REVIEW. The permission and the two things wiped are the Qur'an's
+ * own — 5:6 names clean earth, the face and the hands — and the method is the
+ * hadith of `Ammar ibn Yasir, now cited with its in-book number corrected
+ * (Bukhari 347 is Book 7, Hadith 14, not Hadith 8, as an earlier pass had it).
+ * The English prose is still model-written, and this file has the app's
+ * clearest school-of-thought split in it.
  *
  * Taught here as face and hands to the wrists, which is what the hadith of
  * ʿAmmar ibn Yasir describes. Some schools teach wiping the arms to the elbows.
@@ -27,6 +31,8 @@ export const TAYAMMUM: Guide = {
     beginnerPriority: 3,
     tags: ['travel', 'health'],
     relatedContent: [ref('guide', 'wudu'), ref('guide', 'ghusl')],
+    // The concession, the substitute, and the two things wiped, all in 5:6.
+    sources: [quran(5, 6, { surahName: "Al-Ma'idah" })],
   },
   steps: [
     {
@@ -35,6 +41,7 @@ export const TAYAMMUM: Guide = {
       instruction:
         'Tayammum replaces wudu, and replaces ghusl, when there is no water you can reach, when using it would make you ill or make an illness worse, or when the only water available is needed for drinking.',
       note: 'It is not for when water is merely inconvenient. But it is genuinely allowed when it applies — people miss prayers they were permitted to pray.',
+      sources: [quran(5, 6, { surahName: "Al-Ma'idah" })],
     },
     {
       id: 'intention',
@@ -73,11 +80,11 @@ export const TAYAMMUM: Guide = {
               hadith('bukhari', '347', {
                 book: 7,
                 bookName: 'Rubbing hands and feet with dust (Tayammum)',
-                inBookReference: 'Book 7, Hadith 8',
+                inBookReference: 'Book 7, Hadith 14',
               }),
             ],
             additionalExplanation:
-              'The wording of the narration is that the Prophet ﷺ struck the earth once, blew the dust off, wiped the back of each hand, and then his face. Schools that teach wiping to the elbows argue from other narrations and from the wudu verse. Nobody will think you have prayed invalidly either way.',
+              'In the narration the Prophet ﷺ struck the earth once, blew the dust off, and wiped the face and the backs of the hands — the two wordings Bukhari carries put those in either order, which is why you will see both taught. This guide follows the order of the wudu verse: face, then hands. Schools that teach wiping to the elbows argue from other narrations and from that same verse. Nobody will think you have prayed invalidly either way.',
           },
         ),
       ],

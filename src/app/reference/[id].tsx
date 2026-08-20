@@ -2,6 +2,7 @@ import { Stack, useLocalSearchParams } from 'expo-router';
 import { ScrollView, StyleSheet, View } from 'react-native';
 
 import { ContentNoteCard } from '@/components/content-note';
+import { SourceDisclosure } from '@/components/source-list';
 import { ThemedText } from '@/components/themed-text';
 import { getReference, resolveNotes } from '@/content';
 import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
@@ -58,6 +59,7 @@ export default function ReferenceScreen() {
             {resolveNotes(section.note, section.notes).map((entry, position) => (
               <ContentNoteCard key={`${entry.kind}-${position}`} entry={entry} />
             ))}
+            <SourceDisclosure sources={section.sources ?? []} />
           </View>
         ))}
       </View>

@@ -5,6 +5,7 @@ import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 
 import { RecitationCard } from '@/components/recitation-card';
 import { ContentNoteCard } from '@/components/content-note';
+import { SourceDisclosure } from '@/components/source-list';
 import { ThemedText } from '@/components/themed-text';
 import { getGuide, resolveNotes, type Posture } from '@/content';
 import { localiseGuide } from '@/i18n/localise';
@@ -99,6 +100,14 @@ export default function GuideScreen() {
         {resolveNotes(step.note, step.notes).map((entry, position) => (
           <ContentNoteCard key={`${entry.kind}-${position}`} entry={entry} />
         ))}
+
+        {/*
+          The step's own citations and the ones on the words it has you say,
+          in one list. They are two fields because they answer two questions —
+          where the instruction comes from, and where the wording does — but a
+          reader on a prayer mat is asking one.
+        */}
+        <SourceDisclosure sources={[...(step.sources ?? []), ...(step.says?.sources ?? [])]} />
       </ScrollView>
 
       <View style={[styles.footer, { borderTopColor: theme.border }]}>

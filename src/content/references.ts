@@ -1,16 +1,24 @@
 import { LEARN_TOPICS } from './learn';
 import { note, ref } from './model';
+import { hadith, quran } from './sources';
 import type { Reference } from './types';
 
 /**
  * Reference topics — the things people look up rather than work through.
  *
- * ⚠️ REVIEW REQUIRED — model-written and unchecked.
+ * ⚠️ PARTIAL REVIEW — the English is model-written; the citations were opened
+ * and matched.
  *
  * PERIODS is the most sensitive content in the app and the most consequential
  * to get wrong: it tells someone to stop praying. A woman who converts needs
  * it within about a month, and until now the app said nothing, leaving her to
  * ask a stranger a question most people are embarrassed to ask.
+ *
+ * The two claims that most needed evidence now have it, and it is the same
+ * narration for both: Mu`adha asked `Aisha whether missed prayers are made up
+ * and was told they are not, while the fasts are. Bukhari 321 and Muslim 335a
+ * carry it, and Muslim files it under a chapter heading that states the
+ * asymmetry outright.
  *
  * Two things a reviewer should weigh. The rules on reciting Qur'an and
  * entering a mosque during a period genuinely differ between schools, and are
@@ -32,6 +40,18 @@ export const PERIODS: Reference = {
       body:
         'From the moment bleeding starts until it stops, you do not pray. This is not permission to skip — you are not supposed to pray, and praying anyway is not better.',
       note: 'You do not make these prayers up afterwards. They are not a debt. This surprises most people, so it is worth saying twice: they are simply not owed.',
+      sources: [
+        hadith('bukhari', '321', {
+          book: 6,
+          bookName: 'Menstrual Periods',
+          inBookReference: 'Book 6, Hadith 26',
+        }),
+        hadith('muslim', '335a', {
+          book: 3,
+          bookName: 'The Book of Menstruation',
+          inBookReference: 'Book 3, Hadith 83',
+        }),
+      ],
     },
     {
       id: 'fasting',
@@ -39,12 +59,22 @@ export const PERIODS: Reference = {
       body:
         'You do not fast during a period. Fasts missed in Ramadan for this reason are made up later, before the next Ramadan, at your own pace.',
       note: 'Prayer and fasting work differently here. Prayers are not made up; fasts are.',
+      // The same narration as the section above. It is the one that draws the
+      // distinction, so it is cited at both ends of it rather than once.
+      sources: [
+        hadith('muslim', '335a', {
+          book: 3,
+          bookName: 'The Book of Menstruation',
+          inBookReference: 'Book 3, Hadith 83',
+        }),
+      ],
     },
     {
       id: 'ending',
       heading: 'When it ends',
       body:
         'Once the bleeding has stopped, take a ghusl — the full wash — and you go straight back to praying with the next prayer due.',
+      sources: [quran(2, 222, { surahName: 'Al-Baqarah' })],
     },
     {
       id: 'still-yours',
@@ -99,6 +129,15 @@ export const LOST_COUNT: Reference = {
       body:
         'If you cannot remember whether you are on the second or third rakʿah, assume the smaller one — the number you are certain of — and carry on from there.',
       note: 'Do not start the prayer again. Restarting is the common instinct and it is not the answer.',
+      // "Cast aside the doubt and build on what he is sure of" — the rule this
+      // section states, in the Prophet's ﷺ own wording.
+      sources: [
+        hadith('muslim', '571a', {
+          book: 5,
+          bookName: 'The Book of Mosques and Places of Prayer',
+          inBookReference: 'Book 5, Hadith 110',
+        }),
+      ],
     },
     {
       id: 'sujud',
@@ -109,6 +148,28 @@ export const LOST_COUNT: Reference = {
         note(
           'differs',
           'Schools differ on whether these come before or after the taslim. Either is taught by scholars; do it the way whoever taught you does it.',
+          {
+            /**
+             * Not a difference between a strong report and a weak one: both
+             * orders are in Bukhari. Ibn Buhaina's narration has the two
+             * prostrations before the taslim, Dhul-Yadain's has them after,
+             * and Muslim 571a puts the doubt case before. That is why the
+             * schools land in different places and why the app teaches neither
+             * as the correction of the other.
+             */
+            sources: [
+              hadith('bukhari', '1224', {
+                book: 22,
+                bookName: 'Forgetfulness in Prayer',
+                inBookReference: 'Book 22, Hadith 1',
+              }),
+              hadith('bukhari', '1229', {
+                book: 22,
+                bookName: 'Forgetfulness in Prayer',
+                inBookReference: 'Book 22, Hadith 7',
+              }),
+            ],
+          },
         ),
       ],
     },
@@ -142,6 +203,15 @@ export const MISSED: Reference = {
       heading: 'Pray it when you remember',
       body:
         'Sleeping through a prayer or forgetting it is not a sin. You pray it as soon as you wake or remember, and that prayer counts as the one you missed.',
+      // "There is no expiation except to pray the same" — which is exactly the
+      // reassurance this section is for: the fix is the prayer, not a penalty.
+      sources: [
+        hadith('bukhari', '597', {
+          book: 9,
+          bookName: 'Times of the Prayers',
+          inBookReference: 'Book 9, Hadith 72',
+        }),
+      ],
     },
     {
       id: 'order',
@@ -172,12 +242,27 @@ export const TRAVELLING: Reference = {
       body:
         'On a journey, the four-rakʿah prayers — Dhuhr, ʿAsr and ʿIshaʾ — are prayed as two. Fajr stays two and Maghrib stays three.',
       note: 'This is a gift, not a compromise. It is the practice of the Prophet ﷺ on journeys, not a lowering of the bar.',
+      sources: [
+        quran(4, 101, { surahName: 'An-Nisa' }),
+        hadith('bukhari', '1090', {
+          book: 18,
+          bookName: 'Shortening the Prayers (At-Taqseer)',
+          inBookReference: 'Book 18, Hadith 11',
+        }),
+      ],
     },
     {
       id: 'combine',
       heading: 'Two prayers together',
       body:
         'You may also pray Dhuhr and ʿAsr together, and Maghrib and ʿIshaʾ together, at the time of either one of the pair.',
+      sources: [
+        hadith('muslim', '703a', {
+          book: 6,
+          bookName: 'The Book of Prayer - Travellers',
+          inBookReference: 'Book 6, Hadith 52',
+        }),
+      ],
     },
     {
       id: 'howfar',
@@ -185,6 +270,17 @@ export const TRAVELLING: Reference = {
       body:
         'Far enough that you would ordinarily call it travelling — scholars put the line at roughly eighty kilometres, and differ on it and on how long you may keep shortening once you arrive.',
       note: 'A daily commute is not a journey, however long it feels. If you are unsure, ask someone locally rather than deciding alone.',
+      // ⚠️ REVIEW REQUIRED — the eighty kilometres. No verse or narration gives
+      // a distance; the figure comes from the classical `four burud`, which
+      // different schools convert differently, and the sentence already says
+      // scholars differ on it. Deliberately left without a citation rather
+      // than given one that does not say what it is being used to say.
+      notes: [
+        note(
+          'differs',
+          'There is no distance in the Qur’an or in a narration. The number scholars use comes from a classical measure, and they differ over both the distance and how long you may keep shortening after arriving.',
+        ),
+      ],
     },
   ],
 };
@@ -201,6 +297,15 @@ export const SEATED: Reference = {
       heading: 'Pray sitting',
       body:
         'If standing is beyond you, or would cause real pain or harm, pray sitting down — on a chair or on the floor, whichever you can manage.',
+      // `Imran ibn Husain asked because of an illness of his own, and got the
+      // whole ladder in one sentence: standing, then sitting, then lying.
+      sources: [
+        hadith('bukhari', '1117', {
+          book: 18,
+          bookName: 'Shortening the Prayers (At-Taqseer)',
+          inBookReference: 'Book 18, Hadith 37',
+        }),
+      ],
     },
     {
       id: 'gesture',
@@ -213,6 +318,13 @@ export const SEATED: Reference = {
       heading: 'If you cannot sit either',
       body:
         'Pray lying on your right side facing the qibla, or on your back, and make the movements with your head or your eyes. Prayer is never dropped for illness while you are conscious.',
+      sources: [
+        hadith('bukhari', '1117', {
+          book: 18,
+          bookName: 'Shortening the Prayers (At-Taqseer)',
+          inBookReference: 'Book 18, Hadith 37',
+        }),
+      ],
     },
     {
       id: 'counts',
@@ -240,6 +352,12 @@ export const SEATED: Reference = {
  * mosques and between countries far more here than anywhere else in the app,
  * so a reviewer should read this as "is any of it wrong enough to embarrass
  * someone" rather than as a ruling.
+ *
+ * Three sentences in it are not custom, and those now carry sources: that
+ * Friday prayer is a duty for men, that you pray two rakʿah on entering, and
+ * that you step in with the right foot. Everything else here is description
+ * of a building and of what people in it do, which is `general` knowledge and
+ * needs no isnad.
  */
 export const MOSQUE: Reference = {
   id: 'mosque',
@@ -267,6 +385,17 @@ export const MOSQUE: Reference = {
       body:
         'Friday midday is the busiest hour of the week. For a first visit, go for a normal prayer — Dhuhr in the early afternoon, or ʿIshaʾ at night. Fewer people, more room to watch what everyone else does.',
       note: 'Friday prayer is obligatory for men, so you will need to go eventually. It is easier once the building is already familiar.',
+      // The narration names the four it is not a duty for — a woman among
+      // them — which is where the note's "for men" comes from.
+      sources: [
+        hadith('abu-dawud', '1067', {
+          book: 2,
+          bookName: 'Prayer (Kitab Al-Salat)',
+          inBookReference: 'Book 2, Hadith 678',
+          grading: 'sahih',
+          gradedBy: 'Al-Albani',
+        }),
+      ],
     },
     {
       id: 'before',
@@ -279,6 +408,15 @@ export const MOSQUE: Reference = {
       heading: 'Walking in',
       body:
         'There will be a shoe rack by the door. Take your shoes off there and carry them in if the rack is full. Step in with your right foot. There are usually separate entrances or areas for men and women — look for the signs, or ask; nobody minds being asked.',
+      // The right foot is the general pattern `Aisha describes, not a rule of
+      // its own. The shoe rack is a shoe rack.
+      sources: [
+        hadith('bukhari', '168', {
+          book: 4,
+          bookName: "Ablutions (Wudu')",
+          inBookReference: 'Book 4, Hadith 34',
+        }),
+      ],
     },
     {
       id: 'inside',
@@ -286,6 +424,13 @@ export const MOSQUE: Reference = {
       body:
         'Pray two short rakʿah before you sit down — it is what everyone does on entering. Then sit anywhere on the carpet. There is no reserved seating and no collection.',
       note: 'If a prayer is already in progress, join the line where you are and follow along from wherever the imam has got to.',
+      sources: [
+        hadith('bukhari', '444', {
+          book: 8,
+          bookName: 'Prayers (Salat)',
+          inBookReference: 'Book 8, Hadith 93',
+        }),
+      ],
     },
     {
       id: 'prayer',

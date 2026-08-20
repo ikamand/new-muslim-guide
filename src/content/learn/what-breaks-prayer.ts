@@ -2,7 +2,17 @@ import { note, ref } from '../model';
 import { hadith } from '../sources';
 import type { Reference } from '../types';
 
-/** ⚠️ REVIEW REQUIRED — model-written English, checked citations. */
+/**
+ * ⚠️ REVIEW REQUIRED — model-written English, checked citations.
+ *
+ * The specific thing to look at: the first section lists four things that
+ * break the prayer and cites none of them there. Two are evidenced further
+ * down — speaking by Muslim 537a, and the doubt case by Bukhari 137 — but
+ * "eating or drinking" and "turning away from the qibla" are stated flat, and
+ * this is a list a beginner will act on directly. It is also the shortest
+ * possible version of a subject with real detail behind it; whether that
+ * shortness is a kindness or a half-teaching is a judgement for a reviewer.
+ */
 export const WHAT_BREAKS_PRAYER: Reference = {
   id: 'what-breaks-prayer',
   surface: 'learn',

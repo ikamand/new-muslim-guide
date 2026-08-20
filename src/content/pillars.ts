@@ -1,12 +1,25 @@
 import { Recitations } from './recitations';
+import { hadith, quran } from './sources';
 import type { Pillar } from './types';
 
 /**
  * The five pillars, as reference reading.
  *
- * ⚠️ REVIEW REQUIRED — the Arabic names and the shahada wording below were
- * written by a model and have not been checked by a qualified person. The
+ * ⚠️ REVIEW REQUIRED, two things by name. First, the Arabic names below were
+ * written by a model and have not been checked by a qualified person; the
  * vocalisation marks in particular need verifying against a printed source.
+ * Second, the zakat record states a threshold and a full lunar year and cites
+ * neither — both are real, both come from narrations this audit did not open,
+ * and the sentence is doing more work than its citation supports.
+ *
+ * (The shahada wording is no longer in that category: it is
+ * `Recitations.shahada`, and the guide that teaches it now cites Bukhari 8.)
+ *
+ * Every record here makes one claim before it says anything else — that this
+ * is one of the five — and that claim is Ibn `Umar's narration, Bukhari 8. It
+ * is cited on each rather than once, because a pillar is read on its own page.
+ * Where a record goes on to state a condition, the verse for that condition is
+ * cited beside it.
  *
  * The English is deliberately plain and deliberately shallow. This page
  * orients someone who has just become Muslim; it is not a fiqh reference,
@@ -33,6 +46,20 @@ export const PILLARS: Pillar[] = [
     guideId: 'shahada',
     detail:
       'This is the pillar the other four rest on. Saying it sincerely is what makes a person Muslim, and it is repeated in every prayer for the rest of your life. It is two statements held together: that worship belongs to Allah alone, and that Muhammad ﷺ is the one who conveyed how.',
+    meta: {
+      category: 'becoming-muslim',
+      difficulty: 'foundational',
+      estimatedMinutes: 2,
+      beginnerPriority: 1,
+      tags: ['first-day'],
+      sources: [
+        hadith('bukhari', '8', {
+          book: 2,
+          bookName: 'Belief',
+          inBookReference: 'Book 2, Hadith 1',
+        }),
+      ],
+    },
   },
   {
     id: 'salah',
@@ -43,6 +70,22 @@ export const PILLARS: Pillar[] = [
     detail:
       'Fajr before sunrise, Dhuhr after midday, ʿAsr in the afternoon, Maghrib just after sunset, and ʿIshaʾ at night. Each one takes a few minutes. You wash first — that is wudu — and the app walks you through both.',
     guideId: 'fajr',
+    meta: {
+      category: 'salah',
+      difficulty: 'foundational',
+      estimatedMinutes: 2,
+      beginnerPriority: 1,
+      tags: ['first-day'],
+      // The pillar, and the "at set times" the summary claims.
+      sources: [
+        hadith('bukhari', '8', {
+          book: 2,
+          bookName: 'Belief',
+          inBookReference: 'Book 2, Hadith 1',
+        }),
+        quran(4, 103, { surahName: 'An-Nisa' }),
+      ],
+    },
   },
   {
     id: 'zakat',
@@ -52,6 +95,24 @@ export const PILLARS: Pillar[] = [
     summary: 'A yearly share of the wealth you have held onto, given to those entitled to it.',
     detail:
       'Zakat is not a donation you choose to make — it is a portion of your savings that stops being yours. It applies only above a threshold, and only to wealth you have held for a full lunar year, so many people newly earning owe none at all. Whether it applies to you is worth asking someone locally rather than working out alone.',
+    meta: {
+      category: 'charity',
+      difficulty: 'building',
+      estimatedMinutes: 2,
+      beginnerPriority: 3,
+      tags: ['money'],
+      // ⚠️ Bukhari 8 covers that zakat is one of the five, and nothing more.
+      // The threshold and the lunar year are real and are not cited here —
+      // they come from narrations this audit did not open, and the record
+      // already sends the reader to someone local rather than to a number.
+      sources: [
+        hadith('bukhari', '8', {
+          book: 2,
+          bookName: 'Belief',
+          inBookReference: 'Book 2, Hadith 1',
+        }),
+      ],
+    },
   },
   {
     id: 'sawm',
@@ -61,6 +122,25 @@ export const PILLARS: Pillar[] = [
     summary: 'No food, drink or intimacy from dawn until sunset, for the month of Ramadan.',
     detail:
       'Ramadan moves through the year, so its length and difficulty change with the season. There are real exemptions — illness, travel, pregnancy, nursing, menstruation, old age — and taking one is not a failure. Some days are made up later, some are not.',
+    meta: {
+      category: 'fasting',
+      difficulty: 'building',
+      estimatedMinutes: 2,
+      beginnerPriority: 3,
+      tags: ['ramadan'],
+      // The pillar; the hours the summary gives; and the two exemptions the
+      // Qur'an names by itself. The rest of the exemption list is held, with
+      // its own note, in `reference:ramadan`.
+      sources: [
+        hadith('bukhari', '8', {
+          book: 2,
+          bookName: 'Belief',
+          inBookReference: 'Book 2, Hadith 1',
+        }),
+        quran(2, 187, { surahName: 'Al-Baqarah' }),
+        quran(2, 185, { surahName: 'Al-Baqarah' }),
+      ],
+    },
   },
   {
     id: 'hajj',
@@ -70,6 +150,22 @@ export const PILLARS: Pillar[] = [
     summary: 'The pilgrimage to Mecca, once in a lifetime, for those able to make it.',
     detail:
       'Hajj happens on fixed days of the Islamic year and is required once, and only if you can afford it and are physically able. Most Muslims go later in life, if at all. Nothing about it is expected of you now.',
+    meta: {
+      category: 'pilgrimage',
+      difficulty: 'building',
+      estimatedMinutes: 2,
+      beginnerPriority: 4,
+      sources: [
+        hadith('bukhari', '8', {
+          book: 2,
+          bookName: 'Belief',
+          inBookReference: 'Book 2, Hadith 1',
+        }),
+        // "for whoever is able to find thereto a way" — the condition this
+        // record states, in the verse that states it.
+        quran(3, 97, { surahName: 'Al-Imran' }),
+      ],
+    },
   },
 ];
 

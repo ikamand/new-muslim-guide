@@ -2,8 +2,9 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 
+import { SourceLines } from '@/components/source-list';
 import { ThemedText } from '@/components/themed-text';
-import { formatSource, hasMore, type Attribution, type ContentNote } from '@/content';
+import { hasMore, type Attribution, type ContentNote } from '@/content';
 import { Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { useTheme } from '@/hooks/use-theme';
@@ -39,6 +40,10 @@ function schoolLabel(school: Attribution, t: (key: UIKey) => string): string {
  * sent anyone off-device, and making a citation tappable would be the first
  * thing that does — a decision worth taking deliberately rather than as a
  * side effect. The URLs are stored on every source and ready for it.
+ *
+ * The citation list itself moved to `source-list.tsx` unchanged, because a
+ * step, a reference section and a duʿa all needed the same block and there
+ * must be one of it rather than four.
  */
 export function ContentNoteCard({ entry }: { entry: ContentNote }) {
   const theme = useTheme();
@@ -99,20 +104,7 @@ export function ContentNoteCard({ entry }: { entry: ContentNote }) {
           )}
 
           {entry.sources && entry.sources.length > 0 && (
-            <View style={styles.block}>
-              <ThemedText type="smallBold" themeColor="textSecondary" style={styles.label}>
-                {t('note.sources')}
-              </ThemedText>
-              {entry.sources.map((source) => (
-                <ThemedText
-                  key={formatSource(source)}
-                  type="small"
-                  themeColor="textSecondary"
-                  style={styles.source}>
-                  {formatSource(source)}
-                </ThemedText>
-              ))}
-            </View>
+            <SourceLines sources={entry.sources} />
           )}
         </View>
       )}
@@ -166,8 +158,5 @@ const styles = StyleSheet.create({
   },
   positionText: {
     flex: 1,
-  },
-  source: {
-    fontVariant: ['tabular-nums'],
   },
 });

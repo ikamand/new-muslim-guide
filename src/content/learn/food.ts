@@ -11,6 +11,14 @@ import type { Reference } from '../types';
  * both positions, because a convert meets it in their first week and will be
  * told opposite things by people who are each sincerely reporting what they
  * were taught.
+ *
+ * ⚠️ The two positions in that note are attributed to `contemporary
+ * scholarship` and `a minority`, and those labels are the weakest thing in
+ * this file. They were chosen to avoid naming a madhhab without a source,
+ * which is the right instinct, but "a minority" is itself a claim about how
+ * many scholars hold a view and nothing here establishes it. A reviewer should
+ * either replace both labels with attributions that can be sourced, or say
+ * plainly that contemporary scholars differ without counting them.
  */
 export const FOOD: Reference = {
   id: 'food',

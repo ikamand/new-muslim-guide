@@ -31,8 +31,24 @@ import type { Recitation, RecitationVerse } from './types';
  * called them "the same duʿa graded hasan". They are not — 3458 and 3285 are a
  * DIFFERENT text. 3457 and 3283 are the same text, and both are weak.
  *
- * The prayer recitations above still carry no reference. That is a gap the
- * same report shows, not a claim that none exists.
+ * ⚠️ The prayer recitations no longer carry nothing. Every one of them was
+ * matched, letter for letter with the vowel marks stripped, against the page
+ * it now cites — takbir and rising to Bukhari 795, tashahhud to Bukhari 831,
+ * salawat to Bukhari 3370, the two tasbihs to Muslim 772, the opening
+ * supplication to Abu Dawud 775, `rabbi-ghfir lī` to Abu Dawud 874, the taslim
+ * to Abu Dawud 996, and the shahada after wudu to Muslim 234b. What is checked
+ * is the wording and the number; the English translations beside them are still
+ * the app's own and still want a qualified reader.
+ *
+ * Every citation in the app — not only in this file — was then cross-checked
+ * mechanically against sunnah.com: in-book reference, grading, and grading
+ * authority, sixty-six narrations. One was wrong, and it was in here: the
+ * travel duʿa's in-book reference was Book 15, Hadith 75 and the page says 479.
+ *
+ * One of those nearly went the wrong way. The shahada after wudu matches
+ * Muslim 234b exactly, but not 234a and not Abu Dawud 169 — each is one word
+ * different — and stopping at the first two would have made the app "correct"
+ * a text that was already right. A near miss is not a miss; keep reading.
  */
 /**
  * Al-Fatiha, ayah by ayah.
@@ -95,6 +111,15 @@ export const Recitations = {
     arabic: 'اللَّهُ أَكْبَرُ',
     transliteration: 'Allāhu akbar',
     translation: 'Allah is the greatest.',
+    // Abu Huraira's description of where the takbir falls in the prayer:
+    // on bowing, on rising, on prostrating, and on standing after the two.
+    sources: [
+      hadith('bukhari', '795', {
+        book: 10,
+        bookName: 'Call to Prayers (Adhaan)',
+        inBookReference: 'Book 10, Hadith 190',
+      }),
+    ],
     audioId: 'takbir',
   },
 
@@ -106,6 +131,16 @@ export const Recitations = {
       'Subḥānaka-llāhumma wa biḥamdika, wa tabāraka-smuka, wa taʿālā jadduka, wa lā ilāha ghayruk',
     translation:
       'Glory be to You, O Allah, and praise. Blessed is Your name, exalted is Your majesty, and there is no god but You.',
+    sources: [
+      hadith('abu-dawud', '775', {
+        book: 2,
+        bookName: 'Prayer (Kitab Al-Salat)',
+        inBookReference: 'Book 2, Hadith 385',
+        grading: 'sahih',
+        gradedBy: 'Al-Albani',
+        role: 'practice',
+      }),
+    ],
     audioId: 'opening',
   },
 
@@ -114,6 +149,8 @@ export const Recitations = {
     arabic: 'أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ',
     transliteration: 'Aʿūdhu bi-llāhi mina-sh-shayṭāni-r-rajīm',
     translation: 'I seek refuge in Allah from Satan, the rejected.',
+    // The wording is the Qur'an's own, in the verse that gives the instruction.
+    sources: [quran(16, 98, { surahName: 'An-Nahl' })],
     audioId: 'taawwudh',
   },
 
@@ -133,6 +170,13 @@ export const Recitations = {
     transliteration: 'Subḥāna rabbiya-l-ʿaẓīm',
     translation: 'Glory be to my Lord, the Most Great.',
     times: 'Three times',
+    sources: [
+      hadith('muslim', '772', {
+        book: 6,
+        bookName: 'The Book of Prayer - Travellers',
+        inBookReference: 'Book 6, Hadith 242',
+      }),
+    ],
     audioId: 'ruku-tasbih',
   },
 
@@ -142,6 +186,15 @@ export const Recitations = {
     transliteration: 'Samiʿa-llāhu liman ḥamidah — Rabbanā wa laka-l-ḥamd',
     translation:
       'Allah hears the one who praises Him. Our Lord, to You belongs all praise.',
+    // Both halves in one narration, in this wording — Abu Huraira reports the
+    // reply as `Rabbanā wa laka-l-ḥamd`, which is the form used here.
+    sources: [
+      hadith('bukhari', '795', {
+        book: 10,
+        bookName: 'Call to Prayers (Adhaan)',
+        inBookReference: 'Book 10, Hadith 190',
+      }),
+    ],
     audioId: 'rising',
   },
 
@@ -151,6 +204,13 @@ export const Recitations = {
     transliteration: 'Subḥāna rabbiya-l-aʿlā',
     translation: 'Glory be to my Lord, the Most High.',
     times: 'Three times',
+    sources: [
+      hadith('muslim', '772', {
+        book: 6,
+        bookName: 'The Book of Prayer - Travellers',
+        inBookReference: 'Book 6, Hadith 242',
+      }),
+    ],
     audioId: 'sujud-tasbih',
   },
 
@@ -159,6 +219,16 @@ export const Recitations = {
     arabic: 'رَبِّ اغْفِرْ لِي',
     transliteration: 'Rabbi-ghfir lī',
     translation: 'My Lord, forgive me.',
+    sources: [
+      hadith('abu-dawud', '874', {
+        book: 2,
+        bookName: 'Prayer (Kitab Al-Salat)',
+        inBookReference: 'Book 2, Hadith 484',
+        grading: 'sahih',
+        gradedBy: 'Al-Albani',
+        role: 'practice',
+      }),
+    ],
     audioId: 'between-prostrations',
   },
 
@@ -170,6 +240,15 @@ export const Recitations = {
       'At-taḥiyyātu li-llāhi wa-ṣ-ṣalawātu wa-ṭ-ṭayyibāt. As-salāmu ʿalayka ayyuha-n-nabiyyu wa raḥmatu-llāhi wa barakātuh. As-salāmu ʿalaynā wa ʿalā ʿibādi-llāhi-ṣ-ṣāliḥīn. Ash-hadu an lā ilāha illa-llāh, wa ash-hadu anna Muḥammadan ʿabduhu wa rasūluh.',
     translation:
       'All greetings, prayers and good things are for Allah. Peace be upon you, O Prophet, and the mercy of Allah and His blessings. Peace be upon us and upon the righteous servants of Allah. I bear witness that there is no god but Allah, and I bear witness that Muhammad is His servant and His messenger.',
+    // Ibn Mas`ud's wording, taught by the Prophet ﷺ as the words to say in
+    // place of what the companions had been saying.
+    sources: [
+      hadith('bukhari', '831', {
+        book: 10,
+        bookName: 'Call to Prayers (Adhaan)',
+        inBookReference: 'Book 10, Hadith 225',
+      }),
+    ],
     audioId: 'tashahhud',
   },
 
@@ -181,6 +260,14 @@ export const Recitations = {
       'Allāhumma ṣalli ʿalā Muḥammadin wa ʿalā āli Muḥammad, kamā ṣallayta ʿalā Ibrāhīma wa ʿalā āli Ibrāhīm, innaka ḥamīdun majīd. Allāhumma bārik ʿalā Muḥammadin wa ʿalā āli Muḥammad, kamā bārakta ʿalā Ibrāhīma wa ʿalā āli Ibrāhīm, innaka ḥamīdun majīd.',
     translation:
       'O Allah, send prayers upon Muhammad and the family of Muhammad, as You sent prayers upon Abraham and the family of Abraham. You are indeed Praiseworthy, Glorious. O Allah, bless Muhammad and the family of Muhammad, as You blessed Abraham and the family of Abraham. You are indeed Praiseworthy, Glorious.',
+    // Ka`b ibn `Ujrah asked how to send blessings, and this is the answer.
+    sources: [
+      hadith('bukhari', '3370', {
+        book: 60,
+        bookName: 'Prophets',
+        inBookReference: 'Book 60, Hadith 44',
+      }),
+    ],
     audioId: 'salawat',
   },
 
@@ -190,6 +277,16 @@ export const Recitations = {
     transliteration: 'As-salāmu ʿalaykum wa raḥmatu-llāh',
     translation: 'Peace be upon you, and the mercy of Allah.',
     times: 'Once to the right, then once to the left',
+    sources: [
+      hadith('abu-dawud', '996', {
+        book: 2,
+        bookName: 'Prayer (Kitab Al-Salat)',
+        inBookReference: 'Book 2, Hadith 607',
+        grading: 'sahih',
+        gradedBy: 'Al-Albani',
+        role: 'practice',
+      }),
+    ],
     audioId: 'taslim',
   },
 
@@ -209,6 +306,20 @@ export const Recitations = {
       'Ash-hadu an lā ilāha illa-llāhu waḥdahu lā sharīka lah, wa ash-hadu anna Muḥammadan ʿabduhu wa rasūluh',
     translation:
       'I bear witness that there is no god but Allah alone, with no partner, and I bear witness that Muhammad is His servant and His messenger.',
+    /**
+     * Muslim carries this occasion in several wordings. 234b is the one that
+     * matches the app's text word for word — with `waḥdahu lā sharīka lah` and
+     * with `wa ash-hadu anna` rather than `wa anna`. 234a and Abu Dawud 169
+     * are each a word off, and Tirmidhi 55, which has the same wording, is
+     * graded weak. Checked before assuming the app had reconstructed it.
+     */
+    sources: [
+      hadith('muslim', '234b', {
+        book: 2,
+        bookName: 'The Book of Purification',
+        inBookReference: 'Book 2, Hadith 21',
+      }),
+    ],
     audioId: 'shahada-after-wudu',
   },
 
@@ -217,6 +328,20 @@ export const Recitations = {
     arabic: 'بِسْمِ اللَّهِ',
     transliteration: 'Bismillāh',
     translation: 'In the name of Allah.',
+    /**
+     * The same two words serve the meal in `duas.ts`; the citation for that
+     * occasion sits on the duʿa, because a source belongs to the claim it
+     * supports rather than to the words.
+     */
+    sources: [
+      hadith('abu-dawud', '101', {
+        book: 1,
+        bookName: 'Purification (Kitab Al-Taharah)',
+        inBookReference: 'Book 1, Hadith 101',
+        grading: 'sahih',
+        gradedBy: 'Al-Albani',
+      }),
+    ],
     audioId: 'bismillah',
   },
 
@@ -415,7 +540,10 @@ export const Recitations = {
       hadith('muslim', '1342', {
         book: 15,
         bookName: 'The Book of Pilgrimage',
-        inBookReference: 'Book 15, Hadith 75',
+        // Book 15, Hadith 479 on the page. An earlier pass corrected the
+        // hadith number here (it had cited the deprecated USC-MSA 3153) and
+        // carried the wrong in-book number across with it.
+        inBookReference: 'Book 15, Hadith 479',
       }),
     ],
     audioId: 'dua-travel',

@@ -1,105 +1,9 @@
 [
  {
-  "where": "The takbir",
-  "arabic": "اللَّهُ أَكْبَرُ",
-  "translit": "Allāhu akbar",
-  "english": "Allah is the greatest.",
-  "source": "",
-  "file": "recitations.ts"
- },
- {
-  "where": "The opening supplication",
-  "arabic": "سُبْحَانَكَ اللَّهُمَّ وَبِحَمْدِكَ، وَتَبَارَكَ اسْمُكَ، وَتَعَالَى جَدُّكَ، وَلَا إِلَهَ غَيْرُكَ",
-  "translit": "Subḥānaka-llāhumma wa biḥamdika, wa tabāraka-smuka, wa taʿālā jadduka, wa lā ilāha ghayruk",
-  "english": "Glory be to You, O Allah, and praise. Blessed is Your name, exalted is Your majesty, and there is no god but You.",
-  "source": "",
-  "file": "recitations.ts"
- },
- {
-  "where": "Seeking refuge",
-  "arabic": "أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ",
-  "translit": "Aʿūdhu bi-llāhi mina-sh-shayṭāni-r-rajīm",
-  "english": "I seek refuge in Allah from Satan, the rejected.",
-  "source": "",
-  "file": "recitations.ts"
- },
- {
-  "where": "In rukuʿ",
-  "arabic": "سُبْحَانَ رَبِّيَ الْعَظِيمِ",
-  "translit": "Subḥāna rabbiya-l-ʿaẓīm",
-  "english": "Glory be to my Lord, the Most Great.",
-  "source": "",
-  "file": "recitations.ts"
- },
- {
-  "where": "Rising from rukuʿ",
-  "arabic": "سَمِعَ اللَّهُ لِمَنْ حَمِدَهُ ، رَبَّنَا وَلَكَ الْحَمْدُ",
-  "translit": "Samiʿa-llāhu liman ḥamidah — Rabbanā wa laka-l-ḥamd",
-  "english": "Allah hears the one who praises Him. Our Lord, to You belongs all praise.",
-  "source": "",
-  "file": "recitations.ts"
- },
- {
-  "where": "In sujud",
-  "arabic": "سُبْحَانَ رَبِّيَ الْأَعْلَى",
-  "translit": "Subḥāna rabbiya-l-aʿlā",
-  "english": "Glory be to my Lord, the Most High.",
-  "source": "",
-  "file": "recitations.ts"
- },
- {
-  "where": "Between the prostrations",
-  "arabic": "رَبِّ اغْفِرْ لِي",
-  "translit": "Rabbi-ghfir lī",
-  "english": "My Lord, forgive me.",
-  "source": "",
-  "file": "recitations.ts"
- },
- {
-  "where": "The tashahhud",
-  "arabic": "التَّحِيَّاتُ لِلَّهِ وَالصَّلَوَاتُ وَالطَّيِّبَاتُ، السَّلَامُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ، السَّلَامُ عَلَيْنَا وَعَلَى عِبَادِ اللَّهِ الصَّالِحِينَ، أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ",
-  "translit": "At-taḥiyyātu li-llāhi wa-ṣ-ṣalawātu wa-ṭ-ṭayyibāt. As-salāmu ʿalayka ayyuha-n-nabiyyu wa raḥmatu-llāhi wa barakātuh. As-salāmu ʿalaynā wa ʿalā ʿibādi-llāhi-ṣ-ṣāliḥīn. Ash-hadu an lā ilāha illa-llāh, wa ash-hadu anna Muḥammadan ʿabduhu wa rasūluh.",
-  "english": "All greetings, prayers and good things are for Allah. Peace be upon you, O Prophet, and the mercy of Allah and His blessings. Peace be upon us and upon the righteous servants of Allah. I bear witness that there is no god but Allah, and I bear witness that Muhammad is His servant and His messenger.",
-  "source": "",
-  "file": "recitations.ts"
- },
- {
-  "where": "The salawat",
-  "arabic": "اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ. اللَّهُمَّ بَارِكْ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا بَارَكْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ",
-  "translit": "Allāhumma ṣalli ʿalā Muḥammadin wa ʿalā āli Muḥammad, kamā ṣallayta ʿalā Ibrāhīma wa ʿalā āli Ibrāhīm, innaka ḥamīdun majīd. Allāhumma bārik ʿalā Muḥammadin wa ʿalā āli Muḥammad, kamā bārakta ʿalā Ibrāhīma wa ʿalā āli Ibrāhīm, innaka ḥamīdun majīd.",
-  "english": "O Allah, send prayers upon Muhammad and the family of Muhammad, as You sent prayers upon Abraham and the family of Abraham. You are indeed Praiseworthy, Glorious. O Allah, bless Muhammad and the family of Muhammad, as You blessed Abraham and the family of Abraham. You are indeed Praiseworthy, Glorious.",
-  "source": "",
-  "file": "recitations.ts"
- },
- {
-  "where": "The taslim",
-  "arabic": "السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللَّهِ",
-  "translit": "As-salāmu ʿalaykum wa raḥmatu-llāh",
-  "english": "Peace be upon you, and the mercy of Allah.",
-  "source": "",
-  "file": "recitations.ts"
- },
- {
   "where": "The testimony of faith",
   "arabic": "لَا إِلَٰهَ إِلَّا اللَّهُ مُحَمَّدٌ رَسُولُ اللَّهِ",
   "translit": "Lā ilāha illā-llāh, Muḥammadun rasūlu-llāh",
   "english": "There is no god but Allah, and Muhammad is the Messenger of Allah.",
-  "source": "",
-  "file": "recitations.ts"
- },
- {
-  "where": "After wudu",
-  "arabic": "أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ",
-  "translit": "Ash-hadu an lā ilāha illa-llāhu waḥdahu lā sharīka lah, wa ash-hadu anna Muḥammadan ʿabduhu wa rasūluh",
-  "english": "I bear witness that there is no god but Allah alone, with no partner, and I bear witness that Muhammad is His servant and His messenger.",
-  "source": "",
-  "file": "recitations.ts"
- },
- {
-  "where": "Before eating",
-  "arabic": "بِسْمِ اللَّهِ",
-  "translit": "Bismillāh",
-  "english": "In the name of Allah.",
   "source": "",
   "file": "recitations.ts"
  },
@@ -304,6 +208,30 @@
   "file": "iman.ts"
  },
  {
+  "where": "The takbir",
+  "arabic": "اللَّهُ أَكْبَرُ",
+  "translit": "Allāhu akbar",
+  "english": "Allah is the greatest.",
+  "source": "Sahih al-Bukhari 795",
+  "file": "recitations.ts"
+ },
+ {
+  "where": "The opening supplication",
+  "arabic": "سُبْحَانَكَ اللَّهُمَّ وَبِحَمْدِكَ، وَتَبَارَكَ اسْمُكَ، وَتَعَالَى جَدُّكَ، وَلَا إِلَهَ غَيْرُكَ",
+  "translit": "Subḥānaka-llāhumma wa biḥamdika, wa tabāraka-smuka, wa taʿālā jadduka, wa lā ilāha ghayruk",
+  "english": "Glory be to You, O Allah, and praise. Blessed is Your name, exalted is Your majesty, and there is no god but You.",
+  "source": "Sunan Abi Dawud 775 (sahih — Al-Albani)",
+  "file": "recitations.ts"
+ },
+ {
+  "where": "Seeking refuge",
+  "arabic": "أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ",
+  "translit": "Aʿūdhu bi-llāhi mina-sh-shayṭāni-r-rajīm",
+  "english": "I seek refuge in Allah from Satan, the rejected.",
+  "source": "Qur'an 16:98",
+  "file": "recitations.ts"
+ },
+ {
   "where": "Al-Fatiha — ayah 1",
   "arabic": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
   "translit": "Bismi-llāhi-r-raḥmāni-r-raḥīm",
@@ -357,6 +285,78 @@
   "translit": "Ṣirāṭa-lladhīna anʿamta ʿalayhim ghayri-l-maghḍūbi ʿalayhim wa lā-ḍ-ḍāllīn",
   "english": "The path of those You have blessed — not of those who have earned Your anger, nor of those who have gone astray.",
   "source": "Qur'an 1:1-7",
+  "file": "recitations.ts"
+ },
+ {
+  "where": "In rukuʿ",
+  "arabic": "سُبْحَانَ رَبِّيَ الْعَظِيمِ",
+  "translit": "Subḥāna rabbiya-l-ʿaẓīm",
+  "english": "Glory be to my Lord, the Most Great.",
+  "source": "Sahih Muslim 772",
+  "file": "recitations.ts"
+ },
+ {
+  "where": "Rising from rukuʿ",
+  "arabic": "سَمِعَ اللَّهُ لِمَنْ حَمِدَهُ ، رَبَّنَا وَلَكَ الْحَمْدُ",
+  "translit": "Samiʿa-llāhu liman ḥamidah — Rabbanā wa laka-l-ḥamd",
+  "english": "Allah hears the one who praises Him. Our Lord, to You belongs all praise.",
+  "source": "Sahih al-Bukhari 795",
+  "file": "recitations.ts"
+ },
+ {
+  "where": "In sujud",
+  "arabic": "سُبْحَانَ رَبِّيَ الْأَعْلَى",
+  "translit": "Subḥāna rabbiya-l-aʿlā",
+  "english": "Glory be to my Lord, the Most High.",
+  "source": "Sahih Muslim 772",
+  "file": "recitations.ts"
+ },
+ {
+  "where": "Between the prostrations",
+  "arabic": "رَبِّ اغْفِرْ لِي",
+  "translit": "Rabbi-ghfir lī",
+  "english": "My Lord, forgive me.",
+  "source": "Sunan Abi Dawud 874 (sahih — Al-Albani)",
+  "file": "recitations.ts"
+ },
+ {
+  "where": "The tashahhud",
+  "arabic": "التَّحِيَّاتُ لِلَّهِ وَالصَّلَوَاتُ وَالطَّيِّبَاتُ، السَّلَامُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ، السَّلَامُ عَلَيْنَا وَعَلَى عِبَادِ اللَّهِ الصَّالِحِينَ، أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ",
+  "translit": "At-taḥiyyātu li-llāhi wa-ṣ-ṣalawātu wa-ṭ-ṭayyibāt. As-salāmu ʿalayka ayyuha-n-nabiyyu wa raḥmatu-llāhi wa barakātuh. As-salāmu ʿalaynā wa ʿalā ʿibādi-llāhi-ṣ-ṣāliḥīn. Ash-hadu an lā ilāha illa-llāh, wa ash-hadu anna Muḥammadan ʿabduhu wa rasūluh.",
+  "english": "All greetings, prayers and good things are for Allah. Peace be upon you, O Prophet, and the mercy of Allah and His blessings. Peace be upon us and upon the righteous servants of Allah. I bear witness that there is no god but Allah, and I bear witness that Muhammad is His servant and His messenger.",
+  "source": "Sahih al-Bukhari 831",
+  "file": "recitations.ts"
+ },
+ {
+  "where": "The salawat",
+  "arabic": "اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ. اللَّهُمَّ بَارِكْ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا بَارَكْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ",
+  "translit": "Allāhumma ṣalli ʿalā Muḥammadin wa ʿalā āli Muḥammad, kamā ṣallayta ʿalā Ibrāhīma wa ʿalā āli Ibrāhīm, innaka ḥamīdun majīd. Allāhumma bārik ʿalā Muḥammadin wa ʿalā āli Muḥammad, kamā bārakta ʿalā Ibrāhīma wa ʿalā āli Ibrāhīm, innaka ḥamīdun majīd.",
+  "english": "O Allah, send prayers upon Muhammad and the family of Muhammad, as You sent prayers upon Abraham and the family of Abraham. You are indeed Praiseworthy, Glorious. O Allah, bless Muhammad and the family of Muhammad, as You blessed Abraham and the family of Abraham. You are indeed Praiseworthy, Glorious.",
+  "source": "Sahih al-Bukhari 3370",
+  "file": "recitations.ts"
+ },
+ {
+  "where": "The taslim",
+  "arabic": "السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللَّهِ",
+  "translit": "As-salāmu ʿalaykum wa raḥmatu-llāh",
+  "english": "Peace be upon you, and the mercy of Allah.",
+  "source": "Sunan Abi Dawud 996 (sahih — Al-Albani)",
+  "file": "recitations.ts"
+ },
+ {
+  "where": "After wudu",
+  "arabic": "أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ",
+  "translit": "Ash-hadu an lā ilāha illa-llāhu waḥdahu lā sharīka lah, wa ash-hadu anna Muḥammadan ʿabduhu wa rasūluh",
+  "english": "I bear witness that there is no god but Allah alone, with no partner, and I bear witness that Muhammad is His servant and His messenger.",
+  "source": "Sahih Muslim 234b",
+  "file": "recitations.ts"
+ },
+ {
+  "where": "Before eating",
+  "arabic": "بِسْمِ اللَّهِ",
+  "translit": "Bismillāh",
+  "english": "In the name of Allah.",
+  "source": "Sunan Abi Dawud 101 (sahih — Al-Albani)",
   "file": "recitations.ts"
  },
  {

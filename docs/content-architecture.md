@@ -264,7 +264,13 @@ npx tsc --noEmit && npm run lint && npm run i18n:manifest && npm run content:aud
 ```
 
 7. Mark anything model-written with a ⚠️ comment in its source file. Nothing
-   written by a model ships unreviewed — on text *or* on substance.
+   written by a model ships unreviewed — on text *or* on substance. The comment
+   has to say **what** needs review, not that something does: "model-written
+   English, checked citations" is useful, "needs scholar review" is not.
+8. Add the claim to `docs/scholarly-review.md` under the priority it earns —
+   Priority 1 is anything where a wrong answer changes how someone worships.
+   A ⚠️ in a file tells whoever opens that file; the review document is what a
+   scholar reads end to end, and only one of those two is a queue.
 
 ---
 
@@ -276,6 +282,12 @@ npx tsc --noEmit && npm run lint && npm run i18n:manifest && npm run content:aud
 | `npm run content:audit` | Reports source coverage, ungraded narrations, note classification, broken `relatedContent`. Fails on `daif` sources and dangling pointers. `-- --strict` also fails on anything unsourced. |
 | `npm run arabic` | Lists every Arabic string, copied ones separated from model-written ones. |
 | `npm run audio:manifest` | The sheet of every clip and who recorded it. |
+
+`docs/scholarly-review.md` is the other half of `content:audit` and the half a
+script cannot write. The audit answers "what does this app claim and what backs
+it up"; the review document answers "and which of those claims is still one
+person's judgement". It is ordered by consequence rather than by file, because
+a reviewer's time is the scarce thing.
 
 `content:audit` is the one that answers "what does this app claim, and what
 backs it up". It prints every citation with a link, and **fails** on a narration

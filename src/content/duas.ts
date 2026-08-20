@@ -1,5 +1,6 @@
 import type { ContentMeta } from './model';
 import { Recitations } from './recitations';
+import { hadith } from './sources';
 import type { Recitation } from './types';
 
 /**
@@ -18,7 +19,9 @@ import type { Recitation } from './types';
  *
  * "Before eating" reuses the bismillah already in the app rather than storing
  * the same two words twice. The occasion lives here; the words live in one
- * place, as they do for everything else.
+ * place, as they do for everything else — and its citation lives here too,
+ * because the recitation is titled "Before wudu" and carries the narration for
+ * that occasion. A source belongs to the claim, not to the words.
  */
 export type Dua = {
   id: string;
@@ -56,7 +59,34 @@ export const DUAS: Dua[] = [
     id: 'before-eating',
     when: 'Before eating',
     says: Recitations.bismillah,
-    note: 'If you forget and have already started, say it when you remember.',
+    /**
+     * The note used to say only "say it when you remember", which is close but
+     * loses the thing that is actually taught: remembering mid-meal changes
+     * the wording rather than just the timing.
+     */
+    note: 'If you forget and remember partway through, the taught wording changes: bismi-llāhi fī awwalihi wa ākhirih — in the name of Allah, at its beginning and its end.',
+    meta: {
+      category: 'daily-life',
+      difficulty: 'foundational',
+      estimatedMinutes: 1,
+      beginnerPriority: 2,
+      tags: ['etiquette', 'arabic'],
+      sources: [
+        hadith('bukhari', '5376', {
+          book: 70,
+          bookName: 'Food, Meals',
+          inBookReference: 'Book 70, Hadith 4',
+        }),
+        hadith('tirmidhi', '1858', {
+          book: 25,
+          bookName: 'The Book on Food',
+          inBookReference: 'Book 25, Hadith 75',
+          grading: 'sahih',
+          gradedBy: 'Darussalam',
+          role: 'practice',
+        }),
+      ],
+    },
   },
   {
     id: 'after-eating-provision',

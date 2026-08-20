@@ -9,6 +9,14 @@ import type { Reference } from '../types';
  * written to be permissive on purpose: a new Muslim's first Ramadan is far more
  * often damaged by someone fasting when they should not than by someone
  * skipping when they should have fasted.
+ *
+ * Two things this audit changed. The section on the rest of the month cited
+ * Bukhari 1899 for the Prophet's ﷺ generosity in Ramadan; 1899 is the gates of
+ * heaven opening and says nothing about generosity, while Bukhari 6 — already
+ * cited beside it — carries both that and Jibril's nightly review. The wrong
+ * citation is gone rather than replaced. And the fast was described as ending
+ * "at nightfall", which for a beginner reads as later than it is: it ends at
+ * sunset, which is what the rest of this lesson and the prayer times both say.
  */
 export const RAMADAN: Reference = {
   id: 'ramadan',
@@ -35,7 +43,7 @@ export const RAMADAN: Reference = {
       id: 'fasting',
       heading: 'The fast itself',
       body:
-        'From first light until sunset, no food, no drink — not even water — and no sexual intimacy. The Qur’an marks the start of the fast as the moment dawn becomes distinguishable, and the end at nightfall. Outside those hours you eat and drink normally.',
+        'From first light until sunset, no food, no drink — not even water — and no sexual intimacy. The Qur’an marks the start of the fast as the moment dawn becomes distinguishable, and the end at sunset. Outside those hours you eat and drink normally.',
       sources: [
         quran(2, 183, { surahName: 'Al-Baqarah' }),
         quran(2, 187, { surahName: 'Al-Baqarah' }),
@@ -88,16 +96,14 @@ export const RAMADAN: Reference = {
       heading: 'The rest of the month',
       body:
         'Mosques fill up for taraweeh, a long optional night prayer, and many people read far more Qur’an than usual — Jibril would go through the Qur’an with the Prophet ﷺ each night of Ramadan. There is also more giving: he was described as at his most generous this month.',
+      // One narration, both halves of the sentence: Ibn `Abbas describes the
+      // Prophet ﷺ as most generous in Ramadan, and Jibril meeting him every
+      // night of it to go through the Qur'an.
       sources: [
         hadith('bukhari', '6', {
           book: 1,
           bookName: 'Revelation',
           inBookReference: 'Book 1, Hadith 6',
-        }),
-        hadith('bukhari', '1899', {
-          book: 30,
-          bookName: 'Fasting',
-          inBookReference: 'Book 30, Hadith 9',
         }),
       ],
     },
@@ -119,13 +125,47 @@ export const RAMADAN: Reference = {
       id: 'eid',
       heading: 'Eid al-Fitr',
       body:
-        'The month ends with Eid — a morning prayer, new or good clothes, and visiting people. Before that prayer, every Muslim gives a small fixed amount of food or its value so that nobody is left out of the day. It is called zakat al-fitr and it is due for every member of a household.',
+        'The month ends with Eid — a morning prayer, new or good clothes, and visiting people. Before that prayer, every Muslim gives a small fixed amount of food so that nobody is left out of the day. It is called zakat al-fitr and it is due for every member of a household — old and young, and paid on behalf of anyone in your care.',
       sources: [
         hadith('bukhari', '1503', {
           book: 24,
           bookName: 'Obligatory Charity Tax (Zakat)',
           inBookReference: 'Book 24, Hadith 103',
         }),
+      ],
+      notes: [
+        note(
+          'differs',
+          'Whether it may be given as money instead of food is a real difference, and it decides what you actually hand over. Most mosques and charities collect it either way and will tell you which they are doing.',
+          {
+            /**
+             * The narration names a measure of dates or barley, which is why
+             * the section now says food rather than "food or its value" — that
+             * phrasing stated one school's position as though it were the
+             * ruling. Both positions are held; neither is a concession.
+             */
+            sources: [
+              hadith('bukhari', '1503', {
+                book: 24,
+                bookName: 'Obligatory Charity Tax (Zakat)',
+                inBookReference: 'Book 24, Hadith 103',
+              }),
+            ],
+            positions: [
+              {
+                school: 'Hanafi',
+                position: 'Allow the value in money, and consider it easier for the recipient.',
+              },
+              {
+                school: 'the majority',
+                position:
+                  'Hold that it is the staple food the narration names, given as food.',
+              },
+            ],
+            additionalExplanation:
+              'Nothing about your Eid depends on getting this right in your first year. Give it through whoever your local mosque collects for, in the form they ask for, before the Eid prayer — that satisfies the position they follow, and the timing is the part the narration is strictest about.',
+          },
+        ),
       ],
     },
   ],

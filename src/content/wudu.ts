@@ -1,6 +1,6 @@
 import { Recitations } from './recitations';
 import { ref } from './model';
-import { quran } from './sources';
+import { hadith, quran } from './sources';
 import type { Guide } from './types';
 
 /**
@@ -34,6 +34,17 @@ export const WUDU: Guide = {
         'Intend in your heart that you are performing wudu to purify yourself for prayer, then say:',
       says: Recitations.bismillah,
       note: 'Wudu lasts until it is broken — by using the toilet, passing wind, or deep sleep. It does not need repeating for every prayer.',
+      // Two claims, two sources: that wudu is what the prayer needs, and that
+      // it opens with the name of Allah. Both from the same narration.
+      sources: [
+        hadith('abu-dawud', '101', {
+          book: 1,
+          bookName: 'Purification (Kitab Al-Taharah)',
+          inBookReference: 'Book 1, Hadith 101',
+          grading: 'sahih',
+          gradedBy: 'Al-Albani',
+        }),
+      ],
     },
     {
       id: 'hands',
@@ -69,6 +80,13 @@ export const WUDU: Guide = {
       instruction:
         'Wash your right arm from the fingertips to just past the elbow, three times. Then the left, three times.',
       note: 'Right before left is the pattern for everything that comes in a pair.',
+      sources: [
+        hadith('bukhari', '168', {
+          book: 4,
+          bookName: "Ablutions (Wudu')",
+          inBookReference: 'Book 4, Hadith 34',
+        }),
+      ],
     },
     {
       id: 'head',

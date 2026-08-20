@@ -1,5 +1,6 @@
 import { Recitations } from './recitations';
 import { ref } from './model';
+import { hadith } from './sources';
 import type { Guide } from './types';
 
 /**
@@ -10,10 +11,17 @@ import type { Guide } from './types';
  * screen some people open before they are Muslim at all, so it explains before
  * it instructs — nobody should say these words without knowing what they mean.
  *
- * ⚠️ REVIEW REQUIRED — model-written and unchecked. The points needing a
- * qualified eye most: that witnesses are not a condition of validity, that a
- * full wash afterwards is recommended rather than required, and the wording
- * about what becoming Muslim erases.
+ * ⚠️ PARTIAL REVIEW. Two of the three claims that most needed checking now
+ * carry a source. That becoming Muslim wipes what came before is `Amr ibn
+ * al-`As's narration in Sahih Muslim 121 — "Islam demolishes what was before
+ * it" — and the wash afterwards is the instruction to Qays ibn `Asim in Sunan
+ * Abi Dawud 355, which the ghusl guide now holds with the school difference
+ * beside it.
+ *
+ * ⚠️ REVIEW REQUIRED — that witnesses are not a condition of validity. It is
+ * the settled position and it matters pastorally, but it is a negative: no
+ * text makes witnesses a condition, and an app cannot cite the absence of one.
+ * A qualified reader should confirm the sentence rather than the citation.
  *
  * Deliberately short. Someone reading this is not looking for theology; they
  * are looking for what to do in the next ten minutes.
@@ -37,6 +45,14 @@ export const SHAHADA_GUIDE: Guide = {
       instruction:
         'Becoming Muslim is one sentence, said and meant. Before you say it, be clear on both halves: that worship belongs to Allah alone and nothing shares that with Him, and that Muhammad ﷺ was sent by Him to convey how.',
       note: 'It has to be meant. Saying the words to please someone else, or to marry, does not make a person Muslim.',
+      // The first of the five, and the two halves stated as two halves.
+      sources: [
+        hadith('bukhari', '8', {
+          book: 2,
+          bookName: 'Belief',
+          inBookReference: 'Book 2, Hadith 1',
+        }),
+      ],
     },
     {
       id: 'say',
@@ -52,6 +68,27 @@ export const SHAHADA_GUIDE: Guide = {
       instruction:
         'That is it. Nothing else is required of you in this moment, and nothing you did before it is held against you — becoming Muslim wipes what came before.',
       note: 'You do not need to change your name. You do not need to tell anyone today. Take a full wash when you can, which is recommended for someone who has just become Muslim, and then learn wudu and the prayer — in that order, without rushing.',
+      /**
+       * Muslim 121 for the sentence people most need to hear on this screen;
+       * Abu Dawud 355 for the wash. The ghusl guide carries the school
+       * difference on the second — it belongs there rather than here, because
+       * nobody reading this screen needs it in the next ten minutes.
+       */
+      sources: [
+        hadith('muslim', '121', {
+          book: 1,
+          bookName: 'The Book of Faith',
+          inBookReference: 'Book 1, Hadith 228',
+        }),
+        hadith('abu-dawud', '355', {
+          book: 1,
+          bookName: 'Purification (Kitab Al-Taharah)',
+          inBookReference: 'Book 1, Hadith 355',
+          grading: 'sahih',
+          gradedBy: 'Al-Albani',
+          role: 'practice',
+        }),
+      ],
     },
   ],
 };

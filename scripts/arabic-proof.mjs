@@ -59,6 +59,19 @@ for (const [key, r] of Object.entries(Recitations)) {
   }
 }
 
+/**
+ * Phrases and the pillar names below are hardcoded as uncopied, and stay that
+ * way now that both carry `meta.sources`. The column asks "was this Arabic
+ * copied verbatim from here", and a `meta` source answers a different question
+ * — where the *claim* comes from. Qur'an 4:86 is why you must return the salam;
+ * it is not the text of `As-salāmu ʿalaykum`. Bukhari 8 is why prayer is a
+ * pillar; it is not where `الصَّلَاة` was spelled.
+ *
+ * One row is therefore stricter than it needs to be: `Innā li-llāhi wa innā
+ * ilayhi rājiʿūn` is Qur'an 2:156 word for word and is listed here as written
+ * from memory. A proofing sheet that asks for one unnecessary check is the
+ * right way round; the failure that matters is the one it lets through.
+ */
 for (const p of PHRASES) {
   rows.push({
     where: `Phrase — ${p.said}`,

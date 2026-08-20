@@ -3,10 +3,24 @@ import { useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
-import { formatSource, hasMore, type ContentNote } from '@/content';
+import { formatSource, hasMore, type Attribution, type ContentNote } from '@/content';
 import { Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { useTheme } from '@/hooks/use-theme';
+import type { UIKey } from '@/i18n/ui';
+
+/**
+ * A school's name as a reader sees it.
+ *
+ * The four madhhabs are proper nouns and are the same in every language. The
+ * descriptive attributions are not, and were rendering as raw English —
+ * "the majority" sitting inside an otherwise Spanish page.
+ */
+function schoolLabel(school: Attribution, t: (key: UIKey) => string): string {
+  const key = `attribution.${school}` as UIKey;
+  const translated = t(key);
+  return translated === key ? school : translated;
+}
 
 /**
  * A note, with its depth folded away.
@@ -73,7 +87,7 @@ export function ContentNoteCard({ entry }: { entry: ContentNote }) {
                   <View
                     style={[styles.school, { backgroundColor: theme.accentMuted }]}>
                     <ThemedText type="smallBold" themeColor="accent" style={styles.schoolText}>
-                      {position.school}
+                      {schoolLabel(position.school, t)}
                     </ThemedText>
                   </View>
                   <ThemedText type="small" themeColor="textSecondary" style={styles.positionText}>

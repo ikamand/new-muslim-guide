@@ -15,7 +15,7 @@ Four shapes already exist and they are not interchangeable. The distinction is
 | Shape | Use it when | Lives in |
 |---|---|---|
 | `Guide` | Someone follows it holding a phone, mid-motion. A sequence of `Step`s. | `wudu.ts`, `prayers.ts`, `shahada.ts` |
-| `Reference` | Someone arrives with a question and wants that question answered. Skimmable headings. | `references.ts` |
+| `Reference` | Someone arrives with a question and wants that question answered. Skimmable headings. | `references.ts` (mid-prayer lookups), `learn/` (beginner explanations) |
 | `Pillar` | A named thing you read about once. Used for both the five pillars and the six articles. | `pillars.ts`, `iman.ts` |
 | `Recitation` | Words that are said. Arabic, transliteration, translation, optionally split into verses. | `recitations.ts` |
 
@@ -189,6 +189,18 @@ glosses where the right word depends on the term rather than the English.
 An absent `es` or `fr` is not a placeholder — it falls back to English, which is
 the documented behaviour for all 321 strings. A placeholder would be `es: 'TODO'`,
 and there are none.
+
+### The beginner guides
+
+`src/content/learn/` holds the twelve beginner explanations — what Islam is, who
+the Prophet ﷺ was, what changes at the supermarket. Same `Reference` shape as
+`references.ts`, different moment: those are looked up mid-prayer, these are read
+in a quiet minute. Both join `REFERENCES`.
+
+Every Qur'an and hadith citation in them was verified by opening the page and
+matching the text. Their prose **is** translated into Spanish and French, because
+it is original writing for this app. The Qur'an, dhikr and prayer instructions in
+`recitations.ts` and the guides are **not**, and must not be — see below.
 
 ### `ArabicTerm` has no registry, deliberately
 

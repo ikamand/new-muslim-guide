@@ -50,6 +50,14 @@ export const EN = {
   'note.less': 'Show less',
   'note.positions': 'What the schools say',
   'note.sources': 'Where this comes from',
+  /**
+   * How a scholarly position is attributed. The four schools are proper nouns
+   * and stay as they are in every language; these three are descriptions, and
+   * were rendering as raw English inside an otherwise Spanish page.
+   */
+  'attribution.the majority': 'The majority',
+  'attribution.a minority': 'A minority',
+  'attribution.contemporary scholarship': 'Contemporary scholarship',
   'tab.learn': 'Learn',
   'tab.settings': 'Settings',
 
@@ -264,6 +272,9 @@ const AR: Overrides = {
   'note.less': 'إخفاء',
   'note.positions': 'أقوال المذاهب',
   'note.sources': 'المصدر',
+  'attribution.the majority': 'الجمهور',
+  'attribution.a minority': 'قلّة من العلماء',
+  'attribution.contemporary scholarship': 'العلماء المعاصرون',
   'settings.guidance': 'إرشادات الصلاة لـ',
   'common.back': 'رجوع',
 };
@@ -353,6 +364,9 @@ const FR: Overrides = {
   'note.less': 'Réduire',
   'note.positions': 'Ce que disent les écoles',
   'note.sources': 'D’où cela vient',
+  'attribution.the majority': 'La majorité',
+  'attribution.a minority': 'Une minorité',
+  'attribution.contemporary scholarship': 'Les savants contemporains',
   'settings.guidance': 'Conseils de prière pour',
   'common.back': 'Retour',
 };
@@ -440,6 +454,9 @@ const ES: Overrides = {
   'note.less': 'Mostrar menos',
   'note.positions': 'Lo que dicen las escuelas',
   'note.sources': 'De dónde viene',
+  'attribution.the majority': 'La mayoría',
+  'attribution.a minority': 'Una minoría',
+  'attribution.contemporary scholarship': 'Los sabios contemporáneos',
   'settings.guidance': 'Guía de oración para',
   'common.back': 'Atrás',
 };

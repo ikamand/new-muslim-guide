@@ -1,3 +1,4 @@
+import { LEARN_TOPICS } from './learn';
 import { note, ref } from './model';
 import type { Reference } from './types';
 
@@ -308,7 +309,26 @@ export const MOSQUE: Reference = {
   ],
 };
 
-export const REFERENCES: Reference[] = [MOSQUE, LOST_COUNT, MISSED, TRAVELLING, SEATED, PERIODS];
+/**
+ * Every reference topic in the app.
+ *
+ * The ones defined in this file are what someone looks up mid-prayer or when
+ * something has gone wrong. `LEARN_TOPICS` are the beginner explanations read
+ * in a quiet minute — same shape, different moment, so they live in
+ * `./learn/` and join the list here.
+ *
+ * The beginner topics come first: someone scrolling this list for the first
+ * time should meet "What is Islam?" before "Losing count in prayer".
+ */
+export const REFERENCES: Reference[] = [
+  ...LEARN_TOPICS,
+  MOSQUE,
+  LOST_COUNT,
+  MISSED,
+  TRAVELLING,
+  SEATED,
+  PERIODS,
+];
 
 export function getReference(id: string): Reference | undefined {
   return REFERENCES.find((reference) => reference.id === id);

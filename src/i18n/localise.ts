@@ -48,6 +48,10 @@ function localiseNotes(
   return notes?.map((note) => ({
     ...note,
     text: tr(dict, note.text),
+    // Prose like any other. It was reaching translators through the manifest
+    // and then rendering in English regardless, because this function did not
+    // carry it across — caught by reading a Spanish page rather than the code.
+    additionalExplanation: tr(dict, note.additionalExplanation),
     positions: note.positions?.map((position) => ({
       ...position,
       position: tr(dict, position.position),

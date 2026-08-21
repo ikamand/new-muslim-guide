@@ -146,6 +146,9 @@ export const EN = {
   'count.clips': 'clips',
   /** The pieces a long text is learned in — the unit you loop twenty times. */
   'count.parts': 'parts to learn',
+  'count.items': 'items',
+  /** Reading time, spelled out — a Learn card has room for the word. */
+  'count.minutes.long': 'min read',
   'count.articles': 'articles',
   'count.pillars': 'pillars',
   /** Reading or doing time on a lesson. Not a target — see `estimatedMinutes`. */
@@ -708,6 +711,8 @@ const FR: Overrides = {
   'count.duas': 'invocations',
   'count.clips': 'extraits',
   'count.parts': 'parties à apprendre',
+  'count.items': 'éléments',
+  'count.minutes.long': 'min de lecture',
   'count.articles': 'piliers',
   'count.pillars': 'piliers',
   'note.more': 'En savoir plus',
@@ -949,6 +954,8 @@ const ES: Overrides = {
   'count.duas': 'súplicas',
   'count.clips': 'fragmentos',
   'count.parts': 'partes que aprender',
+  'count.items': 'elementos',
+  'count.minutes.long': 'min de lectura',
   'count.articles': 'pilares',
   'count.pillars': 'pilares',
   'note.more': 'Saber más',

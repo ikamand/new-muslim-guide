@@ -315,7 +315,16 @@ export default function LearnScreen() {
                     title={topic.title}
                     subtitle={topic.shortDescription}
                     count={topic.pieces}
-                    unit={`count.${topic.pieceUnit}` as UIKey}
+                    /*
+                      Minutes read as a phrase rather than a bare noun. "4 min
+                      read" says what the number is; "4 min" beside a title
+                      could be a countdown to something.
+                    */
+                    unit={
+                      topic.pieceUnit === 'minutes'
+                        ? 'count.minutes.long'
+                        : (`count.${topic.pieceUnit}` as UIKey)
+                    }
                     glyph={TOPIC_GLYPH[topic.id]}
                     /*
                       A long title takes the whole row rather than being

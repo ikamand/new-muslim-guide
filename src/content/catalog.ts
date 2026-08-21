@@ -40,17 +40,29 @@ export type CatalogEntry = {
   shortDescription: string;
   meta?: ContentMeta;
   /**
-   * How many pieces the thing has — steps in a guide, sections in a reference,
-   * one for anything indivisible.
+   * What to tell somebody about the size of this, and in what unit.
    *
    * Here rather than on each shape because the only consumer is a list showing
-   * mixed kinds side by side, and "10 steps" against "5 sections" is the line
-   * that tells someone whether this is a minute or an afternoon. A screen
-   * rendering a catalogue entry should not have to switch on `kind` to count.
+   * mixed kinds side by side, and a screen rendering a catalogue entry should
+   * not have to switch on `kind` to work it out.
+   *
+   * ## A reference reports minutes, not sections
+   *
+   * It used to report its section count, which was accurate and misleading.
+   * "10 steps" on a guide is a promise you can keep: you tap Next ten times
+   * and each tap is progress. "5 sections" on a reference promises the same
+   * shape and delivers one scrolling article with five headings — a heading is
+   * not a thing you work through, and somebody who opens it after reading the
+   * card has been told the wrong story about what is behind it.
+   *
+   * The reference screen is deliberately not a stepper, and should not become
+   * one: a person there has a question, not a procedure. So the unit changes
+   * instead. Minutes are the honest answer to what a page of prose costs, and
+   * `estimatedMinutes` was already on every one of them.
    */
   pieces: number;
-  /** The word for what `pieces` counts, as a UI key suffix: 'steps', 'sections'. */
-  pieceUnit: 'steps' | 'sections' | 'items';
+  /** The word for what `pieces` counts, as a UI key suffix. */
+  pieceUnit: 'steps' | 'sections' | 'items' | 'minutes';
   /** Every source on the entry and on anything inside it, flattened. */
   sources: readonly Source[];
   /** Structured notes only. The plain `note` strings stay where they are. */
@@ -91,8 +103,9 @@ function buildCatalog(): readonly CatalogEntry[] {
       title: reference.title,
       shortDescription: reference.subtitle,
       meta: reference.meta,
-      pieces: reference.sections.length,
-      pieceUnit: 'sections',
+      // Minutes, not sections — see `pieces` above.
+      pieces: reference.meta?.estimatedMinutes ?? reference.sections.length,
+      pieceUnit: reference.meta?.estimatedMinutes ? 'minutes' : 'sections',
       sources: [
         ...(reference.meta?.sources ?? []),
         ...collect(reference.sections, (section) => section.sources),

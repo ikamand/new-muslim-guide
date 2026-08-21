@@ -219,6 +219,16 @@ export const EN = {
   'learn.phrases.title': 'What people say to you',
   'learn.phrases.subtitle': 'The phrases you will hear, and how to answer them',
   'duas.title': 'Everyday duʿas',
+  /*
+    The moments of a day. Named the way a person describes their own morning
+    rather than as categories — "Getting up", not "Morning adhkar".
+  */
+  'duas.moment.waking': 'Getting up',
+  'duas.moment.washing': 'Washing',
+  'duas.moment.leaving': 'Going out',
+  'duas.moment.eating': 'Eating',
+  'duas.moment.travel': 'Travelling',
+  'duas.moment.night': 'Going to bed',
   'duas.intro':
     'Short things said through an ordinary day. Start with the one-word one and add another when it sticks — nobody learns these all at once.',
   'learn.duas.title': 'Everyday duʿas',
@@ -469,6 +479,12 @@ const FR: Overrides = {
   'learn.section.startHere': 'Commencer ici',
   'phrases.title': 'Ce qu’on vous dira',
   'duas.title': 'Invocations du quotidien',
+  'duas.moment.waking': 'Au réveil',
+  'duas.moment.washing': 'La toilette',
+  'duas.moment.leaving': 'En sortant',
+  'duas.moment.eating': 'Les repas',
+  'duas.moment.travel': 'En voyage',
+  'duas.moment.night': 'Au coucher',
   'learn.section.everyDay': 'Chaque jour',
   'learn.section.understanding': 'Comprendre',
   'practice.title': 'Pratiquer',
@@ -685,6 +701,12 @@ const ES: Overrides = {
   'learn.section.startHere': 'Empieza aquí',
   'phrases.title': 'Lo que te dirán',
   'duas.title': 'Súplicas diarias',
+  'duas.moment.waking': 'Al despertar',
+  'duas.moment.washing': 'El aseo',
+  'duas.moment.leaving': 'Al salir',
+  'duas.moment.eating': 'Las comidas',
+  'duas.moment.travel': 'De viaje',
+  'duas.moment.night': 'Al acostarse',
   'learn.section.everyDay': 'Cada día',
   'learn.section.understanding': 'Comprender',
   'practice.title': 'Practicar',

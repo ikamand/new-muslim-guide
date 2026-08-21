@@ -23,6 +23,30 @@ import type { Recitation } from './types';
  * because the recitation is titled "Before wudu" and carries the narration for
  * that occasion. A source belongs to the claim, not to the words.
  */
+/**
+ * Where in an ordinary day a duʿa belongs.
+ *
+ * The duʿa screen is a day rather than a list, and this is what orders it. A
+ * list only serves a reader who already knows what they are looking for —
+ * which is the problem exactly: **a new Muslim does not know a duʿa for
+ * putting on clothes exists**, so they will never scroll to it, alphabetically
+ * or otherwise. An index is a born Muslim's tool.
+ *
+ * What a convert has instead is a moment: at the door, about to eat, awake at
+ * two in the morning. So the screen runs from waking to sleeping and puts each
+ * duʿa where it happens, which answers "when would I ever say this".
+ */
+export const DAY_MOMENTS = [
+  'waking',
+  'washing',
+  'leaving',
+  'eating',
+  'travel',
+  'night',
+] as const;
+
+export type DayMoment = (typeof DAY_MOMENTS)[number];
+
 export type Dua = {
   id: string;
   /** The occasion, not the words: "Leaving the house". */
@@ -30,21 +54,31 @@ export type Dua = {
   says: Recitation;
   note?: string;
   meta?: ContentMeta;
+  /** Where it sits in the day. Absent means it does not belong to a moment. */
+  moment?: DayMoment;
 };
+
+/** The duʿas of one moment, in the order they are said. */
+export function duasAt(moment: DayMoment): readonly Dua[] {
+  return DUAS.filter((dua) => dua.moment === moment);
+}
 
 export const DUAS: Dua[] = [
   {
     id: 'wake',
+    moment: 'waking',
     when: 'When you wake up',
     says: Recitations.duaWake,
   },
   {
     id: 'leave-home',
+    moment: 'leaving',
     when: 'Leaving the house',
     says: Recitations.duaLeaveHome,
   },
   {
     id: 'enter-toilet',
+    moment: 'washing',
     when: 'Going into the bathroom',
     says: Recitations.duaEnterToilet,
     note: 'Said before you step in.',
@@ -84,12 +118,14 @@ export const DUAS: Dua[] = [
   },
   {
     id: 'leave-toilet',
+    moment: 'washing',
     when: 'Coming out of the bathroom',
     says: Recitations.duaLeaveToilet,
     note: 'One word. It is the shortest thing in this app and the easiest place to start.',
   },
   {
     id: 'before-eating',
+    moment: 'eating',
     when: 'Before eating',
     says: Recitations.bismillah,
     /**
@@ -123,23 +159,27 @@ export const DUAS: Dua[] = [
   },
   {
     id: 'after-eating-provision',
+    moment: 'eating',
     when: 'After eating',
     says: Recitations.duaAfterEatingProvision,
     note: 'Two wordings are commonly said after a meal. This one carries the stronger grading; the other is below. Either is said, and many people know only one of them.',
   },
   {
     id: 'after-eating',
+    moment: 'eating',
     when: 'After eating',
     says: Recitations.duaAfterEating,
   },
   {
     id: 'travel',
+    moment: 'travel',
     when: 'Setting off on a journey',
     says: Recitations.duaTravel,
     note: 'Long, and nobody expects you to know it yet. The first line alone is worth learning.',
   },
   {
     id: 'sleep',
+    moment: 'night',
     when: 'Going to sleep',
     says: Recitations.duaSleep,
   },

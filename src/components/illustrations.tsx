@@ -605,6 +605,10 @@ export type GlyphName =
   // exactly one id — `mosque` — and every other card was bare.
   | 'wudu'
   | 'prayer'
+  | 'sunrise'
+  | 'door'
+  | 'travel'
+  | 'night'
   | 'before-prayer'
   | 'al-fatihah'
   | 'what-breaks-prayer'
@@ -729,6 +733,41 @@ export function Glyph({ name, color, size = 22 }: { name: GlyphName; color: stri
         here, and figurative drawings of worship are a sensitivity this app
         need not take on.
       */}
+
+      {/* The moments of a day, for the duʿa screen's spine. */}
+      {name === 'sunrise' && (
+        <G {...stroke}>
+          <Path d="M3 18h18" />
+          <Path d="M7 18a5 5 0 0 1 10 0" />
+          <Path d="M12 4v3" />
+          <Path d="M5.6 7.6l2 2" />
+          <Path d="M18.4 7.6l-2 2" />
+        </G>
+      )}
+
+      {name === 'door' && (
+        <G {...stroke}>
+          <Path d="M13 21H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h8" />
+          <Path d="M10 12h10" />
+          <Path d="M17 9l3 3-3 3" />
+        </G>
+      )}
+
+      {name === 'travel' && (
+        <G {...stroke}>
+          <Path d="M3 20h18" />
+          <Path d="M5 16l3-9 3 9" />
+          <Path d="M13 16l3-6 3 6" />
+          <Path d="M6.4 13h3.2" />
+        </G>
+      )}
+
+      {name === 'night' && (
+        <G {...stroke}>
+          <Path d="M20 13.5A7.5 7.5 0 1 1 11.5 5a6 6 0 0 0 8.5 8.5z" />
+          <Path d="M3 21h18" />
+        </G>
+      )}
 
       {/* The mihrab again, at glyph size — the prayers, on the Learn tab. */}
       {name === 'prayer' && (

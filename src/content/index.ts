@@ -5,7 +5,7 @@ import { SHAHADA_GUIDE } from './shahada';
 import { WUDU } from './wudu';
 
 export { AUDIO, getAudio, hasAnyAudio } from './audio';
-export { DUAS, type Dua } from './duas';
+export { DAY_MOMENTS, DUAS, duasAt, type DayMoment, type Dua } from './duas';
 export {
   beginnerPath,
   CATALOG,

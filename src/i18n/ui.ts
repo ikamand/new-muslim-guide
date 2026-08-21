@@ -34,13 +34,9 @@ export const EN = {
   'home.journeyDone': 'You have been through every lesson',
   'home.journeyDone.help':
     'Nothing is locked and nothing expires. Go back over anything you want, or keep these two in your week.',
-  'home.today': 'Today',
-  'home.help': 'I need help with…',
+  'home.help': 'Something’s come up',
   'home.helpElse': 'Something else',
 
-  /** Why a Today row is there. One word, so the row itself stays the point. */
-  'today.reason.prayer': 'Prayer',
-  'today.reason.suggested': 'Suggested',
 
   /**
    * The times of year the app has something to say about. Never a single named
@@ -79,15 +75,21 @@ export const EN = {
    * is the name of an Islamic discipline, on purpose — a beginner does not know
    * that what they want is filed under purification.
    */
-  'help.topic.prayer': 'Praying',
-  'help.topic.washing': 'Washing before prayer',
-  'help.topic.mistakes': 'When something goes wrong',
-  'help.topic.quran': 'The Qur’an',
-  'help.topic.words': 'What to say',
-  'help.topic.food': 'What I can eat',
-  'help.topic.clothing': 'What to wear',
-  'help.topic.people': 'Family, work and people',
-  'help.topic.ramadan': 'Ramadan and fasting',
+  /*
+    Written as the sentence in someone's head, not as a category.
+    "When something goes wrong" is a filing label; a person at 1am is thinking
+    "I think I got it wrong" and will not recognise themselves in a taxonomy.
+    First person where the thought is first person.
+  */
+  'help.topic.prayer': 'How do I pray?',
+  'help.topic.washing': 'Do I need to wash first?',
+  'help.topic.mistakes': 'I think I got it wrong',
+  'help.topic.quran': 'Where do I start with the Qur’an?',
+  'help.topic.words': 'What do I say back?',
+  'help.topic.food': 'Can I eat this?',
+  'help.topic.clothing': 'What should I wear?',
+  'help.topic.people': 'How do I tell people?',
+  'help.topic.ramadan': 'What happens in Ramadan?',
   'help.topic.new': 'I’ve just become Muslim',
 
   /**
@@ -510,24 +512,21 @@ const FR: Overrides = {
   'home.journeyDone': 'Vous avez parcouru toutes les leçons',
   'home.journeyDone.help':
     'Rien n’est verrouillé et rien n’expire. Revenez sur ce que vous voulez, ou gardez ces deux-là dans votre semaine.',
-  'home.today': 'Aujourd’hui',
-  'home.help': 'J’ai besoin d’aide pour…',
+  'home.help': 'Un imprévu ?',
   'home.helpElse': 'Autre chose',
-  'today.reason.prayer': 'Prière',
-  'today.reason.suggested': 'Suggestion',
   'season.ramadan': 'Ramadan',
   'season.last-ten-nights': 'Les dix dernières nuits',
   'season.before-ramadan': 'Le Ramadan approche',
   'season.muharram': 'Une nouvelle année musulmane',
-  'help.topic.prayer': 'Prier',
-  'help.topic.washing': 'Se purifier avant la prière',
-  'help.topic.mistakes': 'Quand quelque chose ne va pas',
-  'help.topic.quran': 'Le Coran',
-  'help.topic.words': 'Quoi dire',
-  'help.topic.food': 'Ce que je peux manger',
-  'help.topic.clothing': 'Comment s’habiller',
-  'help.topic.people': 'Famille, travail et entourage',
-  'help.topic.ramadan': 'Le Ramadan et le jeûne',
+  'help.topic.prayer': 'Comment prier ?',
+  'help.topic.washing': 'Dois-je me purifier avant ?',
+  'help.topic.mistakes': 'Je crois m’être trompé',
+  'help.topic.quran': 'Par où commencer le Coran ?',
+  'help.topic.words': 'Que dois-je répondre ?',
+  'help.topic.food': 'Puis-je manger ça ?',
+  'help.topic.clothing': 'Que dois-je porter ?',
+  'help.topic.people': 'Comment l’annoncer ?',
+  'help.topic.ramadan': 'Que se passe-t-il pendant le Ramadan ?',
   'help.topic.new': 'Je viens d’embrasser l’islam',
   'times.next': 'Prochaine',
   'times.nextTomorrow': 'Prochaine, demain',
@@ -696,24 +695,21 @@ const ES: Overrides = {
   'home.journeyDone': 'Has pasado por todas las lecciones',
   'home.journeyDone.help':
     'Nada está bloqueado y nada caduca. Vuelve a lo que quieras, o guarda estas dos cosas para tu semana.',
-  'home.today': 'Hoy',
-  'home.help': 'Necesito ayuda con…',
+  'home.help': '¿Ha surgido algo?',
   'home.helpElse': 'Otra cosa',
-  'today.reason.prayer': 'Oración',
-  'today.reason.suggested': 'Sugerencia',
   'season.ramadan': 'Ramadán',
   'season.last-ten-nights': 'Las diez últimas noches',
   'season.before-ramadan': 'Ramadán está cerca',
   'season.muharram': 'Un nuevo año islámico',
-  'help.topic.prayer': 'Rezar',
-  'help.topic.washing': 'Purificarse antes de rezar',
-  'help.topic.mistakes': 'Cuando algo sale mal',
-  'help.topic.quran': 'El Corán',
-  'help.topic.words': 'Qué decir',
-  'help.topic.food': 'Qué puedo comer',
-  'help.topic.clothing': 'Qué ponerse',
-  'help.topic.people': 'Familia, trabajo y gente',
-  'help.topic.ramadan': 'Ramadán y el ayuno',
+  'help.topic.prayer': '¿Cómo se reza?',
+  'help.topic.washing': '¿Debo lavarme antes?',
+  'help.topic.mistakes': 'Creo que me equivoqué',
+  'help.topic.quran': '¿Por dónde empiezo con el Corán?',
+  'help.topic.words': '¿Qué respondo?',
+  'help.topic.food': '¿Puedo comer esto?',
+  'help.topic.clothing': '¿Qué debo ponerme?',
+  'help.topic.people': '¿Cómo se lo digo a la gente?',
+  'help.topic.ramadan': '¿Qué pasa en Ramadán?',
   'help.topic.new': 'Acabo de abrazar el islam',
   'times.next': 'Siguiente',
   'times.nextTomorrow': 'Siguiente, mañana',

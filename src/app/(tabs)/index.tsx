@@ -217,10 +217,7 @@ function TodayRow({ item }: { item: TodayItem }) {
   const theme = useTheme();
   const { t } = useLocale();
 
-  const reason =
-    item.reason === 'season' && item.season
-      ? t(`season.${item.season}` as UIKey)
-      : t(`today.reason.${item.reason}` as UIKey);
+  const reason = t(`season.${item.season}` as UIKey);
 
   return (
     <PressableLink
@@ -325,18 +322,14 @@ export default function TodayScreen() {
 
         <JourneyCard />
 
-        {items.length > 0 && (
-          <View style={styles.section}>
-            <ThemedText type="smallBold" themeColor="textSecondary" style={styles.sectionTitle}>
-              {t('home.today')}
-            </ThemedText>
-            <View style={styles.list}>
-              {items.map((item) => (
-                <TodayRow key={item.key} item={item} />
-              ))}
-            </View>
-          </View>
-        )}
+        {/*
+          Nothing most of the year. A season is the only thing left here — it
+          is the one row that answers Today's question rather than Learn's, and
+          it earns no heading of its own because it is one card.
+        */}
+        {items.map((item) => (
+          <TodayRow key={item.key} item={item} />
+        ))}
 
         <HelpSection />
       </ScrollView>

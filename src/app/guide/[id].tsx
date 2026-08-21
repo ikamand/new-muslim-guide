@@ -199,7 +199,10 @@ export default function GuideScreen() {
           where the instruction comes from, and where the wording does — but a
           reader on a prayer mat is asking one.
         */}
-        <SourceDisclosure sources={[...(step.sources ?? []), ...(step.says?.sources ?? [])]} />
+        <SourceDisclosure
+          sources={[...(step.sources ?? []), ...(step.says?.sources ?? [])]}
+          arabic={step.says?.arabic}
+        />
 
         {/*
           Last, under the citations. Someone mid-wudu is reading the

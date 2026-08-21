@@ -59,7 +59,8 @@
     "i18n:manifest": "node --import ./scripts/ts-resolve.mjs scripts/i18n-manifest.mjs",
     "content:audit": "node --import ./scripts/ts-resolve.mjs scripts/content-audit.mjs",
     "content:verify": "node --import ./scripts/ts-resolve.mjs scripts/content-verify.mjs",
-    "quran:juz30": "node scripts/generate-juz30.mjs"
+    "quran:juz30": "node scripts/generate-juz30.mjs",
+    "evidence": "node --import ./scripts/ts-resolve.mjs scripts/generate-evidence.mjs"
   },
   "private": true
 }

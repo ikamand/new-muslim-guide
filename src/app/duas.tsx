@@ -102,6 +102,7 @@ export default function DuasScreen() {
                     */}
                     <SourceDisclosure
                       sources={[...(dua.says.sources ?? []), ...(dua.meta?.sources ?? [])]}
+                      arabic={dua.says.arabic}
                     />
                   </View>
                 );

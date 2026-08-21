@@ -136,7 +136,6 @@ export const GHUSL: Guide = {
           book: 10,
           bookName: "The Two 'Ids",
           inBookReference: 'Book 10, Hadith 2',
-          url: 'https://sunnah.com/malik/10',
           role: 'practice',
         }),
         hadith('ibn-majah', '1315', {
@@ -259,8 +258,7 @@ export const GHUSL: Guide = {
                 book: 10,
                 bookName: "The Two 'Ids",
                 inBookReference: 'Book 10, Hadith 2',
-                url: 'https://sunnah.com/malik/10',
-                role: 'practice',
+                      role: 'practice',
               }),
               hadith('ibn-majah', '1315', {
                 book: 5,

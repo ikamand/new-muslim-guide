@@ -4,9 +4,18 @@ import { Pressable, StyleSheet, View } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { formatSource, type Source } from '@/content';
-import { Spacing } from '@/constants/theme';
+import { HADITH_TEXT, QURAN_TEXT, type EvidenceText } from '@/content/evidence';
+import { ArabicFont, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
+import { useSettings } from '@/hooks/use-settings';
 import { useTheme } from '@/hooks/use-theme';
+
+/** The verse a `QuranSource` addresses, keyed the way `evidence.ts` stores it. */
+function quranText(source: Extract<Source, { kind: 'quran' }>): EvidenceText | undefined {
+  const first = Array.isArray(source.ayah) ? source.ayah[0] : source.ayah;
+  const last = Array.isArray(source.ayah) ? source.ayah[1] : source.ayah;
+  return QURAN_TEXT[`${source.surah}:${first}${last !== first ? `-${last}` : ''}`];
+}
 
 /**
  * Where a claim comes from, as a reader sees it.
@@ -46,15 +55,46 @@ export function SourceLines({
           {t('note.sources')}
         </ThemedText>
       )}
-      {sources.map((source) => (
-        <ThemedText
-          key={formatSource(source)}
-          type="small"
-          themeColor="textSecondary"
-          style={styles.source}>
-          {formatSource(source)}
+      {sources.map((source) => {
+        const text = source.kind === 'quran' ? quranText(source) : undefined;
+
+        return (
+          <View key={formatSource(source)} style={styles.entry}>
+            <ThemedText type="small" themeColor="textSecondary" style={styles.source}>
+              {formatSource(source)}
+            </ThemedText>
+            {/*
+              The verse itself, where the app has it. A citation this app never
+              links out of — deliberately, see above — is otherwise a dead end:
+              a beginner can neither read "Qur'an 2:255" nor follow it, so it
+              was provenance for a reviewer and nothing for the reader.
+            */}
+            {text && <EvidenceBlock text={text} />}
+          </View>
+        );
+      })}
+    </View>
+  );
+}
+
+/** A published text, quoted. Never edited — see HadeethEnc's terms. */
+function EvidenceBlock({ text }: { text: EvidenceText }) {
+  const theme = useTheme();
+  const { translation: showTranslation } = useSettings();
+
+  return (
+    <View style={[styles.evidence, { borderLeftColor: theme.border }]}>
+      <ThemedText style={styles.evidenceArabic}>{text.arabic}</ThemedText>
+      {showTranslation && text.translation && (
+        <ThemedText type="small" themeColor="textSecondary">
+          {text.translation}
         </ThemedText>
-      ))}
+      )}
+      {(text.attribution || text.grade) && (
+        <ThemedText type="caption" themeColor="textSecondary">
+          {[text.attribution, text.grade].filter(Boolean).join(' · ')}
+        </ThemedText>
+      )}
     </View>
   );
 }
@@ -71,10 +111,18 @@ export function SourceLines({
  * Renders nothing at all when there is nothing to show, so a screen can drop
  * it in unconditionally.
  */
-export function SourceDisclosure({ sources }: { sources: readonly Source[] }) {
+export function SourceDisclosure({
+  sources,
+  /** The Arabic this disclosure sits under, if any. Used to find its narration. */
+  arabic,
+}: {
+  sources: readonly Source[];
+  arabic?: string;
+}) {
   const theme = useTheme();
   const { t } = useLocale();
   const [open, setOpen] = useState(false);
+  const hadithText = arabic ? HADITH_TEXT[arabic] : undefined;
 
   // Deduplicated by the line a reader would see: a step and the recitation
   // inside it often cite the same page, and printing it twice looks like an
@@ -101,7 +149,17 @@ export function SourceDisclosure({ sources }: { sources: readonly Source[] }) {
         />
       </Pressable>
 
-      {open && <SourceLines sources={distinct} showLabel={false} />}
+      {open && (
+        <View style={styles.block}>
+          <SourceLines sources={distinct} showLabel={false} />
+          {/*
+            The narration the words themselves appear in, where one was found.
+            Keyed by the Arabic rather than by the citation, because that is
+            the only thing containment proved — see `evidence.ts`.
+          */}
+          {hadithText && <EvidenceBlock text={hadithText} />}
+        </View>
+      )}
     </View>
   );
 }
@@ -131,5 +189,23 @@ const styles = StyleSheet.create({
   },
   source: {
     fontVariant: ['tabular-nums'],
+  },
+  entry: {
+    gap: Spacing.one,
+  },
+  /** Quoted text, set apart from the citation that names it. */
+  evidence: {
+    borderLeftWidth: 3,
+    paddingLeft: Spacing.three,
+    paddingVertical: Spacing.two,
+    gap: Spacing.two,
+    borderRadius: Radius.small,
+  },
+  evidenceArabic: {
+    fontFamily: ArabicFont,
+    fontSize: 22,
+    lineHeight: 44,
+    textAlign: 'right',
+    writingDirection: 'rtl',
   },
 });

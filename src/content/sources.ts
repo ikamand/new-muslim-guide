@@ -29,11 +29,15 @@
  * A free-text field gets "Bukhari", "Sahih Bukhari" and "Sahih al-Bukhari" in
  * the same codebase within a month, and then nothing can group or check them.
  *
- * `sunnahSlug` is the path segment sunnah.com serves the collection under, so
- * a citation can resolve to a page a reviewer can open. Every slug below was
- * confirmed by requesting it and reading back a matching title. Muwatta Malik
- * has none: it is not addressable as `malik:<n>` — it uses a book:hadith pair
- * — and a link that 404s is worse than no link.
+ * `sunnahSlug` is vestigial and kept only so the type does not churn: the app
+ * has moved to IslamHouse, HadeethEnc and QuranEnc, and stopped linking to
+ * sunnah.com. Two things forced it — sunnah.com refuses automated requests, so
+ * nothing here can be checked against it any more, and the decision to build
+ * on one supervised family of sources was made deliberately.
+ *
+ * A citation's number is still printed, because it is the locator a reviewer
+ * uses and "Sahih al-Bukhari 6324" means the same thing wherever it is looked
+ * up. What is gone is the derived link.
  */
 export const HADITH_COLLECTIONS = {
   bukhari: { name: 'Sahih al-Bukhari', authenticThroughout: true, sunnahSlug: 'bukhari' },
@@ -262,10 +266,12 @@ export function formatSource(source: Source): string {
  * A page a reviewer can open, or undefined.
  *
  * An explicit `url` always wins. Otherwise it is derived from patterns
- * confirmed against the live sites — `quran.com/1/1` and
- * `sunnah.com/bukhari:6324` both resolve — never guessed. A collection with no
- * verified slug, and every `general` basis, returns nothing rather than a link
- * that goes somewhere wrong.
+ * confirmed by requesting them, never guessed — and only from the sources this
+ * app builds on. A narration with no HadeethEnc id returns nothing rather than
+ * a link somewhere we no longer read from.
+ *
+ * Read by `content:audit` and `content:verify`, not by the app: the screens
+ * render citations as text and never send anyone off-device.
  */
 export function sourceUrl(source: Source): string | undefined {
   switch (source.kind) {
@@ -276,12 +282,9 @@ export function sourceUrl(source: Source): string | undefined {
     }
     case 'hadith': {
       if (source.url) return source.url;
-      const { sunnahSlug } = HADITH_COLLECTIONS[source.collection];
-      if (sunnahSlug && source.reference) {
-        return `https://sunnah.com/${sunnahSlug}:${source.reference}`;
-      }
-      // Arabic, because every hadith HadeethEnc holds has Arabic and only some
-      // are translated — 65715 is Arabic-only, and its English URL 404s.
+      // HadeethEnc, or nothing. Arabic, because every hadith it holds has
+      // Arabic and only some are translated — 65715 is Arabic-only and its
+      // English URL 404s.
       return source.hadeethEncId
         ? `https://hadeethenc.com/ar/browse/hadith/${source.hadeethEncId}`
         : undefined;

@@ -57,7 +57,7 @@ export default function GuideScreen() {
   const [index, setIndex] = useState(0);
 
   const { locale, t } = useLocale();
-  const { keepAwake } = useSettings();
+  const { keepAwake, completedLessons, toggleLesson } = useSettings();
   const source = getGuide(id);
   // Measured, not just translated. A guide is read one step per screen, so the
   // reading is taken over the whole guide and narrowed to the step below —
@@ -85,6 +85,31 @@ export default function GuideScreen() {
   const go = (next: number) => {
     setIndex(next);
     scrollRef.current?.scrollTo({ y: 0, animated: false });
+  };
+
+  /**
+   * The end of a guide.
+   *
+   * Two things were wrong here, and the second is the one that mattered.
+   *
+   * `router.back()` alone did nothing at all when there was nothing to go back
+   * to — opening a guide from a link, or as the first screen of a session —
+   * so Finish left somebody stranded on the last step of the prayer with a
+   * button that did not respond. `canGoBack` decides, and Today is the honest
+   * fallback: it is where the app starts.
+   *
+   * And finishing a guide did not mark it finished. Somebody could pray all
+   * twenty-three steps of Fajr, tap Finish, and the journey would still be
+   * waiting for them to go and tick a box in `/journey` — so the carry-on card
+   * offered the lesson they had just done. Completing the thing IS the
+   * completion, and `toggleLesson` is guarded rather than toggled, because a
+   * second run through a prayer should not un-finish it.
+   */
+  const finish = () => {
+    const key = `guide:${guide.id}`;
+    if (!completedLessons.includes(key)) toggleLesson(key);
+    if (router.canGoBack()) router.back();
+    else router.replace('/(tabs)');
   };
 
   return (
@@ -202,7 +227,7 @@ export default function GuideScreen() {
         </Pressable>
 
         <Pressable
-          onPress={() => (isLast ? router.back() : go(index + 1))}
+          onPress={() => (isLast ? finish() : go(index + 1))}
           style={({ pressed }) => [
             styles.button,
             { backgroundColor: theme.accent, opacity: pressed ? 0.85 : 1 },

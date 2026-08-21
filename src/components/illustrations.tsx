@@ -1,6 +1,7 @@
+import { getPostureImage } from '@/content/prayer-images';
 import type { Posture } from '@/content/types';
 
-import { StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
 import Svg, { Circle, G, Line, Path } from 'react-native-svg';
 
 import type { DayTimes, PrayerId } from '@/lib/prayer-times';
@@ -316,6 +317,25 @@ export function PostureFigure({
   color: string;
   size?: number;
 }) {
+  /*
+    A drawn illustration wins wherever one exists.
+
+    Per posture rather than all-or-nothing, so the set can land one file at a
+    time and every step still shows something. `getPostureImage` returns
+    nothing for a posture nobody has drawn yet, and the figures below carry it.
+  */
+  const drawn = getPostureImage(posture);
+  if (drawn) {
+    return (
+      <Image
+        source={drawn}
+        style={{ width: size, height: size }}
+        resizeMode="contain"
+        accessible={false}
+      />
+    );
+  }
+
   /**
    * Filled, not stroked — and that is a deliberate break from the rest of this
    * file.

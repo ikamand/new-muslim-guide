@@ -87,6 +87,27 @@ export function getPracticeCredits(items: PracticeItem[]): string[] {
   return lines;
 }
 
+/**
+ * The practice key for a recitation, or undefined if it cannot be practised.
+ *
+ * Matched on the Arabic, which is the one field that is never translated,
+ * never rewritten, and identical wherever the same text appears — see
+ * `localiseRecitation`, which spreads it through untouched. Identity would be
+ * wrong: a localised recitation is a new object, so a step's copy is never the
+ * same reference as the one in `Recitations`.
+ *
+ * This exists so the practice screen can be reached from the words themselves.
+ * It used to be reachable only from the Learn tab, from Today's footer row and
+ * from a help topic — so someone learning Al-Fatiha stood on a mat, on the step
+ * that recites it, three taps from the screen built to teach it.
+ */
+export function practiceKeyFor(recitation: Recitation): string | undefined {
+  return getPracticeItems().find((item) => {
+    const source = (Recitations as Record<string, Recitation>)[item.key];
+    return source?.arabic === recitation.arabic;
+  })?.key;
+}
+
 /** How many clips can be played right now — the count shown on the Learn card. */
 export function getPracticeClipCount(): number {
   return getPracticeItems().reduce((total, item) => total + item.clips.length, 0);

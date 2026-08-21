@@ -27,12 +27,65 @@ import { SOURCE_LOCALE, type ContentDict, type Locale } from './locales';
  * French as in English.
  */
 
+/**
+ * Running totals of what the last translation actually managed.
+ *
+ * Module-level, and safe because every `localise*` below is synchronous: a call
+ * cannot be interleaved with another, so a reading taken either side of one is
+ * that call's own. `measure` is the only thing that reads them.
+ *
+ * The alternative was a second walk of the same fields to count them, kept in
+ * step with the first by hand. One walk that counts as it goes cannot drift.
+ */
+let seen = 0;
+let missed = 0;
+
 function tr(dict: ContentDict, text: string): string;
 function tr(dict: ContentDict, text: string | undefined): string | undefined;
 function tr(dict: ContentDict, text: string | undefined): string | undefined {
   if (!text) return text;
+  seen += 1;
   const translated = dict[text];
-  return translated && translated.trim() ? translated : text;
+  if (translated && translated.trim()) return translated;
+  missed += 1;
+  return text;
+}
+
+/**
+ * How much of what a screen is about to render is really in the reader's
+ * language.
+ *
+ * `strings` counts translatable prose, not words: a step with a title, an
+ * instruction and a note is three.
+ */
+export type Coverage = {
+  strings: number;
+  /** How many fell back to English. */
+  untranslated: number;
+  /** True when nothing fell back — including English itself, which cannot. */
+  complete: boolean;
+};
+
+/**
+ * Localise something and find out what it cost.
+ *
+ * ```ts
+ * const [guide, coverage] = measure(() => localiseGuide(source, locale));
+ * ```
+ *
+ * The app keeps showing English where a translation is missing, because
+ * somebody halfway through wudu needs the instruction more than they need to
+ * know it is untranslated. What this adds is the ability to *say so* — see
+ * `TranslationGap`. Silence was the actual bug: a third-translated app looked
+ * finished, to the reader and to us.
+ */
+export function measure<T>(localise: () => T): [T, Coverage] {
+  const seenBefore = seen;
+  const missedBefore = missed;
+  const value = localise();
+  const strings = seen - seenBefore;
+  const untranslated = missed - missedBefore;
+  return [value, { strings, untranslated, complete: untranslated === 0 }];
 }
 
 /**

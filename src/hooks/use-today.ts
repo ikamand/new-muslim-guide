@@ -91,13 +91,20 @@ export function useToday(): readonly TodayItem[] {
     // Derived from the journey rather than from a list of its own, so the order
     // someone learns wudu, then what to have ready, then the prayer itself,
     // lives in exactly one place.
+    //
+    // `OWN_PAGE` matters here as much as it does on the suggestion below, and
+    // was missing: the first unfinished step in `salah` is the five-pillars
+    // lesson, which is a `pillar` and routes to `/pillars`. So a row headed
+    // "Prayer", summarised "Five prayers a day, at set times, facing the
+    // Kaʿbah in Mecca", opened a list of five cards instead of a prayer.
     const prayerStep: ResolvedStep | undefined = stages
       .flatMap((stage) => stage.steps)
       .find(
         (step) =>
           !step.done &&
           step.entry.meta !== undefined &&
-          PRAYER_CATEGORIES.includes(step.entry.meta.category),
+          PRAYER_CATEGORIES.includes(step.entry.meta.category) &&
+          OWN_PAGE.includes(step.entry.kind),
       );
 
     if (prayerStep) {

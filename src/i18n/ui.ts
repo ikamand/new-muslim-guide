@@ -9,7 +9,7 @@ import type { Locale } from './locales';
  * the tashahhud wrong is a different class of mistake entirely. Only the
  * strings under `src/i18n/content/` carry that weight.
  *
- * ⚠️ REVIEW REQUIRED — the Arabic, French and Spanish below are model-written
+ * ⚠️ REVIEW REQUIRED — the French and Spanish below are model-written
  * and need a native speaker's eye. They are not religious text, so this is
  * proofreading rather than scholarly review.
  *
@@ -184,6 +184,8 @@ export const EN = {
   'practice.slower': 'Slower',
   'practice.ayah': 'Ayah',
   'practice.play': 'Play',
+  /** On the words themselves, so practice is reachable from inside the prayer. */
+  'practice.thisOne': 'Practise this',
   'practice.pause': 'Pause',
 
   'pillars.title': 'The Five Pillars',
@@ -230,6 +232,32 @@ export const EN = {
   'onboarding.skip': 'Skip',
   'onboarding.back': 'Back',
   'onboarding.continue': 'Continue',
+
+  /**
+   * The language question, asked first.
+   *
+   * It used to be inferred from the phone and never asked, on the reasoning
+   * that someone new has enough to decide already. The guess is wrong often
+   * enough to matter — people run a phone in one language and read religious
+   * material in another — and it is a one-tap question with an obvious default,
+   * which is a different thing from a language picker sprung on a stranger.
+   *
+   * `translation.partial` is on the two options that are partly done. Saying it
+   * here, before the choice, is more honest than letting someone pick French
+   * and discover the state of it three screens in.
+   */
+  'onboarding.language.title': 'What language would you like to read in?',
+  'onboarding.language.help': 'You can change this at any time in Settings.',
+  'translation.partial': 'Partly translated — the rest is shown in English.',
+
+  /**
+   * Shown at the foot of a screen carrying untranslated text.
+   *
+   * `{language}` is the language in its own name. The other locales say it
+   * without the placeholder, because "en Français" reads wrong where "en
+   * français" is the sentence — a substitution cannot fix a capital letter.
+   */
+  'translation.gap': 'Some of this page is not in {language} yet, so it is shown in English.',
   'onboarding.selected': 'Selected',
 
   'onboarding.welcome.title': 'Welcome',
@@ -329,183 +357,6 @@ export type UIKey = keyof typeof EN;
 
 type Overrides = Partial<Record<UIKey, string>>;
 
-const AR: Overrides = {
-  'tab.today': 'اليوم',
-  'tab.learn': 'تعلّم',
-  'tab.settings': 'الإعدادات',
-  'learn.title': 'تعلّم',
-  'learn.section.startHere': 'ابدأ من هنا',
-  'phrases.title': 'ما يقوله الناس لك',
-  'duas.title': 'أدعية اليوم',
-  'learn.section.everyDay': 'كل يوم',
-  'learn.section.understanding': 'لفهم أعمق',
-  'practice.title': 'تدرّب',
-  'practice.repeat': 'تكرار',
-  'practice.slower': 'أبطأ',
-  'practice.ayah': 'آية',
-  'practice.play': 'تشغيل',
-  'practice.pause': 'إيقاف',
-  'pillars.title': 'أركان الإسلام',
-  'pillars.testimony': 'الشهادة',
-  'iman.title': 'أركان الإيمان',
-  'qibla.title': 'القبلة',
-  'settings.title': 'الإعدادات',
-  'settings.intro': 'كيف يُقرأ التطبيق، وكيف يتصرّف أثناء الصلاة.',
-  'settings.language': 'اللغة',
-  'settings.display': 'العرض',
-  'settings.transliteration': 'النقحرة',
-  'settings.translation': 'الترجمة',
-  'settings.reminders': 'تنبيهات الصلاة',
-  'reminder.now': 'حان وقت الصلاة.',
-  'settings.duringPrayer': 'أثناء الصلاة',
-  'settings.keepAwake': 'إبقاء الشاشة مضاءة',
-  'onboarding.step': 'الخطوة {n} من {total}',
-  'onboarding.skip': 'تخطٍّ',
-  'onboarding.back': 'رجوع',
-  'onboarding.continue': 'متابعة',
-  'onboarding.selected': 'مختار',
-  'onboarding.welcome.title': 'أهلاً بك',
-  'onboarding.welcome.body1': 'أهلاً بك في الإسلام.',
-  'onboarding.welcome.body2': 'لست مضطرًا لتعلّم كل شيء اليوم.',
-  'onboarding.welcome.body3': 'سنمضي خطوة خطوة.',
-  'onboarding.welcome.cta': 'لنبدأ',
-  'onboarding.stage.title': 'أين أنت الآن؟',
-  'onboarding.stage.new-muslim': 'أسلمتُ للتو',
-  'onboarding.stage.new-muslim.help': 'أنا جديد على الإسلام وأريد المساعدة في الأساسيات.',
-  'onboarding.stage.exploring': 'أتعرّف على الإسلام',
-  'onboarding.stage.exploring.help': 'أستكشف الإسلام وأريد فهم أساسياته.',
-  'onboarding.stage.returning': 'مسلم منذ مدة، وما زلت أتعلّم',
-  'onboarding.stage.returning.help': 'أريد تقوية فهمي وعملي.',
-  'onboarding.stage.helping': 'أساعد شخصًا على تعلّم الإسلام',
-  'onboarding.stage.helping.help': 'أريد مواد بسيطة أستعين بها لمساعدة غيري.',
-  'onboarding.interest.title': 'بماذا تحبّ أن نبدأ؟',
-  'onboarding.interest.prayer': 'الصلاة',
-  'onboarding.interest.basics': 'تعلّم الأساسيات',
-  'onboarding.interest.daily-life': 'الحياة اليومية للمسلم',
-  'onboarding.interest.understanding': 'فهم الإسلام',
-  'onboarding.interest.unsure': 'لست متأكدًا',
-  'onboarding.reassure.title': 'لا تقلق من تعلّم كل شيء',
-  'onboarding.reassure.body1': 'الإسلام طريق عمر كامل.',
-  'onboarding.reassure.body2': 'لا يُنتظر منك أن تعرف كل شيء فورًا.',
-  'onboarding.reassure.body3': 'ابدأ بما تحتاجه اليوم، وسنعينك على الباقي تِباعًا.',
-  'onboarding.reassure.cta': 'لنبدأ',
-  'settings.onboarding': 'البداية',
-  'settings.onboarding.help': 'أجب عن السؤالين مرة أخرى لتغيير ما يقترحه التطبيق أولاً.',
-  'settings.onboarding.redo': 'اختر من جديد',
-  'learn.intro': 'ابدأ من الأعلى إن كنت جديدًا. وما دون ذلك خلفية لما تفعله بالفعل، ويمكنه الانتظار لوقت هادئ.',
-  'learn.recommended': 'من أين تبدأ',
-  'journey.title': 'طريق المبتدئ',
-  'journey.intro': 'ست مراحل بالترتيب الذي يمرّ به معظم الناس. لا شيء مُقفل — اذهب إلى ما تحتاجه اليوم وعُد لما تبقّى.',
-  'journey.progress': '{done} من {total}',
-  'journey.start': 'ابدأ',
-  'journey.continue': 'واصل',
-  'journey.finished': 'تمّ كل شيء',
-  'journey.markDone': 'تحديد كمُنجز',
-  'journey.markNotDone': 'إلغاء التحديد',
-  'journey.done': 'مُنجز',
-  'journey.lessons': 'دروس',
-  'journey.requirement.foundation': 'أساس',
-  'journey.requirement.practice': 'عمل',
-  'journey.requirement.learning': 'يحسن معرفته',
-  'journey.requirement.seasonal': 'في موسمه',
-  'journey.stage.start-here': 'ابدأ من هنا',
-  'journey.stage.start-here.help': 'ما هو الإسلام، وما الذي دخلت فيه.',
-  'journey.stage.first-days': 'أيامك الأولى',
-  'journey.stage.first-days.help': 'ما يكفي لتصلّي الليلة.',
-  'journey.stage.learning-to-pray': 'تعلّم الصلاة',
-  'journey.stage.learning-to-pray.help': 'الصلاة كما ينبغي، خطوة خطوة.',
-  'journey.stage.living': 'الحياة كمسلم',
-  'journey.stage.living.help': 'الطعام واللباس والعمل ومن حولك.',
-  'journey.stage.deepening': 'تعمّق أكثر',
-  'journey.stage.deepening.help': 'الإسلام ليس قائمة أحكام فقط.',
-  'journey.stage.through-the-year': 'على مدار السنة',
-  'journey.stage.through-the-year.help': 'رمضان والحج والعيدان.',
-  'journey.lesson.five-pillars': 'أركان الإسلام',
-  'journey.lesson.six-articles': 'أركان الإيمان',
-  'journey.lesson.phrases': 'ما يقوله الناس لك',
-  'journey.lesson.purification': 'الغسل والتيمم',
-  'journey.lesson.how-to-pray': 'كيف تصلّي',
-  'journey.lesson.pray-fajr': 'صلاة الفجر خطوة خطوة',
-  'journey.lesson.pray-maghrib': 'صلاة المغرب خطوة خطوة',
-  'journey.lesson.everyday-duas': 'أدعية اليوم',
-  'journey.lesson.hereafter': 'الآخرة',
-  'journey.lesson.fasting': 'الصيام',
-  'journey.lesson.zakat': 'الزكاة',
-  'journey.lesson.hajj': 'الحج',
-  'home.prayNow': 'صَلِّ',
-  'home.notInWudu': 'لست على وضوء؟',
-  'home.washFirst': 'توضّأ أولاً',
-  'home.welcome': 'أهلاً بك',
-  'home.welcomeBack': 'أهلاً بعودتك',
-  'home.continue': 'واصل طريقك',
-  'home.start': 'ابدأ طريقك',
-  'home.journeyDone': 'أتممت كل الدروس',
-  'home.journeyDone.help': 'لا شيء مُقفل ولا شيء ينتهي. عُد إلى ما تشاء، أو اجعل هذين جزءًا من أسبوعك.',
-  'home.today': 'اليوم',
-  'home.help': 'أحتاج مساعدة في…',
-  'home.helpElse': 'شيء آخر',
-  'today.reason.prayer': 'الصلاة',
-  'today.reason.suggested': 'مقترح',
-  'season.ramadan': 'رمضان',
-  'season.last-ten-nights': 'العشر الأواخر',
-  'season.before-ramadan': 'رمضان يقترب',
-  'season.dhul-hijjah': 'ذو الحجة',
-  'season.muharram': 'عام هجري جديد',
-  'hijri.month.1': 'محرّم',
-  'hijri.month.2': 'صفر',
-  'hijri.month.3': 'ربيع الأول',
-  'hijri.month.4': 'ربيع الآخر',
-  'hijri.month.5': 'جمادى الأولى',
-  'hijri.month.6': 'جمادى الآخرة',
-  'hijri.month.7': 'رجب',
-  'hijri.month.8': 'شعبان',
-  'hijri.month.9': 'رمضان',
-  'hijri.month.10': 'شوّال',
-  'hijri.month.11': 'ذو القعدة',
-  'hijri.month.12': 'ذو الحجة',
-  'help.topic.prayer': 'الصلاة',
-  'help.topic.washing': 'الطهارة قبل الصلاة',
-  'help.topic.mistakes': 'إذا حدث خطأ',
-  'help.topic.quran': 'القرآن',
-  'help.topic.words': 'ماذا تقول',
-  'help.topic.food': 'ماذا آكل',
-  'help.topic.clothing': 'اللباس',
-  'help.topic.people': 'الأسرة والعمل والناس',
-  'help.topic.ramadan': 'رمضان والصيام',
-  'help.topic.new': 'أسلمتُ حديثًا',
-  'times.next': 'التالية',
-  'times.nextTomorrow': 'التالية، غدًا',
-  'times.endsAtSunrise': 'ينتهي وقتها بشروق الشمس،',
-  'times.needLocation': 'مواقيت الصلاة تحتاج معرفة مكانك',
-  'times.needLocation.why':
-    'تُحسب المواقيت من موضع الشمس حيث تقف. يُستخدم موقعك على هذا الجهاز ولا يُرسل إلى أي مكان — فلا خادم يُرسل إليه.',
-  'times.locationOff':
-    'خدمات الموقع مُعطّلة، فلا يمكن حساب المواقيت. فعّلها من إعدادات هاتفك ثم عُد.',
-  'times.useLocation': 'استخدم موقعي',
-  'times.working': 'يجري حساب مواقيت اليوم…',
-  'times.clockSuspect':
-    'ساعة هاتفك مضبوطة بعيدًا عن المكان الذي يبدو أنك فيه. تتبع هذه المواقيت الساعة، فراجع إعدادات التاريخ والوقت إن بدت خاطئة.',
-  'times.onThisPhone': 'محسوبة على هذا الهاتف',
-  'times.followLocal': 'إن اختلف جدول مسجدك عنها، فاتبع المسجد.',
-  'count.minutes': 'دقيقة',
-  'count.steps': 'خطوات',
-  'count.sections': 'أقسام',
-  'count.phrases': 'عبارة',
-  'count.duas': 'أدعية',
-  'count.clips': 'مقاطع',
-  'count.articles': 'أركان',
-  'count.pillars': 'أركان',
-  'note.more': 'اعرف المزيد',
-  'note.less': 'إخفاء',
-  'note.positions': 'أقوال المذاهب',
-  'note.sources': 'المصدر',
-  'attribution.the majority': 'الجمهور',
-  'attribution.a minority': 'قلّة من العلماء',
-  'attribution.contemporary scholarship': 'العلماء المعاصرون',
-  'settings.guidance': 'إرشادات الصلاة لـ',
-  'common.back': 'رجوع',
-};
-
 const FR: Overrides = {
   'tab.today': 'Aujourd’hui',
   'tab.learn': 'Apprendre',
@@ -521,6 +372,7 @@ const FR: Overrides = {
   'practice.slower': 'Plus lent',
   'practice.ayah': 'Verset',
   'practice.play': 'Lire',
+  'practice.thisOne': 'S’entraîner sur ce texte',
   'practice.pause': 'Pause',
   'pillars.title': 'Les cinq piliers',
   'pillars.testimony': 'L’attestation de foi',
@@ -540,6 +392,11 @@ const FR: Overrides = {
   'onboarding.skip': 'Passer',
   'onboarding.back': 'Retour',
   'onboarding.continue': 'Continuer',
+  'onboarding.language.title': 'Dans quelle langue souhaitez-vous lire ?',
+  'onboarding.language.help': 'Vous pourrez changer cela à tout moment dans les réglages.',
+  'translation.partial': 'Traduction partielle — le reste est affiché en anglais.',
+  'translation.gap':
+    "Une partie de cette page n'est pas encore traduite en français. Elle est affichée en anglais.",
   'onboarding.selected': 'Sélectionné',
   'onboarding.welcome.title': 'Bienvenue',
   'onboarding.welcome.body1': 'Bienvenue en islam.',
@@ -692,6 +549,7 @@ const ES: Overrides = {
   'practice.slower': 'Más lento',
   'practice.ayah': 'Aleya',
   'practice.play': 'Reproducir',
+  'practice.thisOne': 'Practicar este texto',
   'practice.pause': 'Pausa',
   'pillars.title': 'Los cinco pilares',
   'pillars.testimony': 'El testimonio de fe',
@@ -711,6 +569,11 @@ const ES: Overrides = {
   'onboarding.skip': 'Omitir',
   'onboarding.back': 'Atrás',
   'onboarding.continue': 'Continuar',
+  'onboarding.language.title': '¿En qué idioma quieres leer?',
+  'onboarding.language.help': 'Puedes cambiarlo en cualquier momento en Ajustes.',
+  'translation.partial': 'Traducción parcial: el resto se muestra en inglés.',
+  'translation.gap':
+    'Parte de esta página aún no está traducida al español. Se muestra en inglés.',
   'onboarding.selected': 'Seleccionado',
   'onboarding.welcome.title': 'Bienvenida',
   'onboarding.welcome.body1': 'Te damos la bienvenida al islam.',
@@ -846,7 +709,7 @@ const ES: Overrides = {
   'common.back': 'Atrás',
 };
 
-export const UI: Record<Locale, Overrides> = { en: EN, ar: AR, fr: FR, es: ES };
+export const UI: Record<Locale, Overrides> = { en: EN, fr: FR, es: ES };
 
 /** The string for a key, falling back to English whenever a locale lacks it. */
 export function ui(locale: Locale, key: UIKey): string {

@@ -7,6 +7,8 @@ import { StepFrame } from '@/components/onboarding/step-frame';
 import { ThemedText } from '@/components/themed-text';
 import { Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
+import { CONTENT_DICTS } from '@/i18n/content';
+import { LOCALE_NAMES, LOCALES, SOURCE_LOCALE } from '@/i18n/locales';
 import { useSettings } from '@/hooks/use-settings';
 import {
   INITIAL_INTERESTS,
@@ -38,11 +40,23 @@ import type { UIKey } from '@/i18n/ui';
  * first thirty seconds of the app no longer ask a stranger their gender.
  */
 
-const TOTAL_STEPS = 4;
+const TOTAL_STEPS = 5;
+
+/**
+ * Whether a language is finished enough to say nothing about.
+ *
+ * Read from the dictionary rather than written down, so it stops being true on
+ * its own the moment a locale is completed — a hardcoded list of "partial"
+ * languages is a lie waiting to happen. English is the content itself and can
+ * never be partial.
+ */
+function isPartial(locale: (typeof LOCALES)[number]): boolean {
+  return locale !== SOURCE_LOCALE && Object.keys(CONTENT_DICTS[locale]).length > 0;
+}
 
 export default function WelcomeScreen() {
   const router = useRouter();
-  const { t } = useLocale();
+  const { locale, setLocale, t } = useLocale();
   const { setMany, onboarded, userStage, initialInterest } = useSettings();
 
   const [step, setStep] = useState(0);
@@ -111,10 +125,45 @@ export default function WelcomeScreen() {
     label: t(`onboarding.interest.${value}` as UIKey),
   }));
 
+  /*
+    Language leads, because every screen after it is written in the answer —
+    including the welcome. The device's language is already selected, so for
+    most people this is one tap on Continue rather than a decision, which is the
+    difference between asking and handing someone a picker.
+  */
   if (step === 0) {
     return (
       <StepFrame
         step={1}
+        total={TOTAL_STEPS}
+        title={t('onboarding.language.title')}
+        onSkip={skip}
+        onContinue={next}
+        continueLabel={t('onboarding.continue')}>
+        <View style={styles.options} accessibilityRole="radiogroup">
+          {LOCALES.map((value, index) => (
+            <ChoiceCard
+              key={value}
+              label={LOCALE_NAMES[value]}
+              help={isPartial(value) ? t('translation.partial') : undefined}
+              selected={locale === value}
+              onPress={() => setLocale(value)}
+              index={index + 1}
+              total={LOCALES.length}
+            />
+          ))}
+        </View>
+        <ThemedText type="small" themeColor="textSecondary" style={styles.aside}>
+          {t('onboarding.language.help')}
+        </ThemedText>
+      </StepFrame>
+    );
+  }
+
+  if (step === 1) {
+    return (
+      <StepFrame
+        step={2}
         total={TOTAL_STEPS}
         title={t('onboarding.welcome.title')}
         onSkip={skip}
@@ -136,10 +185,10 @@ export default function WelcomeScreen() {
     );
   }
 
-  if (step === 1) {
+  if (step === 2) {
     return (
       <StepFrame
-        step={2}
+        step={3}
         total={TOTAL_STEPS}
         title={t('onboarding.stage.title')}
         onBack={back}
@@ -164,10 +213,10 @@ export default function WelcomeScreen() {
     );
   }
 
-  if (step === 2) {
+  if (step === 3) {
     return (
       <StepFrame
-        step={3}
+        step={4}
         total={TOTAL_STEPS}
         title={t('onboarding.interest.title')}
         onBack={back}
@@ -193,7 +242,7 @@ export default function WelcomeScreen() {
 
   return (
     <StepFrame
-      step={4}
+      step={5}
       total={TOTAL_STEPS}
       title={t('onboarding.reassure.title')}
       onBack={back}
@@ -230,5 +279,8 @@ const styles = StyleSheet.create({
   },
   options: {
     gap: Spacing.two,
+  },
+  aside: {
+    paddingTop: Spacing.three,
   },
 });

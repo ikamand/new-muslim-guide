@@ -5,27 +5,31 @@
  * a set of overrides on top of it, and anything a translator has not delivered
  * falls back to English rather than showing a key or a blank. That means a
  * half-translated language is usable rather than broken, which is the state
- * every language is in for a while.
+ * every language is in for a while — and `TranslationGap` says so on the screen
+ * rather than letting English pass as a finished translation.
+ *
+ * ## Arabic was here and is deliberately gone
+ *
+ * It shipped as a selectable language with an empty dictionary: 645 strings,
+ * none translated, so choosing it produced an entirely English app. That is a
+ * worse first impression than not offering it, and Arabic speakers are the one
+ * audience this app is not needed by — the support, the teachers and the books
+ * are already around them. Re-adding it means `ar` here, an `AR` table in
+ * `ui.ts`, a content dictionary, and restoring the RTL handling this file used
+ * to carry.
  */
-export const LOCALES = ['en', 'ar', 'fr', 'es'] as const;
+export const LOCALES = ['en', 'fr', 'es'] as const;
 
 export type Locale = (typeof LOCALES)[number];
 
 export const SOURCE_LOCALE: Locale = 'en';
 
-/** Named in its own language — nobody looks for "Arabic" in a list they can't read. */
+/** Named in its own language — nobody looks for "Spanish" in a list they read as "Español". */
 export const LOCALE_NAMES: Record<Locale, string> = {
   en: 'English',
-  ar: 'العربية',
   fr: 'Français',
   es: 'Español',
 };
-
-export const RTL_LOCALES: readonly Locale[] = ['ar'];
-
-export function isRTL(locale: Locale): boolean {
-  return RTL_LOCALES.includes(locale);
-}
 
 export function isLocale(value: unknown): value is Locale {
   return typeof value === 'string' && (LOCALES as readonly string[]).includes(value);

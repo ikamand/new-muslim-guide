@@ -69,7 +69,12 @@ export { getImanPillar } from './iman';
 export { getPillar, SHAHADA } from './pillars';
 export { AUDIO_SOURCE_BY_ID, creditLine, getAudioSource, SOURCES } from './audio-sources';
 export type { AudioSource } from './audio-sources';
-export { getPracticeClipCount, getPracticeCredits, getPracticeItems } from './practice';
+export {
+  getPracticeClipCount,
+  getPracticeCredits,
+  getPracticeItems,
+  practiceKeyFor,
+} from './practice';
 export type { PracticeClip, PracticeItem } from './practice';
 export { PHRASES, type Phrase } from './phrases';
 export { Recitations } from './recitations';

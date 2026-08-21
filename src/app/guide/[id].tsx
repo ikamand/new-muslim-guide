@@ -7,8 +7,9 @@ import { RecitationCard } from '@/components/recitation-card';
 import { ContentNoteCard } from '@/components/content-note';
 import { SourceDisclosure } from '@/components/source-list';
 import { ThemedText } from '@/components/themed-text';
+import { TranslationGap } from '@/components/translation-gap';
 import { getGuide, resolveNotes, type Posture } from '@/content';
-import { localiseGuide } from '@/i18n/localise';
+import { localiseGuide, measure } from '@/i18n/localise';
 import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { useSettings } from '@/hooks/use-settings';
@@ -44,7 +45,13 @@ export default function GuideScreen() {
   const { locale } = useLocale();
   const { keepAwake } = useSettings();
   const source = getGuide(id);
-  const guide = source ? localiseGuide(source, locale) : undefined;
+  // Measured, not just translated. A guide is read one step per screen, so the
+  // reading is taken over the whole guide and narrowed to the step below —
+  // localising per step instead would re-run `localiseRecitation` on every
+  // render of every step.
+  const [guide, coverage] = measure(() =>
+    source ? localiseGuide(source, locale) : undefined,
+  );
 
   if (!guide) {
     return (
@@ -108,6 +115,13 @@ export default function GuideScreen() {
           reader on a prayer mat is asking one.
         */}
         <SourceDisclosure sources={[...(step.sources ?? []), ...(step.says?.sources ?? [])]} />
+
+        {/*
+          Last, under the citations. Someone mid-wudu is reading the
+          instruction, not a note about the app — this is for the moment they
+          look up, not the moment they look down.
+        */}
+        <TranslationGap coverage={coverage} />
       </ScrollView>
 
       <View style={[styles.footer, { borderTopColor: theme.border }]}>

@@ -188,16 +188,15 @@ export type LocalisedText = {
   en: string;
   es?: string;
   fr?: string;
-  ar?: string;
 };
 
 /**
  * Arabic that is part of the practice, rather than a translation of the app.
  *
- * The distinction matters and is easy to lose: `locale === 'ar'` means someone
- * is *reading* the app in Arabic, and is served by `src/i18n/content/ar.ts`.
- * This is different — it is the Arabic a reader of any language has to learn,
- * because the words themselves are the thing.
+ * The distinction matters and is easy to lose. A locale is the language someone
+ * is *reading the app in*, served by the tables in `src/i18n/content/`. This is
+ * different — it is the Arabic a reader of any language has to learn, because
+ * the words themselves are the thing, and it is never translated into anything.
  *
  * Script and transliteration are never translated. A Latin-script crutch is
  * the same crutch in French as in English, and the Arabic is what is being

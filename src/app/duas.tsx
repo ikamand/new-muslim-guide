@@ -5,10 +5,11 @@ import { RecitationCard } from '@/components/recitation-card';
 import { ContentNoteCard } from '@/components/content-note';
 import { SourceDisclosure } from '@/components/source-list';
 import { ThemedText } from '@/components/themed-text';
+import { TranslationGap } from '@/components/translation-gap';
 import { DUAS, resolveNotes } from '@/content';
 import { MaxContentWidth, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
-import { localiseDua } from '@/i18n/localise';
+import { localiseDua, measure } from '@/i18n/localise';
 
 /**
  * The day's supplications, in the order the day happens.
@@ -18,6 +19,7 @@ import { localiseDua } from '@/i18n/localise';
  */
 export default function DuasScreen() {
   const { locale, t } = useLocale();
+  const [duas, coverage] = measure(() => DUAS.map((entry) => localiseDua(entry, locale)));
 
   return (
     <ScrollView contentContainerStyle={styles.content}>
@@ -28,7 +30,7 @@ export default function DuasScreen() {
       </ThemedText>
 
       <View style={styles.list}>
-        {DUAS.map((entry) => localiseDua(entry, locale)).map((dua) => (
+        {duas.map((dua) => (
           <View key={dua.id} style={styles.item}>
             <ThemedText type="smallBold" themeColor="textSecondary" style={styles.when}>
               {dua.when}
@@ -37,6 +39,8 @@ export default function DuasScreen() {
             {resolveNotes(dua.note, dua.meta?.notes).map((entry, position) => (
               <ContentNoteCard key={`${entry.kind}-${position}`} entry={entry} />
             ))}
+
+        <TranslationGap coverage={coverage} />
             {/*
               This is where the grading finally becomes visible. The two
               after-meal duʿas sit next to each other on this screen, one weak

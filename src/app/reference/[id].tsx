@@ -4,10 +4,11 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 import { ContentNoteCard } from '@/components/content-note';
 import { SourceDisclosure } from '@/components/source-list';
 import { ThemedText } from '@/components/themed-text';
+import { TranslationGap } from '@/components/translation-gap';
 import { getReference, resolveNotes } from '@/content';
 import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
-import { localiseReference } from '@/i18n/localise';
+import { localiseReference, measure } from '@/i18n/localise';
 import { useTheme } from '@/hooks/use-theme';
 
 /**
@@ -34,7 +35,7 @@ export default function ReferenceScreen() {
     );
   }
 
-  const reference = localiseReference(source, locale);
+  const [reference, coverage] = measure(() => localiseReference(source, locale));
 
   return (
     <ScrollView contentContainerStyle={styles.content}>
@@ -63,6 +64,8 @@ export default function ReferenceScreen() {
           </View>
         ))}
       </View>
+
+      <TranslationGap coverage={coverage} />
     </ScrollView>
   );
 }

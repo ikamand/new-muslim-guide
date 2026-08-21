@@ -1,6 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useAudioPlayer, useAudioPlayerStatus } from 'expo-audio';
-import { Stack } from 'expo-router';
+import { Stack, useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { Platform, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 
@@ -113,7 +113,7 @@ function PlayerClipRow({
           />
         </Pressable>
       </View>
-      <RecitationCard recitation={clip.display} />
+      <RecitationCard practice={false} recitation={clip.display} />
     </View>
   );
 }
@@ -138,7 +138,7 @@ function SilentClipRow({ clip }: { clip: PracticeClip }) {
           {t('practice.ayah')} {clip.part}
         </ThemedText>
       )}
-      <RecitationCard recitation={clip.display} />
+      <RecitationCard practice={false} recitation={clip.display} />
     </View>
   );
 }
@@ -178,11 +178,22 @@ function Toggle({
 
 export default function PracticeScreen() {
   const { locale, t } = useLocale();
+  const { focus } = useLocalSearchParams<{ focus?: string }>();
   const [activeId, setActiveId] = useState<string | null>(null);
   const [loop, setLoop] = useState(false);
   const [slow, setSlow] = useState(false);
 
-  const items = getPracticeItems();
+  /*
+    Arriving from a recitation puts that text first rather than filtering to
+    it. Someone who tapped "Practise this" mid-prayer wants that one and wants
+    it without scrolling — but hiding the rest would make the same screen mean
+    two different things depending on how it was opened, and leave no way back
+    to the others.
+  */
+  const all = getPracticeItems();
+  const items = focus
+    ? [...all].sort((a, b) => Number(b.key === focus) - Number(a.key === focus))
+    : all;
   const credits = getPracticeCredits(items);
 
   return (

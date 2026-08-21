@@ -2,10 +2,11 @@ import { Stack } from 'expo-router';
 import { ScrollView, StyleSheet, View } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
+import { TranslationGap } from '@/components/translation-gap';
 import { PHRASES } from '@/content';
 import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
-import { localisePhrase } from '@/i18n/localise';
+import { localisePhrase, measure } from '@/i18n/localise';
 import { useTheme } from '@/hooks/use-theme';
 
 /**
@@ -19,6 +20,9 @@ import { useTheme } from '@/hooks/use-theme';
 export default function PhrasesScreen() {
   const theme = useTheme();
   const { locale, t } = useLocale();
+  const [phrases, coverage] = measure(() =>
+    PHRASES.map((entry) => localisePhrase(entry, locale)),
+  );
 
   return (
     <ScrollView contentContainerStyle={styles.content}>
@@ -29,7 +33,7 @@ export default function PhrasesScreen() {
       </ThemedText>
 
       <View style={styles.list}>
-        {PHRASES.map((entry) => localisePhrase(entry, locale)).map((phrase) => (
+        {phrases.map((phrase) => (
           <View
             key={phrase.id}
             style={[
@@ -60,6 +64,8 @@ export default function PhrasesScreen() {
             )}
           </View>
         ))}
+
+        <TranslationGap coverage={coverage} />
       </View>
     </ScrollView>
   );

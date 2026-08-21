@@ -2,17 +2,21 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getLocales } from 'expo-localization';
 import { createContext, use, useCallback, useEffect, useMemo, useState, type ReactNode } from 'react';
 
-import { isLocale, isRTL, resolveLocale, SOURCE_LOCALE, type Locale } from '@/i18n/locales';
+import { isLocale, resolveLocale, SOURCE_LOCALE, type Locale } from '@/i18n/locales';
 import { ui, type UIKey } from '@/i18n/ui';
 
 /**
  * The language the app is read in.
  *
- * Defaults to the phone's language rather than asking — someone who has just
- * become Muslim has enough to decide without being handed a language picker on
- * first launch. The setting exists for the case the guess is wrong, which is
- * common enough: people often run a phone in one language and read religious
- * material in another.
+ * The phone's language is the starting guess, and onboarding asks rather than
+ * assuming — the guess is wrong often enough to matter, because people run a
+ * phone in one language and read religious material in another. Asking used to
+ * feel like one decision too many for someone new; a one-tap question with the
+ * right answer already selected is not that.
+ *
+ * Anything the phone reports that the app does not speak resolves to English.
+ * `rtl` used to live here for Arabic and went with it — a right-to-left
+ * language will need it back, along with `RTL_LOCALES` in `i18n/locales.ts`.
  */
 
 const STORAGE_KEY = 'locale';
@@ -31,7 +35,6 @@ type LocaleContext = {
   setLocale: (locale: Locale) => void;
   /** Translated UI string, falling back to English. */
   t: (key: UIKey) => string;
-  rtl: boolean;
   /** False until the stored choice has been read. */
   loaded: boolean;
 };
@@ -74,7 +77,6 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
       locale,
       setLocale,
       t: (key: UIKey) => ui(locale, key),
-      rtl: isRTL(locale),
       loaded,
     }),
     [locale, setLocale, loaded],

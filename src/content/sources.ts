@@ -95,6 +95,22 @@ export type QuranSource = {
   ayah: number | readonly [number, number];
   /** Optional, for display. The reference alone is unambiguous without it. */
   surahName?: string;
+  /**
+   * True where the verse COMMANDS the act rather than supplying its wording.
+   *
+   * The taʿawwudh is the case that forced this field. Qur'an 16:98 says
+   * `فَاسْتَعِذْ` — "seek refuge", an imperative — and the words a person
+   * actually says are `أَعُوذُ`, "I seek refuge". The citation was right about
+   * where the instruction comes from and the comment beside it claimed more:
+   * that the wording was the Qur'an's own. It is not, and nothing in the repo
+   * could see the difference until `content:verify` compared the two texts.
+   *
+   * So this is not a way to silence the check. It is the distinction the check
+   * exposed: a verse can be the authority for doing something without being
+   * the source of what you say. Where this is set, the wording still needs a
+   * citation of its own, and does not yet have one.
+   */
+  wordingElsewhere?: true;
   /** Overrides the derived quran.com link. Set it if you read it elsewhere. */
   url?: string;
 };

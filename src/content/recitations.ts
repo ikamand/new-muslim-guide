@@ -149,8 +149,25 @@ export const Recitations = {
     arabic: 'أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ',
     transliteration: 'Aʿūdhu bi-llāhi mina-sh-shayṭāni-r-rajīm',
     translation: 'I seek refuge in Allah from Satan, the rejected.',
-    // The wording is the Qur'an's own, in the verse that gives the instruction.
-    sources: [quran(16, 98, { surahName: 'An-Nahl' })],
+    /*
+      ⚠️ THIS COMMENT USED TO SAY THE WORDING IS THE QUR'AN'S OWN. It is not.
+
+      16:98 reads `فَاسْتَعِذْ بِاللَّهِ` — "seek refuge in Allah", an
+      imperative addressed to the reader. What a person actually says is
+      `أَعُوذُ بِاللَّهِ`, "I seek refuge in Allah". The verse commands the act
+      and does not supply the words, and the two are different verbs in
+      different persons.
+
+      Nothing in the repo could see that until `npm run content:verify`
+      compared the app's text against the verse it cited. The citation stays,
+      because the verse really is why this is said here; `wordingElsewhere`
+      records what it does not establish.
+
+      ⚠️ REVIEW REQUIRED — the wording has no citation of its own. It is the
+      near-universal formula and is in the collections, but this app does not
+      print a reference it has not verified, and none has been.
+    */
+    sources: [quran(16, 98, { surahName: 'An-Nahl', wordingElsewhere: true })],
     audioId: 'taawwudh',
   },
 

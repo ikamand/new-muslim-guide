@@ -37,17 +37,35 @@ import type { Posture } from './types';
 export type PostureImage = number;
 
 export const PRAYER_IMAGES: Partial<Record<Posture, PostureImage>> = {
-  // standing: require('@/assets/images/prayer/standing.png'),
-  // takbir: require('@/assets/images/prayer/takbir.png'),
-  // bowing: require('@/assets/images/prayer/bowing.png'),
-  // rising: require('@/assets/images/prayer/rising.png'),
-  // prostrating: require('@/assets/images/prayer/prostrating.png'),
-  // sitting: require('@/assets/images/prayer/sitting.png'),
-  // tashahhud: require('@/assets/images/prayer/tashahhud.png'),
-  // 'taslim-right': require('@/assets/images/prayer/taslim-right.png'),
-  // 'taslim-left': require('@/assets/images/prayer/taslim-left.png'),
+  standing: require('@/assets/images/prayer/standing.png'),
+  takbir: require('@/assets/images/prayer/takbir.png'),
+  bowing: require('@/assets/images/prayer/bowing.png'),
+  rising: require('@/assets/images/prayer/rising.png'),
+  prostrating: require('@/assets/images/prayer/prostrating.png'),
+  sitting: require('@/assets/images/prayer/sitting.png'),
+  tashahhud: require('@/assets/images/prayer/tashahhud.png'),
+  'taslim-right': require('@/assets/images/prayer/taslim-right.png'),
+  'taslim-left': require('@/assets/images/prayer/taslim-left.png'),
+  // Still the drawn figure — a tap and water rather than a body.
   // washing: require('@/assets/images/prayer/washing.png'),
 };
+
+/**
+ * Which way round each illustration is.
+ *
+ * The standing figures are portrait and the folded ones are landscape, which
+ * is what the postures actually are — a person standing is tall and a person
+ * prostrating is wide. A single square frame would letterbox half of them and
+ * crop the other half, so the frame follows the picture instead.
+ */
+export const PORTRAIT_POSTURES: readonly Posture[] = [
+  'standing',
+  'takbir',
+  'rising',
+  'bowing',
+  'taslim-right',
+  'taslim-left',
+];
 
 /** The illustration for a posture, or undefined where none has been drawn. */
 export function getPostureImage(posture: Posture): PostureImage | undefined {

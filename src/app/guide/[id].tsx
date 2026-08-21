@@ -131,34 +131,36 @@ export default function GuideScreen() {
           </ThemedText>
         </View>
 
-        {/*
-          The position, drawn. `POSTURE_KEY` names it for a screen reader; a
-          sighted reader mid-movement gets the shape, which is what they can
-          actually use one-handed without stopping to read.
-        */}
-        <View style={styles.head}>
+        <View style={styles.headText}>
           {step.posture && (
-            <View style={[styles.postureTile, { backgroundColor: theme.backgroundElement, borderColor: theme.border }]}>
-              <PostureFigure
-                posture={step.posture}
-                color={theme.accent}
-                size={44}
-              />
-            </View>
+            <ThemedText type="caption" themeColor="accent" style={styles.postureLabel}>
+              {t(POSTURE_KEY[step.posture])}
+            </ThemedText>
           )}
-          <View style={styles.headText}>
-            {step.posture && (
-              <ThemedText type="caption" themeColor="accent" style={styles.postureLabel}>
-                {t(POSTURE_KEY[step.posture])}
-              </ThemedText>
-            )}
-            <ThemedText type="subtitle">{step.title}</ThemedText>
-          </View>
+          <ThemedText type="subtitle">{step.title}</ThemedText>
         </View>
 
         <ThemedText type="default" style={styles.instruction}>
           {step.instruction}
         </ThemedText>
+
+        {/*
+          The position, under the words that describe it.
+
+          It used to be a 44px tile beside the title, which is a decoration
+          rather than an instruction — too small to copy, and above the
+          sentence it illustrates. Someone on a mat reads what to do and then
+          looks at what it should look like, so the picture goes where the
+          eye lands next.
+
+          `POSTURE_KEY` still names it above, for a screen reader and for
+          anyone who wants the word.
+        */}
+        {step.posture && (
+          <View style={[styles.posture, { backgroundColor: theme.backgroundElement }]}>
+            <PostureFigure posture={step.posture} color={theme.accent} height={300} />
+          </View>
+        )}
 
         {step.says && <RecitationCard recitation={step.says} />}
 
@@ -247,18 +249,22 @@ const styles = StyleSheet.create({
   rakahRow: {
     justifyContent: 'center',
   },
-  head: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: Spacing.three,
-  },
-  postureTile: {
-    width: 68,
-    height: 68,
-    borderRadius: Radius.medium,
-    borderWidth: StyleSheet.hairlineWidth,
+  /**
+   * The frame the illustration sits in.
+   *
+   * Height-led rather than width-led, because the postures are not all the
+   * same shape: a person standing is portrait and a person prostrating is
+   * landscape. Constraining the height and letting width follow keeps every
+   * step's picture the same visual weight, which a fixed-width frame would
+   * not — a portrait image at full width would be 500pt tall and push the
+   * citations off the screen.
+   */
+  posture: {
+    alignSelf: 'stretch',
     alignItems: 'center',
     justifyContent: 'center',
+    paddingVertical: Spacing.three,
+    borderRadius: Radius.medium,
   },
   headText: {
     flex: 1,

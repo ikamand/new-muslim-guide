@@ -1,4 +1,4 @@
-import { getPostureImage } from '@/content/prayer-images';
+import { getPostureImage, PORTRAIT_POSTURES } from '@/content/prayer-images';
 import type { Posture } from '@/content/types';
 
 import { Image, StyleSheet, Text, View } from 'react-native';
@@ -312,10 +312,14 @@ export function PostureFigure({
   posture,
   color,
   size = 48,
+  height,
 }: {
   posture: Posture;
   color: string;
+  /** The drawn fallback's box. Ignored where a real illustration exists. */
   size?: number;
+  /** How tall the illustration may be. Width follows from its own shape. */
+  height?: number;
 }) {
   /*
     A drawn illustration wins wherever one exists.
@@ -326,10 +330,30 @@ export function PostureFigure({
   */
   const drawn = getPostureImage(posture);
   if (drawn) {
+    /*
+      The frame takes the picture's own shape rather than a fixed box.
+
+      The postures are not all the same way round — a person standing is
+      portrait and a person prostrating is landscape — so `aspectRatio` does
+      the work. Fixing the height for both, which the first version did, left
+      seventy pixels of empty box under every landscape one: `contain` shrank
+      the image to fit the width and the container kept its height anyway.
+
+      A portrait picture is bounded by height, because at full width it would
+      be five hundred points tall and push the citations off the screen. A
+      landscape one is bounded by width, because it never gets that tall.
+    */
+    const box = height ?? size;
+    const portrait = PORTRAIT_POSTURES.includes(posture);
+
     return (
       <Image
         source={drawn}
-        style={{ width: size, height: size }}
+        style={
+          portrait
+            ? { height: box, aspectRatio: 2 / 3 }
+            : { width: '100%', aspectRatio: 3 / 2, maxHeight: box }
+        }
         resizeMode="contain"
         accessible={false}
       />

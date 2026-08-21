@@ -1,6 +1,7 @@
 # The plan
 
-**Status:** agreed, phased, not started. Nothing here has been built.
+**Status:** Phases 0–3 built and pushed. **Three phases left: 4, 5, 6.**
+Last updated 21 August 2026.
 **Canvas:** https://claude.ai/code/artifact/81fa355d-157f-495c-9096-bc68ae181422
 **Opened:** 20 August 2026, from a walkthrough of the Today and Learn tabs.
 
@@ -15,15 +16,48 @@ with its reasoning attached.
 
 ## The phases at a glance
 
-| | Phase | Why now | Ships via |
+| | Phase | State | Ships via |
 |---|---|---|---|
-| **0** | [Fix what's wrong now](#phase-0--fix-what-is-wrong-now) | Three bugs, live today, independent of everything else | OTA |
-| **1** | [The design system](#phase-1--the-design-system) | Nothing visual can improve until the type scale has a middle | **Build** (fonts) |
-| **2** | [The information architecture](#phase-2--the-information-architecture) | Today and Learn say everything twice | OTA |
-| **3** | [Provenance](#phase-3--provenance) | 26 of 53 Arabic strings have no recorded source | OTA |
-| **4** | [Duʿas, and the first network call](#phase-4--duas-and-the-apps-first-network-call) | 9 duʿas today; 133 occasions available | OTA + privacy label |
-| **5** | [The Qur'an tab](#phase-5--the-quran-tab--juz-30) | Depends on Phase 4's cache | OTA |
-| **6** | [French and Spanish](#phase-6--french-and-spanish) | Deferred on purpose — see below | OTA |
+| **0** | [Fix what's wrong now](#phase-0--fix-what-is-wrong-now) | ✅ **Done** — `8772e71` | OTA |
+| **1** | [The design system](#phase-1--the-design-system) | ✅ **Done** — `76f635e`, `21b66e3`, `41295cc` | OTA |
+| **2** | [The information architecture](#phase-2--the-information-architecture) | ✅ **Done** — `2a60188`, `f79f60f`, `e88f82d`, `014e430`, `aeccf7f`, `663aaef` | OTA |
+| **3** | [Provenance](#phase-3--provenance) | ✅ **Done** — `5f2570a`, `e614780` | OTA |
+| **4** | [Duʿas, and the first network call](#phase-4--duas-and-the-apps-first-network-call) | ⬜ Next | OTA + privacy label |
+| **5** | [The Qur'an tab](#phase-5--the-quran-tab--juz-30) | ⬜ Depends on Phase 4's cache | OTA |
+| **6** | [French and Spanish](#phase-6--french-and-spanish) | ⬜ Deferred on purpose | OTA |
+
+### What shipped in 0–3
+
+- **Bugs**: Today's "Prayer" row no longer opens the pillars list; Al-Fatiha
+  practice is reachable from inside the prayer; Learn no longer lists two
+  topics twice.
+- **Languages**: Arabic removed (645 strings, none translated); the language is
+  asked at first launch; `TranslationGap` says on screen where a page is not
+  fully translated instead of letting English pass as finished.
+- **Type**: eight named rungs replacing five, with nine ad-hoc `fontSize: 17`
+  overrides deleted. Card titles are 20 against body copy's 16.
+- **Arabic**: Amiri Regular, 438 KB, loaded with `useFonts`. Every Arabic string
+  previously rendered in whatever the platform fell back to — SF Arabic on iOS,
+  Noto Naskh on Android.
+- **Drawings**: 19 topic glyphs, a prayer mark, six posture diagrams, the rakʿah
+  arches, the six-arch stage path, and a progress ring.
+- **Structure**: Today is the prayer card, one carry-on line and the questions.
+  Learn is five groups of two-column tiles plus a reference strip.
+- **Provenance**: `npm run content:verify` compares every Arabic text against
+  QuranEnc and searches HadeethEnc for the uncited. 24 of 24 comparable Qur'an
+  texts match word for word.
+
+### Two corrections the work produced
+
+1. **Phase 1 did not need a native build.** `expo-font` has been a dependency
+   since the first commit, so the native module is in every binary; `useFonts`
+   loads at runtime and ships over the air. The config plugin is what would
+   have needed a rebuild. The table above is corrected.
+2. **"26 of 53 Arabic strings are unsourced" was wrong**, and it drove part of
+   this plan. Most of those 26 are not quotations — `الصَّلَاة` is the word
+   "prayer", `أَخِي` is "my brother". The real figure is **2 uncited quotations
+   of 28**: the shahada, and the taʿawwudh wording. See
+   [Phase 3](#phase-3--provenance).
 
 **The order is not arbitrary.** Phase 1 unblocks every visual change after it.
 Phase 4 builds the caching that Phase 5 needs. Phase 6 is last because
@@ -81,9 +115,9 @@ and subtitles. Visible in the first screenshot.
 **Fix:** moot once [Phase 2](#phase-2--the-information-architecture) removes the
 recommended section. Recorded so nobody mistakes it for a design choice.
 
-### 0.4 Language honesty — partly built already
+### 0.4 Language honesty
 
-Written and uncommitted on the working tree as of 21 August:
+Built and pushed in `8772e71`:
 
 - **Arabic removed** from `LOCALES`, the `AR` tables in `ui.ts`, and
   `content/index.ts`; `content/ar.ts` deleted. It shipped selectable with an
@@ -99,12 +133,11 @@ Written and uncommitted on the working tree as of 21 August:
   instruction more than they need to know it is untranslated, and a French
   reader who loses the text loses the ability to pray. What was wrong was doing
   it in silence: a 36%-translated app looked finished.
-- Wired into the guide, reference, duʿa and phrase screens. `tsc --noEmit` clean.
-
-**Still to do:** ask the language at first launch (`welcome.tsx`, currently four
-steps), regenerate `docs/i18n-manifest.csv`, fix the stale `locale === 'ar'`
-comment at [`src/content/model.ts:197`](../src/content/model.ts#L197), and run
-`npx expo export --platform web`.
+- Wired into the guide, reference, duʿa and phrase screens.
+- **Onboarding asks the language first**, because every screen after it is
+  written in the answer. The device's guess is preselected, so it is one tap for
+  most people, and the partly-translated languages say so before the choice —
+  read from the dictionary rather than a hardcoded list that would become a lie.
 
 ---
 
@@ -125,9 +158,16 @@ bugs. See [why the app feels flat](#reference-why-the-app-feels-flat).
 - Replace `linkPrimary`'s hardcoded `#3c87f7` with a theme token. It is iOS blue
   in a green app, and CLAUDE.md forbids hex in components.
 
-⚠️ **This phase needs a full `eas build`.** Font *files* ride an OTA, but adding
-the `expo-font` plugin to `app.json` is native config and an OTA will not carry
-it. Batch it with any other native change rather than doing it mid-pass.
+✅ **This did NOT need a build, and the warning above was wrong.** `expo-font`
+has been a dependency since the first commit, so the native module is already
+in every binary — `useFonts` loads at runtime and ships over the air. Only the
+*config plugin* would have needed a rebuild, and it is not used.
+
+**What shipped:** Amiri Regular, 438 KB, OFL beside it in `assets/fonts/`.
+Regular only, because nothing in the app sets Arabic bold and the second weight
+would have been 300 KB of nothing. Sizes went up with the face rather than
+despite it — the recitation card is 30/58 where it was 26/48, since Amiri sets
+smaller at the same point size and stacks marks above the line.
 
 ---
 
@@ -551,10 +591,11 @@ _(empty — next additions go here)_
 
 | Changed | Reaches the device via |
 |---|---|
-| Phases 0, 2, 3, 4, 5, 6 — `src/`, `assets/`, audio files | `npm run update:preview` (OTA) |
-| **Phase 1** — `expo-font` plugin in `app.json` | full `eas build` — an OTA will not carry it |
+| Every phase, 0 through 6 | `npm run update:preview` (OTA) |
 
-Font *files* are assets and ride an OTA; registering the plugin is native
-config. Batch Phase 1 with any other native change.
+**No phase in this plan needs a native build.** Phase 1 was written expecting
+one and did not need it: `expo-font` was already a dependency, so `useFonts`
+and the font files both ride an OTA. Nothing since has touched `app.json`
+plugins or a native module.
 
 No server, no migrations.

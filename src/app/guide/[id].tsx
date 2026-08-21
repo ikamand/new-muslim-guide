@@ -94,7 +94,7 @@ export default function GuideScreen() {
           </ThemedText>
         </View>
 
-        <ThemedText type="subtitle" style={styles.title}>
+        <ThemedText type="subtitle">
           {step.title}
         </ThemedText>
 
@@ -189,10 +189,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.two,
     paddingVertical: Spacing.one,
     borderRadius: Radius.small,
-  },
-  title: {
-    fontSize: 28,
-    lineHeight: 34,
   },
   instruction: {
     lineHeight: 26,

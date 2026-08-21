@@ -155,8 +155,6 @@ const styles = StyleSheet.create({
     // The chip gets `alignSelf` instead, which was the only reason it was here.
   },
   rowTitle: {
-    fontSize: 17,
-    lineHeight: 24,
   },
   chip: {
     alignSelf: 'flex-start',

@@ -53,7 +53,7 @@ export default function ReferenceScreen() {
               styles.card,
               { backgroundColor: theme.backgroundElement, borderColor: theme.border },
             ]}>
-            <ThemedText type="smallBold" style={styles.heading}>
+            <ThemedText type="cardTitle">
               {section.heading}
             </ThemedText>
             <ThemedText type="default">{section.body}</ThemedText>
@@ -93,9 +93,5 @@ const styles = StyleSheet.create({
     padding: Spacing.four,
     borderRadius: Radius.medium,
     borderWidth: StyleSheet.hairlineWidth,
-  },
-  heading: {
-    fontSize: 17,
-    lineHeight: 24,
   },
 });

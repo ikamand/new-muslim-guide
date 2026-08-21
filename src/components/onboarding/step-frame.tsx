@@ -100,7 +100,7 @@ export function StepFrame({
         <ScrollView
           contentContainerStyle={[styles.content, contentStyle]}
           keyboardShouldPersistTaps="handled">
-          <ThemedText type="subtitle" accessibilityRole="header" style={styles.title}>
+          <ThemedText type="subtitle" accessibilityRole="header">
             {title}
           </ThemedText>
           {children}
@@ -136,9 +136,8 @@ export function StepFrame({
               },
             ]}>
             <ThemedText
-              type="smallBold"
-              themeColor={continueDisabled ? 'textSecondary' : 'textOnAccent'}
-              style={styles.continueLabel}>
+              type="cardTitle"
+              themeColor={continueDisabled ? 'textSecondary' : 'textOnAccent'}>
               {continueLabel}
             </ThemedText>
           </Pressable>
@@ -189,10 +188,6 @@ const styles = StyleSheet.create({
     paddingBottom: Spacing.five,
     gap: Spacing.four,
   },
-  title: {
-    fontSize: 28,
-    lineHeight: 36,
-  },
   footer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -218,9 +213,5 @@ const styles = StyleSheet.create({
     minHeight: 52,
     paddingHorizontal: Spacing.four,
     borderRadius: Radius.small,
-  },
-  continueLabel: {
-    fontSize: 17,
-    lineHeight: 24,
   },
 });

@@ -148,7 +148,7 @@ function JourneyCard() {
         <ThemedText type="small" themeColor="accent" style={styles.kicker}>
           {kicker}
         </ThemedText>
-        <ThemedText type="smallBold" style={styles.cardTitle}>
+        <ThemedText type="cardTitle">
           {label}
         </ThemedText>
         <ThemedText type="small" themeColor="textSecondary">
@@ -187,7 +187,7 @@ function JourneyDoneCard() {
         <ThemedText type="small" themeColor="accent" style={styles.kicker}>
           {t('journey.finished')}
         </ThemedText>
-        <ThemedText type="smallBold" style={styles.cardTitle}>
+        <ThemedText type="cardTitle">
           {t('home.journeyDone')}
         </ThemedText>
         <ThemedText type="small" themeColor="textSecondary">
@@ -235,7 +235,7 @@ function TodayRow({ item }: { item: TodayItem }) {
         <ThemedText type="small" themeColor="accent" style={styles.kicker}>
           {reason}
         </ThemedText>
-        <ThemedText type="smallBold" style={styles.cardTitle}>
+        <ThemedText type="cardTitle">
           {item.title}
         </ThemedText>
         <ThemedText type="small" themeColor="textSecondary">
@@ -374,12 +374,6 @@ const styles = StyleSheet.create({
   kicker: {
     textTransform: 'uppercase',
     letterSpacing: 1,
-    fontSize: 12,
-    lineHeight: 16,
-  },
-  cardTitle: {
-    fontSize: 17,
-    lineHeight: 24,
   },
   action: {
     gap: Spacing.two,
@@ -394,8 +388,6 @@ const styles = StyleSheet.create({
     borderRadius: Radius.small,
   },
   primaryLabel: {
-    fontSize: 17,
-    lineHeight: 24,
   },
   primaryCount: {
     opacity: 0.72,

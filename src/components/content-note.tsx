@@ -84,7 +84,7 @@ export function ContentNoteCard({ entry }: { entry: ContentNote }) {
 
           {entry.positions && entry.positions.length > 0 && (
             <View style={styles.block}>
-              <ThemedText type="smallBold" themeColor="textSecondary" style={styles.label}>
+              <ThemedText type="caption" themeColor="textSecondary" style={styles.label}>
                 {t('note.positions')}
               </ThemedText>
               {entry.positions.map((position) => (
@@ -139,8 +139,6 @@ const styles = StyleSheet.create({
   label: {
     textTransform: 'uppercase',
     letterSpacing: 1,
-    fontSize: 12,
-    lineHeight: 16,
   },
   position: {
     flexDirection: 'row',

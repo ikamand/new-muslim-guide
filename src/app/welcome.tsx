@@ -171,7 +171,7 @@ export default function WelcomeScreen() {
         continueLabel={t('onboarding.welcome.cta')}
         contentStyle={styles.centred}>
         <View style={styles.prose}>
-          <ThemedText type="default" style={styles.lead}>
+          <ThemedText type="lead">
             {t('onboarding.welcome.body1')}
           </ThemedText>
           <ThemedText type="default" themeColor="textSecondary">
@@ -250,7 +250,7 @@ export default function WelcomeScreen() {
       continueLabel={t('onboarding.reassure.cta')}
       contentStyle={styles.centred}>
       <View style={styles.prose}>
-        <ThemedText type="default" style={styles.lead}>
+        <ThemedText type="lead">
           {t('onboarding.reassure.body1')}
         </ThemedText>
         <ThemedText type="default" themeColor="textSecondary">
@@ -272,10 +272,6 @@ const styles = StyleSheet.create({
   },
   prose: {
     gap: Spacing.three,
-  },
-  lead: {
-    fontSize: 18,
-    lineHeight: 28,
   },
   options: {
     gap: Spacing.two,

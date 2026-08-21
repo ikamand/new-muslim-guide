@@ -67,7 +67,7 @@ function LearnCard({
         </View>
       )}
       <View style={styles.cardText}>
-        <ThemedText type="smallBold" style={styles.cardTitle}>
+        <ThemedText type="cardTitle">
           {title}
         </ThemedText>
         <ThemedText type="small" themeColor="textSecondary">
@@ -83,7 +83,7 @@ function LearnCard({
         <ThemedText type="smallBold" themeColor="accent">
           {count}
         </ThemedText>
-        <ThemedText type="small" themeColor="textSecondary" style={styles.unit}>
+        <ThemedText type="caption" themeColor="textSecondary">
           {t(unit)}
         </ThemedText>
       </View>
@@ -114,7 +114,7 @@ function ShahadaCard() {
       </View>
       <View style={styles.featuredBody}>
         <View style={styles.cardText}>
-          <ThemedText type="smallBold" style={styles.cardTitle}>
+          <ThemedText type="cardTitle">
             {t('learn.shahada.title')}
           </ThemedText>
           <ThemedText type="small" themeColor="textSecondary">
@@ -155,7 +155,7 @@ function JourneyCard() {
       style={[styles.journey, { backgroundColor: theme.accentMuted, borderColor: theme.accent }]}
       pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
       <View style={styles.journeyText}>
-        <ThemedText type="smallBold" style={styles.cardTitle}>
+        <ThemedText type="cardTitle">
           {t('journey.title')}
         </ThemedText>
         <ThemedText type="small" themeColor="textSecondary">
@@ -204,7 +204,7 @@ function RecommendedSection() {
             ]}
             pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
             <View style={styles.cardText}>
-              <ThemedText type="smallBold" style={styles.cardTitle}>
+              <ThemedText type="cardTitle">
                 {entry.title}
               </ThemedText>
               <ThemedText type="small" themeColor="textSecondary">
@@ -373,17 +373,9 @@ const styles = StyleSheet.create({
     flex: 1,
     gap: 2,
   },
-  cardTitle: {
-    fontSize: 17,
-    lineHeight: 24,
-  },
   count: {
     alignItems: 'flex-end',
     gap: 1,
-  },
-  unit: {
-    fontSize: 12,
-    lineHeight: 16,
   },
   journey: {
     flexDirection: 'row',

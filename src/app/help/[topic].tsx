@@ -82,7 +82,5 @@ const styles = StyleSheet.create({
     gap: 2,
   },
   rowTitle: {
-    fontSize: 17,
-    lineHeight: 24,
   },
 });

@@ -66,7 +66,7 @@ export function ChoiceCard({
         },
       ]}>
       <View style={styles.text}>
-        <ThemedText type="smallBold" style={styles.label}>
+        <ThemedText type="cardTitle">
           {label}
         </ThemedText>
         {help && (
@@ -115,10 +115,6 @@ const styles = StyleSheet.create({
   text: {
     flex: 1,
     gap: 2,
-  },
-  label: {
-    fontSize: 17,
-    lineHeight: 24,
   },
   hiddenLabel: {
     height: 0,

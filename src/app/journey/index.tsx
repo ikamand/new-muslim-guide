@@ -82,7 +82,7 @@ export default function JourneyScreen() {
             pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
             <View style={styles.stageText}>
               <View style={styles.stageTitleRow}>
-                <ThemedText type="smallBold" style={styles.stageTitle}>
+                <ThemedText type="cardTitle">
                   {t(`journey.stage.${stage.id}` as UIKey)}
                 </ThemedText>
                 {/*
@@ -139,8 +139,6 @@ const styles = StyleSheet.create({
     opacity: 0.8,
   },
   continueTitle: {
-    fontSize: 17,
-    lineHeight: 24,
   },
   stages: {
     gap: Spacing.two,
@@ -161,10 +159,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: Spacing.two,
-  },
-  stageTitle: {
-    fontSize: 17,
-    lineHeight: 24,
   },
   stageProgress: {
     paddingTop: Spacing.one,

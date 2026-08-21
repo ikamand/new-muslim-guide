@@ -31,7 +31,7 @@ export function PillarCard({ pillar, index }: { pillar: Pillar; index: number })
           </ThemedText>
         </View>
         <View style={styles.cardHeadText}>
-          <ThemedText type="smallBold" style={styles.cardTitle}>
+          <ThemedText type="cardTitle">
             {pillar.title}
           </ThemedText>
           <ThemedText type="small" themeColor="textSecondary">
@@ -80,10 +80,6 @@ const styles = StyleSheet.create({
   cardHeadText: {
     flex: 1,
     gap: 2,
-  },
-  cardTitle: {
-    fontSize: 17,
-    lineHeight: 24,
   },
   number: {
     width: 28,

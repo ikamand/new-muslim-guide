@@ -1,5 +1,6 @@
 import type { Posture } from '@/content/types';
 
+import { StyleSheet, Text, View } from 'react-native';
 import Svg, { Circle, G, Line, Path } from 'react-native-svg';
 
 import type { DayTimes, PrayerId } from '@/lib/prayer-times';
@@ -429,6 +430,153 @@ export function RakahProgress({
         );
       })}
     </Svg>
+  );
+}
+
+/**
+ * One arch per stage of the beginner path.
+ *
+ * The Learn tab said "6 of 36" over a three-pixel bar. Thirty-six of what, and
+ * how far is six — a beginner cannot answer either, and a fraction is a poor
+ * thing to hand someone three weeks into a religion. Six arches answer it
+ * without arithmetic: the ones behind you are filled, the one you are on
+ * carries the star, the rest are outlines.
+ *
+ * The shape is the mihrab from the prayer times card, small. Reusing it is the
+ * point — the same form means the same thing everywhere in the app, so a
+ * reader learns the vocabulary once.
+ *
+ * `label` is drawn under each arch. Six words at 10px is small, and it is the
+ * difference between a decoration and a map.
+ */
+export function StagePath({
+  stages,
+  currentIndex,
+  color,
+  trackColor,
+  mutedColor,
+}: {
+  stages: readonly { id: string; label: string; done: boolean }[];
+  currentIndex: number;
+  color: string;
+  trackColor: string;
+  mutedColor: string;
+}) {
+  return (
+    <View style={stagePathStyles.row}>
+      {stages.map((stage, index) => {
+        const here = index === currentIndex;
+
+        return (
+          <View key={stage.id} style={stagePathStyles.cell}>
+            <Svg width={30} height={36} viewBox="0 0 20 24" fill="none">
+              <Path
+                d="M2 24 L2 10 Q2 3 10 1 Q18 3 18 10 L18 24 Z"
+                fill={stage.done ? color : 'none'}
+                stroke={stage.done ? 'none' : here ? color : trackColor}
+                strokeWidth={1.6}
+              />
+              {stage.done && (
+                <Path
+                  d="M6.5 13.5 l2.5 2.5 5 -6"
+                  stroke={mutedColor}
+                  strokeWidth={2}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  fill="none"
+                />
+              )}
+              {here && !stage.done && (
+                <Path
+                  d="M10 7 L11.4 9.8 L14.4 10.2 L12.2 12.4 L12.7 15.4 L10 14 L7.3 15.4 L7.8 12.4 L5.6 10.2 L8.6 9.8 Z"
+                  fill={color}
+                />
+              )}
+            </Svg>
+            <Text
+              numberOfLines={2}
+              style={[
+                stagePathStyles.label,
+                { color: here ? color : trackColor, fontWeight: here ? '700' : '500' },
+              ]}>
+              {stage.label}
+            </Text>
+          </View>
+        );
+      })}
+    </View>
+  );
+}
+
+const stagePathStyles = StyleSheet.create({
+  row: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    gap: 4,
+  },
+  cell: {
+    flex: 1,
+    alignItems: 'center',
+    gap: 6,
+  },
+  label: {
+    fontSize: 10,
+    lineHeight: 13,
+    textAlign: 'center',
+  },
+});
+
+/**
+ * A ring showing how far through the path someone is, with the count inside.
+ *
+ * Small, and on the Today card only. The number belongs inside the ring rather
+ * than beside it because a beginner reading "6" wants to know six of what, and
+ * a ring that is one sixth full answers that without a second line of text.
+ *
+ * Never a percentage. `JourneyProgress` says why at length, and it holds here:
+ * nobody three weeks into a religion needs to be told they are 17% of it.
+ */
+export function ProgressRing({
+  done,
+  total,
+  color,
+  trackColor,
+  size = 44,
+  children,
+}: {
+  done: number;
+  total: number;
+  color: string;
+  trackColor: string;
+  size?: number;
+  children?: React.ReactNode;
+}) {
+  const stroke = 2.5;
+  const radius = (size - stroke) / 2;
+  const circumference = 2 * Math.PI * radius;
+  const fraction = total > 0 ? Math.min(1, done / total) : 0;
+
+  return (
+    <View style={{ width: size, height: size, alignItems: 'center', justifyContent: 'center' }}>
+      <Svg width={size} height={size} style={{ position: 'absolute' }}>
+        <Circle cx={size / 2} cy={size / 2} r={radius} stroke={trackColor} strokeWidth={stroke} fill="none" />
+        {fraction > 0 && (
+          <Circle
+            cx={size / 2}
+            cy={size / 2}
+            r={radius}
+            stroke={color}
+            strokeWidth={stroke}
+            fill="none"
+            strokeLinecap="round"
+            strokeDasharray={circumference}
+            strokeDashoffset={circumference * (1 - fraction)}
+            transform={`rotate(-90 ${size / 2} ${size / 2})`}
+          />
+        )}
+      </Svg>
+      {children}
+    </View>
   );
 }
 

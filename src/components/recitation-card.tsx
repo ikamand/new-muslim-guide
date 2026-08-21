@@ -1,8 +1,10 @@
 import { StyleSheet, View } from 'react-native';
 
+import Ionicons from '@expo/vector-icons/Ionicons';
+
 import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
-import { practiceKeyFor, type Recitation } from '@/content';
+import { getAudio, practiceKeyFor, type Recitation } from '@/content';
 import { ArabicFont, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { useSettings } from '@/hooks/use-settings';
@@ -26,6 +28,10 @@ export function RecitationCard({
   const { t } = useLocale();
   const { transliteration, translation } = useSettings();
   const practiceKey = practice ? practiceKeyFor(recitation) : undefined;
+  /** How many pieces actually have a recording — the number worth showing. */
+  const clipCount = recitation.verses
+    ? recitation.verses.filter((verse) => getAudio(verse.audioId)).length
+    : 0;
 
   return (
     <View
@@ -62,12 +68,47 @@ export function RecitationCard({
       {practiceKey && (
         <PressableLink
           href={{ pathname: '/practice', params: { focus: practiceKey } }}
+          accessibilityLabel={`${t('practice.thisOne')}${clipCount ? `. ${clipCount} ${t('count.clips')}` : ''}`}
           style={[styles.practice, { backgroundColor: theme.accentMuted }]}
           pressedStyle={{ opacity: 0.7 }}>
-          <ThemedText type="smallBold" themeColor="accent">
+          <Ionicons name="play" size={16} color={theme.accent} />
+          <ThemedText type="smallBold" themeColor="accent" style={styles.practiceLabel}>
             {t('practice.thisOne')}
           </ThemedText>
+          {clipCount > 0 && (
+            <ThemedText type="caption" themeColor="textSecondary">
+              {clipCount} · {t('practice.slower')} · {t('practice.repeat')}
+            </ThemedText>
+          )}
         </PressableLink>
+      )}
+
+      {/*
+        The ayahs as a strip, where the text is split into pieces you learn one
+        at a time.
+
+        A card showing all seven at once tells someone how much there is and
+        nothing about how far they have got. Seven bars say both, and they are
+        the unit `RecitationVerse` already exists to describe — the thing you
+        would loop twenty times in a row.
+      */}
+      {recitation.verses && recitation.verses.length > 1 && (
+        <View style={styles.parts}>
+          <View style={styles.partBars}>
+            {recitation.verses.map((verse) => (
+              <View
+                key={verse.audioId}
+                style={[
+                  styles.partBar,
+                  { backgroundColor: getAudio(verse.audioId) ? theme.accent : theme.border },
+                ]}
+              />
+            ))}
+          </View>
+          <ThemedText type="caption" themeColor="textSecondary">
+            {recitation.verses.length} {t('count.parts')}
+          </ThemedText>
+        </View>
       )}
     </View>
   );
@@ -103,11 +144,27 @@ const styles = StyleSheet.create({
     marginVertical: Spacing.one,
   },
   practice: {
-    alignSelf: 'flex-start',
-    minHeight: 44,
-    justifyContent: 'center',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.two,
+    minHeight: 48,
     paddingHorizontal: Spacing.three,
     borderRadius: Radius.small,
     marginTop: Spacing.one,
+  },
+  practiceLabel: {
+    flex: 1,
+  },
+  parts: {
+    gap: Spacing.two,
+  },
+  partBars: {
+    flexDirection: 'row',
+    gap: 4,
+  },
+  partBar: {
+    flex: 1,
+    height: 6,
+    borderRadius: 3,
   },
 });

@@ -2,7 +2,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { JourneyProgress } from '@/components/journey-progress';
+import { ProgressRing } from '@/components/illustrations';
 import { PrayerTimesCard } from '@/components/prayer-times-card';
 import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
@@ -13,7 +13,6 @@ import { useHijriToday } from '@/hooks/use-hijri';
 import { useJourney } from '@/hooks/use-journey';
 import { useLocale } from '@/hooks/use-locale';
 import { usePrayerTimes } from '@/hooks/use-prayer-times';
-import { useSettings } from '@/hooks/use-settings';
 import { useTheme } from '@/hooks/use-theme';
 import { useToday, type TodayItem } from '@/hooks/use-today';
 import { localiseGuide } from '@/i18n/localise';
@@ -93,25 +92,35 @@ function PrayAction({ prayer, wudu }: { prayer: Guide; wudu: Guide }) {
 
 /** Who is reading, and what day it is in the calendar the religion runs on. */
 function Header() {
-  const { t } = useLocale();
-  const { completedLessons } = useSettings();
+  const { locale, t } = useLocale();
   const hijri = useHijriToday();
+
+  /*
+    The weekday, in the reader's language, from the device rather than a table
+    of our own. Friday is the one that matters — someone new does not yet feel
+    the week the way a born Muslim does, and the app knowing what day it is is
+    the smallest possible way of saying so.
+  */
+  const weekday = new Intl.DateTimeFormat(locale, { weekday: 'long' }).format(new Date());
 
   return (
     <View style={styles.header}>
-      <ThemedText type="subtitle">
-        {completedLessons.length > 0 ? t('home.welcomeBack') : t('home.welcome')}
-      </ThemedText>
+      {/*
+        A greeting rather than "Welcome". It is the first Arabic most converts
+        learn, it is what they will be greeted with, and reading it daily in
+        the app is how it stops being foreign.
+      */}
+      <ThemedText type="subtitle">{t('home.greeting')}</ThemedText>
       {/*
         Absent entirely where the platform has no Umm al-Qura data, rather than
         falling back to arithmetic of our own. Shown rather than used silently,
         so a reader whose mosque is a day ahead can see what the app thinks.
       */}
-      {hijri && (
-        <ThemedText type="small" themeColor="textSecondary">
-          {`${hijri.day} ${t(`hijri.month.${hijri.month}` as UIKey)} ${hijri.year}`}
-        </ThemedText>
-      )}
+      <ThemedText type="small" themeColor="textSecondary">
+        {hijri
+          ? `${hijri.day} ${t(`hijri.month.${hijri.month}` as UIKey)} ${hijri.year} · ${weekday}`
+          : weekday}
+      </ThemedText>
     </View>
   );
 }
@@ -142,11 +151,27 @@ function JourneyCard() {
     <PressableLink
       href={routeFor(next.entry)}
       accessibilityLabel={fresh ? `${kicker}: ${label}` : `${kicker}: ${label}. ${progress}`}
-      style={[styles.journey, { backgroundColor: theme.accentMuted, borderColor: theme.accent }]}
+      style={[styles.journey, { backgroundColor: theme.background, borderColor: theme.border }]}
       pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
+      {/*
+        The ring replaces a bar under the text. It carries the count inside it,
+        which answers "six of what" in the same glance — and it is hidden on a
+        first run, because "0 of 36" is a true statement and a discouraging one
+        with nothing yet to be reminded of.
+      */}
+      {!fresh && (
+        <ProgressRing done={done} total={total} color={theme.accent} trackColor={theme.border}>
+          <ThemedText type="caption" themeColor="accent">
+            {done}
+          </ThemedText>
+        </ProgressRing>
+      )}
+
       <View style={styles.journeyText}>
-        <ThemedText type="small" themeColor="accent" style={styles.kicker}>
-          {kicker}
+        <ThemedText type="caption" themeColor="textSecondary" style={styles.kicker}>
+          {kicker} · {t('journey.stageOf')
+            .replace('{n}', String(nextStageIndex + 1))
+            .replace('{total}', String(stages.length))}
         </ThemedText>
         <ThemedText type="cardTitle">
           {label}
@@ -155,15 +180,6 @@ function JourneyCard() {
           {t(`journey.stage.${stage.id}` as UIKey)}
           {minutes ? ` · ${minutes} ${t('count.minutes')}` : ''}
         </ThemedText>
-        {/*
-          Hidden on a first run. "0 of 36" is a true statement and a discouraging
-          one, and there is nothing to be reminded of yet.
-        */}
-        {!fresh && (
-          <View style={styles.journeyProgress}>
-            <JourneyProgress done={done} total={total} />
-          </View>
-        )}
       </View>
       <Ionicons name="arrow-forward" size={20} color={theme.accent} />
     </PressableLink>

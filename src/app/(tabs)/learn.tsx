@@ -3,8 +3,7 @@ import { type Href } from 'expo-router';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { GirihBand, Glyph, type GlyphName } from '@/components/illustrations';
-import { JourneyProgress } from '@/components/journey-progress';
+import { GirihBand, Glyph, StagePath, type GlyphName } from '@/components/illustrations';
 import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
 import {
@@ -68,6 +67,7 @@ function LearnCard({
   count,
   unit,
   glyph,
+  wide = false,
 }: {
   href: Href;
   title: string;
@@ -75,6 +75,8 @@ function LearnCard({
   count: number;
   unit: UIKey;
   glyph?: GlyphName;
+  /** Full width, with the subtitle showing. For a card that carries a group. */
+  wide?: boolean;
 }) {
   const theme = useTheme();
   const { t } = useLocale();
@@ -82,8 +84,10 @@ function LearnCard({
   return (
     <PressableLink
       href={href}
+      accessibilityLabel={`${title}. ${subtitle}. ${count} ${t(unit)}`}
       style={[
         styles.card,
+        wide ? styles.cardWide : styles.cardTile,
         { backgroundColor: theme.backgroundElement, borderColor: theme.border },
       ]}
       pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
@@ -93,26 +97,29 @@ function LearnCard({
         </View>
       )}
       <View style={styles.cardText}>
-        <ThemedText type="cardTitle">
+        <ThemedText type="cardTitle" numberOfLines={2}>
           {title}
         </ThemedText>
-        <ThemedText type="small" themeColor="textSecondary">
-          {subtitle}
+        {/*
+          A tile shows the count where a row shows the sentence. Two lines of
+          subtitle in a half-width card is four lines of text, which is what
+          turned the old full-width list into a wall — and the count is the
+          part that tells you whether this is a minute or an afternoon.
+        */}
+        <ThemedText type="small" themeColor="textSecondary" numberOfLines={wide ? 2 : 1}>
+          {wide ? subtitle : `${count} ${t(unit)}`}
         </ThemedText>
       </View>
-      {/*
-        The count used to be a bare accent number. "14" on its own tells you
-        nothing; a beginner cannot tell whether it means minutes, pages or
-        items they are expected to memorise.
-      */}
-      <View style={styles.count}>
-        <ThemedText type="smallBold" themeColor="accent">
-          {count}
-        </ThemedText>
-        <ThemedText type="caption" themeColor="textSecondary">
-          {t(unit)}
-        </ThemedText>
-      </View>
+      {wide && (
+        <View style={styles.count}>
+          <ThemedText type="smallBold" themeColor="accent">
+            {count}
+          </ThemedText>
+          <ThemedText type="caption" themeColor="textSecondary">
+            {t(unit)}
+          </ThemedText>
+        </View>
+      )}
     </PressableLink>
   );
 }
@@ -170,7 +177,22 @@ function ShahadaCard() {
 function JourneyCard() {
   const theme = useTheme();
   const { t } = useLocale();
-  const { done, total } = useJourney();
+  const { stages, done, total, nextStageIndex } = useJourney();
+
+  /*
+    The path as six arches rather than "6 of 36" over a bar.
+
+    Thirty-six of what, and how far is six? A beginner cannot answer either,
+    and a fraction is a poor thing to hand somebody three weeks into a
+    religion. The arches answer it without arithmetic — filled behind, star on
+    the one you are at — and they are the same mihrab the prayer times card
+    draws, so the shape means the same thing in both places.
+  */
+  const path = stages.map((stage) => ({
+    id: stage.id,
+    label: t(`journey.short.${stage.id}` as UIKey),
+    done: stage.steps.every((step) => step.done),
+  }));
 
   return (
     <PressableLink
@@ -178,20 +200,29 @@ function JourneyCard() {
       accessibilityLabel={`${t('journey.title')}. ${t('journey.progress')
         .replace('{done}', String(done))
         .replace('{total}', String(total))}`}
-      style={[styles.journey, { backgroundColor: theme.accentMuted, borderColor: theme.accent }]}
+      style={[styles.journey, { backgroundColor: theme.backgroundElement, borderColor: theme.border }]}
       pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
-      <View style={styles.journeyText}>
-        <ThemedText type="cardTitle">
-          {t('journey.title')}
+      <View style={styles.journeyHead}>
+        <ThemedText type="sectionTitle">{t('journey.title')}</ThemedText>
+        <ThemedText type="smallBold" themeColor="accent">
+          {t('journey.progress').replace('{done}', String(done)).replace('{total}', String(total))}
         </ThemedText>
-        <ThemedText type="small" themeColor="textSecondary">
-          {t('journey.intro')}
-        </ThemedText>
-        <View style={styles.journeyProgress}>
-          <JourneyProgress done={done} total={total} />
-        </View>
       </View>
-      <Ionicons name="arrow-forward" size={20} color={theme.accent} />
+
+      <StagePath
+        stages={path}
+        currentIndex={nextStageIndex}
+        color={theme.accent}
+        trackColor={theme.textSecondary}
+        mutedColor={theme.textOnAccent}
+      />
+
+      <View style={[styles.journeyAction, { backgroundColor: theme.accent }]}>
+        <ThemedText type="smallBold" themeColor="textOnAccent" style={styles.journeyActionLabel}>
+          {t('journey.carryOn')}
+        </ThemedText>
+        <Ionicons name="arrow-forward" size={18} color={theme.textOnAccent} />
+      </View>
     </PressableLink>
   );
 }
@@ -267,6 +298,7 @@ export default function LearnScreen() {
           <GroupHeading label={t('learn.group.reference')} />
           <View style={styles.list}>
             <LearnCard
+              wide
               href="/phrases"
               title={t('learn.phrases.title')}
               subtitle={t('learn.phrases.subtitle')}
@@ -275,6 +307,7 @@ export default function LearnScreen() {
               glyph="phrases"
             />
             <LearnCard
+              wide
               href="/duas"
               title={t('learn.duas.title')}
               subtitle={t('learn.duas.subtitle')}
@@ -283,6 +316,7 @@ export default function LearnScreen() {
               glyph="duas"
             />
             <LearnCard
+              wide
               href="/practice"
               title={t('learn.practice.title')}
               subtitle={t('learn.practice.subtitle')}
@@ -291,6 +325,7 @@ export default function LearnScreen() {
               glyph="practice"
             />
             <LearnCard
+              wide
               href="/iman"
               title={t('learn.iman.title')}
               subtitle={t('learn.iman.subtitle')}
@@ -299,6 +334,7 @@ export default function LearnScreen() {
               glyph="iman"
             />
             <LearnCard
+              wide
               href="/pillars"
               title={t('learn.pillars.title')}
               subtitle={t('learn.pillars.subtitle')}
@@ -349,16 +385,37 @@ const styles = StyleSheet.create({
   },
   /** Was Spacing.three here and Spacing.two on the Pray tab. Now both are two. */
   list: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
     gap: Spacing.two,
   },
   card: {
+    borderRadius: Radius.medium,
+    borderWidth: StyleSheet.hairlineWidth,
+  },
+  /**
+   * Two to a row, glyph above the title.
+   *
+   * The list was nineteen full-width rows of title-over-sentence, which is the
+   * shape that reads as a wall however well it is grouped. A tile is scanned
+   * rather than read: the mark catches the eye first, the title second, and
+   * six of them fit in the space four rows took.
+   */
+  cardTile: {
+    flexBasis: '48%',
+    flexGrow: 1,
+    gap: Spacing.two,
+    padding: Spacing.three,
+    minHeight: 116,
+  },
+  /** Full width, for the reference strip where the sentence earns its room. */
+  cardWide: {
+    flexBasis: '100%',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     gap: Spacing.three,
     padding: Spacing.three,
-    borderRadius: Radius.medium,
-    borderWidth: StyleSheet.hairlineWidth,
   },
   tile: {
     width: 40,
@@ -376,12 +433,28 @@ const styles = StyleSheet.create({
     gap: 1,
   },
   journey: {
-    flexDirection: 'row',
-    alignItems: 'center',
     gap: Spacing.three,
     padding: Spacing.three,
     borderRadius: Radius.medium,
-    borderWidth: 1,
+    borderWidth: StyleSheet.hairlineWidth,
+  },
+  journeyHead: {
+    flexDirection: 'row',
+    alignItems: 'baseline',
+    justifyContent: 'space-between',
+    gap: Spacing.three,
+  },
+  journeyAction: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    gap: Spacing.three,
+    minHeight: 48,
+    paddingHorizontal: Spacing.three,
+    borderRadius: Radius.small,
+  },
+  journeyActionLabel: {
+    flex: 1,
   },
   journeyText: {
     flex: 1,

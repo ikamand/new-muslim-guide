@@ -27,8 +27,15 @@ export const EN = {
    * they were part-way through, what is worth today, and the plain-language
    * way in for a question they cannot name yet.
    */
-  'home.welcome': 'Welcome',
-  'home.welcomeBack': 'Welcome back',
+  /*
+    The greeting, not "Welcome". It is the first Arabic most converts learn,
+    it is what they will actually be greeted with, and reading it every day in
+    the app is how it stops being a foreign phrase. Transliterated rather than
+    set in Arabic script: the home screen is not the place to make somebody
+    decode before they have had coffee.
+  */
+  'home.greeting': 'Assalamu alaikum',
+  'journey.stageOf': 'stage {n} of {total}',
   'home.continue': 'Continue your journey',
   'home.start': 'Start your journey',
   'home.journeyDone': 'You have been through every lesson',
@@ -129,6 +136,8 @@ export const EN = {
   'count.phrases': 'phrases',
   'count.duas': 'duʿas',
   'count.clips': 'clips',
+  /** The pieces a long text is learned in — the unit you loop twenty times. */
+  'count.parts': 'parts to learn',
   'count.articles': 'articles',
   'count.pillars': 'pillars',
   /** Reading or doing time on a lesson. Not a target — see `estimatedMinutes`. */
@@ -350,6 +359,18 @@ export const EN = {
   'journey.requirement.learning': 'Worth knowing',
   'journey.requirement.seasonal': 'When it comes round',
 
+  /*
+    A word per stage, for under the arches on the Learn tab.
+    The full names do not fit six across a phone, and truncating them to
+    "Learning to…" would be worse than choosing the short form deliberately.
+  */
+  'journey.carryOn': 'Carry on where you left off',
+  'journey.short.start-here': 'Start',
+  'journey.short.first-days': 'First days',
+  'journey.short.learning-to-pray': 'Prayer',
+  'journey.short.living': 'Living',
+  'journey.short.deepening': 'Deeper',
+  'journey.short.through-the-year': 'The year',
   'journey.stage.start-here': 'Start here',
   'journey.stage.start-here.help': 'What Islam is, and what you have joined.',
   'journey.stage.first-days': 'Your first days',
@@ -496,6 +517,13 @@ const FR: Overrides = {
   'journey.requirement.practice': 'Pratique',
   'journey.requirement.learning': 'Bon à savoir',
   'journey.requirement.seasonal': 'Le moment venu',
+  'journey.carryOn': 'Reprendre où vous en étiez',
+  'journey.short.start-here': 'Début',
+  'journey.short.first-days': 'Premiers jours',
+  'journey.short.learning-to-pray': 'Prière',
+  'journey.short.living': 'Vivre',
+  'journey.short.deepening': 'Approfondir',
+  'journey.short.through-the-year': 'L’année',
   'journey.stage.start-here': 'Commencer ici',
   'journey.stage.start-here.help': 'Ce qu’est l’islam, et ce que vous avez rejoint.',
   'journey.stage.first-days': 'Vos premiers jours',
@@ -523,8 +551,8 @@ const FR: Overrides = {
   'home.prayNow': 'Prier',
   'home.notInWudu': 'Pas encore en état de wudu ?',
   'home.washFirst': 'Se laver d’abord',
-  'home.welcome': 'Bienvenue',
-  'home.welcomeBack': 'Bon retour',
+  'home.greeting': 'Assalamu alaikum',
+  'journey.stageOf': 'étape {n} sur {total}',
   'home.continue': 'Continuez votre parcours',
   'home.start': 'Commencez votre parcours',
   'home.journeyDone': 'Vous avez parcouru toutes les leçons',
@@ -566,6 +594,7 @@ const FR: Overrides = {
   'count.phrases': 'phrases',
   'count.duas': 'invocations',
   'count.clips': 'extraits',
+  'count.parts': 'parties à apprendre',
   'count.articles': 'piliers',
   'count.pillars': 'piliers',
   'note.more': 'En savoir plus',
@@ -685,6 +714,13 @@ const ES: Overrides = {
   'journey.requirement.practice': 'Práctica',
   'journey.requirement.learning': 'Bueno saberlo',
   'journey.requirement.seasonal': 'Cuando llegue',
+  'journey.carryOn': 'Continuar donde lo dejaste',
+  'journey.short.start-here': 'Inicio',
+  'journey.short.first-days': 'Primeros días',
+  'journey.short.learning-to-pray': 'Oración',
+  'journey.short.living': 'Vivir',
+  'journey.short.deepening': 'Profundizar',
+  'journey.short.through-the-year': 'El año',
   'journey.stage.start-here': 'Empieza aquí',
   'journey.stage.start-here.help': 'Qué es el islam y a qué te has unido.',
   'journey.stage.first-days': 'Tus primeros días',
@@ -712,8 +748,8 @@ const ES: Overrides = {
   'home.prayNow': 'Rezar',
   'home.notInWudu': '¿Aún sin wudu?',
   'home.washFirst': 'Purifícate primero',
-  'home.welcome': 'Bienvenida',
-  'home.welcomeBack': 'Hola de nuevo',
+  'home.greeting': 'Assalamu alaikum',
+  'journey.stageOf': 'etapa {n} de {total}',
   'home.continue': 'Continúa tu camino',
   'home.start': 'Empieza tu camino',
   'home.journeyDone': 'Has pasado por todas las lecciones',
@@ -755,6 +791,7 @@ const ES: Overrides = {
   'count.phrases': 'frases',
   'count.duas': 'súplicas',
   'count.clips': 'fragmentos',
+  'count.parts': 'partes que aprender',
   'count.articles': 'pilares',
   'count.pillars': 'pilares',
   'note.more': 'Saber más',

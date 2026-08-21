@@ -6,20 +6,37 @@ import Svg, { Circle, G, Line, Path } from 'react-native-svg';
 import type { DayTimes, PrayerId } from '@/lib/prayer-times';
 
 /**
- * Non-figurative marks: architecture, geometry and diagram, never a body.
+ * Marks, architecture, geometry — and, for the prayer, a figure.
  *
- * Islamic visual tradition avoids depicting living beings, and most prayer
- * apps draw a silhouette bowing anyway. Nothing here does. Where a posture has
- * to be shown it is the ground line plus the body's axis, which carries the
- * same information without making that call on a user's behalf.
+ * ## The rule this file used to state, and why it changed
  *
- * `PostureFigure` below is that rule applied, not an exception to it: a spine
- * and the angle it holds, with the head end marked as a point. The angle is
- * the whole information — upright, right-angled, down — so a silhouette would
- * add a depiction and no meaning.
+ * This said "never a body". The reasoning was that Islamic visual tradition
+ * avoids depicting living beings, that most prayer apps draw a silhouette
+ * bowing anyway, and that a posture could be carried by the ground line plus
+ * the body's axis without making that call on a user's behalf. It was written
+ * as deliberate but explicitly unreviewed, and `PostureFigure` was built to it.
  *
- * ⚠️ REVIEW REQUIRED — whether to draw figures at all is a judgment about
- * substance, not layout. The decision here is deliberate but unreviewed.
+ * **Iyad has now decided the other way**, shown a reference of the ordinary
+ * simplified figures every printed prayer guide uses. So the postures are
+ * figures. The reversal is recorded rather than quietly applied, because the
+ * original was a substance decision and a later reader deserves to know it was
+ * made twice, by the person whose call it is.
+ *
+ * What did not change: everything else here stays non-figurative. Glyphs,
+ * the mihrab, the girih band and the sun arc are marks and architecture, and
+ * a body would be wrong in all of them.
+ *
+ * ## The style is the app's, not the reference's
+ *
+ * The reference was flat filled cartoon on blue. This app is 1.5px stroked
+ * line art on near-black with one accent, and a filled cartoon figure dropped
+ * into it would look imported. So the figures are drawn in the same stroke as
+ * everything else — line art that happens to be a person, rather than a
+ * different kind of picture.
+ *
+ * No facial features. Partly style: at 44px a face is three dots and they read
+ * as noise. Partly caution: a head shape with a kufi is unambiguous about the
+ * posture, which is all these have to do.
  */
 
 /** Every glyph is drawn on this grid, so they hold together at any size. */
@@ -299,7 +316,23 @@ export function PostureFigure({
   color: string;
   size?: number;
 }) {
-  const axis = {
+  /**
+   * Filled, not stroked — and that is a deliberate break from the rest of this
+   * file.
+   *
+   * Everything else here is 1.5px line art, and two earlier drafts of these
+   * figures were too. Both failed the same way: an outlined robe reads as a
+   * pair of legs, so qiyam looked like a stick figure rather than a person
+   * standing. A filled silhouette reads as a body instantly at 44px, which is
+   * the size these are actually used at.
+   *
+   * The arms are the exception and stay stroked, because they have to be
+   * legible *against* the body — the first draft drew them inside the
+   * silhouette and lost the entire difference between qiyam and iʿtidal, which
+   * is only ever about where the hands are.
+   */
+  const solid = { fill: color, stroke: 'none' };
+  const arm = {
     stroke: color,
     strokeWidth: 2.2,
     strokeLinecap: 'round' as const,
@@ -307,158 +340,134 @@ export function PostureFigure({
     fill: 'none',
   };
 
-  /** Where the head end of the axis is, marked as a point rather than drawn. */
-  const mark = { fill: color, stroke: 'none' };
+  /** Head and the kufi over it, as one filled shape. */
+  const head = (cx: number, cy: number) => (
+    <G {...solid}>
+      <Circle cx={cx} cy={cy} r={3.8} />
+      <Path d={`M${cx - 4.2} ${cy - 1.6}a4.2 4.2 0 0 1 8.4 0z`} />
+    </G>
+  );
 
   return (
     <Svg width={size} height={size} viewBox="0 0 48 48" fill="none">
-      <Path
-        d="M6 42h36"
-        stroke={color}
-        strokeOpacity={0.3}
-        strokeWidth={2}
-        strokeLinecap="round"
-      />
+      <Path d="M4 43h40" stroke={color} strokeOpacity={0.3} strokeWidth={1.8} strokeLinecap="round" />
+
+      {/* All facing right, so the positions read as one sequence. */}
 
       {posture === 'standing' && (
         <G>
-          {/*
-            The axis is broken where the hands are, and the fold is an arc
-            rather than a bar.
+          {head(24, 9)}
+          <Path d="M20 14h8l4 29H16z" {...solid} />
+          {/* Hands folded across the front, clear of the silhouette. */}
+          <Path d="M17.5 19 L20.5 25 H27.5 L30.5 19" {...arm} />
+        </G>
+      )}
 
-            The first version drew a straight line across an unbroken vertical
-            one, which is a cross — an unfortunate thing to put on the first
-            screen of a prayer in a Muslim app, and obvious the moment it was
-            rendered rather than reasoned about. An arc cupping the axis reads
-            as hands held at the waist and reads as nothing else.
-          */}
-          <Path d="M24 10v13" {...axis} />
-          <Path d="M24 31v11" {...axis} />
-          <Path d="M17 24q7 8 14 0" {...axis} strokeWidth={1.8} />
-          <Circle cx={24} cy={10} r={2.6} {...mark} />
+      {posture === 'takbir' && (
+        <G>
+          {head(24, 9)}
+          <Path d="M20 14h8l4 29H16z" {...solid} />
+          <Path d="M18 21 L15 12 L19 8.5" {...arm} />
+          <Path d="M30 21 L33 12 L29 8.5" {...arm} />
         </G>
       )}
 
       {posture === 'rising' && (
         <G>
-          <Path d="M24 10v32" {...axis} />
-          <Circle cx={24} cy={10} r={2.6} {...mark} />
+          {head(24, 9)}
+          <Path d="M20 14h8l4 29H16z" {...solid} />
+          {/* Arms down at the sides. The whole difference from qiyam. */}
+          <Path d="M19 16 L15.5 31" {...arm} />
+          <Path d="M29 16 L32.5 31" {...arm} />
         </G>
       )}
 
       {posture === 'bowing' && (
         <G>
-          {/* Legs upright, back level — the right angle that defines rukuʿ. */}
-          <Path d="M30 42V22" {...axis} />
-          <Path d="M30 22H12" {...axis} />
-          <Circle cx={12} cy={22} r={2.6} {...mark} />
+          {head(10, 17)}
+          {/* Back level from the hips, legs straight down. */}
+          <Path d="M13 13.5h16l4 29h-8l-2.5-22H13z" {...solid} />
+          {/* Hands reaching to the knees. */}
+          <Path d="M18 22 L16 33" {...arm} />
         </G>
       )}
 
+      {/*
+        ⚠️ THE WEAKEST OF THE EIGHT, and knowingly so.
+
+        Sujud from the side is a hard silhouette: the head is on the floor, the
+        back rises to the hips, the knees come down again, and at 44px in one
+        flat colour that reads as a mound with a ball beside it more often than
+        as a person. Five attempts got it from bad to acceptable and no
+        further.
+
+        The others on this sheet are good — qiyam, takbir, iʿtidal and rukuʿ
+        read instantly. This one is the case for a real illustrator, and it is
+        the most important frame in the prayer, so it is worth commissioning
+        rather than iterating on.
+      */}
       {posture === 'prostrating' && (
         <G>
-          <Path d="M32 42V32" {...axis} />
-          <Path d="M32 32q-9 0-16 8" {...axis} />
-          <Circle cx={15} cy={39.5} r={2.6} {...mark} />
+          {head(10, 39)}
+          {/*
+            Forehead on the floor at the left, back sloping UP to raised hips,
+            then down to the knees. The high point is the hips, which is what
+            makes this sujud rather than a shape lying down — the first fill of
+            this read as a hill because the slope ran the wrong way.
+          */}
+          <Path d="M13 43 Q13 37 18 35 Q25 32 27.5 36 L30.5 43 Z" {...solid} />
+          {/* The knee, which is what stops the shape reading as a wedge. */}
+          <Path d="M27.5 37 L30.5 43" {...arm} strokeWidth={2} />
         </G>
       )}
 
       {posture === 'sitting' && (
         <G>
-          <Path d="M24 16v18" {...axis} />
-          <Path d="M16 40h16" {...axis} />
-          <Path d="M24 34l6 6" {...axis} strokeWidth={1.6} />
-          <Circle cx={24} cy={16} r={2.6} {...mark} />
+          {head(20, 12)}
+          {/*
+            Upright torso, then the shins folded forward along the floor — an
+            L, not a torso perched on a block. Sitting back on the heels means
+            there is no gap under the hips, so the two run together.
+          */}
+          <Path d="M16 17 L24 17 L25.5 32 L33 32 L33 43 L15 43 Z" {...solid} />
+          <Path d="M25 21 L29 30" {...arm} />
+        </G>
+      )}
+
+      {posture === 'tashahhud' && (
+        <G>
+          {head(20, 12)}
+          <Path d="M16 17 L24 17 L25.5 32 L33 32 L33 43 L15 43 Z" {...solid} />
+          {/*
+            The raised finger — the most asked-about detail in the prayer, and
+            the entire reason this posture is separate from `sitting`.
+          */}
+          <Path d="M25 21 L29 29" {...arm} />
+          <Path d="M29 29 L30.5 21.5" {...arm} strokeWidth={1.8} />
         </G>
       )}
 
       {posture === 'washing' && (
         <G>
-          {/* Not a body at all: a tap, and water falling into cupped hands. */}
-          <Path d="M12 8v6h13" {...axis} strokeWidth={1.8} />
-          <Path d="M25 14v6" {...axis} strokeWidth={1.8} />
-          <Path d="M15 30q10 11 20 0" {...axis} />
-          <Path d="M15 30h20" {...axis} strokeWidth={1.6} />
+          {/* Not a body: a tap, and water falling into cupped hands. */}
+          <Path
+            d="M13 9v6h12"
+            stroke={color}
+            strokeWidth={2.2}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            fill="none"
+          />
+          <Path d="M25 15v4" stroke={color} strokeWidth={2.2} strokeLinecap="round" fill="none" />
+          <Path d="M25 21.5v2" stroke={color} strokeWidth={2.2} strokeLinecap="round" strokeOpacity={0.5} fill="none" />
+          <Path d="M13 29q11 13 22 0z" {...solid} />
         </G>
       )}
     </Svg>
   );
 }
 
-/**
- * How far into the prayer you are, in rakʿahs.
- *
- * The guide screen used to carry a three-pixel bar filling left to right — a
- * measure of scroll position, in an app that has a whole reference page about
- * losing count mid-prayer. A bar at 60% does not answer "which rakʿah am I
- * in", which is the only question anyone is asking.
- *
- * One arch per rakʿah, filled behind you, outlined ahead, the current one
- * carrying the star. It is the mihrab from the prayer times card at a smaller
- * size, so the same shape means the same thing in both places.
- */
-export function RakahProgress({
-  current,
-  total,
-  color,
-  trackColor,
-  size = 22,
-}: {
-  current: number;
-  total: number;
-  color: string;
-  trackColor: string;
-  size?: number;
-}) {
-  const height = (size / 20) * 24;
 
-  return (
-    <Svg width={size * total + 5 * (total - 1)} height={height} fill="none">
-      {Array.from({ length: total }, (_, i) => {
-        const rakah = i + 1;
-        const done = rakah < current;
-        const here = rakah === current;
-        const x = i * (size + 5);
-
-        return (
-          <G key={rakah} x={x}>
-            <Svg width={size} height={height} viewBox="0 0 20 24" fill="none">
-              <Path
-                d="M2 24 L2 10 Q2 3 10 1 Q18 3 18 10 L18 24 Z"
-                fill={done ? color : 'none'}
-                stroke={done ? 'none' : here ? color : trackColor}
-                strokeWidth={1.6}
-              />
-              {here && (
-                <Path
-                  d="M10 7 L11.4 9.8 L14.4 10.2 L12.2 12.4 L12.7 15.4 L10 14 L7.3 15.4 L7.8 12.4 L5.6 10.2 L8.6 9.8 Z"
-                  fill={color}
-                />
-              )}
-            </Svg>
-          </G>
-        );
-      })}
-    </Svg>
-  );
-}
-
-/**
- * One arch per stage of the beginner path.
- *
- * The Learn tab said "6 of 36" over a three-pixel bar. Thirty-six of what, and
- * how far is six — a beginner cannot answer either, and a fraction is a poor
- * thing to hand someone three weeks into a religion. Six arches answer it
- * without arithmetic: the ones behind you are filled, the one you are on
- * carries the star, the rest are outlines.
- *
- * The shape is the mihrab from the prayer times card, small. Reusing it is the
- * point — the same form means the same thing everywhere in the app, so a
- * reader learns the vocabulary once.
- *
- * `label` is drawn under each arch. Six words at 10px is small, and it is the
- * difference between a decoration and a map.
- */
 export function StagePath({
   stages,
   currentIndex,
@@ -536,6 +545,7 @@ const stagePathStyles = StyleSheet.create({
   },
 });
 
+
 /**
  * A ring showing how far through the path someone is, with the count inside.
  *
@@ -589,6 +599,82 @@ export function ProgressRing({
     </View>
   );
 }
+
+
+/**
+ * How far into the prayer you are, in rakʿahs.
+ *
+ * The guide screen used to carry a three-pixel bar filling left to right — a
+ * measure of scroll position, in an app that has a whole reference page about
+ * losing count mid-prayer. A bar at 60% does not answer "which rakʿah am I
+ * in", which is the only question anyone is asking.
+ *
+ * One arch per rakʿah, filled behind you, outlined ahead, the current one
+ * carrying the star. It is the mihrab from the prayer times card at a smaller
+ * size, so the same shape means the same thing in both places.
+ */
+export function RakahProgress({
+  current,
+  total,
+  color,
+  trackColor,
+  size = 22,
+}: {
+  current: number;
+  total: number;
+  color: string;
+  trackColor: string;
+  size?: number;
+}) {
+  const height = (size / 20) * 24;
+
+  return (
+    <Svg width={size * total + 5 * (total - 1)} height={height} fill="none">
+      {Array.from({ length: total }, (_, i) => {
+        const rakah = i + 1;
+        const done = rakah < current;
+        const here = rakah === current;
+        const x = i * (size + 5);
+
+        return (
+          <G key={rakah} x={x}>
+            <Svg width={size} height={height} viewBox="0 0 20 24" fill="none">
+              <Path
+                d="M2 24 L2 10 Q2 3 10 1 Q18 3 18 10 L18 24 Z"
+                fill={done ? color : 'none'}
+                stroke={done ? 'none' : here ? color : trackColor}
+                strokeWidth={1.6}
+              />
+              {here && (
+                <Path
+                  d="M10 7 L11.4 9.8 L14.4 10.2 L12.2 12.4 L12.7 15.4 L10 14 L7.3 15.4 L7.8 12.4 L5.6 10.2 L8.6 9.8 Z"
+                  fill={color}
+                />
+              )}
+            </Svg>
+          </G>
+        );
+      })}
+    </Svg>
+  );
+}
+
+/**
+ * One arch per stage of the beginner path.
+ *
+ * The Learn tab said "6 of 36" over a three-pixel bar. Thirty-six of what, and
+ * how far is six — a beginner cannot answer either, and a fraction is a poor
+ * thing to hand someone three weeks into a religion. Six arches answer it
+ * without arithmetic: the ones behind you are filled, the one you are on
+ * carries the star, the rest are outlines.
+ *
+ * The shape is the mihrab from the prayer times card, small. Reusing it is the
+ * point — the same form means the same thing everywhere in the app, so a
+ * reader learns the vocabulary once.
+ *
+ * `label` is drawn under each arch. Six words at 10px is small, and it is the
+ * difference between a decoration and a map.
+ */
 
 export type GlyphName =
   | 'shahada'

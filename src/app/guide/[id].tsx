@@ -27,10 +27,12 @@ import { useTheme } from '@/hooks/use-theme';
  */
 const POSTURE_KEY: Record<Posture, UIKey> = {
   standing: 'posture.standing',
+  takbir: 'posture.takbir',
   bowing: 'posture.bowing',
   rising: 'posture.rising',
   prostrating: 'posture.prostrating',
   sitting: 'posture.sitting',
+  tashahhud: 'posture.tashahhud',
   washing: 'posture.washing',
 };
 

@@ -370,7 +370,9 @@ function rakahSteps(rakah: number, spec: PrayerSpec): Step[] {
     step({
       key: 'takbir',
       title: 'Opening takbir',
-      posture: 'standing',
+      // Its own posture: hands at the ears is the position people ask about
+      // most and the one a text label conveys least.
+      posture: 'takbir',
       instruction:
         'Raise both hands to about shoulder level, palms forward, and say the takbir.',
       says: Recitations.takbir,
@@ -509,7 +511,9 @@ function rakahSteps(rakah: number, spec: PrayerSpec): Step[] {
     step({
       key: 'tashahhud',
       title: isFinal ? 'Final sitting' : 'Sit for tashahhud',
-      posture: 'sitting',
+      // The raised finger is what distinguishes this sitting from the one
+      // between the prostrations, and it is the detail people ask about most.
+      posture: 'tashahhud',
       instruction: sitsTawarruk
         ? 'Say the takbir and sit again — this time slide your left foot across under you to the right and sit on the ground, right foot still upright. Rest your left hand on your left knee and your right hand on your right thigh, raise your right index finger, and say:'
         : 'Say the takbir and sit as you did between the prostrations. Rest your left hand on your left knee and your right hand on your right thigh, raise your right index finger, and say:',

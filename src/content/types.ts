@@ -17,10 +17,12 @@ import type { Source } from './sources';
 /** Drives the posture illustration and the "you are here" cue. */
 export type Posture =
   | 'standing'
+  | 'takbir'
   | 'bowing'
   | 'rising'
   | 'prostrating'
   | 'sitting'
+  | 'tashahhud'
   | 'washing';
 
 /**

@@ -4,7 +4,7 @@ import { ContentNoteCard } from '@/components/content-note';
 import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
 import { resolveNotes, type Pillar } from '@/content';
-import { Radius, Spacing } from '@/constants/theme';
+import { ArabicFont, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { useTheme } from '@/hooks/use-theme';
 
@@ -89,8 +89,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   arabic: {
-    fontSize: 22,
-    lineHeight: 36,
+    fontFamily: ArabicFont,
+    fontSize: 25,
+    lineHeight: 42,
     writingDirection: 'rtl',
   },
   link: {

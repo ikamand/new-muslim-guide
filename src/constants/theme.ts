@@ -34,6 +34,18 @@ export const Colors = {
 
 export type ThemeColor = keyof typeof Colors.light & keyof typeof Colors.dark;
 
+/**
+ * The Arabic face, loaded in `src/app/_layout.tsx`.
+ *
+ * One name, in one place, because it is applied from four separate components
+ * and a face that disagrees with itself between them is worse than no face at
+ * all. The string has to match the key given to `useFonts`.
+ *
+ * Never applied to transliteration or translation — those are Latin text and
+ * Amiri's Latin is a different design with different metrics.
+ */
+export const ArabicFont = 'Amiri';
+
 export const Fonts = Platform.select({
   ios: {
     /** iOS `UIFontDescriptorSystemDesignDefault` */

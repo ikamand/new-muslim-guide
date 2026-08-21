@@ -4,7 +4,7 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 import { ThemedText } from '@/components/themed-text';
 import { TranslationGap } from '@/components/translation-gap';
 import { PHRASES } from '@/content';
-import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
+import { ArabicFont, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { localisePhrase, measure } from '@/i18n/localise';
 import { useTheme } from '@/hooks/use-theme';
@@ -102,8 +102,9 @@ const styles = StyleSheet.create({
     flexShrink: 1,
   },
   arabic: {
-    fontSize: 19,
-    lineHeight: 34,
+    fontFamily: ArabicFont,
+    fontSize: 22,
+    lineHeight: 40,
     writingDirection: 'rtl',
   },
   divider: {

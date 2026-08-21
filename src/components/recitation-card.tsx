@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
 import { practiceKeyFor, type Recitation } from '@/content';
-import { Radius, Spacing } from '@/constants/theme';
+import { ArabicFont, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { useSettings } from '@/hooks/use-settings';
 import { useTheme } from '@/hooks/use-theme';
@@ -80,9 +80,18 @@ const styles = StyleSheet.create({
     borderRadius: Radius.medium,
     borderWidth: StyleSheet.hairlineWidth,
   },
+  /**
+   * Amiri, larger and more open than the platform fallback this replaced.
+   *
+   * 26/48 was chosen for a face that is not this one. Amiri sets a smaller
+   * apparent size at the same point size and stacks vowel marks above the
+   * line, so it needs both: 30 to read at arm's length on a mat, and 58 so a
+   * shadda on one line never touches a kasra on the next.
+   */
   arabic: {
-    fontSize: 26,
-    lineHeight: 48,
+    fontFamily: ArabicFont,
+    fontSize: 30,
+    lineHeight: 58,
     textAlign: 'right',
     writingDirection: 'rtl',
   },

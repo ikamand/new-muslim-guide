@@ -8,6 +8,7 @@ import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { SettingsProvider, useSettings } from '@/hooks/use-settings';
 import { LocaleProvider } from '@/hooks/use-locale';
+import { MemorisedProvider } from '@/hooks/use-memorised';
 import { LocationProvider } from '@/hooks/use-location';
 
 SplashScreen.preventAutoHideAsync();
@@ -109,6 +110,7 @@ function RootStack() {
       <Stack.Screen name="duas" options={{ title: 'Everyday duʿas', headerBackTitle: 'Learn' }} />
       <Stack.Screen name="practice" options={{ title: 'Practice', headerBackTitle: 'Learn' }} />
       <Stack.Screen name="pray" options={{ title: '', headerBackTitle: 'Learn' }} />
+      <Stack.Screen name="surah/[number]" options={{ title: '', headerBackTitle: 'Qur’an' }} />
       <Stack.Screen name="qibla" options={{ title: 'Qibla', headerBackTitle: 'Back' }} />
     </Stack>
   );
@@ -119,7 +121,9 @@ export default function RootLayout() {
     <LocaleProvider>
       <SettingsProvider>
         <LocationProvider>
-          <RootStack />
+          <MemorisedProvider>
+            <RootStack />
+          </MemorisedProvider>
         </LocationProvider>
       </SettingsProvider>
     </LocaleProvider>

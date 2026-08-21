@@ -1,0 +1,170 @@
+import { ScrollView, StyleSheet, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
+import { GirihBand } from '@/components/illustrations';
+import { PressableLink } from '@/components/pressable-link';
+import { ThemedText } from '@/components/themed-text';
+import { LEARNING_ORDER } from '@/content/quran/juz30';
+import { BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
+import { useLocale } from '@/hooks/use-locale';
+import { useMemorised } from '@/hooks/use-memorised';
+import { useTheme } from '@/hooks/use-theme';
+
+/**
+ * Juz 30, in the order people learn it.
+ *
+ * ## Why this is a tab and not a Learn topic
+ *
+ * Today answers "what do I do in the next ten minutes" and Learn answers "what
+ * don't I understand yet". Memorising is neither — it is a practice built over
+ * months, and filing it under Learn would make it look like reading, which is
+ * the one thing it is not.
+ *
+ * ## The order
+ *
+ * Backwards through the mushaf, 114 → 113 → 112 → …, which is how it is
+ * actually taught. Not shortest-first: the data contradicts that, since 110
+ * and 103 are shorter than 114. Backwards is contiguous, so there is never a
+ * question about what comes next, and it front-loads the three *quls* — the
+ * highest-utility surahs in the book.
+ *
+ * ## Progress that never asks anything
+ *
+ * A count, and nothing else. No streak, no daily target, no notice when
+ * somebody stops. Someone three weeks into Islam does not need an app that is
+ * disappointed in them, and the fastest way to make memorising feel like
+ * homework is to score it.
+ */
+export default function QuranScreen() {
+  const theme = useTheme();
+  const { t } = useLocale();
+  const { isMemorised, count } = useMemorised();
+
+  return (
+    <SafeAreaView style={[styles.safeArea, { backgroundColor: theme.background }]} edges={['top']}>
+      <ScrollView contentContainerStyle={styles.content}>
+        <View style={styles.header}>
+          <ThemedText type="subtitle">{t('quran.title')}</ThemedText>
+          <ThemedText type="default" themeColor="textSecondary">
+            {t('quran.intro')}
+          </ThemedText>
+        </View>
+
+        {/*
+          The band is a row of eight-point stars, one tile per surah as it
+          happens — the same girih the shahada card carries. Filled behind the
+          count rather than a percentage: "6 of 37" is a fact, "16%" is a
+          verdict.
+        */}
+        <View style={[styles.progress, { backgroundColor: theme.backgroundElement, borderColor: theme.border }]}>
+          <View style={styles.band}>
+            <GirihBand color={theme.accent} height={54} />
+          </View>
+          <View style={styles.progressBody}>
+            <ThemedText type="cardTitle">
+              {t('quran.progress')
+                .replace('{done}', String(count))
+                .replace('{total}', String(LEARNING_ORDER.length))}
+            </ThemedText>
+            <ThemedText type="small" themeColor="textSecondary">
+              {t('quran.progress.help')}
+            </ThemedText>
+          </View>
+        </View>
+
+        <View style={styles.list}>
+          {LEARNING_ORDER.map((surah) => {
+            const done = isMemorised(surah.number);
+
+            return (
+              <PressableLink
+                key={surah.number}
+                href={{ pathname: '/surah/[number]', params: { number: String(surah.number) } }}
+                accessibilityLabel={`${surah.name}, ${surah.meaning}, ${surah.ayahs.length} ${t('count.ayahs')}`}
+                style={[
+                  styles.row,
+                  { backgroundColor: theme.backgroundElement, borderColor: done ? theme.accent : theme.border },
+                ]}
+                pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
+                {/*
+                  The surah's own number, not its position in the list. It is
+                  what it is called in every mushaf and every conversation, and
+                  a reader will meet it long after this screen.
+                */}
+                <ThemedText
+                  type="caption"
+                  themeColor={done ? 'accent' : 'textSecondary'}
+                  style={styles.number}>
+                  {surah.number}
+                </ThemedText>
+                <View style={styles.rowText}>
+                  <ThemedText type="cardTitle">{surah.name}</ThemedText>
+                  <ThemedText type="small" themeColor="textSecondary">
+                    {surah.meaning} · {surah.ayahs.length} {t('count.ayahs')}
+                  </ThemedText>
+                </View>
+                {done && (
+                  <ThemedText type="caption" themeColor="accent">
+                    {t('quran.known')}
+                  </ThemedText>
+                )}
+              </PressableLink>
+            );
+          })}
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+  },
+  content: {
+    padding: Spacing.four,
+    paddingBottom: BottomTabInset + Spacing.four,
+    gap: Spacing.four,
+    width: '100%',
+    maxWidth: MaxContentWidth,
+    alignSelf: 'center',
+  },
+  header: {
+    gap: Spacing.two,
+    paddingTop: Spacing.four,
+  },
+  progress: {
+    borderRadius: Radius.medium,
+    borderWidth: StyleSheet.hairlineWidth,
+    overflow: 'hidden',
+  },
+  band: {
+    height: 54,
+    overflow: 'hidden',
+  },
+  progressBody: {
+    gap: 2,
+    padding: Spacing.three,
+  },
+  list: {
+    gap: Spacing.two,
+  },
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.three,
+    minHeight: 64,
+    padding: Spacing.three,
+    borderRadius: Radius.medium,
+    borderWidth: StyleSheet.hairlineWidth,
+  },
+  number: {
+    width: 26,
+    textAlign: 'center',
+    fontVariant: ['tabular-nums'],
+  },
+  rowText: {
+    flex: 1,
+    gap: 2,
+  },
+});

@@ -40,6 +40,21 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <Ionicons name="book-outline" size={size} color={color} />,
         }}
       />
+      {/*
+        Memorising is neither what Today asks nor what Learn asks. It has no
+        deadline and it is not reading — it is a practice built over months, so
+        it gets a tab rather than a card that would make it look like an
+        article.
+      */}
+      <Tabs.Screen
+        name="quran"
+        options={{
+          title: t('tab.quran'),
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="bookmarks-outline" size={size} color={color} />
+          ),
+        }}
+      />
       <Tabs.Screen
         name="settings"
         options={{

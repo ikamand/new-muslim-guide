@@ -168,6 +168,29 @@ export const EN = {
   'attribution.a minority': 'A minority',
   'attribution.contemporary scholarship': 'Contemporary scholarship',
   'tab.learn': 'Learn',
+  'tab.quran': 'Qur’an',
+
+  /*
+    The memorisation tab.
+
+    "Progress" is stated as a count and never as a percentage. "6 of 37" is a
+    fact; "16%" is a verdict, and nobody three weeks into a religion needs a
+    phone grading them on it.
+  */
+  'quran.title': 'Learn by heart',
+  'quran.intro': 'The short surahs at the end of the Qur’an, in the order people usually learn them. Start at the top — the first three are the ones you will use most.',
+  'quran.progress': '{done} of {total} learned',
+  'quran.progress.help': 'You decide when one counts. Nothing here is timed, and nothing is taken away.',
+  'quran.known': 'known',
+  'quran.markKnown': 'I know this one',
+  'quran.knowIt': 'You know this one',
+  'quran.surahNumber': 'Surah {n}',
+  'quran.tapToHide': 'Tap any ayah to cover it, then recite it from memory and tap again to check.',
+  'quran.covered': 'covered — tap to check',
+  'quran.hide': 'Cover ayah {n}',
+  'quran.reveal': 'Reveal ayah {n}',
+  'quran.missing': 'That surah isn’t here.',
+  'count.ayahs': 'ayahs',
   'tab.settings': 'Settings',
 
   'learn.title': 'Learn',
@@ -454,6 +477,21 @@ type Overrides = Partial<Record<UIKey, string>>;
 const FR: Overrides = {
   'tab.today': 'Aujourd’hui',
   'tab.learn': 'Apprendre',
+  'tab.quran': 'Coran',
+  'quran.title': 'Apprendre par cœur',
+  'quran.intro': 'Les sourates courtes de la fin du Coran, dans l’ordre où on les apprend habituellement. Commencez par le haut — les trois premières sont celles qui servent le plus.',
+  'quran.progress': '{done} sur {total} apprises',
+  'quran.progress.help': 'C’est vous qui décidez quand une sourate compte. Rien n’est chronométré, et rien ne se perd.',
+  'quran.known': 'apprise',
+  'quran.markKnown': 'Je la connais',
+  'quran.knowIt': 'Vous la connaissez',
+  'quran.surahNumber': 'Sourate {n}',
+  'quran.tapToHide': 'Touchez un verset pour le masquer, récitez-le de mémoire, puis touchez à nouveau pour vérifier.',
+  'quran.covered': 'masqué — touchez pour vérifier',
+  'quran.hide': 'Masquer le verset {n}',
+  'quran.reveal': 'Afficher le verset {n}',
+  'quran.missing': 'Cette sourate n’est pas ici.',
+  'count.ayahs': 'versets',
   'tab.settings': 'Réglages',
   'learn.title': 'Apprendre',
   'pray.title': 'Apprendre à prier',
@@ -676,6 +714,21 @@ const FR: Overrides = {
 const ES: Overrides = {
   'tab.today': 'Hoy',
   'tab.learn': 'Aprender',
+  'tab.quran': 'Corán',
+  'quran.title': 'Aprender de memoria',
+  'quran.intro': 'Las suras cortas del final del Corán, en el orden en que suelen aprenderse. Empieza por arriba — las tres primeras son las que más se usan.',
+  'quran.progress': '{done} de {total} aprendidas',
+  'quran.progress.help': 'Tú decides cuándo cuenta una. Nada se cronometra y nada se pierde.',
+  'quran.known': 'aprendida',
+  'quran.markKnown': 'Me la sé',
+  'quran.knowIt': 'Te la sabes',
+  'quran.surahNumber': 'Sura {n}',
+  'quran.tapToHide': 'Toca una aleya para taparla, recítala de memoria y toca otra vez para comprobar.',
+  'quran.covered': 'tapada — toca para comprobar',
+  'quran.hide': 'Tapar la aleya {n}',
+  'quran.reveal': 'Mostrar la aleya {n}',
+  'quran.missing': 'Esa sura no está aquí.',
+  'count.ayahs': 'aleyas',
   'tab.settings': 'Ajustes',
   'learn.title': 'Aprender',
   'pray.title': 'Aprender a rezar',

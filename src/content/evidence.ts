@@ -5,338 +5,1157 @@
  * here is lost the next time it runs, and one that needs making belongs
  * upstream, where the text is published.
  *
- * 54 Qur'an passages from QuranEnc; 11 narrations from HadeethEnc.
- * Every character came over the wire from a published text rather than from
- * memory, which is the only way a file like this could exist under this
- * project's rules about Arabic.
+ * 55 Qur'an passages and 109 narrations. Every character came over
+ * the wire from a published text rather than from memory, which is the only
+ * way a file like this could exist under this project's rules about Arabic.
  *
- * A narration is here only where the app's own Arabic appears, as a
- * consonantal skeleton, INSIDE the narration HadeethEnc returned — containment
- * rather than similarity, so no judgement was made by a script. The ones that
- * did not pass are in `docs/hadith-candidates.md` for a person to decide.
+ * ## Where each line came from
  *
- * ⚠️ HadeethEnc's terms: no modification, addition or deletion of the content,
- * and the publisher named wherever it appears. These strings are verbatim and
- * must stay that way.
+ * No one source has all of it, so each field is taken from the first that
+ * does, and says so on the text itself. Of the 109 narrations here:
+ * 44 were confirmed against a second, separately edited publisher;
+ * 39 carry HadeethEnc's own translation, 70 carry Darussalam's, and
+ * 0 have Arabic and no translation at all.
+ *
+ * ⚠️ **The Darussalam translations are not ours to relicense.** They reach
+ * this file through a public-domain dedication that covers the compiler's work
+ * and not the translation inside it. What makes that defensible here is scale
+ * and purpose — 70 narrations out of some thirty thousand, each quoted under
+ * the instruction it supports, in an app that is free and never sold. It is a
+ * quotation, not a republication, and it is Iyad's decision on the record.
+ *
+ * ⚠️ **HadeethEnc's terms:** no modification, addition or deletion, and the
+ * publisher named wherever it appears. Both are why `translationFrom` is on
+ * every text rather than in a comment here, and why these strings are verbatim.
+ *
+ * ## What this file does NOT establish
+ *
+ * That a narration is the right evidence for the ruling it sits under. This
+ * proves a text is what the collection prints, nothing more. Which authentic
+ * narration supports a given instruction is substance and stays with a
+ * qualified reviewer — see `docs/scholarly-review.md`.
  */
 
 export type EvidenceText = {
   arabic: string;
-  /** Absent where HadeethEnc publishes no English for that narration. */
+  /** Absent where no source published a translation this app may carry. */
   translation?: string;
-  /** "Narrated by Al-Bukhāri" — HadeethEnc's own wording. */
+  /** "Narrated by Al-Bukhāri". */
   attribution?: string;
+  /** Every grading the sources gave, with who gave it. */
   grade?: string;
+  /** Publisher of the Arabic. A licence obligation, not a nicety. */
+  arabicFrom: string;
+  /** Publisher of the translation, where there is one. */
+  translationFrom?: string;
 };
 
 /** Keyed "2:255" or "1:1-7", matching how a `QuranSource` addresses a verse. */
 export const QURAN_TEXT: Record<string, EvidenceText> = {
   "5:6": {
     "arabic": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوٓاْ إِذَا قُمۡتُمۡ إِلَى ٱلصَّلَوٰةِ فَٱغۡسِلُواْ وُجُوهَكُمۡ وَأَيۡدِيَكُمۡ إِلَى ٱلۡمَرَافِقِ وَٱمۡسَحُواْ بِرُءُوسِكُمۡ وَأَرۡجُلَكُمۡ إِلَى ٱلۡكَعۡبَيۡنِۚ وَإِن كُنتُمۡ جُنُبٗا فَٱطَّهَّرُواْۚ وَإِن كُنتُم مَّرۡضَىٰٓ أَوۡ عَلَىٰ سَفَرٍ أَوۡ جَآءَ أَحَدٞ مِّنكُم مِّنَ ٱلۡغَآئِطِ أَوۡ لَٰمَسۡتُمُ ٱلنِّسَآءَ فَلَمۡ تَجِدُواْ مَآءٗ فَتَيَمَّمُواْ صَعِيدٗا طَيِّبٗا فَٱمۡسَحُواْ بِوُجُوهِكُمۡ وَأَيۡدِيكُم مِّنۡهُۚ مَا يُرِيدُ ٱللَّهُ لِيَجۡعَلَ عَلَيۡكُم مِّنۡ حَرَجٖ وَلَٰكِن يُرِيدُ لِيُطَهِّرَكُمۡ وَلِيُتِمَّ نِعۡمَتَهُۥ عَلَيۡكُمۡ لَعَلَّكُمۡ تَشۡكُرُونَ",
-    "translation": "O you who have believed, when you rise to [perform] prayer, wash your faces and your forearms to the elbows and wipe over your heads and wash your feet to the ankles. And if you are in a state of janābah, then purify yourselves. But if you are ill or on a journey or one of you comes from the place of relieving himself or you have contacted women and do not find water, then seek clean earth and wipe over your faces and hands with it. Allāh does not intend to make difficulty for you, but He intends to purify you and complete His favor upon you that you may be grateful."
+    "translation": "O you who have believed, when you rise to [perform] prayer, wash your faces and your forearms to the elbows and wipe over your heads and wash your feet to the ankles. And if you are in a state of janābah, then purify yourselves. But if you are ill or on a journey or one of you comes from the place of relieving himself or you have contacted women and do not find water, then seek clean earth and wipe over your faces and hands with it. Allāh does not intend to make difficulty for you, but He intends to purify you and complete His favor upon you that you may be grateful.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "2:222": {
     "arabic": "وَيَسۡـَٔلُونَكَ عَنِ ٱلۡمَحِيضِۖ قُلۡ هُوَ أَذٗى فَٱعۡتَزِلُواْ ٱلنِّسَآءَ فِي ٱلۡمَحِيضِ وَلَا تَقۡرَبُوهُنَّ حَتَّىٰ يَطۡهُرۡنَۖ فَإِذَا تَطَهَّرۡنَ فَأۡتُوهُنَّ مِنۡ حَيۡثُ أَمَرَكُمُ ٱللَّهُۚ إِنَّ ٱللَّهَ يُحِبُّ ٱلتَّوَّٰبِينَ وَيُحِبُّ ٱلۡمُتَطَهِّرِينَ",
-    "translation": "And they ask you about menstruation. Say, \"It is harm, so keep away from wives during menstruation. And do not approach them until they are pure. And when they have purified themselves, then come to them from where Allāh has ordained for you. Indeed, Allāh loves those who are constantly repentant and loves those who purify themselves.\""
+    "translation": "And they ask you about menstruation. Say, \"It is harm, so keep away from wives during menstruation. And do not approach them until they are pure. And when they have purified themselves, then come to them from where Allāh has ordained for you. Indeed, Allāh loves those who are constantly repentant and loves those who purify themselves.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "2:144": {
     "arabic": "قَدۡ نَرَىٰ تَقَلُّبَ وَجۡهِكَ فِي ٱلسَّمَآءِۖ فَلَنُوَلِّيَنَّكَ قِبۡلَةٗ تَرۡضَىٰهَاۚ فَوَلِّ وَجۡهَكَ شَطۡرَ ٱلۡمَسۡجِدِ ٱلۡحَرَامِۚ وَحَيۡثُ مَا كُنتُمۡ فَوَلُّواْ وُجُوهَكُمۡ شَطۡرَهُۥۗ وَإِنَّ ٱلَّذِينَ أُوتُواْ ٱلۡكِتَٰبَ لَيَعۡلَمُونَ أَنَّهُ ٱلۡحَقُّ مِن رَّبِّهِمۡۗ وَمَا ٱللَّهُ بِغَٰفِلٍ عَمَّا يَعۡمَلُونَ",
-    "translation": "We have certainly seen the turning of your face, [O Muḥammad], toward the heaven, and We will surely turn you to a qiblah with which you will be pleased. So turn your face [i.e., yourself] toward al-Masjid al-Ḥarām. And wherever you [believers] are, turn your faces [i.e., yourselves] toward it [in prayer]. Indeed, those who have been given the Scripture [i.e., the Jews and the Christians] well know that it is the truth from their Lord. And Allāh is not unaware of what they do."
+    "translation": "We have certainly seen the turning of your face, [O Muḥammad], toward the heaven, and We will surely turn you to a qiblah with which you will be pleased. So turn your face [i.e., yourself] toward al-Masjid al-Ḥarām. And wherever you [believers] are, turn your faces [i.e., yourselves] toward it [in prayer]. Indeed, those who have been given the Scripture [i.e., the Jews and the Christians] well know that it is the truth from their Lord. And Allāh is not unaware of what they do.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "16:98": {
     "arabic": "فَإِذَا قَرَأۡتَ ٱلۡقُرۡءَانَ فَٱسۡتَعِذۡ بِٱللَّهِ مِنَ ٱلشَّيۡطَٰنِ ٱلرَّجِيمِ",
-    "translation": "So when you recite the Qur’ān, [first] seek refuge in Allāh from Satan, the expelled [from His mercy]."
+    "translation": "So when you recite the Qur’ān, [first] seek refuge in Allāh from Satan, the expelled [from His mercy].",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "1:1-7": {
     "arabic": "بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ ٱلۡحَمۡدُ لِلَّهِ رَبِّ ٱلۡعَٰلَمِينَ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ مَٰلِكِ يَوۡمِ ٱلدِّينِ إِيَّاكَ نَعۡبُدُ وَإِيَّاكَ نَسۡتَعِينُ ٱهۡدِنَا ٱلصِّرَٰطَ ٱلۡمُسۡتَقِيمَ صِرَٰطَ ٱلَّذِينَ أَنۡعَمۡتَ عَلَيۡهِمۡ غَيۡرِ ٱلۡمَغۡضُوبِ عَلَيۡهِمۡ وَلَا ٱلضَّآلِّينَ",
-    "translation": "In the name of Allāh, the Entirely Merciful, the Especially Merciful. [All] praise is [due] to Allāh, Lord of the worlds - The Entirely Merciful, the Especially Merciful, Sovereign of the Day of Recompense. It is You we worship and You we ask for help. Guide us to the straight path - The path of those upon whom You have bestowed favor, not of those who have earned [Your] anger or of those who are astray."
+    "translation": "In the name of Allāh, the Entirely Merciful, the Especially Merciful. [All] praise is [due] to Allāh, Lord of the worlds - The Entirely Merciful, the Especially Merciful, Sovereign of the Day of Recompense. It is You we worship and You we ask for help. Guide us to the straight path - The path of those upon whom You have bestowed favor, not of those who have earned [Your] anger or of those who are astray.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "3:19": {
     "arabic": "إِنَّ ٱلدِّينَ عِندَ ٱللَّهِ ٱلۡإِسۡلَٰمُۗ وَمَا ٱخۡتَلَفَ ٱلَّذِينَ أُوتُواْ ٱلۡكِتَٰبَ إِلَّا مِنۢ بَعۡدِ مَا جَآءَهُمُ ٱلۡعِلۡمُ بَغۡيَۢا بَيۡنَهُمۡۗ وَمَن يَكۡفُرۡ بِـَٔايَٰتِ ٱللَّهِ فَإِنَّ ٱللَّهَ سَرِيعُ ٱلۡحِسَابِ",
-    "translation": "Indeed, the religion in the sight of Allāh is Islām. And those who were given the Scripture did not differ except after knowledge had come to them - out of jealous animosity between themselves. And whoever disbelieves in the verses of Allāh, then indeed, Allāh is swift in [taking] account."
+    "translation": "Indeed, the religion in the sight of Allāh is Islām. And those who were given the Scripture did not differ except after knowledge had come to them - out of jealous animosity between themselves. And whoever disbelieves in the verses of Allāh, then indeed, Allāh is swift in [taking] account.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "51:56": {
     "arabic": "وَمَا خَلَقۡتُ ٱلۡجِنَّ وَٱلۡإِنسَ إِلَّا لِيَعۡبُدُونِ",
-    "translation": "And I did not create the jinn and mankind except to worship Me."
+    "translation": "And I did not create the jinn and mankind except to worship Me.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "2:286": {
     "arabic": "لَا يُكَلِّفُ ٱللَّهُ نَفۡسًا إِلَّا وُسۡعَهَاۚ لَهَا مَا كَسَبَتۡ وَعَلَيۡهَا مَا ٱكۡتَسَبَتۡۗ رَبَّنَا لَا تُؤَاخِذۡنَآ إِن نَّسِينَآ أَوۡ أَخۡطَأۡنَاۚ رَبَّنَا وَلَا تَحۡمِلۡ عَلَيۡنَآ إِصۡرٗا كَمَا حَمَلۡتَهُۥ عَلَى ٱلَّذِينَ مِن قَبۡلِنَاۚ رَبَّنَا وَلَا تُحَمِّلۡنَا مَا لَا طَاقَةَ لَنَا بِهِۦۖ وَٱعۡفُ عَنَّا وَٱغۡفِرۡ لَنَا وَٱرۡحَمۡنَآۚ أَنتَ مَوۡلَىٰنَا فَٱنصُرۡنَا عَلَى ٱلۡقَوۡمِ ٱلۡكَٰفِرِينَ",
-    "translation": "Allāh does not charge a soul except [with that within] its capacity. It will have [the consequence of] what [good] it has gained, and it will bear [the consequence of] what [evil] it has earned. \"Our Lord, do not impose blame upon us if we have forgotten or erred. Our Lord, and lay not upon us a burden like that which You laid upon those before us. Our Lord, and burden us not with that which we have no ability to bear. And pardon us; and forgive us; and have mercy upon us. You are our protector, so give us victory over the disbelieving people.\""
+    "translation": "Allāh does not charge a soul except [with that within] its capacity. It will have [the consequence of] what [good] it has gained, and it will bear [the consequence of] what [evil] it has earned. \"Our Lord, do not impose blame upon us if we have forgotten or erred. Our Lord, and lay not upon us a burden like that which You laid upon those before us. Our Lord, and burden us not with that which we have no ability to bear. And pardon us; and forgive us; and have mercy upon us. You are our protector, so give us victory over the disbelieving people.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "2:256": {
+    "arabic": "لَآ إِكۡرَاهَ فِي ٱلدِّينِۖ قَد تَّبَيَّنَ ٱلرُّشۡدُ مِنَ ٱلۡغَيِّۚ فَمَن يَكۡفُرۡ بِٱلطَّٰغُوتِ وَيُؤۡمِنۢ بِٱللَّهِ فَقَدِ ٱسۡتَمۡسَكَ بِٱلۡعُرۡوَةِ ٱلۡوُثۡقَىٰ لَا ٱنفِصَامَ لَهَاۗ وَٱللَّهُ سَمِيعٌ عَلِيمٌ",
+    "translation": "There shall be no compulsion in [acceptance of] the religion. The right course has become distinct from the wrong. So whoever disbelieves in ṭāghūt and believes in Allāh has grasped the most trustworthy handhold with no break in it. And Allāh is Hearing and Knowing.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "112:1-4": {
     "arabic": "قُلۡ هُوَ ٱللَّهُ أَحَدٌ ٱللَّهُ ٱلصَّمَدُ لَمۡ يَلِدۡ وَلَمۡ يُولَدۡ وَلَمۡ يَكُن لَّهُۥ كُفُوًا أَحَدُۢ",
-    "translation": "Say, \"He is Allāh, [who is] One, Allāh, the Eternal Refuge. He neither begets nor is born, Nor is there to Him any equivalent.\""
+    "translation": "Say, \"He is Allāh, [who is] One, Allāh, the Eternal Refuge. He neither begets nor is born, Nor is there to Him any equivalent.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "42:11": {
     "arabic": "فَاطِرُ ٱلسَّمَٰوَٰتِ وَٱلۡأَرۡضِۚ جَعَلَ لَكُم مِّنۡ أَنفُسِكُمۡ أَزۡوَٰجٗا وَمِنَ ٱلۡأَنۡعَٰمِ أَزۡوَٰجٗا يَذۡرَؤُكُمۡ فِيهِۚ لَيۡسَ كَمِثۡلِهِۦ شَيۡءٞۖ وَهُوَ ٱلسَّمِيعُ ٱلۡبَصِيرُ",
-    "translation": "[He is] Creator of the heavens and the earth. He has made for you from yourselves, mates, and among the cattle, mates; He multiplies you thereby. There is nothing like unto Him, and He is the Hearing, the Seeing."
+    "translation": "[He is] Creator of the heavens and the earth. He has made for you from yourselves, mates, and among the cattle, mates; He multiplies you thereby. There is nothing like unto Him, and He is the Hearing, the Seeing.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "7:180": {
     "arabic": "وَلِلَّهِ ٱلۡأَسۡمَآءُ ٱلۡحُسۡنَىٰ فَٱدۡعُوهُ بِهَاۖ وَذَرُواْ ٱلَّذِينَ يُلۡحِدُونَ فِيٓ أَسۡمَٰٓئِهِۦۚ سَيُجۡزَوۡنَ مَا كَانُواْ يَعۡمَلُونَ",
-    "translation": "And to Allāh belong the best names, so invoke Him by them. And leave [the company of] those who practice deviation concerning His names. They will be recompensed for what they have been doing."
+    "translation": "And to Allāh belong the best names, so invoke Him by them. And leave [the company of] those who practice deviation concerning His names. They will be recompensed for what they have been doing.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "33:40": {
     "arabic": "مَّا كَانَ مُحَمَّدٌ أَبَآ أَحَدٖ مِّن رِّجَالِكُمۡ وَلَٰكِن رَّسُولَ ٱللَّهِ وَخَاتَمَ ٱلنَّبِيِّـۧنَۗ وَكَانَ ٱللَّهُ بِكُلِّ شَيۡءٍ عَلِيمٗا",
-    "translation": "Muḥammad is not the father of [any] one of your men, but [he is] the Messenger of Allāh and seal [i.e., last] of the prophets. And ever is Allāh, of all things, Knowing."
+    "translation": "Muḥammad is not the father of [any] one of your men, but [he is] the Messenger of Allāh and seal [i.e., last] of the prophets. And ever is Allāh, of all things, Knowing.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "68:4": {
     "arabic": "وَإِنَّكَ لَعَلَىٰ خُلُقٍ عَظِيمٖ",
-    "translation": "And indeed, you are of a great moral character."
+    "translation": "And indeed, you are of a great moral character.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "33:21": {
     "arabic": "لَّقَدۡ كَانَ لَكُمۡ فِي رَسُولِ ٱللَّهِ أُسۡوَةٌ حَسَنَةٞ لِّمَن كَانَ يَرۡجُواْ ٱللَّهَ وَٱلۡيَوۡمَ ٱلۡأٓخِرَ وَذَكَرَ ٱللَّهَ كَثِيرٗا",
-    "translation": "There has certainly been for you in the Messenger of Allāh an excellent pattern for anyone whose hope is in Allāh and the Last Day and [who] remembers Allāh often."
+    "translation": "There has certainly been for you in the Messenger of Allāh an excellent pattern for anyone whose hope is in Allāh and the Last Day and [who] remembers Allāh often.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "4:80": {
     "arabic": "مَّن يُطِعِ ٱلرَّسُولَ فَقَدۡ أَطَاعَ ٱللَّهَۖ وَمَن تَوَلَّىٰ فَمَآ أَرۡسَلۡنَٰكَ عَلَيۡهِمۡ حَفِيظٗا",
-    "translation": "He who obeys the Messenger has obeyed Allāh; but those who turn away - We have not sent you over them as a guardian."
+    "translation": "He who obeys the Messenger has obeyed Allāh; but those who turn away - We have not sent you over them as a guardian.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "2:2": {
     "arabic": "ذَٰلِكَ ٱلۡكِتَٰبُ لَا رَيۡبَۛ فِيهِۛ هُدٗى لِّلۡمُتَّقِينَ",
-    "translation": "This is the Book about which there is no doubt, a guidance for those conscious of Allāh -"
+    "translation": "This is the Book about which there is no doubt, a guidance for those conscious of Allāh -",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "15:9": {
     "arabic": "إِنَّا نَحۡنُ نَزَّلۡنَا ٱلذِّكۡرَ وَإِنَّا لَهُۥ لَحَٰفِظُونَ",
-    "translation": "Indeed, it is We who sent down the message [i.e., the Qur’ān], and indeed, We will be its guardian."
+    "translation": "Indeed, it is We who sent down the message [i.e., the Qur’ān], and indeed, We will be its guardian.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "59:7": {
     "arabic": "مَّآ أَفَآءَ ٱللَّهُ عَلَىٰ رَسُولِهِۦ مِنۡ أَهۡلِ ٱلۡقُرَىٰ فَلِلَّهِ وَلِلرَّسُولِ وَلِذِي ٱلۡقُرۡبَىٰ وَٱلۡيَتَٰمَىٰ وَٱلۡمَسَٰكِينِ وَٱبۡنِ ٱلسَّبِيلِ كَيۡ لَا يَكُونَ دُولَةَۢ بَيۡنَ ٱلۡأَغۡنِيَآءِ مِنكُمۡۚ وَمَآ ءَاتَىٰكُمُ ٱلرَّسُولُ فَخُذُوهُ وَمَا نَهَىٰكُمۡ عَنۡهُ فَٱنتَهُواْۚ وَٱتَّقُواْ ٱللَّهَۖ إِنَّ ٱللَّهَ شَدِيدُ ٱلۡعِقَابِ",
-    "translation": "And what Allāh restored to His Messenger from the people of the towns - it is for Allāh and for the Messenger and for [his] near relatives and orphans and the needy and the [stranded] traveler - so that it will not be a perpetual distribution among the rich from among you. And whatever the Messenger has given you - take; and what he has forbidden you - refrain from. And fear Allāh; indeed, Allāh is severe in penalty."
+    "translation": "And what Allāh restored to His Messenger from the people of the towns - it is for Allāh and for the Messenger and for [his] near relatives and orphans and the needy and the [stranded] traveler - so that it will not be a perpetual distribution among the rich from among you. And whatever the Messenger has given you - take; and what he has forbidden you - refrain from. And fear Allāh; indeed, Allāh is severe in penalty.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "4:103": {
     "arabic": "فَإِذَا قَضَيۡتُمُ ٱلصَّلَوٰةَ فَٱذۡكُرُواْ ٱللَّهَ قِيَٰمٗا وَقُعُودٗا وَعَلَىٰ جُنُوبِكُمۡۚ فَإِذَا ٱطۡمَأۡنَنتُمۡ فَأَقِيمُواْ ٱلصَّلَوٰةَۚ إِنَّ ٱلصَّلَوٰةَ كَانَتۡ عَلَى ٱلۡمُؤۡمِنِينَ كِتَٰبٗا مَّوۡقُوتٗا",
-    "translation": "And when you have completed the prayer, remember Allāh standing, sitting, or [lying] on your sides. But when you become secure, re-establish [regular] prayer. Indeed, prayer has been decreed upon the believers a decree of specified times."
+    "translation": "And when you have completed the prayer, remember Allāh standing, sitting, or [lying] on your sides. But when you become secure, re-establish [regular] prayer. Indeed, prayer has been decreed upon the believers a decree of specified times.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "7:31": {
     "arabic": "۞ يَٰبَنِيٓ ءَادَمَ خُذُواْ زِينَتَكُمۡ عِندَ كُلِّ مَسۡجِدٖ وَكُلُواْ وَٱشۡرَبُواْ وَلَا تُسۡرِفُوٓاْۚ إِنَّهُۥ لَا يُحِبُّ ٱلۡمُسۡرِفِينَ",
-    "translation": "O children of Adam, take your adornment [i.e., wear your clothing] at every masjid, and eat and drink, but be not excessive. Indeed, He likes not those who commit excess."
+    "translation": "O children of Adam, take your adornment [i.e., wear your clothing] at every masjid, and eat and drink, but be not excessive. Indeed, He likes not those who commit excess.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "7:157": {
     "arabic": "ٱلَّذِينَ يَتَّبِعُونَ ٱلرَّسُولَ ٱلنَّبِيَّ ٱلۡأُمِّيَّ ٱلَّذِي يَجِدُونَهُۥ مَكۡتُوبًا عِندَهُمۡ فِي ٱلتَّوۡرَىٰةِ وَٱلۡإِنجِيلِ يَأۡمُرُهُم بِٱلۡمَعۡرُوفِ وَيَنۡهَىٰهُمۡ عَنِ ٱلۡمُنكَرِ وَيُحِلُّ لَهُمُ ٱلطَّيِّبَٰتِ وَيُحَرِّمُ عَلَيۡهِمُ ٱلۡخَبَٰٓئِثَ وَيَضَعُ عَنۡهُمۡ إِصۡرَهُمۡ وَٱلۡأَغۡلَٰلَ ٱلَّتِي كَانَتۡ عَلَيۡهِمۡۚ فَٱلَّذِينَ ءَامَنُواْ بِهِۦ وَعَزَّرُوهُ وَنَصَرُوهُ وَٱتَّبَعُواْ ٱلنُّورَ ٱلَّذِيٓ أُنزِلَ مَعَهُۥٓ أُوْلَٰٓئِكَ هُمُ ٱلۡمُفۡلِحُونَ",
-    "translation": "Those who follow the Messenger, the unlettered prophet, whom they find written [i.e., described] in what they have of the Torah and the Gospel, who enjoins upon them what is right and prohibits them from what is wrong and makes lawful for them what is good and forbids them from what is evil and relieves them of their burden and the shackles which were upon them. So they who have believed in him, honored him, supported him and followed the light which was sent down with him - it is those who will be the successful."
+    "translation": "Those who follow the Messenger, the unlettered prophet, whom they find written [i.e., described] in what they have of the Torah and the Gospel, who enjoins upon them what is right and prohibits them from what is wrong and makes lawful for them what is good and forbids them from what is evil and relieves them of their burden and the shackles which were upon them. So they who have believed in him, honored him, supported him and followed the light which was sent down with him - it is those who will be the successful.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "2:168": {
     "arabic": "يَٰٓأَيُّهَا ٱلنَّاسُ كُلُواْ مِمَّا فِي ٱلۡأَرۡضِ حَلَٰلٗا طَيِّبٗا وَلَا تَتَّبِعُواْ خُطُوَٰتِ ٱلشَّيۡطَٰنِۚ إِنَّهُۥ لَكُمۡ عَدُوّٞ مُّبِينٌ",
-    "translation": "O mankind, eat from whatever is on earth [that is] lawful and good and do not follow the footsteps of Satan. Indeed, he is to you a clear enemy."
+    "translation": "O mankind, eat from whatever is on earth [that is] lawful and good and do not follow the footsteps of Satan. Indeed, he is to you a clear enemy.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "2:173": {
     "arabic": "إِنَّمَا حَرَّمَ عَلَيۡكُمُ ٱلۡمَيۡتَةَ وَٱلدَّمَ وَلَحۡمَ ٱلۡخِنزِيرِ وَمَآ أُهِلَّ بِهِۦ لِغَيۡرِ ٱللَّهِۖ فَمَنِ ٱضۡطُرَّ غَيۡرَ بَاغٖ وَلَا عَادٖ فَلَآ إِثۡمَ عَلَيۡهِۚ إِنَّ ٱللَّهَ غَفُورٞ رَّحِيمٌ",
-    "translation": "He has only forbidden to you dead animals, blood, the flesh of swine, and that which has been dedicated to other than Allāh. But whoever is forced [by necessity], neither desiring [it] nor transgressing [its limit], there is no sin upon him. Indeed, Allāh is Forgiving and Merciful."
+    "translation": "He has only forbidden to you dead animals, blood, the flesh of swine, and that which has been dedicated to other than Allāh. But whoever is forced [by necessity], neither desiring [it] nor transgressing [its limit], there is no sin upon him. Indeed, Allāh is Forgiving and Merciful.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "5:3": {
     "arabic": "حُرِّمَتۡ عَلَيۡكُمُ ٱلۡمَيۡتَةُ وَٱلدَّمُ وَلَحۡمُ ٱلۡخِنزِيرِ وَمَآ أُهِلَّ لِغَيۡرِ ٱللَّهِ بِهِۦ وَٱلۡمُنۡخَنِقَةُ وَٱلۡمَوۡقُوذَةُ وَٱلۡمُتَرَدِّيَةُ وَٱلنَّطِيحَةُ وَمَآ أَكَلَ ٱلسَّبُعُ إِلَّا مَا ذَكَّيۡتُمۡ وَمَا ذُبِحَ عَلَى ٱلنُّصُبِ وَأَن تَسۡتَقۡسِمُواْ بِٱلۡأَزۡلَٰمِۚ ذَٰلِكُمۡ فِسۡقٌۗ ٱلۡيَوۡمَ يَئِسَ ٱلَّذِينَ كَفَرُواْ مِن دِينِكُمۡ فَلَا تَخۡشَوۡهُمۡ وَٱخۡشَوۡنِۚ ٱلۡيَوۡمَ أَكۡمَلۡتُ لَكُمۡ دِينَكُمۡ وَأَتۡمَمۡتُ عَلَيۡكُمۡ نِعۡمَتِي وَرَضِيتُ لَكُمُ ٱلۡإِسۡلَٰمَ دِينٗاۚ فَمَنِ ٱضۡطُرَّ فِي مَخۡمَصَةٍ غَيۡرَ مُتَجَانِفٖ لِّإِثۡمٖ فَإِنَّ ٱللَّهَ غَفُورٞ رَّحِيمٞ",
-    "translation": "Prohibited to you are dead animals, blood, the flesh of swine, and that which has been dedicated to other than Allāh, and [those animals] killed by strangling or by a violent blow or by a head-long fall or by the goring of horns, and those from which a wild animal has eaten, except what you [are able to] slaughter [before its death], and those which are sacrificed on stone altars, and [prohibited is] that you seek decision through divining arrows. That is grave disobedience. This day those who disbelieve have despaired of [defeating] your religion; so fear them not, but fear Me. This day I have perfected for you your religion and completed My favor upon you and have approved for you Islām as religion. But whoever is forced by severe hunger with no inclination to sin - then indeed, Allāh is Forgiving and Merciful."
+    "translation": "Prohibited to you are dead animals, blood, the flesh of swine, and that which has been dedicated to other than Allāh, and [those animals] killed by strangling or by a violent blow or by a head-long fall or by the goring of horns, and those from which a wild animal has eaten, except what you [are able to] slaughter [before its death], and those which are sacrificed on stone altars, and [prohibited is] that you seek decision through divining arrows. That is grave disobedience. This day those who disbelieve have despaired of [defeating] your religion; so fear them not, but fear Me. This day I have perfected for you your religion and completed My favor upon you and have approved for you Islām as religion. But whoever is forced by severe hunger with no inclination to sin - then indeed, Allāh is Forgiving and Merciful.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "5:90": {
     "arabic": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوٓاْ إِنَّمَا ٱلۡخَمۡرُ وَٱلۡمَيۡسِرُ وَٱلۡأَنصَابُ وَٱلۡأَزۡلَٰمُ رِجۡسٞ مِّنۡ عَمَلِ ٱلشَّيۡطَٰنِ فَٱجۡتَنِبُوهُ لَعَلَّكُمۡ تُفۡلِحُونَ",
-    "translation": "O you who have believed, indeed, intoxicants, gambling, [sacrificing on] stone alters [to other than Allāh], and divining arrows are but defilement from the work of Satan, so avoid it that you may be successful."
+    "translation": "O you who have believed, indeed, intoxicants, gambling, [sacrificing on] stone alters [to other than Allāh], and divining arrows are but defilement from the work of Satan, so avoid it that you may be successful.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "5:5": {
     "arabic": "ٱلۡيَوۡمَ أُحِلَّ لَكُمُ ٱلطَّيِّبَٰتُۖ وَطَعَامُ ٱلَّذِينَ أُوتُواْ ٱلۡكِتَٰبَ حِلّٞ لَّكُمۡ وَطَعَامُكُمۡ حِلّٞ لَّهُمۡۖ وَٱلۡمُحۡصَنَٰتُ مِنَ ٱلۡمُؤۡمِنَٰتِ وَٱلۡمُحۡصَنَٰتُ مِنَ ٱلَّذِينَ أُوتُواْ ٱلۡكِتَٰبَ مِن قَبۡلِكُمۡ إِذَآ ءَاتَيۡتُمُوهُنَّ أُجُورَهُنَّ مُحۡصِنِينَ غَيۡرَ مُسَٰفِحِينَ وَلَا مُتَّخِذِيٓ أَخۡدَانٖۗ وَمَن يَكۡفُرۡ بِٱلۡإِيمَٰنِ فَقَدۡ حَبِطَ عَمَلُهُۥ وَهُوَ فِي ٱلۡأٓخِرَةِ مِنَ ٱلۡخَٰسِرِينَ",
-    "translation": "This day [all] good foods have been made lawful, and the food of those who were given the Scripture is lawful for you and your food is lawful for them. And [lawful in marriage are] chaste women from among the believers and chaste women from among those who were given the Scripture before you, when you have given them their due compensation, desiring chastity, not unlawful sexual intercourse or taking [secret] lovers. And whoever denies the faith - his work has become worthless, and he, in the Hereafter, will be among the losers."
+    "translation": "This day [all] good foods have been made lawful, and the food of those who were given the Scripture is lawful for you and your food is lawful for them. And [lawful in marriage are] chaste women from among the believers and chaste women from among those who were given the Scripture before you, when you have given them their due compensation, desiring chastity, not unlawful sexual intercourse or taking [secret] lovers. And whoever denies the faith - his work has become worthless, and he, in the Hereafter, will be among the losers.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "7:26": {
     "arabic": "يَٰبَنِيٓ ءَادَمَ قَدۡ أَنزَلۡنَا عَلَيۡكُمۡ لِبَاسٗا يُوَٰرِي سَوۡءَٰتِكُمۡ وَرِيشٗاۖ وَلِبَاسُ ٱلتَّقۡوَىٰ ذَٰلِكَ خَيۡرٞۚ ذَٰلِكَ مِنۡ ءَايَٰتِ ٱللَّهِ لَعَلَّهُمۡ يَذَّكَّرُونَ",
-    "translation": "O children of Adam, We have bestowed upon you clothing to conceal your private parts and as adornment. But the clothing of righteousness - that is best. That is from the signs of Allāh that perhaps they will remember."
+    "translation": "O children of Adam, We have bestowed upon you clothing to conceal your private parts and as adornment. But the clothing of righteousness - that is best. That is from the signs of Allāh that perhaps they will remember.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "24:30": {
     "arabic": "قُل لِّلۡمُؤۡمِنِينَ يَغُضُّواْ مِنۡ أَبۡصَٰرِهِمۡ وَيَحۡفَظُواْ فُرُوجَهُمۡۚ ذَٰلِكَ أَزۡكَىٰ لَهُمۡۚ إِنَّ ٱللَّهَ خَبِيرُۢ بِمَا يَصۡنَعُونَ",
-    "translation": "Tell the believing men to reduce [some] of their vision and guard their private parts. That is purer for them. Indeed, Allāh is [fully] Aware of what they do."
+    "translation": "Tell the believing men to reduce [some] of their vision and guard their private parts. That is purer for them. Indeed, Allāh is [fully] Aware of what they do.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "24:31": {
     "arabic": "وَقُل لِّلۡمُؤۡمِنَٰتِ يَغۡضُضۡنَ مِنۡ أَبۡصَٰرِهِنَّ وَيَحۡفَظۡنَ فُرُوجَهُنَّ وَلَا يُبۡدِينَ زِينَتَهُنَّ إِلَّا مَا ظَهَرَ مِنۡهَاۖ وَلۡيَضۡرِبۡنَ بِخُمُرِهِنَّ عَلَىٰ جُيُوبِهِنَّۖ وَلَا يُبۡدِينَ زِينَتَهُنَّ إِلَّا لِبُعُولَتِهِنَّ أَوۡ ءَابَآئِهِنَّ أَوۡ ءَابَآءِ بُعُولَتِهِنَّ أَوۡ أَبۡنَآئِهِنَّ أَوۡ أَبۡنَآءِ بُعُولَتِهِنَّ أَوۡ إِخۡوَٰنِهِنَّ أَوۡ بَنِيٓ إِخۡوَٰنِهِنَّ أَوۡ بَنِيٓ أَخَوَٰتِهِنَّ أَوۡ نِسَآئِهِنَّ أَوۡ مَا مَلَكَتۡ أَيۡمَٰنُهُنَّ أَوِ ٱلتَّٰبِعِينَ غَيۡرِ أُوْلِي ٱلۡإِرۡبَةِ مِنَ ٱلرِّجَالِ أَوِ ٱلطِّفۡلِ ٱلَّذِينَ لَمۡ يَظۡهَرُواْ عَلَىٰ عَوۡرَٰتِ ٱلنِّسَآءِۖ وَلَا يَضۡرِبۡنَ بِأَرۡجُلِهِنَّ لِيُعۡلَمَ مَا يُخۡفِينَ مِن زِينَتِهِنَّۚ وَتُوبُوٓاْ إِلَى ٱللَّهِ جَمِيعًا أَيُّهَ ٱلۡمُؤۡمِنُونَ لَعَلَّكُمۡ تُفۡلِحُونَ",
-    "translation": "And tell the believing women to reduce [some] of their vision and guard their private parts and not expose their adornment except that which [necessarily] appears thereof and to wrap [a portion of] their headcovers over their chests and not expose their adornment [i.e., beauty] except to their husbands, their fathers, their husbands' fathers, their sons, their husbands' sons, their brothers, their brothers' sons, their sisters' sons, their women, that which their right hands possess [i.e., slaves], or those male attendants having no physical desire, or children who are not yet aware of the private aspects of women. And let them not stamp their feet to make known what they conceal of their adornment. And turn to Allāh in repentance, all of you, O believers, that you might succeed."
+    "translation": "And tell the believing women to reduce [some] of their vision and guard their private parts and not expose their adornment except that which [necessarily] appears thereof and to wrap [a portion of] their headcovers over their chests and not expose their adornment [i.e., beauty] except to their husbands, their fathers, their husbands' fathers, their sons, their husbands' sons, their brothers, their brothers' sons, their sisters' sons, their women, that which their right hands possess [i.e., slaves], or those male attendants having no physical desire, or children who are not yet aware of the private aspects of women. And let them not stamp their feet to make known what they conceal of their adornment. And turn to Allāh in repentance, all of you, O believers, that you might succeed.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "33:59": {
     "arabic": "يَٰٓأَيُّهَا ٱلنَّبِيُّ قُل لِّأَزۡوَٰجِكَ وَبَنَاتِكَ وَنِسَآءِ ٱلۡمُؤۡمِنِينَ يُدۡنِينَ عَلَيۡهِنَّ مِن جَلَٰبِيبِهِنَّۚ ذَٰلِكَ أَدۡنَىٰٓ أَن يُعۡرَفۡنَ فَلَا يُؤۡذَيۡنَۗ وَكَانَ ٱللَّهُ غَفُورٗا رَّحِيمٗا",
-    "translation": "O Prophet, tell your wives and your daughters and the women of the believers to bring down over themselves [part] of their outer garments. That is more suitable that they will be known and not be abused. And ever is Allāh Forgiving and Merciful."
+    "translation": "O Prophet, tell your wives and your daughters and the women of the believers to bring down over themselves [part] of their outer garments. That is more suitable that they will be known and not be abused. And ever is Allāh Forgiving and Merciful.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "17:23": {
     "arabic": "۞ وَقَضَىٰ رَبُّكَ أَلَّا تَعۡبُدُوٓاْ إِلَّآ إِيَّاهُ وَبِٱلۡوَٰلِدَيۡنِ إِحۡسَٰنًاۚ إِمَّا يَبۡلُغَنَّ عِندَكَ ٱلۡكِبَرَ أَحَدُهُمَآ أَوۡ كِلَاهُمَا فَلَا تَقُل لَّهُمَآ أُفّٖ وَلَا تَنۡهَرۡهُمَا وَقُل لَّهُمَا قَوۡلٗا كَرِيمٗا",
-    "translation": "And your Lord has decreed that you worship not except Him, and to parents, good treatment. Whether one or both of them reach old age [while] with you, say not to them [so much as], \"uff,\" and do not repel them but speak to them a noble word."
+    "translation": "And your Lord has decreed that you worship not except Him, and to parents, good treatment. Whether one or both of them reach old age [while] with you, say not to them [so much as], \"uff,\" and do not repel them but speak to them a noble word.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "31:15": {
     "arabic": "وَإِن جَٰهَدَاكَ عَلَىٰٓ أَن تُشۡرِكَ بِي مَا لَيۡسَ لَكَ بِهِۦ عِلۡمٞ فَلَا تُطِعۡهُمَاۖ وَصَاحِبۡهُمَا فِي ٱلدُّنۡيَا مَعۡرُوفٗاۖ وَٱتَّبِعۡ سَبِيلَ مَنۡ أَنَابَ إِلَيَّۚ ثُمَّ إِلَيَّ مَرۡجِعُكُمۡ فَأُنَبِّئُكُم بِمَا كُنتُمۡ تَعۡمَلُونَ",
-    "translation": "But if they endeavor to make you associate with Me that of which you have no knowledge, do not obey them but accompany them in [this] world with appropriate kindness and follow the way of those who turn back to Me [in repentance]. Then to Me will be your return, and I will inform you about what you used to do."
+    "translation": "But if they endeavor to make you associate with Me that of which you have no knowledge, do not obey them but accompany them in [this] world with appropriate kindness and follow the way of those who turn back to Me [in repentance]. Then to Me will be your return, and I will inform you about what you used to do.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "30:21": {
     "arabic": "وَمِنۡ ءَايَٰتِهِۦٓ أَنۡ خَلَقَ لَكُم مِّنۡ أَنفُسِكُمۡ أَزۡوَٰجٗا لِّتَسۡكُنُوٓاْ إِلَيۡهَا وَجَعَلَ بَيۡنَكُم مَّوَدَّةٗ وَرَحۡمَةًۚ إِنَّ فِي ذَٰلِكَ لَأٓيَٰتٖ لِّقَوۡمٖ يَتَفَكَّرُونَ",
-    "translation": "And of His signs is that He created for you from yourselves mates that you may find tranquility in them; and He placed between you affection and mercy. Indeed in that are signs for a people who give thought."
+    "translation": "And of His signs is that He created for you from yourselves mates that you may find tranquility in them; and He placed between you affection and mercy. Indeed in that are signs for a people who give thought.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "62:10": {
     "arabic": "فَإِذَا قُضِيَتِ ٱلصَّلَوٰةُ فَٱنتَشِرُواْ فِي ٱلۡأَرۡضِ وَٱبۡتَغُواْ مِن فَضۡلِ ٱللَّهِ وَٱذۡكُرُواْ ٱللَّهَ كَثِيرٗا لَّعَلَّكُمۡ تُفۡلِحُونَ",
-    "translation": "And when the prayer has been concluded, disperse within the land and seek from the bounty of Allāh, and remember Allāh often that you may succeed."
+    "translation": "And when the prayer has been concluded, disperse within the land and seek from the bounty of Allāh, and remember Allāh often that you may succeed.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "2:275": {
     "arabic": "ٱلَّذِينَ يَأۡكُلُونَ ٱلرِّبَوٰاْ لَا يَقُومُونَ إِلَّا كَمَا يَقُومُ ٱلَّذِي يَتَخَبَّطُهُ ٱلشَّيۡطَٰنُ مِنَ ٱلۡمَسِّۚ ذَٰلِكَ بِأَنَّهُمۡ قَالُوٓاْ إِنَّمَا ٱلۡبَيۡعُ مِثۡلُ ٱلرِّبَوٰاْۗ وَأَحَلَّ ٱللَّهُ ٱلۡبَيۡعَ وَحَرَّمَ ٱلرِّبَوٰاْۚ فَمَن جَآءَهُۥ مَوۡعِظَةٞ مِّن رَّبِّهِۦ فَٱنتَهَىٰ فَلَهُۥ مَا سَلَفَ وَأَمۡرُهُۥٓ إِلَى ٱللَّهِۖ وَمَنۡ عَادَ فَأُوْلَٰٓئِكَ أَصۡحَٰبُ ٱلنَّارِۖ هُمۡ فِيهَا خَٰلِدُونَ",
-    "translation": "Those who consume interest cannot stand [on the Day of Resurrection] except as one stands who is being beaten by Satan into insanity. That is because they say, \"Trade is [just] like interest.\" But Allāh has permitted trade and has forbidden interest. So whoever has received an admonition from his Lord and desists may have what is past, and his affair rests with Allāh. But whoever returns [to dealing in interest or usury] - those are the companions of the Fire; they will abide eternally therein."
+    "translation": "Those who consume interest cannot stand [on the Day of Resurrection] except as one stands who is being beaten by Satan into insanity. That is because they say, \"Trade is [just] like interest.\" But Allāh has permitted trade and has forbidden interest. So whoever has received an admonition from his Lord and desists may have what is past, and his affair rests with Allāh. But whoever returns [to dealing in interest or usury] - those are the companions of the Fire; they will abide eternally therein.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "49:11": {
     "arabic": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُواْ لَا يَسۡخَرۡ قَوۡمٞ مِّن قَوۡمٍ عَسَىٰٓ أَن يَكُونُواْ خَيۡرٗا مِّنۡهُمۡ وَلَا نِسَآءٞ مِّن نِّسَآءٍ عَسَىٰٓ أَن يَكُنَّ خَيۡرٗا مِّنۡهُنَّۖ وَلَا تَلۡمِزُوٓاْ أَنفُسَكُمۡ وَلَا تَنَابَزُواْ بِٱلۡأَلۡقَٰبِۖ بِئۡسَ ٱلِٱسۡمُ ٱلۡفُسُوقُ بَعۡدَ ٱلۡإِيمَٰنِۚ وَمَن لَّمۡ يَتُبۡ فَأُوْلَٰٓئِكَ هُمُ ٱلظَّٰلِمُونَ",
-    "translation": "O you who have believed, let not a people ridicule [another] people; perhaps they may be better than them; nor let women ridicule [other] women; perhaps they may be better than them. And do not insult one another and do not call each other by [offensive] nicknames. Wretched is the name [i.e., mention] of disobedience after [one's] faith. And whoever does not repent - then it is those who are the wrongdoers."
+    "translation": "O you who have believed, let not a people ridicule [another] people; perhaps they may be better than them; nor let women ridicule [other] women; perhaps they may be better than them. And do not insult one another and do not call each other by [offensive] nicknames. Wretched is the name [i.e., mention] of disobedience after [one's] faith. And whoever does not repent - then it is those who are the wrongdoers.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "49:12": {
     "arabic": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُواْ ٱجۡتَنِبُواْ كَثِيرٗا مِّنَ ٱلظَّنِّ إِنَّ بَعۡضَ ٱلظَّنِّ إِثۡمٞۖ وَلَا تَجَسَّسُواْ وَلَا يَغۡتَب بَّعۡضُكُم بَعۡضًاۚ أَيُحِبُّ أَحَدُكُمۡ أَن يَأۡكُلَ لَحۡمَ أَخِيهِ مَيۡتٗا فَكَرِهۡتُمُوهُۚ وَٱتَّقُواْ ٱللَّهَۚ إِنَّ ٱللَّهَ تَوَّابٞ رَّحِيمٞ",
-    "translation": "O you who have believed, avoid much [negative] assumption. Indeed, some assumption is sin. And do not spy or backbite each other. Would one of you like to eat the flesh of his brother when dead? You would detest it. And fear Allāh; indeed, Allāh is Accepting of Repentance and Merciful."
+    "translation": "O you who have believed, avoid much [negative] assumption. Indeed, some assumption is sin. And do not spy or backbite each other. Would one of you like to eat the flesh of his brother when dead? You would detest it. And fear Allāh; indeed, Allāh is Accepting of Repentance and Merciful.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "2:186": {
     "arabic": "وَإِذَا سَأَلَكَ عِبَادِي عَنِّي فَإِنِّي قَرِيبٌۖ أُجِيبُ دَعۡوَةَ ٱلدَّاعِ إِذَا دَعَانِۖ فَلۡيَسۡتَجِيبُواْ لِي وَلۡيُؤۡمِنُواْ بِي لَعَلَّهُمۡ يَرۡشُدُونَ",
-    "translation": "And when My servants ask you, [O Muḥammad], concerning Me - indeed I am near. I respond to the invocation of the supplicant when he calls upon Me. So let them respond to Me [by obedience] and believe in Me that they may be [rightly] guided."
+    "translation": "And when My servants ask you, [O Muḥammad], concerning Me - indeed I am near. I respond to the invocation of the supplicant when he calls upon Me. So let them respond to Me [by obedience] and believe in Me that they may be [rightly] guided.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "13:28": {
     "arabic": "ٱلَّذِينَ ءَامَنُواْ وَتَطۡمَئِنُّ قُلُوبُهُم بِذِكۡرِ ٱللَّهِۗ أَلَا بِذِكۡرِ ٱللَّهِ تَطۡمَئِنُّ ٱلۡقُلُوبُ",
-    "translation": "Those who have believed and whose hearts are assured by the remembrance of Allāh. Unquestionably, by the remembrance of Allāh hearts are assured.\""
+    "translation": "Those who have believed and whose hearts are assured by the remembrance of Allāh. Unquestionably, by the remembrance of Allāh hearts are assured.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "39:53": {
     "arabic": "۞ قُلۡ يَٰعِبَادِيَ ٱلَّذِينَ أَسۡرَفُواْ عَلَىٰٓ أَنفُسِهِمۡ لَا تَقۡنَطُواْ مِن رَّحۡمَةِ ٱللَّهِۚ إِنَّ ٱللَّهَ يَغۡفِرُ ٱلذُّنُوبَ جَمِيعًاۚ إِنَّهُۥ هُوَ ٱلۡغَفُورُ ٱلرَّحِيمُ",
-    "translation": "Say, \"O My servants who have transgressed against themselves [by sinning], do not despair of the mercy of Allāh. Indeed, Allāh forgives all sins. Indeed, it is He who is the Forgiving, the Merciful.\""
+    "translation": "Say, \"O My servants who have transgressed against themselves [by sinning], do not despair of the mercy of Allāh. Indeed, Allāh forgives all sins. Indeed, it is He who is the Forgiving, the Merciful.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "66:8": {
     "arabic": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُواْ تُوبُوٓاْ إِلَى ٱللَّهِ تَوۡبَةٗ نَّصُوحًا عَسَىٰ رَبُّكُمۡ أَن يُكَفِّرَ عَنكُمۡ سَيِّـَٔاتِكُمۡ وَيُدۡخِلَكُمۡ جَنَّٰتٖ تَجۡرِي مِن تَحۡتِهَا ٱلۡأَنۡهَٰرُ يَوۡمَ لَا يُخۡزِي ٱللَّهُ ٱلنَّبِيَّ وَٱلَّذِينَ ءَامَنُواْ مَعَهُۥۖ نُورُهُمۡ يَسۡعَىٰ بَيۡنَ أَيۡدِيهِمۡ وَبِأَيۡمَٰنِهِمۡ يَقُولُونَ رَبَّنَآ أَتۡمِمۡ لَنَا نُورَنَا وَٱغۡفِرۡ لَنَآۖ إِنَّكَ عَلَىٰ كُلِّ شَيۡءٖ قَدِيرٞ",
-    "translation": "O you who have believed, repent to Allāh with sincere repentance. Perhaps your Lord will remove from you your misdeeds and admit you into gardens beneath which rivers flow [on] the Day when Allāh will not disgrace the Prophet and those who believed with him. Their light will proceed before them and on their right; they will say, \"Our Lord, perfect for us our light and forgive us. Indeed, You are over all things competent.\""
+    "translation": "O you who have believed, repent to Allāh with sincere repentance. Perhaps your Lord will remove from you your misdeeds and admit you into gardens beneath which rivers flow [on] the Day when Allāh will not disgrace the Prophet and those who believed with him. Their light will proceed before them and on their right; they will say, \"Our Lord, perfect for us our light and forgive us. Indeed, You are over all things competent.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "2:153": {
     "arabic": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُواْ ٱسۡتَعِينُواْ بِٱلصَّبۡرِ وَٱلصَّلَوٰةِۚ إِنَّ ٱللَّهَ مَعَ ٱلصَّٰبِرِينَ",
-    "translation": "O you who have believed, seek help through patience and prayer. Indeed, Allāh is with the patient."
+    "translation": "O you who have believed, seek help through patience and prayer. Indeed, Allāh is with the patient.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "14:7": {
     "arabic": "وَإِذۡ تَأَذَّنَ رَبُّكُمۡ لَئِن شَكَرۡتُمۡ لَأَزِيدَنَّكُمۡۖ وَلَئِن كَفَرۡتُمۡ إِنَّ عَذَابِي لَشَدِيدٞ",
-    "translation": "And [remember] when your Lord proclaimed, 'If you are grateful, I will surely increase you [in favor]; but if you deny, indeed, My punishment is severe.'\""
+    "translation": "And [remember] when your Lord proclaimed, 'If you are grateful, I will surely increase you [in favor]; but if you deny, indeed, My punishment is severe.'\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "9:36": {
     "arabic": "إِنَّ عِدَّةَ ٱلشُّهُورِ عِندَ ٱللَّهِ ٱثۡنَا عَشَرَ شَهۡرٗا فِي كِتَٰبِ ٱللَّهِ يَوۡمَ خَلَقَ ٱلسَّمَٰوَٰتِ وَٱلۡأَرۡضَ مِنۡهَآ أَرۡبَعَةٌ حُرُمٞۚ ذَٰلِكَ ٱلدِّينُ ٱلۡقَيِّمُۚ فَلَا تَظۡلِمُواْ فِيهِنَّ أَنفُسَكُمۡۚ وَقَٰتِلُواْ ٱلۡمُشۡرِكِينَ كَآفَّةٗ كَمَا يُقَٰتِلُونَكُمۡ كَآفَّةٗۚ وَٱعۡلَمُوٓاْ أَنَّ ٱللَّهَ مَعَ ٱلۡمُتَّقِينَ",
-    "translation": "Indeed, the number of months with Allāh is twelve [lunar] months in the register of Allāh [from] the day He created the heavens and the earth; of these, four are sacred. That is the correct religion [i.e., way], so do not wrong yourselves during them. And fight against the disbelievers collectively as they fight against you collectively. And know that Allāh is with the righteous [who fear Him]."
+    "translation": "Indeed, the number of months with Allāh is twelve [lunar] months in the register of Allāh [from] the day He created the heavens and the earth; of these, four are sacred. That is the correct religion [i.e., way], so do not wrong yourselves during them. And fight against the disbelievers collectively as they fight against you collectively. And know that Allāh is with the righteous [who fear Him].",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "2:185": {
     "arabic": "شَهۡرُ رَمَضَانَ ٱلَّذِيٓ أُنزِلَ فِيهِ ٱلۡقُرۡءَانُ هُدٗى لِّلنَّاسِ وَبَيِّنَٰتٖ مِّنَ ٱلۡهُدَىٰ وَٱلۡفُرۡقَانِۚ فَمَن شَهِدَ مِنكُمُ ٱلشَّهۡرَ فَلۡيَصُمۡهُۖ وَمَن كَانَ مَرِيضًا أَوۡ عَلَىٰ سَفَرٖ فَعِدَّةٞ مِّنۡ أَيَّامٍ أُخَرَۗ يُرِيدُ ٱللَّهُ بِكُمُ ٱلۡيُسۡرَ وَلَا يُرِيدُ بِكُمُ ٱلۡعُسۡرَ وَلِتُكۡمِلُواْ ٱلۡعِدَّةَ وَلِتُكَبِّرُواْ ٱللَّهَ عَلَىٰ مَا هَدَىٰكُمۡ وَلَعَلَّكُمۡ تَشۡكُرُونَ",
-    "translation": "The month of Ramaḍān [is that] in which was revealed the Qur’ān, a guidance for the people and clear proofs of guidance and criterion. So whoever sights [the crescent of] the month, let him fast it; and whoever is ill or on a journey - then an equal number of other days. Allāh intends for you ease and does not intend for you hardship and [wants] for you to complete the period and to glorify Allāh for that [to] which He has guided you; and perhaps you will be grateful."
+    "translation": "The month of Ramaḍān [is that] in which was revealed the Qur’ān, a guidance for the people and clear proofs of guidance and criterion. So whoever sights [the crescent of] the month, let him fast it; and whoever is ill or on a journey - then an equal number of other days. Allāh intends for you ease and does not intend for you hardship and [wants] for you to complete the period and to glorify Allāh for that [to] which He has guided you; and perhaps you will be grateful.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "2:183": {
     "arabic": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُواْ كُتِبَ عَلَيۡكُمُ ٱلصِّيَامُ كَمَا كُتِبَ عَلَى ٱلَّذِينَ مِن قَبۡلِكُمۡ لَعَلَّكُمۡ تَتَّقُونَ",
-    "translation": "O you who have believed, decreed upon you is fasting as it was decreed upon those before you that you may become righteous -"
+    "translation": "O you who have believed, decreed upon you is fasting as it was decreed upon those before you that you may become righteous -",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "2:187": {
     "arabic": "أُحِلَّ لَكُمۡ لَيۡلَةَ ٱلصِّيَامِ ٱلرَّفَثُ إِلَىٰ نِسَآئِكُمۡۚ هُنَّ لِبَاسٞ لَّكُمۡ وَأَنتُمۡ لِبَاسٞ لَّهُنَّۗ عَلِمَ ٱللَّهُ أَنَّكُمۡ كُنتُمۡ تَخۡتَانُونَ أَنفُسَكُمۡ فَتَابَ عَلَيۡكُمۡ وَعَفَا عَنكُمۡۖ فَٱلۡـَٰٔنَ بَٰشِرُوهُنَّ وَٱبۡتَغُواْ مَا كَتَبَ ٱللَّهُ لَكُمۡۚ وَكُلُواْ وَٱشۡرَبُواْ حَتَّىٰ يَتَبَيَّنَ لَكُمُ ٱلۡخَيۡطُ ٱلۡأَبۡيَضُ مِنَ ٱلۡخَيۡطِ ٱلۡأَسۡوَدِ مِنَ ٱلۡفَجۡرِۖ ثُمَّ أَتِمُّواْ ٱلصِّيَامَ إِلَى ٱلَّيۡلِۚ وَلَا تُبَٰشِرُوهُنَّ وَأَنتُمۡ عَٰكِفُونَ فِي ٱلۡمَسَٰجِدِۗ تِلۡكَ حُدُودُ ٱللَّهِ فَلَا تَقۡرَبُوهَاۗ كَذَٰلِكَ يُبَيِّنُ ٱللَّهُ ءَايَٰتِهِۦ لِلنَّاسِ لَعَلَّهُمۡ يَتَّقُونَ",
-    "translation": "It has been made permissible for you the night preceding fasting to go to your wives [for sexual relations]. They are a clothing for you and you are a clothing for them. Allāh knows that you used to deceive yourselves, so He accepted your repentance and forgave you. So now, have relations with them and seek that which Allāh has decreed for you [i.e., offspring]. And eat and drink until the white thread of dawn becomes distinct to you from the black thread [of night]. Then complete the fast until the night [i.e., sunset]. And do not have relations with them as long as you are staying for worship in the mosques. These are the limits [set by] Allāh, so do not approach them. Thus does Allāh make clear His verses [i.e., ordinances] to the people that they may become righteous."
+    "translation": "It has been made permissible for you the night preceding fasting to go to your wives [for sexual relations]. They are a clothing for you and you are a clothing for them. Allāh knows that you used to deceive yourselves, so He accepted your repentance and forgave you. So now, have relations with them and seek that which Allāh has decreed for you [i.e., offspring]. And eat and drink until the white thread of dawn becomes distinct to you from the black thread [of night]. Then complete the fast until the night [i.e., sunset]. And do not have relations with them as long as you are staying for worship in the mosques. These are the limits [set by] Allāh, so do not approach them. Thus does Allāh make clear His verses [i.e., ordinances] to the people that they may become righteous.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "2:184": {
     "arabic": "أَيَّامٗا مَّعۡدُودَٰتٖۚ فَمَن كَانَ مِنكُم مَّرِيضًا أَوۡ عَلَىٰ سَفَرٖ فَعِدَّةٞ مِّنۡ أَيَّامٍ أُخَرَۚ وَعَلَى ٱلَّذِينَ يُطِيقُونَهُۥ فِدۡيَةٞ طَعَامُ مِسۡكِينٖۖ فَمَن تَطَوَّعَ خَيۡرٗا فَهُوَ خَيۡرٞ لَّهُۥۚ وَأَن تَصُومُواْ خَيۡرٞ لَّكُمۡ إِن كُنتُمۡ تَعۡلَمُونَ",
-    "translation": "[Fasting for] a limited number of days. So whoever among you is ill or on a journey [during them] - then an equal number of other days [are to be made up]. And upon those who are able [to fast, but with hardship] - a ransom [as substitute] of feeding a poor person [each day]. And whoever volunteers good [i.e., excess] - it is better for him. But to fast is best for you, if you only knew."
+    "translation": "[Fasting for] a limited number of days. So whoever among you is ill or on a journey [during them] - then an equal number of other days [are to be made up]. And upon those who are able [to fast, but with hardship] - a ransom [as substitute] of feeding a poor person [each day]. And whoever volunteers good [i.e., excess] - it is better for him. But to fast is best for you, if you only knew.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "97:1-5": {
     "arabic": "إِنَّآ أَنزَلۡنَٰهُ فِي لَيۡلَةِ ٱلۡقَدۡرِ وَمَآ أَدۡرَىٰكَ مَا لَيۡلَةُ ٱلۡقَدۡرِ لَيۡلَةُ ٱلۡقَدۡرِ خَيۡرٞ مِّنۡ أَلۡفِ شَهۡرٖ تَنَزَّلُ ٱلۡمَلَٰٓئِكَةُ وَٱلرُّوحُ فِيهَا بِإِذۡنِ رَبِّهِم مِّن كُلِّ أَمۡرٖ سَلَٰمٌ هِيَ حَتَّىٰ مَطۡلَعِ ٱلۡفَجۡرِ",
-    "translation": "Indeed, We sent it [i.e., the Qur’ān] down during the Night of Decree. And what can make you know what is the Night of Decree? The Night of Decree is better than a thousand months. The angels and the Spirit [i.e., Gabriel] descend therein by permission of their Lord for every matter. Peace it is until the emergence of dawn."
+    "translation": "Indeed, We sent it [i.e., the Qur’ān] down during the Night of Decree. And what can make you know what is the Night of Decree? The Night of Decree is better than a thousand months. The angels and the Spirit [i.e., Gabriel] descend therein by permission of their Lord for every matter. Peace it is until the emergence of dawn.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "17:79": {
     "arabic": "وَمِنَ ٱلَّيۡلِ فَتَهَجَّدۡ بِهِۦ نَافِلَةٗ لَّكَ عَسَىٰٓ أَن يَبۡعَثَكَ رَبُّكَ مَقَامٗا مَّحۡمُودٗا",
-    "translation": "And from [part of] the night, pray with it [i.e., recitation of the Qur’ān] as additional [worship] for you; it is expected that your Lord will resurrect you to a praised station."
+    "translation": "And from [part of] the night, pray with it [i.e., recitation of the Qur’ān] as additional [worship] for you; it is expected that your Lord will resurrect you to a praised station.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "4:101": {
     "arabic": "وَإِذَا ضَرَبۡتُمۡ فِي ٱلۡأَرۡضِ فَلَيۡسَ عَلَيۡكُمۡ جُنَاحٌ أَن تَقۡصُرُواْ مِنَ ٱلصَّلَوٰةِ إِنۡ خِفۡتُمۡ أَن يَفۡتِنَكُمُ ٱلَّذِينَ كَفَرُوٓاْۚ إِنَّ ٱلۡكَٰفِرِينَ كَانُواْ لَكُمۡ عَدُوّٗا مُّبِينٗا",
-    "translation": "And when you travel throughout the land, there is no blame upon you for shortening the prayer, [especially] if you fear that those who disbelieve may disrupt [or attack] you. Indeed, the disbelievers are ever to you a clear enemy."
+    "translation": "And when you travel throughout the land, there is no blame upon you for shortening the prayer, [especially] if you fear that those who disbelieve may disrupt [or attack] you. Indeed, the disbelievers are ever to you a clear enemy.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "3:97": {
     "arabic": "فِيهِ ءَايَٰتُۢ بَيِّنَٰتٞ مَّقَامُ إِبۡرَٰهِيمَۖ وَمَن دَخَلَهُۥ كَانَ ءَامِنٗاۗ وَلِلَّهِ عَلَى ٱلنَّاسِ حِجُّ ٱلۡبَيۡتِ مَنِ ٱسۡتَطَاعَ إِلَيۡهِ سَبِيلٗاۚ وَمَن كَفَرَ فَإِنَّ ٱللَّهَ غَنِيٌّ عَنِ ٱلۡعَٰلَمِينَ",
-    "translation": "In it are clear signs [such as] the standing place of Abraham. And whoever enters it [i.e., the Ḥaram] shall be safe. And [due] to Allāh from the people is a pilgrimage to the House - for whoever is able to find thereto a way. But whoever disbelieves [i.e., refuses] - then indeed, Allāh is free from need of the worlds."
+    "translation": "In it are clear signs [such as] the standing place of Abraham. And whoever enters it [i.e., the Ḥaram] shall be safe. And [due] to Allāh from the people is a pilgrimage to the House - for whoever is able to find thereto a way. But whoever disbelieves [i.e., refuses] - then indeed, Allāh is free from need of the worlds.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "4:86": {
     "arabic": "وَإِذَا حُيِّيتُم بِتَحِيَّةٖ فَحَيُّواْ بِأَحۡسَنَ مِنۡهَآ أَوۡ رُدُّوهَآۗ إِنَّ ٱللَّهَ كَانَ عَلَىٰ كُلِّ شَيۡءٍ حَسِيبًا",
-    "translation": "And when you are greeted with a greeting, greet [in return] with one better than it or [at least] return it [in a like manner]. Indeed Allāh is ever, over all things, an Accountant."
+    "translation": "And when you are greeted with a greeting, greet [in return] with one better than it or [at least] return it [in a like manner]. Indeed Allāh is ever, over all things, an Accountant.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   },
   "2:156": {
     "arabic": "ٱلَّذِينَ إِذَآ أَصَٰبَتۡهُم مُّصِيبَةٞ قَالُوٓاْ إِنَّا لِلَّهِ وَإِنَّآ إِلَيۡهِ رَٰجِعُونَ",
-    "translation": "Who, when disaster strikes them, say, \"Indeed we belong to Allāh, and indeed to Him we will return.\""
+    "translation": "Who, when disaster strikes them, say, \"Indeed we belong to Allāh, and indeed to Him we will return.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
   }
 };
 
 /**
- * Keyed by the app's own Arabic — the exact string a recitation or duʿa holds.
+ * Keyed `bukhari:159` — collection and the number that collection prints.
  *
- * Not by HadeethEnc id, and not by the citation. The only thing containment
- * proved is that these words appear in this narration, so that is the only
- * thing this map claims. Which narration a given ruling rests on is a
- * judgement, and it stays with a person.
+ * Keyed by the citation because the citation now resolves. An earlier version
+ * keyed these by the app's own Arabic, because searching was the only way to
+ * reach a narration and containment the only thing a search could prove. That
+ * left every citation on an INSTRUCTION unreachable — "wash both hands up to
+ * the wrists" has no Arabic to search with — which was most of them.
  */
-export const HADITH_TEXT: Record<string, EvidenceText & { id: string }> = {
-  "اللَّهُ أَكْبَرُ": {
-    "id": "65086",
-    "arabic": "عن عمر بن الخطاب رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: «إِذَا قَالَ الْمُؤَذِّنُ: اللهُ أَكْبَرُ اللهُ أَكْبَرُ، فَقَالَ أَحَدُكُمُ: اللهُ أَكْبَرُ اللهُ أَكْبَرُ، ثُمَّ قَالَ: أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللهُ، قَالَ: أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللهُ، ثُمَّ قَالَ: أَشْهَدُ أَنَّ مُحَمَّدًا رَسُولُ اللهِ، قَالَ: أَشْهَدُ أَنَّ مُحَمَّدًا رَسُولُ اللهِ، ثُمَّ قَالَ: حَيَّ عَلَى الصَّلَاةِ، قَالَ: لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللهِ، ثُمَّ قَالَ: حَيَّ عَلَى الْفَلَاحِ، قَالَ: لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللهِ، ثُمَّ قَالَ: اللهُ أَكْبَرُ اللهُ أَكْبَرُ، قَالَ: اللهُ أَكْبَرُ اللهُ أَكْبَرُ، ثُمَّ قَالَ: لَا إِلَهَ إِلَّا اللهُ، قَالَ: لَا إِلَهَ إِلَّا اللهُ مِنْ قَلْبِهِ دَخَلَ الْجَنَّةَ».",
-    "translation": "‘Umar ibn al-Khattāb (may Allah be pleased with him) reported: The Messenger of Allah (may Allah’s peace and blessings be upon him) said: \"When the Muezzin (the caller to prayer) says, 'Allahu akbar, Allahu akbar' (Allah is the Greatest), and one of you says 'Allahu akbar, Allahu akbar', and then he says, 'Ash'hadu an lā ilāh illa Allah' (I bear witness that there is no god but Allah), and he says, 'Ash'hadu an lā ilāh illa Allah', and then he says, 'Ash'hadu anna Muhammadan rasūl Allah' (I bear witness that Muhammad is the Messenger of Allah), and he says, 'Ash'hadu anna Muhammadan rasūl Allah', and then he says, 'Hayy ‘ala as-salāh' (Come to prayer), and he says, 'Lā hawla wala quwwata illa billāh' (There is no power or strength except through Allah), and then he says, 'Hayy ‘ala al-falāh' (Come to success), and he says, 'Lā hawla wala quwwata illa billāh', and then he says, 'Allahu akbar, Allahu akbar', and he says, 'Allahu akbar, Allahu akbar', and then he says, 'lā ilāh illa Allah', and he says 'lā ilāh illa Allah' from his heart, he will enter Paradise.\"",
-    "attribution": "Narrated by Muslim",
-    "grade": "Authentic"
+export const HADITH_TEXT: Record<string, EvidenceText> = {
+  "bukhari:8": {
+    "arabic": "عَنْ جَرِيرِِ بْنِ عَبْدِ اللَّهِ رضي الله عنه قَالَ: بَايَعْتُ رَسُولَ اللَّهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ عَلَى شَهَادَةِ أَنْ لاَ إِلَهَ إِلَّا اللَّهُ، وَأَنَّ مُحَمَّدًا رَسُولُ اللَّهِ، وَإِقَامِ الصَّلاَةِ، وَإِيتَاءِ الزَّكَاةِ، وَالسَّمْعِ وَالطَّاعَةِ، وَالنُّصْحِ لِكُلِّ مُسْلِمٍ.",
+    "translation": "Jarīr ibn ‘Abdullah (may Allah be pleased with him) reported: I gave the Messenger of Allah (may Allah's peace and blessings be upon him) a pledge to testify that there is no god but Allah and that Muhammad is the Messenger of Allah, to establish the prayer, to pay Zakah, to hear and obey, and to give sincere advice to every Muslim.",
+    "attribution": "Agreed upon",
+    "grade": "Authentic",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
   },
-  "سُبْحَانَ رَبِّيَ الْعَظِيمِ": {
-    "id": "3727",
-    "arabic": "عن حذيفة بن اليمان رضي الله عنهما قال: صليت مع النبي صلى الله عليه وسلم ذات ليلة فَافْتَتَحَ البقرة، فقلت: يركع عند المئة، ثم مضى، فقلت: يصلي بها في ركعة فمضى، فقلت: يركع بها، ثم افتتح النساء فقرأها، ثم افتتح آل عمران فقرأها، يقرأ مُتَرَسِّلًا: إذا مَر بآية فيها تَسبِيحٌ سَبَّحَ، وإذا مَر بسؤال سَأل، وإذا مَر بِتَعَوُّذٍ تَعَوَّذَ، ثم ركع، فجعل يقول: «سبحان ربي العظيم» فكان ركوعه نحوًا من قِيَامِهِ، ثم قال: «سمع الله لمن حمده، ربنا لك الحمد» ثم قام طويلًا قريبا مما ركع، ثم سجد، فقال: «سبحان ربي الأعلى» فكان سجوده قريبًا من قيامه.",
-    "translation": "Hudhayfah ibn al-Yamān (may Allah be pleased with him) reported: I prayed with the Prophet (may Allah's peace and blessings be upon him) once at night and he started reciting Sūrat al-Baqarah. I thought that he would bow in Rukū‘ at the end of one hundred verses, but he continued. I thought that he would probably recite it (this Sūrah only) in one Rak‘ah, but he continued. I thought he would perhaps bow in Rukū‘ on completing (this Sūrah). He then started reciting Sūrat An-Nisā’ and read it all, then he started reciting Sūrat Āl-‘Imrān and read it all. He recited slowly; when he came across a verse of Tasbīh (glorifying Allah), he would glorify Him, and when he came come across a verse of requesting Allah (something), he would request it from Him, and when he came across a verse of seeking refuge (with Allah), he would seek refuge (with Him). Then he bowed in Rukū‘ and said: \"Glory be to our Lord, the Most Great\". His bowing lasted about the same length of time as his standing. Upon rising from Rukū‘, he said: \"Allah listens to he who praises Him; praise be to You, Our Lord!\" He then remained standing about the same length of time as he had spent in bowing. He then prostrated and said: \"Gory be to our Lord, the Most High\", and his prostration lasted nearly the same length of time as his standing.",
-    "attribution": "Narrated by Muslim",
-    "grade": "Authentic hadith"
+  "bukhari:1": {
+    "arabic": "عَنْ أَمِيرِ المُؤْمِنِينَ أَبِي حَفْصٍ عُمَرَ بْنِ الخَطَّابِ رضي الله عنه قَالَ: سَمِعْتُ رَسُولَ اللَّهِ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ يَقُولُ: «إنَّمَا الأَعْمَالُ بِالنِّيَّاتِ، وَإِنَّمَا لِكُلِّ امْرِئٍ مَا نَوَى، فَمَنْ كَانَتْ هِجْرَتُهُ إلَى اللَّهِ وَرَسُولِهِ فَهِجْرَتُهُ إلَى اللَّهِ وَرَسُولِهِ، وَمَنْ كَانَتْ هِجْرَتُهُ لِدُنْيَا يُصِيبُهَا أَوْ امْرَأَةٍ يَنْكِحُهَا فَهِجْرَتُهُ إلَى مَا هَاجَرَ إلَيْهِ».",
+    "translation": "The Commander of the Believers, Abu Hafs ‘Umar ibn al-Khattāb (may Allah be pleased with him) reported: I heard the Messenger of Allah (ﷺ) say: \"Verily, the reward of deeds depends on intentions, and each person will be rewarded according to what he intended. So, he whose emigration is for the sake of Allah and His Messenger, his emigration will be for the sake of Allah and His Messenger, and he whose emigration is to achieve some worldly gain or take some woman in marriage, his migration will be for what he has migrated for.\"",
+    "attribution": "It was narrated by the two Imāms of the scholars of Hadīth - Abu ‘Abdullāh Muhammad ibn Ismā‘īl ibn Ibrāhīm ibn al-Mughīrah ibn Bardizbah al-Bukhāri and Abu al-Husayn Muslim ibn al-Hajjāj ibn Muslim a",
+    "grade": "Authentic",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
   },
-  "سَمِعَ اللَّهُ لِمَنْ حَمِدَهُ، رَبَّنَا وَلَكَ الْحَمْدُ": {
-    "id": "3095",
+  "muslim:121": {
+    "arabic": "حَدَّثَنَا أَبُو بَكْرِ بْنُ أَبِي شَيْبَةَ، وَأَبُو كُرَيْبٍ وَإِسْحَاقُ بْنُ إِبْرَاهِيمَ جَمِيعًا عَنْ وَكِيعٍ، - قَالَ أَبُو بَكْرٍ حَدَّثَنَا وَكِيعٌ، - عَنْ زَكَرِيَّاءَ بْنِ إِسْحَاقَ، قَالَ حَدَّثَنِي يَحْيَى بْنُ عَبْدِ اللَّهِ بْنِ صَيْفِيٍّ، عَنْ أَبِي مَعْبَدٍ، عَنِ ابْنِ عَبَّاسٍ، عَنْ مُعَاذِ بْنِ جَبَلٍ، - قَالَ أَبُو بَكْرٍ رُبَّمَا قَالَ وَكِيعٌ عَنِ ابْنِ عَبَّاسٍ، أَنَّ مُعَاذًا، - قَالَ بَعَثَنِي رَسُولُ اللَّهِ صلى الله عليه وسلم قَالَ ‏ \"‏ إِنَّكَ تَأْتِي قَوْمًا مِنْ أَهْلِ الْكِتَابِ ‏.‏ فَادْعُهُمْ إِلَى شَهَادَةِ أَنْ لاَ إِلَهَ إِلاَّ اللَّهُ وَأَنِّي رَسُولُ اللَّهِ فَإِنْ هُمْ أَطَاعُوا لِذَلِكَ فَأَعْلِمْهُمْ أَنَّ اللَّهَ افْتَرَضَ عَلَيْهِمْ خَمْسَ صَلَوَاتٍ فِي كُلِّ يَوْمٍ وَلَيْلَةٍ فَإِنْ هُمْ أَطَاعُوا لِذَلِكَ فَأَعْلِمْهُمْ أَنَّ اللَّهَ افْتَرَضَ عَلَيْهِمْ صَدَقَةً تُؤْخَذُ مِنْ أَغْنِيَائِهِمْ فَتُرَدُّ فِي فُقَرَائِهِمْ فَإِنْ هُمْ أَطَاعُوا لِذَلِكَ فَإِيَّاكَ وَكَرَائِمَ أَمْوَالِهِمْ وَاتَّقِ دَعْوَةَ الْمَظْلُومِ فَإِنَّهُ لَيْسَ بَيْنَهَا وَبَيْنَ اللَّهِ حِجَابٌ ‏\"‏ ‏.‏",
+    "translation": "It is reported on the authority of Ibn 'Abbas that Mu'adh said:The Messenger of Allah sent me (as a governor of Yemen) and (at the time of departure) instructed me thus: You will soon find yourself in a community one among the people of the Book, so first call them to testify that there is no god but Allah, that I (Muhammad) am the messenger of Allah, and if they accept this, then tell them Allah has enjoined upon them five prayers during the day and the night and if they accept it, then tell them that Allah has made Zakat obligatory for them that it should be collected from the rich and distributed among the poor, and if they agree to it don't pick up (as a share of Zakat) the best of their wealths. Beware of the supplication of the oppressed for there is no barrier between him and Allah",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "abu-dawud:355": {
+    "arabic": "حَدَّثَنَا مُحَمَّدُ بْنُ كَثِيرٍ الْعَبْدِيُّ، أَخْبَرَنَا سُفْيَانُ، حَدَّثَنَا الأَغَرُّ، عَنْ خَلِيفَةَ بْنِ حُصَيْنٍ، عَنْ جَدِّهِ، قَيْسِ بْنِ عَاصِمٍ قَالَ أَتَيْتُ النَّبِيَّ صلى الله عليه وسلم أُرِيدُ الإِسْلاَمَ فَأَمَرَنِي أَنْ أَغْتَسِلَ بِمَاءٍ وَسِدْرٍ ‏.‏",
+    "translation": "Narrated Qays ibn Asim: I came to the Prophet (ﷺ) with the intention of embracing Islam. He commanded me to take a bath with water (boiled with) the leaves of the lote-tree",
+    "grade": "Sahih (Al-Albani) · Sahih (Muhammad Muhyi Al-Din Abdul Hamid) · Sahih (Zubair Ali Zai)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:159": {
+    "arabic": "حَدَّثَنَا عَبْدُ الْعَزِيزِ بْنُ عَبْدِ اللَّهِ الأُوَيْسِيُّ، قَالَ حَدَّثَنِي إِبْرَاهِيمُ بْنُ سَعْدٍ، عَنِ ابْنِ شِهَابٍ، أَنَّ عَطَاءَ بْنَ يَزِيدَ، أَخْبَرَهُ أَنَّ حُمْرَانَ مَوْلَى عُثْمَانَ أَخْبَرَهُ أَنَّهُ، رَأَى عُثْمَانَ بْنَ عَفَّانَ دَعَا بِإِنَاءٍ، فَأَفْرَغَ عَلَى كَفَّيْهِ ثَلاَثَ مِرَارٍ فَغَسَلَهُمَا، ثُمَّ أَدْخَلَ يَمِينَهُ فِي الإِنَاءِ فَمَضْمَضَ، وَاسْتَنْشَقَ، ثُمَّ غَسَلَ وَجْهَهُ ثَلاَثًا، وَيَدَيْهِ إِلَى الْمِرْفَقَيْنِ ثَلاَثَ مِرَارٍ، ثُمَّ مَسَحَ بِرَأْسِهِ، ثُمَّ غَسَلَ رِجْلَيْهِ ثَلاَثَ مِرَارٍ إِلَى الْكَعْبَيْنِ، ثُمَّ قَالَ قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏ \"‏ مَنْ تَوَضَّأَ نَحْوَ وُضُوئِي هَذَا، ثُمَّ صَلَّى رَكْعَتَيْنِ، لاَ يُحَدِّثُ فِيهِمَا نَفْسَهُ، غُفِرَ لَهُ مَا تَقَدَّمَ مِنْ ذَنْبِهِ ‏\"‏‏.‏",
+    "translation": "Narrated Humran: (the slave of 'Uthman) I saw 'Uthman bin 'Affan asking for a tumbler of water (and when it was brought) he poured water over his hands and washed them thrice and then put his right hand in the water container and rinsed his mouth, washed his nose by putting water in it and then blowing it out. then he washed his face and forearms up to the elbows thrice, passed his wet hands over his head and washed his feet up to the ankles thrice. Then he said, \"Allah's Messenger (ﷺ) said 'If anyone performs ablution like that of mine and offers a two-rak'at prayer during which he does not think of anything else (not related to the present prayer) then his past sins will be forgiven",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "abu-dawud:101": {
+    "arabic": "عن أبي هريرة، قال: قال رسول الله صلى الله عليه وسلم : «لا صلاةَ لِمن لا وُضوءَ له، ولا وُضوءَ لِمن لم يَذْكر اسم الله تعالى عليه».",
+    "translation": "Abu Hurayrah reported that the Messenger of Allah (may Allah's peace and blessings be upon him) said: \"The prayer of a person who does not perform ablution is invalid, and the ablution of a person who does not mention the name of Allah is invalid.\"",
+    "attribution": "Narrated by Ibn Majah - Narrated by Abu Daoud - Narrated by Ahmad",
+    "grade": "Sahih (Al-Albani) · Sahih (Muhammad Muhyi Al-Din Abdul Hamid) · Hasan (Zubair Ali Zai)",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "bukhari:214": {
+    "arabic": "عن عَمْرُو بْنُ عَامِرٍ عَنْ ‌أَنَس بن مالك قَالَ: كَانَ النَّبِيُّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ يَتَوَضَّأُ عِنْدَ كُلِّ صَلَاةٍ، قُلْتُ: كَيْفَ كُنْتُمْ تَصْنَعُونَ؟ قَالَ: يُجْزِئُ أَحَدَنَا الْوُضُوءُ مَا لَمْ يُحْدِثْ.",
+    "translation": "‘Amr ibn ‘Āmir related that Anas ibn Mālik reported: The Prophet (may Allah’s peace and blessings be upon him) used to perform ablution upon every prayer. I asked: \"What did you guys use to do?\" He said: \"Ablution would remain valid for any of us until he broke it.\"",
+    "attribution": "Narrated by Al-Bukhāri",
+    "grade": "Authentic",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "tirmidhi:788": {
+    "arabic": "عَنْ لَقِيطِ بْنِ صَبِرَةَ رَضيَ اللهُ عنه قَالَ: كُنْتُ وَافِدَ بَنِي الْمُنْتَفِقِ -أَوْ فِي وَفْدِ بَنِي الْمُنْتَفِقِ- إِلَى رَسُولِ اللَّهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ، قَالَ: فَلَمَّا قَدِمْنَا عَلَى رَسُولِ اللَّهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ، فَلَمْ نُصَادِفْهُ فِي مَنْزِلِهِ، وَصَادَفْنَا عَائِشَةَ أُمَّ الْمُؤْمِنِينَ، قَالَ: فَأَمَرَتْ لَنَا بِخَزِيرَةٍ، فَصُنِعَتْ لَنَا، قَالَ: وَأُتِينَا بِقِنَاعٍ -وَالْقِنَاعُ: الطَّبَقُ فِيهِ تَمْرٌ- ثُمَّ جَاءَ رَسُولُ اللَّهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ، فَقَالَ: «هَلْ أَصَبْتُمْ شَيْئًا؟ أَوْ أُمِرَ لَكُمْ بِشَيْءٍ؟» قَالَ: قُلْنَا: نَعَمْ، يَا رَسُولَ اللَّهِ، قَالَ: فَبَيْنَا نَحْنُ مَعَ رَسُولِ اللَّهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ جُلُوسٌ، إِذْ دَفَعَ الرَّاعِي غَنَمَهُ إِلَى الْمُرَاحِ، وَمَعَهُ سَخْلَةٌ تَيْعَرُ، فَقَالَ: «مَا وَلَّدْتَ يَا فُلَانُ؟»، قَالَ: بَهْمَةً، قَالَ: «فَاذْبَحْ لَنَا مَكَانَهَا شَاةً»، ثُمَّ قَالَ: «لَا تَحْسِبَنَّ» وَلَمْ يَقُلْ: لَا تَحْسَبَنَّ «أَنَّا مِنْ أَجْلِكَ ذَبَحْنَاهَا، لَنَا غَنَمٌ مِائَةٌ لَا نُرِيدُ أَنْ تَزِيدَ، فَإِذَا وَلَّدَ الرَّاعِي بَهْمَةً، ذَبَحْنَا مَكَانَهَا شَاةً» قَالَ: قُلْتُ: يَا رَسُولَ اللَّهِ، إِنَّ لِي امْرَأَةً وَإِنَّ فِي لِسَانِهَا شَيْئًا -يَعْنِي الْبَذَاءَ- قَالَ: «فَطَلِّقْهَا إِذن»، قَالَ: قُلْتُ: يَا رَسُولَ اللَّهِ إِنَّ لَهَا صُحْبَةً، وَلِي مِنْهَا وَلَدٌ، قَالَ: «فَمُرْهَا» يَقُولُ: عِظْهَا، «فَإِنْ يَكُ فِيهَا خَيْرٌ فَسَتَفْعَلْ، وَلَا تَضْرِبْ ظَعِينَتَكَ كَضَرْبِكَ أُمَيَّتَكَ» فَقُلْتُ: يَا رَسُولَ اللَّهِ، أَخْبِرْنِي عَنِ الْوُضُوءِ، قَالَ: «أَسْبِغِ الْوُضُوءَ، وَخَلِّلْ بَيْنَ الْأَصَابِعِ، وَبَالِغْ فِي الِاسْتِنْشَاقِ إِلَّا أَنْ تَكُونَ صَائِمًا».",
+    "translation": "Laqīt ibn Sabirah (may Allah be pleased with him) reported: I was the leader of or among the delegation of Banu al-Muntafiq that came to the Messenger of Allah (may Allah's peace and blessings be upon him). When we arrived, we did not find him in his house. We found ‘Ā’ishah, the Mother of the Believers, there. He said: She ordered that a dish called Khazīrah be prepared for us, and it was. He said: And a tray containing dates was presented to us. Then, the Messenger of Allah (may Allah's peace and blessings be upon him) came and asked: \"Has anything been served to you or ordered for you?\" He said: We replied: Yes, O Messenger of Allah. He said: While we were sitting in the company of the Messenger of Allah (may Allah's peace and blessings be upon him), a shepherd suddenly drove his herd of sheep to their fold. He had with him a newly-born lamb that was crying. He (the Prophet) asked him: \"What did it bear, O so-and-so?\" He replied: An ewe. He said: \"Slaughter for us a sheep in place of it.\" Then, he said: \"Do not think that we are slaughtering it for you. We have one hundred sheep and we do not want their number to increase. So, whenever an ewe is born, we slaughter a sheep in its place.\" He said: I said: O Messenger of Allah, I have a wife who has something (wrong) in her tongue, i.e., she is foul-mouthed. He said: \"Then divorce her.\" I said: O Messenger of Allah, we have been together for a long time, and I have children from her. He said: \"Then, command her,\" meaning: advise her. \"If there is goodness in her, she will comply. And do not beat your wife as you beat your slave-girl.\" I said: O Messenger of Allah, tell me about ablution. He said: \"Perform ablution thoroughly, pass your fingers through each other, and sniff water well into your nose unless you are fasting.\"",
+    "attribution": "Narrated by Abu Dāwūd, At-Tirmidhi, An-Nasā’i, and Ibn Mājah",
+    "grade": "Sahih (Ahmad Muhammad Shakir) · Sahih (Al-Albani) · Hasan Sahih (Bashar Awad Maarouf) · Isnaad Sahih (Zubair Ali Zai)",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "bukhari:164": {
+    "arabic": "عَنْ ‌حُمْرَانَ مَوْلَى عُثْمَانَ بْنِ عَفَّانَ رضي الله عنه: أَنَّهُ رَأَى عُثْمَانَ بْنَ عَفَّانَ دَعَا بِوَضُوءٍ، فَأَفْرَغَ عَلَى يَدَيْهِ مِنْ إِنَائِهِ، فَغَسَلَهُمَا ثَلَاثَ مَرَّاتٍ، ثُمَّ أَدْخَلَ يَمِينَهُ فِي الْوَضُوءِ، ثُمَّ تَمَضْمَضَ وَاسْتَنْشَقَ وَاسْتَنْثَرَ، ثُمَّ غَسَلَ وَجْهَهُ ثَلَاثًا، وَيَدَيْهِ إِلَى الْمِرْفَقَيْنِ ثَلَاثًا، ثُمَّ مَسَحَ بِرَأْسِهِ، ثُمَّ غَسَلَ كُلَّ رِجْلٍ ثَلَاثًا، ثُمَّ قَالَ: رَأَيْتُ النَّبِيَّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ يَتَوَضَّأُ نَحْوَ وُضُوئِي هَذَا، وَقَالَ: «مَنْ تَوَضَّأَ نَحْوَ وُضُوئِي هَذَا ثُمَّ صَلَّى رَكْعَتَيْنِ لَا يُحَدِّثُ فِيهِمَا نَفْسَهُ غَفَرَ اللهُ لَهُ مَا تَقَدَّمَ مِنْ ذَنْبِهِ».",
+    "translation": "Humrān, the freed slave of 'Uthmān ibn' Affān, reported that he saw 'Uthmān ibn' Affān asking (for water) to perform ablution, and he poured water from his vessel over his hands and washed them thrice and then put his right hand in the water and rinsed his mouth and washed his nose by putting water in it and then blowing it out. Then, he washed his face thrice and his forearms up to the elbows thrice. Then, he passed his wet hands over his head and washed each foot thrice. After that, he said: \"I saw the Prophet (may Allah's peace and blessings be upon him) perform ablution like this ablution of mine, and he said: 'If anyone performs ablution like this ablution of mine and offers two Rak'ahs during which he does not think of anything else, Allah will forgive his past sins.'\"",
+    "attribution": "Agreed upon",
+    "grade": "Authentic",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "bukhari:168": {
+    "arabic": "عَنْ عَائِشَةَ أُمِّ المُؤمنينَ رضي الله عنها قَالَتْ: كَانَ النَّبِيُّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ يُعْجِبُهُ التَّيَمُّنُ، فِي تَنَعُّلِهِ، وَتَرَجُّلِهِ، وَطُهُورِهِ، وَفِي شَأْنِهِ كُلِّهِ.",
+    "translation": "‘Ā’ishah, Mother of the Believers (may Allah be pleased with her), reported: The Prophet (may Allah's peace and blessings be upon him) preferred beginning with the right side when wearing his sandals, combing his hair, purifying himself, and in all of his affairs.",
+    "attribution": "Agreed upon",
+    "grade": "Authentic",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "bukhari:185": {
+    "arabic": "حَدَّثَنَا عَبْدُ اللَّهِ بْنُ يُوسُفَ، قَالَ أَخْبَرَنَا مَالِكٌ، عَنْ عَمْرِو بْنِ يَحْيَى الْمَازِنِيِّ، عَنْ أَبِيهِ، أَنَّ رَجُلاً، قَالَ لِعَبْدِ اللَّهِ بْنِ زَيْدٍ ـ وَهُوَ جَدُّ عَمْرِو بْنِ يَحْيَى ـ أَتَسْتَطِيعُ أَنْ تُرِيَنِي، كَيْفَ كَانَ رَسُولُ اللَّهِ صلى الله عليه وسلم يَتَوَضَّأُ فَقَالَ عَبْدُ اللَّهِ بْنُ زَيْدٍ نَعَمْ‏.‏ فَدَعَا بِمَاءٍ، فَأَفْرَغَ عَلَى يَدَيْهِ فَغَسَلَ يَدَهُ مَرَّتَيْنِ، ثُمَّ مَضْمَضَ وَاسْتَنْثَرَ ثَلاَثًا، ثُمَّ غَسَلَ وَجْهَهُ ثَلاَثًا، ثُمَّ غَسَلَ يَدَيْهِ مَرَّتَيْنِ مَرَّتَيْنِ إِلَى الْمِرْفَقَيْنِ، ثُمَّ مَسَحَ رَأْسَهُ بِيَدَيْهِ، فَأَقْبَلَ بِهِمَا وَأَدْبَرَ، بَدَأَ بِمُقَدَّمِ رَأْسِهِ، حَتَّى ذَهَبَ بِهِمَا إِلَى قَفَاهُ، ثُمَّ رَدَّهُمَا إِلَى الْمَكَانِ الَّذِي بَدَأَ مِنْهُ، ثُمَّ غَسَلَ رِجْلَيْهِ‏.‏",
+    "translation": "Narrated Yahya Al-Mazini:A person asked `Abdullah bin Zaid who was the grandfather of `Amr bin Yahya, \"Can you show me how Allah's Messenger (ﷺ) used to perform ablution?\" `Abdullah bin Zaid replied in the affirmative and asked for water. He poured it on his hands and washed them twice, then he rinsed his mouth thrice and washed his nose with water thrice by putting water in it and blowing it out. He washed his face thrice and after that he washed his forearms up to the elbows twice and then passed his wet hands over his head from its front to its back and vice versa (beginning from the front and taking them to the back of his head up to the nape of the neck and then brought them to the front again from where he had started) and washed his feet (up to the ankles)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "abu-dawud:135": {
+    "arabic": "حَدَّثَنَا مُسَدَّدٌ، حَدَّثَنَا أَبُو عَوَانَةَ، عَنْ مُوسَى بْنِ أَبِي عَائِشَةَ، عَنْ عَمْرِو بْنِ شُعَيْبٍ، عَنْ أَبِيهِ، عَنْ جَدِّهِ، أَنَّ رَجُلاً، أَتَى النَّبِيَّ صلى الله عليه وسلم فَقَالَ يَا رَسُولَ اللَّهِ كَيْفَ الطُّهُورُ فَدَعَا بِمَاءٍ فِي إِنَاءٍ فَغَسَلَ كَفَّيْهِ ثَلاَثًا ثُمَّ غَسَلَ وَجْهَهُ ثَلاَثًا ثُمَّ غَسَلَ ذِرَاعَيْهِ ثَلاَثًا ثُمَّ مَسَحَ بِرَأْسِهِ فَأَدْخَلَ إِصْبَعَيْهِ السَّبَّاحَتَيْنِ فِي أُذُنَيْهِ وَمَسَحَ بِإِبْهَامَيْهِ عَلَى ظَاهِرِ أُذُنَيْهِ وَبِالسَّبَّاحَتَيْنِ بَاطِنَ أُذُنَيْهِ ثُمَّ غَسَلَ رِجْلَيْهِ ثَلاَثًا ثَلاَثًا ثُمَّ قَالَ ‏\"‏ هَكَذَا الْوُضُوءُ فَمَنْ زَادَ عَلَى هَذَا أَوْ نَقَصَ فَقَدْ أَسَاءَ وَظَلَمَ ‏\"‏ ‏.‏ أَوْ ‏\"‏ ظَلَمَ وَأَسَاءَ ‏\"‏ ‏.‏",
+    "translation": "Narrated Abdullah ibn Amr ibn al-'As: A man came to the Prophet (ﷺ) and asked him: Messenger of Allah, how is the ablution (to performed)? He (the Prophet) then called for water in a vessel and washed his hands up to the wrists three times, then washed his face three times, and washed his forearms three times. He then wiped his head and inserted both his index fingers in his ear-holes; he wiped the back of his ears with his thumbs and the front of his ears with the index fingers. He then washed his feet three times. Then he said: This is how ablution should be performed. If anyone does more or less than this, he has done wrong and transgressed, or (said) transgressed and done wrong",
+    "grade": "Hasan Sahih (Al-Albani) · Hasan Sahih (Muhammad Muhyi Al-Din Abdul Hamid) · Sahih Lighairihi (Shuaib Al Arnaut) · Isnaad Hasan (Zubair Ali Zai)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "muslim:234b": {
+    "arabic": "وَحَدَّثَنِي عَبَّاسُ بْنُ عَبْدِ الْعَظِيمِ الْعَنْبَرِيُّ، حَدَّثَنَا النَّضْرُ بْنُ مُحَمَّدٍ، حَدَّثَنَا عِكْرِمَةُ، - وَهُوَ ابْنُ عَمَّارٍ - حَدَّثَنَا أَبُو زُمَيْلٍ، قَالَ حَدَّثَنِي ابْنُ عَبَّاسٍ، قَالَ مُطِرَ النَّاسُ عَلَى عَهْدِ النَّبِيِّ صلى الله عليه وسلم فَقَالَ النَّبِيُّ صلى الله عليه وسلم ‏\"‏ أَصْبَحَ مِنَ النَّاسِ شَاكِرٌ وَمِنْهُمْ كَافِرٌ قَالُوا هَذِهِ رَحْمَةُ اللَّهِ ‏.‏ وَقَالَ بَعْضُهُمْ لَقَدْ صَدَقَ نَوْءُ كَذَا وَكَذَا ‏\"‏ ‏.‏ قَالَ فَنَزَلَتْ هَذِهِ الآيَةُ ‏{‏ فَلاَ أُقْسِمُ بِمَوَاقِعِ النُّجُومِ‏}‏ حَتَّى بَلَغَ ‏{‏ وَتَجْعَلُونَ رِزْقَكُمْ أَنَّكُمْ تُكَذِّبُونَ‏{‏}",
+    "translation": "It is reported on the authority of Ibn 'Abbas that there was (once) a downpour during the life of the Apostle (may peace and blessings be upon him Upon this the Apostle (may peace and blessings be upon him) observed:Some people entered the morning with gratitude and some with ingratitude (to Allah). Those who entered with gratitude said: This is the blessing of Allah, and those who entered with ingratitude said: Such and such asterism was right. It was upon this that the verse was revealed: I swear by the setting of the stars to the end and make your provision that you should disbelieve it",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:135": {
+    "arabic": "حَدَّثَنَا إِسْحَاقُ بْنُ إِبْرَاهِيمَ الْحَنْظَلِيُّ، قَالَ أَخْبَرَنَا عَبْدُ الرَّزَّاقِ، قَالَ أَخْبَرَنَا مَعْمَرٌ، عَنْ هَمَّامِ بْنِ مُنَبِّهٍ، أَنَّهُ سَمِعَ أَبَا هُرَيْرَةَ، يَقُولُ قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏ \"‏ لاَ تُقْبَلُ صَلاَةُ مَنْ أَحْدَثَ حَتَّى يَتَوَضَّأَ ‏\"‏‏.‏ قَالَ رَجُلٌ مِنْ حَضْرَمَوْتَ مَا الْحَدَثُ يَا أَبَا هُرَيْرَةَ قَالَ فُسَاءٌ أَوْ ضُرَاطٌ‏.‏",
+    "translation": "Narrated Abu Huraira:Allah's Messenger (ﷺ) said, \"The prayer of a person who does Hadath (passes urine, stool or wind) is not accepted till he performs the ablution.\" A person from Hadaramout asked Abu Huraira, \"What is 'Hadath'?\" Abu Huraira replied, \" 'Hadath' means the passing of wind",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "abu-dawud:203": {
+    "arabic": "حَدَّثَنَا حَيْوَةُ بْنُ شُرَيْحٍ الْحِمْصِيُّ، - فِي آخَرِينَ - قَالُوا حَدَّثَنَا بَقِيَّةُ، عَنِ الْوَضِينِ بْنِ عَطَاءٍ، عَنْ مَحْفُوظِ بْنِ عَلْقَمَةَ، عَنْ عَبْدِ الرَّحْمَنِ بْنِ عَائِذٍ، عَنْ عَلِيِّ بْنِ أَبِي طَالِبٍ، - رضى الله عنه - قَالَ قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏ \"‏ وِكَاءُ السَّهِ الْعَيْنَانِ فَمَنْ نَامَ فَلْيَتَوَضَّأْ ‏\"‏ ‏.‏",
+    "translation": "Narrated Ali ibn AbuTalib: The Messenger of Allah (ﷺ) said: The eyes are the leather strap of the anus, so one who sleeps should perform ablution",
+    "grade": "Hasan (Al-Albani) · Hasan (Muhammad Muhyi Al-Din Abdul Hamid) · Daif (Shuaib Al Arnaut) · Daif (Zubair Ali Zai)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "tirmidhi:82": {
+    "arabic": "حَدَّثَنَا إِسْحَاقُ بْنُ مَنْصُورٍ، قَالَ حَدَّثَنَا يَحْيَى بْنُ سَعِيدٍ الْقَطَّانُ، عَنْ هِشَامِ بْنِ عُرْوَةَ، قَالَ أَخْبَرَنِي أَبِي، عَنْ بُسْرَةَ بِنْتِ صَفْوَانَ، أَنَّ النَّبِيَّ صلى الله عليه وسلم قَالَ ‏ \"‏ مَنْ مَسَّ ذَكَرَهُ فَلاَ يُصَلِّ حَتَّى يَتَوَضَّأَ ‏\"‏ ‏.‏ قَالَ وَفِي الْبَابِ عَنْ أُمِّ حَبِيبَةَ وَأَبِي أَيُّوبَ وَأَبِي هُرَيْرَةَ وَأَرْوَى ابْنَةِ أُنَيْسٍ وَعَائِشَةَ وَجَابِرٍ وَزَيْدِ بْنِ خَالِدٍ وَعَبْدِ اللَّهِ بْنِ عَمْرٍو ‏.‏ قَالَ أَبُو عِيسَى هَذَا حَدِيثٌ حَسَنٌ صَحِيحٌ ‏.‏ قَالَ هَكَذَا رَوَاهُ غَيْرُ وَاحِدٍ مِثْلَ هَذَا عَنْ هِشَامِ بْنِ عُرْوَةَ عَنْ أَبِيهِ عَنْ بُسْرَةَ ‏.‏",
+    "translation": "Busrah bint Safwan narrated that :the Prophet said: \"Whoever touches his penis, then he is not to pray until he performs Wudu",
+    "grade": "Sahih (Ahmad Muhammad Shakir) · Sahih (Al-Albani) · Hasan Sahih (Bashar Awad Maarouf) · Isnaad Sahih (Zubair Ali Zai)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "tirmidhi:85": {
+    "arabic": "حَدَّثَنَا هَنَّادٌ، حَدَّثَنَا مُلاَزِمُ بْنُ عَمْرٍو، عَنْ عَبْدِ اللَّهِ بْنِ بَدْرٍ، عَنْ قَيْسِ بْنِ طَلْقِ بْنِ عَلِيٍّ، هُوَ الْحَنَفِيُّ عَنْ أَبِيهِ، عَنِ النَّبِيِّ صلى الله عليه وسلم قَالَ ‏ \"‏ وَهَلْ هُوَ إِلاَّ مُضْغَةٌ مِنْهُ أَوْ بَضْعَةٌ مِنْهُ ‏\"‏ ‏.‏ قَالَ وَفِي الْبَابِ عَنْ أَبِي أُمَامَةَ ‏.‏ قَالَ أَبُو عِيسَى وَقَدْ رُوِيَ عَنْ غَيْرِ وَاحِدٍ مِنْ أَصْحَابِ النَّبِيِّ صلى الله عليه وسلم وَبَعْضِ التَّابِعِينَ أَنَّهُمْ لَمْ يَرَوُا الْوُضُوءَ مِنْ مَسِّ الذَّكَرِ وَهُوَ قَوْلُ أَهْلِ الْكُوفَةِ وَابْنِ الْمُبَارَكِ ‏.‏ وَهَذَا الْحَدِيثُ أَحْسَنُ شَيْءٍ رُوِيَ فِي هَذَا الْبَابِ ‏.‏ وَقَدْ رَوَى هَذَا الْحَدِيثَ أَيُّوبُ بْنُ عُتْبَةَ وَمُحَمَّدُ بْنُ جَابِرٍ عَنْ قَيْسِ بْنِ طَلْقٍ عَنْ أَبِيهِ ‏.‏ وَقَدْ تَكَلَّمَ بَعْضُ أَهْلِ الْحَدِيثِ فِي مُحَمَّدِ بْنِ جَابِرٍ وَأَيُّوبَ بْنِ عُتْبَةَ ‏.‏ وَحَدِيثُ مُلاَزِمِ بْنِ عَمْرٍو عَنْ عَبْدِ اللَّهِ بْنِ بَدْرٍ أَصَحُّ وَأَحْسَنُ ‏.‏",
+    "translation": "Qais bin Talq bin Ali - [and he is] Al-Hanafi narrated from his father, that:the Prophet said: 'Is it other than a piece of his flesh?\" Or: \"part of him?",
+    "grade": "Sahih (Ahmad Muhammad Shakir) · Sahih (Al-Albani) · Isnaad Sahih (Zubair Ali Zai)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "abu-dawud:178": {
+    "arabic": "حَدَّثَنَا مُحَمَّدُ بْنُ بَشَّارٍ، حَدَّثَنَا يَحْيَى، وَعَبْدُ الرَّحْمَنِ، قَالاَ حَدَّثَنَا سُفْيَانُ، عَنْ أَبِي رَوْقٍ، عَنْ إِبْرَاهِيمَ التَّيْمِيِّ، عَنْ عَائِشَةَ، أَنَّ النَّبِيَّ صلى الله عليه وسلم قَبَّلَهَا وَلَمْ يَتَوَضَّأْ ‏.‏ قَالَ أَبُو دَاوُدَ كَذَا رَوَاهُ الْفِرْيَابِيُّ وَغَيْرُهُ ‏.‏ قَالَ أَبُو دَاوُدَ وَهُوَ مُرْسَلٌ إِبْرَاهِيمُ التَّيْمِيُّ لَمْ يَسْمَعْ مِنْ عَائِشَةَ ‏.‏ قَالَ أَبُو دَاوُدَ مَاتَ إِبْرَاهِيمُ التَّيْمِيُّ وَلَمْ يَبْلُغْ أَرْبَعِينَ سَنَةً وَكَانَ يُكْنَى أَبَا أَسْمَاءَ ‏.‏",
+    "translation": "Narrated Aisha, Ummul Mu'minin: The Prophet (ﷺ) kissed me and did not perform ablution. Abu Dawud said: This tradition is Mursal (i.e. where the link of the Companions is missing and the Successor reports from the Prophet directly). Ibrahim at-Taimi did not hear anything from 'Aishah. Abu Dawud said: Al-Firyabi and other narrated this tradition in a like manner",
+    "grade": "Sahih (Al-Albani) · Sahih (Muhammad Muhyi Al-Din Abdul Hamid) · Daif (Shuaib Al Arnaut) · Daif (Zubair Ali Zai)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:248": {
+    "arabic": "حَدَّثَنَا عَبْدُ اللَّهِ بْنُ يُوسُفَ، قَالَ أَخْبَرَنَا مَالِكٌ، عَنْ هِشَامٍ، عَنْ أَبِيهِ، عَنْ عَائِشَةَ، زَوْجِ النَّبِيِّ صلى الله عليه وسلم أَنَّ النَّبِيَّ صلى الله عليه وسلم كَانَ إِذَا اغْتَسَلَ مِنَ الْجَنَابَةِ بَدَأَ فَغَسَلَ يَدَيْهِ، ثُمَّ يَتَوَضَّأُ كَمَا يَتَوَضَّأُ لِلصَّلاَةِ، ثُمَّ يُدْخِلُ أَصَابِعَهُ فِي الْمَاءِ، فَيُخَلِّلُ بِهَا أُصُولَ شَعَرِهِ ثُمَّ يَصُبُّ عَلَى رَأْسِهِ ثَلاَثَ غُرَفٍ بِيَدَيْهِ، ثُمَّ يُفِيضُ الْمَاءَ عَلَى جِلْدِهِ كُلِّهِ‏.‏",
+    "translation": "Narrated `Aisha:Whenever the Prophet (ﷺ) took a bath after Janaba he started by washing his hands and then performed ablution like that for the prayer. After that he would put his fingers in water and move the roots of his hair with them, and then pour three handfuls of water over his head and then pour water all over his body",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:291": {
+    "arabic": "حَدَّثَنَا مُعَاذُ بْنُ فَضَالَةَ، قَالَ حَدَّثَنَا هِشَامٌ، ح وَحَدَّثَنَا أَبُو نُعَيْمٍ، عَنْ هِشَامٍ، عَنْ قَتَادَةَ، عَنِ الْحَسَنِ، عَنْ أَبِي رَافِعٍ، عَنْ أَبِي هُرَيْرَةَ، عَنِ النَّبِيِّ صلى الله عليه وسلم قَالَ ‏ \"‏ إِذَا جَلَسَ بَيْنَ شُعَبِهَا الأَرْبَعِ ثُمَّ جَهَدَهَا، فَقَدْ وَجَبَ الْغَسْلُ ‏\"‏‏.‏ تَابَعَهُ عَمْرُو بْنُ مَرْزُوقٍ عَنْ شُعْبَةَ مِثْلَهُ‏.‏ وَقَالَ مُوسَى حَدَّثَنَا أَبَانُ قَالَ حَدَّثَنَا قَتَادَةُ أَخْبَرَنَا الْحَسَنُ مِثْلَهُ‏.‏",
+    "translation": "Narrated Hisham:as the following Hadith 290. Narrated Abu Huraira: The Prophet (ﷺ) said, \"When a man sits in between the four parts of a woman and did the sexual intercourse with her, bath becomes compulsory",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "muslim:348a": {
+    "arabic": "وَحَدَّثَنِيهِ زُهَيْرُ بْنُ حَرْبٍ، وَيَعْقُوبُ الدَّوْرَقِيُّ، قَالاَ حَدَّثَنَا إِسْمَاعِيلُ، وَهُوَ ابْنُ عُلَيَّةَ عَنْ أَيُّوبَ، عَنْ مُحَمَّدٍ، قَالَ قَالَ أَبُو هُرَيْرَةَ ‏ \"‏ لاَ يَزَالُ النَّاسُ ‏\"‏ ‏.‏ بِمِثْلِ حَدِيثِ عَبْدِ الْوَارِثِ غَيْرَ أَنَّهُ لَمْ يَذْكُرِ النَّبِيَّ صلى الله عليه وسلم فِي الإِسْنَادِ وَلَكِنْ قَدْ قَالَ فِي آخِرِ الْحَدِيثِ صَدَقَ اللَّهُ وَرَسُولُهُ ‏.‏",
+    "translation": "It is narrated on the authority of Abu Huraira that he said:The people will constantly, and the rest of the hadith is the same as that transmitted by 'Abdul-Warith with the exception that there is no mention of the Messenger of Allah in that, but he observed at the end of the hadith: Allah and His Messenger told the truth",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:282": {
+    "arabic": "عن أم سلمة رضي الله عنها قالت: «جاءت أمُّ سُلَيمٍ امرأةُ أَبِي طَلحة إلى رسول الله صلى الله عليه وسلم فقالت: يا رسول الله، إنَّ الله لا يَسْتَحيِي من الحَقِّ، فهل على المرأة من غُسْلٍ إِذَا هِيَ احْتَلَمَت؟ فقال رسول الله صلى الله عليه وسلم : نعم، إِذَا رَأَت المَاء».",
+    "translation": "Umm Salamah (may Allah be pleased with her) reported: Umm Sulaym, the wife of Abu Talhah, came to the Messenger of Allah (may Allah's peace and blessings be upon him) and said: \"O Messenger of Allah, verily, Allah does not feel shy of the truth. If a woman had a wet dream, would it be obligatory on her to take a ritual bath?\" He replied: \"Yes, if she sees vaginal fluid.\"",
+    "attribution": "Narrated by Bukhari & Muslim",
+    "grade": "Authentic hadith",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "abu-dawud:311": {
+    "arabic": "حَدَّثَنَا أَحْمَدُ بْنُ يُونُسَ، أَخْبَرَنَا زُهَيْرٌ، حَدَّثَنَا عَلِيُّ بْنُ عَبْدِ الأَعْلَى، عَنْ أَبِي سَهْلٍ، عَنْ مُسَّةَ، عَنْ أُمِّ سَلَمَةَ، قَالَتْ كَانَتِ النُّفَسَاءُ عَلَى عَهْدِ رَسُولِ اللَّهِ صلى الله عليه وسلم تَقْعُدُ بَعْدَ نِفَاسِهَا أَرْبَعِينَ يَوْمًا أَوْ أَرْبَعِينَ لَيْلَةً وَكُنَّا نَطْلِي عَلَى وُجُوهِنَا الْوَرْسَ يَعْنِي مِنَ الْكَلَفِ ‏.‏",
+    "translation": "Narrated Umm Salamah, Ummul Mu'minin: The woman having bleeding after delivery (puerperal haemorrhage) would refrain (from prayer) for forty days or forty nights; and we would anoint our faces with an aromatic herb called wars to remove dark spots",
+    "grade": "Hasan Sahih (Al-Albani) · Hasan Sahih (Muhammad Muhyi Al-Din Abdul Hamid) · Hasan Lighairihi (Shuaib Al Arnaut) · Hasan (Zubair Ali Zai)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:877": {
+    "arabic": "حَدَّثَنَا عَبْدُ اللَّهِ بْنُ يُوسُفَ، قَالَ أَخْبَرَنَا مَالِكٌ، عَنْ نَافِعٍ، عَنْ عَبْدِ اللَّهِ بْنِ عُمَرَ ـ رضى الله عنهما ـ أَنَّ رَسُولَ اللَّهِ صلى الله عليه وسلم قَالَ ‏ \"‏ إِذَا جَاءَ أَحَدُكُمُ الْجُمُعَةَ فَلْيَغْتَسِلْ ‏\"‏‏.‏",
+    "translation": "Narrated `Abdullah bin `Umar:Allah's Messenger (ﷺ) said, \"Anyone of you attending the Friday (prayers) should take a bath",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "tirmidhi:497": {
+    "arabic": "حَدَّثَنَا أَبُو مُوسَى، مُحَمَّدُ بْنُ الْمُثَنَّى حَدَّثَنَا سَعِيدُ بْنُ سُفْيَانَ الْجَحْدَرِيُّ، حَدَّثَنَا شُعْبَةُ، عَنْ قَتَادَةَ، عَنِ الْحَسَنِ، عَنْ سَمُرَةَ بْنِ جُنْدَبٍ، قَالَ قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏ \"‏ مَنْ تَوَضَّأَ يَوْمَ الْجُمُعَةِ فَبِهَا وَنِعْمَتْ وَمَنِ اغْتَسَلَ فَالْغُسْلُ أَفْضَلُ ‏\"‏ ‏.‏ قَالَ وَفِي الْبَابِ عَنْ أَبِي هُرَيْرَةَ وَعَائِشَةَ وَأَنَسٍ ‏.‏ قَالَ أَبُو عِيسَى حَدِيثُ سَمُرَةَ حَدِيثٌ حَسَنٌ ‏.‏ وَقَدْ رَوَاهُ بَعْضُ أَصْحَابِ قَتَادَةَ عَنْ قَتَادَةَ عَنِ الْحَسَنِ عَنْ سَمُرَةَ بْنِ جُنْدَبٍ وَرَوَاهُ بَعْضُهُمْ عَنْ قَتَادَةَ عَنِ الْحَسَنِ عَنِ النَّبِيِّ صلى الله عليه وسلم مُرْسَلٌ ‏.‏ وَالْعَمَلُ عَلَى هَذَا عِنْدَ أَهْلِ الْعِلْمِ مِنْ أَصْحَابِ النَّبِيِّ صلى الله عليه وسلم وَمَنْ بَعْدَهُمُ اخْتَارُوا الْغُسْلَ يَوْمَ الْجُمُعَةِ وَرَأَوْا أَنْ يُجْزِئَ الْوُضُوءُ مِنَ الْغُسْلِ يَوْمَ الْجُمُعَةِ ‏.‏ قَالَ الشَّافِعِيُّ وَمِمَّا يَدُلُّ عَلَى أَنَّ أَمْرَ النَّبِيِّ صلى الله عليه وسلم بِالْغُسْلِ يَوْمَ الْجُمُعَةِ أَنَّهُ عَلَى الاِخْتِيَارِ لاَ عَلَى الْوُجُوبِ حَدِيثُ عُمَرَ حَيْثُ قَالَ لِعُثْمَانَ وَالْوُضُوءَ أَيْضًا وَقَدْ عَلِمْتَ أَنَّ رَسُولَ اللَّهِ صلى الله عليه وسلم أَمَرَ بِالْغُسْلِ يَوْمَ الْجُمُعَةِ ‏.‏ فَلَوْ عَلِمَا أَنَّ أَمْرَهُ عَلَى الْوُجُوبِ لاَ عَلَى الاِخْتِيَارِ لَمْ يَتْرُكْ عُمَرُ عُثْمَانَ حَتَّى يَرُدَّهُ وَيَقُولَ لَهُ ارْجِعْ فَاغْتَسِلْ وَلَمَا خَفِيَ عَلَى عُثْمَانَ ذَلِكَ مَعَ عِلْمِهِ وَلَكِنْ دَلَّ فِي هَذَا الْحَدِيثِ أَنَّ الْغُسْلَ يَوْمَ الْجُمُعَةِ فِيهِ فَضْلٌ مِنْ غَيْرِ وُجُوبٍ يَجِبُ عَلَى الْمَرْءِ فِي ذَلِكَ ‏.‏",
+    "translation": "Samurah bin Jundah narrated that :Allah's Messenger said: \"Whoever performs Wudu on Friday, then he will receive the blessing, and whoever performs Ghusl then Ghusl is more virtuous",
+    "grade": "Sahih (Ahmad Muhammad Shakir) · Sahih (Al-Albani) · Hasan (Bashar Awad Maarouf) · Isnaad Hasan (Zubair Ali Zai)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "malik:432": {
+    "arabic": "وَحَدَّثَنِي عَنْ مَالِكٍ، عَنِ ابْنِ شِهَابٍ، عَنْ أَبِي عُبَيْدٍ، مَوْلَى ابْنِ أَزْهَرَ قَالَ شَهِدْتُ الْعِيدَ مَعَ عُمَرَ بْنِ الْخَطَّابِ فَصَلَّى ثُمَّ انْصَرَفَ فَخَطَبَ النَّاسَ فَقَالَ إِنَّ هَذَيْنِ يَوْمَانِ نَهَى رَسُولُ اللَّهِ صلى الله عليه وسلم عَنْ صِيَامِهِمَا يَوْمُ فِطْرِكُمْ مِنْ صِيَامِكُمْ وَالآخَرُ يَوْمٌ تَأْكُلُونَ فِيهِ مِنْ نُسُكِكُمْ ‏.‏ قَالَ أَبُو عُبَيْدٍ ثُمَّ شَهِدْتُ الْعِيدَ مَعَ عُثْمَانَ بْنِ عَفَّانَ فَجَاءَ فَصَلَّى ثُمَّ انْصَرَفَ فَخَطَبَ وَقَالَ إِنَّهُ قَدِ اجْتَمَعَ لَكُمْ فِي يَوْمِكُمْ هَذَا عِيدَانِ فَمَنْ أَحَبَّ مِنْ أَهْلِ الْعَالِيَةِ أَنْ يَنْتَظِرَ الْجُمُعَةَ فَلْيَنْتَظِرْهَا وَمَنْ أَحَبَّ أَنْ يَرْجِعَ فَقَدْ أَذِنْتُ لَهُ ‏.‏ قَالَ أَبُو عُبَيْدٍ ثُمَّ شَهِدْتُ الْعِيدَ مَعَ عَلِيِّ بْنِ أَبِي طَالِبٍ - وَعُثْمَانُ مَحْصُورٌ - فَجَاءَ فَصَلَّى ثُمَّ انْصَرَفَ فَخَطَبَ ‏.‏",
+    "translation": "Yahya related to me from Malik from Ibn Shihab that Abu Ubayd, the mawla of Ibn Azhar said, \"I was present at an id with Umar ibn al- Khattab. He prayed, and then after he had prayed he gave a khutba to the people and said, 'The Messenger of Allah, may Allah bless him and grant him peace, forbade fasting on these two days - the day you break your fast (after Ramadan), and the day you eat from your sacrifice (after Hajj) .' \" Abu Ubaydcontinued,\"Then I was present at an id with Uthman ibn Affan. He came and prayed, and when he had finished he gave a khutba and said, 'Two ids have been joined together for you on this day of yours. If any of the people of al-Aliyya (the hills outlying Madina) want to wait for the jumua they can do so, and if any of them want to return, I have given them permission.' Abu Ubayd continued, \"Then I was present at an id with AIi ibn Abi Talib (at the time when Uthman was being detained). He came and prayed, and then after he had prayed he gave a khutba",
+    "grade": "Mauquf Sahih (Salim al-Hilali)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "ibn-majah:1315": {
+    "arabic": "حَدَّثَنَا جُبَارَةُ بْنُ الْمُغَلِّسِ، حَدَّثَنَا حَجَّاجُ بْنُ تَمِيمٍ، عَنْ مَيْمُونِ بْنِ مِهْرَانَ، عَنِ ابْنِ عَبَّاسٍ، قَالَ كَانَ رَسُولُ اللَّهِ ـ صلى الله عليه وسلم ـ يَغْتَسِلُ يَوْمَ الْفِطْرِ وَيَوْمَ الأَضْحَى ‏.‏",
+    "translation": "It was narrated that Ibn ‘Abbas said:“The Messenger of Allah (ﷺ) used to have a bath on the day of Fitr and the day of Adha.”",
+    "grade": "Very Daif (Al-Albani) · Very Daif (Muhammad Fouad Abd al-Baqi) · Daif (Zubair Ali Zai)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:462": {
+    "arabic": "عن أبي هريرة رضي الله عنه ، قال: بعث رسول الله صلى الله عليه وسلم خيلا قِبَلَ نَجْدٍ، فجاءت برجل من بني حَنِيفة يُقَالُ لَهُ: ثُمَامَةُ بْنُ أُثَالٍ، سَيِّدُ أَهْلِ اليَمَامَةِ، فَرَبَطُوهُ بِسَارِيَةٍ مِنْ سَوَارِي المسجد، فخرج إليه رسول الله صلى الله عليه وسلم ، فقال: «مَاذَا عِنْدَك يا ثمامة؟» فقال: عندي يا محمد خير، إِنْ تَقْتُلْ تَقْتُل ذَا دَمٍ، وَإِنْ تُنْعِمْ تُنْعِمْ عَلَى شَاكِر، وإن كنت تريد المال فَسَلْ تُعْطَ مِنْهُ مَا شِئْتَ، فَتَرَكَهُ رسول الله صلى الله عليه وسلم حتى كان بعد الغد، فقال: «ما عندك يا ثمامة؟» قال: ما قلت لك، إن تنعم تنعم على شاكر، وإن تقتل تقتل ذا دم، وإن كنت تريد المال فسل تعط منه ما شئت، فتركه رسول الله صلى الله عليه وسلم حتى كان من الغد، فقال: «ماذا عندك يا ثمامة؟» فقال: عندي ما قلت لك، إن تنعم تنعم على شاكر، وإن تقتل تقتل ذا دم، وإن كنت تريد المال فسل تعط منه ما شئت، فقال رسول الله صلى الله عليه وسلم : «أَطْلِقُوا ثمامة»، فَانْطَلَقَ إِلَى نَخْلٍ قَرِيبٍ مِنَ المَسْجِدِ، فاغتسل، ثم دخل المسجد، فقال: أشهد أن لا إله إلا الله، وأشهد أن محمدا عبده ورسوله، يا محمد، والله، مَا كَانَ عَلَى الْأَرْضِ وَجْهٌ أَبْغَضَ إِلَيَّ مِنْ وَجْهِكَ، فَقَدْ أَصْبَحَ وَجْهُكَ أَحَبَّ الْوُجُوهِ كُلِّهَا إِلَيَّ، والله، ما كان مِن دِين أبغَضَ إليَّ مِن دِينَك، فأصبح دينُك أحبَّ الدِّين كُلِّه إليَّ، والله، ما كان من بلد أبغض إلي من بلدك، فأصبح بلدُك أحبَّ البلاد كلها إليَّ، وإنَّ خَيلَك أخَذَتنِي وأنا أُرِيد العمرة فمَاذَا تَرَى؟ فبشَّره رسول الله صلى الله عليه وسلم وأمره أن يَعْتَمِر، فلمَّا قدِم مكَّة قال له قائل: أصَبَوْت، فقال: لا، ولكنَّي أسْلَمت مع رسول الله صلى الله عليه وسلم ، ولا والله، لا يأتِيكم مِن اليمامة حبة حنطة حتىَّ يأْذَنَ فيها رسول الله صلى الله عليه وسلم .",
+    "translation": "Abu Hurayrah (may Allah be pleased with him) reported that the Messenger of Allah (may Allah's peace and blessings be upon him) sent some cavalry towards Najd. They captured a man from the tribe of Banu Hanīfah called Thumāmah ibn Uthāl, and tied him to one of the pillars of the mosque. Then the Messenger of Allah (may Allah's peace and blessings be upon him) went to him and said: \"What do you think, Thumāmah?\" He replied, \"I have a good thought, O Muhammad! If you kill, you will kill someone with blood; if you do a favor, you will do a favor to a grateful person; and if you want money, then ask and you will be given whatever you wish.\" The Messenger of Allah (may Allah's peace and blessings be upon him) left him until the next day, and then said to him: \"What do you think, Thumāmah? He said: \"As I told you before: if you do a favor, you will do a favor to a grateful person; if you kill, you will kill a person with blood; and if you want money, then ask and you will be given whatever you wish.\" The Messenger of Allah (may Allah's peace and blessings be upon him) left him again until the following day and then said to him: \"What do you think, Thumāmah?\" He said: \"I think what I have told you before: if you do a favor , you will do a favor to a grateful person; if you kill, you will kill a person with blood; and if you want money, then ask and you will be given whatever you wish.\" Thereupon, the Prophet (may Allah's peace and blessings be upon him) said: \"Release Thumāmah.\" Thereupon, he went to a place of water near the mosque, took a bath, and then entered the mosque and said: \"I bear witness that there is no god but Allah, and I bear witness that Muhammad is His slave and Messenger. O Muhammad, by Allah! There was no face on the surface of the earth more hateful to me than yours; but now your face has become the most beloved of all faces to me. By Allah, there was no religion more hateful to me than yours; but now it is the most beloved religion to me. By Allah, there was no city more hateful to me than yours; but now it is the most beloved city to me. Your cavalry arrested me when I was intending to perform ‘Umrah. And now what do you think?\" The Prophet (may Allah's peace and blessings be upon him) gave him glad tidings and ordered him to go and perform ‘Umrah. So, when he went to Mecca, someone said to him: \"Have you apostatized?\" Thumāmah replied: \"No, by Allah! I have embraced Islam along with the Messenger of Allah. Behold, by Allah, no single grain of wheat will come to you from Yamāmah unless the Messenger of Allah gives his permission for it.\"",
+    "attribution": "Narrated by Bukhari & Muslim",
+    "grade": "Authentic hadith",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "bukhari:132": {
+    "arabic": "حَدَّثَنَا مُسَدَّدٌ، قَالَ حَدَّثَنَا عَبْدُ اللَّهِ بْنُ دَاوُدَ، عَنِ الأَعْمَشِ، عَنْ مُنْذِرٍ الثَّوْرِيِّ، عَنْ مُحَمَّدٍ ابْنِ الْحَنَفِيَّةِ، عَنْ عَلِيٍّ، قَالَ كُنْتُ رَجُلاً مَذَّاءً فَأَمَرْتُ الْمِقْدَادَ أَنْ يَسْأَلَ النَّبِيَّ صلى الله عليه وسلم فَسَأَلَهُ فَقَالَ ‏ \"‏ فِيهِ الْوُضُوءُ ‏\"‏‏.‏",
+    "translation": "Narrated `Ali:I used to get the emotional urethral discharge frequently so I requested Al-Miqdad to ask the Prophet (ﷺ) about it. Al-Miqdad asked him and he replied, \"One has to perform ablution (after it).\" (See Hadith No)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:347": {
+    "arabic": "عَنْ عَمَّارِ بنِ ياسِرٍ رضي الله عنه قال: بَعَثَنِي رَسُولُ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ فِي حَاجَةٍ، فَأَجْنَبْتُ فَلَمْ أَجِدِ الْمَاءَ، فَتَمَرَّغْتُ فِي الصَّعِيدِ كَمَا تَمَرَّغُ الدَّابَّةُ ثُمَّ أَتَيْتُ النَّبِيَّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ، فَذَكَرْتُ ذَلِكَ لَهُ فَقَالَ: «إِنَّمَا كَانَ يَكْفِيكَ أَنْ تَقُولَ بِيَدَيْكَ هَكَذَا» ثُمَّ ضَرَبَ بِيَدَيْهِ الْأَرْضَ ضَرْبَةً وَاحِدَةً، ثُمَّ مَسَحَ الشِّمَالَ عَلَى الْيَمِينِ، وَظَاهِرَ كَفَّيْهِ وَوَجْهَهُ.",
+    "translation": "‘Ammār ibn Yāsir (may Allah be pleased with him) reported: The Messenger of Allah (may Allah's peace and blessings be upon him) sent me on an errand, and I became Junub (in a state of major ritual impurity) and could not find water. So, I rolled in the dirt like an animal and then came to the Prophet (may Allah's peace and blessings be upon him) and told him about it. He said, \"It was sufficient for you to do this with your hands.\" Then, he struck the ground once with his hands, then wiped the right hand with the left one, the back side of his hands and his face.",
+    "attribution": "Agreed upon",
+    "grade": "Authentic",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "bukhari:828": {
+    "arabic": "حَدَّثَنَا يَحْيَى بْنُ بُكَيْرٍ، قَالَ حَدَّثَنَا اللَّيْثُ، عَنْ خَالِدٍ، عَنْ سَعِيدٍ، عَنْ مُحَمَّدِ بْنِ عَمْرِو بْنِ حَلْحَلَةَ، عَنْ مُحَمَّدِ بْنِ عَمْرِو بْنِ عَطَاءٍ،‏.‏ وَحَدَّثَنَا اللَّيْثُ، عَنْ يَزِيدَ بْنِ أَبِي حَبِيبٍ، وَيَزِيدَ بْنِ مُحَمَّدٍ، عَنْ مُحَمَّدِ بْنِ عَمْرِو بْنِ حَلْحَلَةَ، عَنْ مُحَمَّدِ بْنِ عَمْرِو بْنِ عَطَاءٍ، أَنَّهُ كَانَ جَالِسًا مَعَ نَفَرٍ مِنْ أَصْحَابِ النَّبِيِّ صلى الله عليه وسلم فَذَكَرْنَا صَلاَةَ النَّبِيِّ صلى الله عليه وسلم فَقَالَ أَبُو حُمَيْدٍ السَّاعِدِيُّ أَنَا كُنْتُ أَحْفَظَكُمْ لِصَلاَةِ رَسُولِ اللَّهِ صلى الله عليه وسلم رَأَيْتُهُ إِذَا كَبَّرَ جَعَلَ يَدَيْهِ حِذَاءَ مَنْكِبَيْهِ، وَإِذَا رَكَعَ أَمْكَنَ يَدَيْهِ مِنْ رُكْبَتَيْهِ، ثُمَّ هَصَرَ ظَهْرَهُ، فَإِذَا رَفَعَ رَأْسَهُ اسْتَوَى حَتَّى يَعُودَ كُلُّ فَقَارٍ مَكَانَهُ، فَإِذَا سَجَدَ وَضَعَ يَدَيْهِ غَيْرَ مُفْتَرِشٍ وَلاَ قَابِضِهِمَا، وَاسْتَقْبَلَ بِأَطْرَافِ أَصَابِعِ رِجْلَيْهِ الْقِبْلَةَ، فَإِذَا جَلَسَ فِي الرَّكْعَتَيْنِ جَلَسَ عَلَى رِجْلِهِ الْيُسْرَى وَنَصَبَ الْيُمْنَى، وَإِذَا جَلَسَ فِي الرَّكْعَةِ الآخِرَةِ قَدَّمَ رِجْلَهُ الْيُسْرَى وَنَصَبَ الأُخْرَى وَقَعَدَ عَلَى مَقْعَدَتِهِ‏.‏ وَسَمِعَ اللَّيْثُ يَزِيدَ بْنَ أَبِي حَبِيبٍ وَيَزِيدُ مِنْ مُحَمَّدِ بْنِ حَلْحَلَةَ وَابْنُ حَلْحَلَةَ مِنَ ابْنِ عَطَاءٍ‏.‏ قَالَ أَبُو صَالِحٍ عَنِ اللَّيْثِ كُلُّ فَقَارٍ‏.‏ وَقَالَ ابْنُ الْمُبَارَكِ عَنْ يَحْيَى بْنِ أَيُّوبَ قَالَ حَدَّثَنِي يَزِيدُ بْنُ أَبِي حَبِيبٍ أَنَّ مُحَمَّدَ بْنَ عَمْرٍو حَدَّثَهُ كُلُّ فَقَارٍ‏.‏",
+    "translation": "Narrated Muhammad bin `Amr bin `Ata':I was sitting with some of the companions of Allah's Messenger (ﷺ) and we were discussing about the way of praying of the Prophet. Abu Humaid As-Sa`idi said, \"I remember the prayer of Allah's Messenger (ﷺ) better than any one of you. I saw him raising both his hands up to the level of the shoulders on saying the Takbir; and on bowing he placed his hands on both knees and bent his back straight, then he stood up straight from bowing till all the vertebrate took their normal positions. In prostrations, he placed both his hands on the ground with the forearms away from the ground and away from his body, and his toes were facing the Qibla. On sitting In the second rak`a he sat on his left foot and propped up the right one; and in the last rak`a he pushed his left foot forward and kept the other foot propped up and sat over the buttocks",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:793": {
+    "arabic": "عَنْ أَبِي هُرَيْرَةَ رضي الله عنه: أَنَّ رَسُولَ اللَّهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ دَخَلَ المَسْجِدَ فَدَخَلَ رَجُلٌ، فَصَلَّى، فَسَلَّمَ عَلَى النَّبِيِّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ، فَرَدَّ وَقَالَ: «ارْجِعْ فَصَلِّ، فَإِنَّكَ لَمْ تُصَلِّ»، فَرَجَعَ يُصَلِّي كَمَا صَلَّى، ثُمَّ جَاءَ، فَسَلَّمَ عَلَى النَّبِيِّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ، فَقَالَ: «ارْجِعْ فَصَلِّ، فَإِنَّكَ لَمْ تُصَلِّ» ثَلاَثًا، فَقَالَ: وَالَّذِي بَعَثَكَ بِالحَقِّ مَا أُحْسِنُ غَيْرَهُ، فَعَلِّمْنِي، فَقَالَ: «إِذَا قُمْتَ إِلَى الصَّلاَةِ فَكَبِّرْ، ثُمَّ اقْرَأْ مَا تَيَسَّرَ مَعَكَ مِنَ القُرْآنِ، ثُمَّ ارْكَعْ حَتَّى تَطْمَئِنَّ رَاكِعًا، ثُمَّ ارْفَعْ حَتَّى تَعْدِلَ قَائِمًا، ثُمَّ اسْجُدْ حَتَّى تَطْمَئِنَّ سَاجِدًا، ثُمَّ ارْفَعْ حَتَّى تَطْمَئِنَّ جَالِسًا، وَافْعَلْ ذَلِكَ فِي صَلاَتِكَ كُلِّهَا».",
+    "translation": "Abu Hurayrah (may Allah be pleased with him) reported: The Messenger of Allah (may Allah's peace and blessings be upon him) entered the mosque, and then a man came in and prayed. He greeted the Prophet (may Allah's peace and blessings be upon him), who responded and said: \"Go back and pray, for you have not prayed.\" He went back and prayed as he had prayed, then, he came to the Prophet (may Allah's peace and blessings be upon him) and greeted him. He said: \"Go back and pray, for you have not prayed,\" three times. So, he said: By the One Who sent you with the truth, I cannot do better than that. So teach me. He said: \"When you stand to pray, say Takbīr (Allāhu Akbar), then recite whatever you can of the Qur’an; then bow until you are at ease in bowing; then rise until you are standing up straight; then prostrate until you are at ease in prostration; and then sit up until you are at ease in sitting. Do that throughout your prayer.\"",
+    "attribution": "Agreed upon",
+    "grade": "Authentic",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "bukhari:350": {
+    "arabic": "عن عائشة أم المؤمنين قالت: فرض الله الصلاة حين فرضها ركعتين ركعتين، في الحضر والسفر، فأقرت صلاة السفر، وزيد في صلاة الحضر.",
+    "translation": "Narrated `Aisha:the mother of believers: Allah enjoined the prayer and when He enjoined it, it was two rak`at only (in every prayer) both when in residence or on journey. Then the prayers offered on journey remained the same, but (the rak`at of) the prayers for non-travelers were increased",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:735": {
     "arabic": "عَن ابْنِ عُمَرَ رضي الله عنهما: أَنَّ رَسُولَ اللَّهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ كَانَ يَرْفَعُ يَدَيْهِ حَذْوَ مَنْكِبَيْهِ إِذَا افْتَتَحَ الصَّلَاةَ، وَإِذَا كَبَّرَ لِلرُّكُوعِ، وَإِذَا رَفَعَ رَأْسَهُ مِنَ الرُّكُوعِ، رَفَعَهُمَا كَذَلِكَ أَيْضًا، وَقَالَ: «سَمِعَ اللَّهُ لِمَنْ حَمِدَهُ، رَبَّنَا وَلَكَ الحَمْدُ»، وَكَانَ لاَ يَفْعَلُ ذَلِكَ فِي السُّجُودِ.",
     "translation": "Ibn ‘Umar (may Allah be pleased with him and his father) reported: The Messenger of Allah (may Allah's peace and blessings be upon him) used to raise his hands in line with his shoulders when commencing the prayer, when saying Takbīr (proclaiming Allah's greatness) for Rukū‘ (bowing), and when raising his head from Rukū‘ he would raise them as well and say: \"Sami‘allāhu liman hamidah, rabbana wa laka al-hamd\" (Allah hears whoever praises Him, O our Lord, praise be to You). He did not use to do this in Sujūd (prostration).",
     "attribution": "Agreed upon",
-    "grade": "Authentic"
+    "grade": "Authentic",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
   },
-  "سُبْحَانَ رَبِّيَ الْأَعْلَى": {
-    "id": "3727",
-    "arabic": "عن حذيفة بن اليمان رضي الله عنهما قال: صليت مع النبي صلى الله عليه وسلم ذات ليلة فَافْتَتَحَ البقرة، فقلت: يركع عند المئة، ثم مضى، فقلت: يصلي بها في ركعة فمضى، فقلت: يركع بها، ثم افتتح النساء فقرأها، ثم افتتح آل عمران فقرأها، يقرأ مُتَرَسِّلًا: إذا مَر بآية فيها تَسبِيحٌ سَبَّحَ، وإذا مَر بسؤال سَأل، وإذا مَر بِتَعَوُّذٍ تَعَوَّذَ، ثم ركع، فجعل يقول: «سبحان ربي العظيم» فكان ركوعه نحوًا من قِيَامِهِ، ثم قال: «سمع الله لمن حمده، ربنا لك الحمد» ثم قام طويلًا قريبا مما ركع، ثم سجد، فقال: «سبحان ربي الأعلى» فكان سجوده قريبًا من قيامه.",
-    "translation": "Hudhayfah ibn al-Yamān (may Allah be pleased with him) reported: I prayed with the Prophet (may Allah's peace and blessings be upon him) once at night and he started reciting Sūrat al-Baqarah. I thought that he would bow in Rukū‘ at the end of one hundred verses, but he continued. I thought that he would probably recite it (this Sūrah only) in one Rak‘ah, but he continued. I thought he would perhaps bow in Rukū‘ on completing (this Sūrah). He then started reciting Sūrat An-Nisā’ and read it all, then he started reciting Sūrat Āl-‘Imrān and read it all. He recited slowly; when he came across a verse of Tasbīh (glorifying Allah), he would glorify Him, and when he came come across a verse of requesting Allah (something), he would request it from Him, and when he came across a verse of seeking refuge (with Allah), he would seek refuge (with Him). Then he bowed in Rukū‘ and said: \"Glory be to our Lord, the Most Great\". His bowing lasted about the same length of time as his standing. Upon rising from Rukū‘, he said: \"Allah listens to he who praises Him; praise be to You, Our Lord!\" He then remained standing about the same length of time as he had spent in bowing. He then prostrated and said: \"Gory be to our Lord, the Most High\", and his prostration lasted nearly the same length of time as his standing.",
-    "attribution": "Narrated by Muslim",
-    "grade": "Authentic hadith"
+  "bukhari:740": {
+    "arabic": "عن أبي حازم عن سهل بن سعد قال: كان الناس يؤمرون أن يضع الرجل اليد اليمنى على ذراعه اليسرى في الصلاة. قال أبو حازم: لا أعلمه إلا ينمي ذلك إلى النبي صلى الله عليه وسلم.",
+    "translation": "Narrated Sahl bin Sa`d:The people were ordered to place the right hand on the left forearm in the prayer. Abu Hazim said, \"I knew that the order was from the Prophet (ﷺ)",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
   },
-  "رَبِّ اغْفِرْ لِي": {
-    "id": "65104",
-    "arabic": "عن حُذَيْفَةَ رضي الله عنه: أَنَّ النَّبِيَّ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ كَانَ يَقُولُ بَيْنَ السَّجْدَتَيْنِ: «رَبِّ اغْفِرْ لِي، رَبِّ اغْفِرْ لِي».",
-    "translation": "Hudhayfah (may Allah be pleased with him) reported: The Prophet (may Allah's peace and blessings be upon him) used to say between the two prostrations: \"Rabbi ighfir li, rabbi ighfir li\" (My Lord, forgive me; my Lord, forgive me).",
-    "attribution": "Narrated by Abu Dāwūd, An-Nasā’i, Ibn Mājah, and Ahmad",
-    "grade": "Authentic"
+  "abu-dawud:759": {
+    "arabic": "حَدَّثَنَا أَبُو تَوْبَةَ، حَدَّثَنَا الْهَيْثَمُ، - يَعْنِي ابْنَ حُمَيْدٍ - عَنْ ثَوْرٍ، عَنْ سُلَيْمَانَ بْنِ مُوسَى، عَنْ طَاوُسٍ، قَالَ كَانَ رَسُولُ اللَّهِ صلى الله عليه وسلم يَضَعُ يَدَهُ الْيُمْنَى عَلَى يَدِهِ الْيُسْرَى ثُمَّ يَشُدُّ بَيْنَهُمَا عَلَى صَدْرِهِ وَهُوَ فِي الصَّلاَةِ ‏.‏",
+    "translation": "Narrated Tawus: The Messenger of Allah (ﷺ) used to place his right hand on his left hand, then he folded them strictly on his chest in prayer",
+    "grade": "Sahih (Al-Albani) · Sahih (Muhammad Muhyi Al-Din Abdul Hamid) · Sahih (Zubair Ali Zai)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
   },
-  "السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللَّهِ": {
-    "id": "10945",
-    "arabic": "عَنْ وَائِل بن حُجرٍ رضي الله عنه قَالَ: صَلَّيْتُ مَعَ النَّبِيِّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ، فَكَانَ يُسَلِّمُ عَنْ يَمِينِهِ: «السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ»، وَعَنْ شِمَالِهِ: «السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللَّهِ».",
-    "translation": "Wā’il ibn Hujr (may Allah be pleased with him) reported: I prayed with the Prophet (may Allah's peace and blessings be upon him), and he used to make Taslīm (salutation of peace ending the prayer) to his right saying: \"May Allah's peace, mercy, and blessings be upon you,\" and to his left saying: \"May Allah's peace and mercy be upon you.\"",
-    "attribution": "Narrated by Abu Dāwūd",
-    "grade": "Hasan"
+  "bukhari:756": {
+    "arabic": "حَدَّثَنَا عَلِيُّ بْنُ عَبْدِ اللَّهِ، قَالَ حَدَّثَنَا سُفْيَانُ، قَالَ حَدَّثَنَا الزُّهْرِيُّ، عَنْ مَحْمُودِ بْنِ الرَّبِيعِ، عَنْ عُبَادَةَ بْنِ الصَّامِتِ، أَنَّ رَسُولَ اللَّهِ صلى الله عليه وسلم قَالَ ‏ \"‏ لاَ صَلاَةَ لِمَنْ لَمْ يَقْرَأْ بِفَاتِحَةِ الْكِتَابِ ‏\"‏‏.‏",
+    "translation": "Narrated 'Ubada bin As-Samit:Allah's Messenger (ﷺ) said, \"Whoever does not recite Al-Fatiha in his prayer, his prayer is invalid",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
   },
-  "بِسْمِ اللَّهِ": {
-    "id": "10913",
-    "arabic": "عن أبي هريرة رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم : إذا قرأتم: الحمد لله فاقرءوا: ﴿بسم الله الرحمن الرحيم﴾ إنها أم القرآن، وأم الكتاب، والسبع المثاني، و﴿بسم الله الرحمن الرحيم﴾ إحداها.",
-    "translation": "Abu Hurayrah (may Allah be pleased with him) reported that the Messenger of Allah (may Allah's peace and blessings be upon him) said: \"When you recite Sūrat al-Fātihah, recite 'In the name of Allah, the Most Beneficent, the Most Merciful'. It is the mother of the Qur'an, the mother of the Book, and the seven oft-repeated verses, and 'In the name of Allah, the Most Beneficent, the Most Merciful' is one of these verses",
-    "attribution": "Al-Bayhaqi - Narrated by Ad-Daraqutny",
-    "grade": "Authentic hadith"
-  },
-  "بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا": {
-    "id": "65913",
-    "arabic": "عَنْ حُذَيْفَةَ قَالَ: كَانَ النَّبِيُّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ إِذَا أَرَادَ أَنْ يَنَامَ قَالَ: «بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا» وَإِذَا اسْتَيْقَظَ مِنْ مَنَامِهِ قَالَ: «الحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَمَا أَمَاتَنَا، وَإِلَيْهِ النُّشُورُ».",
-    "attribution": "رواه البخاري",
-    "grade": "صحيح"
-  },
-  "الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ": {
-    "id": "65913",
-    "arabic": "عَنْ حُذَيْفَةَ قَالَ: كَانَ النَّبِيُّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ إِذَا أَرَادَ أَنْ يَنَامَ قَالَ: «بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا» وَإِذَا اسْتَيْقَظَ مِنْ مَنَامِهِ قَالَ: «الحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَمَا أَمَاتَنَا، وَإِلَيْهِ النُّشُورُ».",
-    "attribution": "رواه البخاري",
-    "grade": "صحيح"
-  },
-  "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْخُبُثِ وَالْخَبَائِثِ": {
-    "id": "3150",
-    "arabic": "عَنْ أَنَسٍ رضي الله عنه قَألَ: كَانَ النَّبِيُّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ إِذَا دَخَلَ الخَلاَءَ قَالَ: «اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الخُبُثِ وَالخَبَائِثِ».",
-    "translation": "Anas (may Allah be pleased with him) reported: The Prophet (may Allah's peace and blessings be upon him) used to say before entering the bathroom: \"Allāhumma inni a‘ūdhu bika min al-khubuth wa al-khabā’ith (O Allah, I seek refuge in You from the male and female devils).\"",
+  "bukhari:812": {
+    "arabic": "عن ابنِ عَبَّاسٍ رضي الله عنهما عن النبيِّ صلى الله عليه وسلم قال: «أُمِرْتُ أَنْ أَسْجُدَ عَلَى سَبْعَةِ أَعْظُمٍ: عَلَى الْجَبْهَةِ وَأَشَارَ بِيَدِهِ عَلَى أَنْفِهِ، وَالْيَدَيْنِ، وَالرُّكْبَتَيْنِ، وَأَطْرَافِ الْقَدَمَيْنِ، وَلَا نَكْفِتَ الثِّيَابَ وَالشَّعَرَ».",
+    "translation": "Ibn ‘Abbās (may Allah be pleased with him and his father) reported that the Prophet (may Allah's peace and blessings be upon him) said: \"I have been commanded to prostrate on seven bones: the forehead (and he pointed to his nose), the hands, the knees, and the extremities of the feet, and not to tuck up the clothes and hair.\"",
     "attribution": "Agreed upon",
-    "grade": "Authentic"
+    "grade": "Authentic",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
   },
-  "غُفْرَانَكَ": {
-    "id": "10046",
-    "arabic": "عَنْ عَائِشَةَ أُمِّ المؤْمنينَ رَضيَ اللهُ عنها: أَنَّ النَّبِيَّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ كَانَ إِذَا خَرَجَ مِنَ الغَائِطِ قَالَ: «غُفْرَانَكَ».",
-    "translation": "‘Ā’ishah, Mother of the Believers (may Allah be pleased with her), reported: When the Prophet (may Allah's peace and blessings be upon him) came out of the privy, he would say: 'Ghufrānak' (Your forgiveness).",
+  "muslim:579a": {
+    "arabic": "حَدَّثَنِي أَبُو كُرَيْبٍ، مُحَمَّدُ بْنُ الْعَلاَءِ وَالْقَاسِمُ بْنُ زَكَرِيَّاءَ بْنِ دِينَارٍ وَعَبْدُ بْنُ حُمَيْدٍ قَالُوا حَدَّثَنَا خَالِدُ بْنُ مَخْلَدٍ، عَنْ سُلَيْمَانَ بْنِ بِلاَلٍ، حَدَّثَنِي عُمَارَةُ بْنُ غَزِيَّةَ الأَنْصَارِيُّ، عَنْ نُعَيْمِ بْنِ عَبْدِ اللَّهِ الْمُجْمِرِ، قَالَ رَأَيْتُ أَبَا هُرَيْرَةَ يَتَوَضَّأُ فَغَسَلَ وَجْهَهُ فَأَسْبَغَ الْوُضُوءَ ثُمَّ غَسَلَ يَدَهُ الْيُمْنَى حَتَّى أَشْرَعَ فِي الْعَضُدِ ثُمَّ يَدَهُ الْيُسْرَى حَتَّى أَشْرَعَ فِي الْعَضُدِ ثُمَّ مَسَحَ رَأْسَهُ ثُمَّ غَسَلَ رِجْلَهُ الْيُمْنَى حَتَّى أَشْرَعَ فِي السَّاقِ ثُمَّ غَسَلَ رِجْلَهُ الْيُسْرَى حَتَّى أَشْرَعَ فِي السَّاقِ ثُمَّ قَالَ هَكَذَا رَأَيْتُ رَسُولَ اللَّهِ صلى الله عليه وسلم يَتَوَضَّأُ ‏.‏ وَقَالَ قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏ \"‏ أَنْتُمُ الْغُرُّ الْمُحَجَّلُونَ يَوْمَ الْقِيَامَةِ مِنْ إِسْبَاغِ الْوُضُوءِ فَمَنِ اسْتَطَاعَ مِنْكُمْ فَلْيُطِلْ غُرَّتَهُ وَتَحْجِيلَهُ ‏\"‏ ‏.‏",
+    "translation": "Nu'aim b. 'Abdullah al-Mujmir reported:I saw Abu Huraira perform ablution. He washed his face and washed it well. He then washed his right hand including a portion of his arm. He then washed his left hand including a portion of his arm. He then wiped his head. He then washed his right foot including his shank, and then washed his left foot including shank, and then said: This is how I saw Allah's Messenger (ﷺ) perform his ablution. And (Abu Huraira) added that the Messenger of Allah (ﷺ) had observed: You shall have your faces hands and feet bright on the Day of Resurrection because of your perfect ablution. He who can afford among you, let him increase the brightness of his forehead and that of hands and legs",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:795": {
+    "arabic": "حَدَّثَنَا آدَمُ، قَالَ حَدَّثَنَا ابْنُ أَبِي ذِئْبٍ، عَنْ سَعِيدٍ الْمَقْبُرِيِّ، عَنْ أَبِي هُرَيْرَةَ، قَالَ كَانَ النَّبِيُّ صلى الله عليه وسلم إِذَا قَالَ ‏\"‏ سَمِعَ اللَّهُ لِمَنْ حَمِدَهُ ‏\"‏‏.‏ قَالَ ‏\"‏ اللَّهُمَّ رَبَّنَا وَلَكَ الْحَمْدُ ‏\"‏‏.‏ وَكَانَ النَّبِيُّ صلى الله عليه وسلم إِذَا رَكَعَ وَإِذَا رَفَعَ رَأْسَهُ يُكَبِّرُ، وَإِذَا قَامَ مِنَ السَّجْدَتَيْنِ قَالَ ‏\"‏ اللَّهُ أَكْبَرُ ‏\"‏‏.‏",
+    "translation": "Narrated Abu Huraira:When the Prophet (ﷺ) said, \"Sami`a l-lahu liman hamidah,\" (Allah heard those who sent praises to Him), he would say, \"Rabbana wa laka l-hamd.\" On bowing and raising his head from it the Prophet (ﷺ) used to say Takbir. He also used to say Takbir on rising after the two prostrations. (See Hadith No)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "abu-dawud:775": {
+    "arabic": "عن أبي سعيد الخُدْرِي رضي الله عنه قال: كان رسول الله صلى الله عليه وسلم إذا قام من الليل كَبَّر، ثم يقول: «سُبْحَانك اللَّهم وبحَمْدِك وتبارك اسْمُك، وتعالى جَدُّك، ولا إله غَيْرك»، ثم يقول: «لا إله إلا الله» ثلاثا، ثم يقول: «الله أكبر كبيرا» ثلاثا، «أعُوذُ بالله السَّميع العليم من الشَّيطان الرَّجيم من هَمْزِه، ونَفْخِه، ونَفْثِه»، ثم يقرأ.",
+    "translation": "Abu Sa‘īd al-Khudri (may Allah be pleased with him) reported: When the Messenger of Allah (may Allah's peace and blessings be upon him) got up to pray at night, he would make Takbīr and then say: \"Glory be to You, O Allah, and praise. Blessed is Your name, exalted is Your greatness, and there is nothing worthy of worship but You,\" three times. Thereafter, he would say: \"Allah is the absolute Greatest,\" three times, and: \"I seek refuge in Allah, the All-Hearing and All-Knowing, from the accursed Devil, from his evil suggestions, blowing, and spitting.\" After that, he would recite.",
+    "attribution": "Narrated by Ibn Majah - An-Nasaa’i - Narrated by Abu Daoud - Narrated by Ahmad",
+    "grade": "Sahih (Al-Albani) · Sahih (Muhammad Muhyi Al-Din Abdul Hamid) · Sahih Lighairihi (Shuaib Al Arnaut) · Isnaad Hasan (Zubair Ali Zai)",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "muslim:772": {
+    "arabic": "وَحَدَّثَنَا زُهَيْرُ بْنُ حَرْبٍ، حَدَّثَنَا رَوْحُ بْنُ عُبَادَةَ، حَدَّثَنَا زَكَرِيَّاءُ بْنُ إِسْحَاقَ، حَدَّثَنَا عَمْرُو بْنُ دِينَارٍ، قَالَ سَمِعْتُ جَابِرَ بْنَ عَبْدِ اللَّهِ، يُحَدِّثُ أَنَّ رَسُولَ اللَّهِ صلى الله عليه وسلم كَانَ يَنْقُلُ مَعَهُمُ الْحِجَارَةَ لِلْكَعْبَةِ وَعَلَيْهِ إِزَارُهُ فَقَالَ لَهُ الْعَبَّاسُ عَمُّهُ يَا ابْنَ أَخِي لَوْ حَلَلْتَ إِزَارَكَ فَجَعَلْتَهُ عَلَى مَنْكِبِكَ دُونَ الْحِجَارَةِ - قَالَ - فَحَلَّهُ فَجَعَلَهُ عَلَى مَنْكِبِهِ فَسَقَطَ مَغْشِيًّا عَلَيْهِ - قَالَ - فَمَا رُؤِيَ بَعْدَ ذَلِكَ الْيَوْمِ عُرْيَانًا ‏.‏",
+    "translation": "Jabir b. 'Abdullah reported:The Messenger of Allah (ﷺ) was carrying along with them (his people) stones for the Ka'ba and there was a waist wrapper around him. His uncle,\" Abbas, said to him: 0 son of my brother! if you take off the lower garment and place it on the shoulders underneath the stones, it would be better. He (the Holy Prophet) took it off and placed it on his shoulder and fell down unconscious. He (the narrator) said: Never was he seen naked after that day",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "abu-dawud:874": {
+    "arabic": "حَدَّثَنَا أَبُو الْوَلِيدِ الطَّيَالِسِيُّ، وَعَلِيُّ بْنُ الْجَعْدِ، قَالاَ حَدَّثَنَا شُعْبَةُ، عَنْ عَمْرِو بْنِ مُرَّةَ، عَنْ أَبِي حَمْزَةَ، مَوْلَى الأَنْصَارِ عَنْ رَجُلٍ، مِنْ بَنِي عَبْسٍ عَنْ حُذَيْفَةَ، أَنَّهُ رَأَى رَسُولَ اللَّهِ صلى الله عليه وسلم يُصَلِّي مِنَ اللَّيْلِ فَكَانَ يَقُولُ ‏\"‏ اللَّهُ أَكْبَرُ - ثَلاَثًا - ذُو الْمَلَكُوتِ وَالْجَبَرُوتِ وَالْكِبْرِيَاءِ وَالْعَظَمَةِ ‏\"‏ ‏.‏ ثُمَّ اسْتَفْتَحَ فَقَرَأَ الْبَقَرَةَ ثُمَّ رَكَعَ فَكَانَ رُكُوعُهُ نَحْوًا مِنْ قِيَامِهِ وَكَانَ يَقُولُ فِي رُكُوعِهِ ‏\"‏ سُبْحَانَ رَبِّيَ الْعَظِيمِ سُبْحَانَ رَبِّيَ الْعَظِيمِ ‏\"‏ ‏.‏ ثُمَّ رَفَعَ رَأْسَهُ مِنَ الرُّكُوعِ فَكَانَ قِيَامُهُ نَحْوًا مِنْ رُكُوعِهِ يَقُولُ ‏\"‏ لِرَبِّيَ الْحَمْدُ ‏\"‏ ‏.‏ ثُمَّ سَجَدَ فَكَانَ سُجُودُهُ نَحْوًا مِنْ قِيَامِهِ فَكَانَ يَقُولُ فِي سُجُودِهِ ‏\"‏ سُبْحَانَ رَبِّيَ الأَعْلَى ‏\"‏ ‏.‏ ثُمَّ رَفَعَ رَأْسَهُ مِنَ السُّجُودِ وَكَانَ يَقْعُدُ فِيمَا بَيْنَ السَّجْدَتَيْنِ نَحْوًا مِنْ سُجُودِهِ وَكَانَ يَقُولُ ‏\"‏ رَبِّ اغْفِرْ لِي رَبِّ اغْفِرْ لِي ‏\"‏ ‏.‏ فَصَلَّى أَرْبَعَ رَكَعَاتٍ فَقَرَأَ فِيهِنَّ الْبَقَرَةَ وَآلَ عِمْرَانَ وَالنِّسَاءَ وَالْمَائِدَةَ أَوِ الأَنْعَامَ شَكَّ شُعْبَةُ ‏.‏",
+    "translation": "Narrated Hudhayfah: Hudhayfah saw the Messenger of Allah (ﷺ) praying at night. He said: Allah is most great\" three times, \"Possessor of kingdom, grandeur, greatness and majesty.\" He then began (his prayer) and recited Surah al-Baqarah; then he bowed and he paused in bowing as long as he stood up; he said while bowing, \"Glory be to my mighty Lord,\" \"Glory be to my mighty Lord\" ; then he raised his head, after bowing: then he stood up and he paused as long as he paused in bowing and said, \"Praise be to my Lord\" ; then he prostrated and paused in prostration as long as he paused in the standing position; he said while prostrating: \"Glory be to my most high Lord\"; then he raised his head after prostration, and sat as long as he prostrated, and said while sitting: \"O my Lord forgive me.\" He offered four rak'ahs of prayer and recited in them Surah al-Baqarah, Aal Imran, an-Nisa, al-Ma'idah, or al-An'am. The narrator Shu'bah doubted",
+    "grade": "Sahih (Al-Albani) · Sahih (Muhammad Muhyi Al-Din Abdul Hamid) · Sahih (Shuaib Al Arnaut) · Sahih (Zubair Ali Zai)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:831": {
+    "arabic": "عَنِ ابْنَ مَسْعُودٍ رضي الله عنه قَالَ: عَلَّمَنِي رَسُولُ اللَّهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ، وَكَفِّي بَيْنَ كَفَّيْهِ، التَّشَهُّدَ، كَمَا يُعَلِّمُنِي السُّورَةَ مِنَ القُرْآنِ: «التَّحِيَّاتُ لِلَّهِ، وَالصَّلَوَاتُ وَالطَّيِّبَاتُ، السَّلاَمُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ، السَّلاَمُ عَلَيْنَا وَعَلَى عِبَادِ اللَّهِ الصَّالِحِينَ، أَشْهَدُ أَنْ لاَ إِلَهَ إِلَّا اللَّهُ، وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ».\nوفي لفظ لهما: «إِنَّ اللهَ هُوَ السَّلَامُ، فَإِذَا قَعَدَ أَحَدُكُمْ فِي الصَّلَاةِ فَلْيَقُلْ: التَّحِيَّاتُ لِلَّهِ وَالصَّلَوَاتُ وَالطَّيِّبَاتُ السَّلَامُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ، السَّلَامُ عَلَيْنَا وَعَلَى عِبَادِ اللهِ الصَّالِحِينَ، فَإِذَا قَالَهَا أَصَابَتْ كُلَّ عَبْدٍ لِلَّهِ صَالِحٍ فِي السَّمَاءِ وَالْأَرْضِ، أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللهُ، وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ، ثُمَّ يَتَخَيَّرُ مِنَ الْمَسْأَلَةِ مَا شَاءَ».",
+    "translation": "Ibn Mas‘ūd (may Allah be pleased with him) reported: The Messenger of Allah (may Allah's peace and blessings be upon him) taught me the Tashahhud, with my hand between his two hands, as he would teach me a Surah from the Qur’an: \"At-tahiyyātu lillāhi was-salawātu wat-tayyibātu as-Salāmu ‘alayka ayyuha an-nabiyyu wa rahmatullāhi wa barakātuh, as-salāmu ‘alayna wa ‘ala ‘ibādillāhi as-sālihīn, ash-hadu alla ilāha illallāh wa ash-hadu anna Muhammadan ‘abduhu wa rasūluh (Greetings, prayers, and good things are due to Allah. May the peace, mercy, and blessings of Allah be upon you, O Prophet. Peace be upon us and upon the righteous slaves of Allah. I bear witness that there is no god but Allah, and I bear witness that Muhammad is His slave and Messenger).\" Another wording reads: \"Verily, Allah is the Giver of Peace, so when any of you sits in prayer, let him say: 'At-tahiyyātu lillāhi was-salawātu wat-tayyibātu as-salāmu ‘alayka ayyuha an-nabiyyu wa rahmatullāhi wa barakātuh, as-salāmu ‘alayna wa ‘ala ‘ibādillāhi as-sālihīn (Greetings, prayers, and good things are due to Allah. May the peace, mercy, and blessings of Allah be upon you, O Prophet. Peace be upon us and upon the righteous slaves of Allah).' If you say this, it will benefit every righteous slave of Allah in heaven and on earth. (Then, say:) 'Ash-hadu alla ilāha illallāh wa ash-hadu anna Muhammadan ‘abduhu wa rasūluh (I bear witness that there is no god but Allah, and I bear witness that Muhammad is His slave and Messenger).' Then, let him choose whatever supplication he would like.\"",
+    "attribution": "Agreed upon",
+    "grade": "Authentic",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "bukhari:3370": {
+    "arabic": "عَنْ عَبْدِ الرَّحْمَنِ بْنِ أَبِي لَيْلَى قَالَ: لَقِيَنِي كَعْبُ بْنُ عُجْرَةَ، فَقَالَ: أَلاَ أُهْدِي لَكَ هَدِيَّةً؟ إِنَّ النَّبِيَّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ خَرَجَ عَلَيْنَا، فَقُلْنَا: يَا رَسُولَ اللَّهِ، قَدْ عَلِمْنَا كَيْفَ نُسَلِّمُ عَلَيْكَ، فَكَيْفَ نُصَلِّي عَلَيْكَ؟ قَالَ: «فَقُولُوا: اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا صَلَّيْتَ عَلَى آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ، اللَّهُمَّ بَارِكْ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا بَارَكْتَ عَلَى آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ».",
+    "translation": "‘Abdur-Rahmān ibn Abi Layla reported: I came across Ka‘b ibn ‘Ujrah who said: Shall I offer you a present? The Prophet (may Allah's peace and blessings be upon him) came out to us, and we said: O Messenger of Allah, we have learned how to greet you, but how should we invoke the blessings of Allah upon you? He said: \"Say: Allāhumma salli ‘ala Muhammad wa ‘ala āli Muhammad kama sallayta ‘ala āli Ibrāhīm innaka hamīdun majīd. Allāhumma bārik' ala Muhammad wa' ala āli Muhammad kama bārakta' ala āli Ibrāhīm innaka hamīdun majīd (O Allah, bestow Your grace upon Muhammad and the family of Muhammad just as You bestowed Your grace upon the family of Abraham. Verily, You are Praiseworthy, All-Glorious. O Allah, bless Muhammad and the family of Muhammad just as You blessed the family of Abraham. Verily, You are Praiseworthy, All-Glorious).\"",
+    "attribution": "Agreed upon",
+    "grade": "Authentic",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "abu-dawud:996": {
+    "arabic": "حَدَّثَنَا مُحَمَّدُ بْنُ كَثِيرٍ، أَخْبَرَنَا سُفْيَانُ، ح وَحَدَّثَنَا أَحْمَدُ بْنُ يُونُسَ، حَدَّثَنَا زَائِدَةُ، ح وَحَدَّثَنَا مُسَدَّدٌ، حَدَّثَنَا أَبُو الأَحْوَصِ، ح وَحَدَّثَنَا مُحَمَّدُ بْنُ عُبَيْدٍ الْمُحَارِبِيُّ، وَزِيَادُ بْنُ أَيُّوبَ، قَالاَ حَدَّثَنَا عُمَرُ بْنُ عُبَيْدٍ الطَّنَافِسِيُّ، ح وَحَدَّثَنَا تَمِيمُ بْنُ الْمُنْتَصِرِ، أَخْبَرَنَا إِسْحَاقُ، - يَعْنِي ابْنَ يُوسُفَ - عَنْ شَرِيكٍ، ح وَحَدَّثَنَا أَحْمَدُ بْنُ مَنِيعٍ، حَدَّثَنَا حُسَيْنُ بْنُ مُحَمَّدٍ، حَدَّثَنَا إِسْرَائِيلُ، كُلُّهُمْ عَنْ أَبِي إِسْحَاقَ، عَنْ أَبِي الأَحْوَصِ، عَنْ عَبْدِ اللَّهِ، وَقَالَ، إِسْرَائِيلُ عَنْ أَبِي الأَحْوَصِ، وَالأَسْوَدِ، عَنْ عَبْدِ اللَّهِ، أَنَّ النَّبِيَّ صلى الله عليه وسلم كَانَ يُسَلِّمُ عَنْ يَمِينِهِ وَعَنْ شِمَالِهِ حَتَّى يُرَى بَيَاضُ خَدِّهِ ‏ \"‏ السَّلاَمُ عَلَيْكُمْ وَرَحْمَةُ اللَّهِ السَّلاَمُ عَلَيْكُمْ وَرَحْمَةُ اللَّهِ ‏\"‏ ‏.‏ قَالَ أَبُو دَاوُدَ وَهَذَا لَفْظُ حَدِيثِ سُفْيَانَ وَحَدِيثُ إِسْرَائِيلَ لَمْ يُفَسِّرْهُ ‏.‏ قَالَ أَبُو دَاوُدَ وَرَوَاهُ زُهَيْرٌ عَنْ أَبِي إِسْحَاقَ وَيَحْيَى بْنُ آدَمَ عَنْ إِسْرَائِيلَ عَنْ أَبِي إِسْحَاقَ عَنْ عَبْدِ الرَّحْمَنِ بْنِ الأَسْوَدِ عَنْ أَبِيهِ وَعَلْقَمَةَ عَنْ عَبْدِ اللَّهِ ‏.‏ قَالَ أَبُو دَاوُدَ شُعْبَةُ كَانَ يُنْكِرُ هَذَا الْحَدِيثَ - حَدِيثَ أَبِي إِسْحَاقَ - أَنْ يَكُونَ مَرْفُوعًا ‏.‏",
+    "translation": "Narrated Abdullah ibn Mas'ud: The Prophet (ﷺ) used to give the salutation to his left and right sides until the whiteness of his cheek was seen, (saying: \"Peace be upon you, and mercy of Allah\" twice. AbuDawud said: This is a version of the tradition reported by AbuSufyan. The version of Isra'il did not explain it. AbuDawud said: This tradition has been narrated by Zubayr from AbuIshaq and Yahya ibn Adam from Isra'il from AbuIshaq from AbdurRahman ibn al-Aswad from his father from Alqamah on the authority of Abdullah ibn Mas'ud. AbuDawud said: Shu'bah used to reject this tradition, the tradition narrated by AbuIshaq as coming from the Prophet (ﷺ)",
+    "grade": "Sahih (Al-Albani) · Sahih (Muhammad Muhyi Al-Din Abdul Hamid) · Sahih (Zubair Ali Zai)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:739": {
+    "arabic": "عن نافع أن ابن عمر كان إذا دخل في الصلاة كبر ورفع يديه، وإذا ركع رفع يديه، وإذا قال: سمع الله لمن حمده. رفع يديه، وإذا قام من الركعتين رفع يديه، ورفع ذلك ابن عمر إلى نبي الله صلى الله عليه وسلم.",
+    "translation": "Narrated Nafi`:Whenever Ibn `Umar started the prayer with Takbir, he used to raise his hands: whenever he bowed, he used to raise his hands (before bowing) and also used to raise his hands on saying, \"Sami`a l-lahu liman hamidah\", and he used to do the same on rising from the second rak`a (for the 3rd rak`a). Ibn `Umar said: \"The Prophet (ﷺ) used to do the same",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "muslim:391b": {
+    "arabic": "حَدَّثَنَا قُتَيْبَةُ بْنُ سَعِيدٍ، حَدَّثَنَا لَيْثٌ، عَنْ سَعِيدِ بْنِ أَبِي سَعِيدٍ، عَنْ عَطَاءِ بْنِ مِينَاءَ، عَنْ أَبِي هُرَيْرَةَ، أَنَّهُ قَالَ قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏ \"‏ وَاللَّهِ لَيَنْزِلَنَّ ابْنُ مَرْيَمَ حَكَمًا عَادِلاً فَلَيَكْسِرَنَّ الصَّلِيبَ وَلَيَقْتُلَنَّ الْخِنْزِيرَ وَلَيَضَعَنَّ الْجِزْيَةَ وَلَتُتْرَكَنَّ الْقِلاَصُ فَلاَ يُسْعَى عَلَيْهَا وَلَتَذْهَبَنَّ الشَّحْنَاءُ وَالتَّبَاغُضُ وَالتَّحَاسُدُ وَلَيَدْعُوَنَّ إِلَى الْمَالِ فَلاَ يَقْبَلُهُ أَحَدٌ ‏\"‏ ‏.‏",
+    "translation": "It is narrated on the authority of Abu Huraira that the Messenger or Allah (ﷺ) observed:I swear by Allah that the son of Mary will certainly descend as a just judge and he would definitely break the cross, and kill swine and abolish Jizya and would leave the young she-camel and no one would endeavour to (collect Zakat on it). Spite, mutual hatred and jealousy against one another will certainly disappear and when he summons people to accept wealth, not even one would do so",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:50": {
+    "arabic": "حَدَّثَنَا مُسَدَّدٌ، قَالَ حَدَّثَنَا إِسْمَاعِيلُ بْنُ إِبْرَاهِيمَ، أَخْبَرَنَا أَبُو حَيَّانَ التَّيْمِيُّ، عَنْ أَبِي زُرْعَةَ، عَنْ أَبِي هُرَيْرَةَ، قَالَ كَانَ النَّبِيُّ صلى الله عليه وسلم بَارِزًا يَوْمًا لِلنَّاسِ، فَأَتَاهُ جِبْرِيلُ فَقَالَ مَا الإِيمَانُ قَالَ ‏\"‏ الإِيمَانُ أَنْ تُؤْمِنَ بِاللَّهِ وَمَلاَئِكَتِهِ وَبِلِقَائِهِ وَرُسُلِهِ، وَتُؤْمِنَ بِالْبَعْثِ ‏\"‏‏.‏ قَالَ مَا الإِسْلاَمُ قَالَ ‏\"‏ الإِسْلاَمُ أَنْ تَعْبُدَ اللَّهَ وَلاَ تُشْرِكَ بِهِ، وَتُقِيمَ الصَّلاَةَ، وَتُؤَدِّيَ الزَّكَاةَ الْمَفْرُوضَةَ، وَتَصُومَ رَمَضَانَ ‏\"‏‏.‏ قَالَ مَا الإِحْسَانُ قَالَ ‏\"‏ أَنْ تَعْبُدَ اللَّهَ كَأَنَّكَ تَرَاهُ، فَإِنْ لَمْ تَكُنْ تَرَاهُ فَإِنَّهُ يَرَاكَ ‏\"‏‏.‏ قَالَ مَتَى السَّاعَةُ قَالَ ‏\"‏ مَا الْمَسْئُولُ عَنْهَا بِأَعْلَمَ مِنَ السَّائِلِ، وَسَأُخْبِرُكَ عَنْ أَشْرَاطِهَا إِذَا وَلَدَتِ الأَمَةُ رَبَّهَا، وَإِذَا تَطَاوَلَ رُعَاةُ الإِبِلِ الْبُهْمُ فِي الْبُنْيَانِ، فِي خَمْسٍ لاَ يَعْلَمُهُنَّ إِلاَّ اللَّهُ ‏\"‏‏.‏ ثُمَّ تَلاَ النَّبِيُّ صلى الله عليه وسلم ‏{‏إِنَّ اللَّهَ عِنْدَهُ عِلْمُ السَّاعَةِ‏}‏ الآيَةَ‏.‏ ثُمَّ أَدْبَرَ فَقَالَ ‏\"‏ رُدُّوهُ ‏\"‏‏.‏ فَلَمْ يَرَوْا شَيْئًا‏.‏ فَقَالَ ‏\"‏ هَذَا جِبْرِيلُ جَاءَ يُعَلِّمُ النَّاسَ دِينَهُمْ ‏\"‏‏.‏ قَالَ أَبُو عَبْدِ اللَّهِ جَعَلَ ذَلِكَ كُلَّهُ مِنَ الإِيمَانِ‏.‏",
+    "translation": "Narrated Abu Huraira: One day while the Prophet (ﷺ) was sitting in the company of some people, (The angel) Gabriel came and asked, \"What is faith?\" Allah's Messenger (ﷺ) replied, 'Faith is to believe in Allah, His angels, (the) meeting with Him, His Apostles, and to believe in Resurrection.\" Then he further asked, \"What is Islam?\" Allah's Messenger (ﷺ) replied, \"To worship Allah Alone and none else, to offer prayers perfectly to pay the compulsory charity (Zakat) and to observe fasts during the month of Ramadan.\" Then he further asked, \"What is Ihsan (perfection)?\" Allah's Messenger (ﷺ) replied, \"To worship Allah as if you see Him, and if you cannot achieve this state of devotion then you must consider that He is looking at you.\" Then he further asked, \"When will the Hour be established?\" Allah's Messenger (ﷺ) replied, \"The answerer has no better knowledge than the questioner. But I will inform you about its portents. 1. When a slave (lady) gives birth to her master. 2. When the shepherds of black camels start boasting and competing with others in the construction of higher buildings. And the Hour is one of five things which nobody knows except Allah. The Prophet (ﷺ) then recited: \"Verily, with Allah (Alone) is the knowledge of the Hour--.\" (31. 34) Then that man (Gabriel) left and the Prophet (ﷺ) asked his companions to call him back, but they could not see him. Then the Prophet (ﷺ) said, \"That was Gabriel who came to teach the people their religion.\" Abu 'Abdullah said: He (the Prophet) considered all that as a part of faith",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "muslim:8a": {
+    "arabic": "كَانَ أَوَّلَ مَنْ قَالَ فِي الْقَدَرِ بِالْبَصْرَةِ مَعْبَدٌ الْجُهَنِيُّ۔ فَانْطَلَقْتُ أَنَا وَحُمَيْدُ بْنُ عَبْدِ الرَّحْمَنِ الْحِمْيَرِيُّ حَاجَّيْنِ أَوْ مُعْتَمِرَيْنِ، فَقُلْنَا لَوْ لَقِينَا أَحَدًا مِنْ أَصْحَابِ رَسُولِ اللَّهِ ﷺ فَسَأَلْنَاهُ عَمَّا يَقُولُ هَؤُلاَءِ فِي الْقَدَرِ۔ فَوُفِّقَ لَنَا عَبْدُ اللَّهِ بْنُ عُمَرَ بْنِ الْخَطَّابِ دَاخِلاً الْمَسْجِدَ فَاكْتَنَفْتُهُ أَنَا وَصَاحِبِي أَحَدُنَا عَنْ يَمِينِهِ وَالآخَرُ عَنْ شِمَالِهِ۔ فَظَنَنْتُ أَنَّ صَاحِبِي سَيَكِلُ الْكَلاَمَ إِلَىَّ۔ فَقُلْتُ أَبَا عَبْدِ الرَّحْمَنِ: إِنَّهُ قَدْ ظَهَرَ قِبَلَنَا نَاسٌ يَقْرَءُونَ الْقُرْآنَ وَيَتَقَفَّرُونَ الْعِلْمَ وَذَكَرَ مِنْ شَأْنِهِمْ وَأَنَّهُمْ يَزْعُمُونَ أَنْ لاَ قَدَرَ، وَأَنَّ الأَمْرَ أُنُفٌ۔ قَالَ: فَإِذَا لَقِيتَ أُولَئِكَ فَأَخْبِرْهُمْ أَنِّي بَرِيءٌ مِنْهُمْ وَأَنَّهُمْ بُرَآءُ مِنِّي، وَالَّذِي يَحْلِفُ بِهِ عَبْدُ اللَّهِ بْنُ عُمَرَ لَوْ أَنَّ لأَحَدِهِمْ مِثْلَ أُحُدٍ ذَهَبًا فَأَنْفَقَهُ، مَا قَبِلَ اللَّهُ مِنْهُ حَتَّى يُؤْمِنَ بِالْقَدَرِ۔ ثُمَّ قَالَ: حَدَّثَنِي أَبِي عُمَرُ بْنُ الْخَطَّابِ قَالَ: بَيْنَمَا نَحْنُ عِنْدَ رَسُولِ اللَّهِ ﷺ ذَاتَ يَوْمٍ إِذْ طَلَعَ عَلَيْنَا رَجُلٌ شَدِيدُ بَيَاضِ الثِّيَابِ، شَدِيدُ سَوَادِ الشَّعَرِ۔ لاَ يُرَى عَلَيْهِ أَثَرُ السَّفَرِ وَلاَ يَعْرِفُهُ مِنَّا أَحَدٌ۔ حَتَّى جَلَسَ إِلَى النَّبِيِّ ﷺ فَأَسْنَدَ رُكْبَتَيْهِ إِلَى رُكْبَتَيْهِ، وَوَضَعَ كَفَّيْهِ عَلَى فَخِذَيْهِ۔ وَقَالَ: يَا مُحَمَّدُ، أَخْبِرْنِي عَنِ الإِسْلاَمِ۔ فَقَالَ رَسُولُ اللَّهِ ﷺ: *«الإِسْلاَمُ (١) أَنْ تَشْهَدَ أَنْ لاَ إِلَهَ إِلاَّ اللَّهُ وَأَنَّ مُحَمَّدًا رَسُولُ اللَّهِ، (٢) وَتُقِيمَ الصَّلاَةَ، (٣) وَتُؤْتِيَ الزَّكَاةَ، (٤) وَتَصُومَ رَمَضَانَ، (٥) وَتَحُجَّ الْبَيْتَ إِنِ اسْتَطَعْتَ إِلَيْهِ سَبِيلاً۔»* قَالَ: صَدَقْتَ۔ قَالَ: فَعَجِبْنَا لَهُ يَسْأَلُهُ وَيُصَدِّقُهُ! قَالَ: فَأَخْبِرْنِي عَنِ الإِيمَانِ۔ قَالَ: *«أَنْ (١) تُؤْمِنَ بِاللَّهِ، (٢) وَمَلاَئِكَتِهِ، (٣) وَكُتُبِهِ، (٤) وَرُسُلِهِ، (٥) وَالْيَوْمِ الآخِرِ، (٦) وَتُؤْمِنَ بِالْقَدَرِ خَيْرِهِ وَشَرِّهِ۔»* قَالَ: صَدَقْتَ۔ قَالَ: فَأَخْبِرْنِي عَنِ الإِحْسَانِ۔ قَالَ: *«أَنْ (١) تَعْبُدَ اللَّهَ كَأَنَّكَ تَرَاهُ، (٢) فَإِنْ لَمْ تَكُنْ تَرَاهُ فَإِنَّهُ يَرَاكَ۔»* قَالَ: فَأَخْبِرْنِي عَنِ السَّاعَةِ۔ قَالَ: *«مَا الْمَسْئُولُ عَنْهَا بِأَعْلَمَ مِنَ السَّائِلِ۔»* قَالَ: فَأَخْبِرْنِي عَنْ أَمَارَتِهَا۔ قَالَ: *«أَنْ تَلِدَ الأَمَةُ رَبَّتَهَا، وَأَنْ تَرَى الْحُفَاةَ الْعُرَاةَ الْعَالَةَ رِعَاءَ الشَّاءِ يَتَطَاوَلُونَ فِي الْبُنْيَانِ۔»* قَالَ: ثُمَّ انْطَلَقَ فَلَبِثْتُ مَلِيًّا ثُمَّ قَالَ لِي: *«يَا عُمَرُ أَتَدْرِي مَنِ السَّائِلُ؟»* قُلْتُ: اللَّهُ وَرَسُولُهُ أَعْلَمُ۔ قَالَ: *«فَإِنَّهُ جِبْرِيلُ أَتَاكُمْ يُعَلِّمُكُمْ دِينَكُمْ۔»*",
+    "translation": "the first man who discussed Qadar (Divine Decree) in Baṣrah was Maʿbad al-Juhanī. I along with Ḥumayd b. ʿAbd al-Raḥmān Ḥimyarī set out for pilgrimage or for ʿUmrah and said: Should it so happen that we come into contact with one of the Companions of the Messenger of Allah ﷺ, we shall ask him about what is talked about Qadar. Accidentally we came across ʿAbdullāh b. ʿUmar b. al-Khaṭṭāb, while he was entering the mosque. My companion and I surrounded him. One of us ˹stood˺ on his right and the other stood on his left. I expected that my companion would authorize me to speak. I, therefore, said: Abū ʿAbd al-Raḥmān, there have appeared some people in our land who recite the Quran and pursue knowledge. And then after talking about their affairs, added: They claim that there is no such thing as Qadar and events are not predestined. He said: When you happen to meet such people tell them that I have nothing to do with them and they have nothing to do with me. And verily they are in no way responsible for my ˹belief˺. ʿAbdullāh b ʿUmar swore by Allah: If any one of them had with him gold equal to the bulk of ˹the mountain˺ Uḥud and spent it ˹for the sake of Allah˺, Allah would not accept it unless he affirmed his faith in the Qadar. \n\nHe further said: My father, ʿUmar b. al-Khaṭṭāb, told me: One day we were sitting in the company of the Messenger of Allah ﷺ when there appeared before us a man dressed in pure white clothes. His hair was extraordinarily black. There were no signs of travel on him. None amongst us recognized him. At last, he sat with the Prophet ﷺ. He knelt before him placed his palms on his thighs,\n\nthen said: Muhammad, inform me about Islam. The Messenger of Allah ﷺ said: *“Islam implies that: (1) you testify that there is no god but Allah and that Muhammad is the Messenger of Allah, and (2) you establish prayer, (3) pay Zakat, (4) observe the fast of Ramadan, and (5) perform pilgrimage to the (House) if you are solvent enough ˹to bear the expense of˺ the journey.”* ˹The inquirer˺ said: You have told the truth. ˹ʿUmar˺ said: It amazed us that he would put the question and then he would himself verify the truth. \n\n˹The inquirer˺ said: Inform me about Iman (faith). He replied: *“That (1) you affirm your faith in Allah, (2) in His angels, (3) in His Books, (4) in His Apostles, (5) in the Day of Judgment, and (6) you affirm your faith in the Divine Decree about good and evil.”* ˹The inquirer˺ said: You have told the truth. \n\n˹The inquirer˺ again said: Inform me about Iḥsān (excellence in deeds). He said: *”That (1) you worship Allah as if you are seeing Him, (2) for though you don't see Him, He, verily, sees you.”*\n\n˹The inquirer˺ again said: Inform me about the Hour (of the Last Day). He remarked: *”One who is asked knows no more than the one who is inquiring.”* ˹The inquirer˺ said: Tell me some of its indications. He said: *”That (1) the slave-girl will give birth to her mistress and master, that (2) you will find barefooted, destitute goat herders vying with one another in the construction of magnificent buildings.”*\n\n˹ʿUmar˺ said: Then ˹the inquirer˺ went on his way but I stayed with (the Prophet) for a long while. He then, said to me: *\"ʿUmar, do you know who this inquirer was?\"* I replied: Allah and His Messenger know best. He remarked: *\"He was Jibrīl (Angel Gabriel). He came to you in order to teach you in your religion.\"*",
+    "grade": "Sound (Muslim)",
+    "arabicFrom": "hadithunlocked.com",
+    "translationFrom": "hadithunlocked.com"
+  },
+  "bukhari:39": {
+    "arabic": "عَنْ أَبِي هُرَيْرَةَ رضي الله عنه عَنِ النَّبِيِّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ قَالَ: «إِنَّ الدِّينَ يُسْرٌ، وَلَنْ يُشَادَّ الدِّينَ أَحَدٌ إِلَّا غَلَبَهُ، فَسَدِّدُوا وَقَارِبُوا، وَأَبْشِرُوا، وَاسْتَعِينُوا بِالْغَدْوَةِ وَالرَّوْحَةِ وَشَيْءٍ مِنَ الدُّلْجَةِ».",
+    "translation": "Abu Hurayrah (may Allah be pleased with him) reported: The Prophet (may Allah's peace and blessings be upon him) said: \"Indeed, the religion is easy. No one overburdens himself in the religion except that he will be overwhelmed by it. So, seek uprightness (be moderate) and try to be close to it and receive the glad tidings. Seek help by worship in the Ghadwah (early morning), Rawhah (afternoon), and part of the Duljah (night).\"",
+    "attribution": "Narrated by Al-Bukhāri",
+    "grade": "Authentic",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "bukhari:3559": {
+    "arabic": "عن عبد الله بن عمرو رضي الله عنهما قال: لَمْ يَكُنِ النَّبِيُّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ فَاحِشًا وَلَا مُتَفَحِّشًا، وَكَانَ يَقُولُ: «إِنَّ مِنْ خِيَارِكُمْ أَحْسَنَكُمْ أَخْلَاقًا».",
+    "translation": "‘Abdullāh ibn ‘Amr (may Allah be pleased with him) reported: The Prophet (may Allah's peace and blessings be upon him) was neither obscene, nor would he use obscene language, and he used to say: \"Verily, the best of you are those who have the best manners.\"",
+    "attribution": "Agreed upon",
+    "grade": "Authentic",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "bukhari:631": {
+    "arabic": "حَدَّثَنَا مُحَمَّدُ بْنُ الْمُثَنَّى، قَالَ حَدَّثَنَا عَبْدُ الْوَهَّابِ، قَالَ حَدَّثَنَا أَيُّوبُ، عَنْ أَبِي قِلاَبَةَ، قَالَ حَدَّثَنَا مَالِكٌ، أَتَيْنَا إِلَى النَّبِيِّ صلى الله عليه وسلم وَنَحْنُ شَبَبَةٌ مُتَقَارِبُونَ، فَأَقَمْنَا عِنْدَهُ عِشْرِينَ يَوْمًا وَلَيْلَةً، وَكَانَ رَسُولُ اللَّهِ صلى الله عليه وسلم رَحِيمًا رَفِيقًا، فَلَمَّا ظَنَّ أَنَّا قَدِ اشْتَهَيْنَا أَهْلَنَا أَوْ قَدِ اشْتَقْنَا سَأَلَنَا عَمَّنْ تَرَكْنَا بَعْدَنَا فَأَخْبَرْنَاهُ قَالَ ‏ \"‏ ارْجِعُوا إِلَى أَهْلِيكُمْ فَأَقِيمُوا فِيهِمْ وَعَلِّمُوهُمْ وَمُرُوهُمْ ـ وَذَكَرَ أَشْيَاءَ أَحْفَظُهَا أَوْ لاَ أَحْفَظُهَا ـ وَصَلُّوا كَمَا رَأَيْتُمُونِي أُصَلِّي، فَإِذَا حَضَرَتِ الصَّلاَةُ فَلْيُؤَذِّنْ لَكُمْ أَحَدُكُمْ وَلْيَؤُمَّكُمْ أَكْبَرُكُمْ ‏\"‏‏.‏",
+    "translation": "Narrated Malik:We came to the Prophet (ﷺ) and stayed with him for twenty days and nights. We were all young and of about the same age. The Prophet (ﷺ) was very kind and merciful. When he realized our longing for our families, he asked about our homes and the people there and we told him. Then he asked us to go back to our families and stay with them and teach them (the religion) and to order them to do good things. He also mentioned some other things which I have (remembered or [??] ) forgotten. The Prophet (ﷺ) then added, \"Pray as you have seen me praying and when it is the time for the prayer one of you should pronounce the Adhan and the oldest of you should lead the prayer",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:5027": {
+    "arabic": "عن عثمان رضي الله عنه عن النبي صلى الله عليه وسلم قال: «خَيْرُكُمْ مَنْ تَعَلَّمَ الْقُرْآنَ وَعَلَّمَهُ».",
+    "translation": "‘Uthmān ibn ‘Affān (may Allah be pleased with him) reported: The Prophet (may Allah’s peace and blessings be upon him) said: \"The best of you are those who learn the Qur’an and teach it.\"",
+    "attribution": "Narrated by Al-Bukhāri",
+    "grade": "Authentic",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "bukhari:6018": {
+    "arabic": "حَدَّثَنَا قُتَيْبَةُ بْنُ سَعِيدٍ، حَدَّثَنَا أَبُو الأَحْوَصِ، عَنْ أَبِي حَصِينٍ، عَنْ أَبِي صَالِحٍ، عَنْ أَبِي هُرَيْرَةَ، قَالَ قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏ \"‏ مَنْ كَانَ يُؤْمِنُ بِاللَّهِ وَالْيَوْمِ الآخِرِ فَلاَ يُؤْذِ جَارَهُ، وَمَنْ كَانَ يُؤْمِنُ بِاللَّهِ وَالْيَوْمِ الآخِرِ فَلْيُكْرِمْ ضَيْفَهُ، وَمَنْ كَانَ يُؤْمِنُ بِاللَّهِ وَالْيَوْمِ الآخِرِ فَلْيَقُلْ خَيْرًا أَوْ لِيَصْمُتْ ‏\"‏‏.‏",
+    "translation": "Narrated Abu Huraira:Allah's Messenger (ﷺ) said, \"Anybody who believes in Allah and the Last Day should not harm his neighbor, and anybody who believes in Allah and the Last Day should entertain his guest generously and anybody who believes in Allah and the Last Day should talk what is good or keep quiet. (i.e. abstain from all kinds of evil and dirty talk)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:5376": {
+    "arabic": "عن عُمر بن أبي سلمة رضي الله عنه قال: كُنْتُ غُلَامًا فِي حَجْرِ رَسُولِ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ، وَكَانَتْ يَدِي تَطِيشُ فِي الصَّحْفَةِ، فَقَالَ لِي رَسُولُ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ: «يَا غُلَامُ، سَمِّ اللهَ، وَكُلْ بِيَمِينِكَ، وَكُلْ مِمَّا يَلِيكَ» فَمَا زَالَتْ تِلْكَ طِعْمَتِي بَعْدُ.",
+    "translation": "‘Umar ibn Abi Salamah (may Allah be pleased with him) reported: I was a young boy under the care of the Messenger of Allah (may Allah's peace and blessings be upon him), and my hand used to wander all over the platter (of food). The Messenger of Allah (may Allah's peace and blessings be upon him) said, \"O boy, mention Allah's name, eat with your right hand, and eat from what is nearer to you.\" Since then, I have been eating that way.",
+    "attribution": "Agreed upon",
+    "grade": "Authentic",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "bukhari:6324": {
+    "arabic": "عَنْ حُذَيْفَةَ قَالَ: كَانَ النَّبِيُّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ إِذَا أَرَادَ أَنْ يَنَامَ قَالَ: «بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا» وَإِذَا اسْتَيْقَظَ مِنْ مَنَامِهِ قَالَ: «الحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَمَا أَمَاتَنَا، وَإِلَيْهِ النُّشُورُ».",
+    "translation": "Narrated Hudhaifa:Whenever the Prophet (ﷺ) intended to go to bed, he would recite: \"Bismika Allahumma amutu wa ahya (With Your name, O Allah, I die and I live).\" And when he woke up from his sleep, he would say: \"Al-hamdu lil-lahil-ladhi ahyana ba'da ma amatana; wa ilaihi an-nushur (All the Praises are for Allah Who has made us alive after He made us die (sleep) and unto Him is the Resurrection",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "muslim:537a": {
+    "arabic": "حَدَّثَنَا مُحَمَّدُ بْنُ رَافِعٍ، حَدَّثَنَا عَبْدُ الرَّزَّاقِ بْنُ هَمَّامٍ، حَدَّثَنَا مَعْمَرُ بْنُ رَاشِدٍ، عَنْ هَمَّامِ بْنِ مُنَبِّهٍ، أَخِي وَهْبِ بْنِ مُنَبِّهٍ قَالَ هَذَا مَا حَدَّثَنَا أَبُو هُرَيْرَةَ، عَنْ مُحَمَّدٍ، رَسُولِ اللَّهِ صلى الله عليه وسلم ‏.‏ فَذَكَرَ أَحَادِيثَ مِنْهَا وَقَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏ \"‏ لاَ تُقْبَلُ صَلاَةُ أَحَدِكُمْ إِذَا أَحْدَثَ حَتَّى يَتَوَضَّأَ ‏\"‏ ‏.‏",
+    "translation": "Hammam b. Munabbih who is the brother of Wahb b. Munabbih said:This is what has been transmitted to us by Abu Huraira from Muhammad, the Messenger of Allah (ﷺ) and then narrated a hadith out of them and observed that the Messenger of Allah (ﷺ) said: The prayer of none amongst you would be accepted in a state of impurity until he performs ablution",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:1200": {
+    "arabic": "حَدَّثَنَا إِبْرَاهِيمُ بْنُ مُوسَى، أَخْبَرَنَا عِيسَى ـ هُوَ ابْنُ يُونُسَ ـ عَنْ إِسْمَاعِيلَ، عَنِ الْحَارِثِ بْنِ شُبَيْلٍ، عَنْ أَبِي عَمْرٍو الشَّيْبَانِيِّ، قَالَ قَالَ لِي زَيْدُ بْنُ أَرْقَمَ إِنْ كُنَّا لَنَتَكَلَّمُ فِي الصَّلاَةِ عَلَى عَهْدِ النَّبِيِّ صلى الله عليه وسلم، يُكَلِّمُ أَحَدُنَا صَاحِبَهُ بِحَاجَتِهِ حَتَّى نَزَلَتْ ‏{‏حَافِظُوا عَلَى الصَّلَوَاتِ‏}‏ الآيَةَ، فَأُمِرْنَا بِالسُّكُوتِ‏.‏",
+    "translation": "Narrated Zaid bin Arqam:In the lifetime of the Prophet (ﷺ) we used to speak while praying, and one of us would tell his needs to his companions, till the verse, 'Guard strictly your prayers (2.238) was revealed. After that we were ordered to remain silent while praying",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:403": {
+    "arabic": "حَدَّثَنَا عَبْدُ اللَّهِ بْنُ يُوسُفَ، قَالَ أَخْبَرَنَا مَالِكُ بْنُ أَنَسٍ، عَنْ عَبْدِ اللَّهِ بْنِ دِينَارٍ، عَنْ عَبْدِ اللَّهِ بْنِ عُمَرَ، قَالَ بَيْنَا النَّاسُ بِقُبَاءٍ فِي صَلاَةِ الصُّبْحِ إِذْ جَاءَهُمْ آتٍ فَقَالَ إِنَّ رَسُولَ اللَّهِ صلى الله عليه وسلم قَدْ أُنْزِلَ عَلَيْهِ اللَّيْلَةَ قُرْآنٌ، وَقَدْ أُمِرَ أَنْ يَسْتَقْبِلَ الْكَعْبَةَ فَاسْتَقْبِلُوهَا، وَكَانَتْ وُجُوهُهُمْ إِلَى الشَّأْمِ، فَاسْتَدَارُوا إِلَى الْكَعْبَةِ‏.‏",
+    "translation": "Narrated `Abdullah bin `Umar:While the people were offering the Fajr prayer at Quba' (near Medina), someone came to them and said: \"It has been revealed to Allah's Messenger (ﷺ) tonight, and he has been ordered to pray facing the Ka`ba.\" So turn your faces to the Ka`ba. Those people were facing Sham (Jerusalem) so they turned their faces towards Ka`ba (at Mecca)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:516": {
+    "arabic": "عن أبي قَتَادَةَ الأَنْصَارِيِّ رضي الله عنه قال: «أن رسول الله صلى الله عليه وسلم كان يُصَلِّي وهو حامل أُمَامَةَ بنت زينب بنت رسول الله صلى الله عليه وسلم ».\nولأبي العاص بن الربيع بن عبد شَمْسٍ رضي الله عنه : «فإذا سجد وضعها، وإذا قام حملها».",
+    "translation": "Abu Qatādah al-Ansāri (may Allah be pleased with him) reported: The Messenger of Allah (may Allah's peace and blessings be upon him) used to pray while carrying Umāmah the daughter of Zaynab, daughter of the Messenger of Allah (may Allah's peace and blessings be upon him). Another narration reported by Abu al-‘Ās ibn Ar-Rabī‘ ibn ‘Abd Shams (may Allah be pleased with him) reads: “When he prostrated himself, he would put her on the ground, and when he stood up, he would carry her.”",
+    "attribution": "Narrated by Bukhari & Muslim",
+    "grade": "Authentic hadith",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "bukhari:137": {
+    "arabic": "حَدَّثَنَا عَلِيٌّ، قَالَ حَدَّثَنَا سُفْيَانُ، قَالَ حَدَّثَنَا الزُّهْرِيُّ، عَنْ سَعِيدِ بْنِ الْمُسَيَّبِ، وَعَنْ عَبَّادِ بْنِ تَمِيمٍ، عَنْ عَمِّهِ، أَنَّهُ شَكَا إِلَى رَسُولِ اللَّهِ صلى الله عليه وسلم الرَّجُلُ الَّذِي يُخَيَّلُ إِلَيْهِ أَنَّهُ يَجِدُ الشَّىْءَ فِي الصَّلاَةِ‏.‏ فَقَالَ ‏ \"‏ لاَ يَنْفَتِلْ ـ أَوْ لاَ يَنْصَرِفْ ـ حَتَّى يَسْمَعَ صَوْتًا أَوْ يَجِدَ رِيحًا ‏\"‏‏.‏",
+    "translation": "Narrated `Abbad bin Tamim:My uncle asked Allah's Messenger (ﷺ) about a person who imagined to have passed wind during the prayer. Allah's Apostle replied: \"He should not leave his prayers unless he hears sound or smells something",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "muslim:538a": {
+    "arabic": "حَدَّثَنِي أَبُو الطَّاهِرِ، أَحْمَدُ بْنُ عَمْرِو بْنِ عَبْدِ اللَّهِ بْنِ عَمْرِو بْنِ سَرْحٍ وَحَرْمَلَةُ بْنُ يَحْيَى التُّجِيبِيُّ قَالاَ أَخْبَرَنَا ابْنُ وَهْبٍ، عَنْ يُونُسَ، عَنِ ابْنِ شِهَابٍ، أَنَّ عَطَاءَ بْنَ يَزِيدَ اللَّيْثِيَّ، أَخْبَرَهُ أَنَّ حُمْرَانَ مَوْلَى عُثْمَانَ أَخْبَرَهُ أَنَّ عُثْمَانَ بْنَ عَفَّانَ - رضى الله عنه - دَعَا بِوَضُوءٍ فَتَوَضَّأَ فَغَسَلَ كَفَّيْهِ ثَلاَثَ مَرَّاتٍ ثُمَّ مَضْمَضَ وَاسْتَنْثَرَ ثُمَّ غَسَلَ وَجْهَهُ ثَلاَثَ مَرَّاتٍ ثُمَّ غَسَلَ يَدَهُ الْيُمْنَى إِلَى الْمِرْفَقِ ثَلاَثَ مَرَّاتٍ ثُمَّ غَسَلَ يَدَهُ الْيُسْرَى مِثْلَ ذَلِكَ ثُمَّ مَسَحَ رَأْسَهُ ثُمَّ غَسَلَ رِجْلَهُ الْيُمْنَى إِلَى الْكَعْبَيْنِ ثَلاَثَ مَرَّاتٍ ثُمَّ غَسَلَ الْيُسْرَى مِثْلَ ذَلِكَ ثُمَّ قَالَ رَأَيْتُ رَسُولَ اللَّهِ صلى الله عليه وسلم تَوَضَّأَ نَحْوَ وُضُوئِي هَذَا ثُمَّ قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏ \"‏ مَنْ تَوَضَّأَ نَحْوَ وُضُوئِي هَذَا ثُمَّ قَامَ فَرَكَعَ رَكْعَتَيْنِ لاَ يُحَدِّثُ فِيهِمَا نَفْسَهُ غُفِرَ لَهُ مَا تَقَدَّمَ مِنْ ذَنْبِهِ ‏\"‏ ‏.‏ قَالَ ابْنُ شِهَابٍ وَكَانَ عُلَمَاؤُنَا يَقُولُونَ هَذَا الْوُضُوءُ أَسْبَغُ مَا يَتَوَضَّأُ بِهِ أَحَدٌ لِلصَّلاَةِ ‏.‏",
+    "translation": "Humran, the freed slave of 'Uthman, said:Uthman b. 'Affan called for ablution water and this is how he performed the ablution. He washed his hands thrice. He then rinsed his mouth and cleaned his nose with water (three times). He then washed his face three times, then washed his right arm up to the elbow three times, then washed his left arm like that, then wiped his head; then washed his right foot up to the ankle three times, then washed his left foot like that, and then said: I saw the Messenger of Allah (ﷺ) perform ablution like this ablution of mine. Then the Messenger of Allah (ﷺ) said: He who performs ablution like this ablution of mine and then stood up (for prayer) and offered two rak'ahs of prayer without allowing his thoughts to be distracted, all his previous sins are expiated. Ibn Shihab said: Our scholars remarked: This is the most complete of the ablutions performed for prayer",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:52": {
+    "arabic": "عن النُّعمان بن بَشير رضي الله عنه قال: سَمِعْتُ رَسُولَ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ يَقُولُ -وَأَهْوَى النُّعْمَانُ بِإِصْبَعَيْهِ إِلَى أُذُنَيْهِ-: «إِنَّ الْحَلَالَ بَيِّنٌ وَإِنَّ الْحَرَامَ بَيِّنٌ، وَبَيْنَهُمَا مُشْتَبِهَاتٌ لَا يَعْلَمُهُنَّ كَثِيرٌ مِنَ النَّاسِ، فَمَنِ اتَّقَى الشُّبُهَاتِ اسْتَبْرَأَ لِدِينِهِ وَعِرْضِهِ، وَمَنْ وَقَعَ فِي الشُّبُهَاتِ وَقَعَ فِي الْحَرَامِ، كَالرَّاعِي يَرْعَى حَوْلَ الْحِمَى يُوشِكُ أَنْ يَرْتَعَ فِيهِ، أَلَا وَإِنَّ لِكُلِّ مَلِكٍ حِمًى، أَلَا وَإِنَّ حِمَى اللهِ مَحَارِمُهُ، أَلَا وَإِنَّ فِي الْجَسَدِ مُضْغَةً، إِذَا صَلَحَتْ صَلَحَ الْجَسَدُ كُلُّهُ، وَإِذَا فَسَدَتْ فَسَدَ الْجَسَدُ كُلُّهُ، أَلَا وَهِيَ الْقَلْبُ».",
+    "translation": "An-Nu'mān ibn Bashīr (may Allah be pleased with him) reported: I heard the Messenger of Allah (may Allah's peace and blessings be upon him) say, as An-Nu'mān dropped his two fingers to his ears: \"Verily, the lawful is clear, and the unlawful is clear, and between them are doubtful matters many people do not know. Whoever avoids doubtful matters clears his liability regarding his religion and his honor, and whoever falls into doubtful matters will fall into the unlawful, just like the shepherd who grazes his animals in the vicinity of a prohibited pasture and is thus likely to graze therein. Verily, every king has a protected area, and the protected area of Allah is His prohibitions. Verily, in the body, there is a piece of flesh; if it is sound, the entire body will be sound, and if it is corrupt, the entire body will be corrupt; verily, that is the heart.\"",
+    "attribution": "Agreed upon",
+    "grade": "Authentic",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "abu-dawud:4057": {
+    "arabic": "حَدَّثَنَا قُتَيْبَةُ بْنُ سَعِيدٍ، حَدَّثَنَا اللَّيْثُ، عَنْ يَزِيدَ بْنِ أَبِي حَبِيبٍ، عَنْ أَبِي أَفْلَحَ الْهَمْدَانِيِّ، عَنْ عَبْدِ اللَّهِ بْنِ زُرَيْرٍ، - يَعْنِي الْغَافِقِيَّ - أَنَّهُ سَمِعَ عَلِيَّ بْنَ أَبِي طَالِبٍ، - رضى الله عنه - يَقُولُ إِنَّ نَبِيَّ اللَّهِ صلى الله عليه وسلم أَخَذَ حَرِيرًا فَجَعَلَهُ فِي يَمِينِهِ وَأَخَذَ ذَهَبًا فَجَعَلَهُ فِي شِمَالِهِ ثُمَّ قَالَ ‏ \"‏ إِنَّ هَذَيْنِ حَرَامٌ عَلَى ذُكُورِ أُمَّتِي ‏\"‏ ‏.‏",
+    "translation": "Narrated Ali ibn AbuTalib: The Prophet of Allah (ﷺ) took silk and held it in his right hand, and took gold and held it in his left hand and said: both of these are prohibited to the males of my community",
+    "grade": "Sahih (Al-Albani) · Sahih (Muhammad Muhyi Al-Din Abdul Hamid) · Sahih (Zubair Ali Zai)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:5971": {
+    "arabic": "عن أبي هريرة رضي الله عنه قال: جاء رجل إلى رسول الله صلى الله عليه وسلم فقال: يا رسول الله، مَنْ أحقُّ الناس بِحُسن صَحَابَتِي؟ قال: «أمك» قال: ثم مَنْ ؟ قال: «أمك»، قال: ثم مَنْ؟ قال: «أمك»، قال: ثم مَنْ؟ قال: «أبوك». متفق عليه. وفي رواية: يا رسول الله، مَنْ أحقُّ بحُسْنِ الصُّحْبَةِ؟ قال: «أمك، ثم أمك، ثم أمك، ثم أباك، ثم أدْنَاك أدْنَاك».",
+    "translation": "Abu Hurayrah (may Allah be pleased with him) reported that a man came to the Messenger of Allah (may Allah's peace and blessings be upon him) and said: \"O Messenger of Allah, who is the most entitled among people to my good companionship?\" He said: \"Your mother.\" The man said: \"Who next?\" He said: \"Your mother.\" The man asked again: \"Who next?\" He replied: \"Your mother.\" The man further said: \"Who next?\" He said: \"Your father.\"\nIn another narration, the man asked: \"O Messenger of Allah, who is the most entitled among people to my good companionship?\" He said: \"Your mother, then your mother, then your mother, then your father, and then those who are the closest to you.\"",
+    "attribution": "Narrated by Muslim - Narrated by Bukhari & Muslim",
+    "grade": "Authentic hadith",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "tirmidhi:3895": {
+    "arabic": "حَدَّثَنَا مُحَمَّدُ بْنُ يَحْيَى، قَالَ حَدَّثَنَا مُحَمَّدُ بْنُ يُوسُفَ، قَالَ حَدَّثَنَا سُفْيَانُ، عَنْ هِشَامِ بْنِ عُرْوَةَ، عَنْ أَبِيهِ، عَنْ عَائِشَةَ، قَالَتْ قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏ \"‏ خَيْرُكُمْ خَيْرُكُمْ لأَهْلِهِ وَأَنَا خَيْرُكُمْ لأَهْلِي وَإِذَا مَاتَ صَاحِبُكُمْ فَدَعُوهُ ‏\"‏ ‏.‏ قَالَ أَبُو عِيسَى هَذَا حَدِيثٌ حَسَنٌ غَرِيبٌ صَحِيحٌ مِنْ حَدِيثِ الثَّوْرِيِّ مَا أَقَلَّ مَنْ رَوَاهُ عَنِ الثَّوْرِيِّ ‏.‏ وَرُوِيَ هَذَا عَنْ هِشَامِ بْنِ عُرْوَةَ عَنْ أَبِيهِ عَنِ النَّبِيِّ صلى الله عليه وسلم مُرْسَلٌ ‏.‏",
+    "translation": "Narrated 'Aishah:that the Messenger of Allah (ﷺ) said: \"The best of you is the best to his wives, and I am the best of you to my wives, and when your companion dies, leave him alone",
+    "grade": "Sahih (Ahmad Muhammad Shakir) · Sahih (Al-Albani) · Hasan Sahih (Bashar Awad Maarouf) · Hasan (Zubair Ali Zai)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:2072": {
+    "arabic": "عن أبي هريرة رضي الله عنه عن النبي صلى الله عليه وسلم قال: «كان داود -عليه السلام- لا يأكلُ إلا من عمل يده». \n وعن المقدام بن معد يكرب رضي الله عنه عن النبي صلى الله عليه وسلم قال: «ما أكل أحد طعاما قط خيرا من أن يأكل من عمل يده، وإن نبي الله داود صلى الله عليه وسلم كان يأكل من عمل يده».",
+    "translation": "Abu Hurayrah (may Allah be pleased with him) reported that the Messenger of Allah (may Allah's peace and blessings be upon him) said: \"Dawūd (peace be upon him) used to eat only from the earnings of his own hands.\" Al-Miqdām ibn Ma‘d Yakrab (may Allah be pleased with him) reported that the Prophet (may Allah's peace and blessings be upon him) said: \"No one has ever eaten food better than that which his hands have earned. Indeed, Prophet Dawūd (peace be upon him) used to eat from the earnings of his own hands.\"",
+    "attribution": "Narrated by Bukhari",
+    "grade": "Sahih/Authentic with its two versions",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "bukhari:2766": {
+    "arabic": "عن أبي هريرة رضي الله عنه عن النبي صلى الله عليه وسلم قال: «اجْتَنِبُوا السَّبْعَ الْمُوبِقَاتِ»، قَالُوا: يَا رَسُولَ اللهِ وَمَا هُنَّ؟ قَالَ: «الشِّرْكُ بِاللهِ، وَالسِّحْرُ، وَقَتْلُ النَّفْسِ الَّتِي حَرَّمَ اللهُ إِلَّا بِالْحَقِّ، وَأَكْلُ الرِّبَا، وَأَكْلُ مَالِ الْيَتِيمِ، وَالتَّوَلِّي يَوْمَ الزَّحْفِ، وَقَذْفُ الْمُحْصَنَاتِ الْمُؤْمِنَاتِ الْغَافِلَاتِ».",
+    "translation": "Abu Hurayrah (may Allah be pleased with him) reported: The Prophet (may Allah’s peace and blessings be upon him) said: “Avoid the seven destructive sins” They said: “O Messenger of Allah, what are they?” He said: “Associating partners with Allah; magic (sorcery); killing a person whose killing Allah has prohibited except by legal right; consuming usury; devouring the property of an orphan; fleeing from the battlefield; and slandering chaste, innocent, and believing women.”",
+    "attribution": "Agreed upon",
+    "grade": "Authentic",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "tirmidhi:1295": {
+    "arabic": "حَدَّثَنَا عَبْدُ اللَّهِ بْنُ مُنِيرٍ، قَالَ سَمِعْتُ أَبَا عَاصِمٍ، عَنْ شَبِيبِ بْنِ بِشْرٍ، عَنْ أَنَسِ بْنِ مَالِكٍ، قَالَ لَعَنَ رَسُولُ اللَّهِ صلى الله عليه وسلم فِي الْخَمْرِ عَشَرَةً عَاصِرَهَا وَمُعْتَصِرَهَا وَشَارِبَهَا وَحَامِلَهَا وَالْمَحْمُولَةَ إِلَيْهِ وَسَاقِيَهَا وَبَائِعَهَا وَآكِلَ ثَمَنِهَا وَالْمُشْتَرِيَ لَهَا وَالْمُشْتَرَاةَ لَهُ ‏.‏ قَالَ أَبُو عِيسَى هَذَا حَدِيثٌ غَرِيبٌ مِنْ حَدِيثِ أَنَسٍ ‏.‏ وَقَدْ رُوِيَ نَحْوُ هَذَا عَنِ ابْنِ عَبَّاسٍ وَابْنِ مَسْعُودٍ وَابْنِ عُمَرَ عَنِ النَّبِيِّ صلى الله عليه وسلم ‏.‏",
+    "translation": "Narrated Anas bin Malik: \"The Messenger of Allah (ﷺ) cursed ten involved in wine: The one who presses it, the one who has it pressed, its drinker, its carrier, and the one it is carried to, its server, its seller, the consumption of its price, the one who purchases it and the one it was purchased for.\" [Abu 'Eisa said:] This Hadith is Gharib as a narration of Anas. Similar to this has been reported from Ibn 'Abbas, Ibn Mas'ud, and Ibn 'Umar, from the Prophet (ﷺ)",
+    "grade": "Hasan Sahih (Ahmad Muhammad Shakir) · Hasan Sahih (Al-Albani) · Hasan (Zubair Ali Zai)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:6114": {
+    "arabic": "عن أبي هريرة رضي الله عنه أن رسول الله صلى الله عليه وسلم قال: «لَيْسَ الشَّدِيدُ بِالصُّرَعَةِ، إِنَّمَا الشَّدِيدُ الَّذِي يَمْلِكُ نَفْسَهُ عِنْدَ الْغَضَبِ».",
+    "translation": "Abu Hurayrah (may Allah be pleased with him) reported: The Messenger of Allah (may Allah's peace and blessings be upon him) said: \"The strong man is not the one who can overpower others; rather, the strong man is the one who controls himself when he is angry.\"",
+    "attribution": "Agreed upon",
+    "grade": "Authentic",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "bukhari:13": {
+    "arabic": "حَدَّثَنَا مُسَدَّدٌ، قَالَ حَدَّثَنَا يَحْيَى، عَنْ شُعْبَةَ، عَنْ قَتَادَةَ، عَنْ أَنَسٍ ـ رضى الله عنه ـ عَنِ النَّبِيِّ صلى الله عليه وسلم‏.‏ وَعَنْ حُسَيْنٍ الْمُعَلِّمِ، قَالَ حَدَّثَنَا قَتَادَةُ، عَنْ أَنَسٍ، عَنِ النَّبِيِّ صلى الله عليه وسلم قَالَ ‏ \"‏ لا يُؤْمِنُ أَحَدُكُمْ حَتَّى يُحِبَّ لأَخِيهِ مَا يُحِبُّ لِنَفْسِهِ ‏\"‏‏.‏",
+    "translation": "Narrated Anas: The Prophet (ﷺ) said, \"None of you will have faith till he wishes for his (Muslim) brother what he likes for himself",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:6407": {
+    "arabic": "عَنْ أَبِي مُوسَى رَضِيَ اللَّهُ عَنْهُ قَالَ: قَالَ النَّبِيُّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ: «مَثَلُ الَّذِي يَذْكُرُ رَبَّهُ وَالَّذِي لاَ يَذْكُرُ رَبَّهُ، مَثَلُ الحَيِّ وَالمَيِّتِ»، ولفظ مسلم: «مَثَلُ الْبَيْتِ الَّذِي يُذْكَرُ اللهُ فِيهِ، وَالْبَيْتِ الَّذِي لَا يُذْكَرُ اللهُ فِيهِ، مَثَلُ الْحَيِّ وَالْمَيِّتِ».",
+    "translation": "Abu Mūsa (may Allah be pleased with him) reported: The Prophet (may Allah's peace and blessings be upon him) said: \"The example of the one who remembers his Lord and the one who does not remember His Lord is like the example of the living and the dead person.\" The wording of Muslim reads: \"The example of the house in which Allah is remembered and the house in which Allah is not remembered is like the example of the living and the dead person.\"",
+    "attribution": "Agreed upon",
+    "grade": "Authentic",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "bukhari:6405": {
+    "arabic": "عن أبي هريرة رضي الله عنه أن رسول الله صلى الله عليه وسلم قال: «مَنْ قَالَ: سُبْحَانَ اللهِ وَبِحَمْدِهِ، فِي يَوْمٍ مِائَةَ مَرَّةٍ، حُطَّتْ خَطَايَاهُ وَإِنْ كَانَتْ مِثْلَ زَبَدِ الْبَحْرِ».",
+    "translation": "Abu Hurayrah (may Allah be pleased with him) reported: The Messenger of Allah (may Allah’s peace and blessings be upon him) said: \"Whoever says ‘subhān Allah wa bihamdih (glory be to Allah, and praise be to Him)’ one hundred times a day, his sins will be erased, even if they were as much as the foam of the sea.\"",
+    "attribution": "Agreed upon",
+    "grade": "Authentic",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "bukhari:6309": {
+    "arabic": "حَدَّثَنَا إِسْحَاقُ، أَخْبَرَنَا حَبَّانُ، حَدَّثَنَا هَمَّامٌ، حَدَّثَنَا قَتَادَةُ، حَدَّثَنَا أَنَسُ بْنُ مَالِكٍ، عَنِ النَّبِيِّ صلى الله عليه وسلم‏.‏ وَحَدَّثَنَا هُدْبَةُ، حَدَّثَنَا هَمَّامٌ، حَدَّثَنَا قَتَادَةُ، عَنْ أَنَسٍ ـ رضى الله عنه ـ قَالَ قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏ \"‏ اللَّهُ أَفْرَحُ بِتَوْبَةِ عَبْدِهِ مِنْ أَحَدِكُمْ سَقَطَ عَلَى بَعِيرِهِ، وَقَدْ أَضَلَّهُ فِي أَرْضِ فَلاَةٍ ‏\"‏‏.‏",
+    "translation": "Narrated Anas bin Malik:Allah's Messenger (ﷺ) said, \"Allah is more pleased with the repentance of His slave than anyone of you is pleased with finding his camel which he had lost in the desert",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "muslim:2999": {
+    "arabic": "حَدَّثَنِي زُهَيْرُ بْنُ حَرْبٍ، حَدَّثَنَا سُفْيَانُ بْنُ عُيَيْنَةَ، عَنْ عَمْرِو بْنِ دِينَارٍ، قَالَ سَأَلْنَا ابْنَ عُمَرَ عَنْ رَجُلٍ، قَدِمَ بِعُمْرَةٍ فَطَافَ بِالْبَيْتِ وَلَمْ يَطُفْ بَيْنَ الصَّفَا وَالْمَرْوَةِ أَيَأْتِي امْرَأَتَهُ فَقَالَ قَدِمَ رَسُولُ اللَّهِ صلى الله عليه وسلم فَطَافَ بِالْبَيْتِ سَبْعًا وَصَلَّى خَلْفَ الْمَقَامِ رَكْعَتَيْنِ وَبَيْنَ الصَّفَا وَالْمَرْوَةِ سَبْعًا وَقَدْ كَانَ لَكُمْ فِي رَسُولِ اللَّهِ أُسْوَةٌ حَسَنَةٌ ‏.‏",
+    "translation": "Amr b. Dinar said:We asked Ibn Umar about a person who came for Umra and circumambulated the House, but he did not run between al-Safa' and al-Marwa, whether he is allowed to (put off Ihram) and have intercourse with his wife. He replied: Allah's Messenger (ﷺ) circumambulated the House seven times and offered two rak'ahs of prayer after staying (at 'Arafat), and ran between al-Safa and al-Marwa seven times.\" Verily there is in Allah's Messenger a model pattern for you\" (xxxill)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:4406": {
+    "arabic": "عن أبي بكرة -ضي الله عنه- مرفوعاً: «إِنَّ الزمانَ قَدِ اسْتَدَارَ كَهَيْئَتِهِ يَوْمَ خَلَقَ اللهُ السَّمَاوَاتِ والأَرْضَ: السنةُ اثنا عَشَرَ شَهْرًا، منها أربعةٌ حُرُمٌ: ثلاثٌ مُتَوَالِيَاتٌ: ذُو القَعْدَةِ، وذُو الحَجَّةِ، والمحرمُ، ورَجَبُ مُضَرَ الذي بين جُمَادَى وشَعْبَانَ، أَيُّ شَهْرٍ هَذَا؟» قلنا: اللهُ ورسولُهُ أَعْلَمُ، فسكتَ حتى ظننا أنه سَيُسَمِّيهِ بغير اسمه، قال: «أَلَيْسَ ذَا الحَجَّةِ؟» قُلْنَا: بَلَى. قال: «فأَيُّ بَلَدٍ هَذَا؟» قلنا: اللهُ ورسولُهُ أَعْلَمُ، فسكتَ حتى ظننا أنه سُيَسَمِّيهِ بغير اسمه. قال: «أَلَيْسَ البَلْدَةَ؟» قلنا: بلى. قال: «فأَيُّ يَوْمٍ هَذَا؟» قُلْنَا: اللهُ ورسولُهُ أَعْلَمُ، فسكتَ حتى ظَنَنَّا أنه سيسميه بغير اسمه. قال: «أَلَيْسَ يَوْمَ النَّحْرِ؟» قلنا: بَلَى. قال: «فَإِّنَّ دِمَاءَكُمْ وأَمْوَالَكُمْ وأَعْرَاضَكُمْ عَلَيْكُمْ حَرَامٌ، كَحُرْمَةِ يَوْمِكُمْ هَذَا في بَلَدِكُمْ هَذَا فِي شَهْرِكُمْ هَذَا، وَسَتَلْقَونَ رَبَّكُمْ فَيَسْأَلُكُمْ عَنْ أَعْمَالِكُمْ، أَلَا فَلَا تَرْجِعُوا بَعْدِي كُفَّارًا يَضْرِبُ بَعْضُكُم رِقَابَ بَعْضٍ، أَلَا لِيُبَلِّغِ الشَّاهِدُ الغَائِبَ، فَلَعَلَّ بَعْضَ مَنْ يَبْلُغُهُ أَنْ يكونَ أَوْعَى لَهُ مِنْ بَعْضِ مَنْ سَمِعَهُ»، ثُمَّ قال: «أَلَا هَلْ بَلَّغْتُ، أَلَا هَلْ بَلَّغْتُ؟» قلنا: نعم. قال: «اللَّهُمَّ اشْهَدْ».",
+    "translation": "Abu Bakrah (may Allah be pleased with him) reported that the Prophet (may Allah's peace and blessings be upon him) said: \"Time has completed its cycle and has returned to its state when Allah created the heavens and the earth. The year consists of twelve months, of which four are sacred; three of them are consecutive: Dhu al-Qi‘dah, Dhu al-Hijjah, Muharram, and Rajab of Mudar which comes between the months of Jumāda and Sha‘bān. Which month is this?\" We said: \"Allah and His Messenger know best.\"  He remained silent for some time until we thought he was going to name it by something other than its current name. He then said: \"Is this not the month of Dhu al-Hijjah?\" We said: \"Indeed, it is.\" He then said: \"Which city is this?\" To which we said: \"Allah and His Messenger know best.\" He then remained silent for some time until we thought he was going to name it by something other than its current name. He then said: \"Is this not Al-Baldah (meaning Makkah)?\" We said: \"Indeed, it is.\" He then said: \"What day is this?\" We replied saying: \"Allah and His Messenger know best.\" He then remained silent for some time until we thought he was going to name it by something other than its current name. He said: \"Is this not the Day of An-Nahr (10th of Dhu al-Hijjah)?\" We said: \"Indeed, it is.\" Thereupon he said: \"Indeed, your blood, your property and your honor are inviolable to one another just as the inviolability of this day of yours, in this city of yours, in this month of yours. And you will soon meet your Lord, and He will ask you about your deeds. So, do not return to disbelief after my death, striking each other's necks. Let those who are present here convey my statements to those who are not present, for perhaps someone to whom my words are conveyed will understand them better than someone who listened to them.\" Then he said: \"Behold! Have I delivered (the message) to you? Behold! Have I delivered (the message) to you?\" We answered saying: \"Indeed, you have.\" He said: \"O Allah, bear witness to this!\"",
+    "attribution": "Narrated by Bukhari & Muslim",
+    "grade": "Authentic hadith",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "bukhari:1923": {
+    "arabic": "حَدَّثَنَا آدَمُ بْنُ أَبِي إِيَاسٍ، حَدَّثَنَا شُعْبَةُ، حَدَّثَنَا عَبْدُ الْعَزِيزِ بْنُ صُهَيْبٍ، قَالَ سَمِعْتُ أَنَسَ بْنَ مَالِكٍ ـ رضى الله عنه ـ قَالَ قَالَ النَّبِيُّ صلى الله عليه وسلم ‏ \"‏ تَسَحَّرُوا فَإِنَّ فِي السَّحُورِ بَرَكَةً ‏\"‏‏.‏",
+    "translation": "Narrated Anas bin Malik:The Prophet (ﷺ) said, \"Take Suhur as there is a blessing in it",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:1957": {
+    "arabic": "حَدَّثَنَا عَبْدُ اللَّهِ بْنُ يُوسُفَ، أَخْبَرَنَا مَالِكٌ، عَنْ أَبِي حَازِمٍ، عَنْ سَهْلِ بْنِ سَعْدٍ، أَنَّ رَسُولَ اللَّهِ صلى الله عليه وسلم قَالَ ‏ \"‏ لاَ يَزَالُ النَّاسُ بِخَيْرٍ مَا عَجَّلُوا الْفِطْرَ ‏\"‏‏.‏",
+    "translation": "Narrated Sahl bin Sa`d:Allah's Messenger (ﷺ) said, \"The people will remain on the right path as long as they hasten the breaking of the fast",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:6": {
+    "arabic": "عَنِ ابْنِ عَبَّاسٍ رضي الله عنهما قَالَ: كَانَ رَسُولُ اللَّهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ أَجْوَدَ النَّاسِ، وَكَانَ أَجْوَدُ مَا يَكُونُ فِي رَمَضَانَ حِينَ يَلْقَاهُ جِبْرِيلُ، وَكَانَ يَلْقَاهُ فِي كُلِّ لَيْلَةٍ مِنْ رَمَضَانَ فَيُدَارِسُهُ القُرْآنَ، فَلَرَسُولُ اللَّهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ أَجْوَدُ بِالخَيْرِ مِنَ الرِّيحِ المُرْسَلَةِ.",
+    "translation": "Ibn ‘Abbās (may Allah be pleased with him) reported: The Messenger of Allah (may Allah's peace and blessings be upon him) was the most generous of people, and he used to be more generous than ever in Ramadan when Gabriel (Jibrīl) would meet him. He used to meet him every night during Ramadan to revise the Qur'an with him. Indeed, the Messenger of Allah (may Allah's peace and blessings be upon him) was more generous than the fast wind.",
+    "attribution": "Agreed upon",
+    "grade": "Authentic",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "bukhari:2017": {
+    "arabic": "عَنْ عَائِشَةَ رَضِيَ اللَّهُ عَنْهَا أَنَّ رَسُولَ اللَّهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ قَالَ: «تَحَرَّوْا لَيْلَةَ القَدْرِ فِي الوِتْرِ مِنَ العَشْرِ الأَوَاخِرِ مِنْ رَمَضَانَ».",
+    "translation": "‘Ā’ishah (may Allah be pleased with her) reported that the Messenger of Allah (may Allah's peace and blessings be upon him) said: \"Seek out the Night of Qadr (Decree) in the odd nights of the last ten of Ramadan.\"",
+    "attribution": "Agreed upon",
+    "grade": "Authentic",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "bukhari:1503": {
+    "arabic": "عَنِ ابْنِ عُمَرَ رَضِيَ اللَّهُ عَنْهُمَا قَالَ: فَرَضَ رَسُولُ اللَّهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ زَكَاةَ الفِطْرِ صَاعًا مِنْ تَمْرٍ، أَوْ صَاعًا مِنْ شَعِيرٍ، عَلَى العَبْدِ وَالحُرِّ، وَالذَّكَرِ وَالأُنْثَى، وَالصَّغِيرِ وَالكَبِيرِ مِنَ المُسْلِمِينَ، وَأَمَرَ بِهَا أَنْ تُؤَدَّى قَبْلَ خُرُوجِ النَّاسِ إِلَى الصَّلاَةِ.",
+    "translation": "Ibn ‘Umar (may Allah be pleased with him and his father) reported: The Messenger of Allah (may Allah's peace and blessings be upon him) enjoined Zakat al-Fitr as one Sā‘ of dates or one Sā‘ of barley on the slave and the free person, the male and the female, the young and the old from among the Muslims. He ordered that it be given before the people go out to the prayer.",
+    "attribution": "Agreed upon",
+    "grade": "Authentic",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "bukhari:he3293": {
+    "arabic": "عن جَابِرِ بْنِ عَبْدِ اللَّهِ رَضِيَ اللَّهُ عَنْهُمَا، قَالَ: كَانَ رَسُولُ اللَّهِ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ يُعَلِّمُنَا الِاسْتِخَارَةَ فِي الْأُمُورِ كَمَا يُعَلِّمُنَا السُّورَةَ مِنَ الْقُرْآنِ، يَقُولُ: «إِذَا هَمَّ أَحَدُكُمْ بِالْأَمْرِ فَلْيَرْكَعْ رَكْعَتَيْنِ مِنْ غَيْرِ الْفَرِيضَةِ، ثُمَّ لِيَقُلِ: اللَّهُمَّ إِنِّي أَسْتَخِيرُكَ بِعِلْمِكَ وَأَسْتَقْدِرُكَ بِقُدْرَتِكَ، وَأَسْأَلُكَ مِنْ فَضْلِكَ الْعَظِيمِ، فَإِنَّكَ تَقْدِرُ وَلَا أَقْدِرُ، وَتَعْلَمُ وَلَا أَعْلَمُ، وَأَنْتَ عَلَّامُ الْغُيُوبِ، اللَّهُمَّ إِنْ كُنْتَ تَعْلَمُ أَنَّ هَذَا الْأَمْرَ خَيْرٌ لِي فِي دِينِي، وَمَعَاشِي، وَعَاقِبَةِ أَمْرِي» أَوْ قَالَ: «عَاجِلِ أَمْرِي وَآجِلِهِ، فَاقْدُرْهُ لِي وَيَسِّرْهُ لِي ثُمَّ بَارِكْ لِي فِيهِ، وَإِنْ كُنْتَ تَعْلَمُ أَنَّ هَذَا الْأَمْرَ شَرٌّ لِي فِي دِينِي وَمَعَاشِي وَعَاقِبَةِ أَمْرِي» أَوْ قَالَ: «فِي عَاجِلِ أَمْرِي وَآجِلِهِ، فَاصْرِفْهُ عَنِّي وَاصْرِفْنِي عَنْهُ، وَاقْدُرْ لِي الْخَيْرَ حَيْثُ كَانَ، ثُمَّ أَرْضِنِي» قَالَ: «وَيُسَمِّي حَاجَتَه».",
+    "translation": "Jābir ibn ‘Abdullah (may Allah be pleased with him and his father) reported: The Messenger of Allah (may Allah's peace and blessings be upon him) used to teach us Istikhārah (guidance-seeking prayer) in all matters, as he would teach us a Surah from the Qur’an. He would say: \"When one of you intends to do something, let him perform two Rak‘ahs other than the obligatory prayer and then say: Allāhumma inni astakhīruka bi‘ilmika, wa astaqdiruka biqudratika, wa as’aluka min fadlik al-‘azhīm, fa ’innaka taqdiru wa la aqdiru, wa ta‘lamu wa la a‘lamu, wa anta ‘allāmu al-ghuyūb. Allāhumma in kunta ta‘lamu anna hādha al-’amra khayrun li fi dīni wa ma‘āshi wa ‘āqibati amri, (or he said) ‘ājili amri wa ājilihi, faqdurhu li wa yassirhu li, thumma bārik li fīh. Wa in kunta ta‘lamu anna hādha al-’amra sharrun li fi dīni wa ma‘āshi wa ‘āqibati amri, (or he said) wa ‘ājili amri wa ājilihi, fasrifhu ‘anni, wasrifni ‘anhu, waqdur li al-khayra haythu kāna, thumma ardini. (O Allah, I consult You for Your knowledge, and I seek strength from You for Your power, and I ask You of Your great bounty. Indeed, You are capable and I am not, and You know and I do not, and You are the All-Knower of the unseen. O Allah, if You know that this matter is good for me in my religion, my livelihood, and the outcome of my affairs, (or he said), my immediate and future affairs, then decree it for me, make it easy for me, and then bless it for me. And if You know this matter is evil concerning my religion, my livelihood or the outcome of my affairs, (or he said) my immediate and future affairs, then turn it away from me, and turn me away from it, and decree for me what is good wherever it may be, and make me content).'' He said: ''And let him name his need.''",
+    "attribution": "Narrated by Al-Bukhāri",
+    "grade": "Authentic",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "abu-dawud:he65063": {
+    "arabic": "‌عن عَلِيٍّ قَالَ: إِنِّي كُنْتُ رَجُلًا إِذَا سَمِعْتُ مِنْ رَسُولِ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ حَدِيثًا نَفَعَنِي اللهُ مِنْهُ بِمَا شَاءَ أَنْ يَنْفَعَنِي بِهِ، وَإِذَا حَدَّثَنِي رَجُلٌ مِنْ أَصْحَابِهِ اسْتَحْلَفْتُهُ، فَإِذَا حَلَفَ لِي صَدَّقْتُهُ، وَإِنَّهُ حَدَّثَنِي ‌أَبُو بَكْرٍ، وَصَدَقَ أَبُو بَكْرٍ، قَالَ: سَمِعْتُ رَسُولَ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ يَقُولُ: «مَا مِنْ رَجُلٍ يُذْنِبُ ذَنْبًا، ثُمَّ يَقُومُ فَيَتَطَهَّرُ، ثُمَّ يُصَلِّي، ثُمَّ يَسْتَغْفِرُ اللهَ، إِلَّا غَفَرَ اللهُ لَهُ»، ثُمَّ قَرَأَ هَذِهِ الْآيَةَ: {وَالَّذِينَ إِذَا فَعَلُوا فَاحِشَةً أَوْ ظَلَمُوا أَنْفُسَهُمْ ذَكَرُوا اللهَ فَاسْتَغْفَرُوا لِذُنُوبِهِمْ} [آل عمران: 135].",
+    "translation": "‘Ali reported: Indeed I am a man who, when hearing a Hadīth from the Messenger of Allah (may Allah's peace and blessings be upon him), Allah benefitted me thereby as much as He willed for me to benefit thereby. When a man from his Companions narrates some Hadīth to me, I ask him to swear upon it, when he swears, I believe him. And Abu Bakr narrated to me - and Abu Bakr told the truth; he said: I heard the Messenger of Allah (may Allah's peace and blessings be upon him) say: \"There is no man who commits a sin, then gets up and performs Tahārah (ritual purification), then performs prayer, then seeks forgiveness from Allah, except that Allah forgives him.\" Then, he recited this verse: {And those who, when they commit a shameful act or wrong themselves, remember Allah and seek forgiveness for their sins.} [Surat Āl ‘Imrān: 135]",
+    "attribution": "Narrated by Abu Dāwūd, At-Tirmidhi, and An-Nasā’i in Al-Kubra and by Ibn Mājah and Ahmad",
+    "grade": "Authentic",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "abu-dawud:1067": {
+    "arabic": "عن طارق بن شهاب عن النبي صلى الله عليه وسلم قال: \"الجمعة حق واجب على كل مسلم في جماعة إلا أربعة: عبد مملوك أو امرأة أو صبي أو مريض\".",
+    "translation": "Narrated Tariq ibn Shihab: The Prophet (ﷺ) said: The Friday prayer in congregation is a necessary duty for every Muslim, with four exceptions; a slave, a woman, a boy, and a sick person. Abu Dawud said: Tariq b. Shihab had seen the Prophet (ﷺ) but not heard anything from him",
+    "grade": "Sahih (Al-Albani) · Sahih (Muhammad Muhyi Al-Din Abdul Hamid) · Isnaad Sahih (Zubair Ali Zai)",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:444": {
+    "arabic": "عَنْ ‌أَبِي قَتَادَةَ السَّلَمِيِّ رضي الله عنه أَنَّ رَسُولَ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ قَالَ: «إِذَا دَخَلَ أَحَدُكُمُ الْمَسْجِدَ فَلْيَرْكَعْ رَكْعَتَيْنِ قَبْلَ أَنْ يَجْلِسَ».",
+    "translation": "Abu Qatādah as-Salami (may Allah be pleased with him) reported: The Messenger of Allah (may Allah’s peace and blessings be upon him) said: \"When anyone of you enters the mosque, let him offer two Rak‘ahs before he sits down.\"",
+    "attribution": "Agreed upon",
+    "grade": "Authentic",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "muslim:571a": {
+    "arabic": "وَحَدَّثَنَاهُ أَبُو بَكْرِ بْنُ أَبِي شَيْبَةَ، حَدَّثَنَا وَكِيعٌ، عَنْ سُفْيَانَ، ح وَحَدَّثَنَا ابْنُ الْمُثَنَّى، وَابْنُ، بَشَّارٍ قَالاَ حَدَّثَنَا مُحَمَّدُ بْنُ جَعْفَرٍ، قَالَ حَدَّثَنَا شُعْبَةُ، كِلاَهُمَا عَنْ مَنْصُورٍ، بِهَذَا الإِسْنَادِ وَلَيْسَ فِي حَدِيثِ شُعْبَةَ ‏ \"‏ أَسْبِغُوا الْوُضُوءَ ‏\"‏ ‏.‏ وَفِي حَدِيثِهِ عَنْ أَبِي يَحْيَى الأَعْرَجِ ‏.‏",
+    "translation": "In the hadith transmitted by Shu'ba these words are not there:\" Complete the Wudu,\" and there is the name of Abu Yahya al-A'raj (a narrator)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:1224": {
+    "arabic": "حَدَّثَنَا عَبْدُ اللَّهِ بْنُ يُوسُفَ، أَخْبَرَنَا مَالِكُ بْنُ أَنَسٍ، عَنِ ابْنِ شِهَابٍ، عَنْ عَبْدِ الرَّحْمَنِ الأَعْرَجِ، عَنْ عَبْدِ اللَّهِ ابْنِ بُحَيْنَةَ ـ رضى الله عنه ـ أَنَّهُ قَالَ صَلَّى لَنَا رَسُولُ اللَّهِ صلى الله عليه وسلم رَكْعَتَيْنِ مِنْ بَعْضِ الصَّلَوَاتِ ثُمَّ قَامَ فَلَمْ يَجْلِسْ، فَقَامَ النَّاسُ مَعَهُ، فَلَمَّا قَضَى صَلاَتَهُ وَنَظَرْنَا تَسْلِيمَهُ كَبَّرَ قَبْلَ التَّسْلِيمِ فَسَجَدَ سَجْدَتَيْنِ وَهُوَ جَالِسٌ ثُمَّ سَلَّمَ‏.‏",
+    "translation": "Narrated `Abdullah bin Buhaina:Allah's Messenger (ﷺ) once led us in a prayer and offered two rak`at and got up (for the third rak`a) without sitting (after the second rak`a). The people also got up with him, and when he was about to finish his prayer, we waited for him to finish the prayer with Taslim but he said Takbir before Taslim and performed two prostrations while sitting and then finished the prayer with Taslim",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:1229": {
+    "arabic": "عن أبي هريرة رضي الله عنه قال: صَلَّى النبي صلى الله عليه وسلم إِحْدَى صَلاَتَيِ العَشِيّ -قال محمد: وَأَكْثَرُ ظَنِّي العصر- رَكْعَتَيْنِ، ثُمَّ سَلَّمَ، ثم قام إلى خَشَبَةٍ فِي مُقَدَّمِ المَسْجِدِ، فَوَضَعَ يَدَهُ عَلَيْهَا، وفيهم أبو بكر، وعمر رضي الله عنهما ، فَهَابَا أَنْ يُكَلِّمَاهُ، وخرج سَرَعَانُ النَّاسِ فَقَالُوا: أَقَصُرَتِ الصلاة؟ وَرَجُلٌ يَدْعُوهُ النبي صلى الله عليه وسلم ذُو اليَدَيْنِ، فَقَالَ: أَنَسِيتَ أَمْ قَصُرَتْ؟ فَقَالَ: لَمْ أَنْسَ وَلَمْ تُقْصَرْ، قَالَ: «بَلَى قَدْ نَسِيتَ، فَصَلَّى رَكْعَتَيْنِ، ثُمَّ سَلَّمَ، ثُمَّ كَبَّرَ، فَسَجَدَ مِثْلَ سُجُودِهِ أَوْ أَطْوَلَ، ثُمَّ رَفَعَ رَأْسَهُ، فَكَبَّرَ، ثُمَّ وَضَعَ رَأْسَهُ، فكبر، فَسَجَدَ مِثْلَ سُجُودِهِ أَوْ أَطْوَلَ، ثُمَّ رَفَعَ رَأْسَهُ وَكَبَّرَ».",
+    "translation": "Abu Hurayrah (may Allah be pleased with him) reported that the Prophet (may Allah's peace and blessings be upon him) performed one of the afternoon prayers (the sub-narrator Muhammad said: \"I think that it was most probably the ‘Asr prayer\") and he finished it after offering two Rak‘ahs only. He then stood near a piece of wood in front of the mosque and put his hand on it. Abu Bakr and ‘Umar were amongst those who were present, but they dared not talk to him about it (because of being awed by him), and those who were in a hurry went out. They said: \"Has the prayer been reduced?\" A man who was called Dhu al-Yadayn by the Prophet (may Allah's peace and blessings be upon him) said (to the Prophet): \"Has the prayer been reduced or have you forgotten?\" He said: \"Neither have I forgotten, nor has the prayer been reduced.\" He said: \"Certainly you have forgotten.\" So the Prophet offered two more Rak‘ahs and ended the prayer with Taslīm. Then he said Takbīr and performed a prostration like his ordinary prostration or a bit longer. Then he raised his head and said Takbīr. Then he put his head down and performed a prostration like his ordinary prostration or a bit longer. Then he raised his head and said Takbīr. [Al-Bukhāri]",
+    "attribution": "Narrated by Bukhari & Muslim",
+    "grade": "Authentic hadith",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "bukhari:597": {
+    "arabic": "حَدَّثَنَا أَبُو نُعَيْمٍ، وَمُوسَى بْنُ إِسْمَاعِيلَ، قَالاَ حَدَّثَنَا هَمَّامٌ، عَنْ قَتَادَةَ، عَنْ أَنَسٍ، عَنِ النَّبِيِّ صلى الله عليه وسلم قَالَ ‏\"‏ مَنْ نَسِيَ صَلاَةً فَلْيُصَلِّ إِذَا ذَكَرَهَا، لاَ كَفَّارَةَ لَهَا إِلاَّ ذَلِكَ ‏\"‏‏.‏ ‏{‏وَأَقِمِ الصَّلاَةَ لِذِكْرِي‏}‏ قَالَ مُوسَى قَالَ هَمَّامٌ سَمِعْتُهُ يَقُولُ بَعْدُ ‏{‏وَأَقِمِ الصَّلاَةَ لِذِكْرِي‏}‏‏.‏وَقَالَ حَبَّانُ حَدَّثَنَا هَمَّامٌ، حَدَّثَنَا قَتَادَةُ، حَدَّثَنَا أَنَسٌ، عَنِ النَّبِيِّ صلى الله عليه وسلم نَحْوَهُ‏.‏",
+    "translation": "Narrated Anas:The Prophet (ﷺ) said, \"If anyone forgets a prayer he should pray that prayer when he remembers it. There is no expiation except to pray the same.\" Then he recited: \"Establish prayer for My (i.e. Allah's) remembrance",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:1090": {
+    "arabic": "حَدَّثَنَا عَبْدُ اللَّهِ بْنُ مُحَمَّدٍ، قَالَ حَدَّثَنَا سُفْيَانُ، عَنِ الزُّهْرِيِّ، عَنْ عُرْوَةَ، عَنْ عَائِشَةَ ـ رضى الله عنها ـ قَالَتِ الصَّلاَةُ أَوَّلُ مَا فُرِضَتْ رَكْعَتَيْنِ فَأُقِرَّتْ صَلاَةُ السَّفَرِ، وَأُتِمَّتْ صَلاَةُ الْحَضَرِ‏.‏ قَالَ الزُّهْرِيُّ فَقُلْتُ لِعُرْوَةَ مَا بَالُ عَائِشَةَ تُتِمُّ قَالَ تَأَوَّلَتْ مَا تَأَوَّلَ عُثْمَانُ‏.‏",
+    "translation": "Narrated `Aisha:\"When the prayers were first enjoined they were of two rak`at each. Later the prayer in a journey was kept as it was but the prayers for non-travelers were completed.\" Az-Zuhri said, \"I asked `Urwa what made Aisha pray the full prayers (in journey).\" He replied, \"She did the same as `Uthman did",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "muslim:703a": {
+    "arabic": "وَحَدَّثَنَا مُحَمَّدُ بْنُ رَافِعٍ، حَدَّثَنَا عَبْدُ الرَّزَّاقِ، عَنِ ابْنِ جُرَيْجٍ، أَخْبَرَنِي نَافِعٌ، عَنِ ابْنِ عُمَرَ، أَنَّ عُمَرَ، اسْتَفْتَى النَّبِيَّ صلى الله عليه وسلم فَقَالَ هَلْ يَنَامُ أَحَدُنَا وَهُوَ جُنُبٌ قَالَ ‏ \"‏ نَعَمْ لِيَتَوَضَّأْ ثُمَّ لْيَنَمْ حَتَّى يَغْتَسِلَ إِذَا شَاءَ ‏\"‏ ‏.‏",
+    "translation": "Ibn 'Umar said:'Umar asked the verdict of the Shari'ah from the Apostle (ﷺ) thus: Is it permissible for any one of us to sleep in a state of impurity? He (the Prophet said: Yes, he must perform ablution and then sleep and take a bath when he desires)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:1089": {
+    "arabic": "حَدَّثَنَا أَبُو نُعَيْمٍ، قَالَ حَدَّثَنَا سُفْيَانُ، عَنْ مُحَمَّدِ بْنِ الْمُنْكَدِرِ، وَإِبْرَاهِيمَ بْنِ مَيْسَرَةَ، عَنْ أَنَسٍ ـ رضى الله عنه ـ قَالَ صَلَّيْتُ الظُّهْرَ مَعَ النَّبِيِّ صلى الله عليه وسلم بِالْمَدِينَةِ أَرْبَعًا، وَبِذِي الْحُلَيْفَةِ رَكْعَتَيْنِ‏.‏",
+    "translation": "Narrated Anas bin Malik: I offered four rak`at of Zuhr prayer with the Prophet (ﷺ) at Medina and two rak`at at Dhul-Hulaifa. (i.e. shortened the `Asr prayer)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:1117": {
+    "arabic": "عن عمران بن حصين رضي الله عنه قال: كَانَتْ بِي بَوَاسِيرُ، فَسَأَلْتُ النَّبِيَّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ عَنِ الصَّلَاةِ، فَقَالَ: «صَلِّ قَائِمًا، فَإِنْ لَمْ تَسْتَطِعْ فَقَاعِدًا، فَإِنْ لَمْ تَسْتَطِعْ فَعَلَى جَنْبٍ».",
+    "translation": "‘Imrān ibn Husayn (may Allah be pleased with him) reported: I was suffering from hemorrhoids (piles); so I asked the Prophet (may Allah's peace and blessings be upon him) about the prayer and he said: \"Pray while standing; if you cannot, then while sitting; and if you cannot, then while lying on your side.\"",
+    "attribution": "Narrated by Al-Bukhāri",
+    "grade": "Authentic",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "bukhari:321": {
+    "arabic": "حَدَّثَنَا مُوسَى بْنُ إِسْمَاعِيلَ، قَالَ حَدَّثَنَا هَمَّامٌ، قَالَ حَدَّثَنَا قَتَادَةُ، قَالَ حَدَّثَتْنِي مُعَاذَةُ، أَنَّ امْرَأَةً، قَالَتْ لِعَائِشَةَ أَتَجْزِي إِحْدَانَا صَلاَتَهَا إِذَا طَهُرَتْ فَقَالَتْ أَحَرُورِيَّةٌ أَنْتِ كُنَّا نَحِيضُ مَعَ النَّبِيِّ صلى الله عليه وسلم فَلاَ يَأْمُرُنَا بِهِ‏.‏ أَوْ قَالَتْ فَلاَ نَفْعَلُهُ‏.‏",
+    "translation": "Narrated Mu`adha:A woman asked `Aisha, \"Should I offer the prayers that which I did not offer because of menses\" `Aisha said, \"Are you from the Huraura' (a town in Iraq?) We were with the Prophet (ﷺ) and used to get our periods but he never ordered us to offer them (the Prayers missed during menses).\" `Aisha perhaps said, \"We did not offer them",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "muslim:335a": {
+    "arabic": "حَدَّثَنَا يَحْيَى بْنُ أَيُّوبَ، وَقُتَيْبَةُ، وَابْنُ، حُجْرٍ قَالُوا حَدَّثَنَا إِسْمَاعِيلُ، - وَهُوَ ابْنُ جَعْفَرٍ - عَنِ الْعَلاَءِ، عَنْ أَبِيهِ، عَنْ أَبِي هُرَيْرَةَ، عَنْ رَسُولِ اللَّهِ صلى الله عليه وسلم قَالَ ‏ \"‏ قَالَ اللَّهُ عَزَّ وَجَلَّ إِذَا هَمَّ عَبْدِي بِحَسَنَةٍ وَلَمْ يَعْمَلْهَا كَتَبْتُهَا لَهُ حَسَنَةً فَإِنْ عَمِلَهَا كَتَبْتُهَا عَشْرَ حَسَنَاتٍ إِلَى سَبْعِمِائَةِ ضِعْفٍ وَإِذَا هَمَّ بِسَيِّئَةٍ وَلَمْ يَعْمَلْهَا لَمْ أَكْتُبْهَا عَلَيْهِ فَإِنْ عَمِلَهَا كَتَبْتُهَا سَيِّئَةً وَاحِدَةً ‏\"‏ ‏.‏",
+    "translation": "It is narrated on the authority of Abu Huraira that the Messenger of Allah (ﷺ) observed:Allah, the Great and Glorious, said: Whenever my bondsman intends to do good, but does not do it, I write one good act for him, but if he puts it into practice I wrote from ten to seven hundred good deeds in favour of him. When he intends to commit an evil, but does not actually do it, do not record it. But if he does it, I write only one evil",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:228": {
+    "arabic": "حَدَّثَنَا مُحَمَّدٌ، قَالَ حَدَّثَنَا أَبُو مُعَاوِيَةَ، حَدَّثَنَا هِشَامُ بْنُ عُرْوَةَ، عَنْ أَبِيهِ، عَنْ عَائِشَةَ، قَالَتْ جَاءَتْ فَاطِمَةُ ابْنَةُ أَبِي حُبَيْشٍ إِلَى النَّبِيِّ صلى الله عليه وسلم فَقَالَتْ يَا رَسُولَ اللَّهِ إِنِّي امْرَأَةٌ أُسْتَحَاضُ فَلاَ أَطْهُرُ، أَفَأَدَعُ الصَّلاَةَ فَقَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏\"‏ لاَ، إِنَّمَا ذَلِكِ عِرْقٌ، وَلَيْسَ بِحَيْضٍ، فَإِذَا أَقْبَلَتْ حَيْضَتُكِ فَدَعِي الصَّلاَةَ، وَإِذَا أَدْبَرَتْ فَاغْسِلِي عَنْكِ الدَّمَ ثُمَّ صَلِّي ‏\"‏‏.‏ قَالَ وَقَالَ أَبِي ‏\"‏ ثُمَّ تَوَضَّئِي لِكُلِّ صَلاَةٍ، حَتَّى يَجِيءَ ذَلِكَ الْوَقْتُ ‏\"‏‏.‏",
+    "translation": "Narrated `Aisha:Fatima bint Abi Hubaish came to the Prophet (ﷺ) and said, \"O Allah's Messenger (ﷺ) I get persistent bleeding from the uterus and do not become clean. Shall I give up my prayers?\" Allah's Messenger (ﷺ) replied, \"No, because it is from a blood vessel and not the menses. So when your real menses begins give up your prayers and when it has finished wash off the blood (take a bath) and offer your prayers.\" Hisham (the sub narrator) narrated that his father had also said, (the Prophet (ﷺ) told her): \"Perform ablution for every prayer till the time of the next period comes",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:1484": {
+    "arabic": "حَدَّثَنَا مُسَدَّدٌ، حَدَّثَنَا يَحْيَى، حَدَّثَنَا مَالِكٌ، قَالَ حَدَّثَنِي مُحَمَّدُ بْنُ عَبْدِ اللَّهِ بْنِ عَبْدِ الرَّحْمَنِ بْنِ أَبِي صَعْصَعَةَ، عَنْ أَبِيهِ، عَنْ أَبِي سَعِيدٍ الْخُدْرِيِّ ـ رضى الله عنه ـ عَنِ النَّبِيِّ صلى الله عليه وسلم قَالَ ‏\"‏ لَيْسَ فِيمَا أَقَلُّ مِنْ خَمْسَةِ أَوْسُقٍ صَدَقَةٌ، وَلاَ فِي أَقَلَّ مِنْ خَمْسَةٍ مِنَ الإِبِلِ الذَّوْدِ صَدَقَةٌ، وَلاَ فِي أَقَلَّ مِنْ خَمْسِ أَوَاقٍ مِنَ الْوَرِقِ صَدَقَةٌ ‏\"‏‏.‏ قَالَ أَبُو عَبْدِ اللَّهِ هَذَا تَفْسِيرُ الأَوَّلِ إِذَا قَالَ ‏\"‏ لَيْسَ فِيمَا دُونَ خَمْسَةِ أَوْسُقٍ صَدَقَةٌ ‏\"‏‏.‏ وَيُؤْخَذُ أَبَدًا فِي الْعِلْمِ بِمَا زَادَ أَهْلُ الثَّبَتِ أَوْ بَيَّنُوا‏.‏",
+    "translation": "Narrated Abu Sa`id Al-Khudri:The Prophet (ﷺ) said, \"There is no Zakat on less than five Awsuq (of dates), or on less than five camels, or on less than five Awaq of silver",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "abu-dawud:1573": {
+    "arabic": "حَدَّثَنَا سُلَيْمَانُ بْنُ دَاوُدَ الْمَهْرِيُّ، أَخْبَرَنَا ابْنُ وَهْبٍ، أَخْبَرَنِي جَرِيرُ بْنُ حَازِمٍ، وَسَمَّى، آخَرَ عَنْ أَبِي إِسْحَاقَ، عَنْ عَاصِمِ بْنِ ضَمْرَةَ، وَالْحَارِثِ الأَعْوَرِ، عَنْ عَلِيٍّ، - رضى الله عنه - عَنِ النَّبِيِّ صلى الله عليه وسلم بِبَعْضِ أَوَّلِ هَذَا الْحَدِيثِ قَالَ ‏\"‏ فَإِذَا كَانَتْ لَكَ مِائَتَا دِرْهَمٍ وَحَالَ عَلَيْهَا الْحَوْلُ فَفِيهَا خَمْسَةُ دَرَاهِمَ وَلَيْسَ عَلَيْكَ شَىْءٌ - يَعْنِي فِي الذَّهَبِ - حَتَّى يَكُونَ لَكَ عِشْرُونَ دِينَارًا فَإِذَا كَانَ لَكَ عِشْرُونَ دِينَارًا وَحَالَ عَلَيْهَا الْحَوْلُ فَفِيهَا نِصْفُ دِينَارٍ فَمَا زَادَ فَبِحِسَابِ ذَلِكَ ‏\"‏ ‏.‏ قَالَ فَلاَ أَدْرِي أَعَلِيٌّ يَقُولُ فَبِحِسَابِ ذَلِكَ ‏.‏ أَوْ رَفَعَهُ إِلَى النَّبِيِّ صلى الله عليه وسلم ‏\"‏ وَلَيْسَ فِي مَالٍ زَكَاةٌ حَتَّى يَحُولَ عَلَيْهِ الْحَوْلُ ‏\"‏ ‏.‏ إِلاَّ أَنَّ جَرِيرًا قَالَ ابْنُ وَهْبٍ يَزِيدُ فِي الْحَدِيثِ عَنِ النَّبِيِّ صلى الله عليه وسلم ‏\"‏ لَيْسَ فِي مَالٍ زَكَاةٌ حَتَّى يَحُولَ عَلَيْهِ الْحَوْلُ ‏\"‏ ‏.‏",
+    "translation": "Narrated Ali ibn AbuTalib: The Prophet (ﷺ) said: \"When you possess two hundred dirhams and one year passes on them, five dirhams are payable. Nothing is incumbent on you, that is, on gold, till it reaches twenty dinars. When you possess twenty dinars and one year passes on them, half a dinar is payable. Whatever exceeds, that will be reckoned properly.\" (The narrator said: I do not remember whether the words \"that will be reckoned properly\" were uttered by All himself or he attributed them to the Prophet (ﷺ). No zakat is payable on property till a year passes on it. But Jarir said: Ibn Wahb (sub-narrator) added to this tradition from the Prophet (ﷺ): \"No zakat is payable on property until a year passes away on it",
+    "grade": "Sahih (Al-Albani) · Sahih (Muhammad Muhyi Al-Din Abdul Hamid) · Daif (Zubair Ali Zai)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "abu-dawud:5095": {
+    "arabic": "حَدَّثَنَا إِبْرَاهِيمُ بْنُ الْحَسَنِ الْخَثْعَمِيُّ، حَدَّثَنَا حَجَّاجُ بْنُ مُحَمَّدٍ، عَنِ ابْنِ جُرَيْجٍ، عَنْ إِسْحَاقَ بْنِ عَبْدِ اللَّهِ بْنِ أَبِي طَلْحَةَ، عَنْ أَنَسِ بْنِ مَالِكٍ، أَنَّ النَّبِيَّ صلى الله عليه وسلم قَالَ ‏\"‏ إِذَا خَرَجَ الرَّجُلُ مِنْ بَيْتِهِ فَقَالَ بِسْمِ اللَّهِ تَوَكَّلْتُ عَلَى اللَّهِ لاَ حَوْلَ وَلاَ قُوَّةَ إِلاَّ بِاللَّهِ ‏\"‏ ‏.‏ قَالَ ‏\"‏ يُقَالُ حِينَئِذٍ هُدِيتَ وَكُفِيتَ وَوُقِيتَ فَتَتَنَحَّى لَهُ الشَّيَاطِينُ فَيَقُولُ لَهُ شَيْطَانٌ آخَرُ كَيْفَ لَكَ بِرَجُلٍ قَدْ هُدِيَ وَكُفِيَ وَوُقِيَ ‏\"‏ ‏.‏",
+    "translation": "Narrated Anas ibn Malik: The Prophet (ﷺ) said: When a man goes out of his house and says: \"In the name of Allah, I trust in Allah; there is no might and no power but in Allah,\" the following will be said to him at that time: \"You are guided, defended and protected.\" The devils will go far from him and another devil will say: How can you deal with a man who has been guided, defended and protected?",
+    "grade": "Sahih (Al-Albani) · Sahih (Muhammad Muhyi Al-Din Abdul Hamid) · Hasan (Zubair Ali Zai)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:142": {
+    "arabic": "حَدَّثَنَا آدَمُ، قَالَ حَدَّثَنَا شُعْبَةُ، عَنْ عَبْدِ الْعَزِيزِ بْنِ صُهَيْبٍ، قَالَ سَمِعْتُ أَنَسًا، يَقُولُ كَانَ النَّبِيُّ صلى الله عليه وسلم إِذَا دَخَلَ الْخَلاَءَ قَالَ ‏ \"‏ اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْخُبُثِ وَالْخَبَائِثِ ‏\"‏‏.‏ تَابَعَهُ ابْنُ عَرْعَرَةَ عَنْ شُعْبَةَ‏.‏ وَقَالَ غُنْدَرٌ عَنْ شُعْبَةَ إِذَا أَتَى الْخَلاَءَ‏.‏ وَقَالَ مُوسَى عَنْ حَمَّادٍ إِذَا دَخَلَ‏.‏ وَقَالَ سَعِيدُ بْنُ زَيْدٍ حَدَّثَنَا عَبْدُ الْعَزِيزِ إِذَا أَرَادَ أَنْ يَدْخُلَ‏.‏",
+    "translation": "Narrated Anas:Whenever the Prophet (ﷺ) went to answer the call of nature, he used to say, \"Allah-umma inni a`udhu bika minal khubuthi wal khaba'ith i.e. O Allah, I seek Refuge with You from all offensive and wicked things (evil deeds and evil spirits)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "abu-dawud:30": {
+    "arabic": "حَدَّثَنَا عَمْرُو بْنُ مُحَمَّدٍ النَّاقِدُ، حَدَّثَنَا هَاشِمُ بْنُ الْقَاسِمِ، حَدَّثَنَا إِسْرَائِيلُ، عَنْ يُوسُفَ بْنِ أَبِي بُرْدَةَ، عَنْ أَبِيهِ، حَدَّثَتْنِي عَائِشَةُ، رضى الله عنها أَنَّ النَّبِيَّ صلى الله عليه وسلم كَانَ إِذَا خَرَجَ مِنَ الْغَائِطِ قَالَ ‏ \"‏ غُفْرَانَكَ ‏\"‏ ‏.‏",
+    "translation": "Narrated Aisha, Ummul Mu'minin: When the Prophet (ﷺ) came out of the privy, he used to say: \"Grant me Thy forgiveness",
+    "grade": "Sahih (Al-Albani) · Sahih (Muhammad Muhyi Al-Din Abdul Hamid) · Isnaad Sahih (Zubair Ali Zai)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "tirmidhi:1858": {
+    "arabic": "قَالَ رَسُولُ اللَّهِ ﷺ إِذَا أَكَلَ أَحَدُكُمْ طَعَامًا فَلْيَقُلْ بِسْمِ اللَّهِ فَإِنْ نَسِيَ فِي أَوَّلِهِ فَلْيَقُلْ بِسْمِ اللَّهِ فِي أَوَّلِهِ وَآخِرِهِ",
+    "translation": "From 'Aishah that the Messenger of Allah ﷺ said: \"When one of you eats food, then let him say: 'Bismillah.' If he forgets in the beginning, then let him say: 'Bismillah Fi Awwalihi Wa Akhirih (In the Name of Allah in its beginning and its end.)\"",
+    "grade": "Sound (ʿAli Zaʾī)",
+    "arabicFrom": "hadithunlocked.com",
+    "translationFrom": "hadithunlocked.com"
+  },
+  "tirmidhi:3458": {
+    "arabic": "حَدَّثَنَا مُحَمَّدُ بْنُ إِسْمَاعِيلَ، حَدَّثَنَا عَبْدُ اللَّهِ بْنُ يَزِيدَ الْمُقْرِئُ، حَدَّثَنَا سَعِيدُ بْنُ أَبِي أَيُّوبَ، حَدَّثَنِي أَبُو مَرْحُومٍ، عَنْ سَهْلِ بْنِ مُعَاذِ بْنِ أَنَسٍ، عَنْ أَبِيهِ، قَالَ قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏ \"‏ مَنْ أَكَلَ طَعَامًا فَقَالَ الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنِي هَذَا وَرَزَقَنِيهِ مِنْ غَيْرِ حَوْلٍ مِنِّي وَلاَ قُوَّةٍ ‏.‏ غُفِرَ لَهُ مَا تَقَدَّمَ مِنْ ذَنْبِهِ ‏\"‏ ‏.‏ قَالَ هَذَا حَدِيثٌ حَسَنٌ غَرِيبٌ وَأَبُو مَرْحُومٍ اسْمُهُ عَبْدُ الرَّحِيمِ بْنُ مَيْمُونٍ ‏.‏",
+    "translation": "Sahl bin Mu`adh bin Anas narrated from his father that:The Messenger of Allah (ﷺ) said: “Whoever eats food and then says: ‘All praise is due to Allah who fed me this and granted it as provision to me, without any effort from me nor power, (Al-ḥamdulillāh, alladhī aṭ`amanī hādha wa razaqanīhi min ghairi ḥawlin minnī, wa lā quwwatin)’ his past sins shall be forgiven.”",
+    "grade": "Hasan (Ahmad Muhammad Shakir) · Hasan (Al-Albani) · Hasan (Bashar Awad Maarouf) · Isnaad Hasan (Zubair Ali Zai)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "ibn-majah:3285": {
+    "arabic": "عَنْ سَهْلِ بْنِ مُعَاذِ بْنِ أَنَسٍ عَنْ أَبِيهِ قَالَ: قَالَ رَسُولُ اللهِ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ: «مَنْ أَكَلَ طَعَامًا فَقَالَ: الحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنِي هَذَا وَرَزَقَنِيهِ مِنْ غَيْرِ حَوْلٍ مِنِّي وَلاَ قُوَّةٍ، غُفِرَ لَهُ مَا تَقَدَّمَ مِنْ ذَنْبِهِ».",
+    "translation": "Sahl ibn Mu‘ādh ibn Anas related from his father that the Messenger of Allah (may Allah's peace and blessings be upon him) said: \"Whoever eats food and says 'Alhamdulillah al-ladhi at‘amani hadha wa razaqneih min ghayri hawl li wala quwwah (Praise be to Allah who fed me and provided me with this food through no might or power on my part)', his past sins will be forgiven.\"",
     "attribution": "Narrated by Abu Dāwūd, At-Tirmidhi, Ibn Mājah, and Ahmad",
-    "grade": "Authentic"
+    "grade": "Hasan (Al-Albani) · Hasan (Muhammad Fouad Abd al-Baqi) · Hasan (Shuaib Al Arnaut) · Isnaad Hasan (Zubair Ali Zai)",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "abu-dawud:3850": {
+    "arabic": "حَدَّثَنَا مُحَمَّدُ بْنُ الْعَلاَءِ، حَدَّثَنَا وَكِيعٌ، عَنْ سُفْيَانَ، عَنْ أَبِي هَاشِمٍ الْوَاسِطِيِّ، عَنْ إِسْمَاعِيلَ بْنِ رَبَاحٍ، عَنْ أَبِيهِ، أَوْ غَيْرِهِ عَنْ أَبِي سَعِيدٍ الْخُدْرِيِّ، أَنَّ النَّبِيَّ صلى الله عليه وسلم كَانَ إِذَا فَرَغَ مِنْ طَعَامِهِ قَالَ ‏ \"‏ الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنَا وَسَقَانَا وَجَعَلَنَا مُسْلِمِينَ ‏\"‏ ‏.‏",
+    "translation": "Narrated AbuSa'id al-Khudri: When the Messenger of Allah (ﷺ) finished his food, he said: \"Praise be to Allah Who has given us food and drink and made us Muslims",
+    "grade": "Daif (Al-Albani) · Daif (Muhammad Muhyi Al-Din Abdul Hamid) · Daif (Shuaib Al Arnaut) · Daif (Zubair Ali Zai)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "tirmidhi:3457": {
+    "arabic": "حَدَّثَنَا أَبُو سَعِيدٍ الأَشَجُّ، حَدَّثَنَا حَفْصُ بْنُ غِيَاثٍ، وَأَبُو خَالِدٍ الأَحْمَرُ عَنْ حَجَّاجِ بْنِ أَرْطَاةَ، عَنْ رِيَاحِ بْنِ عَبِيدَةَ، قَالَ حَفْصٌ عَنِ ابْنِ أَخِي أَبِي سَعِيدٍ، وَقَالَ أَبُو خَالِدٍ، عَنْ مَوْلًى، لأَبِي سَعِيدٍ عَنْ أَبِي سَعِيدٍ، رضى الله عنه قَالَ كَانَ النَّبِيُّ صلى الله عليه وسلم إِذَا أَكَلَ أَوْ شَرِبَ قَالَ ‏ \"‏ الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنَا وَسَقَانَا وَجَعَلَنَا مُسْلِمِينَ ‏\"‏ ‏.‏",
+    "translation": "Abu Sa`eed [may Allah be pleased with him] narrated that:When the Prophet (ﷺ) used to eat or drink, he would say: “All praise is due to Allah who fed us and gave us drink, and made us Muslims (Al-ḥamdulillāh, alladhī aṭ`amanā, wa saqānā, wa ja`alanā muslimīn).”",
+    "grade": "Daif (Ahmad Muhammad Shakir) · Daif (Al-Albani) · Daif (Zubair Ali Zai)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "ibn-majah:3283": {
+    "arabic": "حَدَّثَنَا أَبُو بَكْرِ بْنُ أَبِي شَيْبَةَ، حَدَّثَنَا أَبُو خَالِدٍ الأَحْمَرُ، عَنْ حَجَّاجٍ، عَنْ رِيَاحِ بْنِ عَبِيدَةَ، عَنْ مَوْلًى، لأَبِي سَعِيدٍ عَنْ أَبِي سَعِيدٍ، قَالَ كَانَ النَّبِيُّ ـ صلى الله عليه وسلم ـ إِذَا أَكَلَ طَعَامًا قَالَ ‏ \"‏ الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنَا وَسَقَانَا وَجَعَلَنَا مُسْلِمِينَ ‏\"‏ ‏.‏",
+    "translation": "It was narrated that Abu Sa’eed said:“Whenever the Prophet (ﷺ) ate, he would say: Al-hamdu lillahil-ladhi at’amana wa saqana wa ja’alana Muslimin (Praise is to Allah Who has fed us, given us to drink, and made us Muslims).”",
+    "grade": "Daif (Al-Albani) · Daif (Muhammad Fouad Abd al-Baqi) · Daif (Shuaib Al Arnaut) · Daif (Zubair Ali Zai)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "muslim:1342": {
+    "arabic": "عَنْ ‌وَرَّادٍ كَاتِبِ الْمُغِيرَةِ بْنِ شُعْبَةَ قَالَ: أَمْلَى عَلَيَّ الْمُغِيرَةُ بْنُ شُعْبَةَ فِي كِتَابٍ إِلَى مُعَاوِيَةَ: أَنَّ النَّبِيَّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ كَانَ يَقُولُ فِي دُبُرِ كُلِّ صَلَاةٍ مَكْتُوبَةٍ: «لَا إِلَهَ إِلَّا اللهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، اللَّهُمَّ لَا مَانِعَ لِمَا أَعْطَيْتَ، وَلَا مُعْطِيَ لِمَا مَنَعْتَ، وَلَا يَنْفَعُ ذَا الْجَدِّ مِنْكَ الْجَدُّ».",
+    "translation": "Warrād, the scribe of Al-Mughīrah ibn Shu‘bah, related: Al-Mughīrah ibn Shu‘bah dictated to me in a letter to Mu‘āwiyah: The Prophet (may Allah’s peace and blessings be upon him) used to say after every obligatory prayer: \"Lā ilāh illa Allah, wahdahu lā sharīka lah, lahu al-mulku wa lahu al-hamdu wa huwa ‘ala koll shay’in qadīr, allahumma lā māni‘a lima a‘tayt wa lā mu‘tiya lima mana‘ta wa la banfa‘u dha al-jaddi minka al-jadd\" (There is no god but Allah, alone, with no partner with Him. To Him belongs the dominion and to Him praise is due, and He is Able to do all things. O Allah, none can withhold what You give and none can give what You withhold, and riches cannot avail a wealthy person against You).",
+    "attribution": "Agreed upon",
+    "grade": "Authentic",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
   }
 };
 
 /** Where these came from. A licence obligation, not a nicety. */
 export const EVIDENCE_SOURCES = {
   quran: 'QuranEnc.com',
-  hadith: 'HadeethEnc.com',
+  hadith: 'HadeethEnc.com · fawazahmed0/hadith-api',
 } as const;

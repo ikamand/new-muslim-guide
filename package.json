@@ -61,7 +61,7 @@
     "content:verify": "node --import ./scripts/ts-resolve.mjs scripts/content-verify.mjs",
     "quran:juz30": "node scripts/generate-juz30.mjs",
     "evidence": "node --import ./scripts/ts-resolve.mjs scripts/generate-evidence.mjs",
-    "hadith:candidates": "node --import ./scripts/ts-resolve.mjs scripts/hadith-candidates.mjs"
+    "hadith:corpus": "node --import ./scripts/ts-resolve.mjs scripts/fetch-hadith-corpus.mjs"
   },
   "private": true
 }

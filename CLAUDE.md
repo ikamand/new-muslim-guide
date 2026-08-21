@@ -165,26 +165,47 @@ cannot check by looking at the screen.
   collection, extract it verbatim and record where it came from in `source`, as
   `src/content/duas.ts` does. `npm run arabic` lists every Arabic string in the
   app with the copied ones separated from the model-written ones.
-- **The sources are IslamHouse, HadeethEnc and QuranEnc. Not sunnah.com.**
-  Settled. sunnah.com refuses automated requests, so nothing can be checked
-  against it, and the app builds on one supervised family instead:
-  - `quranenc.com/api/v1` — Qur'an, 74 translations, no key.
+- **Four sources, each for what only it has. Not sunnah.com** — it refuses
+  automated requests, so nothing can be checked against it.
+  - `fawazahmed0/hadith-api` via jsDelivr — the Six Books **with the
+    collection's own numbering**, which is the thing nothing else has. Static
+    JSON in a git repo, downloaded by `npm run hadith:corpus` into a gitignored
+    `.cache/`, never called at runtime. Unlicense.
   - `hadeethenc.com/api/v1` — 2,776 graded hadith, vowelled, ~65 languages, no
-    key. **Search is `phrase=` and matches Arabic**, not English.
+    key. **Search is `phrase=`, matches Arabic, and is a loose OR match that
+    caps at 100** — so a common phrase returns a hundred narrations and the one
+    you want is not near the top. Distinctiveness lives at the END of a matn;
+    search there and keep the window that returned FEWEST hits.
+  - `quranenc.com/api/v1` — Qur'an, 74 translations, no key.
   - `cnt.islamhouse.com/api/v1` — 124 books aligned phrase by phrase, including
-    Hisn al-Muslim and the full Arabic of Bukhari and Muslim, no key.
-  - `api3.islamhouse.com/v3` — the library: books, audio, video. Public key is
-    in their own docs.
-  ⚠️ IslamHouse publishes no terms of use; HadeethEnc does — *no modification,
-  addition or deletion, and name the publisher.* Its text ships verbatim.
+    Hisn al-Muslim. Its Bukhari and Muslim are complete but **unnumbered, and
+    their paragraph order is not their numbering** — position looks like
+    numbering until the two drift, and by Bukhari 248 they have. Cost a day.
+  - **Keeping four is deliberate, and the reason is verification.** These are
+    build-time tools, not runtime dependencies — none can take the app down, so
+    the usual case for fewer suppliers does not apply. What redundancy buys is
+    the cross-check that caught the IslamHouse drift above. One source agreeing
+    with itself proves nothing.
+  ⚠️ **Licences differ, so provenance rides on the text.** `EvidenceText`
+  carries `arabicFrom` and `translationFrom` per text, because a credit not
+  attached to the thing it credits gets lost when the thing moves. HadeethEnc:
+  *no modification, addition or deletion, and name the publisher* — its text
+  ships verbatim. IslamHouse publishes no terms at all. **And every English
+  translation of the Six Books in circulation is Darussalam's** — the same
+  wording, carrying the same typo in Abu Dawud 135, appears in every mirror
+  checked. A public-domain dedication on a compilation does not reach the
+  translation inside it. So prefer HadeethEnc's translation, fall back to
+  Darussalam's flagged as such, and rely on it being a quotation — a hundred
+  narrations out of thirty thousand, each under the instruction it supports, in
+  an app that is free and never sold. Iyad's decision, on the record.
 - **Never print a reference you have not opened.** Not a style rule — three
   hadith numbers were once typed from memory here, all plausible, none
   verifiable. **A number you cannot check is worse than no number**, because it
   survives review by looking right. Where the collection and grading are known
   but the number is not, cite with `hadeethEnc(collection, id)` from
   `sources.ts`: it names what was actually read and asserts no number.
-  HadeethEnc cannot be asked for "Bukhari 6324" — it has ids of its own, and no
-  site in this family maps a collection number to a text.
+  HadeethEnc still cannot be asked for "Bukhari 6324" — it has ids of its own —
+  but the hadith corpus **can**, which is why it is here.
 - **A term is not a quotation.** `الصَّلَاة` is the word "prayer"; `أَخِي` is "my
   brother". Asking for a citation for a noun is a category error, and reporting
   one as missing buries the citations that really are. `npm run arabic` counts
@@ -294,12 +315,15 @@ anyone cared.
   writes Imlaei and QuranEnc serves Uthmani; the trap is that Uthmani writes a
   long ā as a COMBINING mark, so it must be promoted to a letter *before*
   diacritics are stripped or every verse false-positives.
-- Added a citation and want its text on screen? `npm run evidence`. It writes
-  `src/content/evidence.ts` and a review sheet at `docs/hadith-candidates.md`.
-  A narration is only accepted where the app's Arabic appears *inside* the
-  narration — containment, never similarity — and everything else goes to the
-  sheet, because choosing which authentic narration supports a claim is
-  substance.
+- Added a citation and want its text on screen? `npm run evidence` (after
+  `npm run hadith:corpus` once). It writes `src/content/evidence.ts` and a
+  report at `docs/evidence-report.md` naming which source supplied every line.
+  It resolves a narration by its NUMBER and, where HadeethEnc has it too,
+  confirms the two publishers print the same wording — a shared run of ten
+  consecutive words, not equality, because one prints the isnad and the other
+  does not. **This proves a text is what the collection prints. It does not
+  prove the narration is the right evidence for the ruling it sits under** —
+  that is substance, and it stays with a qualified reviewer.
 - Touched audio or added a recitation? `npm run audio:manifest`. It regenerates
   `docs/audio-manifest.csv` — the sheet of every clip, what it says, which step
   says it, whether it exists and who recorded it. `-- --check` fails if the

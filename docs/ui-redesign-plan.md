@@ -602,6 +602,57 @@ confirmed, tools `search_hadeeths` / `get_hadeeth_by_id` /
 real hadith rather than reconstructing from memory, which is the failure mode
 `sources.ts` opens by warning about.
 
+### Correction, 21 Aug: numbering, and where it really lives
+
+Two claims above are wrong and are left standing rather than quietly fixed.
+
+**"No site in this family maps a collection number to a text."** True of the
+family, and I over-concluded from it. `cnt.islamhouse.com` serves Bukhari as
+177 pages / 7,070 paragraphs **in book order**, so position stands in for
+numbering — row 159 *is* Bukhari 159, verified against the app's own citation
+at 1, 135, 159, 164, 168 and 185. But it **drifts**: 7,070 rows against 7,563
+standard numbers, and row 248 is the Barāʾ narration that is standard 247.
+Exact in the low hundreds, unreliable deep in. A day was spent before that was
+measured rather than assumed.
+
+**The real answer is a fourth source.** `github.com/fawazahmed0/hadith-api`,
+static JSON over jsDelivr, carries the Six Books **with the collection's own
+numbering** — the thing nothing else here has. All 109 of the app's numbered
+citations resolve against it. Its Arabic agrees with Hadith Unlocked on 10 of
+11 spot checks and with IslamHouse wherever IslamHouse has not yet drifted,
+which is what makes the drift above measurable at all.
+
+| | |
+|---|---|
+| Licence | Unlicense — a public-domain dedication |
+| Delivery | Static files, downloaded to a gitignored `.cache/`, never called at runtime |
+| Extras | `arabicnumber` beside `hadithnumber`; up to four graders per narration |
+| Holes | ~408 narrations have an **empty** `text` — 203 in Muslim alone |
+
+`hadithunlocked.com` covers the holes, lazily, and keeps Muslim's letter
+suffixes (`8a`) where this one collapses them into an entry it leaves empty.
+
+**HadeethEnc's search is a loose OR match capped at 100 results**, which the
+note above missed by testing only short duʿas. A common phrase returns a
+hundred narrations with the right one nowhere near the top. Distinctiveness
+lives at the END of a matn — search there and keep the window returning FEWEST
+hits. That correction alone took cross-checks from 1-in-12 to 44-in-107.
+
+### Licensing — and the one that applies to every mirror
+
+**Every English translation of the Six Books in circulation is the same
+licensed corpus** — Darussalam and Aḥmad Ḥasan, via sunnah.com. Proved rather
+than assumed: Abu Dawud 135 reads *"how is the ablution (to performed)?"* — the
+same typo — in fawazahmed0, in hadithunlocked.com and on prophetmuhammad.com.
+A public-domain dedication on a compilation does not reach the translation
+inside it.
+
+So: prefer HadeethEnc's own translation, which has published terms; fall back
+to Darussalam's **flagged on the text itself** via `translationFrom`; and rely
+on it being a quotation — around a hundred narrations out of thirty thousand,
+each under the instruction it supports, in an app that is free and never sold.
+Iyad's decision, taken with the risk stated.
+
 ### Licensing — one clean, one not
 
 - **HadeethEnc publishes terms**, in its API documentation: *"No modification,

@@ -201,7 +201,6 @@ export default function GuideScreen() {
         */}
         <SourceDisclosure
           sources={[...(step.sources ?? []), ...(step.says?.sources ?? [])]}
-          arabic={step.says?.arabic}
         />
 
         {/*

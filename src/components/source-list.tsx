@@ -17,6 +17,23 @@ function quranText(source: Extract<Source, { kind: 'quran' }>): EvidenceText | u
   return QURAN_TEXT[`${source.surah}:${first}${last !== first ? `-${last}` : ''}`];
 }
 
+/** The narration a `HadithSource` addresses, keyed the way `evidence.ts` stores it. */
+function hadithText(source: Extract<Source, { kind: 'hadith' }>): EvidenceText | undefined {
+  const key = source.reference
+    ? `${source.collection}:${source.reference}`
+    : source.hadeethEncId
+      ? `${source.collection}:he${source.hadeethEncId}`
+      : undefined;
+  return key ? HADITH_TEXT[key] : undefined;
+}
+
+/** The text behind any citation the app can show one for. */
+function evidenceFor(source: Source): EvidenceText | undefined {
+  if (source.kind === 'quran') return quranText(source);
+  if (source.kind === 'hadith') return hadithText(source);
+  return undefined;
+}
+
 /**
  * Where a claim comes from, as a reader sees it.
  *
@@ -56,7 +73,7 @@ export function SourceLines({
         </ThemedText>
       )}
       {sources.map((source) => {
-        const text = source.kind === 'quran' ? quranText(source) : undefined;
+        const text = evidenceFor(source);
 
         return (
           <View key={formatSource(source)} style={styles.entry}>
@@ -64,12 +81,18 @@ export function SourceLines({
               {formatSource(source)}
             </ThemedText>
             {/*
-              The verse itself, where the app has it. A citation this app never
-              links out of — deliberately, see above — is otherwise a dead end:
-              a beginner can neither read "Qur'an 2:255" nor follow it, so it
-              was provenance for a reviewer and nothing for the reader.
+              The verse or the narration itself, where the app has it. A
+              citation this app never links out of — deliberately, see above —
+              is otherwise a dead end: a beginner can neither read "Sahih
+              al-Bukhari 159" nor follow it, so it was provenance for a
+              reviewer and nothing at all for the reader.
             */}
-            {text && <EvidenceBlock text={text} />}
+            {text && (
+              <EvidenceBlock
+                text={text}
+                hideGrade={source.kind === 'hadith' && Boolean(source.grading)}
+              />
+            )}
           </View>
         );
       })}
@@ -77,10 +100,43 @@ export function SourceLines({
   );
 }
 
+/**
+ * Who published the words above.
+ *
+ * A licence obligation, not a nicety: HadeethEnc's terms ask for *"clearly
+ * referring to the publisher and the source"*, and this app carried their text
+ * for a while without naming them anywhere on screen.
+ *
+ * The two fields usually agree. Where they differ it is worth showing both —
+ * one publisher supplied the Arabic and another the translation, which is the
+ * whole point of the cascade. Where one already names the other, as
+ * "Darussalam (via fawazahmed0/hadith-api)" does, printing both would say the
+ * same name twice.
+ */
+function creditFor(text: EvidenceText): string {
+  const { arabicFrom, translationFrom } = text;
+  if (!translationFrom || translationFrom === arabicFrom) return arabicFrom;
+  if (translationFrom.includes(arabicFrom)) return translationFrom;
+  return `${arabicFrom} · ${translationFrom}`;
+}
+
 /** A published text, quoted. Never edited — see HadeethEnc's terms. */
-function EvidenceBlock({ text }: { text: EvidenceText }) {
+function EvidenceBlock({
+  text,
+  /**
+   * Off where the citation line above already prints a grading. `formatSource`
+   * renders "Sunan Abi Dawud 101 (sahih — Al-Albani)", so repeating "Sahih
+   * (Al-Albani)" underneath it read like the app could not keep track of what
+   * it had already said.
+   */
+  hideGrade = false,
+}: {
+  text: EvidenceText;
+  hideGrade?: boolean;
+}) {
   const theme = useTheme();
   const { translation: showTranslation } = useSettings();
+  const footnote = [text.attribution, hideGrade ? undefined : text.grade].filter(Boolean);
 
   return (
     <View style={[styles.evidence, { borderLeftColor: theme.border }]}>
@@ -90,11 +146,14 @@ function EvidenceBlock({ text }: { text: EvidenceText }) {
           {text.translation}
         </ThemedText>
       )}
-      {(text.attribution || text.grade) && (
+      {footnote.length > 0 && (
         <ThemedText type="caption" themeColor="textSecondary">
-          {[text.attribution, text.grade].filter(Boolean).join(' · ')}
+          {footnote.join(' · ')}
         </ThemedText>
       )}
+      <ThemedText type="caption" themeColor="textSecondary">
+        {creditFor(text)}
+      </ThemedText>
     </View>
   );
 }
@@ -111,18 +170,10 @@ function EvidenceBlock({ text }: { text: EvidenceText }) {
  * Renders nothing at all when there is nothing to show, so a screen can drop
  * it in unconditionally.
  */
-export function SourceDisclosure({
-  sources,
-  /** The Arabic this disclosure sits under, if any. Used to find its narration. */
-  arabic,
-}: {
-  sources: readonly Source[];
-  arabic?: string;
-}) {
+export function SourceDisclosure({ sources }: { sources: readonly Source[] }) {
   const theme = useTheme();
   const { t } = useLocale();
   const [open, setOpen] = useState(false);
-  const hadithText = arabic ? HADITH_TEXT[arabic] : undefined;
 
   // Deduplicated by the line a reader would see: a step and the recitation
   // inside it often cite the same page, and printing it twice looks like an
@@ -152,12 +203,6 @@ export function SourceDisclosure({
       {open && (
         <View style={styles.block}>
           <SourceLines sources={distinct} showLabel={false} />
-          {/*
-            The narration the words themselves appear in, where one was found.
-            Keyed by the Arabic rather than by the citation, because that is
-            the only thing containment proved — see `evidence.ts`.
-          */}
-          {hadithText && <EvidenceBlock text={hadithText} />}
         </View>
       )}
     </View>

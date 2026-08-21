@@ -45,6 +45,20 @@ choose and why, then ask.
 **Brutal Mode** — on "be brutal", "tear it apart": increase directness sharply,
 surface every flaw, drop the softening. Still constructive.
 
+**Read `docs/ui-redesign-plan.md` before proposing design or content work.** It
+is the live state of the design conversation, not a historical record: what was
+decided and why, what is built, what is deliberately held and on what. It
+carries the file and line every claim was read from so a later reader can
+re-check rather than trust — including the corrections, which are kept rather
+than quietly fixed, because a wrong number that got quoted twice deserves to be
+met head-on. Update it when a decision changes.
+
+**Two things gate a public release**, and neither is code: the Priority 1 items
+in `docs/scholarly-review.md` — its own words, *wrong answers here change how
+someone worships* — and the unrecorded audio in `docs/audio-manifest.csv`. New
+content adds to the first pile faster than it is being cleared. Worth saying
+when proposing more of it.
+
 ## Warn, don't block
 
 **There are no forbidden approaches here.** Network calls, notifications,
@@ -151,6 +165,30 @@ cannot check by looking at the screen.
   collection, extract it verbatim and record where it came from in `source`, as
   `src/content/duas.ts` does. `npm run arabic` lists every Arabic string in the
   app with the copied ones separated from the model-written ones.
+- **The sources are IslamHouse, HadeethEnc and QuranEnc. Not sunnah.com.**
+  Settled. sunnah.com refuses automated requests, so nothing can be checked
+  against it, and the app builds on one supervised family instead:
+  - `quranenc.com/api/v1` — Qur'an, 74 translations, no key.
+  - `hadeethenc.com/api/v1` — 2,776 graded hadith, vowelled, ~65 languages, no
+    key. **Search is `phrase=` and matches Arabic**, not English.
+  - `cnt.islamhouse.com/api/v1` — 124 books aligned phrase by phrase, including
+    Hisn al-Muslim and the full Arabic of Bukhari and Muslim, no key.
+  - `api3.islamhouse.com/v3` — the library: books, audio, video. Public key is
+    in their own docs.
+  ⚠️ IslamHouse publishes no terms of use; HadeethEnc does — *no modification,
+  addition or deletion, and name the publisher.* Its text ships verbatim.
+- **Never print a reference you have not opened.** Not a style rule — three
+  hadith numbers were once typed from memory here, all plausible, none
+  verifiable. **A number you cannot check is worse than no number**, because it
+  survives review by looking right. Where the collection and grading are known
+  but the number is not, cite with `hadeethEnc(collection, id)` from
+  `sources.ts`: it names what was actually read and asserts no number.
+  HadeethEnc cannot be asked for "Bukhari 6324" — it has ids of its own, and no
+  site in this family maps a collection number to a text.
+- **A term is not a quotation.** `الصَّلَاة` is the word "prayer"; `أَخِي` is "my
+  brother". Asking for a citation for a noun is a category error, and reporting
+  one as missing buries the citations that really are. `npm run arabic` counts
+  the two apart.
 - **Review is two jobs, not one.** Iyad reads and writes Arabic fluently and can
   clear the *text* — spelling, vowel marks, grammar. He cannot clear the
   *substance*: whether a ruling is right, whether a narration is authentic,
@@ -164,9 +202,14 @@ Not decorated — **beautiful**. Someone opens this at the lowest or most
 uncertain point in their life. The craft of the thing tells them whether
 anyone cared.
 
-- **Typography carries it.** Arabic needs real line-height and a face that
-  honours it. Nothing cramped, nothing set at a default size because that was
-  quicker.
+- **Typography carries it.** Arabic is set in **Amiri**, loaded by `useFonts`
+  in `src/app/_layout.tsx` — a font is an asset, so it ships over the air and
+  needs no build. Never on transliteration or translation: those are Latin.
+- **Use the type scale; do not reinvent it.** `themed-text.tsx` has eight named
+  rungs — caption, small, smallBold, default, lead, cardTitle, sectionTitle,
+  subtitle, title. A local `fontSize:` in a screen means the scale is missing a
+  rung; add it there rather than nine times in nine files, which is what
+  happened before.
 - **Calm, generous spacing.** Let screens breathe. One thing at a time, well
   placed, beats four things arranged.
 - **Motion with intent.** Transitions that orient. Nothing bouncing for
@@ -174,17 +217,37 @@ anyone cared.
 - **Finish the details.** Optical alignment, a considered empty state, a
   pressed state that responds. He will notice; assume he's right when he does.
 - **Both themes, always.** Dark mode is not an afterthought — a lot of this app
-  is used before dawn.
+  is used before dawn. A PNG drawn on white becomes a white sticker on a dark
+  screen; composite a new image on both grounds before wiring it.
+- **Drawings are non-figurative — except the prayer postures.** The mihrab, the
+  girih band, the sun arc and every glyph are marks and architecture, and a body
+  would be wrong in all of them. The postures are the exception Iyad decided
+  on, and they are real illustrations. See the header of
+  `src/components/illustrations.tsx`, which records that the rule was reversed
+  and by whom.
+- **A drawing teaches a ruling.** Which arm, how far the hands go, where the
+  gaze falls — an illustration is content, and needs the same review as a
+  sentence about how to pray.
 - `theme.*` tokens from `src/constants/theme.ts`. Never hardcode hex in a
   component.
 
 ## Engineering
 
 - English is the source language. Content is written in English in
-  `src/content/`; `src/i18n/content/{ar,fr,es}.ts` hold translations keyed by
-  the English text, and anything missing falls back to English. Never
-  machine-translate content — a wrong French translation of the tashahhud is
-  the same class of mistake as a wrong Arabic text, and harder to notice.
+  `src/content/`; `src/i18n/content/{fr,es}.ts` hold translations keyed by the
+  English text, and anything missing falls back to English **and says so** —
+  `TranslationGap` marks a screen that is not fully translated, because silence
+  let a third-translated app look finished. Never machine-translate content — a
+  wrong French translation of the tashahhud is the same class of mistake as a
+  wrong Arabic text, and harder to notice.
+- **Arabic is not a locale of this app.** It shipped selectable with an empty
+  dictionary, so choosing it produced an entirely English app. Re-adding it
+  means `ar` in `i18n/locales.ts`, an `AR` table in `ui.ts`, a content
+  dictionary, and restoring the RTL handling that went with it.
+- **Generated content is generated, not typed.** `src/content/quran/juz30.ts`
+  and `src/content/evidence.ts` carry headers saying so. 564 ayahs is not
+  something to transcribe, and every character having come over the wire is the
+  only way a file that size can exist under the rule above.
 - UI chrome lives in `src/i18n/ui.ts`, apart from religious content, because
   getting "Repeat" wrong is a bug and getting a dhikr wrong is not.
 - Content is typed data in `src/content/`, never inline JSX strings. A screen
@@ -205,6 +268,16 @@ anyone cared.
   nothing is syntactically broken.
 - Prove a render happens: `npx expo export --platform web` bundles *and*
   statically renders every route, catching runtime errors a typecheck can't.
+- **Then run it and look at it.** A render that succeeds is not a screen that
+  is right. Everything in this list passed while the app showed a cross where a
+  standing figure should be, truncated the titles that make a topic findable,
+  nested a play button inside another button, and told people a page had five
+  sections when it had one article. None of that is findable without eyes on a
+  screen. `.claude/launch.json` starts the web preview; drive it and screenshot
+  it.
+- **A `python` string-replace that misses fails silently.** Assert the anchor
+  exists, or read the file back. One edit in this repo quietly did nothing and
+  was only caught by a screenshot showing the old wording.
 - Reproduce before fixing, and re-check after.
 - Never leave the tree with a failing typecheck.
 - Touched or added content? `npm run i18n:manifest`. It regenerates
@@ -213,6 +286,20 @@ anyone cared.
   no longer exists. Translations are keyed by the English text, so editing an
   English sentence correctly drops its translations back to English until they
   are redone.
+- Touched Arabic or a citation? `npm run content:verify` (needs network).
+  It compares every Arabic text against QuranEnc and searches HadeethEnc for
+  the uncited. It caught a citation claiming the Qur'an worded the taʿawwudh
+  when 16:98 only commands it — `فَاسْتَعِذْ` against `أَعُوذُ`, different verbs in
+  different persons. Comparison is on a consonantal skeleton, because the app
+  writes Imlaei and QuranEnc serves Uthmani; the trap is that Uthmani writes a
+  long ā as a COMBINING mark, so it must be promoted to a letter *before*
+  diacritics are stripped or every verse false-positives.
+- Added a citation and want its text on screen? `npm run evidence`. It writes
+  `src/content/evidence.ts` and a review sheet at `docs/hadith-candidates.md`.
+  A narration is only accepted where the app's Arabic appears *inside* the
+  narration — containment, never similarity — and everything else goes to the
+  sheet, because choosing which authentic narration supports a claim is
+  substance.
 - Touched audio or added a recitation? `npm run audio:manifest`. It regenerates
   `docs/audio-manifest.csv` — the sheet of every clip, what it says, which step
   says it, whether it exists and who recorded it. `-- --check` fails if the

@@ -31,7 +31,20 @@ const whenSaid = new Map(DUAS.map((d) => [d.says, d.when]));
  * structured as `sources` now, so it is formatted rather than read straight.
  * Verses inherit their parent's citation, as they did before.
  */
-const cite = (r) => (r.sources ?? []).map(formatSource).join('; ');
+/*
+  The citation, as one cell — but only from sources the TEXT came from.
+
+  A `quran` source marked `wordingElsewhere` is the verse that commands an act
+  without supplying its words, so printing it here would say the Arabic was
+  copied from a verse it is not in. That is the exact error `content:verify`
+  caught in the taʿawwudh, and repeating it in the proof sheet would move the
+  problem rather than fix it.
+*/
+const cite = (r) =>
+  (r.sources ?? [])
+    .filter((source) => !(source.kind === 'quran' && source.wordingElsewhere))
+    .map(formatSource)
+    .join('; ');
 const rows = [];
 
 for (const [key, r] of Object.entries(Recitations)) {
@@ -99,9 +112,33 @@ for (const [label, list] of [['Pillar', PILLARS], ['Article of faith', IMAN_PILL
 // Unsourced first: those are the ones a fluent reader needs to look at hardest.
 rows.sort((a, b) => (a.source ? 1 : 0) - (b.source ? 1 : 0));
 
+/**
+ * Whether a string is a quotation or a term.
+ *
+ * The summary line used to say "N written from memory" for everything without
+ * a citation, which read as N unsourced quotations and was quoted back as
+ * exactly that. Most of them are not quotations at all: `الصَّلَاة` is the word
+ * "prayer", `الْإِيمَانُ بِالْقَدَر` is the name of an article of faith, and
+ * `أَخِي` is "my brother". Asking for a hadith reference for a noun is a
+ * category error, not a missing citation, and a sheet that reports it as one
+ * makes the real gaps harder to see.
+ *
+ * So the split is structural: what a guide has you SAY is a quotation and owes
+ * a source; what the app NAMES is a term and does not.
+ *
+ * The one row this is stricter than it needs to be on stays stricter, for the
+ * reason the note above gives: `Innā li-llāhi wa innā ilayhi rājiʿūn` is
+ * Qur'an 2:156 word for word and is filed as a phrase. `npm run
+ * content:verify` is where that gets resolved — it searches the published
+ * texts for anything carrying no citation.
+ */
+const TERM_FILES = new Set(['phrases.ts', 'pillars.ts', 'iman.ts']);
+for (const row of rows) row.kind = TERM_FILES.has(row.file) ? 'term' : 'quotation';
+
 const cell = (v) => (/[",\n]/.test(v) ? `"${v.replace(/"/g, '""')}"` : v);
 const cols = [
   ['where', 'Where it appears'],
+  ['kind', 'Kind'],
   ['arabic', 'Arabic'],
   ['translit', 'Transliteration'],
   ['english', 'English'],
@@ -113,6 +150,13 @@ writeFileSync(
   [cols.map(([, h]) => h).join(','), ...rows.map((r) => cols.map(([k]) => cell(r[k])).join(','))].join('\n') + '\n',
 );
 
-const unsourced = rows.filter((r) => !r.source).length;
-console.log(`Wrote ${rows.length} Arabic strings — ${unsourced} written from memory, ${rows.length - unsourced} copied from a collection.`);
+const quotations = rows.filter((r) => r.kind === 'quotation');
+const uncited = quotations.filter((r) => !r.source);
+const terms = rows.filter((r) => r.kind === 'term');
+console.log(
+  `Wrote ${rows.length} Arabic strings.\n` +
+    `  ${quotations.length} quotations — ${quotations.length - uncited.length} copied from a named source, ` +
+    `${uncited.length} without one.\n` +
+    `  ${terms.length} terms and set expressions — names and everyday words, which owe no citation.`,
+);
 writeFileSync(join(root, 'docs/arabic-proof.json'), JSON.stringify(rows, null, 1));

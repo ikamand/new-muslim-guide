@@ -29,7 +29,7 @@ const load = (p) => import(join(root, p));
 // `require` calls only Metro resolves.
 const { CATALOG, danglingRefs, resolveRef } = await load('src/content/catalog.ts');
 const { pendingRecommendations } = await load('src/content/recommendations.ts');
-const { ungroupedTopics } = await load('src/content/learn/index.ts');
+const { ungrouped } = await load('src/content/learn/index.ts');
 const { helpRefs } = await load('src/content/help.ts');
 const { SEASONS } = await load('src/content/seasons.ts');
 const { formatSource, sourceUrl, assessEvidence } = await load('src/content/sources.ts');
@@ -58,10 +58,10 @@ const withSources = CATALOG.filter((entry) => entry.sources.length > 0);
   the screen renders from TOPIC_GROUPS, not from LEARN_TOPICS. Silent, and
   invisible until somebody goes looking for a page they wrote.
 */
-const orphanTopics = ungroupedTopics();
+const orphanTopics = ungrouped(REFERENCES, GUIDES);
 if (orphanTopics.length) {
-  say(`${orphanTopics.length} Learn topic(s) in no group — these do not render on the Learn tab:`);
-  for (const topic of orphanTopics) say(`  ${topic.id}  ${topic.title}`);
+  say(`${orphanTopics.length} item(s) in no group — these do not render on the Learn tab:`);
+  for (const topic of orphanTopics) say(`  ${topic.kind}:${topic.id}  ${topic.title}`);
   say('  Add each to TOPIC_GROUPS in src/content/learn/index.ts.');
   say();
 }

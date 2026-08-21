@@ -39,6 +39,18 @@ export type CatalogEntry = {
   /** One line. `subtitle` on a guide or reference, `summary` on a pillar. */
   shortDescription: string;
   meta?: ContentMeta;
+  /**
+   * How many pieces the thing has — steps in a guide, sections in a reference,
+   * one for anything indivisible.
+   *
+   * Here rather than on each shape because the only consumer is a list showing
+   * mixed kinds side by side, and "10 steps" against "5 sections" is the line
+   * that tells someone whether this is a minute or an afternoon. A screen
+   * rendering a catalogue entry should not have to switch on `kind` to count.
+   */
+  pieces: number;
+  /** The word for what `pieces` counts, as a UI key suffix: 'steps', 'sections'. */
+  pieceUnit: 'steps' | 'sections' | 'items';
   /** Every source on the entry and on anything inside it, flattened. */
   sources: readonly Source[];
   /** Structured notes only. The plain `note` strings stay where they are. */
@@ -58,6 +70,8 @@ function buildCatalog(): readonly CatalogEntry[] {
       title: guide.title,
       shortDescription: guide.subtitle,
       meta: guide.meta,
+      pieces: guide.steps.length,
+      pieceUnit: 'steps',
       sources: [
         ...(guide.meta?.sources ?? []),
         ...collect(guide.steps, (step) => step.sources),
@@ -77,6 +91,8 @@ function buildCatalog(): readonly CatalogEntry[] {
       title: reference.title,
       shortDescription: reference.subtitle,
       meta: reference.meta,
+      pieces: reference.sections.length,
+      pieceUnit: 'sections',
       sources: [
         ...(reference.meta?.sources ?? []),
         ...collect(reference.sections, (section) => section.sources),
@@ -99,6 +115,8 @@ function buildCatalog(): readonly CatalogEntry[] {
         title: pillar.title,
         shortDescription: pillar.summary,
         meta: pillar.meta,
+        pieces: 1,
+        pieceUnit: 'items',
         sources: pillar.meta?.sources ?? [],
         notes: pillar.meta?.notes ?? [],
       });
@@ -112,6 +130,8 @@ function buildCatalog(): readonly CatalogEntry[] {
       title: dua.when,
       shortDescription: dua.says.translation,
       meta: dua.meta,
+      pieces: 1,
+      pieceUnit: 'items',
       sources: [...(dua.meta?.sources ?? []), ...(dua.says.sources ?? [])],
       notes: dua.meta?.notes ?? [],
     });
@@ -124,6 +144,8 @@ function buildCatalog(): readonly CatalogEntry[] {
       title: phrase.said,
       shortDescription: phrase.meaning,
       meta: phrase.meta,
+      pieces: 1,
+      pieceUnit: 'items',
       sources: phrase.meta?.sources ?? [],
       notes: phrase.meta?.notes ?? [],
     });

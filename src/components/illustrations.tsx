@@ -604,6 +604,7 @@ export type GlyphName =
   // why that tab read as a wall of identical text rows: `TOPIC_GLYPH` mapped
   // exactly one id — `mosque` — and every other card was bare.
   | 'wudu'
+  | 'prayer'
   | 'before-prayer'
   | 'al-fatihah'
   | 'what-breaks-prayer'
@@ -728,6 +729,15 @@ export function Glyph({ name, color, size = 22 }: { name: GlyphName; color: stri
         here, and figurative drawings of worship are a sensitivity this app
         need not take on.
       */}
+
+      {/* The mihrab again, at glyph size — the prayers, on the Learn tab. */}
+      {name === 'prayer' && (
+        <G {...stroke}>
+          <Path d="M5 21V10a7 7 0 0 1 14 0v11" />
+          <Path d="M3 21h18" />
+          <Path d="M12 8l1.2 2.4 2.6.4-1.9 1.8.5 2.6L12 14l-2.4 1.2.5-2.6L8.2 10.8l2.6-.4z" />
+        </G>
+      )}
 
       {name === 'wudu' && (
         <G {...stroke}>

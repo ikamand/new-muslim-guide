@@ -6,8 +6,10 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { GirihBand, Glyph, StagePath, type GlyphName } from '@/components/illustrations';
 import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
+import { routeFor } from '@/lib/content-routes';
 import {
   DUAS,
+  resolveRef,
   getPracticeClipCount,
   IMAN_PILLARS,
   PHRASES,
@@ -20,7 +22,7 @@ import { useLocale } from '@/hooks/use-locale';
 import { useJourney } from '@/hooks/use-journey';
 import { useTheme } from '@/hooks/use-theme';
 import type { UIKey } from '@/i18n/ui';
-import { localiseReference } from '@/i18n/localise';
+import { localiseCatalogEntry } from '@/i18n/localise';
 
 const PRACTICE_CLIP_COUNT = getPracticeClipCount();
 const SHAHADA_STEP_COUNT = SHAHADA_GUIDE.steps.length;
@@ -39,6 +41,12 @@ const SHAHADA_STEP_COUNT = SHAHADA_GUIDE.steps.length;
 const TOPIC_GLYPH: Record<string, GlyphName> = {
   mosque: 'mosque',
   wudu: 'wudu',
+  // The prayer guides share one mark; Fajr is the one the tab shows.
+  fajr: 'prayer',
+  dhuhr: 'prayer',
+  asr: 'prayer',
+  maghrib: 'prayer',
+  isha: 'prayer',
   'before-prayer': 'before-prayer',
   'al-fatihah': 'al-fatihah',
   'what-breaks-prayer': 'what-breaks-prayer',
@@ -277,15 +285,20 @@ export default function LearnScreen() {
             />
             <View style={styles.list}>
               {group.topics
-                .map((topic) => localiseReference(topic, locale))
+                // A ref to content that does not exist yet resolves to nothing
+                // and is dropped, so a group can name something before it is
+                // written without a placeholder card appearing.
+                .map(resolveRef)
+                .filter((entry) => entry !== undefined)
+                .map((entry) => localiseCatalogEntry(entry, locale))
                 .map((topic) => (
                   <LearnCard
-                    key={topic.id}
-                    href={{ pathname: '/reference/[id]', params: { id: topic.id } }}
+                    key={`${topic.kind}:${topic.id}`}
+                    href={routeFor(topic)}
                     title={topic.title}
-                    subtitle={topic.subtitle}
-                    count={topic.sections.length}
-                    unit="count.sections"
+                    subtitle={topic.shortDescription}
+                    count={topic.pieces}
+                    unit={`count.${topic.pieceUnit}` as UIKey}
                     glyph={TOPIC_GLYPH[topic.id]}
                     /*
                       A long title takes the whole row rather than being

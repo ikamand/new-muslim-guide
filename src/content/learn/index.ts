@@ -17,6 +17,7 @@ import { WHAT_IS_THE_QURAN } from './what-is-the-quran';
 import { WHO_IS_ALLAH } from './who-is-allah';
 import { WHO_IS_MUHAMMAD } from './who-is-muhammad';
 import { WORK } from './work';
+import { ref, type ContentRef } from '../model';
 import type { Reference } from '../types';
 
 /**
@@ -91,16 +92,117 @@ export {
  */
 export type TopicGroupId = 'praying' | 'believe' | 'world' | 'hard' | 'year';
 
-export const TOPIC_GROUPS: readonly { id: TopicGroupId; topics: readonly Reference[] }[] = [
-  { id: 'praying', topics: [BEFORE_PRAYER, AL_FATIHAH, WHAT_BREAKS_PRAYER, DUA_AND_DHIKR] },
-  { id: 'believe', topics: [WHAT_IS_ISLAM, WHO_IS_ALLAH, WHO_IS_MUHAMMAD, WHAT_IS_THE_QURAN, SUNNAH] },
-  { id: 'world', topics: [FOOD, CLOTHING, HALAL_AND_HARAM, FAMILY, WORK, MANNERS] },
-  { id: 'hard', topics: [REPENTANCE, PATIENCE_AND_GRATITUDE] },
-  { id: 'year', topics: [RAMADAN, ISLAMIC_CALENDAR] },
+/**
+ * The topics, grouped by when the question arrives.
+ *
+ * The Learn tab rendered these as nineteen consecutive rows under one heading,
+ * which is a shape that only works for someone who already knows what they are
+ * looking for. A beginner does not arrive wanting "Clothing"; they arrive
+ * having been asked something at work, or having opened a fridge.
+ *
+ * So the grouping is by moment rather than by subject. "Out in the world" holds
+ * food, clothes, family, work and manners because those are all the same
+ * situation — being a Muslim among people who are not — even though a library
+ * would file them five different ways.
+ *
+ * ## Refs, not references
+ *
+ * These were `Reference[]` and had to stop being that. Wudu and the prayers are
+ * `Guide`s, so a group of references could not hold them — and the Learn tab
+ * lost every guide the moment the recommendation section that used to carry
+ * them was deleted. Someone opening Learn to find out how to wash could not.
+ *
+ * `ContentRef` is what the rest of the app already uses to point at content
+ * without caring which kind it is, and `resolveRef` drops anything that does
+ * not exist, so a group can name something before it is written.
+ */
+export const TOPIC_GROUPS: readonly { id: TopicGroupId; topics: readonly ContentRef[] }[] = [
+  {
+    id: 'praying',
+    topics: [
+      // Wudu first, because wudu comes first.
+      ref('guide', 'wudu'),
+      ref('reference', 'before-prayer'),
+      ref('guide', 'fajr'),
+      ref('reference', 'al-fatihah'),
+      ref('reference', 'what-breaks-prayer'),
+      ref('reference', 'dua-and-dhikr'),
+    ],
+  },
+  {
+    id: 'believe',
+    topics: [
+      ref('reference', 'what-is-islam'),
+      ref('reference', 'who-is-allah'),
+      ref('reference', 'who-is-muhammad'),
+      ref('reference', 'what-is-the-quran'),
+      ref('reference', 'sunnah'),
+    ],
+  },
+  {
+    id: 'world',
+    topics: [
+      ref('reference', 'food'),
+      ref('reference', 'clothing'),
+      ref('reference', 'halal-and-haram'),
+      ref('reference', 'mosque'),
+      ref('reference', 'family'),
+      ref('reference', 'work'),
+      ref('reference', 'manners'),
+    ],
+  },
+  { id: 'hard', topics: [ref('reference', 'repentance'), ref('reference', 'patience-and-gratitude')] },
+  { id: 'year', topics: [ref('reference', 'ramadan'), ref('reference', 'islamic-calendar')] },
 ];
 
-/** Every topic that no group claims. Drives the audit; should always be empty. */
-export function ungroupedTopics(): readonly Reference[] {
-  const grouped = new Set(TOPIC_GROUPS.flatMap((group) => group.topics.map((t) => t.id)));
-  return LEARN_TOPICS.filter((topic) => !grouped.has(topic.id));
+/**
+ * Anything that should be on the Learn tab and is in no group.
+ *
+ * Widened after a real miss: this used to compare against `LEARN_TOPICS` only,
+ * so `mosque` — a `surface: 'learn'` reference that lives in `references.ts`
+ * rather than in this directory — vanished from the tab and the audit reported
+ * nothing wrong. It now asks the question the screen actually asks: of every
+ * reference marked for this surface, and every guide, which is unreachable?
+ */
+export function ungrouped(
+  allReferences: readonly { id: string; surface?: string; title: string }[],
+  allGuides: readonly { id: string; title: string }[],
+): readonly { kind: string; id: string; title: string }[] {
+  const claimed = new Set(TOPIC_GROUPS.flatMap((g) => g.topics.map((t) => `${t.kind}:${t.id}`)));
+
+  /*
+    Reachable somewhere better than a Learn card, and deliberately absent here.
+
+    Written down rather than left for the check to keep reporting: an audit
+    that always prints six things is an audit nobody reads, and the next
+    person to see the list deserves the reason rather than a decision to
+    re-make.
+  */
+  for (const elsewhere of [
+    // Its own card at the top of the tab.
+    'guide:shahada',
+    // Situational, not lessons. Both sit under "Do I need to wash first?" in
+    // the help topics, which is where somebody actually looks for them —
+    // nobody browses to tayammum, they need it because there is no water.
+    'guide:ghusl',
+    'guide:tayammum',
+    // The five prayers are one lesson, not five. Fajr represents them because
+    // it is the one a beginner learns first; the rest are reached from the
+    // prayer times card, which always offers the one that is actually next.
+    'guide:dhuhr',
+    'guide:asr',
+    'guide:maghrib',
+    'guide:isha',
+  ]) {
+    claimed.add(elsewhere);
+  }
+
+  return [
+    ...allReferences
+      .filter((r) => r.surface === 'learn' && !claimed.has(`reference:${r.id}`))
+      .map((r) => ({ kind: 'reference', id: r.id, title: r.title })),
+    ...allGuides
+      .filter((g) => !claimed.has(`guide:${g.id}`))
+      .map((g) => ({ kind: 'guide', id: g.id, title: g.title })),
+  ];
 }

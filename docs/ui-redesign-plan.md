@@ -265,15 +265,47 @@ returns Hisn al-Muslim as a list of phrases, each with a stable id, the
 vowelled Arabic, and every requested translation alongside it. Twelve pages
 covers the book. That is the exact shape `src/content/duas.ts` wants.
 Hisn al-Muslim's own translation set is `en` and `ar` among our locales —
-**not fr or es** — so it does not solve every language at once.
+**not fr or es** — so it does not solve every language at once. That limit is
+about the *book* translations on `cnt.islamhouse.com` only; the audio
+catalogue is a separate holding and does have French, below.
 
-**The audio, with the catch.** Item 2799103 is Hisn al-Muslim recited by
-Sulayman al-Shuwayhi, reviewed by al-Qahtani (the book's author): **134
-chapter-split MP3s**, direct URLs on `d1.islamhouse.com`, range requests
-supported. But chapter 18 (دعاء الاستفتاح) was downloaded and measured at
-**4.2 minutes** — the whole chapter read with its narrations, not a six-second
-clip. The app's 20 unrecorded clips need single phrases. **This is a listening
-library, not step audio**, and does not close `audio-manifest.csv`.
+**The audio — two sets, shaped very differently.** Both were downloaded and
+their bitrate and duration read from the frame headers rather than guessed.
+
+| | Arabic — item 2799103 | French — item 169380 |
+|---|---|---|
+| Reciter | Sulayman al-Shuwayhi | Yaaqub Leneen |
+| Chapters | 134 (whole book) | 20 (chapters 1–22 only) |
+| Bitrate | 128 kbps | 64 kbps |
+| A simple duʿa | — | **6 s** (ch. 5, undressing, 45 KB) |
+| A prayer duʿa | 254 s (opening supplication) | 68 s (rukuʿ) |
+| Also carries | — | a **PDF per chapter: Arabic, French, and phonetic transliteration** |
+
+The Arabic set is a **listening library**: a four-minute chapter reading with
+its narrations, not a clip, and it does not close `audio-manifest.csv`.
+
+The French set is **not** — its short chapters are already clip-length, and
+chapters 16–22 cover the opening supplication, rukuʿ, rising, sujud, between
+prostrations, sujud al-tilawa and the tashahhud: six of the twenty unrecorded
+clips, in one series.
+
+Three limits on the French set, before anything is planned around it:
+
+1. Each file is **Arabic then French in one MP3**. That fits the `fr` locale
+   exactly and does not fit `en` at all — and splitting one is precisely what
+   the no-modification term forbids.
+2. **There is no English or Spanish equivalent.** The full catalogue was
+   scanned — 200 English audio items, 195 Spanish — and neither has a Hisn
+   al-Muslim recording. French is the only translated one IslamHouse holds.
+3. It stops at chapter 22 of roughly 132.
+
+**A complete French convert-guide audio series also exists** — 11 parts, 209
+files, covering this app's whole curriculum: `414957` essentials, `414965`
+faith, `415732` purification, `416009` prayer, `397504` fasting, `402117` hajj,
+`459992` zakat, `460156` food and drink, `460158` clothing, `460140`
+transactions. French only, again. Somebody built this for converts in French
+and nobody built it in English, which is either a warning about the market or
+the reason this app should exist.
 
 **Where the app stands against it:** 9 duʿas against Hisn al-Muslim's 134
 occasions; 27 audio clips of which 20 are unrecorded, all of them prayer

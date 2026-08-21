@@ -321,7 +321,7 @@ function rakahSteps(rakah: number, spec: PrayerSpec): Step[] {
 
   const steps: Step[] = [];
   const step = (s: Omit<Step, 'id'> & { key: string }) =>
-    steps.push({ ...s, id: `r${rakah}-${s.key}` });
+    steps.push({ ...s, id: `r${rakah}-${s.key}`, rakah });
 
   if (isFirst) {
     step({

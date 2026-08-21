@@ -3,6 +3,7 @@ import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 import { useRef, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 
+import { PostureFigure, RakahProgress } from '@/components/illustrations';
 import { RecitationCard } from '@/components/recitation-card';
 import { ContentNoteCard } from '@/components/content-note';
 import { SourceDisclosure } from '@/components/source-list';
@@ -12,16 +13,25 @@ import { getGuide, resolveNotes, type Posture } from '@/content';
 import { localiseGuide, measure } from '@/i18n/localise';
 import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
+import type { UIKey } from '@/i18n/ui';
 import { useSettings } from '@/hooks/use-settings';
 import { useTheme } from '@/hooks/use-theme';
 
-const POSTURE_LABEL: Record<Posture, string> = {
-  standing: 'Standing',
-  bowing: 'Bowing',
-  rising: 'Standing',
-  prostrating: 'Prostrating',
-  sitting: 'Sitting',
-  washing: 'At the tap',
+/**
+ * The name of a position, for a screen reader.
+ *
+ * It used to be what everyone saw — printed in a pill, in English, on every
+ * step, in an app that translates everything else. It is now the accessible
+ * name of `PostureFigure`, which is the job it was always better suited to:
+ * sighted readers get the shape, and a reader who cannot see it gets the word.
+ */
+const POSTURE_KEY: Record<Posture, UIKey> = {
+  standing: 'posture.standing',
+  bowing: 'posture.bowing',
+  rising: 'posture.rising',
+  prostrating: 'posture.prostrating',
+  sitting: 'posture.sitting',
+  washing: 'posture.washing',
 };
 
 /**
@@ -42,7 +52,7 @@ export default function GuideScreen() {
   const scrollRef = useRef<ScrollView>(null);
   const [index, setIndex] = useState(0);
 
-  const { locale } = useLocale();
+  const { locale, t } = useLocale();
   const { keepAwake } = useSettings();
   const source = getGuide(id);
   // Measured, not just translated. A guide is read one step per screen, so the
@@ -62,6 +72,8 @@ export default function GuideScreen() {
   }
 
   const step = guide.steps[index];
+  /** 0 for anything without rakʿahs — wudu, ghusl, the shahada. */
+  const totalRakahs = guide.steps.reduce((most, s) => Math.max(most, s.rakah ?? 0), 0);
   const isFirst = index === 0;
   const isLast = index === guide.steps.length - 1;
   const progress = (index + 1) / guide.steps.length;
@@ -76,27 +88,69 @@ export default function GuideScreen() {
       <Stack.Screen options={{ title: guide.title }} />
       {keepAwake && <ScreenAwake />}
 
-      <View style={[styles.progressTrack, { backgroundColor: theme.backgroundElement }]}>
-        <View
-          style={[styles.progressFill, { width: `${progress * 100}%`, backgroundColor: theme.accent }]}
-        />
-      </View>
+      {/*
+        Only a guide with no rakʿahs keeps a bar. Wudu is ten steps in a row
+        and "step 4 of 10" is the honest answer; a prayer is not, and answering
+        the wrong question there is what the arches replace.
+      */}
+      {!totalRakahs && (
+        <View style={[styles.progressTrack, { backgroundColor: theme.backgroundElement }]}>
+          <View
+            style={[styles.progressFill, { width: `${progress * 100}%`, backgroundColor: theme.accent }]}
+          />
+        </View>
+      )}
 
       <ScrollView ref={scrollRef} contentContainerStyle={styles.content}>
         <View style={styles.meta}>
-          <View style={[styles.pill, { backgroundColor: theme.accentMuted }]}>
-            <ThemedText type="small" themeColor="accent">
-              {step.posture ? POSTURE_LABEL[step.posture] : null}
-            </ThemedText>
-          </View>
+          {totalRakahs && step.rakah ? (
+            <View
+              style={styles.rakahRow}
+              accessible
+              accessibilityLabel={t('guide.rakahOf')
+                .replace('{n}', String(step.rakah))
+                .replace('{total}', String(totalRakahs))}>
+              <RakahProgress
+                current={step.rakah}
+                total={totalRakahs}
+                color={theme.accent}
+                trackColor={theme.border}
+              />
+            </View>
+          ) : (
+            <View />
+          )}
           <ThemedText type="small" themeColor="textSecondary">
-            Step {index + 1} of {guide.steps.length}
+            {t('guide.stepOf')
+              .replace('{n}', String(index + 1))
+              .replace('{total}', String(guide.steps.length))}
           </ThemedText>
         </View>
 
-        <ThemedText type="subtitle">
-          {step.title}
-        </ThemedText>
+        {/*
+          The position, drawn. `POSTURE_KEY` names it for a screen reader; a
+          sighted reader mid-movement gets the shape, which is what they can
+          actually use one-handed without stopping to read.
+        */}
+        <View style={styles.head}>
+          {step.posture && (
+            <View style={[styles.postureTile, { backgroundColor: theme.backgroundElement, borderColor: theme.border }]}>
+              <PostureFigure
+                posture={step.posture}
+                color={theme.accent}
+                size={44}
+              />
+            </View>
+          )}
+          <View style={styles.headText}>
+            {step.posture && (
+              <ThemedText type="caption" themeColor="accent" style={styles.postureLabel}>
+                {t(POSTURE_KEY[step.posture])}
+              </ThemedText>
+            )}
+            <ThemedText type="subtitle">{step.title}</ThemedText>
+          </View>
+        </View>
 
         <ThemedText type="default" style={styles.instruction}>
           {step.instruction}
@@ -130,6 +184,7 @@ export default function GuideScreen() {
           onPress={() => go(index - 1)}
           style={({ pressed }) => [
             styles.button,
+            styles.backButton,
             styles.secondaryButton,
             {
               borderColor: theme.border,
@@ -137,7 +192,7 @@ export default function GuideScreen() {
               opacity: isFirst ? 0.35 : 1,
             },
           ]}>
-          <ThemedText type="smallBold">Back</ThemedText>
+          <ThemedText type="cardTitle">{t('common.back')}</ThemedText>
         </Pressable>
 
         <Pressable
@@ -146,8 +201,8 @@ export default function GuideScreen() {
             styles.button,
             { backgroundColor: theme.accent, opacity: pressed ? 0.85 : 1 },
           ]}>
-          <ThemedText type="smallBold" themeColor="textOnAccent">
-            {isLast ? 'Finish' : 'Next'}
+          <ThemedText type="cardTitle" themeColor="textOnAccent">
+            {isLast ? t('common.finish') : t('common.next')}
           </ThemedText>
         </Pressable>
       </View>
@@ -185,10 +240,29 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     gap: Spacing.two,
   },
-  pill: {
-    paddingHorizontal: Spacing.two,
-    paddingVertical: Spacing.one,
-    borderRadius: Radius.small,
+  rakahRow: {
+    justifyContent: 'center',
+  },
+  head: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.three,
+  },
+  postureTile: {
+    width: 68,
+    height: 68,
+    borderRadius: Radius.medium,
+    borderWidth: StyleSheet.hairlineWidth,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  headText: {
+    flex: 1,
+    gap: Spacing.one,
+  },
+  postureLabel: {
+    textTransform: 'uppercase',
+    letterSpacing: 1,
   },
   instruction: {
     lineHeight: 26,
@@ -207,8 +281,19 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: Spacing.three,
+    minHeight: 56,
     borderRadius: Radius.medium,
+  },
+  /**
+   * Back is narrower than Next on purpose.
+   *
+   * They were equal halves, which gave the same weight to the thing you do
+   * once by mistake and the thing you do thirty times a prayer. Next takes the
+   * side a right thumb reaches without moving the hand.
+   */
+  backButton: {
+    flex: 0,
+    paddingHorizontal: Spacing.four,
   },
   secondaryButton: {
     borderWidth: StyleSheet.hairlineWidth,

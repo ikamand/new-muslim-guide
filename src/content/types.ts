@@ -81,6 +81,16 @@ export type Step = {
    * a posture to fill a field.
    */
   posture?: Posture;
+  /**
+   * Which rakʿah this step belongs to, 1-based.
+   *
+   * Set only by `buildPrayer` — wudu, ghusl and the shahada have no rakʿahs and
+   * leave it off. It exists so the guide screen can show someone where they are
+   * *in the prayer* rather than how far they have scrolled, which is the thing
+   * a beginner actually loses track of. The step ids already encoded it as an
+   * `r2-` prefix; reading a number out of a string is not data.
+   */
+  rakah?: number;
   /** What you physically do. Second person, plain language. */
   instruction: string;
   /** What you say, if anything. */

@@ -228,6 +228,23 @@ export const EN = {
    * shahada three weeks ago and be frightened of getting something wrong, so
    * nothing here may read as a form, a test, or a thing they are behind on.
    */
+  /**
+   * The positions of the body, named for a screen reader.
+   *
+   * These were hardcoded English in `guide/[id].tsx` and printed on every step
+   * of every prayer — the one part of the app that was never translatable.
+   * They now name the drawing rather than replace it.
+   */
+  'posture.standing': 'Standing',
+  'posture.bowing': 'Bowing',
+  'posture.rising': 'Standing again',
+  'posture.prostrating': 'Prostrating',
+  'posture.sitting': 'Sitting',
+  'posture.washing': 'At the tap',
+
+  'guide.stepOf': 'Step {n} of {total}',
+  'guide.rakahOf': 'Rakʿah {n} of {total}',
+
   'onboarding.step': 'Step {n} of {total}',
   'onboarding.skip': 'Skip',
   'onboarding.back': 'Back',
@@ -350,6 +367,8 @@ export const EN = {
   'settings.audience.both': 'Show everything',
 
   'common.back': 'Back',
+  'common.next': 'Next',
+  'common.finish': 'Finish',
   'common.times': 'times',
 } as const;
 
@@ -388,6 +407,15 @@ const FR: Overrides = {
   'reminder.now': 'C’est l’heure de la prière.',
   'settings.duringPrayer': 'Pendant la prière',
   'settings.keepAwake': 'Garder l’écran allumé',
+  'posture.standing': 'Debout',
+  'posture.bowing': 'Inclinaison',
+  'posture.rising': 'De nouveau debout',
+  'posture.prostrating': 'Prosternation',
+  'posture.sitting': 'Assis',
+  'posture.washing': 'Au robinet',
+  'guide.stepOf': 'Étape {n} sur {total}',
+  'guide.rakahOf': 'Rakʿah {n} sur {total}',
+
   'onboarding.step': 'Étape {n} sur {total}',
   'onboarding.skip': 'Passer',
   'onboarding.back': 'Retour',
@@ -532,6 +560,8 @@ const FR: Overrides = {
   'attribution.contemporary scholarship': 'Les savants contemporains',
   'settings.guidance': 'Conseils de prière pour',
   'common.back': 'Retour',
+  'common.next': 'Suivant',
+  'common.finish': 'Terminer',
 };
 
 const ES: Overrides = {
@@ -565,6 +595,15 @@ const ES: Overrides = {
   'reminder.now': 'Es hora de rezar.',
   'settings.duringPrayer': 'Durante la oración',
   'settings.keepAwake': 'Mantener la pantalla encendida',
+  'posture.standing': 'De pie',
+  'posture.bowing': 'Inclinación',
+  'posture.prostrating': 'Postración',
+  'posture.rising': 'De pie otra vez',
+  'posture.sitting': 'Sentado',
+  'posture.washing': 'En el grifo',
+  'guide.stepOf': 'Paso {n} de {total}',
+  'guide.rakahOf': 'Rakʿah {n} de {total}',
+
   'onboarding.step': 'Paso {n} de {total}',
   'onboarding.skip': 'Omitir',
   'onboarding.back': 'Atrás',
@@ -707,6 +746,8 @@ const ES: Overrides = {
   'attribution.contemporary scholarship': 'Los sabios contemporáneos',
   'settings.guidance': 'Guía de oración para',
   'common.back': 'Atrás',
+  'common.next': 'Siguiente',
+  'common.finish': 'Terminar',
 };
 
 export const UI: Record<Locale, Overrides> = { en: EN, fr: FR, es: ES };

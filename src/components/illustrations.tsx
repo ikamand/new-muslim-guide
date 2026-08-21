@@ -374,6 +374,64 @@ export function PostureFigure({
   );
 }
 
+/**
+ * How far into the prayer you are, in rakʿahs.
+ *
+ * The guide screen used to carry a three-pixel bar filling left to right — a
+ * measure of scroll position, in an app that has a whole reference page about
+ * losing count mid-prayer. A bar at 60% does not answer "which rakʿah am I
+ * in", which is the only question anyone is asking.
+ *
+ * One arch per rakʿah, filled behind you, outlined ahead, the current one
+ * carrying the star. It is the mihrab from the prayer times card at a smaller
+ * size, so the same shape means the same thing in both places.
+ */
+export function RakahProgress({
+  current,
+  total,
+  color,
+  trackColor,
+  size = 22,
+}: {
+  current: number;
+  total: number;
+  color: string;
+  trackColor: string;
+  size?: number;
+}) {
+  const height = (size / 20) * 24;
+
+  return (
+    <Svg width={size * total + 5 * (total - 1)} height={height} fill="none">
+      {Array.from({ length: total }, (_, i) => {
+        const rakah = i + 1;
+        const done = rakah < current;
+        const here = rakah === current;
+        const x = i * (size + 5);
+
+        return (
+          <G key={rakah} x={x}>
+            <Svg width={size} height={height} viewBox="0 0 20 24" fill="none">
+              <Path
+                d="M2 24 L2 10 Q2 3 10 1 Q18 3 18 10 L18 24 Z"
+                fill={done ? color : 'none'}
+                stroke={done ? 'none' : here ? color : trackColor}
+                strokeWidth={1.6}
+              />
+              {here && (
+                <Path
+                  d="M10 7 L11.4 9.8 L14.4 10.2 L12.2 12.4 L12.7 15.4 L10 14 L7.3 15.4 L7.8 12.4 L5.6 10.2 L8.6 9.8 Z"
+                  fill={color}
+                />
+              )}
+            </Svg>
+          </G>
+        );
+      })}
+    </Svg>
+  );
+}
+
 export type GlyphName =
   | 'shahada'
   | 'mosque'

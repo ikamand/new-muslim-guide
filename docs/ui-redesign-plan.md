@@ -241,7 +241,77 @@ Things a wrong assumption would waste real work on.
 Ideas raised but not yet worked through. Add here freely; nothing in this
 section is committed.
 
-_(empty — next additions go here)_
+### 7.1 The IslamHouse family of APIs — 20 August 2026
+
+Four APIs, all free, three needing no key at all. Every endpoint below was
+called and its response read.
+
+| | Base URL | Auth | What it is |
+|---|---|---|---|
+| HadeethEnc | `hadeethenc.com/api/v1` | none | 2,776 graded hadith, vowelled Arabic, ~65 languages |
+| QuranEnc | `quranenc.com/api/v1` | none | 74 Qur'an translations by named translators |
+| IslamHouse | `api3.islamhouse.com/v3` | public key `paV29H2gm56kvLPy` | The library: books, audio, video, 133 languages |
+| **enc.islamhouse** | `cnt.islamhouse.com/api/v1` | none | 124 books aligned **phrase by phrase** across languages |
+
+**Correction to an earlier finding.** HadeethEnc *does* have search — the
+parameter is `phrase`, not `text`, and it matches on Arabic:
+`/hadeeths/search/?phrase=سبحانك اللهم وبحمدك&language=ar` returns five hits.
+An earlier note in this project said no search existed and that matching the
+app's citations would need a crawl. It does not. Every one of the app's 152
+hadith citations can be matched mechanically by its Arabic wording.
+
+**The find is `cnt.islamhouse.com`.** `books/page-data/819?page_number=1&transes=en,fr,es`
+returns Hisn al-Muslim as a list of phrases, each with a stable id, the
+vowelled Arabic, and every requested translation alongside it. Twelve pages
+covers the book. That is the exact shape `src/content/duas.ts` wants.
+Hisn al-Muslim's own translation set is `en` and `ar` among our locales —
+**not fr or es** — so it does not solve every language at once.
+
+**The audio, with the catch.** Item 2799103 is Hisn al-Muslim recited by
+Sulayman al-Shuwayhi, reviewed by al-Qahtani (the book's author): **134
+chapter-split MP3s**, direct URLs on `d1.islamhouse.com`, range requests
+supported. But chapter 18 (دعاء الاستفتاح) was downloaded and measured at
+**4.2 minutes** — the whole chapter read with its narrations, not a six-second
+clip. The app's 20 unrecorded clips need single phrases. **This is a listening
+library, not step audio**, and does not close `audio-manifest.csv`.
+
+**Where the app stands against it:** 9 duʿas against Hisn al-Muslim's 134
+occasions; 27 audio clips of which 20 are unrecorded, all of them prayer
+phrases.
+
+Ideas worth working through, roughly in order of value to a beginner:
+
+1. **"There's a duʿa for this."** The gap is not that converts cannot find
+   duʿas — it is that nobody tells them one exists for putting on clothes or
+   leaving the house. 134 occasions, already written and translated. Surface
+   them at the moment, not in a list.
+2. **Morning and evening adhkar** (books 784, 12290 — 56 languages). A daily
+   practice every born Muslim absorbs and no convert is told about.
+3. **Two books written for exactly this reader**: `778 — يومي الأول في الإسلام`
+   ("My First Day in Islam", 20 languages) and `775 — أنا مسلم` ("I am a
+   Muslim", **77 languages**), both phrase-aligned.
+4. **Quoted text in fr/es.** Machine translation is banned here and rightly.
+   For text the app *quotes*, the enc API is a human, supervised source aligned
+   to the same Arabic.
+5. **The HadeethEnc MCP server** at `https://hadeethenc.com/mcp/` — live,
+   handshake confirmed, tools `search_hadeeths` / `get_hadeeth_by_id` /
+   `get_hadeeths_by_ids`. Wiring it into this repo means content work searches
+   real hadith instead of reconstructing from memory, which is the failure mode
+   `src/content/sources.ts` opens by warning about.
+
+⚠️ **Licensing is not settled, and differs by site.**
+
+- **HadeethEnc publishes terms**, in its API documentation: *"No modification,
+  addition, or deletion of the content. Clearly referring to the publisher and
+  the source (HadeethEnc.com)."* Satisfiable with attribution held as data, the
+  way `src/content/audio-sources.ts` already does it. The first clause bites:
+  trimming a clip or shortening a translation breaks it.
+- **IslamHouse publishes none.** `/terms/` and `/about/` both 404; only a
+  privacy policy exists. Their GitHub says content stays "subject to
+  platform-specific terms" — terms not written down anywhere findable. **Before
+  shipping their audio or book text at scale, email admin@islamhouse.com.**
+  This cannot be resolved by reading, and it is a licence question rather than
+  a technical one.
 
 ---
 

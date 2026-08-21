@@ -42,6 +42,8 @@ export type Surah = {
   number: number;
   /** Transliterated name, as it is normally referred to — "An-Nas". */
   name: string;
+  /** The name in Arabic — "الناس". */
+  nameArabic: string;
   /** What the name means in English — "Mankind". */
   meaning: string;
   place: string;
@@ -52,6 +54,7 @@ export const JUZ_30: readonly Surah[] = [
   {
     number: 78,
     name: "An-Naba",
+    nameArabic: "النبإ",
     meaning: "The Tidings",
     place: "makkah",
     ayahs: [
@@ -100,6 +103,7 @@ export const JUZ_30: readonly Surah[] = [
   {
     number: 79,
     name: "An-Nazi'at",
+    nameArabic: "النازعات",
     meaning: "Those who drag forth",
     place: "makkah",
     ayahs: [
@@ -154,6 +158,7 @@ export const JUZ_30: readonly Surah[] = [
   {
     number: 80,
     name: "'Abasa",
+    nameArabic: "عبس",
     meaning: "He Frowned",
     place: "makkah",
     ayahs: [
@@ -204,6 +209,7 @@ export const JUZ_30: readonly Surah[] = [
   {
     number: 81,
     name: "At-Takwir",
+    nameArabic: "التكوير",
     meaning: "The Overthrowing",
     place: "makkah",
     ayahs: [
@@ -241,6 +247,7 @@ export const JUZ_30: readonly Surah[] = [
   {
     number: 82,
     name: "Al-Infitar",
+    nameArabic: "الإنفطار",
     meaning: "The Cleaving",
     place: "makkah",
     ayahs: [
@@ -268,6 +275,7 @@ export const JUZ_30: readonly Surah[] = [
   {
     number: 83,
     name: "Al-Mutaffifin",
+    nameArabic: "المطففين",
     meaning: "The Defrauding",
     place: "makkah",
     ayahs: [
@@ -312,6 +320,7 @@ export const JUZ_30: readonly Surah[] = [
   {
     number: 84,
     name: "Al-Inshiqaq",
+    nameArabic: "الإنشقاق",
     meaning: "The Sundering",
     place: "makkah",
     ayahs: [
@@ -345,6 +354,7 @@ export const JUZ_30: readonly Surah[] = [
   {
     number: 85,
     name: "Al-Buruj",
+    nameArabic: "البروج",
     meaning: "The Mansions of the Stars",
     place: "makkah",
     ayahs: [
@@ -375,6 +385,7 @@ export const JUZ_30: readonly Surah[] = [
   {
     number: 86,
     name: "At-Tariq",
+    nameArabic: "الطارق",
     meaning: "The Nightcommer",
     place: "makkah",
     ayahs: [
@@ -400,6 +411,7 @@ export const JUZ_30: readonly Surah[] = [
   {
     number: 87,
     name: "Al-A'la",
+    nameArabic: "الأعلى",
     meaning: "The Most High",
     place: "makkah",
     ayahs: [
@@ -427,6 +439,7 @@ export const JUZ_30: readonly Surah[] = [
   {
     number: 88,
     name: "Al-Ghashiyah",
+    nameArabic: "الغاشية",
     meaning: "The Overwhelming",
     place: "makkah",
     ayahs: [
@@ -461,6 +474,7 @@ export const JUZ_30: readonly Surah[] = [
   {
     number: 89,
     name: "Al-Fajr",
+    nameArabic: "الفجر",
     meaning: "The Dawn",
     place: "makkah",
     ayahs: [
@@ -499,6 +513,7 @@ export const JUZ_30: readonly Surah[] = [
   {
     number: 90,
     name: "Al-Balad",
+    nameArabic: "البلد",
     meaning: "The City",
     place: "makkah",
     ayahs: [
@@ -527,6 +542,7 @@ export const JUZ_30: readonly Surah[] = [
   {
     number: 91,
     name: "Ash-Shams",
+    nameArabic: "الشمس",
     meaning: "The Sun",
     place: "makkah",
     ayahs: [
@@ -550,6 +566,7 @@ export const JUZ_30: readonly Surah[] = [
   {
     number: 92,
     name: "Al-Layl",
+    nameArabic: "الليل",
     meaning: "The Night",
     place: "makkah",
     ayahs: [
@@ -579,6 +596,7 @@ export const JUZ_30: readonly Surah[] = [
   {
     number: 93,
     name: "Ad-Duhaa",
+    nameArabic: "الضحى",
     meaning: "The Morning Hours",
     place: "makkah",
     ayahs: [
@@ -598,6 +616,7 @@ export const JUZ_30: readonly Surah[] = [
   {
     number: 94,
     name: "Ash-Sharh",
+    nameArabic: "الشرح",
     meaning: "The Relief",
     place: "makkah",
     ayahs: [
@@ -614,6 +633,7 @@ export const JUZ_30: readonly Surah[] = [
   {
     number: 95,
     name: "At-Tin",
+    nameArabic: "التين",
     meaning: "The Fig",
     place: "makkah",
     ayahs: [
@@ -630,6 +650,7 @@ export const JUZ_30: readonly Surah[] = [
   {
     number: 96,
     name: "Al-'Alaq",
+    nameArabic: "العلق",
     meaning: "The Clot",
     place: "makkah",
     ayahs: [
@@ -657,6 +678,7 @@ export const JUZ_30: readonly Surah[] = [
   {
     number: 97,
     name: "Al-Qadr",
+    nameArabic: "القدر",
     meaning: "The Power",
     place: "makkah",
     ayahs: [
@@ -670,6 +692,7 @@ export const JUZ_30: readonly Surah[] = [
   {
     number: 98,
     name: "Al-Bayyinah",
+    nameArabic: "البينة",
     meaning: "The Clear Proof",
     place: "madinah",
     ayahs: [
@@ -686,6 +709,7 @@ export const JUZ_30: readonly Surah[] = [
   {
     number: 99,
     name: "Az-Zalzalah",
+    nameArabic: "الزلزلة",
     meaning: "The Earthquake",
     place: "madinah",
     ayahs: [
@@ -702,6 +726,7 @@ export const JUZ_30: readonly Surah[] = [
   {
     number: 100,
     name: "Al-'Adiyat",
+    nameArabic: "العاديات",
     meaning: "The Courser",
     place: "makkah",
     ayahs: [
@@ -721,6 +746,7 @@ export const JUZ_30: readonly Surah[] = [
   {
     number: 101,
     name: "Al-Qari'ah",
+    nameArabic: "القارعة",
     meaning: "The Calamity",
     place: "makkah",
     ayahs: [
@@ -740,6 +766,7 @@ export const JUZ_30: readonly Surah[] = [
   {
     number: 102,
     name: "At-Takathur",
+    nameArabic: "التكاثر",
     meaning: "The Rivalry in world increase",
     place: "makkah",
     ayahs: [
@@ -756,6 +783,7 @@ export const JUZ_30: readonly Surah[] = [
   {
     number: 103,
     name: "Al-'Asr",
+    nameArabic: "العصر",
     meaning: "The Declining Day",
     place: "makkah",
     ayahs: [
@@ -767,6 +795,7 @@ export const JUZ_30: readonly Surah[] = [
   {
     number: 104,
     name: "Al-Humazah",
+    nameArabic: "الهمزة",
     meaning: "The Traducer",
     place: "makkah",
     ayahs: [
@@ -784,6 +813,7 @@ export const JUZ_30: readonly Surah[] = [
   {
     number: 105,
     name: "Al-Fil",
+    nameArabic: "الفيل",
     meaning: "The Elephant",
     place: "makkah",
     ayahs: [
@@ -797,6 +827,7 @@ export const JUZ_30: readonly Surah[] = [
   {
     number: 106,
     name: "Quraysh",
+    nameArabic: "قريش",
     meaning: "Quraysh",
     place: "makkah",
     ayahs: [
@@ -809,6 +840,7 @@ export const JUZ_30: readonly Surah[] = [
   {
     number: 107,
     name: "Al-Ma'un",
+    nameArabic: "الماعون",
     meaning: "The Small kindnesses",
     place: "makkah",
     ayahs: [
@@ -824,6 +856,7 @@ export const JUZ_30: readonly Surah[] = [
   {
     number: 108,
     name: "Al-Kawthar",
+    nameArabic: "الكوثر",
     meaning: "The Abundance",
     place: "makkah",
     ayahs: [
@@ -835,6 +868,7 @@ export const JUZ_30: readonly Surah[] = [
   {
     number: 109,
     name: "Al-Kafirun",
+    nameArabic: "الكافرون",
     meaning: "The Disbelievers",
     place: "makkah",
     ayahs: [
@@ -849,6 +883,7 @@ export const JUZ_30: readonly Surah[] = [
   {
     number: 110,
     name: "An-Nasr",
+    nameArabic: "النصر",
     meaning: "The Divine Support",
     place: "madinah",
     ayahs: [
@@ -860,6 +895,7 @@ export const JUZ_30: readonly Surah[] = [
   {
     number: 111,
     name: "Al-Masad",
+    nameArabic: "المسد",
     meaning: "The Palm Fiber",
     place: "makkah",
     ayahs: [
@@ -873,6 +909,7 @@ export const JUZ_30: readonly Surah[] = [
   {
     number: 112,
     name: "Al-Ikhlas",
+    nameArabic: "الإخلاص",
     meaning: "The Sincerity",
     place: "makkah",
     ayahs: [
@@ -885,6 +922,7 @@ export const JUZ_30: readonly Surah[] = [
   {
     number: 113,
     name: "Al-Falaq",
+    nameArabic: "الفلق",
     meaning: "The Daybreak",
     place: "makkah",
     ayahs: [
@@ -898,6 +936,7 @@ export const JUZ_30: readonly Surah[] = [
   {
     number: 114,
     name: "An-Nas",
+    nameArabic: "الناس",
     meaning: "Mankind",
     place: "makkah",
     ayahs: [

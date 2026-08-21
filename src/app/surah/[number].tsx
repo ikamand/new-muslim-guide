@@ -62,6 +62,7 @@ export default function SurahScreen() {
       <Stack.Screen options={{ title: surah.name }} />
 
       <View style={styles.header}>
+        <ThemedText style={styles.titleArabic}>{surah.nameArabic}</ThemedText>
         <ThemedText type="small" themeColor="textSecondary">
           {t('quran.surahNumber').replace('{n}', String(surah.number))} · {surah.meaning} ·{' '}
           {surah.ayahs.length} {t('count.ayahs')}
@@ -171,6 +172,11 @@ const styles = StyleSheet.create({
   },
   header: {
     gap: Spacing.one,
+  },
+  titleArabic: {
+    fontFamily: ArabicFont,
+    fontSize: 34,
+    lineHeight: 52,
   },
   list: {
     gap: Spacing.two,

@@ -5,7 +5,7 @@ import { GirihBand } from '@/components/illustrations';
 import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
 import { LEARNING_ORDER } from '@/content/quran/juz30';
-import { BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
+import { ArabicFont, BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { useMemorised } from '@/hooks/use-memorised';
 import { useTheme } from '@/hooks/use-theme';
@@ -98,7 +98,17 @@ export default function QuranScreen() {
                   {surah.number}
                 </ThemedText>
                 <View style={styles.rowText}>
-                  <ThemedText type="cardTitle">{surah.name}</ThemedText>
+                  <View style={styles.nameRow}>
+                    <ThemedText type="cardTitle">{surah.name}</ThemedText>
+                    {/*
+                      The Arabic name beside the transliteration, not instead
+                      of it. A convert meets these on a mosque wall and in a
+                      mushaf's contents long before they can read an ayah, and
+                      recognising the shape of الإخلاص is the first Arabic
+                      reading most people do without noticing.
+                    */}
+                    <ThemedText style={styles.nameArabic}>{surah.nameArabic}</ThemedText>
+                  </View>
                   <ThemedText type="small" themeColor="textSecondary">
                     {surah.meaning} · {surah.ayahs.length} {t('count.ayahs')}
                   </ThemedText>
@@ -166,5 +176,16 @@ const styles = StyleSheet.create({
   rowText: {
     flex: 1,
     gap: 2,
+  },
+  nameRow: {
+    flexDirection: 'row',
+    alignItems: 'baseline',
+    justifyContent: 'space-between',
+    gap: Spacing.two,
+  },
+  nameArabic: {
+    fontFamily: ArabicFont,
+    fontSize: 22,
+    lineHeight: 32,
   },
 });

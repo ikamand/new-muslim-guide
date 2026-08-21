@@ -81,6 +81,11 @@ for (let n = FIRST; n <= LAST; n += 1) {
   surahs.push({
     number: n,
     name: info.name_simple,
+    // The name as it is actually written. A convert meets these on a mosque
+    // wall and in a mushaf's contents long before they can read a whole ayah,
+    // and recognising the shape of "الإخلاص" is the first Arabic reading most
+    // people do without noticing they are doing it.
+    nameArabic: info.name_arabic,
     meaning: info.translated_name.name,
     place: info.revelation_place,
     ayahs: data.verses.map((verse) => ({
@@ -100,6 +105,7 @@ const body = surahs
     (s) => `  {
     number: ${s.number},
     name: ${JSON.stringify(s.name)},
+    nameArabic: ${JSON.stringify(s.nameArabic)},
     meaning: ${JSON.stringify(s.meaning)},
     place: ${JSON.stringify(s.place)},
     ayahs: [
@@ -158,6 +164,8 @@ export type Surah = {
   number: number;
   /** Transliterated name, as it is normally referred to — "An-Nas". */
   name: string;
+  /** The name in Arabic — "الناس". */
+  nameArabic: string;
   /** What the name means in English — "Mankind". */
   meaning: string;
   place: string;

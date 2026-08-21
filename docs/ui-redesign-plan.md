@@ -1,6 +1,7 @@
 # The plan
 
-**Status:** Phases 0–3 built and pushed. **Three phases left: 4, 5, 6.**
+**Status:** Phases 0–5 built and pushed, with two pieces held back on a licence
+question. **One phase left: 6 (French and Spanish).**
 Last updated 21 August 2026.
 **Canvas:** https://claude.ai/code/artifact/81fa355d-157f-495c-9096-bc68ae181422
 **Opened:** 20 August 2026, from a walkthrough of the Today and Learn tabs.
@@ -22,9 +23,10 @@ with its reasoning attached.
 | **1** | [The design system](#phase-1--the-design-system) | ✅ **Done** — `76f635e`, `21b66e3`, `41295cc` | OTA |
 | **2** | [The information architecture](#phase-2--the-information-architecture) | ✅ **Done** — `2a60188`, `f79f60f`, `e88f82d`, `014e430`, `aeccf7f`, `663aaef` | OTA |
 | **3** | [Provenance](#phase-3--provenance) | ✅ **Done** — `5f2570a`, `e614780` | OTA |
-| **4** | [Duʿas, and the first network call](#phase-4--duas-and-the-apps-first-network-call) | ⬜ Next | OTA + privacy label |
-| **5** | [The Qur'an tab](#phase-5--the-quran-tab--juz-30) | ⬜ Depends on Phase 4's cache | OTA |
-| **6** | [French and Spanish](#phase-6--french-and-spanish) | ⬜ Deferred on purpose | OTA |
+| **4** | [Duʿas, and the first network call](#phase-4--duas-and-the-apps-first-network-call) | 🟡 **Day built** — `d9bd351`. Fetch-and-cache held: no licensed content to fetch yet | OTA |
+| **5** | [The Qur'an tab](#phase-5--the-quran-tab--juz-30) | 🟡 **Text and drill built** — `eed5214`. Audio held: see below | OTA |
+| **6** | [French and Spanish](#phase-6--french-and-spanish) | ⬜ Last, on purpose | OTA |
+| — | [The prayers](#the-prayer-work) | ✅ **Done** — `a004af9` | OTA |
 
 ### What shipped in 0–3
 
@@ -47,6 +49,37 @@ with its reasoning attached.
   QuranEnc and searches HadeethEnc for the uncited. 24 of 24 comparable Qur'an
   texts match word for word.
 
+### The prayer work
+
+Agreed in conversation on 21 August and built the same night (`a004af9`),
+outside the numbered phases because it came out of looking at the app rather
+than out of the original audit.
+
+- **A chooser at `/pray`** showing all five daily prayers with their rakʿah
+  counts *and* the sunnah rawatib either side. Seeing them together is the
+  point: five separate cards could never say "Asr has none", because you would
+  have to open five pages and hold them in your head. Every born Muslim absorbs
+  both facts without being taught and almost no convert is told either.
+- **The branch happens once, at the door.** The rejected alternative was
+  branching mid-prayer — "stop here if you are praying Maghrib" — which arrives
+  when somebody is on a mat, one-handed, four minutes into concentrating. They
+  already know which prayer they are praying; they knew before they stood up.
+- **Tahajjud, istikhara and the prayer of repentance**, one line each in
+  `PRAYER_SPECS`, which is what that table was built for. Each has a reference
+  page as well, because a guide shows the movements and cannot say why you are
+  standing there.
+- **A Friday mark on Dhuhr**, stating the condition rather than relabelling it.
+  Jumuah replaces Dhuhr only for somebody who prays it in congregation; a man
+  who cannot reach a mosque prays Dhuhr, and so does a woman who does not
+  attend. Swapping the label would tell both of them they are praying something
+  they are not.
+
+**Still open here:** the istikhara duʿa text. Both places that print it carry
+the narrator's alternative inside the supplication, and splicing the variants
+produces a text nobody says. The provenance is recorded in
+`src/content/learn/voluntary-prayers.ts` so whoever adds it does not have to
+find it again.
+
 ### Two corrections the work produced
 
 1. **Phase 1 did not need a native build.** `expo-font` has been a dependency
@@ -58,6 +91,26 @@ with its reasoning attached.
    "prayer", `أَخِي` is "my brother". The real figure is **2 uncited quotations
    of 28**: the shahada, and the taʿawwudh wording. See
    [Phase 3](#phase-3--provenance).
+3. **Three hadith numbers were written from memory** while adding the voluntary
+   prayers, and none could be verified — sunnah.com refuses automated requests.
+   All three were removed. `sources.ts` now carries a `hadeethEnc()` citation
+   form for exactly this case: it names the collection and the grading and
+   links a page, and asserts no number. A number you cannot check is worse than
+   no number.
+
+### What is held, and on what
+
+- **Phase 4's fetch-and-cache.** Built nothing, deliberately: there is no
+  licensed content to fetch until the IslamHouse email is answered, and
+  infrastructure with nothing to carry is speculation. The day screen works on
+  the nine duʿas the app already owns.
+- **Phase 5's audio.** All of Juz 30 is ~76 MB, too much to bundle, and the
+  cache it would need is the item above. The ten shortest surahs are ~6.2 MB
+  and could ship bundled now — that is the next move once the licence position
+  is known, since `Husary_Muallim_128kbps` is already cleared in
+  `audio-sources.ts`.
+- **Word-synced highlighting.** Depends on the audio. The API supplies the
+  millisecond segments per word, so the data is there when the files are.
 
 **The order is not arbitrary.** Phase 1 unblocks every visual change after it.
 Phase 4 builds the caching that Phase 5 needs. Phase 6 is last because

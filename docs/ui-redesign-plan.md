@@ -347,6 +347,139 @@ Ideas worth working through, roughly in order of value to a beginner:
 
 ---
 
+### 7.2 How the API content actually reaches the app — decided 20 August 2026
+
+Settled, after a real disagreement worth recording because the reasoning
+matters more than the conclusion.
+
+**The content is theirs; the delivery is ours.** Adopting IslamHouse and
+HadeethEnc text is a clear improvement and not a marginal one — 26 of the app's
+53 Arabic strings are model-written with no source recorded
+(`docs/arabic-proof.csv`), and theirs are reviewed by named people who were paid
+to get them right. That risk is the largest single one in the app and this
+removes it.
+
+What does **not** follow is that the app should call an API when a reader taps
+something. Trust and runtime are separate decisions: text copied at build time
+is exactly as correct as text fetched at 9pm on a Tuesday. Against that, a
+runtime fetch costs the thing the app is for — someone standing outside a
+mosque with no signal, unable to read the duʿa for entering it.
+
+**The shape:**
+
+- **Fetch once, cache permanently.** First launch pulls the library; after that
+  it lives on the device. A scheduled refresh means new content still arrives
+  without anyone shipping a build.
+- **The worship path ships bundled.** Salah, wudu, and the prayer duʿas are in
+  the binary, so they work before the first fetch and after a cache clear.
+  `src/content/` stays the source of truth for what the app *says*.
+- **Verification, not generation.** Each text carries an upstream id, and a
+  script diffs ours against theirs on a consonantal skeleton — so the app's
+  Imlaei script does not false-positive against QuranEnc's Uthmani. Dev machine
+  and CI only; a check that needs the network can never be a build gate here.
+
+Two things this does not buy, and both should be said out loud:
+
+1. **Review does not go away.** The API guarantees the *text*. It does not
+   guarantee *this text belongs on this step* — HadeethEnc has 2,776 hadith and
+   choosing the wrong authentic one is still wrong. The existing split holds:
+   Iyad clears the text, a qualified person clears the substance.
+2. **The first fetch is the app's first network call ever.** It reveals a user's
+   IP to a third party, and it changes the App Store privacy answers. For a
+   convert who has not told their family, "this app never talks to anything" is
+   a real feature being traded away for a real gain.
+
+### 7.3 Hisn al-Muslim, as a day rather than a list
+
+**Not a Learn topic.** It is not a lesson, and 133 occasions as a card would
+rebuild the exact wall [§1](#1-what-triggered-this) is about. The Learn tab
+already has the right door: the "keep coming back to" strip's Duʿas entry,
+currently showing 9.
+
+**A list is the wrong shape, and not because it is long.** A new Muslim does not
+know a duʿa for putting on clothes exists, so they will never scroll to it. An
+index only serves someone who already knows what they are looking for — which is
+a born Muslim's tool. What a convert has instead is a *moment*: at the door,
+about to eat, awake at 2am.
+
+**So the duʿa screen is a day.** `DayArc` in `src/components/illustrations.tsx`
+already draws the sun's path with the five prayers on it, and Hisn al-Muslim
+maps onto that shape exactly — waking, dressing, leaving home, the mosque, the
+prayer, eating, coming home, sleeping. Scrolling from dawn to night puts each
+duʿa where it happens, which answers "when would I ever say this". No index
+answers that.
+
+**And it is smaller than 133.** The book has duʿas for rain stopping, for
+sighting the crescent, for a debtor. Someone three weeks in needs about twenty.
+The day carries what a convert actually meets; the rest sits behind a search.
+
+**What this removes:** the flat list of nine duʿas, and any 134-row Learn card.
+
+**The one part that is genuinely lesson-shaped** is the morning and evening
+adhkar — a practice with a beginning and an end, absorbed by every born Muslim
+and told to no convert. That earns a Learn card. The other 130 do not.
+
+### 7.4 A Qur'an tab — learning Juz 30
+
+**Why a fourth tab.** [§4](#4-the-information-architecture-decision) split Today
+(has a deadline) from Learn (has none). Memorising is neither: it is a practice
+someone builds over months. Filing it under Learn would make it look like
+reading, which is the one thing it is not.
+
+**The scope, counted rather than remembered** — every figure below was read from
+QuranEnc and everyayah.com, not recalled:
+
+| | |
+|---|---|
+| Juz 30 | surahs 78 (An-Naba) – 114 (An-Nas) |
+| Surahs | **37** |
+| Ayahs | **564** |
+| Shortest | 110, 108 and 103 — 3 ayahs each |
+
+**Order: backwards through the mushaf**, 114 → 113 → 112 → …, which is how it is
+actually taught. Not strictly shortest-first — the data says 110 and 103 are
+shorter than 114 — but contiguous, so there is never a question about what comes
+next, and it front-loads the three *quls*, which are the highest-utility surahs
+in the book: said in prayer, after prayer, and for ruqyah.
+
+**Audio already has a source, and it is one the app has cleared.**
+`Husary_Muallim_128kbps` on everyayah.com covers Juz 30 — confirmed by
+requesting 114:1 — and is the same reciter, the same set and the same CC BY-NC
+licence already recorded in `src/content/audio-sources.ts` for Al-Fatihah. The
+attribution obligation and the never-sell-it constraint carry over unchanged.
+
+Sizes, sampled across ten ayahs at ~138 KB each:
+
+- **All of Juz 30: ~76 MB.** Far too much to bundle.
+- **The ten shortest surahs (~46 ayahs): ~6.2 MB.** Bundleable.
+
+Which is exactly [§7.2](#72-how-the-api-content-actually-reaches-the-app--decided-20-august-2026)'s
+model: **the first ten ship in the binary, the rest fetch once and cache.**
+Someone in a basement can still practise the ones they are working on.
+
+**The interaction that matters is not a player.** `src/app/practice.tsx` already
+does per-ayah loop and slow playback, and that machinery scales. What
+memorisation needs on top is one thing: **hide the text.** Show the Arabic, tap
+to conceal it, recite from memory, tap to check. That is the drill that actually
+builds hifz, and no amount of reading replaces it.
+
+**Progress without pressure.** A memorisation tab needs a notion of "known",
+which the Al-Fatihah practice screen has no concept of. It must not become a
+streak: someone three weeks into Islam does not need an app that is disappointed
+in them. Progress goes up, never down, and never asks. The 37 surahs as a girih
+band — one eight-point khatim per surah, filled as it sticks — makes it a
+picture rather than a percentage, and reuses geometry `illustrations.tsx`
+already draws.
+
+⚠️ **Open, and a real blocker: transliteration.** QuranEnc supplies Arabic and
+translation. It does not supply transliteration, and CLAUDE.md forbids writing
+one — the ban covers "an Arabic text, a transliteration or a translation"
+equally. 564 transliterations need a source, or a decision to go without.
+
+Going without is defensible pedagogy rather than a shortcut: for memorisation a
+Latin-script crutch slows people down, and the tradition teaches by ear. Audio
+plus Arabic is how it is done. But that is a decision, not a default.
+
 ## 8. Shipping
 
 Everything in [§2](#2-three-bugs-found-while-auditing),

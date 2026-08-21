@@ -467,6 +467,39 @@ export function PostureFigure({
         </G>
       )}
 
+      {/*
+        The two turns that end the prayer.
+
+        A front view was tried and abandoned: a seated figure seen head-on
+        needs different geometry from the seven profiles here, and what came
+        out read as a lampshade. So these reuse the seated body that already
+        works and put the turn beside the head as an arrow.
+
+        That is a diagram rather than a picture, and it is honest about being
+        one — a drawn illustration will replace it the moment
+        `assets/images/prayer/taslim-right.png` lands, and this exists so the
+        step is not empty until then.
+      */}
+      {posture === 'taslim-right' && (
+        <G>
+          {head(20, 12)}
+          <Path d="M16 17 L24 17 L25.5 32 L33 32 L33 43 L15 43 Z" {...solid} />
+          {/* Forward, the way the body already faces. */}
+          <Path d="M27 11 h7" {...arm} strokeWidth={1.6} />
+          <Path d="M31.5 8 L34.5 11 L31.5 14" {...arm} strokeWidth={1.6} />
+        </G>
+      )}
+
+      {posture === 'taslim-left' && (
+        <G>
+          {head(20, 12)}
+          <Path d="M16 17 L24 17 L25.5 32 L33 32 L33 43 L15 43 Z" {...solid} />
+          {/* Back over the shoulder, the other way. */}
+          <Path d="M6 11 h7" {...arm} strokeWidth={1.6} />
+          <Path d="M8.5 8 L5.5 11 L8.5 14" {...arm} strokeWidth={1.6} />
+        </G>
+      )}
+
       {posture === 'washing' && (
         <G>
           {/* Not a body: a tap, and water falling into cupped hands. */}

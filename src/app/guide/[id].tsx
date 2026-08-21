@@ -33,6 +33,8 @@ const POSTURE_KEY: Record<Posture, UIKey> = {
   prostrating: 'posture.prostrating',
   sitting: 'posture.sitting',
   tashahhud: 'posture.tashahhud',
+  'taslim-right': 'posture.taslim-right',
+  'taslim-left': 'posture.taslim-left',
   washing: 'posture.washing',
 };
 

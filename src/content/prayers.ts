@@ -531,11 +531,19 @@ function rakahSteps(rakah: number, spec: PrayerSpec): Step[] {
         says: Recitations.salawat,
       });
       step({
-        key: 'taslim',
-        title: 'End the prayer',
-        posture: 'sitting',
+        key: 'taslim-right',
+        title: 'Turn to your right',
+        posture: 'taslim-right',
         instruction:
-          'Turn your face to the right and give the greeting, then to the left and give it again.',
+          'Still sitting, turn your face to the right until your cheek can be seen from behind you, and give the greeting.',
+        says: Recitations.taslim,
+        note: 'You are greeting the people beside you, and the angels. Nobody minds if you are praying alone — you still turn.',
+      });
+      step({
+        key: 'taslim-left',
+        title: 'Turn to your left',
+        posture: 'taslim-left',
+        instruction: 'Then turn your face to the left and give the same greeting again.',
         says: Recitations.taslim,
         note: `That is ${spec.title} complete.`,
       });

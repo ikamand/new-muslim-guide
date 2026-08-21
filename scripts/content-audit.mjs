@@ -71,7 +71,7 @@ if (orphanTopics.length) {
   The posture illustrations, so a half-finished set is visible rather than
   something you notice by opening every prayer step.
 */
-const POSTURES = ['standing','takbir','bowing','rising','prostrating','sitting','tashahhud','washing'];
+const POSTURES = ['standing','takbir','bowing','rising','prostrating','sitting','tashahhud','taslim-right','taslim-left','washing'];
 const drawn = POSTURES.filter((p) => PRAYER_IMAGES[p]);
 say(`Posture illustrations — ${drawn.length}/${POSTURES.length} drawn`);
 if (drawn.length < POSTURES.length) {

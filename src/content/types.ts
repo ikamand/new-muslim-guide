@@ -23,6 +23,17 @@ export type Posture =
   | 'prostrating'
   | 'sitting'
   | 'tashahhud'
+  /**
+   * The two turns that end the prayer, apart.
+   *
+   * They were one step reading "turn your face to the right and give the
+   * greeting, then to the left and give it again" — which is two things a
+   * person does, on a screen this app says should hold one. They are also the
+   * last two, so somebody who runs them together ends the prayer wrong and
+   * has nothing to check against.
+   */
+  | 'taslim-right'
+  | 'taslim-left'
   | 'washing';
 
 /**

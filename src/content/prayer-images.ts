@@ -44,6 +44,8 @@ export const PRAYER_IMAGES: Partial<Record<Posture, PostureImage>> = {
   // prostrating: require('@/assets/images/prayer/prostrating.png'),
   // sitting: require('@/assets/images/prayer/sitting.png'),
   // tashahhud: require('@/assets/images/prayer/tashahhud.png'),
+  // 'taslim-right': require('@/assets/images/prayer/taslim-right.png'),
+  // 'taslim-left': require('@/assets/images/prayer/taslim-left.png'),
   // washing: require('@/assets/images/prayer/washing.png'),
 };
 
@@ -52,7 +54,7 @@ export function getPostureImage(posture: Posture): PostureImage | undefined {
   return PRAYER_IMAGES[posture];
 }
 
-/** How many of the eight exist. Reported by `npm run content:audit`. */
+/** How many of the ten exist. Reported by `npm run content:audit`. */
 export function drawnPostureCount(): number {
   return Object.keys(PRAYER_IMAGES).length;
 }

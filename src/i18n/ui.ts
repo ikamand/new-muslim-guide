@@ -156,6 +156,18 @@ export const EN = {
   'learn.title': 'Learn',
   'learn.intro':
     'Start at the top if you are new. Everything below it is background for what you are already doing, and can wait for a quiet minute.',
+  /*
+    The topic groups. Named for the moment a question arrives rather than for
+    the subject — "Out in the world" holds food, clothes, family, work and
+    manners because they are one situation, being Muslim among people who are
+    not, even though a library would file them five different ways.
+  */
+  'learn.group.praying': 'Praying',
+  'learn.group.believe': 'What you believe',
+  'learn.group.world': 'Out in the world',
+  'learn.group.hard': 'When it’s hard',
+  'learn.group.year': 'The year',
+  'learn.group.reference': 'Keep coming back to',
   'learn.section.startHere': 'Start here',
   'learn.section.everyDay': 'Every day',
   'learn.section.understanding': 'Understanding',
@@ -383,6 +395,12 @@ const FR: Overrides = {
   'tab.learn': 'Apprendre',
   'tab.settings': 'Réglages',
   'learn.title': 'Apprendre',
+  'learn.group.praying': 'La prière',
+  'learn.group.believe': 'Ce que vous croyez',
+  'learn.group.world': 'Parmi les autres',
+  'learn.group.hard': 'Quand c’est difficile',
+  'learn.group.year': 'L’année',
+  'learn.group.reference': 'À consulter souvent',
   'learn.section.startHere': 'Commencer ici',
   'phrases.title': 'Ce qu’on vous dira',
   'duas.title': 'Invocations du quotidien',
@@ -568,6 +586,12 @@ const ES: Overrides = {
   'tab.learn': 'Aprender',
   'tab.settings': 'Ajustes',
   'learn.title': 'Aprender',
+  'learn.group.praying': 'La oración',
+  'learn.group.believe': 'Lo que crees',
+  'learn.group.world': 'Entre los demás',
+  'learn.group.hard': 'Cuando cuesta',
+  'learn.group.year': 'El año',
+  'learn.group.reference': 'Para volver a consultar',
   'learn.section.startHere': 'Empieza aquí',
   'phrases.title': 'Lo que te dirán',
   'duas.title': 'Súplicas diarias',

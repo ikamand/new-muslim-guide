@@ -13,15 +13,13 @@ import {
   IMAN_PILLARS,
   PHRASES,
   PILLARS,
-  REFERENCES,
   SHAHADA_GUIDE,
+  TOPIC_GROUPS,
 } from '@/content';
 import { BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { useJourney } from '@/hooks/use-journey';
-import { useRecommendations } from '@/hooks/use-recommendations';
 import { useTheme } from '@/hooks/use-theme';
-import { routeFor } from '@/lib/content-routes';
 import type { UIKey } from '@/i18n/ui';
 import { localiseReference } from '@/i18n/localise';
 
@@ -198,51 +196,19 @@ function JourneyCard() {
   );
 }
 
-/**
- * What onboarding pointed this reader at, if they answered.
- *
- * Absent entirely for anyone who skipped, rather than falling back to a generic
- * list under a personal heading — a section called "Where to start" that is the
- * same for everybody is worse than no section at all.
- *
- * Rendered from whatever resolves, so it shortens and lengthens on its own as
- * content is written. Nothing here names a lesson that does not exist.
- */
-function RecommendedSection() {
+/** A group's name, with a rule running out to its count. */
+function GroupHeading({ label, count }: { label: string; count?: number }) {
   const theme = useTheme();
-  const { t } = useLocale();
-  const recommended = useRecommendations();
-
-  if (recommended.length === 0) return null;
 
   return (
-    <View style={styles.section}>
-      <ThemedText type="smallBold" themeColor="textSecondary" style={styles.sectionTitle}>
-        {t('learn.recommended')}
-      </ThemedText>
-      <View style={styles.list}>
-        {recommended.map((entry) => (
-          <PressableLink
-            key={`${entry.kind}:${entry.id}`}
-            href={routeFor(entry)}
-            accessibilityLabel={`${entry.title}. ${entry.shortDescription}`}
-            style={[
-              styles.card,
-              { backgroundColor: theme.backgroundElement, borderColor: theme.border },
-            ]}
-            pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
-            <View style={styles.cardText}>
-              <ThemedText type="cardTitle">
-                {entry.title}
-              </ThemedText>
-              <ThemedText type="small" themeColor="textSecondary">
-                {entry.shortDescription}
-              </ThemedText>
-            </View>
-            <Ionicons name="arrow-forward" size={18} color={theme.accent} />
-          </PressableLink>
-        ))}
-      </View>
+    <View style={styles.groupHeading}>
+      <ThemedText type="sectionTitle">{label}</ThemedText>
+      <View style={[styles.rule, { backgroundColor: theme.border }]} />
+      {count !== undefined && (
+        <ThemedText type="caption" themeColor="textSecondary">
+          {count}
+        </ThemedText>
+      )}
     </View>
   );
 }
@@ -250,11 +216,6 @@ function RecommendedSection() {
 export default function LearnScreen() {
   const theme = useTheme();
   const { locale, t } = useLocale();
-
-  // Topics meant for a quiet minute rather than for mid-prayer.
-  const learnTopics = REFERENCES.filter((reference) => reference.surface === 'learn').map(
-    (reference) => localiseReference(reference, locale),
-  );
 
   return (
     <SafeAreaView style={[styles.safeArea, { backgroundColor: theme.background }]} edges={['top']}>
@@ -266,37 +227,44 @@ export default function LearnScreen() {
 
         <JourneyCard />
 
-        <RecommendedSection />
+        <ShahadaCard />
 
-        <View style={styles.section}>
-          <ThemedText type="smallBold" themeColor="textSecondary" style={styles.sectionTitle}>
-            {t('learn.section.startHere')}
-          </ThemedText>
-          <View style={styles.list}>
-            {/*
-              Becoming Muslim leads the tab. Some people open this app before
-              they are Muslim at all, and it used to be reachable only as an
-              entry inside a reference page about the five pillars.
-            */}
-            <ShahadaCard />
-            {learnTopics.map((topic) => (
-              <LearnCard
-                key={topic.id}
-                href={{ pathname: '/reference/[id]', params: { id: topic.id } }}
-                title={topic.title}
-                subtitle={topic.subtitle}
-                count={topic.sections.length}
-                unit="count.sections"
-                glyph={TOPIC_GLYPH[topic.id]}
-              />
-            ))}
+        {/*
+          Grouped by when the question arrives, not by subject.
+
+          This was nineteen consecutive rows under one heading, with a
+          "Where to start" section above it resolving from the same tables — so
+          "Becoming Muslim" and "What is Islam?" each appeared twice on one
+          screen. A flat list of nineteen equals only serves a reader who
+          already knows what they want, which is nobody this app is for.
+        */}
+        {TOPIC_GROUPS.map((group) => (
+          <View key={group.id} style={styles.section}>
+            <GroupHeading
+              label={t(`learn.group.${group.id}` as UIKey)}
+              count={group.topics.length}
+            />
+            <View style={styles.list}>
+              {group.topics
+                .map((topic) => localiseReference(topic, locale))
+                .map((topic) => (
+                  <LearnCard
+                    key={topic.id}
+                    href={{ pathname: '/reference/[id]', params: { id: topic.id } }}
+                    title={topic.title}
+                    subtitle={topic.subtitle}
+                    count={topic.sections.length}
+                    unit="count.sections"
+                    glyph={TOPIC_GLYPH[topic.id]}
+                  />
+                ))}
+            </View>
           </View>
-        </View>
+        ))}
 
+        {/* The things you return to rather than read once. */}
         <View style={styles.section}>
-          <ThemedText type="smallBold" themeColor="textSecondary" style={styles.sectionTitle}>
-            {t('learn.section.everyDay')}
-          </ThemedText>
+          <GroupHeading label={t('learn.group.reference')} />
           <View style={styles.list}>
             <LearnCard
               href="/phrases"
@@ -322,14 +290,6 @@ export default function LearnScreen() {
               unit="count.clips"
               glyph="practice"
             />
-          </View>
-        </View>
-
-        <View style={styles.section}>
-          <ThemedText type="smallBold" themeColor="textSecondary" style={styles.sectionTitle}>
-            {t('learn.section.understanding')}
-          </ThemedText>
-          <View style={styles.list}>
             <LearnCard
               href="/iman"
               title={t('learn.iman.title')}
@@ -348,11 +308,11 @@ export default function LearnScreen() {
             />
           </View>
         </View>
-
       </ScrollView>
     </SafeAreaView>
   );
 }
+
 
 const styles = StyleSheet.create({
   safeArea: {
@@ -371,7 +331,17 @@ const styles = StyleSheet.create({
     paddingTop: Spacing.four,
   },
   section: {
-    gap: Spacing.two,
+    gap: Spacing.three,
+  },
+  /** The group's name, a rule running out from it, and the count at the end. */
+  groupHeading: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.three,
+  },
+  rule: {
+    flex: 1,
+    height: StyleSheet.hairlineWidth,
   },
   sectionTitle: {
     textTransform: 'uppercase',

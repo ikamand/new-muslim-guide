@@ -88,5 +88,10 @@ export {
   SEATED,
   TRAVELLING,
 } from './references';
+/**
+ * The Learn tab's grouping, exported because the screen renders from it and
+ * the audit checks it. `LEARN_TOPICS` itself stays inside `REFERENCES`.
+ */
+export { TOPIC_GROUPS, ungroupedTopics, type TopicGroupId } from './learn';
 export { IMAN_PILLARS, PILLARS, PRAYERS, SHAHADA_GUIDE, WUDU };
 export * from './types';

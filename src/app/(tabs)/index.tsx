@@ -301,7 +301,7 @@ function HelpSection() {
 export default function TodayScreen() {
   const theme = useTheme();
   const { next } = usePrayerTimes();
-  const { locale, t } = useLocale();
+  const { locale } = useLocale();
   const items = useToday();
 
   const nextPrayer = next ? PRAYERS.find((prayer) => prayer.id === next.id) : undefined;

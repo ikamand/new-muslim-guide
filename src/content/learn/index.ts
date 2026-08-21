@@ -70,3 +70,37 @@ export {
   REPENTANCE, SUNNAH, WHAT_BREAKS_PRAYER, WHAT_IS_ISLAM, WHAT_IS_THE_QURAN,
   WHO_IS_ALLAH, WHO_IS_MUHAMMAD, WORK,
 };
+
+/**
+ * The topics, grouped by when the question arrives.
+ *
+ * The Learn tab rendered these as nineteen consecutive rows under one heading,
+ * which is a shape that only works for someone who already knows what they are
+ * looking for. A beginner does not arrive wanting "Clothing"; they arrive
+ * having been asked something at work, or having opened a fridge.
+ *
+ * So the grouping is by moment rather than by subject. "Out in the world" holds
+ * food, clothes, family, work and manners because those are all the same
+ * situation — being a Muslim among people who are not — even though a library
+ * would file them five different ways.
+ *
+ * Here rather than in the screen because it is a statement about the content,
+ * and because `npm run content:audit` can then check that every topic is in
+ * exactly one group. A topic missing from this table would silently vanish
+ * from the tab.
+ */
+export type TopicGroupId = 'praying' | 'believe' | 'world' | 'hard' | 'year';
+
+export const TOPIC_GROUPS: readonly { id: TopicGroupId; topics: readonly Reference[] }[] = [
+  { id: 'praying', topics: [BEFORE_PRAYER, AL_FATIHAH, WHAT_BREAKS_PRAYER, DUA_AND_DHIKR] },
+  { id: 'believe', topics: [WHAT_IS_ISLAM, WHO_IS_ALLAH, WHO_IS_MUHAMMAD, WHAT_IS_THE_QURAN, SUNNAH] },
+  { id: 'world', topics: [FOOD, CLOTHING, HALAL_AND_HARAM, FAMILY, WORK, MANNERS] },
+  { id: 'hard', topics: [REPENTANCE, PATIENCE_AND_GRATITUDE] },
+  { id: 'year', topics: [RAMADAN, ISLAMIC_CALENDAR] },
+];
+
+/** Every topic that no group claims. Drives the audit; should always be empty. */
+export function ungroupedTopics(): readonly Reference[] {
+  const grouped = new Set(TOPIC_GROUPS.flatMap((group) => group.topics.map((t) => t.id)));
+  return LEARN_TOPICS.filter((topic) => !grouped.has(topic.id));
+}

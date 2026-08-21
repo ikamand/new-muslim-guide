@@ -29,11 +29,39 @@ const PRACTICE_CLIP_COUNT = getPracticeClipCount();
 const SHAHADA_STEP_COUNT = SHAHADA_GUIDE.steps.length;
 
 /**
- * A mark per topic, so six near-identical rows stop being six near-identical
- * rows. A reference without one simply has no tile — better than reaching for
- * a glyph that means nothing.
+ * A mark per topic, so twenty near-identical rows stop being twenty
+ * near-identical rows.
+ *
+ * This used to hold one entry. Every other Learn card rendered as bare text,
+ * which is most of why the tab read as a wall: a reader scanning it had
+ * nothing but a title to tell one row from the next.
+ *
+ * The keys are reference ids. A topic with no entry still renders — it simply
+ * has no tile, which is better than reaching for a glyph that means nothing.
  */
-const TOPIC_GLYPH: Record<string, GlyphName> = { mosque: 'mosque' };
+const TOPIC_GLYPH: Record<string, GlyphName> = {
+  mosque: 'mosque',
+  wudu: 'wudu',
+  'before-prayer': 'before-prayer',
+  'al-fatihah': 'al-fatihah',
+  'what-breaks-prayer': 'what-breaks-prayer',
+  'dua-and-dhikr': 'dua-and-dhikr',
+  'what-is-islam': 'what-is-islam',
+  'who-is-allah': 'who-is-allah',
+  'who-is-muhammad': 'who-is-muhammad',
+  'what-is-the-quran': 'what-is-the-quran',
+  sunnah: 'sunnah',
+  food: 'food',
+  clothing: 'clothing',
+  'halal-and-haram': 'halal-and-haram',
+  family: 'family',
+  work: 'work',
+  manners: 'manners',
+  repentance: 'repentance',
+  'patience-and-gratitude': 'patience-and-gratitude',
+  ramadan: 'ramadan',
+  'islamic-calendar': 'islamic-calendar',
+};
 
 function LearnCard({
   href,

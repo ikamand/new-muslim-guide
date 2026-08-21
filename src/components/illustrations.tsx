@@ -1,3 +1,5 @@
+import type { Posture } from '@/content/types';
+
 import Svg, { Circle, G, Line, Path } from 'react-native-svg';
 
 import type { DayTimes, PrayerId } from '@/lib/prayer-times';
@@ -9,6 +11,11 @@ import type { DayTimes, PrayerId } from '@/lib/prayer-times';
  * apps draw a silhouette bowing anyway. Nothing here does. Where a posture has
  * to be shown it is the ground line plus the body's axis, which carries the
  * same information without making that call on a user's behalf.
+ *
+ * `PostureFigure` below is that rule applied, not an exception to it: a spine
+ * and the angle it holds, with the head end marked as a point. The angle is
+ * the whole information — upright, right-angled, down — so a silhouette would
+ * add a depiction and no meaning.
  *
  * ⚠️ REVIEW REQUIRED — whether to draw figures at all is a judgment about
  * substance, not layout. The decision here is deliberate but unreviewed.
@@ -261,6 +268,112 @@ export function DayArc({
   );
 }
 
+/**
+ * Where the body is, at each point of the prayer.
+ *
+ * `Posture` in `src/content/types.ts` has always said it "drives the posture
+ * illustration", and there was no illustration — the guide screen printed the
+ * name in a pill instead: "Standing", "Bowing", "Prostrating". A word is the
+ * wrong medium. Someone one-handed on a mat, part-way through a movement,
+ * needs to see the shape; reading a label costs them the glance that seeing it
+ * would have been.
+ *
+ * **No figures.** This obeys the rule at the top of this file rather than
+ * making an exception for itself: the drawing is the ground plus the body's
+ * axis — a spine and the angle it holds. That is not a lesser version of a
+ * silhouette. The angle *is* the entire information: qiyam is upright, rukuʿ
+ * is the right angle, sujud is down. A head and limbs would add nothing except
+ * a depiction this app has decided not to make.
+ *
+ * `standing` and `rising` are drawn apart on purpose — the fold of the hands
+ * in qiyam against the open line of iʿtidal is the thing beginners most often
+ * get wrong, and the one a text label cannot express at all.
+ */
+export function PostureFigure({
+  posture,
+  color,
+  size = 48,
+}: {
+  posture: Posture;
+  color: string;
+  size?: number;
+}) {
+  const axis = {
+    stroke: color,
+    strokeWidth: 2.2,
+    strokeLinecap: 'round' as const,
+    strokeLinejoin: 'round' as const,
+    fill: 'none',
+  };
+
+  /** Where the head end of the axis is, marked as a point rather than drawn. */
+  const mark = { fill: color, stroke: 'none' };
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 48 48" fill="none">
+      <Path
+        d="M6 42h36"
+        stroke={color}
+        strokeOpacity={0.3}
+        strokeWidth={2}
+        strokeLinecap="round"
+      />
+
+      {posture === 'standing' && (
+        <G>
+          <Path d="M24 10v32" {...axis} />
+          {/* The fold, at the height the hands are held. */}
+          <Path d="M17 26h14" {...axis} strokeWidth={1.6} />
+          <Circle cx={24} cy={10} r={2.6} {...mark} />
+        </G>
+      )}
+
+      {posture === 'rising' && (
+        <G>
+          <Path d="M24 10v32" {...axis} />
+          <Circle cx={24} cy={10} r={2.6} {...mark} />
+        </G>
+      )}
+
+      {posture === 'bowing' && (
+        <G>
+          {/* Legs upright, back level — the right angle that defines rukuʿ. */}
+          <Path d="M30 42V22" {...axis} />
+          <Path d="M30 22H12" {...axis} />
+          <Circle cx={12} cy={22} r={2.6} {...mark} />
+        </G>
+      )}
+
+      {posture === 'prostrating' && (
+        <G>
+          <Path d="M32 42V32" {...axis} />
+          <Path d="M32 32q-9 0-16 8" {...axis} />
+          <Circle cx={15} cy={39.5} r={2.6} {...mark} />
+        </G>
+      )}
+
+      {posture === 'sitting' && (
+        <G>
+          <Path d="M24 16v18" {...axis} />
+          <Path d="M16 40h16" {...axis} />
+          <Path d="M24 34l6 6" {...axis} strokeWidth={1.6} />
+          <Circle cx={24} cy={16} r={2.6} {...mark} />
+        </G>
+      )}
+
+      {posture === 'washing' && (
+        <G>
+          {/* Not a body at all: a tap, and water falling into cupped hands. */}
+          <Path d="M12 8v6h13" {...axis} strokeWidth={1.8} />
+          <Path d="M25 14v6" {...axis} strokeWidth={1.8} />
+          <Path d="M15 30q10 11 20 0" {...axis} />
+          <Path d="M15 30h20" {...axis} strokeWidth={1.6} />
+        </G>
+      )}
+    </Svg>
+  );
+}
+
 export type GlyphName =
   | 'shahada'
   | 'mosque'
@@ -270,7 +383,30 @@ export type GlyphName =
   | 'iman'
   | 'pillars'
   | 'ghusl'
-  | 'tayammum';
+  | 'tayammum'
+  // One per Learn topic. Nineteen of the twenty had no mark at all, which is
+  // why that tab read as a wall of identical text rows: `TOPIC_GLYPH` mapped
+  // exactly one id — `mosque` — and every other card was bare.
+  | 'wudu'
+  | 'before-prayer'
+  | 'al-fatihah'
+  | 'what-breaks-prayer'
+  | 'dua-and-dhikr'
+  | 'what-is-islam'
+  | 'who-is-allah'
+  | 'who-is-muhammad'
+  | 'what-is-the-quran'
+  | 'sunnah'
+  | 'food'
+  | 'clothing'
+  | 'halal-and-haram'
+  | 'family'
+  | 'work'
+  | 'manners'
+  | 'repentance'
+  | 'patience-and-gratitude'
+  | 'ramadan'
+  | 'islamic-calendar';
 
 /**
  * The card marks.
@@ -362,6 +498,172 @@ export function Glyph({ name, color, size = 22 }: { name: GlyphName; color: stri
           <Circle cx={12} cy={8} r={1} />
           <Circle cx={8} cy={10.5} r={1} />
           <Circle cx={16} cy={10.5} r={1} />
+        </G>
+      )}
+
+      {/*
+        The Learn topics. Same 24 grid, same 1.5 stroke, so a column of them
+        reads as one set rather than as clip art — the difference between a
+        marked list and a decorated one.
+
+        Each is the plainest true thing about its subject: water for wudu, a
+        book opened for the Qur'an, a crescent for Ramadan. None is a picture
+        of a person, deliberately. A geometric vocabulary is the right register
+        here, and figurative drawings of worship are a sensitivity this app
+        need not take on.
+      */}
+
+      {name === 'wudu' && (
+        <G {...stroke}>
+          <Path d="M6 3v6a6 6 0 0 0 12 0V3" />
+          <Path d="M12 15v6" />
+          <Path d="M8 21h8" />
+        </G>
+      )}
+
+      {name === 'before-prayer' && (
+        <G {...stroke}>
+          <Path d="M4 20h16" />
+          <Path d="M6 20v-5a6 6 0 0 1 12 0v5" />
+          <Path d="M12 4v3" />
+          <Path d="M10.5 5.5h3" />
+        </G>
+      )}
+
+      {name === 'al-fatihah' && (
+        <G {...stroke}>
+          <Path d="M4 5h7a2 2 0 0 1 2 2v12a2 2 0 0 0-2-2H4z" />
+          <Path d="M20 5h-5a2 2 0 0 0-2 2v12a2 2 0 0 1 2-2h5z" />
+          <Path d="M16.5 9.5h1.5" />
+        </G>
+      )}
+
+      {name === 'what-breaks-prayer' && (
+        <G {...stroke}>
+          <Path d="M5 5l14 14" />
+          <Path d="M12 3a9 9 0 1 0 9 9" />
+          <Path d="M12 3a9 9 0 0 1 9 9" />
+        </G>
+      )}
+
+      {name === 'dua-and-dhikr' && (
+        <G {...stroke}>
+          <Path d="M3 12h3l2-5 3 10 2.5-7 2 4h5.5" />
+        </G>
+      )}
+
+      {name === 'what-is-islam' && (
+        <G {...stroke}>
+          <Path d="M12 3 L21 12 L12 21 L3 12 Z" />
+          <Path d="M12 8 L16 12 L12 16 L8 12 Z" />
+        </G>
+      )}
+
+      {name === 'who-is-allah' && (
+        <G {...stroke}>
+          <Circle cx={12} cy={12} r={8} />
+          <Path d="M12 4v16" />
+          <Path d="M4 12h16" />
+        </G>
+      )}
+
+      {name === 'who-is-muhammad' && (
+        <G {...stroke}>
+          <Path d="M3 20h18" />
+          <Path d="M6 20V11" />
+          <Path d="M18 20V11" />
+          <Path d="M12 3l7 6H5z" />
+        </G>
+      )}
+
+      {name === 'what-is-the-quran' && (
+        <G {...stroke}>
+          <Path d="M4 5h7a2 2 0 0 1 2 2v12a2 2 0 0 0-2-2H4z" />
+          <Path d="M20 5h-5a2 2 0 0 0-2 2v12a2 2 0 0 1 2-2h5z" />
+        </G>
+      )}
+
+      {name === 'sunnah' && (
+        <G {...stroke}>
+          <Path d="M4 18c4-8 12-8 16 0" />
+          <Path d="M12 6v4" />
+          <Circle cx={12} cy={18} r={1.6} />
+        </G>
+      )}
+
+      {name === 'food' && (
+        <G {...stroke}>
+          <Path d="M5 3v8a3 3 0 0 0 6 0V3" />
+          <Path d="M8 11v10" />
+          <Path d="M17 3c-1.5 3-1.5 6 0 8v10" />
+        </G>
+      )}
+
+      {name === 'clothing' && (
+        <G {...stroke}>
+          <Path d="M8 3l4 3 4-3 4 3-2 4h-2v11H8V10H6L4 6z" />
+        </G>
+      )}
+
+      {name === 'halal-and-haram' && (
+        <G {...stroke}>
+          <Path d="M12 3v18" />
+          <Path d="M5 8l7-3 7 3" />
+          <Path d="M3 16a3 3 0 0 0 6 0L6 9z" />
+          <Path d="M15 16a3 3 0 0 0 6 0l-3-7z" />
+        </G>
+      )}
+
+      {name === 'family' && (
+        <G {...stroke}>
+          <Circle cx={9} cy={8} r={3} />
+          <Circle cx={17} cy={9} r={2.2} />
+          <Path d="M3 20v-1a6 6 0 0 1 12 0v1" />
+          <Path d="M17 14a4 4 0 0 1 4 4v2" />
+        </G>
+      )}
+
+      {name === 'work' && (
+        <G {...stroke}>
+          <Path d="M3 8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+          <Path d="M9 6V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v1" />
+          <Path d="M3 13h18" />
+        </G>
+      )}
+
+      {name === 'manners' && (
+        <G {...stroke}>
+          <Path d="M4 18V8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H8z" />
+          <Path d="M9 10h6" />
+          <Path d="M9 13h4" />
+        </G>
+      )}
+
+      {name === 'repentance' && (
+        <G {...stroke}>
+          <Path d="M3 12a9 9 0 1 0 3-6.7" />
+          <Path d="M3 4v5h5" />
+        </G>
+      )}
+
+      {name === 'patience-and-gratitude' && (
+        <G {...stroke}>
+          <Path d="M12 21c-5-3-8-6.5-8-10a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 11c0 3.5-3 7-8 10z" />
+        </G>
+      )}
+
+      {name === 'ramadan' && (
+        <G {...stroke}>
+          <Path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+        </G>
+      )}
+
+      {name === 'islamic-calendar' && (
+        <G {...stroke}>
+          <Path d="M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+          <Path d="M3 10h18" />
+          <Path d="M8 3v4" />
+          <Path d="M16 3v4" />
         </G>
       )}
     </Svg>

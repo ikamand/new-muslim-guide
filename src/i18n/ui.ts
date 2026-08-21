@@ -36,8 +36,8 @@ export const EN = {
   */
   'home.greeting': 'Assalamu alaikum',
   'journey.stageOf': 'stage {n} of {total}',
-  'home.continue': 'Continue your journey',
-  'home.start': 'Start your journey',
+  'home.continue': 'Carry on',
+  'home.start': 'Start here',
   'home.journeyDone': 'You have been through every lesson',
   'home.journeyDone.help':
     'Nothing is locked and nothing expires. Go back over anything you want, or keep these two in your week.',
@@ -553,8 +553,8 @@ const FR: Overrides = {
   'home.washFirst': 'Se laver d’abord',
   'home.greeting': 'Assalamu alaikum',
   'journey.stageOf': 'étape {n} sur {total}',
-  'home.continue': 'Continuez votre parcours',
-  'home.start': 'Commencez votre parcours',
+  'home.continue': 'Reprendre',
+  'home.start': 'Commencer',
   'home.journeyDone': 'Vous avez parcouru toutes les leçons',
   'home.journeyDone.help':
     'Rien n’est verrouillé et rien n’expire. Revenez sur ce que vous voulez, ou gardez ces deux-là dans votre semaine.',
@@ -750,8 +750,8 @@ const ES: Overrides = {
   'home.washFirst': 'Purifícate primero',
   'home.greeting': 'Assalamu alaikum',
   'journey.stageOf': 'etapa {n} de {total}',
-  'home.continue': 'Continúa tu camino',
-  'home.start': 'Empieza tu camino',
+  'home.continue': 'Continuar',
+  'home.start': 'Empezar',
   'home.journeyDone': 'Has pasado por todas las lecciones',
   'home.journeyDone.help':
     'Nada está bloqueado y nada caduca. Vuelve a lo que quieras, o guarda estas dos cosas para tu semana.',

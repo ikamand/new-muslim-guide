@@ -97,7 +97,7 @@ function LearnCard({
         </View>
       )}
       <View style={styles.cardText}>
-        <ThemedText type="cardTitle" numberOfLines={2}>
+        <ThemedText type="cardTitle" numberOfLines={3}>
           {title}
         </ThemedText>
         {/*
@@ -287,6 +287,17 @@ export default function LearnScreen() {
                     count={topic.sections.length}
                     unit="count.sections"
                     glyph={TOPIC_GLYPH[topic.id]}
+                    /*
+                      A long title takes the whole row rather than being
+                      truncated into one. "What you need before you pray" came
+                      out as "What you need before …" in a half tile, which
+                      hides the words that make it findable — and the ellipsis
+                      is worse than the extra row it saves.
+
+                      Measured rather than listed, so a retitled topic gets the
+                      right shape without anybody remembering to update a table.
+                    */
+                    wide={topic.title.length > 22}
                   />
                 ))}
             </View>

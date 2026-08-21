@@ -322,9 +322,19 @@ export function PostureFigure({
 
       {posture === 'standing' && (
         <G>
-          <Path d="M24 10v32" {...axis} />
-          {/* The fold, at the height the hands are held. */}
-          <Path d="M17 26h14" {...axis} strokeWidth={1.6} />
+          {/*
+            The axis is broken where the hands are, and the fold is an arc
+            rather than a bar.
+
+            The first version drew a straight line across an unbroken vertical
+            one, which is a cross — an unfortunate thing to put on the first
+            screen of a prayer in a Muslim app, and obvious the moment it was
+            rendered rather than reasoned about. An arc cupping the axis reads
+            as hands held at the waist and reads as nothing else.
+          */}
+          <Path d="M24 10v13" {...axis} />
+          <Path d="M24 31v11" {...axis} />
+          <Path d="M17 24q7 8 14 0" {...axis} strokeWidth={1.8} />
           <Circle cx={24} cy={10} r={2.6} {...mark} />
         </G>
       )}

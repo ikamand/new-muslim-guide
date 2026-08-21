@@ -16,6 +16,7 @@ import { WHAT_IS_ISLAM } from './what-is-islam';
 import { WHAT_IS_THE_QURAN } from './what-is-the-quran';
 import { WHO_IS_ALLAH } from './who-is-allah';
 import { WHO_IS_MUHAMMAD } from './who-is-muhammad';
+import { ISTIKHARA, TAHAJJUD, TAWBA_PRAYER } from './voluntary-prayers';
 import { WORK } from './work';
 import { ref, type ContentRef } from '../model';
 import type { Reference } from '../types';
@@ -63,9 +64,13 @@ export const LEARN_TOPICS: Reference[] = [
   PATIENCE_AND_GRATITUDE,
   ISLAMIC_CALENDAR,
   RAMADAN,
+  TAHAJJUD,
+  ISTIKHARA,
+  TAWBA_PRAYER,
 ];
 
 export {
+  ISTIKHARA, TAHAJJUD, TAWBA_PRAYER,
   AL_FATIHAH, BEFORE_PRAYER, CLOTHING, DUA_AND_DHIKR, FAMILY, FOOD,
   HALAL_AND_HARAM, ISLAMIC_CALENDAR, MANNERS, PATIENCE_AND_GRATITUDE, RAMADAN,
   REPENTANCE, SUNNAH, WHAT_BREAKS_PRAYER, WHAT_IS_ISLAM, WHAT_IS_THE_QURAN,
@@ -90,7 +95,7 @@ export {
  * exactly one group. A topic missing from this table would silently vanish
  * from the tab.
  */
-export type TopicGroupId = 'praying' | 'believe' | 'world' | 'hard' | 'year';
+export type TopicGroupId = 'praying' | 'chosen' | 'believe' | 'world' | 'hard' | 'year';
 
 /**
  * The topics, grouped by when the question arrives.
@@ -123,7 +128,10 @@ export const TOPIC_GROUPS: readonly { id: TopicGroupId; topics: readonly Content
       // Wudu first, because wudu comes first.
       ref('guide', 'wudu'),
       ref('reference', 'before-prayer'),
-      ref('guide', 'fajr'),
+      // The prayers are reached through the chooser rather than as five cards
+      // or as Fajr standing in for all of them — see `src/app/pray.tsx`. The
+      // Learn tab renders that entry itself; it is not a `ContentRef` because
+      // it is a screen rather than a piece of content.
       ref('reference', 'al-fatihah'),
       ref('reference', 'what-breaks-prayer'),
       ref('reference', 'dua-and-dhikr'),
@@ -149,6 +157,16 @@ export const TOPIC_GROUPS: readonly { id: TopicGroupId; topics: readonly Content
       ref('reference', 'family'),
       ref('reference', 'work'),
       ref('reference', 'manners'),
+    ],
+  },
+  {
+    // The prayers you choose. Grouped apart from the five so a reader can see
+    // at a glance which are owed and which are offered.
+    id: 'chosen',
+    topics: [
+      ref('reference', 'tahajjud'),
+      ref('reference', 'istikhara'),
+      ref('reference', 'tawba-prayer'),
     ],
   },
   { id: 'hard', topics: [ref('reference', 'repentance'), ref('reference', 'patience-and-gratitude')] },
@@ -186,13 +204,22 @@ export function ungrouped(
     // nobody browses to tayammum, they need it because there is no water.
     'guide:ghusl',
     'guide:tayammum',
-    // The five prayers are one lesson, not five. Fajr represents them because
-    // it is the one a beginner learns first; the rest are reached from the
-    // prayer times card, which always offers the one that is actually next.
+    // The prayers are reached two ways, neither of them a card here: from
+    // Today's times card, which always offers the one that is next, and from
+    // the chooser, which shows all five with their rakʿah counts side by side.
+    // That comparison is the thing worth teaching and five separate cards
+    // could never make it.
+    'guide:fajr',
     'guide:dhuhr',
     'guide:asr',
     'guide:maghrib',
     'guide:isha',
+    // The three voluntary prayers are reached from the chooser too, and their
+    // reference pages — which is what a reader actually needs — are grouped
+    // under `chosen`.
+    'guide:tahajjud',
+    'guide:istikhara',
+    'guide:tawba',
   ]) {
     claimed.add(elsewhere);
   }

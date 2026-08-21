@@ -8,6 +8,7 @@ import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
 import { routeFor } from '@/lib/content-routes';
 import {
+  DAILY_PRAYERS,
   DUAS,
   resolveRef,
   getPracticeClipCount,
@@ -284,6 +285,22 @@ export default function LearnScreen() {
               count={group.topics.length}
             />
             <View style={styles.list}>
+              {/*
+                The way into the prayers themselves. A screen rather than a
+                piece of content, so it is rendered here instead of resolving
+                through the catalogue like everything beside it.
+              */}
+              {group.id === 'praying' && (
+                <LearnCard
+                  wide
+                  href="/pray"
+                  title={t('learn.toPray.title')}
+                  subtitle={t('learn.toPray.subtitle')}
+                  count={DAILY_PRAYERS.length}
+                  unit="count.prayers"
+                  glyph="prayer"
+                />
+              )}
               {group.topics
                 // A ref to content that does not exist yet resolves to nothing
                 // and is dropped, so a group can name something before it is

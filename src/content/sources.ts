@@ -118,8 +118,28 @@ export type QuranSource = {
 export type HadithSource = {
   kind: 'hadith';
   collection: HadithCollection;
-  /** The number as that collection prints it — "6324". */
-  reference: string;
+  /**
+   * The number as that collection prints it — "6324".
+   *
+   * Optional, and optional for one reason only: **a number you cannot check is
+   * worse than no number.** HadeethEnc gives a narration's collection and its
+   * grading but not the collection's own numbering, and sunnah.com refuses
+   * automated requests — so there are narrations this app can cite honestly and
+   * cannot number. Set `hadeethEncId` for those.
+   *
+   * Writing a plausible number from memory is the exact failure this file opens
+   * by warning about, and it happened while adding the voluntary prayers: three
+   * references were typed from recall, none verifiable, all removed.
+   */
+  reference?: string;
+  /**
+   * HadeethEnc's id for the narration — `hadeethenc.com/ar/browse/hadith/3293`.
+   *
+   * A locator into a supervised collection that publishes the Arabic, the
+   * grading and who graded it. Not a substitute for the collection's own number
+   * where that is known; a way of citing something checkable where it is not.
+   */
+  hadeethEncId?: string;
   /** The book within the collection: 80 for Bukhari's Invocations. */
   book?: number;
   /** That book's name, as the collection gives it — "Invocations". */
@@ -177,6 +197,21 @@ export const hadith = (
   extra?: Omit<HadithSource, 'kind' | 'collection' | 'reference'>,
 ): HadithSource => ({ kind: 'hadith', collection, reference, ...extra });
 
+/**
+ * A narration cited by its HadeethEnc id, because its collection number is not
+ * known to us.
+ *
+ * Deliberately a different function from `hadith` rather than an argument to
+ * it: the two are not interchangeable, and a call site should have to say
+ * which it is. `hadith('bukhari', '1162')` asserts a number. This asserts only
+ * what was actually read — the collection, the grading, and a page.
+ */
+export const hadeethEnc = (
+  collection: HadithCollection,
+  hadeethEncId: string,
+  extra?: Omit<HadithSource, 'kind' | 'collection' | 'reference' | 'hadeethEncId'>,
+): HadithSource => ({ kind: 'hadith', collection, hadeethEncId, ...extra });
+
 export const scholarly = (source: Omit<ScholarlySource, 'kind'>): ScholarlySource => ({
   kind: 'scholarly',
   ...source,
@@ -204,7 +239,10 @@ export function formatSource(source: Source): string {
       const grading = source.grading
         ? ` (${source.grading}${source.gradedBy ? ` — ${source.gradedBy}` : ''})`
         : '';
-      return `${name} ${source.reference}${grading}`;
+      // Where there is no verified number, the collection name stands alone
+      // rather than borrowing HadeethEnc's id and passing it off as one.
+      const where = source.reference ? ` ${source.reference}` : '';
+      return `${name}${where}${grading}`;
     }
     case 'scholarly':
       return [
@@ -239,7 +277,14 @@ export function sourceUrl(source: Source): string | undefined {
     case 'hadith': {
       if (source.url) return source.url;
       const { sunnahSlug } = HADITH_COLLECTIONS[source.collection];
-      return sunnahSlug ? `https://sunnah.com/${sunnahSlug}:${source.reference}` : undefined;
+      if (sunnahSlug && source.reference) {
+        return `https://sunnah.com/${sunnahSlug}:${source.reference}`;
+      }
+      // Arabic, because every hadith HadeethEnc holds has Arabic and only some
+      // are translated — 65715 is Arabic-only, and its English URL 404s.
+      return source.hadeethEncId
+        ? `https://hadeethenc.com/ar/browse/hadith/${source.hadeethEncId}`
+        : undefined;
     }
     case 'scholarly':
       return source.url;

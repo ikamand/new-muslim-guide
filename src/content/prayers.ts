@@ -82,6 +82,36 @@ type PrayerSpec = {
    * Maghrib and Isha: the first two. Dhuhr and Asr: none, all silent.
    */
   aloudRakahs: number;
+  /**
+   * Obligatory, or prayed by choice.
+   *
+   * The five daily prayers are one kind of thing and tahajjud, istikhara and
+   * the prayer of repentance are another — same movements, same words,
+   * different standing entirely. A screen listing them together has to be able
+   * to say which is which, or it teaches that they are equally required.
+   */
+  kind: 'fard' | 'voluntary';
+  /**
+   * The confirmed sunnah rakʿahs either side of a daily prayer — the rawatib.
+   *
+   * Every born Muslim absorbs these and almost no convert is ever told they
+   * exist, which is why they are data rather than a sentence in a note: they
+   * belong beside the obligatory count, where somebody can see that Asr has
+   * none and Dhuhr has six.
+   *
+   * The twelve come from Umm Habiba's narration in Sahih Muslim — "whoever
+   * prays twelve rakʿahs voluntarily in a day, other than the obligatory,
+   * Allah builds him a house in Paradise" — and the breakdown across the five
+   * is the one HadeethEnc prints in its own explanation of it (hadith 65715):
+   * two before Fajr, four before Dhuhr and two after, two after Maghrib, two
+   * after Isha.
+   *
+   * ⚠️ REVIEW REQUIRED — the counts are copied, not remembered, but teaching
+   * these twelve as *the* rawatib is a judgement. The Hanafi school counts
+   * some of them differently.
+   */
+  sunnahBefore?: number;
+  sunnahAfter?: number;
 };
 
 const ORDINALS = ['first', 'second', 'third', 'fourth'] as const;
@@ -526,11 +556,11 @@ function buildPrayer(spec: PrayerSpec): Guide {
     // PRAYER_SPECS is classified without anyone remembering to.
     meta: {
       category: 'salah',
-      difficulty: 'foundational',
+      difficulty: spec.kind === 'fard' ? 'foundational' : 'building',
       // Doing time, not reading time: roughly a minute a rakʿah once the words
       // are known, plus settling and the closing. Not a target.
       estimatedMinutes: spec.rakahs + 2,
-      beginnerPriority: 1,
+      beginnerPriority: spec.kind === 'fard' ? 1 : 3,
       tags: ['first-day', 'arabic'],
       relatedContent: [ref('guide', 'wudu'), ref('reference', 'al-fatihah')],
       // The whole method, and where the rakʿah count comes from.
@@ -553,11 +583,36 @@ function buildPrayer(spec: PrayerSpec): Guide {
 }
 
 export const PRAYER_SPECS: PrayerSpec[] = [
-  { id: 'fajr', title: 'Fajr', when: 'Dawn, before sunrise', rakahs: 2, aloudRakahs: 2 },
-  { id: 'dhuhr', title: 'Dhuhr', when: 'After midday', rakahs: 4, aloudRakahs: 0 },
-  { id: 'asr', title: 'Asr', when: 'Late afternoon', rakahs: 4, aloudRakahs: 0 },
-  { id: 'maghrib', title: 'Maghrib', when: 'Just after sunset', rakahs: 3, aloudRakahs: 2 },
-  { id: 'isha', title: 'Isha', when: 'Night', rakahs: 4, aloudRakahs: 2 },
+  { id: 'fajr', title: 'Fajr', when: 'Dawn, before sunrise', rakahs: 2, aloudRakahs: 2, kind: 'fard', sunnahBefore: 2 },
+  { id: 'dhuhr', title: 'Dhuhr', when: 'After midday', rakahs: 4, aloudRakahs: 0, kind: 'fard', sunnahBefore: 4, sunnahAfter: 2 },
+  // Asr has no confirmed sunnah either side. Worth seeing rather than
+  // inferring: a beginner watching a mosque fill up before Dhuhr and not
+  // before Asr has no way to know why.
+  { id: 'asr', title: 'Asr', when: 'Late afternoon', rakahs: 4, aloudRakahs: 0, kind: 'fard' },
+  { id: 'maghrib', title: 'Maghrib', when: 'Just after sunset', rakahs: 3, aloudRakahs: 2, kind: 'fard', sunnahAfter: 2 },
+  { id: 'isha', title: 'Isha', when: 'Night', rakahs: 4, aloudRakahs: 2, kind: 'fard', sunnahAfter: 2 },
+
+  /*
+    Prayed by choice, and all two rakʿahs.
+
+    This is what `buildPrayer` was built for — the file has always said that
+    adding a voluntary prayer should be one line here rather than a sixth
+    hand-written script, and these are the first three to take it up. They are
+    the same movements and the same words; what differs is why you are
+    standing there, which is what their reference pages carry.
+
+    None is recited aloud. A voluntary prayer in the day is silent, and these
+    are prayed alone.
+  */
+  { id: 'tahajjud', title: 'Tahajjud', when: 'The last part of the night', rakahs: 2, aloudRakahs: 0, kind: 'voluntary' },
+  { id: 'istikhara', title: 'Istikhara', when: 'When you have a decision to make', rakahs: 2, aloudRakahs: 0, kind: 'voluntary' },
+  { id: 'tawba', title: 'The prayer of repentance', when: 'After a sin, whenever you want', rakahs: 2, aloudRakahs: 0, kind: 'voluntary' },
 ];
+
+/** The five that are owed. */
+export const DAILY_PRAYERS = PRAYER_SPECS.filter((spec) => spec.kind === 'fard');
+
+/** The ones prayed by choice. */
+export const VOLUNTARY_PRAYERS = PRAYER_SPECS.filter((spec) => spec.kind === 'voluntary');
 
 export const PRAYERS: Guide[] = PRAYER_SPECS.map(buildPrayer);

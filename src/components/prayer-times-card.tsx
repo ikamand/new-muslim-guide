@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 
 import { DayArc, MihrabArch } from '@/components/illustrations';
@@ -65,7 +66,16 @@ function NeedsLocation({ status }: { status: 'denied' | 'unavailable' }) {
   );
 }
 
-function TimeCell({ prayer, isNext }: { prayer: PrayerTime; isNext: boolean }) {
+function TimeCell({
+  prayer,
+  isNext,
+  jumuah,
+}: {
+  prayer: PrayerTime;
+  isNext: boolean;
+  /** True for Dhuhr on a Friday. */
+  jumuah?: boolean;
+}) {
   const theme = useTheme();
 
   return (
@@ -74,13 +84,57 @@ function TimeCell({ prayer, isNext }: { prayer: PrayerTime; isNext: boolean }) {
         styles.cell,
         isNext && { backgroundColor: theme.accentMuted, borderRadius: Radius.small },
       ]}>
-      <ThemedText type="small" themeColor={isNext ? 'accent' : 'textSecondary'}>
-        {prayer.label}
-      </ThemedText>
+      <View style={styles.cellLabel}>
+        {/*
+          A dot, not a warning glyph. An alert on a prayer time reads as "you
+          are late" or "you have done something wrong", and pressure is the
+          wrong register for somebody three weeks in. This is information.
+        */}
+        {jumuah && <View style={[styles.jumuahDot, { backgroundColor: theme.accent }]} />}
+        <ThemedText type="small" themeColor={isNext ? 'accent' : 'textSecondary'}>
+          {prayer.label}
+        </ThemedText>
+      </View>
       <ThemedText type="smallBold" themeColor={isNext ? 'accent' : 'text'} style={styles.cellTime}>
         {formatTime(prayer.time)}
       </ThemedText>
     </View>
+  );
+}
+
+/**
+ * What the dot on Dhuhr means, on a Friday.
+ *
+ * Deliberately NOT a relabelling of Dhuhr to "Jumuah". Jumuah replaces Dhuhr
+ * only for somebody who actually prays it in congregation, and the app cannot
+ * know that: a man who cannot reach a mosque prays Dhuhr, and so does a woman
+ * who does not attend. Swapping the label would tell both of them they are
+ * praying something they are not.
+ *
+ * So the card states the condition instead of guessing at the person. It is
+ * inferred from the day rather than asked, which is the app's preference, and
+ * it is right for all three readers.
+ */
+function JumuahNote() {
+  const theme = useTheme();
+  const { t } = useLocale();
+  const [open, setOpen] = useState(false);
+
+  return (
+    <Pressable
+      onPress={() => setOpen((was) => !was)}
+      accessibilityRole="button"
+      accessibilityState={{ expanded: open }}
+      style={[styles.jumuah, { borderLeftColor: theme.accent }]}>
+      <ThemedText type="smallBold" themeColor="accent">
+        {t('times.jumuah')}
+      </ThemedText>
+      {open && (
+        <ThemedText type="small" themeColor="textSecondary">
+          {t('times.jumuah.detail')}
+        </ThemedText>
+      )}
+    </Pressable>
   );
 }
 
@@ -89,6 +143,9 @@ export function PrayerTimesCard({ action }: PrayerTimesCardProps) {
   const { t } = useLocale();
   const { status, coords } = useLocation();
   const { today, next, profile, timezoneSuspect } = usePrayerTimes();
+  // 5 is Friday in every locale — `getDay` is not localised, which is what
+  // makes it safe to compare against a number here.
+  const isFriday = new Date().getDay() === 5;
 
   if (status === 'denied' || status === 'unavailable') {
     return <NeedsLocation status={status} />;
@@ -148,9 +205,16 @@ export function PrayerTimesCard({ action }: PrayerTimesCardProps) {
 
       <View style={styles.row}>
         {today.prayers.map((prayer) => (
-          <TimeCell key={prayer.id} prayer={prayer} isNext={prayer.id === next.id && !next.isTomorrow} />
+          <TimeCell
+            key={prayer.id}
+            prayer={prayer}
+            isNext={prayer.id === next.id && !next.isTomorrow}
+            jumuah={isFriday && prayer.id === 'dhuhr'}
+          />
         ))}
       </View>
+
+      {isFriday && <JumuahNote />}
 
       {timezoneSuspect && (
         <View style={[styles.warning, { borderLeftColor: theme.accent }]}>
@@ -254,6 +318,22 @@ const styles = StyleSheet.create({
   },
   cellTime: {
     fontVariant: ['tabular-nums'],
+  },
+  cellLabel: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+  },
+  jumuahDot: {
+    width: 5,
+    height: 5,
+    borderRadius: 3,
+  },
+  jumuah: {
+    borderLeftWidth: 3,
+    paddingLeft: Spacing.three,
+    paddingVertical: Spacing.two,
+    gap: Spacing.one,
   },
   warning: {
     borderLeftWidth: 3,

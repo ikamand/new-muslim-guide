@@ -52,6 +52,7 @@ export {
   hadith,
   HADITH_COLLECTIONS,
   assessEvidence,
+  hadeethEnc,
   isUsable,
   MADHHABS,
   quran,
@@ -94,4 +95,6 @@ export {
  */
 export { TOPIC_GROUPS, ungrouped, type TopicGroupId } from './learn';
 export { IMAN_PILLARS, PILLARS, PRAYERS, SHAHADA_GUIDE, WUDU };
+/** The five that are owed and the three prayed by choice, for the chooser. */
+export { DAILY_PRAYERS, VOLUNTARY_PRAYERS } from './prayers';
 export * from './types';

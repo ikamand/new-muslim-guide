@@ -120,6 +120,14 @@ export const EN = {
   // These are astronomical times, not an authority. A mosque timetable is a
   // decision by people and may differ by a few minutes; where they disagree,
   // the mosque is what you follow.
+  /*
+    Friday. Stated as a condition rather than as a fact about the reader,
+    because Jumuah replaces Dhuhr only for somebody who prays it in
+    congregation — and the app knows the day, not whether you got to a mosque.
+  */
+  'times.jumuah': 'It’s Friday',
+  'times.jumuah.detail':
+    'Today Dhuhr is Jumuah — if you pray it at the mosque with everyone. The khutbah comes first, so arrive before the adhan rather than at it. If you cannot get to a mosque today, you pray Dhuhr as normal.',
   'times.followLocal': 'If your mosque’s timetable differs, follow the mosque.',
 
   /**
@@ -171,7 +179,29 @@ export const EN = {
     manners because they are one situation, being Muslim among people who are
     not, even though a library would file them five different ways.
   */
+  /*
+    The prayer chooser.
+
+    "Sunnah" is not used as a column heading on purpose. To a convert it is an
+    unglossed Arabic word in a table of numbers, and the thing it needs to
+    convey is only *when* — before or after. The word is explained where there
+    is room to explain it.
+  */
+  'pray.title': 'Learn to pray',
+  'pray.intro': 'Every prayer is the same movements and the same words. What changes is how many times round, and whether the Qur’an is said aloud.',
+  'pray.before': 'before',
+  'pray.fard': 'owed',
+  'pray.after': 'after',
+  'pray.rawatib': 'The numbers either side are the sunnah rakʿahs — prayed by choice, before or after the ones that are owed. Asr has none. Twelve a day, across the five.',
+  'pray.chosen': 'Prayed by choice',
+  'pray.chosen.help': 'Two rakʿahs each — the same prayer you already know. What differs is why you are standing there.',
+  'pray.chosen.readMore': 'What these prayers are for →',
+  'count.rakahs': 'rakʿahs',
+  'count.prayers': 'prayers',
+  'learn.toPray.title': 'Learn to pray',
+  'learn.toPray.subtitle': 'All five, and how many rakʿahs each one is',
   'learn.group.praying': 'Praying',
+  'learn.group.chosen': 'Prayers you choose',
   'learn.group.believe': 'What you believe',
   'learn.group.world': 'Out in the world',
   'learn.group.hard': 'When it’s hard',
@@ -416,7 +446,21 @@ const FR: Overrides = {
   'tab.learn': 'Apprendre',
   'tab.settings': 'Réglages',
   'learn.title': 'Apprendre',
+  'pray.title': 'Apprendre à prier',
+  'pray.intro': 'Chaque prière comporte les mêmes gestes et les mêmes paroles. Ce qui change, c’est le nombre de cycles, et si le Coran est récité à voix haute.',
+  'pray.before': 'avant',
+  'pray.fard': 'dû',
+  'pray.after': 'après',
+  'pray.rawatib': 'Les nombres de part et d’autre sont les rakʿahs surérogatoires — priées par choix, avant ou après celles qui sont dues. Asr n’en a aucune. Douze par jour, réparties sur les cinq.',
+  'pray.chosen': 'Priées par choix',
+  'pray.chosen.help': 'Deux rakʿahs chacune — la prière que vous connaissez déjà. Ce qui diffère, c’est la raison d’être là.',
+  'pray.chosen.readMore': 'À quoi servent ces prières →',
+  'count.rakahs': 'rakʿahs',
+  'count.prayers': 'prières',
+  'learn.toPray.title': 'Apprendre à prier',
+  'learn.toPray.subtitle': 'Les cinq, et le nombre de rakʿahs de chacune',
   'learn.group.praying': 'La prière',
+  'learn.group.chosen': 'Les prières que vous choisissez',
   'learn.group.believe': 'Ce que vous croyez',
   'learn.group.world': 'Parmi les autres',
   'learn.group.hard': 'Quand c’est difficile',
@@ -587,6 +631,9 @@ const FR: Overrides = {
   'times.clockSuspect':
     'L’horloge de votre téléphone est réglée très loin de l’endroit où vous semblez être. Ces horaires suivent l’horloge : vérifiez la date et l’heure si elles semblent fausses.',
   'times.onThisPhone': 'calculés sur ce téléphone',
+  'times.jumuah': 'C’est vendredi',
+  'times.jumuah.detail':
+    'Aujourd’hui, Dhuhr devient la prière du vendredi — si vous la priez à la mosquée avec les autres. Le sermon vient d’abord : arrivez avant l’appel, pas au moment de l’appel. Si vous ne pouvez pas vous rendre à la mosquée, vous priez Dhuhr normalement.',
   'times.followLocal': 'Si les horaires de votre mosquée diffèrent, suivez la mosquée.',
   'count.minutes': 'min',
   'count.steps': 'étapes',
@@ -615,7 +662,21 @@ const ES: Overrides = {
   'tab.learn': 'Aprender',
   'tab.settings': 'Ajustes',
   'learn.title': 'Aprender',
+  'pray.title': 'Aprender a rezar',
+  'pray.intro': 'Todas las oraciones tienen los mismos movimientos y las mismas palabras. Lo que cambia es cuántos ciclos, y si el Corán se recita en voz alta.',
+  'pray.before': 'antes',
+  'pray.fard': 'debida',
+  'pray.after': 'después',
+  'pray.rawatib': 'Los números a cada lado son las rakʿahs voluntarias — rezadas por elección, antes o después de las debidas. Asr no tiene ninguna. Doce al día, entre las cinco.',
+  'pray.chosen': 'Rezadas por elección',
+  'pray.chosen.help': 'Dos rakʿahs cada una — la misma oración que ya conoces. Lo que cambia es por qué estás ahí.',
+  'pray.chosen.readMore': 'Para qué son estas oraciones →',
+  'count.rakahs': 'rakʿahs',
+  'count.prayers': 'oraciones',
+  'learn.toPray.title': 'Aprender a rezar',
+  'learn.toPray.subtitle': 'Las cinco, y cuántas rakʿahs tiene cada una',
   'learn.group.praying': 'La oración',
+  'learn.group.chosen': 'Oraciones que eliges',
   'learn.group.believe': 'Lo que crees',
   'learn.group.world': 'Entre los demás',
   'learn.group.hard': 'Cuando cuesta',
@@ -784,6 +845,9 @@ const ES: Overrides = {
   'times.clockSuspect':
     'El reloj de tu teléfono está ajustado muy lejos de donde pareces estar. Estos horarios siguen al reloj, así que revisa la fecha y la hora si algo parece mal.',
   'times.onThisPhone': 'calculados en este teléfono',
+  'times.jumuah': 'Es viernes',
+  'times.jumuah.detail':
+    'Hoy Dhuhr es la oración del viernes — si la rezas en la mezquita con los demás. El sermón va primero, así que llega antes del llamado, no durante. Si hoy no puedes ir a una mezquita, rezas Dhuhr como siempre.',
   'times.followLocal': 'Si el horario de tu mezquita es distinto, sigue el de la mezquita.',
   'count.minutes': 'min',
   'count.steps': 'pasos',

@@ -47,6 +47,19 @@ import { useTheme } from '@/hooks/use-theme';
  *
  * Failure is quiet and local. No signal means the play button says so and the
  * text is still there to read, which is most of what this screen is for.
+ *
+ * ## Playing the whole surah chains the ayah files
+ *
+ * The API also serves one MP3 per surah, and using that would have been the
+ * obvious choice — one request, one file, the reciter's own pauses. Chaining
+ * the per-ayah files instead buys two things worth more:
+ *
+ * 1. **It knows where it is.** The ayah being recited is highlighted as it
+ *    plays, so following along is the same gesture as listening. A single
+ *    surah file cannot say which line you are on, and following along is most
+ *    of what memorising is.
+ * 2. **One set of files, not two.** These are the same clips a single ayah
+ *    plays, so when downloads land there is nothing to store twice.
  */
 /**
  * One ayah's play control.
@@ -60,12 +73,15 @@ function AyahAudio({
   ayah,
   active,
   onActivate,
+  onFinished,
   loop,
 }: {
   surah: number;
   ayah: number;
   active: boolean;
   onActivate: (ayah: number | null) => void;
+  /** Called when this ayah reaches its end without looping. */
+  onFinished: (ayah: number) => void;
   loop: boolean;
 }) {
   const theme = useTheme();
@@ -90,11 +106,11 @@ function AyahAudio({
     if (!active && status.playing) player.pause();
   }, [active, status.playing, player]);
 
-  // Release the row when a non-looping ayah finishes, so the button goes back
-  // to offering a play rather than sitting on a pause nothing is doing.
+  // The screen decides what happens next — release the row, or move to the
+  // ayah after this one. A row knows when it has finished and nothing else.
   useEffect(() => {
-    if (active && status.didJustFinish && !loop) onActivate(null);
-  }, [active, status.didJustFinish, loop, onActivate]);
+    if (active && status.didJustFinish && !loop) onFinished(ayah);
+  }, [active, status.didJustFinish, loop, onFinished, ayah]);
 
   const failed = Boolean(status.error);
 
@@ -145,6 +161,15 @@ export default function SurahScreen() {
   const [hidden, setHidden] = useState<readonly number[]>([]);
   const [playing, setPlaying] = useState<number | null>(null);
   const [loop, setLoop] = useState(false);
+  /**
+   * Whether the whole surah is running.
+   *
+   * Separate from `playing`, which is only ever the ayah currently sounding.
+   * Keeping them apart is what lets `loop` mean the right thing in both modes
+   * — repeat one ayah while you are drilling it, repeat the surah while you
+   * are listening through.
+   */
+  const [continuous, setContinuous] = useState(false);
 
   if (!surah) {
     return (
@@ -158,6 +183,26 @@ export default function SurahScreen() {
   }
 
   const known = isMemorised(surah.number);
+
+  /** What to do when an ayah ends: stop, or move on. */
+  const advance = (finished: number) => {
+    if (!continuous) {
+      setPlaying(null);
+      return;
+    }
+    const next = surah.ayahs.find((a) => a.number > finished);
+    if (next) {
+      setPlaying(next.number);
+      return;
+    }
+    // The end of the surah. Start again if repeat is on, otherwise stop.
+    if (loop) setPlaying(surah.ayahs[0].number);
+    else {
+      setContinuous(false);
+      setPlaying(null);
+    }
+  };
+
   const cover = (ayah: number) =>
     setHidden((current) =>
       current.includes(ayah) ? current.filter((n) => n !== ayah) : [...current, ayah],
@@ -183,22 +228,51 @@ export default function SurahScreen() {
         mode you are in — you turn it on, then work through the surah one ayah
         at a time without reaching for it again.
       */}
-      <Pressable
-        onPress={() => setLoop((was) => !was)}
-        accessibilityRole="switch"
-        accessibilityState={{ checked: loop }}
-        style={[
-          styles.loop,
-          {
-            backgroundColor: loop ? theme.accentMuted : 'transparent',
-            borderColor: loop ? theme.accent : theme.border,
-          },
-        ]}>
-        <Ionicons name="repeat" size={16} color={loop ? theme.accent : theme.textSecondary} />
-        <ThemedText type="smallBold" themeColor={loop ? 'accent' : 'textSecondary'}>
-          {t('practice.repeat')}
-        </ThemedText>
-      </Pressable>
+      <View style={styles.controls}>
+        {/*
+          The whole surah, from the top. Primary, because listening straight
+          through is how most people meet a surah before they try to hold any
+          of it.
+        */}
+        <Pressable
+          onPress={() => {
+            if (continuous) {
+              setContinuous(false);
+              setPlaying(null);
+              return;
+            }
+            setContinuous(true);
+            setPlaying(surah.ayahs[0].number);
+          }}
+          accessibilityRole="button"
+          accessibilityLabel={t(continuous ? 'quran.stop' : 'quran.playSurah')}
+          style={({ pressed }) => [
+            styles.playSurah,
+            { backgroundColor: theme.accent, opacity: pressed ? 0.85 : 1 },
+          ]}>
+          <Ionicons name={continuous ? 'stop' : 'play'} size={16} color={theme.textOnAccent} />
+          <ThemedText type="smallBold" themeColor="textOnAccent">
+            {t(continuous ? 'quran.stop' : 'quran.playSurah')}
+          </ThemedText>
+        </Pressable>
+
+        <Pressable
+          onPress={() => setLoop((was) => !was)}
+          accessibilityRole="switch"
+          accessibilityState={{ checked: loop }}
+          style={[
+            styles.loop,
+            {
+              backgroundColor: loop ? theme.accentMuted : 'transparent',
+              borderColor: loop ? theme.accent : theme.border,
+            },
+          ]}>
+          <Ionicons name="repeat" size={16} color={loop ? theme.accent : theme.textSecondary} />
+          <ThemedText type="smallBold" themeColor={loop ? 'accent' : 'textSecondary'}>
+            {t('practice.repeat')}
+          </ThemedText>
+        </Pressable>
+      </View>
 
       <View style={styles.list}>
         {surah.ayahs.map((ayah) => {
@@ -218,7 +292,13 @@ export default function SurahScreen() {
               key={ayah.number}
               style={[
                 styles.ayah,
-                { backgroundColor: theme.backgroundElement, borderColor: theme.border },
+                {
+                  backgroundColor: theme.backgroundElement,
+                  // Following along is the same gesture as listening, which is
+                  // the reason the whole-surah button chains ayah files rather
+                  // than playing one file for the surah.
+                  borderColor: playing === ayah.number ? theme.accent : theme.border,
+                },
               ]}>
               <View style={styles.ayahHead}>
                 <ThemedText type="caption" themeColor="accent" style={styles.ayahNumber}>
@@ -228,8 +308,15 @@ export default function SurahScreen() {
                   surah={surah.number}
                   ayah={ayah.number}
                   active={playing === ayah.number}
-                  onActivate={setPlaying}
-                  loop={loop}
+                  onActivate={(n) => {
+                    // Touching one ayah leaves the run-through.
+                    setContinuous(false);
+                    setPlaying(n);
+                  }}
+                  onFinished={advance}
+                  // A surah playing through should not loop each ayah on the
+                  // way; repeat applies to the run as a whole.
+                  loop={loop && !continuous}
                 />
               </View>
 
@@ -348,10 +435,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  controls: {
+    flexDirection: 'row',
+    gap: Spacing.two,
+  },
+  playSurah: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.two,
+    minHeight: 40,
+    paddingHorizontal: Spacing.three,
+    borderRadius: Radius.small,
+  },
   loop: {
     flexDirection: 'row',
     alignItems: 'center',
-    alignSelf: 'flex-start',
     gap: Spacing.two,
     minHeight: 40,
     paddingHorizontal: Spacing.three,

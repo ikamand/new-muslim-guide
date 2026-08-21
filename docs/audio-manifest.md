@@ -24,7 +24,7 @@ has an `audioId`.
 | `between-prostrations.mp3` | Between the prostrations | — | Prayer — Sit up | Not recorded | To be commissioned |
 | `tashahhud.mp3` | The tashahhud | — | Prayer — Prostrate again | Not recorded | To be commissioned |
 | `salawat.mp3` | The salawat | — | Prayer — Send prayers on the Prophet | Not recorded | To be commissioned |
-| `taslim.mp3` | The taslim | — | Prayer — End the prayer | Not recorded | To be commissioned |
+| `taslim.mp3` | The taslim | — | Prayer — Turn to your right; Prayer — Turn to your left | Not recorded | To be commissioned |
 | `shahada.mp3` | The testimony of faith | — | Not used in a guide | Not recorded | To be commissioned |
 | `shahada-after-wudu.mp3` | After wudu | — | Wudu — Finish | Not recorded | To be commissioned |
 | `bismillah.mp3` | Before wudu | — | Wudu — Intend | Not recorded | To be commissioned |

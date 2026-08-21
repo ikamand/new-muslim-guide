@@ -1,12 +1,12 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { useAudioPlayer, useAudioPlayerStatus } from 'expo-audio';
-import { Stack, useLocalSearchParams } from 'expo-router';
-import { useEffect, useState } from 'react';
+import { useAudioPlaylist, useAudioPlaylistStatus } from 'expo-audio';
+import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { getSurah, JUZ30_SOURCE } from '@/content/quran/juz30';
-import { ayahAudioUrl, RECITATION_CREDIT } from '@/content/quran/recitation';
+import { ayahAudioUrl, getReciter, reciterCredit } from '@/content/quran/recitation';
 import { ArabicFont, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { useMemorised } from '@/hooks/use-memorised';
@@ -40,136 +40,186 @@ import { useTheme } from '@/hooks/use-theme';
  * recitation still work with the radio off. That promise was about the worship
  * path, and this is a learning surface.
  *
- * The player lives on each row rather than one owned by the screen and moved
- * between them — swapping a source mid-playback is where audio bugs live, and
- * `practice.tsx` learned that already. Only one plays at a time: a row pauses
- * itself the moment another starts.
+ * Failure is quiet and local. No signal means the controls say so and the text
+ * is still there to read, which is most of what this screen is for.
  *
- * Failure is quiet and local. No signal means the play button says so and the
- * text is still there to read, which is most of what this screen is for.
+ * ## The surah is one playlist, not a chain of separate players
  *
- * ## Playing the whole surah chains the ayah files
+ * The first version of this screen gave every ayah its own `useAudioPlayer`
+ * and had the screen chain them by moving a flag from row to row. Two things
+ * were wrong with it, and the second is why this was rewritten:
  *
- * The API also serves one MP3 per surah, and using that would have been the
- * obvious choice — one request, one file, the reciter's own pauses. Chaining
- * the per-ayah files instead buys two things worth more:
+ * 1. **"Play the surah" produced no sound at all.** The button set the flag
+ *    and nothing acted on it — the only `play()` in the file was inside a
+ *    row's own press handler, and a row receiving the flag only knew how to
+ *    *pause*. The button changed its own icon to "Stop", highlighted the first
+ *    ayah, and played silence. The chaining logic underneath it never ran once,
+ *    because nothing ever started and so nothing ever finished.
+ * 2. **It cost one native player per ayah.** Opening Al-Mursalat built fifty
+ *    of them and started fifty downloads before a single tap.
  *
- * 1. **It knows where it is.** The ayah being recited is highlighted as it
- *    plays, so following along is the same gesture as listening. A single
- *    surah file cannot say which line you are on, and following along is most
- *    of what memorising is.
- * 2. **One set of files, not two.** These are the same clips a single ayah
- *    plays, so when downloads land there is nothing to store twice.
+ * `useAudioPlaylist` is the right shape for this and expo-audio documents it as
+ * gapless, which is the thing a chain of separate players cannot be — each
+ * link had to load after the one before it finished, so a surah played through
+ * would have broken between every ayah even once the flag bug was fixed.
+ *
+ * It also keeps what the chain was reaching for: `currentIndex` says which ayah
+ * is sounding, so following along is the same gesture as listening. And it
+ * stays one file per ayah, so the single-ayah button and the whole-surah button
+ * draw on the same clips — nothing is stored twice when downloads land.
+ *
+ * `loop` is set as a property rather than passed as an option on purpose: the
+ * hook rebuilds the playlist whenever the option changes, so a reader toggling
+ * repeat mid-surah would have had the audio stop dead.
  */
-/**
- * One ayah's play control.
- *
- * `loop` is the whole point of it. Hearing an ayah once teaches nothing;
- * hearing it twenty times without touching the phone is how it goes in, and it
- * is what a paper mushaf cannot do.
- */
-function AyahAudio({
-  surah,
-  ayah,
-  active,
-  onActivate,
-  onFinished,
-  loop,
-}: {
-  surah: number;
-  ayah: number;
-  active: boolean;
-  onActivate: (ayah: number | null) => void;
-  /** Called when this ayah reaches its end without looping. */
-  onFinished: (ayah: number) => void;
-  loop: boolean;
-}) {
-  const theme = useTheme();
-  const { t } = useLocale();
-  // `downloadFirst` fetches before playing. For a ~140KB ayah that is a beat,
-  // and it buys playback that does not stutter on a weak connection.
-  const player = useAudioPlayer({ uri: ayahAudioUrl(surah, ayah) }, { downloadFirst: true });
-  const status = useAudioPlayerStatus(player);
-
-  useEffect(() => {
-    // Same as `practice.tsx`, for the same reason: `loop` is a settable
-    // property in expo-audio, with no setLoop() and no creation-time option,
-    // so assignment is the documented API. The lint rule reads it as mutating
-    // a hook's return, but `player` is a handle to a native player rather than
-    // React state, and pushing state out to an external system is what an
-    // effect is for.
-    // eslint-disable-next-line react-hooks/immutability
-    player.loop = loop;
-  }, [loop, player]);
-
-  useEffect(() => {
-    if (!active && status.playing) player.pause();
-  }, [active, status.playing, player]);
-
-  // The screen decides what happens next — release the row, or move to the
-  // ayah after this one. A row knows when it has finished and nothing else.
-  useEffect(() => {
-    if (active && status.didJustFinish && !loop) onFinished(ayah);
-  }, [active, status.didJustFinish, loop, onFinished, ayah]);
-
-  const failed = Boolean(status.error);
-
-  return (
-    <Pressable
-      onPress={() => {
-        if (failed) return;
-        if (status.playing) {
-          player.pause();
-          onActivate(null);
-          return;
-        }
-        onActivate(ayah);
-        player.seekTo(0);
-        player.play();
-      }}
-      accessibilityRole="button"
-      accessibilityLabel={t(status.playing ? 'practice.pause' : 'practice.play')}
-      hitSlop={8}
-      style={({ pressed }) => [
-        styles.play,
-        {
-          backgroundColor: status.playing ? theme.accent : theme.accentMuted,
-          opacity: pressed || failed ? 0.5 : 1,
-        },
-      ]}>
-      {status.isBuffering && !status.playing ? (
-        <Ionicons name="ellipsis-horizontal" size={16} color={theme.accent} />
-      ) : (
-        <Ionicons
-          name={failed ? 'cloud-offline-outline' : status.playing ? 'pause' : 'play'}
-          size={16}
-          color={status.playing ? theme.textOnAccent : theme.accent}
-        />
-      )}
-    </Pressable>
-  );
-}
-
 export default function SurahScreen() {
   const theme = useTheme();
   const { t } = useLocale();
-  const { translation } = useSettings();
+  const router = useRouter();
+  const { translation, reciter: reciterId } = useSettings();
   const { number } = useLocalSearchParams<{ number: string }>();
   const { isMemorised, toggle } = useMemorised();
 
   const surah = getSurah(Number(number));
+  const reciter = getReciter(reciterId);
+
   const [hidden, setHidden] = useState<readonly number[]>([]);
-  const [playing, setPlaying] = useState<number | null>(null);
   const [loop, setLoop] = useState(false);
   /**
-   * Whether the whole surah is running.
+   * What is running, or nothing.
    *
-   * Separate from `playing`, which is only ever the ayah currently sounding.
-   * Keeping them apart is what lets `loop` mean the right thing in both modes
-   * — repeat one ayah while you are drilling it, repeat the surah while you
-   * are listening through.
+   * `'ayah'` and `'surah'` are the same playback with different intentions, and
+   * the difference is only visible in what repeat means: drill this one line,
+   * or listen to the whole thing again. Nothing else in here branches on it.
    */
-  const [continuous, setContinuous] = useState(false);
+  const [mode, setMode] = useState<'ayah' | 'surah' | null>(null);
+  const [stalled, setStalled] = useState(false);
+
+  const ayahs = surah?.ayahs ?? [];
+
+  /*
+    A fresh array each render is fine — the hook keys on the stringified
+    sources, not on identity. What it does mean is that changing reciter builds
+    a new playlist, which is handled below rather than left to stop the audio.
+  */
+  const sources = useMemo(
+    () =>
+      surah
+        ? surah.ayahs.map((ayah) => ({ uri: ayahAudioUrl(reciter, surah.number, ayah.number) }))
+        : [],
+    [reciter, surah],
+  );
+
+  // 250ms rather than the 500ms default: this drives which ayah is highlighted,
+  // and half a second of the wrong line lit up is visible when you are reading
+  // along with it.
+  const playlist = useAudioPlaylist({ sources, updateInterval: 250 });
+  const status = useAudioPlaylistStatus(playlist);
+
+  const index = status.currentIndex;
+  const running = mode !== null;
+  const currentAyah = running ? ayahs[index]?.number : undefined;
+
+  useEffect(() => {
+    // Assignment is the documented API — `loop` is a settable property in
+    // expo-audio with no setter method. The lint rule reads this as mutating a
+    // hook's return value, but `playlist` is a handle to a native object rather
+    // than React state, and pushing state out to an external system is what an
+    // effect is for.
+    // eslint-disable-next-line react-hooks/immutability
+    playlist.loop = !loop ? 'none' : mode === 'ayah' ? 'single' : 'all';
+  }, [playlist, loop, mode]);
+
+  /*
+    Changing reciter mid-listen picks up where the last voice left off.
+
+    The hook hands back a new playlist when the sources change, and a new
+    playlist starts silent at track zero. Stopping would be the easy behaviour
+    and the wrong one: comparing two reciters on the same ayah is the main
+    reason anybody opens that picker, and being thrown back to the top of the
+    surah makes the comparison impossible.
+  */
+  const resumeAt = useRef(0);
+  useEffect(() => {
+    if (running) resumeAt.current = index;
+  }, [running, index]);
+
+  useEffect(() => {
+    if (mode === null) return;
+    playlist.skipTo(resumeAt.current);
+    playlist.play();
+    // Deliberately keyed on the playlist alone. Re-running this when `mode`
+    // changes would restart the audio every time repeat is toggled.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [playlist]);
+
+  /*
+    The recitation scrolls the page, not the reader.
+
+    Without this the highlight is honest and useless: An-Naba is forty ayahs,
+    so by the third one the lit-up line is below the fold and somebody trying
+    to read along is chasing it with their thumb — which is the one thing this
+    screen is meant to spare them, and it is why the highlight was worth
+    building in the first place.
+
+    What it costs is browsing while listening: scroll away to look at a later
+    ayah and the next track pulls you back. That is the right trade for a
+    screen whose whole job is following along, and stopping playback is one tap
+    if you want to read somewhere else.
+
+    Positions are collected from `onLayout` rather than computed, because ayah
+    heights are wildly uneven — one line of Arabic or six, with or without a
+    translation under it, and a covered ayah is a different height again.
+  */
+  const scroller = useRef<ScrollView>(null);
+  const listTop = useRef(0);
+  const rowTops = useRef<Record<number, number>>({});
+
+  useEffect(() => {
+    if (mode === null) return;
+    const top = rowTops.current[index];
+    if (top === undefined) return;
+    // A little headroom, so the current ayah reads as the top of what you are
+    // looking at rather than jammed against the edge of the screen.
+    scroller.current?.scrollTo({ y: Math.max(0, listTop.current + top - Spacing.three), animated: true });
+  }, [mode, index]);
+
+  /*
+    Silence that never resolves, said out loud.
+
+    A playlist's status carries no error field the way a single player's does,
+    so there is nothing to read — which would leave a reader with no signal
+    staring at a button that had visibly accepted their tap and then done
+    nothing.
+
+    What it watches is the clock, not `playing`. The first version of this
+    checked the flag and never once fired: with the audio host unreachable the
+    status still reported `playing: true`, because the flag says a play was
+    requested rather than that sound is coming out. `currentTime` cannot lie
+    that way — audio that is genuinely running moves it, and audio that is not
+    leaves it at zero. Found by cutting the network in a browser and watching
+    the message fail to appear.
+
+    Twelve seconds is not a diagnosis. It is long enough to be sure, and saying
+    "this isn't loading, the text is still here" is the whole job.
+  */
+  const progress = useRef(0);
+  useEffect(() => {
+    progress.current = status.currentTime;
+  }, [status.currentTime]);
+
+  useEffect(() => {
+    if (mode === null) {
+      setStalled(false);
+      return;
+    }
+    setStalled(false);
+    // Reset rather than remember: a new track starts at zero, and comparing
+    // against the previous track's clock would read a fresh start as progress.
+    progress.current = 0;
+    const timer = setTimeout(() => setStalled(progress.current < 0.25), 12000);
+    return () => clearTimeout(timer);
+  }, [mode, index]);
 
   if (!surah) {
     return (
@@ -184,23 +234,36 @@ export default function SurahScreen() {
 
   const known = isMemorised(surah.number);
 
-  /** What to do when an ayah ends: stop, or move on. */
-  const advance = (finished: number) => {
-    if (!continuous) {
-      setPlaying(null);
-      return;
-    }
-    const next = surah.ayahs.find((a) => a.number > finished);
-    if (next) {
-      setPlaying(next.number);
-      return;
-    }
-    // The end of the surah. Start again if repeat is on, otherwise stop.
-    if (loop) setPlaying(surah.ayahs[0].number);
-    else {
-      setContinuous(false);
-      setPlaying(null);
-    }
+  const stop = () => {
+    playlist.pause();
+    setMode(null);
+  };
+
+  /** From the top, as a run-through. */
+  const toggleSurah = () => {
+    if (mode === 'surah') return stop();
+    setMode('surah');
+    resumeAt.current = 0;
+    playlist.skipTo(0);
+    playlist.play();
+  };
+
+  /**
+   * One ayah, from a row.
+   *
+   * With repeat off this carries on into the rest of the surah rather than
+   * stopping at the end of the line — "play from here" is what a reader
+   * tapping partway down a surah almost always wants, and stopping dead after
+   * four seconds is a worse guess. With repeat on it holds on that one ayah,
+   * which is the drill: hearing it twenty times without touching the phone is
+   * how it goes in, and it is what a paper mushaf cannot do.
+   */
+  const playFrom = (position: number) => {
+    if (mode !== null && index === position && status.playing) return stop();
+    setMode('ayah');
+    resumeAt.current = position;
+    playlist.skipTo(position);
+    playlist.play();
   };
 
   const cover = (ayah: number) =>
@@ -209,7 +272,7 @@ export default function SurahScreen() {
     );
 
   return (
-    <ScrollView contentContainerStyle={styles.content}>
+    <ScrollView ref={scroller} contentContainerStyle={styles.content}>
       <Stack.Screen options={{ title: surah.name }} />
 
       <View style={styles.header}>
@@ -235,24 +298,20 @@ export default function SurahScreen() {
           of it.
         */}
         <Pressable
-          onPress={() => {
-            if (continuous) {
-              setContinuous(false);
-              setPlaying(null);
-              return;
-            }
-            setContinuous(true);
-            setPlaying(surah.ayahs[0].number);
-          }}
+          onPress={toggleSurah}
           accessibilityRole="button"
-          accessibilityLabel={t(continuous ? 'quran.stop' : 'quran.playSurah')}
+          accessibilityLabel={t(mode === 'surah' ? 'quran.stop' : 'quran.playSurah')}
           style={({ pressed }) => [
             styles.playSurah,
             { backgroundColor: theme.accent, opacity: pressed ? 0.85 : 1 },
           ]}>
-          <Ionicons name={continuous ? 'stop' : 'play'} size={16} color={theme.textOnAccent} />
+          <Ionicons
+            name={mode === 'surah' ? 'stop' : 'play'}
+            size={16}
+            color={theme.textOnAccent}
+          />
           <ThemedText type="smallBold" themeColor="textOnAccent">
-            {t(continuous ? 'quran.stop' : 'quran.playSurah')}
+            {t(mode === 'surah' ? 'quran.stop' : 'quran.playSurah')}
           </ThemedText>
         </Pressable>
 
@@ -274,9 +333,55 @@ export default function SurahScreen() {
         </Pressable>
       </View>
 
-      <View style={styles.list}>
-        {surah.ayahs.map((ayah) => {
+      {/*
+        Whose voice, on the screen where the voice is.
+
+        The setting is global — a reader who has found someone they can follow
+        wants them for the whole surah and for the one ayah they are drilling.
+        But it is offered here rather than only in Settings, because a reader
+        deciding they cannot follow this reciter is having that thought right
+        now, with the audio playing, and will not go looking through a settings
+        screen for the fix.
+      */}
+      <Pressable
+        onPress={() => router.push('/reciter')}
+        accessibilityRole="button"
+        accessibilityLabel={`${t('reciter.label')}: ${reciter.name}. ${t('reciter.change')}`}
+        style={({ pressed }) => [
+          styles.reciter,
+          {
+            backgroundColor: theme.backgroundElement,
+            borderColor: theme.border,
+            opacity: pressed ? 0.7 : 1,
+          },
+        ]}>
+        <Ionicons name="mic-outline" size={18} color={theme.textSecondary} />
+        <View style={styles.reciterText}>
+          <ThemedText type="caption" themeColor="textSecondary">
+            {t('reciter.label')}
+          </ThemedText>
+          <ThemedText type="smallBold">{reciter.name}</ThemedText>
+        </View>
+        <Ionicons name="chevron-forward" size={18} color={theme.textSecondary} />
+      </Pressable>
+
+      {stalled && (
+        <View style={[styles.stalled, { borderLeftColor: theme.border }]}>
+          <ThemedText type="small" themeColor="textSecondary">
+            {t('quran.audioUnavailable')}
+          </ThemedText>
+        </View>
+      )}
+
+      <View
+        style={styles.list}
+        onLayout={(event) => {
+          listTop.current = event.nativeEvent.layout.y;
+        }}>
+        {surah.ayahs.map((ayah, position) => {
           const isHidden = hidden.includes(ayah.number);
+          const isCurrent = currentAyah === ayah.number;
+          const sounding = isCurrent && status.playing;
 
           return (
             /*
@@ -290,34 +395,54 @@ export default function SurahScreen() {
             */
             <View
               key={ayah.number}
+              onLayout={(event) => {
+                rowTops.current[position] = event.nativeEvent.layout.y;
+              }}
               style={[
                 styles.ayah,
                 {
                   backgroundColor: theme.backgroundElement,
                   // Following along is the same gesture as listening, which is
-                  // the reason the whole-surah button chains ayah files rather
-                  // than playing one file for the surah.
-                  borderColor: playing === ayah.number ? theme.accent : theme.border,
+                  // why the surah plays as one playlist that reports where it
+                  // is rather than as one file that cannot.
+                  borderColor: isCurrent ? theme.accent : theme.border,
                 },
               ]}>
               <View style={styles.ayahHead}>
-                <ThemedText type="caption" themeColor="accent" style={styles.ayahNumber}>
+                <ThemedText
+                  type="caption"
+                  themeColor={isCurrent ? 'accent' : 'textSecondary'}
+                  style={styles.ayahNumber}>
                   {ayah.number}
                 </ThemedText>
-                <AyahAudio
-                  surah={surah.number}
-                  ayah={ayah.number}
-                  active={playing === ayah.number}
-                  onActivate={(n) => {
-                    // Touching one ayah leaves the run-through.
-                    setContinuous(false);
-                    setPlaying(n);
-                  }}
-                  onFinished={advance}
-                  // A surah playing through should not loop each ayah on the
-                  // way; repeat applies to the run as a whole.
-                  loop={loop && !continuous}
-                />
+                <Pressable
+                  onPress={() => playFrom(position)}
+                  accessibilityRole="button"
+                  accessibilityLabel={
+                    sounding
+                      ? t('practice.pause')
+                      : t('quran.playFrom').replace('{n}', String(ayah.number))
+                  }
+                  hitSlop={8}
+                  style={({ pressed }) => [
+                    styles.play,
+                    {
+                      backgroundColor: sounding ? theme.accent : theme.accentMuted,
+                      opacity: pressed ? 0.5 : 1,
+                    },
+                  ]}>
+                  {isCurrent && stalled ? (
+                    <Ionicons name="cloud-offline-outline" size={16} color={theme.accent} />
+                  ) : isCurrent && status.isBuffering && !status.playing ? (
+                    <Ionicons name="ellipsis-horizontal" size={16} color={theme.accent} />
+                  ) : (
+                    <Ionicons
+                      name={sounding ? 'pause' : 'play'}
+                      size={16}
+                      color={sounding ? theme.textOnAccent : theme.accent}
+                    />
+                  )}
+                </Pressable>
               </View>
 
               <Pressable
@@ -382,9 +507,13 @@ export default function SurahScreen() {
       <ThemedText type="caption" themeColor="textSecondary">
         {JUZ30_SOURCE.arabic} · {JUZ30_SOURCE.translation}
       </ThemedText>
-      {/* A licence obligation: the credit goes where the audio plays. */}
+      {/*
+        A licence obligation: the credit goes where the audio plays, and it
+        follows whoever is actually playing rather than naming one reciter for
+        all eight.
+      */}
       <ThemedText type="caption" themeColor="textSecondary">
-        {RECITATION_CREDIT}
+        {reciterCredit(reciter)}
       </ThemedText>
     </ScrollView>
   );
@@ -455,6 +584,25 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.three,
     borderRadius: Radius.small,
     borderWidth: StyleSheet.hairlineWidth,
+  },
+  reciter: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.three,
+    minHeight: 56,
+    paddingHorizontal: Spacing.three,
+    borderRadius: Radius.medium,
+    borderWidth: StyleSheet.hairlineWidth,
+  },
+  reciterText: {
+    flex: 1,
+    gap: 1,
+  },
+  /** The same left rule the app uses when it is talking about itself. */
+  stalled: {
+    borderLeftWidth: 3,
+    paddingLeft: Spacing.three,
+    paddingVertical: Spacing.one,
   },
   ayahNumber: {
     fontVariant: ['tabular-nums'],

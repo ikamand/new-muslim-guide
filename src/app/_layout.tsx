@@ -111,6 +111,13 @@ function RootStack() {
       <Stack.Screen name="practice" options={{ title: 'Practice', headerBackTitle: 'Learn' }} />
       <Stack.Screen name="pray" options={{ title: '', headerBackTitle: 'Learn' }} />
       <Stack.Screen name="surah/[number]" options={{ title: '', headerBackTitle: 'Qur’an' }} />
+      {/*
+        A modal, not a push. Choosing a voice is a detour from the surah you
+        are in the middle of, and it comes back to exactly that surah on the
+        ayah it was already playing — a card sliding over says that, and a
+        fourth screen pushed onto the stack says the opposite.
+      */}
+      <Stack.Screen name="reciter" options={{ presentation: 'modal', title: '' }} />
       <Stack.Screen name="qibla" options={{ title: 'Qibla', headerBackTitle: 'Back' }} />
     </Stack>
   );

@@ -11,6 +11,8 @@ import type {
   Step,
 } from '@/content';
 
+import type { Reciter } from '@/content/quran/recitation';
+
 import { CONTENT_DICTS } from './content';
 import { SOURCE_LOCALE, type ContentDict, type Locale } from './locales';
 
@@ -266,4 +268,18 @@ export function localiseCatalogEntry(entry: CatalogEntry, locale: Locale): Catal
     title: tr(dict, entry.title),
     shortDescription: tr(dict, entry.shortDescription),
   };
+}
+
+
+/**
+ * A reciter in the reader's language.
+ *
+ * Only `blurb` moves. `name` is a person, and a person is called the same thing
+ * in French — transliterating it a second way would make the same reciter look
+ * like two. `folder` is a path on a server and translating it would break the
+ * audio, which is the kind of thing a stringly-keyed table makes possible.
+ */
+export function localiseReciter(reciter: Reciter, locale: Locale): Reciter {
+  if (locale === SOURCE_LOCALE) return reciter;
+  return { ...reciter, blurb: tr(CONTENT_DICTS[locale], reciter.blurb) };
 }

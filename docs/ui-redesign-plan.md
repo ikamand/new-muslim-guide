@@ -446,6 +446,72 @@ things:
 - **Hide the text.** Show the Arabic, tap to conceal, recite from memory, tap to
   check. The drill that actually builds hifz; no amount of reading replaces it.
 
+### 5.2b Built 21 Aug: the surah plays as one playlist, and you pick the voice
+
+**"Play the surah" had never once produced sound.** The button set state and
+nothing acted on it — the only `play()` in the file was inside a row's own press
+handler, and a row receiving the flag knew only how to *pause*. It changed its
+icon to "Stop", highlighted ayah 1, and played silence. The ayah-chaining logic
+underneath it was dead code, because nothing ever started and so nothing ever
+finished. Reported as "the audio does not play", which was exactly right.
+
+Two things were wrong underneath, and the second is why this was rewritten
+rather than patched:
+
+- **One native player per ayah.** Opening Al-Mursalat built fifty of them, each
+  with `downloadFirst: true`, before a single tap.
+- **A chain cannot be gapless.** Each link had to load after the one before it
+  ended, so a surah played through would have broken between every ayah even
+  once the flag bug was fixed. That is the real content of "it should play the
+  whole surah at once, not one by one".
+
+**`useAudioPlaylist` (expo-audio 57) replaces both.** Documented as gapless,
+one native object for the surah, and `currentIndex` says which ayah is sounding
+— so 5.2's follow-along survives, which a single per-surah MP3 could not have
+given. `loop` is set as a property, never passed as an option: the hook rebuilds
+the playlist when the option changes, so toggling repeat mid-surah would have
+killed the audio.
+
+Added with it: the page **scrolls to keep the sounding ayah in view**. Without
+it the highlight is honest and useless — An-Naba is forty ayahs and by the third
+the lit line is below the fold. What it removes is browsing while listening;
+scroll away and the next track pulls you back. Right trade for a screen whose
+job is following along.
+
+**A "no signal" message that watches the clock, not the play flag.** A
+playlist's status carries no `error` field. The first attempt checked
+`status.playing` and never fired once — with the host unreachable the status
+still reported `playing: true`, because the flag means a play was *requested*.
+`currentTime` cannot lie that way. Caught by cutting the network in a browser
+and watching the message fail to appear, not by reading the code.
+
+#### Eight reciters, and what that costs
+
+Iyad's call, 21 Aug, over a recommended four. `RECITERS` in
+`src/content/quran/recitation.ts`: Al-Husary teaching (default) and murattal,
+Abdul Basit, Alafasy, Al-Minshawi, As-Sudais, Ash-Shatri, Al-Ghamdi. Every one
+of **4,512 files — 8 reciters × 564 ayahs — was requested before the list
+shipped**; zero missing. A 404 mid-surah is a silent gap nobody would report.
+
+Each carries a sentence saying what the recording is *for*, not who it is by. A
+list of eight Arabic names is not a choice for someone three weeks into Islam,
+and every app that offers reciters offers them as a directory because every app
+that offers reciters was built for someone who already has a favourite.
+
+⚠️ **The licence question got eight times bigger, and it was already wrong.**
+everyayah.com publishes no terms of use anywhere — checked its front page and
+its recitations index. The `CC BY-NC` that `audio-sources.ts` carried against
+Al-Husary was **this repo's assertion, not the host's statement**, and it was
+being printed on screen as "used under CC BY-NC". `licence` is now optional and
+absent for everything sourced there, including the bundled Al-Fatiha clips;
+`creditLine` drops the clause rather than print a claim nobody made. The belief
+survives in `obligation`, which is read by us and shown to nobody.
+
+Abdul Basit and Alafasy are commercially published recordings and are the two
+most likely to draw an objection. **This has to be settled before a public
+release.** Dropping a voice is one line in `RECITERS` and no user data moves
+with it.
+
 ### 5.3 Transliteration: no line under the ayah
 
 **Settled.** A Latin line is something people read *instead of* the Arabic —

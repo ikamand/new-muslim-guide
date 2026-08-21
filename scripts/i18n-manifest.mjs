@@ -27,6 +27,7 @@ const { IMAN_PILLARS } = await load('src/content/iman.ts');
 const { REFERENCES } = await load('src/content/references.ts');
 const { DUAS } = await load('src/content/duas.ts');
 const { PHRASES } = await load('src/content/phrases.ts');
+const { RECITERS } = await load('src/content/quran/recitation.ts');
 const { CONTENT_DICTS } = await load('src/i18n/content/index.ts');
 const { LOCALES, LOCALE_NAMES, SOURCE_LOCALE } = await load('src/i18n/locales.ts');
 
@@ -94,6 +95,12 @@ for (const phrase of PHRASES) {
   add(where, phrase.when);
   add(where, phrase.reply);
   addNotes(where, phrase.meta?.notes);
+}
+
+// Only the blurb. A reciter's name is a person's name in every language, and
+// the folder is a path on a server that translating would break.
+for (const reciter of RECITERS) {
+  add(`Reciter: ${reciter.name}`, reciter.blurb);
 }
 
 for (const dua of DUAS) {

@@ -8,6 +8,7 @@ import {
 } from '@/lib/onboarding';
 import { DEFAULT_REMINDERS, LEAD_CHOICES, type ReminderSettings } from '@/lib/reminders';
 import { PRAYER_IDS } from '@/lib/prayer-times';
+import { DEFAULT_RECITER, isReciterId, type ReciterId } from '@/content/quran/recitation';
 import { createContext, use, useCallback, useEffect, useMemo, useState, type ReactNode } from 'react';
 
 /**
@@ -65,6 +66,18 @@ export type Settings = {
   completedLessons: readonly string[];
   /** Which prayers to be reminded of, and how long before. All off by default. */
   reminders: ReminderSettings;
+  /**
+   * Whose recitation plays in the Qur'an tab.
+   *
+   * One setting rather than one per screen, because a reader who has found a
+   * voice they can follow wants it for the whole surah and for the single ayah
+   * they are drilling — those are the same preference, not two.
+   *
+   * It defaults to the teaching recording and is changed from the surah screen
+   * itself, where the audio is, rather than only from Settings. A preference
+   * nobody can find is a preference nobody has.
+   */
+  reciter: ReciterId;
 };
 
 const DEFAULTS: Settings = {
@@ -79,6 +92,7 @@ const DEFAULTS: Settings = {
   initialInterest: null,
   completedLessons: [],
   reminders: DEFAULT_REMINDERS,
+  reciter: DEFAULT_RECITER,
 };
 
 /** Unchanged from when this held only display settings, so nobody's choices reset. */
@@ -130,6 +144,9 @@ function parseStored(raw: string | null): Settings {
           )
         : [],
       reminders: parseReminders(stored.reminders),
+      // A voice dropped from a later build reads as the default rather than
+      // throwing, and rather than leaving a folder name that no longer resolves.
+      reciter: isReciterId(stored.reciter) ? stored.reciter : DEFAULTS.reciter,
     };
   } catch {
     return DEFAULTS;

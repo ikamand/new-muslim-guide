@@ -15,7 +15,16 @@ export type AudioSource = {
   /** Which recitation of theirs — teaching, murattal, and so on. */
   detail?: string;
   origin: string;
-  licence: string;
+  /**
+   * The terms the rights-holder actually published, where they published any.
+   *
+   * Optional, and absent is the honest value rather than a gap to fill in.
+   * everyayah.com states no terms anywhere — not on its front page, not on its
+   * recitations index — so naming a licence for anything sourced there would be
+   * printing a claim nobody made. `creditLine` drops the clause when this is
+   * absent, which leaves the attribution standing and asserts nothing.
+   */
+  licence?: string;
   /** What the licence obliges us to keep doing. Shown to nobody; read by us. */
   obligation?: string;
 };
@@ -25,9 +34,58 @@ export const SOURCES = {
     reciter: 'Mahmoud Khalil Al-Husary',
     detail: 'muʿallim (teaching) recitation',
     origin: 'everyayah.com',
-    licence: 'CC BY-NC',
+    obligation:
+      'Believed CC BY-NC, but everyayah.com publishes no terms and that belief could not be sourced. Credit the reciter and everyayah.com wherever the audio plays, and never sell the app or carry advertising in it.',
+  },
+  /*
+    The eight streamed reciters behind the Qur'an tab's picker.
+
+    ⚠️ None carries a `licence`, because everyayah.com publishes no terms
+    anywhere that could be found — see the header of
+    `src/content/quran/recitation.ts`, which carries the full note. Recorded
+    per reciter rather than once, because if one of these has to be dropped
+    over rights it will be one and not all eight.
+  */
+  husaryMurattal: {
+    reciter: 'Mahmoud Khalil Al-Husary',
+    detail: 'murattal recitation',
+    origin: 'everyayah.com',
     obligation:
       'Credit the reciter and everyayah.com wherever the audio plays, and never sell the app or carry advertising in it.',
+  },
+  abdulBasit: {
+    reciter: 'Abdul Basit Abdus Samad',
+    detail: 'murattal recitation',
+    origin: 'everyayah.com',
+    obligation:
+      'Credit the reciter and everyayah.com wherever the audio plays. Commercially published; clear the rights before a public release.',
+  },
+  alafasy: {
+    reciter: 'Mishary Rashid Alafasy',
+    origin: 'everyayah.com',
+    obligation:
+      'Credit the reciter and everyayah.com wherever the audio plays. Commercially published; clear the rights before a public release.',
+  },
+  minshawy: {
+    reciter: 'Mohamed Siddiq El-Minshawi',
+    detail: 'murattal recitation',
+    origin: 'everyayah.com',
+    obligation: 'Credit the reciter and everyayah.com wherever the audio plays.',
+  },
+  sudais: {
+    reciter: 'Abdurrahman As-Sudais',
+    origin: 'everyayah.com',
+    obligation: 'Credit the reciter and everyayah.com wherever the audio plays.',
+  },
+  shatri: {
+    reciter: 'Abu Bakr Ash-Shatri',
+    origin: 'everyayah.com',
+    obligation: 'Credit the reciter and everyayah.com wherever the audio plays.',
+  },
+  ghamdi: {
+    reciter: 'Saad Al-Ghamdi',
+    origin: 'everyayah.com',
+    obligation: 'Credit the reciter and everyayah.com wherever the audio plays.',
   },
   commissioned: {
     reciter: 'To be commissioned',
@@ -57,5 +115,6 @@ export function getAudioSource(audioId: string): AudioSource | undefined {
 /** One credit line per distinct source, for rendering under a list of clips. */
 export function creditLine(source: AudioSource): string {
   const who = source.detail ? `${source.reciter} (${source.detail})` : source.reciter;
-  return `Recitation by ${who}, from ${source.origin}, used under ${source.licence}.`;
+  const where = `Recitation by ${who}, from ${source.origin}`;
+  return source.licence ? `${where}, used under ${source.licence}.` : `${where}.`;
 }

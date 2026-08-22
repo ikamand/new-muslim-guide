@@ -1,3 +1,4 @@
+import { type Href } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
 
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -5,6 +6,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
 import { getAudio, practiceKeyFor, type Recitation } from '@/content';
+import { surahForRecitation } from '@/content/quran/surahs';
 import { ArabicFont, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { useSettings } from '@/hooks/use-settings';
@@ -32,6 +34,22 @@ export function RecitationCard({
   const clipCount = recitation.verses
     ? recitation.verses.filter((verse) => getAudio(verse.audioId)).length
     : 0;
+
+  /*
+    Al-Fatiha goes to the surah, everything else to the practice screen.
+
+    Someone on the recite step of a prayer, on a mat, wants the best screen the
+    app has for those seven ayahs — and that is no longer the practice screen.
+    The surah plays straight through without gaps, plays any single ayah,
+    covers a line so you can test yourself on it, and remembers when you know
+    it. The practice screen still owns every recitation that is not a surah:
+    the takbir, the tashahhud, the salawat.
+  */
+  const practiceSurah = practiceKey ? surahForRecitation(practiceKey) : undefined;
+  const practiceHref: Href =
+    practiceSurah !== undefined
+      ? { pathname: '/surah/[number]', params: { number: String(practiceSurah) } }
+      : { pathname: '/practice', params: { focus: practiceKey ?? '' } };
 
   return (
     <View
@@ -67,7 +85,7 @@ export function RecitationCard({
       */}
       {practiceKey && (
         <PressableLink
-          href={{ pathname: '/practice', params: { focus: practiceKey } }}
+          href={practiceHref}
           accessibilityLabel={`${t('practice.thisOne')}${clipCount ? `. ${clipCount} ${t('count.clips')}` : ''}`}
           style={[styles.practice, { backgroundColor: theme.accentMuted }]}
           pressedStyle={{ opacity: 0.7 }}>

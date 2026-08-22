@@ -552,6 +552,20 @@ whole manifest down. Content files that build scripts read cannot touch assets.
 
 ### 5.3 Transliteration: no line under the ayah
 
+> **Amended 21 Aug — one exception, Al-Fatiha.** The rule below still holds for
+> all 564 ayahs of juz 30 and the reasoning under it is unchanged. What it did
+> not consider is that Al-Fatiha is not optional: it is recited in every rak'ah
+> of every prayer, and somebody three weeks into Islam has to say it *tonight*,
+> five times, before they can read a word of Arabic. Withholding the line there
+> does not protect their reading — it stops them praying. So `ayahTransliteration`
+> in `content/quran/surahs.ts` returns a line for surah 1 and nothing for
+> anything else, and the text is the one already in `recitations.ts`, copied
+> rather than written again.
+>
+> It resolves structurally, not by a flag: the generated ayahs have no
+> transliteration to return because it was never fetched. The rule for juz 30
+> cannot be broken by forgetting.
+
 **Settled.** A Latin line is something people read *instead of* the Arabic —
 they memorise English letters and still cannot open a mushaf. The tradition
 teaches by ear, and the app has Husary's teaching recitation for all 564 ayahs.
@@ -566,6 +580,40 @@ Allahu ahad` — both lose the ḥ/h distinction, so a beginner says the wrong
 letter in the surah they will recite most. The alsunna.org Juz Amma page uses a
 homebrew scheme (`^` for ʿayn) and carries **no licence or permission to reuse**
 at all.
+
+### 5.2d Built 21 Aug: the prayer's recite step opens the surah
+
+The four "Recite Al-Fatiha" steps — 5, 13, 22 and 29 across the prayers — sent
+people to `/practice`. That was right when the practice screen was the best
+Al-Fatiha screen the app had. It isn't any more: the surah plays straight
+through gaplessly, plays any single ayah, covers a line to test it, offers eight
+reciters and remembers when you know it.
+
+So `RecitationCard` routes through `surahForRecitation` — a map, not a check for
+the string `'fatiha'`, because the moment a second surah is recorded for the
+prayer it should be one line and not an `if` inside a component. Everything with
+no surah still goes to `/practice`.
+
+Two things had to land first or the reroute would have been a **downgrade** for
+exactly the person it is for — someone on a mat, mid-step, who cannot read
+Arabic:
+
+- **Transliteration**, per 5.3's amendment above.
+- **Slower**, at 0.75×, the same rate `practice.tsx` uses so one surah does not
+  sound like two apps. Set as `playlist.playbackRate`, never as an option — the
+  hook rebuilds the playlist when an option changes and the audio would stop
+  dead mid-ayah.
+
+Three controls wrapped badly on a 390px phone, stranding "Slower" alone on the
+second row. "Play the surah" now takes a full row of its own with repeat and
+slower paired beneath it, which says the right thing about which is primary.
+
+**Is `/practice` now redundant?** Not by design — it renders every recitation
+with a *recorded* clip, and it is the only home the takbir, tashahhud and
+salawat will have. But it is redundant **today**, because Al-Fatiha is the only
+thing recorded and the surah screen now does it better. That is a fact about
+`docs/audio-manifest.csv` having 20 unrecorded clips, not about the screen.
+Open question at the end of this file.
 
 ### 5.4 Audio size decides what ships bundled
 

@@ -5,7 +5,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
-import { getSurah, JUZ30_SOURCE } from '@/content/quran/surahs';
+import { ayahTransliteration, getSurah, JUZ30_SOURCE } from '@/content/quran/surahs';
 import { ayahSource } from '@/content/quran/ayah-audio';
 import { getReciter, reciterCredit } from '@/content/quran/recitation';
 import { ArabicFont, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
@@ -73,11 +73,15 @@ import { useTheme } from '@/hooks/use-theme';
  * hook rebuilds the playlist whenever the option changes, so a reader toggling
  * repeat mid-surah would have had the audio stop dead.
  */
+/** Slow enough to copy, fast enough to still sound like recitation. The same
+ *  rate `practice.tsx` uses, so one surah does not sound like two apps. */
+const SLOW_RATE = 0.75;
+
 export default function SurahScreen() {
   const theme = useTheme();
   const { t } = useLocale();
   const router = useRouter();
-  const { translation, reciter: reciterId } = useSettings();
+  const { transliteration, translation, reciter: reciterId } = useSettings();
   const { number } = useLocalSearchParams<{ number: string }>();
   const { isMemorised, toggle } = useMemorised();
 
@@ -95,6 +99,15 @@ export default function SurahScreen() {
    */
   const [mode, setMode] = useState<'ayah' | 'surah' | null>(null);
   const [stalled, setStalled] = useState(false);
+  /**
+   * Three-quarter speed, the same rate the practice screen uses.
+   *
+   * The teaching recitation is already slow; this is for the ayah somebody is
+   * stuck on, where the join between two words is moving faster than they can
+   * copy. It applies to the whole playlist rather than one ayah because it is a
+   * mode you are in, like repeat.
+   */
+  const [slow, setSlow] = useState(false);
 
   const ayahs = surah?.ayahs ?? [];
 
@@ -131,6 +144,14 @@ export default function SurahScreen() {
     // eslint-disable-next-line react-hooks/immutability
     playlist.loop = !loop ? 'none' : mode === 'ayah' ? 'single' : 'all';
   }, [playlist, loop, mode]);
+
+  useEffect(() => {
+    // Settable property, same as `loop`, and set the same way and for the same
+    // reason — passing it as an option would rebuild the playlist and stop the
+    // audio the moment somebody reached for it mid-ayah.
+    // eslint-disable-next-line react-hooks/immutability
+    playlist.playbackRate = slow ? SLOW_RATE : 1;
+  }, [playlist, slow]);
 
   /*
     Changing reciter mid-listen picks up where the last voice left off.
@@ -333,6 +354,27 @@ export default function SurahScreen() {
             {t('practice.repeat')}
           </ThemedText>
         </Pressable>
+
+        <Pressable
+          onPress={() => setSlow((was) => !was)}
+          accessibilityRole="switch"
+          accessibilityState={{ checked: slow }}
+          style={[
+            styles.loop,
+            {
+              backgroundColor: slow ? theme.accentMuted : 'transparent',
+              borderColor: slow ? theme.accent : theme.border,
+            },
+          ]}>
+          <Ionicons
+            name="play-back-outline"
+            size={16}
+            color={slow ? theme.accent : theme.textSecondary}
+          />
+          <ThemedText type="smallBold" themeColor={slow ? 'accent' : 'textSecondary'}>
+            {t('practice.slower')}
+          </ThemedText>
+        </Pressable>
       </View>
 
       {/*
@@ -382,6 +424,7 @@ export default function SurahScreen() {
         }}>
         {surah.ayahs.map((ayah, position) => {
           const isHidden = hidden.includes(ayah.number);
+          const transliterated = ayahTransliteration(surah.number, ayah.number);
           const isCurrent = currentAyah === ayah.number;
           const sounding = isCurrent && status.playing;
 
@@ -471,6 +514,18 @@ export default function SurahScreen() {
                   </View>
                 ) : (
                   <ThemedText style={styles.arabic}>{ayah.arabic}</ThemedText>
+                )}
+
+                {/*
+                  Al-Fatiha only, and it returns undefined everywhere else —
+                  see `ayahTransliteration`. It sits under the Arabic and above
+                  the meaning, in the reading order somebody actually uses when
+                  they are trying to say the line rather than understand it.
+                */}
+                {transliteration && !isHidden && transliterated && (
+                  <ThemedText type="small" themeColor="textSecondary" style={styles.transliteration}>
+                    {transliterated}
+                  </ThemedText>
                 )}
 
                 {translation && !isHidden && (
@@ -568,13 +623,25 @@ const styles = StyleSheet.create({
   },
   controls: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
     gap: Spacing.two,
   },
+  /*
+    Its own row, with repeat and slower sharing the one below.
+
+    Three controls in a line wrap on a narrow phone, and what wrapped was
+    "Slower" — stranded alone under the other two, which read as an
+    afterthought rather than a pair of modifiers. Giving the primary action the
+    full width says the right thing about it and makes the wrap deliberate
+    instead of accidental.
+  */
   playSurah: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
+    flexBasis: '100%',
     gap: Spacing.two,
-    minHeight: 40,
+    minHeight: 44,
     paddingHorizontal: Spacing.three,
     borderRadius: Radius.small,
   },
@@ -611,6 +678,10 @@ const styles = StyleSheet.create({
   },
   ayahText: {
     gap: Spacing.two,
+  },
+  /** Latin, so it never takes the Arabic face. */
+  transliteration: {
+    fontStyle: 'italic',
   },
   arabic: {
     fontFamily: ArabicFont,

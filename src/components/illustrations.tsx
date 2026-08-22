@@ -107,7 +107,22 @@ function khatim(cx: number, cy: number, outer: number, inner: number): string {
  * said the shahada yet should not have to pick that card out of six identical
  * rows.
  */
-export function GirihBand({ color, height = 76 }: { color: string; height?: number }) {
+export function GirihBand({
+  color,
+  height = 76,
+  /**
+   * Fill the stars instead of outlining them.
+   *
+   * The same band, finished rather than a second pattern — a done state that
+   * changed the geometry would read as a different thing having happened. Low
+   * opacity, because this sits behind a title and has to stay behind it.
+   */
+  filled = false,
+}: {
+  color: string;
+  height?: number;
+  filled?: boolean;
+}) {
   const tile = 44;
   /**
    * Drawn at a fixed size and cropped by the parent rather than measured and
@@ -139,9 +154,11 @@ export function GirihBand({ color, height = 76 }: { color: string; height?: numb
             <Path
               d={khatim(cx, cy, 18, 9)}
               stroke={color}
-              strokeOpacity={0.42}
+              strokeOpacity={filled ? 0.55 : 0.42}
               strokeWidth={1}
               strokeLinejoin="round"
+              fill={filled ? color : 'none'}
+              fillOpacity={filled ? 0.22 : 0}
             />
             <Line x1={cx - 22} y1={cy} x2={cx - 18} y2={cy} stroke={color} strokeOpacity={0.24} strokeWidth={1} />
             <Line x1={cx + 18} y1={cy} x2={cx + 22} y2={cy} stroke={color} strokeOpacity={0.24} strokeWidth={1} />

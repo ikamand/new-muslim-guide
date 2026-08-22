@@ -247,6 +247,9 @@ export const EN = {
   'learn.section.understanding': 'Understanding',
   'learn.shahada.title': 'Becoming Muslim',
   'learn.shahada.subtitle': 'What to say, and what it means',
+  'learn.shahada.done.title': 'Your shahada',
+  'learn.shahada.done.subtitle': 'The words you said, and what they mean',
+  'learn.shahada.readAgain': 'Read it again',
   'phrases.title': 'What people say to you',
   'phrases.intro':
     'The phrases you will hear in your first week, what they mean, and what to say back. You are not expected to know these — everyone learns them by hearing them.',

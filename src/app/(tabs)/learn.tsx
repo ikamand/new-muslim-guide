@@ -21,12 +21,20 @@ import {
 import { BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { useJourney } from '@/hooks/use-journey';
+import { useSettings } from '@/hooks/use-settings';
+import { stepKey } from '@/content/journey';
 import { useTheme } from '@/hooks/use-theme';
 import type { UIKey } from '@/i18n/ui';
 import { localiseCatalogEntry } from '@/i18n/localise';
 
 const PRACTICE_CLIP_COUNT = getPracticeClipCount();
 const SHAHADA_STEP_COUNT = SHAHADA_GUIDE.steps.length;
+/**
+ * Built the same way the journey builds it, not typed as `'guide:shahada'`.
+ * A literal here would keep pointing at nothing the day the guide is renamed,
+ * and the card would silently go back to calling itself unfinished forever.
+ */
+const SHAHADA_KEY = stepKey({ kind: 'guide', id: 'shahada' });
 
 /**
  * A mark per topic, so twenty near-identical rows stop being twenty
@@ -134,40 +142,87 @@ function LearnCard({
 }
 
 /**
- * Becoming Muslim, given its own weight.
+ * Becoming Muslim, given its own weight — and then stepping out of the way.
  *
  * Some people open this app before they are Muslim at all, and the one card
  * that matters to them was previously indistinguishable from the six below it.
+ *
+ * ## Why it changes once it is done
+ *
+ * It used to say "3 steps →" forever. For most of this app's actual users that
+ * was wrong on the first screen they ever saw: someone who told onboarding they
+ * are a new Muslim said the shahada before they installed anything, and the
+ * biggest card in Learn pointed at it as an unfinished task. The app already
+ * knew, twice — `userStage`, and the guide's own place in the journey — and
+ * this card read neither.
+ *
+ * ## Why it does not disappear
+ *
+ * People come back to the shahada. To re-read the words, to get the Arabic
+ * right, to show somebody. Removing the card would take that away to fix a
+ * label. So it keeps its size and its place and changes what it offers: a task
+ * becomes a keepsake, which is what it already was.
+ *
+ * ## What counts as done
+ *
+ * Either signal. Ticking the lesson, or having said in onboarding that you are
+ * already Muslim — somebody who told the app they are Muslim should not have to
+ * tick a box to prove it. `'exploring'` deliberately does not count, and
+ * neither does `null`: an unanswered question is not a yes.
  */
 function ShahadaCard() {
   const theme = useTheme();
   const { t } = useLocale();
+  const { completedLessons, userStage } = useSettings();
+
+  const done =
+    userStage === 'new-muslim' ||
+    userStage === 'returning' ||
+    completedLessons.includes(SHAHADA_KEY);
 
   return (
     <PressableLink
       href={{ pathname: '/guide/[id]', params: { id: 'shahada' } }}
+      accessibilityLabel={`${t(done ? 'learn.shahada.done.title' : 'learn.shahada.title')}. ${t(
+        done ? 'learn.shahada.done.subtitle' : 'learn.shahada.subtitle',
+      )}`}
       style={[
         styles.featured,
-        { backgroundColor: theme.backgroundElement, borderColor: theme.border },
+        { backgroundColor: theme.backgroundElement, borderColor: done ? theme.accent : theme.border },
       ]}
       pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
       <View style={[styles.band, { backgroundColor: theme.accentMuted }]}>
-        <GirihBand color={theme.accent} height={76} />
+        <GirihBand color={theme.accent} height={76} filled={done} />
       </View>
       <View style={styles.featuredBody}>
         <View style={styles.cardText}>
           <ThemedText type="cardTitle">
-            {t('learn.shahada.title')}
+            {t(done ? 'learn.shahada.done.title' : 'learn.shahada.title')}
           </ThemedText>
           <ThemedText type="small" themeColor="textSecondary">
-            {t('learn.shahada.subtitle')}
+            {t(done ? 'learn.shahada.done.subtitle' : 'learn.shahada.subtitle')}
           </ThemedText>
         </View>
-        <View style={[styles.featuredAction, { backgroundColor: theme.accent }]}>
-          <ThemedText type="smallBold" themeColor="textOnAccent">
-            {SHAHADA_STEP_COUNT} {t('count.steps')}
+        {/*
+          Outlined once it is done, not filled. A solid accent button is the
+          app asking for a tap, and there is nothing left to ask for here — the
+          card is a way back to the words, not a call to action.
+        */}
+        <View
+          style={[
+            styles.featuredAction,
+            done
+              ? { backgroundColor: 'transparent', borderWidth: StyleSheet.hairlineWidth, borderColor: theme.accent }
+              : { backgroundColor: theme.accent },
+          ]}>
+          <ThemedText type="smallBold" themeColor={done ? 'accent' : 'textOnAccent'}>
+            {done ? t('learn.shahada.readAgain') : `${SHAHADA_STEP_COUNT} ${t('count.steps')}`}
           </ThemedText>
-          <Ionicons name="arrow-forward" size={14} color={theme.textOnAccent} />
+          <Ionicons
+            name="arrow-forward"
+            size={14}
+            color={done ? theme.accent : theme.textOnAccent}
+          />
         </View>
       </View>
     </PressableLink>

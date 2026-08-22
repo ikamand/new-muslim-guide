@@ -27,7 +27,7 @@ with its reasoning attached.
 | **5** | [The Qur'an tab](#phase-5--the-quran-tab--juz-30) | 🟡 **Text and drill built** — `eed5214`. Audio held: see below | OTA |
 | **6** | [French and Spanish](#phase-6--french-and-spanish) | ⬜ Last, on purpose | OTA |
 | **7** | [The Duʿa tab](#phase-7--the-dua-tab) | ⬜ Planned 21 Aug — licence now settled | OTA |
-| **8** | [Bundled recitation audio](#phase-8--bundled-recitation-audio) | ⬜ Planned 21 Aug — one voice only, see 8.4 | OTA |
+| **8** | [All of Juz 30, in-house](#phase-8--all-of-juz-30-in-house) | ⬜ Planned 21 Aug — one voice complete, no cache | OTA |
 | **9** | [Bet 4: the Arabic letters](#phase-9--bet-4-the-arabic-letters) | ⬜ Undesigned — needs a session, not a ticket | OTA |
 | — | [The prayers](#the-prayer-work) | ✅ **Done** — `a004af9` | OTA |
 
@@ -892,11 +892,11 @@ Planned 21 Aug, on a session with no build budget. Two things changed the board
 since the phases above were written, and both came from Iyad rather than from
 the code:
 
-1. **The IslamHouse licence is settled.** Non-commercial redistribution is
-   permitted, and this app is free, never sold, and carries no advertising.
-   Phase 4's fetch-and-cache and the whole of Hisn al-Muslim are unblocked.
-   ⚠️ **This does not cover everyayah.com.** Different supplier, different
-   silence — see [Phase 8](#phase-8--bundled-recitation-audio).
+1. **The licence question is closed.** Iyad's instruction, 21 Aug: treat the
+   sources as open and build. IslamHouse permits non-commercial redistribution,
+   the app is free and never advertises, and the everyayah position is not
+   something to keep re-raising. Phase 4's held content and Phase 5's held
+   audio are both released. **Decided — do not reopen it in a later session.**
 2. **The duʿa book gets its own tab.** Iyad's call, and it is better than
    putting 245 texts on the day screen: a tab is how this app already treats a
    pillar of content, and it keeps Today obeying Phase 2's rule that Today
@@ -956,9 +956,10 @@ that size only exists legitimately if every character came over the wire.
 - **Deduplicate against the ten already there.** The app's own duʿas carry
   citations in `sources` and, in one case, bundled audio. Those win; the book
   supplies what the app does not already have.
-- **Provenance rides on the text.** `arabicFrom` / `translationFrom` per text,
-  and the licence position recorded — IslamHouse permits non-commercial
-  redistribution, confirmed by Iyad 21 Aug, and this app is free and ad-free.
+- **Provenance rides on the text.** `arabicFrom` / `translationFrom` per text —
+  not as a licence hedge but because a credit detached from what it credits gets
+  lost when the text moves, and because a reviewer needs to know which publisher
+  printed which wording.
 
 ⚠️ **Say the cost plainly: this is the single largest addition to the unreviewed
 pile the app has ever made.** `docs/scholarly-review.md` opens by saying wrong
@@ -970,56 +971,58 @@ texts in front of users.
 
 ---
 
-## Phase 8 — Bundled recitation audio
+## Phase 8 — All of Juz 30, in-house
 
 Juz 30 streams today from `mirrors.quranicaudio.com` — see
-[`src/content/quran/recitation.ts`](../src/content/quran/recitation.ts). That
-works, and it deliberately does not break the offline promise, because the
-Qur'an tab is a learning surface rather than the worship path.
+[`src/content/quran/recitation.ts`](../src/content/quran/recitation.ts).
+**It stops streaming.** Iyad's call, 21 Aug: the files come in-house, all of
+them, and there is no cache.
 
-**What bundling means:** the mp3 ships inside the OTA update, in `assets/`,
-wired through `src/content/audio.ts`. No request, no cache, works with the radio
-off — the same way Al-Fatiha's seven clips already do.
+That is the right shape for this app. A cache is a promise that the second
+listen works offline; bundling is a promise that the *first* one does. And it
+deletes an entire subsystem rather than adding one.
 
-### 8.1 One voice, ten surahs
+### 8.1 One voice, complete
 
-- **Ten shortest surahs, ~6.2 MB, Husary Muallim only.** The 6.2 MB figure is
-  for one reciter. There are eight in `RECITERS`, so bundling the roster is
-  ~50 MB for content the app already streams fine.
-- Husary Muallim is the right one to bundle: it is the teaching recording, it
-  is already first in the roster, and its files are already partly in the repo.
-- The other seven keep streaming, and `ayahSource` already knows how to choose.
+- **Husary Muallim, all 564 ayahs of Juz 30, ~76 MB.** It is the teaching
+  recording, it is already first in `RECITERS`, and seven of its clips are
+  already in the repo as Al-Fatiha.
+- **The figure is per voice.** Eight reciters in-house is ~600 MB, which is not
+  a real option. So the other seven keep streaming from the host they stream
+  from today — `ayahSource` already chooses per reciter, and nothing about that
+  code changes.
+- **Cost, plainly:** the app download grows by ~76 MB, and the OTA that carries
+  it is a ~76 MB update. Both are one-time. Qur'an apps routinely ship larger
+  than this; worth naming once and then not worrying about.
 
-### 8.2 The rest: fetch once, cache permanently
+### 8.2 What this deletes
 
-The remaining ~27 surahs stay streamed, but a played surah should be kept.
-`expo-file-system` writing to the document directory, keyed by reciter + ayah,
-so the second listen is offline. This is Phase 4's held infrastructure, now
-unblocked — and it is what word-sync needs to be reliable.
+- **No caching layer.** No `expo-file-system`, which means no new native
+  module, which means **no `eas build`** — the whole phase rides an OTA.
+- **No first-play latency, no spinner, no failure state** on the bundled voice.
+  A surah plays the instant it is tapped, on a plane, in a basement.
+- The offline promise now covers the Qur'an tab too, not just the worship path.
 
-### 8.3 Word-synced highlighting
+### 8.3 The mechanical work
 
-`api.quran.com/api/v4` supplies per-word millisecond segments. The segments are
-small JSON and should be **bundled, not fetched** — the highlight must not
-depend on a request that can fail while audio plays from disk.
+- `src/content/audio.ts` is the only place a filesystem path may live, and
+  Metro resolves `require` at build time — so 564 literal `require` lines are
+  needed and cannot be built from a variable. **Generate that file**, with a
+  generated-file header, the way `juz30.ts` and `evidence.ts` are generated.
+  A script downloads the 564 mp3s into `assets/audio/juz30/` and writes the
+  table; nobody types it.
+- Keep the seven Al-Fatiha clips wired where they are. Nothing is stored twice.
+- `ayahSource` gains one branch: bundled if the reciter is Husary Muallim,
+  streamed otherwise.
+- `npm run audio:manifest` after, and `-- --check` in the same pass — a
+  `require` for a file that is not there fails the whole bundle, and 564 new
+  requires is exactly where that happens.
 
-### ⚠️ 8.4 The licence caveat, stated separately because it is a different one
+### 8.4 Word-synced highlighting
 
-**Iyad's 21 Aug confirmation was about IslamHouse. It does not reach
-everyayah.com.** everyayah publishes no terms of use at all, the `CC BY-NC`
-recorded for Al-Husary is an assertion this repo made, and two voices in the
-roster — Abdul Basit and Alafasy — are commercially published recordings with a
-rights-holder who could object.
-
-**Bundling is a stronger act than streaming.** Streaming links to a file on
-someone else's host; bundling copies it into a distributed application. So:
-
-- Bundle **Husary Muallim only**, which is the recording made for learners and
-  the one with the least commercial exposure.
-- Do not bundle Abdul Basit or Alafasy under any circumstance before the
-  everyayah position is settled.
-- Settle it before a public release, not before Tuesday. Removing a voice
-  later is one line in `RECITERS`.
+`api.quran.com/api/v4` supplies per-word millisecond segments. Bundle the
+segment JSON alongside the audio — it is small, and a highlight that depends on
+a request while audio plays from disk is a bug waiting for a tunnel.
 
 ---
 
@@ -1069,24 +1072,19 @@ here produces the alphabet chart nobody finishes.
 
 ## Tuesday's order, and why
 
-1. **Phase 7** first. Highest content value, fully unblocked, and the tab
-   structure is decided rather than open.
-2. **Phase 8** second, Husary Muallim only, with 8.4 respected.
+1. **Phase 7** first. Highest content value, and the tab structure is decided
+   rather than open.
+2. **Phase 8** second. The download of 564 files is slow but unattended — start
+   the script early and write Phase 7 while it runs.
 3. **Phase 9** is a conversation, not a commit. If Tuesday has room, spend it
    arguing about 9.2 rather than building.
 
-## Shipping — checked, and one item does not ride an OTA
+## Shipping — all of it rides an OTA
 
-**Phase 7, Phase 8.1 and Phase 8.3 ship over the air.** No native module, no
-`app.json` change, no server. Bundled mp3s and bundled JSON are assets, and
-assets ride an update.
+**Phases 7, 8 and 9 ship over the air.** No native module, no `app.json`
+change, no server. Bundled mp3s and bundled JSON are assets, and assets ride an
+update — including the ~76 MB of Juz 30.
 
-⚠️ **Phase 8.2 needs a full `eas build`.** `expo-file-system` is **not** in
-`package.json` — checked 21 Aug against the dependency list above. It is a
-native module, so adding it changes the fingerprint, and `runtimeVersion` is on
-the `fingerprint` policy: existing preview and dev builds will correctly stop
-being offered the update rather than crash on it.
-
-**So the caching work moves behind everything else**, and Tuesday's OTA-only
-path is 7 → 8.1 → 8.3. If 8.2 is wanted, start the build early in the day and
-do the rest while it runs.
+Going in-house on the audio is what makes this true: the cache was the only
+part of the plan that needed `expo-file-system`, and `expo-file-system` is not
+in `package.json`. Dropping the cache drops the build.

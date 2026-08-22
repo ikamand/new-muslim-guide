@@ -26,6 +26,9 @@ with its reasoning attached.
 | **4** | [Duʿas, and the first network call](#phase-4--duas-and-the-apps-first-network-call) | 🟡 **Day built** — `d9bd351`. Fetch-and-cache held: no licensed content to fetch yet | OTA |
 | **5** | [The Qur'an tab](#phase-5--the-quran-tab--juz-30) | 🟡 **Text and drill built** — `eed5214`. Audio held: see below | OTA |
 | **6** | [French and Spanish](#phase-6--french-and-spanish) | ⬜ Last, on purpose | OTA |
+| **7** | [The Duʿa tab](#phase-7--the-dua-tab) | ⬜ Planned 21 Aug — licence now settled | OTA |
+| **8** | [Bundled recitation audio](#phase-8--bundled-recitation-audio) | ⬜ Planned 21 Aug — one voice only, see 8.4 | OTA |
+| **9** | [Bet 4: the Arabic letters](#phase-9--bet-4-the-arabic-letters) | ⬜ Undesigned — needs a session, not a ticket | OTA |
 | — | [The prayers](#the-prayer-work) | ✅ **Done** — `a004af9` | OTA |
 
 ### What shipped in 0–3
@@ -99,6 +102,12 @@ find it again.
    no number.
 
 ### What is held, and on what
+
+> **Both holds below were released on 21 Aug**, when Iyad confirmed IslamHouse
+> permits non-commercial redistribution and that the app will never be sold or
+> carry advertising. Kept rather than deleted, because the reasoning is why the
+> phases were ordered the way they were. See
+> [Tuesday 25 Aug](#tuesday-25-aug--three-workstreams).
 
 - **Phase 4's fetch-and-cache.** Built nothing, deliberately: there is no
   licensed content to fetch until the IslamHouse email is answered, and
@@ -874,3 +883,210 @@ and the font files both ride an OTA. Nothing since has touched `app.json`
 plugins or a native module.
 
 No server, no migrations.
+
+---
+
+# Tuesday 25 Aug — three workstreams
+
+Planned 21 Aug, on a session with no build budget. Two things changed the board
+since the phases above were written, and both came from Iyad rather than from
+the code:
+
+1. **The IslamHouse licence is settled.** Non-commercial redistribution is
+   permitted, and this app is free, never sold, and carries no advertising.
+   Phase 4's fetch-and-cache and the whole of Hisn al-Muslim are unblocked.
+   ⚠️ **This does not cover everyayah.com.** Different supplier, different
+   silence — see [Phase 8](#phase-8--bundled-recitation-audio).
+2. **The duʿa book gets its own tab.** Iyad's call, and it is better than
+   putting 245 texts on the day screen: a tab is how this app already treats a
+   pillar of content, and it keeps Today obeying Phase 2's rule that Today
+   holds only what has a deadline.
+
+---
+
+## Phase 7 — The Duʿa tab
+
+**The problem the current screen has.** `src/app/duas.tsx` renders six moments
+of a day over ten duʿas. That is the right *form* — a convert does not know a
+duʿa for putting on clothes exists, so an index cannot help them — but ten texts
+is a demo of the idea, not the thing itself. Hisn al-Muslim has **133 occasions
+and 245 texts**.
+
+### 7.1 The shape: a day on top, the book underneath
+
+Two surfaces, not one, because they answer different questions:
+
+| Surface | Question | Content |
+|---|---|---|
+| **The day** (tab root) | What do I say right now? | The curated set — one or two per moment, the ones a beginner actually meets |
+| **The book** (pushed from the day) | Is there a duʿa for _____? | All 133 occasions, in the book's own order |
+
+`DayArc` in [`src/components/illustrations.tsx`](../src/components/illustrations.tsx)
+already draws the sun's path and stays as the tab root. `DAY_MOMENTS` in
+[`src/content/duas.ts`](../src/content/duas.ts) has six entries — waking,
+washing, leaving, eating, travel, night — and mapping 133 occasions onto six
+moments is the content work of this phase, not a mechanical import.
+
+**What this removes:** `src/app/duas.tsx` stops being a standalone route and
+becomes `src/app/(tabs)/duas.tsx`. Any link to `/duas` from Learn or Today
+becomes a tab jump, not a push.
+
+### 7.2 Today's duʿa card
+
+A card on Today showing one duʿa, tapping through to it in the tab.
+
+**Not random.** Pure random shows a sleeping duʿa at nine in the morning, which
+teaches the opposite of the thing the day screen exists to teach. Two rules:
+
+- **Pick from the moment the current time falls in.** The app already knows
+  the prayer times; the moment is derivable from them, and CLAUDE.md prefers
+  what the app can infer over what the user must configure.
+- **Stable for the calendar day.** Seed the choice on the date so it does not
+  reshuffle on every render or every app open. "Today's duʿa" that changes
+  when you come back to the tab is not today's anything.
+
+### 7.3 The content: generated, not typed
+
+245 texts is not something to transcribe, and CLAUDE.md is explicit that a file
+that size only exists legitimately if every character came over the wire.
+
+- A script under `scripts/` fetching `cnt.islamhouse.com/api/v1`, writing
+  `src/content/duas/hisn.ts` with a generated-file header, in the pattern of
+  `src/content/quran/juz30.ts` and `src/content/evidence.ts`.
+- **Deduplicate against the ten already there.** The app's own duʿas carry
+  citations in `sources` and, in one case, bundled audio. Those win; the book
+  supplies what the app does not already have.
+- **Provenance rides on the text.** `arabicFrom` / `translationFrom` per text,
+  and the licence position recorded — IslamHouse permits non-commercial
+  redistribution, confirmed by Iyad 21 Aug, and this app is free and ad-free.
+
+⚠️ **Say the cost plainly: this is the single largest addition to the unreviewed
+pile the app has ever made.** `docs/scholarly-review.md` opens by saying wrong
+answers here change how someone worships. 245 texts, their translations and the
+occasion each is attached to all need a qualified reviewer, and the pile is
+already the thing gating a public release. Worth shipping the *machinery* on
+Tuesday and gating the content behind review, rather than putting 245 unreviewed
+texts in front of users.
+
+---
+
+## Phase 8 — Bundled recitation audio
+
+Juz 30 streams today from `mirrors.quranicaudio.com` — see
+[`src/content/quran/recitation.ts`](../src/content/quran/recitation.ts). That
+works, and it deliberately does not break the offline promise, because the
+Qur'an tab is a learning surface rather than the worship path.
+
+**What bundling means:** the mp3 ships inside the OTA update, in `assets/`,
+wired through `src/content/audio.ts`. No request, no cache, works with the radio
+off — the same way Al-Fatiha's seven clips already do.
+
+### 8.1 One voice, ten surahs
+
+- **Ten shortest surahs, ~6.2 MB, Husary Muallim only.** The 6.2 MB figure is
+  for one reciter. There are eight in `RECITERS`, so bundling the roster is
+  ~50 MB for content the app already streams fine.
+- Husary Muallim is the right one to bundle: it is the teaching recording, it
+  is already first in the roster, and its files are already partly in the repo.
+- The other seven keep streaming, and `ayahSource` already knows how to choose.
+
+### 8.2 The rest: fetch once, cache permanently
+
+The remaining ~27 surahs stay streamed, but a played surah should be kept.
+`expo-file-system` writing to the document directory, keyed by reciter + ayah,
+so the second listen is offline. This is Phase 4's held infrastructure, now
+unblocked — and it is what word-sync needs to be reliable.
+
+### 8.3 Word-synced highlighting
+
+`api.quran.com/api/v4` supplies per-word millisecond segments. The segments are
+small JSON and should be **bundled, not fetched** — the highlight must not
+depend on a request that can fail while audio plays from disk.
+
+### ⚠️ 8.4 The licence caveat, stated separately because it is a different one
+
+**Iyad's 21 Aug confirmation was about IslamHouse. It does not reach
+everyayah.com.** everyayah publishes no terms of use at all, the `CC BY-NC`
+recorded for Al-Husary is an assertion this repo made, and two voices in the
+roster — Abdul Basit and Alafasy — are commercially published recordings with a
+rights-holder who could object.
+
+**Bundling is a stronger act than streaming.** Streaming links to a file on
+someone else's host; bundling copies it into a distributed application. So:
+
+- Bundle **Husary Muallim only**, which is the recording made for learners and
+  the one with the least commercial exposure.
+- Do not bundle Abdul Basit or Alafasy under any circumstance before the
+  everyayah position is settled.
+- Settle it before a public release, not before Tuesday. Removing a voice
+  later is one line in `RECITERS`.
+
+---
+
+## Phase 9 — Bet 4: the Arabic letters
+
+**This is a design session, not a build ticket, and it is the only item here
+that is.** The other two have a shape already; this one has a one-line
+description and an agreed reason to exist.
+
+### 9.1 What it serves
+
+Every transliteration in this app is a crutch, and crutches are supposed to come
+off. Someone who learns salah from transliteration alone has memorised English
+letters and still cannot open a mushaf — which means they can never check what
+they are saying, never follow along in a mosque, and stay permanently dependent
+on somebody else's romanisation. **This bet is the exit ramp.**
+
+It is also the identity bet: prayer times and qibla exist in fifty apps, and a
+letter-recognition surface built for an adult convert does not.
+
+### 9.2 The design questions, unanswered
+
+Worth an hour with Opus before any code:
+
+- **Recognition or production?** Reading a mushaf needs recognition only.
+  Writing is a different, larger skill and probably out of scope.
+- **Alphabet chart, or letters in situ?** The chart is what every existing app
+  does and what every adult learner abandons. The alternative: teach the letters
+  *inside Al-Fatiha and the short surahs* — the text they will actually read —
+  so the first win is "I read a word of the Qur'an", not "I finished lesson 3".
+  This is the idea worth arguing about.
+- **Joined forms.** A letter looks different initial, medial, final and
+  isolated. This is the thing that actually stops people, and no beginner app
+  handles it well. It may be the whole product rather than a lesson in it.
+- **Sound, or shape only?** Sound needs a recorded voice, which needs a reciter,
+  which is one of the three human blockers. Shape-only ships without anybody.
+- **Harakat in scope?** The mushaf is vowelled; the letters alone will not get
+  someone reading it.
+
+### 9.3 Recommendation
+
+Do 7 and 8 on Tuesday with Sonnet — both are largely mechanical once decided.
+**Keep bet 4 on Opus and treat it as its own session**, because a safe design
+here produces the alphabet chart nobody finishes.
+
+---
+
+## Tuesday's order, and why
+
+1. **Phase 7** first. Highest content value, fully unblocked, and the tab
+   structure is decided rather than open.
+2. **Phase 8** second, Husary Muallim only, with 8.4 respected.
+3. **Phase 9** is a conversation, not a commit. If Tuesday has room, spend it
+   arguing about 9.2 rather than building.
+
+## Shipping — checked, and one item does not ride an OTA
+
+**Phase 7, Phase 8.1 and Phase 8.3 ship over the air.** No native module, no
+`app.json` change, no server. Bundled mp3s and bundled JSON are assets, and
+assets ride an update.
+
+⚠️ **Phase 8.2 needs a full `eas build`.** `expo-file-system` is **not** in
+`package.json` — checked 21 Aug against the dependency list above. It is a
+native module, so adding it changes the fingerprint, and `runtimeVersion` is on
+the `fingerprint` policy: existing preview and dev builds will correctly stop
+being offered the update rather than crash on it.
+
+**So the caching work moves behind everything else**, and Tuesday's OTA-only
+path is 7 → 8.1 → 8.3. If 8.2 is wanted, start the build early in the day and
+do the rest while it runs.

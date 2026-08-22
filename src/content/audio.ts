@@ -16,11 +16,18 @@
  *
  * everyayah.com, recited by Mahmoud Khalil Al-Husary in his *muʿallim*
  * (teaching) recitation — recorded to be copied by learners, which is exactly
- * what this app needs. Licensed CC BY-NC: attribution is required and the app
- * may never be sold or carry advertising. That is a permanent constraint the
- * moment these files ship. The credit is rendered at the foot of the practice
- * screen — beside the audio rather than buried in Settings. Do not remove it
- * while these files are bundled.
+ * what this app needs.
+ *
+ * ⚠️ Believed CC BY-NC, but everyayah.com publishes no terms of use anywhere —
+ * checked its front page and its recitations index. Treat the constraint as
+ * real anyway: credit the reciter, never sell the app, never carry
+ * advertising. The credit is rendered at the foot of every screen these play
+ * on. Do not remove it while these files are bundled. `audio-sources.ts`
+ * carries the full note.
+ *
+ * These same seven clips are what makes Al-Fatiha play with the radio off in
+ * the Qur'an tab — see `ayahSource` in `content/quran/recitation.ts`. Nothing
+ * is stored twice.
  *
  * ⚠️ REVIEW REQUIRED — nobody qualified has yet listened to these seven files.
  * Three things need an ear, not a script: that `fatiha-3` really is the third

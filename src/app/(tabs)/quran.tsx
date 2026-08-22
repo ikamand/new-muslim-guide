@@ -4,14 +4,14 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { GirihBand } from '@/components/illustrations';
 import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
-import { LEARNING_ORDER } from '@/content/quran/juz30';
+import { LEARNING_ORDER } from '@/content/quran/surahs';
 import { ArabicFont, BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { useMemorised } from '@/hooks/use-memorised';
 import { useTheme } from '@/hooks/use-theme';
 
 /**
- * Juz 30, in the order people learn it.
+ * Al-Fatiha and juz 30, in the order people learn them.
  *
  * ## Why this is a tab and not a Learn topic
  *
@@ -22,11 +22,16 @@ import { useTheme } from '@/hooks/use-theme';
  *
  * ## The order
  *
- * Backwards through the mushaf, 114 → 113 → 112 → …, which is how it is
- * actually taught. Not shortest-first: the data contradicts that, since 110
- * and 103 are shorter than 114. Backwards is contiguous, so there is never a
- * question about what comes next, and it front-loads the three *quls* — the
- * highest-utility surahs in the book.
+ * Al-Fatiha first, then backwards through the mushaf, 114 → 113 → 112 → …,
+ * which is how it is actually taught. Not shortest-first: the data contradicts
+ * that, since 110 and 103 are shorter than 114. Backwards is contiguous, so
+ * there is never a question about what comes next, and it front-loads the
+ * three *quls* — the highest-utility surahs in the book.
+ *
+ * Al-Fatiha sits outside that run because it sits outside juz 30, and it goes
+ * first because it is the one surah you cannot pray without. This tab shipped
+ * without it, which meant a memorisation screen that omitted the surah recited
+ * in every rak'ah of every prayer. See `content/quran/surahs.ts`.
  *
  * ## Progress that never asks anything
  *
@@ -51,10 +56,9 @@ export default function QuranScreen() {
         </View>
 
         {/*
-          The band is a row of eight-point stars, one tile per surah as it
-          happens — the same girih the shahada card carries. Filled behind the
-          count rather than a percentage: "6 of 37" is a fact, "16%" is a
-          verdict.
+          The band is a row of eight-point stars — the same girih the shahada
+          card carries. A count behind it rather than a percentage: "6 of 38"
+          is a fact, "16%" is a verdict.
         */}
         <View style={[styles.progress, { backgroundColor: theme.backgroundElement, borderColor: theme.border }]}>
           <View style={styles.band}>

@@ -512,6 +512,44 @@ most likely to draw an objection. **This has to be settled before a public
 release.** Dropping a voice is one line in `RECITERS` and no user data moves
 with it.
 
+### 5.2c Built 21 Aug: Al-Fatiha is in the tab, and it works offline
+
+**The tab shipped without the one surah you cannot pray without.** It was juz 30
+only — 78–114 — so Al-Fatiha, recited in every rak'ah of every prayer, was
+absent from a memorisation screen. Iyad caught it.
+
+Fixed by giving Al-Fatiha the same one path in as everything else: fetched by
+`scripts/generate-juz30.mjs`, written to `src/content/quran/fatiha.ts`. Not
+typed by hand, like the other 564 ayahs. A new hand-written
+`src/content/quran/surahs.ts` composes `[AL_FATIHA, ...JUZ_30 reversed]` — the
+teaching order is an editorial decision and does not belong in a file a script
+overwrites. Count goes 37 → 38.
+
+**Pinned first, not folded in by number**, which would put it *last*, behind
+thirty-seven surahs. It is not part of juz 30; that is a fact about the mushaf,
+not about what a beginner needs first.
+
+**It plays with the radio off.** The seven Husary clips are already bundled for
+the prayer screen, so `ayahSource` returns the bundled module for surah 1 on the
+default reciter and a stream for everything else. Verified by blocking
+`mirrors.quranicaudio.com` in a browser: zero requests, audio still played.
+Choosing another voice moves Al-Fatiha onto the network — the honest place to
+spend that, since a reader who went looking for a different reciter has already
+told you they have a connection.
+
+**`/practice` deliberately did not move.** The proposal was to relocate it to the
+Qur'an tab. It is not an Al-Fatiha screen — `getPracticeItems` renders every
+recitation with a *recorded* clip, and Al-Fatiha is simply the only one recorded
+so far. The other twenty are uncommissioned. Move it and the day those land, the
+tashahhud is filed under "memorise a surah". Adding Al-Fatiha to the Qur'an tab
+is what stops `/practice` reading as a duplicate.
+
+⚠️ `ayahSource` lives in its own module, `quran/ayah-audio.ts`, not beside the
+reciter list. It imports `content/audio.ts`, which is a wall of
+`require('…mp3')` — fine for Metro, fatal for node, and `i18n-manifest.mjs`
+loads `recitation.ts` for the reciter blurbs. Putting the two together took the
+whole manifest down. Content files that build scripts read cannot touch assets.
+
 ### 5.3 Transliteration: no line under the ayah
 
 **Settled.** A Latin line is something people read *instead of* the Arabic —

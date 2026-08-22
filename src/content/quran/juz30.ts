@@ -29,7 +29,7 @@
 export const JUZ30_SOURCE = {
   arabic: 'Imlaei text from api.quran.com (Quran Foundation)',
   translation: 'Saheeh International',
-  fetched: "2026-08-21",
+  fetched: "2026-08-22",
 } as const;
 
 export type Ayah = {
@@ -949,18 +949,3 @@ export const JUZ_30: readonly Surah[] = [
     ],
   },
 ];
-
-/**
- * The order people actually learn them: backwards through the mushaf.
- *
- * Not shortest-first, which the data contradicts — 110 and 103 are shorter
- * than 114. Backwards is how it is taught, it is contiguous so there is never
- * a question about what comes next, and it front-loads the three *quls*, which
- * are the highest-utility surahs in the book: said in prayer, after prayer,
- * and for ruqyah.
- */
-export const LEARNING_ORDER: readonly Surah[] = [...JUZ_30].reverse();
-
-export function getSurah(number: number): Surah | undefined {
-  return JUZ_30.find((surah) => surah.number === number);
-}

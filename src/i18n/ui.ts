@@ -181,7 +181,7 @@ export const EN = {
     phone grading them on it.
   */
   'quran.title': 'Learn by heart',
-  'quran.intro': 'The short surahs at the end of the Qur’an, in the order people usually learn them. Start at the top — the first three are the ones you will use most.',
+  'quran.intro': 'Al-Fatiha, then the short surahs at the end of the Qur’an, in the order people usually learn them. Start at the top — Al-Fatiha is in every prayer, so it is the one to have first.',
   'quran.progress': '{done} of {total} learned',
   'quran.progress.help': 'You decide when one counts. Nothing here is timed, and nothing is taken away.',
   'quran.playSurah': 'Play the surah',
@@ -498,7 +498,7 @@ const FR: Overrides = {
   'tab.learn': 'Apprendre',
   'tab.quran': 'Coran',
   'quran.title': 'Apprendre par cœur',
-  'quran.intro': 'Les sourates courtes de la fin du Coran, dans l’ordre où on les apprend habituellement. Commencez par le haut — les trois premières sont celles qui servent le plus.',
+  'quran.intro': 'Al-Fatiha, puis les sourates courtes de la fin du Coran, dans l’ordre où on les apprend habituellement. Commencez par le haut — Al-Fatiha est dans chaque prière, c’est donc celle à connaître en premier.',
   'quran.progress': '{done} sur {total} apprises',
   'quran.progress.help': 'C’est vous qui décidez quand une sourate compte. Rien n’est chronométré, et rien ne se perd.',
   'quran.playSurah': 'Écouter la sourate',
@@ -750,7 +750,7 @@ const ES: Overrides = {
   'tab.learn': 'Aprender',
   'tab.quran': 'Corán',
   'quran.title': 'Aprender de memoria',
-  'quran.intro': 'Las suras cortas del final del Corán, en el orden en que suelen aprenderse. Empieza por arriba — las tres primeras son las que más se usan.',
+  'quran.intro': 'Al-Fatiha y luego las suras cortas del final del Corán, en el orden en que suelen aprenderse. Empieza por arriba — Al-Fatiha está en cada oración, así que es la primera que conviene saber.',
   'quran.progress': '{done} de {total} aprendidas',
   'quran.progress.help': 'Tú decides cuándo cuenta una. Nada se cronometra y nada se pierde.',
   'quran.playSurah': 'Escuchar la sura',

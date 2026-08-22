@@ -5,8 +5,9 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
-import { getSurah, JUZ30_SOURCE } from '@/content/quran/juz30';
-import { ayahAudioUrl, getReciter, reciterCredit } from '@/content/quran/recitation';
+import { getSurah, JUZ30_SOURCE } from '@/content/quran/surahs';
+import { ayahSource } from '@/content/quran/ayah-audio';
+import { getReciter, reciterCredit } from '@/content/quran/recitation';
 import { ArabicFont, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { useMemorised } from '@/hooks/use-memorised';
@@ -101,12 +102,13 @@ export default function SurahScreen() {
     A fresh array each render is fine — the hook keys on the stringified
     sources, not on identity. What it does mean is that changing reciter builds
     a new playlist, which is handled below rather than left to stop the audio.
+
+    `ayahSource` decides stream or bundled file per ayah, which is how
+    Al-Fatiha plays with the radio off on the default reciter. The screen does
+    not need to know which it got.
   */
   const sources = useMemo(
-    () =>
-      surah
-        ? surah.ayahs.map((ayah) => ({ uri: ayahAudioUrl(reciter, surah.number, ayah.number) }))
-        : [],
+    () => (surah ? surah.ayahs.map((ayah) => ayahSource(reciter, surah.number, ayah.number)) : []),
     [reciter, surah],
   );
 

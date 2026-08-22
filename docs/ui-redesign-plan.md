@@ -1019,6 +1019,49 @@ deletes an entire subsystem rather than adding one.
   `require` for a file that is not there fails the whole bundle, and 564 new
   requires is exactly where that happens.
 
+### 8.5 Teach Al-Ikhlas, and stop setting homework
+
+Iyad's proposal, 22 Aug. **Small change, and it fixes something that is broken
+rather than adding something that is missing.**
+
+**What the step says today.** [`prayers.ts:449`](../src/content/prayers.ts#L449)
+renders *"Recite any other short passage of the Qur'an."* Every other step in
+the prayer gives you the words. This one gives you homework — and it is the
+born-Muslim assumption in its purest form, because **a convert of three weeks
+knows no other passage**. The existing note, *"Until you know one, Al-Fatiha
+alone is enough"*, is a permission slip rather than a path.
+
+**Al-Ikhlas, on evidence rather than taste.** Four ayat. Already in the app
+twice — [`juz30.ts`](../src/content/quran/juz30.ts) as surah 112 and
+[`learn/who-is-allah.ts`](../src/content/learn/who-is-allah.ts) citing
+`quran(112, [1, 4])`. And it is the surah the Prophet ﷺ said equals a third of
+the Qur'an, so it is the canonical first one rather than merely a short one.
+
+**Why it belongs in Phase 8 and not before it.** Al-Fatiha has seven bundled
+clips; Al-Ikhlas streams. Teaching Al-Ikhlas at the recite step today would put
+a network request in the middle of the worship path — the one thing that must
+survive a dead signal. Once 8.1 brings all 564 ayat in-house, Al-Ikhlas is
+offline-safe for nothing.
+
+**The plumbing was left open for this.**
+[`surahs.ts`](../src/content/quran/surahs.ts) already holds
+`SURAH_FOR_RECITATION = { fatiha: 1 }` under a comment saying the second surah
+is one line there rather than an `if` in a component. Take it at its word.
+
+**Two calls worth making now:**
+
+- **Do not copy the text into `recitations.ts`.** Al-Ikhlas exists in
+  `juz30.ts`; storing it twice is what this codebase avoids everywhere else.
+  The step wants a `saysSurah: 112` that renders from surah data — because
+  somebody standing on a mat needs the words **on the step**, not behind a tap.
+  The tap-through to the surah screen stays as well, as Al-Fatiha's does.
+- **Keep the ruling honest.** The short surah is sunnah; Al-Fatiha alone is a
+  valid prayer. The current note says so and must survive the rewrite. Teaching
+  a default must never read as stating a requirement.
+
+**What it removes:** the "any other short passage" instruction, and the only
+step in the prayer that does not tell you what to say.
+
 ### 8.4 Word-synced highlighting
 
 `api.quran.com/api/v4` supplies per-word millisecond segments. Bundle the
@@ -1147,7 +1190,8 @@ the OTA phases while it runs.
 1. **Phase 7** first. Highest content value, and the tab structure is decided
    rather than open.
 2. **Phase 8** second. The download of 564 files is slow but unattended — start
-   the script early and write Phase 7 while it runs.
+   the script early and write Phase 7 while it runs. **8.5 lands the same day**:
+   it is a few lines, and it is the payoff for bringing the audio in-house.
 3. **Phase 9** is a conversation, not a commit. If Tuesday has room, spend it
    arguing about 9.2 rather than building.
 4. **Phase 10** is not Tuesday. It needs a build, and it is infrastructure for

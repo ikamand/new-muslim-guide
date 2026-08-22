@@ -608,12 +608,31 @@ Three controls wrapped badly on a 390px phone, stranding "Slower" alone on the
 second row. "Play the surah" now takes a full row of its own with repeat and
 slower paired beneath it, which says the right thing about which is primary.
 
-**Is `/practice` now redundant?** Not by design — it renders every recitation
-with a *recorded* clip, and it is the only home the takbir, tashahhud and
-salawat will have. But it is redundant **today**, because Al-Fatiha is the only
-thing recorded and the surah screen now does it better. That is a fact about
-`docs/audio-manifest.csv` having 20 unrecorded clips, not about the screen.
-Open question at the end of this file.
+#### `/practice` hides itself, and comes back on its own
+
+**Decided 21 Aug.** Not redundant by design — it renders every recitation with a
+*recorded* clip, and it is the only home the takbir, tashahhud and salawat will
+have. Redundant **today**, because Al-Fatiha is the only thing recorded.
+
+What settled it: with transliteration and slower added above, the surah screen
+is a **strict superset** for those seven ayahs. There is not one thing
+`/practice` does better. Keeping both promoted means the same person meets
+Al-Fatiha in two different treatments depending on which door they took — and
+one door is worse. That inconsistency is the harm; duplication alone would have
+been tolerable.
+
+So all three entry points hide themselves while `hasPracticeBeyondSurahs()` is
+false — the Learn card, Today's finished-journey row, and the "Qur'an" help
+topic, which was the leak that would have made hiding the other two pointless.
+The route stays alive and still renders if reached directly. No list to
+maintain: the condition is derived from which clips are in the bundle, so the
+screen returns by itself the day a clip lands that is not a surah.
+
+⚠️ **This is not a short hold.** Those twenty clips need a reciter commissioned
+— `docs/audio-recording-brief.md` — so until that happens this is a removal in
+everything but name, and `practice.tsx` is code nobody exercises. That is the
+honest cost, and it is the right trade: a screen that reappears when it has
+something to say beats a duplicate reachable three ways.
 
 ### 5.4 Audio size decides what ships bundled
 

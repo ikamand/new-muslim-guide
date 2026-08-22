@@ -6,7 +6,7 @@ import { ProgressRing } from '@/components/illustrations';
 import { PrayerTimesCard } from '@/components/prayer-times-card';
 import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
-import { PRAYERS, WUDU, type Guide } from '@/content';
+import { hasPracticeBeyondSurahs, PRAYERS, WUDU, type Guide } from '@/content';
 import { BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useHelpTopics } from '@/hooks/use-help';
 import { useHijriToday } from '@/hooks/use-hijri';
@@ -191,8 +191,16 @@ function JourneyDoneCard() {
   const theme = useTheme();
   const { t } = useLocale();
 
+  /*
+    Practice drops out while Al-Fatiha is its only recorded content — the
+    Qur'an tab does those seven ayahs better in every respect, and offering
+    both here sends somebody to the worse of two doors. It comes back on its
+    own. See `hasPracticeBeyondSurahs`.
+  */
   const onwards: { href: '/practice' | '/duas'; label: UIKey }[] = [
-    { href: '/practice', label: 'learn.practice.title' },
+    ...(hasPracticeBeyondSurahs()
+      ? [{ href: '/practice' as const, label: 'learn.practice.title' as UIKey }]
+      : []),
     { href: '/duas', label: 'learn.duas.title' },
   ];
 

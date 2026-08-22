@@ -72,6 +72,7 @@ export { AUDIO_SOURCE_BY_ID, creditLine, getAudioSource, SOURCES } from './audio
 export type { AudioSource } from './audio-sources';
 export {
   getPracticeClipCount,
+  hasPracticeBeyondSurahs,
   getPracticeCredits,
   getPracticeItems,
   practiceKeyFor,

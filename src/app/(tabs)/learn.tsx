@@ -12,6 +12,7 @@ import {
   DUAS,
   resolveRef,
   getPracticeClipCount,
+  hasPracticeBeyondSurahs,
   IMAN_PILLARS,
   PHRASES,
   PILLARS,
@@ -28,6 +29,14 @@ import type { UIKey } from '@/i18n/ui';
 import { localiseCatalogEntry } from '@/i18n/localise';
 
 const PRACTICE_CLIP_COUNT = getPracticeClipCount();
+/**
+ * Whether to offer the practice screen at all.
+ *
+ * Computed once at module load like the count beside it, because it cannot
+ * change while the app is running — it is a fact about which clips are in the
+ * bundle. See `hasPracticeBeyondSurahs`.
+ */
+const SHOW_PRACTICE = hasPracticeBeyondSurahs();
 const SHAHADA_STEP_COUNT = SHAHADA_GUIDE.steps.length;
 /**
  * Built the same way the journey builds it, not typed as `'guide:shahada'`.
@@ -420,15 +429,22 @@ export default function LearnScreen() {
               unit="count.duas"
               glyph="duas"
             />
-            <LearnCard
-              wide
-              href="/practice"
-              title={t('learn.practice.title')}
-              subtitle={t('learn.practice.subtitle')}
-              count={PRACTICE_CLIP_COUNT}
-              unit="count.clips"
-              glyph="practice"
-            />
+            {/*
+              Hidden while Al-Fatiha is the only thing recorded, because the
+              Qur'an tab now does those seven ayahs better in every respect.
+              Returns on its own the day a clip lands that is not a surah.
+            */}
+            {SHOW_PRACTICE && (
+              <LearnCard
+                wide
+                href="/practice"
+                title={t('learn.practice.title')}
+                subtitle={t('learn.practice.subtitle')}
+                count={PRACTICE_CLIP_COUNT}
+                unit="count.clips"
+                glyph="practice"
+              />
+            )}
             <LearnCard
               wide
               href="/iman"

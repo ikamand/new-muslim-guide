@@ -1,7 +1,7 @@
 import type { Href } from 'expo-router';
 import { useMemo } from 'react';
 
-import { getReference, resolveRef } from '@/content';
+import { getReference, hasPracticeBeyondSurahs, resolveRef } from '@/content';
 import {
   getHelpTopic,
   HELP_TOPICS,
@@ -63,8 +63,23 @@ function allowed(entry: HelpEntry, audience: Audience): boolean {
   return !reference?.audience || !audience || reference.audience === audience;
 }
 
+/**
+ * A screen worth sending somebody to right now.
+ *
+ * Practice is the only one that can fail this, and only while Al-Fatiha is its
+ * sole recorded clip — the Qur'an tab does those seven ayahs better in every
+ * respect, and the "Qur'an" help topic offering the worse of the two doors is
+ * the exact thing hiding it from Learn and Today was meant to stop. Same rule
+ * this file already applies to a ref with nothing behind it: a chip a beginner
+ * taps has to land somewhere worth landing.
+ */
+function screenAvailable(screen: HelpScreen): boolean {
+  return screen === 'practice' ? hasPracticeBeyondSurahs() : true;
+}
+
 function toLink(entry: HelpEntry, locale: Locale): HelpLink | undefined {
   if (entry.kind === 'screen') {
+    if (!screenAvailable(entry.screen)) return undefined;
     const text = SCREEN_TEXT[entry.screen];
     return {
       key: `screen:${entry.screen}`,

@@ -2,6 +2,7 @@ import { getAudio } from './audio';
 import { creditLine, getAudioSource } from './audio-sources';
 import { Recitations } from './recitations';
 import type { Recitation } from './types';
+import { surahForRecitation } from './quran/surahs';
 
 /** One thing with a play button: a whole recitation, or one ayah of one. */
 export type PracticeClip = {
@@ -111,4 +112,38 @@ export function practiceKeyFor(recitation: Recitation): string | undefined {
 /** How many clips can be played right now — the count shown on the Learn card. */
 export function getPracticeClipCount(): number {
   return getPracticeItems().reduce((total, item) => total + item.clips.length, 0);
+}
+
+
+/**
+ * Whether the practice screen still has anything the Qur'an tab does not.
+ *
+ * ## Why this gate exists
+ *
+ * This screen is "practise the words of the prayer" — the takbir, the opening
+ * duʿa, the tashahhud, the salawat. That is a real job and nothing else does
+ * it. But twenty of its twenty-seven clips are uncommissioned, so the only
+ * thing actually on it is Al-Fatiha, which now lives in the Qur'an tab as a
+ * surah that plays gaplessly, plays any single ayah, covers a line to test
+ * you, works offline and offers eight reciters.
+ *
+ * For Al-Fatiha the surah screen is a strict superset — there is not one thing
+ * the practice screen does better. So promoting both from the Learn tab and
+ * from Today puts a beginner in front of two doors to the same seven ayahs,
+ * one of which is worse, and means the same person meets Al-Fatiha in two
+ * different treatments depending on which they took. That is the harm; the
+ * duplication on its own would be tolerable.
+ *
+ * So the entries hide themselves while that is true, and come back on their
+ * own the day a clip lands that is not a surah. No list to maintain, and
+ * nothing to remember.
+ *
+ * ⚠️ This is not a short hold. Those twenty clips need a reciter commissioned
+ * — see `docs/audio-recording-brief.md` — so until that happens this is a
+ * removal in everything but name, and `practice.tsx` is code nobody exercises.
+ * That is the honest cost, and it is the right trade: a screen that reappears
+ * when it has something to say beats a duplicate that is reachable two ways.
+ */
+export function hasPracticeBeyondSurahs(): boolean {
+  return getPracticeItems().some((item) => surahForRecitation(item.key) === undefined);
 }

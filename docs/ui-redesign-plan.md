@@ -29,6 +29,7 @@ with its reasoning attached.
 | **7** | [The Duʿa tab](#phase-7--the-dua-tab) | ⬜ Planned 21 Aug — licence now settled | OTA |
 | **8** | [All of Juz 30, in-house](#phase-8--all-of-juz-30-in-house) | ⬜ Planned 21 Aug — one voice complete, no cache | OTA |
 | **9** | [Bet 4: the Arabic letters](#phase-9--bet-4-the-arabic-letters) | ⬜ Undesigned — needs a session, not a ticket | OTA |
+| **10** | [Downloading a voice, a juz at a time](#phase-10--downloading-a-voice-a-juz-at-a-time) | ⬜ Planned 21 Aug — after the letters | ⚠️ **Build** |
 | — | [The prayers](#the-prayer-work) | ✅ **Done** — `a004af9` | OTA |
 
 ### What shipped in 0–3
@@ -1070,6 +1071,77 @@ here produces the alphabet chart nobody finishes.
 
 ---
 
+## Phase 10 — Downloading a voice, a juz at a time
+
+Iyad's proposal, 21 Aug, and it is the right architecture: **the teaching voice
+is in-house; every other voice is downloaded on demand, per juz.** Nothing is
+stored that nobody listens to.
+
+**Not on Tuesday.** It needs `expo-file-system`, which is a native module,
+which needs a full `eas build` — and Tuesday's three phases are all OTA. It is
+also larger than it looks, for reasons below.
+
+### 10.1 The rule that does not bend
+
+**The learning path never waits for a download.** Husary Muallim is bundled and
+stays bundled, because someone learning to recite must not meet a progress bar
+between them and Al-Fatiha. Everything in this phase applies to the other seven
+voices, which are for *listening*, not for learning.
+
+### 10.2 It is a storage feature, not a download button
+
+At ~76 MB a voice, a reader who collects three is holding ~300 MB. A download
+affordance without a matching delete affordance is a way to fill someone's
+phone with no way to empty it.
+
+So the phase is really three surfaces:
+
+| Surface | What it does |
+|---|---|
+| **Download** | On the reciter picker — size shown *before* the tap, never after |
+| **Manage** | What is on the device, per voice per juz, with its real size |
+| **Delete** | Per juz and per voice, reversible by downloading again |
+
+Size must be stated before the tap. "Alafasy — 76 MB" is a decision someone can
+make; a download that starts and then reports its size is not.
+
+### 10.3 The states `ayahSource` grows
+
+It has two cases today — bundled, streamed. This makes four, and the two new
+ones are where the bugs live:
+
+- **bundled** — Husary Muallim, always available.
+- **downloaded** — on disk, plays like bundled.
+- **streamed** — not downloaded, has signal, plays as today.
+- **unavailable** — not downloaded, no signal. **This state must be designed,
+  not defaulted.** The honest answer is to offer the teaching voice, which is
+  always there, rather than fail: "Alafasy isn't downloaded and you're offline
+  — play Al-Husary instead?"
+
+Plus the partial cases: an interrupted download, a full disk, a juz that is
+half on the device. A half-downloaded juz must read as *not downloaded*, never
+as a surah that stops in the middle.
+
+### 10.4 Build it for thirty juz, not for one
+
+Juz 30 is 1 of 30. If the Qur'an ever grows past it, this is the machinery that
+carries it — so **nothing in this phase hardcodes juz 30**. The unit is
+`(reciter, juz)`, the manifest is a table, and adding juz 29 is data.
+
+That is the real argument for building it at all. As a feature it is a comfort
+for someone who already knows which reciter they like — which is not a
+three-week-old convert. As infrastructure it is how the app stops being a
+juz-30 app.
+
+### 10.5 Ships via
+
+⚠️ **Full `eas build`.** `expo-file-system` is a native module, `runtimeVersion`
+is on the `fingerprint` policy, and existing preview builds will correctly stop
+being offered this update rather than crash on it. Plan the build in, and do
+the OTA phases while it runs.
+
+---
+
 ## Tuesday's order, and why
 
 1. **Phase 7** first. Highest content value, and the tab structure is decided
@@ -1078,6 +1150,9 @@ here produces the alphabet chart nobody finishes.
    the script early and write Phase 7 while it runs.
 3. **Phase 9** is a conversation, not a commit. If Tuesday has room, spend it
    arguing about 9.2 rather than building.
+4. **Phase 10** is not Tuesday. It needs a build, and it is infrastructure for
+   a Qur'an the app does not have yet — worth doing, worth doing after the
+   letters.
 
 ## Shipping — all of it rides an OTA
 
@@ -1088,3 +1163,7 @@ update — including the ~76 MB of Juz 30.
 Going in-house on the audio is what makes this true: the cache was the only
 part of the plan that needed `expo-file-system`, and `expo-file-system` is not
 in `package.json`. Dropping the cache drops the build.
+
+**Phase 10 brings it back, deliberately.** Downloading a voice needs a
+filesystem, so that phase needs a native build — which is the main reason it
+sits after the three above rather than inside them.

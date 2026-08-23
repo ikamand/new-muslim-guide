@@ -1457,14 +1457,70 @@ wants its own visual treatment — label and value on one row, label in `caption
 at `textSecondary`, value in `default`, hairline between rows — and it must not
 look like a table. Tables read as reference; this should read as answers.
 
+### The size of it, measured
+
+Counted 22 Aug rather than estimated:
+
+| | |
+|---|---|
+| `Reference` pages | **28** — 20 in `learn/`, 6 in `references.ts`, 3 in `voluntary-prayers.ts` |
+| `body` strings across them | **122**, averaging **47 words** |
+| Prose in scope | **~5,700 words** |
+| Translatable strings in the app | 695, of which **235** are done in each of French and Spanish (34%) |
+
+**Reference bodies are the largest single category in
+`docs/i18n-manifest.csv`.** Translations are keyed by the English text, so
+every body this rewrites drops its French and Spanish back to English. **This
+phase partly un-translates the app**, and that is not a reason not to do it —
+it is a reason to do it BEFORE Phase 6 rather than after, which is what the
+original phase order already said.
+
+### Do two pages first, then the other twenty-six
+
+**The failure mode here is deciding the format in the abstract and then
+applying it twenty-eight times.** Four rows and a prose trim sound obvious on
+paper; whether they are right is only visible on a screen.
+
+So: **pick two pages that are as unalike as possible** — one procedural, one
+not. `voluntary-prayers.ts`'s witr page (when / how many / do I have to / how,
+all four rows earn their place) and `food.ts` or `family.ts` (probably no "how
+many", possibly no "how" at all). Build those two, run them, **look at them**,
+and only then commit to the other twenty-six. If the block looks like padding
+on the second page, the design is wrong and two pages is a cheap way to find
+out.
+
+### Making it pleasant, specifically
+
+"Pleasant" is a typography job, and the app already has the tokens for it:
+
+- **Label in `caption` at `textSecondary`; value in `default` at `text`.** The
+  question is scaffolding, the answer is the content.
+- **Hairline between rows, no outer border, no fill.** It must not read as a
+  table — tables read as reference material, and this should read as somebody
+  answering you.
+- **The block sits above the first section, under the subtitle**, with
+  `Spacing.four` beneath it, so the page opens on answers and then continues
+  into prose.
+- **"Do I have to?" is the only row with a stance**, so it can carry `accent`
+  on its value where the others do not. One coloured word per page.
+
+### What gets shorter
+
+Every `body` that currently opens by establishing *what* the thing is can drop
+that sentence, because the block above now says it. The prose keeps *why*, and
+gets better for carrying only that. **If this phase does not reduce the word
+count, it has been done wrong** — it will have added a block and kept the
+paragraph that the block replaces.
+
 ### Cost, plainly
 
-- **It touches every teaching page in the app**, not the salah ones alone.
-- **It rewrites English copy**, and translations are keyed to the English text,
-  so every line it touches drops its French and Spanish back to English.
-  `npm run i18n:manifest` will say so loudly, which is the system working.
-- **It is its own phase and its own day.** Not Tuesday, which already carries
-  the Duʿa tab and 76 MB of audio.
+- **28 pages, ~5,700 words, and a `Reference` type change.** Its own phase and
+  its own day; not Tuesday.
+- **Every rewritten body is new model-written content** on pages that include
+  the salah path, so it lands in `docs/scholarly-review.md` — the pile that
+  gates release. Rewriting for clarity is still rewriting.
+- **`npm run i18n:manifest` after**, and it will report a large drop. That is
+  the system working, not a regression.
 
 ⚠️ **The sheet Iyad showed is not usable as content.** Its citations are Reddit
 and a charity's blog. Its facts happen to be broadly right and its numbers for

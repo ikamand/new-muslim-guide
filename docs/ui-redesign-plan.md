@@ -1367,6 +1367,29 @@ teaching rather than quoting. Same text, two purposes, one place each.
 delete the ⚠️ comment saying it is not printed yet along with the note
 apologising for its absence.
 
+### Drawn, 22 Aug — three decisions the mockup made
+
+Mockup: <https://claude.ai/code/artifact/caa49c0f-78e9-40c8-be21-91908ff138bb>
+— three artboards at the app's real tokens, light theme. Approved by Iyad on
+sight. What it settled that the prose above had left open:
+
+- **The duʿa sits BEFORE "No dream is coming", not after.** Somebody who opened
+  this page came for the words. Putting the correction second means it lands as
+  *"here is what you say — and notice it never asks for a sign"* rather than as
+  a warning standing in front of the thing they came for.
+- **The duʿa card is the only element on the page with the accent border and
+  tint** (`accent` / `accentMuted`). Every other section is
+  `backgroundElement` + `border`. One card styled differently is what makes it
+  read as the point of the screen rather than the third section down — and it
+  is the whole reason the page stops looking like a list of paragraphs.
+- **The "Prayed by choice" rows lose their rakʿah count and gain a chevron.**
+  A count promises a prayer script; a chevron promises a page. The row should
+  stop advertising the thing it no longer opens. The count moves into the
+  section's help line — *"None of these is owed. Each is two rakʿahs."* — where
+  it is said once rather than three times.
+
+**Not drawn yet:** dark mode, and the guide's closing duʿa step.
+
 ### The guide should end with the duʿa
 
 `buildPrayer` derives every prayer from two facts — rakʿah count and whether

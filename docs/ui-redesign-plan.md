@@ -30,6 +30,7 @@ with its reasoning attached.
 | **8** | [All of Juz 30, in-house](#phase-8--all-of-juz-30-in-house) | ⬜ Planned 21 Aug — one voice complete, no cache | OTA |
 | **9** | [Bet 4: the Arabic letters](#phase-9--bet-4-the-arabic-letters) | ⬜ Undesigned — needs a session, not a ticket | OTA |
 | **10** | [Downloading a voice, a juz at a time](#phase-10--downloading-a-voice-a-juz-at-a-time) | ⬜ Planned 21 Aug — after the letters | ⚠️ **Build** |
+| **11** | [Four questions, on every teaching page](#phase-11--four-questions-on-every-teaching-page) | ⬜ Planned 22 Aug — biggest item here, own day | OTA |
 | — | [The prayers](#the-prayer-work) | ✅ **Done** — `a004af9` | OTA |
 
 ### What shipped in 0–3
@@ -1393,51 +1394,83 @@ which should state the distinguishing fact rather than describe the mood:
 lines do not make the difference obvious at a glance, the second row is costing
 more than it earns.
 
-### Reference pages get a quick-facts block
+## Phase 11 — Four questions, on every teaching page
 
-Iyad, 22 Aug, showing a bulleted fact sheet: *"instruction should look similar
-to this — simple and straight to the point, short. Isn't it better than article
-style paragraphs?"*
+Iyad, 22 Aug: *"the when, how many, do I have to, how — should be across all
+learning and teaching content. Simplify for the reader and make it pleasant to
+read and learn."*
 
-**Half yes, and the half that is yes is a real problem with the app today.**
-`voluntary-prayers.ts` is `body` strings of 40–60 words each. Somebody awake at
-3am asking *when can I pray this* should not read a paragraph to find out. The
-hard facts — when, how many, do I have to — want to be scannable rows.
+**This is the largest thing in this document and the most likely to be worth
+it.** It is not a witr change or a voluntary-prayers change. It is a change to
+the `Reference` type and to every teaching page in the app.
 
-**The half that is no is the register, not the form.** The sheet Iyad showed
-carries a line reading *"Status: Sunnah Mu'akkadah, while the Hanafi school
-considers it Wajib."* To a convert of three weeks that is four unknown words
-and no answer to the only question being asked. The app's version of that fact
-is **"No, you don't have to. Most people who pray at night do it anyway."**
-Same ruling, no vocabulary tax. A fact sheet written in the tradition's own
-shorthand is an index for somebody who already knows the words — which is
-precisely the reader this app is not for.
+### The problem it fixes
 
-**So: take the form, drop the register.** Each `Reference` gains an optional
-quick-facts block rendered above its sections — three or four label/value rows,
-plain English, no fiqh terminology:
+`voluntary-prayers.ts` is `body` strings of 40–60 words each, and it is typical
+of the app. Somebody awake at 3am asking *when can I pray this* should not read
+a paragraph to find out. Prose is the right shape for an argument and the wrong
+shape for a fact, and the app currently uses it for both.
 
-| | Witr |
-|---|---|
-| **When** | After Isha, any time until dawn |
-| **How many** | One rakʿah |
-| **Do I have to?** | No — but it is how the night prayer is closed |
+### The four rows
 
-Prose stays underneath for what genuinely needs a sentence. **"No dream is
-coming" cannot be a bullet** — the whole point of that section is to undo
-something the reader was told wrongly, and undoing needs an argument.
+| Row | Answers | Example — witr |
+|---|---|---|
+| **When** | Is it now? | After Isha, any time until dawn |
+| **How many** | What am I committing to? | One, three, five — any odd number. One is enough |
+| **Do I have to?** | The only ruling question a beginner has | No — but it is how the night prayer is closed |
+| **How** | ↳ opens the guide | *Pray one rakʿah* |
 
-**Scope, said plainly:** this is a change to the `Reference` type and to every
-reference page in the app, not to the voluntary prayers alone. That is a much
-larger job than the rest of this section, and it rewrites English copy — which
-drops the French and Spanish translations of every line it touches back to
-English. Worth doing; not worth doing on the same day as everything else here.
+**"How" is a route, not a sentence.** It is the button already designed for the
+voluntary prayers, promoted into the block. That is what keeps the four rows
+honest: three facts and a door, rather than four facts of which one is a lie
+about how simple the movements are.
 
-⚠️ **The sheet's own content is not usable.** Its citations are Reddit and a
-charity's blog, and it states witr as *usually three*, where this plan
-specifies one on Sahih Muslim 752. Both practices are valid. Three reopens the
-Maghrib-shape question and requires explaining the 2+1 versus continuous split
-— which is a longer answer, in a section arguing for shorter ones.
+**Rows are optional.** Food, clothing and family have no "how many". A block
+that pads itself to four rows on every page is the data-slop version of this
+idea.
+
+### Take the form, drop the register
+
+The sheet Iyad showed carried *"Status: Sunnah Mu'akkadah, while the Hanafi
+school considers it Wajib."* To a convert of three weeks that is four unknown
+words and no answer to the only question being asked. The app's version is
+**"No, you don't have to. Most people who pray at night do it anyway."** Same
+ruling, no vocabulary tax.
+
+A fact sheet written in the tradition's own shorthand is an index for somebody
+who already knows the words — the reader this app is explicitly not for. The
+form is right; the vocabulary is what makes most Islamic apps unusable to the
+person this one is for.
+
+### What stays prose
+
+**"No dream is coming" cannot be a bullet.** That section exists to undo
+something the reader was told wrongly by a cousin, and undoing a belief needs
+an argument. Same for "you have to sleep first", and for anything answering
+*why*. The block handles *what*; the prose keeps *why*, and gets shorter
+because it is no longer also carrying *what*.
+
+### Pleasant to read
+
+Iyad's word, and it is a typography job rather than a content one: the block
+wants its own visual treatment — label and value on one row, label in `caption`
+at `textSecondary`, value in `default`, hairline between rows — and it must not
+look like a table. Tables read as reference; this should read as answers.
+
+### Cost, plainly
+
+- **It touches every teaching page in the app**, not the salah ones alone.
+- **It rewrites English copy**, and translations are keyed to the English text,
+  so every line it touches drops its French and Spanish back to English.
+  `npm run i18n:manifest` will say so loudly, which is the system working.
+- **It is its own phase and its own day.** Not Tuesday, which already carries
+  the Duʿa tab and 76 MB of audio.
+
+⚠️ **The sheet Iyad showed is not usable as content.** Its citations are Reddit
+and a charity's blog. Its facts happen to be broadly right and its numbers for
+witr are verified above from the six books — but nothing goes in from it.
+
+---
 
 ### Witr — decided 22 Aug, and it is one rakʿah
 
@@ -1447,8 +1480,27 @@ voluntary prayer with a shape a beginner gets wrong unaided: tahajjud,
 istikhara and qiyam are all the two-rakʿah prayer they already know, and witr
 is not.
 
-**Teach it as ONE rakʿah.** `{ id: 'witr', title: 'Witr', when: 'To close the
-night, after any night prayer', rakahs: 1, aloudRakahs: 0, kind: 'voluntary' }`
+**Say it is an odd number — one, three, five — and generate the one.** Iyad's
+call, 22 Aug, and the narrations state it outright rather than leaving it to be
+inferred:
+
+- **Sunan Abi Dawud 1422** — Abu Ayyub al-Ansari, **Albani: Sahih**:
+  `الْوِتْرُ حَقٌّ عَلَى كُلِّ مُسْلِمٍ، فَمَنْ أَحَبَّ أَنْ يُوتِرَ بِخَمْسٍ فَلْيَفْعَلْ، وَمَنْ أَحَبَّ أَنْ
+  يُوتِرَ بِثَلَاثٍ فَلْيَفْعَلْ، وَمَنْ أَحَبَّ أَنْ يُوتِرَ بِوَاحِدَةٍ فَلْيَفْعَلْ`
+- Corroborated on separate chains: **Nasa'i 1710** (which adds seven) and
+  **Ibn Majah 1190**, both Albani-Sahih.
+- And the structure is stated too — **Nasa'i 1717** and **Abu Dawud 1359**: he
+  prayed five `لَا يَجْلِسُ إِلَّا فِي آخِرِهِنَّ`, not sitting except at the last.
+
+**So the page says the range and the guide teaches the floor.**
+`{ id: 'witr', title: 'Witr', when: 'To close the night, after any night
+prayer', rakahs: 1, aloudRakahs: 0, kind: 'voluntary' }` — one rakʿah is a
+complete, valid witr, it is the least a beginner can get wrong, and the
+quick-facts row carries the rest: **"One, three, five — any odd number. One is
+enough."**
+
+That split is the CLAUDE.md rule working as intended: the guide teaches one
+clear path, the page states the difference a reader will actually meet.
 
 Three reasons, in order of weight:
 
@@ -1457,21 +1509,23 @@ Three reasons, in order of weight:
    the corpus 22 Aug.
 2. **It is the simplest instruction that is complete.** "After you finish
    praying at night, pray one more." Nothing to count, nothing to structure.
-3. **It avoids a shape `buildPrayer` would get wrong.** `rakahs: 3` would
-   generate a Maghrib-shaped prayer — a sitting after the second rakʿah — and
-   whether witr may look like Maghrib is a live dispute this app has no reason
-   to walk into. `rakahs: 1` has no such question in it.
+3. **It avoids a shape `buildPrayer` would get wrong.** `rakahs: 3` or `5`
+   would generate a Maghrib-shaped prayer, sitting after every second rakʿah —
+   and Nasa'i 1717 has him **not** sitting except at the last. `buildPrayer`
+   cannot express that today, which is a second reason the generated guide is
+   the one-rakʿah version until it can.
 
 ⚠️ **A correction, kept rather than quietly dropped.** This section originally
 reached for a narration — "do not pray witr as three, resembling Maghrib" — to
 justify point 3. **It could not be found in the six books in that wording** when
-searched on 22 Aug, so nothing here rests on it and it is not cited. Point 3
-stands on its own as an engineering argument, not a ruling.
+searched on 22 Aug, so it is not cited. What was found instead is better and is
+above: Nasa'i 1717 states the structure positively, by describing what he did
+rather than what he forbade.
 
-**The school difference, in one sentence in the step's `note`:** many pray witr
-as three, and the Hanafi school prays three as a unit. One rakʿah is what the
-app teaches because it is what the narration above states and the least a
-beginner can get wrong.
+**The school difference, in one sentence in the step's `note`:** most people
+pray three, and the Hanafi school prays those three as one unit. The app
+generates one because it is complete on its own and the least a beginner can
+get wrong — not because three is worse.
 
 **Held deliberately: the qunut duʿa.** It is a real part of witr for many, it is
 another Arabic text needing a verified source, and it is not needed to pray a

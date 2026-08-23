@@ -1236,12 +1236,55 @@ part, not a restatement of the total. If it ever appears near the rawatib
 counts it needs a sentence saying so, or it reads as the app contradicting
 itself.
 
+### The four before Dhuhr are 2 + 2, and the data cannot say so
+
+Iyad, 22 Aug, listing the rawatib: *"duhr has 4 — (2+2) before, and after 2."*
+**The counts in [`prayers.ts:31-38`](../src/content/prayers.ts#L31-L38) are
+already exactly right** — Fajr 2 before, Dhuhr 4 before and 2 after, Asr none,
+Maghrib 2 after, Isha 2 after. Twelve. Nothing to correct.
+
+**What is missing is the structure.** `sunnahBefore: 4` renders as `4`, and a
+beginner reads that as one continuous four-rakʿah prayer with a single taslim.
+That is not what most people pray, and it is the born-Muslim assumption again:
+everyone raised Muslim knows the four are two prayers of two, and nothing in
+the app says it.
+
+**The type has to carry units, not just a total.** `sunnahBefore: 4` wants to
+become something that can express `4, as 2 + 2` — and the same change would let
+Maghrib and Isha stay `2` without pretending to a structure they do not have.
+
+⚠️ **The evidence is genuinely contested, and the plan records it rather than
+picking the tidy version.** Read from the corpus 22 Aug:
+
+- **Abu Dawud 1295** and **Nasa'i 1666** — Ibn Umar: `صَلاَةُ اللَّيْلِ وَالنَّهَارِ
+  مَثْنَى مَثْنَى`. Both **Albani: Sahih**.
+- **But Nasa'i appends to his own narration:** `هَذَا الْحَدِيثُ عِنْدِي خَطَأٌ وَاللَّهُ
+  تَعَالَى أَعْلَمُ` — he considers it an error, i.e. he rejects the `وَالنَّهَارِ`
+  addition that is the whole basis for applying it to daytime sunnah.
+- **Bukhari 990 / Muslim 749** carry the same hadith as `صَلاَةُ اللَّيْلِ مَثْنَى
+  مَثْنَى` — night prayer only, no "and the day".
+- **Bukhari 1182** — ʿAisha: `كَانَ لاَ يَدَعُ أَرْبَعًا قَبْلَ الظُّهْرِ وَرَكْعَتَيْنِ قَبْلَ
+  الْغَدَاةِ`. Four before Dhuhr, stated as a unit, silent on taslim.
+
+**So this is a schools-differ case, not a right-and-wrong one.** The majority —
+Shafiʿi and Hanbali — pray the four as 2 + 2. The Hanafis pray them as one
+block with one taslim, which is the same school difference `prayers.ts` already
+flags in its ⚠️ note.
+
+**Decision: teach 2 + 2**, because it is the majority practice and because two
+short prayers are less to hold than one long one for somebody new. Note the
+Hanafi difference in one plain sentence in the step's `note`, as CLAUDE.md
+requires for a difference a beginner will actually meet — and they will meet
+this one, standing next to somebody in a mosque.
+
 ### The work
 
 - Replace the bare "in Sahih Muslim" with `hadith('muslim', '728.03', …)`.
 - Cite the breakdown to Tirmidhi 414 rather than to HadeethEnc's explanation.
 - Keep the existing ⚠️ REVIEW REQUIRED note — the Hanafi difference it already
   records is untouched by any of this — and add the gharib point to it.
+- Widen `sunnahBefore` / `sunnahAfter` so a count can carry its units, and
+  render "4 (2 + 2)" rather than "4".
 - `npm run evidence` afterwards, so the narrations render under the citation
   the way every other one in the app does.
 

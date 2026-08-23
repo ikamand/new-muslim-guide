@@ -1335,25 +1335,37 @@ stops being the wall you hit first.
 
 ### Istikhara's duʿa is the prayer, not a footnote
 
-Iyad's point, and it is the sharpest one: *"istikhara has the istikhara duʿa at
-the end of it — that should be the main thing after making the 2 rakʿahs."*
+Iyad's point, and the sharpest one of the day: *"istikhara has the istikhara
+duʿa at the end of it — that should be the main thing after making the 2
+rakʿahs, not inserted in the where it comes from."*
 
-**The duʿa is not in the app at all.** `voluntary-prayers.ts` holds a section
-called "The words" that describes the duʿa and does not print it, under a
-comment explaining why: both publishers that carry it —
-**Sahih al-Bukhari via HadeethEnc 3293** and **Hisn al-Muslim via
-cnt.islamhouse.com book 819, page 5, phrase 1269185** — print the narrator's
-alternative *inside* the supplication: `وَعَاقِبَةِ أَمْرِي` **or** `عَاجِلِ أَمْرِي
-وَآجِلِهِ`. Splicing them makes a text nobody says.
+**Correction to what this document said earlier.** It claimed the duʿa was not
+in the app. **It is.** [`evidence.ts`](../src/content/evidence.ts) holds it as
+`bukhari:he3293` — full Arabic, transliteration and English, verbatim from
+HadeethEnc — and it renders inside the "where it comes from" disclosure. That
+is exactly what Iyad is looking at, and he confirms the text is right.
 
-**That decision has to be made now, because the phase needs the text.** Two
-things it needs settling on, both editorial rather than technical: which of the
-two wordings the app prints, and where "and he names his need" sits. Iyad reads
-Arabic and can pick the wording; whether the choice is *sound* is a reviewer's
-call, and it goes on the Priority 1 list either way.
+So this is **not a content problem, it is a placement problem.** The most
+important words on the page are sitting in the citation footer, underneath the
+section that describes them without printing them. Nothing needs fetching, no
+source needs choosing, and **it no longer depends on Phase 7** — the istikhara
+work stands alone.
 
-Phase 7 imports Hisn al-Muslim wholesale, so **the text arrives as part of that
-work** rather than being fetched specially.
+**The wording: `وَعَاقِبَةِ أَمْرِي`.** Iyad's call, 22 Aug — both alternatives mean
+the same thing, so pick one. This one because the narration gives it first,
+with `أَوْ قَالَ` marking the second as the narrator's own uncertainty; because it
+is shorter, which matters to somebody memorising; and because it is what the
+printed duʿa collections carry as their main text.
+
+**Keep the two jobs apart.** The evidence footer keeps the narration **verbatim,
+both alternatives intact** — it is a quotation, and a quotation is not edited.
+The instruction prints the single chosen wording, because there the app is
+teaching rather than quoting. Same text, two purposes, one place each.
+
+**The work:** move the text from the citation into
+`voluntary-prayers.ts`'s "The words" section as an actual `Recitation`, and
+delete the ⚠️ comment saying it is not printed yet along with the note
+apologising for its absence.
 
 ### The guide should end with the duʿa
 

@@ -1290,6 +1290,89 @@ this one, standing next to somebody in a mosque.
 
 ---
 
+## Also Tuesday — invert "Prayed by choice"
+
+Iyad, 22 Aug: *"the whole section is messy."* It is, and the code says so
+itself. [`pray.tsx:119`](../src/app/pray.tsx#L119) routes every voluntary row
+to `/guide/[id]`, and the comment **six lines below it** reads:
+
+> *The how and the why are different pages on purpose. A guide walks the
+> movements, which for all three are the movements they already know — what a
+> reader actually needs is what the prayer is FOR.*
+
+The comment is right and the `href` above it does the opposite. Tapping
+"Tahajjud" lands you in a twenty-three step walkthrough of a two-rakʿah prayer
+you already know how to pray, and "Asking God to choose" — the page that exists
+to correct the thing everybody gets told wrong about istikhara — is reachable
+only through a link at the bottom of the section.
+
+### The inversion
+
+| | Today | After |
+|---|---|---|
+| **Tap a voluntary prayer** | 23-step generated guide | The reference page: what it is, and what it is for |
+| **The movements** | The default, unavoidable | One tap deeper, behind **"Pray two rakʿahs"** |
+| **"Asking God to choose"** | Reachable only via a footer link | It *is* the istikhara destination |
+
+**Why this is right and not merely tidier.** For the five fard prayers the
+guide *is* the content — nobody wonders what Dhuhr is for, they wonder what to
+do with their hands. For a voluntary prayer it reverses: the movements are the
+ones they already pray five times a day, and the open question is *why am I
+standing here, and when*. The three reference pages already answer that and are
+already written.
+
+**Keep the guide, one tap down.** A convert of three weeks may genuinely not
+know the two-rakʿah script yet, and `buildPrayer` generates it for free. It
+stops being the wall you hit first.
+
+### The wiring
+
+- One `href` in `pray.tsx`, plus an id map: the specs use `tahajjud`,
+  `istikhara`, `tawba`; the references use `tahajjud`, `istikhara`,
+  **`tawba-prayer`**. Align the ids or map them — do not let it silently 404.
+- The footer link to "what these prayers are for" is then pointing at the place
+  the rows already go. **Delete it.**
+
+### Istikhara's duʿa is the prayer, not a footnote
+
+Iyad's point, and it is the sharpest one: *"istikhara has the istikhara duʿa at
+the end of it — that should be the main thing after making the 2 rakʿahs."*
+
+**The duʿa is not in the app at all.** `voluntary-prayers.ts` holds a section
+called "The words" that describes the duʿa and does not print it, under a
+comment explaining why: both publishers that carry it —
+**Sahih al-Bukhari via HadeethEnc 3293** and **Hisn al-Muslim via
+cnt.islamhouse.com book 819, page 5, phrase 1269185** — print the narrator's
+alternative *inside* the supplication: `وَعَاقِبَةِ أَمْرِي` **or** `عَاجِلِ أَمْرِي
+وَآجِلِهِ`. Splicing them makes a text nobody says.
+
+**That decision has to be made now, because the phase needs the text.** Two
+things it needs settling on, both editorial rather than technical: which of the
+two wordings the app prints, and where "and he names his need" sits. Iyad reads
+Arabic and can pick the wording; whether the choice is *sound* is a reviewer's
+call, and it goes on the Priority 1 list either way.
+
+Phase 7 imports Hisn al-Muslim wholesale, so **the text arrives as part of that
+work** rather than being fetched specially.
+
+### The guide should end with the duʿa
+
+`buildPrayer` derives every prayer from two facts — rakʿah count and whether
+the Qur'an is recited aloud. Istikhara has a third: **it ends with a
+supplication that is the entire point of praying it.**
+
+Add a `closingDua` to the spec rather than hand-writing an istikhara script.
+One optional field, one extra generated step after the taslim, and the rule in
+CLAUDE.md — *never hand-write a sixth prayer* — stays intact. Tahajjud and
+tawba leave it undefined and are unchanged.
+
+### What this removes
+
+The 23-step wall in front of three prayers that did not need one, and the
+footer link that was the only route to the page people most need.
+
+---
+
 ## Tuesday's order, and why
 
 1. **Phase 7** first. Highest content value, and the tab structure is decided
@@ -1301,7 +1384,9 @@ this one, standing next to somebody in a mosque.
    arguing about 9.2 rather than building.
 4. **The rawatib citation** is a twenty-minute job with the numbers already
    found. Do it while something downloads.
-5. **Phase 10** is not Tuesday. It needs a build, and it is infrastructure for
+5. **"Prayed by choice"** is small and self-contained — a good first thing
+   while the audio downloads.
+6. **Phase 10** is not Tuesday. It needs a build, and it is infrastructure for
    a Qur'an the app does not have yet — worth doing, worth doing after the
    letters.
 

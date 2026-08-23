@@ -1367,6 +1367,51 @@ teaching rather than quoting. Same text, two purposes, one place each.
 delete the ⚠️ comment saying it is not printed yet along with the note
 apologising for its absence.
 
+### Add Qiyam al-Layl — and witr is the bigger gap
+
+Iyad, 22 Aug. **Qiyam al-layl is already defined in the app and not offered.**
+`voluntary-prayers.ts` closes the tahajjud page with *"If you have not slept,
+you are praying qiyam al-layl — also good, also voluntary, and not what this
+word means"* — a definition of a thing with nowhere to go.
+
+**Findability is the case for it**, the same one that renamed the rows above:
+*qiyam* is announced at mosques through Ramadan, so it is a word a convert
+meets in their first Ramadan and cannot look up here.
+
+**One line in `PRAYER_SPECS`**, as CLAUDE.md intends:
+
+```
+{ id: 'qiyam', title: 'Qiyam al-Layl', when: 'Any part of the night, before you sleep',
+  rakahs: 2, aloudRakahs: 0, kind: 'voluntary' }
+```
+
+⚠️ **The risk, named once.** Tahajjud and qiyam al-layl differ by exactly one
+fact — whether you slept first — and two adjacent rows invite "which do I
+pick?" from the person least able to answer. Mitigation is in the `when` line,
+which should state the distinguishing fact rather than describe the mood:
+*"before you sleep"* against tahajjud's *"after you have slept"*. If those two
+lines do not make the difference obvious at a glance, the second row is costing
+more than it earns.
+
+### Witr, and why it matters more
+
+**Not asked for — proposed.** Teaching someone to pray at night without telling
+them to close it with witr leaves the instruction mid-sentence. Witr is the
+strongly emphasised sunnah that ends the night, it is the one every night-prayer
+narration in this app already mentions in passing, and `buildPrayer` handles an
+odd rakʿah count today because Maghrib is three.
+
+It is also the one voluntary prayer with a **shape a beginner will get wrong
+unaided** — that it is odd, that it comes last, that the night prayer is prayed
+in twos until it. Tahajjud, istikhara and qiyam are all the two-rakʿah prayer
+they already know; witr is not.
+
+**Cost, plainly:** both of these are new reference pages, which is new
+model-written content on the salah path — the heaviest part of
+`docs/scholarly-review.md`. Two more pages is not a large code change and it is
+a real addition to the pile that gates release. Worth doing; worth doing with
+that said out loud.
+
 ### The rows are named for the prayer, not for the page
 
 Iyad, 22 Aug, on the mockup. The rows had inherited the reference pages' titles

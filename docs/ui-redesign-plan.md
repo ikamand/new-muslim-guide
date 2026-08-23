@@ -1393,6 +1393,52 @@ which should state the distinguishing fact rather than describe the mood:
 lines do not make the difference obvious at a glance, the second row is costing
 more than it earns.
 
+### Reference pages get a quick-facts block
+
+Iyad, 22 Aug, showing a bulleted fact sheet: *"instruction should look similar
+to this — simple and straight to the point, short. Isn't it better than article
+style paragraphs?"*
+
+**Half yes, and the half that is yes is a real problem with the app today.**
+`voluntary-prayers.ts` is `body` strings of 40–60 words each. Somebody awake at
+3am asking *when can I pray this* should not read a paragraph to find out. The
+hard facts — when, how many, do I have to — want to be scannable rows.
+
+**The half that is no is the register, not the form.** The sheet Iyad showed
+carries a line reading *"Status: Sunnah Mu'akkadah, while the Hanafi school
+considers it Wajib."* To a convert of three weeks that is four unknown words
+and no answer to the only question being asked. The app's version of that fact
+is **"No, you don't have to. Most people who pray at night do it anyway."**
+Same ruling, no vocabulary tax. A fact sheet written in the tradition's own
+shorthand is an index for somebody who already knows the words — which is
+precisely the reader this app is not for.
+
+**So: take the form, drop the register.** Each `Reference` gains an optional
+quick-facts block rendered above its sections — three or four label/value rows,
+plain English, no fiqh terminology:
+
+| | Witr |
+|---|---|
+| **When** | After Isha, any time until dawn |
+| **How many** | One rakʿah |
+| **Do I have to?** | No — but it is how the night prayer is closed |
+
+Prose stays underneath for what genuinely needs a sentence. **"No dream is
+coming" cannot be a bullet** — the whole point of that section is to undo
+something the reader was told wrongly, and undoing needs an argument.
+
+**Scope, said plainly:** this is a change to the `Reference` type and to every
+reference page in the app, not to the voluntary prayers alone. That is a much
+larger job than the rest of this section, and it rewrites English copy — which
+drops the French and Spanish translations of every line it touches back to
+English. Worth doing; not worth doing on the same day as everything else here.
+
+⚠️ **The sheet's own content is not usable.** Its citations are Reddit and a
+charity's blog, and it states witr as *usually three*, where this plan
+specifies one on Sahih Muslim 752. Both practices are valid. Three reopens the
+Maghrib-shape question and requires explaining the 2+1 versus continuous split
+— which is a longer answer, in a section arguing for shorter ones.
+
 ### Witr — decided 22 Aug, and it is one rakʿah
 
 **Approved by Iyad.** Teaching someone to pray at night without telling them to

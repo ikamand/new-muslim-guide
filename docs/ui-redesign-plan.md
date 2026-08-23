@@ -1393,24 +1393,51 @@ which should state the distinguishing fact rather than describe the mood:
 lines do not make the difference obvious at a glance, the second row is costing
 more than it earns.
 
-### Witr, and why it matters more
+### Witr — decided 22 Aug, and it is one rakʿah
 
-**Not asked for — proposed.** Teaching someone to pray at night without telling
-them to close it with witr leaves the instruction mid-sentence. Witr is the
-strongly emphasised sunnah that ends the night, it is the one every night-prayer
-narration in this app already mentions in passing, and `buildPrayer` handles an
-odd rakʿah count today because Maghrib is three.
+**Approved by Iyad.** Teaching someone to pray at night without telling them to
+close it with witr leaves the instruction mid-sentence. Witr is also the one
+voluntary prayer with a shape a beginner gets wrong unaided: tahajjud,
+istikhara and qiyam are all the two-rakʿah prayer they already know, and witr
+is not.
 
-It is also the one voluntary prayer with a **shape a beginner will get wrong
-unaided** — that it is odd, that it comes last, that the night prayer is prayed
-in twos until it. Tahajjud, istikhara and qiyam are all the two-rakʿah prayer
-they already know; witr is not.
+**Teach it as ONE rakʿah.** `{ id: 'witr', title: 'Witr', when: 'To close the
+night, after any night prayer', rakahs: 1, aloudRakahs: 0, kind: 'voluntary' }`
 
-**Cost, plainly:** both of these are new reference pages, which is new
-model-written content on the salah path — the heaviest part of
-`docs/scholarly-review.md`. Two more pages is not a large code change and it is
-a real addition to the pile that gates release. Worth doing; worth doing with
-that said out loud.
+Three reasons, in order of weight:
+
+1. **It is what the text says.** Sahih Muslim **752** — Ibn Umar: `الْوِتْرُ رَكْعَةٌ
+   مِنْ آخِرِ اللَّيْلِ`, *"Witr is one rakʿah at the end of the night."* Read from
+   the corpus 22 Aug.
+2. **It is the simplest instruction that is complete.** "After you finish
+   praying at night, pray one more." Nothing to count, nothing to structure.
+3. **It avoids a shape `buildPrayer` would get wrong.** `rakahs: 3` would
+   generate a Maghrib-shaped prayer — a sitting after the second rakʿah — and
+   whether witr may look like Maghrib is a live dispute this app has no reason
+   to walk into. `rakahs: 1` has no such question in it.
+
+⚠️ **A correction, kept rather than quietly dropped.** This section originally
+reached for a narration — "do not pray witr as three, resembling Maghrib" — to
+justify point 3. **It could not be found in the six books in that wording** when
+searched on 22 Aug, so nothing here rests on it and it is not cited. Point 3
+stands on its own as an engineering argument, not a ruling.
+
+**The school difference, in one sentence in the step's `note`:** many pray witr
+as three, and the Hanafi school prays three as a unit. One rakʿah is what the
+app teaches because it is what the narration above states and the least a
+beginner can get wrong.
+
+**Held deliberately: the qunut duʿa.** It is a real part of witr for many, it is
+another Arabic text needing a verified source, and it is not needed to pray a
+valid witr. Add it when there is a text and a reviewer, not with the row.
+
+⚠️ **Check `buildPrayer` actually generates a one-rakʿah prayer sensibly** —
+every existing spec is 2, 3 or 4, so `rakahs: 1` is an untested path. Run it and
+look at the screen before believing it.
+
+**Cost, plainly:** witr and qiyam are two new reference pages of model-written
+content on the salah path, which is the heaviest part of
+`docs/scholarly-review.md` and the pile that gates release.
 
 ### The rows are named for the prayer, not for the page
 

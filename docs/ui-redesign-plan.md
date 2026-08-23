@@ -1185,6 +1185,68 @@ the OTA phases while it runs.
 
 ---
 
+## Also Tuesday — number the rawatib citation
+
+Iyad spotted it 22 Aug: [`prayers.ts:102`](../src/content/prayers.ts#L102) says
+*"The twelve come from Umm Habiba's narration in Sahih Muslim"* **and gives no
+number**, and it attributes the breakdown across the five prayers to
+HadeethEnc's own *explanation* (65715) rather than to a narration. Exactly the
+failure CLAUDE.md names: a reference nobody can open.
+
+All three below were **read from `.cache/hadith`** (fawazahmed0, which carries
+each collection's own numbering) on 22 Aug — not remembered.
+
+### The twelve — Sahih Muslim 728
+
+Umm Habibah. `arabicnumber` **728.03**, continuous no. 1696, book 6 hadith 126.
+
+> مَا مِنْ عَبْدٍ مُسْلِمٍ يُصَلِّي لِلَّهِ كُلَّ يَوْمٍ ثِنْتَىْ عَشْرَةَ رَكْعَةً تَطَوُّعًا غَيْرَ فَرِيضَةٍ إِلاَّ بَنَى اللَّهُ لَهُ بَيْتًا فِي الْجَنَّةِ
+
+Four narrations sit under 728. `.02` has the *twelve sajdahs* wording and `.01`
+/ `.04` are variant chains, so **cite 728 and let the sub-number be 728.03** —
+the app's `hadith()` helper already takes a suffixed id, as `muslim 391b` in
+this same file does.
+
+### The breakdown — Jamiʿ at-Tirmidhi 414
+
+ʿAisha, book 2 hadith 267. Four before Dhuhr, two after, two after Maghrib, two
+after Isha, two before Fajr — the itemisation the app currently takes from an
+explanation. Graded **Sahih by al-Albani and by Ahmad Shakir**; Zubair Ali Zai:
+*Isnaad Hasan*.
+
+⚠️ **This one needs the reviewer, and the reason is in the collection itself.**
+Tirmidhi's own closing words on it:
+
+> حَدِيثُ عَائِشَةَ حَدِيثٌ غَرِيبٌ مِنْ هَذَا الْوَجْهِ. وَمُغِيرَةُ بْنُ زِيَادٍ قَدْ تَكَلَّمَ فِيهِ بَعْضُ أَهْلِ الْعِلْمِ مِنْ قِبَلِ حِفْظِهِ
+
+Gharib by this route, and Mughirah b. Ziyad was criticised for his memory. The
+parallels — **Ibn Majah 1140** and **Nasa'i 1794 / 1795**, both Albani-Sahih —
+carry the same matn **through the same Mughirah → ʿAtaʾ → ʿAisha chain**, so
+they corroborate the wording and not the chain. Do not present them as
+independent corroboration. Whether the breakdown is taught as established is a
+substance call and belongs in `docs/scholarly-review.md`.
+
+### Do not quietly mix in — Sunan Abi Dawud 1269
+
+Umm Habibah, book 5 hadith 20, Albani Sahih:
+*من حافظ على أربع ركعات قبل الظهر وأربع بعدها حرم على النار*.
+
+**It says four after Dhuhr, where the twelve say two.** It is a virtue of one
+part, not a restatement of the total. If it ever appears near the rawatib
+counts it needs a sentence saying so, or it reads as the app contradicting
+itself.
+
+### The work
+
+- Replace the bare "in Sahih Muslim" with `hadith('muslim', '728.03', …)`.
+- Cite the breakdown to Tirmidhi 414 rather than to HadeethEnc's explanation.
+- Keep the existing ⚠️ REVIEW REQUIRED note — the Hanafi difference it already
+  records is untouched by any of this — and add the gharib point to it.
+- `npm run evidence` afterwards, so the narrations render under the citation
+  the way every other one in the app does.
+
+---
+
 ## Tuesday's order, and why
 
 1. **Phase 7** first. Highest content value, and the tab structure is decided
@@ -1194,7 +1256,9 @@ the OTA phases while it runs.
    it is a few lines, and it is the payoff for bringing the audio in-house.
 3. **Phase 9** is a conversation, not a commit. If Tuesday has room, spend it
    arguing about 9.2 rather than building.
-4. **Phase 10** is not Tuesday. It needs a build, and it is infrastructure for
+4. **The rawatib citation** is a twenty-minute job with the numbers already
+   found. Do it while something downloads.
+5. **Phase 10** is not Tuesday. It needs a build, and it is infrastructure for
    a Qur'an the app does not have yet — worth doing, worth doing after the
    letters.
 

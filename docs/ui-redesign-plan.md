@@ -1367,6 +1367,44 @@ teaching rather than quoting. Same text, two purposes, one place each.
 delete the ⚠️ comment saying it is not printed yet along with the note
 apologising for its absence.
 
+### The rows are named for the prayer, not for the page
+
+Iyad, 22 Aug, on the mockup. The rows had inherited the reference pages' titles
+— "Praying at night", "Asking God to choose", "The prayer after a sin". Those
+are good *page* titles and bad *row* labels, and the difference matters:
+
+| Row label | Under it |
+|---|---|
+| **Praying Tahajjud** | The last third of the night |
+| **Praying Istikhara** | Ask Allah to choose when you have a decision to make |
+| **The prayer of repentance** | Ask Allah for forgiveness |
+
+**Why the row and the page want different names.** A row is scanned by someone
+who heard a word and is trying to find it. *Tahajjud* and *istikhara* are words
+a convert will hear said to them — in a mosque, by a friend, in a group chat —
+and cannot look up in this app if the app has renamed them to something more
+evocative. The page, already open, can afford the better title.
+
+**The asymmetry in the third row is deliberate, not an oversight.** Iyad kept
+"The prayer of repentance" in English where the other two carry their Arabic
+names, and the reason holds: *tahajjud* and *istikhara* are heard as Arabic
+words, *salat al-tawba* is mostly not. Name the row with whatever a beginner
+will actually be searching for.
+
+**Where the text comes from.** `PRAYER_SPECS` already carries `title` and
+`when` for all three — `'Tahajjud'` / `'The last part of the night'`,
+`'Istikhara'` / `'When you have a decision to make'`. The rows should render
+from the spec rather than from the reference page, so the two stop having to
+agree by hand.
+
+⚠️ **One substance point on "the last third of the night."** The reference page
+currently says "the last part of the night", and the page's whole argument is
+*how small this is allowed to be*. The last third is the better time, not the
+only valid one — someone who reads "the last third" as a requirement, decides
+they cannot manage it, and drops the prayer has been taught the opposite of
+what the page says. Iyad's wording stands; the note belongs on the reviewer's
+list, and the page body should keep saying that any time after sleeping counts.
+
 ### Drawn, 22 Aug — three decisions the mockup made
 
 Mockup: <https://claude.ai/code/artifact/caa49c0f-78e9-40c8-be21-91908ff138bb>

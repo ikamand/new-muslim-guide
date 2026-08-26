@@ -40,12 +40,31 @@ export const FOOD: Reference = {
     tags: ['etiquette', 'family'],
     relatedContent: [ref('reference', 'halal-and-haram'), ref('reference', 'family')],
   },
+  /*
+    Two rows, not four — and that is the point of piloting the format here.
+
+    Food has no rakʿah count and no movements, so "How many" and "How" simply
+    do not exist for it. Padding to four rows on every page would make the
+    block structure for its own sake, which is the failure mode this whole
+    phase is one bad decision away from.
+
+    "Do I have to?" is answered "yes" here, and it is the first page where that
+    row carries a yes. It has to read as an answer rather than a warning: the
+    tone is settled fact, not a finger raised.
+  */
+  quickFacts: [
+    {
+      label: 'What changes',
+      value: 'Pork, blood, alcohol, and meat that was not slaughtered',
+    },
+    { label: 'Do I have to?', value: 'Yes — this one is not optional', emphasis: true },
+  ],
   sections: [
     {
       id: 'forbidden',
-      heading: 'The short list',
+      heading: 'What is actually forbidden?',
       body:
-        'The Qur’an names what is forbidden: pork, blood, animals that died without being slaughtered, and anything dedicated to something other than God. Alcohol and other intoxicants are forbidden separately. That is the core of it — everything else on the shelf is fine.',
+        'The Qur’an names four things: pork, blood, animals that died without being slaughtered, and anything dedicated to something other than God. Alcohol and other intoxicants are forbidden separately. Everything else on the shelf is fine.',
       sources: [
         quran(2, 173, { surahName: 'Al-Baqarah' }),
         quran(5, 3, { surahName: 'Al-Ma’idah' }),
@@ -54,15 +73,15 @@ export const FOOD: Reference = {
     },
     {
       id: 'reading-labels',
-      heading: 'What this looks like in practice',
+      heading: 'What changes at the supermarket?',
       body:
-        'Mostly it means reading ingredients for a few weeks until you know the usual suspects: gelatine, lard, some animal fats, alcohol in sauces and extracts. It gets automatic quickly. Vegetables, grains, fish, dairy, eggs and fruit were never in question.',
+        'Reading ingredients for a few weeks, until you know the usual suspects: gelatine, lard, some animal fats, alcohol in sauces and extracts. It gets automatic quickly. Vegetables, grains, fish, dairy, eggs and fruit were never in question.',
     },
     {
       id: 'meat',
-      heading: 'Meat is the part people argue about',
+      heading: 'Is supermarket meat halal?',
       body:
-        'The Qur’an explicitly permits the food of the People of the Book — Jews and Christians. What contemporary scholars disagree about is whether meat from modern industrial slaughterhouses in a non-Muslim country falls under that permission, given how the animals are killed and that God’s name is not pronounced over them.',
+        'People genuinely differ, and you will be told opposite things with equal confidence. The Qur’an permits the food of the People of the Book; what scholars disagree about is whether modern industrial slaughter still resembles what that verse describes. Certified halal meat satisfies every position, which is where most converts start.',
       sources: [quran(5, 5, { surahName: 'Al-Ma’idah' })],
       notes: [
         note(

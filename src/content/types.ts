@@ -208,6 +208,52 @@ export type ReferenceSection = {
   sources?: readonly Source[];
 };
 
+/**
+ * One row of the block at the top of a teaching page.
+ *
+ * ## Why a page needs this above its prose
+ *
+ * The reference pages are `body` strings averaging 47 words, and somebody
+ * awake at three in the morning asking *when can I pray this* should not read
+ * a paragraph to find out. Prose is the right shape for an argument and the
+ * wrong shape for a fact, and the app was using it for both.
+ *
+ * ## Written as the reader's question, not the tradition's vocabulary
+ *
+ * The label is the question somebody actually has — "Do I have to?" — and the
+ * value answers it in words they already own. A row reading "Status: Sunnah
+ * Mu'akkadah, and Wajib to the Hanafis" is four unknown words and no answer;
+ * "No — but it is how the night prayer is closed" is the same ruling with no
+ * vocabulary tax. A fact sheet in the tradition's shorthand is an index for
+ * somebody who already knows the words, which is not who this app is for.
+ *
+ * ## Rows are optional and pages differ
+ *
+ * Food has no "how many" and no "how". A block that pads itself to four rows
+ * on every page would be structure for its own sake.
+ */
+export type QuickFact = {
+  /** The reader's question, short enough to sit in one column. */
+  label: string;
+  value: string;
+  /**
+   * Where this row goes, for the one row that is a door rather than a fact.
+   *
+   * "How" is a route to the guide, not a sentence — writing a how-to in one
+   * line would be a lie about how simple the movements are. A page with
+   * movements gets the door; a page without one does not have the row.
+   */
+  href?: string;
+  /**
+   * Drawn in the accent colour.
+   *
+   * For "Do I have to?", which is the only row carrying a stance rather than a
+   * fact. One coloured answer per page; more and none of them read as the
+   * important one.
+   */
+  emphasis?: boolean;
+};
+
 export type Reference = {
   id: string;
   title: string;
@@ -226,6 +272,8 @@ export type Reference = {
    * changes during a period — and shows it to anyone who declined the question.
    */
   audience?: 'man' | 'woman';
+  /** Answers before argument. Three or four rows at most; often fewer. */
+  quickFacts?: readonly QuickFact[];
   sections: ReferenceSection[];
   meta?: ContentMeta;
 };

@@ -2,11 +2,13 @@ import { Stack, useLocalSearchParams } from 'expo-router';
 import { ScrollView, StyleSheet, View } from 'react-native';
 
 import { ContentNoteCard } from '@/components/content-note';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { PressableLink } from '@/components/pressable-link';
 import { RecitationCard } from '@/components/recitation-card';
 import { SourceDisclosure } from '@/components/source-list';
 import { ThemedText } from '@/components/themed-text';
 import { TranslationGap } from '@/components/translation-gap';
-import { getReference, resolveNotes } from '@/content';
+import { getReference, resolveNotes, type QuickFact } from '@/content';
 import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { localiseReference, measure } from '@/i18n/localise';
@@ -47,6 +49,8 @@ export default function ReferenceScreen() {
       </ThemedText>
 
       <View style={styles.list}>
+        {reference.quickFacts && <QuickFacts facts={reference.quickFacts} />}
+
         {reference.sections.map((section) => (
           <View
             key={section.id}
@@ -77,7 +81,81 @@ export default function ReferenceScreen() {
   );
 }
 
+/**
+ * The answers, before the argument.
+ *
+ * Styled as answers rather than as a table: labels quiet, values in body
+ * weight, a hairline between rows and no outer border or fill. A bordered box
+ * of label/value pairs reads as reference material to be consulted; this
+ * should read as somebody answering you.
+ */
+function QuickFacts({ facts }: { facts: readonly QuickFact[] }) {
+  const theme = useTheme();
+  if (facts.length === 0) return null;
+
+  return (
+    <View style={styles.facts}>
+      {facts.map((fact, index) => {
+        const body = (
+          <>
+            <ThemedText
+              type="caption"
+              themeColor="textSecondary"
+              style={styles.factLabel}
+              numberOfLines={2}>
+              {fact.label.toUpperCase()}
+            </ThemedText>
+            <ThemedText
+              type="default"
+              style={[styles.factValue, fact.emphasis && { color: theme.accent }]}>
+              {fact.value}
+            </ThemedText>
+          </>
+        );
+
+        const rowStyle = [
+          styles.factRow,
+          index < facts.length - 1 && { borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: theme.border },
+        ];
+
+        // The one row that is a door rather than a fact.
+        return fact.href ? (
+          <PressableLink
+            key={fact.label}
+            href={fact.href as never}
+            style={rowStyle}
+            pressedStyle={{ opacity: 0.6 }}>
+            {body}
+            <Ionicons name="chevron-forward" size={20} color={theme.accent} />
+          </PressableLink>
+        ) : (
+          <View key={fact.label} style={rowStyle}>
+            {body}
+          </View>
+        );
+      })}
+    </View>
+  );
+}
+
 const styles = StyleSheet.create({
+  facts: {
+    marginBottom: Spacing.two,
+  },
+  factRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.three,
+    minHeight: 52,
+    paddingVertical: Spacing.two,
+  },
+  factLabel: {
+    width: 96,
+    letterSpacing: 0.3,
+  },
+  factValue: {
+    flex: 1,
+  },
   content: {
     padding: Spacing.four,
     paddingBottom: Spacing.six,

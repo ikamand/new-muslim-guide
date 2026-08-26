@@ -261,27 +261,48 @@ export const WITR: Reference = {
     beginnerPriority: 3,
     relatedContent: [ref('reference', 'tahajjud'), ref('reference', 'qiyam-al-layl')],
   },
+  /*
+    All four rows earn their place here, which is why witr is one of the two
+    pages this format was piloted on. The other is `food.ts`, which gets two —
+    if the block only looks right where every row happens to apply, it is
+    structure for its own sake.
+
+    "Do I have to?" answers in the words somebody has. The ruling underneath it
+    is that witr is a strongly emphasised sunnah, and wajib to the Hanafis, but
+    a page that says that has answered a scholar's question rather than the
+    reader's.
+  */
+  quickFacts: [
+    { label: 'When', value: 'After Isha, any time until dawn' },
+    { label: 'How many', value: 'One, three or five — any odd number. One is enough' },
+    {
+      label: 'Do I have to?',
+      value: 'No — but it is how the night prayer is closed',
+      emphasis: true,
+    },
+    { label: 'How', value: 'Pray one rakʿah', href: '/guide/witr' },
+  ],
   sections: [
     {
       id: 'what',
-      heading: 'What it is',
+      heading: 'Why an odd number?',
       body:
-        'The last prayer of your night, and an odd number of rakʿahs — which is what the word means. After Isha, any time until dawn. If you are going to pray at night, this is what you finish on.',
+        'Because that is what the word means. Witr is what you finish the night on, and finishing on an odd rakʿah is the whole shape of it.',
       sources: [hadith('muslim', '752', { grading: 'sahih', role: 'practice' })],
     },
     {
       id: 'how-many',
-      heading: 'One, three or five — your choice',
+      heading: 'Is one really enough?',
       body:
-        'The Prophet ﷺ named all three and left it to the person praying. One rakʿah is a complete witr; it is not a shortened version of something else. Most people pray three, and you will see that around you.',
+        'Yes. The Prophet ﷺ named five, three and one and left the choice to the person praying, so one is a complete witr rather than a shortened version of something else. Most people pray three, and you will see that around you.',
       sources: [hadith('abu-dawud', '1422', { grading: 'sahih', role: 'practice' })],
       note: 'Start with one. It is the whole prayer, it takes a minute, and it is the version you are least likely to get wrong while you are learning.',
     },
     {
       id: 'when',
-      heading: 'When to pray it',
+      heading: 'What if I sleep through it?',
       body:
-        'Any time between Isha and dawn. If you know you will not wake up later, pray it before you go to sleep. If you do pray at night, leave it until the end — it is meant to be the last thing.',
+        'Pray it before you go to bed. Leaving it to the end of the night is better, but only if you are actually going to be awake — and it is meant to be the last thing you pray, not the thing you missed.',
       sources: [hadith('bukhari', '990', { grading: 'sahih', role: 'practice' })],
     },
   ],

@@ -163,9 +163,23 @@ export const Recitations = {
       because the verse really is why this is said here; `wordingElsewhere`
       records what it does not establish.
 
-      ⚠️ REVIEW REQUIRED — the wording has no citation of its own. It is the
-      near-universal formula and is in the collections, but this app does not
-      print a reference it has not verified, and none has been.
+      ⚠️ REVIEW REQUIRED — the wording still has no citation of its own, and
+      the reason is worth writing down rather than rediscovering.
+
+      Checked 26 Aug 2026: these exact words appear in **Sunan Abi Dawud
+      4781**, graded sahih by al-Albani, Muhyi al-Din Abdul Hamid and Shuaib
+      al-Arnaut, with Zubair Ali Zai noting Bukhari 2382 and Muslim 2610. So
+      "it is in the collections" is no longer an assertion; it is verified.
+
+      It is still not cited here, because that narration is about a man who
+      was ANGRY — the Prophet ﷺ said he knew a word that would take away what
+      the man was feeling. Right words, different ruling. Putting that number
+      under the prayer's recite step would be the mistake the Sahih Muslim
+      numbering bug made on eighteen citations: a reference that resolves, and
+      renders, and is about something else.
+
+      What is missing is a narration of these words IN THE PRAYER. A reviewer
+      may know one; this repo has not found it.
     */
     sources: [quran(16, 98, { surahName: 'An-Nahl', wordingElsewhere: true })],
     audioId: 'taawwudh',
@@ -307,6 +321,25 @@ export const Recitations = {
     audioId: 'taslim',
   },
 
+  /*
+    ⚠️ REVIEW REQUIRED — the wording carries no hadith number, deliberately.
+
+    Checked 26 Aug 2026. **Sahih al-Bukhari 8** — the hadith the app already
+    cites for the five pillars — carries `شَهَادَةِ أَنْ لاَ إِلَهَ إِلاَّ اللَّهُ وَأَنَّ
+    مُحَمَّدًا رَسُولُ اللَّهِ`: the testimony THAT there is no god but Allah and
+    THAT Muhammad is His Messenger. What a person actually says, and what this
+    app prints, is the declaration itself without the `أَنْ` and `وَأَنَّ`.
+
+    That is the same distance as the taʿawwudh above, where 16:98 commands
+    seeking refuge in a different verb and a different person from the words
+    anybody says. Near enough to be obviously the same testimony; not the same
+    string. `npm run content:verify` compares on a consonantal skeleton and
+    would report a mismatch, correctly.
+
+    So it stays uncited rather than carrying a number that a reviewer would
+    have to walk back. The formula is universal and nothing about it is in
+    doubt; what is missing is a narration printing it in this exact form.
+  */
   shahada: {
     title: 'The testimony of faith',
     arabic: 'لَا إِلَٰهَ إِلَّا اللَّهُ مُحَمَّدٌ رَسُولُ اللَّهِ',

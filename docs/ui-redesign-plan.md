@@ -25,8 +25,8 @@ with its reasoning attached.
 | **3** | [Provenance](#phase-3--provenance) | ✅ **Done** — `5f2570a`, `e614780` | OTA |
 | **4** | [Duʿas, and the first network call](#phase-4--duas-and-the-apps-first-network-call) | 🟡 **Day built** — `d9bd351`. Fetch-and-cache held: no licensed content to fetch yet | OTA |
 | **5** | [The Qur'an tab](#phase-5--the-quran-tab--juz-30) | 🟡 **Text and drill built** — `eed5214`. Audio held: see below | OTA |
-| **7** | [The Duʿa tab](#phase-7--the-dua-tab) | ⬜ Planned 21 Aug — licence now settled | OTA |
-| **8** | [Audio that saves itself](#phase-8--audio-that-saves-itself) | ⬜ Rewritten 25 Aug — save on play, no button. Absorbs 10 | ⚠️ **Build** |
+| **7** | [The Duʿa tab](#phase-7--the-dua-tab) | 🟡 **Tab, book and Today's card built** — 25 Aug. Left: mapping 132 occasions onto the six moments | OTA |
+| **8** | [Audio that saves itself](#phase-8--audio-that-saves-itself) | 🟡 **Bundled set and Al-Ikhlas built** — 25 Aug. Left: save-on-play, storage screen | ⚠️ **Build** |
 | **9** | [Bet 4: the Arabic letters](#phase-9--bet-4-the-arabic-letters) | ⬜ Undesigned — needs a session, not a ticket | OTA |
 | **10** | Downloading a voice, a juz at a time | ↩︎ **Merged into 8** on 25 Aug — same store, same build |
 | **11** | [Four questions, on every teaching page](#phase-11--four-questions-on-every-teaching-page) | ⬜ Planned 25 Aug — biggest item here, own day | OTA |
@@ -912,6 +912,21 @@ No server, no migrations.
 
 # Built today — Tuesday 25 Aug — and what is left
 
+**Built on 25 Aug, in order:** the rawatib citations · Dhuhr's 2 + 2 · the
+"Prayed by choice" inversion · the istikhara duʿa out of the drawer · qiyam
+al-layl and witr · Al-Ikhlas at the recite step · the three quls bundled · the
+Duʿa tab · Hisn al-Muslim fetched and browsable · Today's duʿa card.
+
+**Left:** Phase 7's mapping of 132 occasions onto six moments (editorial, needs
+Iyad) · Phase 8's save-on-play and storage screen (needs a native build) ·
+Phase 9 (undesigned) · Phase 11 (28 pages, its own day).
+
+⚠️ **Three checking tools were found broken or blind by this day's work**, all
+recorded in their own commits: `content:audit` does not run at all
+(`require()` in `prayer-images.ts`); `audio:manifest` was blind to 15 bundled
+clips; `arabic` reported 54 Arabic strings while the app displayed 372. Two are
+fixed. `content:audit` is not.
+
 ⚠️ **The commit messages from this day say "22 Aug" and are wrong.** A
 mid-session clock told the model the date had rolled back three days and it
 stamped everything with it. The dates in this document are corrected; the
@@ -963,7 +978,7 @@ duʿa for putting on clothes exists, so an index cannot help them — but ten te
 is a demo of the idea, not the thing itself. Hisn al-Muslim has **133 occasions
 and 245 texts**.
 
-### 7.1 The shape: a day on top, the book underneath
+### ✅ Built 25 Aug — 7.1 a day on top, the book underneath
 
 Two surfaces, not one, because they answer different questions:
 
@@ -982,7 +997,7 @@ moments is the content work of this phase, not a mechanical import.
 becomes `src/app/(tabs)/duas.tsx`. Any link to `/duas` from Learn or Today
 becomes a tab jump, not a push.
 
-### 7.2 Today's duʿa card
+### ✅ Built 25 Aug — 7.2 Today's duʿa card
 
 A card on Today showing one duʿa, tapping through to it in the tab.
 
@@ -996,7 +1011,7 @@ teaches the opposite of the thing the day screen exists to teach. Two rules:
   reshuffle on every render or every app open. "Today's duʿa" that changes
   when you come back to the tab is not today's anything.
 
-### 7.3 The content: generated, not typed
+### ✅ Built 25 Aug — 7.3 the content, generated
 
 245 texts is not something to transcribe, and CLAUDE.md is explicit that a file
 that size only exists legitimately if every character came over the wire.
@@ -1049,7 +1064,7 @@ infer over what the user must configure.*
 
 The behaviour is invisible and cannot be wrong.
 
-### 8.2 What is bundled anyway, and why it is tiny
+### ✅ Built 25 Aug — 8.2 the bundled set
 
 **Al-Fatiha (already in, 7 clips) plus the three quls — Al-Ikhlas, Al-Falaq,
 An-Nas.** Well under 1 MB against 76.

@@ -13,7 +13,7 @@ import { TranslationGap } from '@/components/translation-gap';
 import { getGuide, resolveNotes, type Posture } from '@/content';
 import { getSurah, type Ayah } from '@/content/quran/surahs';
 import { localiseGuide, measure } from '@/i18n/localise';
-import { ArabicFont, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
+import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import type { UIKey } from '@/i18n/ui';
 import { useSettings } from '@/hooks/use-settings';
@@ -278,7 +278,7 @@ function SurahInStep({ number }: { number: number }) {
       </ThemedText>
       {surah.ayahs.map((ayah: Ayah) => (
         <View key={ayah.number} style={styles.surahAyah}>
-          <ThemedText style={styles.surahArabic}>{ayah.arabic}</ThemedText>
+          <ThemedText type="arabicVerse" style={styles.surahArabic}>{ayah.arabic}</ThemedText>
           <ThemedText type="small" themeColor="textSecondary">
             {ayah.translation}
           </ThemedText>
@@ -307,9 +307,7 @@ const styles = StyleSheet.create({
     gap: Spacing.one,
   },
   surahArabic: {
-    fontFamily: ArabicFont,
-    fontSize: 30,
-    lineHeight: 58,
+    /* size and face: the `arabicVerse` rung */
     textAlign: 'right',
     writingDirection: 'rtl',
   },

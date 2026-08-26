@@ -3,7 +3,7 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { HISN, HISN_SOURCE } from '@/content/duas/hisn';
-import { ArabicFont, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
+import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { useTheme } from '@/hooks/use-theme';
 
@@ -48,7 +48,7 @@ export default function DuaBookOccasionScreen() {
 
       <View style={styles.header}>
         <ThemedText type="sectionTitle">{occasion.english}</ThemedText>
-        <ThemedText style={[styles.headerArabic, { color: theme.textSecondary }]}>
+        <ThemedText type="arabicQuote" style={[styles.headerArabic, { color: theme.textSecondary }]}>
           {occasion.arabic}
         </ThemedText>
       </View>
@@ -60,7 +60,7 @@ export default function DuaBookOccasionScreen() {
             styles.card,
             { backgroundColor: theme.backgroundElement, borderColor: theme.border },
           ]}>
-          <ThemedText style={styles.arabic}>{line.arabic}</ThemedText>
+          <ThemedText type="arabicLead" style={styles.arabic}>{line.arabic}</ThemedText>
           {line.english ? (
             <ThemedText type="default" themeColor="textSecondary">
               {line.english}
@@ -68,7 +68,7 @@ export default function DuaBookOccasionScreen() {
           ) : null}
           {line.footnote ? (
             <View style={[styles.footnote, { borderLeftColor: theme.border }]}>
-              <ThemedText style={[styles.footnoteText, { color: theme.textSecondary }]}>
+              <ThemedText type="arabicNote" style={[styles.footnoteText, { color: theme.textSecondary }]}>
                 {line.footnote}
               </ThemedText>
             </View>
@@ -107,9 +107,7 @@ const styles = StyleSheet.create({
     gap: Spacing.one,
   },
   headerArabic: {
-    fontFamily: ArabicFont,
-    fontSize: 22,
-    lineHeight: 38,
+    /* size and face: the `arabicQuote` rung */
     textAlign: 'right',
     writingDirection: 'rtl',
   },
@@ -120,9 +118,7 @@ const styles = StyleSheet.create({
     borderWidth: StyleSheet.hairlineWidth,
   },
   arabic: {
-    fontFamily: ArabicFont,
-    fontSize: 26,
-    lineHeight: 52,
+    /* size and face: the `arabicLead` rung */
     textAlign: 'right',
     writingDirection: 'rtl',
   },
@@ -132,9 +128,7 @@ const styles = StyleSheet.create({
     paddingVertical: Spacing.one,
   },
   footnoteText: {
-    fontFamily: ArabicFont,
-    fontSize: 16,
-    lineHeight: 30,
+    /* size and face: the `arabicNote` rung */
     textAlign: 'right',
     writingDirection: 'rtl',
   },

@@ -24,7 +24,7 @@ import { StyleSheet, View, type StyleProp, type ViewStyle } from 'react-native';
 import { PressableLink } from '@/components/pressable-link';
 
 import { ThemedText } from '@/components/themed-text';
-import { ArabicFont, Radius } from '@/constants/theme';
+import { Radius } from '@/constants/theme';
 import { Teaching } from '@/constants/teaching';
 import { useTheme } from '@/hooks/use-theme';
 import type { QuickFact } from '@/content';
@@ -156,11 +156,7 @@ export function TeachingSource({
             ],
         style,
       ]}>
-      <ThemedText
-        style={[
-          styles.arabic,
-          { fontSize: spec.arabicSize, lineHeight: spec.arabicLineHeight },
-        ]}>
+      <ThemedText type={hero ? 'arabicLead' : 'arabicQuote'} style={styles.arabic}>
         {arabic}
       </ThemedText>
       {translation ? (
@@ -320,8 +316,8 @@ const styles = StyleSheet.create({
     gap: 10,
     marginBottom: Teaching.page.sectionGap,
   },
+  /* Direction only. The face and the size are a rung — see `themed-text.tsx`. */
   arabic: {
-    fontFamily: ArabicFont,
     textAlign: 'right',
     writingDirection: 'rtl',
   },

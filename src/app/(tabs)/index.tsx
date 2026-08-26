@@ -7,7 +7,7 @@ import { PrayerTimesCard } from '@/components/prayer-times-card';
 import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
 import { duaOfTheDay, hasPracticeBeyondSurahs, PRAYERS, WUDU, type Guide } from '@/content';
-import { ArabicFont, BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
+import { BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useHelpTopics } from '@/hooks/use-help';
 import { useHijriToday } from '@/hooks/use-hijri';
 import { useJourney } from '@/hooks/use-journey';
@@ -317,7 +317,7 @@ function DuaOfTheDay() {
       <ThemedText type="caption" themeColor="textSecondary">
         {localised.when}
       </ThemedText>
-      <ThemedText style={[styles.duaArabic, { color: theme.text }]} numberOfLines={2}>
+      <ThemedText type="arabicLead" style={[styles.duaArabic, { color: theme.text }]} numberOfLines={2}>
         {localised.says.arabic}
       </ThemedText>
       <ThemedText type="small" themeColor="textSecondary">
@@ -420,9 +420,7 @@ const styles = StyleSheet.create({
     borderWidth: StyleSheet.hairlineWidth,
   },
   duaArabic: {
-    fontFamily: ArabicFont,
-    fontSize: 24,
-    lineHeight: 46,
+    /* size and face: the `arabicLead` rung */
     textAlign: 'right',
     writingDirection: 'rtl',
   },

@@ -1,6 +1,6 @@
 import { StyleSheet, Text, type TextProps } from 'react-native';
 
-import { ThemeColor } from '@/constants/theme';
+import { ArabicFont, ThemeColor } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 /**
@@ -58,7 +58,11 @@ export type ThemedTextProps = TextProps & {
     | 'cardTitle'
     | 'sectionTitle'
     | 'subtitle'
-    | 'title';
+    | 'title'
+    | 'arabicNote'
+    | 'arabicQuote'
+    | 'arabicLead'
+    | 'arabicVerse';
   themeColor?: ThemeColor;
 };
 
@@ -78,6 +82,49 @@ export function ThemedText({ style, type = 'default', themeColor, ...rest }: The
 }
 
 const styles = StyleSheet.create({
+  /*
+    ## The Arabic rungs, and why they had to exist
+​
+    Amiri was being sized by hand in thirteen separate files — 16, 20, 21, 22,
+    24, 25, 26, 30 and 34 — because the rule about not inventing a font size
+    was written about Latin, and Arabic quietly fell outside it. That is the
+    same failure the eight Latin rungs were created to end, running again in
+    another script.
+​
+    Line heights are generous by Latin standards and have to be: Amiri stacks
+    vowel marks above the line and descenders below it, so 26px Arabic needs
+    the leading of 34px Latin or the marks of one line touch the letters of the
+    next. Never set an Arabic line-height by eye — take a rung.
+​
+    `writingDirection` and `textAlign` are NOT set here. A verse in a card is
+    right-aligned; a word inside a sentence is not. Direction belongs to the
+    layout, the face belongs to the type.
+  */
+  /** A footnote, a citation's Arabic, anything supporting. */
+  arabicNote: {
+    fontFamily: ArabicFont,
+    fontSize: 17,
+    lineHeight: 32,
+  },
+  /** A supporting narration or verse — the quote weight on a teaching page. */
+  arabicQuote: {
+    fontFamily: ArabicFont,
+    fontSize: 22,
+    lineHeight: 44,
+  },
+  /** The text a screen is about: a duʿa, a hero verse, a pillar. */
+  arabicLead: {
+    fontFamily: ArabicFont,
+    fontSize: 26,
+    lineHeight: 52,
+  },
+  /** Set to be recited from — the surah screen and the prayer's steps. */
+  arabicVerse: {
+    fontFamily: ArabicFont,
+    fontSize: 30,
+    lineHeight: 58,
+  },
+
   /** Kickers, units and counts — the smallest thing that is still readable. */
   caption: {
     fontSize: 12,

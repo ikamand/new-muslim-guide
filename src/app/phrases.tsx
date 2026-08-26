@@ -4,7 +4,7 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 import { ThemedText } from '@/components/themed-text';
 import { TranslationGap } from '@/components/translation-gap';
 import { PHRASES } from '@/content';
-import { ArabicFont, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
+import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { localisePhrase, measure } from '@/i18n/localise';
 import { useTheme } from '@/hooks/use-theme';
@@ -44,7 +44,7 @@ export default function PhrasesScreen() {
               <ThemedText type="smallBold" style={styles.said}>
                 {phrase.said}
               </ThemedText>
-              <ThemedText style={styles.arabic}>{phrase.arabic}</ThemedText>
+              <ThemedText type="arabicQuote" style={styles.arabic}>{phrase.arabic}</ThemedText>
             </View>
 
             <ThemedText type="small" themeColor="textSecondary">
@@ -102,9 +102,7 @@ const styles = StyleSheet.create({
     flexShrink: 1,
   },
   arabic: {
-    fontFamily: ArabicFont,
-    fontSize: 22,
-    lineHeight: 40,
+    /* size and face: the `arabicQuote` rung */
     writingDirection: 'rtl',
   },
   divider: {

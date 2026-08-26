@@ -6,7 +6,7 @@ import { ThemedText } from '@/components/themed-text';
 import { HISN } from '@/content/duas/hisn';
 import { hisnAt } from '@/content/duas/moments';
 import { DAY_MOMENTS, type DayMoment } from '@/content';
-import { ArabicFont, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
+import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { useTheme } from '@/hooks/use-theme';
 
@@ -76,7 +76,7 @@ export default function DuaBookScreen() {
             pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
             <View style={styles.rowText}>
               <ThemedText type="cardTitle">{occasion.english || occasion.arabic}</ThemedText>
-              <ThemedText style={[styles.arabic, { color: theme.textSecondary }]}>
+              <ThemedText type="arabicNote" style={[styles.arabic, { color: theme.textSecondary }]}>
                 {occasion.arabic}
               </ThemedText>
             </View>
@@ -125,9 +125,7 @@ const styles = StyleSheet.create({
     gap: Spacing.one,
   },
   arabic: {
-    fontFamily: ArabicFont,
-    fontSize: 20,
-    lineHeight: 34,
+    /* size and face: the `arabicNote` rung */
     textAlign: 'right',
     writingDirection: 'rtl',
   },

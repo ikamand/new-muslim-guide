@@ -26,6 +26,10 @@
  * `lead` is 18/28 and `cardTitle` is 20/26. A second scale in a second file
  * would be worse than the local overrides the one-scale rule was written to
  * prevent. Roles below say WHICH rung to use, never what size it is.
+ *
+ * That held for Latin and leaked for Arabic: this file carried `arabicSize: 25`
+ * and `arabicLineHeight: 52` until 26 Aug, which was a second scale in a second
+ * file after all. Amiri now has its own rungs beside the Latin ones.
  */
 
 import { Spacing } from './theme';
@@ -93,15 +97,11 @@ export const Teaching = {
       /** Cancels `page.paddingH` to reach both edges. Never write this twice. */
       bleed: Spacing.three + Spacing.one, // 20
       paddingV: Spacing.four - 2,
-      arabicSize: 25,
-      arabicLineHeight: 52,
       translationType: 'default' as TextType,
     },
     supporting: {
       barWidth: 2,
       paddingLeft: Spacing.three,
-      arabicSize: 21,
-      arabicLineHeight: 42,
       translationType: 'small' as TextType,
     },
   },

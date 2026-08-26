@@ -4,7 +4,7 @@ import { ContentNoteCard } from '@/components/content-note';
 import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
 import { resolveNotes, type Pillar } from '@/content';
-import { ArabicFont, Radius, Spacing } from '@/constants/theme';
+import { Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { useTheme } from '@/hooks/use-theme';
 
@@ -38,7 +38,7 @@ export function PillarCard({ pillar, index }: { pillar: Pillar; index: number })
             {pillar.transliteration}
           </ThemedText>
         </View>
-        <ThemedText style={styles.arabic}>{pillar.arabic}</ThemedText>
+        <ThemedText type="arabicLead" style={styles.arabic}>{pillar.arabic}</ThemedText>
       </View>
 
       <ThemedText type="default">{pillar.summary}</ThemedText>
@@ -89,9 +89,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   arabic: {
-    fontFamily: ArabicFont,
-    fontSize: 25,
-    lineHeight: 42,
+    /* size and face: the `arabicLead` rung */
     writingDirection: 'rtl',
   },
   link: {

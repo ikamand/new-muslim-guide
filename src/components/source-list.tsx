@@ -5,7 +5,7 @@ import { Pressable, StyleSheet, View } from 'react-native';
 import { ThemedText } from '@/components/themed-text';
 import { formatSource, type Source } from '@/content';
 import { HADITH_TEXT, QURAN_TEXT, type EvidenceText } from '@/content/evidence';
-import { ArabicFont, Radius, Spacing } from '@/constants/theme';
+import { Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { useSettings } from '@/hooks/use-settings';
 import { useTheme } from '@/hooks/use-theme';
@@ -140,7 +140,7 @@ function EvidenceBlock({
 
   return (
     <View style={[styles.evidence, { borderLeftColor: theme.border }]}>
-      <ThemedText style={styles.evidenceArabic}>{text.arabic}</ThemedText>
+      <ThemedText type="arabicQuote" style={styles.evidenceArabic}>{text.arabic}</ThemedText>
       {showTranslation && text.translation && (
         <ThemedText type="small" themeColor="textSecondary">
           {text.translation}
@@ -247,9 +247,7 @@ const styles = StyleSheet.create({
     borderRadius: Radius.small,
   },
   evidenceArabic: {
-    fontFamily: ArabicFont,
-    fontSize: 22,
-    lineHeight: 44,
+    /* size and face: the `arabicQuote` rung */
     textAlign: 'right',
     writingDirection: 'rtl',
   },

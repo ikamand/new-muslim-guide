@@ -1,5 +1,5 @@
 import { note, ref } from '../model';
-import { general, hadeethEnc, quran } from '../sources';
+import { general, hadeethEnc, hadith, quran } from '../sources';
 import type { Reference } from '../types';
 
 /**
@@ -52,9 +52,7 @@ export const TAHAJJUD: Reference = {
       body:
         'There is no minimum to reach and no number to work up to. Two rakʿahs, on one night, is the thing itself. People who pray it for decades mostly pray a little, often — which is the pattern the Prophet ﷺ described as the deeds God loves most, the small ones kept up.',
       sources: [
-        general(
-          'That the deeds God loves most are the constant ones, however small, is a narration in Sahih al-Bukhari. It is cited here without its number because the number could not be verified, and this app does not print a reference it has not checked.',
-        ),
+        hadith('muslim', '783', { grading: 'sahih', role: 'virtue' }),
       ],
       note: 'It is the same prayer you already know. Nothing about the movements or the words changes — only the time, and that you chose to be there.',
     },

@@ -4,7 +4,7 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 import { PressableLink } from '@/components/pressable-link';
 import { SourceDisclosure } from '@/components/source-list';
 import { ThemedText } from '@/components/themed-text';
-import { DAILY_PRAYERS, VOLUNTARY_PRAYERS, hadeethEnc } from '@/content';
+import { DAILY_PRAYERS, VOLUNTARY_PRAYERS, hadith } from '@/content';
 import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { useTheme } from '@/hooks/use-theme';
@@ -36,7 +36,27 @@ import { useTheme } from '@/hooks/use-theme';
  */
 
 /** The confirmed sunnah rakʿahs, and where the twelve come from. */
-const RAWATIB_SOURCE = hadeethEnc('muslim', '65715', { grading: 'sahih', role: 'virtue' });
+/*
+  The twelve, and the breakdown across the five.
+
+  Both were read from the collections on 22 Aug 2026 rather than recalled, and
+  they are two different claims needing two different citations. Muslim 728
+  states the number and the reward and says nothing about which prayers; the
+  itemisation — four before Dhuhr, two after, two after Maghrib, two after
+  Isha, two before Fajr — is Tirmidhi's. This screen previously cited
+  HadeethEnc 65715, which is that publisher's own *explanation* of the twelve
+  rather than a narration itemising them.
+
+  ⚠️ Tirmidhi closes 414 with `حديث عائشة حديث غريب من هذا الوجه`, and names
+  Mughirah b. Ziyad's memory. Al-Albani and Ahmad Shakir both grade it sahih.
+  Ibn Majah 1190 and Nasa'i 1794 carry the same wording through the SAME chain,
+  so they are not independent corroboration and are not cited as if they were.
+  Whether the itemisation is taught as established is a reviewer's call.
+*/
+const RAWATIB_SOURCES = [
+  hadith('muslim', '728.03', { grading: 'sahih', role: 'virtue' }),
+  hadith('tirmidhi', '414', { grading: 'sahih', role: 'practice' }),
+];
 
 function Count({ n, label, muted }: { n?: number; label: string; muted?: boolean }) {
   return (
@@ -105,7 +125,7 @@ export default function PrayScreen() {
         <ThemedText type="small" themeColor="textSecondary" style={styles.footnote}>
           {t('pray.rawatib')}
         </ThemedText>
-        <SourceDisclosure sources={[RAWATIB_SOURCE]} />
+        <SourceDisclosure sources={RAWATIB_SOURCES} />
       </View>
 
       <View style={styles.section}>

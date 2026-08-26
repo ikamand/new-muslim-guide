@@ -99,12 +99,14 @@ type PrayerSpec = {
    * belong beside the obligatory count, where somebody can see that Asr has
    * none and Dhuhr has six.
    *
-   * The twelve come from Umm Habiba's narration in Sahih Muslim — "whoever
-   * prays twelve rakʿahs voluntarily in a day, other than the obligatory,
-   * Allah builds him a house in Paradise" — and the breakdown across the five
-   * is the one HadeethEnc prints in its own explanation of it (hadith 65715):
-   * two before Fajr, four before Dhuhr and two after, two after Maghrib, two
-   * after Isha.
+   * The twelve come from Umm Habiba's narration in **Sahih Muslim 728** —
+   * "whoever prays twelve rakʿahs voluntarily in a day, other than the
+   * obligatory, Allah builds him a house in Paradise". That narration states
+   * the number and says nothing about which prayers; the breakdown across the
+   * five is **Jami` at-Tirmidhi 414** — two before Fajr, four before Dhuhr and
+   * two after, two after Maghrib, two after Isha. Both read from the
+   * collections on 22 Aug 2026. `pray.tsx` carries the caveat on Tirmidhi's
+   * chain.
    *
    * ⚠️ REVIEW REQUIRED — the counts are copied, not remembered, but teaching
    * these twelve as *the* rawatib is a judgement. The Hanafi school counts

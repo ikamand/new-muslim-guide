@@ -1633,6 +1633,71 @@ thing:
 design. Which is exactly why the phase builds two unalike pages first and looks
 at them before committing to twenty-six more.
 
+### How it is built — one file owns the look
+
+Iyad, 26 Aug: *"make sure style is very flexible and easily changeable, so if we
+need to change something we go to one file and everything is themed."*
+
+**The problem this solves, precisely.** The look of a teaching page currently
+lives in three places: `reference/[id].tsx`'s `StyleSheet`, inline props inside
+its JSX, and the type scale. The full-bleed source block is the clearest case —
+it works because `margin: -20` cancels the page's `padding: 20`. **Two numbers,
+two files, nothing enforcing that they agree.** Change the page padding and the
+source silently stops reaching the edge.
+
+#### `src/constants/teaching.ts`
+
+Owns the semantic roles of a teaching page. Layout and colour roles only:
+
+```
+page.paddingH          the ONE number the bleed is derived from
+factRow.labelWidth
+source.hero            the page's answer — breaks the margins
+source.supporting      everything else — rule and indent
+bullet.barWidth
+```
+
+**Named for the role, never the look** — `source.hero`, not `bigGreenBlock`. A
+later redesign then changes appearance without renaming anything, which is the
+difference between a token file that survives and one that gets bypassed.
+
+#### `src/components/teaching/`
+
+`<Heading>`, `<Body>`, `<Bullet>`, `<SourceBlock variant>`, `<QuickFacts>` —
+**the only files permitted to read those constants.** Screens compose
+components; content stays pure data. Changing the whole look is then one file,
+which is the thing being asked for.
+
+#### The type scale is NOT extended
+
+The mockups invented body at 17/28 and headings at 21/28. Neither exists —
+and neither is needed. `themed-text.tsx` already has `lead` at 18/28 and
+`cardTitle` at 20/26, within a point of both.
+
+CLAUDE.md's rule is that a local `fontSize:` means the scale is missing a rung.
+**Here the right move is the opposite of adding one: snap the design to the
+rungs that exist.** A second scale living in a second file would be worse than
+the local overrides the rule was written to prevent. Type stays in
+`themed-text.tsx`; `teaching.ts` never mentions a font size.
+
+#### `npm run style:check`
+
+Fails — loudly, but as a warning — if a teaching screen carries a raw
+`fontSize:` or `padding:`. The repo already guards its other invariants this way
+(`arabic`, `audio:manifest`, `content:audit`), and without a guard the
+abstraction leaks back within a month.
+
+#### The honest cost
+
+An abstraction too rigid becomes something pages fight. **This already
+happened once in the mockups**: the hero-versus-supporting source rule did not
+exist until the third page was drawn, and a stricter component set would have
+made that page harder rather than better.
+
+So components take an optional style override for genuine one-offs, and the
+guard warns rather than blocks. A rule that cannot be broken gets worked around
+in uglier ways than the thing it forbade.
+
 ### The size of it, measured
 
 Counted 25 Aug rather than estimated:

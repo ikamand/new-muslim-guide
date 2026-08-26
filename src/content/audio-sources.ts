@@ -105,6 +105,25 @@ export const AUDIO_SOURCE_BY_ID: Record<string, SourceKey> = {
   'fatiha-5': 'husary',
   'fatiha-6': 'husary',
   'fatiha-7': 'husary',
+
+  // The three quls, added 25 Aug 2026 — same reciter, same host, same terms.
+  'ikhlas-1': 'husary',
+  'ikhlas-2': 'husary',
+  'ikhlas-3': 'husary',
+  'ikhlas-4': 'husary',
+
+  'falaq-1': 'husary',
+  'falaq-2': 'husary',
+  'falaq-3': 'husary',
+  'falaq-4': 'husary',
+  'falaq-5': 'husary',
+
+  'nas-1': 'husary',
+  'nas-2': 'husary',
+  'nas-3': 'husary',
+  'nas-4': 'husary',
+  'nas-5': 'husary',
+  'nas-6': 'husary',
 };
 
 export function getAudioSource(audioId: string): AudioSource | undefined {

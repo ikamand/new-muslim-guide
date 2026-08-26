@@ -22,6 +22,7 @@ import { fileURLToPath } from 'node:url';
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const { Recitations } = await import(join(root, 'src/content/recitations.ts'));
 const { getAudioSource } = await import(join(root, 'src/content/audio-sources.ts'));
+const { getSurah } = await import(join(root, 'src/content/quran/surahs.ts'));
 
 /** Ids with a live (uncommented) require in the audio map. */
 function wiredIds() {
@@ -99,6 +100,45 @@ for (const [key, recitation] of Object.entries(Recitations)) {
       arabic: part.text.arabic.replace(/\n/g, ' '),
       transliteration: part.text.transliteration.replace(/\n/g, ' '),
       translation: part.text.translation.replace(/\n/g, ' '),
+    });
+  }
+}
+
+/*
+  The bundled surah clips, which no `Recitation` points at.
+
+  Al-Fatiha, Al-Ikhlas and the two other quls play in the Qur'an tab through
+  `ayahSource`, keyed by surah number rather than by a recitation's `audioId` —
+  so a sheet built only from `Recitations` cannot see them. It listed 27 clips
+  while 22 sat in `assets/audio/`, which is the kind of quiet gap this sheet
+  exists to prevent.
+
+  Al-Fatiha appears once, under the recitation that already claims its seven
+  clips, so it is skipped here rather than printed twice.
+*/
+const BUNDLED_SURAHS = [
+  { number: 112, prefix: 'ikhlas' },
+  { number: 113, prefix: 'falaq' },
+  { number: 114, prefix: 'nas' },
+];
+
+for (const { number, prefix } of BUNDLED_SURAHS) {
+  const surah = getSurah(number);
+  for (const ayah of surah.ayahs) {
+    const id = `${prefix}-${ayah.number}`;
+    const source = getAudioSource(id);
+    rows.push({
+      file: onDisk.get(id) ?? `${id}.mp3`,
+      id,
+      recitation: `${surah.name} — ${surah.meaning}`,
+      part: `Ayah ${ayah.number}`,
+      usedIn: 'Qur’an tab, and the prayer’s recite step',
+      status: statusFor(id),
+      source: source ? `${source.reciter}${source.detail ? ` — ${source.detail}` : ''}` : 'To be commissioned',
+      licence: source?.licence ?? '—',
+      arabic: ayah.arabic.replace(/\n/g, ' '),
+      transliteration: '',
+      translation: ayah.translation.replace(/\n/g, ' '),
     });
   }
 }

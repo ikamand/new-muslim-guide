@@ -22,15 +22,16 @@ import { ayahAudioUrl, type Reciter } from './recitation';
  * A required asset is a module number in React Native; a stream is a `uri`.
  * The player takes either, so this is the one place that has to know which.
  *
- * ## Why Al-Fatiha alone gets this
+ * ## Why these four, and not the rest
  *
- * Because Al-Fatiha alone is not really a learning surface. Every other surah
- * on this tab is something a reader is choosing to memorise; Al-Fatiha is
- * recited in every rak'ah of every prayer, and somebody who cannot get through
- * it cannot pray at all. That puts it on the worship path, and the worship path
- * survives a dead signal — so its seven clips already ship in the binary for
- * the prayer screen and there is no reason for this tab to go to the network
- * for the same audio.
+ * Because they are not really a learning surface. Every other surah on this
+ * tab is something a reader is choosing to memorise; these four are recited.
+ * Al-Fatiha is in every rak'ah and somebody who cannot get through it cannot
+ * pray at all; Al-Ikhlas is what the prayer's "add a short surah" step now
+ * teaches; the three quls are the morning and evening adhkar and are said
+ * after every prayer. That puts all four on the worship path, and the worship
+ * path survives a dead signal — so their clips ship in the binary and there is
+ * no reason for this tab to go to the network for the same audio.
  *
  * It only holds for the teaching recitation, because that is the only one
  * bundled. Choosing another voice moves Al-Fatiha onto the network like
@@ -40,11 +41,33 @@ import { ayahAudioUrl, type Reciter } from './recitation';
  */
 export type AyahSource = number | { uri: string };
 
+/**
+ * The surahs that ship in the binary, and the clip-name prefix for each.
+ *
+ * Four, and not chosen by length: these are what somebody actually recites.
+ * Al-Fatiha is in every rakʿah, Al-Ikhlas is the prayer's "add a short surah"
+ * step, and the three quls are the morning and evening adhkar and are said
+ * after every prayer. Together they are the worship path, and the worship path
+ * works with the radio off.
+ *
+ * A table rather than a chain of `if`s, because the moment a fifth surah is
+ * bundled it should be one line here.
+ */
+const BUNDLED: Readonly<Record<number, string>> = {
+  1: 'fatiha',
+  112: 'ikhlas',
+  113: 'falaq',
+  114: 'nas',
+};
+
 export function ayahSource(reciter: Reciter, surah: number, ayah: number): AyahSource {
-  if (surah === 1 && reciter.id === 'husary-muallim') {
-    // Ayah 1 is the basmala, which is how the clips are cut. The generator
-    // asserts that numbering rather than trusting it — see `fatiha.ts`.
-    const bundled = getAudio(`fatiha-${ayah}`);
+  const prefix = BUNDLED[surah];
+  if (prefix !== undefined && reciter.id === 'husary-muallim') {
+    // Al-Fatiha's ayah 1 is the basmala, which is how its clips are cut. The
+    // generator asserts that numbering rather than trusting it — see
+    // `fatiha.ts`. The quls carry no basmala, so their ayah numbers are the
+    // mushaf's.
+    const bundled = getAudio(`${prefix}-${ayah}`);
     if (bundled !== undefined) return bundled;
   }
   return { uri: ayahAudioUrl(reciter, surah, ayah) };

@@ -26,8 +26,25 @@
  * carries the full note.
  *
  * These same seven clips are what makes Al-Fatiha play with the radio off in
- * the Qur'an tab — see `ayahSource` in `content/quran/recitation.ts`. Nothing
+ * the Qur'an tab — see `ayahSource` in `content/quran/ayah-audio.ts`. Nothing
  * is stored twice.
+ *
+ * ## And the three quls, added 25 Aug 2026
+ *
+ * Al-Ikhlas, Al-Falaq and An-Nas — 15 clips, 1.8 MB, the same Husary Muallim
+ * recording from the same host.
+ *
+ * Not a starter set chosen by length. These four surahs are what somebody
+ * actually recites: Al-Fatiha in every rakʿah, Al-Ikhlas at the prayer's
+ * "add a short surah" step, and the three quls in the morning and evening
+ * adhkar and after every prayer. Bundling them is what makes the WORSHIP PATH
+ * work with the radio off, which is the promise that matters. Every other
+ * surah in the tab is a learning surface, and a learning surface may stream.
+ *
+ * This is deliberately not "bundle Juz 30". That was the plan until 25 Aug and
+ * it was wrong: 76 MB shipped to everybody so that a few people could hear
+ * An-Naba. The rest saves itself on first play — see Phase 8 in
+ * `docs/ui-redesign-plan.md`.
  *
  * ⚠️ REVIEW REQUIRED — nobody qualified has yet listened to these seven files.
  * Three things need an ear, not a script: that `fatiha-3` really is the third
@@ -52,6 +69,24 @@ export const AUDIO: Partial<Record<string, AudioModule>> = {
   'fatiha-5': require('@/assets/audio/fatiha-5.mp3'),
   'fatiha-6': require('@/assets/audio/fatiha-6.mp3'),
   'fatiha-7': require('@/assets/audio/fatiha-7.mp3'),
+
+  'ikhlas-1': require('@/assets/audio/ikhlas-1.mp3'),
+  'ikhlas-2': require('@/assets/audio/ikhlas-2.mp3'),
+  'ikhlas-3': require('@/assets/audio/ikhlas-3.mp3'),
+  'ikhlas-4': require('@/assets/audio/ikhlas-4.mp3'),
+
+  'falaq-1': require('@/assets/audio/falaq-1.mp3'),
+  'falaq-2': require('@/assets/audio/falaq-2.mp3'),
+  'falaq-3': require('@/assets/audio/falaq-3.mp3'),
+  'falaq-4': require('@/assets/audio/falaq-4.mp3'),
+  'falaq-5': require('@/assets/audio/falaq-5.mp3'),
+
+  'nas-1': require('@/assets/audio/nas-1.mp3'),
+  'nas-2': require('@/assets/audio/nas-2.mp3'),
+  'nas-3': require('@/assets/audio/nas-3.mp3'),
+  'nas-4': require('@/assets/audio/nas-4.mp3'),
+  'nas-5': require('@/assets/audio/nas-5.mp3'),
+  'nas-6': require('@/assets/audio/nas-6.mp3'),
   // takbir: require('@/assets/audio/takbir.m4a'),
   // opening: require('@/assets/audio/opening.m4a'),
   // taawwudh: require('@/assets/audio/taawwudh.m4a'),

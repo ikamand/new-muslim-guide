@@ -114,6 +114,38 @@ type PrayerSpec = {
    */
   sunnahBefore?: number;
   sunnahAfter?: number;
+  /**
+   * How the sunnah rakʿahs are actually prayed, where that is not one block.
+   *
+   * `sunnahBefore: 4` on Dhuhr rendered as "4", and a beginner reads that as a
+   * single four-rakʿah prayer with one taslim. It is two prayers of two. The
+   * count alone could not say so, which is the whole reason this exists.
+   *
+   * Most people pray the four before Dhuhr as 2 + 2 (Shafi`i and Hanbali); the
+   * Hanafi school prays them as one block of four. The app teaches the
+   * majority and says so in a note rather than presenting a table.
+   */
+  sunnahBeforeUnits?: readonly number[];
+  /**
+   * The row label on the chooser, where it differs from the prayer's name.
+   *
+   * A row is scanned by somebody who HEARD a word and is trying to find it —
+   * "tahajjud", "istikhara" — so the row leads with the name. The reference
+   * page it opens can afford the better title ("Praying at night"). Row and
+   * page want different names, and this is the row's.
+   */
+  listTitle?: string;
+  /**
+   * The reference page this prayer's row opens.
+   *
+   * Voluntary prayers open the WHY, not the movements: for all of them the
+   * movements are the ones already prayed five times a day, and the open
+   * question is why you are standing there. The generated guide stays one tap
+   * further in, behind a button on that page.
+   *
+   * On the spec rather than a map inside a component, so the two cannot drift.
+   */
+  referenceId?: string;
 };
 
 const ORDINALS = ['first', 'second', 'third', 'fourth'] as const;
@@ -598,7 +630,7 @@ function buildPrayer(spec: PrayerSpec): Guide {
 
 export const PRAYER_SPECS: PrayerSpec[] = [
   { id: 'fajr', title: 'Fajr', when: 'Dawn, before sunrise', rakahs: 2, aloudRakahs: 2, kind: 'fard', sunnahBefore: 2 },
-  { id: 'dhuhr', title: 'Dhuhr', when: 'After midday', rakahs: 4, aloudRakahs: 0, kind: 'fard', sunnahBefore: 4, sunnahAfter: 2 },
+  { id: 'dhuhr', title: 'Dhuhr', when: 'After midday', rakahs: 4, aloudRakahs: 0, kind: 'fard', sunnahBefore: 4, sunnahBeforeUnits: [2, 2], sunnahAfter: 2 },
   // Asr has no confirmed sunnah either side. Worth seeing rather than
   // inferring: a beginner watching a mosque fill up before Dhuhr and not
   // before Asr has no way to know why.
@@ -618,9 +650,36 @@ export const PRAYER_SPECS: PrayerSpec[] = [
     None is recited aloud. A voluntary prayer in the day is silent, and these
     are prayed alone.
   */
-  { id: 'tahajjud', title: 'Tahajjud', when: 'The last part of the night', rakahs: 2, aloudRakahs: 0, kind: 'voluntary' },
-  { id: 'istikhara', title: 'Istikhara', when: 'When you have a decision to make', rakahs: 2, aloudRakahs: 0, kind: 'voluntary' },
-  { id: 'tawba', title: 'The prayer of repentance', when: 'After a sin, whenever you want', rakahs: 2, aloudRakahs: 0, kind: 'voluntary' },
+  {
+    id: 'tahajjud',
+    title: 'Tahajjud',
+    listTitle: 'Praying Tahajjud',
+    when: 'The last third of the night',
+    rakahs: 2,
+    aloudRakahs: 0,
+    kind: 'voluntary',
+    referenceId: 'tahajjud',
+  },
+  {
+    id: 'istikhara',
+    title: 'Istikhara',
+    listTitle: 'Praying Istikhara',
+    when: 'Ask Allah to choose when you have a decision to make',
+    rakahs: 2,
+    aloudRakahs: 0,
+    kind: 'voluntary',
+    referenceId: 'istikhara',
+  },
+  {
+    id: 'tawba',
+    title: 'The prayer of repentance',
+    listTitle: 'The prayer of repentance',
+    when: 'Ask Allah for forgiveness',
+    rakahs: 2,
+    aloudRakahs: 0,
+    kind: 'voluntary',
+    referenceId: 'tawba-prayer',
+  },
 ];
 
 /** The five that are owed. */

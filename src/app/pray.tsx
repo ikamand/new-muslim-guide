@@ -1,3 +1,4 @@
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { Stack } from 'expo-router';
 import { ScrollView, StyleSheet, View } from 'react-native';
 
@@ -134,39 +135,43 @@ export default function PrayScreen() {
           {t('pray.chosen.help')}
         </ThemedText>
 
+        {/*
+          These open the WHY, not the movements. For all of them the movements
+          are the ones already prayed five times a day; what a reader does not
+          have is why they would stand up. The generated guide is one tap
+          further in, behind a button on the page this opens.
+
+          The row is named for the prayer rather than for the page — somebody
+          who heard "tahajjud" is looking for tahajjud, and cannot find it
+          under "Praying at night".
+        */}
         {VOLUNTARY_PRAYERS.map((prayer) => (
           <PressableLink
             key={prayer.id}
-            href={{ pathname: '/guide/[id]', params: { id: prayer.id } }}
+            href={{
+              pathname: '/reference/[id]',
+              params: { id: prayer.referenceId ?? prayer.id },
+            }}
             style={[
               styles.row,
               { backgroundColor: theme.backgroundElement, borderColor: theme.border },
             ]}
             pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
             <View style={styles.rowText}>
-              <ThemedText type="cardTitle">{prayer.title}</ThemedText>
+              <ThemedText type="cardTitle">{prayer.listTitle ?? prayer.title}</ThemedText>
               <ThemedText type="small" themeColor="textSecondary">
                 {prayer.when}
               </ThemedText>
             </View>
-            <Count n={prayer.rakahs} label={t('count.rakahs')} />
+            {/*
+              A count promised a prayer script, and this row no longer opens
+              one. The rakʿah count is said once in the section's help line
+              instead of three times down the column.
+            */}
+            <Ionicons name="chevron-forward" size={20} color={theme.textSecondary} />
           </PressableLink>
         ))}
 
-        {/*
-          The how and the why are different pages on purpose. A guide walks the
-          movements, which for all three are the movements they already know —
-          what a reader actually needs is what the prayer is FOR, and that lives
-          on the Learn tab.
-        */}
-        <PressableLink
-          href={{ pathname: '/reference/[id]', params: { id: 'istikhara' } }}
-          style={[styles.aside, { borderLeftColor: theme.accent }]}
-          pressedStyle={{ opacity: 0.6 }}>
-          <ThemedText type="small" themeColor="textSecondary">
-            {t('pray.chosen.readMore')}
-          </ThemedText>
-        </PressableLink>
       </View>
     </ScrollView>
   );

@@ -49,7 +49,6 @@ export const CLOTHING: Reference = {
         'The instruction to lower the gaze and guard modesty is given to men first and then to women, in consecutive verses. That order is worth noticing: modesty in Islam is not a set of rules aimed only at women, and men have their own covering to observe.',
       sources: [
         quran(24, 30, { surahName: 'An-Nur' }),
-        quran(24, 31, { surahName: 'An-Nur' }),
       ],
     },
     {

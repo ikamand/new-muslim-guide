@@ -81,6 +81,53 @@ for (const page of pages) {
     }
   }
 
+  /*
+    A page states its evidence once.
+
+    Ten citations were printed twice on one page the day the drawer was
+    emptied: Al-Fatihah's own surah under two headings, Bukhari 3293 under both
+    "What is istikhara?" and "What do I say?". Several sections legitimately
+    cite the same verse, and a section cannot see what its siblings printed, so
+    the screen claims each citation for the first section that asks for it.
+    This check exists because that is invisible from any one section's code.
+  */
+  const claimed = new Map();
+  for (const section of page.sections) {
+    for (const source of section.sources ?? []) {
+      if (!resolves(source)) continue;
+      const id = JSON.stringify(source);
+      if (claimed.has(id)) {
+        warnings.push(
+          `${page.id}: the same citation is cited under both "${claimed.get(id)}" and "${section.heading}". Only the first prints it.`,
+        );
+      } else {
+        claimed.set(id, section.heading);
+      }
+    }
+  }
+
+  /*
+    And a recitation must not also appear inside a narration printed on the
+    same page. Bukhari 3293 IS the istikhara duʿa with its chain attached, so a
+    page printing both said the same words twice, once as a thousand characters
+    of narration and once as the thing to recite.
+  */
+  const strip = (t) => t.replace(/[\u064B-\u0652\u0670\u0640]/g, '').replace(/[\u0623\u0625\u0622]/g, '\u0627').replace(/[^\u0621-\u064A]/g, '');
+  const printed = page.sections.flatMap((s) => (s.sources ?? []).map(resolveText).filter(Boolean));
+  for (const section of page.sections) {
+    if (!section.says) continue;
+    const said = strip(section.says.arabic);
+    if (said.length < 40) continue;
+    for (const text of printed) {
+      if (strip(text.arabic).includes(said)) {
+        warnings.push(
+          `${page.id}: "${section.heading}" prints a recitation that is also inside a narration on this page. The same words twice.`,
+        );
+        break;
+      }
+    }
+  }
+
   if (!page.quickFacts) warnings.push(`${page.id}: no quickFacts.`);
   for (const fact of page.quickFacts ?? []) {
     if (fact.label.length > 15) {

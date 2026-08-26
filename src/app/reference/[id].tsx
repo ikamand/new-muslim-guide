@@ -79,9 +79,32 @@ export default function ReferenceScreen() {
 
       {reference.quickFacts && <TeachingFacts facts={reference.quickFacts} />}
 
-      {reference.sections.map((section) => (
-        <Section key={section.id} section={section} />
-      ))}
+      {/*
+        Which section prints which citation, decided once for the whole page.
+
+        A page states its evidence once. Ten citations were being printed twice
+        on the same page — Al-Fatihah's own surah under two headings, Bukhari
+        3293 under both "What is istikhara?" and "What do I say?" — because a
+        section cannot see what its siblings already printed, and several
+        sections legitimately cite the same verse.
+
+        The FIRST section to cite something prints it. Later sections carrying
+        the same citation show nothing, because the reader has already read it
+        further up the same screen.
+      */}
+      {(() => {
+        const claimed = new Set<string>();
+        return reference.sections.map((section) => {
+          const mine = (section.sources ?? []).filter((source) => {
+            if (evidenceFor(source) === undefined) return false;
+            const id = formatSource(source);
+            if (claimed.has(id)) return false;
+            claimed.add(id);
+            return true;
+          });
+          return <Section key={section.id} section={section} printable={mine} />;
+        });
+      })()}
 
       <TranslationGap coverage={coverage} />
     </ScrollView>
@@ -92,7 +115,14 @@ export default function ReferenceScreen() {
  * One section: a question, its answer, and — where the section earns it — the
  * narration itself rather than a reference to it.
  */
-function Section({ section }: { section: ReferenceSection }) {
+function Section({
+  section,
+  printable,
+}: {
+  section: ReferenceSection;
+  /** The citations THIS section prints — the page decides, not the section. */
+  printable: readonly Source[];
+}) {
   const sources = section.sources ?? [];
 
   /*
@@ -114,7 +144,7 @@ function Section({ section }: { section: ReferenceSection }) {
               page and opened with a tap, so Ramadan's twelve texts do not
               become a wall of Arabic nobody reads.
   */
-  const withText = sources
+  const withText = printable
     .map((source) => ({ source, text: evidenceFor(source) }))
     .filter((entry): entry is { source: Source; text: EvidenceText } => entry.text !== undefined);
   const withoutText = sources.filter((source) => evidenceFor(source) === undefined);

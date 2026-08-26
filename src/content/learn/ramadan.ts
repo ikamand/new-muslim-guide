@@ -78,8 +78,7 @@ export const RAMADAN: Reference = {
       heading: 'Why fast at all?',
       body:
         'The Qur’an gives the reason directly: so that you may become mindful of God. It is not endurance for its own sake, and it is not a diet. Being hungry at four in the afternoon is a reminder of who provides, and of people for whom that hunger is not a choice.',
-      sources: [quran(2, 183, { surahName: 'Al-Baqarah' })],
-    },
+      },
     {
       id: 'exempt',
       heading: 'Who does not have to fast?',
@@ -90,7 +89,6 @@ export const RAMADAN: Reference = {
       // route, which the lesson never mentioned and which is the whole answer
       // for a chronic condition.
       sources: [
-        quran(2, 185, { surahName: 'Al-Baqarah' }),
         quran(2, 184, { surahName: 'Al-Baqarah' }),
       ],
       notes: [

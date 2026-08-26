@@ -36,8 +36,7 @@ export const AL_FATIHAH: Reference = {
       heading: 'What is Al-Fatihah?',
       body:
         'The opening chapter of the Qur’an, seven short verses. Its name means "The Opening". It is the most repeated passage in the world: every Muslim says it in every unit of every prayer, which for most people is seventeen times a day.',
-      sources: [quran(1, [1, 7], { surahName: 'Al-Fatihah' })],
-    },
+      },
     {
       id: 'why',
       heading: 'Why does every prayer need it?',

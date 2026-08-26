@@ -121,10 +121,7 @@ export const ISTIKHARA: Reference = {
       */
       body:
         'Two rakʿahs and a duʿa, prayed when you have a decision to make. Jabir reported that the Prophet ﷺ taught it for every matter the way he taught a surah of the Qur’an, which tells you how ordinary it was meant to be, and how often.',
-      sources: [
-        hadeethEnc('bukhari', '3293', { grading: 'sahih', role: 'practice' }),
-      ],
-    },
+      },
     {
       id: 'words',
       heading: 'What do I say?',

@@ -50,12 +50,6 @@ export const WHAT_BREAKS_PRAYER: Reference = {
           bookName: "Ablutions (Wudu')",
           inBookReference: 'Book 4, Hadith 1',
         }),
-        hadith('muslim', '537a', {
-          book: 5,
-          bookName: 'The Book of Mosques and Places of Prayer',
-          inBookReference: 'Book 5, Hadith 39',
-        }),
-        quran(2, 144, { surahName: 'Al-Baqarah' }),
         scholarly({
           work: 'What Invalidates the Prayer?',
           author: 'Islam Question & Answer, fatwa 87749',

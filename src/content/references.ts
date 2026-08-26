@@ -83,11 +83,6 @@ export const PERIODS: Reference = {
       // The same narration as the section above. It is the one that draws the
       // distinction, so it is cited at both ends of it rather than once.
       sources: [
-        hadith('muslim', '335a', {
-          book: 3,
-          bookName: 'The Book of Menstruation',
-          inBookReference: 'Book 3, Hadith 83',
-        }),
       ],
     },
     {
@@ -460,11 +455,6 @@ export const SEATED: Reference = {
       body:
         'Pray lying on your right side facing the qibla, or on your back, and make the movements with your head or your eyes. Prayer is never dropped for illness while you are conscious.',
       sources: [
-        hadith('bukhari', '1117', {
-          book: 18,
-          bookName: 'Shortening the Prayers (At-Taqseer)',
-          inBookReference: 'Book 18, Hadith 37',
-        }),
       ],
     },
     {

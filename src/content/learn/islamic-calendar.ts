@@ -41,7 +41,6 @@ export const ISLAMIC_CALENDAR: Reference = {
       body:
         'The Qur’an says four of the twelve are sacred, and the Prophet ﷺ named them in his farewell sermon: three consecutive ones, Dhul-Qaʿdah, Dhul-Hijjah and Muharram, and Rajab. Fighting is prohibited in them, and wrongdoing in them is treated as more serious.',
       sources: [
-        quran(9, 36, { surahName: 'At-Tawbah' }),
         // Was Bukhari 3197, which carries the same words but is filed under
         // the Beginning of Creation and says nothing about when they were
         // said. 4406 is the same narration in the chapter on the Farewell

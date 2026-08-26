@@ -16,10 +16,15 @@ export const WORK: Reference = {
     tags: ['money'],
     relatedContent: [ref('reference', 'halal-and-haram'), ref('pillar', 'zakat')],
   },
+  quickFacts: [
+    { label: 'Working', value: 'Honoured, not merely tolerated' },
+    { label: 'Interest', value: 'Riba is forbidden — paying it and taking it' },
+  ],
   sections: [
     {
       id: 'working',
-      heading: 'Working is honoured, not tolerated',
+      heading: 'How does Islam see work?',
+      promote: 'hero',
       body:
         'There is no ideal of poverty here. The Prophet ﷺ said nobody has eaten better food than what he earned by his own hands, and noted that the Prophet Dawud ate from his own labour. The Qur’an tells people to disperse and seek God’s bounty as soon as the Friday prayer ends.',
       sources: [
@@ -33,7 +38,7 @@ export const WORK: Reference = {
     },
     {
       id: 'interest',
-      heading: 'Interest',
+      heading: 'What about interest?',
       body:
         'Riba — usually translated as interest or usury — is prohibited in the Qur’an in strong terms, and the Prophet ﷺ listed consuming it among the gravest sins. In practice this is what makes conventional mortgages, interest-bearing savings and most credit cards a live question for Muslims.',
       sources: [
@@ -53,7 +58,7 @@ export const WORK: Reference = {
     },
     {
       id: 'job',
-      heading: 'If your job touches something forbidden',
+      heading: 'What if my job touches something forbidden?',
       body:
         'Directly producing or selling what is prohibited is the clear case — the Prophet ﷺ said the curse on wine falls on ten, its seller and the one who lives off its price among them. What is less clear is indirect involvement — a supermarket cashier who occasionally scans wine, a delivery driver, an accountant at a bank. That distance is exactly what scholars weigh.',
       sources: [

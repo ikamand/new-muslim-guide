@@ -39,17 +39,25 @@ export const TAHAJJUD: Reference = {
     beginnerPriority: 3,
     relatedContent: [ref('guide', 'tahajjud'), ref('reference', 'dua-and-dhikr')],
   },
+  quickFacts: [
+    { label: 'When', value: 'The last part of the night, after you have slept' },
+    { label: 'How many', value: 'Two rakʿahs. That is a whole tahajjud' },
+    { label: 'Do I have to?', value: 'No. Nobody is behind for not praying it', emphasis: true },
+    { label: 'How', value: 'Pray two rakʿahs', href: '/guide/tahajjud' },
+  ],
   sections: [
     {
       id: 'what',
-      heading: 'What it is',
+      heading: 'What is tahajjud?',
+      promote: 'hero',
       body:
         'A prayer in the last part of the night, after you have slept and before Fajr. The Qur’an tells the Prophet ﷺ to keep part of the night for it as something additional, and that word matters: it is not owed. Nobody is behind for not praying it.',
       sources: [quran(17, 79, { surahName: 'Al-Isra' })],
     },
     {
       id: 'how-much',
-      heading: 'Two rakʿahs is tahajjud',
+      heading: 'How little counts?',
+      promote: 'supporting',
       body:
         'There is no minimum to reach and no number to work up to. Two rakʿahs, on one night, is the thing itself. People who pray it for decades mostly pray a little, often — which is the pattern the Prophet ﷺ described as the deeds God loves most, the small ones kept up.',
       sources: [
@@ -59,14 +67,14 @@ export const TAHAJJUD: Reference = {
     },
     {
       id: 'sleep',
-      heading: 'You have to sleep first',
+      heading: 'What if I have not slept?',
       body:
         'Tahajjud is prayed after waking, which is what separates it from simply staying up late. If you have not slept, you are praying qiyam al-layl — also good, also voluntary, and not what this word means.',
       sources: [general('The distinction is in the word itself: tahajjud is from a root meaning to give up sleep, so there has to be sleep to give up.')],
     },
     {
       id: 'start',
-      heading: 'If you want to try it',
+      heading: 'How do I actually start?',
       body:
         'Set an alarm twenty minutes before Fajr rather than for the middle of the night. You are already going to be awake for Fajr; this is standing up a little earlier. Starting there is why people keep it.',
       sources: [general('Practical advice, claiming nothing about the ruling.')],
@@ -95,10 +103,17 @@ export const ISTIKHARA: Reference = {
     beginnerPriority: 3,
     relatedContent: [ref('guide', 'istikhara'), ref('reference', 'dua-and-dhikr')],
   },
+  quickFacts: [
+    { label: 'When', value: 'Any time you have a real decision to make' },
+    { label: 'How many', value: 'Two rakʿahs, then the duʿa' },
+    { label: 'A sign?', value: 'No. It does not promise a dream or a feeling', emphasis: true },
+    { label: 'How', value: 'Pray two rakʿahs', href: '/guide/istikhara' },
+  ],
   sections: [
     {
       id: 'what',
-      heading: 'What it is',
+      heading: 'What is istikhara?',
+      promote: 'hero',
       body:
         'Two rakʿahs and a duʿa, prayed when you have a decision to make. Jabir reported that the Prophet ﷺ taught it for every matter the way he taught a surah of the Qur’an — which tells you how ordinary it was meant to be, and how often.',
       sources: [
@@ -107,7 +122,7 @@ export const ISTIKHARA: Reference = {
     },
     {
       id: 'words',
-      heading: 'The words',
+      heading: 'What do I say?',
       body:
         'Said after the two rakʿahs. Where it says “this matter”, name the thing you are deciding.',
       says: Recitations.istikhara,
@@ -115,7 +130,7 @@ export const ISTIKHARA: Reference = {
     },
     {
       id: 'no-dream',
-      heading: 'No dream is coming',
+      heading: 'What sign should I expect?',
       body:
         'This is the part people are told wrong. The duʿa asks God, if the thing is good for you, to bring it about and make it easy, and if it is bad for you, to turn it away and turn you away from it. It does not promise a sign, a dream or a feeling. You pray, and then you decide, and what follows is the answer.',
       sources: [
@@ -125,7 +140,7 @@ export const ISTIKHARA: Reference = {
     },
     {
       id: 'when',
-      heading: 'When to pray it',
+      heading: 'What can I ask about?',
       body:
         'Any time except the times when prayer is held off, and about anything you genuinely have a choice in — a job, a move, a marriage, something smaller. Not about whether to do something already settled as right or wrong; there is nothing to ask about there.',
       sources: [general('Ordinary explanation of scope, following from what the duʿa asks.')],
@@ -152,10 +167,17 @@ export const TAWBA_PRAYER: Reference = {
     beginnerPriority: 3,
     relatedContent: [ref('guide', 'tawba'), ref('reference', 'repentance')],
   },
+  quickFacts: [
+    { label: 'When', value: 'After a sin, whenever you want' },
+    { label: 'How many', value: 'Two rakʿahs' },
+    { label: 'Do I have to?', value: 'No — repentance does not need it', emphasis: true },
+    { label: 'How', value: 'Pray two rakʿahs', href: '/guide/tawba' },
+  ],
   sections: [
     {
       id: 'what',
-      heading: 'What it is',
+      heading: 'What is it for?',
+      promote: 'hero',
       body:
         'Abu Bakr reported that the Prophet ﷺ said no one does something wrong, then gets up and purifies himself, then prays, then asks God’s forgiveness, except that God forgives him. Wudu, two rakʿahs, and asking. That is the whole of it.',
       sources: [
@@ -164,7 +186,7 @@ export const TAWBA_PRAYER: Reference = {
     },
     {
       id: 'not-required',
-      heading: 'Repentance does not need it',
+      heading: 'Do I have to pray it to be forgiven?',
       body:
         'You are forgiven by turning back to God and meaning it — there is no ceremony and nothing to perform. This prayer is something you may do, not a step you have missed. It exists because doing something with your body often helps when saying it in your head does not.',
       sources: [quran(39, 53, { surahName: 'Az-Zumar' })],
@@ -197,31 +219,38 @@ export const QIYAM_AL_LAYL: Reference = {
     beginnerPriority: 3,
     relatedContent: [ref('reference', 'tahajjud'), ref('reference', 'witr')],
   },
+  quickFacts: [
+    { label: 'When', value: 'Any part of the night, before you sleep' },
+    { label: 'How many', value: 'Two at a time, as many as you want' },
+    { label: 'Do I have to?', value: 'No — none of the night prayer is owed', emphasis: true },
+    { label: 'How', value: 'Pray two rakʿahs', href: '/guide/qiyam' },
+  ],
   sections: [
     {
       id: 'what',
-      heading: 'What it is',
+      heading: 'What is qiyam al-layl?',
+      promote: 'hero',
       body:
         'Praying at night, before you have slept. Any amount, any part of the night after Isha. It is the same prayer you already know — two rakʿahs at a time, as many times as you want.',
       sources: [hadith('muslim', '749', { grading: 'sahih', role: 'practice' })],
     },
     {
       id: 'difference',
-      heading: 'The one thing that separates it from tahajjud',
+      heading: 'How is it different from tahajjud?',
       body:
         'Whether you slept. Pray at night before sleeping and it is qiyam al-layl; sleep first, wake, and pray, and that is tahajjud. Both are voluntary, both are the same movements, and nobody is doing the lesser one.',
       note: 'This is the whole difference. If you are unsure which you prayed, it does not affect whether it counted.',
     },
     {
       id: 'ramadan',
-      heading: 'Where you will hear the word',
+      heading: 'Where will I hear the word?',
       body:
         'In Ramadan, mosques announce “qiyam” for the long night prayers in the last ten nights. Taraweeh is the same family of prayer. You are welcome at it, you can leave when you need to, and nobody is counting your rakʿahs.',
       sources: [general('Ordinary description of what happens at a mosque in Ramadan, claiming nothing about the ruling.')],
     },
     {
       id: 'close',
-      heading: 'Finish with witr',
+      heading: 'How do I finish?',
       body:
         'Whatever you pray at night, end it with witr — a single rakʿah that makes the night’s total odd. It is what closes the night prayer.',
       sources: [hadith('bukhari', '990', { grading: 'sahih', role: 'practice' })],

@@ -15,23 +15,28 @@ export const WHO_IS_MUHAMMAD: Reference = {
     beginnerPriority: 2,
     relatedContent: [ref('reference', 'sunnah'), ref('reference', 'what-is-the-quran')],
   },
+  quickFacts: [
+    { label: 'Who', value: 'A man, and the last of the prophets — not divine' },
+    { label: 'Why the ﷺ', value: 'A short prayer said after his name' },
+  ],
   sections: [
     {
       id: 'who',
-      heading: 'A man, and a messenger',
+      heading: 'Do Muslims worship him?',
+      promote: 'hero',
       body:
         'Muhammad ﷺ was born in Mecca around 570 CE and received the Qur’an over roughly twenty-three years. Muslims believe he is the last of a long line of prophets that includes Ibrahim, Musa and ʿIsa — Abraham, Moses and Jesus. He is not divine and is not worshipped. He delivered the message; the message is from God.',
       sources: [quran(33, 40, { surahName: 'Al-Ahzab' })],
     },
     {
       id: 'the-symbol',
-      heading: 'The symbol after his name',
+      heading: 'What is the ﷺ after his name?',
       body:
         'You will see ﷺ written after his name throughout this app and everywhere else. It stands for an Arabic phrase asking God to bless him and grant him peace. Muslims say it aloud out of respect whenever he is mentioned. Nobody will mind if you forget at first.',
     },
     {
       id: 'character',
-      heading: 'What he was like',
+      heading: 'What was he like?',
       body:
         'The Qur’an describes him as being of great character, and the people who lived with him described someone who never used foul or crude language and who taught that the best people are those with the best manners. Much of what Muslims try to imitate is not ritual at all — it is how he treated people.',
       sources: [
@@ -45,7 +50,7 @@ export const WHO_IS_MUHAMMAD: Reference = {
     },
     {
       id: 'why-follow',
-      heading: 'Why Muslims follow him',
+      heading: 'Why follow him?',
       body:
         'Because the Qur’an tells them to. It calls him an excellent example, and says that obeying him is obeying God. In practice this is very concrete: the Qur’an commands prayer without describing how, and the answer to "how" is that he said, "Pray as you have seen me praying."',
       sources: [

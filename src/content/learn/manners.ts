@@ -16,10 +16,15 @@ export const MANNERS: Reference = {
     tags: ['etiquette', 'family'],
     relatedContent: [ref('reference', 'family'), ref('reference', 'sunnah')],
   },
+  quickFacts: [
+    { label: 'Not optional', value: 'Character is worship, not a side subject', emphasis: true },
+    { label: 'The core', value: 'How you speak, how you handle anger, what you want for others' },
+  ],
   sections: [
     {
       id: 'central',
-      heading: 'Not a side subject',
+      heading: 'Are manners really part of it?',
+      promote: 'hero',
       body:
         'Character sits at the centre rather than the edge. The Prophet ﷺ, described in the Qur’an as being of great character, taught that the best of people are those with the best manners — and the people who lived with him said he never used foul or crude language.',
       sources: [
@@ -33,7 +38,7 @@ export const MANNERS: Reference = {
     },
     {
       id: 'three',
-      heading: 'Three things in one sentence',
+      heading: 'Is there a summary?',
       body:
         'The Prophet ﷺ tied belief directly to behaviour: whoever believes in God and the Last Day should not harm their neighbour, should be generous to their guest, and should say something good or stay quiet. Neighbours, guests, and how you speak — that is a large share of daily life.',
       sources: [
@@ -46,7 +51,7 @@ export const MANNERS: Reference = {
     },
     {
       id: 'speech',
-      heading: 'How you talk about people',
+      heading: 'What about talking about people?',
       body:
         'The Qur’an forbids mocking others, assuming the worst, spying, and talking about people behind their backs — in two consecutive verses. Backbiting is treated as a serious wrong, not a small one, and it is the habit most people find hardest to drop.',
       sources: [
@@ -56,7 +61,7 @@ export const MANNERS: Reference = {
     },
     {
       id: 'anger',
-      heading: 'Anger',
+      heading: 'What do I do when I am angry?',
       body:
         'The Prophet ﷺ said the strong person is not the one who overpowers others, but the one who controls himself when angry. It is a redefinition rather than a rule, and it comes up more often than most of the rules do.',
       sources: [
@@ -69,7 +74,7 @@ export const MANNERS: Reference = {
     },
     {
       id: 'others',
-      heading: 'Wanting for others what you want for yourself',
+      heading: 'What is the measure of it?',
       body:
         'One of the shortest things the Prophet ﷺ said and one of the hardest: none of you truly believes until he wants for his brother what he wants for himself. It is the test to apply when a situation is not covered by anything you have learned yet.',
       sources: [

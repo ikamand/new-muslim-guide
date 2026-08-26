@@ -23,10 +23,15 @@ export const FAMILY: Reference = {
     tags: ['family'],
     relatedContent: [ref('reference', 'manners'), ref('reference', 'food')],
   },
+  quickFacts: [
+    { label: 'Parents', value: 'Honoured immediately after God, whatever they believe' },
+    { label: 'Telling them', value: 'Yours to time. Nothing requires you to announce it', emphasis: true },
+  ],
   sections: [
     {
       id: 'parents',
-      heading: 'Parents come very high',
+      heading: 'Where do parents sit?',
+      promote: 'hero',
       body:
         'The Qur’an places kindness to parents immediately after worshipping God alone, in the same sentence. When a man asked the Prophet ﷺ who most deserved his good company, the answer was "your mother", three times, before "your father".',
       sources: [
@@ -40,7 +45,7 @@ export const FAMILY: Reference = {
     },
     {
       id: 'non-muslim-parents',
-      heading: 'If your parents are not Muslim',
+      heading: 'What if my parents are not Muslim?',
       body:
         'This changes nothing about how you treat them. The Qur’an addresses exactly this: even where parents press their child to abandon belief in God alone, the instruction is not to obey them in that — and in the same breath, to keep their company in this world with kindness. Both halves are the instruction.',
       sources: [quran(31, 15, { surahName: 'Luqman' })],
@@ -54,7 +59,7 @@ export const FAMILY: Reference = {
     },
     {
       id: 'telling-them',
-      heading: 'Telling them, or not yet',
+      heading: 'Do I have to tell them?',
       body:
         'There is no requirement to announce it, and no deadline. Some people tell everyone the same week; others wait months, or years, because the cost at home would be serious. Nothing in your prayer or your standing with God depends on who knows.',
       notes: [
@@ -66,7 +71,7 @@ export const FAMILY: Reference = {
     },
     {
       id: 'marriage',
-      heading: 'Marriage and your own household',
+      heading: 'What about marriage?',
       body:
         'The Qur’an describes marriage as a place of tranquillity, affection and mercy — that is the standard being aimed at. The Prophet ﷺ said the best of you is the best to his family, and he said it about himself first.',
       sources: [

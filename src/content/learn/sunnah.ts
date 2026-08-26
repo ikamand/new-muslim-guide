@@ -27,23 +27,28 @@ export const SUNNAH: Reference = {
     beginnerPriority: 3,
     relatedContent: [ref('reference', 'who-is-muhammad'), ref('reference', 'what-is-the-quran')],
   },
+  quickFacts: [
+    { label: 'What it is', value: 'The Prophet’s ﷺ way — what he said, did, and approved of' },
+    { label: 'How it reaches us', value: 'Hadith: reports with the chain of people who passed them down' },
+  ],
   sections: [
     {
       id: 'what',
-      heading: 'What the word means',
+      heading: 'What does Sunnah mean?',
       body:
         'Sunnah means a way or a path — specifically the way the Prophet ﷺ lived: what he said, what he did, and what he approved of in others. It reaches us through hadith, which are reports of those things recorded with the chain of people who passed each one down.',
     },
     {
       id: 'why',
-      heading: 'Why it sits beside the Qur’an',
+      heading: 'Why does it sit beside the Qur’an?',
+      promote: 'hero',
       body:
         'The Qur’an gives the command and the Sunnah usually gives the method. "Establish the prayer" appears again and again; how many units, when, and what to say in them comes from watching him. The Qur’an itself instructs Muslims to take what the Messenger gives them.',
       sources: [quran(59, 7, { surahName: 'Al-Hashr' }), quran(4, 80, { surahName: 'An-Nisa' })],
     },
     {
       id: 'authentic',
-      heading: 'Not every report is equal',
+      heading: 'Are all hadith reliable?',
       body:
         'Because hadith were transmitted by people, scholars spent centuries grading them — examining every chain and every narrator. Some are sound, some are weak, and some are forgeries. This is why the app names its sources: so you can check, rather than take its word.',
       notes: [
@@ -55,7 +60,7 @@ export const SUNNAH: Reference = {
     },
     {
       id: 'everyday',
-      heading: 'What it looks like day to day',
+      heading: 'What does it look like day to day?',
       body:
         'Much of it is small and human: not harming a neighbour, making a guest welcome, saying something good or staying quiet, eating with the right hand, a few words before sleeping. Following the Sunnah is not an extra layer of difficulty on top of the religion — a lot of it is simply how a decent person moves through a day.',
       sources: [

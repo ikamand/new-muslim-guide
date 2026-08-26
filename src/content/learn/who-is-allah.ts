@@ -23,32 +23,63 @@ export const WHO_IS_ALLAH: Reference = {
     tags: ['first-day'],
     relatedContent: [ref('article', 'allah'), ref('reference', 'what-is-islam')],
   },
+  /*
+    No "do I have to?" row: nothing on a belief page is an instruction. The
+    block flexes to what the page actually is rather than padding to four.
+  */
+  quickFacts: [
+    { label: 'The name', value: 'Arabic for God — the same word Arabic-speaking Christians and Jews use' },
+    { label: 'The answer', value: 'Four lines of the Qur’an, below', emphasis: true },
+  ],
   sections: [
     {
       id: 'the-name',
-      heading: 'The name',
+      heading: 'Is Allah a different God?',
       body:
-        'Allah is simply the Arabic word for God. It is not a different god with a different name — Arabic-speaking Christians and Jews use the same word when they pray. It has no plural and no gender, which is part of why Muslims keep it rather than translating it.',
+        'No. Allah is simply the Arabic word for God, and Arabic-speaking Christians and Jews use it when they pray.',
+      note: 'It has no plural and no gender, which is part of why Muslims keep the word rather than translating it.',
     },
     {
       id: 'al-ikhlas',
-      heading: 'Four lines that answer the question',
+      heading: 'What was said when the Prophet ﷺ was asked to describe God?',
       body:
-        'When the Prophet ﷺ was asked to describe God, the answer given was a short chapter of the Qur’an: that He is One; that He is the One everything turns to and needs; that He was not born and had no children; and that there is nothing at all comparable to Him. Four lines, and Muslims have taken them as the definition ever since.',
+        'A short chapter of the Qur’an — and Muslims have taken it as the definition ever since.',
+      /*
+        The page's answer, so it breaks the margins. The paragraph that used to
+        paraphrase these four lines is gone: the verse says it better, and
+        saying both would be the burial this format exists to undo.
+      */
+      promote: 'hero',
+      bullets: [
+        '**He is One.**',
+        '**Everything turns to Him** and needs Him.',
+        '**He was not born** and had no children.',
+        '**There is nothing comparable to Him.**',
+      ],
       sources: [quran(112, [1, 4], { surahName: 'Al-Ikhlas' })],
     },
     {
       id: 'nothing-like-him',
-      heading: 'Nothing like Him',
+      heading: 'What if I try to picture Him?',
       body:
-        'This is the sentence to hold on to when your mind starts trying to picture God. The Qur’an says there is nothing like Him — so any picture you form is wrong by definition, and you are not expected to form one. Muslims do not depict God, and that is why you will not find images of Him anywhere in Islam.',
+        'Any picture you form is wrong by definition — and you are not expected to form one.',
+      promote: 'supporting',
+      note: 'This is why Muslims do not depict God, and why you will not find images of Him anywhere in Islam.',
       sources: [quran(42, 11, { surahName: 'Ash-Shura' })],
     },
     {
       id: 'names',
-      heading: 'Known by what He does',
+      heading: 'How do I get to know Him?',
       body:
-        'The Qur’an teaches about God through names — the Merciful, the Forgiving, the Hearing, the One who provides. You will meet them constantly: every chapter but one opens by naming Him as the Most Merciful, and the prayer is full of them. Learning a few is a gentler way in than trying to think about God in the abstract.',
+        'Through His names, rather than in the abstract — and you will meet them constantly.',
+      promote: 'supporting',
+      bullets: [
+        '**Ar-Rahman** — the Most Merciful. Every chapter but one opens with it.',
+        '**Al-Ghafur** — the Forgiving.',
+        '**As-Samiʽ** — the Hearing.',
+        '**Ar-Razzaq** — the One who provides.',
+      ],
+      note: 'Learning a few is a gentler way in than trying to think about God in the abstract.',
       sources: [quran(7, 180, { surahName: 'Al-A`raf' })],
     },
   ],

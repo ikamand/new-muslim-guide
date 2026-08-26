@@ -16,10 +16,20 @@ export const BEFORE_PRAYER: Reference = {
     tags: ['first-day'],
     relatedContent: [ref('guide', 'wudu'), ref('reference', 'clothing'), ref('guide', 'fajr')],
   },
+  /*
+    Five conditions, so the block says five rather than listing them — the
+    page below is the list, and repeating it at the top would be the padding
+    this format refuses.
+  */
+  quickFacts: [
+    { label: 'Five things', value: 'Time · wudu · covered · qibla · intention' },
+    { label: 'Do I have to?', value: 'Yes — these come before the prayer itself', emphasis: true },
+  ],
   sections: [
     {
       id: 'time',
-      heading: 'The time has come in',
+      heading: 'Is it the right time?',
+      promote: 'hero',
       body:
         'Each prayer has a window, and you pray inside it rather than whenever you like — the Qur’an calls prayer a decree of specified times. The Pray tab works the times out from where you are, on the phone, so you do not have to calculate anything.',
       sources: [quran(4, 103, { surahName: 'An-Nisa' })],
@@ -36,7 +46,7 @@ export const BEFORE_PRAYER: Reference = {
     },
     {
       id: 'wudu',
-      heading: 'You are in wudu',
+      heading: 'Am I in wudu?',
       body:
         'Wudu is the short wash before prayer. The Prophet ﷺ said the prayer of someone who has broken it is not accepted until they wash again. One wudu covers several prayers — it lasts until something breaks it, and the wudu guide sets out what does and what only feels as though it does.',
       // Deliberately no list here. This page used to name three things that
@@ -58,7 +68,7 @@ export const BEFORE_PRAYER: Reference = {
     },
     {
       id: 'covered',
-      heading: 'You are covered, and so is the place',
+      heading: 'Am I covered, and is the place clean?',
       body:
         'The Qur’an tells people to take their adornment at every place of prayer — dress as you would to meet someone you respect. Your clothes and the ground you pray on should be clean. A carpet, a towel or a mat is fine; a prayer mat is convenient, not required.',
       sources: [quran(7, 31, { surahName: 'Al-A`raf' })],
@@ -71,14 +81,14 @@ export const BEFORE_PRAYER: Reference = {
     },
     {
       id: 'qibla',
-      heading: 'You are facing the qibla',
+      heading: 'Which way do I face?',
       body:
         'Muslims face the Kaʿbah in Mecca, and the Qur’an gives that instruction directly. The Qibla screen in this app points the way from where you are. If you cannot work it out — on a plane, in an unfamiliar place — face your best guess and pray; that is accepted.',
       sources: [quran(2, 144, { surahName: 'Al-Baqarah' })],
     },
     {
       id: 'intention',
-      heading: 'You intend it',
+      heading: 'Do I have to say the intention?',
       body:
         'The intention is a thought, not a sentence: knowing which prayer you are about to pray. You do not say it out loud, and you do not need a formula. If you are standing on a mat about to pray Maghrib, you have already intended it.',
       notes: [

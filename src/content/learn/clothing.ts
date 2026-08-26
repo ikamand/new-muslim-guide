@@ -29,17 +29,22 @@ export const CLOTHING: Reference = {
     tags: ['etiquette', 'women'],
     relatedContent: [ref('reference', 'halal-and-haram'), ref('reference', 'mosque')],
   },
+  quickFacts: [
+    { label: 'The idea', value: 'Modesty — of dress, of look, of manner' },
+    { label: 'Applies to', value: 'Everyone. It starts with how men behave, not with women’s clothes' },
+  ],
   sections: [
     {
       id: 'principle',
-      heading: 'The idea behind it',
+      heading: 'What is the idea behind it?',
       body:
         'The Qur’an speaks about clothing as something given for covering and for adornment — both, not one at the expense of the other. Islam is not against looking good. The instructions that follow are about modesty in public, not about drabness.',
       sources: [quran(7, 26, { surahName: 'Al-A`raf' })],
     },
     {
       id: 'everyone',
-      heading: 'It starts with everyone',
+      heading: 'Is this only about women?',
+      promote: 'hero',
       body:
         'The instruction to lower the gaze and guard modesty is given to men first and then to women, in consecutive verses. That order is worth noticing: modesty in Islam is not a set of rules aimed only at women, and men have their own covering to observe.',
       sources: [
@@ -49,7 +54,7 @@ export const CLOTHING: Reference = {
     },
     {
       id: 'men',
-      heading: 'For men',
+      heading: 'What does it mean for men?',
       body:
         'Cover at least from the navel to the knee, keep clothing loose enough not to be revealing, and avoid pure silk and gold jewellery, which the Prophet ﷺ restricted for men. In ordinary Western dress this changes very little in practice.',
       /**
@@ -72,7 +77,7 @@ export const CLOTHING: Reference = {
     },
     {
       id: 'women',
-      heading: 'For women',
+      heading: 'What does it mean for women?',
       body:
         'The Qur’an instructs believing women to guard their modesty, to draw their head-coverings over the chest, and to draw their outer garments about them. The commonly taught result is loose clothing covering the body, with the head covered, in front of men outside the immediate family.',
       sources: [

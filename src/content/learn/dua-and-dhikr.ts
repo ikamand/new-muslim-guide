@@ -16,10 +16,15 @@ export const DUA_AND_DHIKR: Reference = {
     tags: ['arabic', 'audio'],
     relatedContent: [ref('dua', 'wake'), ref('reference', 'what-is-the-quran')],
   },
+  quickFacts: [
+    { label: 'Duʿa', value: 'Asking — in any language, in your own words' },
+    { label: 'Dhikr', value: 'Remembering — short phrases, repeated' },
+    { label: 'Where to start', value: 'The duʿas of an ordinary day', href: '/duas' },
+  ],
   sections: [
     {
       id: 'dua',
-      heading: 'Duʿa is asking',
+      heading: 'What is duʿa?',
       body:
         'Duʿa is simply asking God for something. It has no set form, no required language and no appointed time — the Qur’an says He is near and answers the one who calls. You can make duʿa in English, in your own words, in the car, and it is the same duʿa.',
       sources: [quran(2, 186, { surahName: 'Al-Baqarah' })],
@@ -32,14 +37,15 @@ export const DUA_AND_DHIKR: Reference = {
     },
     {
       id: 'dhikr',
-      heading: 'Dhikr is remembering',
+      heading: 'What is dhikr?',
       body:
         'Dhikr means remembrance — short phrases repeated through the day. Subḥān Allāh (glory be to God), al-ḥamdu li-llāh (all praise is God’s), Allāhu akbar (God is greatest). The Qur’an says hearts settle by the remembrance of God, and that is closer to what it does than anything a description manages.',
       sources: [quran(13, 28, { surahName: 'Ar-Ra`d' })],
     },
     {
       id: 'why',
-      heading: 'Why it is given so much weight',
+      heading: 'Why does it matter so much?',
+      promote: 'hero',
       body:
         'The Prophet ﷺ compared the person who remembers their Lord to the living, and the one who does not to the dead. He also said that whoever says subḥān Allāhi wa bi-ḥamdih a hundred times in a day has their sins forgiven though they were like the foam of the sea.',
       sources: [
@@ -57,7 +63,7 @@ export const DUA_AND_DHIKR: Reference = {
     },
     {
       id: 'start',
-      heading: 'Where to start',
+      heading: 'Where do I start?',
       body:
         'Pick one phrase and one moment — waking, or the walk to work. The Everyday duʿas screen has short ones with the Arabic, how it sounds and what it means. The shortest is a single word, which is a deliberate place to begin rather than a compromise.',
     },

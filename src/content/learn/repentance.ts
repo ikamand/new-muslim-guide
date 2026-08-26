@@ -21,24 +21,29 @@ export const REPENTANCE: Reference = {
     beginnerPriority: 2,
     relatedContent: [ref('reference', 'dua-and-dhikr'), ref('reference', 'missed')],
   },
+  quickFacts: [
+    { label: 'The door', value: 'Does not close. Not for anyone, not for anything', emphasis: true },
+    { label: 'What it takes', value: 'Stop, regret it, resolve not to return' },
+  ],
   sections: [
     {
       id: 'door',
-      heading: 'The door does not close',
+      heading: 'Is it too late for me?',
+      promote: 'hero',
       body:
         'The Qur’an addresses people who have wronged themselves and tells them not to despair of God’s mercy, because He forgives all sins. That verse is worth knowing early, because the thing most likely to end someone’s practice is not a sin — it is deciding afterwards that they are past helping.',
       sources: [quran(39, 53, { surahName: 'Az-Zumar' })],
     },
     {
       id: 'how',
-      heading: 'What repentance actually is',
+      heading: 'What does repentance actually take?',
       body:
         'Stopping, meaning it, and asking. There is no ritual, no witness, and nobody to confess to — you turn to God directly. The Qur’an calls it turning to Him with sincere repentance, and that is the whole procedure.',
       sources: [quran(66, 8, { surahName: 'At-Tahrim' })],
     },
     {
       id: 'joy',
-      heading: 'How it is received',
+      heading: 'How is it received?',
       body:
         'The Prophet ﷺ described God as more pleased with a person’s repentance than someone would be who lost their camel in the desert and then found it. The image is not of a grudging pardon. It is relief and delight.',
       sources: [
@@ -51,7 +56,7 @@ export const REPENTANCE: Reference = {
     },
     {
       id: 'again',
-      heading: 'If it happens again',
+      heading: 'What if I do it again?',
       body:
         'You repent again. People expect to fail once and be finished; that is not how it works, and a habit that takes a year to break took a year for everybody else too. Keep praying while you work on it — stopping the prayer because you feel unworthy of it is the one move that makes things worse.',
       notes: [

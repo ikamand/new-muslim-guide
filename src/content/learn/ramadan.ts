@@ -49,17 +49,23 @@ export const RAMADAN: Reference = {
     tags: ['ramadan', 'health'],
     relatedContent: [ref('pillar', 'sawm'), ref('reference', 'mosque')],
   },
+  quickFacts: [
+    { label: 'When', value: 'The ninth month — it moves about 11 days earlier each year' },
+    { label: 'The fast', value: 'No food, drink or intimacy from dawn until sunset' },
+    { label: 'Do I have to?', value: 'Yes, if you are able. Several people are excused', emphasis: true },
+  ],
   sections: [
     {
       id: 'what',
-      heading: 'What it is',
+      heading: 'What is Ramadan?',
       body:
         'The ninth month of the Islamic lunar calendar, and the month in which the Qur’an began to be revealed. Because the calendar is lunar, it moves about eleven days earlier each year — so it passes through every season over a lifetime.',
       sources: [quran(2, 185, { surahName: 'Al-Baqarah' })],
     },
     {
       id: 'fasting',
-      heading: 'The fast itself',
+      heading: 'What does the fast involve?',
+      promote: 'hero',
       body:
         'From first light until sunset, no food, no drink — not even water — and no sexual intimacy. The Qur’an marks the start of the fast as the moment dawn becomes distinguishable, and the end at sunset. Outside those hours you eat and drink normally.',
       sources: [
@@ -69,14 +75,14 @@ export const RAMADAN: Reference = {
     },
     {
       id: 'why',
-      heading: 'Why',
+      heading: 'Why fast at all?',
       body:
         'The Qur’an gives the reason directly: so that you may become mindful of God. It is not endurance for its own sake, and it is not a diet. Being hungry at four in the afternoon is a reminder of who provides, and of people for whom that hunger is not a choice.',
       sources: [quran(2, 183, { surahName: 'Al-Baqarah' })],
     },
     {
       id: 'exempt',
-      heading: 'Who does not fast',
+      heading: 'Who does not have to fast?',
       body:
         'The Qur’an names two: anyone ill, and anyone travelling. Both make the days up afterwards, at their own pace, before the next Ramadan. It also gives a second route for someone who could only fast with real hardship — feeding a poor person for each day instead of fasting it. That second route is the answer for a long-term or permanent condition, where making the days up later is not something that is ever going to happen. During a period a woman does not fast either, and those days are made up.',
       note: 'If you are on medication or managing an illness, ask a doctor and someone knowledgeable before your first Ramadan rather than during it. A first Ramadan is far more often damaged by someone fasting who should not have than by someone taking an exemption they were given.',
@@ -136,7 +142,7 @@ export const RAMADAN: Reference = {
     },
     {
       id: 'day',
-      heading: 'Suhoor and iftar',
+      heading: 'What are suhoor and iftar?',
       body:
         'Suhoor is the meal before dawn — the Prophet ﷺ said to take it, because there is blessing in it, and skipping it makes a long day much harder. Iftar is breaking the fast at sunset, traditionally with dates and water, and he taught not to delay it once the sun is down.',
       sources: [
@@ -154,7 +160,7 @@ export const RAMADAN: Reference = {
     },
     {
       id: 'worship',
-      heading: 'The rest of the month',
+      heading: 'What happens the rest of the month?',
       body:
         'Mosques fill up for taraweeh, a long optional night prayer, and many people read far more Qur’an than usual — Jibril would go through the Qur’an with the Prophet ﷺ each night of Ramadan. There is also more giving: he was described as at his most generous this month.',
       // One narration, both halves of the sentence: Ibn `Abbas describes the
@@ -170,7 +176,7 @@ export const RAMADAN: Reference = {
     },
     {
       id: 'laylat-al-qadr',
-      heading: 'The night in the last ten',
+      heading: 'What is Laylat al-Qadr?',
       body:
         'One night in Ramadan is called Laylat al-Qadr, the Night of Decree — the night the Qur’an began to be revealed, which the Qur’an says is better than a thousand months. Nobody is told which night it is. The Prophet ﷺ said to look for it in the odd nights of the last ten, which is why mosques fill up at the end of the month.',
       sources: [
@@ -184,7 +190,7 @@ export const RAMADAN: Reference = {
     },
     {
       id: 'eid',
-      heading: 'Eid al-Fitr',
+      heading: 'What happens at the end?',
       body:
         'The month ends with Eid — a morning prayer, new or good clothes, and visiting people. Before that prayer, every Muslim gives a small fixed amount of food so that nobody is left out of the day. It is called zakat al-fitr and it is due for every member of a household — old and young, and paid on behalf of anyone in your care.',
       sources: [

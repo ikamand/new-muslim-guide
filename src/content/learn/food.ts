@@ -124,7 +124,7 @@ export const FOOD: Reference = {
     },
     {
       id: 'family-table',
-      heading: 'Eating with your family',
+      heading: 'What about eating with my family?',
       body:
         'You do not have to stop eating with people who are not Muslim, and you do not have to make a scene. Eat what you can, quietly leave what you cannot, and answer questions if they come. Most families adjust faster when the change is undramatic.',
       notes: [

@@ -48,10 +48,16 @@ export const PERIODS: Reference = {
   title: 'Periods and prayer',
   subtitle: 'What changes, and what does not',
   audience: 'woman',
+  quickFacts: [
+    { label: 'Prayer', value: 'You do not pray, and you do not make those prayers up' },
+    { label: 'Fasting', value: 'You do not fast, and you do make those up' },
+    { label: 'When it ends', value: 'Take a ghusl, then pray from the next prayer due' },
+  ],
   sections: [
     {
       id: 'prayer',
-      heading: 'You do not pray',
+      heading: 'Do I still pray?',
+      promote: 'hero',
       body:
         'From the moment bleeding starts until it stops, you do not pray. This is not permission to skip — you are not supposed to pray, and praying anyway is not better.',
       note: 'You do not make these prayers up afterwards. They are not a debt. This surprises most people, so it is worth saying twice: they are simply not owed.',
@@ -70,7 +76,7 @@ export const PERIODS: Reference = {
     },
     {
       id: 'fasting',
-      heading: 'You do not fast, but you make it up',
+      heading: 'What about fasting?',
       body:
         'You do not fast during a period. Fasts missed in Ramadan for this reason are made up later, before the next Ramadan, at your own pace.',
       note: 'Prayer and fasting work differently here. Prayers are not made up; fasts are.',
@@ -86,21 +92,21 @@ export const PERIODS: Reference = {
     },
     {
       id: 'ending',
-      heading: 'When it ends',
+      heading: 'When do I start praying again?',
       body:
         'Once the bleeding has stopped, take a ghusl — the full wash — and you go straight back to praying with the next prayer due.',
       sources: [quran(2, 222, { surahName: 'Al-Baqarah' })],
     },
     {
       id: 'still-yours',
-      heading: 'What does not change',
+      heading: 'What can I still do?',
       body:
         'Everything else stays open to you. You can make duʿa in your own words, say dhikr, listen to the Qur’an, go on learning, and sit with people who are praying.',
       note: 'You are not unclean and you are not excluded. The rest from prayer is a concession you have been given, not a punishment or a mark against you.',
     },
     {
       id: 'differences',
-      heading: 'Where you will hear different answers',
+      heading: 'Why do people tell me different things?',
       body:
         'One question here is genuinely open and two are not, and it saves a lot of confusion to know which is which. Reciting the Qur’an during a period is the open one: scholars divide on it, and you will meet people certain of opposite answers. Holding a printed muṣḥaf is not open in the same way — all four schools say not to. Nor is sitting in the prayer hall of a mosque, which all four treat as somewhere not to stay through a period, though several allow walking through.',
       note: 'None of this touches what the last section said. Listening, duʿa, dhikr and learning are open on every account, and nobody who tells you one of these is being difficult with you.',
@@ -141,7 +147,7 @@ export const PERIODS: Reference = {
     },
     {
       id: 'irregular',
-      heading: 'Bleeding that is not a period',
+      heading: 'What if the bleeding is not a period?',
       body:
         'Bleeding outside your normal pattern, or lasting far beyond it, is treated differently — it does not stop you praying. A woman asked the Prophet ﷺ exactly this and was told not to give up her prayers, because that bleeding comes from a blood vessel rather than being a period. You wash, do wudu, and pray; the wudu is done afresh for each prayer.',
       note: 'Telling the two apart is genuinely a question for someone knowledgeable, not for an app. Do not guess, and do not stop praying on a guess.',
@@ -158,7 +164,7 @@ export const PERIODS: Reference = {
     },
     {
       id: 'after-birth',
-      heading: 'After giving birth',
+      heading: 'What about after giving birth?',
       body:
         'Bleeding after childbirth follows the same rules as a period: you do not pray, you do not make those prayers up, and you take a ghusl when it ends.',
       // Umm Salama: women refrained from prayer for forty days after
@@ -194,10 +200,15 @@ export const LOST_COUNT: Reference = {
   surface: 'pray',
   title: 'Losing count in prayer',
   subtitle: 'What to do when you are not sure where you are',
+  quickFacts: [
+    { label: 'The fix', value: 'Take the smaller number, then two extra prostrations' },
+    { label: 'Does it count?', value: 'Yes — the prayer is valid', emphasis: true },
+  ],
   sections: [
     {
       id: 'rule',
-      heading: 'Take the smaller number',
+      heading: 'I have lost count — what now?',
+      promote: 'hero',
       body:
         'If you cannot remember whether you are on the second or third rakʿah, assume the smaller one — the number you are certain of — and carry on from there.',
       note: 'Do not start the prayer again. Restarting is the common instinct and it is not the answer.',
@@ -213,7 +224,7 @@ export const LOST_COUNT: Reference = {
     },
     {
       id: 'sujud',
-      heading: 'Then two extra prostrations',
+      heading: 'What are the two extra prostrations?',
       body:
         'Finish the prayer as normal. Before or after the final taslim, make two prostrations just as you do in the prayer itself, saying the takbir as you go down and as you come up, then give the taslim.',
       notes: [
@@ -247,13 +258,13 @@ export const LOST_COUNT: Reference = {
     },
     {
       id: 'also',
-      heading: 'The same fix covers more than doubt',
+      heading: 'What else does that fix cover?',
       body:
         'Those two prostrations also cover forgetting the first sitting, adding a movement by mistake, or saying something in the wrong place.',
     },
     {
       id: 'settle',
-      heading: 'Do not chase it',
+      heading: 'It keeps happening — is that bad?',
       body:
         'Everyone loses count, including people who have prayed all their lives. If the doubt keeps coming back in the same prayer, ignore it and finish — chasing certainty is itself a distraction from the prayer.',
     },
@@ -269,10 +280,15 @@ export const MISSED: Reference = {
   surface: 'pray',
   title: 'Missing a prayer',
   subtitle: 'Sleeping through it, forgetting, or running out of time',
+  quickFacts: [
+    { label: 'Is it a sin?', value: 'Not if you slept or forgot', emphasis: true },
+    { label: 'What to do', value: 'Pray it as soon as you remember' },
+  ],
   sections: [
     {
       id: 'pray-it',
-      heading: 'Pray it when you remember',
+      heading: 'I missed a prayer — is that a sin?',
+      promote: 'hero',
       body:
         'Sleeping through a prayer or forgetting it is not a sin. You pray it as soon as you wake or remember, and that prayer counts as the one you missed.',
       // "There is no expiation except to pray the same" — which is exactly the
@@ -287,13 +303,13 @@ export const MISSED: Reference = {
     },
     {
       id: 'order',
-      heading: 'In order, if there are several',
+      heading: 'What if I missed several?',
       body:
         'Missed more than one? Pray them in the order they were due, then the prayer you are currently in time for.',
     },
     {
       id: 'guilt',
-      heading: 'Do not let it stop you',
+      heading: 'What if it keeps happening?',
       body:
         'The thing that ends people’s prayer is not the prayer they missed — it is deciding they are now the sort of person who misses prayers. Pray the next one. That is the whole recovery.',
       note: 'Deliberately leaving a prayer is a serious matter and different from oversleeping. The action is still the same: pray it, and pray the next one.',
@@ -307,10 +323,16 @@ export const TRAVELLING: Reference = {
   surface: 'pray',
   title: 'Praying while travelling',
   subtitle: 'Shortening and combining on a journey',
+  quickFacts: [
+    { label: 'How many', value: 'Dhuhr, ʿAsr and ʿIshaʾ become two. Fajr and Maghrib do not change' },
+    { label: 'Together?', value: 'Dhuhr with ʿAsr, Maghrib with ʿIshaʾ — at either time' },
+    { label: 'Do I have to?', value: 'Shortening is the sunnah on a journey', emphasis: true },
+  ],
   sections: [
     {
       id: 'shorten',
-      heading: 'Four becomes two',
+      heading: 'How much do I pray when travelling?',
+      promote: 'hero',
       body:
         'On a journey, the four-rakʿah prayers — Dhuhr, ʿAsr and ʿIshaʾ — are prayed as two. Fajr stays two and Maghrib stays three.',
       note: 'This is a gift, not a compromise. It is the practice of the Prophet ﷺ on journeys, not a lowering of the bar.',
@@ -325,7 +347,7 @@ export const TRAVELLING: Reference = {
     },
     {
       id: 'combine',
-      heading: 'Two prayers together',
+      heading: 'Can I pray two together?',
       body:
         'You may also pray Dhuhr and ʿAsr together, and Maghrib and ʿIshaʾ together, at the time of either one of the pair.',
       sources: [
@@ -338,7 +360,7 @@ export const TRAVELLING: Reference = {
     },
     {
       id: 'howfar',
-      heading: 'How far counts as a journey',
+      heading: 'How far counts as travelling?',
       body:
         'Far enough that you would ordinarily call it travelling. There is no distance in the Qur’an or in any narration, so scholars have had to draw the line themselves, and they draw it in different places — the most common answer works out at somewhere around eighty to ninety kilometres. What everyone agrees on is when it starts: not when you decide to go, but once you have actually left the place you live.',
       note: 'A daily commute is not a journey, however long it feels. If you are unsure, ask someone locally rather than deciding alone.',
@@ -405,10 +427,15 @@ export const SEATED: Reference = {
   surface: 'pray',
   title: 'Praying when you cannot stand',
   subtitle: 'Illness, injury, pain, or no room to stand',
+  quickFacts: [
+    { label: 'If you cannot stand', value: 'Pray sitting — on a chair or the floor' },
+    { label: 'Does it count?', value: 'Fully. It is not worth less', emphasis: true },
+  ],
   sections: [
     {
       id: 'sit',
-      heading: 'Pray sitting',
+      heading: 'What if I cannot stand?',
+      promote: 'hero',
       body:
         'If standing is beyond you, or would cause real pain or harm, pray sitting down — on a chair or on the floor, whichever you can manage.',
       // `Imran ibn Husain asked because of an illness of his own, and got the
@@ -423,13 +450,13 @@ export const SEATED: Reference = {
     },
     {
       id: 'gesture',
-      heading: 'Bow and prostrate with a gesture',
+      heading: 'How do I bow and prostrate?',
       body:
         'Lean forward a little for the bowing, and further forward for the prostration, so that the prostration is clearly lower than the bow. Say everything exactly as you would standing.',
     },
     {
       id: 'lying',
-      heading: 'If you cannot sit either',
+      heading: 'What if I cannot sit either?',
       body:
         'Pray lying on your right side facing the qibla, or on your back, and make the movements with your head or your eyes. Prayer is never dropped for illness while you are conscious.',
       sources: [
@@ -442,7 +469,7 @@ export const SEATED: Reference = {
     },
     {
       id: 'counts',
-      heading: 'It is a full prayer',
+      heading: 'Does it count the same?',
       body:
         'A prayer prayed sitting because you could not stand is not worth less than one prayed standing. It is the prayer you were asked for.',
     },
@@ -492,10 +519,15 @@ export const MOSQUE: Reference = {
   surface: 'learn',
   title: 'Your first time at a mosque',
   subtitle: 'What actually happens, so none of it is a surprise',
+  quickFacts: [
+    { label: 'When', value: 'A quiet prayer, not Friday midday' },
+    { label: 'Bring', value: 'Nothing. Socks if you would rather' },
+    { label: 'If you get it wrong', value: 'Nobody minds. Everyone was new once', emphasis: true },
+  ],
   sections: [
     {
       id: 'when',
-      heading: 'Pick a quiet prayer, not Friday',
+      heading: 'When should I go the first time?',
       body:
         'Friday midday is the busiest hour of the week. For a first visit, go for a normal prayer — Dhuhr in the early afternoon, or ʿIshaʾ at night. Fewer people, more room to watch what everyone else does.',
       note: 'Friday prayer is obligatory for men, so you will need to go eventually. It is easier once the building is already familiar.',
@@ -513,7 +545,7 @@ export const MOSQUE: Reference = {
     },
     {
       id: 'before',
-      heading: 'Before you leave',
+      heading: 'What should I do before I go?',
       // "Women cover the hair, arms and legs" used to sit here as a flat rule
       // with nothing behind it, next to a lesson that treats the same subject
       // with its verses and its `differs` note. One subject, one place.
@@ -522,7 +554,7 @@ export const MOSQUE: Reference = {
     },
     {
       id: 'arriving',
-      heading: 'Walking in',
+      heading: 'What do I do when I walk in?',
       body:
         'There will be a shoe rack by the door. Take your shoes off there and carry them in if the rack is full. Step in with your right foot. There are usually separate entrances or areas for men and women — look for the signs, or ask; nobody minds being asked.',
       // The right foot is the general pattern `Aisha describes, not a rule of
@@ -537,7 +569,7 @@ export const MOSQUE: Reference = {
     },
     {
       id: 'inside',
-      heading: 'Once you are inside',
+      heading: 'Where do I sit?',
       body:
         'Pray two short rakʿah before you sit down — it is what everyone does on entering. Then sit anywhere on the carpet. There is no reserved seating and no collection.',
       note: 'If a prayer is already in progress, join the line where you are and follow along from wherever the imam has got to.',
@@ -551,19 +583,19 @@ export const MOSQUE: Reference = {
     },
     {
       id: 'prayer',
-      heading: 'The prayer itself',
+      heading: 'What happens in the prayer?',
       body:
         'People stand shoulder to shoulder in straight lines, filling from the front. Stand in a line, follow the imam, and do what the row does. You do not say anything aloud and nobody is watching you.',
     },
     {
       id: 'after',
-      heading: 'Afterwards',
+      heading: 'What happens afterwards?',
       body:
         'People turn and greet whoever is beside them. Say salam back. Someone will very likely ask if you are new — this is the moment the whole trip is actually for, and it is worth staying ten minutes for it.',
     },
     {
       id: 'nobody-minds',
-      heading: 'Things nobody minds',
+      heading: 'What if I get something wrong?',
       body:
         'Being a beat behind in the movements. Not knowing where to stand. Your phone going off. Asking a stranger what to do. Leaving straight after. Getting the words wrong under your breath.',
       note: 'Everyone in that room was new once, including the imam. Nobody is grading you, and the ones who notice you are new are almost always pleased about it.',

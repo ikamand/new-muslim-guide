@@ -22,16 +22,21 @@ export const HALAL_AND_HARAM: Reference = {
     tags: ['etiquette'],
     relatedContent: [ref('reference', 'food'), ref('reference', 'work')],
   },
+  quickFacts: [
+    { label: 'The words', value: 'Halal is permitted. Haram is forbidden' },
+    { label: 'The default', value: 'Yes — things are permitted unless there is a clear reason otherwise', emphasis: true },
+  ],
   sections: [
     {
       id: 'words',
-      heading: 'Two words you will hear constantly',
+      heading: 'What do halal and haram mean?',
       body:
         'Halal means permitted. Haram means forbidden. They apply to everything, not just food — how you earn money, how you speak about people, what you wear. Most of life is halal and always was; the forbidden list is short.',
     },
     {
       id: 'default',
-      heading: 'The default is yes',
+      heading: 'Do I need permission for ordinary things?',
+      promote: 'hero',
       body:
         'This is the part people get backwards. Things are permitted unless there is a clear reason otherwise, and the Qur’an describes the Prophet’s ﷺ message as making good things lawful rather than piling on prohibitions. You do not need to find permission for ordinary life.',
       sources: [
@@ -41,7 +46,7 @@ export const HALAL_AND_HARAM: Reference = {
     },
     {
       id: 'middle',
-      heading: 'And a space in between',
+      heading: 'What about things in between?',
       body:
         'The Prophet ﷺ said the lawful is clear and the unlawful is clear, and between them are matters that are unclear, which many people do not know about. Someone who stays away from what is doubtful protects their faith and their honour. That middle ground is where most real questions live.',
       sources: [
@@ -60,7 +65,7 @@ export const HALAL_AND_HARAM: Reference = {
     },
     {
       id: 'asking',
-      heading: 'When you are not sure',
+      heading: 'What if I am not sure?',
       body:
         'Ask someone qualified, and ask about your actual situation rather than the general case — circumstances change answers. You will also meet Muslims who are certain of opposite answers on the same question. That usually means it is a genuine point of scholarly difference rather than that one of them is lying to you.',
     },

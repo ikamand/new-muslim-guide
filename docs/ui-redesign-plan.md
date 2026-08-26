@@ -23,8 +23,8 @@ with its reasoning attached.
 | **1** | [The design system](#phase-1--the-design-system) | ✅ **Done** — `76f635e`, `21b66e3`, `41295cc` | OTA |
 | **2** | [The information architecture](#phase-2--the-information-architecture) | ✅ **Done** — `2a60188`, `f79f60f`, `e88f82d`, `014e430`, `aeccf7f`, `663aaef` | OTA |
 | **3** | [Provenance](#phase-3--provenance) | ✅ **Done** — `5f2570a`, `e614780` | OTA |
-| **4** | [Duʿas, and the first network call](#phase-4--duas-and-the-apps-first-network-call) | 🟡 **Day built** — `d9bd351`. Fetch-and-cache held: no licensed content to fetch yet | OTA |
-| **5** | [The Qur'an tab](#phase-5--the-quran-tab--juz-30) | 🟡 **Text and drill built** — `eed5214`. Audio held: see below | OTA |
+| **4** | [Duʿas, and the first network call](#phase-4--duas-and-the-apps-first-network-call) | ✅ **Done** — `d9bd351`, and its held half is now Phase 7 | OTA |
+| **5** | [The Qur'an tab](#phase-5--the-quran-tab--juz-30) | ✅ **Done** — `eed5214`, and its held audio is now Phase 8 | OTA |
 | **7** | [The Duʿa tab](#phase-7--the-dua-tab) | 🟡 **Tab, book and Today's card built** — 25 Aug. Left: mapping 132 occasions onto the six moments | OTA |
 | **8** | [Audio that saves itself](#phase-8--audio-that-saves-itself) | 🟡 **Bundled set and Al-Ikhlas built** — 25 Aug. Left: save-on-play, storage screen | ⚠️ **Build** |
 | **9** | [Bet 4: the Arabic letters](#phase-9--bet-4-the-arabic-letters) | ⬜ Undesigned — needs a session, not a ticket | OTA |

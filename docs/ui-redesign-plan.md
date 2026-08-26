@@ -25,11 +25,11 @@ with its reasoning attached.
 | **3** | [Provenance](#phase-3--provenance) | ✅ **Done** — `5f2570a`, `e614780` | OTA |
 | **4** | [Duʿas, and the first network call](#phase-4--duas-and-the-apps-first-network-call) | ✅ **Done** — `d9bd351`, and its held half is now Phase 7 | OTA |
 | **5** | [The Qur'an tab](#phase-5--the-quran-tab--juz-30) | ✅ **Done** — `eed5214`, and its held audio is now Phase 8 | OTA |
-| **7** | [The Duʿa tab](#phase-7--the-dua-tab) | 🟡 **Tab, book and Today's card built** — 25 Aug. Left: mapping 132 occasions onto the six moments | OTA |
-| **8** | [Audio that saves itself](#phase-8--audio-that-saves-itself) | 🟡 **Bundled set and Al-Ikhlas built** — 25 Aug. Left: save-on-play, storage screen | ⚠️ **Build** |
+| **7** | [The Duʿa tab](#phase-7--the-dua-tab) | ✅ **Done** — 26 Aug. Tab, book, Today's card, and 37 occasions placed in the day | OTA |
+| **8** | [Audio that saves itself](#phase-8--audio-that-saves-itself) | ✅ **Done** — 26 Aug. Save-on-play and the storage screen. **Needs `eas build`** | ⚠️ **Build** |
 | **9** | [~~Bet 4: the Arabic letters~~](#phase-9--dropped-25-aug) | ❌ **Dropped 25 Aug** — it is an Arabic curriculum, not a feature | — |
 | **10** | Downloading a voice, a juz at a time | ↩︎ **Merged into 8** on 25 Aug — same store, same build |
-| **11** | [Four questions, on every teaching page](#phase-11--four-questions-on-every-teaching-page) | ⬜ Planned 25 Aug — biggest item here, own day | OTA |
+| **11** | [Four questions, on every teaching page](#phase-11--four-questions-on-every-teaching-page) | ✅ **Done** — 26 Aug. All 30 pages, plus `npm run style:check` | OTA |
 | — | [The prayers](#the-prayer-work) | ✅ **Done** — `a004af9` | OTA |
 
 ### What shipped in 0–3
@@ -911,6 +911,25 @@ No server, no migrations.
 ---
 
 # Built today — Tuesday 25 Aug — and what is left
+
+**Built overnight on 26 Aug — phases 7, 8 and 11 are all closed.**
+
+- **11.** One file owns the look (`constants/teaching.ts`), a component set is
+  the only thing allowed to read it, the cards are gone (294px → 350px text
+  column), and all 30 teaching pages carry answers-first blocks, question
+  headings and 29 promoted narrations — one hero each. `npm run style:check`
+  guards it and caught a blank hero on `what-is-islam` before it shipped.
+- **7.** 37 of the book's 132 occasions placed in the day, hand-written because
+  placement is a judgement. The day still teaches only the nine checked duʿas;
+  the book is a door beside them, not content.
+- **8.** Audio saves itself on first play, to `Paths.document` so the system
+  cannot delete it, with a storage screen that can. ⚠️ **This one needs
+  `eas build --profile preview --platform android`** — `expo-file-system` is
+  native, so no existing build will be offered it.
+
+⚠️ **Nobody has seen any of it on a phone.** Typecheck, export, lint, the style
+guard and the manifests all pass; that is not the same as eyes on a screen, and
+this document has said so all day.
 
 **Built on 25 Aug, in order:** the rawatib citations · Dhuhr's 2 + 2 · the
 "Prayed by choice" inversion · the istikhara duʿa out of the drawer · qiyam

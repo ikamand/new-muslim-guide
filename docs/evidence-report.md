@@ -5,11 +5,11 @@ supplied each line of it.
 
 | | |
 |---|---|
-| Qur'an passages | 55 of 55 |
-| Narrations | 109 of 109 |
+| Qur'an passages | 56 of 56 |
+| Narrations | 116 of 116 |
 | Confirmed against a second publisher | 44 |
 | Translation from HadeethEnc (published terms) | 39 |
-| Translation from Darussalam (quoted) | 70 |
+| Translation from Darussalam (quoted) | 77 |
 | Arabic with no translation | 0 |
 | Nothing found | 0 |
 
@@ -82,6 +82,7 @@ under. That is substance and stays with a reviewer.
 | `abu-dawud:996` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
 | `bukhari:739` | HadeethEnc.com | Darussalam (via fawazahmed0/hadith-api) | HadeethEnc 65441 |
 | `muslim:391b` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
+| `bukhari:he3293` | HadeethEnc.com | HadeethEnc.com | HadeethEnc 3293 |
 | `bukhari:50` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
 | `muslim:8a` | hadithunlocked.com | hadithunlocked.com | — |
 | `bukhari:39` | HadeethEnc.com | HadeethEnc.com | HadeethEnc 5795 |
@@ -116,7 +117,11 @@ under. That is substance and stays with a reviewer.
 | `bukhari:6` | HadeethEnc.com | HadeethEnc.com | HadeethEnc 6179 |
 | `bukhari:2017` | HadeethEnc.com | HadeethEnc.com | HadeethEnc 4540 |
 | `bukhari:1503` | HadeethEnc.com | HadeethEnc.com | HadeethEnc 4520 |
-| `bukhari:he3293` | HadeethEnc.com | HadeethEnc.com | HadeethEnc 3293 |
+| `muslim:783` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
+| `muslim:749` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
+| `bukhari:990` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
+| `muslim:752` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
+| `abu-dawud:1422` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
 | `abu-dawud:he65063` | HadeethEnc.com | HadeethEnc.com | HadeethEnc 65063 |
 | `abu-dawud:1067` | HadeethEnc.com | Darussalam (via fawazahmed0/hadith-api) | HadeethEnc 65769 |
 | `bukhari:444` | HadeethEnc.com | HadeethEnc.com | HadeethEnc 65091 |
@@ -143,3 +148,5 @@ under. That is substance and stays with a reviewer.
 | `tirmidhi:3457` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
 | `ibn-majah:3283` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
 | `muslim:1342` | HadeethEnc.com | HadeethEnc.com | HadeethEnc 65102 |
+| `muslim:728` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
+| `tirmidhi:414` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |

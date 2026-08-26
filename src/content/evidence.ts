@@ -5,22 +5,22 @@
  * here is lost the next time it runs, and one that needs making belongs
  * upstream, where the text is published.
  *
- * 55 Qur'an passages and 109 narrations. Every character came over
+ * 56 Qur'an passages and 116 narrations. Every character came over
  * the wire from a published text rather than from memory, which is the only
  * way a file like this could exist under this project's rules about Arabic.
  *
  * ## Where each line came from
  *
  * No one source has all of it, so each field is taken from the first that
- * does, and says so on the text itself. Of the 109 narrations here:
+ * does, and says so on the text itself. Of the 116 narrations here:
  * 44 were confirmed against a second, separately edited publisher;
- * 39 carry HadeethEnc's own translation, 70 carry Darussalam's, and
+ * 39 carry HadeethEnc's own translation, 77 carry Darussalam's, and
  * 0 have Arabic and no translation at all.
  *
  * ⚠️ **The Darussalam translations are not ours to relicense.** They reach
  * this file through a public-domain dedication that covers the compiler's work
  * and not the translation inside it. What makes that defensible here is scale
- * and purpose — 70 narrations out of some thirty thousand, each quoted under
+ * and purpose — 77 narrations out of some thirty thousand, each quoted under
  * the instruction it supports, in an app that is free and never sold. It is a
  * quotation, not a republication, and it is Iyad's decision on the record.
  *
@@ -70,6 +70,12 @@ export const QURAN_TEXT: Record<string, EvidenceText> = {
     "arabicFrom": "QuranEnc.com",
     "translationFrom": "QuranEnc.com"
   },
+  "112:1-4": {
+    "arabic": "قُلۡ هُوَ ٱللَّهُ أَحَدٌ ٱللَّهُ ٱلصَّمَدُ لَمۡ يَلِدۡ وَلَمۡ يُولَدۡ وَلَمۡ يَكُن لَّهُۥ كُفُوًا أَحَدُۢ",
+    "translation": "Say, \"He is Allāh, [who is] One, Allāh, the Eternal Refuge. He neither begets nor is born, Nor is there to Him any equivalent.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
   "16:98": {
     "arabic": "فَإِذَا قَرَأۡتَ ٱلۡقُرۡءَانَ فَٱسۡتَعِذۡ بِٱللَّهِ مِنَ ٱلشَّيۡطَٰنِ ٱلرَّجِيمِ",
     "translation": "So when you recite the Qur’ān, [first] seek refuge in Allāh from Satan, the expelled [from His mercy].",
@@ -103,12 +109,6 @@ export const QURAN_TEXT: Record<string, EvidenceText> = {
   "2:256": {
     "arabic": "لَآ إِكۡرَاهَ فِي ٱلدِّينِۖ قَد تَّبَيَّنَ ٱلرُّشۡدُ مِنَ ٱلۡغَيِّۚ فَمَن يَكۡفُرۡ بِٱلطَّٰغُوتِ وَيُؤۡمِنۢ بِٱللَّهِ فَقَدِ ٱسۡتَمۡسَكَ بِٱلۡعُرۡوَةِ ٱلۡوُثۡقَىٰ لَا ٱنفِصَامَ لَهَاۗ وَٱللَّهُ سَمِيعٌ عَلِيمٌ",
     "translation": "There shall be no compulsion in [acceptance of] the religion. The right course has become distinct from the wrong. So whoever disbelieves in ṭāghūt and believes in Allāh has grasped the most trustworthy handhold with no break in it. And Allāh is Hearing and Knowing.",
-    "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
-  },
-  "112:1-4": {
-    "arabic": "قُلۡ هُوَ ٱللَّهُ أَحَدٌ ٱللَّهُ ٱلصَّمَدُ لَمۡ يَلِدۡ وَلَمۡ يُولَدۡ وَلَمۡ يَكُن لَّهُۥ كُفُوًا أَحَدُۢ",
-    "translation": "Say, \"He is Allāh, [who is] One, Allāh, the Eternal Refuge. He neither begets nor is born, Nor is there to Him any equivalent.\"",
     "arabicFrom": "QuranEnc.com",
     "translationFrom": "QuranEnc.com"
   },
@@ -379,6 +379,12 @@ export const QURAN_TEXT: Record<string, EvidenceText> = {
   "2:156": {
     "arabic": "ٱلَّذِينَ إِذَآ أَصَٰبَتۡهُم مُّصِيبَةٞ قَالُوٓاْ إِنَّا لِلَّهِ وَإِنَّآ إِلَيۡهِ رَٰجِعُونَ",
     "translation": "Who, when disaster strikes them, say, \"Indeed we belong to Allāh, and indeed to Him we will return.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "undefined:undefined": {
+    "arabic": "",
+    "translation": "",
     "arabicFrom": "QuranEnc.com",
     "translationFrom": "QuranEnc.com"
   }
@@ -727,6 +733,14 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
     "arabicFrom": "fawazahmed0/hadith-api",
     "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
   },
+  "bukhari:he3293": {
+    "arabic": "عن جَابِرِ بْنِ عَبْدِ اللَّهِ رَضِيَ اللَّهُ عَنْهُمَا، قَالَ: كَانَ رَسُولُ اللَّهِ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ يُعَلِّمُنَا الِاسْتِخَارَةَ فِي الْأُمُورِ كَمَا يُعَلِّمُنَا السُّورَةَ مِنَ الْقُرْآنِ، يَقُولُ: «إِذَا هَمَّ أَحَدُكُمْ بِالْأَمْرِ فَلْيَرْكَعْ رَكْعَتَيْنِ مِنْ غَيْرِ الْفَرِيضَةِ، ثُمَّ لِيَقُلِ: اللَّهُمَّ إِنِّي أَسْتَخِيرُكَ بِعِلْمِكَ وَأَسْتَقْدِرُكَ بِقُدْرَتِكَ، وَأَسْأَلُكَ مِنْ فَضْلِكَ الْعَظِيمِ، فَإِنَّكَ تَقْدِرُ وَلَا أَقْدِرُ، وَتَعْلَمُ وَلَا أَعْلَمُ، وَأَنْتَ عَلَّامُ الْغُيُوبِ، اللَّهُمَّ إِنْ كُنْتَ تَعْلَمُ أَنَّ هَذَا الْأَمْرَ خَيْرٌ لِي فِي دِينِي، وَمَعَاشِي، وَعَاقِبَةِ أَمْرِي» أَوْ قَالَ: «عَاجِلِ أَمْرِي وَآجِلِهِ، فَاقْدُرْهُ لِي وَيَسِّرْهُ لِي ثُمَّ بَارِكْ لِي فِيهِ، وَإِنْ كُنْتَ تَعْلَمُ أَنَّ هَذَا الْأَمْرَ شَرٌّ لِي فِي دِينِي وَمَعَاشِي وَعَاقِبَةِ أَمْرِي» أَوْ قَالَ: «فِي عَاجِلِ أَمْرِي وَآجِلِهِ، فَاصْرِفْهُ عَنِّي وَاصْرِفْنِي عَنْهُ، وَاقْدُرْ لِي الْخَيْرَ حَيْثُ كَانَ، ثُمَّ أَرْضِنِي» قَالَ: «وَيُسَمِّي حَاجَتَه».",
+    "translation": "Jābir ibn ‘Abdullah (may Allah be pleased with him and his father) reported: The Messenger of Allah (may Allah's peace and blessings be upon him) used to teach us Istikhārah (guidance-seeking prayer) in all matters, as he would teach us a Surah from the Qur’an. He would say: \"When one of you intends to do something, let him perform two Rak‘ahs other than the obligatory prayer and then say: Allāhumma inni astakhīruka bi‘ilmika, wa astaqdiruka biqudratika, wa as’aluka min fadlik al-‘azhīm, fa ’innaka taqdiru wa la aqdiru, wa ta‘lamu wa la a‘lamu, wa anta ‘allāmu al-ghuyūb. Allāhumma in kunta ta‘lamu anna hādha al-’amra khayrun li fi dīni wa ma‘āshi wa ‘āqibati amri, (or he said) ‘ājili amri wa ājilihi, faqdurhu li wa yassirhu li, thumma bārik li fīh. Wa in kunta ta‘lamu anna hādha al-’amra sharrun li fi dīni wa ma‘āshi wa ‘āqibati amri, (or he said) wa ‘ājili amri wa ājilihi, fasrifhu ‘anni, wasrifni ‘anhu, waqdur li al-khayra haythu kāna, thumma ardini. (O Allah, I consult You for Your knowledge, and I seek strength from You for Your power, and I ask You of Your great bounty. Indeed, You are capable and I am not, and You know and I do not, and You are the All-Knower of the unseen. O Allah, if You know that this matter is good for me in my religion, my livelihood, and the outcome of my affairs, (or he said), my immediate and future affairs, then decree it for me, make it easy for me, and then bless it for me. And if You know this matter is evil concerning my religion, my livelihood or the outcome of my affairs, (or he said) my immediate and future affairs, then turn it away from me, and turn me away from it, and decree for me what is good wherever it may be, and make me content).'' He said: ''And let him name his need.''",
+    "attribution": "Narrated by Al-Bukhāri",
+    "grade": "Authentic",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
   "bukhari:50": {
     "arabic": "حَدَّثَنَا مُسَدَّدٌ، قَالَ حَدَّثَنَا إِسْمَاعِيلُ بْنُ إِبْرَاهِيمَ، أَخْبَرَنَا أَبُو حَيَّانَ التَّيْمِيُّ، عَنْ أَبِي زُرْعَةَ، عَنْ أَبِي هُرَيْرَةَ، قَالَ كَانَ النَّبِيُّ صلى الله عليه وسلم بَارِزًا يَوْمًا لِلنَّاسِ، فَأَتَاهُ جِبْرِيلُ فَقَالَ مَا الإِيمَانُ قَالَ ‏\"‏ الإِيمَانُ أَنْ تُؤْمِنَ بِاللَّهِ وَمَلاَئِكَتِهِ وَبِلِقَائِهِ وَرُسُلِهِ، وَتُؤْمِنَ بِالْبَعْثِ ‏\"‏‏.‏ قَالَ مَا الإِسْلاَمُ قَالَ ‏\"‏ الإِسْلاَمُ أَنْ تَعْبُدَ اللَّهَ وَلاَ تُشْرِكَ بِهِ، وَتُقِيمَ الصَّلاَةَ، وَتُؤَدِّيَ الزَّكَاةَ الْمَفْرُوضَةَ، وَتَصُومَ رَمَضَانَ ‏\"‏‏.‏ قَالَ مَا الإِحْسَانُ قَالَ ‏\"‏ أَنْ تَعْبُدَ اللَّهَ كَأَنَّكَ تَرَاهُ، فَإِنْ لَمْ تَكُنْ تَرَاهُ فَإِنَّهُ يَرَاكَ ‏\"‏‏.‏ قَالَ مَتَى السَّاعَةُ قَالَ ‏\"‏ مَا الْمَسْئُولُ عَنْهَا بِأَعْلَمَ مِنَ السَّائِلِ، وَسَأُخْبِرُكَ عَنْ أَشْرَاطِهَا إِذَا وَلَدَتِ الأَمَةُ رَبَّهَا، وَإِذَا تَطَاوَلَ رُعَاةُ الإِبِلِ الْبُهْمُ فِي الْبُنْيَانِ، فِي خَمْسٍ لاَ يَعْلَمُهُنَّ إِلاَّ اللَّهُ ‏\"‏‏.‏ ثُمَّ تَلاَ النَّبِيُّ صلى الله عليه وسلم ‏{‏إِنَّ اللَّهَ عِنْدَهُ عِلْمُ السَّاعَةِ‏}‏ الآيَةَ‏.‏ ثُمَّ أَدْبَرَ فَقَالَ ‏\"‏ رُدُّوهُ ‏\"‏‏.‏ فَلَمْ يَرَوْا شَيْئًا‏.‏ فَقَالَ ‏\"‏ هَذَا جِبْرِيلُ جَاءَ يُعَلِّمُ النَّاسَ دِينَهُمْ ‏\"‏‏.‏ قَالَ أَبُو عَبْدِ اللَّهِ جَعَلَ ذَلِكَ كُلَّهُ مِنَ الإِيمَانِ‏.‏",
     "translation": "Narrated Abu Huraira: One day while the Prophet (ﷺ) was sitting in the company of some people, (The angel) Gabriel came and asked, \"What is faith?\" Allah's Messenger (ﷺ) replied, 'Faith is to believe in Allah, His angels, (the) meeting with Him, His Apostles, and to believe in Resurrection.\" Then he further asked, \"What is Islam?\" Allah's Messenger (ﷺ) replied, \"To worship Allah Alone and none else, to offer prayers perfectly to pay the compulsory charity (Zakat) and to observe fasts during the month of Ramadan.\" Then he further asked, \"What is Ihsan (perfection)?\" Allah's Messenger (ﷺ) replied, \"To worship Allah as if you see Him, and if you cannot achieve this state of devotion then you must consider that He is looking at you.\" Then he further asked, \"When will the Hour be established?\" Allah's Messenger (ﷺ) replied, \"The answerer has no better knowledge than the questioner. But I will inform you about its portents. 1. When a slave (lady) gives birth to her master. 2. When the shepherds of black camels start boasting and competing with others in the construction of higher buildings. And the Hour is one of five things which nobody knows except Allah. The Prophet (ﷺ) then recited: \"Verily, with Allah (Alone) is the knowledge of the Hour--.\" (31. 34) Then that man (Gabriel) left and the Prophet (ﷺ) asked his companions to call him back, but they could not see him. Then the Prophet (ﷺ) said, \"That was Gabriel who came to teach the people their religion.\" Abu 'Abdullah said: He (the Prophet) considered all that as a part of faith",
@@ -967,13 +981,36 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
     "arabicFrom": "HadeethEnc.com",
     "translationFrom": "HadeethEnc.com"
   },
-  "bukhari:he3293": {
-    "arabic": "عن جَابِرِ بْنِ عَبْدِ اللَّهِ رَضِيَ اللَّهُ عَنْهُمَا، قَالَ: كَانَ رَسُولُ اللَّهِ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ يُعَلِّمُنَا الِاسْتِخَارَةَ فِي الْأُمُورِ كَمَا يُعَلِّمُنَا السُّورَةَ مِنَ الْقُرْآنِ، يَقُولُ: «إِذَا هَمَّ أَحَدُكُمْ بِالْأَمْرِ فَلْيَرْكَعْ رَكْعَتَيْنِ مِنْ غَيْرِ الْفَرِيضَةِ، ثُمَّ لِيَقُلِ: اللَّهُمَّ إِنِّي أَسْتَخِيرُكَ بِعِلْمِكَ وَأَسْتَقْدِرُكَ بِقُدْرَتِكَ، وَأَسْأَلُكَ مِنْ فَضْلِكَ الْعَظِيمِ، فَإِنَّكَ تَقْدِرُ وَلَا أَقْدِرُ، وَتَعْلَمُ وَلَا أَعْلَمُ، وَأَنْتَ عَلَّامُ الْغُيُوبِ، اللَّهُمَّ إِنْ كُنْتَ تَعْلَمُ أَنَّ هَذَا الْأَمْرَ خَيْرٌ لِي فِي دِينِي، وَمَعَاشِي، وَعَاقِبَةِ أَمْرِي» أَوْ قَالَ: «عَاجِلِ أَمْرِي وَآجِلِهِ، فَاقْدُرْهُ لِي وَيَسِّرْهُ لِي ثُمَّ بَارِكْ لِي فِيهِ، وَإِنْ كُنْتَ تَعْلَمُ أَنَّ هَذَا الْأَمْرَ شَرٌّ لِي فِي دِينِي وَمَعَاشِي وَعَاقِبَةِ أَمْرِي» أَوْ قَالَ: «فِي عَاجِلِ أَمْرِي وَآجِلِهِ، فَاصْرِفْهُ عَنِّي وَاصْرِفْنِي عَنْهُ، وَاقْدُرْ لِي الْخَيْرَ حَيْثُ كَانَ، ثُمَّ أَرْضِنِي» قَالَ: «وَيُسَمِّي حَاجَتَه».",
-    "translation": "Jābir ibn ‘Abdullah (may Allah be pleased with him and his father) reported: The Messenger of Allah (may Allah's peace and blessings be upon him) used to teach us Istikhārah (guidance-seeking prayer) in all matters, as he would teach us a Surah from the Qur’an. He would say: \"When one of you intends to do something, let him perform two Rak‘ahs other than the obligatory prayer and then say: Allāhumma inni astakhīruka bi‘ilmika, wa astaqdiruka biqudratika, wa as’aluka min fadlik al-‘azhīm, fa ’innaka taqdiru wa la aqdiru, wa ta‘lamu wa la a‘lamu, wa anta ‘allāmu al-ghuyūb. Allāhumma in kunta ta‘lamu anna hādha al-’amra khayrun li fi dīni wa ma‘āshi wa ‘āqibati amri, (or he said) ‘ājili amri wa ājilihi, faqdurhu li wa yassirhu li, thumma bārik li fīh. Wa in kunta ta‘lamu anna hādha al-’amra sharrun li fi dīni wa ma‘āshi wa ‘āqibati amri, (or he said) wa ‘ājili amri wa ājilihi, fasrifhu ‘anni, wasrifni ‘anhu, waqdur li al-khayra haythu kāna, thumma ardini. (O Allah, I consult You for Your knowledge, and I seek strength from You for Your power, and I ask You of Your great bounty. Indeed, You are capable and I am not, and You know and I do not, and You are the All-Knower of the unseen. O Allah, if You know that this matter is good for me in my religion, my livelihood, and the outcome of my affairs, (or he said), my immediate and future affairs, then decree it for me, make it easy for me, and then bless it for me. And if You know this matter is evil concerning my religion, my livelihood or the outcome of my affairs, (or he said) my immediate and future affairs, then turn it away from me, and turn me away from it, and decree for me what is good wherever it may be, and make me content).'' He said: ''And let him name his need.''",
-    "attribution": "Narrated by Al-Bukhāri",
-    "grade": "Authentic",
-    "arabicFrom": "HadeethEnc.com",
-    "translationFrom": "HadeethEnc.com"
+  "muslim:783": {
+    "arabic": "وَحَدَّثَنِي زُهَيْرُ بْنُ حَرْبٍ، وَأَبُو غَسَّانَ الْمِسْمَعِيُّ ح وَحَدَّثَنَاهُ مُحَمَّدُ بْنُ الْمُثَنَّى، وَابْنُ، بَشَّارٍ قَالُوا حَدَّثَنَا مُعَاذُ بْنُ هِشَامٍ، قَالَ حَدَّثَنِي أَبِي، عَنْ قَتَادَةَ، وَمَطَرٍ، عَنِ الْحَسَنِ، عَنْ أَبِي رَافِعٍ، عَنْ أَبِي هُرَيْرَةَ، أَنَّ نَبِيَّ اللَّهِ صلى الله عليه وسلم قَالَ ‏\"‏ إِذَا جَلَسَ بَيْنَ شُعَبِهَا الأَرْبَعِ ثُمَّ جَهَدَهَا فَقَدْ وَجَبَ عَلَيْهِ الْغُسْلُ ‏\"‏ ‏.‏ وَفِي حَدِيثِ مَطَرٍ ‏\"‏ وَإِنْ لَمْ يُنْزِلْ ‏\"‏ ‏.‏ قَالَ زُهَيْرٌ مِنْ بَيْنِهِمْ ‏\"‏ بَيْنَ أَشْعُبِهَا الأَرْبَعِ ‏\"‏ ‏.‏",
+    "translation": "Abu Huraira reported:The Apostle of Allah (ﷺ) said: When a man has sexual intercourse, bathing becomes obligatory (both for the male and the female). In the hadith of Matar the words are: Even if there is no orgasm. Zuhair has narrated it with a minor alteration of words",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "muslim:749": {
+    "arabic": "وَحَدَّثَنِي أَحْمَدُ بْنُ سَعِيدٍ الدَّارِمِيُّ، حَدَّثَنَا حَبَّانُ، حَدَّثَنَا وُهَيْبٌ، حَدَّثَنَا مَنْصُورٌ، عَنْ أُمِّهِ، عَنْ عَائِشَةَ، أَنَّ امْرَأَةً، سَأَلَتِ النَّبِيَّ صلى الله عليه وسلم كَيْفَ أَغْتَسِلُ عِنْدَ الطُّهْرِ فَقَالَ ‏ \"‏ خُذِي فِرْصَةً مُمَسَّكَةً فَتَوَضَّئِي بِهَا ‏\"‏ ‏.‏ ثُمَّ ذَكَرَ نَحْوَ حَدِيثِ سُفْيَانَ ‏.‏",
+    "translation": "A'isha reported:A woman asked the Messenger of Allah (ﷺ) how he should wash herself after the menstrual period. He (the Holy Prophet) said: Take a cotton with musk and purity yourself, and the rest of the hadith was narrated like that of Sufyan",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:990": {
+    "arabic": "حَدَّثَنَا عَبْدُ اللَّهِ بْنُ يُوسُفَ، قَالَ أَخْبَرَنَا مَالِكٌ، عَنْ نَافِعٍ، وَعَبْدِ اللَّهِ بْنِ دِينَارٍ، عَنِ ابْنِ عُمَرَ، أَنَّ رَجُلاً، سَأَلَ رَسُولَ اللَّهِ صلى الله عليه وسلم عَنْ صَلاَةِ اللَّيْلِ فَقَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏ \"‏ صَلاَةُ اللَّيْلِ مَثْنَى مَثْنَى، فَإِذَا خَشِيَ أَحَدُكُمُ الصُّبْحَ صَلَّى رَكْعَةً وَاحِدَةً، تُوتِرُ لَهُ مَا قَدْ صَلَّى ‏\"‏‏.‏",
+    "translation": "Narrated Ibn `Umar: Once a person asked Allah's Messenger (ﷺ) about the night prayer. Allah's Apostle (ﷺ) replied, \"The night prayer is offered as two Rak`at followed by two Rak`at and so on and if anyone is afraid of the approaching dawn (Fajr prayer) he should pray one Rak`ah and this will be a Witr for all the Rak`at which he has prayed before",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "muslim:752": {
+    "arabic": "وَحَدَّثَنَا يَحْيَى بْنُ يَحْيَى، وَأَبُو بَكْرِ بْنُ أَبِي شَيْبَةَ كِلاَهُمَا عَنْ أَبِي الأَحْوَصِ، عَنْ إِبْرَاهِيمَ بْنِ مُهَاجِرٍ، عَنْ صَفِيَّةَ بِنْتِ شَيْبَةَ، عَنْ عَائِشَةَ، قَالَتْ دَخَلَتْ أَسْمَاءُ بِنْتُ شَكَلٍ عَلَى رَسُولِ اللَّهِ صلى الله عليه وسلم فَقَالَتْ يَا رَسُولَ اللَّهِ كَيْفَ تَغْتَسِلُ إِحْدَانَا إِذَا طَهُرَتْ مِنَ الْحَيْضِ وَسَاقَ الْحَدِيثَ وَلَمْ يَذْكُرْ فِيهِ غُسْلَ الْجَنَابَةِ ‏.‏",
+    "translation": "A'isha reported:Asma' b. Shakal came to the Messenger of Allah (ﷺ) and said: Messenger of Allah, how one amongst us should take a bath after the menstruation, and the rest of the hadith is the same and there is no mention of bathing because of sexual intercourse",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "abu-dawud:1422": {
+    "arabic": "حَدَّثَنَا عَبْدُ الرَّحْمَنِ بْنُ الْمُبَارَكِ، حَدَّثَنِي قُرَيْشُ بْنُ حَيَّانَ الْعِجْلِيُّ، حَدَّثَنَا بَكْرُ بْنُ وَائِلٍ، عَنِ الزُّهْرِيِّ، عَنْ عَطَاءِ بْنِ يَزِيدَ اللَّيْثِيِّ، عَنْ أَبِي أَيُّوبَ الأَنْصَارِيِّ، قَالَ قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏ \"‏ الْوِتْرُ حَقٌّ عَلَى كُلِّ مُسْلِمٍ فَمَنْ أَحَبَّ أَنْ يُوتِرَ بِخَمْسٍ فَلْيَفْعَلْ وَمَنْ أَحَبَّ أَنْ يُوتِرَ بِثَلاَثٍ فَلْيَفْعَلْ وَمَنْ أَحَبَّ أَنْ يُوتِرَ بِوَاحِدَةٍ فَلْيَفْعَلْ ‏\"‏ ‏.‏",
+    "translation": "Narrated AbuAyyub al-Ansari: The Prophet (ﷺ) said: The witr is a duty for every Muslim so if anyone wishes to observe it with five rak'ahs, he may do so; if anyone wishes to observe it with three, he may do so, and if anyone wishes to observe it with one, he may do so",
+    "grade": "Sahih (Al-Albani) · Sahih (Muhammad Muhyi Al-Din Abdul Hamid) · Isnaad Sahih (Zubair Ali Zai)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
   },
   "abu-dawud:he65063": {
     "arabic": "‌عن عَلِيٍّ قَالَ: إِنِّي كُنْتُ رَجُلًا إِذَا سَمِعْتُ مِنْ رَسُولِ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ حَدِيثًا نَفَعَنِي اللهُ مِنْهُ بِمَا شَاءَ أَنْ يَنْفَعَنِي بِهِ، وَإِذَا حَدَّثَنِي رَجُلٌ مِنْ أَصْحَابِهِ اسْتَحْلَفْتُهُ، فَإِذَا حَلَفَ لِي صَدَّقْتُهُ، وَإِنَّهُ حَدَّثَنِي ‌أَبُو بَكْرٍ، وَصَدَقَ أَبُو بَكْرٍ، قَالَ: سَمِعْتُ رَسُولَ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ يَقُولُ: «مَا مِنْ رَجُلٍ يُذْنِبُ ذَنْبًا، ثُمَّ يَقُومُ فَيَتَطَهَّرُ، ثُمَّ يُصَلِّي، ثُمَّ يَسْتَغْفِرُ اللهَ، إِلَّا غَفَرَ اللهُ لَهُ»، ثُمَّ قَرَأَ هَذِهِ الْآيَةَ: {وَالَّذِينَ إِذَا فَعَلُوا فَاحِشَةً أَوْ ظَلَمُوا أَنْفُسَهُمْ ذَكَرُوا اللهَ فَاسْتَغْفَرُوا لِذُنُوبِهِمْ} [آل عمران: 135].",
@@ -1151,6 +1188,19 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
     "grade": "Authentic",
     "arabicFrom": "HadeethEnc.com",
     "translationFrom": "HadeethEnc.com"
+  },
+  "muslim:728": {
+    "arabic": "وَحَدَّثَنِي عُبَيْدُ اللَّهِ بْنُ مُعَاذٍ الْعَنْبَرِيُّ، قَالَ حَدَّثَنَا أَبِي قَالَ، حَدَّثَنَا شُعْبَةُ، عَنْ أَبِي بَكْرِ بْنِ حَفْصٍ، عَنْ أَبِي سَلَمَةَ بْنِ عَبْدِ الرَّحْمَنِ، قَالَ دَخَلْتُ عَلَى عَائِشَةَ أَنَا وَأَخُوهَا، مِنَ الرَّضَاعَةِ فَسَأَلَهَا عَنْ غُسْلِ النَّبِيِّ، صلى الله عليه وسلم مِنَ الْجَنَابَةِ فَدَعَتْ بِإِنَاءٍ قَدْرِ الصَّاعِ فَاغْتَسَلَتْ وَبَيْنَنَا وَبَيْنَهَا سِتْرٌ وَأَفْرَغَتْ عَلَى رَأْسِهَا ثَلاَثًا ‏.‏ قَالَ وَكَانَ أَزْوَاجُ النَّبِيِّ صلى الله عليه وسلم يَأْخُذْنَ مِنْ رُءُوسِهِنَّ حَتَّى تَكُونَ كَالْوَفْرَةِ ‏.‏",
+    "translation": "Abu Salamab. 'Abd al-Rahman reported:I along with the foster brother of 'A'isha went to her and he asked about the bath of the Apostle (ﷺ) because of sexual intercourse. She called for a vessel equal to a Sa' and she took a bath. and there was a curtain between us and her. She poured water on her head thrice and he (Abu Salama) said: The wives of the Apostle (ﷺ) collectedhair on their heads and these lopped up to ears (and did rot go beyond that)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "tirmidhi:414": {
+    "arabic": "حَدَّثَنَا مُحَمَّدُ بْنُ رَافِعٍ النَّيْسَابُورِيُّ، حَدَّثَنَا إِسْحَاقُ بْنُ سُلَيْمَانَ الرَّازِيُّ، حَدَّثَنَا الْمُغِيرَةُ بْنُ زِيَادٍ، عَنْ عَطَاءٍ، عَنْ عَائِشَةَ، قَالَتْ قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏ \"‏ مَنْ ثَابَرَ عَلَى ثِنْتَىْ عَشْرَةَ رَكْعَةً مِنَ السُّنَّةِ بَنَى اللَّهُ لَهُ بَيْتًا فِي الْجَنَّةِ أَرْبَعِ رَكَعَاتٍ قَبْلَ الظُّهْرِ وَرَكْعَتَيْنِ بَعْدَهَا وَرَكْعَتَيْنِ بَعْدَ الْمَغْرِبِ وَرَكْعَتَيْنِ بَعْدَ الْعِشَاءِ وَرَكْعَتَيْنِ قَبْلَ الْفَجْرِ ‏\"‏ ‏.‏ قَالَ وَفِي الْبَابِ عَنْ أُمِّ حَبِيبَةَ وَأَبِي هُرَيْرَةَ وَأَبِي مُوسَى وَابْنِ عُمَرَ ‏.‏ قَالَ أَبُو عِيسَى حَدِيثُ عَائِشَةَ حَدِيثٌ غَرِيبٌ مِنْ هَذَا الْوَجْهِ ‏.‏ وَمُغِيرَةُ بْنُ زِيَادٍ قَدْ تَكَلَّمَ فِيهِ بَعْضُ أَهْلِ الْعِلْمِ مِنْ قِبَلِ حِفْظِهِ ‏.‏",
+    "translation": "Aishah narrated that Allah's Messenger (S) said:\"Whoever is regular with twelve Rak'ah of Sunnah (prayer), Allah will build a house for him in Paradise: Four Rak'ah before Zuhr, two Rak'ah after it, two Rak'ah after Maghrib, two Rak'ah after Isha, and two Rak'ah before Fajr",
+    "grade": "Sahih (Ahmad Muhammad Shakir) · Sahih (Al-Albani) · Isnaad Hasan (Zubair Ali Zai)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
   }
 };
 

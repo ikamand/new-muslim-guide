@@ -160,6 +160,29 @@ type PrayerSpec = {
   referenceId?: string;
 };
 
+/**
+ * Where the twelve rawatib come from, and where their breakdown does.
+ *
+ * Two claims needing two citations: Muslim 728 states the number and the
+ * reward and names no prayer; Tirmidhi 414 is the itemisation — four before
+ * Dhuhr, two after, two after Maghrib, two after Isha, two before Fajr. Both
+ * read from the collections on 25 Aug 2026.
+ *
+ * ⚠️ Tirmidhi closes 414 with `حديث عائشة حديث غريب من هذا الوجه` and names
+ * Mughirah b. Ziyad's memory. Al-Albani and Ahmad Shakir both grade it sahih.
+ * Ibn Majah 1190 and Nasa'i 1794 carry the same wording through the SAME
+ * chain, so they are not independent corroboration.
+ *
+ * These lived in `app/pray.tsx` until 26 Aug, which was wrong twice over:
+ * CLAUDE.md keeps content out of screens, and `npm run evidence` only scans
+ * `src/content/` — so a citation in a screen silently never got its text and
+ * rendered as a bare number under a heading promising the narration.
+ */
+export const RAWATIB_SOURCES = [
+  hadith('muslim', '728', { grading: 'sahih', role: 'virtue' }),
+  hadith('tirmidhi', '414', { grading: 'sahih', role: 'practice' }),
+];
+
 const ORDINALS = ['first', 'second', 'third', 'fourth'] as const;
 
 const ADHAN_BOOK = { book: 10, bookName: 'Call to Prayers (Adhaan)' } as const;

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useRouter } from 'expo-router';
 import { Pressable, ScrollView, StyleSheet, Switch, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -10,6 +11,8 @@ import { useReminders } from '@/hooks/use-reminders';
 import { useSettings, type Audience } from '@/hooks/use-settings';
 import { PRAYER_IDS, PRAYER_LABEL } from '@/lib/prayer-times';
 import { LEAD_CHOICES } from '@/lib/reminders';
+import { deleteVoice, savedVoices, type SavedVoice } from '@/content/quran/offline';
+import { RECITERS } from '@/content/quran/recitation';
 import { useLocale } from '@/hooks/use-locale';
 import { LOCALE_NAMES, LOCALES } from '@/i18n/locales';
 import { useTheme } from '@/hooks/use-theme';
@@ -274,6 +277,81 @@ function OnboardingGroup() {
   );
 }
 
+/**
+ * What the Qur'an tab has saved, and how to be rid of it.
+ *
+ * ## Why this is not optional
+ *
+ * The audio saves itself the first time a surah plays, with no button and no
+ * prompt — which is the right behaviour, and it is only honest if somebody can
+ * see what accumulated and delete it. Saving quietly with no way to clear it
+ * fills a phone invisibly, and that is a worse experience than the download
+ * button the design refused.
+ *
+ * Sizes are shown in MB rather than a bar or a percentage. A bar needs a total
+ * to be a fraction of, and there is no total here — the reader's own sense of
+ * whether 40 MB matters on their phone is better than anything this screen
+ * could invent.
+ */
+function StorageGroup() {
+  const theme = useTheme();
+  const { t } = useLocale();
+  /*
+    Read once, lazily, rather than in an effect. An effect that sets state on
+    mount renders the screen twice and flashes an empty list first; a lazy
+    initialiser runs before the first paint. The read is a directory listing,
+    not a download.
+  */
+  const [voices, setVoices] = useState<SavedVoice[]>(savedVoices);
+
+  if (voices.length === 0) return null;
+
+  const remove = (folder: string) => {
+    deleteVoice(folder);
+    setVoices(savedVoices());
+  };
+
+  return (
+    <View style={styles.section}>
+      <ThemedText type="smallBold" themeColor="textSecondary" style={styles.sectionTitle}>
+        {t('settings.storage')}
+      </ThemedText>
+      <ThemedText type="small" themeColor="textSecondary">
+        {t('settings.storage.help')}
+      </ThemedText>
+
+      <View style={[styles.group, { backgroundColor: theme.backgroundElement, borderColor: theme.border }]}>
+        {voices.map((voice) => (
+          <View key={voice.folder} style={styles.storageRow}>
+            <View style={styles.storageText}>
+              <ThemedText type="default">{reciterNameFor(voice.folder)}</ThemedText>
+              <ThemedText type="small" themeColor="textSecondary">
+                {`${voice.files} ${t('settings.storage.files')} · ${megabytes(voice.bytes)} MB`}
+              </ThemedText>
+            </View>
+            <Pressable
+              onPress={() => remove(voice.folder)}
+              accessibilityRole="button"
+              accessibilityLabel={`${t('settings.storage.delete')} — ${reciterNameFor(voice.folder)}`}
+              hitSlop={8}>
+              <ThemedText type="smallBold" themeColor="accent">
+                {t('settings.storage.delete')}
+              </ThemedText>
+            </Pressable>
+          </View>
+        ))}
+      </View>
+    </View>
+  );
+}
+
+/** Folders are named for the host's path; readers are not. */
+function reciterNameFor(folder: string): string {
+  return RECITERS.find((reciter) => reciter.folder === folder)?.name ?? folder;
+}
+
+const megabytes = (bytes: number) => (bytes / 1_000_000).toFixed(1);
+
 export default function SettingsScreen() {
   const theme = useTheme();
   const { t } = useLocale();
@@ -287,6 +365,8 @@ export default function SettingsScreen() {
         </View>
 
         <OnboardingGroup />
+
+        <StorageGroup />
 
         <View style={styles.section}>
           <ThemedText type="smallBold" themeColor="textSecondary" style={styles.sectionTitle}>
@@ -353,6 +433,17 @@ export default function SettingsScreen() {
 }
 
 const styles = StyleSheet.create({
+  storageRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.three,
+    paddingVertical: Spacing.three,
+    paddingHorizontal: Spacing.three,
+  },
+  storageText: {
+    flex: 1,
+    gap: 2,
+  },
   safeArea: {
     flex: 1,
   },

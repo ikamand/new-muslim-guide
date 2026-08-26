@@ -300,7 +300,7 @@ function TodayRow({ item }: { item: TodayItem }) {
  */
 function DuaOfTheDay() {
   const theme = useTheme();
-  const { t, locale } = useLocale();
+  const { locale } = useLocale();
   const dua = duaOfTheDay();
   if (!dua) return null;
 

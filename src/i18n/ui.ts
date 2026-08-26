@@ -421,6 +421,10 @@ export const EN = {
     'Start with what you need today. We’ll help you with the rest as you go.',
   'onboarding.reassure.cta': 'Let’s begin',
 
+  'settings.storage': 'Saved audio',
+  'settings.storage.help': 'Surahs save themselves the first time you play them, so they work without a signal afterwards. Delete a voice here to get the space back — playing it again saves it again.',
+  'settings.storage.files': 'ayahs',
+  'settings.storage.delete': 'Delete',
   'settings.onboarding': 'Getting started',
   'settings.onboarding.help':
     'Answer the two questions again to change what the app suggests first.',

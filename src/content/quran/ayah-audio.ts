@@ -13,6 +13,7 @@
 
 import { getAudio } from '../audio';
 
+import { savedAyah, saveAyah } from './offline';
 import { ayahAudioUrl, type Reciter } from './recitation';
 
 /**
@@ -70,5 +71,26 @@ export function ayahSource(reciter: Reciter, surah: number, ayah: number): AyahS
     const bundled = getAudio(`${prefix}-${ayah}`);
     if (bundled !== undefined) return bundled;
   }
+  /*
+    Saved from a previous play. Checked before the network and after the
+    bundle, which is the order of certainty: shipped in the binary, then on
+    this device, then somewhere else.
+  */
+  const saved = savedAyah(reciter, surah, ayah);
+  if (saved) return { uri: saved };
+
   return { uri: ayahAudioUrl(reciter, surah, ayah) };
+}
+
+/**
+ * Keep this ayah for next time.
+ *
+ * Call it AFTER playback has started. The reader is already hearing the ayah
+ * by then, so a slow save or a failed one costs them nothing — which is the
+ * property that lets this have no button, no progress bar and no failure
+ * state anybody has to read.
+ */
+export function keepAyah(reciter: Reciter, surah: number, ayah: number): void {
+  if (BUNDLED[surah] !== undefined && reciter.id === 'husary-muallim') return;
+  void saveAyah(reciter, surah, ayah);
 }

@@ -6,7 +6,7 @@ import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { ayahTransliteration, getSurah, JUZ30_SOURCE } from '@/content/quran/surahs';
-import { ayahSource } from '@/content/quran/ayah-audio';
+import { ayahSource, keepAyah } from '@/content/quran/ayah-audio';
 import { getReciter, reciterCredit } from '@/content/quran/recitation';
 import { ArabicFont, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
@@ -134,6 +134,23 @@ export default function SurahScreen() {
   const index = status.currentIndex;
   const running = mode !== null;
   const currentAyah = running ? ayahs[index]?.number : undefined;
+
+  /*
+    Keep whatever is playing, for next time.
+
+    After playback has started, never before — the reader is already hearing
+    the ayah by the time this fires, so a slow save or a failed one costs them
+    nothing. That is what lets the whole feature have no button, no progress
+    bar and no failure state anybody has to read: the surahs somebody actually
+    listens to are the ones that end up on their phone, and nobody was asked to
+    predict which those would be.
+
+    Bundled ayahs return immediately; there is nothing to fetch.
+  */
+  useEffect(() => {
+    if (!running || !surah || currentAyah === undefined) return;
+    keepAyah(reciter, surah.number, currentAyah);
+  }, [running, surah, currentAyah, reciter]);
 
   useEffect(() => {
     // Assignment is the documented API — `loop` is a settable property in

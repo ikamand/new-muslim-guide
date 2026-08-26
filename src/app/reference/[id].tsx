@@ -2,6 +2,7 @@ import { Stack, useLocalSearchParams } from 'expo-router';
 import { ScrollView, StyleSheet, View } from 'react-native';
 
 import { ContentNoteCard } from '@/components/content-note';
+import { RecitationCard } from '@/components/recitation-card';
 import { SourceDisclosure } from '@/components/source-list';
 import { ThemedText } from '@/components/themed-text';
 import { TranslationGap } from '@/components/translation-gap';
@@ -57,6 +58,12 @@ export default function ReferenceScreen() {
               {section.heading}
             </ThemedText>
             <ThemedText type="default">{section.body}</ThemedText>
+            {/*
+              Where the section's subject IS a form of words, the words are the
+              section. The same card the prayer steps use, so a duʿa looks the
+              same wherever somebody meets it.
+            */}
+            {section.says && <RecitationCard recitation={section.says} />}
             {resolveNotes(section.note, section.notes).map((entry, position) => (
               <ContentNoteCard key={`${entry.kind}-${position}`} entry={entry} />
             ))}

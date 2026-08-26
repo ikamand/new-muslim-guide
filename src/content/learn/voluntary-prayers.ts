@@ -1,4 +1,5 @@
 import { note, ref } from '../model';
+import { Recitations } from '../recitations';
 import { general, hadeethEnc, hadith, quran } from '../sources';
 import type { Reference } from '../types';
 
@@ -105,6 +106,14 @@ export const ISTIKHARA: Reference = {
       ],
     },
     {
+      id: 'words',
+      heading: 'The words',
+      body:
+        'Said after the two rakʿahs. Where it says “this matter”, name the thing you are deciding.',
+      says: Recitations.istikhara,
+      sources: [hadeethEnc('bukhari', '3293', { grading: 'sahih', role: 'practice' })],
+    },
+    {
       id: 'no-dream',
       heading: 'No dream is coming',
       body:
@@ -120,36 +129,6 @@ export const ISTIKHARA: Reference = {
       body:
         'Any time except the times when prayer is held off, and about anything you genuinely have a choice in — a job, a move, a marriage, something smaller. Not about whether to do something already settled as right or wrong; there is nothing to ask about there.',
       sources: [general('Ordinary explanation of scope, following from what the duʿa asks.')],
-    },
-    {
-      id: 'words',
-      heading: 'The words',
-      /*
-        ⚠️ THE DUʿA TEXT IS NOT HERE YET, DELIBERATELY.
-
-        It is long, and both places that print it — Sahih al-Bukhari via
-        HadeethEnc 3293, and Hisn al-Muslim via cnt.islamhouse.com book 819
-        page 5, phrase id 1269185 — carry the narrator's alternative inside
-        the supplication: "…and the outcome of my affairs" OR "…my immediate
-        and future affairs". Splicing the two produces a text nobody says, and
-        choosing between them, along with where "and he names his need" sits,
-        is an editorial decision this file will not make on its own.
-
-        The provenance is recorded so whoever adds it does not have to find it
-        again. HadeethEnc's English carries a transliteration in this app's own
-        academic style, so all three lines can come from one source.
-      */
-      body:
-        'The duʿa is a few lines long, and it is worth learning from someone who can hear you say it. It names what you are asking about, asks God to bring it about if it is good for you, and to take it away if it is not.',
-      sources: [
-        hadeethEnc('bukhari', '3293', { grading: 'sahih', role: 'practice' }),
-      ],
-      notes: [
-        note(
-          'practical',
-          'The wording is not printed here yet. It is in Sahih al-Bukhari and in every duʿa collection, and it is being added with its full text rather than from memory.',
-        ),
-      ],
     },
   ],
 };

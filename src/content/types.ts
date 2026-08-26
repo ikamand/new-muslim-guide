@@ -171,6 +171,18 @@ export type ReferenceSection = {
   id: string;
   heading: string;
   body: string;
+  /**
+   * A text the section is actually about, printed rather than described.
+   *
+   * The istikhara page is why this exists. Its "The words" section described
+   * the duʿa in prose and left the words themselves in the citation drawer
+   * underneath — so the most important thing on the page was the part nobody
+   * opened. A section whose subject IS a form of words should print it.
+   *
+   * Rendered by the same `RecitationCard` the prayer steps use, so a duʿa
+   * looks the same wherever it is met.
+   */
+  says?: Recitation;
   /** Anything a first-timer would otherwise take the wrong way. */
   note?: string;
   /**

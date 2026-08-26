@@ -1,4 +1,4 @@
-import { hadith, quran } from './sources';
+import { hadeethEnc, hadith, quran } from './sources';
 import type { Recitation, RecitationVerse } from './types';
 
 /**
@@ -565,4 +565,38 @@ export const Recitations = {
     ],
     audioId: 'dua-travel',
   },
+  /**
+   * The istikhara duʿa, said after the two rakʿahs.
+   *
+   * ⚠️ COPIED, NOT COMPOSED, and the seam is worth knowing about. Every
+   * publisher of Sahih al-Bukhari 3293 prints the narrator's alternative
+   * INSIDE the supplication — "…and the outcome of my affairs" OR "…my
+   * immediate and future affairs" — because Jabir was unsure which the
+   * Prophet ﷺ said. A text carrying both is a narration; a text carrying
+   * neither is a splice. This prints `وَعَاقِبَةِ أَمْرِي` throughout, which is
+   * the wording the narration gives first and the one the printed duʿa
+   * collections carry.
+   *
+   * Iyad's decision, 22 Aug 2026: both mean the same thing, choose one.
+   *
+   * The Arabic, transliteration and English were extracted from the app's own
+   * `evidence.ts` entry `bukhari:he3293` — HadeethEnc's text — rather than
+   * retyped, so nothing here passed through a keyboard. The narrator's closing
+   * "and he names his need" is not part of the supplication and lives as a
+   * note on the section instead.
+   *
+   * ⚠️ REVIEW REQUIRED — a reviewer owns whether this is the wording the app
+   * should teach, not whether it was copied correctly.
+   */
+  istikhara: {
+    title: 'The istikhara duʿa',
+    arabic:
+      "اللَّهُمَّ إِنِّي أَسْتَخِيرُكَ بِعِلْمِكَ وَأَسْتَقْدِرُكَ بِقُدْرَتِكَ، وَأَسْأَلُكَ مِنْ فَضْلِكَ الْعَظِيمِ، فَإِنَّكَ تَقْدِرُ وَلَا أَقْدِرُ، وَتَعْلَمُ وَلَا أَعْلَمُ، وَأَنْتَ عَلَّامُ الْغُيُوبِ، اللَّهُمَّ إِنْ كُنْتَ تَعْلَمُ أَنَّ هَذَا الْأَمْرَ خَيْرٌ لِي فِي دِينِي، وَمَعَاشِي، وَعَاقِبَةِ أَمْرِي، فَاقْدُرْهُ لِي وَيَسِّرْهُ لِي ثُمَّ بَارِكْ لِي فِيهِ، وَإِنْ كُنْتَ تَعْلَمُ أَنَّ هَذَا الْأَمْرَ شَرٌّ لِي فِي دِينِي وَمَعَاشِي وَعَاقِبَةِ أَمْرِي، فَاصْرِفْهُ عَنِّي وَاصْرِفْنِي عَنْهُ، وَاقْدُرْ لِي الْخَيْرَ حَيْثُ كَانَ، ثُمَّ أَرْضِنِي",
+    transliteration:
+      "Allāhumma inni astakhīruka bi‘ilmika, wa astaqdiruka biqudratika, wa as’aluka min fadlik al-‘azhīm, fa ’innaka taqdiru wa la aqdiru, wa ta‘lamu wa la a‘lamu, wa anta ‘allāmu al-ghuyūb. Allāhumma in kunta ta‘lamu anna hādha al-’amra khayrun li fi dīni wa ma‘āshi wa ‘āqibati amri, faqdurhu li wa yassirhu li, thumma bārik li fīh. Wa in kunta ta‘lamu anna hādha al-’amra sharrun li fi dīni wa ma‘āshi wa ‘āqibati amri, fasrifhu ‘anni, wasrifni ‘anhu, waqdur li al-khayra haythu kāna, thumma ardini.",
+    translation:
+      "O Allah, I consult You for Your knowledge, and I seek strength from You for Your power, and I ask You of Your great bounty. Indeed, You are capable and I am not, and You know and I do not, and You are the All-Knower of the unseen. O Allah, if You know that this matter is good for me in my religion, my livelihood, and the outcome of my affairs, then decree it for me, make it easy for me, and then bless it for me. And if You know this matter is evil concerning my religion, my livelihood or the outcome of my affairs, then turn it away from me, and turn me away from it, and decree for me what is good wherever it may be, and make me content",
+    sources: [hadeethEnc('bukhari', '3293', { grading: 'sahih', role: 'practice' })],
+  },
+
 } satisfies Record<string, Recitation>;

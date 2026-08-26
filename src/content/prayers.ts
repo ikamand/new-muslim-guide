@@ -3,7 +3,7 @@ import type { ContentNote } from './model';
 import { Recitations } from './recitations';
 import { general, hadith, quran, scholarly } from './sources';
 import type { Source } from './sources';
-import type { Guide, Step } from './types';
+import type { Guide, Step, Recitation } from './types';
 
 /**
  * The five daily prayers are the same prayer repeated a different number of
@@ -135,6 +135,18 @@ type PrayerSpec = {
    * page want different names, and this is the row's.
    */
   listTitle?: string;
+  /**
+   * A supplication said after the taslim, where it is the point of the prayer.
+   *
+   * `buildPrayer` derives every prayer from two facts — rakʿah count, and
+   * whether the Qur'an is recited aloud. Istikhara has a third: it ends with a
+   * duʿa that is the whole reason for praying it, and a script that stopped at
+   * the taslim would leave out the thing somebody came for.
+   *
+   * Optional, and one generated step rather than a hand-written script, so the
+   * rule holds: never write a sixth prayer by hand.
+   */
+  closingDua?: Recitation;
   /**
    * The reference page this prayer's row opens.
    *
@@ -579,8 +591,19 @@ function rakahSteps(rakah: number, spec: PrayerSpec): Step[] {
         posture: 'taslim-left',
         instruction: 'Then turn your face to the left and give the same greeting again.',
         says: Recitations.taslim,
-        note: `That is ${spec.title} complete.`,
+        note: spec.closingDua ? undefined : `That is ${spec.title} complete.`,
       });
+      if (spec.closingDua) {
+        step({
+          key: 'closing-dua',
+          title: 'Then ask',
+          posture: 'sitting',
+          instruction:
+            'The prayer is finished. Still sitting, say the duʿa — and where it says “this matter”, name the thing you are deciding.',
+          says: spec.closingDua,
+          note: `That is ${spec.title} complete.`,
+        });
+      }
     }
   } else if (!isFinal) {
     // Nothing to add: the next rakʿah opens by standing back up.
@@ -669,6 +692,7 @@ export const PRAYER_SPECS: PrayerSpec[] = [
     aloudRakahs: 0,
     kind: 'voluntary',
     referenceId: 'istikhara',
+    closingDua: Recitations.istikhara,
   },
   {
     id: 'tawba',

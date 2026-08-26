@@ -57,7 +57,7 @@ export const TAHAJJUD: Reference = {
     {
       id: 'how-much',
       heading: 'How little counts?',
-      promote: 'supporting',
+      promote: 'quote',
       body:
         'There is no minimum to reach and no number to work up to. Two rakʿahs, on one night, is the thing itself. People who pray it for decades mostly pray a little, often, which is the pattern the Prophet ﷺ described as the deeds God loves most, the small ones kept up.',
       sources: [
@@ -330,7 +330,7 @@ export const WITR: Reference = {
       heading: 'Is one really enough?',
       body:
         'Yes. The Prophet ﷺ named five, three and one, and left the choice to the person praying, so one is a complete witr rather than a shortened version of something else. Most people pray three, and you will see that around you.',
-      promote: 'supporting',
+      promote: 'quote',
       sources: [hadith('abu-dawud', '1422', { grading: 'sahih', role: 'practice' })],
       note: 'Start with one. It is the whole prayer, it takes a minute, and it is the version you are least likely to get wrong while you are learning.',
     },

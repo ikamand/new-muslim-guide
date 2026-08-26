@@ -99,7 +99,7 @@ export const Teaching = {
       paddingV: Spacing.four - 2,
       translationType: 'default' as TextType,
     },
-    supporting: {
+    quote: {
       barWidth: 2,
       paddingLeft: Spacing.three,
       translationType: 'small' as TextType,

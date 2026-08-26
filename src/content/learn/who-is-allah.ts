@@ -63,7 +63,7 @@ export const WHO_IS_ALLAH: Reference = {
       heading: 'What if I try to picture Him?',
       body:
         'Any picture you form is wrong by definition, and you are not expected to form one.',
-      promote: 'supporting',
+      promote: 'quote',
       note: 'This is why Muslims do not depict God, and why you will not find images of Him anywhere in Islam.',
       sources: [quran(42, 11, { surahName: 'Ash-Shura' })],
     },
@@ -72,7 +72,7 @@ export const WHO_IS_ALLAH: Reference = {
       heading: 'How do I get to know Him?',
       body:
         'Through His names, rather than in the abstract, and you will meet them constantly.',
-      promote: 'supporting',
+      promote: 'quote',
       bullets: [
         '**Ar-Rahman**, the Most Merciful. Every chapter but one opens with it.',
         '**Al-Ghafur**, the Forgiving.',

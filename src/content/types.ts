@@ -208,15 +208,15 @@ export type ReferenceSection = {
    * collapsed "Where this comes from" — so the best-sourced writing in the app
    * was the part nobody opened, under prose a model wrote paraphrasing it.
    *
-   * `hero` breaks the page's margins and is the page's answer. `supporting`
-   * gets a rule and an indent. **One hero per page**: the treatment stops
-   * meaning anything the moment a page has three, which is what the first page
-   * citing three verses proved.
+   * Every citation that HAS a text is printed on the page now; this field only
+   * decides which one is the hero. `hero` breaks the margins and is the page's
+   * answer, one per page. Everything else is a `quote`, or folds where the
+   * text is very long or it is the third in one section.
    *
-   * A promoted citation is removed from the drawer below, so nothing is said
-   * twice.
+   * The drawer keeps only citations with no text at all — scholarly opinions
+   * and plain reasoning. A verse is never hidden.
    */
-  promote?: 'hero' | 'supporting';
+  promote?: 'hero' | 'quote';
   /**
    * A text the section is actually about, printed rather than described.
    *

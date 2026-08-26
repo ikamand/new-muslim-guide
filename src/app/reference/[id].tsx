@@ -10,12 +10,14 @@ import {
   TeachingBullet,
   TeachingBulletText,
   TeachingFacts,
+  TeachingFoldedSource,
   TeachingHeading,
   TeachingSource,
 } from '@/components/teaching';
 import { ThemedText } from '@/components/themed-text';
 import { TranslationGap } from '@/components/translation-gap';
-import { formatSource, getReference, resolveNotes, type ReferenceSection } from '@/content';
+import { formatSource, getReference, resolveNotes, type ReferenceSection, type Source } from '@/content';
+import type { EvidenceText } from '@/content/evidence';
 import { MaxContentWidth } from '@/constants/theme';
 import { Teaching } from '@/constants/teaching';
 import { useLocale } from '@/hooks/use-locale';
@@ -94,32 +96,66 @@ function Section({ section }: { section: ReferenceSection }) {
   const sources = section.sources ?? [];
 
   /*
-    A promoted citation is printed on the page, so it leaves the drawer. The
-    drawer's job is the reference line for everything the page did not print;
-    saying the same narration twice on one screen would be worse than the
-    burial this fixes.
+    Every citation that HAS a text goes on the page. The drawer keeps only the
+    ones that have none — scholarly opinions and plain reasoning.
+
+    The app carried 125 verses and narrations and printed 48 of them. The other
+    77 sat inside a collapsed "Where this comes from" beneath prose that
+    paraphrased them, which is how eighteen Sahih Muslim citations rendered
+    entirely unrelated narrations for months without anyone seeing.
+
+    Weight is decided here rather than in the content, because it depends on
+    the length of a text nobody typed and on how many a section ended up with:
+
+      hero    the page's answer, breaking the margins. One per page, and the
+              only one the content file chooses.
+      quote   the default. Printed in full, under the paragraph it supports.
+      folded  a very long narration, or the third in one section. Named on the
+              page and opened with a tap, so Ramadan's twelve texts do not
+              become a wall of Arabic nobody reads.
   */
-  const promoted = section.promote ? sources.find((entry) => evidenceFor(entry)) : undefined;
-  const promotedText = promoted ? evidenceFor(promoted) : undefined;
-  const remaining = promoted ? sources.filter((entry) => entry !== promoted) : sources;
+  const withText = sources
+    .map((source) => ({ source, text: evidenceFor(source) }))
+    .filter((entry): entry is { source: Source; text: EvidenceText } => entry.text !== undefined);
+  const withoutText = sources.filter((source) => evidenceFor(source) === undefined);
 
   const notes = resolveNotes(section.note, section.notes);
   const bullets = section.bullets ?? [];
-  const bodyIsLast = bullets.length === 0 && !promotedText && !section.says && notes.length === 0;
+  const bodyIsLast =
+    bullets.length === 0 && withText.length === 0 && !section.says && notes.length === 0;
 
   return (
     <View>
       <TeachingHeading>{section.heading}</TeachingHeading>
       <TeachingBody last={bodyIsLast}>{section.body}</TeachingBody>
 
-      {promotedText && promoted ? (
-        <TeachingSource
-          variant={section.promote ?? 'supporting'}
-          arabic={promotedText.arabic}
-          translation={promotedText.translation}
-          reference={formatSource(promoted)}
-        />
-      ) : null}
+      {withText.map(({ source, text }, index) => {
+        const isHero = index === 0 && section.promote === 'hero';
+        const tooLong = text.arabic.length > LONG_NARRATION;
+        const deepInSection = index >= 2;
+
+        if (!isHero && (tooLong || deepInSection)) {
+          return (
+            <TeachingFoldedSource
+              key={formatSource(source)}
+              arabic={text.arabic}
+              translation={text.translation}
+              reference={formatSource(source)}
+              label={source.kind === 'quran' ? 'Read the verse' : 'Read the narration'}
+            />
+          );
+        }
+
+        return (
+          <TeachingSource
+            key={formatSource(source)}
+            variant={isHero ? 'hero' : 'quote'}
+            arabic={text.arabic}
+            translation={text.translation}
+            reference={formatSource(source)}
+          />
+        );
+      })}
 
       {bullets.map((text, index) => (
         <TeachingBullet key={text} last={index === bullets.length - 1 && notes.length === 0}>
@@ -137,10 +173,22 @@ function Section({ section }: { section: ReferenceSection }) {
         ),
       )}
 
-      <SourceDisclosure sources={remaining} />
+      {/*
+        What is left: citations the app can show no text for. A scholarly
+        opinion is a reference to a book, not a quotation, and printing an
+        empty block for one would be worse than the line that names it.
+      */}
+      <SourceDisclosure sources={withoutText} />
     </View>
   );
 }
+
+/**
+ * Past this, a full-bleed or inset block stops being an answer and becomes a
+ * wall. Al-Fatihah's seven verses run 596 characters; one narration in the app
+ * runs 2,615.
+ */
+const LONG_NARRATION = 700;
 
 const styles = StyleSheet.create({
   content: {

@@ -98,7 +98,17 @@ export default function SurahScreen() {
    * or listen to the whole thing again. Nothing else in here branches on it.
    */
   const [mode, setMode] = useState<'ayah' | 'surah' | null>(null);
-  const [stalled, setStalled] = useState(false);
+  /*
+    Which track we decided was stalled, rather than a boolean reset on every
+    change.
+
+    A boolean needed clearing whenever the track moved, which meant calling
+    setState synchronously inside an effect — a cascading render, and what
+    `react-hooks/set-state-in-effect` was flagging. Storing the track instead
+    makes "not stalled" the derived default: a new track simply is not the one
+    that stalled, so nothing has to be reset.
+  */
+  const [stalledTrack, setStalledTrack] = useState<string | null>(null);
   /**
    * Three-quarter speed, the same rate the practice screen uses.
    *
@@ -248,18 +258,19 @@ export default function SurahScreen() {
     progress.current = status.currentTime;
   }, [status.currentTime]);
 
+  const track = mode === null ? null : `${mode}:${index}`;
+  const stalled = track !== null && stalledTrack === track;
+
   useEffect(() => {
-    if (mode === null) {
-      setStalled(false);
-      return;
-    }
-    setStalled(false);
+    if (track === null) return;
     // Reset rather than remember: a new track starts at zero, and comparing
     // against the previous track's clock would read a fresh start as progress.
     progress.current = 0;
-    const timer = setTimeout(() => setStalled(progress.current < 0.25), 12000);
+    const timer = setTimeout(() => {
+      if (progress.current < 0.25) setStalledTrack(track);
+    }, 12000);
     return () => clearTimeout(timer);
-  }, [mode, index]);
+  }, [track]);
 
   if (!surah) {
     return (

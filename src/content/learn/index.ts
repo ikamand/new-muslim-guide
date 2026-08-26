@@ -165,8 +165,15 @@ export const TOPIC_GROUPS: readonly { id: TopicGroupId; topics: readonly Content
     // The prayers you choose. Grouped apart from the five so a reader can see
     // at a glance which are owed and which are offered.
     id: 'chosen',
+    /*
+      Ordered by the night rather than alphabetically: qiyam is prayed before
+      sleeping, tahajjud after waking, witr closes whichever of them you prayed.
+      Istikhara and tawba answer a moment rather than an hour, so they follow.
+    */
     topics: [
+      ref('reference', 'qiyam-al-layl'),
       ref('reference', 'tahajjud'),
+      ref('reference', 'witr'),
       ref('reference', 'istikhara'),
       ref('reference', 'tawba-prayer'),
     ],
@@ -216,12 +223,15 @@ export function ungrouped(
     'guide:asr',
     'guide:maghrib',
     'guide:isha',
-    // The three voluntary prayers are reached from the chooser too, and their
+    // The voluntary prayers are reached from the chooser too, and their
     // reference pages — which is what a reader actually needs — are grouped
-    // under `chosen`.
+    // under `chosen`. Since 26 Aug the chooser opens the reference rather than
+    // the guide, so these are one tap further in than they used to be.
     'guide:tahajjud',
     'guide:istikhara',
     'guide:tawba',
+    'guide:qiyam',
+    'guide:witr',
   ]) {
     claimed.add(elsewhere);
   }

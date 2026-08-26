@@ -89,7 +89,3 @@ export function planReminders(
   return planned;
 }
 
-/** True where the planned set would exceed what iOS will hold. */
-export function exceedsPlatformLimit(planned: PlannedReminder[]): boolean {
-  return planned.length > 64;
-}

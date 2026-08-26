@@ -30,7 +30,12 @@ const load = (p) => import(join(root, p));
 const { CATALOG, danglingRefs, resolveRef } = await load('src/content/catalog.ts');
 const { pendingRecommendations } = await load('src/content/recommendations.ts');
 const { ungrouped } = await load('src/content/learn/index.ts');
-const { PRAYER_IMAGES } = await load('src/content/prayer-images.ts');
+/*
+  The NAMES, not the files. `prayer-images.ts` also holds a wall of `require()`
+  that only Metro can resolve, and importing the module for its map crashed
+  this whole script — see the note beside `DRAWN_POSTURES`.
+*/
+const { DRAWN_POSTURES } = await load('src/content/drawn-postures.ts');
 const { helpRefs } = await load('src/content/help.ts');
 const { SEASONS } = await load('src/content/seasons.ts');
 const { formatSource, sourceUrl, assessEvidence } = await load('src/content/sources.ts');
@@ -72,10 +77,10 @@ if (orphanTopics.length) {
   something you notice by opening every prayer step.
 */
 const POSTURES = ['standing','takbir','bowing','rising','prostrating','sitting','tashahhud','taslim-right','taslim-left','washing'];
-const drawn = POSTURES.filter((p) => PRAYER_IMAGES[p]);
+const drawn = POSTURES.filter((p) => DRAWN_POSTURES.includes(p));
 say(`Posture illustrations — ${drawn.length}/${POSTURES.length} drawn`);
 if (drawn.length < POSTURES.length) {
-  say(`  still the built-in figures: ${POSTURES.filter((p) => !PRAYER_IMAGES[p]).join(', ')}`);
+  say(`  still the built-in figures: ${POSTURES.filter((p) => !DRAWN_POSTURES.includes(p)).join(', ')}`);
   say('  Drop a PNG in assets/images/prayer/ and uncomment its line in');
   say('  src/content/prayer-images.ts. Nothing else is needed.');
 }

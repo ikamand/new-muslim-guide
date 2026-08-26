@@ -1216,9 +1216,3 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
     "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
   }
 };
-
-/** Where these came from. A licence obligation, not a nicety. */
-export const EVIDENCE_SOURCES = {
-  quran: 'QuranEnc.com',
-  hadith: 'HadeethEnc.com · fawazahmed0/hadith-api',
-} as const;

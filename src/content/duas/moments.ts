@@ -95,7 +95,3 @@ export function hisnAt(moment: DayMoment): readonly HisnOccasion[] {
     .filter((occasion): occasion is HisnOccasion => occasion !== undefined);
 }
 
-/** How many of the book's occasions are placed in the day at all. */
-export function placedOccasionCount(): number {
-  return Object.values(OCCASIONS_BY_MOMENT).reduce((n, ids) => n + ids.length, 0);
-}

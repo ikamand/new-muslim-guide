@@ -72,7 +72,3 @@ export function getPostureImage(posture: Posture): PostureImage | undefined {
   return PRAYER_IMAGES[posture];
 }
 
-/** How many of the ten exist. Reported by `npm run content:audit`. */
-export function drawnPostureCount(): number {
-  return Object.keys(PRAYER_IMAGES).length;
-}

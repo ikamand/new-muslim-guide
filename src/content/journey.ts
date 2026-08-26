@@ -187,19 +187,3 @@ export function entryStageIndex(
 /** A stable key for progress, unique across kinds. */
 export const stepKey = (entry: ContentRef): string => `${entry.kind}:${entry.id}`;
 
-/**
- * Every step in the journey, flattened.
- *
- * Deduplicated: Al-Fatihah and Fajr appear in two stages each, because someone
- * meets them once to get through a first prayer and again to learn them
- * properly. Counting either twice would make the total a lie.
- */
-export function allSteps(): readonly JourneyStep[] {
-  const seen = new Set<string>();
-  return JOURNEY.flatMap((stage) => stage.steps).filter((entry) => {
-    const key = stepKey(entry.ref);
-    if (seen.has(key)) return false;
-    seen.add(key);
-    return true;
-  });
-}

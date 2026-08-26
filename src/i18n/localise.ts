@@ -3,7 +3,6 @@ import type {
   ContentNote,
   Dua,
   Guide,
-  LocalisedText,
   Phrase,
   Pillar,
   Recitation,
@@ -115,20 +114,6 @@ function localiseNotes(
   }));
 }
 
-/**
- * A `LocalisedText` in the reader's language.
- *
- * Prefers a translation written beside the term, falls back to the keyed table
- * in `src/i18n/content/`, and falls back again to English. That order matters:
- * inline wins because it was chosen for this specific term, which is the whole
- * reason `LocalisedText` exists rather than everything going through the table.
- */
-export function localiseText(text: LocalisedText, locale: Locale): string {
-  const inline = text[locale];
-  if (inline && inline.trim()) return inline;
-  if (locale === SOURCE_LOCALE) return text.en;
-  return tr(CONTENT_DICTS[locale], text.en);
-}
 
 export function localiseRecitation(recitation: Recitation, locale: Locale): Recitation {
   if (locale === SOURCE_LOCALE) return recitation;

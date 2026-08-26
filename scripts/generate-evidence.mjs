@@ -660,12 +660,6 @@ export const QURAN_TEXT: Record<string, EvidenceText> = ${JSON.stringify(quran, 
  * the wrists" has no Arabic to search with — which was most of them.
  */
 export const HADITH_TEXT: Record<string, EvidenceText> = ${JSON.stringify(hadith, null, 2)};
-
-/** Where these came from. A licence obligation, not a nicety. */
-export const EVIDENCE_SOURCES = {
-  quran: 'QuranEnc.com',
-  hadith: 'HadeethEnc.com · fawazahmed0/hadith-api',
-} as const;
 `;
 
 writeFileSync(join(root, 'src/content/evidence.ts'), file);

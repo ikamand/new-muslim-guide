@@ -210,11 +210,53 @@ for (const [collection, edition] of Object.entries(EDITIONS)) {
     console.log(`⚠️  .cache/hadith/ara-${edition}.json missing — run \`npm run hadith:corpus\``);
     continue;
   }
+  /*
+    Two numbering systems, and picking the wrong one is silent.
+
+    `hadithnumber` is a continuous index over the whole collection.
+    `arabicnumber` is the number the collection itself prints — what a reader
+    means by "Sahih Muslim 728", and what this app's citations carry.
+
+    For five of the six books they are the same value in every single record:
+    Bukhari 7589/7589, Abu Dawud 5274/5274, Tirmidhi 3998/3998, Ibn Majah
+    4343/4343, Malik 1858/1858. For **Muslim they never match** — 7,563
+    narrations, zero agreements, because Muslim's own numbering runs to about
+    2,000 and groups its variant chains under one number.
+
+    So indexing by `hadithnumber` looked correct for years and was wrong for
+    every Muslim citation in the app. `muslim 391b`, cited for raising the
+    hands in prayer, rendered a narration about the son of Mary; `muslim 752`,
+    cited for witr, rendered one about ghusl after menstruation. Nothing
+    failed, nothing was blank, and the pages looked finished.
+
+    Both keys are indexed now, with `arabicnumber` winning. Where a collection
+    numbers variants — Muslim's `728.01`, `728.02`, `728.03` — the base number
+    resolves to the first, which is the narration all the variants share.
+  */
   const index = (file) => {
     if (!existsSync(file)) return {};
     const parsed = JSON.parse(readFileSync(file, 'utf8'));
-    return Object.fromEntries(parsed.hadiths.map((h) => [String(h.hadithnumber), h]));
+
+    /*
+      Two namespaces, never merged — merging them is what made the first
+      attempt at this fix fail. `printed["752"]` and `continuous["752"]` are
+      different narrations in Muslim, so a single map silently keeps whichever
+      was written last.
+    */
+    const printed = {};
+    const continuous = {};
+    for (const h of parsed.hadiths) {
+      continuous[String(h.hadithnumber)] = h;
+      if (h.arabicnumber === undefined) continue;
+      const label = String(h.arabicnumber);
+      printed[label] = h;
+      /* `728` should reach `728.01` — the narration the variants share. */
+      const base = label.split('.')[0];
+      if (printed[base] === undefined) printed[base] = h;
+    }
+    return { printed, continuous };
   };
+
   corpus[collection] = { arabic: index(arabicFile), english: index(englishFile) };
 }
 
@@ -372,14 +414,27 @@ for (const [key, source] of hadithCites) {
     and render as a blank quote block on the phone.
   */
   const usable = (entry) => (String(entry?.text ?? '').trim() ? entry : undefined);
-  const record = number
-    ? (usable(book?.arabic?.[number]) ?? usable(book?.arabic?.[baseNumber]))
-    : undefined;
-  const lookup = usable(book?.arabic?.[number]) ? number : baseNumber;
+  /*
+    Order matters: the collection's own number first, then its variant group,
+    then the continuous index as a last resort. A citation means the printed
+    number, and only falls back to the index when the collection prints none.
+  */
+  /*
+    The collection's OWN number first, always. A citation reading "Sahih Muslim
+    728" means the number Muslim prints, and the continuous index is only a
+    fallback for a collection that prints none.
+  */
+  const find = (space) =>
+    number
+      ? [number, baseNumber].map((key) => usable(book?.arabic?.[space]?.[key])).find(Boolean)
+      : undefined;
+  const record = find('printed') ?? find('continuous');
+  const space = find('printed') ? 'printed' : 'continuous';
+  const lookup = number && usable(book?.arabic?.[space]?.[number]) ? number : baseNumber;
   if (record) {
     arabic = record.text;
     arabicFrom = 'fawazahmed0/hadith-api';
-    const graded = book.english?.[lookup]?.grades ?? record.grades ?? [];
+    const graded = book.english?.[space]?.[lookup]?.grades ?? record.grades ?? [];
     if (graded.length > 0) {
       grade = graded.map((g) => `${g.grade} (${g.name})`).join(' · ');
     }
@@ -481,7 +536,7 @@ for (const [key, source] of hadithCites) {
 
   /* 3. Fall back to the dataset's English, which is Darussalam's. */
   if (!translation && lookup) {
-    const english = corpus[source.collection]?.english?.[lookup];
+    const english = corpus[source.collection]?.english?.[space]?.[lookup];
     if (english?.text) {
       translation = english.text;
       translationFrom = 'Darussalam (via fawazahmed0/hadith-api)';

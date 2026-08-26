@@ -1,7 +1,7 @@
 Content verify — comparing the app’s Arabic against QuranEnc and HadeethEnc
 
-Qur’an texts checked against QuranEnc — 30
-  30 match the published text, word for word.
+Qur’an texts checked against QuranEnc — 33
+  33 match the published text, word for word.
   Nothing drifted.
 
 16 texts carry no source. Searching HadeethEnc for candidates —
@@ -88,7 +88,7 @@ these are suggestions to check, never citations to paste.
       hadeethenc 8345  يجمع الله الناس الأولين والآخرين في صعيد واحد، يسمعهم الداعي وينفذهم ا
       hadeethenc 66360  بأبي أنت يا نبي الله، لا يجمع الله عليك موتتين، أما الموتة التي كتبت ع
 
-9 text(s) cite a verse that commands the act without wording it.
+11 text(s) cite a verse that commands the act without wording it.
 Not compared, on purpose — and each still needs a citation for its wording:
   Seeking refuge  (recitations.ts)
   Fajr — Seek refuge  (guides)
@@ -97,6 +97,8 @@ Not compared, on purpose — and each still needs a citation for its wording:
   Maghrib — Seek refuge  (guides)
   Isha — Seek refuge  (guides)
   Tahajjud — Seek refuge  (guides)
+  Qiyam al-Layl — Seek refuge  (guides)
+  Witr — Seek refuge  (guides)
   Istikhara — Seek refuge  (guides)
   The prayer of repentance — Seek refuge  (guides)
 

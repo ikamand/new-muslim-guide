@@ -253,11 +253,17 @@ anyone cared.
 - **Typography carries it.** Arabic is set in **Amiri**, loaded by `useFonts`
   in `src/app/_layout.tsx` — a font is an asset, so it ships over the air and
   needs no build. Never on transliteration or translation: those are Latin.
-- **Use the type scale; do not reinvent it.** `themed-text.tsx` has eight named
-  rungs — caption, small, smallBold, default, lead, cardTitle, sectionTitle,
-  subtitle, title. A local `fontSize:` in a screen means the scale is missing a
-  rung; add it there rather than nine times in nine files, which is what
-  happened before.
+- **Use the type scale; do not reinvent it.** `themed-text.tsx` has twelve named
+  rungs. Nine Latin — caption, small, smallBold, default, lead, cardTitle,
+  sectionTitle, subtitle, title — and, since 26 Aug, four for Amiri:
+  arabicNote, arabicQuote, arabicLead, arabicVerse. A local `fontSize:` in a
+  screen means the scale is missing a rung; add it there rather than nine times
+  in nine files, which is what happened before.
+  **The Arabic rungs exist because the rule above was read as being about
+  Latin**, and Amiri was hand-sized in thirteen files at nine different sizes
+  before anyone noticed. Arabic line-heights are far larger than the Latin
+  equivalent and have to be — Amiri stacks vowel marks above the line and
+  descenders below — so never set one by eye.
 - **Calm, generous spacing.** Let screens breathe. One thing at a time, well
   placed, beats four things arranged.
 - **Motion with intent.** Transitions that orient. Nothing bouncing for

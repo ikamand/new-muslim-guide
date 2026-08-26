@@ -286,15 +286,17 @@ export const WITR: Reference = {
     {
       id: 'what',
       heading: 'Why an odd number?',
-      body:
-        'Because that is what the word means. Witr is what you finish the night on, and finishing on an odd rakʿah is the whole shape of it.',
+      body: 'Because that is what the word means — and it is what you finish the night on.',
+      // The page's answer, printed rather than filed.
+      promote: 'hero',
       sources: [hadith('muslim', '752', { grading: 'sahih', role: 'practice' })],
     },
     {
       id: 'how-many',
       heading: 'Is one really enough?',
       body:
-        'Yes. The Prophet ﷺ named five, three and one and left the choice to the person praying, so one is a complete witr rather than a shortened version of something else. Most people pray three, and you will see that around you.',
+        'Yes. The Prophet ﷺ named five, three and one, and left the choice to the person praying — so one is a complete witr, not a shortened version of something else. Most people pray three, and you will see that around you.',
+      promote: 'supporting',
       sources: [hadith('abu-dawud', '1422', { grading: 'sahih', role: 'practice' })],
       note: 'Start with one. It is the whole prayer, it takes a minute, and it is the version you are least likely to get wrong while you are learning.',
     },

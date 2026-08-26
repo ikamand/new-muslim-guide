@@ -63,8 +63,20 @@ export const FOOD: Reference = {
     {
       id: 'forbidden',
       heading: 'What is actually forbidden?',
-      body:
-        'The Qur’an names four things: pork, blood, animals that died without being slaughtered, and anything dedicated to something other than God. Alcohol and other intoxicants are forbidden separately. Everything else on the shelf is fine.',
+      body: 'Four things, and the Qur’an names them outright.',
+      /*
+        This is the page's answer, so the verse breaks the margins rather than
+        sitting in the drawer. Everything below unpacks what it just said —
+        which is why the paragraph that used to paraphrase it is gone.
+      */
+      promote: 'hero',
+      bullets: [
+        '**Pork** — and anything from it: lard, gelatine, some animal fats.',
+        '**Blood** — flowing or congealed, as an ingredient.',
+        '**Meat not slaughtered** — an animal that died on its own, or was strangled or electrocuted.',
+        '**Dedicated to other than God** — killed in another name.',
+        '**Alcohol** — forbidden in its own verse, and it covers every intoxicant, not only drink.',
+      ],
       sources: [
         quran(2, 173, { surahName: 'Al-Baqarah' }),
         quran(5, 3, { surahName: 'Al-Ma’idah' }),
@@ -74,8 +86,11 @@ export const FOOD: Reference = {
     {
       id: 'reading-labels',
       heading: 'What changes at the supermarket?',
-      body:
-        'Reading ingredients for a few weeks, until you know the usual suspects: gelatine, lard, some animal fats, alcohol in sauces and extracts. It gets automatic quickly. Vegetables, grains, fish, dairy, eggs and fruit were never in question.',
+      body: 'Reading labels, for a few weeks. Then it is automatic.',
+      bullets: [
+        '**Watch for** gelatine, lard, some animal fats, and alcohol in sauces and extracts.',
+        '**Never in question** — vegetables, grains, fish, dairy, eggs, fruit.',
+      ],
     },
     {
       id: 'meat',

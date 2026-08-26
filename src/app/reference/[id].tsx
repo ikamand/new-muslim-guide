@@ -2,17 +2,24 @@ import { Stack, useLocalSearchParams } from 'expo-router';
 import { ScrollView, StyleSheet, View } from 'react-native';
 
 import { ContentNoteCard } from '@/components/content-note';
-import Ionicons from '@expo/vector-icons/Ionicons';
-import { PressableLink } from '@/components/pressable-link';
 import { RecitationCard } from '@/components/recitation-card';
-import { SourceDisclosure } from '@/components/source-list';
+import { SourceDisclosure, evidenceFor } from '@/components/source-list';
+import {
+  TeachingAside,
+  TeachingBody,
+  TeachingBullet,
+  TeachingBulletText,
+  TeachingFacts,
+  TeachingHeading,
+  TeachingSource,
+} from '@/components/teaching';
 import { ThemedText } from '@/components/themed-text';
 import { TranslationGap } from '@/components/translation-gap';
-import { getReference, resolveNotes, type QuickFact } from '@/content';
-import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
+import { formatSource, getReference, resolveNotes, type ReferenceSection } from '@/content';
+import { MaxContentWidth } from '@/constants/theme';
+import { Teaching } from '@/constants/teaching';
 import { useLocale } from '@/hooks/use-locale';
 import { localiseReference, measure } from '@/i18n/localise';
-import { useTheme } from '@/hooks/use-theme';
 
 /**
  * A reference topic, read top to bottom.
@@ -20,9 +27,26 @@ import { useTheme } from '@/hooks/use-theme';
  * No stepper and no progress bar. Someone here has a question, not a procedure
  * to follow, and making them tap through seven screens to find the one line
  * they came for would be the wrong shape entirely.
+ *
+ * ## Why there are no cards any more
+ *
+ * Every section used to sit in a bordered box. On a 390px phone that put 96px
+ * of the screen into padding — the card's 24 inside the page's 24, doubled —
+ * leaving a 294px column, about 37 characters a line against an optimal 45 to
+ * 75. Every paragraph was forced narrower than is comfortable to read, which
+ * is why the pages felt cramped and scrolled forever.
+ *
+ * Dropping the boxes and the outer padding together gives 350px and ~44
+ * characters. Sections are separated by space and by the accent colour on
+ * their headings, which is cheaper than a border and reads faster.
+ *
+ * ## Where the look lives
+ *
+ * `constants/teaching.ts`, and only there. This screen composes components and
+ * writes no numbers of its own — so changing how every teaching page in the
+ * app looks is one file.
  */
 export default function ReferenceScreen() {
-  const theme = useTheme();
   const { locale } = useLocale();
   const { id } = useLocalSearchParams<{ id: string }>();
   const source = getReference(id);
@@ -44,37 +68,18 @@ export default function ReferenceScreen() {
     <ScrollView contentContainerStyle={styles.content}>
       <Stack.Screen options={{ title: reference.title }} />
 
-      <ThemedText type="default" themeColor="textSecondary">
+      <ThemedText
+        type={Teaching.subtitle.type}
+        themeColor={Teaching.subtitle.color}
+        style={styles.subtitle}>
         {reference.subtitle}
       </ThemedText>
 
-      <View style={styles.list}>
-        {reference.quickFacts && <QuickFacts facts={reference.quickFacts} />}
+      {reference.quickFacts && <TeachingFacts facts={reference.quickFacts} />}
 
-        {reference.sections.map((section) => (
-          <View
-            key={section.id}
-            style={[
-              styles.card,
-              { backgroundColor: theme.backgroundElement, borderColor: theme.border },
-            ]}>
-            <ThemedText type="cardTitle">
-              {section.heading}
-            </ThemedText>
-            <ThemedText type="default">{section.body}</ThemedText>
-            {/*
-              Where the section's subject IS a form of words, the words are the
-              section. The same card the prayer steps use, so a duʿa looks the
-              same wherever somebody meets it.
-            */}
-            {section.says && <RecitationCard recitation={section.says} />}
-            {resolveNotes(section.note, section.notes).map((entry, position) => (
-              <ContentNoteCard key={`${entry.kind}-${position}`} entry={entry} />
-            ))}
-            <SourceDisclosure sources={section.sources ?? []} />
-          </View>
-        ))}
-      </View>
+      {reference.sections.map((section) => (
+        <Section key={section.id} section={section} />
+      ))}
 
       <TranslationGap coverage={coverage} />
     </ScrollView>
@@ -82,101 +87,77 @@ export default function ReferenceScreen() {
 }
 
 /**
- * The answers, before the argument.
- *
- * Styled as answers rather than as a table: labels quiet, values in body
- * weight, a hairline between rows and no outer border or fill. A bordered box
- * of label/value pairs reads as reference material to be consulted; this
- * should read as somebody answering you.
+ * One section: a question, its answer, and — where the section earns it — the
+ * narration itself rather than a reference to it.
  */
-function QuickFacts({ facts }: { facts: readonly QuickFact[] }) {
-  const theme = useTheme();
-  if (facts.length === 0) return null;
+function Section({ section }: { section: ReferenceSection }) {
+  const sources = section.sources ?? [];
+
+  /*
+    A promoted citation is printed on the page, so it leaves the drawer. The
+    drawer's job is the reference line for everything the page did not print;
+    saying the same narration twice on one screen would be worse than the
+    burial this fixes.
+  */
+  const promoted = section.promote ? sources.find((entry) => evidenceFor(entry)) : undefined;
+  const promotedText = promoted ? evidenceFor(promoted) : undefined;
+  const remaining = promoted ? sources.filter((entry) => entry !== promoted) : sources;
+
+  const notes = resolveNotes(section.note, section.notes);
+  const bullets = section.bullets ?? [];
+  const bodyIsLast = bullets.length === 0 && !promotedText && !section.says && notes.length === 0;
 
   return (
-    <View style={styles.facts}>
-      {facts.map((fact, index) => {
-        const body = (
-          <>
-            <ThemedText
-              type="caption"
-              themeColor="textSecondary"
-              style={styles.factLabel}
-              numberOfLines={2}>
-              {fact.label.toUpperCase()}
-            </ThemedText>
-            <ThemedText
-              type="default"
-              style={[styles.factValue, fact.emphasis && { color: theme.accent }]}>
-              {fact.value}
-            </ThemedText>
-          </>
-        );
+    <View>
+      <TeachingHeading>{section.heading}</TeachingHeading>
+      <TeachingBody last={bodyIsLast}>{section.body}</TeachingBody>
 
-        const rowStyle = [
-          styles.factRow,
-          index < facts.length - 1 && { borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: theme.border },
-        ];
+      {promotedText && promoted ? (
+        <TeachingSource
+          variant={section.promote ?? 'supporting'}
+          arabic={promotedText.arabic}
+          translation={promotedText.translation}
+          reference={formatSource(promoted)}
+        />
+      ) : null}
 
-        // The one row that is a door rather than a fact.
-        return fact.href ? (
-          <PressableLink
-            key={fact.label}
-            href={fact.href as never}
-            style={rowStyle}
-            pressedStyle={{ opacity: 0.6 }}>
-            {body}
-            <Ionicons name="chevron-forward" size={20} color={theme.accent} />
-          </PressableLink>
+      {bullets.map((text, index) => (
+        <TeachingBullet key={text} last={index === bullets.length - 1 && notes.length === 0}>
+          <TeachingBulletText text={text} />
+        </TeachingBullet>
+      ))}
+
+      {section.says && <RecitationCard recitation={section.says} />}
+
+      {notes.map((entry, position) =>
+        entry.kind === 'practical' ? (
+          <TeachingAside key={`${entry.kind}-${position}`}>{entry.text}</TeachingAside>
         ) : (
-          <View key={fact.label} style={rowStyle}>
-            {body}
-          </View>
-        );
-      })}
+          <ContentNoteCard key={`${entry.kind}-${position}`} entry={entry} />
+        ),
+      )}
+
+      <SourceDisclosure sources={remaining} />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  facts: {
-    marginBottom: Spacing.two,
-  },
-  factRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: Spacing.three,
-    minHeight: 52,
-    paddingVertical: Spacing.two,
-  },
-  factLabel: {
-    width: 96,
-    letterSpacing: 0.3,
-  },
-  factValue: {
-    flex: 1,
-  },
   content: {
-    padding: Spacing.four,
-    paddingBottom: Spacing.six,
-    gap: Spacing.five,
+    paddingHorizontal: Teaching.page.paddingH,
+    paddingTop: Teaching.page.paddingV,
+    paddingBottom: Teaching.page.paddingV * 2,
     width: '100%',
     maxWidth: MaxContentWidth,
     alignSelf: 'center',
+  },
+  subtitle: {
+    marginBottom: Teaching.page.sectionGap,
   },
   missing: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    padding: Spacing.four,
-  },
-  list: {
-    gap: Spacing.three,
-  },
-  card: {
-    gap: Spacing.two,
-    padding: Spacing.four,
-    borderRadius: Radius.medium,
-    borderWidth: StyleSheet.hairlineWidth,
+    padding: Teaching.page.paddingV,
   },
 });

@@ -28,7 +28,7 @@ function hadithText(source: Extract<Source, { kind: 'hadith' }>): EvidenceText |
 }
 
 /** The text behind any citation the app can show one for. */
-function evidenceFor(source: Source): EvidenceText | undefined {
+export function evidenceFor(source: Source): EvidenceText | undefined {
   if (source.kind === 'quran') return quranText(source);
   if (source.kind === 'hadith') return hadithText(source);
   return undefined;

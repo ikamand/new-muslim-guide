@@ -38,6 +38,16 @@ import { useTheme } from '@/hooks/use-theme';
  * because that was quicker.
  */
 
+/**
+ * The eight rungs, as a name.
+ *
+ * Exported so `constants/teaching.ts` can say WHICH rung a role uses without
+ * repeating a size. That file deliberately holds no font sizes: type lives
+ * here and keeps living here, or the app grows a second scale in a second
+ * file, which is worse than the local overrides this scale was built to stop.
+ */
+export type TextType = NonNullable<ThemedTextProps['type']>;
+
 export type ThemedTextProps = TextProps & {
   type?:
     | 'caption'

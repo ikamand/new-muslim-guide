@@ -186,6 +186,38 @@ export type ReferenceSection = {
   heading: string;
   body: string;
   /**
+   * Genuine list items, where the content is a list.
+   *
+   * The four forbidden foods were one 44-word paragraph. As four items with a
+   * bolded lead each, they are scannable — which is what GOV.UK's own research
+   * measures: bullets, bolded keywords and short sections are read faster with
+   * fewer errors.
+   *
+   * ⚠️ Per section, never per page. A page bulleted because bullets look tidy
+   * is the fact-sheet failure this format exists to avoid — "no dream is
+   * coming" needs a paragraph, because undoing a belief takes an argument.
+   *
+   * A leading `**bold**` marks the lead-in.
+   */
+  bullets?: readonly string[];
+  /**
+   * Print this section's first citation on the page rather than only in the
+   * drawer beneath it.
+   *
+   * The app carried 164 narrations and verses and showed them only inside a
+   * collapsed "Where this comes from" — so the best-sourced writing in the app
+   * was the part nobody opened, under prose a model wrote paraphrasing it.
+   *
+   * `hero` breaks the page's margins and is the page's answer. `supporting`
+   * gets a rule and an indent. **One hero per page**: the treatment stops
+   * meaning anything the moment a page has three, which is what the first page
+   * citing three verses proved.
+   *
+   * A promoted citation is removed from the drawer below, so nothing is said
+   * twice.
+   */
+  promote?: 'hero' | 'supporting';
+  /**
    * A text the section is actually about, printed rather than described.
    *
    * The istikhara page is why this exists. Its "The words" section described

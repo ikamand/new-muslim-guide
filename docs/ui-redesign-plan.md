@@ -26,9 +26,9 @@ with its reasoning attached.
 | **4** | [Duʿas, and the first network call](#phase-4--duas-and-the-apps-first-network-call) | 🟡 **Day built** — `d9bd351`. Fetch-and-cache held: no licensed content to fetch yet | OTA |
 | **5** | [The Qur'an tab](#phase-5--the-quran-tab--juz-30) | 🟡 **Text and drill built** — `eed5214`. Audio held: see below | OTA |
 | **7** | [The Duʿa tab](#phase-7--the-dua-tab) | ⬜ Planned 21 Aug — licence now settled | OTA |
-| **8** | [All of Juz 30, in-house](#phase-8--all-of-juz-30-in-house) | ⬜ Planned 21 Aug — one voice complete, no cache | OTA |
+| **8** | [Audio that saves itself](#phase-8--audio-that-saves-itself) | ⬜ Rewritten 22 Aug — save on play, no button. Absorbs 10 | ⚠️ **Build** |
 | **9** | [Bet 4: the Arabic letters](#phase-9--bet-4-the-arabic-letters) | ⬜ Undesigned — needs a session, not a ticket | OTA |
-| **10** | [Downloading a voice, a juz at a time](#phase-10--downloading-a-voice-a-juz-at-a-time) | ⬜ Planned 21 Aug — after the letters | ⚠️ **Build** |
+| **10** | Downloading a voice, a juz at a time | ↩︎ **Merged into 8** on 22 Aug — same store, same build |
 | **11** | [Four questions, on every teaching page](#phase-11--four-questions-on-every-teaching-page) | ⬜ Planned 22 Aug — biggest item here, own day | OTA |
 | — | [The prayers](#the-prayer-work) | ✅ **Done** — `a004af9` | OTA |
 
@@ -1015,54 +1015,75 @@ texts in front of users.
 
 ---
 
-## Phase 8 — All of Juz 30, in-house
+## Phase 8 — Audio that saves itself
 
-Juz 30 streams today from `mirrors.quranicaudio.com` — see
-[`src/content/quran/recitation.ts`](../src/content/quran/recitation.ts).
-**It stops streaming.** Iyad's call, 21 Aug: the files come in-house, all of
-them, and there is no cache.
+**Rewritten 22 Aug**, on Iyad's question: *"why download surah 78, 79, 80 if
+it's never used or has not been needed yet?"*
 
-That is the right shape for this app. A cache is a promise that the second
-listen works offline; bundling is a promise that the *first* one does. And it
-deletes an entire subsystem rather than adding one.
+**He is right, and the earlier plan here was wrong.** It said bundle all 564
+ayat of Juz 30 — ~76 MB — in Husary Muallim. That ships An-Naba's 40 ayahs to
+somebody who will never open it, and every user pays for it in download size,
+mobile data and storage.
 
-### 8.1 One voice, complete
+### 8.1 The rule: save on first play, with no button
 
-- **Husary Muallim, all 564 ayahs of Juz 30, ~76 MB.** It is the teaching
-  recording, it is already first in `RECITERS`, and seven of its clips are
-  already in the repo as Al-Fatiha.
-- **The figure is per voice.** Eight reciters in-house is ~600 MB, which is not
-  a real option. So the other seven keep streaming from the host they stream
-  from today — `ayahSource` already chooses per reciter, and nothing about that
-  code changes.
-- **Cost, plainly:** the app download grows by ~76 MB, and the OTA that carries
-  it is a ~76 MB update. Both are one-time. Qur'an apps routinely ship larger
-  than this; worth naming once and then not worrying about.
+**Tap play → it streams AND writes to disk. Second time it is local.**
 
-### 8.2 What this deletes
+Iyad asked whether a download button should sit beside repeat and next. **No**,
+and the reason is the one CLAUDE.md already states: *prefer what the app can
+infer over what the user must configure.*
 
-- **No caching layer.** No `expo-file-system`, which means no new native
-  module, which means **no `eas build`** — the whole phase rides an OTA.
-- **No first-play latency, no spinner, no failure state** on the bundled voice.
-  A surah plays the instant it is tapped, on a plane, in a basement.
-- The offline promise now covers the Qur'an tab too, not just the worship path.
+- A download button asks somebody to predict whether they will want surah 93
+  offline **later**, which they cannot know now.
+- It puts an un-pressed icon on 37 rows, which reads as 37 chores rather than a
+  library.
+- Save-on-play gets the same result with no decision: the surahs a person
+  actually uses are exactly the ones that end up on their phone.
 
-### 8.3 The mechanical work
+The behaviour is invisible and cannot be wrong.
 
-- `src/content/audio.ts` is the only place a filesystem path may live, and
-  Metro resolves `require` at build time — so 564 literal `require` lines are
-  needed and cannot be built from a variable. **Generate that file**, with a
-  generated-file header, the way `juz30.ts` and `evidence.ts` are generated.
-  A script downloads the 564 mp3s into `assets/audio/juz30/` and writes the
-  table; nobody types it.
-- Keep the seven Al-Fatiha clips wired where they are. Nothing is stored twice.
-- `ayahSource` gains one branch: bundled if the reciter is Husary Muallim,
-  streamed otherwise.
-- `npm run audio:manifest` after, and `-- --check` in the same pass — a
-  `require` for a file that is not there fails the whole bundle, and 564 new
-  requires is exactly where that happens.
+### 8.2 What is bundled anyway, and why it is tiny
 
-### 8.5 Teach Al-Ikhlas, and stop setting homework
+**Al-Fatiha (already in, 7 clips) plus the three quls — Al-Ikhlas, Al-Falaq,
+An-Nas.** Well under 1 MB against 76.
+
+Not an arbitrary starter set: those four are what a beginner actually recites —
+Al-Fatiha in every rakʿah, Al-Ikhlas at the recite step (see 8.5), and the
+three quls in the morning and evening adhkar and after every prayer. **It means
+the worship path never touches the network**, which is the promise that
+matters. Everything else is a learning surface, and a learning surface may
+stream once.
+
+### 8.3 Two places an explicit control does earn its place
+
+- **A storage screen in Settings** — what is saved, how much space, delete.
+  **Not optional.** Saving automatically with no way to see or clear it fills
+  somebody's phone invisibly, which is worse than the download button this
+  phase just refused.
+- **One "download this juz" action**, for the deliberate case: somebody about
+  to board a flight. At the juz level, not per surah, and not in the player.
+
+### 8.4 This merges Phase 8 and Phase 10
+
+Both need `expo-file-system`, both need a native build, and the difference
+between "save this surah" and "save this reciter's juz" is **a key in the same
+store**. Building them apart would pay the build cost twice and write the
+storage screen twice.
+
+⚠️ **So Phase 8 now needs a full `eas build`**, where the bundle-everything
+version did not. That is the price of not shipping 76 MB to everybody, and it
+is worth it. `runtimeVersion` is on the fingerprint policy, so existing preview
+builds will stop being offered the update rather than break on it.
+
+### 8.5 What this removed from the plan
+
+- The 76 MB bundle, and the "one voice complete" framing with it.
+- The claim that Phase 8 rides an OTA. It does not any more.
+- Phase 10 as a separate phase.
+
+---
+
+### ✅ Built 22 Aug — Al-Ikhlas at the recite step
 
 Iyad's proposal, 22 Aug. **Small change, and it fixes something that is broken
 rather than adding something that is missing.**

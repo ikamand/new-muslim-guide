@@ -25,7 +25,6 @@ with its reasoning attached.
 | **3** | [Provenance](#phase-3--provenance) | ✅ **Done** — `5f2570a`, `e614780` | OTA |
 | **4** | [Duʿas, and the first network call](#phase-4--duas-and-the-apps-first-network-call) | 🟡 **Day built** — `d9bd351`. Fetch-and-cache held: no licensed content to fetch yet | OTA |
 | **5** | [The Qur'an tab](#phase-5--the-quran-tab--juz-30) | 🟡 **Text and drill built** — `eed5214`. Audio held: see below | OTA |
-| **6** | [French and Spanish](#phase-6--french-and-spanish) | ⬜ Last, on purpose | OTA |
 | **7** | [The Duʿa tab](#phase-7--the-dua-tab) | ⬜ Planned 21 Aug — licence now settled | OTA |
 | **8** | [All of Juz 30, in-house](#phase-8--all-of-juz-30-in-house) | ⬜ Planned 21 Aug — one voice complete, no cache | OTA |
 | **9** | [Bet 4: the Arabic letters](#phase-9--bet-4-the-arabic-letters) | ⬜ Undesigned — needs a session, not a ticket | OTA |
@@ -667,7 +666,28 @@ percentage, reusing geometry `illustrations.tsx` already draws.
 
 ---
 
-## Phase 6 — French and Spanish
+## Future work — not in this plan
+
+### French and Spanish (was Phase 6)
+
+**Taken out of the active plan 22 Aug.** Iyad: *"leave phase 6 out of this plan
+but keep it for future work — I want to focus on English for now."*
+
+235 of 695 strings are translated into each. `TranslationGap` already marks a
+screen that is not fully translated, so a partly-translated app tells the truth
+about itself rather than looking finished.
+
+**This makes Phase 11 cheaper, and that is not a coincidence.** Phase 11
+rewrites ~5,700 words of English and would have dropped every touched line's
+French and Spanish back to English. With translation deferred, that cost is
+zero — the work that was going to be paid for twice is now paid for once, in
+the right order. Deferring translation is the correct move *because* of Phase
+11, not despite it.
+
+The original phase reasoning is kept below, because the ordering argument is
+what makes it safe to defer.
+
+#### The original Phase 6 reasoning
 
 **Deliberately last.** Translations are keyed by the English text
 (`src/i18n/locales.ts`): edit an English sentence and its translation drops back
@@ -697,6 +717,8 @@ The gaps concentrate in the worship path — Fajr 59, Wudu 35, Ghusl 28, Periods
   whole curriculum. Somebody built it for converts in French and nobody built it
   in English, which is either a warning about the market or the reason this app
   should exist.
+
+---
 
 ---
 
@@ -1457,6 +1479,85 @@ wants its own visual treatment — label and value on one row, label in `caption
 at `textSecondary`, value in `default`, hairline between rows — and it must not
 look like a table. Tables read as reference; this should read as answers.
 
+### Bring the evidence up out of the drawer
+
+Iyad, 22 Aug: *"a lot of 'where it came from' sources have hadiths and great
+information — should we add that stuff in the main learning sections?"*
+
+**Yes, selectively — and this is the second time the same bug has been found.**
+The istikhara duʿa was buried in the citation footer too. There is a pattern
+here worth naming: **the app hides its best-sourced material in a drawer under
+prose a model wrote.**
+
+Measured 22 Aug: **`evidence.ts` holds 164 entries averaging 79 words** — 55
+Qur'an ayahs and 109 hadith, roughly **13,000 words of authenticated text**.
+The pages above them are model-written and awaiting review. The strongest
+writing in the app is the part nobody opens.
+
+#### The rule for promoting one
+
+Not all 164. A citation drawer is doing real work when it proves a ruling the
+prose already states plainly — that is provenance, and it belongs where it is.
+
+**Promote a narration when it says something the prose cannot:**
+
+- **A form of words** — a duʿa, a phrase to say. The istikhara duʿa is the
+  clearest case: the thing you came for.
+- **A number or a specific** the prose is only paraphrasing.
+- **A reassurance whose force comes from whose words they are.** "The deeds God
+  loves most are the constant ones, however small" lands differently as the
+  Prophet's ﷺ sentence than as the app's. The tahajjud page currently
+  paraphrases it in prose and puts the narration underneath — backwards.
+
+**The test:** *would the reader be worse off if they never opened the drawer?*
+If yes, it is content. If no, it is provenance and stays.
+
+#### What it must not become
+
+⚠️ **This fights Phase 11's own goal if done carelessly.** Phase 11 exists to
+make pages shorter, and 79-word narrations are not short. A page that gains
+three hadith and loses nothing has been made worse in the name of being made
+better. **A promoted narration replaces the paragraph that was paraphrasing
+it** — it does not sit next to it.
+
+And nothing gets promoted as decoration. A hadith quoted because it is
+beautiful, under a ruling it does not establish, is the failure mode that
+`docs/scholarly-review.md` exists to catch.
+
+### How the information should be displayed — the principles
+
+Iyad asked for this researched rather than assumed. These are the ones that
+apply to a reader three weeks into Islam, holding a phone, looking for one
+thing:
+
+1. **Headings are the questions, not the topics.** A convert searches with the
+   sentence in their head, not a category name. The app already proved this on
+   itself — Phase 2 renamed the help chips from "When something goes wrong" to
+   **"I lost count"**, and it is the single most-quoted improvement in this
+   document. Section headings should take the same treatment: "What it is"
+   becomes "What am I actually doing?"; "How much" becomes "How little counts?"
+   Roughly a third of the app's headings are already question-shaped; the rest
+   are labels.
+2. **Answer in the first sentence, qualify in the second.** Many bodies build
+   toward the answer. Someone scanning reads sentence one and leaves. Put the
+   answer where the eye lands, then the exception.
+3. **One idea per block.** At 47 words the average body usually carries two or
+   three. Split them; the block count going up while the word count goes down
+   is the shape of success here.
+4. **Progressive disclosure, deliberately.** Four rows answer the fast
+   questions, prose answers *why*, the drawer proves it. Three depths, and a
+   reader should be able to stop after any one of them and not be misled.
+5. **Concrete beats complete.** "Set an alarm twenty minutes before Fajr"
+   teaches more than an accurate paragraph about the night's thirds. The
+   tahajjud page already does this well and is the model to copy.
+6. **Never make the reader learn a word to get an answer.** If a sentence needs
+   *mustahabb* or *wajib* explained before it can be understood, it is
+   answering a scholar's question rather than the reader's.
+
+**And the honest limit on all of it:** these are principles, not a validated
+design. Which is exactly why the phase builds two unalike pages first and looks
+at them before committing to twenty-six more.
+
 ### The size of it, measured
 
 Counted 22 Aug rather than estimated:
@@ -1468,12 +1569,13 @@ Counted 22 Aug rather than estimated:
 | Prose in scope | **~5,700 words** |
 | Translatable strings in the app | 695, of which **235** are done in each of French and Spanish (34%) |
 
-**Reference bodies are the largest single category in
-`docs/i18n-manifest.csv`.** Translations are keyed by the English text, so
-every body this rewrites drops its French and Spanish back to English. **This
-phase partly un-translates the app**, and that is not a reason not to do it —
-it is a reason to do it BEFORE Phase 6 rather than after, which is what the
-original phase order already said.
+**The translation cost is now zero.** Reference bodies are the largest single
+category in `docs/i18n-manifest.csv`, and rewriting them would have dropped
+every touched line's French and Spanish back to English. Translation was taken
+out of the plan on 22 Aug — see
+[Future work](#future-work--not-in-this-plan) — so this phase now pays for
+those words once instead of twice. It is the right order, arrived at from the
+other direction.
 
 ### Do two pages first, then the other twenty-six
 
@@ -1519,8 +1621,10 @@ paragraph that the block replaces.
 - **Every rewritten body is new model-written content** on pages that include
   the salah path, so it lands in `docs/scholarly-review.md` — the pile that
   gates release. Rewriting for clarity is still rewriting.
-- **`npm run i18n:manifest` after**, and it will report a large drop. That is
-  the system working, not a regression.
+- **`npm run i18n:manifest` after** — it fails if a locale file still
+  translates wording that no longer exists, which is exactly what rewriting
+  5,700 words will cause. Run it, do not skip it because translation is
+  deferred.
 
 ⚠️ **The sheet Iyad showed is not usable as content.** Its citations are Reddit
 and a charity's blog. Its facts happen to be broadly right and its numbers for

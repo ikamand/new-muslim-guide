@@ -237,7 +237,7 @@
   "where": "Article of faith — Belief in divine decree",
   "arabic": "الْإِيمَانُ بِالْقَدَر",
   "translit": "Al-īmān bi-l-qadar",
-  "english": "That nothing happens outside Allah’s knowledge and will — the good and the hard alike.",
+  "english": "That nothing happens outside Allah’s knowledge and will, the good and the hard alike.",
   "source": "",
   "file": "iman.ts",
   "kind": "term"
@@ -318,7 +318,7 @@
   "where": "Al-Fatiha — ayah 7",
   "arabic": "صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ",
   "translit": "Ṣirāṭa-lladhīna anʿamta ʿalayhim ghayri-l-maghḍūbi ʿalayhim wa la-ḍ-ḍāllīn",
-  "english": "The path of those You have blessed — not of those who have earned Your anger, nor of those who have gone astray.",
+  "english": "The path of those You have blessed, not of those who have earned Your anger, nor of those who have gone astray.",
   "source": "Qur'an 1:1-7",
   "file": "recitations.ts",
   "kind": "quotation"
@@ -335,7 +335,7 @@
  {
   "where": "Rising from rukuʿ",
   "arabic": "سَمِعَ اللَّهُ لِمَنْ حَمِدَهُ، رَبَّنَا وَلَكَ الْحَمْدُ",
-  "translit": "Samiʿa-llāhu liman ḥamidah — Rabbanā wa laka-l-ḥamd",
+  "translit": "Samiʿa-llāhu liman ḥamidah. Rabbanā wa laka-l-ḥamd",
   "english": "Allah hears the one who praises Him. Our Lord, to You belongs all praise.",
   "source": "Sahih al-Bukhari 795",
   "file": "recitations.ts",

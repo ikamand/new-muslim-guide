@@ -59,7 +59,7 @@ export const PERIODS: Reference = {
       heading: 'Do I still pray?',
       promote: 'hero',
       body:
-        'From the moment bleeding starts until it stops, you do not pray. This is not permission to skip — you are not supposed to pray, and praying anyway is not better.',
+        'From the moment bleeding starts until it stops, you do not pray. This is not permission to skip. You are not supposed to pray, and praying anyway is not better.',
       note: 'You do not make these prayers up afterwards. They are not a debt. This surprises most people, so it is worth saying twice: they are simply not owed.',
       sources: [
         hadith('bukhari', '321', {
@@ -94,7 +94,7 @@ export const PERIODS: Reference = {
       id: 'ending',
       heading: 'When do I start praying again?',
       body:
-        'Once the bleeding has stopped, take a ghusl — the full wash — and you go straight back to praying with the next prayer due.',
+        'Once the bleeding has stopped, take a ghusl, the full wash, and you go straight back to praying with the next prayer due.',
       sources: [quran(2, 222, { surahName: 'Al-Baqarah' })],
     },
     {
@@ -108,7 +108,7 @@ export const PERIODS: Reference = {
       id: 'differences',
       heading: 'Why do people tell me different things?',
       body:
-        'One question here is genuinely open and two are not, and it saves a lot of confusion to know which is which. Reciting the Qur’an during a period is the open one: scholars divide on it, and you will meet people certain of opposite answers. Holding a printed muṣḥaf is not open in the same way — all four schools say not to. Nor is sitting in the prayer hall of a mosque, which all four treat as somewhere not to stay through a period, though several allow walking through.',
+        'One question here is genuinely open and two are not, and it saves a lot of confusion to know which is which. Reciting the Qur’an during a period is the open one: scholars divide on it, and you will meet people certain of opposite answers. Holding a printed muṣḥaf is not open in the same way, because all four schools say not to. Nor is sitting in the prayer hall of a mosque, which all four treat as somewhere not to stay through a period, though several allow walking through.',
       note: 'None of this touches what the last section said. Listening, duʿa, dhikr and learning are open on every account, and nobody who tells you one of these is being difficult with you.',
       notes: [
         note(
@@ -117,7 +117,7 @@ export const PERIODS: Reference = {
           {
             sources: [
               scholarly({
-                work: 'Encyclopedia of Fiqh — Rulings of Menstruation',
+                work: 'Encyclopedia of Fiqh, Rulings of Menstruation',
                 author: 'Dorar al-Saniyyah',
                 url: 'https://dorar.net/en/feqhia/58',
               }),
@@ -140,7 +140,7 @@ export const PERIODS: Reference = {
               },
             ],
             additionalExplanation:
-              'This section used to say scholars differ on all three of these and give no positions, which put a question all four schools agree on next to one they genuinely split over. On the muṣḥaf the agreement is about touching it; scholars treat a barrier between hand and page differently, so if you need to carry one or turn its pages, that is the thing to ask about. On the mosque the agreement is about remaining there — the Shafi`i and Hanbali schools permit passing through, and several contemporary scholars go further. If any of it affects your week, ask someone knowledgeable which position your local mosque follows.',
+              'This section used to say scholars differ on all three of these and give no positions, which put a question all four schools agree on next to one they genuinely split over. On the muṣḥaf the agreement is about touching it; scholars treat a barrier between hand and page differently, so if you need to carry one or turn its pages, that is the thing to ask about. On the mosque the agreement is about remaining there. The Shafi`i and Hanbali schools permit passing through, and several contemporary scholars go further. If any of it affects your week, ask someone knowledgeable which position your local mosque follows.',
           },
         ),
       ],
@@ -149,7 +149,7 @@ export const PERIODS: Reference = {
       id: 'irregular',
       heading: 'What if the bleeding is not a period?',
       body:
-        'Bleeding outside your normal pattern, or lasting far beyond it, is treated differently — it does not stop you praying. A woman asked the Prophet ﷺ exactly this and was told not to give up her prayers, because that bleeding comes from a blood vessel rather than being a period. You wash, do wudu, and pray; the wudu is done afresh for each prayer.',
+        'Bleeding outside your normal pattern, or lasting far beyond it, is treated differently, and it does not stop you praying. A woman asked the Prophet ﷺ exactly this and was told not to give up her prayers, because that bleeding comes from a blood vessel rather than being a period. You wash, do wudu, and pray; the wudu is done afresh for each prayer.',
       note: 'Telling the two apart is genuinely a question for someone knowledgeable, not for an app. Do not guess, and do not stop praying on a guess.',
       // The section stated the rule with nothing behind it. This is the
       // narration the rule comes from, and it carries the wudu detail the
@@ -202,15 +202,15 @@ export const LOST_COUNT: Reference = {
   subtitle: 'What to do when you are not sure where you are',
   quickFacts: [
     { label: 'The fix', value: 'Take the smaller number, then two extra prostrations' },
-    { label: 'Does it count?', value: 'Yes — the prayer is valid', emphasis: true },
+    { label: 'Does it count?', value: 'Yes, the prayer is valid', emphasis: true },
   ],
   sections: [
     {
       id: 'rule',
-      heading: 'I have lost count — what now?',
+      heading: 'I have lost count. What now?',
       promote: 'hero',
       body:
-        'If you cannot remember whether you are on the second or third rakʿah, assume the smaller one — the number you are certain of — and carry on from there.',
+        'If you cannot remember whether you are on the second or third rakʿah, assume the smaller one, the number you are certain of, and carry on from there.',
       note: 'Do not start the prayer again. Restarting is the common instinct and it is not the answer.',
       // "Cast aside the doubt and build on what he is sure of" — the rule this
       // section states, in the Prophet's ﷺ own wording.
@@ -264,9 +264,9 @@ export const LOST_COUNT: Reference = {
     },
     {
       id: 'settle',
-      heading: 'It keeps happening — is that bad?',
+      heading: 'It keeps happening. Is that bad?',
       body:
-        'Everyone loses count, including people who have prayed all their lives. If the doubt keeps coming back in the same prayer, ignore it and finish — chasing certainty is itself a distraction from the prayer.',
+        'Everyone loses count, including people who have prayed all their lives. If the doubt keeps coming back in the same prayer, ignore it and finish. Chasing certainty is itself a distraction from the prayer.',
     },
   ],
 };
@@ -287,7 +287,7 @@ export const MISSED: Reference = {
   sections: [
     {
       id: 'pray-it',
-      heading: 'I missed a prayer — is that a sin?',
+      heading: 'I missed a prayer. Is that a sin?',
       promote: 'hero',
       body:
         'Sleeping through a prayer or forgetting it is not a sin. You pray it as soon as you wake or remember, and that prayer counts as the one you missed.',
@@ -311,7 +311,7 @@ export const MISSED: Reference = {
       id: 'guilt',
       heading: 'What if it keeps happening?',
       body:
-        'The thing that ends people’s prayer is not the prayer they missed — it is deciding they are now the sort of person who misses prayers. Pray the next one. That is the whole recovery.',
+        'The thing that ends people’s prayer is not the prayer they missed. It is deciding they are now the sort of person who misses prayers. Pray the next one. That is the whole recovery.',
       note: 'Deliberately leaving a prayer is a serious matter and different from oversleeping. The action is still the same: pray it, and pray the next one.',
     },
   ],
@@ -325,7 +325,7 @@ export const TRAVELLING: Reference = {
   subtitle: 'Shortening and combining on a journey',
   quickFacts: [
     { label: 'How many', value: 'Dhuhr, ʿAsr and ʿIshaʾ become two. Fajr and Maghrib stay' },
-    { label: 'Together?', value: 'Dhuhr with ʿAsr, Maghrib with ʿIshaʾ — at either time' },
+    { label: 'Together?', value: 'Dhuhr with ʿAsr, Maghrib with ʿIshaʾ, at either time' },
     { label: 'Do I have to?', value: 'Shortening is the sunnah on a journey', emphasis: true },
   ],
   sections: [
@@ -334,7 +334,7 @@ export const TRAVELLING: Reference = {
       heading: 'How much do I pray when travelling?',
       promote: 'hero',
       body:
-        'On a journey, the four-rakʿah prayers — Dhuhr, ʿAsr and ʿIshaʾ — are prayed as two. Fajr stays two and Maghrib stays three.',
+        'On a journey, the four-rakʿah prayers, Dhuhr, ʿAsr and ʿIshaʾ, are prayed as two. Fajr stays two and Maghrib stays three.',
       note: 'This is a gift, not a compromise. It is the practice of the Prophet ﷺ on journeys, not a lowering of the bar.',
       sources: [
         quran(4, 101, { surahName: 'An-Nisa' }),
@@ -362,7 +362,7 @@ export const TRAVELLING: Reference = {
       id: 'howfar',
       heading: 'How far counts as travelling?',
       body:
-        'Far enough that you would ordinarily call it travelling. There is no distance in the Qur’an or in any narration, so scholars have had to draw the line themselves, and they draw it in different places — the most common answer works out at somewhere around eighty to ninety kilometres. What everyone agrees on is when it starts: not when you decide to go, but once you have actually left the place you live.',
+        'Far enough that you would ordinarily call it travelling. There is no distance in the Qur’an or in any narration, so scholars have had to draw the line themselves, and they draw it in different places. The most common answer works out at somewhere around eighty to ninety kilometres. What everyone agrees on is when it starts: not when you decide to go, but once you have actually left the place you live.',
       note: 'A daily commute is not a journey, however long it feels. If you are unsure, ask someone locally rather than deciding alone.',
       // The "once you have left" sentence is the one thing here that is agreed
       // and it now carries the narration Bukhari files under exactly that
@@ -378,11 +378,11 @@ export const TRAVELLING: Reference = {
       notes: [
         note(
           'differs',
-          'No verse and no narration gives a distance. The figure most scholars use is a conversion of a classical measure, and a second position holds there is no fixed distance at all — if it is a journey, you may shorten.',
+          'No verse and no narration gives a distance. The figure most scholars use is a conversion of a classical measure, and a second position holds there is no fixed distance at all: if it is a journey, you may shorten.',
           {
             sources: [
               scholarly({
-                work: 'Encyclopedia of Fiqh — How Travellers Pray',
+                work: 'Encyclopedia of Fiqh, How Travellers Pray',
                 author: 'Dorar al-Saniyyah',
                 url: 'https://dorar.net/en/feqhia/116',
               }),
@@ -404,7 +404,7 @@ export const TRAVELLING: Reference = {
               {
                 school: 'Hanafi',
                 position:
-                  'Reckon it from a journey of about three days at the pace people travelled then, which the school gives as forty-eight miles — roughly seventy-seven kilometres.',
+                  'Reckon it from a journey of about three days at the pace people travelled then, which the school gives as forty-eight miles, or roughly seventy-seven kilometres.',
               },
               {
                 school: 'contemporary scholarship',
@@ -413,7 +413,7 @@ export const TRAVELLING: Reference = {
               },
             ],
             additionalExplanation:
-              'The app used to say "roughly eighty kilometres" without saying where the number came from, which made a scholarly conversion look like a reported figure. A barid is a classical measure of distance, and four of them is two days of loaded-camel travel; converted into modern units it lands near eighty-eight kilometres, and different conversions give slightly different numbers, which is most of why you will hear eighty from one person and ninety from another. How long you may keep shortening once you arrive is a second difference again — the Maliki and Shafi`i schools stop at four days, the Hanafi school at fifteen, and some hold there is no limit while you have not settled.',
+              'The app used to say "roughly eighty kilometres" without saying where the number came from, which made a scholarly conversion look like a reported figure. A barid is a classical measure of distance, and four of them is two days of loaded-camel travel; converted into modern units it lands near eighty-eight kilometres, and different conversions give slightly different numbers, which is most of why you will hear eighty from one person and ninety from another. How long you may keep shortening once you arrive is a second difference again. The Maliki and Shafi`i schools stop at four days, the Hanafi school at fifteen, and some hold there is no limit while you have not settled.',
           },
         ),
       ],
@@ -428,7 +428,7 @@ export const SEATED: Reference = {
   title: 'Praying when you cannot stand',
   subtitle: 'Illness, injury, pain, or no room to stand',
   quickFacts: [
-    { label: 'Cannot stand?', value: 'Pray sitting — on a chair or the floor' },
+    { label: 'Cannot stand?', value: 'Pray sitting, on a chair or the floor' },
     { label: 'Does it count?', value: 'Fully. It is not worth less', emphasis: true },
   ],
   sections: [
@@ -437,7 +437,7 @@ export const SEATED: Reference = {
       heading: 'What if I cannot stand?',
       promote: 'hero',
       body:
-        'If standing is beyond you, or would cause real pain or harm, pray sitting down — on a chair or on the floor, whichever you can manage.',
+        'If standing is beyond you, or would cause real pain or harm, pray sitting down, on a chair or on the floor, whichever you can manage.',
       // `Imran ibn Husain asked because of an illness of his own, and got the
       // whole ladder in one sentence: standing, then sitting, then lying.
       sources: [
@@ -529,7 +529,7 @@ export const MOSQUE: Reference = {
       id: 'when',
       heading: 'When should I go the first time?',
       body:
-        'Friday midday is the busiest hour of the week. For a first visit, go for a normal prayer — Dhuhr in the early afternoon, or ʿIshaʾ at night. Fewer people, more room to watch what everyone else does.',
+        'Friday midday is the busiest hour of the week. For a first visit, go for a normal prayer: Dhuhr in the early afternoon, or ʿIshaʾ at night. Fewer people, more room to watch what everyone else does.',
       note: 'Friday prayer is obligatory for men, so you will need to go eventually. It is easier once the building is already familiar.',
       // The narration names the four it is not a duty for — a woman among
       // them — which is where the note's "for men" comes from.
@@ -550,13 +550,13 @@ export const MOSQUE: Reference = {
       // with nothing behind it, next to a lesson that treats the same subject
       // with its verses and its `differs` note. One subject, one place.
       body:
-        'Do your wudu at home if you can — it is one less thing to work out when you arrive. Wear clean clothes that cover you from the navel to the knees at minimum; loose trousers and a long top are entirely normal. What a woman covers is no different here from anywhere else in front of men outside the family, and the clothing guide sets it out with the verses behind it.',
+        'Do your wudu at home if you can. It is one less thing to work out when you arrive. Wear clean clothes that cover you from the navel to the knees at minimum; loose trousers and a long top are entirely normal. What a woman covers is no different here from anywhere else in front of men outside the family, and the clothing guide sets it out with the verses behind it.',
     },
     {
       id: 'arriving',
       heading: 'What do I do when I walk in?',
       body:
-        'There will be a shoe rack by the door. Take your shoes off there and carry them in if the rack is full. Step in with your right foot. There are usually separate entrances or areas for men and women — look for the signs, or ask; nobody minds being asked.',
+        'There will be a shoe rack by the door. Take your shoes off there and carry them in if the rack is full. Step in with your right foot. There are usually separate entrances or areas for men and women. Look for the signs, or ask; nobody minds being asked.',
       // The right foot is the general pattern `Aisha describes, not a rule of
       // its own. The shoe rack is a shoe rack.
       sources: [
@@ -571,7 +571,7 @@ export const MOSQUE: Reference = {
       id: 'inside',
       heading: 'Where do I sit?',
       body:
-        'Pray two short rakʿah before you sit down — it is what everyone does on entering. Then sit anywhere on the carpet. There is no reserved seating and no collection.',
+        'Pray two short rakʿah before you sit down. It is what everyone does on entering. Then sit anywhere on the carpet. There is no reserved seating and no collection.',
       note: 'If a prayer is already in progress, join the line where you are and follow along from wherever the imam has got to.',
       sources: [
         hadith('bukhari', '444', {
@@ -591,7 +591,7 @@ export const MOSQUE: Reference = {
       id: 'after',
       heading: 'What happens afterwards?',
       body:
-        'People turn and greet whoever is beside them. Say salam back. Someone will very likely ask if you are new — this is the moment the whole trip is actually for, and it is worth staying ten minutes for it.',
+        'People turn and greet whoever is beside them. Say salam back. Someone will very likely ask if you are new. This is the moment the whole trip is actually for, and it is worth staying ten minutes for it.',
     },
     {
       id: 'nobody-minds',

@@ -98,7 +98,7 @@ export const WUDU: Guide = {
       notes: [
         note(
           'agreed',
-          'What certainly breaks it: anything that leaves you from the front or the back — using the toilet, passing wind — and losing awareness, whether through sleep deep enough that you would not have noticed, fainting, or anything else that takes your senses away.',
+          'What certainly breaks it: anything that leaves you from the front or the back, such as using the toilet or passing wind, and losing awareness, whether through sleep deep enough that you would not have noticed, fainting, or anything else that takes your senses away.',
           {
             sources: [
               quran(5, 6, { surahName: "Al-Ma'idah" }),
@@ -116,7 +116,7 @@ export const WUDU: Guide = {
               }),
             ],
             additionalExplanation:
-              'Bukhari 135 is the Prophet\'s ﷺ words that the prayer of someone who breaks their wudu is not accepted until they wash again — and Abu Huraira, asked what breaking it meant, answered: passing wind. On sleep the wording is "the eyes are the drawstring of the backside, so whoever sleeps should perform wudu". Schools qualify that by how deeply and in what position, but all four agree that heavy sleep ends it, and all four agree that losing your senses another way — fainting, anaesthetic, being drunk — ends it too, which is why this note names that rather than only sleep.',
+              'Bukhari 135 is the Prophet\'s ﷺ words that the prayer of someone who breaks their wudu is not accepted until they wash again. Abu Huraira, asked what breaking it meant, answered: passing wind. On sleep the wording is "the eyes are the drawstring of the backside, so whoever sleeps should perform wudu". Schools qualify that by how deeply and in what position, but all four agree that heavy sleep ends it, and all four agree that losing your senses another way, whether fainting, anaesthetic or being drunk, ends it too, which is why this note names that rather than only sleep.',
           },
         ),
         note(
@@ -150,7 +150,7 @@ export const WUDU: Guide = {
               // assembled. It states each as a school's and names who else
               // holds it, which is what an attribution needs behind it.
               scholarly({
-                work: 'Encyclopedia of Fiqh — Nullifiers of Ablution',
+                work: 'Encyclopedia of Fiqh, Nullifiers of Ablution',
                 author: 'Dorar al-Saniyyah',
                 url: 'https://dorar.net/en/feqhia/44',
               }),
@@ -163,12 +163,12 @@ export const WUDU: Guide = {
               {
                 school: 'Maliki',
                 position:
-                  'Both break it where there is desire — the private parts touched deliberately with the palm, and contact with the opposite sex accompanied by desire.',
+                  'Both break it where there is desire: the private parts touched deliberately with the palm, and contact with the opposite sex accompanied by desire.',
               },
               {
                 school: 'Shafi`i',
                 position:
-                  'Both break it regardless of intention — the private parts touched with the palm and no barrier, and skin contact with an adult of the opposite sex who is not a close relative.',
+                  'Both break it regardless of intention: the private parts touched with the palm and no barrier, and skin contact with an adult of the opposite sex who is not a close relative.',
               },
               {
                 school: 'Hanbali',
@@ -177,7 +177,7 @@ export const WUDU: Guide = {
               },
             ],
             additionalExplanation:
-              'The split is not carelessness — it is two authentic narrations pointing different ways. Busrah bint Safwan reports "whoever touches his penis should not pray until he performs wudu"; Talq ibn `Ali reports the Prophet ﷺ answering "is it anything other than a piece of him?" Tirmidhi grades both sound and records that the second is the position of the scholars of Kufa. On the opposite sex, the verse says "or you have touched women", and the argument is over whether that word means intercourse or ordinary contact; `A\'isha reports that the Prophet ﷺ kissed her and prayed without washing again.',
+              'The split is not carelessness. It is two authentic narrations pointing different ways. Busrah bint Safwan reports "whoever touches his penis should not pray until he performs wudu"; Talq ibn `Ali reports the Prophet ﷺ answering "is it anything other than a piece of him?" Tirmidhi grades both sound and records that the second is the position of the scholars of Kufa. On the opposite sex, the verse says "or you have touched women", and the argument is over whether that word means intercourse or ordinary contact; `A\'isha reports that the Prophet ﷺ kissed her and prayed without washing again.',
           },
         ),
       ],
@@ -222,7 +222,7 @@ export const WUDU: Guide = {
       posture: 'washing',
       instruction:
         'Sniff a little water into your nose with your right hand, then blow it out using your left. Three times.',
-      note: 'Draw it up properly — unless you are fasting, in which case go gently.',
+      note: 'Draw it up properly, unless you are fasting, in which case go gently.',
       sources: [
         hadith('tirmidhi', '788', {
           book: 8,
@@ -238,7 +238,7 @@ export const WUDU: Guide = {
       title: 'Wash your face',
       posture: 'washing',
       instruction:
-        'Wash your whole face three times — from your hairline to under your chin, and from ear to ear.',
+        'Wash your whole face three times, from your hairline to under your chin and from ear to ear.',
       // The first of the four parts the verse itself names.
       sources: [quran(5, 6, { surahName: "Al-Ma'idah" })],
     },
@@ -264,7 +264,7 @@ export const WUDU: Guide = {
       posture: 'washing',
       instruction:
         'With wet hands, wipe over your head from the front to the back and return to the front. Once.',
-      note: 'Wiping, not washing — and once, not three times.',
+      note: 'Wiping, not washing, and once rather than three times.',
       // The verse says wipe rather than wash; Bukhari 185 is the front-to-back
       // -and-back-again motion the instruction describes.
       sources: [
@@ -319,11 +319,11 @@ export const WUDU: Guide = {
       notes: [
         note(
           'practical',
-          'If you are ever rushed or short of water, the four parts the Qur’an itself names are the face, the arms to the elbows, wiping the head, and the feet to the ankles — once each is enough. Everything else here is the fuller way the Prophet ﷺ did it.',
+          'If you are ever rushed or short of water, the four parts the Qur’an itself names are the face, the arms to the elbows, wiping the head, and the feet to the ankles. Once each is enough. Everything else here is the fuller way the Prophet ﷺ did it.',
           {
             sources: [quran(5, 6, { surahName: "Al-Ma'idah" })],
             additionalExplanation:
-              'Schools differ over what else is strictly required beyond those four — the intention, keeping to the order, and washing without long pauses in between are each treated as a requirement in some schools and as a recommendation in others. Teaching the full method sidesteps the question entirely, which is why this guide does. Knowing the shorter version matters on the day you have half a bottle of water and a prayer to catch.',
+              'Schools differ over what else is strictly required beyond those four. The intention, keeping to the order, and washing without long pauses in between are each treated as a requirement in some schools and as a recommendation in others. Teaching the full method sidesteps the question entirely, which is why this guide does. Knowing the shorter version matters on the day you have half a bottle of water and a prayer to catch.',
           },
         ),
       ],

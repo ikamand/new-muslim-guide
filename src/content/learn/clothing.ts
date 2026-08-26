@@ -30,15 +30,15 @@ export const CLOTHING: Reference = {
     relatedContent: [ref('reference', 'halal-and-haram'), ref('reference', 'mosque')],
   },
   quickFacts: [
-    { label: 'The idea', value: 'Modesty — of dress, of look, of manner' },
-    { label: 'Applies to', value: 'Everyone — and it starts with how men behave' },
+    { label: 'The idea', value: 'Modesty of dress, of look, and of manner' },
+    { label: 'Applies to', value: 'Everyone, and it starts with how men behave' },
   ],
   sections: [
     {
       id: 'principle',
       heading: 'What is the idea behind it?',
       body:
-        'The Qur’an speaks about clothing as something given for covering and for adornment — both, not one at the expense of the other. Islam is not against looking good. The instructions that follow are about modesty in public, not about drabness.',
+        'The Qur’an speaks about clothing as something given for covering and for adornment: both, not one at the expense of the other. Islam is not against looking good. The instructions that follow are about modesty in public, not about drabness.',
       sources: [quran(7, 26, { surahName: 'Al-A`raf' })],
     },
     {
@@ -92,7 +92,7 @@ export const CLOTHING: Reference = {
             sources: [
               quran(24, 31, { surahName: 'An-Nur' }),
               scholarly({
-                work: 'Encyclopedia of Fiqh — Parts of the Body We Are Obliged to Cover',
+                work: 'Encyclopedia of Fiqh, Parts of the Body We Are Obliged to Cover',
                 author: 'Dorar al-Saniyyah',
                 url: 'https://dorar.net/en/feqhia/499',
               }),
@@ -109,12 +109,12 @@ export const CLOTHING: Reference = {
               }),
             ],
             additionalExplanation:
-              'This note used to weigh a majority against a minority, and that count does not hold in either direction — Dorar’s Encyclopedia of Fiqh calls covering the face the view of the majority of scholars, while summaries written from inside the Hanafi and Maliki schools present the opposite as the common position. So the schools are named below rather than counted. You will meet Muslims on both sides who are each following scholarship they trust, and the detail of any one school is worth hearing from someone qualified rather than reading in a summary.',
+              'This note used to weigh a majority against a minority, and that count does not hold in either direction. Dorar’s Encyclopedia of Fiqh calls covering the face the view of the majority of scholars, while summaries written from inside the Hanafi and Maliki schools present the opposite as the common position. So the schools are named below rather than counted. You will meet Muslims on both sides who are each following scholarship they trust, and the detail of any one school is worth hearing from someone qualified rather than reading in a summary.',
             positions: [
               {
                 school: 'Maliki',
                 position:
-                  'The face and hands are what ordinarily shows, so covering them is not required in itself — though the school still calls for covering where there is a real fear of harassment.',
+                  'The face and hands are what ordinarily shows, so covering them is not required in itself, though the school still calls for covering where there is a real fear of harassment.',
               },
               {
                 school: 'Hanafi',

@@ -28,15 +28,15 @@ export const SUNNAH: Reference = {
     relatedContent: [ref('reference', 'who-is-muhammad'), ref('reference', 'what-is-the-quran')],
   },
   quickFacts: [
-    { label: 'What it is', value: 'The Prophet’s ﷺ way — what he said, did, and approved of' },
-    { label: 'How', value: 'Hadith — reports carrying the chain that passed them down' },
+    { label: 'What it is', value: 'The Prophet’s ﷺ way: what he said, did, and approved of' },
+    { label: 'How', value: 'Hadith, reports carrying the chain that passed them down' },
   ],
   sections: [
     {
       id: 'what',
       heading: 'What does Sunnah mean?',
       body:
-        'Sunnah means a way or a path — specifically the way the Prophet ﷺ lived: what he said, what he did, and what he approved of in others. It reaches us through hadith, which are reports of those things recorded with the chain of people who passed each one down.',
+        'Sunnah means a way or a path, and specifically the way the Prophet ﷺ lived: what he said, what he did, and what he approved of in others. It reaches us through hadith, which are reports of those things recorded with the chain of people who passed each one down.',
     },
     {
       id: 'why',
@@ -50,7 +50,7 @@ export const SUNNAH: Reference = {
       id: 'authentic',
       heading: 'Are all hadith reliable?',
       body:
-        'Because hadith were transmitted by people, scholars spent centuries grading them — examining every chain and every narrator. Some are sound, some are weak, and some are forgeries. This is why the app names its sources: so you can check, rather than take its word.',
+        'Because hadith were transmitted by people, scholars spent centuries grading them, examining every chain and every narrator. Some are sound, some are weak, and some are forgeries. This is why the app names its sources: so you can check, rather than take its word.',
       notes: [
         note(
           'agreed',
@@ -62,7 +62,7 @@ export const SUNNAH: Reference = {
       id: 'everyday',
       heading: 'What does it look like day to day?',
       body:
-        'Much of it is small and human: not harming a neighbour, making a guest welcome, saying something good or staying quiet, eating with the right hand, a few words before sleeping. Following the Sunnah is not an extra layer of difficulty on top of the religion — a lot of it is simply how a decent person moves through a day.',
+        'Much of it is small and human: not harming a neighbour, making a guest welcome, saying something good or staying quiet, eating with the right hand, a few words before sleeping. Following the Sunnah is not an extra layer of difficulty on top of the religion. A lot of it is simply how a decent person moves through a day.',
       sources: [
         hadith('bukhari', '6018', {
           book: 78,

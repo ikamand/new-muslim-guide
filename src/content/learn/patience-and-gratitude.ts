@@ -38,21 +38,21 @@ export const PATIENCE_AND_GRATITUDE: Reference = {
       id: 'patience',
       heading: 'Does patience mean doing nothing?',
       body:
-        'Sabr means holding steady — carrying on doing the right thing while something is hard, rather than accepting whatever happens. The Qur’an pairs it with prayer as the two things to seek help through, which is a practical instruction more than a moral one: when it is bad, pray.',
+        'Sabr means holding steady: carrying on doing the right thing while something is hard, rather than accepting whatever happens. The Qur’an pairs it with prayer as the two things to seek help through, which is a practical instruction more than a moral one: when it is bad, pray.',
       sources: [quran(2, 153, { surahName: 'Al-Baqarah' })],
     },
     {
       id: 'gratitude',
       heading: 'What does gratitude actually mean?',
       body:
-        'The Qur’an says that if you are grateful, He will increase you. Much of gratitude in practice is simply naming things — which is why al-ḥamdu li-llāh is said constantly, over small things, out loud. It is a habit of attention rather than a feeling you wait for.',
+        'The Qur’an says that if you are grateful, He will increase you. Much of gratitude in practice is simply naming things, which is why al-ḥamdu li-llāh is said constantly, over small things, out loud. It is a habit of attention rather than a feeling you wait for.',
       sources: [quran(14, 7, { surahName: 'Ibrahim' })],
     },
     {
       id: 'converts',
       heading: 'What does this look like for me now?',
       body:
-        'The first year often costs something real — family who do not understand, friends who drift, a life that has to be rearranged. That difficulty is not a sign you chose wrongly, and it is exactly the situation the word sabr is for.',
+        'The first year often costs something real: family who do not understand, friends who drift, a life that has to be rearranged. That difficulty is not a sign you chose wrongly, and it is exactly the situation the word sabr is for.',
     },
   ],
 };

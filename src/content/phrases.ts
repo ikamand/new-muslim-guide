@@ -44,7 +44,7 @@ export const PHRASES: Phrase[] = [
     arabic: 'السَّلَامُ عَلَيْكُمْ',
     meaning: 'Peace be upon you.',
     when: 'The greeting, arriving or passing. Said to you before almost anything else.',
-    reply: 'Wa ʿalaykumu s-salām — and peace be upon you. Always answer it.',
+    reply: 'Wa ʿalaykumu s-salām, and peace be upon you. Always answer it.',
     // "Always answer it" is the one instruction on this screen, and it is the
     // Qur'an's: return the greeting, or better it.
     meta: {
@@ -62,7 +62,7 @@ export const PHRASES: Phrase[] = [
     arabic: 'جَزَاكَ اللَّهُ خَيْرًا',
     meaning: 'May Allah reward you with good.',
     when: 'Thank you. You will hear this far more often than the Arabic for “thanks”.',
-    reply: 'Wa iyyāk — and you.',
+    reply: 'Wa iyyāk, and you.',
   },
   {
     id: 'baraka',
@@ -70,28 +70,28 @@ export const PHRASES: Phrase[] = [
     arabic: 'بَارَكَ اللَّهُ فِيكَ',
     meaning: 'May Allah bless you.',
     when: 'Thanks, praise, or simply warmth towards you.',
-    reply: 'Wa fīka bāraka-llāh — and may He bless you.',
+    reply: 'Wa fīka bāraka-llāh, and may He bless you.',
   },
   {
     id: 'alhamdulillah',
     said: 'Al-ḥamdu li-llāh',
     arabic: 'الْحَمْدُ لِلَّهِ',
     meaning: 'All praise is for Allah.',
-    when: 'After good news, after eating, after sneezing — and as the normal answer to “how are you?”',
+    when: 'After good news, after eating, after sneezing, and as the normal answer to “how are you?”',
   },
   {
     id: 'inshaallah',
     said: 'In shāʾa-llāh',
     arabic: 'إِنْ شَاءَ اللَّهُ',
     meaning: 'If Allah wills.',
-    when: 'Attached to anything about the future. Not a soft no, whatever you may have been told — it is an acknowledgement that the future is not ours to promise.',
+    when: 'Attached to anything about the future. Not a soft no, whatever you may have been told. It is an acknowledgement that the future is not ours to promise.',
   },
   {
     id: 'mashaallah',
     said: 'Mā shāʾa-llāh',
     arabic: 'مَا شَاءَ اللَّهُ',
     meaning: 'What Allah has willed.',
-    when: 'Admiring something — a child, a new job, good news. Said so that admiration carries no envy with it.',
+    when: 'Admiring something: a child, a new job, good news. Said so that admiration carries no envy with it.',
   },
   {
     id: 'subhanallah',
@@ -132,7 +132,7 @@ export const PHRASES: Phrase[] = [
     said: 'Ṣalla-llāhu ʿalayhi wa sallam',
     arabic: 'صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ',
     meaning: 'May Allah’s prayers and peace be upon him.',
-    when: 'Said after the Prophet’s name. Written as ﷺ — that single character is this whole phrase.',
+    when: 'Said after the Prophet’s name. Written as ﷺ, and that single character is this whole phrase.',
   },
   {
     id: 'radiyallahu',

@@ -363,7 +363,7 @@ const handPlacementNote: ContentNote = note(
       },
     ],
     additionalExplanation:
-      'What Sahih al-Bukhari establishes is only that the right hand goes over the left forearm — the narration names no place on the body, and Ibn Qudamah records the folding itself as agreed by the majority. After that everyone is reading indirect evidence. The report naming the chest that Ibn `Uthaymin calls the best on the question is Wa\'il ibn Hujr\'s, and he judges the chest the most correct view even though the well-known position of his own school is below the navel; the narration usually quoted for below the navel, from `Ali, is graded weak by an-Nawawi and Ibn Hajar. Set against that, none of the four schools\' well-known positions puts a man\'s hands on the chest itself. So the honest summary is that no position here rests on an agreed, authentic, explicit narration, and that is exactly why the schools differ. Follow whichever you are taught locally; nobody holds that the prayer fails over it.',
+      'What Sahih al-Bukhari establishes is only that the right hand goes over the left forearm. The narration names no place on the body, and Ibn Qudamah records the folding itself as agreed by the majority. After that everyone is reading indirect evidence. The report naming the chest that Ibn `Uthaymin calls the best on the question is Wa\'il ibn Hujr\'s, and he judges the chest the most correct view even though the well-known position of his own school is below the navel; the narration usually quoted for below the navel, from `Ali, is graded weak by an-Nawawi and Ibn Hajar. Set against that, none of the four schools\' well-known positions puts a man\'s hands on the chest itself. So the honest summary is that no position here rests on an agreed, authentic, explicit narration, and that is exactly why the schools differ. Follow whichever you are taught locally; nobody holds that the prayer fails over it.',
   },
 );
 
@@ -374,7 +374,7 @@ const stillnessNote: ContentNote = note(
   {
     sources: [PRAYED_BADLY],
     additionalExplanation:
-      'He told him: bow until you are at rest bowing, then rise until you are standing straight, then prostrate until you are at rest prostrating, then sit until you are at rest sitting — and do that through the whole prayer. Speed is the most common fault in a new Muslim\'s prayer and the easiest to fix.',
+      'He told him: bow until you are at rest bowing, then rise until you are standing straight, then prostrate until you are at rest prostrating, then sit until you are at rest sitting, and do that through the whole prayer. Speed is the most common fault in a new Muslim\'s prayer and the easiest to fix.',
   },
 );
 
@@ -395,7 +395,7 @@ const finalSittingNote: ContentNote = note(
       {
         school: 'Hanbali',
         position:
-          'The same distinction, but only in a prayer that has two sittings — so Fajr keeps the ordinary sitting.',
+          'The same distinction, but only in a prayer that has two sittings, so Fajr keeps the ordinary sitting.',
       },
     ],
     additionalExplanation:
@@ -534,7 +534,7 @@ function rakahSteps(rakah: number, spec: PrayerSpec): Step[] {
         ? 'After Al-Fatiha, recite another short surah aloud. Al-Ikhlas is four verses and is where most people start:'
         : 'After Al-Fatiha, recite another short surah quietly. Al-Ikhlas is four verses and is where most people start:',
       saysSurah: 112,
-      note: 'This part is sunnah, not required. A prayer of Al-Fatiha alone is a complete prayer — so if you do not know one yet, carry on to the bow.',
+      note: 'This part is sunnah, not required. A prayer of Al-Fatiha alone is a complete prayer, so if you do not know one yet, carry on to the bow.',
       sources: [quran(112, [1, 4], { surahName: 'Al-Ikhlas' })],
     });
   }
@@ -566,7 +566,7 @@ function rakahSteps(rakah: number, spec: PrayerSpec): Step[] {
     title: 'Prostrate',
     posture: 'prostrating',
     instruction:
-      'Say the takbir and go down into prostration — forehead, nose, both palms, both knees and the toes of both feet touching the ground. Once settled, say:',
+      'Say the takbir and go down into prostration, with your forehead, nose, both palms, both knees and the toes of both feet touching the ground. Once settled, say:',
     says: Recitations.sujudTasbih,
     note: isFirst
       ? 'Keep your elbows off the ground and away from your sides, and your toes turned toward the qibla. The hands are not raised for this one.'
@@ -599,7 +599,7 @@ function rakahSteps(rakah: number, spec: PrayerSpec): Step[] {
       // between the prostrations, and it is the detail people ask about most.
       posture: 'tashahhud',
       instruction: sitsTawarruk
-        ? 'Say the takbir and sit again — this time slide your left foot across under you to the right and sit on the ground, right foot still upright. Rest your left hand on your left knee and your right hand on your right thigh, raise your right index finger, and say:'
+        ? 'Say the takbir and sit again. This time slide your left foot across under you to the right and sit on the ground, right foot still upright. Rest your left hand on your left knee and your right hand on your right thigh, raise your right index finger, and say:'
         : 'Say the takbir and sit as you did between the prostrations. Rest your left hand on your left knee and your right hand on your right thigh, raise your right index finger, and say:',
       says: Recitations.tashahhud,
       note: 'You will see the finger held still and you will see it moved. What the narration describes is the raising itself.',
@@ -621,7 +621,7 @@ function rakahSteps(rakah: number, spec: PrayerSpec): Step[] {
         instruction:
           'Still sitting, turn your face to the right until your cheek can be seen from behind you, and give the greeting.',
         says: Recitations.taslim,
-        note: 'You are greeting the people beside you, and the angels. Nobody minds if you are praying alone — you still turn.',
+        note: 'You are greeting the people beside you, and the angels. Nobody minds if you are praying alone. You still turn.',
       });
       step({
         key: 'taslim-left',
@@ -637,7 +637,7 @@ function rakahSteps(rakah: number, spec: PrayerSpec): Step[] {
           title: 'Then ask',
           posture: 'sitting',
           instruction:
-            'The prayer is finished. Still sitting, say the duʿa — and where it says “this matter”, name the thing you are deciding.',
+            'The prayer is finished. Still sitting, say the duʿa, and where it says “this matter”, name the thing you are deciding.',
           says: spec.closingDua,
           note: `That is ${spec.title} complete.`,
         });

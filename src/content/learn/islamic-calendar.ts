@@ -23,7 +23,7 @@ export const ISLAMIC_CALENDAR: Reference = {
     relatedContent: [ref('reference', 'ramadan'), ref('pillar', 'hajj')],
   },
   quickFacts: [
-    { label: 'The year', value: 'Twelve lunar months — about 11 days shorter than a solar year' },
+    { label: 'The year', value: 'Twelve lunar months, about 11 days shorter than a solar year' },
     { label: 'Why it moves', value: 'Ramadan and Hajj drift through the seasons over a lifetime' },
   ],
   sections: [
@@ -32,14 +32,14 @@ export const ISLAMIC_CALENDAR: Reference = {
       heading: 'Why does the date move every year?',
       promote: 'hero',
       body:
-        'Twelve months, each beginning with a new moon, making a year about eleven days shorter than the solar one. That is why Ramadan and the two Eids move earlier every year rather than falling on fixed dates — over a lifetime they pass through every season.',
+        'Twelve months, each beginning with a new moon, making a year about eleven days shorter than the solar one. That is why Ramadan and the two Eids move earlier every year rather than falling on fixed dates. Over a lifetime they pass through every season.',
       sources: [quran(9, 36, { surahName: 'At-Tawbah' })],
     },
     {
       id: 'sacred',
       heading: 'What are the sacred months?',
       body:
-        'The Qur’an says four of the twelve are sacred, and the Prophet ﷺ named them in his farewell sermon: three consecutive — Dhul-Qaʿdah, Dhul-Hijjah and Muharram — and Rajab. Fighting is prohibited in them, and wrongdoing in them is treated as more serious.',
+        'The Qur’an says four of the twelve are sacred, and the Prophet ﷺ named them in his farewell sermon: three consecutive ones, Dhul-Qaʿdah, Dhul-Hijjah and Muharram, and Rajab. Fighting is prohibited in them, and wrongdoing in them is treated as more serious.',
       sources: [
         quran(9, 36, { surahName: 'At-Tawbah' }),
         // Was Bukhari 3197, which carries the same words but is filed under
@@ -57,7 +57,7 @@ export const ISLAMIC_CALENDAR: Reference = {
       id: 'landmarks',
       heading: 'What do I actually need to know?',
       body:
-        'Ramadan is the month of fasting and ends with Eid al-Fitr. Dhul-Hijjah is the month of Hajj, and its tenth day is Eid al-Adha, the second of the two Eids — marked by those not on pilgrimage as well. Muharram opens the year.',
+        'Ramadan is the month of fasting and ends with Eid al-Fitr. Dhul-Hijjah is the month of Hajj, and its tenth day is Eid al-Adha, the second of the two Eids, marked by those not on pilgrimage as well. Muharram opens the year.',
     },
     {
       id: 'practical',

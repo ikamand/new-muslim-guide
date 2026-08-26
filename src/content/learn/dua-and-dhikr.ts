@@ -17,8 +17,8 @@ export const DUA_AND_DHIKR: Reference = {
     relatedContent: [ref('dua', 'wake'), ref('reference', 'what-is-the-quran')],
   },
   quickFacts: [
-    { label: 'Duʿa', value: 'Asking — in any language, in your own words' },
-    { label: 'Dhikr', value: 'Remembering — short phrases, repeated' },
+    { label: 'Duʿa', value: 'Asking, in any language and in your own words' },
+    { label: 'Dhikr', value: 'Remembering, in short phrases, repeated' },
     { label: 'Where to start', value: 'The duʿas of an ordinary day', href: '/duas' },
   ],
   sections: [
@@ -26,7 +26,7 @@ export const DUA_AND_DHIKR: Reference = {
       id: 'dua',
       heading: 'What is duʿa?',
       body:
-        'Duʿa is simply asking God for something. It has no set form, no required language and no appointed time — the Qur’an says He is near and answers the one who calls. You can make duʿa in English, in your own words, in the car, and it is the same duʿa.',
+        'Duʿa is simply asking God for something. It has no set form, no required language and no appointed time. The Qur’an says He is near and answers the one who calls. You can make duʿa in English, in your own words, in the car, and it is the same duʿa.',
       sources: [quran(2, 186, { surahName: 'Al-Baqarah' })],
       notes: [
         note(
@@ -39,7 +39,7 @@ export const DUA_AND_DHIKR: Reference = {
       id: 'dhikr',
       heading: 'What is dhikr?',
       body:
-        'Dhikr means remembrance — short phrases repeated through the day. Subḥān Allāh (glory be to God), al-ḥamdu li-llāh (all praise is God’s), Allāhu akbar (God is greatest). The Qur’an says hearts settle by the remembrance of God, and that is closer to what it does than anything a description manages.',
+        'Dhikr means remembrance: short phrases repeated through the day. Subḥān Allāh (glory be to God), al-ḥamdu li-llāh (all praise is God’s), Allāhu akbar (God is greatest). The Qur’an says hearts settle by the remembrance of God, and that is closer to what it does than anything a description manages.',
       sources: [quran(13, 28, { surahName: 'Ar-Ra`d' })],
     },
     {
@@ -65,7 +65,7 @@ export const DUA_AND_DHIKR: Reference = {
       id: 'start',
       heading: 'Where do I start?',
       body:
-        'Pick one phrase and one moment — waking, or the walk to work. The Everyday duʿas screen has short ones with the Arabic, how it sounds and what it means. The shortest is a single word, which is a deliberate place to begin rather than a compromise.',
+        'Pick one phrase and one moment, such as waking or the walk to work. The Everyday duʿas screen has short ones with the Arabic, how it sounds and what it means. The shortest is a single word, which is a deliberate place to begin rather than a compromise.',
     },
   ],
 };

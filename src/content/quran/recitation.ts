@@ -81,7 +81,7 @@ export const RECITERS: readonly Reciter[] = [
   {
     id: 'husary-muallim',
     folder: 'Husary_Muallim_128kbps',
-    name: 'Mahmoud Khalil Al-Husary — teaching',
+    name: 'Mahmoud Khalil Al-Husary, teaching',
     blurb: 'Slow, one phrase at a time. Recorded for learners to repeat after, and the best place to start.',
     source: SOURCES.husary,
   },

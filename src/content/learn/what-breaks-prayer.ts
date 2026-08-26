@@ -43,7 +43,7 @@ export const WHAT_BREAKS_PRAYER: Reference = {
       id: 'breaks',
       heading: 'What actually breaks it?',
       body:
-        'Losing your wudu. Speaking on purpose to someone. Eating or drinking. Laughing out loud. Turning your body right away from the qibla, or deciding to stop. If one of these happens, put it right and pray it again from the beginning — but read the rest of this page first, because almost every one of them has an exception, and most of what a beginner worries about is on the other list.',
+        'Losing your wudu. Speaking on purpose to someone. Eating or drinking. Laughing out loud. Turning your body right away from the qibla, or deciding to stop. If one of these happens, put it right and pray it again from the beginning. But read the rest of this page first, because almost every one of them has an exception, and most of what a beginner worries about is on the other list.',
       sources: [
         hadith('bukhari', '135', {
           book: 4,
@@ -76,7 +76,7 @@ export const WHAT_BREAKS_PRAYER: Reference = {
               // For the second half of the explanation — that three schools
               // leave the wudu standing and one does not.
               scholarly({
-                work: 'Encyclopedia of Fiqh — Nullifiers of Ablution',
+                work: 'Encyclopedia of Fiqh, Nullifiers of Ablution',
                 author: 'Dorar al-Saniyyah',
                 url: 'https://dorar.net/en/feqhia/44',
               }),
@@ -93,7 +93,7 @@ export const WHAT_BREAKS_PRAYER: Reference = {
       // 1,431 characters. Full-bleed, that is a wall rather than an answer.
       promote: 'supporting',
       body:
-        'A companion said "Allah have mercy on you" to a man who sneezed mid-prayer, not knowing he could not. Afterwards the Prophet ﷺ taught him — without scolding him, and by his own account better than anyone had ever taught him anything — that this prayer is not the place for ordinary speech. He was not told to pray it again. Deliberate speech ends the prayer; speech before you knew the rule, or in a moment of forgetfulness, does not.',
+        'A companion said "Allah have mercy on you" to a man who sneezed mid-prayer, not knowing he could not. Afterwards the Prophet ﷺ taught him, without scolding him and by his own account better than anyone had ever taught him anything, that this prayer is not the place for ordinary speech. He was not told to pray it again. Deliberate speech ends the prayer; speech before you knew the rule, or in a moment of forgetfulness, does not.',
       sources: [
         hadith('muslim', '537a', {
           book: 5,
@@ -124,7 +124,7 @@ export const WHAT_BREAKS_PRAYER: Reference = {
               }),
             ],
             additionalExplanation:
-              'Zayd ibn Arqam: "we used to speak while praying, and one of us would tell his companion what he needed, until the verse was revealed and we were ordered to be silent." Ibn Mas`ud used to greet the Prophet ﷺ mid-prayer and be answered, and returned from Abyssinia to find that he was not — "there is occupation enough in the prayer".',
+              'Zayd ibn Arqam: "we used to speak while praying, and one of us would tell his companion what he needed, until the verse was revealed and we were ordered to be silent." Ibn Mas`ud used to greet the Prophet ﷺ mid-prayer and be answered, and returned from Abyssinia to find that he was not: "there is occupation enough in the prayer".',
           },
         ),
       ],
@@ -133,7 +133,7 @@ export const WHAT_BREAKS_PRAYER: Reference = {
       id: 'qibla',
       heading: 'What if I am facing the wrong way?',
       body:
-        'This one is narrower than it sounds. What ends the prayer is turning your whole body away from the qibla with no reason to. Getting the direction wrong — in a hotel room, on a plane, in a city you do not know — does not, as long as you worked it out as best you could. If you find out afterwards that you were off, the prayer stands.',
+        'This one is narrower than it sounds. What ends the prayer is turning your whole body away from the qibla with no reason to. Getting the direction wrong, in a hotel room or on a plane or in a city you do not know, does not, as long as you worked it out as best you could. If you find out afterwards that you were off, the prayer stands.',
       sources: [
         quran(2, 144, { surahName: 'Al-Baqarah' }),
         hadith('bukhari', '403', {
@@ -155,7 +155,7 @@ export const WHAT_BREAKS_PRAYER: Reference = {
               }),
             ],
             additionalExplanation:
-              'The people of Quba were praying facing Jerusalem when someone arrived to say the direction had been changed to the Ka`bah that night — so they turned mid-prayer and carried on. Bukhari puts the narration under a chapter heading that includes those who held there is no need to repeat a prayer offered by mistake in the wrong direction.',
+              'The people of Quba were praying facing Jerusalem when someone arrived to say the direction had been changed to the Ka`bah that night, so they turned mid-prayer and carried on. Bukhari puts the narration under a chapter heading that includes those who held there is no need to repeat a prayer offered by mistake in the wrong direction.',
           },
         ),
       ],
@@ -164,7 +164,7 @@ export const WHAT_BREAKS_PRAYER: Reference = {
       id: 'moving',
       heading: 'Can I move at all?',
       body:
-        'Scratching, shifting your weight, stepping forward to close a gap, picking up a child — none of this ends the prayer. What is meant by movement breaking it is a lot of it, continuously, for no reason connected to praying. The Prophet ﷺ prayed while carrying his granddaughter, putting her down to prostrate and picking her back up.',
+        'Scratching, shifting your weight, stepping forward to close a gap, picking up a child: none of this ends the prayer. What is meant by movement breaking it is a lot of it, continuously, for no reason connected to praying. The Prophet ﷺ prayed while carrying his granddaughter, putting her down to prostrate and picking her back up.',
       sources: [
         hadith('bukhari', '516', {
           book: 8,
@@ -210,7 +210,7 @@ export const WHAT_BREAKS_PRAYER: Reference = {
       id: 'mistakes',
       heading: 'What about ordinary mistakes?',
       body:
-        'Losing count, forgetting a sitting, adding a movement, saying something in the wrong place — none of these break the prayer. They are fixed with two extra prostrations at the end, which the app covers separately. A beginner will do all of these, and none of them is a disaster.',
+        'Losing count, forgetting a sitting, adding a movement, saying something in the wrong place: none of these break the prayer. They are fixed with two extra prostrations at the end, which the app covers separately. A beginner will do all of these, and none of them is a disaster.',
       notes: [
         note(
           'practical',

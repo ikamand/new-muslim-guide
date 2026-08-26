@@ -40,7 +40,7 @@ export const TAYAMMUM: Guide = {
       title: 'When you can use it',
       instruction:
         'Tayammum replaces wudu, and replaces ghusl, when there is no water you can reach, when using it would make you ill or make an illness worse, or when the only water available is needed for drinking.',
-      note: 'It is not for when water is merely inconvenient. But it is genuinely allowed when it applies — people miss prayers they were permitted to pray.',
+      note: 'It is not for when water is merely inconvenient. But it is genuinely allowed when it applies, and people miss prayers they were permitted to pray.',
       sources: [quran(5, 6, { surahName: "Al-Ma'idah" })],
     },
     {
@@ -53,7 +53,7 @@ export const TAYAMMUM: Guide = {
       id: 'strike',
       title: 'Touch the ground',
       instruction:
-        'Place both palms flat on a clean natural surface — earth, sand, stone, or dust settled on something. Lift them and shake off any excess.',
+        'Place both palms flat on a clean natural surface: earth, sand, stone, or dust settled on something. Lift them and shake off any excess.',
       note: 'It does not have to be soil. A dusty windowsill or a stone wall will do.',
     },
     {
@@ -84,7 +84,7 @@ export const TAYAMMUM: Guide = {
               }),
             ],
             additionalExplanation:
-              'In the narration the Prophet ﷺ struck the earth once, blew the dust off, and wiped the face and the backs of the hands — the two wordings Bukhari carries put those in either order, which is why you will see both taught. This guide follows the order of the wudu verse: face, then hands. Schools that teach wiping to the elbows argue from other narrations and from that same verse. Nobody will think you have prayed invalidly either way.',
+              'In the narration the Prophet ﷺ struck the earth once, blew the dust off, and wiped the face and the backs of the hands. The two wordings Bukhari carries put those in either order, which is why you will see both taught. This guide follows the order of the wudu verse: face, then hands. Schools that teach wiping to the elbows argue from other narrations and from that same verse. Nobody will think you have prayed invalidly either way.',
           },
         ),
       ],

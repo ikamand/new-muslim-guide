@@ -47,7 +47,7 @@ export const FAMILY: Reference = {
       id: 'non-muslim-parents',
       heading: 'What if my parents are not Muslim?',
       body:
-        'This changes nothing about how you treat them. The Qur’an addresses exactly this: even where parents press their child to abandon belief in God alone, the instruction is not to obey them in that — and in the same breath, to keep their company in this world with kindness. Both halves are the instruction.',
+        'This changes nothing about how you treat them. The Qur’an addresses exactly this: even where parents press their child to abandon belief in God alone, the instruction is not to obey them in that, and in the same breath to keep their company in this world with kindness. Both halves are the instruction.',
       sources: [quran(31, 15, { surahName: 'Luqman' })],
       notes: [
         note(
@@ -73,7 +73,7 @@ export const FAMILY: Reference = {
       id: 'marriage',
       heading: 'What about marriage?',
       body:
-        'The Qur’an describes marriage as a place of tranquillity, affection and mercy — that is the standard being aimed at. The Prophet ﷺ said the best of you is the best to his family, and he said it about himself first.',
+        'The Qur’an describes marriage as a place of tranquillity, affection and mercy. That is the standard being aimed at. The Prophet ﷺ said the best of you is the best to his family, and he said it about himself first.',
       sources: [
         quran(30, 21, { surahName: 'Ar-Rum' }),
         hadith('tirmidhi', '3895', {
@@ -87,7 +87,7 @@ export const FAMILY: Reference = {
       notes: [
         note(
           'practical',
-          'Who you may marry, and what a valid marriage requires, has real detail to it and depends on your circumstances. Scholars have discussed this in more detail — this is a question to take to someone locally rather than settle from a page.',
+          'Who you may marry, and what a valid marriage requires, has real detail to it and depends on your circumstances. Scholars have discussed this in more detail, and it is a question to take to someone locally rather than settle from a page.',
         ),
       ],
     },

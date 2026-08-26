@@ -24,14 +24,14 @@ export const HALAL_AND_HARAM: Reference = {
   },
   quickFacts: [
     { label: 'The words', value: 'Halal is permitted. Haram is forbidden' },
-    { label: 'The default', value: 'Yes — permitted unless there is a clear reason not', emphasis: true },
+    { label: 'The default', value: 'Yes, permitted unless there is a clear reason not', emphasis: true },
   ],
   sections: [
     {
       id: 'words',
       heading: 'What do halal and haram mean?',
       body:
-        'Halal means permitted. Haram means forbidden. They apply to everything, not just food — how you earn money, how you speak about people, what you wear. Most of life is halal and always was; the forbidden list is short.',
+        'Halal means permitted. Haram means forbidden. They apply to everything, not just food: how you earn money, how you speak about people, what you wear. Most of life is halal and always was; the forbidden list is short.',
     },
     {
       id: 'default',
@@ -67,7 +67,7 @@ export const HALAL_AND_HARAM: Reference = {
       id: 'asking',
       heading: 'What if I am not sure?',
       body:
-        'Ask someone qualified, and ask about your actual situation rather than the general case — circumstances change answers. You will also meet Muslims who are certain of opposite answers on the same question. That usually means it is a genuine point of scholarly difference rather than that one of them is lying to you.',
+        'Ask someone qualified, and ask about your actual situation rather than the general case, because circumstances change answers. You will also meet Muslims who are certain of opposite answers on the same question. That usually means it is a genuine point of scholarly difference rather than that one of them is lying to you.',
     },
   ],
 };

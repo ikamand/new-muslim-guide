@@ -27,7 +27,7 @@ export const WHAT_IS_ISLAM: Reference = {
   },
   quickFacts: [
     { label: 'The word', value: 'Submission to God, and the peace that comes with it' },
-    { label: 'Stands on', value: 'Five things — shahada, prayer, zakat, fasting, hajj' },
+    { label: 'Stands on', value: 'Five things: shahada, prayer, zakat, fasting, hajj' },
   ],
   sections: [
     {
@@ -36,14 +36,14 @@ export const WHAT_IS_ISLAM: Reference = {
       // 3:19 answers the page's own title, which is what a hero is for.
       promote: 'hero',
       body:
-        'Islam is an Arabic word meaning submission — giving yourself over to God. A Muslim is someone who does that. It comes from the same root as salam, peace, and the two ideas sit together: peace through no longer being pulled in every direction at once.',
+        'Islam is an Arabic word meaning submission, giving yourself over to God. A Muslim is someone who does that. It comes from the same root as salam, peace, and the two ideas sit together: peace through no longer being pulled in every direction at once.',
       sources: [quran(3, 19, { surahName: 'Al-Imran' }), quran(51, 56, { surahName: 'Adh-Dhariyat' })],
     },
     {
       id: 'one-god',
       heading: 'What is at the centre of it?',
       body:
-        'Everything else rests on this. Islam teaches that there is one God — Allah, the Arabic word for God, used by Arabic-speaking Christians and Jews too — and that worship belongs to Him alone, with nothing and no one sharing it. Saying and meaning that is what makes a person Muslim.',
+        'Everything else rests on this. Islam teaches that there is one God, Allah, the Arabic word for God used by Arabic-speaking Christians and Jews too, and that worship belongs to Him alone, with nothing and no one sharing it. Saying and meaning that is what makes a person Muslim.',
       notes: [
         note(
           'agreed',
@@ -56,7 +56,7 @@ export const WHAT_IS_ISLAM: Reference = {
       id: 'five',
       heading: 'What does it ask of me?',
       body:
-        'The testimony of faith, the five daily prayers, zakat — a yearly share of savings given to those entitled to it — fasting in Ramadan, and the pilgrimage to Mecca once in a lifetime for anyone able to make it. The Prophet ﷺ described Islam as built on these five.',
+        'The testimony of faith, the five daily prayers, zakat, a yearly share of savings given to those entitled to it, fasting in Ramadan, and the pilgrimage to Mecca once in a lifetime for anyone able to make it. The Prophet ﷺ described Islam as built on these five.',
       sources: [
         hadith('bukhari', '8', {
           book: 2,
@@ -87,7 +87,7 @@ export const WHAT_IS_ISLAM: Reference = {
       id: 'manageable',
       heading: 'Is it meant to be this hard?',
       body:
-        'You are not behind. The Prophet ﷺ said the religion is easy, and that whoever overburdens themselves in it will not keep it up — so take the next thing, not all of it. The Qur’an says God does not ask of anyone more than they can bear.',
+        'You are not behind. The Prophet ﷺ said the religion is easy, and that whoever overburdens themselves in it will not keep it up, so take the next thing rather than all of it. The Qur’an says God does not ask of anyone more than they can bear.',
       sources: [
         hadith('bukhari', '39', {
           book: 2,

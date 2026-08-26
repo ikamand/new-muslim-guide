@@ -59,17 +59,17 @@ export const TAHAJJUD: Reference = {
       heading: 'How little counts?',
       promote: 'supporting',
       body:
-        'There is no minimum to reach and no number to work up to. Two rakʿahs, on one night, is the thing itself. People who pray it for decades mostly pray a little, often — which is the pattern the Prophet ﷺ described as the deeds God loves most, the small ones kept up.',
+        'There is no minimum to reach and no number to work up to. Two rakʿahs, on one night, is the thing itself. People who pray it for decades mostly pray a little, often, which is the pattern the Prophet ﷺ described as the deeds God loves most, the small ones kept up.',
       sources: [
         hadith('muslim', '783', { grading: 'sahih', role: 'virtue' }),
       ],
-      note: 'It is the same prayer you already know. Nothing about the movements or the words changes — only the time, and that you chose to be there.',
+      note: 'It is the same prayer you already know. Nothing about the movements or the words changes. Only the time, and that you chose to be there.',
     },
     {
       id: 'sleep',
       heading: 'What if I have not slept?',
       body:
-        'Tahajjud is prayed after waking, which is what separates it from simply staying up late. If you have not slept, you are praying qiyam al-layl — also good, also voluntary, and not what this word means.',
+        'Tahajjud is prayed after waking, which is what separates it from simply staying up late. If you have not slept, you are praying qiyam al-layl, which is also good, also voluntary, and not what this word means.',
       sources: [general('The distinction is in the word itself: tahajjud is from a root meaning to give up sleep, so there has to be sleep to give up.')],
     },
     {
@@ -120,7 +120,7 @@ export const ISTIKHARA: Reference = {
         thousand characters of narration and once as the thing to recite.
       */
       body:
-        'Two rakʿahs and a duʿa, prayed when you have a decision to make. Jabir reported that the Prophet ﷺ taught it for every matter the way he taught a surah of the Qur’an — which tells you how ordinary it was meant to be, and how often.',
+        'Two rakʿahs and a duʿa, prayed when you have a decision to make. Jabir reported that the Prophet ﷺ taught it for every matter the way he taught a surah of the Qur’an, which tells you how ordinary it was meant to be, and how often.',
       sources: [
         hadeethEnc('bukhari', '3293', { grading: 'sahih', role: 'practice' }),
       ],
@@ -147,7 +147,7 @@ export const ISTIKHARA: Reference = {
       id: 'when',
       heading: 'What can I ask about?',
       body:
-        'Any time except the times when prayer is held off, and about anything you genuinely have a choice in — a job, a move, a marriage, something smaller. Not about whether to do something already settled as right or wrong; there is nothing to ask about there.',
+        'Any time except the times when prayer is held off, and about anything you genuinely have a choice in: a job, a move, a marriage, something smaller. Not about whether to do something already settled as right or wrong; there is nothing to ask about there.',
       sources: [general('Ordinary explanation of scope, following from what the duʿa asks.')],
     },
   ],
@@ -175,7 +175,7 @@ export const TAWBA_PRAYER: Reference = {
   quickFacts: [
     { label: 'When', value: 'After a sin, whenever you want' },
     { label: 'How many', value: 'Two rakʿahs' },
-    { label: 'Do I have to?', value: 'No — repentance does not need it', emphasis: true },
+    { label: 'Do I have to?', value: 'No, repentance does not need it', emphasis: true },
     { label: 'How', value: 'Pray two rakʿahs', href: '/guide/tawba' },
   ],
   sections: [
@@ -193,9 +193,9 @@ export const TAWBA_PRAYER: Reference = {
       id: 'not-required',
       heading: 'Do I have to pray it to be forgiven?',
       body:
-        'You are forgiven by turning back to God and meaning it — there is no ceremony and nothing to perform. This prayer is something you may do, not a step you have missed. It exists because doing something with your body often helps when saying it in your head does not.',
+        'You are forgiven by turning back to God and meaning it. There is no ceremony and nothing to perform. This prayer is something you may do, not a step you have missed. It exists because doing something with your body often helps when saying it in your head does not.',
       sources: [quran(39, 53, { surahName: 'Az-Zumar' })],
-      note: 'There is no limit, and no shame in praying it often. Somebody who prays it twice in a week has not failed twice — they have turned back twice.',
+      note: 'There is no limit, and no shame in praying it often. Somebody who prays it twice in a week has not failed twice. They have turned back twice.',
     },
   ],
 };
@@ -227,7 +227,7 @@ export const QIYAM_AL_LAYL: Reference = {
   quickFacts: [
     { label: 'When', value: 'Any part of the night, before you sleep' },
     { label: 'How many', value: 'Two at a time, as many as you want' },
-    { label: 'Do I have to?', value: 'No — none of the night prayer is owed', emphasis: true },
+    { label: 'Do I have to?', value: 'No, none of the night prayer is owed', emphasis: true },
     { label: 'How', value: 'Pray two rakʿahs', href: '/guide/qiyam' },
   ],
   sections: [
@@ -236,7 +236,7 @@ export const QIYAM_AL_LAYL: Reference = {
       heading: 'What is qiyam al-layl?',
       promote: 'hero',
       body:
-        'Praying at night, before you have slept. Any amount, any part of the night after Isha. It is the same prayer you already know — two rakʿahs at a time, as many times as you want.',
+        'Praying at night, before you have slept. Any amount, any part of the night after Isha. It is the same prayer you already know: two rakʿahs at a time, as many times as you want.',
       sources: [hadith('muslim', '749', { grading: 'sahih', role: 'practice' })],
     },
     {
@@ -257,7 +257,7 @@ export const QIYAM_AL_LAYL: Reference = {
       id: 'close',
       heading: 'How do I finish?',
       body:
-        'Whatever you pray at night, end it with witr — a single rakʿah that makes the night’s total odd. It is what closes the night prayer.',
+        'Whatever you pray at night, end it with witr, a single rakʿah that makes the night’s total odd. It is what closes the night prayer.',
       sources: [hadith('bukhari', '990', { grading: 'sahih', role: 'practice' })],
     },
   ],
@@ -308,10 +308,10 @@ export const WITR: Reference = {
   */
   quickFacts: [
     { label: 'When', value: 'After Isha, any time until dawn' },
-    { label: 'How many', value: 'One, three or five — any odd number. One is enough' },
+    { label: 'How many', value: 'One, three or five. Any odd number, and one is enough' },
     {
       label: 'Do I have to?',
-      value: 'No — but it is how the night prayer is closed',
+      value: 'No, but it is how the night prayer is closed',
       emphasis: true,
     },
     { label: 'How', value: 'Pray one rakʿah', href: '/guide/witr' },
@@ -320,7 +320,7 @@ export const WITR: Reference = {
     {
       id: 'what',
       heading: 'Why an odd number?',
-      body: 'Because that is what the word means — and it is what you finish the night on.',
+      body: 'Because that is what the word means, and it is what you finish the night on.',
       // The page's answer, printed rather than filed.
       promote: 'hero',
       sources: [hadith('muslim', '752', { grading: 'sahih', role: 'practice' })],
@@ -329,7 +329,7 @@ export const WITR: Reference = {
       id: 'how-many',
       heading: 'Is one really enough?',
       body:
-        'Yes. The Prophet ﷺ named five, three and one, and left the choice to the person praying — so one is a complete witr, not a shortened version of something else. Most people pray three, and you will see that around you.',
+        'Yes. The Prophet ﷺ named five, three and one, and left the choice to the person praying, so one is a complete witr rather than a shortened version of something else. Most people pray three, and you will see that around you.',
       promote: 'supporting',
       sources: [hadith('abu-dawud', '1422', { grading: 'sahih', role: 'practice' })],
       note: 'Start with one. It is the whole prayer, it takes a minute, and it is the version you are least likely to get wrong while you are learning.',
@@ -338,7 +338,7 @@ export const WITR: Reference = {
       id: 'when',
       heading: 'What if I sleep through it?',
       body:
-        'Pray it before you go to bed. Leaving it to the end of the night is better, but only if you are actually going to be awake — and it is meant to be the last thing you pray, not the thing you missed.',
+        'Pray it before you go to bed. Leaving it to the end of the night is better, but only if you are actually going to be awake. It is meant to be the last thing you pray, not the thing you missed.',
       sources: [hadith('bukhari', '990', { grading: 'sahih', role: 'practice' })],
     },
   ],

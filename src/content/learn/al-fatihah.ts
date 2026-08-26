@@ -27,7 +27,7 @@ export const AL_FATIHAH: Reference = {
   quickFacts: [
     { label: 'How long', value: 'Seven short verses' },
     { label: 'How often', value: 'Every rakʿah of every prayer, for life' },
-    { label: 'Do I have to?', value: 'Yes — there is no prayer without it', emphasis: true },
+    { label: 'Do I have to?', value: 'Yes, there is no prayer without it', emphasis: true },
     { label: 'How', value: 'Learn it a verse at a time', href: '/surah/1' },
   ],
   sections: [
@@ -35,7 +35,7 @@ export const AL_FATIHAH: Reference = {
       id: 'what',
       heading: 'What is Al-Fatihah?',
       body:
-        'The opening chapter of the Qur’an — seven short verses. Its name means "The Opening". It is the most repeated passage in the world: every Muslim says it in every unit of every prayer, which for most people is seventeen times a day.',
+        'The opening chapter of the Qur’an, seven short verses. Its name means "The Opening". It is the most repeated passage in the world: every Muslim says it in every unit of every prayer, which for most people is seventeen times a day.',
       sources: [quran(1, [1, 7], { surahName: 'Al-Fatihah' })],
     },
     {
@@ -56,14 +56,14 @@ export const AL_FATIHAH: Reference = {
       id: 'meaning',
       heading: 'What am I actually saying?',
       body:
-        'It opens by praising God as the Lord of everything and the source of mercy, then turns and speaks to Him directly: You alone we worship, and You alone we ask for help. The rest is a request — guide us along the straight path. It is a prayer for guidance, said before anything else is asked for.',
+        'It opens by praising God as the Lord of everything and the source of mercy, then turns and speaks to Him directly: You alone we worship, and You alone we ask for help. The rest is a request: guide us along the straight path. It is a prayer for guidance, said before anything else is asked for.',
       sources: [quran(1, [1, 7], { surahName: 'Al-Fatihah' })],
     },
     {
       id: 'learning',
       heading: 'How do I learn it?',
       body:
-        'Take one verse at a time, listening and repeating rather than reading. The Practice screen has all seven with a recording against each, and a repeat button — play a line, say it with the reciter, and move on when it holds. Most people need days, not minutes.',
+        'Take one verse at a time, listening and repeating rather than reading. The Practice screen has all seven with a recording against each, and a repeat button. Play a line, say it with the reciter, and move on when it holds. Most people need days, not minutes.',
       notes: [
         note(
           'practical',

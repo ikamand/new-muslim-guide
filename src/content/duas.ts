@@ -164,7 +164,7 @@ export const DUAS: Dua[] = [
             }),
           ],
           additionalExplanation:
-            'There is no narration about the bathroom itself. What there is instead is `Aisha’s report that the Prophet ﷺ liked to start on the right in everything — his sandals, his hair, his wudu — and scholars read the bathroom as the one place that runs the other way. Khalil ibn Ishaq states it for the Maliki school, and IslamWeb, quoting him, says plainly that there is no specific evidence for it and that it rests on `Aisha’s general statement. Worth doing; not worth worrying about if you forget.',
+            'There is no narration about the bathroom itself. What there is instead is `Aisha’s report that the Prophet ﷺ liked to start on the right in everything, his sandals, his hair and his wudu, and scholars read the bathroom as the one place that runs the other way. Khalil ibn Ishaq states it for the Maliki school, and IslamWeb, quoting him, says plainly that there is no specific evidence for it and that it rests on `Aisha’s general statement. Worth doing; not worth worrying about if you forget.',
         }),
       ],
     },
@@ -186,7 +186,7 @@ export const DUAS: Dua[] = [
      * loses the thing that is actually taught: remembering mid-meal changes
      * the wording rather than just the timing.
      */
-    note: 'If you forget and remember partway through, the taught wording changes: bismi-llāhi fī awwalihi wa ākhirih — in the name of Allah, at its beginning and its end.',
+    note: 'If you forget and remember partway through, the taught wording changes: bismi-llāhi fī awwalihi wa ākhirih, meaning in the name of Allah, at its beginning and its end.',
     meta: {
       category: 'daily-life',
       difficulty: 'foundational',

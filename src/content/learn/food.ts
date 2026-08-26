@@ -57,7 +57,7 @@ export const FOOD: Reference = {
       label: 'What changes',
       value: 'Pork, blood, alcohol, and meat that was not slaughtered',
     },
-    { label: 'Do I have to?', value: 'Yes — this one is not optional', emphasis: true },
+    { label: 'Do I have to?', value: 'Yes, this one is not optional', emphasis: true },
   ],
   sections: [
     {
@@ -71,11 +71,11 @@ export const FOOD: Reference = {
       */
       promote: 'hero',
       bullets: [
-        '**Pork** — and anything from it: lard, gelatine, some animal fats.',
-        '**Blood** — flowing or congealed, as an ingredient.',
-        '**Meat not slaughtered** — an animal that died on its own, or was strangled or electrocuted.',
-        '**Dedicated to other than God** — killed in another name.',
-        '**Alcohol** — forbidden in its own verse, and it covers every intoxicant, not only drink.',
+        '**Pork**, and anything from it: lard, gelatine, some animal fats.',
+        '**Blood**, flowing or congealed, as an ingredient.',
+        '**Meat not slaughtered**: an animal that died on its own, or was strangled or electrocuted.',
+        '**Dedicated to other than God**, killed in another name.',
+        '**Alcohol**, forbidden in its own verse, and it covers every intoxicant, not only drink.',
       ],
       sources: [
         quran(2, 173, { surahName: 'Al-Baqarah' }),
@@ -89,7 +89,7 @@ export const FOOD: Reference = {
       body: 'Reading labels, for a few weeks. Then it is automatic.',
       bullets: [
         '**Watch for** gelatine, lard, some animal fats, and alcohol in sauces and extracts.',
-        '**Never in question** — vegetables, grains, fish, dairy, eggs, fruit.',
+        '**Never in question**: vegetables, grains, fish, dairy, eggs, fruit.',
       ],
     },
     {
@@ -117,7 +117,7 @@ export const FOOD: Reference = {
               }),
             ],
             additionalExplanation:
-              'The starting point is not in dispute. All four schools hold that meat slaughtered by Jews and Christians is lawful, and all four hold that an animal killed by strangling, electrocution or anything other than cutting the throat was not lawfully slaughtered at all. What people disagree about is whether a modern slaughterhouse still meets that second condition — stunning, mechanical blades and who is actually doing the slaughtering are all part of it. That makes it a question about how agreed rules apply today rather than a split between the schools, which is why this note names no school and counts nobody: some scholars hold the verse still covers ordinary supermarket meat, and others hold that industrial slaughter no longer resembles what it describes and restrict meat to what is certified. Buying certified halal meat satisfies every position, which is why most converts start there and settle the question later. Nobody is doing anything strange by taking the cautious route while they learn, and nobody is being lax by relying on the verse. The specifics are worth asking someone locally about rather than resolving from an article.',
+              'The starting point is not in dispute. All four schools hold that meat slaughtered by Jews and Christians is lawful, and all four hold that an animal killed by strangling, electrocution or anything other than cutting the throat was not lawfully slaughtered at all. What people disagree about is whether a modern slaughterhouse still meets that second condition. Stunning, mechanical blades and who is actually doing the slaughtering are all part of it. That makes it a question about how agreed rules apply today rather than a split between the schools, which is why this note names no school and counts nobody: some scholars hold the verse still covers ordinary supermarket meat, and others hold that industrial slaughter no longer resembles what it describes and restrict meat to what is certified. Buying certified halal meat satisfies every position, which is why most converts start there and settle the question later. Nobody is doing anything strange by taking the cautious route while they learn, and nobody is being lax by relying on the verse. The specifics are worth asking someone locally about rather than resolving from an article.',
           },
         ),
       ],

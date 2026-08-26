@@ -16,7 +16,7 @@ export const WHO_IS_MUHAMMAD: Reference = {
     relatedContent: [ref('reference', 'sunnah'), ref('reference', 'what-is-the-quran')],
   },
   quickFacts: [
-    { label: 'Who', value: 'A man, and the last of the prophets — not divine' },
+    { label: 'Who', value: 'A man, and the last of the prophets. Not divine' },
     { label: 'Why the ﷺ', value: 'A short prayer said after his name' },
   ],
   sections: [
@@ -25,7 +25,7 @@ export const WHO_IS_MUHAMMAD: Reference = {
       heading: 'Do Muslims worship him?',
       promote: 'hero',
       body:
-        'Muhammad ﷺ was born in Mecca around 570 CE and received the Qur’an over roughly twenty-three years. Muslims believe he is the last of a long line of prophets that includes Ibrahim, Musa and ʿIsa — Abraham, Moses and Jesus. He is not divine and is not worshipped. He delivered the message; the message is from God.',
+        'Muhammad ﷺ was born in Mecca around 570 CE and received the Qur’an over roughly twenty-three years. Muslims believe he is the last of a long line of prophets that includes Ibrahim, Musa and ʿIsa, or Abraham, Moses and Jesus. He is not divine and is not worshipped. He delivered the message; the message is from God.',
       sources: [quran(33, 40, { surahName: 'Al-Ahzab' })],
     },
     {
@@ -38,7 +38,7 @@ export const WHO_IS_MUHAMMAD: Reference = {
       id: 'character',
       heading: 'What was he like?',
       body:
-        'The Qur’an describes him as being of great character, and the people who lived with him described someone who never used foul or crude language and who taught that the best people are those with the best manners. Much of what Muslims try to imitate is not ritual at all — it is how he treated people.',
+        'The Qur’an describes him as being of great character, and the people who lived with him described someone who never used foul or crude language and who taught that the best people are those with the best manners. Much of what Muslims try to imitate is not ritual at all. It is how he treated people.',
       sources: [
         quran(68, 4, { surahName: 'Al-Qalam' }),
         hadith('bukhari', '3559', {

@@ -33,7 +33,7 @@ export const IMAN_PILLARS: Pillar[] = [
     transliteration: 'Al-īmān bi-llāh',
     summary: 'That Allah is one, without partner, and that nothing else deserves worship.',
     detail:
-      'The other five sit inside this one. It is not only accepting that God exists — it is accepting that He is one, that nothing shares His authority, and that worship is owed to Him alone. Everything you say in prayer is a restatement of it.',
+      'The other five sit inside this one. It is not only accepting that God exists. It is accepting that He is one, that nothing shares His authority, and that worship is owed to Him alone. Everything you say in prayer is a restatement of it.',
     guideId: 'fajr',
     meta: {
       category: 'belief',
@@ -100,7 +100,7 @@ export const IMAN_PILLARS: Pillar[] = [
     transliteration: 'Al-īmān bi-r-rusul',
     summary: 'That Allah sent prophets to every people, and that Muhammad ﷺ is the last of them.',
     detail:
-      'Many of them will already be familiar — Ibrahim, Musa, ʿIsa, and others shared with Judaism and Christianity. Islam honours them as men Allah sent, not as divine, and does not let you accept some and reject others. Muhammad ﷺ closes the line; no prophet comes after him.',
+      'Many of them will already be familiar: Ibrahim, Musa, ʿIsa, and others shared with Judaism and Christianity. Islam honours them as men Allah sent, not as divine, and does not let you accept some and reject others. Muhammad ﷺ closes the line; no prophet comes after him.',
     meta: {
       category: 'belief',
       difficulty: 'foundational',
@@ -122,7 +122,7 @@ export const IMAN_PILLARS: Pillar[] = [
     transliteration: 'Al-īmān bi-l-yawmi-l-ākhir',
     summary: 'That this life ends, everyone is raised, and each person answers for what they did.',
     detail:
-      'Nothing you do is lost or goes unweighed, including what nobody else ever saw. When the Day comes is known only to Allah — working out dates for it is not part of believing in it, and people who claim to have done so are to be ignored.',
+      'Nothing you do is lost or goes unweighed, including what nobody else ever saw. When the Day comes is known only to Allah. Working out dates for it is not part of believing in it, and people who claim to have done so are to be ignored.',
     meta: {
       category: 'belief',
       difficulty: 'foundational',
@@ -142,7 +142,7 @@ export const IMAN_PILLARS: Pillar[] = [
     title: 'Belief in divine decree',
     arabic: 'الْإِيمَانُ بِالْقَدَر',
     transliteration: 'Al-īmān bi-l-qadar',
-    summary: 'That nothing happens outside Allah’s knowledge and will — the good and the hard alike.',
+    summary: 'That nothing happens outside Allah’s knowledge and will, the good and the hard alike.',
     detail:
       'This is the one people find hardest, and it is usually misread as meaning your choices do not matter. It does not. You still choose, and you are still answerable for what you choose. Held rightly it settles you rather than paralyses you: you act as well as you can, and you are not crushed by the part of the outcome that was never yours to control.',
     note: 'If this one sits badly with you at first, that is normal and it is not a sign your faith is faulty. It is the article scholars have written the most about, precisely because it is difficult.',

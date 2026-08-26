@@ -26,7 +26,7 @@ export const MANNERS: Reference = {
       heading: 'Are manners really part of it?',
       promote: 'hero',
       body:
-        'Character sits at the centre rather than the edge. The Prophet ﷺ, described in the Qur’an as being of great character, taught that the best of people are those with the best manners — and the people who lived with him said he never used foul or crude language.',
+        'Character sits at the centre rather than the edge. The Prophet ﷺ, described in the Qur’an as being of great character, taught that the best of people are those with the best manners, and the people who lived with him said he never used foul or crude language.',
       sources: [
         quran(68, 4, { surahName: 'Al-Qalam' }),
         hadith('bukhari', '3559', {
@@ -40,7 +40,7 @@ export const MANNERS: Reference = {
       id: 'three',
       heading: 'Is there a summary?',
       body:
-        'The Prophet ﷺ tied belief directly to behaviour: whoever believes in God and the Last Day should not harm their neighbour, should be generous to their guest, and should say something good or stay quiet. Neighbours, guests, and how you speak — that is a large share of daily life.',
+        'The Prophet ﷺ tied belief directly to behaviour: whoever believes in God and the Last Day should not harm their neighbour, should be generous to their guest, and should say something good or stay quiet. Neighbours, guests, and how you speak. That is a large share of daily life.',
       sources: [
         hadith('bukhari', '6018', {
           book: 78,
@@ -53,7 +53,7 @@ export const MANNERS: Reference = {
       id: 'speech',
       heading: 'What about talking about people?',
       body:
-        'The Qur’an forbids mocking others, assuming the worst, spying, and talking about people behind their backs — in two consecutive verses. Backbiting is treated as a serious wrong, not a small one, and it is the habit most people find hardest to drop.',
+        'The Qur’an forbids mocking others, assuming the worst, spying, and talking about people behind their backs, in two consecutive verses. Backbiting is treated as a serious wrong, not a small one, and it is the habit most people find hardest to drop.',
       sources: [
         quran(49, 11, { surahName: 'Al-Hujurat' }),
         quran(49, 12, { surahName: 'Al-Hujurat' }),

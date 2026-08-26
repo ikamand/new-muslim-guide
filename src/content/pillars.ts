@@ -72,7 +72,7 @@ export const PILLARS: Pillar[] = [
     transliteration: 'Aṣ-ṣalāh',
     summary: 'Five prayers a day, at set times, facing the Kaʿbah in Mecca.',
     detail:
-      'Fajr before sunrise, Dhuhr after midday, ʿAsr in the afternoon, Maghrib just after sunset, and ʿIshaʾ at night. Each one takes a few minutes. You wash first — that is wudu — and the app walks you through both.',
+      'Fajr before sunrise, Dhuhr after midday, ʿAsr in the afternoon, Maghrib just after sunset, and ʿIshaʾ at night. Each one takes a few minutes. You wash first, which is wudu, and the app walks you through both.',
     guideId: 'fajr',
     meta: {
       category: 'salah',
@@ -98,7 +98,7 @@ export const PILLARS: Pillar[] = [
     transliteration: 'Az-zakāh',
     summary: 'A yearly share of the wealth you have held onto, given to those entitled to it.',
     detail:
-      'Zakat is not a donation you choose to make — it is a portion of your savings that stops being yours. It applies only above a threshold, and only to wealth you have held for a full lunar year, so many people newly earning owe none at all. Whether it applies to you is worth asking someone locally rather than working out alone.',
+      'Zakat is not a donation you choose to make. It is a portion of your savings that stops being yours. It applies only above a threshold, and only to wealth you have held for a full lunar year, so many people newly earning owe none at all. Whether it applies to you is worth asking someone locally rather than working out alone.',
     meta: {
       category: 'charity',
       difficulty: 'building',
@@ -148,7 +148,7 @@ export const PILLARS: Pillar[] = [
     transliteration: 'Aṣ-ṣawm',
     summary: 'No food, drink or intimacy from dawn until sunset, for the month of Ramadan.',
     detail:
-      'Ramadan moves through the year, so its length and difficulty change with the season. There are real exemptions — illness, travel, pregnancy, nursing, menstruation, old age — and taking one is not a failure. Some days are made up later, some are not.',
+      'Ramadan moves through the year, so its length and difficulty change with the season. There are real exemptions for illness, travel, pregnancy, nursing, menstruation and old age, and taking one is not a failure. Some days are made up later, some are not.',
     meta: {
       category: 'fasting',
       difficulty: 'building',

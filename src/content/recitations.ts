@@ -100,7 +100,7 @@ const FATIHA_VERSES: RecitationVerse[] = [
     transliteration:
       'Ṣirāṭa-lladhīna anʿamta ʿalayhim ghayri-l-maghḍūbi ʿalayhim wa la-ḍ-ḍāllīn',
     translation:
-      'The path of those You have blessed — not of those who have earned Your anger, nor of those who have gone astray.',
+      'The path of those You have blessed, not of those who have earned Your anger, nor of those who have gone astray.',
     audioId: 'fatiha-7',
   },
 ];
@@ -214,7 +214,7 @@ export const Recitations = {
   rising: {
     title: 'Rising from rukuʿ',
     arabic: 'سَمِعَ اللَّهُ لِمَنْ حَمِدَهُ، رَبَّنَا وَلَكَ الْحَمْدُ',
-    transliteration: 'Samiʿa-llāhu liman ḥamidah — Rabbanā wa laka-l-ḥamd',
+    transliteration: 'Samiʿa-llāhu liman ḥamidah. Rabbanā wa laka-l-ḥamd',
     translation:
       'Allah hears the one who praises Him. Our Lord, to You belongs all praise.',
     // Both halves in one narration, in this wording — Abu Huraira reports the

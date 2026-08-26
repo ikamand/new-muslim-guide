@@ -109,7 +109,7 @@ export const EN = {
   'times.endsAtSunrise': 'ends at sunrise,',
   'times.needLocation': 'Prayer times need to know where you are',
   'times.needLocation.why':
-    'The times are worked out from the position of the sun where you are standing. Your location is used on this device and never sent anywhere — there is no server to send it to.',
+    'The times are worked out from the position of the sun where you are standing. Your location is used on this device and never sent anywhere. There is no server to send it to.',
   'times.locationOff':
     'Location services are turned off, so the times can’t be worked out. Turn them on in your phone’s settings and come back.',
   'times.useLocation': 'Use my location',
@@ -127,7 +127,7 @@ export const EN = {
   */
   'times.jumuah': 'It’s Friday',
   'times.jumuah.detail':
-    'Today Dhuhr is Jumuah — if you pray it at the mosque with everyone. The khutbah comes first, so arrive before the adhan rather than at it. If you cannot get to a mosque today, you pray Dhuhr as normal.',
+    'Today Dhuhr is Jumuah, if you pray it at the mosque with everyone. The khutbah comes first, so arrive before the adhan rather than at it. If you cannot get to a mosque today, you pray Dhuhr as normal.',
   'times.followLocal': 'If your mosque’s timetable differs, follow the mosque.',
 
   /**
@@ -174,7 +174,7 @@ export const EN = {
   'tab.quran': 'Qur’an',
   'tab.duas': 'Duʿa',
   'duaBook.title': 'Every occasion',
-  'duaBook.intro': 'Hisn al-Muslim, the collection these come from, in the order the book has them. Reach for it when you already know what you are looking for — the day above is for when you do not.',
+  'duaBook.intro': 'Hisn al-Muslim, the collection these come from, in the order the book has them. Reach for it when you already know what you are looking for. The day above is for when you do not.',
   'duaBook.open': 'Browse every occasion →',
   'duaBook.moreForThisMoment': 'more for this moment in the book →',
   'duaBook.filtered': 'Occasions for this part of the day',
@@ -190,7 +190,7 @@ export const EN = {
     phone grading them on it.
   */
   'quran.title': 'Learn by heart',
-  'quran.intro': 'Al-Fatiha, then the short surahs at the end of the Qur’an, in the order people usually learn them. Start at the top — Al-Fatiha is in every prayer, so it is the one to have first.',
+  'quran.intro': 'Al-Fatiha, then the short surahs at the end of the Qur’an, in the order people usually learn them. Start at the top. Al-Fatiha is in every prayer, so it is the one to have first.',
   'quran.progress': '{done} of {total} learned',
   'quran.progress.help': 'You decide when one counts. Nothing here is timed, and nothing is taken away.',
   'quran.playSurah': 'Play the surah',
@@ -200,16 +200,16 @@ export const EN = {
   'quran.knowIt': 'You know this one',
   'quran.surahNumber': 'Surah {n}',
   'quran.tapToHide': 'Tap any ayah to cover it, then recite it from memory and tap again to check.',
-  'quran.covered': 'covered — tap to check',
+  'quran.covered': 'covered, tap to check',
   'quran.hide': 'Cover ayah {n}',
   'quran.reveal': 'Reveal ayah {n}',
   'quran.missing': 'That surah isn’t here.',
   'quran.playFrom': 'Play from ayah {n}',
-  'quran.audioUnavailable': 'The recitation isn’t loading. Check your connection — the text is still here to read.',
+  'quran.audioUnavailable': 'The recitation isn’t loading. Check your connection. The text is still here to read.',
   'reciter.title': 'Reciter',
   'reciter.label': 'Reciter',
   'reciter.change': 'Change reciter',
-  'reciter.intro': 'Whose recitation plays here. Any of them is correct — they differ in pace and in voice, not in what is said.',
+  'reciter.intro': 'Whose recitation plays here. Any of them is correct. They differ in pace and in voice, not in what is said.',
   'reciter.credit': 'All recitations from everyayah.com.',
   'count.ayahs': 'ayahs',
   'tab.settings': 'Settings',
@@ -236,10 +236,10 @@ export const EN = {
   'pray.before': 'before',
   'pray.fard': 'owed',
   'pray.after': 'after',
-  'pray.rawatib': 'The numbers either side are the sunnah rakʿahs — prayed by choice, before or after the ones that are owed. Asr has none. Twelve a day, across the five. The four before Dhuhr are two prayers of two, not one of four.',
+  'pray.rawatib': 'The numbers either side are the sunnah rakʿahs, prayed by choice, before or after the ones that are owed. Asr has none. Twelve a day, across the five. The four before Dhuhr are two prayers of two, not one of four.',
   'step.openSurah': 'Open this surah to practise →',
   'pray.chosen': 'Prayed by choice',
-  'pray.chosen.help': 'None of these is owed. They are the prayer you already know — what differs is why you are standing there.',
+  'pray.chosen.help': 'None of these is owed. They are the prayer you already know. What differs is why you are standing there.',
   'count.rakahs': 'rakʿahs',
   'count.prayers': 'prayers',
   'learn.toPray.title': 'Learn to pray',
@@ -261,7 +261,7 @@ export const EN = {
   'learn.shahada.readAgain': 'Read it again',
   'phrases.title': 'What people say to you',
   'phrases.intro':
-    'The phrases you will hear in your first week, what they mean, and what to say back. You are not expected to know these — everyone learns them by hearing them.',
+    'The phrases you will hear in your first week, what they mean, and what to say back. You are not expected to know these. Everyone learns them by hearing them.',
   'phrases.youSay': 'You say:',
   'learn.phrases.title': 'What people say to you',
   'learn.phrases.subtitle': 'The phrases you will hear, and how to answer them',
@@ -277,7 +277,7 @@ export const EN = {
   'duas.moment.travel': 'Travelling',
   'duas.moment.night': 'Going to bed',
   'duas.intro':
-    'Short things said through an ordinary day. Start with the one-word one and add another when it sticks — nobody learns these all at once.',
+    'Short things said through an ordinary day. Start with the one-word one and add another when it sticks. Nobody learns these all at once.',
   'learn.duas.title': 'Everyday duʿas',
   'learn.duas.subtitle': 'Waking, eating, leaving the house, sleeping',
   'learn.practice.title': 'Practice the recitations',
@@ -289,7 +289,7 @@ export const EN = {
 
   'practice.title': 'Practice',
   'practice.intro':
-    'Play a line, turn on repeat, and say it with the reciter until it holds. This is for learning beforehand — in prayer you recite yourself, not from a recording.',
+    'Play a line, turn on repeat, and say it with the reciter until it holds. This is for learning beforehand. In prayer you recite yourself, not from a recording.',
   'practice.repeat': 'Repeat',
   'practice.slower': 'Slower',
   'practice.ayah': 'Ayah',
@@ -300,9 +300,9 @@ export const EN = {
 
   'pillars.title': 'The Five Pillars',
   'pillars.intro':
-    'The five things Islam is built on. Only the first two ask anything of you today — the rest arrive in their own time, and two of them may never apply to you at all.',
+    'The five things Islam is built on. Only the first two ask anything of you today. The rest arrive in their own time, and two of them may never apply to you at all.',
   'iman.intro':
-    'The five pillars are what you do. These six are what you believe while doing it. You already accepted them when you said the shahada — this page is only putting names to them, and nothing here is something you need to memorise.',
+    'The five pillars are what you do. These six are what you believe while doing it. You already accepted them when you said the shahada. This page is only putting names to them, and nothing here is something you need to memorise.',
   'pillars.testimony': 'The testimony',
   'pillars.taughtHere': 'The app teaches this →',
   'iman.title': 'The Six Articles of Faith',
@@ -318,7 +318,7 @@ export const EN = {
   'settings.translation.help': 'What the words mean in English',
   'settings.reminders': 'Prayer reminders',
   'settings.reminders.help':
-    'A quiet notification before each prayer. Nothing is sent anywhere — your phone works the times out and sets its own alarms.',
+    'A quiet notification before each prayer. Nothing is sent anywhere. Your phone works the times out and sets its own alarms.',
   'settings.reminders.lead': 'How far ahead',
   'settings.reminders.atTime': 'At the time',
   'settings.reminders.minutesBefore': '{n} minutes before',
@@ -379,7 +379,7 @@ export const EN = {
    */
   'onboarding.language.title': 'What language would you like to read in?',
   'onboarding.language.help': 'You can change this at any time in Settings.',
-  'translation.partial': 'Partly translated — the rest is shown in English.',
+  'translation.partial': 'Partly translated. The rest is shown in English.',
 
   /**
    * Shown at the foot of a screen carrying untranslated text.
@@ -422,7 +422,7 @@ export const EN = {
   'onboarding.reassure.cta': 'Let’s begin',
 
   'settings.storage': 'Saved audio',
-  'settings.storage.help': 'Surahs save themselves the first time you play them, so they work without a signal afterwards. Delete a voice here to get the space back — playing it again saves it again.',
+  'settings.storage.help': 'Surahs save themselves the first time you play them, so they work without a signal afterwards. Delete a voice here to get the space back, and playing it again saves it again.',
   'settings.storage.files': 'ayahs',
   'settings.storage.delete': 'Delete',
   'settings.onboarding': 'Getting started',
@@ -439,7 +439,7 @@ export const EN = {
    */
   'journey.title': 'The beginner path',
   'journey.intro':
-    'Six stages, in the order most people meet them. Nothing is locked — go straight to what you need today and come back for the rest.',
+    'Six stages, in the order most people meet them. Nothing is locked. Go straight to what you need today and come back for the rest.',
   'journey.progress': '{done} of {total}',
   'journey.start': 'Start',
   'journey.continue': 'Continue',

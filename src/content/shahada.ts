@@ -92,7 +92,7 @@ export const SHAHADA_GUIDE: Guide = {
       id: 'say',
       title: 'Say it',
       instruction:
-        'Say it aloud, in Arabic if you can manage it. If the Arabic is beyond you today, say it in your own language and meaning it — then learn the Arabic, because you will say it in every prayer for the rest of your life.',
+        'Say it aloud, in Arabic if you can manage it. If the Arabic is beyond you today, say it in your own language and mean it, then learn the Arabic, because you will say it in every prayer for the rest of your life.',
       says: Recitations.shahada,
       note: 'You are Muslim from the moment you say it and mean it. Nobody has to be there, and no imam has to be present.',
       // Thumamah ibn Uthal said it standing in the mosque with people around;
@@ -125,7 +125,7 @@ export const SHAHADA_GUIDE: Guide = {
       notes: [
         note(
           'agreed',
-          'Getting it written down is a separate question, and worth doing when you can. A mosque or Islamic centre can record it and give you a certificate — not because your Islam needs one, but because other people\'s paperwork sometimes does.',
+          'Getting it written down is a separate question, and worth doing when you can. A mosque or Islamic centre can record it and give you a certificate. Not because your Islam needs one, but because other people\'s paperwork sometimes does.',
           {
             sources: [
               scholarly({
@@ -140,7 +140,7 @@ export const SHAHADA_GUIDE: Guide = {
               }),
             ],
             additionalExplanation:
-              'These are two different things and the app keeps them apart on purpose. Whether you are Muslim is settled between you and Allah the moment you say it and mean it, and both answers cited here say so plainly — one of them in the words "Islam is a matter that is between a person and his Lord". Whether a registrar, a mosque, a Hajj visa office or a marriage contract will take your word for it later is a paperwork question with a paperwork answer. Historically witnesses were asked for in Muslim courts because inheritance and marriage law followed a person\'s religion, which is where the idea that they are required comes from. If you are not ready to walk into a mosque, that is fine — none of this expires, and the certificate is available whenever you want it.',
+              'These are two different things and the app keeps them apart on purpose. Whether you are Muslim is settled between you and Allah the moment you say it and mean it, and both answers cited here say so plainly, one of them in the words "Islam is a matter that is between a person and his Lord". Whether a registrar, a mosque, a Hajj visa office or a marriage contract will take your word for it later is a paperwork question with a paperwork answer. Historically witnesses were asked for in Muslim courts because inheritance and marriage law followed a person\'s religion, which is where the idea that they are required comes from. If you are not ready to walk into a mosque, that is fine. None of this expires, and the certificate is available whenever you want it.',
           },
         ),
       ],
@@ -149,8 +149,8 @@ export const SHAHADA_GUIDE: Guide = {
       id: 'after',
       title: 'You are Muslim',
       instruction:
-        'That is it. Nothing else is required of you in this moment, and nothing you did before it is held against you — becoming Muslim wipes what came before.',
-      note: 'You do not need to change your name. You do not need to tell anyone today. Take a full wash when you can, which is recommended for someone who has just become Muslim, and then learn wudu and the prayer — in that order, without rushing.',
+        'That is it. Nothing else is required of you in this moment, and nothing you did before it is held against you. Becoming Muslim wipes what came before.',
+      note: 'You do not need to change your name. You do not need to tell anyone today. Take a full wash when you can, which is recommended for someone who has just become Muslim, and then learn wudu and the prayer, in that order, without rushing.',
       /**
        * Muslim 121 for the sentence people most need to hear on this screen;
        * Abu Dawud 355 for the wash. The ghusl guide carries the school

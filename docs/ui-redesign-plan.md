@@ -26,10 +26,10 @@ with its reasoning attached.
 | **4** | [Duʿas, and the first network call](#phase-4--duas-and-the-apps-first-network-call) | 🟡 **Day built** — `d9bd351`. Fetch-and-cache held: no licensed content to fetch yet | OTA |
 | **5** | [The Qur'an tab](#phase-5--the-quran-tab--juz-30) | 🟡 **Text and drill built** — `eed5214`. Audio held: see below | OTA |
 | **7** | [The Duʿa tab](#phase-7--the-dua-tab) | ⬜ Planned 21 Aug — licence now settled | OTA |
-| **8** | [Audio that saves itself](#phase-8--audio-that-saves-itself) | ⬜ Rewritten 22 Aug — save on play, no button. Absorbs 10 | ⚠️ **Build** |
+| **8** | [Audio that saves itself](#phase-8--audio-that-saves-itself) | ⬜ Rewritten 25 Aug — save on play, no button. Absorbs 10 | ⚠️ **Build** |
 | **9** | [Bet 4: the Arabic letters](#phase-9--bet-4-the-arabic-letters) | ⬜ Undesigned — needs a session, not a ticket | OTA |
-| **10** | Downloading a voice, a juz at a time | ↩︎ **Merged into 8** on 22 Aug — same store, same build |
-| **11** | [Four questions, on every teaching page](#phase-11--four-questions-on-every-teaching-page) | ⬜ Planned 22 Aug — biggest item here, own day | OTA |
+| **10** | Downloading a voice, a juz at a time | ↩︎ **Merged into 8** on 25 Aug — same store, same build |
+| **11** | [Four questions, on every teaching page](#phase-11--four-questions-on-every-teaching-page) | ⬜ Planned 25 Aug — biggest item here, own day | OTA |
 | — | [The prayers](#the-prayer-work) | ✅ **Done** — `a004af9` | OTA |
 
 ### What shipped in 0–3
@@ -670,7 +670,7 @@ percentage, reusing geometry `illustrations.tsx` already draws.
 
 ### French and Spanish (was Phase 6)
 
-**Taken out of the active plan 22 Aug.** Iyad: *"leave phase 6 out of this plan
+**Taken out of the active plan 25 Aug.** Iyad: *"leave phase 6 out of this plan
 but keep it for future work — I want to focus on English for now."*
 
 235 of 695 strings are translated into each. `TranslationGap` already marks a
@@ -910,10 +910,17 @@ No server, no migrations.
 
 ---
 
-# Built 22 Aug, and what is left
+# Built today — Tuesday 25 Aug — and what is left
+
+⚠️ **The commit messages from this day say "22 Aug" and are wrong.** A
+mid-session clock told the model the date had rolled back three days and it
+stamped everything with it. The dates in this document are corrected; the
+commits are not, because rewriting pushed history to fix a date stamp costs
+more than it is worth. If a commit from this range cites 22 Aug, read 25 Aug.
+
 
 **Everything outside the numbering is done.** Commits `875eb1d`..`main` on
-22 Aug: the rawatib citations, Dhuhr's 2 + 2, the "Prayed by choice"
+25 Aug: the rawatib citations, Dhuhr's 2 + 2, the "Prayed by choice"
 inversion, the istikhara duʿa, qiyam al-layl and witr. Each section below that
 is marked ✅ shipped that day.
 
@@ -930,7 +937,7 @@ tools CLAUDE.md relies on is unavailable until it is fixed.
 
 ---
 
-# Tuesday 25 Aug — three workstreams
+# The Tuesday workstreams (this is that Tuesday)
 
 Planned 21 Aug, on a session with no build budget. Two things changed the board
 since the phases above were written, and both came from Iyad rather than from
@@ -1017,7 +1024,7 @@ texts in front of users.
 
 ## Phase 8 — Audio that saves itself
 
-**Rewritten 22 Aug**, on Iyad's question: *"why download surah 78, 79, 80 if
+**Rewritten 25 Aug**, on Iyad's question: *"why download surah 78, 79, 80 if
 it's never used or has not been needed yet?"*
 
 **He is right, and the earlier plan here was wrong.** It said bundle all 564
@@ -1083,9 +1090,9 @@ builds will stop being offered the update rather than break on it.
 
 ---
 
-### ✅ Built 22 Aug — Al-Ikhlas at the recite step
+### ✅ Built 25 Aug — Al-Ikhlas at the recite step
 
-Iyad's proposal, 22 Aug. **Small change, and it fixes something that is broken
+Iyad's proposal, 25 Aug. **Small change, and it fixes something that is broken
 rather than adding something that is missing.**
 
 **What the step says today.** [`prayers.ts:449`](../src/content/prayers.ts#L449)
@@ -1249,16 +1256,16 @@ the OTA phases while it runs.
 
 ---
 
-## ✅ Built 22 Aug — the rawatib citation has numbers
+## ✅ Built 25 Aug — the rawatib citation has numbers
 
-Iyad spotted it 22 Aug: [`prayers.ts:102`](../src/content/prayers.ts#L102) says
+Iyad spotted it 25 Aug: [`prayers.ts:102`](../src/content/prayers.ts#L102) says
 *"The twelve come from Umm Habiba's narration in Sahih Muslim"* **and gives no
 number**, and it attributes the breakdown across the five prayers to
 HadeethEnc's own *explanation* (65715) rather than to a narration. Exactly the
 failure CLAUDE.md names: a reference nobody can open.
 
 All three below were **read from `.cache/hadith`** (fawazahmed0, which carries
-each collection's own numbering) on 22 Aug — not remembered.
+each collection's own numbering) on 25 Aug — not remembered.
 
 ### The twelve — Sahih Muslim 728
 
@@ -1302,7 +1309,7 @@ itself.
 
 ### ✅ Built — the four before Dhuhr are 2 + 2
 
-Iyad, 22 Aug, listing the rawatib: *"duhr has 4 — (2+2) before, and after 2."*
+Iyad, 25 Aug, listing the rawatib: *"duhr has 4 — (2+2) before, and after 2."*
 **The counts in [`prayers.ts:31-38`](../src/content/prayers.ts#L31-L38) are
 already exactly right** — Fajr 2 before, Dhuhr 4 before and 2 after, Asr none,
 Maghrib 2 after, Isha 2 after. Twelve. Nothing to correct.
@@ -1318,7 +1325,7 @@ become something that can express `4, as 2 + 2` — and the same change would le
 Maghrib and Isha stay `2` without pretending to a structure they do not have.
 
 ⚠️ **The evidence is genuinely contested, and the plan records it rather than
-picking the tidy version.** Read from the corpus 22 Aug:
+picking the tidy version.** Read from the corpus 25 Aug:
 
 - **Abu Dawud 1295** and **Nasa'i 1666** — Ibn Umar: `صَلاَةُ اللَّيْلِ وَالنَّهَارِ
   مَثْنَى مَثْنَى`. Both **Albani: Sahih**.
@@ -1354,9 +1361,9 @@ this one, standing next to somebody in a mosque.
 
 ---
 
-## ✅ Built 22 Aug — "Prayed by choice" is inverted
+## ✅ Built 25 Aug — "Prayed by choice" is inverted
 
-Iyad, 22 Aug: *"the whole section is messy."* It is, and the code says so
+Iyad, 25 Aug: *"the whole section is messy."* It is, and the code says so
 itself. [`pray.tsx:119`](../src/app/pray.tsx#L119) routes every voluntary row
 to `/guide/[id]`, and the comment **six lines below it** reads:
 
@@ -1415,7 +1422,7 @@ section that describes them without printing them. Nothing needs fetching, no
 source needs choosing, and **it no longer depends on Phase 7** — the istikhara
 work stands alone.
 
-**The wording: `وَعَاقِبَةِ أَمْرِي`.** Iyad's call, 22 Aug — both alternatives mean
+**The wording: `وَعَاقِبَةِ أَمْرِي`.** Iyad's call, 25 Aug — both alternatives mean
 the same thing, so pick one. This one because the narration gives it first,
 with `أَوْ قَالَ` marking the second as the narrator's own uncertainty; because it
 is shorter, which matters to somebody memorising; and because it is what the
@@ -1433,7 +1440,7 @@ apologising for its absence.
 
 ### ✅ Built — Qiyam al-Layl added
 
-Iyad, 22 Aug. **Qiyam al-layl is already defined in the app and not offered.**
+Iyad, 25 Aug. **Qiyam al-layl is already defined in the app and not offered.**
 `voluntary-prayers.ts` closes the tahajjud page with *"If you have not slept,
 you are praying qiyam al-layl — also good, also voluntary, and not what this
 word means"* — a definition of a thing with nowhere to go.
@@ -1459,7 +1466,7 @@ more than it earns.
 
 ## Phase 11 — Four questions, on every teaching page
 
-Iyad, 22 Aug: *"the when, how many, do I have to, how — should be across all
+Iyad, 25 Aug: *"the when, how many, do I have to, how — should be across all
 learning and teaching content. Simplify for the reader and make it pleasant to
 read and learn."*
 
@@ -1522,7 +1529,7 @@ look like a table. Tables read as reference; this should read as answers.
 
 ### Bring the evidence up out of the drawer
 
-Iyad, 22 Aug: *"a lot of 'where it came from' sources have hadiths and great
+Iyad, 25 Aug: *"a lot of 'where it came from' sources have hadiths and great
 information — should we add that stuff in the main learning sections?"*
 
 **Yes, selectively — and this is the second time the same bug has been found.**
@@ -1530,7 +1537,7 @@ The istikhara duʿa was buried in the citation footer too. There is a pattern
 here worth naming: **the app hides its best-sourced material in a drawer under
 prose a model wrote.**
 
-Measured 22 Aug: **`evidence.ts` holds 164 entries averaging 79 words** — 55
+Measured 25 Aug: **`evidence.ts` holds 164 entries averaging 79 words** — 55
 Qur'an ayahs and 109 hadith, roughly **13,000 words of authenticated text**.
 The pages above them are model-written and awaiting review. The strongest
 writing in the app is the part nobody opens.
@@ -1601,7 +1608,7 @@ at them before committing to twenty-six more.
 
 ### The size of it, measured
 
-Counted 22 Aug rather than estimated:
+Counted 25 Aug rather than estimated:
 
 | | |
 |---|---|
@@ -1613,7 +1620,7 @@ Counted 22 Aug rather than estimated:
 **The translation cost is now zero.** Reference bodies are the largest single
 category in `docs/i18n-manifest.csv`, and rewriting them would have dropped
 every touched line's French and Spanish back to English. Translation was taken
-out of the plan on 22 Aug — see
+out of the plan on 25 Aug — see
 [Future work](#future-work--not-in-this-plan) — so this phase now pays for
 those words once instead of twice. It is the right order, arrived at from the
 other direction.
@@ -1682,7 +1689,7 @@ istikhara and qiyam are all the two-rakʿah prayer they already know, and witr
 is not.
 
 **Say it is an odd number — one, three, five — and generate the one.** Iyad's
-call, 22 Aug, and the narrations state it outright rather than leaving it to be
+call, 25 Aug, and the narrations state it outright rather than leaving it to be
 inferred:
 
 - **Sunan Abi Dawud 1422** — Abu Ayyub al-Ansari, **Albani: Sahih**:
@@ -1707,7 +1714,7 @@ Three reasons, in order of weight:
 
 1. **It is what the text says.** Sahih Muslim **752** — Ibn Umar: `الْوِتْرُ رَكْعَةٌ
    مِنْ آخِرِ اللَّيْلِ`, *"Witr is one rakʿah at the end of the night."* Read from
-   the corpus 22 Aug.
+   the corpus 25 Aug.
 2. **It is the simplest instruction that is complete.** "After you finish
    praying at night, pray one more." Nothing to count, nothing to structure.
 3. **It avoids a shape `buildPrayer` would get wrong.** `rakahs: 3` or `5`
@@ -1719,7 +1726,7 @@ Three reasons, in order of weight:
 ⚠️ **A correction, kept rather than quietly dropped.** This section originally
 reached for a narration — "do not pray witr as three, resembling Maghrib" — to
 justify point 3. **It could not be found in the six books in that wording** when
-searched on 22 Aug, so it is not cited. What was found instead is better and is
+searched on 25 Aug, so it is not cited. What was found instead is better and is
 above: Nasa'i 1717 states the structure positively, by describing what he did
 rather than what he forbade.
 
@@ -1742,7 +1749,7 @@ content on the salah path, which is the heaviest part of
 
 ### The rows are named for the prayer, not for the page
 
-Iyad, 22 Aug, on the mockup. The rows had inherited the reference pages' titles
+Iyad, 25 Aug, on the mockup. The rows had inherited the reference pages' titles
 — "Praying at night", "Asking God to choose", "The prayer after a sin". Those
 are good *page* titles and bad *row* labels, and the difference matters:
 
@@ -1778,7 +1785,7 @@ they cannot manage it, and drops the prayer has been taught the opposite of
 what the page says. Iyad's wording stands; the note belongs on the reviewer's
 list, and the page body should keep saying that any time after sleeping counts.
 
-### Drawn, 22 Aug — three decisions the mockup made
+### Drawn, 25 Aug — three decisions the mockup made
 
 Mockup: <https://claude.ai/code/artifact/caa49c0f-78e9-40c8-be21-91908ff138bb>
 — three artboards at the app's real tokens, light theme. Approved by Iyad on

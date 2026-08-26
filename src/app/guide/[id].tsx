@@ -4,14 +4,16 @@ import { useRef, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 
 import { PostureFigure, RakahProgress } from '@/components/illustrations';
+import { PressableLink } from '@/components/pressable-link';
 import { RecitationCard } from '@/components/recitation-card';
 import { ContentNoteCard } from '@/components/content-note';
 import { SourceDisclosure } from '@/components/source-list';
 import { ThemedText } from '@/components/themed-text';
 import { TranslationGap } from '@/components/translation-gap';
 import { getGuide, resolveNotes, type Posture } from '@/content';
+import { getSurah, type Ayah } from '@/content/quran/surahs';
 import { localiseGuide, measure } from '@/i18n/localise';
-import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
+import { ArabicFont, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import type { UIKey } from '@/i18n/ui';
 import { useSettings } from '@/hooks/use-settings';
@@ -189,6 +191,14 @@ export default function GuideScreen() {
 
         {step.says && <RecitationCard recitation={step.says} />}
 
+        {/*
+          A surah the step has you recite, printed from the Qur'an tab's own
+          data rather than copied into a Recitation. No transliteration line:
+          juz30 carries none on purpose, and inventing one here would be a
+          model writing Arabic-adjacent text, which this repo does not do.
+        */}
+        {step.saysSurah !== undefined && <SurahInStep number={step.saysSurah} />}
+
         {resolveNotes(step.note, step.notes).map((entry, position) => (
           <ContentNoteCard key={`${entry.kind}-${position}`} entry={entry} />
         ))}
@@ -243,7 +253,69 @@ export default function GuideScreen() {
   );
 }
 
+/**
+ * The four ayat of a short surah, inside a prayer step.
+ *
+ * Deliberately quieter than the surah screen — this is somebody mid-prayer
+ * checking words they half-know, not somebody memorising. Arabic at the size
+ * the recitation cards use, translation under it, and a way through to the
+ * full screen when they want to drill it.
+ */
+function SurahInStep({ number }: { number: number }) {
+  const theme = useTheme();
+  const { t } = useLocale();
+  const surah = getSurah(number);
+  if (!surah) return null;
+
+  return (
+    <View
+      style={[
+        styles.surahCard,
+        { backgroundColor: theme.accentMuted, borderColor: theme.accent },
+      ]}>
+      <ThemedText type="caption" themeColor="textSecondary">
+        {surah.name} · {surah.meaning}
+      </ThemedText>
+      {surah.ayahs.map((ayah: Ayah) => (
+        <View key={ayah.number} style={styles.surahAyah}>
+          <ThemedText style={styles.surahArabic}>{ayah.arabic}</ThemedText>
+          <ThemedText type="small" themeColor="textSecondary">
+            {ayah.translation}
+          </ThemedText>
+        </View>
+      ))}
+      <PressableLink
+        href={{ pathname: '/surah/[number]', params: { number: String(number) } }}
+        style={styles.surahLink}
+        pressedStyle={{ opacity: 0.6 }}>
+        <ThemedText type="smallBold" themeColor="accent">
+          {t('step.openSurah')}
+        </ThemedText>
+      </PressableLink>
+    </View>
+  );
+}
+
 const styles = StyleSheet.create({
+  surahCard: {
+    gap: Spacing.three,
+    padding: Spacing.four,
+    borderRadius: Radius.medium,
+    borderWidth: StyleSheet.hairlineWidth,
+  },
+  surahAyah: {
+    gap: Spacing.one,
+  },
+  surahArabic: {
+    fontFamily: ArabicFont,
+    fontSize: 30,
+    lineHeight: 58,
+    textAlign: 'right',
+    writingDirection: 'rtl',
+  },
+  surahLink: {
+    paddingTop: Spacing.two,
+  },
   screen: {
     flex: 1,
   },

@@ -109,6 +109,20 @@ export type Step = {
   /** What you say, if anything. */
   says?: Recitation;
   /**
+   * A surah the step has you recite, by number, printed from `juz30.ts`.
+   *
+   * Separate from `says` because a surah is not stored twice. Al-Ikhlas
+   * already exists as surah 112 in the Qur'an tab's data; a `Recitation`
+   * copy of it would be the same text in two files, drifting.
+   *
+   * It also cannot be a `Recitation` honestly: juz30 carries no
+   * transliteration, deliberately (see the header of `juz30.ts`), and
+   * inventing one to fill the field would be exactly the improvisation
+   * CLAUDE.md forbids. So the step prints Arabic and English, as the surah
+   * screen does, and links through to it.
+   */
+  saysSurah?: number;
+  /**
    * Anything a first-timer would otherwise get wrong.
    *
    * Untouched, and still the right field for most of what it holds. Where a

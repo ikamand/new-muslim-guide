@@ -228,6 +228,7 @@ export const EN = {
   'pray.fard': 'owed',
   'pray.after': 'after',
   'pray.rawatib': 'The numbers either side are the sunnah rakʿahs — prayed by choice, before or after the ones that are owed. Asr has none. Twelve a day, across the five. The four before Dhuhr are two prayers of two, not one of four.',
+  'step.openSurah': 'Open this surah to practise →',
   'pray.chosen': 'Prayed by choice',
   'pray.chosen.help': 'None of these is owed. They are the prayer you already know — what differs is why you are standing there.',
   'count.rakahs': 'rakʿahs',

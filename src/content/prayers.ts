@@ -487,17 +487,32 @@ function rakahSteps(rakah: number, spec: PrayerSpec): Step[] {
   });
 
   if (addsSurah) {
+    /*
+      This step used to say "recite any other short passage of the Qur'an" and
+      leave it there.
+
+      Every other step in the prayer gives you the words. That one gave a
+      three-week-old convert homework: they know no other passage, which is
+      exactly the born-Muslim assumption this app exists to close. The old note
+      told them Al-Ikhlas is where people start and then did not show it.
+
+      So it shows it. Surah 112 by number rather than a copy of the text —
+      `juz30.ts` already holds it and holds it once.
+
+      The sunnah/obligatory line is load-bearing and stays: a prayer of
+      Al-Fatiha alone is valid, and teaching a default must never read as
+      stating a requirement.
+    */
     step({
       key: 'surah',
       title: 'Add a short surah',
       posture: 'standing',
       instruction: aloud
-        ? 'Recite any other short passage of the Qur’an aloud.'
-        : 'Recite any other short passage of the Qur’an quietly.',
-      // Al-Ikhlas has four ayat, not three. The app said three here and
-      // "Four lines that answer the question" in `learn/who-is-allah.ts`,
-      // which cites Qur'an 112:1-4 — two screens, one surah, two numbers.
-      note: 'Al-Ikhlas is four short verses and is where most people start. Until you know one, Al-Fatiha alone is enough.',
+        ? 'After Al-Fatiha, recite another short surah aloud. Al-Ikhlas is four verses and is where most people start:'
+        : 'After Al-Fatiha, recite another short surah quietly. Al-Ikhlas is four verses and is where most people start:',
+      saysSurah: 112,
+      note: 'This part is sunnah, not required. A prayer of Al-Fatiha alone is a complete prayer — so if you do not know one yet, carry on to the bow.',
+      sources: [quran(112, [1, 4], { surahName: 'Al-Ikhlas' })],
     });
   }
 

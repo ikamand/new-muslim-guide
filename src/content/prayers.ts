@@ -684,6 +684,36 @@ export const PRAYER_SPECS: PrayerSpec[] = [
     referenceId: 'tahajjud',
   },
   {
+    id: 'qiyam',
+    title: 'Qiyam al-Layl',
+    listTitle: 'Praying Qiyam al-Layl',
+    when: 'Any part of the night, before you sleep',
+    rakahs: 2,
+    aloudRakahs: 0,
+    kind: 'voluntary',
+    referenceId: 'qiyam-al-layl',
+  },
+  /*
+    Witr is one rakʿah here, and the page says it may be one, three or five.
+
+    Abu Dawud 1422 has the Prophet ﷺ naming all three and leaving the choice;
+    Muslim 752 states one at the end of the night. One is generated because it
+    is a complete witr on its own and the least a beginner can get wrong — and
+    because `buildPrayer` cannot yet express the structure Nasa'i 1717
+    describes for five, which is not sitting except at the last. A three-rakʿah
+    spec would generate a Maghrib-shaped prayer, sitting after the second.
+  */
+  {
+    id: 'witr',
+    title: 'Witr',
+    listTitle: 'Praying Witr',
+    when: 'To close the night, after any night prayer',
+    rakahs: 1,
+    aloudRakahs: 0,
+    kind: 'voluntary',
+    referenceId: 'witr',
+  },
+  {
     id: 'istikhara',
     title: 'Istikhara',
     listTitle: 'Praying Istikhara',

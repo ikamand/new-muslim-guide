@@ -172,3 +172,117 @@ export const TAWBA_PRAYER: Reference = {
     },
   ],
 };
+
+/**
+ * Qiyam al-Layl.
+ *
+ * The app already defined this word — at the foot of the tahajjud page, to say
+ * what tahajjud is NOT — and then offered nowhere to go. Somebody meets
+ * "qiyam" announced at a mosque in their first Ramadan and cannot look it up.
+ *
+ * ⚠️ REVIEW REQUIRED — model-written English over citations read from the
+ * collections. The framing a reviewer owns: whether separating this from
+ * tahajjud helps a beginner or just gives them a second thing to be unsure
+ * about. The difference is one fact, and both pages have to carry it plainly.
+ */
+export const QIYAM_AL_LAYL: Reference = {
+  id: 'qiyam-al-layl',
+  surface: 'learn',
+  title: 'Standing at night',
+  subtitle: 'Qiyam al-Layl, and how it differs from tahajjud',
+  meta: {
+    category: 'salah',
+    difficulty: 'building',
+    estimatedMinutes: 2,
+    beginnerPriority: 3,
+    relatedContent: [ref('reference', 'tahajjud'), ref('reference', 'witr')],
+  },
+  sections: [
+    {
+      id: 'what',
+      heading: 'What it is',
+      body:
+        'Praying at night, before you have slept. Any amount, any part of the night after Isha. It is the same prayer you already know — two rakʿahs at a time, as many times as you want.',
+      sources: [hadith('muslim', '749', { grading: 'sahih', role: 'practice' })],
+    },
+    {
+      id: 'difference',
+      heading: 'The one thing that separates it from tahajjud',
+      body:
+        'Whether you slept. Pray at night before sleeping and it is qiyam al-layl; sleep first, wake, and pray, and that is tahajjud. Both are voluntary, both are the same movements, and nobody is doing the lesser one.',
+      note: 'This is the whole difference. If you are unsure which you prayed, it does not affect whether it counted.',
+    },
+    {
+      id: 'ramadan',
+      heading: 'Where you will hear the word',
+      body:
+        'In Ramadan, mosques announce “qiyam” for the long night prayers in the last ten nights. Taraweeh is the same family of prayer. You are welcome at it, you can leave when you need to, and nobody is counting your rakʿahs.',
+      sources: [general('Ordinary description of what happens at a mosque in Ramadan, claiming nothing about the ruling.')],
+    },
+    {
+      id: 'close',
+      heading: 'Finish with witr',
+      body:
+        'Whatever you pray at night, end it with witr — a single rakʿah that makes the night’s total odd. It is what closes the night prayer.',
+      sources: [hadith('bukhari', '990', { grading: 'sahih', role: 'practice' })],
+    },
+  ],
+};
+
+/**
+ * Witr.
+ *
+ * The one voluntary prayer whose shape a beginner gets wrong unaided. The
+ * others are all the two-rakʿah prayer they already pray five times a day;
+ * this one is odd, and it comes last.
+ *
+ * ⚠️ REVIEW REQUIRED — model-written English over citations read from the
+ * collections on 22 Aug 2026. What a reviewer owns: whether teaching the
+ * one-rakʿah form as the app's single path is right for a beginner when most
+ * people around them will pray three.
+ *
+ * The number is not invented. Abu Dawud 1422 has the Prophet ﷺ naming five,
+ * three and one as the reader's choice, and Muslim 752 states one at the end
+ * of the night. The generated guide teaches one because one is complete on its
+ * own and is the least that can go wrong; the page states the range.
+ *
+ * The qunut duʿa is deliberately absent. It is real, it is another Arabic text
+ * needing a verified source, and a witr without it is valid.
+ */
+export const WITR: Reference = {
+  id: 'witr',
+  surface: 'learn',
+  title: 'Witr',
+  subtitle: 'The odd rakʿah that closes the night',
+  meta: {
+    category: 'salah',
+    difficulty: 'building',
+    estimatedMinutes: 2,
+    beginnerPriority: 3,
+    relatedContent: [ref('reference', 'tahajjud'), ref('reference', 'qiyam-al-layl')],
+  },
+  sections: [
+    {
+      id: 'what',
+      heading: 'What it is',
+      body:
+        'The last prayer of your night, and an odd number of rakʿahs — which is what the word means. After Isha, any time until dawn. If you are going to pray at night, this is what you finish on.',
+      sources: [hadith('muslim', '752', { grading: 'sahih', role: 'practice' })],
+    },
+    {
+      id: 'how-many',
+      heading: 'One, three or five — your choice',
+      body:
+        'The Prophet ﷺ named all three and left it to the person praying. One rakʿah is a complete witr; it is not a shortened version of something else. Most people pray three, and you will see that around you.',
+      sources: [hadith('abu-dawud', '1422', { grading: 'sahih', role: 'practice' })],
+      note: 'Start with one. It is the whole prayer, it takes a minute, and it is the version you are least likely to get wrong while you are learning.',
+    },
+    {
+      id: 'when',
+      heading: 'When to pray it',
+      body:
+        'Any time between Isha and dawn. If you know you will not wake up later, pray it before you go to sleep. If you do pray at night, leave it until the end — it is meant to be the last thing.',
+      sources: [hadith('bukhari', '990', { grading: 'sahih', role: 'practice' })],
+    },
+  ],
+};

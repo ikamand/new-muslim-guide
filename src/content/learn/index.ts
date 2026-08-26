@@ -16,7 +16,7 @@ import { WHAT_IS_ISLAM } from './what-is-islam';
 import { WHAT_IS_THE_QURAN } from './what-is-the-quran';
 import { WHO_IS_ALLAH } from './who-is-allah';
 import { WHO_IS_MUHAMMAD } from './who-is-muhammad';
-import { ISTIKHARA, TAHAJJUD, TAWBA_PRAYER } from './voluntary-prayers';
+import { ISTIKHARA, QIYAM_AL_LAYL, TAHAJJUD, TAWBA_PRAYER, WITR } from './voluntary-prayers';
 import { WORK } from './work';
 import { ref, type ContentRef } from '../model';
 import type { Reference } from '../types';
@@ -65,12 +65,14 @@ export const LEARN_TOPICS: Reference[] = [
   ISLAMIC_CALENDAR,
   RAMADAN,
   TAHAJJUD,
+  QIYAM_AL_LAYL,
+  WITR,
   ISTIKHARA,
   TAWBA_PRAYER,
 ];
 
 export {
-  ISTIKHARA, TAHAJJUD, TAWBA_PRAYER,
+  ISTIKHARA, QIYAM_AL_LAYL, TAHAJJUD, TAWBA_PRAYER, WITR,
   AL_FATIHAH, BEFORE_PRAYER, CLOTHING, DUA_AND_DHIKR, FAMILY, FOOD,
   HALAL_AND_HARAM, ISLAMIC_CALENDAR, MANNERS, PATIENCE_AND_GRATITUDE, RAMADAN,
   REPENTANCE, SUNNAH, WHAT_BREAKS_PRAYER, WHAT_IS_ISLAM, WHAT_IS_THE_QURAN,

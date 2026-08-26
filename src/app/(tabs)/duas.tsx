@@ -2,6 +2,7 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ContentNoteCard } from '@/components/content-note';
+import { PressableLink } from '@/components/pressable-link';
 import { Glyph } from '@/components/illustrations';
 import { RecitationCard } from '@/components/recitation-card';
 import { SourceDisclosure } from '@/components/source-list';
@@ -119,12 +120,40 @@ export default function DuasScreen() {
       })}
 
       <TranslationGap coverage={coverage} />
+        {/*
+          The day is the tab; the book is one tap under it.
+
+          Both are needed and they answer different questions. The day answers
+          "what do I say now" for somebody who does not know a duʿa for this
+          moment exists. The index answers "is there a duʿa for ___" for
+          somebody who already does. Putting the index first would have made
+          the app useless to the first person, which is who it is for.
+        */}
+        <PressableLink
+          href="/dua-book"
+          style={[
+            styles.bookLink,
+            { backgroundColor: theme.backgroundElement, borderColor: theme.border },
+          ]}
+          pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
+          <ThemedText type="smallBold" themeColor="accent">
+            {t('duaBook.open')}
+          </ThemedText>
+        </PressableLink>
       </ScrollView>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  bookLink: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: 52,
+    borderRadius: Radius.medium,
+    borderWidth: StyleSheet.hairlineWidth,
+    marginTop: Spacing.three,
+  },
   safeArea: {
     flex: 1,
   },

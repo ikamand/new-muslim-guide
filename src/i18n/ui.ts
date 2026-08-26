@@ -173,6 +173,11 @@ export const EN = {
   'tab.learn': 'Learn',
   'tab.quran': 'Qur’an',
   'tab.duas': 'Duʿa',
+  'duaBook.title': 'Every occasion',
+  'duaBook.intro': 'Hisn al-Muslim, the collection these come from, in the order the book has them. Reach for it when you already know what you are looking for — the day above is for when you do not.',
+  'duaBook.open': 'Browse every occasion →',
+  'duaBook.credit': 'Arabic and translation published by',
+  'duaBook.missing': 'That occasion is not in the book.',
 
   /*
     The memorisation tab.

@@ -24,10 +24,17 @@
  * ⚠️ The nine duʿas the app already shows live in `src/content/duas.ts` with
  * checked citations and, in one case, bundled audio. They are NOT merged here.
  *
- * ⚠️ Because nothing imports this file, `npm run arabic` and
- * `npm run i18n:manifest` do not see it — they report what the app actually
- * ships. Wiring even one occasion into a screen will move both sheets sharply,
- * and that is the moment the review pile grows, not this one.
+ * ⚠️ `npm run arabic` reads this file directly — it has to, because the sheet
+ * collects from a hand-written list of content files and the book shipped
+ * without being on it. For one commit the sheet said 54 Arabic strings while
+ * the app displayed 372.
+ *
+ * ⚠️ The English here is IslamHouse's, not the app's, so it is NOT in
+ * `docs/i18n-manifest.csv` and must never be machine-translated. When French
+ * and Spanish come back, fetch them the same way this English was fetched:
+ * `transes=fr` on the same endpoint returns the publisher's own translation.
+ * A model translating a duʿa is the same class of error as a model writing
+ * one.
  */
 
 export type HisnLine = {

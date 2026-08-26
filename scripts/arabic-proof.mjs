@@ -23,6 +23,7 @@ const { PHRASES } = await load('src/content/phrases.ts');
 const { PILLARS } = await load('src/content/pillars.ts');
 const { IMAN_PILLARS } = await load('src/content/iman.ts');
 const { DUAS } = await load('src/content/duas.ts');
+const { HISN, HISN_SOURCE } = await load('src/content/duas/hisn.ts');
 
 const whenSaid = new Map(DUAS.map((d) => [d.says, d.when]));
 
@@ -132,6 +133,33 @@ rows.sort((a, b) => (a.source ? 1 : 0) - (b.source ? 1 : 0));
  * content:verify` is where that gets resolved — it searches the published
  * texts for anything carrying no citation.
  */
+/*
+  Hisn al-Muslim, which nearly slipped past this sheet entirely.
+
+  `dua-book/` renders 318 lines of Arabic straight from `duas/hisn.ts`, and
+  this script collects from a hand-written list of content files — so the day
+  the book shipped, the sheet still said 54 Arabic strings while the app
+  displayed 372. CLAUDE.md says this lists EVERY Arabic string in the app, and
+  for one commit it did not.
+
+  Every line is `copied`: both the Arabic and the English are IslamHouse's
+  published book, carried verbatim by a generator. That is the whole point of
+  the column — these owe no model-written flag, and a reviewer reading this
+  sheet should see them counted rather than absent.
+*/
+for (const occasion of HISN) {
+  for (const line of occasion.lines) {
+    rows.push({
+      where: `Hisn al-Muslim — ${occasion.english || occasion.arabic}`,
+      arabic: line.arabic,
+      translit: '',
+      english: line.english,
+      source: `${HISN_SOURCE.publisher}, book ${HISN_SOURCE.book}${line.footnote ? ` — ${line.footnote}` : ''}`,
+      file: 'duas/hisn.ts',
+    });
+  }
+}
+
 const TERM_FILES = new Set(['phrases.ts', 'pillars.ts', 'iman.ts']);
 for (const row of rows) row.kind = TERM_FILES.has(row.file) ? 'term' : 'quotation';
 

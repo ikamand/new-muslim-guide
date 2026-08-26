@@ -910,6 +910,26 @@ No server, no migrations.
 
 ---
 
+# Built 22 Aug, and what is left
+
+**Everything outside the numbering is done.** Commits `875eb1d`..`main` on
+22 Aug: the rawatib citations, Dhuhr's 2 + 2, the "Prayed by choice"
+inversion, the istikhara duʿa, qiyam al-layl and witr. Each section below that
+is marked ✅ shipped that day.
+
+⚠️ **Verified by export and by reading the rendered HTML, not by looking at a
+screen.** There is no browser automation on this machine. Routes, row labels
+and the generated step lists were all checked; nobody has seen it running.
+
+⚠️ **`npm run content:audit` does not run.** It dies on the `require()` calls
+in `prayer-images.ts` — Metro resolves those at build time and plain node
+cannot. Pre-existing, from `7cb06ed`, not caused by this work. One of the
+tools CLAUDE.md relies on is unavailable until it is fixed.
+
+**Still to build: phases 7, 8, 9, 10 and 11.** None started.
+
+---
+
 # Tuesday 25 Aug — three workstreams
 
 Planned 21 Aug, on a session with no build budget. Two things changed the board
@@ -1208,7 +1228,7 @@ the OTA phases while it runs.
 
 ---
 
-## Also Tuesday — number the rawatib citation
+## ✅ Built 22 Aug — the rawatib citation has numbers
 
 Iyad spotted it 22 Aug: [`prayers.ts:102`](../src/content/prayers.ts#L102) says
 *"The twelve come from Umm Habiba's narration in Sahih Muslim"* **and gives no
@@ -1259,7 +1279,7 @@ part, not a restatement of the total. If it ever appears near the rawatib
 counts it needs a sentence saying so, or it reads as the app contradicting
 itself.
 
-### The four before Dhuhr are 2 + 2, and the data cannot say so
+### ✅ Built — the four before Dhuhr are 2 + 2
 
 Iyad, 22 Aug, listing the rawatib: *"duhr has 4 — (2+2) before, and after 2."*
 **The counts in [`prayers.ts:31-38`](../src/content/prayers.ts#L31-L38) are
@@ -1313,7 +1333,7 @@ this one, standing next to somebody in a mosque.
 
 ---
 
-## Also Tuesday — invert "Prayed by choice"
+## ✅ Built 22 Aug — "Prayed by choice" is inverted
 
 Iyad, 22 Aug: *"the whole section is messy."* It is, and the code says so
 itself. [`pray.tsx:119`](../src/app/pray.tsx#L119) routes every voluntary row
@@ -1356,7 +1376,7 @@ stops being the wall you hit first.
 - The footer link to "what these prayers are for" is then pointing at the place
   the rows already go. **Delete it.**
 
-### Istikhara's duʿa is the prayer, not a footnote
+### ✅ Built — the istikhara duʿa is on the page
 
 Iyad's point, and the sharpest one of the day: *"istikhara has the istikhara
 duʿa at the end of it — that should be the main thing after making the 2
@@ -1390,7 +1410,7 @@ teaching rather than quoting. Same text, two purposes, one place each.
 delete the ⚠️ comment saying it is not printed yet along with the note
 apologising for its absence.
 
-### Add Qiyam al-Layl — and witr is the bigger gap
+### ✅ Built — Qiyam al-Layl added
 
 Iyad, 22 Aug. **Qiyam al-layl is already defined in the app and not offered.**
 `voluntary-prayers.ts` closes the tahajjud page with *"If you have not slept,
@@ -1632,7 +1652,7 @@ witr are verified above from the six books — but nothing goes in from it.
 
 ---
 
-### Witr — decided 22 Aug, and it is one rakʿah
+### ✅ Built — Witr, generated as one rakʿah
 
 **Approved by Iyad.** Teaching someone to pray at night without telling them to
 close it with witr leaves the instruction mid-sentence. Witr is also the one

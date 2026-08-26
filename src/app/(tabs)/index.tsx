@@ -6,8 +6,8 @@ import { ProgressRing } from '@/components/illustrations';
 import { PrayerTimesCard } from '@/components/prayer-times-card';
 import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
-import { hasPracticeBeyondSurahs, PRAYERS, WUDU, type Guide } from '@/content';
-import { BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
+import { duaOfTheDay, hasPracticeBeyondSurahs, PRAYERS, WUDU, type Guide } from '@/content';
+import { ArabicFont, BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useHelpTopics } from '@/hooks/use-help';
 import { useHijriToday } from '@/hooks/use-hijri';
 import { useJourney } from '@/hooks/use-journey';
@@ -15,7 +15,7 @@ import { useLocale } from '@/hooks/use-locale';
 import { usePrayerTimes } from '@/hooks/use-prayer-times';
 import { useTheme } from '@/hooks/use-theme';
 import { useToday, type TodayItem } from '@/hooks/use-today';
-import { localiseGuide } from '@/i18n/localise';
+import { localiseDua, localiseGuide } from '@/i18n/localise';
 import type { UIKey } from '@/i18n/ui';
 import { routeFor } from '@/lib/content-routes';
 
@@ -278,6 +278,55 @@ function TodayRow({ item }: { item: TodayItem }) {
  * ever hidden, because the question someone has today is not the only question
  * they will ever have.
  */
+/**
+ * One duʿa for the moment the clock is in.
+ *
+ * ## Why this belongs on Today when the duʿa tab exists
+ *
+ * Because a tab is somewhere you go, and nobody goes looking for a duʿa they
+ * do not know exists. This card is the app noticing the moment on their
+ * behalf — which is the same argument that made the duʿa screen a day rather
+ * than a list, applied one level up.
+ *
+ * It also passes Today's own test. Today holds what has a deadline, and "you
+ * are leaving the house now" is a deadline in the only sense that matters
+ * here: it stops being true in an hour.
+ *
+ * ## It is allowed to be absent
+ *
+ * `duaOfTheDay` returns nothing for a moment the app has no duʿa for, and this
+ * renders nothing rather than reaching for a duʿa from another moment. A card
+ * offering "before eating" at midnight would undo the whole point of it.
+ */
+function DuaOfTheDay() {
+  const theme = useTheme();
+  const { t, locale } = useLocale();
+  const dua = duaOfTheDay();
+  if (!dua) return null;
+
+  const localised = localiseDua(dua, locale);
+
+  return (
+    <PressableLink
+      href="/duas"
+      style={[
+        styles.duaCard,
+        { backgroundColor: theme.backgroundElement, borderColor: theme.border },
+      ]}
+      pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
+      <ThemedText type="caption" themeColor="textSecondary">
+        {localised.when}
+      </ThemedText>
+      <ThemedText style={[styles.duaArabic, { color: theme.text }]} numberOfLines={2}>
+        {localised.says.arabic}
+      </ThemedText>
+      <ThemedText type="small" themeColor="textSecondary">
+        {localised.says.translation}
+      </ThemedText>
+    </PressableLink>
+  );
+}
+
 function HelpSection() {
   const theme = useTheme();
   const { t } = useLocale();
@@ -346,6 +395,8 @@ export default function TodayScreen() {
 
         <JourneyCard />
 
+        <DuaOfTheDay />
+
         {/*
           Nothing most of the year. A season is the only thing left here — it
           is the one row that answers Today's question rather than Learn's, and
@@ -362,6 +413,19 @@ export default function TodayScreen() {
 }
 
 const styles = StyleSheet.create({
+  duaCard: {
+    gap: Spacing.two,
+    padding: Spacing.four,
+    borderRadius: Radius.medium,
+    borderWidth: StyleSheet.hairlineWidth,
+  },
+  duaArabic: {
+    fontFamily: ArabicFont,
+    fontSize: 24,
+    lineHeight: 46,
+    textAlign: 'right',
+    writingDirection: 'rtl',
+  },
   safeArea: {
     flex: 1,
   },

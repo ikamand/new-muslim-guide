@@ -58,6 +58,59 @@ export type Dua = {
   moment?: DayMoment;
 };
 
+/**
+ * Which moment of the day an hour falls in.
+ *
+ * A table of twenty-four rather than a chain of comparisons, because the
+ * boundaries are the content here and a reader should be able to see all of
+ * them at once instead of deriving them from arithmetic.
+ *
+ * `washing` is not on it, and that is not an oversight: going to the bathroom
+ * has no hour. Its duʿas are reached from the day screen, where the whole day
+ * is visible, rather than from a card that claims this is the moment for them.
+ */
+const MOMENT_BY_HOUR: readonly DayMoment[] = [
+  'night', 'night', 'night', 'night', //  00–03
+  'waking', 'waking', 'waking', 'waking', //  04–07
+  'waking', 'leaving', 'leaving', 'leaving', //  08–11
+  'eating', 'eating', 'eating', 'travel', //  12–15
+  'travel', 'travel', 'eating', 'eating', //  16–19
+  'night', 'night', 'night', 'night', //  20–23
+];
+
+/**
+ * One duʿa for right now — the card Today shows.
+ *
+ * ## Not random, and the reason is the whole point of the day screen
+ *
+ * A random pick shows a sleeping duʿa at nine in the morning, which teaches
+ * the opposite of the thing this content exists to teach: that there are words
+ * for the moment you are actually in. So the moment comes from the clock.
+ *
+ * ## Stable for the calendar day
+ *
+ * Seeded on the date, so it does not reshuffle every time the tab is opened.
+ * "Today's duʿa" that changes when you come back to it is not today's
+ * anything. It does change as the day moves between moments, which is correct
+ * — the card is answering "what do I say now", not "what is today's quote".
+ *
+ * ## Why it can return undefined
+ *
+ * Nine duʿas do not cover six moments. Rather than widen the pick to any duʿa
+ * at all — which would put "before eating" on screen at midnight and undo the
+ * paragraph above — the card is simply absent for a moment the app has nothing
+ * for. An honest gap beats a wrong answer, and the gap closes as the book is
+ * reviewed and its occasions graduate onto the day.
+ */
+export function duaOfTheDay(now: Date = new Date()): Dua | undefined {
+  const candidates = duasAt(MOMENT_BY_HOUR[now.getHours()]);
+  if (candidates.length === 0) return undefined;
+  const dayNumber = Math.floor(
+    Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) / 86_400_000,
+  );
+  return candidates[dayNumber % candidates.length];
+}
+
 /** The duʿas of one moment, in the order they are said. */
 export function duasAt(moment: DayMoment): readonly Dua[] {
   return DUAS.filter((dua) => dua.moment === moment);

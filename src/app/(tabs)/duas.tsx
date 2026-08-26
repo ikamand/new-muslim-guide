@@ -1,5 +1,5 @@
-import { Stack } from 'expo-router';
 import { ScrollView, StyleSheet, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ContentNoteCard } from '@/components/content-note';
 import { Glyph } from '@/components/illustrations';
@@ -54,12 +54,19 @@ export default function DuasScreen() {
   );
 
   return (
-    <ScrollView contentContainerStyle={styles.content}>
-      <Stack.Screen options={{ title: t('duas.title') }} />
+    <SafeAreaView style={[styles.safeArea, { backgroundColor: theme.background }]} edges={['top']}>
+      <ScrollView contentContainerStyle={styles.content}>
+        {/*
+          The title is on the page, not in a header. This screen used to be
+          pushed from Learn and took its name from the navigation bar; as a tab
+          there is no bar to take it from, and losing it would have left the
+          day starting mid-sentence.
+        */}
+        <ThemedText type="subtitle">{t('duas.title')}</ThemedText>
 
-      <ThemedText type="default" themeColor="textSecondary">
-        {t('duas.intro')}
-      </ThemedText>
+        <ThemedText type="default" themeColor="textSecondary">
+          {t('duas.intro')}
+        </ThemedText>
 
       {DAY_MOMENTS.map((moment) => {
         const duas = duasAt(moment);
@@ -112,11 +119,15 @@ export default function DuasScreen() {
       })}
 
       <TranslationGap coverage={coverage} />
-    </ScrollView>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+  },
   content: {
     padding: Spacing.four,
     paddingBottom: Spacing.six,

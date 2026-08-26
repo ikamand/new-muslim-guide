@@ -107,7 +107,6 @@ function RootStack() {
         name="phrases"
         options={{ title: 'What people say to you', headerBackTitle: 'Learn' }}
       />
-      <Stack.Screen name="duas" options={{ title: 'Everyday duʿas', headerBackTitle: 'Learn' }} />
       <Stack.Screen name="practice" options={{ title: 'Practice', headerBackTitle: 'Learn' }} />
       <Stack.Screen name="pray" options={{ title: '', headerBackTitle: 'Learn' }} />
       <Stack.Screen name="surah/[number]" options={{ title: '', headerBackTitle: 'Qur’an' }} />

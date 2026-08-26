@@ -172,6 +172,7 @@ export const EN = {
   'attribution.contemporary scholarship': 'Contemporary scholarship',
   'tab.learn': 'Learn',
   'tab.quran': 'Qur’an',
+  'tab.duas': 'Duʿa',
 
   /*
     The memorisation tab.
@@ -497,6 +498,7 @@ const FR: Overrides = {
   'tab.today': 'Aujourd’hui',
   'tab.learn': 'Apprendre',
   'tab.quran': 'Coran',
+  'tab.duas': 'Duʿa',
   'quran.title': 'Apprendre par cœur',
   'quran.intro': 'Al-Fatiha, puis les sourates courtes de la fin du Coran, dans l’ordre où on les apprend habituellement. Commencez par le haut — Al-Fatiha est dans chaque prière, c’est donc celle à connaître en premier.',
   'quran.progress': '{done} sur {total} apprises',
@@ -748,6 +750,7 @@ const ES: Overrides = {
   'tab.today': 'Hoy',
   'tab.learn': 'Aprender',
   'tab.quran': 'Corán',
+  'tab.duas': 'Duʿa',
   'quran.title': 'Aprender de memoria',
   'quran.intro': 'Al-Fatiha y luego las suras cortas del final del Corán, en el orden en que suelen aprenderse. Empieza por arriba — Al-Fatiha está en cada oración, así que es la primera que conviene saber.',
   'quran.progress': '{done} de {total} aprendidas',

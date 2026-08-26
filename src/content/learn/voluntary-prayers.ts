@@ -1,4 +1,4 @@
-import { note, ref } from '../model';
+import { ref } from '../model';
 import { Recitations } from '../recitations';
 import { general, hadeethEnc, hadith, quran } from '../sources';
 import type { Reference } from '../types';

@@ -55,6 +55,26 @@ export default function TabsLayout() {
           ),
         }}
       />
+      {/*
+        Hisn al-Muslim is a book, not a topic, and a book gets a tab — the same
+        judgement the Qur'an tab already carries. It also keeps Today obeying
+        its own rule: Today holds what has a deadline, and a duʿa for putting
+        on clothes has none.
+
+        The tab opens on the day rather than on an index, because a convert
+        does not know a duʿa for putting on clothes EXISTS and will never
+        scroll to it. An index is a tool for somebody who already knows the
+        name of what they want.
+      */}
+      <Tabs.Screen
+        name="duas"
+        options={{
+          title: t('tab.duas'),
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="sunny-outline" size={size} color={color} />
+          ),
+        }}
+      />
       <Tabs.Screen
         name="settings"
         options={{

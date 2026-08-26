@@ -7,7 +7,7 @@ import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
 import { getAudio, practiceKeyFor, type Recitation } from '@/content';
 import { surahForRecitation } from '@/content/quran/surahs';
-import { ArabicFont, Radius, Spacing } from '@/constants/theme';
+import { Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { useSettings } from '@/hooks/use-settings';
 import { useTheme } from '@/hooks/use-theme';
@@ -57,7 +57,7 @@ export function RecitationCard({
         styles.card,
         { backgroundColor: theme.backgroundElement, borderColor: theme.border },
       ]}>
-      <ThemedText style={styles.arabic}>{recitation.arabic}</ThemedText>
+      <ThemedText type="arabicVerse" style={styles.arabic}>{recitation.arabic}</ThemedText>
 
       {transliteration && (
         <ThemedText type="small" themeColor="textSecondary" style={styles.transliteration}>
@@ -148,9 +148,7 @@ const styles = StyleSheet.create({
    * shadda on one line never touches a kasra on the next.
    */
   arabic: {
-    fontFamily: ArabicFont,
-    fontSize: 30,
-    lineHeight: 58,
+    /* size and face: the `arabicVerse` rung */
     textAlign: 'right',
     writingDirection: 'rtl',
   },

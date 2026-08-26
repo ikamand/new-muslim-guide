@@ -8,7 +8,7 @@ import { ThemedText } from '@/components/themed-text';
 import { ayahTransliteration, getSurah, JUZ30_SOURCE } from '@/content/quran/surahs';
 import { ayahSource, keepAyah } from '@/content/quran/ayah-audio';
 import { getReciter, reciterCredit } from '@/content/quran/recitation';
-import { ArabicFont, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
+import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { useMemorised } from '@/hooks/use-memorised';
 import { useSettings } from '@/hooks/use-settings';
@@ -327,7 +327,7 @@ export default function SurahScreen() {
       <Stack.Screen options={{ title: surah.name }} />
 
       <View style={styles.header}>
-        <ThemedText style={styles.titleArabic}>{surah.nameArabic}</ThemedText>
+        <ThemedText type="arabicDisplay" style={styles.titleArabic}>{surah.nameArabic}</ThemedText>
         <ThemedText type="small" themeColor="textSecondary">
           {t('quran.surahNumber').replace('{n}', String(surah.number))} · {surah.meaning} ·{' '}
           {surah.ayahs.length} {t('count.ayahs')}
@@ -541,7 +541,7 @@ export default function SurahScreen() {
                     </ThemedText>
                   </View>
                 ) : (
-                  <ThemedText style={styles.arabic}>{ayah.arabic}</ThemedText>
+                  <ThemedText type="arabicVerse" style={styles.arabic}>{ayah.arabic}</ThemedText>
                 )}
 
                 {/*
@@ -623,9 +623,7 @@ const styles = StyleSheet.create({
     gap: Spacing.one,
   },
   titleArabic: {
-    fontFamily: ArabicFont,
-    fontSize: 34,
-    lineHeight: 52,
+    /* size and face: the `arabicDisplay` rung */
   },
   list: {
     gap: Spacing.two,
@@ -712,9 +710,7 @@ const styles = StyleSheet.create({
     fontStyle: 'italic',
   },
   arabic: {
-    fontFamily: ArabicFont,
-    fontSize: 30,
-    lineHeight: 58,
+    /* size and face: the `arabicVerse` rung */
     textAlign: 'right',
     writingDirection: 'rtl',
   },

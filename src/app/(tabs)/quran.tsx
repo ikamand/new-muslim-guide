@@ -5,7 +5,7 @@ import { GirihBand } from '@/components/illustrations';
 import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
 import { LEARNING_ORDER } from '@/content/quran/surahs';
-import { ArabicFont, BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
+import { BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { useMemorised } from '@/hooks/use-memorised';
 import { useTheme } from '@/hooks/use-theme';
@@ -111,7 +111,7 @@ export default function QuranScreen() {
                       recognising the shape of الإخلاص is the first Arabic
                       reading most people do without noticing.
                     */}
-                    <ThemedText style={styles.nameArabic}>{surah.nameArabic}</ThemedText>
+                    <ThemedText type="arabicName" style={styles.nameArabic}>{surah.nameArabic}</ThemedText>
                   </View>
                   <ThemedText type="small" themeColor="textSecondary">
                     {surah.meaning} · {surah.ayahs.length} {t('count.ayahs')}
@@ -188,8 +188,6 @@ const styles = StyleSheet.create({
     gap: Spacing.two,
   },
   nameArabic: {
-    fontFamily: ArabicFont,
-    fontSize: 22,
-    lineHeight: 32,
+    /* size and face: the `arabicName` rung */
   },
 });

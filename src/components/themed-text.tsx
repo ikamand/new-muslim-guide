@@ -59,10 +59,12 @@ export type ThemedTextProps = TextProps & {
     | 'sectionTitle'
     | 'subtitle'
     | 'title'
+    | 'arabicName'
     | 'arabicNote'
     | 'arabicQuote'
     | 'arabicLead'
-    | 'arabicVerse';
+    | 'arabicVerse'
+    | 'arabicDisplay';
   themeColor?: ThemeColor;
 };
 
@@ -100,6 +102,17 @@ const styles = StyleSheet.create({
     right-aligned; a word inside a sentence is not. Direction belongs to the
     layout, the face belongs to the type.
   */
+  /*
+    A NAME, not a sentence: a surah in a list, a label beside a transliteration.
+    Tight leading on purpose — the rungs below are set for flowing text with
+    vowel marks stacking between lines, and a single-line name given that much
+    leading floats away from the row it belongs to.
+  */
+  arabicName: {
+    fontFamily: ArabicFont,
+    fontSize: 22,
+    lineHeight: 32,
+  },
   /** A footnote, a citation's Arabic, anything supporting. */
   arabicNote: {
     fontFamily: ArabicFont,
@@ -123,6 +136,12 @@ const styles = StyleSheet.create({
     fontFamily: ArabicFont,
     fontSize: 30,
     lineHeight: 58,
+  },
+  /** A title at the head of a screen, read once rather than recited. */
+  arabicDisplay: {
+    fontFamily: ArabicFont,
+    fontSize: 34,
+    lineHeight: 52,
   },
 
   /** Kickers, units and counts — the smallest thing that is still readable. */

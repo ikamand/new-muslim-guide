@@ -27,7 +27,7 @@ with its reasoning attached.
 | **5** | [The Qur'an tab](#phase-5--the-quran-tab--juz-30) | ✅ **Done** — `eed5214`, and its held audio is now Phase 8 | OTA |
 | **7** | [The Duʿa tab](#phase-7--the-dua-tab) | 🟡 **Tab, book and Today's card built** — 25 Aug. Left: mapping 132 occasions onto the six moments | OTA |
 | **8** | [Audio that saves itself](#phase-8--audio-that-saves-itself) | 🟡 **Bundled set and Al-Ikhlas built** — 25 Aug. Left: save-on-play, storage screen | ⚠️ **Build** |
-| **9** | [Bet 4: the Arabic letters](#phase-9--bet-4-the-arabic-letters) | ⬜ Undesigned — needs a session, not a ticket | OTA |
+| **9** | [~~Bet 4: the Arabic letters~~](#phase-9--dropped-25-aug) | ❌ **Dropped 25 Aug** — it is an Arabic curriculum, not a feature | — |
 | **10** | Downloading a voice, a juz at a time | ↩︎ **Merged into 8** on 25 Aug — same store, same build |
 | **11** | [Four questions, on every teaching page](#phase-11--four-questions-on-every-teaching-page) | ⬜ Planned 25 Aug — biggest item here, own day | OTA |
 | — | [The prayers](#the-prayer-work) | ✅ **Done** — `a004af9` | OTA |
@@ -919,7 +919,7 @@ Duʿa tab · Hisn al-Muslim fetched and browsable · Today's duʿa card.
 
 **Left:** Phase 7's mapping of 132 occasions onto six moments (editorial, needs
 Iyad) · Phase 8's save-on-play and storage screen (needs a native build) ·
-Phase 9 (undesigned) · Phase 11 (28 pages, its own day).
+Phase 11 (28 pages, its own day). **Phase 9 is dropped.**
 
 ⚠️ **Three checking tools were found broken or blind by this day's work**, all
 recorded in their own commits: `content:audit` does not run at all
@@ -1156,47 +1156,59 @@ a request while audio plays from disk is a bug waiting for a tunnel.
 
 ---
 
-## Phase 9 — Bet 4: the Arabic letters
+## Phase 9 — DROPPED, 25 Aug
 
-**This is a design session, not a build ticket, and it is the only item here
-that is.** The other two have a shape already; this one has a one-line
-description and an agreed reason to exist.
+**Iyad killed it, and he was right.** Kept here rather than deleted, because the
+reasoning is worth not repeating.
 
-### 9.1 What it serves
+### What was proposed
 
-Every transliteration in this app is a crutch, and crutches are supposed to come
-off. Someone who learns salah from transliteration alone has memorised English
-letters and still cannot open a mushaf — which means they can never check what
-they are saying, never follow along in a mosque, and stay permanently dependent
-on somebody else's romanisation. **This bet is the exit ramp.**
+Teaching letter recognition from the texts a convert already recites — the
+observation being that Al-Fatiha alone carries 21 of the 28 letters and
+Al-Fatiha plus the three quls carries 26. The transliteration line would come
+off word by word as recognition was demonstrated, until the page someone opens
+five times a day had turned into Arabic.
 
-It is also the identity bet: prayer times and qibla exist in fifty apps, and a
-letter-recognition surface built for an adult convert does not.
+### Why it does not survive contact
 
-### 9.2 The design questions, unanswered
+- **The letters are about a fifth of reading, and the proposal treated the rest
+  as free.** It claimed harakat "come free because the mushaf is fully
+  vowelled". That is wrong. A mark being printed is not the same as knowing
+  what it does: sukun, three cases of tanwin, shadda and madd all have to be
+  taught, and past those sit the tajwid rules that decide whether a recitation
+  is correct at all. `بْ بٍ بً بّ` is not a detail on top of ب.
+- **Once the vowels cannot be hand-waved, this is an Arabic literacy
+  curriculum**, not a feature. It would become the largest thing in the app.
+- **And it changes who the app is for.** The promise is how to pray, three
+  weeks after the shahada. Somebody who intends to pray in English and
+  transliteration for the rest of their life is not a failed user of this app —
+  they are the primary one. Making literacy the route to full use quietly
+  reclassifies them.
 
-Worth an hour with Opus before any code:
+### What the Arabic in the app is actually for
 
-- **Recognition or production?** Reading a mushaf needs recognition only.
-  Writing is a different, larger skill and probably out of scope.
-- **Alphabet chart, or letters in situ?** The chart is what every existing app
-  does and what every adult learner abandons. The alternative: teach the letters
-  *inside Al-Fatiha and the short surahs* — the text they will actually read —
-  so the first win is "I read a word of the Qur'an", not "I finished lesson 3".
-  This is the idea worth arguing about.
-- **Joined forms.** A letter looks different initial, medial, final and
-  isolated. This is the thing that actually stops people, and no beginner app
-  handles it well. It may be the whole product rather than a lesson in it.
-- **Sound, or shape only?** Sound needs a recorded voice, which needs a reciter,
-  which is one of the three human blockers. Shape-only ships without anybody.
-- **Harakat in scope?** The mushaf is vowelled; the letters alone will not get
-  someone reading it.
+Iyad's answer, and it stands: authenticity, beauty, and the readers who already
+have Arabic. One thing to add — it is also the **referent**. Somebody reciting
+from transliteration is still looking at the real words of what they are
+saying, not a substitute for them. That is worth carrying even for a reader who
+will never decode it.
 
-### 9.3 Recommendation
+### The slot this leaves empty, and why it is not empty
 
-Do 7 and 8 on Tuesday with Sonnet — both are largely mechanical once decided.
-**Keep bet 4 on Opus and treat it as its own session**, because a safe design
-here produces the alphabet chart nobody finishes.
+Phase 9 was the roadmap's "identity bet" — the thing making this app different
+rather than a good version of a familiar category. Dropping it appears to leave
+that unfilled.
+
+**It is already filled, distributed rather than concentrated.** The identity is
+the convert-first framing everywhere: that the rawatib are taught *because
+every born Muslim absorbs them and almost no convert is ever told*; that the
+help chip says "I lost count" and not "When something goes wrong"; that a page
+exists to say no dream is coming after istikhara; that the recite step prints
+Al-Ikhlas instead of asking for "any other short passage". Fifty apps have
+prayer times. None of them do that.
+
+It is not a feature that can be pointed at in a store listing, which is
+probably why the slot kept reading as empty.
 
 ---
 

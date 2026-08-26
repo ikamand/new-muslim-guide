@@ -25,6 +25,11 @@ isn't a senior engineer.
 
 ## How to work
 
+**Small and finished beats large and nearly.** Half-done work at volume is
+worth less than one thing done properly, and it costs more, because every piece
+of it has to be re-checked later by someone who did not build it. When there is
+more to do than can be done well, do less of it and say which part you left.
+
 **Be decisive.** One recommendation, not a menu.
 **Be inventive.** The rules in this file exist to keep the work clean, not to
 keep it safe. Propose the expensive right idea — a different shape for a
@@ -307,6 +312,28 @@ anyone cared.
 
 ## Before you ship
 
+- **Prefer a check that fails over a rule to remember.** This is the strongest
+  thing on this list, and it was learned the hard way: "one hero per page" was
+  written into the plan and broken the same night by the person who wrote it,
+  while `npm run style:check` caught a blank one immediately. Whenever a
+  content or layout invariant is agreed, add it to a script that exits
+  non-zero. `arabic`, `audio:manifest`, `content:verify` and `style:check` all
+  exist because a sentence in a document does not stop anything.
+- **When you cannot see the result, build less — and say so first.** The
+  failure is not "did not look at a screen"; it is building thirty pages that
+  could not be looked at and calling green checks verification. If there is no
+  way to see it, build the foundation and ONE example of each pattern, then
+  stop and write down what needs eyes. Say this at the start, not in the
+  summary afterwards.
+- **A repeated change across more than about three files is a pilot, not a
+  batch.** Do two that are as unalike as possible, get them looked at, then do
+  the rest. Twenty-eight pages built to a format nobody has seen is
+  twenty-eight pages to redo.
+- **Check the thing, not a proxy for it.** "Is `package.json` in the
+  fingerprint's file list?" is not "does `package.json` affect the
+  fingerprint". "Did the citation resolve?" is not "is the right narration on
+  the screen". Every wrong assertion in this project so far has been a proxy
+  answered confidently.
 - **`tsc --noEmit` passing is not evidence the change works.** It's evidence
   nothing is syntactically broken.
 - Prove a render happens: `npx expo export --platform web` bundles *and*

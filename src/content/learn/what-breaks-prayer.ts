@@ -35,7 +35,7 @@ export const WHAT_BREAKS_PRAYER: Reference = {
     relatedContent: [ref('reference', 'lost-count'), ref('guide', 'wudu')],
   },
   quickFacts: [
-    { label: 'Breaks it', value: 'Losing wudu · speaking · eating · laughing out loud · turning away' },
+    { label: 'Breaks it', value: 'Wudu · speaking · eating · laughing · turning away' },
     { label: 'Does not', value: 'Doubt · small movements · ordinary mistakes' },
   ],
   sections: [
@@ -90,7 +90,8 @@ export const WHAT_BREAKS_PRAYER: Reference = {
     {
       id: 'speaking',
       heading: 'What if I speak without thinking?',
-      promote: 'hero',
+      // 1,431 characters. Full-bleed, that is a wall rather than an answer.
+      promote: 'supporting',
       body:
         'A companion said "Allah have mercy on you" to a man who sneezed mid-prayer, not knowing he could not. Afterwards the Prophet ﷺ taught him — without scolding him, and by his own account better than anyone had ever taught him anything — that this prayer is not the place for ordinary speech. He was not told to pray it again. Deliberate speech ends the prayer; speech before you knew the rule, or in a moment of forgetfulness, does not.',
       sources: [

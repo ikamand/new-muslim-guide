@@ -113,7 +113,12 @@ export const ISTIKHARA: Reference = {
     {
       id: 'what',
       heading: 'What is istikhara?',
-      promote: 'hero',
+      /*
+        No promotion here. "What do I say?" below already prints the duʿa
+        through `says`, and Bukhari 3293 IS that duʿa with its chain attached —
+        promoting it would put the same words on the page twice, once as a
+        thousand characters of narration and once as the thing to recite.
+      */
       body:
         'Two rakʿahs and a duʿa, prayed when you have a decision to make. Jabir reported that the Prophet ﷺ taught it for every matter the way he taught a surah of the Qur’an — which tells you how ordinary it was meant to be, and how often.',
       sources: [

@@ -31,7 +31,7 @@ export const CLOTHING: Reference = {
   },
   quickFacts: [
     { label: 'The idea', value: 'Modesty — of dress, of look, of manner' },
-    { label: 'Applies to', value: 'Everyone. It starts with how men behave, not with women’s clothes' },
+    { label: 'Applies to', value: 'Everyone — and it starts with how men behave' },
   ],
   sections: [
     {

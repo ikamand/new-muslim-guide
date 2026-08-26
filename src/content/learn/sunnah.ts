@@ -29,7 +29,7 @@ export const SUNNAH: Reference = {
   },
   quickFacts: [
     { label: 'What it is', value: 'The Prophet’s ﷺ way — what he said, did, and approved of' },
-    { label: 'How it reaches us', value: 'Hadith: reports with the chain of people who passed them down' },
+    { label: 'How', value: 'Hadith — reports carrying the chain that passed them down' },
   ],
   sections: [
     {

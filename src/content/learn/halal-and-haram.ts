@@ -24,7 +24,7 @@ export const HALAL_AND_HARAM: Reference = {
   },
   quickFacts: [
     { label: 'The words', value: 'Halal is permitted. Haram is forbidden' },
-    { label: 'The default', value: 'Yes — things are permitted unless there is a clear reason otherwise', emphasis: true },
+    { label: 'The default', value: 'Yes — permitted unless there is a clear reason not', emphasis: true },
   ],
   sections: [
     {

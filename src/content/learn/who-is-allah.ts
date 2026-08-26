@@ -28,7 +28,7 @@ export const WHO_IS_ALLAH: Reference = {
     block flexes to what the page actually is rather than padding to four.
   */
   quickFacts: [
-    { label: 'The name', value: 'Arabic for God — the same word Arabic-speaking Christians and Jews use' },
+    { label: 'The name', value: 'Arabic for God — the same word Arab Christians use' },
     { label: 'The answer', value: 'Four lines of the Qur’an, below', emphasis: true },
   ],
   sections: [

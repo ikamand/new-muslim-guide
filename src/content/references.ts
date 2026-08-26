@@ -324,7 +324,7 @@ export const TRAVELLING: Reference = {
   title: 'Praying while travelling',
   subtitle: 'Shortening and combining on a journey',
   quickFacts: [
-    { label: 'How many', value: 'Dhuhr, ʿAsr and ʿIshaʾ become two. Fajr and Maghrib do not change' },
+    { label: 'How many', value: 'Dhuhr, ʿAsr and ʿIshaʾ become two. Fajr and Maghrib stay' },
     { label: 'Together?', value: 'Dhuhr with ʿAsr, Maghrib with ʿIshaʾ — at either time' },
     { label: 'Do I have to?', value: 'Shortening is the sunnah on a journey', emphasis: true },
   ],
@@ -428,7 +428,7 @@ export const SEATED: Reference = {
   title: 'Praying when you cannot stand',
   subtitle: 'Illness, injury, pain, or no room to stand',
   quickFacts: [
-    { label: 'If you cannot stand', value: 'Pray sitting — on a chair or the floor' },
+    { label: 'Cannot stand?', value: 'Pray sitting — on a chair or the floor' },
     { label: 'Does it count?', value: 'Fully. It is not worth less', emphasis: true },
   ],
   sections: [
@@ -522,7 +522,7 @@ export const MOSQUE: Reference = {
   quickFacts: [
     { label: 'When', value: 'A quiet prayer, not Friday midday' },
     { label: 'Bring', value: 'Nothing. Socks if you would rather' },
-    { label: 'If you get it wrong', value: 'Nobody minds. Everyone was new once', emphasis: true },
+    { label: 'Get it wrong?', value: 'Nobody minds. Everyone was new once', emphasis: true },
   ],
   sections: [
     {

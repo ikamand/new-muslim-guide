@@ -24,7 +24,7 @@ import { StyleSheet, View, type StyleProp, type ViewStyle } from 'react-native';
 import { PressableLink } from '@/components/pressable-link';
 
 import { ThemedText } from '@/components/themed-text';
-import { ArabicFont } from '@/constants/theme';
+import { ArabicFont, Radius } from '@/constants/theme';
 import { Teaching } from '@/constants/teaching';
 import { useTheme } from '@/hooks/use-theme';
 import type { QuickFact } from '@/content';
@@ -147,7 +147,13 @@ export function TeachingSource({
                 borderColor: theme.border,
               },
             ]
-          : [styles.supporting, { borderLeftColor: theme.border }],
+          : [
+              styles.supporting,
+              {
+                backgroundColor: theme.backgroundElement,
+                borderColor: theme.border,
+              },
+            ],
         style,
       ]}>
       <ThemedText
@@ -164,9 +170,22 @@ export function TeachingSource({
           {`“${translation}”`}
         </ThemedText>
       ) : null}
+      {/*
+        Identical in both weights, deliberately.
+
+        The first version varied three things at once between hero and quote —
+        the shape, the reference colour, and whether a rule was drawn. Three
+        differences do not read as "more important" and "less important"; they
+        read as two unrelated components, and Iyad said so immediately.
+
+        A hierarchy varies ONE dimension. Here it is prominence: the hero
+        breaks the margins and sets its Arabic larger. Everything else — this
+        line included — is the same in both, so the two weights read as one
+        component at two sizes.
+      */}
       <View style={styles.reference}>
-        {hero ? <View style={[styles.rule, { backgroundColor: theme.accent }]} /> : null}
-        <ThemedText type="caption" themeColor={hero ? 'accent' : 'textSecondary'}>
+        <View style={[styles.rule, { backgroundColor: theme.accent }]} />
+        <ThemedText type="caption" themeColor="accent">
           {reference.toUpperCase()}
         </ThemedText>
       </View>
@@ -288,11 +307,17 @@ const styles = StyleSheet.create({
     gap: 12,
     marginBottom: Teaching.page.sectionGap,
   },
+  /*
+    The same block as the hero, inset instead of full-bleed. Same ground, same
+    hairline, same reference line — one component at two sizes rather than two
+    components that happen to both hold Arabic.
+  */
   supporting: {
-    borderLeftWidth: Teaching.source.supporting.barWidth,
-    paddingLeft: Teaching.source.supporting.paddingLeft,
-    paddingVertical: 6,
-    gap: 6,
+    paddingHorizontal: Teaching.source.supporting.paddingLeft,
+    paddingVertical: Teaching.source.hero.paddingV - 6,
+    borderRadius: Radius.medium,
+    borderWidth: StyleSheet.hairlineWidth,
+    gap: 10,
     marginBottom: Teaching.page.sectionGap,
   },
   arabic: {

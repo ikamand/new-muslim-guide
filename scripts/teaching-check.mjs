@@ -35,10 +35,11 @@ const key = (s) =>
           : null
       : null;
 
-const resolves = (s) => {
+const resolveText = (s) => {
   const k = key(s);
-  return k ? Boolean(QURAN_TEXT[k] ?? HADITH_TEXT[k]) : false;
+  return k ? (QURAN_TEXT[k] ?? HADITH_TEXT[k]) : undefined;
 };
+const resolves = (s) => Boolean(resolveText(s));
 
 const errors = [];
 const warnings = [];
@@ -59,12 +60,36 @@ for (const page of pages) {
           `note does not count) or npm run evidence has not been run for it.`,
       );
     }
+    /*
+      A hero is an answer, not an excerpt. Past about 700 characters a
+      full-bleed block stops being the page's centre of gravity and becomes a
+      wall somebody scrolls past — which is what `what-breaks-prayer` did with
+      a 1,431-character narration until this check found it.
+    */
+    if (section.promote === 'hero') {
+      const text = (section.sources ?? []).map(resolveText).find(Boolean);
+      if (text && text.arabic.length > 700) {
+        warnings.push(
+          `${page.id}: hero on "${section.heading}" is ${text.arabic.length} characters. That is a wall, not an answer — demote it to supporting.`,
+        );
+      }
+    }
+
+    /* A label column is 96px wide. Anything past ~15 characters wraps to three lines. */
     if (!/\?$/.test(section.heading)) {
       warnings.push(`${page.id}: "${section.heading}" is a label, not the reader's question.`);
     }
   }
 
   if (!page.quickFacts) warnings.push(`${page.id}: no quickFacts.`);
+  for (const fact of page.quickFacts ?? []) {
+    if (fact.label.length > 15) {
+      warnings.push(`${page.id}: fact label "${fact.label}" is ${fact.label.length} chars — the column is 96px and it will wrap to three lines.`);
+    }
+    if (fact.value.length > 62) {
+      warnings.push(`${page.id}: fact value for "${fact.label}" is ${fact.value.length} chars — it will run to three lines.`);
+    }
+  }
 }
 
 /* Raw numbers in a teaching screen mean the token file is being bypassed. */

@@ -2,6 +2,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { AskBar } from '@/components/ask-bar';
 import { ProgressRing } from '@/components/illustrations';
 import { PrayerTimesCard } from '@/components/prayer-times-card';
 import { PressableLink } from '@/components/pressable-link';
@@ -121,6 +122,14 @@ function Header() {
           ? `${hijri.day} ${t(`hijri.month.${hijri.month}` as UIKey)} ${hijri.year} · ${weekday}`
           : weekday}
       </ThemedText>
+      {/*
+        Chrome rather than a card, and inside the header rather than below it,
+        so the prayer times stay the first piece of content on the screen. The
+        app's spine is salah; a search field above it would say otherwise.
+      */}
+      <View style={styles.ask}>
+        <AskBar />
+      </View>
     </View>
   );
 }
@@ -438,6 +447,9 @@ const styles = StyleSheet.create({
   },
   header: {
     gap: Spacing.one,
+  },
+  ask: {
+    paddingTop: Spacing.three,
   },
   section: {
     gap: Spacing.two,

@@ -119,6 +119,13 @@ function RootStack() {
         fourth screen pushed onto the stack says the opposite.
       */}
       <Stack.Screen name="reciter" options={{ presentation: 'modal', title: '' }} />
+      {/*
+        A modal for the same reason the reciter is one: asking a question is a
+        detour from whatever screen you were on, and it returns you there. It
+        carries no header — the field itself is the header, and it takes focus
+        the moment the sheet opens so the keyboard is already up.
+      */}
+      <Stack.Screen name="ask" options={{ presentation: 'modal', headerShown: false }} />
       <Stack.Screen name="qibla" options={{ title: 'Qibla', headerBackTitle: 'Back' }} />
     </Stack>
   );

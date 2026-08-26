@@ -41,6 +41,26 @@ export const EN = {
   'home.journeyDone': 'You have been through every lesson',
   'home.journeyDone.help':
     'Nothing is locked and nothing expires. Go back over anything you want, or keep these two in your week.',
+  /**
+   * The ask bar and its sheet.
+   *
+   * Deliberately not "Search". Someone three weeks into Islam does not know
+   * what this app contains, so they cannot search it; they have a question.
+   * "Ask" is the gesture they already make at 1am into a browser, and naming
+   * it that is the whole reason the field beats a row of icons.
+   */
+  'ask.open': 'Ask a question or scan a label',
+  'ask.placeholder': 'Ask or scan…',
+  'ask.close': 'Close',
+  'ask.scan': 'Scan a label',
+  'ask.scanDescription': 'Point the camera at an ingredient list',
+  'ask.soon': 'Soon',
+  'ask.starters': 'Common questions',
+  'ask.results': 'Answers',
+  'ask.emptyTitle': 'Nothing here answers that yet',
+  'ask.emptyBody':
+    'The app can only answer what has been written and checked. This one has not been, so rather than guess it says nothing.',
+  'ask.browse': 'Browse everything',
   'home.help': 'Something’s come up',
   'home.helpElse': 'Something else',
 
@@ -701,6 +721,18 @@ const FR: Overrides = {
   'home.journeyDone': 'Vous avez parcouru toutes les leçons',
   'home.journeyDone.help':
     'Rien n’est verrouillé et rien n’expire. Revenez sur ce que vous voulez, ou gardez ces deux-là dans votre semaine.',
+  'ask.open': 'Poser une question ou scanner une étiquette',
+  'ask.placeholder': 'Demander ou scanner…',
+  'ask.close': 'Fermer',
+  'ask.scan': 'Scanner une étiquette',
+  'ask.scanDescription': 'Pointez la caméra vers la liste des ingrédients',
+  'ask.soon': 'Bientôt',
+  'ask.starters': 'Questions fréquentes',
+  'ask.results': 'Réponses',
+  'ask.emptyTitle': 'Rien ici ne répond encore à cela',
+  'ask.emptyBody':
+    'L’application ne répond qu’à ce qui a été rédigé et vérifié. Ce n’est pas le cas ici : plutôt que de deviner, elle se tait.',
+  'ask.browse': 'Tout parcourir',
   'home.help': 'Un imprévu ?',
   'home.helpElse': 'Autre chose',
   'season.ramadan': 'Ramadan',
@@ -944,6 +976,18 @@ const ES: Overrides = {
   'home.prayNow': 'Rezar',
   'home.notInWudu': '¿Aún sin wudu?',
   'home.washFirst': 'Purifícate primero',
+  'ask.open': 'Haz una pregunta o escanea una etiqueta',
+  'ask.placeholder': 'Pregunta o escanea…',
+  'ask.close': 'Cerrar',
+  'ask.scan': 'Escanear una etiqueta',
+  'ask.scanDescription': 'Apunta la cámara a la lista de ingredientes',
+  'ask.soon': 'Pronto',
+  'ask.starters': 'Preguntas frecuentes',
+  'ask.results': 'Respuestas',
+  'ask.emptyTitle': 'Todavía no hay nada que responda a eso',
+  'ask.emptyBody':
+    'La aplicación solo responde lo que se ha escrito y verificado. Esto no lo está, así que en lugar de adivinar, no dice nada.',
+  'ask.browse': 'Ver todo',
   'home.greeting': 'Assalamu alaikum',
   'journey.stageOf': 'etapa {n} de {total}',
   'home.continue': 'Continuar',

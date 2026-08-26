@@ -1,9 +1,11 @@
-import { Stack } from 'expo-router';
+import { Stack, useLocalSearchParams } from 'expo-router';
 import { ScrollView, StyleSheet, View } from 'react-native';
 
 import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
 import { HISN } from '@/content/duas/hisn';
+import { hisnAt } from '@/content/duas/moments';
+import { DAY_MOMENTS, type DayMoment } from '@/content';
 import { ArabicFont, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { useTheme } from '@/hooks/use-theme';
@@ -35,17 +37,35 @@ import { useTheme } from '@/hooks/use-theme';
 export default function DuaBookScreen() {
   const theme = useTheme();
   const { t } = useLocale();
+  const { moment } = useLocalSearchParams<{ moment?: string }>();
+
+  /*
+    Arriving from a moment on the day screen shows that moment's occasions
+    only. Arriving from the tab's own link shows the whole book. Same screen,
+    because two screens listing the same rows differently is how a codebase
+    grows a second list that drifts.
+  */
+  const filtered = isMoment(moment) ? hisnAt(moment) : undefined;
+  const occasions = filtered ?? HISN;
 
   return (
     <ScrollView contentContainerStyle={styles.content}>
       <Stack.Screen options={{ title: t('duaBook.title') }} />
 
       <ThemedText type="default" themeColor="textSecondary">
-        {t('duaBook.intro')}
+        {filtered ? t('duaBook.filtered') : t('duaBook.intro')}
       </ThemedText>
 
+      {filtered ? (
+        <PressableLink href="/dua-book" style={styles.showAll} pressedStyle={{ opacity: 0.6 }}>
+          <ThemedText type="smallBold" themeColor="accent">
+            {t('duaBook.showAll')}
+          </ThemedText>
+        </PressableLink>
+      ) : null}
+
       <View style={styles.list}>
-        {HISN.map((occasion) => (
+        {occasions.map((occasion) => (
           <PressableLink
             key={occasion.id}
             href={{ pathname: '/dua-book/[id]', params: { id: String(occasion.id) } }}
@@ -70,7 +90,15 @@ export default function DuaBookScreen() {
   );
 }
 
+/** A route param is a string; this is the only place that has to care. */
+function isMoment(value: string | undefined): value is DayMoment {
+  return value !== undefined && (DAY_MOMENTS as readonly string[]).includes(value);
+}
+
 const styles = StyleSheet.create({
+  showAll: {
+    alignSelf: 'flex-start',
+  },
   content: {
     padding: Spacing.four,
     paddingBottom: Spacing.six,

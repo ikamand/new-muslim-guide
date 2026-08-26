@@ -9,6 +9,7 @@ import { SourceDisclosure } from '@/components/source-list';
 import { ThemedText } from '@/components/themed-text';
 import { TranslationGap } from '@/components/translation-gap';
 import { DAY_MOMENTS, DUAS, duasAt, resolveNotes, type DayMoment } from '@/content';
+import { hisnAt } from '@/content/duas/moments';
 import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { useTheme } from '@/hooks/use-theme';
@@ -114,6 +115,20 @@ export default function DuasScreen() {
                   </View>
                 );
               })}
+            {/*
+              The book's occasions for this same moment, as a door rather than
+              as content.
+
+              The day teaches the nine supplications the app owns and has had
+              checked; Hisn al-Muslim's text has not been through a reviewer,
+              so it is not promoted onto a teaching surface. But somebody
+              standing at the door at 8am should still find out that the book
+              has seven more for exactly this moment — which is the whole
+              argument for the day screen, applied to content the app is not
+              yet ready to teach.
+            */}
+            <MomentBookLink moment={moment} />
+
             </View>
           </View>
         );
@@ -145,7 +160,40 @@ export default function DuasScreen() {
   );
 }
 
+/**
+ * "Seven more for this moment" — discovery without a claim.
+ *
+ * Renders nothing where the book has nothing for a moment, rather than showing
+ * a zero. An empty affordance is worse than an absent one: it advertises a
+ * dead end.
+ */
+function MomentBookLink({ moment }: { moment: DayMoment }) {
+  const theme = useTheme();
+  const { t } = useLocale();
+  const occasions = hisnAt(moment);
+  if (occasions.length === 0) return null;
+
+  return (
+    <PressableLink
+      href={{ pathname: '/dua-book', params: { moment } }}
+      style={[styles.momentLink, { borderColor: theme.border }]}
+      pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
+      <ThemedText type="small" themeColor="accent">
+        {`${occasions.length} ${t('duaBook.moreForThisMoment')}`}
+      </ThemedText>
+    </PressableLink>
+  );
+}
+
 const styles = StyleSheet.create({
+  momentLink: {
+    alignSelf: 'flex-start',
+    paddingVertical: Spacing.two,
+    paddingHorizontal: Spacing.three,
+    borderRadius: Radius.small,
+    borderWidth: StyleSheet.hairlineWidth,
+    marginTop: Spacing.two,
+  },
   bookLink: {
     alignItems: 'center',
     justifyContent: 'center',

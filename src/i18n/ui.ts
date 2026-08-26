@@ -176,6 +176,9 @@ export const EN = {
   'duaBook.title': 'Every occasion',
   'duaBook.intro': 'Hisn al-Muslim, the collection these come from, in the order the book has them. Reach for it when you already know what you are looking for — the day above is for when you do not.',
   'duaBook.open': 'Browse every occasion →',
+  'duaBook.moreForThisMoment': 'more for this moment in the book →',
+  'duaBook.filtered': 'Occasions for this part of the day',
+  'duaBook.showAll': 'Show every occasion',
   'duaBook.credit': 'Arabic and translation published by',
   'duaBook.missing': 'That occasion is not in the book.',
 

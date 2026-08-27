@@ -151,13 +151,38 @@ function Section({
 
   const notes = resolveNotes(section.note, section.notes);
   const bullets = section.bullets ?? [];
-  const bodyIsLast =
-    bullets.length === 0 && withText.length === 0 && !section.says && notes.length === 0;
+
+  /*
+    Which block ends the section, and so carries the gap to the next heading.
+
+    Every block used to decide that for itself from a partial view. The body
+    checked four of the six things that can follow it and the bullets checked
+    one, so neither knew the disclosure existed. A section whose only trailing
+    block was "Where this comes from" therefore gave the FULL 30px gap to the
+    body above it and rendered the disclosure below that gap, leaving 8px of
+    toggle padding between it and the next heading: 30 from the section it
+    belongs to, 8 from the section it does not. It read as a label on the
+    heading underneath.
+
+    Computed once here, in render order, and read by every block.
+  */
+  const trailing: Trailing =
+    withoutText.length > 0
+      ? 'sources'
+      : notes.length > 0
+        ? 'notes'
+        : section.says
+          ? 'says'
+          : bullets.length > 0
+            ? 'bullets'
+            : withText.length > 0
+              ? 'texts'
+              : 'body';
 
   return (
     <View>
       <TeachingHeading>{section.heading}</TeachingHeading>
-      <TeachingBody last={bodyIsLast}>{section.body}</TeachingBody>
+      <TeachingBody last={trailing === 'body'}>{section.body}</TeachingBody>
 
       {withText.map(({ source, text }, index) => {
         const isHero = index === 0 && section.promote === 'hero';
@@ -188,18 +213,33 @@ function Section({
       })}
 
       {bullets.map((text, index) => (
-        <TeachingBullet key={text} last={index === bullets.length - 1 && notes.length === 0}>
+        <TeachingBullet key={text} last={index === bullets.length - 1 && trailing === 'bullets'}>
           <TeachingBulletText text={text} />
         </TeachingBullet>
       ))}
 
-      {section.says && <RecitationCard recitation={section.says} />}
+      {section.says && (
+        <View style={trailing === 'says' && styles.endsSection}>
+          <RecitationCard recitation={section.says} />
+        </View>
+      )}
 
       {notes.map((entry, position) =>
         entry.kind === 'practical' ? (
-          <TeachingAside key={`${entry.kind}-${position}`}>{entry.text}</TeachingAside>
+          // Owns its own gap, so wrapping it as below would double to 60.
+          <TeachingAside
+            key={`${entry.kind}-${position}`}
+            last={position === notes.length - 1 && trailing === 'notes'}>
+            {entry.text}
+          </TeachingAside>
         ) : (
-          <ContentNoteCard key={`${entry.kind}-${position}`} entry={entry} />
+          <View
+            key={`${entry.kind}-${position}`}
+            style={
+              position === notes.length - 1 && trailing === 'notes' && styles.endsSection
+            }>
+            <ContentNoteCard entry={entry} />
+          </View>
         ),
       )}
 
@@ -208,13 +248,19 @@ function Section({
         opinion is a reference to a book, not a quotation, and printing an
         empty block for one would be worse than the line that names it.
       */}
-      <SourceDisclosure sources={withoutText} />
+      <SourceDisclosure
+        sources={withoutText}
+        style={trailing === 'sources' ? styles.endsSection : undefined}
+      />
     </View>
   );
 }
 
+/** The block that ends a section, and so owes the gap to the next heading. */
+type Trailing = 'body' | 'texts' | 'bullets' | 'says' | 'notes' | 'sources';
+
 /**
- * Past this, a full-bleed or inset block stops being an answer and becomes a
+ * Past this, an inset block stops being an answer and becomes a
  * wall. Al-Fatihah's seven verses run 596 characters; one narration in the app
  * runs 2,615.
  */
@@ -230,6 +276,10 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   subtitle: {
+    marginBottom: Teaching.page.sectionGap,
+  },
+  /** For the blocks that carry no bottom margin of their own. */
+  endsSection: {
     marginBottom: Teaching.page.sectionGap,
   },
   missing: {

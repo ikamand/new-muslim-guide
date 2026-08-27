@@ -1,8 +1,10 @@
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { useState } from 'react';
 import { useRouter } from 'expo-router';
 import { Pressable, ScrollView, StyleSheet, Switch, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { PressableLink } from '@/components/pressable-link';
 import { RecitationCard } from '@/components/recitation-card';
 import { ThemedText } from '@/components/themed-text';
 import { Recitations } from '@/content/recitations';
@@ -52,6 +54,38 @@ function SettingRow({
         thumbColor={theme.background}
       />
     </View>
+  );
+}
+
+/**
+ * The one row in Settings that opens a page rather than flipping a switch.
+ *
+ * It is here because the credit it leads to came off the narrations. Every
+ * publisher the app carries is named on one page a person can find, instead of
+ * a domain name printed under a hadith on a teaching screen — see
+ * `content/text-sources.ts`.
+ */
+function SourcesRow() {
+  const theme = useTheme();
+  const { t } = useLocale();
+
+  return (
+    <PressableLink
+      href="/sources"
+      style={[
+        styles.group,
+        styles.row,
+        { backgroundColor: theme.backgroundElement, borderColor: theme.border },
+      ]}
+      pressedStyle={{ opacity: 0.6 }}>
+      <View style={styles.rowText}>
+        <ThemedText type="default">{t('settings.sources')}</ThemedText>
+        <ThemedText type="small" themeColor="textSecondary">
+          {t('settings.sources.help')}
+        </ThemedText>
+      </View>
+      <Ionicons name="chevron-forward" size={20} color={theme.accent} />
+    </PressableLink>
   );
 }
 
@@ -422,6 +456,8 @@ export default function SettingsScreen() {
           </ThemedText>
           <RecitationCard recitation={Recitations.takbir} />
         </View>
+
+        <SourcesRow />
 
         <ThemedText type="small" themeColor="textSecondary" style={styles.footnote}>
           The Arabic always stays — it is what you actually say. Everything on this device stays

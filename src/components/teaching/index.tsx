@@ -93,10 +93,30 @@ export function TeachingBullet({
 }
 
 /** Advice, which is neither an instruction nor a source and looks like neither. */
-export function TeachingAside({ children }: { children: React.ReactNode }) {
+export function TeachingAside({
+  children,
+  last,
+}: {
+  children: React.ReactNode;
+  /**
+   * Adds the gap to the next heading, same as `TeachingBody`.
+   *
+   * It used to take that gap unconditionally, which was invisible while an
+   * aside was always the last thing in its section and wrong the moment
+   * something followed it. With "Where this comes from" underneath, the
+   * disclosure ended up 30px from the aside above and 30px from the heading
+   * below — floating between two sections rather than belonging to either.
+   */
+  last?: boolean;
+}) {
   const theme = useTheme();
   return (
-    <View style={[styles.aside, { borderLeftColor: theme.border }]}>
+    <View
+      style={[
+        styles.aside,
+        { borderLeftColor: theme.border },
+        { marginBottom: last ? Teaching.page.sectionGap : Teaching.body.gap },
+      ]}>
       <ThemedText type={Teaching.aside.type} themeColor="textSecondary">
         {children}
       </ThemedText>
@@ -107,10 +127,15 @@ export function TeachingAside({ children }: { children: React.ReactNode }) {
 /**
  * A narration or a verse, printed rather than filed.
  *
- * `hero` breaks the page's margins and is the page's answer. `supporting`
- * gets a rule and an indent. **One hero per page** — the treatment stops
- * meaning anything the moment a page has three of them, which is exactly what
- * happened on the first page that cited three verses.
+ * One block, two sizes. `hero` is the page's answer and sets its Arabic at the
+ * `arabicLead` rung; `quote` is everything supporting it, at `arabicQuote`.
+ * **One hero per page** — the treatment stops meaning anything the moment a
+ * page has three of them, which is exactly what happened on the first page
+ * that cited three verses.
+ *
+ * The hero used to break the page's margins as well. It no longer does: that
+ * read as two unrelated shapes rather than as a hierarchy, and it coupled a
+ * negative margin here to `page.paddingH` there. See `constants/teaching.ts`.
  */
 export function TeachingSource({
   arabic,
@@ -131,39 +156,25 @@ export function TeachingSource({
   style?: StyleProp<ViewStyle>;
 }) {
   const theme = useTheme();
-  const hero = variant === 'hero';
-  const spec = hero ? Teaching.source.hero : Teaching.source.quote;
+  const spec = variant === 'hero' ? Teaching.source.hero : Teaching.source.quote;
 
   return (
     <View
       style={[
-        hero
-          ? [
-              styles.hero,
-              {
-                marginHorizontal: -Teaching.source.hero.bleed,
-                paddingHorizontal: Teaching.source.hero.bleed,
-                paddingVertical: Teaching.source.hero.paddingV,
-                backgroundColor: theme.backgroundElement,
-                borderColor: theme.border,
-              },
-            ]
-          : [
-              styles.quote,
-              {
-                backgroundColor: theme.backgroundElement,
-                borderColor: theme.border,
-              },
-            ],
+        styles.block,
+        {
+          paddingVertical: spec.paddingV,
+          gap: spec.gap,
+          backgroundColor: theme.backgroundElement,
+          borderColor: theme.border,
+        },
         style,
       ]}>
-      <ThemedText type={hero ? 'arabicLead' : 'arabicQuote'} style={styles.arabic}>
+      <ThemedText type={spec.arabicType} style={styles.arabic}>
         {arabic}
       </ThemedText>
       {translation ? (
-        <ThemedText
-          type={spec.translationType}
-          themeColor={hero ? 'text' : 'textSecondary'}>
+        <ThemedText type={spec.translationType} themeColor={spec.translationColor}>
           {`“${translation}”`}
         </ThemedText>
       ) : null}
@@ -175,10 +186,10 @@ export function TeachingSource({
         differences do not read as "more important" and "less important"; they
         read as two unrelated components, and Iyad said so immediately.
 
-        A hierarchy varies ONE dimension. Here it is prominence: the hero
-        breaks the margins and sets its Arabic larger. Everything else — this
-        line included — is the same in both, so the two weights read as one
-        component at two sizes.
+        A hierarchy varies ONE dimension. That principle was written here while
+        the hero still broke the page's margins, which was a second dimension
+        and the one Iyad later read as an inconsistency rather than as
+        emphasis. Now it holds: the ONLY difference is size.
       */}
       <View style={styles.reference}>
         <View style={[styles.rule, { backgroundColor: theme.accent }]} />
@@ -349,10 +360,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: Teaching.factRow.gap,
     paddingVertical: Spacing.three - 4,
-    paddingHorizontal: Teaching.source.quote.paddingLeft,
+    paddingHorizontal: Teaching.source.paddingH,
     borderRadius: Radius.small,
     borderWidth: StyleSheet.hairlineWidth,
-    marginBottom: Spacing.two + 2,
+    /*
+      The same gap the opened block takes, for two reasons. It is a collapsed
+      `TeachingSource`, so anything else makes the page jump on tap — this was
+      10 against the opened block's 30. And it ends a section often enough that
+      the smaller number left it crowding the next heading.
+    */
+    marginBottom: Teaching.page.sectionGap,
   },
   foldedText: {
     flex: 1,
@@ -373,25 +390,18 @@ const styles = StyleSheet.create({
     borderLeftWidth: Teaching.aside.barWidth,
     paddingLeft: Teaching.aside.paddingLeft,
     paddingVertical: 4,
-    marginBottom: Teaching.page.sectionGap,
-  },
-  hero: {
-    borderTopWidth: StyleSheet.hairlineWidth,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    gap: 12,
-    marginBottom: Teaching.page.sectionGap,
+    /* marginBottom is the `last` prop's — see `TeachingAside`. */
   },
   /*
-    The same block as the hero, inset instead of full-bleed. Same ground, same
-    hairline, same reference line — one component at two sizes rather than two
-    components that happen to both hold Arabic.
+    One shape for both weights. Same ground, same hairline, same radius, same
+    reference line — genuinely one component at two sizes, rather than two
+    components that happen to both hold Arabic. Vertical padding and gap come
+    from the spec; nothing else varies.
   */
-  quote: {
-    paddingHorizontal: Teaching.source.quote.paddingLeft,
-    paddingVertical: Teaching.source.hero.paddingV - 6,
+  block: {
+    paddingHorizontal: Teaching.source.paddingH,
     borderRadius: Radius.medium,
     borderWidth: StyleSheet.hairlineWidth,
-    gap: 10,
     marginBottom: Teaching.page.sectionGap,
   },
   /* Direction only. The face and the size are a rung — see `themed-text.tsx`. */

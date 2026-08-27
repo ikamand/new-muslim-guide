@@ -1,6 +1,6 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useState } from 'react';
-import { Pressable, StyleSheet, View } from 'react-native';
+import { Pressable, StyleSheet, View, type StyleProp, type ViewStyle } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { formatSource, type Source } from '@/content';
@@ -46,6 +46,9 @@ export function evidenceFor(source: Source): EvidenceText | undefined {
  * `formatSource` already prints the grading and who gave it, and it is the
  * same function the audit script prints. One formatter, one wording, three
  * places: this component, the note card, and the terminal.
+ *
+ * What it does NOT print any more is the publisher. That is Settings →
+ * Sources; see `content/text-sources.ts` for why it moved.
  *
  * Citations render as text rather than links, for the reason `content-note.tsx`
  * gives: nothing in this app has ever sent anyone off-device, and making a
@@ -101,26 +104,34 @@ export function SourceLines({
 }
 
 /**
- * Who published the words above.
+ * The one thing `attribution` says that the citation line above does not.
  *
- * A licence obligation, not a nicety: HadeethEnc's terms ask for *"clearly
- * referring to the publisher and the source"*, and this app carried their text
- * for a while without naming them anywhere on screen.
- *
- * The two fields usually agree. Where they differ it is worth showing both —
- * one publisher supplied the Arabic and another the translation, which is the
- * whole point of the cascade. Where one already names the other, as
- * "Darussalam (via fawazahmed0/hadith-api)" does, printing both would say the
- * same name twice.
+ * Most of its values duplicate the reference — "Narrated by Al-Bukhāri" under
+ * a line already reading "Sahih al-Bukhari 6018". One does not: *agreed upon*,
+ * muttafaq ʿalayh, meaning both Bukhari and Muslim narrated it, which is the
+ * highest tier of authentication there is and something a citation to either
+ * one alone cannot carry. Twenty-five texts say it, in two different wordings,
+ * and they are printed in one.
  */
-function creditFor(text: EvidenceText): string {
-  const { arabicFrom, translationFrom } = text;
-  if (!translationFrom || translationFrom === arabicFrom) return arabicFrom;
-  if (translationFrom.includes(arabicFrom)) return translationFrom;
-  return `${arabicFrom} · ${translationFrom}`;
+function agreedUpon(text: EvidenceText): boolean {
+  const attribution = text.attribution ?? '';
+  return /^agreed upon$/i.test(attribution) || /bukhari\s*&\s*muslim/i.test(attribution);
 }
 
-/** A published text, quoted. Never edited — see HadeethEnc's terms. */
+/**
+ * A published text, quoted. Never edited — see HadeethEnc's terms.
+ *
+ * It used to close with the publisher: "HadeethEnc.com · Darussalam (via
+ * fawazahmed0/hadith-api)". That is build plumbing, and on a teaching screen
+ * it read as though the app were citing a website as its authority for a
+ * hadith. The obligation it discharged now lives on one page that names every
+ * publisher at once — see `content/text-sources.ts` and `app/sources.tsx`.
+ *
+ * The grading stays. It is substance, not provenance, and it is not always
+ * redundant: 73 of the 116 narrations carry a grading from the publisher where
+ * only 46 citations record one of their own, so dropping this line would lose
+ * the grading on every text in the gap between those two numbers.
+ */
 function EvidenceBlock({
   text,
   /**
@@ -136,7 +147,10 @@ function EvidenceBlock({
 }) {
   const theme = useTheme();
   const { translation: showTranslation } = useSettings();
-  const footnote = [text.attribution, hideGrade ? undefined : text.grade].filter(Boolean);
+  const footnote = [
+    agreedUpon(text) ? 'Agreed upon' : undefined,
+    hideGrade ? undefined : text.grade,
+  ].filter(Boolean);
 
   return (
     <View style={[styles.evidence, { borderLeftColor: theme.border }]}>
@@ -151,9 +165,6 @@ function EvidenceBlock({
           {footnote.join(' · ')}
         </ThemedText>
       )}
-      <ThemedText type="caption" themeColor="textSecondary">
-        {creditFor(text)}
-      </ThemedText>
     </View>
   );
 }
@@ -170,7 +181,18 @@ function EvidenceBlock({
  * Renders nothing at all when there is nothing to show, so a screen can drop
  * it in unconditionally.
  */
-export function SourceDisclosure({ sources }: { sources: readonly Source[] }) {
+export function SourceDisclosure({
+  sources,
+  /**
+   * The caller's gap, for a layout where this ends a block. The component
+   * carries no bottom margin of its own because three of the four screens
+   * using it put it last on the screen, where a trailing margin is dead space.
+   */
+  style,
+}: {
+  sources: readonly Source[];
+  style?: StyleProp<ViewStyle>;
+}) {
   const theme = useTheme();
   const { t } = useLocale();
   const [open, setOpen] = useState(false);
@@ -185,7 +207,7 @@ export function SourceDisclosure({ sources }: { sources: readonly Source[] }) {
   if (distinct.length === 0) return null;
 
   return (
-    <View style={styles.wrapper}>
+    <View style={[styles.wrapper, style]}>
       <Pressable
         onPress={() => setOpen((current) => !current)}
         style={({ pressed }) => [styles.toggle, { opacity: pressed ? 0.6 : 1 }]}

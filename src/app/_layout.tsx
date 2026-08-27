@@ -127,6 +127,7 @@ function RootStack() {
       */}
       <Stack.Screen name="ask" options={{ presentation: 'modal', headerShown: false }} />
       <Stack.Screen name="qibla" options={{ title: 'Qibla', headerBackTitle: 'Back' }} />
+      <Stack.Screen name="sources" options={{ title: 'Sources', headerBackTitle: 'Settings' }} />
     </Stack>
   );
 }

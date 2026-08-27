@@ -1669,12 +1669,34 @@ source silently stops reaching the edge.
 Owns the semantic roles of a teaching page. Layout and colour roles only:
 
 ```
-page.paddingH          the ONE number the bleed is derived from
+page.paddingH          the page's own margins
 factRow.labelWidth
-source.hero            the page's answer — breaks the margins
-source.supporting      everything else — rule and indent
+source.paddingH        shared by both weights — one block shape
+source.hero            the page's answer — larger Arabic
+source.quote           everything else
 bullet.barWidth
 ```
+
+> **Superseded, 26 Aug — the hero no longer breaks the margins.** This section
+> was written with `page.paddingH` described as *"the ONE number the bleed is
+> derived from"*, and `source.hero` as *"breaks the margins"*. Both are now
+> wrong, and the entry above is the corrected one.
+>
+> Two reasons, in order of weight. **It did not read as a hierarchy.** Shown
+> three built pages and asked what the design was doing, Iyad read it as
+> *"some verses are full width and some are in bento boxes, is that by design
+> and intentional?"* — an inconsistency, not emphasis. A treatment whose
+> meaning does not reach the person who commissioned it is decorative, and the
+> right response was to remove a mechanism rather than add a rule keeping it
+> alive. **And the coupling was the exact thing this section exists to
+> complain about**: `marginHorizontal: -20` in a component cancelling
+> `paddingHorizontal: 20` on a page, two numbers in two files with nothing
+> enforcing agreement.
+>
+> Both weights are now the same inset block. Prominence is carried by SIZE
+> alone — `arabicLead` against `arabicQuote` — which is the one dimension
+> `TeachingSource` always claimed to be varying and, until now, was not.
+> `npm run style:check` still enforces one hero per page.
 
 **Named for the role, never the look** — `source.hero`, not `bigGreenBlock`. A
 later redesign then changes appearance without renaming anything, which is the

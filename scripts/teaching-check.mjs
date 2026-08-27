@@ -62,9 +62,9 @@ for (const page of pages) {
     }
     /*
       A hero is an answer, not an excerpt. Past about 700 characters a
-      full-bleed block stops being the page's centre of gravity and becomes a
-      wall somebody scrolls past — which is what `what-breaks-prayer` did with
-      a 1,431-character narration until this check found it.
+      hero stops being the page's centre of gravity and becomes a wall
+      somebody scrolls past — which is what `what-breaks-prayer` did with a
+      1,431-character narration until this check found it.
     */
     if (section.promote === 'hero') {
       const text = (section.sources ?? []).map(resolveText).find(Boolean);

@@ -512,6 +512,26 @@ export const EN = {
   'journey.lesson.zakat': 'Zakat',
   'journey.lesson.hajj': 'Hajj',
   'settings.guidance': 'Prayer guidance for',
+
+  /*
+    Settings → Sources.
+
+    Attribution used to sit under each narration on the teaching pages, which
+    put a mirror's domain name on screen underneath a hadith. It reads as
+    though the app were citing a website rather than Bukhari, so it came off
+    and landed here, where somebody looking for it can actually find it.
+  */
+  'settings.sources': 'Sources',
+  'settings.sources.help': 'Where every text and recitation in the app came from',
+  'sources.intro':
+    'The Qur’an, the narrations and the recitations in this app are published by other people. This is who they are.',
+  'sources.quran': 'The Qur’an',
+  'sources.quran.arabic': 'The Arabic of every surah you can read and memorise',
+  'sources.quran.translation': 'The translation printed under it',
+  'sources.texts': 'Quoted in the lessons',
+  'sources.voices': 'Recitation',
+  'sources.footnote':
+    'Nothing here is edited. Where a publisher asks to be named, this is where they are named.',
   'settings.audience.man': 'Men',
   'settings.audience.woman': 'Women',
   'settings.audience.both': 'Show everything',
@@ -785,6 +805,17 @@ const FR: Overrides = {
   'attribution.a minority': 'Une minorité',
   'attribution.contemporary scholarship': 'Les savants contemporains',
   'settings.guidance': 'Conseils de prière pour',
+  'settings.sources': 'Sources',
+  'settings.sources.help': 'D’où viennent tous les textes et les récitations',
+  'sources.intro':
+    'Le Coran, les hadiths et les récitations de cette application sont publiés par d’autres. Voici qui ils sont.',
+  'sources.quran': 'Le Coran',
+  'sources.quran.arabic': 'L’arabe de chaque sourate à lire et à mémoriser',
+  'sources.quran.translation': 'La traduction imprimée en dessous',
+  'sources.texts': 'Cités dans les leçons',
+  'sources.voices': 'Récitation',
+  'sources.footnote':
+    'Rien ici n’est modifié. Lorsqu’un éditeur demande à être nommé, c’est ici qu’il l’est.',
   'common.back': 'Retour',
   'common.next': 'Suivant',
   'common.finish': 'Terminer',
@@ -1047,6 +1078,17 @@ const ES: Overrides = {
   'attribution.a minority': 'Una minoría',
   'attribution.contemporary scholarship': 'Los sabios contemporáneos',
   'settings.guidance': 'Guía de oración para',
+  'settings.sources': 'Fuentes',
+  'settings.sources.help': 'De dónde vienen todos los textos y las recitaciones',
+  'sources.intro':
+    'El Corán, los hadices y las recitaciones de esta aplicación los publican otras personas. Estas son.',
+  'sources.quran': 'El Corán',
+  'sources.quran.arabic': 'El árabe de cada sura para leer y memorizar',
+  'sources.quran.translation': 'La traducción impresa debajo',
+  'sources.texts': 'Citados en las lecciones',
+  'sources.voices': 'Recitación',
+  'sources.footnote':
+    'Nada de esto está modificado. Cuando un editor pide ser nombrado, aquí es donde se le nombra.',
   'common.back': 'Atrás',
   'common.next': 'Siguiente',
   'common.finish': 'Terminar',

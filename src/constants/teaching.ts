@@ -5,10 +5,13 @@
  *
  * A teaching page's appearance used to live in three places at once:
  * `reference/[id].tsx`'s `StyleSheet`, inline props inside its JSX, and the
- * type scale. The full-bleed source block was the clearest symptom — it works
- * because a negative margin cancels the page's padding, which meant two
+ * type scale. The full-bleed source block was the clearest symptom — it worked
+ * because a negative margin cancelled the page's padding, which meant two
  * numbers in two files that had to agree with nothing enforcing it. Change the
  * page padding and the source silently stopped reaching the edge.
+ *
+ * That block is gone as of 26 Aug and so is the coupling — see `source` below
+ * — but the lesson it taught is why everything here is in one file.
  *
  * So: one file, and the components in `components/teaching/` are the only
  * things allowed to read it.
@@ -38,7 +41,7 @@ import type { TextType } from '@/components/themed-text';
 
 export const Teaching = {
   /**
-   * The single number the full-bleed source block is derived from.
+   * The page's own margins.
    *
    * Lower than the app's usual `Spacing.four`, and that is the point: at 24px
    * a side, plus a card's own 24, the text column on a 390px phone was 294px —
@@ -85,24 +88,46 @@ export const Teaching = {
   bullet: { barWidth: 4, barRadius: 2, gap: Spacing.three - 4, marginBottom: Spacing.two + 2 },
 
   /**
-   * Two weights of evidence, and the reason there are two.
+   * Two weights of evidence, one block shape.
    *
-   * The first pages drawn had one treatment, and it worked until a page cited
-   * three verses — at which point the page was stripes and the treatment meant
-   * nothing. So: the narration that IS the page's answer breaks the margins;
-   * everything supporting gets a rule and an indent. One hero per page.
+   * The first pages drawn had a single treatment, and it worked until a page
+   * cited three verses — at which point the page was stripes and the treatment
+   * meant nothing. So there are two: the text that IS the page's answer, and
+   * everything supporting it. One hero per page, enforced by
+   * `npm run style:check`.
+   *
+   * ## Why the hero stopped breaking the margins, 26 Aug
+   *
+   * It reached both edges by cancelling `page.paddingH` with a negative
+   * margin — two numbers in two files that had to agree with nothing enforcing
+   * it, which is the exact coupling the header of this file was written about.
+   *
+   * And it did not read as emphasis. Asked what the design was doing, Iyad
+   * read it as "some verses are full width and some are in bento boxes" — an
+   * inconsistency, not a hierarchy. A treatment whose meaning does not reach
+   * the person who commissioned it is decorative.
+   *
+   * Both weights are now the same inset block, and prominence is carried by
+   * SIZE alone: the one dimension that already means emphasis in typography,
+   * and the one `TeachingSource` always claimed to be the difference. The
+   * bleed is gone, and so is the coupling.
    */
   source: {
+    /** Shared by both weights. One shape, two sizes. */
+    paddingH: Spacing.three,
     hero: {
-      /** Cancels `page.paddingH` to reach both edges. Never write this twice. */
-      bleed: Spacing.three + Spacing.one, // 20
       paddingV: Spacing.four - 2,
+      gap: 12,
+      arabicType: 'arabicLead' as TextType,
       translationType: 'default' as TextType,
+      translationColor: 'text' as ThemeColor,
     },
     quote: {
-      barWidth: 2,
-      paddingLeft: Spacing.three,
+      paddingV: Spacing.four - 8,
+      gap: 10,
+      arabicType: 'arabicQuote' as TextType,
       translationType: 'small' as TextType,
+      translationColor: 'textSecondary' as ThemeColor,
     },
   },
 

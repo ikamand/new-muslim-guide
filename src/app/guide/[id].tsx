@@ -52,15 +52,28 @@ function ScreenAwake() {
 }
 
 export default function GuideScreen() {
-  const { id } = useLocalSearchParams<{ id: string }>();
+  const { id, step: wanted } = useLocalSearchParams<{ id: string; step?: string }>();
   const router = useRouter();
   const theme = useTheme();
   const scrollRef = useRef<ScrollView>(null);
-  const [index, setIndex] = useState(0);
+  const source = getGuide(id);
+  /*
+    Search hands over a step id, so a result opens AT its answer instead of at
+    step one. By id rather than by number: a step's position shifts whenever
+    one is inserted above it, and a stale link would then land somewhere
+    plausible and wrong. An id that no longer exists falls back to the start.
+
+    Lazy, so it seeds the first render only — paging on from here is ordinary
+    state, and the parameter does not drag the reader back.
+  */
+  const [index, setIndex] = useState(() => {
+    if (!wanted || !source) return 0;
+    const at = source.steps.findIndex((candidate) => candidate.id === wanted);
+    return at === -1 ? 0 : at;
+  });
 
   const { locale, t } = useLocale();
   const { keepAwake, completedLessons, toggleLesson } = useSettings();
-  const source = getGuide(id);
   // Measured, not just translated. A guide is read one step per screen, so the
   // reading is taken over the whole guide and narrowed to the step below —
   // localising per step instead would re-run `localiseRecitation` on every

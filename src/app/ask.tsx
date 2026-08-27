@@ -7,14 +7,11 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
 import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
-import { CATALOG } from '@/content';
-import { HISN } from '@/content/duas/hisn';
 import { useHelpTopics } from '@/hooks/use-help';
 import { useLocale } from '@/hooks/use-locale';
 import { useTheme } from '@/hooks/use-theme';
-import { localiseCatalogEntry } from '@/i18n/localise';
 import type { UIKey } from '@/i18n/ui';
-import { routeFor } from '@/lib/content-routes';
+import { buildIndex, search } from '@/lib/search';
 
 /**
  * The sheet behind the ask bar.
@@ -46,14 +43,6 @@ import { routeFor } from '@/lib/content-routes';
  * source and not two; the row comes out the day this can answer.
  */
 
-/** Case and accent folded, so "wudu" finds "wuḍūʾ" and "Prayer" finds "prayer". */
-function fold(value: string): string {
-  return value
-    .normalize('NFD')
-    .replace(/[̀-ͯ]/g, '')
-    .toLowerCase();
-}
-
 type Suggestion = {
   key: string;
   title: string;
@@ -61,14 +50,6 @@ type Suggestion = {
   description: string;
   /** "Guide", "Duʿa" — what kind of thing this is. */
   topic: string;
-  /**
-   * What the filter matches against, which is deliberately not what is drawn.
-   *
-   * A duʿa's Arabic belongs in here so it can be searched, and must not reach
-   * the description — that line is a Latin rung, and Amiri is the only face
-   * this app sets Arabic in.
-   */
-  haystack: string;
   href: Parameters<typeof PressableLink>[0]['href'];
 };
 
@@ -100,7 +81,6 @@ export default function AskScreen() {
           title: link.title,
           description: link.description,
           topic: topic.label,
-          haystack: `${link.title} ${link.description} ${topic.label}`,
           href: link.href,
         })),
       ),
@@ -120,51 +100,32 @@ export default function AskScreen() {
     sits in wudu.ts under "nullifiers". That gap closes with an alias layer,
     not by widening this any further.
   */
-  const searchable = useMemo<readonly Suggestion[]>(() => {
-    const catalogue = CATALOG.map((raw) => {
-      const entry = localiseCatalogEntry(raw, locale);
-      return {
-        key: `${entry.kind}:${entry.id}`,
-        title: entry.title,
-        description: entry.shortDescription,
-        topic: t(`kind.${entry.kind}` as UIKey),
-        haystack: `${entry.title} ${entry.shortDescription}`,
-        href: routeFor(entry),
-      };
-    });
+  /*
+    Typed, it searches everything: the 78 catalogue entries, the 132 duʿa
+    occasions, and — the point of this — the 286 prayer and wudu steps and 101
+    reference sections underneath them.
 
-    /*
-      And the duʿa book, which the catalogue does not contain.
-
-      `CATALOG` holds 9 duʿas — the ones woven into the guides. Hisn al-Muslim
-      is 132 more, and they were reachable only by browsing to the right moment
-      of the day. "Dhikr upon entering the house" was in the app the whole time
-      and could not be asked for, which is the single largest findability gap
-      here: the duʿa book is the part of this app people most often arrive
-      wanting one specific thing from.
-
-      The occasion titles are English and stay English for a French or Spanish
-      reader, because the book itself is Arabic and English — the same as what
-      the duʿa book screen already shows them.
-    */
-    const book = HISN.map((occasion) => ({
-      key: `hisn:${occasion.id}`,
-      title: occasion.english,
-      description: '',
-      topic: t('kind.dua'),
-      haystack: `${occasion.english} ${occasion.arabic}`,
-      href: { pathname: '/dua-book/[id]' as const, params: { id: String(occasion.id) } },
-    }));
-
-    return [...catalogue, ...book];
-  }, [locale, t]);
+    The answers live at that lower level. "Wind" wants the sentence inside
+    wudu.ts, not the guide that contains it, and a search over page names can
+    only ever hand somebody "Wudu — 10 steps" and let them hunt. Ranking is in
+    `lib/search.ts` with the reasoning; here it is only rendered.
+  */
+  const index = useMemo(
+    () => buildIndex(locale, (kind) => t(`kind.${kind}` as UIKey)),
+    [locale, t],
+  );
 
   const trimmed = query.trim();
-  const results = useMemo(() => {
+  const results = useMemo<readonly Suggestion[]>(() => {
     if (!trimmed) return starters;
-    const needle = fold(trimmed);
-    return searchable.filter((item) => fold(item.haystack).includes(needle));
-  }, [starters, searchable, trimmed]);
+    return search(index, trimmed).map((hit) => ({
+      key: hit.key,
+      title: hit.title,
+      description: hit.snippet,
+      topic: hit.context,
+      href: hit.href,
+    }));
+  }, [starters, index, trimmed]);
 
   return (
     <SafeAreaView style={[styles.safeArea, { backgroundColor: theme.background }]} edges={['top']}>
@@ -262,10 +223,22 @@ export default function AskScreen() {
                 style={[styles.result, { borderColor: theme.border }]}
                 pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
                 <View style={styles.resultText}>
-                  <ThemedText type="default">{item.title}</ThemedText>
-                  <ThemedText type="small" themeColor="textSecondary">
-                    {item.description || item.topic}
+                  {/*
+                    Three lines, in the order somebody reads a result: what
+                    kind of thing this is and where it lives, what it is
+                    called, and — where there is one — the sentence that
+                    answers. A step's snippet is the instruction itself, which
+                    is often the whole answer without opening anything.
+                  */}
+                  <ThemedText type="caption" themeColor="textSecondary" style={styles.kicker}>
+                    {item.topic}
                   </ThemedText>
+                  <ThemedText type="default">{item.title}</ThemedText>
+                  {item.description ? (
+                    <ThemedText type="small" themeColor="textSecondary" numberOfLines={2}>
+                      {item.description}
+                    </ThemedText>
+                  ) : null}
                 </View>
                 <Ionicons name="chevron-forward" size={18} color={theme.textSecondary} />
               </PressableLink>
@@ -356,6 +329,10 @@ const styles = StyleSheet.create({
   resultText: {
     flex: 1,
     gap: 2,
+  },
+  kicker: {
+    textTransform: 'uppercase',
+    letterSpacing: 1,
   },
   empty: {
     gap: Spacing.two,

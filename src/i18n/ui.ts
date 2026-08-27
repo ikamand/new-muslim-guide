@@ -57,6 +57,8 @@ export const EN = {
    * whether to tap needs to know which kind of thing they are about to open.
    */
   'kind.guide': 'Guide',
+  'kind.step': 'Step in',
+  'kind.section': 'In',
   'kind.reference': 'Reference',
   'kind.pillar': 'Pillar',
   'kind.article': 'Article',
@@ -756,6 +758,8 @@ const FR: Overrides = {
   'home.journeyDone.help':
     'Rien n’est verrouillé et rien n’expire. Revenez sur ce que vous voulez, ou gardez ces deux-là dans votre semaine.',
   'kind.guide': 'Guide',
+  'kind.step': 'Étape de',
+  'kind.section': 'Dans',
   'kind.reference': 'Référence',
   'kind.pillar': 'Pilier',
   'kind.article': 'Article',
@@ -1028,6 +1032,8 @@ const ES: Overrides = {
   'home.notInWudu': '¿Aún sin wudu?',
   'home.washFirst': 'Purifícate primero',
   'kind.guide': 'Guía',
+  'kind.step': 'Paso de',
+  'kind.section': 'En',
   'kind.reference': 'Referencia',
   'kind.pillar': 'Pilar',
   'kind.article': 'Artículo',

@@ -66,6 +66,7 @@
     "evidence": "node --import ./scripts/ts-resolve.mjs scripts/generate-evidence.mjs",
     "hisn": "node scripts/generate-hisn.mjs",
     "style:check": "node --import ./scripts/ts-resolve.mjs scripts/teaching-check.mjs",
+    "search:check": "node --import ./scripts/ts-resolve.mjs scripts/search-check.mjs",
     "hadith:corpus": "node --import ./scripts/ts-resolve.mjs scripts/fetch-hadith-corpus.mjs"
   },
   "private": true

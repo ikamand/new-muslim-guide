@@ -4,6 +4,7 @@ import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 
 import { MarkedText } from '@/components/marked-text';
 import { ThemedText } from '@/components/themed-text';
+import { annotationFor } from '@/content/duas/annotations';
 import { occasionFor, sessionById } from '@/content/duas/sessions';
 import type { HisnLine } from '@/content/duas/hisn';
 import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
@@ -46,7 +47,24 @@ export default function AdhkarSessionScreen() {
 
   const session = sessionById(id);
   const occasion = session ? occasionFor(session) : undefined;
-  const lines = useMemo(() => occasion?.lines ?? [], [occasion]);
+
+  /*
+    A step is what a reader is asked to do once — not always one row of the
+    book. Rows marked `continues` are folded into the row above them, because
+    the publisher split Sūrat an-Nās and al-Baqarah 286 across a page break and
+    showing the tail as its own card asks somebody to say half a verse.
+  */
+  const steps = useMemo(() => {
+    const out: { line: HisnLine; tail: HisnLine[] }[] = [];
+    for (const line of occasion?.lines ?? []) {
+      if (annotationFor(line.id)?.continues && out.length > 0) {
+        out[out.length - 1].tail.push(line);
+        continue;
+      }
+      out.push({ line, tail: [] });
+    }
+    return out;
+  }, [occasion]);
 
   const [index, setIndex] = useState(0);
   const [count, setCount] = useState(0);
@@ -61,8 +79,28 @@ export default function AdhkarSessionScreen() {
     );
   }
 
-  const line = lines[Math.min(index, lines.length - 1)];
-  const target = line.repeat ?? 1;
+  const step = steps[Math.min(index, steps.length - 1)];
+  const { line } = step;
+  /*
+    An instruction is not counted. "Join his palms and blow into them" is
+    something to do, and a counter on it would be the app inventing a
+    repetition the book never states.
+  */
+  const instruction = annotationFor(line.id)?.recited === false;
+  const target = instruction ? 1 : (line.repeat ?? 1);
+
+  /*
+    A split row is JOINED to the row above rather than stacked under it. Two
+    right-aligned blocks each begin on their own line, so Sūrat an-Nās read as
+    a verse followed by a second quotation — which is exactly the impression
+    the split creates and the reason for folding it in at all. One string
+    flows.
+  */
+  const arabic = [line.arabic, ...step.tail.map((entry) => entry.arabic)].join(' ');
+  const english = [line.english, ...step.tail.map((entry) => entry.english)]
+    .filter(Boolean)
+    .join(' ');
+  const emphasis = [line.emphasis ?? [], ...step.tail.map((entry) => entry.emphasis ?? [])].flat();
 
   /*
     One press does one thing. Below the target it counts; at the target it
@@ -76,7 +114,7 @@ export default function AdhkarSessionScreen() {
       setCount(next);
       return;
     }
-    if (index < lines.length - 1) {
+    if (index < steps.length - 1) {
       setIndex(index + 1);
       setCount(0);
     } else {
@@ -90,7 +128,7 @@ export default function AdhkarSessionScreen() {
 
       <View style={styles.frame}>
         <View style={styles.ticks}>
-          {lines.map((entry, position) => (
+          {steps.map(({ line: entry }, position) => (
             <View
               key={entry.id}
               style={[
@@ -123,7 +161,7 @@ export default function AdhkarSessionScreen() {
               opacity: pressed ? 0.9 : 1,
             },
           ]}>
-          {target > 1 ? (
+          {target > 1 && !instruction ? (
             <View
               style={[
                 styles.badge,
@@ -139,23 +177,23 @@ export default function AdhkarSessionScreen() {
             <ThemedText
               type={line.kind === 'quoted' ? 'arabicLead' : 'arabicQuote'}
               style={styles.arabic}>
-              <MarkedText text={line.arabic} spans={line.emphasis} colour={theme.accent} />
+              <MarkedText text={arabic} spans={emphasis} colour={theme.accent} />
             </ThemedText>
-            {line.english ? (
+            {english ? (
               <ThemedText type="default" themeColor="textSecondary">
-                <MarkedText
-                  text={line.english}
-                  spans={line.emphasis}
-                  colour={theme.accent}
-                  bold
-                />
+                <MarkedText text={english} spans={emphasis} colour={theme.accent} bold />
               </ThemedText>
             ) : null}
+
           </ScrollView>
         </Pressable>
 
         <ThemedText type="caption" themeColor="textSecondary" style={styles.hint}>
-          {target > 1 ? t('adhkar.tapToCount') : t('adhkar.swipeOn')}
+          {instruction
+            ? t('adhkar.instruction')
+            : target > 1
+              ? t('adhkar.tapToCount')
+              : t('adhkar.swipeOn')}
         </ThemedText>
       </View>
     </View>

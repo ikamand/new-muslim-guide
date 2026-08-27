@@ -65,12 +65,55 @@ export type HisnAnnotation = {
   time?: 'morning' | 'evening' | 'both';
   /** Why, in a few words, for the reviewer coming after. */
   reason?: string;
+  /**
+   * This row is the tail of the one above it, split by the publisher's
+   * pagination rather than because it is a separate thing to say.
+   *
+   * Two of the sleep adhkār are verse endings — Sūrat an-Nās finishes on its
+   * own row, and al-Baqarah 286 sits under 285. Shown as separate cards they
+   * read as two texts; a reader is being asked to say one.
+   */
+  continues?: boolean;
   /** ISO date a qualified reviewer cleared this entry. */
   reviewed?: string;
 };
 
-/** Keyed by IslamHouse's line id — the same key `moments.ts` uses. */
-export const HISN_ANNOTATIONS: Readonly<Record<number, HisnAnnotation>> = {};
+/**
+ * Keyed by IslamHouse's line id — the same key `moments.ts` uses.
+ *
+ * ⚠️ These eight were read one at a time and are NOT reviewed: `reviewed` is
+ * absent on every one, and a reviewer should still see them. They are here
+ * because each is a question of what the sentence IS, not of what the ruling
+ * is — "one should join his palms and blow into them" is an instruction in any
+ * reading of the Arabic, and "(ثلاث مرات)" is a count for the lines above it.
+ * Nothing here decides a wording, a grading, or which sitting a line belongs
+ * to; those stay untouched.
+ *
+ * The rest of the four sittings — 54 of 59 lines — needed no entry. An earlier
+ * estimate of "59 judgements" treated the whole pile as one problem and was
+ * wrong by an order of magnitude.
+ */
+export const HISN_ANNOTATIONS: Readonly<Record<number, HisnAnnotation>> = {
+  // Morning and evening adhkār
+  1269191: {
+    recited: false,
+    reason: "the compiler's own opening praise, before the adhkār begin",
+  },
+  1269211: { recited: false, reason: 'a count for the three sūrahs above, not a text' },
+
+  // Adhkār of sleep
+  1269268: { recited: false, reason: 'an instruction: join the palms and blow into them' },
+  1269283: { recited: true, continues: true, reason: 'the last words of Sūrat an-Nās' },
+  1269284: { recited: false, reason: 'an instruction: wipe over the body afterwards' },
+  1269289: { recited: true, continues: true, reason: 'al-Baqarah 286, under 285 above it' },
+  1269309: {
+    recited: false,
+    reason: 'an instruction to recite as-Sajdah and al-Mulk, not their text',
+  },
+
+  // Adhkār after the prayer
+  1269173: { recited: false, reason: 'a label on the lines above: after every prayer' },
+};
 
 /**
  * What the app knows about a line, which today is nothing for every line.

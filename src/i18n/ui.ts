@@ -233,6 +233,7 @@ export const EN = {
   'adhkar.pinFull': 'Ten is the most you can pin. Unpin one to add another.',
   'adhkar.tapToCount': 'Tap anywhere to count',
   'adhkar.swipeOn': 'Tap to move on',
+  'adhkar.instruction': 'Something to do — tap to continue',
   'adhkar.combined':
     'The book gives one list for both the morning and the evening, and marks the few that belong to only one. Which line belongs where has not been reviewed yet, so all of them are here.',
   'duaBook.title': 'Every occasion',

@@ -49,6 +49,20 @@ export const EN = {
    * "Ask" is the gesture they already make at 1am into a browser, and naming
    * it that is the whole reason the field beats a row of icons.
    */
+  /**
+   * What a search result IS, shown under its title.
+   *
+   * The sheet returns guides, references, duʿas and phrases side by side, and
+   * "10 steps" versus "3 minutes" is a different promise. A reader deciding
+   * whether to tap needs to know which kind of thing they are about to open.
+   */
+  'kind.guide': 'Guide',
+  'kind.reference': 'Reference',
+  'kind.pillar': 'Pillar',
+  'kind.article': 'Article',
+  'kind.dua': 'Duʿa',
+  'kind.phrase': 'Phrase',
+
   'ask.open': 'Ask a question or scan a label',
   'ask.placeholder': 'Ask or scan…',
   'ask.close': 'Close',
@@ -741,6 +755,12 @@ const FR: Overrides = {
   'home.journeyDone': 'Vous avez parcouru toutes les leçons',
   'home.journeyDone.help':
     'Rien n’est verrouillé et rien n’expire. Revenez sur ce que vous voulez, ou gardez ces deux-là dans votre semaine.',
+  'kind.guide': 'Guide',
+  'kind.reference': 'Référence',
+  'kind.pillar': 'Pilier',
+  'kind.article': 'Article',
+  'kind.dua': 'Duʿa',
+  'kind.phrase': 'Expression',
   'ask.open': 'Poser une question ou scanner une étiquette',
   'ask.placeholder': 'Demander ou scanner…',
   'ask.close': 'Fermer',
@@ -1007,6 +1027,12 @@ const ES: Overrides = {
   'home.prayNow': 'Rezar',
   'home.notInWudu': '¿Aún sin wudu?',
   'home.washFirst': 'Purifícate primero',
+  'kind.guide': 'Guía',
+  'kind.reference': 'Referencia',
+  'kind.pillar': 'Pilar',
+  'kind.article': 'Artículo',
+  'kind.dua': 'Duʿa',
+  'kind.phrase': 'Expresión',
   'ask.open': 'Haz una pregunta o escanea una etiqueta',
   'ask.placeholder': 'Pregunta o escanea…',
   'ask.close': 'Cerrar',

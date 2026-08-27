@@ -126,7 +126,38 @@ for (let day = 0; day < 366; day += 1) {
   }
 }
 
-console.log(`${counted} counted lines and ${cardLines} distinct card lines checked.`);
+/*
+  3. A line the book marks for one sitting must carry a matching `time`.
+
+     The marking is a parenthesis inside the Arabic — `(مائةَ مرَّةٍ إذا أصبحَ)`
+     — so a re-fetch that adds one, or renumbers the occasion, would otherwise
+     put a morning line into the evening list silently. This is the one part of
+     the morning/evening split that can rot.
+*/
+const MORNING_MARK = /إذا\s*أصبح|إِذَا\s*أَصْبَحَ/;
+const EVENING_MARK = /إذا\s*أمسى|إِذَا\s*أَمْسَى/;
+let marked = 0;
+for (const occasion of HISN) {
+  for (const line of occasion.lines) {
+    const wants = MORNING_MARK.test(line.arabic)
+      ? 'morning'
+      : EVENING_MARK.test(line.arabic)
+        ? 'evening'
+        : null;
+    if (!wants) continue;
+    marked += 1;
+    const has = HISN_ANNOTATIONS[line.id]?.time;
+    if (has !== wants) {
+      failures += 1;
+      console.error(`\n✗ line ${line.id} says "${wants}" in its own text but is ` +
+        `annotated ${has ?? 'nothing'}`);
+      console.error(`    ${line.arabic.slice(-70)}`);
+    }
+  }
+}
+
+console.log(`${counted} counted lines, ${cardLines} distinct card lines, ` +
+  `${marked} sitting-marked lines checked.`);
 if (failures > 0) {
   console.error(`\n${failures} line(s) the app asks someone to say read as narrations.`);
   process.exit(1);

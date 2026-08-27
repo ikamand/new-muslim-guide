@@ -5,10 +5,11 @@ import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { MarkedText } from '@/components/marked-text';
 import { ThemedText } from '@/components/themed-text';
 import { annotationFor } from '@/content/duas/annotations';
-import { occasionFor, sessionById } from '@/content/duas/sessions';
+import { linesFor, occasionFor, sessionById } from '@/content/duas/sessions';
 import type { HisnLine } from '@/content/duas/hisn';
 import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
+import type { UIKey } from '@/i18n/ui';
 import { useTheme } from '@/hooks/use-theme';
 
 /**
@@ -40,6 +41,14 @@ import { useTheme } from '@/hooks/use-theme';
  * count, which is read off its own prose and cross-checked against IslamHouse's
  * English. No line is asserted to be a duʿa by this screen.
  */
+/** Each sitting is named for itself. */
+const SESSION_TITLE: Record<string, UIKey> = {
+  morning: 'adhkar.window.morning',
+  evening: 'adhkar.window.evening',
+  sleep: 'adhkar.window.night',
+  'after-prayer': 'adhkar.window.afterPrayer',
+};
+
 export default function AdhkarSessionScreen() {
   const theme = useTheme();
   const { t } = useLocale();
@@ -56,7 +65,7 @@ export default function AdhkarSessionScreen() {
   */
   const steps = useMemo(() => {
     const out: { line: HisnLine; tail: HisnLine[] }[] = [];
-    for (const line of occasion?.lines ?? []) {
+    for (const line of session ? linesFor(session) : []) {
       if (annotationFor(line.id)?.continues && out.length > 0) {
         out[out.length - 1].tail.push(line);
         continue;
@@ -64,7 +73,7 @@ export default function AdhkarSessionScreen() {
       out.push({ line, tail: [] });
     }
     return out;
-  }, [occasion]);
+  }, [session]);
 
   const [index, setIndex] = useState(0);
   const [count, setCount] = useState(0);
@@ -87,6 +96,8 @@ export default function AdhkarSessionScreen() {
     repetition the book never states.
   */
   const instruction = annotationFor(line.id)?.recited === false;
+  const eveningOpening =
+    session?.sitting === 'evening' ? annotationFor(line.id)?.eveningOpening : undefined;
   const target = instruction ? 1 : (line.repeat ?? 1);
 
   /*
@@ -124,7 +135,12 @@ export default function AdhkarSessionScreen() {
 
   return (
     <View style={[styles.screen, { backgroundColor: theme.background }]}>
-      <Stack.Screen options={{ title: occasion.english || t('duaBook.title') }} />
+      {/*
+        The sitting's name, not the occasion's. Morning and evening read the
+        same occasion, so its own title — "Morning and evening Adhkār" — would
+        put both words at the top of each and undo the naming entirely.
+      */}
+      <Stack.Screen options={{ title: t(SESSION_TITLE[session.id] ?? 'duaBook.title') }} />
 
       <View style={styles.frame}>
         <View style={styles.ticks}>
@@ -179,6 +195,22 @@ export default function AdhkarSessionScreen() {
               style={styles.arabic}>
               <MarkedText text={arabic} spans={emphasis} colour={theme.accent} />
             </ThemedText>
+            {/*
+              The book's own evening substitution, shown beside the morning
+              wording rather than spliced into it — the footnote ends "and the
+              rest as above", so a complete evening text exists nowhere to
+              copy.
+            */}
+            {eveningOpening ? (
+              <View style={[styles.swap, { borderLeftColor: theme.accent }]}>
+                <ThemedText type="caption" themeColor="textSecondary">
+                  {t('adhkar.inTheEvening')}
+                </ThemedText>
+                <ThemedText type="arabicNote" style={styles.arabic}>
+                  {eveningOpening}
+                </ThemedText>
+              </View>
+            ) : null}
             {english ? (
               <ThemedText type="default" themeColor="textSecondary">
                 <MarkedText text={english} spans={emphasis} colour={theme.accent} bold />
@@ -231,5 +263,6 @@ const styles = StyleSheet.create({
     paddingVertical: 2,
   },
   arabic: { textAlign: 'right', writingDirection: 'rtl' },
+  swap: { borderLeftWidth: 2, paddingLeft: Spacing.three, gap: Spacing.one },
   hint: { textAlign: 'center', textTransform: 'uppercase', letterSpacing: 1 },
 });

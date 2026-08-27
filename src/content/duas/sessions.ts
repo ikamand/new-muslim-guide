@@ -6,25 +6,23 @@
  * Which of the book's 132 occasions is a *session* is an editorial judgement,
  * not something derivable from `hisn.ts`. A generator would overwrite it.
  *
- * ## ⚠️ Morning and evening are ONE session here, not two
+ * ## Morning and evening are two sessions over ONE occasion
  *
- * Every app that ships these splits them: a morning list and an evening list,
- * with the wording changed between them. Hisn al-Muslim does not. It prints a
- * single occasion — `أَذْكَارُ الصَّبَاحِ وَالْمَسَاءِ`, 29 lines — and marks the
- * handful that belong to one sitting only in its own prose: `إذا أصبحَ`,
- * `إذا أمسى`. For a few, the WORDING itself changes, and the book records that
- * in a footnote rather than as a second text: footnote 112 says the evening
- * form of `اللَّهُمَّ مَا أَصْبَحَ بِي` is `اللَّهُمَّ مَا أَمْسَى بِي`.
+ * Hisn al-Muslim prints a single occasion — `أَذْكَارُ الصَّبَاحِ وَالْمَسَاءِ`,
+ * 29 lines — for both sittings. The app shows the same list twice, named for
+ * the sitting you are in, which is what every reader expects and what the book
+ * supports.
  *
- * Splitting them in code therefore means conjugating Arabic by hand, which is
- * the one thing this repo will not do. So the app shows the book's list in
- * both windows and names the window it is in. When a reviewer has marked each
- * line `morning`, `evening` or `both` in `annotations.ts` — and transcribed
- * the variant wordings from the book's own footnotes — this becomes two
- * sessions and nothing else has to change.
+ * Six lines behave. Four say which sitting they belong to in their own text —
+ * `(مائةَ مرَّةٍ إذا أصبحَ)` — and are hidden from the other. Two open with a
+ * word that changes, `أَصْبَحْتُ` to `أَمْسَيْتُ`, and carry the book's own
+ * footnote as an evening note rather than being rewritten. All six are
+ * transcribed in `annotations.ts`; none is a judgement, and the other 23 are
+ * said at both because the book marks them for neither.
  */
 
-import { HISN, type HisnOccasion } from './hisn';
+import { annotationFor } from './annotations';
+import { HISN, type HisnLine, type HisnOccasion } from './hisn';
 
 /** When a session is the one to be doing, in terms of the prayer day. */
 export type AdhkarWindow =
@@ -57,13 +55,37 @@ export type AdhkarSession = {
    * than the reverse.
    */
   minutes: number;
+  /**
+   * Which sitting this session is, where two of them read one occasion.
+   *
+   * Absent for sessions whose occasion belongs to a single sitting anyway —
+   * there is nothing to filter.
+   */
+  sitting?: 'morning' | 'evening';
 };
 
 export const ADHKAR_SESSIONS: readonly AdhkarSession[] = [
-  { id: 'morning-evening', occasion: 1269190, windows: ['morning', 'evening'], minutes: 7 },
+  { id: 'morning', occasion: 1269190, windows: ['morning'], sitting: 'morning', minutes: 7 },
+  { id: 'evening', occasion: 1269190, windows: ['evening'], sitting: 'evening', minutes: 7 },
   { id: 'sleep', occasion: 1269267, windows: ['night'], minutes: 5 },
   { id: 'after-prayer', occasion: 1269149, windows: ['after-prayer'], minutes: 3 },
 ];
+
+/**
+ * The lines a session actually reads.
+ *
+ * A line the book marks for the other sitting is dropped; everything else is
+ * kept, because the book marking neither means both.
+ */
+export function linesFor(session: AdhkarSession): readonly HisnLine[] {
+  const occasion = occasionFor(session);
+  if (!occasion) return [];
+  if (!session.sitting) return occasion.lines;
+  return occasion.lines.filter((line) => {
+    const time = annotationFor(line.id)?.time;
+    return time === undefined || time === session.sitting;
+  });
+}
 
 /** The session to lead with in a given window, if any. */
 export function sessionForWindow(window: AdhkarWindow | null): AdhkarSession | undefined {

@@ -8,6 +8,7 @@ import { ThemedText } from '@/components/themed-text';
 import { HISN } from '@/content/duas/hisn';
 import {
   ADHKAR_SESSIONS,
+  linesFor,
   occasionFor,
   sessionForWindow,
   type AdhkarSession,
@@ -127,7 +128,7 @@ export default function DuasScreen() {
               key={session.id}
               label={t(sessionLabelKey(session))}
               href={{ pathname: '/adhkar/[id]', params: { id: session.id } }}
-              count={occasionFor(session)?.lines.length}
+              count={linesFor(session).length}
             />
           ))}
           <Row label="Hisn al-Muslim" href="/dua-book" count={HISN.length} muted />
@@ -153,8 +154,10 @@ function SessionHero({
 }) {
   const theme = useTheme();
   const { t } = useLocale();
-  const occasion = occasionFor(session);
-  if (!occasion) return null;
+  // The session's own lines, not the occasion's — morning and evening read the
+  // same occasion and drop the few the book marks for the other sitting.
+  const lines = linesFor(session);
+  if (lines.length === 0) return null;
 
   const kicker = state.justPrayed
     ? `${t('adhkar.justPrayed')} ${state.justPrayed}`
@@ -176,9 +179,9 @@ function SessionHero({
           {kicker}
         </ThemedText>
       ) : null}
-      <ThemedText type="cardTitle">{t(sessionLabelKey(session, state.window))}</ThemedText>
+      <ThemedText type="cardTitle">{t(sessionLabelKey(session))}</ThemedText>
       <ThemedText type="small" themeColor="textSecondary">
-        {`${occasion.lines.length}  ·  ${t('adhkar.minutes').replace('{n}', String(session.minutes))}`}
+        {`${lines.length}  ·  ${t('adhkar.minutes').replace('{n}', String(session.minutes))}`}
       </ThemedText>
       <View style={[styles.start, { backgroundColor: theme.accent }]}>
         <ThemedText type="smallBold" themeColor="textOnAccent">
@@ -228,18 +231,10 @@ function Row({
   );
 }
 
-/**
- * What to call a session.
- *
- * The morning-and-evening list is one occasion in the book and takes its name
- * from the window it is being read in — the same 29 lines, correctly called
- * the evening adhkār at five in the afternoon. Away from a window it keeps the
- * morning name, because that is the sitting most people mean.
- */
-function sessionLabelKey(session: AdhkarSession, window?: string | null): UIKey {
-  if (session.id === 'morning-evening') {
-    return window === 'evening' ? 'adhkar.window.evening' : 'adhkar.window.morning';
-  }
+/** What to call a session. Each names its own sitting now. */
+function sessionLabelKey(session: AdhkarSession): UIKey {
+  if (session.id === 'morning') return 'adhkar.window.morning';
+  if (session.id === 'evening') return 'adhkar.window.evening';
   if (session.id === 'sleep') return 'adhkar.window.night';
   return 'adhkar.window.afterPrayer';
 }

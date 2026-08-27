@@ -55,16 +55,31 @@ export type HisnAnnotation = {
   /**
    * Which of the two sittings this line belongs to.
    *
-   * The book prints one combined morning-and-evening list and marks only a
-   * handful of lines `إذا أصبحَ` or `إذا أمسى`. For the rest it is a judgement,
-   * and for a few the WORDING changes between the two — footnote 112 says the
-   * evening form of `اللَّهُمَّ مَا أَصْبَحَ بِي` is `اللَّهُمَّ مَا أَمْسَى بِي`.
-   * A variant wording is a religious text and must be recorded verbatim from
-   * the book's own footnote, never conjugated by hand.
+   * Absent means BOTH, and that is the book's own position rather than a gap:
+   * Hisn al-Muslim prints one list for the morning and the evening and marks
+   * only the few that belong to one sitting. Twenty-three of the twenty-nine
+   * carry no mark, so they are said at both, and the app claims nothing the
+   * book does not.
+   *
+   * Set only where the book says so IN THE TEXT — `(مائةَ مرَّةٍ إذا أصبحَ)`,
+   * `(ثلاثَ مرَّاتٍ إذا أمسى)`. That is transcription, not a ruling, which is
+   * why these are filled in and the rest of the split is not a question.
    */
-  time?: 'morning' | 'evening' | 'both';
-  /** Why, in a few words, for the reviewer coming after. */
-  reason?: string;
+  time?: 'morning' | 'evening';
+  /**
+   * The evening opening for a line whose wording changes, verbatim from the
+   * book's own footnote.
+   *
+   * Six lines in, `اللَّهُمَّ إِنِّي أَصْبَحْتُ` means "O Allah, I have reached the
+   * morning" — said at sunset it is not a variant, it is wrong. The book knows
+   * and gives the substitution in a footnote: `وإذا أمسى قال: اللَّهم إني أمسيت`.
+   *
+   * ⚠️ The footnote ends in an ellipsis: "and the rest as above". So the app
+   * SHOWS the substitution beside the morning wording rather than splicing a
+   * complete evening text — a spliced string would appear verbatim nowhere,
+   * and assembling one is the one place invention could enter this file.
+   */
+  eveningOpening?: string;
   /**
    * This row is the tail of the one above it, split by the publisher's
    * pagination rather than because it is a separate thing to say.
@@ -74,6 +89,14 @@ export type HisnAnnotation = {
    * read as two texts; a reader is being asked to say one.
    */
   continues?: boolean;
+  /**
+   * Why, in a few words, for the reviewer coming after.
+   *
+   * Every entry in this file carries one. An annotation without a stated
+   * reason is indistinguishable from a guess, and the point of the file is
+   * that a person can check each line against the book.
+   */
+  reason?: string;
   /** ISO date a qualified reviewer cleared this entry. */
   reviewed?: string;
 };
@@ -100,6 +123,21 @@ export const HISN_ANNOTATIONS: Readonly<Record<number, HisnAnnotation>> = {
     reason: "the compiler's own opening praise, before the adhkār begin",
   },
   1269211: { recited: false, reason: 'a count for the three sūrahs above, not a text' },
+
+  // …and the six the book marks for one sitting or the other. Transcribed
+  // from the parenthesis printed in the line, or from its own footnote.
+  1269255: { time: 'morning', reason: 'the line says (مائةَ مرَّةٍ إذا أصبحَ)' },
+  1269257: { time: 'morning', reason: 'the line says (ثلاثَ مرَّاتٍ إذا أصبحَ)' },
+  1269259: { time: 'morning', reason: 'the line says (إذا أصبحَ)' },
+  1269263: { time: 'evening', reason: 'the line says (ثلاثَ مرَّاتٍ إذا أمسى)' },
+  1269223: {
+    eveningOpening: 'اللَّهم إني أمسيت',
+    reason: "the book's footnote: وإذا أمسى قال: اللَّهم إني أمسيت",
+  },
+  1269226: {
+    eveningOpening: 'اللَّهم ما أمسى بي',
+    reason: "the book's footnote: وإذا أمسى قال: اللَّهم ما أمسى بي...",
+  },
 
   // Adhkār of sleep
   1269268: { recited: false, reason: 'an instruction: join the palms and blow into them' },

@@ -99,21 +99,39 @@ const GROUPS: readonly (readonly string[])[] = [
   ['arabic', 'transliteration', 'pronounce', 'pronunciation'],
 
   /* What the duʿa book calls itself, and what people call it. */
+  /* Not 'prayer'. That is the third time a common word was added to a group
+     and made things worse — after 'wash' for wudu and 'fajr' for fasting. A
+     synonym has to be specific or it costs more than it buys. */
   ['dua', 'duas', 'supplication', 'dhikr', 'invocation', 'remembrance'],
   ['say', 'said', 'saying', 'recite', 'words'],
+
+  /* Belief. The page is called "The Six Articles of Faith"; nobody types that. */
+  ['iman', 'faith', 'belief', 'creed', 'articles', 'aqeedah'],
 
   /* Charity. */
   ['zakat', 'charity', 'giving', 'sadaqah', 'donate'],
 ];
 
-/** term → every word that means the same, including itself. */
+/**
+ * term → every word that means the same, including itself.
+ *
+ * Keyed twice: once by the word as written, and once by its transliteration
+ * key. Without the second, looking synonyms up was itself spelling-sensitive —
+ * "dua" reached the duʿa book through "supplication" and "duaa" reached
+ * nothing, which is the same one-letter cliff this file exists to remove.
+ */
 const EXPANSIONS: ReadonlyMap<string, readonly string[]> = (() => {
   const map = new Map<string, string[]>();
+  const add = (at: string, group: readonly string[]) => {
+    if (!at) return;
+    const existing = map.get(at) ?? [];
+    for (const other of group) if (!existing.includes(other)) existing.push(other);
+    map.set(at, existing);
+  };
   for (const group of GROUPS) {
     for (const word of group) {
-      const existing = map.get(word) ?? [word];
-      for (const other of group) if (!existing.includes(other)) existing.push(other);
-      map.set(word, existing);
+      add(word, [word, ...group]);
+      add(transliterationKey(word), [word, ...group]);
     }
   }
   return map;
@@ -121,5 +139,51 @@ const EXPANSIONS: ReadonlyMap<string, readonly string[]> = (() => {
 
 /** Every spelling of one typed word that should count as a match for it. */
 export function expand(term: string): readonly string[] {
-  return EXPANSIONS.get(term) ?? [term];
+  return EXPANSIONS.get(term) ?? EXPANSIONS.get(transliterationKey(term)) ?? [term];
+}
+
+/**
+ * One spelling for every way an Arabic word gets written in Latin letters.
+ *
+ * ## The bug
+ *
+ * "Shahada" found the guide. "Shahadah" found nothing — one letter, and the
+ * app went blank. Same for salaah, duaa, wudhu, tayamum, rakaah and zakah:
+ * seven of ten common terms broke on an alternate spelling, because matching
+ * asks whether the typed word STARTS a word in the text, and "shahadah" does
+ * not start "shahada".
+ *
+ * This is not an edge case. There is no single correct Latin spelling of an
+ * Arabic word — the app had to pick one, and a reader who learnt a different
+ * one is not making a mistake. Converts meet these words written every way at
+ * once, in a mosque, in a book and on a forum, in the same week.
+ *
+ * ## What it does
+ *
+ * Collapses the differences that are spelling rather than meaning: doubled
+ * letters, the h/t at the end of a tāʾ marbūṭa, and the digraphs used for
+ * letters Latin has no sign for.
+ *
+ *     shahada · shahadah  → shahada        zakat · zakah   → zaka
+ *     salah · salaah      → sala           wudu · wudhu    → wudu
+ *     tayammum · tayamum  → tayamum        dua · duaa      → dua
+ *
+ * Applied to the app's text and to the query alike, so being over-eager can
+ * only ever cause a false MATCH, never a miss. False matches are handled by
+ * scoring: an exact hit always outranks one of these.
+ */
+export function transliterationKey(word: string): string {
+  const key = word
+    .replace(/[^a-z0-9]/g, '')
+    /* Doubles first: "salaah" has to become "salah" before the trailing h goes. */
+    .replace(/(.)\1+/g, '$1')
+    /* Digraphs standing in for one Arabic letter. */
+    .replace(/dh/g, 'd')
+    .replace(/th/g, 't')
+    .replace(/kh/g, 'k')
+    .replace(/gh/g, 'g')
+    /* Tāʾ marbūṭa, written -ah or -at depending on whose book you read. */
+    .replace(/[ht]$/, '');
+  /* Two letters is not a word, it is a collision waiting to happen. */
+  return key.length >= 3 ? key : '';
 }

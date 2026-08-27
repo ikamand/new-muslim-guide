@@ -13,7 +13,7 @@ import { HISN } from '@/content/duas/hisn';
 import { localiseCatalogEntry, localiseGuide, localiseReference } from '@/i18n/localise';
 import type { Locale } from '@/i18n/locales';
 import { routeFor } from '@/lib/content-routes';
-import { expand, STOPWORDS } from '@/lib/search-words';
+import { expand, STOPWORDS, transliterationKey } from '@/lib/search-words';
 
 /**
  * Everything in the app, searchable, offline.
@@ -83,10 +83,26 @@ type Indexed = Omit<SearchResult, 'score'> & {
    * `raw` a sentence at a time instead, which is exact and costs nothing at
    * forty results.
    */
-  fields: readonly { field: Field; text: string; raw: string }[];
+  fields: readonly { field: Field; text: string; raw: string; loose: string }[];
 };
 
 /** Case and accent folded, so "wudu" finds "wuḍūʾ" and "Salah" finds "salah". */
+/** Every word of a string put through `transliterationKey`. */
+function loosen(value: string): string {
+  return fold(value)
+    /*
+      The ʿayn and hamza marks are dropped, not treated as word breaks. As
+      separators they split "rakʿah" into "rak" and "ah", and "rakaah" then
+      matched neither half — the mark is transliteration furniture, and the
+      reader typing the word has almost certainly left it out.
+    */
+    .replace(/[\u02bf\u02be'’`ʻʼ]/g, '')
+    .split(/[^a-z0-9]+/)
+    .map(transliterationKey)
+    .filter(Boolean)
+    .join(' ');
+}
+
 export function fold(value: string): string {
   return value
     .normalize('NFD')
@@ -104,7 +120,16 @@ export function fold(value: string): string {
  * "wind" and should never sit above the step about breaking wudu. A hit at the
  * start beats one in the middle, because titles lead with their subject.
  */
-function scoreTerm(entry: Indexed, term: string): number {
+function startsWord(text: string, term: string): boolean {
+  let at = text.indexOf(term);
+  while (at !== -1) {
+    if (at === 0 || !/[a-z0-9]/.test(text[at - 1])) return true;
+    at = text.indexOf(term, at + 1);
+  }
+  return false;
+}
+
+function scoreTerm(entry: Indexed, term: string, key: string): number {
   let best = 0;
   for (const { field, text } of entry.fields) {
     /*
@@ -130,6 +155,17 @@ function scoreTerm(entry: Indexed, term: string): number {
       }
       at = text.indexOf(term, at + 1);
     }
+  }
+  if (best > 0) return best;
+
+  /*
+    Nothing matched as typed. Try the transliteration key — "shahadah" against
+    the app's "shahada" — at three quarters, so a page that spells the word the
+    way this reader does always sits above one that does not.
+  */
+  if (!key) return 0;
+  for (const { field, loose } of entry.fields) {
+    if (startsWord(loose, key)) best = Math.max(best, Math.round(WEIGHT[field] * 0.75));
   }
   return best;
 }
@@ -157,7 +193,9 @@ function scoreQuery(entry: Indexed, terms: readonly (readonly string[])[]): numb
       happened to know the app's.
     */
     let best = 0;
-    for (const variant of variants) best = Math.max(best, scoreTerm(entry, variant));
+    for (const variant of variants) {
+      best = Math.max(best, scoreTerm(entry, variant, transliterationKey(variant)));
+    }
     if (best === 0) return 0;
     total += best;
   }
@@ -190,8 +228,13 @@ export function buildIndex(locale: Locale, label: (kind: string) => string): rea
       context: label(entry.kind),
       href: routeFor(entry),
       fields: [
-        { field: 'title', text: fold(entry.title), raw: entry.title },
-        { field: 'description', text: fold(entry.shortDescription), raw: entry.shortDescription },
+        { field: 'title', text: fold(entry.title), raw: entry.title, loose: loosen(entry.title) },
+        {
+          field: 'description',
+          text: fold(entry.shortDescription),
+          raw: entry.shortDescription,
+          loose: loosen(entry.shortDescription),
+        },
       ],
     });
 
@@ -225,11 +268,12 @@ export function buildIndex(locale: Locale, label: (kind: string) => string): rea
              still only a signpost. */
           href: { pathname: '/guide/[id]', params: { id: guide.id, step: step.id } },
           fields: [
-            { field: 'title', text: fold(step.title), raw: step.title },
+            { field: 'title', text: fold(step.title), raw: step.title, loose: loosen(step.title) },
             {
               field: 'body',
               text: fold(`${step.instruction} ${step.note ?? ''} ${noted} ${said}`),
               raw: `${step.instruction} ${step.note ?? ''} ${noted}`,
+              loose: loosen(`${step.instruction} ${step.note ?? ''} ${noted} ${said}`),
             },
           ],
         });
@@ -253,11 +297,12 @@ export function buildIndex(locale: Locale, label: (kind: string) => string): rea
              knows what they are looking for when they land. */
           href: { pathname: '/reference/[id]', params: { id: reference.id } },
           fields: [
-            { field: 'title', text: fold(section.heading), raw: section.heading },
+            { field: 'title', text: fold(section.heading), raw: section.heading, loose: loosen(section.heading) },
             {
               field: 'body',
               text: fold(`${section.body} ${bullets} ${noted}`),
               raw: `${section.body} ${bullets} ${noted}`,
+              loose: loosen(`${section.body} ${bullets} ${noted}`),
             },
           ],
         });
@@ -278,10 +323,10 @@ export function buildIndex(locale: Locale, label: (kind: string) => string): rea
       context: label('dua'),
       href: { pathname: '/dua-book/[id]', params: { id: String(occasion.id) } },
       fields: [
-        { field: 'title', text: fold(occasion.english), raw: occasion.english },
+        { field: 'title', text: fold(occasion.english), raw: occasion.english, loose: loosen(occasion.english) },
         /* Arabic is searchable and never shown here — the description line is a
            Latin rung, and Amiri is the only face this app sets Arabic in. */
-        { field: 'body', text: fold(occasion.arabic), raw: '' },
+        { field: 'body', text: fold(occasion.arabic), raw: '', loose: '' },
       ],
     });
   }

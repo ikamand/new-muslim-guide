@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 
 import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
-import { DUAS } from '@/content';
+import { duaOfTheDay } from '@/content';
 import { HISN } from '@/content/duas/hisn';
 import {
   ADHKAR_SESSIONS,
@@ -67,9 +67,15 @@ export default function DuasScreen() {
   const state = useMemo(() => windowAt(today, new Date()), [today]);
   const live = sessionForWindow(state.window);
 
+  /*
+    Pinned entries are occasions in the book, not the nine the app owns.
+    Pinning was reachable from one screen holding those nine, which made it
+    look like a property of them rather than something you can do to anything
+    in the book. A star on every occasion says otherwise.
+  */
   const pinned = pinnedDuas
-    .map((id) => DUAS.find((dua) => dua.id === id))
-    .filter((dua): dua is NonNullable<typeof dua> => dua !== undefined);
+    .map((key) => HISN.find((occasion) => String(occasion.id) === key))
+    .filter((occasion): occasion is NonNullable<typeof occasion> => occasion !== undefined);
 
   /*
     The dead zone opens up one duʿa, so the rows below it are the rest. With a
@@ -81,11 +87,21 @@ export default function DuasScreen() {
     so it is the same duʿa all day: "somewhere to start" that changes every
     time you look at it is not somewhere to start.
   */
-  const heroDua = live
-    ? undefined
-    : (pinned[0] ?? DUAS[dayNumber(new Date()) % DUAS.length]);
-  const suggested = !live && pinned.length === 0;
-  const pinnedRows = pinned.length > 0 && !live ? pinned.slice(1) : pinned;
+  /*
+    The top card, when no sitting is open.
+
+    It was a day-seeded pick over all nine, which is how it came to offer the
+    duʿa for going into the bathroom as somewhere to begin. `duaOfTheDay`
+    already answers this properly: it reads the hour and returns a duʿa for the
+    part of the day you are actually in, stable for the calendar day, and
+    returns nothing rather than offering a sleeping duʿa at nine in the
+    morning. An honest gap beats a wrong answer.
+
+    It draws on the nine rather than the book because those are the only duʿas
+    in the app with checked citations, hand-written notes and French and
+    Spanish — and this is the one card everybody sees.
+  */
+  const suggestion = live ? undefined : duaOfTheDay();
 
   return (
     <SafeAreaView style={[styles.safeArea, { backgroundColor: theme.background }]} edges={['top']}>
@@ -94,21 +110,21 @@ export default function DuasScreen() {
 
         {live ? <SessionHero session={live} state={state} /> : null}
 
-        {heroDua ? (
+        {suggestion ? (
           <View
             style={[
               styles.heroCard,
               { backgroundColor: theme.backgroundElement, borderColor: theme.border },
             ]}>
             <ThemedText type="caption" themeColor="textSecondary" style={styles.kicker}>
-              {suggested ? t('adhkar.somewhereToStart') : heroDua.when}
+              {t('adhkar.forNow')}
             </ThemedText>
-            {suggested ? <ThemedText type="cardTitle">{heroDua.when}</ThemedText> : null}
+            <ThemedText type="cardTitle">{suggestion.when}</ThemedText>
             <ThemedText type="arabicLead" style={styles.arabic}>
-              {heroDua.says.arabic}
+              {suggestion.says.arabic}
             </ThemedText>
             <ThemedText type="small" themeColor="textSecondary">
-              {heroDua.says.translation}
+              {suggestion.says.translation}
             </ThemedText>
           </View>
         ) : null}
@@ -116,11 +132,16 @@ export default function DuasScreen() {
         {pinned.length > 0 ? (
           <View style={styles.group}>
             <ThemedText type="caption" themeColor="textSecondary" style={styles.label}>
-              {`${t('adhkar.learning')}  ·  ${pinned.length}`}
+              {`${t('adhkar.pinned')}  ·  ${pinned.length}`}
             </ThemedText>
             <View style={[styles.rows, { borderTopColor: theme.border }]}>
-              {pinnedRows.map((dua) => (
-                <Row key={dua.id} label={dua.when} href="/everyday-duas" chevron />
+              {pinned.map((occasion) => (
+                <Row
+                  key={occasion.id}
+                  label={occasion.english || occasion.arabic}
+                  href={{ pathname: '/dua-book/[id]', params: { id: String(occasion.id) } }}
+                  chevron
+                />
               ))}
             </View>
           </View>
@@ -140,7 +161,6 @@ export default function DuasScreen() {
               count={occasionFor(session)?.lines.length}
             />
           ))}
-          <Row label={t('adhkar.everyday')} href="/everyday-duas" count={DUAS.length} muted />
           <Row label="Hisn al-Muslim" href="/dua-book" count={HISN.length} muted />
         </View>
       </ScrollView>
@@ -253,11 +273,6 @@ function sessionLabelKey(session: AdhkarSession, window?: string | null): UIKey 
   }
   if (session.id === 'sleep') return 'adhkar.window.night';
   return 'adhkar.window.afterPrayer';
-}
-
-/** Whole days since the epoch, so a pick is stable for a calendar day. */
-function dayNumber(now: Date): number {
-  return Math.floor(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) / 86_400_000);
 }
 
 function sinceLabel(window: string | null): string {

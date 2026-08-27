@@ -25,7 +25,14 @@ export function routeFor(entry: CatalogEntry): Href {
     case 'article':
       return '/iman';
     case 'dua':
-      return '/duas';
+      /*
+        The nine, not the tab. The tab used to list them and now leads with
+        whichever sitting of adhkār is open, so a journey step saying "learn
+        the duʿa for waking" would land somewhere it is not. These nine are
+        also the only duʿas carrying French and Spanish, which is why the
+        screen outlived being taken off the tab.
+      */
+      return '/everyday-duas';
     case 'phrase':
       return '/phrases';
   }

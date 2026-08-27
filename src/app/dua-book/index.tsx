@@ -1,6 +1,7 @@
 import { Stack, useLocalSearchParams } from 'expo-router';
 import { ScrollView, StyleSheet, View } from 'react-native';
 
+import { PinStar } from '@/components/pin-star';
 import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
 import { HISN } from '@/content/duas/hisn';
@@ -83,6 +84,12 @@ export default function DuaBookScreen() {
             <ThemedText type="caption" themeColor="textSecondary">
               {occasion.lines.length}
             </ThemedText>
+            {/*
+              The star sits on the row as well as on the occasion's own page,
+              because someone scanning the index for the duʿa they use every
+              day should not have to open it to keep it.
+            */}
+            <PinStar id={occasion.id} size={19} />
           </PressableLink>
         ))}
       </View>

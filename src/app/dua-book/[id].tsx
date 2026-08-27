@@ -2,6 +2,7 @@ import { Stack, useLocalSearchParams } from 'expo-router';
 import { ScrollView, StyleSheet, View } from 'react-native';
 
 import { MarkedText } from '@/components/marked-text';
+import { PinStar } from '@/components/pin-star';
 import { ThemedText } from '@/components/themed-text';
 import { HISN } from '@/content/duas/hisn';
 import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
@@ -79,7 +80,12 @@ export default function DuaBookOccasionScreen() {
       <Stack.Screen options={{ title: occasion.english || t('duaBook.title') }} />
 
       <View style={styles.header}>
-        <ThemedText type="sectionTitle">{occasion.english}</ThemedText>
+        <View style={styles.headerRow}>
+          <ThemedText type="sectionTitle" style={styles.headerTitle}>
+            {occasion.english}
+          </ThemedText>
+          <PinStar id={occasion.id} />
+        </View>
         <ThemedText type="arabicQuote" style={[styles.headerArabic, { color: theme.textSecondary }]}>
           {occasion.arabic}
         </ThemedText>
@@ -141,6 +147,14 @@ const styles = StyleSheet.create({
   header: {
     gap: Spacing.one,
   },
+  headerRow: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
+    gap: Spacing.two,
+  },
+  /* The title wraps; the star must not be pushed off the edge by a long one. */
+  headerTitle: { flex: 1 },
   headerArabic: {
     /* size and face: the `arabicQuote` rung */
     textAlign: 'right',

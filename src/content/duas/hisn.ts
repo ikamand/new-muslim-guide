@@ -15,15 +15,20 @@
  * are removed, and the footnote a [24] pointed at is printed directly beneath
  * the line already.
  *
- * ⚠️ Square brackets holding WORDS are supplication text, not markers, and are
- * kept with their brackets — `[بِسْمِ اللَّهِ]` opens the duʿa for entering the
- * bathroom. 53 of them survive here. The rule is `[0-9]+`
- * and nothing looser; `scripts/hisn-clean.mjs` proves after every run that the
- * strip removed markers and only markers, by deleting the permitted spans from
- * the source itself and comparing. A dropped letter or ḥaraka fails the build.
+ * ⚠️ Square brackets are gone too, on Iyad's instruction of 27 Aug 2026, and
+ * this is the one removal that changes what the book is SAYING rather than how
+ * it looks. 53 of them held words, not a footnote number,
+ * and the book uses them for a wording some narrations of a hadith carry and
+ * the base one does not — `[بِسْمِ اللَّهِ]` opens the bathroom duʿa that way.
+ * Without them the app presents an optional addition as part of the duʿa. He
+ * was told and decided; it is recorded here because a reader of this file
+ * cannot otherwise tell that anything was ever marked.
  *
- * Footnotes keep their ((…)): there the marks separate quoted matn from the
- * citation around it, and no `kind` field records that.
+ * Only the two characters go. `assertBracketContentsSurvive` looks for every
+ * bracket's contents in the output on every run, and
+ * `assertOnlyMarkersRemoved` proves the strip removed markers and only
+ * markers by deleting the permitted spans from the source itself and
+ * comparing. A dropped letter or ḥaraka fails the build.
  *
  * `id` is the publisher's own row id, kept so a reviewer can find the line
  * again in their text rather than take this file's word for it.
@@ -87,6 +92,19 @@ export type HisnLine = {
   repeat?: number;
   /** The phrase `repeat` was read from, kept so the number can be checked. */
   repeatText?: string;
+  /**
+   * Words the book had in square brackets, which the strip removed.
+   *
+   * The brackets marked a wording some narrations of a hadith carry and the
+   * base one does not — `[بِسْمِ اللَّهِ]`, `[ثلاثاً]`, `[i.e., footstool]`.
+   * Removing them was Iyad's call; carrying the strings here is what lets a
+   * screen still show that those words were marked, instead of silently
+   * folding an optional addition into the duʿa.
+   *
+   * Cleaned exactly as the line is, so each is a substring of `arabic` or
+   * `english` and a renderer can split on it.
+   */
+  emphasis?: readonly string[];
   /**
    * The book's footnote for this line, verbatim and unparsed.
    *
@@ -291,7 +309,10 @@ export const HISN: readonly HisnOccasion[] = [
         "id": 1268978,
         "kind": "quoted",
         "arabic": "إِنَّ فِي خَلْقِ السَّمَوَاتِ وَالأَرْضِ وَاخْتِلاَفِ اللَّيْلِ وَالنَّهَارِ لَآيَاتٍ لأُوْلِي الألْبَابِ الَّذِينَ يَذْكُرُونَ اللَّهَ قِيَاماً وَقُعُوداً وَعَلَىَ جُنُوبِهِمْ وَيَتَفَكَّرُونَ فِي خَلْقِ السَّمَوَاتِ وَالأَرْضِ رَبَّنَا مَا خَلَقْتَ هَذا بَاطِلاً سُبْحَانَكَ فَقِنَا عَذَابَ النَّارِ رَبَّنَا إِنَّكَ مَن تُدْخِلِ النَّارَ فَقَدْ أَخْزَيْتَهُ وَمَا لِلظَّالِمِينَ مِنْ أَنصَارٍ رَّبَّنَا إِنَّنَا سَمِعْنَا مُنَادِياً يُنَادِي لِلإِيمَانِ أَنْ آمِنُواْ بِرَبِّكُمْ فَآمَنَّا رَبَّنَا فَاغْفِرْ لَنَا ذُنُوبَنَا وَكَفِّرْ عَنَّا سَيِّئَاتِنَا وَتَوَفَّنَا مَعَ الأبْرَارِ رَبَّنَا وَآتِنَا مَا وَعَدتَّنَا عَلَى رُسُلِكَ وَلاَ تُخْزِنَا يَوْمَ الْقِيَامَةِ إِنَّكَ لاَ تُخْلِفُ الْمِيعَادَ فَاسْتَجَابَ لَهُمْ رَبُّهُمْ أَنِّي لاَ أُضِيعُ عَمَلَ عَامِلٍ مِّنكُم مِّن ذَكَرٍ أَوْ أُنثَى بَعْضُكُم مِّن بَعْضٍ فَالَّذِينَ هَاجَرُواْ وَأُخْرِجُواْ مِن دِيَارِهِمْ وَأُوذُواْ فِي سَبِيلِي وَقَاتَلُواْ وَقُتِلُواْ لأُكَفِّرَنَّ عَنْهُمْ سَيِّئَاتِهِمْ وَلأُدْخِلَنَّهُمْ جَنَّاتٍ تَجْرِي مِن تَحْتِهَا الأَنْهَارُ ثَوَاباً مِّن عِندِ اللَّهِ وَاللَّهُ عِندَهُ حُسْنُ الثَّوَابِ لاَ يَغُرَّنَّكَ تَقَلُّبُ الَّذِينَ كَفَرُواْ فِي الْبِلاَدِ مَتَاعٌ قَلِيلٌ ثُمَّ مَأْوَاهُمْ جَهَنَّمُ وَبِئْسَ الْمِهَادُ لَكِنِ الَّذِينَ اتَّقَوْاْ رَبَّهُمْ لَهُمْ جَنَّاتٌ تَجْرِي مِنْ تَحْتِهَا الأَنْهَارُ خَالِدِينَ فِيهَا نُزُلاً مِّنْ عِندِ اللَّهِ وَمَا عِندَ اللَّهِ خَيْرٌ لِّلأَبْرَارِ وَإِنَّ مِنْ أَهْلِ الْكِتَابِ لَمَن يُؤْمِنُ بِاللَّهِ وَمَا أُنزِلَ إِلَيْكُمْ وَمَآ أُنزِلَ إِلَيْهِمْ خَاشِعِينَ لِلَّهِ لاَ يَشْتَرُونَ بِآيَاتِ اللَّهِ ثَمَناً قَلِيلاً أُوْلَئِكَ لَهُمْ أَجْرُهُمْ عِندَ رَبِّهِمْ إِنَّ اللَّهَ سَرِيعُ الْحِسَابِ يَا أَيُّهَا الَّذِينَ آمَنُواْ اصْبِرُواْ وَصَابِرُواْ وَرَابِطُواْ وَاتَّقُواْ اللَّهَ لَعَلَّكُمْ تُفْلِحُونَ.",
-        "english": "Indeed, in the creation of the heavens and earth and the alternation of the night and day are signs for people of understanding, those who remember Allah while standing, sitting, and lying on their sides, and reflect upon the creation of the heavens and earth [saying], \"Our Lord, you have not created all this in vain. Glory be to You. Protect us from the punishment of the Fire. Our Lord, whoever You cause to enter the Fire, You have surely disgraced him, and the wrongdoers will have no helpers. Our Lord, we have heard the caller to faith calling, ‘Believe in your Lord,’ so we believed. Our Lord, forgive us our sins, expiate our misdeeds, and cause us to die among the righteous. \"Our Lord, give us what You have promised us through Your messengers, and do not disgrace us on the Day of Resurrection, for You never break Your promise.\" Their Lord responded to them: \"I will never waste the deeds of any doer among you, male or female; you are the same in reward. Those who migrated and were driven out of their homes and suffered for My sake, and fought and were killed—I will surely expiate their sins and admit them into gardens under which rivers flow, a reward from Allah; with Allah is the best reward.\" Do not be deceived by the disbelievers’ prosperity in the land: it is a brief enjoyment, then Hell will be their abode. What a terrible resting place! But for those who fear their Lord will be gardens under which rivers flow, abiding therein forever—a welcoming gift from Allah; and what is with Allah is best for the righteous. There are some among the People of the Book who believe in Allah and what has been sent down to you and what was sent down to them; humbling themselves before Allah. They do not sell Allah’s verses for a small price. It is they who will have their reward with their Lord. Indeed, Allah is swift in reckoning. O you who believe, be patient and endure, stand on guard and fear Allah, so that you may be successful.",
+        "english": "Indeed, in the creation of the heavens and earth and the alternation of the night and day are signs for people of understanding, those who remember Allah while standing, sitting, and lying on their sides, and reflect upon the creation of the heavens and earth saying, \"Our Lord, you have not created all this in vain. Glory be to You. Protect us from the punishment of the Fire. Our Lord, whoever You cause to enter the Fire, You have surely disgraced him, and the wrongdoers will have no helpers. Our Lord, we have heard the caller to faith calling, ‘Believe in your Lord,’ so we believed. Our Lord, forgive us our sins, expiate our misdeeds, and cause us to die among the righteous. \"Our Lord, give us what You have promised us through Your messengers, and do not disgrace us on the Day of Resurrection, for You never break Your promise.\" Their Lord responded to them: \"I will never waste the deeds of any doer among you, male or female; you are the same in reward. Those who migrated and were driven out of their homes and suffered for My sake, and fought and were killed—I will surely expiate their sins and admit them into gardens under which rivers flow, a reward from Allah; with Allah is the best reward.\" Do not be deceived by the disbelievers’ prosperity in the land: it is a brief enjoyment, then Hell will be their abode. What a terrible resting place! But for those who fear their Lord will be gardens under which rivers flow, abiding therein forever—a welcoming gift from Allah; and what is with Allah is best for the righteous. There are some among the People of the Book who believe in Allah and what has been sent down to you and what was sent down to them; humbling themselves before Allah. They do not sell Allah’s verses for a small price. It is they who will have their reward with their Lord. Indeed, Allah is swift in reckoning. O you who believe, be patient and endure, stand on guard and fear Allah, so that you may be successful.",
+        "emphasis": [
+          "saying"
+        ],
         "footnote": "الآيات من سورة آل عمران، 190-200، البخاري مع الفتح، 8/ 337، برقم 4569، ومسلم، 1/ 530، برقم 256."
       }
     ]
@@ -367,8 +388,11 @@ export const HISN: readonly HisnOccasion[] = [
       {
         "id": 1269005,
         "kind": "quoted",
-        "arabic": "[بِسْمِ اللَّهِ] اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْخُبْثِ وَالْخَبائِث.",
+        "arabic": "بِسْمِ اللَّهِ اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْخُبْثِ وَالْخَبائِث.",
         "english": "In the name of Allah, O Allah, I seek refuge with You from the male and female devils.",
+        "emphasis": [
+          "بِسْمِ اللَّهِ"
+        ],
         "footnote": "أخرجه البخاري، 1/ 45، برقم 142، ومسلم، 1/ 283، برقم 375، وزيادة: ((بسم الله)) في أوله أخرجها سعيد بن منصور. انظر فتح الباري 1/244."
       }
     ]
@@ -479,8 +503,13 @@ export const HISN: readonly HisnOccasion[] = [
       {
         "id": 1269031,
         "kind": "quoted",
-        "arabic": "[اللَّهُمَّ اجْعَلْ لِي نُوراً فِي قَبْرِي... وَنُوراً فِي عِظَامِي] [وَزِدْنِي نُوراً، وَزِدْنِي نُوراً، وَزِدْنِي نُوراً] [وَهَبْ لِي نُوراً عَلَى نُورٍ].",
+        "arabic": "اللَّهُمَّ اجْعَلْ لِي نُوراً فِي قَبْرِي... وَنُوراً فِي عِظَامِي وَزِدْنِي نُوراً، وَزِدْنِي نُوراً، وَزِدْنِي نُوراً وَهَبْ لِي نُوراً عَلَى نُورٍ.",
         "english": "O Allah, grant me light in my grave... and light in my bones.\" \"And increase me in light, increase me in light, and increase me in light.\" \"And bestow upon me light upon light.",
+        "emphasis": [
+          "اللَّهُمَّ اجْعَلْ لِي نُوراً فِي قَبْرِي... وَنُوراً فِي عِظَامِي",
+          "وَزِدْنِي نُوراً، وَزِدْنِي نُوراً، وَزِدْنِي نُوراً",
+          "وَهَبْ لِي نُوراً عَلَى نُورٍ"
+        ],
         "footnote": "ذكره ابن حجر في فتح الباري، وعزاه إلى ابن أبي عاصم في كتاب الدعاء، انظر الفتح 11/118، وقال: فاجتمع من اختلاف الروايات خمس وعشرون خصلة."
       }
     ]
@@ -493,8 +522,12 @@ export const HISN: readonly HisnOccasion[] = [
       {
         "id": 1269036,
         "kind": "quoted",
-        "arabic": "يَبْدَأُ بِرِجْلِهِ الْيُمْنَى، وَيَقُولُ: أَعُوذُ بِاللَّهِ العَظِيمِ، وَبِوَجْهِهِ الْكَرِيمِ، وَسُلْطَانِهِ الْقَدِيمِ، مِنَ الشَّيْطَانِ الرَّجِيمِ [بِسْمِ اللَّهِ، وَالصَّلَاةُ] [وَالسَّلَامُ عَلَى رَسُولِ اللَّهِ] اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ.",
+        "arabic": "يَبْدَأُ بِرِجْلِهِ الْيُمْنَى، وَيَقُولُ: أَعُوذُ بِاللَّهِ العَظِيمِ، وَبِوَجْهِهِ الْكَرِيمِ، وَسُلْطَانِهِ الْقَدِيمِ، مِنَ الشَّيْطَانِ الرَّجِيمِ بِسْمِ اللَّهِ، وَالصَّلَاةُ وَالسَّلَامُ عَلَى رَسُولِ اللَّهِ اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ.",
         "english": "He begins with his right foot and says: \"I seek refuge with Allah, the Most Great, and with His Noble Face, and His eternal authority from the accursed devil.\" \"In the name of Allah, and may the blessings of Allah\" \"and His peace be upon the Messenger of Allah.\" \"O Allah, open for me the gates of Your mercy.\"",
+        "emphasis": [
+          "بِسْمِ اللَّهِ، وَالصَّلَاةُ",
+          "وَالسَّلَامُ عَلَى رَسُولِ اللَّهِ"
+        ],
         "footnote": "مسلم، 1/ 494، برقم 713، وفي سنن ابن ماجه من حديث فاطمة –رضي الله عنها-: ((اللهم اغفر لي ذنوبي،وافتح لي أبواب رحمتك))، وصححه الألباني لشواهده. انظر: صحيح ابن ماجه، 1/128-129."
       }
     ]
@@ -554,8 +587,12 @@ export const HISN: readonly HisnOccasion[] = [
       {
         "id": 1269057,
         "kind": "quoted",
-        "arabic": "اللَّهُمَّ رَبَّ هَذِهِ الدَّعْوَةِ التَّامَّةِ، وَالصَّلاَةِ الْقَائِمَةِ، آتِ مُحَمَّداً الْوَسِيلَةَ وَالْفَضِيلَةَ، وَابْعَثْهُ مَقَامَاً مَحمُوداً الَّذِي وَعَدْتَهُ، [إِنَّكَ لَا تُخْلِفُ الْمِيعَادَ].",
-        "english": "O Allah, Lord of this perfect call and the established prayer, grant Muhammad Al-Wasīlah (the highest position of Paradise) and the degree of superiority, and raise him to a Praiseworthy Position which You have promised him, [indeed, You never fail in Your promise].",
+        "arabic": "اللَّهُمَّ رَبَّ هَذِهِ الدَّعْوَةِ التَّامَّةِ، وَالصَّلاَةِ الْقَائِمَةِ، آتِ مُحَمَّداً الْوَسِيلَةَ وَالْفَضِيلَةَ، وَابْعَثْهُ مَقَامَاً مَحمُوداً الَّذِي وَعَدْتَهُ، إِنَّكَ لَا تُخْلِفُ الْمِيعَادَ.",
+        "english": "O Allah, Lord of this perfect call and the established prayer, grant Muhammad Al-Wasīlah (the highest position of Paradise) and the degree of superiority, and raise him to a Praiseworthy Position which You have promised him, indeed, You never fail in Your promise.",
+        "emphasis": [
+          "إِنَّكَ لَا تُخْلِفُ الْمِيعَادَ",
+          "indeed, You never fail in Your promise"
+        ],
         "footnote": "البخاري، 1/ 152، برقم 614، وما بين المعقوفين للبيهقي، 1/410، وحسَّن إسناده العلامة عبد العزيز بن باز -رحمه الله- في تحفة الأخيار، ص38."
       },
       {
@@ -610,8 +647,20 @@ export const HISN: readonly HisnOccasion[] = [
       {
         "id": 1269072,
         "kind": "quoted",
-        "arabic": "اللَّهُمَّ لَكَ الْحَمْدُ، أَنْتَ نُورُ السَّمَوَاتِ وَالأَرْضِ وَمَنْ فِيهِنَّ، وَلَكَ الْحَمْدُ أَنْتَ قَيِّمُ السَّمَوَاتِ وَالأَرْضِ وَمَنْ فِيهِنَّ، [وَلَكَ الْحَمْدُ أَنْتَ رَبُّ السَّمَواتِ وَالأَرْضِ وَمَنْ فِيهِنَّ] [وَلَكَ الْحَمْدُ لَكَ مُلْكُ السَّمَوَاتِ وَالأَرْضِ وَمَنْ فِيهِنَّ] [وَلَكَ الْحَمْدُ أَنْتَ مَلِكُ السَّمَوَاتِ وَالأَرْضِ] [وَلَكَ الْحَمْدُ] [أَنْتَ الْحَقُّ، وَوَعْدُكَ الْحَقُّ، وَقَوْلُكَ الْحَقُّ، وَلِقاؤُكَ الْحَقُّ، وَالْجَنَّةُ حَقٌّ، وَالنَّارُ حَقٌّ، وَالنَّبِيُّونَ حَقٌّ، وَمحَمَّدٌ -صلى الله عليه وسلم- حَقٌّ، وَالسّاعَةُ حَقٌّ] [اللَّهُمَّ لَكَ أَسْلَمتُ، وَعَلَيْكَ تَوَكَّلْتُ، وَبِكَ آمَنْتُ، وَإِلَيْكَ أَنَبْتُ، وَبِكَ خاصَمْتُ، وَإِلَيْكَ حاكَمْتُ. فَاغْفِرْ لِي مَا قَدَّمْتُ، وَمَا أَخَّرْتُ، وَمَا أَسْرَرْتُ، وَمَا أَعْلَنْتُ] [وَمَا أَنْتَ أَعْلَمُ بِهِ مِنِّي] [أَنْتَ المُقَدِّمُ، وَأَنْتَ المُؤَخِّرُ لاَ إِلَهَ إِلاَّ أَنْتَ] [أَنْتَ إِلَهِي لاَ إِلَهَ إِلاَّ أَنْتَ] [وَلاَ حَوْلَ وَلاَ قُوَّةَ إِلاَّ بِاللَّهِ].",
+        "arabic": "اللَّهُمَّ لَكَ الْحَمْدُ، أَنْتَ نُورُ السَّمَوَاتِ وَالأَرْضِ وَمَنْ فِيهِنَّ، وَلَكَ الْحَمْدُ أَنْتَ قَيِّمُ السَّمَوَاتِ وَالأَرْضِ وَمَنْ فِيهِنَّ، وَلَكَ الْحَمْدُ أَنْتَ رَبُّ السَّمَواتِ وَالأَرْضِ وَمَنْ فِيهِنَّ وَلَكَ الْحَمْدُ لَكَ مُلْكُ السَّمَوَاتِ وَالأَرْضِ وَمَنْ فِيهِنَّ وَلَكَ الْحَمْدُ أَنْتَ مَلِكُ السَّمَوَاتِ وَالأَرْضِ وَلَكَ الْحَمْدُ أَنْتَ الْحَقُّ، وَوَعْدُكَ الْحَقُّ، وَقَوْلُكَ الْحَقُّ، وَلِقاؤُكَ الْحَقُّ، وَالْجَنَّةُ حَقٌّ، وَالنَّارُ حَقٌّ، وَالنَّبِيُّونَ حَقٌّ، وَمحَمَّدٌ -صلى الله عليه وسلم- حَقٌّ، وَالسّاعَةُ حَقٌّ اللَّهُمَّ لَكَ أَسْلَمتُ، وَعَلَيْكَ تَوَكَّلْتُ، وَبِكَ آمَنْتُ، وَإِلَيْكَ أَنَبْتُ، وَبِكَ خاصَمْتُ، وَإِلَيْكَ حاكَمْتُ. فَاغْفِرْ لِي مَا قَدَّمْتُ، وَمَا أَخَّرْتُ، وَمَا أَسْرَرْتُ، وَمَا أَعْلَنْتُ وَمَا أَنْتَ أَعْلَمُ بِهِ مِنِّي أَنْتَ المُقَدِّمُ، وَأَنْتَ المُؤَخِّرُ لاَ إِلَهَ إِلاَّ أَنْتَ أَنْتَ إِلَهِي لاَ إِلَهَ إِلاَّ أَنْتَ وَلاَ حَوْلَ وَلاَ قُوَّةَ إِلاَّ بِاللَّهِ.",
         "english": "O Allah, praise is due to You; You are the Light of the heavens and the earth and all that is in them. Praise is due to You; You are the Sustainer of the heavens and the earth and all that is in them. Praise is due to You; You are the Lord of the heavens and the earth and all that is in them. Praise is due to You; to You belongs the dominion of the heavens and the earth and all that is in them. Praise is due to You; You are the Sovereign of the heavens and the earth; Praise is due to You; You are the Truth; Your promise is the truth; Your speech is the truth; and meeting You is the truth. Paradise is true, Hellfire is true, the prophets are true, Muhammad (ﷺ) is true, and the Hour is true. O Allah, I submit to You, rely upon You, believe in You, turn to You in repentance, with Your help I argue, and refer judgment to You. So, forgive me my previous and future sins, what I have concealed and what I have declared, and what You know better than me. You are the Advancer and You are the Delayer. There is no god but You. You are my God, there is no god but You. There is no power and no strength except through Allah.\"",
+        "emphasis": [
+          "وَلَكَ الْحَمْدُ أَنْتَ رَبُّ السَّمَواتِ وَالأَرْضِ وَمَنْ فِيهِنَّ",
+          "وَلَكَ الْحَمْدُ لَكَ مُلْكُ السَّمَوَاتِ وَالأَرْضِ وَمَنْ فِيهِنَّ",
+          "وَلَكَ الْحَمْدُ أَنْتَ مَلِكُ السَّمَوَاتِ وَالأَرْضِ",
+          "وَلَكَ الْحَمْدُ",
+          "أَنْتَ الْحَقُّ، وَوَعْدُكَ الْحَقُّ، وَقَوْلُكَ الْحَقُّ، وَلِقاؤُكَ الْحَقُّ، وَالْجَنَّةُ حَقٌّ، وَالنَّارُ حَقٌّ، وَالنَّبِيُّونَ حَقٌّ، وَمحَمَّدٌ -صلى الله عليه وسلم- حَقٌّ، وَالسّاعَةُ حَقٌّ",
+          "اللَّهُمَّ لَكَ أَسْلَمتُ، وَعَلَيْكَ تَوَكَّلْتُ، وَبِكَ آمَنْتُ، وَإِلَيْكَ أَنَبْتُ، وَبِكَ خاصَمْتُ، وَإِلَيْكَ حاكَمْتُ. فَاغْفِرْ لِي مَا قَدَّمْتُ، وَمَا أَخَّرْتُ، وَمَا أَسْرَرْتُ، وَمَا أَعْلَنْتُ",
+          "وَمَا أَنْتَ أَعْلَمُ بِهِ مِنِّي",
+          "أَنْتَ المُقَدِّمُ، وَأَنْتَ المُؤَخِّرُ لاَ إِلَهَ إِلاَّ أَنْتَ",
+          "أَنْتَ إِلَهِي لاَ إِلَهَ إِلاَّ أَنْتَ",
+          "وَلاَ حَوْلَ وَلاَ قُوَّةَ إِلاَّ بِاللَّهِ"
+        ],
         "footnote": "البخاري مع الفتح، 3/ 3، و11/ 116، و13/ 371، 423، 465،، برقم 1120، ورقم 6317، ورقم 7385، ورقم 7442، ورقم 7499، ومسلم مختصراً بنحوه، 1/ 532، برقم 769."
       }
     ]
@@ -645,8 +694,12 @@ export const HISN: readonly HisnOccasion[] = [
       {
         "id": 1269082,
         "kind": "quoted",
-        "arabic": "اللَّهُمَّ لَكَ رَكَعْتُ، وَبِكَ آمَنْتُ، وَلَكَ أَسْلَمْتُ، خَشَعَ لَكَ سَمْعِي، وَبَصَرِي، وَمُخِّي، وَعَــــظْمِي، وَعَصَبِي، [وَمَا استَقَلَّتْ بِهِ قَدَمِي].",
-        "english": "O Allah, For You I bow, in You I believe, and for You I submit. My hearing, sight, brain, bones, sinews, [and what my feet have carried] are humbled before You.",
+        "arabic": "اللَّهُمَّ لَكَ رَكَعْتُ، وَبِكَ آمَنْتُ، وَلَكَ أَسْلَمْتُ، خَشَعَ لَكَ سَمْعِي، وَبَصَرِي، وَمُخِّي، وَعَــــظْمِي، وَعَصَبِي، وَمَا استَقَلَّتْ بِهِ قَدَمِي.",
+        "english": "O Allah, For You I bow, in You I believe, and for You I submit. My hearing, sight, brain, bones, sinews, and what my feet have carried are humbled before You.",
+        "emphasis": [
+          "وَمَا استَقَلَّتْ بِهِ قَدَمِي",
+          "and what my feet have carried"
+        ],
         "footnote": "مسلم، 1/ 534، برفم 771، والأربعة إلا ابن ماجه: أبو داود، برقم 760، ورقم 761، والترمذي، برقم 3421، والنسائي، برقم 1049، وما بين المعقوفين لفظ ابن خزيمة، برقم 607، وابن حبان، برقم 1901."
       },
       {
@@ -779,7 +832,10 @@ export const HISN: readonly HisnOccasion[] = [
         "id": 1269116,
         "kind": "quoted",
         "arabic": "اللَّهُمَّ اكْتُبْ لِي بِهَا عِنْدَكَ أَجْراً، وَضَعْ عَنِّي بِهَا وِزْراً، وَاجْعَلْهَا لِي عِنْدَكَ ذُخْراً، وَتَقَبَّلْهَا مِنِّي كَمَا تَقَبَّلْتَهَا مِنْ عَبْدِكَ دَاوُدَ.",
-        "english": "O Allah, record it for me as a reward with You, remove by it a sin for me, and store it for me with You, and accept it from me as You accepted it from Your servant [Prophet] David.",
+        "english": "O Allah, record it for me as a reward with You, remove by it a sin for me, and store it for me with You, and accept it from me as You accepted it from Your servant Prophet David.",
+        "emphasis": [
+          "Prophet"
+        ],
         "footnote": "الترمذي، 2/ 473، برقم 579، والحاكم وصححه ووافقه الذهبي، 1/219."
       }
     ]
@@ -918,10 +974,14 @@ export const HISN: readonly HisnOccasion[] = [
       {
         "id": 1269152,
         "kind": "quoted",
-        "arabic": "لاَ إِلَهَ إِلاَّ اللَّهُ وَحْدَهُ لاَ شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ [ثلاثاً]، اللَّهُمَّ لاَ مَانِعَ لِمَا أَعْطَيْتَ، وَلاَ مُعْطِيَ لِمَا مَنَعْتَ، وَلاَ يَنْفَعُ ذَا الْجَدِّ مِنْكَ الجَدُّ.",
-        "english": "There is no god but Allah, alone, with no partners. To Him belongs the sovereignty and all praise is due to Him, and He is Competent over all things [three times]. O Allah, none can withhold what You have given, and none can give what You have withheld, and the greatness of the great will be of no avail to him against You.",
+        "arabic": "لاَ إِلَهَ إِلاَّ اللَّهُ وَحْدَهُ لاَ شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ ثلاثاً، اللَّهُمَّ لاَ مَانِعَ لِمَا أَعْطَيْتَ، وَلاَ مُعْطِيَ لِمَا مَنَعْتَ، وَلاَ يَنْفَعُ ذَا الْجَدِّ مِنْكَ الجَدُّ.",
+        "english": "There is no god but Allah, alone, with no partners. To Him belongs the sovereignty and all praise is due to Him, and He is Competent over all things three times. O Allah, none can withhold what You have given, and none can give what You have withheld, and the greatness of the great will be of no avail to him against You.",
         "repeat": 3,
         "repeatText": "[ثلاثاً]",
+        "emphasis": [
+          "ثلاثاً",
+          "three times"
+        ],
         "footnote": "البخاري، 1/ 255، برقم 844، ومسلم، 1/ 414، برقم 593، وما بين المعقوفين زيادة من البخاري، برقم 6473."
       },
       {
@@ -948,7 +1008,10 @@ export const HISN: readonly HisnOccasion[] = [
         "id": 1269162,
         "kind": "quran",
         "arabic": "قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ مِنْ شَرِّ مَا خَلَقَ وَمِنْ شَرِّ غَاسِقٍ إِذَا وَقَبَ وَمِنْ شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ،",
-        "english": "Say, “I seek refuge with the Lord of the daybreak, from the harm of all what He has created; from the harm of darkening [night] when it spreads around, from the harm of the sorceresses who blow on knots, and from the harm of the envier when he envies.\""
+        "english": "Say, “I seek refuge with the Lord of the daybreak, from the harm of all what He has created; from the harm of darkening night when it spreads around, from the harm of the sorceresses who blow on knots, and from the harm of the envier when he envies.\"",
+        "emphasis": [
+          "night"
+        ]
       },
       {
         "id": 1269167,
@@ -967,7 +1030,10 @@ export const HISN: readonly HisnOccasion[] = [
         "id": 1269175,
         "kind": "quran",
         "arabic": "اللَّهُ لاَ إِلَهَ إِلاَّ هُوَ الْحَيُّ الْقَيُّومُ لاَ تَأْخُذُهُ سِنَةٌ وَلاَ نَوْمٌ لَّهُ مَا فِي السَّمَوَاتِ وَمَا فِي الأَرْضِ مَن ذَا الَّذِي يَشْفَعُ عِنْدَهُ إِلاَّ بِإِذْنِهِ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ وَلاَ يُحِيطُونَ بِشَيْءٍ مِّنْ عِلْمِهِ إِلاَّ بِمَا شَاءَ وَسِعَ كُرْسِيُّهُ السَّمَوَاتِ وَالأَرْضَ وَلاَ يَؤُودُهُ حِفْظُهُمَا وَهُوَ الْعَلِيُّ الْعَظِيمُ عَقِبَ كلِّ صَلاَةٍ.",
-        "english": "Allah: none has the right to be worshiped except Him, the Ever-Living, All-Sustaining. Neither drowsiness overtakes Him nor sleep. To Him belongs all that is in the heavens and all that is on earth. Who is there that can intercede with Him except with His permission? He knows what was before them and what will be after them, while they encompass nothing of His knowledge, except what He wills. His Kursī [i.e., footstool] extends over the heavens and earth, and safeguarding of both does not weary Him, for He is the Most High, the Most Great. after each prayer.",
+        "english": "Allah: none has the right to be worshiped except Him, the Ever-Living, All-Sustaining. Neither drowsiness overtakes Him nor sleep. To Him belongs all that is in the heavens and all that is on earth. Who is there that can intercede with Him except with His permission? He knows what was before them and what will be after them, while they encompass nothing of His knowledge, except what He wills. His Kursī i.e., footstool extends over the heavens and earth, and safeguarding of both does not weary Him, for He is the Most High, the Most Great. after each prayer.",
+        "emphasis": [
+          "i.e., footstool"
+        ],
         "footnote": "من قرأها دبر كل صلاة لم يمنعه من دخول الجنة إلا أن يموت. النسائي في عمل اليوم والليلة، برقم 100، وابن السني، برقم، 121، وصححه الألباني في صحيح الجامع، 5/339، وسلسلة الأحاديث الصحيحة، 2/697، برقم 972، والآية رقم 255 من سورة البقرة."
       },
       {
@@ -1035,7 +1101,10 @@ export const HISN: readonly HisnOccasion[] = [
         "id": 1269194,
         "kind": "quran",
         "arabic": "اللَّهُ لاَ إِلَهَ إِلاَّ هُوَ الْحَيُّ الْقَيُّومُ لاَ تَأْخُذُهُ سِنَةٌ وَلاَ نَوْمٌ لَّهُ مَا فِي السَّمَوَاتِ وَمَا فِي الأَرْضِ مَن ذَا الَّذِي يَشْفَعُ عِنْدَهُ إِلاَّ بِإِذْنِهِ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ وَلاَ يُحِيطُونَ بِشَيْءٍ مِّنْ عِلْمِهِ إِلاَّ بِمَا شَاء وَسِعَ كُرْسِيُّهُ السَّمَوَاتِ وَالْأَرْضَ وَلاَ يَؤُودُهُ حِفْظُهُمَا وَهُوَ الْعَلِيُّ الْعَظِيمُ.",
-        "english": "Allah: none has the right to be worshiped except Him, the Ever-Living, All-Sustaining. Neither drowsiness overtakes Him nor sleep. To Him belongs all that is in the heavens and all that is on earth. Who is there that can intercede with Him except with His permission? He knows what was before them and what will be after them, while they encompass nothing of His knowledge, except what He wills. His Kursī [i.e., footstool] extends over the heavens and earth, and safeguarding of both does not weary Him, for He is the Most High, the Most Great.",
+        "english": "Allah: none has the right to be worshiped except Him, the Ever-Living, All-Sustaining. Neither drowsiness overtakes Him nor sleep. To Him belongs all that is in the heavens and all that is on earth. Who is there that can intercede with Him except with His permission? He knows what was before them and what will be after them, while they encompass nothing of His knowledge, except what He wills. His Kursī i.e., footstool extends over the heavens and earth, and safeguarding of both does not weary Him, for He is the Most High, the Most Great.",
+        "emphasis": [
+          "i.e., footstool"
+        ],
         "footnote": "سورة البقرة، الآية: 255. من قالها حين يصبح أُجير من الجن حتى يمسي، ومن قالها حين يمسي أُجير منهم حتى يصبح. أخرجه الحاكم، 1/562، وصححه الألباني في صحيح الترغيب والترهيب، 1/273، وعزاه إلى النسائي، والطبراني، وقال: ((إسناد الطبراني جيد))."
       },
       {
@@ -1048,7 +1117,10 @@ export const HISN: readonly HisnOccasion[] = [
         "id": 1269200,
         "kind": "quran",
         "arabic": "قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ مِنْ شَرِّ مَا خَلَقَ وَمِنْ شَرِّ غَاسِقٍ إِذَا وَقَبَ وَمِنْ شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ.",
-        "english": "Say, “I seek refuge with the Lord of the daybreak, from the harm of all what He has created; from the harm of darkening [night] when it spreads around, from the harm of the sorceresses who blow on knots, and from the harm of the envier when he envies.\""
+        "english": "Say, “I seek refuge with the Lord of the daybreak, from the harm of all what He has created; from the harm of darkening night when it spreads around, from the harm of the sorceresses who blow on knots, and from the harm of the envier when he envies.\"",
+        "emphasis": [
+          "night"
+        ]
       },
       {
         "id": 1269205,
@@ -1262,7 +1334,10 @@ export const HISN: readonly HisnOccasion[] = [
         "id": 1269273,
         "kind": "quran",
         "arabic": "قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ مِنْ شَرِّ مَا خَلَقَ وَمِنْ شَرِّ غَاسِقٍ إِذَا وَقَبَ وَمِنْ شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ.",
-        "english": "Say, “I seek refuge with the Lord of the daybreak, from the harm of all what He has created; from the harm of darkening [night] when it spreads around, from the harm of the sorceresses who blow on knots, and from the harm of the envier when he envies.\""
+        "english": "Say, “I seek refuge with the Lord of the daybreak, from the harm of all what He has created; from the harm of darkening night when it spreads around, from the harm of the sorceresses who blow on knots, and from the harm of the envier when he envies.\"",
+        "emphasis": [
+          "night"
+        ]
       },
       {
         "id": 1269278,
@@ -1289,14 +1364,21 @@ export const HISN: readonly HisnOccasion[] = [
         "id": 1269286,
         "kind": "quran",
         "arabic": "اللَّهُ لاَ إِلَهَ إِلاَّ هُوَ الْحَيُّ الْقَيُّومُ لاَ تَأْخُذُهُ سِنَةٌ وَلاَ نَوْمٌ لَّهُ مَا فِي السَّمَوَاتِ وَمَا فِي الأَرْضِ مَن ذَا الَّذِي يَشْفَعُ عِنْـــــــــــدَهُ إِلاَّ بِإِذْنِهِ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ وَلاَ يُحِيطُونَ بِشَيْءٍ مِّنْ عِلْمِهِ إِلاَّ بِمَا شَاء وَسِعَ كُرْسِيُّهُ السَّمَوَاتِ وَالأَرْضَ وَلاَ يَؤُودُهُ حِفْظُهُمَا وَهُوَ الْعَلِيُّ الْعَظِيمُ.",
-        "english": "Allah: none has the right to be worshiped except Him, the Ever-Living, All-Sustaining. Neither drowsiness overtakes Him nor sleep. To Him belongs all that is in the heavens and all that is on earth. Who is there that can intercede with Him except with His permission? He knows what was before them and what will be after them, while they encompass nothing of His knowledge, except what He wills. His Kursī [i.e., footstool] extends over the heavens and earth, and safeguarding of both does not weary Him, for He is the Most High, the Most Great.",
+        "english": "Allah: none has the right to be worshiped except Him, the Ever-Living, All-Sustaining. Neither drowsiness overtakes Him nor sleep. To Him belongs all that is in the heavens and all that is on earth. Who is there that can intercede with Him except with His permission? He knows what was before them and what will be after them, while they encompass nothing of His knowledge, except what He wills. His Kursī i.e., footstool extends over the heavens and earth, and safeguarding of both does not weary Him, for He is the Most High, the Most Great.",
+        "emphasis": [
+          "i.e., footstool"
+        ],
         "footnote": "سورة البقرة، الاية: 255، من قرأها إذا أوى إلى فراشه فإنه لن يزال عليه من اللَّه حافظ ولا يقربه شيطان حتى يصبح، البخاري مع الفتح، 4/ 487، برقم 2311."
       },
       {
         "id": 1269288,
         "kind": "quran",
         "arabic": "آمَنَ الرَّسُولُ بِمَا أُنزِلَ إِلَيْهِ مِن رَّبِّهِ وَالْمُؤْمِنُونَ كُلٌّ آمَنَ بِاللَّهِ وَمَلآئِكَتِهِ وَكُتُبِهِ وَرُسُلِهِ لاَ نُفَرِّقُ بَيْنَ أَحَدٍ مِّن رُّسُلِهِ وَقَالُواْ سَمِعْنَا وَأَطَعْنَا غُفْرَانَكَ رَبَّنَا وَإِلَيْكَ الْمَصِيرُ",
-        "english": "The Messenger believes in what has been sent down to him from his Lord, as do the believers. All of them believe in Allah, His angels, His Books, and His messengers, [saying], “We make no distinction between any of His messengers.” And they say, “We hear and obey. Grant us Your forgiveness, our Lord, and to You is the [final] destination.”"
+        "english": "The Messenger believes in what has been sent down to him from his Lord, as do the believers. All of them believe in Allah, His angels, His Books, and His messengers, saying, “We make no distinction between any of His messengers.” And they say, “We hear and obey. Grant us Your forgiveness, our Lord, and to You is the final destination.”",
+        "emphasis": [
+          "saying",
+          "final"
+        ]
       },
       {
         "id": 1269289,
@@ -1365,7 +1447,11 @@ export const HISN: readonly HisnOccasion[] = [
         "id": 1269309,
         "kind": "quoted",
         "arabic": "يَقْرَأُ الــم تَنْزِيلَ السَّجْدَةِ، وَتَبَارَكَ الَّذي بِيَدِهِ الْمُلْكُ.",
-        "english": "Reciting Alif-Lām-Mīm. The revelation [Surat as-Sajdah], and Blessed is He in Whose Hand is the dominion [Surat al-Mulk].",
+        "english": "Reciting Alif-Lām-Mīm. The revelation Surat as-Sajdah, and Blessed is He in Whose Hand is the dominion Surat al-Mulk.",
+        "emphasis": [
+          "Surat as-Sajdah",
+          "Surat al-Mulk"
+        ],
         "footnote": "الترمذي، برقم 3404، والنسائي في عمل اليوم والليلة، برقم 707، وانظر: صحيح الجامع 4/255."
       },
       {
@@ -1459,8 +1545,12 @@ export const HISN: readonly HisnOccasion[] = [
       {
         "id": 1269332,
         "kind": "quoted",
-        "arabic": "اللَّهُمَّ اهْدِنِي فِيمَنْ هَدَيْتَ، وَعَافِنِي فِيمَنْ عَافَيْتَ، وَتَوَلَّنِي فِيمَنْ تَوَلَّيْتَ، وَبَارِكْ لِي فِيمَا أَعْطَيْتَ، وَقِنِي شَرَّ مَا قَضَيْتَ؛ فَإِنَّكَ تَقْضِي وَلاَ يُقْضَى عَلَيْكَ، إِنَّهُ لاَ يَذِلُّ مَنْ وَالَيْتَ، [وَلاَ يَعِزُّ مَنْ عَادَيْتَ]، تَبارَكْتَ رَبَّنا وَتَعَالَيْتَ.",
-        "english": "O Allah, guide me among those whom You have guided, grant me wellbeing among those whom You have granted wellbeing, protect me among those whom You have protected, bless for me what You have given me, and save me from the evil of what You have decreed. Verily, You decree and none can decree against You. Indeed, the one You have supported is not humiliated, [and the one You have taken as an enemy is not honored]. Blessed are You, O Lord, and Exalted.",
+        "arabic": "اللَّهُمَّ اهْدِنِي فِيمَنْ هَدَيْتَ، وَعَافِنِي فِيمَنْ عَافَيْتَ، وَتَوَلَّنِي فِيمَنْ تَوَلَّيْتَ، وَبَارِكْ لِي فِيمَا أَعْطَيْتَ، وَقِنِي شَرَّ مَا قَضَيْتَ؛ فَإِنَّكَ تَقْضِي وَلاَ يُقْضَى عَلَيْكَ، إِنَّهُ لاَ يَذِلُّ مَنْ وَالَيْتَ، وَلاَ يَعِزُّ مَنْ عَادَيْتَ، تَبارَكْتَ رَبَّنا وَتَعَالَيْتَ.",
+        "english": "O Allah, guide me among those whom You have guided, grant me wellbeing among those whom You have granted wellbeing, protect me among those whom You have protected, bless for me what You have given me, and save me from the evil of what You have decreed. Verily, You decree and none can decree against You. Indeed, the one You have supported is not humiliated, and the one You have taken as an enemy is not honored. Blessed are You, O Lord, and Exalted.",
+        "emphasis": [
+          "وَلاَ يَعِزُّ مَنْ عَادَيْتَ",
+          "and the one You have taken as an enemy is not honored"
+        ],
         "footnote": "أخرجه أصحاب السنن الأربعة، وأحمد، والدارمي، والبيهقي: أبو داود، برقم 1425، والترمذي، برقم 464، والنسائي، برقم 1744، وابن ماجه، برقم 1178، وأحمد، برقم 1718، والدارمي، برقم 1592، والحاكم، 3/ 172، والبيهقي، 2/ 209، وما بين المعقوفين للبيهقي، وانظر: صحيح الترمذي، 1/144، وصحيح ابن ماجه، 1/194، وإرواء الغليل للألباني، 2/172."
       },
       {
@@ -1487,8 +1577,12 @@ export const HISN: readonly HisnOccasion[] = [
       {
         "id": 1269339,
         "kind": "quoted",
-        "arabic": "سُبْحَانَ المَلِكِ القُدُّوسِ ثلاثَ مرَّاتٍ والثَّالِثَةُ يَجْهَرُ بها ويَمُدُّ بها صَوتَهُ يقولُ: [رَبِّ الْمَلاَئِكَةِ وَالرُّوحِ].",
-        "english": "Glory be to the Sovereign, the Most Holy,\" three times, and he raises his voice and prolongs it in the third one, saying: \"[Lord of the angels and the Spirit].",
+        "arabic": "سُبْحَانَ المَلِكِ القُدُّوسِ ثلاثَ مرَّاتٍ والثَّالِثَةُ يَجْهَرُ بها ويَمُدُّ بها صَوتَهُ يقولُ: رَبِّ الْمَلاَئِكَةِ وَالرُّوحِ.",
+        "english": "Glory be to the Sovereign, the Most Holy,\" three times, and he raises his voice and prolongs it in the third one, saying: \"Lord of the angels and the Spirit.",
+        "emphasis": [
+          "رَبِّ الْمَلاَئِكَةِ وَالرُّوحِ",
+          "Lord of the angels and the Spirit"
+        ],
         "footnote": "رواه النسائي، 3/ 244، برقم 1734، والدارقطني، 2/ 31، وغيرهما، وما بين المعقوفين زيادة للدارقطني 2/31، برقم 2، وإسناده صحيح، انظر: زاد المعاد بتحقيق شعيب الأرناؤوط وعبدالقادر الأرناؤوط، 1/337.1"
       }
     ]
@@ -1918,8 +2012,12 @@ export const HISN: readonly HisnOccasion[] = [
       {
         "id": 1269441,
         "kind": "quoted",
-        "arabic": "اللَّهُمَّ اغْفِرْ لَهُ وَارْحَمْهُ، وَعَافِهِ، وَاعْفُ عَنْهُ، وَأَكْرِمْ نُزُلَهُ، وَوَسِّعْ مُدْخَلَهُ، وَاغْسِلْهُ بِالْمَاءِ وَالثَّلْجِ وَالْبَرَدِ، وَنَقِّهِ مِنَ الْخَطَايَا كَمَا نَقَّيْتَ الثَّوْبَ الأَبْيَضَ مِنَ الدَّنَسِ، وَأَبْدِلْهُ دَاراً خَيْراً مِنْ دَارِهِ، وَأَهْلاً خَيْراً مِنْ أَهْلِهِ، وَزَوْجَاً خَيْراً مِنْ زَوْجِهِ، وَأَدْخِلْهُ الْجَنَّةَ، وَأَعِذْهُ مِنْ عَذَابِ القَبْرِ [وَعَذَابِ النَّارِ].",
-        "english": "O Allah, forgive him and have mercy on him, grant him wellness, and pardon him. Make his resting place honorable, and make his entry place spacious. Wash him with water, snow, and hail, and purify him from sins as You purify a white garment from dirt. Give him in exchange a home better than his home, a family better than his family, and a spouse better than his spouse. Admit him to Paradise and protect him from the torment of the grave [and the torment of Hellfire].",
+        "arabic": "اللَّهُمَّ اغْفِرْ لَهُ وَارْحَمْهُ، وَعَافِهِ، وَاعْفُ عَنْهُ، وَأَكْرِمْ نُزُلَهُ، وَوَسِّعْ مُدْخَلَهُ، وَاغْسِلْهُ بِالْمَاءِ وَالثَّلْجِ وَالْبَرَدِ، وَنَقِّهِ مِنَ الْخَطَايَا كَمَا نَقَّيْتَ الثَّوْبَ الأَبْيَضَ مِنَ الدَّنَسِ، وَأَبْدِلْهُ دَاراً خَيْراً مِنْ دَارِهِ، وَأَهْلاً خَيْراً مِنْ أَهْلِهِ، وَزَوْجَاً خَيْراً مِنْ زَوْجِهِ، وَأَدْخِلْهُ الْجَنَّةَ، وَأَعِذْهُ مِنْ عَذَابِ القَبْرِ وَعَذَابِ النَّارِ.",
+        "english": "O Allah, forgive him and have mercy on him, grant him wellness, and pardon him. Make his resting place honorable, and make his entry place spacious. Wash him with water, snow, and hail, and purify him from sins as You purify a white garment from dirt. Give him in exchange a home better than his home, a family better than his family, and a spouse better than his spouse. Admit him to Paradise and protect him from the torment of the grave and the torment of Hellfire.",
+        "emphasis": [
+          "وَعَذَابِ النَّارِ",
+          "and the torment of Hellfire"
+        ],
         "footnote": "مسلم، 2/ 663، برقم 963."
       },
       {
@@ -2030,8 +2128,12 @@ export const HISN: readonly HisnOccasion[] = [
       {
         "id": 1269468,
         "kind": "quoted",
-        "arabic": "السَّلاَمُ عَلَيْكُمْ أَهْلَ الدِّيَارِ، مِنَ الْمُؤْمِنِينَ وَالْمُسْلِمِينَ، وَإِنَّا إِنْ شَاءَ اللَّهُ بِكُمْ لاَحِقُونَ، [وَيَرْحَمُ اللَّهُ الْمُسْتَقدِمِينَ مِنَّا وَالْمُسْتأْخِرِينَ] أَسْاَلُ اللَّهَ لَنَا وَلَكُمُ الْعَافِيَةَ.",
-        "english": "Peace be upon you, dwellers of these abodes from amongst the believers and Muslims. We, Allah willing, shall definitely join you. [May Allah have mercy upon those of us who have died and those who will die later]. I ask Allah to grant well-being to us and you.",
+        "arabic": "السَّلاَمُ عَلَيْكُمْ أَهْلَ الدِّيَارِ، مِنَ الْمُؤْمِنِينَ وَالْمُسْلِمِينَ، وَإِنَّا إِنْ شَاءَ اللَّهُ بِكُمْ لاَحِقُونَ، وَيَرْحَمُ اللَّهُ الْمُسْتَقدِمِينَ مِنَّا وَالْمُسْتأْخِرِينَ أَسْاَلُ اللَّهَ لَنَا وَلَكُمُ الْعَافِيَةَ.",
+        "english": "Peace be upon you, dwellers of these abodes from amongst the believers and Muslims. We, Allah willing, shall definitely join you. May Allah have mercy upon those of us who have died and those who will die later. I ask Allah to grant well-being to us and you.",
+        "emphasis": [
+          "وَيَرْحَمُ اللَّهُ الْمُسْتَقدِمِينَ مِنَّا وَالْمُسْتأْخِرِينَ",
+          "May Allah have mercy upon those of us who have died and those who will die later"
+        ],
         "footnote": "مسلم، 2/ 671، برقم 975، وابن ماجه، 1/ 494، واللفظ له، برقم 1547 عن بريدة -رضي الله عنه-، وما بين المعقوفين من حديث عائشة –رضي الله عنها- عند مسلم، 2/ 671، برقم 975."
       }
     ]
@@ -2212,8 +2314,11 @@ export const HISN: readonly HisnOccasion[] = [
       {
         "id": 1269510,
         "kind": "quoted",
-        "arabic": "الْحَمْدُ لِلَّهِ حَمْداً كَثِيراً طَيِّباً مُبَارَكاً فِيهِ، غَيْرَ [مَكْفِيٍّ وَلاَ] مُوَدَّعٍ، وَلاَ مُسْتَغْنَىً عَنْهُ رَبَّنَا.",
+        "arabic": "الْحَمْدُ لِلَّهِ حَمْداً كَثِيراً طَيِّباً مُبَارَكاً فِيهِ، غَيْرَ مَكْفِيٍّ وَلاَ مُوَدَّعٍ، وَلاَ مُسْتَغْنَىً عَنْهُ رَبَّنَا.",
         "english": "Praise be to Allah, abundant, good, and blessed praise. He is in no need of any of His creation and to Him alone is a never-ending praise, a praise that we will never bid farewell to and an indispensable praise, O our Lord.",
+        "emphasis": [
+          "مَكْفِيٍّ وَلاَ"
+        ],
         "footnote": "البخاري، 6/ 214، برقم 5458، والترمذي بلفظه، 5/ 507، برقم 3456."
       }
     ]
@@ -2882,8 +2987,12 @@ export const HISN: readonly HisnOccasion[] = [
       {
         "id": 1269677,
         "kind": "quoted",
-        "arabic": "اللَّهُمَّ لاَ تُؤَاخِذْنِي بِمَا يَقُولُونَ، وَاغْفِرْ لِي مَا لاَ يَعْلَمُونَ، [وَاجْعَلْنِي خَيْراً مِمَّا يَظُّنُّونَ].",
-        "english": "O Allah, do not hold me accountable for what they say, and forgive me for what they do not know, [and make me better than what they think of me].",
+        "arabic": "اللَّهُمَّ لاَ تُؤَاخِذْنِي بِمَا يَقُولُونَ، وَاغْفِرْ لِي مَا لاَ يَعْلَمُونَ، وَاجْعَلْنِي خَيْراً مِمَّا يَظُّنُّونَ.",
+        "english": "O Allah, do not hold me accountable for what they say, and forgive me for what they do not know, and make me better than what they think of me.",
+        "emphasis": [
+          "وَاجْعَلْنِي خَيْراً مِمَّا يَظُّنُّونَ",
+          "and make me better than what they think of me"
+        ],
         "footnote": "البخاري في الأدب المفرد، برقم 761، وصحح إسناده الألباني في صحيح الأدب المفرد، برقم 585، وما بين المعقوفين زيادة للبيهقي في شعب الإيمان، 4/228 من طريق آخر."
       }
     ]
@@ -2939,7 +3048,10 @@ export const HISN: readonly HisnOccasion[] = [
         "id": 1269689,
         "kind": "quoted",
         "arabic": "لَمَّا دَنَا النَّبِيُّ -صلى الله عليه وسلم- مِنَ الصَّفَا قَرَأَ: إِنَّ الصَّفَا وَالْمَرْوَةَ مِنْ شَعَآئِرِ اللَّهِ أَبْدَأُ بِمَا بَدَأَ اللَّهُ بِهِ فَبَدَأَ بِالصَّفَا فَرَقِيَ عَلَيْهِ حَتَّى رَأَى الْبَيْتَ، فَاسْتَقْبَلَ الْقِبْلَةَ، فَوَحَّدَ اللَّهَ وَكبَّرَهُ وَقَالَ: لاَ إِلَهَ إِلاَّ اللَّهُ وَحْدَهُ لاَ شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، لاَ إِلَهَ إِلاَّ اللَّهُ وَحْدَهُ، أَنْجَزَ وَعْدَهُ، وَنَصَرَ عَبْدَهُ، وَهَزَمَ الْأَحْزَابَ وَحْدَهُ، ثُمَّ دَعَا بَيْنَ ذلكَ. قَالَ مِثْلَ هَذَا ثَلاَثَ مَرَّاتٍ الْحَدِيثُ. وَفِيهِ: فَفَعَلَ عَلَى الْمَرْوَةِ كَمَا فَعَلَ عَلَى الصَّفَا.",
-        "english": "When the Prophet (ﷺ) came close to Safa, he recited: Indeed, Safa and Marwah [mounts] are among the symbols of Allah. I begin with what Allah has begun with.\" He then began with Safa and ascended it until he saw the House (Ka‘bah), then he faced the Qiblah, declared the oneness of Allah, proclaimed His greatness, and said: \"None has the right to be worshiped except Allah alone, Who has no partner. To Him belongs the dominion, to Him belongs all praise, and He is Competent over all things. None has the right to be worshiped except Allah alone. He fulfilled His promise, gave victory to His servant, and defeated the Confederates alone, then he supplicated in between. He said this three times\" the Hadīth. And in it: \"He did on Marwah what he did on Safa.",
+        "english": "When the Prophet (ﷺ) came close to Safa, he recited: Indeed, Safa and Marwah mounts are among the symbols of Allah. I begin with what Allah has begun with.\" He then began with Safa and ascended it until he saw the House (Ka‘bah), then he faced the Qiblah, declared the oneness of Allah, proclaimed His greatness, and said: \"None has the right to be worshiped except Allah alone, Who has no partner. To Him belongs the dominion, to Him belongs all praise, and He is Competent over all things. None has the right to be worshiped except Allah alone. He fulfilled His promise, gave victory to His servant, and defeated the Confederates alone, then he supplicated in between. He said this three times\" the Hadīth. And in it: \"He did on Marwah what he did on Safa.",
+        "emphasis": [
+          "mounts"
+        ],
         "footnote": "مسلم، 2/ 888، برقم 1218،والآية من سورة البقرة، رقم 158."
       }
     ]
@@ -3043,8 +3155,11 @@ export const HISN: readonly HisnOccasion[] = [
       {
         "id": 1269715,
         "kind": "quoted",
-        "arabic": "إِذَا رَأَى أَحَدُكُم مِنْ أَخِيهِ، أَوْ مِنْ نَفْسِهِ، أَوْ مِنْ مَالِهِ مَا يُعْجِبُهُ [فَلْيَدْعُ لَهُ بِالْبَرَكَةِ] فَإِنَّ الْعَيْنَ حَقٌّ.",
+        "arabic": "إِذَا رَأَى أَحَدُكُم مِنْ أَخِيهِ، أَوْ مِنْ نَفْسِهِ، أَوْ مِنْ مَالِهِ مَا يُعْجِبُهُ فَلْيَدْعُ لَهُ بِالْبَرَكَةِ فَإِنَّ الْعَيْنَ حَقٌّ.",
         "english": "If any of you sees something from his brother, himself, or his wealth which he finds amazing, let him invoke blessings for it, for the evil eye is certainly true.",
+        "emphasis": [
+          "فَلْيَدْعُ لَهُ بِالْبَرَكَةِ"
+        ],
         "footnote": "مسند أحمد 4/447، برقم 15700، وابن ماجه، برقم 3508، ومالك، 3/ 118-119، وصححه الألباني في صحيح الجامع 1/212، وانظر تحقيق زاد المعاد للأرناؤوط 4/170."
       }
     ]
@@ -3071,8 +3186,12 @@ export const HISN: readonly HisnOccasion[] = [
       {
         "id": 1269721,
         "kind": "quoted",
-        "arabic": "بِسْمِ اللَّهِ وَاللَّهُ أَكْبَرُ [اللَّهُمَّ مِنْكَ وَلَكَ] اللَّهُمَّ تَقَبَّلْ مِنِّي.",
-        "english": "In the name of Allah and Allah is the Greatest. [O Allah, it is from You and for You]. O Allah, accept it from me.",
+        "arabic": "بِسْمِ اللَّهِ وَاللَّهُ أَكْبَرُ اللَّهُمَّ مِنْكَ وَلَكَ اللَّهُمَّ تَقَبَّلْ مِنِّي.",
+        "english": "In the name of Allah and Allah is the Greatest. O Allah, it is from You and for You. O Allah, accept it from me.",
+        "emphasis": [
+          "اللَّهُمَّ مِنْكَ وَلَكَ",
+          "O Allah, it is from You and for You"
+        ],
         "footnote": "مسلم، 3/ 1557، برقم 1967، والبيهقي، 9/287 وما بين المعقوفين للبيهقي، 9/287 وغيره، والجملة الأخيرة سقتها بالمعنى من رواية مسلم."
       }
     ]
@@ -3227,7 +3346,7 @@ export const HISN: readonly HisnOccasion[] = [
         "kind": "quoted",
         "arabic": "الْبَاقِيَاتُ الصَّالِحَاتُ: سُبْحَانَ اللَّهِ، وَالْحَمْدُ لِلَّهِ، وَلاَ إِلَهَ إِلاَّ اللَّهُ، وَاللَّهُ أَكْبَرُ، وَلاَ حَوْلَ وَلاَ قُوَّةَ إِلاَّ بِاللَّهِ.",
         "english": "The lasting righteous deeds are: Glory be to Allah, all praise is due to Allah, there is no deity worthy of worship except Allah, Allah is the Greatest, and there is no might or power except through Allah.",
-        "footnote": "أحمد، برقم 513، بترتيب أحمد شاكر، وانظر: مجمع الزوائد، 1/297، وعزاه ابن حجر في بلوغ المرام من رواية أبي سعيد إلى النسائي [في الكبرى]، برقم 10617، وقال: صححه ابن حبان، [برقم 840]، والحاكم [1/ 541]."
+        "footnote": "أحمد، برقم 513، بترتيب أحمد شاكر، وانظر: مجمع الزوائد، 1/297، وعزاه ابن حجر في بلوغ المرام من رواية أبي سعيد إلى النسائي في الكبرى، برقم 10617، وقال: صححه ابن حبان، برقم 840، والحاكم 1/ 541."
       }
     ]
   },

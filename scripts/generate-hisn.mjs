@@ -39,6 +39,8 @@
 
 import { mkdirSync, writeFileSync } from 'node:fs';
 import {
+  assertBracketContentsSurvive,
+  bracketContents,
   assertOnlyMarkersRemoved,
   assertRepeatMatchesText,
   cleanArabic,
@@ -101,6 +103,7 @@ function kindOf(arabic) {
 const occasions = [];
 const footnotes = new Map();
 const skippedCounts = [];
+let emphasis = [];
 let wordBrackets = { before: 0, after: 0 };
 
 /**
@@ -114,8 +117,10 @@ function strip(raw, field, where) {
   const fn = field === 'arabic' ? cleanArabic : field === 'english' ? cleanEnglish : cleanFootnote;
   const out = fn(raw);
   assertOnlyMarkersRemoved(raw ?? '', out, `${where}.${field}`, field);
+  assertBracketContentsSurvive(raw ?? '', out, `${where}.${field}`);
   wordBrackets.before += countWordBrackets(raw);
   wordBrackets.after += countWordBrackets(out);
+  emphasis.push(...bracketContents(raw));
   return out;
 }
 
@@ -142,10 +147,13 @@ for (const row of rows) {
       dropping them is only lossless once `kind` has recorded what they said.
     */
     const kind = kindOf(clean(row.original_text));
+    emphasis = [];
     const arabic = strip(row.original_text, 'arabic', `line ${row.id}`);
     const english = strip(row.transes?.en, 'english', `line ${row.id}`);
+    const marked = [...new Set(emphasis)];
 
-    const { repeat, repeatText, reason } = repeatOf(arabic, english);
+    // Raw, because the counts live inside brackets the strip removes.
+    const { repeat, repeatText, reason } = repeatOf(row.original_text, row.transes?.en);
     if (repeat) assertRepeatMatchesText(repeat, repeatText, `line ${row.id}`);
     if (reason) skippedCounts.push(`  line ${row.id}: ${reason}`);
 
@@ -155,6 +163,7 @@ for (const row of rows) {
       arabic,
       english,
       ...(repeat ? { repeat, repeatText } : {}),
+      ...(marked.length > 0 ? { emphasis: marked } : {}),
       ...(note ? { footnote: note } : {}),
     });
   }
@@ -172,16 +181,18 @@ console.log(
 const missingEn = occasions.filter((o) => !o.english).length;
 if (missingEn) console.warn(`⚠️  ${missingEn} occasions have no English title`);
 
-if (wordBrackets.before !== wordBrackets.after) {
+if (wordBrackets.after !== 0) {
   throw new Error(
-    `Assertion 2 failed: ${wordBrackets.before} word-bearing brackets went in and ` +
-      `${wordBrackets.after} came out. Those hold supplication text, not footnote ` +
-      `markers, and the strip must never touch them.`,
+    `Assertion 2 failed: ${wordBrackets.after} bracket(s) survived the strip. All of ` +
+      'them are meant to go; the words they held are checked separately by ' +
+      'assertBracketContentsSurvive, which runs on every field.',
   );
 }
 
 const withRepeat = occasions.flatMap((o) => o.lines).filter((l) => l.repeat).length;
-console.log(`  ${wordBrackets.after} word-bearing brackets kept, markers removed`);
+console.log(
+  `  ${wordBrackets.before} word-bearing brackets removed, their words kept and checked`,
+);
 console.log(`  ${withRepeat} lines carry a repeat count both languages agree on`);
 if (skippedCounts.length > 0) {
   console.log(`⚠️  ${skippedCounts.length} lines mention a count that was NOT recorded:`);
@@ -206,15 +217,20 @@ const header = `/**
  * are removed, and the footnote a [24] pointed at is printed directly beneath
  * the line already.
  *
- * ⚠️ Square brackets holding WORDS are supplication text, not markers, and are
- * kept with their brackets — \`[بِسْمِ اللَّهِ]\` opens the duʿa for entering the
- * bathroom. ${wordBrackets.after} of them survive here. The rule is \`[0-9]+\`
- * and nothing looser; \`scripts/hisn-clean.mjs\` proves after every run that the
- * strip removed markers and only markers, by deleting the permitted spans from
- * the source itself and comparing. A dropped letter or ḥaraka fails the build.
+ * ⚠️ Square brackets are gone too, on Iyad's instruction of 27 Aug 2026, and
+ * this is the one removal that changes what the book is SAYING rather than how
+ * it looks. ${wordBrackets.before} of them held words, not a footnote number,
+ * and the book uses them for a wording some narrations of a hadith carry and
+ * the base one does not — \`[بِسْمِ اللَّهِ]\` opens the bathroom duʿa that way.
+ * Without them the app presents an optional addition as part of the duʿa. He
+ * was told and decided; it is recorded here because a reader of this file
+ * cannot otherwise tell that anything was ever marked.
  *
- * Footnotes keep their ((…)): there the marks separate quoted matn from the
- * citation around it, and no \`kind\` field records that.
+ * Only the two characters go. \`assertBracketContentsSurvive\` looks for every
+ * bracket's contents in the output on every run, and
+ * \`assertOnlyMarkersRemoved\` proves the strip removed markers and only
+ * markers by deleting the permitted spans from the source itself and
+ * comparing. A dropped letter or ḥaraka fails the build.
  *
  * \`id\` is the publisher's own row id, kept so a reviewer can find the line
  * again in their text rather than take this file's word for it.
@@ -279,6 +295,19 @@ const body = `export type HisnLine = {
   repeat?: number;
   /** The phrase \`repeat\` was read from, kept so the number can be checked. */
   repeatText?: string;
+  /**
+   * Words the book had in square brackets, which the strip removed.
+   *
+   * The brackets marked a wording some narrations of a hadith carry and the
+   * base one does not — \`[بِسْمِ اللَّهِ]\`, \`[ثلاثاً]\`, \`[i.e., footstool]\`.
+   * Removing them was Iyad's call; carrying the strings here is what lets a
+   * screen still show that those words were marked, instead of silently
+   * folding an optional addition into the duʿa.
+   *
+   * Cleaned exactly as the line is, so each is a substring of \`arabic\` or
+   * \`english\` and a renderer can split on it.
+   */
+  emphasis?: readonly string[];
   /**
    * The book's footnote for this line, verbatim and unparsed.
    *

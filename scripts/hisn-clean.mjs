@@ -56,6 +56,17 @@ const FOOTNOTE_MARKER = /\[\d+\]/g;
 /** The book's quotation and Qur'an marks, Arabic side. */
 const ARABIC_MARKS = /\(\(|\)\)|[«»﴿﴾]/g;
 
+/**
+ * The brackets left once the footnote markers are gone.
+ *
+ * Removed on Iyad's instruction, 27 Aug 2026, after the consequence was put to
+ * him: the book uses these for a wording carried by some narrations of a
+ * hadith and not the base one, so dropping them presents an optional addition
+ * as part of the duʿa. He decided. The WORDS are untouched — only the two
+ * characters go — and `assertBracketContentsSurvive` proves that on every run.
+ */
+const BRACKETS = /[[\]]/g;
+
 /** The same two things in IslamHouse's English. */
 const ENGLISH_MARKS = /[{}]/g;
 
@@ -110,11 +121,11 @@ function unquote(s) {
 }
 
 export function cleanArabic(raw) {
-  return tidy((raw ?? '').replace(FOOTNOTE_MARKER, '').replace(ARABIC_MARKS, ''));
+  return tidy((raw ?? '').replace(FOOTNOTE_MARKER, '').replace(ARABIC_MARKS, '').replace(BRACKETS, ''));
 }
 
 export function cleanEnglish(raw) {
-  return unquote(tidy((raw ?? '').replace(FOOTNOTE_MARKER, '').replace(ENGLISH_MARKS, '')));
+  return unquote(tidy((raw ?? '').replace(FOOTNOTE_MARKER, '').replace(ENGLISH_MARKS, '').replace(BRACKETS, '')));
 }
 
 /**
@@ -125,7 +136,7 @@ export function cleanEnglish(raw) {
  * written to remove.
  */
 export function cleanFootnote(raw) {
-  return tidy((raw ?? '').replace(FOOTNOTE_MARKER, ''));
+  return tidy((raw ?? '').replace(FOOTNOTE_MARKER, '').replace(BRACKETS, ''));
 }
 
 /**
@@ -155,6 +166,7 @@ export function assertOnlyMarkersRemoved(raw, cleaned, where, field) {
   // lose depends on whether anything else is recording them — see the note on
   // footnotes in this file's header.
   permit(FOOTNOTE_MARKER);
+  permit(BRACKETS);
   if (field === 'arabic') permit(ARABIC_MARKS);
   if (field === 'english') permit(ENGLISH_MARKS);
 
@@ -216,7 +228,47 @@ export function assertOnlyMarkersRemoved(raw, cleaned, where, field) {
   }
 }
 
-/** Assertion 2 — a bracket holding words is supplication text and must survive. */
+/**
+ * Assertion 2 — the WORDS a bracket held are supplication text and must survive.
+ *
+ * This used to compare bracket counts either side, which worked while the
+ * brackets themselves were kept. Now that they are removed, a count proves
+ * nothing and the real question is whether anything inside them was lost with
+ * them. So each bracket's contents are cleaned the same way and looked for in
+ * the output; a missing one throws.
+ */
+export function assertBracketContentsSurvive(raw, cleaned, where) {
+  const squash = (t) => (t ?? '').replace(/\s+/g, '');
+  const haystack = squash(cleaned);
+  for (const m of (raw ?? '').matchAll(/\[([^\]]+)\]/g)) {
+    if (/^\d+$/.test(m[1])) continue;
+    const inner = squash(m[1].replace(ARABIC_MARKS, '').replace(ENGLISH_MARKS, '').replace(BRACKETS, ''));
+    if (inner && !haystack.includes(inner)) {
+      throw new Error(
+        `${where}: the words inside ${JSON.stringify(m[0])} did not survive the strip. ` +
+          'Only the two bracket characters may go.',
+      );
+    }
+  }
+}
+
+/**
+ * The text each word-bearing bracket held, cleaned the same way the line is.
+ *
+ * The brackets themselves are removed, so this is what a screen needs in order
+ * to still show that the words were marked — see the note on `BRACKETS`. The
+ * strings come back cleaned so they can be found in the output as substrings.
+ */
+export function bracketContents(raw) {
+  return [...(raw ?? '').matchAll(/\[([^\]]+)\]/g)]
+    .filter((m) => !/^\d+$/.test(m[1]))
+    .map((m) =>
+      m[1].replace(ARABIC_MARKS, '').replace(ENGLISH_MARKS, '').replace(BRACKETS, '').replace(/\s+/g, ' ').trim(),
+    )
+    .filter(Boolean);
+}
+
+/** How many brackets held words rather than a footnote number. */
 export function countWordBrackets(s) {
   return [...(s ?? '').matchAll(/\[([^\]]*)\]/g)].filter((m) => !/^\d+$/.test(m[1])).length;
 }
@@ -311,8 +363,20 @@ function countsIn(text, table, arabic) {
  * and a `reason` the caller reports for a human to look at.
  */
 export function repeatOf(arabicText, englishText) {
-  const ar = countsIn(arabicText, ARABIC_COUNTS, true);
-  const en = countsIn(englishText, ENGLISH_COUNTS, false);
+  /*
+    Read the counts BEFORE the brackets are removed, not after.
+
+    The book puts every count inside brackets, and one of them is square:
+    `[ثلاثاً]`. Parsing the fully cleaned text lost that line's count — 19 fell
+    to 18 — because by then its brackets were gone and nothing marked the
+    phrase. So the quotation marks come off (they would otherwise make the
+    book's own `((` look like a group) and the brackets stay on just long
+    enough to be read.
+  */
+  const forCounts = (t) =>
+    (t ?? '').replace(FOOTNOTE_MARKER, '').replace(ARABIC_MARKS, '').replace(ENGLISH_MARKS, '');
+  const ar = countsIn(forCounts(arabicText), ARABIC_COUNTS, true);
+  const en = countsIn(forCounts(englishText), ENGLISH_COUNTS, false);
   if (ar.length === 0 && en.length === 0) return { repeat: null, reason: null };
   const values = (list) => list.map((x) => x.value);
   if (ar.length !== 1 || en.length !== 1) {

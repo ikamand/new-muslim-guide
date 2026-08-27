@@ -68,7 +68,8 @@
     "style:check": "node --import ./scripts/ts-resolve.mjs scripts/teaching-check.mjs",
     "search:check": "node --import ./scripts/ts-resolve.mjs scripts/search-check.mjs",
     "hadith:corpus": "node --import ./scripts/ts-resolve.mjs scripts/fetch-hadith-corpus.mjs",
-    "hisn:check": "node --import ./scripts/ts-resolve.mjs scripts/hisn-annotations-check.mjs"
+    "hisn:check": "node --import ./scripts/ts-resolve.mjs scripts/hisn-annotations-check.mjs",
+    "adhkar:check": "node --import ./scripts/ts-resolve.mjs scripts/adhkar-window-check.mjs"
   },
   "private": true
 }

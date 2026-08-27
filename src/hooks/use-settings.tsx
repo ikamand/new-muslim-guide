@@ -78,7 +78,24 @@ export type Settings = {
    * nobody can find is a preference nobody has.
    */
   reciter: ReciterId;
+  /**
+   * Duʿas the reader has pinned to the top of the Duʿa tab, by id.
+   *
+   * A shortcut, not a record of progress and not a favourites list. What it
+   * buys is that the two or three duʿas someone is working on sit above a book
+   * of 132 instead of inside it. Nothing reads it as "learned" — the app
+   * cannot know that, and asking would be handing someone a decision they did
+   * not come for.
+   *
+   * Ordered as pinned, capped at `MAX_PINNED`. Ten is Iyad's number: enough
+   * that nobody has to unpin to pin, few enough that the list stays a
+   * shortcut.
+   */
+  pinnedDuas: readonly string[];
 };
+
+/** See `pinnedDuas`. */
+export const MAX_PINNED = 10;
 
 const DEFAULTS: Settings = {
   transliteration: true,
@@ -93,6 +110,7 @@ const DEFAULTS: Settings = {
   completedLessons: [],
   reminders: DEFAULT_REMINDERS,
   reciter: DEFAULT_RECITER,
+  pinnedDuas: [],
 };
 
 /** Unchanged from when this held only display settings, so nobody's choices reset. */
@@ -147,6 +165,14 @@ function parseStored(raw: string | null): Settings {
       // A voice dropped from a later build reads as the default rather than
       // throwing, and rather than leaving a folder name that no longer resolves.
       reciter: isReciterId(stored.reciter) ? stored.reciter : DEFAULTS.reciter,
+      // Filtered and re-capped on read, not just on write: a list written by a
+      // build with a higher cap, or hand-edited storage, would otherwise walk
+      // straight past MAX_PINNED and make the tab something nobody designed.
+      pinnedDuas: Array.isArray(stored.pinnedDuas)
+        ? stored.pinnedDuas
+            .filter((entry): entry is string => typeof entry === 'string')
+            .slice(0, MAX_PINNED)
+        : [],
     };
   } catch {
     return DEFAULTS;
@@ -187,6 +213,8 @@ type SettingsContext = Settings & {
   setMany: (values: Partial<Settings>) => void;
   /** Marks a lesson done, or undoes it. Reversible on purpose. */
   toggleLesson: (key: string) => void;
+  /** Pins a duʿa to the top of the Duʿa tab, or unpins it. */
+  togglePinned: (id: string) => void;
   /** False until the stored value has been read — the splash waits on this. */
   loaded: boolean;
 };
@@ -253,6 +281,30 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
     });
   }, []);
 
+  /**
+   * Pinning is append-at-the-end and silently ignores the eleventh.
+   *
+   * Dropping the oldest instead would remove something the reader chose,
+   * without saying so, from a screen they are not looking at. Refusing is
+   * ruder and more honest; the screen disables the control at the cap and says
+   * why, rather than letting this decide.
+   */
+  const togglePinned = useCallback((id: string) => {
+    setSettings((current) => {
+      const pinned = current.pinnedDuas;
+      const next = {
+        ...current,
+        pinnedDuas: pinned.includes(id)
+          ? pinned.filter((entry) => entry !== id)
+          : pinned.length >= MAX_PINNED
+            ? pinned
+            : [...pinned, id],
+      };
+      void AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+      return next;
+    });
+  }, []);
+
   const setMany = useCallback((values: Partial<Settings>) => {
     setSettings((current) => {
       const next = { ...current, ...values };
@@ -262,8 +314,8 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const value = useMemo(
-    () => ({ ...settings, toggle, set, setMany, toggleLesson, loaded }),
-    [settings, toggle, set, setMany, toggleLesson, loaded],
+    () => ({ ...settings, toggle, set, setMany, toggleLesson, togglePinned, loaded }),
+    [settings, toggle, set, setMany, toggleLesson, togglePinned, loaded],
   );
 
   return <Context value={value}>{children}</Context>;

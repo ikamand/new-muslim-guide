@@ -1,210 +1,273 @@
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useMemo } from 'react';
 
-import { ContentNoteCard } from '@/components/content-note';
 import { PressableLink } from '@/components/pressable-link';
-import { Glyph } from '@/components/illustrations';
-import { RecitationCard } from '@/components/recitation-card';
-import { SourceDisclosure } from '@/components/source-list';
 import { ThemedText } from '@/components/themed-text';
-import { TranslationGap } from '@/components/translation-gap';
-import { DAY_MOMENTS, DUAS, duasAt, resolveNotes, type DayMoment } from '@/content';
-import { hisnAt } from '@/content/duas/moments';
+import { DUAS } from '@/content';
+import { HISN } from '@/content/duas/hisn';
+import {
+  ADHKAR_SESSIONS,
+  occasionFor,
+  sessionForWindow,
+  type AdhkarSession,
+} from '@/content/duas/sessions';
 import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
+import { usePrayerTimes } from '@/hooks/use-prayer-times';
+import { useSettings } from '@/hooks/use-settings';
 import { useTheme } from '@/hooks/use-theme';
-import { localiseDua, measure } from '@/i18n/localise';
+import { windowAt } from '@/lib/adhkar-window';
+import { formatTime } from '@/lib/prayer-times';
 import type { UIKey } from '@/i18n/ui';
 
 /**
- * The day's supplications, laid out as a day.
+ * The duʿa tab — one answer, not a menu.
  *
- * This was a flat list of nine, ordered by when you would say them — which was
- * the right instinct and the wrong shape, because a list is scanned by
- * somebody who already knows what they are looking for. That is not who this
- * screen is for.
+ * ## What this replaced, and why
  *
- * **A new Muslim does not know a duʿa for putting on clothes exists.** They
- * will never scroll to it. What they have instead is a moment — at the door,
- * about to eat, awake at two in the morning — so the screen runs from waking
- * to sleeping and puts each duʿa where it happens. Reading down it is meant to
- * feel like recognising your own day, and noticing how much of it has words
- * you were never told about.
+ * This screen used to be a day: six moments on a vertical rail, each holding
+ * the duʿas said at that time. The argument for it was good and is worth
+ * keeping in mind — a new Muslim does not know a duʿa for putting on clothes
+ * exists, so an index is useless to them and a day is not.
  *
- * The spine down the left is the day passing. It is the same idea as `DayArc`
- * on the prayer times card, turned vertical because this scrolls.
+ * What the day could not do is *answer*. It laid the whole day out and left
+ * the reader to find their place in it, using an hour table that was only ever
+ * right near the equator at an equinox. The app knows the actual prayer times,
+ * offline, so it can lead with the sitting that is open right now and name the
+ * boundary it came from: `Fajr was 05:12 · Morning adhkār`.
+ *
+ * ## One hero, everything else is a row
+ *
+ * The rule this screen is built on, arrived at by getting it wrong twice in a
+ * mockup. Exactly one thing is ever opened up: the live session, or — for the
+ * seven to thirteen hours a day that belong to no sitting — one pinned duʿa.
+ * Everything else, pinned duʿas included, is a row of the same shape. A pinned
+ * duʿa showing its Arabic inline looked richer and was worse: a different
+ * shape from its neighbours for no reason, useless at ten pins, and nobody
+ * learns a duʿa by scrolling past it.
+ *
+ * ## No location is a normal state, not an error
+ *
+ * `usePrayerTimes` gives null times until location is granted, and some people
+ * will never grant it. That path is not special-cased; it simply has no open
+ * window, which is the same state as mid-morning. The tab still works.
  */
-
-/** A mark per moment. Drawn from the set the app already has. */
-const MOMENT_GLYPH: Record<DayMoment, Parameters<typeof Glyph>[0]['name']> = {
-  waking: 'sunrise',
-  washing: 'wudu',
-  leaving: 'door',
-  eating: 'food',
-  travel: 'travel',
-  night: 'night',
-};
-
 export default function DuasScreen() {
   const theme = useTheme();
-  const { locale, t } = useLocale();
+  const { t } = useLocale();
+  const { today } = usePrayerTimes();
+  const { pinnedDuas } = useSettings();
 
-  // Measured over every duʿa rather than per moment: the reading has to cover
-  // the whole screen for `TranslationGap` to be honest about it.
-  const [byId, coverage] = measure(
-    () => new Map(DUAS.map((entry) => [entry.id, localiseDua(entry, locale)])),
-  );
+  /*
+    Recomputed per render rather than on a timer. The screen is cheap, and
+    `usePrayerTimes` already re-renders every thirty seconds and on foreground,
+    so a window boundary is never more than half a minute stale.
+  */
+  const state = useMemo(() => windowAt(today, new Date()), [today]);
+  const live = sessionForWindow(state.window);
+
+  const pinned = pinnedDuas
+    .map((id) => DUAS.find((dua) => dua.id === id))
+    .filter((dua): dua is NonNullable<typeof dua> => dua !== undefined);
+
+  /*
+    The dead zone opens up one duʿa, so the rows below it are the rest. With a
+    live session nothing is promoted and all of them are rows.
+
+    With nothing pinned it suggests one instead of leaving a screen of five
+    bare rows — which is what most people would see for most of the day in
+    their first week, and is a menu rather than an answer. Seeded on the date
+    so it is the same duʿa all day: "somewhere to start" that changes every
+    time you look at it is not somewhere to start.
+  */
+  const heroDua = live
+    ? undefined
+    : (pinned[0] ?? DUAS[dayNumber(new Date()) % DUAS.length]);
+  const suggested = !live && pinned.length === 0;
+  const pinnedRows = pinned.length > 0 && !live ? pinned.slice(1) : pinned;
 
   return (
     <SafeAreaView style={[styles.safeArea, { backgroundColor: theme.background }]} edges={['top']}>
       <ScrollView contentContainerStyle={styles.content}>
-        {/*
-          The title is on the page, not in a header. This screen used to be
-          pushed from Learn and took its name from the navigation bar; as a tab
-          there is no bar to take it from, and losing it would have left the
-          day starting mid-sentence.
-        */}
-        <ThemedText type="subtitle">{t('duas.title')}</ThemedText>
+        <ThemedText type="subtitle">{t('tab.duas')}</ThemedText>
 
-        <ThemedText type="default" themeColor="textSecondary">
-          {t('duas.intro')}
-        </ThemedText>
+        {live ? <SessionHero session={live} state={state} /> : null}
 
-      {DAY_MOMENTS.map((moment) => {
-        const duas = duasAt(moment);
-        if (duas.length === 0) return null;
+        {heroDua ? (
+          <View
+            style={[
+              styles.heroCard,
+              { backgroundColor: theme.backgroundElement, borderColor: theme.border },
+            ]}>
+            <ThemedText type="caption" themeColor="textSecondary" style={styles.kicker}>
+              {suggested ? t('adhkar.somewhereToStart') : heroDua.when}
+            </ThemedText>
+            {suggested ? <ThemedText type="cardTitle">{heroDua.when}</ThemedText> : null}
+            <ThemedText type="arabicLead" style={styles.arabic}>
+              {heroDua.says.arabic}
+            </ThemedText>
+            <ThemedText type="small" themeColor="textSecondary">
+              {heroDua.says.translation}
+            </ThemedText>
+          </View>
+        ) : null}
 
-        return (
-          <View key={moment} style={styles.moment}>
-            {/*
-              The spine, and the moment's mark sitting on it. The line runs the
-              full height of the block so consecutive moments join up into one
-              continuous day rather than reading as six separate sections.
-            */}
-            <View style={styles.rail}>
-              <View style={[styles.railLine, { backgroundColor: theme.border }]} />
-              <View style={[styles.railMark, { backgroundColor: theme.accentMuted }]}>
-                <Glyph name={MOMENT_GLYPH[moment]} color={theme.accent} size={18} />
-              </View>
-            </View>
-
-            <View style={styles.momentBody}>
-              <ThemedText type="sectionTitle">
-                {t(`duas.moment.${moment}` as UIKey)}
-              </ThemedText>
-
-              {duas.map((entry) => {
-                const dua = byId.get(entry.id) ?? entry;
-                return (
-                  <View key={dua.id} style={styles.item}>
-                    <ThemedText type="caption" themeColor="textSecondary" style={styles.when}>
-                      {dua.when}
-                    </ThemedText>
-                    <RecitationCard recitation={dua.says} />
-                    {resolveNotes(dua.note, dua.meta?.notes).map((note, position) => (
-                      <ContentNoteCard key={`${note.kind}-${position}`} entry={note} />
-                    ))}
-                    {/*
-                      Where the grading becomes visible. The two after-meal
-                      duʿas sit next to each other, one weak and one hasan, and
-                      the flat list never said so.
-                    */}
-                    <SourceDisclosure
-                      sources={[...(dua.says.sources ?? []), ...(dua.meta?.sources ?? [])]}
-                    />
-                  </View>
-                );
-              })}
-            {/*
-              The book's occasions for this same moment, as a door rather than
-              as content.
-
-              The day teaches the nine supplications the app owns and has had
-              checked; Hisn al-Muslim's text has not been through a reviewer,
-              so it is not promoted onto a teaching surface. But somebody
-              standing at the door at 8am should still find out that the book
-              has seven more for exactly this moment — which is the whole
-              argument for the day screen, applied to content the app is not
-              yet ready to teach.
-            */}
-            <MomentBookLink moment={moment} />
-
+        {pinned.length > 0 ? (
+          <View style={styles.group}>
+            <ThemedText type="caption" themeColor="textSecondary" style={styles.label}>
+              {`${t('adhkar.learning')}  ·  ${pinned.length}`}
+            </ThemedText>
+            <View style={[styles.rows, { borderTopColor: theme.border }]}>
+              {pinnedRows.map((dua) => (
+                <Row key={dua.id} label={dua.when} href="/everyday-duas" chevron />
+              ))}
             </View>
           </View>
-        );
-      })}
+        ) : null}
 
-      <TranslationGap coverage={coverage} />
         {/*
-          The day is the tab; the book is one tap under it.
-
-          Both are needed and they answer different questions. The day answers
-          "what do I say now" for somebody who does not know a duʿa for this
-          moment exists. The index answers "is there a duʿa for ___" for
-          somebody who already does. Putting the index first would have made
-          the app useless to the first person, which is who it is for.
+          Every session except the one already promoted, then the two ways into
+          everything else. All the same row, because they are all "opens a list
+          of things" and looking different would imply they are not.
         */}
-        <PressableLink
-          href="/dua-book"
-          style={[
-            styles.bookLink,
-            { backgroundColor: theme.backgroundElement, borderColor: theme.border },
-          ]}
-          pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
-          <ThemedText type="smallBold" themeColor="accent">
-            {t('duaBook.open')}
-          </ThemedText>
-        </PressableLink>
+        <View style={[styles.rows, { borderTopColor: theme.border }]}>
+          {ADHKAR_SESSIONS.filter((session) => session.id !== live?.id).map((session) => (
+            <Row
+              key={session.id}
+              label={t(sessionLabelKey(session))}
+              href={{ pathname: '/adhkar/[id]', params: { id: session.id } }}
+              count={occasionFor(session)?.lines.length}
+            />
+          ))}
+          <Row label={t('adhkar.everyday')} href="/everyday-duas" count={DUAS.length} muted />
+          <Row label="Hisn al-Muslim" href="/dua-book" count={HISN.length} muted />
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
 }
 
 /**
- * "Seven more for this moment" — discovery without a claim.
+ * The open sitting, named by the boundary that opened it.
  *
- * Renders nothing where the book has nothing for a moment, rather than showing
- * a zero. An empty affordance is worse than an absent one: it advertises a
- * dead end.
+ * "Fajr was 05:12" rather than "morning": a reader who wonders why this is on
+ * screen gets the reason on the same card, and a reader who does not can
+ * ignore a small grey line.
  */
-function MomentBookLink({ moment }: { moment: DayMoment }) {
+function SessionHero({
+  session,
+  state,
+}: {
+  session: AdhkarSession;
+  state: ReturnType<typeof windowAt>;
+}) {
   const theme = useTheme();
   const { t } = useLocale();
-  const occasions = hisnAt(moment);
-  if (occasions.length === 0) return null;
+  const occasion = occasionFor(session);
+  if (!occasion) return null;
+
+  const kicker = state.justPrayed
+    ? `${t('adhkar.justPrayed')} ${state.justPrayed}`
+    : state.since
+      ? `${sinceLabel(state.window)} ${t('adhkar.since')} ${formatTime(state.since)}`
+      : '';
 
   return (
     <PressableLink
-      href={{ pathname: '/dua-book', params: { moment } }}
-      style={[styles.momentLink, { borderColor: theme.border }]}
+      href={{ pathname: '/adhkar/[id]', params: { id: session.id } }}
+      style={[
+        styles.heroCard,
+        { backgroundColor: theme.backgroundElement, borderColor: theme.border },
+      ]}
       pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
-      <ThemedText type="small" themeColor="accent">
-        {`${occasions.length} ${t('duaBook.moreForThisMoment')}`}
+      <View style={[styles.heroRail, { backgroundColor: theme.accent }]} />
+      {kicker ? (
+        <ThemedText type="caption" themeColor="textSecondary" style={styles.kicker}>
+          {kicker}
+        </ThemedText>
+      ) : null}
+      <ThemedText type="cardTitle">{t(sessionLabelKey(session, state.window))}</ThemedText>
+      <ThemedText type="small" themeColor="textSecondary">
+        {`${occasion.lines.length}  ·  ${t('adhkar.minutes').replace('{n}', String(session.minutes))}`}
       </ThemedText>
+      <View style={[styles.start, { backgroundColor: theme.accent }]}>
+        <ThemedText type="smallBold" themeColor="textOnAccent">
+          {t('adhkar.start')}
+        </ThemedText>
+      </View>
     </PressableLink>
   );
 }
 
+function Row({
+  label,
+  href,
+  count,
+  muted,
+  chevron,
+}: {
+  label: string;
+  href: Parameters<typeof PressableLink>[0]['href'];
+  count?: number;
+  muted?: boolean;
+  chevron?: boolean;
+}) {
+  const theme = useTheme();
+  return (
+    <PressableLink
+      href={href}
+      style={[styles.row, { borderBottomColor: theme.border }]}
+      pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
+      <ThemedText type="default" themeColor={muted ? 'textSecondary' : 'text'}>
+        {label}
+      </ThemedText>
+      {/*
+        A count means "a set of this many"; a chevron means "one duʿa". Two
+        different things, so they do not get the same mark.
+      */}
+      {chevron ? (
+        <ThemedText type="default" themeColor="accent">
+          ›
+        </ThemedText>
+      ) : count !== undefined ? (
+        <ThemedText type="caption" themeColor="textSecondary">
+          {count}
+        </ThemedText>
+      ) : null}
+    </PressableLink>
+  );
+}
+
+/**
+ * What to call a session.
+ *
+ * The morning-and-evening list is one occasion in the book and takes its name
+ * from the window it is being read in — the same 29 lines, correctly called
+ * the evening adhkār at five in the afternoon. Away from a window it keeps the
+ * morning name, because that is the sitting most people mean.
+ */
+function sessionLabelKey(session: AdhkarSession, window?: string | null): UIKey {
+  if (session.id === 'morning-evening') {
+    return window === 'evening' ? 'adhkar.window.evening' : 'adhkar.window.morning';
+  }
+  if (session.id === 'sleep') return 'adhkar.window.night';
+  return 'adhkar.window.afterPrayer';
+}
+
+/** Whole days since the epoch, so a pick is stable for a calendar day. */
+function dayNumber(now: Date): number {
+  return Math.floor(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) / 86_400_000);
+}
+
+function sinceLabel(window: string | null): string {
+  if (window === 'morning') return 'Fajr';
+  if (window === 'evening') return 'Asr';
+  return 'Isha';
+}
+
 const styles = StyleSheet.create({
-  momentLink: {
-    alignSelf: 'flex-start',
-    paddingVertical: Spacing.two,
-    paddingHorizontal: Spacing.three,
-    borderRadius: Radius.small,
-    borderWidth: StyleSheet.hairlineWidth,
-    marginTop: Spacing.two,
-  },
-  bookLink: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    minHeight: 52,
-    borderRadius: Radius.medium,
-    borderWidth: StyleSheet.hairlineWidth,
-    marginTop: Spacing.three,
-  },
-  safeArea: {
-    flex: 1,
-  },
+  safeArea: { flex: 1 },
   content: {
     padding: Spacing.four,
     paddingBottom: Spacing.six,
@@ -213,37 +276,39 @@ const styles = StyleSheet.create({
     maxWidth: MaxContentWidth,
     alignSelf: 'center',
   },
-  moment: {
-    flexDirection: 'row',
-    gap: Spacing.three,
+  heroCard: {
+    borderRadius: Radius.medium,
+    borderWidth: StyleSheet.hairlineWidth,
+    padding: Spacing.four,
+    gap: Spacing.two,
+    overflow: 'hidden',
   },
-  rail: {
-    width: 34,
-    alignItems: 'center',
-  },
-  railLine: {
+  heroRail: {
     position: 'absolute',
+    left: 0,
     top: 0,
-    bottom: -Spacing.four,
-    width: StyleSheet.hairlineWidth,
+    bottom: 0,
+    width: 3,
   },
-  railMark: {
-    width: 34,
-    height: 34,
+  kicker: { textTransform: 'uppercase', letterSpacing: 1 },
+  start: {
+    marginTop: Spacing.two,
+    minHeight: 44,
     borderRadius: Radius.small,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  momentBody: {
-    flex: 1,
+  group: { gap: Spacing.two },
+  label: { textTransform: 'uppercase', letterSpacing: 1 },
+  rows: { borderTopWidth: StyleSheet.hairlineWidth },
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     gap: Spacing.three,
-    paddingBottom: Spacing.two,
+    minHeight: 48,
+    paddingVertical: Spacing.two,
+    borderBottomWidth: StyleSheet.hairlineWidth,
   },
-  item: {
-    gap: Spacing.two,
-  },
-  when: {
-    textTransform: 'uppercase',
-    letterSpacing: 1,
-  },
+  arabic: { textAlign: 'right', writingDirection: 'rtl' },
 });

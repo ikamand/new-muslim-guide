@@ -6,10 +6,10 @@ supplied each line of it.
 | | |
 |---|---|
 | Qur'an passages | 56 of 56 |
-| Narrations | 116 of 116 |
-| Confirmed against a second publisher | 53 |
-| Translation from HadeethEnc (published terms) | 46 |
-| Translation from Darussalam (quoted) | 70 |
+| Narrations | 121 of 121 |
+| Confirmed against a second publisher | 56 |
+| Translation from HadeethEnc (published terms) | 47 |
+| Translation from Darussalam (quoted) | 74 |
 | Arabic with no translation | 0 |
 | Nothing found | 0 |
 
@@ -111,7 +111,12 @@ under. That is substance and stays with a reviewer.
 | `bukhari:6405` | HadeethEnc.com | HadeethEnc.com | HadeethEnc 5516 |
 | `bukhari:6309` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
 | `muslim:2999` | HadeethEnc.com | HadeethEnc.com | HadeethEnc 3298 |
+| `bukhari:1892` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
+| `bukhari:1969` | HadeethEnc.com | Darussalam (via fawazahmed0/hadith-api) | HadeethEnc 65517 |
+| `muslim:1164` | HadeethEnc.com | Darussalam (via fawazahmed0/hadith-api) | HadeethEnc 65523 |
+| `bukhari:969` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
 | `bukhari:4406` | HadeethEnc.com | HadeethEnc.com | HadeethEnc 10104 |
+| `bukhari:5707` | HadeethEnc.com | HadeethEnc.com | HadeethEnc 3407 |
 | `bukhari:1923` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
 | `bukhari:1957` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
 | `bukhari:6` | HadeethEnc.com | HadeethEnc.com | HadeethEnc 6179 |

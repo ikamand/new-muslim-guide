@@ -200,8 +200,6 @@ export const ES: ContentDict = {
     "Cuando te equivocas",
   "Repentance, and why it is not a big ceremony":
     "El arrepentimiento, y por qué no es una gran ceremonia",
-  "You will find out when Ramadan starts from the people around you rather than from a calculation, because the start of a month is announced locally and mosques in the same city can differ by a day. That is normal and not worth worrying about.":
-    "Sabrás cuándo empieza Ramadán por la gente de tu alrededor más que por un cálculo, porque el inicio del mes se anuncia localmente y mezquitas de la misma ciudad pueden diferir en un día. Eso es normal y no merece preocupación.",
   "Whether a month begins by sighting the moon locally or by astronomical calculation is a live question, and communities in the same country sometimes start Ramadan on different days.":
     "Si un mes empieza por la observación local de la luna o por cálculo astronómico es una cuestión viva, y comunidades del mismo país empiezan Ramadán a veces en días distintos.",
   "Both approaches are argued from evidence and neither community is being careless. As a beginner the practical answer is to follow the mosque or community you pray with. Scholars have discussed this in more detail.":

@@ -5,22 +5,22 @@
  * here is lost the next time it runs, and one that needs making belongs
  * upstream, where the text is published.
  *
- * 56 Qur'an passages and 116 narrations. Every character came over
+ * 56 Qur'an passages and 121 narrations. Every character came over
  * the wire from a published text rather than from memory, which is the only
  * way a file like this could exist under this project's rules about Arabic.
  *
  * ## Where each line came from
  *
  * No one source has all of it, so each field is taken from the first that
- * does, and says so on the text itself. Of the 116 narrations here:
- * 53 were confirmed against a second, separately edited publisher;
- * 46 carry HadeethEnc's own translation, 70 carry Darussalam's, and
+ * does, and says so on the text itself. Of the 121 narrations here:
+ * 56 were confirmed against a second, separately edited publisher;
+ * 47 carry HadeethEnc's own translation, 74 carry Darussalam's, and
  * 0 have Arabic and no translation at all.
  *
  * ⚠️ **The Darussalam translations are not ours to relicense.** They reach
  * this file through a public-domain dedication that covers the compiler's work
  * and not the translation inside it. What makes that defensible here is scale
- * and purpose — 70 narrations out of some thirty thousand, each quoted under
+ * and purpose — 74 narrations out of some thirty thousand, each quoted under
  * the instruction it supports, in an app that is free and never sold. It is a
  * quotation, not a republication, and it is Iyad's decision on the record.
  *
@@ -948,11 +948,43 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
     "arabicFrom": "HadeethEnc.com",
     "translationFrom": "HadeethEnc.com"
   },
+  "bukhari:1892": {
+    "arabic": "حَدَّثَنَا مُسَدَّدٌ، حَدَّثَنَا إِسْمَاعِيلُ، عَنْ أَيُّوبَ، عَنْ نَافِعٍ، عَنِ ابْنِ عُمَرَ ـ رضى الله عنهما ـ قَالَ صَامَ النَّبِيُّ صلى الله عليه وسلم عَاشُورَاءَ، وَأَمَرَ بِصِيَامِهِ‏.‏ فَلَمَّا فُرِضَ رَمَضَانُ تُرِكَ‏.‏ وَكَانَ عَبْدُ اللَّهِ لاَ يَصُومُهُ، إِلاَّ أَنْ يُوَافِقَ صَوْمَهُ‏.‏",
+    "translation": "Narrated Ibn `Umar:The Prophet (ﷺ) observed the fast on the 10th of Muharram ('Ashura), and ordered (Muslims) to fast on that day, but when the fasting of the month of Ramadan was prescribed, the fasting of the 'Ashura' was abandoned. `Abdullah did not use to fast on that day unless it coincided with his routine fasting by chance",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:1969": {
+    "arabic": "عن عائشة رضي الله عنها قالت: كان رسول الله صلى الله عليه وسلم يصوم حتى نقول: لا يفطر، ويفطر حتى نقول: لا يصوم، فما رأيت رسول الله صلى الله عليه وسلم استكمل صيام شهر إلا رمضان، وما رأيته أكثر صيامًا منه في شعبان.",
+    "translation": "Narrated `Aisha:Allah's Messenger (ﷺ) used to fast till one would say that he would never stop fasting, and he would abandon fasting till one would say that he would never fast. I never saw Allah's Messenger (ﷺ) fasting for a whole month except the month of Ramadan, and did not see him fasting in any month more than in the month of Sha'ban",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "muslim:1164": {
+    "arabic": "عن أبي أيوب الأنصاري رضي الله عنه أن رسول الله صلى الله عليه وسلم قال: «من صام رمضان ثم أتبعه ستًّا من شوال كان كصيام الدهر».",
+    "translation": "Abu Ayyub al-Ansari (Allah be pleased with him) reported Allah's Messenger (ﷺ) as saying:He who observed the fast of Ramadan and then followed it with six (fasts) of Shawwal. it would be as if he fasted perpetually",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:969": {
+    "arabic": "حَدَّثَنَا مُحَمَّدُ بْنُ عَرْعَرَةَ، قَالَ حَدَّثَنَا شُعْبَةُ، عَنْ سُلَيْمَانَ، عَنْ مُسْلِمٍ الْبَطِينِ، عَنْ سَعِيدِ بْنِ جُبَيْرٍ، عَنِ ابْنِ عَبَّاسٍ، عَنِ النَّبِيِّ صلى الله عليه وسلم أَنَّهُ قَالَ ‏\"‏ مَا الْعَمَلُ فِي أَيَّامِ الْعَشْرِ أَفْضَلَ مِنَ الْعَمَلِ فِي هَذِهِ ‏\"‏‏.‏ قَالُوا وَلاَ الْجِهَادُ قَالَ ‏\"‏ وَلاَ الْجِهَادُ، إِلاَّ رَجُلٌ خَرَجَ يُخَاطِرُ بِنَفْسِهِ وَمَالِهِ فَلَمْ يَرْجِعْ بِشَىْءٍ ‏\"‏‏.‏",
+    "translation": "Narrated Ibn `Abbas:The Prophet (ﷺ) said, \"No good deeds done on other days are superior to those done on these (first ten days of Dhul Hijja).\" Then some companions of the Prophet (ﷺ) said, \"Not even Jihad?\" He replied, \"Not even Jihad, except that of a man who does it by putting himself and his property in danger (for Allah's sake) and does not return with any of those things",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
   "bukhari:4406": {
     "arabic": "عن أبي بكرة -ضي الله عنه- مرفوعاً: «إِنَّ الزمانَ قَدِ اسْتَدَارَ كَهَيْئَتِهِ يَوْمَ خَلَقَ اللهُ السَّمَاوَاتِ والأَرْضَ: السنةُ اثنا عَشَرَ شَهْرًا، منها أربعةٌ حُرُمٌ: ثلاثٌ مُتَوَالِيَاتٌ: ذُو القَعْدَةِ، وذُو الحَجَّةِ، والمحرمُ، ورَجَبُ مُضَرَ الذي بين جُمَادَى وشَعْبَانَ، أَيُّ شَهْرٍ هَذَا؟» قلنا: اللهُ ورسولُهُ أَعْلَمُ، فسكتَ حتى ظننا أنه سَيُسَمِّيهِ بغير اسمه، قال: «أَلَيْسَ ذَا الحَجَّةِ؟» قُلْنَا: بَلَى. قال: «فأَيُّ بَلَدٍ هَذَا؟» قلنا: اللهُ ورسولُهُ أَعْلَمُ، فسكتَ حتى ظننا أنه سُيَسَمِّيهِ بغير اسمه. قال: «أَلَيْسَ البَلْدَةَ؟» قلنا: بلى. قال: «فأَيُّ يَوْمٍ هَذَا؟» قُلْنَا: اللهُ ورسولُهُ أَعْلَمُ، فسكتَ حتى ظَنَنَّا أنه سيسميه بغير اسمه. قال: «أَلَيْسَ يَوْمَ النَّحْرِ؟» قلنا: بَلَى. قال: «فَإِّنَّ دِمَاءَكُمْ وأَمْوَالَكُمْ وأَعْرَاضَكُمْ عَلَيْكُمْ حَرَامٌ، كَحُرْمَةِ يَوْمِكُمْ هَذَا في بَلَدِكُمْ هَذَا فِي شَهْرِكُمْ هَذَا، وَسَتَلْقَونَ رَبَّكُمْ فَيَسْأَلُكُمْ عَنْ أَعْمَالِكُمْ، أَلَا فَلَا تَرْجِعُوا بَعْدِي كُفَّارًا يَضْرِبُ بَعْضُكُم رِقَابَ بَعْضٍ، أَلَا لِيُبَلِّغِ الشَّاهِدُ الغَائِبَ، فَلَعَلَّ بَعْضَ مَنْ يَبْلُغُهُ أَنْ يكونَ أَوْعَى لَهُ مِنْ بَعْضِ مَنْ سَمِعَهُ»، ثُمَّ قال: «أَلَا هَلْ بَلَّغْتُ، أَلَا هَلْ بَلَّغْتُ؟» قلنا: نعم. قال: «اللَّهُمَّ اشْهَدْ».",
     "translation": "Abu Bakrah (may Allah be pleased with him) reported that the Prophet (may Allah's peace and blessings be upon him) said: \"Time has completed its cycle and has returned to its state when Allah created the heavens and the earth. The year consists of twelve months, of which four are sacred; three of them are consecutive: Dhu al-Qi‘dah, Dhu al-Hijjah, Muharram, and Rajab of Mudar which comes between the months of Jumāda and Sha‘bān. Which month is this?\" We said: \"Allah and His Messenger know best.\"  He remained silent for some time until we thought he was going to name it by something other than its current name. He then said: \"Is this not the month of Dhu al-Hijjah?\" We said: \"Indeed, it is.\" He then said: \"Which city is this?\" To which we said: \"Allah and His Messenger know best.\" He then remained silent for some time until we thought he was going to name it by something other than its current name. He then said: \"Is this not Al-Baldah (meaning Makkah)?\" We said: \"Indeed, it is.\" He then said: \"What day is this?\" We replied saying: \"Allah and His Messenger know best.\" He then remained silent for some time until we thought he was going to name it by something other than its current name. He said: \"Is this not the Day of An-Nahr (10th of Dhu al-Hijjah)?\" We said: \"Indeed, it is.\" Thereupon he said: \"Indeed, your blood, your property and your honor are inviolable to one another just as the inviolability of this day of yours, in this city of yours, in this month of yours. And you will soon meet your Lord, and He will ask you about your deeds. So, do not return to disbelief after my death, striking each other's necks. Let those who are present here convey my statements to those who are not present, for perhaps someone to whom my words are conveyed will understand them better than someone who listened to them.\" Then he said: \"Behold! Have I delivered (the message) to you? Behold! Have I delivered (the message) to you?\" We answered saying: \"Indeed, you have.\" He said: \"O Allah, bear witness to this!\"",
     "attribution": "Narrated by Bukhari & Muslim",
     "grade": "Authentic hadith",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "bukhari:5707": {
+    "arabic": "عَنْ أَبِي هُرَيْرَةَ رضي الله عنه قَالَ: قَالَ رَسُولُ اللَّهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ: «لاَ عَدْوَى وَلاَ طِيَرَةَ، وَلاَ هَامَةَ وَلاَ صَفَرَ، وَفِرَّ مِنَ المَجْذُومِ كَمَا تَفِرُّ مِنَ الأَسَدِ».",
+    "translation": "Abu Hurayrah (may Allah be pleased with him) reported: The Messenger of Allah (may Allah's peace and blessings be upon him) said: \"There is no contagion, nor is there any evil omen in birds, nor is there any evil omen in the owl, nor is there any evil omen in Safar, and run away from the leper as you would run away from the lion.\"",
+    "attribution": "Agreed upon",
+    "grade": "Authentic",
     "arabicFrom": "HadeethEnc.com",
     "translationFrom": "HadeethEnc.com"
   },

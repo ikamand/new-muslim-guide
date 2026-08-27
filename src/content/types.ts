@@ -11,7 +11,7 @@
  * `./model.ts`.
  */
 
-import type { ContentMeta, ContentNote } from './model';
+import type { ContentMeta, ContentNote, ContentRef } from './model';
 import type { Source } from './sources';
 
 /** Drives the posture illustration and the "you are here" cue. */
@@ -166,8 +166,16 @@ export type Pillar = {
   summary: string;
   /** Two or three plain sentences. No jargon a first-timer wouldn't know. */
   detail: string;
-  /** Where the app already teaches this, if it does. */
-  guideId?: string;
+  /**
+   * Where the app already teaches this, if it does.
+   *
+   * A `ContentRef` rather than a guide id, because not everything the app
+   * teaches is a guide. Fasting is taught by the Ramadan lesson, which is a
+   * `Reference` — and while this field was `guideId` the only way to link it
+   * was to invent a guide that does not exist, so the fasting pillar had no
+   * link at all and the page read as though the app did not cover Ramadan.
+   */
+  teaches?: ContentRef;
   /** Anything a first-timer would otherwise take the wrong way. */
   note?: string;
   meta?: ContentMeta;

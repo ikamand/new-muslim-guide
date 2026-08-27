@@ -3,8 +3,9 @@ import { StyleSheet, View } from 'react-native';
 import { ContentNoteCard } from '@/components/content-note';
 import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
-import { resolveNotes, type Pillar } from '@/content';
+import { resolveNotes, resolveRef, type Pillar } from '@/content';
 import { Radius, Spacing } from '@/constants/theme';
+import { routeFor } from '@/lib/content-routes';
 import { useLocale } from '@/hooks/use-locale';
 import { useTheme } from '@/hooks/use-theme';
 
@@ -17,6 +18,12 @@ import { useTheme } from '@/hooks/use-theme';
 export function PillarCard({ pillar, index }: { pillar: Pillar; index: number }) {
   const theme = useTheme();
   const { t } = useLocale();
+  /*
+    Resolved rather than routed straight from the ref, so a pillar pointing at
+    content that has been renamed loses its link instead of offering a tap that
+    lands on a blank screen.
+  */
+  const teaches = pillar.teaches ? resolveRef(pillar.teaches) : undefined;
 
   return (
     <View
@@ -51,9 +58,9 @@ export function PillarCard({ pillar, index }: { pillar: Pillar; index: number })
         <ContentNoteCard key={`${entry.kind}-${position}`} entry={entry} />
       ))}
 
-      {pillar.guideId && (
+      {teaches && (
         <PressableLink
-          href={{ pathname: '/guide/[id]', params: { id: pillar.guideId } }}
+          href={routeFor(teaches)}
           style={[styles.link, { borderColor: theme.border }]}
           pressedStyle={{ opacity: 0.6 }}>
           <ThemedText type="smallBold" themeColor="accent">

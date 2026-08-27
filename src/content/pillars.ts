@@ -1,3 +1,4 @@
+import { ref } from './model';
 import { Recitations } from './recitations';
 import { hadith, quran } from './sources';
 import type { Pillar } from './types';
@@ -47,7 +48,7 @@ export const PILLARS: Pillar[] = [
     arabic: 'الشَّهَادَة',
     transliteration: 'Ash-shahādah',
     summary: 'Saying, and meaning, that there is no god but Allah and that Muhammad is His Messenger.',
-    guideId: 'shahada',
+    teaches: ref('guide', 'shahada'),
     detail:
       'This is the pillar the other four rest on. Saying it sincerely is what makes a person Muslim, and it is repeated in every prayer for the rest of your life. It is two statements held together: that worship belongs to Allah alone, and that Muhammad ﷺ is the one who conveyed how.',
     meta: {
@@ -73,7 +74,7 @@ export const PILLARS: Pillar[] = [
     summary: 'Five prayers a day, at set times, facing the Kaʿbah in Mecca.',
     detail:
       'Fajr before sunrise, Dhuhr after midday, ʿAsr in the afternoon, Maghrib just after sunset, and ʿIshaʾ at night. Each one takes a few minutes. You wash first, which is wudu, and the app walks you through both.',
-    guideId: 'fajr',
+    teaches: ref('guide', 'fajr'),
     meta: {
       category: 'salah',
       difficulty: 'foundational',
@@ -147,6 +148,10 @@ export const PILLARS: Pillar[] = [
     arabic: 'الصَّوْم',
     transliteration: 'Aṣ-ṣawm',
     summary: 'No food, drink or intimacy from dawn until sunset, for the month of Ramadan.',
+    // The Ramadan lesson, not a guide: fasting is a month you read about, not
+    // a sequence you follow holding a phone. It was the one pillar the app
+    // teaches in full and never offered a way into.
+    teaches: ref('reference', 'ramadan'),
     detail:
       'Ramadan moves through the year, so its length and difficulty change with the season. There are real exemptions for illness, travel, pregnancy, nursing, menstruation and old age, and taking one is not a failure. Some days are made up later, some are not.',
     meta: {

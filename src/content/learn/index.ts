@@ -97,7 +97,7 @@ export {
  * exactly one group. A topic missing from this table would silently vanish
  * from the tab.
  */
-export type TopicGroupId = 'praying' | 'chosen' | 'believe' | 'world' | 'hard' | 'year';
+export type TopicGroupId = 'praying' | 'believe' | 'world' | 'hard' | 'year';
 
 /**
  * The topics, grouped by when the question arrives.
@@ -161,23 +161,6 @@ export const TOPIC_GROUPS: readonly { id: TopicGroupId; topics: readonly Content
       ref('reference', 'manners'),
     ],
   },
-  {
-    // The prayers you choose. Grouped apart from the five so a reader can see
-    // at a glance which are owed and which are offered.
-    id: 'chosen',
-    /*
-      Ordered by the night rather than alphabetically: qiyam is prayed before
-      sleeping, tahajjud after waking, witr closes whichever of them you prayed.
-      Istikhara and tawba answer a moment rather than an hour, so they follow.
-    */
-    topics: [
-      ref('reference', 'qiyam-al-layl'),
-      ref('reference', 'tahajjud'),
-      ref('reference', 'witr'),
-      ref('reference', 'istikhara'),
-      ref('reference', 'tawba-prayer'),
-    ],
-  },
   { id: 'hard', topics: [ref('reference', 'repentance'), ref('reference', 'patience-and-gratitude')] },
   { id: 'year', topics: [ref('reference', 'ramadan'), ref('reference', 'islamic-calendar')] },
 ];
@@ -223,15 +206,23 @@ export function ungrouped(
     'guide:asr',
     'guide:maghrib',
     'guide:isha',
-    // The voluntary prayers are reached from the chooser too, and their
-    // reference pages — which is what a reader actually needs — are grouped
-    // under `chosen`. Since 26 Aug the chooser opens the reference rather than
-    // the guide, so these are one tap further in than they used to be.
+    // The voluntary prayers, both halves of them. Since 26 Aug the chooser at
+    // `/pray` opens the reference rather than the guide, and it lists all five
+    // under its own "Prayers you choose" heading — so the Learn tab carried a
+    // `chosen` group that was the same five rows opening the same five pages.
+    // The group is gone and the chooser is the one place they live: it can put
+    // them beside the five obligatory prayers, which is the comparison that
+    // teaches what "voluntary" means, and a Learn group never could.
     'guide:tahajjud',
     'guide:istikhara',
     'guide:tawba',
     'guide:qiyam',
     'guide:witr',
+    'reference:tahajjud',
+    'reference:istikhara',
+    'reference:tawba-prayer',
+    'reference:qiyam-al-layl',
+    'reference:witr',
   ]) {
     claimed.add(elsewhere);
   }

@@ -9,7 +9,6 @@ import { ThemedText } from '@/components/themed-text';
 import { routeFor } from '@/lib/content-routes';
 import {
   DAILY_PRAYERS,
-  DUAS,
   resolveRef,
   getPracticeClipCount,
   hasPracticeBeyondSurahs,
@@ -420,15 +419,12 @@ export default function LearnScreen() {
               unit="count.phrases"
               glyph="phrases"
             />
-            <LearnCard
-              wide
-              href="/duas"
-              title={t('learn.duas.title')}
-              subtitle={t('learn.duas.subtitle')}
-              count={DUAS.length}
-              unit="count.duas"
-              glyph="duas"
-            />
+            {/*
+              No duʿa card here. `/duas` IS the Duʿa tab, so this row was a
+              full-width link from one tab to another one already sitting in
+              the bar underneath it — and it took the place where something
+              unreachable could have gone.
+            */}
             {/*
               Hidden while Al-Fatiha is the only thing recorded, because the
               Qur'an tab now does those seven ayahs better in every respect.

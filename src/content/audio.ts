@@ -6,8 +6,11 @@
  * file exists: content stays as data with a string id, and every filesystem
  * path lives in exactly one place.
  *
- * PARTIALLY FILLED. Al-Fatiha is in; the twelve adhkar are not yet recorded
- * and stay commented out. `getAudio` returns undefined for those, and callers
+ * PARTIALLY FILLED. Al-Fatiha and the three quls are in — 22 clips. Twenty
+ * are not yet recorded and stay commented out: the twelve said in prayer and
+ * wudu, which have steps waiting for them and are briefed in
+ * `docs/audio-recording-brief.md`, and eight everyday adhkar that no screen
+ * plays yet. `getAudio` returns undefined for those, and callers
  * must hide the control rather than show one that does nothing. Do not add a
  * `require` for a file that is not in the repo — a missing asset fails the
  * whole bundle, not just the screen.

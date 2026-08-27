@@ -115,6 +115,34 @@ be struck and the ⚠️ in the source file removed with it.
 
 ---
 
+## ✅ Cleared — 26 August 2026
+
+**A qualified reviewer has been through this and confirmed the content is
+correct from the sources.** Reported by Iyad on 26 August 2026. Priority 1 is
+no longer a release gate.
+
+This entry is written from Iyad's report, not from a document the reviewer
+signed, and it says so on purpose — the rest of this file is careful to
+separate what was read from what was inferred, and a clearance is the last
+place to start blurring that. If a marked-up copy or a written note exists,
+it belongs alongside this line.
+
+The one thing the reviewer left open was general rather than specific: **make
+sure the duʿas and verses are put in the right places.** Not a defect report —
+advice about how the work should be done. It is answered the way this repo
+answers everything of that shape, with a check rather than a promise:
+`npm run audio:brief` now generates the recording brief from the manifest, so
+the text a reciter reads cannot drift from the text the app shows. The first
+run of it found four such drifts, listed in the commit.
+
+**What this leaves.** The only remaining gate on a public release is the audio:
+twelve clips wired to live prayer steps with no file behind them, listed in
+`docs/audio-recording-brief.md` and now safe to record from. The items below
+are kept rather than deleted, because what was asked and how it was answered
+is worth more than a shorter document.
+
+---
+
 ## PRIORITY 1 — must review before any public religious release
 
 Wrong answers here change how someone worships.

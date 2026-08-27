@@ -51,12 +51,39 @@ const LABELS = {
  */
 const EXPECTATIONS = [
   { query: 'passing wind', wants: 'step:wudu:', because: 'lives in a step note, not the instruction' },
+  { query: 'i farted', wants: 'step:wudu:', because: 'the app writes "passing wind"; nobody types that' },
+  { query: 'entering the home', wants: 'hisn:', because: 'the app writes "house"' },
+  { query: 'how do i decide', wants: 'guide:istikhara', because: 'nobody knows the word istikhara yet' },
+  { query: 'can i pray on my period', wants: 'reference:periods', because: 'the everyday word, not "menstruation"' },
+  { query: 'do i need to shower after sex', wants: 'step:ghusl:', because: 'nobody types "ghusl" or "janabah"' },
+  { query: 'dua before sleeping', wants: 'dua:sleep', because: 'the book says "supplication"' },
+  { query: 'how do i become muslim', wants: 'guide:shahada', because: 'they do not know it is called the shahada' },
+  { query: 'my mum is upset', wants: 'reference:family', because: 'one useful word among several useless ones' },
+  { query: 'what is halal meat', wants: 'section:food:', because: 'a section, not a whole page' },
   { query: 'what breaks wudu', wants: '', because: 'a typed phrase, not a substring of anything' },
-  { query: 'istikhara', wants: 'guide:istikhara', because: 'a whole guide is named this' },
-  { query: 'entering the house', wants: 'hisn:', because: 'the duʿa book was unsearchable entirely' },
-  { query: 'missed a prayer', wants: 'section:', because: 'the answer is a section, not a page' },
+  { query: 'istikhara', wants: 'guide:istikhara', because: 'the obvious case must not regress' },
   { query: 'tayammum', wants: 'guide:tayammum', because: 'the obvious case must not regress' },
   { query: 'lost count', wants: '', because: 'phrased the way a person in the middle of it would' },
+  { query: 'missed a prayer', wants: 'section:', because: 'the answer is a section, not a page' },
+];
+
+/**
+ * Questions with no verified right answer yet, checked only for returning
+ * SOMETHING. A blank screen reads as "Islam has no answer for this", which is
+ * the worst thing this app can say to somebody three weeks in.
+ *
+ * Two of these are answered badly rather than well, and that is recorded here
+ * rather than quietly passing: "how many times do i pray" lands on qiyam
+ * al-layl, and "i missed fajr" lands on tahajjud. Both are the single-term
+ * fallback doing its job and finding something loosely related. Precision, not
+ * coverage, is the next piece of work.
+ */
+const MUST_RETURN_SOMETHING = [
+  'what do i say when someone dies', 'i cant read arabic', 'do i have to wear hijab',
+  'what do i say before eating', 'i missed fajr', 'can i pray sitting down',
+  'how many times do i pray', 'i dont know what to say in prayer', 'washing before prayer',
+  'i think i broke my prayer', 'what do i say when i sneeze', 'praying at work',
+  'fasting rules', 'can i shorten prayer when driving', 'what is zakat',
 ];
 
 const index = buildIndex('en', (kind) => LABELS[kind] ?? kind);
@@ -79,7 +106,20 @@ for (const { query, wants, because } of EXPECTATIONS) {
   }
 }
 
-console.log(`\n${index.length} things indexed, ${EXPECTATIONS.length - failed}/${EXPECTATIONS.length} questions answered.`);
+let blank = 0;
+for (const query of MUST_RETURN_SOMETHING) {
+  if (search(index, query, 1).length === 0) {
+    blank += 1;
+    console.error(`  ✗ "${query}" — returned nothing at all`);
+  }
+}
+
+console.log(
+  `\n${index.length} things indexed. ` +
+    `${EXPECTATIONS.length - failed}/${EXPECTATIONS.length} land on the right answer, ` +
+    `${MUST_RETURN_SOMETHING.length - blank}/${MUST_RETURN_SOMETHING.length} return something.`,
+);
+failed += blank;
 
 if (failed > 0) {
   console.error(

@@ -13,6 +13,7 @@ import { HISN } from '@/content/duas/hisn';
 import { localiseCatalogEntry, localiseGuide, localiseReference } from '@/i18n/localise';
 import type { Locale } from '@/i18n/locales';
 import { routeFor } from '@/lib/content-routes';
+import { expand, STOPWORDS } from '@/lib/search-words';
 
 /**
  * Everything in the app, searchable, offline.
@@ -106,16 +107,29 @@ export function fold(value: string): string {
 function scoreTerm(entry: Indexed, term: string): number {
   let best = 0;
   for (const { field, text } of entry.fields) {
-    const at = text.indexOf(term);
-    if (at === -1) continue;
+    /*
+      A term has to start a word. Bare substring matching was the single
+      largest source of wrong answers: "ate" matched inside "prostrate" and
+      put a step of the Fajr prayer at the top of "what do i say before
+      eating", and "sin" matches inside "rising".
 
-    let points = WEIGHT[field];
-    const before = at === 0 ? ' ' : text[at - 1];
-    const after = text[at + term.length] ?? ' ';
-    if (!/[a-z0-9]/.test(before) && !/[a-z0-9]/.test(after)) points += 25;
-    if (at === 0) points += 15;
-
-    best = Math.max(best, points);
+      Word START rather than whole word, so "pray" still finds "prayer" and
+      "travel" finds "travelling" — a reader typing the stem of a word means
+      the word, and demanding an exact match would lose far more than it saves.
+    */
+    let at = text.indexOf(term);
+    while (at !== -1) {
+      const before = at === 0 ? ' ' : text[at - 1];
+      if (!/[a-z0-9]/.test(before)) {
+        let points = WEIGHT[field];
+        const after = text[at + term.length] ?? ' ';
+        if (!/[a-z0-9]/.test(after)) points += 25;
+        if (at === 0) points += 15;
+        best = Math.max(best, points);
+        break;
+      }
+      at = text.indexOf(term, at + 1);
+    }
   }
   return best;
 }
@@ -132,12 +146,20 @@ function scoreTerm(entry: Indexed, term: string): number {
  * Words under three characters are dropped unless that is the whole query, so
  * "is" and "a" in a typed question do not decide the ranking.
  */
-function scoreQuery(entry: Indexed, terms: readonly string[]): number {
+function scoreQuery(entry: Indexed, terms: readonly (readonly string[])[]): number {
   let total = 0;
-  for (const term of terms) {
-    const points = scoreTerm(entry, term);
-    if (points === 0) return 0;
-    total += points;
+  for (const variants of terms) {
+    /*
+      Any spelling of the word counts, and the best one scores. "Farted" and
+      "wind" are the same question; the app happens to have written one of
+      them. A synonym scores exactly as the word itself would, because a reader
+      who used the everyday word is not asking a vaguer question than one who
+      happened to know the app's.
+    */
+    let best = 0;
+    for (const variant of variants) best = Math.max(best, scoreTerm(entry, variant));
+    if (best === 0) return 0;
+    total += best;
   }
   return total;
 }
@@ -274,12 +296,17 @@ export function buildIndex(locale: Locale, label: (kind: string) => string): rea
  * answer it and showed "Intend in your heart that you are performing wudu" —
  * a correct hit wearing an unrelated sentence, which reads as a wrong result.
  */
-function matchedSentence(entry: Indexed, terms: readonly string[]): string | undefined {
+function matchedSentence(
+  entry: Indexed,
+  terms: readonly (readonly string[])[],
+): string | undefined {
   for (const { field, raw } of entry.fields) {
     if (field !== 'body' || !raw) continue;
     for (const sentence of raw.split(/(?<=[.!?])\s+/)) {
       const folded = fold(sentence);
-      if (terms.every((term) => folded.includes(term))) return firstSentence(sentence);
+      if (terms.every((variants) => variants.some((v) => folded.includes(v)))) {
+        return firstSentence(sentence);
+      }
     }
   }
   return undefined;
@@ -291,17 +318,56 @@ export function search(
   query: string,
   limit = 40,
 ): readonly SearchResult[] {
+  /*
+    Typed words become groups of acceptable spellings, in three passes.
+
+    Question words go first: they are the most common words in a typed question
+    and the least informative, and leaving them in made "how do i decide" score
+    every section whose heading starts with "How". Then anything under three
+    characters. Then each survivor becomes itself plus its synonyms.
+
+    Each filter is skipped if it would empty the query, because refusing to
+    search is worse than searching badly.
+  */
   const all = fold(query.trim()).split(/\s+/).filter(Boolean);
   if (all.length === 0) return [];
-  const meaningful = all.filter((term) => term.length >= 3);
-  const terms = meaningful.length > 0 ? meaningful : all;
 
-  const hits: SearchResult[] = [];
-  for (const entry of index) {
-    const points = scoreQuery(entry, terms);
-    if (points > 0) {
-      hits.push({ ...entry, score: points, snippet: matchedSentence(entry, terms) ?? entry.snippet });
+  const content = all.filter((term) => !STOPWORDS.has(term));
+  const kept = content.length > 0 ? content : all;
+  const long = kept.filter((term) => term.length >= 3);
+  const terms = (long.length > 0 ? long : kept).map(expand);
+
+  /*
+    Every term has to appear — until that finds nothing at all, when the
+    longest term tries on its own.
+
+    "Fasting rules" returned nothing because "rules" appears nowhere, and a
+    reader is not told which of their words the app failed on. Something
+    relevant beats a blank screen; a blank screen reads as "Islam has no
+    answer for this", which is the worst thing this app could say to somebody
+    three weeks in.
+
+    Longest first, but every term gets a turn. Taking only the longest assumed
+    the longest word was the most meaningful, and "my mum is upset" then
+    searched for "upset" — which is in no page — and gave up, while "mum"
+    would have found the Family reference immediately.
+  */
+  const longestFirst = [...terms].sort((a, b) => b[0].length - a[0].length);
+  const attempts = [terms, ...longestFirst.map((term) => [term])];
+  let hits: SearchResult[] = [];
+  for (const attempt of attempts) {
+    hits = [];
+    for (const entry of index) {
+      const points = scoreQuery(entry, attempt);
+      if (points > 0) {
+        hits.push({
+          ...entry,
+          score: points,
+          snippet: matchedSentence(entry, attempt) ?? entry.snippet,
+        });
+      }
     }
+    if (hits.length > 0) break;
   }
 
   /*

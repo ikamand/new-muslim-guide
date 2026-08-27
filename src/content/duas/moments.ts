@@ -34,7 +34,7 @@ import type { DayMoment } from '../duas';
 import { HISN, type HisnOccasion } from './hisn';
 
 /** IslamHouse row ids, grouped by the part of the day they belong to. */
-const OCCASIONS_BY_MOMENT: Readonly<Record<DayMoment, readonly number[]>> = {
+export const OCCASIONS_BY_MOMENT: Readonly<Record<DayMoment, readonly number[]>> = {
   waking: [
     1268971, // waking from sleep
     1268990, // wearing a garment

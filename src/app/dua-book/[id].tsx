@@ -25,6 +25,24 @@ import { useTheme } from '@/hooks/use-theme';
  * ⚠️ No transliteration, deliberately. IslamHouse publishes none, and writing
  * one would be the model producing Arabic-adjacent text — the same rule that
  * keeps `juz30.ts` transliteration-free.
+ *
+ * ## Why the three kinds are set differently
+ *
+ * The book's ((…)) and ﴿…﴾ no longer reach this screen — `hisn-clean.mjs`
+ * removes them. On the page those marks were the ONLY thing separating a
+ * verse from a narration, and this screen used to render all three kinds at
+ * the same weight, so stripping them without changing anything here would
+ * have quietly flattened a real distinction.
+ *
+ * So the design carries what the punctuation used to: Qur'an sits in an
+ * accent-tinted block, quoted speech takes the lead weight because it is the
+ * words themselves, and prose — instructions, and narrations about the virtue
+ * of dhikr — takes the quote weight.
+ *
+ * ⚠️ `prose` is NOT set as a footnote, on purpose. A few prose rows are
+ * continuations of a verse the publisher split across a page break, and
+ * demoting those to supporting weight would misrepresent them. Telling them
+ * apart is `annotations.ts`'s job and no one has done it yet.
  */
 export default function DuaBookOccasionScreen() {
   const theme = useTheme();
@@ -59,8 +77,27 @@ export default function DuaBookOccasionScreen() {
           style={[
             styles.card,
             { backgroundColor: theme.backgroundElement, borderColor: theme.border },
+            line.kind === 'quran' && {
+              backgroundColor: theme.accentMuted,
+              borderColor: theme.accentMuted,
+            },
           ]}>
-          <ThemedText type="arabicLead" style={styles.arabic}>{line.arabic}</ThemedText>
+          {/*
+            The count the book itself states, where both languages agreed on
+            it. A numeral rather than a word, so it needs no translation and
+            reads the same in a list of Arabic.
+          */}
+          {line.repeat ? (
+            <View style={[styles.repeat, { borderColor: theme.border }]}>
+              <ThemedText type="smallBold" themeColor="accent">{`×${line.repeat}`}</ThemedText>
+            </View>
+          ) : null}
+
+          <ThemedText
+            type={line.kind === 'quoted' ? 'arabicLead' : 'arabicQuote'}
+            style={styles.arabic}>
+            {line.arabic}
+          </ThemedText>
           {line.english ? (
             <ThemedText type="default" themeColor="textSecondary">
               {line.english}
@@ -110,6 +147,13 @@ const styles = StyleSheet.create({
     /* size and face: the `arabicQuote` rung */
     textAlign: 'right',
     writingDirection: 'rtl',
+  },
+  repeat: {
+    alignSelf: 'flex-start',
+    paddingHorizontal: Spacing.two,
+    paddingVertical: Spacing.one,
+    borderRadius: Radius.small,
+    borderWidth: StyleSheet.hairlineWidth,
   },
   card: {
     gap: Spacing.three,

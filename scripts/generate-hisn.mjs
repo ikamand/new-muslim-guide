@@ -38,6 +38,15 @@
  */
 
 import { mkdirSync, writeFileSync } from 'node:fs';
+import {
+  assertOnlyMarkersRemoved,
+  assertRepeatMatchesText,
+  cleanArabic,
+  cleanEnglish,
+  cleanFootnote,
+  countWordBrackets,
+  repeatOf,
+} from './hisn-clean.mjs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -91,26 +100,61 @@ function kindOf(arabic) {
 */
 const occasions = [];
 const footnotes = new Map();
+const skippedCounts = [];
+let wordBrackets = { before: 0, after: 0 };
+
+/**
+ * Clean one field and prove the cleaning removed only markers.
+ *
+ * `assertOnlyMarkersRemoved` is field-aware because a footnote keeps its
+ * ((…)) — see `hisn-clean.mjs`. Assertion 2 rides along here: a bracket
+ * holding words is supplication text, and the totals either side must match.
+ */
+function strip(raw, field, where) {
+  const fn = field === 'arabic' ? cleanArabic : field === 'english' ? cleanEnglish : cleanFootnote;
+  const out = fn(raw);
+  assertOnlyMarkersRemoved(raw ?? '', out, `${where}.${field}`, field);
+  wordBrackets.before += countWordBrackets(raw);
+  wordBrackets.after += countWordBrackets(out);
+  return out;
+}
+
 for (const row of rows) {
-  if (row.type === 'footnote') footnotes.set(row.split_group, clean(row.original_text));
+  if (row.type === 'footnote') {
+    footnotes.set(row.split_group, strip(row.original_text, 'footnote', `footnote ${row.id}`));
+  }
 }
 
 for (const row of rows) {
   if (row.type === 'title' && row.tag !== 'h1') {
     occasions.push({
       id: row.id,
-      arabic: clean(row.original_text),
-      english: clean(row.transes?.en),
+      arabic: strip(row.original_text, 'arabic', `occasion ${row.id}`),
+      english: strip(row.transes?.en, 'english', `occasion ${row.id}`),
       lines: [],
     });
   } else if (row.type === 'paragraph' && occasions.length > 0) {
     const note = footnotes.get(row.split_group);
-    const arabic = clean(row.original_text);
+    /*
+      `kind` is read from the RAW text, before the marks that carry it are
+      removed. That ordering is the whole reason the strip is safe: ((…)) and
+      ﴿…﴾ are the only thing on the page telling a narration from a verse, and
+      dropping them is only lossless once `kind` has recorded what they said.
+    */
+    const kind = kindOf(clean(row.original_text));
+    const arabic = strip(row.original_text, 'arabic', `line ${row.id}`);
+    const english = strip(row.transes?.en, 'english', `line ${row.id}`);
+
+    const { repeat, repeatText, reason } = repeatOf(arabic, english);
+    if (repeat) assertRepeatMatchesText(repeat, repeatText, `line ${row.id}`);
+    if (reason) skippedCounts.push(`  line ${row.id}: ${reason}`);
+
     occasions[occasions.length - 1].lines.push({
       id: row.id,
-      kind: kindOf(arabic),
+      kind,
       arabic,
-      english: clean(row.transes?.en),
+      english,
+      ...(repeat ? { repeat, repeatText } : {}),
       ...(note ? { footnote: note } : {}),
     });
   }
@@ -128,6 +172,23 @@ console.log(
 const missingEn = occasions.filter((o) => !o.english).length;
 if (missingEn) console.warn(`⚠️  ${missingEn} occasions have no English title`);
 
+if (wordBrackets.before !== wordBrackets.after) {
+  throw new Error(
+    `Assertion 2 failed: ${wordBrackets.before} word-bearing brackets went in and ` +
+      `${wordBrackets.after} came out. Those hold supplication text, not footnote ` +
+      `markers, and the strip must never touch them.`,
+  );
+}
+
+const withRepeat = occasions.flatMap((o) => o.lines).filter((l) => l.repeat).length;
+console.log(`  ${wordBrackets.after} word-bearing brackets kept, markers removed`);
+console.log(`  ${withRepeat} lines carry a repeat count both languages agree on`);
+if (skippedCounts.length > 0) {
+  console.log(`⚠️  ${skippedCounts.length} lines mention a count that was NOT recorded:`);
+  skippedCounts.forEach((line) => console.log(line));
+  console.log('  Each needs a human — a line with two counts is usually two dhikr.');
+}
+
 const header = `/**
  * Hisn al-Muslim — the book, as IslamHouse publishes it.
  *
@@ -136,6 +197,24 @@ const header = `/**
  * ${occasions.length} occasions, ${lines} lines, fetched from
  * cnt.islamhouse.com book ${BOOK} with its English translation alongside. Every
  * character came over the wire; nothing here was typed or remembered.
+ *
+ * ## The publisher's typography is removed, and the removal is proved
+ *
+ * IslamHouse marks quoted speech ((…)), Qur'an ﴿…﴾ — "…" and {…} in its
+ * English — and points at footnotes with [24]. Those are gone here. Nothing
+ * they meant is lost: \`kind\` is read from those exact characters BEFORE they
+ * are removed, and the footnote a [24] pointed at is printed directly beneath
+ * the line already.
+ *
+ * ⚠️ Square brackets holding WORDS are supplication text, not markers, and are
+ * kept with their brackets — \`[بِسْمِ اللَّهِ]\` opens the duʿa for entering the
+ * bathroom. ${wordBrackets.after} of them survive here. The rule is \`[0-9]+\`
+ * and nothing looser; \`scripts/hisn-clean.mjs\` proves after every run that the
+ * strip removed markers and only markers, by deleting the permitted spans from
+ * the source itself and comparing. A dropped letter or ḥaraka fails the build.
+ *
+ * Footnotes keep their ((…)): there the marks separate quoted matn from the
+ * citation around it, and no \`kind\` field records that.
  *
  * \`id\` is the publisher's own row id, kept so a reviewer can find the line
  * again in their text rather than take this file's word for it.
@@ -184,6 +263,22 @@ const body = `export type HisnLine = {
   kind: 'quoted' | 'quran' | 'prose';
   arabic: string;
   english: string;
+  /**
+   * How many times the book says to say it.
+   *
+   * Read from the book's own prose — \`(ثلاثَ مرَّاتٍ)\` — and emitted ONLY when
+   * the Arabic and IslamHouse's English are parsed independently and produce
+   * the same single number. A line with two counts in it, like "(Ten times) …
+   * or (once when feeling lazy)", yields nothing and is reported by the
+   * generator instead, because it is usually two dhikr sharing a row.
+   *
+   * This is reading what is written, which is why it is generated. Whether a
+   * line is something a person says AT ALL is the opposite kind of question
+   * and is not answered here — see \`annotations.ts\`.
+   */
+  repeat?: number;
+  /** The phrase \`repeat\` was read from, kept so the number can be checked. */
+  repeatText?: string;
   /**
    * The book's footnote for this line, verbatim and unparsed.
    *

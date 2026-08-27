@@ -156,11 +156,19 @@ can actually grant, and the file a reviewer signs off.
 
 ```jsonc
 {
-  "1269196": { "recited": true, "repeat": 3, "repeatText": "(ثلاثَ مرَّاتٍ)",
-               "time": "both", "reviewed": "2026-09-xx" },
+  "1269196": { "recited": true, "time": "both", "reviewed": "2026-09-xx" },
   "1269205": { "recited": false, "reason": "instruction" }
 }
 ```
+
+**Correction, 27 Aug 2026 — `repeat` does not live here.** This section first
+put the repeat count in the annotations file. That was wrong: the book states
+the count in its own prose, `(ثلاثَ مرَّاتٍ)`, and reading it off the page is a
+transformation like stripping a bracket, not a judgement. It is generated into
+`book.json` with the phrase it came from beside it. The overlay holds only what
+a human decides — `recited` and `time`. Kept rather than quietly edited,
+because the distinction between the two files is the whole design and getting
+it wrong once is worth showing.
 
 Consumers who want one file get **`hisn.json`**, the two merged at build time.
 `hisn.min.json` for the size-conscious. A `schema.json` so the shape is
@@ -235,7 +243,27 @@ document, which is what this document is.
 
 ## 7. Phases
 
-**Phase 1 — in this repo, now.** The strip in `scripts/generate-hisn.mjs`
+**Phase 1 — BUILT, 27 Aug 2026.** `scripts/hisn-clean.mjs`, wired into
+`scripts/generate-hisn.mjs`, with `src/content/duas/annotations.ts` and
+`npm run hisn:check`. What the build actually found, none of it predicted here:
+
+- **Footnotes keep their `((…))`.** In a footnote the marks separate quoted
+  matn from the citation prose around it — `وزيادة: ((بسم الله)) في أوله` — and
+  no `kind` field records that, so the rule "strip a mark only where something
+  else carries what it meant" says they stay. Found by the assertion
+  disagreeing with the strip, not by reading.
+- **27 English lines had an orphaned opening quote.** The closing quote is not
+  the last character: IslamHouse prints `"…messenger." (Four times)` and
+  `"…Magnificent," three times.` A first rule that required the quote to end
+  the string stripped one half of 27 pairs.
+- **19 lines carry a repeat count; 4 were refused.** The refusals are correct —
+  three are lines holding two dhikr at once (33/33/34 in the tasbih), one is a
+  bare prose "Three times" instruction with no count of its own.
+- **The assertion caught three of its own bugs before it caught any of the
+  strip's**, which is the argument for writing it as a different algorithm
+  rather than a second call to the same `replace()`.
+
+**Phase 1 as originally written —** The strip in `scripts/generate-hisn.mjs`
 (after `kindOf()` runs, so `kind` is derived from the marks before they go) plus
 `src/content/duas/annotations.ts` as the hand-written overlay, following the
 pattern `src/content/duas/moments.ts` already established. Checks 1–4. Then the

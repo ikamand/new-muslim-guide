@@ -3,8 +3,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useMemo } from 'react';
 
 import { PressableLink } from '@/components/pressable-link';
+import { DuaCard } from '@/components/dua-card';
 import { ThemedText } from '@/components/themed-text';
-import { duaOfTheDay } from '@/content';
 import { HISN } from '@/content/duas/hisn';
 import {
   ADHKAR_SESSIONS,
@@ -87,21 +87,7 @@ export default function DuasScreen() {
     so it is the same duʿa all day: "somewhere to start" that changes every
     time you look at it is not somewhere to start.
   */
-  /*
-    The top card, when no sitting is open.
-
-    It was a day-seeded pick over all nine, which is how it came to offer the
-    duʿa for going into the bathroom as somewhere to begin. `duaOfTheDay`
-    already answers this properly: it reads the hour and returns a duʿa for the
-    part of the day you are actually in, stable for the calendar day, and
-    returns nothing rather than offering a sleeping duʿa at nine in the
-    morning. An honest gap beats a wrong answer.
-
-    It draws on the nine rather than the book because those are the only duʿas
-    in the app with checked citations, hand-written notes and French and
-    Spanish — and this is the one card everybody sees.
-  */
-  const suggestion = live ? undefined : duaOfTheDay();
+  // The card answers "what now" whenever no sitting is open. See DuaCard.
 
   return (
     <SafeAreaView style={[styles.safeArea, { backgroundColor: theme.background }]} edges={['top']}>
@@ -110,24 +96,7 @@ export default function DuasScreen() {
 
         {live ? <SessionHero session={live} state={state} /> : null}
 
-        {suggestion ? (
-          <View
-            style={[
-              styles.heroCard,
-              { backgroundColor: theme.backgroundElement, borderColor: theme.border },
-            ]}>
-            <ThemedText type="caption" themeColor="textSecondary" style={styles.kicker}>
-              {t('adhkar.forNow')}
-            </ThemedText>
-            <ThemedText type="cardTitle">{suggestion.when}</ThemedText>
-            <ThemedText type="arabicLead" style={styles.arabic}>
-              {suggestion.says.arabic}
-            </ThemedText>
-            <ThemedText type="small" themeColor="textSecondary">
-              {suggestion.says.translation}
-            </ThemedText>
-          </View>
-        ) : null}
+        {live ? null : <DuaCard />}
 
         {pinned.length > 0 ? (
           <View style={styles.group}>

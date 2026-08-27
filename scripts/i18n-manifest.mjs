@@ -25,7 +25,6 @@ const { GUIDES } = await load('src/content/guides.ts');
 const { PILLARS } = await load('src/content/pillars.ts');
 const { IMAN_PILLARS } = await load('src/content/iman.ts');
 const { REFERENCES } = await load('src/content/references.ts');
-const { DUAS } = await load('src/content/duas.ts');
 const { PHRASES } = await load('src/content/phrases.ts');
 const { RECITERS } = await load('src/content/quran/recitation.ts');
 const { CONTENT_DICTS } = await load('src/i18n/content/index.ts');
@@ -101,12 +100,6 @@ for (const phrase of PHRASES) {
 // the folder is a path on a server that translating would break.
 for (const reciter of RECITERS) {
   add(`Reciter: ${reciter.name}`, reciter.blurb);
-}
-
-for (const dua of DUAS) {
-  add(`Duʿa: ${dua.when}`, dua.when);
-  add(`Duʿa: ${dua.when}`, dua.note);
-  addNotes(`Duʿa: ${dua.when}`, dua.meta?.notes);
 }
 
 for (const reference of REFERENCES) {

@@ -43,7 +43,6 @@ const { GUIDES } = await load('src/content/guides.ts');
 const { REFERENCES } = await load('src/content/references.ts');
 const { PILLARS } = await load('src/content/pillars.ts');
 const { IMAN_PILLARS } = await load('src/content/iman.ts');
-const { DUAS } = await load('src/content/duas.ts');
 
 const strict = process.argv.includes('--strict');
 const label = (entry) => `${entry.kind}:${entry.id}`;
@@ -207,7 +206,6 @@ const plain = [
   ...GUIDES.flatMap((guide) => guide.steps.map((step) => step.note)),
   ...REFERENCES.flatMap((reference) => reference.sections.map((section) => section.note)),
   ...[...PILLARS, ...IMAN_PILLARS].map((pillar) => pillar.note),
-  ...DUAS.map((dua) => dua.note),
 ].filter(Boolean);
 
 const structured = CATALOG.flatMap((entry) => entry.notes);

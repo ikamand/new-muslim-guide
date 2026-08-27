@@ -14,7 +14,7 @@ export const DUA_AND_DHIKR: Reference = {
     estimatedMinutes: 4,
     beginnerPriority: 2,
     tags: ['arabic', 'audio'],
-    relatedContent: [ref('dua', 'wake'), ref('reference', 'what-is-the-quran')],
+    relatedContent: [ref('hisn', '1268971'), ref('reference', 'what-is-the-quran')],
   },
   quickFacts: [
     { label: 'Duʿa', value: 'Asking, in any language and in your own words' },

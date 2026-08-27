@@ -22,10 +22,9 @@ const { formatSource } = await load('src/content/sources.ts');
 const { PHRASES } = await load('src/content/phrases.ts');
 const { PILLARS } = await load('src/content/pillars.ts');
 const { IMAN_PILLARS } = await load('src/content/iman.ts');
-const { DUAS } = await load('src/content/duas.ts');
 const { HISN, HISN_SOURCE } = await load('src/content/duas/hisn.ts');
 
-const whenSaid = new Map(DUAS.map((d) => [d.says, d.when]));
+const whenSaid = new Map();
 
 /**
  * The citation, as one cell. Was a free-text `source` string on the recitation;

@@ -81,7 +81,14 @@ export type ContentTag =
  * Ids are only unique within a kind — 'shahada' is a guide *and* a pillar
  * today — so anything pointing at content has to carry both.
  */
-export type ContentKind = 'guide' | 'reference' | 'pillar' | 'article' | 'dua' | 'phrase';
+/**
+ * `hisn` replaced `dua` on 27 Aug 2026. The nine duʿas the app owned were
+ * deleted — every one of their occasions is in Hisn al-Muslim — so the entity
+ * a reference points at is now the book's occasion, keyed by IslamHouse's own
+ * row id. Referring to content by what it IS rather than by which screen used
+ * to hold it is what stopped a screen deletion breaking the journey.
+ */
+export type ContentKind = 'guide' | 'reference' | 'pillar' | 'article' | 'hisn' | 'phrase';
 
 export type ContentRef = {
   kind: ContentKind;

@@ -14,6 +14,7 @@
 import { HISN } from '../src/content/duas/hisn.ts';
 import { HISN_ANNOTATIONS } from '../src/content/duas/annotations.ts';
 import { OCCASIONS_BY_MOMENT } from '../src/content/duas/moments.ts';
+import { pickForNow, resolvePick } from '../src/content/duas/card.ts';
 
 const lineIds = new Set(HISN.flatMap((occasion) => occasion.lines.map((line) => line.id)));
 const occasionIds = new Set(HISN.map((occasion) => occasion.id));
@@ -51,6 +52,52 @@ if (lost.length > 0) {
   lost.forEach(([moment, id]) => console.error(`    ${moment}: ${id}`));
   failed = true;
 }
+
+/*
+  The card's picks are hand-written occasion and line ids, the same class of
+  hand-written reference as the annotations and the moment placements, and they
+  rot the same way. Walked over a whole solar year and all twelve Islamic
+  months rather than spot-checked, because the seasonal branches only fire for
+  a few weeks and nobody will be looking on those days.
+*/
+let picks = 0;
+const reasons = new Map();
+const base = new Date('2026-01-01T00:00:00');
+for (let day = 0; day < 366; day += 1) {
+  for (let hour = 0; hour < 24; hour += 4) {
+    for (let month = 1; month <= 12; month += 1) {
+      const now = new Date(base.getTime() + day * 86_400_000 + hour * 3_600_000);
+      /*
+        Maghrib alternates between an hour away and six, so Ramadan exercises
+        BOTH the iftar branch and the ordinary fasting one. Pinning it an hour
+        out meant `fasting` never fired and the check reported a clean run
+        over a branch it had not entered.
+      */
+      const maghrib = new Date(now.getTime() + (day % 2 ? 60 : 360) * 60_000);
+      const pick = pickForNow({ now, hijri: { month, day: 15 }, maghrib });
+      if (!pick) {
+        console.error(`\n✗ no card pick for month ${month}, hour ${hour}, day ${day}`);
+        failed = true;
+        break;
+      }
+      const resolved = resolvePick(pick);
+      if (!resolved || !resolved.line.arabic) {
+        console.error(
+          `\n✗ card pick ${pick.occasion}/${pick.line ?? '-'} (${pick.reason}) ` +
+            'does not resolve to a line with Arabic',
+        );
+        failed = true;
+        break;
+      }
+      picks += 1;
+      reasons.set(pick.reason, (reasons.get(pick.reason) ?? 0) + 1);
+    }
+  }
+}
+console.log(
+  `${picks} card picks resolved — ` +
+    [...reasons.entries()].map(([r, n]) => `${r} ${n}`).join(', '),
+);
 
 if (failed) {
   console.error('\n  A re-fetch changed the book. Find where each line went before deleting.');

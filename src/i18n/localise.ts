@@ -1,7 +1,6 @@
 import type {
   CatalogEntry,
   ContentNote,
-  Dua,
   Guide,
   Phrase,
   Pillar,
@@ -192,31 +191,9 @@ export function localiseReference(reference: Reference, locale: Locale): Referen
 }
 
 /**
- * A duʿa in the reader's language.
- *
- * ⚠️ This did not exist. `scripts/i18n-manifest.mjs` has always collected
- * `when` and `note` from every duʿa, so a translator would have delivered
- * them — and the screen rendered the English regardless, because nothing ever
- * looked them up. Invisible today only because every content locale is empty.
- * The Arabic is untouched, as everywhere.
- */
-export function localiseDua(dua: Dua, locale: Locale): Dua {
-  if (locale === SOURCE_LOCALE) return dua;
-  const dict = CONTENT_DICTS[locale];
-
-  return {
-    ...dua,
-    when: tr(dict, dua.when),
-    note: tr(dict, dua.note),
-    says: localiseRecitation(dua.says, locale),
-    meta: dua.meta && { ...dua.meta, notes: localiseNotes(dua.meta.notes, dict) },
-  };
-}
-
-/**
  * A phrase in the reader's language.
  *
- * Same gap as `localiseDua`. `said` is never translated — it is how the Arabic
+ * `said` is never translated — it is how the Arabic
  * sounds, which is the same sound whatever language you read the gloss in.
  */
 export function localisePhrase(phrase: Phrase, locale: Locale): Phrase {

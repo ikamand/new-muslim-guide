@@ -39,7 +39,6 @@ const load = (p) => import(join(root, p));
 
 const { Recitations } = await load('src/content/recitations.ts');
 const { PHRASES } = await load('src/content/phrases.ts');
-const { DUAS } = await load('src/content/duas.ts');
 const { GUIDES } = await load('src/content/guides.ts');
 
 const out = [];
@@ -108,7 +107,6 @@ for (const [key, r] of Object.entries(Recitations)) {
   }
 }
 for (const p of PHRASES) add(`Phrase — ${p.said}`, 'phrases.ts', p.arabic, p.sources);
-for (const d of DUAS) add(`Duʿa — ${d.when}`, 'duas.ts', d.says?.arabic, d.says?.sources);
 for (const g of GUIDES) {
   for (const s of g.steps) {
     if (s.says) add(`${g.title} — ${s.title}`, 'guides', s.says.arabic, s.says.sources);

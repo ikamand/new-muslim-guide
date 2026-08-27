@@ -56,7 +56,7 @@ const EXPECTATIONS = [
   { query: 'how do i decide', wants: 'guide:istikhara', because: 'nobody knows the word istikhara yet' },
   { query: 'can i pray on my period', wants: 'reference:periods', because: 'the everyday word, not "menstruation"' },
   { query: 'do i need to shower after sex', wants: 'step:ghusl:', because: 'nobody types "ghusl" or "janabah"' },
-  { query: 'dua before sleeping', wants: 'dua:sleep', because: 'the book says "supplication"' },
+  { query: 'dua before sleeping', wants: 'hisn:1269267', because: 'the book says "supplication", and the nine the app owned are gone' },
   { query: 'how do i become muslim', wants: 'guide:shahada', because: 'they do not know it is called the shahada' },
   { query: 'my mum is upset', wants: 'reference:family', because: 'one useful word among several useless ones' },
   { query: 'what is halal meat', wants: 'section:food:', because: 'a section, not a whole page' },

@@ -129,7 +129,7 @@ export const JOURNEY: readonly Stage[] = [
     id: 'deepening',
     steps: [
       step(ref('reference', 'dua-and-dhikr'), 'practice'),
-      step(ref('dua', 'wake'), 'practice', 'journey.lesson.everyday-duas'),
+      step(ref('hisn', '1268971'), 'practice', 'journey.lesson.everyday-duas'),
       step(ref('reference', 'repentance'), 'learning'),
       step(ref('reference', 'patience-and-gratitude'), 'learning'),
       step(ref('article', 'last-day'), 'learning', 'journey.lesson.hereafter'),

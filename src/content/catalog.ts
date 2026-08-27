@@ -16,7 +16,7 @@
  * everything here is keyed by both.
  */
 
-import { DUAS } from './duas';
+import { HISN } from './duas/hisn';
 import { GUIDES } from './guides';
 import { IMAN_PILLARS } from './iman';
 import type { ContentKind, ContentMeta, ContentNote, ContentRef } from './model';
@@ -136,17 +136,26 @@ function buildCatalog(): readonly CatalogEntry[] {
     }
   }
 
-  for (const dua of DUAS) {
+  /*
+    All 132 occasions, not the nine the app used to own. Search already
+    indexed them (`search.ts`), so this is the catalogue catching up with
+    what search could see — and it means the journey and recommendations can
+    point at any occasion in the book rather than at a hand-made shortlist.
+
+    No `sources`: the book's citations are unparsed prose in a footnote, and
+    turning prose into a structured citation is the guess this repo does not
+    make. An occasion carries no claim it cannot support.
+  */
+  for (const occasion of HISN) {
     entries.push({
-      kind: 'dua',
-      id: dua.id,
-      title: dua.when,
-      shortDescription: dua.says.translation,
-      meta: dua.meta,
-      pieces: 1,
+      kind: 'hisn',
+      id: String(occasion.id),
+      title: occasion.english || occasion.arabic,
+      shortDescription: occasion.lines[0]?.english ?? '',
+      pieces: occasion.lines.length,
       pieceUnit: 'items',
-      sources: [...(dua.meta?.sources ?? []), ...(dua.says.sources ?? [])],
-      notes: dua.meta?.notes ?? [],
+      sources: [],
+      notes: [],
     });
   }
 

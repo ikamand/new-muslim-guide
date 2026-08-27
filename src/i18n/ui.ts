@@ -215,7 +215,6 @@ export const EN = {
   'duaBook.moreForThisMoment': 'more for this moment in the book →',
   'duaBook.filtered': 'Occasions for this part of the day',
   'duaBook.showAll': 'Show every occasion',
-  'duaBook.credit': 'Arabic and translation published by',
   'duaBook.missing': 'That occasion is not in the book.',
 
   /*

@@ -59,6 +59,7 @@ export function windowAt(today: DayTimes | null, now: Date): WindowState {
 
   const at = (id: string) => today.prayers.find((prayer) => prayer.id === id)?.time;
   const fajr = at('fajr');
+  const dhuhr = at('dhuhr');
   const asr = at('asr');
   const maghrib = at('maghrib');
   const isha = at('isha');
@@ -75,10 +76,28 @@ export function windowAt(today: DayTimes | null, now: Date): WindowState {
     }
   }
 
-  if (fajr && now >= fajr && now < today.sunrise) {
+  /*
+    Both windows are the UNION of the mainstream positions, not a choice
+    between them.
+
+    Morning is read as Fajr→sunrise by some and Fajr→midday by others; evening
+    as ʿAsr→Maghrib or as Maghrib→ʿIshāʾ, since the Islamic day turns at
+    sunset. This function decides what the tab OFFERS, not when it is
+    permissible to say anything, so it does not have to adjudicate — it can
+    cover every span either position calls by that name and claim nothing.
+
+    The narrow reading was tried first and was a usability failure, not a
+    scholarly one. Fajr to sunrise in Manchester in August is 85 minutes, so
+    somebody waking at seven — most people — found no morning sitting at all,
+    and anybody sitting down after sunset found no evening one. The costs are
+    lopsided: too wide leaves an offer standing slightly outside somebody's
+    preferred window, too narrow makes the thing vanish for a reader who does
+    not yet know it exists.
+  */
+  if (fajr && dhuhr && now >= fajr && now < dhuhr) {
     return { window: 'morning', since: fajr };
   }
-  if (asr && maghrib && now >= asr && now < maghrib) {
+  if (asr && isha && now >= asr && now < isha) {
     return { window: 'evening', since: asr };
   }
   /*

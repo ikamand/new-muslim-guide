@@ -89,17 +89,20 @@ for (const spec of SHAPES) {
       fail(`${spec.name} ${hhmm(minute)}: before Fajr should be night, got ${state.window}`);
       break;
     }
-    // Fajr → sunrise is the morning sitting, except where a prayer's grace
-    // period legitimately takes precedence.
-    if (minute > spec.fajr + GRACE_MIN && minute < spec.sunrise
-        && state.window !== 'morning') {
-      fail(`${spec.name} ${hhmm(minute)}: Fajr→sunrise should be morning, got ${state.window}`);
+    /*
+      Fajr→Dhuhr is morning and ʿAsr→ʿIshāʾ is evening — the union of the
+      mainstream positions rather than a choice between them, so the offer
+      never disappears on somebody whose reading differs. A prayer's grace
+      period still takes precedence inside either span.
+    */
+    if (minute > spec.fajr + GRACE_MIN && minute < spec.dhuhr - 1
+        && state.window !== 'morning' && state.window !== 'after-prayer') {
+      fail(`${spec.name} ${hhmm(minute)}: Fajr→Dhuhr should be morning, got ${state.window}`);
       break;
     }
-    // ʿAsr → Maghrib is the evening sitting, same exception.
-    if (minute > spec.asr + GRACE_MIN && minute < spec.maghrib
-        && state.window !== 'evening') {
-      fail(`${spec.name} ${hhmm(minute)}: ʿAsr→Maghrib should be evening, got ${state.window}`);
+    if (minute > spec.asr + GRACE_MIN && minute < spec.isha - 1
+        && state.window !== 'evening' && state.window !== 'after-prayer') {
+      fail(`${spec.name} ${hhmm(minute)}: ʿAsr→ʿIshāʾ should be evening, got ${state.window}`);
       break;
     }
   }

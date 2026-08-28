@@ -93,6 +93,13 @@ const GUIDES: Readonly<Record<string, Cadence>> = {
  */
 const REFERENCES: Readonly<Record<string, Cadence>> = {
   'what-is-islam': 'once',
+  /* Phase 9. All five are read once and kept, not returned to on a cycle —
+     except the minimum prayer, which somebody reaches for on a bad night. */
+  'life-before': 'once',
+  'your-name': 'once',
+  'minimum-prayer': 'until-fluent',
+  adhan: 'once',
+  rulings: 'once',
   'who-is-allah': 'once',
   'who-is-muhammad': 'once',
   'what-is-the-quran': 'once',

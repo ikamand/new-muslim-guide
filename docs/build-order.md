@@ -663,6 +663,31 @@ may be the most valuable page the app could add.*
 
 **Done when** all five pass the standing checklist and the reviewer has cleared
 them.
+**Done 28 Aug 2026.** All five written, wired into Learn, given cadences and
+glyphs, and `style:check` reports **0 failures and 0 warnings across all 35
+teaching pages** — which it did not at first: the five arrived with label
+headings instead of questions, fact labels too long for a 96px column, and
+heroes promoting citations with no text behind them.
+
+**The citations, each opened before it was printed:**
+
+| Page | Evidence |
+|---|---|
+| The least you can do | **Bukhari 757**, the man who prayed badly — the Prophet ﷺ is asked to teach the prayer and lists exactly the six elements this page names. Qur'an 4:103 for the fixed times. |
+| Must, should, may | Qur'an 2:29 for the default. The five categories carry a `general` basis, because they are a classification rather than a text. |
+| The call to prayer | **Bukhari 611** — say what the muezzin says. |
+| Do I have to change my name? | **Bukhari 6193**, Ḥazn and Sahl — and it is used because of how it ENDS: the man declined and kept his name. Qur'an 33:5 for the family name. |
+| What happens to the life before | **Muslim 121**, "Islam demolishes what came before it", which was sitting in a CODE COMMENT in `shahada.ts` and on no screen. Qur'an 25:70 and 39:53. |
+
+⚠️ **What the last page deliberately does not do.** It rules on nothing — not a
+previous marriage, not children, not money earned before. Those have conditions
+on them. It answers only the question underneath them, which is whether the
+past disqualifies you.
+
+⚠️ **A `general` basis cannot carry a hero.** A promoted section prints its
+citation's text, and a basis statement has none — so `rulings` renders its hero
+on the Qur'an citation instead. Long narrations cannot either: promoting Muslim
+121 made an 1,822-character wall.
 **Ships via** OTA.
 
 ### Phase 10 — Duʿas from the Qur'an

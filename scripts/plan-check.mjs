@@ -90,7 +90,7 @@ const CLAIMS = [
     `docs/build-order.md` "What this removes" is the record that they existed.
   */
   ['scripts/content-audit.mjs', 32, 'pendingRecommendations'],
-  ['src/app/(tabs)/learn.tsx', 194, 'function ShahadaCard'],
+  ['src/app/(tabs)/learn.tsx', 203, 'function ShahadaCard'],
   ['src/app/(tabs)/learn.tsx', 204, "shahadaState === 'recently'"],
   ['src/content/journey.ts', 38, 'export type Requirement'],
   ['src/content/journey.ts', 170, 'ENTRY_BY_CONFIDENCE'],
@@ -191,22 +191,24 @@ const teachingMinutes = teaching.reduce((n, e) => n + (e.meta?.estimatedMinutes 
   teaching entries" is still true — none was edited or removed, one was added
   beside them.
 */
-measure('catalogue: non-hisn entries', teaching.length, 70);
+/* 70 → 75: Phase 9's five tier-one pages. */
+measure('catalogue: non-hisn entries', teaching.length, 75);
 /*
   186 became 206 on 28 Aug 2026: the ninety-nine names declare 20 minutes.
   The 69 pages the plan measured are unchanged; a 70th was added beside them.
 */
-measure('catalogue: total estimated minutes', teachingMinutes, 206);
+measure('catalogue: total estimated minutes', teachingMinutes, 223);
 measure('catalogue: hisn occasions', CATALOG.length - teaching.length, 132);
 
 const priority = (n) => teaching.filter((e) => e.meta?.beginnerPriority === n).length;
-measure('entries at beginner priority 1–2', priority(1) + priority(2), 26);
+/* All five of Phase 9's pages are tier one, so all five land here. */
+measure('entries at beginner priority 1–2', priority(1) + priority(2), 31);
 measure('entries at beginner priority 4–5', priority(4) + priority(5), 3);
 measure(
   'entries carrying beginnerPriority or difficulty',
   teaching.filter((e) => e.meta?.beginnerPriority || e.meta?.difficulty).length,
   /* 52 → 53: the names collection carries meta. */
-  53,
+  58,
 );
 
 // Journey lessons that are guides — the only kind that self-completes.

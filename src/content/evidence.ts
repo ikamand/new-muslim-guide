@@ -5,22 +5,22 @@
  * here is lost the next time it runs, and one that needs making belongs
  * upstream, where the text is published.
  *
- * 56 Qur'an passages and 121 narrations. Every character came over
+ * 62 Qur'an passages and 114 narrations. Every character came over
  * the wire from a published text rather than from memory, which is the only
  * way a file like this could exist under this project's rules about Arabic.
  *
  * ## Where each line came from
  *
  * No one source has all of it, so each field is taken from the first that
- * does, and says so on the text itself. Of the 121 narrations here:
- * 56 were confirmed against a second, separately edited publisher;
- * 47 carry HadeethEnc's own translation, 74 carry Darussalam's, and
+ * does, and says so on the text itself. Of the 114 narrations here:
+ * 55 were confirmed against a second, separately edited publisher;
+ * 46 carry HadeethEnc's own translation, 68 carry Darussalam's, and
  * 0 have Arabic and no translation at all.
  *
  * ⚠️ **The Darussalam translations are not ours to relicense.** They reach
  * this file through a public-domain dedication that covers the compiler's work
  * and not the translation inside it. What makes that defensible here is scale
- * and purpose — 74 narrations out of some thirty thousand, each quoted under
+ * and purpose — 68 narrations out of some thirty thousand, each quoted under
  * the instruction it supports, in an app that is free and never sold. It is a
  * quotation, not a republication, and it is Iyad's decision on the record.
  *
@@ -112,6 +112,36 @@ export const QURAN_TEXT: Record<string, EvidenceText> = {
     "arabicFrom": "QuranEnc.com",
     "translationFrom": "QuranEnc.com"
   },
+  "25:70": {
+    "arabic": "إِلَّا مَن تَابَ وَءَامَنَ وَعَمِلَ عَمَلٗا صَٰلِحٗا فَأُوْلَٰٓئِكَ يُبَدِّلُ ٱللَّهُ سَيِّـَٔاتِهِمۡ حَسَنَٰتٖۗ وَكَانَ ٱللَّهُ غَفُورٗا رَّحِيمٗا",
+    "translation": "Except for those who repent, believe and do righteous work. For them Allāh will replace their evil deeds with good. And ever is Allāh Forgiving and Merciful.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "39:53": {
+    "arabic": "۞ قُلۡ يَٰعِبَادِيَ ٱلَّذِينَ أَسۡرَفُواْ عَلَىٰٓ أَنفُسِهِمۡ لَا تَقۡنَطُواْ مِن رَّحۡمَةِ ٱللَّهِۚ إِنَّ ٱللَّهَ يَغۡفِرُ ٱلذُّنُوبَ جَمِيعًاۚ إِنَّهُۥ هُوَ ٱلۡغَفُورُ ٱلرَّحِيمُ",
+    "translation": "Say, \"O My servants who have transgressed against themselves [by sinning], do not despair of the mercy of Allāh. Indeed, Allāh forgives all sins. Indeed, it is He who is the Forgiving, the Merciful.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "33:5": {
+    "arabic": "ٱدۡعُوهُمۡ لِأٓبَآئِهِمۡ هُوَ أَقۡسَطُ عِندَ ٱللَّهِۚ فَإِن لَّمۡ تَعۡلَمُوٓاْ ءَابَآءَهُمۡ فَإِخۡوَٰنُكُمۡ فِي ٱلدِّينِ وَمَوَٰلِيكُمۡۚ وَلَيۡسَ عَلَيۡكُمۡ جُنَاحٞ فِيمَآ أَخۡطَأۡتُم بِهِۦ وَلَٰكِن مَّا تَعَمَّدَتۡ قُلُوبُكُمۡۚ وَكَانَ ٱللَّهُ غَفُورٗا رَّحِيمًا",
+    "translation": "Call them by [the names of] their fathers; it is more just in the sight of Allāh. But if you do not know their fathers - then they are [still] your brothers in religion and those entrusted to you. And there is no blame upon you for that in which you have erred but [only for] what your hearts intended. And ever is Allāh Forgiving and Merciful.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "4:103": {
+    "arabic": "فَإِذَا قَضَيۡتُمُ ٱلصَّلَوٰةَ فَٱذۡكُرُواْ ٱللَّهَ قِيَٰمٗا وَقُعُودٗا وَعَلَىٰ جُنُوبِكُمۡۚ فَإِذَا ٱطۡمَأۡنَنتُمۡ فَأَقِيمُواْ ٱلصَّلَوٰةَۚ إِنَّ ٱلصَّلَوٰةَ كَانَتۡ عَلَى ٱلۡمُؤۡمِنِينَ كِتَٰبٗا مَّوۡقُوتٗا",
+    "translation": "And when you have completed the prayer, remember Allāh standing, sitting, or [lying] on your sides. But when you become secure, re-establish [regular] prayer. Indeed, prayer has been decreed upon the believers a decree of specified times.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "2:29": {
+    "arabic": "هُوَ ٱلَّذِي خَلَقَ لَكُم مَّا فِي ٱلۡأَرۡضِ جَمِيعٗا ثُمَّ ٱسۡتَوَىٰٓ إِلَى ٱلسَّمَآءِ فَسَوَّىٰهُنَّ سَبۡعَ سَمَٰوَٰتٖۚ وَهُوَ بِكُلِّ شَيۡءٍ عَلِيمٞ",
+    "translation": "It is He who created for you all of that which is on the earth. Then He directed Himself to the heaven, [His being above all creation], and made them seven heavens, and He is Knowing of all things.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
   "42:11": {
     "arabic": "فَاطِرُ ٱلسَّمَٰوَٰتِ وَٱلۡأَرۡضِۚ جَعَلَ لَكُم مِّنۡ أَنفُسِكُمۡ أَزۡوَٰجٗا وَمِنَ ٱلۡأَنۡعَٰمِ أَزۡوَٰجٗا يَذۡرَؤُكُمۡ فِيهِۚ لَيۡسَ كَمِثۡلِهِۦ شَيۡءٞۖ وَهُوَ ٱلسَّمِيعُ ٱلۡبَصِيرُ",
     "translation": "[He is] Creator of the heavens and the earth. He has made for you from yourselves, mates, and among the cattle, mates; He multiplies you thereby. There is nothing like unto Him, and He is the Hearing, the Seeing.",
@@ -163,12 +193,6 @@ export const QURAN_TEXT: Record<string, EvidenceText> = {
   "59:7": {
     "arabic": "مَّآ أَفَآءَ ٱللَّهُ عَلَىٰ رَسُولِهِۦ مِنۡ أَهۡلِ ٱلۡقُرَىٰ فَلِلَّهِ وَلِلرَّسُولِ وَلِذِي ٱلۡقُرۡبَىٰ وَٱلۡيَتَٰمَىٰ وَٱلۡمَسَٰكِينِ وَٱبۡنِ ٱلسَّبِيلِ كَيۡ لَا يَكُونَ دُولَةَۢ بَيۡنَ ٱلۡأَغۡنِيَآءِ مِنكُمۡۚ وَمَآ ءَاتَىٰكُمُ ٱلرَّسُولُ فَخُذُوهُ وَمَا نَهَىٰكُمۡ عَنۡهُ فَٱنتَهُواْۚ وَٱتَّقُواْ ٱللَّهَۖ إِنَّ ٱللَّهَ شَدِيدُ ٱلۡعِقَابِ",
     "translation": "And what Allāh restored to His Messenger from the people of the towns - it is for Allāh and for the Messenger and for [his] near relatives and orphans and the needy and the [stranded] traveler - so that it will not be a perpetual distribution among the rich from among you. And whatever the Messenger has given you - take; and what he has forbidden you - refrain from. And fear Allāh; indeed, Allāh is severe in penalty.",
-    "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
-  },
-  "4:103": {
-    "arabic": "فَإِذَا قَضَيۡتُمُ ٱلصَّلَوٰةَ فَٱذۡكُرُواْ ٱللَّهَ قِيَٰمٗا وَقُعُودٗا وَعَلَىٰ جُنُوبِكُمۡۚ فَإِذَا ٱطۡمَأۡنَنتُمۡ فَأَقِيمُواْ ٱلصَّلَوٰةَۚ إِنَّ ٱلصَّلَوٰةَ كَانَتۡ عَلَى ٱلۡمُؤۡمِنِينَ كِتَٰبٗا مَّوۡقُوتٗا",
-    "translation": "And when you have completed the prayer, remember Allāh standing, sitting, or [lying] on your sides. But when you become secure, re-establish [regular] prayer. Indeed, prayer has been decreed upon the believers a decree of specified times.",
     "arabicFrom": "QuranEnc.com",
     "translationFrom": "QuranEnc.com"
   },
@@ -292,12 +316,6 @@ export const QURAN_TEXT: Record<string, EvidenceText> = {
     "arabicFrom": "QuranEnc.com",
     "translationFrom": "QuranEnc.com"
   },
-  "39:53": {
-    "arabic": "۞ قُلۡ يَٰعِبَادِيَ ٱلَّذِينَ أَسۡرَفُواْ عَلَىٰٓ أَنفُسِهِمۡ لَا تَقۡنَطُواْ مِن رَّحۡمَةِ ٱللَّهِۚ إِنَّ ٱللَّهَ يَغۡفِرُ ٱلذُّنُوبَ جَمِيعًاۚ إِنَّهُۥ هُوَ ٱلۡغَفُورُ ٱلرَّحِيمُ",
-    "translation": "Say, \"O My servants who have transgressed against themselves [by sinning], do not despair of the mercy of Allāh. Indeed, Allāh forgives all sins. Indeed, it is He who is the Forgiving, the Merciful.\"",
-    "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
-  },
   "66:8": {
     "arabic": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُواْ تُوبُوٓاْ إِلَى ٱللَّهِ تَوۡبَةٗ نَّصُوحًا عَسَىٰ رَبُّكُمۡ أَن يُكَفِّرَ عَنكُمۡ سَيِّـَٔاتِكُمۡ وَيُدۡخِلَكُمۡ جَنَّٰتٖ تَجۡرِي مِن تَحۡتِهَا ٱلۡأَنۡهَٰرُ يَوۡمَ لَا يُخۡزِي ٱللَّهُ ٱلنَّبِيَّ وَٱلَّذِينَ ءَامَنُواْ مَعَهُۥۖ نُورُهُمۡ يَسۡعَىٰ بَيۡنَ أَيۡدِيهِمۡ وَبِأَيۡمَٰنِهِمۡ يَقُولُونَ رَبَّنَآ أَتۡمِمۡ لَنَا نُورَنَا وَٱغۡفِرۡ لَنَآۖ إِنَّكَ عَلَىٰ كُلِّ شَيۡءٖ قَدِيرٞ",
     "translation": "O you who have believed, repent to Allāh with sincere repentance. Perhaps your Lord will remove from you your misdeeds and admit you into gardens beneath which rivers flow [on] the Day when Allāh will not disgrace the Prophet and those who believed with him. Their light will proceed before them and on their right; they will say, \"Our Lord, perfect for us our light and forgive us. Indeed, You are over all things competent.\"",
@@ -379,6 +397,24 @@ export const QURAN_TEXT: Record<string, EvidenceText> = {
   "2:156": {
     "arabic": "ٱلَّذِينَ إِذَآ أَصَٰبَتۡهُم مُّصِيبَةٞ قَالُوٓاْ إِنَّا لِلَّهِ وَإِنَّآ إِلَيۡهِ رَٰجِعُونَ",
     "translation": "Who, when disaster strikes them, say, \"Indeed we belong to Allāh, and indeed to Him we will return.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "59:22": {
+    "arabic": "هُوَ ٱللَّهُ ٱلَّذِي لَآ إِلَٰهَ إِلَّا هُوَۖ عَٰلِمُ ٱلۡغَيۡبِ وَٱلشَّهَٰدَةِۖ هُوَ ٱلرَّحۡمَٰنُ ٱلرَّحِيمُ",
+    "translation": "He is Allāh, other than whom there is no deity, Knower of the unseen and the witnessed. He is the Entirely Merciful, the Especially Merciful.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "59:23": {
+    "arabic": "هُوَ ٱللَّهُ ٱلَّذِي لَآ إِلَٰهَ إِلَّا هُوَ ٱلۡمَلِكُ ٱلۡقُدُّوسُ ٱلسَّلَٰمُ ٱلۡمُؤۡمِنُ ٱلۡمُهَيۡمِنُ ٱلۡعَزِيزُ ٱلۡجَبَّارُ ٱلۡمُتَكَبِّرُۚ سُبۡحَٰنَ ٱللَّهِ عَمَّا يُشۡرِكُونَ",
+    "translation": "He is Allāh, other than whom there is no deity, the Sovereign, the Pure, the Perfection, the Grantor of Security, the Overseer, the Exalted in Might, the Compeller, the Superior. Exalted is Allāh above whatever they associate with Him.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "59:24": {
+    "arabic": "هُوَ ٱللَّهُ ٱلۡخَٰلِقُ ٱلۡبَارِئُ ٱلۡمُصَوِّرُۖ لَهُ ٱلۡأَسۡمَآءُ ٱلۡحُسۡنَىٰۚ يُسَبِّحُ لَهُۥ مَا فِي ٱلسَّمَٰوَٰتِ وَٱلۡأَرۡضِۖ وَهُوَ ٱلۡعَزِيزُ ٱلۡحَكِيمُ",
+    "translation": "He is Allāh, the Creator, the Producer, the Fashioner; to Him belong the best names. Whatever is in the heavens and earth is exalting Him. And He is the Exalted in Might, the Wise.",
     "arabicFrom": "QuranEnc.com",
     "translationFrom": "QuranEnc.com"
   },
@@ -768,6 +804,26 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
     "grade": "Authentic",
     "arabicFrom": "HadeethEnc.com",
     "translationFrom": "HadeethEnc.com"
+  },
+  "bukhari:6193": {
+    "arabic": "حَدَّثَنَا إِبْرَاهِيمُ بْنُ مُوسَى، حَدَّثَنَا هِشَامٌ، أَنَّ ابْنَ جُرَيْجٍ، أَخْبَرَهُمْ قَالَ أَخْبَرَنِي عَبْدُ الْحَمِيدِ بْنُ جُبَيْرِ بْنِ شَيْبَةَ، قَالَ جَلَسْتُ إِلَى سَعِيدِ بْنِ الْمُسَيَّبِ فَحَدَّثَنِي أَنَّ جَدَّهُ حَزْنًا قَدِمَ عَلَى النَّبِيِّ صلى الله عليه وسلم‏.‏ فَقَالَ ‏\"‏ مَا اسْمُكَ ‏\"‏‏.‏ قَالَ اسْمِي حَزْنٌ‏.‏ قَالَ ‏\"‏ بَلْ أَنْتَ سَهْلٌ ‏\"‏‏.‏ قَالَ مَا أَنَا بِمُغَيِّرٍ اسْمًا سَمَّانِيهِ أَبِي‏.‏ قَالَ ابْنُ الْمُسَيَّبِ فَمَا زَالَتْ فِينَا الْحُزُونَةُ بَعْدُ‏.‏",
+    "translation": "Narrated Sa`id bin Al-Musaiyab:That when his grandfather, Hazn visited the Prophet (ﷺ) the Prophet (ﷺ) said (to him), \"What is your name?\" He said, \"My name is Hazn.\" The Prophet (ﷺ) said, \" But you are Sahl.\" He said, \"I will not change my name with which my father named me.\" Ibn Al-Musaiyab added: So we have had roughness (in character) ever since",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:757": {
+    "arabic": "عَنْ أَبِي هُرَيْرَةَ رضي الله عنه: أَنَّ رَسُولَ اللَّهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ دَخَلَ المَسْجِدَ فَدَخَلَ رَجُلٌ، فَصَلَّى، فَسَلَّمَ عَلَى النَّبِيِّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ، فَرَدَّ وَقَالَ: «ارْجِعْ فَصَلِّ، فَإِنَّكَ لَمْ تُصَلِّ»، فَرَجَعَ يُصَلِّي كَمَا صَلَّى، ثُمَّ جَاءَ، فَسَلَّمَ عَلَى النَّبِيِّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ، فَقَالَ: «ارْجِعْ فَصَلِّ، فَإِنَّكَ لَمْ تُصَلِّ» ثَلاَثًا، فَقَالَ: وَالَّذِي بَعَثَكَ بِالحَقِّ مَا أُحْسِنُ غَيْرَهُ، فَعَلِّمْنِي، فَقَالَ: «إِذَا قُمْتَ إِلَى الصَّلاَةِ فَكَبِّرْ، ثُمَّ اقْرَأْ مَا تَيَسَّرَ مَعَكَ مِنَ القُرْآنِ، ثُمَّ ارْكَعْ حَتَّى تَطْمَئِنَّ رَاكِعًا، ثُمَّ ارْفَعْ حَتَّى تَعْدِلَ قَائِمًا، ثُمَّ اسْجُدْ حَتَّى تَطْمَئِنَّ سَاجِدًا، ثُمَّ ارْفَعْ حَتَّى تَطْمَئِنَّ جَالِسًا، وَافْعَلْ ذَلِكَ فِي صَلاَتِكَ كُلِّهَا».",
+    "translation": "Abu Hurayrah (may Allah be pleased with him) reported: The Messenger of Allah (may Allah's peace and blessings be upon him) entered the mosque, and then a man came in and prayed. He greeted the Prophet (may Allah's peace and blessings be upon him), who responded and said: \"Go back and pray, for you have not prayed.\" He went back and prayed as he had prayed, then, he came to the Prophet (may Allah's peace and blessings be upon him) and greeted him. He said: \"Go back and pray, for you have not prayed,\" three times. So, he said: By the One Who sent you with the truth, I cannot do better than that. So teach me. He said: \"When you stand to pray, say Takbīr (Allāhu Akbar), then recite whatever you can of the Qur’an; then bow until you are at ease in bowing; then rise until you are standing up straight; then prostrate until you are at ease in prostration; and then sit up until you are at ease in sitting. Do that throughout your prayer.\"",
+    "attribution": "Agreed upon",
+    "grade": "Authentic",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "bukhari:611": {
+    "arabic": "حَدَّثَنَا عَبْدُ اللَّهِ بْنُ يُوسُفَ، قَالَ أَخْبَرَنَا مَالِكٌ، عَنِ ابْنِ شِهَابٍ، عَنْ عَطَاءِ بْنِ يَزِيدَ اللَّيْثِيِّ، عَنْ أَبِي سَعِيدٍ الْخُدْرِيِّ، أَنَّ رَسُولَ اللَّهِ صلى الله عليه وسلم قَالَ ‏ \"‏ إِذَا سَمِعْتُمُ النِّدَاءَ فَقُولُوا مِثْلَ ما يَقُولُ الْمُؤَذِّنُ ‏\"‏‏.‏",
+    "translation": "Narrated Abu Sa`id Al-Khudri:Allah's Messenger (ﷺ) said, \"Whenever you hear the Adhan, say what the Mu'adh-dhin is saying",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
   },
   "bukhari:3559": {
     "arabic": "عن عبد الله بن عمرو رضي الله عنهما قال: لَمْ يَكُنِ النَّبِيُّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ فَاحِشًا وَلَا مُتَفَحِّشًا، وَكَانَ يَقُولُ: «إِنَّ مِنْ خِيَارِكُمْ أَحْسَنَكُمْ أَخْلَاقًا».",
@@ -1162,77 +1218,6 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
     "grade": "Sahih (Al-Albani) · Sahih (Muhammad Muhyi Al-Din Abdul Hamid) · Daif (Zubair Ali Zai)",
     "arabicFrom": "fawazahmed0/hadith-api",
     "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
-  },
-  "abu-dawud:5095": {
-    "arabic": "حَدَّثَنَا إِبْرَاهِيمُ بْنُ الْحَسَنِ الْخَثْعَمِيُّ، حَدَّثَنَا حَجَّاجُ بْنُ مُحَمَّدٍ، عَنِ ابْنِ جُرَيْجٍ، عَنْ إِسْحَاقَ بْنِ عَبْدِ اللَّهِ بْنِ أَبِي طَلْحَةَ، عَنْ أَنَسِ بْنِ مَالِكٍ، أَنَّ النَّبِيَّ صلى الله عليه وسلم قَالَ ‏\"‏ إِذَا خَرَجَ الرَّجُلُ مِنْ بَيْتِهِ فَقَالَ بِسْمِ اللَّهِ تَوَكَّلْتُ عَلَى اللَّهِ لاَ حَوْلَ وَلاَ قُوَّةَ إِلاَّ بِاللَّهِ ‏\"‏ ‏.‏ قَالَ ‏\"‏ يُقَالُ حِينَئِذٍ هُدِيتَ وَكُفِيتَ وَوُقِيتَ فَتَتَنَحَّى لَهُ الشَّيَاطِينُ فَيَقُولُ لَهُ شَيْطَانٌ آخَرُ كَيْفَ لَكَ بِرَجُلٍ قَدْ هُدِيَ وَكُفِيَ وَوُقِيَ ‏\"‏ ‏.‏",
-    "translation": "Narrated Anas ibn Malik: The Prophet (ﷺ) said: When a man goes out of his house and says: \"In the name of Allah, I trust in Allah; there is no might and no power but in Allah,\" the following will be said to him at that time: \"You are guided, defended and protected.\" The devils will go far from him and another devil will say: How can you deal with a man who has been guided, defended and protected?",
-    "grade": "Sahih (Al-Albani) · Sahih (Muhammad Muhyi Al-Din Abdul Hamid) · Hasan (Zubair Ali Zai)",
-    "arabicFrom": "fawazahmed0/hadith-api",
-    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
-  },
-  "bukhari:142": {
-    "arabic": "حَدَّثَنَا آدَمُ، قَالَ حَدَّثَنَا شُعْبَةُ، عَنْ عَبْدِ الْعَزِيزِ بْنِ صُهَيْبٍ، قَالَ سَمِعْتُ أَنَسًا، يَقُولُ كَانَ النَّبِيُّ صلى الله عليه وسلم إِذَا دَخَلَ الْخَلاَءَ قَالَ ‏ \"‏ اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْخُبُثِ وَالْخَبَائِثِ ‏\"‏‏.‏ تَابَعَهُ ابْنُ عَرْعَرَةَ عَنْ شُعْبَةَ‏.‏ وَقَالَ غُنْدَرٌ عَنْ شُعْبَةَ إِذَا أَتَى الْخَلاَءَ‏.‏ وَقَالَ مُوسَى عَنْ حَمَّادٍ إِذَا دَخَلَ‏.‏ وَقَالَ سَعِيدُ بْنُ زَيْدٍ حَدَّثَنَا عَبْدُ الْعَزِيزِ إِذَا أَرَادَ أَنْ يَدْخُلَ‏.‏",
-    "translation": "Narrated Anas:Whenever the Prophet (ﷺ) went to answer the call of nature, he used to say, \"Allah-umma inni a`udhu bika minal khubuthi wal khaba'ith i.e. O Allah, I seek Refuge with You from all offensive and wicked things (evil deeds and evil spirits)",
-    "arabicFrom": "fawazahmed0/hadith-api",
-    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
-  },
-  "abu-dawud:30": {
-    "arabic": "حَدَّثَنَا عَمْرُو بْنُ مُحَمَّدٍ النَّاقِدُ، حَدَّثَنَا هَاشِمُ بْنُ الْقَاسِمِ، حَدَّثَنَا إِسْرَائِيلُ، عَنْ يُوسُفَ بْنِ أَبِي بُرْدَةَ، عَنْ أَبِيهِ، حَدَّثَتْنِي عَائِشَةُ، رضى الله عنها أَنَّ النَّبِيَّ صلى الله عليه وسلم كَانَ إِذَا خَرَجَ مِنَ الْغَائِطِ قَالَ ‏ \"‏ غُفْرَانَكَ ‏\"‏ ‏.‏",
-    "translation": "Narrated Aisha, Ummul Mu'minin: When the Prophet (ﷺ) came out of the privy, he used to say: \"Grant me Thy forgiveness",
-    "grade": "Sahih (Al-Albani) · Sahih (Muhammad Muhyi Al-Din Abdul Hamid) · Isnaad Sahih (Zubair Ali Zai)",
-    "arabicFrom": "fawazahmed0/hadith-api",
-    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
-  },
-  "tirmidhi:1858": {
-    "arabic": "قَالَ رَسُولُ اللَّهِ ﷺ إِذَا أَكَلَ أَحَدُكُمْ طَعَامًا فَلْيَقُلْ بِسْمِ اللَّهِ فَإِنْ نَسِيَ فِي أَوَّلِهِ فَلْيَقُلْ بِسْمِ اللَّهِ فِي أَوَّلِهِ وَآخِرِهِ",
-    "translation": "From 'Aishah that the Messenger of Allah ﷺ said: \"When one of you eats food, then let him say: 'Bismillah.' If he forgets in the beginning, then let him say: 'Bismillah Fi Awwalihi Wa Akhirih (In the Name of Allah in its beginning and its end.)\"",
-    "grade": "Sound (ʿAli Zaʾī)",
-    "arabicFrom": "hadithunlocked.com",
-    "translationFrom": "hadithunlocked.com"
-  },
-  "tirmidhi:3458": {
-    "arabic": "حَدَّثَنَا مُحَمَّدُ بْنُ إِسْمَاعِيلَ، حَدَّثَنَا عَبْدُ اللَّهِ بْنُ يَزِيدَ الْمُقْرِئُ، حَدَّثَنَا سَعِيدُ بْنُ أَبِي أَيُّوبَ، حَدَّثَنِي أَبُو مَرْحُومٍ، عَنْ سَهْلِ بْنِ مُعَاذِ بْنِ أَنَسٍ، عَنْ أَبِيهِ، قَالَ قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏ \"‏ مَنْ أَكَلَ طَعَامًا فَقَالَ الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنِي هَذَا وَرَزَقَنِيهِ مِنْ غَيْرِ حَوْلٍ مِنِّي وَلاَ قُوَّةٍ ‏.‏ غُفِرَ لَهُ مَا تَقَدَّمَ مِنْ ذَنْبِهِ ‏\"‏ ‏.‏ قَالَ هَذَا حَدِيثٌ حَسَنٌ غَرِيبٌ وَأَبُو مَرْحُومٍ اسْمُهُ عَبْدُ الرَّحِيمِ بْنُ مَيْمُونٍ ‏.‏",
-    "translation": "Sahl bin Mu`adh bin Anas narrated from his father that:The Messenger of Allah (ﷺ) said: “Whoever eats food and then says: ‘All praise is due to Allah who fed me this and granted it as provision to me, without any effort from me nor power, (Al-ḥamdulillāh, alladhī aṭ`amanī hādha wa razaqanīhi min ghairi ḥawlin minnī, wa lā quwwatin)’ his past sins shall be forgiven.”",
-    "grade": "Hasan (Ahmad Muhammad Shakir) · Hasan (Al-Albani) · Hasan (Bashar Awad Maarouf) · Isnaad Hasan (Zubair Ali Zai)",
-    "arabicFrom": "fawazahmed0/hadith-api",
-    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
-  },
-  "ibn-majah:3285": {
-    "arabic": "عَنْ سَهْلِ بْنِ مُعَاذِ بْنِ أَنَسٍ عَنْ أَبِيهِ قَالَ: قَالَ رَسُولُ اللهِ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ: «مَنْ أَكَلَ طَعَامًا فَقَالَ: الحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنِي هَذَا وَرَزَقَنِيهِ مِنْ غَيْرِ حَوْلٍ مِنِّي وَلاَ قُوَّةٍ، غُفِرَ لَهُ مَا تَقَدَّمَ مِنْ ذَنْبِهِ».",
-    "translation": "Sahl ibn Mu‘ādh ibn Anas related from his father that the Messenger of Allah (may Allah's peace and blessings be upon him) said: \"Whoever eats food and says 'Alhamdulillah al-ladhi at‘amani hadha wa razaqneih min ghayri hawl li wala quwwah (Praise be to Allah who fed me and provided me with this food through no might or power on my part)', his past sins will be forgiven.\"",
-    "attribution": "Narrated by Abu Dāwūd, At-Tirmidhi, Ibn Mājah, and Ahmad",
-    "grade": "Hasan (Al-Albani) · Hasan (Muhammad Fouad Abd al-Baqi) · Hasan (Shuaib Al Arnaut) · Isnaad Hasan (Zubair Ali Zai)",
-    "arabicFrom": "HadeethEnc.com",
-    "translationFrom": "HadeethEnc.com"
-  },
-  "abu-dawud:3850": {
-    "arabic": "حَدَّثَنَا مُحَمَّدُ بْنُ الْعَلاَءِ، حَدَّثَنَا وَكِيعٌ، عَنْ سُفْيَانَ، عَنْ أَبِي هَاشِمٍ الْوَاسِطِيِّ، عَنْ إِسْمَاعِيلَ بْنِ رَبَاحٍ، عَنْ أَبِيهِ، أَوْ غَيْرِهِ عَنْ أَبِي سَعِيدٍ الْخُدْرِيِّ، أَنَّ النَّبِيَّ صلى الله عليه وسلم كَانَ إِذَا فَرَغَ مِنْ طَعَامِهِ قَالَ ‏ \"‏ الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنَا وَسَقَانَا وَجَعَلَنَا مُسْلِمِينَ ‏\"‏ ‏.‏",
-    "translation": "Narrated AbuSa'id al-Khudri: When the Messenger of Allah (ﷺ) finished his food, he said: \"Praise be to Allah Who has given us food and drink and made us Muslims",
-    "grade": "Daif (Al-Albani) · Daif (Muhammad Muhyi Al-Din Abdul Hamid) · Daif (Shuaib Al Arnaut) · Daif (Zubair Ali Zai)",
-    "arabicFrom": "fawazahmed0/hadith-api",
-    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
-  },
-  "tirmidhi:3457": {
-    "arabic": "حَدَّثَنَا أَبُو سَعِيدٍ الأَشَجُّ، حَدَّثَنَا حَفْصُ بْنُ غِيَاثٍ، وَأَبُو خَالِدٍ الأَحْمَرُ عَنْ حَجَّاجِ بْنِ أَرْطَاةَ، عَنْ رِيَاحِ بْنِ عَبِيدَةَ، قَالَ حَفْصٌ عَنِ ابْنِ أَخِي أَبِي سَعِيدٍ، وَقَالَ أَبُو خَالِدٍ، عَنْ مَوْلًى، لأَبِي سَعِيدٍ عَنْ أَبِي سَعِيدٍ، رضى الله عنه قَالَ كَانَ النَّبِيُّ صلى الله عليه وسلم إِذَا أَكَلَ أَوْ شَرِبَ قَالَ ‏ \"‏ الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنَا وَسَقَانَا وَجَعَلَنَا مُسْلِمِينَ ‏\"‏ ‏.‏",
-    "translation": "Abu Sa`eed [may Allah be pleased with him] narrated that:When the Prophet (ﷺ) used to eat or drink, he would say: “All praise is due to Allah who fed us and gave us drink, and made us Muslims (Al-ḥamdulillāh, alladhī aṭ`amanā, wa saqānā, wa ja`alanā muslimīn).”",
-    "grade": "Daif (Ahmad Muhammad Shakir) · Daif (Al-Albani) · Daif (Zubair Ali Zai)",
-    "arabicFrom": "fawazahmed0/hadith-api",
-    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
-  },
-  "ibn-majah:3283": {
-    "arabic": "حَدَّثَنَا أَبُو بَكْرِ بْنُ أَبِي شَيْبَةَ، حَدَّثَنَا أَبُو خَالِدٍ الأَحْمَرُ، عَنْ حَجَّاجٍ، عَنْ رِيَاحِ بْنِ عَبِيدَةَ، عَنْ مَوْلًى، لأَبِي سَعِيدٍ عَنْ أَبِي سَعِيدٍ، قَالَ كَانَ النَّبِيُّ ـ صلى الله عليه وسلم ـ إِذَا أَكَلَ طَعَامًا قَالَ ‏ \"‏ الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنَا وَسَقَانَا وَجَعَلَنَا مُسْلِمِينَ ‏\"‏ ‏.‏",
-    "translation": "It was narrated that Abu Sa’eed said:“Whenever the Prophet (ﷺ) ate, he would say: Al-hamdu lillahil-ladhi at’amana wa saqana wa ja’alana Muslimin (Praise is to Allah Who has fed us, given us to drink, and made us Muslims).”",
-    "grade": "Daif (Al-Albani) · Daif (Muhammad Fouad Abd al-Baqi) · Daif (Shuaib Al Arnaut) · Daif (Zubair Ali Zai)",
-    "arabicFrom": "fawazahmed0/hadith-api",
-    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
-  },
-  "muslim:1342": {
-    "arabic": "عن عبد الله بن عمر رضي الله عنهما أن رسول الله صلى الله عليه وسلم كان إذا استَوَى على بَعِيره خارجًا إلى سَفَر، كَبَّرَ ثلاثا، ثم قال: «سبحان الذي سخَّر لنا هذا وما كُنَّا له مُقْرِنِينَ وإنَّا إلى ربِّنا لـمُنْقَلِبُون، اللهم إنَّا نَسْأَلُك في سفرنا هذا البِرَّ والتَّقْوَى، ومن العمل ما تَرْضَى، اللهم هَوِّنْ علينا سفرنا هذا واطْوِ عنا بُعْدَه، اللهم أنت الصاحب في السفر، والخليفة في الأهل، اللهم إني أعوذ بك مِن وَعْثَاء السفر، وكآبة الـمَنْظر، وسوء الـمُنْقَلَب في المال والأهل والولد». وإذا رجع قالهن. وزاد فيهن «آيبون تائبون عابدون لِربنا حامدون». \nوفي رواية: كان النبي صلى الله عليه وسلم إذا قَفَل من الحج أو العمرة، كلما أَوْفَى على ثَنِيَّة أو فَدْفَدٍ كَبَّرَ ثلاثا، ثم قال: «لا إله إلا الله وحده لا شريك له، له الملك وله الحمد، وهو على كل شيء قدير، آيِبون، تائبون، عابدون، ساجدون، لربنا حامدون، صدَق الله وَعْدَه، ونصَر عَبْدَه، وهزَم الأحزابَ وحده». وفي لفظ: إذا قَفَل من الجيوش أو السَّرايا أو الحج أو العمرة.",
-    "translation": "‘Abdullāh ibn ‘Umar (may Allah be pleased with him) reported: Whenever the Messenger of Allah (may Allah's peace and blessings be upon him) mounted his camel while setting out on a journey, he would say Takbīr three times and then say: \"Glory be to the One who subdued this (ride) for us and we were not ourselves powerful enough to use it as a ride, and to our Lord we shall, indeed, return. O Allah, we ask You during this journey of ours for righteousness, piety, and such deeds that are pleasing to You. O Allah, make easy for us this journey of ours and make the distance short for us. O Allah, You are the Companion during the journey and the Guardian of the family and the property in our absence. O Allah, I seek refuge in You from the hardships of traveling, unhappiness connected with ghastly scenes, and the evil turns in property and family.\" On returning, he would recite this supplication, while adding these words: \"We are those who return; those who repent; those who worship; and those who praise our Lord.\"\nIn another narration: “Whenever the Prophet (may Allah's peace and blessings be upon him) returned from Hajj or ‘Umrah and ascended a height or hill, he would say Takbīr three times and say: there is no god but Allah, who has no partner; to Him belongs the sovereignty and due to Him is all praise; and He is omnipotent over all things. We are those who return; those who repent; those who worship; those who prostrate; and those who praise our Lord. Allah has fulfilled His promise, granted His slave victory, and vanquished the confederates alone.\"\nIn a different wording: “Whenever he returned from battles, Hajj or ‘Umrah.”",
-    "attribution": "Narrated by Muslim",
-    "grade": "Authentic hadith",
-    "arabicFrom": "HadeethEnc.com",
-    "translationFrom": "HadeethEnc.com"
   },
   "muslim:728": {
     "arabic": "حَدَّثَنَا مُحَمَّدُ بْنُ عَبْدِ اللَّهِ بْنِ نُمَيْرٍ، حَدَّثَنَا أَبُو خَالِدٍ، - يَعْنِي سُلَيْمَانَ بْنَ حَيَّانَ - عَنْ دَاوُدَ بْنِ أَبِي هِنْدٍ، عَنِ النُّعْمَانِ بْنِ سَالِمٍ، عَنْ عَمْرِو بْنِ أَوْسٍ، قَالَ حَدَّثَنِي عَنْبَسَةُ بْنُ أَبِي سُفْيَانَ، فِي مَرَضِهِ الَّذِي مَاتَ فِيهِ بِحَدِيثٍ يُتَسَارُّ إِلَيْهِ قَالَ سَمِعْتُ أُمَّ حَبِيبَةَ تَقُولُ سَمِعْتُ رَسُولَ اللَّهِ صلى الله عليه وسلم يَقُولُ ‏ \"‏ مَنْ صَلَّى اثْنَتَىْ عَشْرَةَ رَكْعَةً فِي يَوْمٍ وَلَيْلَةٍ بُنِيَ لَهُ بِهِنَّ بَيْتٌ فِي الْجَنَّةِ ‏\"‏ ‏.‏ قَالَتْ أُمُّ حَبِيبَةَ فَمَا تَرَكْتُهُنَّ مُنْذُ سَمِعْتُهُنَّ مِنْ رَسُولِ اللَّهِ صلى الله عليه وسلم ‏.‏ وَقَالَ عَنْبَسَةُ فَمَا تَرَكْتُهُنَّ مُنْذُ سَمِعْتُهُنَّ مِنْ أُمِّ حَبِيبَةَ ‏.‏ وَقَالَ عَمْرُو بْنُ أَوْسٍ مَا تَرَكْتُهُنَّ مُنْذُ سَمِعْتُهُنَّ مِنْ عَنْبَسَةَ ‏.‏ وَقَالَ النُّعْمَانُ بْنُ سَالِمٍ مَا تَرَكْتُهُنَّ مُنْذُ سَمِعْتُهُنَّ مِنْ عَمْرِو بْنِ أَوْسٍ ‏.‏",

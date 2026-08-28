@@ -1,3 +1,4 @@
+import { ADHAN } from './adhan';
 import { AL_FATIHAH } from './al-fatihah';
 import { BEFORE_PRAYER } from './before-prayer';
 import { CLOTHING } from './clothing';
@@ -5,11 +6,14 @@ import { DUA_AND_DHIKR } from './dua-and-dhikr';
 import { FAMILY } from './family';
 import { FOOD } from './food';
 import { HALAL_AND_HARAM } from './halal-and-haram';
+import { LIFE_BEFORE } from './life-before';
+import { MINIMUM_PRAYER } from './minimum-prayer';
 import { ISLAMIC_CALENDAR } from './islamic-calendar';
 import { MANNERS } from './manners';
 import { PATIENCE_AND_GRATITUDE } from './patience-and-gratitude';
 import { RAMADAN } from './ramadan';
 import { REPENTANCE } from './repentance';
+import { RULINGS } from './rulings';
 import { SUNNAH } from './sunnah';
 import { WHAT_BREAKS_PRAYER } from './what-breaks-prayer';
 import { WHAT_IS_ISLAM } from './what-is-islam';
@@ -18,6 +22,7 @@ import { WHO_IS_ALLAH } from './who-is-allah';
 import { WHO_IS_MUHAMMAD } from './who-is-muhammad';
 import { ISTIKHARA, QIYAM_AL_LAYL, TAHAJJUD, TAWBA_PRAYER, WITR } from './voluntary-prayers';
 import { WORK } from './work';
+import { YOUR_NAME } from './your-name';
 import { ref, type ContentRef } from '../model';
 import type { Reference } from '../types';
 
@@ -46,6 +51,12 @@ import type { Reference } from '../types';
  */
 export const LEARN_TOPICS: Reference[] = [
   WHAT_IS_ISLAM,
+  /* Phase 9, 28 Aug 2026 — the five tier-one gaps. */
+  LIFE_BEFORE,
+  YOUR_NAME,
+  MINIMUM_PRAYER,
+  ADHAN,
+  RULINGS,
   WHO_IS_ALLAH,
   WHO_IS_MUHAMMAD,
   WHAT_IS_THE_QURAN,
@@ -134,7 +145,9 @@ export const TOPIC_GROUPS: readonly { id: TopicGroupId; topics: readonly Content
       // or as Fajr standing in for all of them — see `src/app/pray.tsx`. The
       // Learn tab renders that entry itself; it is not a `ContentRef` because
       // it is a screen rather than a piece of content.
+      ref('reference', 'minimum-prayer'),
       ref('reference', 'al-fatihah'),
+      ref('reference', 'adhan'),
       ref('reference', 'what-breaks-prayer'),
       ref('reference', 'dua-and-dhikr'),
     ],
@@ -143,6 +156,9 @@ export const TOPIC_GROUPS: readonly { id: TopicGroupId; topics: readonly Content
     id: 'believe',
     topics: [
       ref('reference', 'what-is-islam'),
+      ref('reference', 'life-before'),
+      ref('reference', 'your-name'),
+      ref('reference', 'rulings'),
       ref('reference', 'who-is-allah'),
       ref('reference', 'who-is-muhammad'),
       ref('reference', 'what-is-the-quran'),

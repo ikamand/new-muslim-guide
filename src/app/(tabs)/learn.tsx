@@ -84,6 +84,11 @@ const TOPIC_GLYPH: Record<string, GlyphName> = {
   ramadan: 'ramadan',
   'islamic-calendar': 'islamic-calendar',
   'quranic-names': 'names',
+  'minimum-prayer': 'minimum-prayer',
+  adhan: 'adhan',
+  rulings: 'rulings',
+  'your-name': 'your-name',
+  'life-before': 'life-before',
 };
 
 function LearnCard({

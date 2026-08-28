@@ -808,7 +808,12 @@ export type GlyphName =
   | 'patience-and-gratitude'
   | 'ramadan'
   | 'islamic-calendar'
-  | 'names';
+  | 'names'
+  | 'minimum-prayer'
+  | 'adhan'
+  | 'rulings'
+  | 'your-name'
+  | 'life-before';
 
 /**
  * The card marks.
@@ -1015,6 +1020,52 @@ export function Glyph({ name, color, size = 22 }: { name: GlyphName; color: stri
         rather than a decorative rosette, and it stays non-figurative like
         everything else on this tab.
       */}
+      {/* The least you can do: one arch of the mihrab, not the full set. */}
+      {name === 'minimum-prayer' && (
+        <G {...stroke}>
+          <Path d="M8 20v-8a4 4 0 0 1 8 0v8" />
+          <Path d="M5 20h14" />
+        </G>
+      )}
+
+      {/* The call: a source, and two arcs going out from it. */}
+      {name === 'adhan' && (
+        <G {...stroke}>
+          <Path d="M9 20V4" />
+          <Path d="M13 8a5 5 0 0 1 0 8" />
+          <Path d="M16 5.5a9 9 0 0 1 0 13" />
+        </G>
+      )}
+
+      {/* Five categories: five marks, the middle one longest, because most of
+          ordinary life sits in the middle one. */}
+      {name === 'rulings' && (
+        <G {...stroke}>
+          <Path d="M4 8h5" />
+          <Path d="M4 12h16" />
+          <Path d="M4 16h5" />
+          <Path d="M15 8h5" />
+          <Path d="M15 16h5" />
+        </G>
+      )}
+
+      {/* A name: a tag, kept. */}
+      {name === 'your-name' && (
+        <G {...stroke}>
+          <Path d="M4 10.5 11 4h9v9l-6.5 6.5a2 2 0 0 1-2.8 0L4 13.3a2 2 0 0 1 0-2.8Z" />
+          <Circle cx={16} cy={8} r={1.2} />
+        </G>
+      )}
+
+      {/* What came before: a line that stops, and an open one after it. */}
+      {name === 'life-before' && (
+        <G {...stroke}>
+          <Path d="M4 16h6" />
+          <Path d="M14 8h6" />
+          <Path d="M10 16 14 8" />
+        </G>
+      )}
+
       {name === 'names' && (
         <G {...stroke}>
           <Circle cx={12} cy={12} r={3.5} />

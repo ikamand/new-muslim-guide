@@ -4,23 +4,21 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { AskBar } from '@/components/ask-bar';
 import { DailyCollectionCard } from '@/components/daily-collection-card';
+import { AdhkarSessionCard, useLiveSession } from '@/components/adhkar-session-card';
 import { DuaCard } from '@/components/dua-card';
-import { ProgressRing } from '@/components/illustrations';
 import { PrayerTimesCard } from '@/components/prayer-times-card';
 import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
-import { hasPracticeBeyondSurahs, PRAYERS, WUDU, type Guide } from '@/content';
+import { PRAYERS, WUDU, type Guide } from '@/content';
 import { BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useHelpTopics } from '@/hooks/use-help';
 import { useHijriToday } from '@/hooks/use-hijri';
-import { useJourney } from '@/hooks/use-journey';
 import { useLocale } from '@/hooks/use-locale';
 import { usePrayerTimes } from '@/hooks/use-prayer-times';
 import { useTheme } from '@/hooks/use-theme';
 import { useToday, type TodayItem } from '@/hooks/use-today';
 import { localiseGuide } from '@/i18n/localise';
 import type { UIKey } from '@/i18n/ui';
-import { routeFor } from '@/lib/content-routes';
 
 /**
  * Today.
@@ -40,6 +38,15 @@ import { routeFor } from '@/lib/content-routes';
  * washing, the other five under when something goes wrong — which is where
  * someone looks for them, and which costs the home screen two sections rather
  * than adding four.
+ *
+ * ## The permanent journey card is gone
+ *
+ * It sat above the prayer times every day of the year, whether or not there
+ * was anything to continue, and it failed the one test this screen is built
+ * on: it had no deadline. The lesson is still reachable from here — it is the
+ * LAST candidate in `use-today.ts`, shown when nothing with a deadline is
+ * competing — and "6 of 36" as a permanent fixture is gone with it. The
+ * chapter someone is in belongs on Learn, which is where it now lives.
  *
  * Nothing here counts days, keeps a streak, or notices an absence. Someone
  * three weeks into Islam does not need an app that is disappointed in them.
@@ -136,123 +143,12 @@ function Header() {
   );
 }
 
-/**
- * Where they were, or where to begin.
- *
- * One card with three states and no fourth. It never invents progress after the
- * end: once every lesson is done it stops asking to be continued and offers the
- * two things that are worth repeating for years instead.
- */
-function JourneyCard() {
-  const theme = useTheme();
-  const { t } = useLocale();
-  const { next, nextStageIndex, stages, done, total, fresh } = useJourney();
-
-  if (!next) return <JourneyDoneCard />;
-
-  const label = next.labelKey ? t(next.labelKey as UIKey) : next.entry.title;
-  const stage = stages[nextStageIndex];
-  const minutes = next.entry.meta?.estimatedMinutes;
-  const kicker = fresh ? t('home.start') : t('home.continue');
-  const progress = t('journey.progress')
-    .replace('{done}', String(done))
-    .replace('{total}', String(total));
-
-  return (
-    <PressableLink
-      href={routeFor(next.entry)}
-      accessibilityLabel={fresh ? `${kicker}: ${label}` : `${kicker}: ${label}. ${progress}`}
-      style={[styles.journey, { backgroundColor: theme.background, borderColor: theme.border }]}
-      pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
-      {/*
-        The ring replaces a bar under the text. It carries the count inside it,
-        which answers "six of what" in the same glance — and it is hidden on a
-        first run, because "0 of 36" is a true statement and a discouraging one
-        with nothing yet to be reminded of.
-      */}
-      {!fresh && (
-        <ProgressRing done={done} total={total} color={theme.accent} trackColor={theme.border}>
-          <ThemedText type="caption" themeColor="accent">
-            {done}
-          </ThemedText>
-        </ProgressRing>
-      )}
-
-      <View style={styles.journeyText}>
-        <ThemedText type="caption" themeColor="textSecondary" style={styles.kicker}>
-          {kicker} · {t('journey.stageOf')
-            .replace('{n}', String(nextStageIndex + 1))
-            .replace('{total}', String(stages.length))}
-        </ThemedText>
-        <ThemedText type="cardTitle">
-          {label}
-        </ThemedText>
-        <ThemedText type="small" themeColor="textSecondary">
-          {t(`journey.stage.${stage.id}` as UIKey)}
-          {minutes ? ` · ${minutes} ${t('count.minutes')}` : ''}
-        </ThemedText>
-      </View>
-      <Ionicons name="arrow-forward" size={20} color={theme.accent} />
-    </PressableLink>
-  );
-}
-
-/** What a finished journey becomes: two things that never finish. */
-function JourneyDoneCard() {
-  const theme = useTheme();
-  const { t } = useLocale();
-
-  /*
-    Practice drops out while Al-Fatiha is its only recorded content — the
-    Qur'an tab does those seven ayahs better in every respect, and offering
-    both here sends somebody to the worse of two doors. It comes back on its
-    own. See `hasPracticeBeyondSurahs`.
-  */
-  const onwards: { href: '/practice' | '/duas'; label: UIKey }[] = [
-    ...(hasPracticeBeyondSurahs()
-      ? [{ href: '/practice' as const, label: 'learn.practice.title' as UIKey }]
-      : []),
-    { href: '/duas', label: 'learn.duas.title' },
-  ];
-
-  return (
-    <View
-      style={[styles.journey, { backgroundColor: theme.accentMuted, borderColor: theme.accent }]}>
-      <View style={styles.journeyText}>
-        <ThemedText type="small" themeColor="accent" style={styles.kicker}>
-          {t('journey.finished')}
-        </ThemedText>
-        <ThemedText type="cardTitle">
-          {t('home.journeyDone')}
-        </ThemedText>
-        <ThemedText type="small" themeColor="textSecondary">
-          {t('home.journeyDone.help')}
-        </ThemedText>
-        <View style={styles.onwards}>
-          {onwards.map((entry) => (
-            <PressableLink
-              key={entry.href}
-              href={entry.href}
-              accessibilityLabel={t(entry.label)}
-              style={[styles.onwardsLink, { borderColor: theme.accent }]}
-              pressedStyle={{ opacity: 0.6 }}>
-              <ThemedText type="smallBold" themeColor="accent">
-                {t(entry.label)}
-              </ThemedText>
-            </PressableLink>
-          ))}
-        </View>
-      </View>
-    </View>
-  );
-}
-
 /** One row of Today, with the reason it is there said in a word. */
 function TodayRow({ item }: { item: TodayItem }) {
   const theme = useTheme();
   const { t } = useLocale();
 
-  const reason = t(`season.${item.season}` as UIKey);
+  const reason = t(item.reason);
 
   return (
     <PressableLink
@@ -334,11 +230,25 @@ function HelpSection() {
   );
 }
 
+/**
+ * The words for right now: the open adhkār sitting, or a duʿa.
+ *
+ * One slot rather than two cards stacked. Both are "words to say" and showing
+ * both at once made Today read as a list of everything rather than an answer
+ * to what to do next — and the sitting is the one with a deadline, so when
+ * there is one it wins.
+ */
+function WordsSlot() {
+  const live = useLiveSession();
+  if (live) return <AdhkarSessionCard session={live.session} state={live.state} />;
+  return <DuaCard />;
+}
+
 export default function TodayScreen() {
   const theme = useTheme();
   const { next } = usePrayerTimes();
   const { locale } = useLocale();
-  const items = useToday();
+  const item = useToday();
 
   const nextPrayer = next ? PRAYERS.find((prayer) => prayer.id === next.id) : undefined;
   const wudu = localiseGuide(WUDU, locale);
@@ -356,20 +266,27 @@ export default function TodayScreen() {
           }
         />
 
-        <JourneyCard />
+        {/*
+          One words slot, not two cards.
 
-        <DuaCard />
+          The adhkār sitting when the clock is inside one, the duʿa card
+          otherwise. `lib/adhkar-window.ts` has computed the live sitting from
+          real prayer times all along and rendered it only on the Duʿa tab —
+          so the morning adhkār, seven minutes somebody says every day of their
+          life, was the one daily thing Today never mentioned.
+        */}
+        <WordsSlot />
 
         <DailyCollectionCard />
 
         {/*
-          Nothing most of the year. A season is the only thing left here — it
-          is the one row that answers Today's question rather than Learn's, and
-          it earns no heading of its own because it is one card.
+          One thing worth today, chosen by a single ranked function, and
+          nothing at all when there is nothing. The permanent journey card that
+          used to sit above the prayer times is gone: it had no deadline, which
+          is the whole test this screen is built on, and it is now the last
+          candidate here rather than a fixture.
         */}
-        {items.map((item) => (
-          <TodayRow key={item.key} item={item} />
-        ))}
+        {item ? <TodayRow item={item} /> : null}
 
         <HelpSection />
       </ScrollView>

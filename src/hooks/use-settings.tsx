@@ -7,6 +7,7 @@ import {
   type UserStage,
 } from '@/lib/onboarding';
 import { DEFAULT_REMINDERS, LEAD_CHOICES, type ReminderSettings } from '@/lib/reminders';
+import type { HomePlace } from '@/lib/home-place';
 import { PRAYER_IDS } from '@/lib/prayer-times';
 import { DEFAULT_RECITER, isReciterId, type ReciterId } from '@/content/quran/recitation';
 import { createContext, use, useCallback, useEffect, useMemo, useState, type ReactNode } from 'react';
@@ -64,6 +65,18 @@ export type Settings = {
    * lesson added later cannot retroactively change what someone has finished.
    */
   completedLessons: readonly string[];
+  /**
+   * Where this person usually is, and when they last left it.
+   *
+   * A place remembered, not just coordinates held for a calculation — a new
+   * fact about the user, and the reason `home-place.ts` opens by saying so. It
+   * never leaves the device; there is no server to send it to. It exists so
+   * Today can offer the travelling page to somebody who has plainly gone
+   * somewhere, and it never asserts a ruling about shortening prayers.
+   */
+  home: HomePlace | null;
+  /** When the current run of being far from home began. Null when near home. */
+  awaySince: number | null;
   /** Which prayers to be reminded of, and how long before. All off by default. */
   reminders: ReminderSettings;
   /**
@@ -108,12 +121,27 @@ const DEFAULTS: Settings = {
   userStage: null,
   initialInterest: null,
   completedLessons: [],
+  home: null,
+  awaySince: null,
   reminders: DEFAULT_REMINDERS,
   reciter: DEFAULT_RECITER,
   pinnedDuas: [],
 };
 
 /** Unchanged from when this held only display settings, so nobody's choices reset. */
+function isHomePlace(value: unknown): value is HomePlace {
+  if (value === null || typeof value !== 'object') return false;
+  const place = value as Record<string, unknown>;
+  return (
+    typeof place.latitude === 'number' &&
+    Number.isFinite(place.latitude) &&
+    typeof place.longitude === 'number' &&
+    Number.isFinite(place.longitude) &&
+    typeof place.since === 'number' &&
+    Number.isFinite(place.since)
+  );
+}
+
 const STORAGE_KEY = 'display-settings';
 
 /**
@@ -153,6 +181,18 @@ function parseStored(raw: string | null): Settings {
       userStage: isUserStage(stored.userStage) ? stored.userStage : null,
       initialInterest: isInitialInterest(stored.initialInterest)
         ? stored.initialInterest
+        : null,
+      /*
+        Narrowed like everything else here, and it matters more than most: a
+        malformed home would be compared against a real fix and could say
+        somebody is travelling in their own kitchen. Anything that is not two
+        finite numbers and a timestamp reads as "no home recorded", which the
+        app handles — it simply never offers the travelling page until the next
+        fix sets one.
+      */
+      home: isHomePlace(stored.home) ? stored.home : null,
+      awaySince: typeof stored.awaySince === 'number' && Number.isFinite(stored.awaySince)
+        ? stored.awaySince
         : null,
       // Filtered rather than trusted: a malformed entry would otherwise mark a
       // lesson complete that does not exist, and the total would never add up.

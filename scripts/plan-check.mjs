@@ -94,11 +94,17 @@ const CLAIMS = [
   ['src/hooks/use-settings.tsx', 66, 'completedLessons: readonly string[]'],
   ['src/app/guide/[id].tsx', 125, 'toggleLesson(key)'],
   ['src/app/journey/[stage].tsx', 61, 'toggleLesson(step.key)'],
-  ['src/app/(tabs)/index.tsx', 43, 'keeps a streak'],
-  ['src/app/(tabs)/index.tsx', 102, 'Friday is the one that matters'],
+  ['src/app/(tabs)/index.tsx', 51, 'keeps a streak'],
+  /*
+    Moved into `prayer-times-card.tsx` in spirit: Phase 4 found that the card
+    already says "It is Friday" through `JumuahNote`, so `use-today.ts` does
+    NOT carry a Friday candidate. The line still exists here and is still what
+    the documents cite.
+  */
+  ['src/app/(tabs)/index.tsx', 110, 'Friday is the one that matters'],
   ['src/app/ask.tsx', 29, 'I farted'],
   ['src/content/model.ts', 182, 'export type ScholarlyPosition'],
-  ['src/i18n/ui.ts', 273, 'quran.tapToHide'],
+  ['src/i18n/ui.ts', 287, 'quran.tapToHide'],
   ['src/content/references.ts', 522, 'Friday midday is the busiest hour'],
   ['src/content/references.ts', 565, 'join the line where you are'],
   ['src/content/learn/halal-and-haram.ts', 38, 'Do I need permission for ordinary things?'],
@@ -232,7 +238,8 @@ const kindFiles = execSync(
   { cwd: root, encoding: 'utf8' },
 ).trim();
 /* 9 → 11: `learn/index.ts` and the names collection both name `collection`. */
-measure('files naming a ContentKind value', Number(kindFiles), 11);
+/* 11 → 12: `use-today.ts` now resolves refs by kind for its candidates. */
+measure('files naming a ContentKind value', Number(kindFiles), 12);
 
 /*
   No component may branch on WHICH collection it is rendering.

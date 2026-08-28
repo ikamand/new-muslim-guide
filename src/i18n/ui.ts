@@ -91,6 +91,18 @@ export const EN = {
   'season.before-ramadan': 'Ramadan is close',
   'season.dhul-hijjah': 'Dhul-Hijjah',
   'season.muharram': 'A new Islamic year',
+  /*
+    Why the one card on Today is there, in a few words.
+
+    Each is a reason, not a category: "It is Friday" and "You seem to be away
+    from home" tell a reader why the app is showing them this now. A card that
+    silently swaps its contents reads as random; the same card with a reason
+    on it reads as the app paying attention — and if the reason is wrong, it is
+    visibly wrong rather than quietly wrong.
+  */
+  'today.away': 'You seem to be away from home',
+  'today.lastThird': 'The last third of the night',
+  'today.continue': 'Carry on where you were',
 
   /**
    * The Islamic months.

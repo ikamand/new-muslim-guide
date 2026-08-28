@@ -164,7 +164,13 @@ measure('journey: total estimated minutes', journeyMinutes, 123);
 // The catalogue, excluding the duʿa book.
 const teaching = CATALOG.filter((e) => e.kind !== 'hisn');
 const teachingMinutes = teaching.reduce((n, e) => n + (e.meta?.estimatedMinutes ?? 0), 0);
-measure('catalogue: non-hisn entries', teaching.length, 69);
+/*
+  69 became 70 on 28 Aug 2026 when Phase 3 added the `quranic-names`
+  collection. The plan's "untouched throughout: every word of the 69 existing
+  teaching entries" is still true — none was edited or removed, one was added
+  beside them.
+*/
+measure('catalogue: non-hisn entries', teaching.length, 70);
 measure('catalogue: total estimated minutes', teachingMinutes, 186);
 measure('catalogue: hisn occasions', CATALOG.length - teaching.length, 132);
 

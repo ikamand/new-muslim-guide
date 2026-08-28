@@ -270,8 +270,34 @@ starts until both have been looked at, in both themes, at phone width.*
 *The first collection, chosen because it is short, low-risk, and fills a
 tier-three gap the research named. It exists to prove Phase 2 end to end.*
 
-- **Source: AlAdhan `asmaAlHusna`.** Free, no key, vowelled Arabic plus
-  transliteration plus English meaning; 99 records confirmed by calling it.
+- ~~**Source: AlAdhan `asmaAlHusna`.**~~ **Not used. Built 28 Aug 2026 from
+  QuranEnc instead, and the feature changed shape.** The enumeration question
+  below was answered by calling the sources, and the answer was worse than the
+  question assumed:
+  - The **statement** that Allah has ninety-nine names is authentic — Bukhari
+    2736, Bukhari 7392, Muslim 2677.
+  - An enumerated **list** appears in only two places, **Tirmidhi 3507** and
+    **Ibn Majah 3861**, and the two do not agree. Tirmidhi has al-Quddūs,
+    al-Ghaffār, al-Qahhār and al-Fattāḥ where Ibn Majah does not; Ibn Majah has
+    al-Qāhir, al-Qarīb, ar-Rabb and al-Mubīn where Tirmidhi does not.
+  - **Tirmidhi 3507 is graded Ḍaʿīf by all three graders** the corpus carries.
+  - **AlAdhan publishes the Tirmidhi list** — 97 of its 99 occur in Tirmidhi
+    3507 against 73 in Ibn Majah 3861. So the fallback below still shipped the
+    weak enumeration with the label filed off.
+  - Separately, AlAdhan's English is not publishable here: inconsistent
+    capitalisation, two renderings crammed into one field, a typo in #84
+    ("Soverign"), and it contradicts the four names `learn/who-is-allah.ts`
+    already gives in the app's own register.
+  - A mechanical rule — include a name if it occurs in the Qur'an — was tried
+    and fails: matching against all 6,236 ayahs returns al-Ḥaqq 181 times
+    because الحق usually means "the truth", and al-Muʾmin 120 times by catching
+    المؤمنون. Which occurrences NAME Allah is exegesis, not a rule a script can
+    hold.
+  **Iyad decided: Qur'anic names only.** The collection is 59:22–24, the
+  passage where the Qur'an enumerates them itself and closes "to Him belong the
+  best names" — 14 entries, every string from QuranEnc, each title Saheeh
+  International's rendering and each explanation their own footnote. No
+  transliteration, on the `hisn.ts` rule.
 - **Cadence `daily`: one name on Today, one screen for the set.** Reading one a
   day is a three-month practice, which is the kind of long-tail content the app
   has none of.
@@ -285,6 +311,10 @@ tier-three gap the research named. It exists to prove Phase 2 end to end.*
 
 **Done when** the set renders, one name appears on Today, and either the
 reviewer has cleared the enumeration or the screen makes no canonical claim.
+**Done 28 Aug 2026**, on the second limb: the screen claims only what the
+Qur'an says, and both screens were looked at on a 393pt phone in both themes.
+Still for the reviewer: whether presenting these fourteen, framed this way, is
+right — and `docs/scholarly-review.md` is where that sits.
 **Ships via** OTA. **Then stop.**
 
 ### Phase 4 — Today and Learn

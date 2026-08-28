@@ -3,6 +3,7 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { AskBar } from '@/components/ask-bar';
+import { DailyCollectionCard } from '@/components/daily-collection-card';
 import { DuaCard } from '@/components/dua-card';
 import { ProgressRing } from '@/components/illustrations';
 import { PrayerTimesCard } from '@/components/prayer-times-card';
@@ -358,6 +359,8 @@ export default function TodayScreen() {
         <JourneyCard />
 
         <DuaCard />
+
+        <DailyCollectionCard />
 
         {/*
           Nothing most of the year. A season is the only thing left here — it

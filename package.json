@@ -72,7 +72,8 @@
     "adhkar:check": "node --import ./scripts/ts-resolve.mjs scripts/adhkar-window-check.mjs",
     "narration:check": "node --import ./scripts/ts-resolve.mjs scripts/narration-check.mjs",
     "plan:check": "node --import ./scripts/ts-resolve.mjs scripts/plan-check.mjs",
-    "verify:import": "node --import ./scripts/ts-resolve.mjs scripts/verify-import.mjs"
+    "verify:import": "node --import ./scripts/ts-resolve.mjs scripts/verify-import.mjs",
+    "collection:names": "node scripts/generate-names.mjs"
   },
   "private": true
 }

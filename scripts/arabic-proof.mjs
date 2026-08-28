@@ -23,6 +23,7 @@ const { PHRASES } = await load('src/content/phrases.ts');
 const { PILLARS } = await load('src/content/pillars.ts');
 const { IMAN_PILLARS } = await load('src/content/iman.ts');
 const { HISN, HISN_SOURCE } = await load('src/content/duas/hisn.ts');
+const { COLLECTIONS } = await load('src/content/collections/index.ts');
 
 const whenSaid = new Map();
 
@@ -105,6 +106,29 @@ for (const [label, list] of [['Pillar', PILLARS], ['Article of faith', IMAN_PILL
       english: p.summary,
       source: '',
       file: label === 'Pillar' ? 'pillars.ts' : 'iman.ts',
+    });
+  }
+}
+
+/*
+  Collections.
+
+  Driven off `COLLECTIONS` rather than named file by file, because this sheet
+  collects from a hand-written list and that is exactly how the duʿa book went
+  missing from it — for one commit it reported 54 Arabic strings while the app
+  displayed 372. A collection added tomorrow appears here without anyone
+  remembering this line exists.
+*/
+for (const collection of COLLECTIONS) {
+  for (const entry of collection.entries) {
+    if (!entry.arabic) continue;
+    rows.push({
+      where: `${collection.title} — ${entry.title}`,
+      arabic: entry.arabic,
+      translit: entry.transliteration ?? '',
+      english: entry.title,
+      source: (entry.sources ?? []).map(formatSource).join('; '),
+      file: `collections/${collection.id}.ts`,
     });
   }
 }

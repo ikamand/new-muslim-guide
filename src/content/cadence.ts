@@ -330,7 +330,10 @@ const HISN: Readonly<Record<number, Cadence>> = {
  * fails `content:audit` by name, which is how a new one is stopped from
  * shipping as a page nothing can place.
  */
-const COLLECTIONS: Readonly<Record<string, Cadence>> = {};
+const COLLECTIONS: Readonly<Record<string, Cadence>> = {
+  /* One name a day is a fortnight's practice, and then it comes round again. */
+  'quranic-names': 'daily',
+};
 
 /** Every cadence in the app, keyed as `kind:id`. */
 export const CADENCE: Readonly<Record<string, Cadence>> = {

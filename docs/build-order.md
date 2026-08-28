@@ -13,6 +13,11 @@ The two findings that drive everything:
 Nothing below is a rebuild. Two screens change, one field is added, one dead
 file is deleted, and new content lands beside the old.
 
+**Untouched throughout**, and the reason the app is worth expanding at all:
+`buildPrayer` and `PRAYER_SPECS`, offline prayer times and qibla, the Qur'an
+tab and juz 30, Hisn al-Muslim's 132 occasions, `lib/adhkar-window.ts`, the
+verification apparatus, and every word of the 69 existing teaching entries.
+
 ---
 
 ## At a glance
@@ -57,6 +62,9 @@ Nothing visible ships. Each one makes every later phase cheaper.
   Arabic alphabet; this is that lesson, in code
 - Normalises alef wasla, superscript alef, hamza-alef, Uthmani vs Imlaei
 - Excludes non-hadith authorities by rule, not by eye
+- Keeps **fitrahive/dua-dhikr** (MIT) as a cross-check rather than a feed: its
+  citations carry Muslim's sub-numbering — `Muslim No. 2723 (75)` — which is
+  exactly what disambiguates the 0/7 failure this gate has to catch
 - Exits non-zero. Nothing reaches `src/content/` without passing it
 - **Build this first and build nothing else until it works.** It is the asset;
   the APIs are interchangeable
@@ -117,6 +125,8 @@ repeated.
 - **Today:** one "worth today" slot, competed for by a single ranked function —
   a season, a First that just became available, the surah being learned, or a
   lesson. Never more than one. This retires the permanent journey card
+- Help chips stay until Ask can answer; the header, greeting and Ask bar are
+  unchanged
 - **Ships, then stop.** Both screens seen before Stage C begins
 
 ---
@@ -195,6 +205,9 @@ been written here in one go.
 - Skip the hadith-cited half: it duplicates Hisn, and every Sahih Muslim
   citation failed against the corpus (0/7, the two-numberings problem)
 - Exclude the Naqshbandi-sourced record by rule, not by eye
+- ⚠️ The API's `months` and `days` fields promise calendar binding and were
+  empty in all twenty records sampled. **Do not build the seasonal slot on
+  them**
 
 ### Phase 10 — Jumuʿah, then the tier-two set
 

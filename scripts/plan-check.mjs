@@ -185,17 +185,31 @@ measure(
   47,
 );
 
-// Files that switch on ContentKind.
+/*
+  Files that switch on ContentKind — the cost of adding a seventh.
+
+  ⚠️ Corrected 28 Aug 2026, and the wrong number is left named here rather
+  than quietly swapped, because it was quoted in a plan and priced a phase.
+
+  This counted 17 by matching any `kind === '` at all. Thirteen of those were
+  other `kind` fields entirely: `Source.kind` in `source-list.tsx` and four
+  scripts, `ContentNote.kind` in the reference screens, `fard`/`voluntary` in
+  `prayers.ts`, `screen`/`content` in `use-help.ts`. None of them would change
+  if a seventh ContentKind were added, which is the only question the number
+  was ever asked to answer.
+
+  The real figure is 7, and `docs/build-order.md` Phase 2 is priced off it.
+*/
 const { execSync } = await import('node:child_process');
 const kindFiles = execSync(
   // This script is excluded: it names ContentKind only to count the files
   // that name ContentKind, and counting itself would be a lie that grows.
-  `grep -rl "ContentKind\\|kind === '\\|case 'hisn'\\|kind: 'hisn'" src scripts ` +
-    `--include="*.ts" --include="*.tsx" --include="*.mjs" ` +
+  `grep -rlE "ContentKind|(kind|case) ?(===|:)? ?'(guide|reference|pillar|article|hisn|phrase)'" ` +
+    `src scripts --include="*.ts" --include="*.tsx" --include="*.mjs" ` +
     `| grep -v plan-check.mjs | sort | wc -l`,
   { cwd: root, encoding: 'utf8' },
 ).trim();
-measure('files naming ContentKind or branching on kind', Number(kindFiles), 17);
+measure('files that would change for a seventh ContentKind', Number(kindFiles), 7);
 
 // recommendations.ts, still uncalled by any screen.
 const callers = execSync(

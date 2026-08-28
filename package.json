@@ -71,7 +71,8 @@
     "hisn:check": "node --import ./scripts/ts-resolve.mjs scripts/hisn-annotations-check.mjs",
     "adhkar:check": "node --import ./scripts/ts-resolve.mjs scripts/adhkar-window-check.mjs",
     "narration:check": "node --import ./scripts/ts-resolve.mjs scripts/narration-check.mjs",
-    "plan:check": "node --import ./scripts/ts-resolve.mjs scripts/plan-check.mjs"
+    "plan:check": "node --import ./scripts/ts-resolve.mjs scripts/plan-check.mjs",
+    "verify:import": "node --import ./scripts/ts-resolve.mjs scripts/verify-import.mjs"
   },
   "private": true
 }

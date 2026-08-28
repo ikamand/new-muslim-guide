@@ -211,10 +211,20 @@ times.*
   with a title, optional Arabic and transliteration, a translation, and a
   source. The 99 names, the duʿas from the Qur'an, the sīrah episodes, the vices
   and virtues, and the small sunnahs are all instances of it.
-- **Pay the `ContentKind` cost once.** Seventeen files name `ContentKind` or
-  branch on a kind value. For a seventh kind, `model.ts`, `catalog.ts`,
-  `content-routes.ts` and `search.ts` must change at minimum, plus a new screen
-  and the five audit scripts.
+- **Pay the `ContentKind` cost once.** Seven files would change for a seventh
+  kind: `model.ts`, `catalog.ts`, `content-routes.ts`, `search.ts`, `index.ts`,
+  `learn/index.ts` and `learn.tsx` — plus a new screen and the audit scripts
+  that read the catalogue.
+  ⚠️ **This said seventeen until 28 Aug 2026, and the correction is kept
+  rather than swapped**, because the wrong number priced this phase. The check
+  behind it matched any `kind === '` in the repo, and thirteen of its
+  seventeen hits were unrelated fields — `Source.kind` in `source-list.tsx`
+  and four scripts, `ContentNote.kind` in the reference screens,
+  `fard`/`voluntary` in `prayers.ts`, `screen`/`content` in `use-help.ts`.
+  None of them would move for a new ContentKind. **Phase 2 is roughly a third
+  of the size the plan claimed**, which is worth knowing before it is
+  scheduled. Found while adding Phase 0, whose own `Source.kind` branch tripped
+  the check and exposed it; `plan-check.mjs` now counts ContentKind proper.
 - **One screen renders every collection.** A collection's identity is data; no
   component may switch on which collection it is, or the cost is being paid
   again in disguise.

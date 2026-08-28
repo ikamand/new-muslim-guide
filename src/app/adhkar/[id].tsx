@@ -264,7 +264,8 @@ const styles = StyleSheet.create({
   screen: { flex: 1 },
   frame: {
     flex: 1,
-    padding: Spacing.four,
+    /* 16, not 24: see the gutter note in `dua-book/[id].tsx`. */
+    padding: Spacing.three,
     gap: Spacing.three,
     width: '100%',
     maxWidth: MaxContentWidth,
@@ -277,7 +278,7 @@ const styles = StyleSheet.create({
     flex: 1,
     borderRadius: Radius.medium,
     borderWidth: 1.5,
-    padding: Spacing.four,
+    padding: Spacing.three,
   },
   /* The scroll container fills the card so a short duʿa is still all target. */
   cardScroll: { flexGrow: 1 },

@@ -107,7 +107,8 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
   },
   content: {
-    padding: Spacing.four,
+    /* 16, not 24: see the gutter note in `dua-book/[id].tsx`. */
+    padding: Spacing.three,
     paddingBottom: Spacing.six,
     gap: Spacing.four,
     width: '100%',

@@ -102,11 +102,43 @@ export type AdhkarStep = {
  * steps a reader will.
  */
 export function stepsFor(session: AdhkarSession): readonly AdhkarStep[] {
+  const occasion = occasionFor(session);
+  if (!occasion) return [];
+  return stepsForOccasion(occasion, session.sitting);
+}
+
+/**
+ * The same derivation, for an occasion nobody has made a sitting out of.
+ *
+ * ## Why this exists
+ *
+ * `/dua-book/[id]` rendered `occasion.lines` raw while `/adhkar/[id]` rendered
+ * these steps, so the two screens showed the same occasion differently — and
+ * the book screen showed it WRONG. Hisn prints the three Quls and then a bare
+ * row reading `(ثلاثَ مرَّاتٍ)`; `annotations.ts` has carried that count onto
+ * the three above it since it was written, but only the reader was asking. The
+ * book screen printed the orphaned row as a card of its own containing the
+ * complete sentence "Three times." — a duʿa card that is not a duʿa, telling
+ * a reader to say something three times without saying what.
+ *
+ * The rules were never session-specific; only the sitting filter is. So they
+ * move here and both screens read one derivation. There is no version of this
+ * where two screens each hold their own copy of "what the book's rows mean"
+ * and stay in agreement.
+ *
+ * `sitting` is `undefined` for the book, which keeps every line the book
+ * prints — including the six marked for one sitting or the other, because the
+ * book prints them all on one page and this screen is the book.
+ */
+export function stepsForOccasion(
+  occasion: HisnOccasion,
+  sitting?: 'morning' | 'evening',
+): readonly AdhkarStep[] {
   const steps: AdhkarStep[] = [];
 
-  for (const line of linesFor(session)) {
+  for (const line of linesForOccasion(occasion, sitting)) {
     const note = annotationFor(line.id);
-    const eveningForms = session.sitting === 'evening' ? (line.eveningForms ?? []) : [];
+    const eveningForms = sitting === 'evening' ? (line.eveningForms ?? []) : [];
 
     /*
       A row the publisher split across a page break joins the row above it.
@@ -181,11 +213,19 @@ export function stepsFor(session: AdhkarSession): readonly AdhkarStep[] {
 export function linesFor(session: AdhkarSession): readonly HisnLine[] {
   const occasion = occasionFor(session);
   if (!occasion) return [];
-  if (!session.sitting) return occasion.lines.filter((line) => !annotationFor(line.id)?.omit);
+  return linesForOccasion(occasion, session.sitting);
+}
+
+/** The same filter, keyed on the occasion rather than a sitting of it. */
+export function linesForOccasion(
+  occasion: HisnOccasion,
+  sitting?: 'morning' | 'evening',
+): readonly HisnLine[] {
+  if (!sitting) return occasion.lines.filter((line) => !annotationFor(line.id)?.omit);
   return occasion.lines.filter((line) => {
     const note = annotationFor(line.id);
     if (note?.omit) return false;
-    return note?.time === undefined || note.time === session.sitting;
+    return note?.time === undefined || note.time === sitting;
   });
 }
 

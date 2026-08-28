@@ -1125,6 +1125,58 @@ the book its occasions came from.
 already translate zero — so this adds to an existing gap rather than opening
 one.
 
+### ✅ Built 28 Aug — 7.5 the book screen reads the annotations too
+
+Iyad, on a screenshot of `/dua-book/1269190`: *"this also should be fixed and
+counts should be applied."* He was looking at a card whose entire contents were
+the sentence **"Three times."**
+
+**The data was already right; one screen was not asking.** Hisn prints the three
+Quls and then a bare row reading `(ثلاثَ مرَّاتٍ)`. `annotations.ts` has carried
+that count onto the three above it — `1269196/1269200/1269205: repeat 3`,
+`1269211: omit` — since the file was written. `/adhkar/[id]` read it through
+`stepsFor` and showed `×3`; `/dua-book/[id]` rendered `occasion.lines` raw and
+showed the orphan. So the two screens rendering the same occasion disagreed,
+and the book was the wrong one: a count attached to nothing, and no count where
+the count belonged.
+
+`stepsForOccasion(occasion, sitting?)` now holds the derivation and
+`stepsFor(session)` is a wrapper over it. The rules were never session-specific
+— only the sitting filter is. **There is no version of this where two screens
+each keep their own copy of "what the book's rows mean" and stay in agreement.**
+
+What actually moved, measured across all 132 occasions — **129 are byte
+identical**:
+
+| Occasion | Rows → cards | Counts shown |
+|---|---|---|
+| Morning and evening | 29 → 28 | 11 → 14 |
+| After the prayer | 11 → 14 | 2 → 6 |
+| Adhkār of sleep | 19 → 17 | 1 → 1 |
+
+The three Quls gain `×3`; the tasbīḥ, taḥmīd and takbīr become three cards at
+`×33` each instead of one row with the counts buried in its prose; the two
+page-break continuations — the tail of Sūrat an-Nās, and al-Baqarah 286 under
+285 — fold back into the verse they belong to.
+
+**A rule copied without checking it, caught by the numbers.** The first version
+suppressed the badge on instructions, mirroring the reader. Sleep's count went
+1 → 0 and that was wrong: `/adhkar/[id]` forces an instruction's target to 1 so
+nobody taps three times to get past "join the palms and blow into them" — a
+statement about the counter mechanic, not about whether the count exists. Line
+1269284 says to wipe over the body **three times**, and the book prints it. The
+book screen shows the count on instructions; the reader still does not count
+them.
+
+`npm run hisn:check` now walks every occasion the book screen can open and
+fails if any step's whole text is a parenthetical — the shape of an orphaned
+count. Exactly one row in 318 trips it raw; zero survive annotation. Proved by
+deleting the `omit` and watching it exit non-zero.
+
+⚠️ **This shows no less of the book.** Every row is still on screen; what moved
+were counts and labels that were never text to recite, each a named entry in
+`annotations.ts` with its reason beside it.
+
 ---
 
 ## Phase 8 — Audio that saves itself

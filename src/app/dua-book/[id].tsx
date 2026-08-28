@@ -5,6 +5,7 @@ import { MarkedText } from '@/components/marked-text';
 import { PinStar } from '@/components/pin-star';
 import { ThemedText } from '@/components/themed-text';
 import { HISN } from '@/content/duas/hisn';
+import { stepsForOccasion } from '@/content/duas/sessions';
 import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { useTheme } from '@/hooks/use-theme';
@@ -58,6 +59,26 @@ import { useTheme } from '@/hooks/use-theme';
  * continuations of a verse the publisher split across a page break, and
  * demoting those to supporting weight would misrepresent them. Telling them
  * apart is `annotations.ts`'s job and no one has done it yet.
+ *
+ * ## It reads the book's rows through `annotations.ts`, like the reader does
+ *
+ * This screen used to render `occasion.lines` straight, which meant the two
+ * screens showing the same occasion disagreed — and this was the one that was
+ * wrong. Hisn prints the three Quls and then a bare row `(ثلاثَ مرَّاتٍ)`;
+ * `annotations.ts` carries that count onto the three above it, so the reader
+ * showed `×3` while this screen showed a card whose entire content was the
+ * sentence "Three times." A count attached to nothing, and no count where the
+ * count belonged.
+ *
+ * `stepsForOccasion` is now the only thing that knows what the book's rows
+ * mean. It also folds the page-break continuations back together and splits
+ * the rows holding several dhikr — the same three transformations, on both
+ * screens, from one place.
+ *
+ * ⚠️ This does not make the screen show LESS of the book. Every row is still
+ * here; the ones that moved are counts and labels that were never text to
+ * recite, and each move is a named entry in `annotations.ts` with its reason
+ * beside it.
  */
 export default function DuaBookOccasionScreen() {
   const theme = useTheme();
@@ -75,6 +96,8 @@ export default function DuaBookOccasionScreen() {
     );
   }
 
+  const steps = stepsForOccasion(occasion);
+
   return (
     <ScrollView contentContainerStyle={styles.content}>
       <Stack.Screen options={{ title: occasion.english || t('duaBook.title') }} />
@@ -91,36 +114,45 @@ export default function DuaBookOccasionScreen() {
         </ThemedText>
       </View>
 
-      {occasion.lines.map((line) => (
+      {steps.map((step) => (
         <View
-          key={line.id}
+          key={step.key}
           style={[
             styles.card,
             { backgroundColor: theme.backgroundElement, borderColor: theme.border },
-            line.kind === 'quran' && {
+            step.line.kind === 'quran' && {
               backgroundColor: theme.accentMuted,
               borderColor: theme.accentMuted,
             },
           ]}>
           {/*
-            The count the book itself states, where both languages agreed on
-            it. A numeral rather than a word, so it needs no translation and
-            reads the same in a list of Arabic.
+            The count, from wherever the book stated it — beside the words, or
+            on a row of its own below them, which `annotations.ts` has already
+            carried onto the rows it belongs to. A numeral rather than a word,
+            so it needs no translation and reads the same in a list of Arabic.
+
+            Shown on instructions too, unlike the reader. `/adhkar/[id]` forces
+            an instruction's target to 1 so nobody has to tap three times to
+            get past "join the palms and blow into them" — that is about the
+            counter mechanic, not about whether the count exists. Here the
+            badge only states a fact, and for line 1269284 the fact is real:
+            the book says to wipe over the body three times. Suppressing it
+            would drop a count the page prints.
           */}
-          {line.repeat ? (
+          {step.repeat > 1 ? (
             <View style={[styles.repeat, { borderColor: theme.border }]}>
-              <ThemedText type="smallBold" themeColor="accent">{`×${line.repeat}`}</ThemedText>
+              <ThemedText type="smallBold" themeColor="accent">{`×${step.repeat}`}</ThemedText>
             </View>
           ) : null}
 
           <ThemedText
-            type={line.kind === 'quoted' ? 'arabicLead' : 'arabicQuote'}
+            type={step.line.kind === 'quoted' ? 'arabicLead' : 'arabicQuote'}
             style={styles.arabic}>
-            <MarkedText text={line.arabic} spans={line.emphasis} colour={theme.accent} />
+            <MarkedText text={step.arabic} spans={step.emphasis} colour={theme.accent} />
           </ThemedText>
-          {line.english ? (
+          {step.english ? (
             <ThemedText type="default" themeColor="textSecondary">
-              <MarkedText text={line.english} spans={line.emphasis} colour={theme.accent} bold />
+              <MarkedText text={step.english} spans={step.emphasis} colour={theme.accent} bold />
             </ThemedText>
           ) : null}
         </View>
@@ -131,7 +163,14 @@ export default function DuaBookOccasionScreen() {
 
 const styles = StyleSheet.create({
   content: {
-    padding: Spacing.four,
+    /*
+      Spacing.three, not four. A card sitting at the gutter charges the reader
+      twice — the screen's padding and then its own — and the eye sees only the
+      sum. At 24 + 24 the Arabic had 297pt of a 393pt phone; at 16 + 16 it has
+      329. The gutter is the half to give up, because the card's padding is
+      what holds the text off its own border.
+    */
+    padding: Spacing.three,
     paddingBottom: Spacing.six,
     gap: Spacing.three,
     width: '100%',
@@ -169,7 +208,7 @@ const styles = StyleSheet.create({
   },
   card: {
     gap: Spacing.three,
-    padding: Spacing.four,
+    padding: Spacing.three,
     borderRadius: Radius.medium,
     borderWidth: StyleSheet.hairlineWidth,
   },

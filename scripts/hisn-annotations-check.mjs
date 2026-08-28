@@ -14,7 +14,12 @@
 import { HISN } from '../src/content/duas/hisn.ts';
 import { HISN_ANNOTATIONS } from '../src/content/duas/annotations.ts';
 import { OCCASIONS_BY_MOMENT } from '../src/content/duas/moments.ts';
-import { ADHKAR_SESSIONS, arabicNameFor, sharedHeadingSplits } from '../src/content/duas/sessions.ts';
+import {
+  ADHKAR_SESSIONS,
+  arabicNameFor,
+  sharedHeadingSplits,
+  stepsForOccasion,
+} from '../src/content/duas/sessions.ts';
 import { pickForNow, resolvePick } from '../src/content/duas/card.ts';
 
 const lineIds = new Set(HISN.flatMap((occasion) => occasion.lines.map((line) => line.id)));
@@ -51,6 +56,38 @@ console.log(`${placements.length} day-moment placements`);
 if (lost.length > 0) {
   console.error(`\n✗ ${lost.length} placement(s) point at an occasion the book no longer has:`);
   lost.forEach(([moment, id]) => console.error(`    ${moment}: ${id}`));
+  failed = true;
+}
+
+/*
+  No screen may show a step whose entire text is a parenthetical.
+
+  Hisn prints the three Quls and then a bare row reading `(ثلاثَ مرَّاتٍ).` —
+  the count for the rows above it, not a text of its own. `/dua-book/[id]`
+  rendered it as a card whose whole content was the sentence "Three times.",
+  which is a duʿa card that is not a duʿa. `annotations.ts` had already moved
+  that count onto the three Quls; only the reader was asking.
+
+  Both screens now derive from `stepsForOccasion`, so this walks every occasion
+  the book screen can open, not just the four with sittings. Exactly one row in
+  318 trips the raw test today, and zero survive annotation — which is the
+  state this keeps.
+*/
+const WHOLLY_PARENTHETICAL = /^\s*[(（][^)）]*[)）]\s*[.。]?\s*$/;
+const orphans = [];
+let stepCount = 0;
+for (const occasion of HISN) {
+  for (const step of stepsForOccasion(occasion)) {
+    stepCount += 1;
+    if (WHOLLY_PARENTHETICAL.test(step.arabic)) orphans.push([occasion.id, step.key, step.arabic]);
+  }
+}
+console.log(`${stepCount} steps across every occasion`);
+
+if (orphans.length > 0) {
+  console.error(`\n✗ ${orphans.length} step(s) are nothing but a parenthetical — a count with no words:`);
+  orphans.forEach(([occasion, key, arabic]) => console.error(`    occasion ${occasion}, step ${key}: ${arabic}`));
+  console.error('    Carry the count onto the rows it belongs to with `repeat`, and `omit` the row.');
   failed = true;
 }
 

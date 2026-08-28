@@ -12,6 +12,7 @@
  */
 
 import type { ContentMeta, ContentNote, ContentRef } from './model';
+import type { ProviderId } from './providers';
 import type { Source } from './sources';
 
 /** Drives the posture illustration and the "you are here" cue. */
@@ -316,4 +317,73 @@ export type Reference = {
   quickFacts?: readonly QuickFact[];
   sections: ReferenceSection[];
   meta?: ContentMeta;
+};
+
+/**
+ * One entry in a collection. Short, and the same shape whatever the set is.
+ *
+ * The five bodies of content `docs/build-order.md` adds are the same object
+ * seen five times — the 99 names, the duʿas the Qur'an puts in the mouths of
+ * the prophets, the sīrah in episodes, the vices and their opposites, and the
+ * small sunnahs. Every one of them is an ordered list of short entries with a
+ * name, sometimes an Arabic text, and something said about it.
+ *
+ * Only `title` and `translation` are required, and that is what lets one type
+ * hold all five: a name of Allah has Arabic and a transliteration and a
+ * meaning; a sīrah episode has none of the three and is a title over prose.
+ * A screen renders the fields that are present rather than switching on which
+ * collection it is looking at.
+ */
+export type CollectionEntry = {
+  id: string;
+  /** What the entry is called. "Ar-Raḥmān", "The year of sorrow". */
+  title: string;
+  /** The Arabic, where the entry is an Arabic text. Never transliterated by us. */
+  arabic?: string;
+  transliteration?: string;
+  /** The English. A meaning, a translation, or the paragraph itself. */
+  translation: string;
+  /** One line of context, where the entry needs it. */
+  note?: string;
+  sources?: readonly Source[];
+};
+
+/**
+ * An ordered set of short entries, rendered by one screen.
+ *
+ * ## Why this is a content kind rather than five screens
+ *
+ * Because it would otherwise be five screens. Each of the five bodies above
+ * would arrive with its own route, its own list component and its own idea of
+ * how an Arabic line sits above its meaning, and the fourth one would look
+ * different from the first for no reason anybody could name. Paying the cost
+ * of a seventh `ContentKind` once is cheaper than paying a screen five times,
+ * and it is the only way the fifth one is as good as the first.
+ *
+ * ## A collection's identity is data
+ *
+ * No component may switch on WHICH collection it is rendering. The moment one
+ * does, the cost above is being paid again in disguise and the next collection
+ * needs code rather than a data file. If a set genuinely needs to look
+ * different, the difference belongs in a field here that every collection can
+ * set — not in a branch on `id`.
+ *
+ * `npm run content:audit` fails if a collection names a provider that does not
+ * exist, and `plan:check` fails if a screen starts branching on a collection id.
+ */
+export type Collection = {
+  id: string;
+  title: string;
+  /** One line, for the card that opens it. */
+  subtitle: string;
+  /**
+   * Where this body of content came from, as a row in `providers.ts`.
+   *
+   * Required, not optional. It is the provenance rule at the size of a
+   * dataset: 99 entries would otherwise repeat one publisher 99 times and
+   * record that publisher's terms in none of them.
+   */
+  provider: ProviderId;
+  meta?: ContentMeta;
+  entries: readonly CollectionEntry[];
 };

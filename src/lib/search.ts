@@ -7,6 +7,7 @@ import type { Href } from 'expo-router';
   running app, and a search index nobody can test is one nobody can trust.
 */
 import { CATALOG } from '@/content/catalog';
+import { getCollection } from '@/content/collections';
 import { getGuide } from '@/content/guides';
 import { getReference } from '@/content/references';
 import { HISN } from '@/content/duas/hisn';
@@ -304,6 +305,38 @@ export function buildIndex(locale: Locale, label: (kind: string) => string): rea
               raw: `${section.body} ${bullets} ${noted}`,
               loose: loosen(`${section.body} ${bullets} ${noted}`),
             },
+          ],
+        });
+      }
+    }
+
+    /*
+      A collection's entries, so the set is findable by what is IN it.
+
+      Indexed here rather than left to the collection's own title, because a
+      collection whose 99 entries cannot be searched is a shelf with a label
+      and no way in — someone looking for "Ar-Raḥmān" does not know it lives
+      under "The names of Allah". The Arabic is searchable and never rendered
+      on this Latin rung, the same rule the duʿa book follows below.
+
+      No branch on WHICH collection: every one is indexed the same way, which
+      is the claim `types.ts` makes about this kind.
+    */
+    if (entry.kind === 'collection') {
+      const collection = getCollection(entry.id);
+      if (!collection) continue;
+      for (const item of collection.entries) {
+        const body = `${item.translation} ${item.note ?? ''} ${item.transliteration ?? ''}`;
+        index.push({
+          key: `collection:${collection.id}:${item.id}`,
+          title: item.title,
+          snippet: firstSentence(item.translation),
+          context: `${label('section')} ${collection.title}`,
+          href: { pathname: '/collection/[id]', params: { id: collection.id } },
+          fields: [
+            { field: 'title', text: fold(item.title), raw: item.title, loose: loosen(item.title) },
+            { field: 'body', text: fold(body), raw: body, loose: loosen(body) },
+            { field: 'body', text: fold(item.arabic ?? ''), raw: '', loose: '' },
           ],
         });
       }

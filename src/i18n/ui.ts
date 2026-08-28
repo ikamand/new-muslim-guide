@@ -64,6 +64,7 @@ export const EN = {
   'kind.article': 'Article',
   'kind.dua': 'Duʿa',
   'kind.phrase': 'Phrase',
+  'kind.collection': 'Collection',
 
   'ask.open': 'Ask a question or scan a label',
   'ask.placeholder': 'Ask or scan…',
@@ -252,6 +253,7 @@ export const EN = {
   'duaBook.filtered': 'Occasions for this part of the day',
   'duaBook.showAll': 'Show every occasion',
   'duaBook.missing': 'That occasion is not in the book.',
+  'collection.missing': 'That collection is not in the app.',
 
   /*
     The memorisation tab.
@@ -802,6 +804,7 @@ const FR: Overrides = {
   'kind.article': 'Article',
   'kind.dua': 'Duʿa',
   'kind.phrase': 'Expression',
+  'kind.collection': 'Collection',
   'ask.open': 'Poser une question ou scanner une étiquette',
   'ask.placeholder': 'Demander ou scanner…',
   'ask.close': 'Fermer',
@@ -1075,6 +1078,7 @@ const ES: Overrides = {
   'kind.article': 'Artículo',
   'kind.dua': 'Duʿa',
   'kind.phrase': 'Expresión',
+  'kind.collection': 'Colección',
   'ask.open': 'Haz una pregunta o escanea una etiqueta',
   'ask.placeholder': 'Pregunta o escanea…',
   'ask.close': 'Cerrar',

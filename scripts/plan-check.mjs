@@ -97,7 +97,7 @@ const CLAIMS = [
   ['src/app/(tabs)/index.tsx', 43, 'keeps a streak'],
   ['src/app/(tabs)/index.tsx', 102, 'Friday is the one that matters'],
   ['src/app/ask.tsx', 29, 'I farted'],
-  ['src/content/model.ts', 169, 'export type ScholarlyPosition'],
+  ['src/content/model.ts', 182, 'export type ScholarlyPosition'],
   ['src/i18n/ui.ts', 273, 'quran.tapToHide'],
   ['src/content/references.ts', 522, 'Friday midday is the busiest hour'],
   ['src/content/references.ts', 565, 'join the line where you are'],
@@ -204,18 +204,41 @@ measure(
   if a seventh ContentKind were added, which is the only question the number
   was ever asked to answer.
 
-  The real figure is 7, and `docs/build-order.md` Phase 2 is priced off it.
+  The real figure was 7 before the seventh kind was added, and adding it made
+  it 9 — `types.ts` for the `Collection` shape and the new screen. Phase 2
+  measured the whole job at 11 files, four of them new; the grep only ever sees
+  the ones that name a kind value. Both numbers are in
+  `docs/build-order.md` Phase 2, because a prediction is worth keeping beside
+  what it predicted.
 */
 const { execSync } = await import('node:child_process');
 const kindFiles = execSync(
   // This script is excluded: it names ContentKind only to count the files
   // that name ContentKind, and counting itself would be a lie that grows.
-  `grep -rlE "ContentKind|(kind|case) ?(===|:)? ?'(guide|reference|pillar|article|hisn|phrase)'" ` +
+  `grep -rlE "ContentKind|(kind|case) ?(===|:)? ?'(guide|reference|pillar|article|hisn|phrase|collection)'" ` +
     `src scripts --include="*.ts" --include="*.tsx" --include="*.mjs" ` +
     `| grep -v plan-check.mjs | sort | wc -l`,
   { cwd: root, encoding: 'utf8' },
 ).trim();
-measure('files that would change for a seventh ContentKind', Number(kindFiles), 7);
+measure('files naming a ContentKind value', Number(kindFiles), 9);
+
+/*
+  No component may branch on WHICH collection it is rendering.
+
+  This is the whole claim Phase 2 makes, and it is the one that decays
+  silently: the fifth collection needing "just one special case" in the screen
+  is how a kind that cost seven files to add stops paying for itself. The
+  screen renders by which fields an entry HAS, never by which set it is.
+
+  Matched in `src/app` and `src/components` only — `content/` legitimately
+  names collection ids, because that is where a collection is declared.
+*/
+const branching = execSync(
+  `grep -rnE "collection(\\.id)? === '|case '[a-z0-9-]+': *// *collection" ` +
+    `src/app src/components || true`,
+  { cwd: root, encoding: 'utf8' },
+).trim();
+if (branching) fail(`a component is branching on which collection it renders:\n    ${branching}`);
 
 /*
   The two dead exports stay dead.

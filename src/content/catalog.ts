@@ -17,6 +17,7 @@
  */
 
 import { cadenceFor } from './cadence';
+import { COLLECTIONS } from './collections';
 import { HISN } from './duas/hisn';
 import { GUIDES } from './guides';
 import { IMAN_PILLARS } from './iman';
@@ -184,8 +185,31 @@ function buildCatalog(): readonly CatalogEntry[] {
     });
   }
 
+  for (const collection of COLLECTIONS) {
+    entries.push({
+      kind: 'collection',
+      id: collection.id,
+      title: collection.title,
+      shortDescription: collection.subtitle,
+      meta: collection.meta,
+      pieces: collection.entries.length,
+      pieceUnit: 'items',
+      /*
+        Sources from the entries as well as the collection, the same flattening
+        every other kind gets. The provider is a separate axis and deliberately
+        not folded in here: `providers.ts` says where the BODY came from, and a
+        `Source` says what a single line cites.
+      */
+      sources: [
+        ...(collection.meta?.sources ?? []),
+        ...collect(collection.entries, (entry) => entry.sources),
+      ],
+      notes: collection.meta?.notes ?? [],
+    });
+  }
+
   /*
-    Attached in one place rather than at each of the six push sites above.
+    Attached in one place rather than at each of the seven push sites above.
     Six call sites is six chances to forget, and the next content kind would
     be a seventh; this way a new kind gets its cadence resolved for free and
     the audit tells whoever added it that the table needs a row.

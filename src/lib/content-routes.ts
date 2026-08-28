@@ -28,6 +28,8 @@ export function routeFor(entry: CatalogEntry): Href {
       return { pathname: '/dua-book/[id]', params: { id: entry.id } };
     case 'phrase':
       return '/phrases';
+    case 'collection':
+      return { pathname: '/collection/[id]', params: { id: entry.id } };
   }
 }
 

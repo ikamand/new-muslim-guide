@@ -234,6 +234,13 @@ times.*
   of the size the plan claimed**, which is worth knowing before it is
   scheduled. Found while adding Phase 0, whose own `Source.kind` branch tripped
   the check and exposed it; `plan-check.mjs` now counts ContentKind proper.
+  **Built 28 Aug 2026, and the prediction is kept beside the outcome.** Seven
+  was the count of files naming a kind value, and it was right: adding
+  `collection` made it nine — `types.ts` for the shape, and the new screen. The
+  whole job was **11 files, four of them new**: the type, the shape, the
+  registry, the collections directory, the catalogue, the route, the search
+  index, the screen, the UI labels, and two scripts. The grep only ever sees
+  the files that name a kind, which is a good proxy and not the job.
 - **One screen renders every collection.** A collection's identity is data; no
   component may switch on which collection it is, or the cost is being paid
   again in disguise.

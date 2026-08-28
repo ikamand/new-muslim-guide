@@ -132,7 +132,20 @@ export type ContentTag =
  * row id. Referring to content by what it IS rather than by which screen used
  * to hold it is what stopped a screen deletion breaking the journey.
  */
-export type ContentKind = 'guide' | 'reference' | 'pillar' | 'article' | 'hisn' | 'phrase';
+/**
+ * `collection` was added on 28 Aug 2026 as the seventh kind, and is the only
+ * one that is a SHAPE rather than a subject: five separate bodies of content
+ * are instances of it. See `Collection` in `types.ts` for why that is one kind
+ * and not five screens.
+ */
+export type ContentKind =
+  | 'guide'
+  | 'reference'
+  | 'pillar'
+  | 'article'
+  | 'hisn'
+  | 'phrase'
+  | 'collection';
 
 export type ContentRef = {
   kind: ContentKind;

@@ -323,6 +323,15 @@ const HISN: Readonly<Record<number, Cadence>> = {
   1269723: 'on-event', // What to say to repel the plots of the rebellious devils
 };
 
+/**
+ * Collections — the ordered sets, added from Phase 2 onward.
+ *
+ * Empty until the 99 names land in Phase 3. A collection with no row here
+ * fails `content:audit` by name, which is how a new one is stopped from
+ * shipping as a page nothing can place.
+ */
+const COLLECTIONS: Readonly<Record<string, Cadence>> = {};
+
 /** Every cadence in the app, keyed as `kind:id`. */
 export const CADENCE: Readonly<Record<string, Cadence>> = {
   ...Object.fromEntries(Object.entries(GUIDES).map(([id, c]) => [`guide:${id}`, c])),
@@ -331,6 +340,7 @@ export const CADENCE: Readonly<Record<string, Cadence>> = {
   ...Object.fromEntries(Object.entries(ARTICLES).map(([id, c]) => [`article:${id}`, c])),
   ...Object.fromEntries(Object.entries(PHRASES).map(([id, c]) => [`phrase:${id}`, c])),
   ...Object.fromEntries(Object.entries(HISN).map(([id, c]) => [`hisn:${id}`, c])),
+  ...Object.fromEntries(Object.entries(COLLECTIONS).map(([id, c]) => [`collection:${id}`, c])),
 };
 
 /** The cadence of what a ref points at, or undefined if nobody has decided. */

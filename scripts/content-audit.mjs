@@ -30,6 +30,8 @@ const load = (p) => import(join(root, p));
 const { CATALOG, danglingRefs, resolveRef } = await load('src/content/catalog.ts');
 const { pendingRecommendations } = await load('src/content/recommendations.ts');
 const { CADENCE } = await load('src/content/cadence.ts');
+const { COLLECTIONS } = await load('src/content/collections/index.ts');
+const { PROVIDERS } = await load('src/content/providers.ts');
 const { ungrouped } = await load('src/content/learn/index.ts');
 /*
   The NAMES, not the files. `prayer-images.ts` also holds a wall of `require()`
@@ -255,6 +257,31 @@ if (homeMissing.length) {
 
 /* ---------- pointers ---------- */
 
+/* ---------- collections and their providers ---------- */
+
+/*
+  A collection must name a provider that exists.
+
+  This is the provenance rule at the size of a dataset, and it is the one thing
+  about a collection that cannot be checked by looking at the screen: a set of
+  99 entries renders identically whether or not anybody recorded where it came
+  from or what its licence obliges. So it fails here instead.
+*/
+const badProvider = COLLECTIONS.filter((entry) => !PROVIDERS[entry.provider]);
+
+say(`Collections — ${COLLECTIONS.length}`);
+for (const collection of COLLECTIONS) {
+  const provider = PROVIDERS[collection.provider];
+  say(
+    `  ${pad(collection.id, 22)} ${String(collection.entries.length).padStart(3)} entries` +
+      `  ${provider ? provider.name : `⚠️ unknown provider "${collection.provider}"`}`,
+  );
+}
+if (!COLLECTIONS.length) {
+  say('  none yet — the kind shipped empty on purpose; the 99 names are Phase 3.');
+}
+say();
+
 /* ---------- cadence ---------- */
 
 /*
@@ -315,6 +342,11 @@ if (noCadence.length) {
   failures.push(`${noCadence.length} entr(ies) with no cadence — add a row to src/content/cadence.ts`);
 }
 if (badCadence.length) failures.push(`${badCadence.length} entr(ies) with an unknown cadence`);
+if (badProvider.length) {
+  failures.push(
+    `${badProvider.length} collection(s) naming a provider with no row in src/content/providers.ts`,
+  );
+}
 if (staleCadence.length) {
   failures.push(`${staleCadence.length} cadence row(s) pointing at content that does not exist`);
 }

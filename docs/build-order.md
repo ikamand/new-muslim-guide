@@ -31,7 +31,7 @@ file is deleted, and new content lands beside the old.
 | 6 | The Firsts | OTA | yes |
 | 7 | Onboarding: two facts | OTA | yes |
 | **D** | **Content, paced** | | |
-| 8 | The three tier-one gaps | OTA | review |
+| 8 | The five tier-one gaps | OTA | review |
 | 9 | Duʿas from the Qur'an | OTA | review |
 | 10 | Jumuʿah, then the tier-two set | OTA | review |
 | 11 | Zakat, with a dated nisab | OTA + script | review |
@@ -110,8 +110,13 @@ repeated.
   wants 23 steps; year three wants the time and the qibla
 - **Learn:** the shahada drops from hero to one line in the header — cadence
   `keepsake`
-- **Learn:** `on-event` pages leave the shelf for Ask, about six of them
-- Nobody browses to tayammum; they need it because there is no water
+- **Learn:** `on-event` pages leave the shelf for Ask, about six of them.
+  Nobody browses to tayammum; they need it because there is no water
+- **Learn:** a "Where you are" card replaces the journey card — not a fraction,
+  but the chapter of life you are in and the two or three things left in it
+- **Today:** one "worth today" slot, competed for by a single ranked function —
+  a season, a First that just became available, the surah being learned, or a
+  lesson. Never more than one. This retires the permanent journey card
 - **Ships, then stop.** Both screens seen before Stage C begins
 
 ---
@@ -152,6 +157,9 @@ repeated.
 - Both are checkable facts, not self-descriptions, and both can be re-asked
 - Onboarding becomes a **seed, not a verdict**: Phase 5's observations quietly
   update it. No badge, no level-up, no announcement
+- Learn finally reads `beginnerPriority` — set on 52 entries and read by no
+  screen today. De-emphasised in week one, surfaced in year two, keyed off the
+  tier signal from Phases 5 and 6
 
 ---
 
@@ -161,7 +169,7 @@ Every page here is new religious instruction: written from sources, through the
 Phase 0 gate, and reviewed. Roughly twenty pages in total — more than has ever
 been written here in one go.
 
-### Phase 8 — The three tier-one gaps
+### Phase 8 — The five tier-one gaps
 
 - **The minimum valid prayer.** The app teaches Fajr as 23 steps and never says
   "here is the least you can do today, and it counts." That sentence is the
@@ -171,7 +179,13 @@ been written here in one go.
   / ḥarām, a beginner reads every "should" as a "must" and burns out in a month
 - **The adhān.** Never explained anywhere — it appears only as a Bukhari book
   name in citations
-- ⚠️ All three need review before shipping
+- **"Do I have to change my name?"** One of the three questions converts ask
+  most, and the app is silent on it
+- **What happens to the life before.** Muslim 121 — "Islam demolishes what was
+  before it" — currently exists only in a code comment. Nothing addresses guilt,
+  a previous marriage, children, or a past that is not going anywhere. This is
+  the 1am search the app was built for
+- ⚠️ All five need review before shipping
 
 ### Phase 9 — Duʿas from the Qur'an
 
@@ -217,6 +231,9 @@ been written here in one go.
   programme surveyed
 - **The vices and the virtues** — the app has two of roughly twelve
 - **Why people differ** — one page making the 47 `differs` notes legible
+- **The small sunnahs** — right side first, siwāk, waking, leaving the house,
+  eating. They exist scattered across 132 Hisn occasions; nothing gathers them
+  as a practice you take on
 - **Teaching someone else** — the "helping" onboarding answer that currently
   does nothing. At year three, the convert *is* the person others ask
 - All are `collection` instances: data files, not code

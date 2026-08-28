@@ -928,6 +928,20 @@ against the source.
 
 Published: https://claude.ai/code/artifact/589e9bcb-cbf5-4241-af03-d0de2f73345e
 
+### 28 Aug — the build order
+
+**`docs/build-order.md`** merges the two above into one sequence: thirteen
+phases in four stages. Foundations first and invisible (the import gate,
+`Cadence`, the `collection` kind); then a deliberate pilot pair that stops for
+eyes (the 99 names, and Today/Learn); then what the app knows about you; then
+content, paced, with Jumuʿah leading.
+
+**Start at Phase 0 and build nothing else until it passes.** It carries a
+"not doing" table so the four rejected sources, runtime API calls, Arabic
+literacy and streaks are not re-litigated.
+
+Published: https://claude.ai/code/artifact/ca1842f9-7b6e-4fc3-b782-b563191663c1
+
 Nothing there is decided. The one thing in it flagged for the scholarly
 reviewer rather than for design is `references.ts:565`, which tells someone
 arriving mid-prayer to join the line and stops.

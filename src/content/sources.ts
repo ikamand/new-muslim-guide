@@ -236,7 +236,7 @@ export function formatSource(source: Source): string {
       const ayah = Array.isArray(source.ayah)
         ? `${source.ayah[0]}-${source.ayah[1]}`
         : String(source.ayah);
-      return `Qur'an ${source.surah}:${ayah}`;
+      return `Qur’an ${source.surah}:${ayah}`;
     }
     case 'hadith': {
       const { name } = HADITH_COLLECTIONS[source.collection];

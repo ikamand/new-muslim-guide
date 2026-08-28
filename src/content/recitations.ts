@@ -187,7 +187,7 @@ export const Recitations = {
 
   fatiha: {
     sources: [quran(1, [1, 7], { surahName: 'Al-Fatihah' })],
-    title: 'Al-Fatiha',
+    title: 'Al-Fatihah',
     arabic: FATIHA_VERSES.map((verse) => verse.arabic).join('\n'),
     transliteration: FATIHA_VERSES.map((verse) => verse.transliteration).join('\n'),
     translation: FATIHA_VERSES.map((verse) => verse.translation).join(' '),

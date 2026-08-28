@@ -33,7 +33,7 @@ export const WORK: Reference = {
           bookName: 'Sales and Trade',
           inBookReference: 'Book 34, Hadith 25',
         }),
-        quran(62, 10, { surahName: 'Al-Jumu`ah' }),
+        quran(62, 10, { surahName: 'Al-Jumuʿah' }),
       ],
     },
     {

@@ -80,7 +80,7 @@ export const WHO_IS_ALLAH: Reference = {
         '**Ar-Razzaq**, the One who provides.',
       ],
       note: 'Learning a few is a gentler way in than trying to think about God in the abstract.',
-      sources: [quran(7, 180, { surahName: 'Al-A`raf' })],
+      sources: [quran(7, 180, { surahName: 'Al-Aʿraf' })],
     },
   ],
 };

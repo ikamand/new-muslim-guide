@@ -39,7 +39,7 @@ export const CLOTHING: Reference = {
       heading: 'What is the idea behind it?',
       body:
         'The Qur’an speaks about clothing as something given for covering and for adornment: both, not one at the expense of the other. Islam is not against looking good. The instructions that follow are about modesty in public, not about drabness.',
-      sources: [quran(7, 26, { surahName: 'Al-A`raf' })],
+      sources: [quran(7, 26, { surahName: 'Al-Aʿraf' })],
     },
     {
       id: 'everyone',

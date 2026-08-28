@@ -40,7 +40,7 @@ export const HALAL_AND_HARAM: Reference = {
       body:
         'This is the part people get backwards. Things are permitted unless there is a clear reason otherwise, and the Qur’an describes the Prophet’s ﷺ message as making good things lawful rather than piling on prohibitions. You do not need to find permission for ordinary life.',
       sources: [
-        quran(7, 157, { surahName: 'Al-A`raf' }),
+        quran(7, 157, { surahName: 'Al-Aʿraf' }),
         quran(2, 168, { surahName: 'Al-Baqarah' }),
       ],
     },

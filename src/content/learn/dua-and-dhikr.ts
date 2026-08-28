@@ -39,15 +39,15 @@ export const DUA_AND_DHIKR: Reference = {
       id: 'dhikr',
       heading: 'What is dhikr?',
       body:
-        'Dhikr means remembrance: short phrases repeated through the day. Subḥān Allāh (glory be to God), al-ḥamdu li-llāh (all praise is God’s), Allāhu akbar (God is greatest). The Qur’an says hearts settle by the remembrance of God, and that is closer to what it does than anything a description manages.',
-      sources: [quran(13, 28, { surahName: 'Ar-Ra`d' })],
+        'Dhikr means remembrance: short phrases repeated through the day. Subḥāna-llāh (glory be to God), al-ḥamdu li-llāh (all praise is God’s), Allāhu akbar (God is greatest). The Qur’an says hearts settle by the remembrance of God, and that is closer to what it does than anything a description manages.',
+      sources: [quran(13, 28, { surahName: 'Ar-Raʿd' })],
     },
     {
       id: 'why',
       heading: 'Why does it matter so much?',
       promote: 'hero',
       body:
-        'The Prophet ﷺ compared the person who remembers their Lord to the living, and the one who does not to the dead. He also said that whoever says subḥān Allāhi wa bi-ḥamdih a hundred times in a day has their sins forgiven though they were like the foam of the sea.',
+        'The Prophet ﷺ compared the person who remembers their Lord to the living, and the one who does not to the dead. He also said that whoever says subḥāna-llāhi wa bi-ḥamdih a hundred times in a day has their sins forgiven though they were like the foam of the sea.',
       sources: [
         hadith('bukhari', '6407', {
           book: 80,

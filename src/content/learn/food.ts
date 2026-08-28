@@ -79,8 +79,8 @@ export const FOOD: Reference = {
       ],
       sources: [
         quran(2, 173, { surahName: 'Al-Baqarah' }),
-        quran(5, 3, { surahName: 'Al-Ma’idah' }),
-        quran(5, 90, { surahName: 'Al-Ma’idah' }),
+        quran(5, 3, { surahName: 'Al-Maidah' }),
+        quran(5, 90, { surahName: 'Al-Maidah' }),
       ],
     },
     {
@@ -97,14 +97,14 @@ export const FOOD: Reference = {
       heading: 'Is supermarket meat halal?',
       body:
         'People genuinely differ, and you will be told opposite things with equal confidence. The Qur’an permits the food of the People of the Book; what scholars disagree about is whether modern industrial slaughter still resembles what that verse describes. Certified halal meat satisfies every position, which is where most converts start.',
-      sources: [quran(5, 5, { surahName: 'Al-Ma’idah' })],
+      sources: [quran(5, 5, { surahName: 'Al-Maidah' })],
       notes: [
         note(
           'differs',
           'Muslims in Western countries genuinely differ on supermarket meat, and you will be told opposite things with equal confidence.',
           {
             sources: [
-              quran(5, 5, { surahName: 'Al-Ma’idah' }),
+              quran(5, 5, { surahName: 'Al-Maidah' }),
               scholarly({
                 work: 'Rulings on eating meat of the People of the Book according to the madhhabs, fatwa 82899',
                 author: 'IslamWeb',

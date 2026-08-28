@@ -488,7 +488,7 @@ function rakahSteps(rakah: number, spec: PrayerSpec): Step[] {
 
   step({
     key: 'fatiha',
-    title: 'Recite Al-Fatiha',
+    title: 'Recite Al-Fatihah',
     posture: 'standing',
     instruction: aloud
       ? 'Recite the opening chapter of the Qur’an aloud.'
@@ -531,10 +531,10 @@ function rakahSteps(rakah: number, spec: PrayerSpec): Step[] {
       title: 'Add a short surah',
       posture: 'standing',
       instruction: aloud
-        ? 'After Al-Fatiha, recite another short surah aloud. Al-Ikhlas is four verses and is where most people start:'
-        : 'After Al-Fatiha, recite another short surah quietly. Al-Ikhlas is four verses and is where most people start:',
+        ? 'After Al-Fatihah, recite another short surah aloud. Al-Ikhlas is four verses and is where most people start:'
+        : 'After Al-Fatihah, recite another short surah quietly. Al-Ikhlas is four verses and is where most people start:',
       saysSurah: 112,
-      note: 'This part is sunnah, not required. A prayer of Al-Fatiha alone is a complete prayer, so if you do not know one yet, carry on to the bow.',
+      note: 'This part is sunnah, not required. A prayer of Al-Fatihah alone is a complete prayer, so if you do not know one yet, carry on to the bow.',
       sources: [quran(112, [1, 4], { surahName: 'Al-Ikhlas' })],
     });
   }

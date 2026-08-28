@@ -71,7 +71,7 @@ export const BEFORE_PRAYER: Reference = {
       heading: 'Am I covered, and is the place clean?',
       body:
         'The Qur’an tells people to take their adornment at every place of prayer, so dress as you would to meet someone you respect. Your clothes and the ground you pray on should be clean. A carpet, a towel or a mat is fine; a prayer mat is convenient, not required.',
-      sources: [quran(7, 31, { surahName: 'Al-A`raf' })],
+      sources: [quran(7, 31, { surahName: 'Al-Aʿraf' })],
       notes: [
         note(
           'practical',

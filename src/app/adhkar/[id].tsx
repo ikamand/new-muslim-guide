@@ -98,7 +98,8 @@ export default function AdhkarSessionScreen() {
   const instruction = annotationFor(line.id)?.recited === false;
   const eveningOpening =
     session?.sitting === 'evening' ? annotationFor(line.id)?.eveningOpening : undefined;
-  const target = instruction ? 1 : (line.repeat ?? 1);
+  // An annotation's count wins: the book sometimes states it on the next row.
+  const target = instruction ? 1 : (annotationFor(line.id)?.repeat ?? line.repeat ?? 1);
   const last = index === steps.length - 1;
 
   /*
@@ -163,7 +164,12 @@ export default function AdhkarSessionScreen() {
                 {
                   backgroundColor: position <= index ? theme.accent : theme.border,
                   opacity: position < index ? 0.5 : 1,
-                  height: position === index ? 6 : entry.repeat && entry.repeat > 3 ? 5 : 3,
+                  height:
+                    position === index
+                      ? 6
+                      : (annotationFor(entry.id)?.repeat ?? entry.repeat ?? 1) > 3
+                        ? 5
+                        : 3,
                 },
               ]}
             />

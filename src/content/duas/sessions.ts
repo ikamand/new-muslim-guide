@@ -80,10 +80,11 @@ export const ADHKAR_SESSIONS: readonly AdhkarSession[] = [
 export function linesFor(session: AdhkarSession): readonly HisnLine[] {
   const occasion = occasionFor(session);
   if (!occasion) return [];
-  if (!session.sitting) return occasion.lines;
+  if (!session.sitting) return occasion.lines.filter((line) => !annotationFor(line.id)?.omit);
   return occasion.lines.filter((line) => {
-    const time = annotationFor(line.id)?.time;
-    return time === undefined || time === session.sitting;
+    const note = annotationFor(line.id);
+    if (note?.omit) return false;
+    return note?.time === undefined || note.time === session.sitting;
   });
 }
 

@@ -90,6 +90,25 @@ export type HisnAnnotation = {
    */
   continues?: boolean;
   /**
+   * How many times, where the book states the count on a DIFFERENT row.
+   *
+   * Hisn al-Muslim prints the three Quls and then a bare row reading
+   * `(ثلاثَ مرَّاتٍ)`, which is the count for the three above it rather than a
+   * text of its own. The generator refuses to guess that — it reads a count
+   * only where it sits beside the words — so the association is made here,
+   * where a person can see which rows it was attached to.
+   */
+  repeat?: number;
+  /**
+   * Do not show this row at all: what it says is carried somewhere else.
+   *
+   * Different from `recited: false`, which shows the row as an instruction
+   * because it tells the reader to do something. A row like `(ثلاثَ مرَّاتٍ)`
+   * tells them nothing once its count sits on the three sūrahs it belonged to
+   * — as its own card it read as a duʿa whose entire text was "Three times."
+   */
+  omit?: boolean;
+  /**
    * Why, in a few words, for the reviewer coming after.
    *
    * Every entry in this file carries one. An annotation without a stated
@@ -122,7 +141,12 @@ export const HISN_ANNOTATIONS: Readonly<Record<number, HisnAnnotation>> = {
     recited: false,
     reason: "the compiler's own opening praise, before the adhkār begin",
   },
-  1269211: { recited: false, reason: 'a count for the three sūrahs above, not a text' },
+  // The book prints the three Quls, then a row saying (ثلاثَ مرَّاتٍ). The count
+  // belongs to them; the row belongs nowhere once it has been moved.
+  1269196: { repeat: 3, reason: 'the (ثلاثَ مرَّاتٍ) row below the three Quls' },
+  1269200: { repeat: 3, reason: 'the (ثلاثَ مرَّاتٍ) row below the three Quls' },
+  1269205: { repeat: 3, reason: 'the (ثلاثَ مرَّاتٍ) row below the three Quls' },
+  1269211: { omit: true, reason: 'the count above; carried onto the three Quls' },
 
   // …and the six the book marks for one sitting or the other. Transcribed
   // from the parenthesis printed in the line, or from its own footnote.
@@ -130,6 +154,22 @@ export const HISN_ANNOTATIONS: Readonly<Record<number, HisnAnnotation>> = {
   1269257: { time: 'morning', reason: 'the line says (ثلاثَ مرَّاتٍ إذا أصبحَ)' },
   1269259: { time: 'morning', reason: 'the line says (إذا أصبحَ)' },
   1269263: { time: 'evening', reason: 'the line says (ثلاثَ مرَّاتٍ إذا أمسى)' },
+
+  /*
+    ⚠️ EDITORIAL, not transcribed — the only entry in this file that is not
+    read off the page, and Iyad's call.
+
+    The book prints the same dhikr twice: once at ten times (or once when
+    tired), and once at a hundred times in the morning. In the morning both
+    appeared and read as a duplicate. The hundred-times line is marked
+    `إذا أصبحَ` and so is morning-only, so deleting the ten-times line outright
+    would have left the EVENING sitting with neither. Confining it to the
+    evening removes the duplicate without losing the dhikr.
+  */
+  1269252: {
+    time: 'evening',
+    reason: 'duplicate of the ×100 line in the morning, which is morning-only',
+  },
   1269223: {
     eveningOpening: 'اللَّهم إني أمسيت',
     reason: "the book's footnote: وإذا أمسى قال: اللَّهم إني أمسيت",

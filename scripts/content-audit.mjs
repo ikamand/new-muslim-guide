@@ -29,6 +29,7 @@ const load = (p) => import(join(root, p));
 // `require` calls only Metro resolves.
 const { CATALOG, danglingRefs, resolveRef } = await load('src/content/catalog.ts');
 const { pendingRecommendations } = await load('src/content/recommendations.ts');
+const { CADENCE } = await load('src/content/cadence.ts');
 const { ungrouped } = await load('src/content/learn/index.ts');
 /*
   The NAMES, not the files. `prayer-images.ts` also holds a wall of `require()`
@@ -254,6 +255,40 @@ if (homeMissing.length) {
 
 /* ---------- pointers ---------- */
 
+/* ---------- cadence ---------- */
+
+/*
+  Every entry must say where it belongs in someone's life.
+
+  A failing check rather than a line in a document, per the strongest rule in
+  CLAUDE.md, and it is the whole reason cadence is worth having: Phase 4 places
+  content by it, so an entry with no cadence is an entry no screen can put
+  anywhere. Adding a content file without a `cadence.ts` row fails here rather
+  than silently producing a page nothing surfaces.
+*/
+const CADENCES = ['once', 'until-fluent', 'daily', 'yearly', 'on-event', 'keepsake'];
+const noCadence = CATALOG.filter((entry) => !entry.cadence);
+const badCadence = CATALOG.filter((entry) => entry.cadence && !CADENCES.includes(entry.cadence));
+const staleCadence = Object.keys(CADENCE).filter((key) => {
+  const [kind, ...rest] = key.split(':');
+  return !resolveRef({ kind, id: rest.join(':') });
+});
+
+say('Cadence');
+for (const value of CADENCES) {
+  const count = CATALOG.filter((entry) => entry.cadence === value).length;
+  say(`  ${pad(value, 13)} ${String(count).padStart(3)}`);
+}
+say(`  ${pad('undeclared', 13)} ${String(noCadence.length).padStart(3)}`);
+if (noCadence.length) {
+  for (const entry of noCadence.slice(0, 20)) say(`    ${label(entry)}`);
+}
+if (staleCadence.length) {
+  say(`  cadence.ts points at ${staleCadence.length} entr(ies) the catalogue does not have:`);
+  for (const key of staleCadence.slice(0, 20)) say(`    ${key}`);
+}
+say();
+
 const dangling = danglingRefs();
 if (dangling.length) {
   say(`Broken relatedContent pointers (${dangling.length})`);
@@ -276,6 +311,13 @@ if (byVerdict['below-bar'].length) {
   );
 }
 if (dangling.length) failures.push(`${dangling.length} broken relatedContent pointer(s)`);
+if (noCadence.length) {
+  failures.push(`${noCadence.length} entr(ies) with no cadence — add a row to src/content/cadence.ts`);
+}
+if (badCadence.length) failures.push(`${badCadence.length} entr(ies) with an unknown cadence`);
+if (staleCadence.length) {
+  failures.push(`${staleCadence.length} cadence row(s) pointing at content that does not exist`);
+}
 if (homeMissing.length) failures.push(`${homeMissing.length} home pointer(s) resolving to nothing`);
 if (strict && unsourced.length) failures.push(`${unsourced.length} entries citing nothing`);
 

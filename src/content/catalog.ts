@@ -16,10 +16,11 @@
  * everything here is keyed by both.
  */
 
+import { cadenceFor } from './cadence';
 import { HISN } from './duas/hisn';
 import { GUIDES } from './guides';
 import { IMAN_PILLARS } from './iman';
-import type { ContentKind, ContentMeta, ContentNote, ContentRef } from './model';
+import type { Cadence, ContentKind, ContentMeta, ContentNote, ContentRef } from './model';
 import { PHRASES } from './phrases';
 import { PILLARS } from './pillars';
 import { REFERENCES } from './references';
@@ -63,6 +64,16 @@ export type CatalogEntry = {
   pieces: number;
   /** The word for what `pieces` counts, as a UI key suffix. */
   pieceUnit: 'steps' | 'sections' | 'items' | 'minutes';
+  /**
+   * Where this belongs in someone's life, and for how long.
+   *
+   * Resolved here rather than read off each shape, because the value lives in
+   * one table — `cadence.ts` says why. Optional in the type and required in
+   * practice: `content:audit` fails on any entry without one, so a `undefined`
+   * reaching a screen means the audit was not run rather than that a decision
+   * was made.
+   */
+  cadence?: Cadence;
   /** Every source on the entry and on anything inside it, flattened. */
   sources: readonly Source[];
   /** Structured notes only. The plain `note` strings stay where they are. */
@@ -173,7 +184,16 @@ function buildCatalog(): readonly CatalogEntry[] {
     });
   }
 
-  return entries;
+  /*
+    Attached in one place rather than at each of the six push sites above.
+    Six call sites is six chances to forget, and the next content kind would
+    be a seventh; this way a new kind gets its cadence resolved for free and
+    the audit tells whoever added it that the table needs a row.
+  */
+  return entries.map((entry) => ({
+    ...entry,
+    cadence: cadenceFor({ kind: entry.kind, id: entry.id }),
+  }));
 }
 
 export const CATALOG: readonly CatalogEntry[] = buildCatalog();

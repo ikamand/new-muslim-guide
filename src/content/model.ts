@@ -58,6 +58,50 @@ export type Difficulty = 'foundational' | 'building' | 'deeper';
  */
 export type BeginnerPriority = 1 | 2 | 3 | 4 | 5;
 
+/**
+ * When a piece of content belongs in someone's life — its shape in time.
+ *
+ * Content here had two possible states before this: a task you finish, or a
+ * monument that sits on a shelf forever. Neither describes the morning adhkār,
+ * which you say every day of your life and never complete, or the page about
+ * losing count in prayer, which is worthless until the minute it is the only
+ * thing that matters.
+ *
+ * ## This decides placement, not presentation
+ *
+ * That is the whole difference from `Requirement` in `journey.ts`, whose own
+ * comment scopes it to how a step "is presented". Cadence answers a different
+ * question — where does this belong, and for how long — and each value has a
+ * placement rule attached rather than a style:
+ *
+ * `once`         Read it and it is yours. Appears in Learn; leaves Today
+ *                permanently once met.
+ * `until-fluent` Needed until it is not. Drives Today's primary action while
+ *                it is needed, then collapses to a link. This is what turns
+ *                "Pray now · Fajr · 23 steps" into something else for someone
+ *                who has prayed a thousand Fajrs.
+ * `daily`        Forever. Permanent on Today, and NEVER counted as journey
+ *                progress — you do not finish the morning adhkār.
+ * `yearly`       Returns with the calendar. Surfaced by `seasons.ts` and
+ *                nowhere else.
+ * `on-event`     Invisible until it happens. Off the shelf entirely, reachable
+ *                from Ask and Help.
+ * `keepsake`     Rarely, and never removed. One line, never a hero.
+ *
+ * ## Where the values are recorded
+ *
+ * Not here. `src/content/cadence.ts` holds the table, and the reason is in its
+ * header: `ContentMeta` is present on 52 of the catalogue's 201 entries, so a
+ * field here could never answer the question for the other 149.
+ */
+export type Cadence =
+  | 'once'
+  | 'until-fluent'
+  | 'daily'
+  | 'yearly'
+  | 'on-event'
+  | 'keepsake';
+
 /** Cross-cutting labels for search and "related", closed for the same reason as category. */
 export type ContentTag =
   | 'first-day'

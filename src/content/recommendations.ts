@@ -21,7 +21,7 @@
 
 import { INITIAL_INTERESTS, USER_STAGES, type InitialInterest, type UserStage } from '@/lib/onboarding';
 
-import { resolveRef, type CatalogEntry } from './catalog';
+import { resolveRef } from './catalog';
 import { ref, type ContentRef } from './model';
 
 export { INITIAL_INTERESTS, USER_STAGES };
@@ -184,46 +184,26 @@ const dedupe = (refs: readonly ContentRef[]): readonly ContentRef[] => {
   });
 };
 
-/**
- * Everything worth showing, most relevant first, before resolution.
- *
- * Interest leads because it is the more specific answer — someone who said
- * "prayer" asked a narrower question than someone who said "I just became
- * Muslim". Stage follows, and the universal path fills the tail so the list is
- * never short just because a table was.
- */
-export function recommendedRefs(
-  stage: UserStage | null,
-  interest: InitialInterest | null,
-): readonly ContentRef[] {
-  return dedupe([
-    ...(interest ? BY_INTEREST[interest] : []),
-    ...(stage ? BY_STAGE[stage] : []),
-    ...UNIVERSAL,
-  ]);
-}
+/*
+  Two exports were deleted here on 28 Aug 2026, and the names are deliberately
+  not repeated in code so `plan:check` can guard against their return.
 
-/**
- * The same list, resolved to real content, with anything unwritten dropped.
- *
- * Silent about what is missing — a beginner should never see a gap in the app's
- * plans. `pendingRecommendations` is where that surfaces instead.
- */
-export function recommendationsFor(
-  stage: UserStage | null,
-  interest: InitialInterest | null,
-  limit = 6,
-): readonly CatalogEntry[] {
-  const resolved: CatalogEntry[] = [];
+  They ranked and resolved this file's tables into a list for a screen, and no
+  screen ever asked for one. Twenty possible onboarding answers fed a
+  personalisation engine whose output nothing rendered.
 
-  for (const entry of recommendedRefs(stage, interest)) {
-    const found = resolveRef(entry);
-    if (found) resolved.push(found);
-    if (resolved.length === limit) break;
-  }
+  Deleting rather than wiring them up is the deliberate half. Phase 7 of
+  `docs/build-order.md` replaces the two questions these tables are keyed on —
+  "which describes you" becomes "have you said the shahada" and "can you pray
+  on your own yet", because a fact can be checked against behaviour and a
+  self-description cannot. A ranking built on the retired answers would have
+  been rewritten before it was ever shown to anybody.
 
-  return resolved;
-}
+  What stays is the part that works: the tables are a readable statement of
+  what a beginner should meet first, and `pendingRecommendations` reports
+  anything they name that has not been written yet. The audit prints that, and
+  it is a to-do list rather than a failure.
+*/
 
 /** Every ref any table points at that has no content yet. Drives the audit. */
 export function pendingRecommendations(): readonly ContentRef[] {

@@ -14,14 +14,13 @@ export {
   resolveRef,
   type CatalogEntry,
 } from './catalog';
+export { CADENCE, cadenceFor } from './cadence';
 export { getGuide, GUIDES, PURIFICATION } from './guides';
 export {
   INITIAL_INTERESTS,
   PLANNED,
   TOPICS,
   pendingRecommendations,
-  recommendationsFor,
-  recommendedRefs,
   USER_STAGES,
   type InitialInterest,
   type UserStage,
@@ -35,6 +34,7 @@ export {
   resolveNotes,
   type ArabicTerm,
   type BeginnerPriority,
+  type Cadence,
   type Consensus,
   type ContentCategory,
   type ContentKind,

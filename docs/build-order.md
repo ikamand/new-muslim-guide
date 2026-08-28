@@ -167,10 +167,19 @@ diagnosis.
 *Content currently has two possible states, a task or a monument. This gives it
 a shape in time, which is what lets screens place content written after them.*
 
-- **Add `Cadence` to `ContentMeta`.** Six values: `once` (read it and it is
-  yours), `until-fluent` (needed until it is not), `daily` (forever), `yearly`
+- **Add `Cadence`.** Six values: `once` (read it and it is yours),
+  `until-fluent` (needed until it is not), `daily` (forever), `yearly`
   (returns with the calendar), `on-event` (invisible until it happens),
   `keepsake` (rarely, and never removed).
+  ⚠️ **Built as a table, not a field on `ContentMeta`**, which is what this
+  said until 28 Aug 2026. `meta` is present on 52 of the 201 catalogue
+  entries: the other 149 are the 132 occasions of Hisn al-Muslim, which live
+  in a generated file that says do not edit by hand, and 17 phrases and
+  situational pages carrying no `meta` at all. A field there would have
+  answered for a quarter of the catalogue and needed a second mechanism for
+  the rest. The type is in `model.ts`; the values are in `src/content/cadence.ts`,
+  which is the arrangement `duas/moments.ts` and `duas/annotations.ts` already
+  use for editorial judgements about the same generated rows.
 - **It decides placement, not presentation.** That is the whole difference from
   `Requirement` in `journey.ts:38`, whose own comment scopes it to how a step
   "is presented". All six rules, because the placement *is* the feature:

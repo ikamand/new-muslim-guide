@@ -63,7 +63,7 @@ export type JourneyState = {
  * "continue" lessons — which they would the moment either kept its own rule.
  */
 export function useJourney(): JourneyState {
-  const { completedLessons, userStage, initialInterest } = useSettings();
+  const { completedLessons, initialInterest } = useSettings();
   const { locale } = useLocale();
 
   return useMemo(() => {
@@ -99,7 +99,7 @@ export function useJourney(): JourneyState {
     }
     const distinct = [...seen.values()];
 
-    const entry = entryStageIndex(userStage, initialInterest);
+    const entry = entryStageIndex(initialInterest);
     const fromEntry = stages.findIndex((stage, index) => index >= entry && stage.next);
     const anywhere = stages.findIndex((stage) => stage.next);
     const nextStageIndex = fromEntry === -1 ? anywhere : fromEntry;
@@ -112,5 +112,5 @@ export function useJourney(): JourneyState {
       nextStageIndex,
       fresh: distinct.every((step) => !step.done),
     };
-  }, [completedLessons, userStage, initialInterest, locale]);
+  }, [completedLessons, initialInterest, locale]);
 }

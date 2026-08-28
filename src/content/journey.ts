@@ -22,7 +22,7 @@
  * they tapped "The Five Pillars" would be a small lie about where they are.
  */
 
-import type { InitialInterest, UserStage } from '@/lib/onboarding';
+import type { InitialInterest } from '@/lib/onboarding';
 
 import type { ContentRef } from './model';
 import { ref } from './model';
@@ -167,19 +167,18 @@ const ENTRY_BY_INTEREST: Record<InitialInterest, StageId> = {
   unsure: 'start-here',
 };
 
-const ENTRY_BY_STAGE: Record<UserStage, StageId> = {
-  'new-muslim': 'first-days',
-  exploring: 'start-here',
-  returning: 'learning-to-pray',
-  helping: 'start-here',
-};
-
-/** Index into `JOURNEY`. Zero for anyone who skipped or answered nothing. */
-export function entryStageIndex(
-  stage: UserStage | null,
-  interest: InitialInterest | null,
-): number {
-  const id = (interest && ENTRY_BY_INTEREST[interest]) ?? (stage && ENTRY_BY_STAGE[stage]);
+/**
+ * Index into `JOURNEY`. Zero for anyone who skipped or answered nothing.
+ *
+ * Interest is the only input, and there used to be a second: `ENTRY_BY_STAGE`
+ * mapped the onboarding stage to a starting point and was removed on 28 Aug
+ * 2026 as unreachable. Nothing could ever read it — this function preferred
+ * interest whenever it was set, and `welcome.tsx` gates its Continue on each
+ * answer in turn and nulls both on Skip, so "stage answered, interest not" is
+ * a state the app cannot produce.
+ */
+export function entryStageIndex(interest: InitialInterest | null): number {
+  const id = interest && ENTRY_BY_INTEREST[interest];
   const found = id ? JOURNEY.findIndex((entry) => entry.id === id) : -1;
   return found === -1 ? 0 : found;
 }

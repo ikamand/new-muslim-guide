@@ -72,13 +72,19 @@ const CLAIMS = [
   ['src/content/learn/family.ts', 62, 'Do I have to tell them?'],
   ['src/content/learn/family.ts', 74, 'What about marriage?'],
   ['src/content/index.ts', 22, 'pendingRecommendations'],
-  ['src/content/index.ts', 24, 'recommendedRefs'],
-  ['scripts/content-audit.mjs', 31, 'pendingRecommendations'],
+  /*
+    `index.ts:24 recommendedRefs` and `journey.ts:171 ENTRY_BY_STAGE` were
+    cited by both source documents as dead code, and Phase 1 deleted them on
+    28 Aug 2026. The citations are dropped rather than repointed: they
+    described something that is gone, which is the phase working, and leaving
+    them would make a completed deletion look like a stale reference forever.
+    `docs/build-order.md` "What this removes" is the record that they existed.
+  */
+  ['scripts/content-audit.mjs', 32, 'pendingRecommendations'],
   ['src/app/(tabs)/learn.tsx', 181, 'function ShahadaCard'],
   ['src/app/(tabs)/learn.tsx', 187, "userStage === 'new-muslim'"],
   ['src/content/journey.ts', 38, 'export type Requirement'],
-  ['src/content/journey.ts', 171, 'ENTRY_BY_STAGE'],
-  ['src/content/journey.ts', 182, 'ENTRY_BY_INTEREST'],
+  ['src/content/journey.ts', 161, 'ENTRY_BY_INTEREST'],
   ['src/content/journey.ts', 163, "prayer: 'first-days'"],
   ['src/app/welcome.tsx', 198, 'continueDisabled={stage === null}'],
   ['src/app/welcome.tsx', 226, 'continueDisabled={interest === null}'],
@@ -91,7 +97,7 @@ const CLAIMS = [
   ['src/app/(tabs)/index.tsx', 43, 'keeps a streak'],
   ['src/app/(tabs)/index.tsx', 102, 'Friday is the one that matters'],
   ['src/app/ask.tsx', 29, 'I farted'],
-  ['src/content/model.ts', 125, 'export type ScholarlyPosition'],
+  ['src/content/model.ts', 169, 'export type ScholarlyPosition'],
   ['src/i18n/ui.ts', 273, 'quran.tapToHide'],
   ['src/content/references.ts', 522, 'Friday midday is the busiest hour'],
   ['src/content/references.ts', 565, 'join the line where you are'],
@@ -211,12 +217,22 @@ const kindFiles = execSync(
 ).trim();
 measure('files that would change for a seventh ContentKind', Number(kindFiles), 7);
 
-// recommendations.ts, still uncalled by any screen.
-const callers = execSync(
-  `grep -rl "recommendationsFor\\|recommendedRefs" src --include="*.tsx" || true`,
+/*
+  The two dead exports stay dead.
+
+  Phase 1 deleted them, so this no longer guards "uncalled by a screen" — it
+  guards that nobody reintroduces them. Anything named `recommendationsFor` or
+  `recommendedRefs` anywhere in `src/` is either the deletion being undone or a
+  new function wearing a retired name, and both deserve a look.
+*/
+const revived = execSync(
+  // A definition or a call, never the bare name — `recommendations.ts` carries
+  // a comment explaining the deletion, and a guard that fires on its own
+  // record of what it guards is a guard nobody keeps.
+  `grep -rlE "(export (function|const) )?(recommendationsFor|recommendedRefs) ?[(=]" src || true`,
   { cwd: root, encoding: 'utf8' },
 ).trim();
-if (callers) fail(`recommendations.ts now has a screen calling it: ${callers}`);
+if (revived) fail(`a deleted recommendation export is back: ${revived}`);
 
 if (measured.every(([, a, c]) => a === c)) {
   pass(`all ${measured.length} measurements match the documents`);

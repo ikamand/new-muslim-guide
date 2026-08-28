@@ -72,6 +72,116 @@ export const ADHKAR_SESSIONS: readonly AdhkarSession[] = [
 ];
 
 /**
+ * One thing a reader is asked to do once.
+ *
+ * Not the same as a row of the book, and the three ways they differ are the
+ * three things this file settles so no screen has to: a row can be dropped
+ * (`omit`), folded into the row above (`continues`), or SPLIT because the book
+ * put two dhikr in one row with the count printed between them.
+ */
+export type AdhkarStep = {
+  /** Unique per step — a split row yields several from one line id. */
+  key: string;
+  /** The row it came from, for annotations, ids and bug reports. */
+  line: HisnLine;
+  arabic: string;
+  english: string;
+  emphasis?: readonly string[];
+  repeat: number;
+  /** Something to do rather than something to say. Never counted. */
+  instruction: boolean;
+  /** The book's evening substitutions, in an evening sitting only. */
+  eveningForms: readonly string[];
+};
+
+/**
+ * The steps a session reads, with the book's rows turned into things to do.
+ *
+ * Everything a screen needs to render a sitting, so the reader holds no
+ * content rules of its own and `npm run narration:check` can see the same
+ * steps a reader will.
+ */
+export function stepsFor(session: AdhkarSession): readonly AdhkarStep[] {
+  const steps: AdhkarStep[] = [];
+
+  for (const line of linesFor(session)) {
+    const note = annotationFor(line.id);
+    const eveningForms = session.sitting === 'evening' ? (line.eveningForms ?? []) : [];
+
+    /*
+      A row the publisher split across a page break joins the row above it.
+      Shown separately, Sūrat an-Nās reads as a verse followed by a second
+      quotation, and a reader is asked to say half a verse.
+    */
+    if (note?.continues && steps.length > 0) {
+      const previous = steps[steps.length - 1];
+      previous.arabic = `${previous.arabic} ${line.arabic}`.trim();
+      previous.english = [previous.english, line.english].filter(Boolean).join(' ');
+      previous.emphasis = [...(previous.emphasis ?? []), ...(line.emphasis ?? [])];
+      continue;
+    }
+
+    const splits = note?.splitOn ?? [];
+    if (splits.length === 0) {
+      steps.push({
+        key: String(line.id),
+        line,
+        arabic: line.arabic,
+        english: line.english,
+        emphasis: line.emphasis,
+        repeat: note?.repeat ?? line.repeat ?? 1,
+        instruction: note?.recited === false,
+        eveningForms,
+      });
+      continue;
+    }
+
+    /*
+      The book prints `لا إله إلا الله … قَدِيرٌ ثلاثاً، اللَّهُمَّ لاَ مَانِعَ …`
+      — two dhikr in one row with the count for the first sitting between them.
+      As one card it asked a reader to say the whole thing three times and
+      showed them the word "three times" in the middle of the duʿa. Split at the
+      marker, which is removed: it is a count, and a count belongs on the
+      counter.
+    */
+    let arabic = line.arabic;
+    let english = line.english ?? '';
+    const markers = splits.map((split) => [split.arabic, split.english]).flat();
+    const trim = (text: string) => text.replace(/^[\s،,.]+|[\s،,.]+$/g, '').trim();
+
+    splits.forEach((split, position) => {
+      const cutAr = arabic.indexOf(split.arabic);
+      const cutEn = english.indexOf(split.english);
+      steps.push({
+        key: `${line.id}-${position}`,
+        line,
+        arabic: trim(cutAr >= 0 ? arabic.slice(0, cutAr) : arabic),
+        english: trim(cutEn >= 0 ? english.slice(0, cutEn) : english),
+        emphasis: line.emphasis?.filter((span) => !markers.includes(span)),
+        repeat: split.repeatBefore ?? 1,
+        instruction: false,
+        eveningForms: [],
+      });
+      arabic = cutAr >= 0 ? arabic.slice(cutAr + split.arabic.length) : '';
+      english = cutEn >= 0 ? english.slice(cutEn + split.english.length) : '';
+    });
+
+    steps.push({
+      key: `${line.id}-${splits.length}`,
+      line,
+      arabic: trim(arabic),
+      english: trim(english),
+      emphasis: line.emphasis?.filter((span) => !markers.includes(span)),
+      repeat: note?.repeat ?? 1,
+      instruction: false,
+      eveningForms,
+    });
+  }
+
+  return steps;
+}
+
+/**
  * The lines a session actually reads.
  *
  * A line the book marks for the other sitting is dropped; everything else is

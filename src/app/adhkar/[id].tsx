@@ -4,9 +4,7 @@ import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 
 import { MarkedText } from '@/components/marked-text';
 import { ThemedText } from '@/components/themed-text';
-import { annotationFor } from '@/content/duas/annotations';
-import { linesFor, occasionFor, sessionById } from '@/content/duas/sessions';
-import type { HisnLine } from '@/content/duas/hisn';
+import { occasionFor, sessionById, stepsFor } from '@/content/duas/sessions';
 import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import type { UIKey } from '@/i18n/ui';
@@ -57,23 +55,7 @@ export default function AdhkarSessionScreen() {
   const session = sessionById(id);
   const occasion = session ? occasionFor(session) : undefined;
 
-  /*
-    A step is what a reader is asked to do once — not always one row of the
-    book. Rows marked `continues` are folded into the row above them, because
-    the publisher split Sūrat an-Nās and al-Baqarah 286 across a page break and
-    showing the tail as its own card asks somebody to say half a verse.
-  */
-  const steps = useMemo(() => {
-    const out: { line: HisnLine; tail: HisnLine[] }[] = [];
-    for (const line of session ? linesFor(session) : []) {
-      if (annotationFor(line.id)?.continues && out.length > 0) {
-        out[out.length - 1].tail.push(line);
-        continue;
-      }
-      out.push({ line, tail: [] });
-    }
-    return out;
-  }, [session]);
+  const steps = useMemo(() => (session ? stepsFor(session) : []), [session]);
 
   const [index, setIndex] = useState(0);
   const [count, setCount] = useState(0);
@@ -89,31 +71,15 @@ export default function AdhkarSessionScreen() {
   }
 
   const step = steps[Math.min(index, steps.length - 1)];
-  const { line } = step;
   /*
     An instruction is not counted. "Join his palms and blow into them" is
     something to do, and a counter on it would be the app inventing a
     repetition the book never states.
   */
-  const instruction = annotationFor(line.id)?.recited === false;
-  // Straight from the book's footnote via `hisn.ts`, never hand-copied.
-  const eveningForms = session?.sitting === 'evening' ? (line.eveningForms ?? []) : [];
-  // An annotation's count wins: the book sometimes states it on the next row.
-  const target = instruction ? 1 : (annotationFor(line.id)?.repeat ?? line.repeat ?? 1);
+  const { instruction, eveningForms, arabic, english, emphasis } = step;
+  const target = instruction ? 1 : step.repeat;
   const last = index === steps.length - 1;
 
-  /*
-    A split row is JOINED to the row above rather than stacked under it. Two
-    right-aligned blocks each begin on their own line, so Sūrat an-Nās read as
-    a verse followed by a second quotation — which is exactly the impression
-    the split creates and the reason for folding it in at all. One string
-    flows.
-  */
-  const arabic = [line.arabic, ...step.tail.map((entry) => entry.arabic)].join(' ');
-  const english = [line.english, ...step.tail.map((entry) => entry.english)]
-    .filter(Boolean)
-    .join(' ');
-  const emphasis = [line.emphasis ?? [], ...step.tail.map((entry) => entry.emphasis ?? [])].flat();
 
   /*
     One press does one thing. Below the target it counts; at the target it
@@ -156,9 +122,9 @@ export default function AdhkarSessionScreen() {
 
       <View style={styles.frame}>
         <View style={styles.ticks}>
-          {steps.map(({ line: entry }, position) => (
+          {steps.map((entry, position) => (
             <View
-              key={entry.id}
+              key={entry.key}
               style={[
                 styles.tick,
                 {
@@ -167,7 +133,7 @@ export default function AdhkarSessionScreen() {
                   height:
                     position === index
                       ? 6
-                      : (annotationFor(entry.id)?.repeat ?? entry.repeat ?? 1) > 3
+                      : entry.repeat > 3
                         ? 5
                         : 3,
                 },
@@ -193,7 +159,8 @@ export default function AdhkarSessionScreen() {
           style={[
             styles.card,
             {
-              backgroundColor: line.kind === 'quran' ? theme.accentMuted : theme.backgroundElement,
+              backgroundColor:
+                step.line.kind === 'quran' ? theme.accentMuted : theme.backgroundElement,
               borderColor: count > 0 ? theme.accent : theme.border,
             },
           ]}
@@ -216,7 +183,7 @@ export default function AdhkarSessionScreen() {
             accessibilityLabel={t('adhkar.tapToCount')}
             style={({ pressed }) => [styles.cardBody, { opacity: pressed ? 0.9 : 1 }]}>
             <ThemedText
-              type={line.kind === 'quoted' ? 'arabicLead' : 'arabicQuote'}
+              type={step.line.kind === 'quoted' ? 'arabicLead' : 'arabicQuote'}
               style={styles.arabic}>
               <MarkedText text={arabic} spans={emphasis} colour={theme.accent} />
             </ThemedText>

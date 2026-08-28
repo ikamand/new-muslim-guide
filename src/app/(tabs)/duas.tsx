@@ -8,7 +8,7 @@ import { ThemedText } from '@/components/themed-text';
 import { HISN } from '@/content/duas/hisn';
 import {
   ADHKAR_SESSIONS,
-  linesFor,
+  stepsFor,
   occasionFor,
   sessionForWindow,
   type AdhkarSession,
@@ -128,7 +128,7 @@ export default function DuasScreen() {
               key={session.id}
               label={t(sessionLabelKey(session))}
               href={{ pathname: '/adhkar/[id]', params: { id: session.id } }}
-              count={linesFor(session).length}
+              count={stepsFor(session).length}
             />
           ))}
           <Row label="Hisn al-Muslim" href="/dua-book" count={HISN.length} muted />
@@ -154,10 +154,13 @@ function SessionHero({
 }) {
   const theme = useTheme();
   const { t } = useLocale();
-  // The session's own lines, not the occasion's — morning and evening read the
-  // same occasion and drop the few the book marks for the other sitting.
-  const lines = linesFor(session);
-  if (lines.length === 0) return null;
+  /*
+    Steps, not rows. Morning and evening read the same occasion and drop the
+    few the book marks for the other sitting, and a row holding two dhikr
+    counts as the two things it actually asks for.
+  */
+  const steps = stepsFor(session);
+  if (steps.length === 0) return null;
 
   const kicker = state.justPrayed
     ? `${t('adhkar.justPrayed')} ${state.justPrayed}`
@@ -181,7 +184,7 @@ function SessionHero({
       ) : null}
       <ThemedText type="cardTitle">{t(sessionLabelKey(session))}</ThemedText>
       <ThemedText type="small" themeColor="textSecondary">
-        {`${lines.length}  ·  ${t('adhkar.minutes').replace('{n}', String(session.minutes))}`}
+        {`${steps.length}  ·  ${t('adhkar.minutes').replace('{n}', String(session.minutes))}`}
       </ThemedText>
       <View style={[styles.start, { backgroundColor: theme.accent }]}>
         <ThemedText type="smallBold" themeColor="textOnAccent">

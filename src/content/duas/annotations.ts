@@ -86,6 +86,19 @@ export type HisnAnnotation = {
    */
   repeat?: number;
   /**
+   * Cut this row into separate steps, dropping the marker.
+   *
+   * The book sometimes prints two dhikr in one row with the count for the
+   * first between them — `… وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ ثلاثاً، اللَّهُمَّ لاَ
+   * مَانِعَ …`. Left whole it asks a reader to say both three times and puts the
+   * word "three times" in the middle of the duʿa. The marker is removed
+   * because it is a count, and a count belongs on the counter.
+   *
+   * Both languages are named so the English cuts at the same place. Neither is
+   * searched for loosely: an exact substring or the row is left alone.
+   */
+  splitOn?: readonly { arabic: string; english: string; repeatBefore?: number }[];
+  /**
    * Do not show this row at all: what it says is carried somewhere else.
    *
    * Different from `recited: false`, which shows the row as an instruction
@@ -168,6 +181,10 @@ export const HISN_ANNOTATIONS: Readonly<Record<number, HisnAnnotation>> = {
   },
 
   // Adhkār after the prayer
+  1269152: {
+    splitOn: [{ arabic: 'ثلاثاً،', english: 'three times.', repeatBefore: 3 }],
+    reason: 'two dhikr in one row, with the count for the first printed between them',
+  },
   1269173: { recited: false, reason: 'a label on the lines above: after every prayer' },
 };
 

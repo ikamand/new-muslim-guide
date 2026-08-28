@@ -31,7 +31,7 @@
  */
 import { HISN } from '../src/content/duas/hisn.ts';
 import { HISN_ANNOTATIONS } from '../src/content/duas/annotations.ts';
-import { ADHKAR_SESSIONS, linesFor } from '../src/content/duas/sessions.ts';
+import { ADHKAR_SESSIONS, linesFor, stepsFor } from '../src/content/duas/sessions.ts';
 import { pickForNow, resolvePick } from '../src/content/duas/card.ts';
 
 /**
@@ -81,14 +81,15 @@ const report = (where, entry, hits) => {
 */
 let counted = 0;
 for (const session of ADHKAR_SESSIONS) {
-  const occasion = HISN.find((entry) => entry.id === session.occasion);
-  if (!occasion) continue;
-  for (const line of occasion.lines) {
-    if (!line.repeat) continue;
-    if (HISN_ANNOTATIONS[line.id]?.recited === false) continue;
+  // Steps, not rows: a row the book splits in two is two things on screen, and
+  // checking rows would miss whichever half the reader is actually shown.
+  for (const step of stepsFor(session)) {
+    if (step.repeat <= 1 || step.instruction) continue;
     counted += 1;
-    const hits = markersIn(line.arabic);
-    if (hits.length > 0) report(`${session.id}, counted line ${line.id}`, { line }, hits);
+    const hits = markersIn(step.arabic);
+    if (hits.length > 0) {
+      report(`${session.id}, counted step ${step.key}`, { line: { ...step.line, arabic: step.arabic } }, hits);
+    }
   }
 }
 

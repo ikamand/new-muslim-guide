@@ -293,6 +293,12 @@ const MUST_CARRY = [
   ['the observation storage decision', research, 'storage shape deliberately'],
   ['the Ask alias layer', research, 'alias layer'],
   ['what happens if a pilot is rejected', research, 'Rejection'],
+  // The three jobs the tiers actually are. The plan built all their parts and
+  // never named what they added up to, which a reader executing it would need.
+  ['the instructor tier', research, 'Instructor'],
+  ['the companion tier', research, 'Companion'],
+  ['the instrument tier', research, 'Instrument'],
+  ['the limit on what can trigger companion content', research, 'honest limit on'],
 ];
 
 /**

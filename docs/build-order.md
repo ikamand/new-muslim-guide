@@ -29,6 +29,45 @@ verification apparatus, and every word of the 69 existing teaching entries.
 
 ---
 
+## What the three tiers are, and which phases build them
+
+The research found the app is an excellent instructor, a partial companion, and
+not an instrument at all. Those are **not difficulty bands** — a convert's
+knowledge is jagged rather than layered, so nothing here gates content by tier
+and nothing is hidden from anyone. They are three different jobs the app does,
+and this table is what the fourteen phases add up to.
+
+| The job | What it is | Built by |
+|---|---|---|
+| **Instructor** — weeks 0–8 | Tells you what to do next, in order. Already good; five pages missing. | Phase 9 |
+| **Companion** — months 2–24 | Meets you at the moment life produces a question. Needs event-shaped content *and* something to surface it. | Phases 1, 4, 6, 8, 11 |
+| **Instrument** — year 2+ | Depth and maintenance in what you already do, and a Today that stops instructing. | Phases 2, 4, 7, 13 |
+
+### ⚠️ The honest limit on "companion"
+
+The research promised content that arrives *at the moment life produces the
+question*. Most of it cannot, and the plan should not pretend otherwise.
+
+- **What can trigger it.** The Hijri calendar, which is the only trigger the app
+  has today (`use-today.ts` reads `seasonFor` and nothing else) — Ramadan, Dhul
+  Hijjah, Muharram. Friday, weekly, for Jumuʿah. And a First becoming available,
+  from Phase 6.
+- **What could trigger it, and needs a decision.** The app already holds
+  `coords` for prayer times and qibla, so it could notice you are a long way from
+  home and offer the travelling page — which today is reachable only by browsing
+  to it. That inference stays on the device and calls nothing, but it is the app
+  noticing something about your life rather than your taps, and that is Iyad's
+  call rather than mine. **It is deliberately in no phase until he makes it.**
+- **What cannot, and must not be faked.** A death. A relapse. Being corrected at
+  the mosque. A question from a partner. The app cannot know these, and the only
+  routes to guessing are surveillance or noticing absence — one is ruled out by
+  the offline promise and the other by `index.tsx:43`.
+- **So for most of tier two, "companion" means a narrower thing:** the page
+  exists, it is written for that moment rather than as a reference article, and
+  Ask finds it in one search. That is a reference that is *ready*. It is less
+  than the research's phrasing implies, and saying so here is cheaper than
+  discovering it in Phase 11.
+
 ## What this plan is not about
 
 **Audio, which is the actual release gate.** Twelve clips are wired to live
@@ -235,6 +274,10 @@ things the app already has; nothing new is written.*
   browses to tayammum; they need it because there is no water.
 - **Help chips and the header stay as they are.** The chips retire into Ask when
   Ask can answer, which is Phase 8, not now.
+- **⚠️ Not building: the travelling trigger.** The ranked slot above is where a
+  location-based offer would go, and the app already has the coordinates. It is
+  left out pending Iyad's decision — see "The honest limit on companion". If he
+  says yes it is one more candidate in the same ranked function, not a new phase.
 
 **Done when** both screens have been seen at phone width in both themes, the
 adhkār sitting appears inside its window and the duʿa card outside it, and the

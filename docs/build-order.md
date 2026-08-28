@@ -712,6 +712,39 @@ because it is the only body of text in this plan that verifies automatically.*
 
 **Done when** all 30 pass `verify:import` and `content:verify`, and the
 collection needed no code change beyond a data file and a registry row.
+**Done 28 Aug 2026 — 32 duʿas**, and two things went differently.
+
+⚠️ **The Pray API could not be found.** This phase and `docs/expansion-plan.md`
+§1.2 both describe testing it in detail — 57 records, `formula` and
+`description` modelled separately, a Naqshbandi record to exclude — and
+**neither document records the hostname**. It could not be found again. That is
+a gap in the plan rather than in the API, and it is written into the
+generator's header so nobody repeats the search.
+
+It did not matter, because the API was only ever the LIST. Every word was
+always going to come from QuranEnc — that is why this body is "fully
+verifiable" — so what was missing was a set of verse references, and those are
+now stated directly.
+
+⚠️ **A mechanical rule does not work here either**, the same way it did not for
+the 99 names. Searching all 6,236 ayahs for the vocative `رَبَّنَا` or `رَبِّ`
+returns **215 verses**, the first of which is 1:2 — "Lord of the worlds", a
+description of God rather than an address to Him. Tightening it does not help:
+some of the true addresses are the pleas of the damned, which nobody is being
+taught to say. So the references are written out, and every one is a
+supplication the Qur'an explicitly attributes.
+
+**No text is sliced.** The whole ayah ships, framing and all — deciding where a
+supplication begins would be an editorial act on a Qur'an text, and "And
+[mention] when Abraham said…" is what tells a reader whose words these are.
+
+**Placement**, Iyad's decision: its own screen, Ask, a row in Learn, and a row
+on the **Duʿa tab** beside Hisn al-Muslim — where somebody actually goes
+looking for a duʿa. The tab reads `COLLECTIONS` filtered by CATEGORY, not by
+id, so a future collection lands there and the branch `types.ts` forbids is
+never written. **Not** in the daily coda: `dailyEntry` alternates between
+`daily` collections, so a second one would mean a name one day and a duʿa the
+next, and the 99 names would take 198 days to come round instead of 99.
 **Ships via** OTA.
 
 ### Phase 11 — Jumuʿah, then the tier-two set

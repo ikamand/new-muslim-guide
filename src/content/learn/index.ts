@@ -150,6 +150,7 @@ export const TOPIC_GROUPS: readonly { id: TopicGroupId; topics: readonly Content
       ref('reference', 'adhan'),
       ref('reference', 'what-breaks-prayer'),
       ref('reference', 'dua-and-dhikr'),
+      ref('collection', 'quranic-duas'),
     ],
   },
   {

@@ -73,7 +73,8 @@
     "narration:check": "node --import ./scripts/ts-resolve.mjs scripts/narration-check.mjs",
     "plan:check": "node --import ./scripts/ts-resolve.mjs scripts/plan-check.mjs",
     "verify:import": "node --import ./scripts/ts-resolve.mjs scripts/verify-import.mjs",
-    "collection:names": "node scripts/generate-names.mjs"
+    "collection:names": "node scripts/generate-names.mjs",
+    "collection:duas": "node scripts/generate-quranic-duas.mjs"
   },
   "private": true
 }

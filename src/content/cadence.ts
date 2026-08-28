@@ -340,6 +340,16 @@ const HISN: Readonly<Record<number, Cadence>> = {
 const COLLECTIONS: Readonly<Record<string, Cadence>> = {
   /* One name a day is a fortnight's practice, and then it comes round again. */
   'quranic-names': 'daily',
+  /*
+    NOT `daily`, deliberately.
+
+    `dailyEntry` alternates between the collections whose cadence is `daily`,
+    so a second one would mean a name one day and a duʿa the next — and the 99
+    names would take 198 days to come round instead of 99. One daily practice
+    is a practice; two is a rota. These live on the Duʿa tab, which is where
+    somebody goes looking for a duʿa.
+  */
+  'quranic-duas': 'once',
 };
 
 /** Every cadence in the app, keyed as `kind:id`. */

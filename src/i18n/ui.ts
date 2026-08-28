@@ -251,6 +251,9 @@ export const EN = {
   /** The pieces a long text is learned in — the unit you loop twenty times. */
   'count.parts': 'parts to learn',
   'count.items': 'items',
+  /* Counted rather than bare — "32" alone in a column beside "132 occasions"
+     says nothing about what it counts. */
+  'count.items.long': '{n} to read',
   /** Reading time, spelled out — a Learn card has room for the word. */
   'count.minutes.long': 'min read',
   'count.articles': 'articles',

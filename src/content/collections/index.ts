@@ -25,13 +25,14 @@
  * no component may branch on which collection it is rendering.
  */
 
+import { QURANIC_DUAS } from './quranic-duas';
 import { QURANIC_NAMES } from './quranic-names';
 
 import { cadenceFor } from '../cadence';
 import { ref } from '../model';
 import type { Collection, CollectionEntry } from '../types';
 
-export const COLLECTIONS: readonly Collection[] = [QURANIC_NAMES];
+export const COLLECTIONS: readonly Collection[] = [QURANIC_NAMES, QURANIC_DUAS];
 
 export function getCollection(id: string): Collection | undefined {
   return COLLECTIONS.find((entry) => entry.id === id);

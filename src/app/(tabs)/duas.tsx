@@ -10,6 +10,7 @@ import {
 } from '@/components/adhkar-session-card';
 import { DuaCard } from '@/components/dua-card';
 import { ThemedText } from '@/components/themed-text';
+import { COLLECTIONS } from '@/content/collections';
 import { HISN } from '@/content/duas/hisn';
 import {
   ADHKAR_SESSIONS,
@@ -158,6 +159,28 @@ export default function DuasScreen() {
             meta={t('adhkar.occasions').replace('{n}', String(HISN.length))}
             muted
           />
+          {/*
+            Any collection of supplications, in the same row as everything else
+            here — and driven off `COLLECTIONS` rather than named one by one,
+            so a second one lands on this tab without anybody editing it. That
+            is the claim the `collection` kind was added to make.
+
+            Filtered by CATEGORY rather than by id: a collection of the names
+            of Allah is not a duʿa book and does not belong on this tab, and
+            branching on which collection it is would be the thing
+            `content/types.ts` forbids.
+          */}
+          {COLLECTIONS.filter((collection) => collection.meta?.category === 'quran').map(
+            (collection) => (
+              <Row
+                key={collection.id}
+                label={collection.title}
+                href={{ pathname: '/collection/[id]', params: { id: collection.id } }}
+                meta={t('count.items.long').replace('{n}', String(collection.entries.length))}
+                muted
+              />
+            ),
+          )}
         </View>
       </ScrollView>
     </SafeAreaView>

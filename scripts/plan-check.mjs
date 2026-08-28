@@ -192,12 +192,13 @@ const teachingMinutes = teaching.reduce((n, e) => n + (e.meta?.estimatedMinutes 
   beside them.
 */
 /* 70 → 75: Phase 9's five tier-one pages. */
-measure('catalogue: non-hisn entries', teaching.length, 75);
+/* 75 → 76: Phase 10's Qur'anic duʿas are a catalogue entry of their own. */
+measure('catalogue: non-hisn entries', teaching.length, 76);
 /*
   186 became 206 on 28 Aug 2026: the ninety-nine names declare 20 minutes.
   The 69 pages the plan measured are unchanged; a 70th was added beside them.
 */
-measure('catalogue: total estimated minutes', teachingMinutes, 223);
+measure('catalogue: total estimated minutes', teachingMinutes, 238);
 measure('catalogue: hisn occasions', CATALOG.length - teaching.length, 132);
 
 const priority = (n) => teaching.filter((e) => e.meta?.beginnerPriority === n).length;
@@ -208,7 +209,7 @@ measure(
   'entries carrying beginnerPriority or difficulty',
   teaching.filter((e) => e.meta?.beginnerPriority || e.meta?.difficulty).length,
   /* 52 → 53: the names collection carries meta. */
-  58,
+  59,
 );
 
 // Journey lessons that are guides — the only kind that self-completes.
@@ -256,7 +257,8 @@ const kindFiles = execSync(
 ).trim();
 /* 9 → 11: `learn/index.ts` and the names collection both name `collection`. */
 /* 11 → 12: `use-today.ts` now resolves refs by kind for its candidates. */
-measure('files naming a ContentKind value', Number(kindFiles), 12);
+/* 12 → 14: the duʿa collection, and the Duʿa tab now reads COLLECTIONS. */
+measure('files naming a ContentKind value', Number(kindFiles), 14);
 
 /*
   No component may branch on WHICH collection it is rendering.

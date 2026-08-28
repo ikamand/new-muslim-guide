@@ -891,7 +891,25 @@ Things a wrong assumption would waste real work on.
 
 Ideas raised but not worked through. Nothing here is committed.
 
-_(empty — next additions go here)_
+### 27 Aug — the app runs out after three hours
+
+Iyad: the Shahada card says "Read" and then "Read it again" and then nothing,
+while holding the second-largest slot in Learn forever; and the two onboarding
+questions make no visible difference to what the app shows.
+
+Both are true and both were measured. **`docs/learning-model.md`** is the
+audit: the journey is 123 minutes over 36 lessons, the whole non-duʿa
+catalogue is 186 minutes, and the twenty possible onboarding answers produce
+three distinguishable app states. `recommendations.ts` — 236 lines of
+stage × interest tables — is called by no screen. It also carries what a
+brand-new, a second-year and a fifth-year Muslim each need, and what the app
+has of it.
+
+Published: https://claude.ai/code/artifact/271ee7bf-6397-4db1-a99f-c602f303d782
+
+Nothing there is decided. The one thing in it flagged for the scholarly
+reviewer rather than for design is `references.ts:565`, which tells someone
+arriving mid-prayer to join the line and stops.
 
 ---
 

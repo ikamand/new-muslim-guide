@@ -5,11 +5,11 @@ supplied each line of it.
 
 | | |
 |---|---|
-| Qur'an passages | 62 of 62 |
-| Narrations | 114 of 114 |
-| Confirmed against a second publisher | 55 |
-| Translation from HadeethEnc (published terms) | 46 |
-| Translation from Darussalam (quoted) | 68 |
+| Qur'an passages | 94 of 94 |
+| Narrations | 119 of 119 |
+| Confirmed against a second publisher | 57 |
+| Translation from HadeethEnc (published terms) | 48 |
+| Translation from Darussalam (quoted) | 71 |
 | Arabic with no translation | 0 |
 | Nothing found | 0 |
 
@@ -89,6 +89,11 @@ under. That is substance and stays with a reviewer.
 | `bukhari:6193` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
 | `bukhari:757` | HadeethEnc.com | HadeethEnc.com | HadeethEnc 3185 |
 | `bukhari:611` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
+| `bukhari:930` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
+| `bukhari:934` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
+| `bukhari:881` | HadeethEnc.com | HadeethEnc.com | HadeethEnc 5393 |
+| `bukhari:929` | HadeethEnc.com | HadeethEnc.com | HadeethEnc 10551 |
+| `bukhari:636` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
 | `bukhari:3559` | HadeethEnc.com | HadeethEnc.com | HadeethEnc 5803 |
 | `bukhari:631` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
 | `bukhari:5027` | HadeethEnc.com | HadeethEnc.com | HadeethEnc 5913 |

@@ -9,6 +9,7 @@ import { HALAL_AND_HARAM } from './halal-and-haram';
 import { LIFE_BEFORE } from './life-before';
 import { MINIMUM_PRAYER } from './minimum-prayer';
 import { ISLAMIC_CALENDAR } from './islamic-calendar';
+import { JUMUAH } from './jumuah';
 import { MANNERS } from './manners';
 import { PATIENCE_AND_GRATITUDE } from './patience-and-gratitude';
 import { RAMADAN } from './ramadan';
@@ -57,6 +58,8 @@ export const LEARN_TOPICS: Reference[] = [
   MINIMUM_PRAYER,
   ADHAN,
   RULINGS,
+  /* Phase 11, 28 Aug 2026 — the largest single gap in the app. */
+  JUMUAH,
   WHO_IS_ALLAH,
   WHO_IS_MUHAMMAD,
   WHAT_IS_THE_QURAN,
@@ -189,6 +192,7 @@ export const TOPIC_GROUPS: readonly { id: TopicGroupId; topics: readonly Content
       ref('reference', 'mosque'),
       ref('reference', 'family'),
       ref('reference', 'work'),
+      ref('reference', 'jumuah'),
       ref('reference', 'manners'),
     ],
   },

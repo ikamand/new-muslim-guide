@@ -562,7 +562,7 @@ export const MOSQUE: Reference = {
       heading: 'Where do I sit?',
       body:
         'Pray two short rakʿah before you sit down. It is what everyone does on entering. Then sit anywhere on the carpet. There is no reserved seating and no collection.',
-      note: 'If a prayer is already in progress, join the line where you are and follow along from wherever the imam has got to.',
+      note: 'If a prayer is already in progress, join the line where you are and follow the imam from wherever he has got to. When he finishes and gives salām, stand back up and pray the rakʿahs you missed on your own — that is what completes your prayer.',
       sources: [
         hadith('bukhari', '444', {
           book: 8,

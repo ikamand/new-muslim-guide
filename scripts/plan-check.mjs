@@ -193,23 +193,24 @@ const teachingMinutes = teaching.reduce((n, e) => n + (e.meta?.estimatedMinutes 
 */
 /* 70 → 75: Phase 9's five tier-one pages. */
 /* 75 → 76: Phase 10's Qur'anic duʿas are a catalogue entry of their own. */
-measure('catalogue: non-hisn entries', teaching.length, 76);
+/* 76 → 77: Phase 11's Jumuʿah page. */
+measure('catalogue: non-hisn entries', teaching.length, 77);
 /*
   186 became 206 on 28 Aug 2026: the ninety-nine names declare 20 minutes.
   The 69 pages the plan measured are unchanged; a 70th was added beside them.
 */
-measure('catalogue: total estimated minutes', teachingMinutes, 238);
+measure('catalogue: total estimated minutes', teachingMinutes, 243);
 measure('catalogue: hisn occasions', CATALOG.length - teaching.length, 132);
 
 const priority = (n) => teaching.filter((e) => e.meta?.beginnerPriority === n).length;
 /* All five of Phase 9's pages are tier one, so all five land here. */
-measure('entries at beginner priority 1–2', priority(1) + priority(2), 31);
+measure('entries at beginner priority 1–2', priority(1) + priority(2), 32);
 measure('entries at beginner priority 4–5', priority(4) + priority(5), 3);
 measure(
   'entries carrying beginnerPriority or difficulty',
   teaching.filter((e) => e.meta?.beginnerPriority || e.meta?.difficulty).length,
   /* 52 → 53: the names collection carries meta. */
-  59,
+  60,
 );
 
 // Journey lessons that are guides — the only kind that self-completes.

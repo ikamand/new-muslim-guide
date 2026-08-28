@@ -100,6 +100,8 @@ const REFERENCES: Readonly<Record<string, Cadence>> = {
   'minimum-prayer': 'until-fluent',
   adhan: 'once',
   rulings: 'once',
+  /* Weekly, and the calendar is the only trigger the app has for it. */
+  jumuah: 'yearly',
   'who-is-allah': 'once',
   'who-is-muhammad': 'once',
   'what-is-the-quran': 'once',

@@ -10,6 +10,7 @@ import { SettingsProvider, useSettings } from '@/hooks/use-settings';
 import { LocaleProvider } from '@/hooks/use-locale';
 import { MemorisedProvider } from '@/hooks/use-memorised';
 import { LocationProvider } from '@/hooks/use-location';
+import { ObservationsProvider } from '@/hooks/use-observations';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -136,11 +137,17 @@ export default function RootLayout() {
   return (
     <LocaleProvider>
       <SettingsProvider>
+        {/*
+          Inside settings and outside location: it records what somebody does,
+          which is never a reason to ask for a location fix.
+        */}
+        <ObservationsProvider>
         <LocationProvider>
           <MemorisedProvider>
             <RootStack />
           </MemorisedProvider>
         </LocationProvider>
+        </ObservationsProvider>
       </SettingsProvider>
     </LocaleProvider>
   );

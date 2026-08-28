@@ -1,5 +1,11 @@
 import { Stack, useLocalSearchParams } from 'expo-router';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import {
+  ScrollView,
+  StyleSheet,
+  View,
+  type NativeScrollEvent,
+  type NativeSyntheticEvent,
+} from 'react-native';
 
 import { ContentNoteCard } from '@/components/content-note';
 import { RecitationCard } from '@/components/recitation-card';
@@ -19,9 +25,19 @@ import { TranslationGap } from '@/components/translation-gap';
 import { formatSource, getReference, resolveNotes, type ReferenceSection, type Source } from '@/content';
 import type { EvidenceText } from '@/content/evidence';
 import { MaxContentWidth } from '@/constants/theme';
+
 import { Teaching } from '@/constants/teaching';
 import { useLocale } from '@/hooks/use-locale';
+import { useObservations } from '@/hooks/use-observations';
+import { useSettings } from '@/hooks/use-settings';
 import { localiseReference, measure } from '@/i18n/localise';
+/**
+ * How close to the bottom counts as the bottom.
+ *
+ * Momentum scrolling routinely stops a few points short, and a reader who has
+ * plainly finished should not be denied the mark by two pixels of rubber band.
+ */
+const END_SLACK = 24;
 
 /**
  * A reference topic, read top to bottom.
@@ -51,6 +67,9 @@ import { localiseReference, measure } from '@/i18n/localise';
 export default function ReferenceScreen() {
   const { locale } = useLocale();
   const { id } = useLocalSearchParams<{ id: string }>();
+  /* Above the early return below: hooks cannot be called conditionally. */
+  const { completedLessons, toggleLesson } = useSettings();
+  const { finish } = useObservations();
   const source = getReference(id);
 
   if (!source) {
@@ -66,8 +85,42 @@ export default function ReferenceScreen() {
 
   const [reference, coverage] = measure(() => localiseReference(source, locale));
 
+  /*
+    Reading it to the end marks it read.
+
+    31 of the app's 36 journey lessons could ONLY be marked by a checkbox in
+    `/journey`, so somebody who read "What is Islam?" three times from Learn
+    left the app certain they had never started — and every screen that keys
+    off progress was working from that. Guides have self-marked since they got
+    a finish button; a reference had no equivalent because there is no last
+    step to press.
+
+    Reaching the bottom is the honest equivalent. Not opening it: an accidental
+    tap is not a reading. Not a timer either — a timer marks a page somebody
+    left open on a table. The end of the article is the one signal that means
+    they actually got there, and `toggleLesson` is guarded rather than toggled,
+    because reading something twice must not un-read it.
+  */
+  const onScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+    const { layoutMeasurement, contentOffset, contentSize } = event.nativeEvent;
+    const atEnd = layoutMeasurement.height + contentOffset.y >= contentSize.height - END_SLACK;
+    if (!atEnd) return;
+
+    const key = `reference:${reference.id}`;
+    if (!completedLessons.includes(key)) toggleLesson(key);
+    finish(key);
+  };
+
   return (
-    <ScrollView contentContainerStyle={styles.content}>
+    <ScrollView
+      contentContainerStyle={styles.content}
+      onScroll={onScroll}
+      /*
+        Four times a second is plenty for "did they reach the bottom" and is
+        the difference between a smooth scroll and a janky one on the phones
+        this app is actually opened on.
+      */
+      scrollEventThrottle={250}>
       <Stack.Screen options={{ title: reference.title }} />
 
       <ThemedText

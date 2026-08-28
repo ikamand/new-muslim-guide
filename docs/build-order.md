@@ -433,9 +433,16 @@ watches a great deal and records almost none of it.*
   marked done only by a checkbox at `journey/[stage].tsx:61`, so reading "What
   is Islam?" three times from Learn leaves the app certain you never started.
 - **Log every Ask search that returned nothing.** The highest-value untapped
-  signal in the repository. `ask.tsx:29` already records that "I farted" finds
-  nothing while `wudu.ts` answers it outright. Every failed search is a content
-  gap with a name on it, and Phase 8 consumes this log.
+  signal in the repository. Every failed search is a content gap with a name on
+  it, and Phase 8 consumes this log.
+  ⚠️ **The two examples this plan names no longer miss.** Built 28 Aug 2026 and
+  tested: "I farted" and "how do I decide" both return results now, and the
+  results are wrong — "I farted" leads with a section of *Praying while
+  travelling* when the answer is in `wudu.ts` under "nullifiers". A bad match
+  is a worse failure than a blank and the miss log **cannot see it**, because a
+  search only counts as missed when it returns nothing. Phase 8 will need a
+  second signal — a result nobody taps is not the same as no result. Corrected
+  in `ask.tsx`'s own header.
 - **Decide the storage shape deliberately.** Settings live in one AsyncStorage
   key, `display-settings`, narrowed field by field on read. Behavioural history
   is a different kind of data — it grows, and it may want pruning. Decide
@@ -447,6 +454,15 @@ watches a great deal and records almost none of it.*
 
 **Done when** the record survives an app restart, a network log shows nothing
 leaving the device, and the failed-search log holds real entries.
+**Done 28 Aug 2026**, all three checked by driving the app: an observation
+written in one page was read by a second, a route interceptor recorded every
+request the app made and none went anywhere but this machine, and a search that
+truly returns nothing was logged.
+
+**Storage:** its own AsyncStorage key, `observations`, not `display-settings`.
+The reason is written at the top of `src/lib/observations.ts` — settings
+serialise the whole object on every write, so joining them would rewrite
+somebody's reminders and reciter every time they finish reading a page.
 **Ships via** OTA.
 
 ### Phase 6 — The Firsts

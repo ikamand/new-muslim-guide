@@ -7,6 +7,7 @@ import { ThemedText } from '@/components/themed-text';
 import { occasionFor, sessionById, stepsFor } from '@/content/duas/sessions';
 import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
+import { useObservations } from '@/hooks/use-observations';
 import type { UIKey } from '@/i18n/ui';
 import { useTheme } from '@/hooks/use-theme';
 
@@ -51,6 +52,7 @@ export default function AdhkarSessionScreen() {
   const theme = useTheme();
   const { t } = useLocale();
   const { id } = useLocalSearchParams<{ id: string }>();
+  const { sittingDone } = useObservations();
 
   const session = sessionById(id);
   const occasion = session ? occasionFor(session) : undefined;
@@ -79,6 +81,21 @@ export default function AdhkarSessionScreen() {
   const { instruction, eveningForms, arabic, english, emphasis } = step;
   const target = instruction ? 1 : step.repeat;
   const last = index === steps.length - 1;
+
+  /*
+    Reaching the end of the sitting is the sitting being done.
+
+    The same reasoning as a guide's finish button and a reference scrolled to
+    its end: completing the thing IS the completion, and nothing should ask
+    somebody to confirm what they have just visibly finished. Recorded as an
+    observation only — it is not a lesson and must never appear as progress,
+    because `cadence.ts` makes the adhkār `daily` and you do not finish the
+    morning adhkār.
+  */
+  const finishSitting = () => {
+    if (session) sittingDone(session.id);
+    router.back();
+  };
 
 
   /*
@@ -245,7 +262,7 @@ export default function AdhkarSessionScreen() {
           </ThemedText>
 
           <Pressable
-            onPress={() => (last ? router.back() : goTo(index + 1))}
+            onPress={() => (last ? finishSitting() : goTo(index + 1))}
             hitSlop={Spacing.three}
             accessibilityRole="button"
             accessibilityLabel={last ? t('adhkar.finish') : t('adhkar.next')}

@@ -1,6 +1,6 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useRouter } from 'expo-router';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -9,9 +9,22 @@ import { ThemedText } from '@/components/themed-text';
 import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useHelpTopics } from '@/hooks/use-help';
 import { useLocale } from '@/hooks/use-locale';
+import { useObservations } from '@/hooks/use-observations';
 import { useTheme } from '@/hooks/use-theme';
 import type { UIKey } from '@/i18n/ui';
 import { buildIndex, search } from '@/lib/search';
+
+/**
+ * How long a query has to sit still before a miss counts.
+ *
+ * The field searches on every keystroke, so without this "tayammum" typed at
+ * normal speed logs eight misses and one hit — and seven of those are somebody
+ * spelling rather than somebody asking.
+ */
+const MISS_AFTER_MS = 1000;
+
+/** Below this it is a letter or two, not a question. */
+const MIN_MISS_LENGTH = 3;
 
 /**
  * The sheet behind the ask bar.
@@ -25,15 +38,25 @@ import { buildIndex, search } from '@/lib/search';
  *
  * ## The limit worth knowing
  *
- * This matches the app's OWN vocabulary and nothing else. "Istikhara" lands
- * because a guide is called that. "How do I decide" does not. "I farted" does
- * not, though `wudu.ts` answers it outright with Bukhari 135 behind it, filed
- * under the word "nullifiers" — which nobody types.
+ * This matches the app's OWN vocabulary. "Istikhara" lands because a guide is
+ * called that.
  *
- * That is the real gap, and widening this filter cannot close it. It closes
- * with an alias layer: the phrasings a person actually uses, generated at
- * build time, committed as data, matched offline. Search keys are not
- * religious content, so they need a proofread rather than a scholar.
+ * ⚠️ **Corrected 28 Aug 2026.** This said "How do I decide" and "I farted"
+ * returned nothing, and `docs/build-order.md` repeats it. Neither is true any
+ * more — both now return results, and the results are WRONG. "I farted" leads
+ * with a section of "Praying while travelling"; the answer it wants is in
+ * `wudu.ts` under the word "nullifiers", which nobody types.
+ *
+ * That is a worse failure than a blank, not a better one, and it is invisible
+ * to the miss log Phase 5 added: a search only counts as missed when it
+ * returns NOTHING, so the two examples the plan named are exactly the two
+ * cases that log cannot see. Phase 8 seeds the alias layer from real misses
+ * and will need a second signal for bad matches — a result nobody taps is not
+ * the same as no result, and only one of the two is being recorded.
+ *
+ * The alias layer is still the fix: the phrasings a person actually uses,
+ * generated at build time, committed as data, matched offline. Search keys are
+ * not religious content, so they need a proofread rather than a scholar.
  *
  * ## Why the chip row on Today is still there
  *
@@ -58,6 +81,7 @@ export default function AskScreen() {
   const router = useRouter();
   const { locale, t } = useLocale();
   const [query, setQuery] = useState('');
+  const { searchMissed } = useObservations();
   const topics = useHelpTopics();
 
   /*
@@ -126,6 +150,23 @@ export default function AskScreen() {
       href: hit.href,
     }));
   }, [starters, index, trimmed]);
+
+  /*
+    A search that found nothing is a content gap with a name on it.
+
+    Debounced, and that is the whole difficulty: this field searches on every
+    keystroke, so "tayammum" typed slowly would log eight misses ending in one
+    hit — seven of which are somebody spelling, not somebody asking. A second
+    of stillness is the difference between a half-typed word and a question.
+
+    Recorded only when the reader typed enough to mean something, and never
+    when something WAS found. Phase 8 builds the alias layer from these.
+  */
+  useEffect(() => {
+    if (trimmed.length < MIN_MISS_LENGTH || results.length > 0) return;
+    const timer = setTimeout(() => searchMissed(trimmed), MISS_AFTER_MS);
+    return () => clearTimeout(timer);
+  }, [trimmed, results.length, searchMissed]);
 
   return (
     <SafeAreaView style={[styles.safeArea, { backgroundColor: theme.background }]} edges={['top']}>

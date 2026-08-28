@@ -102,7 +102,13 @@ const CLAIMS = [
     the documents cite.
   */
   ['src/app/(tabs)/index.tsx', 110, 'Friday is the one that matters'],
-  ['src/app/ask.tsx', 29, 'I farted'],
+  /*
+    Still cited, and the citation now points at the CORRECTION rather than the
+    claim. Phase 5 found that "I farted" no longer returns nothing — it returns
+    the wrong thing, which the miss log cannot see. The documents' sentence
+    about it is wrong and the file says so at this line.
+  */
+  ['src/app/ask.tsx', 44, 'I farted'],
   ['src/content/model.ts', 182, 'export type ScholarlyPosition'],
   ['src/i18n/ui.ts', 287, 'quran.tapToHide'],
   ['src/content/references.ts', 522, 'Friday midday is the busiest hour'],

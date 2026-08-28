@@ -16,6 +16,7 @@ import { localiseGuide, measure } from '@/i18n/localise';
 import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import type { UIKey } from '@/i18n/ui';
+import { useObservations } from '@/hooks/use-observations';
 import { useSettings } from '@/hooks/use-settings';
 import { useTheme } from '@/hooks/use-theme';
 
@@ -74,6 +75,7 @@ export default function GuideScreen() {
 
   const { locale, t } = useLocale();
   const { keepAwake, completedLessons, toggleLesson } = useSettings();
+  const { finish: observed } = useObservations();
   // Measured, not just translated. A guide is read one step per screen, so the
   // reading is taken over the whole guide and narrowed to the step below —
   // localising per step instead would re-run `localiseRecitation` on every
@@ -123,6 +125,13 @@ export default function GuideScreen() {
   const finish = () => {
     const key = `guide:${guide.id}`;
     if (!completedLessons.includes(key)) toggleLesson(key);
+    /*
+      `completedLessons` says THAT it is done; this says WHEN, and keeps
+      saying it on a second run through. Phase 7 needs the second one —
+      "has prayed for a month" is a question about dates, and a set of keys
+      cannot answer it.
+    */
+    observed(key);
     if (router.canGoBack()) router.back();
     else router.replace('/(tabs)');
   };

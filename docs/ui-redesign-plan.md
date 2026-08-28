@@ -907,6 +907,27 @@ has of it.
 
 Published: https://claude.ai/code/artifact/271ee7bf-6397-4db1-a99f-c602f303d782
 
+### 28 Aug — four candidate APIs, tested
+
+Iyad supplied four. **`docs/expansion-plan.md`** is the evaluation and the
+build plan that follows from it. Two are worth taking: AlAdhan's 99 names
+(free, no key) and the Pray API's 30 Qur'anic duʿas, which verify against
+QuranEnc. Two are rejected — ummahapi cites volume-and-page rather than
+hadith numbers, and islamic.network's Quotes/Stories/People/Events are
+Naqshbandi devotional content whose Arabic is marked
+`claude-retranslation-from-en` in the data.
+
+islamicapi's `zakat-nisab` is the one endpoint needing a key. **Get the key,
+never ship it** — it belongs in a build script beside `hadith:corpus`.
+
+The plan's centrepiece is not a source but a gate: `npm run verify:import`,
+which self-tests its comparator before it reports. Every Sahih Muslim
+citation in the Pray API failed against the corpus (0/7) — the known
+two-numberings problem — and that is the argument for the gate rather than
+against the source.
+
+Published: https://claude.ai/code/artifact/589e9bcb-cbf5-4241-af03-d0de2f73345e
+
 Nothing there is decided. The one thing in it flagged for the scholarly
 reviewer rather than for design is `references.ts:565`, which tells someone
 arriving mid-prayer to join the line and stops.

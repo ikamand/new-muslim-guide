@@ -374,8 +374,15 @@ things the app already has; nothing new is written.*
 - **Learn: a "Where you are" card replaces the journey card.** Not a fraction:
   the chapter of life you are in, and the two or three things left in it. "6 of
   36" is a report card handed to someone three weeks into a religion.
-- **Learn: `on-event` pages leave the shelf for Ask.** About six of them. Nobody
-  browses to tayammum; they need it because there is no water.
+- ~~**Learn: `on-event` pages leave the shelf for Ask.**~~ **Already true, and
+  was before this phase started.** `TOPIC_GROUPS` holds zero `on-event`
+  entries; the six situational pages — losing count, missing a prayer,
+  travelling, praying seated, periods, tayammum — are all in Help, moved there
+  by an earlier change that `index.tsx`'s own header records. Phase 1's cadence
+  backfill marks eleven entries `on-event`, not six; the extra five are
+  istikhara and the prayer of repentance in both their guide and reference
+  forms, plus the istirjāʿ phrase, and those are reachable from the prayer
+  chooser rather than being emergencies. Nothing to do.
 - **Help chips and the header stay as they are.** The chips retire into Ask when
   Ask can answer, which is Phase 8, not now.
 - **⚠️ Not building: the travelling trigger.** The ranked slot above is where a
@@ -386,6 +393,23 @@ things the app already has; nothing new is written.*
 **Done when** both screens have been seen at phone width in both themes, the
 adhkār sitting appears inside its window and the duʿa card outside it, and the
 six situational pages are gone from the shelf but still reachable.
+**Done 28 Aug 2026.** Today was tested at four clocks — after Maghrib in
+London, Friday before Ḏuhr in Los Angeles, 3am in Singapore, and away from
+home — and Learn in both shahada states, all at 393pt in both themes.
+
+⚠️ **Not built: the competence-shaped prayer action.** There is no honest
+signal for it yet. Only 5 of 36 lessons self-mark, so it would key off a
+checkbox almost nobody ticks. Phase 5 records what the app observes and Phase 7
+makes onboarding ask facts — and *"a simulated month of prayer completions
+changes the primary action with no prompt"* is Phase 7's own done-when, not
+this one's. Building it here means guessing at competence.
+
+⚠️ **Departed from the plan on the shahada.** It says the hero drops to a
+header line, full stop. It now drops to a line **once it is done**, and stays a
+hero while it is not — `learn.tsx`'s own header records why the card exists at
+all: someone who has not said the shahada was previously unable to tell it from
+the six topics below it. Flattening both states would have fixed the wrong one.
+Cadence `keepsake` is what it BECOMES.
 **Ships via** OTA. **Then stop.**
 
 ---

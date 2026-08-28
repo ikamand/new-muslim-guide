@@ -81,8 +81,8 @@ const CLAIMS = [
     `docs/build-order.md` "What this removes" is the record that they existed.
   */
   ['scripts/content-audit.mjs', 32, 'pendingRecommendations'],
-  ['src/app/(tabs)/learn.tsx', 181, 'function ShahadaCard'],
-  ['src/app/(tabs)/learn.tsx', 187, "userStage === 'new-muslim'"],
+  ['src/app/(tabs)/learn.tsx', 194, 'function ShahadaCard'],
+  ['src/app/(tabs)/learn.tsx', 200, "userStage === 'new-muslim'"],
   ['src/content/journey.ts', 38, 'export type Requirement'],
   ['src/content/journey.ts', 161, 'ENTRY_BY_INTEREST'],
   ['src/content/journey.ts', 163, "prayer: 'first-days'"],

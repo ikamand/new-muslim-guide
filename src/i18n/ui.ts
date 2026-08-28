@@ -100,6 +100,10 @@ export const EN = {
     on it reads as the app paying attention — and if the reason is wrong, it is
     visibly wrong rather than quietly wrong.
   */
+  'learn.where.kicker': 'Where you are',
+  'learn.where.left': 'Left in this chapter',
+  'learn.where.done': 'You have been through all six chapters.',
+  'learn.shahada.line': 'The shahada · read the words again',
   'today.away': 'You seem to be away from home',
   'today.lastThird': 'The last third of the night',
   'today.continue': 'Carry on where you were',

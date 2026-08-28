@@ -165,12 +165,24 @@ function LearnCard({
  * knew, twice — `userStage`, and the guide's own place in the journey — and
  * this card read neither.
  *
- * ## Why it does not disappear
+ * ## Why it does not disappear, and why it stops being a hero
  *
  * People come back to the shahada. To re-read the words, to get the Arabic
  * right, to show somebody. Removing the card would take that away to fix a
- * label. So it keeps its size and its place and changes what it offers: a task
- * becomes a keepsake, which is what it already was.
+ * label.
+ *
+ * But "return to this a few times in your life" and "second-largest object on
+ * the tab forever" are not the same claim, and cadence `keepsake` is the first
+ * of those. So once it is done this stops being a card at all and becomes one
+ * line in the header — reachable forever, weighted honestly.
+ *
+ * ⚠️ It stays a HERO while it is not done, which is a deliberate departure
+ * from `docs/build-order.md`. That plan says the shahada drops to a header
+ * line, full stop. For somebody who has not said it, this is the one card on
+ * the tab that matters, and this file's own opening records why: they were
+ * previously indistinguishable from the six topics below. Flattening both
+ * states would fix the wrong one. Keepsake is what it BECOMES, not what it
+ * always was.
  *
  * ## What counts as done
  *
@@ -189,49 +201,51 @@ function ShahadaCard() {
     userStage === 'returning' ||
     completedLessons.includes(SHAHADA_KEY);
 
+  /*
+    Done: one line under the tab's own intro, not a card. No band, no action
+    button, no border — the same shape the name-of-the-day coda takes on
+    Today, and for the same reason: it is not a task and should not be dressed
+    as one.
+  */
+  if (done) {
+    return (
+      <PressableLink
+        href={{ pathname: '/guide/[id]', params: { id: 'shahada' } }}
+        accessibilityLabel={t('learn.shahada.done.title')}
+        style={[styles.keepsake, { borderTopColor: theme.border }]}
+        pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
+        <ThemedText type="small" themeColor="textSecondary">
+          {t('learn.shahada.line')}
+        </ThemedText>
+        <Ionicons name="arrow-forward" size={14} color={theme.accent} />
+      </PressableLink>
+    );
+  }
+
   return (
     <PressableLink
       href={{ pathname: '/guide/[id]', params: { id: 'shahada' } }}
-      accessibilityLabel={`${t(done ? 'learn.shahada.done.title' : 'learn.shahada.title')}. ${t(
-        done ? 'learn.shahada.done.subtitle' : 'learn.shahada.subtitle',
-      )}`}
+      accessibilityLabel={`${t('learn.shahada.title')}. ${t('learn.shahada.subtitle')}`}
       style={[
         styles.featured,
-        { backgroundColor: theme.backgroundElement, borderColor: done ? theme.accent : theme.border },
+        { backgroundColor: theme.backgroundElement, borderColor: theme.border },
       ]}
       pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
       <View style={[styles.band, { backgroundColor: theme.accentMuted }]}>
-        <GirihBand color={theme.accent} height={76} filled={done} />
+        <GirihBand color={theme.accent} height={76} filled={false} />
       </View>
       <View style={styles.featuredBody}>
         <View style={styles.cardText}>
-          <ThemedText type="cardTitle">
-            {t(done ? 'learn.shahada.done.title' : 'learn.shahada.title')}
-          </ThemedText>
+          <ThemedText type="cardTitle">{t('learn.shahada.title')}</ThemedText>
           <ThemedText type="small" themeColor="textSecondary">
-            {t(done ? 'learn.shahada.done.subtitle' : 'learn.shahada.subtitle')}
+            {t('learn.shahada.subtitle')}
           </ThemedText>
         </View>
-        {/*
-          Outlined once it is done, not filled. A solid accent button is the
-          app asking for a tap, and there is nothing left to ask for here — the
-          card is a way back to the words, not a call to action.
-        */}
-        <View
-          style={[
-            styles.featuredAction,
-            done
-              ? { backgroundColor: 'transparent', borderWidth: StyleSheet.hairlineWidth, borderColor: theme.accent }
-              : { backgroundColor: theme.accent },
-          ]}>
-          <ThemedText type="smallBold" themeColor={done ? 'accent' : 'textOnAccent'}>
-            {done ? t('learn.shahada.readAgain') : `${SHAHADA_STEP_COUNT} ${t('count.steps')}`}
+        <View style={[styles.featuredAction, { backgroundColor: theme.accent }]}>
+          <ThemedText type="smallBold" themeColor="textOnAccent">
+            {`${SHAHADA_STEP_COUNT} ${t('count.steps')}`}
           </ThemedText>
-          <Ionicons
-            name="arrow-forward"
-            size={14}
-            color={done ? theme.accent : theme.textOnAccent}
-          />
+          <Ionicons name="arrow-forward" size={14} color={theme.textOnAccent} />
         </View>
       </View>
     </PressableLink>
@@ -239,46 +253,61 @@ function ShahadaCard() {
 }
 
 /**
- * The way into the beginner path.
+ * Where you are — the chapter, and what is left in it.
  *
- * Above the recommendations rather than beside them: the recommendations answer
- * "what should I read next", and this answers "is there an order to any of
- * this" — which is the question someone has in their first week. It carries its
- * progress so returning to the tab shows where they left off without opening
- * anything.
+ * ## Why the fraction went
+ *
+ * It said "6 of 36" beside the arches. Thirty-six of what, and how far is six?
+ * A beginner cannot answer either, and a fraction is a report card handed to
+ * somebody three weeks into a religion — it measures them against a syllabus
+ * they never agreed to and reads as 30 things undone.
+ *
+ * What replaces it is the same information said as a place rather than a
+ * score: the chapter you are in, and the two or three things still in it. That
+ * is a shape somebody can act on this afternoon, and it is finite in a way
+ * "36" is not.
+ *
+ * The arches stay. They were already the right answer to "how far" — filled
+ * behind, star on the one you are at, no arithmetic — and they are the same
+ * mihrab the prayer times card draws, so the shape means the same thing in
+ * both places.
+ *
+ * ## Three, not all of them
+ *
+ * A chapter can hold eight steps, and listing eight is the wall this card
+ * exists to replace. Three is enough to show what KIND of thing is left
+ * without becoming a second list below the first.
  */
-function JourneyCard() {
+const SHOW_LEFT = 3;
+
+function WhereYouAre() {
   const theme = useTheme();
   const { t } = useLocale();
-  const { stages, done, total, nextStageIndex } = useJourney();
+  const { stages, nextStageIndex } = useJourney();
 
-  /*
-    The path as six arches rather than "6 of 36" over a bar.
-
-    Thirty-six of what, and how far is six? A beginner cannot answer either,
-    and a fraction is a poor thing to hand somebody three weeks into a
-    religion. The arches answer it without arithmetic — filled behind, star on
-    the one you are at — and they are the same mihrab the prayer times card
-    draws, so the shape means the same thing in both places.
-  */
   const path = stages.map((stage) => ({
     id: stage.id,
     label: t(`journey.short.${stage.id}` as UIKey),
     done: stage.steps.every((step) => step.done),
   }));
 
+  const stage = nextStageIndex === -1 ? undefined : stages[nextStageIndex];
+  const left = stage?.steps.filter((step) => !step.done).slice(0, SHOW_LEFT) ?? [];
+
   return (
     <PressableLink
       href="/journey"
-      accessibilityLabel={`${t('journey.title')}. ${t('journey.progress')
-        .replace('{done}', String(done))
-        .replace('{total}', String(total))}`}
+      accessibilityLabel={`${t('learn.where.kicker')}. ${
+        stage ? t(`journey.stage.${stage.id}` as UIKey) : t('learn.where.done')
+      }`}
       style={[styles.journey, { backgroundColor: theme.backgroundElement, borderColor: theme.border }]}
       pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
-      <View style={styles.journeyHead}>
-        <ThemedText type="sectionTitle">{t('journey.title')}</ThemedText>
-        <ThemedText type="smallBold" themeColor="accent">
-          {t('journey.progress').replace('{done}', String(done)).replace('{total}', String(total))}
+      <View style={styles.cardText}>
+        <ThemedText type="caption" themeColor="textSecondary" style={styles.kicker}>
+          {t('learn.where.kicker')}
+        </ThemedText>
+        <ThemedText type="sectionTitle">
+          {stage ? t(`journey.stage.${stage.id}` as UIKey) : t('learn.where.done')}
         </ThemedText>
       </View>
 
@@ -289,6 +318,24 @@ function JourneyCard() {
         trackColor={theme.textSecondary}
         mutedColor={theme.textOnAccent}
       />
+
+      {left.length > 0 ? (
+        /*
+          Its own spacing, not `cardText`. That style is a title-and-subtitle
+          pair at a 2pt gap, and three separate steps set 2pt apart read as one
+          sentence that has wrapped — which is the opposite of the point.
+        */
+        <View style={styles.left}>
+          <ThemedText type="caption" themeColor="textSecondary" style={styles.kicker}>
+            {t('learn.where.left')}
+          </ThemedText>
+          {left.map((step) => (
+            <ThemedText key={step.key} type="small" themeColor="textSecondary">
+              {step.labelKey ? t(step.labelKey as UIKey) : step.entry.title}
+            </ThemedText>
+          ))}
+        </View>
+      ) : null}
 
       <View style={[styles.journeyAction, { backgroundColor: theme.accent }]}>
         <ThemedText type="smallBold" themeColor="textOnAccent" style={styles.journeyActionLabel}>
@@ -329,9 +376,9 @@ export default function LearnScreen() {
           <ThemedText type="default" themeColor="textSecondary">{t('learn.intro')}</ThemedText>
         </View>
 
-        <JourneyCard />
-
         <ShahadaCard />
+
+        <WhereYouAre />
 
         {/*
           Grouped by when the question arrives, not by subject.
@@ -562,10 +609,25 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     gap: Spacing.three,
   },
+  /* Uppercase and tracked, the same label treatment every card kicker uses. */
+  kicker: { textTransform: 'uppercase', letterSpacing: 1 },
+  left: { gap: Spacing.one },
+  /* A rule and a line. Not a card — see `ShahadaCard`. */
+  keepsake: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    gap: Spacing.two,
+    borderTopWidth: StyleSheet.hairlineWidth,
+    paddingTop: Spacing.three,
+    marginTop: -Spacing.four,
+  },
   journeyAction: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    /* Air above it, or the list's last line reads as the button's label. */
+    marginTop: Spacing.one,
     gap: Spacing.three,
     minHeight: 48,
     paddingHorizontal: Spacing.three,

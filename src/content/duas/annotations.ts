@@ -67,20 +67,6 @@ export type HisnAnnotation = {
    */
   time?: 'morning' | 'evening';
   /**
-   * The evening opening for a line whose wording changes, verbatim from the
-   * book's own footnote.
-   *
-   * Six lines in, `اللَّهُمَّ إِنِّي أَصْبَحْتُ` means "O Allah, I have reached the
-   * morning" — said at sunset it is not a variant, it is wrong. The book knows
-   * and gives the substitution in a footnote: `وإذا أمسى قال: اللَّهم إني أمسيت`.
-   *
-   * ⚠️ The footnote ends in an ellipsis: "and the rest as above". So the app
-   * SHOWS the substitution beside the morning wording rather than splicing a
-   * complete evening text — a spliced string would appear verbatim nowhere,
-   * and assembling one is the one place invention could enter this file.
-   */
-  eveningOpening?: string;
-  /**
    * This row is the tail of the one above it, split by the publisher's
    * pagination rather than because it is a separate thing to say.
    *
@@ -169,14 +155,6 @@ export const HISN_ANNOTATIONS: Readonly<Record<number, HisnAnnotation>> = {
   1269252: {
     time: 'evening',
     reason: 'duplicate of the ×100 line in the morning, which is morning-only',
-  },
-  1269223: {
-    eveningOpening: 'اللَّهم إني أمسيت',
-    reason: "the book's footnote: وإذا أمسى قال: اللَّهم إني أمسيت",
-  },
-  1269226: {
-    eveningOpening: 'اللَّهم ما أمسى بي',
-    reason: "the book's footnote: وإذا أمسى قال: اللَّهم ما أمسى بي...",
   },
 
   // Adhkār of sleep

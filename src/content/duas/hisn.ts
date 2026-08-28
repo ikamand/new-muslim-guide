@@ -93,6 +93,21 @@ export type HisnLine = {
   /** The phrase `repeat` was read from, kept so the number can be checked. */
   repeatText?: string;
   /**
+   * What to say instead, in the evening, where the wording is for the morning.
+   *
+   * Taken from the book's own footnote — `وإذا أمسى قال: أمسينا وأمسى الملك
+   * للَّه` — and never composed. The footnotes usually end in an ellipsis
+   * meaning "and the rest as above", so these are OPENINGS to substitute, not
+   * complete evening texts, and a screen must show them beside the line rather
+   * than in place of it.
+   *
+   * ⚠️ Three of these were lost for a week because the generator kept only one
+   * footnote per line, and on the lines that matter the citation came last. The
+   * evening sitting printed "we have reached the morning" with no hint the book
+   * had said otherwise.
+   */
+  eveningForms?: readonly string[];
+  /**
    * Words the book had in square brackets, which the strip removed.
    *
    * The brackets marked a wording some narrations of a hadith carry and the
@@ -510,7 +525,7 @@ export const HISN: readonly HisnOccasion[] = [
           "وَزِدْنِي نُوراً، وَزِدْنِي نُوراً، وَزِدْنِي نُوراً",
           "وَهَبْ لِي نُوراً عَلَى نُورٍ"
         ],
-        "footnote": "ذكره ابن حجر في فتح الباري، وعزاه إلى ابن أبي عاصم في كتاب الدعاء، انظر الفتح 11/118، وقال: فاجتمع من اختلاف الروايات خمس وعشرون خصلة."
+        "footnote": "الترمذي، 5/ 483، برقم 3419. أخرجه البخاري في الأدب المفرد، برقم 695، ص258 وصحح إسناده الألباني في صحيح الأدب المفرد، برقم 536. ذكره ابن حجر في فتح الباري، وعزاه إلى ابن أبي عاصم في كتاب الدعاء، انظر الفتح 11/118، وقال: فاجتمع من اختلاف الروايات خمس وعشرون خصلة."
       }
     ]
   },
@@ -528,7 +543,7 @@ export const HISN: readonly HisnOccasion[] = [
           "بِسْمِ اللَّهِ، وَالصَّلَاةُ",
           "وَالسَّلَامُ عَلَى رَسُولِ اللَّهِ"
         ],
-        "footnote": "مسلم، 1/ 494، برقم 713، وفي سنن ابن ماجه من حديث فاطمة –رضي الله عنها-: ((اللهم اغفر لي ذنوبي،وافتح لي أبواب رحمتك))، وصححه الألباني لشواهده. انظر: صحيح ابن ماجه، 1/128-129."
+        "footnote": "لقول أنس بن مالك -رضي الله عنه-: ((من السنة إذ دخلت المسجد أن تَبدأ برجلك اليمنى، وإذا خرجت أن تبدأ برجلك اليسرى))، أخرجه الحاكم، 1/ 218، وصححه على شرط مسلم، ووافقه الذهبي، وأخرجه البيهقي، 2/ 442، وحسنه الألباني في سلسلة الأحاديث الصحيحة، 5/ 624، برقم 2478. أبو داود، برقم 466، وانظر: صحيح الجامع، برقم 4591. رواه ابن السني، برقم 88، وحسنه الألباني في الثمر المستطاب، ص 607. أبو داود، 1/ 126، برقم 465، وانظر: صحيح الجامع، 1/528. مسلم، 1/ 494، برقم 713، وفي سنن ابن ماجه من حديث فاطمة –رضي الله عنها-: ((اللهم اغفر لي ذنوبي،وافتح لي أبواب رحمتك))، وصححه الألباني لشواهده. انظر: صحيح ابن ماجه، 1/128-129."
       }
     ]
   },
@@ -542,7 +557,7 @@ export const HISN: readonly HisnOccasion[] = [
         "kind": "quoted",
         "arabic": "يَبْدَأُ بِرِجْلِهِ الْيُسْرَى وَيَقُولُ: بِسْمِ اللَّهِ وَالصّلَاةُ وَالسَّلَامُ عَلَى رَسُولِ اللَّهِ، اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ فَضْلِك، اللَّهُمَّ اعْصِمْنِي مِنَ الشَّيْطَانِ الرَّجِيمِ.",
         "english": "He begins with his left foot and says: \"In the name of Allah, and may Allah’s peace and blessings be upon the Messenger of Allah. O Allah, I ask You for Your bounty. O Allah, protect me from the accursed devil.\"",
-        "footnote": "انظر تخريج روايات الحديث السابق في دعاء دخول المسجد، رقم (20) وزيادة: ((اللهم اعصمني من الشيطان الرجيم)) لابن ماجه. انظر: صحيح ابن ماجه، 1/129."
+        "footnote": "الحاكم، 1/ 218، والبيهقي، 2/ 442، وحسنه الألباني في سلسلة الأحاديث الصحيحة، 5/ 624، برقم 2478، وتقدم تخريجه. انظر تخريج روايات الحديث السابق في دعاء دخول المسجد، رقم (20) وزيادة: ((اللهم اعصمني من الشيطان الرجيم)) لابن ماجه. انظر: صحيح ابن ماجه، 1/129."
       }
     ]
   },
@@ -569,7 +584,7 @@ export const HISN: readonly HisnOccasion[] = [
         "kind": "prose",
         "arabic": "يَقُولُ: وَأَنَا أَشْهَدُ أَنْ لاَ إِلَهَ إِلاَّ اللَّهُ وَحْدَهُ لاَ شَرِيكَ لَهُ وَأَنَّ مُحَمَّداً عَبْدُهُ وَرَسُولُهُ، رَضِيتُ بِاللَّهِ رَبَّاً، وَبِمُحَمَّدٍ رَسُولاً، وَبِالْإِسْلاَمِ دِينَاً يَقُولُ ذَلِكَ عَقِبَ تَشَهُّدِ الْمُؤَذِّنِ.",
         "english": "He says: \"And I bear witness that there is no deity worthy of worship but Allah alone without any partner, and that Muhammad is His slave and Messenger. I am pleased with Allah as a Lord, with Muhammad as a Messenger, and with Islam as a religion.\" He says this following the muezzin says the testimony.",
-        "footnote": "ابن خزيمة، 1/220."
+        "footnote": "مسلم، 1/ 290، برقم 386. ابن خزيمة، 1/220."
       },
       {
         "id": 1269054,
@@ -661,7 +676,7 @@ export const HISN: readonly HisnOccasion[] = [
           "أَنْتَ إِلَهِي لاَ إِلَهَ إِلاَّ أَنْتَ",
           "وَلاَ حَوْلَ وَلاَ قُوَّةَ إِلاَّ بِاللَّهِ"
         ],
-        "footnote": "البخاري مع الفتح، 3/ 3، و11/ 116، و13/ 371، 423، 465،، برقم 1120، ورقم 6317، ورقم 7385، ورقم 7442، ورقم 7499، ومسلم مختصراً بنحوه، 1/ 532، برقم 769."
+        "footnote": "كان النبي -صلى الله عليه وسلم- يقوله إذا قام من الليل يتهجد. البخاري مع الفتح، 3/ 3، و11/ 116، و13/ 371، 423، 465،، برقم 1120، ورقم 6317، ورقم 7385، ورقم 7442، ورقم 7499، ومسلم مختصراً بنحوه، 1/ 532، برقم 769."
       }
     ]
   },
@@ -953,7 +968,7 @@ export const HISN: readonly HisnOccasion[] = [
         "kind": "quoted",
         "arabic": "اللَّهُمَّ إِنِّي أَسْأَلُكَ بِأَنَّي أَشْهَدُ أَنَّكَ أَنْتَ اللَّهُ لاَ إِلَهَ إِلاَّ أَنْتَ الْأَحَدُ الصَّمَدُ الَّذِي لَمْ يَلِدْ وَلَمْ يُولَدْ وَلَمْ يَكُنْ لَهُ كُفُواً أَحَدٌ.",
         "english": "O Allah, I ask You by my testimony that You are Allah, there is no god but You, the Only One, the Eternal Refuge, Who has not begotten and has not been begotten, and other is none like Him.",
-        "footnote": "أبو داود، 2/ 62، برقم 1493، والترمذي، 5/ 515، برقم 3475، وابن ماجه، 2/ 1267، برقم 3857، والنسائي، برقم 1300 بلفظه، وأحمد، برقم 18974، وصححه الألباني في صحيح النسائي، 1/280، وانظر: صحيح ابن ماجه، 2/ 329، وصحيح الترمذي، 3/ 163."
+        "footnote": "رواه أهل السنن: أبو داود، برقم 1495، والترمذي، برقم 3544، وابن ماجه، برقم 3858، والنسائي، برقم 1299، وانظر: صحيح ابن ماجه، 2/329. أبو داود، 2/ 62، برقم 1493، والترمذي، 5/ 515، برقم 3475، وابن ماجه، 2/ 1267، برقم 3857، والنسائي، برقم 1300 بلفظه، وأحمد، برقم 18974، وصححه الألباني في صحيح النسائي، 1/280، وانظر: صحيح ابن ماجه، 2/ 329، وصحيح الترمذي، 3/ 163."
       }
     ]
   },
@@ -1140,21 +1155,28 @@ export const HISN: readonly HisnOccasion[] = [
         "kind": "quoted",
         "arabic": "أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ، لاَ إِلَهَ إلاَّ اللَّهُ وَحْدَهُ لاَ شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، رَبِّ أَسْأَلُكَ خَيْرَ مَا فِي هَذَا الْيَوْمِ وَخَيرَ مَا بَعْدَهُ، وَأَعُوذُ بِكَ مِنْ شَرِّ مَا فِي هَذَا الْيَوْمِ وَشَرِّ مَا بَعْدَهُ، رَبِّ أَعُوذُ بِكَ مِنَ الْكَسَلِ وَسُوءِ الْكِبَرِ، رَبِّ أَعُوذُ بِكَ مِنْ عَذَابٍ فِي النَّارِ وَعَذَابٍ فِي الْقَبْرِ.",
         "english": "We have reached the morning and in this morning all sovereignty belongs to Allah, and all praise is due to Allah. There is no god but Allah, alone, without a partner, to Him belongs all sovereignty and all praise and He is Competent over all things. My Lord, I ask You for the good of this day and the good of what follows it, and I seek refuge in You from the evil of this day and the evil of what follows it. My Lord, I seek refuge in You from laziness and woeful aging. My Lord, I seek refuge in You from torment in Hellfire and punishment in the grave.",
-        "footnote": "مسلم، 4/ 2088، برقم 2723."
+        "eveningForms": [
+          "أمسينا وأمسى الملك للَّه.",
+          "رب أسألك خير ما في هذه الليلة، وخير ما بعدها، وأعوذ بك من شر ما في هذه الليلة، وشر ما بعدها."
+        ],
+        "footnote": "وإذا أمسى قال: أمسينا وأمسى الملك للَّه. وإذا أمسى قال: رب أسألك خير ما في هذه الليلة، وخير ما بعدها، وأعوذ بك من شر ما في هذه الليلة، وشر ما بعدها. مسلم، 4/ 2088، برقم 2723."
       },
       {
         "id": 1269217,
         "kind": "quoted",
         "arabic": "اللَّهُمَّ بِكَ أَصْبَحْنَا، وَبِكَ أَمْسَيْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ وَإِلَيْكَ النُّشُورُ.",
         "english": "O Allah, with Your Power we have reached the morning, with Your Power we reach the evening, with Your Power we live and we die, and to You will be the resurrection.",
-        "footnote": "الترمذي، 5/ 466، برقم 3391، وانظر: صحيح الترمذي 3/142."
+        "eveningForms": [
+          "اللَّهم بك أمسينا، وبك أصبحنا، وبك نحيا، وبك نموت، وإليك المصير."
+        ],
+        "footnote": "وإذا أمسى قال: اللَّهم بك أمسينا، وبك أصبحنا، وبك نحيا، وبك نموت، وإليك المصير. الترمذي، 5/ 466، برقم 3391، وانظر: صحيح الترمذي 3/142."
       },
       {
         "id": 1269220,
         "kind": "quoted",
         "arabic": "اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلاَّ أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ، وَأَبُوءُ بِذَنْبِي فَاغْفِرْ لِي فَإِنَّهُ لاَ يَغْفِرُ الذُّنوبَ إِلاَّ أَنْتَ.",
         "english": "O Allah, You are my Lord, there is no deity worthy of worship except You. You created me and I am Your slave. I will abide by Your covenant and promise as much as I can. I seek refuge with You from the evil of what I have done. I admit Your favor upon me and admit my sin. So, forgive me, for indeed, none forgives sins but You.",
-        "footnote": "من قالها موقناً بها حين يمسي، فمات من ليلته دخل الجنة، وكذلك إذا أصبح. أخرجه البخاري، 7/ 150، برقم 6306."
+        "footnote": "أقر وأعترف. من قالها موقناً بها حين يمسي، فمات من ليلته دخل الجنة، وكذلك إذا أصبح. أخرجه البخاري، 7/ 150، برقم 6306."
       },
       {
         "id": 1269223,
@@ -1163,14 +1185,20 @@ export const HISN: readonly HisnOccasion[] = [
         "english": "O Allah, I have reached the morning and call on You, the bearers of Your Throne, Your angels, and all of Your creation to bear witness that You are Allah, none has the right to be worshiped except You, alone without partner, and that Muhammad is Your slave and messenger. (Four times)",
         "repeat": 4,
         "repeatText": "(أربعَ مَرَّاتٍ)",
-        "footnote": "وإذا أمسى قال: اللَّهم إني أمسيت."
+        "eveningForms": [
+          "اللَّهم إني أمسيت."
+        ],
+        "footnote": "وإذا أمسى قال: اللَّهم إني أمسيت. من قالها حين يصبح، أو يمسي أربع مرات، أعتقه اللَّه من النار. أخرجه أبو داود، 4/ 317، برقم 5071، والبخاري في الأدب المفرد، برقم 1201، والنسائي في عمل اليوم والليلة، برقم 9، وابن السني، برقم 70، وحسّن سماحة الشيخ ابن باز –رحمه الله- إسناد النسائي، وأبي داود، في تحفة الأخيار، ص23."
       },
       {
         "id": 1269226,
         "kind": "quoted",
         "arabic": "اللَّهُمَّ مَا أَصْبَحَ بِي مِنْ نِعْمَةٍ أَوْ بِأَحَدٍ مِنْ خَلْقِكَ فَمِنْكَ وَحْدَكَ لاَ شَرِيكَ لَكَ، فَلَكَ الْحَمْدُ وَلَكَ الشُّكْرُ.",
         "english": "O Allah, whatever blessing I or any of Your creation have in this morning, it is from You alone, without any partner; so, to You belongs all praise, and unto You is all thanks.",
-        "footnote": "وإذا أمسى قال: اللَّهم ما أمسى بي..."
+        "eveningForms": [
+          "اللَّهم ما أمسى بي."
+        ],
+        "footnote": "وإذا أمسى قال: اللَّهم ما أمسى بي... من قالها حين يصبح فقد أدَّى شكر يومه، ومن قالها حين يمسي فقد أدَّى شكر ليلته. أخرجه أبو داود، 4/ 318، برقم 5075، والنسائي في عمل اليوم والليلة، برقم 7، وابن السني، برقم 41، وابن حبان، ((موارد)) برقم 2361، وحسّن ابن باز –رحمه الله- إسناده في تحفة الأخيار، ص24."
       },
       {
         "id": 1269229,
@@ -1234,14 +1262,21 @@ export const HISN: readonly HisnOccasion[] = [
         "kind": "quoted",
         "arabic": "أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ رَبِّ الْعَالَمِينَ، اللَّهُـمَّ إِنِّي أَسْأَلُكَ خَيْرَ هَذَا الْيَوْمِ:فَتْحَهُ، وَنَصْرَهُ، وَنورَهُ، وَبَرَكَتَهُ، وَهُدَاهُ، وَأَعُوذُ بِكَ مِنْ شَرِّ مَا فِيهِ وَشَرِّ مَا بَعْدَهُ.",
         "english": "We have reached the morning, and in the morning the dominion belongs to Allah, the Lord of the worlds. O Allah, I ask You for the good of this day: its conquest, victory, light, blessing, and guidance; and I seek refuge with You from its evil and the evil of what comes after it.",
-        "footnote": "أبو داود، 4/ 322، برقم 5084، وحسن إسناده شعيب وعبد القادر الأرناؤوط في تحقيق زاد المعاد، 2/373."
+        "eveningForms": [
+          "أمسينا وأمسى الملك للَّه ربّ العالمين.",
+          "اللَّهم إني أسألك خير هذه الليلة: فتحها، ونصرها، ونورها، وبركتها، وهداها، وأعوذ بك من شر ما فيها، وشر ما بعدها."
+        ],
+        "footnote": "وإذا أمسى قال: أمسينا وأمسى الملك للَّه ربّ العالمين. وإذا أمسى قال: اللَّهم إني أسألك خير هذه الليلة: فتحها، ونصرها، ونورها، وبركتها، وهداها، وأعوذ بك من شر ما فيها، وشر ما بعدها. أبو داود، 4/ 322، برقم 5084، وحسن إسناده شعيب وعبد القادر الأرناؤوط في تحقيق زاد المعاد، 2/373."
       },
       {
         "id": 1269247,
         "kind": "quoted",
         "arabic": "أَصْبَحْنا عَلَى فِطْرَةِ الْإِسْلاَمِ، وَعَلَى كَلِمَةِ الْإِخْلاَصِ، وَعَلَى دِينِ نَبِيِّنَا مُحَمَّدٍ -صلى الله عليه وسلم-، وَعَلَى مِلَّةِ أَبِينَا إِبْرَاهِيمَ، حَنِيفاً مُسْلِماً وَمَا كَانَ مِنَ الْمُشرِكِينَ.",
         "english": "We have entered the morning upon the natural disposition of Islam, upon the word of sincerity, upon the religion of our Prophet Muhammad (ﷺ), and upon the creed of our father Abraham, inclining toward truth, a Muslim, and he was not of the polytheists.",
-        "footnote": "أحمد، 3/ 406، و407، برقم 15360، ورقم 15563، وابن السني في عمل اليوم والليلة، برقم 34، وانظر: صحيح الجامع، 4/209."
+        "eveningForms": [
+          "أمسينا على فطرة الإسلام."
+        ],
+        "footnote": "وإذا أمسى قال: أمسينا على فطرة الإسلام. أحمد، 3/ 406، و407، برقم 15360، ورقم 15563، وابن السني في عمل اليوم والليلة، برقم 34، وانظر: صحيح الجامع، 4/209."
       },
       {
         "id": 1269250,
@@ -1257,7 +1292,7 @@ export const HISN: readonly HisnOccasion[] = [
         "kind": "quoted",
         "arabic": "لاَ إِلَهَ إِلاَّ اللَّهُ وَحْدَهُ لاَ شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ (عشرَ مرَّات)، أَوْ (مرَّةً واحدةً عندَ الكَسَلِ).",
         "english": "There is no deity worthy of worship except Allah alone, Who has no partner, to Him belongs the sovereignty, to Him belongs the praise, and He is Competent over all things. (Ten times) or (once when feeling lazy)",
-        "footnote": "النسائي في عمل اليوم والليلة، برقم 24، وانظر: صحيح الترغيب والترهيب، 1/272، وتحفة الأخيار لابن باز -رحمه الله-، ص44، وانظر فضلها في:ص146، حديث، رقم 255."
+        "footnote": "النسائي في عمل اليوم والليلة، برقم 24، وانظر: صحيح الترغيب والترهيب، 1/272، وتحفة الأخيار لابن باز -رحمه الله-، ص44، وانظر فضلها في:ص146، حديث، رقم 255. أبو داود، برقم 5077، وابن ماجه، برقم 3798، وأحمد، برقم 8719، وانظر: صحيح الترغيب والترهيب، 1/270، وصحيح أبي داود، 3/957، وصحيح ابن ماجه، 2/331، وزاد المعاد، 2/377."
       },
       {
         "id": 1269255,
@@ -1392,7 +1427,7 @@ export const HISN: readonly HisnOccasion[] = [
         "kind": "quoted",
         "arabic": "بِاسْمِكَ رَبِّي وَضَعْتُ جَنْبِي، وَبِكَ أَرْفَعُهُ، فَإِن أَمْسَكْتَ نَفْسِي فارْحَمْهَا، وَإِنْ أَرْسَلْتَهَا فَاحْفَظْهَا، بِمَا تَحْفَظُ بِهِ عِبَادَكَ الصَّالِحِينَ.",
         "english": "By Your name, my Lord, I lay down my side, and by You I raise it. If You take my soul, then have mercy on it, and if You send it back, then protect it with what You protect Your righteous servants.",
-        "footnote": "البخاري مع الفتح، 11/ 126، برقم 6320. ومسلم، 4/ 2084، برقم 2714."
+        "footnote": "((إذا قام أحدكم من فراشه ثم رجع إليه فلينفضه بصَنِفَةِ إزاره ثلاث مرات، وليُسمِّ اللَّه؛ فإنه لا يدري ما خلفه عليه بعده، وإذا اضطجع فليقل:..)) الحديث، ومعنى بصَنِفة إزاره: طَرَفه مِمَّا يَلِي طُرَّته. النهاية في غريب الحديث والأثر (صنف). البخاري مع الفتح، 11/ 126، برقم 6320. ومسلم، 4/ 2084، برقم 2714."
       },
       {
         "id": 1269294,
@@ -1406,7 +1441,7 @@ export const HISN: readonly HisnOccasion[] = [
         "kind": "quoted",
         "arabic": "اللَّهُمَّ قِنِي عَذَابَكَ يَوْمَ تَبْعَثُ عِبَادَكَ.",
         "english": "O Allah, protect me from Your punishment when You resurrect Your slaves.",
-        "footnote": "أبو داود بلفظه، 4/ 311، برقم 5045، والترمذي، برقم 3398، وانظر: صحيح الترمذي، 3/143، وصحيح أبي داود، 3/ 240."
+        "footnote": "((كان -صلى الله عليه وسلم- إذا أراد أن يرقد وضع يده اليمنى تحت خدِّه، ثم يقول:...)) الحديث. أبو داود بلفظه، 4/ 311، برقم 5045، والترمذي، برقم 3398، وانظر: صحيح الترمذي، 3/143، وصحيح أبي داود، 3/ 240."
       },
       {
         "id": 1269299,
@@ -1459,7 +1494,7 @@ export const HISN: readonly HisnOccasion[] = [
         "kind": "quoted",
         "arabic": "اللَّهُمَّ أَسْلَمْتُ نَفْسِي إِلَيْكَ، وَفَوَّضْتُ أَمْرِي إِلَيْكَ، وَوَجَّهْتُ وَجْهِي إِلَيْكَ، وَأَلْجَأْتُ ظَهْرِي إِلَيْكَ، رَغْبَةً وَرَهْبَةً إِلَيْكَ، لاَ مَلْجَأَ وَلاَ مَنْجَا مِنْكَ إِلاَّ إِلَيْكَ، آمَنْتُ بِكِتَابِكَ الَّذِي أَنْزَلْتَ، وَبِنَبِيِّكَ الَّذِي أَرْسَلْتَ.",
         "english": "O Allah, I have submitted myself to You, entrusted my affairs to You, turned my face to You, and committed my back to You, out of desire for You and fear of You. There is no refuge and no place of safety from You but with You. I believe in the Book You have revealed and in Your Prophet whom You have sent.",
-        "footnote": "قال -صلى الله عليه وسلم- لمن قال ذلك: ((فإن مُتَّ مُتَّ على الفطرة)). البخاري مع الفتح، 11/ 113، برقم 6313، ومسلم، 4، 2081، برقم 2710."
+        "footnote": "((إذا أخذت مضجعك فتوضأ وضوءك للصلاة، ثم اضطجع على شقك الأيمن، ثم قل:...)) الحديث. قال -صلى الله عليه وسلم- لمن قال ذلك: ((فإن مُتَّ مُتَّ على الفطرة)). البخاري مع الفتح، 11/ 113، برقم 6313، ومسلم، 4، 2081، برقم 2710."
       }
     ]
   },
@@ -1873,7 +1908,7 @@ export const HISN: readonly HisnOccasion[] = [
         "kind": "quoted",
         "arabic": "بَارَكَ اللَّهُ لَكَ فِي الْمَوْهُوبِ لَكَ، وَشَكَرْتَ الْوَاهِبَ، وَبَلَغَ أَشُدَّهُ، وَرُزِقْتَ بِرَّهُ. وَيَرُدُّ عَلَيْهِ الْمُهَــــــنَّأُ فَيَقُولُ: بَارَكَ اللَّهُ لَكَ وَبَارَكَ عَلَيْكَ، وَجَزَاكَ اللَّهُ خَيْراً، وَرَزَقَكَ اللَّهُ مِثْلَهُ، وَأَجْزَلَ ثَوَابَكَ.",
         "english": "May Allah bless for you what has been granted to you, and may you thank the Giver, and may he reach maturity, and may you be granted his righteousness.\" The one being congratulated responds by saying: \"May Allah bless for you and bless upon you, and may Allah reward you goodness, and may He grant you the like of it, and may He increase your reward.",
-        "footnote": "قاله النووي في الأذكار، ص349، وانظر: صحيح الأذكار للنووي، لسليم الهلالي، 2/713، وتمام التخريج في الذكر والدعاء والعلاج بالرقى للمؤلف، 1/ 416."
+        "footnote": "ذُكِرَ من كلام الحسن البصري. انظر: تحفة المودود لابن القيم، ص 20، وعزاه لابن المنذر في الأوسط. قاله النووي في الأذكار، ص349، وانظر: صحيح الأذكار للنووي، لسليم الهلالي، 2/713، وتمام التخريج في الذكر والدعاء والعلاج بالرقى للمؤلف، 1/ 416."
       }
     ]
   },
@@ -2570,7 +2605,7 @@ export const HISN: readonly HisnOccasion[] = [
         "kind": "quoted",
         "arabic": "مَنْ حَفِظَ عَشْرَ آيَاتٍ مِنْ أَوَّلِ سُورَةِ الْكَهْفِ عُصِمَ مِنَ الدَّجَّالِ، وَالْاسْتِعَاذَةُ بِاللَّهِ مِنْ فِتْنَتِهِ عَقِبَ التَّشَهُّدِ الْأَخِيرِ مِنْ كُلِّ صَلاَةٍ.",
         "english": "Whoever memorizes ten verses from the beginning of Surat al-Kahf will be guarded against the Antichrist, and seeking refuge with Allah from his trial after the final Tashahhud of every prayer.",
-        "footnote": "مسلم، 1/ 555، برقم 809، وفي رواية: من آخر الكهف، 1/ 556، برقم 809."
+        "footnote": "مسلم، 1/ 555، برقم 809، وفي رواية: من آخر الكهف، 1/ 556، برقم 809. انظر: حديث رقم 55، وحديث 56، ص 41 من هذا الكتاب."
       }
     ]
   },

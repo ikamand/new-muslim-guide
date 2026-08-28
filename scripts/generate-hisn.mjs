@@ -124,10 +124,35 @@ function strip(raw, field, where) {
   return out;
 }
 
+/*
+  ⚠️ ALL footnotes for a line, not the last one.
+
+  This used to `set` on the split_group, so a line with several footnotes kept
+  only whichever came last. Group 144 has three — [103] and [104] give the
+  EVENING wording of the duʿa, [105] is the citation — and the citation won, so
+  the app printed "we have reached the morning" in the evening sitting with no
+  hint that the book had said otherwise. Three of the five morning-worded lines
+  lost their evening form that way.
+
+  They are kept in the order the book numbers them, so [103] reads before
+  [104], and joined rather than listed: nothing displays a footnote any more,
+  and the reader of this field is a person deciding what an annotation should
+  say.
+*/
+const collected = new Map();
 for (const row of rows) {
-  if (row.type === 'footnote') {
-    footnotes.set(row.split_group, strip(row.original_text, 'footnote', `footnote ${row.id}`));
-  }
+  if (row.type !== 'footnote') continue;
+  const list = collected.get(row.split_group) ?? [];
+  const marker = /^\s*\[(\d+)\]/.exec(row.original_text ?? '');
+  list.push({ order: marker ? Number(marker[1]) : Number.MAX_SAFE_INTEGER, row });
+  collected.set(row.split_group, list);
+}
+for (const [group, list] of collected) {
+  const text = list
+    .sort((a, b) => a.order - b.order)
+    .map((entry) => strip(entry.row.original_text, 'footnote', `footnote ${entry.row.id}`))
+    .join(' ');
+  footnotes.set(group, text);
 }
 
 for (const row of rows) {
@@ -153,6 +178,19 @@ for (const row of rows) {
     const marked = [...new Set(emphasis)];
 
     // Raw, because the counts live inside brackets the strip removes.
+    /*
+      The evening wording, lifted from the book's own footnote.
+
+      Hisn al-Muslim gives it as `وإذا أمسى قال: …` — "and in the evening he
+      says" — under a line worded for the morning. EXTRACTED rather than
+      hand-copied into `annotations.ts`: every character then still came over
+      the wire, and a re-fetch keeps it current instead of leaving a
+      transcription to rot. Some lines carry two.
+    */
+    const eveningForms = [...(note ?? '').matchAll(/وإذا\s+أمسى\s+قال:\s*([^.]+\.?)/g)]
+      .map((match) => match[1].trim())
+      .filter(Boolean);
+
     const { repeat, repeatText, reason } = repeatOf(row.original_text, row.transes?.en);
     if (repeat) assertRepeatMatchesText(repeat, repeatText, `line ${row.id}`);
     if (reason) skippedCounts.push(`  line ${row.id}: ${reason}`);
@@ -164,6 +202,7 @@ for (const row of rows) {
       english,
       ...(repeat ? { repeat, repeatText } : {}),
       ...(marked.length > 0 ? { emphasis: marked } : {}),
+      ...(eveningForms.length > 0 ? { eveningForms } : {}),
       ...(note ? { footnote: note } : {}),
     });
   }
@@ -295,6 +334,21 @@ const body = `export type HisnLine = {
   repeat?: number;
   /** The phrase \`repeat\` was read from, kept so the number can be checked. */
   repeatText?: string;
+  /**
+   * What to say instead, in the evening, where the wording is for the morning.
+   *
+   * Taken from the book's own footnote — \`وإذا أمسى قال: أمسينا وأمسى الملك
+   * للَّه\` — and never composed. The footnotes usually end in an ellipsis
+   * meaning "and the rest as above", so these are OPENINGS to substitute, not
+   * complete evening texts, and a screen must show them beside the line rather
+   * than in place of it.
+   *
+   * ⚠️ Three of these were lost for a week because the generator kept only one
+   * footnote per line, and on the lines that matter the citation came last. The
+   * evening sitting printed "we have reached the morning" with no hint the book
+   * had said otherwise.
+   */
+  eveningForms?: readonly string[];
   /**
    * Words the book had in square brackets, which the strip removed.
    *

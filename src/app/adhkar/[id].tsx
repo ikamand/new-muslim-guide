@@ -96,8 +96,8 @@ export default function AdhkarSessionScreen() {
     repetition the book never states.
   */
   const instruction = annotationFor(line.id)?.recited === false;
-  const eveningOpening =
-    session?.sitting === 'evening' ? annotationFor(line.id)?.eveningOpening : undefined;
+  // Straight from the book's footnote via `hisn.ts`, never hand-copied.
+  const eveningForms = session?.sitting === 'evening' ? (line.eveningForms ?? []) : [];
   // An annotation's count wins: the book sometimes states it on the next row.
   const target = instruction ? 1 : (annotationFor(line.id)?.repeat ?? line.repeat ?? 1);
   const last = index === steps.length - 1;
@@ -226,14 +226,16 @@ export default function AdhkarSessionScreen() {
               rest as above", so a complete evening text exists nowhere to
               copy.
             */}
-            {eveningOpening ? (
+            {eveningForms.length > 0 ? (
               <View style={[styles.swap, { borderLeftColor: theme.accent }]}>
                 <ThemedText type="caption" themeColor="textSecondary">
                   {t('adhkar.inTheEvening')}
                 </ThemedText>
-                <ThemedText type="arabicNote" style={styles.arabic}>
-                  {eveningOpening}
-                </ThemedText>
+                {eveningForms.map((form) => (
+                  <ThemedText key={form} type="arabicQuote" style={styles.arabic}>
+                    {form}
+                  </ThemedText>
+                ))}
               </View>
             ) : null}
             {english ? (

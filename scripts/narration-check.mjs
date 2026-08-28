@@ -31,7 +31,7 @@
  */
 import { HISN } from '../src/content/duas/hisn.ts';
 import { HISN_ANNOTATIONS } from '../src/content/duas/annotations.ts';
-import { ADHKAR_SESSIONS } from '../src/content/duas/sessions.ts';
+import { ADHKAR_SESSIONS, linesFor } from '../src/content/duas/sessions.ts';
 import { pickForNow, resolvePick } from '../src/content/duas/card.ts';
 
 /**
@@ -134,6 +134,18 @@ for (let day = 0; day < 366; day += 1) {
      put a morning line into the evening list silently. This is the one part of
      the morning/evening split that can rot.
 */
+/*
+  ⚠️ Two different things are checked below, and conflating them cost a week.
+
+  MORNING_MARK is the book's INSTRUCTION — `(مائةَ مرَّةٍ إذا أصبحَ)` — which
+  says a line belongs to one sitting.
+
+  MORNING_WORDING is the line being worded for the morning in the first place:
+  `أَصْبَحْنَا`, `أَصْبَحْتُ`. That is not an instruction and the first version of
+  this check did not look for it, so the evening sitting printed "we have
+  reached the morning" and nothing failed.
+*/
+const MORNING_WORDING = /أَصْبَحْنَا|أَصْبَحْتُ|أَصْبَحَ\s+بِي|أَصْبَحَ\s+الْمُلْكُ/;
 const MORNING_MARK = /إذا\s*أصبح|إِذَا\s*أَصْبَحَ/;
 const EVENING_MARK = /إذا\s*أمسى|إِذَا\s*أَمْسَى/;
 let marked = 0;
@@ -156,7 +168,29 @@ for (const occasion of HISN) {
   }
 }
 
+/*
+  4. A line worded for the morning must either be confined to the morning or
+     carry the evening wording the book gives for it. Otherwise the evening
+     sitting says "we have reached the morning" and means it.
+*/
+let worded = 0;
+for (const session of ADHKAR_SESSIONS) {
+  if (session.sitting !== 'evening') continue;
+  for (const line of linesFor(session)) {
+    if (!MORNING_WORDING.test(line.arabic)) continue;
+    worded += 1;
+    if (!line.eveningForms || line.eveningForms.length === 0) {
+      failures += 1;
+      console.error(`\n✗ line ${line.id} is worded for the morning and shows in ` +
+        'the evening with no evening form from the book');
+      console.error(`    ${line.arabic.slice(0, 80)}`);
+      console.error('    The book gives it as وإذا أمسى قال: … — check the footnote survived.');
+    }
+  }
+}
+
 console.log(`${counted} counted lines, ${cardLines} distinct card lines, ` +
+  `${worded} morning-worded evening lines, ` +
   `${marked} sitting-marked lines checked.`);
 if (failures > 0) {
   console.error(`\n${failures} line(s) the app asks someone to say read as narrations.`);

@@ -234,7 +234,7 @@ export const EN = {
   'adhkar.tapToCount': 'Tap anywhere to count',
   'adhkar.swipeOn': 'Tap to move on',
   'adhkar.instruction': 'Something to do — tap to continue',
-  'adhkar.inTheEvening': 'In the evening, begin:',
+  'adhkar.inTheEvening': 'In the evening, say instead:',
   'adhkar.previous': 'Previous',
   'adhkar.next': 'Next',
   'adhkar.finish': 'Done',

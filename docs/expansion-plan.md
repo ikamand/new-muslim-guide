@@ -219,7 +219,7 @@ Iyad's actual brief. Here is why the app resists new content today.
 
 `ContentKind` is a closed union of six: `guide | reference | pillar | article |
 hisn | phrase`. Closed is right — an open string gets 'salah', 'prayer' and
-'Prayer' in one codebase. But **17 files switch on it**:
+'Prayer' in one codebase. But **17 files name it or branch on a kind value**:
 
 ```
 src/content/model.ts        src/lib/content-routes.ts    scripts/content-audit.mjs
@@ -231,7 +231,10 @@ src/content/prayers.ts      src/app/reference/[id].tsx   scripts/teaching-check.
                             src/app/adhkar/[id].tsx
 ```
 
-**Adding a seventh kind is a seventeen-file change.** That is the whole reason
+Three of those only declare or re-export the type; the rest branch. **Adding a
+seventh kind means editing `model.ts`, `catalog.ts`, `content-routes.ts` and
+`search.ts` at minimum, writing a screen, and walking the five audit scripts —
+a change that reaches seventeen files.** That is the whole reason
 the app has not grown past its first shape, and it is why "the 99 names", "the
 sīrah in episodes" and "the vices and the virtues" all feel like large projects
 when each is a list of short entries with a source.

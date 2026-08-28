@@ -34,7 +34,7 @@ verification apparatus, and every word of the 69 existing teaching entries.
 | **C** | **What the app knows about you** | | |
 | 5 | Observation | OTA | yes |
 | 6 | The Firsts | OTA | yes |
-| 7 | Onboarding: two facts | OTA | yes |
+| 7 | Onboarding: two facts, not two identities | OTA | yes |
 | **D** | **Content, paced** | | |
 | 8 | The five tier-one gaps | OTA | review |
 | 9 | Duʿas from the Qur'an | OTA | review |
@@ -84,7 +84,9 @@ Nothing visible ships. Each one makes every later phase cheaper.
 
 - One new `ContentKind`: an ordered set of short entries, each with a title,
   optional Arabic and transliteration, a translation, and a source
-- Pays the seventeen-file `ContentKind` cost **once**
+- Pays the `ContentKind` cost **once**: `model.ts`, `catalog.ts`,
+  `content-routes.ts`, `search.ts`, a screen, and five audit scripts — seventeen
+  files reached in total
 - One screen renders every collection
 - After this, a new collection is a data file plus a registry row — not a code
   change

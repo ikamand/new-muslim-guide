@@ -535,13 +535,33 @@ at the minute they know least, and neither is ever revisited.*
   "praying" and the app changes what it offers. No badge, no level-up, no
   announcement. This is `CLAUDE.md`'s own rule — prefer what the app can infer
   over what the user must configure — applied to the thing it was written for.
-- **Learn finally reads `beginnerPriority`.** Set on 52 entries and read by no
-  screen today. De-emphasised in week one, surfaced in year two, keyed off the
-  tier signal from Phases 5 and 6.
+- ⚠️ **Not built: Learn reading `beginnerPriority`.** It is set on 53 entries
+  and still read by no screen. Everything else in this phase turns on ONE
+  signal — can this person pray — and re-ordering the Learn shelf needs a
+  second one: how far into the religion they are. Phase 6's firsts are the
+  honest source for that (first Jumuʿah, first Ramadan), and none of them can
+  be marked until somebody has used the app for a season. Ordering a shelf by a
+  signal that is empty for every current reader would be sorting by nothing.
+  Better once the ledger has entries in it.
 
 **Done when** answering the two questions differently produces visibly different
 Today screens, and a simulated month of prayer completions changes the primary
 action with no prompt.
+**Done 28 Aug 2026**, both driven: "teach me" gets *Pray Fajr · 23 steps* and
+the wudu line, "yes" gets *Pray Fajr* alone — and a profile that ANSWERED
+"teach me" but carries 17 prayer finishes spanning 30 days gets the second one,
+with nothing announcing the change.
+
+**What the two answers replaced.** `userStage` and `initialInterest` are gone
+from settings, from `journey.ts`, from `use-help.ts` and from
+`recommendations.ts`, whose three tables collapsed to one ordered list — they
+were keyed on questions that no longer exist, and nothing had ranked from them
+since Phase 1. Seven `plan:check` citations were repointed at the successors.
+
+⚠️ **The inference only ever raises somebody.** There is no path back down:
+demoting would mean the app deciding they had got worse, which needs noticing
+an absence. `competence.ts` counts finishes and elapsed time — never which
+days — so nothing in it can express a gap or be drawn as a streak.
 **Ships via** OTA.
 
 ### Phase 8 — Ask that can answer

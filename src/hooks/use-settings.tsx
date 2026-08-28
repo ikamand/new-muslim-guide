@@ -1,10 +1,10 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {
-  isInitialInterest,
-  isUserStage,
-  type InitialInterest,
-  type UserStage,
+  isPrayerConfidence,
+  isShahadaState,
+  type PrayerConfidence,
+  type ShahadaState,
 } from '@/lib/onboarding';
 import { DEFAULT_REMINDERS, LEAD_CHOICES, type ReminderSettings } from '@/lib/reminders';
 import type { HomePlace } from '@/lib/home-place';
@@ -53,10 +53,21 @@ export type Settings = {
   onboardingCompleted: boolean;
   /** They chose to skip. Not a lesser state — the app works the same either way. */
   onboardingSkipped: boolean;
-  /** Where they said they are. Null when skipped, or from an older install. */
-  userStage: UserStage | null;
-  /** What they said they wanted help with first. */
-  initialInterest: InitialInterest | null;
+  /**
+   * Where they said they are with the shahada. Null when skipped.
+   *
+   * A seed, never a verdict — see `lib/onboarding.ts`. It replaced
+   * `userStage`, which asked which of four kinds of person somebody was and
+   * could never be checked against anything.
+   */
+  shahadaState: ShahadaState | null;
+  /**
+   * Whether they said they can pray on their own. Null when skipped.
+   *
+   * Read through `lib/competence.ts`, never directly by a screen: what the app
+   * has SEEN can raise it, and the raised value is the one that matters.
+   */
+  prayerConfidence: PrayerConfidence | null;
   /**
    * Lessons marked done, as `kind:id`.
    *
@@ -118,8 +129,8 @@ const DEFAULTS: Settings = {
   onboarded: false,
   onboardingCompleted: false,
   onboardingSkipped: false,
-  userStage: null,
-  initialInterest: null,
+  shahadaState: null,
+  prayerConfidence: null,
   completedLessons: [],
   home: null,
   awaySince: null,
@@ -175,12 +186,15 @@ function parseStored(raw: string | null): Settings {
         typeof stored.onboardingSkipped === 'boolean'
           ? stored.onboardingSkipped
           : DEFAULTS.onboardingSkipped,
-      // A stage written by a future build, or corrupted, reads as unanswered
-      // rather than throwing — an unrecognised value should cost someone their
-      // recommendations, not their app.
-      userStage: isUserStage(stored.userStage) ? stored.userStage : null,
-      initialInterest: isInitialInterest(stored.initialInterest)
-        ? stored.initialInterest
+      /*
+        An answer written by a future build, or corrupted, reads as unanswered
+        rather than throwing. It costs somebody a seed, not their app — and
+        `competence.ts` treats a missing answer as "teach me", which is the
+        safe end to be wrong at.
+      */
+      shahadaState: isShahadaState(stored.shahadaState) ? stored.shahadaState : null,
+      prayerConfidence: isPrayerConfidence(stored.prayerConfidence)
+        ? stored.prayerConfidence
         : null,
       /*
         Narrowed like everything else here, and it matters more than most: a

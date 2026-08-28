@@ -11,11 +11,12 @@ import {
 } from '@/content/help';
 import { useLocale } from '@/hooks/use-locale';
 import { useSettings, type Audience } from '@/hooks/use-settings';
+import { usePrayerConfidence } from '@/hooks/use-competence';
 import { localiseCatalogEntry } from '@/i18n/localise';
 import type { Locale } from '@/i18n/locales';
 import { ui, type UIKey } from '@/i18n/ui';
 import { routeForHelpScreen, routeForHelpTopic, routeFor } from '@/lib/content-routes';
-import type { InitialInterest } from '@/lib/onboarding';
+import type { PrayerConfidence } from '@/lib/onboarding';
 
 /**
  * "I need help with…", resolved to things that actually open.
@@ -104,16 +105,24 @@ function toLink(entry: HelpEntry, locale: Locale): HelpLink | undefined {
 /**
  * Which questions to put first.
  *
- * Reordering, never filtering. Someone who said "prayer" meets the prayer
+ * Reordering, never filtering. Somebody learning to pray meets the prayer
  * questions first and still sees every other one below them, because the
  * question they have today is not the only question they will ever have.
+ *
+ * ## Keyed on praying, not on "what do you want help with"
+ *
+ * That question was retired in Phase 7 — it asked somebody to pick a category
+ * of themselves in their first minute and could never be checked. Confidence
+ * is a better key for this list anyway: what somebody needs help with is
+ * mostly a function of where they are with the prayer, and unlike the old
+ * answer it moves on its own as the app watches them. See `lib/competence.ts`.
  */
-const LEADING: Record<InitialInterest, readonly HelpTopicId[]> = {
-  prayer: ['prayer', 'washing', 'mistakes'],
-  basics: ['new', 'prayer', 'quran'],
-  'daily-life': ['food', 'clothing', 'people'],
-  understanding: ['new', 'quran', 'words'],
-  unsure: [],
+const LEADING: Record<PrayerConfidence, readonly HelpTopicId[]> = {
+  /* Nothing else matters yet. Wash, pray, and what to do when it goes wrong. */
+  'teach-me': ['prayer', 'washing', 'new'],
+  'need-words': ['prayer', 'mistakes', 'quran'],
+  /* Past the mechanics: the questions are about living among people now. */
+  'on-my-own': ['people', 'food', 'clothing'],
 };
 
 function resolveTopic(
@@ -142,10 +151,11 @@ function resolveTopic(
 /** Every topic that resolves to something, most relevant to this reader first. */
 export function useHelpTopics(): readonly ResolvedHelpTopic[] {
   const { locale } = useLocale();
-  const { audience, initialInterest } = useSettings();
+  const { audience } = useSettings();
+  const confidence = usePrayerConfidence();
 
   return useMemo(() => {
-    const leading = initialInterest ? LEADING[initialInterest] : [];
+    const leading = LEADING[confidence];
     const order = [
       ...leading,
       ...HELP_TOPICS.map((topic) => topic.id).filter((id) => !leading.includes(id)),
@@ -154,7 +164,7 @@ export function useHelpTopics(): readonly ResolvedHelpTopic[] {
     return order
       .map((id) => resolveTopic(id, locale, audience))
       .filter((topic): topic is ResolvedHelpTopic => topic !== undefined);
-  }, [locale, audience, initialInterest]);
+  }, [locale, audience, confidence]);
 }
 
 /** One topic, for its own screen. Undefined for an id that resolves to nothing. */

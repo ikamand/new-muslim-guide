@@ -60,16 +60,34 @@ const KEY = 'observations';
  */
 export const MAX_MISSES = 200;
 
+export type Finish = {
+  /** The first time. Never moves — see `recordFinished`. */
+  first: number;
+  last: number;
+  /** How many times, monotonic. Never decreases, and no date is kept. */
+  times: number;
+};
+
 export type Observations = {
   /** When the app was first opened. The only clock this file keeps. */
   installedAt: number;
   /**
-   * `kind:id` → when it was finished, most recent wins.
+   * `kind:id` → when it was first finished, when it was last finished, and how
+   * many times.
    *
-   * A map rather than a list, because the same lesson can be read twice and
-   * the second reading is not a second lesson.
+   * ## Why three numbers and not one
+   *
+   * Phase 5 stored only the last time, which cannot answer the question Phase 7
+   * asks: has this person been praying for a month? `first` and `times` answer
+   * it between them, and they are the SAFEST pair that can.
+   *
+   * ⚠️ The obvious alternative — a list of the days somebody prayed — was
+   * rejected outright. That is a streak in everything but name, and it records
+   * the days they did NOT, which is the one thing `index.tsx` promises this app
+   * never does. Two numbers that only ever go up cannot express a gap, cannot
+   * be drawn as a calendar, and cannot tell anybody they have lapsed.
    */
-  finished: Record<string, number>;
+  finished: Record<string, Finish>;
   /** Adhkār sitting ids → when that sitting was last completed. */
   sittings: Record<string, number>;
   /** Surah numbers played to the end, and when. */
@@ -113,6 +131,38 @@ export const EMPTY: Observations = {
 const isRecord = (value: unknown): value is Record<string, unknown> =>
   value !== null && typeof value === 'object' && !Array.isArray(value);
 
+/**
+ * Finishes, narrowed — and migrated from the bare number Phase 5 wrote.
+ *
+ * A record written hours before this shape existed holds `1787953082432` where
+ * this expects an object. Dropping those would erase somebody's history to
+ * satisfy a type, so a number reads as one finish at that moment, which is
+ * exactly what it meant.
+ */
+function finishes(value: unknown): Record<string, Finish> {
+  if (!isRecord(value)) return {};
+  const out: Record<string, Finish> = {};
+  for (const [key, entry] of Object.entries(value)) {
+    if (typeof entry === 'number' && Number.isFinite(entry)) {
+      out[key] = { first: entry, last: entry, times: 1 };
+      continue;
+    }
+    if (!isRecord(entry)) continue;
+    const { first, last, times: count } = entry;
+    if (
+      typeof first === 'number' &&
+      Number.isFinite(first) &&
+      typeof last === 'number' &&
+      Number.isFinite(last) &&
+      typeof count === 'number' &&
+      Number.isFinite(count)
+    ) {
+      out[key] = { first, last, times: count };
+    }
+  }
+  return out;
+}
+
 /** Numbers only, so a malformed entry cannot become a date in 1970 or NaN. */
 function times(value: unknown): Record<string, number> {
   if (!isRecord(value)) return {};
@@ -144,7 +194,7 @@ export function parse(raw: string | null): Observations {
       typeof stored.installedAt === 'number' && Number.isFinite(stored.installedAt)
         ? stored.installedAt
         : 0,
-    finished: times(stored.finished),
+    finished: finishes(stored.finished),
     sittings: times(stored.sittings),
     surahs: times(stored.surahs),
     misses: Array.isArray(stored.misses)
@@ -172,9 +222,19 @@ export async function write(value: Observations): Promise<void> {
 
 /* ----------------------------- the recorders ----------------------------- */
 
-/** Something was finished. Re-finishing updates the time rather than adding. */
+/**
+ * Something was finished.
+ *
+ * `first` never moves and `times` only rises. Re-reading a page is not a new
+ * lesson, but it IS another time — and the difference between "read it once"
+ * and "has done this twenty times" is the whole of what Phase 7 infers from.
+ */
 export function recordFinished(value: Observations, key: string, at: number): Observations {
-  return { ...value, finished: { ...value.finished, [key]: at } };
+  const before = value.finished[key];
+  const entry: Finish = before
+    ? { first: before.first, last: at, times: before.times + 1 }
+    : { first: at, last: at, times: 1 };
+  return { ...value, finished: { ...value.finished, [key]: entry } };
 }
 
 export function recordSitting(value: Observations, id: string, at: number): Observations {

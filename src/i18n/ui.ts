@@ -107,6 +107,27 @@ export const EN = {
     what HAS happened and never what is left, so there is nothing here for a
     count to attach itself to.
   */
+  /*
+    The two onboarding questions. Facts, not identities — see `lib/onboarding.ts`.
+
+    Each answer is written the way somebody would say it to a friend, because
+    the alternative is asking a person in their first thirty seconds to pick
+    which category of convert they are.
+  */
+  'onboarding.said.title': 'Have you said the shahada?',
+  'onboarding.said.not-yet': 'Not yet',
+  'onboarding.said.not-yet.help': 'That is completely fine. Nothing here assumes you have.',
+  'onboarding.said.exploring': 'I am still finding out',
+  'onboarding.said.exploring.help': 'Read anything you like. Nobody is counting.',
+  'onboarding.said.recently': 'Yes, recently',
+  'onboarding.said.a-while': 'Yes, a while ago',
+  'onboarding.prays.title': 'Can you pray on your own yet?',
+  'onboarding.prays.teach-me': 'No — teach me',
+  'onboarding.prays.teach-me.help': 'Every step, with the words written out.',
+  'onboarding.prays.need-words': 'I need the words in front of me',
+  'onboarding.prays.need-words.help': 'You know the shape of it and want the text there.',
+  'onboarding.prays.on-my-own': 'Yes',
+  'onboarding.prays.on-my-own.help': 'The time and the direction, and out of your way.',
   'firsts.title': 'Your firsts',
   'firsts.intro': 'Things that happen once. Nothing here is a target, and nothing counts down — this is a record of what has already happened, in the order it did.',
   'firsts.none': 'Nothing yet. The app marks some of these itself when it sees them.',

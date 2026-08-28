@@ -11,10 +11,10 @@ import { CONTENT_DICTS } from '@/i18n/content';
 import { LOCALE_NAMES, LOCALES, SOURCE_LOCALE } from '@/i18n/locales';
 import { useSettings } from '@/hooks/use-settings';
 import {
-  INITIAL_INTERESTS,
-  USER_STAGES,
-  type InitialInterest,
-  type UserStage,
+  PRAYER_CONFIDENCES,
+  SHAHADA_STATES,
+  type PrayerConfidence,
+  type ShahadaState,
 } from '@/lib/onboarding';
 import type { UIKey } from '@/i18n/ui';
 
@@ -57,13 +57,13 @@ function isPartial(locale: (typeof LOCALES)[number]): boolean {
 export default function WelcomeScreen() {
   const router = useRouter();
   const { locale, setLocale, t } = useLocale();
-  const { setMany, onboarded, userStage, initialInterest } = useSettings();
+  const { setMany, onboarded, shahadaState, prayerConfidence } = useSettings();
 
   const [step, setStep] = useState(0);
   // Prefilled, so someone who reopens this from Settings sees what they chose
   // last time rather than a blank form implying they never answered.
-  const [stage, setStage] = useState<UserStage | null>(userStage);
-  const [interest, setInterest] = useState<InitialInterest | null>(initialInterest);
+  const [said, setSaid] = useState<ShahadaState | null>(shahadaState);
+  const [prays, setPrays] = useState<PrayerConfidence | null>(prayerConfidence);
 
   /** True when this is a revisit rather than a first run. */
   const revisiting = onboarded;
@@ -78,11 +78,11 @@ export default function WelcomeScreen() {
       onboarded: true,
       onboardingCompleted: true,
       onboardingSkipped: false,
-      userStage: stage,
-      initialInterest: interest,
+      shahadaState: said,
+      prayerConfidence: prays,
     });
     leave();
-  }, [setMany, stage, interest, leave]);
+  }, [setMany, said, prays, leave]);
 
   const skip = useCallback(() => {
     // A revisit that ends in Skip means "leave things as they are", not "throw
@@ -92,8 +92,8 @@ export default function WelcomeScreen() {
         onboarded: true,
         onboardingCompleted: false,
         onboardingSkipped: true,
-        userStage: null,
-        initialInterest: null,
+        shahadaState: null,
+        prayerConfidence: null,
       });
     }
     leave();
@@ -114,15 +114,16 @@ export default function WelcomeScreen() {
     return () => subscription.remove();
   }, [step, back]);
 
-  const stageOptions = USER_STAGES.map((value) => ({
+  const shahadaOptions = SHAHADA_STATES.map((value) => ({
     value,
-    label: t(`onboarding.stage.${value}` as UIKey),
-    help: t(`onboarding.stage.${value}.help` as UIKey),
+    label: t(`onboarding.said.${value}` as UIKey),
+    help: t(`onboarding.said.${value}.help` as UIKey),
   }));
 
-  const interestOptions = INITIAL_INTERESTS.map((value) => ({
+  const prayerOptions = PRAYER_CONFIDENCES.map((value) => ({
     value,
-    label: t(`onboarding.interest.${value}` as UIKey),
+    label: t(`onboarding.prays.${value}` as UIKey),
+    help: t(`onboarding.prays.${value}.help` as UIKey),
   }));
 
   /*
@@ -190,22 +191,22 @@ export default function WelcomeScreen() {
       <StepFrame
         step={3}
         total={TOTAL_STEPS}
-        title={t('onboarding.stage.title')}
+        title={t('onboarding.said.title')}
         onBack={back}
         onSkip={skip}
         onContinue={next}
         continueLabel={t('onboarding.continue')}
-        continueDisabled={stage === null}>
+        continueDisabled={said === null}>
         <View style={styles.options} accessibilityRole="radiogroup">
-          {stageOptions.map((option, index) => (
+          {shahadaOptions.map((option, index) => (
             <ChoiceCard
               key={option.value}
               label={option.label}
               help={option.help}
-              selected={stage === option.value}
-              onPress={() => setStage(option.value)}
+              selected={said === option.value}
+              onPress={() => setSaid(option.value)}
               index={index + 1}
-              total={stageOptions.length}
+              total={shahadaOptions.length}
             />
           ))}
         </View>
@@ -218,21 +219,22 @@ export default function WelcomeScreen() {
       <StepFrame
         step={4}
         total={TOTAL_STEPS}
-        title={t('onboarding.interest.title')}
+        title={t('onboarding.prays.title')}
         onBack={back}
         onSkip={skip}
         onContinue={next}
         continueLabel={t('onboarding.continue')}
-        continueDisabled={interest === null}>
+        continueDisabled={prays === null}>
         <View style={styles.options} accessibilityRole="radiogroup">
-          {interestOptions.map((option, index) => (
+          {prayerOptions.map((option, index) => (
             <ChoiceCard
               key={option.value}
               label={option.label}
-              selected={interest === option.value}
-              onPress={() => setInterest(option.value)}
+              help={option.help}
+              selected={prays === option.value}
+              onPress={() => setPrays(option.value)}
               index={index + 1}
-              total={interestOptions.length}
+              total={prayerOptions.length}
             />
           ))}
         </View>

@@ -19,13 +19,8 @@
  * as content lands, with no code change.
  */
 
-import { INITIAL_INTERESTS, USER_STAGES, type InitialInterest, type UserStage } from '@/lib/onboarding';
-
 import { resolveRef } from './catalog';
 import { ref, type ContentRef } from './model';
-
-export { INITIAL_INTERESTS, USER_STAGES };
-export type { InitialInterest, UserStage };
 
 /**
  * The beginner explanations, by name.
@@ -66,111 +61,51 @@ export const TOPICS = {
 export const PLANNED = TOPICS;
 
 /** The five pillars and six articles, as they are listed in the app. */
-const FIVE_PILLARS = ref('pillar', 'salah');
-const SIX_ARTICLES = ref('article', 'allah');
-
 /**
- * Where someone says they are.
+ * What a beginner should meet, and in what order.
  *
- * "Helping someone learn" gets the same starting points as a new Muslim, in the
- * same order: the thing you hand to someone else is the thing they need first.
- * It differs in what it does NOT get — nothing that assumes the reader is the
- * one praying.
- */
-const BY_STAGE: Record<UserStage, readonly ContentRef[]> = {
-  'new-muslim': [
-    ref('guide', 'shahada'),
-    TOPICS.whatIsIslam,
-    ref('guide', 'wudu'),
-    TOPICS.beforePrayer,
-    ref('guide', 'fajr'),
-    TOPICS.alFatihah,
-    FIVE_PILLARS,
-  ],
-  exploring: [
-    TOPICS.whatIsIslam,
-    TOPICS.whoIsAllah,
-    TOPICS.whoIsMuhammad,
-    TOPICS.whatIsTheQuran,
-    FIVE_PILLARS,
-    ref('guide', 'shahada'),
-  ],
-  returning: [
-    ref('guide', 'fajr'),
-    ref('guide', 'wudu'),
-    TOPICS.whatIsTheQuran,
-    TOPICS.sunnah,
-    TOPICS.ramadan,
-    ref('reference', 'mosque'),
-  ],
-  helping: [
-    TOPICS.whatIsIslam,
-    ref('guide', 'shahada'),
-    FIVE_PILLARS,
-    SIX_ARTICLES,
-    ref('guide', 'wudu'),
-  ],
-};
-
-/** What someone says they want help with. More specific than stage, so it leads. */
-const BY_INTEREST: Record<InitialInterest, readonly ContentRef[]> = {
-  prayer: [
-    ref('guide', 'wudu'),
-    TOPICS.beforePrayer,
-    ref('guide', 'fajr'),
-    TOPICS.alFatihah,
-    TOPICS.whatBreaksPrayer,
-    ref('reference', 'lost-count'),
-    ref('reference', 'missed'),
-    ref('reference', 'mosque'),
-  ],
-  basics: [
-    TOPICS.whatIsIslam,
-    ref('guide', 'shahada'),
-    FIVE_PILLARS,
-    SIX_ARTICLES,
-    TOPICS.whatIsTheQuran,
-    TOPICS.whoIsMuhammad,
-  ],
-  'daily-life': [
-    TOPICS.halalAndHaram,
-    TOPICS.food,
-    TOPICS.clothing,
-    ref('reference', 'mosque'),
-    TOPICS.family,
-    TOPICS.work,
-    TOPICS.manners,
-  ],
-  understanding: [
-    TOPICS.whatIsIslam,
-    TOPICS.duaAndDhikr,
-    TOPICS.whoIsAllah,
-    TOPICS.whoIsMuhammad,
-    TOPICS.whatIsTheQuran,
-    TOPICS.sunnah,
-    FIVE_PILLARS,
-  ],
-  /**
-   * "I'm not sure" is the answer the app most has to respect. Someone
-   * overwhelmed enough to pick it is told nothing about themselves and simply
-   * gets the beginner path, which is what everyone gets anyway.
-   */
-  unsure: [],
-};
-
-/**
- * The universal beginner path.
+ * ## One list, since Phase 7
  *
- * What anyone gets who answered nothing, skipped, or said they were not sure —
- * and what fills the tail of every other list. Wudu before prayer because wudu
- * comes before prayer.
+ * This was three tables — by `UserStage`, by `InitialInterest`, and a
+ * universal tail — feeding a ranking function that Phase 1 deleted because no
+ * screen ever called it. Phase 7 then retired both questions those tables were
+ * keyed on: they asked which of four kinds of person somebody was, and what
+ * they wanted help with, in their first minute, and neither could ever be
+ * checked against anything.
+ *
+ * What survived is the part that was always true: the order a beginner meets
+ * these in. Nothing branches on who they are, because the app now works that
+ * out by watching — see `lib/competence.ts` — and a table of categories is the
+ * opposite of that.
+ *
+ * It is still a POINTER list. A ref to content that does not exist resolves to
+ * nothing, so this can name something before it is written;
+ * `pendingRecommendations` reports those and the audit prints them. That is
+ * the to-do list for whoever writes them, and a plan is not a lie.
  */
-const UNIVERSAL: readonly ContentRef[] = [
+const BEGINNER_PATH: readonly ContentRef[] = [
   ref('guide', 'shahada'),
   ref('guide', 'wudu'),
   ref('guide', 'fajr'),
-  FIVE_PILLARS,
-  SIX_ARTICLES,
+  ref('pillar', 'salah'),
+  ref('article', 'allah'),
+  TOPICS.whatIsIslam,
+  TOPICS.whoIsAllah,
+  TOPICS.whoIsMuhammad,
+  TOPICS.whatIsTheQuran,
+  TOPICS.sunnah,
+  TOPICS.beforePrayer,
+  TOPICS.alFatihah,
+  TOPICS.whatBreaksPrayer,
+  TOPICS.halalAndHaram,
+  TOPICS.food,
+  TOPICS.clothing,
+  TOPICS.family,
+  TOPICS.work,
+  TOPICS.manners,
+  TOPICS.duaAndDhikr,
+  TOPICS.repentance,
+  TOPICS.ramadan,
   ref('reference', 'mosque'),
 ];
 
@@ -207,10 +142,5 @@ const dedupe = (refs: readonly ContentRef[]): readonly ContentRef[] => {
 
 /** Every ref any table points at that has no content yet. Drives the audit. */
 export function pendingRecommendations(): readonly ContentRef[] {
-  const all = [
-    ...Object.values(BY_STAGE).flat(),
-    ...Object.values(BY_INTEREST).flat(),
-    ...UNIVERSAL,
-  ];
-  return dedupe(all).filter((entry) => !resolveRef(entry));
+  return dedupe(BEGINNER_PATH).filter((entry) => !resolveRef(entry));
 }

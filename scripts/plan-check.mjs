@@ -67,6 +67,15 @@ const DRIFT = 6;
  * Transcribed from the prose around each citation, so a citation that still
  * resolves but no longer supports the sentence it sits in still fails.
  */
+/*
+  ⚠️ Seven of these were repointed on 28 Aug 2026, not because the documents
+  were wrong but because Phase 7 retired what they cited. `userStage` and
+  `initialInterest` asked which of four kinds of person somebody was and what
+  they wanted help with; both are gone, replaced by "have you said the
+  shahada" and "can you pray on your own yet". Each citation now points at the
+  successor rather than being deleted, so the sentence in the plan still has
+  something to check itself against.
+*/
 const CLAIMS = [
   ['src/content/learn/work.ts', 41, 'What about interest?'],
   ['src/content/learn/family.ts', 62, 'Do I have to tell them?'],
@@ -82,16 +91,16 @@ const CLAIMS = [
   */
   ['scripts/content-audit.mjs', 32, 'pendingRecommendations'],
   ['src/app/(tabs)/learn.tsx', 194, 'function ShahadaCard'],
-  ['src/app/(tabs)/learn.tsx', 200, "userStage === 'new-muslim'"],
+  ['src/app/(tabs)/learn.tsx', 204, "shahadaState === 'recently'"],
   ['src/content/journey.ts', 38, 'export type Requirement'],
-  ['src/content/journey.ts', 161, 'ENTRY_BY_INTEREST'],
-  ['src/content/journey.ts', 163, "prayer: 'first-days'"],
-  ['src/app/welcome.tsx', 198, 'continueDisabled={stage === null}'],
-  ['src/app/welcome.tsx', 226, 'continueDisabled={interest === null}'],
-  ['src/app/welcome.tsx', 95, 'userStage: null'],
-  ['src/hooks/use-help.ts', 111, 'const LEADING'],
-  ['src/hooks/use-settings.tsx', 56, 'userStage: UserStage | null'],
-  ['src/hooks/use-settings.tsx', 66, 'completedLessons: readonly string[]'],
+  ['src/content/journey.ts', 170, 'ENTRY_BY_CONFIDENCE'],
+  ['src/content/journey.ts', 172, "'teach-me': 'first-days'"],
+  ['src/app/welcome.tsx', 199, 'continueDisabled={said === null}'],
+  ['src/app/welcome.tsx', 227, 'continueDisabled={prays === null}'],
+  ['src/app/welcome.tsx', 95, 'shahadaState: null'],
+  ['src/hooks/use-help.ts', 120, 'const LEADING'],
+  ['src/hooks/use-settings.tsx', 63, 'shahadaState: ShahadaState | null'],
+  ['src/hooks/use-settings.tsx', 78, 'completedLessons: readonly string[]'],
   ['src/app/guide/[id].tsx', 125, 'toggleLesson(key)'],
   ['src/app/journey/[stage].tsx', 61, 'toggleLesson(step.key)'],
   ['src/app/(tabs)/index.tsx', 51, 'keeps a streak'],
@@ -101,7 +110,7 @@ const CLAIMS = [
     NOT carry a Friday candidate. The line still exists here and is still what
     the documents cite.
   */
-  ['src/app/(tabs)/index.tsx', 110, 'Friday is the one that matters'],
+  ['src/app/(tabs)/index.tsx', 139, 'Friday is the one that matters'],
   /*
     Still cited, and the citation now points at the CORRECTION rather than the
     claim. Phase 5 found that "I farted" no longer returns nothing — it returns
@@ -110,7 +119,7 @@ const CLAIMS = [
   */
   ['src/app/ask.tsx', 44, 'I farted'],
   ['src/content/model.ts', 182, 'export type ScholarlyPosition'],
-  ['src/i18n/ui.ts', 321, 'quran.tapToHide'],
+  ['src/i18n/ui.ts', 342, 'quran.tapToHide'],
   ['src/content/references.ts', 522, 'Friday midday is the busiest hour'],
   ['src/content/references.ts', 565, 'join the line where you are'],
   ['src/content/learn/halal-and-haram.ts', 38, 'Do I need permission for ordinary things?'],

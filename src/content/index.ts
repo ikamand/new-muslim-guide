@@ -16,15 +16,7 @@ export {
 } from './catalog';
 export { CADENCE, cadenceFor } from './cadence';
 export { getGuide, GUIDES, PURIFICATION } from './guides';
-export {
-  INITIAL_INTERESTS,
-  PLANNED,
-  TOPICS,
-  pendingRecommendations,
-  USER_STAGES,
-  type InitialInterest,
-  type UserStage,
-} from './recommendations';
+export { PLANNED, TOPICS, pendingRecommendations } from './recommendations';
 export {
   asNote,
   byBeginnerPriority,

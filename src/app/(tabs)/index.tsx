@@ -15,6 +15,7 @@ import { useHelpTopics } from '@/hooks/use-help';
 import { useHijriToday } from '@/hooks/use-hijri';
 import { useLocale } from '@/hooks/use-locale';
 import { usePrayerTimes } from '@/hooks/use-prayer-times';
+import { usePrayerConfidence } from '@/hooks/use-competence';
 import { useTheme } from '@/hooks/use-theme';
 import { useToday, type TodayItem } from '@/hooks/use-today';
 import { localiseGuide } from '@/i18n/localise';
@@ -58,10 +59,34 @@ import type { UIKey } from '@/i18n/ui';
  * Someone standing on a mat wants to start praying, not to browse. It lives
  * inside the times card, under the mihrab, so the prayer you are about to pray
  * and the button that starts it are the same object.
+ *
+ * ## It changes shape with competence
+ *
+ * Week one wants a 23-step walkthrough. Year three wants the time, the
+ * direction, and to be left alone — and until Phase 7 both got the same
+ * button, offering "38 steps" to somebody who has prayed ʿIshāʾ a thousand
+ * times.
+ *
+ * The step count is what goes. To a beginner it is a promise about how much
+ * help is coming; to somebody fluent it is the app implying they need it.
+ * Everything else stays: the same button, the same place, the same route —
+ * a person who wants the walkthrough is still one tap from it, and nothing
+ * announces that anything changed.
+ *
+ * The wudu line goes too, at `on-my-own`. Wudu before prayer is the first
+ * thing anybody learns and the last thing they need reminding of, and
+ * `docs/build-order.md` is explicit that year three wants the time, the qibla
+ * and the surah rather than the preconditions.
+ *
+ * ⚠️ It never goes the other way. `competence.ts` only ever raises somebody,
+ * because lowering them would mean deciding they had got worse — which needs
+ * noticing an absence, which this screen promises it does not do.
  */
 function PrayAction({ prayer, wudu }: { prayer: Guide; wudu: Guide }) {
   const theme = useTheme();
   const { t } = useLocale();
+  const confidence = usePrayerConfidence();
+  const fluent = confidence === 'on-my-own';
 
   return (
     <View style={styles.action}>
@@ -73,9 +98,11 @@ function PrayAction({ prayer, wudu }: { prayer: Guide; wudu: Guide }) {
         <ThemedText type="smallBold" themeColor="textOnAccent" style={styles.primaryLabel}>
           {t('home.prayNow')} {prayer.title}
         </ThemedText>
-        <ThemedText type="small" themeColor="textOnAccent" style={styles.primaryCount}>
-          {prayer.steps.length} {t('count.steps')}
-        </ThemedText>
+        {fluent ? null : (
+          <ThemedText type="small" themeColor="textOnAccent" style={styles.primaryCount}>
+            {prayer.steps.length} {t('count.steps')}
+          </ThemedText>
+        )}
         <Ionicons name="arrow-forward" size={18} color={theme.textOnAccent} />
       </PressableLink>
 
@@ -84,6 +111,7 @@ function PrayAction({ prayer, wudu }: { prayer: Guide; wudu: Guide }) {
         three cards above the prayers, so a first-timer scanned ghusl and
         tayammum to find the one they needed before every single prayer.
       */}
+      {fluent ? null : (
       <PressableLink
         href={{ pathname: '/guide/[id]', params: { id: wudu.id } }}
         accessibilityLabel={`${t('home.notInWudu')} ${t('home.washFirst')}`}
@@ -96,6 +124,7 @@ function PrayAction({ prayer, wudu }: { prayer: Guide; wudu: Guide }) {
           {t('home.washFirst')} · {wudu.steps.length} {t('count.steps')}
         </ThemedText>
       </PressableLink>
+      )}
     </View>
   );
 }

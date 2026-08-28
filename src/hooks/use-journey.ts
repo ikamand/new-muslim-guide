@@ -11,6 +11,7 @@ import {
 } from '@/content/journey';
 import { useLocale } from '@/hooks/use-locale';
 import { useSettings } from '@/hooks/use-settings';
+import { usePrayerConfidence } from '@/hooks/use-competence';
 import { localiseCatalogEntry } from '@/i18n/localise';
 
 export type ResolvedStep = JourneyStep & {
@@ -63,7 +64,8 @@ export type JourneyState = {
  * "continue" lessons — which they would the moment either kept its own rule.
  */
 export function useJourney(): JourneyState {
-  const { completedLessons, initialInterest } = useSettings();
+  const { completedLessons } = useSettings();
+  const confidence = usePrayerConfidence();
   const { locale } = useLocale();
 
   return useMemo(() => {
@@ -99,7 +101,7 @@ export function useJourney(): JourneyState {
     }
     const distinct = [...seen.values()];
 
-    const entry = entryStageIndex(initialInterest);
+    const entry = entryStageIndex(confidence);
     const fromEntry = stages.findIndex((stage, index) => index >= entry && stage.next);
     const anywhere = stages.findIndex((stage) => stage.next);
     const nextStageIndex = fromEntry === -1 ? anywhere : fromEntry;
@@ -112,5 +114,5 @@ export function useJourney(): JourneyState {
       nextStageIndex,
       fresh: distinct.every((step) => !step.done),
     };
-  }, [completedLessons, initialInterest, locale]);
+  }, [completedLessons, confidence, locale]);
 }

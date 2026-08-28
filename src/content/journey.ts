@@ -22,7 +22,7 @@
  * they tapped "The Five Pillars" would be a small lie about where they are.
  */
 
-import type { InitialInterest } from '@/lib/onboarding';
+import type { PrayerConfidence } from '@/lib/onboarding';
 
 import type { ContentRef } from './model';
 import { ref } from './model';
@@ -152,37 +152,35 @@ export const JOURNEY: readonly Stage[] = [
  *
  * Not a gate and not a skip: every stage stays open, and nothing before the
  * entry point is marked done or hidden. It only decides which stage the app
- * *offers* first, because pointing someone who said "help me with prayer" at
- * "What is Islam?" is answering a question they did not ask.
+ * *offers* first, because pointing somebody who cannot pray yet at "What is
+ * Islam?" is answering a question they did not ask.
  *
- * Interest leads over stage, on the same reasoning as the recommendation
- * tables: "prayer" is a narrower answer than "I just became Muslim".
+ * ## Keyed on praying, not on interest
+ *
+ * It used to read `initialInterest` — "what do you want help with first",
+ * one of five categories somebody picked in their first minute. Phase 7
+ * retired that question for a fact instead, and the fact turns out to be the
+ * better key anyway: where the journey should open is a question about what
+ * somebody can already DO, and "can you pray on your own yet" is exactly that.
+ *
+ * The old question could never be revisited. This one is raised by observation
+ * — see `lib/competence.ts` — so somebody who has since learned to pray moves
+ * forward without anyone asking them again.
  */
-const ENTRY_BY_INTEREST: Record<InitialInterest, StageId> = {
-  // "Enough to pray tonight" — the stage, not the syllabus about it.
-  prayer: 'first-days',
-  basics: 'start-here',
-  'daily-life': 'living',
-  understanding: 'start-here',
-  unsure: 'start-here',
+const ENTRY_BY_CONFIDENCE: Record<PrayerConfidence, StageId> = {
+  /* Enough to pray tonight: the stage, not the syllabus about it. */
+  'teach-me': 'first-days',
+  'need-words': 'learning-to-pray',
+  /* Somebody who prays already is past the mechanics. */
+  'on-my-own': 'living',
 };
 
-/**
- * Index into `JOURNEY`. Zero for anyone who skipped or answered nothing.
- *
- * Interest is the only input, and there used to be a second: `ENTRY_BY_STAGE`
- * mapped the onboarding stage to a starting point and was removed on 28 Aug
- * 2026 as unreachable. Nothing could ever read it — this function preferred
- * interest whenever it was set, and `welcome.tsx` gates its Continue on each
- * answer in turn and nulls both on Skip, so "stage answered, interest not" is
- * a state the app cannot produce.
- */
-export function entryStageIndex(interest: InitialInterest | null): number {
-  const id = interest && ENTRY_BY_INTEREST[interest];
+/** Index into `JOURNEY`. Zero for anyone who skipped or answered nothing. */
+export function entryStageIndex(confidence: PrayerConfidence | null): number {
+  const id = confidence && ENTRY_BY_CONFIDENCE[confidence];
   const found = id ? JOURNEY.findIndex((entry) => entry.id === id) : -1;
   return found === -1 ? 0 : found;
 }
 
 /** A stable key for progress, unique across kinds. */
 export const stepKey = (entry: ContentRef): string => `${entry.kind}:${entry.id}`;
-

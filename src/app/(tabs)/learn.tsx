@@ -186,19 +186,23 @@ function LearnCard({
  *
  * ## What counts as done
  *
- * Either signal. Ticking the lesson, or having said in onboarding that you are
- * already Muslim — somebody who told the app they are Muslim should not have to
- * tick a box to prove it. `'exploring'` deliberately does not count, and
- * neither does `null`: an unanswered question is not a yes.
+ * Either signal. Ticking the lesson, or having answered "yes" to the shahada
+ * question — somebody who told the app they have said it should not have to
+ * tick a box to prove it. `'exploring'` and `'not-yet'` deliberately do not
+ * count, and neither does `null`: an unanswered question is not a yes.
+ *
+ * The question this reads changed in Phase 7 from "which describes you" to
+ * "have you said the shahada", which is the thing this card actually needed to
+ * know and was previously inferring from a category.
  */
 function ShahadaCard() {
   const theme = useTheme();
   const { t } = useLocale();
-  const { completedLessons, userStage } = useSettings();
+  const { completedLessons, shahadaState } = useSettings();
 
   const done =
-    userStage === 'new-muslim' ||
-    userStage === 'returning' ||
+    shahadaState === 'recently' ||
+    shahadaState === 'a-while' ||
     completedLessons.includes(SHAHADA_KEY);
 
   /*

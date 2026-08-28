@@ -199,6 +199,23 @@ for (const session of ADHKAR_SESSIONS) {
      they never drifted from the book, and fails loudly if a re-fetch changes
      a row underneath them.
 */
+/*
+  6. Every rewrite must name a string that is actually in its row, and the
+     total is printed so an edit to the book's own wording can never be silent.
+*/
+let rewrites = 0;
+for (const [key, note] of Object.entries(HISN_ANNOTATIONS)) {
+  for (const change of note.rewrite ?? []) {
+    rewrites += 1;
+    const entry = byId.get(Number(key));
+    if (entry && !entry.line.arabic.includes(change.from)) {
+      failures += 1;
+      console.error(`\n✗ line ${key}: rewrite target is not in the row any more`);
+      console.error(`    ${change.from}`);
+    }
+  }
+}
+
 let partStrings = 0;
 for (const [key, note] of Object.entries(HISN_ANNOTATIONS)) {
   if (!note.parts) continue;
@@ -220,7 +237,7 @@ for (const [key, note] of Object.entries(HISN_ANNOTATIONS)) {
 }
 
 console.log(`${counted} counted lines, ${cardLines} distinct card lines, ` +
-  `${partStrings} part strings, ` +
+  `${partStrings} part strings, ${rewrites} rewrite(s) of the book's wording, ` +
   `${worded} morning-worded evening lines, ` +
   `${marked} sitting-marked lines checked.`);
 if (failures > 0) {

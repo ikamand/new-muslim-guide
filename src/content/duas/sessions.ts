@@ -121,14 +121,26 @@ export function stepsFor(session: AdhkarSession): readonly AdhkarStep[] {
       continue;
     }
 
+    /*
+      ⚠️ The one place the book's own wording is altered — `الصُّبْحِ` to
+      `الفَجْرِ`, on Iyad's instruction. Applied here rather than in `hisn.ts`
+      so the generated file stays exactly what came over the wire and the
+      change is visible in one hand-edited entry.
+    */
+    const rewritten = (note?.rewrite ?? []).reduce(
+      (text, { from, to }) => text.replace(from, to),
+      line.arabic,
+    );
+    const marked = [...(line.emphasis ?? []), ...(note?.emphasis ?? [])];
+
     const parts = note?.parts ?? [];
     if (parts.length === 0) {
       steps.push({
         key: String(line.id),
         line,
-        arabic: line.arabic,
+        arabic: rewritten,
         english: line.english,
-        emphasis: line.emphasis,
+        emphasis: marked.length > 0 ? marked : undefined,
         repeat: note?.repeat ?? line.repeat ?? 1,
         instruction: note?.recited === false,
         eveningForms,

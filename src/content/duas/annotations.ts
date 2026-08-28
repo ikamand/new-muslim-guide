@@ -105,6 +105,30 @@ export type HisnAnnotation = {
    */
   parts?: readonly { arabic: string; english: string; repeat?: number }[];
   /**
+   * ⚠️ WORDS CHANGED FROM THE BOOK'S OWN TEXT. The only field here that does.
+   *
+   * Everything else in this file describes the book. This edits it, so it is
+   * deliberately awkward: each replacement names the exact string it replaces,
+   * `npm run narration:check` fails if that string is not in the row, and the
+   * check prints the total so a rewrite can never be silent.
+   *
+   * Both halves are lifted from the corpus, never typed. For the one entry
+   * that uses this — `الصُّبْحِ` → `الفَجْرِ`, on Iyad's instruction — the
+   * replacement appears vowelled elsewhere in the book, and the wāw before it
+   * is left untouched so no string is assembled by hand. IslamHouse's own
+   * English already renders that word "Fajr".
+   */
+  rewrite?: readonly { from: string; to: string }[];
+  /**
+   * Extra spans to pick out in the accent colour, beyond the ones the book
+   * bracketed.
+   *
+   * For text that is instruction rather than duʿa — "ten times after the
+   * Maghrib and Fajr prayers" trails the end of a line and reads as part of
+   * the words until it is marked.
+   */
+  emphasis?: readonly string[];
+  /**
    * Do not show this row at all: what it says is carried somewhere else.
    *
    * Different from `recited: false`, which shows the row as an instruction
@@ -187,6 +211,13 @@ export const HISN_ANNOTATIONS: Readonly<Record<number, HisnAnnotation>> = {
   },
 
   // Adhkār after the prayer
+  1269178: {
+    reason:
+      'ten times after Maghrib and Fajr; the count and the occasion are prose at the end of the row',
+    repeat: 10,
+    rewrite: [{ from: "الصُّبْحِ", to: "الفَجْرِ" }],
+    emphasis: ["عَشْرَ مَرّاتٍ بَعْدَ صَلاةِ الْمَغْرِبِ وَالفَجْرِ"],
+  },
   1269173: { omit: true, reason: 'a label on the rows above, not a step of its own' },
   /*
     Two rows where the book puts several dhikr in one, with the count printed

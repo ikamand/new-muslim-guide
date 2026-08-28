@@ -147,6 +147,20 @@ export const TOPIC_GROUPS: readonly { id: TopicGroupId; topics: readonly Content
       ref('reference', 'who-is-muhammad'),
       ref('reference', 'what-is-the-quran'),
       ref('reference', 'sunnah'),
+      /*
+        Last in the group, and deliberately.
+
+        `docs/learning-model.md:268` files the ninety-nine names under tier
+        three — year two and after — and argues the shape "suits a card on
+        Today better than a page in Learn". The card is where the daily
+        practice lives; this row exists because without it the page was
+        reachable only from that card and from Ask, which is not findable at
+        all. It sits after the five foundational topics rather than among them
+        because a person in week one needs "Who is Allah?" and does not need
+        ninety-nine names, and `beginnerPriority: 5` says the same thing to
+        anything that sorts.
+      */
+      ref('collection', 'quranic-names'),
     ],
   },
   {

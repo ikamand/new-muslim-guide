@@ -83,6 +83,7 @@ const TOPIC_GLYPH: Record<string, GlyphName> = {
   'patience-and-gratitude': 'patience-and-gratitude',
   ramadan: 'ramadan',
   'islamic-calendar': 'islamic-calendar',
+  'quranic-names': 'names',
 };
 
 function LearnCard({

@@ -51,7 +51,9 @@ export type ProviderId =
   | 'fawazahmed0'
   | 'hadithunlocked'
   | 'islamhouse'
-  | 'fitrahive';
+  | 'fitrahive'
+  | 'ninetynine'
+  | 'aladhan';
 
 export type Provider = {
   /** What to call it in a report. */
@@ -171,6 +173,39 @@ export const PROVIDERS: Readonly<Record<ProviderId, Provider>> = {
       'Publishes no terms at all. Its English ships verbatim and is never ' +
       'machine-translated into the app’s other languages; fetch `transes=fr` from the ' +
       'same endpoint instead.',
+  },
+  ninetynine: {
+    name: 'www.99NamesofAllah.name',
+    where: 'www.99NamesofAllah.name — "Al-Asmāʾ al-Ḥusnā", 2026-05 v2 (PDF)',
+    supplies:
+      'Which ninety-nine names the app lists, their transliteration and their English meaning.',
+    verification:
+      'Its methodology is stated rather than assumed, which is why it is used at all: it ' +
+      'holds that the enumerated list in Tirmidhi and Ibn Majah is an addition from later ' +
+      'transmitters rather than the Prophet’s ﷺ own words, and derives its names from the ' +
+      'Qur’an and authentic Sunnah following Ibn al-Qayyim, Al-Ghazali, Ibn Hazm, ' +
+      'Al-Qurtubi and Abd al-Razzaq al-Badr. It also states plainly that Allah has more ' +
+      'names than ninety-nine. ' +
+      '⚠️ Its list is nonetheless the SAME ninety-nine, in the same order, that AlAdhan ' +
+      'publishes from Tirmidhi — checked name by name. The difference is the justification ' +
+      'and the quality of the English, not the membership. ' +
+      '⚠️ Its Arabic column is not machine-readable: the PDF text layer reverses it, so ' +
+      'the Arabic comes from AlAdhan and is matched by transliteration, never retyped.',
+    obligation: 'No licence published. Supplied by Iyad on 28 Aug 2026 as the source to use.',
+  },
+  aladhan: {
+    name: 'AlAdhan',
+    where: 'api.aladhan.com/v1/asmaAlHusna',
+    supplies: 'The vowelled Arabic for the ninety-nine names. Nothing else.',
+    fetchedBy: 'npm run collection:names',
+    verification:
+      'Each name is matched to its row in the 99NamesofAllah list by a folded ' +
+      'transliteration AND by position, and the run fails if any of the ninety-nine does ' +
+      'not match both. The Arabic is then cross-checked against Tirmidhi 3507 in the local ' +
+      'corpus — an independently edited text of the same list. ' +
+      '⚠️ Its own English is NOT used and must not be: inconsistent capitalisation, two ' +
+      'renderings crammed into one field, and a typo at #84 ("Soverign").',
+    obligation: 'No licence published that could be found.',
   },
   fitrahive: {
     name: 'fitrahive/dua-dhikr',

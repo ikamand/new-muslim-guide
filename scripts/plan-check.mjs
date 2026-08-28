@@ -171,16 +171,21 @@ const teachingMinutes = teaching.reduce((n, e) => n + (e.meta?.estimatedMinutes 
   beside them.
 */
 measure('catalogue: non-hisn entries', teaching.length, 70);
-measure('catalogue: total estimated minutes', teachingMinutes, 186);
+/*
+  186 became 206 on 28 Aug 2026: the ninety-nine names declare 20 minutes.
+  The 69 pages the plan measured are unchanged; a 70th was added beside them.
+*/
+measure('catalogue: total estimated minutes', teachingMinutes, 206);
 measure('catalogue: hisn occasions', CATALOG.length - teaching.length, 132);
 
 const priority = (n) => teaching.filter((e) => e.meta?.beginnerPriority === n).length;
 measure('entries at beginner priority 1–2', priority(1) + priority(2), 26);
-measure('entries at beginner priority 4–5', priority(4) + priority(5), 2);
+measure('entries at beginner priority 4–5', priority(4) + priority(5), 3);
 measure(
   'entries carrying beginnerPriority or difficulty',
   teaching.filter((e) => e.meta?.beginnerPriority || e.meta?.difficulty).length,
-  52,
+  /* 52 → 53: the names collection carries meta. */
+  53,
 );
 
 // Journey lessons that are guides — the only kind that self-completes.
@@ -226,7 +231,8 @@ const kindFiles = execSync(
     `| grep -v plan-check.mjs | sort | wc -l`,
   { cwd: root, encoding: 'utf8' },
 ).trim();
-measure('files naming a ContentKind value', Number(kindFiles), 9);
+/* 9 → 11: `learn/index.ts` and the names collection both name `collection`. */
+measure('files naming a ContentKind value', Number(kindFiles), 11);
 
 /*
   No component may branch on WHICH collection it is rendering.

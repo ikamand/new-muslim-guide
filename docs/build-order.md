@@ -293,11 +293,34 @@ tier-three gap the research named. It exists to prove Phase 2 end to end.*
     because الحق usually means "the truth", and al-Muʾmin 120 times by catching
     المؤمنون. Which occurrences NAME Allah is exegesis, not a rule a script can
     hold.
-  **Iyad decided: Qur'anic names only.** The collection is 59:22–24, the
-  passage where the Qur'an enumerates them itself and closes "to Him belong the
-  best names" — 14 entries, every string from QuranEnc, each title Saheeh
-  International's rendering and each explanation their own footnote. No
-  transliteration, on the `hisn.ts` rule.
+  **First decision: Qur'anic names only** — 14 entries from 59:22–24, the
+  passage where the Qur'an enumerates them itself.
+  **Superseded the same day.** Iyad supplied *Al-Asmāʾ al-Ḥusnā* from
+  www.99NamesofAllah.name, which answers the objection rather than sidesteps
+  it: the source **states its own methodology** on its own page — that the
+  enumerated list in Tirmidhi and Ibn Majah is an addition from later
+  transmitters rather than the Prophet's ﷺ words, and that its names are
+  derived from the Qur'an and authentic Sunnah following Ibn al-Qayyim,
+  Al-Ghazali, Ibn Hazm, Al-Qurtubi and Abd al-Razzaq al-Badr. It also states
+  that Allah has more names than ninety-nine. That is the provenance AlAdhan's
+  bare list did not have. Its transliteration is also in the app's own scheme.
+  ⚠️ **Its ninety-nine are the same ninety-nine, in the same order, that
+  AlAdhan publishes from Tirmidhi** — checked name by name. The difference is
+  the justification and the English, not the membership; worth knowing rather
+  than rediscovering.
+  ⚠️ **Its Arabic column is not machine-readable** — the PDF text layer
+  reverses it — so the vowelled Arabic comes from AlAdhan and is matched by
+  transliteration AND position, with a shift check, because a wrong pairing
+  would put one name's Arabic under another's meaning and read perfectly.
+  97 of 99 spellings are confirmed against Tirmidhi 3507 in the local corpus,
+  a second independently edited witness. 14 of the 99 carry a verse citation,
+  because the Qur'an lists them itself in 59:22–24.
+- **In Learn as well as on Today.** `docs/learning-model.md:268` files the
+  names under **tier three — year two and after**, and argues the shape "suits
+  a card on Today better than a page in Learn". Both, in the end: the card
+  carries the daily practice, and a row in "What you believe" makes the page
+  findable at all — without it the only routes in were that card and Ask.
+  `beginnerPriority: 5`, `difficulty: 'deeper'`.
 - **Cadence `daily`: one name on Today, one screen for the set.** Reading one a
   day is a three-month practice, which is the kind of long-tail content the app
   has none of.

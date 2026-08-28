@@ -24,6 +24,7 @@ const { PILLARS } = await load('src/content/pillars.ts');
 const { IMAN_PILLARS } = await load('src/content/iman.ts');
 const { HISN, HISN_SOURCE } = await load('src/content/duas/hisn.ts');
 const { COLLECTIONS } = await load('src/content/collections/index.ts');
+const { PROVIDERS } = await load('src/content/providers.ts');
 
 const whenSaid = new Map();
 
@@ -127,7 +128,21 @@ for (const collection of COLLECTIONS) {
       arabic: entry.arabic,
       translit: entry.transliteration ?? '',
       english: entry.title,
-      source: (entry.sources ?? []).map(formatSource).join('; '),
+      /*
+        A per-entry citation where there is one, and otherwise the provider
+        that supplied the whole body.
+
+        This is the provenance rule at its two scales. A name of Allah that
+        the Qur'an lists carries the verse; the other eighty-five carry no
+        verse and are not therefore unsourced — they came from a named
+        publisher recorded in `providers.ts`. Reporting them as "no source"
+        would bury the texts that really do lack one, which is the exact
+        failure this sheet exists to prevent.
+      */
+      source:
+        (entry.sources ?? []).map(formatSource).join('; ') ||
+        PROVIDERS[collection.arabicFrom ?? collection.provider]?.name ||
+        '',
       file: `collections/${collection.id}.ts`,
     });
   }

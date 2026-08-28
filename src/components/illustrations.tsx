@@ -807,7 +807,8 @@ export type GlyphName =
   | 'repentance'
   | 'patience-and-gratitude'
   | 'ramadan'
-  | 'islamic-calendar';
+  | 'islamic-calendar'
+  | 'names';
 
 /**
  * The card marks.
@@ -1001,6 +1002,30 @@ export function Glyph({ name, color, size = 22 }: { name: GlyphName; color: stri
         <G {...stroke}>
           <Path d="M12 3 L21 12 L12 21 L3 12 Z" />
           <Path d="M12 8 L16 12 L12 16 L8 12 Z" />
+        </G>
+      )}
+
+      {/*
+        The names. One centre, approached from every side.
+
+        Deliberately a companion to `who-is-allah` rather than a variation on
+        it: that mark is a whole circle with axes through it, and this is a
+        small centre with rays coming in. Ninety-nine names and one named — a
+        reader will not decode that, but it is why the mark is this shape
+        rather than a decorative rosette, and it stays non-figurative like
+        everything else on this tab.
+      */}
+      {name === 'names' && (
+        <G {...stroke}>
+          <Circle cx={12} cy={12} r={3.5} />
+          <Path d="M12 6.5V3" />
+          <Path d="M12 17.5V21" />
+          <Path d="M6.5 12H3" />
+          <Path d="M17.5 12H21" />
+          <Path d="M8.1 8.1 5.6 5.6" />
+          <Path d="M15.9 8.1 18.4 5.6" />
+          <Path d="M8.1 15.9 5.6 18.4" />
+          <Path d="M15.9 15.9 18.4 18.4" />
         </G>
       )}
 

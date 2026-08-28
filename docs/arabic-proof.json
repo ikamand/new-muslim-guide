@@ -414,128 +414,893 @@
   "kind": "quotation"
  },
  {
-  "where": "The names of Allah — Knower of the unseen and the witnessed",
-  "arabic": "عَٰلِمُ ٱلۡغَيۡبِ وَٱلشَّهَٰدَةِ",
+  "where": "The names of Allah — Ar-Raḥmān",
+  "arabic": "الرَّحْمَنُ",
   "translit": "",
-  "english": "Knower of the unseen and the witnessed",
+  "english": "Ar-Raḥmān",
   "source": "Qur’an 59:22",
   "file": "collections/quranic-names.ts",
   "kind": "quotation"
  },
  {
-  "where": "The names of Allah — the Entirely Merciful, the Especially Merciful",
-  "arabic": "ٱلرَّحۡمَٰنُ ٱلرَّحِيمُ",
+  "where": "The names of Allah — Ar-Raḥīm",
+  "arabic": "الرَّحِيمُ",
   "translit": "",
-  "english": "the Entirely Merciful, the Especially Merciful",
+  "english": "Ar-Raḥīm",
   "source": "Qur’an 59:22",
   "file": "collections/quranic-names.ts",
   "kind": "quotation"
  },
  {
-  "where": "The names of Allah — the Sovereign",
-  "arabic": "ٱلۡمَلِكُ",
+  "where": "The names of Allah — Al-Malik",
+  "arabic": "الْمَلِكُ",
   "translit": "",
-  "english": "the Sovereign",
+  "english": "Al-Malik",
   "source": "Qur’an 59:23",
   "file": "collections/quranic-names.ts",
   "kind": "quotation"
  },
  {
-  "where": "The names of Allah — the Pure",
-  "arabic": "ٱلۡقُدُّوسُ",
+  "where": "The names of Allah — Al-Quddūs",
+  "arabic": "الْقُدُّوسُ",
   "translit": "",
-  "english": "the Pure",
+  "english": "Al-Quddūs",
   "source": "Qur’an 59:23",
   "file": "collections/quranic-names.ts",
   "kind": "quotation"
  },
  {
-  "where": "The names of Allah — the Perfection",
-  "arabic": "ٱلسَّلَٰمُ",
+  "where": "The names of Allah — As-Salām",
+  "arabic": "السَّلاَمُ",
   "translit": "",
-  "english": "the Perfection",
+  "english": "As-Salām",
   "source": "Qur’an 59:23",
   "file": "collections/quranic-names.ts",
   "kind": "quotation"
  },
  {
-  "where": "The names of Allah — the Grantor of Security",
-  "arabic": "ٱلۡمُؤۡمِنُ",
+  "where": "The names of Allah — Al-Muʾmin",
+  "arabic": "الْمُؤْمِنُ",
   "translit": "",
-  "english": "the Grantor of Security",
+  "english": "Al-Muʾmin",
   "source": "Qur’an 59:23",
   "file": "collections/quranic-names.ts",
   "kind": "quotation"
  },
  {
-  "where": "The names of Allah — the Overseer",
-  "arabic": "ٱلۡمُهَيۡمِنُ",
+  "where": "The names of Allah — Al-Muhaymin",
+  "arabic": "الْمُهَيْمِنُ",
   "translit": "",
-  "english": "the Overseer",
+  "english": "Al-Muhaymin",
   "source": "Qur’an 59:23",
   "file": "collections/quranic-names.ts",
   "kind": "quotation"
  },
  {
-  "where": "The names of Allah — the Exalted in Might",
-  "arabic": "ٱلۡعَزِيزُ",
+  "where": "The names of Allah — Al-ʿAzīz",
+  "arabic": "الْعَزِيزُ",
   "translit": "",
-  "english": "the Exalted in Might",
+  "english": "Al-ʿAzīz",
   "source": "Qur’an 59:23",
   "file": "collections/quranic-names.ts",
   "kind": "quotation"
  },
  {
-  "where": "The names of Allah — the Compeller",
-  "arabic": "ٱلۡجَبَّارُ",
+  "where": "The names of Allah — Al-Jabbār",
+  "arabic": "الْجَبَّارُ",
   "translit": "",
-  "english": "the Compeller",
+  "english": "Al-Jabbār",
   "source": "Qur’an 59:23",
   "file": "collections/quranic-names.ts",
   "kind": "quotation"
  },
  {
-  "where": "The names of Allah — the Superior",
-  "arabic": "ٱلۡمُتَكَبِّرُ",
+  "where": "The names of Allah — Al-Mutakabbir",
+  "arabic": "الْمُتَكَبِّرُ",
   "translit": "",
-  "english": "the Superior",
+  "english": "Al-Mutakabbir",
   "source": "Qur’an 59:23",
   "file": "collections/quranic-names.ts",
   "kind": "quotation"
  },
  {
-  "where": "The names of Allah — the Creator",
-  "arabic": "ٱلۡخَٰلِقُ",
+  "where": "The names of Allah — Al-Khāliq",
+  "arabic": "الْخَالِقُ",
   "translit": "",
-  "english": "the Creator",
+  "english": "Al-Khāliq",
   "source": "Qur’an 59:24",
   "file": "collections/quranic-names.ts",
   "kind": "quotation"
  },
  {
-  "where": "The names of Allah — the Producer",
-  "arabic": "ٱلۡبَارِئُ",
+  "where": "The names of Allah — Al-Bāriʾ",
+  "arabic": "الْبَارِئُ",
   "translit": "",
-  "english": "the Producer",
+  "english": "Al-Bāriʾ",
   "source": "Qur’an 59:24",
   "file": "collections/quranic-names.ts",
   "kind": "quotation"
  },
  {
-  "where": "The names of Allah — the Fashioner",
-  "arabic": "ٱلۡمُصَوِّرُ",
+  "where": "The names of Allah — Al-Muṣawwir",
+  "arabic": "الْمُصَوِّرُ",
   "translit": "",
-  "english": "the Fashioner",
+  "english": "Al-Muṣawwir",
   "source": "Qur’an 59:24",
   "file": "collections/quranic-names.ts",
   "kind": "quotation"
  },
  {
-  "where": "The names of Allah — the Wise",
-  "arabic": "ٱلۡحَكِيمُ",
+  "where": "The names of Allah — Al-Ghaffār",
+  "arabic": "الْغَفَّارُ",
   "translit": "",
-  "english": "the Wise",
+  "english": "Al-Ghaffār",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Qahhār",
+  "arabic": "الْقَهَّارُ",
+  "translit": "",
+  "english": "Al-Qahhār",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Wahhāb",
+  "arabic": "الْوَهَّابُ",
+  "translit": "",
+  "english": "Al-Wahhāb",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Ar-Razzāq",
+  "arabic": "الرَّزَّاقُ",
+  "translit": "",
+  "english": "Ar-Razzāq",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Fattāḥ",
+  "arabic": "الْفَتَّاحُ",
+  "translit": "",
+  "english": "Al-Fattāḥ",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-ʿAlīm",
+  "arabic": "اَلْعَلِيْمُ",
+  "translit": "",
+  "english": "Al-ʿAlīm",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Qābiḍ",
+  "arabic": "الْقَابِضُ",
+  "translit": "",
+  "english": "Al-Qābiḍ",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Bāsiṭ",
+  "arabic": "الْبَاسِطُ",
+  "translit": "",
+  "english": "Al-Bāsiṭ",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Khāfiḍ",
+  "arabic": "الْخَافِضُ",
+  "translit": "",
+  "english": "Al-Khāfiḍ",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Ar-Rāfiʿ",
+  "arabic": "الرَّافِعُ",
+  "translit": "",
+  "english": "Ar-Rāfiʿ",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Muʿizz",
+  "arabic": "الْمُعِزُّ",
+  "translit": "",
+  "english": "Al-Muʿizz",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Mudhil",
+  "arabic": "المُذِلُّ",
+  "translit": "",
+  "english": "Al-Mudhil",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — As-Samīʿ",
+  "arabic": "السَّمِيعُ",
+  "translit": "",
+  "english": "As-Samīʿ",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Baṣīr",
+  "arabic": "الْبَصِيرُ",
+  "translit": "",
+  "english": "Al-Baṣīr",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Ḥakam",
+  "arabic": "الْحَكَمُ",
+  "translit": "",
+  "english": "Al-Ḥakam",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-ʿAdl",
+  "arabic": "الْعَدْلُ",
+  "translit": "",
+  "english": "Al-ʿAdl",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Laṭīf",
+  "arabic": "اللَّطِيفُ",
+  "translit": "",
+  "english": "Al-Laṭīf",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Khabīr",
+  "arabic": "الْخَبِيرُ",
+  "translit": "",
+  "english": "Al-Khabīr",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Ḥalīm",
+  "arabic": "الْحَلِيمُ",
+  "translit": "",
+  "english": "Al-Ḥalīm",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-ʿAẓīm",
+  "arabic": "الْعَظِيمُ",
+  "translit": "",
+  "english": "Al-ʿAẓīm",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Ghafūr",
+  "arabic": "الْغَفُورُ",
+  "translit": "",
+  "english": "Al-Ghafūr",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Ash-Shakūr",
+  "arabic": "الشَّكُورُ",
+  "translit": "",
+  "english": "Ash-Shakūr",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-ʿAlī",
+  "arabic": "الْعَلِيُّ",
+  "translit": "",
+  "english": "Al-ʿAlī",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Kabīr",
+  "arabic": "الْكَبِيرُ",
+  "translit": "",
+  "english": "Al-Kabīr",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Ḥafīẓ",
+  "arabic": "الْحَفِيظُ",
+  "translit": "",
+  "english": "Al-Ḥafīẓ",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Muqīt",
+  "arabic": "المُقيِت",
+  "translit": "",
+  "english": "Al-Muqīt",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Ḥasīb",
+  "arabic": "الْحسِيبُ",
+  "translit": "",
+  "english": "Al-Ḥasīb",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Jalīl",
+  "arabic": "الْجَلِيلُ",
+  "translit": "",
+  "english": "Al-Jalīl",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Karīm",
+  "arabic": "الْكَرِيمُ",
+  "translit": "",
+  "english": "Al-Karīm",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Ar-Raqīb",
+  "arabic": "الرَّقِيبُ",
+  "translit": "",
+  "english": "Ar-Raqīb",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Mujīb",
+  "arabic": "الْمُجِيبُ",
+  "translit": "",
+  "english": "Al-Mujīb",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Wāsiʿ",
+  "arabic": "الْوَاسِعُ",
+  "translit": "",
+  "english": "Al-Wāsiʿ",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Ḥakīm",
+  "arabic": "الْحَكِيمُ",
+  "translit": "",
+  "english": "Al-Ḥakīm",
   "source": "Qur’an 59:24",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Wadūd",
+  "arabic": "الْوَدُودُ",
+  "translit": "",
+  "english": "Al-Wadūd",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Majīd",
+  "arabic": "الْمَجِيدُ",
+  "translit": "",
+  "english": "Al-Majīd",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Bāʿith",
+  "arabic": "الْبَاعِثُ",
+  "translit": "",
+  "english": "Al-Bāʿith",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Ash-Shahīd",
+  "arabic": "الشَّهِيدُ",
+  "translit": "",
+  "english": "Ash-Shahīd",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Ḥaqq",
+  "arabic": "الْحَقُّ",
+  "translit": "",
+  "english": "Al-Ḥaqq",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Wakīl",
+  "arabic": "الْوَكِيلُ",
+  "translit": "",
+  "english": "Al-Wakīl",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Qawiyy",
+  "arabic": "الْقَوِيُّ",
+  "translit": "",
+  "english": "Al-Qawiyy",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Matīn",
+  "arabic": "الْمَتِينُ",
+  "translit": "",
+  "english": "Al-Matīn",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Waliyy",
+  "arabic": "الْوَلِيُّ",
+  "translit": "",
+  "english": "Al-Waliyy",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Ḥamīd",
+  "arabic": "الْحَمِيدُ",
+  "translit": "",
+  "english": "Al-Ḥamīd",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Muḥṣī",
+  "arabic": "الْمُحْصِي",
+  "translit": "",
+  "english": "Al-Muḥṣī",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Mubdiʾ",
+  "arabic": "الْمُبْدِئُ",
+  "translit": "",
+  "english": "Al-Mubdiʾ",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Muʿīd",
+  "arabic": "الْمُعِيدُ",
+  "translit": "",
+  "english": "Al-Muʿīd",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Muḥyī",
+  "arabic": "الْمُحْيِي",
+  "translit": "",
+  "english": "Al-Muḥyī",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Mumīt",
+  "arabic": "اَلْمُمِيتُ",
+  "translit": "",
+  "english": "Al-Mumīt",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Ḥayy",
+  "arabic": "الْحَيُّ",
+  "translit": "",
+  "english": "Al-Ḥayy",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Qayyūm",
+  "arabic": "الْقَيُّومُ",
+  "translit": "",
+  "english": "Al-Qayyūm",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Wājid",
+  "arabic": "الْوَاجِدُ",
+  "translit": "",
+  "english": "Al-Wājid",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Mājid",
+  "arabic": "الْمَاجِدُ",
+  "translit": "",
+  "english": "Al-Mājid",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Wāḥid",
+  "arabic": "الْواحِدُ",
+  "translit": "",
+  "english": "Al-Wāḥid",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Aḥad",
+  "arabic": "اَلاَحَدُ",
+  "translit": "",
+  "english": "Al-Aḥad",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Aṣ-Ṣamad",
+  "arabic": "الصَّمَدُ",
+  "translit": "",
+  "english": "Aṣ-Ṣamad",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Qādir",
+  "arabic": "الْقَادِرُ",
+  "translit": "",
+  "english": "Al-Qādir",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Muqtadir",
+  "arabic": "الْمُقْتَدِرُ",
+  "translit": "",
+  "english": "Al-Muqtadir",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Muqaddim",
+  "arabic": "الْمُقَدِّمُ",
+  "translit": "",
+  "english": "Al-Muqaddim",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Muʾakhkhir",
+  "arabic": "الْمُؤَخِّرُ",
+  "translit": "",
+  "english": "Al-Muʾakhkhir",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Awwal",
+  "arabic": "الأوَّلُ",
+  "translit": "",
+  "english": "Al-Awwal",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Ākhir",
+  "arabic": "الآخِرُ",
+  "translit": "",
+  "english": "Al-Ākhir",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Aẓ-Ẓāhir",
+  "arabic": "الظَّاهِرُ",
+  "translit": "",
+  "english": "Aẓ-Ẓāhir",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Bāṭin",
+  "arabic": "الْبَاطِنُ",
+  "translit": "",
+  "english": "Al-Bāṭin",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Wālī",
+  "arabic": "الْوَالِي",
+  "translit": "",
+  "english": "Al-Wālī",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Mutaʿālī",
+  "arabic": "الْمُتَعَالِي",
+  "translit": "",
+  "english": "Al-Mutaʿālī",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Barr",
+  "arabic": "الْبَرُّ",
+  "translit": "",
+  "english": "Al-Barr",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — At-Tawwāb",
+  "arabic": "التَّوَابُ",
+  "translit": "",
+  "english": "At-Tawwāb",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Muntaqim",
+  "arabic": "الْمُنْتَقِمُ",
+  "translit": "",
+  "english": "Al-Muntaqim",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-ʿAfūw",
+  "arabic": "العَفُوُّ",
+  "translit": "",
+  "english": "Al-ʿAfūw",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Ar-Raʾūf",
+  "arabic": "الرَّؤُوفُ",
+  "translit": "",
+  "english": "Ar-Raʾūf",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Mālik al-Mulk",
+  "arabic": "مَالِكُ الْمُلْكِ",
+  "translit": "",
+  "english": "Mālik al-Mulk",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Dhū al-Jalāli wa-l-Ikrām",
+  "arabic": "ذُوالْجَلاَلِ وَالإكْرَامِ",
+  "translit": "",
+  "english": "Dhū al-Jalāli wa-l-Ikrām",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Muqsiṭ",
+  "arabic": "الْمُقْسِطُ",
+  "translit": "",
+  "english": "Al-Muqsiṭ",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Jāmiʿ",
+  "arabic": "الْجَامِعُ",
+  "translit": "",
+  "english": "Al-Jāmiʿ",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Ghaniyy",
+  "arabic": "الْغَنِيُّ",
+  "translit": "",
+  "english": "Al-Ghaniyy",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Mughnī",
+  "arabic": "الْمُغْنِي",
+  "translit": "",
+  "english": "Al-Mughnī",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Māniʿ",
+  "arabic": "اَلْمَانِعُ",
+  "translit": "",
+  "english": "Al-Māniʿ",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Aḍ-Ḍārr",
+  "arabic": "الضَّارَّ",
+  "translit": "",
+  "english": "Aḍ-Ḍārr",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — An-Nāfiʿ",
+  "arabic": "النَّافِعُ",
+  "translit": "",
+  "english": "An-Nāfiʿ",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — An-Nūr",
+  "arabic": "النُّورُ",
+  "translit": "",
+  "english": "An-Nūr",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Hādī",
+  "arabic": "الْهَادِي",
+  "translit": "",
+  "english": "Al-Hādī",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Badīʿ",
+  "arabic": "الْبَدِيعُ",
+  "translit": "",
+  "english": "Al-Badīʿ",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Bāqī",
+  "arabic": "اَلْبَاقِي",
+  "translit": "",
+  "english": "Al-Bāqī",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Al-Wāriṯ",
+  "arabic": "الْوَارِثُ",
+  "translit": "",
+  "english": "Al-Wāriṯ",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Ar-Rashīd",
+  "arabic": "الرَّشِيدُ",
+  "translit": "",
+  "english": "Ar-Rashīd",
+  "source": "AlAdhan",
+  "file": "collections/quranic-names.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "The names of Allah — Aṣ-Ṣabūr",
+  "arabic": "الصَّبُورُ",
+  "translit": "",
+  "english": "Aṣ-Ṣabūr",
+  "source": "AlAdhan",
   "file": "collections/quranic-names.ts",
   "kind": "quotation"
  },

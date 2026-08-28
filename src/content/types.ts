@@ -384,6 +384,17 @@ export type Collection = {
    * record that publisher's terms in none of them.
    */
   provider: ProviderId;
+  /**
+   * Who supplied the Arabic, where that is not the same body as the rest.
+   *
+   * `EvidenceText` already carries `arabicFrom` and `translationFrom` per
+   * text, because one publisher's wording and another's translation routinely
+   * arrive together and a single credit would be a lie about one of them. The
+   * same happens at collection scale: the names of Allah take their list and
+   * their English from one source and their vowelled Arabic from another,
+   * because the first publishes Arabic that a script cannot read.
+   */
+  arabicFrom?: ProviderId;
   meta?: ContentMeta;
   entries: readonly CollectionEntry[];
 };

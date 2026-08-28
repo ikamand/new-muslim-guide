@@ -219,7 +219,10 @@ const research = read('docs/learning-model.md');
 const evaluation = read('docs/expansion-plan.md');
 
 /**
- * [what, where it came from, a phrase the build order must contain].
+ * [what, which document it came from, a phrase the build order must contain].
+ *
+ * The middle field is documentation rather than logic — it records the origin of
+ * each row so a future reader can find the argument behind it.
  *
  * The union of both source documents, transcribed once. `source` is checked
  * too: if a gap is renamed in the research and not here, this notices.
@@ -280,16 +283,32 @@ const MUST_CARRY = [
   ['ummahapi rejected', evaluation, 'ummahapi'],
   ['Sufi/machine-translated APIs rejected', evaluation, 'Naqshbandi'],
   ['prayer-time/fasting rejected', evaluation, 'prayer-time'],
+  // The six execution gaps neither source document carried. These have no
+  // source doc to check against — they were found by asking whether the plan
+  // could actually be run — so `research` stands in as the origin.
+  ['audio named as the real release gate', research, 'audio-recording-brief'],
+  ['the standing checklist for Stage D', research, 'i18n:manifest'],
+  ['who backfills Cadence onto 201 entries', research, 'Backfill all 201'],
+  ['the Firsts data model', research, 'Define the data model'],
+  ['the observation storage decision', research, 'storage shape deliberately'],
+  ['the Ask alias layer', research, 'alias layer'],
+  ['what happens if a pilot is rejected', research, 'Rejection'],
 ];
 
-for (const [what, sourceDoc, phrase] of MUST_CARRY) {
-  if (!order.includes(phrase)) fail(`build-order.md never mentions "${what}" (looked for “${phrase}”)`);
-  else if (!sourceDoc.includes(phrase.replace('Zakat, with a dated nisab', 'Zakat')))
-    // A phrase the plan invented rather than inherited is fine; only report
-    // the reverse, which means the source document was edited underneath.
-    void 0;
+/**
+ * Markdown wraps at eighty columns, so a phrase the plan definitely contains is
+ * routinely split across two lines — and a check that fails on line wrapping is
+ * a check people learn to ignore, which is worse than no check. Both sides are
+ * flattened to one lowercase line before comparing.
+ */
+const flat = (text) => text.replace(/\s+/g, ' ').toLowerCase();
+const flatOrder = flat(order);
+
+for (const [what, , phrase] of MUST_CARRY) {
+  if (!flatOrder.includes(flat(phrase)))
+    fail(`build-order.md never mentions "${what}" (looked for “${phrase}”)`);
 }
-if (failures === 0 || !MUST_CARRY.some(([, , p]) => !order.includes(p))) {
+if (!MUST_CARRY.some(([, , ph]) => !flatOrder.includes(flat(ph)))) {
   pass(`all ${MUST_CARRY.length} gaps and sources have a home in the build order`);
 }
 
@@ -320,6 +339,18 @@ if (glance.length !== headings.length) {
   }
   if (failures === 0) pass(`${glance.length} phases, table and body agree`);
 }
+
+/* every phase states how it is finished and how it reaches a device */
+
+const phaseBlocks = order.split(/^### Phase /m).slice(1);
+for (const block of phaseBlocks) {
+  const name = block.split('\n')[0].trim();
+  if (!/^\*\*Done when\*\*/m.test(block)) fail(`Phase ${name} has no "Done when"`);
+  if (!/^\*\*Ships via\*\*/m.test(block)) fail(`Phase ${name} has no "Ships via"`);
+}
+if (phaseBlocks.length !== headings.length)
+  fail(`phase blocks (${phaseBlocks.length}) and headings (${headings.length}) disagree`);
+else pass(`all ${phaseBlocks.length} phases state "Done when" and "Ships via"`);
 
 console.log(
   failures === 0

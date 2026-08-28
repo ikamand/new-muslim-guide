@@ -21,7 +21,7 @@
  * that these are the only defensible windows.
  */
 
-import type { DayTimes } from './prayer-times';
+import type { DayTimes, PrayerTime } from './prayer-times';
 import type { AdhkarWindow } from '@/content/duas/sessions';
 
 /**
@@ -42,6 +42,25 @@ export type WindowState = {
   justPrayed?: string;
   /** The boundary that opened the current window, for the screen to cite. */
   since?: Date;
+  /**
+   * The boundary that will CLOSE the window, where the day's times know it.
+   *
+   * This function always tested both ends of every span and threw the closing
+   * one away, which left the screen able to say only "ʿAsr was 4:52" — the
+   * half a reader cannot act on. How long is left is the half they can.
+   *
+   * It is the day's own `PrayerTime`, not a name and a time copied out of it,
+   * so the label can never drift from the boundary that was actually tested.
+   * The tab hardcoded a second table of prayer names for exactly this and
+   * would have gone on saying "ʿAsr" the day the evening window moved to
+   * Maghrib — a change this file's own header says is open.
+   *
+   * Absent in two cases, both honest rather than lazy: after a prayer, where
+   * the boundary is a grace period and not a prayer at all, and at night after
+   * ʿIshāʾ, where the window closes at TOMORROW's Fajr and `today` does not
+   * have it.
+   */
+  until?: PrayerTime;
 };
 
 /**
@@ -57,11 +76,10 @@ export type WindowState = {
 export function windowAt(today: DayTimes | null, now: Date): WindowState {
   if (!today) return { window: null };
 
-  const at = (id: string) => today.prayers.find((prayer) => prayer.id === id)?.time;
+  const at = (id: string) => today.prayers.find((prayer) => prayer.id === id);
   const fajr = at('fajr');
   const dhuhr = at('dhuhr');
   const asr = at('asr');
-  const maghrib = at('maghrib');
   const isha = at('isha');
 
   /*
@@ -94,11 +112,11 @@ export function windowAt(today: DayTimes | null, now: Date): WindowState {
     preferred window, too narrow makes the thing vanish for a reader who does
     not yet know it exists.
   */
-  if (fajr && dhuhr && now >= fajr && now < dhuhr) {
-    return { window: 'morning', since: fajr };
+  if (fajr && dhuhr && now >= fajr.time && now < dhuhr.time) {
+    return { window: 'morning', since: fajr.time, until: dhuhr };
   }
-  if (asr && isha && now >= asr && now < isha) {
-    return { window: 'evening', since: asr };
+  if (asr && isha && now >= asr.time && now < isha.time) {
+    return { window: 'evening', since: asr.time, until: isha };
   }
   /*
     Night is TWO tests, not one, and the second is the whole reason this
@@ -110,11 +128,16 @@ export function windowAt(today: DayTimes | null, now: Date): WindowState {
     person awake at one in the morning looking for the sleep adhkār. The hours
     before Fajr belong to the night that has not ended yet.
   */
-  if (isha && now >= isha) {
-    return { window: 'night', since: isha };
+  if (isha && now >= isha.time) {
+    /*
+      No `until`: this window closes at TOMORROW's Fajr, and `today` holds the
+      Fajr that has already been and gone. Saying nothing beats naming a time
+      sixteen hours in the past.
+    */
+    return { window: 'night', since: isha.time };
   }
-  if (fajr && now < fajr) {
-    return { window: 'night' };
+  if (fajr && now < fajr.time) {
+    return { window: 'night', until: fajr };
   }
 
   return { window: null };

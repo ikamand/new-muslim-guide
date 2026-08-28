@@ -14,6 +14,7 @@
 import { HISN } from '../src/content/duas/hisn.ts';
 import { HISN_ANNOTATIONS } from '../src/content/duas/annotations.ts';
 import { OCCASIONS_BY_MOMENT } from '../src/content/duas/moments.ts';
+import { ADHKAR_SESSIONS, arabicNameFor, sharedHeadingSplits } from '../src/content/duas/sessions.ts';
 import { pickForNow, resolvePick } from '../src/content/duas/card.ts';
 
 const lineIds = new Set(HISN.flatMap((occasion) => occasion.lines.map((line) => line.id)));
@@ -50,6 +51,35 @@ console.log(`${placements.length} day-moment placements`);
 if (lost.length > 0) {
   console.error(`\n✗ ${lost.length} placement(s) point at an occasion the book no longer has:`);
   lost.forEach(([moment, id]) => console.error(`    ${moment}: ${id}`));
+  failed = true;
+}
+
+/*
+  Morning and evening are named by SPLITTING the book's one shared heading —
+  `أَذْكَارُ الصَّبَاحِ وَالْمَسَاءِ` — so a re-fetch that rewords it silently
+  turns both sittings back into the same name. `arabicNameFor` falls back
+  rather than guessing, which is right for a reader on a mat and useless as a
+  way of finding out, so the finding out happens here.
+*/
+const names = ADHKAR_SESSIONS.map((session) => [session.id, arabicNameFor(session)]);
+console.log(names.map(([id, name]) => `${id}: ${name ?? '—'}`).join('  ·  '));
+
+if (!sharedHeadingSplits()) {
+  console.error('\n✗ the shared morning/evening heading no longer has the shape the split assumes;');
+  console.error('    both sittings are falling back to it unchanged. Re-read it and fix arabicNameFor.');
+  failed = true;
+}
+
+const missing = names.filter(([, name]) => !name);
+if (missing.length > 0) {
+  console.error(`\n✗ ${missing.length} session(s) have no Arabic name — the occasion is gone:`);
+  missing.forEach(([id]) => console.error(`    ${id}`));
+  failed = true;
+}
+
+const distinct = new Set(names.map(([, name]) => name));
+if (distinct.size !== names.length) {
+  console.error('\n✗ two sittings share an Arabic name; the duʿa tab would show it twice.');
   failed = true;
 }
 

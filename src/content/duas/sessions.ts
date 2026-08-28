@@ -203,3 +203,73 @@ export function sessionById(id: string): AdhkarSession | undefined {
 export function occasionFor(session: AdhkarSession): HisnOccasion | undefined {
   return HISN.find((entry) => entry.id === session.occasion);
 }
+
+/**
+ * The conjunction joining the two sittings in the book's shared heading.
+ *
+ * Named rather than written inline because `arabicNameFor` and
+ * `scripts/hisn-annotations-check.mjs` both test for it, and two copies of a
+ * two-character Arabic string is exactly how a check stops matching the thing
+ * it checks.
+ */
+const HEADING_WAW = 'وَ';
+
+/**
+ * What a sitting is called in Arabic.
+ *
+ * ## Why this is a function and not four strings
+ *
+ * Sleep and after-prayer have headings of their own in the book and are simply
+ * read back. Morning and evening do not: Hisn prints ONE heading for both —
+ * `أَذْكَارُ الصَّبَاحِ وَالْمَسَاءِ` — so a per-sitting name has to come from
+ * somewhere, and CLAUDE.md is explicit that Arabic is never composed here.
+ *
+ * So it is not composed. The heading is SPLIT, mechanically and reversibly:
+ * the morning name is its first two words verbatim, and the evening name is
+ * the same first word plus its third with the leading conjunction removed.
+ * Every character still comes from the book; only the joining word is dropped.
+ *
+ * ## And it degrades rather than guesses
+ *
+ * `hisn.ts` is regenerated from IslamHouse on demand, so the heading can move
+ * under this. If it no longer has the shape the split assumes, both sittings
+ * fall back to the heading exactly as printed — the same name twice is odd,
+ * and it is a great deal better than a name assembled out of a wording that
+ * has changed. `npm run hisn:check` fails loudly when that happens, so the
+ * fallback is a safety net for a reader on a mat, never the way this is
+ * noticed.
+ *
+ * ⚠️ The split itself is unreviewed. It asserts a heading, not a ruling, but
+ * Iyad reads Arabic and has not yet cleared the vowelling.
+ */
+export function arabicNameFor(session: AdhkarSession): string | undefined {
+  const heading = occasionFor(session)?.arabic;
+  if (!heading || !session.sitting) return heading;
+
+  const words = heading.split(' ');
+  if (words.length !== 3 || !words[2].startsWith(HEADING_WAW)) return heading;
+
+  return session.sitting === 'morning'
+    ? `${words[0]} ${words[1]}`
+    : `${words[0]} ${words[2].slice(HEADING_WAW.length)}`;
+}
+
+/** Whether the shared heading still has the shape `arabicNameFor` splits. */
+export function sharedHeadingSplits(): boolean {
+  const shared = ADHKAR_SESSIONS.filter((session) => session.sitting !== undefined);
+  return shared.every((session) => {
+    const words = occasionFor(session)?.arabic.split(' ');
+    return words?.length === 3 && words[2].startsWith(HEADING_WAW);
+  });
+}
+
+/**
+ * The book's own title, for the row that opens it.
+ *
+ * ⚠️ Unreviewed, and the one Arabic string on the duʿa tab that was not copied
+ * out of the data: `hisn.ts` is generated per-occasion and carries no title for
+ * the book the occasions came from. It is a NAME rather than a quotation —
+ * asking for a citation for the title of a book is a category error — but it
+ * is written here rather than in a screen so a correction lands in one place.
+ */
+export const HISN_ARABIC_TITLE = 'حِصْنُ الْمُسْلِمِ';

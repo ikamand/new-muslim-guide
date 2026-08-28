@@ -82,6 +82,34 @@ for (const spec of SHAPES) {
       break;
     }
 
+    /*
+      A closing boundary must always still be ahead. The screen prints it as
+      "ends at Dhuhr, 1:12 PM", so one that has already passed is not a wrong
+      pixel — it is the app telling somebody a window shut hours ago while
+      offering it to them.
+    */
+    if (state.until && state.until.time.getTime() <= now.getTime()) {
+      fail(`${spec.name} ${hhmm(minute)}: until (${state.until.label}) is in the past`);
+      break;
+    }
+    /*
+      And it is present for exactly the windows that have one inside `today`.
+      After a prayer the boundary is a grace period rather than a prayer, and
+      after ʿIshāʾ it is TOMORROW's Fajr, which this day does not hold — both
+      documented in `adhkar-window.ts` and both silent if they drift.
+    */
+    const shouldHaveUntil =
+      state.window === 'morning' ||
+      state.window === 'evening' ||
+      (state.window === 'night' && minute < spec.fajr);
+    if (shouldHaveUntil !== (state.until !== undefined)) {
+      fail(
+        `${spec.name} ${hhmm(minute)}: window ${state.window} ` +
+          `${state.until ? 'has' : 'lacks'} an until, expected the opposite`,
+      );
+      break;
+    }
+
     // The small hours belong to the night that has not ended. This is the case
     // a lone `now >= isha` test drops, because after midnight the day's ʿIshāʾ
     // is still in the future.

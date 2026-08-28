@@ -213,9 +213,14 @@ export const EN = {
   'adhkar.window.evening': 'Evening adhkār',
   'adhkar.window.night': 'Before sleep',
   'adhkar.window.afterPrayer': 'After the prayer',
-  'adhkar.since': 'was',
   'adhkar.justPrayed': 'You have just prayed',
   'adhkar.minutes': 'about {n} minutes',
+  /* The half a reader can act on: how long the sitting has left, not when it opened. */
+  'adhkar.endsAt': 'ends at {prayer}, {time}',
+  /* A count is meaningless without its unit, and these two are different units. */
+  'adhkar.toSay': '{n} to say',
+  'adhkar.minutesShort': '{n} min',
+  'adhkar.occasions': '{n} occasions',
   'adhkar.start': 'Start',
   'adhkar.readAgain': 'Read again',
   'adhkar.pinned': 'Pinned duʿas',
@@ -341,8 +346,12 @@ export const EN = {
   'duas.moment.eating': 'Eating',
   'duas.moment.travel': 'Travelling',
   'duas.moment.night': 'Going to bed',
+  /*
+    Rewritten for the tab as it is now. The old wording described the retired
+    six-moment day screen and was already attached to nothing.
+  */
   'duas.intro':
-    'Short things said through an ordinary day. Start with the one-word one and add another when it sticks. Nobody learns these all at once.',
+    'Short sets of words said at fixed points in the day — and a duʿa for almost anything else.',
   'learn.duas.title': 'Everyday duʿas',
   'learn.duas.subtitle': 'Waking, eating, leaving the house, sleeping',
   'learn.practice.title': 'Practice the recitations',

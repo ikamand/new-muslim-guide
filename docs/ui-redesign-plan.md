@@ -25,7 +25,7 @@ with its reasoning attached.
 | **3** | [Provenance](#phase-3--provenance) | ✅ **Done** — `5f2570a`, `e614780` | OTA |
 | **4** | [Duʿas, and the first network call](#phase-4--duas-and-the-apps-first-network-call) | ✅ **Done** — `d9bd351`, and its held half is now Phase 7 | OTA |
 | **5** | [The Qur'an tab](#phase-5--the-quran-tab--juz-30) | ✅ **Done** — `eed5214`, and its held audio is now Phase 8 | OTA |
-| **7** | [The Duʿa tab](#phase-7--the-dua-tab) | ✅ **Done** — 26 Aug. Tab, book, Today's card, and 37 occasions placed in the day | OTA |
+| **7** | [The Duʿa tab](#phase-7--the-dua-tab) | ✅ **Done** — 27 Aug. Tab, book, Today's card, 37 occasions placed in the day, and the tab redrawn to carry Arabic | OTA |
 | **8** | [Audio that saves itself](#phase-8--audio-that-saves-itself) | ✅ **Done** — 26 Aug. Save-on-play and the storage screen. **Needs `eas build`** | ⚠️ **Build** |
 | **9** | [~~Bet 4: the Arabic letters~~](#phase-9--dropped-25-aug) | ❌ **Dropped 25 Aug** — it is an Arabic curriculum, not a feature | — |
 | **10** | Downloading a voice, a juz at a time | ↩︎ **Merged into 8** on 25 Aug — same store, same build |
@@ -1053,6 +1053,77 @@ occasion each is attached to all need a qualified reviewer, and the pile is
 already the thing gating a public release. Worth shipping the *machinery* on
 Tuesday and gating the content behind review, rather than putting 245 unreviewed
 texts in front of users.
+
+### ✅ Built 27 Aug — 7.4 the tab stopped being an index of itself
+
+Iyad, on a screenshot: *"this page should look a lot better and follow how the
+general style and design."* He was right, and the diagnosis is worth keeping
+because it is a class of failure rather than a layout bug.
+
+**Every other tab puts content on the screen; this one put a table of
+contents.** Qur'an shows `الفاتحة` beside the name. Today shows the times and
+the mihrab. Learn shows a glyph per topic. The duʿa tab showed five words and
+five numerals — and 7.1 above argues, in its own words, that *an index cannot
+help them*. It had become the thing it was built to replace. Most concretely:
+**the tab about words to say carried no Arabic at all** while a sitting was
+open, in an app whose best asset is Amiri.
+
+What changed, all of it inside components that already existed:
+
+| | Before | After |
+|---|---|---|
+| Row | `Morning adhkār` · `26` | + `أَذْكَارُ الصَّبَاحِ`, and `26 to say · 7 min` |
+| Hero | `ASR WAS 4:52 PM` | `ends at Isha, 9:02 PM` |
+| Header | a bare word | the `paddingTop` + intro block Learn and Qur'an share |
+| `paddingBottom` | `Spacing.six` (64) | `BottomTabInset + Spacing.four` |
+
+**The numeral column mixed units.** Sessions passed `stepsFor().length` and the
+book row passed `HISN.length`, so `26` meant lines and `132` meant occasions in
+one column. Both now say what they count.
+
+**`windowAt` knew both ends of every span and returned only the one already
+behind the reader.** It now carries `until` as the day's own `PrayerTime`,
+which is what killed the screen's private `sinceLabel` table of
+window→`'Fajr'`/`'Asr'`/`'Isha'`. That table would have gone on saying ʿAsr the
+day the evening boundary moved to Maghrib — a change the file's own header
+flags as open. `until` is absent for exactly two windows and both are honest:
+after a prayer the boundary is a grace period, and after ʿIshāʾ it is
+*tomorrow's* Fajr, which `today` does not hold. `npm run adhkar:check` asserts
+that presence-or-absence over 7,200 minutes and was proved to fail when `until`
+is removed.
+
+**Two things the mockup got wrong and the running screen corrected**, kept here
+rather than quietly fixed:
+
+- It said the evening sitting *ends at Maghrib*. It ends at **ʿIshāʾ** —
+  `windowAt` deliberately takes the union of the mainstream positions, so
+  ʿIshāʾ is the honest end of what the tab offers.
+- It set the hero's Arabic beside the title, the way the Qur'an tab sets a
+  surah. `الأَذْكَارُ بَعْدَ السَّلاَمِ مِنَ الصَّلاَةِ` is seven words and
+  collided with it — and that hero is on screen for twenty minutes after each
+  of the five prayers, so it is not an edge case. Arabic now takes its own
+  line in the hero and in every row, one shape that fits the longest name.
+
+**What was proposed and dropped:** a `DayArc` at the head of the tab, to fill
+the empty third of the screen. Once the rows carried Arabic the screen ended
+four pixels short of the fold on a 390×844 phone with nothing to fill, and an
+arc on top of that would have been decoration standing in for content. The
+Amiri is the ornament, and it means something.
+
+⚠️ **Morning and evening are named by SPLITTING the book's one shared
+heading** — `أَذْكَارُ الصَّبَاحِ وَالْمَسَاءِ`. Mechanically, not rewritten:
+morning is its first two words verbatim, evening is the same first word plus
+the third with its leading `وَ` dropped. Nothing is composed, but **the
+vowelling is unreviewed**. `arabicNameFor` falls back to the heading unchanged
+if the book moves under it, and `npm run hisn:check` fails loudly when that
+happens — proved by rewording the heading and watching it exit non-zero.
+`HISN_ARABIC_TITLE` (`حِصْنُ الْمُسْلِمِ`) is the one Arabic string on the tab
+not copied out of `src/content`: the generated `hisn.ts` carries no title for
+the book its occasions came from.
+
+**Not translated.** The five new keys join `adhkar.*`, of which FR and ES
+already translate zero — so this adds to an existing gap rather than opening
+one.
 
 ---
 

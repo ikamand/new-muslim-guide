@@ -8,12 +8,13 @@ import { ThemedText } from '@/components/themed-text';
 import { HISN } from '@/content/duas/hisn';
 import {
   ADHKAR_SESSIONS,
+  arabicNameFor,
+  HISN_ARABIC_TITLE,
   stepsFor,
-  occasionFor,
   sessionForWindow,
   type AdhkarSession,
 } from '@/content/duas/sessions';
-import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
+import { BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { usePrayerTimes } from '@/hooks/use-prayer-times';
 import { useSettings } from '@/hooks/use-settings';
@@ -93,7 +94,18 @@ export default function DuasScreen() {
   return (
     <SafeAreaView style={[styles.safeArea, { backgroundColor: theme.background }]} edges={['top']}>
       <ScrollView contentContainerStyle={styles.content}>
-        <ThemedText type="subtitle">{t('tab.duas')}</ThemedText>
+        {/*
+          The same header block Learn and Qur'an use — `paddingTop` and a line
+          saying what the tab is for. This is the one tab whose own title is a
+          word most readers do not have yet, and "adhkār" below it is a second,
+          so the sentence is not decoration.
+        */}
+        <View style={styles.header}>
+          <ThemedText type="subtitle">{t('tab.duas')}</ThemedText>
+          <ThemedText type="default" themeColor="textSecondary">
+            {t('duas.intro')}
+          </ThemedText>
+        </View>
 
         {live ? <SessionHero session={live} state={state} /> : null}
 
@@ -109,6 +121,7 @@ export default function DuasScreen() {
                 <Row
                   key={occasion.id}
                   label={occasion.english || occasion.arabic}
+                  arabic={occasion.arabic}
                   href={{ pathname: '/dua-book/[id]', params: { id: String(occasion.id) } }}
                   chevron
                 />
@@ -127,11 +140,23 @@ export default function DuasScreen() {
             <Row
               key={session.id}
               label={t(sessionLabelKey(session))}
+              arabic={arabicNameFor(session)}
               href={{ pathname: '/adhkar/[id]', params: { id: session.id } }}
-              count={stepsFor(session).length}
+              meta={sessionMeta(session, t)}
             />
           ))}
-          <Row label="Hisn al-Muslim" href="/dua-book" count={HISN.length} muted />
+          {/*
+            The book, not a sitting — and its count is a different unit, which
+            is why both now say what they are counting. Bare numerals put "26"
+            and "132" in one column meaning lines and occasions.
+          */}
+          <Row
+            label="Hisn al-Muslim"
+            arabic={HISN_ARABIC_TITLE}
+            href="/dua-book"
+            meta={t('adhkar.occasions').replace('{n}', String(HISN.length))}
+            muted
+          />
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -139,11 +164,23 @@ export default function DuasScreen() {
 }
 
 /**
- * The open sitting, named by the boundary that opened it.
+ * The open sitting, and how long is left of it.
  *
- * "Fajr was 05:12" rather than "morning": a reader who wonders why this is on
- * screen gets the reason on the same card, and a reader who does not can
- * ignore a small grey line.
+ * ## Why this stopped citing the boundary that opened the window
+ *
+ * It used to say `ASR WAS 4:52 PM`. That answers "why is this on screen",
+ * which the card title mostly answers by itself, and leaves out the thing a
+ * reader can act on — whether they have two hours or ten minutes. `windowAt`
+ * always knew both ends of the span and returned only the one already behind
+ * them.
+ *
+ * The wording is Today's, verbatim: that card already says "ends at sunrise,
+ * 10:05 PM" about the Fajr window, and two screens describing the same kind of
+ * fact should not invent two ways of saying it.
+ *
+ * After a prayer it still names the prayer instead. That window is an event
+ * with a grace period rather than a span between two prayers, so there is no
+ * closing boundary to name — see `until` in `adhkar-window.ts`.
  */
 function SessionHero({
   session,
@@ -162,10 +199,20 @@ function SessionHero({
   const steps = stepsFor(session);
   if (steps.length === 0) return null;
 
-  const kicker = state.justPrayed
+  const arabicName = arabicNameFor(session);
+
+  /*
+    The prayer's name comes from `state`, not from a table of this screen's
+    own. The old one hardcoded window→'Fajr'/'Asr'/'Isha' beside a `windowAt`
+    whose header says the evening boundary is unsourced and may move — so the
+    day it moved to Maghrib, this line would have gone on saying ʿAsr.
+  */
+  const standing = state.justPrayed
     ? `${t('adhkar.justPrayed')} ${state.justPrayed}`
-    : state.since
-      ? `${sinceLabel(state.window)} ${t('adhkar.since')} ${formatTime(state.since)}`
+    : state.until
+      ? t('adhkar.endsAt')
+          .replace('{prayer}', state.until.label)
+          .replace('{time}', formatTime(state.until.time))
       : '';
 
   return (
@@ -177,14 +224,31 @@ function SessionHero({
       ]}
       pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
       <View style={[styles.heroRail, { backgroundColor: theme.accent }]} />
-      {kicker ? (
-        <ThemedText type="caption" themeColor="textSecondary" style={styles.kicker}>
-          {kicker}
+      {/*
+        Sentence case, not the uppercase kicker the cards elsewhere use. Those
+        label a CATEGORY — "FOR ABOUT NOW", "NEXT" — and a deadline is not one.
+      */}
+      {standing ? (
+        <ThemedText type="small" themeColor="textSecondary">
+          {standing}
         </ThemedText>
       ) : null}
       <ThemedText type="cardTitle">{t(sessionLabelKey(session))}</ThemedText>
+      {/*
+        On its own line rather than beside the title, for the same reason the
+        rows do it — see `Row`. Tried inline first, the way the Qur'an tab sets
+        a surah name, and `الأَذْكَارُ بَعْدَ السَّلاَمِ مِنَ الصَّلاَةِ` broke it:
+        title and Arabic both wrapped to two lines and interleaved. That hero
+        is not an edge case — it is the one on screen for twenty minutes after
+        each of the five prayers.
+      */}
+      {arabicName ? (
+        <ThemedText type="arabicName" style={styles.arabic}>
+          {arabicName}
+        </ThemedText>
+      ) : null}
       <ThemedText type="small" themeColor="textSecondary">
-        {`${steps.length}  ·  ${t('adhkar.minutes').replace('{n}', String(session.minutes))}`}
+        {sessionMeta(session, t, { long: true })}
       </ThemedText>
       <View style={[styles.start, { backgroundColor: theme.accent }]}>
         <ThemedText type="smallBold" themeColor="textOnAccent">
@@ -195,16 +259,29 @@ function SessionHero({
   );
 }
 
+/**
+ * One way in, and the Arabic it is called by.
+ *
+ * The Arabic takes a line of its own rather than sitting beside the English.
+ * Inline is what the Qur'an tab does and it works there because a surah name
+ * is one word; `الأَذْكَارُ بَعْدَ السَّلاَمِ مِنَ الصَّلاَةِ` is seven, and a
+ * row that fits three of the four is worse than one shape that fits all of
+ * them. It also lets the Amiri be read rather than squeezed — vowel marks
+ * stack above and below the line, so it is the last thing to crowd.
+ */
 function Row({
   label,
+  arabic,
   href,
-  count,
+  meta,
   muted,
   chevron,
 }: {
   label: string;
+  arabic?: string;
   href: Parameters<typeof PressableLink>[0]['href'];
-  count?: number;
+  /** What this opens, with its unit — never a bare numeral. */
+  meta?: string;
   muted?: boolean;
   chevron?: boolean;
 }) {
@@ -212,22 +289,33 @@ function Row({
   return (
     <PressableLink
       href={href}
+      accessibilityLabel={meta ? `${label}. ${meta}` : label}
       style={[styles.row, { borderBottomColor: theme.border }]}
       pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
-      <ThemedText type="default" themeColor={muted ? 'textSecondary' : 'text'}>
-        {label}
-      </ThemedText>
-      {/*
-        A count means "a set of this many"; a chevron means "one duʿa". Two
-        different things, so they do not get the same mark.
-      */}
-      {chevron ? (
-        <ThemedText type="default" themeColor="accent">
-          ›
+      <View style={styles.rowHead}>
+        <ThemedText type="default" themeColor={muted ? 'textSecondary' : 'text'}>
+          {label}
         </ThemedText>
-      ) : count !== undefined ? (
-        <ThemedText type="caption" themeColor="textSecondary">
-          {count}
+        {/*
+          A count means "a set of this many"; a chevron means "one duʿa". Two
+          different things, so they do not get the same mark.
+        */}
+        {chevron ? (
+          <ThemedText type="default" themeColor="accent">
+            ›
+          </ThemedText>
+        ) : meta ? (
+          <ThemedText type="caption" themeColor="textSecondary">
+            {meta}
+          </ThemedText>
+        ) : null}
+      </View>
+      {arabic ? (
+        <ThemedText
+          type="arabicName"
+          themeColor={muted ? 'textSecondary' : 'text'}
+          style={styles.arabic}>
+          {arabic}
         </ThemedText>
       ) : null}
     </PressableLink>
@@ -242,17 +330,36 @@ function sessionLabelKey(session: AdhkarSession): UIKey {
   return 'adhkar.window.afterPrayer';
 }
 
-function sinceLabel(window: string | null): string {
-  if (window === 'morning') return 'Fajr';
-  if (window === 'evening') return 'Asr';
-  return 'Isha';
+/**
+ * How long a sitting is and what it holds, in one line.
+ *
+ * Shared by the hero and the rows so they cannot disagree about what the
+ * numeral counts — which they did, silently: the hero said "25 · about 7
+ * minutes" while the row below it said "26" and meant the same kind of thing.
+ */
+function sessionMeta(
+  session: AdhkarSession,
+  t: (key: UIKey) => string,
+  options?: { long?: boolean },
+): string {
+  const count = t('adhkar.toSay').replace('{n}', String(stepsFor(session).length));
+  const time = options?.long
+    ? t('adhkar.minutes').replace('{n}', String(session.minutes))
+    : t('adhkar.minutesShort').replace('{n}', String(session.minutes));
+  return `${count}  ·  ${time}`;
 }
 
 const styles = StyleSheet.create({
   safeArea: { flex: 1 },
   content: {
     padding: Spacing.four,
-    paddingBottom: Spacing.six,
+    /*
+      Every other tab clears the tab bar this way. This one used a bare
+      `Spacing.six`, which is 64 against the 74 iOS needs and the 104 Android
+      does — invisible while the list was short, and the last row under the bar
+      as soon as somebody pins a few duʿas.
+    */
+    paddingBottom: BottomTabInset + Spacing.four,
     gap: Spacing.four,
     width: '100%',
     maxWidth: MaxContentWidth,
@@ -272,7 +379,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     width: 3,
   },
-  kicker: { textTransform: 'uppercase', letterSpacing: 1 },
+  header: { gap: Spacing.two, paddingTop: Spacing.four },
   start: {
     marginTop: Spacing.two,
     minHeight: 44,
@@ -284,13 +391,16 @@ const styles = StyleSheet.create({
   label: { textTransform: 'uppercase', letterSpacing: 1 },
   rows: { borderTopWidth: StyleSheet.hairlineWidth },
   row: {
+    gap: Spacing.one,
+    minHeight: 48,
+    paddingVertical: Spacing.two,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+  rowHead: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     gap: Spacing.three,
-    minHeight: 48,
-    paddingVertical: Spacing.two,
-    borderBottomWidth: StyleSheet.hairlineWidth,
   },
   arabic: { textAlign: 'right', writingDirection: 'rtl' },
 });

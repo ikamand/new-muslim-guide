@@ -27,6 +27,14 @@ export const STOPWORDS: ReadonlySet<string> = new Set([
   'does', 'did', 'done', 'doing', 'not', 'dont', 'cant', 'cannot',
   'any', 'some', 'all', 'about', 'into', 'onto', 'than', 'then',
   'there', 'here', 'been', 'being', 'get', 'got', 'make', 'made',
+  /*
+    Added in Phase 8. People say "someone" and "something" constantly in a
+    typed question — and the duʿa book is full of titles like "Supplication for
+    SOMEONE wearing a new garment", so "what do I say when someone dies" came
+    back with the garment duʿa on a title hit. They carry no subject, which is
+    exactly what this list is for.
+  */
+  'someone', 'something', 'anyone', 'anything', 'else', 'just',
 ]);
 
 /**
@@ -48,6 +56,25 @@ export const STOPWORDS: ReadonlySet<string> = new Set([
  * the wrong page, which is a bug; it never puts a wrong word on a screen.
  */
 const GROUPS: readonly (readonly string[])[] = [
+  /*
+    Added in Phase 8, and every one of these came from a query that returned
+    the WRONG page rather than nothing — which is the failure the miss log
+    cannot see. Each was found by asking the app the questions its own Help
+    chips say people ask, and reading what came back.
+
+      "what should i wear"    → What do halal and haram mean?
+      "what do i say back"    → Saying Takbīr at the Black Stone
+      "i just became muslim"  → Which months ask anything of me?
+      "what do i say when someone dies" → Supplication for wearing a new garment
+
+    The app has a good page for all four. It writes "clothing" and a person
+    types "wear"; it writes "greeting" and they type "say back".
+  */
+  ['wear', 'clothing', 'clothes', 'dress', 'outfit', 'hijab'],
+  ['greeting', 'salam', 'say back', 'greet', 'reply'],
+  ['convert', 'revert', 'became muslim', 'new muslim', 'just became'],
+  ['died', 'dies', 'death', 'janazah', 'funeral', 'passed away'],
+
   /* Wudu and what ends it. */
   ['fart', 'farted', 'farting', 'passing wind', 'flatulence', 'gas'],
   /* Not 'wash'. It is a common word in a guide full of washing, and expanding
@@ -140,6 +167,40 @@ const EXPANSIONS: ReadonlyMap<string, readonly string[]> = (() => {
 /** Every spelling of one typed word that should count as a match for it. */
 export function expand(term: string): readonly string[] {
   return EXPANSIONS.get(term) ?? EXPANSIONS.get(transliterationKey(term)) ?? [term];
+}
+
+/**
+ * The multi-word members of every group, longest first.
+ *
+ * `expand` works on one typed word, so a group member of two words could only
+ * ever be matched inside the app's own TEXT — never in what somebody types.
+ * That made half the aliases one-directional without saying so: the app knows
+ * "say back" means the greeting and "became muslim" means a convert, and a
+ * reader typing either got neither, because the query had already been split
+ * on whitespace into "say", "back".
+ *
+ * Longest first so "became muslim" is tried before "muslim" alone.
+ */
+const PHRASES: readonly (readonly [string, string])[] = GROUPS.flatMap((group) =>
+  group
+    .filter((member) => member.includes(' '))
+    .map((member) => [member, group[0]] as readonly [string, string]),
+).sort((a, b) => b[0].length - a[0].length);
+
+/**
+ * A typed query with any known phrase collapsed to its group's first word.
+ *
+ * "i just became muslim" becomes "i just convert", which then tokenises to a
+ * term the index can actually score. Deliberately a substitution rather than
+ * an addition: leaving both in would let the individual words go on matching
+ * whatever they were matching before, which is the noise this fixes.
+ */
+export function collapsePhrases(query: string): string {
+  let out = query;
+  for (const [phrase, head] of PHRASES) {
+    if (out.includes(phrase)) out = out.split(phrase).join(head);
+  }
+  return out;
 }
 
 /**

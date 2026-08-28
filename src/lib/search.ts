@@ -14,7 +14,7 @@ import { HISN } from '@/content/duas/hisn';
 import { localiseCatalogEntry, localiseGuide, localiseReference } from '@/i18n/localise';
 import type { Locale } from '@/i18n/locales';
 import { routeFor } from '@/lib/content-routes';
-import { expand, STOPWORDS, transliterationKey } from '@/lib/search-words';
+import { collapsePhrases, expand, STOPWORDS, transliterationKey } from '@/lib/search-words';
 
 /**
  * Everything in the app, searchable, offline.
@@ -60,6 +60,44 @@ const WEIGHT: Record<Field, number> = {
   /* Prose. A hit is real but incidental far more often. */
   body: 40,
 };
+
+/**
+ * How much a whole body of content is worth against a typed QUESTION.
+ *
+ * ## The duʿa book was winning arguments it should not have been in
+ *
+ * Hisn al-Muslim is 132 occasions, each titled "Supplication for …", and every
+ * one of those titles is built from the exact words people type. Indexing them
+ * — which was right — quietly made them the answer to almost everything:
+ *
+ *   "what do i say back"          → Saying Takbīr at the Black Stone
+ *   "how do i make dua"           → Dhikr after rainfall
+ *   "what should i wear"          → Supplication for wearing a garment
+ *   "what do i say when someone dies" → Supplication for someone wearing a new garment
+ *   "i just became muslim"        → Dhikr at Al-Mashʿar Al-Ḥarām
+ *
+ * Every one of those beat a teaching page that answers the question, on a
+ * title hit, because a four-word title is nothing but keywords.
+ *
+ * ## A weight, not a filter
+ *
+ * The book still ranks and still wins when somebody asks for what it holds —
+ * "duʿa for rain" finds the duʿa for rain. It is scaled so it cannot outrank a
+ * page of the same relevance, because somebody typing a question wants an
+ * explanation, and the book is where you go once you know what you want.
+ * Nothing is hidden and nothing is filtered.
+ *
+ * ⚠️ **0.75 was measured, not chosen.** The first attempt used 0.6 and broke
+ * `search:check`: "duʿa before sleeping" fell below the night-prayer
+ * references, which is precisely a query that WANTS the book. Every value from
+ * 0.7 to 0.85 passes both that suite and the Phase 8 question set; 0.75 sits
+ * in the middle of the range that works rather than at either edge of it.
+ */
+const KIND_WEIGHT: Record<string, number> = {
+  hisn: 0.75,
+};
+
+const kindWeight = (key: string): number => KIND_WEIGHT[key.split(':')[0]] ?? 1;
 
 export type SearchResult = {
   key: string;
@@ -194,8 +232,25 @@ function scoreQuery(entry: Indexed, terms: readonly (readonly string[])[]): numb
       happened to know the app's.
     */
     let best = 0;
-    for (const variant of variants) {
-      best = Math.max(best, scoreTerm(entry, variant, transliterationKey(variant)));
+    for (const [at, variant] of variants.entries()) {
+      /*
+        The spelling bridge applies to the word the READER typed, and to
+        nothing else.
+
+        `transliterationKey` exists so "shahadah" finds "shahada" — it collapses
+        doubles and drops a trailing h or t, because a tāʾ marbūṭa is written
+        both ways. Applied to an ordinary English word it truncates it into a
+        DIFFERENT English word: `transliterationKey('fart')` is `'far'`, which
+        matched the heading "How far counts as travelling?" and put it at the
+        top of "i farted" — a wrong answer where the app has a right one.
+
+        A synonym never needs the bridge. It comes from `search-words.ts`, so
+        it is already spelled the way the app spells it, and `expand` always
+        returns the typed word first. Passing an empty key for the rest makes
+        `scoreTerm` skip the fallback entirely.
+      */
+      const key = at === 0 ? transliterationKey(variant) : '';
+      best = Math.max(best, scoreTerm(entry, variant, key));
     }
     if (best === 0) return 0;
     total += best;
@@ -407,7 +462,14 @@ export function search(
     Each filter is skipped if it would empty the query, because refusing to
     search is worse than searching badly.
   */
-  const all = fold(query.trim()).split(/\s+/).filter(Boolean);
+  /*
+    Known phrases collapse to one word before anything is split.
+
+    "i just became muslim" becomes "i just convert" — otherwise the query is
+    tokenised into "became" and "muslim" and the alias that exists for exactly
+    this never gets a chance. See `collapsePhrases`.
+  */
+  const all = collapsePhrases(fold(query.trim())).split(/\s+/).filter(Boolean);
   if (all.length === 0) return [];
 
   const content = all.filter((term) => !STOPWORDS.has(term));
@@ -436,7 +498,7 @@ export function search(
   for (const attempt of attempts) {
     hits = [];
     for (const entry of index) {
-      const points = scoreQuery(entry, attempt);
+      const points = Math.round(scoreQuery(entry, attempt) * kindWeight(entry.key));
       if (points > 0) {
         hits.push({
           ...entry,

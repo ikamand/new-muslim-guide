@@ -11,7 +11,6 @@ import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
 import { PRAYERS, WUDU, type Guide } from '@/content';
 import { BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
-import { useHelpTopics } from '@/hooks/use-help';
 import { useHijriToday } from '@/hooks/use-hijri';
 import { useLocale } from '@/hooks/use-locale';
 import { usePrayerTimes } from '@/hooks/use-prayer-times';
@@ -48,6 +47,19 @@ import type { UIKey } from '@/i18n/ui';
  * LAST candidate in `use-today.ts`, shown when nothing with a deadline is
  * competing — and "6 of 36" as a permanent fixture is gone with it. The
  * chapter someone is in belongs on Learn, which is where it now lives.
+ *
+ * ## The help chips retired into Ask
+ *
+ * A row of ten plain-words questions used to sit at the bottom — "How do I
+ * pray?", "I think I got it wrong". They were right, and they were here
+ * because Ask could not answer them: it matched only the app's own vocabulary,
+ * so the chips were a hand-made way past a search that did not work.
+ *
+ * Phase 8 fixed the search, and the chips are the same ten topics the Ask
+ * sheet already offers as its starters — both read `useHelpTopics`, so there
+ * was one source and two places showing it. They came out the day the sheet
+ * could answer them and not before, which would have traded a row that worked
+ * for one that did not.
  *
  * Nothing here counts days, keeps a streak, or notices an absence. Someone
  * three weeks into Islam does not need an app that is disappointed in them.
@@ -206,60 +218,6 @@ function TodayRow({ item }: { item: TodayItem }) {
 }
 
 /**
- * The app in ordinary words.
- *
- * Every chip resolves to real content — a topic with nothing behind it is never
- * built — and a topic holding one thing opens that thing rather than a page
- * listing it alone. The order shifts with what onboarding heard; nothing is
- * ever hidden, because the question someone has today is not the only question
- * they will ever have.
- */
-
-function HelpSection() {
-  const theme = useTheme();
-  const { t } = useLocale();
-  const topics = useHelpTopics();
-
-  if (topics.length === 0) return null;
-
-  return (
-    <View style={styles.section}>
-      <ThemedText type="smallBold" themeColor="textSecondary" style={styles.sectionTitle}>
-        {t('home.help')}
-      </ThemedText>
-      <View style={styles.chips}>
-        {topics.map((topic) => (
-          <PressableLink
-            key={topic.id}
-            href={topic.href}
-            accessibilityLabel={topic.label}
-            style={[
-              styles.chip,
-              { backgroundColor: theme.backgroundElement, borderColor: theme.border },
-            ]}
-            pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
-            <ThemedText type="small">{topic.label}</ThemedText>
-          </PressableLink>
-        ))}
-        {/*
-          The honest end of a finite list. Learn is the whole shelf, so nobody
-          leaves this row without somewhere to go.
-        */}
-        <PressableLink
-          href="/learn"
-          accessibilityLabel={t('home.helpElse')}
-          style={[styles.chip, { borderColor: theme.accent }]}
-          pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
-          <ThemedText type="small" themeColor="accent">
-            {t('home.helpElse')}
-          </ThemedText>
-        </PressableLink>
-      </View>
-    </View>
-  );
-}
-
-/**
  * The words for right now: the open adhkār sitting, or a duʿa.
  *
  * One slot rather than two cards stacked. Both are "words to say" and showing
@@ -317,7 +275,6 @@ export default function TodayScreen() {
         */}
         {item ? <TodayRow item={item} /> : null}
 
-        <HelpSection />
       </ScrollView>
     </SafeAreaView>
   );

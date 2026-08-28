@@ -103,14 +103,14 @@ const CLAIMS = [
   ['src/hooks/use-settings.tsx', 78, 'completedLessons: readonly string[]'],
   ['src/app/guide/[id].tsx', 125, 'toggleLesson(key)'],
   ['src/app/journey/[stage].tsx', 61, 'toggleLesson(step.key)'],
-  ['src/app/(tabs)/index.tsx', 51, 'keeps a streak'],
+  ['src/app/(tabs)/index.tsx', 64, 'keeps a streak'],
   /*
     Moved into `prayer-times-card.tsx` in spirit: Phase 4 found that the card
     already says "It is Friday" through `JumuahNote`, so `use-today.ts` does
     NOT carry a Friday candidate. The line still exists here and is still what
     the documents cite.
   */
-  ['src/app/(tabs)/index.tsx', 139, 'Friday is the one that matters'],
+  ['src/app/(tabs)/index.tsx', 151, 'Friday is the one that matters'],
   /*
     Still cited, and the citation now points at the CORRECTION rather than the
     claim. Phase 5 found that "I farted" no longer returns nothing — it returns

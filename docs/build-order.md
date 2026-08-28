@@ -586,6 +586,33 @@ answers it.*
 
 **Done when** the specific misses named in `ask.tsx` resolve, and the chip row is
 removed from Today in the same change that makes the sheet answer them.
+**Done 28 Aug 2026.** Both, and the diagnosis changed on the way.
+
+⚠️ **The alias layer already existed.** `search-words.ts` had 33 synonym
+groups, and `farted` already expanded to "passing wind". The failure was not
+recall — it was two precision bugs and a ranking one:
+
+- **`transliterationKey('fart')` is `'far'`.** The Arabic spelling bridge
+  (`salaah`/`salaat` → `sala`) truncates ordinary English words into DIFFERENT
+  English words, so "i farted" matched the heading *How far counts as
+  travelling?*. The bridge now applies only to the word the reader typed, never
+  to the app's own synonyms — those are already spelled the app's way.
+- **The duʿa book was swamping the questions.** 132 occasions titled
+  "Supplication for …" are nothing but keywords: "what do I say back" returned
+  *Takbīr at the Black Stone*, "how do I make duʿa" returned *Dhikr after
+  rainfall*. A kind weight of 0.75 fixes it without hiding anything — measured,
+  not chosen: 0.6 broke "duʿa before sleeping", and 0.7–0.85 all pass.
+- **Phrase aliases were one-directional.** A group member of two words could
+  only match the app's text, never a typed query, because the query was split
+  on whitespace first. `collapsePhrases` runs before tokenising.
+
+⚠️ **"Seed it from the failed-search log" cannot work as written**, and this is
+worth knowing before Phase 8 is called finished. Phase 5's log never leaves the
+device — that is its whole promise — so no developer can ever read a real
+reader's misses. The gap list here was found instead by asking the app the 27
+questions its own Help chips say people ask and reading what came back, which
+found five wrong answers the miss log could not have seen anyway, because every
+one of them returned something.
 **Ships via** OTA.
 
 ---

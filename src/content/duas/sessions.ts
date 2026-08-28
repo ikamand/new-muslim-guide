@@ -121,8 +121,8 @@ export function stepsFor(session: AdhkarSession): readonly AdhkarStep[] {
       continue;
     }
 
-    const splits = note?.splitOn ?? [];
-    if (splits.length === 0) {
+    const parts = note?.parts ?? [];
+    if (parts.length === 0) {
       steps.push({
         key: String(line.id),
         line,
@@ -137,44 +137,23 @@ export function stepsFor(session: AdhkarSession): readonly AdhkarStep[] {
     }
 
     /*
-      The book prints `لا إله إلا الله … قَدِيرٌ ثلاثاً، اللَّهُمَّ لاَ مَانِعَ …`
-      — two dhikr in one row with the count for the first sitting between them.
-      As one card it asked a reader to say the whole thing three times and
-      showed them the word "three times" in the middle of the duʿa. Split at the
-      marker, which is removed: it is a count, and a count belongs on the
-      counter.
+      A row holding several dhikr becomes one step each. The parts name their
+      own text — see `parts` in `annotations.ts` — so nothing here has to guess
+      where one ends, and the counts printed between them never reach a screen.
     */
-    let arabic = line.arabic;
-    let english = line.english ?? '';
-    const markers = splits.map((split) => [split.arabic, split.english]).flat();
-    const trim = (text: string) => text.replace(/^[\s،,.]+|[\s،,.]+$/g, '').trim();
-
-    splits.forEach((split, position) => {
-      const cutAr = arabic.indexOf(split.arabic);
-      const cutEn = english.indexOf(split.english);
+    parts.forEach((part, position) => {
       steps.push({
         key: `${line.id}-${position}`,
         line,
-        arabic: trim(cutAr >= 0 ? arabic.slice(0, cutAr) : arabic),
-        english: trim(cutEn >= 0 ? english.slice(0, cutEn) : english),
-        emphasis: line.emphasis?.filter((span) => !markers.includes(span)),
-        repeat: split.repeatBefore ?? 1,
+        arabic: part.arabic,
+        english: part.english,
+        emphasis: line.emphasis?.filter(
+          (span) => part.arabic.includes(span) || part.english.includes(span),
+        ),
+        repeat: part.repeat ?? 1,
         instruction: false,
-        eveningForms: [],
+        eveningForms: position === parts.length - 1 ? eveningForms : [],
       });
-      arabic = cutAr >= 0 ? arabic.slice(cutAr + split.arabic.length) : '';
-      english = cutEn >= 0 ? english.slice(cutEn + split.english.length) : '';
-    });
-
-    steps.push({
-      key: `${line.id}-${splits.length}`,
-      line,
-      arabic: trim(arabic),
-      english: trim(english),
-      emphasis: line.emphasis?.filter((span) => !markers.includes(span)),
-      repeat: note?.repeat ?? 1,
-      instruction: false,
-      eveningForms,
     });
   }
 

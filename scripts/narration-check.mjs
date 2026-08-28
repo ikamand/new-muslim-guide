@@ -190,7 +190,37 @@ for (const session of ADHKAR_SESSIONS) {
   }
 }
 
+/*
+  5. Every `parts` string must still be VERBATIM text from its row.
+
+     `parts` is the only place in this repo where Arabic sits in a hand-edited
+     file next to the generated text it came from, so it is the only place a
+     rewrite could hide. The strings were sliced out by a script; this proves
+     they never drifted from the book, and fails loudly if a re-fetch changes
+     a row underneath them.
+*/
+let partStrings = 0;
+for (const [key, note] of Object.entries(HISN_ANNOTATIONS)) {
+  if (!note.parts) continue;
+  const entry = byId.get(Number(key));
+  if (!entry) continue;
+  for (const part of note.parts) {
+    partStrings += 1;
+    if (!entry.line.arabic.includes(part.arabic)) {
+      failures += 1;
+      console.error(`\n✗ line ${key}: a part's Arabic is not in the row any more`);
+      console.error(`    ${part.arabic.slice(0, 70)}`);
+    }
+    if (part.english && !entry.line.english.includes(part.english)) {
+      failures += 1;
+      console.error(`\n✗ line ${key}: a part's English is not in the row any more`);
+      console.error(`    ${part.english.slice(0, 70)}`);
+    }
+  }
+}
+
 console.log(`${counted} counted lines, ${cardLines} distinct card lines, ` +
+  `${partStrings} part strings, ` +
   `${worded} morning-worded evening lines, ` +
   `${marked} sitting-marked lines checked.`);
 if (failures > 0) {

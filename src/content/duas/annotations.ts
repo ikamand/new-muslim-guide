@@ -86,18 +86,24 @@ export type HisnAnnotation = {
    */
   repeat?: number;
   /**
-   * Cut this row into separate steps, dropping the marker.
+   * Cut this row into the separate things it actually asks for.
    *
-   * The book sometimes prints two dhikr in one row with the count for the
-   * first between them — `… وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ ثلاثاً، اللَّهُمَّ لاَ
-   * مَانِعَ …`. Left whole it asks a reader to say both three times and puts the
-   * word "three times" in the middle of the duʿa. The marker is removed
-   * because it is a count, and a count belongs on the counter.
+   * The book sometimes prints several dhikr in one row with the counts between
+   * them — `سُبْحَانَ اللَّهِ، وَالْحَمْدُ لِلَّهِ، وَاللَّهُ أَكْبَرُ (ثلاثاً وثلاثين) …`.
+   * Left whole it asks a reader to say all of it thirty-three times and shows
+   * "(thirty-three times)" inside the duʿa as though it were part of the words.
    *
-   * Both languages are named so the English cuts at the same place. Neither is
-   * searched for loosely: an exact substring or the row is left alone.
+   * Each part names its own text rather than a marker to cut at, because the
+   * English cannot be cut at the same points: IslamHouse prints a
+   * transliteration first and the translation as one trailing parenthetical,
+   * so the meaning of the first dhikr sits nowhere near it.
+   *
+   * ⚠️ Every string here is a VERBATIM substring of the row, sliced out of
+   * `hisn.ts` by a script rather than typed, and `npm run narration:check`
+   * fails if one stops matching. That is what stops this becoming the place
+   * where Arabic quietly gets rewritten.
    */
-  splitOn?: readonly { arabic: string; english: string; repeatBefore?: number }[];
+  parts?: readonly { arabic: string; english: string; repeat?: number }[];
   /**
    * Do not show this row at all: what it says is carried somewhere else.
    *
@@ -181,11 +187,52 @@ export const HISN_ANNOTATIONS: Readonly<Record<number, HisnAnnotation>> = {
   },
 
   // Adhkār after the prayer
-  1269152: {
-    splitOn: [{ arabic: 'ثلاثاً،', english: 'three times.', repeatBefore: 3 }],
-    reason: 'two dhikr in one row, with the count for the first printed between them',
+  1269173: { omit: true, reason: 'a label on the rows above, not a step of its own' },
+  /*
+    Two rows where the book puts several dhikr in one, with the count printed
+    between them. Each part below is a VERBATIM substring of the row — cut out
+    of the data by a script rather than typed, and checked by
+    `npm run narration:check` on every run.
+  */
+  1269156: {
+    reason: 'four dhikr in one row: the tasbīh, tahmīd and takbīr are ×33 each',
+    parts: [
+      {
+        arabic: "سُبْحَانَ اللَّهِ",
+        english: "Glory be to Allah",
+        repeat: 33,
+      },
+      {
+        arabic: "وَالْحَمْدُ لِلَّهِ",
+        english: "and all praise is due to Allah",
+        repeat: 33,
+      },
+      {
+        arabic: "وَاللَّهُ أَكْبَرُ",
+        english: "and Allah is the Greatest",
+        repeat: 33,
+      },
+      {
+        arabic: "لاَ إِلَهَ إِلاَّ اللَّهُ وَحْدَهُ لاَ شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ",
+        english: "There is no god but Allah, alone with no partner. To Him belongs the sovereignty, and all praise is due to Him, and He is Competent over all things",
+        repeat: 1,
+      },
+    ],
   },
-  1269173: { recited: false, reason: 'a label on the lines above: after every prayer' },
+  1269152: {
+    reason: 'two dhikr in one row, with the count for the first printed between them',
+    parts: [
+      {
+        arabic: "لاَ إِلَهَ إِلاَّ اللَّهُ وَحْدَهُ لاَ شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ",
+        english: "There is no god but Allah, alone, with no partners. To Him belongs the sovereignty and all praise is due to Him, and He is Competent over all things",
+        repeat: 3,
+      },
+      {
+        arabic: "اللَّهُمَّ لاَ مَانِعَ لِمَا أَعْطَيْتَ، وَلاَ مُعْطِيَ لِمَا مَنَعْتَ، وَلاَ يَنْفَعُ ذَا الْجَدِّ مِنْكَ الجَدُّ",
+        english: "O Allah, none can withhold what You have given, and none can give what You have withheld, and the greatness of the great will be of no avail to him against You",
+      },
+    ],
+  },
 };
 
 /**

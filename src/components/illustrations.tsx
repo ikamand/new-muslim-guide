@@ -647,7 +647,7 @@ const stagePathStyles = StyleSheet.create({
  * than beside it because a beginner reading "6" wants to know six of what, and
  * a ring that is one sixth full answers that without a second line of text.
  *
- * Never a percentage. `JourneyProgress` says why at length, and it holds here:
+ * Never a percentage, and never a count. Phase 6 retired the last of those:
  * nobody three weeks into a religion needs to be told they are 17% of it.
  */
 export function ProgressRing({

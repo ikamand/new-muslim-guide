@@ -1,9 +1,14 @@
 import { createContext, use, useCallback, useEffect, useMemo, useState, type ReactNode } from 'react';
 
+import { useSettings } from '@/hooks/use-settings';
+
 import {
+  awardObserved,
   EMPTY,
+  forgetFirst,
   read,
   recordFinished,
+  recordFirst,
   recordMiss,
   recordSitting,
   recordSurah,
@@ -33,11 +38,15 @@ type ObservationsValue = Observations & {
   sittingDone: (id: string) => void;
   surahDone: (number: number) => void;
   searchMissed: (query: string) => void;
+  /** Mark a first, or unmark one somebody tapped by mistake. */
+  markFirst: (id: string) => void;
+  forget: (id: string) => void;
 };
 
 const ObservationsContext = createContext<ObservationsValue | null>(null);
 
 export function ObservationsProvider({ children }: { children: ReactNode }) {
+  const { completedLessons } = useSettings();
   const [value, setValue] = useState<Observations>(EMPTY);
   const [loaded, setLoaded] = useState(false);
 
@@ -51,15 +60,22 @@ export function ObservationsProvider({ children }: { children: ReactNode }) {
         app, and a "days since install" that only counts people who answered
         questions would be wrong for exactly the readers most likely to skip.
       */
-      const next = stored.installedAt ? stored : { ...stored, installedAt: Date.now() };
+      const now = Date.now();
+      const dated = stored.installedAt ? stored : { ...stored, installedAt: now };
+      /*
+        Awarded once here as well as on every write, so somebody who used this
+        app before Phase 5 existed does not have to finish another lesson
+        before their ledger admits what they have already done.
+      */
+      const next = awardObserved(dated, completedLessons, now);
       setValue(next);
       setLoaded(true);
-      if (!stored.installedAt) void write(next);
+      if (next !== stored) void write(next);
     });
     return () => {
       alive = false;
     };
-  }, []);
+  }, [completedLessons]);
 
   const update = useCallback((change: (current: Observations) => Observations) => {
     setValue((current) => {
@@ -70,26 +86,48 @@ export function ObservationsProvider({ children }: { children: ReactNode }) {
     });
   }, []);
 
+  /*
+    Every recorder awards as it writes.
+
+    A first that marks itself has to be decided the moment the thing happens,
+    not derived on render — see `awardObserved`. Composing it here rather than
+    inside each recorder keeps `observations.ts` pure and means a new recorder
+    cannot forget to do it: the wrapper is the only way to write.
+  */
+  const record = useCallback(
+    (change: (current: Observations, at: number) => Observations) => {
+      const at = Date.now();
+      update((current) => awardObserved(change(current, at), completedLessons, at));
+    },
+    [update, completedLessons],
+  );
+
   const finish = useCallback(
-    (key: string) => update((current) => recordFinished(current, key, Date.now())),
-    [update],
+    (key: string) => record((current, at) => recordFinished(current, key, at)),
+    [record],
   );
   const sittingDone = useCallback(
-    (id: string) => update((current) => recordSitting(current, id, Date.now())),
-    [update],
+    (id: string) => record((current, at) => recordSitting(current, id, at)),
+    [record],
   );
   const surahDone = useCallback(
-    (number: number) => update((current) => recordSurah(current, number, Date.now())),
-    [update],
+    (number: number) => record((current, at) => recordSurah(current, number, at)),
+    [record],
   );
   const searchMissed = useCallback(
     (query: string) => update((current) => recordMiss(current, query, Date.now())),
     [update],
   );
 
+  const markFirst = useCallback(
+    (id: string) => update((current) => recordFirst(current, id, Date.now())),
+    [update],
+  );
+  const forget = useCallback((id: string) => update((current) => forgetFirst(current, id)), [update]);
+
   const api = useMemo<ObservationsValue>(
-    () => ({ ...value, loaded, finish, sittingDone, surahDone, searchMissed }),
-    [value, loaded, finish, sittingDone, surahDone, searchMissed],
+    () => ({ ...value, loaded, finish, sittingDone, surahDone, searchMissed, markFirst, forget }),
+    [value, loaded, finish, sittingDone, surahDone, searchMissed, markFirst, forget],
   );
 
   return <ObservationsContext value={api}>{children}</ObservationsContext>;

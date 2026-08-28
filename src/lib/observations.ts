@@ -1,5 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import { FIRSTS } from '@/content/firsts';
+
 /**
  * What the app has seen this person do.
  *
@@ -84,6 +86,19 @@ export type Observations = {
    * words — which is another reason nothing here leaves the device.
    */
   misses: readonly { query: string; at: number }[];
+  /**
+   * Firsts that have happened → when. See `content/firsts.ts` for the rules.
+   *
+   * Here rather than in a key of its own because a first IS an observation:
+   * same lifecycle, same promise, same "nothing leaves the device". Two of
+   * them mark themselves directly from the records above, and splitting the
+   * two apart would mean a write to one key deriving from a read of another.
+   *
+   * ⚠️ The timestamp is for ORDER and nothing else. Nothing may compute a
+   * duration from it — "two years since your first fast" is the noticing
+   * `index.tsx` promises this app does not do.
+   */
+  firsts: Record<string, number>;
 };
 
 export const EMPTY: Observations = {
@@ -92,6 +107,7 @@ export const EMPTY: Observations = {
   sittings: {},
   surahs: {},
   misses: [],
+  firsts: {},
 };
 
 const isRecord = (value: unknown): value is Record<string, unknown> =>
@@ -142,6 +158,7 @@ export function parse(raw: string | null): Observations {
           )
           .slice(-MAX_MISSES)
       : [],
+    firsts: times(stored.firsts),
   };
 }
 
@@ -180,6 +197,69 @@ export function recordMiss(value: Observations, query: string, at: number): Obse
   if (!trimmed) return value;
   const without = value.misses.filter((entry) => entry.query !== trimmed);
   return { ...value, misses: [...without, { query: trimmed, at }].slice(-MAX_MISSES) };
+}
+
+/**
+ * A first happened.
+ *
+ * Guarded rather than overwriting: a first is the FIRST, so marking it twice
+ * must not move its date and reorder somebody's ledger. This is the one
+ * recorder here that refuses to update an existing entry, and that difference
+ * is the whole meaning of the word.
+ */
+export function recordFirst(value: Observations, id: string, at: number): Observations {
+  if (value.firsts[id]) return value;
+  return { ...value, firsts: { ...value.firsts, [id]: at } };
+}
+
+/**
+ * A first un-happened, because somebody said it had not.
+ *
+ * The only way to remove one, and it exists for a mis-tap rather than as a
+ * mechanic — nothing in the app ever calls this on somebody's behalf, and
+ * nothing expires.
+ */
+export function forgetFirst(value: Observations, id: string): Observations {
+  if (!value.firsts[id]) return value;
+  const firsts = { ...value.firsts };
+  delete firsts[id];
+  return { ...value, firsts };
+}
+
+/**
+ * Award every `observed` first the records now justify.
+ *
+ * Derived at WRITE time, not in an effect. The React lint rule against calling
+ * setState from an effect is right here for a real reason and not only a
+ * stylistic one: deriving this on every render would recompute a fact that
+ * cannot change back, and `recordFirst` refuses to move an existing date, so
+ * the work would be pure waste on every frame.
+ *
+ * `alsoFinished` carries `completedLessons` from settings. Without it, anybody
+ * who already used this app gets no firsts at all: `observations.finished` was
+ * created by Phase 5 and is empty for them, while their history lives in the
+ * settings key that has recorded finished lessons all along. The app did watch
+ * them pray; it simply wrote it down somewhere else.
+ */
+export function awardObserved(
+  value: Observations,
+  alsoFinished: readonly string[],
+  at: number,
+): Observations {
+  const finished = new Set([...Object.keys(value.finished), ...alsoFinished]);
+
+  return FIRSTS.reduce((carry, first) => {
+    if (first.trigger !== 'observed' || !first.from || carry.firsts[first.id]) return carry;
+
+    const earned =
+      first.from === 'surah:any'
+        ? Object.keys(carry.surahs).length > 0
+        : first.from.startsWith('sitting:')
+          ? Boolean(carry.sittings[first.from.slice('sitting:'.length)])
+          : finished.has(first.from);
+
+    return earned ? recordFirst(carry, first.id, at) : carry;
+  }, value);
 }
 
 /** Whole days since the app was first opened, or undefined if unknown. */

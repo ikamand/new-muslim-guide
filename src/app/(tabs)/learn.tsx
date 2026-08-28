@@ -381,6 +381,23 @@ export default function LearnScreen() {
         <WhereYouAre />
 
         {/*
+          The ledger, one line under the chapter card.
+
+          A link rather than a card, and below "Where you are" rather than
+          above it: the chapter is what someone can act on this afternoon, and
+          the firsts are what they look at rarely. `content/firsts.ts` explains
+          why there is no count on either side of this link.
+        */}
+        <PressableLink
+          href="/firsts"
+          accessibilityLabel={t('firsts.title')}
+          style={[styles.linkRow, { borderTopColor: theme.border }]}
+          pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
+          <ThemedText type="small" themeColor="textSecondary">{t('firsts.open')}</ThemedText>
+          <Ionicons name="arrow-forward" size={14} color={theme.accent} />
+        </PressableLink>
+
+        {/*
           Grouped by when the question arrives, not by subject.
 
           This was nineteen consecutive rows under one heading, with a
@@ -612,6 +629,19 @@ const styles = StyleSheet.create({
   /* Uppercase and tracked, the same label treatment every card kicker uses. */
   kicker: { textTransform: 'uppercase', letterSpacing: 1 },
   left: { gap: Spacing.one },
+  /*
+    The same line treatment as `keepsake`, without its negative top margin —
+    that one is tuned to sit tight under the tab's own intro, and reusing it
+    here pulled the row up into the card above.
+  */
+  linkRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    gap: Spacing.two,
+    borderTopWidth: StyleSheet.hairlineWidth,
+    paddingTop: Spacing.three,
+  },
   /* A rule and a line. Not a card — see `ShahadaCard`. */
   keepsake: {
     flexDirection: 'row',

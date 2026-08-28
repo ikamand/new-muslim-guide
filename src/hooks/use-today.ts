@@ -2,10 +2,12 @@ import type { Href } from 'expo-router';
 import { useEffect, useMemo } from 'react';
 
 import { resolveRef } from '@/content';
+import { FIRSTS } from '@/content/firsts';
 import { seasonFor } from '@/content/seasons';
 import { useHijriToday } from '@/hooks/use-hijri';
 import { useJourney } from '@/hooks/use-journey';
 import { useLocale } from '@/hooks/use-locale';
+import { useObservations } from '@/hooks/use-observations';
 import { useLocation } from '@/hooks/use-location';
 import { usePrayerTimes } from '@/hooks/use-prayer-times';
 import { useSettings } from '@/hooks/use-settings';
@@ -79,12 +81,13 @@ export type TodayItem = {
 };
 
 export function useToday(): TodayItem | undefined {
-  const { locale } = useLocale();
+  const { locale, t } = useLocale();
   const hijri = useHijriToday();
   const { next } = useJourney();
   const { coords } = useLocation();
   const { today } = usePrayerTimes();
   const { home, awaySince, setMany } = useSettings();
+  const { firsts } = useObservations();
 
   /*
     Home follows a long stay, never the last fix. Written from an effect
@@ -136,7 +139,37 @@ export function useToday(): TodayItem | undefined {
     }
 
     /*
-      3. The last third of the night has begun.
+      3. A first the app can tell the DAY of, but not the answer to.
+
+      "It is Friday tomorrow. Was that your first Jumuʿah?" — asked on the
+      Thursday, so the question arrives while the answer is still ahead rather
+      than after the fact. Offered once and then never again, because
+      `recordFirst` refuses to move a date and an unmarked first is not a
+      failing to be chased.
+
+      A WEEKDAY only, never a Hijri date. `content/firsts.ts` says why Ramadan
+      and Eid are `quiet` instead: months begin by local moon sighting and the
+      calculation differs often enough that asking on the wrong day is worse
+      than not asking.
+    */
+    const offer = FIRSTS.find(
+      (first) =>
+        first.trigger === 'offered' &&
+        first.askOnWeekday === now.getDay() &&
+        !firsts[first.id],
+    );
+    if (offer) {
+      return {
+        key: `first:${offer.id}`,
+        reason: 'today.firstAsk',
+        title: t(`first.${offer.id}` as UIKey),
+        description: t('firsts.ask'),
+        href: '/firsts',
+      };
+    }
+
+    /*
+      4. The last third of the night has begun.
 
       Computed from the day's own boundaries rather than a clock hour: the
       span from ʿIshāʾ to Fajr, split in three. A fact about the sky, and the
@@ -189,7 +222,7 @@ export function useToday(): TodayItem | undefined {
     }
 
     /*
-      4. The lesson. Last, because it has no deadline — which is exactly why it
+      5. The lesson. Last, because it has no deadline — which is exactly why it
       should never have been a permanent card above the prayer times.
     */
     if (next) {
@@ -204,5 +237,5 @@ export function useToday(): TodayItem | undefined {
     }
 
     return undefined;
-  }, [hijri, next, locale, coords, home, today]);
+  }, [hijri, next, locale, coords, home, today, firsts, t]);
 }

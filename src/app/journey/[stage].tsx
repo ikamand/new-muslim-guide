@@ -2,7 +2,6 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { Stack, useLocalSearchParams } from 'expo-router';
 import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 
-import { JourneyProgress } from '@/components/journey-progress';
 import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
 import { STAGE_IDS, type StageId } from '@/content/journey';
@@ -109,7 +108,6 @@ export default function StageScreen() {
           <ThemedText type="default" themeColor="textSecondary">
             {t(`journey.stage.${stage.id}.help` as UIKey)}
           </ThemedText>
-          <JourneyProgress done={stage.done} total={stage.total} />
         </View>
 
         <View style={styles.list}>

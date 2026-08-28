@@ -100,10 +100,40 @@ export const EN = {
     on it reads as the app paying attention — and if the reason is wrong, it is
     visibly wrong rather than quietly wrong.
   */
+  /*
+    The firsts. Each is a thing that happens once in a life, named plainly.
+
+    No numbers anywhere in this block, and none may be added: the ledger shows
+    what HAS happened and never what is left, so there is nothing here for a
+    count to attach itself to.
+  */
+  'firsts.title': 'Your firsts',
+  'firsts.intro': 'Things that happen once. Nothing here is a target, and nothing counts down — this is a record of what has already happened, in the order it did.',
+  'firsts.none': 'Nothing yet. The app marks some of these itself when it sees them.',
+  'firsts.notYet': 'Not yet',
+  'firsts.mark': 'This has happened',
+  'firsts.open': 'Your firsts →',
+  'firsts.ask': 'Was that your first?',
+  'firsts.askNo': 'Not yet',
+  'first.prayer-alone': 'Prayed on your own',
+  'first.wudu-alone': 'Made wudu on your own',
+  'first.adhkar': 'Sat with the morning adhkār',
+  'first.surah-memorised': 'Held a surah from memory',
+  'first.jumuah': 'Prayed your first Jumuʿah',
+  'first.mosque': 'Walked into a mosque',
+  'first.full-day': 'Prayed all five in one day',
+  'first.fast': 'Fasted a day',
+  'first.ramadan': 'Been through a Ramadan',
+  'first.eid': 'Been to an Eid',
+  'first.prayed-in-public': 'Prayed somewhere public',
+  'first.explained-islam': 'Explained Islam to someone who asked',
+  'first.janazah': 'Been to a janāzah',
+  'first.zakat': 'Given zakat',
   'learn.where.kicker': 'Where you are',
   'learn.where.left': 'Left in this chapter',
   'learn.where.done': 'You have been through all six chapters.',
   'learn.shahada.line': 'The shahada · read the words again',
+  'today.firstAsk': 'It is Friday tomorrow',
   'today.away': 'You seem to be away from home',
   'today.lastThird': 'The last third of the night',
   'today.continue': 'Carry on where you were',

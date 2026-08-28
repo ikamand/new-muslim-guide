@@ -493,6 +493,27 @@ syllabus. This is what gives the app a spine reaching years instead of weeks.*
 
 **Done when** a first can be marked and survives a restart, no screen anywhere
 displays a remaining count, and the calendar-triggered offer fires on a Thursday.
+**Done 28 Aug 2026**, all three driven rather than reasoned: a first was marked
+and read back by a second page after a restart, the offer was seen firing with
+the browser clock moved to a Thursday evening, and the last remaining counts —
+three uses of `JourneyProgress` on `/journey` and `/journey/[stage]` — were
+removed, taking the component with them. The stage cards already show a tick
+when a stage is complete, so the bar was saying a second time what the list
+said better.
+
+**Data model:** id plus a timestamp, stored with the other observations rather
+than in a key of its own — a first IS an observation, and two of them mark
+themselves from the records already there. **The timestamp orders the ledger
+and is never shown**, because a visible date invites both the comparison and
+the "two years since" that `index.tsx` promises the app does not do.
+**On reinstall it is gone and the app says nothing** — no restore prompt, no
+apology, no "we noticed you lost your progress".
+
+⚠️ **Ramadan and Eid are `quiet`, not `offered`**, however tempting the prompt.
+`seasons.ts` settles it: months begin by local moon sighting and the Umm
+al-Qura calculation differs often enough that asking "was that your first Eid?"
+on the wrong day is worse than not asking. Only a WEEKDAY is safe to trigger
+on, which is why Jumuʿah is the one first the app offers.
 **Ships via** OTA.
 
 ### Phase 7 — Onboarding: two facts, not two identities

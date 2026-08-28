@@ -2,7 +2,6 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { Stack } from 'expo-router';
 import { ScrollView, StyleSheet, View } from 'react-native';
 
-import { JourneyProgress } from '@/components/journey-progress';
 import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
 import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
@@ -49,7 +48,7 @@ function ContinueCard({ step }: { step: ResolvedStep }) {
 export default function JourneyScreen() {
   const theme = useTheme();
   const { t } = useLocale();
-  const { stages, done, total, next } = useJourney();
+  const { stages, next } = useJourney();
 
   return (
     <>
@@ -59,7 +58,6 @@ export default function JourneyScreen() {
         <ThemedText type="default" themeColor="textSecondary">
           {t('journey.intro')}
         </ThemedText>
-        <JourneyProgress done={done} total={total} />
       </View>
 
       {next && <ContinueCard step={next} />}
@@ -96,9 +94,6 @@ export default function JourneyScreen() {
               <ThemedText type="small" themeColor="textSecondary">
                 {t(`journey.stage.${stage.id}.help` as UIKey)}
               </ThemedText>
-              <View style={styles.stageProgress}>
-                <JourneyProgress done={stage.done} total={stage.total} />
-              </View>
             </View>
             <Ionicons name="chevron-forward" size={18} color={theme.textSecondary} />
           </PressableLink>

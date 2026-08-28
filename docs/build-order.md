@@ -769,14 +769,32 @@ until the week it is urgent, and then the only thing that matters.*
 - **⚠️ Ten pages is a batch, not a phase.** Two first, as unalike as possible,
   looked at, then the rest. This is the rule that thirty unlooked-at pages once
   broke.
-- **⚠️ Separately, for the reviewer:** `references.ts:565` tells someone arriving
-  mid-prayer to "join the line where you are and follow along from wherever the
-  imam has got to" — and stops, before the part that decides whether their prayer
-  is complete. Whether that is a defect is a question of substance, and it
-  belongs at the top of the next review pass.
+- ~~**⚠️ Separately, for the reviewer:** `references.ts:565`~~ **Fixed 28 Aug
+  2026. It was a defect.** The note told somebody arriving mid-prayer to join
+  the line and follow along, and stopped — leaving them to walk out with an
+  incomplete prayer. It now says to stand back up after the imam's salām and
+  pray the rakʿahs they missed, on **Bukhari 636**: *"pray whatever you are
+  able to pray and complete whatever you have missed."* The Jumuʿah page says
+  the same thing in its own words, because that is where somebody arriving late
+  to a full room will actually be looking.
 
 **Done when** Jumuʿah has shipped and been read on its own, the pilot of two has
 been looked at, and every page passes the standing checklist.
+**Jumuʿah done 28 Aug 2026, and shipped alone**, as this phase requires. 36
+teaching pages, 0 failures, 0 warnings. Citations: Qur'an 62:9 for the
+obligation, **Bukhari 930** (the man told to stand and pray two rakʿah during
+the khuṭbah), **Bukhari 934** (even telling your neighbour to be quiet is idle
+talk), **Bukhari 881** and **929** (washing, and coming early), **Bukhari 636**
+(completing what was missed).
+
+⚠️ **The one exemption it states** is that Jumuʿah is not required of women,
+which is agreed. It does not enumerate travel or illness — those have
+conditions on them and the app has no page for them yet.
+
+**Still to do: the pilot of two, then the remaining six.** Praying behind an
+imam · death and janāzah · Eid · voluntary fasting · marriage in shape · a
+partner you already have · when you slip for a month · being corrected by other
+Muslims.
 **Ships via** OTA.
 
 ### Phase 12 — Zakat, with a dated nisab

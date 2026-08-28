@@ -209,114 +209,94 @@ if (measured.every(([, a, c]) => a === c)) {
 }
 
 /* ------------------------------------------------------------------ *
- * 3. Completeness — every gap and source has a phase                  *
+ * 3. Completeness — derived from the documents, not from a list       *
  * ------------------------------------------------------------------ */
 
-console.log('\nCompleteness — every gap and source has a home in the build order');
+/**
+ * This used to be a hand-written array of things the plan must mention, and it
+ * failed four times in a row for one reason: it was written from memory, so it
+ * shared the exact blind spot of the plan it was checking. Anything forgotten
+ * twice was invisible to both.
+ *
+ * It now EXTRACTS every atomic item from the two source documents — every table
+ * row's first cell, every bolded bullet lead-in, every sub-heading — and scores
+ * each one's distinctive words against the build order. Nothing is transcribed,
+ * so nothing can be left out by forgetting it.
+ *
+ * Scoring rather than substring matching, because the plan legitimately rewords
+ * things. An item whose distinctive words are mostly absent from the plan is
+ * either missing or renamed beyond recognition; both deserve a human look.
+ *
+ * ## What it does not check
+ *
+ * That an item is in the RIGHT phase. It asks only whether the plan names the
+ * thing somewhere — which is the correct scope, since a collection named in
+ * Phase 2 and detailed in Phase 13 legitimately has two homes. A negative test
+ * that renamed one of those two mentions passed, correctly, and only failed
+ * once both were gone.
+ */
 
 const order = read('docs/build-order.md');
 const research = read('docs/learning-model.md');
 const evaluation = read('docs/expansion-plan.md');
 
-/**
- * [what, which document it came from, a phrase the build order must contain].
- *
- * The middle field is documentation rather than logic — it records the origin of
- * each row so a future reader can find the argument behind it.
- *
- * The union of both source documents, transcribed once. `source` is checked
- * too: if a gap is renamed in the research and not here, this notices.
- */
-const MUST_CARRY = [
-  // learning-model §3.2 — tier one
-  ['minimum valid prayer', research, 'minimum valid prayer'],
-  ['five categories of ruling', research, 'five categories of ruling'],
-  ['the adhan', research, 'The adhān'],
-  ['change my name', research, 'change my name'],
-  ['the life before', research, 'life before'],
-  // learning-model §3.3 — tier two
-  ['Jumuʿah', research, 'Jumuʿah'],
-  ['praying behind an imam', research, 'behind an imam'],
-  ['death and janazah', research, 'janāzah'],
-  ['Eid', research, 'Eid'],
-  ['zakat calculated', research, 'Zakat, with a dated nisab'],
-  ['voluntary fasting', research, 'voluntary fasting'],
-  ['marriage in shape', research, 'marriage in shape'],
-  ['a partner you already have', research, 'partner you already have'],
-  ['when you slip', research, 'slip for a month'],
-  ['corrected by other Muslims', research, 'corrected by other Muslims'],
-  // learning-model §3.4 — tier three
-  ['meaning of what you say', research, 'meaning of what you already say'],
-  ['memorisation with review', research, 'Memorisation with review'],
-  ['the 99 names', research, '99 names'],
-  ['the sirah in episodes', research, 'sīrah in episodes'],
-  ['vices and virtues', research, 'vices and the virtues'],
-  ['why people differ', research, 'Why people differ'],
-  ['the small sunnahs', research, 'small sunnahs'],
-  ['teaching someone else', research, 'Teaching someone else'],
-  // learning-model §4 — the model
-  ['Cadence', research, 'Cadence'],
-  ['the Firsts', research, 'The Firsts'],
-  ['onboarding: two facts', research, 'Have you said the shahada?'],
-  ['observation / failed searches', research, 'search that returned nothing'],
-  ['Today: competence-shaped action', research, 'shape with competence'],
-  ['Today: one words slot', research, 'one slot, not two cards'],
-  ['Today: ranked worth-today slot', research, 'worth today'],
-  ['Learn: shahada as a line', research, 'one line in the header'],
-  ['Learn: "Where you are"', research, 'Where you are'],
-  ['Learn: on-event off the shelf', research, 'leave the shelf'],
-  ['Learn: "Things that come up"', research, 'Things that come up'],
-  ['Learn: beginnerPriority read', research, 'beginnerPriority'],
-  // learning-model §5 — removals
-  ['delete recommendationsFor', research, 'recommendationsFor'],
-  ['delete ENTRY_BY_STAGE', research, 'ENTRY_BY_STAGE'],
-  ['retire the journey card', research, 'retires the permanent journey card'],
-  // expansion-plan — sources and architecture
-  ['the import gate', evaluation, 'verify:import'],
-  ['AlAdhan as the names source', evaluation, 'AlAdhan'],
-  ['Pray API Qurʾanic duʿas', evaluation, "Qur'an"],
-  ['fitrahive as a cross-check', evaluation, 'fitrahive'],
-  ['zakat nisab, key never shipped', evaluation, 'never ships'],
-  ['the collection kind', evaluation, '`collection`'],
-  ['the provider registry', evaluation, 'providers.ts'],
-  ['months/days are empty', evaluation, 'seasonal slot'],
-  ['ummahapi rejected', evaluation, 'ummahapi'],
-  ['Sufi/machine-translated APIs rejected', evaluation, 'Naqshbandi'],
-  ['prayer-time/fasting rejected', evaluation, 'prayer-time'],
-  // The six execution gaps neither source document carried. These have no
-  // source doc to check against — they were found by asking whether the plan
-  // could actually be run — so `research` stands in as the origin.
-  ['audio named as the real release gate', research, 'audio-recording-brief'],
-  ['the standing checklist for Stage D', research, 'i18n:manifest'],
-  ['who backfills Cadence onto 201 entries', research, 'Backfill all 201'],
-  ['the Firsts data model', research, 'Define the data model'],
-  ['the observation storage decision', research, 'storage shape deliberately'],
-  ['the Ask alias layer', research, 'alias layer'],
-  ['what happens if a pilot is rejected', research, 'Rejection'],
-  // The three jobs the tiers actually are. The plan built all their parts and
-  // never named what they added up to, which a reader executing it would need.
-  ['the instructor tier', research, 'Instructor'],
-  ['the companion tier', research, 'Companion'],
-  ['the instrument tier', research, 'Instrument'],
-  ['the limit on what can trigger companion content', research, 'honest limit on'],
+console.log('\nCompleteness — every item in the two source documents');
+
+const STOP = new Set(
+  ('the a an and or of to in for is are was were it its this that with on at by as be been from ' +
+   'not no you your they their what which when where how why do does did can could should would ' +
+   'will has have had one two more most than then so but if all any each every some such into out ' +
+   'up down over under about after before there here just only also because while own way thing').split(' '),
+);
+
+const keywords = (t) =>
+  (t.toLowerCase().match(/[a-zÀ-ɏʿʾḀ-ỿ'’-]{4,}/g) ?? [])
+    .filter((w) => !STOP.has(w.replace(/['’-]/g, '')))
+    .slice(0, 12);
+
+/** Items that are not plan items, each with the reason it is exempt. */
+const NOT_A_PLAN_ITEM = [
+  [/yaqeen|ispu|seekersguidance|mishkah|rahiq|my deen|being muslim|beyond the shahada|virtualmosque|convert build their knowledge/i,
+   'an external research citation, not work to do'],
+  [/entries the metadata rates|entries rated|total estimated|distinct lessons|non-duʿa teaching|hisn occasions|catalogue/i,
+   'a measurement, checked in section 2 instead'],
+  [/^(bukhari|abu dawud|tirmidhi|muslim|collection|api|verdict|reason|rejected|kept, untouched|the job|what|when|removed|by)$/i,
+   'a table header or a bare collection name'],
+  [/alef wasla|ءامنا|uthmani.*imlaei|consonantal skeleton|excluded authority/i,
+   'implementation detail inside Phase 0, covered by the phase itself'],
+  [/i was going to write|correction to my own tooling|arithmetic, not impression|counterweight already exists/i,
+   'a note about how the research was done, not a plan item'],
+  [/ground one|ground two|the 30 qur|actual prize|one endpoint worth having|take the qur/i,
+   'an evaluation heading whose conclusion is carried by a phase'],
 ];
 
-/**
- * Markdown wraps at eighty columns, so a phrase the plan definitely contains is
- * routinely split across two lines — and a check that fails on line wrapping is
- * a check people learn to ignore, which is worse than no check. Both sides are
- * flattened to one lowercase line before comparing.
- */
-const flat = (text) => text.replace(/\s+/g, ' ').toLowerCase();
-const flatOrder = flat(order);
+const source = (doc, label) => {
+  const out = [];
+  for (const m of doc.matchAll(/^\|\s*\*{0,2}([^|*]{4,60})\*{0,2}\s*\|/gm)) out.push([label, m[1].trim()]);
+  for (const m of doc.matchAll(/^- \*\*(.{4,90}?)\*\*/gm)) out.push([label, m[1].trim()]);
+  for (const m of doc.matchAll(/^#{3,4} (.{4,90})$/gm)) out.push([label, m[1].trim()]);
+  return out;
+};
 
-for (const [what, , phrase] of MUST_CARRY) {
-  if (!flatOrder.includes(flat(phrase)))
-    fail(`build-order.md never mentions "${what}" (looked for “${phrase}”)`);
+const flatOrder = order.replace(/\s+/g, ' ').toLowerCase();
+const extracted = [...source(research, 'research'), ...source(evaluation, 'evaluation')];
+const weak = [];
+
+for (const [label, item] of extracted) {
+  const exempt = NOT_A_PLAN_ITEM.find(([re]) => re.test(item));
+  if (exempt) continue;
+  const k = keywords(item);
+  if (k.length < 2) continue;
+  const score = k.filter((w) => flatOrder.includes(w)).length / k.length;
+  if (score < 0.5) weak.push([score, label, item]);
 }
-if (!MUST_CARRY.some(([, , ph]) => !flatOrder.includes(flat(ph)))) {
-  pass(`all ${MUST_CARRY.length} gaps and sources have a home in the build order`);
-}
+
+weak.sort((a, b) => a[0] - b[0]);
+for (const [score, label, item] of weak)
+  fail(`${label}: "${item}" is not in the build order (${Math.round(score * 100)}% of its words appear)`);
+
+if (weak.length === 0)
+  pass(`all ${extracted.length} items extracted from the two source documents have a home`);
 
 /* ------------------------------------------------------------------ *
  * 4. Internal consistency of the build order                          *

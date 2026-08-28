@@ -43,6 +43,13 @@ and this table is what the fourteen phases add up to.
 | **Companion** — months 2–24 | Meets you at the moment life produces a question. Needs event-shaped content *and* something to surface it. | Phases 1, 4, 6, 8, 11 |
 | **Instrument** — year 2+ | Depth and maintenance in what you already do, and a Today that stops instructing. | Phases 2, 4, 7, 13 |
 
+The model is not invented here. It comes from what convert programmes and
+research actually report — Yaqeen's survey of 618 converts arguing the shift
+from conversion to post-conversion care, ISPU on converts feeling unrecognised
+in Muslim spaces, *Being Muslim*'s chapter structure, and the SeekersGuidance
+ladder, which is the level model this deliberately rejects. All cited in
+`docs/learning-model.md`.
+
 ### ⚠️ The honest limit on "companion"
 
 The research promised content that arrives *at the moment life produces the
@@ -166,8 +173,17 @@ a shape in time, which is what lets screens place content written after them.*
   `keepsake` (rarely, and never removed).
 - **It decides placement, not presentation.** That is the whole difference from
   `Requirement` in `journey.ts:38`, whose own comment scopes it to how a step
-  "is presented". A `daily` never leaves Today and is never counted as journey
-  progress; an `on-event` is not on the shelf at all.
+  "is presented". All six rules, because the placement *is* the feature:
+  - `once` — appears in Learn; leaves Today permanently once met.
+  - `until-fluent` — drives Today's primary action while it is needed, then
+    collapses to a link. This is what turns "Pray now Fajr · 23 steps" into
+    something else for someone who has prayed a thousand Fajrs.
+  - `daily` — permanent on Today, and **never counted as journey progress**;
+    you do not finish the morning adhkār.
+  - `yearly` — surfaced by `seasons.ts` and nowhere else.
+  - `on-event` — off the shelf entirely, reachable from Ask and Help. This alone
+    takes about six pages out of Learn without losing anything.
+  - `keepsake` — one line, never a hero.
 - **Backfill all 201 catalogue entries.** This is the bulk of the phase and it
   is an editorial decision per entry, not a mechanical migration — 69 teaching
   entries and 132 duʿa occasions. Budget for it; it is why this phase is not an
@@ -260,7 +276,16 @@ things the app already has; nothing new is written.*
   surah they are working on. Today gives both the same button.
 - **Today: one "worth today" slot, competed for by a single ranked function.** A
   season, a First that just became available, the surah being learned, or a
-  lesson — never more than one. **This is what retires the permanent journey
+  lesson — never more than one.
+- **The ranked function considers every recurring deadline, not just the
+  calendar.** `use-today.ts` threw out two of three home rows on one test —
+  *does it have a deadline?* — and then applied it only to lessons. These all
+  pass that test and none is surfaced today: the **morning adhkār window closes
+  at sunrise**, 365 times a year rather than 30; **Friday** is weekly, and
+  `index.tsx:102` already computes the weekday; **witr closes at Fajr**; **the
+  last third of the night** opens and closes; **a voluntary fast** has a date.
+  The app already holds the prayer times and the voluntary-prayer content for
+  all of them. **This is what retires the permanent journey
   card**, which the research listed as a removal and the first draft of this
   plan quietly failed to remove.
 - **Learn: the shahada drops from hero to one line in the header.** Cadence
@@ -575,6 +600,25 @@ a code change.
 
 ---
 
+## What this removes
+
+*A change that only adds usually is not finished being thought about. Named here
+because the removals are spread across phases and easy to skip.*
+
+| Removed | By |
+|---|---|
+| `recommendationsFor` and `recommendedRefs` — 236 lines no screen calls | Phase 1 |
+| `ENTRY_BY_STAGE`, unreachable | Phase 1 |
+| The "0 of 36" framing, and the lesson counter as the app's idea of progress | Phase 6 |
+| The permanent Shahada hero in Learn | Phase 4 |
+| The permanent journey card on Today | Phase 4 |
+| One of the two words-cards on Today | Phase 4 |
+| About six situational pages, off the Learn shelf and into Ask | Phase 4 |
+| The help chip row on Today, once Ask can answer | Phase 8 |
+| **The premise that Learn is where progress is made** | Phases 4 and 6 |
+
+---
+
 ## Not doing, and why
 
 *Written down so none of it is re-litigated.*
@@ -584,6 +628,8 @@ a code change.
 | ummahapi.com | Cites volume-and-page, not hadith numbers. Nothing can check it |
 | islamic.network Quotes / Stories / People / Events | Naqshbandi devotional frame; Arabic marked `claude-retranslation-from-en` in the data |
 | islamicapi `prayer-time`, `fasting` | Would replace an offline calculation with a network call |
+| islamic.network AlQuran | The app has its own Qur'an source, verified against QuranEnc |
+| islamic.network Sermons | Friday sermons. A sermon is not a lesson about Jumuʿah — that is Phase 11 |
 | Any runtime API call | Every source is a build-time tool. If all four vanished, the app would not notice |
 | Arabic literacy | Settled. Transliteration stays, permanently |
 | Machine-translated content | Same class of mistake as a wrong Arabic text |

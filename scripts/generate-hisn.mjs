@@ -76,6 +76,54 @@ process.stdout.write('\n');
 
 const clean = (s) => (s ?? '').replace(/\s+/g, ' ').trim();
 
+/** Diacritics, alef forms and punctuation off, for comparing wordings. */
+const bare = (s) =>
+  (s ?? '')
+    .replace(/[\u064B-\u0652\u0670\u0640]/g, '')
+    .replace(/[إأآ]/g, 'ا')
+    .replace(/[،.:]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+/**
+ * ⚠️ WRITTEN, PROVEN, AND DELIBERATELY NOT USED. Read before reaching for it.
+ *
+ * It builds the evening line by replacing the morning-worded head with the
+ * book's own substitution, and the boundary is not guessed: mapping أمسى→أصبح
+ * across the footnote and requiring the result to be a prefix of the line pins
+ * the replaced span exactly. Five of the eight substitutions pass.
+ *
+ * It is unused because the OUTPUT is wrong in two ways that only show on a
+ * screen. The footnotes are printed lightly vowelled while the body is fully
+ * vowelled, so a spliced line opens with bare consonants and continues in full
+ * harakat — unreadable to precisely the reader this app is for. And two lines
+ * carry a SECOND substitution (هذا اليوم → هذه الليلة) that cannot be applied
+ * mechanically, so they would come out half-corrected: "we have reached the
+ * evening… I ask You for the good of this day".
+ *
+ * What unblocks it is four vowelled forms — أَمْسَيْتُ, أَمْسَى and the two
+ * clause substitutions — which the book does not contain and which a model must
+ * not write. Only أَمْسَيْنَا appears vowelled anywhere in the corpus.
+ */
+function spliceEvening(arabic, forms) {
+  for (const form of forms) {
+    const asMorning = bare(form)
+      .replace(/امسينا/g, 'اصبحنا')
+      .replace(/امسيت/g, 'اصبحت')
+      .replace(/امسى/g, 'اصبح');
+    const words = asMorning.split(' ');
+    // Walk the line word by word until the bare prefix matches, so the cut
+    // lands on a word boundary in the ORIGINAL, vowelled text.
+    const original = arabic.split(' ');
+    for (let take = words.length; take <= Math.min(original.length, words.length + 2); take += 1) {
+      if (bare(original.slice(0, take).join(' ')) === asMorning) {
+        return [form.replace(/[.،]$/, ''), ...original.slice(take)].join(' ').trim();
+      }
+    }
+  }
+  return undefined;
+}
+
 /*
   What the book's own punctuation proves, and what it does not.
 

@@ -1,12 +1,17 @@
 import { ADHAN } from './adhan';
+import { A_PARTNER_ALREADY } from './a-partner-already';
 import { AL_FATIHAH } from './al-fatihah';
+import { BEHIND_AN_IMAM } from './behind-an-imam';
+import { BEING_CORRECTED } from './being-corrected';
 import { BEFORE_PRAYER } from './before-prayer';
 import { CLOTHING } from './clothing';
 import { DUA_AND_DHIKR } from './dua-and-dhikr';
+import { EID } from './eid';
 import { FAMILY } from './family';
 import { FOOD } from './food';
 import { HALAL_AND_HARAM } from './halal-and-haram';
 import { LIFE_BEFORE } from './life-before';
+import { MARRIAGE_SHAPE } from './marriage-shape';
 import { MINIMUM_PRAYER } from './minimum-prayer';
 import { IF_YOU_STOPPED } from './if-you-stopped';
 import { ISLAMIC_CALENDAR } from './islamic-calendar';
@@ -24,6 +29,7 @@ import { WHAT_IS_THE_QURAN } from './what-is-the-quran';
 import { WHO_IS_ALLAH } from './who-is-allah';
 import { WHO_IS_MUHAMMAD } from './who-is-muhammad';
 import { ISTIKHARA, QIYAM_AL_LAYL, TAHAJJUD, TAWBA_PRAYER, WITR } from './voluntary-prayers';
+import { VOLUNTARY_FASTING } from './voluntary-fasting';
 import { WORK } from './work';
 import { YOUR_NAME } from './your-name';
 import { ref, type ContentRef } from '../model';
@@ -65,6 +71,12 @@ export const LEARN_TOPICS: Reference[] = [
   /* The pilot of two: an event with a room, and one with nobody in it. */
   JANAZAH,
   IF_YOU_STOPPED,
+  BEHIND_AN_IMAM,
+  EID,
+  VOLUNTARY_FASTING,
+  BEING_CORRECTED,
+  MARRIAGE_SHAPE,
+  A_PARTNER_ALREADY,
   WHO_IS_ALLAH,
   WHO_IS_MUHAMMAD,
   WHAT_IS_THE_QURAN,
@@ -156,6 +168,7 @@ export const TOPIC_GROUPS: readonly { id: TopicGroupId; topics: readonly Content
       ref('reference', 'minimum-prayer'),
       ref('reference', 'al-fatihah'),
       ref('reference', 'adhan'),
+      ref('reference', 'behind-an-imam'),
       ref('reference', 'what-breaks-prayer'),
       ref('reference', 'dua-and-dhikr'),
       ref('collection', 'quranic-duas'),
@@ -196,6 +209,8 @@ export const TOPIC_GROUPS: readonly { id: TopicGroupId; topics: readonly Content
       ref('reference', 'halal-and-haram'),
       ref('reference', 'mosque'),
       ref('reference', 'family'),
+      ref('reference', 'marriage-shape'),
+      ref('reference', 'a-partner-already'),
       ref('reference', 'work'),
       ref('reference', 'jumuah'),
       ref('reference', 'janazah'),
@@ -209,10 +224,19 @@ export const TOPIC_GROUPS: readonly { id: TopicGroupId; topics: readonly Content
       /* The month somebody quietly stopped. `repentance` covers the theology;
          this is the shape of a convert relapse, which is a different page. */
       ref('reference', 'if-you-stopped'),
+      ref('reference', 'being-corrected'),
       ref('reference', 'patience-and-gratitude'),
     ],
   },
-  { id: 'year', topics: [ref('reference', 'ramadan'), ref('reference', 'islamic-calendar')] },
+  {
+    id: 'year',
+    topics: [
+      ref('reference', 'ramadan'),
+      ref('reference', 'voluntary-fasting'),
+      ref('reference', 'eid'),
+      ref('reference', 'islamic-calendar'),
+    ],
+  },
 ];
 
 /**

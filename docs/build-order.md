@@ -810,9 +810,35 @@ the other has nobody present at all. 38 teaching pages, 0 failures, 0 warnings.
   and NOT used: two of the corpus's three graders call it hasan and the third
   daif. Bukhari 6307 says something stronger and is not disputed.
 
-**Still to do: the remaining six.** Praying behind an imam · Eid · voluntary
-fasting · marriage in shape · a partner you already have · being corrected by
-other Muslims.
+**The remaining six done 28 Aug 2026.** 44 teaching pages, 0 failures, 0
+warnings. **Phase 11 is complete.**
+
+- **Praying behind an imam** — every guide taught praying ALONE, which is right
+  for weeks, and nothing taught the other shape. Bukhari 722, Bukhari 689,
+  Bukhari 636. Reading Al-Fātiḥah behind the imam in an aloud prayer is marked
+  `differs`.
+- **Eid** — ⚠️ **names no date, deliberately.** `seasons.ts` settles it: the
+  month begins by local sighting and a calculated date is wrong often enough
+  that "Eid is today" is the one thing this calculation cannot support. It says
+  to ask locally. Bukhari 953, Bukhari 956.
+- **Fasting outside Ramadan** — the research called it "well sourced, wrongly
+  filed", one paragraph inside the calendar page. Names WEEKDAYS and no dates,
+  for the same reason as Eid. Bukhari 1969.
+- **When someone corrects you** — the missing half of `manners.ts`, which is
+  about the reader's manners and never about other people's. It is the page
+  that makes the 47 `differs` notes legible: two confident people with opposite
+  answers is usually two schools, not one liar. Qur'an 16:125.
+- **Marriage, in shape** — the pieces named, and no ruling given. Bukhari 5090.
+  What a walī is for when a convert has no Muslim family is marked `differs`.
+- **If you already have a partner** — ⚠️ **answers almost nothing, and that is
+  the design.** Whether an existing marriage continues has real conditions,
+  real differences, and legal consequences in some countries. What it does is
+  say the situation is normal, that "you must divorce" is not the automatic
+  answer, and to do nothing irreversible before speaking to somebody who will
+  ask questions first.
+
+⚠️ **`differs` notes went 47 → 50.** All three additions NAME a difference
+rather than picking a side, which is what that measurement counts.
 **Ships via** OTA.
 
 ### Phase 12 — Zakat, with a dated nisab

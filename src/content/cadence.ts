@@ -105,6 +105,13 @@ const REFERENCES: Readonly<Record<string, Cadence>> = {
   /* Both invisible until they happen — nobody browses to either. */
   janazah: 'on-event',
   'if-you-stopped': 'on-event',
+  /* Phase 11's remaining six. Two are read once; four wait for the day. */
+  'behind-an-imam': 'until-fluent',
+  eid: 'yearly',
+  'voluntary-fasting': 'yearly',
+  'being-corrected': 'on-event',
+  'marriage-shape': 'once',
+  'a-partner-already': 'on-event',
   'who-is-allah': 'once',
   'who-is-muhammad': 'once',
   'what-is-the-quran': 'once',

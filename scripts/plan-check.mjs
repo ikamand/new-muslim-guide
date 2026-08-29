@@ -195,23 +195,24 @@ const teachingMinutes = teaching.reduce((n, e) => n + (e.meta?.estimatedMinutes 
 /* 75 → 76: Phase 10's Qur'anic duʿas are a catalogue entry of their own. */
 /* 76 → 77: Phase 11's Jumuʿah page. */
 /* 77 → 79: Phase 11's pilot of two. */
-measure('catalogue: non-hisn entries', teaching.length, 79);
+/* 79 → 85: Phase 11's remaining six. */
+measure('catalogue: non-hisn entries', teaching.length, 85);
 /*
   186 became 206 on 28 Aug 2026: the ninety-nine names declare 20 minutes.
   The 69 pages the plan measured are unchanged; a 70th was added beside them.
 */
-measure('catalogue: total estimated minutes', teachingMinutes, 252);
+measure('catalogue: total estimated minutes', teachingMinutes, 278);
 measure('catalogue: hisn occasions', CATALOG.length - teaching.length, 132);
 
 const priority = (n) => teaching.filter((e) => e.meta?.beginnerPriority === n).length;
 /* All five of Phase 9's pages are tier one, so all five land here. */
 measure('entries at beginner priority 1–2', priority(1) + priority(2), 32);
-measure('entries at beginner priority 4–5', priority(4) + priority(5), 4);
+measure('entries at beginner priority 4–5', priority(4) + priority(5), 6);
 measure(
   'entries carrying beginnerPriority or difficulty',
   teaching.filter((e) => e.meta?.beginnerPriority || e.meta?.difficulty).length,
   /* 52 → 53: the names collection carries meta. */
-  62,
+  68,
 );
 
 // Journey lessons that are guides — the only kind that self-completes.
@@ -225,7 +226,14 @@ measure(
 measure(
   'notes marked `differs`',
   CATALOG.flatMap((e) => e.notes ?? []).filter((n) => n.kind === 'differs').length,
-  47,
+  /*
+    47 → 50. Phase 11 added three: reading Al-Fātiḥah behind an imam in an
+    aloud prayer, what a walī is for when a convert has no Muslim family, and
+    whether an existing marriage continues. All three are places the app now
+    NAMES a difference rather than picking a side, which is what this
+    measurement was counting in the first place.
+  */
+  50,
 );
 
 /*

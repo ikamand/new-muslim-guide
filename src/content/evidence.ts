@@ -5,22 +5,22 @@
  * here is lost the next time it runs, and one that needs making belongs
  * upstream, where the text is published.
  *
- * 94 Qur'an passages and 121 narrations. Every character came over
+ * 96 Qur'an passages and 126 narrations. Every character came over
  * the wire from a published text rather than from memory, which is the only
  * way a file like this could exist under this project's rules about Arabic.
  *
  * ## Where each line came from
  *
  * No one source has all of it, so each field is taken from the first that
- * does, and says so on the text itself. Of the 121 narrations here:
- * 58 were confirmed against a second, separately edited publisher;
- * 49 carry HadeethEnc's own translation, 72 carry Darussalam's, and
+ * does, and says so on the text itself. Of the 126 narrations here:
+ * 60 were confirmed against a second, separately edited publisher;
+ * 50 carry HadeethEnc's own translation, 76 carry Darussalam's, and
  * 0 have Arabic and no translation at all.
  *
  * ⚠️ **The Darussalam translations are not ours to relicense.** They reach
  * this file through a public-domain dedication that covers the compiler's work
  * and not the translation inside it. What makes that defensible here is scale
- * and purpose — 72 narrations out of some thirty thousand, each quoted under
+ * and purpose — 76 narrations out of some thirty thousand, each quoted under
  * the instruction it supports, in an app that is free and never sold. It is a
  * quotation, not a republication, and it is Iyad's decision on the record.
  *
@@ -151,6 +151,18 @@ export const QURAN_TEXT: Record<string, EvidenceText> = {
   "2:156": {
     "arabic": "ٱلَّذِينَ إِذَآ أَصَٰبَتۡهُم مُّصِيبَةٞ قَالُوٓاْ إِنَّا لِلَّهِ وَإِنَّآ إِلَيۡهِ رَٰجِعُونَ",
     "translation": "Who, when disaster strikes them, say, \"Indeed we belong to Allāh, and indeed to Him we will return.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "16:125": {
+    "arabic": "ٱدۡعُ إِلَىٰ سَبِيلِ رَبِّكَ بِٱلۡحِكۡمَةِ وَٱلۡمَوۡعِظَةِ ٱلۡحَسَنَةِۖ وَجَٰدِلۡهُم بِٱلَّتِي هِيَ أَحۡسَنُۚ إِنَّ رَبَّكَ هُوَ أَعۡلَمُ بِمَن ضَلَّ عَن سَبِيلِهِۦ وَهُوَ أَعۡلَمُ بِٱلۡمُهۡتَدِينَ",
+    "translation": "Invite to the way of your Lord with wisdom and good instruction, and argue with them in a way that is best. Indeed, your Lord is most knowing of who has strayed from His way, and He is most knowing of who is [rightly] guided.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "29:46": {
+    "arabic": "۞ وَلَا تُجَٰدِلُوٓاْ أَهۡلَ ٱلۡكِتَٰبِ إِلَّا بِٱلَّتِي هِيَ أَحۡسَنُ إِلَّا ٱلَّذِينَ ظَلَمُواْ مِنۡهُمۡۖ وَقُولُوٓاْ ءَامَنَّا بِٱلَّذِيٓ أُنزِلَ إِلَيۡنَا وَأُنزِلَ إِلَيۡكُمۡ وَإِلَٰهُنَا وَإِلَٰهُكُمۡ وَٰحِدٞ وَنَحۡنُ لَهُۥ مُسۡلِمُونَ",
+    "translation": "And do not argue with the People of the Scripture except in a way that is best, except for those who commit injustice among them, and say, \"We believe in that which has been revealed to us and revealed to you. And our God and your God is one; and we are Muslims [in submission] to Him.\"",
     "arabicFrom": "QuranEnc.com",
     "translationFrom": "QuranEnc.com"
   },
@@ -1065,6 +1077,44 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
     "arabicFrom": "HadeethEnc.com",
     "translationFrom": "HadeethEnc.com"
   },
+  "bukhari:722": {
+    "arabic": "حَدَّثَنَا عَبْدُ اللَّهِ بْنُ مُحَمَّدٍ، قَالَ حَدَّثَنَا عَبْدُ الرَّزَّاقِ، قَالَ أَخْبَرَنَا مَعْمَرٌ، عَنْ هَمَّامٍ، عَنْ أَبِي هُرَيْرَةَ، عَنِ النَّبِيِّ صلى الله عليه وسلم أَنَّهُ قَالَ ‏ \"‏ إِنَّمَا جُعِلَ الإِمَامُ لِيُؤْتَمَّ بِهِ فَلاَ تَخْتَلِفُوا عَلَيْهِ، فَإِذَا رَكَعَ فَارْكَعُوا، وَإِذَا قَالَ سَمِعَ اللَّهُ لِمَنْ حَمِدَهُ‏.‏ فَقُولُوا رَبَّنَا لَكَ الْحَمْدُ‏.‏ وَإِذَا سَجَدَ فَاسْجُدُوا، وَإِذَا صَلَّى جَالِسًا فَصَلُّوا جُلُوسًا أَجْمَعُونَ، وَأَقِيمُوا الصَّفَّ فِي الصَّلاَةِ، فَإِنَّ إِقَامَةَ الصَّفِّ مِنْ حُسْنِ الصَّلاَةِ ‏\"‏‏.‏",
+    "translation": "Narrated Abu Huraira:The Prophet (ﷺ) said, \"The Imam is (appointed) to be followed. So do not differ from him, bow when he bows, and say, \"Rabbana-lakal hamd\" if he says \"Sami`a l-lahu liman hamidah\"; and if he prostrates, prostrate (after him), and if he prays sitting, pray sitting all together, and straighten the rows for the prayer, as the straightening of the rows is amongst those things which make your prayer a correct and perfect one. (See Hadith No)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:689": {
+    "arabic": "عن أنس بن مالك أن رسول الله صلى الله عليه وسلم ركب فرسا، فصُرِع عنه فجُحِش شِقُّه الأيمن، فصلى صلاة من الصلوات وهو قاعد، فصلَّينا وراءه قعودا، فلما انصرف قال: إنما جُعِل الإمام ليُؤتمَّ به، فإذا صلى قائما، فصلوا قياما، فإذا ركع، فاركعوا وإذا رفع، فارفعوا، وإذا قال: سمع الله لمن حمده، فقولوا: ربنا ولك الحمد، وإذا صلى قائما، فصلوا قياما، وإذا صلى جالسا، فصلوا جلوسا أجمعون.",
+    "translation": "Anas ibn Mālik (may Allah be pleased with him) reported that the Messenger of Allah (may Allah's peace and blessings be upon him) was once riding a horse and fell down from it, injuring his right side. He led one of the prayers while sitting, and we prayed behind him sitting as well. When he finished the prayer, he said: \"The Imām is meant to be followed, so when he prays standing, then pray standing; and when he bows, bow; and when he rises from bowing, rise; and when he says: 'Allah hears those who praise Him)', then say: 'Our Lord, for You is all praise'; and when he prays standing, then pray standing; and when he prays sitting, then all of you pray sitting.\"",
+    "attribution": "Narrated by Bukhari",
+    "grade": "Authentic hadith",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "bukhari:956": {
+    "arabic": "حَدَّثَنَا سَعِيدُ بْنُ أَبِي مَرْيَمَ، قَالَ حَدَّثَنَا مُحَمَّدُ بْنُ جَعْفَرٍ، قَالَ أَخْبَرَنِي زَيْدٌ، عَنْ عِيَاضِ بْنِ عَبْدِ اللَّهِ بْنِ أَبِي سَرْحٍ، عَنْ أَبِي سَعِيدٍ الْخُدْرِيِّ، قَالَ كَانَ رَسُولُ اللَّهِ صلى الله عليه وسلم يَخْرُجُ يَوْمَ الْفِطْرِ وَالأَضْحَى إِلَى الْمُصَلَّى، فَأَوَّلُ شَىْءٍ يَبْدَأُ بِهِ الصَّلاَةُ ثُمَّ يَنْصَرِفُ، فَيَقُومُ مُقَابِلَ النَّاسِ، وَالنَّاسُ جُلُوسٌ عَلَى صُفُوفِهِمْ، فَيَعِظُهُمْ وَيُوصِيهِمْ وَيَأْمُرُهُمْ، فَإِنْ كَانَ يُرِيدُ أَنْ يَقْطَعَ بَعْثًا قَطَعَهُ، أَوْ يَأْمُرَ بِشَىْءٍ أَمَرَ بِهِ، ثُمَّ يَنْصَرِفُ‏.‏ قَالَ أَبُو سَعِيدٍ فَلَمْ يَزَلِ النَّاسُ عَلَى ذَلِكَ حَتَّى خَرَجْتُ مَعَ مَرْوَانَ وَهْوَ أَمِيرُ الْمَدِينَةِ فِي أَضْحًى أَوْ فِطْرٍ، فَلَمَّا أَتَيْنَا الْمُصَلَّى إِذَا مِنْبَرٌ بَنَاهُ كَثِيرُ بْنُ الصَّلْتِ، فَإِذَا مَرْوَانُ يُرِيدُ أَنْ يَرْتَقِيَهُ قَبْلَ أَنْ يُصَلِّيَ، فَجَبَذْتُ بِثَوْبِهِ فَجَبَذَنِي فَارْتَفَعَ، فَخَطَبَ قَبْلَ الصَّلاَةِ، فَقُلْتُ لَهُ غَيَّرْتُمْ وَاللَّهِ‏.‏ فَقَالَ أَبَا سَعِيدٍ، قَدْ ذَهَبَ مَا تَعْلَمُ‏.‏ فَقُلْتُ مَا أَعْلَمُ وَاللَّهِ خَيْرٌ مِمَّا لاَ أَعْلَمُ‏.‏ فَقَالَ إِنَّ النَّاسَ لَمْ يَكُونُوا يَجْلِسُونَ لَنَا بَعْدَ الصَّلاَةِ فَجَعَلْتُهَا قَبْلَ الصَّلاَةِ‏.‏",
+    "translation": "Narrated Abu Sa`id Al-Khudri:The Prophet (ﷺ) used to proceed to the Musalla on the days of Id-ul-Fitr and Id-ul-Adha; the first thing to begin with was the prayer and after that he would stand in front of the people and the people would keep sitting in their rows. Then he would preach to them, advise them and give them orders, (i.e. Khutba). And after that if he wished to send an army for an expedition, he would do so; or if he wanted to give an order, he would do so, and then depart. The people followed this tradition till I went out with Marwan, the Governor of Medina, for the prayer of Id-ul-Adha or Id-ul-Fitr. When we reached the Musalla, there was a pulpit made by Kathir bin As-Salt. Marwan wanted to get up on that pulpit before the prayer. I got hold of his clothes but he pulled them and ascended the pulpit and delivered the Khutba before the prayer. I said to him, \"By Allah, you have changed (the Prophet's tradition).\" He replied, \"O Abu Sa`id! Gone is that which you know.\" I said, \"By Allah! What I know is better than what I do not know.\" Marwan said, \"People do not sit to listen to our Khutba after the prayer, so I delivered the Khutba before the prayer",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:953": {
+    "arabic": "حَدَّثَنَا مُحَمَّدُ بْنُ عَبْدِ الرَّحِيمِ، حَدَّثَنَا سَعِيدُ بْنُ سُلَيْمَانَ، قَالَ حَدَّثَنَا هُشَيْمٌ، قَالَ أَخْبَرَنَا عُبَيْدُ اللَّهِ بْنُ أَبِي بَكْرِ بْنِ أَنَسٍ، عَنْ أَنَسٍ، قَالَ كَانَ رَسُولُ اللَّهِ صلى الله عليه وسلم لاَ يَغْدُو يَوْمَ الْفِطْرِ حَتَّى يَأْكُلَ تَمَرَاتٍ‏.‏ وَقَالَ مُرَجَّى بْنُ رَجَاءٍ حَدَّثَنِي عُبَيْدُ اللَّهِ قَالَ حَدَّثَنِي أَنَسٌ عَنِ النَّبِيِّ صلى الله عليه وسلم وَيَأْكُلُهُنَّ وِتْرًا‏.‏",
+    "translation": "Narrated Anas bin Malik:Allah's Messenger (ﷺ) never proceeded (for the prayer) on the Day of `Id-ul-Fitr unless he had eaten some dates. Anas also narrated: The Prophet (ﷺ) used to eat odd number of dates",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:1969": {
+    "arabic": "عن عائشة رضي الله عنها قالت: كان رسول الله صلى الله عليه وسلم يصوم حتى نقول: لا يفطر، ويفطر حتى نقول: لا يصوم، فما رأيت رسول الله صلى الله عليه وسلم استكمل صيام شهر إلا رمضان، وما رأيته أكثر صيامًا منه في شعبان.",
+    "translation": "Narrated `Aisha:Allah's Messenger (ﷺ) used to fast till one would say that he would never stop fasting, and he would abandon fasting till one would say that he would never fast. I never saw Allah's Messenger (ﷺ) fasting for a whole month except the month of Ramadan, and did not see him fasting in any month more than in the month of Sha'ban",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:5090": {
+    "arabic": "عَنْ أَبِي هُرَيْرَةَ رَضِيَ اللَّهُ عَنْهُ عَنِ النَّبِيِّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ قَالَ: «‌تُنْكَحُ المَرْأَةُ لِأَرْبَعٍ: لِمَالِهَا وَلِحَسَبِهَا وَجَمَالِهَا وَلِدِينِهَا، فَاظْفَرْ بِذَاتِ الدِّينِ، تَرِبَتْ يَدَاكَ».",
+    "translation": "Narrated Abu Huraira:The Prophet (ﷺ) said, \"A woman is married for four things, i.e., her wealth, her family status, her beauty and her religion. So you should marry the religious woman (otherwise) you will be a losers",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
   "bukhari:3559": {
     "arabic": "عن عبد الله بن عمرو رضي الله عنهما قال: لَمْ يَكُنِ النَّبِيُّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ فَاحِشًا وَلَا مُتَفَحِّشًا، وَكَانَ يَقُولُ: «إِنَّ مِنْ خِيَارِكُمْ أَحْسَنَكُمْ أَخْلَاقًا».",
     "translation": "‘Abdullāh ibn ‘Amr (may Allah be pleased with him) reported: The Prophet (may Allah's peace and blessings be upon him) was neither obscene, nor would he use obscene language, and he used to say: \"Verily, the best of you are those who have the best manners.\"",
@@ -1248,12 +1298,6 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
     "arabic": "حَدَّثَنَا مُسَدَّدٌ، حَدَّثَنَا إِسْمَاعِيلُ، عَنْ أَيُّوبَ، عَنْ نَافِعٍ، عَنِ ابْنِ عُمَرَ ـ رضى الله عنهما ـ قَالَ صَامَ النَّبِيُّ صلى الله عليه وسلم عَاشُورَاءَ، وَأَمَرَ بِصِيَامِهِ‏.‏ فَلَمَّا فُرِضَ رَمَضَانُ تُرِكَ‏.‏ وَكَانَ عَبْدُ اللَّهِ لاَ يَصُومُهُ، إِلاَّ أَنْ يُوَافِقَ صَوْمَهُ‏.‏",
     "translation": "Narrated Ibn `Umar:The Prophet (ﷺ) observed the fast on the 10th of Muharram ('Ashura), and ordered (Muslims) to fast on that day, but when the fasting of the month of Ramadan was prescribed, the fasting of the 'Ashura' was abandoned. `Abdullah did not use to fast on that day unless it coincided with his routine fasting by chance",
     "arabicFrom": "fawazahmed0/hadith-api",
-    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
-  },
-  "bukhari:1969": {
-    "arabic": "عن عائشة رضي الله عنها قالت: كان رسول الله صلى الله عليه وسلم يصوم حتى نقول: لا يفطر، ويفطر حتى نقول: لا يصوم، فما رأيت رسول الله صلى الله عليه وسلم استكمل صيام شهر إلا رمضان، وما رأيته أكثر صيامًا منه في شعبان.",
-    "translation": "Narrated `Aisha:Allah's Messenger (ﷺ) used to fast till one would say that he would never stop fasting, and he would abandon fasting till one would say that he would never fast. I never saw Allah's Messenger (ﷺ) fasting for a whole month except the month of Ramadan, and did not see him fasting in any month more than in the month of Sha'ban",
-    "arabicFrom": "HadeethEnc.com",
     "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
   },
   "muslim:1164": {

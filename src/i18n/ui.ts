@@ -630,6 +630,19 @@ export const EN = {
   'journey.done': 'Done',
   'journey.lessons': 'lessons',
 
+  /*
+    The end of a lesson. `journey.markDone` above belongs to the checkbox in a
+    stage list, which is a claim about a lesson you are looking AT; these are
+    said at the bottom of the lesson itself, by somebody who has just finished
+    it. Different sentence, different place, and "Mark as done" would read as
+    a form field at the end of an article.
+  */
+  'lesson.doneNext': 'Done — next',
+  'lesson.markRead': 'Mark as read',
+  'lesson.read': 'Read',
+  'lesson.unread': 'Mark as not read',
+  'lesson.next': 'Next',
+
   'journey.requirement.foundation': 'Foundation',
   'journey.requirement.practice': 'Practice',
   'journey.requirement.learning': 'Worth knowing',
@@ -856,6 +869,11 @@ const FR: Overrides = {
   'journey.markNotDone': 'Marquer comme non terminé',
   'journey.done': 'Terminé',
   'journey.lessons': 'leçons',
+  'lesson.doneNext': 'Terminé — suite',
+  'lesson.markRead': 'Marquer comme lu',
+  'lesson.read': 'Lu',
+  'lesson.unread': 'Marquer comme non lu',
+  'lesson.next': 'Suite',
   'journey.requirement.foundation': 'Fondations',
   'journey.requirement.practice': 'Pratique',
   'journey.requirement.learning': 'Bon à savoir',
@@ -1137,6 +1155,11 @@ const ES: Overrides = {
   'journey.markNotDone': 'Marcar como no hecho',
   'journey.done': 'Hecho',
   'journey.lessons': 'lecciones',
+  'lesson.doneNext': 'Hecho — sigue',
+  'lesson.markRead': 'Marcar como leído',
+  'lesson.read': 'Leído',
+  'lesson.unread': 'Marcar como no leído',
+  'lesson.next': 'Sigue',
   'journey.requirement.foundation': 'Base',
   'journey.requirement.practice': 'Práctica',
   'journey.requirement.learning': 'Bueno saberlo',

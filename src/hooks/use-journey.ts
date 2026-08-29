@@ -39,6 +39,22 @@ export type JourneyState = {
   nextStageIndex: number;
   /** Nothing has been marked done yet — the journey has not been started. */
   fresh: boolean;
+  /**
+   * The lesson that follows `key` in the journey, for the end of a page.
+   *
+   * ## Why it is not `next`
+   *
+   * `next` is the first UNFINISHED step, so on the page somebody is about to
+   * finish it is usually that page — and offering "next: the thing you are
+   * looking at" is the carry-on card's old bug in a new place. This walks the
+   * journey in order from the step AFTER this one and takes the first that is
+   * not done, so the answer is right both before the mark lands and after.
+   *
+   * Undefined for the 24 reference articles that are not journey steps at all,
+   * and for the last unfinished lesson. A page with no next says so by showing
+   * nothing rather than by inventing a destination.
+   */
+  after: (key: string) => ResolvedStep | undefined;
 };
 
 /**
@@ -106,6 +122,17 @@ export function useJourney(): JourneyState {
     const anywhere = stages.findIndex((stage) => stage.next);
     const nextStageIndex = fromEntry === -1 ? anywhere : fromEntry;
 
+    /*
+      Ordered over the whole journey, with the duplicates collapsed to their
+      first appearance — the same list `distinct` is built from, so "the lesson
+      after this one" and "how many lessons there are" cannot disagree.
+    */
+    const after = (key: string): ResolvedStep | undefined => {
+      const at = distinct.findIndex((step) => step.key === key);
+      if (at === -1) return undefined;
+      return distinct.slice(at + 1).find((step) => !step.done);
+    };
+
     return {
       stages,
       done: distinct.filter((step) => step.done).length,
@@ -113,6 +140,7 @@ export function useJourney(): JourneyState {
       next: nextStageIndex === -1 ? undefined : stages[nextStageIndex].next,
       nextStageIndex,
       fresh: distinct.every((step) => !step.done),
+      after,
     };
   }, [completedLessons, confidence, locale]);
 }

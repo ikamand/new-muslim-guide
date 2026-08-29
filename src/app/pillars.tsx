@@ -1,6 +1,7 @@
 import { Stack } from 'expo-router';
 import { ScrollView, StyleSheet, View } from 'react-native';
 
+import { LessonEnd } from '@/components/lesson-end';
 import { PillarCard } from '@/components/pillar-card';
 import { RecitationCard } from '@/components/recitation-card';
 import { ThemedText } from '@/components/themed-text';
@@ -30,6 +31,14 @@ export default function PillarsScreen() {
           <PillarCard key={pillar.id} pillar={localisePillar(pillar, locale)} index={index} />
         ))}
       </View>
+
+      {/*
+        The journey's "The Five Pillars" step points at `pillar:salah`, because
+        a step has to point at a record and this page is where that record is
+        read. It is the key the stage list ticks, so it is the key this marks —
+        anything else would tick nothing.
+      */}
+      <LessonEnd lessonKey="pillar:salah" />
     </ScrollView>
   );
 }

@@ -267,6 +267,18 @@ type SettingsContext = Settings & {
   setMany: (values: Partial<Settings>) => void;
   /** Marks a lesson done, or undoes it. Reversible on purpose. */
   toggleLesson: (key: string) => void;
+  /**
+   * Marks a lesson done and leaves it done.
+   *
+   * The one a screen calls. `toggleLesson` belongs to the checkbox in
+   * `/journey`, where flipping is what the reader means; everywhere else the
+   * caller means "this is finished" and calling a toggle to say so is a bug
+   * waiting for a second call. It decides inside the updater rather than from
+   * a `completedLessons` the caller read during render — that closure is one
+   * render old the moment anything else writes, and a guard built on it
+   * un-marks the lesson it just marked.
+   */
+  completeLesson: (key: string) => void;
   /** Pins a duʿa to the top of the Duʿa tab, or unpins it. */
   togglePinned: (id: string) => void;
   /** False until the stored value has been read — the splash waits on this. */
@@ -336,6 +348,19 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
   }, []);
 
   /**
+   * Add-only, and it returns the same object when the key is already there —
+   * so a second call writes nothing and re-renders nothing.
+   */
+  const completeLesson = useCallback((key: string) => {
+    setSettings((current) => {
+      if (current.completedLessons.includes(key)) return current;
+      const next = { ...current, completedLessons: [...current.completedLessons, key] };
+      void AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+      return next;
+    });
+  }, []);
+
+  /**
    * Pinning is append-at-the-end and silently ignores the eleventh.
    *
    * Dropping the oldest instead would remove something the reader chose,
@@ -368,8 +393,8 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const value = useMemo(
-    () => ({ ...settings, toggle, set, setMany, toggleLesson, togglePinned, loaded }),
-    [settings, toggle, set, setMany, toggleLesson, togglePinned, loaded],
+    () => ({ ...settings, toggle, set, setMany, toggleLesson, completeLesson, togglePinned, loaded }),
+    [settings, toggle, set, setMany, toggleLesson, completeLesson, togglePinned, loaded],
   );
 
   return <Context value={value}>{children}</Context>;

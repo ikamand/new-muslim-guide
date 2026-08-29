@@ -1,7 +1,8 @@
 import { Stack } from 'expo-router';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import { LessonEnd } from '@/components/lesson-end';
+import { LessonScroll } from '@/components/lesson-scroll';
 import { PillarCard } from '@/components/pillar-card';
 import { RecitationCard } from '@/components/recitation-card';
 import { ThemedText } from '@/components/themed-text';
@@ -14,7 +15,7 @@ export default function PillarsScreen() {
   const { locale, t } = useLocale();
 
   return (
-    <ScrollView contentContainerStyle={styles.content}>
+    <LessonScroll lessonKey="pillar:salah" contentContainerStyle={styles.content}>
       <Stack.Screen options={{ title: t('pillars.title') }} />
 
       <ThemedText type="default" themeColor="textSecondary">{t('pillars.intro')}</ThemedText>
@@ -39,7 +40,7 @@ export default function PillarsScreen() {
         anything else would tick nothing.
       */}
       <LessonEnd lessonKey="pillar:salah" />
-    </ScrollView>
+    </LessonScroll>
   );
 }
 

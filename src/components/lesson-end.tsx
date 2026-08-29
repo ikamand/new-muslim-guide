@@ -6,175 +6,69 @@ import { ThemedText } from '@/components/themed-text';
 import { Radius, Spacing } from '@/constants/theme';
 import { useJourney } from '@/hooks/use-journey';
 import { useLocale } from '@/hooks/use-locale';
-import { useObservations } from '@/hooks/use-observations';
-import { useSettings } from '@/hooks/use-settings';
 import { useTheme } from '@/hooks/use-theme';
 import type { UIKey } from '@/i18n/ui';
 import { routeFor } from '@/lib/content-routes';
 
 /**
- * The end of a lesson: a tap that says you finished it, and where to go next.
+ * The end of a lesson: where to go next, and nothing else.
  *
- * ## Why a tap and not a scroll
+ * ## Where the marking went
  *
- * This replaces a scroll handler that inferred "read" from reaching the bottom
- * of the page, and the inference was wrong on the platform most of these
- * readers are on. `scrollEventThrottle` gates `ScrollEventType.SCROLL` on
- * Android and nothing else emits a SCROLL at rest — see
- * `ReactScrollViewHelper.kt`, `emitScrollEvent` — so the last event the app
- * saw could be a quarter-second of travel short of the end, and no later one
- * ever corrected it. iOS fires a final event only after DECELERATION, so a
- * careful drag that stops without a fling misses there too; only web was
- * reliable, because react-native-web keeps a 100ms scroll-end timer of its
- * own. Three platforms, three behaviours, three workarounds.
+ * This component used to do two jobs — mark the lesson read and offer the
+ * next one — and carried three controls to do them: "Done — next", a quiet
+ * "Mark as read", and a "Read" chip once marked. Iyad read that as clutter,
+ * and he was right: reaching this block IS the evidence of reading, so asking
+ * for a tap on top of it was bookkeeping. Marking now belongs to the scroll —
+ * see `lesson-scroll.tsx`, which records the reversal and why the slack makes
+ * scroll inference safe where the exact-bottom version was not. By the time
+ * this button is on screen, the mark has already landed. Un-marking lives in
+ * the journey's stage list, which is a claim about a lesson you are looking
+ * AT rather than one you are inside.
  *
- * A control at the END of the article carries the same evidence with none of
- * the inference: you cannot press it without having got there. It also cannot
- * mistake somebody skimming to the bottom to see how long the page is for
- * somebody who read it.
+ * ## Replace, not push
  *
- * ⚠️ **This under-counts on purpose.** A reader who finishes and taps Back
- * gets no mark. That is the honest direction to be wrong in — the app never
- * claims you read something you did not — and it is why `observations` still
- * records every page that was OPENED, which is a fact rather than a guess.
+ * Reading is a chain: this button leads to the next lesson, whose button
+ * leads to the next. Pushing built the whole chain onto the stack, so Back
+ * from the fifth lesson walked somebody through four they had just read.
+ * `replace` swaps this lesson for the next one, so Back always returns to
+ * wherever the reading started — the journey, Learn, a search result.
  *
- * ## Why it is also the way onward
- *
- * The bottom of a reference article used to be a dead end: no next step, no
- * onward move, nothing but the back button. Making the primary action both
- * mark this lesson and open the next one means the tap that records progress
- * is the tap the reader wanted anyway. A button that only does bookkeeping is
- * a chore and gets skipped; this one is the path of least resistance.
+ * A page with no next lesson — the 24 reference articles that are not
+ * journey steps, and the last unfinished one — renders nothing: the mark has
+ * landed, and an empty block would be furniture.
  */
 export function LessonEnd({ lessonKey }: { lessonKey: string }) {
   const theme = useTheme();
   const router = useRouter();
   const { t } = useLocale();
-  const { completedLessons, completeLesson, toggleLesson } = useSettings();
-  const { finish } = useObservations();
   const { after } = useJourney();
 
-  const done = completedLessons.includes(lessonKey);
   const next = after(lessonKey);
-  const nextLabel = next
-    ? next.labelKey
-      ? t(next.labelKey as UIKey)
-      : next.entry.title
-    : undefined;
+  if (!next) return null;
 
-  /*
-    `completeLesson` says THAT it is done; `finish` says WHEN, and keeps saying
-    it on a second reading. Competence is a question about dates — see
-    `lib/competence.ts` — and a set of keys cannot answer it.
-  */
-  const mark = () => {
-    completeLesson(lessonKey);
-    finish(lessonKey);
-  };
-
-  const markAndGo = () => {
-    mark();
-    if (next) router.push(routeFor(next.entry));
-  };
-
-  if (done) {
-    return (
-      <View style={styles.block}>
-        <View style={styles.readRow}>
-          <Pressable
-            onPress={() => toggleLesson(lessonKey)}
-            accessibilityRole="button"
-            accessibilityLabel={t('lesson.unread')}
-            style={({ pressed }) => [
-              styles.readChip,
-              {
-                backgroundColor: pressed ? theme.backgroundSelected : theme.accentMuted,
-              },
-            ]}>
-            <Ionicons name="checkmark" size={16} color={theme.accent} />
-            <ThemedText type="smallBold" themeColor="accent">
-              {t('lesson.read')}
-            </ThemedText>
-          </Pressable>
-        </View>
-
-        {next && nextLabel && (
-          <Pressable
-            onPress={() => router.push(routeFor(next.entry))}
-            accessibilityRole="button"
-            accessibilityLabel={`${t('lesson.next')}: ${nextLabel}`}
-            style={({ pressed }) => [
-              styles.button,
-              styles.secondary,
-              {
-                borderColor: theme.border,
-                backgroundColor: pressed ? theme.backgroundSelected : 'transparent',
-              },
-            ]}>
-            <View style={styles.label}>
-              <ThemedText type="caption" themeColor="textSecondary" style={styles.kicker}>
-                {t('lesson.next')}
-              </ThemedText>
-              <ThemedText type="cardTitle">{nextLabel}</ThemedText>
-            </View>
-            <Ionicons name="arrow-forward" size={20} color={theme.textSecondary} />
-          </Pressable>
-        )}
-      </View>
-    );
-  }
+  const nextLabel = next.labelKey ? t(next.labelKey as UIKey) : next.entry.title;
 
   return (
     <View style={styles.block}>
       <Pressable
-        onPress={markAndGo}
+        onPress={() => router.replace(routeFor(next.entry))}
         accessibilityRole="button"
-        accessibilityLabel={
-          nextLabel ? `${t('lesson.doneNext')}: ${nextLabel}` : t('lesson.markRead')
-        }
+        accessibilityLabel={`${t('lesson.next')}: ${nextLabel}`}
         style={({ pressed }) => [
           styles.button,
           { backgroundColor: theme.accent, opacity: pressed ? 0.85 : 1 },
         ]}>
         <View style={styles.label}>
-          {nextLabel ? (
-            <>
-              <ThemedText type="caption" themeColor="textOnAccent" style={styles.kicker}>
-                {t('lesson.doneNext')}
-              </ThemedText>
-              <ThemedText type="cardTitle" themeColor="textOnAccent">
-                {nextLabel}
-              </ThemedText>
-            </>
-          ) : (
-            <ThemedText type="cardTitle" themeColor="textOnAccent">
-              {t('lesson.markRead')}
-            </ThemedText>
-          )}
-        </View>
-        <Ionicons
-          name={nextLabel ? 'arrow-forward' : 'checkmark'}
-          size={20}
-          color={theme.textOnAccent}
-        />
-      </Pressable>
-
-      {/*
-        Only where the primary also navigates. Without a next lesson the
-        primary IS "mark it read", and a second control saying the same thing
-        in quieter type is a choice between one option.
-      */}
-      {nextLabel && (
-        <Pressable
-          onPress={mark}
-          accessibilityRole="button"
-          accessibilityLabel={t('lesson.markRead')}
-          style={({ pressed }) => [styles.quiet, { opacity: pressed ? 0.6 : 1 }]}>
-          <ThemedText type="small" themeColor="textSecondary">
-            {t('lesson.markRead')}
+          <ThemedText type="caption" themeColor="textOnAccent" style={styles.kicker}>
+            {t('lesson.next')}
           </ThemedText>
-        </Pressable>
-      )}
+          <ThemedText type="cardTitle" themeColor="textOnAccent">
+            {nextLabel}
+          </ThemedText>
+        </View>
+        <Ionicons name="arrow-forward" size={20} color={theme.textOnAccent} />
+      </Pressable>
     </View>
   );
 }
@@ -182,7 +76,6 @@ export function LessonEnd({ lessonKey }: { lessonKey: string }) {
 const styles = StyleSheet.create({
   block: {
     marginTop: Spacing.five,
-    gap: Spacing.three,
   },
   button: {
     flexDirection: 'row',
@@ -194,9 +87,6 @@ const styles = StyleSheet.create({
     paddingVertical: Spacing.three,
     borderRadius: Radius.medium,
   },
-  secondary: {
-    borderWidth: StyleSheet.hairlineWidth,
-  },
   label: {
     flex: 1,
     gap: Spacing.half,
@@ -204,20 +94,5 @@ const styles = StyleSheet.create({
   kicker: {
     textTransform: 'uppercase',
     letterSpacing: 1,
-  },
-  quiet: {
-    alignItems: 'center',
-    paddingVertical: Spacing.two,
-  },
-  readRow: {
-    flexDirection: 'row',
-  },
-  readChip: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: Spacing.one,
-    paddingHorizontal: Spacing.three,
-    paddingVertical: Spacing.two,
-    borderRadius: Radius.small,
   },
 });

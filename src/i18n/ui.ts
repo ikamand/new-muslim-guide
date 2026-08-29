@@ -669,16 +669,11 @@ export const EN = {
   'journey.lessons': 'lessons',
 
   /*
-    The end of a lesson. `journey.markDone` above belongs to the checkbox in a
-    stage list, which is a claim about a lesson you are looking AT; these are
-    said at the bottom of the lesson itself, by somebody who has just finished
-    it. Different sentence, different place, and "Mark as done" would read as
-    a form field at the end of an article.
+    The end of a lesson. This block held four more strings — "Done — next",
+    "Mark as read", "Read", "Mark as not read" — until 29 Aug, when marking
+    moved from a tap to the scroll itself (see `lesson-scroll.tsx`) and the
+    end of a lesson became one button: the next one.
   */
-  'lesson.doneNext': 'Done — next',
-  'lesson.markRead': 'Mark as read',
-  'lesson.read': 'Read',
-  'lesson.unread': 'Mark as not read',
   'lesson.next': 'Next',
 
   'journey.requirement.foundation': 'Foundation',

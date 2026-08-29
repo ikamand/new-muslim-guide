@@ -1,8 +1,9 @@
 import { Stack, useLocalSearchParams } from 'expo-router';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import { ContentNoteCard } from '@/components/content-note';
 import { LessonEnd } from '@/components/lesson-end';
+import { LessonScroll } from '@/components/lesson-scroll';
 import { RecitationCard } from '@/components/recitation-card';
 import { SourceDisclosure, evidenceFor } from '@/components/source-list';
 import {
@@ -27,9 +28,12 @@ import { localiseReference, measure } from '@/i18n/localise';
 /**
  * A reference topic, read top to bottom.
  *
- * No stepper and no progress bar. Someone here has a question, not a procedure
- * to follow, and making them tap through seven screens to find the one line
- * they came for would be the wrong shape entirely.
+ * No stepper. Someone here has a question, not a procedure to follow, and
+ * making them tap through seven screens to find the one line they came for
+ * would be the wrong shape entirely. The thin bar at the top is scroll
+ * progress, not steps — added 29 Aug at Iyad's ask, because a long article
+ * gives no sense of how much is left — and reaching the end is what marks
+ * the lesson read. Both live in `LessonScroll`.
  *
  * ## Why there are no cards any more
  *
@@ -69,7 +73,7 @@ export default function ReferenceScreen() {
   const [reference, coverage] = measure(() => localiseReference(source, locale));
 
   return (
-    <ScrollView contentContainerStyle={styles.content}>
+    <LessonScroll lessonKey={`reference:${reference.id}`} contentContainerStyle={styles.content}>
       <Stack.Screen options={{ title: reference.title }} />
 
       <ThemedText
@@ -111,7 +115,7 @@ export default function ReferenceScreen() {
       <TranslationGap coverage={coverage} />
 
       <LessonEnd lessonKey={`reference:${reference.id}`} />
-    </ScrollView>
+    </LessonScroll>
   );
 }
 

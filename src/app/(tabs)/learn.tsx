@@ -12,6 +12,7 @@ import {
   DAILY_PRAYERS,
   resolveRef,
   getPracticeClipCount,
+  GROUP_ORDER,
   hasPracticeBeyondSurahs,
   IMAN_PILLARS,
   PHRASES,
@@ -22,6 +23,9 @@ import {
 import { BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { useJourney } from '@/hooks/use-journey';
+import { useObservations } from '@/hooks/use-observations';
+import { usePrayerConfidence } from '@/hooks/use-competence';
+import { useReadingInProgress } from '@/hooks/use-reading';
 import { useSettings } from '@/hooks/use-settings';
 import { stepKey } from '@/content/journey';
 import { useTheme } from '@/hooks/use-theme';
@@ -119,6 +123,7 @@ function LearnCard({
   unit,
   glyph,
   wide = false,
+  progress,
 }: {
   href: Href;
   title: string;
@@ -128,6 +133,11 @@ function LearnCard({
   glyph?: GlyphName;
   /** Full width, with the subtitle showing. For a card that carries a group. */
   wide?: boolean;
+  /**
+   * How far through this lesson the reader got before leaving, 0..1.
+   * Drawn as a thin line along the card's foot — a bookmark, not a score.
+   */
+  progress?: number;
 }) {
   const theme = useTheme();
   const { t } = useLocale();
@@ -170,6 +180,14 @@ function LearnCard({
             {t(unit)}
           </ThemedText>
         </View>
+      )}
+      {progress !== undefined && progress > 0 && (
+        <View
+          style={[
+            styles.bookmark,
+            { width: `${Math.round(progress * 100)}%`, backgroundColor: theme.accent },
+          ]}
+        />
       )}
     </PressableLink>
   );
@@ -392,6 +410,7 @@ type CardSpec = {
   unit: UIKey;
   glyph?: GlyphName;
   wide: boolean;
+  progress?: number;
 };
 
 /**
@@ -444,6 +463,18 @@ function GroupHeading({ label, count }: { label: string; count?: number }) {
 export default function LearnScreen() {
   const theme = useTheme();
   const { locale, t } = useLocale();
+  const confidence = usePrayerConfidence();
+  const { reading } = useObservations();
+  const readingNow = useReadingInProgress();
+
+  /*
+    The shelves, in this reader's order — see GROUP_ORDER's note on why this
+    re-sorts on confidence and never on a tap. The groups themselves and the
+    cards inside them do not move; only which shelf comes first does.
+  */
+  const groups = GROUP_ORDER[confidence]
+    .map((id) => TOPIC_GROUPS.find((group) => group.id === id))
+    .filter((group): group is (typeof TOPIC_GROUPS)[number] => group !== undefined);
 
   return (
     <SafeAreaView style={[styles.safeArea, { backgroundColor: theme.background }]} edges={['top']}>
@@ -456,6 +487,24 @@ export default function LearnScreen() {
         <ShahadaCard />
 
         <WhereYouAre />
+
+        {/*
+          What they were in the middle of, offered back. A row rather than a
+          moved card: the lesson stays findable on its shelf below, and this
+          line is the one place on the tab allowed to change day to day.
+        */}
+        {readingNow && (
+          <PressableLink
+            href={routeFor(readingNow.entry)}
+            accessibilityLabel={`${t('today.reading')}: ${readingNow.entry.title}`}
+            style={[styles.linkRow, { borderTopColor: theme.border }]}
+            pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
+            <ThemedText type="small" themeColor="textSecondary" numberOfLines={1} style={styles.readingLine}>
+              {t('today.reading')}: <ThemedText type="smallBold">{readingNow.entry.title}</ThemedText>
+            </ThemedText>
+            <Ionicons name="arrow-forward" size={14} color={theme.accent} />
+          </PressableLink>
+        )}
 
         {/*
           The ledger, one line under the chapter card.
@@ -483,7 +532,7 @@ export default function LearnScreen() {
           screen. A flat list of nineteen equals only serves a reader who
           already knows what they want, which is nobody this app is for.
         */}
-        {TOPIC_GROUPS.map((group) => {
+        {groups.map((group) => {
           /*
             The screens that live in a group without being catalogue content —
             the prayer chooser and the zakat working-out — join the same list
@@ -539,6 +588,7 @@ export default function LearnScreen() {
                   ? ('count.minutes.long' as UIKey)
                   : (`count.${topic.pieceUnit}` as UIKey),
               glyph: TOPIC_GLYPH[topic.id],
+              progress: reading[`${topic.kind}:${topic.id}`]?.furthest,
               /*
                 A long title takes the whole row rather than being
                 truncated into one. "What you need before you pray" came
@@ -670,6 +720,19 @@ const styles = StyleSheet.create({
   card: {
     borderRadius: Radius.medium,
     borderWidth: StyleSheet.hairlineWidth,
+    /* So the bookmark line clips to the rounded corners. */
+    overflow: 'hidden',
+  },
+  /** Where the reader got to, along the card's foot. Quiet on purpose. */
+  bookmark: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    height: 3,
+    opacity: 0.55,
+  },
+  readingLine: {
+    flex: 1,
   },
   /**
    * Two to a row, glyph above the title.

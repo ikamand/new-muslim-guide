@@ -2255,3 +2255,54 @@ OTA (`npm run update:preview`). The one dependency added,
 `@expo-google-fonts/literata`, carries no native code — no podspec, no
 gradle, no expo-module config — so the fingerprint is untouched and existing
 builds accept the update.
+
+---
+
+# Built 29 Aug, second batch — priorities, not skips
+
+Iyad, on seeing the arch strip star its second stage while the first sat
+untouched: answers should define PRIORITIES, not skip stages — everything
+still gets completed, but the order is the reader's; and the app should
+remember what somebody was in the middle of. Agreed and built the same day.
+
+## The stages sort instead of pointing ✅
+
+`STAGE_ORDER` in `content/journey.ts` replaces the entry pointer: each
+onboarding answer maps to a full ordering of the six stages, `orderedStages`
+serves it, and `use-journey` lost its special case — "next" is simply the
+first unfinished stage in YOUR order, and the star is always on the first
+unfinished arch. One source of truth: the arch strip, the journey screen and
+Today's carry-on all read the same ordered stages. "Start here" became **"The
+basics"** (short label "Basics"), because a stage called Start can now sit
+third. ("Foundations" was the first pick and does not fit under a 30px arch.)
+
+## Learn's shelves sort by the same signal ✅
+
+`GROUP_ORDER` beside `TOPIC_GROUPS`: teach-me and need-words lead with
+Praying; on-my-own leads with Out in the world and the prayer reference moves
+to the end. Re-sorts only when confidence moves — an answered question, or
+`lib/competence.ts` watching them pray — never on a tap. A page that
+reshuffles under a reader's hand is not smart, it is unfindable; the one
+surface allowed to change daily is the carry-on slot, below.
+
+## The app remembers what you were reading ✅
+
+`observations.reading` (`lib/observations.ts`): when a lesson page unmounts
+unfinished past 5% scroll, `LessonScroll` records how far the screen got —
+once, on the way out, never per scroll event; a finish deletes the entry.
+`useReadingInProgress` narrows the log to the one entry worth offering back
+(most recent, unfinished, resolvable, within 14 days) and three surfaces
+read it:
+
+- **Today**: "You were reading" takes the carry-on slot ahead of the
+  journey's next lesson — a book you are midway through beats one you have
+  not opened.
+- **Learn**: one quiet row under the Where-you-are card. The lesson's card
+  does NOT move off its shelf — the row points, the shelf stays findable.
+- **The card itself**: a thin line along its foot showing how far you got.
+  A bookmark, not a score.
+
+Verified end to end in the browser: answered onboarding as "prays on my
+own" → Living leads the arches and Out in the world leads the shelves; left
+"Who is Allah?" at 40% → the row, the Today slot and the bookmark all
+appeared, and the store showed `furthest: 0.4`. Ships OTA; no native change.

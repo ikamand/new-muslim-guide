@@ -58,7 +58,7 @@ import { useTheme } from '@/hooks/use-theme';
 export function LessonScroll({ lessonKey, children, ...scroll }: LessonScrollProps) {
   const theme = useTheme();
   const { loaded: settingsLoaded, completeLesson } = useSettings();
-  const { loaded: observationsLoaded, finish } = useObservations();
+  const { loaded: observationsLoaded, finish, leftReading } = useObservations();
 
   // Lazy state, not a ref: the compiler's lint forbids reading a ref in render.
   const [progress] = useState(() => new Animated.Value(0));
@@ -69,15 +69,25 @@ export function LessonScroll({ lessonKey, children, ...scroll }: LessonScrollPro
   const [reachedEnd, setReachedEnd] = useState(false);
   const marked = useRef(false);
   const settle = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  /** The deepest the reader has been, as the bar's own fraction. */
+  const furthest = useRef(0);
+  /*
+    The unmount recorder reads through a ref so the cleanup below can be a
+    true once-per-mount effect — depending on `leftReading` would make its
+    cleanup fire on any identity change and record a departure mid-read.
+  */
+  const onLeave = useRef({ leftReading, lessonKey, loaded: observationsLoaded });
+  onLeave.current = { leftReading, lessonKey, loaded: observationsLoaded };
 
   const measure = useCallback(
     (fromScroll: boolean) => {
       if (viewport.current <= 0 || content.current <= 0) return;
 
       const scrollable = content.current - viewport.current;
-      progress.setValue(
-        scrollable <= 0 ? 1 : Math.min(1, Math.max(0, offset.current / scrollable)),
-      );
+      const fraction =
+        scrollable <= 0 ? 1 : Math.min(1, Math.max(0, offset.current / scrollable));
+      progress.setValue(fraction);
+      furthest.current = Math.max(furthest.current, fraction);
 
       const atEnd = offset.current + viewport.current >= content.current - END_SLACK;
       if (!atEnd) return;
@@ -98,6 +108,24 @@ export function LessonScroll({ lessonKey, children, ...scroll }: LessonScrollPro
   );
 
   useEffect(() => () => clearTimeout(settle.current), []);
+
+  /*
+    Leaving partway is worth remembering — it is the whole "You were reading"
+    signal on Today and Learn. Recorded once, on unmount, never per scroll
+    event; below 5% is a glance, not a reading. The mark guard keeps a
+    finished read from also logging itself as unfinished, and the loaded
+    guard keeps a too-early departure from writing over stored history —
+    the same race the mark effect below waits out.
+  */
+  useEffect(
+    () => () => {
+      const leave = onLeave.current;
+      if (!marked.current && leave.loaded && furthest.current > 0.05) {
+        leave.leftReading(leave.lessonKey, furthest.current);
+      }
+    },
+    [],
+  );
 
   useEffect(() => {
     /*

@@ -117,6 +117,26 @@ export type Observations = {
    * `index.tsx` promises this app does not do.
    */
   firsts: Record<string, number>;
+  /**
+   * `kind:id` → how far somebody got through a lesson they left, and when.
+   *
+   * The signal behind "You were reading" on the carry-on surfaces: opened,
+   * read part of it, went away. Recorded when the page unmounts, never per
+   * scroll event, and a finish deletes the entry — being midway through a
+   * lesson you have completed is re-reading, not unfinished business.
+   *
+   * `furthest` only rises, like everything in this file. It is a fraction of
+   * the page's scroll, which is the honest name for what it measures: where
+   * the screen got to, not what the reader took in.
+   */
+  reading: Record<string, Reading>;
+};
+
+export type Reading = {
+  /** 0..1 of the page's scrollable height, the deepest they have been. */
+  furthest: number;
+  /** When they last left the page. */
+  at: number;
 };
 
 export const EMPTY: Observations = {
@@ -126,6 +146,7 @@ export const EMPTY: Observations = {
   surahs: {},
   misses: [],
   firsts: {},
+  reading: {},
 };
 
 const isRecord = (value: unknown): value is Record<string, unknown> =>
@@ -158,6 +179,27 @@ function finishes(value: unknown): Record<string, Finish> {
       Number.isFinite(count)
     ) {
       out[key] = { first, last, times: count };
+    }
+  }
+  return out;
+}
+
+/** A fraction and a date, both finite, or the entry never existed. */
+function readings(value: unknown): Record<string, Reading> {
+  if (!isRecord(value)) return {};
+  const out: Record<string, Reading> = {};
+  for (const [key, entry] of Object.entries(value)) {
+    if (!isRecord(entry)) continue;
+    const { furthest, at } = entry;
+    if (
+      typeof furthest === 'number' &&
+      Number.isFinite(furthest) &&
+      furthest > 0 &&
+      furthest <= 1 &&
+      typeof at === 'number' &&
+      Number.isFinite(at)
+    ) {
+      out[key] = { furthest, at };
     }
   }
   return out;
@@ -209,6 +251,7 @@ export function parse(raw: string | null): Observations {
           .slice(-MAX_MISSES)
       : [],
     firsts: times(stored.firsts),
+    reading: readings(stored.reading),
   };
 }
 
@@ -234,7 +277,31 @@ export function recordFinished(value: Observations, key: string, at: number): Ob
   const entry: Finish = before
     ? { first: before.first, last: at, times: before.times + 1 }
     : { first: at, last: at, times: 1 };
-  return { ...value, finished: { ...value.finished, [key]: entry } };
+  // A finish ends the "in the middle of reading" state — see `reading`.
+  const reading = { ...value.reading };
+  delete reading[key];
+  return { ...value, finished: { ...value.finished, [key]: entry }, reading };
+}
+
+/**
+ * Somebody left a lesson partway through.
+ *
+ * `furthest` only rises: scrolling back up before leaving does not un-read
+ * the page. Finished lessons never record — a partial re-read of something
+ * done is not unfinished business, and letting it in would put "You were
+ * reading" on pages the reader has already been congratulated for.
+ */
+export function recordReading(
+  value: Observations,
+  key: string,
+  furthest: number,
+  at: number,
+): Observations {
+  if (value.finished[key]) return value;
+  const before = value.reading[key];
+  const deepest = Math.min(1, Math.max(before?.furthest ?? 0, furthest));
+  if (deepest <= 0) return value;
+  return { ...value, reading: { ...value.reading, [key]: { furthest: deepest, at } } };
 }
 
 export function recordSitting(value: Observations, id: string, at: number): Observations {

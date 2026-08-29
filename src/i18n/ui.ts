@@ -194,6 +194,7 @@ export const EN = {
   'today.away': 'You seem to be away from home',
   'today.lastThird': 'The last third of the night',
   'today.continue': 'Carry on where you were',
+  'today.reading': 'You were reading',
 
   /**
    * The Islamic months.
@@ -693,13 +694,19 @@ export const EN = {
     "Learning to…" would be worse than choosing the short form deliberately.
   */
   'journey.carryOn': 'Carry on where you left off',
-  'journey.short.start-here': 'Start',
+  /*
+    Not "Start" any more: since the stages sort by the reader's priorities,
+    this one can sit third, and a stage called Start in the middle of the row
+    is a contradiction drawn on screen. "Basics" is true in any position.
+    ("Foundations" was considered and does not fit under a 30px arch.)
+  */
+  'journey.short.start-here': 'Basics',
   'journey.short.first-days': 'First days',
   'journey.short.learning-to-pray': 'Prayer',
   'journey.short.living': 'Living',
   'journey.short.deepening': 'Deeper',
   'journey.short.through-the-year': 'The year',
-  'journey.stage.start-here': 'Start here',
+  'journey.stage.start-here': 'The basics',
   'journey.stage.start-here.help': 'What Islam is, and what you have joined.',
   'journey.stage.first-days': 'Your first days',
   'journey.stage.first-days.help': 'Enough to pray tonight.',

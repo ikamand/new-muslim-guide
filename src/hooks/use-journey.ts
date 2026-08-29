@@ -2,8 +2,7 @@ import { useMemo } from 'react';
 
 import { resolveRef, type CatalogEntry } from '@/content';
 import {
-  entryStageIndex,
-  JOURNEY,
+  orderedStages,
   stepKey,
   type JourneyStep,
   type Stage,
@@ -66,15 +65,11 @@ export type JourneyState = {
  *
  * ## What "next" means
  *
- * The first unfinished step at or after the reader's entry stage, and only then
- * the first unfinished step anywhere. Onboarding decides the entry stage — see
- * `entryStageIndex` — so someone who said they wanted help with prayer is
- * offered the stage that gets them praying tonight rather than being marched
- * back to "What is Islam?" every time they open the app.
- *
- * The earlier stages are not skipped, hidden or marked done. Once the reader
- * finishes everything from their entry stage on, `next` falls back to whatever
- * they passed over, and the count has always been over the whole journey.
+ * The first unfinished step in the reader's OWN stage order — see
+ * `orderedStages`, which is where onboarding's answer becomes a sequence.
+ * There is no entry pointer and no skipping: the stages simply come in the
+ * order this reader should meet them, so "next" is one rule with no special
+ * case, and the arch strip's star always sits on the first unfinished arch.
  *
  * Home and the journey screen both read this, so the two cannot offer different
  * "continue" lessons — which they would the moment either kept its own rule.
@@ -107,20 +102,19 @@ export function useJourney(): JourneyState {
       };
     };
 
-    const stages = JOURNEY.map(resolve);
+    const stages = orderedStages(confidence).map(resolve);
 
     // Counted over distinct lessons: Al-Fatihah and Fajr each appear in two
     // stages, and counting them twice would make the total unreachable.
+    // Built over the READER'S order, so `after` walks their path, not the
+    // universal one.
     const seen = new Map<string, ResolvedStep>();
     for (const stage of stages) {
       for (const step of stage.steps) if (!seen.has(step.key)) seen.set(step.key, step);
     }
     const distinct = [...seen.values()];
 
-    const entry = entryStageIndex(confidence);
-    const fromEntry = stages.findIndex((stage, index) => index >= entry && stage.next);
-    const anywhere = stages.findIndex((stage) => stage.next);
-    const nextStageIndex = fromEntry === -1 ? anywhere : fromEntry;
+    const nextStageIndex = stages.findIndex((stage) => stage.next);
 
     /*
       Ordered over the whole journey, with the duplicates collapsed to their

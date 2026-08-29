@@ -10,6 +10,7 @@ import { useLocale } from '@/hooks/use-locale';
 import { useObservations } from '@/hooks/use-observations';
 import { useLocation } from '@/hooks/use-location';
 import { usePrayerTimes } from '@/hooks/use-prayer-times';
+import { useReadingInProgress } from '@/hooks/use-reading';
 import { useSettings } from '@/hooks/use-settings';
 import { localiseCatalogEntry } from '@/i18n/localise';
 import type { UIKey } from '@/i18n/ui';
@@ -88,6 +89,7 @@ export function useToday(): TodayItem | undefined {
   const { today } = usePrayerTimes();
   const { home, awaySince, setMany } = useSettings();
   const { firsts } = useObservations();
+  const reading = useReadingInProgress();
 
   /*
     Home follows a long stay, never the last fix. Written from an effect
@@ -248,7 +250,24 @@ export function useToday(): TodayItem | undefined {
     }
 
     /*
-      5. The lesson. Last, because it has no deadline — which is exactly why it
+      5. Something left half-read. Ahead of the journey's next lesson because
+      a book somebody is midway through beats one they have not opened — and
+      this is the slot that is allowed to notice what they were doing, so the
+      library on Learn never has to move a card to say it.
+    */
+    if (reading) {
+      return {
+        key: reading.key,
+        reason: 'today.reading',
+        title: reading.entry.title,
+        description: reading.entry.shortDescription,
+        minutes: reading.entry.meta?.estimatedMinutes,
+        href: routeFor(reading.entry),
+      };
+    }
+
+    /*
+      6. The lesson. Last, because it has no deadline — which is exactly why it
       should never have been a permanent card above the prayer times.
     */
     if (next) {
@@ -263,5 +282,5 @@ export function useToday(): TodayItem | undefined {
     }
 
     return undefined;
-  }, [hijri, next, locale, coords, home, today, firsts, t]);
+  }, [hijri, next, reading, locale, coords, home, today, firsts, t]);
 }

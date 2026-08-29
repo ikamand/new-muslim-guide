@@ -1,3 +1,5 @@
+import type { PrayerConfidence } from '@/lib/onboarding';
+
 import { ADHAN } from './adhan';
 import { A_PARTNER_ALREADY } from './a-partner-already';
 import { AL_FATIHAH } from './al-fatihah';
@@ -264,6 +266,27 @@ export const TOPIC_GROUPS: readonly { id: TopicGroupId; topics: readonly Content
     ],
   },
 ];
+
+/**
+ * The order the groups come in, given what the reader can already do.
+ *
+ * The same idea as `STAGE_ORDER` in `journey.ts`, applied to the Learn tab:
+ * onboarding's answer defines priority, so the group somebody should be in
+ * NOW leads the page. Every group is always present — this sorts shelves, it
+ * does not hide books — and it re-sorts only when confidence moves, which is
+ * a slow signal (an answered question, or `lib/competence.ts` watching them
+ * pray). Never on a tap: a page that reshuffles under a reader's hand is not
+ * smart, it is unfindable.
+ *
+ * The two learner answers share one order, because both are still learning
+ * to pray and "Praying" is their now. `on-my-own` is past the mechanics, so
+ * daily life leads and the prayer reference moves to the end of the shelf.
+ */
+export const GROUP_ORDER: Record<PrayerConfidence, readonly TopicGroupId[]> = {
+  'teach-me': ['praying', 'believe', 'world', 'hard', 'year'],
+  'need-words': ['praying', 'believe', 'world', 'hard', 'year'],
+  'on-my-own': ['world', 'believe', 'hard', 'year', 'praying'],
+};
 
 /**
  * Anything that should be on the Learn tab and is in no group.

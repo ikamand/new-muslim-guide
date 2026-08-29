@@ -148,38 +148,70 @@ export const JOURNEY: readonly Stage[] = [
 ];
 
 /**
- * Where the journey opens for someone, given what onboarding heard.
+ * The order the stages come in, given what onboarding heard.
  *
- * Not a gate and not a skip: every stage stays open, and nothing before the
- * entry point is marked done or hidden. It only decides which stage the app
- * *offers* first, because pointing somebody who cannot pray yet at "What is
- * Islam?" is answering a question they did not ask.
+ * This replaced an entry POINTER on 29 Aug, at Iyad's instruction. The
+ * pointer kept one universal order on screen and starred a stage in the
+ * middle of it, which read as "you skipped something" — the app's own owner
+ * asked why. What the answer actually defines is priority, so priority is
+ * what the stages now do: every stage is present, every stage completable,
+ * and the sequence is the reader's own. The star is always on the first
+ * unfinished arch, and the picture cannot lie.
  *
  * ## Keyed on praying, not on interest
  *
- * It used to read `initialInterest` — "what do you want help with first",
- * one of five categories somebody picked in their first minute. Phase 7
- * retired that question for a fact instead, and the fact turns out to be the
- * better key anyway: where the journey should open is a question about what
- * somebody can already DO, and "can you pray on your own yet" is exactly that.
+ * "Can you pray on your own yet" is a fact about what somebody can DO, and
+ * it is raised by observation — see `lib/competence.ts` — so the order moves
+ * forward on its own as the app watches them pray. It changes on that slow
+ * signal only, never on a tap: a syllabus that reshuffles itself daily is
+ * not smart, it is unfindable.
  *
- * The old question could never be revisited. This one is raised by observation
- * — see `lib/competence.ts` — so somebody who has since learned to pray moves
- * forward without anyone asking them again.
+ * The reasoning per answer:
+ * - `teach-me` cannot pray tonight, so the doing comes first and the
+ *   syllabus about it after.
+ * - `need-words` prays but is carrying the words uncertainly — the prayer
+ *   texts first, the first-days guides to backfill, then the rest.
+ * - `on-my-own` is past the mechanics: daily life first, then depth, then
+ *   the year every practising Muslim meets (zakat, Ramadan), with the
+ *   how-to-pray stages last as reference rather than curriculum.
  */
-const ENTRY_BY_CONFIDENCE: Record<PrayerConfidence, StageId> = {
-  /* Enough to pray tonight: the stage, not the syllabus about it. */
-  'teach-me': 'first-days',
-  'need-words': 'learning-to-pray',
-  /* Somebody who prays already is past the mechanics. */
-  'on-my-own': 'living',
+const STAGE_ORDER: Record<PrayerConfidence, readonly StageId[]> = {
+  'teach-me': [
+    'first-days',
+    'learning-to-pray',
+    'start-here',
+    'living',
+    'deepening',
+    'through-the-year',
+  ],
+  'need-words': [
+    'learning-to-pray',
+    'first-days',
+    'start-here',
+    'living',
+    'deepening',
+    'through-the-year',
+  ],
+  'on-my-own': [
+    'living',
+    'deepening',
+    'through-the-year',
+    'start-here',
+    'learning-to-pray',
+    'first-days',
+  ],
 };
 
-/** Index into `JOURNEY`. Zero for anyone who skipped or answered nothing. */
-export function entryStageIndex(confidence: PrayerConfidence | null): number {
-  const id = confidence && ENTRY_BY_CONFIDENCE[confidence];
-  const found = id ? JOURNEY.findIndex((entry) => entry.id === id) : -1;
-  return found === -1 ? 0 : found;
+/**
+ * The journey's stages, in this reader's order. Someone who skipped
+ * onboarding gets the teach-me order — the same seed `lib/competence.ts`
+ * uses, because a guide for new Muslims should assume its reader is new.
+ */
+export function orderedStages(confidence: PrayerConfidence | null): readonly Stage[] {
+  const order = STAGE_ORDER[confidence ?? 'teach-me'];
+  return order
+    .map((id) => JOURNEY.find((stage) => stage.id === id))
+    .filter((stage): stage is Stage => stage !== undefined);
 }
 
 /** A stable key for progress, unique across kinds. */

@@ -119,7 +119,7 @@ const CLAIMS = [
   */
   ['src/app/ask.tsx', 44, 'I farted'],
   ['src/content/model.ts', 182, 'export type ScholarlyPosition'],
-  ['src/i18n/ui.ts', 372, 'quran.tapToHide'],
+  ['src/i18n/ui.ts', 380, 'quran.tapToHide'],
   ['src/content/references.ts', 522, 'Friday midday is the busiest hour'],
   ['src/content/references.ts', 565, 'join the line where you are'],
   ['src/content/learn/halal-and-haram.ts', 38, 'Do I need permission for ordinary things?'],

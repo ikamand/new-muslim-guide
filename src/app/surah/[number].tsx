@@ -11,6 +11,7 @@ import { getReciter, reciterCredit } from '@/content/quran/recitation';
 import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { useMemorised } from '@/hooks/use-memorised';
+import { useObservations } from '@/hooks/use-observations';
 import { useSettings } from '@/hooks/use-settings';
 import { useTheme } from '@/hooks/use-theme';
 
@@ -84,6 +85,7 @@ export default function SurahScreen() {
   const { transliteration, translation, reciter: reciterId } = useSettings();
   const { number } = useLocalSearchParams<{ number: string }>();
   const { isMemorised, toggle } = useMemorised();
+  const { surahDone } = useObservations();
 
   const surah = getSurah(Number(number));
   const reciter = getReciter(reciterId);
@@ -317,10 +319,27 @@ export default function SurahScreen() {
     playlist.play();
   };
 
+  /*
+    Covering every ayah is somebody reciting the whole surah from memory.
+
+    That is the one honest signal this screen produces. Marking a surah
+    "memorised" is a claim; covering all of it and working through is the act
+    itself, and it is what `observations.surahs` needs so the Qur'an tab can
+    offer back whichever surah has gone longest without being recited.
+
+    Recorded on the last one to be covered rather than on some later
+    completion, because there is no later completion — the reader reveals them
+    again as they check, and a moment when all of them were hidden is the only
+    moment the whole surah was held at once.
+  */
   const cover = (ayah: number) =>
-    setHidden((current) =>
-      current.includes(ayah) ? current.filter((n) => n !== ayah) : [...current, ayah],
-    );
+    setHidden((current) => {
+      const next = current.includes(ayah)
+        ? current.filter((n) => n !== ayah)
+        : [...current, ayah];
+      if (next.length === surah.ayahs.length) surahDone(surah.number);
+      return next;
+    });
 
   return (
     <ScrollView ref={scroller} contentContainerStyle={styles.content}>

@@ -1,3 +1,4 @@
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -8,6 +9,8 @@ import { LEARNING_ORDER } from '@/content/quran/surahs';
 import { BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { useMemorised } from '@/hooks/use-memorised';
+import { useObservations } from '@/hooks/use-observations';
+import { reviewFor } from '@/lib/review';
 import { useTheme } from '@/hooks/use-theme';
 
 /**
@@ -43,7 +46,10 @@ import { useTheme } from '@/hooks/use-theme';
 export default function QuranScreen() {
   const theme = useTheme();
   const { t } = useLocale();
-  const { isMemorised, count } = useMemorised();
+  const { isMemorised, memorised, count } = useMemorised();
+  const observations = useObservations();
+  const review = reviewFor(memorised, observations);
+  const reviewSurah = review ? LEARNING_ORDER.find((s) => s.number === review.surah) : undefined;
 
   return (
     <SafeAreaView style={[styles.safeArea, { backgroundColor: theme.background }]} edges={['top']}>
@@ -75,6 +81,44 @@ export default function QuranScreen() {
             </ThemedText>
           </View>
         </View>
+
+        {/*
+          One surah worth reciting again — and never a queue.
+
+          `lib/review.ts` explains the whole design: the schedule is invisible,
+          the slot is always filled and never late, and the sentence is about
+          the surah rather than about the reader. This screen must never grow a
+          count of what is "due"; that is a backlog, and a backlog is a streak
+          wearing different clothes.
+        */}
+        {review ? (
+          <PressableLink
+            href={{ pathname: '/surah/[number]', params: { number: String(review.surah) } }}
+            accessibilityLabel={`${t('quran.review.kicker')}: ${reviewSurah?.name ?? ''}`}
+            style={[
+              styles.review,
+              { backgroundColor: theme.backgroundElement, borderColor: theme.accent },
+            ]}
+            pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
+            {/*
+              The accent border and the chevron are the same pair the surah
+              rows already use for "known", reused rather than invented: this
+              card is the only thing on the screen asking to be tapped, and
+              with a hairline border in `theme.border` it read as a second
+              progress card sitting under the first one.
+            */}
+            <View style={styles.reviewText}>
+              <ThemedText type="caption" themeColor="accent" style={styles.kicker}>
+                {t('quran.review.kicker')}
+              </ThemedText>
+              <ThemedText type="cardTitle">{reviewSurah?.name}</ThemedText>
+              <ThemedText type="small" themeColor="textSecondary">
+                {t(review.neverRecited ? 'quran.review.never' : 'quran.review.stale')}
+              </ThemedText>
+            </View>
+            <Ionicons name="chevron-forward" size={18} color={theme.textSecondary} />
+          </PressableLink>
+        ) : null}
 
         <View style={styles.list}>
           {LEARNING_ORDER.map((surah) => {
@@ -147,6 +191,16 @@ const styles = StyleSheet.create({
     gap: Spacing.two,
     paddingTop: Spacing.four,
   },
+  review: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.three,
+    padding: Spacing.three,
+    borderRadius: Radius.medium,
+    borderWidth: StyleSheet.hairlineWidth,
+  },
+  reviewText: { flex: 1, gap: Spacing.one },
+  kicker: { textTransform: 'uppercase', letterSpacing: 1 },
   progress: {
     borderRadius: Radius.medium,
     borderWidth: StyleSheet.hairlineWidth,

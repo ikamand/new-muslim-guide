@@ -132,6 +132,14 @@ export const EN = {
     Zakat. Every string here is written to describe a WORKING-OUT rather than
     a ruling — see `lib/zakat.ts`. Nothing in this block says "you owe".
   */
+  /*
+    Review. Every string here is about a SURAH, never about the reader — see
+    `lib/review.ts`. There is no count, no "due", and nothing that could be
+    read as the app noticing you had been away.
+  */
+  'quran.review.kicker': 'Worth reciting again',
+  'quran.review.stale': 'It has been a while since you recited this one.',
+  'quran.review.never': 'You have marked this one, but not recited it here yet.',
   'zakat.title': 'Working out zakat',
   'zakat.intro': 'Zakat is 2.5% of the wealth you have held for a lunar year, once it passes a threshold. This works out the sum for the three things nobody disputes. It is not a ruling on what you owe.',
   'zakat.currency': 'Currency',

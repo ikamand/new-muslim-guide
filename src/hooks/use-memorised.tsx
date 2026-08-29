@@ -25,6 +25,8 @@ const STORAGE_KEY = 'memorised-surahs';
 
 type MemorisedContext = {
   isMemorised: (surah: number) => boolean;
+  /** Every surah marked, so review can order them. */
+  memorised: readonly number[];
   toggle: (surah: number) => void;
   count: number;
   /** False until the stored set has been read. */
@@ -78,6 +80,7 @@ export function MemorisedProvider({ children }: { children: ReactNode }) {
   const value = useMemo<MemorisedContext>(
     () => ({
       isMemorised: (surah: number) => surahs.includes(surah),
+      memorised: surahs,
       toggle,
       count: surahs.length,
       loaded,

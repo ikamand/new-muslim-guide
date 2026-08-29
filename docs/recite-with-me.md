@@ -162,6 +162,32 @@ beginner recording has a measured rate and a stall map.
   it converts, transcribes and aligns every file and prints the transcript,
   the advanced count and the stall map per recording.
 
+### Measured 29 Aug, evening — the first real recording, two requirements out of it
+
+Iyad's own recitation, 26 s, recorded in the macOS Voice Memos app on this
+machine's mic — the first human audio through the pipeline.
+
+- **The model heard him nearly perfectly.** The transcript is ayahs 2–7,
+  clean but for word-boundary artifacts (مَا لِكِ split; نَسْتَعِينَاهُ اهْدِنَ
+  merged by liaison).
+- **The first aligner scored it 0/29.** The recording begins at الحمد — no
+  audible basmala, a legitimate way to begin — and word five sits exactly one
+  past a 4-word window anchored on بسم. A near-perfect transcript, zero
+  tracking, forever. **Requirement: cold-start acquisition** — until the
+  first word locks, the window is wide (8 here); after it, narrow. With that
+  one change: **18/29 (62%), tracked to the final word, recovering at every
+  stumble** — and silence, English and the Husary baseline all unchanged.
+- **What the 18/29 honestly means.** Four of the eleven misses are the
+  unrecited basmala and two are ayah 3, absent from the transcript (skipped
+  or dropped — only the reciter knows). The rest are **boundary
+  splits/merges**, the dominant loss mode in both human takes so far: the
+  highlight *skips past* those words and re-locks; it never freezes.
+  **Requirement for Phase 3: the matcher must tolerate token↔word boundary
+  mismatch in both directions** — one token spanning two reference words
+  (liaison) and one word arriving as two tokens.
+- Still open: the deliberately-beginner and struggling takes, which are the
+  registers the gate actually decides on.
+
 ### Measured 29 Aug, later — three adversarial probes, and a design lesson
 
 Probes the machine could make without a human: ten seconds of silence, an

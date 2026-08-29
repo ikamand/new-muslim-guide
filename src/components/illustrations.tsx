@@ -1076,7 +1076,9 @@ export type GlyphName =
   | 'arrogance'
   | 'envy'
   | 'voluntary-fasting'
-  | 'eid';
+  | 'eid'
+  // The house itself — the qibla screen's mark, riding the arrow's tip.
+  | 'kaaba';
 
 /**
  * The card marks.
@@ -1612,6 +1614,15 @@ export function Glyph({ name, color, size = 22 }: { name: GlyphName; color: stri
       {name === 'eid' && (
         <G {...stroke}>
           <Path d={khatim(12, 12, 8.5, 4.5)} />
+        </G>
+      )}
+
+      {/* The Kaʿbah: the cube, the band of the kiswah, the raised door. */}
+      {name === 'kaaba' && (
+        <G {...stroke}>
+          <Path d="M4.5 5.5h15v14h-15z" />
+          <Path d="M4.5 9.25h15" />
+          <Path d="M14 19.5v-4a1.8 1.8 0 0 1 3.6 0v4" strokeWidth={1.3} />
         </G>
       )}
     </Svg>

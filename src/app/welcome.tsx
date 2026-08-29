@@ -2,11 +2,13 @@ import { useRouter } from 'expo-router';
 import { useCallback, useEffect, useState } from 'react';
 import { BackHandler, Platform, StyleSheet, View } from 'react-native';
 
+import { MihrabArch } from '@/components/illustrations';
 import { ChoiceCard } from '@/components/onboarding/choice-card';
 import { StepFrame } from '@/components/onboarding/step-frame';
 import { ThemedText } from '@/components/themed-text';
 import { Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
+import { useTheme } from '@/hooks/use-theme';
 import { CONTENT_DICTS } from '@/i18n/content';
 import { LOCALE_NAMES, LOCALES, SOURCE_LOCALE } from '@/i18n/locales';
 import { useSettings } from '@/hooks/use-settings';
@@ -73,6 +75,7 @@ function isPartial(locale: (typeof LOCALES)[number]): boolean {
 
 export default function WelcomeScreen() {
   const router = useRouter();
+  const theme = useTheme();
   const { locale, setLocale, t } = useLocale();
   const { setMany, onboarded, shahadaState, prayerConfidence } = useSettings();
 
@@ -188,6 +191,17 @@ export default function WelcomeScreen() {
         onContinue={next}
         continueLabel={t('onboarding.welcome.cta')}
         contentStyle={styles.centred}>
+        {/*
+          The app's own architecture, on its front door. This screen was three
+          short lines floating in an empty frame — the one screen every single
+          person sees carried none of the identity the rest of the app has.
+          The arch is the mihrab from the prayer card, drawn a little firmer
+          than its usual whisper because here it is the picture, not the
+          backdrop.
+        */}
+        <View style={styles.arch} accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
+          <MihrabArch color={theme.accent} width={216} opacity={0.4} />
+        </View>
         <View style={styles.prose}>
           <ThemedText type="lead">
             {t('onboarding.welcome.body1')}
@@ -291,6 +305,13 @@ const styles = StyleSheet.create({
   },
   prose: {
     gap: Spacing.three,
+  },
+  /*
+    The arch's own SVG ends where the wall would meet the floor, so the prose
+    below it reads as standing inside the niche rather than under a picture.
+  */
+  arch: {
+    alignItems: 'center',
   },
   options: {
     gap: Spacing.two,

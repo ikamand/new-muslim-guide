@@ -271,7 +271,7 @@ export const EN = {
   */
   'qibla.bearing': '{deg}° from north',
   'qibla.where': 'The Kaʿbah is {point} of you. If the arrow is jumping about, face that way using anything you trust — a map, the sun, a neighbour.',
-  'qibla.needLocation': 'The qibla is worked out from where you are, so it needs your location. You can turn that on from the prayer times on the home screen.',
+  'qibla.needLocation': 'The qibla is worked out from where you are, so it needs your location. It is used on this device and never sent anywhere.',
   'qibla.locating': 'Finding your location…',
   'qibla.noCompass': 'This phone isn’t reporting a compass heading, so the arrow is pointing at the raw bearing rather than at the Kaʿbah. Use the number above.',
   'qibla.unsure': 'The compass isn’t confident right now. Move away from anything metal or electrical and turn the phone in a figure of eight to settle it.',
@@ -612,7 +612,12 @@ export const EN = {
   'onboarding.selected': 'Selected',
 
   'onboarding.welcome.title': 'Welcome',
-  'onboarding.welcome.body1': 'Welcome to Islam.',
+  /*
+    Not "Welcome to Islam" under a title that already says Welcome — and the
+    greeting is the better first sentence anyway: it is the first thing anyone
+    will actually say to them, taught by being said.
+  */
+  'onboarding.welcome.body1': 'Assalamu alaikum — peace be upon you.',
   'onboarding.welcome.body2': 'You don’t need to learn everything today.',
   'onboarding.welcome.body3': 'We’ll take it one step at a time.',
   'onboarding.welcome.cta': 'Let’s get started',

@@ -3,6 +3,7 @@ import { Stack } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 
+import { Glyph } from '@/components/illustrations';
 import { ThemedText } from '@/components/themed-text';
 import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
@@ -100,12 +101,37 @@ export default function QiblaScreen() {
   }, [coords]);
 
   if (!coords) {
+    /*
+      The one screen in the app that is nothing but the location, so the ask
+      lives here — it used to send people to a different tab to grant it,
+      which is a button's job. While the answer is still coming, say so and
+      offer nothing to press.
+    */
+    const waiting = status === 'locating' || status === 'ready';
+
     return (
-      <ScrollView contentContainerStyle={styles.content}>
+      <ScrollView contentContainerStyle={[styles.content, styles.empty]}>
         <Stack.Screen options={{ title: t('qibla.title') }} />
-        <ThemedText type="default" themeColor="textSecondary">
-          {status === 'denied' ? t('qibla.needLocation') : t('qibla.locating')}
+        <View style={[styles.emptyMark, { backgroundColor: theme.accentMuted }]}>
+          <Glyph name="kaaba" color={theme.accent} size={30} />
+        </View>
+        <ThemedText type="default" themeColor="textSecondary" style={styles.emptyBody}>
+          {waiting ? t('qibla.locating') : t('qibla.needLocation')}
         </ThemedText>
+        {!waiting && (
+          <Pressable
+            onPress={() => void request()}
+            accessibilityRole="button"
+            accessibilityLabel={t('times.useLocation')}
+            style={({ pressed }) => [
+              styles.grant,
+              { backgroundColor: theme.accent, opacity: pressed ? 0.85 : 1 },
+            ]}>
+            <ThemedText type="smallBold" themeColor="textOnAccent">
+              {t('times.useLocation')}
+            </ThemedText>
+          </Pressable>
+        )}
       </ScrollView>
     );
   }
@@ -168,6 +194,14 @@ export default function QiblaScreen() {
         <View style={[styles.needle, { transform: [{ rotate: `${rotation}deg` }] }]}>
           <View style={[styles.needleStem, { backgroundColor: theme.border }]} />
           <View style={[styles.needleHead, { borderBottomColor: theme.accent }]} />
+          {/*
+            The Kaʿbah rides the arrow's tip, counter-rotated so the house
+            stays upright while the arrow swings — the arrow does not point
+            somewhere abstract, it points at a building.
+          */}
+          <View style={[styles.needleKaaba, { transform: [{ rotate: `${-rotation}deg` }] }]}>
+            <Glyph name="kaaba" color={theme.accent} size={22} />
+          </View>
         </View>
         <View style={[styles.hub, { backgroundColor: theme.accent }]} />
       </View>
@@ -231,6 +265,33 @@ const styles = StyleSheet.create({
     borderBottomWidth: 22,
     borderLeftColor: 'transparent',
     borderRightColor: 'transparent',
+  },
+  needleKaaba: {
+    position: 'absolute',
+    top: 8,
+  },
+  empty: {
+    flexGrow: 1,
+    justifyContent: 'center',
+    gap: Spacing.three,
+  },
+  emptyMark: {
+    width: 56,
+    height: 56,
+    borderRadius: Radius.medium,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  emptyBody: {
+    textAlign: 'center',
+    maxWidth: 300,
+  },
+  grant: {
+    minHeight: 48,
+    paddingHorizontal: Spacing.four,
+    borderRadius: Radius.small,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   hub: {
     width: 12,

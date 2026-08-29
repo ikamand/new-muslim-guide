@@ -791,10 +791,28 @@ talk), **Bukhari 881** and **929** (washing, and coming early), **Bukhari 636**
 which is agreed. It does not enumerate travel or illness — those have
 conditions on them and the app has no page for them yet.
 
-**Still to do: the pilot of two, then the remaining six.** Praying behind an
-imam · death and janāzah · Eid · voluntary fasting · marriage in shape · a
-partner you already have · when you slip for a month · being corrected by other
-Muslims.
+**Pilot of two done 28 Aug 2026** — *When someone dies* and *If you stopped for
+a while*, picked to be as unalike as the list allows: one is an event you are
+taken to with no idea what to do, in a room where everybody else seems to know;
+the other has nobody present at all. 38 teaching pages, 0 failures, 0 warnings.
+
+- **When someone dies** teaches the SHAPE and almost no rulings — washing and
+  shrouding, inheritance, and what a non-Muslim family's rite permits all have
+  conditions on them and are left to somebody who knows the situation. What it
+  answers is what is about to happen and what to do with your hands. Qur'an
+  2:156, **Bukhari 1325**. Four takbīrs standing, without rukūʿ or sujūd, is
+  marked `agreed`.
+- **If you stopped for a while** is deliberately NOT `repentance.ts`, which
+  already covers the theology well. This is the shape of a convert relapse and
+  the question underneath it — whether coming back means starting again — which
+  the other page never had reason to ask. Qur'an 39:53, **Bukhari 6307**.
+  ⚠️ Tirmidhi 2499 ("the best of the sinners are the repentant") was checked
+  and NOT used: two of the corpus's three graders call it hasan and the third
+  daif. Bukhari 6307 says something stronger and is not disputed.
+
+**Still to do: the remaining six.** Praying behind an imam · Eid · voluntary
+fasting · marriage in shape · a partner you already have · being corrected by
+other Muslims.
 **Ships via** OTA.
 
 ### Phase 12 — Zakat, with a dated nisab

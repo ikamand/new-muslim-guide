@@ -5,22 +5,22 @@
  * here is lost the next time it runs, and one that needs making belongs
  * upstream, where the text is published.
  *
- * 94 Qur'an passages and 119 narrations. Every character came over
+ * 94 Qur'an passages and 121 narrations. Every character came over
  * the wire from a published text rather than from memory, which is the only
  * way a file like this could exist under this project's rules about Arabic.
  *
  * ## Where each line came from
  *
  * No one source has all of it, so each field is taken from the first that
- * does, and says so on the text itself. Of the 119 narrations here:
- * 57 were confirmed against a second, separately edited publisher;
- * 48 carry HadeethEnc's own translation, 71 carry Darussalam's, and
+ * does, and says so on the text itself. Of the 121 narrations here:
+ * 58 were confirmed against a second, separately edited publisher;
+ * 49 carry HadeethEnc's own translation, 72 carry Darussalam's, and
  * 0 have Arabic and no translation at all.
  *
  * ⚠️ **The Darussalam translations are not ours to relicense.** They reach
  * this file through a public-domain dedication that covers the compiler's work
  * and not the translation inside it. What makes that defensible here is scale
- * and purpose — 71 narrations out of some thirty thousand, each quoted under
+ * and purpose — 72 narrations out of some thirty thousand, each quoted under
  * the instruction it supports, in an app that is free and never sold. It is a
  * quotation, not a republication, and it is Iyad's decision on the record.
  *
@@ -145,6 +145,12 @@ export const QURAN_TEXT: Record<string, EvidenceText> = {
   "62:9": {
     "arabic": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوٓاْ إِذَا نُودِيَ لِلصَّلَوٰةِ مِن يَوۡمِ ٱلۡجُمُعَةِ فَٱسۡعَوۡاْ إِلَىٰ ذِكۡرِ ٱللَّهِ وَذَرُواْ ٱلۡبَيۡعَۚ ذَٰلِكُمۡ خَيۡرٞ لَّكُمۡ إِن كُنتُمۡ تَعۡلَمُونَ",
     "translation": "O you who have believed, when [the adhān] is called for the prayer on the day of Jumuʿah [Friday], then proceed to the remembrance of Allāh and leave trade. That is better for you, if you only knew.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "2:156": {
+    "arabic": "ٱلَّذِينَ إِذَآ أَصَٰبَتۡهُم مُّصِيبَةٞ قَالُوٓاْ إِنَّا لِلَّهِ وَإِنَّآ إِلَيۡهِ رَٰجِعُونَ",
+    "translation": "Who, when disaster strikes them, say, \"Indeed we belong to Allāh, and indeed to Him we will return.\"",
     "arabicFrom": "QuranEnc.com",
     "translationFrom": "QuranEnc.com"
   },
@@ -397,12 +403,6 @@ export const QURAN_TEXT: Record<string, EvidenceText> = {
   "4:86": {
     "arabic": "وَإِذَا حُيِّيتُم بِتَحِيَّةٖ فَحَيُّواْ بِأَحۡسَنَ مِنۡهَآ أَوۡ رُدُّوهَآۗ إِنَّ ٱللَّهَ كَانَ عَلَىٰ كُلِّ شَيۡءٍ حَسِيبًا",
     "translation": "And when you are greeted with a greeting, greet [in return] with one better than it or [at least] return it [in a like manner]. Indeed Allāh is ever, over all things, an Accountant.",
-    "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
-  },
-  "2:156": {
-    "arabic": "ٱلَّذِينَ إِذَآ أَصَٰبَتۡهُم مُّصِيبَةٞ قَالُوٓاْ إِنَّا لِلَّهِ وَإِنَّآ إِلَيۡهِ رَٰجِعُونَ",
-    "translation": "Who, when disaster strikes them, say, \"Indeed we belong to Allāh, and indeed to Him we will return.\"",
     "arabicFrom": "QuranEnc.com",
     "translationFrom": "QuranEnc.com"
   },
@@ -1050,6 +1050,20 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
     "translation": "Narrated Abu Huraira:The Prophet (ﷺ) said, \"When you hear the Iqama, proceed to offer the prayer with calmness and solemnity and do not make haste. And pray whatever you are able to pray and complete whatever you have missed",
     "arabicFrom": "fawazahmed0/hadith-api",
     "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:1325": {
+    "arabic": "حَدَّثَنَا عَبْدُ اللَّهِ بْنُ مَسْلَمَةَ، قَالَ قَرَأْتُ عَلَى ابْنِ أَبِي ذِئْبٍ عَنْ سَعِيدِ بْنِ أَبِي سَعِيدٍ الْمَقْبُرِيِّ، عَنْ أَبِيهِ، أَنَّهُ سَأَلَ أَبَا هُرَيْرَةَ ـ رضى الله عنه ـ فَقَالَ سَمِعْتُ النَّبِيَّ صلى الله عليه وسلم‏.‏ حَدَّثَنَا أَحْمَدُ بْنُ شَبِيبِ بْنِ سَعِيدٍ، قَالَ حَدَّثَنِي أَبِي، حَدَّثَنَا يُونُسُ، قَالَ ابْنُ شِهَابٍ وَحَدَّثَنِي عَبْدُ الرَّحْمَنِ الأَعْرَجُ، أَنَّ أَبَا هُرَيْرَةَ ـ رضى الله عنه ـ قَالَ قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏\"‏ مَنْ شَهِدَ الْجَنَازَةَ حَتَّى يُصَلِّيَ عَلَيْهَا فَلَهُ قِيرَاطٌ، وَمَنْ شَهِدَ حَتَّى تُدْفَنَ كَانَ لَهُ قِيرَاطَانِ ‏\"‏‏.‏ قِيلَ وَمَا الْقِيرَاطَانِ قَالَ ‏\"‏ مِثْلُ الْجَبَلَيْنِ الْعَظِيمَيْنِ ‏\"‏‏.‏",
+    "translation": "Narrated Abu Huraira:that Allah's Messenger (ﷺ) said, \"Whoever attends the funeral procession till he offers the funeral prayer for it, will get a reward equal to one Qirat, and whoever accompanies it till burial, will get a reward equal to two Qirats.\" It was asked, \"What are two Qirats?\" He replied, \"Like two huge mountains",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:6307": {
+    "arabic": "عن أبي هريرة رضي الله عنه قال: سمعت رسول الله صلى الله عليه وسلم يقول: «وَاللهِ إني لأَسْتَغْفِرُ اللهَ وأَتُوبُ إليهِ في اليومِ أَكْثَرَ من سَبْعِينَ مَرَّةً».",
+    "translation": "Abu Hurayrah (may Allah be pleased with him) reported that he heard the Prophet (may Allah's peace and blessings be upon him) say: \"By Allah! I ask Allah for forgiveness and repent to Him more than seventy times a day.\"",
+    "attribution": "Narrated by Bukhari",
+    "grade": "Authentic hadith",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
   },
   "bukhari:3559": {
     "arabic": "عن عبد الله بن عمرو رضي الله عنهما قال: لَمْ يَكُنِ النَّبِيُّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ فَاحِشًا وَلَا مُتَفَحِّشًا، وَكَانَ يَقُولُ: «إِنَّ مِنْ خِيَارِكُمْ أَحْسَنَكُمْ أَخْلَاقًا».",

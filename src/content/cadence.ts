@@ -102,6 +102,9 @@ const REFERENCES: Readonly<Record<string, Cadence>> = {
   rulings: 'once',
   /* Weekly, and the calendar is the only trigger the app has for it. */
   jumuah: 'yearly',
+  /* Both invisible until they happen — nobody browses to either. */
+  janazah: 'on-event',
+  'if-you-stopped': 'on-event',
   'who-is-allah': 'once',
   'who-is-muhammad': 'once',
   'what-is-the-quran': 'once',

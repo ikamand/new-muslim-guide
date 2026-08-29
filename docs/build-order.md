@@ -867,6 +867,50 @@ that moves.*
 **Done when** the snapshot regenerates from a clean checkout with the key in the
 environment, no key appears anywhere in `src/` or in git, and the reviewer has
 cleared the threshold wording.
+**Done 28 Aug 2026, and there is no key.**
+
+⚠️ **islamicapi was not used.** ummahapi serves the same numbers with **no key
+at all** — 5,000 requests per fifteen minutes, which for a script run once a
+release is not a limit — so the whole §1.6 "get an API key, it never ships"
+problem disappears rather than being managed. `expansion-plan.md` §1.3 rejects
+ummahapi and that rejection stands where it was made: its HADITH api cites
+volume-and-page, so nothing can check it. A spot price is not a narration.
+
+⚠️ **It became a working-out, not just a threshold.** The plan said state a
+threshold and stop. It states both thresholds AND does the arithmetic for cash,
+gold and silver — the three categories nobody disputes — because 2.5% of a
+number the reader typed is multiplication, not a ruling. What it never does is
+say "you owe": the largest block on the screen is what it did NOT count, and
+that is not a disclaimer, it is the most important thing there.
+
+**The research, before a line was written:**
+
+- Rate 1/40 = 2.5% — **Abu Dawud 1572, 1573**. Nisab 200 dirhams / 5 awāq —
+  **Bukhari 1447, 1405**, authentic. Gold at 20 dinars — Abu Dawud 1573. Ḥawl
+  one lunar year — **Tirmidhi 631**.
+- ⚠️ **The gram figures are in no hadith.** 85g and 595g are modern conversions
+  (mithqāl 4.25g, dirham 2.975g); 87.48g / 612.36g is the classical reckoning.
+  Both ship, and the screen names which it uses.
+- ⚠️ **Zakat is due on the WHOLE amount above nisab, not the excess.** The
+  easiest error to make, and the screen says so explicitly.
+- ⚠️ **Not printed: the 2.577% solar-year adjustment.** Widely repeated; no
+  source could be opened stating it. A number that cannot be checked is worse
+  than no number.
+- ⚠️ **Left unanswered on purpose:** debts (Ibn Bāz says not deductible, others
+  differ), jewellery worn for use (no source could be opened stating the
+  positions, so the page does not assert one), and every modern category.
+
+**Ramadan promotion**, on Iyad's instruction — with a correction folded in.
+Zakat al-māl is **not** due before Eid; it falls due when a lunar year passes
+on the reader's own wealth, in whatever month that lands. The thing due before
+the Eid prayer is **zakat al-fitr**, which is different, small, fixed, and
+already covered at `learn/ramadan.ts:193`. So the Today slot surfaces the
+calculator during Ramadan because that is when most people choose to pay — and
+says exactly that rather than implying a deadline.
+
+**Nothing is stored.** What somebody has is the most private thing in the app;
+the figures live in component state and are written nowhere. **Nothing leaves
+the device** — verified with a route interceptor: zero external requests.
 **Ships via** OTA plus one new build script.
 
 ### Phase 13 — The tier-three collections

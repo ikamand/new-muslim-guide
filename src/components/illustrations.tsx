@@ -813,7 +813,8 @@ export type GlyphName =
   | 'adhan'
   | 'rulings'
   | 'your-name'
-  | 'life-before';
+  | 'life-before'
+  | 'zakat';
 
 /**
  * The card marks.
@@ -1063,6 +1064,14 @@ export function Glyph({ name, color, size = 22 }: { name: GlyphName; color: stri
           <Path d="M4 16h6" />
           <Path d="M14 8h6" />
           <Path d="M10 16 14 8" />
+        </G>
+      )}
+
+      {/* Zakat: a portion leaving a whole. A ring with one part set apart. */}
+      {name === 'zakat' && (
+        <G {...stroke}>
+          <Circle cx={12} cy={12} r={7.5} />
+          <Path d="M12 4.5v7.5l5.3 5.3" />
         </G>
       )}
 

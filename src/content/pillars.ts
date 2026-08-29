@@ -99,7 +99,7 @@ export const PILLARS: Pillar[] = [
     transliteration: 'Az-zakāh',
     summary: 'A yearly share of the wealth you have held onto, given to those entitled to it.',
     detail:
-      'Zakat is not a donation you choose to make. It is a portion of your savings that stops being yours. It applies only above a threshold, and only to wealth you have held for a full lunar year, so many people newly earning owe none at all. Whether it applies to you is worth asking someone locally rather than working out alone.',
+      'Zakat is not a donation you choose to make. It is a portion of your savings that stops being yours. It applies only above a threshold, and only to wealth you have held for a full lunar year, so many people newly earning owe none at all. The app can work out the sum for cash, gold and silver — but it counts nothing else, and whether it applies to you is still worth asking someone locally.',
     meta: {
       category: 'charity',
       difficulty: 'building',

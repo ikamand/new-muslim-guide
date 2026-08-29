@@ -4,6 +4,7 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { GirihBand, Glyph, StagePath, type GlyphName } from '@/components/illustrations';
+import { CURRENCIES } from '@/content/nisab';
 import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
 import { routeFor } from '@/lib/content-routes';
@@ -427,6 +428,23 @@ export default function LearnScreen() {
                 piece of content, so it is rendered here instead of resolving
                 through the catalogue like everything beside it.
               */}
+              {/*
+                The zakat working-out. A screen rather than a piece of content,
+                so it is rendered here like the prayer chooser above rather
+                than resolving through the catalogue.
+              */}
+              {group.id === 'year' && (
+                <LearnCard
+                  wide
+                  href="/zakat"
+                  title={t('zakat.title')}
+                  subtitle={t('zakat.open')}
+                  /* Currencies, because that is what the screen asks you to pick. */
+                  count={CURRENCIES.length}
+                  unit="zakat.currencies"
+                  glyph="zakat"
+                />
+              )}
               {group.id === 'praying' && (
                 <LearnCard
                   wide

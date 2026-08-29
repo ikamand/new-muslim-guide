@@ -90,18 +90,26 @@ const CLAIMS = [
     `docs/build-order.md` "What this removes" is the record that they existed.
   */
   ['scripts/content-audit.mjs', 32, 'pendingRecommendations'],
-  ['src/app/(tabs)/learn.tsx', 203, 'function ShahadaCard'],
-  ['src/app/(tabs)/learn.tsx', 204, "shahadaState === 'recently'"],
+  /*
+    Seven claims repointed 29 Aug 2026 after `30a8023` (priorities, and
+    remembering what you were reading) moved lines in three files, and after
+    `ENTRY_BY_CONFIDENCE` grew into `STAGE_ORDER` — the same claim, a bigger
+    shape: the confidence answer no longer picks an entry stage, it orders
+    the whole journey. The claim the documents make (onboarding's second
+    fact decides what comes first) is still true and still lives here.
+  */
+  ['src/app/(tabs)/learn.tsx', 241, 'function ShahadaCard'],
+  ['src/app/(tabs)/learn.tsx', 247, "shahadaState === 'recently'"],
   ['src/content/journey.ts', 38, 'export type Requirement'],
-  ['src/content/journey.ts', 170, 'ENTRY_BY_CONFIDENCE'],
-  ['src/content/journey.ts', 172, "'teach-me': 'first-days'"],
-  ['src/app/welcome.tsx', 216, 'continueDisabled={said === null}'],
-  ['src/app/welcome.tsx', 244, 'continueDisabled={prays === null}'],
+  ['src/content/journey.ts', 178, 'const STAGE_ORDER'],
+  ['src/content/journey.ts', 179, "'teach-me': ["],
+  ['src/app/welcome.tsx', 230, 'continueDisabled={said === null}'],
+  ['src/app/welcome.tsx', 258, 'continueDisabled={prays === null}'],
   ['src/app/welcome.tsx', 112, 'shahadaState: null'],
   ['src/hooks/use-help.ts', 120, 'const LEADING'],
   ['src/hooks/use-settings.tsx', 63, 'shahadaState: ShahadaState | null'],
   ['src/hooks/use-settings.tsx', 78, 'completedLessons: readonly string[]'],
-  ['src/app/guide/[id].tsx', 125, 'toggleLesson(key)'],
+  ['src/app/guide/[id].tsx', 146, 'toggleLesson(key)'],
   ['src/app/journey/[stage].tsx', 61, 'toggleLesson(step.key)'],
   ['src/app/(tabs)/index.tsx', 64, 'keeps a streak'],
   /*
@@ -273,7 +281,9 @@ const kindFiles = execSync(
 /* 9 → 11: `learn/index.ts` and the names collection both name `collection`. */
 /* 11 → 12: `use-today.ts` now resolves refs by kind for its candidates. */
 /* 12 → 14: the duʿa collection, and the Duʿa tab now reads COLLECTIONS. */
-measure('files naming a ContentKind value', Number(kindFiles), 14);
+/* 14 → 15: `use-reading.ts` (30a8023, the app remembers what you were
+   reading) resolves the remembered place by kind. */
+measure('files naming a ContentKind value', Number(kindFiles), 15);
 
 /*
   No component may branch on WHICH collection it is rendering.

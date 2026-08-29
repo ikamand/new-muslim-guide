@@ -2,6 +2,15 @@
 
 **Status:** Agreed in principle 27 August 2026. **Nothing built. Deliberately
 parked** — Iyad's words: *"I really think we should do it but not now."*
+**29 Aug 2026: direction endorsed, still parked.** Iyad liked the
+recommendation to do Phases 0–1 as written and to target the selector
+**on-device** rather than on a server — the backlog's own "version of this
+plan worth wanting", now plausible: Apple Foundation Models (iOS 26+) and
+Gemini Nano are reachable from React Native, structured output included,
+which would delete Part 5's server, bill and privacy cost in one move (the
+five rules validate in the app instead; a device without a model keeps
+today's offline list as the floor; ⚠️ native module, so a build, not an OTA).
+Queued behind the recite-with-me work; nothing here is scheduled.
 **Opened:** 27 August 2026, from a question about
 [ai.salaam.world](https://ai.salaam.world/) and what it would take to train a
 "Muslim AI model".

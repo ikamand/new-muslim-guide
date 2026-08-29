@@ -389,6 +389,10 @@ things the app already has; nothing new is written.*
   location-based offer would go, and the app already has the coordinates. It is
   left out pending Iyad's decision — see "The honest limit on companion". If he
   says yes it is one more candidate in the same ranked function, not a new phase.
+  **29 Aug 2026: he inclined yes** — endorsing the smart-direction
+  recommendation that included it ("i like the whole part 2 recommendation").
+  Still not built; when picked up it is the one-more-candidate above, and the
+  inference stays on the device like everything else in Stage C.
 
 **Done when** both screens have been seen at phone width in both themes, the
 adhkār sitting appears inside its window and the duʿa card outside it, and the
@@ -977,6 +981,16 @@ publisher's word-by-word data. QuranEnc gives whole-verse translations, and
 producing the glosses here would be the model writing Arabic-adjacent text —
 the rule that keeps `juz30.ts` and the duʿa book transliteration-free. It needs
 a source before it needs a developer.
+
+**Correction, 29 Aug 2026: half unblocked, verified by calling it.**
+`api.quran.com/api/v4` — the source the Qur'an tab already generates from —
+serves per-word English via `word_translation_language=en`: *bis'mi → "In
+(the) name", l-lahi → "(of) Allah"*, in the app's own transliteration scheme.
+So the **Qur'anic** texts — Al-Fātiḥah, the three quls, all 38 surahs — can
+gloss word by word today, generated not typed, in the `generate-juz30.mjs`
+pattern. The tashahhud, tasbīḥāt and opening duʿa are not Qur'an and stay
+blocked on a publisher. Iyad wants this built: *"that's amazing and should
+definetly be added to the plan"* — queued behind the recite-with-me work.
 
 **Still to do:** the four above.
 **Ships via** OTA.

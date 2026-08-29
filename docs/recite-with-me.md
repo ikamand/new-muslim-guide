@@ -162,6 +162,31 @@ beginner recording has a measured rate and a stall map.
   it converts, transcribes and aligns every file and prints the transcript,
   the advanced count and the stall map per recording.
 
+### Measured 29 Aug, later — three adversarial probes, and a design lesson
+
+Probes the machine could make without a human: ten seconds of silence, an
+English sentence ("okay let me try this again…", macOS `say`), and Al-Fātiḥah
+read as **plain spoken Arabic with no tajwīd** by the Maged ar_SA voice — a
+synthetic point between Husary and a beginner.
+
+- **Silence:** the model hallucinated one word (a known Whisper behaviour);
+  the aligner ignored it and the pointer never moved. On the phone,
+  `whisper.rn`'s VAD gates silence before it reaches the model at all.
+- **English:** transcribed as Arabic-shaped gibberish; every token ignored,
+  nothing advanced. The silence-on-loss rule survives someone talking to
+  themselves near the mic.
+- **Plain-spoken Arabic: the model heard ~85% of it correctly — and the first
+  aligner scored 6/29.** One liaison merge (*rabi-l-ʿālamīn* arriving as one
+  token) froze a greedy lookahead-1 pointer for the rest of the surah. **A
+  follow-along that cannot re-acquire after one stumble highlights nothing
+  forever.** The aligner now matches within a 4-word window (words passed
+  over are "skipped", never "wrong"), tolerates a leading ال moving across a
+  token boundary, and treats the window as its resync. Same audio: **23/29
+  (79%), tracked to the final ayah, recovering from both stumbles** — while
+  silence and English still advance zero, which is the guard that matters.
+  Phase 3's real aligner inherits this shape as a requirement, not a
+  suggestion.
+
 ## Phase 1 — The gate
 
 A decision, made by Iyad looking at Phase 0's traces. The suggested bar:

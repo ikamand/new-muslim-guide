@@ -946,6 +946,42 @@ Nothing there is decided. The one thing in it flagged for the scholarly
 reviewer rather than for design is `references.ts:565`, which tells someone
 arriving mid-prayer to join the line and stops.
 
+### 29 Aug — a persona pass, and five decisions out of it
+
+A "think as a new Muslim" review plus research on making the app smart. The
+finding that framed it: the content shelf is nearly complete for the first two
+years — the gaps are modality (voice, ambient surfaces, time-shape), not
+pages. Decided by Iyad the same day, all queued behind recite-with-me:
+
+- **Recite with me** — the mic follows your Fatiha; **`docs/recite-with-me.md`**
+  is the plan and its Phase 0 spike already passed the fluent baseline at
+  100%. The active work.
+- **Ramadan mode** — Ramadan as a mode of Today, not a screen;
+  **`docs/ramadan-mode.md`**. A placement project, not a content project: one
+  new page (fasting where nobody else is), everything else is existing
+  reviewed content given a time-shape. Deadline logic: machinery needs eyes by
+  mid-January 2027.
+- **A private line on each First** — one optional sentence, written by the
+  reader, stored with the observations, shown nowhere else. The ledger
+  becomes theirs; the app becomes a witness. Small, OTA.
+- **A lock-screen widget / Live Activity** — the prayer countdown where eyes
+  already are; the iftar countdown during Ramadan. ⚠️ Native work and a
+  build, and the first feature that puts "Maghrib 8:14pm" where a family
+  member might see it — a toggle, off by default, for exactly the users
+  CLAUDE.md names.
+- **The smart direction endorsed** — `quote-dont-answer.md`'s Phases 0–1
+  (aliases, the real eval) when picked up, with the selector now targeted
+  **on-device** (Apple Foundation Models / Gemini Nano reachable from RN as
+  of 2026) instead of on a server — no server, no bill, and the 1am question
+  never leaves the phone; the travelling trigger (build-order Phase 4's held
+  item); and the two window notifications (adhkār opening, Thursday night).
+  Direction, not a work order — nothing scheduled yet.
+
+Also recorded in `build-order.md` Phase 13 the same day: the word-by-word
+gloss is only half blocked — `api.quran.com/api/v4` serves per-word English
+(`word_translation_language=en`, verified by calling it), so the Qur'anic
+texts can gloss today; the tashahhud and tasbīḥāt still need a publisher.
+
 ---
 
 ## Shipping

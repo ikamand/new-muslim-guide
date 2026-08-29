@@ -6,6 +6,8 @@ import { ThemedText } from '@/components/themed-text';
 import { Radius, Spacing } from '@/constants/theme';
 import { useJourney } from '@/hooks/use-journey';
 import { useLocale } from '@/hooks/use-locale';
+import { useObservations } from '@/hooks/use-observations';
+import { useSettings } from '@/hooks/use-settings';
 import { useTheme } from '@/hooks/use-theme';
 import type { UIKey } from '@/i18n/ui';
 import { routeFor } from '@/lib/content-routes';
@@ -26,6 +28,15 @@ import { routeFor } from '@/lib/content-routes';
  * the journey's stage list, which is a claim about a lesson you are looking
  * AT rather than one you are inside.
  *
+ * The press marks too, as a fallback — not belt-and-braces reflex, but the
+ * one hole the scroll leaves: Android's last scroll event can report a
+ * position short of where the finger stopped, the same truncation that
+ * killed the exact-bottom version. If that event lands outside the slack,
+ * the reader still sees this button and still taps it, and the tap must not
+ * depend on an event that never came. Guarded by `completedLessons`, so when
+ * the scroll HAS marked — the normal case — the press records nothing and a
+ * single reading cannot count as two.
+ *
  * ## Replace, not push
  *
  * Reading is a chain: this button leads to the next lesson, whose button
@@ -43,16 +54,26 @@ export function LessonEnd({ lessonKey }: { lessonKey: string }) {
   const router = useRouter();
   const { t } = useLocale();
   const { after } = useJourney();
+  const { completedLessons, completeLesson } = useSettings();
+  const { finish } = useObservations();
 
   const next = after(lessonKey);
   if (!next) return null;
 
   const nextLabel = next.labelKey ? t(next.labelKey as UIKey) : next.entry.title;
 
+  const go = () => {
+    if (!completedLessons.includes(lessonKey)) {
+      completeLesson(lessonKey);
+      finish(lessonKey);
+    }
+    router.replace(routeFor(next.entry));
+  };
+
   return (
     <View style={styles.block}>
       <Pressable
-        onPress={() => router.replace(routeFor(next.entry))}
+        onPress={go}
         accessibilityRole="button"
         accessibilityLabel={`${t('lesson.next')}: ${nextLabel}`}
         style={({ pressed }) => [

@@ -76,8 +76,31 @@ type LocationContextValue = {
   status: LocationStatus;
   /** True while a stored fix is on screen and a fresh one is still coming. */
   isStale: boolean;
+  /** When the fix on screen was taken, for a stored one. Null for a live read. */
+  fixedAt: number | null;
   request: () => Promise<void>;
 };
+
+/**
+ * The coordinates are stored and no fresh read is coming.
+ *
+ * Not the same as `isStale`, and the difference is the whole point. A stored
+ * fix is on screen for a moment on every cold launch while the live read runs,
+ * and warning about that would cry wolf on every launch. This is the case where
+ * the stored fix is all there will BE — permission refused, or the device
+ * cannot produce one — so the number on screen is about wherever the reader was
+ * the last time the app could tell.
+ *
+ * ⚠️ It matters here more than on the prayer times, which simply refuse to draw
+ * without a live fix. A qibla drawn from a fix in another city is a confident
+ * arrow pointing the wrong way, and somebody prays facing it.
+ */
+export function isUnverified(value: {
+  isStale: boolean;
+  status: LocationStatus;
+}): boolean {
+  return value.isStale && (value.status === 'denied' || value.status === 'unavailable');
+}
 
 const Context = createContext<LocationContextValue | null>(null);
 
@@ -85,6 +108,7 @@ export function LocationProvider({ children }: { children: ReactNode }) {
   const [coords, setCoords] = useState<LatLon | null>(null);
   const [status, setStatus] = useState<LocationStatus>('locating');
   const [isStale, setIsStale] = useState(false);
+  const [fixedAt, setFixedAt] = useState<number | null>(null);
   const inFlight = useRef(false);
 
   const refresh = useCallback(async () => {
@@ -120,6 +144,7 @@ export function LocationProvider({ children }: { children: ReactNode }) {
       });
       setStatus('ready');
       setIsStale(false);
+      setFixedAt(null);
       void AsyncStorage.setItem(STORAGE_KEY, JSON.stringify({ ...next, at: Date.now() }));
     } catch {
       setStatus((current) => (current === 'ready' ? current : 'unavailable'));
@@ -149,6 +174,7 @@ export function LocationProvider({ children }: { children: ReactNode }) {
         if (!active || !stored) return;
         setCoords({ latitude: stored.latitude, longitude: stored.longitude });
         setIsStale(true);
+        setFixedAt(stored.at);
       })
       .catch(() => {
         // No stored fix just means we wait for the live one.
@@ -172,8 +198,8 @@ export function LocationProvider({ children }: { children: ReactNode }) {
   }, [refresh]);
 
   const value = useMemo(
-    () => ({ coords, status, isStale, request }),
-    [coords, status, isStale, request],
+    () => ({ coords, status, isStale, fixedAt, request }),
+    [coords, status, isStale, fixedAt, request],
   );
 
   return <Context value={value}>{children}</Context>;

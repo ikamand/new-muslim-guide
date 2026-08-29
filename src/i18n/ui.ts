@@ -252,6 +252,44 @@ export const EN = {
   'times.locationOff':
     'Location services are turned off, so the times can’t be worked out. Turn them on in your phone’s settings and come back.',
   'times.useLocation': 'Use my location',
+  /* Three states nobody had translated, found by `npm run nav:check`. */
+  'settings.footnote': 'The Arabic always stays — it is what you actually say. Everything on this device stays on this device.',
+  'guide.missing': 'That guide doesn’t exist.',
+  'reference.missing': 'That page has moved.',
+
+
+  /*
+    The qibla screen. Every sentence on it used to be an English literal in the
+    component, which is why a French reader got an English page with nothing
+    saying so.
+
+    `qibla.unverified` is the one that matters. The bearing is exact arithmetic
+    and the screen said so with total confidence, from coordinates that could be
+    a week old and a country away — the prayer times refuse to draw in that
+    state and the qibla drew anyway.
+  */
+  'qibla.bearing': '{deg}° from north',
+  'qibla.where': 'The Kaʿbah is {point} of you. If the arrow is jumping about, face that way using anything you trust — a map, the sun, a neighbour.',
+  'qibla.needLocation': 'The qibla is worked out from where you are, so it needs your location. You can turn that on from the prayer times on the home screen.',
+  'qibla.locating': 'Finding your location…',
+  'qibla.noCompass': 'This phone isn’t reporting a compass heading, so the arrow is pointing at the raw bearing rather than at the Kaʿbah. Use the number above.',
+  'qibla.unsure': 'The compass isn’t confident right now. Move away from anything metal or electrical and turn the phone in a figure of eight to settle it.',
+  'qibla.unverified.title': 'This is worked out from an older position',
+  'qibla.unverified.body': 'The app last knew where you were {when}, and cannot check now. If you have travelled since, this direction is wrong. Turn location back on, or find the qibla another way.',
+  'qibla.unverified.fix': 'Use my location',
+  'qibla.when.today': 'earlier today',
+  'qibla.when.yesterday': 'yesterday',
+  'qibla.when.days': '{n} days ago',
+  'qibla.when.unknown': 'at some point',
+  'qibla.point.north': 'north',
+  'qibla.point.north-east': 'north-east',
+  'qibla.point.east': 'east',
+  'qibla.point.south-east': 'south-east',
+  'qibla.point.south': 'south',
+  'qibla.point.south-west': 'south-west',
+  'qibla.point.west': 'west',
+  'qibla.point.north-west': 'north-west',
+
   'times.working': 'Working out today’s times…',
   'times.clockSuspect':
     'Your phone’s clock is set a long way from where you seem to be. These times follow the clock, so check your date and time settings if they look wrong.',
@@ -965,6 +1003,37 @@ const FR: Overrides = {
   'times.locationOff':
     'La localisation est désactivée, les horaires ne peuvent donc pas être calculés. Activez-la dans les réglages de votre téléphone et revenez.',
   'times.useLocation': 'Utiliser ma position',
+  'settings.footnote': 'L’arabe reste toujours — c’est ce que vous dites réellement. Tout ce qui est sur cet appareil y reste.',
+  'guide.missing': 'Ce guide n’existe pas.',
+  'reference.missing': 'Cette page a été déplacée.',
+
+
+  'qibla.bearing': '{deg}° depuis le nord',
+  'qibla.where': 'La Kaʿbah est au {point} de vous. Si la flèche bouge dans tous les sens, orientez-vous avec ce qui vous semble fiable — une carte, le soleil, un voisin.',
+  'qibla.needLocation': 'La qibla se calcule à partir de votre position, elle a donc besoin de votre localisation. Vous pouvez l’activer depuis les horaires de prière sur l’écran d’accueil.',
+  'qibla.locating': 'Recherche de votre position…',
+  'qibla.noCompass': 'Ce téléphone ne fournit pas de cap, la flèche indique donc l’angle brut et non la Kaʿbah. Utilisez le nombre ci-dessus.',
+  'qibla.unsure': 'La boussole n’est pas fiable pour l’instant. Éloignez-vous de tout objet métallique ou électrique et faites un huit avec le téléphone.',
+  'qibla.unverified.title': 'Calculé à partir d’une position ancienne',
+  'qibla.unverified.body': 'La dernière position connue date de {when}, et l’app ne peut pas vérifier maintenant. Si vous avez voyagé depuis, cette direction est fausse. Réactivez la localisation, ou trouvez la qibla autrement.',
+  'qibla.unverified.fix': 'Utiliser ma position',
+  /*
+    Phrased to follow "date de" without doubling a preposition. "date de il y a
+    5 jours" was the first attempt and is not French.
+  */
+  'qibla.when.today': 'plus tôt dans la journée',
+  'qibla.when.yesterday': 'hier',
+  'qibla.when.days': '{n} jours',
+  'qibla.when.unknown': 'un moment indéterminé',
+  'qibla.point.north': 'nord',
+  'qibla.point.north-east': 'nord-est',
+  'qibla.point.east': 'est',
+  'qibla.point.south-east': 'sud-est',
+  'qibla.point.south': 'sud',
+  'qibla.point.south-west': 'sud-ouest',
+  'qibla.point.west': 'ouest',
+  'qibla.point.north-west': 'nord-ouest',
+
   'times.working': 'Calcul des horaires du jour…',
   'times.clockSuspect':
     'L’horloge de votre téléphone est réglée très loin de l’endroit où vous semblez être. Ces horaires suivent l’horloge : vérifiez la date et l’heure si elles semblent fausses.',
@@ -1251,6 +1320,33 @@ const ES: Overrides = {
   'times.locationOff':
     'La ubicación está desactivada, así que no se pueden calcular los horarios. Actívala en los ajustes de tu teléfono y vuelve.',
   'times.useLocation': 'Usar mi ubicación',
+  'settings.footnote': 'El árabe siempre se queda — es lo que realmente dices. Todo lo que está en este dispositivo se queda en él.',
+  'guide.missing': 'Esa guía no existe.',
+  'reference.missing': 'Esa página se ha movido.',
+
+
+  'qibla.bearing': '{deg}° desde el norte',
+  'qibla.where': 'La Kaʿbah está al {point} de ti. Si la flecha se mueve mucho, oriéntate con algo de fiar — un mapa, el sol, un vecino.',
+  'qibla.needLocation': 'La alquibla se calcula desde donde estás, así que necesita tu ubicación. Puedes activarla desde los horarios de oración en la pantalla de inicio.',
+  'qibla.locating': 'Buscando tu ubicación…',
+  'qibla.noCompass': 'Este teléfono no da un rumbo de brújula, así que la flecha apunta al ángulo en bruto y no a la Kaʿbah. Usa el número de arriba.',
+  'qibla.unsure': 'La brújula no está segura ahora mismo. Aléjate de objetos metálicos o eléctricos y mueve el teléfono en forma de ocho.',
+  'qibla.unverified.title': 'Calculado desde una posición antigua',
+  'qibla.unverified.body': 'La app supo dónde estabas {when}, y ahora no puede comprobarlo. Si has viajado desde entonces, esta dirección es incorrecta. Vuelve a activar la ubicación, o busca la alquibla de otra forma.',
+  'qibla.unverified.fix': 'Usar mi ubicación',
+  'qibla.when.today': 'hoy más temprano',
+  'qibla.when.yesterday': 'ayer',
+  'qibla.when.days': 'hace {n} días',
+  'qibla.when.unknown': 'en algún momento',
+  'qibla.point.north': 'norte',
+  'qibla.point.north-east': 'noreste',
+  'qibla.point.east': 'este',
+  'qibla.point.south-east': 'sureste',
+  'qibla.point.south': 'sur',
+  'qibla.point.south-west': 'suroeste',
+  'qibla.point.west': 'oeste',
+  'qibla.point.north-west': 'noroeste',
+
   'times.working': 'Calculando los horarios de hoy…',
   'times.clockSuspect':
     'El reloj de tu teléfono está ajustado muy lejos de donde pareces estar. Estos horarios siguen al reloj, así que revisa la fecha y la hora si algo parece mal.',

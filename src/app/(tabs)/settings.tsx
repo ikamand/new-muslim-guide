@@ -460,8 +460,7 @@ export default function SettingsScreen() {
         <SourcesRow />
 
         <ThemedText type="small" themeColor="textSecondary" style={styles.footnote}>
-          The Arabic always stays — it is what you actually say. Everything on this device stays
-          on this device.
+          {t('settings.footnote')}
         </ThemedText>
       </ScrollView>
     </SafeAreaView>

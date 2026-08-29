@@ -75,7 +75,8 @@
     "verify:import": "node --import ./scripts/ts-resolve.mjs scripts/verify-import.mjs",
     "collection:names": "node scripts/generate-names.mjs",
     "collection:duas": "node scripts/generate-quranic-duas.mjs",
-    "zakat:nisab": "node scripts/fetch-nisab.mjs"
+    "zakat:nisab": "node scripts/fetch-nisab.mjs",
+    "nav:check": "node scripts/navigation-check.mjs"
   },
   "private": true
 }

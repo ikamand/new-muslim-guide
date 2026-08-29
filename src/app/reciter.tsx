@@ -76,7 +76,11 @@ export default function ReciterScreen() {
                 // Straight back to the surah, which resumes in the new voice on
                 // the ayah it was already on. Making someone tap a second time
                 // to leave would be a step between them and hearing the change.
-                router.back();
+                // The Qur'an tab is the fallback rather than Today: this screen
+                // is only ever reached from reading, so that is where "back"
+                // means something when there is no history to pop.
+                if (router.canGoBack()) router.back();
+                else router.replace('/(tabs)/quran');
               }}
               accessibilityRole="radio"
               accessibilityState={{ checked: chosen }}

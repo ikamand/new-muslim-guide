@@ -94,7 +94,15 @@ export default function AdhkarSessionScreen() {
   */
   const finishSitting = () => {
     if (session) sittingDone(session.id);
-    router.back();
+    /*
+      Guarded, for the reason `guide/[id].tsx` already records: `router.back()`
+      alone does nothing when there is nothing to go back to, and a sitting is
+      exactly what a reminder or a link opens as the first screen of a session.
+      Somebody finished the morning adhkār, pressed Done, and stayed where they
+      were with a button that had visibly done nothing.
+    */
+    if (router.canGoBack()) router.back();
+    else router.replace('/(tabs)');
   };
 
 

@@ -87,7 +87,7 @@ export default function GuideScreen() {
   if (!guide) {
     return (
       <View style={[styles.missing, { backgroundColor: theme.background }]}>
-        <ThemedText type="default">That guide doesn’t exist.</ThemedText>
+        <ThemedText type="default">{t('guide.missing')}</ThemedText>
       </View>
     );
   }

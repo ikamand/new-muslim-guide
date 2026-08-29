@@ -190,7 +190,10 @@ export default function AskScreen() {
             />
           </View>
           <Pressable
-            onPress={() => router.back()}
+            onPress={() => {
+              if (router.canGoBack()) router.back();
+              else router.replace('/(tabs)');
+            }}
             accessibilityRole="button"
             accessibilityLabel={t('ask.close')}
             style={styles.close}>

@@ -50,7 +50,7 @@ import { localiseReference, measure } from '@/i18n/localise';
  * app looks is one file.
  */
 export default function ReferenceScreen() {
-  const { locale } = useLocale();
+  const { locale, t } = useLocale();
   const { id } = useLocalSearchParams<{ id: string }>();
   /* Above the early return below: hooks cannot be called conditionally. */
   const source = getReference(id);
@@ -60,7 +60,7 @@ export default function ReferenceScreen() {
       <View style={styles.missing}>
         <Stack.Screen options={{ title: '' }} />
         <ThemedText type="default" themeColor="textSecondary">
-          That page has moved.
+          {t('reference.missing')}
         </ThemedText>
       </View>
     );

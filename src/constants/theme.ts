@@ -46,6 +46,21 @@ export type ThemeColor = keyof typeof Colors.light & keyof typeof Colors.dark;
  */
 export const ArabicFont = 'Amiri';
 
+/**
+ * The Latin display face, loaded beside Amiri in `src/app/_layout.tsx`.
+ *
+ * Literata — a bookish serif built for long-form reading, which is the right
+ * register for an app that is mostly quiet instruction. It carries the three
+ * heading rungs only (`sectionTitle`, `subtitle`, `title` in
+ * `themed-text.tsx`): headings are the app's voice, body copy is its
+ * legibility, and buttons and cards stay in the system face because chrome
+ * should not be literary.
+ *
+ * The name includes the weight because that is how a static-instance TTF
+ * registers: there is no bold axis to ask for, this file IS the 600.
+ */
+export const HeadingFont = 'Literata_600SemiBold';
+
 
 export const Spacing = {
   half: 2,

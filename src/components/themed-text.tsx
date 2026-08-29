@@ -1,6 +1,6 @@
 import { StyleSheet, Text, type TextProps } from 'react-native';
 
-import { ArabicFont, ThemeColor } from '@/constants/theme';
+import { ArabicFont, HeadingFont, ThemeColor } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 /**
@@ -183,22 +183,34 @@ const styles = StyleSheet.create({
     lineHeight: 26,
     fontWeight: '600',
   },
+  /*
+    ## The heading rungs are Literata, since 29 Aug
+
+    The Arabic had a voice (Amiri) and every Latin heading was the platform
+    default, so half the app's personality was rented from the OS. The three
+    display rungs now carry the serif; `caption` through `cardTitle` stay in
+    the system face on purpose — card titles double as button labels, and
+    chrome should not be literary.
+
+    No `fontWeight` beside a static-instance font: the file IS the 600, and
+    naming a weight on top of it invites Android to synthesise a second one.
+  */
   /** A heading inside a page — the group names on the Learn tab. */
   sectionTitle: {
+    fontFamily: HeadingFont,
     fontSize: 24,
     lineHeight: 30,
-    fontWeight: '600',
   },
   /** The screen's own name, at the top. */
   subtitle: {
+    fontFamily: HeadingFont,
     fontSize: 30,
     lineHeight: 38,
-    fontWeight: '600',
   },
   /** Reserved for one thing on one screen. Rare by design. */
   title: {
+    fontFamily: HeadingFont,
     fontSize: 36,
     lineHeight: 42,
-    fontWeight: '600',
   },
 });

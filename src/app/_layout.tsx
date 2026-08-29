@@ -53,8 +53,14 @@ function RootStack() {
     A failure is not fatal. `fontsError` still lets the app through: the Arabic
     falls back to the platform face, which is exactly where it is today.
   */
+  /*
+    Literata, for the Latin headings — see `HeadingFont` in `constants/theme`.
+    The subpath import matters: it bundles the one 250KB weight, where the
+    package root would drag every weight and italic into the app.
+  */
   const [fontsLoaded, fontsError] = useFonts({
     Amiri: require('@/assets/fonts/Amiri-Regular.ttf'),
+    Literata_600SemiBold: require('@expo-google-fonts/literata/600SemiBold/Literata_600SemiBold.ttf'),
   });
 
   // Hold the splash until the stored settings are in. Otherwise the first

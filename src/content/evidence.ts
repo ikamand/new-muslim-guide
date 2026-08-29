@@ -5,16 +5,16 @@
  * here is lost the next time it runs, and one that needs making belongs
  * upstream, where the text is published.
  *
- * 96 Qur'an passages and 126 narrations. Every character came over
+ * 96 Qur'an passages and 129 narrations. Every character came over
  * the wire from a published text rather than from memory, which is the only
  * way a file like this could exist under this project's rules about Arabic.
  *
  * ## Where each line came from
  *
  * No one source has all of it, so each field is taken from the first that
- * does, and says so on the text itself. Of the 126 narrations here:
- * 60 were confirmed against a second, separately edited publisher;
- * 50 carry HadeethEnc's own translation, 76 carry Darussalam's, and
+ * does, and says so on the text itself. Of the 129 narrations here:
+ * 63 were confirmed against a second, separately edited publisher;
+ * 53 carry HadeethEnc's own translation, 76 carry Darussalam's, and
  * 0 have Arabic and no translation at all.
  *
  * ⚠️ **The Darussalam translations are not ours to relicense.** They reach
@@ -1115,6 +1115,38 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
     "arabicFrom": "HadeethEnc.com",
     "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
   },
+  "bukhari:7352": {
+    "arabic": "عن عمرو بن العاص رضي الله عنه أنه سمع رسول الله صلى الله عليه وسلم يقول: «إِذَا حَكَمَ الحَاكِمُ فَاجْتَهَدَ ثم أَصابَ فله أَجْرَان، وإِذا حَكَمَ فَاجْتَهَدَ ثم أَخْطَأَ فله أَجْرٌ».",
+    "translation": "‘Amr ibn al-‘Ās (may Allah be pleased with him) reported: The Messenger of Allah (may Allah’s peace and blessings be upon him) said: \"If a judge issues a ruling, having tried his best to decide correctly, and his ruling is right, he will have a double reward, but if he issues a ruling, having tried his best to decide correctly, and his ruling is wrong, he will have a single reward.\"",
+    "attribution": "Narrated by Bukhari & Muslim",
+    "grade": "Authentic hadith",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "bukhari:887": {
+    "arabic": "عن أبي هريرة رضي الله عنه أن رسول الله صلى الله عليه وسلم قال: «لَوْلا أنْ أَشُقِّ على أُمَّتِي لَأَمَرْتُهم بالسِّواكِ مع كلِّ وُضُوء».",
+    "translation": "Abu Hurayrah (may Allah be pleased with him) reported that the Messenger of Allah (may Allah’s peace and blessings be upon him) said: “Were it not that I would cause difficulty for my followers, I would command them to use the tooth-stick with every prayer.”",
+    "attribution": "An-Nasaa’i - Narrated by Ahmad - Maalik",
+    "grade": "Authentic hadith",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "bukhari:3461": {
+    "arabic": "عن عبد الله بن عمرو رضي الله عنهما أن النبي صلى الله عليه وسلم قال: «بَلِّغُوا عَنِّي وَلَوْ آيَةً، وَحَدِّثُوا عَنْ بَنِي إِسْرَائِيلَ وَلَا حَرَجَ، وَمَنْ كَذَبَ عَلَيَّ مُتَعَمِّدًا فَلْيَتَبَوَّأْ مَقْعَدَهُ مِنَ النَّارِ».",
+    "translation": "‘Abdullāh ibn ‘Amr (may Allah be pleased with him) reported: The Prophet (may Allah's peace and blessings be upon him) said: \"Convey from me even if one verse, and narrate from the Children of Israel, and there is no sin in doing that. And whoever intentionally tells a lie about me, let him occupy his seat in Hellfire.\"",
+    "attribution": "Narrated by Al-Bukhāri",
+    "grade": "Authentic",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "bukhari:5027": {
+    "arabic": "عن عثمان رضي الله عنه عن النبي صلى الله عليه وسلم قال: «خَيْرُكُمْ مَنْ تَعَلَّمَ الْقُرْآنَ وَعَلَّمَهُ».",
+    "translation": "‘Uthmān ibn ‘Affān (may Allah be pleased with him) reported: The Prophet (may Allah’s peace and blessings be upon him) said: \"The best of you are those who learn the Qur’an and teach it.\"",
+    "attribution": "Narrated by Al-Bukhāri",
+    "grade": "Authentic",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
   "bukhari:3559": {
     "arabic": "عن عبد الله بن عمرو رضي الله عنهما قال: لَمْ يَكُنِ النَّبِيُّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ فَاحِشًا وَلَا مُتَفَحِّشًا، وَكَانَ يَقُولُ: «إِنَّ مِنْ خِيَارِكُمْ أَحْسَنَكُمْ أَخْلَاقًا».",
     "translation": "‘Abdullāh ibn ‘Amr (may Allah be pleased with him) reported: The Prophet (may Allah's peace and blessings be upon him) was neither obscene, nor would he use obscene language, and he used to say: \"Verily, the best of you are those who have the best manners.\"",
@@ -1128,14 +1160,6 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
     "translation": "Narrated Malik:We came to the Prophet (ﷺ) and stayed with him for twenty days and nights. We were all young and of about the same age. The Prophet (ﷺ) was very kind and merciful. When he realized our longing for our families, he asked about our homes and the people there and we told him. Then he asked us to go back to our families and stay with them and teach them (the religion) and to order them to do good things. He also mentioned some other things which I have (remembered or [??] ) forgotten. The Prophet (ﷺ) then added, \"Pray as you have seen me praying and when it is the time for the prayer one of you should pronounce the Adhan and the oldest of you should lead the prayer",
     "arabicFrom": "fawazahmed0/hadith-api",
     "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
-  },
-  "bukhari:5027": {
-    "arabic": "عن عثمان رضي الله عنه عن النبي صلى الله عليه وسلم قال: «خَيْرُكُمْ مَنْ تَعَلَّمَ الْقُرْآنَ وَعَلَّمَهُ».",
-    "translation": "‘Uthmān ibn ‘Affān (may Allah be pleased with him) reported: The Prophet (may Allah’s peace and blessings be upon him) said: \"The best of you are those who learn the Qur’an and teach it.\"",
-    "attribution": "Narrated by Al-Bukhāri",
-    "grade": "Authentic",
-    "arabicFrom": "HadeethEnc.com",
-    "translationFrom": "HadeethEnc.com"
   },
   "bukhari:6018": {
     "arabic": "حَدَّثَنَا قُتَيْبَةُ بْنُ سَعِيدٍ، حَدَّثَنَا أَبُو الأَحْوَصِ، عَنْ أَبِي حَصِينٍ، عَنْ أَبِي صَالِحٍ، عَنْ أَبِي هُرَيْرَةَ، قَالَ قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏ \"‏ مَنْ كَانَ يُؤْمِنُ بِاللَّهِ وَالْيَوْمِ الآخِرِ فَلاَ يُؤْذِ جَارَهُ، وَمَنْ كَانَ يُؤْمِنُ بِاللَّهِ وَالْيَوْمِ الآخِرِ فَلْيُكْرِمْ ضَيْفَهُ، وَمَنْ كَانَ يُؤْمِنُ بِاللَّهِ وَالْيَوْمِ الآخِرِ فَلْيَقُلْ خَيْرًا أَوْ لِيَصْمُتْ ‏\"‏‏.‏",

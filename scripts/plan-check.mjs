@@ -196,23 +196,25 @@ const teachingMinutes = teaching.reduce((n, e) => n + (e.meta?.estimatedMinutes 
 /* 76 → 77: Phase 11's Jumuʿah page. */
 /* 77 → 79: Phase 11's pilot of two. */
 /* 79 → 85: Phase 11's remaining six. */
-measure('catalogue: non-hisn entries', teaching.length, 85);
+/* 85 → 88: Phase 13's three tier-three pages. */
+measure('catalogue: non-hisn entries', teaching.length, 88);
 /*
   186 became 206 on 28 Aug 2026: the ninety-nine names declare 20 minutes.
   The 69 pages the plan measured are unchanged; a 70th was added beside them.
 */
-measure('catalogue: total estimated minutes', teachingMinutes, 278);
+measure('catalogue: total estimated minutes', teachingMinutes, 291);
 measure('catalogue: hisn occasions', CATALOG.length - teaching.length, 132);
 
 const priority = (n) => teaching.filter((e) => e.meta?.beginnerPriority === n).length;
 /* All five of Phase 9's pages are tier one, so all five land here. */
 measure('entries at beginner priority 1–2', priority(1) + priority(2), 32);
-measure('entries at beginner priority 4–5', priority(4) + priority(5), 6);
+/* Tier three is where 4–5 lives, so all three land here. */
+measure('entries at beginner priority 4–5', priority(4) + priority(5), 9);
 measure(
   'entries carrying beginnerPriority or difficulty',
   teaching.filter((e) => e.meta?.beginnerPriority || e.meta?.difficulty).length,
   /* 52 → 53: the names collection carries meta. */
-  68,
+  71,
 );
 
 // Journey lessons that are guides — the only kind that self-completes.

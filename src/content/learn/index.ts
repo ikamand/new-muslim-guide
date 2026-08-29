@@ -22,12 +22,15 @@ import { PATIENCE_AND_GRATITUDE } from './patience-and-gratitude';
 import { RAMADAN } from './ramadan';
 import { REPENTANCE } from './repentance';
 import { RULINGS } from './rulings';
+import { SMALL_SUNNAHS } from './small-sunnahs';
 import { SUNNAH } from './sunnah';
+import { TEACHING_SOMEONE } from './teaching-someone';
 import { WHAT_BREAKS_PRAYER } from './what-breaks-prayer';
 import { WHAT_IS_ISLAM } from './what-is-islam';
 import { WHAT_IS_THE_QURAN } from './what-is-the-quran';
 import { WHO_IS_ALLAH } from './who-is-allah';
 import { WHO_IS_MUHAMMAD } from './who-is-muhammad';
+import { WHY_PEOPLE_DIFFER } from './why-people-differ';
 import { ISTIKHARA, QIYAM_AL_LAYL, TAHAJJUD, TAWBA_PRAYER, WITR } from './voluntary-prayers';
 import { VOLUNTARY_FASTING } from './voluntary-fasting';
 import { WORK } from './work';
@@ -77,6 +80,10 @@ export const LEARN_TOPICS: Reference[] = [
   BEING_CORRECTED,
   MARRIAGE_SHAPE,
   A_PARTNER_ALREADY,
+  /* Phase 13, 28 Aug 2026 — the three tier-three items that are pages. */
+  WHY_PEOPLE_DIFFER,
+  SMALL_SUNNAHS,
+  TEACHING_SOMEONE,
   WHO_IS_ALLAH,
   WHO_IS_MUHAMMAD,
   WHAT_IS_THE_QURAN,
@@ -185,6 +192,8 @@ export const TOPIC_GROUPS: readonly { id: TopicGroupId; topics: readonly Content
       ref('reference', 'who-is-muhammad'),
       ref('reference', 'what-is-the-quran'),
       ref('reference', 'sunnah'),
+      /* Why four schools. The page that makes the 50 `differs` notes legible. */
+      ref('reference', 'why-people-differ'),
       /*
         Last in the group, and deliberately.
 
@@ -215,6 +224,8 @@ export const TOPIC_GROUPS: readonly { id: TopicGroupId; topics: readonly Content
       ref('reference', 'jumuah'),
       ref('reference', 'janazah'),
       ref('reference', 'manners'),
+      ref('reference', 'small-sunnahs'),
+      ref('reference', 'teaching-someone'),
     ],
   },
   {

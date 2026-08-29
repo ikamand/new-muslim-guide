@@ -947,6 +947,37 @@ and all of it is `collection` instances — data files, not code.*
 
 **Done when** each collection passes the standing checklist and was added without
 a code change.
+**Three of the seven done 28 Aug 2026.** 47 teaching pages, 0 failures, 0
+warnings.
+
+⚠️ **"All of it is `collection` instances — data files, not code" is wrong**, and
+that is worth correcting rather than working around. Of the seven items:
+
+| Item | What it actually is | State |
+|---|---|---|
+| Why people differ | the plan's own words say "one page" | ✅ built |
+| The small sunnahs | a page — see below | ✅ built |
+| Teaching someone else | a page | ✅ built |
+| The meaning of what you already say | a collection, but needs word-by-word Arabic | ⬜ blocked |
+| Memorisation with review | a FEATURE in the Qur'an tab, not content at all | ⬜ |
+| The sīrah in episodes | a collection, and a large one | ⬜ |
+| The vices and the virtues | roughly ten pages | ⬜ |
+
+⚠️ **The small sunnahs is a page, not a collection, deliberately.** The words
+are already in this app — Hisn al-Muslim carries the duʿa on waking, on leaving
+the house, on eating, each from its own publisher. A collection would put a
+second copy of those words in a second place, which `learn/adhan.ts` already
+refused for the same reason. What was missing was never the words; it was the
+idea that these are a practice somebody takes on.
+
+⚠️ **"The meaning of what you already say" is blocked on a source, not on
+time.** Word-by-word glossing of Al-Fātiḥah and the tashahhud needs a
+publisher's word-by-word data. QuranEnc gives whole-verse translations, and
+producing the glosses here would be the model writing Arabic-adjacent text —
+the rule that keeps `juz30.ts` and the duʿa book transliteration-free. It needs
+a source before it needs a developer.
+
+**Still to do:** the four above.
 **Ships via** OTA.
 
 ---

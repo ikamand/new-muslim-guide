@@ -114,6 +114,10 @@ const REFERENCES: Readonly<Record<string, Cadence>> = {
   'a-partner-already': 'on-event',
   /* Phase 13. Read once and kept; the sunnahs are a practice you return to. */
   'why-people-differ': 'once',
+  'anger': 'once',
+  'arrogance': 'once',
+  'envy': 'once',
+  'showing-off': 'once',
   'small-sunnahs': 'until-fluent',
   'teaching-someone': 'once',
   'who-is-allah': 'once',

@@ -22,6 +22,10 @@ import { PATIENCE_AND_GRATITUDE } from './patience-and-gratitude';
 import { RAMADAN } from './ramadan';
 import { REPENTANCE } from './repentance';
 import { RULINGS } from './rulings';
+import { ANGER } from './anger';
+import { ARROGANCE } from './arrogance';
+import { ENVY } from './envy';
+import { SHOWING_OFF } from './showing-off';
 import { SMALL_SUNNAHS } from './small-sunnahs';
 import { SUNNAH } from './sunnah';
 import { TEACHING_SOMEONE } from './teaching-someone';
@@ -82,6 +86,10 @@ export const LEARN_TOPICS: Reference[] = [
   A_PARTNER_ALREADY,
   /* Phase 13, 28 Aug 2026 — the three tier-three items that are pages. */
   WHY_PEOPLE_DIFFER,
+  ANGER,
+  ARROGANCE,
+  ENVY,
+  SHOWING_OFF,
   SMALL_SUNNAHS,
   TEACHING_SOMEONE,
   WHO_IS_ALLAH,
@@ -237,6 +245,13 @@ export const TOPIC_GROUPS: readonly { id: TopicGroupId; topics: readonly Content
       ref('reference', 'if-you-stopped'),
       ref('reference', 'being-corrected'),
       ref('reference', 'patience-and-gratitude'),
+      /* The four interior vices. Each page carries its own cure rather than
+         pairing off into four more pages: nobody treats envy by reading a
+         separate article about contentment. */
+      ref('reference', 'anger'),
+      ref('reference', 'showing-off'),
+      ref('reference', 'arrogance'),
+      ref('reference', 'envy'),
     ],
   },
   {

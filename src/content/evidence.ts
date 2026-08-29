@@ -5,22 +5,22 @@
  * here is lost the next time it runs, and one that needs making belongs
  * upstream, where the text is published.
  *
- * 96 Qur'an passages and 129 narrations. Every character came over
+ * 96 Qur'an passages and 138 narrations. Every character came over
  * the wire from a published text rather than from memory, which is the only
  * way a file like this could exist under this project's rules about Arabic.
  *
  * ## Where each line came from
  *
  * No one source has all of it, so each field is taken from the first that
- * does, and says so on the text itself. Of the 129 narrations here:
- * 63 were confirmed against a second, separately edited publisher;
- * 53 carry HadeethEnc's own translation, 76 carry Darussalam's, and
+ * does, and says so on the text itself. Of the 138 narrations here:
+ * 68 were confirmed against a second, separately edited publisher;
+ * 58 carry HadeethEnc's own translation, 80 carry Darussalam's, and
  * 0 have Arabic and no translation at all.
  *
  * ⚠️ **The Darussalam translations are not ours to relicense.** They reach
  * this file through a public-domain dedication that covers the compiler's work
  * and not the translation inside it. What makes that defensible here is scale
- * and purpose — 76 narrations out of some thirty thousand, each quoted under
+ * and purpose — 80 narrations out of some thirty thousand, each quoted under
  * the instruction it supports, in an app that is free and never sold. It is a
  * quotation, not a republication, and it is Iyad's decision on the record.
  *
@@ -1123,6 +1123,78 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
     "arabicFrom": "HadeethEnc.com",
     "translationFrom": "HadeethEnc.com"
   },
+  "bukhari:6116": {
+    "arabic": "عن أبي هريرة رضي الله عنه: أَنَّ رَجُلًا قَالَ لِلنَّبِيِّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ: أَوْصِنِي، قَالَ: «لَا تَغْضَبْ» فَرَدَّدَ مِرَارًا قَالَ: «لَا تَغْضَبْ».",
+    "translation": "Abu Hurayrah (may Allah be pleased with him) reported: A man came to the Prophet (may Allah's peace and blessings be upon him) and said: \"Advise me.\" He said: \"Do not get angry.\" He repeated that several times, and every time, he would say: \"Do not get angry.\"",
+    "attribution": "Narrated by Al-Bukhāri",
+    "grade": "Authentic",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "bukhari:6114": {
+    "arabic": "عن أبي هريرة رضي الله عنه أن رسول الله صلى الله عليه وسلم قال: «لَيْسَ الشَّدِيدُ بِالصُّرَعَةِ، إِنَّمَا الشَّدِيدُ الَّذِي يَمْلِكُ نَفْسَهُ عِنْدَ الْغَضَبِ».",
+    "translation": "Abu Hurayrah (may Allah be pleased with him) reported: The Messenger of Allah (may Allah's peace and blessings be upon him) said: \"The strong man is not the one who can overpower others; rather, the strong man is the one who controls himself when he is angry.\"",
+    "attribution": "Agreed upon",
+    "grade": "Authentic",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "bukhari:6115": {
+    "arabic": "حَدَّثَنَا عُثْمَانُ بْنُ أَبِي شَيْبَةَ، حَدَّثَنَا جَرِيرٌ، عَنِ الأَعْمَشِ، عَنْ عَدِيِّ بْنِ ثَابِتٍ، حَدَّثَنَا سُلَيْمَانُ بْنُ صُرَدٍ، قَالَ اسْتَبَّ رَجُلاَنِ عِنْدَ النَّبِيِّ صلى الله عليه وسلم وَنَحْنُ عِنْدَهُ جُلُوسٌ، وَأَحَدُهُمَا يَسُبُّ صَاحِبَهُ مُغْضَبًا قَدِ احْمَرَّ وَجْهُهُ فَقَالَ النَّبِيُّ صلى الله عليه وسلم ‏ \"‏ إِنِّي لأَعْلَمُ كَلِمَةً لَوْ قَالَهَا لَذَهَبَ عَنْهُ مَا يَجِدُ لَوْ قَالَ أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ ‏\"‏‏.‏ فَقَالُوا لِلرَّجُلِ أَلاَ تَسْمَعُ مَا يَقُولُ النَّبِيُّ صلى الله عليه وسلم قَالَ إِنِّي لَسْتُ بِمَجْنُونٍ‏.‏",
+    "translation": "Narrated Sulaiman bin Sarad:Two men abused each other in front of the Prophet (ﷺ) while we were sitting with him. One of the two abused his companion furiously and his face became red. The Prophet (ﷺ) said, \"I know a word (sentence) the saying of which will cause him to relax if this man says it. Only if he said, \"I seek refuge with Allah from Satan, the outcast.' \" So they said to that (furious) man, 'Don't you hear what the Prophet (ﷺ) is saying?\" He said, \"I am not mad",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "muslim:91": {
+    "arabic": "عن عبد الله بن مسعود رضي الله عنه عن النبيِّ صلى الله عليه وسلم ، قَالَ: «لا يدخلُ الجنةَ مَن كان في قلبه مِثقال ذرةٍ من كِبر» فقال رجل: إنّ الرجلَ يحب أن يكون ثوبه حسنا، ونَعله حسنة؟ قال: «إنّ الله جميلٌ يحب الجمالَ، الكِبر: بَطَرُ الحق وغَمْطُ الناس».",
+    "translation": "‘Abdullāh ibn Mas‘ūd (may Allah be pleased with him) reported that the Prophet (may Allah's peace and blessings be upon him) said: \"Anyone has an atom's weight of arrogance in his heart will not enter Paradise.\" A man said:\" What if one likes his clothes and shoes to look good?\" He said: \"Verily, Allah is beautiful and He loves beauty. Arrogance is to reject the truth and look down on people.\"",
+    "attribution": "Narrated by Muslim",
+    "grade": "Authentic hadith",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "muslim:2588": {
+    "arabic": "عن أبي هريرة رضي الله عنه عن رسول الله صلى الله عليه وسلم قال: «مَا نَقَصَتْ صَدَقَةٌ مِنْ مَالٍ، وَمَا زَادَ اللهُ عَبْدًا بِعَفْوٍ إِلَّا عِزًّا، وَمَا تَوَاضَعَ أَحَدٌ لِلهِ إِلَّا رَفَعَهُ اللهُ».",
+    "translation": "Abu Hurayrah (may Allah be pleased with him) reported: The Messenger of Allah (may Allah's peace and blessings be upon him) said: \"Charity does not diminish wealth, and Allah does not increase a servant, on account of his forgiveness, except in honor, and no one humbles himself seeking the pleasure of Allah except that Allah will elevate him.\"",
+    "attribution": "Narrated by Muslim",
+    "grade": "Authentic",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "bukhari:6064": {
+    "arabic": "عَنْ أَبِي هُرَيْرَةَ رضي الله عنه عَنِ النَّبِيِّ صلى الله عليه وسلم قَالَ: «إِيَّاكُمْ وَالظَّنَّ؛ فَإِنَّ الظَّنَّ أَكْذَبُ الْحَدِيثِ، وَلَا تَحَسَّسُوا، وَلَا تَجَسَّسُوا، وَلَا تَحَاسَدُوا، وَلَا تَدَابَرُوا، وَلَا تَبَاغَضُوا، وَكُونُوا عِبَادَ اللهِ إِخْوَانًا».",
+    "translation": "Abu Hurayrah (may Allah be pleased with him) reported that the Prophet (may Allah's peace and blessings be upon him) said: \"Beware of false thought, for false thought is the most untruth speech. Do not search for the faults of one another, do not spy on one another, do not envy one another, do not turn your backs on one another, do not harbor hatred for one another, and be, O slaves of Allah, brothers.\"",
+    "attribution": "Agreed upon",
+    "grade": "Authentic",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "bukhari:73": {
+    "arabic": "حَدَّثَنَا الْحُمَيْدِيُّ، قَالَ حَدَّثَنَا سُفْيَانُ، قَالَ حَدَّثَنِي إِسْمَاعِيلُ بْنُ أَبِي خَالِدٍ، عَلَى غَيْرِ مَا حَدَّثَنَاهُ الزُّهْرِيُّ، قَالَ سَمِعْتُ قَيْسَ بْنَ أَبِي حَازِمٍ، قَالَ سَمِعْتُ عَبْدَ اللَّهِ بْنَ مَسْعُودٍ، قَالَ قَالَ النَّبِيُّ صلى الله عليه وسلم ‏ \"‏ لاَ حَسَدَ إِلاَّ فِي اثْنَتَيْنِ رَجُلٌ آتَاهُ اللَّهُ مَالاً فَسُلِّطَ عَلَى هَلَكَتِهِ فِي الْحَقِّ، وَرَجُلٌ آتَاهُ اللَّهُ الْحِكْمَةَ، فَهْوَ يَقْضِي بِهَا وَيُعَلِّمُهَا ‏\"‏‏.‏",
+    "translation": "Narrated `Abdullah bin Mas`ud:The Prophet (ﷺ) said, \"Do not wish to be like anyone except in two cases. (The first is) A person, whom Allah has given wealth and he spends it righteously; (the second is) the one whom Allah has given wisdom (the Holy Qur'an) and he acts according to it and teaches it to others.\" (Fath-al-Bari page 177 Vol)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:6490": {
+    "arabic": "حَدَّثَنَا إِسْمَاعِيلُ، قَالَ حَدَّثَنِي مَالِكٌ، عَنْ أَبِي الزِّنَادِ، عَنِ الأَعْرَجِ، عَنْ أَبِي هُرَيْرَةَ، عَنْ رَسُولِ اللَّهِ صلى الله عليه وسلم قَالَ ‏ \"‏ إِذَا نَظَرَ أَحَدُكُمْ إِلَى مَنْ فُضِّلَ عَلَيْهِ فِي الْمَالِ وَالْخَلْقِ، فَلْيَنْظُرْ إِلَى مَنْ هُوَ أَسْفَلَ مِنْهُ ‏\"‏‏.‏",
+    "translation": "Narrated Abu Huraira:Allah's Messenger (ﷺ) said, \"If anyone of you looked at a person who was made superior to him in property and (in good) appearance, then he should also look at the one who is inferior to him",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:6499": {
+    "arabic": "حَدَّثَنَا مُسَدَّدٌ، حَدَّثَنَا يَحْيَى، عَنْ سُفْيَانَ، حَدَّثَنِي سَلَمَةُ بْنُ كُهَيْلٍ،‏.‏ وَحَدَّثَنَا أَبُو نُعَيْمٍ، حَدَّثَنَا سُفْيَانُ، عَنْ سَلَمَةَ، قَالَ سَمِعْتُ جُنْدَبًا، يَقُولُ قَالَ النَّبِيُّ صلى الله عليه وسلم وَلَمْ أَسْمَعْ أَحَدًا يَقُولُ قَالَ النَّبِيُّ صلى الله عليه وسلم غَيْرَهُ فَدَنَوْتُ مِنْهُ فَسَمِعْتُهُ يَقُولُ قَالَ النَّبِيُّ صلى الله عليه وسلم ‏ \"‏ مَنْ سَمَّعَ سَمَّعَ اللَّهُ بِهِ، وَمَنْ يُرَائِي يُرَائِي اللَّهُ بِهِ ‏\"‏‏.‏",
+    "translation": "Narrated Jundub:The Prophet (ﷺ) said, \"He who lets the people hear of his good deeds intentionally, to win their praise, Allah will let the people know his real intention (on the Day of Resurrection), and he who does good things in public to show off and win the praise of the people, Allah will disclose his real intention (and humiliate him)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "muslim:2985": {
+    "arabic": "عن أبي هريرة رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: «قَالَ اللهُ تَبَارَكَ وَتَعَالَى: أَنَا أَغْنَى الشُّرَكَاءِ عَنِ الشِّرْكِ، مَنْ عَمِلَ عَمَلًا أَشْرَكَ فِيهِ مَعِي غَيْرِي تَرَكْتُهُ وَشِرْكَهُ».",
+    "translation": "Abu Hurayrah (may Allah be pleased with him) reported: The Messenger of Allah (may Allah's peace and blessings be upon him) said: \"Allah Almighty said: 'I am the One Who is most free from want of partners. So, he who does something for the sake of someone else beside Me, I discard him and his polytheism.'\"",
+    "attribution": "Narrated by Muslim",
+    "grade": "Authentic",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
   "bukhari:887": {
     "arabic": "عن أبي هريرة رضي الله عنه أن رسول الله صلى الله عليه وسلم قال: «لَوْلا أنْ أَشُقِّ على أُمَّتِي لَأَمَرْتُهم بالسِّواكِ مع كلِّ وُضُوء».",
     "translation": "Abu Hurayrah (may Allah be pleased with him) reported that the Messenger of Allah (may Allah’s peace and blessings be upon him) said: “Were it not that I would cause difficulty for my followers, I would command them to use the tooth-stick with every prayer.”",
@@ -1273,14 +1345,6 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
     "grade": "Hasan Sahih (Ahmad Muhammad Shakir) · Hasan Sahih (Al-Albani) · Hasan (Zubair Ali Zai)",
     "arabicFrom": "fawazahmed0/hadith-api",
     "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
-  },
-  "bukhari:6114": {
-    "arabic": "عن أبي هريرة رضي الله عنه أن رسول الله صلى الله عليه وسلم قال: «لَيْسَ الشَّدِيدُ بِالصُّرَعَةِ، إِنَّمَا الشَّدِيدُ الَّذِي يَمْلِكُ نَفْسَهُ عِنْدَ الْغَضَبِ».",
-    "translation": "Abu Hurayrah (may Allah be pleased with him) reported: The Messenger of Allah (may Allah's peace and blessings be upon him) said: \"The strong man is not the one who can overpower others; rather, the strong man is the one who controls himself when he is angry.\"",
-    "attribution": "Agreed upon",
-    "grade": "Authentic",
-    "arabicFrom": "HadeethEnc.com",
-    "translationFrom": "HadeethEnc.com"
   },
   "bukhari:13": {
     "arabic": "حَدَّثَنَا مُسَدَّدٌ، قَالَ حَدَّثَنَا يَحْيَى، عَنْ شُعْبَةَ، عَنْ قَتَادَةَ، عَنْ أَنَسٍ ـ رضى الله عنه ـ عَنِ النَّبِيِّ صلى الله عليه وسلم‏.‏ وَعَنْ حُسَيْنٍ الْمُعَلِّمِ، قَالَ حَدَّثَنَا قَتَادَةُ، عَنْ أَنَسٍ، عَنِ النَّبِيِّ صلى الله عليه وسلم قَالَ ‏ \"‏ لا يُؤْمِنُ أَحَدُكُمْ حَتَّى يُحِبَّ لأَخِيهِ مَا يُحِبُّ لِنَفْسِهِ ‏\"‏‏.‏",

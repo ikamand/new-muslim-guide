@@ -947,8 +947,9 @@ and all of it is `collection` instances — data files, not code.*
 
 **Done when** each collection passes the standing checklist and was added without
 a code change.
-**Three of the seven done 28 Aug 2026.** 47 teaching pages, 0 failures, 0
-warnings.
+**Five of the seven done 28 Aug 2026.** 51 teaching pages, 0 failures, 0
+warnings. Only the sīrah and the word-by-word glossing remain; the second is
+blocked on a publisher, not on time.
 
 ⚠️ **"All of it is `collection` instances — data files, not code" is wrong**, and
 that is worth correcting rather than working around. Of the seven items:
@@ -959,9 +960,9 @@ that is worth correcting rather than working around. Of the seven items:
 | The small sunnahs | a page — see below | ✅ built |
 | Teaching someone else | a page | ✅ built |
 | The meaning of what you already say | a collection, but needs word-by-word Arabic | ⬜ blocked |
-| Memorisation with review | a FEATURE in the Qur'an tab, not content at all | ⬜ |
+| Memorisation with review | a FEATURE in the Qur'an tab, not content at all | ✅ built |
 | The sīrah in episodes | a collection, and a large one | ⬜ |
-| The vices and the virtues | roughly ten pages | ⬜ |
+| The vices and the virtues | four pages, not ten — see below | ✅ built |
 
 ⚠️ **The small sunnahs is a page, not a collection, deliberately.** The words
 are already in this app — Hisn al-Muslim carries the duʿa on waking, on leaving
@@ -1033,3 +1034,27 @@ the zakat threshold in Phase 12.
 reverted and its stage does not proceed — a pilot that ships anyway is not a
 pilot. Phases 3 and 4 are each one OTA and each independently revertible, which
 is why they were chosen as the pair.
+
+⚠️ **The vices came to four pages, not ten, and each carries its own cure.**
+The plan said "Riyāʾ, kibr, ḥasad, ghaḍab and their opposites", which reads as
+eight. Pairing them off would have produced four thin pages nobody reads in the
+order that makes them work: nobody treats envy by opening a separate article
+about contentment. So `envy` ends on Bukhari 6490 — look at who has less — and
+`arrogance` ends on Muslim 2588, and the cure is the last thing you read rather
+than a link you do not follow.
+
+Every narration was read out of the corpus before a word was written around it,
+and the book number and in-book position come from the corpus record rather than
+from memory. Ten citations: Bukhari 73, 6064, 6114, 6115, 6116, 6490, 6499 and
+Muslim 91, 2588, 2985.
+
+⚠️ **66 of 138 printed narrations open with an isnad, and it is worth deciding
+about.** Every text that reaches the app through Darussalam rather than
+HadeethEnc carries the full chain — `bukhari:6499` gives three lines of
+"ḥaddathanā Musaddad, ḥaddathanā Yaḥyā…" before a word the Prophet ﷺ said.
+This is not new and none of it is wrong; it is what the collection prints. But
+it is the first Arabic a beginner meets on nearly half the teaching pages, and
+`showing-off` had to move its hero off Bukhari 6499 onto Muslim 2985 to avoid
+opening the page with a chain of narrators. **Not fixed here, because the fix
+is to trim a text this app promises to quote verbatim, and that is Iyad's call
+rather than a build decision.**

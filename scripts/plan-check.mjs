@@ -197,12 +197,14 @@ const teachingMinutes = teaching.reduce((n, e) => n + (e.meta?.estimatedMinutes 
 /* 77 → 79: Phase 11's pilot of two. */
 /* 79 → 85: Phase 11's remaining six. */
 /* 85 → 88: Phase 13's three tier-three pages. */
-measure('catalogue: non-hisn entries', teaching.length, 88);
+/* 88 → 92: the four vices — anger, showing-off, arrogance, envy. */
+measure('catalogue: non-hisn entries', teaching.length, 92);
 /*
   186 became 206 on 28 Aug 2026: the ninety-nine names declare 20 minutes.
   The 69 pages the plan measured are unchanged; a 70th was added beside them.
 */
-measure('catalogue: total estimated minutes', teachingMinutes, 291);
+/* 291 → 310: the four vices declare 4, 5, 5 and 5 minutes. */
+measure('catalogue: total estimated minutes', teachingMinutes, 310);
 measure('catalogue: hisn occasions', CATALOG.length - teaching.length, 132);
 
 const priority = (n) => teaching.filter((e) => e.meta?.beginnerPriority === n).length;
@@ -214,7 +216,8 @@ measure(
   'entries carrying beginnerPriority or difficulty',
   teaching.filter((e) => e.meta?.beginnerPriority || e.meta?.difficulty).length,
   /* 52 → 53: the names collection carries meta. */
-  71,
+  /* 71 → 75: the four vices each carry both. */
+  75,
 );
 
 // Journey lessons that are guides — the only kind that self-completes.

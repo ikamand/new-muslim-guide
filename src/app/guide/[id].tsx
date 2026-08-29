@@ -285,6 +285,7 @@ export default function GuideScreen() {
           onPress={() => (isLast ? finish() : go(index + 1))}
           style={({ pressed }) => [
             styles.button,
+            styles.nextButton,
             { backgroundColor: theme.accent, opacity: pressed ? 0.85 : 1 },
           ]}>
           <ThemedText type="cardTitle" themeColor="textOnAccent">
@@ -427,27 +428,34 @@ const styles = StyleSheet.create({
     maxWidth: MaxContentWidth,
     alignSelf: 'center',
   },
+  /**
+   * No `flex` here, and that is the whole fix. This style used to say
+   * `flex: 1` and let Back override it, first with `flex: 0` (which is
+   * flexBasis 0 — the button shrank to its padding and the label spilled),
+   * then with `flexBasis: 'auto'` — which repaired the web and did NOTHING
+   * on the phone, because native Yoga reads `auto` as "unset" and fell back
+   * to the flex: 1 basis of 0 (`processFlexBasis` in yoga/node/Node.cpp).
+   * So on a device the label laid out at zero width, wrapped to four
+   * letter-lines, and stretched both buttons to twice their height.
+   * An inherited `flex: 1` cannot be overridden with `auto`; the element
+   * that should grow opts in instead.
+   */
   button: {
-    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     minHeight: 56,
     borderRadius: Radius.medium,
   },
   /**
-   * Back is narrower than Next on purpose.
-   *
-   * They were equal halves, which gave the same weight to the thing you do
-   * once by mistake and the thing you do thirty times a prayer. Next takes the
-   * side a right thumb reaches without moving the hand.
-   *
-   * Not `flex: 0` — that shorthand sets flexBasis to 0, which sized the button
-   * to its padding alone and let the label spill past the rounded corners.
+   * Next takes all the width Back leaves. Back is narrower on purpose:
+   * equal halves gave the same weight to the thing you do once by mistake
+   * and the thing you do thirty times a prayer, and Next sits on the side
+   * a right thumb reaches without moving the hand.
    */
+  nextButton: {
+    flex: 1,
+  },
   backButton: {
-    flexGrow: 0,
-    flexShrink: 0,
-    flexBasis: 'auto',
     paddingHorizontal: Spacing.four,
   },
   secondaryButton: {

@@ -83,16 +83,21 @@ Enforced in code, not intention, when the screen is built (Phase 4):
 
 | | Phase | State | Ships via |
 |---|---|---|---|
-| **0** | [The desktop spike](#phase-0--the-desktop-spike) | ⏳ Baseline ✅ 100% · waiting on recordings | nothing — throwaway |
-| **1** | [The gate](#phase-1--the-gate) | ⬜ Waiting on Phase 0 + recordings | — a decision |
-| **2** | [The phone spike](#phase-2--the-phone-spike) | ⬜ | dev build (throwaway) |
-| **3** | [The aligner, for real](#phase-3--the-aligner-for-real) | ⬜ | OTA |
-| **4** | [The screen](#phase-4--the-screen) | ⬜ | OTA |
-| **5** | [The model as a download](#phase-5--the-model-as-a-download) | ⬜ | **eas build** |
+| **0** | [The desktop spike](#phase-0--the-desktop-spike) | ✅ Done 29 Aug — baseline 100%, real take tracked | nothing — throwaway |
+| **1** | [The gate](#phase-1--the-gate) | ⏳ The dev build is now its instrument | — a decision |
+| **2** | [The phone spike](#phase-2--the-phone-spike) | ⏳ Built 29 Aug · EAS build `48254b4c` queued | dev build |
+| **3** | [The aligner, for real](#phase-3--the-aligner-for-real) | ✅ Built 29 Aug | OTA |
+| **4** | [The screen](#phase-4--the-screen) | ⬜ Waits for the gate and eyes on the spike | OTA |
+| **5** | [The model as a download](#phase-5--the-model-as-a-download) | ⬜ Waits for the gate | **eas build** |
 
-Phases 3–5 are sketches until Phase 1 says go — sized for planning, not
-committed. If the gate says no, everything above it is deleted and this
-document records why.
+**The sequencing changed 29 Aug, on instruction.** The original rule — nothing
+past the gate is committed work — was Iyad's to unmake and he unmade it:
+*"lets build the whole plan."* Phases 2 and 3 are built ahead of the gate;
+what survives of the rule is that Phases 4 and 5 still wait, because a mic
+feature cannot be looked at except on a phone, and the pilot discipline
+(build, then eyes, then the rest) binds harder than the gate ever did. The
+dev build also upgrades the gate itself: a live voice through a real phone
+mic beats acted desktop recordings as evidence.
 
 ---
 
@@ -257,6 +262,30 @@ latency word-to-highlight, battery and heat over a seven-ayah session, and
 performance on **the oldest Android that matters** — an open question below.
 Done when those three numbers exist for the model the gate chose.
 
+### Built 29 Aug — machinery in, build queued
+
+`src/app/recite-spike.tsx`, an instrument linked from nowhere: fetches the
+Tarteel model (148 MB) and Silero VAD (1 MB) once into `Paths.document`, runs
+the live mic through `RealtimeTranscriber` (15 s slice cap, VAD cutting at
+silences, `promptPreviousSlices: false` — each per Phase 0's repetition
+finding), re-runs the pure follower on every slice event, and highlights the
+Fatiha word by word with model-load and slice timings on screen. Mic
+permission strings landed in `app.json`, worded as the promise they are.
+Android development build: `48254b4c` on EAS.
+
+**To run it, Iyad:** install the APK from the EAS build page, run `npm start`
+on the iMac with the phone on the same wifi, open the project in the dev
+client, then open `newmuslimguide://recite-spike` from the phone's browser —
+the screen is deliberately linked from nowhere. Tap *Get the models* on wifi
+once, then *Start*, and recite. The three numbers to read off the screen:
+model load ms, last-slice ms, and how the highlight follows your real voice.
+
+⚠️ **Two API facts learned against the published types, for whoever touches
+this next:** whisper.rn 0.7.4's exports map has no bare entry — import
+`whisper.rn/index` and sibling paths — and `RealtimeTranscriber` takes the
+`RingBufferVad` wrapper, not the raw VAD context; the README's shorthand
+elides both, and `autoSliceOnSpeechEnd` does not exist in 0.7.4's options.
+
 ## Phase 3 — The aligner, for real
 
 The spike aligner rewritten as a tested TypeScript module, `src/lib/`, pure
@@ -264,6 +293,22 @@ logic with no audio dependency (feed it token streams in tests — including a
 mid-ayah restart, a skipped word, and garbage — and assert pointer behaviour,
 with silence-on-loss as an asserted state, not a hope). OTA; useful even
 before the native pieces ship, because it is testable without them.
+
+### Built 29 Aug — `src/lib/recite-align.ts` + `npm run align:check`
+
+One-shot and pure: hand it the reference and the full transcript on every
+recogniser event; re-running from the top makes streaming revision free. The
+API has no vocabulary for wrong — `position`, `passedOver`, `held`,
+`complete` — so the screen cannot express what the module cannot say. Ten
+check cases whose fixtures are the spike's verbatim transcripts; the check
+was flipped once to prove it fails.
+
+**One contract grew past the spike:** before the first word locks, the whole
+text is open to acquisition, not an eight-word window — practice loops a
+single ayah, which begins nowhere near word one. And one expectation was
+corrected honestly: the plain-spoken take ends `held` two words short
+(`complete: false`), because its final garbled token matches nothing — the
+follower finished still, judging nothing, which is the designed behaviour.
 
 ## Phase 4 — The screen
 

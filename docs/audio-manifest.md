@@ -11,13 +11,13 @@ has an `audioId`.
 | `takbir.mp3` | The takbir | — | Prayer — Opening takbir; Prayer — Stand for the … rakʿah | Not recorded | To be commissioned |
 | `opening.mp3` | The opening supplication | — | Prayer — Fold your hands, and open | Not recorded | To be commissioned |
 | `taawwudh.mp3` | Seeking refuge | — | Prayer — Seek refuge | Not recorded | To be commissioned |
-| `fatiha-1.mp3` | Al-Fatiha | Ayah 1 | Prayer — Recite Al-Fatiha | Ready | Mahmoud Khalil Al-Husary — muʿallim (teaching) recitation |
-| `fatiha-2.mp3` | Al-Fatiha | Ayah 2 | Prayer — Recite Al-Fatiha | Ready | Mahmoud Khalil Al-Husary — muʿallim (teaching) recitation |
-| `fatiha-3.mp3` | Al-Fatiha | Ayah 3 | Prayer — Recite Al-Fatiha | Ready | Mahmoud Khalil Al-Husary — muʿallim (teaching) recitation |
-| `fatiha-4.mp3` | Al-Fatiha | Ayah 4 | Prayer — Recite Al-Fatiha | Ready | Mahmoud Khalil Al-Husary — muʿallim (teaching) recitation |
-| `fatiha-5.mp3` | Al-Fatiha | Ayah 5 | Prayer — Recite Al-Fatiha | Ready | Mahmoud Khalil Al-Husary — muʿallim (teaching) recitation |
-| `fatiha-6.mp3` | Al-Fatiha | Ayah 6 | Prayer — Recite Al-Fatiha | Ready | Mahmoud Khalil Al-Husary — muʿallim (teaching) recitation |
-| `fatiha-7.mp3` | Al-Fatiha | Ayah 7 | Prayer — Recite Al-Fatiha | Ready | Mahmoud Khalil Al-Husary — muʿallim (teaching) recitation |
+| `fatiha-1.mp3` | Al-Fatihah | Ayah 1 | Prayer — Recite Al-Fatihah | Ready | Mahmoud Khalil Al-Husary — muʿallim (teaching) recitation |
+| `fatiha-2.mp3` | Al-Fatihah | Ayah 2 | Prayer — Recite Al-Fatihah | Ready | Mahmoud Khalil Al-Husary — muʿallim (teaching) recitation |
+| `fatiha-3.mp3` | Al-Fatihah | Ayah 3 | Prayer — Recite Al-Fatihah | Ready | Mahmoud Khalil Al-Husary — muʿallim (teaching) recitation |
+| `fatiha-4.mp3` | Al-Fatihah | Ayah 4 | Prayer — Recite Al-Fatihah | Ready | Mahmoud Khalil Al-Husary — muʿallim (teaching) recitation |
+| `fatiha-5.mp3` | Al-Fatihah | Ayah 5 | Prayer — Recite Al-Fatihah | Ready | Mahmoud Khalil Al-Husary — muʿallim (teaching) recitation |
+| `fatiha-6.mp3` | Al-Fatihah | Ayah 6 | Prayer — Recite Al-Fatihah | Ready | Mahmoud Khalil Al-Husary — muʿallim (teaching) recitation |
+| `fatiha-7.mp3` | Al-Fatihah | Ayah 7 | Prayer — Recite Al-Fatihah | Ready | Mahmoud Khalil Al-Husary — muʿallim (teaching) recitation |
 | `ruku-tasbih.mp3` | In rukuʿ | — | Prayer — Bow | Not recorded | To be commissioned |
 | `rising.mp3` | Rising from rukuʿ | — | Prayer — Stand up straight | Not recorded | To be commissioned |
 | `sujud-tasbih.mp3` | In sujud | — | Prayer — Prostrate; Prayer — Prostrate again | Not recorded | To be commissioned |

@@ -71,6 +71,7 @@
     "hadith:corpus": "node --import ./scripts/ts-resolve.mjs scripts/fetch-hadith-corpus.mjs",
     "hisn:check": "node --import ./scripts/ts-resolve.mjs scripts/hisn-annotations-check.mjs",
     "adhkar:check": "node --import ./scripts/ts-resolve.mjs scripts/adhkar-window-check.mjs",
+    "align:check": "node --import ./scripts/ts-resolve.mjs scripts/align-check.mjs",
     "narration:check": "node --import ./scripts/ts-resolve.mjs scripts/narration-check.mjs",
     "plan:check": "node --import ./scripts/ts-resolve.mjs scripts/plan-check.mjs",
     "verify:import": "node --import ./scripts/ts-resolve.mjs scripts/verify-import.mjs",

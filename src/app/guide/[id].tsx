@@ -419,9 +419,14 @@ const styles = StyleSheet.create({
    * They were equal halves, which gave the same weight to the thing you do
    * once by mistake and the thing you do thirty times a prayer. Next takes the
    * side a right thumb reaches without moving the hand.
+   *
+   * Not `flex: 0` — that shorthand sets flexBasis to 0, which sized the button
+   * to its padding alone and let the label spill past the rounded corners.
    */
   backButton: {
-    flex: 0,
+    flexGrow: 0,
+    flexShrink: 0,
+    flexBasis: 'auto',
     paddingHorizontal: Spacing.four,
   },
   secondaryButton: {

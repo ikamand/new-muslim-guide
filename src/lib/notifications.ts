@@ -18,6 +18,15 @@ import type { PlannedReminder } from './reminders';
 const ANDROID_CHANNEL = 'prayer-reminders';
 
 /**
+ * expo-notifications does not schedule on web — calling it throws, and
+ * `use-reminders` runs on every screen via Settings, so the whole web preview
+ * crashed on a module phones never miss. Phones are the product; the web
+ * build exists so changes can be looked at, and it must stay bootable.
+ * Reminders simply do not exist there: no permission, nothing scheduled.
+ */
+const NO_SCHEDULER = Platform.OS === 'web';
+
+/**
  * Android 8 and later attach sound and importance to a channel rather than to
  * the notification, and a channel's settings are fixed once it is created.
  * A custom adhan will need a new channel id, not an edit to this one — and the
@@ -41,6 +50,7 @@ export async function ensureAndroidChannel(name: string): Promise<void> {
  * how an app gets refused once and permanently.
  */
 export async function requestPermission(): Promise<boolean> {
+  if (NO_SCHEDULER) return false;
   const existing = await Notifications.getPermissionsAsync();
   if (existing.granted) return true;
   if (!existing.canAskAgain) return false;
@@ -52,6 +62,7 @@ export async function requestPermission(): Promise<boolean> {
 }
 
 export async function hasPermission(): Promise<boolean> {
+  if (NO_SCHEDULER) return false;
   return (await Notifications.getPermissionsAsync()).granted;
 }
 
@@ -70,6 +81,7 @@ export async function reschedule(
   copy: ReminderCopy,
   leadMinutes: number,
 ): Promise<number> {
+  if (NO_SCHEDULER) return 0;
   await Notifications.cancelAllScheduledNotificationsAsync();
   if (planned.length === 0) return 0;
 
@@ -94,9 +106,11 @@ export async function reschedule(
 }
 
 export async function cancelAll(): Promise<void> {
+  if (NO_SCHEDULER) return;
   await Notifications.cancelAllScheduledNotificationsAsync();
 }
 
 export async function pendingCount(): Promise<number> {
+  if (NO_SCHEDULER) return 0;
   return (await Notifications.getAllScheduledNotificationsAsync()).length;
 }

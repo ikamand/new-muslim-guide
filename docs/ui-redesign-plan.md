@@ -2215,10 +2215,43 @@ wudu illustration is its own future piece of work.
   there), so Settings no longer crashes the web preview — which is the
   surface every check-by-looking pass in this repo runs on.
 
-## Still to land
+## 3 · Learn's card grammar ✅
 
-- **3** · Learn's card grammar: one anatomy, a glyph on every card,
-  top-aligned tiles, the doubled arrow removed.
-- **4** · Welcome and Qibla: the app's own art on its front door; the
-  location button on the qibla screen itself.
-- **6** · A Latin display face for the heading rungs, piloted and looked at.
+Seventeen new glyphs in the set's grid and stroke, so every card carries a
+mark — the interlocked rings for marriage, the minbar for Jumuʿah, the grave
+marker, the khatim for Eid, the empty bowl for voluntary fasting, heat rising
+for anger, and the rest. And `pairTiles()`: tiles are 48% with `flexGrow: 1`,
+so a tile with no partner in its wrap row grew to full width with a tile's
+vertical anatomy — glyph at the top, title at the bottom, dead air between.
+Each run of consecutive tiles is measured and a leftover odd one is promoted
+to a wide row. The prayer chooser and zakat cards join the same layout pass.
+The doubled arrow on "Your firsts" was the string carrying "→" beside the
+row's arrow icon.
+
+## 4 · Welcome and Qibla ✅
+
+The welcome step carries the mihrab arch with its star at opacity 0.4 — the
+one screen every person sees had none of the app's identity. "Welcome to
+Islam." under a title already saying Welcome became "Assalamu alaikum — peace
+be upon you": the greeting is taught by being said. The qibla screen asks for
+location itself instead of pointing at another tab, behind a kaaba glyph (the
+cube, the kiswah band, the raised door) — and the same glyph rides the
+compass arrow's tip, counter-rotated so the house stays upright while the
+arrow swings. Verified against a granted fix: 58° from New York.
+
+## 6 · Literata on the heading rungs ✅
+
+`sectionTitle`, `subtitle` and `title` carry Literata SemiBold, loaded beside
+Amiri and riding an OTA the same way. `caption` through `cardTitle` stay in
+the system face on purpose — card titles double as button labels, and chrome
+should not be literary. The subpath require bundles the one 250KB weight.
+Looked at on Today, Learn, Qur'an and a guide step in both themes. **This is
+a taste call and reverting it is two lines** — if it reads wrong on a real
+phone, say so and it goes.
+
+## What this batch needs to ship
+
+OTA (`npm run update:preview`). The one dependency added,
+`@expo-google-fonts/literata`, carries no native code — no podspec, no
+gradle, no expo-module config — so the fingerprint is untouched and existing
+builds accept the update.

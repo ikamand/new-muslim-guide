@@ -10,7 +10,10 @@
     "ios": {
       "icon": "./assets/images/icon.png",
       "bundleIdentifier": "com.newmuslimguide.app",
-      "supportsTablet": false
+      "supportsTablet": false,
+      "infoPlist": {
+        "NSMicrophoneUsageDescription": "The microphone is used only while you practise reciting, so the app can follow along on screen. Nothing you say is recorded, saved, or sent anywhere."
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -20,7 +23,10 @@
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "predictiveBackGestureEnabled": false,
-      "package": "com.newmuslimguide.app"
+      "package": "com.newmuslimguide.app",
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ]
     },
     "web": {
       "output": "static",

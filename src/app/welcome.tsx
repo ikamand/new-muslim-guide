@@ -40,7 +40,24 @@ import type { UIKey } from '@/i18n/ui';
  * first thirty seconds of the app no longer ask a stranger their gender.
  */
 
-const TOTAL_STEPS = 5;
+/**
+ * Whether to ask about language at all.
+ *
+ * With one locale the question has one answer, and a radio group of one is a
+ * control that cannot do anything — so the step disappears and onboarding is
+ * four questions rather than five. Derived from `LOCALES` rather than written
+ * down: adding a language back brings the step back with it, and nobody has to
+ * remember that this is where it went.
+ */
+const ASK_LANGUAGE = LOCALES.length > 1;
+
+const TOTAL_STEPS = ASK_LANGUAGE ? 5 : 4;
+
+/** The step the flow opens on, and the floor for Back. */
+const FIRST_STEP = ASK_LANGUAGE ? 0 : 1;
+
+/** The number a step SHOWS, which is not its index once language is gone. */
+const shown = (n: number) => (ASK_LANGUAGE ? n : n - 1);
 
 /**
  * Whether a language is finished enough to say nothing about.
@@ -59,7 +76,7 @@ export default function WelcomeScreen() {
   const { locale, setLocale, t } = useLocale();
   const { setMany, onboarded, shahadaState, prayerConfidence } = useSettings();
 
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(FIRST_STEP);
   // Prefilled, so someone who reopens this from Settings sees what they chose
   // last time rather than a blank form implying they never answered.
   const [said, setSaid] = useState<ShahadaState | null>(shahadaState);
@@ -99,7 +116,7 @@ export default function WelcomeScreen() {
     leave();
   }, [revisiting, setMany, leave]);
 
-  const back = useCallback(() => setStep((current) => Math.max(0, current - 1)), []);
+  const back = useCallback(() => setStep((current) => Math.max(FIRST_STEP, current - 1)), []);
   const next = useCallback(() => setStep((current) => current + 1), []);
 
   // Android's hardware back should step backwards through the questions, not
@@ -107,7 +124,7 @@ export default function WelcomeScreen() {
   useEffect(() => {
     if (Platform.OS !== 'android') return;
     const subscription = BackHandler.addEventListener('hardwareBackPress', () => {
-      if (step === 0) return false;
+      if (step === FIRST_STEP) return false;
       back();
       return true;
     });
@@ -132,10 +149,10 @@ export default function WelcomeScreen() {
     most people this is one tap on Continue rather than a decision, which is the
     difference between asking and handing someone a picker.
   */
-  if (step === 0) {
+  if (step === 0 && ASK_LANGUAGE) {
     return (
       <StepFrame
-        step={1}
+        step={shown(1)}
         total={TOTAL_STEPS}
         title={t('onboarding.language.title')}
         onSkip={skip}
@@ -164,7 +181,7 @@ export default function WelcomeScreen() {
   if (step === 1) {
     return (
       <StepFrame
-        step={2}
+        step={shown(2)}
         total={TOTAL_STEPS}
         title={t('onboarding.welcome.title')}
         onSkip={skip}
@@ -189,7 +206,7 @@ export default function WelcomeScreen() {
   if (step === 2) {
     return (
       <StepFrame
-        step={3}
+        step={shown(3)}
         total={TOTAL_STEPS}
         title={t('onboarding.said.title')}
         onBack={back}
@@ -217,7 +234,7 @@ export default function WelcomeScreen() {
   if (step === 3) {
     return (
       <StepFrame
-        step={4}
+        step={shown(4)}
         total={TOTAL_STEPS}
         title={t('onboarding.prays.title')}
         onBack={back}
@@ -244,7 +261,7 @@ export default function WelcomeScreen() {
 
   return (
     <StepFrame
-      step={5}
+      step={shown(5)}
       total={TOTAL_STEPS}
       title={t('onboarding.reassure.title')}
       onBack={back}

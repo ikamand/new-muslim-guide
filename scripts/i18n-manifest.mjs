@@ -149,9 +149,15 @@ const csv =
 const done = Object.fromEntries(
   targets.map((l) => [l, rows.filter((r) => CONTENT_DICTS[l][r.english]).length]),
 );
-const summary = targets
-  .map((l) => `${LOCALE_NAMES[l]} ${done[l]}/${rows.length}`)
-  .join(', ');
+/*
+  With no target locales this is a bare extraction of the English, which is
+  exactly what it is for: the sheet you hand a translator on the day a language
+  comes back. It says so rather than printing an empty table and a stray full
+  stop.
+*/
+const summary = targets.length
+  ? targets.map((l) => `${LOCALE_NAMES[l]} ${done[l]}/${rows.length}`).join(', ')
+  : 'English only — no other language is enabled';
 
 const md = `# Translation manifest
 
@@ -168,11 +174,18 @@ column lists every place a string is used — worth reading where the same
 English needs different wording in another language.
 
 Anything untranslated falls back to English, so a partly finished language is
-safe to ship.
+safe to ship — though "safe" is not "finished", which is what removing French
+and Spanish was about.
 
-| Language | Translated | Remaining |
+${
+  targets.length
+    ? `| Language | Translated | Remaining |
 |---|---|---|
-${targets.map((l) => `| ${LOCALE_NAMES[l]} | ${done[l]} | ${rows.length - done[l]} |`).join('\n')}
+${targets.map((l) => `| ${LOCALE_NAMES[l]} | ${done[l]} | ${rows.length - done[l]} |`).join('\n')}`
+    : `No language is enabled but English — see the note in \`src/i18n/locales.ts\`
+for why, and for how to bring one back. This sheet is the English side of that
+work, kept current so the day it happens there is nothing to reconstruct.`
+}
 
 ⚠️ These are translations of Qur'an, of dhikr said in prayer, and of
 instructions on how to worship. They need a qualified translator in each

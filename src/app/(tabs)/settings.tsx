@@ -92,8 +92,10 @@ function SourcesRow() {
 /**
  * Language, named in each language.
  *
- * A list rather than a picker: four options fit on screen, and a modal to
- * choose between four things is a step nobody needs.
+ * A list rather than a picker: the handful of options fit on screen, and a
+ * modal to choose between a few things is a step nobody needs.
+ *
+ * Rendered only when there is more than one language — see the call site.
  */
 function LanguageGroup() {
   const theme = useTheme();
@@ -402,12 +404,20 @@ export default function SettingsScreen() {
 
         <StorageGroup />
 
-        <View style={styles.section}>
-          <ThemedText type="smallBold" themeColor="textSecondary" style={styles.sectionTitle}>
-            {t('settings.language')}
-          </ThemedText>
-          <LanguageGroup />
-        </View>
+        {/*
+          Hidden while there is one language, heading and all — a settings
+          section offering a single choice is a row that reads as broken.
+          Derived from `LOCALES`, so adding a language back restores the whole
+          section without anyone remembering it lives here.
+        */}
+        {LOCALES.length > 1 && (
+          <View style={styles.section}>
+            <ThemedText type="smallBold" themeColor="textSecondary" style={styles.sectionTitle}>
+              {t('settings.language')}
+            </ThemedText>
+            <LanguageGroup />
+          </View>
+        )}
 
         <View style={[styles.group, { backgroundColor: theme.backgroundElement, borderColor: theme.border }]}>
           <SettingRow

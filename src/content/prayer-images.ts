@@ -37,17 +37,15 @@ import type { Posture } from './types';
 export type PostureImage = number;
 
 export const PRAYER_IMAGES: Partial<Record<Posture, PostureImage>> = {
-  standing: require('@/assets/images/prayer/standing.png'),
-  takbir: require('@/assets/images/prayer/takbir.png'),
-  bowing: require('@/assets/images/prayer/bowing.png'),
-  rising: require('@/assets/images/prayer/rising.png'),
-  prostrating: require('@/assets/images/prayer/prostrating.png'),
-  sitting: require('@/assets/images/prayer/sitting.png'),
-  tashahhud: require('@/assets/images/prayer/tashahhud.png'),
-  'taslim-right': require('@/assets/images/prayer/taslim-right.png'),
-  'taslim-left': require('@/assets/images/prayer/taslim-left.png'),
-  // Still the drawn figure — a tap and water rather than a body.
-  // washing: require('@/assets/images/prayer/washing.png'),
+  /*
+    Empty since 29 Aug 2026, deliberately. The nine PNGs that filled it were
+    flat-shaded cartoon figures — the reference style, not the app's — and
+    Iyad decided they go: a posture drawing must be large, clear and accurate
+    in the app's own line-art voice, or absent until one is. The drawn
+    `PostureDiagram` in `illustrations.tsx` is the current answer; a
+    commissioned set can land here one file at a time, exactly as the header
+    above describes, and wins over the drawing the moment it does.
+  */
 };
 
 /**

@@ -2165,3 +2165,60 @@ in `package.json`. Dropping the cache drops the build.
 **Phase 10 brings it back, deliberately.** Downloading a voice needs a
 filesystem, so that phase needs a native build — which is the main reason it
 sits after the three above rather than inside them.
+
+---
+
+# Built 29 Aug — the design audit's six items
+
+A full audit of the app's design ran on the web preview, screen by screen in
+both themes, and rated it 7.5/10: a strong system worn unevenly. Iyad agreed
+all six findings and ordered them built. Recorded here as each lands.
+
+## 1 · The cartoon postures are gone — and drawn postures replaced them ✅
+
+**Iyad's decision, in his words: the replacement must be "large and effective,
+clear to see every step accurately — otherwise it shouldn't be there at all
+until we figure something out."**
+
+The nine flat-shaded cartoon PNGs contradicted the style decision recorded in
+`illustrations.tsx` (line art in the app's own stroke, no imported cartoon) —
+and one contradicted its own caption: the bowing figure's hands hung loose
+beside "hands gripping your knees". Deleted from `assets/images/prayer/`
+(recoverable in git history), the `require`s emptied out of
+`content/prayer-images.ts`, the pipeline kept for a commissioned set.
+
+**`PostureDiagram` in `illustrations.tsx` is the replacement**: nine large
+line drawings on one stage — faint mihrab arch, ground line, 2.2-unit stroke,
+body shapes filled with the card colour so nearer limbs occlude farther ones.
+Front view where the hands are the information (qiyam, takbir, taslim),
+profile where the silhouette is the ruling (rukūʿ, sujūd, the sitting).
+Iterated against screenshots in both themes before porting. ⚠️ Unreviewed —
+`docs/scholarly-review.md` §1.11 carries exactly what each drawing asserts.
+
+## 2 · The diagram appears only when the body moves ✅
+
+Four standing steps in a row repeated the same picture, and on "Seek refuge"
+the words were below the fold. Now the guide shows the diagram on the step
+where the posture *changes*; on a held posture the kicker names it and the
+recitation leads. One asymmetry, deliberate: `sitting` straight after
+`tashahhud` draws nothing (a finger lowers, the body stays), while entering
+`tashahhud` is precisely when the finger diagram earns its place. `washing`
+never draws — the tap glyph repeated on every wudu step taught nothing, and
+wudu illustration is its own future piece of work.
+
+## 5 · Two bugs — both verified on screen ✅
+
+- The guide footer's Back button was styled `flex: 0`, whose implicit
+  `flexBasis: 0` collapsed it to its padding and let the label spill past the
+  corners — on every platform, not just web.
+- `lib/notifications.ts` now answers honestly on web (no scheduler exists
+  there), so Settings no longer crashes the web preview — which is the
+  surface every check-by-looking pass in this repo runs on.
+
+## Still to land
+
+- **3** · Learn's card grammar: one anatomy, a glyph on every card,
+  top-aligned tiles, the doubled arrow removed.
+- **4** · Welcome and Qibla: the app's own art on its front door; the
+  location button on the qibla screen itself.
+- **6** · A Latin display face for the heading rungs, piloted and looked at.

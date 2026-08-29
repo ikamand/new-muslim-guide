@@ -3,7 +3,7 @@ import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 import { useRef, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 
-import { PostureFigure, RakahProgress } from '@/components/illustrations';
+import { PostureDiagram, RakahProgress } from '@/components/illustrations';
 import { PressableLink } from '@/components/pressable-link';
 import { RecitationCard } from '@/components/recitation-card';
 import { ContentNoteCard } from '@/components/content-note';
@@ -95,6 +95,25 @@ export default function GuideScreen() {
   const step = guide.steps[index];
   /** 0 for anything without rakʿahs — wudu, ghusl, the shahada. */
   const totalRakahs = guide.steps.reduce((most, s) => Math.max(most, s.rakah ?? 0), 0);
+  /*
+    The diagram appears only when the body MOVES.
+
+    Four standing steps in a row used to repeat the same picture, and the
+    repeat cost the one thing a recite step is for: the figure took half the
+    screen and pushed the words below the fold. When the posture is the same
+    as the step before, the reader's body already knows it — the kicker still
+    names it, the screen reader still hears it, and the words lead.
+
+    One asymmetry: `sitting` straight after `tashahhud` is not a movement —
+    the body stays put and a finger lowers — so it draws nothing, while
+    `tashahhud` after `sitting` is precisely when the finger diagram earns
+    its place.
+  */
+  const previousPosture = index > 0 ? guide.steps[index - 1].posture : undefined;
+  const postureChanged =
+    step.posture !== undefined &&
+    step.posture !== previousPosture &&
+    !(step.posture === 'sitting' && previousPosture === 'tashahhud');
   const isFirst = index === 0;
   const isLast = index === guide.steps.length - 1;
   const progress = (index + 1) / guide.steps.length;
@@ -196,18 +215,20 @@ export default function GuideScreen() {
         {/*
           The position, under the words that describe it.
 
-          It used to be a 44px tile beside the title, which is a decoration
-          rather than an instruction — too small to copy, and above the
-          sentence it illustrates. Someone on a mat reads what to do and then
-          looks at what it should look like, so the picture goes where the
-          eye lands next.
-
-          `POSTURE_KEY` still names it above, for a screen reader and for
-          anyone who wants the word.
+          Someone on a mat reads what to do and then looks at what it should
+          look like, so the picture goes where the eye lands next — but only
+          on the step where the position is new (see `postureChanged` above).
+          `POSTURE_KEY` still names it, for a screen reader and for anyone who
+          wants the word. `PostureDiagram` skips `washing` itself: a tap glyph
+          repeated on every wudu step taught nothing.
         */}
-        {step.posture && (
+        {step.posture && step.posture !== 'washing' && postureChanged && (
           <View style={[styles.posture, { backgroundColor: theme.backgroundElement }]}>
-            <PostureFigure posture={step.posture} color={theme.accent} height={300} />
+            <PostureDiagram
+              posture={step.posture}
+              color={theme.accent}
+              surface={theme.backgroundElement}
+            />
           </View>
         )}
 

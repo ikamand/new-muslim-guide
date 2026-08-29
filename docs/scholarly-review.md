@@ -732,6 +732,30 @@ should not have.**
   Levant and Iraq, or is there a better-attested convention for either? And is
   the Karachi box's southern reach worth fixing?
 
+### 1.11 The posture diagrams — a drawing teaches a ruling
+
+**NEW — 29 August 2026. Drawn by a model and cleared by nobody.**
+
+- **File** `src/components/illustrations.tsx`, `PostureDiagram`
+- **What changed** The nine cartoon PNGs were removed on Iyad's instruction and
+  replaced with line drawings in the app's own style, one per posture, shown on
+  the guide step where the body moves. The cartoons had their own substance
+  problem — the bowing figure's hands hung loose beside a caption saying
+  "hands gripping your knees" — so this is a correction as well as a restyle,
+  but the replacements are new content, not reviewed content.
+- **What each drawing asserts** qiyam: hands folded on the lower chest, right
+  over left. takbir: palms raised beside the head. rukūʿ: back flat, head
+  level, hands gripping the knees, legs straight. sujūd: forehead and nose to
+  the ground, palms flat beside the head, elbows raised, knees down, toes
+  tucked. julūs: sitting back on the heel, hands on the thighs. tashahhud: the
+  right index finger extended. taslim: the head turned over the shoulder,
+  drawn as seen from behind — which is also how its caption describes it.
+- **Reviewer** Does each drawing match the step it sits under, and the school
+  the step teaches? Hand height in qiyam and takbir are exactly the points the
+  app's own `differs` notes flag as school-dependent — the drawing must not
+  contradict the note beside it. Is the sujūd figure's weight distribution
+  acceptable (forearms off the ground, belly off the thighs)?
+
 ---
 
 ## PRIORITY 2 — should review

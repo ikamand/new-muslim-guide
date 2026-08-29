@@ -2,7 +2,7 @@ import { getPostureImage, PORTRAIT_POSTURES } from '@/content/prayer-images';
 import type { Posture } from '@/content/types';
 
 import { Image, StyleSheet, Text, View } from 'react-native';
-import Svg, { Circle, G, Line, Path } from 'react-native-svg';
+import Svg, { Circle, Ellipse, G, Line, Path } from 'react-native-svg';
 
 import type { DayTimes, PrayerId } from '@/lib/prayer-times';
 
@@ -22,6 +22,14 @@ import type { DayTimes, PrayerId } from '@/lib/prayer-times';
  * figures. The reversal is recorded rather than quietly applied, because the
  * original was a substance decision and a later reader deserves to know it was
  * made twice, by the person whose call it is.
+ *
+ * **And a third decision, 29 Aug 2026.** What actually shipped against the
+ * paragraph above was a set of flat-shaded cartoon PNGs — the *reference's*
+ * style, which the section below says would look imported, and it did. Iyad
+ * removed them: a posture drawing is either large, clear and accurate in the
+ * app's own line, or absent until one is. `PostureDiagram` is the drawn
+ * answer, and the PNG pipeline in `content/prayer-images.ts` stays empty,
+ * waiting for a commissioned set if one is ever wanted.
  *
  * What did not change: everything else here stays non-figurative. Glyphs,
  * the mihrab, the girih band and the sun arc are marks and architecture, and
@@ -561,6 +569,241 @@ export function PostureFigure({
   );
 }
 
+
+/**
+ * The prayer posture, drawn large enough to copy.
+ *
+ * This is the teaching illustration for the guide's steps — the whole figure,
+ * in the app's own stroke, inside a faint mihrab arch so the frame says where
+ * the body is: in prayer. Body shapes are filled with the card's own colour so
+ * a nearer limb occludes what is behind it, which is what keeps line art
+ * legible at this size.
+ *
+ * The views are mixed on purpose, the way printed prayer guides mix them:
+ * front where the hands are the information (qiyam's fold, takbir, the salam's
+ * turned head), profile where the silhouette is the ruling (the flat back of
+ * rukūʿ, sujūd's seven points, the sitting). One stage, one ground line, one
+ * scale, so the sequence still reads as one person moving.
+ *
+ * What each drawing asserts, because a drawing teaches a ruling:
+ * qiyam — hands folded on the lower chest, right over left. takbir — palms
+ * raised beside the head. rukūʿ — back flat, head level with it, hands
+ * gripping the knees, legs straight. sujūd — forehead and nose to the ground,
+ * palms flat beside the head, elbows raised, knees down, toes tucked. julūs —
+ * sitting back on the heel, hands on the thighs. tashahhud — the right index
+ * finger extended. taslim — the head turned over the shoulder.
+ *
+ * ⚠️ Drawn by a model and cleared by nobody. Every assertion above needs the
+ * same qualified review as a sentence about how to pray — tracked in
+ * `docs/scholarly-review.md`.
+ *
+ * `washing` has no diagram on purpose: a tap glyph repeated on all ten wudu
+ * steps taught nothing, and a wrong drawing of a specific step would be worse
+ * than the text alone. Wudu illustration is its own future piece of work.
+ */
+export function PostureDiagram({
+  posture,
+  color,
+  surface,
+}: {
+  posture: Posture;
+  color: string;
+  /** The card colour behind the drawing — body shapes fill with it. */
+  surface: string;
+}) {
+  if (posture === 'washing') return null;
+
+  /** A front-view head: circle and kufi dome, no face. */
+  const headFront = (cx: number, cy: number) => (
+    <G>
+      <Circle cx={cx} cy={cy} r={10} fill={surface} />
+      <Path d={`M${cx - 8.6} ${cy - 4.4} a8.6 8 0 0 1 17.2 0 z`} fill={surface} />
+    </G>
+  );
+
+  /** A profile head: circle, kufi, and the least nose that reads a direction. */
+  const headProfile = (cx: number, cy: number, flip = false) => {
+    const s = flip ? -1 : 1;
+    return (
+      <G>
+        <Circle cx={cx} cy={cy} r={9.5} fill={surface} />
+        <Path
+          d={`M${cx - s * 8.2} ${cy - 4.2} a8.2 7.6 0 0 ${flip ? 0 : 1} ${s * 16.4} 0 z`}
+          fill={surface}
+        />
+        <Path d={`M${cx + s * 9} ${cy + 1} q${s * 3.4} 1.2 ${s * 2} 4.6`} />
+      </G>
+    );
+  };
+
+  /** The standing robe shared by qiyam, takbir and iʿtidal. */
+  const robeStanding = (
+    <G>
+      <Path d="M120 178 v6 q0 4 3.5 4 h3 q3 0 3 -3 v-7 z" fill={surface} strokeWidth={1.8} />
+      <Path d="M130.5 178 v7 q0 3 3 3 h3 q3.5 0 3.5 -4 v-6 z" fill={surface} strokeWidth={1.8} />
+      <Path
+        d="M119 88 Q113 90 112 96 L104 168 Q103.5 174 109 175.5 Q118 178 130 178 Q142 178 151 175.5 Q156.5 174 156 168 L148 96 Q147 90 141 88 Q130 85.5 119 88 Z"
+        fill={surface}
+      />
+    </G>
+  );
+
+  /** The seated profile shared by julūs and tashahhud. */
+  const seatedBody = (
+    <G>
+      <Path d="M118 186 L113 186 Q108 180 112 172 L117 166 L121 172 Z" fill={surface} strokeWidth={1.8} />
+      <Path
+        d="M125 99 Q117 102 117 112 L116 144 Q115 152 122 155 L138 158 Q145 157 144 148 L143 110 Q142 101 133 99 Q129 97.5 125 99 Z"
+        fill={surface}
+      />
+      <Path
+        d="M117 150 Q133 152 145 162 L152 170 Q157 177 152 182 Q148 186 140 186 L117 186 Q112 178 117 150 Z"
+        fill={surface}
+      />
+      {headProfile(133, 88)}
+    </G>
+  );
+
+  /** The salam, seated front-on, the head turned over one shoulder. */
+  const taslim = (left: boolean) => {
+    const s = left ? -1 : 1;
+    return (
+      <G>
+        <Path d="M102 188 Q98 170 112 162 L148 162 Q162 170 158 188 Z" fill={surface} />
+        <Path
+          d="M118 107 Q112 109 111 115 L106 154 Q105 160 111 161 Q130 165 149 161 Q155 160 154 154 L149 115 Q148 109 142 107 Q130 104.5 118 107 Z"
+          fill={surface}
+        />
+        {headProfile(130 + s * 3, 94, left)}
+        <Path
+          d={`M${130 + s * 16} 76 Q${130 + s * 28} 82 ${130 + s * 30} 94`}
+          strokeDasharray="1.5 5"
+          strokeWidth={1.8}
+          strokeOpacity={0.7}
+        />
+        <Path
+          d={`M${130 + s * 26.5} 88 L${130 + s * 30} 94 L${130 + s * 24} 95.5`}
+          strokeWidth={1.8}
+          strokeOpacity={0.7}
+        />
+        <Path d="M115 112 L110 132 L116 148" />
+        <Path d="M145 112 L150 132 L144 148" />
+        <Ellipse cx={118} cy={152} rx={3.6} ry={2.8} fill={surface} />
+        <Ellipse cx={142} cy={152} rx={3.6} ry={2.8} fill={surface} />
+      </G>
+    );
+  };
+
+  return (
+    <View style={{ width: '100%', aspectRatio: 260 / 210 }}>
+      <Svg width="100%" height="100%" viewBox="0 0 260 210" fill="none">
+        {/* The niche: prayer's own architecture, kept faint behind the body. */}
+        <Path
+          d="M66 188 L66 110 Q66 56 130 42 Q194 56 194 110 L194 188"
+          stroke={color}
+          strokeOpacity={0.16}
+          strokeWidth={1.5}
+          strokeLinecap="round"
+        />
+        <Path
+          d="M80 188 L80 112 Q80 70 130 58 Q180 70 180 112 L180 188"
+          stroke={color}
+          strokeOpacity={0.1}
+          strokeWidth={1.5}
+          strokeLinecap="round"
+        />
+        <Path d="M28 188 H232" stroke={color} strokeOpacity={0.35} strokeWidth={1.8} strokeLinecap="round" />
+
+        <G stroke={color} strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round" fill="none">
+          {posture === 'standing' && (
+            <G>
+              {headFront(130, 74)}
+              {robeStanding}
+              <Path d="M115 97 L110 126 L127 134" />
+              <Path d="M145 97 L150 126 L134 134" />
+              <Ellipse cx={130} cy={134} rx={4.6} ry={3.4} fill={surface} />
+            </G>
+          )}
+
+          {posture === 'takbir' && (
+            <G>
+              {headFront(130, 74)}
+              {robeStanding}
+              <Path d="M115 98 L108 114 L110.5 94" />
+              <Path d="M145 98 L152 114 L149.5 94" />
+              <Ellipse cx={111} cy={87} rx={4.2} ry={5.8} fill={surface} />
+              <Ellipse cx={149} cy={87} rx={4.2} ry={5.8} fill={surface} />
+            </G>
+          )}
+
+          {posture === 'rising' && (
+            <G>
+              {headFront(130, 74)}
+              {robeStanding}
+              <Path d="M113 97 L107 138" />
+              <Path d="M147 97 L153 138" />
+              <Circle cx={106.5} cy={142} r={3.2} fill={surface} />
+              <Circle cx={153.5} cy={142} r={3.2} fill={surface} />
+            </G>
+          )}
+
+          {posture === 'bowing' && (
+            <G>
+              <Path d="M112 188 v-6 q0 -4 4 -4 h22 q6 0 6 5 v5 z" fill={surface} strokeWidth={1.8} />
+              <Path d="M116 178 L116 126 L138 133 L140 178 Z" fill={surface} />
+              <Path
+                d="M116 128 Q112 120 120 116 L156 110 Q164 109 166 116 Q168 124 160 127 L124 136 Q116 137 116 128 Z"
+                fill={surface}
+              />
+              {headProfile(174, 117)}
+              <Path d="M156 122 L149 134 L142 142" />
+              <Circle cx={140.5} cy={144} r={3.4} fill={surface} />
+            </G>
+          )}
+
+          {posture === 'prostrating' && (
+            <G>
+              <Path
+                d="M104 188 L103 181 Q103 176 108 174 L113 172 L115 179 L113 188 Z"
+                fill={surface}
+                strokeWidth={1.8}
+              />
+              <Path d="M112 188 v-7 q0 -3 3 -3 h26 q6 0 7 5 l1 5 z" fill={surface} strokeWidth={1.8} />
+              <Path
+                d="M136 180 L133 146 Q132 136 139 132 Q146 129 151 135 L178 160 Q184 166 182 172 L174 181 Q170 185 162 185 L148 185 Q140 185 138 178 Z"
+                fill={surface}
+              />
+              {headProfile(192, 176)}
+              <Path d="M170 162 L163 176 L176 183" />
+              <Path d="M177 188 q-1 -5 3 -5 h14 q3 0 3 2.5 q0 2.5 -3 2.5 z" fill={surface} strokeWidth={1.8} />
+            </G>
+          )}
+
+          {posture === 'sitting' && (
+            <G>
+              {seatedBody}
+              <Path d="M134 110 L132 132 L142 148" />
+              <Ellipse cx={144.5} cy={150} rx={3.6} ry={2.8} fill={surface} />
+            </G>
+          )}
+
+          {posture === 'tashahhud' && (
+            <G>
+              {seatedBody}
+              {/* Hand held just off the thigh so the raised finger reads
+                  against clear ground — on the lap line it vanished. */}
+              <Path d="M134 110 L131 130 L143 141" />
+              <Path d="M143 141 L157 135" />
+            </G>
+          )}
+
+          {posture === 'taslim-right' && taslim(false)}
+          {posture === 'taslim-left' && taslim(true)}
+        </G>
+      </Svg>
+    </View>
+  );
+}
 
 export function StagePath({
   stages,

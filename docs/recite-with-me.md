@@ -188,6 +188,31 @@ machine's mic — the first human audio through the pipeline.
 - Still open: the deliberately-beginner and struggling takes, which are the
   registers the gate actually decides on.
 
+**Corrected the same evening — Iyad recited the whole Fatiha, and the section
+above is wrong twice.** He confirmed it: the basmala and ayah 3 were both
+recited. The energy trace shows speech from 0.5 s, and both appear the moment
+the audio is decoded in ~6 s slices instead of one 26 s pass. The whole-file
+decode was **suppressing genuine repetitions** — a known Whisper decoder
+behaviour, and the Fatiha repeats itself (the basmala's phrases return as
+ayah 3). Three consequences, each now a requirement:
+
+1. **Decode in short slices, never whole passages.** This is what
+   `whisper.rn`'s `RealtimeTranscriber` does anyway (VAD-cut slices), so the
+   phone design was already right and the desktop test mode was the
+   misleading configuration. Phase 2 must confirm repetitions survive its
+   slicing on real hardware.
+2. **Widen on any stall, not only at cold start** — my fixed-time slice cuts
+   garbled words mid-syllable and froze the narrow window two words deep;
+   VAD slicing will garble less, but the aligner should not depend on that.
+   With widening: sliced decode of Iyad's take tracks **21/29 (72%), start
+   to end**, bismillah locking immediately — remaining losses are slice-edge
+   artifacts plus one orthographic variant (the model writes رحمان where the
+   app writes الرحمٰن; Phase 3's normaliser should treat them as one word).
+   Guards unchanged throughout: silence 0, English 0, Husary 29/29.
+3. **The score is not the experience.** 21/29 with recovery everywhere means
+   a highlight that follows a complete, correct recitation while skipping a
+   few words at seams — visible as a jump, never as a freeze or a "wrong".
+
 ### Measured 29 Aug, later — three adversarial probes, and a design lesson
 
 Probes the machine could make without a human: ten seconds of silence, an

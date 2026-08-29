@@ -1057,7 +1057,26 @@ export type GlyphName =
   | 'rulings'
   | 'your-name'
   | 'life-before'
-  | 'zakat';
+  | 'zakat'
+  // 29 Aug: the seventeen topics that still had no mark. A card without a
+  // glyph beside twenty cards with one read as unfinished, which it was.
+  | 'behind-an-imam'
+  | 'quranic-duas'
+  | 'why-people-differ'
+  | 'marriage-shape'
+  | 'a-partner-already'
+  | 'jumuah'
+  | 'janazah'
+  | 'small-sunnahs'
+  | 'teaching-someone'
+  | 'if-you-stopped'
+  | 'being-corrected'
+  | 'anger'
+  | 'showing-off'
+  | 'arrogance'
+  | 'envy'
+  | 'voluntary-fasting'
+  | 'eid';
 
 /**
  * The card marks.
@@ -1437,6 +1456,162 @@ export function Glyph({ name, color, size = 22 }: { name: GlyphName; color: stri
           <Path d="M3 10h18" />
           <Path d="M8 3v4" />
           <Path d="M16 3v4" />
+        </G>
+      )}
+
+      {/* A row: two arches together, the taller one ahead of them. */}
+      {name === 'behind-an-imam' && (
+        <G {...stroke}>
+          <Path d="M2.5 20.5h19" />
+          <Path d="M3 20.5v-5.5q0-2.6 2.75-3.2q2.75.6 2.75 3.2v5.5" />
+          <Path d="M9.5 20.5v-5.5q0-2.6 2.75-3.2q2.75.6 2.75 3.2v5.5" />
+          <Path d="M16 20.5v-8q0-3.4 3-4.1q3 .7 3 4.1v8" strokeWidth={1.4} />
+        </G>
+      )}
+
+      {/* The open book, and one word of it rising. */}
+      {name === 'quranic-duas' && (
+        <G {...stroke}>
+          <Path d="M4 7h7a2 2 0 0 1 2 2v12a2 2 0 0 0-2-2H4z" />
+          <Path d="M20 7h-5a2 2 0 0 0-2 2v12a2 2 0 0 1 2-2h5z" />
+          <Circle cx={13} cy={3.4} r={1.4} />
+        </G>
+      )}
+
+      {/* One stem, two branches, both tips at the same height. */}
+      {name === 'why-people-differ' && (
+        <G {...stroke}>
+          <Path d="M12 21v-8" />
+          <Path d="M12 13q0-4-4-5L5.8 7.4" />
+          <Path d="M12 13q0-4 4-5l2.2-.6" />
+          <Circle cx={4.6} cy={7} r={1.3} />
+          <Circle cx={19.4} cy={7} r={1.3} />
+        </G>
+      )}
+
+      {/* Two rings, interlocked. */}
+      {name === 'marriage-shape' && (
+        <G {...stroke}>
+          <Circle cx={9.5} cy={12} r={5.5} />
+          <Circle cx={14.5} cy={12} r={5.5} />
+        </G>
+      )}
+
+      {/* The same two rings, one of them not yet settled. */}
+      {name === 'a-partner-already' && (
+        <G {...stroke}>
+          <Circle cx={9.5} cy={12} r={5.5} />
+          <Circle cx={14.5} cy={12} r={5.5} strokeDasharray="2.5 3" />
+        </G>
+      )}
+
+      {/* The minbar: steps up to the place the khutbah is given from. */}
+      {name === 'jumuah' && (
+        <G {...stroke}>
+          <Path d="M3 20h18" />
+          <Path d="M6 20v-3h3v-3h3v-3h3v-4h4v13" />
+        </G>
+      )}
+
+      {/* A grave marker, rounded, on level ground. */}
+      {name === 'janazah' && (
+        <G {...stroke}>
+          <Path d="M4 20h16" />
+          <Path d="M9 20V9q0-3.5 3-3.5T15 9v11" />
+        </G>
+      )}
+
+      {/* Small things, kept up: three marks climbing one quiet path. */}
+      {name === 'small-sunnahs' && (
+        <G {...stroke}>
+          <Path d="M4.5 19Q12 14 20 6.5" strokeOpacity={0.45} strokeDasharray="1.5 3" />
+          <Circle cx={6.5} cy={17.6} r={1.4} />
+          <Circle cx={12.2} cy={13.4} r={1.9} />
+          <Circle cx={18} cy={8.3} r={2.4} />
+        </G>
+      )}
+
+      {/* From one to another: what is passed on grows on the way. */}
+      {name === 'teaching-someone' && (
+        <G {...stroke}>
+          <Circle cx={6} cy={15.5} r={1.8} />
+          <Path d="M7.5 12.8Q12 7 16.2 10.4" />
+          <Path d="M15.4 8.4L16.6 10.7L14.2 11.4" />
+          <Circle cx={17.8} cy={15.5} r={2.6} />
+        </G>
+      )}
+
+      {/* A road that stopped, and carries on from where it is. */}
+      {name === 'if-you-stopped' && (
+        <G {...stroke}>
+          <Path d="M3.5 12h6" />
+          <Path d="M13.5 12h4.5" />
+          <Path d="M16.5 9.5L19.5 12L16.5 14.5" />
+        </G>
+      )}
+
+      {/* A word received, and taken well. */}
+      {name === 'being-corrected' && (
+        <G {...stroke}>
+          <Path d="M4 18V8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H8z" />
+          <Path d="M9 11l2 2 4-4.5" />
+        </G>
+      )}
+
+      {/* Heat rising — the thing the page teaches you to let pass. */}
+      {name === 'anger' && (
+        <G {...stroke}>
+          <Path d="M8 19q-2.5-3 0-6t0-6" />
+          <Path d="M13 19q-2.5-3 0-6t0-6" />
+          <Path d="M18 19q-2.5-3 0-6t0-6" />
+        </G>
+      )}
+
+      {/* A mirror on its stand. */}
+      {name === 'showing-off' && (
+        <G {...stroke}>
+          <Circle cx={12} cy={10.5} r={6} />
+          <Path d="M12 16.5V20" />
+          <Path d="M9 20h6" />
+          <Path d="M14.3 7.4q2 1.2 2.3 3.3" strokeOpacity={0.55} />
+        </G>
+      )}
+
+      {/* Three alike; one holds itself above the line the others stand on. */}
+      {name === 'arrogance' && (
+        <G {...stroke}>
+          <Path d="M4 17.5h16" />
+          <Circle cx={8} cy={15.3} r={2} />
+          <Circle cx={16} cy={15.3} r={2} />
+          <Circle cx={12} cy={6.5} r={2.4} />
+        </G>
+      )}
+
+      {/* Two portions; the eye kept on the brighter one. */}
+      {name === 'envy' && (
+        <G {...stroke}>
+          <Circle cx={7} cy={15} r={3} />
+          <Circle cx={16.5} cy={10} r={3} />
+          <Path d="M16.5 4.5v-2" strokeWidth={1.3} />
+          <Path d="M21 6.4l1.4-1.4" strokeWidth={1.3} />
+          <Path d="M12 6.4L10.6 5" strokeWidth={1.3} />
+          <Path d="M9.7 13.2l3.4-1.8" strokeDasharray="2 2.5" />
+        </G>
+      )}
+
+      {/* An empty bowl, until sunset. */}
+      {name === 'voluntary-fasting' && (
+        <G {...stroke}>
+          <Path d="M4.5 10.5h15" />
+          <Path d="M4.5 10.5a7.5 7.5 0 0 0 15 0" />
+          <Path d="M9.5 20h5" />
+        </G>
+      )}
+
+      {/* The khatim, whole: the festival at the end of the completed month. */}
+      {name === 'eid' && (
+        <G {...stroke}>
+          <Path d={khatim(12, 12, 8.5, 4.5)} />
         </G>
       )}
     </Svg>

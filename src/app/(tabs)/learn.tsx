@@ -90,6 +90,25 @@ const TOPIC_GLYPH: Record<string, GlyphName> = {
   rulings: 'rulings',
   'your-name': 'your-name',
   'life-before': 'life-before',
+  // 29 Aug: the seventeen that were still bare. Every card carries a mark
+  // now — a lone unmarked card read as a mistake, and was one.
+  'behind-an-imam': 'behind-an-imam',
+  'quranic-duas': 'quranic-duas',
+  'why-people-differ': 'why-people-differ',
+  'marriage-shape': 'marriage-shape',
+  'a-partner-already': 'a-partner-already',
+  jumuah: 'jumuah',
+  janazah: 'janazah',
+  'small-sunnahs': 'small-sunnahs',
+  'teaching-someone': 'teaching-someone',
+  'if-you-stopped': 'if-you-stopped',
+  'being-corrected': 'being-corrected',
+  anger: 'anger',
+  'showing-off': 'showing-off',
+  arrogance: 'arrogance',
+  envy: 'envy',
+  'voluntary-fasting': 'voluntary-fasting',
+  eid: 'eid',
 };
 
 function LearnCard({
@@ -357,6 +376,54 @@ function WhereYouAre() {
   );
 }
 
+/**
+ * One card's worth of facts, before it is laid out.
+ *
+ * The layout pass below decides `wide` twice: first from the title (a long
+ * title in a half tile truncates the words that make it findable), then from
+ * the neighbourhood — see `pairTiles`.
+ */
+type CardSpec = {
+  key: string;
+  href: Href;
+  title: string;
+  subtitle: string;
+  count: number;
+  unit: UIKey;
+  glyph?: GlyphName;
+  wide: boolean;
+};
+
+/**
+ * No tile stands alone.
+ *
+ * Tiles are laid out at 48% with `flexGrow: 1`, so a tile with no partner in
+ * its wrap row grew to full width while keeping a tile's vertical anatomy —
+ * glyph at the top, title at the bottom, dead air between. Every group with
+ * an odd run of tiles had one of these balloons, and they read as broken
+ * cards rather than as a layout rule.
+ *
+ * So the run is measured: within each stretch of consecutive tiles, pairs
+ * stay tiles, and a leftover odd one is promoted to a wide row — the anatomy
+ * built for full width. Measured rather than hand-flagged, so regrouping a
+ * topic never leaves a balloon behind.
+ */
+function pairTiles(cards: CardSpec[]): CardSpec[] {
+  const out = cards.map((card) => ({ ...card }));
+  let runStart = -1;
+
+  for (let i = 0; i <= out.length; i += 1) {
+    const isTile = i < out.length && !out[i].wide;
+    if (isTile && runStart === -1) runStart = i;
+    if (!isTile && runStart !== -1) {
+      if ((i - runStart) % 2 === 1) out[i - 1].wide = true;
+      runStart = -1;
+    }
+  }
+
+  return out;
+}
+
 /** A group's name, with a rule running out to its count. */
 function GroupHeading({ label, count }: { label: string; count?: number }) {
   const theme = useTheme();
@@ -416,87 +483,89 @@ export default function LearnScreen() {
           screen. A flat list of nineteen equals only serves a reader who
           already knows what they want, which is nobody this app is for.
         */}
-        {TOPIC_GROUPS.map((group) => (
-          <View key={group.id} style={styles.section}>
-            <GroupHeading
-              label={t(`learn.group.${group.id}` as UIKey)}
-              count={group.topics.length}
-            />
-            <View style={styles.list}>
-              {/*
-                The way into the prayers themselves. A screen rather than a
-                piece of content, so it is rendered here instead of resolving
-                through the catalogue like everything beside it.
-              */}
-              {/*
-                The zakat working-out. A screen rather than a piece of content,
-                so it is rendered here like the prayer chooser above rather
-                than resolving through the catalogue.
-              */}
-              {group.id === 'year' && (
-                <LearnCard
-                  wide
-                  href="/zakat"
-                  title={t('zakat.title')}
-                  subtitle={t('zakat.open')}
-                  /* Currencies, because that is what the screen asks you to pick. */
-                  count={CURRENCIES.length}
-                  unit="zakat.currencies"
-                  glyph="zakat"
-                />
-              )}
-              {group.id === 'praying' && (
-                <LearnCard
-                  wide
-                  href="/pray"
-                  title={t('learn.toPray.title')}
-                  subtitle={t('learn.toPray.subtitle')}
-                  count={DAILY_PRAYERS.length}
-                  unit="count.prayers"
-                  glyph="prayer"
-                />
-              )}
-              {group.topics
-                // A ref to content that does not exist yet resolves to nothing
-                // and is dropped, so a group can name something before it is
-                // written without a placeholder card appearing.
-                .map(resolveRef)
-                .filter((entry) => entry !== undefined)
-                .map((entry) => localiseCatalogEntry(entry, locale))
-                .map((topic) => (
-                  <LearnCard
-                    key={`${topic.kind}:${topic.id}`}
-                    href={routeFor(topic)}
-                    title={topic.title}
-                    subtitle={topic.shortDescription}
-                    count={topic.pieces}
-                    /*
-                      Minutes read as a phrase rather than a bare noun. "4 min
-                      read" says what the number is; "4 min" beside a title
-                      could be a countdown to something.
-                    */
-                    unit={
-                      topic.pieceUnit === 'minutes'
-                        ? 'count.minutes.long'
-                        : (`count.${topic.pieceUnit}` as UIKey)
-                    }
-                    glyph={TOPIC_GLYPH[topic.id]}
-                    /*
-                      A long title takes the whole row rather than being
-                      truncated into one. "What you need before you pray" came
-                      out as "What you need before …" in a half tile, which
-                      hides the words that make it findable — and the ellipsis
-                      is worse than the extra row it saves.
+        {TOPIC_GROUPS.map((group) => {
+          /*
+            The screens that live in a group without being catalogue content —
+            the prayer chooser and the zakat working-out — join the same list
+            as everything beside them, so the layout pass sees the whole group.
+          */
+          const specials: CardSpec[] = [];
+          if (group.id === 'praying') {
+            specials.push({
+              key: 'screen:pray',
+              href: '/pray',
+              title: t('learn.toPray.title'),
+              subtitle: t('learn.toPray.subtitle'),
+              count: DAILY_PRAYERS.length,
+              unit: 'count.prayers',
+              glyph: 'prayer',
+              wide: true,
+            });
+          }
+          if (group.id === 'year') {
+            specials.push({
+              key: 'screen:zakat',
+              href: '/zakat',
+              title: t('zakat.title'),
+              subtitle: t('zakat.open'),
+              /* Currencies, because that is what the screen asks you to pick. */
+              count: CURRENCIES.length,
+              unit: 'zakat.currencies',
+              glyph: 'zakat',
+              wide: true,
+            });
+          }
 
-                      Measured rather than listed, so a retitled topic gets the
-                      right shape without anybody remembering to update a table.
-                    */
-                    wide={topic.title.length > 22}
-                  />
+          const topics: CardSpec[] = group.topics
+            // A ref to content that does not exist yet resolves to nothing
+            // and is dropped, so a group can name something before it is
+            // written without a placeholder card appearing.
+            .map(resolveRef)
+            .filter((entry) => entry !== undefined)
+            .map((entry) => localiseCatalogEntry(entry, locale))
+            .map((topic) => ({
+              key: `${topic.kind}:${topic.id}`,
+              href: routeFor(topic),
+              title: topic.title,
+              subtitle: topic.shortDescription,
+              count: topic.pieces,
+              /*
+                Minutes read as a phrase rather than a bare noun. "4 min
+                read" says what the number is; "4 min" beside a title
+                could be a countdown to something.
+              */
+              unit:
+                topic.pieceUnit === 'minutes'
+                  ? ('count.minutes.long' as UIKey)
+                  : (`count.${topic.pieceUnit}` as UIKey),
+              glyph: TOPIC_GLYPH[topic.id],
+              /*
+                A long title takes the whole row rather than being
+                truncated into one. "What you need before you pray" came
+                out as "What you need before …" in a half tile, which
+                hides the words that make it findable — and the ellipsis
+                is worse than the extra row it saves.
+
+                Measured rather than listed, so a retitled topic gets the
+                right shape without anybody remembering to update a table.
+              */
+              wide: topic.title.length > 22,
+            }));
+
+          return (
+            <View key={group.id} style={styles.section}>
+              <GroupHeading
+                label={t(`learn.group.${group.id}` as UIKey)}
+                count={group.topics.length}
+              />
+              <View style={styles.list}>
+                {pairTiles([...specials, ...topics]).map(({ key, ...card }) => (
+                  <LearnCard key={key} {...card} />
                 ))}
+              </View>
             </View>
-          </View>
-        ))}
+          );
+        })}
 
         {/* The things you return to rather than read once. */}
         <View style={styles.section}>

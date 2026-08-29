@@ -21,11 +21,10 @@
 import type { Posture } from './types';
 
 export const DRAWN_POSTURES: readonly Posture[] = [
-  'standing',
-  'takbir',
-  'bowing',
-  'rising',
-  'prostrating',
-  'sitting',
-  'tashahhud',
+  /*
+    Empty since 29 Aug 2026, with `PRAYER_IMAGES`. The cartoon PNGs were
+    removed — `PostureDiagram` in `components/illustrations.tsx` draws every
+    posture in code now, so "drawn" here means what it always meant: a real
+    image file shipped in the bundle, of which there are none.
+  */
 ];

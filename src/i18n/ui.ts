@@ -166,7 +166,8 @@ export const EN = {
   'firsts.none': 'Nothing yet. The app marks some of these itself when it sees them.',
   'firsts.notYet': 'Not yet',
   'firsts.mark': 'This has happened',
-  'firsts.open': 'Your firsts →',
+  /* No arrow in the string — the row draws its own, and it drew both. */
+  'firsts.open': 'Your firsts',
   'firsts.ask': 'Was that your first?',
   'firsts.askNo': 'Not yet',
   'first.prayer-alone': 'Prayed on your own',

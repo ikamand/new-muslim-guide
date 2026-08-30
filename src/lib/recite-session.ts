@@ -48,17 +48,26 @@ type ModelFile = {
   bytes: number;
 };
 
+/*
+  Both models download from ikamand/recite-models — hosting the app controls,
+  Iyad's in-house decision of 31 Aug 2026. The files are byte-identical to
+  the upstream copies they were archived from (SHA256SUMS in that repo), so
+  phones that downloaded before the switch keep passing the size check and
+  never re-fetch. The release tag and filenames are frozen: shipped app
+  versions hold these URLs forever, and that repo's README says so.
+*/
+
 /** Tarteel's whisper-base fine-tune (Apache-2.0), GGML f16. */
 const RECOGNITION: ModelFile = {
   name: 'ggml-base-ar-quran.bin',
-  url: 'https://huggingface.co/B1uqa/whisper-base-ar-quran-ggml/resolve/main/ggml-model.bin',
+  url: 'https://github.com/ikamand/recite-models/releases/download/models-v1/ggml-base-ar-quran-f16.bin',
   bytes: 147_951_465,
 };
 
 /** Silero VAD — what cuts the audio into slices at silences. */
 const VAD: ModelFile = {
   name: 'ggml-silero-v6.2.0.bin',
-  url: 'https://huggingface.co/ggml-org/whisper-vad/resolve/main/ggml-silero-v6.2.0.bin',
+  url: 'https://github.com/ikamand/recite-models/releases/download/models-v1/ggml-silero-v6.2.0.bin',
   bytes: 885_098,
 };
 

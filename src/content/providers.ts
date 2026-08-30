@@ -217,17 +217,18 @@ export const PROVIDERS: Readonly<Record<ProviderId, Provider>> = {
       'model-written Arabic can reach a screen through it.',
     verification:
       'The Phase 0 spike (docs/recite-with-me.md) ran the app’s own bundled Husary ' +
-      'clips through it and the aligner tracked 29/29 words — which also verifies the ' +
-      'third-party GGML conversion currently downloaded. Every download is checked ' +
-      'against a pinned byte size. ' +
+      'clips through it and the aligner tracked 29/29 words — which also verified the ' +
+      'GGML conversion the app downloads. Every download is checked against a pinned ' +
+      'byte size, and the hosted copies were verified byte-for-byte against SHA256SUMS ' +
+      'before the app was repointed at them. ' +
       '⚠️ The ONE runtime-fetched entry in this file: the model is downloaded once by ' +
-      'the app, like reciter audio, because 148 MB cannot ship in the bundle. If the ' +
-      'host vanishes the feature degrades to its download screen; nothing else notices.',
+      'the app, like reciter audio, because 148 MB cannot ship in the bundle.',
     licence: 'Apache-2.0, stated on the model card.',
     obligation:
-      'Keep the attribution when the feature ships, and before any public release ' +
-      'convert from Tarteel’s own weights and host the file somewhere the app controls ' +
-      'rather than depending on a stranger’s mirror staying alive.',
+      'Keep the attribution when the feature ships. Self-hosting is DONE (31 Aug ' +
+      '2026): the app downloads from ikamand/recite-models, hosting Iyad controls, ' +
+      'with the release URLs frozen by that repo’s README. The original weights and ' +
+      'the converter are archived there too, so a fresh conversion needs no stranger.',
   },
   fitrahive: {
     name: 'fitrahive/dua-dhikr',

@@ -53,9 +53,11 @@ MIT permits vendoring with its notice kept.
 3. **Extract.** New repo, move the two modules and their checks, publish,
    `npm install` it back. A mechanical afternoon once the surface stops
    moving. The `align-check` fixtures travel with the aligner.
-4. **Self-host the models** (already an obligation in `providers.ts`):
-   convert from the archived original weights with the archived converter,
-   host at a URL the library controls, repoint `recite-session`.
+4. ~~**Self-host the models**~~ **Done 31 Aug 2026** — the app downloads
+   from `ikamand/recite-models`'s frozen release URLs. Converting fresh from
+   the archived originals stays available (originals + converter are in the
+   same repo) but is no longer owed to anyone: the hosted GGML is verified
+   by checksum and by the Phase 0 baseline.
 
 ## In-house, decided 31 Aug 2026 — *"i want my inhouse stuff not others"*
 
@@ -73,13 +75,13 @@ moved up is *whose copies the app builds from*):
   commit the source change to the `in-house/0.7.4` branch of
   `ikamand/whisper.rn-mirror`, which is the canonical in-house history of
   engine changes. The SliceManager fix is its first commit.
-- **The models move to `ikamand/recite-archive`'s release assets** — pending
+- **The models move to `ikamand/recite-models`'s release assets** — pending
   one action only Iyad can take (the harness rightly refuses account-level
   visibility changes):
-  `gh repo edit ikamand/recite-archive --visibility public --accept-visibility-change-consequences`.
+  `gh repo edit ikamand/recite-models --visibility public --accept-visibility-change-consequences`.
   Once public, `recite-session.ts`'s two URLs repoint there and the byte-size
   pins stay identical.
-- ⚠️ **The cost, said once:** `recite-archive` and the vendored tarballs are
+- ⚠️ **The cost, said once:** `recite-models` and the vendored tarballs are
   now LOAD-BEARING, not insurance. Renaming or deleting that repo breaks new
   model downloads; deleting `vendor/` breaks `npm install`. The upstreams
   become the fallback instead of the source.
@@ -106,7 +108,7 @@ whisper.cpp/ggml engine sources, so the whole buildable stack survives in one
 7 MB file — the PCM stream module's tarball, and the Silero VAD model.
 `vendor/SHA256SUMS` covers them.
 
-**In the local archive, `~/Documents/recite-archive/`** (23 files,
+**In the local archive, `~/Documents/recite-models/`** (23 files,
 `SHA256SUMS` at its root): the ORIGINAL Tarteel weights — the true source
 that makes us independent of every third-party conversion:
 
@@ -123,16 +125,17 @@ logged in. Everything now lives under his own GitHub account:
 
 | Where | What |
 |---|---|
-| `github.com/ikamand/recite-archive` (private) | The archive's small files in git; the four model files as release **models-v1** assets — both original `pytorch_model.bin`s, the app's GGML f16, the VAD — byte sizes matching `SHA256SUMS` exactly |
+| `github.com/ikamand/recite-models` (public) | The archive's small files in git; the four model files as release **models-v1** assets — both original `pytorch_model.bin`s, the app's GGML f16, the VAD — byte sizes matching `SHA256SUMS` exactly |
 | `github.com/ikamand/whisper.rn-mirror` (private) | Full source mirror, 144 refs — every branch and tag through v0.7.4 |
 | `github.com/ikamand/react-native-audio-pcm-stream-mirror` (private) | Full source mirror of the mic module |
 
-⚠️ **One honest limit on the self-hosting idea:** release assets on a
-PRIVATE repo need authentication to download, so the app cannot fetch models
-from there as it stands. Before repointing `recite-session` at these URLs
-(the path-step 4 above), either make `recite-archive` public — Apache-2.0
-and MIT both permit the redistribution — or put the files on other hosting.
-As pure insurance, private is right for now.
+**Self-hosting DONE, 31 Aug 2026.** The repo was renamed `recite-models`
+(while nothing pointed at it — the free moment), made public by Iyad, and
+`recite-session.ts` now downloads both models from its `models-v1` release.
+Verified before the repoint: both assets downloaded anonymously from the
+release and hashed byte-for-byte to `SHA256SUMS`. **The freeze rule is in
+that repo's README:** the tag and asset filenames are never renamed or
+deleted — shipped apps hold the URLs forever; new models get new tags.
 
 ## Licences, so nobody re-derives them
 

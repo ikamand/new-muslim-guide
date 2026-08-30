@@ -53,7 +53,8 @@ export type ProviderId =
   | 'islamhouse'
   | 'fitrahive'
   | 'ninetynine'
-  | 'aladhan';
+  | 'aladhan'
+  | 'tarteel';
 
 export type Provider = {
   /** What to call it in a report. */
@@ -206,6 +207,27 @@ export const PROVIDERS: Readonly<Record<ProviderId, Provider>> = {
       '⚠️ Its own English is NOT used and must not be: inconsistent capitalisation, two ' +
       'renderings crammed into one field, and a typo at #84 ("Soverign").',
     obligation: 'No licence published that could be found.',
+  },
+  tarteel: {
+    name: 'Tarteel AI — whisper-base-ar-quran',
+    where: 'huggingface.co/tarteel-ai/whisper-base-ar-quran',
+    supplies:
+      'The on-device speech model behind “Recite with me”. A model, not text: its ' +
+      'output feeds the aligner in `lib/recite-align.ts` and is never rendered, so no ' +
+      'model-written Arabic can reach a screen through it.',
+    verification:
+      'The Phase 0 spike (docs/recite-with-me.md) ran the app’s own bundled Husary ' +
+      'clips through it and the aligner tracked 29/29 words — which also verifies the ' +
+      'third-party GGML conversion currently downloaded. Every download is checked ' +
+      'against a pinned byte size. ' +
+      '⚠️ The ONE runtime-fetched entry in this file: the model is downloaded once by ' +
+      'the app, like reciter audio, because 148 MB cannot ship in the bundle. If the ' +
+      'host vanishes the feature degrades to its download screen; nothing else notices.',
+    licence: 'Apache-2.0, stated on the model card.',
+    obligation:
+      'Keep the attribution when the feature ships, and before any public release ' +
+      'convert from Tarteel’s own weights and host the file somewhere the app controls ' +
+      'rather than depending on a stranger’s mirror staying alive.',
   },
   fitrahive: {
     name: 'fitrahive/dua-dhikr',

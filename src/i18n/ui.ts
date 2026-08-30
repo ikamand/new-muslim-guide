@@ -430,6 +430,27 @@ export const EN = {
   'reciter.intro': 'Whose recitation plays here. Any of them is correct. They differ in pace and in voice, not in what is said.',
   'reciter.credit': 'All recitations from everyayah.com.',
   'count.ayahs': 'ayahs',
+
+  /*
+    Recite with me. The explain line is a promise the code keeps —
+    `lib/recite-session.ts` cannot write audio and never sends any.
+  */
+  'recite.title': 'Recite with me',
+  'recite.explain':
+    'Recite out loud and the words light up as you are heard. The listening happens entirely on this phone — nothing you say is recorded, saved, or sent anywhere.',
+  'recite.download': 'Get the listening models ({mb} MB, once)',
+  'recite.downloading.vad': 'Fetching the voice detector…',
+  'recite.downloading.recognition': 'Fetching the recognition model — best on wifi…',
+  'recite.start': 'Start listening',
+  'recite.starting': 'Getting ready…',
+  'recite.stop': 'Stop',
+  'recite.ayahOf': 'Ayah {a} of {total}',
+  'recite.permission':
+    'The microphone is off for this app, and recitation can only be followed if it can be heard. You can allow it in your phone’s settings.',
+  'recite.error': 'Listening stopped. Try again.',
+  'recite.complete': 'You recited it all the way through.',
+  'settings.storage.recite': 'Recite with me — the listening models',
+
   'tab.settings': 'Settings',
 
   'learn.title': 'Learn',

@@ -14,6 +14,7 @@ import { useSettings, type Audience } from '@/hooks/use-settings';
 import { PRAYER_IDS, PRAYER_LABEL } from '@/lib/prayer-times';
 import { LEAD_CHOICES } from '@/lib/reminders';
 import { deleteVoice, savedVoices, type SavedVoice } from '@/content/quran/offline';
+import { deleteReciteModels, reciteModelBytes } from '@/lib/recite-session';
 import { RECITERS } from '@/content/quran/recitation';
 import { useLocale } from '@/hooks/use-locale';
 import { LOCALE_NAMES, LOCALES } from '@/i18n/locales';
@@ -339,12 +340,18 @@ function StorageGroup() {
     not a download.
   */
   const [voices, setVoices] = useState<SavedVoice[]>(savedVoices);
+  const [reciteBytes, setReciteBytes] = useState<number>(reciteModelBytes);
 
-  if (voices.length === 0) return null;
+  if (voices.length === 0 && reciteBytes === 0) return null;
 
   const remove = (folder: string) => {
     deleteVoice(folder);
     setVoices(savedVoices());
+  };
+
+  const removeReciteModels = () => {
+    deleteReciteModels();
+    setReciteBytes(reciteModelBytes());
   };
 
   return (
@@ -376,6 +383,25 @@ function StorageGroup() {
             </Pressable>
           </View>
         ))}
+        {reciteBytes > 0 && (
+          <View style={styles.storageRow}>
+            <View style={styles.storageText}>
+              <ThemedText type="default">{t('settings.storage.recite')}</ThemedText>
+              <ThemedText type="small" themeColor="textSecondary">
+                {`${megabytes(reciteBytes)} MB`}
+              </ThemedText>
+            </View>
+            <Pressable
+              onPress={removeReciteModels}
+              accessibilityRole="button"
+              accessibilityLabel={`${t('settings.storage.delete')} — ${t('settings.storage.recite')}`}
+              hitSlop={8}>
+              <ThemedText type="smallBold" themeColor="accent">
+                {t('settings.storage.delete')}
+              </ThemedText>
+            </Pressable>
+          </View>
+        )}
       </View>
     </View>
   );

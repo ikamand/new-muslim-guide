@@ -4,6 +4,7 @@ import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 
+import { ReciteFollow } from '@/components/recite-follow';
 import { ThemedText } from '@/components/themed-text';
 import { ayahTransliteration, getSurah, JUZ30_SOURCE } from '@/content/quran/surahs';
 import { ayahSource, keepAyah } from '@/content/quran/ayah-audio';
@@ -455,6 +456,13 @@ export default function SurahScreen() {
         </View>
         <Ionicons name="chevron-forward" size={18} color={theme.textSecondary} />
       </Pressable>
+
+      {/*
+        The listening half. Hearing the surah is the row above; being heard
+        reciting it is this one. It renders nothing on web, where the mic
+        pipeline does not exist.
+      */}
+      <ReciteFollow verses={ayahs} />
 
       {stalled && (
         <View style={[styles.stalled, { borderLeftColor: theme.border }]}>

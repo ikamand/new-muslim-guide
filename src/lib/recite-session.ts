@@ -193,16 +193,20 @@ export type FollowCallbacks = {
   No slices, no VAD contexts, no queues — nothing to wedge. What makes this
   sufficient is the aligner's own contract: it acquires anywhere, the screen
   never moves backwards, so audio sliding out of the window loses nothing.
-  The window stays under the 26 s at which Phase 0 measured whole-passage
+  Window and tick are latency knobs, tuned on Iyad's phone: recognition time
+  scales with window length, so 12 s trades a little context for a faster
+  pass, and a 600 ms tick means the next pass starts almost as soon as the
+  previous one finishes — the in-flight guard makes real cadence equal to
+  pass time. The window stays under the 26 s at which Phase 0 measured whole-passage
   decoding suppressing the Fatiha's genuine repetitions, and silence in the
   window just hallucinates a stray word the aligner ignores — also measured.
   The Silero VAD model is no longer used or downloaded.
 */
 const SAMPLE_RATE = 16_000;
 const BYTES_PER_SECOND = SAMPLE_RATE * 2;
-const WINDOW_SECONDS = 15;
+const WINDOW_SECONDS = 12;
 const WINDOW_BYTES = WINDOW_SECONDS * BYTES_PER_SECOND;
-const TICK_MS = 1_000;
+const TICK_MS = 600;
 /** Don't burn a pass when almost nothing new was heard. */
 const MIN_NEW_BYTES = BYTES_PER_SECOND * 0.35;
 

@@ -76,9 +76,13 @@ export function ReciteFollow({ verses }: { verses: readonly { arabic: string }[]
 
   useEffect(() => {
     if (displayed >= shownPosition) return undefined;
+    /* The walk savours when it is close and hurries when it is behind — a
+       fixed stroll felt like lag the moment the reader got ayahs ahead. */
+    const gap = shownPosition - displayed;
+    const pace = gap > 8 ? 35 : gap > 3 ? 70 : 140;
     const walker = setInterval(
       () => setDisplayed((at) => (at < shownPosition ? at + 1 : at)),
-      140,
+      pace,
     );
     return () => clearInterval(walker);
   }, [displayed, shownPosition]);

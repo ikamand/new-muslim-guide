@@ -138,6 +138,7 @@ const REFERENCES: Readonly<Record<string, Cadence>> = {
   'patience-and-gratitude': 'once',
   'islamic-calendar': 'once',
   ramadan: 'yearly',
+  'fasting-alone': 'yearly',
   tahajjud: 'once', // The explanation. The guide of the same name is until-fluent.
   'qiyam-al-layl': 'once',
   witr: 'once',

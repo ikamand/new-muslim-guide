@@ -6,10 +6,10 @@ supplied each line of it.
 | | |
 |---|---|
 | Qur'an passages | 96 of 96 |
-| Narrations | 138 of 138 |
+| Narrations | 139 of 139 |
 | Confirmed against a second publisher | 68 |
 | Translation from HadeethEnc (published terms) | 58 |
-| Translation from Darussalam (quoted) | 80 |
+| Translation from Darussalam (quoted) | 81 |
 | Arabic with no translation | 0 |
 | Nothing found | 0 |
 
@@ -101,6 +101,7 @@ under. That is substance and stays with a reviewer.
 | `bukhari:956` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
 | `bukhari:953` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
 | `bukhari:1969` | HadeethEnc.com | Darussalam (via fawazahmed0/hadith-api) | HadeethEnc 65517 |
+| `bukhari:1894` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
 | `bukhari:5090` | HadeethEnc.com | Darussalam (via fawazahmed0/hadith-api) | HadeethEnc 65940 |
 | `bukhari:7352` | HadeethEnc.com | HadeethEnc.com | HadeethEnc 64682 |
 | `bukhari:6116` | HadeethEnc.com | HadeethEnc.com | HadeethEnc 4709 |

@@ -1,6 +1,7 @@
 import type { PrayerConfidence } from '@/lib/onboarding';
 
 import { ADHAN } from './adhan';
+import { FASTING_ALONE } from './fasting-alone';
 import { A_PARTNER_ALREADY } from './a-partner-already';
 import { AL_FATIHAH } from './al-fatihah';
 import { BEHIND_AN_IMAM } from './behind-an-imam';
@@ -83,6 +84,8 @@ export const LEARN_TOPICS: Reference[] = [
   BEHIND_AN_IMAM,
   EID,
   VOLUNTARY_FASTING,
+  /* Ramadan mode, 30 Aug 2026 — the one page docs/ramadan-mode.md adds. */
+  FASTING_ALONE,
   BEING_CORRECTED,
   MARRIAGE_SHAPE,
   A_PARTNER_ALREADY,
@@ -260,6 +263,8 @@ export const TOPIC_GROUPS: readonly { id: TopicGroupId; topics: readonly Content
     id: 'year',
     topics: [
       ref('reference', 'ramadan'),
+      /* Beside the month it belongs to: the month, kept where nobody else is. */
+      ref('reference', 'fasting-alone'),
       ref('reference', 'voluntary-fasting'),
       ref('reference', 'eid'),
       ref('reference', 'islamic-calendar'),

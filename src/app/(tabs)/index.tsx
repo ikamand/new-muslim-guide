@@ -6,6 +6,7 @@ import { AskBar } from '@/components/ask-bar';
 import { DailyCollectionCard } from '@/components/daily-collection-card';
 import { AdhkarSessionCard, useLiveSession } from '@/components/adhkar-session-card';
 import { DuaCard } from '@/components/dua-card';
+import { FastLine } from '@/components/fast-line';
 import { PrayerTimesCard } from '@/components/prayer-times-card';
 import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
@@ -252,6 +253,12 @@ export default function TodayScreen() {
             ) : null
           }
         />
+
+        {/*
+          The fast, during Ramadan and the fortnight before it. Renders
+          nothing the other eleven months — see docs/ramadan-mode.md.
+        */}
+        <FastLine />
 
         {/*
           One words slot, not two cards.

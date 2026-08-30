@@ -1,8 +1,6 @@
 import * as Notifications from 'expo-notifications';
 import { Platform } from 'react-native';
 
-import type { PlannedReminder } from './reminders';
-
 /**
  * Everything that actually touches the notification system.
  *
@@ -66,43 +64,48 @@ export async function hasPermission(): Promise<boolean> {
   return (await Notifications.getPermissionsAsync()).granted;
 }
 
-export type ReminderCopy = {
-  /** "Fajr" — whatever the prayer is called in the reader's language. */
-  title: (prayerId: PlannedReminder['prayerId']) => string;
-  /** "In 10 minutes" or "It is time to pray". */
-  body: (minutesBefore: number) => string;
-  /** Name of the Android channel, shown in the system settings app. */
-  channelName: string;
+/**
+ * One notification, already worded. The planners in `reminders.ts` say when;
+ * the caller says what; this module only delivers. Growing past prayers —
+ * suhoor, the adhkār window, Thursday's Jumuʿah note — meant the wording
+ * could no longer be a function of a prayer id, so each item carries its own.
+ */
+export type ScheduledItem = {
+  fireAt: Date;
+  title: string;
+  body: string;
 };
 
-/** Replaces every pending reminder with the given set. */
-export async function reschedule(
-  planned: PlannedReminder[],
-  copy: ReminderCopy,
-  leadMinutes: number,
+/**
+ * Replaces every pending notification with the given set.
+ *
+ * The caller is responsible for keeping the set under the iOS cap of 64
+ * pending — `use-reminders` sorts everything by fire time and keeps the
+ * nearest 60, so what is dropped is always the furthest away, which the next
+ * foreground top-up restores.
+ */
+export async function rescheduleItems(
+  items: readonly ScheduledItem[],
+  channelName: string,
 ): Promise<number> {
   if (NO_SCHEDULER) return 0;
   await Notifications.cancelAllScheduledNotificationsAsync();
-  if (planned.length === 0) return 0;
+  if (items.length === 0) return 0;
 
-  await ensureAndroidChannel(copy.channelName);
+  await ensureAndroidChannel(channelName);
 
-  for (const reminder of planned) {
+  for (const item of items) {
     await Notifications.scheduleNotificationAsync({
-      content: {
-        title: copy.title(reminder.prayerId),
-        body: copy.body(leadMinutes),
-        sound: true,
-      },
+      content: { title: item.title, body: item.body, sound: true },
       trigger: {
         type: Notifications.SchedulableTriggerInputTypes.DATE,
-        date: reminder.fireAt,
+        date: item.fireAt,
         channelId: ANDROID_CHANNEL,
       },
     });
   }
 
-  return planned.length;
+  return items.length;
 }
 
 export async function cancelAll(): Promise<void> {

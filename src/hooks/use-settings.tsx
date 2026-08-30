@@ -91,6 +91,19 @@ export type Settings = {
   /** Which prayers to be reminded of, and how long before. All off by default. */
   reminders: ReminderSettings;
   /**
+   * Wake me before Fajr for suhoor, during Ramadan only.
+   *
+   * The offer appears once a year, in the Shaʿban window on Today — but the
+   * OFFER is transient and this switch is permanent, findable year-round in
+   * Settings and on the fast line during the month. Iyad's correction, 29 Aug
+   * 2026: a declined offer must never close the door on a changed mind.
+   */
+  suhoorWakeUp: boolean;
+  /** A note when the morning adhkār window opens. Off by default. */
+  adhkarNote: boolean;
+  /** A note on Thursday evening that tomorrow is Jumuʿah. Off by default. */
+  jumuahNote: boolean;
+  /**
    * Whose recitation plays in the Qur'an tab.
    *
    * One setting rather than one per screen, because a reader who has found a
@@ -135,6 +148,9 @@ const DEFAULTS: Settings = {
   home: null,
   awaySince: null,
   reminders: DEFAULT_REMINDERS,
+  suhoorWakeUp: false,
+  adhkarNote: false,
+  jumuahNote: false,
   reciter: DEFAULT_RECITER,
   pinnedDuas: [],
 };
@@ -216,6 +232,9 @@ function parseStored(raw: string | null): Settings {
           )
         : [],
       reminders: parseReminders(stored.reminders),
+      suhoorWakeUp: typeof stored.suhoorWakeUp === 'boolean' ? stored.suhoorWakeUp : false,
+      adhkarNote: typeof stored.adhkarNote === 'boolean' ? stored.adhkarNote : false,
+      jumuahNote: typeof stored.jumuahNote === 'boolean' ? stored.jumuahNote : false,
       // A voice dropped from a later build reads as the default rather than
       // throwing, and rather than leaving a folder name that no longer resolves.
       reciter: isReciterId(stored.reciter) ? stored.reciter : DEFAULTS.reciter,

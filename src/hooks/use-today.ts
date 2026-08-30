@@ -3,6 +3,7 @@ import { useEffect, useMemo } from 'react';
 
 import { resolveRef } from '@/content';
 import { FIRSTS } from '@/content/firsts';
+import { arcFor } from '@/content/ramadan-arc';
 import { seasonFor } from '@/content/seasons';
 import { useHijriToday } from '@/hooks/use-hijri';
 import { useJourney } from '@/hooks/use-journey';
@@ -122,32 +123,41 @@ export function useToday(): TodayItem | undefined {
     }
 
     /*
-      2. Zakat, during Ramadan.
+      2. The Ramadan arc — the season broken into moments.
 
-      ⚠️ NOT because zakat al-māl is due then — it is not. It falls due when a
-      lunar year has passed on wealth above the threshold, on the reader's own
-      date, whichever month that is (Tirmidhi 631). The thing that IS due
-      before the Eid prayer is zakat al-fitr, which is a different, small,
-      fixed amount and lives in `learn/ramadan.ts`.
-
-      It is surfaced here because Ramadan is when most people choose to pay,
-      for the extra reward, and therefore when they think about it. The screen
-      says exactly that rather than implying a deadline.
-
-      Ahead of the season row below, because a sum somebody has to sit down and
-      do is worth more of their attention in that month than a lesson is.
+      `ramadan-arc.ts` owns months 8 and 9: the fast in the first days,
+      tarāwīḥ in the evenings, the zakat calculator mid-month (the standing
+      month-9 zakat candidate moved there, reasoning and all), the last ten
+      nights, then Eid across the month boundary. Asked before `seasonFor`,
+      so the season's own Ramadan rows never fire; the season table keeps
+      Dhul Hijjah and Muharram.
     */
-    if (hijri?.month === 9) {
-      return {
-        key: 'screen:zakat',
-        reason: 'today.zakat',
-        title: t('zakat.title'),
-        description: t('today.zakat.why'),
-        href: '/zakat',
-      };
+    const arc = hijri ? arcFor(hijri, now.getHours()) : undefined;
+    if (arc) {
+      if (!arc.ref) {
+        return {
+          key: 'screen:zakat',
+          reason: arc.reason,
+          title: t('zakat.title'),
+          description: t('today.zakat.why'),
+          href: '/zakat',
+        };
+      }
+      const found = resolveRef(arc.ref);
+      if (found) {
+        const entry = localiseCatalogEntry(found, locale);
+        return {
+          key: `arc:${arc.id}`,
+          reason: arc.reason,
+          title: entry.title,
+          description: entry.shortDescription,
+          minutes: entry.meta?.estimatedMinutes,
+          href: routeFor(found),
+        };
+      }
     }
 
-    /* 3. The calendar window — Ramadan, Dhul Hijjah, Muharram. */
+    /* 3. The calendar window — Dhul Hijjah, Muharram (Ramadan is the arc's). */
     const season = hijri ? seasonFor(hijri) : undefined;
     if (season) {
       const found = resolveRef(season.ref);

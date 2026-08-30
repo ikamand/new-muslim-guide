@@ -189,7 +189,7 @@ function AudienceGroup() {
 function RemindersGroup() {
   const theme = useTheme();
   const { t } = useLocale();
-  const { reminders, toggle, setLead, granted, anyOn } = useReminders();
+  const { reminders, toggle, toggleFlag, flags, setLead, granted, anyOn } = useReminders();
 
   const leadLabel = (minutes: number) =>
     minutes === 0
@@ -270,6 +270,42 @@ function RemindersGroup() {
           </View>
         </>
       )}
+
+      {/*
+        The windows — the suhoor wake-up (docs/ramadan-mode.md R3, dormant
+        outside the month but always in this same place, so a changed mind
+        can always find it) and the two notes from build-order.md. Offers at
+        a moment opening; none of them can notice an absence.
+      */}
+      <View
+        style={[styles.group, { backgroundColor: theme.backgroundElement, borderColor: theme.border }]}>
+        {(
+          [
+            ['suhoorWakeUp', 'settings.suhoor'],
+            ['adhkarNote', 'settings.adhkarNote'],
+            ['jumuahNote', 'settings.jumuahNote'],
+          ] as const
+        ).map(([flag, label], index) => (
+          <View
+            key={flag}
+            style={[
+              styles.row,
+              index < 2 && {
+                borderBottomWidth: StyleSheet.hairlineWidth,
+                borderBottomColor: theme.border,
+              },
+            ]}>
+            <ThemedText type="default" style={styles.flagLabel}>
+              {t(label)}
+            </ThemedText>
+            <Switch
+              value={flags[flag]}
+              onValueChange={() => void toggleFlag(flag)}
+              trackColor={{ true: theme.accent }}
+            />
+          </View>
+        ))}
+      </View>
     </View>
   );
 }
@@ -511,6 +547,7 @@ const styles = StyleSheet.create({
     paddingVertical: Spacing.three,
     paddingHorizontal: Spacing.three,
   },
+  flagLabel: { flex: 1, paddingRight: 8 },
   storageText: {
     flex: 1,
     gap: 2,

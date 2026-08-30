@@ -92,6 +92,30 @@ export const EN = {
   'season.dhul-hijjah': 'Dhul-Hijjah',
   'season.muharram': 'A new Islamic year',
   /*
+    The Ramadan arc — the season broken into moments. Kickers for
+    `src/content/ramadan-arc.ts`; the zakat row reuses `today.zakat`.
+  */
+  'arc.before': 'Ramadan is close',
+  'arc.early': 'Ramadan — the first days',
+  'arc.tarawih': 'Tonight, at the mosque',
+  'arc.eid': 'Eid is close',
+  /*
+    The fast line on Today, month 9 and late Shaʿban only. Times, never day
+    numbers — the sighting humility in `seasons.ts` applies to every word.
+  */
+  'fast.suhoor': 'Suhoor ends at Fajr — {time}',
+  'fast.iftar': 'Iftar at Maghrib — {time}',
+  'ramadan.wake': 'Wake me for suhoor, about 45 minutes before Fajr',
+  'ramadan.wake.help':
+    'Ramadan is close. The app can wake you before Fajr for suhoor — change it any time, here or in Settings.',
+  'suhoor.notification.title': 'Suhoor',
+  'suhoor.notification.body': 'Fajr is at {time}. Time to eat something.',
+  'adhkar.notification.title': 'Morning adhkār',
+  'adhkar.notification.body': 'The window is open until sunrise.',
+  'jumuah.notification.title': 'Jumuʿah tomorrow',
+  'jumuah.notification.body':
+    'The Friday prayer replaces Ḏuhr, prayed in congregation around midday.',
+  /*
     Why the one card on Today is there, in a few words.
 
     Each is a reason, not a category: "It is Friday" and "You seem to be away
@@ -566,6 +590,13 @@ export const EN = {
   'settings.reminders.minutesBefore': '{n} minutes before',
   'settings.reminders.denied':
     'Notifications are turned off for this app. Turn them on in your phone’s settings, then come back.',
+  /*
+    The windows. Each is an offer at a moment opening — none of them can
+    express an absence, because none of them knows one.
+  */
+  'settings.suhoor': 'During Ramadan: wake me before Fajr for suhoor',
+  'settings.adhkarNote': 'Morning adhkār — a note when the window opens',
+  'settings.jumuahNote': 'Jumuʿah — a note on Thursday evening',
   'reminder.now': 'It is time to pray.',
   'reminder.soon': 'In {n} minutes.',
   'settings.duringPrayer': 'During prayer',

@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 
 import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
+import { useReminderSync } from '@/hooks/use-reminders';
 import { SettingsProvider, useSettings } from '@/hooks/use-settings';
 import { LocaleProvider } from '@/hooks/use-locale';
 import { MemorisedProvider } from '@/hooks/use-memorised';
@@ -31,6 +32,13 @@ function RootStack() {
   const theme = Colors[scheme === 'dark' ? 'dark' : 'light'];
   const { loaded, onboarded } = useSettings();
   const router = useRouter();
+
+  /*
+    The one owner of the notification schedule. Mounted here, not on the
+    Settings screen, so the twelve-day rolling window tops up on every
+    launch — not only in sessions where Settings happened to be opened.
+  */
+  useReminderSync();
 
   /*
     Amiri, for the Arabic.

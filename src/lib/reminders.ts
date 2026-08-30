@@ -89,3 +89,89 @@ export function planReminders(
   return planned;
 }
 
+/* ------------------------------------------------------------------ */
+/* The windows — docs/ramadan-mode.md R3 and the two notes from        */
+/* docs/build-order.md. Same shape as planReminders: pure arithmetic   */
+/* over the same day loop, returning instants for use-reminders to     */
+/* word and schedule. Each planner exists only while its toggle is on. */
+/* ------------------------------------------------------------------ */
+
+/** A planned moment plus the prayer time it is anchored to, for the wording. */
+export type PlannedMoment = {
+  fireAt: Date;
+  anchor: Date;
+};
+
+/** Minutes before Fajr the suhoor wake-up fires. One sensible value, stated
+    plainly on the switch, rather than a configurator nobody asked for. */
+export const SUHOOR_LEAD_MINUTES = 45;
+
+function eachDay(
+  coords: LatLon,
+  profile: MethodProfile,
+  from: Date,
+  daysAhead: number,
+  pick: (day: Date, prayers: { id: PrayerId; time: Date }[]) => PlannedMoment | undefined,
+): PlannedMoment[] {
+  const planned: PlannedMoment[] = [];
+  for (let offset = 0; offset < daysAhead; offset += 1) {
+    const day = new Date(from.getFullYear(), from.getMonth(), from.getDate() + offset);
+    const moment = pick(day, computeDay(coords, day, profile).prayers);
+    if (moment && moment.fireAt.getTime() > from.getTime()) planned.push(moment);
+  }
+  return planned;
+}
+
+/**
+ * Wake-ups before Fajr, only on days that fall in Ramadan.
+ *
+ * `isRamadan` is injected rather than imported so this file stays pure
+ * arithmetic — the Hijri conversion lives with the caller, and a check can
+ * hand in a fake calendar.
+ */
+export function planSuhoor(
+  coords: LatLon,
+  profile: MethodProfile,
+  from: Date,
+  isRamadan: (day: Date) => boolean,
+  daysAhead: number = DAYS_AHEAD,
+): PlannedMoment[] {
+  return eachDay(coords, profile, from, daysAhead, (day, prayers) => {
+    if (!isRamadan(day)) return undefined;
+    const fajr = prayers.find((prayer) => prayer.id === 'fajr')?.time;
+    if (!fajr) return undefined;
+    return { fireAt: new Date(fajr.getTime() - SUHOOR_LEAD_MINUTES * 60_000), anchor: fajr };
+  });
+}
+
+/** A note shortly after Fajr that the morning adhkār window is open. */
+export function planAdhkarNotes(
+  coords: LatLon,
+  profile: MethodProfile,
+  from: Date,
+  daysAhead: number = DAYS_AHEAD,
+): PlannedMoment[] {
+  return eachDay(coords, profile, from, daysAhead, (day, prayers) => {
+    const fajr = prayers.find((prayer) => prayer.id === 'fajr')?.time;
+    if (!fajr) return undefined;
+    return { fireAt: new Date(fajr.getTime() + 10 * 60_000), anchor: fajr };
+  });
+}
+
+/** Thursday after Maghrib: tomorrow is Jumuʿah. The night before, because the
+    decision that needs lead time — leaving work for the midday prayer — is
+    made the evening before, not at 11am. */
+export function planJumuahNotes(
+  coords: LatLon,
+  profile: MethodProfile,
+  from: Date,
+  daysAhead: number = DAYS_AHEAD,
+): PlannedMoment[] {
+  return eachDay(coords, profile, from, daysAhead, (day, prayers) => {
+    if (day.getDay() !== 4) return undefined;
+    const maghrib = prayers.find((prayer) => prayer.id === 'maghrib')?.time;
+    if (!maghrib) return undefined;
+    return { fireAt: new Date(maghrib.getTime() + 45 * 60_000), anchor: maghrib };
+  });
+}
+

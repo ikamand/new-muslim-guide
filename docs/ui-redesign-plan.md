@@ -2386,3 +2386,41 @@ tile is one revert away; and gold-on-parchment contrast at small sizes
 
 Everything ships OTA. Verified by screenshot in both themes: Today, Learn,
 Duʿa, Qur'an, surah/1, settings, reference/what-is-islam.
+
+---
+
+## 30 Aug 2026 — Awqat: the card rebuilt, the day on the arch
+
+The prayer-times feature is named **Awqat** (Iyad's choice, from the case
+study at claude.ai/code/artifact/23c462e9-2222-480a-a705-24cad059f4b6, which
+also holds the mosque-matching, monthly-jadwal and settings design still to
+build). What shipped today, all OTA:
+
+- **`awqat-arch.tsx`** — the mihrab whose outline is the sun's path. Spring
+  line = horizon, crown = noon, legs = the dark; each prayer marked at its
+  true moment (filled/ringed/hollow), the sun a travelling gold dot. The old
+  DayArc is deleted from `illustrations.tsx` — merged, not removed: it
+  duplicated the times row as a free-standing drawing and is now the arch.
+- **The card** (`prayer-times-card.tsx`): next prayer inside the niche, time
+  in gold; times row is the arch's baseline; the method prose moved to a
+  "Prayer times" group on Settings (`PrayerTimesGroup`); Qibla stays as the
+  quiet line. The month link joins it when the monthly jadwal exists —
+  no dead taps.
+- **The windows sheet**: tapping the niche (one target, not five dots) opens
+  the five *spans* — each prayer's window with its end. ʿIshāʾ ends at the
+  middle of the night in the fiqh sense (`SunnahTimes`, now on `DayTimes` as
+  `middleOfNight`). ⚠️ The window-end wordings in `ui.ts` are rulings and
+  sit in the scholarly-review pile; they follow the `times.endsAtSunrise`
+  precedent for rulings that must live beside their times.
+- **Motion**: the live mark breathes (~5s), the next prayer's ring blooms
+  once when its time arrives. Both respect reduce-motion. Nothing bounces.
+- **At `on-my-own` the Pray button and wudu line both go** — a reversal of
+  the earlier "button stays" decision, on Iyad's call: it routes to the
+  teaching walkthrough, which a fluent person never opens. The walkthrough
+  stays one tap away on Learn.
+
+Verified by screenshot: learner card (light), fluent card (dark, via seeded
+`prayerConfidence`), and the windows sheet (synthetic tap). The headless
+rig's clock disagrees with its faked coordinates, so the absolute times in
+those screenshots are scrambled and the timezone caution fires — that is the
+rig, and it is also proof the caution works.

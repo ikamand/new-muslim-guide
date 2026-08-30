@@ -101,6 +101,17 @@ function PrayAction({ prayer, wudu }: { prayer: Guide; wudu: Guide }) {
   const confidence = usePrayerConfidence();
   const fluent = confidence === 'on-my-own';
 
+  /*
+    At `on-my-own` the whole block goes — the button too, which is a reversal
+    of the earlier design (30 Aug) and Iyad's call: the button routes to the
+    teaching walkthrough, and a fluent person never opens it. What the card
+    keeps for them is what year three actually wants — the time, the arch,
+    the direction. The walkthrough stays one tap away on Learn, so the person
+    the ratchet promoted out of this button has not lost the guide, only the
+    doorbell.
+  */
+  if (fluent) return null;
+
   return (
     <View style={styles.action}>
       {/*

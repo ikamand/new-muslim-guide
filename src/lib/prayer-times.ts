@@ -6,6 +6,7 @@ import {
   PolarCircleResolution,
   PrayerTimes,
   Qibla,
+  SunnahTimes,
   type CalculationParameters,
 } from 'adhan';
 
@@ -237,6 +238,12 @@ export type DayTimes = {
   prayers: PrayerTime[];
   /** Marks the end of Fajr's window. Not a prayer. */
   sunrise: Date;
+  /**
+   * Halfway between sunset and the next Fajr — the "middle of the night" in
+   * the fiqh sense, not 00:00 on a clock. The windows sheet uses it as the
+   * end of ʿIshāʾ's preferred time.
+   */
+  middleOfNight: Date;
 };
 
 export function computeDay(coords: LatLon, reference: Date, profile: MethodProfile): DayTimes {
@@ -249,6 +256,7 @@ export function computeDay(coords: LatLon, reference: Date, profile: MethodProfi
   return {
     prayers: PRAYER_IDS.map((id) => ({ id, label: PRAYER_LABEL[id], time: times[id] })),
     sunrise: times.sunrise,
+    middleOfNight: new SunnahTimes(times).middleOfTheNight,
   };
 }
 

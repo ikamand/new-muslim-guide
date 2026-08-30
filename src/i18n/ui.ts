@@ -341,6 +341,31 @@ export const EN = {
     'Today Dhuhr is Jumuah, if you pray it at the mosque with everyone. The khutbah comes first, so arrive before the adhan rather than at it. If you cannot get to a mosque today, you pray Dhuhr as normal.',
   'times.followLocal': 'If your mosque’s timetable differs, follow the mosque.',
 
+  /*
+    The windows sheet, opened by tapping the Awqat arch on Today.
+
+    ⚠️ REVIEW REQUIRED — these are rulings, not chrome, and they follow the
+    precedent `times.endsAtSunrise` set for a ruling that must live beside
+    the times it describes. Fajr→sunrise and Dhuhr→ʿAsr are settled;
+    ʿAsr→Maghrib is taught as the one clear way, leaving the preferred-time
+    detail to a lesson; ʿIshāʾ ends at the middle of the night in the fiqh
+    sense (halfway from sunset to Fajr), which is the preferred position —
+    schools differ on the permissible end, and a qualified reviewer decides
+    whether that sentence needs saying here.
+  */
+  'windows.open': 'When each prayer can be prayed',
+  'windows.close': 'Close',
+  'windows.title': 'The five windows',
+  'windows.intro':
+    'Each prayer has a span, not a moment. Anywhere inside its window counts.',
+  'windows.fajr': 'until sunrise',
+  'windows.dhuhr': 'until ʿAsr begins',
+  'windows.asr': 'until Maghrib',
+  'windows.maghrib': 'until ʿIshāʾ begins',
+  'windows.isha': 'until the middle of the night',
+  'windows.note':
+    'Praying early in the window is better. If one closes before you have prayed, see “I missed a prayer” under help.',
+
   /**
    * Units for the counts on cards. A bare "14" tells a beginner nothing — it
    * could be minutes, pages, or things they are expected to have memorised.
@@ -592,6 +617,7 @@ export const EN = {
   'settings.translation': 'Translation',
   'settings.transliteration.help': 'The Arabic spelled out in English letters',
   'settings.translation.help': 'What the words mean in English',
+  'settings.times': 'Prayer times',
   'settings.reminders': 'Prayer reminders',
   'settings.reminders.help':
     'A quiet notification before each prayer. Nothing is sent anywhere. Your phone works the times out and sets its own alarms.',

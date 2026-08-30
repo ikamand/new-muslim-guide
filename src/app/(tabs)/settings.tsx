@@ -17,6 +17,7 @@ import { deleteVoice, savedVoices, type SavedVoice } from '@/content/quran/offli
 import { deleteReciteModels, reciteModelBytes } from '@/lib/recite-session';
 import { RECITERS } from '@/content/quran/recitation';
 import { useLocale } from '@/hooks/use-locale';
+import { usePrayerTimes } from '@/hooks/use-prayer-times';
 import { LOCALE_NAMES, LOCALES } from '@/i18n/locales';
 import { useTheme } from '@/hooks/use-theme';
 
@@ -450,6 +451,34 @@ function reciterNameFor(folder: string): string {
 
 const megabytes = (bytes: number) => (bytes / 1_000_000).toFixed(1);
 
+/**
+ * Where the times come from — the line that used to live on the Awqat card.
+ *
+ * Moved here (Iyad, 30 Aug) so the card can be glanceable; this is also where
+ * changing the method, the madhab and the mosque match will land, so the
+ * provenance sits at the head of the group that will one day edit it. Until
+ * then it is information, not a control.
+ */
+function PrayerTimesGroup() {
+  const { t } = useLocale();
+  const { profile } = usePrayerTimes();
+  if (!profile) return null;
+
+  return (
+    <View style={styles.section}>
+      <ThemedText type="smallBold" themeColor="textSecondary" style={styles.sectionTitle}>
+        {t('settings.times')}
+      </ThemedText>
+      <ThemedText type="small" themeColor="textSecondary">
+        {profile.label} · {t('times.onThisPhone')}
+      </ThemedText>
+      <ThemedText type="small" themeColor="textSecondary">
+        {t('times.followLocal')}
+      </ThemedText>
+    </View>
+  );
+}
+
 export default function SettingsScreen() {
   const theme = useTheme();
   const { t } = useLocale();
@@ -494,6 +523,8 @@ export default function SettingsScreen() {
             isLast
           />
         </View>
+
+        <PrayerTimesGroup />
 
         <RemindersGroup />
 

@@ -91,15 +91,21 @@ that makes us independent of every third-party conversion:
 | `ggml/ggml-silero-v6.2.0.bin` | VAD, sha `2aa269b7…` |
 | `tools/convert-h5-to-ggml.py` | whisper.cpp's converter — originals + this = we can mint GGML forever |
 
-⚠️ **The one outstanding step, and it needs Iyad:** the local archive lives on
-one machine. Move the model files to storage he controls — a private GitHub
-repo's release assets is the natural fit (2 GB/file limit, free, and its
-download URLs later double as the app's self-hosted model source). There is
-no `gh` CLI on this machine and the GitHub connector was down when this was
-written; either install `gh` and say the word, or create the release in the
-browser and drag the five files in. Until then the insurance is: repo-vendored
-build stack + one local copy of the weights + three independent upstream
-sources still live.
+**Off-machine copies — done 30 Aug 2026**, after `gh` was installed and Iyad
+logged in. Everything now lives under his own GitHub account:
+
+| Where | What |
+|---|---|
+| `github.com/ikamand/recite-archive` (private) | The archive's small files in git; the four model files as release **models-v1** assets — both original `pytorch_model.bin`s, the app's GGML f16, the VAD — byte sizes matching `SHA256SUMS` exactly |
+| `github.com/ikamand/whisper.rn-mirror` (private) | Full source mirror, 144 refs — every branch and tag through v0.7.4 |
+| `github.com/ikamand/react-native-audio-pcm-stream-mirror` (private) | Full source mirror of the mic module |
+
+⚠️ **One honest limit on the self-hosting idea:** release assets on a
+PRIVATE repo need authentication to download, so the app cannot fetch models
+from there as it stands. Before repointing `recite-session` at these URLs
+(the path-step 4 above), either make `recite-archive` public — Apache-2.0
+and MIT both permit the redistribution — or put the files on other hosting.
+As pure insurance, private is right for now.
 
 ## Licences, so nobody re-derives them
 

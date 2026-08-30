@@ -156,6 +156,16 @@ same QF word data re-served — a mirror adds convenience, not a witness, and
 this app fetches at build time from the origins. The key stays out of the
 repo per the Phase 12 rule; nothing currently needs it.
 
+Iyad then walked their catalogue item by item (30 Aug): transliteration,
+99 names, prayer times, qibla, hijri and the daily cards all already exist
+in the app — on-device, from origins, with the provenance work an
+aggregator cannot carry — and their "widgets" are website embeds, not
+phone widgets. Two ideas worth keeping FROM the walk, both build-time and
+in-house: an **Islamic events** layer for the seasonal arc (filtered
+through seasons.ts's sighting humility — no single-day claims), and a
+**verse of the day** picked locally from the 564 verified ayahs already
+on the device.
+
 ### 1.4 fitrahive/dua-dhikr — marginal, and worth keeping a link to
 
 **MIT licensed** — the cleanest licence of anything this app touches, cleaner

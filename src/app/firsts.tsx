@@ -1,5 +1,6 @@
 import { Stack } from 'expo-router';
-import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { useState } from 'react';
+import { Pressable, ScrollView, StyleSheet, TextInput, View } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { FIRSTS } from '@/content/firsts';
@@ -7,6 +8,7 @@ import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { useObservations } from '@/hooks/use-observations';
 import { useTheme } from '@/hooks/use-theme';
+import { NOTE_LIMIT } from '@/lib/observations';
 import type { UIKey } from '@/i18n/ui';
 
 /**
@@ -32,17 +34,40 @@ import type { UIKey } from '@/i18n/ui';
  *
  * A mis-tap must be recoverable, so a marked first can be tapped again to
  * remove it. That is the ONLY way one is ever removed: nothing expires and
- * nothing lapses.
+ * nothing lapses. Forgetting a first keeps its written line, so the undo for
+ * a tap can never destroy a sentence.
+ *
+ * ## One private line each
+ *
+ * A marked first can carry a sentence the reader writes — how it actually
+ * was. Stored with the other observations, shown only here, read by nothing:
+ * the ledger's job is to be a witness, and a witness does not analyse. The
+ * affordance is a quiet line under the row, never a prompt — an empty ledger
+ * entry is complete without one.
  */
 export default function FirstsScreen() {
   const theme = useTheme();
   const { t } = useLocale();
-  const { firsts, markFirst, forget } = useObservations();
+  const { firsts, notes, markFirst, forget, noteFirst } = useObservations();
+
+  const [editing, setEditing] = useState<string | null>(null);
+  const [draft, setDraft] = useState('');
 
   const done = FIRSTS.filter((first) => firsts[first.id]).sort(
     (a, b) => firsts[a.id] - firsts[b.id],
   );
   const waiting = FIRSTS.filter((first) => !firsts[first.id]);
+
+  const beginEdit = (id: string) => {
+    setEditing(id);
+    setDraft(notes[id] ?? '');
+  };
+
+  const keep = () => {
+    if (editing) noteFirst(editing, draft);
+    setEditing(null);
+    setDraft('');
+  };
 
   return (
     <ScrollView contentContainerStyle={styles.content}>
@@ -59,20 +84,62 @@ export default function FirstsScreen() {
       ) : (
         <View style={styles.list}>
           {done.map((first) => (
-            <Pressable
-              key={first.id}
-              onPress={() => forget(first.id)}
-              accessibilityRole="button"
-              accessibilityLabel={t(`first.${first.id}` as UIKey)}
-              style={({ pressed }) => [
-                styles.row,
-                {
-                  backgroundColor: pressed ? theme.backgroundSelected : theme.accentMuted,
-                  borderColor: theme.accent,
-                },
-              ]}>
-              <ThemedText type="default">{t(`first.${first.id}` as UIKey)}</ThemedText>
-            </Pressable>
+            <View key={first.id}>
+              <Pressable
+                onPress={() => forget(first.id)}
+                accessibilityRole="button"
+                accessibilityLabel={t(`first.${first.id}` as UIKey)}
+                style={({ pressed }) => [
+                  styles.row,
+                  {
+                    backgroundColor: pressed ? theme.backgroundSelected : theme.accentMuted,
+                    borderColor: theme.accent,
+                  },
+                ]}>
+                <ThemedText type="default">{t(`first.${first.id}` as UIKey)}</ThemedText>
+              </Pressable>
+
+              {editing === first.id ? (
+                <View style={styles.noteEditor}>
+                  <TextInput
+                    value={draft}
+                    onChangeText={setDraft}
+                    maxLength={NOTE_LIMIT}
+                    multiline
+                    autoFocus
+                    placeholder={t('firsts.note.placeholder')}
+                    placeholderTextColor={theme.textSecondary}
+                    style={[
+                      styles.noteInput,
+                      {
+                        color: theme.text,
+                        borderColor: theme.border,
+                        backgroundColor: theme.backgroundElement,
+                      },
+                    ]}
+                  />
+                  <Pressable onPress={keep} accessibilityRole="button" hitSlop={8}>
+                    <ThemedText type="smallBold" themeColor="accent">
+                      {t('firsts.note.keep')}
+                    </ThemedText>
+                  </Pressable>
+                </View>
+              ) : (
+                <Pressable
+                  onPress={() => beginEdit(first.id)}
+                  accessibilityRole="button"
+                  accessibilityLabel={t('firsts.note.add')}
+                  hitSlop={4}
+                  style={styles.noteLine}>
+                  <ThemedText
+                    type="small"
+                    themeColor="textSecondary"
+                    style={notes[first.id] ? undefined : styles.noteHint}>
+                    {notes[first.id] ?? t('firsts.note.add')}
+                  </ThemedText>
+                </Pressable>
+              )}
+            </View>
           ))}
         </View>
       )}
@@ -124,5 +191,23 @@ const styles = StyleSheet.create({
     paddingVertical: Spacing.two,
     borderRadius: Radius.small,
     borderWidth: StyleSheet.hairlineWidth,
+  },
+  noteLine: {
+    paddingHorizontal: Spacing.three,
+    paddingTop: Spacing.one,
+  },
+  noteHint: { fontStyle: 'italic' },
+  noteEditor: {
+    paddingHorizontal: Spacing.three,
+    paddingTop: Spacing.two,
+    gap: Spacing.two,
+  },
+  noteInput: {
+    minHeight: 44,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderRadius: Radius.small,
+    paddingHorizontal: Spacing.two,
+    paddingVertical: Spacing.two,
+    fontSize: 16, // matches the default rung, as ask.tsx does for its input
   },
 });

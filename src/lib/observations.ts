@@ -130,6 +130,15 @@ export type Observations = {
    * the screen got to, not what the reader took in.
    */
   reading: Record<string, Reading>;
+  /**
+   * One private line per first, written by the reader — how it actually was.
+   *
+   * Shown only on the ledger, never surfaced anywhere else, never read by
+   * any inference. It exists so the ledger is THEIRS rather than the app's:
+   * the app is a witness here, not an observer. Forgetting a first keeps its
+   * line, so a mis-tap cannot destroy a sentence someone wrote.
+   */
+  notes: Record<string, string>;
 };
 
 export type Reading = {
@@ -147,6 +156,7 @@ export const EMPTY: Observations = {
   misses: [],
   firsts: {},
   reading: {},
+  notes: {},
 };
 
 const isRecord = (value: unknown): value is Record<string, unknown> =>
@@ -252,6 +262,13 @@ export function parse(raw: string | null): Observations {
       : [],
     firsts: times(stored.firsts),
     reading: readings(stored.reading),
+    notes: isRecord(stored.notes)
+      ? Object.fromEntries(
+          Object.entries(stored.notes)
+            .filter((entry): entry is [string, string] => typeof entry[1] === 'string')
+            .map(([id, text]) => [id, text.slice(0, NOTE_LIMIT)]),
+        )
+      : {},
   };
 }
 
@@ -334,6 +351,18 @@ export function recordMiss(value: Observations, query: string, at: number): Obse
  * recorder here that refuses to update an existing entry, and that difference
  * is the whole meaning of the word.
  */
+/** Long enough for a paragraph, short enough that this stays a line. */
+export const NOTE_LIMIT = 280;
+
+/** The reader's own line on a first. An empty text removes it. */
+export function recordFirstNote(value: Observations, id: string, text: string): Observations {
+  const trimmed = text.trim().slice(0, NOTE_LIMIT);
+  const notes = { ...value.notes };
+  if (trimmed.length === 0) delete notes[id];
+  else notes[id] = trimmed;
+  return { ...value, notes };
+}
+
 export function recordFirst(value: Observations, id: string, at: number): Observations {
   if (value.firsts[id]) return value;
   return { ...value, firsts: { ...value.firsts, [id]: at } };

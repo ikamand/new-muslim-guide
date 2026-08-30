@@ -9,6 +9,7 @@ import {
   read,
   recordFinished,
   recordFirst,
+  recordFirstNote,
   recordMiss,
   recordReading,
   recordSitting,
@@ -42,6 +43,8 @@ type ObservationsValue = Observations & {
   /** Mark a first, or unmark one somebody tapped by mistake. */
   markFirst: (id: string) => void;
   forget: (id: string) => void;
+  /** The reader's own line on a first. Empty text removes it. */
+  noteFirst: (id: string, text: string) => void;
   /** Somebody left a lesson partway through — see `recordReading`. */
   leftReading: (key: string, furthest: number) => void;
 };
@@ -127,6 +130,10 @@ export function ObservationsProvider({ children }: { children: ReactNode }) {
     [update],
   );
   const forget = useCallback((id: string) => update((current) => forgetFirst(current, id)), [update]);
+  const noteFirst = useCallback(
+    (id: string, text: string) => update((current) => recordFirstNote(current, id, text)),
+    [update],
+  );
   const leftReading = useCallback(
     (key: string, furthest: number) =>
       update((current) => recordReading(current, key, furthest, Date.now())),
@@ -134,8 +141,8 @@ export function ObservationsProvider({ children }: { children: ReactNode }) {
   );
 
   const api = useMemo<ObservationsValue>(
-    () => ({ ...value, loaded, finish, sittingDone, surahDone, searchMissed, markFirst, forget, leftReading }),
-    [value, loaded, finish, sittingDone, surahDone, searchMissed, markFirst, forget, leftReading],
+    () => ({ ...value, loaded, finish, sittingDone, surahDone, searchMissed, markFirst, forget, noteFirst, leftReading }),
+    [value, loaded, finish, sittingDone, surahDone, searchMissed, markFirst, forget, noteFirst, leftReading],
   );
 
   return <ObservationsContext value={api}>{children}</ObservationsContext>;

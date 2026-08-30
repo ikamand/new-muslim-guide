@@ -190,6 +190,14 @@ export const EN = {
   'firsts.none': 'Nothing yet. The app marks some of these itself when it sees them.',
   'firsts.notYet': 'Not yet',
   'firsts.mark': 'This has happened',
+  /*
+    The private line. An offer in the quiet colour, never a prompt — an
+    entry without one is complete. Stored on the device with everything
+    else, shown only on the ledger, read by nothing.
+  */
+  'firsts.note.add': 'Add a line about it, if you want one',
+  'firsts.note.placeholder': 'How it was',
+  'firsts.note.keep': 'Keep',
   /* No arrow in the string — the row draws its own, and it drew both. */
   'firsts.open': 'Your firsts',
   'firsts.ask': 'Was that your first?',

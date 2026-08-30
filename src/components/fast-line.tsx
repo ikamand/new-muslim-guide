@@ -1,7 +1,7 @@
 import { StyleSheet, Switch, View } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
-import { Radius, Spacing } from '@/constants/theme';
+import { Spacing } from '@/constants/theme';
 import { useHijriToday } from '@/hooks/use-hijri';
 import { useLocale } from '@/hooks/use-locale';
 import { useLocation } from '@/hooks/use-location';
@@ -67,7 +67,7 @@ export function FastLine() {
 
   return (
     <View
-      style={[styles.card, { backgroundColor: theme.backgroundElement, borderColor: theme.border }]}
+      style={[styles.card, { borderColor: theme.goldSoft }]}
     >
       {line ? <ThemedText type="smallBold">{line}</ThemedText> : null}
       {ramadanClose ? (
@@ -93,11 +93,17 @@ const timeOf = (date: Date) =>
   date.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' });
 
 const styles = StyleSheet.create({
+  /*
+    A panel between rules, like everything else on Today.
+
+    This was missed in the first pass because it renders nothing outside
+    Ramadan and the fortnight before — so Today looked card-free on screen
+    while still carrying one for six weeks of the year. Out-of-season UI does
+    not show up in a screenshot; it has to be found by reading the imports.
+  */
   card: {
-    borderWidth: 1,
-    borderRadius: Radius.medium,
-    paddingHorizontal: Spacing.three,
-    paddingVertical: Spacing.two,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    paddingVertical: Spacing.three,
     gap: Spacing.one,
   },
   switchRow: {

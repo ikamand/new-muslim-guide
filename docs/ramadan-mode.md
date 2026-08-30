@@ -2,10 +2,15 @@
 
 **Status:** Agreed 29 August 2026 — Iyad: *"i like the whole ramadan mode
 idea, bake it in the plan."* **All four pieces built 30 Aug** on his "build
-everything" instruction — commit `de5986c`. ⚠️ **Nobody has seen any of it
-on a screen**: verification was `tsc`, the full check suite and a web export,
-and the pilot rule (eyes on R1 plus one arc card, mocked date, both themes)
-still stands before this is called done. R4 is on the scholarly-review pile.
+everything" instruction — commit `de5986c`. **Seen on a screen the same
+day:** all seven windows driven in the web preview with a mocked clock and
+London coordinates at 393pt — the Shaʿban offer, pre-dawn suhoor, daytime
+iftar, the tarāwīḥ evening, mid-month zakat, the last ten nights, Eid-close —
+in light, and repeated in dark. Screenshots and the driving script are in
+`.cache/ramadan-shots/`. Two things the browser cannot verify and the phone
+still must: **a wake-up actually firing** (web has no scheduler by design,
+`notifications.ts:27`) and the switch's permission prompt. R4 remains on the
+scholarly-review pile.
 **Opened:** 29 August 2026, from the first-Ramadan-companion conversation.
 
 **The finding the design rests on:** the content already exists —

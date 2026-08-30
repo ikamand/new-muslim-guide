@@ -4,7 +4,7 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 
 import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
-import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
+import { MaxContentWidth, Spacing } from '@/constants/theme';
 import { useHelpTopic } from '@/hooks/use-help';
 import { useTheme } from '@/hooks/use-theme';
 

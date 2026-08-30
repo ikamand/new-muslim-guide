@@ -7,7 +7,7 @@ import { ThemedText } from '@/components/themed-text';
 import { HISN } from '@/content/duas/hisn';
 import { hisnAt } from '@/content/duas/moments';
 import { DAY_MOMENTS, type DayMoment } from '@/content';
-import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
+import { MaxContentWidth, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { useTheme } from '@/hooks/use-theme';
 

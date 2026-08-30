@@ -6,7 +6,7 @@ import { PressableLink } from '@/components/pressable-link';
 import { SourceDisclosure } from '@/components/source-list';
 import { ThemedText } from '@/components/themed-text';
 import { DAILY_PRAYERS, RAWATIB_SOURCES, VOLUNTARY_PRAYERS } from '@/content';
-import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
+import { MaxContentWidth, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { useTheme } from '@/hooks/use-theme';
 

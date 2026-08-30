@@ -6,7 +6,7 @@ import { GirihBand } from '@/components/illustrations';
 import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
 import { LEARNING_ORDER } from '@/content/quran/surahs';
-import { BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
+import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { useMemorised } from '@/hooks/use-memorised';
 import { useObservations } from '@/hooks/use-observations';

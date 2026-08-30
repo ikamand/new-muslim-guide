@@ -1,17 +1,18 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useAudioPlaylist, useAudioPlaylistStatus } from 'expo-audio';
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
-import { useEffect, useMemo, useRef, useState } from 'react';
-import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
-import { ReciteFollow } from '@/components/recite-follow';
+import { ReciteControls, ReciteOpenRow } from '@/components/recite-follow';
 import { ThemedText } from '@/components/themed-text';
-import { ayahTransliteration, getSurah, JUZ30_SOURCE } from '@/content/quran/surahs';
+import { ayahTransliteration, ayahWordTransliterations, getSurah, JUZ30_SOURCE } from '@/content/quran/surahs';
 import { ayahSource, keepAyah } from '@/content/quran/ayah-audio';
 import { getReciter, reciterCredit } from '@/content/quran/recitation';
 import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { useMemorised } from '@/hooks/use-memorised';
+import { useReciteFollow } from '@/hooks/use-recite-follow';
 import { useObservations } from '@/hooks/use-observations';
 import { useSettings } from '@/hooks/use-settings';
 import { useTheme } from '@/hooks/use-theme';
@@ -122,7 +123,8 @@ export default function SurahScreen() {
    */
   const [slow, setSlow] = useState(false);
 
-  const ayahs = surah?.ayahs ?? [];
+  // Stable identity: two memos and the recite hook key off it.
+  const ayahs = useMemo(() => surah?.ayahs ?? [], [surah]);
 
   /*
     A fresh array each render is fine — the hook keys on the stringified
@@ -143,6 +145,33 @@ export default function SurahScreen() {
   // along with it.
   const playlist = useAudioPlaylist({ sources, updateInterval: 250 });
   const status = useAudioPlaylistStatus(playlist);
+
+  /*
+    Listening to Husary and being listened to are the same gesture in two
+    directions, and they cannot both hold the audio session — starting one
+    stops the other, both ways.
+  */
+  const stopPlayback = useCallback(() => {
+    playlist.pause();
+    setMode(null);
+  }, [playlist]);
+
+  const followStrings = useMemo(
+    () => ({
+      downloading: (percent: number) => `${t('recite.downloading.recognition')} ${percent}%`,
+      error: t('recite.error'),
+    }),
+    [t],
+  );
+  const follow = useReciteFollow(surah?.ayahs ?? [], followStrings, stopPlayback);
+  const highlightActive = follow.open && (follow.state === 'listening' || follow.complete);
+
+  /* Global word index of each ayah's first word, for the heard-set lookup.
+     Written without mutation for the compiler; n is at most forty. */
+  const wordOffsets = useMemo(() => {
+    const counts = ayahs.map((ayah) => ayah.arabic.trim().split(/\s+/).length);
+    return counts.map((_, i) => counts.slice(0, i).reduce((sum, len) => sum + len, 0));
+  }, [ayahs]);
 
   const index = status.currentIndex;
   const running = mode !== null;
@@ -237,6 +266,15 @@ export default function SurahScreen() {
     scroller.current?.scrollTo({ y: Math.max(0, listTop.current + top - Spacing.three), animated: true });
   }, [mode, index]);
 
+  /* The recitation scrolls the page in the speaking direction too — same
+     trade as above, same machinery, keyed on the verse the walk is painting. */
+  useEffect(() => {
+    if (!follow.open || follow.state !== 'listening') return;
+    const top = rowTops.current[follow.currentVerse - 1];
+    if (top === undefined) return;
+    scroller.current?.scrollTo({ y: Math.max(0, listTop.current + top - Spacing.three), animated: true });
+  }, [follow.open, follow.state, follow.currentVerse]);
+
   /*
     Silence that never resolves, said out loud.
 
@@ -295,6 +333,7 @@ export default function SurahScreen() {
 
   /** From the top, as a run-through. */
   const toggleSurah = () => {
+    if (follow.state === 'listening') void follow.stop();
     if (mode === 'surah') return stop();
     setMode('surah');
     resumeAt.current = 0;
@@ -313,6 +352,7 @@ export default function SurahScreen() {
    * how it goes in, and it is what a paper mushaf cannot do.
    */
   const playFrom = (position: number) => {
+    if (follow.state === 'listening') void follow.stop();
     if (mode !== null && index === position && status.playing) return stop();
     setMode('ayah');
     resumeAt.current = position;
@@ -343,6 +383,10 @@ export default function SurahScreen() {
     });
 
   return (
+    <View style={styles.screen}>
+      {/* Pinned above the scroll, per Iyad: the controls must not disappear
+          while the page follows the recitation downward. */}
+      <ReciteControls follow={follow} />
     <ScrollView ref={scroller} contentContainerStyle={styles.content}>
       <Stack.Screen options={{ title: surah.name }} />
 
@@ -459,10 +503,10 @@ export default function SurahScreen() {
 
       {/*
         The listening half. Hearing the surah is the row above; being heard
-        reciting it is this one. It renders nothing on web, where the mic
-        pipeline does not exist.
+        reciting it is this one — the highlight lives in the ayah cards, and
+        this row just opens the pinned controls. Nothing on web.
       */}
-      <ReciteFollow verses={ayahs} />
+      <ReciteOpenRow follow={follow} />
 
       {stalled && (
         <View style={[styles.stalled, { borderLeftColor: theme.border }]}>
@@ -482,6 +526,15 @@ export default function SurahScreen() {
           const transliterated = ayahTransliteration(surah.number, ayah.number);
           const isCurrent = currentAyah === ayah.number;
           const sounding = isCurrent && status.playing;
+          /* The recite highlight, when a session is live: green means this
+             word was HEARD — passed-over words stay unlit, so a stumble
+             shows as a quiet gap, and lights late if said right later. */
+          const beingRecited = highlightActive && follow.currentVerse === ayah.number;
+          const arabicWords = ayah.arabic.trim().split(/\s+/);
+          const translitWords = ayahWordTransliterations(surah.number, ayah.number);
+          const offset = wordOffsets[position] ?? 0;
+          const wordLit = (w: number) =>
+            follow.heard.has(offset + w) && offset + w < follow.displayed;
 
           return (
             /*
@@ -504,8 +557,9 @@ export default function SurahScreen() {
                   backgroundColor: theme.backgroundElement,
                   // Following along is the same gesture as listening, which is
                   // why the surah plays as one playlist that reports where it
-                  // is rather than as one file that cannot.
-                  borderColor: isCurrent ? theme.accent : theme.border,
+                  // is rather than as one file that cannot — and the recite
+                  // session borrows the same border for the verse being said.
+                  borderColor: isCurrent || beingRecited ? theme.accent : theme.border,
                 },
               ]}>
               <View style={styles.ayahHead}>
@@ -567,20 +621,50 @@ export default function SurahScreen() {
                       {t('quran.covered')}
                     </ThemedText>
                   </View>
+                ) : highlightActive ? (
+                  <ThemedText type="arabicVerse" style={styles.arabic}>
+                    {arabicWords.map((word, w) => (
+                      <Text
+                        key={`${ayah.number}-${w}`}
+                        style={{ color: wordLit(w) ? theme.accent : theme.text }}
+                      >
+                        {word}
+                        {w < arabicWords.length - 1 ? ' ' : ''}
+                      </Text>
+                    ))}
+                  </ThemedText>
                 ) : (
                   <ThemedText type="arabicVerse" style={styles.arabic}>{ayah.arabic}</ThemedText>
                 )}
 
                 {/*
-                  Al-Fatiha only, and it returns undefined everywhere else —
-                  see `ayahTransliteration`. It sits under the Arabic and above
-                  the meaning, in the reading order somebody actually uses when
-                  they are trying to say the line rather than understand it.
+                  Every surah now — Iyad reversed §5.3's Fatiha-only rule on
+                  30 Aug 2026; the history is on `ayahTransliteration`. It
+                  sits under the Arabic and above the meaning, in the reading
+                  order somebody uses when trying to SAY the line — and when
+                  a recite session is live, the Latin word lights in step
+                  with its Arabic one, index-aligned by the generator.
                 */}
                 {transliteration && !isHidden && transliterated && (
-                  <ThemedText type="small" themeColor="textSecondary" style={styles.transliteration}>
-                    {transliterated}
-                  </ThemedText>
+                  highlightActive &&
+                  translitWords &&
+                  translitWords.length === arabicWords.length ? (
+                    <ThemedText type="small" themeColor="textSecondary" style={styles.transliteration}>
+                      {translitWords.map((word, w) => (
+                        <Text
+                          key={`${ayah.number}-t${w}`}
+                          style={wordLit(w) ? { color: theme.accent } : undefined}
+                        >
+                          {word}
+                          {w < translitWords.length - 1 ? ' ' : ''}
+                        </Text>
+                      ))}
+                    </ThemedText>
+                  ) : (
+                    <ThemedText type="small" themeColor="textSecondary" style={styles.transliteration}>
+                      {transliterated}
+                    </ThemedText>
+                  )
                 )}
 
                 {translation && !isHidden && (
@@ -628,10 +712,12 @@ export default function SurahScreen() {
         {reciterCredit(reciter)}
       </ThemedText>
     </ScrollView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  screen: { flex: 1 },
   content: {
     padding: Spacing.four,
     paddingBottom: Spacing.six,

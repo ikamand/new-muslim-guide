@@ -23,6 +23,7 @@
  */
 
 import { Recitations } from '../recitations';
+import { WORD_TRANSLITERATIONS } from './transliterations';
 import { AL_FATIHA } from './fatiha';
 import { JUZ_30, type Surah } from './juz30';
 
@@ -62,32 +63,39 @@ export function surahForRecitation(practiceKey: string): number | undefined {
 }
 
 /**
- * How an ayah sounds, in Latin letters — for Al-Fatiha and nothing else.
+ * How an ayah sounds, in Latin letters — now for every surah here.
  *
- * ## This is an exception to a settled decision, not a reversal of it
+ * ## The history of this rule, kept because it reversed twice
  *
- * Juz 30 carries no transliteration on purpose, and that stands. A Latin line
- * under an ayah gets read *instead of* the Arabic: people memorise English
- * letters, and still cannot open a mushaf. For a surah somebody is choosing to
- * learn, the line is a crutch that postpones the thing they came for.
+ * ui-redesign-plan §5.3 settled "no transliteration under juz 30" — a Latin
+ * line gets read *instead of* the Arabic. Al-Fatiha became the one exception
+ * (somebody three weeks in must say it tonight, five times). Then on
+ * 30 Aug 2026 **Iyad reversed the rule itself**, for the recite feature:
+ * *"transliteration should be more than alfatihah … we do need them because
+ * most new muslims cant read arabic."* Someone reciting along with the
+ * follower needs a line they can read, and per-word data lets the highlight
+ * light the Latin word in step with the Arabic one — which turns the crutch
+ * argument on its head: the lit pairing is how the shapes get learned.
  *
- * Al-Fatiha is not that. It is recited in every rak'ah of every prayer, and
- * somebody three weeks into Islam has to say it tonight, five times, before
- * they can read a word of Arabic. Withholding the line there does not protect
- * their reading — it stops them praying. That is a different situation from
- * the one the rule was written for, which is why this is narrow and why it is
- * written down.
- *
- * It resolves itself structurally rather than by a flag: the 564 generated
- * ayahs have no transliteration to return, because it was never fetched. So
- * only Al-Fatiha can show one, and the rule for everything else cannot be
- * broken by forgetting.
- *
- * The text is the one already in `recitations.ts` — copied across rather than
- * written again, because a transliteration is content and this app does not
- * invent content. One scheme, one place, and the two screens cannot drift.
+ * The data is generated, per word, from the same source as the ayah text
+ * (`scripts/generate-transliterations.mjs`), in the app's own scheme.
+ * Al-Fatiha prefers the hand-checked line in `recitations.ts`, unchanged —
+ * one scheme, and the prayer screens cannot drift from this one.
  */
 export function ayahTransliteration(surah: number, ayah: number): string | undefined {
-  if (surah !== 1) return undefined;
-  return Recitations.fatiha.verses[ayah - 1]?.transliteration;
+  if (surah === 1) return Recitations.fatiha.verses[ayah - 1]?.transliteration;
+  return WORD_TRANSLITERATIONS[surah]?.[ayah]?.join(' ');
+}
+
+/**
+ * The same line as separate words, index-aligned with the ayah's Arabic
+ * split on spaces — the generator guarantees the alignment or omits the
+ * ayah. `undefined` means "no per-word line": the caller falls back to the
+ * plain line or nothing, never to a misaligned highlight.
+ */
+export function ayahWordTransliterations(
+  surah: number,
+  ayah: number,
+): readonly string[] | undefined {
+  return WORD_TRANSLITERATIONS[surah]?.[ayah];
 }

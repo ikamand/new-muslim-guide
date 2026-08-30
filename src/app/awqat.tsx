@@ -226,7 +226,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'baseline',
     gap: Spacing.one,
-    paddingBottom: Spacing.two,
+    /* Even air above and below the labels — top was missing (Iyad). */
+    paddingVertical: Spacing.two,
     borderBottomWidth: 1,
   },
   dayRow: {

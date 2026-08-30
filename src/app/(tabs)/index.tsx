@@ -305,16 +305,18 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   /*
-    Gap four, not five. Every seam on this screen is the screen gap PLUS both
-    neighbours' own padding, and at 32 the stack read as holes — Iyad marked
-    five of them with an X on one screenshot. The tail keeps only the tab-bar
-    inset: the old extra Spacing.four left a blank apron under Settings.
+    Gap two. Twice Iyad marked the seams in red and twice the culprit was the
+    same arithmetic: every block already ends with its own padding and a rule,
+    so the screen gap double-counts — at 32 the seams were holes, at 24 still
+    bands. At 8 the gap is only the air between a rule and the next block's
+    own headroom, and the page reads as one column. The tail keeps only the
+    tab-bar inset.
   */
   content: {
     padding: Spacing.four,
     paddingTop: Spacing.three,
     paddingBottom: BottomTabInset + Spacing.two,
-    gap: Spacing.four,
+    gap: Spacing.two,
     width: '100%',
     maxWidth: MaxContentWidth,
     alignSelf: 'center',

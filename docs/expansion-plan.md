@@ -145,6 +145,17 @@ check is worse than no number, because it survives review by looking right.*
 The content is also a subset of Hisn al-Muslim, which the app already has in
 full. No value.
 
+**Re-checked 30 Aug 2026, with an API key Iyad registered.** The service has
+grown to twelve datasets, and its hadith endpoint now resolves by proper
+number — `/api/hadith/bukhari/1894` returns `hadithnumber: 1894` with Arabic
+that is skeleton-identical to the local corpus, and its word-by-word Qur'an
+matches the Quran Foundation data in the app's own scheme. So the rejection
+above narrows to the duʿas dataset it was written about. Adoption is still
+declined, for a cleaner reason: it is the same fawazahmed0 corpus and the
+same QF word data re-served — a mirror adds convenience, not a witness, and
+this app fetches at build time from the origins. The key stays out of the
+repo per the Phase 12 rule; nothing currently needs it.
+
 ### 1.4 fitrahive/dua-dhikr — marginal, and worth keeping a link to
 
 **MIT licensed** — the cleanest licence of anything this app touches, cleaner

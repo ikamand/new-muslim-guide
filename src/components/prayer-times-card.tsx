@@ -412,7 +412,13 @@ const styles = StyleSheet.create({
   */
   card: {
     gap: Spacing.three,
-    paddingVertical: Spacing.four,
+    /*
+      Slim vertical padding: the arch's crown already carries ~9px of drawn
+      air at the niche's top, and the quiet line closes the bottom — a full
+      24 on both ends stacked onto the screen gap and pressed as dead space.
+    */
+    paddingTop: Spacing.two,
+    paddingBottom: Spacing.two,
     /*
       A bottom rule only.
 

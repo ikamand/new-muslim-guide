@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
       per join: a block closes itself and the next one opens against it.
     */
     borderBottomWidth: StyleSheet.hairlineWidth,
-    paddingVertical: Spacing.four,
+    paddingVertical: Spacing.three,
     gap: Spacing.two,
   },
   head: {

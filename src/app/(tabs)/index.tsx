@@ -304,11 +304,17 @@ const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
   },
+  /*
+    Gap four, not five. Every seam on this screen is the screen gap PLUS both
+    neighbours' own padding, and at 32 the stack read as holes — Iyad marked
+    five of them with an X on one screenshot. The tail keeps only the tab-bar
+    inset: the old extra Spacing.four left a blank apron under Settings.
+  */
   content: {
     padding: Spacing.four,
     paddingTop: Spacing.three,
-    paddingBottom: BottomTabInset + Spacing.four,
-    gap: Spacing.five,
+    paddingBottom: BottomTabInset + Spacing.two,
+    gap: Spacing.four,
     width: '100%',
     maxWidth: MaxContentWidth,
     alignSelf: 'center',

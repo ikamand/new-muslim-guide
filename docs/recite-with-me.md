@@ -167,6 +167,18 @@ beginner recording has a measured rate and a stall map.
   it converts, transcribes and aligns every file and prints the transcript,
   the advanced count and the stall map per recording.
 
+### Seen 31 Aug — the first on-device session, on tape
+
+Iyad screen-recorded a live attempt (31 s, frames pulled and read on the
+iMac). What it proves: models loaded in ~4 s on his phone, and **the
+word-by-word following worked live** — بِسْمِ lit at ~7 s, three words by
+~8 s, Ayah 2 reached by ~10 s. What it also captures: the session then froze
+at Ayah 2 for the remaining twenty seconds — the SliceManager stack overflow
+killing the pipeline silently, matching his crash screenshot. The recording
+predates the fixes (the listening hint line is absent), so the freeze and
+the back-and-forth he reported are both already patched; a fresh take on the
+new bundle is the next piece of evidence.
+
 ### Measured 29 Aug, evening — the first real recording, two requirements out of it
 
 Iyad's own recitation, 26 s, recorded in the macOS Voice Memos app on this

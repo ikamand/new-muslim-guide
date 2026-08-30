@@ -48,6 +48,24 @@ import { useTheme } from '@/hooks/use-theme';
  */
 export type TextType = NonNullable<ThemedTextProps['type']>;
 
+/**
+ * Optical trim for an `arabicName` sitting in a Latin row.
+ *
+ * Amiri's line box reserves headroom for stacked vowel marks — its ascent
+ * runs well above a Latin face's — so in a row aligned on the baseline the
+ * Arabic box's top sticks up past everything visible, and the row carries an
+ * invisible blank band. Nobody sees it until the row is pressed: the
+ * highlight paints the real box, and the band shows up as dead space at the
+ * top (Iyad's held-press screenshots, 31 Aug — Qur'an and Duʿa rows).
+ *
+ * One constant, applied wherever a name shares a row with Latin, so the eye
+ * that tunes it tunes every row at once. Top takes more than bottom because
+ * the box's slack is mostly ascent. Trims the BOX, never the glyphs — marks
+ * still render, overflowing harmlessly into the row's padding.
+ */
+export const ARABIC_NAME_TRIM = { marginTop: -6, marginBottom: -2 } as const;
+
+
 export type ThemedTextProps = TextProps & {
   type?:
     | 'caption'

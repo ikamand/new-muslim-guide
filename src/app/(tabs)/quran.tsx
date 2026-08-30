@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { GirihBand } from '@/components/illustrations';
 import { PressableLink } from '@/components/pressable-link';
-import { ThemedText } from '@/components/themed-text';
+import { ARABIC_NAME_TRIM, ThemedText } from '@/components/themed-text';
 import { LEARNING_ORDER } from '@/content/quran/surahs';
 import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
@@ -239,6 +239,7 @@ const styles = StyleSheet.create({
     gap: Spacing.two,
   },
   nameArabic: {
-    /* size and face: the `arabicName` rung */
+    /* size and face: the `arabicName` rung; the trim's story lives with it */
+    ...ARABIC_NAME_TRIM,
   },
 });

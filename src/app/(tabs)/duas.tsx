@@ -10,7 +10,7 @@ import {
 } from '@/components/adhkar-session-card';
 import { DuaCard } from '@/components/dua-card';
 import { Shelf, Unwan } from '@/components/jadwal';
-import { ThemedText } from '@/components/themed-text';
+import { ARABIC_NAME_TRIM, ThemedText } from '@/components/themed-text';
 import { COLLECTIONS } from '@/content/collections';
 import { HISN } from '@/content/duas/hisn';
 import {
@@ -311,5 +311,5 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     gap: Spacing.three,
   },
-  arabic: { textAlign: 'right', writingDirection: 'rtl' },
+  arabic: { textAlign: 'right', writingDirection: 'rtl', ...ARABIC_NAME_TRIM },
 });

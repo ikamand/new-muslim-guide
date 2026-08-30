@@ -214,7 +214,17 @@ export function JadwalRow({
     <PressableLink
       href={href}
       accessibilityLabel={accessibilityLabel ?? `${title}${meta ? `. ${meta}` : ''}`}
-      style={[styles.row, { borderBottomColor: theme.goldSoft }]}
+      style={[
+        styles.row,
+        /*
+          Kicker rows halve their top padding: the uppercase caption carries
+          its own headroom, and where a bookmark anchors the bottom edge a
+          full pad above the kicker pressed as a blank band (Iyad's held
+          screenshots, 31 Aug).
+        */
+        kicker ? styles.rowWithKicker : null,
+        { borderBottomColor: theme.goldSoft },
+      ]}
       pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
       {marginal ? <View style={styles.rowMarginal}>{marginal}</View> : null}
       <View style={styles.rowText}>
@@ -386,6 +396,9 @@ const styles = StyleSheet.create({
     gap: Spacing.three,
     paddingVertical: Spacing.three,
     borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+  rowWithKicker: {
+    paddingTop: Spacing.two,
   },
   rowMarginal: {
     alignItems: 'center',

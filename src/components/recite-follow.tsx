@@ -61,6 +61,16 @@ export function ReciteFollow({ verses }: { verses: readonly { arabic: string }[]
   */
   const [shownPosition, setShownPosition] = useState(0);
   /*
+    Green means HEARD — nothing else ever has. The aligner passes over a
+    garbled word when a later one matches (follows, never blocks), but the
+    first mistake test showed the walk painting those passed-over words green
+    on its way by, which read as the app accepting sounds as words. Heard
+    words accumulate here; passed-over ones stay unlit — a mistake shows as
+    a quiet absence, never a colour — and saying the word properly later
+    lights it late, because every pass re-reads the whole window.
+  */
+  const [heard, setHeard] = useState<ReadonlySet<number>>(new Set());
+  /*
     What the reader SEES is a walk, not a leap. The engine reports in
     ~one-second batches, so the true position often jumps a whole ayah at
     once — and a card that flips ayahs before its words were ever seen to
@@ -135,12 +145,21 @@ export function ReciteFollow({ verses }: { verses: readonly { arabic: string }[]
     setTranscript('');
     setShownPosition(0);
     setDisplayed(0);
+    setHeard(new Set());
     try {
       session.current = await startFollowSession({
         onTranscript: (text) => {
           setTranscript(text);
           const live = align(reference, text);
           setShownPosition((prev) => Math.max(prev, live.position));
+          setHeard((prev) => {
+            const next = new Set(prev);
+            const passed = new Set(live.passedOver);
+            for (let index = 0; index < live.position; index += 1) {
+              if (!passed.has(index)) next.add(index);
+            }
+            return next;
+          });
         },
         onError: (message) => {
           /* Rule 2: the words dim; the reader is not interrupted. The log
@@ -160,11 +179,12 @@ export function ReciteFollow({ verses }: { verses: readonly { arabic: string }[]
 
   if (!canRecite || reference.length === 0) return null;
 
-  /* The verse on screen follows the walk, not the engine's leaps. */
-  const currentVerse =
-    displayed < reference.length
-      ? reference[displayed].verse
-      : reference[reference.length - 1].verse;
+  /* The verse on screen follows the walk — anchored on the last word the
+     walk has painted, not the next expected one, so an ayah's final word
+     gets its moment green before the card turns. The first full test
+     reported exactly that missing moment. */
+  const anchor = Math.min(Math.max(displayed - 1, 0), reference.length - 1);
+  const currentVerse = displayed === 0 ? reference[0].verse : reference[anchor].verse;
   const verseWords = reference.filter((word) => word.verse === currentVerse);
   const verseStart = reference.findIndex((word) => word.verse === currentVerse);
   const totalVerses = reference[reference.length - 1].verse;
@@ -258,6 +278,7 @@ export function ReciteFollow({ verses }: { verses: readonly { arabic: string }[]
               currentVerse={currentVerse}
               totalVerses={totalVerses}
               position={displayed}
+              heard={heard}
               onStop={() => void stop()}
             />
           )}
@@ -285,6 +306,7 @@ function ListeningBody({
   currentVerse,
   totalVerses,
   position,
+  heard,
   onStop,
 }: {
   verseWords: readonly { word: string }[];
@@ -292,6 +314,7 @@ function ListeningBody({
   currentVerse: number;
   totalVerses: number;
   position: number;
+  heard: ReadonlySet<number>;
   onStop: () => void;
 }) {
   const theme = useTheme();
@@ -328,7 +351,10 @@ function ListeningBody({
           <Text
             key={`${currentVerse}-${w}`}
             style={{
-              color: verseStart + w < position ? theme.accent : theme.text,
+              color:
+                verseStart + w < position && heard.has(verseStart + w)
+                  ? theme.accent
+                  : theme.text,
             }}
           >
             {word.word}

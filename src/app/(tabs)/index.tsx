@@ -3,7 +3,7 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { AskBar } from '@/components/ask-bar';
-import { Action, JadwalRow, Unwan } from '@/components/jadwal';
+import { Action, JadwalRow, QuietRow, Unwan } from '@/components/jadwal';
 import { DailyCollectionCard } from '@/components/daily-collection-card';
 import { AdhkarSessionCard, useLiveSession } from '@/components/adhkar-session-card';
 import { DuaCard } from '@/components/dua-card';
@@ -238,7 +238,7 @@ function WordsSlot() {
 export default function TodayScreen() {
   const theme = useTheme();
   const { next } = usePrayerTimes();
-  const { locale } = useLocale();
+  const { locale, t } = useLocale();
   const item = useToday();
 
   const nextPrayer = next ? PRAYERS.find((prayer) => prayer.id === next.id) : undefined;
@@ -284,6 +284,16 @@ export default function TodayScreen() {
           candidate here rather than a fixture.
         */}
         {item ? <TodayRow item={item} /> : null}
+
+        {/*
+          Settings closes the screen. It left the tab bar (the one tab that
+          was neither worship nor content) and a first home at the end of
+          Learn proved too buried — Iyad's call, twice: the bottom of Today,
+          where a quiet ruled line is findable without being an eye-sore, is
+          where it lives. The one exception to this screen's deadline test,
+          made deliberately and on the record.
+        */}
+        <QuietRow href="/settings" label={t('settings.title')} />
 
       </ScrollView>
     </SafeAreaView>

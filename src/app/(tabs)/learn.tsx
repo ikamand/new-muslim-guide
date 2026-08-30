@@ -444,31 +444,41 @@ export default function LearnScreen() {
           <Unwan title={t('learn.title')} subtitle={t('learn.intro')} />
         </View>
 
-        <ShahadaCard />
-
-        <WhereYouAre />
-
         {/*
-          What they were in the middle of, offered back. A row rather than a
-          moved card: the lesson stays findable on its shelf below, and this
-          line is the one place on the tab allowed to change day to day.
+          The ledger rides directly under the shahada — the first first, and
+          the record of the ones after it. One section, so the two sit as
+          neighbours rather than a screen-gap apart.
         */}
-        {/*
-          Promoted from a quiet grey line to the full kicker row — the same
-          shape Today gives the same content, one treatment for one thing in
-          two places. It earned the promotion by being missed: a one-line
-          "You were reading: …" in textSecondary was invisible between the
-          chapter card and the shelves (Iyad, 31 Aug). The bookmark along its
-          foot comes with the row.
-        */}
-        {readingNow && (
-          <JadwalRow
-            href={routeFor(readingNow.entry)}
-            kicker={t('today.reading')}
-            title={readingNow.entry.title}
-            progress={readingNow.furthest}
+        <View style={styles.section}>
+          <ShahadaCard />
+          <QuietRow
+            href="/firsts"
+            label={t('firsts.open')}
+            accessibilityLabel={t('firsts.title')}
           />
-        )}
+        </View>
+
+        {/*
+          The kicker row Today gives the same content — one treatment for one
+          thing in two places, and the lesson stays findable on its shelf
+          below; this is still the one line on the tab allowed to change day
+          to day. It sits INSIDE the chapter section rather than floating
+          between sections: as a direct child of the screen it took the 32px
+          screen gap on both sides and read as marooned (Iyad's screenshot,
+          31 Aug). The bookmark along its foot comes with the row.
+        */}
+        <View style={styles.section}>
+          <WhereYouAre />
+          {readingNow && (
+            <JadwalRow
+              href={routeFor(readingNow.entry)}
+              kicker={t('today.reading')}
+              title={readingNow.entry.title}
+              progress={readingNow.furthest}
+              trailing={<Ionicons name="chevron-forward" size={14} color={theme.gold} />}
+            />
+          )}
+        </View>
 
         {/*
           Grouped by when the question arrives, not by subject.
@@ -574,23 +584,6 @@ export default function LearnScreen() {
           </View>
         </View>
       
-        {/*
-          The colophon — the note at the end of a manuscript where the book
-          talks about itself. That is exactly what these two are: the ledger
-          of firsts (a keepsake register at the back of the book, the way a
-          family Qur'an's flyleaf records births), and Settings, which left
-          the tab bar because it was the one tab that was neither worship nor
-          content. `content/firsts.ts` explains why the ledger shows no count.
-        */}
-        <View style={styles.colophon}>
-          <QuietRow
-            href="/firsts"
-            label={t('firsts.open')}
-            accessibilityLabel={t('firsts.title')}
-          />
-          <QuietRow href="/settings" label={t('settings.title')} />
-        </View>
-
       </ScrollView>
     </SafeAreaView>
   );
@@ -598,10 +591,6 @@ export default function LearnScreen() {
 
 
 const styles = StyleSheet.create({
-  /* Breathing room above the end matter — the rows carry their own rules. */
-  colophon: {
-    marginTop: Spacing.five,
-  },
   safeArea: {
     flex: 1,
   },

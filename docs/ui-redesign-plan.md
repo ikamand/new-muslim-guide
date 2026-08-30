@@ -2477,3 +2477,13 @@ same content, bookmark included; and pressed-state highlights sat off-centre
 because `keepsake` and the collection coda had top-only padding — the
 highlight paints the padded box, so asymmetric padding is invisible until
 the press. Both symmetric now, footprints unchanged via cancelling margins.
+
+### 31 Aug, evening — the colophon reverses; Settings lands on Today
+
+The colophon lasted one look: Iyad called it too buried, and reaffirmed his
+original placement — so it is decided and built. Settings is the last quiet
+ruled line at the foot of Today, the one deliberate exception to that
+screen's deadline test, recorded as such in the code. "Your firsts" moved up
+to sit directly under the shahada row. The promoted "You were reading" row
+was floating between sections with the 32px screen gap on both sides; it now
+lives inside the chapter section with a chevron, matching every other row.

@@ -174,7 +174,7 @@ export default function ReciteSpikeScreen() {
       <View
         style={[
           styles.card,
-          { backgroundColor: theme.backgroundElement, borderColor: theme.border },
+          { borderColor: theme.goldSoft },
         ]}
       >
         {VERSE_ROWS.map((row) => (
@@ -214,7 +214,7 @@ export default function ReciteSpikeScreen() {
         <View
           style={[
             styles.card,
-            { backgroundColor: theme.backgroundElement, borderColor: theme.border },
+            { borderColor: theme.goldSoft },
           ]}
         >
           <ThemedText type="caption" style={{ color: theme.textSecondary }}>
@@ -244,9 +244,9 @@ const styles = StyleSheet.create({
     borderRadius: Radius.medium,
   },
   card: {
-    borderWidth: 1,
-    borderRadius: Radius.large,
-    padding: Spacing.four,
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    paddingVertical: Spacing.four,
     gap: Spacing.three,
   },
   verse: { textAlign: 'right' },

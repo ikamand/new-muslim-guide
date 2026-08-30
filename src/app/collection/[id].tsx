@@ -67,10 +67,7 @@ export default function CollectionScreen() {
       {collection.entries.map((entry, index) => (
         <View
           key={entry.id}
-          style={[
-            styles.card,
-            { backgroundColor: theme.backgroundElement, borderColor: theme.border },
-          ]}>
+          style={[styles.card, { borderBottomColor: theme.goldSoft }]}>
           {/*
             The ordinal, because a collection is ORDERED and the order is part
             of what it is — the sīrah in sequence, the names as the list has
@@ -160,9 +157,8 @@ const styles = StyleSheet.create({
   },
   card: {
     gap: Spacing.two,
-    padding: Spacing.three,
-    borderRadius: Radius.medium,
-    borderWidth: StyleSheet.hairlineWidth,
+    paddingVertical: Spacing.three,
+    borderBottomWidth: StyleSheet.hairlineWidth,
   },
   titleRow: {
     flexDirection: 'row',

@@ -37,7 +37,7 @@ export function ReciteOpenRow({ follow }: { follow: ReciteFollowController }) {
         styles.row,
         {
           backgroundColor: theme.backgroundElement,
-          borderColor: theme.border,
+          borderColor: theme.goldSoft,
           opacity: pressed ? 0.7 : 1,
         },
       ]}
@@ -60,7 +60,7 @@ export function ReciteControls({ follow }: { follow: ReciteFollowController }) {
 
   return (
     <View
-      style={[styles.bar, { backgroundColor: theme.backgroundElement, borderColor: theme.border }]}
+      style={[styles.bar, { backgroundColor: theme.backgroundElement, borderColor: theme.goldSoft }]}
     >
       {follow.state === 'listening' ? <KeepAwakeWhileListening /> : null}
 

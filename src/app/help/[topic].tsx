@@ -38,10 +38,7 @@ export default function HelpTopicScreen() {
             key={link.key}
             href={link.href}
             accessibilityLabel={`${link.title}. ${link.description}`}
-            style={[
-              styles.row,
-              { backgroundColor: theme.backgroundElement, borderColor: theme.border },
-            ]}
+            style={[styles.row, { borderBottomColor: theme.goldSoft }]}
             pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
             <View style={styles.rowText}>
               <ThemedText type="smallBold" style={styles.rowTitle}>
@@ -73,9 +70,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     gap: Spacing.three,
-    padding: Spacing.three,
-    borderRadius: Radius.medium,
-    borderWidth: StyleSheet.hairlineWidth,
+    paddingVertical: Spacing.three,
+    borderBottomWidth: StyleSheet.hairlineWidth,
   },
   rowText: {
     flex: 1,

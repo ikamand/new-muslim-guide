@@ -486,8 +486,9 @@ export default function SurahScreen() {
         style={({ pressed }) => [
           styles.reciter,
           {
+            /* A control keeps its fill; only the edge joins the gold family. */
             backgroundColor: theme.backgroundElement,
-            borderColor: theme.border,
+            borderColor: theme.goldSoft,
             opacity: pressed ? 0.7 : 1,
           },
         ]}>
@@ -554,12 +555,15 @@ export default function SurahScreen() {
               style={[
                 styles.ayah,
                 {
-                  backgroundColor: theme.backgroundElement,
-                  // Following along is the same gesture as listening, which is
-                  // why the surah plays as one playlist that reports where it
-                  // is rather than as one file that cannot — and the recite
-                  // session borrows the same border for the verse being said.
-                  borderColor: isCurrent || beingRecited ? theme.accent : theme.border,
+                  // The live ayah is the lit one — the reading pool, not a
+                  // coloured frame. Following along is the same gesture as
+                  // listening, which is why the surah plays as one playlist
+                  // that reports where it is rather than as one file that
+                  // cannot — and the recite session borrows the same light
+                  // for the verse being said.
+                  backgroundColor:
+                    isCurrent || beingRecited ? theme.backgroundSelected : 'transparent',
+                  borderBottomColor: theme.goldSoft,
                 },
               ]}>
               <View style={styles.ayahHead}>
@@ -744,8 +748,8 @@ const styles = StyleSheet.create({
   ayah: {
     gap: Spacing.two,
     padding: Spacing.three,
-    borderRadius: Radius.medium,
-    borderWidth: StyleSheet.hairlineWidth,
+    borderRadius: Radius.rule,
+    borderBottomWidth: StyleSheet.hairlineWidth,
   },
   ayahHead: {
     flexDirection: 'row',

@@ -1,6 +1,7 @@
 import { StyleSheet, View } from 'react-native';
 
 import { ContentNoteCard } from '@/components/content-note';
+import { Rosette } from '@/components/jadwal';
 import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
 import { resolveNotes, resolveRef, type Pillar } from '@/content';
@@ -29,14 +30,15 @@ export function PillarCard({ pillar, index }: { pillar: Pillar; index: number })
     <View
       style={[
         styles.card,
-        { backgroundColor: theme.backgroundElement, borderColor: theme.border },
+        { borderColor: theme.goldSoft },
       ]}>
       <View style={styles.cardHead}>
-        <View style={[styles.number, { backgroundColor: theme.accentMuted }]}>
-          <ThemedText type="smallBold" themeColor="accent">
-            {index + 1}
-          </ThemedText>
-        </View>
+        {/*
+          A rosette, not a tinted chip. These are numbered items in a series,
+          which is the one thing the marginal rosette exists for — and it puts
+          the number outside the text block where a contents page keeps it.
+        */}
+        <Rosette label={String(index + 1)} />
         <View style={styles.cardHeadText}>
           <ThemedText type="cardTitle">
             {pillar.title}
@@ -75,9 +77,8 @@ export function PillarCard({ pillar, index }: { pillar: Pillar; index: number })
 const styles = StyleSheet.create({
   card: {
     gap: Spacing.three,
-    padding: Spacing.four,
-    borderRadius: Radius.medium,
-    borderWidth: StyleSheet.hairlineWidth,
+    paddingVertical: Spacing.four,
+    borderBottomWidth: StyleSheet.hairlineWidth,
   },
   cardHead: {
     flexDirection: 'row',
@@ -87,13 +88,6 @@ const styles = StyleSheet.create({
   cardHeadText: {
     flex: 1,
     gap: 2,
-  },
-  number: {
-    width: 28,
-    height: 28,
-    borderRadius: Radius.small,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   arabic: {
     /* size and face: the `arabicLead` rung */

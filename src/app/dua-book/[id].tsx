@@ -119,10 +119,16 @@ export default function DuaBookOccasionScreen() {
           key={step.key}
           style={[
             styles.card,
-            { backgroundColor: theme.backgroundElement, borderColor: theme.border },
+            { borderBottomColor: theme.goldSoft },
+            /*
+              A Qur'an line is set apart by a gold rule in its margin, not a
+              tinted fill — illumination marking a quotation, which is
+              literally what gold did on this book's pages.
+            */
             step.line.kind === 'quran' && {
-              backgroundColor: theme.accentMuted,
-              borderColor: theme.accentMuted,
+              borderLeftWidth: 2,
+              borderLeftColor: theme.gold,
+              paddingLeft: Spacing.three,
             },
           ]}>
           {/*
@@ -208,9 +214,8 @@ const styles = StyleSheet.create({
   },
   card: {
     gap: Spacing.three,
-    padding: Spacing.three,
-    borderRadius: Radius.medium,
-    borderWidth: StyleSheet.hairlineWidth,
+    paddingVertical: Spacing.three,
+    borderBottomWidth: StyleSheet.hairlineWidth,
   },
   arabic: {
     /* size and face: the `arabicLead` rung */

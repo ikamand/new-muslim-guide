@@ -72,10 +72,12 @@ export default function JourneyScreen() {
               .replace('{total}', String(stage.total))}`}
             style={[
               styles.stage,
-              {
-                backgroundColor: theme.backgroundElement,
-                borderColor: stage.done === stage.total ? theme.accent : theme.border,
-              },
+              /*
+                A finished stage used to earn an accent border round its card.
+                Complete is what malachite means now, and the count beside the
+                name already says it — a coloured frame said it twice.
+              */
+              { borderBottomColor: theme.goldSoft },
             ]}
             pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
             <View style={styles.stageText}>
@@ -142,9 +144,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: Spacing.three,
-    padding: Spacing.three,
-    borderRadius: Radius.medium,
-    borderWidth: StyleSheet.hairlineWidth,
+    paddingVertical: Spacing.three,
+    borderBottomWidth: StyleSheet.hairlineWidth,
   },
   stageText: {
     flex: 1,

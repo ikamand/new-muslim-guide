@@ -124,10 +124,7 @@ function Group({ title, children }: { title: string; children: React.ReactNode }
         {title.toUpperCase()}
       </ThemedText>
       <View
-        style={[
-          styles.rows,
-          { backgroundColor: theme.backgroundElement, borderColor: theme.border },
-        ]}>
+        style={[styles.rows, { borderColor: theme.goldSoft }]}>
         {children}
       </View>
     </View>
@@ -184,8 +181,8 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
   },
   rows: {
-    borderRadius: Spacing.three - 4,
-    borderWidth: StyleSheet.hairlineWidth,
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderBottomWidth: StyleSheet.hairlineWidth,
     overflow: 'hidden',
   },
   row: {

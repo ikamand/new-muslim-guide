@@ -113,7 +113,7 @@ export default function FirstsScreen() {
                       styles.noteInput,
                       {
                         color: theme.text,
-                        borderColor: theme.border,
+                        borderColor: theme.goldSoft,
                         backgroundColor: theme.backgroundElement,
                       },
                     ]}

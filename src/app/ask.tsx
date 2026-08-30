@@ -175,7 +175,7 @@ export default function AskScreen() {
           <View
             style={[
               styles.field,
-              { backgroundColor: theme.backgroundElement, borderColor: theme.border },
+              { backgroundColor: theme.backgroundElement, borderColor: theme.goldSoft },
             ]}>
             <Ionicons name="search-outline" size={18} color={theme.textSecondary} />
             <TextInput
@@ -214,7 +214,7 @@ export default function AskScreen() {
           <View
             style={[
               styles.scanRow,
-              { backgroundColor: theme.backgroundElement, borderColor: theme.border },
+              { backgroundColor: theme.backgroundElement, borderColor: theme.goldSoft },
             ]}>
             <Ionicons name="scan-outline" size={22} color={theme.textSecondary} />
             <View style={styles.scanText}>

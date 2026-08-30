@@ -166,9 +166,9 @@ export default function GuideScreen() {
         the wrong question there is what the arches replace.
       */}
       {!totalRakahs && (
-        <View style={[styles.progressTrack, { backgroundColor: theme.backgroundElement }]}>
+        <View style={[styles.progressTrack, { backgroundColor: theme.goldSoft }]}>
           <View
-            style={[styles.progressFill, { width: `${progress * 100}%`, backgroundColor: theme.accent }]}
+            style={[styles.progressFill, { width: `${progress * 100}%`, backgroundColor: theme.gold }]}
           />
         </View>
       )}
@@ -223,6 +223,11 @@ export default function GuideScreen() {
           repeated on every wudu step taught nothing.
         */}
         {step.posture && step.posture !== 'washing' && postureChanged && (
+          /*
+            The one fill this screen keeps: an illustration needs a ground of
+            its own, and the posture PNGs are composited against this colour
+            in both themes.
+          */
           <View style={[styles.posture, { backgroundColor: theme.backgroundElement }]}>
             <PostureDiagram
               posture={step.posture}

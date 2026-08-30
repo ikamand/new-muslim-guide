@@ -76,7 +76,7 @@ function SourcesRow() {
       style={[
         styles.group,
         styles.row,
-        { backgroundColor: theme.backgroundElement, borderColor: theme.border },
+        { borderColor: theme.goldSoft },
       ]}
       pressedStyle={{ opacity: 0.6 }}>
       <View style={styles.rowText}>
@@ -104,7 +104,7 @@ function LanguageGroup() {
 
   return (
     <View
-      style={[styles.group, { backgroundColor: theme.backgroundElement, borderColor: theme.border }]}>
+      style={[styles.group, { borderColor: theme.goldSoft }]}>
       {LOCALES.map((option, index) => (
         <Pressable
           key={option}
@@ -150,7 +150,7 @@ function AudienceGroup() {
 
   return (
     <View
-      style={[styles.group, { backgroundColor: theme.backgroundElement, borderColor: theme.border }]}>
+      style={[styles.group, { borderColor: theme.goldSoft }]}>
       {options.map((option, index) => (
         <Pressable
           key={option.label}
@@ -214,7 +214,7 @@ function RemindersGroup() {
       )}
 
       <View
-        style={[styles.group, { backgroundColor: theme.backgroundElement, borderColor: theme.border }]}>
+        style={[styles.group, { borderColor: theme.goldSoft }]}>
         {PRAYER_IDS.map((id, index) => (
           <View
             key={id}
@@ -244,7 +244,7 @@ function RemindersGroup() {
           <View
             style={[
               styles.group,
-              { backgroundColor: theme.backgroundElement, borderColor: theme.border },
+              { borderColor: theme.goldSoft },
             ]}>
             {LEAD_CHOICES.map((minutes, index) => (
               <Pressable
@@ -278,7 +278,7 @@ function RemindersGroup() {
         a moment opening; none of them can notice an absence.
       */}
       <View
-        style={[styles.group, { backgroundColor: theme.backgroundElement, borderColor: theme.border }]}>
+        style={[styles.group, { borderColor: theme.goldSoft }]}>
         {(
           [
             ['suhoorWakeUp', 'settings.suhoor'],
@@ -399,7 +399,7 @@ function StorageGroup() {
         {t('settings.storage.help')}
       </ThemedText>
 
-      <View style={[styles.group, { backgroundColor: theme.backgroundElement, borderColor: theme.border }]}>
+      <View style={[styles.group, { borderColor: theme.goldSoft }]}>
         {voices.map((voice) => (
           <View key={voice.folder} style={styles.storageRow}>
             <View style={styles.storageText}>
@@ -481,7 +481,7 @@ export default function SettingsScreen() {
           </View>
         )}
 
-        <View style={[styles.group, { backgroundColor: theme.backgroundElement, borderColor: theme.border }]}>
+        <View style={[styles.group, { borderColor: theme.goldSoft }]}>
           <SettingRow
             label={t('settings.transliteration')}
             description={t('settings.transliteration.help')}
@@ -511,7 +511,7 @@ export default function SettingsScreen() {
           <View
             style={[
               styles.group,
-              { backgroundColor: theme.backgroundElement, borderColor: theme.border },
+              { borderColor: theme.goldSoft },
             ]}>
             <SettingRow
               label={t('settings.keepAwake')}
@@ -572,10 +572,14 @@ const styles = StyleSheet.create({
     paddingLeft: Spacing.three,
     paddingVertical: Spacing.one,
   },
+  /*
+    A ruled table, not a box. Each group keeps both rules because it is a
+    self-contained table with space around it, like the source block inside a
+    teaching page. The horizontal padding went with the fill.
+  */
   group: {
-    borderRadius: Radius.medium,
-    borderWidth: StyleSheet.hairlineWidth,
-    paddingHorizontal: Spacing.three,
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderBottomWidth: StyleSheet.hairlineWidth,
   },
   row: {
     flexDirection: 'row',

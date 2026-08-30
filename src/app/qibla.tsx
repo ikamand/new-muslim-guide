@@ -154,10 +154,7 @@ export default function QiblaScreen() {
       */}
       {unverified && (
         <View
-          style={[
-            styles.unverified,
-            { backgroundColor: theme.backgroundElement, borderColor: theme.accent },
-          ]}>
+          style={[styles.unverified, { borderLeftColor: theme.vermilion }]}>
           <ThemedText type="smallBold">{t('qibla.unverified.title')}</ThemedText>
           <ThemedText type="small" themeColor="textSecondary">
             {t('qibla.unverified.body').replace('{when}', whenFixed(fixedAt, now, t))}
@@ -186,10 +183,15 @@ export default function QiblaScreen() {
         </ThemedText>
       </View>
 
+      {/*
+        The dial keeps its fill. It is an instrument face, not a card — the
+        needle needs a ground to turn against — so the no-boxes rule does not
+        apply. Its edge joins the gold family with every other drawn line.
+      */}
       <View
         style={[
           styles.dial,
-          { backgroundColor: theme.backgroundElement, borderColor: theme.border },
+          { backgroundColor: theme.backgroundElement, borderColor: theme.goldSoft },
         ]}>
         <View style={[styles.needle, { transform: [{ rotate: `${rotation}deg` }] }]}>
           <View style={[styles.needleStem, { backgroundColor: theme.border }]} />
@@ -301,12 +303,13 @@ const styles = StyleSheet.create({
   note: {
     alignSelf: 'stretch',
   },
+  /* A caution in the margin — vermilion rule, no box. Rubric, not accent. */
   unverified: {
     alignSelf: 'stretch',
     gap: Spacing.two,
-    padding: Spacing.three,
-    borderRadius: Radius.medium,
-    borderLeftWidth: 3,
+    paddingVertical: Spacing.two,
+    paddingLeft: Spacing.three,
+    borderLeftWidth: 2,
   },
   fix: {
     alignSelf: 'flex-start',

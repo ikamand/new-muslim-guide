@@ -70,10 +70,7 @@ export default function DuaBookScreen() {
           <PressableLink
             key={occasion.id}
             href={{ pathname: '/dua-book/[id]', params: { id: String(occasion.id) } }}
-            style={[
-              styles.row,
-              { backgroundColor: theme.backgroundElement, borderColor: theme.border },
-            ]}
+            style={[styles.row, { borderBottomColor: theme.goldSoft }]}
             pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
             <View style={styles.rowText}>
               <ThemedText type="cardTitle">{occasion.english || occasion.arabic}</ThemedText>
@@ -123,10 +120,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: Spacing.three,
     minHeight: 64,
-    paddingHorizontal: Spacing.three,
     paddingVertical: Spacing.two,
-    borderRadius: Radius.medium,
-    borderWidth: StyleSheet.hairlineWidth,
+    borderBottomWidth: StyleSheet.hairlineWidth,
   },
   rowText: {
     flex: 1,

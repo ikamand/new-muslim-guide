@@ -30,7 +30,7 @@ function LessonRow({ step }: { step: ResolvedStep }) {
   const label = step.labelKey ? t(step.labelKey as UIKey) : step.entry.title;
 
   return (
-    <View style={[styles.row, { backgroundColor: theme.backgroundElement, borderColor: theme.border }]}>
+    <View style={[styles.row, { borderBottomColor: theme.goldSoft }]}>
       {/*
         `rowMain` carries `flex: 1` and the row's padding. Both were being
         dropped on every platform because the style was a function — see
@@ -138,8 +138,7 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     alignItems: 'center',
-    borderRadius: Radius.medium,
-    borderWidth: StyleSheet.hairlineWidth,
+    borderBottomWidth: StyleSheet.hairlineWidth,
   },
   rowMain: {
     flex: 1,

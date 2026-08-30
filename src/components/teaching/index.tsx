@@ -165,8 +165,7 @@ export function TeachingSource({
         {
           paddingVertical: spec.paddingV,
           gap: spec.gap,
-          backgroundColor: theme.backgroundElement,
-          borderColor: theme.border,
+          borderColor: theme.goldSoft,
         },
         style,
       ]}>
@@ -398,10 +397,18 @@ const styles = StyleSheet.create({
     components that happen to both hold Arabic. Vertical padding and gap come
     from the spec; nothing else varies.
   */
+  /*
+    A quotation between two rules, not a tinted box.
+
+    Rules top AND bottom here, unlike the stacked blocks on a tab: this sits
+    inside running prose as a pull-quote, and a quotation needs framing on
+    both sides to read as set apart from the sentences around it. The
+    horizontal padding goes with the fill — with no ground to inset from, it
+    only pushed the Arabic off the page's measure.
+  */
   block: {
-    paddingHorizontal: Teaching.source.paddingH,
-    borderRadius: Radius.medium,
-    borderWidth: StyleSheet.hairlineWidth,
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderBottomWidth: StyleSheet.hairlineWidth,
     marginBottom: Teaching.page.sectionGap,
   },
   /* Direction only. The face and the size are a rung — see `themed-text.tsx`. */

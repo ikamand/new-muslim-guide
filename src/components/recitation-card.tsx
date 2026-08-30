@@ -55,7 +55,7 @@ export function RecitationCard({
     <View
       style={[
         styles.card,
-        { backgroundColor: theme.backgroundElement, borderColor: theme.border },
+        { borderColor: theme.goldSoft },
       ]}>
       <ThemedText type="arabicVerse" style={styles.arabic}>{recitation.arabic}</ThemedText>
 
@@ -133,11 +133,15 @@ export function RecitationCard({
 }
 
 const styles = StyleSheet.create({
+  /*
+    A panel between rules. The recitation is the text a screen is about, and a
+    box around it said it was one item among several.
+  */
   card: {
     gap: Spacing.two,
-    padding: Spacing.three,
-    borderRadius: Radius.medium,
-    borderWidth: StyleSheet.hairlineWidth,
+    paddingVertical: Spacing.three,
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderBottomWidth: StyleSheet.hairlineWidth,
   },
   /**
    * Amiri, larger and more open than the platform fallback this replaced.

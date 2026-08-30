@@ -36,10 +36,7 @@ export default function PhrasesScreen() {
         {phrases.map((phrase) => (
           <View
             key={phrase.id}
-            style={[
-              styles.card,
-              { backgroundColor: theme.backgroundElement, borderColor: theme.border },
-            ]}>
+            style={[styles.card, { borderBottomColor: theme.goldSoft }]}>
             <View style={styles.head}>
               <ThemedText type="smallBold" style={styles.said}>
                 {phrase.said}
@@ -85,9 +82,8 @@ const styles = StyleSheet.create({
   },
   card: {
     gap: Spacing.two,
-    padding: Spacing.four,
-    borderRadius: Radius.medium,
-    borderWidth: StyleSheet.hairlineWidth,
+    paddingVertical: Spacing.four,
+    borderBottomWidth: StyleSheet.hairlineWidth,
   },
   head: {
     flexDirection: 'row',

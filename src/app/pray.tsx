@@ -80,10 +80,7 @@ export default function PrayScreen() {
             accessibilityLabel={`${prayer.title}. ${prayer.rakahs} ${t('count.rakahs')}. ${
               prayer.sunnahBefore ?? 0
             } ${t('pray.before')}, ${prayer.sunnahAfter ?? 0} ${t('pray.after')}`}
-            style={[
-              styles.row,
-              { backgroundColor: theme.backgroundElement, borderColor: theme.border },
-            ]}
+            style={[styles.row, { borderBottomColor: theme.goldSoft }]}
             pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
             <View style={styles.rowText}>
               <ThemedText type="cardTitle">{prayer.title}</ThemedText>
@@ -131,10 +128,7 @@ export default function PrayScreen() {
               pathname: '/reference/[id]',
               params: { id: prayer.referenceId ?? prayer.id },
             }}
-            style={[
-              styles.row,
-              { backgroundColor: theme.backgroundElement, borderColor: theme.border },
-            ]}
+            style={[styles.row, { borderBottomColor: theme.goldSoft }]}
             pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
             <View style={styles.rowText}>
               <ThemedText type="cardTitle">{prayer.listTitle ?? prayer.title}</ThemedText>
@@ -168,15 +162,14 @@ const styles = StyleSheet.create({
   section: {
     gap: Spacing.two,
   },
+  /* A ruled entry, like every list in the app since the jadwal grammar. */
   row: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: Spacing.two,
     minHeight: 64,
-    paddingHorizontal: Spacing.three,
     paddingVertical: Spacing.two,
-    borderRadius: Radius.medium,
-    borderWidth: StyleSheet.hairlineWidth,
+    borderBottomWidth: StyleSheet.hairlineWidth,
   },
   rowText: {
     flex: 1,

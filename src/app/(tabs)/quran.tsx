@@ -66,7 +66,7 @@ export default function QuranScreen() {
           card carries. A count behind it rather than a percentage: "6 of 38"
           is a fact, "16%" is a verdict.
         */}
-        <View style={[styles.progress, { backgroundColor: theme.backgroundElement, borderColor: theme.border }]}>
+        <View style={[styles.progress, { borderColor: theme.goldSoft }]}>
           <View style={styles.band}>
             <GirihBand color={theme.accent} height={54} />
           </View>
@@ -95,20 +95,16 @@ export default function QuranScreen() {
           <PressableLink
             href={{ pathname: '/surah/[number]', params: { number: String(review.surah) } }}
             accessibilityLabel={`${t('quran.review.kicker')}: ${reviewSurah?.name ?? ''}`}
-            style={[
-              styles.review,
-              { backgroundColor: theme.backgroundElement, borderColor: theme.accent },
-            ]}
+            style={[styles.review, { borderBottomColor: theme.goldSoft }]}
             pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
             {/*
-              The accent border and the chevron are the same pair the surah
-              rows already use for "known", reused rather than invented: this
-              card is the only thing on the screen asking to be tapped, and
-              with a hairline border in `theme.border` it read as a second
-              progress card sitting under the first one.
+              The kicker is why this row is here, and saying so is rubric's
+              job — the accent border it used to carry was a card marking
+              itself special, which is what the vermilion word now does
+              without a box.
             */}
             <View style={styles.reviewText}>
-              <ThemedText type="caption" themeColor="accent" style={styles.kicker}>
+              <ThemedText type="caption" themeColor="vermilion" style={styles.kicker}>
                 {t('quran.review.kicker')}
               </ThemedText>
               <ThemedText type="cardTitle">{reviewSurah?.name}</ThemedText>
@@ -129,10 +125,7 @@ export default function QuranScreen() {
                 key={surah.number}
                 href={{ pathname: '/surah/[number]', params: { number: String(surah.number) } }}
                 accessibilityLabel={`${surah.name}, ${surah.meaning}, ${surah.ayahs.length} ${t('count.ayahs')}`}
-                style={[
-                  styles.row,
-                  { backgroundColor: theme.backgroundElement, borderColor: done ? theme.accent : theme.border },
-                ]}
+                style={[styles.row, { borderBottomColor: theme.goldSoft }]}
                 pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
                 {/*
                   The surah's own number, not its position in the list. It is
@@ -141,7 +134,7 @@ export default function QuranScreen() {
                 */}
                 <ThemedText
                   type="caption"
-                  themeColor={done ? 'accent' : 'textSecondary'}
+                  themeColor={done ? 'malachite' : 'textSecondary'}
                   style={styles.number}>
                   {surah.number}
                 </ThemedText>
@@ -162,7 +155,7 @@ export default function QuranScreen() {
                   </ThemedText>
                 </View>
                 {done && (
-                  <ThemedText type="caption" themeColor="accent">
+                  <ThemedText type="caption" themeColor="malachite">
                     {t('quran.known')}
                   </ThemedText>
                 )}
@@ -195,15 +188,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: Spacing.three,
-    padding: Spacing.three,
-    borderRadius: Radius.medium,
-    borderWidth: StyleSheet.hairlineWidth,
+    paddingVertical: Spacing.three,
+    borderBottomWidth: StyleSheet.hairlineWidth,
   },
   reviewText: { flex: 1, gap: Spacing.one },
   kicker: { textTransform: 'uppercase', letterSpacing: 1 },
+  /* A panel under the girih band, like the shahada panel on Learn. */
   progress: {
-    borderRadius: Radius.medium,
-    borderWidth: StyleSheet.hairlineWidth,
+    borderBottomWidth: StyleSheet.hairlineWidth,
     overflow: 'hidden',
   },
   band: {
@@ -217,14 +209,19 @@ const styles = StyleSheet.create({
   list: {
     gap: Spacing.two,
   },
+  /*
+    A ruled entry. "Known" used to be an accent border around the whole card;
+    it is now malachite on the number and the trailing word — green appears
+    only when something is right, and a coloured frame said it louder than a
+    fact deserves.
+  */
   row: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: Spacing.three,
     minHeight: 64,
-    padding: Spacing.three,
-    borderRadius: Radius.medium,
-    borderWidth: StyleSheet.hairlineWidth,
+    paddingVertical: Spacing.three,
+    borderBottomWidth: StyleSheet.hairlineWidth,
   },
   number: {
     width: 26,

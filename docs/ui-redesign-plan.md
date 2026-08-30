@@ -2342,3 +2342,47 @@ Verified end to end in the browser: answered onboarding as "prays on my
 own" → Living leads the arches and Out in the world leads the shelves; left
 "Who is Allah?" at 40% → the row, the Today slot and the bookmark all
 appeared, and the store showed `furthest: 0.4`. Ships OTA; no native change.
+
+---
+
+## 30 Aug 2026 — the jadwal grammar ships, every screen
+
+Decided with Iyad after he called the app's look machine-made and asked for
+something Islamic and beautiful. Three artifacts led here: "Lapis and Gold"
+(the three directions), "The Three Tabs" (the mockups he approved with
+"build it"), and this build. The visual language is the Islamic manuscript
+page — the analysis and the pigment palette live in the artifacts; the code
+is the record of what shipped.
+
+**The palette** (`src/constants/theme.ts`): colours named for pigments, one
+job each. Lapis = structure and the ONLY pressable colour. Gold =
+illumination, never a control. Vermilion = rubric (why a card chose
+something; cautions). Malachite = correct/heard/done — green appears only
+when something is right. `accent` survives as an alias for lapis. Light is
+the canonical theme; dark (lapis night) derives from it.
+
+**The grammar** (`src/components/jadwal.tsx`): Unwan, DoubleRule, Shelf,
+Rosette, JadwalRow, QuietRow, Rubric, Action, Rule. The page is the
+container — screens separate parts with rules and space, not boxes. This
+replaced the `backgroundElement`+`border` pair that was inlined in 33 files.
+
+**Fills that deliberately survive** — a fill means "this is a thing, not a
+container": form inputs (zakat, firsts note, ask), the qibla dial (an
+instrument face), the posture illustration ground in guide/[id], the
+recite-follow listening bar (floats over content), and the lit ayah on
+surah/[number] (`backgroundSelected` = the reading pool; the live ayah is
+the lit one, replacing the accent-border highlight of commit 23dcea3 —
+same meaning, different vehicle).
+
+**State moved off borders**: Qur'an tab "known" and journey "stage done"
+were accent borders around cards; they are now malachite marks / the count
+itself. `TOPIC_GLYPH` (47 hand-assigned tiles) and `pairTiles` are deleted —
+shelf rules and marginal numerals do that job with information.
+
+**Held for eyes on a device** (commits `5be03ad`…): Learn without its glyph
+tiles — if ruled rows rebuild the wall the tiles were added to break, the
+tile is one revert away; and gold-on-parchment contrast at small sizes
+(`#8E6A21` is pre-darkened; measure before lightening).
+
+Everything ships OTA. Verified by screenshot in both themes: Today, Learn,
+Duʿa, Qur'an, surah/1, settings, reference/what-is-islam.

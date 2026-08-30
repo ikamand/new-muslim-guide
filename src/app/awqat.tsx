@@ -8,8 +8,9 @@ import { ThemedText } from '@/components/themed-text';
 import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { useLocation } from '@/hooks/use-location';
+import { usePrayerTimes } from '@/hooks/use-prayer-times';
 import { buildMonth, formatClock, hijriSpan, type MonthDay } from '@/lib/awqat-month';
-import { inferProfile, PRAYER_IDS } from '@/lib/prayer-times';
+import { PRAYER_IDS } from '@/lib/prayer-times';
 import { useTheme } from '@/hooks/use-theme';
 import type { UIKey } from '@/i18n/ui';
 
@@ -69,6 +70,12 @@ export default function AwqatScreen() {
   const theme = useTheme();
   const { locale, t } = useLocale();
   const { coords } = useLocation();
+  /*
+    The profile comes from the same hook the card uses — the one place a
+    method choice is resolved — so this table can never print a different
+    convention than the card above it.
+  */
+  const { profile } = usePrayerTimes();
 
   /*
     Which month is showing, as (year, 0-based month). Stepped by whole months
@@ -80,7 +87,7 @@ export default function AwqatScreen() {
     return { year: now.getFullYear(), month: now.getMonth() };
   });
 
-  if (!coords) {
+  if (!coords || !profile) {
     return (
       <ScrollView contentContainerStyle={styles.content}>
         <Stack.Screen options={{ title: t('awqat.title') }} />
@@ -91,7 +98,6 @@ export default function AwqatScreen() {
     );
   }
 
-  const profile = inferProfile(coords);
   const month = buildMonth(coords, shown.year, shown.month, profile, new Date());
   const span = hijriSpan(month.days);
 

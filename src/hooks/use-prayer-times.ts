@@ -2,10 +2,11 @@ import { useEffect, useMemo, useState } from 'react';
 import { AppState } from 'react-native';
 
 import { useLocation } from '@/hooks/use-location';
+import { useSettings } from '@/hooks/use-settings';
 import {
   computeDay,
   findNextPrayer,
-  inferProfile,
+  resolveProfile,
   timezoneLooksWrong,
   type DayTimes,
   type MethodProfile,
@@ -34,6 +35,7 @@ export type PrayerTimesState = {
 
 export function usePrayerTimes(): PrayerTimesState {
   const { coords } = useLocation();
+  const { awqatMethod, awqatHanafiAsr } = useSettings();
   const [now, setNow] = useState(() => new Date());
 
   useEffect(() => {
@@ -57,7 +59,7 @@ export function usePrayerTimes(): PrayerTimesState {
       return { today: null, next: null, profile: null, timezoneSuspect: false };
     }
 
-    const profile = inferProfile(coords);
+    const profile = resolveProfile(coords, { methodId: awqatMethod, hanafiAsr: awqatHanafiAsr });
 
     return {
       today: computeDay(coords, now, profile),
@@ -65,5 +67,5 @@ export function usePrayerTimes(): PrayerTimesState {
       profile,
       timezoneSuspect: timezoneLooksWrong(coords, now),
     };
-  }, [coords, now]);
+  }, [coords, now, awqatMethod, awqatHanafiAsr]);
 }

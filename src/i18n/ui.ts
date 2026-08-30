@@ -641,6 +641,18 @@ export const EN = {
   'settings.transliteration.help': 'The Arabic spelled out in English letters',
   'settings.translation.help': 'What the words mean in English',
   'settings.times': 'Prayer times',
+  'settings.method': 'Calculation method',
+  'settings.method.suggested': 'Suggested for your location',
+  /*
+    ⚠️ REVIEW — the ʿAsr wordings state a fiqh difference in one plain
+    sentence each; the shadow-length framing is the standard way both schools
+    describe their own position.
+  */
+  'settings.asr': 'ʿAsr time',
+  'settings.asr.help':
+    'The schools differ on when ʿAsr begins: when a shadow equals its object, or twice it. Your mosque’s timetable follows one — match it.',
+  'settings.asr.standard': 'Standard — shadow equals its object',
+  'settings.asr.hanafi': 'Later — twice its object (Hanafi)',
   'settings.reminders': 'Prayer reminders',
   'settings.reminders.help':
     'A quiet notification before each prayer. Nothing is sent anywhere. Your phone works the times out and sets its own alarms.',

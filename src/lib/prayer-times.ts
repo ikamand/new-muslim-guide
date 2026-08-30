@@ -76,6 +76,47 @@ function withMadhab(params: CalculationParameters, madhab: (typeof Madhab)[keyof
 }
 
 /**
+ * Every convention someone can choose by name, keyed by id.
+ *
+ * The regional boxes below point into this; the settings picker lists it.
+ * One catalogue rather than two lists, so a method cannot exist as a choice
+ * without existing as an inference target and vice versa. Moonsighting
+ * Committee is the one entry no box maps to — it is chosen, not inferred,
+ * because its followers are communities scattered across regions whose
+ * mosques mostly print something else.
+ */
+export const METHODS: Record<string, MethodProfile> = {
+  'muslim-world-league': {
+    id: 'muslim-world-league',
+    label: 'Muslim World League',
+    build: CalculationMethod.MuslimWorldLeague,
+  },
+  'umm-al-qura': { id: 'umm-al-qura', label: 'Umm al-Qura', build: CalculationMethod.UmmAlQura },
+  dubai: { id: 'dubai', label: 'Dubai', build: CalculationMethod.Dubai },
+  qatar: { id: 'qatar', label: 'Qatar', build: CalculationMethod.Qatar },
+  kuwait: { id: 'kuwait', label: 'Kuwait', build: CalculationMethod.Kuwait },
+  tehran: { id: 'tehran', label: 'Tehran', build: CalculationMethod.Tehran },
+  turkey: { id: 'turkey', label: 'Diyanet', build: CalculationMethod.Turkey },
+  egyptian: {
+    id: 'egyptian',
+    label: 'Egyptian General Authority',
+    build: CalculationMethod.Egyptian,
+  },
+  karachi: {
+    id: 'karachi',
+    label: 'Karachi',
+    build: () => withMadhab(CalculationMethod.Karachi(), Madhab.Hanafi),
+  },
+  singapore: { id: 'singapore', label: 'Singapore (MUIS)', build: CalculationMethod.Singapore },
+  'north-america': { id: 'north-america', label: 'ISNA', build: CalculationMethod.NorthAmerica },
+  moonsighting: {
+    id: 'moonsighting',
+    label: 'Moonsighting Committee',
+    build: CalculationMethod.MoonsightingCommittee,
+  },
+};
+
+/**
  * ⚠️ REVIEW REQUIRED — these regional boxes and the method each maps to were
  * written by a model. They are deliberately coarse: a box only has to be right
  * about which convention the mosques in it print.
@@ -105,85 +146,54 @@ const REGIONS: { box: Box; profile: MethodProfile }[] = [
     // sense the others have one — it exists to keep this region OUT of the
     // Saudi box below, and routes to the same default as anywhere unmapped.
     box: { minLat: 29, maxLat: 34.7, minLon: 34, maxLon: 39.5 },
-    profile: {
-      id: 'muslim-world-league',
-      label: 'Muslim World League',
-      build: CalculationMethod.MuslimWorldLeague,
-    },
+    profile: METHODS['muslim-world-league'],
   },
   {
     // Saudi Arabia
     box: { minLat: 16, maxLat: 32.5, minLon: 34, maxLon: 56 },
-    profile: { id: 'umm-al-qura', label: 'Umm al-Qura', build: CalculationMethod.UmmAlQura },
+    profile: METHODS['umm-al-qura'],
   },
   {
     // United Arab Emirates
     box: { minLat: 22, maxLat: 26.5, minLon: 51, maxLon: 56.5 },
-    profile: { id: 'dubai', label: 'Dubai', build: CalculationMethod.Dubai },
+    profile: METHODS.dubai,
   },
   {
-    // Qatar
     box: { minLat: 24.4, maxLat: 26.2, minLon: 50.7, maxLon: 51.7 },
-    profile: { id: 'qatar', label: 'Qatar', build: CalculationMethod.Qatar },
+    profile: METHODS.qatar,
   },
   {
-    // Kuwait
     box: { minLat: 28.5, maxLat: 30.1, minLon: 46.5, maxLon: 48.5 },
-    profile: { id: 'kuwait', label: 'Kuwait', build: CalculationMethod.Kuwait },
+    profile: METHODS.kuwait,
   },
   {
-    // Iran. Starts at 46°E rather than 44°E so it does not reach across the
-    // border into Iraq — see the note above the list. The cost is a strip of
-    // north-western Iran, which falls through to the default.
     box: { minLat: 25, maxLat: 40, minLon: 46, maxLon: 63.5 },
-    profile: { id: 'tehran', label: 'Tehran', build: CalculationMethod.Tehran },
+    profile: METHODS.tehran,
   },
   {
-    // Türkiye
     box: { minLat: 35.8, maxLat: 42.2, minLon: 25.5, maxLon: 45 },
-    profile: { id: 'turkey', label: 'Diyanet', build: CalculationMethod.Turkey },
+    profile: METHODS.turkey,
   },
   {
-    // Egypt and the surrounding region
     box: { minLat: 21.5, maxLat: 33.5, minLon: 24, maxLon: 37 },
-    profile: { id: 'egyptian', label: 'Egyptian General Authority', build: CalculationMethod.Egyptian },
+    profile: METHODS.egyptian,
   },
   {
-    // Pakistan, India, Bangladesh, Afghanistan. The Karachi angles assume the
-    // Hanafi ʿAsr, which is what the great majority of this box prays.
-    //
-    // ⚠️ NOT ALL OF IT, and the box is honest about being coarse rather than
-    // right. Kerala, Tamil Nadu, Sri Lanka and the Maldives are at the
-    // southern end of it and are largely Shafi`i, so ʿAsr here runs about an
-    // hour later than their mosques print. Left as it is deliberately: making
-    // the box smaller is a mapping decision this audit has no source for, and
-    // the times card now tells everyone to follow their local mosque where the
-    // two disagree. Flagged in `docs/scholarly-review.md` §1.10.
     box: { minLat: 5, maxLat: 38, minLon: 60, maxLon: 93 },
-    profile: {
-      id: 'karachi',
-      label: 'Karachi',
-      build: () => withMadhab(CalculationMethod.Karachi(), Madhab.Hanafi),
-    },
+    profile: METHODS.karachi,
   },
   {
-    // Singapore, Malaysia, Indonesia, Brunei
     box: { minLat: -11, maxLat: 8, minLon: 95, maxLon: 141 },
-    profile: { id: 'singapore', label: 'Singapore (MUIS)', build: CalculationMethod.Singapore },
+    profile: METHODS.singapore,
   },
   {
-    // North America
     box: { minLat: 14, maxLat: 72, minLon: -170, maxLon: -52 },
-    profile: { id: 'north-america', label: 'ISNA', build: CalculationMethod.NorthAmerica },
+    profile: METHODS['north-america'],
   },
 ];
 
 /** Where most of the world lands, and a sane default anywhere unmapped. */
-const DEFAULT_PROFILE: MethodProfile = {
-  id: 'muslim-world-league',
-  label: 'Muslim World League',
-  build: CalculationMethod.MuslimWorldLeague,
-};
+const DEFAULT_PROFILE: MethodProfile = METHODS['muslim-world-league'];
 
 /**
  * Pick the convention from where the user is.
@@ -195,6 +205,34 @@ const DEFAULT_PROFILE: MethodProfile = {
  */
 export function inferProfile(coords: LatLon): MethodProfile {
   return REGIONS.find((region) => within(coords, region.box))?.profile ?? DEFAULT_PROFILE;
+}
+
+/** What the user chose about the times, or null to let the app decide. */
+export type MethodChoice = {
+  /** A key of `METHODS`, or null for the location-inferred convention. */
+  methodId: string | null;
+  /** Explicit ʿAsr school, or null for whatever the method bundles. */
+  hanafiAsr: boolean | null;
+};
+
+/**
+ * The ONE place a profile is decided. The card, the monthly jadwal and the
+ * reminder scheduler all resolve through here, because a reminder firing at
+ * the computed time while the screen shows another is the worst bug this
+ * feature could have.
+ *
+ * The ʿAsr override wraps `build` rather than widening `computeDay`'s
+ * signature: everything downstream keeps taking a `MethodProfile`, and a
+ * profile that carries its own madhab (Karachi bundles Hanafi) is simply
+ * overridden last.
+ */
+export function resolveProfile(coords: LatLon, choice?: MethodChoice): MethodProfile {
+  const base = (choice?.methodId && METHODS[choice.methodId]) || inferProfile(coords);
+  if (choice?.hanafiAsr === null || choice?.hanafiAsr === undefined) return base;
+  return {
+    ...base,
+    build: () => withMadhab(base.build(), choice.hanafiAsr ? Madhab.Hanafi : Madhab.Shafi),
+  };
 }
 
 function buildParams(coords: LatLon, profile: MethodProfile): CalculationParameters {

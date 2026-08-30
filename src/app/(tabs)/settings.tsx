@@ -18,6 +18,9 @@ import { deleteReciteModels, reciteModelBytes } from '@/lib/recite-session';
 import { RECITERS } from '@/content/quran/recitation';
 import { useLocale } from '@/hooks/use-locale';
 import { usePrayerTimes } from '@/hooks/use-prayer-times';
+import { useLocation } from '@/hooks/use-location';
+import { inferProfile, METHODS } from '@/lib/prayer-times';
+import { Madhab } from 'adhan';
 import { LOCALE_NAMES, LOCALES } from '@/i18n/locales';
 import { useTheme } from '@/hooks/use-theme';
 
@@ -460,9 +463,35 @@ const megabytes = (bytes: number) => (bytes / 1_000_000).toFixed(1);
  * then it is information, not a control.
  */
 function PrayerTimesGroup() {
+  const theme = useTheme();
   const { t } = useLocale();
+  const { awqatMethod, awqatHanafiAsr, set } = useSettings();
+  const { coords } = useLocation();
   const { profile } = usePrayerTimes();
-  if (!profile) return null;
+  if (!profile || !coords) return null;
+
+  /*
+    "Suggested" first and preselected, then every named convention. The
+    suggestion names what it resolves to, so choosing it is never a mystery —
+    and a reader who has no idea what these words mean can leave without
+    touching anything and be right.
+  */
+  const suggested = inferProfile(coords);
+  const methodRows: { id: string | null; label: string }[] = [
+    {
+      id: null,
+      label: `${t('settings.method.suggested')} · ${suggested.label}`,
+    },
+    ...Object.values(METHODS).map((method) => ({ id: method.id, label: method.label })),
+  ];
+
+  /*
+    Effective, not stored: with no override the row reflects what the method
+    itself bundles (Karachi carries Hanafi), so the tick never lies about
+    which ʿAsr the card is showing.
+  */
+  const hanafiNow =
+    awqatHanafiAsr ?? profile.build().madhab === Madhab.Hanafi;
 
   return (
     <View style={styles.section}>
@@ -475,6 +504,68 @@ function PrayerTimesGroup() {
       <ThemedText type="small" themeColor="textSecondary">
         {t('times.followLocal')}
       </ThemedText>
+
+      <ThemedText type="small" themeColor="textSecondary" style={styles.subheading}>
+        {t('settings.method')}
+      </ThemedText>
+      <View style={[styles.group, { borderColor: theme.goldSoft }]}>
+        {methodRows.map((row, index) => (
+          <Pressable
+            key={row.id ?? 'suggested'}
+            onPress={() => set('awqatMethod', row.id)}
+            accessibilityRole="radio"
+            accessibilityState={{ selected: awqatMethod === row.id }}
+            style={[
+              styles.row,
+              index < methodRows.length - 1 && {
+                borderBottomWidth: StyleSheet.hairlineWidth,
+                borderBottomColor: theme.border,
+              },
+            ]}>
+            <ThemedText type="default">{row.label}</ThemedText>
+            {awqatMethod === row.id && (
+              <ThemedText type="smallBold" themeColor="accent">
+                ✓
+              </ThemedText>
+            )}
+          </Pressable>
+        ))}
+      </View>
+
+      <ThemedText type="small" themeColor="textSecondary" style={styles.subheading}>
+        {t('settings.asr')}
+      </ThemedText>
+      <ThemedText type="small" themeColor="textSecondary">
+        {t('settings.asr.help')}
+      </ThemedText>
+      <View style={[styles.group, { borderColor: theme.goldSoft }]}>
+        {(
+          [
+            { hanafi: false, label: t('settings.asr.standard') },
+            { hanafi: true, label: t('settings.asr.hanafi') },
+          ] as const
+        ).map((row, index) => (
+          <Pressable
+            key={String(row.hanafi)}
+            onPress={() => set('awqatHanafiAsr', row.hanafi)}
+            accessibilityRole="radio"
+            accessibilityState={{ selected: hanafiNow === row.hanafi }}
+            style={[
+              styles.row,
+              index === 0 && {
+                borderBottomWidth: StyleSheet.hairlineWidth,
+                borderBottomColor: theme.border,
+              },
+            ]}>
+            <ThemedText type="default">{row.label}</ThemedText>
+            {hanafiNow === row.hanafi && (
+              <ThemedText type="smallBold" themeColor="accent">
+                ✓
+              </ThemedText>
+            )}
+          </Pressable>
+        ))}
+      </View>
     </View>
   );
 }
@@ -622,6 +713,11 @@ const styles = StyleSheet.create({
   rowText: {
     flex: 1,
     gap: 2,
+  },
+  subheading: {
+    marginTop: Spacing.three,
+    textTransform: 'uppercase',
+    letterSpacing: 1,
   },
   section: {
     gap: Spacing.two,

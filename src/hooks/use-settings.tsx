@@ -69,6 +69,15 @@ export type Settings = {
    */
   prayerConfidence: PrayerConfidence | null;
   /**
+   * Calculation-method override — a key of `METHODS` in `prayer-times.ts`,
+   * or null to keep the location-inferred convention. Null is the default
+   * and the right answer for almost everyone; the setting exists for the
+   * person who already knows what these words mean.
+   */
+  awqatMethod: string | null;
+  /** Explicit ʿAsr school; null keeps whatever the method bundles. */
+  awqatHanafiAsr: boolean | null;
+  /**
    * Lessons marked done, as `kind:id`.
    *
    * A record of where someone has been, not a gate on where they can go — the
@@ -144,6 +153,8 @@ const DEFAULTS: Settings = {
   onboardingSkipped: false,
   shahadaState: null,
   prayerConfidence: null,
+  awqatMethod: null,
+  awqatHanafiAsr: null,
   completedLessons: [],
   home: null,
   awaySince: null,
@@ -212,6 +223,15 @@ function parseStored(raw: string | null): Settings {
       prayerConfidence: isPrayerConfidence(stored.prayerConfidence)
         ? stored.prayerConfidence
         : null,
+      /*
+        Narrowed to a string, not validated against `METHODS` — that would
+        couple this file to the times engine. `resolveProfile` treats an
+        unknown id as "infer", so a stale id from an older build degrades to
+        the default rather than crashing the card.
+      */
+      awqatMethod: typeof stored.awqatMethod === 'string' ? stored.awqatMethod : null,
+      awqatHanafiAsr:
+        typeof stored.awqatHanafiAsr === 'boolean' ? stored.awqatHanafiAsr : null,
       /*
         Narrowed like everything else here, and it matters more than most: a
         malformed home would be compared against a real fix and could say

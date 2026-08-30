@@ -12,7 +12,7 @@ import {
   rescheduleItems,
   type ScheduledItem,
 } from '@/lib/notifications';
-import { inferProfile, PRAYER_LABEL, type PrayerId } from '@/lib/prayer-times';
+import { PRAYER_LABEL, resolveProfile, type PrayerId } from '@/lib/prayer-times';
 import {
   planAdhkarNotes,
   planJumuahNotes,
@@ -64,10 +64,23 @@ const timeOf = (date: Date) =>
 /** Mounted once in the root layout. Renders nothing; owns the schedule. */
 export function useReminderSync(): void {
   const { coords } = useLocation();
-  const { reminders, suhoorWakeUp, adhkarNote, jumuahNote, loaded } = useSettings();
+  const { reminders, suhoorWakeUp, adhkarNote, jumuahNote, awqatMethod, awqatHanafiAsr, loaded } =
+    useSettings();
   const { locale, t } = useLocale();
 
-  const signature = JSON.stringify({ reminders, suhoorWakeUp, adhkarNote, jumuahNote });
+  /*
+    `awqatMethod`/`awqatHanafiAsr` are in the signature so changing the
+    convention reschedules every pending notification — otherwise a reminder
+    would fire at the OLD method's time for up to twelve days.
+  */
+  const signature = JSON.stringify({
+    reminders,
+    suhoorWakeUp,
+    adhkarNote,
+    jumuahNote,
+    awqatMethod,
+    awqatHanafiAsr,
+  });
   const lastRun = useRef<string>('');
 
   useEffect(() => {
@@ -82,7 +95,13 @@ export function useReminderSync(): void {
       }
       if (!(await hasPermission())) return;
 
-      const profile = inferProfile(coords);
+      // Through `resolveProfile`, never `inferProfile`: a reminder firing at
+      // the inferred time while the card shows a chosen method's time is the
+      // worst bug this feature could have.
+      const profile = resolveProfile(coords, {
+        methodId: awqatMethod,
+        hanafiAsr: awqatHanafiAsr,
+      });
       const now = new Date();
       const items: ScheduledItem[] = [];
 

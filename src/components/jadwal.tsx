@@ -265,11 +265,19 @@ export function QuietRow({
   href,
   label,
   value,
+  strong = false,
   accessibilityLabel,
 }: {
   href: Href;
   label: string;
   value?: string;
+  /**
+   * Body-size type instead of small. For the quiet row that is a whole
+   * destination rather than a side door — Settings on Today earns it: it is
+   * the only way to a screen, and small read as an afterthought (Iyad).
+   * Still textSecondary; louder would stop being quiet.
+   */
+  strong?: boolean;
   accessibilityLabel?: string;
 }) {
   const theme = useTheme();
@@ -280,7 +288,7 @@ export function QuietRow({
       accessibilityLabel={accessibilityLabel ?? `${label}${value ? `: ${value}` : ''}`}
       style={[styles.quiet, { borderBottomColor: theme.goldSoft }]}
       pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
-      <ThemedText type="small" themeColor="textSecondary">
+      <ThemedText type={strong ? 'default' : 'small'} themeColor="textSecondary">
         {label}
       </ThemedText>
       {value ? (

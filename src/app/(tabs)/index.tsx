@@ -293,7 +293,7 @@ export default function TodayScreen() {
           where it lives. The one exception to this screen's deadline test,
           made deliberately and on the record.
         */}
-        <QuietRow href="/settings" label={t('settings.title')} />
+        <QuietRow href="/settings" label={t('settings.title')} strong />
 
       </ScrollView>
     </SafeAreaView>

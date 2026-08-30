@@ -162,6 +162,33 @@ function markFor(id: PrayerId, times: DayTimes): Point {
   }
 }
 
+/*
+  The travelled day, as distance along the authored path.
+
+  The outline is drawn bottom-left → up the leg → over the curve → down the
+  right leg, so "how far the day has come" is a single distance from the
+  path's start: the overlay stroke below brightens exactly that much of the
+  outline, and the arch visibly fills with gold as the day passes — full by
+  ʿIshāʾ, faint again at dawn. Meaning carried by state, not by motion.
+*/
+const LEG_LEN = H - SPRING_Y;
+const CURVE_LEN = CURVE_LENGTHS[SAMPLES];
+const PATH_LEN = LEG_LEN * 2 + CURVE_LEN;
+const FAJR_DIST = H - NIGHT_ANCHOR_Y;
+
+function travelledAt(times: DayTimes, now: Date): number {
+  const at = (want: PrayerId) => times.prayers.find((p) => p.id === want)!.time;
+  if (now < at('fajr')) return 0;
+  if (now < times.sunrise) {
+    return FAJR_DIST + fraction(at('fajr'), times.sunrise, now) * (LEG_LEN - FAJR_DIST);
+  }
+  if (now < at('maghrib')) {
+    return LEG_LEN + fraction(times.sunrise, at('maghrib'), now) * CURVE_LEN;
+  }
+  const down = fraction(at('maghrib'), at('isha'), now) * (NIGHT_ANCHOR_Y - SPRING_Y);
+  return LEG_LEN + CURVE_LEN + down;
+}
+
 /** Where the sun is right now, or null when it is night and it isn't drawn. */
 function sunAt(times: DayTimes, now: Date): Point | null {
   const at = (want: PrayerId) => times.prayers.find((p) => p.id === want)!.time;
@@ -193,6 +220,7 @@ export function AwqatArch({
   const reducedMotion = useReducedMotion();
 
   const sun = useMemo(() => sunAt(times, now), [times, now]);
+  const travelled = useMemo(() => travelledAt(times, now), [times, now]);
   const marks = useMemo(
     () =>
       times.prayers.map((prayer) => ({
@@ -233,7 +261,15 @@ export function AwqatArch({
     bloom.value = withTiming(1, { duration: 900, easing: Easing.out(Easing.cubic) });
   }, [bloom, nextId, reducedMotion]);
 
-  const sunProps = useAnimatedProps(() => ({ opacity: breath.value }));
+  /*
+    Opacity AND a whisper of size. Opacity alone read as invisible on a real
+    panel (Iyad, on device) — the eye catches growth sooner than fade, so the
+    dot swells half a point at the top of each breath. Still nothing bounces.
+  */
+  const sunProps = useAnimatedProps(() => ({
+    opacity: breath.value,
+    r: 3.7 + breath.value * 0.9,
+  }));
   const ringProps = useAnimatedProps(() => ({
     // The ring breathes only when the sun is down — one live mark at a time.
     opacity: sun ? 1 : breath.value,
@@ -243,8 +279,22 @@ export function AwqatArch({
   return (
     <View style={StyleSheet.absoluteFill} pointerEvents="none">
       <Svg width="100%" height="100%" viewBox={`0 0 ${W} ${H}`} fill="none">
-        <Path d={OUTER_PATH} stroke={theme.gold} strokeWidth={1.2} strokeOpacity={0.6} />
+        <Path d={OUTER_PATH} stroke={theme.gold} strokeWidth={1.2} strokeOpacity={0.4} />
         <Path d={INNER_PATH} stroke={theme.goldSoft} strokeWidth={0.7} />
+        {/*
+          The day so far, drawn over the outline at full strength. A dash the
+          length of the travelled distance, offset to start where Fajr does —
+          by ʿIshāʾ the whole arch is lit, and at dawn it is faint again.
+        */}
+        {travelled > 0 ? (
+          <Path
+            d={OUTER_PATH}
+            stroke={theme.gold}
+            strokeWidth={1.3}
+            strokeDasharray={`${travelled} ${PATH_LEN * 2}`}
+            strokeDashoffset={-FAJR_DIST}
+          />
+        ) : null}
 
         {marks.map(({ id, point, passed }) =>
           id === nextId ? (
@@ -275,7 +325,6 @@ export function AwqatArch({
             animatedProps={sunProps}
             cx={sun.x}
             cy={sun.y}
-            r={4.2}
             fill={theme.gold}
           />
         ) : null}

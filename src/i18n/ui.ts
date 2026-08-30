@@ -381,7 +381,7 @@ export const EN = {
   'awqat.col.fajr': 'Fajr',
   'awqat.col.dhuhr': 'Dhuhr',
   'awqat.col.asr': 'ʿAsr',
-  'awqat.col.maghrib': 'Magh.',
+  'awqat.col.maghrib': 'Maghrib',
   'awqat.col.isha': 'ʿIshāʾ',
   'awqat.col.hijri': 'Hijri',
   'awqat.whiteDays': 'The white days',

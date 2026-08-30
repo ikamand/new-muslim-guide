@@ -124,7 +124,13 @@ const styles = StyleSheet.create({
       per join: a block closes itself and the next one opens against it.
     */
     borderBottomWidth: StyleSheet.hairlineWidth,
-    paddingVertical: Spacing.three,
+    /*
+      Lighter above the rubric than below the translation: the uppercase
+      kicker carries its own headroom, and a full 16 on top still pressed as
+      a blank band after the last rhythm pass (Iyad, on device).
+    */
+    paddingTop: Spacing.two,
+    paddingBottom: Spacing.three,
     gap: Spacing.two,
   },
   head: {

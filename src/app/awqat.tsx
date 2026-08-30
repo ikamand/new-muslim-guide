@@ -3,7 +3,7 @@ import { Stack } from 'expo-router';
 import { useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 
-import { QuietRow, Rubric, Unwan } from '@/components/jadwal';
+import { DoubleRule, QuietRow, Rubric } from '@/components/jadwal';
 import { ThemedText } from '@/components/themed-text';
 import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
@@ -123,26 +123,39 @@ export default function AwqatScreen() {
     <ScrollView contentContainerStyle={styles.content}>
       <Stack.Screen options={{ title: t('awqat.title') }} />
 
-      <Unwan title={civil} subtitle={hijriLine} />
-
-      <View style={styles.nav}>
+      {/*
+        The month steppers flank the name — ‹ September 2026 › — inside the
+        ʿunwān itself, the way a bound calendar turns pages. A separate nav
+        line under the headpiece cost a row and read as furniture (Iyad).
+      */}
+      <DoubleRule />
+      <View style={styles.head}>
         <Pressable
           onPress={() => step(-1)}
           accessibilityRole="button"
           accessibilityLabel={t('awqat.previous')}
-          hitSlop={12}
+          hitSlop={14}
           style={({ pressed }) => ({ opacity: pressed ? 0.5 : 1 })}>
-          <Ionicons name="chevron-back" size={18} color={theme.gold} />
+          <Ionicons name="chevron-back" size={22} color={theme.gold} />
         </Pressable>
+        <View style={styles.headText}>
+          <ThemedText type="subtitle" style={styles.centred}>
+            {civil}
+          </ThemedText>
+          <ThemedText type="small" themeColor="textSecondary" style={styles.centred}>
+            {hijriLine}
+          </ThemedText>
+        </View>
         <Pressable
           onPress={() => step(1)}
           accessibilityRole="button"
           accessibilityLabel={t('awqat.next')}
-          hitSlop={12}
+          hitSlop={14}
           style={({ pressed }) => ({ opacity: pressed ? 0.5 : 1 })}>
-          <Ionicons name="chevron-forward" size={18} color={theme.gold} />
+          <Ionicons name="chevron-forward" size={22} color={theme.gold} />
         </Pressable>
       </View>
+      <DoubleRule />
 
       <View style={[styles.headRow, { borderBottomColor: theme.gold }]}>
         <View style={styles.dayNum} />
@@ -184,17 +197,30 @@ export default function AwqatScreen() {
 }
 
 const styles = StyleSheet.create({
+  /*
+    Slimmer sides than the app's usual 24: this is a table, the columns need
+    the width, and a printed jadwal runs close to its edges too.
+  */
   content: {
-    padding: Spacing.four,
+    paddingVertical: Spacing.four,
+    paddingHorizontal: Spacing.three,
     paddingBottom: BottomTabInset + Spacing.four,
     width: '100%',
     maxWidth: MaxContentWidth,
     alignSelf: 'center',
   },
-  nav: {
+  head: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingVertical: Spacing.two,
+    alignItems: 'center',
+    gap: Spacing.two,
+    paddingVertical: Spacing.three,
+  },
+  headText: {
+    flex: 1,
+    gap: 2,
+  },
+  centred: {
+    textAlign: 'center',
   },
   headRow: {
     flexDirection: 'row',

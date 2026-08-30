@@ -98,6 +98,58 @@ the history rather than rediscovering it. Add to this list.
 | 30 Aug 2026 | `SliceManager.addAudioData` recurses per slice boundary with no oversized-chunk guard — a stalled VAD queue's backlog overflows the call stack mid-recitation | `patches/whisper.rn+0.7.4.patch`: oversized chunks split, recursion capped at one level (src + both builds) | **PR pending Iyad's go-ahead** |
 | 31 Aug 2026 | Terminal: whisper.rn's slice cleanup deletes a slice its own queue still points at ("Slice not found for index 0"), then no transcription ever fires again — caught in a Metro trace while five ayahs went unheard; a second bug in the same trace showed a slice's partial text resetting mid-stream | **The whole realtime layer replaced** with the in-house core in `recite-session.ts` (`8eb3612`): rolling 15 s window, one pass in flight, no slices, no VAD, no queues. Verified live: all seven ayahs tracked end-to-end at ~1.0–1.4 s per pass on Iyad's phone, garbled words held and forgiven | No — their layer is no longer used; the SliceManager patch stays only as history |
 
+## How to work on this feature — the cookbook a session needs
+
+Written 30 Aug 2026 so the live-debugging method survives the conversation
+that invented it. This is how every bug in the ledger above was actually
+caught.
+
+**The live trace — the main instrument.** The dev build streams every
+`__DEV__` log to whichever terminal runs Metro. So: ask Iyad to stop his own
+`npm start` (Ctrl+C), run `npx expo start` YOURSELF as a background task, have
+him reload the app (same wifi, port 8081 reconnects), and read the task's
+output file. Each recognition pass logs `[follow] <ms> <window transcript>` —
+pass latency and exactly what the model heard, which is how the terminal
+slice bug was caught in the act and how the fake-sounds question was settled
+(the model heard them honestly; the display was lying).
+
+**The on-phone instrument:** `/recite-spike` (open
+`newmuslimguide://recite-spike` in the phone browser — linked from nowhere).
+Shows the raw transcript, model-load ms and per-pass ms on screen. The
+product card never shows any of that; the spike exists so it never has to.
+
+**The desktop repro:** `.cache/recite-spike/` on the iMac — whisper.cpp
+built, the model, `align.mjs`, and `run.sh`: drop any voice memo in
+`recordings/` and it transcribes + aligns offline. `npm run align:check`
+pins the aligner against verbatim transcripts from real sessions; new
+regressions become new fixtures there.
+
+**Screen recordings:** Iyad drops them in `~/Documents`; extract frames with
+the scratchpad Playwright (`channel: 'chrome'`, load the video via a
+`file://` HTML page — a blank page cannot load file media — and remember
+React Native Web scrolls an inner div, so `fullPage` screenshots see only
+the viewport).
+
+**The knobs, and where each rule lives:** window/tick in
+`lib/recite-session.ts` (`WINDOW_SECONDS`, `TICK_MS` — pass time scales with
+window length); walk paces and the display rules (high-water, heard-set,
+verse anchor) in `hooks/use-recite-follow.ts`; matching tolerances in
+`lib/recite-align.ts`. Every constant's comment says which phone test set it.
+
+## Status — update this block when it changes
+
+As of 30 Aug 2026, commit `23dcea3`:
+
+- **Working on:** the in-card redesign (highlight inside ayah cards, pinned
+  controls, surah-wide per-word transliteration) — built, **not yet seen on
+  Iyad's phone**. His test and recording are the next input.
+- **Open decisions, his:** tiny-vs-base model (the only lever left on the
+  1–3 s follow lag; conversion tools and originals are archived and ready);
+  the upstream PR for the SliceManager patch.
+- **Known limits:** ~1.0–1.4 s per recognition pass with the base model on
+  his phone; 23 of 571 ayahs have no per-word transliteration (generator
+  refused misaligned splits — they render the plain line).
+
 ## Takedown insurance — done 30 Aug 2026
 
 Everything the feature builds from now exists in copies we hold, checksummed.

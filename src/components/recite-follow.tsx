@@ -56,13 +56,32 @@ export function ReciteFollow({ verses }: { verses: readonly { arabic: string }[]
     position — on the first phone test the highlight visibly jumped back and
     forth, which reads as the app changing its mind about the reader. A
     teacher's finger only rests or moves on, so what is SHOWN is the
-    session's high-water mark, kept in the transcript handler; `held` and
-    `complete` still come from the live alignment.
+    session's high-water mark, kept in the transcript handler; `complete`
+    still comes from the live alignment.
   */
   const [shownPosition, setShownPosition] = useState(0);
+  /*
+    What the reader SEES is a walk, not a leap. The engine reports in
+    ~one-second batches, so the true position often jumps a whole ayah at
+    once — and a card that flips ayahs before its words were ever seen to
+    light reads as "no highlight at all", which is exactly what the first
+    full test reported. `displayed` chases `shownPosition` one word at a
+    time; the verse on screen follows the walk, so every word gets its
+    moment green before the card moves on.
+  */
+  const [displayed, setDisplayed] = useState(0);
   const session = useRef<FollowSession | undefined>(undefined);
 
   const alignment = align(reference, transcript);
+
+  useEffect(() => {
+    if (displayed >= shownPosition) return undefined;
+    const walker = setInterval(
+      () => setDisplayed((at) => (at < shownPosition ? at + 1 : at)),
+      140,
+    );
+    return () => clearInterval(walker);
+  }, [displayed, shownPosition]);
 
   const stop = useCallback(async () => {
     const current = session.current;
@@ -111,6 +130,7 @@ export function ReciteFollow({ verses }: { verses: readonly { arabic: string }[]
     setState('starting');
     setTranscript('');
     setShownPosition(0);
+    setDisplayed(0);
     try {
       session.current = await startFollowSession({
         onTranscript: (text) => {
@@ -136,10 +156,10 @@ export function ReciteFollow({ verses }: { verses: readonly { arabic: string }[]
 
   if (!canRecite || reference.length === 0) return null;
 
-  /* The verse being recited: the one holding the next expected word. */
+  /* The verse on screen follows the walk, not the engine's leaps. */
   const currentVerse =
-    shownPosition < reference.length
-      ? reference[shownPosition].verse
+    displayed < reference.length
+      ? reference[displayed].verse
       : reference[reference.length - 1].verse;
   const verseWords = reference.filter((word) => word.verse === currentVerse);
   const verseStart = reference.findIndex((word) => word.verse === currentVerse);
@@ -233,13 +253,12 @@ export function ReciteFollow({ verses }: { verses: readonly { arabic: string }[]
               verseStart={verseStart}
               currentVerse={currentVerse}
               totalVerses={totalVerses}
-              position={shownPosition}
-              held={alignment.held}
+              position={displayed}
               onStop={() => void stop()}
             />
           )}
 
-          {alignment.complete && state !== 'listening' && (
+          {alignment.complete && displayed >= reference.length && state !== 'listening' && (
             <ThemedText type="small" themeColor="accent">
               {t('recite.complete')}
             </ThemedText>
@@ -262,7 +281,6 @@ function ListeningBody({
   currentVerse,
   totalVerses,
   position,
-  held,
   onStop,
 }: {
   verseWords: readonly { word: string }[];
@@ -270,7 +288,6 @@ function ListeningBody({
   currentVerse: number;
   totalVerses: number;
   position: number;
-  held: boolean;
   onStop: () => void;
 }) {
   const theme = useTheme();
@@ -292,22 +309,22 @@ function ListeningBody({
         </Pressable>
       </View>
 
-      {position === 0 && !held ? (
-        <ThemedText type="caption" themeColor="textSecondary">
-          {t('recite.listeningHint')}
-        </ThemedText>
-      ) : null}
+      {/*
+        One quiet line, always present and never judging: the hint until the
+        first word lights, then a steady "listening". The first tester met a
+        gray dim on lost tracking and rightly asked what it meant and what to
+        do — the answer is nothing, so the screen now says the one true thing
+        instead of recolouring words. Words only ever turn green.
+      */}
+      <ThemedText type="caption" themeColor="textSecondary">
+        {position === 0 ? t('recite.listeningHint') : t('recite.listening')}
+      </ThemedText>
       <ThemedText type="arabicLead" style={styles.verse}>
         {verseWords.map((word, w) => (
           <Text
             key={`${currentVerse}-${w}`}
             style={{
-              color:
-                verseStart + w < position
-                  ? theme.accent
-                  : held
-                    ? theme.textSecondary
-                    : theme.text,
+              color: verseStart + w < position ? theme.accent : theme.text,
             }}
           >
             {word.word}

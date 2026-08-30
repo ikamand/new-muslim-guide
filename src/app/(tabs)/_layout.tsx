@@ -75,15 +75,14 @@ export default function TabsLayout() {
           ),
         }}
       />
-      <Tabs.Screen
-        name="settings"
-        options={{
-          title: t('tab.settings'),
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="settings-outline" size={size} color={color} />
-          ),
-        }}
-      />
+      {/*
+        No settings tab. It was the one tab that was neither worship nor
+        content, and a tab advertises configuration as a primary activity —
+        against the app's own rule that every setting is a decision handed to
+        someone who didn't ask for one. Settings is the colophon at the end
+        of Learn now: the page where the book talks about itself, on the
+        book's last page.
+      */}
     </Tabs>
   );
 }

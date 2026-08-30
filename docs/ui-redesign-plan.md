@@ -2460,3 +2460,20 @@ meridiem input parses and is AUTHORITATIVE (a wrong PM is a non-match, not a
 guess — pinned in `npm run awqat:fit`), the save button is permanent with a
 caption saying why it is disabled, return walks the five fields and closes
 the keyboard, and saving with no back stack lands on /awqat-settings.
+
+### 31 Aug, later — Settings leaves the tab bar; the colophon
+
+Iyad's call: the settings tab was the one tab that was neither worship nor
+content. The bar is four now — Today, Learn, Qur'an, Duʿa — and Settings is
+the **colophon**: the last quiet row at the end of Learn, beside "Your
+firsts" (a keepsake register at the back of the book), because the colophon
+is where a manuscript talks about itself. Bottom-of-Today was considered and
+rejected by Today's own deadline test — the same test that killed the
+permanent journey card.
+
+Two of his other catches in the same pass: "You were reading" on Learn was
+a grey line people missed — promoted to the same kicker row Today gives the
+same content, bookmark included; and pressed-state highlights sat off-centre
+because `keepsake` and the collection coda had top-only padding — the
+highlight paints the padded box, so asymmetric padding is invisible until
+the press. Both symmetric now, footprints unchanged via cancelling margins.

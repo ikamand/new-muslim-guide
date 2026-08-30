@@ -533,7 +533,6 @@ export const EN = {
   'recite.complete': 'You recited it all the way through.',
   'settings.storage.recite': 'Recite with me — the listening models',
 
-  'tab.settings': 'Settings',
 
   'learn.title': 'Learn',
   'learn.intro':

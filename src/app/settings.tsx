@@ -1,14 +1,14 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { Stack, useRouter } from 'expo-router';
 import { useState } from 'react';
-import { useRouter } from 'expo-router';
 import { Pressable, ScrollView, StyleSheet, Switch, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { PressableLink } from '@/components/pressable-link';
 import { RecitationCard } from '@/components/recitation-card';
 import { ThemedText } from '@/components/themed-text';
 import { Recitations } from '@/content/recitations';
-import { BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
+
+import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useReminders } from '@/hooks/use-reminders';
 import { useSettings, type Audience } from '@/hooks/use-settings';
 import { PRAYER_IDS, PRAYER_LABEL } from '@/lib/prayer-times';
@@ -485,8 +485,11 @@ export default function SettingsScreen() {
   const { t } = useLocale();
 
   return (
-    <SafeAreaView style={[styles.safeArea, { backgroundColor: theme.background }]} edges={['top']}>
-      <ScrollView contentContainerStyle={styles.content}>
+    <ScrollView
+      style={{ backgroundColor: theme.background }}
+      contentContainerStyle={styles.content}>
+      {/* The native header carries no title — the page names itself below. */}
+      <Stack.Screen options={{ title: '' }} />
         <View style={styles.header}>
           <ThemedText type="subtitle">{t('settings.title')}</ThemedText>
           <ThemedText type="default" themeColor="textSecondary">{t('settings.intro')}</ThemedText>
@@ -566,8 +569,7 @@ export default function SettingsScreen() {
         <ThemedText type="small" themeColor="textSecondary" style={styles.footnote}>
           {t('settings.footnote')}
         </ThemedText>
-      </ScrollView>
-    </SafeAreaView>
+    </ScrollView>
   );
 }
 
@@ -584,12 +586,9 @@ const styles = StyleSheet.create({
     flex: 1,
     gap: 2,
   },
-  safeArea: {
-    flex: 1,
-  },
   content: {
     padding: Spacing.four,
-    paddingBottom: BottomTabInset + Spacing.four,
+    paddingBottom: Spacing.six,
     gap: Spacing.five,
     width: '100%',
     maxWidth: MaxContentWidth,

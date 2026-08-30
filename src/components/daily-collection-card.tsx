@@ -88,12 +88,18 @@ const styles = StyleSheet.create({
   */
   row: {
     /*
-      No rule of its own. The panel above now closes with one, and the
-      negative margin pulls this up against it — so the coda reads as that
-      panel's footer, which is what it always meant to be.
+      No rule of its own. The panel above closes with one, and the negative
+      margin pulls this up against it — so the coda reads as that panel's
+      footer, which is what it always meant to be.
+
+      Padding is symmetric and the added bottom half is cancelled by margin,
+      keeping the footprint: top-only padding was invisible until the row was
+      pressed, when the highlight painted the padded box with the text at its
+      bottom edge.
     */
-    paddingTop: Spacing.three,
+    paddingVertical: Spacing.three,
     marginTop: -Spacing.two,
+    marginBottom: -Spacing.three,
   },
   line: {
     flexDirection: 'row',

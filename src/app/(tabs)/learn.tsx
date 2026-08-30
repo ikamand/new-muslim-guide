@@ -453,23 +453,22 @@ export default function LearnScreen() {
           moved card: the lesson stays findable on its shelf below, and this
           line is the one place on the tab allowed to change day to day.
         */}
+        {/*
+          Promoted from a quiet grey line to the full kicker row — the same
+          shape Today gives the same content, one treatment for one thing in
+          two places. It earned the promotion by being missed: a one-line
+          "You were reading: …" in textSecondary was invisible between the
+          chapter card and the shelves (Iyad, 31 Aug). The bookmark along its
+          foot comes with the row.
+        */}
         {readingNow && (
-          <QuietRow
+          <JadwalRow
             href={routeFor(readingNow.entry)}
-            label={t('today.reading')}
-            value={readingNow.entry.title}
+            kicker={t('today.reading')}
+            title={readingNow.entry.title}
+            progress={readingNow.furthest}
           />
         )}
-
-        {/*
-          The ledger, one line under the chapter card.
-
-          A link rather than a card, and below "Where you are" rather than
-          above it: the chapter is what someone can act on this afternoon, and
-          the firsts are what they look at rarely. `content/firsts.ts` explains
-          why there is no count on either side of this link.
-        */}
-        <QuietRow href="/firsts" label={t('firsts.open')} accessibilityLabel={t('firsts.title')} />
 
         {/*
           Grouped by when the question arrives, not by subject.
@@ -574,6 +573,24 @@ export default function LearnScreen() {
             ))}
           </View>
         </View>
+      
+        {/*
+          The colophon — the note at the end of a manuscript where the book
+          talks about itself. That is exactly what these two are: the ledger
+          of firsts (a keepsake register at the back of the book, the way a
+          family Qur'an's flyleaf records births), and Settings, which left
+          the tab bar because it was the one tab that was neither worship nor
+          content. `content/firsts.ts` explains why the ledger shows no count.
+        */}
+        <View style={styles.colophon}>
+          <QuietRow
+            href="/firsts"
+            label={t('firsts.open')}
+            accessibilityLabel={t('firsts.title')}
+          />
+          <QuietRow href="/settings" label={t('settings.title')} />
+        </View>
+
       </ScrollView>
     </SafeAreaView>
   );
@@ -581,6 +598,10 @@ export default function LearnScreen() {
 
 
 const styles = StyleSheet.create({
+  /* Breathing room above the end matter — the rows carry their own rules. */
+  colophon: {
+    marginTop: Spacing.five,
+  },
   safeArea: {
     flex: 1,
   },
@@ -654,14 +675,21 @@ const styles = StyleSheet.create({
     here pulled the row up into the card above.
   */
   /* A rule and a line. Not a card — see `ShahadaCard`. */
+  /*
+    Padding is symmetric and the added bottom half is cancelled by margin, so
+    the footprint is unchanged. Asymmetric padding was invisible until the
+    row was pressed — the highlight paints the padded box, and top-only
+    padding put the text at its bottom edge (Iyad's screenshot, 31 Aug).
+  */
   keepsake: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     gap: Spacing.two,
     borderTopWidth: StyleSheet.hairlineWidth,
-    paddingTop: Spacing.three,
+    paddingVertical: Spacing.three,
     marginTop: -Spacing.four,
+    marginBottom: -Spacing.three,
   },
   journeyAction: {
     flexDirection: 'row',

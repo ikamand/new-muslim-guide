@@ -83,7 +83,8 @@
     "collection:duas": "node scripts/generate-quranic-duas.mjs",
     "zakat:nisab": "node scripts/fetch-nisab.mjs",
     "nav:check": "node scripts/navigation-check.mjs",
-    "postinstall": "patch-package"
+    "postinstall": "patch-package",
+    "awqat:fit": "npx tsx scripts/awqat-fit-check.ts"
   },
   "private": true
 }

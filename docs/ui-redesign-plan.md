@@ -2424,3 +2424,25 @@ Verified by screenshot: learner card (light), fluent card (dark, via seeded
 rig's clock disagrees with its faked coordinates, so the absolute times in
 those screenshots are scrambled and the timezone caution fires — that is the
 rig, and it is also proof the caution works.
+
+### Same day, later — the rest of Awqat ships
+
+- **Method + ʿAsr settings** (`80ca1c3`): `METHODS` catalogue, and
+  `resolveProfile` as the single decision point. The reminder signature
+  includes the choice so a method change reschedules notifications.
+- **Match my mosque** (this commit): `lib/mosque-fit.ts` searches every
+  method × school for the combination reproducing five board times; residues
+  become `params.adjustments`. `npm run awqat:fit` is the check that fails —
+  it generates a board from a known configuration and asserts recovery, and
+  rejects an iqamah column (+25 across the board). Precedence lives in ONE
+  hook, `use-awqat-profile.ts`: mosque > chosen method > inferred. Manual
+  picks clear the match rather than silently stacking. The card carries a
+  malachite-dotted "Matched to your mosque" caption.
+- **The monthly jadwal** (`b3dd14c`): /awqat, bare clock times, Fridays
+  gold, today lit, white days rubric; moon-boundary events held because
+  `learn/voluntary-fasting.ts` promises the app will not date them.
+
+Verified end to end in the browser: typed a board with Dhuhr +1 into
+/mosque-match and it announced "Matched · Muslim World League · Dhuhr +1
+min". Still to eyes: the whole flow on a device, and the ⚠️ review-flagged
+wordings (windows sheet, ʿAsr help, mosque copy).

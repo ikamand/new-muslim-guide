@@ -9,6 +9,7 @@ import { Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { useLocation } from '@/hooks/use-location';
 import { usePrayerTimes } from '@/hooks/use-prayer-times';
+import { useSettings } from '@/hooks/use-settings';
 import {
   formatCountdown,
   formatTime,
@@ -255,6 +256,7 @@ export function PrayerTimesCard({ action }: PrayerTimesCardProps) {
   const { status, coords } = useLocation();
   const { today, next, timezoneSuspect } = usePrayerTimes();
   const [windowsOpen, setWindowsOpen] = useState(false);
+  const { awqatMosque } = useSettings();
   // 5 is Friday in every locale — `getDay` is not localised, which is what
   // makes it safe to compare against a number here.
   const isFriday = new Date().getDay() === 5;
@@ -334,6 +336,23 @@ export function PrayerTimesCard({ action }: PrayerTimesCardProps) {
           />
         ))}
       </View>
+
+      {/*
+        One caption, only when a mosque match is active: the numbers above
+        simply ARE the mosque's numbers now, and the malachite dot is the
+        only colour that state gets — matched means confirmed right, and
+        that is what malachite means.
+      */}
+      {awqatMosque && (
+        <View style={styles.matched}>
+          <ThemedText type="caption" themeColor="malachite">
+            ●
+          </ThemedText>
+          <ThemedText type="caption" themeColor="textSecondary">
+            {t('mosque.active')}
+          </ThemedText>
+        </View>
+      )}
 
       {action}
 
@@ -443,6 +462,12 @@ const styles = StyleSheet.create({
   },
   nextTime: {
     fontVariant: ['tabular-nums'],
+  },
+  matched: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: Spacing.one,
   },
   quiet: {
     flexDirection: 'row',

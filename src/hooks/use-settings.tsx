@@ -7,6 +7,7 @@ import {
   type ShahadaState,
 } from '@/lib/onboarding';
 import { DEFAULT_REMINDERS, LEAD_CHOICES, type ReminderSettings } from '@/lib/reminders';
+import type { MosqueFit } from '@/lib/mosque-fit';
 import type { HomePlace } from '@/lib/home-place';
 import { PRAYER_IDS } from '@/lib/prayer-times';
 import { DEFAULT_RECITER, isReciterId, type ReciterId } from '@/content/quran/recitation';
@@ -77,6 +78,12 @@ export type Settings = {
   awqatMethod: string | null;
   /** Explicit ʿAsr school; null keeps whatever the method bundles. */
   awqatHanafiAsr: boolean | null;
+  /**
+   * The mosque match — a (method, school, per-prayer offsets) triple fitted
+   * from the five times on a mosque's board. Outranks `awqatMethod` and
+   * `awqatHanafiAsr`; see `use-awqat-profile.ts` for the precedence.
+   */
+  awqatMosque: MosqueFit | null;
   /**
    * Lessons marked done, as `kind:id`.
    *
@@ -155,6 +162,7 @@ const DEFAULTS: Settings = {
   prayerConfidence: null,
   awqatMethod: null,
   awqatHanafiAsr: null,
+  awqatMosque: null,
   completedLessons: [],
   home: null,
   awaySince: null,
@@ -177,6 +185,19 @@ function isHomePlace(value: unknown): value is HomePlace {
     Number.isFinite(place.longitude) &&
     typeof place.since === 'number' &&
     Number.isFinite(place.since)
+  );
+}
+
+
+/** Enough of a shape check to trust the store; the method id is re-validated at use. */
+function isMosqueFit(value: unknown): value is MosqueFit {
+  if (typeof value !== 'object' || value === null) return false;
+  const fit = value as MosqueFit;
+  return (
+    typeof fit.methodId === 'string' &&
+    typeof fit.hanafiAsr === 'boolean' &&
+    typeof fit.adjustments === 'object' &&
+    fit.adjustments !== null
   );
 }
 
@@ -232,6 +253,12 @@ function parseStored(raw: string | null): Settings {
       awqatMethod: typeof stored.awqatMethod === 'string' ? stored.awqatMethod : null,
       awqatHanafiAsr:
         typeof stored.awqatHanafiAsr === 'boolean' ? stored.awqatHanafiAsr : null,
+      /*
+        Shape-checked shallowly; `mosqueProfile` re-validates the method id
+        against the catalogue at use, so a half-valid store degrades to
+        inference rather than crashing the card.
+      */
+      awqatMosque: isMosqueFit(stored.awqatMosque) ? stored.awqatMosque : null,
       /*
         Narrowed like everything else here, and it matters more than most: a
         malformed home would be compared against a real fix and could say

@@ -11,7 +11,7 @@ import { Recitations } from '@/content/recitations';
 import { BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useReminders } from '@/hooks/use-reminders';
 import { useSettings, type Audience } from '@/hooks/use-settings';
-import { PRAYER_IDS, PRAYER_LABEL } from '@/lib/prayer-times';
+import { inferProfile, METHODS, PRAYER_IDS, PRAYER_LABEL } from '@/lib/prayer-times';
 import { LEAD_CHOICES } from '@/lib/reminders';
 import { deleteVoice, savedVoices, type SavedVoice } from '@/content/quran/offline';
 import { deleteReciteModels, reciteModelBytes } from '@/lib/recite-session';
@@ -19,7 +19,6 @@ import { RECITERS } from '@/content/quran/recitation';
 import { useLocale } from '@/hooks/use-locale';
 import { usePrayerTimes } from '@/hooks/use-prayer-times';
 import { useLocation } from '@/hooks/use-location';
-import { inferProfile, METHODS } from '@/lib/prayer-times';
 import { Madhab } from 'adhan';
 import { LOCALE_NAMES, LOCALES } from '@/i18n/locales';
 import { useTheme } from '@/hooks/use-theme';
@@ -465,7 +464,7 @@ const megabytes = (bytes: number) => (bytes / 1_000_000).toFixed(1);
 function PrayerTimesGroup() {
   const theme = useTheme();
   const { t } = useLocale();
-  const { awqatMethod, awqatHanafiAsr, set } = useSettings();
+  const { awqatMethod, awqatHanafiAsr, awqatMosque, set, setMany } = useSettings();
   const { coords } = useLocation();
   const { profile } = usePrayerTimes();
   if (!profile || !coords) return null;
@@ -505,6 +504,37 @@ function PrayerTimesGroup() {
         {t('times.followLocal')}
       </ThemedText>
 
+      {/*
+        The headline of the group, and the answer for most people who open
+        it: transcribe the board, skip the vocabulary below entirely.
+      */}
+      <PressableLink
+        href="/mosque-match"
+        accessibilityLabel={t('mosque.title')}
+        style={[styles.group, styles.row, { borderColor: theme.goldSoft }]}
+        pressedStyle={{ opacity: 0.6 }}>
+        <ThemedText type="default">{t('mosque.title')}</ThemedText>
+        <ThemedText type="smallBold" themeColor="gold">
+          ›
+        </ThemedText>
+      </PressableLink>
+
+      {awqatMosque && (
+        <View style={styles.matchedState}>
+          <ThemedText type="small" themeColor="malachite">
+            {t('mosque.active')} · {METHODS[awqatMosque.methodId]?.label ?? awqatMosque.methodId}
+          </ThemedText>
+          <Pressable
+            onPress={() => set('awqatMosque', null)}
+            accessibilityRole="button"
+            style={({ pressed }) => ({ opacity: pressed ? 0.6 : 1 })}>
+            <ThemedText type="smallBold" themeColor="accent">
+              {t('mosque.clear')}
+            </ThemedText>
+          </Pressable>
+        </View>
+      )}
+
       <ThemedText type="small" themeColor="textSecondary" style={styles.subheading}>
         {t('settings.method')}
       </ThemedText>
@@ -512,7 +542,7 @@ function PrayerTimesGroup() {
         {methodRows.map((row, index) => (
           <Pressable
             key={row.id ?? 'suggested'}
-            onPress={() => set('awqatMethod', row.id)}
+            onPress={() => setMany({ awqatMethod: row.id, awqatMosque: null })}
             accessibilityRole="radio"
             accessibilityState={{ selected: awqatMethod === row.id }}
             style={[
@@ -547,7 +577,7 @@ function PrayerTimesGroup() {
         ).map((row, index) => (
           <Pressable
             key={String(row.hanafi)}
-            onPress={() => set('awqatHanafiAsr', row.hanafi)}
+            onPress={() => setMany({ awqatHanafiAsr: row.hanafi, awqatMosque: null })}
             accessibilityRole="radio"
             accessibilityState={{ selected: hanafiNow === row.hanafi }}
             style={[
@@ -713,6 +743,10 @@ const styles = StyleSheet.create({
   rowText: {
     flex: 1,
     gap: 2,
+  },
+  matchedState: {
+    gap: Spacing.one,
+    paddingTop: Spacing.two,
   },
   subheading: {
     marginTop: Spacing.three,

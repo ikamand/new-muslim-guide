@@ -653,6 +653,25 @@ export const EN = {
     'The schools differ on when ʿAsr begins: when a shadow equals its object, or twice it. Your mosque’s timetable follows one — match it.',
   'settings.asr.standard': 'Standard — shadow equals its object',
   'settings.asr.hanafi': 'Later — twice its object (Hanafi)',
+  /*
+    Match your mosque. `mosque.iqamah` is the two-column trap named at the
+    moment it matters; `mosque.drift` is the season caveat — a fit that is
+    right today can drift if the method is wrong, and honesty beats
+    certainty.
+  */
+  'mosque.title': 'Match your mosque',
+  'mosque.intro': 'Copy today’s times from your mosque’s board or website, and the app works out the rest.',
+  'mosque.iqamah':
+    'Boards often print two columns. Enter the first — the adhan, when the prayer comes in. The second, iqamah, is when the congregation stands, usually 10–30 minutes later.',
+  'mosque.matched': 'Matched',
+  'mosque.hanafi': 'Hanafi ʿAsr',
+  'mosque.use': 'Use these times',
+  'mosque.noMatch':
+    'These times don’t line up with any calculation the app knows. The usual reason is the iqamah column — check the board for an adhan column and try those times instead.',
+  'mosque.drift':
+    'A match made today can drift with the seasons if the mosque follows something unusual. If the app and the board disagree next month, match again — it takes a minute.',
+  'mosque.active': 'Matched to your mosque',
+  'mosque.clear': 'Back to this phone’s own times',
   'settings.reminders': 'Prayer reminders',
   'settings.reminders.help':
     'A quiet notification before each prayer. Nothing is sent anywhere. Your phone works the times out and sets its own alarms.',

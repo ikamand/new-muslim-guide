@@ -12,7 +12,8 @@ import {
   rescheduleItems,
   type ScheduledItem,
 } from '@/lib/notifications';
-import { PRAYER_LABEL, resolveProfile, type PrayerId } from '@/lib/prayer-times';
+import { useAwqatProfile } from '@/hooks/use-awqat-profile';
+import { PRAYER_LABEL, type PrayerId } from '@/lib/prayer-times';
 import {
   planAdhkarNotes,
   planJumuahNotes,
@@ -64,8 +65,9 @@ const timeOf = (date: Date) =>
 /** Mounted once in the root layout. Renders nothing; owns the schedule. */
 export function useReminderSync(): void {
   const { coords } = useLocation();
-  const { reminders, suhoorWakeUp, adhkarNote, jumuahNote, awqatMethod, awqatHanafiAsr, loaded } =
+  const { reminders, suhoorWakeUp, adhkarNote, jumuahNote, awqatMethod, awqatHanafiAsr, awqatMosque, loaded } =
     useSettings();
+  const profileFor = useAwqatProfile();
   const { locale, t } = useLocale();
 
   /*
@@ -80,6 +82,7 @@ export function useReminderSync(): void {
     jumuahNote,
     awqatMethod,
     awqatHanafiAsr,
+    awqatMosque,
   });
   const lastRun = useRef<string>('');
 
@@ -95,13 +98,10 @@ export function useReminderSync(): void {
       }
       if (!(await hasPermission())) return;
 
-      // Through `resolveProfile`, never `inferProfile`: a reminder firing at
-      // the inferred time while the card shows a chosen method's time is the
-      // worst bug this feature could have.
-      const profile = resolveProfile(coords, {
-        methodId: awqatMethod,
-        hanafiAsr: awqatHanafiAsr,
-      });
+      // Through the precedence hook, never `inferProfile`: a reminder firing
+      // at one profile's time while the card shows another is the worst bug
+      // this feature could have.
+      const profile = profileFor(coords);
       const now = new Date();
       const items: ScheduledItem[] = [];
 
@@ -167,7 +167,7 @@ export function useReminderSync(): void {
       active = false;
       subscription.remove();
     };
-  }, [loaded, coords, signature, locale, reminders, suhoorWakeUp, adhkarNote, jumuahNote, t]);
+  }, [loaded, coords, signature, locale, reminders, suhoorWakeUp, adhkarNote, jumuahNote, profileFor, t]);
 }
 
 export type ReminderFlag = 'suhoorWakeUp' | 'adhkarNote' | 'jumuahNote';

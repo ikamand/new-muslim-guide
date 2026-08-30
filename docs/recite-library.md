@@ -57,6 +57,33 @@ MIT permits vendoring with its notice kept.
    convert from the archived original weights with the archived converter,
    host at a URL the library controls, repoint `recite-session`.
 
+## In-house, decided 31 Aug 2026 — *"i want my inhouse stuff not others"*
+
+Iyad's call, overriding the wait-for-the-gate sequencing above for
+independence (the extraction into a published package still waits; what
+moved up is *whose copies the app builds from*):
+
+- **The code installs from this repo, not npm.** `package.json` points
+  `whisper.rn` and the PCM module at `file:vendor/*.tgz`. npm's registry is
+  no longer contacted for either; the crash patch applies on top exactly as
+  before.
+- **How an engine fix is made now, every time:** edit `node_modules/whisper.rn`
+  (src AND both `lib/` builds — Metro uses src, but keep them honest), run
+  `npx patch-package whisper.rn`, commit the regenerated patch here — **and**
+  commit the source change to the `in-house/0.7.4` branch of
+  `ikamand/whisper.rn-mirror`, which is the canonical in-house history of
+  engine changes. The SliceManager fix is its first commit.
+- **The models move to `ikamand/recite-archive`'s release assets** — pending
+  one action only Iyad can take (the harness rightly refuses account-level
+  visibility changes):
+  `gh repo edit ikamand/recite-archive --visibility public --accept-visibility-change-consequences`.
+  Once public, `recite-session.ts`'s two URLs repoint there and the byte-size
+  pins stay identical.
+- ⚠️ **The cost, said once:** `recite-archive` and the vendored tarballs are
+  now LOAD-BEARING, not insurance. Renaming or deleting that repo breaks new
+  model downloads; deleting `vendor/` breaks `npm install`. The upstreams
+  become the fallback instead of the source.
+
 ## Maintenance ledger
 
 Every bug found and fixed in the engine path, so a future session inherits

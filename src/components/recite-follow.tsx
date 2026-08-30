@@ -80,13 +80,16 @@ export function ReciteFollow({ verses }: { verses: readonly { arabic: string }[]
   const download = useCallback(async () => {
     setState('downloading');
     try {
-      const ok = await downloadReciteModels((stage) =>
-        setStatus(t(stage === 'vad' ? 'recite.downloading.vad' : 'recite.downloading.recognition')),
+      const ok = await downloadReciteModels((stage, percent) =>
+        setStatus(
+          `${t(stage === 'vad' ? 'recite.downloading.vad' : 'recite.downloading.recognition')} ${percent}%`,
+        ),
       );
       setStatus('');
       setState(ok ? 'ready' : 'download');
-    } catch {
-      setStatus('');
+    } catch (error) {
+      console.warn('recite download', error);
+      setStatus(__DEV__ ? String(error) : '');
       setState('download');
     }
   }, [t]);
@@ -102,13 +105,18 @@ export function ReciteFollow({ verses }: { verses: readonly { arabic: string }[]
     try {
       session.current = await startFollowSession({
         onTranscript: setTranscript,
-        onError: () => {
-          /* Rule 2: the words dim; the reader is not interrupted. */
+        onError: (message) => {
+          /* Rule 2: the words dim; the reader is not interrupted. The log
+             line is for the Metro terminal, not the screen. */
+          console.warn('recite session', message);
         },
       });
       setState('listening');
-    } catch {
-      setStatus(t('recite.error'));
+    } catch (error) {
+      /* The calm copy is for users; the cause is for whoever is debugging —
+         visible in dev, in the Metro logs always. */
+      console.warn('recite start', error);
+      setStatus(__DEV__ ? `${t('recite.error')} — ${String(error)}` : t('recite.error'));
       await stop();
     }
   }, [stop, t]);

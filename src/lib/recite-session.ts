@@ -1,4 +1,11 @@
 import { Directory, File, Paths } from 'expo-file-system';
+/*
+  The legacy API, for one reason: the new `File.downloadFileAsync` reports
+  nothing until it is done, and a 148 MB fetch with no progress reads as a
+  hang — Iyad's first phone test said exactly that. `createDownloadResumable`
+  is the documented path to a progress callback in SDK 57.
+*/
+import { createDownloadResumable } from 'expo-file-system/legacy';
 import { Platform } from 'react-native';
 
 /**
@@ -107,7 +114,7 @@ export function deleteReciteModels(): void {
   }
 }
 
-async function fetchModel(model: ModelFile): Promise<void> {
+async function fetchModel(model: ModelFile, onPercent: (percent: number) => void): Promise<void> {
   const file = fileFor(model);
   if (present(model)) return;
   try {
@@ -115,7 +122,14 @@ async function fetchModel(model: ModelFile): Promise<void> {
   } catch {
     /* replaced below either way */
   }
-  await File.downloadFileAsync(model.url, file);
+  const download = createDownloadResumable(model.url, file.uri, {}, (progress) => {
+    const expected = progress.totalBytesExpectedToWrite;
+    /* The server may not say how big it is; the pinned size is the honest
+       denominator either way. */
+    const total = expected > 0 ? expected : model.bytes;
+    onPercent(Math.min(99, Math.floor((progress.totalBytesWritten / total) * 100)));
+  });
+  await download.downloadAsync();
   if (!present(model)) {
     try {
       fileFor(model).delete();
@@ -124,25 +138,26 @@ async function fetchModel(model: ModelFile): Promise<void> {
     }
     throw new Error(`${model.name} arrived the wrong size`);
   }
+  onPercent(100);
 }
 
 /**
  * Fetches whichever models are missing. Resolves true when both are present
- * and verified. `onStatus` gets one short human sentence per stage.
+ * and verified. `onStatus` gets the stage and how far through it is, 0–100.
  */
 export async function downloadReciteModels(
-  onStatus: (status: 'vad' | 'recognition') => void,
+  onStatus: (status: 'vad' | 'recognition', percent: number) => void,
 ): Promise<boolean> {
   if (!canRecite) return false;
   const dir = modelDir();
   if (!dir.exists) dir.create({ intermediates: true });
   if (!present(VAD)) {
-    onStatus('vad');
-    await fetchModel(VAD);
+    onStatus('vad', 0);
+    await fetchModel(VAD, (percent) => onStatus('vad', percent));
   }
   if (!present(RECOGNITION)) {
-    onStatus('recognition');
-    await fetchModel(RECOGNITION);
+    onStatus('recognition', 0);
+    await fetchModel(RECOGNITION, (percent) => onStatus('recognition', percent));
   }
   return reciteModelsReady();
 }

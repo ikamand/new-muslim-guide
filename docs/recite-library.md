@@ -75,12 +75,11 @@ moved up is *whose copies the app builds from*):
   commit the source change to the `in-house/0.7.4` branch of
   `ikamand/whisper.rn-mirror`, which is the canonical in-house history of
   engine changes. The SliceManager fix is its first commit.
-- **The models move to `ikamand/recite-models`'s release assets** — pending
-  one action only Iyad can take (the harness rightly refuses account-level
-  visibility changes):
-  `gh repo edit ikamand/recite-models --visibility public --accept-visibility-change-consequences`.
-  Once public, `recite-session.ts`'s two URLs repoint there and the byte-size
-  pins stay identical.
+- **The models download from `ikamand/recite-models`'s release assets** —
+  done 31 Aug 2026, after Iyad renamed the repo and made it public. Both
+  assets were fetched anonymously and hashed byte-for-byte against
+  `SHA256SUMS` before `recite-session.ts` was repointed; the pinned sizes
+  are unchanged, so phones that downloaded earlier keep their files.
 - ⚠️ **The cost, said once:** `recite-models` and the vendored tarballs are
   now LOAD-BEARING, not insurance. Renaming or deleting that repo breaks new
   model downloads; deleting `vendor/` breaks `npm install`. The upstreams

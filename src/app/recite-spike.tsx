@@ -101,12 +101,8 @@ export default function ReciteSpikeScreen() {
   const download = useCallback(async () => {
     setPhase('downloading');
     try {
-      const ok = await downloadReciteModels((stage, percent) =>
-        setStatus(
-          stage === 'vad'
-            ? `Fetching the voice detector (about 1 MB)… ${percent}%`
-            : `Fetching the recognition model (about 148 MB, wifi recommended)… ${percent}%`,
-        ),
+      const ok = await downloadReciteModels((percent) =>
+        setStatus(`Fetching the recognition model (about 148 MB, wifi recommended)… ${percent}%`),
       );
       setStatus(ok ? '' : 'The download did not land. Try again.');
       setPhase(ok ? 'ready' : 'idle');

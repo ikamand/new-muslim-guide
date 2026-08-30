@@ -471,7 +471,6 @@ export const EN = {
   'recite.explain':
     'Recite out loud and the words light up as you are heard. The listening happens entirely on this phone — nothing you say is recorded, saved, or sent anywhere.',
   'recite.download': 'Get the listening models ({mb} MB, once)',
-  'recite.downloading.vad': 'Fetching the voice detector…',
   'recite.downloading.recognition': 'Fetching the recognition model — best on wifi…',
   'recite.start': 'Start listening',
   'recite.starting': 'Getting ready…',

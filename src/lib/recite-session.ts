@@ -12,12 +12,12 @@ import { Platform } from 'react-native';
  * The listening machinery behind "Recite with me" — phases 4 and 5 of
  * docs/recite-with-me.md.
  *
- * Owns the two model files and the live session, so the product card and the
+ * Owns the model file and the live session, so the product card and the
  * /recite-spike instrument share one implementation. The five rules the plan
  * sets live at this layer where they can be enforced rather than remembered:
  *
- * - Nothing heard is written anywhere. The transcriber gets no `fs` and no
- *   `audioOutputPath`, so it cannot write audio even by accident.
+ * - Nothing heard is written anywhere: audio lives in a rolling in-memory
+ *   window and nothing in this module can write it out.
  * - Nothing about a session is recorded in observations.
  * - The transcript leaves this module only as a callback argument, for the
  *   aligner. Product screens never render it.
@@ -31,12 +31,6 @@ import { Platform } from 'react-native';
  * a message nobody can act on. Size, not a hash: hashing 148 MB in JS on the
  * phones this app targets costs more than the risk it retires, and the byte
  * count already catches every failure the download path has produced.
- *
- * ⚠️ Before a public release the recognition model must be converted from
- * `tarteel-ai/whisper-base-ar-quran` directly and hosted somewhere the app
- * controls — the pinned size below is of a third-party conversion that was
- * verified end-to-end by the Phase 0 baseline, which is enough for testing
- * and not enough to depend on strangers keeping a repo alive.
  */
 
 const MODEL_DIR = 'recite-models';
@@ -57,22 +51,16 @@ type ModelFile = {
   versions hold these URLs forever, and that repo's README says so.
 */
 
-/** Tarteel's whisper-base fine-tune (Apache-2.0), GGML f16. */
+/** Tarteel's whisper-base fine-tune (Apache-2.0), GGML f16. The ONLY model
+    the follower needs since the in-house core below retired the VAD. */
 const RECOGNITION: ModelFile = {
   name: 'ggml-base-ar-quran.bin',
   url: 'https://github.com/ikamand/recite-models/releases/download/models-v1/ggml-base-ar-quran-f16.bin',
   bytes: 147_951_465,
 };
 
-/** Silero VAD — what cuts the audio into slices at silences. */
-const VAD: ModelFile = {
-  name: 'ggml-silero-v6.2.0.bin',
-  url: 'https://github.com/ikamand/recite-models/releases/download/models-v1/ggml-silero-v6.2.0.bin',
-  bytes: 885_098,
-};
-
 /** Rounded for buttons and help text. */
-export const RECITE_DOWNLOAD_MB = Math.round((RECOGNITION.bytes + VAD.bytes) / 1_000_000);
+export const RECITE_DOWNLOAD_MB = Math.round(RECOGNITION.bytes / 1_000_000);
 
 /** The mic pipeline is native; on web the feature simply does not exist. */
 export const canRecite = Platform.OS !== 'web';
@@ -94,9 +82,10 @@ function present(model: ModelFile): boolean {
   }
 }
 
-/** Both models on disk and the right size. */
+/** The model on disk and the right size. A leftover Silero VAD file from
+    before 31 Aug 2026 is ignored (and deletable from the storage screen). */
 export function reciteModelsReady(): boolean {
-  return canRecite && present(RECOGNITION) && present(VAD);
+  return canRecite && present(RECOGNITION);
 }
 
 /** What the store holds, for the storage screen. 0 when nothing is saved. */
@@ -151,22 +140,18 @@ async function fetchModel(model: ModelFile, onPercent: (percent: number) => void
 }
 
 /**
- * Fetches whichever models are missing. Resolves true when both are present
- * and verified. `onStatus` gets the stage and how far through it is, 0–100.
+ * Fetches the model if it is missing. Resolves true when present and
+ * verified. `onPercent` reports 0–100 as it lands.
  */
 export async function downloadReciteModels(
-  onStatus: (status: 'vad' | 'recognition', percent: number) => void,
+  onPercent: (percent: number) => void,
 ): Promise<boolean> {
   if (!canRecite) return false;
   const dir = modelDir();
   if (!dir.exists) dir.create({ intermediates: true });
-  if (!present(VAD)) {
-    onStatus('vad', 0);
-    await fetchModel(VAD, (percent) => onStatus('vad', percent));
-  }
   if (!present(RECOGNITION)) {
-    onStatus('recognition', 0);
-    await fetchModel(RECOGNITION, (percent) => onStatus('recognition', percent));
+    onPercent(0);
+    await fetchModel(RECOGNITION, onPercent);
   }
   return reciteModelsReady();
 }
@@ -178,28 +163,52 @@ export type FollowSession = {
 
 export type FollowCallbacks = {
   /**
-   * The full transcript so far, every time the recogniser emits. Feed it to
-   * `align` and render nothing else from it.
+   * What the recogniser currently hears — the trailing window, not an
+   * accumulated log. Feed it to `align` and render nothing else from it.
+   * The aligner's acquire-anywhere rule and the screen's high-water display
+   * are what make a forgetful transcript safe.
    */
-  onTranscript: (fullText: string) => void;
-  /** Milliseconds the last slice took to recognise. For the instrument. */
+  onTranscript: (windowText: string) => void;
+  /** Milliseconds the last recognition pass took. For the instrument. */
   onProcessTime?: (ms: number) => void;
   onError: (message: string) => void;
 };
 
-/** What whisper.rn hands back that this module reads. */
-type TranscribeEvent = {
-  sliceIndex?: number;
-  processTime?: number;
-  data?: { result?: string };
-};
+/*
+  ## The in-house realtime core — ledger entry 31 Aug 2026
+
+  whisper.rn's RealtimeTranscriber/RingBufferVad/SliceManager stack produced
+  three distinct field bugs in three days, and the third was terminal: its
+  cleanup deletes a slice its own queue still points at ("Slice not found for
+  index 0"), after which no transcription ever fires again — caught verbatim
+  in a Metro trace while Iyad recited five unheard ayahs into a live mic.
+  Per docs/recite-library.md ("own the logic, rent the plumbing"), that whole
+  layer is replaced here with the smallest loop our design needs:
+
+  - the mic streams PCM chunks (the one native piece kept, via
+    @fugood/react-native-audio-pcm-stream);
+  - a rolling window keeps the last WINDOW_SEC seconds of audio;
+  - a timer re-transcribes the whole window, one pass in flight at a time.
+
+  No slices, no VAD contexts, no queues — nothing to wedge. What makes this
+  sufficient is the aligner's own contract: it acquires anywhere, the screen
+  never moves backwards, so audio sliding out of the window loses nothing.
+  The window stays under the 26 s at which Phase 0 measured whole-passage
+  decoding suppressing the Fatiha's genuine repetitions, and silence in the
+  window just hallucinates a stray word the aligner ignores — also measured.
+  The Silero VAD model is no longer used or downloaded.
+*/
+const SAMPLE_RATE = 16_000;
+const BYTES_PER_SECOND = SAMPLE_RATE * 2;
+const WINDOW_SECONDS = 15;
+const WINDOW_BYTES = WINDOW_SECONDS * BYTES_PER_SECOND;
+const TICK_MS = 1_000;
+/** Don't burn a pass when almost nothing new was heard. */
+const MIN_NEW_BYTES = BYTES_PER_SECOND * 0.35;
 
 /**
- * Starts listening. Loads both models into memory (seconds, reported via the
- * returned `loadMs`), opens the mic, and streams VAD-cut slices through the
- * recogniser. `promptPreviousSlices` stays false — feeding earlier text back
- * in reintroduces the repetition suppression Phase 0 measured, and the
- * Fatiha repeats itself.
+ * Starts listening. Loads the model into memory (seconds — `loadMs` reports
+ * it), opens the mic, and re-recognises the trailing window on a steady tick.
  */
 export async function startFollowSession(
   callbacks: FollowCallbacks,
@@ -209,75 +218,91 @@ export async function startFollowSession(
   /* Loaded here, not at module top: the web bundle must never execute the
      native entry points. */
   const whisper = await import('whisper.rn/index');
-  const realtime = await import('whisper.rn/realtime-transcription/index');
-  const adapters = await import('whisper.rn/realtime-transcription/adapters/AudioPcmStreamAdapter');
+  const { default: LiveAudioStream } = await import('@fugood/react-native-audio-pcm-stream');
+  const { Buffer } = await import('buffer');
 
   const t0 = Date.now();
   const whisperContext = await whisper.initWhisper({ filePath: fileFor(RECOGNITION).uri });
-  const vadContext = await whisper.initWhisperVad({ filePath: fileFor(VAD).uri });
   const loadMs = Date.now() - t0;
 
-  /* In dev the engine narrates itself to the Metro terminal. The freeze
-     reported on 31 Aug (stuck after ayah 1, old and new builds alike) is
-     invisible to static reading — these traces are how the next report
-     carries its own diagnosis. Production stays silent. */
-  const trace = __DEV__ ? (tag: string) => (m: string) => console.log(tag, m) : undefined;
-
-  const audioStream = new adapters.AudioPcmStreamAdapter();
-  /* The transcriber's contract is the ring-buffer wrapper, not the raw VAD
-     context — the README's shorthand elides it; the types do not. */
-  const vad = new realtime.RingBufferVad(vadContext, { logger: trace?.('[vad]') });
-
-  const slices = new Map<number, string>();
-
-  const transcriber = new realtime.RealtimeTranscriber(
-    { whisperContext, vadContext: vad, audioStream },
-    {
-      audioSliceSec: 15,
-      promptPreviousSlices: false,
-      transcribeOptions: { language: 'ar' },
-      logger: trace?.('[rt]'),
-    },
-    {
-      onTranscribe: (event: TranscribeEvent) => {
-        const text = event.data?.result;
-        if (typeof text === 'string') {
-          slices.set(event.sliceIndex ?? 0, text);
-          const joined = [...slices.entries()]
-            .sort(([a], [b]) => a - b)
-            .map(([, slice]) => slice)
-            .join(' ');
-          callbacks.onTranscript(joined);
-        }
-        if (typeof event.processTime === 'number') {
-          callbacks.onProcessTime?.(event.processTime);
-        }
-      },
-      onError: (error: unknown) => callbacks.onError(String(error)),
-    },
-  );
-
+  const chunks: Uint8Array[] = [];
+  let windowBytes = 0;
+  let newBytes = 0;
+  let inFlight = false;
   let stopped = false;
+
+  LiveAudioStream.init({
+    sampleRate: SAMPLE_RATE,
+    channels: 1,
+    bitsPerSample: 16,
+    audioSource: 6,
+    bufferSize: 16 * 1024,
+    wavFile: '',
+  });
+
+  LiveAudioStream.on('data', (base64Chunk: string) => {
+    if (stopped) return;
+    const chunk = new Uint8Array(Buffer.from(base64Chunk, 'base64'));
+    chunks.push(chunk);
+    windowBytes += chunk.length;
+    newBytes += chunk.length;
+    /* Slide: drop whole chunks off the front once past the window. */
+    while (windowBytes > WINDOW_BYTES && chunks.length > 1) {
+      windowBytes -= chunks[0].length;
+      chunks.shift();
+    }
+  });
+
+  const tick = async () => {
+    if (stopped || inFlight || newBytes < MIN_NEW_BYTES) return;
+    inFlight = true;
+    newBytes = 0;
+    const passStart = Date.now();
+    try {
+      const window = new Uint8Array(windowBytes);
+      let offset = 0;
+      for (const chunk of chunks) {
+        window.set(chunk, offset);
+        offset += chunk.length;
+      }
+      const { promise } = whisperContext.transcribeData(window.buffer as ArrayBuffer, {
+        language: 'ar',
+      });
+      const result = await promise;
+      if (!stopped && typeof result?.result === 'string') {
+        if (__DEV__) console.log('[follow]', `${Date.now() - passStart}ms`, result.result);
+        callbacks.onTranscript(result.result);
+        callbacks.onProcessTime?.(Date.now() - passStart);
+      }
+    } catch (error) {
+      /* One failed pass is not a dead session — the next tick tries again.
+         A dead context would fail every tick, which the log makes visible. */
+      if (__DEV__) console.log('[follow] pass failed:', String(error));
+      callbacks.onError(String(error));
+    } finally {
+      inFlight = false;
+    }
+  };
+  const timer = setInterval(() => void tick(), TICK_MS);
+
   const stop = async () => {
     if (stopped) return;
     stopped = true;
+    clearInterval(timer);
     try {
-      await transcriber.stop();
-      await transcriber.release();
+      await LiveAudioStream.stop();
     } catch {
-      /* stopping an already-stopped transcriber is not an event */
+      /* stopping an already-stopped mic is not an event */
     }
-    for (const context of [whisperContext, vadContext]) {
-      try {
-        await context.release();
-      } catch {
-        /* released is released */
-      }
+    try {
+      await whisperContext.release();
+    } catch {
+      /* released is released */
     }
   };
 
   try {
-    await transcriber.start();
+    LiveAudioStream.start();
   } catch (error) {
     await stop();
     throw error;

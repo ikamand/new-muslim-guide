@@ -90,10 +90,8 @@ export function ReciteFollow({ verses }: { verses: readonly { arabic: string }[]
   const download = useCallback(async () => {
     setState('downloading');
     try {
-      const ok = await downloadReciteModels((stage, percent) =>
-        setStatus(
-          `${t(stage === 'vad' ? 'recite.downloading.vad' : 'recite.downloading.recognition')} ${percent}%`,
-        ),
+      const ok = await downloadReciteModels((percent) =>
+        setStatus(`${t('recite.downloading.recognition')} ${percent}%`),
       );
       setStatus('');
       setState(ok ? 'ready' : 'download');

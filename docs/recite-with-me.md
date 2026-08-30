@@ -386,6 +386,17 @@ staying alive.
 3. **Whatever you want to add.** This document is meant to grow — new phases
    go under the table with their reasoning, the way the other plan docs do it.
 
+## After the gate — the library
+
+**Decided 30 Aug 2026, and it has its own document: `docs/recite-library.md`.**
+The follower and the session extract into Iyad's own long-term package — a
+library with a programming API, never a server — once the gate passes and the
+surface stops moving. That document also carries the maintenance ledger
+(every engine bug and fix so far) and the takedown insurance: the exact build
+tarballs are vendored in `vendor/`, and the original Tarteel weights are
+archived locally with checksums. Sessions touching the recite machinery
+should read it first.
+
 ## Backlog — raised, not decided
 
 - **Rehearsal mode** (the guided walk-through of a whole prayer, phone off the

@@ -366,6 +366,29 @@ export const EN = {
   'windows.note':
     'Praying early in the window is better. If one closes before you have prayed, see “I missed a prayer” under help.',
 
+  /*
+    The monthly jadwal.
+
+    Weekday column heads are the prayers' own names shortened to fit five
+    across a phone; `awqat.projected` is the one sentence of honesty the
+    whole table needs, and it is deliberately consistent with
+    `learn/voluntary-fasting.ts`, which promises the app will not date
+    ʿĀshūrāʾ or ʿArafah.
+  */
+  'awqat.title': 'Awqat',
+  'awqat.previous': 'Previous month',
+  'awqat.next': 'Next month',
+  'awqat.col.fajr': 'Fajr',
+  'awqat.col.dhuhr': 'Dhuhr',
+  'awqat.col.asr': 'ʿAsr',
+  'awqat.col.maghrib': 'Magh.',
+  'awqat.col.isha': 'ʿIshāʾ',
+  'awqat.col.hijri': 'Hijri',
+  'awqat.whiteDays': 'The white days',
+  'awqat.whiteDays.detail': 'Three sunnah fasting days mid-month',
+  'awqat.projected':
+    'The Hijri column follows the Umm al-Qura projection. The sacred dates — Ramadan, the Eids, ʿĀshūrāʾ, ʿArafah — are settled by the moon being sighted, so they are not printed here. Your mosque will know them in the week beforehand.',
+
   /**
    * Units for the counts on cards. A bare "14" tells a beginner nothing — it
    * could be minutes, pages, or things they are expected to have memorised.

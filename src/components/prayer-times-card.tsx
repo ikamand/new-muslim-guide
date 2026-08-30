@@ -251,13 +251,18 @@ function WindowsSheet({
 
 export function PrayerTimesCard({ action }: PrayerTimesCardProps) {
   const theme = useTheme();
-  const { t } = useLocale();
+  const { locale, t } = useLocale();
   const { status, coords } = useLocation();
   const { today, next, timezoneSuspect } = usePrayerTimes();
   const [windowsOpen, setWindowsOpen] = useState(false);
   // 5 is Friday in every locale — `getDay` is not localised, which is what
   // makes it safe to compare against a number here.
   const isFriday = new Date().getDay() === 5;
+  /*
+    The month link wears the month's own name — "September ›" — because "the
+    monthly timetable" is a mouthful and the name says where the tap lands.
+  */
+  const monthWord = new Intl.DateTimeFormat(locale, { month: 'long' }).format(new Date());
 
   if (status === 'denied' || status === 'unavailable') {
     return <NeedsLocation status={status} />;
@@ -349,15 +354,26 @@ export function PrayerTimesCard({ action }: PrayerTimesCardProps) {
         because it is used daily; the month link joins it when the monthly
         jadwal exists, rather than shipping as a dead tap.
       */}
-      <PressableLink
-        href="/qibla"
-        accessibilityLabel={t('qibla.title')}
-        style={[styles.quiet, { borderTopColor: theme.goldSoft }]}
-        pressedStyle={{ opacity: 0.6 }}>
-        <ThemedText type="smallBold" themeColor="gold">
-          {t('qibla.title')} ›
-        </ThemedText>
-      </PressableLink>
+      <View style={[styles.quiet, { borderTopColor: theme.goldSoft }]}>
+        <PressableLink
+          href="/awqat"
+          accessibilityLabel={t('awqat.title')}
+          style={styles.quietLink}
+          pressedStyle={{ opacity: 0.6 }}>
+          <ThemedText type="smallBold" themeColor="gold">
+            {monthWord} ›
+          </ThemedText>
+        </PressableLink>
+        <PressableLink
+          href="/qibla"
+          accessibilityLabel={t('qibla.title')}
+          style={styles.quietLink}
+          pressedStyle={{ opacity: 0.6 }}>
+          <ThemedText type="smallBold" themeColor="gold">
+            {t('qibla.title')} ›
+          </ThemedText>
+        </PressableLink>
+      </View>
 
       <WindowsSheet
         visible={windowsOpen}
@@ -429,10 +445,14 @@ const styles = StyleSheet.create({
     fontVariant: ['tabular-nums'],
   },
   quiet: {
-    alignItems: 'flex-end',
-    paddingTop: Spacing.three,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     marginTop: Spacing.one,
     borderTopWidth: StyleSheet.hairlineWidth,
+  },
+  quietLink: {
+    minHeight: 44,
+    justifyContent: 'center',
   },
   backdrop: {
     flex: 1,

@@ -1,0 +1,78 @@
+diff --git a/node_modules/whisper.rn/lib/commonjs/realtime-transcription/SliceManager.js b/node_modules/whisper.rn/lib/commonjs/realtime-transcription/SliceManager.js
+index 2758a33..beda0bf 100644
+--- a/node_modules/whisper.rn/lib/commonjs/realtime-transcription/SliceManager.js
++++ b/node_modules/whisper.rn/lib/commonjs/realtime-transcription/SliceManager.js
+@@ -28,11 +28,18 @@ class SliceManager {
+     const bytesPerSlice = this.sliceDurationSec * this.sampleRate * 2;
+ 
+     // Check if adding this data would exceed slice capacity
++    if (audioData.length > bytesPerSlice) {
++      let result = {};
++      for (let offset = 0; offset < audioData.length; offset += bytesPerSlice) {
++        result = this.addAudioData(audioData.subarray(offset, offset + bytesPerSlice));
++      }
++      return result;
++    }
+     if (currentSlice.sampleCount + audioData.length > bytesPerSlice) {
+       // Finalize current slice and create new one
+       this.finalizeCurrentSlice();
+       this.currentSliceIndex += 1;
+-      return this.addAudioData(audioData); // Recursively add to new slice
++      return this.addAudioData(audioData); // At most one level deep now
+     }
+ 
+     // Append data to current slice
+diff --git a/node_modules/whisper.rn/lib/module/realtime-transcription/SliceManager.js b/node_modules/whisper.rn/lib/module/realtime-transcription/SliceManager.js
+index cda9f12..9bdadfe 100644
+--- a/node_modules/whisper.rn/lib/module/realtime-transcription/SliceManager.js
++++ b/node_modules/whisper.rn/lib/module/realtime-transcription/SliceManager.js
+@@ -22,11 +22,18 @@ export class SliceManager {
+     const bytesPerSlice = this.sliceDurationSec * this.sampleRate * 2;
+ 
+     // Check if adding this data would exceed slice capacity
++    if (audioData.length > bytesPerSlice) {
++      let result = {};
++      for (let offset = 0; offset < audioData.length; offset += bytesPerSlice) {
++        result = this.addAudioData(audioData.subarray(offset, offset + bytesPerSlice));
++      }
++      return result;
++    }
+     if (currentSlice.sampleCount + audioData.length > bytesPerSlice) {
+       // Finalize current slice and create new one
+       this.finalizeCurrentSlice();
+       this.currentSliceIndex += 1;
+-      return this.addAudioData(audioData); // Recursively add to new slice
++      return this.addAudioData(audioData); // At most one level deep now
+     }
+ 
+     // Append data to current slice
+diff --git a/node_modules/whisper.rn/src/realtime-transcription/SliceManager.ts b/node_modules/whisper.rn/src/realtime-transcription/SliceManager.ts
+index 13b6b1b..cf019db 100644
+--- a/node_modules/whisper.rn/src/realtime-transcription/SliceManager.ts
++++ b/node_modules/whisper.rn/src/realtime-transcription/SliceManager.ts
+@@ -35,12 +35,24 @@ export class SliceManager {
+     // Calculate bytes per slice (2 bytes per sample for 16-bit PCM)
+     const bytesPerSlice = this.sliceDurationSec * this.sampleRate * 2
+ 
++    // A chunk larger than a whole slice can never fit, so the old
++    // recursion below never terminated on one - a stalled VAD queue handing
++    // over its backlog overflowed the call stack (patched locally; see
++    // patches/whisper.rn+*.patch). Split it into slice-sized pieces first.
++    if (audioData.length > bytesPerSlice) {
++      let result: { slice?: AudioSlice } = {}
++      for (let offset = 0; offset < audioData.length; offset += bytesPerSlice) {
++        result = this.addAudioData(audioData.subarray(offset, offset + bytesPerSlice))
++      }
++      return result
++    }
++
+     // Check if adding this data would exceed slice capacity
+     if (currentSlice.sampleCount + audioData.length > bytesPerSlice) {
+       // Finalize current slice and create new one
+       this.finalizeCurrentSlice()
+       this.currentSliceIndex += 1
+-      return this.addAudioData(audioData) // Recursively add to new slice
++      return this.addAudioData(audioData) // At most one level deep now
+     }
+ 
+     // Append data to current slice

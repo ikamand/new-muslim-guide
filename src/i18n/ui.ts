@@ -479,6 +479,8 @@ export const EN = {
   'recite.ayahOf': 'Ayah {a} of {total}',
   'recite.permission':
     'The microphone is off for this app, and recitation can only be followed if it can be heard. You can allow it in your phone’s settings.',
+  'recite.listeningHint':
+    'Recite out loud — each word lights up as it is heard.',
   'recite.error': 'Listening stopped. Try again.',
   'recite.complete': 'You recited it all the way through.',
   'settings.storage.recite': 'Recite with me — the listening models',

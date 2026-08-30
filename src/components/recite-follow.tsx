@@ -50,6 +50,16 @@ export function ReciteFollow({ verses }: { verses: readonly { arabic: string }[]
   >('closed');
   const [status, setStatus] = useState('');
   const [transcript, setTranscript] = useState('');
+  /*
+    The highlight never moves backwards. Streaming recognition REVISES its
+    partial text, and re-aligning a revised transcript can compute a smaller
+    position — on the first phone test the highlight visibly jumped back and
+    forth, which reads as the app changing its mind about the reader. A
+    teacher's finger only rests or moves on, so what is SHOWN is the
+    session's high-water mark, kept in the transcript handler; `held` and
+    `complete` still come from the live alignment.
+  */
+  const [shownPosition, setShownPosition] = useState(0);
   const session = useRef<FollowSession | undefined>(undefined);
 
   const alignment = align(reference, transcript);
@@ -102,9 +112,14 @@ export function ReciteFollow({ verses }: { verses: readonly { arabic: string }[]
     }
     setState('starting');
     setTranscript('');
+    setShownPosition(0);
     try {
       session.current = await startFollowSession({
-        onTranscript: setTranscript,
+        onTranscript: (text) => {
+          setTranscript(text);
+          const live = align(reference, text);
+          setShownPosition((prev) => Math.max(prev, live.position));
+        },
         onError: (message) => {
           /* Rule 2: the words dim; the reader is not interrupted. The log
              line is for the Metro terminal, not the screen. */
@@ -119,14 +134,14 @@ export function ReciteFollow({ verses }: { verses: readonly { arabic: string }[]
       setStatus(__DEV__ ? `${t('recite.error')} — ${String(error)}` : t('recite.error'));
       await stop();
     }
-  }, [stop, t]);
+  }, [reference, stop, t]);
 
   if (!canRecite || reference.length === 0) return null;
 
   /* The verse being recited: the one holding the next expected word. */
   const currentVerse =
-    alignment.position < reference.length
-      ? reference[alignment.position].verse
+    shownPosition < reference.length
+      ? reference[shownPosition].verse
       : reference[reference.length - 1].verse;
   const verseWords = reference.filter((word) => word.verse === currentVerse);
   const verseStart = reference.findIndex((word) => word.verse === currentVerse);
@@ -220,7 +235,7 @@ export function ReciteFollow({ verses }: { verses: readonly { arabic: string }[]
               verseStart={verseStart}
               currentVerse={currentVerse}
               totalVerses={totalVerses}
-              position={alignment.position}
+              position={shownPosition}
               held={alignment.held}
               onStop={() => void stop()}
             />
@@ -279,6 +294,11 @@ function ListeningBody({
         </Pressable>
       </View>
 
+      {position === 0 && !held ? (
+        <ThemedText type="caption" themeColor="textSecondary">
+          {t('recite.listeningHint')}
+        </ThemedText>
+      ) : null}
       <ThemedText type="arabicLead" style={styles.verse}>
         {verseWords.map((word, w) => (
           <Text

@@ -127,7 +127,8 @@ const CLAIMS = [
   */
   ['src/app/ask.tsx', 44, 'I farted'],
   ['src/content/model.ts', 182, 'export type ScholarlyPosition'],
-  ['src/i18n/ui.ts', 418, 'quran.tapToHide'],
+  /* 418 → 452 when the recite.* strings landed above it, 30 Aug 2026. */
+  ['src/i18n/ui.ts', 452, 'quran.tapToHide'],
   ['src/content/references.ts', 522, 'Friday midday is the busiest hour'],
   ['src/content/references.ts', 565, 'join the line where you are'],
   ['src/content/learn/halal-and-haram.ts', 38, 'Do I need permission for ordinary things?'],
@@ -206,13 +207,15 @@ const teachingMinutes = teaching.reduce((n, e) => n + (e.meta?.estimatedMinutes 
 /* 79 → 85: Phase 11's remaining six. */
 /* 85 → 88: Phase 13's three tier-three pages. */
 /* 88 → 92: the four vices — anger, showing-off, arrogance, envy. */
-measure('catalogue: non-hisn entries', teaching.length, 92);
+/* 92 → 93: `fasting-alone`, the one page docs/ramadan-mode.md adds. */
+measure('catalogue: non-hisn entries', teaching.length, 93);
 /*
   186 became 206 on 28 Aug 2026: the ninety-nine names declare 20 minutes.
   The 69 pages the plan measured are unchanged; a 70th was added beside them.
 */
 /* 291 → 310: the four vices declare 4, 5, 5 and 5 minutes. */
-measure('catalogue: total estimated minutes', teachingMinutes, 310);
+/* 310 → 314: fasting-alone's four minutes. */
+measure('catalogue: total estimated minutes', teachingMinutes, 314);
 measure('catalogue: hisn occasions', CATALOG.length - teaching.length, 132);
 
 const priority = (n) => teaching.filter((e) => e.meta?.beginnerPriority === n).length;
@@ -225,7 +228,8 @@ measure(
   teaching.filter((e) => e.meta?.beginnerPriority || e.meta?.difficulty).length,
   /* 52 → 53: the names collection carries meta. */
   /* 71 → 75: the four vices each carry both. */
-  75,
+  /* 75 → 76: fasting-alone, 30 Aug 2026. */
+  76,
 );
 
 // Journey lessons that are guides — the only kind that self-completes.

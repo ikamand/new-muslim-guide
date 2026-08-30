@@ -87,8 +87,8 @@ Enforced in code, not intention, when the screen is built (Phase 4):
 | **1** | [The gate](#phase-1--the-gate) | ⏳ The dev build is now its instrument | — a decision |
 | **2** | [The phone spike](#phase-2--the-phone-spike) | ⏳ Built 29 Aug · EAS build `48254b4c` queued | dev build |
 | **3** | [The aligner, for real](#phase-3--the-aligner-for-real) | ✅ Built 29 Aug | OTA |
-| **4** | [The screen](#phase-4--the-screen) | ⬜ Waits for the gate and eyes on the spike | OTA |
-| **5** | [The model as a download](#phase-5--the-model-as-a-download) | ⬜ Waits for the gate | **eas build** |
+| **4** | [The screen](#phase-4--the-screen) | ✅ Built 30 Aug — needs eyes on the dev build | OTA |
+| **5** | [The model as a download](#phase-5--the-model-as-a-download) | ✅ Built 30 Aug — convert-and-self-host still owed pre-ship | **eas build** |
 
 **The sequencing changed 29 Aug, on instruction.** The original rule — nothing
 past the gate is committed work — was Iyad's to unmake and he unmade it:
@@ -320,6 +320,21 @@ downloaded (the affordance explains, once), no mic permission, tracking,
 silence-on-loss. Copy for the mic prompt says on screen what rule 3 promises:
 nothing is recorded, nothing leaves the phone.
 
+### Built 30 Aug — and wider than planned, on Iyad's "build everything"
+
+`src/components/recite-follow.tsx`, a card under the reciter row on **every
+surah screen, not only /surah/1** — the generated Qur'an text is the
+reference, so all 38 surahs follow for free, and the prayer's recite step
+reaches it because that step already opens the surah screen (the open
+question about a second entry point dissolved). One ayah at a time, because
+the reciter holds the surah in memory, not their eyes. The five rules are the
+component's shape: nothing it can render expresses a score, a count or a
+wrong; `held` dims the words and says nothing; the machinery
+(`lib/recite-session.ts`, shared with /recite-spike so the instrument
+measures the real pipeline) is given no filesystem and no output path, so it
+cannot write audio even by accident. **Not seen on a phone yet** — the dev
+build is where this gets eyes, and the pilot rule holds until then.
+
 ## Phase 5 — The model as a download
 
 The 40–150 MB model is Phase-8 audio's shape exactly: fetched once, kept in
@@ -335,6 +350,19 @@ an `eas build`, and the fingerprint policy will correctly stop older builds
 receiving OTAs that assume it. The App Store privacy label survives — audio is
 processed on device, stored nowhere, sent nowhere — but the mic permission
 itself is a new question the store listing answers.
+
+### Built 30 Aug — download, verify, delete, credit
+
+`lib/recite-session.ts` owns both files: downloaded once into
+`Paths.document/recite-models/` (the Phase 8 pattern), verified against
+pinned byte sizes — which also catches an HTML error page saved as a model,
+the failure the redirect test produced — and deletable from the storage
+screen in Settings. The Tarteel row in `content/providers.ts` records the
+Apache-2.0 licence and is honest about being the file's ONE runtime-fetched
+entry. **Still owed before any public release, recorded in that row:**
+convert from `tarteel-ai/whisper-base-ar-quran` directly and host the file
+somewhere the app controls, rather than depending on a stranger's mirror
+staying alive.
 
 ---
 

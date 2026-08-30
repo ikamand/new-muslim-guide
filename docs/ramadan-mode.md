@@ -1,8 +1,11 @@
 # Ramadan mode
 
 **Status:** Agreed 29 August 2026 — Iyad: *"i like the whole ramadan mode
-idea, bake it in the plan."* **Nothing built.** Queued behind the
-recite-with-me work by his instruction the same day.
+idea, bake it in the plan."* **All four pieces built 30 Aug** on his "build
+everything" instruction — commit `de5986c`. ⚠️ **Nobody has seen any of it
+on a screen**: verification was `tsc`, the full check suite and a web export,
+and the pilot rule (eyes on R1 plus one arc card, mocked date, both themes)
+still stands before this is called done. R4 is on the scholarly-review pile.
 **Opened:** 29 August 2026, from the first-Ramadan-companion conversation.
 
 **The finding the design rests on:** the content already exists —
@@ -32,12 +35,19 @@ which is what cadence `yearly` was built to mean.
 
 ## The pieces
 
-| # | Piece | Ships via |
-|---|---|---|
-| **R1** | The fast line: suhoor and iftar from prayer times | OTA |
-| **R2** | `RAMADAN_ARC`: the season becomes phases | OTA |
-| **R3** | The suhoor wake-up: a setting, offered once | OTA |
-| **R4** | One new page: fasting where nobody else is | OTA + review |
+| # | Piece | State | Ships via |
+|---|---|---|---|
+| **R1** | The fast line: suhoor and iftar from prayer times | ✅ Built 30 Aug (`fast-line.tsx`, own line — the default held) | OTA |
+| **R2** | `RAMADAN_ARC`: the season becomes phases | ✅ Built 30 Aug (`ramadan-arc.ts`; the standing zakat candidate moved into it) | OTA |
+| **R3** | The suhoor wake-up: a setting, offered once | ✅ Built 30 Aug, plus the two window notes from build-order | OTA |
+| **R4** | One new page: fasting where nobody else is | ✅ Written 30 Aug (`learn/fasting-alone.ts`, Bukhari 1894 opened first) — ⚠️ unreviewed | OTA + review |
+
+**What R3 forced, and the app gained:** the notification schedule now has one
+owner, `useReminderSync` in the root layout. It lived on the Settings screen,
+so the twelve-day rolling window only topped up in sessions where Settings
+was opened — a pre-existing flaw the fast line's toggle would have widened.
+All four notification kinds flow through one plan, sorted by fire time and
+capped at 60 under the iOS pending limit of 64.
 
 ### R1 — The fast line
 

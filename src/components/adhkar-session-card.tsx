@@ -104,12 +104,9 @@ export function AdhkarSessionCard({
   return (
     <PressableLink
       href={{ pathname: '/adhkar/[id]', params: { id: session.id } }}
-      style={[
-        styles.card,
-        { backgroundColor: theme.backgroundElement, borderColor: theme.border },
-      ]}
+      style={[styles.card, { borderColor: theme.goldSoft }]}
       pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
-      <View style={[styles.rail, { backgroundColor: theme.accent }]} />
+      <View style={[styles.rail, { backgroundColor: theme.gold }]} />
       {/*
         Sentence case, not the uppercase kicker the cards elsewhere use. Those
         label a CATEGORY — "FOR ABOUT NOW", "NEXT" — and a deadline is not one.
@@ -136,8 +133,9 @@ export function AdhkarSessionCard({
       <ThemedText type="small" themeColor="textSecondary">
         {sessionMeta(session, t, { long: true })}
       </ThemedText>
-      <View style={[styles.start, { backgroundColor: theme.accent }]}>
-        <ThemedText type="smallBold" themeColor="textOnAccent">
+      <View
+        style={[styles.start, { backgroundColor: theme.action, borderColor: theme.actionRule }]}>
+        <ThemedText type="smallBold" themeColor="onAction">
           {t('adhkar.start')}
         </ThemedText>
       </View>
@@ -161,26 +159,36 @@ export function useLiveSession(): { session: AdhkarSession; state: WindowState }
 }
 
 const styles = StyleSheet.create({
+  /*
+    A panel between rules, like everything else on Today. It was the last
+    filled rectangle on the screen once the others went, and one card among
+    ruled blocks reads as a mistake rather than as emphasis.
+  */
   card: {
-    borderRadius: Radius.medium,
-    borderWidth: StyleSheet.hairlineWidth,
-    padding: Spacing.four,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    paddingVertical: Spacing.four,
+    paddingLeft: Spacing.three,
     gap: Spacing.two,
     overflow: 'hidden',
   },
-  /* The accent rail is what marks this as the live one among the sittings. */
+  /*
+    The rail still marks the live sitting among the others on the Duʿa tab,
+    but in gold and in the margin: a mark beside the text rather than a
+    coloured edge on a card. Illumination is exactly this job.
+  */
   rail: {
     position: 'absolute',
     left: 0,
-    top: 0,
-    bottom: 0,
-    width: 3,
+    top: Spacing.four,
+    bottom: Spacing.four,
+    width: 2,
   },
   arabic: { textAlign: 'right', writingDirection: 'rtl' },
   start: {
     marginTop: Spacing.two,
     minHeight: 44,
-    borderRadius: Radius.small,
+    borderRadius: Radius.rule,
+    borderWidth: StyleSheet.hairlineWidth,
     alignItems: 'center',
     justifyContent: 'center',
   },

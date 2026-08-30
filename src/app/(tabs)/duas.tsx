@@ -9,6 +9,7 @@ import {
   sessionMeta,
 } from '@/components/adhkar-session-card';
 import { DuaCard } from '@/components/dua-card';
+import { Shelf, Unwan } from '@/components/jadwal';
 import { ThemedText } from '@/components/themed-text';
 import { COLLECTIONS } from '@/content/collections';
 import { HISN } from '@/content/duas/hisn';
@@ -103,10 +104,7 @@ export default function DuasScreen() {
           so the sentence is not decoration.
         */}
         <View style={styles.header}>
-          <ThemedText type="subtitle">{t('tab.duas')}</ThemedText>
-          <ThemedText type="default" themeColor="textSecondary">
-            {t('duas.intro')}
-          </ThemedText>
+          <Unwan title={t('tab.duas')} subtitle={t('duas.intro')} />
         </View>
 
         {live ? <AdhkarSessionCard session={live} state={state} /> : null}
@@ -115,10 +113,8 @@ export default function DuasScreen() {
 
         {pinned.length > 0 ? (
           <View style={styles.group}>
-            <ThemedText type="caption" themeColor="textSecondary" style={styles.label}>
-              {`${t('adhkar.pinned')}  ·  ${pinned.length}`}
-            </ThemedText>
-            <View style={[styles.rows, { borderTopColor: theme.border }]}>
+            <Shelf label={t('adhkar.pinned')} count={pinned.length} />
+            <View style={styles.rows}>
               {pinned.map((occasion) => (
                 <Row
                   key={occasion.id}
@@ -137,7 +133,7 @@ export default function DuasScreen() {
           everything else. All the same row, because they are all "opens a list
           of things" and looking different would imply they are not.
         */}
-        <View style={[styles.rows, { borderTopColor: theme.border }]}>
+        <View style={styles.rows}>
           {ADHKAR_SESSIONS.filter((session) => session.id !== live?.id).map((session) => (
             <Row
               key={session.id}
@@ -218,7 +214,7 @@ function Row({
     <PressableLink
       href={href}
       accessibilityLabel={meta ? `${label}. ${meta}` : label}
-      style={[styles.row, { borderBottomColor: theme.border }]}
+      style={[styles.row, { borderBottomColor: theme.goldSoft }]}
       pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
       <View style={styles.rowHead}>
         <ThemedText type="default" themeColor={muted ? 'textSecondary' : 'text'}>
@@ -229,7 +225,7 @@ function Row({
           different things, so they do not get the same mark.
         */}
         {chevron ? (
-          <ThemedText type="default" themeColor="accent">
+          <ThemedText type="default" themeColor="gold">
             ›
           </ThemedText>
         ) : meta ? (
@@ -238,10 +234,19 @@ function Row({
           </ThemedText>
         ) : null}
       </View>
+      {/*
+        Gold, at the size a name deserves.
+
+        These come out of Hisn al-Muslim verbatim, and on the tab whose own
+        title is a word most readers do not have yet they are the thing worth
+        setting properly. Gold because a heading in this book is illuminated —
+        and `arabicName` because Amiri stacks marks high and the rung already
+        carries the line-height that stops rows colliding.
+      */}
       {arabic ? (
         <ThemedText
           type="arabicName"
-          themeColor={muted ? 'textSecondary' : 'text'}
+          themeColor={muted ? 'textSecondary' : 'gold'}
           style={styles.arabic}>
           {arabic}
         </ThemedText>
@@ -289,8 +294,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   group: { gap: Spacing.two },
-  label: { textTransform: 'uppercase', letterSpacing: 1 },
-  rows: { borderTopWidth: StyleSheet.hairlineWidth },
+  /*
+    No top rule. `Shelf` above already draws one with the group's name set
+    into it, and two lines a gap apart read as a mistake.
+  */
+  rows: {},
   row: {
     gap: Spacing.one,
     minHeight: 48,

@@ -3,6 +3,7 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { AskBar } from '@/components/ask-bar';
+import { Action, JadwalRow, Unwan } from '@/components/jadwal';
 import { DailyCollectionCard } from '@/components/daily-collection-card';
 import { AdhkarSessionCard, useLiveSession } from '@/components/adhkar-session-card';
 import { DuaCard } from '@/components/dua-card';
@@ -96,28 +97,26 @@ import type { UIKey } from '@/i18n/ui';
  * noticing an absence, which this screen promises it does not do.
  */
 function PrayAction({ prayer, wudu }: { prayer: Guide; wudu: Guide }) {
-  const theme = useTheme();
   const { t } = useLocale();
   const confidence = usePrayerConfidence();
   const fluent = confidence === 'on-my-own';
 
   return (
     <View style={styles.action}>
-      <PressableLink
+      {/*
+        The one pressable thing on Today.
+
+        `Action` is lapis, because gold is illumination and never a control.
+        The arrow is gone with it: a bar this wide, in the only saturated
+        colour on the screen, does not also need an icon to say it is a
+        button.
+      */}
+      <Action
         href={{ pathname: '/guide/[id]', params: { id: prayer.id } }}
         accessibilityLabel={`${t('home.prayNow')} ${prayer.title}`}
-        style={[styles.primary, { backgroundColor: theme.accent }]}
-        pressedStyle={{ opacity: 0.85 }}>
-        <ThemedText type="smallBold" themeColor="textOnAccent" style={styles.primaryLabel}>
-          {t('home.prayNow')} {prayer.title}
-        </ThemedText>
-        {fluent ? null : (
-          <ThemedText type="small" themeColor="textOnAccent" style={styles.primaryCount}>
-            {prayer.steps.length} {t('count.steps')}
-          </ThemedText>
-        )}
-        <Ionicons name="arrow-forward" size={18} color={theme.textOnAccent} />
-      </PressableLink>
+        label={`${t('home.prayNow')} ${prayer.title}`}
+        meta={fluent ? undefined : `${prayer.steps.length} ${t('count.steps')}`}
+      />
 
       {/*
         Wudu is a precondition, not a sibling. It used to sit in a section of
@@ -158,21 +157,28 @@ function Header() {
   return (
     <View style={styles.header}>
       {/*
-        A greeting rather than "Welcome". It is the first Arabic most converts
-        learn, it is what they will be greeted with, and reading it daily in
-        the app is how it stops being foreign.
+        The greeting and the date, as an ʿunwān — the illuminated headpiece
+        that opens a chapter.
+
+        They were a `subtitle` and a `small` line floating above the first
+        card, which read as the first item in a list. Between two gold rules
+        they read as what the page is called, and the Hijri date stops looking
+        like a debug line and starts looking like it belongs to a calendar.
+
+        The greeting is Arabic rather than "Welcome": it is the first Arabic
+        most converts learn, it is what they will be greeted with, and reading
+        it daily is how it stops being foreign. The date is absent entirely
+        where the platform has no Umm al-Qura data, rather than falling back
+        to arithmetic of our own.
       */}
-      <ThemedText type="subtitle">{t('home.greeting')}</ThemedText>
-      {/*
-        Absent entirely where the platform has no Umm al-Qura data, rather than
-        falling back to arithmetic of our own. Shown rather than used silently,
-        so a reader whose mosque is a day ahead can see what the app thinks.
-      */}
-      <ThemedText type="small" themeColor="textSecondary">
-        {hijri
-          ? `${hijri.day} ${t(`hijri.month.${hijri.month}` as UIKey)} ${hijri.year} · ${weekday}`
-          : weekday}
-      </ThemedText>
+      <Unwan
+        title={t('home.greeting')}
+        subtitle={
+          hijri
+            ? `${hijri.day} ${t(`hijri.month.${hijri.month}` as UIKey)} ${hijri.year} · ${weekday}`
+            : weekday
+        }
+      />
       {/*
         Chrome rather than a card, and inside the header rather than below it,
         so the prayer times stay the first piece of content on the screen. The
@@ -193,28 +199,14 @@ function TodayRow({ item }: { item: TodayItem }) {
   const reason = t(item.reason);
 
   return (
-    <PressableLink
+    <JadwalRow
       href={item.href}
       accessibilityLabel={`${reason}. ${item.title}. ${item.description}`}
-      style={[
-        styles.todayRow,
-        { backgroundColor: theme.backgroundElement, borderColor: theme.border },
-      ]}
-      pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
-      <View style={styles.todayText}>
-        <ThemedText type="small" themeColor="accent" style={styles.kicker}>
-          {reason}
-        </ThemedText>
-        <ThemedText type="cardTitle">
-          {item.title}
-        </ThemedText>
-        <ThemedText type="small" themeColor="textSecondary">
-          {item.description}
-          {item.minutes ? ` · ${item.minutes} ${t('count.minutes')}` : ''}
-        </ThemedText>
-      </View>
-      <Ionicons name="arrow-forward" size={18} color={theme.accent} />
-    </PressableLink>
+      kicker={reason}
+      title={item.title}
+      meta={`${item.description}${item.minutes ? ` · ${item.minutes} ${t('count.minutes')}` : ''}`}
+      trailing={<Ionicons name="chevron-forward" size={14} color={theme.gold} />}
+    />
   );
 }
 
@@ -317,26 +309,8 @@ const styles = StyleSheet.create({
   list: {
     gap: Spacing.two,
   },
-  kicker: {
-    textTransform: 'uppercase',
-    letterSpacing: 1,
-  },
   action: {
     gap: Spacing.two,
-  },
-  primary: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: Spacing.two,
-    minHeight: 52,
-    paddingHorizontal: Spacing.three,
-    borderRadius: Radius.small,
-  },
-  primaryLabel: {
-  },
-  primaryCount: {
-    opacity: 0.72,
   },
   wuduLine: {
     flexDirection: 'row',
@@ -373,19 +347,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.three,
     borderRadius: Radius.small,
     borderWidth: StyleSheet.hairlineWidth,
-  },
-  todayRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    gap: Spacing.three,
-    padding: Spacing.three,
-    borderRadius: Radius.medium,
-    borderWidth: StyleSheet.hairlineWidth,
-  },
-  todayText: {
-    flex: 1,
-    gap: 2,
   },
   chips: {
     flexDirection: 'row',

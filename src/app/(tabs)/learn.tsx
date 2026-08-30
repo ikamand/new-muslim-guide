@@ -3,7 +3,8 @@ import { type Href } from 'expo-router';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { GirihBand, Glyph, StagePath, type GlyphName } from '@/components/illustrations';
+import { GirihBand, StagePath } from '@/components/illustrations';
+import { JadwalRow, QuietRow, Rosette, Shelf, Unwan } from '@/components/jadwal';
 import { CURRENCIES } from '@/content/nisab';
 import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
@@ -60,60 +61,6 @@ const SHAHADA_KEY = stepKey({ kind: 'guide', id: 'shahada' });
  * The keys are reference ids. A topic with no entry still renders — it simply
  * has no tile, which is better than reaching for a glyph that means nothing.
  */
-const TOPIC_GLYPH: Record<string, GlyphName> = {
-  mosque: 'mosque',
-  wudu: 'wudu',
-  // The prayer guides share one mark; Fajr is the one the tab shows.
-  fajr: 'prayer',
-  dhuhr: 'prayer',
-  asr: 'prayer',
-  maghrib: 'prayer',
-  isha: 'prayer',
-  'before-prayer': 'before-prayer',
-  'al-fatihah': 'al-fatihah',
-  'what-breaks-prayer': 'what-breaks-prayer',
-  'dua-and-dhikr': 'dua-and-dhikr',
-  'what-is-islam': 'what-is-islam',
-  'who-is-allah': 'who-is-allah',
-  'who-is-muhammad': 'who-is-muhammad',
-  'what-is-the-quran': 'what-is-the-quran',
-  sunnah: 'sunnah',
-  food: 'food',
-  clothing: 'clothing',
-  'halal-and-haram': 'halal-and-haram',
-  family: 'family',
-  work: 'work',
-  manners: 'manners',
-  repentance: 'repentance',
-  'patience-and-gratitude': 'patience-and-gratitude',
-  ramadan: 'ramadan',
-  'islamic-calendar': 'islamic-calendar',
-  'quranic-names': 'names',
-  'minimum-prayer': 'minimum-prayer',
-  adhan: 'adhan',
-  rulings: 'rulings',
-  'your-name': 'your-name',
-  'life-before': 'life-before',
-  // 29 Aug: the seventeen that were still bare. Every card carries a mark
-  // now — a lone unmarked card read as a mistake, and was one.
-  'behind-an-imam': 'behind-an-imam',
-  'quranic-duas': 'quranic-duas',
-  'why-people-differ': 'why-people-differ',
-  'marriage-shape': 'marriage-shape',
-  'a-partner-already': 'a-partner-already',
-  jumuah: 'jumuah',
-  janazah: 'janazah',
-  'small-sunnahs': 'small-sunnahs',
-  'teaching-someone': 'teaching-someone',
-  'if-you-stopped': 'if-you-stopped',
-  'being-corrected': 'being-corrected',
-  anger: 'anger',
-  'showing-off': 'showing-off',
-  arrogance: 'arrogance',
-  envy: 'envy',
-  'voluntary-fasting': 'voluntary-fasting',
-  eid: 'eid',
-};
 
 function LearnCard({
   href,
@@ -121,8 +68,7 @@ function LearnCard({
   subtitle,
   count,
   unit,
-  glyph,
-  wide = false,
+  index,
   progress,
 }: {
   href: Href;
@@ -130,66 +76,41 @@ function LearnCard({
   subtitle: string;
   count: number;
   unit: UIKey;
-  glyph?: GlyphName;
-  /** Full width, with the subtitle showing. For a card that carries a group. */
-  wide?: boolean;
-  /**
-   * How far through this lesson the reader got before leaving, 0..1.
-   * Drawn as a thin line along the card's foot — a bookmark, not a score.
-   */
+  /** Its place within its shelf, drawn as a rosette in the margin. */
+  index: number;
+  /** How far through this the reader got before leaving, 0..1. */
   progress?: number;
 }) {
   const theme = useTheme();
   const { t } = useLocale();
 
+  /*
+    One shape, full width, always.
+
+    This used to be two — a half-width tile and a wide row — with a measured
+    pairing pass deciding which, plus a per-topic glyph tile to tell twenty
+    near-identical rows apart. All of that existed to fight the same problem:
+    a flat list of equals reads as a wall.
+
+    The shelf rules and the marginal numbers solve it instead, and they solve
+    it with information rather than with decoration — a numeral says how deep
+    a shelf runs, and a glyph never did. Both the pairing pass and the
+    forty-seven-entry glyph table are gone with the tile.
+
+    ⚠️ This is the change on this tab most worth looking at on a device. If
+    ruled rows rebuild the wall the tiles were added to break, the tile is one
+    revert away.
+  */
   return (
-    <PressableLink
+    <JadwalRow
       href={href}
       accessibilityLabel={`${title}. ${subtitle}. ${count} ${t(unit)}`}
-      style={[
-        styles.card,
-        wide ? styles.cardWide : styles.cardTile,
-        { backgroundColor: theme.backgroundElement, borderColor: theme.border },
-      ]}
-      pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
-      {glyph && (
-        <View style={[styles.tile, { backgroundColor: theme.accentMuted }]}>
-          <Glyph name={glyph} color={theme.accent} />
-        </View>
-      )}
-      <View style={styles.cardText}>
-        <ThemedText type="cardTitle" numberOfLines={3}>
-          {title}
-        </ThemedText>
-        {/*
-          A tile shows the count where a row shows the sentence. Two lines of
-          subtitle in a half-width card is four lines of text, which is what
-          turned the old full-width list into a wall — and the count is the
-          part that tells you whether this is a minute or an afternoon.
-        */}
-        <ThemedText type="small" themeColor="textSecondary" numberOfLines={wide ? 2 : 1}>
-          {wide ? subtitle : `${count} ${t(unit)}`}
-        </ThemedText>
-      </View>
-      {wide && (
-        <View style={styles.count}>
-          <ThemedText type="smallBold" themeColor="accent">
-            {count}
-          </ThemedText>
-          <ThemedText type="caption" themeColor="textSecondary">
-            {t(unit)}
-          </ThemedText>
-        </View>
-      )}
-      {progress !== undefined && progress > 0 && (
-        <View
-          style={[
-            styles.bookmark,
-            { width: `${Math.round(progress * 100)}%`, backgroundColor: theme.accent },
-          ]}
-        />
-      )}
-    </PressableLink>
+      marginal={<Rosette label={String(index)} />}
+      title={title}
+      meta={`${subtitle} · ${count} ${t(unit)}`}
+      progress={progress}
+      trailing={<Ionicons name="chevron-forward" size={14} color={theme.gold} />}
+    />
   );
 }
 
@@ -275,7 +196,7 @@ function ShahadaCard() {
       accessibilityLabel={`${t('learn.shahada.title')}. ${t('learn.shahada.subtitle')}`}
       style={[
         styles.featured,
-        { backgroundColor: theme.backgroundElement, borderColor: theme.border },
+        { borderColor: theme.goldSoft },
       ]}
       pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
       <View style={[styles.band, { backgroundColor: theme.accentMuted }]}>
@@ -288,8 +209,8 @@ function ShahadaCard() {
             {t('learn.shahada.subtitle')}
           </ThemedText>
         </View>
-        <View style={[styles.featuredAction, { backgroundColor: theme.accent }]}>
-          <ThemedText type="smallBold" themeColor="textOnAccent">
+        <View style={[styles.featuredAction, { backgroundColor: theme.action }]}>
+          <ThemedText type="smallBold" themeColor="onAction">
             {`${SHAHADA_STEP_COUNT} ${t('count.steps')}`}
           </ThemedText>
           <Ionicons name="arrow-forward" size={14} color={theme.textOnAccent} />
@@ -347,7 +268,7 @@ function WhereYouAre() {
       accessibilityLabel={`${t('learn.where.kicker')}. ${
         stage ? t(`journey.stage.${stage.id}` as UIKey) : t('learn.where.done')
       }`}
-      style={[styles.journey, { backgroundColor: theme.backgroundElement, borderColor: theme.border }]}
+      style={[styles.journey, { borderColor: theme.goldSoft }]}
       pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
       <View style={styles.cardText}>
         <ThemedText type="caption" themeColor="textSecondary" style={styles.kicker}>
@@ -384,11 +305,16 @@ function WhereYouAre() {
         </View>
       ) : null}
 
-      <View style={[styles.journeyAction, { backgroundColor: theme.accent }]}>
-        <ThemedText type="smallBold" themeColor="textOnAccent" style={styles.journeyActionLabel}>
+      {/*
+        `action`, not `accent`. In dark they are two different blues, so a tab
+        carrying both showed two primary buttons in two colours — the shahada
+        panel's and this one's. `action` is the one a control takes.
+      */}
+      <View style={[styles.journeyAction, { backgroundColor: theme.action }]}>
+        <ThemedText type="smallBold" themeColor="onAction" style={styles.journeyActionLabel}>
           {t('journey.carryOn')}
         </ThemedText>
-        <Ionicons name="arrow-forward" size={18} color={theme.textOnAccent} />
+        <Ionicons name="arrow-forward" size={18} color={theme.onAction} />
       </View>
     </PressableLink>
   );
@@ -408,8 +334,6 @@ type CardSpec = {
   subtitle: string;
   count: number;
   unit: UIKey;
-  glyph?: GlyphName;
-  wide: boolean;
   progress?: number;
 };
 
@@ -427,37 +351,74 @@ type CardSpec = {
  * built for full width. Measured rather than hand-flagged, so regrouping a
  * topic never leaves a balloon behind.
  */
-function pairTiles(cards: CardSpec[]): CardSpec[] {
-  const out = cards.map((card) => ({ ...card }));
-  let runStart = -1;
 
-  for (let i = 0; i <= out.length; i += 1) {
-    const isTile = i < out.length && !out[i].wide;
-    if (isTile && runStart === -1) runStart = i;
-    if (!isTile && runStart !== -1) {
-      if ((i - runStart) % 2 === 1) out[i - 1].wide = true;
-      runStart = -1;
-    }
+
+/**
+ * The shelf of things you return to rather than read once.
+ *
+ * A function of `t` rather than a constant, because the titles are localised
+ * and the tab re-renders on a language change. Built as a list so the
+ * marginal numerals stay consecutive when `SHOW_PRACTICE` is false — written
+ * out as four rows, the practice row's absence left a gap in the numbering,
+ * which is the one thing a contents page must never do.
+ *
+ * No duʿa row here. `/duas` IS the Duʿa tab, so it was a link from one tab to
+ * another already sitting in the bar underneath it, and it took the place
+ * where something unreachable could have gone.
+ *
+ * Practice is hidden while Al-Fatiha is the only thing recorded, because the
+ * Qur'an tab does those seven ayahs better in every respect. It returns on
+ * its own the day a clip lands that is not a surah.
+ */
+function REFERENCE_SHELF(t: (key: UIKey) => string): CardSpec[] {
+  /*
+    Built by pushing rather than by spreading a conditional array: a spread's
+    inner literal is not contextually typed, so every `href` widened to
+    `string` and lost the typed-routes check that is the point of turning
+    them on.
+  */
+  const rows: CardSpec[] = [
+    {
+      key: 'screen:phrases',
+      href: '/phrases',
+      title: t('learn.phrases.title'),
+      subtitle: t('learn.phrases.subtitle'),
+      count: PHRASES.length,
+      unit: 'count.phrases',
+    },
+  ];
+
+  if (SHOW_PRACTICE) {
+    rows.push({
+      key: 'screen:practice',
+      href: '/practice',
+      title: t('learn.practice.title'),
+      subtitle: t('learn.practice.subtitle'),
+      count: PRACTICE_CLIP_COUNT,
+      unit: 'count.clips',
+    });
   }
 
-  return out;
-}
-
-/** A group's name, with a rule running out to its count. */
-function GroupHeading({ label, count }: { label: string; count?: number }) {
-  const theme = useTheme();
-
-  return (
-    <View style={styles.groupHeading}>
-      <ThemedText type="sectionTitle">{label}</ThemedText>
-      <View style={[styles.rule, { backgroundColor: theme.border }]} />
-      {count !== undefined && (
-        <ThemedText type="caption" themeColor="textSecondary">
-          {count}
-        </ThemedText>
-      )}
-    </View>
+  rows.push(
+    {
+      key: 'screen:iman',
+      href: '/iman',
+      title: t('learn.iman.title'),
+      subtitle: t('learn.iman.subtitle'),
+      count: IMAN_PILLARS.length,
+      unit: 'count.articles',
+    },
+    {
+      key: 'screen:pillars',
+      href: '/pillars',
+      title: t('learn.pillars.title'),
+      subtitle: t('learn.pillars.subtitle'),
+      count: PILLARS.length,
+      unit: 'count.pillars',
+    },
   );
+
+  return rows;
 }
 
 export default function LearnScreen() {
@@ -480,8 +441,7 @@ export default function LearnScreen() {
     <SafeAreaView style={[styles.safeArea, { backgroundColor: theme.background }]} edges={['top']}>
       <ScrollView contentContainerStyle={styles.content}>
         <View style={styles.header}>
-          <ThemedText type="subtitle">{t('learn.title')}</ThemedText>
-          <ThemedText type="default" themeColor="textSecondary">{t('learn.intro')}</ThemedText>
+          <Unwan title={t('learn.title')} subtitle={t('learn.intro')} />
         </View>
 
         <ShahadaCard />
@@ -494,16 +454,11 @@ export default function LearnScreen() {
           line is the one place on the tab allowed to change day to day.
         */}
         {readingNow && (
-          <PressableLink
+          <QuietRow
             href={routeFor(readingNow.entry)}
-            accessibilityLabel={`${t('today.reading')}: ${readingNow.entry.title}`}
-            style={[styles.linkRow, { borderTopColor: theme.border }]}
-            pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
-            <ThemedText type="small" themeColor="textSecondary" numberOfLines={1} style={styles.readingLine}>
-              {t('today.reading')}: <ThemedText type="smallBold">{readingNow.entry.title}</ThemedText>
-            </ThemedText>
-            <Ionicons name="arrow-forward" size={14} color={theme.accent} />
-          </PressableLink>
+            label={t('today.reading')}
+            value={readingNow.entry.title}
+          />
         )}
 
         {/*
@@ -514,14 +469,7 @@ export default function LearnScreen() {
           the firsts are what they look at rarely. `content/firsts.ts` explains
           why there is no count on either side of this link.
         */}
-        <PressableLink
-          href="/firsts"
-          accessibilityLabel={t('firsts.title')}
-          style={[styles.linkRow, { borderTopColor: theme.border }]}
-          pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
-          <ThemedText type="small" themeColor="textSecondary">{t('firsts.open')}</ThemedText>
-          <Ionicons name="arrow-forward" size={14} color={theme.accent} />
-        </PressableLink>
+        <QuietRow href="/firsts" label={t('firsts.open')} accessibilityLabel={t('firsts.title')} />
 
         {/*
           Grouped by when the question arrives, not by subject.
@@ -547,8 +495,6 @@ export default function LearnScreen() {
               subtitle: t('learn.toPray.subtitle'),
               count: DAILY_PRAYERS.length,
               unit: 'count.prayers',
-              glyph: 'prayer',
-              wide: true,
             });
           }
           if (group.id === 'year') {
@@ -560,8 +506,6 @@ export default function LearnScreen() {
               /* Currencies, because that is what the screen asks you to pick. */
               count: CURRENCIES.length,
               unit: 'zakat.currencies',
-              glyph: 'zakat',
-              wide: true,
             });
           }
 
@@ -587,30 +531,18 @@ export default function LearnScreen() {
                 topic.pieceUnit === 'minutes'
                   ? ('count.minutes.long' as UIKey)
                   : (`count.${topic.pieceUnit}` as UIKey),
-              glyph: TOPIC_GLYPH[topic.id],
               progress: reading[`${topic.kind}:${topic.id}`]?.furthest,
-              /*
-                A long title takes the whole row rather than being
-                truncated into one. "What you need before you pray" came
-                out as "What you need before …" in a half tile, which
-                hides the words that make it findable — and the ellipsis
-                is worse than the extra row it saves.
-
-                Measured rather than listed, so a retitled topic gets the
-                right shape without anybody remembering to update a table.
-              */
-              wide: topic.title.length > 22,
             }));
 
           return (
             <View key={group.id} style={styles.section}>
-              <GroupHeading
+              <Shelf
                 label={t(`learn.group.${group.id}` as UIKey)}
                 count={group.topics.length}
               />
               <View style={styles.list}>
-                {pairTiles([...specials, ...topics]).map(({ key, ...card }) => (
-                  <LearnCard key={key} {...card} />
+                {[...specials, ...topics].map(({ key, ...card }, i) => (
+                  <LearnCard key={key} {...card} index={i + 1} />
                 ))}
               </View>
             </View>
@@ -619,57 +551,27 @@ export default function LearnScreen() {
 
         {/* The things you return to rather than read once. */}
         <View style={styles.section}>
-          <GroupHeading label={t('learn.group.reference')} />
+          <Shelf label={t('learn.group.reference')} />
           <View style={styles.list}>
-            <LearnCard
-              wide
-              href="/phrases"
-              title={t('learn.phrases.title')}
-              subtitle={t('learn.phrases.subtitle')}
-              count={PHRASES.length}
-              unit="count.phrases"
-              glyph="phrases"
-            />
             {/*
-              No duʿa card here. `/duas` IS the Duʿa tab, so this row was a
-              full-width link from one tab to another one already sitting in
-              the bar underneath it — and it took the place where something
+              An array rather than four hand-written rows, so the marginal
+              numerals stay consecutive when `SHOW_PRACTICE` is false. Written
+              out, the practice row's absence left a gap in the numbering —
+              which is the sort of thing a contents page must never do.
+
+              No duʿa card here. `/duas` IS the Duʿa tab, so that row was a
+              link from one tab to another already sitting in the bar
+              underneath it, and it took the place where something
               unreachable could have gone.
+
+              Practice is hidden while Al-Fatiha is the only thing recorded,
+              because the Qur'an tab does those seven ayahs better in every
+              respect. It returns on its own the day a clip lands that is not
+              a surah.
             */}
-            {/*
-              Hidden while Al-Fatiha is the only thing recorded, because the
-              Qur'an tab now does those seven ayahs better in every respect.
-              Returns on its own the day a clip lands that is not a surah.
-            */}
-            {SHOW_PRACTICE && (
-              <LearnCard
-                wide
-                href="/practice"
-                title={t('learn.practice.title')}
-                subtitle={t('learn.practice.subtitle')}
-                count={PRACTICE_CLIP_COUNT}
-                unit="count.clips"
-                glyph="practice"
-              />
-            )}
-            <LearnCard
-              wide
-              href="/iman"
-              title={t('learn.iman.title')}
-              subtitle={t('learn.iman.subtitle')}
-              count={IMAN_PILLARS.length}
-              unit="count.articles"
-              glyph="iman"
-            />
-            <LearnCard
-              wide
-              href="/pillars"
-              title={t('learn.pillars.title')}
-              subtitle={t('learn.pillars.subtitle')}
-              count={PILLARS.length}
-              unit="count.pillars"
-              glyph="pillars"
-            />
+            {REFERENCE_SHELF(t).map(({ key, ...card }, i) => (
+              <LearnCard key={key} {...card} index={i + 1} />
+            ))}
           </View>
         </View>
       </ScrollView>
@@ -698,42 +600,27 @@ const styles = StyleSheet.create({
     gap: Spacing.three,
   },
   /** The group's name, a rule running out from it, and the count at the end. */
-  groupHeading: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: Spacing.three,
-  },
-  rule: {
-    flex: 1,
-    height: StyleSheet.hairlineWidth,
-  },
   sectionTitle: {
     textTransform: 'uppercase',
     letterSpacing: 1,
   },
   /** Was Spacing.three here and Spacing.two on the Pray tab. Now both are two. */
-  list: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: Spacing.two,
-  },
-  card: {
-    borderRadius: Radius.medium,
-    borderWidth: StyleSheet.hairlineWidth,
-    /* So the bookmark line clips to the rounded corners. */
-    overflow: 'hidden',
-  },
+  /*
+    A column. This was the tile grid — `row` + `wrap` — and it survived the
+    tiles going: ruled rows inside a row-direction container size to their
+    content instead of stretching, so every long meta line ran off the right
+    edge and took its chevron with it. `minWidth` was not the problem; the
+    axis was.
+  */
+  list: {},
+  /*
+    A panel, not a card. The girih band across its head is what marks this as
+    the one thing on the tab a reader who has not said the shahada should not
+    have to pick out of a list — a fill and a border around it as well was the
+    same claim made twice, and it left two rounded rectangles sitting above
+    fifty ruled rows.
+  */
   /** Where the reader got to, along the card's foot. Quiet on purpose. */
-  bookmark: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    height: 3,
-    opacity: 0.55,
-  },
-  readingLine: {
-    flex: 1,
-  },
   /**
    * Two to a row, glyph above the title.
    *
@@ -742,42 +629,15 @@ const styles = StyleSheet.create({
    * rather than read: the mark catches the eye first, the title second, and
    * six of them fit in the space four rows took.
    */
-  cardTile: {
-    flexBasis: '48%',
-    flexGrow: 1,
-    gap: Spacing.two,
-    padding: Spacing.three,
-    minHeight: 116,
-  },
   /** Full width, for the reference strip where the sentence earns its room. */
-  cardWide: {
-    flexBasis: '100%',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    gap: Spacing.three,
-    padding: Spacing.three,
-  },
-  tile: {
-    width: 40,
-    height: 40,
-    borderRadius: Radius.small,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   cardText: {
     flex: 1,
     gap: 2,
   },
-  count: {
-    alignItems: 'flex-end',
-    gap: 1,
-  },
   journey: {
     gap: Spacing.three,
-    padding: Spacing.three,
-    borderRadius: Radius.medium,
-    borderWidth: StyleSheet.hairlineWidth,
+    paddingVertical: Spacing.four,
+    borderBottomWidth: StyleSheet.hairlineWidth,
   },
   journeyHead: {
     flexDirection: 'row',
@@ -793,14 +653,6 @@ const styles = StyleSheet.create({
     that one is tuned to sit tight under the tab's own intro, and reusing it
     here pulled the row up into the card above.
   */
-  linkRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    gap: Spacing.two,
-    borderTopWidth: StyleSheet.hairlineWidth,
-    paddingTop: Spacing.three,
-  },
   /* A rule and a line. Not a card — see `ShahadaCard`. */
   keepsake: {
     flexDirection: 'row',
@@ -832,9 +684,15 @@ const styles = StyleSheet.create({
   journeyProgress: {
     paddingTop: Spacing.one,
   },
+  /*
+    A panel, not a card. The girih band across its head is what marks this as
+    the one thing on the tab a reader who has not said the shahada should not
+    have to pick out of a list — a fill and a rounded border as well was the
+    same claim made twice, and it left the only rectangle on a tab of fifty
+    ruled rows.
+  */
   featured: {
-    borderRadius: Radius.medium,
-    borderWidth: StyleSheet.hairlineWidth,
+    borderBottomWidth: StyleSheet.hairlineWidth,
     overflow: 'hidden',
   },
   band: {
@@ -845,7 +703,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: Spacing.three,
-    padding: Spacing.three,
+    paddingVertical: Spacing.three,
   },
   featuredAction: {
     flexDirection: 'row',
@@ -853,6 +711,6 @@ const styles = StyleSheet.create({
     gap: Spacing.two,
     minHeight: 44,
     paddingHorizontal: Spacing.three,
-    borderRadius: Radius.small,
+    borderRadius: Radius.rule,
   },
 });

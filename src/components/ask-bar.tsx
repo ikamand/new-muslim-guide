@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 
 import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
-import { Radius, Spacing } from '@/constants/theme';
+import { Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { useTheme } from '@/hooks/use-theme';
 
@@ -44,22 +44,28 @@ export function AskBar() {
     <PressableLink
       href="/ask"
       accessibilityLabel={t('ask.open')}
-      style={[
-        styles.bar,
-        { backgroundColor: theme.backgroundElement, borderColor: theme.border },
-      ]}
+      style={[styles.bar, { borderBottomColor: theme.goldSoft }]}
       pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
       <Ionicons name="search-outline" size={18} color={theme.textSecondary} />
       <ThemedText type="small" themeColor="textSecondary" style={styles.placeholder}>
         {t('ask.placeholder')}
       </ThemedText>
-      <View style={[styles.divider, { backgroundColor: theme.border }]} />
+      <View style={[styles.divider, { backgroundColor: theme.goldSoft }]} />
       <Ionicons name="scan-outline" size={18} color={theme.textSecondary} />
     </PressableLink>
   );
 }
 
 const styles = StyleSheet.create({
+  /*
+    A ruled line, not a field.
+
+    It used to be a filled box with a border and a radius, sitting directly
+    above the prayer times — so the screen opened with two boxes competing,
+    and the search won on contrast. Under the jadwal grammar the page is the
+    container: this is a rule with words on it, which reads as chrome and
+    lets `PrayerTimesCard` be the first thing anybody sees.
+  */
   bar: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -67,9 +73,7 @@ const styles = StyleSheet.create({
     /* 48 rather than the 44 minimum: this is the widest target on the screen
        and the one someone reaches furthest for. */
     minHeight: 48,
-    paddingHorizontal: Spacing.three,
-    borderRadius: Radius.small,
-    borderWidth: StyleSheet.hairlineWidth,
+    borderBottomWidth: StyleSheet.hairlineWidth,
   },
   placeholder: {
     flex: 1,

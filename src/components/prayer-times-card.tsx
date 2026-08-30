@@ -15,10 +15,7 @@ function Shell({ children }: { children: React.ReactNode }) {
   const theme = useTheme();
   return (
     <View
-      style={[
-        styles.card,
-        { backgroundColor: theme.backgroundElement, borderColor: theme.border },
-      ]}>
+      style={[styles.card, { borderColor: theme.goldSoft }]}>
       {children}
     </View>
   );
@@ -79,11 +76,14 @@ function TimeCell({
   const theme = useTheme();
 
   return (
-    <View
-      style={[
-        styles.cell,
-        isNext && { backgroundColor: theme.accentMuted, borderRadius: Radius.small },
-      ]}>
+    /*
+      The next prayer is marked in gold, not by a filled pill.
+
+      A pill is a second container inside a screen that just removed all of
+      them, and it made the live cell look pressable when it is not. Gold is
+      how this page marks the thing you are on.
+    */
+    <View style={styles.cell}>
       <View style={styles.cellLabel}>
         {/*
           A dot, not a warning glyph. An alert on a prayer time reads as "you
@@ -91,11 +91,11 @@ function TimeCell({
           wrong register for somebody three weeks in. This is information.
         */}
         {jumuah && <View style={[styles.jumuahDot, { backgroundColor: theme.accent }]} />}
-        <ThemedText type="small" themeColor={isNext ? 'accent' : 'textSecondary'}>
+        <ThemedText type="small" themeColor={isNext ? 'gold' : 'textSecondary'}>
           {prayer.label}
         </ThemedText>
       </View>
-      <ThemedText type="smallBold" themeColor={isNext ? 'accent' : 'text'} style={styles.cellTime}>
+      <ThemedText type="smallBold" themeColor={isNext ? 'gold' : 'text'} style={styles.cellTime}>
         {formatTime(prayer.time)}
       </ThemedText>
     </View>
@@ -165,7 +165,15 @@ export function PrayerTimesCard({ action }: PrayerTimesCardProps) {
     <Shell>
       {/* The niche that marks the qibla, framing the prayer you face it for. */}
       <View style={styles.arch} pointerEvents="none">
-        <MihrabArch color={theme.accent} width={200} opacity={0.16} />
+        {/*
+          Gold, and drawn rather than hinted.
+
+          It was `accent` at 0.16 — a watermark you had to look for. Under the
+          jadwal grammar this arch IS the card's frame, and it is illumination,
+          which is gold's one job. 0.5 is as far as it goes: it orients, and a
+          niche that competes with the time inside it has stopped orienting.
+        */}
+        <MihrabArch color={theme.gold} width={200} opacity={0.5} />
       </View>
 
       <View style={styles.next}>
@@ -193,7 +201,7 @@ export function PrayerTimesCard({ action }: PrayerTimesCardProps) {
 
       {action}
 
-      <View style={[styles.divider, { backgroundColor: theme.border }]} />
+      <View style={[styles.divider, { backgroundColor: theme.goldSoft }]} />
 
       {/* Where each prayer actually falls on the sun's path. */}
       <DayArc
@@ -217,7 +225,7 @@ export function PrayerTimesCard({ action }: PrayerTimesCardProps) {
       {isFriday && <JumuahNote />}
 
       {timezoneSuspect && (
-        <View style={[styles.warning, { borderLeftColor: theme.accent }]}>
+        <View style={[styles.warning, { borderLeftColor: theme.vermilion }]}>
           <ThemedText type="small" themeColor="textSecondary">
             {t('times.clockSuspect')}
           </ThemedText>
@@ -244,7 +252,7 @@ export function PrayerTimesCard({ action }: PrayerTimesCardProps) {
         </View>
         <PressableLink
           href="/qibla"
-          style={[styles.qibla, { borderColor: theme.border }]}
+          style={[styles.qibla, { borderColor: theme.goldSoft }]}
           pressedStyle={{ opacity: 0.6 }}>
           <ThemedText type="smallBold" themeColor="accent">
             {t('qibla.title')}
@@ -256,11 +264,22 @@ export function PrayerTimesCard({ action }: PrayerTimesCardProps) {
 }
 
 const styles = StyleSheet.create({
+  /*
+    A panel, not a card. The mihrab below is the frame now — a niche drawn in
+    gold reads as the edge of this block, so a border round it would be two
+    edges saying the same thing.
+  */
   card: {
     gap: Spacing.three,
-    padding: Spacing.four,
-    borderRadius: Radius.medium,
-    borderWidth: StyleSheet.hairlineWidth,
+    paddingVertical: Spacing.four,
+    /*
+      A bottom rule only.
+
+      Every block on Today drawing both meant every join between two blocks
+      showed two hairlines a gap apart, which reads as a mistake. One rule
+      per join: a block closes itself and the next one opens against it.
+    */
+    borderBottomWidth: StyleSheet.hairlineWidth,
     position: 'relative',
     overflow: 'hidden',
   },

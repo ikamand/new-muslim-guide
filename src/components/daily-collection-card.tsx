@@ -49,7 +49,7 @@ export function DailyCollectionCard() {
   return (
     <PressableLink
       href={{ pathname: '/collection/[id]', params: { id: collection.id } }}
-      style={[styles.row, { borderTopColor: theme.border }]}
+      style={styles.row}
       pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
       {/*
         One line, Latin left and Arabic right, rather than the Arabic stacked
@@ -87,7 +87,11 @@ const styles = StyleSheet.create({
     footer rather than as a fifth thing in the stack.
   */
   row: {
-    borderTopWidth: StyleSheet.hairlineWidth,
+    /*
+      No rule of its own. The panel above now closes with one, and the
+      negative margin pulls this up against it — so the coda reads as that
+      panel's footer, which is what it always meant to be.
+    */
     paddingTop: Spacing.three,
     marginTop: -Spacing.two,
   },

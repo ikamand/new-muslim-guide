@@ -2,9 +2,10 @@ import { StyleSheet, View } from 'react-native';
 
 import { MarkedText } from '@/components/marked-text';
 import { PressableLink } from '@/components/pressable-link';
+import { Rubric } from '@/components/jadwal';
 import { ThemedText } from '@/components/themed-text';
 import { pickForNow, resolvePick, type CardReason } from '@/content/duas/card';
-import { Radius, Spacing } from '@/constants/theme';
+import { Spacing } from '@/constants/theme';
 import { useHijriToday } from '@/hooks/use-hijri';
 import { useLocale } from '@/hooks/use-locale';
 import { usePrayerTimes } from '@/hooks/use-prayer-times';
@@ -61,15 +62,19 @@ export function DuaCard() {
   return (
     <PressableLink
       href={{ pathname: '/dua-book/[id]', params: { id: String(occasion.id) } }}
-      style={[
-        styles.card,
-        { backgroundColor: theme.backgroundElement, borderColor: theme.border },
-      ]}
+      style={[styles.card, { borderColor: theme.goldSoft }]}
       pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
       <View style={styles.head}>
-        <ThemedText type="caption" themeColor="textSecondary" style={styles.kicker}>
-          {t(REASON_KEY[pick.reason])}
-        </ThemedText>
+        {/*
+          The reason is rubric, not a grey kicker.
+
+          "Always worth saying", "It is Friday" — this is the card explaining
+          why it chose what it chose, which is exactly the job red ink did in
+          a manuscript: the note about the text, never the text. It is also
+          the only red on the screen, so it reads as a mark rather than as a
+          colour scheme.
+        */}
+        <Rubric label={t(REASON_KEY[pick.reason])} align="left" />
         {line.repeat ? (
           <ThemedText type="smallBold" themeColor="accent">
             {t('card.times').replace('{n}', String(line.repeat))}
@@ -102,10 +107,24 @@ export function DuaCard() {
 }
 
 const styles = StyleSheet.create({
+  /*
+    A panel between two rules rather than a card.
+
+    Same content, no box: the fill, the border and the radius are what made
+    this one of four near-identical rectangles stacked down Today. Rules top
+    and bottom separate it from what is above and below without claiming it
+    is a different kind of object.
+  */
   card: {
-    borderRadius: Radius.medium,
-    borderWidth: StyleSheet.hairlineWidth,
-    padding: Spacing.four,
+    /*
+      A bottom rule only.
+
+      Every block on Today drawing both meant every join between two blocks
+      showed two hairlines a gap apart, which reads as a mistake. One rule
+      per join: a block closes itself and the next one opens against it.
+    */
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    paddingVertical: Spacing.four,
     gap: Spacing.two,
   },
   head: {
@@ -114,6 +133,5 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     gap: Spacing.two,
   },
-  kicker: { textTransform: 'uppercase', letterSpacing: 1 },
   arabic: { textAlign: 'right', writingDirection: 'rtl' },
 });

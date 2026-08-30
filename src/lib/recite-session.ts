@@ -217,10 +217,16 @@ export async function startFollowSession(
   const vadContext = await whisper.initWhisperVad({ filePath: fileFor(VAD).uri });
   const loadMs = Date.now() - t0;
 
+  /* In dev the engine narrates itself to the Metro terminal. The freeze
+     reported on 31 Aug (stuck after ayah 1, old and new builds alike) is
+     invisible to static reading — these traces are how the next report
+     carries its own diagnosis. Production stays silent. */
+  const trace = __DEV__ ? (tag: string) => (m: string) => console.log(tag, m) : undefined;
+
   const audioStream = new adapters.AudioPcmStreamAdapter();
   /* The transcriber's contract is the ring-buffer wrapper, not the raw VAD
      context — the README's shorthand elides it; the types do not. */
-  const vad = new realtime.RingBufferVad(vadContext);
+  const vad = new realtime.RingBufferVad(vadContext, { logger: trace?.('[vad]') });
 
   const slices = new Map<number, string>();
 
@@ -230,6 +236,7 @@ export async function startFollowSession(
       audioSliceSec: 15,
       promptPreviousSlices: false,
       transcribeOptions: { language: 'ar' },
+      logger: trace?.('[rt]'),
     },
     {
       onTranscribe: (event: TranscribeEvent) => {

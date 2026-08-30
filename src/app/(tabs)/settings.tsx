@@ -11,15 +11,12 @@ import { Recitations } from '@/content/recitations';
 import { BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useReminders } from '@/hooks/use-reminders';
 import { useSettings, type Audience } from '@/hooks/use-settings';
-import { inferProfile, METHODS, PRAYER_IDS, PRAYER_LABEL } from '@/lib/prayer-times';
+import { PRAYER_IDS, PRAYER_LABEL } from '@/lib/prayer-times';
 import { LEAD_CHOICES } from '@/lib/reminders';
 import { deleteVoice, savedVoices, type SavedVoice } from '@/content/quran/offline';
 import { deleteReciteModels, reciteModelBytes } from '@/lib/recite-session';
 import { RECITERS } from '@/content/quran/recitation';
 import { useLocale } from '@/hooks/use-locale';
-import { usePrayerTimes } from '@/hooks/use-prayer-times';
-import { useLocation } from '@/hooks/use-location';
-import { Madhab } from 'adhan';
 import { LOCALE_NAMES, LOCALES } from '@/i18n/locales';
 import { useTheme } from '@/hooks/use-theme';
 
@@ -454,148 +451,31 @@ function reciterNameFor(folder: string): string {
 const megabytes = (bytes: number) => (bytes / 1_000_000).toFixed(1);
 
 /**
- * Where the times come from — the line that used to live on the Awqat card.
+ * One row: the Prayer times settings live on their own page now.
  *
- * Moved here (Iyad, 30 Aug) so the card can be glanceable; this is also where
- * changing the method, the madhab and the mosque match will land, so the
- * provenance sits at the head of the group that will one day edit it. Until
- * then it is information, not a control.
+ * They started as a group here and the method list made this tab the longest
+ * screen in the app — Iyad's catch. The row keeps the same heading key the
+ * page's title uses, so the door and the room agree on the name.
  */
 function PrayerTimesGroup() {
   const theme = useTheme();
   const { t } = useLocale();
-  const { awqatMethod, awqatHanafiAsr, awqatMosque, set, setMany } = useSettings();
-  const { coords } = useLocation();
-  const { profile } = usePrayerTimes();
-  if (!profile || !coords) return null;
-
-  /*
-    "Suggested" first and preselected, then every named convention. The
-    suggestion names what it resolves to, so choosing it is never a mystery —
-    and a reader who has no idea what these words mean can leave without
-    touching anything and be right.
-  */
-  const suggested = inferProfile(coords);
-  const methodRows: { id: string | null; label: string }[] = [
-    {
-      id: null,
-      label: `${t('settings.method.suggested')} · ${suggested.label}`,
-    },
-    ...Object.values(METHODS).map((method) => ({ id: method.id, label: method.label })),
-  ];
-
-  /*
-    Effective, not stored: with no override the row reflects what the method
-    itself bundles (Karachi carries Hanafi), so the tick never lies about
-    which ʿAsr the card is showing.
-  */
-  const hanafiNow =
-    awqatHanafiAsr ?? profile.build().madhab === Madhab.Hanafi;
 
   return (
     <View style={styles.section}>
       <ThemedText type="smallBold" themeColor="textSecondary" style={styles.sectionTitle}>
         {t('settings.times')}
       </ThemedText>
-      <ThemedText type="small" themeColor="textSecondary">
-        {profile.label} · {t('times.onThisPhone')}
-      </ThemedText>
-      <ThemedText type="small" themeColor="textSecondary">
-        {t('times.followLocal')}
-      </ThemedText>
-
-      {/*
-        The headline of the group, and the answer for most people who open
-        it: transcribe the board, skip the vocabulary below entirely.
-      */}
       <PressableLink
-        href="/mosque-match"
-        accessibilityLabel={t('mosque.title')}
+        href="/awqat-settings"
+        accessibilityLabel={t('settings.times')}
         style={[styles.group, styles.row, { borderColor: theme.goldSoft }]}
         pressedStyle={{ opacity: 0.6 }}>
-        <ThemedText type="default">{t('mosque.title')}</ThemedText>
+        <ThemedText type="default">{t('settings.times.open')}</ThemedText>
         <ThemedText type="smallBold" themeColor="gold">
           ›
         </ThemedText>
       </PressableLink>
-
-      {awqatMosque && (
-        <View style={styles.matchedState}>
-          <ThemedText type="small" themeColor="malachite">
-            {t('mosque.active')} · {METHODS[awqatMosque.methodId]?.label ?? awqatMosque.methodId}
-          </ThemedText>
-          <Pressable
-            onPress={() => set('awqatMosque', null)}
-            accessibilityRole="button"
-            style={({ pressed }) => ({ opacity: pressed ? 0.6 : 1 })}>
-            <ThemedText type="smallBold" themeColor="accent">
-              {t('mosque.clear')}
-            </ThemedText>
-          </Pressable>
-        </View>
-      )}
-
-      <ThemedText type="small" themeColor="textSecondary" style={styles.subheading}>
-        {t('settings.method')}
-      </ThemedText>
-      <View style={[styles.group, { borderColor: theme.goldSoft }]}>
-        {methodRows.map((row, index) => (
-          <Pressable
-            key={row.id ?? 'suggested'}
-            onPress={() => setMany({ awqatMethod: row.id, awqatMosque: null })}
-            accessibilityRole="radio"
-            accessibilityState={{ selected: awqatMethod === row.id }}
-            style={[
-              styles.row,
-              index < methodRows.length - 1 && {
-                borderBottomWidth: StyleSheet.hairlineWidth,
-                borderBottomColor: theme.border,
-              },
-            ]}>
-            <ThemedText type="default">{row.label}</ThemedText>
-            {awqatMethod === row.id && (
-              <ThemedText type="smallBold" themeColor="accent">
-                ✓
-              </ThemedText>
-            )}
-          </Pressable>
-        ))}
-      </View>
-
-      <ThemedText type="small" themeColor="textSecondary" style={styles.subheading}>
-        {t('settings.asr')}
-      </ThemedText>
-      <ThemedText type="small" themeColor="textSecondary">
-        {t('settings.asr.help')}
-      </ThemedText>
-      <View style={[styles.group, { borderColor: theme.goldSoft }]}>
-        {(
-          [
-            { hanafi: false, label: t('settings.asr.standard') },
-            { hanafi: true, label: t('settings.asr.hanafi') },
-          ] as const
-        ).map((row, index) => (
-          <Pressable
-            key={String(row.hanafi)}
-            onPress={() => setMany({ awqatHanafiAsr: row.hanafi, awqatMosque: null })}
-            accessibilityRole="radio"
-            accessibilityState={{ selected: hanafiNow === row.hanafi }}
-            style={[
-              styles.row,
-              index === 0 && {
-                borderBottomWidth: StyleSheet.hairlineWidth,
-                borderBottomColor: theme.border,
-              },
-            ]}>
-            <ThemedText type="default">{row.label}</ThemedText>
-            {hanafiNow === row.hanafi && (
-              <ThemedText type="smallBold" themeColor="accent">
-                ✓
-              </ThemedText>
-            )}
-          </Pressable>
-        ))}
-      </View>
     </View>
   );
 }
@@ -743,15 +623,6 @@ const styles = StyleSheet.create({
   rowText: {
     flex: 1,
     gap: 2,
-  },
-  matchedState: {
-    gap: Spacing.one,
-    paddingTop: Spacing.two,
-  },
-  subheading: {
-    marginTop: Spacing.three,
-    textTransform: 'uppercase',
-    letterSpacing: 1,
   },
   section: {
     gap: Spacing.two,

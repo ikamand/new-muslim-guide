@@ -51,23 +51,43 @@ function minutesOfDay(date: Date): number {
 }
 
 /**
- * A board time like "5:15" or "12:49", read without a meridiem.
+ * A board time as people actually type one: "5:15", "5:15 AM", "05.15",
+ * "5 15", "515", "5:15pm".
  *
- * Boards print bare clock times, so each number has two readings twelve
- * hours apart. The right one is whichever lands nearer the computed time for
+ * With a meridiem the reading is AUTHORITATIVE — someone who typed PM meant
+ * PM, and second-guessing them would hide their typo instead of surfacing it
+ * as a non-match. Without one, each number has two readings twelve hours
+ * apart, and the right one is whichever lands nearer the computed time for
  * that prayer — a Fajr entry of "5:15" is 05:15 because no method puts Fajr
  * within hours of 17:15. Returns minutes-of-day, or null for unparseable
  * input.
+ *
+ * The first shipped version rejected any meridiem outright, which made the
+ * whole fit silently fail for anyone copying a website that prints "AM" —
+ * the save button never appeared and nothing said why. Hence the leniency,
+ * and the test cases in `scripts/awqat-fit-check.ts` that pin it.
  */
 export function parseBoardTime(raw: string, computed: Date): number | null {
-  const match = raw.trim().match(/^(\d{1,2})[:.٫]?(\d{2})$/);
+  const match = raw
+    .trim()
+    .match(/^(\d{1,2})[\s:.٫]?(\d{2})\s*(?:([AaPp])\.?\s*[Mm]?\.?)?$/);
   if (!match) return null;
   const hours = Number(match[1]);
   const minutes = Number(match[2]);
-  if (hours > 23 || minutes > 59) return null;
+  if (minutes > 59) return null;
 
+  const meridiem = match[3]?.toLowerCase();
+  if (meridiem) {
+    if (hours < 1 || hours > 12) return null;
+    return ((hours % 12) + (meridiem === 'p' ? 12 : 0)) * 60 + minutes;
+  }
+
+  if (hours > 23) return null;
   const reference = minutesOfDay(computed);
-  const candidates = hours <= 12 ? [((hours % 12) * 60 + minutes), ((hours % 12) + 12) * 60 + minutes] : [hours * 60 + minutes];
+  const candidates =
+    hours <= 12
+      ? [(hours % 12) * 60 + minutes, ((hours % 12) + 12) * 60 + minutes]
+      : [hours * 60 + minutes];
   candidates.sort((a, b) => Math.abs(a - reference) - Math.abs(b - reference));
   return candidates[0];
 }

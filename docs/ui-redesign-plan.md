@@ -2446,3 +2446,17 @@ Verified end to end in the browser: typed a board with Dhuhr +1 into
 /mosque-match and it announced "Matched · Muslim World League · Dhuhr +1
 min". Still to eyes: the whole flow on a device, and the ⚠️ review-flagged
 wordings (windows sheet, ʿAsr help, mosque copy).
+
+### 31 Aug 2026 — Awqat settings get a room of their own, and the save bug
+
+Iyad's three catches, all landed: (1) the Prayer times group moved off the
+Settings tab — the method list had made it the longest screen in the app —
+onto `/awqat-settings`, reached by one row; (2) the method picker is a
+disclosure, collapsed to the current choice; (3) the mosque-match save bug.
+That bug had two stacked causes: `parseBoardTime` rejected any input with
+AM/PM (so the save button never rendered — it only existed once a fit did),
+and on a phone a successful match rendered below the open keyboard. Fixed:
+meridiem input parses and is AUTHORITATIVE (a wrong PM is a non-match, not a
+guess — pinned in `npm run awqat:fit`), the save button is permanent with a
+caption saying why it is disabled, return walks the five fields and closes
+the keyboard, and saving with no back stack lands on /awqat-settings.

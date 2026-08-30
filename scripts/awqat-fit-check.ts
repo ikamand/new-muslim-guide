@@ -63,7 +63,23 @@ const suggested = inferProfile(coords);
   check('rejects an iqamah column', result === null, JSON.stringify(result?.fit));
 }
 
-// 4. Garbage input must not match.
+// 4. Meridiem input parses, and a meridiem is authoritative.
+{
+  const entries = board('north-america', false, {});
+  const withMeridiem = { ...entries, fajr: entries.fajr + ' AM', isha: entries.isha + 'pm' };
+  const result = fitMosque(coords, withMeridiem, suggested, today);
+  check('accepts AM/PM input', result?.fit.methodId === 'north-america' && result.worst === 0,
+    JSON.stringify(result?.fit));
+}
+{
+  // Fajr typed as PM is a typo, not a time — it must fail, not be "fixed".
+  const entries = board('north-america', false, {});
+  const wrong = { ...entries, fajr: entries.fajr + ' PM' };
+  const result = fitMosque(coords, wrong, suggested, today);
+  check('a wrong meridiem is a non-match, not a guess', result === null, JSON.stringify(result?.fit));
+}
+
+// 5. Garbage input must not match.
 {
   const result = fitMosque(coords, { fajr: 'x', dhuhr: '1:20', asr: '5:00', maghrib: '7:56', isha: '9:20' }, suggested, today);
   check('rejects unparseable input', result === null);

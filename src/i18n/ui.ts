@@ -641,6 +641,7 @@ export const EN = {
   'settings.transliteration.help': 'The Arabic spelled out in English letters',
   'settings.translation.help': 'What the words mean in English',
   'settings.times': 'Prayer times',
+  'settings.times.open': 'Method, ʿAsr, and your mosque',
   'settings.method': 'Calculation method',
   'settings.method.suggested': 'Suggested for your location',
   /*
@@ -666,6 +667,7 @@ export const EN = {
   'mosque.matched': 'Matched',
   'mosque.hanafi': 'Hanafi ʿAsr',
   'mosque.use': 'Use these times',
+  'mosque.incomplete': 'Enter all five times from the board and the match appears here.',
   'mosque.noMatch':
     'These times don’t line up with any calculation the app knows. The usual reason is the iqamah column — check the board for an adhan column and try those times instead.',
   'mosque.drift':

@@ -1,8 +1,8 @@
 import { Stack, useRouter } from 'expo-router';
-import { useMemo, useState } from 'react';
-import { Pressable, ScrollView, StyleSheet, TextInput, View } from 'react-native';
+import { useMemo, useRef, useState } from 'react';
+import { Keyboard, Pressable, ScrollView, StyleSheet, TextInput, View } from 'react-native';
 
-import { Rule, Unwan } from '@/components/jadwal';
+import { Unwan } from '@/components/jadwal';
 import { ThemedText } from '@/components/themed-text';
 import { BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
@@ -41,6 +41,13 @@ export default function MosqueMatchScreen() {
     maghrib: '',
     isha: '',
   });
+  /*
+    Return walks Fajr → ʿIshāʾ and the last field closes the keyboard — the
+    first build left the result hidden under it, which read as "typing does
+    nothing" on a phone. The rig that verified that build has no keyboard,
+    which is exactly why it never showed.
+  */
+  const inputs = useRef<Partial<Record<PrayerId, TextInput | null>>>({});
 
   const complete = PRAYER_IDS.every((id) => entries[id].trim().length > 0);
 
@@ -111,11 +118,21 @@ export default function MosqueMatchScreen() {
           <View key={id} style={[styles.inputRow, { borderBottomColor: theme.goldSoft }]}>
             <ThemedText type="default">{t(`awqat.col.${id}` as UIKey)}</ThemedText>
             <TextInput
+              ref={(node) => {
+                inputs.current[id] = node;
+              }}
               value={entries[id]}
               onChangeText={(text) => setEntries((current) => ({ ...current, [id]: text }))}
               placeholder={placeholders?.[id] ?? ''}
               placeholderTextColor={theme.textSecondary}
               keyboardType="numbers-and-punctuation"
+              returnKeyType={id === 'isha' ? 'done' : 'next'}
+              onSubmitEditing={() => {
+                const order = PRAYER_IDS;
+                const following = order[order.indexOf(id) + 1];
+                if (following) inputs.current[following]?.focus();
+                else Keyboard.dismiss();
+              }}
               accessibilityLabel={PRAYER_LABEL[id]}
               style={[
                 styles.input,
@@ -140,31 +157,42 @@ export default function MosqueMatchScreen() {
               {offsetSummary}
             </ThemedText>
           ) : null}
-
-          <Pressable
-            onPress={() => {
-              set('awqatMosque', result.fit);
-              router.back();
-            }}
-            accessibilityRole="button"
-            style={({ pressed }) => [
-              styles.use,
-              { backgroundColor: theme.action, borderColor: theme.actionRule, opacity: pressed ? 0.85 : 1 },
-            ]}>
-            <ThemedText type="smallBold" themeColor="onAction">
-              {t('mosque.use')}
-            </ThemedText>
-          </Pressable>
         </View>
       )}
 
-      {complete && !result && (
-        <View style={styles.found}>
-          <Rule />
-          <ThemedText type="small" themeColor="textSecondary" style={styles.note}>
-            {t('mosque.noMatch')}
-          </ThemedText>
-        </View>
+      {/*
+        The save control is ALWAYS on screen, and when it cannot save its
+        caption says why. The first build only rendered it once a fit
+        existed, so a failed parse and a missing feature looked identical —
+        "there's no way to save the changes" was the exact bug report.
+      */}
+      <Pressable
+        onPress={() => {
+          if (!result) return;
+          set('awqatMosque', result.fit);
+          Keyboard.dismiss();
+          if (router.canGoBack()) router.back();
+          else router.replace('/awqat-settings');
+        }}
+        accessibilityRole="button"
+        accessibilityState={{ disabled: !result }}
+        disabled={!result}
+        style={({ pressed }) => [
+          styles.use,
+          {
+            backgroundColor: theme.action,
+            borderColor: theme.actionRule,
+            opacity: !result ? 0.4 : pressed ? 0.85 : 1,
+          },
+        ]}>
+        <ThemedText type="smallBold" themeColor="onAction">
+          {t('mosque.use')}
+        </ThemedText>
+      </Pressable>
+      {!result && (
+        <ThemedText type="small" themeColor="textSecondary" style={styles.centred}>
+          {complete ? t('mosque.noMatch') : t('mosque.incomplete')}
+        </ThemedText>
       )}
 
       {/*

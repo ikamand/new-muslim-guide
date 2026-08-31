@@ -120,9 +120,17 @@ export default function AwqatScreen() {
   const firstWhiteIndex = month.days.findIndex((day) => day.isWhiteDay);
 
   return (
-    <ScrollView contentContainerStyle={styles.content}>
+    <>
       <Stack.Screen options={{ title: t('awqat.title') }} />
-
+      {/*
+        The column header is child 3 and STICKS: the month stepper scrolls
+        away and the labels stop at the top, so day 27 still says which
+        column is ʿAsr. A printed jadwal never loses its header row either —
+        the reader's thumb just couldn't hold it. Iyad's ask, 31 Aug. The
+        row carries the page background for this: while stuck, day rows
+        scroll beneath it.
+      */}
+      <ScrollView contentContainerStyle={styles.content} stickyHeaderIndices={[3]}>
       {/*
         The month steppers flank the name — ‹ September 2026 › — inside the
         ʿunwān itself, the way a bound calendar turns pages. A separate nav
@@ -157,7 +165,11 @@ export default function AwqatScreen() {
       </View>
       <DoubleRule />
 
-      <View style={[styles.headRow, { borderBottomColor: theme.gold }]}>
+      <View
+        style={[
+          styles.headRow,
+          { borderBottomColor: theme.gold, backgroundColor: theme.background },
+        ]}>
         <View style={styles.dayNum} />
         {PRAYER_IDS.map((id) => (
           <ThemedText key={id} type="caption" themeColor="gold" style={styles.cell}>
@@ -192,7 +204,8 @@ export default function AwqatScreen() {
       <ThemedText type="small" themeColor="textSecondary" style={styles.foot}>
         {t('awqat.projected')}
       </ThemedText>
-    </ScrollView>
+      </ScrollView>
+    </>
   );
 }
 

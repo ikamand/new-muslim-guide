@@ -2622,3 +2622,10 @@ the script (native header chrome, arch-fitted labels, ARABIC_NAME_TRIM).
 All four rules were forced to fire and verified exit-1 before landing.
 Still open, its own session: the `Column` layout component so flush joins
 are composed, not remembered.
+
+**Addendum, same day:** the rule reached the last two tabs, on Iyad's eye.
+The Qur'an tab had 8px of unpainted air under all 38 surah rules and 24px
+container gaps between header, progress panel, review row and list; the
+Duʿa tab split its ruled rows across gapped groups, stacking a 24px gap
+onto the Shelf's own 24px padding. Both now run their ruled content as one
+zero-gap group — measured 0px and held-press verified.

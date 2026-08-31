@@ -33,6 +33,10 @@ const { CADENCE } = await load('src/content/cadence.ts');
 const { COLLECTIONS } = await load('src/content/collections/index.ts');
 const { PROVIDERS } = await load('src/content/providers.ts');
 const { ungrouped } = await load('src/content/learn/index.ts');
+const { CURRICULUM, COMMISSIONED, SMALL_UNITS, uncurriculed } = await load(
+  'src/content/curriculum.ts',
+);
+const { EN } = await load('src/i18n/ui.ts');
 /*
   The NAMES, not the files. `prayer-images.ts` also holds a wall of `require()`
   that only Metro can resolve, and importing the module for its map crashed
@@ -73,6 +77,88 @@ if (orphanTopics.length) {
   say('  Add each to TOPIC_GROUPS in src/content/learn/index.ts.');
   say();
 }
+
+/* ---------- the curriculum ---------- */
+
+/*
+  The path went stale once already: 22 pages landed in phases 9–13 and no
+  journey stage ever learned their names, so "Continue" could not reach them.
+  These checks are that failure turned into an exit code, per the plan at
+  docs/learn-redesign-plan.md §7.
+*/
+const lessonEntries = CURRICULUM.flatMap((tier) =>
+  tier.units.flatMap((unit) =>
+    unit.lessons.map((lesson) => ({ tier, unit, lesson, key: `${lesson.ref.kind}:${lesson.ref.id}` })),
+  ),
+);
+
+// Exactly one unit per lesson. A page in two units would double-count
+// progress and give "the lesson after this one" two answers.
+const seenLesson = new Map();
+const doubleClaimed = [];
+for (const entry of lessonEntries) {
+  const first = seenLesson.get(entry.key);
+  if (first && first.unit !== entry.unit) doubleClaimed.push(entry);
+  else seenLesson.set(entry.key, entry);
+}
+
+// An unresolved lesson is a commission if declared, a typo if not.
+const unresolvedLessons = lessonEntries.filter(({ lesson }) => !resolveRef(lesson.ref));
+const commissionedLessons = unresolvedLessons.filter(({ key }) => COMMISSIONED.includes(key));
+const typoLessons = unresolvedLessons.filter(({ key }) => !COMMISSIONED.includes(key));
+// A COMMISSIONED entry that now resolves is a stale commission — the page
+// was written, so the declaration must come off for the list to stay honest.
+const staleCommissions = COMMISSIONED.filter((key) => {
+  const [kind, ...rest] = key.split(':');
+  return resolveRef({ kind, id: rest.join(':') });
+});
+
+// Every tier and unit must have its name and purpose in ui.ts, and every
+// lesson labelKey must exist — a missing key renders as its raw key string.
+const missingKeys = [];
+for (const tier of CURRICULUM) {
+  for (const key of [`curriculum.tier.${tier.id}`, `curriculum.tier.${tier.id}.purpose`]) {
+    if (!(key in EN)) missingKeys.push(key);
+  }
+  for (const unit of tier.units) {
+    for (const key of [`curriculum.unit.${unit.id}`, `curriculum.unit.${unit.id}.purpose`]) {
+      if (!(key in EN)) missingKeys.push(key);
+    }
+    for (const lesson of unit.lessons) {
+      if (lesson.labelKey && !(lesson.labelKey in EN)) missingKeys.push(lesson.labelKey);
+    }
+  }
+}
+
+// Coverage: every surface:'learn' reference and every guide is a lesson, a
+// door, or deliberately elsewhere. The journey's staleness, made impossible.
+const uncurr = uncurriculed(REFERENCES, GUIDES);
+
+say(
+  `Curriculum — ${CURRICULUM.length} tiers, ` +
+    `${CURRICULUM.reduce((n, tier) => n + tier.units.length, 0)} units, ` +
+    `${seenLesson.size} lessons (${seenLesson.size - unresolvedLessons.length} written)`,
+);
+for (const tier of CURRICULUM) {
+  for (const unit of tier.units) {
+    const resolved = unit.lessons.filter((lesson) => resolveRef(lesson.ref)).length;
+    const size =
+      (resolved < 2 || resolved > 6) && !SMALL_UNITS.includes(unit.id)
+        ? '  ⚠️ outside the 2–6 band'
+        : '';
+    say(`  ${pad(`${tier.id}/${unit.id}`, 38)} ${resolved}/${unit.lessons.length}${size}`);
+  }
+}
+if (commissionedLessons.length) {
+  say(`  commissioned, not yet written (${commissionedLessons.length}):`);
+  for (const { key, unit } of commissionedLessons) say(`    ${key}  (holds its place in ${unit.id})`);
+}
+if (uncurr.length) {
+  say(`  ${uncurr.length} page(s) in no unit — the path cannot reach these:`);
+  for (const topic of uncurr) say(`    ${topic.kind}:${topic.id}  ${topic.title}`);
+  say('  Add each to CURRICULUM in src/content/curriculum.ts, or to its elsewhere list with a reason.');
+}
+say();
 
 /*
   The posture illustrations, so a half-finished set is visible rather than
@@ -338,6 +424,30 @@ if (byVerdict['below-bar'].length) {
   );
 }
 if (dangling.length) failures.push(`${dangling.length} broken relatedContent pointer(s)`);
+if (uncurr.length) {
+  failures.push(`${uncurr.length} page(s) in no curriculum unit — add to CURRICULUM or its elsewhere list`);
+}
+if (typoLessons.length) {
+  failures.push(
+    `${typoLessons.length} curriculum lesson(s) resolving to nothing and not declared in COMMISSIONED: ` +
+      typoLessons.map(({ key }) => key).join(', '),
+  );
+}
+if (doubleClaimed.length) {
+  failures.push(
+    `${doubleClaimed.length} lesson(s) claimed by two units: ` +
+      doubleClaimed.map(({ key }) => key).join(', '),
+  );
+}
+if (staleCommissions.length) {
+  failures.push(
+    `${staleCommissions.length} COMMISSIONED entr(ies) that now resolve — the page exists, remove the declaration: ` +
+      staleCommissions.join(', '),
+  );
+}
+if (missingKeys.length) {
+  failures.push(`${missingKeys.length} curriculum i18n key(s) missing from ui.ts: ${missingKeys.join(', ')}`);
+}
 if (noCadence.length) {
   failures.push(`${noCadence.length} entr(ies) with no cadence — add a row to src/content/cadence.ts`);
 }

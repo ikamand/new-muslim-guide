@@ -874,6 +874,63 @@ export const EN = {
   'journey.lesson.fasting': 'Fasting',
   'journey.lesson.zakat': 'Zakat',
   'journey.lesson.hajj': 'Hajj',
+
+  /**
+   * The curriculum — tiers and units (docs/learn-redesign-plan.md).
+   *
+   * A tier is named for a time of life, never a rank: "Beginner" grades the
+   * person, and a convert's jagged knowledge means the grade would be wrong
+   * as often as right. Each name carries a one-line purpose underneath, which
+   * is how a tier says what it offers without saying what you are.
+   */
+  'curriculum.tier.first-weeks': 'Your first weeks',
+  'curriculum.tier.first-weeks.purpose': 'Until you can pray on your own.',
+  'curriculum.tier.life-follows': 'The life that follows',
+  'curriculum.tier.life-follows.purpose': 'For the questions life brings.',
+  'curriculum.tier.deeper': 'Going deeper',
+  'curriculum.tier.deeper.purpose': 'Depth in what you already do.',
+
+  'curriculum.unit.becoming-muslim': 'Becoming Muslim',
+  'curriculum.unit.becoming-muslim.purpose': 'What you said, and what you joined.',
+  'curriculum.unit.who-you-follow': 'Who you follow',
+  'curriculum.unit.who-you-follow.purpose':
+    'Allah, His Messenger, and where the religion comes from.',
+  'curriculum.unit.how-to-pray': 'How to pray',
+  'curriculum.unit.how-to-pray.purpose':
+    'One rakʿah, learned once — every prayer is built from it.',
+  'curriculum.unit.when-it-goes-wrong': 'When it goes wrong',
+  'curriculum.unit.when-it-goes-wrong.purpose':
+    'Losing count, breaking wudu, missing a prayer — all recoverable.',
+  'curriculum.unit.praying-with-others': 'Praying with others',
+  'curriculum.unit.praying-with-others.purpose':
+    'The call, the mosque, the imam, and Friday.',
+  'curriculum.unit.everyday-words': 'Everyday words',
+  'curriculum.unit.everyday-words.purpose':
+    'What people say to you, and what you say back.',
+  'curriculum.unit.eating-wearing-earning': 'Eating, wearing, earning',
+  'curriculum.unit.eating-wearing-earning.purpose':
+    'Halal and haram where you actually meet them.',
+  'curriculum.unit.people': 'People',
+  'curriculum.unit.people.purpose':
+    'Family, manners, marriage — and the day someone dies.',
+  'curriculum.unit.meeting-muslims': 'Meeting other Muslims',
+  'curriculum.unit.meeting-muslims.purpose':
+    'Why confident people tell you opposite things.',
+  'curriculum.unit.the-year': 'The year',
+  'curriculum.unit.the-year.purpose':
+    'Ramadan, the Eids, zakat, and the calendar they follow.',
+  'curriculum.unit.when-its-hard': 'When it’s hard',
+  'curriculum.unit.when-its-hard.purpose': 'Coming back is part of the path.',
+  'curriculum.unit.prayers-you-choose': 'Prayers you choose',
+  'curriculum.unit.prayers-you-choose.purpose':
+    'The night prayers, and the ones for a moment.',
+  'curriculum.unit.interior-life': 'The interior life',
+  'curriculum.unit.interior-life.purpose':
+    'Anger, envy, showing off, arrogance — and their cures.',
+  'curriculum.unit.practices': 'Practices to take on',
+  'curriculum.unit.practices.purpose':
+    'Small sunnahs that become yours over the years.',
+
   'settings.guidance': 'Prayer guidance for',
 
   /*

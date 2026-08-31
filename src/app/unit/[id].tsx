@@ -8,6 +8,7 @@ import { ThemedText } from '@/components/themed-text';
 import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useCurriculum, type ResolvedLesson } from '@/hooks/use-curriculum';
 import { useLocale } from '@/hooks/use-locale';
+import { useObservations } from '@/hooks/use-observations';
 import { useSettings } from '@/hooks/use-settings';
 import { useTheme } from '@/hooks/use-theme';
 import type { UIKey } from '@/i18n/ui';
@@ -28,8 +29,19 @@ function LessonRow({ step }: { step: ResolvedLesson }) {
   const theme = useTheme();
   const { t } = useLocale();
   const { toggleLesson } = useSettings();
+  const { reading } = useObservations();
 
   const label = step.labelKey ? t(step.labelKey as UIKey) : step.entry.title;
+
+  /*
+    The bookmark, permanent. The carry-on slot forgets a half-read page after
+    a fortnight and holds only the most recent one — right for a "what now"
+    surface, and exactly how a read went missing: the ONLY place that showed
+    it stopped. This row is where the lesson lives, so this is where the
+    bookmark lives, with no horizon and no cap. Same gold rule at the foot
+    that every reading row draws; gone the moment the lesson is done.
+  */
+  const bookmark = !step.done ? reading[step.key]?.furthest : undefined;
 
   return (
     <View style={[styles.row, { borderBottomColor: theme.goldSoft }]}>
@@ -64,6 +76,15 @@ function LessonRow({ step }: { step: ResolvedLesson }) {
           {step.done && <Ionicons name="checkmark" size={16} color={theme.textOnAccent} />}
         </View>
       </Pressable>
+
+      {bookmark ? (
+        <View
+          style={[
+            styles.bookmark,
+            { width: `${Math.round(bookmark * 100)}%`, backgroundColor: theme.gold },
+          ]}
+        />
+      ) : null}
     </View>
   );
 }
@@ -205,5 +226,12 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  /* The same rule `JadwalRow` draws — a bookmark sitting on the separator. */
+  bookmark: {
+    position: 'absolute',
+    left: 0,
+    bottom: 0,
+    height: 1.5,
   },
 });

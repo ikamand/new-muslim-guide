@@ -35,7 +35,7 @@
  * stays countable; an unresolved ref nobody declared is a typo.
  */
 
-import type { PrayerConfidence, ShahadaState } from '@/lib/onboarding';
+import type { PrayerConfidence } from '@/lib/onboarding';
 
 import { ref, type ContentRef } from './model';
 
@@ -267,7 +267,7 @@ export const SMALL_UNITS: readonly string[] = [
   'practices',
 ];
 
-const SHAHADA_KEY = stepKey(ref('guide', 'shahada'));
+export const SHAHADA_KEY = stepKey(ref('guide', 'shahada'));
 
 /**
  * Whether a lesson counts as done — the ONE predicate, shared.
@@ -275,21 +275,20 @@ const SHAHADA_KEY = stepKey(ref('guide', 'shahada'));
  * Exists because the Learn tab and the journey disagreed about the same fact:
  * the shahada card read `shahadaState` and collapsed, while the journey read
  * only `completedLessons` and went on offering "Becoming Muslim" as the next
- * lesson to somebody who had told the app they had already said it. Somebody
- * who answered "yes" should not have to tick a box to prove it — and now no
- * surface can apply that rule without the other. `'exploring'`, `'not-yet'`
- * and `null` deliberately do not count: an unanswered question is not a yes.
+ * lesson to somebody who had told the app they had already said it.
+ *
+ * It used to read `shahadaState` as a second source for the shahada lesson,
+ * and that shadow truth broke the manual controls: the circle on the unit row
+ * edits only `completedLessons`, so for anyone whose done-ness came from the
+ * answer, un-marking silently added a key, changed nothing on screen, and
+ * could never succeed. Now the ANSWER writes the LEDGER — saying "yes" to the
+ * shahada question adds `SHAHADA_KEY` to `completedLessons` at that moment
+ * (onboarding, the progress screen, and a one-time seed in `use-settings` for
+ * installs from before this change) — and this predicate is a plain lookup.
+ * One writable truth; nothing can disagree with it.
  */
-export function isLessonDone(
-  key: string,
-  completedLessons: readonly string[],
-  shahadaState: ShahadaState | null,
-): boolean {
-  if (completedLessons.includes(key)) return true;
-  if (key === SHAHADA_KEY) {
-    return shahadaState === 'recently' || shahadaState === 'a-while';
-  }
-  return false;
+export function isLessonDone(key: string, completedLessons: readonly string[]): boolean {
+  return completedLessons.includes(key);
 }
 
 /**

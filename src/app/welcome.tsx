@@ -12,9 +12,11 @@ import { useTheme } from '@/hooks/use-theme';
 import { CONTENT_DICTS } from '@/i18n/content';
 import { LOCALE_NAMES, LOCALES, SOURCE_LOCALE } from '@/i18n/locales';
 import { useSettings } from '@/hooks/use-settings';
+import { SHAHADA_KEY } from '@/content/curriculum';
 import {
   PRAYER_CONFIDENCES,
   SHAHADA_STATES,
+  saidShahada,
   type PrayerConfidence,
   type ShahadaState,
 } from '@/lib/onboarding';
@@ -77,7 +79,7 @@ export default function WelcomeScreen() {
   const router = useRouter();
   const theme = useTheme();
   const { locale, setLocale, t } = useLocale();
-  const { setMany, onboarded, shahadaState, prayerConfidence } = useSettings();
+  const { setMany, onboarded, shahadaState, prayerConfidence, completedLessons } = useSettings();
 
   const [step, setStep] = useState(FIRST_STEP);
   // Prefilled, so someone who reopens this from Settings sees what they chose
@@ -91,7 +93,18 @@ export default function WelcomeScreen() {
   const leave = useCallback(() => router.replace('/(tabs)'), [router]);
 
   const finish = useCallback(() => {
-    // One write. Four separate `set` calls would each be computed from state
+    /*
+      The answer writes the ledger: a yes ticks the shahada lesson, a no
+      un-ticks it — done-ness has ONE source (`isLessonDone` reads only
+      `completedLessons`), and this is where the answer becomes a tick. The
+      un-tick matters on a revisit: "actually, not yet" must not leave
+      "Becoming Muslim" marked done by an answer that no longer stands.
+    */
+    const done = new Set(completedLessons);
+    if (saidShahada(said)) done.add(SHAHADA_KEY);
+    else done.delete(SHAHADA_KEY);
+
+    // One write. Separate `set` calls would each be computed from state
     // captured before the others applied, and the gate would follow whichever
     // landed last.
     setMany({
@@ -100,9 +113,10 @@ export default function WelcomeScreen() {
       onboardingSkipped: false,
       shahadaState: said,
       prayerConfidence: prays,
+      completedLessons: [...done],
     });
     leave();
-  }, [setMany, said, prays, leave]);
+  }, [setMany, said, prays, completedLessons, leave]);
 
   const skip = useCallback(() => {
     // A revisit that ends in Skip means "leave things as they are", not "throw

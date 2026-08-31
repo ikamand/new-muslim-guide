@@ -60,3 +60,16 @@ export const CONFIDENCE_ORDER: Record<PrayerConfidence, number> = {
   'need-words': 1,
   'on-my-own': 2,
 };
+
+/**
+ * Whether an answer means the shahada has been said.
+ *
+ * The one place the two "yes"es are named, because three files act on it:
+ * onboarding and the progress screen write the shahada lesson's tick from it,
+ * and `use-settings` runs the one-time seed for older installs.
+ * `'exploring'`, `'not-yet'` and `null` are not a yes — an unanswered
+ * question never counts as one.
+ */
+export function saidShahada(value: ShahadaState | null): boolean {
+  return value === 'recently' || value === 'a-while';
+}

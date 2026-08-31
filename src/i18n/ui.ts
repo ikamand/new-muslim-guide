@@ -826,6 +826,20 @@ export const EN = {
   'journey.lessons': 'lessons',
 
   /*
+    The progress screen — where somebody corrects the app's picture of them.
+    The two questions reuse the onboarding strings above, so the wording
+    cannot drift between the first asking and every asking after it.
+  */
+  'learn.progress': 'What you already know',
+  'progress.intro':
+    'Tell the app what you can already do. It stays on this phone, and nothing is ever locked either way.',
+  'progress.units': 'The path, unit by unit',
+  'progress.units.help':
+    'Tick off whole units you already know. Each one opens for lesson-by-lesson marks.',
+  'progress.markUnit': 'Mark every lesson in this unit as done',
+  'progress.unmarkUnit': 'Mark every lesson in this unit as not done',
+
+  /*
     The end of a lesson. This block held four more strings — "Done — next",
     "Mark as read", "Read", "Mark as not read" — until 29 Aug, when marking
     moved from a tap to the scroll itself (see `lesson-scroll.tsx`) and the

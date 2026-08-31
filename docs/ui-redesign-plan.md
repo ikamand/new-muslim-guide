@@ -2503,17 +2503,56 @@ tier), tier names *Your first weeks / The life that follows / Going deeper*.
 Nothing in it is built; the five audit findings it folds in are listed
 there. Until it is decided, the current Learn tab stands.
 
+
 ---
 
-## 30 Aug 2026 — Learn re-thread PROPOSED, not built
+## 31 Aug 2026 — Progress: one ledger, permanent bookmarks, the room ✅
 
-The Learn-tab audit found the tab running two orderings at once (journey
-stages and by-moment shelves) with 22 pages unreachable by "Continue", and
-grew into a full restructure: **tier → unit → lesson**, one universal
-creed-first order, library on its own screen. The plan is
-`docs/learn-redesign-plan.md` — status PROPOSED, awaiting Iyad's red pen on
-the curriculum map. Three decisions already made by him in that session:
-nothing hidden or locked, one universal order (confidence picks the open
-tier), tier names *Your first weeks / The life that follows / Going deeper*.
-Nothing in it is built; the five audit findings it folds in are listed
-there. Until it is decided, the current Learn tab stands.
+Decided with Iyad and built the same day, after the Awqat window fix (the
+Pray button and wudu line now appear only while a prayer's window is open —
+`findCurrentPrayer` in `src/lib/prayer-times.ts`, sharing `windowEnd` with
+the windows sheet so the two cannot drift).
+
+**The brief was his: "the best cleanest way to track progress manually and
+automatically, so nobody wonders where their reads went."** The audit of the
+existing machinery found two live bugs and two holes; the build fixed all
+four and added the screen he asked for.
+
+- **Answers seed the ledger, never shadow it.** `isLessonDone`
+  (`src/content/curriculum.ts`) is a plain `completedLessons` lookup now; a
+  yes to the shahada question WRITES `guide:shahada` into the ledger at the
+  moment it is given (onboarding, the progress screen, and a one-time
+  `progressSeeded` backfill in `use-settings.tsx` for older installs). This
+  killed the broken circle: un-marking the shahada lesson used to silently
+  add a key and could never succeed, because done-ness had a second source.
+- **Bookmarks are permanent where the lesson lives.** The unit screen's
+  lesson rows draw the reading bookmark from `observations.reading` with no
+  horizon; the carry-on slot keeps its 14 days. A half-read page can no
+  longer vanish everywhere at once. And `recordReading` now guards on the
+  ledger, not on `finished` history, so a lesson un-marked for a redo
+  bookmarks again.
+- **Seed vs declaration.** `prayerConfidenceAt` (null = onboarding seed):
+  observation still silently promotes a seed, but an answer given on the
+  progress screen is a declaration and wins outright, both directions — the
+  ratchet stops the APP demoting people, not the person correcting the app.
+  Cost on the record in `src/lib/competence.ts`: after a declaration, silent
+  promotion is off for that person until they declare again.
+- **The room: `/progress`**, a quiet row at the foot of Learn's spine
+  ("What you already know"). The two onboarding questions re-asked live
+  (same strings), and every unit as a row with a whole-unit mark — six taps
+  instead of forty for somebody arriving with real prior knowledge. The
+  effective (promoted) confidence is what shows selected, because the screen
+  reports what the app acts on.
+- **Renames can no longer orphan progress silently.**
+  `src/content/progress-keys.ts` maps old keys to new in both parsers, and
+  `content:audit` keeps `docs/progress-keys.txt` (every key progress can
+  attach to — 226 at time of writing) and exits non-zero when a key
+  disappears without a migration entry. Verified by forcing all three
+  failure paths.
+
+Verified in the running app: seed backfill from a legacy store shape,
+un-mark surviving reload, whole-unit mark/unmark, bookmark rendering,
+declaration beating an injected promotion-worthy observation history.
+
+Also: the previous section appeared twice verbatim at the end of this file —
+an accidental paste, not a kept correction — and the duplicate was removed.

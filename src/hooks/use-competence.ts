@@ -24,12 +24,12 @@ import type { PrayerConfidence } from '@/lib/onboarding';
  * than three weeks.
  */
 export function usePrayerConfidence(): PrayerConfidence {
-  const { prayerConfidence: said } = useSettings();
+  const { prayerConfidence: said, prayerConfidenceAt } = useSettings();
   const observations = useObservations();
   const [now] = useState(() => Date.now());
 
   return useMemo(
-    () => prayerConfidence(said, observations, now),
-    [said, observations, now],
+    () => prayerConfidence(said, prayerConfidenceAt, observations, now),
+    [said, prayerConfidenceAt, observations, now],
   );
 }

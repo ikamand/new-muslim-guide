@@ -70,13 +70,33 @@ export function observedConfidence(value: Observations, now: number): PrayerConf
   return undefined;
 }
 
-/** What they said, raised by what the app has seen. Never lowered. */
+/**
+ * What they said, raised by what the app has seen — unless they DECLARED.
+ *
+ * Two kinds of answer, told apart by `declaredAt`:
+ *
+ * - **A seed** (`declaredAt` null): the onboarding answer, given in
+ *   somebody's first thirty seconds. Observation may out-rank it, upward
+ *   only, exactly as before.
+ * - **A declaration** (`declaredAt` set): given deliberately on the progress
+ *   screen, by somebody looking at the question and correcting the app. It
+ *   wins outright, in both directions — the ratchet exists to stop the APP
+ *   deciding someone got worse, not to overrule the person's own word.
+ *
+ * The cost, on the record: after a declaration the silent promotion is off
+ * for that person until they declare again. Somebody who declared "teach me"
+ * and then prays with the app for a month keeps the walkthrough until they
+ * say otherwise — and the screen where they say otherwise is the one they
+ * declared on, which is the whole reason it exists.
+ */
 export function prayerConfidence(
   said: PrayerConfidence | null,
+  declaredAt: number | null,
   value: Observations,
   now: number,
 ): PrayerConfidence {
   const seeded = said ?? 'teach-me';
+  if (declaredAt !== null) return seeded;
   const seen = observedConfidence(value, now);
   if (!seen) return seeded;
   return CONFIDENCE_ORDER[seen] > CONFIDENCE_ORDER[seeded] ? seen : seeded;

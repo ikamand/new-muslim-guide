@@ -3,9 +3,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   isPrayerConfidence,
   isShahadaState,
+  saidShahada,
   type PrayerConfidence,
   type ShahadaState,
 } from '@/lib/onboarding';
+import { SHAHADA_KEY } from '@/content/curriculum';
+import { migrateProgressKey } from '@/content/progress-keys';
 import { DEFAULT_REMINDERS, LEAD_CHOICES, type ReminderSettings } from '@/lib/reminders';
 import type { MosqueFit } from '@/lib/mosque-fit';
 import type { HomePlace } from '@/lib/home-place';
@@ -69,6 +72,28 @@ export type Settings = {
    * has SEEN can raise it, and the raised value is the one that matters.
    */
   prayerConfidence: PrayerConfidence | null;
+  /**
+   * When `prayerConfidence` was DECLARED on the progress screen, or null when
+   * it is only the onboarding seed.
+   *
+   * The distinction `lib/competence.ts` turns on: a seed was given in
+   * somebody's first thirty seconds and observation may out-rank it; a
+   * declaration was given deliberately, later, on the screen that exists for
+   * exactly this, and it wins outright — the ratchet stops the APP demoting
+   * people, not the person correcting the app.
+   */
+  prayerConfidenceAt: number | null;
+  /**
+   * One-time backfill flag: whether a yes to the shahada question has been
+   * written into `completedLessons` as the shahada lesson's tick.
+   *
+   * `isLessonDone` used to read `shahadaState` as a second source of truth
+   * for that one lesson, and the shadow broke un-marking (the circle edits
+   * only the ledger). Now the answer writes the ledger — at onboarding, on
+   * the progress screen, and once here for installs that answered before
+   * this flag existed. True from then on, so an un-mark is never re-seeded.
+   */
+  progressSeeded: boolean;
   /**
    * Calculation-method override — a key of `METHODS` in `prayer-times.ts`,
    * or null to keep the location-inferred convention. Null is the default
@@ -160,6 +185,8 @@ const DEFAULTS: Settings = {
   onboardingSkipped: false,
   shahadaState: null,
   prayerConfidence: null,
+  prayerConfidenceAt: null,
+  progressSeeded: true,
   awqatMethod: null,
   awqatHanafiAsr: null,
   awqatMosque: null,
@@ -213,6 +240,41 @@ function parseStored(raw: string | null): Settings {
     const parsed: unknown = JSON.parse(raw);
     if (typeof parsed !== 'object' || parsed === null) return DEFAULTS;
     const stored = parsed as Partial<Record<keyof Settings, unknown>>;
+
+    /*
+      An answer written by a future build, or corrupted, reads as unanswered
+      rather than throwing. It costs somebody a seed, not their app — and
+      `competence.ts` treats a missing answer as "teach me", which is the
+      safe end to be wrong at.
+    */
+    const shahadaState = isShahadaState(stored.shahadaState) ? stored.shahadaState : null;
+
+    /*
+      Filtered rather than trusted — a malformed entry would otherwise mark a
+      lesson complete that does not exist — then mapped through the rename
+      table, so a content id that changed between builds keeps its tick
+      instead of silently reverting to unread on every device. A Set, because
+      two old keys can migrate to one new one.
+    */
+    const lessons = new Set(
+      Array.isArray(stored.completedLessons)
+        ? stored.completedLessons
+            .filter(
+              (entry): entry is string => typeof entry === 'string' && entry.includes(':'),
+            )
+            .map(migrateProgressKey)
+        : [],
+    );
+
+    /*
+      The one-time seed — see `progressSeeded` on the type. Only for a store
+      from before the flag existed: from here on the answer writes the tick
+      at the moment it is given, and an un-marked shahada stays un-marked.
+    */
+    if (stored.progressSeeded !== true && saidShahada(shahadaState)) {
+      lessons.add(SHAHADA_KEY);
+    }
+
     return {
       transliteration:
         typeof stored.transliteration === 'boolean'
@@ -234,16 +296,15 @@ function parseStored(raw: string | null): Settings {
         typeof stored.onboardingSkipped === 'boolean'
           ? stored.onboardingSkipped
           : DEFAULTS.onboardingSkipped,
-      /*
-        An answer written by a future build, or corrupted, reads as unanswered
-        rather than throwing. It costs somebody a seed, not their app — and
-        `competence.ts` treats a missing answer as "teach me", which is the
-        safe end to be wrong at.
-      */
-      shahadaState: isShahadaState(stored.shahadaState) ? stored.shahadaState : null,
+      shahadaState,
       prayerConfidence: isPrayerConfidence(stored.prayerConfidence)
         ? stored.prayerConfidence
         : null,
+      prayerConfidenceAt:
+        typeof stored.prayerConfidenceAt === 'number' && Number.isFinite(stored.prayerConfidenceAt)
+          ? stored.prayerConfidenceAt
+          : null,
+      progressSeeded: true,
       /*
         Narrowed to a string, not validated against `METHODS` — that would
         couple this file to the times engine. `resolveProfile` treats an
@@ -271,13 +332,7 @@ function parseStored(raw: string | null): Settings {
       awaySince: typeof stored.awaySince === 'number' && Number.isFinite(stored.awaySince)
         ? stored.awaySince
         : null,
-      // Filtered rather than trusted: a malformed entry would otherwise mark a
-      // lesson complete that does not exist, and the total would never add up.
-      completedLessons: Array.isArray(stored.completedLessons)
-        ? stored.completedLessons.filter(
-            (entry): entry is string => typeof entry === 'string' && entry.includes(':'),
-          )
-        : [],
+      completedLessons: [...lessons],
       reminders: parseReminders(stored.reminders),
       suhoorWakeUp: typeof stored.suhoorWakeUp === 'boolean' ? stored.suhoorWakeUp : false,
       adhkarNote: typeof stored.adhkarNote === 'boolean' ? stored.adhkarNote : false,
@@ -345,6 +400,14 @@ type SettingsContext = Settings & {
    * un-marks the lesson it just marked.
    */
   completeLesson: (key: string) => void;
+  /**
+   * Marks several lessons done, or un-marks them, in ONE write.
+   *
+   * The progress screen's "whole unit" circle. Per-key toggles would race
+   * each other through stale closures and write the store once per lesson;
+   * this decides inside the updater, like everything else here.
+   */
+  markLessons: (keys: readonly string[], done: boolean) => void;
   /** Pins a duʿa to the top of the Duʿa tab, or unpins it. */
   togglePinned: (id: string) => void;
   /** False until the stored value has been read — the splash waits on this. */
@@ -426,6 +489,20 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
     });
   }, []);
 
+  const markLessons = useCallback((keys: readonly string[], done: boolean) => {
+    setSettings((current) => {
+      const set = new Set(current.completedLessons);
+      for (const key of keys) {
+        if (done) set.add(key);
+        else set.delete(key);
+      }
+      if (set.size === current.completedLessons.length) return current;
+      const next = { ...current, completedLessons: [...set] };
+      void AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+      return next;
+    });
+  }, []);
+
   /**
    * Pinning is append-at-the-end and silently ignores the eleventh.
    *
@@ -459,8 +536,8 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const value = useMemo(
-    () => ({ ...settings, toggle, set, setMany, toggleLesson, completeLesson, togglePinned, loaded }),
-    [settings, toggle, set, setMany, toggleLesson, completeLesson, togglePinned, loaded],
+    () => ({ ...settings, toggle, set, setMany, toggleLesson, completeLesson, markLessons, togglePinned, loaded }),
+    [settings, toggle, set, setMany, toggleLesson, completeLesson, markLessons, togglePinned, loaded],
   );
 
   return <Context value={value}>{children}</Context>;

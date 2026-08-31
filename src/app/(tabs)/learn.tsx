@@ -17,7 +17,7 @@ import {
   PILLARS,
   SHAHADA_GUIDE,
 } from '@/content';
-import { isLessonDone, stepKey } from '@/content/curriculum';
+import { isLessonDone, SHAHADA_KEY } from '@/content/curriculum';
 import { BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useCurriculum, type ResolvedTier } from '@/hooks/use-curriculum';
 import { useLocale } from '@/hooks/use-locale';
@@ -40,12 +40,6 @@ import type { UIKey } from '@/i18n/ui';
 const PRACTICE_CLIP_COUNT = getPracticeClipCount();
 const SHOW_PRACTICE = hasPracticeBeyondSurahs();
 const SHAHADA_STEP_COUNT = SHAHADA_GUIDE.steps.length;
-/**
- * Built the same way the curriculum builds it, not typed as `'guide:shahada'`.
- * A literal here would keep pointing at nothing the day the guide is renamed,
- * and the card would silently go back to calling itself unfinished forever.
- */
-const SHAHADA_KEY = stepKey({ kind: 'guide', id: 'shahada' });
 
 /**
  * Becoming Muslim, given its own weight — and then stepping out of the way.
@@ -63,9 +57,9 @@ const SHAHADA_KEY = stepKey({ kind: 'guide', id: 'shahada' });
 function ShahadaCard() {
   const theme = useTheme();
   const { t } = useLocale();
-  const { completedLessons, shahadaState } = useSettings();
+  const { completedLessons } = useSettings();
 
-  if (isLessonDone(SHAHADA_KEY, completedLessons, shahadaState)) {
+  if (isLessonDone(SHAHADA_KEY, completedLessons)) {
     return (
       <PressableLink
         href={{ pathname: '/guide/[id]', params: { id: 'shahada' } }}
@@ -392,6 +386,17 @@ export default function LearnScreen() {
             </>
           )}
           {tiers.map((tier) => (tier.id === here?.id ? null : <TierDoor key={tier.id} tier={tier} />))}
+          {/*
+            The door to the progress screen — where the onboarding questions
+            are re-asked and whole units can be marked known. At the spine's
+            foot because it is ABOUT the spine: the person who needs it is
+            looking at a path that has them wrong.
+          */}
+          <QuietRow
+            href="/progress"
+            label={t('learn.progress')}
+            accessibilityLabel={t('learn.progress')}
+          />
         </View>
 
         {/* The things you return to rather than read once. Unnumbered: a

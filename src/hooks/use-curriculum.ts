@@ -79,7 +79,7 @@ export type CurriculumState = {
  * and `content:audit` is where an unresolved lesson surfaces.
  */
 export function useCurriculum(): CurriculumState {
-  const { completedLessons, shahadaState } = useSettings();
+  const { completedLessons } = useSettings();
   const confidence = usePrayerConfidence();
   const { locale } = useLocale();
 
@@ -95,7 +95,7 @@ export function useCurriculum(): CurriculumState {
             ...lesson,
             entry,
             key,
-            done: isLessonDone(key, completedLessons, shahadaState),
+            done: isLessonDone(key, completedLessons),
           } satisfies ResolvedLesson;
         })
         .filter((lesson): lesson is ResolvedLesson => lesson !== undefined);
@@ -169,5 +169,5 @@ export function useCurriculum(): CurriculumState {
       total: flat.length,
       after,
     };
-  }, [completedLessons, shahadaState, confidence, locale]);
+  }, [completedLessons, confidence, locale]);
 }

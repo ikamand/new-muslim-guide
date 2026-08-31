@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { FIRSTS } from '@/content/firsts';
+import { migrateProgressKey } from '@/content/progress-keys';
 
 /**
  * What the app has seen this person do.
@@ -163,19 +164,32 @@ const isRecord = (value: unknown): value is Record<string, unknown> =>
   value !== null && typeof value === 'object' && !Array.isArray(value);
 
 /**
- * Finishes, narrowed — and migrated from the bare number Phase 5 wrote.
+ * Finishes, narrowed — and migrated twice over: from the bare number Phase 5
+ * wrote, and through the rename table in `progress-keys.ts`.
  *
  * A record written hours before this shape existed holds `1787953082432` where
  * this expects an object. Dropping those would erase somebody's history to
  * satisfy a type, so a number reads as one finish at that moment, which is
- * exactly what it meant.
+ * exactly what it meant. Two old keys migrating to one new one merge on the
+ * only honest arithmetic: earliest first, latest last, times summed.
  */
 function finishes(value: unknown): Record<string, Finish> {
   if (!isRecord(value)) return {};
   const out: Record<string, Finish> = {};
+  const keep = (key: string, entry: Finish) => {
+    const named = migrateProgressKey(key);
+    const before = out[named];
+    out[named] = before
+      ? {
+          first: Math.min(before.first, entry.first),
+          last: Math.max(before.last, entry.last),
+          times: before.times + entry.times,
+        }
+      : entry;
+  };
   for (const [key, entry] of Object.entries(value)) {
     if (typeof entry === 'number' && Number.isFinite(entry)) {
-      out[key] = { first: entry, last: entry, times: 1 };
+      keep(key, { first: entry, last: entry, times: 1 });
       continue;
     }
     if (!isRecord(entry)) continue;
@@ -188,7 +202,7 @@ function finishes(value: unknown): Record<string, Finish> {
       typeof count === 'number' &&
       Number.isFinite(count)
     ) {
-      out[key] = { first, last, times: count };
+      keep(key, { first, last, times: count });
     }
   }
   return out;
@@ -209,7 +223,12 @@ function readings(value: unknown): Record<string, Reading> {
       typeof at === 'number' &&
       Number.isFinite(at)
     ) {
-      out[key] = { furthest, at };
+      // Renames merge on the deepest bookmark and the latest departure.
+      const named = migrateProgressKey(key);
+      const before = out[named];
+      out[named] = before
+        ? { furthest: Math.max(before.furthest, furthest), at: Math.max(before.at, at) }
+        : { furthest, at };
     }
   }
   return out;
@@ -304,17 +323,24 @@ export function recordFinished(value: Observations, key: string, at: number): Ob
  * Somebody left a lesson partway through.
  *
  * `furthest` only rises: scrolling back up before leaving does not un-read
- * the page. Finished lessons never record — a partial re-read of something
- * done is not unfinished business, and letting it in would put "You were
- * reading" on pages the reader has already been congratulated for.
+ * the page. Lessons currently marked done never record — a partial re-read
+ * of something done is not unfinished business, and letting it in would put
+ * "You were reading" on pages the reader has already been congratulated for.
+ *
+ * The guard is `doneNow` — the ledger, passed in — and NOT `value.finished`,
+ * which it used to be. `finished` is history and history never un-happens,
+ * so guarding on it meant somebody who un-marked a lesson to redo it
+ * properly could never get a bookmark on the re-read: the app remembered
+ * they had finished once and refused to see them reading now.
  */
 export function recordReading(
   value: Observations,
   key: string,
   furthest: number,
   at: number,
+  doneNow: readonly string[],
 ): Observations {
-  if (value.finished[key]) return value;
+  if (doneNow.includes(key)) return value;
   const before = value.reading[key];
   const deepest = Math.min(1, Math.max(before?.furthest ?? 0, furthest));
   if (deepest <= 0) return value;

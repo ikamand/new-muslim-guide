@@ -136,8 +136,10 @@ export function ObservationsProvider({ children }: { children: ReactNode }) {
   );
   const leftReading = useCallback(
     (key: string, furthest: number) =>
-      update((current) => recordReading(current, key, furthest, Date.now())),
-    [update],
+      // The ledger, not `finished`, is what gates a bookmark — see
+      // `recordReading` on why an un-marked lesson must bookmark again.
+      update((current) => recordReading(current, key, furthest, Date.now(), completedLessons)),
+    [update, completedLessons],
   );
 
   const api = useMemo<ObservationsValue>(

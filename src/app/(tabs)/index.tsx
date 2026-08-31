@@ -74,6 +74,18 @@ import type { UIKey } from '@/i18n/ui';
  * inside the times card, under the mihrab, so the prayer you are about to pray
  * and the button that starts it are the same object.
  *
+ * ## It shows only while a prayer's window is open
+ *
+ * It used to be handed the NEXT prayer, so at 11am the biggest button on the
+ * screen said "Pray Dhuhr" — an instruction to pray a prayer whose time had
+ * not entered, which is invalid, to the one reader who would follow it
+ * literally. Now it is handed the prayer whose window contains this moment
+ * (`findCurrentPrayer`, the same window ends the sheet prints), and between
+ * windows the whole block is absent — the niche already says what is next and
+ * counts down to it. The wudu line hides with the button, as one unit: wudu
+ * before the time is valid, but a line that stays when its button goes would
+ * need explaining, and Iyad chose the block over the footnote (31 Aug).
+ *
  * ## It changes shape with competence
  *
  * Week one wants a 23-step walkthrough. Year three wants the time, the
@@ -237,11 +249,12 @@ function WordsSlot() {
 
 export default function TodayScreen() {
   const theme = useTheme();
-  const { next } = usePrayerTimes();
+  const { current } = usePrayerTimes();
   const { locale, t } = useLocale();
   const item = useToday();
 
-  const nextPrayer = next ? PRAYERS.find((prayer) => prayer.id === next.id) : undefined;
+  /* The prayer to pray NOW — null between windows, and so is the button. */
+  const currentPrayer = current ? PRAYERS.find((prayer) => prayer.id === current.id) : undefined;
   const wudu = localiseGuide(WUDU, locale);
 
   return (
@@ -251,8 +264,8 @@ export default function TodayScreen() {
 
         <PrayerTimesCard
           action={
-            nextPrayer ? (
-              <PrayAction prayer={localiseGuide(nextPrayer, locale)} wudu={wudu} />
+            currentPrayer ? (
+              <PrayAction prayer={localiseGuide(currentPrayer, locale)} wudu={wudu} />
             ) : null
           }
         />

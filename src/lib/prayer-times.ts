@@ -351,6 +351,73 @@ export function findNextPrayer(coords: LatLon, now: Date, profile: MethodProfile
   };
 }
 
+/**
+ * When `id`'s window closes, within its own day's times.
+ *
+ * Fajr ends at sunrise; Dhuhr, ʿAsr and Maghrib each end when the next prayer
+ * enters; ʿIshāʾ ends at the middle of the night in the fiqh sense. This is
+ * the one statement of those ends — the windows sheet and Today's pray button
+ * both read it, so what the sheet prints and when the button shows can never
+ * disagree.
+ *
+ * ⚠️ The ends are rulings, not astronomy — see the review note on
+ * `WindowsSheet` in `prayer-times-card.tsx`, which this mapping was lifted
+ * from verbatim.
+ */
+export function windowEnd(day: DayTimes, id: PrayerId): Date {
+  const at = (prayerId: PrayerId) => day.prayers.find((prayer) => prayer.id === prayerId)!.time;
+  switch (id) {
+    case 'fajr':
+      return day.sunrise;
+    case 'dhuhr':
+      return at('asr');
+    case 'asr':
+      return at('maghrib');
+    case 'maghrib':
+      return at('isha');
+    case 'isha':
+      return day.middleOfNight;
+  }
+}
+
+export type CurrentPrayer = PrayerTime & {
+  /** When this prayer's window closes. */
+  windowEnds: Date;
+};
+
+/**
+ * The prayer whose window is open at `now`, or null between windows.
+ *
+ * Null is a real answer, not a failure: after sunrise nothing is due until
+ * Dhuhr, and after the middle of the night nothing is due until Fajr. Today's
+ * pray button hides in those spans, because "Pray Dhuhr" on screen at 11am is
+ * an instruction to pray a prayer whose time has not entered — invalid, and
+ * exactly the kind of thing a convert would follow literally.
+ *
+ * Yesterday is scanned as well as today because ʿIshāʾ's window crosses
+ * midnight: at 00:30 the open window belongs to *yesterday's* ʿIshāʾ, whose
+ * middle-of-night lands in the small hours of today. Two days are enough — a
+ * window that contains `now` cannot have started earlier than yesterday's
+ * ʿIshāʾ. If a desynced clock puts `now` outside both days, no window matches
+ * and the button simply hides, which is the safe failure.
+ */
+export function findCurrentPrayer(
+  coords: LatLon,
+  now: Date,
+  profile: MethodProfile,
+): CurrentPrayer | null {
+  for (const offset of [-1, 0]) {
+    const day = computeDay(coords, localDay(now, offset), profile);
+    for (const prayer of day.prayers) {
+      const ends = windowEnd(day, prayer.id);
+      if (now.getTime() >= prayer.time.getTime() && now.getTime() < ends.getTime()) {
+        return { ...prayer, windowEnds: ends };
+      }
+    }
+  }
+  return null;
+}
+
 /** Degrees clockwise from true north towards the Kaʿbah. */
 export function qiblaBearing(coords: LatLon): number {
   return Qibla(new Coordinates(coords.latitude, coords.longitude));

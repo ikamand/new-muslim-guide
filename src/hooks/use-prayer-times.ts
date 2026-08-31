@@ -5,8 +5,10 @@ import { useAwqatProfile } from '@/hooks/use-awqat-profile';
 import { useLocation } from '@/hooks/use-location';
 import {
   computeDay,
+  findCurrentPrayer,
   findNextPrayer,
   timezoneLooksWrong,
+  type CurrentPrayer,
   type DayTimes,
   type MethodProfile,
   type NextPrayer,
@@ -27,6 +29,13 @@ const TICK_MS = 30_000;
 export type PrayerTimesState = {
   today: DayTimes | null;
   next: NextPrayer | null;
+  /**
+   * The prayer whose window is open right now, or null between windows —
+   * after sunrise and after the middle of the night, nothing is due. The
+   * 30-second tick above is what makes this current: the pray button it
+   * gates appears within half a minute of the adhan.
+   */
+  current: CurrentPrayer | null;
   profile: MethodProfile | null;
   /** The device clock disagrees badly with where the device says it is. */
   timezoneSuspect: boolean;
@@ -55,7 +64,7 @@ export function usePrayerTimes(): PrayerTimesState {
 
   return useMemo(() => {
     if (!coords) {
-      return { today: null, next: null, profile: null, timezoneSuspect: false };
+      return { today: null, next: null, current: null, profile: null, timezoneSuspect: false };
     }
 
     const profile = profileFor(coords);
@@ -63,6 +72,7 @@ export function usePrayerTimes(): PrayerTimesState {
     return {
       today: computeDay(coords, now, profile),
       next: findNextPrayer(coords, now, profile),
+      current: findCurrentPrayer(coords, now, profile),
       profile,
       timezoneSuspect: timezoneLooksWrong(coords, now),
     };

@@ -13,9 +13,9 @@ import { useSettings } from '@/hooks/use-settings';
 import {
   formatCountdown,
   formatTime,
+  windowEnd,
   type DayTimes,
   type NextPrayer,
-  type PrayerId,
   type PrayerTime,
 } from '@/lib/prayer-times';
 import { useTheme } from '@/hooks/use-theme';
@@ -162,6 +162,10 @@ function JumuahNote() {
  * the night is computed in the fiqh sense (halfway from sunset to Fajr), not
  * 00:00. The wording lives in `ui.ts` beside `times.endsAtSunrise`, which
  * set the precedent. None of it ships a public release unreviewed.
+ *
+ * The ends themselves come from `windowEnd` in `lib/prayer-times.ts`, which
+ * also gates Today's pray button — one mapping, so the span the sheet prints
+ * and the span the button obeys cannot drift apart.
  */
 function WindowsSheet({
   visible,
@@ -177,19 +181,9 @@ function WindowsSheet({
   const theme = useTheme();
   const { t } = useLocale();
 
-  const at = (id: PrayerId) => today.prayers.find((p) => p.id === id)!.time;
   const windows: { prayer: PrayerTime; ends: Date }[] = today.prayers.map((prayer) => ({
     prayer,
-    ends:
-      prayer.id === 'fajr'
-        ? today.sunrise
-        : prayer.id === 'dhuhr'
-          ? at('asr')
-          : prayer.id === 'asr'
-            ? at('maghrib')
-            : prayer.id === 'maghrib'
-              ? at('isha')
-              : today.middleOfNight,
+    ends: windowEnd(today, prayer.id),
   }));
 
   const now = new Date(next.time.getTime() - next.msUntil);

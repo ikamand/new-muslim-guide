@@ -2487,3 +2487,33 @@ screen's deadline test, recorded as such in the code. "Your firsts" moved up
 to sit directly under the shahada row. The promoted "You were reading" row
 was floating between sections with the 32px screen gap on both sides; it now
 lives inside the chapter section with a chevron, matching every other row.
+
+---
+
+## 30 Aug 2026 — Learn re-thread PROPOSED, not built
+
+The Learn-tab audit found the tab running two orderings at once (journey
+stages and by-moment shelves) with 22 pages unreachable by "Continue", and
+grew into a full restructure: **tier → unit → lesson**, one universal
+creed-first order, library on its own screen. The plan is
+`docs/learn-redesign-plan.md` — status PROPOSED, awaiting Iyad's red pen on
+the curriculum map. Three decisions already made by him in that session:
+nothing hidden or locked, one universal order (confidence picks the open
+tier), tier names *Your first weeks / The life that follows / Going deeper*.
+Nothing in it is built; the five audit findings it folds in are listed
+there. Until it is decided, the current Learn tab stands.
+
+---
+
+## 30 Aug 2026 — Learn re-thread PROPOSED, not built
+
+The Learn-tab audit found the tab running two orderings at once (journey
+stages and by-moment shelves) with 22 pages unreachable by "Continue", and
+grew into a full restructure: **tier → unit → lesson**, one universal
+creed-first order, library on its own screen. The plan is
+`docs/learn-redesign-plan.md` — status PROPOSED, awaiting Iyad's red pen on
+the curriculum map. Three decisions already made by him in that session:
+nothing hidden or locked, one universal order (confidence picks the open
+tier), tier names *Your first weeks / The life that follows / Going deeper*.
+Nothing in it is built; the five audit findings it folds in are listed
+there. Until it is decided, the current Learn tab stands.

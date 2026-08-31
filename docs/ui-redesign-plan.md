@@ -2556,3 +2556,19 @@ declaration beating an injected promotion-worthy observation history.
 
 Also: the previous section appeared twice verbatim at the end of this file —
 an accidental paste, not a kept correction — and the duplicate was removed.
+
+---
+
+## 31 Aug 2026 — Awqat card: the quiet line becomes spandrel marks ✅
+
+Iyad's idea, built the same day: the "August › / Qibla ›" text row at the
+card's foot is gone, replaced by two drawn marks in the arch's empty top
+corners — a jadwal mark (left, → `/awqat`) and a compass rose (right,
+→ `/qibla`), `JadwalMark` and `CompassRose` in
+`src/components/illustrations.tsx`. Spandrels are where an illuminated page
+puts small ornaments, so the links now sit in space the arch was already
+leaving empty and the card is one row shorter. Drawn as siblings above the
+niche pressable, never inside it; 44pt targets; month name kept in the
+calendar mark's accessibility label. One trap found on web: the SVG
+`rotation` prop is not translated by react-native-svg-web, so the compass
+needle's lean is baked into its path coordinates.

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Modal, Pressable, StyleSheet, View } from 'react-native';
 
 import { AwqatArch } from '@/components/awqat-arch';
+import { CompassRose, JadwalMark } from '@/components/illustrations';
 import { DoubleRule } from '@/components/jadwal';
 import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
@@ -254,10 +255,8 @@ export function PrayerTimesCard({ action }: PrayerTimesCardProps) {
   // 5 is Friday in every locale — `getDay` is not localised, which is what
   // makes it safe to compare against a number here.
   const isFriday = new Date().getDay() === 5;
-  /*
-    The month link wears the month's own name — "September ›" — because "the
-    monthly timetable" is a mouthful and the name says where the tap lands.
-  */
+  // The month's own name rides in the calendar mark's accessibility label,
+  // so a screen reader still hears where the tap lands.
   const monthWord = new Intl.DateTimeFormat(locale, { month: 'long' }).format(new Date());
 
   if (status === 'denied' || status === 'unavailable') {
@@ -317,6 +316,31 @@ export function PrayerTimesCard({ action }: PrayerTimesCardProps) {
         </View>
       </Pressable>
 
+      {/*
+        The spandrels. The corners around an arch are where an illuminated
+        page puts its small ornaments, and these two are ornaments that go
+        somewhere: the jadwal mark to the month's timetable, the compass
+        rose to the qibla. They replaced a quiet text row at the card's foot
+        ("August › / Qibla ›") — one row shorter, and the links now sit in
+        space the arch was already leaving empty. Drawn AFTER the niche so
+        they stack above it: siblings, never children, because a link inside
+        the windows-sheet button is a button inside a button.
+      */}
+      <PressableLink
+        href="/awqat"
+        accessibilityLabel={`${t('awqat.title')} · ${monthWord}`}
+        style={[styles.spandrel, styles.spandrelLeft]}
+        pressedStyle={{ opacity: 0.5 }}>
+        <JadwalMark color={theme.gold} />
+      </PressableLink>
+      <PressableLink
+        href="/qibla"
+        accessibilityLabel={t('qibla.title')}
+        style={[styles.spandrel, styles.spandrelRight]}
+        pressedStyle={{ opacity: 0.5 }}>
+        <CompassRose color={theme.gold} />
+      </PressableLink>
+
       {/* The times row is the arch's baseline — the legs land on this rule. */}
       <View style={[styles.divider, { backgroundColor: theme.goldSoft }]} />
 
@@ -372,34 +396,6 @@ export function PrayerTimesCard({ action }: PrayerTimesCardProps) {
           </ThemedText>
         </View>
       )}
-
-      {/*
-        The quiet line. The method prose that lived here — "ISNA · worked out
-        on this phone · your mosque wins" — moved to the Prayer times group in
-        Settings, where changing it will one day be possible. Qibla stays,
-        because it is used daily; the month link joins it when the monthly
-        jadwal exists, rather than shipping as a dead tap.
-      */}
-      <View style={[styles.quiet, { borderTopColor: theme.goldSoft }]}>
-        <PressableLink
-          href="/awqat"
-          accessibilityLabel={t('awqat.title')}
-          style={styles.quietLink}
-          pressedStyle={{ opacity: 0.6 }}>
-          <ThemedText type="smallBold" themeColor="gold">
-            {monthWord} ›
-          </ThemedText>
-        </PressableLink>
-        <PressableLink
-          href="/qibla"
-          accessibilityLabel={t('qibla.title')}
-          style={styles.quietLink}
-          pressedStyle={{ opacity: 0.6 }}>
-          <ThemedText type="smallBold" themeColor="gold">
-            {t('qibla.title')} ›
-          </ThemedText>
-        </PressableLink>
-      </View>
 
       <WindowsSheet
         visible={windowsOpen}
@@ -482,15 +478,26 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: Spacing.one,
   },
-  quiet: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: Spacing.one,
-    borderTopWidth: StyleSheet.hairlineWidth,
-  },
-  quietLink: {
-    minHeight: 44,
+  /*
+    44pt targets in the arch's empty corners, the drawn mark centred. Above
+    the niche in stacking order (they render after it), so the corner taps
+    are theirs and everything else on the niche still opens the windows
+    sheet.
+  */
+  spandrel: {
+    position: 'absolute',
+    top: Spacing.one,
+    width: 44,
+    height: 44,
+    alignItems: 'center',
     justifyContent: 'center',
+    zIndex: 2,
+  },
+  spandrelLeft: {
+    left: Spacing.one,
+  },
+  spandrelRight: {
+    right: Spacing.one,
   },
   backdrop: {
     flex: 1,

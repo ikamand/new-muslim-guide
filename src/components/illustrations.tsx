@@ -1493,3 +1493,71 @@ export function Glyph({ name, color, size = 22 }: { name: GlyphName; color: stri
     </Svg>
   );
 }
+
+/**
+ * A compass rose, for the Awqat card's right spandrel — the qibla link.
+ *
+ * The corners around an arch are the spandrels, and in an illuminated page
+ * they carry exactly this kind of small ornament, which is why the two card
+ * links live there rather than on a row of their own. Drawn on the 24 grid
+ * in the same stroke as the arch it sits beside. The needle leans rather
+ * than pointing north: this mark means "find the direction", not "you are
+ * facing it" — the qibla screen is where the real needle lives.
+ */
+export function CompassRose({ color, size = 22 }: { color: string; size?: number }) {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <Circle cx={12} cy={12} r={9.2} stroke={color} strokeWidth={1.3} />
+      {/* Cardinal ticks, inside the ring — the Rosette's language. */}
+      <G stroke={color} strokeOpacity={0.4} strokeWidth={1}>
+        <Line x1={12} y1={2.8} x2={12} y2={5} />
+        <Line x1={12} y1={19} x2={12} y2={21.2} />
+        <Line x1={2.8} y1={12} x2={5} y2={12} />
+        <Line x1={19} y1={12} x2={21.2} y2={12} />
+      </G>
+      {/*
+        The needle, leaning 32° — rotated in the coordinates themselves, not
+        with a `rotation` prop, which react-native-svg does not translate on
+        web (it lands as an invalid DOM attribute and the needle with it).
+      */}
+      <Path d="M15.5 6.4 L13.61 13.01 L10.39 10.99 Z" fill={color} />
+      <Path
+        d="M8.5 17.6 L10.39 10.99 L13.61 13.01 Z"
+        stroke={color}
+        strokeWidth={1}
+        strokeOpacity={0.55}
+      />
+      <Circle cx={12} cy={12} r={1.1} fill={color} />
+    </Svg>
+  );
+}
+
+/**
+ * A jadwal — the monthly timetable, as a mark. The Awqat card's left
+ * spandrel, opening the month screen. A ruled sheet with its two binding
+ * ties and a header band: a table, not a Hijri crescent, because the tap
+ * lands on the printed month.
+ */
+export function JadwalMark({ color, size = 22 }: { color: string; size?: number }) {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <Path
+        d="M3.6 7.4 a2.4 2.4 0 0 1 2.4 -2.4 h12 a2.4 2.4 0 0 1 2.4 2.4 v10.2 a2.4 2.4 0 0 1 -2.4 2.4 h-12 a2.4 2.4 0 0 1 -2.4 -2.4 Z"
+        stroke={color}
+        strokeWidth={1.3}
+      />
+      <G stroke={color} strokeWidth={1.3} strokeLinecap="round">
+        <Line x1={8.2} y1={2.6} x2={8.2} y2={6.6} />
+        <Line x1={15.8} y1={2.6} x2={15.8} y2={6.6} />
+      </G>
+      <Line x1={3.6} y1={9.8} x2={20.4} y2={9.8} stroke={color} strokeOpacity={0.5} strokeWidth={1} />
+      <G fill={color} fillOpacity={0.55}>
+        <Circle cx={8.2} cy={13} r={1.05} />
+        <Circle cx={12} cy={13} r={1.05} />
+        <Circle cx={15.8} cy={13} r={1.05} />
+        <Circle cx={8.2} cy={16.6} r={1.05} />
+        <Circle cx={12} cy={16.6} r={1.05} />
+      </G>
+    </Svg>
+  );
+}

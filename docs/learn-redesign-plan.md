@@ -124,7 +124,7 @@ screen the Six Articles step already opens — a duplicate).
    never grayed. Confidence seeds which tier opens (teach-me / need-words →
    tier 1, on-my-own → tier 2); completion moves the star.
 6. **"Browse by situation"** — one quiet row → the library screen.
-7. Reference shelf — plus one new row: **The prayers** → `/pray`, so the
+7. Reference shelf — plus one new row: **Every prayer** → `/pray`, so the
    farḍ/sunnah table never sinks with a shelf again.
 
 The tab drops from ~50 rows to roughly a dozen.
@@ -142,11 +142,52 @@ The five by-moment groups exactly as the shelves render today — moved, not
 redesigned. Fixed order (no confidence sort; a lookup surface has no "now").
 Shelf counts fixed to count rendered rows, specials included.
 
-### Awqat card (separate proposal, Iyad's call)
+### Every prayer — `/pray` widened (decided 30 Aug)
 
-One line on the current prayer's row — "+2 before · 2 after" — putting the
-rawatib at the moment of use, five times a day, zero navigation. Mockup
-first; the Awqat card's design decisions are Iyad's.
+The chooser's job widens from choose-before-praying to **the map of every
+prayer**, in four bands:
+
+1. **The five** — name, when, rakʿahs, sunnah before/after, plus one new
+   column `buildPrayer` already knows: **aloud or silent**.
+2. **The week and the year** — Jumuʿah (2, replaces Dhuhr), Eid, janāzah.
+   Counts and "when" extracted from their existing pages; no new writing.
+3. **Prayers you choose** — the five rows, each opening its page. Special
+   words (the istikhāra duʿa) stay on the prayer's own page — the map
+   points, it never duplicates, because a duʿa printed twice is two places
+   for a correction to miss.
+4. **When it's different** — pointer rows into existing pages: praying
+   seated, missed prayers, travelling.
+
+NOT on the map, named rather than smuggled: duha (no page exists) and any
+shortening-rules detail beyond what the travelling page already says —
+either is commissioned content for the review pile if wanted.
+
+Reached three ways: a row at the foot of the **Awqat screen** (one tap from
+where a prayer-minded person already is, without touching the card), the
+reference-shelf row on Learn, and the links the chooser already has.
+
+### Awqat card (mockup first — the card's design is Iyad's)
+
+Two candidate lines, drawn in ONE mockup pass, shipped only as approved on
+sight:
+
+- **Witr, after ʿIshaʾ — decided in principle, 30 Aug.** A line that exists
+  only while the window is open: "Witr — before Fajr →". A window statement
+  is a ruling: it is read from the witr page's own text and joins the
+  review pile.
+- **Rawatib counts on the current prayer** ("+2 before · 2 after") — still
+  proposed, not decided.
+
+The night slot for tahajjud/qiyām is **REJECTED** (Iyad, 30 Aug) — only
+witr earned the card. Decided; not to be re-raised.
+
+### Trigger-moment doors (decided 30 Aug)
+
+Tawba and istikhāra are event-summoned, not clock-summoned. The repentance
+and if-you-stopped pages each end with a door — "There is also a prayer for
+this →" — to the tawba prayer; istikhāra is doored from the chooser and
+Ask. This, plus tier 3's unit, is how the event-bound prayers stay part of
+the process.
 
 ## 5. The audit findings this folds in
 
@@ -212,8 +253,12 @@ they were tuned for goes.
 2. **Two screens, as unalike as possible, then STOP for eyes:** the Learn tab
    with tiers (tier 1 open, both themes, screenshots) and the library screen.
 3. Only after sign-off: unit screen, the three `LessonScroll` wraps, the
-   reference-shelf prayers row, Today wiring, i18n manifest.
-4. Separately, last: the Awqat sunnah-line mockup.
+   reference-shelf prayers row, the two trigger-moment doors, Today wiring,
+   i18n manifest.
+4. Separately: the Every-prayer widening of `/pray` (bands 2 and 4, the
+   aloud/silent column — extraction only), then the Awqat card mockup with
+   the witr line and the rawatib line together. Card changes ship only
+   after Iyad sees the mockup.
 5. **"How prayer works" is written from sources, cited from pages actually
    opened, flagged ⚠️ unreviewed, and does not gate the structure** — the
    unit ships around minimum-prayer until the page clears review.

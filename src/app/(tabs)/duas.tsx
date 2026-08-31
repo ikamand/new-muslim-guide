@@ -111,21 +111,27 @@ export default function DuasScreen() {
 
         {live ? null : <DuaCard />}
 
+        {/*
+          One zero-gap group for everything ruled: the pinned shelf and its
+          rows, then the sessions and the books, flush — a rule and the next
+          row's box touch. They were separate groups across a 24px container
+          gap, so the last pinned rule floated over dead air (the flush-join
+          rule, Iyad, 31 Aug). The Shelf's own padding is the sectioning.
+        */}
+        <View>
         {pinned.length > 0 ? (
-          <View style={styles.group}>
+          <>
             <Shelf label={t('adhkar.pinned')} count={pinned.length} />
-            <View style={styles.rows}>
-              {pinned.map((occasion) => (
-                <Row
-                  key={occasion.id}
-                  label={occasion.english || occasion.arabic}
-                  arabic={occasion.arabic}
-                  href={{ pathname: '/dua-book/[id]', params: { id: String(occasion.id) } }}
-                  chevron
-                />
-              ))}
-            </View>
-          </View>
+            {pinned.map((occasion) => (
+              <Row
+                key={occasion.id}
+                label={occasion.english || occasion.arabic}
+                arabic={occasion.arabic}
+                href={{ pathname: '/dua-book/[id]', params: { id: String(occasion.id) } }}
+                chevron
+              />
+            ))}
+          </>
         ) : null}
 
         {/*
@@ -133,7 +139,7 @@ export default function DuasScreen() {
           everything else. All the same row, because they are all "opens a list
           of things" and looking different would imply they are not.
         */}
-        <View style={styles.rows}>
+        <View>
           {ADHKAR_SESSIONS.filter((session) => session.id !== live?.id).map((session) => (
             <Row
               key={session.id}
@@ -177,6 +183,7 @@ export default function DuasScreen() {
               />
             ),
           )}
+        </View>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -266,7 +273,8 @@ const styles = StyleSheet.create({
       as soon as somebody pins a few duʿas.
     */
     paddingBottom: BottomTabInset + Spacing.four,
-    gap: Spacing.four,
+    /* Card joins only — the ruled rows live in the flush group below. */
+    gap: Spacing.two,
     width: '100%',
     maxWidth: MaxContentWidth,
     alignSelf: 'center',
@@ -285,7 +293,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     width: 3,
   },
-  header: { gap: Spacing.two, paddingTop: Spacing.four },
+  header: { gap: Spacing.two, paddingTop: Spacing.four, paddingBottom: Spacing.two },
   start: {
     marginTop: Spacing.two,
     minHeight: 44,
@@ -293,12 +301,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  group: { gap: Spacing.two },
-  /*
-    No top rule. `Shelf` above already draws one with the group's name set
-    into it, and two lines a gap apart read as a mistake.
-  */
-  rows: {},
   row: {
     gap: Spacing.one,
     minHeight: 48,

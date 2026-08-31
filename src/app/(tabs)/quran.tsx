@@ -62,6 +62,13 @@ export default function QuranScreen() {
         </View>
 
         {/*
+          One zero-gap group from the progress panel down: the panel's rule,
+          the review row and every surah row touch — the flush-join rule.
+          The list used to put 8px of unpainted air under every rule, which
+          is 38 floating rules on one screen (Iyad, 31 Aug).
+        */}
+        <View>
+        {/*
           The band is a row of eight-point stars — the same girih the shahada
           card carries. A count behind it rather than a percentage: "6 of 38"
           is a fact, "16%" is a verdict.
@@ -163,6 +170,7 @@ export default function QuranScreen() {
             );
           })}
         </View>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -175,7 +183,8 @@ const styles = StyleSheet.create({
   content: {
     padding: Spacing.four,
     paddingBottom: BottomTabInset + Spacing.four,
-    gap: Spacing.four,
+    /* Card joins only — every ruled join lives inside the flush group. */
+    gap: Spacing.two,
     width: '100%',
     maxWidth: MaxContentWidth,
     alignSelf: 'center',
@@ -183,6 +192,8 @@ const styles = StyleSheet.create({
   header: {
     gap: Spacing.two,
     paddingTop: Spacing.four,
+    /* The header owns the air above the panel; a gap paints nothing. */
+    paddingBottom: Spacing.two,
   },
   review: {
     flexDirection: 'row',
@@ -206,9 +217,7 @@ const styles = StyleSheet.create({
     gap: 2,
     padding: Spacing.three,
   },
-  list: {
-    gap: Spacing.two,
-  },
+  list: {},
   /*
     A ruled entry. "Known" used to be an accent border around the whole card;
     it is now malachite on the number and the trailing word — green appears

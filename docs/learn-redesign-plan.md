@@ -262,6 +262,16 @@ they were tuned for goes.
    the shahada unsaid, "Becoming Muslim" is the hero, the unit title AND
    the first left-in-chapter line — the unit and its first lesson share a
    name, and one of them may deserve a different one.
+
+   **31 Aug, after Iyad's device pass:** the in-place accordion is gone —
+   expanding a tier collapsed the one above and the page shifted under the
+   reader's finger. Collapsed tiers are now doors to `/tier/[id]` (a screen
+   cannot jump). One spine: the where-you-are card and its tier's unit rows
+   are one section, always the tier the reader is in — the card for one
+   tier above a different tier's rows was two spines with equal claim and
+   most of what "blended". Rosettes now mark the path alone (the reference
+   shelf is unnumbered, Browse-by-situation folded into it), and the tier
+   shelf dropped its count, which was wrapping the label on his screen.
 3. Only after sign-off: unit screen, the three `LessonScroll` wraps, the
    reference-shelf prayers row, the two trigger-moment doors, Today wiring,
    i18n manifest.

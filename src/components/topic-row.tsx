@@ -29,8 +29,13 @@ export function TopicRow({
   subtitle: string;
   count: number;
   unit: UIKey;
-  /** Its place within its shelf, drawn as a rosette in the margin. */
-  index: number;
+  /**
+   * Its place within its shelf, drawn as a rosette in the margin. Omitted on
+   * the Learn tab's reference shelf: a numeral means a sequence, and "keep
+   * coming back to" is not one — numbered rows are the path's mark alone.
+   * The library keeps its numerals, where they are a contents page's.
+   */
+  index?: number;
   /** How far through this the reader got before leaving, 0..1. */
   progress?: number;
 }) {
@@ -41,7 +46,7 @@ export function TopicRow({
     <JadwalRow
       href={href}
       accessibilityLabel={`${title}. ${subtitle}. ${count} ${t(unit)}`}
-      marginal={<Rosette label={String(index)} />}
+      marginal={index !== undefined ? <Rosette label={String(index)} /> : undefined}
       title={title}
       meta={`${subtitle} · ${count} ${t(unit)}`}
       progress={progress}

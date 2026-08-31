@@ -1,6 +1,5 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { useState } from 'react';
-import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { GirihBand, StagePath } from '@/components/illustrations';
@@ -239,29 +238,29 @@ function TierOpen({ tier }: { tier: ResolvedTier }) {
 }
 
 /**
- * A collapsed tier: its name, its purpose, its size — and everything behind
- * one tap. Collapsed, never grayed: gray is the visual language of a lock,
- * and nothing here is locked. The person whose friend dies on Tuesday finds
- * janāzah on Tuesday.
+ * A door to another tier: its name, its purpose, its size — and everything
+ * behind one tap. A door, never a gray-out: gray is the visual language of a
+ * lock, and nothing here is locked — the person whose friend dies on Tuesday
+ * finds janāzah on Tuesday.
+ *
+ * It NAVIGATES. This was an in-place accordion, and expanding one tier
+ * collapsed the tier above it, so the page shifted under the reader's finger
+ * and the row they tapped landed somewhere else (Iyad's device, 31 Aug). It
+ * was also the only control on the tab that mutated the page rather than
+ * opening a screen. A screen cannot jump.
  */
-function TierClosed({ tier, onOpen }: { tier: ResolvedTier; onOpen: () => void }) {
+function TierDoor({ tier }: { tier: ResolvedTier }) {
   const theme = useTheme();
   const { t } = useLocale();
 
   return (
-    <Pressable
-      onPress={onOpen}
-      accessibilityRole="button"
+    <PressableLink
+      href={{ pathname: '/tier/[id]', params: { id: tier.id } }}
       accessibilityLabel={`${t(`curriculum.tier.${tier.id}` as UIKey)}. ${t(
         `curriculum.tier.${tier.id}.purpose` as UIKey,
       )}. ${tier.total} ${t('count.lessons')}`}
-      style={({ pressed }) => [
-        styles.tierClosed,
-        {
-          borderBottomColor: theme.goldSoft,
-          backgroundColor: pressed ? theme.backgroundSelected : 'transparent',
-        },
-      ]}>
+      style={[styles.tierDoor, { borderBottomColor: theme.goldSoft }]}
+      pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
       <View style={styles.cardText}>
         <ThemedText type="caption" themeColor="gold" style={styles.kicker}>
           {t(`curriculum.tier.${tier.id}` as UIKey)}
@@ -275,8 +274,8 @@ function TierClosed({ tier, onOpen }: { tier: ResolvedTier; onOpen: () => void }
       <ThemedText type="caption" themeColor="textSecondary">
         {String(tier.total)}
       </ThemedText>
-      <Ionicons name="chevron-down" size={16} color={theme.textSecondary} />
-    </Pressable>
+      <Ionicons name="chevron-forward" size={16} color={theme.textSecondary} />
+    </PressableLink>
   );
 }
 
@@ -347,14 +346,16 @@ export default function LearnScreen() {
   const readingNow = useReadingInProgress();
 
   /*
-    Which tier sits open. The default follows the path — the tier the next
-    lesson is in, falling back to confidence's starting tier once everything
-    is done — and a tap on a collapsed tier overrides it for this visit.
-    Local state, not stored: a browse is a visit, not a decision.
+    One spine. The tier shown in full is always the tier the reader is IN —
+    the one holding the next lesson, falling back to confidence's starting
+    tier once everything is done. No expansion state: the other tiers are
+    doors to their own screens, so nothing on this page ever moves under a
+    finger. The where-you-are card and its tier's unit rows are ONE section,
+    because showing the card for one tier above a different tier's rows was
+    two spines with equal claim — most of what "blended" (Iyad, 31 Aug).
   */
-  const [opened, setOpened] = useState<string | null>(null);
-  const defaultOpen = nextTierIndex !== -1 ? tiers[nextTierIndex].id : tiers[openTierIndex]?.id;
-  const openId = opened ?? defaultOpen;
+  const hereIndex = nextTierIndex !== -1 ? nextTierIndex : openTierIndex;
+  const here = tiers[hereIndex];
 
   return (
     <SafeAreaView style={[styles.safeArea, { backgroundColor: theme.background }]} edges={['top']}>
@@ -373,6 +374,7 @@ export default function LearnScreen() {
           />
         </View>
 
+        {/* The spine: where you are, the units around it, doors to the rest. */}
         <View style={styles.section}>
           <WhereYouAre />
           {readingNow && (
@@ -384,36 +386,29 @@ export default function LearnScreen() {
               trailing={<Ionicons name="chevron-forward" size={14} color={theme.gold} />}
             />
           )}
+          {here && (
+            <>
+              <Shelf label={t(`curriculum.tier.${here.id}` as UIKey)} />
+              <TierOpen tier={here} />
+            </>
+          )}
+          {tiers.map((tier) => (tier.id === here?.id ? null : <TierDoor key={tier.id} tier={tier} />))}
         </View>
 
-        {/* The path: three tiers, one open. */}
-        {tiers.map((tier) =>
-          tier.id === openId ? (
-            <View key={tier.id} style={styles.section}>
-              <Shelf label={t(`curriculum.tier.${tier.id}` as UIKey)} count={tier.total} />
-              <ThemedText type="small" themeColor="textSecondary">
-                {t(`curriculum.tier.${tier.id}.purpose` as UIKey)}
-              </ThemedText>
-              <TierOpen tier={tier} />
-            </View>
-          ) : (
-            <TierClosed key={tier.id} tier={tier} onOpen={() => setOpened(tier.id)} />
-          ),
-        )}
-
-        {/* The library — the same pages, grouped by the moment they answer. */}
-        <QuietRow
-          href="/library"
-          label={t('learn.browse')}
-          accessibilityLabel={t('learn.browse')}
-        />
-
-        {/* The things you return to rather than read once. */}
+        {/* The things you return to rather than read once. Unnumbered: a
+            rosette means a sequence, and this shelf is not one. */}
         <View style={styles.section}>
           <Shelf label={t('learn.group.reference')} />
           <View>
-            {REFERENCE_SHELF(t).map(({ key, ...row }, i) => (
-              <TopicRow key={key} {...row} index={i + 1} />
+            <JadwalRow
+              href="/library"
+              accessibilityLabel={`${t('learn.browse')}. ${t('learn.browse.subtitle')}`}
+              title={t('learn.browse')}
+              meta={t('learn.browse.subtitle')}
+              trailing={<Ionicons name="chevron-forward" size={14} color={theme.gold} />}
+            />
+            {REFERENCE_SHELF(t).map(({ key, ...row }) => (
+              <TopicRow key={key} {...row} />
             ))}
           </View>
         </View>
@@ -476,7 +471,7 @@ const styles = StyleSheet.create({
   journeyActionLabel: {
     flex: 1,
   },
-  tierClosed: {
+  tierDoor: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: Spacing.three,

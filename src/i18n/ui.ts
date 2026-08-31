@@ -948,6 +948,7 @@ export const EN = {
   'curriculum.short.practices': 'Practices',
 
   'learn.browse': 'Browse by situation',
+  'learn.browse.subtitle': 'The same pages, grouped by the moment they answer',
   'library.title': 'By situation',
   'library.intro':
     'The same pages as the path, grouped by the moment they answer — for when life produces the question.',

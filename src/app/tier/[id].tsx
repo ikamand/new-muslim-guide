@@ -1,6 +1,6 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Stack, useLocalSearchParams } from 'expo-router';
-import { ScrollView, StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 
 import { JadwalRow, Rosette } from '@/components/jadwal';
 import { ThemedText } from '@/components/themed-text';
@@ -51,6 +51,14 @@ export default function TierScreen() {
           {t(`curriculum.tier.${tier.id}.purpose` as UIKey)}
         </ThemedText>
 
+        {/*
+          One zero-gap group, not direct children of the gapped container:
+          a container gap between ruled rows is air nothing paints, so every
+          rule floated 16px above the next row's pressed box (held-press
+          screenshots, 31 Aug). Rules and boxes touch; the rows own their
+          air as padding.
+        */}
+        <View>
         {tier.units.map((unit, i) => {
           const finished = unit.total > 0 && unit.done === unit.total;
           /*
@@ -83,6 +91,7 @@ export default function TierScreen() {
             />
           );
         })}
+        </View>
       </ScrollView>
     </>
   );

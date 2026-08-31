@@ -2572,3 +2572,26 @@ niche pressable, never inside it; 44pt targets; month name kept in the
 calendar mark's accessibility label. One trap found on web: the SVG
 `rotation` prop is not translated by react-native-svg-web, so the compass
 needle's lean is baked into its path coordinates.
+
+---
+
+## 31 Aug 2026 — The spacing rule: a rule and the next box touch ✅
+
+Iyad, with held-press screenshots: dead bands between rules and pressed
+highlights, "spreading everywhere", spot-fixed repeatedly and never cured.
+Measured root cause: vertical air between ruled/pressable rows was owned by
+container `gap`s (8/16/32 depending on screen) and negative-margin
+compensations — which paint nothing — instead of by the rows' own padded
+boxes, which do. The firsts→where-you-are join measured 32px of unpainted
+air between the rule and the panel.
+
+**The rule, now the invariant: at any join involving a rule or a pressable,
+the rule and the next box TOUCH; air lives inside painted boxes as padding,
+never in container gaps or negative margins.** Applied: Learn's content and
+section gaps went to zero (blocks own their air; the header's rule-to-rule
+join takes paddingBottom), the keepsake's negative margins died as the
+fossil compensation they were, Today's one-thing row and Settings share a
+zero-gap foot, the tier screen's unit rows moved into one flush group, and
+the unit screen's doors joined the lessons group. Verified by measurement
+(dead air 32→0) and held-press screenshots at every named join. Card-to-card
+joins (Today's cards) keep Spacing.two.

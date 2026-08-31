@@ -136,18 +136,20 @@ export default function UnitScreen() {
           {unit.lessons.map((step) => (
             <LessonRow key={step.key} step={step} />
           ))}
-        </View>
 
-        {/* Where the unit opens out rather than finishes — a practice, not a
-            step, so it carries no checkbox and counts toward nothing. */}
-        {unit.doors.map((door) => (
-          <QuietRow
-            key={`${door.kind}:${door.id}`}
-            href={routeFor(door)}
-            label={door.title}
-            accessibilityLabel={door.title}
-          />
-        ))}
+          {/* Where the unit opens out rather than finishes — a practice, not
+              a step, so it carries no checkbox and counts toward nothing.
+              Inside the rows group, so the last lesson's rule and the door's
+              box touch instead of straddling a dead container gap. */}
+          {unit.doors.map((door) => (
+            <QuietRow
+              key={`${door.kind}:${door.id}`}
+              href={routeFor(door)}
+              label={door.title}
+              accessibilityLabel={door.title}
+            />
+          ))}
+        </View>
       </ScrollView>
     </>
   );

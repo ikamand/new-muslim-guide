@@ -296,17 +296,27 @@ export default function TodayScreen() {
           is the whole test this screen is built on, and it is now the last
           candidate here rather than a fixture.
         */}
-        {item ? <TodayRow item={item} /> : null}
-
         {/*
-          Settings closes the screen. It left the tab bar (the one tab that
-          was neither worship nor content) and a first home at the end of
-          Learn proved too buried — Iyad's call, twice: the bottom of Today,
-          where a quiet ruled line is findable without being an eye-sore, is
-          where it lives. The one exception to this screen's deadline test,
-          made deliberately and on the record.
+          The foot: the one-thing row and Settings, as ONE zero-gap group so
+          the row's rule and the Settings box touch. Split by the screen's
+          gap they showed 8px of dead air between rule and pressed highlight
+          — the same double-counted-air disease Learn had at 32px, held-press
+          screenshots, 31 Aug. A rule and the next box touch; air belongs to
+          painted boxes.
         */}
-        <QuietRow href="/settings" label={t('settings.title')} strong />
+        <View>
+          {item ? <TodayRow item={item} /> : null}
+
+          {/*
+            Settings closes the screen. It left the tab bar (the one tab that
+            was neither worship nor content) and a first home at the end of
+            Learn proved too buried — Iyad's call, twice: the bottom of Today,
+            where a quiet ruled line is findable without being an eye-sore, is
+            where it lives. The one exception to this screen's deadline test,
+            made deliberately and on the record.
+          */}
+          <QuietRow href="/settings" label={t('settings.title')} strong />
+        </View>
 
       </ScrollView>
     </SafeAreaView>

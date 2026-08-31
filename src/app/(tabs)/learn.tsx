@@ -425,10 +425,19 @@ const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
   },
+  /*
+    NO gap, on the container or the sections — the cure Today's comment
+    describes, finished. Every join on this page involves a rule or a
+    pressable box, and a container gap is air nothing paints: the rule
+    floats, and a pressed row's highlight starts a band below the line
+    above it (Iyad's held-press screenshots, 31 Aug — measured at 32px
+    between the firsts rule and the where-you-are panel). The rule now:
+    a rule and the next box TOUCH; air lives inside painted boxes, as
+    padding, where the press shows it belonging to the row.
+  */
   content: {
     padding: Spacing.four,
     paddingBottom: BottomTabInset + Spacing.four,
-    gap: Spacing.five,
     width: '100%',
     maxWidth: MaxContentWidth,
     alignSelf: 'center',
@@ -436,10 +445,12 @@ const styles = StyleSheet.create({
   header: {
     gap: Spacing.two,
     paddingTop: Spacing.four,
+    /* The one rule-to-rule join on the page: the ʿunwān's closing double
+       rule against the hero's band (or the keepsake's own top rule). The
+       air between them is the header's, as padding — not a container gap. */
+    paddingBottom: Spacing.three,
   },
-  section: {
-    gap: Spacing.three,
-  },
+  section: {},
   cardText: {
     flex: 1,
     gap: 2,
@@ -451,6 +462,12 @@ const styles = StyleSheet.create({
   },
   kicker: { textTransform: 'uppercase', letterSpacing: 1 },
   left: { gap: Spacing.one },
+  /*
+    No negative margins. The pair that lived here compensated for the
+    container gaps above — the fossil of the double-counted-air disease
+    this stylesheet was cured of; with the gaps gone the row simply owns
+    its padding like everything else.
+  */
   keepsake: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -458,8 +475,6 @@ const styles = StyleSheet.create({
     gap: Spacing.two,
     borderTopWidth: StyleSheet.hairlineWidth,
     paddingVertical: Spacing.three,
-    marginTop: -Spacing.four,
-    marginBottom: -Spacing.three,
   },
   journeyAction: {
     flexDirection: 'row',

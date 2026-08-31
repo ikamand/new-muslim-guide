@@ -166,20 +166,22 @@ Reached three ways: a row at the foot of the **Awqat screen** (one tap from
 where a prayer-minded person already is, without touching the card), the
 reference-shelf row on Learn, and the links the chooser already has.
 
-### Awqat card (mockup first — the card's design is Iyad's)
+### Awqat card — SETTLED 31 Aug: a deep link, not new lines
 
-Two candidate lines, drawn in ONE mockup pass, shipped only as approved on
-sight:
+Iyad saw the mockup of both candidate lines and chose a third thing: the
+card's face changes by nothing, and **the times row itself became a tap
+target opening Every prayer** — where the rawatib, aloud/silent, witr's
+window and the rest already live. Both drawn lines are DROPPED:
 
-- **Witr, after ʿIshaʾ — decided in principle, 30 Aug.** A line that exists
-  only while the window is open: "Witr — before Fajr →". A window statement
-  is a ruling: it is read from the witr page's own text and joins the
-  review pile.
-- **Rawatib counts on the current prayer** ("+2 before · 2 after") — still
-  proposed, not decided.
+- the rawatib line ("+2 before · 2 after" under the next prayer) — dropped;
+- the witr line after ʿIshaʾ — dropped, superseding the 30 Aug
+  decided-in-principle;
+- the night slot for tahajjud/qiyām was already rejected 30 Aug.
 
-The night slot for tahajjud/qiyām is **REJECTED** (Iyad, 30 Aug) — only
-witr earned the card. Decided; not to be re-raised.
+All three are decided; none is to be re-raised. Known caveat, on record: a
+tap target with no visible affordance is found by accident — if it proves
+unfindable, the fix is a third quiet footer link ("Every prayer ›" beside
+Month and Qibla), not a return of the lines.
 
 ### Trigger-moment doors (decided 30 Aug)
 

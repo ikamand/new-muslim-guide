@@ -326,7 +326,20 @@ export function PrayerTimesCard({ action }: PrayerTimesCardProps) {
       {/* The times row is the arch's baseline — the legs land on this rule. */}
       <View style={[styles.divider, { backgroundColor: theme.goldSoft }]} />
 
-      <View style={styles.row}>
+      {/*
+        The whole row opens Every prayer — the rakʿah counts, the rawatib,
+        aloud or silent, and the prayers beyond the five. Iyad's call, 31 Aug:
+        this deep link REPLACED two proposed lines on the card itself (rawatib
+        under the next prayer, witr after ʿIshaʾ), so the card's face changes
+        by nothing and the information is one tap away where a prayer-minded
+        person already looks. The cells stay visually quiet on purpose — the
+        row is the target, not any one time.
+      */}
+      <PressableLink
+        href="/pray"
+        accessibilityLabel={t('learn.everyPrayer.title')}
+        style={styles.row}
+        pressedStyle={{ opacity: 0.6 }}>
         {today.prayers.map((prayer) => (
           <TimeCell
             key={prayer.id}
@@ -335,7 +348,7 @@ export function PrayerTimesCard({ action }: PrayerTimesCardProps) {
             jumuah={isFriday && prayer.id === 'dhuhr'}
           />
         ))}
-      </View>
+      </PressableLink>
 
       {/*
         One caption, only when a mosque match is active: the numbers above

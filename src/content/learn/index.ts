@@ -1,5 +1,3 @@
-import type { PrayerConfidence } from '@/lib/onboarding';
-
 import { ADHAN } from './adhan';
 import { FASTING_ALONE } from './fasting-alone';
 import { A_PARTNER_ALREADY } from './a-partner-already';
@@ -13,6 +11,7 @@ import { EID } from './eid';
 import { FAMILY } from './family';
 import { FOOD } from './food';
 import { HALAL_AND_HARAM } from './halal-and-haram';
+import { HOW_PRAYER_WORKS } from './how-prayer-works';
 import { LIFE_BEFORE } from './life-before';
 import { MARRIAGE_SHAPE } from './marriage-shape';
 import { MINIMUM_PRAYER } from './minimum-prayer';
@@ -102,6 +101,8 @@ export const LEARN_TOPICS: Reference[] = [
   WHAT_IS_THE_QURAN,
   SUNNAH,
   BEFORE_PRAYER,
+  /* 31 Aug 2026 — the one page the Learn re-thread commissions. */
+  HOW_PRAYER_WORKS,
   AL_FATIHAH,
   WHAT_BREAKS_PRAYER,
   HALAL_AND_HARAM,
@@ -181,6 +182,7 @@ export const TOPIC_GROUPS: readonly { id: TopicGroupId; topics: readonly Content
       // Wudu first, because wudu comes first.
       ref('guide', 'wudu'),
       ref('reference', 'before-prayer'),
+      ref('reference', 'how-prayer-works'),
       // The prayers are reached through the chooser rather than as five cards
       // or as Fajr standing in for all of them — see `src/app/pray.tsx`. The
       // Learn tab renders that entry itself; it is not a `ContentRef` because
@@ -272,26 +274,11 @@ export const TOPIC_GROUPS: readonly { id: TopicGroupId; topics: readonly Content
   },
 ];
 
-/**
- * The order the groups come in, given what the reader can already do.
- *
- * The same idea as `STAGE_ORDER` in `journey.ts`, applied to the Learn tab:
- * onboarding's answer defines priority, so the group somebody should be in
- * NOW leads the page. Every group is always present — this sorts shelves, it
- * does not hide books — and it re-sorts only when confidence moves, which is
- * a slow signal (an answered question, or `lib/competence.ts` watching them
- * pray). Never on a tap: a page that reshuffles under a reader's hand is not
- * smart, it is unfindable.
- *
- * The two learner answers share one order, because both are still learning
- * to pray and "Praying" is their now. `on-my-own` is past the mechanics, so
- * daily life leads and the prayer reference moves to the end of the shelf.
- */
-export const GROUP_ORDER: Record<PrayerConfidence, readonly TopicGroupId[]> = {
-  'teach-me': ['praying', 'believe', 'world', 'hard', 'year'],
-  'need-words': ['praying', 'believe', 'world', 'hard', 'year'],
-  'on-my-own': ['world', 'believe', 'hard', 'year', 'praying'],
-};
+/*
+  GROUP_ORDER is gone. It sorted these shelves by prayer confidence when they
+  WERE the Learn tab; the library they moved to is a lookup surface with no
+  "now", so it renders the groups in authored order and nothing re-sorts.
+*/
 
 /**
  * Anything that should be on the Learn tab and is in no group.

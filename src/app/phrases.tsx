@@ -1,6 +1,8 @@
 import { Stack } from 'expo-router';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
+import { LessonEnd } from '@/components/lesson-end';
+import { LessonScroll } from '@/components/lesson-scroll';
 import { ThemedText } from '@/components/themed-text';
 import { TranslationGap } from '@/components/translation-gap';
 import { PHRASES } from '@/content';
@@ -25,7 +27,11 @@ export default function PhrasesScreen() {
   );
 
   return (
-    <ScrollView contentContainerStyle={styles.content}>
+    /*
+      `phrase:salam` is the Phrases step's key — the curriculum points the
+      whole-list step at its first record. Reaching the end marks it read.
+    */
+    <LessonScroll lessonKey="phrase:salam" contentContainerStyle={styles.content}>
       <Stack.Screen options={{ title: t('phrases.title') }} />
 
       <ThemedText type="default" themeColor="textSecondary">
@@ -64,7 +70,9 @@ export default function PhrasesScreen() {
 
         <TranslationGap coverage={coverage} />
       </View>
-    </ScrollView>
+
+      <LessonEnd lessonKey="phrase:salam" />
+    </LessonScroll>
   );
 }
 

@@ -272,16 +272,28 @@ they were tuned for goes.
    most of what "blended". Rosettes now mark the path alone (the reference
    shelf is unnumbered, Browse-by-situation folded into it), and the tier
    shelf dropped its count, which was wrapping the label on his screen.
-3. Only after sign-off: unit screen, the three `LessonScroll` wraps, the
-   reference-shelf prayers row, the two trigger-moment doors, Today wiring,
-   i18n manifest.
-4. Separately: the Every-prayer widening of `/pray` (bands 2 and 4, the
-   aloud/silent column — extraction only), then the Awqat card mockup with
-   the witr line and the rawatib line together. Card changes ship only
-   after Iyad sees the mockup.
-5. **"How prayer works" is written from sources, cited from pages actually
-   opened, flagged ⚠️ unreviewed, and does not gate the structure** — the
-   unit ships around minimum-prayer until the page clears review.
+3. ✅ Built 31 Aug. `LessonEnd` walks the curriculum (its "next" and the
+   tab's can no longer disagree); `/iman`, `/phrases` and the duʿa-book
+   occasions mark themselves by scroll; the journey is GONE — screens,
+   tables, hook, `STAGE_ORDER` and `GROUP_ORDER` — with `stepKey` and the
+   step types now living in `curriculum.ts`. The doors went further than
+   planned: `relatedContent` had been data no screen read, so reference
+   pages now render it as quiet rows before the next-lesson button —
+   repentance and if-you-stopped door to the tawba prayer through their own
+   metadata. The "Becoming Muslim" collision is resolved: the unit is
+   **"Where you begin"** (Iyad, 31 Aug); ids unchanged.
+4. ✅ Built 31 Aug, half of it. `/pray` is the **Every prayer** map: the
+   five carry an aloud/silent phrase from `aloudRakahs`, and two new bands —
+   the week and the year (Jumuʿah, Eid, janāzah) and when it's different
+   (seated, missed, travelling) — extraction only, each row the page's own
+   reviewed words. The Awqat card mockup (witr line + rawatib line) is
+   drawn and delivered; **no card code ships until Iyad rules on it.**
+5. ✅ Written 31 Aug — `learn/how-prayer-works.ts`, ⚠️ flagged, substance
+   unreviewed. Structural claims restate what the app already ships; its
+   one citation is Bukhari 757 REUSED from minimum-prayer where it was
+   verified. `COMMISSIONED` is empty; the audit's stale-commission check
+   forced the declaration off the day the page landed. Still owed: the
+   qualified-reader pass before public release, like every learn/ page.
 
 ## 10. Cost, plainly
 

@@ -2,6 +2,7 @@ import { Stack, useLocalSearchParams } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
 
 import { ContentNoteCard } from '@/components/content-note';
+import { QuietRow } from '@/components/jadwal';
 import { LessonEnd } from '@/components/lesson-end';
 import { LessonScroll } from '@/components/lesson-scroll';
 import { RecitationCard } from '@/components/recitation-card';
@@ -18,9 +19,10 @@ import {
 } from '@/components/teaching';
 import { ThemedText } from '@/components/themed-text';
 import { TranslationGap } from '@/components/translation-gap';
-import { formatSource, getReference, resolveNotes, type ReferenceSection, type Source } from '@/content';
+import { formatSource, getReference, resolveNotes, resolveRef, type ReferenceSection, type Source } from '@/content';
 import type { EvidenceText } from '@/content/evidence';
 import { MaxContentWidth } from '@/constants/theme';
+import { routeFor } from '@/lib/content-routes';
 
 import { Teaching } from '@/constants/teaching';
 import { useLocale } from '@/hooks/use-locale';
@@ -113,6 +115,27 @@ export default function ReferenceScreen() {
       })()}
 
       <TranslationGap coverage={coverage} />
+
+      {/*
+        The doors: where this page's moment leads. `relatedContent` had been
+        data read by nothing since it was written — the audit guarded its
+        pointers while no screen rendered them. It exists for the pages whose
+        subject has a next move the reader cannot know to look for: repentance
+        and if-you-stopped each door to the prayer of repentance, because the
+        moment of remorse is where that prayer is found, not a clock and not
+        a shelf (docs/learn-redesign-plan.md, trigger-moment doors).
+      */}
+      {(source.meta?.relatedContent ?? [])
+        .map(resolveRef)
+        .filter((entry) => entry !== undefined)
+        .map((entry) => (
+          <QuietRow
+            key={`${entry.kind}:${entry.id}`}
+            href={routeFor(entry)}
+            label={entry.title}
+            accessibilityLabel={entry.title}
+          />
+        ))}
 
       <LessonEnd lessonKey={`reference:${reference.id}`} />
     </LessonScroll>

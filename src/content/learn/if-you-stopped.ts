@@ -31,6 +31,9 @@ export const IF_YOU_STOPPED: Reference = {
     beginnerPriority: 3,
     relatedContent: [
       ref('reference', 'repentance'),
+      /* The prayer for this exact moment — doored here because remorse is
+         where it is looked for, not a shelf and not a clock. */
+      ref('reference', 'tawba-prayer'),
       ref('reference', 'missed'),
       ref('reference', 'minimum-prayer'),
     ],

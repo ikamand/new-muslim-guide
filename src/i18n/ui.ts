@@ -552,6 +552,13 @@ export const EN = {
     is room to explain it.
   */
   'pray.title': 'Learn to pray',
+  /* The aloud/silent column — a fact `buildPrayer` already encodes per
+     prayer, said in words because a comparison column teaches it best. */
+  'pray.aloud': 'Qur’an aloud',
+  'pray.silent': 'Qur’an silently',
+  'pray.aloudTwo': 'first two rakʿahs aloud',
+  'pray.week': 'The week and the year',
+  'pray.different': 'When it’s different',
   'pray.intro': 'Every prayer is the same movements and the same words. What changes is how many times round, and whether the Qur’an is said aloud.',
   'pray.before': 'before',
   'pray.fard': 'owed',
@@ -890,7 +897,10 @@ export const EN = {
   'curriculum.tier.deeper': 'Going deeper',
   'curriculum.tier.deeper.purpose': 'Depth in what you already do.',
 
-  'curriculum.unit.becoming-muslim': 'Becoming Muslim',
+  /* "Becoming Muslim" collided with the shahada guide's title — the unit and
+     its first lesson shared a name, visible three times at once on the tab
+     when the shahada was unsaid. Renamed by Iyad, 31 Aug. */
+  'curriculum.unit.becoming-muslim': 'Where you begin',
   'curriculum.unit.becoming-muslim.purpose': 'What you said, and what you joined.',
   'curriculum.unit.who-you-follow': 'Who you follow',
   'curriculum.unit.who-you-follow.purpose':
@@ -932,7 +942,7 @@ export const EN = {
     'Small sunnahs that become yours over the years.',
 
   /* One word per unit, for the arch strip — a 30px arch fits nothing longer. */
-  'curriculum.short.becoming-muslim': 'Becoming',
+  'curriculum.short.becoming-muslim': 'Begin',
   'curriculum.short.who-you-follow': 'Belief',
   'curriculum.short.how-to-pray': 'Prayer',
   'curriculum.short.when-it-goes-wrong': 'Mistakes',

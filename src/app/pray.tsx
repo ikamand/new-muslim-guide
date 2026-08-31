@@ -5,10 +5,14 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 import { PressableLink } from '@/components/pressable-link';
 import { SourceDisclosure } from '@/components/source-list';
 import { ThemedText } from '@/components/themed-text';
-import { DAILY_PRAYERS, RAWATIB_SOURCES, VOLUNTARY_PRAYERS } from '@/content';
+import { DAILY_PRAYERS, RAWATIB_SOURCES, resolveRef, VOLUNTARY_PRAYERS } from '@/content';
+import { ref, type ContentRef } from '@/content/model';
 import { MaxContentWidth, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { useTheme } from '@/hooks/use-theme';
+import { localiseCatalogEntry } from '@/i18n/localise';
+import type { UIKey } from '@/i18n/ui';
+import { routeFor } from '@/lib/content-routes';
 
 /**
  * Which prayer, chosen once.
@@ -38,6 +42,35 @@ import { useTheme } from '@/hooks/use-theme';
 
 /** The confirmed sunnah rakʿahs, and where the twelve come from. */
 
+/**
+ * The map's other bands: the prayers that arrive with the week, the year and
+ * a death, and the pages for when praying is different. Extraction only —
+ * each row's title and sentence are the page's own — so a row is exactly as
+ * reviewed as the page it opens. A ref that does not resolve renders nothing.
+ */
+const WEEK_AND_YEAR: readonly ContentRef[] = [
+  ref('reference', 'jumuah'),
+  ref('reference', 'eid'),
+  ref('reference', 'janazah'),
+];
+
+const DIFFERENT: readonly ContentRef[] = [
+  ref('reference', 'seated'),
+  ref('reference', 'missed'),
+  ref('reference', 'travelling'),
+];
+
+/**
+ * Aloud or silent, as one phrase per row. Derived from the same field the
+ * generated guides recite from, so this column can never disagree with the
+ * prayer it describes.
+ */
+function aloudKey(prayer: { rakahs: number; aloudRakahs: number }): UIKey {
+  if (prayer.aloudRakahs === 0) return 'pray.silent';
+  if (prayer.aloudRakahs >= prayer.rakahs) return 'pray.aloud';
+  return 'pray.aloudTwo';
+}
+
 function Count({ n, label, muted }: { n?: number; label: string; muted?: boolean }) {
   return (
     <View style={styles.count}>
@@ -56,11 +89,20 @@ function Count({ n, label, muted }: { n?: number; label: string; muted?: boolean
 
 export default function PrayScreen() {
   const theme = useTheme();
-  const { t } = useLocale();
+  const { locale, t } = useLocale();
+
+  /* The rows of the two pointer bands — the pages' own words, localised. */
+  const band = (refs: readonly ContentRef[]) =>
+    refs
+      .map(resolveRef)
+      .filter((entry) => entry !== undefined)
+      .map((entry) => localiseCatalogEntry(entry, locale));
 
   return (
     <ScrollView contentContainerStyle={styles.content}>
-      <Stack.Screen options={{ title: t('pray.title') }} />
+      {/* "Every prayer" — the map's name since the /pray widening; the same
+          name its reference-shelf row carries. */}
+      <Stack.Screen options={{ title: t('learn.everyPrayer.title') }} />
 
       <ThemedText type="default" themeColor="textSecondary">
         {t('pray.intro')}
@@ -77,15 +119,15 @@ export default function PrayScreen() {
           <PressableLink
             key={prayer.id}
             href={{ pathname: '/guide/[id]', params: { id: prayer.id } }}
-            accessibilityLabel={`${prayer.title}. ${prayer.rakahs} ${t('count.rakahs')}. ${
-              prayer.sunnahBefore ?? 0
-            } ${t('pray.before')}, ${prayer.sunnahAfter ?? 0} ${t('pray.after')}`}
+            accessibilityLabel={`${prayer.title}. ${prayer.rakahs} ${t('count.rakahs')}, ${t(
+              aloudKey(prayer),
+            )}. ${prayer.sunnahBefore ?? 0} ${t('pray.before')}, ${prayer.sunnahAfter ?? 0} ${t('pray.after')}`}
             style={[styles.row, { borderBottomColor: theme.goldSoft }]}
             pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
             <View style={styles.rowText}>
               <ThemedText type="cardTitle">{prayer.title}</ThemedText>
               <ThemedText type="small" themeColor="textSecondary">
-                {prayer.when}
+                {`${prayer.when} · ${t(aloudKey(prayer))}`}
               </ThemedText>
             </View>
             <Count n={prayer.sunnahBefore} label={t('pray.before')} muted />
@@ -103,6 +145,31 @@ export default function PrayScreen() {
           {t('pray.rawatib')}
         </ThemedText>
         <SourceDisclosure sources={RAWATIB_SOURCES} />
+      </View>
+
+      {/*
+        The prayers that arrive with the calendar and with a death. Before
+        this band existed they lived only as reading on the Learn side, and
+        the map claimed "every prayer" while missing the weekly one.
+      */}
+      <View style={styles.section}>
+        <ThemedText type="sectionTitle">{t('pray.week')}</ThemedText>
+        {band(WEEK_AND_YEAR).map((entry) => (
+          <PressableLink
+            key={entry.id}
+            href={routeFor(entry)}
+            accessibilityLabel={`${entry.title}. ${entry.shortDescription}`}
+            style={[styles.row, { borderBottomColor: theme.goldSoft }]}
+            pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
+            <View style={styles.rowText}>
+              <ThemedText type="cardTitle">{entry.title}</ThemedText>
+              <ThemedText type="small" themeColor="textSecondary">
+                {entry.shortDescription}
+              </ThemedText>
+            </View>
+            <Ionicons name="chevron-forward" size={20} color={theme.textSecondary} />
+          </PressableLink>
+        ))}
       </View>
 
       <View style={styles.section}>
@@ -145,6 +212,28 @@ export default function PrayScreen() {
           </PressableLink>
         ))}
 
+      </View>
+
+      {/* The exceptional cases, so the map admits they exist — pointer rows
+          into pages that already cover them. */}
+      <View style={styles.section}>
+        <ThemedText type="sectionTitle">{t('pray.different')}</ThemedText>
+        {band(DIFFERENT).map((entry) => (
+          <PressableLink
+            key={entry.id}
+            href={routeFor(entry)}
+            accessibilityLabel={`${entry.title}. ${entry.shortDescription}`}
+            style={[styles.row, { borderBottomColor: theme.goldSoft }]}
+            pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
+            <View style={styles.rowText}>
+              <ThemedText type="cardTitle">{entry.title}</ThemedText>
+              <ThemedText type="small" themeColor="textSecondary">
+                {entry.shortDescription}
+              </ThemedText>
+            </View>
+            <Ionicons name="chevron-forward" size={20} color={theme.textSecondary} />
+          </PressableLink>
+        ))}
       </View>
     </ScrollView>
   );

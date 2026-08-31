@@ -5,10 +5,11 @@ import {
   CURRICULUM,
   isLessonDone,
   openTierIndex,
+  stepKey,
+  type JourneyStep,
   type TierId,
   type Unit,
 } from '@/content/curriculum';
-import { stepKey, type JourneyStep } from '@/content/journey';
 import { localiseCatalogEntry } from '@/i18n/localise';
 import { usePrayerConfidence } from '@/hooks/use-competence';
 import { useLocale } from '@/hooks/use-locale';

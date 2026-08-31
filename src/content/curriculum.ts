@@ -1,9 +1,9 @@
 /**
  * The curriculum: tier → unit → lesson. One path, one direction.
  *
- * This replaces the six-stage journey as the app's spine (the plan is
- * `docs/learn-redesign-plan.md`; the journey tables in `journey.ts` stay until
- * the screens have switched over, then go). Like the journey, it is not a
+ * This replaced the six-stage journey as the app's spine (the plan is
+ * `docs/learn-redesign-plan.md`; the journey's tables, hook and screens were
+ * deleted once every consumer read from here). Like the journey, it is not a
  * second content system: every lesson is a `ContentRef` into the same
  * catalogue every other surface reads, so a correction lands everywhere at
  * once.
@@ -38,7 +38,29 @@
 import type { PrayerConfidence, ShahadaState } from '@/lib/onboarding';
 
 import { ref, type ContentRef } from './model';
-import { stepKey, type JourneyStep, type Requirement } from './journey';
+
+/**
+ * What kind of thing a lesson is. Presentation only — it never gates.
+ *
+ * `foundation` — what Islam is. Read once, and everything else assumes it.
+ * `practice`   — something you do, and will do again tomorrow.
+ * `learning`   — worth knowing, in no hurry.
+ * `seasonal`   — arrives with the year rather than with you.
+ */
+export type Requirement = 'foundation' | 'practice' | 'learning' | 'seasonal';
+
+export type JourneyStep = {
+  ref: ContentRef;
+  requirement: Requirement;
+  /**
+   * Set only where the step opens a list rather than a single page, so the
+   * curriculum can call it what a beginner would call it.
+   */
+  labelKey?: string;
+};
+
+/** A stable key for progress, unique across kinds. */
+export const stepKey = (entry: ContentRef): string => `${entry.kind}:${entry.id}`;
 
 export type TierId = 'first-weeks' | 'life-follows' | 'deeper';
 
@@ -234,9 +256,10 @@ export const CURRICULUM: readonly Tier[] = [
 /**
  * Lessons named before they are written. An unresolved curriculum ref that is
  * NOT in this list fails the audit as a typo; one that is here is reported as
- * commissioned work.
+ * commissioned work. Empty since 31 Aug — how-prayer-works was written, and
+ * the audit's stale-commission check forced this line to say so.
  */
-export const COMMISSIONED: readonly string[] = ['reference:how-prayer-works'];
+export const COMMISSIONED: readonly string[] = [];
 
 /** Units allowed outside the 2–6 lesson band, with the reason on record. */
 export const SMALL_UNITS: readonly string[] = [

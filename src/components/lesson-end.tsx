@@ -4,7 +4,12 @@ import { Pressable, StyleSheet, View } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { Radius, Spacing } from '@/constants/theme';
-import { useJourney } from '@/hooks/use-journey';
+/*
+  The curriculum, not the journey: this button's "next" and the Learn tab's
+  "next" must come from the same order, or finishing a page offers a lesson
+  the tab disagrees with.
+*/
+import { useCurriculum } from '@/hooks/use-curriculum';
 import { useLocale } from '@/hooks/use-locale';
 import { useObservations } from '@/hooks/use-observations';
 import { useSettings } from '@/hooks/use-settings';
@@ -53,7 +58,7 @@ export function LessonEnd({ lessonKey }: { lessonKey: string }) {
   const theme = useTheme();
   const router = useRouter();
   const { t } = useLocale();
-  const { after } = useJourney();
+  const { after } = useCurriculum();
   const { completedLessons, completeLesson } = useSettings();
   const { finish } = useObservations();
 

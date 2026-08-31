@@ -1,6 +1,7 @@
 import { Stack, useLocalSearchParams } from 'expo-router';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
+import { LessonScroll } from '@/components/lesson-scroll';
 import { MarkedText } from '@/components/marked-text';
 import { PinStar } from '@/components/pin-star';
 import { ThemedText } from '@/components/themed-text';
@@ -99,7 +100,13 @@ export default function DuaBookOccasionScreen() {
   const steps = stepsForOccasion(occasion);
 
   return (
-    <ScrollView contentContainerStyle={styles.content}>
+    /*
+      Reading an occasion to the end marks `hisn:<id>` — for most occasions an
+      inert key, but for the everyday-duʿas curriculum step (hisn:1268971) it
+      is what lets reading complete the step, which only a checkbox could do
+      before. No LessonEnd here: the book is browsed, not walked in order.
+    */
+    <LessonScroll lessonKey={`hisn:${occasion.id}`} contentContainerStyle={styles.content}>
       <Stack.Screen options={{ title: occasion.english || t('duaBook.title') }} />
 
       <View style={styles.header}>
@@ -163,7 +170,7 @@ export default function DuaBookOccasionScreen() {
           ) : null}
         </View>
       ))}
-    </ScrollView>
+    </LessonScroll>
   );
 }
 

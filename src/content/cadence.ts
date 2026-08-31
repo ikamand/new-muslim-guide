@@ -98,6 +98,8 @@ const REFERENCES: Readonly<Record<string, Cadence>> = {
   'life-before': 'once',
   'your-name': 'once',
   'minimum-prayer': 'until-fluent',
+  /* The pattern, needed until it is not — like the guides it explains. */
+  'how-prayer-works': 'until-fluent',
   adhan: 'once',
   rulings: 'once',
   /* Weekly, and the calendar is the only trigger the app has for it. */

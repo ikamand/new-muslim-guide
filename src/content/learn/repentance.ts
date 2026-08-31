@@ -19,7 +19,13 @@ export const REPENTANCE: Reference = {
     difficulty: 'foundational',
     estimatedMinutes: 4,
     beginnerPriority: 2,
-    relatedContent: [ref('reference', 'dua-and-dhikr'), ref('reference', 'missed')],
+    relatedContent: [
+      /* First, because it is the door this page exists to open: there is a
+         prayer for this exact moment, and remorse is where it is found. */
+      ref('reference', 'tawba-prayer'),
+      ref('reference', 'dua-and-dhikr'),
+      ref('reference', 'missed'),
+    ],
   },
   quickFacts: [
     { label: 'The door', value: 'Does not close. Not for anyone, not for anything', emphasis: true },

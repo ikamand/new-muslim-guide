@@ -106,8 +106,9 @@ function RootStack() {
         the journey reads in the user's language. The older routes below still
         carry English titles here — a pre-existing gap, not one this adds to.
       */}
-      <Stack.Screen name="journey/index" options={{ title: '', headerBackTitle: 'Learn' }} />
-      <Stack.Screen name="journey/[stage]" options={{ title: '', headerBackTitle: 'Back' }} />
+      <Stack.Screen name="tier/[id]" options={{ title: '', headerBackTitle: 'Learn' }} />
+      <Stack.Screen name="unit/[id]" options={{ title: '', headerBackTitle: 'Back' }} />
+      <Stack.Screen name="library" options={{ title: '', headerBackTitle: 'Learn' }} />
       {/* Titled from the topic itself, in the reader's language. */}
       <Stack.Screen name="help/[topic]" options={{ title: '', headerBackTitle: 'Back' }} />
       <Stack.Screen

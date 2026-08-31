@@ -17,8 +17,7 @@ import {
   PILLARS,
   SHAHADA_GUIDE,
 } from '@/content';
-import { isLessonDone } from '@/content/curriculum';
-import { stepKey } from '@/content/journey';
+import { isLessonDone, stepKey } from '@/content/curriculum';
 import { BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useCurriculum, type ResolvedTier } from '@/hooks/use-curriculum';
 import { useLocale } from '@/hooks/use-locale';

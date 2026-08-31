@@ -121,7 +121,11 @@ for (const tier of CURRICULUM) {
     if (!(key in EN)) missingKeys.push(key);
   }
   for (const unit of tier.units) {
-    for (const key of [`curriculum.unit.${unit.id}`, `curriculum.unit.${unit.id}.purpose`]) {
+    for (const key of [
+      `curriculum.unit.${unit.id}`,
+      `curriculum.unit.${unit.id}.purpose`,
+      `curriculum.short.${unit.id}`,
+    ]) {
       if (!(key in EN)) missingKeys.push(key);
     }
     for (const lesson of unit.lessons) {

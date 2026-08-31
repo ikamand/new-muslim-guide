@@ -248,10 +248,20 @@ they were tuned for goes.
 
 ## 9. Build order — the pilot rule
 
-1. **Data + checks, no UI.** `curriculum.ts`, the done predicate, the audit
-   extension. `tsc` and `content:audit` green. Provably right or not.
-2. **Two screens, as unalike as possible, then STOP for eyes:** the Learn tab
-   with tiers (tier 1 open, both themes, screenshots) and the library screen.
+1. ✅ Built 30 Aug. **Data + checks, no UI.** `curriculum.ts`, the done
+   predicate, the audit extension. `tsc` and `content:audit` green — 58
+   lessons, 57 resolving, coverage complete on the first run.
+2. ✅ Built 30 Aug, **awaiting Iyad's eyes.** The Learn tab with tiers and
+   the library screen, screenshotted in both themes from the static export
+   (headless Chrome over CDP; the Playwright browser was held by another
+   session). Also built here because rows must lead somewhere: a minimal
+   `/unit/[id]` adapted from the stage screen, and Today's `next` switched
+   to the curriculum so the two surfaces cannot disagree. Seen on screen:
+   the shahada answer now advances the path (finding 1), and the library
+   counts match their rosettes (finding 2). Open question for Iyad: with
+   the shahada unsaid, "Becoming Muslim" is the hero, the unit title AND
+   the first left-in-chapter line — the unit and its first lesson share a
+   name, and one of them may deserve a different one.
 3. Only after sign-off: unit screen, the three `LessonScroll` wraps, the
    reference-shelf prayers row, the two trigger-moment doors, Today wiring,
    i18n manifest.

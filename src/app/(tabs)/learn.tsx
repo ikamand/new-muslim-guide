@@ -1,181 +1,73 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { type Href } from 'expo-router';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { useState } from 'react';
+import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { GirihBand, StagePath } from '@/components/illustrations';
 import { JadwalRow, QuietRow, Rosette, Shelf, Unwan } from '@/components/jadwal';
-import { CURRENCIES } from '@/content/nisab';
 import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
+import { TopicRow, type TopicSpec } from '@/components/topic-row';
 import { routeFor } from '@/lib/content-routes';
 import {
   DAILY_PRAYERS,
-  resolveRef,
   getPracticeClipCount,
-  GROUP_ORDER,
   hasPracticeBeyondSurahs,
   IMAN_PILLARS,
   PHRASES,
   PILLARS,
   SHAHADA_GUIDE,
-  TOPIC_GROUPS,
 } from '@/content';
+import { isLessonDone } from '@/content/curriculum';
+import { stepKey } from '@/content/journey';
 import { BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
+import { useCurriculum, type ResolvedTier } from '@/hooks/use-curriculum';
 import { useLocale } from '@/hooks/use-locale';
-import { useJourney } from '@/hooks/use-journey';
-import { useObservations } from '@/hooks/use-observations';
-import { usePrayerConfidence } from '@/hooks/use-competence';
 import { useReadingInProgress } from '@/hooks/use-reading';
 import { useSettings } from '@/hooks/use-settings';
-import { stepKey } from '@/content/journey';
 import { useTheme } from '@/hooks/use-theme';
 import type { UIKey } from '@/i18n/ui';
-import { localiseCatalogEntry } from '@/i18n/localise';
+
+/**
+ * The Learn tab: the path, and one door to the library.
+ *
+ * This tab used to carry two orderings of the same content at once — the
+ * journey's six stages in a card, and five by-moment shelves below it, fifty
+ * rows deep. Two directions is no direction (docs/learn-redesign-plan.md).
+ * Now it carries ONE: three tiers of units, the open one expanded, the other
+ * two collapsed but alive. The shelves live on at `/library`, one quiet row
+ * away, for the day life produces the question.
+ */
 
 const PRACTICE_CLIP_COUNT = getPracticeClipCount();
-/**
- * Whether to offer the practice screen at all.
- *
- * Computed once at module load like the count beside it, because it cannot
- * change while the app is running — it is a fact about which clips are in the
- * bundle. See `hasPracticeBeyondSurahs`.
- */
 const SHOW_PRACTICE = hasPracticeBeyondSurahs();
 const SHAHADA_STEP_COUNT = SHAHADA_GUIDE.steps.length;
 /**
- * Built the same way the journey builds it, not typed as `'guide:shahada'`.
+ * Built the same way the curriculum builds it, not typed as `'guide:shahada'`.
  * A literal here would keep pointing at nothing the day the guide is renamed,
  * and the card would silently go back to calling itself unfinished forever.
  */
 const SHAHADA_KEY = stepKey({ kind: 'guide', id: 'shahada' });
 
 /**
- * A mark per topic, so twenty near-identical rows stop being twenty
- * near-identical rows.
- *
- * This used to hold one entry. Every other Learn card rendered as bare text,
- * which is most of why the tab read as a wall: a reader scanning it had
- * nothing but a title to tell one row from the next.
- *
- * The keys are reference ids. A topic with no entry still renders — it simply
- * has no tile, which is better than reaching for a glyph that means nothing.
- */
-
-function LearnCard({
-  href,
-  title,
-  subtitle,
-  count,
-  unit,
-  index,
-  progress,
-}: {
-  href: Href;
-  title: string;
-  subtitle: string;
-  count: number;
-  unit: UIKey;
-  /** Its place within its shelf, drawn as a rosette in the margin. */
-  index: number;
-  /** How far through this the reader got before leaving, 0..1. */
-  progress?: number;
-}) {
-  const theme = useTheme();
-  const { t } = useLocale();
-
-  /*
-    One shape, full width, always.
-
-    This used to be two — a half-width tile and a wide row — with a measured
-    pairing pass deciding which, plus a per-topic glyph tile to tell twenty
-    near-identical rows apart. All of that existed to fight the same problem:
-    a flat list of equals reads as a wall.
-
-    The shelf rules and the marginal numbers solve it instead, and they solve
-    it with information rather than with decoration — a numeral says how deep
-    a shelf runs, and a glyph never did. Both the pairing pass and the
-    forty-seven-entry glyph table are gone with the tile.
-
-    ⚠️ This is the change on this tab most worth looking at on a device. If
-    ruled rows rebuild the wall the tiles were added to break, the tile is one
-    revert away.
-  */
-  return (
-    <JadwalRow
-      href={href}
-      accessibilityLabel={`${title}. ${subtitle}. ${count} ${t(unit)}`}
-      marginal={<Rosette label={String(index)} />}
-      title={title}
-      meta={`${subtitle} · ${count} ${t(unit)}`}
-      progress={progress}
-      trailing={<Ionicons name="chevron-forward" size={14} color={theme.gold} />}
-    />
-  );
-}
-
-/**
  * Becoming Muslim, given its own weight — and then stepping out of the way.
  *
- * Some people open this app before they are Muslim at all, and the one card
- * that matters to them was previously indistinguishable from the six below it.
+ * A hero while it is not done, because for somebody who has not said the
+ * shahada it is the one thing on the tab that matters; one line in the
+ * header once it is, because "return to this a few times in your life" and
+ * "second-largest object on the tab forever" are not the same claim.
  *
- * ## Why it changes once it is done
- *
- * It used to say "3 steps →" forever. For most of this app's actual users that
- * was wrong on the first screen they ever saw: someone who told onboarding they
- * are a new Muslim said the shahada before they installed anything, and the
- * biggest card in Learn pointed at it as an unfinished task. The app already
- * knew, twice — `userStage`, and the guide's own place in the journey — and
- * this card read neither.
- *
- * ## Why it does not disappear, and why it stops being a hero
- *
- * People come back to the shahada. To re-read the words, to get the Arabic
- * right, to show somebody. Removing the card would take that away to fix a
- * label.
- *
- * But "return to this a few times in your life" and "second-largest object on
- * the tab forever" are not the same claim, and cadence `keepsake` is the first
- * of those. So once it is done this stops being a card at all and becomes one
- * line in the header — reachable forever, weighted honestly.
- *
- * ⚠️ It stays a HERO while it is not done, which is a deliberate departure
- * from `docs/build-order.md`. That plan says the shahada drops to a header
- * line, full stop. For somebody who has not said it, this is the one card on
- * the tab that matters, and this file's own opening records why: they were
- * previously indistinguishable from the six topics below. Flattening both
- * states would fix the wrong one. Keepsake is what it BECOMES, not what it
- * always was.
- *
- * ## What counts as done
- *
- * Either signal. Ticking the lesson, or having answered "yes" to the shahada
- * question — somebody who told the app they have said it should not have to
- * tick a box to prove it. `'exploring'` and `'not-yet'` deliberately do not
- * count, and neither does `null`: an unanswered question is not a yes.
- *
- * The question this reads changed in Phase 7 from "which describes you" to
- * "have you said the shahada", which is the thing this card actually needed to
- * know and was previously inferring from a category.
+ * Done-ness comes from `isLessonDone` — the ONE predicate, shared with the
+ * curriculum — so this card and the path can never again disagree about the
+ * same fact, which they did when this read `shahadaState` and the journey
+ * read only the tick.
  */
 function ShahadaCard() {
   const theme = useTheme();
   const { t } = useLocale();
   const { completedLessons, shahadaState } = useSettings();
 
-  const done =
-    shahadaState === 'recently' ||
-    shahadaState === 'a-while' ||
-    completedLessons.includes(SHAHADA_KEY);
-
-  /*
-    Done: one line under the tab's own intro, not a card. No band, no action
-    button, no border — the same shape the name-of-the-day coda takes on
-    Today, and for the same reason: it is not a task and should not be dressed
-    as one.
-  */
-  if (done) {
+  if (isLessonDone(SHAHADA_KEY, completedLessons, shahadaState)) {
     return (
       <PressableLink
         href={{ pathname: '/guide/[id]', params: { id: 'shahada' } }}
@@ -194,10 +86,7 @@ function ShahadaCard() {
     <PressableLink
       href={{ pathname: '/guide/[id]', params: { id: 'shahada' } }}
       accessibilityLabel={`${t('learn.shahada.title')}. ${t('learn.shahada.subtitle')}`}
-      style={[
-        styles.featured,
-        { borderColor: theme.goldSoft },
-      ]}
+      style={[styles.featured, { borderColor: theme.goldSoft }]}
       pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
       <View style={[styles.band, { backgroundColor: theme.accentMuted }]}>
         <GirihBand color={theme.accent} height={76} filled={false} />
@@ -221,95 +110,80 @@ function ShahadaCard() {
 }
 
 /**
- * Where you are — the chapter, and what is left in it.
+ * Where you are — the unit, and what is left in it.
  *
- * ## Why the fraction went
- *
- * It said "6 of 36" beside the arches. Thirty-six of what, and how far is six?
- * A beginner cannot answer either, and a fraction is a report card handed to
- * somebody three weeks into a religion — it measures them against a syllabus
- * they never agreed to and reads as 30 things undone.
- *
- * What replaces it is the same information said as a place rather than a
- * score: the chapter you are in, and the two or three things still in it. That
- * is a shape somebody can act on this afternoon, and it is finite in a way
- * "36" is not.
- *
- * The arches stay. They were already the right answer to "how far" — filled
- * behind, star on the one you are at, no arithmetic — and they are the same
- * mihrab the prayer times card draws, so the shape means the same thing in
- * both places.
- *
- * ## Three, not all of them
- *
- * A chapter can hold eight steps, and listing eight is the wall this card
- * exists to replace. Three is enough to show what KIND of thing is left
- * without becoming a second list below the first.
+ * The arches are the units of the tier the next lesson sits in, the star on
+ * the unit itself: the same mihrab strip that carried six stages now carries
+ * a tier's units, so "how far" is still a picture and never arithmetic.
+ * Three remaining lessons at most, because listing eight is the wall this
+ * card exists to replace.
  */
 const SHOW_LEFT = 3;
 
 function WhereYouAre() {
   const theme = useTheme();
   const { t } = useLocale();
-  const { stages, nextStageIndex } = useJourney();
+  const { tiers, next, nextTierIndex, nextUnitIndex } = useCurriculum();
 
-  const path = stages.map((stage) => ({
-    id: stage.id,
-    label: t(`journey.short.${stage.id}` as UIKey),
-    done: stage.steps.every((step) => step.done),
+  if (!next || nextTierIndex === -1) {
+    return (
+      <PressableLink
+        href="/library"
+        accessibilityLabel={t('learn.where.done')}
+        style={[styles.journey, { borderColor: theme.goldSoft }]}
+        pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
+        <ThemedText type="sectionTitle">{t('learn.where.done')}</ThemedText>
+      </PressableLink>
+    );
+  }
+
+  const tier = tiers[nextTierIndex];
+  const unit = tier.units[nextUnitIndex];
+
+  const path = tier.units.map((entry) => ({
+    id: entry.id,
+    label: t(`curriculum.short.${entry.id}` as UIKey),
+    done: entry.total > 0 && entry.done === entry.total,
   }));
 
-  const stage = nextStageIndex === -1 ? undefined : stages[nextStageIndex];
-  const left = stage?.steps.filter((step) => !step.done).slice(0, SHOW_LEFT) ?? [];
+  const left = unit.lessons.filter((lesson) => !lesson.done).slice(0, SHOW_LEFT);
 
   return (
     <PressableLink
-      href="/journey"
-      accessibilityLabel={`${t('learn.where.kicker')}. ${
-        stage ? t(`journey.stage.${stage.id}` as UIKey) : t('learn.where.done')
-      }`}
+      href={{ pathname: '/unit/[id]', params: { id: unit.id } }}
+      accessibilityLabel={`${t('learn.where.kicker')}. ${t(
+        `curriculum.unit.${unit.id}` as UIKey,
+      )}`}
       style={[styles.journey, { borderColor: theme.goldSoft }]}
       pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
       <View style={styles.cardText}>
         <ThemedText type="caption" themeColor="textSecondary" style={styles.kicker}>
           {t('learn.where.kicker')}
         </ThemedText>
-        <ThemedText type="sectionTitle">
-          {stage ? t(`journey.stage.${stage.id}` as UIKey) : t('learn.where.done')}
-        </ThemedText>
+        <ThemedText type="sectionTitle">{t(`curriculum.unit.${unit.id}` as UIKey)}</ThemedText>
       </View>
 
       <StagePath
         stages={path}
-        currentIndex={nextStageIndex}
+        currentIndex={nextUnitIndex}
         color={theme.accent}
         trackColor={theme.textSecondary}
         mutedColor={theme.textOnAccent}
       />
 
       {left.length > 0 ? (
-        /*
-          Its own spacing, not `cardText`. That style is a title-and-subtitle
-          pair at a 2pt gap, and three separate steps set 2pt apart read as one
-          sentence that has wrapped — which is the opposite of the point.
-        */
         <View style={styles.left}>
           <ThemedText type="caption" themeColor="textSecondary" style={styles.kicker}>
             {t('learn.where.left')}
           </ThemedText>
-          {left.map((step) => (
-            <ThemedText key={step.key} type="small" themeColor="textSecondary">
-              {step.labelKey ? t(step.labelKey as UIKey) : step.entry.title}
+          {left.map((lesson) => (
+            <ThemedText key={lesson.key} type="small" themeColor="textSecondary">
+              {lesson.labelKey ? t(lesson.labelKey as UIKey) : lesson.entry.title}
             </ThemedText>
           ))}
         </View>
       ) : null}
 
-      {/*
-        `action`, not `accent`. In dark they are two different blues, so a tab
-        carrying both showed two primary buttons in two colours — the shahada
-        panel's and this one's. `action` is the one a control takes.
-      */}
       <View style={[styles.journeyAction, { backgroundColor: theme.action }]}>
         <ThemedText type="smallBold" themeColor="onAction" style={styles.journeyActionLabel}>
           {t('journey.carryOn')}
@@ -321,63 +195,108 @@ function WhereYouAre() {
 }
 
 /**
- * One card's worth of facts, before it is laid out.
+ * One tier, expanded: its units as ruled rows.
  *
- * The layout pass below decides `wide` twice: first from the title (a long
- * title in a half tile truncates the words that make it findable), then from
- * the neighbourhood — see `pairTiles`.
+ * A finished unit trades its chevron for a malachite tick — complete is what
+ * malachite means — and the hairline along a started unit's foot is the same
+ * bookmark every reading row carries: a place, not a score.
  */
-type CardSpec = {
-  key: string;
-  href: Href;
-  title: string;
-  subtitle: string;
-  count: number;
-  unit: UIKey;
-  progress?: number;
-};
+function TierOpen({ tier }: { tier: ResolvedTier }) {
+  const theme = useTheme();
+  const { t } = useLocale();
+
+  return (
+    <View>
+      {tier.units.map((unit, i) => {
+        const finished = unit.total > 0 && unit.done === unit.total;
+        return (
+          <JadwalRow
+            key={unit.id}
+            href={{ pathname: '/unit/[id]', params: { id: unit.id } }}
+            accessibilityLabel={`${t(`curriculum.unit.${unit.id}` as UIKey)}. ${t(
+              'journey.progress',
+            )
+              .replace('{done}', String(unit.done))
+              .replace('{total}', String(unit.total))}`}
+            marginal={<Rosette label={String(i + 1)} />}
+            title={t(`curriculum.unit.${unit.id}` as UIKey)}
+            meta={t('journey.progress')
+              .replace('{done}', String(unit.done))
+              .replace('{total}', String(unit.total))}
+            progress={!finished && unit.done > 0 ? unit.done / unit.total : undefined}
+            trailing={
+              finished ? (
+                <Ionicons name="checkmark-circle" size={16} color={theme.malachite} />
+              ) : (
+                <Ionicons name="chevron-forward" size={14} color={theme.gold} />
+              )
+            }
+          />
+        );
+      })}
+    </View>
+  );
+}
 
 /**
- * No tile stands alone.
- *
- * Tiles are laid out at 48% with `flexGrow: 1`, so a tile with no partner in
- * its wrap row grew to full width while keeping a tile's vertical anatomy —
- * glyph at the top, title at the bottom, dead air between. Every group with
- * an odd run of tiles had one of these balloons, and they read as broken
- * cards rather than as a layout rule.
- *
- * So the run is measured: within each stretch of consecutive tiles, pairs
- * stay tiles, and a leftover odd one is promoted to a wide row — the anatomy
- * built for full width. Measured rather than hand-flagged, so regrouping a
- * topic never leaves a balloon behind.
+ * A collapsed tier: its name, its purpose, its size — and everything behind
+ * one tap. Collapsed, never grayed: gray is the visual language of a lock,
+ * and nothing here is locked. The person whose friend dies on Tuesday finds
+ * janāzah on Tuesday.
  */
+function TierClosed({ tier, onOpen }: { tier: ResolvedTier; onOpen: () => void }) {
+  const theme = useTheme();
+  const { t } = useLocale();
 
+  return (
+    <Pressable
+      onPress={onOpen}
+      accessibilityRole="button"
+      accessibilityLabel={`${t(`curriculum.tier.${tier.id}` as UIKey)}. ${t(
+        `curriculum.tier.${tier.id}.purpose` as UIKey,
+      )}. ${tier.total} ${t('count.lessons')}`}
+      style={({ pressed }) => [
+        styles.tierClosed,
+        {
+          borderBottomColor: theme.goldSoft,
+          backgroundColor: pressed ? theme.backgroundSelected : 'transparent',
+        },
+      ]}>
+      <View style={styles.cardText}>
+        <ThemedText type="caption" themeColor="gold" style={styles.kicker}>
+          {t(`curriculum.tier.${tier.id}` as UIKey)}
+        </ThemedText>
+        <ThemedText type="small" themeColor="textSecondary">
+          {t(`curriculum.tier.${tier.id}.purpose` as UIKey)}
+        </ThemedText>
+      </View>
+      {/* The count at the row's end, where every shelf puts it — inside the
+          sentence it collided with the purpose line's full stop. */}
+      <ThemedText type="caption" themeColor="textSecondary">
+        {String(tier.total)}
+      </ThemedText>
+      <Ionicons name="chevron-down" size={16} color={theme.textSecondary} />
+    </Pressable>
+  );
+}
 
-/**
- * The shelf of things you return to rather than read once.
- *
- * A function of `t` rather than a constant, because the titles are localised
- * and the tab re-renders on a language change. Built as a list so the
- * marginal numerals stay consecutive when `SHOW_PRACTICE` is false — written
- * out as four rows, the practice row's absence left a gap in the numbering,
- * which is the one thing a contents page must never do.
- *
- * No duʿa row here. `/duas` IS the Duʿa tab, so it was a link from one tab to
- * another already sitting in the bar underneath it, and it took the place
- * where something unreachable could have gone.
- *
- * Practice is hidden while Al-Fatiha is the only thing recorded, because the
- * Qur'an tab does those seven ayahs better in every respect. It returns on
- * its own the day a clip lands that is not a surah.
- */
-function REFERENCE_SHELF(t: (key: UIKey) => string): CardSpec[] {
-  /*
-    Built by pushing rather than by spreading a conditional array: a spread's
-    inner literal is not contextually typed, so every `href` widened to
-    `string` and lost the typed-routes check that is the point of turning
-    them on.
-  */
-  const rows: CardSpec[] = [
+/** The shelf of things you return to rather than read once. */
+function REFERENCE_SHELF(t: (key: UIKey) => string): TopicSpec[] {
+  const rows: TopicSpec[] = [
+    /*
+      Every prayer first, because it is the row this shelf exists for: the
+      farḍ/sunnah table used to sink with the Praying shelf the day somebody
+      learned to pray — practice content filed as learning content. This
+      shelf never sorts, so the counts stay one tap away forever.
+    */
+    {
+      key: 'screen:pray',
+      href: '/pray',
+      title: t('learn.everyPrayer.title'),
+      subtitle: t('learn.everyPrayer.subtitle'),
+      count: DAILY_PRAYERS.length,
+      unit: 'count.prayers',
+    },
     {
       key: 'screen:phrases',
       href: '/phrases',
@@ -423,19 +342,19 @@ function REFERENCE_SHELF(t: (key: UIKey) => string): CardSpec[] {
 
 export default function LearnScreen() {
   const theme = useTheme();
-  const { locale, t } = useLocale();
-  const confidence = usePrayerConfidence();
-  const { reading } = useObservations();
+  const { t } = useLocale();
+  const { tiers, nextTierIndex, openTierIndex } = useCurriculum();
   const readingNow = useReadingInProgress();
 
   /*
-    The shelves, in this reader's order — see GROUP_ORDER's note on why this
-    re-sorts on confidence and never on a tap. The groups themselves and the
-    cards inside them do not move; only which shelf comes first does.
+    Which tier sits open. The default follows the path — the tier the next
+    lesson is in, falling back to confidence's starting tier once everything
+    is done — and a tap on a collapsed tier overrides it for this visit.
+    Local state, not stored: a browse is a visit, not a decision.
   */
-  const groups = GROUP_ORDER[confidence]
-    .map((id) => TOPIC_GROUPS.find((group) => group.id === id))
-    .filter((group): group is (typeof TOPIC_GROUPS)[number] => group !== undefined);
+  const [opened, setOpened] = useState<string | null>(null);
+  const defaultOpen = nextTierIndex !== -1 ? tiers[nextTierIndex].id : tiers[openTierIndex]?.id;
+  const openId = opened ?? defaultOpen;
 
   return (
     <SafeAreaView style={[styles.safeArea, { backgroundColor: theme.background }]} edges={['top']}>
@@ -444,11 +363,7 @@ export default function LearnScreen() {
           <Unwan title={t('learn.title')} subtitle={t('learn.intro')} />
         </View>
 
-        {/*
-          The ledger rides directly under the shahada — the first first, and
-          the record of the ones after it. One section, so the two sit as
-          neighbours rather than a screen-gap apart.
-        */}
+        {/* The first first, and the record of the ones after it. */}
         <View style={styles.section}>
           <ShahadaCard />
           <QuietRow
@@ -458,15 +373,6 @@ export default function LearnScreen() {
           />
         </View>
 
-        {/*
-          The kicker row Today gives the same content — one treatment for one
-          thing in two places, and the lesson stays findable on its shelf
-          below; this is still the one line on the tab allowed to change day
-          to day. It sits INSIDE the chapter section rather than floating
-          between sections: as a direct child of the screen it took the 32px
-          screen gap on both sides and read as marooned (Iyad's screenshot,
-          31 Aug). The bookmark along its foot comes with the row.
-        */}
         <View style={styles.section}>
           <WhereYouAre />
           {readingNow && (
@@ -480,115 +386,41 @@ export default function LearnScreen() {
           )}
         </View>
 
-        {/*
-          Grouped by when the question arrives, not by subject.
-
-          This was nineteen consecutive rows under one heading, with a
-          "Where to start" section above it resolving from the same tables — so
-          "Becoming Muslim" and "What is Islam?" each appeared twice on one
-          screen. A flat list of nineteen equals only serves a reader who
-          already knows what they want, which is nobody this app is for.
-        */}
-        {groups.map((group) => {
-          /*
-            The screens that live in a group without being catalogue content —
-            the prayer chooser and the zakat working-out — join the same list
-            as everything beside them, so the layout pass sees the whole group.
-          */
-          const specials: CardSpec[] = [];
-          if (group.id === 'praying') {
-            specials.push({
-              key: 'screen:pray',
-              href: '/pray',
-              title: t('learn.toPray.title'),
-              subtitle: t('learn.toPray.subtitle'),
-              count: DAILY_PRAYERS.length,
-              unit: 'count.prayers',
-            });
-          }
-          if (group.id === 'year') {
-            specials.push({
-              key: 'screen:zakat',
-              href: '/zakat',
-              title: t('zakat.title'),
-              subtitle: t('zakat.open'),
-              /* Currencies, because that is what the screen asks you to pick. */
-              count: CURRENCIES.length,
-              unit: 'zakat.currencies',
-            });
-          }
-
-          const topics: CardSpec[] = group.topics
-            // A ref to content that does not exist yet resolves to nothing
-            // and is dropped, so a group can name something before it is
-            // written without a placeholder card appearing.
-            .map(resolveRef)
-            .filter((entry) => entry !== undefined)
-            .map((entry) => localiseCatalogEntry(entry, locale))
-            .map((topic) => ({
-              key: `${topic.kind}:${topic.id}`,
-              href: routeFor(topic),
-              title: topic.title,
-              subtitle: topic.shortDescription,
-              count: topic.pieces,
-              /*
-                Minutes read as a phrase rather than a bare noun. "4 min
-                read" says what the number is; "4 min" beside a title
-                could be a countdown to something.
-              */
-              unit:
-                topic.pieceUnit === 'minutes'
-                  ? ('count.minutes.long' as UIKey)
-                  : (`count.${topic.pieceUnit}` as UIKey),
-              progress: reading[`${topic.kind}:${topic.id}`]?.furthest,
-            }));
-
-          return (
-            <View key={group.id} style={styles.section}>
-              <Shelf
-                label={t(`learn.group.${group.id}` as UIKey)}
-                count={group.topics.length}
-              />
-              <View style={styles.list}>
-                {[...specials, ...topics].map(({ key, ...card }, i) => (
-                  <LearnCard key={key} {...card} index={i + 1} />
-                ))}
-              </View>
+        {/* The path: three tiers, one open. */}
+        {tiers.map((tier) =>
+          tier.id === openId ? (
+            <View key={tier.id} style={styles.section}>
+              <Shelf label={t(`curriculum.tier.${tier.id}` as UIKey)} count={tier.total} />
+              <ThemedText type="small" themeColor="textSecondary">
+                {t(`curriculum.tier.${tier.id}.purpose` as UIKey)}
+              </ThemedText>
+              <TierOpen tier={tier} />
             </View>
-          );
-        })}
+          ) : (
+            <TierClosed key={tier.id} tier={tier} onOpen={() => setOpened(tier.id)} />
+          ),
+        )}
+
+        {/* The library — the same pages, grouped by the moment they answer. */}
+        <QuietRow
+          href="/library"
+          label={t('learn.browse')}
+          accessibilityLabel={t('learn.browse')}
+        />
 
         {/* The things you return to rather than read once. */}
         <View style={styles.section}>
           <Shelf label={t('learn.group.reference')} />
-          <View style={styles.list}>
-            {/*
-              An array rather than four hand-written rows, so the marginal
-              numerals stay consecutive when `SHOW_PRACTICE` is false. Written
-              out, the practice row's absence left a gap in the numbering —
-              which is the sort of thing a contents page must never do.
-
-              No duʿa card here. `/duas` IS the Duʿa tab, so that row was a
-              link from one tab to another already sitting in the bar
-              underneath it, and it took the place where something
-              unreachable could have gone.
-
-              Practice is hidden while Al-Fatiha is the only thing recorded,
-              because the Qur'an tab does those seven ayahs better in every
-              respect. It returns on its own the day a clip lands that is not
-              a surah.
-            */}
-            {REFERENCE_SHELF(t).map(({ key, ...card }, i) => (
-              <LearnCard key={key} {...card} index={i + 1} />
+          <View>
+            {REFERENCE_SHELF(t).map(({ key, ...row }, i) => (
+              <TopicRow key={key} {...row} index={i + 1} />
             ))}
           </View>
         </View>
-      
       </ScrollView>
     </SafeAreaView>
   );
 }
-
 
 const styles = StyleSheet.create({
   safeArea: {
@@ -609,37 +441,6 @@ const styles = StyleSheet.create({
   section: {
     gap: Spacing.three,
   },
-  /** The group's name, a rule running out from it, and the count at the end. */
-  sectionTitle: {
-    textTransform: 'uppercase',
-    letterSpacing: 1,
-  },
-  /** Was Spacing.three here and Spacing.two on the Pray tab. Now both are two. */
-  /*
-    A column. This was the tile grid — `row` + `wrap` — and it survived the
-    tiles going: ruled rows inside a row-direction container size to their
-    content instead of stretching, so every long meta line ran off the right
-    edge and took its chevron with it. `minWidth` was not the problem; the
-    axis was.
-  */
-  list: {},
-  /*
-    A panel, not a card. The girih band across its head is what marks this as
-    the one thing on the tab a reader who has not said the shahada should not
-    have to pick out of a list — a fill and a border around it as well was the
-    same claim made twice, and it left two rounded rectangles sitting above
-    fifty ruled rows.
-  */
-  /** Where the reader got to, along the card's foot. Quiet on purpose. */
-  /**
-   * Two to a row, glyph above the title.
-   *
-   * The list was nineteen full-width rows of title-over-sentence, which is the
-   * shape that reads as a wall however well it is grouped. A tile is scanned
-   * rather than read: the mark catches the eye first, the title second, and
-   * six of them fit in the space four rows took.
-   */
-  /** Full width, for the reference strip where the sentence earns its room. */
   cardText: {
     flex: 1,
     gap: 2,
@@ -649,27 +450,8 @@ const styles = StyleSheet.create({
     paddingVertical: Spacing.four,
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
-  journeyHead: {
-    flexDirection: 'row',
-    alignItems: 'baseline',
-    justifyContent: 'space-between',
-    gap: Spacing.three,
-  },
-  /* Uppercase and tracked, the same label treatment every card kicker uses. */
   kicker: { textTransform: 'uppercase', letterSpacing: 1 },
   left: { gap: Spacing.one },
-  /*
-    The same line treatment as `keepsake`, without its negative top margin —
-    that one is tuned to sit tight under the tab's own intro, and reusing it
-    here pulled the row up into the card above.
-  */
-  /* A rule and a line. Not a card — see `ShahadaCard`. */
-  /*
-    Padding is symmetric and the added bottom half is cancelled by margin, so
-    the footprint is unchanged. Asymmetric padding was invisible until the
-    row was pressed — the highlight paints the padded box, and top-only
-    padding put the text at its bottom edge (Iyad's screenshot, 31 Aug).
-  */
   keepsake: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -694,20 +476,13 @@ const styles = StyleSheet.create({
   journeyActionLabel: {
     flex: 1,
   },
-  journeyText: {
-    flex: 1,
-    gap: Spacing.one,
+  tierClosed: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.three,
+    paddingVertical: Spacing.three,
+    borderBottomWidth: StyleSheet.hairlineWidth,
   },
-  journeyProgress: {
-    paddingTop: Spacing.one,
-  },
-  /*
-    A panel, not a card. The girih band across its head is what marks this as
-    the one thing on the tab a reader who has not said the shahada should not
-    have to pick out of a list — a fill and a rounded border as well was the
-    same claim made twice, and it left the only rectangle on a tab of fifty
-    ruled rows.
-  */
   featured: {
     borderBottomWidth: StyleSheet.hairlineWidth,
     overflow: 'hidden',

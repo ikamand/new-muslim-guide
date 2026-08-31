@@ -218,7 +218,7 @@ export const EN = {
   'first.zakat': 'Given zakat',
   'learn.where.kicker': 'Where you are',
   'learn.where.left': 'Left in this chapter',
-  'learn.where.done': 'You have been through all six chapters.',
+  'learn.where.done': 'You have been through the whole path.',
   'learn.shahada.line': 'The shahada · read the words again',
   'today.firstAsk': 'It is Friday tomorrow',
   'today.zakat': 'It is Ramadan',
@@ -930,6 +930,30 @@ export const EN = {
   'curriculum.unit.practices': 'Practices to take on',
   'curriculum.unit.practices.purpose':
     'Small sunnahs that become yours over the years.',
+
+  /* One word per unit, for the arch strip — a 30px arch fits nothing longer. */
+  'curriculum.short.becoming-muslim': 'Becoming',
+  'curriculum.short.who-you-follow': 'Belief',
+  'curriculum.short.how-to-pray': 'Prayer',
+  'curriculum.short.when-it-goes-wrong': 'Mistakes',
+  'curriculum.short.praying-with-others': 'Together',
+  'curriculum.short.everyday-words': 'Words',
+  'curriculum.short.eating-wearing-earning': 'Halal',
+  'curriculum.short.people': 'People',
+  'curriculum.short.meeting-muslims': 'Muslims',
+  'curriculum.short.the-year': 'The year',
+  'curriculum.short.when-its-hard': 'Hard days',
+  'curriculum.short.prayers-you-choose': 'Chosen',
+  'curriculum.short.interior-life': 'The heart',
+  'curriculum.short.practices': 'Practices',
+
+  'learn.browse': 'Browse by situation',
+  'library.title': 'By situation',
+  'library.intro':
+    'The same pages as the path, grouped by the moment they answer — for when life produces the question.',
+  'learn.everyPrayer.title': 'Every prayer',
+  'learn.everyPrayer.subtitle': 'All of them side by side — rakʿahs, sunnah, and when',
+  'count.lessons': 'lessons',
 
   'settings.guidance': 'Prayer guidance for',
 

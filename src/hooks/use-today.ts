@@ -6,7 +6,12 @@ import { FIRSTS } from '@/content/firsts';
 import { arcFor } from '@/content/ramadan-arc';
 import { seasonFor } from '@/content/seasons';
 import { useHijriToday } from '@/hooks/use-hijri';
-import { useJourney } from '@/hooks/use-journey';
+/*
+  The curriculum, not the journey: Today's carry-on and the Learn tab must
+  take "next" from the same source, or the two surfaces offer different
+  continue lessons — the disagreement the shared hook exists to prevent.
+*/
+import { useCurriculum } from '@/hooks/use-curriculum';
 import { useLocale } from '@/hooks/use-locale';
 import { useObservations } from '@/hooks/use-observations';
 import { useLocation } from '@/hooks/use-location';
@@ -85,7 +90,7 @@ export type TodayItem = {
 export function useToday(): TodayItem | undefined {
   const { locale, t } = useLocale();
   const hijri = useHijriToday();
-  const { next } = useJourney();
+  const { next } = useCurriculum();
   const { coords } = useLocation();
   const { today } = usePrayerTimes();
   const { home, awaySince, setMany } = useSettings();

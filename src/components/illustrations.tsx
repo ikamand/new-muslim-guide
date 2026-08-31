@@ -1,7 +1,7 @@
 import { getPostureImage, PORTRAIT_POSTURES } from '@/content/prayer-images';
 import type { Posture } from '@/content/types';
 
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, View, type ColorValue } from 'react-native';
 import Svg, { Circle, Ellipse, G, Line, Path } from 'react-native-svg';
 
 
@@ -1558,6 +1558,79 @@ export function JadwalMark({ color, size = 22 }: { color: string; size?: number 
         <Circle cx={8.2} cy={16.6} r={1.05} />
         <Circle cx={12} cy={16.6} r={1.05} />
       </G>
+    </Svg>
+  );
+}
+
+/*
+  ── The four doors ─────────────────────────────────────────────────────────
+  The tab bar's marks, chosen by Iyad from the "Four Doors" options sheet
+  (31 Aug 2026) — the "objects of practice" set: four things from the
+  physical world of worship, no two silhouettes alike. They replaced the
+  last stock Ionicons in the app (moon, book, bookmarks, sun). All on the
+  24 grid at the house stroke; the tab bar supplies colour and size, so
+  active/inactive stays a tint change and nothing else about the bar moves.
+*/
+
+/** Today: a mihrab niche with the gold moment inside — the Awqat card as a mark. */
+export function NicheMark({ color, size = 24 }: { color: ColorValue; size?: number }) {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <G stroke={color} strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+        <Path d="M2.75 20.25 H21.25" />
+        <Path d="M5.5 20.25 V11.5 C5.5 6.6 8.2 4.4 12 4.4 C15.8 4.4 18.5 6.6 18.5 11.5 V20.25" />
+      </G>
+      <Circle cx={12} cy={9.6} r={1.7} fill={color} />
+    </Svg>
+  );
+}
+
+/** Learn: three arches on one baseline, the one you are inside marked — the StagePath as a door. */
+export function ArcadeMark({ color, size = 24 }: { color: ColorValue; size?: number }) {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <G stroke={color} strokeWidth={1.4} strokeLinecap="round" strokeLinejoin="round">
+        <Path d="M2.5 19.75 H21.5" />
+        <Path d="M3.1 19.75 V13.9 Q3.1 10.4 5.4 10.4 Q7.7 10.4 7.7 13.9 V19.75" />
+        <Path d="M9.7 19.75 V12.4 Q9.7 8.2 12 8.2 Q14.3 8.2 14.3 12.4 V19.75" />
+        <Path d="M16.3 19.75 V13.9 Q16.3 10.4 18.6 10.4 Q20.9 10.4 20.9 13.9 V19.75" />
+      </G>
+      <Circle cx={12} cy={13.6} r={1.3} fill={color} />
+    </Svg>
+  );
+}
+
+/** Qur'an: a rehl — the folding stand holding an open mushaf. */
+export function RehlMark({ color, size = 24 }: { color: ColorValue; size?: number }) {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <G stroke={color} strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+        <Path d="M5.2 20.6 L18.8 9.2" />
+        <Path d="M18.8 20.6 L5.2 9.2" />
+        <Path d="M12 5.9 C10.4 4.3 8 4 5.9 4.6 L5.9 9 C8 8.4 10.4 8.7 12 10.3 C13.6 8.7 16 8.4 18.1 9 L18.1 4.6 C16 4 13.6 4.3 12 5.9 Z" />
+        <Path d="M12 5.9 V10.3" strokeWidth={1} />
+      </G>
+    </Svg>
+  );
+}
+
+/** Du'a: the misbaha — the loop of beads with its tassel. */
+export function MisbahaMark({ color, size = 24 }: { color: ColorValue; size?: number }) {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <G stroke={color} strokeWidth={1.3} strokeLinecap="round" strokeLinejoin="round">
+        <Circle cx={12} cy={3.4} r={1.25} />
+        <Circle cx={15.88} cy={4.66} r={1.25} />
+        <Circle cx={18.28} cy={7.96} r={1.25} />
+        <Circle cx={18.28} cy={12.04} r={1.25} />
+        <Circle cx={15.88} cy={15.34} r={1.25} />
+        <Circle cx={8.12} cy={15.34} r={1.25} />
+        <Circle cx={5.72} cy={12.04} r={1.25} />
+        <Circle cx={5.72} cy={7.96} r={1.25} />
+        <Circle cx={8.12} cy={4.66} r={1.25} />
+        <Path d="M12 16.6 V19" />
+      </G>
+      <Circle cx={12} cy={20.3} r={1.15} fill={color} />
     </Svg>
   );
 }

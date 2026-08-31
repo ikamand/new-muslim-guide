@@ -1,8 +1,15 @@
-import Ionicons from '@expo/vector-icons/Ionicons';
 import { Tabs } from 'expo-router/tabs';
 
+import { ArcadeMark, MisbahaMark, NicheMark, RehlMark } from '@/components/illustrations';
 import { useLocale } from '@/hooks/use-locale';
 import { useTheme } from '@/hooks/use-theme';
+
+/*
+  The four doors wear the app's own marks — the "objects of practice" set
+  from the Four Doors sheet, Iyad's pick (31 Aug 2026): a niche, an arcade,
+  a rehl, a misbaha. They replaced the last four stock Ionicons in the app;
+  the drawings live in `illustrations.tsx` beside every other mark.
+*/
 
 export default function TabsLayout() {
   const theme = useTheme();
@@ -30,14 +37,14 @@ export default function TabsLayout() {
         name="index"
         options={{
           title: t('tab.today'),
-          tabBarIcon: ({ color, size }) => <Ionicons name="moon-outline" size={size} color={color} />,
+          tabBarIcon: ({ color, size }) => <NicheMark color={color} size={size} />,
         }}
       />
       <Tabs.Screen
         name="learn"
         options={{
           title: t('tab.learn'),
-          tabBarIcon: ({ color, size }) => <Ionicons name="book-outline" size={size} color={color} />,
+          tabBarIcon: ({ color, size }) => <ArcadeMark color={color} size={size} />,
         }}
       />
       {/*
@@ -50,9 +57,7 @@ export default function TabsLayout() {
         name="quran"
         options={{
           title: t('tab.quran'),
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="bookmarks-outline" size={size} color={color} />
-          ),
+          tabBarIcon: ({ color, size }) => <RehlMark color={color} size={size} />,
         }}
       />
       {/*
@@ -70,9 +75,7 @@ export default function TabsLayout() {
         name="duas"
         options={{
           title: t('tab.duas'),
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="sunny-outline" size={size} color={color} />
-          ),
+          tabBarIcon: ({ color, size }) => <MisbahaMark color={color} size={size} />,
         }}
       />
       {/*

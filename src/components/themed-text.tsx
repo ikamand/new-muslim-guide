@@ -65,6 +65,16 @@ export type TextType = NonNullable<ThemedTextProps['type']>;
  */
 export const ARABIC_NAME_TRIM = { marginTop: -6, marginBottom: -2 } as const;
 
+/**
+ * The `default` rung's size for the few places that cannot render a
+ * ThemedText — a TextInput. lineHeight is deliberately omitted: TextInput's
+ * vertical centring fights an explicit line height on iOS. Spread this;
+ * never restate the number — `style:check` fails a bare `fontSize:` outside
+ * this file, which is how the scale stopped leaking the first time it was
+ * rebuilt and then leaked anyway.
+ */
+export const INPUT_TEXT = { fontSize: 16 } as const;
+
 
 export type ThemedTextProps = TextProps & {
   type?:

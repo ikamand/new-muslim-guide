@@ -420,9 +420,8 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     letterSpacing: 1,
   },
-  instruction: {
-    lineHeight: 26,
-  },
+  /* `default` already carries 16/26 — the override that restated it is gone. */
+  instruction: {},
   footer: {
     flexDirection: 'row',
     gap: Spacing.two,

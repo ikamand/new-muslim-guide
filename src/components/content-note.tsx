@@ -91,7 +91,7 @@ export function ContentNoteCard({ entry }: { entry: ContentNote }) {
                 <View key={position.school} style={styles.position}>
                   <View
                     style={[styles.school, { backgroundColor: theme.accentMuted }]}>
-                    <ThemedText type="smallBold" themeColor="accent" style={styles.schoolText}>
+                    <ThemedText type="caption" themeColor="accent">
                       {schoolLabel(position.school, t)}
                     </ThemedText>
                   </View>
@@ -127,7 +127,6 @@ const styles = StyleSheet.create({
     // The row is 20px of text, so the padding is what makes the target 44.
     paddingVertical: Spacing.three,
     paddingRight: Spacing.three,
-    marginTop: -Spacing.two,
   },
   detail: {
     gap: Spacing.three,
@@ -147,12 +146,8 @@ const styles = StyleSheet.create({
   },
   school: {
     paddingHorizontal: Spacing.two,
-    paddingVertical: 2,
+    paddingVertical: Spacing.half,
     borderRadius: Radius.small,
-  },
-  schoolText: {
-    fontSize: 12,
-    lineHeight: 18,
   },
   positionText: {
     flex: 1,

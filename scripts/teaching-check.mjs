@@ -44,6 +44,81 @@ const resolves = (s) => Boolean(resolveText(s));
 const errors = [];
 const warnings = [];
 
+/* ─────────────────────────────────────────────────────────────
+   Style sources — the tokens hold only if leaks FAIL.
+
+   The palette lives in constants/theme.ts, the type scale in
+   components/themed-text.tsx, spacing in the Spacing tokens. All three
+   leaked anyway — eleven local font sizes, a hand-typed rgba, negative
+   margins compensating container gaps — because nothing failed when they
+   did. These rules are the teeth: change gold in one line, grow every
+   input in one line, and know nothing anywhere is quietly opting out.
+   An allowlisted file carries its reason here, on the record.
+   ───────────────────────────────────────────────────────────── */
+
+const STYLE_RULES = [
+  {
+    name: 'hardcoded colour',
+    re: /#[0-9a-fA-F]{6}\b|rgba?\(/,
+    allow: {
+      'src/constants/theme.ts': 'the palette itself',
+    },
+    fix: 'take a theme token; add one to constants/theme.ts if none fits',
+  },
+  {
+    name: 'local font size',
+    re: /fontSize:|lineHeight:/,
+    allow: {
+      'src/components/themed-text.tsx': 'the scale itself',
+      'src/app/_layout.tsx': 'native header chrome, platform-sized on purpose',
+      'src/components/illustrations.tsx': 'labels fitted inside drawn arches',
+    },
+    fix: 'use a ThemedText rung (INPUT_TEXT for a TextInput); a missing size is a missing rung',
+  },
+  {
+    name: 'negative margin',
+    re: /margin[A-Za-z]*:\s*-/,
+    allow: {
+      'src/components/themed-text.tsx': 'ARABIC_NAME_TRIM — documented optical trim of the Amiri line box',
+    },
+    fix: 'a negative margin compensates a container gap — fix the join instead (see the spacing rule in docs/ui-redesign-plan.md)',
+  },
+  {
+    name: 'raw pixel spacing',
+    re: /(padding|margin)[A-Za-z]*:\s*[1-9]/,
+    allow: {},
+    fix: 'use a Spacing token',
+  },
+];
+
+const walkSrc = (dir) =>
+  readdirSync(join(root, dir), { withFileTypes: true }).flatMap((entry) =>
+    entry.isDirectory()
+      ? walkSrc(`${dir}/${entry.name}`)
+      : /\.(ts|tsx)$/.test(entry.name)
+        ? [`${dir}/${entry.name}`]
+        : [],
+  );
+
+const styleFiles = ['src/app', 'src/components', 'src/hooks', 'src/lib', 'src/constants'].flatMap(
+  walkSrc,
+);
+
+for (const file of styleFiles) {
+  const lines = readFileSync(join(root, file), 'utf8').split('\n');
+  for (const rule of STYLE_RULES) {
+    if (file in rule.allow) continue;
+    lines.forEach((line, i) => {
+      const lead = line.trimStart();
+      if (lead.startsWith('*') || lead.startsWith('//') || lead.startsWith('/*')) return;
+      if (rule.re.test(line)) {
+        errors.push(`${file}:${i + 1} ${rule.name} — ${rule.fix}\n    ${lead.slice(0, 90)}`);
+      }
+    });
+  }
+}
+
+
 for (const page of pages) {
   if (!page?.id) continue;
 

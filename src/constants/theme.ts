@@ -61,6 +61,8 @@ export const Colors = {
     malachite: '#2E6B52',
 
     action: '#1B3A6B',
+    /* The modal backdrop. Ink-toned, same in both themes on purpose. */
+    scrim: 'rgba(12, 17, 24, 0.45)',
     onAction: '#F3ECDC',
     /* Invisible in light — the bar has enough contrast against parchment. */
     actionRule: '#1B3A6B',
@@ -82,6 +84,7 @@ export const Colors = {
     malachite: '#6FCFB2',
 
     action: '#2A5391',
+    scrim: 'rgba(12, 17, 24, 0.45)',
     onAction: '#F2E9D5',
     /* A gold hairline, because a lapis bar on a lapis ground has no edge. */
     actionRule: '#C9A253',

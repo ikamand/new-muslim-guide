@@ -581,7 +581,7 @@ const styles = StyleSheet.create({
     paddingVertical: Spacing.three,
     paddingHorizontal: Spacing.three,
   },
-  flagLabel: { flex: 1, paddingRight: 8 },
+  flagLabel: { flex: 1, paddingRight: Spacing.two },
   storageText: {
     flex: 1,
     gap: 2,

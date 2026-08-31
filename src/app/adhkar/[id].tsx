@@ -323,7 +323,7 @@ const styles = StyleSheet.create({
     borderWidth: StyleSheet.hairlineWidth,
     borderRadius: Radius.large,
     paddingHorizontal: Spacing.three,
-    paddingVertical: 2,
+    paddingVertical: Spacing.half,
   },
   arabic: { textAlign: 'right', writingDirection: 'rtl' },
   swap: { borderLeftWidth: 2, paddingLeft: Spacing.three, gap: Spacing.one },

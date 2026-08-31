@@ -2595,3 +2595,30 @@ zero-gap foot, the tier screen's unit rows moved into one flush group, and
 the unit screen's doors joined the lessons group. Verified by measurement
 (dead air 32→0) and held-press screenshots at every named join. Card-to-card
 joins (Today's cards) keep Spacing.two.
+
+---
+
+## 31 Aug 2026 — Style sources get teeth ✅
+
+Iyad: "style consistency is everything — change one number and the dense
+feeling is gone; change one string and the whole app updates." The
+architecture already existed (theme tokens, the type scale, Spacing); what
+was missing was enforcement, and the audit proved it: one hand-typed rgba,
+eleven local font sizes across ten files, three negative-margin fossils,
+five raw pixel paddings — every one a place a global change would not reach.
+
+All fixed: inputs share `INPUT_TEXT` from the scale, the overrides that
+restated or approximated rungs became the rungs (the niche's prayer name is
+now the `subtitle` rung — Literata, as headings have been since 29 Aug; the
+phrases head and source labels took `cardTitle`/`caption`), the modal
+backdrop became a `scrim` token, the times row joined its divider in a
+flush group instead of a negative margin, and the last raw pixels became
+Spacing tokens.
+
+And enforced: `npm run style:check` now FAILS on a hardcoded colour outside
+theme.ts, a fontSize/lineHeight outside themed-text.tsx, any negative
+margin, or a raw pixel padding/margin — allowlists carry their reasons in
+the script (native header chrome, arch-fitted labels, ARABIC_NAME_TRIM).
+All four rules were forced to fire and verified exit-1 before landing.
+Still open, its own session: the `Column` layout component so flush joins
+are composed, not remembered.

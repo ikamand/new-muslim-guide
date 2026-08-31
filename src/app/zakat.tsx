@@ -2,7 +2,7 @@ import { Stack } from 'expo-router';
 import { useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, TextInput, View } from 'react-native';
 
-import { ThemedText } from '@/components/themed-text';
+import { INPUT_TEXT, ThemedText } from '@/components/themed-text';
 import { CURRENCIES, PRICED_AT, PRICE_SOURCE } from '@/content/nisab';
 import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
@@ -216,7 +216,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.three,
     borderRadius: Radius.small,
     borderWidth: StyleSheet.hairlineWidth,
-    fontSize: 17,
+    ...INPUT_TEXT,
   },
   sum: {
     gap: Spacing.two,

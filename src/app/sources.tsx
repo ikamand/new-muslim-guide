@@ -190,7 +190,5 @@ const styles = StyleSheet.create({
     paddingVertical: Spacing.three - 4,
     gap: 2,
   },
-  footnote: {
-    marginTop: -Spacing.two,
-  },
+  footnote: {},
 });

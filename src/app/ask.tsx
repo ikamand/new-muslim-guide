@@ -5,7 +5,7 @@ import { Pressable, ScrollView, StyleSheet, TextInput, View } from 'react-native
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { PressableLink } from '@/components/pressable-link';
-import { ThemedText } from '@/components/themed-text';
+import { INPUT_TEXT, ThemedText } from '@/components/themed-text';
 import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useHelpTopics } from '@/hooks/use-help';
 import { useLocale } from '@/hooks/use-locale';
@@ -324,8 +324,7 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    /* The `default` rung's size, set here because TextInput is not ThemedText. */
-    fontSize: 16,
+    ...INPUT_TEXT,
     /* Android pads its inputs by default and the field is already 48 tall. */
     paddingVertical: 0,
   },

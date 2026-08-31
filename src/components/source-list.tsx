@@ -71,7 +71,7 @@ export function SourceLines({
   return (
     <View style={styles.block}>
       {showLabel && (
-        <ThemedText type="smallBold" themeColor="textSecondary" style={styles.label}>
+        <ThemedText type="caption" themeColor="textSecondary" style={styles.label}>
           {t('note.sources')}
         </ThemedText>
       )}
@@ -251,8 +251,6 @@ const styles = StyleSheet.create({
   label: {
     textTransform: 'uppercase',
     letterSpacing: 1,
-    fontSize: 12,
-    lineHeight: 16,
   },
   source: {
     fontVariant: ['tabular-nums'],

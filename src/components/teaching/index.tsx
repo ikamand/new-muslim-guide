@@ -388,7 +388,7 @@ const styles = StyleSheet.create({
   aside: {
     borderLeftWidth: Teaching.aside.barWidth,
     paddingLeft: Teaching.aside.paddingLeft,
-    paddingVertical: 4,
+    paddingVertical: Spacing.one,
     /* marginBottom is the `last` prop's — see `TeachingAside`. */
   },
   /*

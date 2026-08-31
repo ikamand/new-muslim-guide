@@ -44,7 +44,7 @@ export default function PhrasesScreen() {
             key={phrase.id}
             style={[styles.card, { borderBottomColor: theme.goldSoft }]}>
             <View style={styles.head}>
-              <ThemedText type="smallBold" style={styles.said}>
+              <ThemedText type="cardTitle" style={styles.said}>
                 {phrase.said}
               </ThemedText>
               <ThemedText type="arabicQuote" style={styles.arabic}>{phrase.arabic}</ThemedText>
@@ -101,8 +101,6 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   said: {
-    fontSize: 17,
-    lineHeight: 26,
     flexShrink: 1,
   },
   arabic: {

@@ -3,7 +3,7 @@ import { useMemo, useRef, useState } from 'react';
 import { Keyboard, Pressable, ScrollView, StyleSheet, TextInput, View } from 'react-native';
 
 import { Unwan } from '@/components/jadwal';
-import { ThemedText } from '@/components/themed-text';
+import { INPUT_TEXT, ThemedText } from '@/components/themed-text';
 import { BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { useLocation } from '@/hooks/use-location';
@@ -236,7 +236,7 @@ const styles = StyleSheet.create({
     borderWidth: StyleSheet.hairlineWidth,
     borderRadius: Radius.rule,
     textAlign: 'center',
-    fontSize: 16,
+    ...INPUT_TEXT,
     fontVariant: ['tabular-nums'],
   },
   found: {

@@ -2,7 +2,7 @@ import { Stack } from 'expo-router';
 import { useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, TextInput, View } from 'react-native';
 
-import { ThemedText } from '@/components/themed-text';
+import { INPUT_TEXT, ThemedText } from '@/components/themed-text';
 import { FIRSTS } from '@/content/firsts';
 import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
@@ -208,6 +208,6 @@ const styles = StyleSheet.create({
     borderRadius: Radius.small,
     paddingHorizontal: Spacing.two,
     paddingVertical: Spacing.two,
-    fontSize: 16, // matches the default rung, as ask.tsx does for its input
+    ...INPUT_TEXT,
   },
 });

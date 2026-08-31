@@ -51,7 +51,7 @@ function NeedsLocation({ status }: { status: 'denied' | 'unavailable' }) {
 
   return (
     <Shell>
-      <ThemedText type="smallBold" style={styles.cardTitle}>
+      <ThemedText type="cardTitle">
         {t('times.needLocation')}
       </ThemedText>
       <ThemedText type="small" themeColor="textSecondary">
@@ -192,7 +192,10 @@ function WindowsSheet({
   return (
     <Modal visible={visible} transparent animationType="fade" onRequestClose={onClose}>
       {/* The backdrop is the close control; the sheet itself swallows taps. */}
-      <Pressable style={styles.backdrop} onPress={onClose} accessibilityLabel={t('windows.close')}>
+      <Pressable
+        style={[styles.backdrop, { backgroundColor: theme.scrim }]}
+        onPress={onClose}
+        accessibilityLabel={t('windows.close')}>
         <Pressable style={[styles.sheet, { backgroundColor: theme.background }]} onPress={() => {}}>
           <DoubleRule />
           <View style={styles.sheetBody}>
@@ -298,7 +301,7 @@ export function PrayerTimesCard({ action }: PrayerTimesCardProps) {
           <ThemedText type="caption" themeColor="textSecondary" style={styles.nextLabel}>
             {next.isTomorrow ? t('times.nextTomorrow') : t('times.next')}
           </ThemedText>
-          <ThemedText type="subtitle" style={styles.nextName}>
+          <ThemedText type="subtitle">
             {next.label}
           </ThemedText>
           <ThemedText type="cardTitle" themeColor="gold" style={styles.nextTime}>
@@ -341,6 +344,15 @@ export function PrayerTimesCard({ action }: PrayerTimesCardProps) {
         <CompassRose color={theme.gold} />
       </PressableLink>
 
+      {/*
+        The times row and its divider as ONE zero-gap group: the divider is
+        the arch's baseline, and the row's box now touches it — the flush-join
+        rule — instead of pulling itself up with a negative margin across a
+        container gap, which was the last of the compensation fossils here.
+        The row's own paddingTop keeps the printed times exactly where they
+        were.
+      */}
+      <View>
       {/* The times row is the arch's baseline — the legs land on this rule. */}
       <View style={[styles.divider, { backgroundColor: theme.goldSoft }]} />
 
@@ -367,6 +379,7 @@ export function PrayerTimesCard({ action }: PrayerTimesCardProps) {
           />
         ))}
       </PressableLink>
+      </View>
 
       {/*
         One caption, only when a mosque match is active: the numbers above
@@ -447,10 +460,6 @@ const styles = StyleSheet.create({
     gap: Spacing.half,
     paddingTop: Spacing.three,
   },
-  cardTitle: {
-    fontSize: 17,
-    lineHeight: 24,
-  },
   button: {
     alignSelf: 'flex-start',
     paddingVertical: Spacing.two,
@@ -461,10 +470,6 @@ const styles = StyleSheet.create({
   nextLabel: {
     textTransform: 'uppercase',
     letterSpacing: 1,
-  },
-  nextName: {
-    fontSize: 28,
-    lineHeight: 36,
   },
   divider: {
     height: StyleSheet.hairlineWidth,
@@ -502,7 +507,6 @@ const styles = StyleSheet.create({
   backdrop: {
     flex: 1,
     justifyContent: 'flex-end',
-    backgroundColor: 'rgba(12, 17, 24, 0.45)',
   },
   sheet: {
     paddingTop: Spacing.three,
@@ -541,7 +545,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     gap: Spacing.one,
-    marginTop: -Spacing.two,
+    /* The box touches the divider; this is the air the negative margin faked. */
+    paddingTop: Spacing.two,
   },
   cell: {
     flex: 1,

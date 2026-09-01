@@ -13,10 +13,13 @@
  * language.
  *
  * What is written:
- *   categories.json — the 452 categories, ids and titles
- *   hadeeths.json   — id → the full record: hadeeth, hadeeth_ar, grade,
- *                     grade_ar, attribution, explanation(s), hints,
- *                     words_meanings_ar, categories, translations
+ *   categories.json  — the 452 categories, ids and titles
+ *   hadeeths.json    — id → the full ENGLISH record: hadeeth, hadeeth_ar,
+ *                      grade, grade_ar, attribution, explanation(s), hints,
+ *                      words_meanings_ar, categories, translations
+ *   hadeeths-fr.json — the same records in French, where a record HAS
+ *   hadeeths-es.json   French/Spanish (its own `translations` array says;
+ *                      coverage is not uniform and is not pretended to be)
  *
  * ⚠️ HadeethEnc's terms: no modification, addition or deletion, and name the
  * publisher. A mirror for build-time tooling honours that (the bytes ship
@@ -73,24 +76,43 @@ for (const category of categories) {
 }
 console.log(`unique hadith ids: ${ids.size}`);
 
-/* ── 3. the records, resume-safe ── */
-const target = join(out, 'hadeeths.json');
-const held = existsSync(target) ? JSON.parse(readFileSync(target, 'utf8')) : {};
-let fetched = 0;
-let sinceSave = 0;
-for (const id of ids) {
-  if (held[id]) continue;
-  held[id] = await get(`https://hadeethenc.com/api/v1/hadeeths/one/?language=en&id=${id}`);
-  fetched += 1;
-  sinceSave += 1;
-  if (sinceSave >= 50) {
-    writeFileSync(target, JSON.stringify(held));
-    sinceSave = 0;
-    process.stdout.write(`\r  ${Object.keys(held).length}/${ids.size}`);
+/* ── 3. the records, resume-safe, per language ── */
+const LANGS = [
+  { code: 'en', file: 'hadeeths.json' },
+  { code: 'fr', file: 'hadeeths-fr.json' },
+  { code: 'es', file: 'hadeeths-es.json' },
+];
+
+/* The English pass holds every record's `translations` array — the map of
+   which languages each hadith actually exists in. French and Spanish fetch
+   only where offered rather than collecting 404s. */
+let english = {};
+for (const lang of LANGS) {
+  const target = join(out, lang.file);
+  const held = existsSync(target) ? JSON.parse(readFileSync(target, 'utf8')) : {};
+  let fetched = 0;
+  let sinceSave = 0;
+  for (const id of ids) {
+    if (held[id]) continue;
+    if (lang.code !== 'en') {
+      const offered = english[id]?.translations;
+      if (Array.isArray(offered) && !offered.includes(lang.code)) continue;
+    }
+    held[id] = await get(
+      `https://hadeethenc.com/api/v1/hadeeths/one/?language=${lang.code}&id=${id}`,
+    );
+    fetched += 1;
+    sinceSave += 1;
+    if (sinceSave >= 50) {
+      writeFileSync(target, JSON.stringify(held));
+      sinceSave = 0;
+      process.stdout.write(`\r  ${lang.code}: ${Object.keys(held).length}`);
+    }
+    await sleep(120);
   }
-  await sleep(120);
+  writeFileSync(target, JSON.stringify(held));
+  if (lang.code === 'en') english = held;
+  console.log(
+    `\n${lang.file} — ${Object.keys(held).length} records (${fetched} newly fetched).`,
+  );
 }
-writeFileSync(target, JSON.stringify(held));
-console.log(
-  `\nWrote .cache/hadeethenc/hadeeths.json — ${Object.keys(held).length} records (${fetched} newly fetched).`,
-);

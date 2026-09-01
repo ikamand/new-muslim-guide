@@ -11,14 +11,21 @@
  * writer — an orphan whose provenance had to be taken on faith plus a
  * verify run. Now the file is reproducible: delete it and run this.
  *
- * Shape: an array of { s, a, ar, en } — surah, ayah, Arabic, English —
- * matching the orphan it replaces, so readers need no migration.
+ * Shape: `saheeh.json` is an array of { s, a, ar, en } — matching the orphan
+ * it replaced, so readers need no migration. The other editions are
+ * { s, a, tr } — the Arabic lives once, in saheeh.json.
+ *
+ * Editions (an editorial choice, stated): Saheeh International (en),
+ * french_montada (Noor International) and spanish_garcia (Isa García) — the
+ * standard modern editions; QuranEnc also serves french_rashid and two other
+ * Spanish Montada variants if the choice is ever revisited. An edition whose
+ * file already exists is SKIPPED — delete the file to refresh it.
  *
  * ⚠️ Refresh deliberately, not automatically: if QuranEnc revises a
  * translation, `content:verify` (which checks LIVE QuranEnc) will show the
  * drift against a stale cache — that is the staleness alarm.
  */
-import { writeFileSync, mkdirSync } from 'node:fs';
+import { existsSync, writeFileSync, mkdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -40,30 +47,40 @@ const get = async (url) => {
   throw lastError;
 };
 
-const entries = [];
-for (let sura = 1; sura <= 114; sura += 1) {
-  const verses = await get(
-    `https://quranenc.com/api/v1/translation/sura/english_saheeh/${sura}`,
-  );
-  if (!Array.isArray(verses) || verses.length === 0) {
-    throw new Error(`sura ${sura}: empty result`);
-  }
-  for (const verse of verses) {
-    entries.push({
-      s: Number(verse.sura),
-      a: Number(verse.aya),
-      ar: verse.arabic_text,
-      en: verse.translation,
-    });
-  }
-  process.stdout.write(`\r  sura ${sura}/114 — ${entries.length} ayahs`);
-}
-console.log();
-
-if (entries.length !== 6236) {
-  throw new Error(`expected 6236 ayahs, got ${entries.length} — refusing to write a partial corpus`);
-}
+const EDITIONS = [
+  { key: 'english_saheeh', file: 'saheeh.json', withArabic: true },
+  { key: 'french_montada', file: 'french_montada.json', withArabic: false },
+  { key: 'spanish_garcia', file: 'spanish_garcia.json', withArabic: false },
+];
 
 mkdirSync(out, { recursive: true });
-writeFileSync(join(out, 'saheeh.json'), JSON.stringify(entries));
-console.log(`Wrote .cache/quran/saheeh.json — ${entries.length} ayahs.`);
+for (const edition of EDITIONS) {
+  const target = join(out, edition.file);
+  if (existsSync(target)) {
+    console.log(`${edition.file} already present — skipped (delete to refresh).`);
+    continue;
+  }
+  const entries = [];
+  for (let sura = 1; sura <= 114; sura += 1) {
+    const verses = await get(
+      `https://quranenc.com/api/v1/translation/sura/${edition.key}/${sura}`,
+    );
+    if (!Array.isArray(verses) || verses.length === 0) {
+      throw new Error(`${edition.key} sura ${sura}: empty result`);
+    }
+    for (const verse of verses) {
+      entries.push(
+        edition.withArabic
+          ? { s: Number(verse.sura), a: Number(verse.aya), ar: verse.arabic_text, en: verse.translation }
+          : { s: Number(verse.sura), a: Number(verse.aya), tr: verse.translation },
+      );
+    }
+    process.stdout.write(`\r  ${edition.key}: sura ${sura}/114 — ${entries.length} ayahs`);
+  }
+  console.log();
+  if (entries.length !== 6236) {
+    throw new Error(`${edition.key}: expected 6236 ayahs, got ${entries.length} — refusing to write a partial corpus`);
+  }
+  writeFileSync(target, JSON.stringify(entries));
+  console.log(`Wrote .cache/quran/${edition.file} — ${entries.length} ayahs.`);
+}

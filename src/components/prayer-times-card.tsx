@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Modal, Pressable, StyleSheet, View } from 'react-native';
 
 import { AwqatArch } from '@/components/awqat-arch';
-import { CompassRose, JadwalMark } from '@/components/illustrations';
+import { CompassRose, Glyph, JadwalMark } from '@/components/illustrations';
 import { DoubleRule } from '@/components/jadwal';
 import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
@@ -76,10 +76,14 @@ function NeedsLocation({ status }: { status: 'denied' | 'unavailable' }) {
 function TimeCell({
   prayer,
   isNext,
+  passed,
   jumuah,
 }: {
   prayer: PrayerTime;
   isNext: boolean;
+  /** The prayer's time has gone by. Muted — never ticked: weight says "the
+      time passed", a checkmark would claim "you prayed it". */
+  passed: boolean;
   /** True for Dhuhr on a Friday. */
   jumuah?: boolean;
 }) {
@@ -87,13 +91,24 @@ function TimeCell({
 
   return (
     /*
-      The next prayer is marked in gold, not by a filled pill.
-
-      A pill is a second container inside a screen that just removed all of
-      them, and it made the live cell look pressable when it is not. Gold is
-      how this page marks the thing you are on.
+      The next prayer gets the quiet selected ground — the colour this app
+      already uses for "the thing you are on" — where it used to be gold text
+      alone, which under-marked the one cell the eye is looking for. The
+      day-glyph above each label is the arch's information written out: the
+      row and the arch wear the same five signs (Iyad's steals from the two
+      Today concepts, 1 Sep 2026).
     */
-    <View style={styles.cell}>
+    <View
+      style={[
+        styles.cell,
+        isNext && { backgroundColor: theme.backgroundSelected },
+        passed && !isNext && styles.cellPassed,
+      ]}>
+      <Glyph
+        name={prayer.id}
+        size={16}
+        color={isNext ? theme.gold : theme.textSecondary}
+      />
       <View style={styles.cellLabel}>
         {/*
           A dot, not a warning glyph. An alert on a prayer time reads as "you
@@ -105,7 +120,16 @@ function TimeCell({
           {prayer.label}
         </ThemedText>
       </View>
-      <ThemedText type="smallBold" themeColor={isNext ? 'gold' : 'text'} style={styles.cellTime}>
+      {/*
+        The `small` rung, not smallBold — "12:54 PM" in bold wrapped its
+        meridiem onto a second line in a fifth of a phone, and the tinted
+        cell now carries the emphasis the bold used to. One line, always.
+      */}
+      <ThemedText
+        type="small"
+        themeColor={isNext ? 'gold' : 'text'}
+        style={styles.cellTime}
+        numberOfLines={1}>
         {formatTime(prayer.time)}
       </ThemedText>
     </View>
@@ -375,6 +399,7 @@ export function PrayerTimesCard({ action }: PrayerTimesCardProps) {
             key={prayer.id}
             prayer={prayer}
             isNext={prayer.id === next.id && !next.isTomorrow}
+            passed={prayer.time.getTime() < next.time.getTime() - next.msUntil}
             jumuah={isFriday && prayer.id === 'dhuhr'}
           />
         ))}
@@ -551,8 +576,13 @@ const styles = StyleSheet.create({
   cell: {
     flex: 1,
     alignItems: 'center',
-    gap: 2,
+    gap: Spacing.half,
     paddingVertical: Spacing.two,
+    borderRadius: Radius.small,
+  },
+  /* The whole cell steps back together — glyph, label and time as one. */
+  cellPassed: {
+    opacity: 0.55,
   },
   cellTime: {
     fontVariant: ['tabular-nums'],

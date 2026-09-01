@@ -1502,48 +1502,98 @@ export function Glyph({ name, color, size = 22 }: { name: GlyphName; color: stri
         </G>
       )}
 
-      {/* Sunrise: the half sun on the horizon, rays up. */}
-      {name === 'fajr' && (
-        <G {...stroke}>
+      {isDayMark(name) && <G {...stroke}>{dayMarkPaths(name)}</G>}
+    </Svg>
+  );
+}
+
+/** The five daily prayers as times of day. A subset of `GlyphName`. */
+export type DayMarkName = 'fajr' | 'dhuhr' | 'asr' | 'maghrib' | 'isha';
+
+const DAY_MARKS: readonly DayMarkName[] = ['fajr', 'dhuhr', 'asr', 'maghrib', 'isha'];
+
+function isDayMark(name: GlyphName): name is DayMarkName {
+  return (DAY_MARKS as readonly string[]).includes(name);
+}
+
+/**
+ * The drawing itself, on the 24 grid, stroke inherited — ONE source for the
+ * `Glyph` above and for `DayMarkAt` below, so the mark on the Awqat arch and
+ * the mark on the Every-prayer row can never drift apart.
+ */
+function dayMarkPaths(name: DayMarkName) {
+  switch (name) {
+    /* Sunrise: the half sun on the horizon, rays up. */
+    case 'fajr':
+      return (
+        <>
           <Path d="M3.5 16.5 H20.5" />
           <Path d="M7.8 16.5 A4.2 4.2 0 0 1 16.2 16.5" />
           <Path d="M12 7.9 v2 M6.6 9.7 l1.4 1.4 M17.4 9.7 l-1.4 1.4" />
-        </G>
-      )}
-
-      {/* Noon: the whole sun, high, no horizon. */}
-      {name === 'dhuhr' && (
-        <G {...stroke}>
+        </>
+      );
+    /* Noon: the whole sun, high, no horizon. */
+    case 'dhuhr':
+      return (
+        <>
           <Circle cx={12} cy={12} r={3.9} />
           <Path d="M12 4.4 v2.2 M12 17.4 v2.2 M4.4 12 h2.2 M17.4 12 h2.2 M6.6 6.6 l1.6 1.6 M15.8 15.8 l1.6 1.6 M17.4 6.6 l-1.6 1.6 M8.2 15.8 l-1.6 1.6" />
-        </G>
-      )}
-
-      {/* Late afternoon: the whole sun, low over the horizon. */}
-      {name === 'asr' && (
-        <G {...stroke}>
+        </>
+      );
+    /* Late afternoon: the whole sun, low over the horizon. */
+    case 'asr':
+      return (
+        <>
           <Circle cx={12} cy={12.5} r={3.6} />
           <Path d="M12 5.9 v1.8 M6.9 7.9 l1.3 1.3 M17.1 7.9 l-1.3 1.3" />
           <Path d="M3.5 19 H20.5" />
-        </G>
-      )}
-
-      {/* Sunset: the half sun going, dusk rules beneath — no rays left. */}
-      {name === 'maghrib' && (
-        <G {...stroke}>
+        </>
+      );
+    /* Sunset: the half sun going, dusk rules beneath — no rays left. */
+    case 'maghrib':
+      return (
+        <>
           <Path d="M3.5 14 H20.5" />
           <Path d="M7.8 14 A4.2 4.2 0 0 1 16.2 14" />
           <Path d="M6.5 17.2 H17.5 M9 20.2 H15" />
-        </G>
-      )}
+        </>
+      );
+    /* Night: the hilal. */
+    case 'isha':
+      return <Path d="M13.6 4.4 A7.6 7.6 0 1 0 19.4 14.8 A6.2 6.2 0 0 1 13.6 4.4 Z" />;
+  }
+}
 
-      {/* Night: the hilal. */}
-      {name === 'isha' && (
-        <G {...stroke}>
-          <Path d="M13.6 4.4 A7.6 7.6 0 1 0 19.4 14.8 A6.2 6.2 0 0 1 13.6 4.4 Z" />
-        </G>
-      )}
-    </Svg>
+/**
+ * A day mark for embedding INSIDE another Svg — the Awqat arch places these
+ * at each prayer's true position on its outline. `cx`/`cy` are the centre in
+ * the host's viewBox units; the stroke is set in glyph space so it scales to
+ * roughly the arch outline's own weight.
+ */
+export function DayMarkAt({
+  name,
+  cx,
+  cy,
+  size = 15,
+  color,
+}: {
+  name: DayMarkName;
+  cx: number;
+  cy: number;
+  size?: number;
+  color: ColorValue;
+}) {
+  const k = size / GRID;
+  return (
+    <G
+      transform={`translate(${cx - size / 2}, ${cy - size / 2}) scale(${k})`}
+      stroke={color}
+      strokeWidth={1.8}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      fill="none">
+      {dayMarkPaths(name)}
+    </G>
   );
 }
 

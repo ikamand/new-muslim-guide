@@ -10,8 +10,9 @@ import Animated, {
   withSequence,
   withTiming,
 } from 'react-native-reanimated';
-import Svg, { Circle, Path } from 'react-native-svg';
+import Svg, { Circle, G, Path } from 'react-native-svg';
 
+import { DayMarkAt } from '@/components/illustrations';
 import type { DayTimes, PrayerId } from '@/lib/prayer-times';
 import { useTheme } from '@/hooks/use-theme';
 
@@ -257,7 +258,7 @@ export function AwqatArch({
   const bloom = useSharedValue(1);
   useEffect(() => {
     if (reducedMotion || nextId === null) return;
-    bloom.value = 1.9;
+    bloom.value = 1.4;
     bloom.value = withTiming(1, { duration: 900, easing: Easing.out(Easing.cubic) });
   }, [bloom, nextId, reducedMotion]);
 
@@ -273,12 +274,14 @@ export function AwqatArch({
   const ringProps = useAnimatedProps(() => ({
     // The ring breathes only when the sun is down — one live mark at a time.
     opacity: sun ? 1 : breath.value,
-    r: 5 * bloom.value,
+    r: 12 * bloom.value,
   }));
 
   return (
     <View style={StyleSheet.absoluteFill} pointerEvents="none">
-      <Svg width="100%" height="100%" viewBox={`0 0 ${W} ${H}`} fill="none">
+      {/* Six viewBox units of headroom: the crown mark's ring rises above
+          the crown itself, and clipping it would behead the next prayer. */}
+      <Svg width="100%" height="100%" viewBox={`0 -6 ${W} ${H + 6}`} fill="none">
         <Path d={OUTER_PATH} stroke={theme.gold} strokeWidth={1.2} strokeOpacity={0.4} />
         <Path d={INNER_PATH} stroke={theme.goldSoft} strokeWidth={0.7} />
         {/*
@@ -296,38 +299,52 @@ export function AwqatArch({
           />
         ) : null}
 
-        {marks.map(({ id, point, passed }) =>
-          id === nextId ? (
-            <AnimatedCircle
-              key={id}
-              animatedProps={ringProps}
-              cx={point.x}
-              cy={point.y}
-              stroke={theme.gold}
-              strokeWidth={1.4}
-            />
-          ) : (
-            <Circle
-              key={id}
-              cx={point.x}
-              cy={point.y}
-              r={3.2}
-              fill={passed ? theme.gold : 'none'}
-              stroke={passed ? undefined : theme.gold}
-              strokeWidth={passed ? undefined : 1}
-              strokeOpacity={passed ? undefined : 0.55}
-            />
-          ),
-        )}
-
+        {/*
+          The sun rides the line BENEATH the signs: drawn before the marks, so
+          approaching a prayer it slips behind the paper disc rather than over
+          it. The halo is what makes the travelling dot read as the sun and
+          not as a sixth mark.
+        */}
         {sun ? (
-          <AnimatedCircle
-            animatedProps={sunProps}
-            cx={sun.x}
-            cy={sun.y}
-            fill={theme.gold}
-          />
+          <>
+            <Circle cx={sun.x} cy={sun.y} r={8} fill={theme.gold} fillOpacity={0.18} />
+            <AnimatedCircle
+              animatedProps={sunProps}
+              cx={sun.x}
+              cy={sun.y}
+              fill={theme.gold}
+            />
+          </>
         ) : null}
+
+        {/*
+          "On the line" — Iyad's pick, 1 Sep 2026: each prayer's mark is its
+          day-glyph at its true moment, on a paper disc so the outline reads
+          as passing beneath the sign. Passed prayers sink to the hairline
+          gold — done, quiet; a checkmark would claim they were prayed, which
+          this card cannot know. The next prayer's disc wears the ring (the
+          same one that bloomed here when it was a bare circle).
+        */}
+        {marks.map(({ id, point, passed }) => (
+          <G key={id}>
+            <Circle cx={point.x} cy={point.y} r={10} fill={theme.background} />
+            {id === nextId ? (
+              <AnimatedCircle
+                animatedProps={ringProps}
+                cx={point.x}
+                cy={point.y}
+                stroke={theme.gold}
+                strokeWidth={1.4}
+              />
+            ) : null}
+            <DayMarkAt
+              name={id}
+              cx={point.x}
+              cy={point.y}
+              color={passed && id !== nextId ? theme.goldSoft : theme.gold}
+            />
+          </G>
+        ))}
       </Svg>
     </View>
   );

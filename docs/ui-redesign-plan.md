@@ -2651,3 +2651,27 @@ helper sentences moved with it. The intro simplified; the four-sentence
 footnote shrank to the twelve-a-day line. The screen's four bands joined the
 flush-join rule while it was open. The three pointer bands are otherwise
 untouched.
+
+---
+
+## 1 Sep 2026 — Awqat card: signs on the line, and the row keyed ✅
+
+From the two Today concepts Iyad brought, via the "Three Small Steals"
+artifact: the arch's marks are now the day-glyphs at their true moments —
+"on the line", his pick over the lamps — each on a paper disc so the outline
+passes beneath the sign; passed prayers sink to the hairline gold (muted,
+never ticked: a checkmark would claim they were prayed); the next prayer's
+disc wears the breathing/blooming ring; the sun keeps its dot, gains a soft
+halo, and now slips BEHIND the discs. The double arch is untouched — Iyad
+kept it by name. `DayMarkAt` in illustrations.tsx embeds the same drawings
+`Glyph` uses, one source, transform-scaled into the arch's viewBox (which
+gained 6 units of crown headroom so the ring is never clipped).
+
+The times row took the three steals: the day-glyph above each label, the
+`backgroundSelected` tint behind the next cell (replacing gold-text-only),
+and passed cells at 0.55 opacity. The tint promoted the old
+Dhuhr-time-wraps nit into an eyesore, so times moved from smallBold to the
+`small` rung on one line — the tint now carries the emphasis the bold did.
+Rejected from the concepts, reasons on the artifact: cards/shadows, the
+mosque photo, bell + hamburger, the progress ring, per-prayer checkmarks,
+and "Ask anything about Islam".

@@ -942,6 +942,17 @@ export type GlyphName =
   | 'envy'
   | 'voluntary-fasting'
   | 'eid'
+  /*
+    The five daily prayers as times of day, for the Every-prayer rows —
+    Iyad's tiled mock translated into the house stroke (1 Sep 2026): a
+    convert does not yet feel the shape of the day, and sunrise · noon ·
+    low sun · sunset · crescent teach it faster than the words beside them.
+  */
+  | 'fajr'
+  | 'dhuhr'
+  | 'asr'
+  | 'maghrib'
+  | 'isha'
   // The house itself — the qibla screen's mark, riding the arrow's tip.
   | 'kaaba';
 
@@ -1488,6 +1499,48 @@ export function Glyph({ name, color, size = 22 }: { name: GlyphName; color: stri
           <Path d="M4.5 5.5h15v14h-15z" />
           <Path d="M4.5 9.25h15" />
           <Path d="M14 19.5v-4a1.8 1.8 0 0 1 3.6 0v4" strokeWidth={1.3} />
+        </G>
+      )}
+
+      {/* Sunrise: the half sun on the horizon, rays up. */}
+      {name === 'fajr' && (
+        <G {...stroke}>
+          <Path d="M3.5 16.5 H20.5" />
+          <Path d="M7.8 16.5 A4.2 4.2 0 0 1 16.2 16.5" />
+          <Path d="M12 7.9 v2 M6.6 9.7 l1.4 1.4 M17.4 9.7 l-1.4 1.4" />
+        </G>
+      )}
+
+      {/* Noon: the whole sun, high, no horizon. */}
+      {name === 'dhuhr' && (
+        <G {...stroke}>
+          <Circle cx={12} cy={12} r={3.9} />
+          <Path d="M12 4.4 v2.2 M12 17.4 v2.2 M4.4 12 h2.2 M17.4 12 h2.2 M6.6 6.6 l1.6 1.6 M15.8 15.8 l1.6 1.6 M17.4 6.6 l-1.6 1.6 M8.2 15.8 l-1.6 1.6" />
+        </G>
+      )}
+
+      {/* Late afternoon: the whole sun, low over the horizon. */}
+      {name === 'asr' && (
+        <G {...stroke}>
+          <Circle cx={12} cy={12.5} r={3.6} />
+          <Path d="M12 5.9 v1.8 M6.9 7.9 l1.3 1.3 M17.1 7.9 l-1.3 1.3" />
+          <Path d="M3.5 19 H20.5" />
+        </G>
+      )}
+
+      {/* Sunset: the half sun going, dusk rules beneath — no rays left. */}
+      {name === 'maghrib' && (
+        <G {...stroke}>
+          <Path d="M3.5 14 H20.5" />
+          <Path d="M7.8 14 A4.2 4.2 0 0 1 16.2 14" />
+          <Path d="M6.5 17.2 H17.5 M9 20.2 H15" />
+        </G>
+      )}
+
+      {/* Night: the hilal. */}
+      {name === 'isha' && (
+        <G {...stroke}>
+          <Path d="M13.6 4.4 A7.6 7.6 0 1 0 19.4 14.8 A6.2 6.2 0 0 1 13.6 4.4 Z" />
         </G>
       )}
     </Svg>

@@ -2629,3 +2629,25 @@ container gaps between header, progress panel, review row and list; the
 Duʿa tab split its ruled rows across gapped groups, stacking a 24px gap
 onto the Shelf's own 24px padding. Both now run their ruled content as one
 zero-gap group — measured 0px and held-press verified.
+
+---
+
+## 1 Sep 2026 — Every prayer: obligatory first, and "owed" retired ✅
+
+Iyad's brief, designed in two artifacts (his tiled reference, the flat
+counter-proposal) and built as the merged cut he approved: the obligatory
+count is the one big thing — the subtitle rung, Literata, lapis, five
+numerals in a straight column (2 · 4 · 4 · 3 · 4) — and the sunnah is a
+sentence in the row: "2 before", "2 + 2 before, 2 after" (from
+sunnahBeforeUnits, so nobody prays four in one go), and on Asr the word
+"none" instead of two dashes. Kept from the tiled mock, translated into the
+house stroke: a gold time-of-day glyph per row (fajr/dhuhr/asr/maghrib/isha
+joined GlyphName) and a legend whose dots key the colours — Obligatory =
+required in lapis, Sunnah = recommended in gold. Left out, with reasons on
+the artifact: pastel tiles, speaker icons, "None listed".
+
+"Owed" is gone from the app's mouth: pray.fard is "obligatory" and the two
+helper sentences moved with it. The intro simplified; the four-sentence
+footnote shrank to the twelve-a-day line. The screen's four bands joined the
+flush-join rule while it was open. The three pointer bands are otherwise
+untouched.

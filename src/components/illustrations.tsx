@@ -1737,3 +1737,74 @@ export function MisbahaMark({ color, size = 24 }: { color: ColorValue; size?: nu
     </Svg>
   );
 }
+
+/*
+  ── The counting card's marks ──────────────────────────────────────────────
+  From the "Counting Card" artifact, Iyad's cut (2 Sep 2026): the sitting
+  screen crowns each card with a KIND medallion — the khatim for a Qur'an
+  verse (on the tinted card, which is Qur'an-only), a small fortress for a
+  line from Hisn al-Muslim, the Fortress of the Muslim — and divides the
+  Arabic from its meaning with an illuminated rosette. The colour and the
+  crown tell the same truth twice.
+*/
+
+/** The khatim in a ring — a Qur'an verse's medallion. */
+export function KhatimMark({ color, size = 30 }: { color: ColorValue; size?: number }) {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 32 32" fill="none">
+      <G stroke={color}>
+        <Circle cx={16} cy={16} r={14} strokeWidth={1.2} />
+        <Circle cx={16} cy={16} r={11.2} strokeWidth={0.7} strokeOpacity={0.6} />
+        <Path
+          d="M16 6.5 L18.6 13.4 L25.5 16 L18.6 18.6 L16 25.5 L13.4 18.6 L6.5 16 L13.4 13.4 Z"
+          strokeWidth={1.1}
+        />
+      </G>
+      <Circle cx={16} cy={16} r={1.5} fill={color} />
+    </Svg>
+  );
+}
+
+/** The fortress in a ring — a Hisn al-Muslim line's medallion. */
+export function HisnMark({ color, size = 30 }: { color: ColorValue; size?: number }) {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 32 32" fill="none">
+      <G stroke={color} strokeWidth={1.2} strokeLinecap="round" strokeLinejoin="round">
+        <Circle cx={16} cy={16} r={14} />
+        <Path d="M9 22.5 V13 h2.6 v-2.6 h2.6 V13 h3.6 v-2.6 h2.6 V13 H23 v9.5" />
+        <Path d="M14 22.5 v-3.4 a2 2 0 0 1 4 0 v3.4" />
+        <Path d="M7.5 22.5 h17" />
+      </G>
+    </Svg>
+  );
+}
+
+/**
+ * The illuminated rosette — eight soft petals with a gold heart, the
+ * manuscript ornament that divides a text from its meaning on the counting
+ * card. Petals in the soft gold, outlined in the full; the centre carries a
+ * dot of the page so the heart reads as a ring.
+ */
+export function IlluminatedRosette({
+  petal,
+  outline,
+  heart,
+  size = 26,
+}: {
+  petal: ColorValue;
+  outline: ColorValue;
+  heart: ColorValue;
+  size?: number;
+}) {
+  const angles = [0, 45, 90, 135, 180, 225, 270, 315];
+  return (
+    <Svg width={size} height={size} viewBox="0 0 28 28" fill="none">
+      {angles.map((angle) => (
+        <G key={angle} transform={`rotate(${angle} 14 14)`}>
+          <Ellipse cx={14} cy={6.4} rx={2.6} ry={4.6} fill={petal} stroke={outline} strokeWidth={0.9} />
+        </G>
+      ))}
+      <Circle cx={14} cy={14} r={3.2} fill={heart} />
+    </Svg>
+  );
+}

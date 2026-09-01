@@ -80,6 +80,8 @@ export const ADHKAR_SESSIONS: readonly AdhkarSession[] = [
  * put two dhikr in one row with the count printed between them.
  */
 export type AdhkarStep = {
+  /** Why the line is said — present only when a reviewed narration exists. */
+  virtue?: { english: string; source: string };
   /** Unique per step — a split row yields several from one line id. */
   key: string;
   /** The row it came from, for annotations, ids and bug reports. */
@@ -175,6 +177,7 @@ export function stepsForOccasion(
         emphasis: marked.length > 0 ? marked : undefined,
         repeat: note?.repeat ?? line.repeat ?? 1,
         instruction: note?.recited === false,
+        virtue: note?.virtue,
         eveningForms,
       });
       continue;

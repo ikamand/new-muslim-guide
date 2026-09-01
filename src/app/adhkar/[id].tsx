@@ -1,7 +1,9 @@
 import { Stack, router, useLocalSearchParams } from 'expo-router';
 import { useMemo, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import Svg, { Circle } from 'react-native-svg';
 
+import { HisnMark, IlluminatedRosette, KhatimMark } from '@/components/illustrations';
 import { MarkedText } from '@/components/marked-text';
 import { ThemedText } from '@/components/themed-text';
 import { occasionFor, sessionById, stepsFor } from '@/content/duas/sessions';
@@ -146,25 +148,29 @@ export default function AdhkarSessionScreen() {
       <Stack.Screen options={{ title: t(SESSION_TITLE[session.id] ?? 'duaBook.title') }} />
 
       <View style={styles.frame}>
-        <View style={styles.ticks}>
-          {steps.map((entry, position) => (
+        {/*
+          The bookmark rule — the tick strip's honest successor (Iyad: the
+          strip "looked like information and told nobody anything"). The same
+          idiom the reading rows use everywhere else: a hairline that fills
+          gold as the sitting advances, the plain fact at its end.
+        */}
+        <View style={styles.factRow}>
+          <View style={[styles.factTrack, { backgroundColor: theme.goldSoft }]}>
             <View
-              key={entry.key}
               style={[
-                styles.tick,
+                styles.factFill,
                 {
-                  backgroundColor: position <= index ? theme.accent : theme.border,
-                  opacity: position < index ? 0.5 : 1,
-                  height:
-                    position === index
-                      ? 6
-                      : entry.repeat > 3
-                        ? 5
-                        : 3,
+                  backgroundColor: theme.gold,
+                  width: `${Math.round(((index + 1) / steps.length) * 100)}%`,
                 },
               ]}
             />
-          ))}
+          </View>
+          <ThemedText type="caption" themeColor="textSecondary" style={styles.factLabel}>
+            {t('journey.progress')
+              .replace('{done}', String(index + 1))
+              .replace('{total}', String(steps.length))}
+          </ThemedText>
         </View>
 
         {session.id === 'morning-evening' ? (
@@ -180,6 +186,17 @@ export default function AdhkarSessionScreen() {
           of the card. React Native Web does not reproduce it, so a browser is
           no help in catching this one.
         */}
+        {/*
+          The crown chip straddles the card's top border and SAYS what the
+          text is: the khatim for a Qur'an verse — on the tinted card, which
+          is Qur'an-only — and the fortress for a line from Hisn al-Muslim,
+          the Fortress of the Muslim. A sibling of the ScrollView, pinned, so
+          a long text scrolls beneath it; the scroll content carries the
+          headroom that keeps the first line clear of it — which is also what
+          keeps the old count-pill-on-the-words collision from ever coming
+          back in another costume.
+        */}
+        <View style={styles.cardWrap}>
         <ScrollView
           style={[
             styles.card,
@@ -190,18 +207,6 @@ export default function AdhkarSessionScreen() {
             },
           ]}
           contentContainerStyle={styles.cardScroll}>
-          {target > 1 && !instruction ? (
-            <View
-              style={[
-                styles.badge,
-                { borderColor: theme.border, backgroundColor: theme.background },
-              ]}>
-              <ThemedText type="smallBold" themeColor="accent">
-                {`${count} / ${target}`}
-              </ThemedText>
-            </View>
-          ) : null}
-
           <Pressable
             onPress={advance}
             accessibilityRole="button"
@@ -231,19 +236,66 @@ export default function AdhkarSessionScreen() {
               </View>
             ) : null}
             {english ? (
-              <ThemedText type="default" themeColor="textSecondary">
-                <MarkedText text={english} spans={emphasis} colour={theme.accent} bold />
-              </ThemedText>
+              <>
+                {/* The illuminated rosette divides the words from their meaning. */}
+                <View style={styles.dividerRow}>
+                  <View style={[styles.dividerRule, { backgroundColor: theme.goldSoft }]} />
+                  <IlluminatedRosette
+                    petal={theme.goldSoft}
+                    outline={theme.gold}
+                    heart={theme.gold}
+                  />
+                  <View style={[styles.dividerRule, { backgroundColor: theme.goldSoft }]} />
+                </View>
+                <ThemedText type="default" themeColor="textSecondary">
+                  <MarkedText text={english} spans={emphasis} colour={theme.accent} bold />
+                </ThemedText>
+              </>
+            ) : null}
+
+            {/* Why the line is said — rendered only when a reviewed narration
+                exists in the annotations; see HisnAnnotation.virtue. */}
+            {step.virtue ? (
+              <View
+                style={[
+                  styles.virtue,
+                  { borderColor: theme.border, backgroundColor: theme.background },
+                ]}>
+                <ThemedText type="caption" themeColor="gold" style={styles.virtueHead}>
+                  {t('adhkar.whySaid')}
+                </ThemedText>
+                <ThemedText type="small" themeColor="textSecondary">
+                  {step.virtue.english}
+                </ThemedText>
+                <ThemedText type="caption" themeColor="textSecondary">
+                  {step.virtue.source}
+                </ThemedText>
+              </View>
             ) : null}
 
           </Pressable>
         </ScrollView>
+        <View
+          style={[
+            styles.crown,
+            { backgroundColor: theme.background, borderColor: theme.border },
+          ]}>
+          {step.line.kind === 'quran' ? (
+            <KhatimMark color={theme.gold} />
+          ) : (
+            <HisnMark color={theme.gold} />
+          )}
+        </View>
+        </View>
 
         {/*
-          Moving between duʿas is its own control, not a side effect of
-          counting. `›` always advances, whatever the count says, so a line
-          marked ×100 is never a hundred taps deep — and `‹` exists at all,
-          which it did not before.
+          The instrument: the circle carries the count and a gold ring that
+          fills as the dhikr is said — one glance says how far, whether it is
+          3 or 100, and it never scrolls away the way the old pill did. It
+          sits where a one-handed thumb rests, counts on press, resets on a
+          long press; the card above still counts too, so nothing is taken
+          from a thumb used to tapping the words. `‹ ›` move, as before —
+          never a side effect of counting.
         */}
         <View style={styles.nav}>
           <Pressable
@@ -261,13 +313,58 @@ export default function AdhkarSessionScreen() {
             </ThemedText>
           </Pressable>
 
-          <ThemedText type="caption" themeColor="textSecondary" style={styles.hint}>
-            {instruction
-              ? t('adhkar.instruction')
-              : target > 1
-                ? t('adhkar.tapToCount')
-                : t('adhkar.swipeOn')}
-          </ThemedText>
+          <Pressable
+            onPress={advance}
+            onLongPress={() => setCount(0)}
+            accessibilityRole="button"
+            accessibilityLabel={
+              instruction
+                ? t('adhkar.instruction')
+                : `${t('adhkar.tapToCount')}. ${count} / ${target}. ${t('adhkar.resetCount')}`
+            }
+            style={({ pressed }) => [styles.circleWrap, { opacity: pressed ? 0.85 : 1 }]}>
+            <Svg
+              width={RING_SIZE}
+              height={RING_SIZE}
+              viewBox={`0 0 ${RING_SIZE} ${RING_SIZE}`}
+              fill="none"
+              style={styles.ring}>
+              <Circle
+                cx={RING_SIZE / 2}
+                cy={RING_SIZE / 2}
+                r={RING_R}
+                stroke={theme.goldSoft}
+                strokeWidth={3}
+              />
+              {!instruction && count > 0 ? (
+                <Circle
+                  cx={RING_SIZE / 2}
+                  cy={RING_SIZE / 2}
+                  r={RING_R}
+                  stroke={theme.gold}
+                  strokeWidth={3}
+                  strokeLinecap="round"
+                  strokeDasharray={`${RING_C * (count / target)} ${RING_C}`}
+                />
+              ) : null}
+            </Svg>
+            <View style={[styles.circle, { backgroundColor: theme.action }]}>
+              {instruction ? (
+                <ThemedText type="subtitle" themeColor="onAction">
+                  ›
+                </ThemedText>
+              ) : (
+                <>
+                  <ThemedText type="cardTitle" themeColor="onAction" style={styles.circleCount}>
+                    {count}
+                  </ThemedText>
+                  <ThemedText type="caption" themeColor="onAction" style={styles.circleOf}>
+                    {`of ${target}`}
+                  </ThemedText>
+                </>
+              )}
+            </View>
+          </Pressable>
 
           <Pressable
             onPress={() => (last ? finishSitting() : goTo(index + 1))}
@@ -280,10 +377,21 @@ export default function AdhkarSessionScreen() {
             </ThemedText>
           </Pressable>
         </View>
+
+        {instruction ? (
+          <ThemedText type="caption" themeColor="textSecondary" style={styles.hint}>
+            {t('adhkar.instruction')}
+          </ThemedText>
+        ) : null}
       </View>
     </View>
   );
 }
+
+/** The instrument's geometry: ring radius and circumference, module-level. */
+const RING_SIZE = 84;
+const RING_R = 38;
+const RING_C = 2 * Math.PI * RING_R;
 
 const styles = StyleSheet.create({
   screen: { flex: 1 },
@@ -297,17 +405,59 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   missing: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: Spacing.four },
-  ticks: { flexDirection: 'row', gap: 2, alignItems: 'flex-end', height: 6 },
-  tick: { flex: 1, borderRadius: 2 },
+  factRow: { flexDirection: 'row', alignItems: 'center', gap: Spacing.two },
+  factTrack: { flex: 1, height: 2, borderRadius: 1 },
+  factFill: { position: 'absolute', left: 0, top: 0, bottom: 0, borderRadius: 1 },
+  factLabel: { fontVariant: ['tabular-nums'] },
+  /* Headroom for the crown chip straddling the card's top border. */
+  cardWrap: { flex: 1, marginTop: Spacing.four },
   card: {
     flex: 1,
     borderRadius: Radius.medium,
     borderWidth: 1.5,
     padding: Spacing.three,
   },
-  /* The scroll container fills the card so a short duʿa is still all target. */
-  cardScroll: { flexGrow: 1 },
-  cardBody: { flexGrow: 1, gap: Spacing.three, paddingTop: Spacing.three },
+  /* The scroll container fills the card so a short duʿa is still all target;
+     top padding keeps the first line clear of the crown chip. */
+  cardScroll: { flexGrow: 1, paddingTop: Spacing.four },
+  /* Centred while shorter than the card; a long text top-aligns and scrolls. */
+  cardBody: { flexGrow: 1, gap: Spacing.three, justifyContent: 'center' },
+  crown: {
+    position: 'absolute',
+    top: -Spacing.five + Spacing.two,
+    alignSelf: 'center',
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    borderWidth: StyleSheet.hairlineWidth,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  dividerRow: { flexDirection: 'row', alignItems: 'center', gap: Spacing.two },
+  dividerRule: { flex: 1, height: 1 },
+  virtue: {
+    borderWidth: StyleSheet.hairlineWidth,
+    borderRadius: Radius.small,
+    padding: Spacing.three,
+    gap: Spacing.one,
+  },
+  virtueHead: { textTransform: 'uppercase', letterSpacing: 1 },
+  circleWrap: {
+    width: RING_SIZE,
+    height: RING_SIZE,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  ring: { position: 'absolute', transform: [{ rotate: '-90deg' }] },
+  circle: {
+    width: RING_SIZE - 14,
+    height: RING_SIZE - 14,
+    borderRadius: (RING_SIZE - 14) / 2,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  circleCount: { fontVariant: ['tabular-nums'] },
+  circleOf: { opacity: 0.8 },
   nav: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -315,17 +465,7 @@ const styles = StyleSheet.create({
     gap: Spacing.three,
   },
   navButton: { minWidth: 44, minHeight: 44, alignItems: 'center', justifyContent: 'center' },
-  badge: {
-    position: 'absolute',
-    top: Spacing.three,
-    left: Spacing.three,
-    zIndex: 1,
-    borderWidth: StyleSheet.hairlineWidth,
-    borderRadius: Radius.large,
-    paddingHorizontal: Spacing.three,
-    paddingVertical: Spacing.half,
-  },
   arabic: { textAlign: 'right', writingDirection: 'rtl' },
   swap: { borderLeftWidth: 2, paddingLeft: Spacing.three, gap: Spacing.one },
-  hint: { flex: 1, textAlign: 'center', textTransform: 'uppercase', letterSpacing: 1 },
+  hint: { textAlign: 'center', textTransform: 'uppercase', letterSpacing: 1 },
 });

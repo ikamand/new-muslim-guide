@@ -469,6 +469,8 @@ export const EN = {
   'adhkar.previous': 'Previous',
   'adhkar.next': 'Next',
   'adhkar.finish': 'Done',
+  'adhkar.whySaid': 'Why it is said',
+  'adhkar.resetCount': 'Hold to reset the count',
   'adhkar.combined':
     'The book gives one list for both the morning and the evening, and marks the few that belong to only one. Which line belongs where has not been reviewed yet, so all of them are here.',
   'duaBook.title': 'Every occasion',

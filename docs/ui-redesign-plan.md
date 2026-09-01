@@ -2675,3 +2675,38 @@ Dhuhr-time-wraps nit into an eyesore, so times moved from smallBold to the
 Rejected from the concepts, reasons on the artifact: cards/shadows, the
 mosque photo, bell + hamburger, the progress ring, per-prayer checkmarks,
 and "Ask anything about Islam".
+
+---
+
+## 2 Sep 2026 — The counting card: the sitting screen rebuilt ✅
+
+Designed across five rounds of the "Counting Card" artifact with Iyad and
+built as his final cut. What shipped, and the reasoning each piece carries:
+
+- **The bookmark rule** replaced the tick strip — a hairline filling gold
+  with "3 of 26" at its end, the reading rows' own idiom. Iyad's verdict on
+  the strip stands in the code comment: it looked like information and told
+  nobody anything.
+- **The instrument circle** replaced the floating count pill: the count and
+  a gold ring that fills live in a lapis circle at the thumb's rest, press
+  to count, long-press to reset, never scrolling away the way the pill did
+  on a ×100. The card still counts on tap — nothing taken from anyone. The
+  pill's collision with the Arabic first line (held-press class of bug) is
+  structurally dead.
+- **Kind medallions** crown each card: the khatim for a Qur'an verse on the
+  tinted card (tint stays Qur'an-only, Iyad's observation), the fortress
+  for a Hisn al-Muslim line — the crown and the colour tell the same truth
+  twice. Pinned outside the scroll, so long texts slide beneath.
+- **The illuminated rosette** divides Arabic from meaning; short texts
+  centre in the full-height card, long ones scroll as before.
+- **The virtue slot** exists in the data (HisnAnnotation.virtue → AdhkarStep)
+  and renders only when filled — each entry must come through the sourcing
+  pipeline with its citation opened, then review. Iyad's concept mock
+  misattributing Bukhari 5017 is the recorded cautionary tale.
+- Rejected from the concept mocks, reasons on the artifact: stats bar and
+  percent ring, 1-2-3 stepper, Listen (no recorded clips — the audio gate),
+  the medal progress row, cross-sitting prev/next, bookmark icon.
+- Named as the real gap beyond ornament: the sitting lines carry no
+  transliteration (deliberate — IslamHouse publishes none, the app refuses
+  to invent). Transliterating the ~30 session lines the way the salah
+  recitations were done is the highest-value companion content task.

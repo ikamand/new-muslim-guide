@@ -46,6 +46,14 @@
 
 export type HisnAnnotation = {
   /**
+   * ⚠️ WHY this line is said — a narration's substance, rendered on the
+   * counting card only when this is filled. Every entry must quote a graded
+   * narration through the four-source pipeline with its citation OPENED, and
+   * clears review before it ships; the app never composes one. Empty today,
+   * deliberately: the slot exists so the content work has somewhere to land.
+   */
+  virtue?: { english: string; source: string };
+  /**
    * Is this line words a person says?
    *
    * `false` for an instruction or a narration about the virtue of dhikr.

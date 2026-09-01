@@ -2710,3 +2710,28 @@ built as his final cut. What shipped, and the reasoning each piece carries:
   transliteration (deliberate — IslamHouse publishes none, the app refuses
   to invent). Transliterating the ~30 session lines the way the salah
   recitations were done is the highest-value companion content task.
+
+---
+
+## 2 Sep 2026 — Duʿas from the Qur'an, recurated ✅
+
+Iyad brought a blog list of the duʿas people actually say and the diagnosis
+that the collection had drifted into a story anthology. The blog served as a
+curation signal ONLY — every character still comes from QuranEnc. Out (7):
+Lūṭ, Shuʿayb, Sulaymān 27:19, Mūsā 28:24, Yūsuf 12:101, Ibrāhīm 2:126–127.
+In (8): ḥasbiyallāh 9:129, refuge-from-whispers 23:97–98, 17:80, the
+reflectors' 3:191–194, Ṭālūt's company 2:250, 3:16, Mūsā's people 10:85–86,
+Nūḥ 11:47. Kept against the axe, deliberately: Āsiyah, the mother of Maryam
+(nearly the only women's voices), Ayyūb (said in illness). 33 entries; the
+generator now takes [from, to] ayah ranges so 3:191–194 ships as ONE duʿa of
+four whole consecutive ayahs.
+
+Mid-run, QuranEnc went down (Cloudflare 524s) — and a full corpus was found
+already in `.cache/quran/saheeh.json`, an orphan with no surviving writer.
+Two fixes made it a system: `npm run quran:corpus` now fetches the whole
+corpus reproducibly (114 sura requests, refuses partial writes), and the
+generator reads the cache first with the network as fallback — the
+`.cache/hadith/` pattern applied to source #3, so no QuranEnc outage can
+stall a regeneration again. The orphan's bytes were then validated the only
+honest way: `content:verify` against LIVE QuranEnc once it recovered — all
+33 texts match word for word, nothing drifted.

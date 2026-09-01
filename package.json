@@ -84,7 +84,8 @@
     "zakat:nisab": "node scripts/fetch-nisab.mjs",
     "nav:check": "node scripts/navigation-check.mjs",
     "postinstall": "patch-package",
-    "awqat:fit": "npx tsx scripts/awqat-fit-check.ts"
+    "awqat:fit": "npx tsx scripts/awqat-fit-check.ts",
+    "quran:corpus": "node scripts/fetch-quran-corpus.mjs"
   },
   "private": true
 }

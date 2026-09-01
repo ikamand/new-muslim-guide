@@ -840,6 +840,16 @@ export const EN = {
     cannot drift between the first asking and every asking after it.
   */
   'learn.progress': 'What you already know',
+  'learn.progress.meta': 'Correct what the book assumes.',
+  /*
+    The written-page Learn tab (2 Sep) — the manuscript grammar made literal.
+    "Book" is the screen's own metaphor: finished lessons are ink, unread
+    ones are blank ruled lines, and the tiers are the whole book's map.
+  */
+  'learn.openingLine': 'The opening line',
+  'learn.writingNow': 'Being written now',
+  'learn.wholeBook': 'The whole book',
+  'learn.book.written': 'Written',
   'progress.intro':
     'Tell the app what you can already do. It stays on this phone, and nothing is ever locked either way.',
   'progress.units': 'The path, unit by unit',

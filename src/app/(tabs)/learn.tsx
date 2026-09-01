@@ -1,9 +1,10 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import Svg, { Circle } from 'react-native-svg';
 
-import { GirihBand, StagePath } from '@/components/illustrations';
-import { JadwalRow, QuietRow, Rosette, Shelf, Unwan } from '@/components/jadwal';
+import { BookArch, GirihBand, QalamMark } from '@/components/illustrations';
+import { Frame, JadwalRow, Shelf, Unwan } from '@/components/jadwal';
 import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
 import { TopicRow, type TopicSpec } from '@/components/topic-row';
@@ -19,7 +20,12 @@ import {
 } from '@/content';
 import { isLessonDone, SHAHADA_KEY } from '@/content/curriculum';
 import { BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
-import { useCurriculum, type ResolvedTier } from '@/hooks/use-curriculum';
+import {
+  useCurriculum,
+  type ResolvedLesson,
+  type ResolvedTier,
+  type ResolvedUnit,
+} from '@/hooks/use-curriculum';
 import { useLocale } from '@/hooks/use-locale';
 import { useReadingInProgress } from '@/hooks/use-reading';
 import { useSettings } from '@/hooks/use-settings';
@@ -27,52 +33,44 @@ import { useTheme } from '@/hooks/use-theme';
 import type { UIKey } from '@/i18n/ui';
 
 /**
- * The Learn tab: the path, and one door to the library.
+ * The Learn tab: the page your life is writing.
  *
- * This tab used to carry two orderings of the same content at once — the
- * journey's six stages in a card, and five by-moment shelves below it, fifty
- * rows deep. Two directions is no direction (docs/learn-redesign-plan.md).
- * Now it carries ONE: three tiers of units, the open one expanded, the other
- * two collapsed but alive. The shelves live on at `/library`, one quiet row
- * away, for the day life produces the question.
+ * The path stopped being a list on 2 Sep. It is now a manuscript page inside
+ * a drawn jadwal frame: a finished lesson is a line of ink closed with an
+ * end-mark, an unread one is a blank ruled line — paper waiting, not
+ * homework owed — and the next lesson is half-written, with the qalam
+ * resting where the ink stops. The tiers are the whole book, drawn as an
+ * arcade whose arches fill with ink; the reference shelf lives OUTSIDE the
+ * frame, where a manuscript keeps its commentary.
+ *
+ * What this replaced, deliberately: the where-you-are card, the carry-on
+ * button (the qalam line IS carry-on), the you-were-reading row (the pen
+ * rests at your furthest ink; Today still offers off-path reads back), the
+ * left-in-this-chapter list (the blank lines carry it), the chip strip and
+ * the tier-door rows (the arcade carries both). Six affordances became a
+ * page. Design record: docs/ui-redesign-plan.md, 2 Sep 2026.
+ *
+ * Everything here is a VIEW of `completedLessons` — the one ledger — so the
+ * page can never disagree with the unit screens or Today about what is done.
  */
 
 const PRACTICE_CLIP_COUNT = getPracticeClipCount();
 const SHOW_PRACTICE = hasPracticeBeyondSurahs();
 const SHAHADA_STEP_COUNT = SHAHADA_GUIDE.steps.length;
 
+/** A lesson's display name — the shared rule, so a line and a row agree. */
+function lessonLabel(lesson: ResolvedLesson, t: (key: UIKey) => string): string {
+  return lesson.labelKey ? t(lesson.labelKey as UIKey) : lesson.entry.title;
+}
+
 /**
- * Becoming Muslim, given its own weight — and then stepping out of the way.
- *
- * A hero while it is not done, because for somebody who has not said the
- * shahada it is the one thing on the tab that matters; one line in the
- * header once it is, because "return to this a few times in your life" and
- * "second-largest object on the tab forever" are not the same claim.
- *
- * Done-ness comes from `isLessonDone` — the ONE predicate, shared with the
- * curriculum — so this card and the path can never again disagree about the
- * same fact, which they did when this read `shahadaState` and the journey
- * read only the tick.
+ * Becoming Muslim, still a hero while it is not done — for somebody who has
+ * not said the shahada it is the one thing on the tab that matters. Once
+ * said, it becomes the book's opening line inside the frame instead.
  */
-function ShahadaCard() {
+function ShahadaHero() {
   const theme = useTheme();
   const { t } = useLocale();
-  const { completedLessons } = useSettings();
-
-  if (isLessonDone(SHAHADA_KEY, completedLessons)) {
-    return (
-      <PressableLink
-        href={{ pathname: '/guide/[id]', params: { id: 'shahada' } }}
-        accessibilityLabel={t('learn.shahada.done.title')}
-        style={[styles.keepsake, { borderTopColor: theme.border }]}
-        pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
-        <ThemedText type="small" themeColor="textSecondary">
-          {t('learn.shahada.line')}
-        </ThemedText>
-        <Ionicons name="arrow-forward" size={14} color={theme.accent} />
-      </PressableLink>
-    );
-  }
 
   return (
     <PressableLink
@@ -101,174 +99,249 @@ function ShahadaCard() {
   );
 }
 
-/**
- * Where you are — the unit, and what is left in it.
- *
- * The arches are the units of the tier the next lesson sits in, the star on
- * the unit itself: the same mihrab strip that carried six stages now carries
- * a tier's units, so "how far" is still a picture and never arithmetic.
- * Three remaining lessons at most, because listing eight is the wall this
- * card exists to replace.
- */
-const SHOW_LEFT = 3;
-
-function WhereYouAre() {
+/** The first sentence of this book: the shahada, written, with its mark. */
+function OpeningLine() {
   const theme = useTheme();
   const { t } = useLocale();
-  const { tiers, next, nextTierIndex, nextUnitIndex } = useCurriculum();
-
-  if (!next || nextTierIndex === -1) {
-    return (
-      <PressableLink
-        href="/library"
-        accessibilityLabel={t('learn.where.done')}
-        style={[styles.journey, { borderColor: theme.goldSoft }]}
-        pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
-        <ThemedText type="sectionTitle">{t('learn.where.done')}</ThemedText>
-      </PressableLink>
-    );
-  }
-
-  const tier = tiers[nextTierIndex];
-  const unit = tier.units[nextUnitIndex];
-
-  const path = tier.units.map((entry) => ({
-    id: entry.id,
-    label: t(`curriculum.short.${entry.id}` as UIKey),
-    done: entry.total > 0 && entry.done === entry.total,
-  }));
-
-  const left = unit.lessons.filter((lesson) => !lesson.done).slice(0, SHOW_LEFT);
 
   return (
     <PressableLink
-      href={{ pathname: '/unit/[id]', params: { id: unit.id } }}
-      accessibilityLabel={`${t('learn.where.kicker')}. ${t(
-        `curriculum.unit.${unit.id}` as UIKey,
-      )}`}
-      style={[styles.journey, { borderColor: theme.goldSoft }]}
+      href={{ pathname: '/guide/[id]', params: { id: 'shahada' } }}
+      accessibilityLabel={t('learn.shahada.line')}
+      style={styles.openLine}
       pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
+      <Ionicons name="checkmark-circle" size={18} color={theme.malachite} />
       <View style={styles.cardText}>
-        <ThemedText type="caption" themeColor="textSecondary" style={styles.kicker}>
-          {t('learn.where.kicker')}
+        <ThemedText type="caption" themeColor="gold" style={styles.kicker}>
+          {t('learn.openingLine')}
         </ThemedText>
-        <ThemedText type="sectionTitle">{t(`curriculum.unit.${unit.id}` as UIKey)}</ThemedText>
-      </View>
-
-      <StagePath
-        stages={path}
-        currentIndex={nextUnitIndex}
-        color={theme.accent}
-        trackColor={theme.textSecondary}
-        mutedColor={theme.textOnAccent}
-      />
-
-      {left.length > 0 ? (
-        <View style={styles.left}>
-          <ThemedText type="caption" themeColor="textSecondary" style={styles.kicker}>
-            {t('learn.where.left')}
-          </ThemedText>
-          {left.map((lesson) => (
-            <ThemedText key={lesson.key} type="small" themeColor="textSecondary">
-              {lesson.labelKey ? t(lesson.labelKey as UIKey) : lesson.entry.title}
-            </ThemedText>
-          ))}
-        </View>
-      ) : null}
-
-      <View style={[styles.journeyAction, { backgroundColor: theme.action }]}>
-        <ThemedText type="smallBold" themeColor="onAction" style={styles.journeyActionLabel}>
-          {t('journey.carryOn')}
+        <ThemedText type="small" themeColor="textSecondary">
+          {t('learn.shahada.line')}
         </ThemedText>
-        <Ionicons name="arrow-forward" size={18} color={theme.onAction} />
       </View>
+      <Ionicons name="arrow-forward" size={14} color={theme.accent} />
+    </PressableLink>
+  );
+}
+
+/** The mark a mushaf sets after an ayah, closing a written line. */
+function EndMark() {
+  const theme = useTheme();
+  return (
+    <Svg width={9} height={9} viewBox="0 0 10 10">
+      <Circle cx={5} cy={5} r={2.4} fill={theme.gold} />
+      <Circle cx={5} cy={5} r={4.2} stroke={theme.goldSoft} strokeWidth={0.8} fill="none" />
+    </Svg>
+  );
+}
+
+/** A finished lesson: its title in ink, closed with the end-mark. */
+function InkedLine({ lesson }: { lesson: ResolvedLesson }) {
+  const theme = useTheme();
+  const { t } = useLocale();
+  const label = lessonLabel(lesson, t);
+
+  return (
+    <PressableLink
+      href={routeFor(lesson.entry)}
+      accessibilityLabel={label}
+      style={styles.inkLine}
+      pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
+      <ThemedText type="default" numberOfLines={1} style={styles.inkTitle}>
+        {label}
+      </ThemedText>
+      <EndMark />
     </PressableLink>
   );
 }
 
 /**
- * One tier, expanded: its units as ruled rows.
- *
- * A finished unit trades its chevron for a malachite tick — complete is what
- * malachite means — and the hairline along a started unit's foot is the same
- * bookmark every reading row carries: a place, not a score.
+ * The half-written line: the next lesson, with the qalam resting where the
+ * ink stops. This IS carry-on — the button it replaced said the same thing
+ * in a sentence. `fraction` is how far the reading bookmark got INTO this
+ * lesson, so the ink literally grows as far as the reader did; the pen sits
+ * at the boundary, capped short of the arrow so the two never collide.
  */
-function TierOpen({ tier }: { tier: ResolvedTier }) {
+function QalamLine({ lesson, fraction }: { lesson: ResolvedLesson; fraction: number }) {
   const theme = useTheme();
   const { t } = useLocale();
+  const label = lessonLabel(lesson, t);
+  const at = Math.round(Math.min(fraction, 0.8) * 100);
 
   return (
-    <View>
-      {tier.units.map((unit, i) => {
-        const finished = unit.total > 0 && unit.done === unit.total;
-        return (
-          <JadwalRow
-            key={unit.id}
-            href={{ pathname: '/unit/[id]', params: { id: unit.id } }}
-            accessibilityLabel={`${t(`curriculum.unit.${unit.id}` as UIKey)}. ${t(
-              'journey.progress',
-            )
-              .replace('{done}', String(unit.done))
-              .replace('{total}', String(unit.total))}`}
-            marginal={<Rosette label={String(i + 1)} />}
-            title={t(`curriculum.unit.${unit.id}` as UIKey)}
-            meta={t('journey.progress')
-              .replace('{done}', String(unit.done))
-              .replace('{total}', String(unit.total))}
-            progress={!finished && unit.done > 0 ? unit.done / unit.total : undefined}
-            trailing={
-              finished ? (
-                <Ionicons name="checkmark-circle" size={16} color={theme.malachite} />
-              ) : (
-                <Ionicons name="chevron-forward" size={14} color={theme.gold} />
-              )
-            }
-          />
-        );
-      })}
+    <PressableLink
+      href={routeFor(lesson.entry)}
+      accessibilityLabel={`${t('journey.carryOn')}. ${label}`}
+      style={styles.qalamLine}
+      pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
+      <ThemedText
+        type="default"
+        themeColor="accent"
+        numberOfLines={1}
+        style={styles.qalamTitle}>
+        {label}
+      </ThemedText>
+      <View style={styles.rest}>
+        <View style={[styles.restRule, { backgroundColor: theme.goldSoft }]} />
+        {at > 0 && (
+          <View style={[styles.restInk, { backgroundColor: theme.gold, width: `${at}%` }]} />
+        )}
+        <View style={[styles.penAt, { left: `${at}%` }]}>
+          <QalamMark color={theme.text} size={26} />
+        </View>
+      </View>
+      <Ionicons name="arrow-forward" size={16} color={theme.accent} />
+    </PressableLink>
+  );
+}
+
+/*
+  Blank rules run ragged like real text, not justified like a form. Three
+  lengths, cycled — deterministic so the page does not shimmer on re-render.
+*/
+const RAGGED = ['88%', '96%', '74%'] as const;
+
+/** An unread lesson: blank ruled paper. Deliberately unnamed and inert. */
+function BlankLine({ index }: { index: number }) {
+  const theme = useTheme();
+  return (
+    <View
+      style={styles.blankLine}
+      accessibilityElementsHidden
+      importantForAccessibility="no-hide-descendants">
+      <View
+        style={[
+          styles.blankRule,
+          { backgroundColor: theme.goldSoft, width: RAGGED[index % RAGGED.length] },
+        ]}
+      />
     </View>
   );
 }
 
 /**
- * A door to another tier: its name, its purpose, its size — and everything
- * behind one tap. A door, never a gray-out: gray is the visual language of a
- * lock, and nothing here is locked — the person whose friend dies on Tuesday
- * finds janāzah on Tuesday.
+ * The chapter being written: the open unit as manuscript lines.
  *
- * It NAVIGATES. This was an in-place accordion, and expanding one tier
- * collapsed the tier above it, so the page shifted under the reader's finger
- * and the row they tapped landed somewhere else (Iyad's device, 31 Aug). It
- * was also the only control on the tab that mutated the page rather than
- * opening a screen. A screen cannot jump.
+ * Out-of-order reading draws itself — a lesson finished early is simply an
+ * inked line below a blank one, the gap a copyist left to fill later. The
+ * pen always rests at the FIRST unwritten line, which is `next`.
  */
-function TierDoor({ tier }: { tier: ResolvedTier }) {
+function ChapterBlock({
+  unit,
+  next,
+  fraction,
+}: {
+  unit: ResolvedUnit;
+  next: ResolvedLesson;
+  fraction: number;
+}) {
   const theme = useTheme();
   const { t } = useLocale();
 
   return (
-    <PressableLink
-      href={{ pathname: '/tier/[id]', params: { id: tier.id } }}
-      accessibilityLabel={`${t(`curriculum.tier.${tier.id}` as UIKey)}. ${t(
-        `curriculum.tier.${tier.id}.purpose` as UIKey,
-      )}. ${tier.total} ${t('count.lessons')}`}
-      style={[styles.tierDoor, { borderBottomColor: theme.goldSoft }]}
-      pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
-      <View style={styles.cardText}>
-        <ThemedText type="caption" themeColor="gold" style={styles.kicker}>
-          {t(`curriculum.tier.${tier.id}` as UIKey)}
+    <View>
+      <PressableLink
+        href={{ pathname: '/unit/[id]', params: { id: unit.id } }}
+        accessibilityLabel={`${t('learn.writingNow')}. ${t(`curriculum.unit.${unit.id}` as UIKey)}`}
+        style={styles.chapterHead}
+        pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
+        <ThemedText type="caption" themeColor="textSecondary" style={styles.kicker}>
+          {t('learn.writingNow')}
         </ThemedText>
-        <ThemedText type="small" themeColor="textSecondary">
-          {t(`curriculum.tier.${tier.id}.purpose` as UIKey)}
-        </ThemedText>
-      </View>
-      {/* The count at the row's end, where every shelf puts it — inside the
-          sentence it collided with the purpose line's full stop. */}
-      <ThemedText type="caption" themeColor="textSecondary">
-        {String(tier.total)}
-      </ThemedText>
-      <Ionicons name="chevron-forward" size={16} color={theme.textSecondary} />
-    </PressableLink>
+        <ThemedText type="sectionTitle">{t(`curriculum.unit.${unit.id}` as UIKey)}</ThemedText>
+      </PressableLink>
+      {unit.lessons.map((lesson, index) =>
+        lesson.done ? (
+          <InkedLine key={lesson.key} lesson={lesson} />
+        ) : lesson.key === next.key ? (
+          <QalamLine key={lesson.key} lesson={lesson} fraction={fraction} />
+        ) : (
+          <BlankLine key={lesson.key} index={index} />
+        ),
+      )}
+    </View>
+  );
+}
+
+/**
+ * The whole book: the three tiers as an arcade elevation, one row each.
+ * Every row is a door to its tier's own screen; the ledger door sits at the
+ * book's foot because it is ABOUT the book — the person who needs it is
+ * looking at a page that has them wrong.
+ */
+function BookMap({
+  tiers,
+  penTierIndex,
+  penUnitIndex,
+}: {
+  tiers: readonly ResolvedTier[];
+  penTierIndex: number;
+  penUnitIndex: number;
+}) {
+  const theme = useTheme();
+  const { t } = useLocale();
+
+  return (
+    <View>
+      <Shelf label={t('learn.wholeBook')} />
+      {tiers.map((tier, tierIndex) => {
+        const meta =
+          tier.total > 0 && tier.done === tier.total
+            ? t('learn.book.written')
+            : tier.done > 0
+              ? t('journey.progress')
+                  .replace('{done}', String(tier.done))
+                  .replace('{total}', String(tier.total))
+              : `${tier.total} ${t('count.lessons')}`;
+        return (
+          <PressableLink
+            key={tier.id}
+            href={{ pathname: '/tier/[id]', params: { id: tier.id } }}
+            accessibilityLabel={`${t(`curriculum.tier.${tier.id}` as UIKey)}. ${meta}`}
+            style={[styles.bookRow, { borderBottomColor: theme.goldSoft }]}
+            pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
+            <View style={styles.bookLabel}>
+              <ThemedText type={tierIndex === penTierIndex ? 'smallBold' : 'small'}>
+                {t(`curriculum.tier.${tier.id}` as UIKey)}
+              </ThemedText>
+              <ThemedText type="caption" themeColor="textSecondary">
+                {meta}
+              </ThemedText>
+            </View>
+            <View style={styles.bookArches}>
+              {tier.units.map((unit, unitIndex) => (
+                <BookArch
+                  key={unit.id}
+                  clipId={`arch-${tier.id}-${unit.id}`}
+                  done={unit.done}
+                  total={unit.total}
+                  current={tierIndex === penTierIndex && unitIndex === penUnitIndex}
+                  color={theme.accent}
+                  trackColor={theme.textSecondary}
+                  dotColor={theme.gold}
+                />
+              ))}
+            </View>
+            <Ionicons name="chevron-forward" size={14} color={theme.textSecondary} />
+          </PressableLink>
+        );
+      })}
+      <PressableLink
+        href="/progress"
+        accessibilityLabel={`${t('learn.progress')}. ${t('learn.progress.meta')}`}
+        style={styles.ledger}
+        pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
+        <View style={styles.bookLabel}>
+          <ThemedText type="caption" themeColor="gold" style={styles.kicker}>
+            {t('learn.progress')}
+          </ThemedText>
+          <ThemedText type="small" themeColor="textSecondary">
+            {t('learn.progress.meta')}
+          </ThemedText>
+        </View>
+        <Ionicons name="chevron-forward" size={16} color={theme.textSecondary} />
+      </PressableLink>
+    </View>
   );
 }
 
@@ -335,20 +408,18 @@ function REFERENCE_SHELF(t: (key: UIKey) => string): TopicSpec[] {
 export default function LearnScreen() {
   const theme = useTheme();
   const { t } = useLocale();
-  const { tiers, nextTierIndex, openTierIndex } = useCurriculum();
-  const readingNow = useReadingInProgress();
+  const { tiers, next, nextTierIndex, nextUnitIndex } = useCurriculum();
+  const reading = useReadingInProgress();
+  const { completedLessons } = useSettings();
 
+  const shahadaDone = isLessonDone(SHAHADA_KEY, completedLessons);
+  const unit = next && nextTierIndex !== -1 ? tiers[nextTierIndex].units[nextUnitIndex] : undefined;
   /*
-    One spine. The tier shown in full is always the tier the reader is IN —
-    the one holding the next lesson, falling back to confidence's starting
-    tier once everything is done. No expansion state: the other tiers are
-    doors to their own screens, so nothing on this page ever moves under a
-    finger. The where-you-are card and its tier's unit rows are ONE section,
-    because showing the card for one tier above a different tier's rows was
-    two spines with equal claim — most of what "blended" (Iyad, 31 Aug).
+    The reading bookmark folds into the qalam line: when the half-read page
+    IS the next lesson, its furthest scroll becomes the ink's length. An
+    off-path read is not lost — Today's carry-on slot still offers it back.
   */
-  const hereIndex = nextTierIndex !== -1 ? nextTierIndex : openTierIndex;
-  const here = tiers[hereIndex];
+  const fraction = next && reading && reading.key === next.key ? reading.furthest : 0;
 
   return (
     <SafeAreaView style={[styles.safeArea, { backgroundColor: theme.background }]} edges={['top']}>
@@ -357,51 +428,47 @@ export default function LearnScreen() {
           <Unwan title={t('learn.title')} subtitle={t('learn.intro')} />
         </View>
 
-        {/* The first first, and the record of the ones after it. */}
-        <View style={styles.section}>
-          <ShahadaCard />
-          <QuietRow
+        {!shahadaDone && (
+          <View style={styles.heroWrap}>
+            <ShahadaHero />
+          </View>
+        )}
+
+        {/* The frame: the path inside, commentary outside. */}
+        <Frame>
+          {shahadaDone && <OpeningLine />}
+          <PressableLink
             href="/firsts"
-            label={t('firsts.open')}
             accessibilityLabel={t('firsts.title')}
-          />
-        </View>
+            style={[
+              styles.firstsLine,
+              shahadaDone && [styles.firstsRule, { borderTopColor: theme.goldSoft }],
+            ]}
+            pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
+            <ThemedText type="small" themeColor="textSecondary">
+              {t('firsts.open')}
+            </ThemedText>
+            <Ionicons name="chevron-forward" size={14} color={theme.gold} />
+          </PressableLink>
 
-        {/* The spine: where you are, the units around it, doors to the rest. */}
-        <View style={styles.section}>
-          <WhereYouAre />
-          {readingNow && (
-            <JadwalRow
-              href={routeFor(readingNow.entry)}
-              kicker={t('today.reading')}
-              title={readingNow.entry.title}
-              progress={readingNow.furthest}
-              trailing={<Ionicons name="chevron-forward" size={14} color={theme.gold} />}
-            />
+          {unit && next ? (
+            <ChapterBlock unit={unit} next={next} fraction={fraction} />
+          ) : (
+            <PressableLink
+              href="/library"
+              accessibilityLabel={t('learn.where.done')}
+              style={styles.doneLine}
+              pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
+              <ThemedText type="default">{t('learn.where.done')}</ThemedText>
+              <Ionicons name="arrow-forward" size={16} color={theme.accent} />
+            </PressableLink>
           )}
-          {here && (
-            <>
-              <Shelf label={t(`curriculum.tier.${here.id}` as UIKey)} />
-              <TierOpen tier={here} />
-            </>
-          )}
-          {tiers.map((tier) => (tier.id === here?.id ? null : <TierDoor key={tier.id} tier={tier} />))}
-          {/*
-            The door to the progress screen — where the onboarding questions
-            are re-asked and whole units can be marked known. At the spine's
-            foot because it is ABOUT the spine: the person who needs it is
-            looking at a path that has them wrong.
-          */}
-          <QuietRow
-            href="/progress"
-            label={t('learn.progress')}
-            accessibilityLabel={t('learn.progress')}
-          />
-        </View>
 
-        {/* The things you return to rather than read once. Unnumbered: a
-            rosette means a sequence, and this shelf is not one. */}
-        <View style={styles.section}>
+          <BookMap tiers={tiers} penTierIndex={nextTierIndex} penUnitIndex={nextUnitIndex} />
+        </Frame>
+
+        {/* Outside the frame: the marginalia. Unnumbered — not a sequence. */}
+        <View>
           <Shelf label={t('learn.group.reference')} />
           <View>
             <JadwalRow
@@ -426,17 +493,14 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   /*
-    NO gap, on the container or the sections — the cure Today's comment
-    describes, finished. Every join on this page involves a rule or a
-    pressable box, and a container gap is air nothing paints: the rule
-    floats, and a pressed row's highlight starts a band below the line
-    above it (Iyad's held-press screenshots, 31 Aug — measured at 32px
-    between the firsts rule and the where-you-are panel). The rule now:
-    a rule and the next box TOUCH; air lives inside painted boxes, as
-    padding, where the press shows it belonging to the row.
+    Slimmer sides than the app's usual 24, like the Awqat table: the frame
+    spends ~18px of its own on borders and inner padding, and a framed page
+    running close to its edges is what the printed object does too (Iyad
+    asked for the narrow sides, 2 Sep).
   */
   content: {
-    padding: Spacing.four,
+    paddingVertical: Spacing.four,
+    paddingHorizontal: Spacing.three,
     paddingBottom: BottomTabInset + Spacing.four,
     width: '100%',
     maxWidth: MaxContentWidth,
@@ -445,58 +509,130 @@ const styles = StyleSheet.create({
   header: {
     gap: Spacing.two,
     paddingTop: Spacing.four,
-    /* The one rule-to-rule join on the page: the ʿunwān's closing double
-       rule against the hero's band (or the keepsake's own top rule). The
-       air between them is the header's, as padding — not a container gap. */
+    /* The air between the ʿunwān's closing rule and the frame's opening one
+       is the header's, as padding — never a container gap. */
     paddingBottom: Spacing.three,
   },
-  section: {},
+  heroWrap: {
+    paddingBottom: Spacing.three,
+  },
   cardText: {
     flex: 1,
     gap: 2,
   },
-  journey: {
-    gap: Spacing.three,
-    paddingVertical: Spacing.four,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-  },
   kicker: { textTransform: 'uppercase', letterSpacing: 1 },
-  left: { gap: Spacing.one },
-  /*
-    No negative margins. The pair that lived here compensated for the
-    container gaps above — the fossil of the double-counted-air disease
-    this stylesheet was cured of; with the gaps gone the row simply owns
-    its padding like everything else.
-  */
-  keepsake: {
+
+  openLine: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.two,
+    paddingBottom: Spacing.two,
+  },
+  firstsLine: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     gap: Spacing.two,
-    borderTopWidth: StyleSheet.hairlineWidth,
-    paddingVertical: Spacing.three,
+    paddingVertical: Spacing.two,
   },
-  journeyAction: {
+  firstsRule: {
+    borderTopWidth: StyleSheet.hairlineWidth,
+  },
+
+  chapterHead: {
+    gap: 2,
+    paddingTop: Spacing.three,
+    paddingBottom: Spacing.two,
+  },
+  inkLine: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.two,
+    minHeight: 34,
+    paddingVertical: Spacing.half,
+  },
+  inkTitle: {
+    flexShrink: 1,
+  },
+  qalamLine: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.two,
+    minHeight: 48,
+    paddingVertical: Spacing.one,
+  },
+  qalamTitle: {
+    flexShrink: 1,
+    fontWeight: '600',
+  },
+  /*
+    The blank rule after the title, with the pen on it. Absolute children,
+    positioned from the row's foot so the rule meets the title's baseline;
+    the pen's nib is drawn at its own bottom-left, so `left: at%` with a
+    small translate puts the nib exactly at the ink's edge.
+  */
+  rest: {
+    flex: 1,
+    alignSelf: 'stretch',
+    minWidth: 44,
+  },
+  restRule: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 15,
+    height: StyleSheet.hairlineWidth,
+  },
+  restInk: {
+    position: 'absolute',
+    left: 0,
+    bottom: 14,
+    height: 2,
+  },
+  penAt: {
+    position: 'absolute',
+    bottom: 13,
+    transform: [{ translateX: -6 }],
+  },
+  blankLine: {
+    minHeight: 34,
+    justifyContent: 'flex-end',
+    paddingBottom: Spacing.two + Spacing.one,
+  },
+  blankRule: {
+    height: StyleSheet.hairlineWidth,
+  },
+  doneLine: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    /* Air above it, or the list's last line reads as the button's label. */
-    marginTop: Spacing.one,
-    gap: Spacing.three,
-    minHeight: 48,
-    paddingHorizontal: Spacing.three,
-    borderRadius: Radius.small,
+    gap: Spacing.two,
+    paddingVertical: Spacing.three,
   },
-  journeyActionLabel: {
-    flex: 1,
-  },
-  tierDoor: {
+
+  bookRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: Spacing.three,
-    paddingVertical: Spacing.three,
+    gap: Spacing.two,
+    paddingVertical: Spacing.two,
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
+  bookLabel: {
+    flex: 1,
+    gap: 0,
+  },
+  bookArches: {
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    gap: Spacing.one,
+  },
+  ledger: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.two,
+    paddingTop: Spacing.two,
+  },
+
   featured: {
     borderBottomWidth: StyleSheet.hairlineWidth,
     overflow: 'hidden',

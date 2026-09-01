@@ -101,6 +101,24 @@ export function Unwan({ title, subtitle }: { title: string; subtitle?: string })
 }
 
 /**
+ * The frame itself — the jadwal drawn at last.
+ *
+ * Every component in this file borrows the name of the ruled frame a scribe
+ * draws around a text block, and until the written-page Learn tab nothing
+ * ever drew one. This is it: a gold rule outside, a hair rule inside, the
+ * text block within. What sits inside the frame is the path; what sits
+ * outside is commentary — that edge is the whole information architecture.
+ */
+export function Frame({ children }: { children: ReactNode }) {
+  const theme = useTheme();
+  return (
+    <View style={[styles.frame, { borderColor: theme.gold }]}>
+      <View style={[styles.frameIn, { borderColor: theme.goldSoft }]}>{children}</View>
+    </View>
+  );
+}
+
+/**
  * A shelf heading — a rule with the name set into it.
  *
  * The Learn tab's groups were `sectionTitle` floating above a gap, which is
@@ -379,6 +397,15 @@ const styles = StyleSheet.create({
   },
   centred: {
     textAlign: 'center',
+  },
+  frame: {
+    borderWidth: 1,
+    padding: Spacing.one,
+  },
+  frameIn: {
+    borderWidth: StyleSheet.hairlineWidth,
+    paddingHorizontal: Spacing.three,
+    paddingVertical: Spacing.three,
   },
   shelf: {
     flexDirection: 'row',

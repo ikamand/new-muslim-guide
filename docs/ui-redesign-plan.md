@@ -2735,3 +2735,37 @@ generator reads the cache first with the network as fallback — the
 stall a regeneration again. The orphan's bytes were then validated the only
 honest way: `content:verify` against LIVE QuranEnc once it recovered — all
 33 texts match word for word, nothing drifted.
+
+---
+
+## 2 Sep 2026 — Learn becomes the page being written ✅
+
+Iyad brought two AI card mocks; the answer to the card skin was no, but the
+exploration escalated — three in-grammar cuts (artifact "Learn, Rethreaded"),
+then his push "you can do much better" produced the reimagining he approved:
+**the manuscript metaphor made literal** (artifact "The Page Being Written").
+Built in `learn.tsx` (rewritten), `jadwal.tsx` (`Frame` — the ruled frame the
+component set is NAMED for, drawn at last), `illustrations.tsx` (`QalamMark`,
+`BookArch`).
+
+The grammar: a finished lesson is an inked line closed with an end-mark; an
+unread one is a blank ragged rule — paper waiting, not homework owed; the
+next lesson is half-written with the qalam resting where the ink stops, and
+its ink GROWS with `recordReading`'s furthest (verified end-to-end on web:
+read half of Halal and haram, return, pen mid-line). The tiers are an arcade
+whose arches fill with ink to their fraction (`BookArch` clip), so
+out-of-order reading — janāzah on Tuesday — shows at book scale. Inside the
+frame: opening line (shahada, once said; the hero card still carries it
+before), firsts, chapter, book map, ledger door. Outside: the reference
+shelf, as marginalia.
+
+Removed, deliberately: the where-you-are card, carry-on button, you-were-
+reading row (Today still offers off-path reads), left-in-this-chapter list,
+the chip strip, the tier doors, spine counts. Sides trimmed to Spacing.three
+for the frame (the Awqat argument). Screens checked: 390/320, light/dark,
+fresh + progressed states. Known knock-ons: tier names wrap to two lines at
+320 beside six arches (acceptable); blank lines hide unwritten titles by
+design — the unit screen lists them one tap in. Fallback recorded: if the
+blanks confuse on device, ghost titles go ON the rules and everything else
+survives. Draft chrome copy ("The opening line", "Being written now", "The
+whole book", "Correct what the book assumes.") is Iyad's to reword.

@@ -2,7 +2,7 @@ import { getPostureImage, PORTRAIT_POSTURES } from '@/content/prayer-images';
 import type { Posture } from '@/content/types';
 
 import { Image, StyleSheet, Text, View, type ColorValue } from 'react-native';
-import Svg, { Circle, Ellipse, G, Line, Path } from 'react-native-svg';
+import Svg, { Circle, ClipPath, Defs, Ellipse, G, Line, Path, Rect } from 'react-native-svg';
 
 
 /**
@@ -667,6 +667,91 @@ export function PostureDiagram({
         </G>
       </Svg>
     </View>
+  );
+}
+
+/**
+ * A qalam — the reed pen, resting where the ink stops.
+ *
+ * Drawn for the Learn tab's written page: the next lesson is a half-written
+ * line, and the pen sits at the boundary between its ink and the blank rule.
+ * An object of practice, like the rehl and the misbaha on the tab bar — not
+ * a figure. Two shaft edges, a rounded top, a cut nib; house stroke weight.
+ */
+export function QalamMark({ color, size = 26 }: { color: ColorValue; size?: number }) {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 32 32" fill="none">
+      <Path d="M27 3 L13 21 L10.4 24.6" stroke={color} strokeWidth={1.5} strokeLinecap="round" />
+      <Path d="M29.5 5.5 L16 22.5 L13.6 26" stroke={color} strokeWidth={1.5} strokeLinecap="round" />
+      <Path d="M27 3 Q28.8 3.4 29.5 5.5" stroke={color} strokeWidth={1.5} strokeLinecap="round" />
+      <Path d="M10.4 24.6 L13.6 26 L9 29.5 Z" fill={color} />
+    </Svg>
+  );
+}
+
+/** The StagePath's arch, shared with `BookArch` so the two can never drift. */
+const BOOK_ARCH_PATH = 'M2 24 L2 10 Q2 3 10 1 Q18 3 18 10 L18 24 Z';
+
+/**
+ * One unit of the whole-book arcade on the Learn tab.
+ *
+ * The fill is ink rising in the doorway: a unit dipped into early — the
+ * janāzah-on-Tuesday case — fills to its fraction, so out-of-order reading
+ * is visible at book scale without a number. Full is a written unit, an
+ * outline is an unopened one, and the gold drop marks where the pen is.
+ *
+ * `clipId` must be unique per instance on the screen: SVG clip paths live in
+ * a global id namespace, and two arches sharing one would share a fraction.
+ */
+export function BookArch({
+  done,
+  total,
+  current = false,
+  color,
+  trackColor,
+  dotColor,
+  clipId,
+  width = 15,
+}: {
+  done: number;
+  total: number;
+  current?: boolean;
+  color: ColorValue;
+  trackColor: ColorValue;
+  dotColor: ColorValue;
+  clipId: string;
+  width?: number;
+}) {
+  const fraction = total > 0 ? Math.min(1, done / total) : 0;
+  const height = (width * 24) / 20;
+
+  if (fraction >= 1) {
+    return (
+      <Svg width={width} height={height} viewBox="0 0 20 24">
+        <Path d={BOOK_ARCH_PATH} fill={color} />
+      </Svg>
+    );
+  }
+
+  return (
+    <Svg width={width} height={height} viewBox="0 0 20 24" fill="none">
+      {fraction > 0 && (
+        <>
+          <Defs>
+            <ClipPath id={clipId}>
+              <Rect x={0} y={24 - 24 * fraction} width={20} height={24 * fraction} />
+            </ClipPath>
+          </Defs>
+          <Path d={BOOK_ARCH_PATH} fill={color} clipPath={`url(#${clipId})`} />
+        </>
+      )}
+      <Path
+        d={BOOK_ARCH_PATH}
+        stroke={current ? color : trackColor}
+        strokeWidth={current ? 1.8 : 1.4}
+      />
+      {current && <Circle cx={10} cy={11} r={3.2} fill={dotColor} />}
+    </Svg>
   );
 }
 

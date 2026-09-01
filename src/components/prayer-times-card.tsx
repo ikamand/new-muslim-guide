@@ -325,7 +325,14 @@ export function PrayerTimesCard({ action }: PrayerTimesCardProps) {
           <ThemedText type="caption" themeColor="textSecondary" style={styles.nextLabel}>
             {next.isTomorrow ? t('times.nextTomorrow') : t('times.next')}
           </ThemedText>
-          <ThemedText type="subtitle">
+          {/*
+            Full-width box, centred text — not for layout, for the font race:
+            "Asr" rendered as "As" on Iyad's phone and healed on restart,
+            which is the signature of text measured before Literata loaded
+            and clipped when the wider face swapped in. A box wider than any
+            word leaves the race nothing to eat, whichever way it lands.
+          */}
+          <ThemedText type="subtitle" style={styles.nextName}>
             {next.label}
           </ThemedText>
           <ThemedText type="cardTitle" themeColor="gold" style={styles.nextTime}>
@@ -495,6 +502,10 @@ const styles = StyleSheet.create({
   nextLabel: {
     textTransform: 'uppercase',
     letterSpacing: 1,
+  },
+  nextName: {
+    width: '100%',
+    textAlign: 'center',
   },
   divider: {
     height: StyleSheet.hairlineWidth,

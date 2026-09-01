@@ -165,20 +165,26 @@ export default function AwqatScreen() {
       </View>
       <DoubleRule />
 
-      <View
-        style={[
-          styles.headRow,
-          { borderBottomColor: theme.gold, backgroundColor: theme.background },
-        ]}>
-        <View style={styles.dayNum} />
-        {PRAYER_IDS.map((id) => (
-          <ThemedText key={id} type="caption" themeColor="gold" style={styles.cell}>
-            {t(`awqat.col.${id}` as UIKey)}
+      {/*
+        Two Views, not one, and the split is load-bearing: this outer View is
+        the sticky child, and on native RN wraps a sticky child in its own
+        header component — which on Android interfered with the child's OWN
+        layout style, stacking the five column names vertically (Iyad's
+        device, 1 Sep). The outer carries only the background; the row
+        layout lives on the inner View the wrapper never touches.
+      */}
+      <View style={{ backgroundColor: theme.background }}>
+        <View style={[styles.headRow, { borderBottomColor: theme.gold }]}>
+          <View style={styles.dayNum} />
+          {PRAYER_IDS.map((id) => (
+            <ThemedText key={id} type="caption" themeColor="gold" style={styles.cell}>
+              {t(`awqat.col.${id}` as UIKey)}
+            </ThemedText>
+          ))}
+          <ThemedText type="caption" themeColor="gold" style={styles.hijriCell}>
+            {t('awqat.col.hijri')}
           </ThemedText>
-        ))}
-        <ThemedText type="caption" themeColor="gold" style={styles.hijriCell}>
-          {t('awqat.col.hijri')}
-        </ThemedText>
+        </View>
       </View>
 
       {month.days.map((day, index) => (

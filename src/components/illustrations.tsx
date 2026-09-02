@@ -690,6 +690,46 @@ export function QalamMark({ color, size = 26 }: { color: ColorValue; size?: numb
 }
 
 /**
+ * An illuminated headpiece for an ʿunwān — a medallion with tendrils.
+ *
+ * The answer to "the tab headers feel bare" that a manuscript would give:
+ * warmth from geometry and gold, never a raster (a baked-light image is
+ * wrong in dark mode, and this app is used before dawn). One medallion —
+ * the eight-point star in a double ring — with hairline tendrils reaching
+ * toward the margins, exactly the anatomy of a printed sarlawḥ panel.
+ * Iyad approved the direction 2 Sep; if it earns its place, other tabs can
+ * take their own medallions.
+ */
+export function HeadpieceMark({
+  color,
+  trackColor,
+  width = 220,
+}: {
+  color: ColorValue;
+  trackColor: ColorValue;
+  width?: number;
+}) {
+  const height = (width * 44) / 220;
+  return (
+    <Svg width={width} height={height} viewBox="0 0 220 44" fill="none">
+      <Path d="M8 22 H84" stroke={trackColor} strokeWidth={1} />
+      <Path d="M136 22 H212" stroke={trackColor} strokeWidth={1} />
+      <Path d="M84 22 q6 -8 12 0" stroke={color} strokeWidth={1} />
+      <Path d="M124 22 q6 -8 12 0" stroke={color} strokeWidth={1} />
+      <Circle cx={110} cy={22} r={15} stroke={color} strokeWidth={1} />
+      <Circle cx={110} cy={22} r={10.5} stroke={trackColor} strokeWidth={0.8} />
+      <Rect x={103} y={15} width={14} height={14} stroke={color} strokeWidth={1} />
+      <Rect x={103} y={15} width={14} height={14} stroke={color} strokeWidth={1} transform="rotate(45 110 22)" />
+      <Circle cx={110} cy={22} r={2.2} fill={color} />
+      <Circle cx={88} cy={22} r={1.6} fill={color} />
+      <Circle cx={132} cy={22} r={1.6} fill={color} />
+      <Circle cx={8} cy={22} r={1.6} fill={trackColor} />
+      <Circle cx={212} cy={22} r={1.6} fill={trackColor} />
+    </Svg>
+  );
+}
+
+/**
  * The eight-point girih star as one drawn unit — two squares, one rotated.
  *
  * The Qur'an tab's counting band is 38 of these, one per surah, filled as

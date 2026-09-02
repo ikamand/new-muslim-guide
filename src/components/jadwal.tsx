@@ -81,10 +81,20 @@ export function DoubleRule() {
  * decoration: a heading floating above a gap reads as the first item in a
  * list, and a panel between two rules reads as the thing the page is called.
  */
-export function Unwan({ title, subtitle }: { title: string; subtitle?: string }) {
+export function Unwan({
+  title,
+  subtitle,
+  headpiece,
+}: {
+  title: string;
+  subtitle?: string;
+  /** An illuminated panel above the title — a `HeadpieceMark`, centred. */
+  headpiece?: ReactNode;
+}) {
   return (
     <View>
       <DoubleRule />
+      {headpiece ? <View style={styles.unwanHeadpiece}>{headpiece}</View> : null}
       <View style={styles.unwanBody}>
         <ThemedText type="subtitle" style={styles.centred}>
           {title}
@@ -451,6 +461,11 @@ const styles = StyleSheet.create({
   unwanBody: {
     paddingVertical: Spacing.three,
     gap: Spacing.one,
+  },
+  unwanHeadpiece: {
+    alignItems: 'center',
+    /* The body's own padding carries the air below; this seats the panel. */
+    paddingTop: Spacing.three,
   },
   centred: {
     textAlign: 'center',

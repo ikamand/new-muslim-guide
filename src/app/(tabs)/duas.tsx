@@ -1,23 +1,24 @@
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
+import Svg, { Circle, Path } from 'react-native-svg';
 
 import { PressableLink } from '@/components/pressable-link';
 import {
   AdhkarSessionCard,
   sessionLabelKey,
-  sessionMeta,
 } from '@/components/adhkar-session-card';
 import { DuaCard } from '@/components/dua-card';
+import { HeadpieceMark, HisnMark, KhatimMark } from '@/components/illustrations';
 import { Shelf, Unwan } from '@/components/jadwal';
 import { ARABIC_NAME_TRIM, ThemedText } from '@/components/themed-text';
 import { COLLECTIONS } from '@/content/collections';
 import { HISN } from '@/content/duas/hisn';
 import {
   ADHKAR_SESSIONS,
-  arabicNameFor,
   HISN_ARABIC_TITLE,
   sessionForWindow,
+  type AdhkarSession,
 } from '@/content/duas/sessions';
 import { BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
@@ -25,38 +26,33 @@ import { usePrayerTimes } from '@/hooks/use-prayer-times';
 import { useSettings } from '@/hooks/use-settings';
 import { useTheme } from '@/hooks/use-theme';
 import { windowAt } from '@/lib/adhkar-window';
+import type { UIKey } from '@/i18n/ui';
 
 /**
- * The duʿa tab — one answer, not a menu.
+ * The duʿa tab — the misbaha and the fortress.
  *
- * ## What this replaced, and why
+ * ## The two natures (2 Sep, from the "Misbaha and the Fortress" artifact)
  *
- * This screen used to be a day: six moments on a vertical rail, each holding
- * the duʿas said at that time. The argument for it was good and is worth
- * keeping in mind — a new Muslim does not know a duʿa for putting on clothes
- * exists, so an index is useless to them and a day is not.
+ * The tab holds two different things and now gives each its object. The four
+ * sittings said at fixed points in the day are BEADS ON ONE STRAND — the
+ * instrument this practice is counted on, and the tab's own icon — with the
+ * open sitting's bead gold and full, and its card beneath. The library —
+ * Hisn al-Muslim and the Qur'an duʿas — is the fortress: two rows wearing
+ * the marks the counting screen already draws.
  *
- * What the day could not do is *answer*. It laid the whole day out and left
- * the reader to find their place in it, using an hour table that was only ever
- * right near the equator at an equinox. The app knows the actual prayer times,
- * offline, so it can lead with the sitting that is open right now and name the
- * boundary it came from: `Fajr was 05:12 · Morning adhkār`.
+ * ## What the strand replaced
  *
- * ## One hero, everything else is a row
+ * The three closed-session rows, and their "25 to say · 7 min" metas — each
+ * still says it on its own screen, and on the card the moment its window
+ * opens. Tapping a bead opens its sitting exactly as its row did. Six list
+ * items became two, under one shelf line.
  *
- * The rule this screen is built on, arrived at by getting it wrong twice in a
- * mockup. Exactly one thing is ever opened up: the live session, or — for the
- * seven to thirteen hours a day that belong to no sitting — one pinned duʿa.
- * Everything else, pinned duʿas included, is a row of the same shape. A pinned
- * duʿa showing its Arabic inline looked richer and was worse: a different
- * shape from its neighbours for no reason, useless at ten pins, and nobody
- * learns a duʿa by scrolling past it.
+ * ## One hero, everything else is a row — still the law
  *
- * ## No location is a normal state, not an error
- *
- * `usePrayerTimes` gives null times until location is granted, and some people
- * will never grant it. That path is not special-cased; it simply has no open
- * window, which is the same state as mid-morning. The tab still works.
+ * Exactly one thing is ever opened up: the live session, or — for the seven
+ * to thirteen hours a day that belong to no sitting — one pinned duʿa. In
+ * the dead zone no bead is gold and the strand just sits quiet; no location
+ * is the same state, not an error.
  */
 export default function DuasScreen() {
   const theme = useTheme();
@@ -74,119 +70,188 @@ export default function DuasScreen() {
 
   /*
     Pinned entries are occasions in the book, not the nine the app owns.
-    Pinning was reachable from one screen holding those nine, which made it
-    look like a property of them rather than something you can do to anything
-    in the book. A star on every occasion says otherwise.
+    A star on every occasion says pinning is something you can do to anything
+    in the book.
   */
   const pinned = pinnedDuas
     .map((key) => HISN.find((occasion) => String(occasion.id) === key))
     .filter((occasion): occasion is NonNullable<typeof occasion> => occasion !== undefined);
 
-  /*
-    The dead zone opens up one duʿa, so the rows below it are the rest. With a
-    live session nothing is promoted and all of them are rows.
-
-    With nothing pinned it suggests one instead of leaving a screen of five
-    bare rows — which is what most people would see for most of the day in
-    their first week, and is a menu rather than an answer. Seeded on the date
-    so it is the same duʿa all day: "somewhere to start" that changes every
-    time you look at it is not somewhere to start.
-  */
-  // The card answers "what now" whenever no sitting is open. See DuaCard.
-
   return (
     <SafeAreaView style={[styles.safeArea, { backgroundColor: theme.background }]} edges={['top']}>
       <ScrollView contentContainerStyle={styles.content}>
         {/*
-          The same header block Learn and Qur'an use — `paddingTop` and a line
-          saying what the tab is for. This is the one tab whose own title is a
-          word most readers do not have yet, and "adhkār" below it is a second,
-          so the sentence is not decoration.
+          The ʿunwān, now with its illumination: the medallion-and-tendrils
+          headpiece a manuscript would put here. Warmth from geometry and
+          gold, never a raster — a baked-light image is wrong in dark mode,
+          and this app is used before dawn. The first tab to take one;
+          docs/ui-redesign-plan.md holds the decision.
         */}
         <View style={styles.header}>
-          <Unwan title={t('tab.duas')} subtitle={t('duas.intro')} />
+          <Unwan
+            title={t('tab.duas')}
+            subtitle={t('duas.intro')}
+            headpiece={<HeadpieceMark color={theme.gold} trackColor={theme.goldSoft} />}
+          />
         </View>
 
-        {live ? <AdhkarSessionCard session={live} state={state} /> : null}
+        <Strand liveId={live?.id} />
 
+        {live ? <AdhkarSessionCard session={live} state={state} /> : null}
         {live ? null : <DuaCard />}
 
         {/*
           One zero-gap group for everything ruled: the pinned shelf and its
-          rows, then the sessions and the books, flush — a rule and the next
-          row's box touch. They were separate groups across a 24px container
-          gap, so the last pinned rule floated over dead air (the flush-join
-          rule, Iyad, 31 Aug). The Shelf's own padding is the sectioning.
+          rows, then the fortress, flush — a rule and the next row's box
+          touch (the flush-join rule).
         */}
         <View>
-        {pinned.length > 0 ? (
-          <>
-            <Shelf label={t('adhkar.pinned')} count={pinned.length} />
-            {pinned.map((occasion) => (
-              <Row
-                key={occasion.id}
-                label={occasion.english || occasion.arabic}
-                arabic={occasion.arabic}
-                href={{ pathname: '/dua-book/[id]', params: { id: String(occasion.id) } }}
-                chevron
-              />
-            ))}
-          </>
-        ) : null}
+          {pinned.length > 0 ? (
+            <>
+              <Shelf label={t('adhkar.pinned')} count={pinned.length} />
+              {pinned.map((occasion) => (
+                <Row
+                  key={occasion.id}
+                  label={occasion.english || occasion.arabic}
+                  arabic={occasion.arabic}
+                  href={{ pathname: '/dua-book/[id]', params: { id: String(occasion.id) } }}
+                  chevron
+                />
+              ))}
+            </>
+          ) : null}
 
-        {/*
-          Every session except the one already promoted, then the two ways into
-          everything else. All the same row, because they are all "opens a list
-          of things" and looking different would imply they are not.
-        */}
-        <View>
-          {ADHKAR_SESSIONS.filter((session) => session.id !== live?.id).map((session) => (
+          {/*
+            The fortress: the two ways into everything else, wearing the
+            marks the counting screen's crowns already draw — the gate for
+            the book named after one, the seal for the Qur'an duʿas.
+          */}
+          <Shelf label={t('duas.group.else')} />
+          <View>
             <Row
-              key={session.id}
-              label={t(sessionLabelKey(session))}
-              arabic={arabicNameFor(session)}
-              href={{ pathname: '/adhkar/[id]', params: { id: session.id } }}
-              meta={sessionMeta(session, t)}
+              label="Hisn al-Muslim"
+              arabic={HISN_ARABIC_TITLE}
+              href="/dua-book"
+              meta={t('adhkar.occasions').replace('{n}', String(HISN.length))}
+              mark={<HisnMark color={theme.textSecondary} size={30} />}
+              muted
             />
-          ))}
-          {/*
-            The book, not a sitting — and its count is a different unit, which
-            is why both now say what they are counting. Bare numerals put "26"
-            and "132" in one column meaning lines and occasions.
-          */}
-          <Row
-            label="Hisn al-Muslim"
-            arabic={HISN_ARABIC_TITLE}
-            href="/dua-book"
-            meta={t('adhkar.occasions').replace('{n}', String(HISN.length))}
-            muted
-          />
-          {/*
-            Any collection of supplications, in the same row as everything else
-            here — and driven off `COLLECTIONS` rather than named one by one,
-            so a second one lands on this tab without anybody editing it. That
-            is the claim the `collection` kind was added to make.
-
-            Filtered by CATEGORY rather than by id: a collection of the names
-            of Allah is not a duʿa book and does not belong on this tab, and
-            branching on which collection it is would be the thing
-            `content/types.ts` forbids.
-          */}
-          {COLLECTIONS.filter((collection) => collection.meta?.category === 'quran').map(
-            (collection) => (
-              <Row
-                key={collection.id}
-                label={collection.title}
-                href={{ pathname: '/collection/[id]', params: { id: collection.id } }}
-                meta={t('count.items.long').replace('{n}', String(collection.entries.length))}
-                muted
-              />
-            ),
-          )}
-        </View>
+            {COLLECTIONS.filter((collection) => collection.meta?.category === 'quran').map(
+              (collection) => (
+                <Row
+                  key={collection.id}
+                  label={collection.title}
+                  href={{ pathname: '/collection/[id]', params: { id: collection.id } }}
+                  meta={t('count.items.long').replace('{n}', String(collection.entries.length))}
+                  mark={<KhatimMark color={theme.textSecondary} size={30} />}
+                  muted
+                />
+              ),
+            )}
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
+  );
+}
+
+/*
+  The strand's beads, in day order — not the content file's order. "After
+  prayer" recurs five times a day and holds a position here only because it
+  must hold one; between Morning and Evening is where most of its sayings
+  fall. On the record in the artifact's notes, Iyad's call to revisit.
+*/
+const STRAND_ORDER: readonly string[] = ['morning', 'after-prayer', 'evening', 'sleep'];
+const STRAND_T: readonly number[] = [0.13, 0.38, 0.62, 0.87];
+const STRAND_HEIGHT = 112;
+const BEAD_WIDTH = 64;
+
+/**
+ * A point on the strand's curve — the same quadratic bézier the thread is
+ * drawn with, so a bead can never sit off the thread. The Awqat arch taught
+ * this: hand-placed marks drift off a curve the first time anything moves.
+ */
+function strandPoint(width: number, t: number): { x: number; y: number } {
+  const u = 1 - t;
+  return {
+    x: u * u * 6 + 2 * u * t * (width / 2) + t * t * (width - 6),
+    y: u * u * 20 + 2 * u * t * 74 + t * t * 20,
+  };
+}
+
+/**
+ * The day's sittings as beads on one hung thread, the live one gold and
+ * blooming. Tapping a bead opens its sitting, exactly as its old row did.
+ * In the dead zone no bead is gold and the strand sits quiet.
+ */
+function Strand({ liveId }: { liveId?: string }) {
+  const theme = useTheme();
+  const { t } = useLocale();
+  const [width, setWidth] = useState(0);
+
+  const sessions = STRAND_ORDER.map((id) =>
+    ADHKAR_SESSIONS.find((session) => session.id === id),
+  ).filter((session): session is AdhkarSession => session !== undefined);
+
+  return (
+    <View
+      style={styles.strand}
+      onLayout={(event) => setWidth(event.nativeEvent.layout.width)}>
+      {width > 0 && (
+        <>
+          <Svg width={width} height={STRAND_HEIGHT} style={StyleSheet.absoluteFill}>
+            <Path
+              d={`M6 20 Q${width / 2} 74 ${width - 6} 20`}
+              stroke={theme.goldSoft}
+              strokeWidth={1.2}
+              fill="none"
+            />
+            {/* The tassel at the strand's head, marking its low point. */}
+            <Path
+              d={`M${width / 2} 47 v10 m-4 -2 l4 6 l4 -6`}
+              stroke={theme.goldSoft}
+              strokeWidth={1}
+              fill="none"
+            />
+          </Svg>
+          {sessions.map((session, index) => {
+            const point = strandPoint(width, STRAND_T[index]);
+            const isLive = session.id === liveId;
+            return (
+              <PressableLink
+                key={session.id}
+                href={{ pathname: '/adhkar/[id]', params: { id: session.id } }}
+                accessibilityLabel={t(sessionLabelKey(session))}
+                style={[
+                  styles.bead,
+                  { left: point.x - BEAD_WIDTH / 2, top: point.y - 15 },
+                ]}
+                pressedStyle={{ opacity: 0.6 }}>
+                {/* A paper disc, so the thread passes behind, never through. */}
+                <View style={[styles.beadDisc, { backgroundColor: theme.background }]}>
+                  <Svg width={30} height={30} viewBox="0 0 30 30" fill="none">
+                    {isLive ? (
+                      <>
+                        <Circle cx={15} cy={15} r={13} stroke={theme.gold} strokeWidth={1} />
+                        <Circle cx={15} cy={15} r={8.5} fill={theme.gold} />
+                      </>
+                    ) : (
+                      <Circle cx={15} cy={15} r={8.5} stroke={theme.text} strokeWidth={1.2} />
+                    )}
+                  </Svg>
+                </View>
+                <ThemedText
+                  type="caption"
+                  themeColor={isLive ? 'gold' : 'textSecondary'}
+                  style={styles.beadLabel}>
+                  {t(`adhkar.bead.${session.id}` as UIKey)}
+                </ThemedText>
+              </PressableLink>
+            );
+          })}
+        </>
+      )}
+    </View>
   );
 }
 
@@ -207,6 +272,7 @@ function Row({
   meta,
   muted,
   chevron,
+  mark,
 }: {
   label: string;
   arabic?: string;
@@ -215,6 +281,8 @@ function Row({
   meta?: string;
   muted?: boolean;
   chevron?: boolean;
+  /** A drawn mark naming the door — the fortress gate, the seal. */
+  mark?: React.ReactNode;
 }) {
   const theme = useTheme();
   return (
@@ -223,43 +291,42 @@ function Row({
       accessibilityLabel={meta ? `${label}. ${meta}` : label}
       style={[styles.row, { borderBottomColor: theme.goldSoft }]}
       pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
-      <View style={styles.rowHead}>
-        {/* The rung every other tab's rows wear — at `default` these read a
-            weight lighter than the fihrist and Learn (Iyad's review). */}
-        <ThemedText type="cardTitle" themeColor={muted ? 'textSecondary' : 'text'}>
-          {label}
-        </ThemedText>
-        {/*
-          A count means "a set of this many"; a chevron means "one duʿa". Two
-          different things, so they do not get the same mark.
-        */}
-        {chevron ? (
-          <ThemedText type="default" themeColor="gold">
-            ›
+      {mark ? <View style={styles.rowMark}>{mark}</View> : null}
+      <View style={styles.rowBody}>
+        <View style={styles.rowHead}>
+          {/* The rung every other tab's rows wear — at `default` these read a
+              weight lighter than the fihrist and Learn (Iyad's review). */}
+          <ThemedText type="cardTitle" themeColor={muted ? 'textSecondary' : 'text'}>
+            {label}
           </ThemedText>
-        ) : meta ? (
-          <ThemedText type="caption" themeColor="textSecondary">
-            {meta}
+          {/*
+            A count means "a set of this many"; a chevron means "one duʿa". Two
+            different things, so they do not get the same mark.
+          */}
+          {chevron ? (
+            <ThemedText type="default" themeColor="gold">
+              ›
+            </ThemedText>
+          ) : meta ? (
+            <ThemedText type="caption" themeColor="textSecondary">
+              {meta}
+            </ThemedText>
+          ) : null}
+        </View>
+        {/*
+          Gold, at the size a name deserves. These come out of Hisn al-Muslim
+          verbatim, and on the tab whose own title is a word most readers do
+          not have yet they are the thing worth setting properly.
+        */}
+        {arabic ? (
+          <ThemedText
+            type="arabicName"
+            themeColor={muted ? 'textSecondary' : 'gold'}
+            style={styles.arabic}>
+            {arabic}
           </ThemedText>
         ) : null}
       </View>
-      {/*
-        Gold, at the size a name deserves.
-
-        These come out of Hisn al-Muslim verbatim, and on the tab whose own
-        title is a word most readers do not have yet they are the thing worth
-        setting properly. Gold because a heading in this book is illuminated —
-        and `arabicName` because Amiri stacks marks high and the rung already
-        carries the line-height that stops rows colliding.
-      */}
-      {arabic ? (
-        <ThemedText
-          type="arabicName"
-          themeColor={muted ? 'textSecondary' : 'gold'}
-          style={styles.arabic}>
-          {arabic}
-        </ThemedText>
-      ) : null}
     </PressableLink>
   );
 }
@@ -271,8 +338,7 @@ const styles = StyleSheet.create({
     /*
       Every other tab clears the tab bar this way. This one used a bare
       `Spacing.six`, which is 64 against the 74 iOS needs and the 104 Android
-      does — invisible while the list was short, and the last row under the bar
-      as soon as somebody pins a few duʿas.
+      does.
     */
     paddingBottom: BottomTabInset + Spacing.four,
     /* Card joins only — the ruled rows live in the flush group below. */
@@ -296,18 +362,41 @@ const styles = StyleSheet.create({
     width: 3,
   },
   header: { gap: Spacing.two, paddingTop: Spacing.four, paddingBottom: Spacing.two },
-  start: {
-    marginTop: Spacing.two,
-    minHeight: 44,
-    borderRadius: Radius.small,
+  strand: {
+    height: STRAND_HEIGHT,
+  },
+  bead: {
+    position: 'absolute',
+    width: BEAD_WIDTH,
+    alignItems: 'center',
+    gap: Spacing.one,
+  },
+  beadDisc: {
+    width: 30,
+    height: 30,
+    borderRadius: 15,
     alignItems: 'center',
     justifyContent: 'center',
   },
+  beadLabel: {
+    textAlign: 'center',
+  },
   row: {
-    gap: Spacing.one,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.three,
     minHeight: 48,
     paddingVertical: Spacing.two,
     borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+  rowMark: {
+    width: 34,
+    alignItems: 'center',
+  },
+  rowBody: {
+    flex: 1,
+    gap: Spacing.one,
+    minWidth: 0,
   },
   rowHead: {
     flexDirection: 'row',

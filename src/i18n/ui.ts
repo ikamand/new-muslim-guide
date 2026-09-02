@@ -449,6 +449,13 @@ export const EN = {
   'adhkar.occasions': '{n} occasions',
   'adhkar.start': 'Start',
   'adhkar.readAgain': 'Read again',
+  /* The strand's bead captions — short, because they sit under a 30px bead. */
+  'adhkar.bead.morning': 'Morning',
+  'adhkar.bead.after-prayer': 'After prayer',
+  'adhkar.bead.evening': 'Evening',
+  'adhkar.bead.sleep': 'Sleep',
+  /* The fortress shelf — echoes the intro's "almost anything else". */
+  'duas.group.else': 'For everything else',
   'adhkar.pinned': 'Pinned duʿas',
   'card.iftar': 'Breaking your fast soon',
   'card.fasting': 'While you are fasting',

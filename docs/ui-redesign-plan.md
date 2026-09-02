@@ -2807,3 +2807,31 @@ deliberately:** the basmala line (content addition, review-gated) — the
 artifact says so too. Whole chain verified on web: cover ×6 → corners →
 mark known → completed frame → tab shows gilded row + star 2 + review slot.
 Dark = lamplight, checked. Not yet seen on a real device.
+
+---
+
+## 2 Sep 2026 — The misbaha and the fortress; the first headpiece ✅
+
+The Duʿa tab rebuilt from the "Misbaha and the Fortress" artifact, approved
+same day ("beautiful, simple and elegant"). Two natures, two objects: the
+four sittings are BEADS ON ONE STRAND (`Strand` in duas.tsx — thread and
+tassel drawn as one bézier, bead positions computed on the same curve so
+nothing can sit off the thread; the Awqat lesson, kept), the open sitting's
+bead gold with a bloom ring, its card beneath (unchanged anatomy). The
+library is the fortress: Hisn + Qur'an-duʿas rows wearing `HisnMark` and
+`KhatimMark` under a "For everything else" shelf. Removed: the three
+closed-session rows and their metas. Dead zone: no gold bead, the strand
+sits quiet, `DuaCard` as before.
+
+**The headpiece decision.** Iyad liked the warmth of the AI header images;
+the recorded answer is the manuscript's own: `HeadpieceMark`
+(illustrations.tsx) — a medallion with tendrils, tokens only, correct in
+both themes — mounted via `Unwan`'s new `headpiece` slot. Duʿa is the pilot
+tab; if it earns its place on device, Today/Learn/Qurʾan can take their own
+medallions (sun, qalam, star). Never a raster: baked light is wrong in dark
+mode and the app is used before dawn.
+
+New strings: `adhkar.bead.*` (short captions under 30px beads — mandatory,
+never mystery meat), `duas.group.else`. "After prayer" holds a strand
+position it doesn't truly have (recurs ×5/day) — on record, Iyad may move
+it to the tassel. Verified on web: live-morning light, dead-zone dark.

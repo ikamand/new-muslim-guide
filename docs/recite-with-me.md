@@ -94,7 +94,7 @@ argument that changed it.
 | **3** | [The aligner, for real](#phase-3--the-aligner-for-real) | ✅ Built 29 Aug | OTA |
 | **4** | [The screen](#phase-4--the-screen) | ✅ Built 30 Aug — needs eyes on the dev build | OTA |
 | **5** | [The model as a download](#phase-5--the-model-as-a-download) | ✅ Built 30 Aug — convert-and-self-host still owed pre-ship | **eas build** |
-| **6** | [The classroom](#phase-6--the-classroom-repeat-after-the-reciter) | 🚪 Agreed 2 Sep — its pairs spike is built and waits on Iyad's recordings | OTA, after its gate |
+| **6** | [The classroom](#phase-6--the-classroom-repeat-after-the-reciter) | ✅ Gate measured and passed 2 Sep; the mode is **built the same evening — not yet seen on a phone** | OTA |
 
 **The sequencing changed 29 Aug, on instruction.** The original rule — nothing
 past the gate is committed work — was Iyad's to unmake and he unmade it:
@@ -529,6 +529,35 @@ an OTA once its gate passes. The build-time timing pass is iMac work, per
 reciter. The real cost is the same one as ever, sharpened: a red mark this
 mode shows wrongly is worse than the silence the follow mode would have
 kept — which is why the spike gates it.
+
+### Built 2 Sep 2026, evening — on the measured scope, not yet seen on a phone
+
+- **`alignClassroom` in `lib/recite-align.ts`** — the strict pass: selector
+  leads, lookahead exactly one and it concedes, endings judged (bare always
+  passes), letters never judged, the stray-ه artifact confirms unjudged, an
+  ending slip re-said right is redeemed, liaison merges with the article
+  elided confirm both words. Ten new `align:check` cases pin it — six of
+  them verbatim from the pairs takes — and the check was flipped once to
+  prove it fails. Follow-mode cases untouched.
+- **`pause()`/`resume()` on the follow session** — the mic closes for the
+  reciter's turn and reopens on an empty window; the model loads once.
+  ⚠️ The vendored Android module's stop() releases its recorder and its
+  start() then silently no-ops, so every reopen re-runs init() — read in
+  the native source, recorded in a comment there, **and untestable off a
+  phone: the first live run is what proves resume works.**
+- **`hooks/use-recite-classroom.ts`** — the loop: reciter turn (his clip
+  through its own player, mounted only for his turn, with a 12 s watchdog
+  so a dead stream cannot wedge the loop) → your turn (selector on a lapis
+  wash, malachite confirms, vermilion concedes, skip in the bar) → the
+  evaporating score (confirmed ÷ total; ≥ 80 % advances after a beat,
+  below it the reciter repeats; Once more / Next ayah override).
+- **The bar** offers both modes when models are ready: *Repeat after the
+  reciter* (primary) and the follow mode's *Start listening*.
+- Checks: tsc clean, 20/20 align cases, i18n manifest regenerated clean,
+  `expo export --platform web` renders every route, style:check clean.
+- **Not built, deliberately:** per-word lighting under the reciter's voice
+  and tap-a-word-to-hear — both wait on the word-timing pilot; the reciter's
+  turn glows the ayah card only.
 
 ---
 

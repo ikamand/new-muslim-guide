@@ -14,7 +14,8 @@ declare module '@fugood/react-native-audio-pcm-stream' {
     wavFile: string;
   };
   const LiveAudioStream: {
-    init(options: PcmStreamOptions): void;
+    /** Android returns a promise (its native init takes one); iOS is sync. */
+    init(options: PcmStreamOptions): Promise<void> | void;
     start(): void;
     stop(): Promise<void> | void;
     on(event: 'data', callback: (base64Chunk: string) => void): void;

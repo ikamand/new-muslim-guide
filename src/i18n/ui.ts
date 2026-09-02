@@ -549,6 +549,20 @@ export const EN = {
   'recite.complete': 'You recited it all the way through.',
   'settings.storage.recite': 'Recite with me — the listening models',
 
+  /*
+    The classroom — repeat after the reciter (Phase 6). The score line says
+    "heard", not "right": the pairs spike scoped what the ear can honestly
+    claim, and hearing is exactly it.
+  */
+  'recite.classroom.start': 'Repeat after the reciter',
+  'recite.classroom.listen': 'Listen — ayah {a} of {total}',
+  'recite.classroom.yourTurn': '● Your turn — say the lit word',
+  'recite.classroom.score': 'Heard {n} of {total} words — {pct}%',
+  'recite.classroom.again': 'Once more',
+  'recite.classroom.next': 'Next ayah',
+  'recite.classroom.skip': 'Skip this word',
+  'recite.classroom.done': 'You repeated the whole surah, ayah by ayah.',
+
 
   'learn.title': 'Learn',
   'learn.intro':

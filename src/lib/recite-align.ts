@@ -138,6 +138,204 @@ function matches(token: string, ref: string): boolean {
   return false;
 }
 
+/* ------------------------------------------------------------------ *
+ * The classroom variant — Phase 6 of docs/recite-with-me.md.
+ *
+ * Same instrument, opposite posture: the follow mode trails a reader and
+ * forgives everything; the classroom leads one ayah at a time and is strict
+ * about the reader while staying tolerant of the microphone. Every rule
+ * below is scoped by the pairs spike of 2 Sep 2026:
+ *
+ * - **Endings are judged, letters are not.** The spike measured wrong short
+ *   vowel endings surviving into the transcript 5/6 (اللَّهَ for اللَّهُ came
+ *   back written as said), while imitated letter swaps (flat h, dropped
+ *   ʿayn, س for ص) were silently corrected 0/3 — so an ending can concede a
+ *   word and a letter never can, because the ear cannot testify to it.
+ * - **A bare ending always passes.** The one vowel miss was the bare اللَّهْ
+ *   restored to اللَّهُ — a dropped ending is invisible, and bare is also the
+ *   legitimate waqf form. Only a *present, different* vowel concedes.
+ * - **The stray-suffix artifact is noise, not an error.** The control take
+ *   إِيَّاكَ نَعْبُدُ came back نَعْبُدُهُ — a lone short phrase can grow a trailing
+ *   ه, so a token that is the expected word plus ه confirms (its ending is
+ *   then unknowable and goes unjudged).
+ * - **Lookahead is exactly one, and it concedes.** In follow mode a skipped
+ *   word is passed over silently; here the reader moving on to the next
+ *   word turns the held word `conceded` — red on the screen. Anything the
+ *   selector cannot reach in one step is ignored noise and the selector
+ *   waits, because Phase 0 measured splits/merges as the dominant noise on
+ *   CORRECT recitation and a wider concession would convert microphone
+ *   artifacts into accusations.
+ * - **A wrong ending is instantly redeemable.** Readers re-say a slipped
+ *   word without prompting; if the next token is the same word said right,
+ *   the concession upgrades to confirmed.
+ *
+ * The vocabulary stays the module's: `pending`, `confirmed`, `conceded`.
+ * "Wrong" still does not exist here — a conceded word is one the reader
+ * moved past, and the score a consumer derives is confirmed ÷ total.
+ * ------------------------------------------------------------------ */
+
+export type ClassroomWordState = 'pending' | 'confirmed' | 'conceded';
+
+export type ClassroomAlignment = {
+  /** One state per reference word, in order. */
+  states: readonly ClassroomWordState[];
+  /** The selector: index of the word the reader should say next. */
+  position: number;
+  /** True once every word is confirmed or conceded. */
+  complete: boolean;
+};
+
+const TANWEEN_TO_VOWEL: Record<string, string> = { 'ً': 'َ', 'ٌ': 'ُ', 'ٍ': 'ِ' };
+/** Marks that ride along without being the ending: shadda, tatweel, dagger
+    alef, Qur'anic annotation signs. */
+const RIDE_ALONG = /[ّـٰٟۖ-ۭ]/;
+
+/**
+ * The final short vowel of a written word or a transcribed token — the one
+ * signal the pairs spike proved the ear reports. Tanween folds to its plain
+ * vowel; sukun and an unmarked final letter are both '' (bare).
+ */
+export function finalVowel(text: string): string {
+  const t = text.normalize('NFC');
+  for (let i = t.length - 1; i >= 0; i -= 1) {
+    const ch = t[i];
+    if (RIDE_ALONG.test(ch)) continue;
+    if (ch in TANWEEN_TO_VOWEL) return TANWEEN_TO_VOWEL[ch];
+    if ('َُِ'.includes(ch)) return ch;
+    return ''; // sukun or a bare letter — no ending vowel to judge
+  }
+  return '';
+}
+
+type EndedToken = { key: string; ending: string };
+
+function tokeniseWithEndings(transcript: string): EndedToken[] {
+  return transcript
+    .split(/\s+/)
+    .map((raw) => ({ key: normalise(raw), ending: finalVowel(raw) }))
+    .filter((token) => token.key.length > 0);
+}
+
+/** matches(), plus the measured stray trailing-ه artifact. */
+function matchesLoose(token: string, ref: string): boolean {
+  return matches(token, ref) || token === `${ref}ه`;
+}
+
+/** True when both sides carry an ending vowel and they disagree. A bare side
+    never concedes — dropped endings are invisible to the ear, and bare is
+    the legitimate stopping form. */
+function endingDisagrees(token: EndedToken, ref: ReferenceWord): boolean {
+  const refEnd = finalVowel(ref.word);
+  return refEnd !== '' && token.ending !== '' && token.ending !== refEnd;
+}
+
+/** The shapes one token takes when it spans two reference words: plain
+    concatenation, and the second word's article eliding to ل or nothing —
+    ربالعالمين is never what liaison produces; ربلعالمين is. */
+function mergedForms(a: string, b: string): string[] {
+  const bare = b.startsWith('ال') && b.length > 3 ? b.slice(2) : b;
+  return [...new Set([a + b, `${a}ل${bare}`, a + bare])];
+}
+
+/**
+ * One strict pass over one ayah. Pure; re-run per recogniser event, like
+ * `align`. `skipped` carries words the reader passed manually — the escape
+ * hatch — which the pass treats as conceded the moment the selector reaches
+ * them.
+ */
+export function alignClassroom(
+  reference: readonly ReferenceWord[],
+  transcript: string,
+  skipped: ReadonlySet<number> = new Set(),
+): ClassroomAlignment {
+  const tokens = tokeniseWithEndings(transcript);
+  const states: ClassroomWordState[] = reference.map(() => 'pending');
+  let position = 0;
+  /** A word conceded for its ending alone, still open to instant redemption. */
+  let redeemable = -1;
+  /** The first half of a word the recogniser split in two. */
+  let carry: string | null = null;
+
+  const settle = () => {
+    while (position < reference.length && skipped.has(position)) {
+      states[position] = 'conceded';
+      position += 1;
+    }
+  };
+  settle();
+
+  for (const token of tokens) {
+    if (position >= reference.length) break;
+
+    if (redeemable >= 0) {
+      const prev = reference[redeemable];
+      if (matches(token.key, prev.key) && !endingDisagrees(token, prev)) {
+        states[redeemable] = 'confirmed';
+        redeemable = -1;
+        continue;
+      }
+    }
+
+    const target = reference[position];
+
+    if (carry !== null) {
+      const whole = carry + token.key;
+      carry = null;
+      if (matches(whole, target.key)) {
+        const wrongEnd = endingDisagrees(token, target);
+        states[position] = wrongEnd ? 'conceded' : 'confirmed';
+        redeemable = wrongEnd ? position : -1;
+        position += 1;
+        settle();
+        continue;
+      }
+      // The carry led nowhere; judge this token on its own below.
+    }
+
+    if (matchesLoose(token.key, target.key)) {
+      // Suffix-matched tokens carry the artifact's vowel, not the word's —
+      // their ending goes unjudged.
+      const wrongEnd = matches(token.key, target.key) && endingDisagrees(token, target);
+      states[position] = wrongEnd ? 'conceded' : 'confirmed';
+      redeemable = wrongEnd ? position : -1;
+      position += 1;
+      settle();
+      continue;
+    }
+
+    const next = position + 1 < reference.length ? reference[position + 1] : undefined;
+
+    if (next && mergedForms(target.key, next.key).some((form) => token.key === form)) {
+      states[position] = 'confirmed';
+      const wrongEnd = endingDisagrees(token, next);
+      states[position + 1] = wrongEnd ? 'conceded' : 'confirmed';
+      redeemable = wrongEnd ? position + 1 : -1;
+      position += 2;
+      settle();
+      continue;
+    }
+
+    if (next && matchesLoose(token.key, next.key)) {
+      states[position] = 'conceded';
+      const wrongEnd = matches(token.key, next.key) && endingDisagrees(token, next);
+      states[position + 1] = wrongEnd ? 'conceded' : 'confirmed';
+      redeemable = wrongEnd ? position + 1 : -1;
+      position += 2;
+      settle();
+      continue;
+    }
+
+    if (token.key.length >= 2 && target.key.startsWith(token.key)) {
+      carry = token.key;
+      continue;
+    }
+
+    // Noise. Judged never; the selector waits for the reader.
+  }
+
+  return { states, position, complete: position >= reference.length };
+}
+
 /** One pass of the follower over a full transcript. Pure; re-run per event. */
 export function align(reference: readonly ReferenceWord[], transcript: string): Alignment {
   const tokens = tokenise(transcript);

@@ -159,6 +159,14 @@ export async function downloadReciteModels(
 export type FollowSession = {
   /** Stops listening and frees every native resource. Safe to call twice. */
   stop: () => Promise<void>;
+  /**
+   * Closes the mic between turns; the loaded model stays in memory. The
+   * classroom's turn-taking is also its echo-cancellation: while the reciter
+   * plays, nothing is listening, so the follower can never track his voice.
+   */
+  pause: () => Promise<void>;
+  /** Reopens the mic on an EMPTY window — nothing heard before it counts. */
+  resume: () => Promise<void>;
 };
 
 export type FollowCallbacks = {
@@ -213,9 +221,14 @@ const MIN_NEW_BYTES = BYTES_PER_SECOND * 0.35;
 /**
  * Starts listening. Loads the model into memory (seconds — `loadMs` reports
  * it), opens the mic, and re-recognises the trailing window on a steady tick.
+ *
+ * `startPaused` loads the model with the mic closed — the classroom's shape,
+ * where the reciter speaks first and `resume()` opens the mic for the
+ * reader's turn.
  */
 export async function startFollowSession(
   callbacks: FollowCallbacks,
+  options: { startPaused?: boolean } = {},
 ): Promise<FollowSession & { loadMs: number }> {
   if (!canRecite) throw new Error('native only');
 
@@ -234,18 +247,33 @@ export async function startFollowSession(
   let newBytes = 0;
   let inFlight = false;
   let stopped = false;
+  let paused = options.startPaused === true;
 
-  LiveAudioStream.init({
+  const MIC_OPTIONS = {
     sampleRate: SAMPLE_RATE,
     channels: 1,
     bitsPerSample: 16,
     audioSource: 6,
     bufferSize: 16 * 1024,
     wavFile: '',
-  });
+  };
+
+  /*
+    Every open re-runs init(). Not defensive habit: the vendored Android
+    module's recording thread does `recorder.release(); recorder = null` in
+    its finally when stopped, and its start() silently returns while recorder
+    is null — so stop() then start() records nothing, ever again, unless
+    init() builds a fresh recorder first. Read in
+    node_modules/@fugood/.../RNLiveAudioStreamModule.java, 2 Sep 2026. The
+    iOS init just stores options, so re-running it is free there.
+  */
+  const openMic = async () => {
+    await Promise.resolve(LiveAudioStream.init(MIC_OPTIONS));
+    LiveAudioStream.start();
+  };
 
   LiveAudioStream.on('data', (base64Chunk: string) => {
-    if (stopped) return;
+    if (stopped || paused) return;
     const chunk = new Uint8Array(Buffer.from(base64Chunk, 'base64'));
     chunks.push(chunk);
     windowBytes += chunk.length;
@@ -258,7 +286,7 @@ export async function startFollowSession(
   });
 
   const tick = async () => {
-    if (stopped || inFlight || newBytes < MIN_NEW_BYTES) return;
+    if (stopped || paused || inFlight || newBytes < MIN_NEW_BYTES) return;
     inFlight = true;
     newBytes = 0;
     const passStart = Date.now();
@@ -305,12 +333,34 @@ export async function startFollowSession(
     }
   };
 
-  try {
-    LiveAudioStream.start();
-  } catch (error) {
-    await stop();
-    throw error;
+  const pause = async () => {
+    if (stopped || paused) return;
+    paused = true;
+    try {
+      await LiveAudioStream.stop();
+    } catch {
+      /* an already-closed mic is the state pause wants */
+    }
+  };
+
+  const resume = async () => {
+    if (stopped || !paused) return;
+    /* An empty window: the reader's turn starts with nothing carried over. */
+    chunks.length = 0;
+    windowBytes = 0;
+    newBytes = 0;
+    await openMic();
+    paused = false;
+  };
+
+  if (!paused) {
+    try {
+      await openMic();
+    } catch (error) {
+      await stop();
+      throw error;
+    }
   }
 
-  return { stop, loadMs };
+  return { stop, pause, resume, loadMs };
 }

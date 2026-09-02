@@ -148,8 +148,11 @@ As of 2 Sep 2026:
   Iyad's fifteen takes that afternoon: wrong vowel endings are heard 5/6
   (اللَّهُ/اللَّهَ included), imitated letter-quality errors 0/3, controls 5/6
   clean.** Red may claim words and endings; letter quality stays with the
-  tap-a-word teacher. Measured detail in the phase's section. No app code
-  for the mode exists yet; the build decision is Iyad's next call.
+  tap-a-word teacher. Measured detail in the phase's section. **Built the same
+  evening on that scope** — strict aligner + ten pinned cases, mic
+  pause/resume (Android re-init requirement recorded in recite-session.ts),
+  the turn-taking hook, and the two-mode bar. **Not yet seen on a phone**;
+  the live trace cookbook below is how it gets eyes.
 - **Still open from 30 Aug:** the in-card redesign (highlight inside ayah
   cards, pinned controls, surah-wide per-word transliteration) — built,
   **not yet seen on Iyad's phone**. His test and recording are the next

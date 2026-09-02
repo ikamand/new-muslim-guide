@@ -6,7 +6,7 @@ import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import { GirihStar } from '@/components/illustrations';
 import { MushafRosette } from '@/components/jadwal';
-import { ReciteControls, ReciteOpenRow } from '@/components/recite-follow';
+import { ReciteControls, ReciteOpenRow, ReciterTurnPlayer } from '@/components/recite-follow';
 import { ThemedText } from '@/components/themed-text';
 import { ayahTransliteration, ayahWordTransliterations, getSurah, JUZ30_SOURCE } from '@/content/quran/surahs';
 import { ayahSource, keepAyah } from '@/content/quran/ayah-audio';
@@ -14,6 +14,7 @@ import { getReciter, reciterCredit } from '@/content/quran/recitation';
 import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { useMemorised } from '@/hooks/use-memorised';
+import { useReciteClassroom } from '@/hooks/use-recite-classroom';
 import { useReciteFollow } from '@/hooks/use-recite-follow';
 import { useObservations } from '@/hooks/use-observations';
 import { useSettings } from '@/hooks/use-settings';
@@ -168,6 +169,10 @@ export default function SurahScreen() {
   );
   const follow = useReciteFollow(surah?.ayahs ?? [], followStrings, stopPlayback);
   const highlightActive = follow.open && (follow.state === 'listening' || follow.complete);
+  /* The classroom (Phase 6): repeat after the reciter, one ayah at a time.
+     Shares the bar, the models and the mic machinery with follow; only one
+     of the two modes runs at a time. */
+  const classroom = useReciteClassroom(ayahs, stopPlayback);
 
   /* Global word index of each ayah's first word, for the heard-set lookup.
      Written without mutation for the compiler; n is at most forty. */
@@ -278,6 +283,19 @@ export default function SurahScreen() {
     scroller.current?.scrollTo({ y: Math.max(0, listTop.current + top - Spacing.three), animated: true });
   }, [follow.open, follow.state, follow.currentVerse]);
 
+  /* The classroom walks the page ayah by ayah the same way, and keeps each
+     ayah it plays for next time — the playlist's keep effect above never
+     sees classroom playback, which goes through its own player. */
+  useEffect(() => {
+    if (!classroom.active) return;
+    const top = rowTops.current[classroom.ayahIndex];
+    if (top !== undefined) {
+      scroller.current?.scrollTo({ y: Math.max(0, listTop.current + top - Spacing.three), animated: true });
+    }
+    const ayahNumber = ayahs[classroom.ayahIndex]?.number;
+    if (surah && ayahNumber !== undefined) keepAyah(reciter, surah.number, ayahNumber);
+  }, [classroom.active, classroom.ayahIndex, ayahs, reciter, surah]);
+
   /*
     Silence that never resolves, said out loud.
 
@@ -337,6 +355,7 @@ export default function SurahScreen() {
   /** From the top, as a run-through. */
   const toggleSurah = () => {
     if (follow.state === 'listening') void follow.stop();
+    if (classroom.active) void classroom.stop();
     if (mode === 'surah') return stop();
     setMode('surah');
     resumeAt.current = 0;
@@ -356,6 +375,7 @@ export default function SurahScreen() {
    */
   const playFrom = (position: number) => {
     if (follow.state === 'listening') void follow.stop();
+    if (classroom.active) void classroom.stop();
     if (mode !== null && index === position && status.playing) return stop();
     setMode('ayah');
     resumeAt.current = position;
@@ -389,7 +409,17 @@ export default function SurahScreen() {
     <View style={styles.screen}>
       {/* Pinned above the scroll, per Iyad: the controls must not disappear
           while the page follows the recitation downward. */}
-      <ReciteControls follow={follow} />
+      <ReciteControls follow={follow} classroom={classroom} />
+      {/* The reciter's turn, as sound. Mounted only while it IS his turn —
+          the key replays the clip on "once more", and unmounting closes his
+          voice before the mic ever opens. */}
+      {classroom.state === 'running' && classroom.turn === 'reciter' ? (
+        <ReciterTurnPlayer
+          key={`${classroom.ayahIndex}:${classroom.attempt}`}
+          source={sources[classroom.ayahIndex]}
+          onFinished={classroom.reciterFinished}
+        />
+      ) : null}
     <ScrollView ref={scroller} contentContainerStyle={styles.content}>
       <Stack.Screen options={{ title: surah.name }} />
 
@@ -566,6 +596,20 @@ export default function SurahScreen() {
           const offset = wordOffsets[position] ?? 0;
           const wordLit = (w: number) =>
             follow.heard.has(offset + w) && offset + w < follow.displayed;
+          /* The classroom paints the same words the opposite way round: the
+             selector LEADS (a lapis wash on the word to say), malachite is a
+             word the ear confirmed, vermilion a word the reader moved past —
+             the register Phase 6 allows this opt-in mode and no more. */
+          const classroomAyah = classroom.active && classroom.ayahIndex === position;
+          const classroomStyle = (w: number) => {
+            const wordState = classroom.wordStates.get(w);
+            if (wordState === 'confirmed') return { color: theme.malachite };
+            if (wordState === 'conceded') return { color: theme.vermilion };
+            if (classroom.turn === 'you' && w === classroom.selected) {
+              return { color: theme.accent, backgroundColor: theme.accentMuted };
+            }
+            return { color: theme.text };
+          };
 
           return (
             /*
@@ -592,7 +636,9 @@ export default function SurahScreen() {
                   // cannot — and the recite session borrows the same light
                   // for the verse being said.
                   backgroundColor:
-                    isCurrent || beingRecited ? theme.backgroundSelected : 'transparent',
+                    isCurrent || beingRecited || classroomAyah
+                      ? theme.backgroundSelected
+                      : 'transparent',
                   borderBottomColor: theme.goldSoft,
                 },
               ]}>
@@ -634,11 +680,15 @@ export default function SurahScreen() {
                     line box still needs a look on a real device.
                   */
                   <ThemedText type="arabicVerse" style={styles.arabic}>
-                    {highlightActive
+                    {highlightActive || classroomAyah
                       ? arabicWords.map((word, w) => (
                           <Text
                             key={`${ayah.number}-${w}`}
-                            style={{ color: wordLit(w) ? theme.accent : theme.text }}
+                            style={
+                              classroomAyah
+                                ? classroomStyle(w)
+                                : { color: wordLit(w) ? theme.accent : theme.text }
+                            }
                           >
                             {word}
                             {w < arabicWords.length - 1 ? ' ' : ''}
@@ -662,14 +712,20 @@ export default function SurahScreen() {
               <View style={styles.ayahFoot}>
                 <View style={styles.footLines}>
                   {transliteration && !isHidden && transliterated ? (
-                    highlightActive &&
+                    (highlightActive || classroomAyah) &&
                     translitWords &&
                     translitWords.length === arabicWords.length ? (
                       <ThemedText type="small" themeColor="textSecondary" style={styles.transliteration}>
                         {translitWords.map((word, w) => (
                           <Text
                             key={`${ayah.number}-t${w}`}
-                            style={wordLit(w) ? { color: theme.accent } : undefined}
+                            style={
+                              classroomAyah
+                                ? { color: classroomStyle(w).color }
+                                : wordLit(w)
+                                  ? { color: theme.accent }
+                                  : undefined
+                            }
                           >
                             {word}
                             {w < translitWords.length - 1 ? ' ' : ''}

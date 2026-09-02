@@ -138,11 +138,19 @@ verse anchor) in `hooks/use-recite-follow.ts`; matching tolerances in
 
 ## Status — update this block when it changes
 
-As of 30 Aug 2026, commit `23dcea3`:
+As of 2 Sep 2026:
 
-- **Working on:** the in-card redesign (highlight inside ayah cards, pinned
-  controls, surah-wide per-word transliteration) — built, **not yet seen on
-  Iyad's phone**. His test and recording are the next input.
+- **New, 2 Sep:** the classroom mode (repeat after the reciter, selector
+  leads, red on the passed-over word, ephemeral score) is agreed and
+  specified as **Phase 6 of `docs/recite-with-me.md`** — read it there. Its
+  gate is the pairs spike (`.cache/recite-spike/run-pairs.sh`, takes in
+  `TAKES.md`), built and proven on synthetic audio the same day; **waiting
+  on Iyad's fifteen minimal-pair recordings.** No app code for the mode
+  exists yet, deliberately.
+- **Still open from 30 Aug:** the in-card redesign (highlight inside ayah
+  cards, pinned controls, surah-wide per-word transliteration) — built,
+  **not yet seen on Iyad's phone**. His test and recording are the next
+  input.
 - **Open decisions, his:** tiny-vs-base model (the only lever left on the
   1–3 s follow lag; conversion tools and originals are archived and ready);
   the upstream PR for the SliceManager patch.

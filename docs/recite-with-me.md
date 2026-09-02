@@ -77,6 +77,11 @@ Enforced in code, not intention, when the screen is built (Phase 4):
    screen, which CLAUDE.md forbids — the only Arabic rendered is the app's own
    reviewed text.
 
+**Scope, amended 2 Sep 2026:** these five bind the follow mode unchanged. The
+classroom mode (Phase 6) is a separate, opt-in room and amends rule 1 inside
+itself only — see that phase for exactly what changed, what did not, and the
+argument that changed it.
+
 ---
 
 ## The phases at a glance
@@ -89,6 +94,7 @@ Enforced in code, not intention, when the screen is built (Phase 4):
 | **3** | [The aligner, for real](#phase-3--the-aligner-for-real) | ✅ Built 29 Aug | OTA |
 | **4** | [The screen](#phase-4--the-screen) | ✅ Built 30 Aug — needs eyes on the dev build | OTA |
 | **5** | [The model as a download](#phase-5--the-model-as-a-download) | ✅ Built 30 Aug — convert-and-self-host still owed pre-ship | **eas build** |
+| **6** | [The classroom](#phase-6--the-classroom-repeat-after-the-reciter) | 🚪 Agreed 2 Sep — its pairs spike is built and waits on Iyad's recordings | OTA, after its gate |
 
 **The sequencing changed 29 Aug, on instruction.** The original rule — nothing
 past the gate is committed work — was Iyad's to unmake and he unmade it:
@@ -375,6 +381,122 @@ entry. **Still owed before any public release, recorded in that row:**
 convert from `tarteel-ai/whisper-base-ar-quran` directly and host the file
 somewhere the app controls, rather than depending on a stranger's mirror
 staying alive.
+
+## Phase 6 — The classroom (repeat after the reciter)
+
+**Opened and agreed 2 Sep 2026**, from Iyad's idea: hear an ayah in the
+chosen reciter's voice, repeat it, and be corrected — *"we are not trying to
+be judgemental, we are working towards correctness… correcting someone when
+they pronounce a word incorrectly in class is not judging them it's
+correcting them."* The register argument was made and accepted: correction a
+learner walked in asking for is not judgment, and talaqqī — the tradition's
+own method — has the teacher correct. **Nothing in this phase ships before
+its gate (the pairs spike below) is read.**
+
+### What the amendment changes, and what it does not
+
+The follow mode keeps all five rules untouched. The classroom is opt-in by
+entering it, and inside it:
+
+- **Rule 1 is amended:** a word the reader passed over or substituted turns
+  red, and an ayah ends with a score. Red is `passedOver` made visible
+  instead of silent — the same fact the aligner always computed.
+- **Rule 4 stands in its strongest form: the score evaporates.** Shown at
+  the ayah's end, reset when the next try starts. No history, no chart, no
+  entry anywhere — a per-attempt log would be the app's first record of how
+  well someone worships. Iyad, 2 Sep: *"no persistance needed just view and
+  reset when next try is started."*
+- **Rules 3 and 5 stand:** audio never leaves the device or touches disk,
+  and the transcript is never rendered.
+
+### The loop
+
+1. The reciter reads the ayah — mic closed, his words lighting as he says
+   them. Turn-taking is also the echo-cancellation: the mic never hears the
+   reciter, so the follower cannot track Husary instead of the reader.
+2. Mic opens and the selector **leads**: it sits on the word to say *before*
+   it is said. Follow mode trails the reader; the classroom answers "what do
+   I read now?" — the thing Iyad noticed the current screen never tells him.
+3. A match confirms the word and the selector advances.
+4. A non-match holds one beat: if the next utterance matches the held word,
+   it confirms — self-correction, costing nothing. If it matches the
+   *following* word, the held word turns red and the selector concedes and
+   moves on. No retry setting; the beat rule covers both of Iyad's cases.
+5. Ayah complete → score = confirmed ÷ total, shown, gone. Below the bar the
+   reciter reads the ayah again; at the bar, the next ayah.
+
+**Strict about the reader, not the microphone.** The strict matcher keeps
+the noise tolerances (ال/و attachment, split/merge repair) and drops only
+the content forgiveness. Phase 0 measured boundary splits and merges as the
+dominant recognition noise on *correct* recitation — without this
+distinction, every artifact becomes a false accusation and the mode teaches
+people to close it. And never trapped: re-saying is the normal fix, and a
+tap always moves past a word the app will not yield on.
+
+### The three rungs of "correct"
+
+Raw waveform comparison was considered and rejected: two waveforms of the
+same correct sound are numerically alien (pitch, timbre, pace), so
+wave-against-wave measures whose voice it is, not whether it is right.
+
+1. **Words** — skipped and substituted words. Certain, today, from the
+   existing aligner run strict.
+2. **Vowelled, ear-vs-ear.** Phase 0 recorded that the model returns *fully
+   vowelled* transcripts — اللَّهُ and اللَّهَ leave the model as different
+   strings, and it is our own `normalise()` that erases the difference.
+   Rung 2 compares the model's transcript of the reader against the model's
+   transcript **of the reciter's own clip** (obtained in the same build-time
+   pass as the word timings below) — the same instrument on both sides, so
+   its quirks partially cancel, and the target is what the reciter actually
+   said, which handles waqf naturally: Husary rightly drops the final vowel
+   at a stop, where the abstract text would mislead.
+3. **True acoustic scoring** — phoneme-level, per-sound. A different model
+   class and a new native runtime (whisper.cpp cannot run those); weeks of
+   work; ownable in-repo only if Apache/MIT weights worth archiving exist.
+   Priced and parked unless rung 2's ear proves too forgiving.
+
+### The gate — the pairs spike (built 2 Sep, waits on recordings)
+
+The one question the whole phase hangs on: when a word is deliberately
+mispronounced, does the transcript reflect **the mouth** or silently restore
+**the text**? Per error class, the MOUTH fraction decides what red may claim
+and what the score means — and the meaning already agreed is *"confirmed by
+the ear, as good as the ear is"* (Iyad, 2 Sep). The rig:
+`.cache/recite-spike/run-pairs.sh`, takes listed in
+`.cache/recite-spike/TAKES.md` — fifteen short voice memos: final-vowel
+minimal pairs (نَعْبُدُ/نَعْبُدَ/نَعْبُدِ, اللَّهُ/اللَّهَ/اللَّهْ, الْحَمْدُ/ِ/َ), consonant swaps
+(flat h for ح, dropped ʿayn, س for ص with plain t for ط), each beside a
+correct control.
+
+A synthetic preview (Maged TTS through the real pipeline — plumbing proof,
+not evidence) suggests the pattern to expect: the consonant swaps surfaced
+(الرَّهِيمِ written as heard; the ʿayn's absence written; a hybrid السراط keeping
+the mouth's س while restoring the text's ط), while the vowel-ending fatha
+was silently corrected back to نَعْبُدُ and a mispronounced اللَّهَ was rewritten
+as لَهَا. If the human takes repeat that, rung 2 hears consonants far better
+than endings, and the red mark's claims get scoped accordingly. The human
+recordings decide.
+
+### Companion piece — tap a word to hear it alone
+
+The classroom's answer to "how do I fix the word it marked": tap it and the
+reciter says *that word*, as often as wanted. Word timings come from running
+our own model over the reciter's ayah clips with `tokenTimestamps` —
+verified present in the vendored whisper.rn 0.7.4 types
+(`NativeRNWhisper.d.ts:16`, 2 Sep 2026) — **at build time on the iMac**,
+shipped as a small data table like the transliterations. Phones compute
+nothing; nothing new leaves our repos. ⚠️ A mis-cut slice that clips the ḥ
+off حمد is a *content* error, not a bug — a word-slice teaches pronunciation
+the way a drawing teaches a ruling — so the pilot is one surah, checked by
+ear, before any batch.
+
+### Costs, this phase
+
+No new native ground: same model, same mic pipeline, so the mode itself is
+an OTA once its gate passes. The build-time timing pass is iMac work, per
+reciter. The real cost is the same one as ever, sharpened: a red mark this
+mode shows wrongly is worse than the silence the follow mode would have
+kept — which is why the spike gates it.
 
 ---
 

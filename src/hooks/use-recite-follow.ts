@@ -1,5 +1,6 @@
 import { requestRecordingPermissionsAsync } from 'expo-audio';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { AppState } from 'react-native';
 
 import { align, buildReference, type ReferenceWord } from '@/lib/recite-align';
 import {
@@ -101,6 +102,16 @@ export function useReciteFollow(
 
   useEffect(() => () => void session.current?.stop(), []);
 
+  /* A locked screen or a phone call must not leave a wedged mic session
+     behind — Android quietly stops delivering audio to backgrounded apps,
+     which would look like eternal listening. Stopping is the honest state. */
+  useEffect(() => {
+    const sub = AppState.addEventListener('change', (appState) => {
+      if (appState !== 'active' && session.current) void stop();
+    });
+    return () => sub.remove();
+  }, [stop]);
+
   /* Complete means done, quietly — the session does not outlive the surah. */
   useEffect(() => {
     if (alignment.complete && session.current) void stop();
@@ -161,6 +172,11 @@ export function useReciteFollow(
         onError: (message) => {
           /* The words stay still; the cause goes to the Metro terminal. */
           console.warn('recite session', message);
+        },
+        onBroken: () => {
+          /* Three dead passes: stop saying "listening" — it isn't. */
+          setStatus(strings.error);
+          void stop();
         },
       });
       setState('listening');

@@ -51,9 +51,22 @@ type ModelFile = {
   versions hold these URLs forever, and that repo's README says so.
 */
 
-/** Tarteel's whisper-base fine-tune (Apache-2.0), GGML f16. The ONLY model
-    the follower needs since the in-house core below retired the VAD. */
+/** Tarteel's whisper-base fine-tune (Apache-2.0), quantized q8_0 — the ONLY
+    model the follower needs since the in-house core below retired the VAD.
+    Quantized 2 Sep 2026 from the archived f16 with whisper.cpp's own tool
+    and verified on the full desktop rig before the repoint: transcripts
+    byte-identical to f16 on the Husary baseline (29/29), Iyad's takes and
+    all fifteen pairs takes. Half the download of the f16. */
 const RECOGNITION: ModelFile = {
+  name: 'ggml-base-ar-quran-q8.bin',
+  url: 'https://github.com/ikamand/recite-models/releases/download/models-v2/ggml-base-ar-quran-q8_0.bin',
+  bytes: 81_768_585,
+};
+
+/** The f16 this app downloaded before 2 Sep 2026. A phone that already
+    holds it keeps working and never re-downloads — same ear, bigger file —
+    so it stays accepted for as long as those installs exist. */
+const LEGACY_F16: ModelFile = {
   name: 'ggml-base-ar-quran.bin',
   url: 'https://github.com/ikamand/recite-models/releases/download/models-v1/ggml-base-ar-quran-f16.bin',
   bytes: 147_951_465,
@@ -82,10 +95,16 @@ function present(model: ModelFile): boolean {
   }
 }
 
-/** The model on disk and the right size. A leftover Silero VAD file from
-    before 31 Aug 2026 is ignored (and deletable from the storage screen). */
+/** The model on disk and the right size — either file is the same ear. A
+    leftover Silero VAD file from before 31 Aug 2026 is ignored (and
+    deletable from the storage screen). */
 export function reciteModelsReady(): boolean {
-  return canRecite && present(RECOGNITION);
+  return canRecite && (present(RECOGNITION) || present(LEGACY_F16));
+}
+
+/** Whichever copy this phone holds, preferring the quantized one. */
+function recognitionOnDisk(): ModelFile {
+  return present(RECOGNITION) ? RECOGNITION : LEGACY_F16;
 }
 
 /** What the store holds, for the storage screen. 0 when nothing is saved. */
@@ -149,7 +168,7 @@ export async function downloadReciteModels(
   if (!canRecite) return false;
   const dir = modelDir();
   if (!dir.exists) dir.create({ intermediates: true });
-  if (!present(RECOGNITION)) {
+  if (!reciteModelsReady()) {
     onPercent(0);
     await fetchModel(RECOGNITION, onPercent);
   }
@@ -180,6 +199,13 @@ export type FollowCallbacks = {
   /** Milliseconds the last recognition pass took. For the instrument. */
   onProcessTime?: (ms: number) => void;
   onError: (message: string) => void;
+  /**
+   * Three recognition passes in a row have failed — the context is almost
+   * certainly dead and no transcript is coming. Fired once; the consumer
+   * should stop the session and say so, because a dead session that still
+   * says "listening" is the one lie this feature must never tell.
+   */
+  onBroken?: () => void;
 };
 
 /*
@@ -217,6 +243,28 @@ const WINDOW_BYTES = WINDOW_SECONDS * BYTES_PER_SECOND;
 const TICK_MS = 600;
 /** Don't burn a pass when almost nothing new was heard. */
 const MIN_NEW_BYTES = BYTES_PER_SECOND * 0.35;
+/**
+ * Mean 16-bit amplitude below which a chunk counts as silence. Speech at
+ * arm's length runs well above a thousand; an ordinary quiet room sits
+ * under a hundred. Set LOW on purpose — a missed quiet reciter is a broken
+ * feature, a decoded silent pass is only a warm phone — and the dev trace
+ * shows every skipped tick, so the number can be tuned on evidence.
+ */
+const SILENCE_MEAN_AMPLITUDE = 180;
+/** Consecutive failed passes before the session declares itself broken. */
+const BROKEN_AFTER = 3;
+
+/** Cheap voice check: mean |sample| over every fourth 16-bit LE sample. */
+function meanAmplitude(chunk: Uint8Array): number {
+  let sum = 0;
+  let count = 0;
+  for (let i = 0; i + 1 < chunk.length; i += 8) {
+    const sample = (chunk[i] | (chunk[i + 1] << 8)) << 16 >> 16;
+    sum += Math.abs(sample);
+    count += 1;
+  }
+  return count === 0 ? 0 : sum / count;
+}
 
 /**
  * Starts listening. Loads the model into memory (seconds — `loadMs` reports
@@ -239,7 +287,7 @@ export async function startFollowSession(
   const { Buffer } = await import('buffer');
 
   const t0 = Date.now();
-  const whisperContext = await whisper.initWhisper({ filePath: fileFor(RECOGNITION).uri });
+  const whisperContext = await whisper.initWhisper({ filePath: fileFor(recognitionOnDisk()).uri });
   const loadMs = Date.now() - t0;
 
   const chunks: Uint8Array[] = [];
@@ -277,13 +325,19 @@ export async function startFollowSession(
     const chunk = new Uint8Array(Buffer.from(base64Chunk, 'base64'));
     chunks.push(chunk);
     windowBytes += chunk.length;
-    newBytes += chunk.length;
+    /* Only VOICED audio counts toward a new pass. Silence used to burn a
+       decode every tick — heat, battery, and a hallucinated word for the
+       aligner to ignore. The window itself still keeps every chunk, so the
+       pass that does run hears the pauses between words. */
+    if (meanAmplitude(chunk) >= SILENCE_MEAN_AMPLITUDE) newBytes += chunk.length;
     /* Slide: drop whole chunks off the front once past the window. */
     while (windowBytes > WINDOW_BYTES && chunks.length > 1) {
       windowBytes -= chunks[0].length;
       chunks.shift();
     }
   });
+
+  let failuresInARow = 0;
 
   const tick = async () => {
     if (stopped || paused || inFlight || newBytes < MIN_NEW_BYTES) return;
@@ -306,11 +360,16 @@ export async function startFollowSession(
         callbacks.onTranscript(result.result);
         callbacks.onProcessTime?.(Date.now() - passStart);
       }
+      failuresInARow = 0;
     } catch (error) {
       /* One failed pass is not a dead session — the next tick tries again.
-         A dead context would fail every tick, which the log makes visible. */
+         Three in a row is: the terminal slice bug of 31 Aug looked exactly
+         like this from the outside, five ayahs recited into a screen that
+         still said listening. Now the session says so instead. */
       if (__DEV__) console.log('[follow] pass failed:', String(error));
       callbacks.onError(String(error));
+      failuresInARow += 1;
+      if (failuresInARow === BROKEN_AFTER) callbacks.onBroken?.();
     } finally {
       inFlight = false;
     }

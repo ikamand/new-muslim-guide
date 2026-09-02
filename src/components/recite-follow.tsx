@@ -293,10 +293,13 @@ export function ReciteControls({
 }
 
 /**
- * The reciter's turn, as sound. Mounted by the surah screen ONLY while the
- * classroom's turn is his — never during static web render, where
- * `useAudioPlayer` throws (the lesson practice.tsx carries) — and unmounted
- * before the mic opens, so playback and listening never overlap.
+ * The reciter's turn, as sound — and one gold hairline of progress, because
+ * a long ayah otherwise plays into what looks like a frozen screen. Mounted
+ * by the surah screen ONLY while the classroom's turn is his — never during
+ * static web render, where `useAudioPlayer` throws (the lesson practice.tsx
+ * carries) — and unmounted before the mic opens, so playback and listening
+ * never overlap. It sits directly under the pinned bar, which is where the
+ * line draws.
  */
 export function ReciterTurnPlayer({
   source,
@@ -342,7 +345,24 @@ export function ReciterTurnPlayer({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return null;
+  const fraction =
+    status.duration > 0 ? Math.min(1, status.currentTime / status.duration) : 0;
+
+  return <ReciterProgressLine fraction={fraction} />;
+}
+
+function ReciterProgressLine({ fraction }: { fraction: number }) {
+  const theme = useTheme();
+  return (
+    <View style={[styles.progressTrack, { backgroundColor: theme.goldSoft }]}>
+      <View
+        style={[
+          styles.progressFill,
+          { backgroundColor: theme.gold, width: `${Math.round(fraction * 100)}%` },
+        ]}
+      />
+    </View>
+  );
 }
 
 /** Hook rules forbid a conditional hook; a conditional component is fine. */
@@ -383,5 +403,12 @@ const styles = StyleSheet.create({
   },
   pairButton: {
     flex: 1,
+  },
+  progressTrack: {
+    height: 2,
+    width: '100%',
+  },
+  progressFill: {
+    height: 2,
   },
 });

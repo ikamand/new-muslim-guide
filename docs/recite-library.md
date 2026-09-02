@@ -158,6 +158,15 @@ As of 2 Sep 2026:
   cards, pinned controls, surah-wide per-word transliteration) — built,
   **not yet seen on Iyad's phone**. His test and recording are the next
   input.
+- **Audit pass, 2 Sep evening (after the first live session):** the model
+  quantized to q8_0 — half the download, verified transcript-identical on
+  the whole rig, hosted as `models-v2` under the freeze rule; a silence
+  gate so quiet rooms stop burning decode passes; three failed passes now
+  close the session honestly instead of saying "listening" (the 31 Aug
+  terminal bug's lesson, enforced); backgrounding stops both modes cleanly;
+  a gold hairline shows the reciter's progress during his turn. All
+  phone-verifiable claims still owed a phone: the silence threshold (180)
+  and the q8 pass time.
 - **Open decisions, his:** tiny-vs-base model (the only lever left on the
   1–3 s follow lag; conversion tools and originals are archived and ready);
   the upstream PR for the SliceManager patch.

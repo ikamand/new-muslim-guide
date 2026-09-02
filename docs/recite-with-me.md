@@ -382,6 +382,18 @@ convert from `tarteel-ai/whisper-base-ar-quran` directly and host the file
 somewhere the app controls, rather than depending on a stranger's mirror
 staying alive.
 
+**Quantized 2 Sep 2026 — the download halves.** `models-v2` on
+`ikamand/recite-models` carries a q8_0 quantization (81,768,585 bytes,
+sha `72194195…`) made with whisper.cpp's own tool from the archived f16.
+Verified before the repoint, on the full rig: transcripts byte-identical
+to f16 across the Husary baseline (29/29), Iyad's real takes and all
+fifteen pairs takes; the English probe still aligns to zero; identical
+MOUTH/TEXT verdicts. The hosted asset was re-downloaded anonymously and
+hashed before the code moved. New installs fetch the q8; a phone already
+holding the f16 keeps it and never re-downloads — `recite-session.ts`
+accepts either file and prefers the smaller. The q8 also joined the local
+archive and its SHA256SUMS.
+
 ## Phase 6 — The classroom (repeat after the reciter)
 
 **Opened and agreed 2 Sep 2026**, from Iyad's idea: hear an ayah in the

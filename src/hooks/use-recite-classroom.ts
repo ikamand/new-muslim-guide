@@ -1,5 +1,6 @@
 import { requestRecordingPermissionsAsync } from 'expo-audio';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { AppState } from 'react-native';
 
 import {
   alignClassroom,
@@ -150,6 +151,15 @@ export function useReciteClassroom(
     setState('closed');
   }, [teardown, resetTurn]);
 
+  /* Backgrounding mid-lesson (a call, a locked screen) stops the classroom
+     cleanly rather than leaving a wedged mic behind a frozen turn. */
+  useEffect(() => {
+    const sub = AppState.addEventListener('change', (appState) => {
+      if (appState !== 'active' && session.current) void stop();
+    });
+    return () => sub.remove();
+  }, [stop]);
+
   /** Move the loop to an ayah's reciter turn (a fresh attempt). */
   const beginAyah = useCallback(
     (index: number) => {
@@ -237,6 +247,9 @@ export function useReciteClassroom(
         {
           onTranscript,
           onError: (message) => console.warn('recite classroom', message),
+          /* Three dead passes: close the classroom honestly rather than
+             hold a selector on a word nothing is listening for. */
+          onBroken: () => void stop(),
         },
         { startPaused: true },
       );

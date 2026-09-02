@@ -2879,3 +2879,30 @@ scales from the measured width (12–20px) so narrow screens can't overflow;
 positions and path share one set of constants (the Awqat rule). Display
 only — the fihrist is the navigation. Verified 390 + 320; Duʿa tab also
 checked at 320 (bead labels clear, no collisions).
+
+---
+
+## 2 Sep 2026 — ⚠️ RELEASE GATE: Android multi-window desync, undecided
+
+Samsung pop-up/split-screen resize leaves the RN surface desynced: text
+hard-clips mid-glyph with stale measurements and the touch map goes stale,
+so tabs stop responding until the window is dragged back to fullscreen
+(which heals it completely — Iyad's device, 2 Sep). The OTA-able nudge
+(width-keyed remount in `_layout.tsx`, a20b1f8) did NOT fix it on device —
+the desynced surface never delivers the resize event to JS, so no OTA-level
+fix can. The nudge stays (harmless; helps devices that do emit, e.g. DeX).
+
+**Iyad's instruction: decide and fix BEFORE app-store release.** The two
+options, both needing a full `eas build` (fingerprint change — old builds
+orphaned until updated):
+
+1. **Recommended — restart the activity on resize:** remove `screenSize` /
+   `smallestScreenSize` / `screenLayout` from `android:configChanges` via a
+   small config plugin, so Android itself recreates the activity on a
+   multi-window resize. Split-screen stays usable; a resize costs a brief
+   reload. The OS doing forcefully what the nudge tried politely.
+2. **Opt out of multi-window:** `resizeableActivity: false`. No pop-up or
+   split-screen at all; Play large-screen guidance frowns on it.
+
+Batch the chosen fix into the NEXT native build — do not ship to stores
+with this undecided. Fullscreen use is unaffected either way.

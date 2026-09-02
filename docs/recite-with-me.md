@@ -511,6 +511,15 @@ honest sentence is "words and endings, confirmed by the ear."
 
 ### Companion piece — tap a word to hear it alone
 
+**HELD, Iyad's call, 2 Sep 2026** — *"hold it and remember it as a feature
+to be built in the future."* Not effort: the classroom is one session old
+and its loop should settle through real use before more surface rides on
+it, and a word-slice is the app's first machine-cut religious audio —
+content, not chrome. **To resume:** the classroom's knobs have stopped
+moving on his feedback; then the build-time timing pass (per reciter), then
+the pilot — ONE surah, every slice checked by ear, before any batch.
+Everything below is the design as agreed, kept current for that day.
+
 The classroom's answer to "how do I fix the word it marked": tap it and the
 reciter says *that word*, as often as wanted. Word timings come from running
 our own model over the reciter's ayah clips with `tokenTimestamps` —

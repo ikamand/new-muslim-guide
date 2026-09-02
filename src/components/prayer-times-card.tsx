@@ -340,13 +340,18 @@ export function PrayerTimesCard({ action }: PrayerTimesCardProps) {
           </ThemedText>
           {/*
             Sunrise closes Fajr's window, so it is worth a line while Fajr is
-            next and is noise for the other twenty hours of the day.
+            next and is noise for the other twenty hours of the day. Its OWN
+            line: joined to the countdown with a separator it ran nearly the
+            niche's full width and crowded the arch's legs (Iyad, 2 Sep).
           */}
           <ThemedText type="small" themeColor="textSecondary">
-            {next.id === 'fajr'
-              ? `${formatCountdown(next.msUntil)} · ${t('times.endsAtSunrise')} ${formatTime(today.sunrise)}`
-              : formatCountdown(next.msUntil)}
+            {formatCountdown(next.msUntil)}
           </ThemedText>
+          {next.id === 'fajr' && (
+            <ThemedText type="small" themeColor="textSecondary">
+              {`${t('times.endsAtSunrise')} ${formatTime(today.sunrise)}`}
+            </ThemedText>
+          )}
         </View>
       </Pressable>
 
@@ -490,7 +495,13 @@ const styles = StyleSheet.create({
   nicheIn: {
     alignItems: 'center',
     gap: Spacing.half,
-    paddingTop: Spacing.three,
+    /*
+      Five (32) rather than three: with the box centred in the 190 niche,
+      top padding is what seats the text stack lower in the arch — at 16 the
+      first caption hung just under the crown ornament and the whole stack
+      read as floating high (Iyad, 2 Sep).
+    */
+    paddingTop: Spacing.five,
   },
   button: {
     alignSelf: 'flex-start',

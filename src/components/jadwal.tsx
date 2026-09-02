@@ -1,6 +1,6 @@
 import { type ReactNode } from 'react';
 import { StyleSheet, View, type StyleProp, type ViewStyle } from 'react-native';
-import Svg, { Circle, Path } from 'react-native-svg';
+import Svg, { Circle, Path, Rect } from 'react-native-svg';
 
 import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
@@ -109,11 +109,13 @@ export function Unwan({ title, subtitle }: { title: string; subtitle?: string })
  * text block within. What sits inside the frame is the path; what sits
  * outside is commentary — that edge is the whole information architecture.
  */
-export function Frame({ children }: { children: ReactNode }) {
+export function Frame({ children, flush = false }: { children: ReactNode; flush?: boolean }) {
   const theme = useTheme();
   return (
     <View style={[styles.frame, { borderColor: theme.gold }]}>
-      <View style={[styles.frameIn, { borderColor: theme.goldSoft }]}>{children}</View>
+      <View style={[styles.frameIn, flush && styles.frameFlush, { borderColor: theme.goldSoft }]}>
+        {children}
+      </View>
     </View>
   );
 }
@@ -173,6 +175,61 @@ export function Rosette({ label, size = 26 }: { label: string; size?: number }) 
         <Path d="M28.6 15 L24.4 16.8 L24.4 13.2 Z" fill={theme.gold} />
       </Svg>
       <ThemedText type="caption" themeColor="gold">
+        {label}
+      </ThemedText>
+    </View>
+  );
+}
+
+/**
+ * The mushaf's ayah marker: the eight-point star with a numeral inside.
+ *
+ * In a printed mushaf the marker sits INSIDE the text at the ayah's end,
+ * and reading it is part of reading the page — so this is drawn to ride
+ * inline (the numeral is real text overlaid, like `Rosette`, because font
+ * resolution inside react-native-svg is unreliable). The numeral is Latin,
+ * per the house rule: the reader this app exists for cannot parse ٣ yet.
+ *
+ * `filled` is the held-from-memory state: soft gold petals, ink numeral —
+ * the covered ayah's rosette, and the fihrist's mark for a known surah.
+ */
+export function MushafRosette({
+  label,
+  filled = false,
+  size = 28,
+}: {
+  label: string;
+  filled?: boolean;
+  size?: number;
+}) {
+  const theme = useTheme();
+  return (
+    <View style={[styles.mushafBox, { width: size, height: size }]}>
+      <Svg width={size} height={size} viewBox="0 0 32 32" fill="none" style={StyleSheet.absoluteFill}>
+        <Rect
+          x={6}
+          y={6}
+          width={20}
+          height={20}
+          fill={filled ? theme.goldSoft : 'none'}
+          fillOpacity={filled ? 0.55 : 1}
+          stroke={theme.gold}
+          strokeWidth={1}
+        />
+        <Rect
+          x={6}
+          y={6}
+          width={20}
+          height={20}
+          fill={filled ? theme.goldSoft : 'none'}
+          fillOpacity={filled ? 0.55 : 1}
+          stroke={theme.gold}
+          strokeWidth={1}
+          transform="rotate(45 16 16)"
+        />
+        <Circle cx={16} cy={16} r={8} stroke={filled ? theme.gold : theme.goldSoft} strokeWidth={0.8} />
+      </Svg>
+      <ThemedText type="caption" themeColor={filled ? 'text' : 'gold'} style={styles.mushafNumeral}>
         {label}
       </ThemedText>
     </View>
@@ -407,6 +464,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.three,
     paddingVertical: Spacing.three,
   },
+  /*
+    For a frame of full-bleed rows: the rows own their horizontal padding,
+    so a gilded row's wash can reach the frame's inner rule — the flush-join
+    rule again, air inside painted boxes, never a container inset.
+  */
+  frameFlush: {
+    paddingHorizontal: 0,
+    paddingVertical: Spacing.one,
+  },
   shelf: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -420,6 +486,14 @@ const styles = StyleSheet.create({
   shelfLabel: {
     textTransform: 'uppercase',
     letterSpacing: 1.6,
+  },
+  mushafBox: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  /* letterSpacing tightened so "114" holds inside the star at 32px. */
+  mushafNumeral: {
+    letterSpacing: -0.5,
   },
   rosette: {
     alignItems: 'center',

@@ -2769,3 +2769,41 @@ design — the unit screen lists them one tap in. Fallback recorded: if the
 blanks confuse on device, ghost titles go ON the rules and everything else
 survives. Draft chrome copy ("The opening line", "Being written now", "The
 whole book", "Correct what the book assumes.") is Iyad's to reword.
+
+---
+
+## 2 Sep 2026 — The illuminated fihrist and the illuminated page ✅
+
+Both built from the artifact pair ("The Fihrist Showdown", "The Illuminated
+Page"), after the showdown against the ChatGPT card mocks. One idea drawn
+twice: **learning the book is illuminating it.**
+
+**Qur'an tab** (`quran.tsx` rewritten): the progress panel's girih band
+became the count — 38 `GirihStar`s, one per surah in learning order, each
+filled when ITS surah is marked known (per-surah truth, not a contiguous
+fill; verified: marking An-Nas gilds star 2, not star 1). The list moved
+inside `Frame flush` as a fihrist: `MushafRosette` numbers, known rows take
+the selected-ground wash + filled rosette, the "known" word retired to the
+a11y label. One vermilion `Rubric` — "then juz 30, backwards" — between
+rows 1 and 114. Review row untouched.
+
+**Surah screen** (`surah/[number].tsx`): header became a cartouche (name ·
+meaning · Makkan/Medinan — `place` shown for the first time; new
+`quran.place.*` keys). Ayah markers moved INSIDE the text as inline
+`MushafRosette`s (View-in-Text; ⚠️ web-verified, device look pending — the
+seat is `inlineRosette`'s translateY). Covered ayahs are blank ruled paper
+with a filled rosette (the Learn page's language, reversed). The ayah head
+row died: play moved beside the Latin lines, still a sibling of the cover
+target, still present while covered so checking-by-ear works. The frame
+earns ornament from state that already existed: corners (`GirihStar`) when
+`hidden.length > 0` or known, midpoint stars + cartouche wash when the
+reader marks it known. `listTop` now measured on the frame wrapper.
+
+**Corrected en route:** the artifact claimed covering all ayahs records the
+surah as known — wrong; it records a recitation (`surahDone`, review
+bookkeeping). "Known" is only the reader's own mark (`toggle`), per that
+button's own comment, and the build follows the code. **Not built,
+deliberately:** the basmala line (content addition, review-gated) — the
+artifact says so too. Whole chain verified on web: cover ×6 → corners →
+mark known → completed frame → tab shows gilded row + star 2 + review slot.
+Dark = lamplight, checked. Not yet seen on a real device.

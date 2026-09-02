@@ -4,6 +4,8 @@ import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
+import { GirihStar } from '@/components/illustrations';
+import { MushafRosette } from '@/components/jadwal';
 import { ReciteControls, ReciteOpenRow } from '@/components/recite-follow';
 import { ThemedText } from '@/components/themed-text';
 import { ayahTransliteration, ayahWordTransliterations, getSurah, JUZ30_SOURCE } from '@/content/quran/surahs';
@@ -16,6 +18,7 @@ import { useReciteFollow } from '@/hooks/use-recite-follow';
 import { useObservations } from '@/hooks/use-observations';
 import { useSettings } from '@/hooks/use-settings';
 import { useTheme } from '@/hooks/use-theme';
+import type { UIKey } from '@/i18n/ui';
 
 /**
  * One surah, to read and then to recite from memory.
@@ -390,16 +393,28 @@ export default function SurahScreen() {
     <ScrollView ref={scroller} contentContainerStyle={styles.content}>
       <Stack.Screen options={{ title: surah.name }} />
 
-      <View style={styles.header}>
-        <ThemedText type="arabicDisplay" style={styles.titleArabic}>{surah.nameArabic}</ThemedText>
-        <ThemedText type="small" themeColor="textSecondary">
-          {t('quran.surahNumber').replace('{n}', String(surah.number))} · {surah.meaning} ·{' '}
-          {surah.ayahs.length} {t('count.ayahs')}
-        </ThemedText>
-        <ThemedText type="small" themeColor="textSecondary">
-          {t('quran.tapToHide')}
-        </ThemedText>
+      {/*
+        The surah's cartouche — a mushaf's header band: name, place, size.
+        It takes the gilded wash the day the reader marks the surah known,
+        because the pages people hold by heart are the illuminated ones.
+      */}
+      <View
+        style={[
+          styles.cartouche,
+          { borderColor: theme.gold },
+          known && { backgroundColor: theme.backgroundSelected },
+        ]}>
+        <View style={[styles.cartoucheIn, { borderColor: theme.goldSoft }]}>
+          <ThemedText type="arabicDisplay" style={styles.centred}>{surah.nameArabic}</ThemedText>
+          <ThemedText type="small" themeColor="textSecondary" style={styles.centred}>
+            {t('quran.surahNumber').replace('{n}', String(surah.number))} · {surah.meaning} ·{' '}
+            {t(`quran.place.${surah.place}` as UIKey)} · {surah.ayahs.length} {t('count.ayahs')}
+          </ThemedText>
+        </View>
       </View>
+      <ThemedText type="small" themeColor="textSecondary" style={styles.centred}>
+        {t('quran.tapToHide')}
+      </ThemedText>
 
       {/*
         Repeat is a screen-wide setting rather than per row, because it is a
@@ -517,11 +532,26 @@ export default function SurahScreen() {
         </View>
       )}
 
+      {/*
+        The frame that earns its gold. Plain while nothing is held; the
+        corner stars arrive when ayahs start being covered from memory; the
+        midpoint stars complete it — with the cartouche's wash — when the
+        reader marks the surah known. All three states are drawn from state
+        the screen already keeps; nothing new is recorded.
+
+        `listTop` is measured here, on the frame wrapper, because the list
+        now sits inside the frame and its own layout.y would be relative to
+        the frame, not the scroll content. The few pixels of frame border
+        and padding are inside the scroll aim's tolerance.
+      */}
       <View
-        style={styles.list}
+        style={styles.frameWrap}
         onLayout={(event) => {
           listTop.current = event.nativeEvent.layout.y;
         }}>
+        <View style={[styles.mframe, { borderColor: theme.gold }]}>
+          <View style={[styles.mframeIn, { borderColor: theme.goldSoft }]}>
+            <View style={styles.list}>
         {surah.ayahs.map((ayah, position) => {
           const isHidden = hidden.includes(ayah.number);
           const transliterated = ayahTransliteration(surah.number, ayah.number);
@@ -566,13 +596,98 @@ export default function SurahScreen() {
                   borderBottomColor: theme.goldSoft,
                 },
               ]}>
-              <View style={styles.ayahHead}>
-                <ThemedText
-                  type="caption"
-                  themeColor={isCurrent ? 'accent' : 'textSecondary'}
-                  style={styles.ayahNumber}>
-                  {ayah.number}
-                </ThemedText>
+              <Pressable
+                onPress={() => cover(ayah.number)}
+                accessibilityRole="button"
+                accessibilityLabel={
+                  isHidden
+                    ? t('quran.reveal').replace('{n}', String(ayah.number))
+                    : t('quran.hide').replace('{n}', String(ayah.number))
+                }
+                style={({ pressed }) => [styles.ayahText, { opacity: pressed ? 0.6 : 1 }]}>
+                {isHidden ? (
+                  /*
+                    Blank ruled paper, the rosette holding the ayah's place —
+                    the language Learn speaks for an unwritten lesson, said
+                    the other way round: paper where the text lives in you,
+                    not on the screen. The rule's length roughly echoes the
+                    line's, which is part of what you are learning; covering
+                    an ayah still doesn't make everything below it jump.
+                  */
+                  <View style={styles.coveredLine}>
+                    <MushafRosette label={String(ayah.number)} filled size={28} />
+                    <View
+                      style={[
+                        styles.coveredRule,
+                        {
+                          backgroundColor: theme.goldSoft,
+                          width: `${Math.max(28, Math.min(84, Math.round(ayah.arabic.length * 1.4)))}%`,
+                        },
+                      ]}
+                    />
+                  </View>
+                ) : (
+                  /*
+                    The marker rides INSIDE the text at the ayah's end, where
+                    every printed mushaf has set it — an inline View in Text.
+                    ⚠️ Verified on web; the baseline seat against Amiri's tall
+                    line box still needs a look on a real device.
+                  */
+                  <ThemedText type="arabicVerse" style={styles.arabic}>
+                    {highlightActive
+                      ? arabicWords.map((word, w) => (
+                          <Text
+                            key={`${ayah.number}-${w}`}
+                            style={{ color: wordLit(w) ? theme.accent : theme.text }}
+                          >
+                            {word}
+                            {w < arabicWords.length - 1 ? ' ' : ''}
+                          </Text>
+                        ))
+                      : ayah.arabic}
+                    {'\u00A0'}
+                    <View style={styles.inlineRosette}>
+                      <MushafRosette label={String(ayah.number)} size={28} />
+                    </View>
+                  </ThemedText>
+                )}
+              </Pressable>
+
+              {/*
+                The Latin lines and the play control share the card's foot —
+                the play button is a SIBLING of the cover target, never a
+                child, and it stays through a covered state so the reader can
+                listen while checking themselves.
+              */}
+              <View style={styles.ayahFoot}>
+                <View style={styles.footLines}>
+                  {transliteration && !isHidden && transliterated ? (
+                    highlightActive &&
+                    translitWords &&
+                    translitWords.length === arabicWords.length ? (
+                      <ThemedText type="small" themeColor="textSecondary" style={styles.transliteration}>
+                        {translitWords.map((word, w) => (
+                          <Text
+                            key={`${ayah.number}-t${w}`}
+                            style={wordLit(w) ? { color: theme.accent } : undefined}
+                          >
+                            {word}
+                            {w < translitWords.length - 1 ? ' ' : ''}
+                          </Text>
+                        ))}
+                      </ThemedText>
+                    ) : (
+                      <ThemedText type="small" themeColor="textSecondary" style={styles.transliteration}>
+                        {transliterated}
+                      </ThemedText>
+                    )
+                  ) : null}
+                  {translation && !isHidden ? (
+                    <ThemedText type="small" themeColor="textSecondary">
+                      {ayah.translation}
+                    </ThemedText>
+                  ) : null}
+                </View>
                 <Pressable
                   onPress={() => playFrom(position)}
                   accessibilityRole="button"
@@ -602,84 +717,38 @@ export default function SurahScreen() {
                   )}
                 </Pressable>
               </View>
-
-              <Pressable
-                onPress={() => cover(ayah.number)}
-                accessibilityRole="button"
-                accessibilityLabel={
-                  isHidden
-                    ? t('quran.reveal').replace('{n}', String(ayah.number))
-                    : t('quran.hide').replace('{n}', String(ayah.number))
-                }
-                style={({ pressed }) => [styles.ayahText, { opacity: pressed ? 0.6 : 1 }]}>
-                {isHidden ? (
-                  /*
-                    A blank of roughly the right height rather than a collapsed
-                    row. The line keeps its place, so covering an ayah does not
-                    make everything below it jump — and the shape of the gap is
-                    a reminder of how long the line is, which is part of what
-                    you are learning.
-                  */
-                  <View style={[styles.covered, { borderColor: theme.border }]}>
-                    <ThemedText type="small" themeColor="textSecondary">
-                      {t('quran.covered')}
-                    </ThemedText>
-                  </View>
-                ) : highlightActive ? (
-                  <ThemedText type="arabicVerse" style={styles.arabic}>
-                    {arabicWords.map((word, w) => (
-                      <Text
-                        key={`${ayah.number}-${w}`}
-                        style={{ color: wordLit(w) ? theme.accent : theme.text }}
-                      >
-                        {word}
-                        {w < arabicWords.length - 1 ? ' ' : ''}
-                      </Text>
-                    ))}
-                  </ThemedText>
-                ) : (
-                  <ThemedText type="arabicVerse" style={styles.arabic}>{ayah.arabic}</ThemedText>
-                )}
-
-                {/*
-                  Every surah now — Iyad reversed §5.3's Fatiha-only rule on
-                  30 Aug 2026; the history is on `ayahTransliteration`. It
-                  sits under the Arabic and above the meaning, in the reading
-                  order somebody uses when trying to SAY the line — and when
-                  a recite session is live, the Latin word lights in step
-                  with its Arabic one, index-aligned by the generator.
-                */}
-                {transliteration && !isHidden && transliterated && (
-                  highlightActive &&
-                  translitWords &&
-                  translitWords.length === arabicWords.length ? (
-                    <ThemedText type="small" themeColor="textSecondary" style={styles.transliteration}>
-                      {translitWords.map((word, w) => (
-                        <Text
-                          key={`${ayah.number}-t${w}`}
-                          style={wordLit(w) ? { color: theme.accent } : undefined}
-                        >
-                          {word}
-                          {w < translitWords.length - 1 ? ' ' : ''}
-                        </Text>
-                      ))}
-                    </ThemedText>
-                  ) : (
-                    <ThemedText type="small" themeColor="textSecondary" style={styles.transliteration}>
-                      {transliterated}
-                    </ThemedText>
-                  )
-                )}
-
-                {translation && !isHidden && (
-                  <ThemedText type="small" themeColor="textSecondary">
-                    {ayah.translation}
-                  </ThemedText>
-                )}
-              </Pressable>
             </View>
           );
         })}
+            </View>
+          </View>
+        </View>
+        {(hidden.length > 0 || known) && (
+          <>
+            <View style={[styles.corner, styles.cornerTL]}>
+              <GirihStar filled size={13} color={theme.gold} trackColor={theme.gold} />
+            </View>
+            <View style={[styles.corner, styles.cornerTR]}>
+              <GirihStar filled size={13} color={theme.gold} trackColor={theme.gold} />
+            </View>
+            <View style={[styles.corner, styles.cornerBL]}>
+              <GirihStar filled size={13} color={theme.gold} trackColor={theme.gold} />
+            </View>
+            <View style={[styles.corner, styles.cornerBR]}>
+              <GirihStar filled size={13} color={theme.gold} trackColor={theme.gold} />
+            </View>
+          </>
+        )}
+        {known && (
+          <>
+            <View style={[styles.corner, styles.edgeL]}>
+              <GirihStar filled size={11} color={theme.gold} trackColor={theme.gold} />
+            </View>
+            <View style={[styles.corner, styles.edgeR]}>
+              <GirihStar filled size={11} color={theme.gold} trackColor={theme.gold} />
+            </View>
+          </>
+        )}
       </View>
 
       {/*
@@ -736,12 +805,40 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: Spacing.four,
   },
-  header: {
-    gap: Spacing.one,
+  cartouche: {
+    borderWidth: 1,
+    padding: Spacing.one,
   },
-  titleArabic: {
-    /* size and face: the `arabicDisplay` rung */
+  cartoucheIn: {
+    borderWidth: StyleSheet.hairlineWidth,
+    paddingVertical: Spacing.two,
+    paddingHorizontal: Spacing.three,
+    gap: 2,
   },
+  centred: {
+    textAlign: 'center',
+  },
+  frameWrap: {
+    /* The ornaments hang on the frame's own edges. */
+    position: 'relative',
+  },
+  mframe: {
+    borderWidth: 1,
+    padding: Spacing.one,
+  },
+  mframeIn: {
+    borderWidth: StyleSheet.hairlineWidth,
+    paddingVertical: Spacing.one,
+  },
+  corner: {
+    position: 'absolute',
+  },
+  cornerTL: { top: -6, left: -6 },
+  cornerTR: { top: -6, right: -6 },
+  cornerBL: { bottom: -6, left: -6 },
+  cornerBR: { bottom: -6, right: -6 },
+  edgeL: { left: -5, top: '50%', transform: [{ translateY: -5 }] },
+  edgeR: { right: -5, top: '50%', transform: [{ translateY: -5 }] },
   list: {
     gap: Spacing.two,
   },
@@ -750,12 +847,6 @@ const styles = StyleSheet.create({
     padding: Spacing.three,
     borderRadius: Radius.rule,
     borderBottomWidth: StyleSheet.hairlineWidth,
-  },
-  ayahHead: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    gap: Spacing.two,
   },
   play: {
     width: 34,
@@ -816,11 +907,35 @@ const styles = StyleSheet.create({
     paddingLeft: Spacing.three,
     paddingVertical: Spacing.one,
   },
-  ayahNumber: {
-    fontVariant: ['tabular-nums'],
-  },
   ayahText: {
     gap: Spacing.two,
+  },
+  ayahFoot: {
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    gap: Spacing.two,
+  },
+  footLines: {
+    flex: 1,
+    gap: Spacing.half,
+  },
+  /*
+    The inline marker's seat. RN puts an inline View's bottom on the text
+    baseline; Amiri's line box is tall, so without a nudge the rosette rides
+    high. Tuned on web; ⚠️ needs a look on a real device.
+  */
+  inlineRosette: {
+    transform: [{ translateY: 6 }],
+  },
+  coveredLine: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    gap: Spacing.two,
+    minHeight: 58,
+  },
+  coveredRule: {
+    height: 1,
   },
   /** Latin, so it never takes the Arabic face. */
   transliteration: {
@@ -831,15 +946,7 @@ const styles = StyleSheet.create({
     textAlign: 'right',
     writingDirection: 'rtl',
   },
-  covered: {
-    minHeight: 58,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: Radius.small,
-    borderWidth: StyleSheet.hairlineWidth,
-    borderStyle: 'dashed',
-  },
-  mark: {
+ mark: {
     minHeight: 56,
     alignItems: 'center',
     justifyContent: 'center',

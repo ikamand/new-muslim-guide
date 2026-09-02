@@ -689,6 +689,52 @@ export function QalamMark({ color, size = 26 }: { color: ColorValue; size?: numb
   );
 }
 
+/**
+ * The eight-point girih star as one drawn unit — two squares, one rotated.
+ *
+ * The Qur'an tab's counting band is 38 of these, one per surah, filled as
+ * each is learned: the band that used to decorate the progress panel IS the
+ * progress now. Also the frame ornament on the surah screen — the corner
+ * pieces that arrive as a page starts being held from memory.
+ */
+export function GirihStar({
+  size = 15,
+  filled,
+  color,
+  trackColor,
+}: {
+  size?: number;
+  filled: boolean;
+  color: ColorValue;
+  trackColor: ColorValue;
+}) {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 32 32" fill="none">
+      <Rect
+        x={6}
+        y={6}
+        width={20}
+        height={20}
+        fill={filled ? color : 'none'}
+        fillOpacity={filled ? 0.85 : 1}
+        stroke={filled ? undefined : trackColor}
+        strokeWidth={filled ? 0 : 1.4}
+      />
+      <Rect
+        x={6}
+        y={6}
+        width={20}
+        height={20}
+        fill={filled ? color : 'none'}
+        fillOpacity={filled ? 0.85 : 1}
+        stroke={filled ? undefined : trackColor}
+        strokeWidth={filled ? 0 : 1.4}
+        transform="rotate(45 16 16)"
+      />
+    </Svg>
+  );
+}
+
 /** The StagePath's arch, shared with `BookArch` so the two can never drift. */
 const BOOK_ARCH_PATH = 'M2 24 L2 10 Q2 3 10 1 Q18 3 18 10 L18 24 Z';
 

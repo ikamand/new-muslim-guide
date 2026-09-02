@@ -492,6 +492,11 @@ export const EN = {
   'quran.title': 'Learn by heart',
   'quran.intro': 'Al-Fatihah, then the short surahs at the end of the Qur’an, in the order people usually learn them. Start at the top. Al-Fatihah is in every prayer, so it is the one to have first.',
   'quran.progress': '{done} of {total} learned',
+  /* The fihrist's one red line: why 114 follows 1. */
+  'quran.order': 'then juz 30, backwards',
+  /* A mushaf header's third fact, beside name and size. */
+  'quran.place.makkah': 'Makkan',
+  'quran.place.madinah': 'Medinan',
   'quran.progress.help': 'You decide when one counts. Nothing here is timed, and nothing is taken away.',
   'quran.playSurah': 'Play the surah',
   'quran.stop': 'Stop',

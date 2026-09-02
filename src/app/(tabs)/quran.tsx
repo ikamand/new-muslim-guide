@@ -1,8 +1,10 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { Fragment } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { GirihBand } from '@/components/illustrations';
+import { GirihStar } from '@/components/illustrations';
+import { Frame, MushafRosette, Rubric } from '@/components/jadwal';
 import { PressableLink } from '@/components/pressable-link';
 import { ARABIC_NAME_TRIM, ThemedText } from '@/components/themed-text';
 import { LEARNING_ORDER } from '@/content/quran/surahs';
@@ -14,7 +16,7 @@ import { reviewFor } from '@/lib/review';
 import { useTheme } from '@/hooks/use-theme';
 
 /**
- * Al-Fatiha and juz 30, in the order people learn them.
+ * Al-Fatiha and juz 30, in the order people learn them — as a fihrist.
  *
  * ## Why this is a tab and not a Learn topic
  *
@@ -23,25 +25,31 @@ import { useTheme } from '@/hooks/use-theme';
  * months, and filing it under Learn would make it look like reading, which is
  * the one thing it is not.
  *
+ * ## The fihrist (2 Sep)
+ *
+ * The contents page at the front of a mushaf — surah names, numbers in
+ * rosettes, ruled into a frame — is this screen's printed ancestor, the way
+ * the mosque wall timetable is the Awqat table's. So the list lives inside
+ * the drawn frame and gilds itself: a known surah takes the selected-ground
+ * wash and a filled rosette, the way an illuminator marks what is finished.
+ * The word "known" retired from the row; screen readers still hear it.
+ *
  * ## The order
  *
  * Al-Fatiha first, then backwards through the mushaf, 114 → 113 → 112 → …,
- * which is how it is actually taught. Not shortest-first: the data contradicts
- * that, since 110 and 103 are shorter than 114. Backwards is contiguous, so
- * there is never a question about what comes next, and it front-loads the
- * three *quls* — the highest-utility surahs in the book.
- *
- * Al-Fatiha sits outside that run because it sits outside juz 30, and it goes
- * first because it is the one surah you cannot pray without. This tab shipped
- * without it, which meant a memorisation screen that omitted the surah recited
- * in every rak'ah of every prayer. See `content/quran/surahs.ts`.
+ * which is how it is actually taught. Backwards is contiguous, so there is
+ * never a question about what comes next, and it front-loads the three
+ * *quls*. The one red line in the frame — "then juz 30, backwards" — answers
+ * the question the jump from 1 to 114 always raised.
  *
  * ## Progress that never asks anything
  *
- * A count, and nothing else. No streak, no daily target, no notice when
- * somebody stops. Someone three weeks into Islam does not need an app that is
- * disappointed in them, and the fastest way to make memorising feel like
- * homework is to score it.
+ * The band above the list is 38 eight-point stars, one per surah in learning
+ * order, each filled the day its surah is marked known: the girih band that
+ * used to decorate the count IS the count now, and a gap in the band is a
+ * fact, not a nag. No streak, no daily target, no notice when somebody
+ * stops. Someone three weeks into Islam does not need an app that is
+ * disappointed in them.
  */
 export default function QuranScreen() {
   const theme = useTheme();
@@ -62,114 +70,121 @@ export default function QuranScreen() {
         </View>
 
         {/*
-          One zero-gap group from the progress panel down: the panel's rule,
-          the review row and every surah row touch — the flush-join rule.
-          The list used to put 8px of unpainted air under every rule, which
-          is 38 floating rules on one screen (Iyad, 31 Aug).
+          One zero-gap group from the band down: the band's rule, the review
+          row and the frame touch — the flush-join rule.
         */}
         <View>
-        {/*
-          The band is a row of eight-point stars — the same girih the shahada
-          card carries. A count behind it rather than a percentage: "6 of 38"
-          is a fact, "16%" is a verdict.
-        */}
-        <View style={[styles.progress, { borderColor: theme.goldSoft }]}>
-          <View style={styles.band}>
-            <GirihBand color={theme.accent} height={54} />
-          </View>
-          <View style={styles.progressBody}>
-            <ThemedText type="cardTitle">
-              {t('quran.progress')
-                .replace('{done}', String(count))
-                .replace('{total}', String(LEARNING_ORDER.length))}
-            </ThemedText>
-            <ThemedText type="small" themeColor="textSecondary">
-              {t('quran.progress.help')}
-            </ThemedText>
-          </View>
-        </View>
-
-        {/*
-          One surah worth reciting again — and never a queue.
-
-          `lib/review.ts` explains the whole design: the schedule is invisible,
-          the slot is always filled and never late, and the sentence is about
-          the surah rather than about the reader. This screen must never grow a
-          count of what is "due"; that is a backlog, and a backlog is a streak
-          wearing different clothes.
-        */}
-        {review ? (
-          <PressableLink
-            href={{ pathname: '/surah/[number]', params: { number: String(review.surah) } }}
-            accessibilityLabel={`${t('quran.review.kicker')}: ${reviewSurah?.name ?? ''}`}
-            style={[styles.review, { borderBottomColor: theme.goldSoft }]}
-            pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
-            {/*
-              The kicker is why this row is here, and saying so is rubric's
-              job — the accent border it used to carry was a card marking
-              itself special, which is what the vermilion word now does
-              without a box.
-            */}
-            <View style={styles.reviewText}>
-              <ThemedText type="caption" themeColor="vermilion" style={styles.kicker}>
-                {t('quran.review.kicker')}
+          <View style={[styles.progress, { borderBottomColor: theme.goldSoft }]}>
+            <View style={styles.bandRow}>
+              {LEARNING_ORDER.map((surah) => (
+                <GirihStar
+                  key={surah.number}
+                  size={15}
+                  filled={isMemorised(surah.number)}
+                  color={theme.gold}
+                  trackColor={theme.goldSoft}
+                />
+              ))}
+            </View>
+            <View style={styles.progressBody}>
+              <ThemedText type="smallBold" style={styles.centred}>
+                {t('quran.progress')
+                  .replace('{done}', String(count))
+                  .replace('{total}', String(LEARNING_ORDER.length))}
               </ThemedText>
-              <ThemedText type="cardTitle">{reviewSurah?.name}</ThemedText>
-              <ThemedText type="small" themeColor="textSecondary">
-                {t(review.neverRecited ? 'quran.review.never' : 'quran.review.stale')}
+              <ThemedText type="small" themeColor="textSecondary" style={styles.centred}>
+                {t('quran.progress.help')}
               </ThemedText>
             </View>
-            <Ionicons name="chevron-forward" size={18} color={theme.textSecondary} />
-          </PressableLink>
-        ) : null}
+          </View>
 
-        <View style={styles.list}>
-          {LEARNING_ORDER.map((surah) => {
-            const done = isMemorised(surah.number);
+          {/*
+            One surah worth reciting again — and never a queue.
 
-            return (
-              <PressableLink
-                key={surah.number}
-                href={{ pathname: '/surah/[number]', params: { number: String(surah.number) } }}
-                accessibilityLabel={`${surah.name}, ${surah.meaning}, ${surah.ayahs.length} ${t('count.ayahs')}`}
-                style={[styles.row, { borderBottomColor: theme.goldSoft }]}
-                pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
-                {/*
-                  The surah's own number, not its position in the list. It is
-                  what it is called in every mushaf and every conversation, and
-                  a reader will meet it long after this screen.
-                */}
-                <ThemedText
-                  type="caption"
-                  themeColor={done ? 'malachite' : 'textSecondary'}
-                  style={styles.number}>
-                  {surah.number}
+            `lib/review.ts` explains the whole design: the schedule is
+            invisible, the slot is always filled and never late, and the
+            sentence is about the surah rather than about the reader. This
+            screen must never grow a count of what is "due"; that is a
+            backlog, and a backlog is a streak wearing different clothes.
+          */}
+          {review ? (
+            <PressableLink
+              href={{ pathname: '/surah/[number]', params: { number: String(review.surah) } }}
+              accessibilityLabel={`${t('quran.review.kicker')}: ${reviewSurah?.name ?? ''}`}
+              style={[styles.review, { borderBottomColor: theme.goldSoft }]}
+              pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
+              <View style={styles.reviewText}>
+                <ThemedText type="caption" themeColor="vermilion" style={styles.kicker}>
+                  {t('quran.review.kicker')}
                 </ThemedText>
-                <View style={styles.rowText}>
-                  <View style={styles.nameRow}>
-                    <ThemedText type="cardTitle">{surah.name}</ThemedText>
+                <ThemedText type="cardTitle">{reviewSurah?.name}</ThemedText>
+                <ThemedText type="small" themeColor="textSecondary">
+                  {t(review.neverRecited ? 'quran.review.never' : 'quran.review.stale')}
+                </ThemedText>
+              </View>
+              <Ionicons name="chevron-forward" size={18} color={theme.textSecondary} />
+            </PressableLink>
+          ) : null}
+
+          <View style={styles.frameGap}>
+            <Frame flush>
+              {LEARNING_ORDER.map((surah, index) => {
+                const done = isMemorised(surah.number);
+                const last = index === LEARNING_ORDER.length - 1;
+
+                return (
+                  <Fragment key={surah.number}>
                     {/*
-                      The Arabic name beside the transliteration, not instead
-                      of it. A convert meets these on a mosque wall and in a
-                      mushaf's contents long before they can read an ayah, and
-                      recognising the shape of الإخلاص is the first Arabic
-                      reading most people do without noticing.
+                      The one red line the whole order needs, where the jump
+                      happens: between Al-Fatihah and An-Nas.
                     */}
-                    <ThemedText type="arabicName" style={styles.nameArabic}>{surah.nameArabic}</ThemedText>
-                  </View>
-                  <ThemedText type="small" themeColor="textSecondary">
-                    {surah.meaning} · {surah.ayahs.length} {t('count.ayahs')}
-                  </ThemedText>
-                </View>
-                {done && (
-                  <ThemedText type="caption" themeColor="malachite">
-                    {t('quran.known')}
-                  </ThemedText>
-                )}
-              </PressableLink>
-            );
-          })}
-        </View>
+                    {index === 1 && (
+                      <View style={[styles.orderRubric, { borderBottomColor: theme.goldSoft }]}>
+                        <Rubric label={t('quran.order')} />
+                      </View>
+                    )}
+                    <PressableLink
+                      href={{ pathname: '/surah/[number]', params: { number: String(surah.number) } }}
+                      accessibilityLabel={`${surah.name}, ${surah.meaning}, ${surah.ayahs.length} ${t(
+                        'count.ayahs',
+                      )}${done ? `. ${t('quran.known')}` : ''}`}
+                      style={[
+                        styles.row,
+                        { borderBottomColor: theme.goldSoft },
+                        last && styles.rowLast,
+                        /* Gilded: how an illuminator marks what is finished. */
+                        done && { backgroundColor: theme.backgroundSelected },
+                      ]}
+                      pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
+                      {/*
+                        The surah's own number, not its position in the list —
+                        it is what it is called in every mushaf — in the same
+                        rosette its ayahs wear on the surah screen.
+                      */}
+                      <MushafRosette label={String(surah.number)} filled={done} size={32} />
+                      <View style={styles.rowText}>
+                        <View style={styles.nameRow}>
+                          <ThemedText type="cardTitle">{surah.name}</ThemedText>
+                          {/*
+                            The Arabic name beside the transliteration, not
+                            instead of it: recognising the shape of الإخلاص is
+                            the first Arabic reading most people do without
+                            noticing.
+                          */}
+                          <ThemedText type="arabicName" style={styles.nameArabic}>
+                            {surah.nameArabic}
+                          </ThemedText>
+                        </View>
+                        <ThemedText type="small" themeColor="textSecondary">
+                          {surah.meaning} · {surah.ayahs.length} {t('count.ayahs')}
+                        </ThemedText>
+                      </View>
+                    </PressableLink>
+                  </Fragment>
+                );
+              })}
+            </Frame>
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -181,10 +196,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   content: {
-    padding: Spacing.four,
+    paddingVertical: Spacing.four,
+    /* Slimmer sides than the app's usual 24: the frame spends its own. */
+    paddingHorizontal: Spacing.three,
     paddingBottom: BottomTabInset + Spacing.four,
-    /* Card joins only — every ruled join lives inside the flush group. */
-    gap: Spacing.two,
     width: '100%',
     maxWidth: MaxContentWidth,
     alignSelf: 'center',
@@ -192,8 +207,29 @@ const styles = StyleSheet.create({
   header: {
     gap: Spacing.two,
     paddingTop: Spacing.four,
-    /* The header owns the air above the panel; a gap paints nothing. */
+    /* The header owns the air above the band; a gap paints nothing. */
     paddingBottom: Spacing.two,
+  },
+  centred: {
+    textAlign: 'center',
+  },
+  progress: {
+    borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+  /*
+    The 38 stars wrap rather than count per row, so a narrow screen makes
+    three quiet rows instead of clipping — the band is data, not a layout.
+  */
+  bandRow: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    gap: Spacing.one,
+    paddingTop: Spacing.three,
+  },
+  progressBody: {
+    gap: 2,
+    padding: Spacing.three,
   },
   review: {
     flexDirection: 'row',
@@ -204,38 +240,25 @@ const styles = StyleSheet.create({
   },
   reviewText: { flex: 1, gap: Spacing.one },
   kicker: { textTransform: 'uppercase', letterSpacing: 1 },
-  /* A panel under the girih band, like the shahada panel on Learn. */
-  progress: {
+  /* The frame's air above, as padding on a wrapper the press never lights. */
+  frameGap: {
+    paddingTop: Spacing.three,
+  },
+  orderRubric: {
+    paddingVertical: Spacing.two,
     borderBottomWidth: StyleSheet.hairlineWidth,
-    overflow: 'hidden',
   },
-  band: {
-    height: 54,
-    overflow: 'hidden',
-  },
-  progressBody: {
-    gap: 2,
-    padding: Spacing.three,
-  },
-  list: {},
-  /*
-    A ruled entry. "Known" used to be an accent border around the whole card;
-    it is now malachite on the number and the trailing word — green appears
-    only when something is right, and a coloured frame said it louder than a
-    fact deserves.
-  */
   row: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: Spacing.three,
     minHeight: 64,
-    paddingVertical: Spacing.three,
+    paddingVertical: Spacing.two,
+    paddingHorizontal: Spacing.three,
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
-  number: {
-    width: 26,
-    textAlign: 'center',
-    fontVariant: ['tabular-nums'],
+  rowLast: {
+    borderBottomWidth: 0,
   },
   rowText: {
     flex: 1,

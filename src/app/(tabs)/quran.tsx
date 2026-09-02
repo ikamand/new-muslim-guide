@@ -1,9 +1,10 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import Svg, { Circle, G, Path, Rect } from 'react-native-svg';
 
-import { GirihStar, HeadpieceMark } from '@/components/illustrations';
+import { HeadpieceMark } from '@/components/illustrations';
 import { Frame, MushafRosette, Rubric, Unwan } from '@/components/jadwal';
 import { PressableLink } from '@/components/pressable-link';
 import { ARABIC_NAME_TRIM, ThemedText } from '@/components/themed-text';
@@ -78,17 +79,7 @@ export default function QuranScreen() {
         */}
         <View>
           <View style={[styles.progress, { borderBottomColor: theme.goldSoft }]}>
-            <View style={styles.bandRow}>
-              {LEARNING_ORDER.map((surah) => (
-                <GirihStar
-                  key={surah.number}
-                  size={15}
-                  filled={isMemorised(surah.number)}
-                  color={theme.gold}
-                  trackColor={theme.goldSoft}
-                />
-              ))}
-            </View>
+            <WoundStrand known={isMemorised} />
             {/* The count is the band's caption, nothing more — the
                 reassurance sentence now closes the frame instead. */}
             <ThemedText type="caption" themeColor="textSecondary" style={styles.bandCount}>
@@ -201,6 +192,135 @@ export default function QuranScreen() {
   );
 }
 
+/*
+  The strand's geometry. Three coils, and the row counts are DERIVED from
+  the learning order's length so a 39th surah could never fall off the
+  thread silently. y-positions and insets are the same constants the thread
+  path is built from — the Awqat rule: a bead cannot sit off the thread,
+  because both are computed from one set of numbers.
+*/
+const STRAND_YS = [18, 56, 94] as const;
+const STRAND_HEIGHT = 126;
+const STRAND_INSET = 26;
+
+function strandRows(total: number): [number, number, number] {
+  const first = Math.ceil(total / 3);
+  const second = Math.ceil((total - first) / 2);
+  return [first, second, total - first - second];
+}
+
+/**
+ * The whole book as one misbaha, wound in three coils.
+ *
+ * 38 beads on one continuous thread: along the top, a turn at the edge,
+ * back along the second row — so the LEARNING ORDER runs along the thread,
+ * and row two reads right-to-left because the strand turned — then a turn,
+ * the last coil, and the tassel after the final bead: An-Naba, the surah
+ * the juz is named for. The strand ends because the juz does.
+ *
+ * A bead gilds the day its surah is marked known: the gold travels down
+ * the strand over years, an illumination the reader lays themselves. The
+ * beads are eight-point stars, not circles — the star is this tab's mark,
+ * shared with the fihrist rosettes below; the thread carries the misbaha
+ * feeling on its own. Duʿa holds the day's short strand, this tab the long
+ * strand of the book (Iyad's ask, 2 Sep: "match the feeling").
+ *
+ * Display-only: at bead size these are not honest tap targets, and the
+ * fihrist below is the navigation. Bead size shrinks with the screen so
+ * the coils can never overflow a narrow phone.
+ */
+function WoundStrand({ known }: { known: (surah: number) => boolean }) {
+  const theme = useTheme();
+  const [width, setWidth] = useState(0);
+
+  const rows = strandRows(LEARNING_ORDER.length);
+  const step = width > 0 ? (width - 2 * STRAND_INSET) / (rows[0] - 1) : 0;
+  const size = Math.min(20, Math.max(12, Math.floor(step - 3)));
+  const arm = size * 0.31;
+
+  const beads: { x: number; y: number; surah: number }[] = [];
+  let index = 0;
+  rows.forEach((count, row) => {
+    for (let i = 0; i < count; i++) {
+      const surah = LEARNING_ORDER[index];
+      if (surah) {
+        beads.push({
+          /* Row two runs right-to-left: the thread turned, and the order
+             follows the thread, never the reading direction. */
+          x: row === 1 ? width - STRAND_INSET - step * i : STRAND_INSET + step * i,
+          y: STRAND_YS[row],
+          surah: surah.number,
+        });
+      }
+      index++;
+    }
+  });
+
+  const xl = STRAND_INSET;
+  const xr = width - STRAND_INSET;
+  const turn1 = (STRAND_YS[1] - STRAND_YS[0]) / 2;
+  const turn2 = (STRAND_YS[2] - STRAND_YS[1]) / 2;
+  const lastX = xl + step * (rows[2] - 1);
+  const tailX = lastX + Math.min(22, step);
+  const tailY = STRAND_YS[2] + 8;
+  const thread =
+    `M ${xl} ${STRAND_YS[0]} H ${xr} ` +
+    `A ${turn1} ${turn1} 0 0 1 ${xr} ${STRAND_YS[1]} H ${xl} ` +
+    `A ${turn2} ${turn2} 0 0 0 ${xl} ${STRAND_YS[2]} H ${lastX + 10} ` +
+    `Q ${tailX - 4} ${STRAND_YS[2]} ${tailX} ${tailY}`;
+
+  return (
+    <View
+      style={styles.strand}
+      accessible={false}
+      importantForAccessibility="no-hide-descendants"
+      onLayout={(event) => setWidth(event.nativeEvent.layout.width)}>
+      {width > 0 && (
+        <Svg width={width} height={STRAND_HEIGHT}>
+          <Path d={thread} stroke={theme.goldSoft} strokeWidth={1.2} fill="none" />
+          {/* The tassel, after the last bead. */}
+          <Path
+            d={`M ${tailX} ${tailY} v 7 m -4 -2 l 4 6 l 4 -6`}
+            stroke={theme.goldSoft}
+            strokeWidth={1}
+            fill="none"
+          />
+          {beads.map((bead) => {
+            const filled = known(bead.surah);
+            return (
+              <G key={bead.surah}>
+                {/* A paper disc: the thread passes behind, never through. */}
+                <Circle cx={bead.x} cy={bead.y} r={size / 2 + 2} fill={theme.background} />
+                <Rect
+                  x={bead.x - arm}
+                  y={bead.y - arm}
+                  width={2 * arm}
+                  height={2 * arm}
+                  fill={filled ? theme.gold : 'none'}
+                  fillOpacity={filled ? 0.85 : 1}
+                  stroke={filled ? undefined : theme.goldSoft}
+                  strokeWidth={filled ? 0 : 1.4}
+                />
+                <Rect
+                  x={bead.x - arm}
+                  y={bead.y - arm}
+                  width={2 * arm}
+                  height={2 * arm}
+                  fill={filled ? theme.gold : 'none'}
+                  fillOpacity={filled ? 0.85 : 1}
+                  stroke={filled ? undefined : theme.goldSoft}
+                  strokeWidth={filled ? 0 : 1.4}
+                  transform={`rotate(45 ${bead.x} ${bead.y})`}
+                />
+              </G>
+            );
+          })}
+        </Svg>
+      )}
+    </View>
+  );
+}
+
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
@@ -223,24 +343,9 @@ const styles = StyleSheet.create({
   progress: {
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
-  /*
-    The 38 stars wrap rather than count per row, so a narrow screen makes
-    three quiet rows instead of clipping — the band is data, not a layout.
-  */
-  bandRow: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    gap: Spacing.one,
-    paddingTop: Spacing.three,
-    /*
-      Wide enough for exactly 19 stars (19×15 + 18×4 = 357), so the 38 wrap
-      as two even rows of 19 — free wrapping broke them 20/18, and the short
-      second row read as an accident rather than a composition (Iyad's
-      device). Narrower screens still wrap naturally inside this cap.
-    */
-    maxWidth: 360,
-    alignSelf: 'center',
+  strand: {
+    height: STRAND_HEIGHT,
+    marginTop: Spacing.two,
   },
   bandCount: {
     textAlign: 'center',

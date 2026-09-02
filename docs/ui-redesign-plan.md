@@ -2861,3 +2861,21 @@ Standing check from his device screenshot: with only Al-Fatihah marked, the
 band's FIRST star should be gold; his screenshot appeared to show the
 second. Likely image scaling — but if the second star is truly gold on
 device, that is an off-by-one to hunt.
+
+---
+
+## 2 Sep 2026 — The wound strand ✅
+
+Iyad asked for bigger band beads over three rows "to match the feeling of
+the duʿa masbahah"; the artifact ("The Wound Strand") showed grid vs strand
+and he chose the strand. Built as `WoundStrand` in quran.tsx: all 38 beads
+on ONE thread wound in three coils — the learning order runs ALONG the
+thread (row two right-to-left, because the strand turned), gold travels
+down it as surahs are marked known, and the tassel follows the last bead
+(An-Naba, the juz's namesake — the strand ends because the juz does).
+Beads stay eight-point stars (this tab's mark); the thread carries the
+misbaha feeling. Row counts DERIVED from LEARNING_ORDER.length; bead size
+scales from the measured width (12–20px) so narrow screens can't overflow;
+positions and path share one set of constants (the Awqat rule). Display
+only — the fihrist is the navigation. Verified 390 + 320; Duʿa tab also
+checked at 320 (bead labels clear, no collisions).

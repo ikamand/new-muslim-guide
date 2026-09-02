@@ -496,9 +496,11 @@ export const EN = {
     fact; "16%" is a verdict, and nobody three weeks into a religion needs a
     phone grading them on it.
   */
-  'quran.title': 'Learn by heart',
-  'quran.intro': 'Al-Fatihah, then the short surahs at the end of the Qur’an, in the order people usually learn them. Start at the top. Al-Fatihah is in every prayer, so it is the one to have first.',
-  'quran.progress': '{done} of {total} learned',
+  /* The tab's own name — a description, never a command (Iyad, 2 Sep). */
+  'quran.title': 'Qur’an',
+  'quran.intro': 'Al-Fatihah and Juz ʿAmma — the short surahs most often recited in prayer.',
+  /* A state, not a task — and the surah screen's own words for it. */
+  'quran.progress': '{done} of {total} known by heart',
   /* The fihrist's one red line: why 114 follows 1. */
   'quran.order': 'then juz 30, backwards',
   /* A mushaf header's third fact, beside name and size. */

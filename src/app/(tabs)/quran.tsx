@@ -3,7 +3,7 @@ import { Fragment } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { GirihStar } from '@/components/illustrations';
+import { GirihStar, HeadpieceMark } from '@/components/illustrations';
 import { Frame, MushafRosette, Rubric, Unwan } from '@/components/jadwal';
 import { PressableLink } from '@/components/pressable-link';
 import { ARABIC_NAME_TRIM, ThemedText } from '@/components/themed-text';
@@ -65,7 +65,11 @@ export default function QuranScreen() {
         {/* The ʿunwān every other tab opens with — this one was the odd
             page out, left-aligned with no rules (Iyad's four-tab review). */}
         <View style={styles.header}>
-          <Unwan title={t('quran.title')} subtitle={t('quran.intro')} />
+          <Unwan
+            title={t('quran.title')}
+            subtitle={t('quran.intro')}
+            headpiece={<HeadpieceMark color={theme.gold} trackColor={theme.goldSoft} />}
+          />
         </View>
 
         {/*
@@ -85,16 +89,13 @@ export default function QuranScreen() {
                 />
               ))}
             </View>
-            <View style={styles.progressBody}>
-              <ThemedText type="smallBold" style={styles.centred}>
-                {t('quran.progress')
-                  .replace('{done}', String(count))
-                  .replace('{total}', String(LEARNING_ORDER.length))}
-              </ThemedText>
-              <ThemedText type="small" themeColor="textSecondary" style={styles.centred}>
-                {t('quran.progress.help')}
-              </ThemedText>
-            </View>
+            {/* The count is the band's caption, nothing more — the
+                reassurance sentence now closes the frame instead. */}
+            <ThemedText type="caption" themeColor="textSecondary" style={styles.bandCount}>
+              {t('quran.progress')
+                .replace('{done}', String(count))
+                .replace('{total}', String(LEARNING_ORDER.length))}
+            </ThemedText>
           </View>
 
           {/*
@@ -184,6 +185,16 @@ export default function QuranScreen() {
               })}
             </Frame>
           </View>
+
+          {/*
+            The one sentence of honesty, at the table's foot — the position
+            Awqat gives its Hijri note. As preamble it was one more strip
+            between the reader and the fihrist; as a colophon it is the last
+            word, which is what reassurance should be.
+          */}
+          <ThemedText type="small" themeColor="textSecondary" style={styles.footNote}>
+            {t('quran.progress.help')}
+          </ThemedText>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -209,9 +220,6 @@ const styles = StyleSheet.create({
     /* The header owns the air above the band; a gap paints nothing. */
     paddingBottom: Spacing.two,
   },
-  centred: {
-    textAlign: 'center',
-  },
   progress: {
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
@@ -234,9 +242,14 @@ const styles = StyleSheet.create({
     maxWidth: 360,
     alignSelf: 'center',
   },
-  progressBody: {
-    gap: 2,
-    padding: Spacing.three,
+  bandCount: {
+    textAlign: 'center',
+    paddingTop: Spacing.two,
+    paddingBottom: Spacing.three,
+  },
+  footNote: {
+    textAlign: 'center',
+    paddingTop: Spacing.three,
   },
   review: {
     flexDirection: 'row',

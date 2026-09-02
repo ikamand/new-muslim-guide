@@ -2835,3 +2835,29 @@ New strings: `adhkar.bead.*` (short captions under 30px beads — mandatory,
 never mystery meat), `duas.group.else`. "After prayer" holds a strand
 position it doesn't truly have (recurs ×5/day) — on record, Iyad may move
 it to the tassel. Verified on web: live-morning light, dead-zone dark.
+
+---
+
+## 2 Sep 2026 — The fihrist's head: description, not command ✅
+
+Two rounds on the artifact "The Fihrist's Head", both Iyad's calls. First
+the structure: the head had become five strips of preamble; now it matches
+Duʿa's pattern — rule, medallion (`HeadpieceMark`, same drawing; per-tab
+variants still open), title, one line, rule, then the star band with its
+count directly under the closing rules (Iyad moved it there from my
+headpiece-slot proposal, for cross-tab consistency with the strand). The
+reassurance sentence moved from preamble to the frame's foot — the Awqat
+colophon position.
+
+Second, the register — Iyad's catch, now a system rule: **Learn instructs;
+the other tabs describe.** "Learn by heart" was a command in a title slot,
+so `quran.title` is now the tab's own name ("Qur'an"), `quran.intro`
+describes — "Al-Fatihah and Juz ʿAmma — the short surahs most often recited
+in prayer" — teaching the name Juz ʿAmma by exposure, and `quran.progress`
+says "known by heart" (a state, the surah screen's own words) instead of
+"learned" (a task). All copy remains Iyad's to reword.
+
+Standing check from his device screenshot: with only Al-Fatihah marked, the
+band's FIRST star should be gold; his screenshot appeared to show the
+second. Likely image scaling — but if the second star is truly gold on
+device, that is an off-by-one to hunt.

@@ -94,7 +94,7 @@ argument that changed it.
 | **3** | [The aligner, for real](#phase-3--the-aligner-for-real) | ✅ Built 29 Aug | OTA |
 | **4** | [The screen](#phase-4--the-screen) | ✅ Built 30 Aug — needs eyes on the dev build | OTA |
 | **5** | [The model as a download](#phase-5--the-model-as-a-download) | ✅ Built 30 Aug — convert-and-self-host still owed pre-ship | **eas build** |
-| **6** | [The classroom](#phase-6--the-classroom-repeat-after-the-reciter) | ✅ Gate measured and passed 2 Sep; the mode is **built the same evening — not yet seen on a phone** | OTA |
+| **6** | [The classroom](#phase-6--the-classroom-repeat-after-the-reciter) | ✅ Built and **seen working on Iyad's phone the same evening** (preview OTA) | OTA |
 
 **The sequencing changed 29 Aug, on instruction.** The original rule — nothing
 past the gate is committed work — was Iyad's to unmake and he unmade it:
@@ -530,7 +530,14 @@ reciter. The real cost is the same one as ever, sharpened: a red mark this
 mode shows wrongly is worse than the silence the follow mode would have
 kept — which is why the spike gates it.
 
-### Built 2 Sep 2026, evening — on the measured scope, not yet seen on a phone
+### Built 2 Sep 2026, evening — and seen working on the phone within the hour
+
+Iyad ran it on the preview build (OTA published by him, fingerprint
+`57541e46…` matching his 30 Aug build exactly): *"this works so much better
+than i expected for a first time build."* That one session is also the
+proof of the one piece no desktop check could reach — the Android mic
+reopening after the reciter's turn, through the re-init workaround below.
+A traced dev-build session remains the tool for any tuning. What was built:
 
 - **`alignClassroom` in `lib/recite-align.ts`** — the strict pass: selector
   leads, lookahead exactly one and it concedes, endings judged (bare always

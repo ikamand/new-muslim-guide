@@ -151,8 +151,9 @@ As of 2 Sep 2026:
   tap-a-word teacher. Measured detail in the phase's section. **Built the same
   evening on that scope** — strict aligner + ten pinned cases, mic
   pause/resume (Android re-init requirement recorded in recite-session.ts),
-  the turn-taking hook, and the two-mode bar. **Not yet seen on a phone**;
-  the live trace cookbook below is how it gets eyes.
+  the turn-taking hook, and the two-mode bar. **Seen working on Iyad's
+  phone the same evening** (preview OTA): "works so much better than i
+  expected." The mic's Android re-init-on-resume is thereby proven live.
 - **Still open from 30 Aug:** the in-card redesign (highlight inside ayah
   cards, pinned controls, surah-wide per-word transliteration) — built,
   **not yet seen on Iyad's phone**. His test and recording are the next

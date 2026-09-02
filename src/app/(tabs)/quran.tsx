@@ -4,7 +4,7 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { GirihStar } from '@/components/illustrations';
-import { Frame, MushafRosette, Rubric } from '@/components/jadwal';
+import { Frame, MushafRosette, Rubric, Unwan } from '@/components/jadwal';
 import { PressableLink } from '@/components/pressable-link';
 import { ARABIC_NAME_TRIM, ThemedText } from '@/components/themed-text';
 import { LEARNING_ORDER } from '@/content/quran/surahs';
@@ -62,11 +62,10 @@ export default function QuranScreen() {
   return (
     <SafeAreaView style={[styles.safeArea, { backgroundColor: theme.background }]} edges={['top']}>
       <ScrollView contentContainerStyle={styles.content}>
+        {/* The ʿunwān every other tab opens with — this one was the odd
+            page out, left-aligned with no rules (Iyad's four-tab review). */}
         <View style={styles.header}>
-          <ThemedText type="subtitle">{t('quran.title')}</ThemedText>
-          <ThemedText type="default" themeColor="textSecondary">
-            {t('quran.intro')}
-          </ThemedText>
+          <Unwan title={t('quran.title')} subtitle={t('quran.intro')} />
         </View>
 
         {/*
@@ -161,7 +160,7 @@ export default function QuranScreen() {
                         it is what it is called in every mushaf — in the same
                         rosette its ayahs wear on the surah screen.
                       */}
-                      <MushafRosette label={String(surah.number)} filled={done} size={32} />
+                      <MushafRosette label={String(surah.number)} filled={done} size={34} />
                       <View style={styles.rowText}>
                         <View style={styles.nameRow}>
                           <ThemedText type="cardTitle">{surah.name}</ThemedText>
@@ -226,6 +225,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     gap: Spacing.one,
     paddingTop: Spacing.three,
+    /*
+      Wide enough for exactly 19 stars (19×15 + 18×4 = 357), so the 38 wrap
+      as two even rows of 19 — free wrapping broke them 20/18, and the short
+      second row read as an accident rather than a composition (Iyad's
+      device). Narrower screens still wrap naturally inside this cap.
+    */
+    maxWidth: 360,
+    alignSelf: 'center',
   },
   progressBody: {
     gap: 2,

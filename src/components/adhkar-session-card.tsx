@@ -166,7 +166,9 @@ const styles = StyleSheet.create({
   */
   card: {
     borderBottomWidth: StyleSheet.hairlineWidth,
-    paddingVertical: Spacing.four,
+    /* Three, not four: with five stacked lines and a button the 24s read as
+       slack rather than calm on the phone (Iyad's four-tab review). */
+    paddingVertical: Spacing.three,
     paddingLeft: Spacing.three,
     gap: Spacing.two,
     overflow: 'hidden',
@@ -179,8 +181,8 @@ const styles = StyleSheet.create({
   rail: {
     position: 'absolute',
     left: 0,
-    top: Spacing.four,
-    bottom: Spacing.four,
+    top: Spacing.three,
+    bottom: Spacing.three,
     width: 2,
   },
   arabic: { textAlign: 'right', writingDirection: 'rtl' },

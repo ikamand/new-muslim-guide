@@ -224,7 +224,9 @@ function Row({
       style={[styles.row, { borderBottomColor: theme.goldSoft }]}
       pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
       <View style={styles.rowHead}>
-        <ThemedText type="default" themeColor={muted ? 'textSecondary' : 'text'}>
+        {/* The rung every other tab's rows wear — at `default` these read a
+            weight lighter than the fihrist and Learn (Iyad's review). */}
+        <ThemedText type="cardTitle" themeColor={muted ? 'textSecondary' : 'text'}>
           {label}
         </ThemedText>
         {/*

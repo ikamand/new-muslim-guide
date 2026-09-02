@@ -2,7 +2,8 @@ import { useFonts } from 'expo-font';
 import { Stack, useRouter } from 'expo-router';
 import * as Notifications from 'expo-notifications';
 import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { useWindowDimensions } from 'react-native';
 
 import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
@@ -149,7 +150,41 @@ function RootStack() {
   );
 }
 
+/*
+  The window's width, but only once it has stopped moving.
+
+  Samsung multi-window (pop-up view, split screen) resizes the activity
+  without the RN surface reliably re-measuring: text painted with stale
+  measurements hard-clips mid-glyph ("Start" as "Sta") and the touch map
+  goes stale with it, so taps land where the tabs USED to be (Iyad's
+  device, 2 Sep — dragging back to fullscreen healed everything, which is
+  the tell that the surface only needed a kick). The debounce keeps a live
+  drag from remounting the tree on every frame; 300ms after the width
+  settles is one kick.
+*/
+function useSettledWidth(): number {
+  const { width } = useWindowDimensions();
+  const [settled, setSettled] = useState(width);
+  useEffect(() => {
+    if (Math.round(width) === Math.round(settled)) return;
+    const timer = setTimeout(() => setSettled(width), 300);
+    return () => clearTimeout(timer);
+  }, [width, settled]);
+  return Math.round(settled);
+}
+
 export default function RootLayout() {
+  /*
+    Keying the stack on the settled width remounts the whole navigation
+    tree when a multi-window resize lands — the same refresh Iyad got by
+    dragging back to fullscreen, delivered automatically. The cost, on
+    purpose: a resize returns the app to the Today tab, which is the price
+    of every native view re-measuring at the new size. The providers stay
+    OUTSIDE the key so settings, observations and the location grant ride
+    through untouched. Width only — the keyboard changes height, rotation
+    is locked, so this key moves exactly when a window is resized.
+  */
+  const settledWidth = useSettledWidth();
   return (
     <LocaleProvider>
       <SettingsProvider>
@@ -160,7 +195,7 @@ export default function RootLayout() {
         <ObservationsProvider>
         <LocationProvider>
           <MemorisedProvider>
-            <RootStack />
+            <RootStack key={settledWidth} />
           </MemorisedProvider>
         </LocationProvider>
         </ObservationsProvider>

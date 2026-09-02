@@ -477,6 +477,38 @@ as لَهَا. If the human takes repeat that, rung 2 hears consonants far bette
 than endings, and the red mark's claims get scoped accordingly. The human
 recordings decide.
 
+### Measured 2 Sep 2026 — Iyad's fifteen takes, and the preview inverted
+
+Recorded on his phone, ordinary room, run the same afternoon. Raw
+transcripts kept in `.cache/recite-spike/out/pairs-*.txt`.
+
+- **Vowel endings: 5 of 6 heard as said.** نَعْبُدَ, نَعْبُدِ, اللَّهَ, الْحَمْدِ and
+  الْحَمْدَ all came back with the deliberate wrong ending written — including
+  اللَّهُ/اللَّهَ, the exact pair the phase opened with. The one miss: the bare
+  اللَّهْ was restored to اللَّهُ, so a *dropped* ending is invisible where a
+  *wrong* one is not (and bare is also the legitimate waqf form, which
+  ear-vs-ear against the reciter's rendition absorbs).
+- **Consonant swaps: 0 of 3.** The flat h, the dropped ʿayn and the س-for-ص
+  were all silently corrected to the proper letters — the model saw through
+  the imitation. The exact opposite of the TTS preview, and the honest
+  caveat cuts both ways: a native speaker *imitating* a convert's error may
+  keep enough of the real phoneme's cues that the model rescues it, while
+  the TTS run shows a truly flat ه does surface. What a genuine convert's
+  mouth produces sits between those two datapoints and is not measurable
+  from this room. Treat letter-quality as UNDETECTABLE until a real
+  learner's recording says otherwise.
+- **Controls: 5 of 6 clean.** The odd one out is a boundary artifact worth
+  remembering when the strict matcher is built: an isolated إِيَّاكَ نَعْبُدُ
+  gained a trailing ه (نَعْبُدُهُ) — a short lone phrase can grow a stray
+  suffix, so the strict matcher's noise tolerance must not read one as a
+  wrong ending.
+
+**What the gate therefore allows red to claim:** skipped and substituted
+words (certain), and wrong short-vowel endings (measured, 5/6). What it may
+NOT claim: letter quality — ح against ه, the ʿayn, the emphatics stay with
+the tap-a-word teacher and the reader's own ear, unmarked. The score's
+honest sentence is "words and endings, confirmed by the ear."
+
 ### Companion piece — tap a word to hear it alone
 
 The classroom's answer to "how do I fix the word it marked": tap it and the

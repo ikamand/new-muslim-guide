@@ -144,9 +144,12 @@ As of 2 Sep 2026:
   leads, red on the passed-over word, ephemeral score) is agreed and
   specified as **Phase 6 of `docs/recite-with-me.md`** — read it there. Its
   gate is the pairs spike (`.cache/recite-spike/run-pairs.sh`, takes in
-  `TAKES.md`), built and proven on synthetic audio the same day; **waiting
-  on Iyad's fifteen minimal-pair recordings.** No app code for the mode
-  exists yet, deliberately.
+  `TAKES.md`), built and proven on synthetic audio the same day — and **run on
+  Iyad's fifteen takes that afternoon: wrong vowel endings are heard 5/6
+  (اللَّهُ/اللَّهَ included), imitated letter-quality errors 0/3, controls 5/6
+  clean.** Red may claim words and endings; letter quality stays with the
+  tap-a-word teacher. Measured detail in the phase's section. No app code
+  for the mode exists yet; the build decision is Iyad's next call.
 - **Still open from 30 Aug:** the in-card redesign (highlight inside ayah
   cards, pinned controls, surah-wide per-word transliteration) — built,
   **not yet seen on Iyad's phone**. His test and recording are the next

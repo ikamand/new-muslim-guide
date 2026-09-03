@@ -77,13 +77,19 @@ export default function ReferenceScreen() {
 
   /*
     The matn: the one section the content file marks `promote: 'hero'`,
-    rendered FIRST inside the drawn frame with "The answer" over it — even
-    when the file places it midway, because the answer leads and the
-    commentary keeps the file's order below (the "Three Readings" design,
-    Iyad, 2 Sep). This is the second attempt at making the hero legible as
-    the page's answer: the first broke the margins and read as inconsistency
-    rather than hierarchy (see constants/teaching.ts). This time the
-    treatment carries its own label.
+    rendered FIRST inside the drawn frame — even when the file places it
+    midway, because the answer leads and the commentary keeps the file's
+    order below (the "Three Readings" design, Iyad, 2 Sep). This is the
+    second attempt at making the hero legible as the page's answer: the
+    first broke the margins and read as inconsistency rather than hierarchy
+    (see constants/teaching.ts).
+
+    The frame carries the section's own question as its heading, like every
+    other section. It briefly carried a label, "The answer", in the
+    heading's place instead (2 Sep), and that hid the question the body was
+    written to answer: the Friday page opened with "No." and nothing above
+    it to say no to (Iyad, 3 Sep). Seventeen of the forty-two heroes read
+    that way. The frame alone says which section is the answer.
 
     A page that marks no hero gets no frame — the design never invents an
     answer. Its facts open the page bare and its questions thread directly,
@@ -131,9 +137,6 @@ export default function ReferenceScreen() {
       {hero ? (
         <View style={styles.matnWrap}>
           <Frame>
-            <ThemedText type="caption" themeColor="gold" style={styles.matnKicker}>
-              {t('teach.answer')}
-            </ThemedText>
             <Section section={hero} matn />
             {/* The vitals live inside the frame: answer, facts, and the
                 one door, in a single box (the tahajjud stress test). */}
@@ -212,9 +215,9 @@ function Section({
 }: {
   section: ReferenceSection;
   /**
-   * Inside the frame the kicker "The answer" replaces the heading: the
-   * question dissolves into the label, which is what the artifact showed
-   * and Iyad approved. Everything else renders as everywhere.
+   * Inside the frame the section prints its hero text in full; that is the
+   * only thing `matn` changes. The heading renders as everywhere — see the
+   * note on the frame above for the label that briefly replaced it.
    */
   matn?: boolean;
 }) {
@@ -269,7 +272,7 @@ function Section({
 
   return (
     <View>
-      {!matn && <TeachingHeading>{section.heading}</TeachingHeading>}
+      <TeachingHeading>{section.heading}</TeachingHeading>
       <TeachingBody last={trailing === 'body'}>{section.body}</TeachingBody>
 
       {heroEntry && (
@@ -343,11 +346,6 @@ const styles = StyleSheet.create({
   },
   matnWrap: {
     marginBottom: Teaching.page.sectionGap,
-  },
-  matnKicker: {
-    textTransform: 'uppercase',
-    letterSpacing: 1,
-    marginBottom: Spacing.two,
   },
   /* Inside the frame the facts end the box; the frame owns the air below. */
   matnFacts: {

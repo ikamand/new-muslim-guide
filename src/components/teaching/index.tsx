@@ -19,7 +19,7 @@
  */
 
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { StyleSheet, View, type StyleProp, type ViewStyle } from 'react-native';
+import { StyleSheet, Text, View, type StyleProp, type ViewStyle } from 'react-native';
 
 import { PressableLink } from '@/components/pressable-link';
 
@@ -28,6 +28,36 @@ import { Radius, Spacing } from '@/constants/theme';
 import { Teaching } from '@/constants/teaching';
 import { useTheme } from '@/hooks/use-theme';
 import type { QuickFact } from '@/content';
+
+/**
+ * Inline emphasis. Content marks a run with `**`, the way a term is set off
+ * in a bullet ("**Mahr** — a gift…") or a phrase inside a sentence ("say
+ * **Allāhu akbar** four times"). Nothing parsed those outside the leading
+ * position of a bullet until 3 Sep, so a funeral page printed the asterisks
+ * around Innā li-llāhi. Every block that can carry body text runs through
+ * this now.
+ *
+ * A bare `Text`, never a `ThemedText`: the run must inherit the size, colour
+ * and line height of whatever it sits in, and a nested `ThemedText` always
+ * applies a rung of its own (see `marked-text.tsx` for the same trap).
+ */
+export function withBold(text: string): React.ReactNode {
+  if (!text.includes('**')) return text;
+  return text
+    .split('**')
+    .map((part, index) =>
+      index % 2 === 1 ? (
+        <Text key={index} style={styles.bold}>
+          {part}
+        </Text>
+      ) : (
+        part
+      ),
+    );
+}
+
+const emphasised = (children: React.ReactNode) =>
+  typeof children === 'string' ? withBold(children) : children;
 
 /** A section heading, and the only accent-coloured text on a page. */
 export function TeachingHeading({ children }: { children: string }) {
@@ -57,7 +87,7 @@ export function TeachingBody({
       type={Teaching.body.type}
       themeColor={muted ? 'textSecondary' : Teaching.body.color}
       style={{ marginBottom: last ? Teaching.page.sectionGap : Teaching.body.gap }}>
-      {children}
+      {emphasised(children)}
     </ThemedText>
   );
 }
@@ -85,7 +115,7 @@ export function TeachingBullet({
       ]}>
       <View style={[styles.bar, { backgroundColor: theme.border }]} />
       <ThemedText type="default" style={styles.bulletText}>
-        {children}
+        {emphasised(children)}
       </ThemedText>
     </View>
   );
@@ -117,7 +147,7 @@ export function TeachingAside({
         { marginBottom: last ? Teaching.page.sectionGap : Teaching.body.gap },
       ]}>
       <ThemedText type={Teaching.aside.type} themeColor="textSecondary">
-        {children}
+        {emphasised(children)}
       </ThemedText>
     </View>
   );
@@ -277,23 +307,15 @@ export function TeachingFacts({
 }
 
 /**
- * A bullet whose lead-in is bold, written as `**Pork** — and anything from it`.
+ * A bullet with a bold run, usually its lead-in: `**Pork**, and anything from
+ * it`. Since 3 Sep the run may sit anywhere in the line, and there may be two.
  *
  * Markdown rather than two fields, because the lead-in is part of the sentence
  * and splitting it in the data would make the content file read worse than the
  * screen does.
  */
 export function TeachingBulletText({ text }: { text: string }) {
-  const match = /^\*\*(.+?)\*\*(.*)$/s.exec(text);
-  if (!match) return <>{text}</>;
-  return (
-    <>
-      <ThemedText type="default" style={styles.lead}>
-        {match[1]}
-      </ThemedText>
-      {match[2]}
-    </>
-  );
+  return <>{withBold(text)}</>;
 }
 
 const styles = StyleSheet.create({
@@ -366,7 +388,7 @@ const styles = StyleSheet.create({
   factEmphasis: {
     fontWeight: '700',
   },
-  lead: {
+  bold: {
     fontWeight: '700',
   },
 });

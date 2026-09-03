@@ -2945,6 +2945,16 @@ and immediately caught `ramadan` carrying two, now on the content-review
 pile. New chrome strings: teach.answer / teach.differs / teach.legend.*
 (draft, Iyad's to reword).
 
+**Corrected 3 Sep — the label is gone.** "The answer" replaced the hero's
+heading, and the heading was the question the body answers. Iyad opened
+the Friday page and read "THE ANSWER … No." with nothing to say no to
+(`learn/jumuah.ts:41` asks "Is this an extra prayer?"). Seventeen of the
+forty-two heroes read that way — bodies opening Yes, No, Because, or a
+fragment. The frame now prints the section's own heading like every other
+section; the frame alone marks which section is the answer. One line in
+`reference/[id].tsx`; `teach.answer` removed from ui.ts. The paragraph
+above is kept as written because it was quoted to Iyad as approved.
+
 ---
 
 ## 3 Sep 2026 — One evidence grammar: the name-line and the sheet ✅

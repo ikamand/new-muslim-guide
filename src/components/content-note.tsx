@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 
 import { SourceLines } from '@/components/source-list';
+import { withBold } from '@/components/teaching';
 import { ThemedText } from '@/components/themed-text';
 import { hasMore, type Attribution, type ContentNote } from '@/content';
 import { Radius, Spacing } from '@/constants/theme';
@@ -62,7 +63,7 @@ export function ContentNoteCard({ entry }: { entry: ContentNote }) {
   return (
     <View style={[styles.note, { borderLeftColor: rail }]}>
       <ThemedText type="small" themeColor="textSecondary">
-        {entry.text}
+        {withBold(entry.text)}
       </ThemedText>
 
       {expandable && (

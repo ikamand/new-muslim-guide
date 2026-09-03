@@ -2973,3 +2973,20 @@ verses), what-breaks (multi-source line wraps to two lines), tahajjud
 (fallback label), pray renders. The sheet is a modal — the page never
 moves under a finger. Held, review-gated: the collection-literacy lines
 ("ṣaḥīḥ means the chain is authenticated") — designed, not shipped.
+
+---
+
+## 3 Sep 2026 — The Underdrawing: sketched titles on the blank lines ✅
+
+Iyad's device review named the written page's recorded risk — "a bit hard
+to know what's going on at first sight" — and chose the recorded retreat
+from the three artifact ideas ("The Legible Chapter"): `BlankLine` became
+`SketchedLine`, the lesson's title in faint ink (opacity 0.55) on its
+ragged rule — a scribe's underdrawing. Three states now read at a glance:
+inked, at the pen, sketched. The surface preview returned (janāzah visible
+again), and sketched lines are PRESSABLE — a named line will be tapped,
+and nothing is locked. The whole-book arcade untouched, per Iyad.
+Considered and held: the Numbered Chapter (safest, drains the poetry) and
+the Pen Alone (the future simplification, in the drawer); the one-time
+self-writing ink animation noted as an optional spice, not built.
+Verified light + dark at 390.

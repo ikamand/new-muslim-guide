@@ -201,21 +201,45 @@ function QalamLine({ lesson, fraction }: { lesson: ResolvedLesson; fraction: num
 */
 const RAGGED = ['88%', '96%', '74%'] as const;
 
-/** An unread lesson: blank ruled paper. Deliberately unnamed and inert. */
-function BlankLine({ index }: { index: number }) {
+/**
+ * An unread lesson: its title sketched in faint ink on a ruled line — a
+ * scribe's underdrawing, waiting to be gilded.
+ *
+ * These began as bare blank rules ("paper waiting, not homework owed"),
+ * and Iyad's device review found the cost: the chapter was a riddle at
+ * first sight (3 Sep — the retreat recorded the day the page shipped).
+ * With the titles whispering, the three states read at a glance — inked,
+ * at the pen, sketched — and the surface preview returns: the person
+ * whose friend dies on Tuesday can SEE "When someone dies" waiting.
+ *
+ * Pressable, unlike the bare rules: nothing here is locked, and a line
+ * that shows a name will be tapped — a named line that answers nothing
+ * reads as broken, where an unnamed one read as paper.
+ */
+function SketchedLine({ lesson, index }: { lesson: ResolvedLesson; index: number }) {
   const theme = useTheme();
+  const { t } = useLocale();
+  const label = lessonLabel(lesson, t);
   return (
-    <View
+    <PressableLink
+      href={routeFor(lesson.entry)}
+      accessibilityLabel={label}
       style={styles.blankLine}
-      accessibilityElementsHidden
-      importantForAccessibility="no-hide-descendants">
+      pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
+      <ThemedText
+        type="default"
+        themeColor="textSecondary"
+        numberOfLines={1}
+        style={styles.sketchTitle}>
+        {label}
+      </ThemedText>
       <View
         style={[
           styles.blankRule,
           { backgroundColor: theme.goldSoft, width: RAGGED[index % RAGGED.length] },
         ]}
       />
-    </View>
+    </PressableLink>
   );
 }
 
@@ -256,7 +280,7 @@ function ChapterBlock({
         ) : lesson.key === next.key ? (
           <QalamLine key={lesson.key} lesson={lesson} fraction={fraction} />
         ) : (
-          <BlankLine key={lesson.key} index={index} />
+          <SketchedLine key={lesson.key} lesson={lesson} index={index} />
         ),
       )}
     </View>
@@ -597,7 +621,13 @@ const styles = StyleSheet.create({
   blankLine: {
     minHeight: 34,
     justifyContent: 'flex-end',
-    paddingBottom: Spacing.two + Spacing.one,
+    gap: Spacing.half,
+    paddingBottom: Spacing.two,
+  },
+  /* The whisper: present enough to name the line, faint enough to stay
+     unwritten. Checked by lamplight — too faint and dark mode loses it. */
+  sketchTitle: {
+    opacity: 0.55,
   },
   blankRule: {
     height: StyleSheet.hairlineWidth,

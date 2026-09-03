@@ -3027,3 +3027,27 @@ and the HadeethEnc cache (all three call paths: by-id, matn search, EN
 pull) — after a 15-minute stall against the same Cloudflare weather.
 content:verify against live remains the arbiter. ⚠️ All app-voice prose on
 the five pages awaits scholarly review.
+
+---
+
+## 3 Sep 2026 — The writing sweep ✅
+
+Iyad read the Friday page and asked where "No." came from and what "The
+answer" answered. Two page bugs (the matn label hiding the question — see
+the correction under 2 Sep; `**bold**` only parsed at the head of a
+bullet) and one register problem: accurate, warm prose that read as
+machine-written for a handful of habits repeated on every page — 239
+em-dash hinges, epigram closers, the app narrating its own editorial
+reasoning, eight "This note used to say…" changelog sentences inside
+"Learn more", a file path and CLAUDE.md inside source notes, five prayers
+spelt three ways each.
+
+All 45 Learn pages, the six pray references, the four guides, the prayer
+notes, pillars and ui.ts were rewritten by hand to `docs/writing.md`. Every
+fact, citation and note structure stayed where it was; only the English
+moved. `style:check` now fails on the checkable habits (em-dash hinge,
+unpaired bold, file path, revision history, reviewer language, capitals
+for emphasis, spelling variants) — proven by planting a violation and
+watching it exit 1. Verified with eyes on web: jumuah (question above
+"No.", verse below), janazah (bold phrase, no asterisks). Everything ships
+by OTA. Substance is untouched and still owes its scholarly read.

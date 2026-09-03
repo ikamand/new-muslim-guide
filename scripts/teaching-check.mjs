@@ -119,6 +119,94 @@ for (const file of styleFiles) {
 }
 
 
+/* ─────────────────────────────────────────────────────────────
+   Prose — the register holds only if slips FAIL. docs/writing.md.
+
+   Every rule here names a habit the 3 Sep sweep found repeated across
+   forty pages: the em-dash hinge, asterisks printed on screen, a file
+   path inside a source note, "This note used to say…" shown to a reader,
+   the same prayer spelt three ways. Strings only — comments are free to
+   say anything. Publishers' text (evidence.ts, hisn.ts, juz30.ts) is not
+   scanned; it is not ours to edit.
+   ───────────────────────────────────────────────────────────── */
+
+const PROSE_FILES = [
+  ...walkSrc('src/content/learn'),
+  'src/content/references.ts',
+  'src/content/wudu.ts',
+  'src/content/ghusl.ts',
+  'src/content/tayammum.ts',
+  'src/content/shahada.ts',
+  'src/content/prayers.ts',
+  'src/content/pillars.ts',
+  'src/content/iman.ts',
+  'src/content/phrases.ts',
+  'src/i18n/ui.ts',
+];
+
+const SPELLINGS = [
+  ['Ḏuhr', 'Dhuhr'],
+  ['ʿIshāʾ', 'ʿIsha'],
+  ['ʿIshaʾ', 'ʿIsha'],
+  ['Makkah', 'Mecca'],
+  ['Al-Fātiḥah', 'Al-Fatihah'],
+  ['khuṭbah', 'khutbah'],
+  ['adhān', 'adhan'],
+  ['janāzah', 'janazah'],
+  ['takbīr', 'takbir'],
+  ['iqāmah', 'iqamah'],
+  ['Muḥarram', 'Muharram'],
+  ['Shawwāl', 'Shawwal'],
+  ['ʿĀshūrāʾ', 'ʿAshuraʾ'],
+];
+
+const PROSE_RULES = [
+  { name: 'em-dash hinge', re: / — /, fix: 'write the sentence: a full stop, a colon or a comma' },
+  { name: 'unpaired **', test: (s) => (s.match(/\*\*/g) ?? []).length % 2 === 1, fix: 'bold markers come in pairs' },
+  { name: 'file path in reader text', re: /\.tsx?\b|CLAUDE\.md|`[\w./-]+`/, fix: 'name the page, not the file' },
+  {
+    name: 'revision history in reader text',
+    re: /\b(This (note|lesson|section|app|guide|page) (used to|said)|The app used to|used to (say|give|weigh|set out|be filed))\b/,
+    fix: 'the reader gets the current answer; git holds the story',
+  },
+  { name: 'reviewer language', re: /claiming no(thing about the ruling| textual authority)/, fix: 'say "not a ruling"' },
+  {
+    name: 'capitals for emphasis',
+    re: /\b(?!USD|GBP|EUR|CAD|AUD|PKR|INR|MYR|ZAR|AED|CE|MB|CSV|UTC)[A-Z]{3,}\b/,
+    fix: 'stress belongs in the shape of the sentence',
+  },
+  ...SPELLINGS.map(([variant, canon]) => ({
+    name: `spelling "${variant}"`,
+    re: new RegExp(variant.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')),
+    fix: `spell it "${canon}" in prose`,
+    allow: { 'src/content/phrases.ts': 'the said/reply fields are transliterations' },
+  })),
+  {
+    name: 'spelling "salām"',
+    re: /\bsalām\b/,
+    fix: 'spell it "salam" in prose',
+    allow: { 'src/content/phrases.ts': 'the said/reply fields are transliterations' },
+  },
+];
+
+const stripComments = (src) =>
+  src.replace(/\/\*[\s\S]*?\*\//g, (m) => m.replace(/[^\n]/g, ' ')).replace(/^\s*\/\/.*$/gm, '');
+
+for (const file of PROSE_FILES) {
+  const src = stripComments(readFileSync(join(root, file), 'utf8'));
+  const literal = /'((?:[^'\\\n]|\\.)*)'|"((?:[^"\\\n]|\\.)*)"|`((?:[^`\\]|\\.)*)`/g;
+  for (const m of src.matchAll(literal)) {
+    const text = m[1] ?? m[2] ?? m[3] ?? '';
+    if (text.length < 20) continue;
+    const line = src.slice(0, m.index).split('\n').length;
+    for (const rule of PROSE_RULES) {
+      if (rule.allow && file in rule.allow) continue;
+      const hit = rule.test ? rule.test(text) : rule.re.test(text);
+      if (hit) errors.push(`${file}:${line} ${rule.name} — ${rule.fix}\n    ${text.slice(0, 90)}`);
+    }
+  }
+}
+
 for (const page of pages) {
   if (!page?.id) continue;
 

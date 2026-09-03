@@ -325,6 +325,9 @@ anyone cared.
   content or layout invariant is agreed, add it to a script that exits
   non-zero. `arabic`, `audio:manifest`, `content:verify` and `style:check` all
   exist because a sentence in a document does not stop anything.
+  `style:check` also guards the prose register since 3 Sep — no em-dash
+  hinges, no file paths or revision history in reader text, one spelling per
+  name. `docs/writing.md` says what the register is and why each rule exists.
 - **When you cannot see the result, build less — and say so first.** The
   failure is not "did not look at a screen"; it is building thirty pages that
   could not be looked at and calling green checks verification. If there is no

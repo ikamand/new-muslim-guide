@@ -2944,3 +2944,32 @@ of the data and was dropped. No hero → no frame, facts open bare.
 and immediately caught `ramadan` carrying two, now on the content-review
 pile. New chrome strings: teach.answer / teach.differs / teach.legend.*
 (draft, Iyad's to reword).
+
+---
+
+## 3 Sep 2026 — One evidence grammar: the name-line and the sheet ✅
+
+Iyad's design, from the "Evidence Sheet" artifact, applied to ALL learning
+content as the standing rule: **the matn prints its hero text; every other
+citation is a name on the page — one quiet accent line per section — and
+the sheet behind it holds the texts.** Built as `EvidenceLine` in
+source-list.tsx (line + RN Modal sheet; the sheet's body IS `SourceLines`,
+so evidence renders exactly as note cards always have — grading included,
+publishers on Settings → Sources per Iyad's call, credit still riding in
+the data on every text).
+
+**Enforced by absence:** `SourceDisclosure` and `TeachingFoldedSource` are
+DELETED, not deprecated — future code cannot regress to the two-fold
+confusion because the components no longer exist. Swapped at every call
+site: reference sections (all 53 pages), guide steps, pray's rawatib. The
+reference page's second printed quote died with them (the sneeze narration
+now lives in section 2's sheet); the claimed-set page-level dedup went too,
+since only the matn prints. Line short-names: hadith without its grading
+parenthetical, scholarly by author, `general` unnamed (label falls back to
+"Where this comes from" — tahajjud shows it).
+
+Verified with eyes: food (matn line QUR'AN 5:3 · 5:90 → sheet with full
+verses), what-breaks (multi-source line wraps to two lines), tahajjud
+(fallback label), pray renders. The sheet is a modal — the page never
+moves under a finger. Held, review-gated: the collection-literacy lines
+("ṣaḥīḥ means the chain is authenticated") — designed, not shipped.

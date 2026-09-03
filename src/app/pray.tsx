@@ -4,7 +4,7 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 
 import { Glyph, type GlyphName } from '@/components/illustrations';
 import { PressableLink } from '@/components/pressable-link';
-import { SourceDisclosure } from '@/components/source-list';
+import { EvidenceLine } from '@/components/source-list';
 import { ThemedText } from '@/components/themed-text';
 import { DAILY_PRAYERS, RAWATIB_SOURCES, resolveRef, VOLUNTARY_PRAYERS } from '@/content';
 import { ref, type ContentRef } from '@/content/model';
@@ -204,7 +204,7 @@ export default function PrayScreen() {
         <ThemedText type="small" themeColor="textSecondary" style={styles.footnote}>
           {t('pray.rawatib')}
         </ThemedText>
-        <SourceDisclosure sources={RAWATIB_SOURCES} />
+        <EvidenceLine sources={RAWATIB_SOURCES} />
       </View>
 
       {/*

@@ -19,8 +19,7 @@
  */
 
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { useState } from 'react';
-import { Pressable, StyleSheet, View, type StyleProp, type ViewStyle } from 'react-native';
+import { StyleSheet, View, type StyleProp, type ViewStyle } from 'react-native';
 
 import { PressableLink } from '@/components/pressable-link';
 
@@ -297,90 +296,7 @@ export function TeachingBulletText({ text }: { text: string }) {
   );
 }
 
-/**
- * A narration that is on the page but not opened yet.
- *
- * ## Why it does not preview the Arabic
- *
- * The first draft showed the opening words. Every hadith in the corpus opens
- * with its isnad — `حَدَّثَنَا آدَمُ بْنُ أَبِي إِيَاسٍ` is "Adam ibn Abi Iyas narrated
- * to us" — so the preview was a chain of transmitters and none of the saying,
- * which is the least informative part of the text. Truncating right-to-left
- * Arabic with a trailing ellipsis was confusing on top of that.
- *
- * So it shows the reference and says what it is. That is enough to know
- * something is there and to decide to open it, which is the whole job.
- *
- * ## Why it exists at all
- *
- * Ramadan cites twelve texts. At quote weight that page is a wall of Arabic
- * and nobody reads any of it. A long narration or the third citation in one
- * section folds; everything else is printed.
- *
- * This is NOT the old drawer. The drawer gave no hint that anything was inside
- * it, which is how 18 Sahih Muslim citations rendered the wrong narration for
- * months without anyone seeing. This names the collection and the number on
- * the page.
- */
-export function TeachingFoldedSource({
-  arabic,
-  translation,
-  reference,
-  label,
-}: {
-  arabic: string;
-  translation?: string;
-  reference: string;
-  label: string;
-}) {
-  const theme = useTheme();
-  const [open, setOpen] = useState(false);
-
-  if (open) return <TeachingSource arabic={arabic} translation={translation} reference={reference} />;
-
-  return (
-    <Pressable
-      onPress={() => setOpen(true)}
-      accessibilityRole="button"
-      accessibilityLabel={`${label}. ${reference}`}
-      style={({ pressed }) => [
-        styles.folded,
-        { borderColor: theme.border, backgroundColor: pressed ? theme.backgroundSelected : 'transparent' },
-      ]}>
-      <View style={styles.foldedText}>
-        <ThemedText type="caption" themeColor="accent">
-          {reference.toUpperCase()}
-        </ThemedText>
-        <ThemedText type="small" themeColor="textSecondary">
-          {label}
-        </ThemedText>
-      </View>
-      <Ionicons name="chevron-down" size={18} color={theme.accent} />
-    </Pressable>
-  );
-}
-
 const styles = StyleSheet.create({
-  folded: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: Teaching.factRow.gap,
-    paddingVertical: Spacing.three - 4,
-    paddingHorizontal: Teaching.source.paddingH,
-    borderRadius: Radius.small,
-    borderWidth: StyleSheet.hairlineWidth,
-    /*
-      The same gap the opened block takes, for two reasons. It is a collapsed
-      `TeachingSource`, so anything else makes the page jump on tap — this was
-      10 against the opened block's 30. And it ends a section often enough that
-      the smaller number left it crowding the next heading.
-    */
-    marginBottom: Teaching.page.sectionGap,
-  },
-  foldedText: {
-    flex: 1,
-    gap: 2,
-  },
   bullet: {
     flexDirection: 'row',
     gap: Teaching.bullet.gap,

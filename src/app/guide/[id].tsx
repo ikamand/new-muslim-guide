@@ -7,7 +7,7 @@ import { PostureDiagram, RakahProgress } from '@/components/illustrations';
 import { PressableLink } from '@/components/pressable-link';
 import { RecitationCard } from '@/components/recitation-card';
 import { ContentNoteCard } from '@/components/content-note';
-import { SourceDisclosure } from '@/components/source-list';
+import { EvidenceLine } from '@/components/source-list';
 import { ThemedText } from '@/components/themed-text';
 import { TranslationGap } from '@/components/translation-gap';
 import { getGuide, resolveNotes, type Posture } from '@/content';
@@ -257,7 +257,7 @@ export default function GuideScreen() {
           where the instruction comes from, and where the wording does — but a
           reader on a prayer mat is asking one.
         */}
-        <SourceDisclosure
+        <EvidenceLine
           sources={[...(step.sources ?? []), ...(step.says?.sources ?? [])]}
         />
 

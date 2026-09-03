@@ -1,6 +1,6 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useState } from 'react';
-import { Pressable, StyleSheet, View, type StyleProp, type ViewStyle } from 'react-native';
+import { Modal, Pressable, ScrollView, StyleSheet, View, type StyleProp, type ViewStyle } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { formatSource, type Source } from '@/content';
@@ -170,24 +170,25 @@ function EvidenceBlock({
 }
 
 /**
- * The same list, folded away until asked for.
+ * One quiet line of names, and the sheet behind it.
  *
- * Deliberately not shown by default. Someone learning to pray is holding a
- * phone mid-motion and does not need a citation block between them and the
- * next instruction — but the person who wants to know whether the app is
- * making this up should never have to take its word for it. One quiet line
- * settles both.
+ * The single grammar for every citation on a learning screen, decided by
+ * Iyad on 3 Sep after the two-fold confusion: the collection and number
+ * stay visible on the page — the lesson of the drawer that hid eighteen
+ * wrong narrations — and the texts wait behind ONE tap, in a sheet.
  *
- * Renders nothing at all when there is nothing to show, so a screen can drop
- * it in unconditionally.
+ * A sheet and not an inline unfold, because the page must never move under
+ * the reader's finger (the tier-accordion lesson), and because a modal is
+ * this app's grammar for a detour that returns you — the reciter and Ask
+ * both say so. Inside, `SourceLines` renders every citation exactly as the
+ * note cards always have: the name, the text where the app holds one, the
+ * grading. Publishers stay on Settings → Sources.
+ *
+ * Renders nothing at all when there is nothing to show, so a screen can
+ * drop it in unconditionally.
  */
-export function SourceDisclosure({
+export function EvidenceLine({
   sources,
-  /**
-   * The caller's gap, for a layout where this ends a block. The component
-   * carries no bottom margin of its own because three of the four screens
-   * using it put it last on the screen, where a trailing margin is dead space.
-   */
   style,
 }: {
   sources: readonly Source[];
@@ -198,52 +199,120 @@ export function SourceDisclosure({
   const [open, setOpen] = useState(false);
 
   // Deduplicated by the line a reader would see: a step and the recitation
-  // inside it often cite the same page, and printing it twice looks like an
-  // error rather than like thoroughness.
+  // inside it often cite the same page.
   const distinct = [
     ...new Map(sources.map((source) => [formatSource(source), source])).values(),
   ];
 
   if (distinct.length === 0) return null;
 
+  /*
+    Short names for the line: the grading parenthetical belongs in the
+    sheet, a scholarly work's full title would wrap the line to four, and a
+    `general` source has no name at all — it is reasoning, and it shows
+    inside the sheet only.
+  */
+  const names = distinct
+    .map((source) => {
+      if (source.kind === 'general') return undefined;
+      if (source.kind === 'scholarly') return source.author ?? source.work;
+      return formatSource(source).replace(/\s*\(.*\)$/, '');
+    })
+    .filter((name): name is string => Boolean(name));
+  const label = names.length > 0 ? names.join(' · ') : t('note.sources');
+
   return (
-    <View style={[styles.wrapper, style]}>
+    <>
       <Pressable
-        onPress={() => setOpen((current) => !current)}
-        style={({ pressed }) => [styles.toggle, { opacity: pressed ? 0.6 : 1 }]}
-        accessibilityRole="button">
-        <ThemedText type="small" themeColor="textSecondary">
-          {t('note.sources')}
+        onPress={() => setOpen(true)}
+        accessibilityRole="button"
+        accessibilityLabel={`${t('note.sources')}. ${label}`}
+        style={({ pressed }) => [styles.line, { opacity: pressed ? 0.6 : 1 }, style]}>
+        <View style={[styles.lineDash, { backgroundColor: theme.accent }]} />
+        <ThemedText type="caption" themeColor="accent" style={styles.lineNames} numberOfLines={2}>
+          {label.toUpperCase()}
         </ThemedText>
-        <Ionicons
-          name={open ? 'chevron-up' : 'chevron-down'}
-          size={12}
-          color={theme.textSecondary}
-        />
+        <Ionicons name="chevron-forward" size={12} color={theme.accent} />
       </Pressable>
 
-      {open && (
-        <View style={styles.block}>
-          <SourceLines sources={distinct} showLabel={false} />
+      <Modal
+        visible={open}
+        transparent
+        animationType="slide"
+        onRequestClose={() => setOpen(false)}>
+        <View style={styles.sheetRoot}>
+          <Pressable
+            style={[StyleSheet.absoluteFill, { backgroundColor: theme.scrim }]}
+            onPress={() => setOpen(false)}
+            accessibilityRole="button"
+            accessibilityLabel={t('windows.close')}
+          />
+          <View
+            style={[
+              styles.sheet,
+              { backgroundColor: theme.backgroundElement, borderColor: theme.border },
+            ]}>
+            <View style={[styles.grabber, { backgroundColor: theme.border }]} />
+            <ThemedText type="caption" themeColor="gold" style={styles.sheetTitle}>
+              {t('note.sources')}
+            </ThemedText>
+            <ScrollView contentContainerStyle={styles.sheetScroll}>
+              <SourceLines sources={distinct} showLabel={false} />
+            </ScrollView>
+          </View>
         </View>
-      )}
-    </View>
+      </Modal>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
-  wrapper: {
-    gap: Spacing.one,
-  },
-  toggle: {
+  line: {
     flexDirection: 'row',
     alignItems: 'center',
-    alignSelf: 'flex-start',
-    gap: Spacing.one,
-    // Same reasoning as the note card: the row is small text, and the padding
-    // is what makes the tap target reachable.
+    gap: Spacing.two,
+    /* Small text; the padding is what makes the tap target reachable. */
     paddingVertical: Spacing.two,
     paddingRight: Spacing.three,
+  },
+  lineDash: {
+    width: 16,
+    height: 1,
+    opacity: 0.7,
+  },
+  lineNames: {
+    flexShrink: 1,
+    letterSpacing: 0.4,
+  },
+  sheetRoot: {
+    flex: 1,
+    justifyContent: 'flex-end',
+  },
+  sheet: {
+    borderTopLeftRadius: Radius.medium,
+    borderTopRightRadius: Radius.medium,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderBottomWidth: 0,
+    maxHeight: '80%',
+    paddingTop: Spacing.two,
+    paddingHorizontal: Spacing.four,
+    paddingBottom: Spacing.five,
+    gap: Spacing.two,
+  },
+  grabber: {
+    width: 40,
+    height: 4,
+    borderRadius: 2,
+    alignSelf: 'center',
+  },
+  sheetTitle: {
+    textAlign: 'center',
+    textTransform: 'uppercase',
+    letterSpacing: 1,
+    paddingVertical: Spacing.two,
+  },
+  sheetScroll: {
+    paddingBottom: Spacing.four,
   },
   block: {
     gap: Spacing.one,

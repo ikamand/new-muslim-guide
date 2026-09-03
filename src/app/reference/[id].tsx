@@ -6,14 +6,13 @@ import { Frame, QuietRow, Rosette } from '@/components/jadwal';
 import { LessonEnd } from '@/components/lesson-end';
 import { LessonScroll } from '@/components/lesson-scroll';
 import { RecitationCard } from '@/components/recitation-card';
-import { SourceDisclosure, evidenceFor } from '@/components/source-list';
+import { EvidenceLine, evidenceFor } from '@/components/source-list';
 import {
   TeachingAside,
   TeachingBody,
   TeachingBullet,
   TeachingBulletText,
   TeachingFacts,
-  TeachingFoldedSource,
   TeachingHeading,
   TeachingSource,
 } from '@/components/teaching';
@@ -101,21 +100,6 @@ export default function ReferenceScreen() {
     resolveNotes(section.note, section.notes).some((entry) => entry.kind === 'differs');
   const pageDiffers = reference.sections.some(sectionDiffers);
 
-  /*
-    Which section prints which citation, decided once for the whole page —
-    in RENDER order, so the matn claims its evidence first and a later
-    section citing the same verse folds away, never the other way round.
-  */
-  const claimed = new Set<string>();
-  const printableFor = (section: ReferenceSection) =>
-    (section.sources ?? []).filter((entry) => {
-      if (evidenceFor(entry) === undefined) return false;
-      const key = formatSource(entry);
-      if (claimed.has(key)) return false;
-      claimed.add(key);
-      return true;
-    });
-
   return (
     <LessonScroll lessonKey={`reference:${reference.id}`} contentContainerStyle={styles.content}>
       <Stack.Screen options={{ title: reference.title }} />
@@ -150,7 +134,7 @@ export default function ReferenceScreen() {
             <ThemedText type="caption" themeColor="gold" style={styles.matnKicker}>
               {t('teach.answer')}
             </ThemedText>
-            <Section section={hero} printable={printableFor(hero)} matn />
+            <Section section={hero} matn />
             {/* The vitals live inside the frame: answer, facts, and the
                 one door, in a single box (the tahajjud stress test). */}
             {reference.quickFacts && (
@@ -183,7 +167,7 @@ export default function ReferenceScreen() {
                     {t('teach.differs')}
                   </ThemedText>
                 )}
-                <Section section={section} printable={printableFor(section)} />
+                <Section section={section} />
               </View>
             </View>
           ))}
@@ -224,12 +208,9 @@ export default function ReferenceScreen() {
  */
 function Section({
   section,
-  printable,
   matn = false,
 }: {
   section: ReferenceSection;
-  /** The citations THIS section prints — the page decides, not the section. */
-  printable: readonly Source[];
   /**
    * Inside the frame the kicker "The answer" replaces the heading: the
    * question dissolves into the label, which is what the artifact showed
@@ -240,28 +221,21 @@ function Section({
   const sources = section.sources ?? [];
 
   /*
-    Every citation that HAS a text goes on the page. The drawer keeps only the
-    ones that have none — scholarly opinions and plain reasoning.
-
-    The app carried 125 verses and narrations and printed 48 of them. The other
-    77 sat inside a collapsed "Where this comes from" beneath prose that
-    paraphrased them, which is how eighteen Sahih Muslim citations rendered
-    entirely unrelated narrations for months without anyone seeing.
-
-    Weight is decided here rather than in the content, because it depends on
-    the length of a text nobody typed and on how many a section ended up with:
-
-      hero    the page's answer, breaking the margins. One per page, and the
-              only one the content file chooses.
-      quote   the default. Printed in full, under the paragraph it supports.
-      folded  a very long narration, or the third in one section. Named on the
-              page and opened with a tap, so Ramadan's twelve texts do not
-              become a wall of Arabic nobody reads.
+    One grammar for every citation, Iyad's rule (3 Sep): the matn prints its
+    hero text because the framed answer IS the page; every other citation —
+    on every section, matn included — is a name in one quiet line, and the
+    sheet behind it holds the texts. The folded cards and the "Where this
+    comes from" toggle both died into it; a page's evidence footprint is now
+    exactly one line per section.
   */
-  const withText = printable
-    .map((source) => ({ source, text: evidenceFor(source) }))
-    .filter((entry): entry is { source: Source; text: EvidenceText } => entry.text !== undefined);
-  const withoutText = sources.filter((source) => evidenceFor(source) === undefined);
+  const heroEntry = matn
+    ? sources
+        .map((source) => ({ source, text: evidenceFor(source) }))
+        .find((entry): entry is { source: Source; text: EvidenceText } => entry.text !== undefined)
+    : undefined;
+  const lineSources = heroEntry
+    ? sources.filter((source) => source !== heroEntry.source)
+    : sources;
 
   const notes = resolveNotes(section.note, section.notes);
   const bullets = section.bullets ?? [];
@@ -281,15 +255,15 @@ function Section({
     Computed once here, in render order, and read by every block.
   */
   const trailing: Trailing =
-    withoutText.length > 0
-      ? 'sources'
+    lineSources.length > 0
+      ? 'line'
       : notes.length > 0
         ? 'notes'
         : section.says
           ? 'says'
           : bullets.length > 0
             ? 'bullets'
-            : withText.length > 0
+            : heroEntry
               ? 'texts'
               : 'body';
 
@@ -298,39 +272,14 @@ function Section({
       {!matn && <TeachingHeading>{section.heading}</TeachingHeading>}
       <TeachingBody last={trailing === 'body'}>{section.body}</TeachingBody>
 
-      {withText.map(({ source, text }, index) => {
-        const isHero = index === 0 && section.promote === 'hero';
-        const tooLong = text.arabic.length > LONG_NARRATION;
-        /*
-          Inside the matn frame only the hero text prints — the food page's
-          answer cites THREE verses, and printing them all made the frame two
-          screens tall, which is a wall wearing a frame. The others fold,
-          named, one tap away.
-        */
-        const deepInSection = index >= (matn ? 1 : 2);
-
-        if (!isHero && (tooLong || deepInSection)) {
-          return (
-            <TeachingFoldedSource
-              key={formatSource(source)}
-              arabic={text.arabic}
-              translation={text.translation}
-              reference={formatSource(source)}
-              label={source.kind === 'quran' ? 'Read the verse' : 'Read the narration'}
-            />
-          );
-        }
-
-        return (
-          <TeachingSource
-            key={formatSource(source)}
-            variant={isHero ? 'hero' : 'quote'}
-            arabic={text.arabic}
-            translation={text.translation}
-            reference={formatSource(source)}
-          />
-        );
-      })}
+      {heroEntry && (
+        <TeachingSource
+          variant="hero"
+          arabic={heroEntry.text.arabic}
+          translation={heroEntry.text.translation}
+          reference={formatSource(heroEntry.source)}
+        />
+      )}
 
       {bullets.map((text, index) => (
         <TeachingBullet key={text} last={index === bullets.length - 1 && trailing === 'bullets'}>
@@ -363,28 +312,16 @@ function Section({
         ),
       )}
 
-      {/*
-        What is left: citations the app can show no text for. A scholarly
-        opinion is a reference to a book, not a quotation, and printing an
-        empty block for one would be worse than the line that names it.
-      */}
-      <SourceDisclosure
-        sources={withoutText}
-        style={trailing === 'sources' ? styles.endsSection : undefined}
+      <EvidenceLine
+        sources={lineSources}
+        style={trailing === 'line' ? styles.endsSection : undefined}
       />
     </View>
   );
 }
 
 /** The block that ends a section, and so owes the gap to the next heading. */
-type Trailing = 'body' | 'texts' | 'bullets' | 'says' | 'notes' | 'sources';
-
-/**
- * Past this, an inset block stops being an answer and becomes a
- * wall. Al-Fatihah's seven verses run 596 characters; one narration in the app
- * runs 2,615.
- */
-const LONG_NARRATION = 700;
+type Trailing = 'body' | 'texts' | 'bullets' | 'says' | 'notes' | 'line';
 
 const styles = StyleSheet.create({
   content: {

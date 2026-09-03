@@ -39,10 +39,10 @@ export const BEING_CORRECTED: Reference = {
       id: 'happens',
       heading: 'Why did someone correct me in front of everyone?',
       body:
-        'Because it will happen, and it is worth being ready rather than winded. Somebody will tell you your feet are wrong, your hands are in the wrong place, or that what you just did is not how it is done — usually in the middle of a room, usually meaning well, and usually with no idea that you have been Muslim for six weeks.\n\nIt is not a judgement on whether you belong there. It is a mosque doing the thing mosques do, and it happens to people who have prayed for forty years.',
+        'It happens to almost everyone, and it is better to be ready for it than winded by it. Somebody will tell you your feet are wrong, your hands are in the wrong place, or that what you just did is not how it is done. It will usually be in the middle of a room, usually meant well, and usually said with no idea that you have been Muslim for six weeks.\n\nIt is not a judgement on whether you belong there. It is a mosque doing what mosques do, and it happens to people who have prayed for forty years.',
       sources: [
         general(
-          'Ordinary orientation, claiming no textual authority. Named because every convert-support source surveyed reports public correction as a leading reason people stop attending.',
+          'Ordinary orientation, not a ruling. Included because every convert-support source surveyed reports public correction as a leading reason people stop attending.',
         ),
       ],
     },
@@ -50,11 +50,11 @@ export const BEING_CORRECTED: Reference = {
       id: 'two-answers',
       heading: 'Why do two people tell me opposite things?',
       body:
-        'Almost always because they are following different schools of thought, and both are describing their own correctly. Where to put your hands, whether to say the intention aloud, how many times to wipe — these are places where the scholarship genuinely differs, and has for a thousand years.\n\nNeither of them is lying to you and neither is making it up. You have walked into an old disagreement that nobody bothered to explain first.',
+        'Almost always because they follow different schools of thought, and each is describing their own correctly. Where to put your hands, whether to say the intention aloud, how many times to wipe: these are points where the scholarship genuinely differs, and has for a thousand years.\n\nNeither of them is lying to you, and neither is making it up. You have walked into an old disagreement that nobody explained to you first.',
       notes: [
         note(
           'agreed',
-          'That the schools differ on details of practice, within Sunni Islam, is not itself controversial. This app teaches one clear way because a first-timer needs a path — and it marks the places where a difference is one you will actually meet.',
+          'That the schools differ on details of practice within Sunni Islam is not itself controversial. This app teaches one clear way, because a first-timer needs a path, and it marks the places where you will actually meet a difference.',
         ),
       ],
     },
@@ -62,11 +62,11 @@ export const BEING_CORRECTED: Reference = {
       id: 'culture',
       heading: 'Is this Islam or is it their culture?',
       body:
-        'Sometimes it is culture, and it is entirely fair to ask which. A useful question, asked plainly and without edge: **is that required, or is that how it is done where you are from?** Most people answer it honestly, and the ones who cannot were not going to be a good source anyway.\n\nThe five categories are worth having in your head for exactly this — much of what arrives as a rule is a recommendation, and some of it is a habit.',
+        'Sometimes it is culture, and it is fair to ask which. A useful question, asked plainly and without edge: **is that required, or is that how it is done where you are from?** Most people answer it honestly, and the ones who cannot were never going to be a good source.\n\nThe five categories of ruling are worth having in your head for exactly this. Much of what reaches you as a rule is a recommendation, and some of it is a habit.',
       notes: [
         note(
           'practical',
-          'Being told the app or a book is wrong is also normal. Ask what it should say instead and where that comes from — that is not rude, it is the ordinary way this is discussed.',
+          'Being told that this app, or a book, is wrong is also normal. Ask what it should say instead, and where that comes from. That is not rude. It is the ordinary way these things are discussed.',
         ),
       ],
     },
@@ -74,14 +74,14 @@ export const BEING_CORRECTED: Reference = {
       id: 'what-to-say',
       heading: 'What should I actually say?',
       body:
-        '"Thank you, I will look into it." That is a complete answer, it is true, and it ends the exchange without agreeing or arguing. You do not owe a defence of what you were doing, you do not have to explain that you are new, and you certainly do not have to debate it in a prayer hall.\n\nThen look into it, once, when you are calm — and if two answers stay standing, follow the one your mosque follows.',
+        '"Thank you, I will look into it." That is a complete answer. It is true, and it ends the exchange without agreeing or arguing. You do not owe anyone a defence of what you were doing. You do not have to explain that you are new, and you certainly do not have to debate it in a prayer hall.\n\nThen look into it, once, when you are calm. If two answers are still standing, follow the one your mosque follows.',
       sources: [quran(16, 125, { surahName: 'An-Nahl' })],
     },
     {
       id: 'harsh',
       heading: 'What if they were unkind about it?',
       body:
-        'Then they were wrong about the manner, whatever they were right about in substance. Being correct does not license being harsh, and a religion whose Prophet ﷺ was described as gentle does not hand anybody a right to humiliate a stranger at prayer.\n\nYou are allowed to be hurt by it. What is worth not doing is concluding that the room, or the religion, is what that person was.',
+        'Then they were wrong about the manner, whatever they were right about in substance. Being correct does not give anyone licence to be harsh, and a religion whose Prophet ﷺ was known for gentleness does not hand anybody the right to humiliate a stranger at prayer.\n\nYou are allowed to be hurt by it. What matters is not to conclude that the room, or the religion, is what that one person was.',
       notes: [
         note(
           'practical',

@@ -63,7 +63,7 @@ export const FAJR_PAGE: Reference = {
       heading: 'What is Fajr?',
       promote: 'hero',
       body:
-        'Two rakʿahs between first light and sunrise — the shortest of the five, and the one the Prophet ﷺ spoke about the most.',
+        'Two rakʿahs, prayed between first light and sunrise. It is the shortest of the five prayers, and the one the Prophet ﷺ spoke about most.',
       sources: [hadith('muslim', '657a', { grading: 'sahih', role: 'virtue' })],
     },
     {
@@ -71,9 +71,9 @@ export const FAJR_PAGE: Reference = {
       heading: 'Why is it worth getting up?',
       body: 'Because more was promised for this one than for any other.',
       bullets: [
-        '**Paradise, promised plainly** — whoever prays the two cool prayers, Fajr and ʿAsr, enters the Garden.',
-        '**The day under protection** — the one who prays it is in the covenant of Allah.',
-        '**The hardest prayer for a hypocrite** — and if people knew what is in it, they would come even crawling.',
+        '**Paradise, promised plainly.** Whoever prays the two cool prayers, Fajr and ʿAsr, enters the Garden.',
+        '**The day under protection.** The one who prays it is under the protection of Allah.',
+        '**The hardest prayer for a hypocrite.** If people knew what was in it, they would come even if they had to crawl.',
       ],
       sources: [
         hadith('bukhari', '574', { grading: 'sahih', role: 'virtue' }),
@@ -84,16 +84,16 @@ export const FAJR_PAGE: Reference = {
       id: 'sunnah-pair',
       heading: 'What are the two rakʿahs before it?',
       body:
-        'A short voluntary prayer, prayed quietly before the fajr itself — the sunnah the Prophet ﷺ weighed against everything.',
+        'A short voluntary prayer, prayed quietly before Fajr itself. It is the sunnah prayer the Prophet ﷺ called better than the world and everything in it.',
       sources: [hadith('muslim', '725a', { grading: 'sahih', role: 'virtue' })],
       note:
-        'This narration is about the sunnah pair, not the farḍ — two small extra rakʿahs, and they are the ones "better than this world and what it contains".',
+        'This narration is about the sunnah pair, not the obligatory prayer. Two small extra rakʿahs, and they are the ones described as better than this world and what it contains.',
     },
     {
       id: 'slept',
       heading: 'What if I sleep through it?',
       body:
-        'Pray it when you wake. Sleeping through a prayer is not the sin the whisper at 9am says it is — the prayer is simply owed when the eyes open, and the page on missing a prayer walks through exactly what to do.',
+        'Pray it when you wake up. Sleeping through a prayer is not the sin the voice in your head at 9am says it is. The prayer is simply owed when your eyes open, and the page on missing a prayer walks through exactly what to do.',
     },
   ],
 };
@@ -121,14 +121,14 @@ export const DHUHR_PAGE: Reference = {
       heading: 'What is Dhuhr?',
       promote: 'hero',
       body:
-        'Four rakʿahs once the sun has passed its height — the first prayer of the working day, prayed silently, and one of the five the Prophet ﷺ compared to a river at your door.',
+        'Four rakʿahs, prayed once the sun has passed its highest point. It is the first prayer of the working day, prayed silently, and one of the five the Prophet ﷺ compared to a river at your door.',
       sources: [hadith('bukhari', '528', { grading: 'sahih', role: 'virtue' })],
     },
     {
       id: 'rounds',
       heading: 'What are the four before and after?',
       body:
-        'Dhuhr carries the largest voluntary escort of the five: four rakʿahs before it and more after. Keeping them was tied to a promise no other rawatib carries in these words.',
+        'Dhuhr has the most voluntary rakʿahs attached to it of the five: four before it and more after. The Prophet ﷺ tied keeping them to a promise no other sunnah prayer carries in the same words.',
       sources: [
         hadith('abu-dawud', '1269', { grading: 'sahih', gradedBy: 'Al-Albani', role: 'virtue' }),
       ],
@@ -137,7 +137,7 @@ export const DHUHR_PAGE: Reference = {
       id: 'work',
       heading: 'What if I am at work?',
       body:
-        'Dhuhr is four silent rakʿahs — a few minutes in any clean, quiet corner. If the window closes on you anyway, the page on missing a prayer walks through catching it up.',
+        'Dhuhr is four silent rakʿahs, a few minutes in any clean, quiet corner. If the window closes on you anyway, the page on missing a prayer walks through catching it up.',
     },
   ],
 };
@@ -171,17 +171,17 @@ export const ASR_PAGE: Reference = {
          the weight section below, where quote weight and the sheet fit. */
       promote: 'hero',
       body:
-        'Four silent rakʿahs in the last stretch of the afternoon, prayed while the day is still busy — which is exactly why so much was said about it.',
+        'Four silent rakʿahs in the last stretch of the afternoon, prayed while the day is still busy. That is exactly why so much was said about it.',
     },
     {
       id: 'weight',
       heading: 'Why does it matter so much?',
       body: 'Four narrations give this one afternoon prayer unusual weight.',
       bullets: [
-        '**Never the Fire** — whoever prays before the sun rises and before it sets, the Prophet ﷺ said, will not enter it.',
-        '**The two cool prayers** — Fajr and ʿAsr together carry the plain promise of Paradise.',
-        '**The changing of the guard** — the angels of night and day overlap at Fajr and ʿAsr, and it is your prayer they report.',
-        '**And a warning kept in the same collection** — the Prophet ﷺ said that abandoning ʿAsr empties the day’s deeds. It is the one prayer he singled out that way.',
+        '**Never the Fire.** Whoever prays before the sun rises and before it sets, the Prophet ﷺ said, will not enter it.',
+        '**The two cool prayers.** Fajr and ʿAsr together carry the plain promise of Paradise.',
+        '**The changing of the guard.** The angels of night and day overlap at Fajr and ʿAsr, and it is your prayer they report.',
+        '**And a warning, from the same collection.** The Prophet ﷺ said that whoever leaves the ʿAsr prayer has lost his good deeds. It is the one prayer he singled out that way.',
       ],
       sources: [
         hadith('muslim', '634a', { grading: 'sahih', role: 'virtue' }),
@@ -207,7 +207,7 @@ export const MAGHRIB_PAGE: Reference = {
   },
   quickFacts: [
     { label: 'When', value: 'From just after sunset until ʿIsha' },
-    { label: 'How many', value: 'Three rakʿahs — the first two aloud' },
+    { label: 'How many', value: 'Three rakʿahs, the first two aloud' },
     { label: 'How', value: 'Pray Maghrib', href: '/guide/maghrib' },
   ],
   sections: [
@@ -219,7 +219,7 @@ export const MAGHRIB_PAGE: Reference = {
          cannot be placed rather than stretch a weak narration. */
       promote: 'hero',
       body:
-        'Three rakʿahs as the light goes — the only odd count of the five, and the first prayer said aloud since dawn.',
+        'Three rakʿahs, prayed as the light goes. It is the only one of the five with an odd count, and the first prayer recited aloud since dawn.',
     },
     {
       id: 'after',
@@ -232,7 +232,7 @@ export const MAGHRIB_PAGE: Reference = {
       id: 'timing',
       heading: 'Does it have to be right at sunset?',
       body:
-        'Its window runs until ʿIsha, but it is the shortest window of the five — which is why Maghrib is the prayer most often prayed the moment it arrives.',
+        'Its window runs until ʿIsha, but it is the shortest window of the five. That is why Maghrib is the prayer most often prayed the moment it comes in.',
     },
   ],
 };
@@ -241,7 +241,7 @@ export const ISHA_PAGE: Reference = {
   id: 'isha',
   surface: 'pray',
   title: 'ʿIsha',
-  subtitle: 'The night prayer, and the night banked',
+  subtitle: 'The night prayer, and how the day ends',
   meta: {
     category: 'salah',
     difficulty: 'foundational',
@@ -251,7 +251,7 @@ export const ISHA_PAGE: Reference = {
   },
   quickFacts: [
     { label: 'When', value: 'From nightfall until the middle of the night' },
-    { label: 'How many', value: 'Four rakʿahs — the first two aloud' },
+    { label: 'How many', value: 'Four rakʿahs, the first two aloud' },
     { label: 'How', value: 'Pray ʿIsha', href: '/guide/isha' },
   ],
   sections: [
@@ -260,14 +260,14 @@ export const ISHA_PAGE: Reference = {
       heading: 'What is ʿIsha?',
       promote: 'hero',
       body:
-        'Four rakʿahs once night has settled — and prayed in congregation, it is counted like standing half the night in prayer.',
+        'Four rakʿahs, prayed once night has settled. Prayed in congregation, it is counted like standing half the night in prayer.',
       sources: [hadith('muslim', '656a', { grading: 'sahih', role: 'virtue' })],
     },
     {
       id: 'heavy',
       heading: 'Is it hard to end the day with it?',
       body:
-        'It is meant to be the easy one to skip — which is exactly what the Prophet ﷺ said about it: no prayer sits heavier on a hypocrite than ʿIsha and Fajr, and if people knew what was in them they would come crawling. Praying it is quietly deciding which kind of person the day ends as.',
+        'It is the easy one to skip, and the Prophet ﷺ said exactly that. No prayer sits heavier on a hypocrite than ʿIsha and Fajr, and if people knew what was in them they would come even if they had to crawl. Praying it is a quiet decision about how the day ends.',
       sources: [hadith('bukhari', '657', { grading: 'sahih', role: 'virtue' })],
     },
   ],

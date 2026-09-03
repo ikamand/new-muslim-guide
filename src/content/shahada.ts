@@ -140,7 +140,7 @@ export const SHAHADA_GUIDE: Guide = {
               }),
             ],
             additionalExplanation:
-              'These are two different things and the app keeps them apart on purpose. Whether you are Muslim is settled between you and Allah the moment you say it and mean it, and both answers cited here say so plainly, one of them in the words "Islam is a matter that is between a person and his Lord". Whether a registrar, a mosque, a Hajj visa office or a marriage contract will take your word for it later is a paperwork question with a paperwork answer. Historically witnesses were asked for in Muslim courts because inheritance and marriage law followed a person\'s religion, which is where the idea that they are required comes from. If you are not ready to walk into a mosque, that is fine. None of this expires, and the certificate is available whenever you want it.',
+              'These are two different things. Whether you are Muslim is settled between you and Allah the moment you say it and mean it, and both answers cited here say so plainly, one of them in the words "Islam is a matter that is between a person and his Lord". Whether a registrar, a mosque, a Hajj visa office or a marriage contract will take your word for it later is a paperwork question with a paperwork answer.\n\nHistorically, witnesses were asked for in Muslim courts because inheritance and marriage law followed a person\'s religion, and that is where the idea that they are required comes from. If you are not ready to walk into a mosque, that is fine. None of this expires, and the certificate is available whenever you want it.',
           },
         ),
       ],

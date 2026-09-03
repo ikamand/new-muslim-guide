@@ -173,7 +173,7 @@ export const GHUSL: Guide = {
               }),
             ],
             additionalExplanation:
-              '`Ali was too shy to ask and sent al-Miqdad to ask for him; the answer was that it requires wudu. This app said "any release of sexual fluid" before, which swept the two together and would have sent people for a full wash they did not owe. The books keep them apart carefully, and so does this.',
+              '`Ali was too shy to ask and sent al-Miqdad to ask for him. The answer was that it requires wudu, not ghusl. The books keep the two fluids carefully apart, and so does this guide.',
           },
         ),
         note(
@@ -219,7 +219,7 @@ export const GHUSL: Guide = {
               },
             ],
             additionalExplanation:
-              'Two reports carry it. Thumamah ibn Uthal, released from the pillar of the mosque, went to a nearby grove, washed, came back and said the shahada. Bukhari files that under a chapter headed "taking a bath on embracing Islam". And Qays ibn `Asim came intending to accept Islam and was told to wash. Scholars read the second differently: some as a command, some as guidance. The recommended reading is the more common one, and it is not only held outside the Hanbali school: a group of Hanbalis report it from Ahmad himself, and al-Mardawi, whose job in that school was to say which position it settles on, chose it. What nobody holds is that your Islam is incomplete without it, and nobody thinks less of you for doing it a week later than the day itself.',
+              'Two reports carry it. Thumamah ibn Uthal, released from the pillar of the mosque, went to a nearby grove, washed, came back and said the shahada. Bukhari files that under a chapter headed "taking a bath on embracing Islam". And Qays ibn `Asim came intending to accept Islam and was told to wash.\n\nScholars read the second report differently, some as a command and some as guidance. The reading that makes it recommended is the more common one, and it is held inside the Hanbali school as well: a group of Hanbalis report it from Ahmad himself, and al-Mardawi, whose role in that school was to say which position it settles on, chose it. No one holds that your Islam is incomplete without it, and no one thinks less of you for doing it a week later than the day itself.',
           },
         ),
         note(
@@ -246,7 +246,7 @@ export const GHUSL: Guide = {
               }),
             ],
             additionalExplanation:
-              'This used to be filed here as a difference between "the majority" and "a minority", which was vaguer than the evidence needs. All four schools hold the Friday ghusl a sunnah; the obligatory reading of Bukhari 877, "anyone of you attending the Friday prayer should take a bath", is held outside them. Tirmidhi records ash-Shafi`i\'s own argument for the first reading: `Umar was addressing the congregation when `Uthman arrived having only done wudu, and `Umar reproached him without sending him back to wash. Neither of them treated it as a condition, and both knew the instruction. One practical point the schools also agree on: it only counts as the Friday wash if it is done before the prayer.',
+              'All four schools hold the Friday ghusl to be a sunnah. The reading of Bukhari 877, "anyone of you attending the Friday prayer should take a bath", as an obligation is held outside them. Tirmidhi records ash-Shafi`i\'s own argument for the sunnah reading: `Umar was addressing the congregation when `Uthman arrived having only done wudu, and `Umar reproached him without sending him back to wash. Neither of them treated it as a condition, and both knew the instruction. One practical point the schools also agree on: it only counts as the Friday wash if it is done before the prayer.',
           },
         ),
         note(
@@ -270,7 +270,7 @@ export const GHUSL: Guide = {
               }),
             ],
             additionalExplanation:
-              'The narration that says the Prophet ﷺ himself washed on both Eids is graded weak by Darussalam, so it is not what the recommendation rests on and it is labelled here rather than quietly promoted. What it rests on is Malik\'s report of Ibn `Umar in the Muwatta. The hadith immediately after the weak one, Ibn Majah 1316, is graded fabricated. The app does not use it and never has.',
+              'The narration that says the Prophet ﷺ himself washed on both Eids is graded weak by Darussalam, so the recommendation does not rest on it, and it is labelled as weak here rather than quietly promoted. What the recommendation rests on is Malik\'s report of Ibn `Umar in the Muwatta.',
           },
         ),
       ],

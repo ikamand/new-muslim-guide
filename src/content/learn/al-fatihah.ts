@@ -66,7 +66,7 @@ export const AL_FATIHAH: Reference = {
       notes: [
         note(
           'practical',
-          'Until you have it, say what you know and keep going. Nobody expects a first-week Muslim to have memorised it, and the prayer you pray while learning is still your prayer.',
+          'Until you have it, say what you know and keep going. No one expects a first-week Muslim to have memorised it, and the prayer you pray while learning is still a prayer.',
         ),
       ],
     },

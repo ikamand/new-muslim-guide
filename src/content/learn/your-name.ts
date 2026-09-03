@@ -18,7 +18,7 @@ export const YOUR_NAME: Reference = {
   id: 'your-name',
   surface: 'learn',
   title: 'Do I have to change my name?',
-  subtitle: 'No — and where the idea comes from',
+  subtitle: 'No, and where the idea comes from',
   meta: {
     category: 'becoming-muslim',
     difficulty: 'foundational',
@@ -42,7 +42,7 @@ export const YOUR_NAME: Reference = {
       heading: 'So why do people think you must?',
       promote: 'hero',
       body:
-        'The Prophet ﷺ did change some people’s names — where a name carried a meaning worth leaving behind. What is worth noticing is how one of those went: he suggested a man called Ḥazn, which means something like grief, be called Sahl instead, meaning ease. The man said he would not change the name his father gave him, and he kept it.',
+        'Because the Prophet ﷺ did change some people’s names, where a name carried a meaning worth leaving behind. What is worth noticing is how one of those went. He suggested that a man called Ḥazn, which means something like grief, be called Sahl instead, meaning ease. The man said he would not change the name his father gave him, and he kept it.',
       sources: [hadith('bukhari', '6193')],
       notes: [
         note(
@@ -55,7 +55,7 @@ export const YOUR_NAME: Reference = {
       id: 'family-name',
       heading: 'What about my family name?',
       body:
-        'This part is not a preference. The Qur’an instructs that people be called by their fathers’ names, and converts keep their family name for the same reason — your lineage is not something Islam asks you to drop, and cutting yourself off from it is the opposite of what is asked.',
+        'This part is not a preference. The Qur’an instructs that people be called by their fathers’ names, and converts keep their family name for the same reason. Your lineage is not something Islam asks you to drop. Cutting yourself off from it is the opposite of what is asked.',
       sources: [quran(33, 5, { surahName: 'Al-Ahzab' })],
     },
     {

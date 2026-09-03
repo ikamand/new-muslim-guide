@@ -39,7 +39,7 @@ export const DUA_AND_DHIKR: Reference = {
       id: 'dhikr',
       heading: 'What is dhikr?',
       body:
-        'Dhikr means remembrance: short phrases repeated through the day. Subḥāna-llāh (glory be to God), al-ḥamdu li-llāh (all praise is God’s), Allāhu akbar (God is greatest). The Qur’an says hearts settle by the remembrance of God, and that is closer to what it does than anything a description manages.',
+        'Dhikr means remembrance: short phrases repeated through the day. Subḥāna-llāh (glory be to God), al-ḥamdu li-llāh (all praise is God’s), Allāhu akbar (God is greatest). The Qur’an says hearts find rest in the remembrance of God, and that describes what it does better than any explanation.',
       sources: [quran(13, 28, { surahName: 'Ar-Raʿd' })],
     },
     {
@@ -65,7 +65,7 @@ export const DUA_AND_DHIKR: Reference = {
       id: 'start',
       heading: 'Where do I start?',
       body:
-        'Pick one phrase and one moment, such as waking or the walk to work. The Everyday duʿas screen has short ones with the Arabic, how it sounds and what it means. The shortest is a single word, which is a deliberate place to begin rather than a compromise.',
+        'Pick one phrase and one moment, such as waking up or the walk to work. The Duʿa tab has short ones with the Arabic, how it sounds, and what it means. The shortest is a single word. Starting there is not a compromise.',
     },
   ],
 };

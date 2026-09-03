@@ -39,18 +39,18 @@ export const FASTING_ALONE: Reference = {
       id: 'normal',
       heading: 'Is it supposed to feel this strange?',
       body:
-        'Ramadan is built as a shared month — shared pre-dawn meals, shared sunsets, whole cities changing rhythm. Keeping it alone, in a place running on its ordinary rhythm, is genuinely harder than keeping it surrounded by people who are also hungry. If your first Ramadan feels like swimming against a current, that is the situation, not a fault in your fasting.\n\nThe fast itself is exactly as valid alone as in Mecca. Nothing about other people’s participation is a condition of yours.',
+        'Ramadan is built as a shared month: shared pre-dawn meals, shared sunsets, whole cities changing rhythm. Keeping it alone, in a place running at its ordinary pace, is genuinely harder than keeping it among people who are also hungry. If your first Ramadan feels like swimming against a current, that is the situation, not a fault in your fasting.\n\nThe fast itself is exactly as valid alone as it would be in Mecca. Other people taking part is not a condition of yours.',
       sources: [quran(2, 183, { surahName: 'Al-Baqarah' })],
     },
     {
       id: 'work',
       heading: 'What do I say at work or school?',
       body:
-        'You owe nobody an announcement, and you are hiding nothing shameful — both are true at once, and you get to pick your point on that line. Many people simply decline lunch with “I’m good, thanks.” Saying “I’m fasting — it’s Ramadan” is also a complete answer, and most colleagues respond with curiosity, not hostility.\n\nThe questions that follow are nearly always the same three: not even water? (no, not even water), the whole month? (daylight hours, every day), isn’t that dangerous? (hundreds of millions of people do it every year, and the sick, pregnant and travelling are exempt).',
+        'You owe no one an announcement, and you are hiding nothing shameful. Both are true at once, and you choose where you stand between them. Many people simply decline lunch with “I’m good, thanks.” Saying “I’m fasting, it’s Ramadan” is also a complete answer, and most colleagues respond with curiosity rather than hostility.\n\nThe questions that follow are nearly always the same three. Not even water? No, not even water. The whole month? Daylight hours, every day. Isn’t that dangerous? Hundreds of millions of people do it every year, and the sick, the pregnant and the travelling are exempt.',
       notes: [
         note(
           'practical',
-          'If you are not out as a Muslim where you work or live, you do not have to be out to fast. A quiet “I’m not eating right now” has covered many first Ramadans, and the page on telling your family applies here too.',
+          'If people at work or at home do not know you are Muslim, you do not have to tell them in order to fast. A quiet “I’m not eating right now” has covered many first Ramadans. The Family page has more on telling people.',
         ),
       ],
     },
@@ -59,20 +59,20 @@ export const FASTING_ALONE: Reference = {
       heading: 'What if someone gives me a hard time?',
       promote: 'hero',
       body:
-        'The instruction for exactly this moment is short: the fast is a shield, and if someone picks a fight or insults you while you are keeping it, you say “I am fasting” and leave it there. Out loud or under your breath — the point is that the fast changes how you answer provocation, not just what you eat.',
+        'The Prophet ﷺ gave an instruction for exactly this moment, and it is short. The fast is a shield, and if someone picks a fight or insults you while you are keeping it, you say “I am fasting” and leave it there. Out loud or under your breath, either way. The point is that the fast changes how you answer provocation, not only what you eat.',
       sources: [hadith('bukhari', '1894')],
     },
     {
       id: 'iftar-alone',
-      heading: 'Breaking fast alone — is that even Ramadan?',
+      heading: 'Is breaking the fast alone still Ramadan?',
       body:
-        'An iftar for one — a date, a glass of water, a plate you made yourself in a quiet kitchen — is a full iftar, witnessed by the One you kept the fast for. The duʿa at breaking the fast is in this app’s Duʿa tab, and the moment belongs to you either way.\n\nIt is still worth saying: this is the loneliest recurring moment of a solo Ramadan, and it does not have to stay solo.',
+        'An iftar for one, a date, a glass of water and a plate you made yourself in a quiet kitchen, is a full iftar, seen by the One you kept the fast for. The duʿa for breaking the fast is in the Duʿa tab, and the moment is yours either way.\n\nIt is still worth saying that this is the loneliest recurring moment of a Ramadan kept alone, and it does not have to stay that way.',
     },
     {
       id: 'mosque',
       heading: 'Where are all the other Muslims, then?',
       body:
-        'At the mosque, every single evening. Ramadan is the one month a year when a mosque runs a free communal meal at sunset, open to whoever walks in — and when showing up alone is completely unremarkable, because half the room came alone. Nobody will ask why you are there. If anyone asks anything, it will be whether you have eaten.\n\nIf there is a month to make a mosque yours, it is this one. The night prayers afterwards are covered in the page on standing at night, and you can leave whenever you need to.',
+        'At the mosque, every single evening. Ramadan is the one month of the year when a mosque runs a free communal meal at sunset, open to whoever walks in. Turning up alone is completely unremarkable, because half the room came alone. No one will ask why you are there. If anyone asks anything, it will be whether you have eaten.\n\nIf there is a month to make a mosque yours, it is this one. The night prayers afterwards are covered on the page about standing at night, and you can leave whenever you need to.',
       notes: [
         note(
           'practical',

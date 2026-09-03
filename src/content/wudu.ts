@@ -116,7 +116,7 @@ export const WUDU: Guide = {
               }),
             ],
             additionalExplanation:
-              'Bukhari 135 is the Prophet\'s ﷺ words that the prayer of someone who breaks their wudu is not accepted until they wash again. Abu Huraira, asked what breaking it meant, answered: passing wind. On sleep the wording is "the eyes are the drawstring of the backside, so whoever sleeps should perform wudu". Schools qualify that by how deeply and in what position, but all four agree that heavy sleep ends it, and all four agree that losing your senses another way, whether fainting, anaesthetic or being drunk, ends it too, which is why this note names that rather than only sleep.',
+              'Bukhari 135 is the Prophet\'s ﷺ words that the prayer of someone who breaks their wudu is not accepted until they wash again. Abu Huraira, asked what breaking it meant, answered: passing wind. On sleep the wording is "the eyes are the drawstring of the backside, so whoever sleeps should perform wudu". Schools qualify that by how deeply and in what position, but all four agree that heavy sleep ends it. All four also agree that losing your senses another way, whether fainting, anaesthetic or being drunk, ends it too. That is why this note names losing your senses, and not only sleep.',
           },
         ),
         note(

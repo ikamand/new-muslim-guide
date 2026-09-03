@@ -46,21 +46,21 @@ export const SMALL_SUNNAHS: Reference = {
       id: 'right',
       heading: 'Why do people start with the right?',
       body:
-        'Because he did. ʿĀʾishah described him as liking to begin with the right side — putting on shoes, combing his hair, washing. It applies to entering a room, eating, giving and taking. The left is used for the opposite: leaving a bathroom, removing shoes.\n\nIt is a small thing that becomes automatic within about a week, and it is the easiest of these to start with.',
+        'Because he did. ʿĀʾishah described the Prophet ﷺ as liking to begin with the right side: putting on shoes, combing his hair, washing. It applies to entering a room, eating, giving and taking. The left is used for the opposite: leaving a bathroom, removing shoes.\n\nIt is a small thing that becomes automatic within about a week, and it is the easiest of these to start with.',
       sources: [hadith('bukhari', '168')],
     },
     {
       id: 'siwak',
       heading: 'What is the siwak?',
       body:
-        'A twig from the arāk tree, used to clean the teeth — you will see them sold outside mosques for very little. The Prophet ﷺ said that were it not hard on people, he would have ordered it before every prayer, which tells you both how much he valued it and that he did not make it a requirement.\n\nA toothbrush achieves the cleaning. Many people use the siwak anyway, before prayer and on Fridays.',
+        'A twig from the arāk tree, used to clean the teeth. You will see them sold outside mosques for very little. The Prophet ﷺ said that if it were not hard on people, he would have ordered it before every prayer. That tells you how much he valued it, and also that he did not make it a requirement.\n\nA toothbrush does the cleaning. Many people use the siwak as well, before prayer and on Fridays.',
       sources: [hadith('bukhari', '887')],
     },
     {
       id: 'duas',
       heading: 'What about the little duʿas?',
       body:
-        'They are already in this app, in the duʿa book, with the book’s own wording: waking, leaving the house, entering and leaving the bathroom, before and after eating, entering a mosque. This page does not print them a second time — one text belongs in one place, and there it can be searched, pinned and read in Arabic and English together.',
+        'They are already in this app, in the duʿa book, in the book’s own wording: waking, leaving the house, entering and leaving the bathroom, before and after eating, entering a mosque. They are not repeated here. In the book they can be searched, pinned, and read in Arabic and English together.',
       notes: [
         note(
           'practical',
@@ -75,7 +75,7 @@ export const SMALL_SUNNAHS: Reference = {
         'One. Then, once it has stopped being something you remember to do, one more.\n\nThe way this goes wrong is a person adopting twelve at once in their first month, keeping none of them past week three, and concluding they are bad at being Muslim. Nothing here is a checklist and nothing is measured. A habit you have held for two years is worth more than eleven you dropped.',
       sources: [
         general(
-          'Practical advice on pace, claiming no textual authority. Which habits these are is above and cited; how many to take on at once is not a ruling.',
+          'Practical advice on pace, not a ruling. Which habits these are is cited above; how many to take on at once is a matter of judgement.',
         ),
       ],
     },

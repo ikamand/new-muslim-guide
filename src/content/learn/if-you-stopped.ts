@@ -48,14 +48,14 @@ export const IF_YOU_STOPPED: Reference = {
       heading: 'Am I still Muslim?',
       promote: 'hero',
       body:
-        'Yes. Missing prayers — for a week, for a month, for longer — does not undo your shahada, and you do not say it again to come back. There is no re-entry, no ceremony, and nobody to tell.\n\nThat is worth reading twice, because the belief that you have to start again is the single most common reason people do not.',
+        'Yes. Missing prayers, for a week, a month or longer, does not undo your shahada, and you do not say it again to come back. There is no re-entry, no ceremony, and no one to tell.\n\nThat is worth reading twice, because believing you have to start again is the most common reason people never come back.',
       sources: [quran(39, 53, { surahName: 'Az-Zumar' })],
     },
     {
       id: 'how',
       heading: 'How do I actually come back?',
       body:
-        'You pray the next prayer. That is the whole procedure. Not a plan, not a fresh start on Monday, not catching up on everything first — the next one, whenever it is, even if it is in twenty minutes and you do it badly.',
+        'You pray the next prayer. That is all. Not a plan, not a fresh start on Monday, not catching up on everything first. Just the next one, whenever it is, even if it is in twenty minutes and you do it badly.',
       notes: [
         note(
           'practical',
@@ -67,7 +67,7 @@ export const IF_YOU_STOPPED: Reference = {
       id: 'shame',
       heading: 'Why does it feel so much worse than it is?',
       body:
-        'Because a gap makes people feel like frauds, and feeling like a fraud is much heavier than missing a prayer. Converts get this especially hard: there is often nobody who knew you before, so the gap feels like evidence that the whole thing was a phase.\n\nIt is not evidence of anything. The Prophet ﷺ said that he himself sought forgiveness and turned back to God more than seventy times in a day. Turning back is not the exception in this religion. It is the normal condition of being a person in it.',
+        'Because a gap makes people feel like frauds, and feeling like a fraud is much heavier than missing a prayer. Converts get this especially hard. There is often no one who knew you before, so the gap feels like evidence that the whole thing was a phase.\n\nIt is not evidence of anything. The Prophet ﷺ said that he himself sought forgiveness and turned back to God more than seventy times a day. Turning back is not the exception in this religion. It is the normal condition of everyone in it.',
       sources: [hadith('bukhari', '6307')],
     },
     {
@@ -86,7 +86,7 @@ export const IF_YOU_STOPPED: Reference = {
       id: 'nobody-knows',
       heading: 'Do I have to tell anyone?',
       body:
-        'No. Not a friend, not an imam, not a group chat. There is no confession in Islam and nothing here needs a witness. If you want to tell somebody because carrying it alone is heavy, that is a good reason — but it is your reason, not a requirement.',
+        'No. Not a friend, not an imam, not a group chat. There is no confession in Islam and nothing here needs a witness. If you want to tell somebody because carrying it alone is heavy, that is a good reason. But it is your reason, not a requirement.',
     },
     {
       id: 'again',
@@ -96,7 +96,7 @@ export const IF_YOU_STOPPED: Reference = {
       notes: [
         note(
           'practical',
-          'People often relapse in a pattern — the same month, the same trigger. Noticing yours is more useful than promising it will not happen.',
+          'People often stop in a pattern: the same month, the same trigger. Noticing yours is more useful than promising it will not happen again.',
         ),
       ],
     },

@@ -40,18 +40,18 @@ export const RULINGS: Reference = {
       id: 'why',
       heading: 'Is everything I read a rule?',
       body:
-        'Read anything about Islam for a week and you will meet dozens of sentences that sound like instructions. Almost none of them are the same KIND of instruction, and if you read them all as commands you will end the month exhausted and convinced you are failing at everything.\n\nThere are five categories. Learning them once is the difference between a religion with a shape and a religion that is one long list.',
+        'Read about Islam for a week and you will meet dozens of sentences that sound like instructions. They are not all the same kind of instruction, and if you read them all as commands you will end the month exhausted and convinced you are failing at everything.\n\nThere are five categories. Learning them once is the difference between a religion with a shape and a religion that is one long list.',
     },
     {
       id: 'five',
       heading: 'What are the five?',
       body: 'From the strongest to the strongest against, with everything ordinary in the middle.',
       bullets: [
-        '**Farḍ** — obligatory. The five prayers, fasting Ramadan. Leaving one is a sin.',
-        '**Mustaḥabb** — recommended. Good to do, and no sin at all in not doing it. Most of what you will read about falls here.',
-        '**Mubāḥ** — simply allowed. Neither rewarded nor blamed. This is the vast majority of ordinary life: what you eat for breakfast, what work you do, who you are friends with.',
-        '**Makrūh** — disliked. Better avoided, and not a sin.',
-        '**Ḥarām** — forbidden. A short list, and the app says plainly what is on it.',
+        '**Farḍ**: obligatory. The five prayers, fasting in Ramadan. Leaving one is a sin.',
+        '**Mustaḥabb**: recommended. Good to do, and no sin at all in not doing it. Most of what you will read about falls here.',
+        '**Mubāḥ**: simply allowed. Neither rewarded nor blamed. This is the vast majority of ordinary life: what you eat for breakfast, what work you do, who your friends are.',
+        '**Makrūh**: disliked. Better avoided, but not a sin.',
+        '**Ḥarām**: forbidden. A short list, and this app says plainly what is on it.',
       ],
       sources: [
         general(
@@ -77,7 +77,7 @@ export const RULINGS: Reference = {
       id: 'should',
       heading: 'What does it mean when this app says “should”?',
       body:
-        'It usually means mustaḥabb — worth doing, not required. Where something is genuinely obligatory the app says so plainly, and where the schools of thought differ it says that too. You are not expected to hold all of it at once, and nothing here is keeping score.',
+        'It usually means mustaḥabb: worth doing, not required. Where something is genuinely obligatory, the app says so plainly, and where the schools of thought differ it says that too. You are not expected to take all of it on at once, and nothing here is keeping score.',
       notes: [
         note(
           'practical',

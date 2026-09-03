@@ -38,7 +38,7 @@ export const VOLUNTARY_FASTING: Reference = {
       heading: 'Do I have to do any of this?',
       promote: 'hero',
       body:
-        'No. Ramadan is the fast that is required; everything on this page is voluntary, and skipping all of it is not a shortcoming. The Prophet ﷺ fasted in a way ʿĀʾishah described as going through stretches where you would think he would never stop, and stretches where you would think he would never fast — which is worth holding on to if you have decided you are failing at something.',
+        'No. Ramadan is the fast that is required. Everything on this page is voluntary, and skipping all of it is not a shortcoming. ʿĀʾishah described the Prophet ﷺ fasting in stretches where you would think he would never stop, and then not fasting in stretches where you would think he would never fast again. That is worth holding on to if you have decided you are failing at something.',
       sources: [hadith('bukhari', '1969')],
     },
     {
@@ -47,15 +47,15 @@ export const VOLUNTARY_FASTING: Reference = {
       body:
         'A few, and they are ordinary rather than obscure. The easiest to start with are the weekly ones, because they need no calendar at all.',
       bullets: [
-        '**Mondays and Thursdays** — the common weekly fast, and the simplest thing to try.',
-        '**Three days a month** — usually the middle of the lunar month.',
+        '**Mondays and Thursdays**: the common weekly fast, and the simplest thing to try.',
+        '**Three days a month**: usually the middle of the lunar month.',
         '**Six days in Shawwal**, the month after Ramadan.',
         '**ʿAshuraʾ**, in Muharram, and **the Day of ʿArafah** for those not on Hajj.',
       ],
       notes: [
         note(
           'practical',
-          'This app will not tell you the date of ʿAshuraʾ or ʿArafah. Those depend on the moon being sighted, and a calculated date is wrong often enough that it would be a bad thing to be confident about. Ask your mosque in the week beforehand.',
+          'This app does not give the date of ʿAshuraʾ or ʿArafah. Those depend on the moon being sighted, and a calculated date is wrong often enough to be worth not trusting. Ask your mosque in the week beforehand.',
         ),
       ],
     },
@@ -63,7 +63,7 @@ export const VOLUNTARY_FASTING: Reference = {
       id: 'how',
       heading: 'How is it different from Ramadan?',
       body:
-        'It is not — the fast itself is the same, dawn to sunset, and it begins with the same intention. What differs is that you can stop. A voluntary fast can be broken partway through without owing anything, which is not true of Ramadan, and that alone makes it a reasonable thing to attempt on a working day.',
+        'It is not different. The fast itself is the same, dawn to sunset, and it begins with the same intention. What differs is that you can stop. A voluntary fast can be broken partway through without owing anything, which is not true of Ramadan, and that alone makes it a reasonable thing to try on a working day.',
     },
     {
       id: 'start',
@@ -72,7 +72,7 @@ export const VOLUNTARY_FASTING: Reference = {
         'One Monday. Not a schedule, not a commitment, not a fast you have announced. Do one, see what it is like on a normal day with a normal job, and decide afterwards.\n\nIf it goes badly, that is information rather than failure, and nothing about it is recorded anywhere.',
       sources: [
         general(
-          'Practical advice about starting, claiming no textual authority. Which days are fasted is above and cited; how to begin is not a ruling.',
+          'Practical advice about starting, not a ruling. Which days are fasted is cited above.',
         ),
       ],
       notes: [

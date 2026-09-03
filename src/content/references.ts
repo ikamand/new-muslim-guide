@@ -135,7 +135,7 @@ export const PERIODS: Reference = {
               },
             ],
             additionalExplanation:
-              'This section used to say scholars differ on all three of these and give no positions, which put a question all four schools agree on next to one they genuinely split over. On the muṣḥaf the agreement is about touching it; scholars treat a barrier between hand and page differently, so if you need to carry one or turn its pages, that is the thing to ask about. On the mosque the agreement is about remaining there. The Shafi`i and Hanbali schools permit passing through, and several contemporary scholars go further. If any of it affects your week, ask someone knowledgeable which position your local mosque follows.',
+              'On the muṣḥaf, the agreement is about touching it directly. Scholars treat a barrier between hand and page differently, so if you need to carry one or turn its pages, that is the thing to ask about. On the mosque, the agreement is about staying there. The Shafi`i and Hanbali schools permit passing through, and several contemporary scholars go further. If any of this affects your week, ask someone knowledgeable which position your local mosque follows.',
           },
         ),
       ],
@@ -306,7 +306,7 @@ export const MISSED: Reference = {
       id: 'guilt',
       heading: 'What if it keeps happening?',
       body:
-        'The thing that ends people’s prayer is not the prayer they missed. It is deciding they are now the sort of person who misses prayers. Pray the next one. That is the whole recovery.',
+        'What ends people’s prayer is not the prayer they missed. It is deciding that they are now the sort of person who misses prayers. Pray the next one, and you are back.',
       note: 'Deliberately leaving a prayer is a serious matter and different from oversleeping. The action is still the same: pray it, and pray the next one.',
     },
   ],
@@ -408,7 +408,7 @@ export const TRAVELLING: Reference = {
               },
             ],
             additionalExplanation:
-              'The app used to say "roughly eighty kilometres" without saying where the number came from, which made a scholarly conversion look like a reported figure. A barid is a classical measure of distance, and four of them is two days of loaded-camel travel; converted into modern units it lands near eighty-eight kilometres, and different conversions give slightly different numbers, which is most of why you will hear eighty from one person and ninety from another. How long you may keep shortening once you arrive is a second difference again. The Maliki and Shafi`i schools stop at four days, the Hanafi school at fifteen, and some hold there is no limit while you have not settled.',
+              'A barid is a classical measure of distance, and four of them is two days of travel by loaded camel. Converted into modern units it lands near eighty-eight kilometres, and different conversions give slightly different numbers, which is most of why you will hear eighty from one person and ninety from another.\n\nHow long you may keep shortening once you arrive is a second difference. The Maliki and Shafi`i schools stop at four days, the Hanafi school at fifteen, and some hold that there is no limit while you have not settled.',
           },
         ),
       ],
@@ -562,7 +562,7 @@ export const MOSQUE: Reference = {
       heading: 'Where do I sit?',
       body:
         'Pray two short rakʿahs before you sit down. It is what everyone does on entering. Then sit anywhere on the carpet. There is no reserved seating and no collection.',
-      note: 'If a prayer is already in progress, join the line where you are and follow the imam from wherever he has got to. When he finishes and gives salam, stand back up and pray the rakʿahs you missed on your own — that is what completes your prayer.',
+      note: 'If a prayer is already in progress, join the line where you are and follow the imam from wherever he has got to. When he finishes and gives salam, stand back up and pray the rakʿahs you missed on your own. That is what completes your prayer.',
       sources: [
         hadith('bukhari', '444', {
           book: 8,
@@ -587,8 +587,8 @@ export const MOSQUE: Reference = {
       id: 'nobody-minds',
       heading: 'What if I get something wrong?',
       body:
-        'Being a beat behind in the movements. Not knowing where to stand. Your phone going off. Asking a stranger what to do. Leaving straight after. Getting the words wrong under your breath.',
-      note: 'Everyone in that room was new once, including the imam. Nobody is grading you, and the ones who notice you are new are almost always pleased about it.',
+        'All of these are fine: being a beat behind in the movements, not knowing where to stand, your phone going off, asking a stranger what to do, leaving straight afterwards, getting the words wrong under your breath.',
+      note: 'Everyone in that room was new once, including the imam. No one is grading you, and the people who notice you are new are almost always pleased about it.',
     },
   ],
 };

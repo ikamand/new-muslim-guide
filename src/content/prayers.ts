@@ -363,7 +363,7 @@ const handPlacementNote: ContentNote = note(
       },
     ],
     additionalExplanation:
-      'What Sahih al-Bukhari establishes is only that the right hand goes over the left forearm. The narration names no place on the body, and Ibn Qudamah records the folding itself as agreed by the majority. After that everyone is reading indirect evidence. The report naming the chest that Ibn `Uthaymin calls the best on the question is Wa\'il ibn Hujr\'s, and he judges the chest the most correct view even though the well-known position of his own school is below the navel; the narration usually quoted for below the navel, from `Ali, is graded weak by an-Nawawi and Ibn Hajar. Set against that, none of the four schools\' well-known positions puts a man\'s hands on the chest itself. So the honest summary is that no position here rests on an agreed, authentic, explicit narration, and that is exactly why the schools differ. Follow whichever you are taught locally; nobody holds that the prayer fails over it.',
+      'What Sahih al-Bukhari establishes is only that the right hand goes over the left forearm. The narration names no place on the body, and Ibn Qudamah records the folding itself as agreed by the majority. After that everyone is reading indirect evidence.\n\nThe report naming the chest that Ibn `Uthaymin calls the best on the question is Wa\'il ibn Hujr\'s, and he judges the chest the most correct view even though the well-known position of his own school is below the navel. The narration usually quoted for below the navel, from `Ali, is graded weak by an-Nawawi and Ibn Hajar. Set against that, none of the four schools\' well-known positions puts a man\'s hands on the chest itself.\n\nSo the honest summary is that no position here rests on an agreed, authentic, explicit narration, and that is exactly why the schools differ. Follow whichever you are taught locally. No one holds that the prayer fails over it.',
   },
 );
 
@@ -621,7 +621,7 @@ function rakahSteps(rakah: number, spec: PrayerSpec): Step[] {
         instruction:
           'Still sitting, turn your face to the right until your cheek can be seen from behind you, and give the greeting.',
         says: Recitations.taslim,
-        note: 'You are greeting the people beside you, and the angels. Nobody minds if you are praying alone. You still turn.',
+        note: 'You are greeting the people beside you, and the angels. If you are praying alone, you still turn.',
       });
       step({
         key: 'taslim-left',

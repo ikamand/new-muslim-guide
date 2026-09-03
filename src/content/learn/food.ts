@@ -63,7 +63,7 @@ export const FOOD: Reference = {
     {
       id: 'forbidden',
       heading: 'What is actually forbidden?',
-      body: 'Four things, and the Qur’an names them outright.',
+      body: 'Five things, and the Qur’an names each of them outright.',
       /*
         This is the page's answer, so the verse breaks the margins rather than
         sitting in the drawer. Everything below unpacks what it just said —
@@ -117,7 +117,7 @@ export const FOOD: Reference = {
               }),
             ],
             additionalExplanation:
-              'The starting point is not in dispute. All four schools hold that meat slaughtered by Jews and Christians is lawful, and all four hold that an animal killed by strangling, electrocution or anything other than cutting the throat was not lawfully slaughtered at all. What people disagree about is whether a modern slaughterhouse still meets that second condition. Stunning, mechanical blades and who is actually doing the slaughtering are all part of it. That makes it a question about how agreed rules apply today rather than a split between the schools, which is why this note names no school and counts nobody: some scholars hold the verse still covers ordinary supermarket meat, and others hold that industrial slaughter no longer resembles what it describes and restrict meat to what is certified. Buying certified halal meat satisfies every position, which is why most converts start there and settle the question later. Nobody is doing anything strange by taking the cautious route while they learn, and nobody is being lax by relying on the verse. The specifics are worth asking someone locally about rather than resolving from an article.',
+              'The starting point is not in dispute. All four schools hold that meat slaughtered by Jews and Christians is lawful, and all four hold that an animal killed by strangling, electrocution or anything other than cutting the throat was not lawfully slaughtered at all. What people disagree about is whether a modern slaughterhouse still meets that second condition. Stunning, mechanical blades and who is actually doing the slaughtering are all part of it.\n\nSo this is a question about how agreed rules apply today, not a split between the schools, and no school is named here. Some scholars hold that the verse still covers ordinary supermarket meat. Others hold that industrial slaughter no longer resembles what the verse describes, and restrict meat to what is certified. Certified halal meat satisfies every position, which is why most converts start there and settle the question later. Taking the cautious route while you learn is not strange, and relying on the verse is not lax. The specifics are worth asking someone locally rather than settling from an article.',
           },
         ),
       ],

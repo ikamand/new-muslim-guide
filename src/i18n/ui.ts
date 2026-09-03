@@ -76,7 +76,7 @@ export const EN = {
   'ask.results': 'Answers',
   'ask.emptyTitle': 'Nothing here answers that yet',
   'ask.emptyBody':
-    'The app can only answer what has been written and checked. This one has not been, so rather than guess it says nothing.',
+    'Only questions that have been written up and checked can be answered here. This one has not been yet.',
   'ask.browse': 'Browse everything',
   'home.help': 'Something’s come up',
   'home.helpElse': 'Something else',
@@ -96,18 +96,18 @@ export const EN = {
     `src/content/ramadan-arc.ts`; the zakat row reuses `today.zakat`.
   */
   'arc.before': 'Ramadan is close',
-  'arc.early': 'Ramadan — the first days',
+  'arc.early': 'Ramadan, the first days',
   'arc.tarawih': 'Tonight, at the mosque',
   'arc.eid': 'Eid is close',
   /*
     The fast line on Today, month 9 and late Shaʿban only. Times, never day
     numbers — the sighting humility in `seasons.ts` applies to every word.
   */
-  'fast.suhoor': 'Suhoor ends at Fajr — {time}',
-  'fast.iftar': 'Iftar at Maghrib — {time}',
+  'fast.suhoor': 'Suhoor ends at Fajr, {time}',
+  'fast.iftar': 'Iftar at Maghrib, {time}',
   'ramadan.wake': 'Wake me for suhoor, about 45 minutes before Fajr',
   'ramadan.wake.help':
-    'Ramadan is close. The app can wake you before Fajr for suhoor — change it any time, here or in Settings.',
+    'Ramadan is close. The app can wake you before Fajr for suhoor. Change it any time, here or in Settings.',
   'suhoor.notification.title': 'Suhoor',
   'suhoor.notification.body': 'Fajr is at {time}. Time to eat something.',
   'adhkar.notification.title': 'Morning adhkār',
@@ -146,7 +146,7 @@ export const EN = {
   'onboarding.said.recently': 'Yes, recently',
   'onboarding.said.a-while': 'Yes, a while ago',
   'onboarding.prays.title': 'Can you pray on your own yet?',
-  'onboarding.prays.teach-me': 'No — teach me',
+  'onboarding.prays.teach-me': 'No, teach me',
   'onboarding.prays.teach-me.help': 'Every step, with the words written out.',
   'onboarding.prays.need-words': 'I need the words in front of me',
   'onboarding.prays.need-words.help': 'You know the shape of it and want the text there.',
@@ -167,7 +167,7 @@ export const EN = {
   'zakat.title': 'Working out zakat',
   'zakat.intro': 'Zakat is 2.5% of the wealth you have held for a lunar year, once it passes a threshold. This works out the sum for the three things nobody disputes. It is not a ruling on what you owe.',
   'zakat.currency': 'Currency',
-  'zakat.cash': 'Cash — in hand, in accounts, saved',
+  'zakat.cash': 'Cash: in hand, in accounts, saved',
   'zakat.gold': 'Gold you hold, in grams',
   'zakat.silver': 'Silver you hold, in grams',
   'zakat.total': 'That comes to',
@@ -175,18 +175,18 @@ export const EN = {
   'zakat.thresholds': 'The thresholds',
   'zakat.reached': 'your total is above this',
   'zakat.below': 'your total is below this',
-  'zakat.whole': 'Above a threshold, zakat is due on the whole amount — not only the part above the line.',
+  'zakat.whole': 'Above a threshold, zakat is due on the whole amount, not only the part above the line.',
   'zakat.silverFirst': 'Silver is listed first because it is the lower threshold, so more people give and more reaches those entitled to it. That is a position, and some follow the gold threshold instead.',
   'zakat.priced': 'Gold and silver priced {date} · {source}',
   'zakat.stale': 'This price ships with the app and does not update on its own. Check it against a dealer before acting on a close call.',
-  'zakat.hawl': 'Zakat falls due when a lunar year has passed on wealth that stayed above the threshold — on your own date, whichever month that is. Many people pay during Ramadan by choice, for the extra reward, and that is not the same as it being due then.',
+  'zakat.hawl': 'Zakat falls due when a lunar year has passed on wealth that stayed above the threshold, on your own date, whichever month that is. Many people pay during Ramadan by choice, for the extra reward, and that is not the same as it being due then.',
   'zakat.notCounted': 'What this has not counted',
-  'zakat.notCounted.body': 'Debts you owe · money owed to you · business stock · shares and pensions · crypto · property beyond your home · jewellery you wear. Each of these is answered differently by different scholars, and some are modern questions with no settled answer. If any is a large part of your wealth, this sum is not your zakat and you need a person.',
+  'zakat.notCounted.body': 'Debts you owe · money owed to you · business stock · shares and pensions · crypto · property beyond your home · jewellery you wear. Each of these is answered differently by different scholars, and some are modern questions with no settled answer. If any of these is a large part of your wealth, this sum is not your zakat. Ask someone qualified.',
   'zakat.noCurrency': 'This app does not carry a price in that currency. Rather than convert through a rate it does not have, it stops.',
-  'zakat.open': 'Cash, gold and silver — and what it does not count',
+  'zakat.open': 'Cash, gold and silver, and what it does not count',
   'zakat.currencies': 'currencies',
   'firsts.title': 'Your firsts',
-  'firsts.intro': 'Things that happen once. Nothing here is a target, and nothing counts down — this is a record of what has already happened, in the order it did.',
+  'firsts.intro': 'Things that happen once. Nothing here is a target, and nothing counts down. This is a record of what has already happened, in the order it did.',
   'firsts.none': 'Nothing yet. The app marks some of these itself when it sees them.',
   'firsts.notYet': 'Not yet',
   'firsts.mark': 'This has happened',
@@ -222,7 +222,7 @@ export const EN = {
   'learn.shahada.line': 'The shahada · read the words again',
   'today.firstAsk': 'It is Friday tomorrow',
   'today.zakat': 'It is Ramadan',
-  'today.zakat.why': 'Many people work theirs out this month. It is not due now — it is due when a year has passed on your own wealth.',
+  'today.zakat.why': 'Many people work theirs out this month. It is not due now. It is due when a year has passed on your own wealth.',
   'today.away': 'You seem to be away from home',
   'today.lastThird': 'The last third of the night',
   'today.continue': 'Carry on where you were',
@@ -287,7 +287,7 @@ export const EN = {
     'Location services are turned off, so the times can’t be worked out. Turn them on in your phone’s settings and come back.',
   'times.useLocation': 'Use my location',
   /* Three states nobody had translated, found by `npm run nav:check`. */
-  'settings.footnote': 'The Arabic always stays — it is what you actually say. Everything on this device stays on this device.',
+  'settings.footnote': 'The Arabic always stays, because it is what you actually say. Everything on this device stays on this device.',
   'guide.missing': 'That guide doesn’t exist.',
   /* The written page's chrome — the two-inks law. ("The answer", the matn
      frame's label, went on 3 Sep: the frame shows the question instead.) */
@@ -308,7 +308,7 @@ export const EN = {
     state and the qibla drew anyway.
   */
   'qibla.bearing': '{deg}° from north',
-  'qibla.where': 'The Kaʿbah is {point} of you. If the arrow is jumping about, face that way using anything you trust — a map, the sun, a neighbour.',
+  'qibla.where': 'The Kaʿbah is {point} of you. If the arrow is jumping about, face that way using anything you trust: a map, the sun, a neighbour.',
   'qibla.needLocation': 'The qibla is worked out from where you are, so it needs your location. It is used on this device and never sent anywhere.',
   'qibla.locating': 'Finding your location…',
   'qibla.noCompass': 'This phone isn’t reporting a compass heading, so the arrow is pointing at the raw bearing rather than at the Kaʿbah. Use the number above.',
@@ -392,7 +392,7 @@ export const EN = {
   'awqat.whiteDays': 'The white days',
   'awqat.whiteDays.detail': 'Three sunnah fasting days mid-month',
   'awqat.projected':
-    'The Hijri column follows the Umm al-Qura projection. The sacred dates — Ramadan, the Eids, ʿAshuraʾ, ʿArafah — are settled by the moon being sighted, so they are not printed here. Your mosque will know them in the week beforehand.',
+    'The Hijri column follows the Umm al-Qura projection. The sacred dates, Ramadan, the Eids, ʿAshuraʾ and ʿArafah, are settled by the moon being sighted, so they are not printed here. Your mosque will know them in the week beforehand.',
 
   /**
    * Units for the counts on cards. A bare "14" tells a beginner nothing — it
@@ -476,7 +476,7 @@ export const EN = {
   'adhkar.pinFull': 'Ten is the most you can pin. Unpin one to add another.',
   'adhkar.tapToCount': 'Tap anywhere to count',
   'adhkar.swipeOn': 'Tap to move on',
-  'adhkar.instruction': 'Something to do — tap to continue',
+  'adhkar.instruction': 'Something to do. Tap to continue',
   'adhkar.inTheEvening': 'In the evening, say instead:',
   'adhkar.previous': 'Previous',
   'adhkar.next': 'Next',
@@ -503,7 +503,7 @@ export const EN = {
   */
   /* The tab's own name — a description, never a command (Iyad, 2 Sep). */
   'quran.title': 'Qur’an',
-  'quran.intro': 'Al-Fatihah and Juz ʿAmma — the short surahs most often recited in prayer.',
+  'quran.intro': 'Al-Fatihah and Juz ʿAmma, the short surahs most often recited in prayer.',
   /* A state, not a task — and the surah screen's own words for it. */
   'quran.progress': '{done} of {total} known by heart',
   /* The fihrist's one red line: why 114 follows 1. */
@@ -538,21 +538,21 @@ export const EN = {
   */
   'recite.title': 'Recite with me',
   'recite.explain':
-    'Recite out loud and the words light up as you are heard. The listening happens entirely on this phone — nothing you say is recorded, saved, or sent anywhere.',
+    'Recite out loud and the words light up as you are heard. The listening happens entirely on this phone. Nothing you say is recorded, saved, or sent anywhere.',
   'recite.download': 'Get the listening models ({mb} MB, once)',
-  'recite.downloading.recognition': 'Fetching the recognition model — best on wifi…',
+  'recite.downloading.recognition': 'Fetching the recognition model. Best on wifi…',
   'recite.start': 'Start listening',
   'recite.starting': 'Getting ready…',
   'recite.stop': 'Stop',
   'recite.ayahOf': 'Ayah {a} of {total}',
   'recite.permission':
     'The microphone is off for this app, and recitation can only be followed if it can be heard. You can allow it in your phone’s settings.',
-  'recite.listening': '● Listening — recite at your own pace',
+  'recite.listening': '● Listening. Recite at your own pace',
   'recite.listeningHint':
-    'Recite out loud — each word lights up as it is heard.',
+    'Recite out loud. Each word lights up as it is heard.',
   'recite.error': 'Listening stopped. Try again.',
   'recite.complete': 'You recited it all the way through.',
-  'settings.storage.recite': 'Recite with me — the listening models',
+  'settings.storage.recite': 'Recite with me: the listening models',
 
   /*
     The classroom — repeat after the reciter (Phase 6). The score line says
@@ -560,9 +560,9 @@ export const EN = {
     claim, and hearing is exactly it.
   */
   'recite.classroom.start': 'Repeat after the reciter',
-  'recite.classroom.listen': 'Listen — ayah {a} of {total}',
-  'recite.classroom.yourTurn': '● Your turn — say the lit word',
-  'recite.classroom.score': 'Heard {n} of {total} words — {pct}%',
+  'recite.classroom.listen': 'Listen: ayah {a} of {total}',
+  'recite.classroom.yourTurn': '● Your turn. Say the lit word',
+  'recite.classroom.score': 'Heard {n} of {total} words, {pct}%',
   'recite.classroom.again': 'Once more',
   'recite.classroom.next': 'Next ayah',
   'recite.classroom.skip': 'Skip this word',
@@ -649,7 +649,7 @@ export const EN = {
     six-moment day screen and was already attached to nothing.
   */
   'duas.intro':
-    'Short sets of words said at fixed points in the day — and a duʿa for almost anything else.',
+    'Short sets of words said at fixed points in the day, and a duʿa for almost anything else.',
   'learn.duas.title': 'Everyday duʿas',
   'learn.duas.subtitle': 'Waking, eating, leaving the house, sleeping',
   'learn.practice.title': 'Practice the recitations',
@@ -699,9 +699,9 @@ export const EN = {
   */
   'settings.asr': 'ʿAsr time',
   'settings.asr.help':
-    'The schools differ on when ʿAsr begins: when a shadow equals its object, or twice it. Your mosque’s timetable follows one — match it.',
-  'settings.asr.standard': 'Standard — shadow equals its object',
-  'settings.asr.hanafi': 'Later — twice its object (Hanafi)',
+    'The schools differ on when ʿAsr begins: when a shadow equals its object, or twice it. Your mosque’s timetable follows one. Match it.',
+  'settings.asr.standard': 'Standard: shadow equals its object',
+  'settings.asr.hanafi': 'Later: twice its object (Hanafi)',
   /*
     Match your mosque. `mosque.iqamah` is the two-column trap named at the
     moment it matters; `mosque.drift` is the season caveat — a fit that is
@@ -711,15 +711,15 @@ export const EN = {
   'mosque.title': 'Match your mosque',
   'mosque.intro': 'Copy today’s times from your mosque’s board or website, and the app works out the rest.',
   'mosque.iqamah':
-    'Boards often print two columns. Enter the first — the adhan, when the prayer comes in. The second, iqamah, is when the congregation stands, usually 10–30 minutes later.',
+    'Boards often print two columns. Enter the first, the adhan, which is when the prayer comes in. The second, the iqamah, is when the congregation stands, usually 10 to 30 minutes later.',
   'mosque.matched': 'Matched',
   'mosque.hanafi': 'Hanafi ʿAsr',
   'mosque.use': 'Use these times',
   'mosque.incomplete': 'Enter all five times from the board and the match appears here.',
   'mosque.noMatch':
-    'These times don’t line up with any calculation the app knows. The usual reason is the iqamah column — check the board for an adhan column and try those times instead.',
+    'These times don’t line up with any calculation the app knows. The usual reason is the iqamah column. Check the board for an adhan column and try those times instead.',
   'mosque.drift':
-    'A match made today can drift with the seasons if the mosque follows something unusual. If the app and the board disagree next month, match again — it takes a minute.',
+    'A match made today can drift with the seasons if the mosque follows something unusual. If the app and the board disagree next month, match again. It takes a minute.',
   'mosque.active': 'Matched to your mosque',
   'mosque.clear': 'Back to this phone’s own times',
   'settings.reminders': 'Prayer reminders',
@@ -735,8 +735,8 @@ export const EN = {
     express an absence, because none of them knows one.
   */
   'settings.suhoor': 'During Ramadan: wake me before Fajr for suhoor',
-  'settings.adhkarNote': 'Morning adhkār — a note when the window opens',
-  'settings.jumuahNote': 'Jumuʿah — a note on Thursday evening',
+  'settings.adhkarNote': 'Morning adhkār: a note when the window opens',
+  'settings.jumuahNote': 'Jumuʿah: a note on Thursday evening',
   'reminder.now': 'It is time to pray.',
   'reminder.soon': 'In {n} minutes.',
   'settings.duringPrayer': 'During prayer',
@@ -810,9 +810,9 @@ export const EN = {
     greeting is the better first sentence anyway: it is the first thing anyone
     will actually say to them, taught by being said.
   */
-  'onboarding.welcome.body1': 'Assalamu alaikum — peace be upon you.',
+  'onboarding.welcome.body1': 'Assalamu alaikum. Peace be upon you.',
   'onboarding.welcome.body2': 'You don’t need to learn everything today.',
-  'onboarding.welcome.body3': 'We’ll take it one step at a time.',
+  'onboarding.welcome.body3': 'One thing at a time, starting with whatever you need first.',
   'onboarding.welcome.cta': 'Let’s get started',
 
   'onboarding.stage.title': 'Where are you right now?',
@@ -832,11 +832,11 @@ export const EN = {
   'onboarding.interest.understanding': 'Understanding Islam',
   'onboarding.interest.unsure': 'I’m not sure',
 
-  'onboarding.reassure.title': 'Don’t worry about learning everything',
-  'onboarding.reassure.body1': 'Islam is a lifelong journey.',
-  'onboarding.reassure.body2': 'You are not expected to know everything immediately.',
+  'onboarding.reassure.title': 'You are not behind',
+  'onboarding.reassure.body1': 'Nobody learns this all at once, and nobody expects you to.',
+  'onboarding.reassure.body2': 'Start with what you need today. The rest will keep.',
   'onboarding.reassure.body3':
-    'Start with what you need today. We’ll help you with the rest as you go.',
+    'Nothing here is locked, timed or scored.',
   'onboarding.reassure.cta': 'Let’s begin',
 
   'settings.storage': 'Saved audio',
@@ -873,7 +873,7 @@ export const EN = {
     cannot drift between the first asking and every asking after it.
   */
   'learn.progress': 'What you already know',
-  'learn.progress.meta': 'Correct what the book assumes.',
+  'learn.progress.meta': 'Tell the app what you already know.',
   /*
     The written-page Learn tab (2 Sep) — the manuscript grammar made literal.
     "Book" is the screen's own metaphor: finished lessons are ink, unread
@@ -973,10 +973,10 @@ export const EN = {
     'Allah, His Messenger, and where the religion comes from.',
   'curriculum.unit.how-to-pray': 'How to pray',
   'curriculum.unit.how-to-pray.purpose':
-    'One rakʿah, learned once — every prayer is built from it.',
+    'One rakʿah, learned once. Every prayer is built from it.',
   'curriculum.unit.when-it-goes-wrong': 'When it goes wrong',
   'curriculum.unit.when-it-goes-wrong.purpose':
-    'Losing count, breaking wudu, missing a prayer — all recoverable.',
+    'Losing count, breaking wudu, missing a prayer. All recoverable.',
   'curriculum.unit.praying-with-others': 'Praying with others',
   'curriculum.unit.praying-with-others.purpose':
     'The call, the mosque, the imam, and Friday.',
@@ -988,7 +988,7 @@ export const EN = {
     'Halal and haram where you actually meet them.',
   'curriculum.unit.people': 'People',
   'curriculum.unit.people.purpose':
-    'Family, manners, marriage — and the day someone dies.',
+    'Family, manners, marriage, and the day someone dies.',
   'curriculum.unit.meeting-muslims': 'Meeting other Muslims',
   'curriculum.unit.meeting-muslims.purpose':
     'Why confident people tell you opposite things.',
@@ -1002,7 +1002,7 @@ export const EN = {
     'The night prayers, and the ones for a moment.',
   'curriculum.unit.interior-life': 'The interior life',
   'curriculum.unit.interior-life.purpose':
-    'Anger, envy, showing off, arrogance — and their cures.',
+    'Anger, envy, showing off, arrogance, and their cures.',
   'curriculum.unit.practices': 'Practices to take on',
   'curriculum.unit.practices.purpose':
     'Small sunnahs that become yours over the years.',
@@ -1027,9 +1027,9 @@ export const EN = {
   'learn.browse.subtitle': 'The same pages, grouped by the moment they answer',
   'library.title': 'By situation',
   'library.intro':
-    'The same pages as the path, grouped by the moment they answer — for when life produces the question.',
+    'The same pages as the path, grouped by the moment they answer, for when life produces the question.',
   'learn.everyPrayer.title': 'Every prayer',
-  'learn.everyPrayer.subtitle': 'All of them side by side — rakʿahs, sunnah, and when',
+  'learn.everyPrayer.subtitle': 'All of them side by side: rakʿahs, sunnah, and when',
   'count.lessons': 'lessons',
 
   'settings.guidance': 'Prayer guidance for',

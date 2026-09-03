@@ -37,9 +37,9 @@ export type PrayerId = (typeof PRAYER_IDS)[number];
 export const PRAYER_LABEL: Record<PrayerId, string> = {
   fajr: 'Fajr',
   dhuhr: 'Dhuhr',
-  asr: 'Asr',
+  asr: 'ʿAsr',
   maghrib: 'Maghrib',
-  isha: 'Isha',
+  isha: 'ʿIsha',
 };
 
 export type LatLon = { latitude: number; longitude: number };

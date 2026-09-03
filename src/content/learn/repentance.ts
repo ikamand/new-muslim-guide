@@ -44,7 +44,7 @@ export const REPENTANCE: Reference = {
       id: 'how',
       heading: 'What does repentance actually take?',
       body:
-        'Stopping, meaning it, and asking. There is no ritual, no witness, and nobody to confess to. You turn to God directly. The Qur’an calls it turning to Him with sincere repentance, and that is the whole procedure.',
+        'Stopping, meaning it, and asking. There is no ritual, no witness, and nobody to confess to. You turn to God directly. The Qur’an calls it turning to Him with sincere repentance, and that is all it takes.',
       sources: [quran(66, 8, { surahName: 'At-Tahrim' })],
     },
     {
@@ -64,11 +64,11 @@ export const REPENTANCE: Reference = {
       id: 'again',
       heading: 'What if I do it again?',
       body:
-        'You repent again. People expect to fail once and be finished; that is not how it works, and a habit that takes a year to break took a year for everybody else too. Keep praying while you work on it. Stopping the prayer because you feel unworthy of it is the one move that makes things worse.',
+        'You repent again. People expect to fail once and be finished. That is not how it works, and a habit that takes a year to break took a year for everybody else too. Keep praying while you work on it. Stopping the prayer because you feel unworthy of it is the one thing that makes it worse.',
       notes: [
         note(
           'practical',
-          'Nobody is owed an account of your sins. You do not have to tell an imam, a friend, or anyone at the mosque.',
+          'No one is owed an account of your sins. You do not have to tell an imam, a friend, or anyone at the mosque.',
         ),
       ],
     },

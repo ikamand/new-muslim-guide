@@ -65,14 +65,14 @@ export const ISLAMIC_CALENDAR: Reference = {
       heading: 'Why does the date move every year?',
       promote: 'hero',
       body:
-        'Twelve months, each beginning with a new moon, making a year about eleven days shorter than the solar one. That is why Ramadan and the two Eids move earlier every year rather than falling on fixed dates. Over a lifetime they pass through every season.',
+        'Because the year is made of twelve lunar months, each beginning with a new moon, and that makes it about eleven days shorter than the solar year. So Ramadan and the two Eids arrive about eleven days earlier each year rather than falling on fixed dates. Over a lifetime they pass through every season.',
       sources: [quran(9, 36, { surahName: 'At-Tawbah' })],
     },
     {
       id: 'months',
       heading: 'What are the twelve months?',
       body:
-        'In order, from the top of the year. Four are sacred, two carry an Eid and one carries the fast; the other five have nothing in them at all. Several are named for a season they no longer fall in — Rabiʿ is spring, Jumada is the dry part of the year — because the months kept moving and the names did not.',
+        'In order, from the start of the year. Four are sacred, two carry an Eid and one carries the fast. The other five have nothing particular in them. Several are named for a season they no longer fall in, because the months kept moving and the names did not: Rabiʿ means spring, and Jumada is the dry part of the year.',
       /*
         Names and dates only. Every claim that needed a narration moved down to
         `worth`, and the reason is the render order rather than the writing: a
@@ -82,18 +82,18 @@ export const ISLAMIC_CALENDAR: Reference = {
         heading and has to be the first thing under it.
       */
       bullets: [
-        '**1. Muharram** — Sacred. The year opens here, and its tenth day is ʿAshuraʾ.',
-        '**2. Safar** — Nothing falls in it.',
-        '**3. Rabiʿ al-Awwal** — Nothing falls in it.',
-        '**4. Rabiʿ al-Akhir** — Nothing falls in it. You will hear it called Rabiʿ ath-Thani too.',
-        '**5. Jumada al-Ula** — Nothing falls in it.',
-        '**6. Jumada al-Akhirah** — Nothing falls in it. Also called Jumada ath-Thaniyah.',
-        '**7. Rajab** — Sacred, and the odd one of the four: the other three run consecutively and this one stands on its own.',
-        '**8. Shaʿban** — The month before Ramadan.',
-        '**9. Ramadan** — The month of the fast, and the month in which the Qur’an began to be revealed.',
-        '**10. Shawwal** — Opens with Eid al-Fitr, on its first day.',
-        '**11. Dhul-Qaʿdah** — Sacred.',
-        '**12. Dhul-Hijjah** — Sacred, and the month of Hajj. Its tenth day is Eid al-Adha.',
+        '**1. Muharram**: sacred. The year opens here, and its tenth day is ʿAshuraʾ.',
+        '**2. Safar**: nothing falls in it.',
+        '**3. Rabiʿ al-Awwal**: nothing falls in it.',
+        '**4. Rabiʿ al-Akhir**: nothing falls in it. You will also hear it called Rabiʿ ath-Thani.',
+        '**5. Jumada al-Ula**: nothing falls in it.',
+        '**6. Jumada al-Akhirah**: nothing falls in it. Also called Jumada ath-Thaniyah.',
+        '**7. Rajab**: sacred, and the odd one of the four. The other three run consecutively, and this one stands on its own.',
+        '**8. Shaʿban**: the month before Ramadan.',
+        '**9. Ramadan**: the month of the fast, and the month in which the Qur’an began to be revealed.',
+        '**10. Shawwal**: opens with Eid al-Fitr, on its first day.',
+        '**11. Dhul-Qaʿdah**: sacred.',
+        '**12. Dhul-Hijjah**: sacred, and the month of Hajj. Its tenth day is Eid al-Adha.',
       ],
       notes: [
         note(
@@ -121,7 +121,7 @@ export const ISLAMIC_CALENDAR: Reference = {
         section and wrong when a list is.
       */
       body:
-        'Only one thing in the year is obligatory, and it is Ramadan, which has a lesson of its own. Four others are worth knowing because you will hear all four mentioned and none of them is required: the fast of ʿAshuraʾ on the tenth of Muharram, which the Prophet ﷺ kept and which became voluntary once Ramadan was prescribed; fasting through Shaʿban, which he did more of than in any month but Ramadan; six fasts spread through Shawwal after Ramadan; and the first ten days of Dhul-Hijjah, which he described as the best days of the year for doing good.',
+        'Only one thing in the year is obligatory, and that is Ramadan, which has a page of its own. Four other things are worth knowing about, because you will hear all four mentioned, and none of them is required. The fast of ʿAshuraʾ, on the tenth of Muharram, which the Prophet ﷺ kept and which became voluntary once Ramadan was prescribed. Fasting in Shaʿban, which he did more than in any month except Ramadan. Six fasts spread through Shawwal, after Ramadan. And the first ten days of Dhul-Hijjah, which he described as the best days of the year for doing good.',
       sources: [
         // The tenth of Muharram, named as such, ordered and then left
         // voluntary once Ramadan came — both halves of that sentence.
@@ -176,14 +176,14 @@ export const ISLAMIC_CALENDAR: Reference = {
       id: 'practical',
       heading: 'How does this affect my week?',
       body:
-        'For most of the year, not at all — you will pick the date up from the people around you and never need to work it out. It only matters at the two ends of Ramadan, and there it is announced locally rather than calculated in advance, so mosques in the same city can start the month or the Eid a day apart. That is normal and not worth worrying about.',
+        'For most of the year, not at all. You will pick the date up from the people around you and never need to work it out. It only matters at the two ends of Ramadan, and there it is announced locally rather than calculated in advance, so mosques in the same city can start the month, or the Eid, a day apart. That is normal and not worth worrying about.',
       notes: [
         note(
           'differs',
           'Whether a month begins by sighting the moon locally or by astronomical calculation is a live question, and communities in the same country sometimes start Ramadan on different days.',
           {
             additionalExplanation:
-              'Both approaches are argued from evidence and neither community is being careless. As a beginner the practical answer is to follow the mosque or community you pray with. Scholars have discussed this in more detail.',
+              'Both approaches are argued from evidence, and neither community is being careless. As a beginner, the practical answer is to follow the mosque or community you pray with.',
             positions: [
               { school: 'the majority', position: 'Follow the sighting of the moon, as reported locally or regionally.' },
               { school: 'contemporary scholarship', position: 'Some bodies accept astronomical calculation to fix the date in advance.' },

@@ -77,7 +77,7 @@ export const TAHAJJUD: Reference = {
       heading: 'How do I actually start?',
       body:
         'Set an alarm twenty minutes before Fajr rather than for the middle of the night. You are already going to be awake for Fajr; this is standing up a little earlier. Starting there is why people keep it.',
-      sources: [general('Practical advice, claiming nothing about the ruling.')],
+      sources: [general('Practical advice, not a ruling.')],
     },
   ],
 };
@@ -181,7 +181,7 @@ export const TAWBA_PRAYER: Reference = {
       heading: 'What is it for?',
       promote: 'hero',
       body:
-        'Abu Bakr reported that the Prophet ﷺ said no one does something wrong, then gets up and purifies himself, then prays, then asks God’s forgiveness, except that God forgives him. Wudu, two rakʿahs, and asking. That is the whole of it.',
+        'Abu Bakr reported that the Prophet ﷺ said no one does something wrong, then gets up and purifies himself, then prays, then asks God’s forgiveness, except that God forgives him. Wudu, two rakʿahs, and asking. Nothing more is needed.',
       sources: [
         hadeethEnc('abu-dawud', '65063', { grading: 'sahih', role: 'practice' }),
       ],
@@ -248,7 +248,7 @@ export const QIYAM_AL_LAYL: Reference = {
       heading: 'Where will I hear the word?',
       body:
         'In Ramadan, mosques announce “qiyam” for the long night prayers in the last ten nights. Taraweeh is the same family of prayer. You are welcome at it, you can leave when you need to, and nobody is counting your rakʿahs.',
-      sources: [general('Ordinary description of what happens at a mosque in Ramadan, claiming nothing about the ruling.')],
+      sources: [general('Ordinary description of what happens at a mosque in Ramadan, not a ruling.')],
     },
     {
       id: 'close',

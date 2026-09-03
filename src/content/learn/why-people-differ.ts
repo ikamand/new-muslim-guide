@@ -44,20 +44,20 @@ export const WHY_PEOPLE_DIFFER: Reference = {
       id: 'what',
       heading: 'What is a madhhab?',
       body:
-        'A school of legal reasoning. Four of them are followed today — Ḥanafī, Mālikī, Shāfiʿī and Ḥanbalī — named after scholars of the first centuries, and every one of them is Sunni. They are not denominations and not sects. They are four careful attempts at the same question: given the Qur’an and the Sunnah, what exactly follows?\n\nMost Muslims you meet follow one, usually the one their country follows, and most of them have never thought about it — the way most people have never thought about which grammar they speak.',
+        'A school of legal reasoning. Four are followed today, Hanafi, Maliki, Shafiʿi and Hanbali, each named after a scholar of the first centuries, and every one of them is Sunni. They are not denominations and not sects. They are four careful attempts at the same question: given the Qur’an and the Sunnah, what exactly follows?\n\nMost Muslims you meet follow one, usually the one their country follows, and most have never thought about it, in the way most people have never thought about the grammar of the language they speak.',
     },
     {
       id: 'why',
       heading: 'Why would there be four answers?',
       body:
-        'Because the texts do not spell out every case, and reading them takes judgement. Two scholars can hold the same narration, agree it is authentic, and still reach different conclusions about what it obliges — one reads a command as binding, the other as strongly encouraged; one has a narration the other never received.\n\nThat is not a flaw that was later discovered. It was anticipated: the Prophet ﷺ said that a judge who strives to reach the right answer is rewarded even when he gets it wrong, and rewarded twice when he gets it right. A religion that rewards a wrong answer arrived at honestly is a religion that expects careful people to disagree.',
+        'Because the texts do not spell out every case, and reading them takes judgement. Two scholars can hold the same narration, agree that it is authentic, and still reach different conclusions about what it requires. One reads a command as binding, the other as strongly encouraged. One has a narration the other never received.\n\nThat is not a flaw discovered later. It was expected. The Prophet ﷺ said that a judge who strives to reach the right answer is rewarded even when he gets it wrong, and rewarded twice when he gets it right. A religion that rewards a wrong answer reached honestly is a religion that expects careful people to disagree.',
       sources: [hadith('bukhari', '7352')],
     },
     {
       id: 'scale',
       heading: 'How much do they actually disagree about?',
       body:
-        'Far less than the noise suggests. Nobody differs about the five prayers, the fast of Ramadan, or what is forbidden. The differences are in the detail of practice — where the hands rest, whether the intention is said aloud, how many times something is wiped — and in the harder edges of law.\n\nIf you learned to pray from this app and prayed behind an imam of any of the four, you would be praying correctly. That is worth knowing before somebody tells you otherwise.',
+        'Far less than the noise suggests. No one differs about the five prayers, the fast of Ramadan, or what is forbidden. The differences are in the detail of practice, such as where the hands rest, whether the intention is said aloud and how many times something is wiped, and in the harder edges of law.\n\nIf you learned to pray from this app and prayed behind an imam from any of the four, you would be praying correctly. That is worth knowing before somebody tells you otherwise.',
       notes: [
         note(
           'agreed',
@@ -69,10 +69,10 @@ export const WHY_PEOPLE_DIFFER: Reference = {
       id: 'this-app',
       heading: 'Which one does this app teach?',
       body:
-        'One clear way, on purpose, because somebody learning to pray needs a path rather than a comparison table. Where a difference is one you will actually meet — at a mosque, from a friend, in a book — the app marks it and says what the other positions are, rather than pretending there is only one.\n\nSo when you see a note saying scholars differ here, that is not the app hedging. It is the app telling you in advance about a conversation you are going to have.',
+        'One clear way, on purpose, because somebody learning to pray needs a path rather than a comparison table. Where a difference is one you will actually meet, at a mosque, from a friend or in a book, the app marks it and says what the other positions are, rather than pretending there is only one.\n\nSo when you see a note saying that scholars differ, that is not the app hedging. It is the app telling you in advance about a conversation you are going to have.',
       sources: [
         general(
-          'A statement of this app’s own editorial approach, claiming no textual authority. What the schools hold is above and cited; how this app presents it is a design decision recorded in CLAUDE.md.',
+          'A statement of this app’s own approach, not a ruling. What the schools hold is cited above; how this app presents it is an editorial decision.',
         ),
       ],
     },
@@ -80,7 +80,7 @@ export const WHY_PEOPLE_DIFFER: Reference = {
       id: 'which',
       heading: 'Do I have to pick one?',
       body:
-        'Not on day one, and probably not for a long time. In practice most converts end up following whichever school the mosque they attend follows, which is a perfectly ordinary way to arrive at it and requires no decision at all.\n\nWhat is worth avoiding is assembling your own from whichever answer is easiest in each case. Not because anybody is policing it, but because it stops being a considered position and becomes a preference wearing a scholar’s name.',
+        'Not on day one, and probably not for a long time. In practice most converts end up following whichever school their mosque follows, which is a perfectly ordinary way to arrive at it and requires no decision at all.\n\nWhat is worth avoiding is assembling your own from whichever answer is easiest in each case. Not because anybody is policing it, but because that stops being a considered position and becomes a preference wearing a scholar’s name.',
       notes: [
         note(
           'practical',

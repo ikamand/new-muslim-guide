@@ -37,19 +37,19 @@ export const ADHAN: Reference = {
       id: 'what',
       heading: 'What am I hearing?',
       body:
-        'The adhan is the announcement that a prayer’s time has come in. It is called out — from a mosque, from a phone, sometimes by one person in a room — and it happens five times a day at the times in this app.\n\nIt is not a summons you are late for and it is not a countdown. It marks the opening of a window, and the window is usually hours long.',
+        'The adhan is the announcement that a prayer’s time has come in. It is called out from a mosque, from a phone, or sometimes by one person in a room, and it happens five times a day, at the times shown in this app.\n\nIt is not a summons you are late for, and it is not a countdown. It marks the opening of a window, and the window is usually hours long.',
     },
     {
       id: 'say-back',
       heading: 'Am I supposed to say something back?',
       promote: 'hero',
       body:
-        'Quietly repeating what the caller says, line by line, is the ordinary thing to do while it is happening — and there is a short duʿa said afterwards. Neither is obligatory, and neither is complicated.',
+        'The usual thing is to quietly repeat what the caller says, line by line, while the adhan is being called, and then to say a short duʿa afterwards. Neither is obligatory, and neither is complicated.',
       sources: [hadith('bukhari', '611')],
       notes: [
         note(
           'practical',
-          'If you do not know the words yet, listening is enough. Nobody is watching, and nobody starts out knowing them.',
+          'If you do not know the words yet, listening is enough. No one starts out knowing them.',
         ),
       ],
     },
@@ -57,13 +57,13 @@ export const ADHAN: Reference = {
       id: 'second-call',
       heading: 'Why did it happen twice?',
       body:
-        'The adhan announces the time. A second, shorter call — the iqamah — is given immediately before a congregation actually starts praying. If you are in a mosque and hear a second one a few minutes after the first, that is people standing up to pray, not a mistake.',
+        'The adhan announces the time. A second, shorter call, the iqamah, is given immediately before a congregation actually starts praying. If you are in a mosque and hear a second call a few minutes after the first, that is people standing up to pray, not a mistake.',
     },
     {
       id: 'not-a-deadline',
       heading: 'Does this mean I am late?',
       body:
-        'Hearing the adhan for a prayer you have not prayed does not mean you are late. It means that prayer has just become available. The times card on the Today screen shows when each window closes, which is the part worth knowing.',
+        'Hearing the adhan for a prayer you have not prayed yet does not mean you are late. It means that prayer has just become available. The times card on the Today screen shows when each window closes, and that is the part worth knowing.',
       notes: [
         note(
           'practical',

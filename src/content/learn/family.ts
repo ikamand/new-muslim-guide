@@ -87,7 +87,7 @@ export const FAMILY: Reference = {
       notes: [
         note(
           'practical',
-          'Who you may marry, and what a valid marriage requires, has real detail to it and depends on your circumstances. Scholars have discussed this in more detail, and it is a question to take to someone locally rather than settle from a page.',
+          'Who you may marry, and what a valid marriage requires, has real detail to it and depends on your circumstances. It is a question to take to someone locally rather than settle from a page.',
         ),
       ],
     },

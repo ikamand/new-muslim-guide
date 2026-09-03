@@ -117,7 +117,7 @@ export const RECITERS: readonly Reciter[] = [
     id: 'sudais',
     folder: 'Abdurrahmaan_As-Sudais_192kbps',
     name: 'Abdurrahman As-Sudais',
-    blurb: 'An imam of the Sacred Mosque in Makkah. The voice you will hear on a broadcast from there.',
+    blurb: 'An imam of the Sacred Mosque in Mecca. The voice you will hear on a broadcast from there.',
     source: SOURCES.sudais,
   },
   {

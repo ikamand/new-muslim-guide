@@ -52,7 +52,7 @@ export const WORK: Reference = {
       notes: [
         note(
           'practical',
-          'If you already have a mortgage or a loan, you have not ruined anything and you do not have to solve it this month. Islamic finance options exist in many countries and vary a great deal. Scholars have discussed this in more detail, so get advice on your actual situation.',
+          'If you already have a mortgage or a loan, you have not ruined anything, and you do not have to solve it this month. Islamic finance options exist in many countries and vary a great deal. Get advice on your actual situation.',
         ),
       ],
     },
@@ -76,7 +76,7 @@ export const WORK: Reference = {
           'Scholars differ on how much distance from a prohibited thing is enough, so answers vary by how central it is to the job.',
           {
             additionalExplanation:
-              'The usual reasoning looks at whether the forbidden thing is the point of the work or incidental to it, at how much of your income depends on it, and at what leaving would cost you. Someone whose whole income is from selling alcohol is in a different position from someone who occasionally rings it through a till, and someone who cannot simply leave is in a different position again. This note used to set out two positions and attribute one to the majority and one to contemporary scholarship, which stated a count nobody has taken, and the first of them was not a disagreement at all, since the clear case is agreed. Where scholars actually differ is on the line, and the line moves with the facts, which is why the answer here is to describe your actual job to someone qualified rather than to read a general rule off a page.',
+              'The usual reasoning looks at whether the forbidden thing is the point of the work or incidental to it, at how much of your income depends on it, and at what leaving would cost you. Someone whose whole income comes from selling alcohol is in a different position from someone who occasionally rings it through a till, and someone who cannot simply leave is in a different position again. The clear case is agreed. Where scholars actually differ is on where the line falls, and the line moves with the facts. That is why the answer here is to describe your actual job to someone qualified rather than to read a general rule off a page.',
           },
         ),
         note(

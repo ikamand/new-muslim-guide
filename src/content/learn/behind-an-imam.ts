@@ -33,18 +33,18 @@ export const BEHIND_AN_IMAM: Reference = {
       heading: 'What am I actually meant to do?',
       promote: 'hero',
       body:
-        'Follow him, and follow him slightly late. The Prophet ﷺ said the imam is appointed to be followed — so you bow when he has bowed, not with him and never before him. If you find yourself moving at the same moment, you are going too early.\n\nThat is most of it. The prayer is the same prayer you already know; what changes is that somebody else decides when.',
+        'Follow the imam, and follow him slightly late. The Prophet ﷺ said the imam is appointed to be followed, so you bow once he has bowed, not with him and never before him. If you find yourself moving at the same moment as him, you are going too early.\n\nThat is most of it. The prayer is the same prayer you already know. What changes is that somebody else decides when each movement happens.',
       sources: [hadith('bukhari', '722')],
     },
     {
       id: 'recitation',
       heading: 'Do I still recite?',
       body:
-        'In the prayers said aloud — Fajr, Maghrib and ʿIsha — the imam recites and you listen. In the silent ones you recite quietly to yourself as usual. Either way you say the same things in bowing and prostration that you would alone.',
+        'In the prayers recited aloud, Fajr, Maghrib and ʿIsha, the imam recites and you listen. In the silent ones you recite quietly to yourself as usual. Either way, you say the same things in bowing and prostration that you would say alone.',
       notes: [
         note(
           'differs',
-          'Whether you also read Al-Fatihah quietly behind the imam in an aloud prayer is a place the schools genuinely part company. Follow what the mosque you are in does, and nobody will think anything of it.',
+          'Whether you also read Al-Fatihah quietly behind the imam in a prayer recited aloud is a point on which the schools genuinely differ. Follow what the mosque you are in does.',
         ),
       ],
     },
@@ -52,7 +52,7 @@ export const BEHIND_AN_IMAM: Reference = {
       id: 'rows',
       heading: 'Where do I stand?',
       body:
-        'In the row, shoulder to shoulder, filling the gaps. Rows are straightened deliberately before the prayer starts and somebody may touch your shoulder or foot to line you up — that is not a correction of you, it is what happens to everyone. If a row is full, start the next one behind it.',
+        'In the row, shoulder to shoulder, filling the gaps. Rows are straightened before the prayer starts, and somebody may touch your shoulder or foot to line you up. That is not a correction aimed at you. It happens to everyone. If a row is full, start the next one behind it.',
       sources: [hadith('bukhari', '689')],
       notes: [
         note(
@@ -65,11 +65,11 @@ export const BEHIND_AN_IMAM: Reference = {
       id: 'lost',
       heading: 'What if I lose track?',
       body:
-        'Keep following. You do not have to know which rakʿah it is — the imam does, and your job is to be in the same position he is. If everyone sits and you were about to stand, sit. Nobody is counting on your behalf and nobody is watching you the way it feels.',
+        'Keep following. You do not have to know which rakʿah it is. The imam does, and your job is to be in the same position as him. If everyone sits and you were about to stand, sit. No one is watching you the way it feels.',
       notes: [
         note(
           'practical',
-          'If the imam makes a mistake, men say **subḥān Allāh** and women clap once. You will hear it happen; it is normal and it is not a scandal.',
+          'If the imam makes a mistake, men say **subḥān Allāh** and women clap once. You will hear it happen. It is normal, and it is not a scandal.',
         ),
       ],
     },
@@ -84,10 +84,10 @@ export const BEHIND_AN_IMAM: Reference = {
       id: 'first-time',
       heading: 'Will anyone notice I am new?',
       body:
-        'Less than you think. A room in prayer is looking forward, not sideways. Stand at the back, copy the person next to you, and accept that you will be half a second behind everything — which is, technically, exactly right.',
+        'Less than you think. A room in prayer is looking forward, not sideways. Stand at the back, copy the person next to you, and accept that you will be half a second behind everything. Half a second behind is exactly where you are meant to be.',
       sources: [
         general(
-          'Ordinary orientation for a first congregation, claiming no textual authority. The etiquette above is what the narrations state; this is what a room feels like.',
+          'Ordinary orientation for a first congregation, not a ruling. The etiquette above comes from the narrations; this is what the room feels like.',
         ),
       ],
     },

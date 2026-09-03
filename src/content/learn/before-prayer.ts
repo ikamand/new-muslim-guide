@@ -31,7 +31,7 @@ export const BEFORE_PRAYER: Reference = {
       heading: 'Is it the right time?',
       promote: 'hero',
       body:
-        'Each prayer has a window, and you pray inside it rather than whenever you like, and the Qur’an calls prayer a decree of specified times. The Pray tab works the times out from where you are, on the phone, so you do not have to calculate anything.',
+        'Each prayer has a window, and you pray inside it rather than whenever you like. The Qur’an calls prayer a decree of specified times. The Today screen works the times out from where you are, on the phone itself, so you do not have to calculate anything.',
       sources: [quran(4, 103, { surahName: 'An-Nisa' })],
       notes: [
         note(
@@ -39,7 +39,7 @@ export const BEFORE_PRAYER: Reference = {
           'If your local mosque prints a timetable and it differs from the app by a few minutes, follow the mosque.',
           {
             additionalExplanation:
-              'The app works the times out from the position of the sun, which is arithmetic. A mosque timetable is a decision: which twilight angle to use for Fajr and Isha, whether to round to the nearest five minutes, whether to hold Isha back in summer so people can get there. Both are honest answers to the same question and they land a few minutes apart. Praying with the congregation you actually pray with matters more than the arithmetic, and the differences are almost always small enough that either time falls inside the window anyway. The one place it is worth checking is high summer in a northern country, where Fajr and Isha can crowd together and mosques handle it in noticeably different ways.',
+              'The app works the times out from the position of the sun, which is arithmetic. A mosque timetable involves decisions: which twilight angle to use for Fajr and ʿIsha, whether to round to the nearest five minutes, whether to hold ʿIsha back in summer so people can get there. Both are honest answers to the same question, and they land a few minutes apart.\n\nPraying with the congregation you actually pray with matters more than the arithmetic. The differences are almost always small enough that either time falls inside the window. The one place worth checking is high summer in a northern country, where Fajr and ʿIsha can crowd together and mosques handle it in noticeably different ways.',
           },
         ),
       ],
@@ -104,7 +104,7 @@ export const BEFORE_PRAYER: Reference = {
               }),
             ],
             additionalExplanation:
-              'Most of this is agreed and only one part of it is open. The imams agree that the place of the intention is the heart and that the prayer never asks you to speak it, so that is not one side of an argument. What they differ on is whether voicing it is recommended. Ibn Taymiyyah, who records both views, reports that scholars among the followers of Abu Hanifah, ash-Shafi`i and Ahmad held it recommended as a way of making the intention firmer, and that scholars among the followers of Malik and Ahmad held it is not, because neither the Prophet ﷺ nor his Companions did it; he takes the second view. This note used to give the first row as the majority and the second as a minority, which counted scholars nobody has counted and put an agreed point on one side of a disagreement. If you were taught to say it, saying it harms nothing.',
+              'Most of this is agreed, and only one part is open. The imams agree that the intention lives in the heart and that the prayer never asks you to speak it, so that is not one side of an argument. What they differ on is whether saying it aloud is recommended.\n\nIbn Taymiyyah records both views. Scholars among the followers of Abu Hanifah, ash-Shafi`i and Ahmad held it recommended, as a way of making the intention firmer. Scholars among the followers of Malik and Ahmad held that it is not, because neither the Prophet ﷺ nor his Companions did it. He takes the second view. If you were taught to say it, saying it harms nothing.',
             positions: [
               {
                 school: 'Hanafi',

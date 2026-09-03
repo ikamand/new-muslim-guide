@@ -28,7 +28,7 @@ export const EID: Reference = {
   quickFacts: [
     { label: 'How many', value: 'Two a year', emphasis: true },
     { label: 'The prayer', value: 'Morning, once, and it is short' },
-    { label: 'The date', value: 'Ask locally — it is decided by sighting' },
+    { label: 'The date', value: 'Ask locally. It is decided by sighting the moon' },
   ],
   sections: [
     {
@@ -41,7 +41,7 @@ export const EID: Reference = {
       id: 'when',
       heading: 'When exactly is it?',
       body:
-        'Ask your local mosque, and ask a day or two before. The month begins by sighting the new moon, so the date is not settled until it is — and mosques in the same city sometimes differ by a day. This app deliberately does not tell you, because a calculated date is wrong often enough to matter here.',
+        'Ask your local mosque, and ask a day or two before. The month begins when the new moon is sighted, so the date is not settled until it is, and mosques in the same city sometimes differ by a day. This app does not give you the date, because a calculated date is wrong often enough to matter here.',
       notes: [
         note(
           'practical',
@@ -53,7 +53,7 @@ export const EID: Reference = {
       id: 'prayer',
       heading: 'What is the Eid prayer like?',
       body:
-        'Short, and unlike the daily prayers in two ways: it is two rakʿahs with several extra **Allāhu akbar** said before the recitation, and the talk comes AFTER the prayer rather than before it. There is no adhan and no iqamah for it.\n\nIf you do not know when the extra takbirs come, watch the row in front and raise your hands when they do.',
+        'Short, and unlike the daily prayers in two ways. It is two rakʿahs with several extra **Allāhu akbar** said before the recitation, and the talk comes after the prayer rather than before it. There is no adhan and no iqamah.\n\nIf you do not know when the extra takbirs come, watch the row in front and raise your hands when they do.',
       sources: [hadith('bukhari', '956')],
     },
     {
@@ -61,23 +61,23 @@ export const EID: Reference = {
       heading: 'What do people do before it?',
       promote: 'hero',
       body:
-        'Wash, put on the best clothes they own, and go. On Eid al-Fitr specifically the Prophet ﷺ would eat something — dates — before leaving, which is worth knowing because on every other festival morning you might assume you were meant to be fasting. You are not; fasting on the two Eids is not done.',
+        'They wash, put on the best clothes they own, and go. On Eid al-Fitr the Prophet ﷺ would eat something before leaving, a few dates. That is worth knowing, because on a festival morning after a month of fasting you might assume you were meant to fast. You are not. Fasting on the two Eids is not done.',
       sources: [hadith('bukhari', '953')],
     },
     {
       id: 'alone',
       heading: 'What if I have nobody to spend it with?',
       body:
-        'This is the hardest day of the year for a lot of converts, and it is worth saying plainly rather than leaving you to discover it. A family day is a hard day to have no family in.\n\nGo to the prayer. Mosques are at their most welcoming that morning and somebody will almost certainly invite you to eat — if nobody does, it is fair to say to a person there that it is your first Eid. That sentence tends to end with you at a table.',
+        'For a lot of converts this is the hardest day of the year, and it is better said plainly than left for you to discover. A family day is a hard day to have no family in.\n\nGo to the prayer. Mosques are at their most welcoming that morning, and somebody will almost certainly invite you to eat. If no one does, it is fine to tell someone there that it is your first Eid. That usually ends with you at a table.',
       sources: [
         general(
-          'Ordinary pastoral orientation, claiming no textual authority. Named here because every convert-support source surveyed reports the two Eids as the loneliest days in a convert’s year.',
+          'Ordinary pastoral advice, not a ruling. Included because every convert-support source surveyed reports the two Eids as the loneliest days in a convert’s year.',
         ),
       ],
       notes: [
         note(
           'practical',
-          'Plan it a few days ahead rather than on the morning. Eid arranged in advance is a different day from Eid improvised at 9am.',
+          'Plan it a few days ahead rather than on the morning. An Eid arranged in advance is a very different day from one improvised at 9am.',
         ),
       ],
     },

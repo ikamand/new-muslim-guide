@@ -41,11 +41,11 @@ export const MINIMUM_PRAYER: Reference = {
       id: 'counts',
       heading: 'Is a short prayer still a prayer?',
       body:
-        'The guides in this app walk you through a prayer at its fullest — every position, every word, in order. That is what to aim at, and it is not the bar. A prayer done briefly, plainly, with the essentials in place, is a prayer. It is not half a prayer and it does not need making up later.\n\nThis page exists because reading "23 steps" on a night when you have four minutes and no confidence can make praying feel out of reach. It is not.',
+        'Yes. The guides in this app walk you through a prayer at its fullest: every position, every word, in order. That is what to aim at, but it is not the bar. A prayer done briefly and plainly, with the essentials in place, is a prayer. It is not half a prayer, and it does not need making up later.\n\nReading "23 steps" on a night when you have four minutes and no confidence can make praying feel out of reach. It is not.',
       notes: [
         note(
           'practical',
-          'On a hard day, the least is the right amount. Nobody is grading the difference.',
+          'On a hard day, the least is the right amount.',
         ),
       ],
     },
@@ -57,7 +57,7 @@ export const MINIMUM_PRAYER: Reference = {
       bullets: [
         'Say **Allāhu akbar** to begin.',
         'Recite what you know of the Qur’an.',
-        'Bow, and settle there — not a dip on the way past.',
+        'Bow, and settle there. Not a dip on the way past.',
         'Stand back up straight.',
         'Prostrate, and settle there.',
         'Sit up calmly between the prostrations, and do the same through the rest of it.',
@@ -74,14 +74,14 @@ export const MINIMUM_PRAYER: Reference = {
       id: 'if-you-only-know',
       heading: 'What if I only know Al-Fatihah?',
       body:
-        'Then you have what you need. Al-Fatihah is the part the prayer does not do without, and anything after it is more rather than necessary. If you are still learning the words, read them from the screen — nobody has to hold them in memory before they are allowed to start.',
+        'Then you have what you need. Al-Fatihah is the part the prayer cannot do without, and anything after it is extra rather than necessary. If you are still learning the words, read them from the screen. No one has to know them by heart before they are allowed to start.',
     },
     {
       id: 'on-time',
       heading: 'Is it better to rush it or pray it late?',
       promote: 'hero',
       body:
-        'The prayer has fixed times, and the time is part of it. Given the choice between a short prayer inside its window and a careful one after the window has closed, pray the short one. The full shape will come; the time will not come back.',
+        'The prayer has fixed times, and the time is part of it. Given the choice between a short prayer inside its window and a careful one after the window has closed, pray the short one. The full shape will come later. The time will not come back.',
       sources: [quran(4, 103, { surahName: 'An-Nisa' })],
     },
   ],

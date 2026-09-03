@@ -21,7 +21,7 @@ export const HOW_PRAYER_WORKS: Reference = {
   id: 'how-prayer-works',
   surface: 'learn',
   title: 'How prayer works',
-  subtitle: 'One rakʿah, learned once — every prayer is built from it',
+  subtitle: 'One rakʿah, learned once. Every prayer is built from it',
   meta: {
     category: 'salah',
     difficulty: 'foundational',
@@ -34,7 +34,7 @@ export const HOW_PRAYER_WORKS: Reference = {
     ],
   },
   quickFacts: [
-    { label: 'The unit', value: 'One rakʿah — a round of standing, bowing and prostrating', emphasis: true },
+    { label: 'The unit', value: 'One rakʿah, a round of standing, bowing and prostrating', emphasis: true },
     { label: 'The counts', value: '2 · 4 · 4 · 3 · 4, from Fajr to ʿIsha' },
   ],
   sections: [
@@ -42,7 +42,7 @@ export const HOW_PRAYER_WORKS: Reference = {
       id: 'one-pattern',
       heading: 'Why do the five prayers look identical?',
       body:
-        'Because they are. Every prayer in Islam is the same movements and the same words, repeated a set number of times. Fajr is not one skill and Maghrib another — there is ONE skill, and it is smaller than the step-by-step guides make it look. Learn it once and you have learned every prayer you will ever pray, including the voluntary ones.\n\nWhat changes from prayer to prayer is two facts: how many times round, and whether the Qur’an is recited aloud or quietly. That is the whole difference.',
+        'Because they are. Every prayer in Islam is the same movements and the same words, repeated a set number of times. Fajr is not one skill and Maghrib another. There is one skill, and it is smaller than the step-by-step guides make it look. Learn it once and you have learned every prayer you will ever pray, including the voluntary ones.\n\nOnly two things change from prayer to prayer: how many times round, and whether the Qur’an is recited aloud or quietly.',
     },
     {
       id: 'the-rakah',
@@ -50,7 +50,7 @@ export const HOW_PRAYER_WORKS: Reference = {
       body:
         'A rakʿah is one round of the prayer’s movements. When the Prophet ﷺ was asked to teach the prayer, what he listed is short, and it is this round:',
       bullets: [
-        'Stand and recite what you know of the Qur’an — Al-Fatihah first.',
+        'Stand and recite what you know of the Qur’an, Al-Fatihah first.',
         'Bow, and settle there.',
         'Stand back up straight.',
         'Prostrate, and settle there.',
@@ -60,7 +60,7 @@ export const HOW_PRAYER_WORKS: Reference = {
       notes: [
         note(
           'practical',
-          'That is the unit. A four-rakʿah prayer is this, four times — nothing new appears in round three that was not in round one.',
+          'That is the unit. A four-rakʿah prayer is this, four times. Nothing new appears in round three that was not in round one.',
         ),
       ],
     },
@@ -68,23 +68,23 @@ export const HOW_PRAYER_WORKS: Reference = {
       id: 'the-joints',
       heading: 'What holds the rounds together?',
       body:
-        'Three joints, and the guides walk you through each: the prayer opens by saying Allāhu akbar; partway through — after the second rakʿah, in prayers longer than two — you sit briefly for the tashahhud; and at the very end you sit again, say the tashahhud, and close by turning your head to each side with the salam. Everything else is the rounds themselves.',
+        'Three joints, and the guides walk you through each of them. The prayer opens with Allāhu akbar. In prayers longer than two rakʿahs, you sit briefly for the tashahhud after the second. At the very end you sit again, say the tashahhud, and close by turning your head to each side with the salam. Everything else is the rounds themselves.',
     },
     {
       id: 'the-counts',
       heading: 'So what changes between the five?',
       body: 'Only the count, and whether you hear the recitation:',
       bullets: [
-        '**Fajr** — 2 rakʿahs, Qur’an aloud.',
-        '**Dhuhr** — 4, quietly.',
-        '**ʿAsr** — 4, quietly.',
-        '**Maghrib** — 3, first two aloud.',
-        '**ʿIsha** — 4, first two aloud.',
+        '**Fajr**: 2 rakʿahs, Qur’an aloud.',
+        '**Dhuhr**: 4, quietly.',
+        '**ʿAsr**: 4, quietly.',
+        '**Maghrib**: 3, first two aloud.',
+        '**ʿIsha**: 4, first two aloud.',
       ],
       notes: [
         note(
           'practical',
-          'The Every prayer screen keeps this table one tap away, with the sunnah prayers that ride before and after each — you never need to hold it in memory.',
+          'The Every prayer screen keeps this table one tap away, with the sunnah prayers before and after each one. You never need to hold it in your memory.',
         ),
       ],
     },
@@ -92,7 +92,7 @@ export const HOW_PRAYER_WORKS: Reference = {
       id: 'learning-it',
       heading: 'How do I actually learn it?',
       body:
-        'By praying, with the guide open. Pick the next prayer of the day, follow it step by step on the mat, and let the pattern teach itself — after a week the guide is confirming what your body already knows. Nobody learns the prayer from a page and then performs it; everybody learns it by doing it imperfectly first.\n\nAnd on a night when even that feels like too much, the least you can do is enough — that is its own page, and it is short.',
+        'By praying, with the guide open. Pick the next prayer of the day, follow it step by step on the mat, and let the pattern teach itself. After a week the guide is confirming what your body already knows. No one learns the prayer from a page and then performs it. Everyone learns it by doing it imperfectly first.\n\nOn a night when even that feels like too much, the least you can do is enough. That has its own page, and it is short.',
     },
   ],
 };

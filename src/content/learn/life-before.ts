@@ -41,7 +41,7 @@ export const LIFE_BEFORE: Reference = {
       id: 'wiped',
       heading: 'Does my past come with me?',
       body:
-        'A companion of the Prophet ﷺ, near the end of his life, said that when Islam entered his heart he asked to give his pledge — and was told that Islam demolishes what came before it. Not forgives it slowly. Demolishes.\n\nYou did not arrive owing for those years. No debt carried over, no probation, nothing to work off.',
+        'A companion of the Prophet ﷺ, near the end of his own life, recalled that when Islam entered his heart he went to give his pledge, and was told that Islam demolishes what came before it. Not forgives it slowly. Demolishes it.\n\nYou did not arrive owing for those years. No debt carried over, no probation, nothing to work off.',
       sources: [hadith('muslim', '121')],
     },
     {
@@ -49,14 +49,14 @@ export const LIFE_BEFORE: Reference = {
       heading: 'Is it only cancelled?',
       promote: 'hero',
       body:
-        'The Qur’an goes further than clearing the account. For those who turn, believe and do right, it says the wrongs are exchanged for good — not merely wiped, but swapped. Read that once and then again, because it is not what most people expect a religion to say about their worst years.',
+        'No, the Qur’an goes further than cancelling it. For those who turn back, believe and do right, it says their wrongs are exchanged for good. Not merely wiped out, but swapped. Read that twice, because it is not what most people expect a religion to say about their worst years.',
       sources: [quran(25, 70, { surahName: 'Al-Furqan' })],
     },
     {
       id: 'confession',
       heading: 'Do I have to tell anyone what I did?',
       body:
-        'There is no confession in Islam. Nobody at a mosque needs your history, no imam has to hear it, and nothing about your becoming Muslim requires you to describe what you are leaving. Anyone who asks is asking for themselves, not for the religion, and you can decline.',
+        'There is no confession in Islam. No one at a mosque needs your history, no imam has to hear it, and nothing about becoming Muslim requires you to describe what you are leaving behind. Anyone who asks is asking for their own reasons, not for the religion, and you can decline.',
       notes: [
         note(
           'practical',
@@ -68,7 +68,7 @@ export const LIFE_BEFORE: Reference = {
       id: 'still-here',
       heading: 'What about the things that have not gone away?',
       body:
-        'Some of the past is not past. A marriage, children, a job, money, family who do not know. Those are real and they do not vanish, and this page is not going to pretend otherwise or rule on them — they have conditions on them and they need somebody who knows your situation.\n\nWhat has already been settled is the part underneath: none of it disqualifies you, and none of it has to be solved before you pray tonight.',
+        'Some of the past is not past. A marriage, children, a job, money, family who do not know. Those are real, and they do not vanish. There are no rulings on them here, because each has conditions on it and needs somebody who knows your situation.\n\nWhat is already settled is the part underneath: none of it disqualifies you, and none of it has to be solved before you pray tonight.',
       notes: [
         note(
           'practical',
@@ -80,7 +80,7 @@ export const LIFE_BEFORE: Reference = {
       id: 'guilt',
       heading: 'Why do I still feel guilty?',
       body:
-        'It often does, and it is not a sign that something was left undone. The Qur’an tells people who have wronged themselves not to despair, and the address is to them specifically — not to people who have nothing to regret. Feeling it is not evidence against you.',
+        'Guilt often lingers, and it is not a sign that something was left undone. The Qur’an tells people who have wronged themselves not to despair, and it is addressed to them specifically, not to people with nothing to regret. Feeling guilty is not evidence against you.',
       sources: [quran(39, 53, { surahName: 'Az-Zumar' })],
       notes: [note('practical', 'If it becomes heavy rather than passing, that is worth telling a person you trust.')],
     },

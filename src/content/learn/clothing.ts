@@ -108,7 +108,7 @@ export const CLOTHING: Reference = {
               }),
             ],
             additionalExplanation:
-              'This note used to weigh a majority against a minority, and that count does not hold in either direction. Dorar’s Encyclopedia of Fiqh calls covering the face the view of the majority of scholars, while summaries written from inside the Hanafi and Maliki schools present the opposite as the common position. So the schools are named below rather than counted. You will meet Muslims on both sides who are each following scholarship they trust, and the detail of any one school is worth hearing from someone qualified rather than reading in a summary.',
+              'Reference works do not agree on which side is the majority. Dorar’s Encyclopedia of Fiqh calls covering the face the view of most scholars, while summaries written from inside the Hanafi and Maliki schools present the opposite as the common position. So the schools are named below rather than counted. You will meet Muslims on both sides, each following scholarship they trust. The detail of any one school is worth hearing from someone qualified rather than reading in a summary.',
             positions: [
               {
                 school: 'Maliki',
@@ -135,7 +135,7 @@ export const CLOTHING: Reference = {
         ),
         note(
           'practical',
-          'Nobody has the right to pressure you, and starting is often gradual. If covering would put you in danger or out you before you are ready, that is a real circumstance to discuss with someone knowledgeable rather than a rule you are breaking.',
+          'No one has the right to pressure you, and most people start gradually. If covering would put you in danger, or reveal your conversion before you are ready, that is a real circumstance to discuss with someone knowledgeable, not a rule you are breaking.',
         ),
       ],
     },

@@ -129,7 +129,7 @@ export const RAMADAN: Reference = {
               },
             ],
             additionalExplanation:
-              'This lesson used to say the exemptions were covered by "makes the days up later", which is one of these four answers stated as though it were the ruling. There is a fifth position that is older than all of them: Ibn `Abbas and Ibn `Umar held that a pregnant or breastfeeding woman feeds a poor person for each day and does not make the days up at all, which is the gentlest of the answers and is still taught. Among contemporary scholars, Ibn Baz, Ibn `Uthaymin and the Permanent Committee held that the days are made up. Nothing here needs deciding in the abstract: work out with someone knowledgeable what applies to your own situation, and do it before Ramadan rather than in the middle of it.',
+              'There is also a fifth position, older than all four: Ibn `Abbas and Ibn `Umar held that a pregnant or breastfeeding woman feeds a poor person for each day and does not make the days up at all. It is the gentlest of the answers, and it is still taught. Among contemporary scholars, Ibn Baz, Ibn `Uthaymin and the Permanent Committee held that the days are made up. Nothing here needs deciding in the abstract. Work out with someone knowledgeable what applies to your own situation, and do it before Ramadan rather than in the middle of it.',
           },
         ),
         note(

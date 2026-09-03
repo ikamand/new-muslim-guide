@@ -50,7 +50,7 @@ export const SUNNAH: Reference = {
       id: 'authentic',
       heading: 'Are all hadith reliable?',
       body:
-        'Because hadith were transmitted by people, scholars spent centuries grading them, examining every chain and every narrator. Some are sound, some are weak, and some are forgeries. This is why the app names its sources: so you can check, rather than take its word.',
+        'No. Because hadith were passed on by people, scholars spent centuries grading them, examining every chain and every narrator. Some are sound, some are weak, and some are forgeries. That is why this app names its sources: so you can check, rather than take its word.',
       notes: [
         note(
           'agreed',

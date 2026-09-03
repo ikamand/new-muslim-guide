@@ -336,7 +336,15 @@ const styles = StyleSheet.create({
     tab-bar inset.
   */
   content: {
-    padding: Spacing.four,
+    /*
+      One measure for all four tabs (3 Sep): sides at Spacing.three and the
+      ʿunwān's rule at Spacing.three from the top. Today already opened at 16
+      and the other three opened at 48 — 24 of content padding plus 24 of
+      header padding — so the rule jumped down a notch on three tabs out of
+      four. The sides were 24 here and on Duʿa against 16 on Learn and
+      Qur'an, which made the same rule two widths. Both are one number now.
+    */
+    paddingHorizontal: Spacing.three,
     paddingTop: Spacing.three,
     paddingBottom: BottomTabInset + Spacing.two,
     gap: Spacing.two,

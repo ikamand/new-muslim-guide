@@ -334,7 +334,11 @@ function Row({
 const styles = StyleSheet.create({
   safeArea: { flex: 1 },
   content: {
-    padding: Spacing.four,
+    /* Spacing.three, the measure every tab opens on — see `(tabs)/index.tsx`.
+       These sides were 24 against Learn's and Qur'an's 16, so the ʿunwān's
+       rule was 16px shorter here than on the tab beside it (Iyad, 3 Sep). */
+    paddingHorizontal: Spacing.three,
+    paddingTop: Spacing.three,
     /*
       Every other tab clears the tab bar this way. This one used a bare
       `Spacing.six`, which is 64 against the 74 iOS needs and the 104 Android
@@ -361,7 +365,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     width: 3,
   },
-  header: { gap: Spacing.two, paddingTop: Spacing.four, paddingBottom: Spacing.two },
+  header: { gap: Spacing.two, paddingBottom: Spacing.two },
   strand: {
     height: STRAND_HEIGHT,
   },

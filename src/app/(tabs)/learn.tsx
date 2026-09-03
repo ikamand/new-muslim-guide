@@ -523,7 +523,8 @@ const styles = StyleSheet.create({
     asked for the narrow sides, 2 Sep).
   */
   content: {
-    paddingVertical: Spacing.four,
+    /* Spacing.three, the measure every tab opens on — see `(tabs)/index.tsx`. */
+    paddingTop: Spacing.three,
     paddingHorizontal: Spacing.three,
     paddingBottom: BottomTabInset + Spacing.four,
     width: '100%',
@@ -532,9 +533,9 @@ const styles = StyleSheet.create({
   },
   header: {
     gap: Spacing.two,
-    paddingTop: Spacing.four,
     /* The air between the ʿunwān's closing rule and the frame's opening one
-       is the header's, as padding — never a container gap. */
+       is the header's, as padding — never a container gap. Nothing above the
+       opening rule: the scroll's own paddingTop is the whole of it. */
     paddingBottom: Spacing.three,
   },
   heroWrap: {

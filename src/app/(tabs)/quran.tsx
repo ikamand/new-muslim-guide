@@ -326,8 +326,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   content: {
-    paddingVertical: Spacing.four,
-    /* Slimmer sides than the app's usual 24: the frame spends its own. */
+    /* Spacing.three, the measure every tab opens on — see `(tabs)/index.tsx`. */
+    paddingTop: Spacing.three,
     paddingHorizontal: Spacing.three,
     paddingBottom: BottomTabInset + Spacing.four,
     width: '100%',
@@ -336,7 +336,6 @@ const styles = StyleSheet.create({
   },
   header: {
     gap: Spacing.two,
-    paddingTop: Spacing.four,
     /* The header owns the air above the band; a gap paints nothing. */
     paddingBottom: Spacing.two,
   },

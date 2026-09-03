@@ -1844,6 +1844,14 @@ export function JadwalMark({ color, size = 22 }: { color: string; size?: number 
   last stock Ionicons in the app (moon, book, bookmarks, sun). All on the
   24 grid at the house stroke; the tab bar supplies colour and size, so
   active/inactive stays a tint change and nothing else about the bar moves.
+
+  ⚠️ Being on the same grid is not the same as being the same size, and the
+  first cut of these was not. Measured as ink rather than as viewBox, the
+  four came out 15.9, 11.6, 16.3 and 19.3 units tall: the arcade was 40%
+  shorter than the misbaha and read as a smaller icon in the bar (Iyad,
+  3 Sep). They now share an optical block — ink from y≈3.5 to y≈20.25,
+  about 16.5 tall — and the two architectural marks share a ground line at
+  20.25. Redraw anything here and measure the ink, not the box.
 */
 
 /** Today: a mihrab niche with the gold moment inside — the Awqat card as a mark. */
@@ -1852,9 +1860,9 @@ export function NicheMark({ color, size = 24 }: { color: ColorValue; size?: numb
     <Svg width={size} height={size} viewBox="0 0 24 24" fill="none">
       <G stroke={color} strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
         <Path d="M2.75 20.25 H21.25" />
-        <Path d="M5.5 20.25 V11.5 C5.5 6.6 8.2 4.4 12 4.4 C15.8 4.4 18.5 6.6 18.5 11.5 V20.25" />
+        <Path d="M5.5 20.25 V11.2 C5.5 6.1 8.2 3.9 12 3.9 C15.8 3.9 18.5 6.1 18.5 11.2 V20.25" />
       </G>
-      <Circle cx={12} cy={9.6} r={1.7} fill={color} />
+      <Circle cx={12} cy={9.3} r={1.7} fill={color} />
     </Svg>
   );
 }
@@ -1864,12 +1872,12 @@ export function ArcadeMark({ color, size = 24 }: { color: ColorValue; size?: num
   return (
     <Svg width={size} height={size} viewBox="0 0 24 24" fill="none">
       <G stroke={color} strokeWidth={1.4} strokeLinecap="round" strokeLinejoin="round">
-        <Path d="M2.5 19.75 H21.5" />
-        <Path d="M3.1 19.75 V13.9 Q3.1 10.4 5.4 10.4 Q7.7 10.4 7.7 13.9 V19.75" />
-        <Path d="M9.7 19.75 V12.4 Q9.7 8.2 12 8.2 Q14.3 8.2 14.3 12.4 V19.75" />
-        <Path d="M16.3 19.75 V13.9 Q16.3 10.4 18.6 10.4 Q20.9 10.4 20.9 13.9 V19.75" />
+        <Path d="M2.75 20.25 H21.25" />
+        <Path d="M2.75 20.25 V13.8 Q2.75 9.4 5 9.4 Q7.25 9.4 7.25 13.8 V20.25" />
+        <Path d="M9 20.25 V11.4 Q9 4.6 12 4.6 Q15 4.6 15 11.4 V20.25" />
+        <Path d="M16.75 20.25 V13.8 Q16.75 9.4 19 9.4 Q21.25 9.4 21.25 13.8 V20.25" />
       </G>
-      <Circle cx={12} cy={13.6} r={1.3} fill={color} />
+      <Circle cx={12} cy={14.2} r={1.3} fill={color} />
     </Svg>
   );
 }
@@ -1879,10 +1887,10 @@ export function RehlMark({ color, size = 24 }: { color: ColorValue; size?: numbe
   return (
     <Svg width={size} height={size} viewBox="0 0 24 24" fill="none">
       <G stroke={color} strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
-        <Path d="M5.2 20.6 L18.8 9.2" />
-        <Path d="M18.8 20.6 L5.2 9.2" />
-        <Path d="M12 5.9 C10.4 4.3 8 4 5.9 4.6 L5.9 9 C8 8.4 10.4 8.7 12 10.3 C13.6 8.7 16 8.4 18.1 9 L18.1 4.6 C16 4 13.6 4.3 12 5.9 Z" />
-        <Path d="M12 5.9 V10.3" strokeWidth={1} />
+        <Path d="M4.8 20.25 L19.2 8.9" />
+        <Path d="M19.2 20.25 L4.8 8.9" />
+        <Path d="M12 5.6 C10.2 3.9 7.6 3.6 5.4 4.2 L5.4 8.8 C7.6 8.2 10.2 8.5 12 10.2 C13.8 8.5 16.4 8.2 18.6 8.8 L18.6 4.2 C16.4 3.6 13.8 3.9 12 5.6 Z" />
+        <Path d="M12 5.6 V10.2" strokeWidth={1} />
       </G>
     </Svg>
   );
@@ -1892,19 +1900,21 @@ export function RehlMark({ color, size = 24 }: { color: ColorValue; size?: numbe
 export function MisbahaMark({ color, size = 24 }: { color: ColorValue; size?: number }) {
   return (
     <Svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <G stroke={color} strokeWidth={1.3} strokeLinecap="round" strokeLinejoin="round">
-        <Circle cx={12} cy={3.4} r={1.25} />
-        <Circle cx={15.88} cy={4.66} r={1.25} />
-        <Circle cx={18.28} cy={7.96} r={1.25} />
-        <Circle cx={18.28} cy={12.04} r={1.25} />
-        <Circle cx={15.88} cy={15.34} r={1.25} />
-        <Circle cx={8.12} cy={15.34} r={1.25} />
-        <Circle cx={5.72} cy={12.04} r={1.25} />
-        <Circle cx={5.72} cy={7.96} r={1.25} />
-        <Circle cx={8.12} cy={4.66} r={1.25} />
-        <Path d="M12 16.6 V19" />
+      {/* 1.4 like the niche and the arcade: at 1.3 on the narrowest of the
+          four marks the loop read lighter than the rest of the bar. */}
+      <G stroke={color} strokeWidth={1.4} strokeLinecap="round" strokeLinejoin="round">
+        <Circle cx={12} cy={4.7} r={1.25} />
+        <Circle cx={15.7} cy={5.75} r={1.25} />
+        <Circle cx={17.98} cy={8.57} r={1.25} />
+        <Circle cx={17.98} cy={12.03} r={1.25} />
+        <Circle cx={15.7} cy={14.84} r={1.25} />
+        <Circle cx={8.3} cy={14.84} r={1.25} />
+        <Circle cx={6.02} cy={12.03} r={1.25} />
+        <Circle cx={6.02} cy={8.57} r={1.25} />
+        <Circle cx={8.3} cy={5.75} r={1.25} />
+        <Path d="M12 15.9 V18" />
       </G>
-      <Circle cx={12} cy={20.3} r={1.15} fill={color} />
+      <Circle cx={12} cy={19.05} r={1.05} fill={color} />
     </Svg>
   );
 }

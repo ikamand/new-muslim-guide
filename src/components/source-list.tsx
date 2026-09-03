@@ -62,9 +62,16 @@ export function SourceLines({
    * heading underneath printed the same sentence twice, once in capitals.
    */
   showLabel = true,
+  /**
+   * One rung up on the English, for the evidence sheet: a translation read
+   * at length in a modal earns body size, where the same block inside a
+   * note card's dense detail keeps `small` (Iyad, 3 Sep).
+   */
+  roomy = false,
 }: {
   sources: readonly Source[];
   showLabel?: boolean;
+  roomy?: boolean;
 }) {
   const { t } = useLocale();
 
@@ -94,6 +101,7 @@ export function SourceLines({
               <EvidenceBlock
                 text={text}
                 hideGrade={source.kind === 'hadith' && Boolean(source.grading)}
+                roomy={roomy}
               />
             )}
           </View>
@@ -141,9 +149,11 @@ function EvidenceBlock({
    * it had already said.
    */
   hideGrade = false,
+  roomy = false,
 }: {
   text: EvidenceText;
   hideGrade?: boolean;
+  roomy?: boolean;
 }) {
   const theme = useTheme();
   const { translation: showTranslation } = useSettings();
@@ -156,7 +166,7 @@ function EvidenceBlock({
     <View style={[styles.evidence, { borderLeftColor: theme.border }]}>
       <ThemedText type="arabicQuote" style={styles.evidenceArabic}>{text.arabic}</ThemedText>
       {showTranslation && text.translation && (
-        <ThemedText type="small" themeColor="textSecondary">
+        <ThemedText type={roomy ? 'default' : 'small'} themeColor="textSecondary">
           {text.translation}
         </ThemedText>
       )}
@@ -257,7 +267,7 @@ export function EvidenceLine({
               {t('note.sources')}
             </ThemedText>
             <ScrollView contentContainerStyle={styles.sheetScroll}>
-              <SourceLines sources={distinct} showLabel={false} />
+              <SourceLines sources={distinct} showLabel={false} roomy />
             </ScrollView>
           </View>
         </View>

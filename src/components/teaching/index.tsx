@@ -212,12 +212,19 @@ export function TeachingSource({
  * belief page has neither "how many" nor "do I have to". A block that pads
  * itself to four rows everywhere would be structure for its own sake.
  */
-export function TeachingFacts({ facts }: { facts: readonly QuickFact[] }) {
+export function TeachingFacts({
+  facts,
+  style,
+}: {
+  facts: readonly QuickFact[];
+  /** Inside the matn frame the frame owns the trailing air; see reference. */
+  style?: StyleProp<ViewStyle>;
+}) {
   const theme = useTheme();
   if (facts.length === 0) return null;
 
   return (
-    <View style={{ marginBottom: Teaching.page.sectionGap }}>
+    <View style={[{ marginBottom: Teaching.page.sectionGap }, style]}>
       {facts.map((fact, index) => {
         const body = (
           <>

@@ -289,6 +289,11 @@ export const EN = {
   /* Three states nobody had translated, found by `npm run nav:check`. */
   'settings.footnote': 'The Arabic always stays — it is what you actually say. Everything on this device stays on this device.',
   'guide.missing': 'That guide doesn’t exist.',
+  /* The written page's chrome — the matn frame and the two-inks law. */
+  'teach.answer': 'The answer',
+  'teach.differs': 'Where people differ',
+  'teach.legend.settled': 'Ink is settled.',
+  'teach.legend.differs': 'Red is where Muslims genuinely differ.',
   'reference.missing': 'That page has moved.',
 
 

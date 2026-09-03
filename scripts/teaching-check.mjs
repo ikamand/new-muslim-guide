@@ -123,6 +123,19 @@ for (const page of pages) {
   if (!page?.id) continue;
 
   const heroes = page.sections.filter((s) => s.promote === 'hero');
+  /*
+    The two-inks law: red marks where Muslims genuinely differ, and it stays
+    rare or it stops meaning anything. A page where more than one section
+    carries a differs note probably has a content problem, not a colour one.
+  */
+  const redSections = page.sections.filter((s) =>
+    [...(s.notes ?? []), ...(s.note ? [] : [])].some((n) => n && n.kind === 'differs'),
+  );
+  if (redSections.length > 1) {
+    warnings.push(
+      `${page.id}: ${redSections.length} sections carry differs notes — red must stay rare to keep meaning.`,
+    );
+  }
   if (heroes.length > 1) {
     warnings.push(`${page.id}: ${heroes.length} heroes. One per page — the treatment stops meaning anything otherwise.`);
   }

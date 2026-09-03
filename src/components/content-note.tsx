@@ -52,8 +52,15 @@ export function ContentNoteCard({ entry }: { entry: ContentNote }) {
 
   const expandable = hasMore(entry);
 
+  /*
+    The two-inks law: a genuine difference wears red — rubrication doing its
+    oldest job — and everything else keeps the accent. The reader learns to
+    tell "settled" from "people argue about this" by colour alone.
+  */
+  const rail = entry.kind === 'differs' ? theme.vermilion : theme.accent;
+
   return (
-    <View style={[styles.note, { borderLeftColor: theme.accent }]}>
+    <View style={[styles.note, { borderLeftColor: rail }]}>
       <ThemedText type="small" themeColor="textSecondary">
         {entry.text}
       </ThemedText>

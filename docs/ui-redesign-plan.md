@@ -2906,3 +2906,41 @@ orphaned until updated):
 
 Batch the chosen fix into the NEXT native build — do not ship to stores
 with this undecided. Fullscreen use is unaffected either way.
+
+---
+
+## 2 Sep 2026 — The reading pages: matn wa-sharḥ under the two-inks law ✅
+
+Built from the "Three Readings" artifact (three designs → combined pick →
+stress-tested on Tahajjud and What-breaks-prayer, all approved). One
+renderer changed — `reference/[id].tsx` — so all 53 teaching pages moved
+together; the four archetype pages were verified with eyes on web (food:
+hero+differs; who-is-allah: hero, no red; tahajjud: hero+facts+door;
+what-breaks-prayer: no hero).
+
+**The matn:** the section the file marks `promote: 'hero'` renders FIRST
+inside the drawn Frame under "The answer" — even when the file places it
+midway. This is the SECOND attempt at making the hero legible as the
+answer (the first broke margins and Iyad read it as inconsistency —
+constants/teaching.ts holds that story); this time the treatment carries
+its own label. The quickFacts render inside the frame (TeachingFacts grew
+a style override), the href fact staying the door it already was. Learned
+from real content: only the hero text PRINTS inside the frame — food's
+answer cites three verses and printing all three made a wall wearing a
+frame; the rest fold, named.
+
+**The gloss:** every other section on a thread with a numbered Rosette,
+file order kept. Costs ~38px of the column the teaching design once fought
+for (350 → ~312); approved by eyes, watch on device.
+
+**The two inks:** a `differs` section announces "Where people differ" in
+vermilion above its heading; ContentNoteCard rails differs notes red
+APP-WIDE (guides included, deliberately); the legend line renders only on
+pages that have red. `promote: 'quote'` turned out to govern evidence
+weight, not body voice — the artifact's "raised voice" rule was a misread
+of the data and was dropped. No hero → no frame, facts open bare.
+
+**The tooth:** teaching-check warns past one differs-section per page —
+and immediately caught `ramadan` carrying two, now on the content-review
+pile. New chrome strings: teach.answer / teach.differs / teach.legend.*
+(draft, Iyad's to reword).

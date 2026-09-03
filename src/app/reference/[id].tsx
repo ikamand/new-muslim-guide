@@ -2,7 +2,7 @@ import { Stack, useLocalSearchParams } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
 
 import { ContentNoteCard } from '@/components/content-note';
-import { QuietRow } from '@/components/jadwal';
+import { Frame, QuietRow, Rosette } from '@/components/jadwal';
 import { LessonEnd } from '@/components/lesson-end';
 import { LessonScroll } from '@/components/lesson-scroll';
 import { RecitationCard } from '@/components/recitation-card';
@@ -21,11 +21,12 @@ import { ThemedText } from '@/components/themed-text';
 import { TranslationGap } from '@/components/translation-gap';
 import { formatSource, getReference, resolveNotes, resolveRef, type ReferenceSection, type Source } from '@/content';
 import type { EvidenceText } from '@/content/evidence';
-import { MaxContentWidth } from '@/constants/theme';
+import { MaxContentWidth, Spacing } from '@/constants/theme';
 import { routeFor } from '@/lib/content-routes';
 
 import { Teaching } from '@/constants/teaching';
 import { useLocale } from '@/hooks/use-locale';
+import { useTheme } from '@/hooks/use-theme';
 import { localiseReference, measure } from '@/i18n/localise';
 /**
  * A reference topic, read top to bottom.
@@ -57,6 +58,7 @@ import { localiseReference, measure } from '@/i18n/localise';
  */
 export default function ReferenceScreen() {
   const { locale, t } = useLocale();
+  const theme = useTheme();
   const { id } = useLocalSearchParams<{ id: string }>();
   /* Above the early return below: hooks cannot be called conditionally. */
   const source = getReference(id);
@@ -74,6 +76,46 @@ export default function ReferenceScreen() {
 
   const [reference, coverage] = measure(() => localiseReference(source, locale));
 
+  /*
+    The matn: the one section the content file marks `promote: 'hero'`,
+    rendered FIRST inside the drawn frame with "The answer" over it — even
+    when the file places it midway, because the answer leads and the
+    commentary keeps the file's order below (the "Three Readings" design,
+    Iyad, 2 Sep). This is the second attempt at making the hero legible as
+    the page's answer: the first broke the margins and read as inconsistency
+    rather than hierarchy (see constants/teaching.ts). This time the
+    treatment carries its own label.
+
+    A page that marks no hero gets no frame — the design never invents an
+    answer. Its facts open the page bare and its questions thread directly,
+    which is the shape those pages already are.
+  */
+  const heroIndex = reference.sections.findIndex((section) => section.promote === 'hero');
+  const hero = heroIndex >= 0 ? reference.sections[heroIndex] : undefined;
+  const rest =
+    heroIndex >= 0
+      ? reference.sections.filter((_, index) => index !== heroIndex)
+      : reference.sections;
+
+  const sectionDiffers = (section: ReferenceSection) =>
+    resolveNotes(section.note, section.notes).some((entry) => entry.kind === 'differs');
+  const pageDiffers = reference.sections.some(sectionDiffers);
+
+  /*
+    Which section prints which citation, decided once for the whole page —
+    in RENDER order, so the matn claims its evidence first and a later
+    section citing the same verse folds away, never the other way round.
+  */
+  const claimed = new Set<string>();
+  const printableFor = (section: ReferenceSection) =>
+    (section.sources ?? []).filter((entry) => {
+      if (evidenceFor(entry) === undefined) return false;
+      const key = formatSource(entry);
+      if (claimed.has(key)) return false;
+      claimed.add(key);
+      return true;
+    });
+
   return (
     <LessonScroll lessonKey={`reference:${reference.id}`} contentContainerStyle={styles.content}>
       <Stack.Screen options={{ title: reference.title }} />
@@ -85,34 +127,68 @@ export default function ReferenceScreen() {
         {reference.subtitle}
       </ThemedText>
 
-      {reference.quickFacts && <TeachingFacts facts={reference.quickFacts} />}
+      {/*
+        The two-inks legend, only where the page has red to explain: ink is
+        settled, red is where Muslims genuinely differ. For a reader being
+        told opposite things with equal confidence, seeing WHICH kind of
+        thing they were told is the most protective line on the page.
+      */}
+      {pageDiffers && (
+        <View style={[styles.legend, { borderBottomColor: theme.goldSoft }]}>
+          <ThemedText type="caption" themeColor="textSecondary">
+            {t('teach.legend.settled')}{' '}
+            <ThemedText type="caption" themeColor="vermilion">
+              {t('teach.legend.differs')}
+            </ThemedText>
+          </ThemedText>
+        </View>
+      )}
+
+      {hero ? (
+        <View style={styles.matnWrap}>
+          <Frame>
+            <ThemedText type="caption" themeColor="gold" style={styles.matnKicker}>
+              {t('teach.answer')}
+            </ThemedText>
+            <Section section={hero} printable={printableFor(hero)} matn />
+            {/* The vitals live inside the frame: answer, facts, and the
+                one door, in a single box (the tahajjud stress test). */}
+            {reference.quickFacts && (
+              <TeachingFacts facts={reference.quickFacts} style={styles.matnFacts} />
+            )}
+          </Frame>
+        </View>
+      ) : (
+        reference.quickFacts && <TeachingFacts facts={reference.quickFacts} />
+      )}
 
       {/*
-        Which section prints which citation, decided once for the whole page.
-
-        A page states its evidence once. Ten citations were being printed twice
-        on the same page — Al-Fatihah's own surah under two headings, Bukhari
-        3293 under both "What is istikhara?" and "What do I say?" — because a
-        section cannot see what its siblings already printed, and several
-        sections legitimately cite the same verse.
-
-        The FIRST section to cite something prints it. Later sections carrying
-        the same citation show nothing, because the reader has already read it
-        further up the same screen.
+        The gloss: every other section on one thread, a rosette naming its
+        place — the commentary around the matn, in the file's own order. A
+        section holding a `differs` note announces itself in red before its
+        heading; red marks disputed SECTIONS, never every sentence that
+        mentions a school.
       */}
-      {(() => {
-        const claimed = new Set<string>();
-        return reference.sections.map((section) => {
-          const mine = (section.sources ?? []).filter((source) => {
-            if (evidenceFor(source) === undefined) return false;
-            const id = formatSource(source);
-            if (claimed.has(id)) return false;
-            claimed.add(id);
-            return true;
-          });
-          return <Section key={section.id} section={section} printable={mine} />;
-        });
-      })()}
+      {rest.length > 0 && (
+        <View style={styles.glossList}>
+          <View style={[styles.thread, { backgroundColor: theme.goldSoft }]} />
+          {rest.map((section, index) => (
+            <View key={section.id} style={styles.gloss}>
+              <View style={[styles.glossDisc, { backgroundColor: theme.background }]}>
+                <Rosette label={String(index + 1)} />
+              </View>
+              <View style={styles.glossBody}>
+                {sectionDiffers(section) && (
+                  <ThemedText type="caption" themeColor="vermilion" style={styles.differsKick}>
+                    {t('teach.differs')}
+                  </ThemedText>
+                )}
+                <Section section={section} printable={printableFor(section)} />
+              </View>
+            </View>
+          ))}
+        </View>
+      )}
 
       <TranslationGap coverage={coverage} />
 
@@ -149,10 +225,17 @@ export default function ReferenceScreen() {
 function Section({
   section,
   printable,
+  matn = false,
 }: {
   section: ReferenceSection;
   /** The citations THIS section prints — the page decides, not the section. */
   printable: readonly Source[];
+  /**
+   * Inside the frame the kicker "The answer" replaces the heading: the
+   * question dissolves into the label, which is what the artifact showed
+   * and Iyad approved. Everything else renders as everywhere.
+   */
+  matn?: boolean;
 }) {
   const sources = section.sources ?? [];
 
@@ -212,13 +295,19 @@ function Section({
 
   return (
     <View>
-      <TeachingHeading>{section.heading}</TeachingHeading>
+      {!matn && <TeachingHeading>{section.heading}</TeachingHeading>}
       <TeachingBody last={trailing === 'body'}>{section.body}</TeachingBody>
 
       {withText.map(({ source, text }, index) => {
         const isHero = index === 0 && section.promote === 'hero';
         const tooLong = text.arabic.length > LONG_NARRATION;
-        const deepInSection = index >= 2;
+        /*
+          Inside the matn frame only the hero text prints — the food page's
+          answer cites THREE verses, and printing them all made the frame two
+          screens tall, which is a wall wearing a frame. The others fold,
+          named, one tap away.
+        */
+        const deepInSection = index >= (matn ? 1 : 2);
 
         if (!isHero && (tooLong || deepInSection)) {
           return (
@@ -308,6 +397,55 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     marginBottom: Teaching.page.sectionGap,
+  },
+  /* The legend hangs from the subtitle's air; its rule closes the head. */
+  legend: {
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    paddingBottom: Spacing.two,
+    marginBottom: Teaching.page.sectionGap,
+  },
+  matnWrap: {
+    marginBottom: Teaching.page.sectionGap,
+  },
+  matnKicker: {
+    textTransform: 'uppercase',
+    letterSpacing: 1,
+    marginBottom: Spacing.two,
+  },
+  /* Inside the frame the facts end the box; the frame owns the air below. */
+  matnFacts: {
+    marginBottom: 0,
+  },
+  glossList: {
+    position: 'relative',
+  },
+  /* Behind the rosettes' paper discs, from the first to the last. */
+  thread: {
+    position: 'absolute',
+    left: 12.5,
+    top: 14,
+    bottom: Teaching.page.sectionGap + 8,
+    width: 1,
+  },
+  gloss: {
+    flexDirection: 'row',
+    gap: Spacing.three - 4,
+  },
+  glossDisc: {
+    width: 26,
+    height: 26,
+    borderRadius: 13,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  glossBody: {
+    flex: 1,
+    minWidth: 0,
+  },
+  differsKick: {
+    textTransform: 'uppercase',
+    letterSpacing: 1,
+    marginBottom: Spacing.one,
   },
   /** For the blocks that carry no bottom margin of their own. */
   endsSection: {

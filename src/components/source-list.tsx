@@ -237,6 +237,7 @@ export function EvidenceLine({
         onPress={() => setOpen(true)}
         accessibilityRole="button"
         accessibilityLabel={`${t('note.sources')}. ${label}`}
+        hitSlop={10}
         style={({ pressed }) => [styles.line, { opacity: pressed ? 0.6 : 1 }, style]}>
         <View style={[styles.lineDash, { backgroundColor: theme.accent }]} />
         <ThemedText type="caption" themeColor="accent" style={styles.lineNames} numberOfLines={2}>
@@ -281,8 +282,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: Spacing.two,
-    /* Small text; the padding is what makes the tap target reachable. */
-    paddingVertical: Spacing.two,
+    /*
+      Slim on purpose: at paddingVertical two the tap-padding stacked on the
+      section gaps around it and the line floated in extra air (Iyad, 3
+      Sep). The 44pt target comes from hitSlop, which costs no layout.
+    */
+    paddingVertical: Spacing.one,
     paddingRight: Spacing.three,
   },
   lineDash: {

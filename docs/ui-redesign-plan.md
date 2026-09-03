@@ -3051,3 +3051,14 @@ for emphasis, spelling variants) — proven by planting a violation and
 watching it exit 1. Verified with eyes on web: jumuah (question above
 "No.", verse below), janazah (bold phrase, no asterisks). Everything ships
 by OTA. Substance is untouched and still owes its scholarly read.
+
+**Same day, the first page written to the register:** `learn/which-dhikr.ts`,
+"Which dhikr is best?", in the *Practices to take on* unit, from five fatwas
+Iyad sent (IslamWeb 21892, 198891, 97628, 182167; IslamQA 195274). The
+Qur'an is the best dhikr unless a dhikr belongs to that moment; the examples
+are the app's own after-prayer sitting, the adhan page, the tasbih in the
+prayer, the three sittings and the Friday card, so the page explains why
+the Duʿa tab keeps a clock and the Qur'an tab does not. Tirmidhi 2926,
+which two of the fatwas lean on, is graded weak by three of four graders in
+the corpus and was left out. `practices` left `SMALL_UNITS` with its second
+lesson. The salawat page proposed alongside it is not written.

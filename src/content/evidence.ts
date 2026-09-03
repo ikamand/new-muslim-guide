@@ -5,22 +5,22 @@
  * here is lost the next time it runs, and one that needs making belongs
  * upstream, where the text is published.
  *
- * 97 Qur'an passages and 150 narrations. Every character came over
+ * 98 Qur'an passages and 155 narrations. Every character came over
  * the wire from a published text rather than from memory, which is the only
  * way a file like this could exist under this project's rules about Arabic.
  *
  * ## Where each line came from
  *
  * No one source has all of it, so each field is taken from the first that
- * does, and says so on the text itself. Of the 150 narrations here:
- * 61 were confirmed against a second, separately edited publisher;
- * 61 carry HadeethEnc's own translation, 89 carry Darussalam's, and
+ * does, and says so on the text itself. Of the 155 narrations here:
+ * 64 were confirmed against a second, separately edited publisher;
+ * 64 carry HadeethEnc's own translation, 91 carry Darussalam's, and
  * 0 have Arabic and no translation at all.
  *
  * ⚠️ **The Darussalam translations are not ours to relicense.** They reach
  * this file through a public-domain dedication that covers the compiler's work
  * and not the translation inside it. What makes that defensible here is scale
- * and purpose — 89 narrations out of some thirty thousand, each quoted under
+ * and purpose — 91 narrations out of some thirty thousand, each quoted under
  * the instruction it supports, in an app that is free and never sold. It is a
  * quotation, not a republication, and it is Iyad's decision on the record.
  *
@@ -172,6 +172,18 @@ export const QURAN_TEXT: Record<string, EvidenceText> = {
     "arabicFrom": "QuranEnc.com",
     "translationFrom": "QuranEnc.com"
   },
+  "39:23": {
+    "arabic": "ٱللَّهُ نَزَّلَ أَحۡسَنَ ٱلۡحَدِيثِ كِتَٰبٗا مُّتَشَٰبِهٗا مَّثَانِيَ تَقۡشَعِرُّ مِنۡهُ جُلُودُ ٱلَّذِينَ يَخۡشَوۡنَ رَبَّهُمۡ ثُمَّ تَلِينُ جُلُودُهُمۡ وَقُلُوبُهُمۡ إِلَىٰ ذِكۡرِ ٱللَّهِۚ ذَٰلِكَ هُدَى ٱللَّهِ يَهۡدِي بِهِۦ مَن يَشَآءُۚ وَمَن يُضۡلِلِ ٱللَّهُ فَمَا لَهُۥ مِنۡ هَادٍ",
+    "translation": "Allāh has sent down the best statement: a consistent Book wherein is reiteration. The skins shiver therefrom of those who fear their Lord; then their skins and their hearts relax at the remembrance [i.e., mention] of Allāh. That is the guidance of Allāh by which He guides whom He wills. And one whom Allāh sends astray - for him there is no guide.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "15:9": {
+    "arabic": "إِنَّا نَحۡنُ نَزَّلۡنَا ٱلذِّكۡرَ وَإِنَّا لَهُۥ لَحَٰفِظُونَ",
+    "translation": "Indeed, it is We who sent down the message [i.e., the Qur’ān], and indeed, We will be its guardian.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
   "42:11": {
     "arabic": "فَاطِرُ ٱلسَّمَٰوَٰتِ وَٱلۡأَرۡضِۚ جَعَلَ لَكُم مِّنۡ أَنفُسِكُمۡ أَزۡوَٰجٗا وَمِنَ ٱلۡأَنۡعَٰمِ أَزۡوَٰجٗا يَذۡرَؤُكُمۡ فِيهِۚ لَيۡسَ كَمِثۡلِهِۦ شَيۡءٞۖ وَهُوَ ٱلسَّمِيعُ ٱلۡبَصِيرُ",
     "translation": "[He is] Creator of the heavens and the earth. He has made for you from yourselves, mates, and among the cattle, mates; He multiplies you thereby. There is nothing like unto Him, and He is the Hearing, the Seeing.",
@@ -211,12 +223,6 @@ export const QURAN_TEXT: Record<string, EvidenceText> = {
   "2:2": {
     "arabic": "ذَٰلِكَ ٱلۡكِتَٰبُ لَا رَيۡبَۛ فِيهِۛ هُدٗى لِّلۡمُتَّقِينَ",
     "translation": "This is the Book about which there is no doubt, a guidance for those conscious of Allāh -",
-    "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
-  },
-  "15:9": {
-    "arabic": "إِنَّا نَحۡنُ نَزَّلۡنَا ٱلذِّكۡرَ وَإِنَّا لَهُۥ لَحَٰفِظُونَ",
-    "translation": "Indeed, it is We who sent down the message [i.e., the Qur’ān], and indeed, We will be its guardian.",
     "arabicFrom": "QuranEnc.com",
     "translationFrom": "QuranEnc.com"
   },
@@ -1212,6 +1218,43 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
     "translation": "Abu Hurayrah (may Allah be pleased with him) reported that the Messenger of Allah (may Allah’s peace and blessings be upon him) said: “Were it not that I would cause difficulty for my followers, I would command them to use the tooth-stick with every prayer.”",
     "attribution": "An-Nasaa’i - Narrated by Ahmad - Maalik",
     "grade": "Authentic hadith",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "muslim:591": {
+    "arabic": "عن ثَوْبَانَ رضي الله عنه قال: كَانَ رَسُولُ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ إِذَا انْصَرَفَ مِنْ صَلَاتِهِ اسْتَغْفَرَ ثَلَاثًا، وَقَالَ: «اللَّهُمَّ أَنْتَ السَّلَامُ، وَمِنْكَ السَّلَامُ، تَبَارَكْتَ ذَا الْجَلَالِ وَالْإِكْرَامِ»، قَالَ الْوَلِيدُ: فَقُلْتُ لِلْأَوْزَاعِيِّ: كَيْفَ الْاسْتِغْفَارُ؟ قَالَ: تَقُولُ: أَسْتَغْفِرُ اللهَ، أَسْتَغْفِرُ اللهَ.",
+    "translation": "Thawbān (may Allah be pleased with him) reported: When the Messenger of Allah (may Allah's peace and blessings be upon him) finished his prayer, he would seek Allah’s forgiveness three times and say: \"Allahumma anta as-salām wa minka as-salām, tabārakta yadha al-jalāl wa al-ikrām (O Allah, You are As-Salām (peace, perfection), and as-salām comes from You. Blessed are You, O Possessor of Glory and Honor)\". Al-Walīd said: I said to Al-Awzā‘i: \"How is the seeking of forgiveness?\" He said: \"You say: Astaghfirullāh, astaghfirullāh (I seek forgiveness from Allah, I seek forgiveness from Allah).\"",
+    "attribution": "Narrated by Muslim",
+    "grade": "Authentic",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "abu-dawud:1047": {
+    "arabic": "حَدَّثَنَا هَارُونُ بْنُ عَبْدِ اللَّهِ، حَدَّثَنَا حُسَيْنُ بْنُ عَلِيٍّ، عَنْ عَبْدِ الرَّحْمَنِ بْنِ يَزِيدَ بْنِ جَابِرٍ، عَنْ أَبِي الأَشْعَثِ الصَّنْعَانِيِّ، عَنْ أَوْسِ بْنِ أَوْسٍ، قَالَ قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏\"‏ إِنَّ مِنْ أَفْضَلِ أَيَّامِكُمْ يَوْمَ الْجُمُعَةِ فِيهِ خُلِقَ آدَمُ وَفِيهِ قُبِضَ وَفِيهِ النَّفْخَةُ وَفِيهِ الصَّعْقَةُ فَأَكْثِرُوا عَلَىَّ مِنَ الصَّلاَةِ فِيهِ فَإِنَّ صَلاَتَكُمْ مَعْرُوضَةٌ عَلَىَّ ‏\"‏ ‏.‏ قَالَ قَالُوا يَا رَسُولَ اللَّهِ وَكَيْفَ تُعْرَضُ صَلاَتُنَا عَلَيْكَ وَقَدْ أَرِمْتَ يَقُولُونَ بَلِيتَ ‏.‏ فَقَالَ ‏\"‏ إِنَّ اللَّهَ عَزَّ وَجَلَّ حَرَّمَ عَلَى الأَرْضِ أَجْسَادَ الأَنْبِيَاءِ ‏\"‏ ‏.‏",
+    "translation": "Narrated Aws ibn Aws: The Prophet (ﷺ) said: Among the most excellent of your days is Friday; on it Adam was created, on it he died, on it the last trumpet will be blown, and on it the shout will be made, so invoke more blessings on me that day, for your blessings will be submitted to me. The people asked: Messenger of Allah, how can it be that our blessings will be submitted to you while your body is decayed? He replied: Allah, the Exalted, has prohibited the earth from consuming the bodies of Prophets",
+    "grade": "Sahih (Al-Albani) · Sahih (Muhammad Muhyi Al-Din Abdul Hamid) · Sahih Lighairihi (Shuaib Al Arnaut) · Daif (Zubair Ali Zai)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "muslim:2731": {
+    "arabic": "حَدَّثَنَا زُهَيْرُ بْنُ حَرْبٍ، حَدَّثَنَا حَبَّانُ بْنُ هِلاَلٍ، حَدَّثَنَا وُهَيْبٌ، حَدَّثَنَا سَعِيدٌ الْجُرَيْرِيُّ، عَنْ أَبِي عَبْدِ اللَّهِ الْجِسْرِيِّ، عَنِ ابْنِ الصَّامِتِ، عَنْ أَبِي ذَرٍّ، أَنَّ رَسُولَ اللَّهِ صلى الله عليه وسلم سُئِلَ أَىُّ الْكَلاَمِ أَفْضَلُ قَالَ ‏ \"‏ مَا اصْطَفَى اللَّهُ لِمَلاَئِكَتِهِ أَوْ لِعِبَادِهِ سُبْحَانَ اللَّهِ وَبِحَمْدِهِ ‏\"‏ ‏.‏",
+    "translation": "Abu Dharr reported that Allah's Messenger (ﷺ) was asked as to which words were the best. He said:Those for which Allah made a choice for His Angels and His servants (and the words are):\" Hallowed be Allah and praise is due to Him",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "muslim:2137": {
+    "arabic": "عن سَمُرَة بن جندبٍ رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: «أَحَبُّ الْكَلَامِ إِلَى اللهِ أَرْبَعٌ: سُبْحَانَ اللهِ، وَالْحَمْدُ لِلهِ، وَلَا إِلَهَ إِلَّا اللهُ، وَاللهُ أَكْبَرُ، لَا يَضُرُّكَ بِأَيِّهِنَّ بَدَأْتَ».",
+    "translation": "Samurah ibn Jundub (may Allah be pleased with him) reported: The Messenger of Allah (may Allah's peace and blessings be upon him) said: \"The most beloved speech to Allah are four: subhān Allah (glory be Allah), al-hamdulillāh (praise be to Allah), la ilāha illa Allah (there is no god but Allah), and Allāhu akbar (Allah is the Most Great), and it does not matter which one of them you start with.\"",
+    "attribution": "Narrated by Muslim",
+    "grade": "Authentic",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "tirmidhi:2910": {
+    "arabic": "عن عبد الله بن مسعود رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: «مَنْ قَرَأَ حَرْفًا مِنْ كِتَابِ اللهِ فَلَهُ بِهِ حَسَنَةٌ، وَالْحَسَنَةُ بِعَشْرِ أَمْثَالِهَا، لَا أَقُولُ {الم} حَرْفٌ، وَلَكِنْ {أَلِفٌ} حَرْفٌ، وَ{لَامٌ} حَرْفٌ، وَ{مِيمٌ} حَرْفٌ».",
+    "translation": "‘Abdullāh ibn Mas‘ūd (may Allah be pleased with him) reported: The Messenger of Allah (may Allah’s peace and blessings be upon him) said: \"Whoever recites a letter from the Book of Allah will be credited with a good deed for it, and a good deed is multiplied tenfold. I am not saying that 'Alif-Lām-Mīm' is one letter, but Alif is a letter, Lām is a letter, and Mīm is a letter.\"",
+    "attribution": "Narrated by At-Tirmidhi",
+    "grade": "Sahih (Ahmad Muhammad Shakir) · Sahih (Al-Albani) · Hasan Sahih (Bashar Awad Maarouf) · Isnaad Hasan (Zubair Ali Zai)",
     "arabicFrom": "HadeethEnc.com",
     "translationFrom": "HadeethEnc.com"
   },

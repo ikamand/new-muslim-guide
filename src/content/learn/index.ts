@@ -30,6 +30,7 @@ import { ARROGANCE } from './arrogance';
 import { ENVY } from './envy';
 import { SHOWING_OFF } from './showing-off';
 import { SMALL_SUNNAHS } from './small-sunnahs';
+import { WHICH_DHIKR } from './which-dhikr';
 import { SUNNAH } from './sunnah';
 import { TEACHING_SOMEONE } from './teaching-someone';
 import { WHAT_BREAKS_PRAYER } from './what-breaks-prayer';
@@ -96,6 +97,8 @@ export const LEARN_TOPICS: Reference[] = [
   ENVY,
   SHOWING_OFF,
   SMALL_SUNNAHS,
+  /* 3 Sep 2026 — the question a convert with ten minutes asks. */
+  WHICH_DHIKR,
   TEACHING_SOMEONE,
   WHO_IS_ALLAH,
   WHO_IS_MUHAMMAD,
@@ -201,6 +204,7 @@ export const TOPIC_GROUPS: readonly { id: TopicGroupId; topics: readonly Content
       ref('reference', 'behind-an-imam'),
       ref('reference', 'what-breaks-prayer'),
       ref('reference', 'dua-and-dhikr'),
+      ref('reference', 'which-dhikr'),
       ref('collection', 'quranic-duas'),
     ],
   },

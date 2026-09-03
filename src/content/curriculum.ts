@@ -246,7 +246,10 @@ export const CURRICULUM: readonly Tier[] = [
            is where "the meaning of what you already say" and the sīrah land
            when they are written. */
         id: 'practices',
-        lessons: [step(ref('reference', 'small-sunnahs'), 'practice')],
+        lessons: [
+          step(ref('reference', 'small-sunnahs'), 'practice'),
+          step(ref('reference', 'which-dhikr'), 'learning'),
+        ],
         doors: [ref('collection', 'quranic-names')],
       },
     ],
@@ -263,8 +266,7 @@ export const COMMISSIONED: readonly string[] = [];
 
 /** Units allowed outside the 2–6 lesson band, with the reason on record. */
 export const SMALL_UNITS: readonly string[] = [
-  /* One lesson plus doors, growing — see the unit's own comment. */
-  'practices',
+  /* 'practices' left this list on 3 Sep 2026 with its second lesson. */
 ];
 
 export const SHAHADA_KEY = stepKey(ref('guide', 'shahada'));

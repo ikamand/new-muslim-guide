@@ -1401,3 +1401,25 @@ disagreeing with another inside the same file.
 - **French and Spanish.** Nothing went stale: the translation manifest keys on
   English, and no English string changed. `i18n:manifest --check` passes at 645
   strings with nothing deleted.
+
+
+## Added 3 September 2026 — "Which dhikr is best?" (`learn/which-dhikr.ts`)
+
+Model-written over checked citations. What a qualified reader needs to clear:
+
+- **The ranking.** The page says the Qur'an is the best dhikr in general and
+  that a dhikr with a time of its own comes first in that time, attributed to
+  an-Nawawi, Ibn Taymiyyah, Ibn Baz and Ibn `Uthaymin through IslamQA 195274
+  and IslamWeb 198891 (both Arabic). The attributions were read on those
+  pages, not in the scholars' own works.
+- **The narrations.** Muslim 2731 (Abu Dharr, the words Allah loves most),
+  Muslim 2137 (Samurah, the four phrases), Muslim 591 (Thawban, three
+  istighfar after the prayer), Abu Dawud 1047 (Aws, more salawat on Friday;
+  Al-Albani sahih, Zubair Ali Zai da`if), Tirmidhi 2910 (Ibn Mas`ud, ten for
+  a letter; Al-Albani sahih). Each opened in the corpus by its own number.
+  Tirmidhi 2926 was left out as weak.
+- **The examples.** That after-prayer adhkar, answering the adhan, the tasbih
+  in bowing and prostration, the morning, evening and sleep adhkar, and
+  Friday salawat are each a dhikr with its own time. The hero verse is
+  39:23, with 15:9 beside it; the page reads "the best of speech" and "the
+  Reminder" as the Qur'an's names for itself.

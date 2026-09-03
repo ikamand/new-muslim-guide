@@ -121,6 +121,7 @@ const REFERENCES: Readonly<Record<string, Cadence>> = {
   'envy': 'once',
   'showing-off': 'once',
   'small-sunnahs': 'until-fluent',
+  'which-dhikr': 'once',
   'teaching-someone': 'once',
   'who-is-allah': 'once',
   'who-is-muhammad': 'once',
@@ -152,6 +153,13 @@ const REFERENCES: Readonly<Record<string, Cadence>> = {
   travelling: 'on-event',
   seated: 'on-event',
   periods: 'on-event',
+  /* The five daily prayers' own pages (3 Sep): what each is and what it is
+     worth, read once; the guide of the same name is until-fluent. */
+  fajr: 'once',
+  dhuhr: 'once',
+  asr: 'once',
+  maghrib: 'once',
+  isha: 'once',
 };
 
 /** The five pillars, and the six articles of faith. */

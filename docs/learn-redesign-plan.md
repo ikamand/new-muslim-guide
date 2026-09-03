@@ -91,7 +91,7 @@ untouched: they are the instrument followed on the mat, not lessons.
 |---|---|---|
 | 1 | **Prayers you choose** | witr · tahajjud · qiyam-al-layl · istikhara · tawba-prayer |
 | 2 | **The interior life** | anger · showing-off · arrogance · envy |
-| 3 | **Practices to take on** | small-sunnahs — doors: the 99 names (collection:quranic-names, one-a-day) · Qurʾan memorisation (→ Qurʾan tab). Where meaning-of-what-you-say and the sīrah land when written. |
+| 3 | **Practices to take on** | small-sunnahs · which-dhikr *(3 Sep: the Qur'an is the best dhikr unless a dhikr belongs to that moment, with the app's own sittings and cards as the examples)* — doors: the 99 names (collection:quranic-names, one-a-day) · Qurʾan memorisation (→ Qurʾan tab). Where meaning-of-what-you-say and the sīrah land when written. |
 
 ⚠️ Unit 1 partially reverses the 26 Aug decision that the voluntary prayers
 live only in the `/pray` chooser (`src/content/learn/index.ts:337`). The

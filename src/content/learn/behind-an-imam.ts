@@ -40,11 +40,11 @@ export const BEHIND_AN_IMAM: Reference = {
       id: 'recitation',
       heading: 'Do I still recite?',
       body:
-        'In the prayers said aloud — Fajr, Maghrib and ʿIshāʾ — the imam recites and you listen. In the silent ones you recite quietly to yourself as usual. Either way you say the same things in bowing and prostration that you would alone.',
+        'In the prayers said aloud — Fajr, Maghrib and ʿIsha — the imam recites and you listen. In the silent ones you recite quietly to yourself as usual. Either way you say the same things in bowing and prostration that you would alone.',
       notes: [
         note(
           'differs',
-          'Whether you also read Al-Fātiḥah quietly behind the imam in an aloud prayer is a place the schools genuinely part company. Follow what the mosque you are in does, and nobody will think anything of it.',
+          'Whether you also read Al-Fatihah quietly behind the imam in an aloud prayer is a place the schools genuinely part company. Follow what the mosque you are in does, and nobody will think anything of it.',
         ),
       ],
     },
@@ -77,7 +77,7 @@ export const BEHIND_AN_IMAM: Reference = {
       id: 'late',
       heading: 'What if I join late?',
       body:
-        'Join wherever they are, in the row where there is space, and follow from there. When the imam gives salām, stand back up and pray the rakʿahs you missed on your own. That last part is what completes your prayer, and it is the part people forget.',
+        'Join wherever they are, in the row where there is space, and follow from there. When the imam gives salam, stand back up and pray the rakʿahs you missed on your own. That last part is what completes your prayer, and it is the part people forget.',
       sources: [hadith('bukhari', '636')],
     },
     {

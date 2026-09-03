@@ -12,7 +12,7 @@ import type { Reference } from '../types';
  * ⚠️ It teaches the SHAPE and almost no rulings. Washing and shrouding the
  * body, who inherits what, what a non-Muslim family may do — every one of
  * those has conditions on it and belongs to somebody who knows the situation.
- * What a convert standing at the back of a janāzah needs is what is about to
+ * What a convert standing at the back of a janazah needs is what is about to
  * happen and what to do with their hands, and that is what this is.
  */
 export const JANAZAH: Reference = {
@@ -44,7 +44,7 @@ export const JANAZAH: Reference = {
     },
     {
       id: 'shape',
-      heading: 'What actually happens at a janāzah?',
+      heading: 'What actually happens at a janazah?',
       body:
         'Quickly, and with very little ceremony. The body is washed and wrapped, a short prayer is prayed over it — usually at a mosque, often straight after one of the daily prayers — and it is buried, normally within a day. There is no open casket, no music, and no long service.',
       bullets: [
@@ -63,11 +63,11 @@ export const JANAZAH: Reference = {
       id: 'prayer',
       heading: 'How do I pray the funeral prayer?',
       body:
-        'You stand in a row and follow the imam, and you stay standing the whole way through — there is no bowing and no prostration in it, which surprises almost everybody the first time. He says **Allāhu akbar** four times, and between them there are quiet supplications. Then salām, and it is finished.\n\nIf you do not know the words, stand with them and say nothing. Following in silence is not a failure to participate.',
+        'You stand in a row and follow the imam, and you stay standing the whole way through — there is no bowing and no prostration in it, which surprises almost everybody the first time. He says **Allāhu akbar** four times, and between them there are quiet supplications. Then salam, and it is finished.\n\nIf you do not know the words, stand with them and say nothing. Following in silence is not a failure to participate.',
       notes: [
         note(
           'agreed',
-          'Four takbīrs, standing, without rukūʿ or sujūd is agreed across the schools. What is said quietly between them is where they differ in detail.',
+          'Four takbirs, standing, without rukūʿ or sujūd is agreed across the schools. What is said quietly between them is where they differ in detail.',
         ),
         note(
           'practical',
@@ -79,7 +79,7 @@ export const JANAZAH: Reference = {
       id: 'attend',
       heading: 'Should I go if I did not know them?',
       body:
-        'Yes, and it is one of the few things in this religion that is straightforwardly encouraged for a stranger. The Prophet ﷺ described a reward for whoever attends until the prayer, and more for whoever stays until the burial. Turning up to a janāzah for somebody you never met is an ordinary thing to do.',
+        'Yes, and it is one of the few things in this religion that is straightforwardly encouraged for a stranger. The Prophet ﷺ described a reward for whoever attends until the prayer, and more for whoever stays until the burial. Turning up to a janazah for somebody you never met is an ordinary thing to do.',
       sources: [hadith('bukhari', '1325')],
     },
     {

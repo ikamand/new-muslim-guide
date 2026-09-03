@@ -114,7 +114,7 @@ export const EN = {
   'adhkar.notification.body': 'The window is open until sunrise.',
   'jumuah.notification.title': 'Jumuʿah tomorrow',
   'jumuah.notification.body':
-    'The Friday prayer replaces Ḏuhr, prayed in congregation around midday.',
+    'The Friday prayer replaces Dhuhr, prayed in congregation around midday.',
   /*
     Why the one card on Today is there, in a few words.
 
@@ -214,7 +214,7 @@ export const EN = {
   'first.eid': 'Been to an Eid',
   'first.prayed-in-public': 'Prayed somewhere public',
   'first.explained-islam': 'Explained Islam to someone who asked',
-  'first.janazah': 'Been to a janāzah',
+  'first.janazah': 'Been to a janazah',
   'first.zakat': 'Given zakat',
   'learn.where.kicker': 'Where you are',
   'learn.where.left': 'Left in this chapter',
@@ -289,8 +289,8 @@ export const EN = {
   /* Three states nobody had translated, found by `npm run nav:check`. */
   'settings.footnote': 'The Arabic always stays — it is what you actually say. Everything on this device stays on this device.',
   'guide.missing': 'That guide doesn’t exist.',
-  /* The written page's chrome — the matn frame and the two-inks law. */
-  'teach.answer': 'The answer',
+  /* The written page's chrome — the two-inks law. ("The answer", the matn
+     frame's label, went on 3 Sep: the frame shows the question instead.) */
   'teach.differs': 'Where people differ',
   'teach.legend.settled': 'Ink is settled.',
   'teach.legend.differs': 'Red is where Muslims genuinely differ.',
@@ -353,7 +353,7 @@ export const EN = {
     precedent `times.endsAtSunrise` set for a ruling that must live beside
     the times it describes. Fajr→sunrise and Dhuhr→ʿAsr are settled;
     ʿAsr→Maghrib is taught as the one clear way, leaving the preferred-time
-    detail to a lesson; ʿIshāʾ ends at the middle of the night in the fiqh
+    detail to a lesson; ʿIsha ends at the middle of the night in the fiqh
     sense (halfway from sunset to Fajr), which is the preferred position —
     schools differ on the permissible end, and a qualified reviewer decides
     whether that sentence needs saying here.
@@ -366,7 +366,7 @@ export const EN = {
   'windows.fajr': 'until sunrise',
   'windows.dhuhr': 'until ʿAsr begins',
   'windows.asr': 'until Maghrib',
-  'windows.maghrib': 'until ʿIshāʾ begins',
+  'windows.maghrib': 'until ʿIsha begins',
   'windows.isha': 'until the middle of the night',
   'windows.note':
     'Praying early in the window is better. If one closes before you have prayed, see “I missed a prayer” under help.',
@@ -378,7 +378,7 @@ export const EN = {
     across a phone; `awqat.projected` is the one sentence of honesty the
     whole table needs, and it is deliberately consistent with
     `learn/voluntary-fasting.ts`, which promises the app will not date
-    ʿĀshūrāʾ or ʿArafah.
+    ʿAshuraʾ or ʿArafah.
   */
   'awqat.title': 'Awqat',
   'awqat.previous': 'Previous month',
@@ -387,12 +387,12 @@ export const EN = {
   'awqat.col.dhuhr': 'Dhuhr',
   'awqat.col.asr': 'ʿAsr',
   'awqat.col.maghrib': 'Maghrib',
-  'awqat.col.isha': 'ʿIshāʾ',
+  'awqat.col.isha': 'ʿIsha',
   'awqat.col.hijri': 'Hijri',
   'awqat.whiteDays': 'The white days',
   'awqat.whiteDays.detail': 'Three sunnah fasting days mid-month',
   'awqat.projected':
-    'The Hijri column follows the Umm al-Qura projection. The sacred dates — Ramadan, the Eids, ʿĀshūrāʾ, ʿArafah — are settled by the moon being sighted, so they are not printed here. Your mosque will know them in the week beforehand.',
+    'The Hijri column follows the Umm al-Qura projection. The sacred dates — Ramadan, the Eids, ʿAshuraʾ, ʿArafah — are settled by the moon being sighted, so they are not printed here. Your mosque will know them in the week beforehand.',
 
   /**
    * Units for the counts on cards. A bare "14" tells a beginner nothing — it

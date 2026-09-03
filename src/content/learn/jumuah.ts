@@ -7,8 +7,8 @@ import type { Reference } from '../types';
  *
  * `docs/build-order.md` calls this the largest single gap in the app, and it
  * was: Jumuʿah was mentioned once, at `references.ts:522`, in a note advising a
- * first visit on a different day. Nothing said that it REPLACES Ḏuhr rather
- * than adding to it, that it is two rakʿah and not four, that the khuṭbah is
+ * first visit on a different day. Nothing said that it REPLACES Dhuhr rather
+ * than adding to it, that it is two rakʿahs and not four, that the khutbah is
  * listened to in silence, when to arrive, or what to do if you arrive during
  * it. It is obligatory, weekly, and the most intimidating room a convert walks
  * into.
@@ -31,8 +31,8 @@ export const JUMUAH: Reference = {
     relatedContent: [ref('reference', 'mosque'), ref('guide', 'dhuhr')],
   },
   quickFacts: [
-    { label: 'Replaces', value: 'Ḏuhr. It is not an extra prayer', emphasis: true },
-    { label: 'Length', value: 'A talk, then two rakʿah' },
+    { label: 'Replaces', value: 'Dhuhr. It is not an extra prayer', emphasis: true },
+    { label: 'Length', value: 'A talk, then two rakʿahs' },
     { label: 'Arrive', value: 'Before the talk starts' },
   ],
   sections: [
@@ -41,14 +41,14 @@ export const JUMUAH: Reference = {
       heading: 'Is this an extra prayer?',
       promote: 'hero',
       body:
-        'No. On Friday, the midday prayer is done differently: instead of praying Ḏuhr on your own, you go to a mosque, listen to a talk, and pray two rakʿah behind the imam. That is the whole of it, and it takes the place of Ḏuhr rather than being added to it.\n\nIf you pray Jumuʿah you do not then pray Ḏuhr. People new to this often do both, which is not required of them.',
+        'No. On Friday, the midday prayer is done differently: instead of praying Dhuhr on your own, you go to a mosque, listen to a talk, and pray two rakʿahs behind the imam. That is the whole of it, and it takes the place of Dhuhr rather than being added to it.\n\nIf you pray Jumuʿah you do not then pray Dhuhr. People new to this often do both, which is not required of them.',
       sources: [quran(62, 9, { surahName: 'Al-Jumuah' })],
     },
     {
       id: 'who',
       heading: 'Do I have to go?',
       body:
-        'For men who can get there, yes — it is obligatory, not recommended, and that is the one thing about Friday worth being clear on. Women may attend and are welcome; it is not required of them, and a woman who prays Ḏuhr at home on a Friday has done what is asked.',
+        'For men who can get there, yes — it is obligatory, not recommended, and that is the one thing about Friday worth being clear on. Women may attend and are welcome; it is not required of them, and a woman who prays Dhuhr at home on a Friday has done what is asked.',
       notes: [
         note(
           'agreed',
@@ -60,10 +60,10 @@ export const JUMUAH: Reference = {
       id: 'shape',
       heading: 'What actually happens?',
       body:
-        'You arrive, take your shoes off, and pray two short rakʿah on your own before sitting down. Then the imam gives a talk from the front — usually twenty minutes, in two parts with a short sit in between. When it ends, everyone stands and prays two rakʿah together. Then it is over and people leave.',
+        'You arrive, take your shoes off, and pray two short rakʿahs on your own before sitting down. Then the imam gives a talk from the front — usually twenty minutes, in two parts with a short sit in between. When it ends, everyone stands and prays two rakʿahs together. Then it is over and people leave.',
       bullets: [
-        'Two short rakʿah when you come in, before you sit.',
-        'The **khuṭbah** — the talk. Two parts, with a brief sit between them.',
+        'Two short rakʿahs when you come in, before you sit.',
+        'The **khutbah** — the talk. Two parts, with a brief sit between them.',
         'Two rakʿah in congregation, led aloud by the imam.',
       ],
       sources: [hadith('bukhari', '930')],
@@ -72,7 +72,7 @@ export const JUMUAH: Reference = {
       id: 'silence',
       heading: 'Can I talk during the talk?',
       body:
-        'No, and this is the part visitors most often get wrong. The khuṭbah is listened to in silence — not whispered over, not scrolled through. The Prophet ﷺ said that even telling the person beside you to be quiet, while the imam is speaking, is itself idle talk. If somebody asks you something, a shake of the head is the answer.',
+        'No, and this is the part visitors most often get wrong. The khutbah is listened to in silence — not whispered over, not scrolled through. The Prophet ﷺ said that even telling the person beside you to be quiet, while the imam is speaking, is itself idle talk. If somebody asks you something, a shake of the head is the answer.',
       sources: [hadith('bukhari', '934')],
       notes: [
         note(
@@ -92,7 +92,7 @@ export const JUMUAH: Reference = {
       id: 'late',
       heading: 'What if I arrive while it is happening?',
       body:
-        'Come in quietly and sit down where there is room. If you arrive during the talk, do not walk through the rows to find a better spot — and you still pray the two short rakʿah first, briefly, because the Prophet ﷺ told a man who came in during the khuṭbah to stand and pray them.\n\nIf you arrive after the congregation has already started praying, join the line where you are and follow the imam from wherever he has got to. When he finishes and gives salām, do not leave: stand back up and pray the rakʿahs you missed on your own. That last part is what completes your prayer.',
+        'Come in quietly and sit down where there is room. If you arrive during the talk, do not walk through the rows to find a better spot — and you still pray the two short rakʿahs first, briefly, because the Prophet ﷺ told a man who came in during the khutbah to stand and pray them.\n\nIf you arrive after the congregation has already started praying, join the line where you are and follow the imam from wherever he has got to. When he finishes and gives salam, do not leave: stand back up and pray the rakʿahs you missed on your own. That last part is what completes your prayer.',
       sources: [hadith('bukhari', '636')],
       notes: [
         note(

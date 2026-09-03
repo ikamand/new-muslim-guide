@@ -319,8 +319,8 @@ export const TRAVELLING: Reference = {
   title: 'Praying while travelling',
   subtitle: 'Shortening and combining on a journey',
   quickFacts: [
-    { label: 'How many', value: 'Dhuhr, ʿAsr and ʿIshaʾ become two. Fajr and Maghrib stay' },
-    { label: 'Together?', value: 'Dhuhr with ʿAsr, Maghrib with ʿIshaʾ, at either time' },
+    { label: 'How many', value: 'Dhuhr, ʿAsr and ʿIsha become two. Fajr and Maghrib stay' },
+    { label: 'Together?', value: 'Dhuhr with ʿAsr, Maghrib with ʿIsha, at either time' },
     { label: 'Do I have to?', value: 'Shortening is the sunnah on a journey', emphasis: true },
   ],
   sections: [
@@ -329,7 +329,7 @@ export const TRAVELLING: Reference = {
       heading: 'How much do I pray when travelling?',
       promote: 'hero',
       body:
-        'On a journey, the four-rakʿah prayers, Dhuhr, ʿAsr and ʿIshaʾ, are prayed as two. Fajr stays two and Maghrib stays three.',
+        'On a journey, the four-rakʿah prayers, Dhuhr, ʿAsr and ʿIsha, are prayed as two. Fajr stays two and Maghrib stays three.',
       note: 'This is a gift, not a compromise. It is the practice of the Prophet ﷺ on journeys, not a lowering of the bar.',
       sources: [
         quran(4, 101, { surahName: 'An-Nisa' }),
@@ -344,7 +344,7 @@ export const TRAVELLING: Reference = {
       id: 'combine',
       heading: 'Can I pray two together?',
       body:
-        'You may also pray Dhuhr and ʿAsr together, and Maghrib and ʿIshaʾ together, at the time of either one of the pair.',
+        'You may also pray Dhuhr and ʿAsr together, and Maghrib and ʿIsha together, at the time of either one of the pair.',
       sources: [
         hadith('muslim', '703a', {
           book: 6,
@@ -485,7 +485,7 @@ export const SEATED: Reference = {
  * someone" rather than as a ruling.
  *
  * Three sentences in it are not custom, and those now carry sources: that
- * Friday prayer is a duty for men, that you pray two rakʿah on entering, and
+ * Friday prayer is a duty for men, that you pray two rakʿahs on entering, and
  * that you step in with the right foot. Everything else here is description
  * of a building and of what people in it do, which is `general` knowledge and
  * needs no isnad.
@@ -519,7 +519,7 @@ export const MOSQUE: Reference = {
       id: 'when',
       heading: 'When should I go the first time?',
       body:
-        'Friday midday is the busiest hour of the week. For a first visit, go for a normal prayer: Dhuhr in the early afternoon, or ʿIshaʾ at night. Fewer people, more room to watch what everyone else does.',
+        'Friday midday is the busiest hour of the week. For a first visit, go for a normal prayer: Dhuhr in the early afternoon, or ʿIsha at night. Fewer people, more room to watch what everyone else does.',
       note: 'Friday prayer is obligatory for men, so you will need to go eventually. It is easier once the building is already familiar.',
       // The narration names the four it is not a duty for — a woman among
       // them — which is where the note's "for men" comes from.
@@ -561,8 +561,8 @@ export const MOSQUE: Reference = {
       id: 'inside',
       heading: 'Where do I sit?',
       body:
-        'Pray two short rakʿah before you sit down. It is what everyone does on entering. Then sit anywhere on the carpet. There is no reserved seating and no collection.',
-      note: 'If a prayer is already in progress, join the line where you are and follow the imam from wherever he has got to. When he finishes and gives salām, stand back up and pray the rakʿahs you missed on your own — that is what completes your prayer.',
+        'Pray two short rakʿahs before you sit down. It is what everyone does on entering. Then sit anywhere on the carpet. There is no reserved seating and no collection.',
+      note: 'If a prayer is already in progress, join the line where you are and follow the imam from wherever he has got to. When he finishes and gives salam, stand back up and pray the rakʿahs you missed on your own — that is what completes your prayer.',
       sources: [
         hadith('bukhari', '444', {
           book: 8,

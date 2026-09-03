@@ -695,9 +695,9 @@ export const PRAYER_SPECS: PrayerSpec[] = [
   // Asr has no confirmed sunnah either side. Worth seeing rather than
   // inferring: a beginner watching a mosque fill up before Dhuhr and not
   // before Asr has no way to know why.
-  { id: 'asr', title: 'Asr', when: 'Late afternoon', rakahs: 4, aloudRakahs: 0, kind: 'fard' },
+  { id: 'asr', title: 'ʿAsr', when: 'Late afternoon', rakahs: 4, aloudRakahs: 0, kind: 'fard' },
   { id: 'maghrib', title: 'Maghrib', when: 'Just after sunset', rakahs: 3, aloudRakahs: 2, kind: 'fard', sunnahAfter: 2 },
-  { id: 'isha', title: 'Isha', when: 'Night', rakahs: 4, aloudRakahs: 2, kind: 'fard', sunnahAfter: 2 },
+  { id: 'isha', title: 'ʿIsha', when: 'Night', rakahs: 4, aloudRakahs: 2, kind: 'fard', sunnahAfter: 2 },
 
   /*
     Prayed by choice, and all two rakʿahs.

@@ -73,7 +73,7 @@ export const PILLARS: Pillar[] = [
     transliteration: 'Aṣ-ṣalāh',
     summary: 'Five prayers a day, at set times, facing the Kaʿbah in Mecca.',
     detail:
-      'Fajr before sunrise, Dhuhr after midday, ʿAsr in the afternoon, Maghrib just after sunset, and ʿIshaʾ at night. Each one takes a few minutes. You wash first, which is wudu, and the app walks you through both.',
+      'Fajr before sunrise, Dhuhr after midday, ʿAsr in the afternoon, Maghrib just after sunset, and ʿIsha at night. Each one takes a few minutes. You wash first, which is wudu, and the app walks you through both.',
     teaches: ref('guide', 'fajr'),
     meta: {
       category: 'salah',

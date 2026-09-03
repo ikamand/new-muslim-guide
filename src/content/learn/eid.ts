@@ -53,7 +53,7 @@ export const EID: Reference = {
       id: 'prayer',
       heading: 'What is the Eid prayer like?',
       body:
-        'Short, and unlike the daily prayers in two ways: it is two rakʿah with several extra **Allāhu akbar** said before the recitation, and the talk comes AFTER the prayer rather than before it. There is no adhān and no iqāmah for it.\n\nIf you do not know when the extra takbīrs come, watch the row in front and raise your hands when they do.',
+        'Short, and unlike the daily prayers in two ways: it is two rakʿahs with several extra **Allāhu akbar** said before the recitation, and the talk comes AFTER the prayer rather than before it. There is no adhan and no iqamah for it.\n\nIf you do not know when the extra takbirs come, watch the row in front and raise your hands when they do.',
       sources: [hadith('bukhari', '956')],
     },
     {

@@ -6,14 +6,14 @@ import type { Reference } from '../types';
  * ⚠️ NEW, 28 Aug 2026 — model-written English over checked citations.
  *
  * The research called this "well sourced, wrongly filed": one paragraph inside
- * `learn/islamic-calendar.ts`, covering ʿĀshūrāʾ, Shaʿbān, the six of Shawwāl
+ * `learn/islamic-calendar.ts`, covering ʿAshuraʾ, Shaʿbān, the six of Shawwal
  * and the first ten of Dhul-Ḥijjah. It is a PRACTICE, not a calendar fact, and
  * a person deciding whether to fast a Monday will never look for it under "The
  * Muslim year".
  *
  * ⚠️ It names weekdays and it names no DATES. `seasons.ts` settles why: the
  * app's Hijri date comes from Umm al-Qura, months begin by local sighting, and
- * telling somebody to fast ʿĀshūrāʾ on the wrong day is worse than not telling
+ * telling somebody to fast ʿAshuraʾ on the wrong day is worse than not telling
  * them. Mondays and Thursdays are weekdays and carry no such problem.
  */
 export const VOLUNTARY_FASTING: Reference = {
@@ -49,13 +49,13 @@ export const VOLUNTARY_FASTING: Reference = {
       bullets: [
         '**Mondays and Thursdays** — the common weekly fast, and the simplest thing to try.',
         '**Three days a month** — usually the middle of the lunar month.',
-        '**Six days in Shawwāl**, the month after Ramadan.',
-        '**ʿĀshūrāʾ**, in Muḥarram, and **the Day of ʿArafah** for those not on Hajj.',
+        '**Six days in Shawwal**, the month after Ramadan.',
+        '**ʿAshuraʾ**, in Muharram, and **the Day of ʿArafah** for those not on Hajj.',
       ],
       notes: [
         note(
           'practical',
-          'This app will not tell you the date of ʿĀshūrāʾ or ʿArafah. Those depend on the moon being sighted, and a calculated date is wrong often enough that it would be a bad thing to be confident about. Ask your mosque in the week beforehand.',
+          'This app will not tell you the date of ʿAshuraʾ or ʿArafah. Those depend on the moon being sighted, and a calculated date is wrong often enough that it would be a bad thing to be confident about. Ask your mosque in the week beforehand.',
         ),
       ],
     },

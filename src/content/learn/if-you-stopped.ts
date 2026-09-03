@@ -5,7 +5,7 @@ import type { Reference } from '../types';
 /**
  * ⚠️ NEW, 28 Aug 2026 — model-written English over checked citations.
  *
- * The other half of Phase 11's pilot, and picked to be as unlike a janāzah as
+ * The other half of Phase 11's pilot, and picked to be as unlike a janazah as
  * the list allows: nobody is present for this one. It is three weeks of missed
  * Fajr, the shame that follows, and a person who has quietly decided they were
  * never really Muslim.

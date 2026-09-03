@@ -39,7 +39,7 @@ export const FASTING_ALONE: Reference = {
       id: 'normal',
       heading: 'Is it supposed to feel this strange?',
       body:
-        'Ramadan is built as a shared month — shared pre-dawn meals, shared sunsets, whole cities changing rhythm. Keeping it alone, in a place running on its ordinary rhythm, is genuinely harder than keeping it surrounded by people who are also hungry. If your first Ramadan feels like swimming against a current, that is the situation, not a fault in your fasting.\n\nThe fast itself is exactly as valid alone as in Makkah. Nothing about other people’s participation is a condition of yours.',
+        'Ramadan is built as a shared month — shared pre-dawn meals, shared sunsets, whole cities changing rhythm. Keeping it alone, in a place running on its ordinary rhythm, is genuinely harder than keeping it surrounded by people who are also hungry. If your first Ramadan feels like swimming against a current, that is the situation, not a fault in your fasting.\n\nThe fast itself is exactly as valid alone as in Mecca. Nothing about other people’s participation is a condition of yours.',
       sources: [quran(2, 183, { surahName: 'Al-Baqarah' })],
     },
     {

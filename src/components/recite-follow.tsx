@@ -114,7 +114,8 @@ export function ReciteControls({
           </Pressable>
         </View>
 
-        {classroom.turn === 'scored' && classroom.score !== null ? (
+        {(classroom.turn === 'scored' || classroom.state === 'finished') &&
+        classroom.score !== null ? (
           <ThemedText type="small" themeColor={classroom.score >= 80 ? 'malachite' : 'textSecondary'}>
             {t('recite.classroom.score')
               .replace('{n}', String(heard))
@@ -123,7 +124,10 @@ export function ReciteControls({
           </ThemedText>
         ) : null}
 
-        {classroom.turn === 'scored' ? (
+        {/* Buttons only while the loop is live — a finished classroom has
+            nothing for them to do, and dead buttons under a done message is
+            exactly the confusion the first completion produced. */}
+        {classroom.turn === 'scored' && classroom.state === 'running' ? (
           <View style={styles.pairRow}>
             <Pressable
               onPress={classroom.again}

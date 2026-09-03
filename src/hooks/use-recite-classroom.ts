@@ -187,18 +187,25 @@ export function useReciteClassroom(
       setScore(percent);
       turnRef.current = 'scored';
       setTurn('scored');
-      /* The beat the score is readable for, then the loop decides: below the
-         bar the reciter says it again, at the bar the next ayah — or done. */
       clearScoreTimer();
+      /* The last ayah passing the bar IS the finish — straight to done, no
+         2.8 s of buttons that vanish mid-reach. The score stays on screen
+         under the done line. (Found live: the first surah completion left
+         the done message, the score AND both buttons stacked together, and
+         the buttons led nowhere because the session was already gone.) */
+      if (percent >= ADVANCE_AT * 100 && ayahRef.current + 1 >= references.length) {
+        void teardown();
+        setState('finished');
+        return;
+      }
+      /* Otherwise the beat the score is readable for, then the loop decides:
+         below the bar the reciter says it again, at the bar the next ayah. */
       scoreTimer.current = setTimeout(() => {
         const index = ayahRef.current;
         if (percent < ADVANCE_AT * 100) {
           beginAyah(index);
-        } else if (index + 1 < references.length) {
-          beginAyah(index + 1);
         } else {
-          void teardown();
-          setState('finished');
+          beginAyah(index + 1);
         }
       }, SCORE_BEAT_MS);
     },
@@ -270,9 +277,15 @@ export function useReciteClassroom(
     });
   }, []);
 
-  const again = useCallback(() => beginAyah(ayahRef.current), [beginAyah]);
+  /* Both guarded on a live session: once the classroom is finished or torn
+     down there is nothing for a stray tap to restart into. */
+  const again = useCallback(() => {
+    if (!session.current) return;
+    beginAyah(ayahRef.current);
+  }, [beginAyah]);
 
   const next = useCallback(() => {
+    if (!session.current) return;
     clearScoreTimer();
     const index = ayahRef.current;
     if (index + 1 < references.length) {

@@ -99,6 +99,23 @@ async function loadContentModules() {
 
 const CONTENT = await loadContentModules();
 
+/*
+  The HadeethEnc mirror — `.cache/hadeethenc/hadeeths.json`, written by
+  `npm run hadeethenc:corpus` — first, live API as fallback. 3 Sep 2026:
+  this generator sat 15 minutes retrying HadeethEnc through the same
+  Cloudflare weather that took QuranEnc down, while a complete mirror
+  (2,328 records: Arabic, English, grades, attributions) sat unread in
+  the cache. The mirror serves all three call paths: fetch-by-id, the
+  matn search, and the English pull. Same guarantee as the Qur'an side:
+  the published text is checked by `content:verify` regardless of which
+  path served it.
+*/
+import { readFileSync as readHeSync, existsSync as heExists } from 'node:fs';
+const hePath = new URL('../.cache/hadeethenc/hadeeths.json', import.meta.url);
+const heCache = heExists(hePath) ? JSON.parse(readHeSync(hePath, 'utf8')) : undefined;
+if (heCache) console.log(`HadeethEnc mirror: ${Object.keys(heCache).length} records (live API is the fallback).`);
+
+
 const get = async (url) => {
   const response = await fetch(url, { headers: { 'user-agent': 'new-muslim-guide/evidence' } });
   if (!response.ok) throw new Error(`${response.status} ${url}`);
@@ -176,16 +193,38 @@ console.log(
 
 /* ---------------- Qur'an: deterministic, every one of them ---------------- */
 
-console.log(`Qur'an — ${quranCites.size} passages from QuranEnc`);
+/*
+  The local corpus first — `.cache/quran/saheeh.json`, written by
+  `npm run quran:corpus` — with the live API as fallback. The duʿas
+  generator got this treatment when a QuranEnc outage stalled it mid-run
+  (2 Sep); this generator hit the identical 524 wall a day later while
+  regenerating for the prayer pages. Same cure, same reasoning:
+  `content:verify` against LIVE QuranEnc remains the arbiter, so a stale
+  cache cannot slip a wrong character through to a commit.
+*/
+import { readFileSync as readCorpusSync, existsSync as corpusExists } from 'node:fs';
+const corpusPath = new URL('../.cache/quran/saheeh.json', import.meta.url);
+const quranCorpus = corpusExists(corpusPath)
+  ? new Map(
+      JSON.parse(readCorpusSync(corpusPath, 'utf8')).map((row) => [`${row.s}:${row.a}`, row]),
+    )
+  : undefined;
+
+console.log(
+  `Qur'an — ${quranCites.size} passages from ${quranCorpus ? 'the local corpus (QuranEnc mirror)' : 'QuranEnc live'}`,
+);
 const quran = {};
 for (const [key, source] of quranCites) {
   const first = Array.isArray(source.ayah) ? source.ayah[0] : source.ayah;
   const last = Array.isArray(source.ayah) ? source.ayah[1] : source.ayah;
   const parts = [];
   for (let n = first; n <= last; n += 1) {
-    const data = await get(
-      `https://quranenc.com/api/v1/translation/aya/english_saheeh/${source.surah}/${n}`,
-    );
+    const cached = quranCorpus?.get(`${source.surah}:${n}`);
+    const data = cached
+      ? { result: { arabic_text: cached.ar, translation: cached.en } }
+      : await get(
+          `https://quranenc.com/api/v1/translation/aya/english_saheeh/${source.surah}/${n}`,
+        );
     parts.push({ arabic: data.result.arabic_text, translation: data.result.translation });
   }
   quran[key] = {
@@ -450,13 +489,33 @@ for (const [key, source] of hadithCites) {
   /* 2. HadeethEnc — its own translation, and a second witness to the Arabic. */
   let hadeethEncHit;
   if (source.hadeethEncId) {
-    try {
-      const ar = await get(
-        `https://hadeethenc.com/api/v1/hadeeths/one/?language=ar&id=${source.hadeethEncId}`,
-      );
-      if (ar?.hadeeth) hadeethEncHit = { id: source.hadeethEncId, arabic: ar.hadeeth };
-    } catch {
-      /* Cited but unreachable — falls through to whatever else is known. */
+    const mirrored = heCache?.[String(source.hadeethEncId)];
+    if (mirrored?.hadeeth_ar) {
+      hadeethEncHit = { id: source.hadeethEncId, arabic: mirrored.hadeeth_ar };
+    } else {
+      try {
+        const ar = await get(
+          `https://hadeethenc.com/api/v1/hadeeths/one/?language=ar&id=${source.hadeethEncId}`,
+        );
+        if (ar?.hadeeth) hadeethEncHit = { id: source.hadeethEncId, arabic: ar.hadeeth };
+      } catch {
+        /* Cited but unreachable — falls through to whatever else is known. */
+      }
+    }
+  } else if (arabic && heCache) {
+    /*
+      The mirror searched locally: substring on the same skeletons the live
+      search flow compared with. Tighter than HadeethEnc's loose OR match,
+      which is the direction that can only LOSE candidates, never invent
+      them — and `sameNarration` still decides, exactly as before.
+    */
+    const ours = skeleton(arabic);
+    for (const record of Object.values(heCache)) {
+      if (!record.hadeeth_ar) continue;
+      if (sameNarration(ours, skeleton(record.hadeeth_ar))) {
+        hadeethEncHit = { id: record.id, arabic: record.hadeeth_ar };
+        break;
+      }
     }
   } else if (arabic) {
     /*
@@ -519,18 +578,26 @@ for (const [key, source] of hadithCites) {
     */
     arabic = hadeethEncHit.arabic;
     arabicFrom = 'HadeethEnc.com';
-    try {
-      const en = await get(
-        `https://hadeethenc.com/api/v1/hadeeths/one/?language=en&id=${hadeethEncHit.id}`,
-      );
-      if (en?.hadeeth) {
-        translation = en.hadeeth;
-        translationFrom = 'HadeethEnc.com';
-        attribution = en.attribution ?? attribution;
-        grade = grade ?? en.grade;
+    const mirroredEn = heCache?.[String(hadeethEncHit.id)];
+    if (mirroredEn?.hadeeth) {
+      translation = mirroredEn.hadeeth;
+      translationFrom = 'HadeethEnc.com';
+      attribution = mirroredEn.attribution ?? attribution;
+      grade = grade ?? mirroredEn.grade;
+    } else {
+      try {
+        const en = await get(
+          `https://hadeethenc.com/api/v1/hadeeths/one/?language=en&id=${hadeethEncHit.id}`,
+        );
+        if (en?.hadeeth) {
+          translation = en.hadeeth;
+          translationFrom = 'HadeethEnc.com';
+          attribution = en.attribution ?? attribution;
+          grade = grade ?? en.grade;
+        }
+      } catch {
+        /* Arabic only rather than a translation written here. */
       }
-    } catch {
-      /* Arabic only rather than a translation written here. */
     }
   }
 

@@ -2990,3 +2990,30 @@ Considered and held: the Numbered Chapter (safest, drains the poetry) and
 the Pen Alone (the future simplification, in the drawer); the one-time
 self-writing ink animation noted as an optional spice, not built.
 Verified light + dark at 390.
+
+---
+
+## 3 Sep 2026 — The five prayers get their pages ✅ ⚠️ review-gated
+
+From the "Fajr Page" artifact, extended to all five at Iyad's go. New
+`daily-prayers.ts`: five Reference pages (ids fajr/dhuhr/asr/maghrib/isha,
+the first `surface: 'pray'` content — excluded from unclaimed checks by
+design). Every-prayer rows retarget from the guides to these pages; each
+page's matn holds the facts and "Pray X ›" as its door, so the guide is
+one tap in. Eleven narrations sourced by Arabic-matn search of the corpus,
+numbers from the records' own `arabicnumber` (Muslim 657a/725a/634a/656a/
+728a, Bukhari 528/553/555/574/657, Abu Dawud 1269 sahih–Al-Albani).
+Deliberate absences on the record: Tirmidhi's Hajj-reward virtue (grading
+needs the reviewer) and any Maghrib-specific virtue (none strongly
+authenticated found — its frame is citation-free, now legal in
+teaching-check for exactly this case). ʿAsr's hero was demoted to a
+citation-free frame after the check caught a 750-char wall (short matns
+never cross-check to HadeethEnc's matn-only text — the ten-word window
+outmeasures a four-word matn; known limitation, on the record).
+
+**Pipeline hardening en route:** generate-evidence.mjs is now mirror-first
+for BOTH suppliers — the Qur'an cache (the du'as generator's cure applied)
+and the HadeethEnc cache (all three call paths: by-id, matn search, EN
+pull) — after a 15-minute stall against the same Cloudflare weather.
+content:verify against live remains the arbiter. ⚠️ All app-voice prose on
+the five pages awaits scholarly review.

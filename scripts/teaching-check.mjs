@@ -141,11 +141,22 @@ for (const page of pages) {
   }
 
   for (const section of page.sections) {
-    if (section.promote && !(section.sources ?? []).some(resolves)) {
+    /*
+      A hero that CITES something must have the text behind it, or the
+      promotion renders as nothing. A hero with no sources at all is legal
+      since the matn frame (2 Sep): the frame renders the body and the
+      quickFacts, which is exactly what Maghrib's page does — no strongly
+      authenticated virtue names Maghrib alone, and the rule is to leave
+      out what cannot be placed, not to force a citation.
+    */
+    if (
+      section.promote &&
+      (section.sources ?? []).length > 0 &&
+      !(section.sources ?? []).some(resolves)
+    ) {
       errors.push(
         `${page.id} → "${section.heading}" promotes a citation with no text behind it. ` +
-          `It renders as nothing. Either the section's sources are empty (a citation inside a ` +
-          `note does not count) or npm run evidence has not been run for it.`,
+          `It renders as nothing — npm run evidence has not been run for it.`,
       );
     }
     /*

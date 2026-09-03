@@ -5,22 +5,22 @@
  * here is lost the next time it runs, and one that needs making belongs
  * upstream, where the text is published.
  *
- * 96 Qur'an passages and 139 narrations. Every character came over
+ * 97 Qur'an passages and 150 narrations. Every character came over
  * the wire from a published text rather than from memory, which is the only
  * way a file like this could exist under this project's rules about Arabic.
  *
  * ## Where each line came from
  *
  * No one source has all of it, so each field is taken from the first that
- * does, and says so on the text itself. Of the 139 narrations here:
- * 68 were confirmed against a second, separately edited publisher;
- * 58 carry HadeethEnc's own translation, 81 carry Darussalam's, and
+ * does, and says so on the text itself. Of the 150 narrations here:
+ * 61 were confirmed against a second, separately edited publisher;
+ * 61 carry HadeethEnc's own translation, 89 carry Darussalam's, and
  * 0 have Arabic and no translation at all.
  *
  * ⚠️ **The Darussalam translations are not ours to relicense.** They reach
  * this file through a public-domain dedication that covers the compiler's work
  * and not the translation inside it. What makes that defensible here is scale
- * and purpose — 81 narrations out of some thirty thousand, each quoted under
+ * and purpose — 89 narrations out of some thirty thousand, each quoted under
  * the instruction it supports, in an app that is free and never sold. It is a
  * quotation, not a republication, and it is Iyad's decision on the record.
  *
@@ -448,15 +448,9 @@ export const QURAN_TEXT: Record<string, EvidenceText> = {
     "arabicFrom": "QuranEnc.com",
     "translationFrom": "QuranEnc.com"
   },
-  "2:126": {
-    "arabic": "وَإِذۡ قَالَ إِبۡرَٰهِـۧمُ رَبِّ ٱجۡعَلۡ هَٰذَا بَلَدًا ءَامِنٗا وَٱرۡزُقۡ أَهۡلَهُۥ مِنَ ٱلثَّمَرَٰتِ مَنۡ ءَامَنَ مِنۡهُم بِٱللَّهِ وَٱلۡيَوۡمِ ٱلۡأٓخِرِۚ قَالَ وَمَن كَفَرَ فَأُمَتِّعُهُۥ قَلِيلٗا ثُمَّ أَضۡطَرُّهُۥٓ إِلَىٰ عَذَابِ ٱلنَّارِۖ وَبِئۡسَ ٱلۡمَصِيرُ",
-    "translation": "And [mention] when Abraham said, \"My Lord, make this a secure city and provide its people with fruits - whoever of them believes in Allāh and the Last Day.\" [Allāh] said, \"And whoever disbelieves - I will grant him enjoyment for a little; then I will force him to the punishment of the Fire, and wretched is the destination.\"",
-    "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
-  },
-  "2:127": {
-    "arabic": "وَإِذۡ يَرۡفَعُ إِبۡرَٰهِـۧمُ ٱلۡقَوَاعِدَ مِنَ ٱلۡبَيۡتِ وَإِسۡمَٰعِيلُ رَبَّنَا تَقَبَّلۡ مِنَّآۖ إِنَّكَ أَنتَ ٱلسَّمِيعُ ٱلۡعَلِيمُ",
-    "translation": "And [mention] when Abraham was raising the foundations of the House and [with him] Ishmael, [saying], \"Our Lord, accept [this] from us. Indeed, You are the Hearing, the Knowing.",
+  "11:47": {
+    "arabic": "قَالَ رَبِّ إِنِّيٓ أَعُوذُ بِكَ أَنۡ أَسۡـَٔلَكَ مَا لَيۡسَ لِي بِهِۦ عِلۡمٞۖ وَإِلَّا تَغۡفِرۡ لِي وَتَرۡحَمۡنِيٓ أَكُن مِّنَ ٱلۡخَٰسِرِينَ",
+    "translation": "[Noah] said, \"My Lord, I seek refuge in You from asking that of which I have no knowledge. And unless You forgive me and have mercy upon me, I will be among the losers.\"",
     "arabicFrom": "QuranEnc.com",
     "translationFrom": "QuranEnc.com"
   },
@@ -484,12 +478,6 @@ export const QURAN_TEXT: Record<string, EvidenceText> = {
     "arabicFrom": "QuranEnc.com",
     "translationFrom": "QuranEnc.com"
   },
-  "12:101": {
-    "arabic": "۞ رَبِّ قَدۡ ءَاتَيۡتَنِي مِنَ ٱلۡمُلۡكِ وَعَلَّمۡتَنِي مِن تَأۡوِيلِ ٱلۡأَحَادِيثِۚ فَاطِرَ ٱلسَّمَٰوَٰتِ وَٱلۡأَرۡضِ أَنتَ وَلِيِّۦ فِي ٱلدُّنۡيَا وَٱلۡأٓخِرَةِۖ تَوَفَّنِي مُسۡلِمٗا وَأَلۡحِقۡنِي بِٱلصَّٰلِحِينَ",
-    "translation": "My Lord, You have given me [something] of sovereignty and taught me of the interpretation of dreams. Creator of the heavens and earth, You are my protector in this world and the Hereafter. Cause me to die a Muslim and join me with the righteous.\"",
-    "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
-  },
   "20:25": {
     "arabic": "قَالَ رَبِّ ٱشۡرَحۡ لِي صَدۡرِي",
     "translation": "[Moses] said, \"My Lord, expand [i.e., relax] for me my breast [with assurance]",
@@ -508,15 +496,15 @@ export const QURAN_TEXT: Record<string, EvidenceText> = {
     "arabicFrom": "QuranEnc.com",
     "translationFrom": "QuranEnc.com"
   },
-  "28:24": {
-    "arabic": "فَسَقَىٰ لَهُمَا ثُمَّ تَوَلَّىٰٓ إِلَى ٱلظِّلِّ فَقَالَ رَبِّ إِنِّي لِمَآ أَنزَلۡتَ إِلَيَّ مِنۡ خَيۡرٖ فَقِيرٞ",
-    "translation": "So he watered [their flocks] for them; then he went back to the shade and said, \"My Lord, indeed I am, for whatever good You would send down to me, in need.\"",
-    "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
-  },
   "7:151": {
     "arabic": "قَالَ رَبِّ ٱغۡفِرۡ لِي وَلِأَخِي وَأَدۡخِلۡنَا فِي رَحۡمَتِكَۖ وَأَنتَ أَرۡحَمُ ٱلرَّٰحِمِينَ",
     "translation": "[Moses] said, \"My Lord, forgive me and my brother and admit us into Your mercy, for You are the most merciful of the merciful.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "10:85-86": {
+    "arabic": "فَقَالُواْ عَلَى ٱللَّهِ تَوَكَّلۡنَا رَبَّنَا لَا تَجۡعَلۡنَا فِتۡنَةٗ لِّلۡقَوۡمِ ٱلظَّٰلِمِينَ وَنَجِّنَا بِرَحۡمَتِكَ مِنَ ٱلۡقَوۡمِ ٱلۡكَٰفِرِينَ",
+    "translation": "So they said, \"Upon Allāh do we rely. Our Lord, make us not [objects of] trial for the wrongdoing people And save us by Your mercy from the disbelieving people.\"",
     "arabicFrom": "QuranEnc.com",
     "translationFrom": "QuranEnc.com"
   },
@@ -544,21 +532,9 @@ export const QURAN_TEXT: Record<string, EvidenceText> = {
     "arabicFrom": "QuranEnc.com",
     "translationFrom": "QuranEnc.com"
   },
-  "27:19": {
-    "arabic": "فَتَبَسَّمَ ضَاحِكٗا مِّن قَوۡلِهَا وَقَالَ رَبِّ أَوۡزِعۡنِيٓ أَنۡ أَشۡكُرَ نِعۡمَتَكَ ٱلَّتِيٓ أَنۡعَمۡتَ عَلَيَّ وَعَلَىٰ وَٰلِدَيَّ وَأَنۡ أَعۡمَلَ صَٰلِحٗا تَرۡضَىٰهُ وَأَدۡخِلۡنِي بِرَحۡمَتِكَ فِي عِبَادِكَ ٱلصَّٰلِحِينَ",
-    "translation": "So [Solomon] smiled, amused at her speech, and said, \"My Lord, enable me to be grateful for Your favor which You have bestowed upon me and upon my parents and to do righteousness of which You approve. And admit me by Your mercy into [the ranks of] Your righteous servants.\"",
-    "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
-  },
-  "26:169": {
-    "arabic": "رَبِّ نَجِّنِي وَأَهۡلِي مِمَّا يَعۡمَلُونَ",
-    "translation": "My Lord, save me and my family from [the consequence of] what they do.\"",
-    "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
-  },
-  "7:89": {
-    "arabic": "قَدِ ٱفۡتَرَيۡنَا عَلَى ٱللَّهِ كَذِبًا إِنۡ عُدۡنَا فِي مِلَّتِكُم بَعۡدَ إِذۡ نَجَّىٰنَا ٱللَّهُ مِنۡهَاۚ وَمَا يَكُونُ لَنَآ أَن نَّعُودَ فِيهَآ إِلَّآ أَن يَشَآءَ ٱللَّهُ رَبُّنَاۚ وَسِعَ رَبُّنَا كُلَّ شَيۡءٍ عِلۡمًاۚ عَلَى ٱللَّهِ تَوَكَّلۡنَاۚ رَبَّنَا ٱفۡتَحۡ بَيۡنَنَا وَبَيۡنَ قَوۡمِنَا بِٱلۡحَقِّ وَأَنتَ خَيۡرُ ٱلۡفَٰتِحِينَ",
-    "translation": "We would have invented against Allāh a lie if we returned to your religion after Allāh had saved us from it. And it is not for us to return to it except that Allāh, our Lord, should will. Our Lord has encompassed all things in knowledge. Upon Allāh we have relied. Our Lord, decide between us and our people in truth, and You are the best of those who give decision.\"",
+  "2:250": {
+    "arabic": "وَلَمَّا بَرَزُواْ لِجَالُوتَ وَجُنُودِهِۦ قَالُواْ رَبَّنَآ أَفۡرِغۡ عَلَيۡنَا صَبۡرٗا وَثَبِّتۡ أَقۡدَامَنَا وَٱنصُرۡنَا عَلَى ٱلۡقَوۡمِ ٱلۡكَٰفِرِينَ",
+    "translation": "And when they went forth to [face] Goliath and his soldiers, they said, \"Our Lord, pour upon us patience and plant firmly our feet and give us victory over the disbelieving people.\"",
     "arabicFrom": "QuranEnc.com",
     "translationFrom": "QuranEnc.com"
   },
@@ -586,6 +562,24 @@ export const QURAN_TEXT: Record<string, EvidenceText> = {
     "arabicFrom": "QuranEnc.com",
     "translationFrom": "QuranEnc.com"
   },
+  "17:80": {
+    "arabic": "وَقُل رَّبِّ أَدۡخِلۡنِي مُدۡخَلَ صِدۡقٖ وَأَخۡرِجۡنِي مُخۡرَجَ صِدۡقٖ وَٱجۡعَل لِّي مِن لَّدُنكَ سُلۡطَٰنٗا نَّصِيرٗا",
+    "translation": "And say, \"My Lord, cause me to enter a sound entrance and to exit a sound exit and grant me from Yourself a supporting authority.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "9:129": {
+    "arabic": "فَإِن تَوَلَّوۡاْ فَقُلۡ حَسۡبِيَ ٱللَّهُ لَآ إِلَٰهَ إِلَّا هُوَۖ عَلَيۡهِ تَوَكَّلۡتُۖ وَهُوَ رَبُّ ٱلۡعَرۡشِ ٱلۡعَظِيمِ",
+    "translation": "But if they turn away, [O Muḥammad], say, \"Sufficient for me is Allāh; there is no deity except Him. On Him I have relied, and He is the Lord of the Great Throne.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "23:97-98": {
+    "arabic": "وَقُل رَّبِّ أَعُوذُ بِكَ مِنۡ هَمَزَٰتِ ٱلشَّيَٰطِينِ وَأَعُوذُ بِكَ رَبِّ أَن يَحۡضُرُونِ",
+    "translation": "And say, \"My Lord, I seek refuge in You from the incitements of the devils, And I seek refuge in You, my Lord, lest they be present with me.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
   "2:201": {
     "arabic": "وَمِنۡهُم مَّن يَقُولُ رَبَّنَآ ءَاتِنَا فِي ٱلدُّنۡيَا حَسَنَةٗ وَفِي ٱلۡأٓخِرَةِ حَسَنَةٗ وَقِنَا عَذَابَ ٱلنَّارِ",
     "translation": "But among them is he who says, \"Our Lord, give us in this world [that which is] good and in the Hereafter [that which is] good and protect us from the punishment of the Fire.\"",
@@ -598,9 +592,21 @@ export const QURAN_TEXT: Record<string, EvidenceText> = {
     "arabicFrom": "QuranEnc.com",
     "translationFrom": "QuranEnc.com"
   },
+  "3:16": {
+    "arabic": "ٱلَّذِينَ يَقُولُونَ رَبَّنَآ إِنَّنَآ ءَامَنَّا فَٱغۡفِرۡ لَنَا ذُنُوبَنَا وَقِنَا عَذَابَ ٱلنَّارِ",
+    "translation": "Those who say, 'Our Lord, indeed we have believed, so forgive us our sins and protect us from the punishment of the Fire,' \"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
   "3:147": {
     "arabic": "وَمَا كَانَ قَوۡلَهُمۡ إِلَّآ أَن قَالُواْ رَبَّنَا ٱغۡفِرۡ لَنَا ذُنُوبَنَا وَإِسۡرَافَنَا فِيٓ أَمۡرِنَا وَثَبِّتۡ أَقۡدَامَنَا وَٱنصُرۡنَا عَلَى ٱلۡقَوۡمِ ٱلۡكَٰفِرِينَ",
     "translation": "And their words were not but that they said, \"Our Lord, forgive us our sins and the excess [committed] in our affairs and plant firmly our feet and give us victory over the disbelieving people.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "3:191-194": {
+    "arabic": "ٱلَّذِينَ يَذۡكُرُونَ ٱللَّهَ قِيَٰمٗا وَقُعُودٗا وَعَلَىٰ جُنُوبِهِمۡ وَيَتَفَكَّرُونَ فِي خَلۡقِ ٱلسَّمَٰوَٰتِ وَٱلۡأَرۡضِ رَبَّنَا مَا خَلَقۡتَ هَٰذَا بَٰطِلٗا سُبۡحَٰنَكَ فَقِنَا عَذَابَ ٱلنَّارِ رَبَّنَآ إِنَّكَ مَن تُدۡخِلِ ٱلنَّارَ فَقَدۡ أَخۡزَيۡتَهُۥۖ وَمَا لِلظَّٰلِمِينَ مِنۡ أَنصَارٖ رَّبَّنَآ إِنَّنَا سَمِعۡنَا مُنَادِيٗا يُنَادِي لِلۡإِيمَٰنِ أَنۡ ءَامِنُواْ بِرَبِّكُمۡ فَـَٔامَنَّاۚ رَبَّنَا فَٱغۡفِرۡ لَنَا ذُنُوبَنَا وَكَفِّرۡ عَنَّا سَيِّـَٔاتِنَا وَتَوَفَّنَا مَعَ ٱلۡأَبۡرَارِ رَبَّنَا وَءَاتِنَا مَا وَعَدتَّنَا عَلَىٰ رُسُلِكَ وَلَا تُخۡزِنَا يَوۡمَ ٱلۡقِيَٰمَةِۖ إِنَّكَ لَا تُخۡلِفُ ٱلۡمِيعَادَ",
+    "translation": "Who remember Allāh while standing or sitting or [lying] on their sides and give thought to the creation of the heavens and the earth, [saying], \"Our Lord, You did not create this aimlessly; exalted are You [above such a thing]; then protect us from the punishment of the Fire. Our Lord, indeed whoever You admit to the Fire - You have disgraced him, and for the wrongdoers there are no helpers. Our Lord, indeed we have heard a caller [i.e., Prophet Muḥammad (ﷺ)] calling to faith, [saying], 'Believe in your Lord,' and we have believed. Our Lord, so forgive us our sins and remove from us our misdeeds and cause us to die among the righteous. Our Lord, and grant us what You promised us through Your messengers and do not disgrace us on the Day of Resurrection. Indeed, You do not fail in [Your] promise.\"",
     "arabicFrom": "QuranEnc.com",
     "translationFrom": "QuranEnc.com"
   },
@@ -869,9 +875,9 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
     "translationFrom": "HadeethEnc.com"
   },
   "bukhari:350": {
-    "arabic": "عن عائشة أم المؤمنين قالت: فرض الله الصلاة حين فرضها ركعتين ركعتين، في الحضر والسفر، فأقرت صلاة السفر، وزيد في صلاة الحضر.",
+    "arabic": "حَدَّثَنَا عَبْدُ اللَّهِ بْنُ يُوسُفَ، قَالَ أَخْبَرَنَا مَالِكٌ، عَنْ صَالِحِ بْنِ كَيْسَانَ، عَنْ عُرْوَةَ بْنِ الزُّبَيْرِ، عَنْ عَائِشَةَ أُمِّ الْمُؤْمِنِينَ، قَالَتْ ‏ \"‏ فَرَضَ اللَّهُ الصَّلاَةَ حِينَ فَرَضَهَا رَكْعَتَيْنِ رَكْعَتَيْنِ فِي الْحَضَرِ وَالسَّفَرِ، فَأُقِرَّتْ صَلاَةُ السَّفَرِ، وَزِيدَ فِي صَلاَةِ الْحَضَرِ ‏\"‏‏.‏",
     "translation": "Narrated `Aisha:the mother of believers: Allah enjoined the prayer and when He enjoined it, it was two rak`at only (in every prayer) both when in residence or on journey. Then the prayers offered on journey remained the same, but (the rak`at of) the prayers for non-travelers were increased",
-    "arabicFrom": "HadeethEnc.com",
+    "arabicFrom": "fawazahmed0/hadith-api",
     "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
   },
   "bukhari:735": {
@@ -883,9 +889,9 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
     "translationFrom": "HadeethEnc.com"
   },
   "bukhari:740": {
-    "arabic": "عن أبي حازم عن سهل بن سعد قال: كان الناس يؤمرون أن يضع الرجل اليد اليمنى على ذراعه اليسرى في الصلاة. قال أبو حازم: لا أعلمه إلا ينمي ذلك إلى النبي صلى الله عليه وسلم.",
+    "arabic": "حَدَّثَنَا عَبْدُ اللَّهِ بْنُ مَسْلَمَةَ، عَنْ مَالِكٍ، عَنْ أَبِي حَازِمٍ، عَنْ سَهْلِ بْنِ سَعْدٍ، قَالَ كَانَ النَّاسُ يُؤْمَرُونَ أَنْ يَضَعَ الرَّجُلُ الْيَدَ الْيُمْنَى عَلَى ذِرَاعِهِ الْيُسْرَى فِي الصَّلاَةِ‏.‏ قَالَ أَبُو حَازِمٍ لاَ أَعْلَمُهُ إِلاَّ يَنْمِي ذَلِكَ إِلَى النَّبِيِّ صلى الله عليه وسلم‏.‏ قَالَ إِسْمَاعِيلُ يُنْمَى ذَلِكَ‏.‏ وَلَمْ يَقُلْ يَنْمِي‏.‏",
     "translation": "Narrated Sahl bin Sa`d:The people were ordered to place the right hand on the left forearm in the prayer. Abu Hazim said, \"I knew that the order was from the Prophet (ﷺ)",
-    "arabicFrom": "HadeethEnc.com",
+    "arabicFrom": "fawazahmed0/hadith-api",
     "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
   },
   "abu-dawud:759": {
@@ -910,9 +916,9 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
     "translationFrom": "HadeethEnc.com"
   },
   "muslim:579a": {
-    "arabic": "عن عبد الله بن الزبير قال: كان رسول الله صلى الله عليه وسلم إذا قعد في الصلاة جعل قدمه اليسرى بين فخذه وساقه، وفرش قدمه اليمنى، ووضع يده اليسرى على ركبته اليسرى، ووضع يده اليمنى على فخذه اليمنى، وأشار بإصبعه.",
+    "arabic": "حَدَّثَنَا مُحَمَّدُ بْنُ مَعْمَرِ بْنِ رِبْعِيٍّ الْقَيْسِيُّ، حَدَّثَنَا أَبُو هِشَامٍ الْمَخْزُومِيُّ، عَنْ عَبْدِ الْوَاحِدِ، - وَهُوَ ابْنُ زِيَادٍ - حَدَّثَنَا عُثْمَانُ بْنُ حَكِيمٍ، حَدَّثَنِي عَامِرُ بْنُ عَبْدِ اللَّهِ بْنِ الزُّبَيْرِ، عَنْ أَبِيهِ، قَالَ كَانَ رَسُولُ اللَّهِ صلى الله عليه وسلم إِذَا قَعَدَ فِي الصَّلاَةِ جَعَلَ قَدَمَهُ الْيُسْرَى بَيْنَ فَخِذِهِ وَسَاقِهِ وَفَرَشَ قَدَمَهُ الْيُمْنَى وَوَضَعَ يَدَهُ الْيُسْرَى عَلَى رُكْبَتِهِ الْيُسْرَى وَوَضَعَ يَدَهُ الْيُمْنَى عَلَى فَخِذِهِ الْيُمْنَى وَأَشَارَ بِإِصْبَعِهِ ‏.‏",
     "translation": "Abdullah b. Zubair narrated on the authority of his father:When the Messenger of Allah (ﷺ) sat in prayer. he placed the left foot between his thigh and shank and stretched the right foot and placed his left hand on his left knee and placed his right hand on his right thigh, and raised his finger",
-    "arabicFrom": "HadeethEnc.com",
+    "arabicFrom": "fawazahmed0/hadith-api",
     "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
   },
   "bukhari:795": {
@@ -968,9 +974,9 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
     "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
   },
   "bukhari:739": {
-    "arabic": "عن نافع أن ابن عمر كان إذا دخل في الصلاة كبر ورفع يديه، وإذا ركع رفع يديه، وإذا قال: سمع الله لمن حمده. رفع يديه، وإذا قام من الركعتين رفع يديه، ورفع ذلك ابن عمر إلى نبي الله صلى الله عليه وسلم.",
+    "arabic": "حَدَّثَنَا عَيَّاشٌ، قَالَ حَدَّثَنَا عَبْدُ الأَعْلَى، قَالَ حَدَّثَنَا عُبَيْدُ اللَّهِ، عَنْ نَافِعٍ، أَنَّ ابْنَ عُمَرَ، كَانَ إِذَا دَخَلَ فِي الصَّلاَةِ كَبَّرَ وَرَفَعَ يَدَيْهِ، وَإِذَا رَكَعَ رَفَعَ يَدَيْهِ، وَإِذَا قَالَ سَمِعَ اللَّهُ لِمَنْ حَمِدَهُ‏.‏ رَفَعَ يَدَيْهِ، وَإِذَا قَامَ مِنَ الرَّكْعَتَيْنِ رَفَعَ يَدَيْهِ‏.‏ وَرَفَعَ ذَلِكَ ابْنُ عُمَرَ إِلَى نَبِيِّ اللَّهِ صلى الله عليه وسلم‏.‏ رَوَاهُ حَمَّادُ بْنُ سَلَمَةَ عَنْ أَيُّوبَ عَنْ نَافِعٍ عَنِ ابْنِ عُمَرَ عَنِ النَّبِيِّ صلى الله عليه وسلم‏.‏ وَرَوَاهُ ابْنُ طَهْمَانَ عَنْ أَيُّوبَ وَمُوسَى بْنِ عُقْبَةَ مُخْتَصَرًا‏.‏",
     "translation": "Narrated Nafi`:Whenever Ibn `Umar started the prayer with Takbir, he used to raise his hands: whenever he bowed, he used to raise his hands (before bowing) and also used to raise his hands on saying, \"Sami`a l-lahu liman hamidah\", and he used to do the same on rising from the second rak`a (for the 3rd rak`a). Ibn `Umar said: \"The Prophet (ﷺ) used to do the same",
-    "arabicFrom": "HadeethEnc.com",
+    "arabicFrom": "fawazahmed0/hadith-api",
     "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
   },
   "muslim:391b": {
@@ -1104,9 +1110,9 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
     "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
   },
   "bukhari:1969": {
-    "arabic": "عن عائشة رضي الله عنها قالت: كان رسول الله صلى الله عليه وسلم يصوم حتى نقول: لا يفطر، ويفطر حتى نقول: لا يصوم، فما رأيت رسول الله صلى الله عليه وسلم استكمل صيام شهر إلا رمضان، وما رأيته أكثر صيامًا منه في شعبان.",
+    "arabic": "حَدَّثَنَا عَبْدُ اللَّهِ بْنُ يُوسُفَ، أَخْبَرَنَا مَالِكٌ، عَنْ أَبِي النَّضْرِ، عَنْ أَبِي سَلَمَةَ، عَنْ عَائِشَةَ ـ رضى الله عنها ـ قَالَتْ كَانَ رَسُولُ اللَّهِ صلى الله عليه وسلم يَصُومُ حَتَّى نَقُولَ لاَ يُفْطِرُ، وَيُفْطِرُ حَتَّى نَقُولَ لاَ يَصُومُ‏.‏ فَمَا رَأَيْتُ رَسُولَ اللَّهِ صلى الله عليه وسلم اسْتَكْمَلَ صِيَامَ شَهْرٍ إِلاَّ رَمَضَانَ، وَمَا رَأَيْتُهُ أَكْثَرَ صِيَامًا مِنْهُ فِي شَعْبَانَ‏.‏",
     "translation": "Narrated `Aisha:Allah's Messenger (ﷺ) used to fast till one would say that he would never stop fasting, and he would abandon fasting till one would say that he would never fast. I never saw Allah's Messenger (ﷺ) fasting for a whole month except the month of Ramadan, and did not see him fasting in any month more than in the month of Sha'ban",
-    "arabicFrom": "HadeethEnc.com",
+    "arabicFrom": "fawazahmed0/hadith-api",
     "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
   },
   "bukhari:1894": {
@@ -1116,9 +1122,9 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
     "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
   },
   "bukhari:5090": {
-    "arabic": "عَنْ أَبِي هُرَيْرَةَ رَضِيَ اللَّهُ عَنْهُ عَنِ النَّبِيِّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ قَالَ: «‌تُنْكَحُ المَرْأَةُ لِأَرْبَعٍ: لِمَالِهَا وَلِحَسَبِهَا وَجَمَالِهَا وَلِدِينِهَا، فَاظْفَرْ بِذَاتِ الدِّينِ، تَرِبَتْ يَدَاكَ».",
+    "arabic": "حَدَّثَنَا مُسَدَّدٌ، حَدَّثَنَا يَحْيَى، عَنْ عُبَيْدِ اللَّهِ، قَالَ حَدَّثَنِي سَعِيدُ بْنُ أَبِي سَعِيدٍ، عَنْ أَبِيهِ، عَنْ أَبِي هُرَيْرَةَ ـ رضى الله عنه ـ عَنِ النَّبِيِّ صلى الله عليه وسلم قَالَ ‏ \"‏ تُنْكَحُ الْمَرْأَةُ لأَرْبَعٍ لِمَالِهَا وَلِحَسَبِهَا وَجَمَالِهَا وَلِدِينِهَا، فَاظْفَرْ بِذَاتِ الدِّينِ تَرِبَتْ يَدَاكَ ‏\"‏‏.‏",
     "translation": "Narrated Abu Huraira:The Prophet (ﷺ) said, \"A woman is married for four things, i.e., her wealth, her family status, her beauty and her religion. So you should marry the religious woman (otherwise) you will be a losers",
-    "arabicFrom": "HadeethEnc.com",
+    "arabicFrom": "fawazahmed0/hadith-api",
     "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
   },
   "bukhari:7352": {
@@ -1254,9 +1260,9 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
     "translationFrom": "HadeethEnc.com"
   },
   "bukhari:6324": {
-    "arabic": "عَنْ حُذَيْفَةَ قَالَ: كَانَ النَّبِيُّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ إِذَا أَرَادَ أَنْ يَنَامَ قَالَ: «بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا» وَإِذَا اسْتَيْقَظَ مِنْ مَنَامِهِ قَالَ: «الحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَمَا أَمَاتَنَا، وَإِلَيْهِ النُّشُورُ».",
+    "arabic": "حَدَّثَنَا أَبُو نُعَيْمٍ، حَدَّثَنَا سُفْيَانُ، عَنْ عَبْدِ الْمَلِكِ بْنِ عُمَيْرٍ، عَنْ رِبْعِيِّ بْنِ حِرَاشٍ، عَنْ حُذَيْفَةَ، قَالَ كَانَ النَّبِيُّ صلى الله عليه وسلم إِذَا أَرَادَ أَنْ يَنَامَ قَالَ ‏\"‏ بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا ‏\"‏‏.‏ وَإِذَا اسْتَيْقَظَ مِنْ مَنَامِهِ قَالَ ‏\"‏ الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا، وَإِلَيْهِ النُّشُورُ ‏\"‏‏.‏",
     "translation": "Narrated Hudhaifa:Whenever the Prophet (ﷺ) intended to go to bed, he would recite: \"Bismika Allahumma amutu wa ahya (With Your name, O Allah, I die and I live).\" And when he woke up from his sleep, he would say: \"Al-hamdu lil-lahil-ladhi ahyana ba'da ma amatana; wa ilaihi an-nushur (All the Praises are for Allah Who has made us alive after He made us die (sleep) and unto Him is the Resurrection",
-    "arabicFrom": "HadeethEnc.com",
+    "arabicFrom": "fawazahmed0/hadith-api",
     "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
   },
   "muslim:537a": {
@@ -1294,9 +1300,9 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
     "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
   },
   "muslim:538a": {
-    "arabic": "عن عبد الله بن مسعود رضي الله عنه قال: كنا نُسلِّم على النبي صلى الله عليه وسلم وهو في الصلاة فيرُدُّ علينا، فلما رجعنا من عند النجاشي سلمنا عليه فلم يرد علينا، وقال: «إن في الصلاة شغلًا».",
+    "arabic": "حَدَّثَنَا أَبُو بَكْرِ بْنُ أَبِي شَيْبَةَ، وَزُهَيْرُ بْنُ حَرْبٍ، وَابْنُ، نُمَيْرٍ وَأَبُو سَعِيدٍ الأَشَجُّ - وَأَلْفَاظُهُمْ مُتَقَارِبَةٌ - قَالُوا حَدَّثَنَا ابْنُ فُضَيْلٍ، حَدَّثَنَا الأَعْمَشُ، عَنْ إِبْرَاهِيمَ، عَنْ عَلْقَمَةَ، عَنْ عَبْدِ اللَّهِ، قَالَ كُنَّا نُسَلِّمُ عَلَى رَسُولِ اللَّهِ صلى الله عليه وسلم وَهُوَ فِي الصَّلاَةِ فَيَرُدُّ عَلَيْنَا فَلَمَّا رَجَعْنَا مِنْ عِنْدِ النَّجَاشِي سَلَّمْنَا عَلَيْهِ فَلَمْ يَرُدَّ عَلَيْنَا فَقُلْنَا يَا رَسُولَ اللَّهِ كُنَّا نُسَلِّمُ عَلَيْكَ فِي الصَّلاَةِ فَتَرُدُّ عَلَيْنَا ‏.‏ فَقَالَ ‏ \"‏ إِنَّ فِي الصَّلاَةِ شُغُلاً ‏\"‏ ‏.‏",
     "translation": "Abdullah (b. Masu'd) reported:We used to greet the Messenger of Allah (ﷺ) while he was engaged in prayer and he would respond to our greeting. But when we returned from the Negus we greeted him and he did not respond to us; so we said: Messenger of Allah. we used to greet you when you were engaged in prayer and you would respond to us. He replied: Prayer demands whole attention",
-    "arabicFrom": "HadeethEnc.com",
+    "arabicFrom": "fawazahmed0/hadith-api",
     "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
   },
   "bukhari:52": {
@@ -1315,10 +1321,10 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
     "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
   },
   "bukhari:5971": {
-    "arabic": "عن أبي هريرة رضي الله عنه قال: جاء رجل إلى رسول الله صلى الله عليه وسلم فقال: يا رسول الله، مَنْ أحقُّ الناس بِحُسن صَحَابَتِي؟ قال: «أمك» قال: ثم مَنْ ؟ قال: «أمك»، قال: ثم مَنْ؟ قال: «أمك»، قال: ثم مَنْ؟ قال: «أبوك». متفق عليه. وفي رواية: يا رسول الله، مَنْ أحقُّ بحُسْنِ الصُّحْبَةِ؟ قال: «أمك، ثم أمك، ثم أمك، ثم أباك، ثم أدْنَاك أدْنَاك».",
-    "translation": "Abu Hurayrah (may Allah be pleased with him) reported that a man came to the Messenger of Allah (may Allah's peace and blessings be upon him) and said: \"O Messenger of Allah, who is the most entitled among people to my good companionship?\" He said: \"Your mother.\" The man said: \"Who next?\" He said: \"Your mother.\" The man asked again: \"Who next?\" He replied: \"Your mother.\" The man further said: \"Who next?\" He said: \"Your father.\"\nIn another narration, the man asked: \"O Messenger of Allah, who is the most entitled among people to my good companionship?\" He said: \"Your mother, then your mother, then your mother, then your father, and then those who are the closest to you.\"",
-    "attribution": "Narrated by Muslim - Narrated by Bukhari & Muslim",
-    "grade": "Authentic hadith",
+    "arabic": "عَنْ أَبِي هُرَيْرَةَ رَضيَ اللهُ عنه قَالَ: جَاءَ رَجُلٌ إِلَى رَسُولِ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ، فَقَالَ: يَا رَسُولَ اللهِ، أَرَأَيْتَ إِنْ جَاءَ رَجُلٌ يُرِيدُ أَخْذَ مَالِي؟ قَالَ: «فَلَا تُعْطِهِ مَالَكَ» قَالَ: أَرَأَيْتَ إِنْ قَاتَلَنِي؟ قَالَ: «قَاتِلْهُ» قَالَ: أَرَأَيْتَ إِنْ قَتَلَنِي؟ قَالَ: «فَأَنْتَ شَهِيدٌ»، قَالَ: أَرَأَيْتَ إِنْ قَتَلْتُهُ؟ قَالَ: «هُوَ فِي النَّارِ».",
+    "translation": "Abu Hurayrah (may Allah be pleased with him) reported: A man came to the Messenger of Allah (may Allah's peace and blessings be upon him) and said: O Messenger of Allah, what if a man comes to me wanting to take my money? He said: \"Then do not give him your money.\" The man said: What if he fights with me? He said: \"Then fight with him.\" The man said: What if he kills me? He said: \"Then, you would be a martyr.\" The man said: What if I kill him? He said: \"He would be in Hellfire.\"",
+    "attribution": "Narrated by Muslim",
+    "grade": "Authentic",
     "arabicFrom": "HadeethEnc.com",
     "translationFrom": "HadeethEnc.com"
   },
@@ -1395,9 +1401,9 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
     "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
   },
   "muslim:1164": {
-    "arabic": "عن أبي أيوب الأنصاري رضي الله عنه أن رسول الله صلى الله عليه وسلم قال: «من صام رمضان ثم أتبعه ستًّا من شوال كان كصيام الدهر».",
+    "arabic": "حَدَّثَنَا يَحْيَى بْنُ أَيُّوبَ، وَقُتَيْبَةُ بْنُ سَعِيدٍ، وَعَلِيُّ بْنُ حُجْرٍ، جَمِيعًا عَنْ إِسْمَاعِيلَ، - قَالَ ابْنُ أَيُّوبَ حَدَّثَنَا إِسْمَاعِيلُ بْنُ جَعْفَرٍ، - أَخْبَرَنِي سَعْدُ بْنُ سَعِيدِ بْنِ قَيْسٍ، عَنْ عُمَرَ، بْنِ ثَابِتِ بْنِ الْحَارِثِ الْخَزْرَجِيِّ عَنْ أَبِي أَيُّوبَ الأَنْصَارِيِّ، - رضى الله عنه - أَنَّهُ حَدَّثَهُ أَنَّ رَسُولَ اللَّهِ صلى الله عليه وسلم قَالَ ‏ \"‏ مَنْ صَامَ رَمَضَانَ ثُمَّ أَتْبَعَهُ سِتًّا مِنْ شَوَّالٍ كَانَ كَصِيَامِ الدَّهْرِ ‏\"‏ ‏.‏",
     "translation": "Abu Ayyub al-Ansari (Allah be pleased with him) reported Allah's Messenger (ﷺ) as saying:He who observed the fast of Ramadan and then followed it with six (fasts) of Shawwal. it would be as if he fasted perpetually",
-    "arabicFrom": "HadeethEnc.com",
+    "arabicFrom": "fawazahmed0/hadith-api",
     "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
   },
   "bukhari:969": {
@@ -1497,11 +1503,82 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
     "arabicFrom": "HadeethEnc.com",
     "translationFrom": "HadeethEnc.com"
   },
+  "muslim:657a": {
+    "arabic": "وَحَدَّثَنِي نَصْرُ بْنُ عَلِيٍّ الْجَهْضَمِيُّ، حَدَّثَنَا بِشْرٌ، - يَعْنِي ابْنَ مُفَضَّلٍ - عَنْ خَالِدٍ، عَنْ أَنَسِ بْنِ سِيرِينَ، قَالَ سَمِعْتُ جُنْدَبَ بْنَ عَبْدِ اللَّهِ، يَقُولُ قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏ \"‏ مَنْ صَلَّى الصُّبْحَ فَهُوَ فِي ذِمَّةِ اللَّهِ فَلاَ يَطْلُبَنَّكُمُ اللَّهُ مِنْ ذِمَّتِهِ بِشَىْءٍ فَيُدْرِكَهُ فَيَكُبَّهُ فِي نَارِ جَهَنَّمَ ‏\"‏ ‏.‏",
+    "translation": "Jundab b. 'Abdullah reported Allah's Messenger (ﷺ) as saying:He who prayed the morning prayer (in congregation) he is in fact under the protection of Allah. And it can never happen that Allah should demand anything from you in connection with the protection (that He guarantees) and one should not get it. He would then throw him in the fire of Hell",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:574": {
+    "arabic": "حَدَّثَنَا هُدْبَةُ بْنُ خَالِدٍ، قَالَ حَدَّثَنَا هَمَّامٌ، حَدَّثَنِي أَبُو جَمْرَةَ، عَنْ أَبِي بَكْرِ بْنِ أَبِي مُوسَى، عَنْ أَبِيهِ، أَنَّ رَسُولَ اللَّهِ صلى الله عليه وسلم قَالَ ‏ \"‏ مَنْ صَلَّى الْبَرْدَيْنِ دَخَلَ الْجَنَّةَ ‏\"‏‏.‏ وَقَالَ ابْنُ رَجَاءٍ حَدَّثَنَا هَمَّامٌ عَنْ أَبِي جَمْرَةَ أَنَّ أَبَا بَكْرِ بْنَ عَبْدِ اللَّهِ بْنِ قَيْسٍ أَخْبَرَهُ بِهَذَا‏.‏ حَدَّثَنَا إِسْحَاقُ، عَنْ حَبَّانَ، حَدَّثَنَا هَمَّامٌ، حَدَّثَنَا أَبُو جَمْرَةَ، عَنْ أَبِي بَكْرِ بْنِ عَبْدِ اللَّهِ، عَنْ أَبِيهِ، عَنِ النَّبِيِّ صلى الله عليه وسلم مِثْلَهُ‏.‏",
+    "translation": "Narrated Abu Bakr bin Abi Musa:My father said, \"Allah's Messenger (ﷺ) said, 'Whoever prays the two cool prayers (`Asr and Fajr) will go to Paradise",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:657": {
+    "arabic": "حَدَّثَنَا عُمَرُ بْنُ حَفْصٍ، قَالَ حَدَّثَنَا أَبِي قَالَ، حَدَّثَنَا الأَعْمَشُ، قَالَ حَدَّثَنِي أَبُو صَالِحٍ، عَنْ أَبِي هُرَيْرَةَ، قَالَ قَالَ النَّبِيُّ صلى الله عليه وسلم ‏ \"‏ لَيْسَ صَلاَةٌ أَثْقَلَ عَلَى الْمُنَافِقِينَ مِنَ الْفَجْرِ وَالْعِشَاءِ، وَلَوْ يَعْلَمُونَ مَا فِيهِمَا لأَتَوْهُمَا وَلَوْ حَبْوًا، لَقَدْ هَمَمْتُ أَنْ آمُرَ الْمُؤَذِّنَ فَيُقِيمَ، ثُمَّ آمُرَ رَجُلاً يَؤُمُّ النَّاسَ، ثُمَّ آخُذَ شُعَلاً مِنْ نَارٍ فَأُحَرِّقَ عَلَى مَنْ لاَ يَخْرُجُ إِلَى الصَّلاَةِ بَعْدُ ‏\"‏‏.‏",
+    "translation": "Narrated Abu Huraira:The Prophet (ﷺ) said, \"No prayer is heavier upon the hypocrites than the Fajr and the `Isha' prayers and if they knew what is in them (in reward), they would have attended them, even if (it was) crawling. Certainly, I felt the urge to order the Mu'adh-dhin (call-maker) so that he would pronounce Iqama, then order a man to lead the people (in prayer), then take a flame of fire so that I burn (the houses) upon those who had not left for the prayer yet",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "muslim:725a": {
+    "arabic": "حَدَّثَنَا مُحَمَّدُ بْنُ عُبَيْدٍ الْغُبَرِيُّ، حَدَّثَنَا أَبُو عَوَانَةَ، عَنْ قَتَادَةَ، عَنْ زُرَارَةَ بْنِ أَوْفَى، عَنْ سَعْدِ بْنِ هِشَامٍ، عَنْ عَائِشَةَ، عَنِ النَّبِيِّ صلى الله عليه وسلم قَالَ ‏ \"‏ رَكْعَتَا الْفَجْرِ خَيْرٌ مِنَ الدُّنْيَا وَمَا فِيهَا ‏\"‏ ‏.‏",
+    "translation": "A'isha reported Allah's Messenger as saying:The two rak'ahs at dawn are better than this world and what it contains",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:528": {
+    "arabic": "عَنْ أَبِي هُرَيْرَةَ رضي الله عنه أَنَّهُ سَمِعَ رَسُولَ اللَّهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ يَقُولُ: «أَرَأَيْتُمْ لَوْ أَنَّ نَهَرًا بِبَابِ أَحَدِكُمْ يَغْتَسِلُ فِيهِ كُلَّ يَوْمٍ خَمْسًا، مَا تَقُولُ ذَلِكَ يُبْقِي مِنْ دَرَنِهِ؟» قَالُوا: لَا يُبْقِي مِنْ دَرَنِهِ شَيْئًا، قَالَ: «فَذَلِكَ مِثْلُ الصَّلَوَاتِ الخَمْسِ، يَمْحُو اللَّهُ بِهِ الخَطَايَا».",
+    "translation": "Abu Hurayrah (may Allah be pleased with him) reported that he heard the Messenger of Allah (may Allah's peace and blessings be upon him) say: \"What if there was a river at the door of any of you wherein he takes a bath five times a day? Would there remain any of his filth?\" They said: Nothing of his filth would remain. He said: \"This is similar to the five prayers by means of which Allah erases sins.\"",
+    "attribution": "Agreed upon",
+    "grade": "Authentic",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "abu-dawud:1269": {
+    "arabic": "حَدَّثَنَا مُؤَمَّلُ بْنُ الْفَضْلِ، حَدَّثَنَا مُحَمَّدُ بْنُ شُعَيْبٍ، عَنِ النُّعْمَانِ، عَنْ مَكْحُولٍ، عَنْ عَنْبَسَةَ بْنِ أَبِي سُفْيَانَ، قَالَ قَالَتْ أُمُّ حَبِيبَةَ زَوْجُ النَّبِيِّ صلى الله عليه وسلم قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏ \"‏ مَنْ حَافَظَ عَلَى أَرْبَعِ رَكَعَاتٍ قَبْلَ الظُّهْرِ وَأَرْبَعٍ بَعْدَهَا حَرُمَ عَلَى النَّارِ ‏\"‏ ‏.‏ قَالَ أَبُو دَاوُدَ رَوَاهُ الْعَلاَءُ بْنُ الْحَارِثِ وَسُلَيْمَانُ بْنُ مُوسَى عَنْ مَكْحُولٍ بِإِسْنَادِهِ مِثْلَهُ ‏.‏",
+    "translation": "Narrated Umm Habibah: The Prophet (ﷺ) said: If anyone keeps on praying regularly four rak'ahs before and four after the noon prayer, he will not enter the Hell-fire. Abu Dawud said: Al-'Ala' bin Al-Harith and Sulaiman bin Musa reported it from Makhul with his chain, similarly",
+    "grade": "Sahih (Al-Albani) · Sahih (Muhammad Muhyi Al-Din Abdul Hamid) · Sahih (Zubair Ali Zai)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "muslim:634a": {
+    "arabic": "وَحَدَّثَنَا أَبُو بَكْرِ بْنُ أَبِي شَيْبَةَ، وَأَبُو كُرَيْبٍ وَإِسْحَاقُ بْنُ إِبْرَاهِيمَ جَمِيعًا عَنْ وَكِيعٍ، - قَالَ أَبُو كُرَيْبٍ حَدَّثَنَا وَكِيعٌ، - عَنِ ابْنِ أَبِي خَالِدٍ، وَمِسْعَرٍ، وَالْبَخْتَرِيِّ بْنِ الْمُخْتَارِ، سَمِعُوهُ مِنْ أَبِي بَكْرِ بْنِ عُمَارَةَ بْنِ رُؤَيْبَةَ، عَنْ أَبِيهِ، قَالَ سَمِعْتُ رَسُولَ اللَّهِ صلى الله عليه وسلم يَقُولُ ‏ \"‏ لَنْ يَلِجَ النَّارَ أَحَدٌ صَلَّى قَبْلَ طُلُوعِ الشَّمْسِ وَقَبْلَ غُرُوبِهَا ‏\"‏ ‏.‏ يَعْنِي الْفَجْرَ وَالْعَصْرَ ‏.‏ فَقَالَ لَهُ رَجُلٌ مِنْ أَهْلِ الْبَصْرَةِ آنْتَ سَمِعْتَ هَذَا مِنْ رَسُولِ اللَّهِ صلى الله عليه وسلم قَالَ نَعَمْ ‏.‏ قَالَ الرَّجُلُ وَأَنَا أَشْهَدُ أَنِّي سَمِعْتُهُ مِنْ رَسُولِ اللَّهِ صلى الله عليه وسلم سَمِعَتْهُ أُذُنَاىَ وَوَعَاهُ قَلْبِي ‏.‏",
+    "translation": "Umara b. Ruwaiba is reported to have said on the authority of his father:I heard the Messenger of Allah (ﷺ) saying: He who observes prayer before the rising of the sun and its setting, i.e. the dawn prayer and the afternoon prayer, would not enter the (Hell) fire. A person belonging to Basra said to him: Did you yourself hear it from the Messenger of Allah (ﷺ)? He said: Yes. The person (from Basra) said: I bear witness that I heard it from the Messenger of Allah (ﷺ); my ears heard it and my heart retained it",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:555": {
+    "arabic": "حَدَّثَنَا عَبْدُ اللَّهِ بْنُ يُوسُفَ، قَالَ حَدَّثَنَا مَالِكٌ، عَنْ أَبِي الزِّنَادِ، عَنِ الأَعْرَجِ، عَنْ أَبِي هُرَيْرَةَ، أَنَّ رَسُولَ اللَّهِ صلى الله عليه وسلم قَالَ ‏ \"‏ يَتَعَاقَبُونَ فِيكُمْ مَلاَئِكَةٌ بِاللَّيْلِ وَمَلاَئِكَةٌ بِالنَّهَارِ، وَيَجْتَمِعُونَ فِي صَلاَةِ الْفَجْرِ وَصَلاَةِ الْعَصْرِ، ثُمَّ يَعْرُجُ الَّذِينَ بَاتُوا فِيكُمْ، فَيَسْأَلُهُمْ وَهْوَ أَعْلَمُ بِهِمْ كَيْفَ تَرَكْتُمْ عِبَادِي فَيَقُولُونَ تَرَكْنَاهُمْ وَهُمْ يُصَلُّونَ، وَأَتَيْنَاهُمْ وَهُمْ يُصَلُّونَ ‏\"‏‏.‏",
+    "translation": "Narrated Abu Huraira:Allah's Messenger (ﷺ) said, \"Angels come to you in succession by night and day and all of them get together at the time of the Fajr and `Asr prayers. Those who have passed the night with you (or stayed with you) ascend (to the Heaven) and Allah asks them, though He knows everything about you, well, \"In what state did you leave my slaves?\" The angels reply: \"When we left them they were praying and when we reached them, they were praying",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:553": {
+    "arabic": "عن بريدة بن الحصيب رضي الله عنه أنه قال: بَكِّرُوا بِصَلَاةِ الْعَصْرِ، فَإِنَّ النَّبِيَّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ قَالَ: «مَنْ تَرَكَ صَلَاةَ الْعَصْرِ فَقَدْ حَبِطَ عَمَلُهُ».",
+    "translation": "Buraydah ibn al-Hasīb (may Allah be pleased with him) said: Offer the ‘Asr prayer early, for the Prophet (may Allah's peace and blessings be upon him) said: \"Whoever abandons the ‘Asr prayer, his deeds will be rendered worthless.\"",
+    "attribution": "Narrated by Al-Bukhāri",
+    "grade": "Authentic",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "muslim:728a": {
+    "arabic": "حَدَّثَنَا مُحَمَّدُ بْنُ عَبْدِ اللَّهِ بْنِ نُمَيْرٍ، حَدَّثَنَا أَبُو خَالِدٍ، - يَعْنِي سُلَيْمَانَ بْنَ حَيَّانَ - عَنْ دَاوُدَ بْنِ أَبِي هِنْدٍ، عَنِ النُّعْمَانِ بْنِ سَالِمٍ، عَنْ عَمْرِو بْنِ أَوْسٍ، قَالَ حَدَّثَنِي عَنْبَسَةُ بْنُ أَبِي سُفْيَانَ، فِي مَرَضِهِ الَّذِي مَاتَ فِيهِ بِحَدِيثٍ يُتَسَارُّ إِلَيْهِ قَالَ سَمِعْتُ أُمَّ حَبِيبَةَ تَقُولُ سَمِعْتُ رَسُولَ اللَّهِ صلى الله عليه وسلم يَقُولُ ‏ \"‏ مَنْ صَلَّى اثْنَتَىْ عَشْرَةَ رَكْعَةً فِي يَوْمٍ وَلَيْلَةٍ بُنِيَ لَهُ بِهِنَّ بَيْتٌ فِي الْجَنَّةِ ‏\"‏ ‏.‏ قَالَتْ أُمُّ حَبِيبَةَ فَمَا تَرَكْتُهُنَّ مُنْذُ سَمِعْتُهُنَّ مِنْ رَسُولِ اللَّهِ صلى الله عليه وسلم ‏.‏ وَقَالَ عَنْبَسَةُ فَمَا تَرَكْتُهُنَّ مُنْذُ سَمِعْتُهُنَّ مِنْ أُمِّ حَبِيبَةَ ‏.‏ وَقَالَ عَمْرُو بْنُ أَوْسٍ مَا تَرَكْتُهُنَّ مُنْذُ سَمِعْتُهُنَّ مِنْ عَنْبَسَةَ ‏.‏ وَقَالَ النُّعْمَانُ بْنُ سَالِمٍ مَا تَرَكْتُهُنَّ مُنْذُ سَمِعْتُهُنَّ مِنْ عَمْرِو بْنِ أَوْسٍ ‏.‏",
+    "translation": "Umm Habiba (the wife of the Holy Prophet) reported Allah's Messenger (ﷺ) as saying:A house will be built in Paradise, for anyone who prays in a day and a night twelve rak'ahs; and she added: I have never abandoned (observing them) since I heard it from the Messenger of Allah (ﷺ). Some of the other narrators said the same words: I have never abandoned (observing them) since I heard (from so and so)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "muslim:656a": {
+    "arabic": "حَدَّثَنَا إِسْحَاقُ بْنُ إِبْرَاهِيمَ، أَخْبَرَنَا الْمُغِيرَةُ بْنُ سَلَمَةَ الْمَخْزُومِيُّ، حَدَّثَنَا عَبْدُ الْوَاحِدِ، - وَهُوَ ابْنُ زِيَادٍ - حَدَّثَنَا عُثْمَانُ بْنُ حَكِيمٍ، حَدَّثَنَا عَبْدُ الرَّحْمَنِ بْنُ أَبِي عَمْرَةَ، قَالَ دَخَلَ عُثْمَانُ بْنُ عَفَّانَ الْمَسْجِدَ بَعْدَ صَلاَةِ الْمَغْرِبِ فَقَعَدَ وَحْدَهُ فَقَعَدْتُ إِلَيْهِ فَقَالَ يَا ابْنَ أَخِي سَمِعْتُ رَسُولَ اللَّهِ صلى الله عليه وسلم يَقُولُ ‏ \"‏ مَنْ صَلَّى الْعِشَاءَ فِي جَمَاعَةٍ فَكَأَنَّمَا قَامَ نِصْفَ اللَّيْلِ وَمَنْ صَلَّى الصُّبْحَ فِي جَمَاعَةٍ فَكَأَنَّمَا صَلَّى اللَّيْلَ كُلَّهُ ‏\"‏ ‏.‏",
+    "translation": "Abd al-Rahman b. Abd 'Amr reported:'Uthman b. 'Affan (narrated the mosque after evening prayer and sat alone. I also sat alone with him, so he said: 0, son of my brother, I heard the Messenger of Allah (ﷺ) say: He who observed the 'Isha' prayer in congregation, it was as if he prayed up to midnight, and he who prayed the morning prayer in congregation, it was as if he prayed the whole night",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
   "abu-dawud:1067": {
-    "arabic": "عن طارق بن شهاب عن النبي صلى الله عليه وسلم قال: \"الجمعة حق واجب على كل مسلم في جماعة إلا أربعة: عبد مملوك أو امرأة أو صبي أو مريض\".",
+    "arabic": "حَدَّثَنَا عَبَّاسُ بْنُ عَبْدِ الْعَظِيمِ، حَدَّثَنِي إِسْحَاقُ بْنُ مَنْصُورٍ، حَدَّثَنَا هُرَيْمٌ، عَنْ إِبْرَاهِيمَ بْنِ مُحَمَّدِ بْنِ الْمُنْتَشِرِ، عَنْ قَيْسِ بْنِ مُسْلِمٍ، عَنْ طَارِقِ بْنِ شِهَابٍ، عَنِ النَّبِيِّ صلى الله عليه وسلم قَالَ ‏ \"‏ الْجُمُعَةُ حَقٌّ وَاجِبٌ عَلَى كُلِّ مُسْلِمٍ فِي جَمَاعَةٍ إِلاَّ أَرْبَعَةً عَبْدٌ مَمْلُوكٌ أَوِ امْرَأَةٌ أَوْ صَبِيٌّ أَوْ مَرِيضٌ ‏\"‏ ‏.‏ قَالَ أَبُو دَاوُدَ طَارِقُ بْنُ شِهَابٍ قَدْ رَأَى النَّبِيَّ صلى الله عليه وسلم وَلَمْ يَسْمَعْ مِنْهُ شَيْئًا ‏.‏",
     "translation": "Narrated Tariq ibn Shihab: The Prophet (ﷺ) said: The Friday prayer in congregation is a necessary duty for every Muslim, with four exceptions; a slave, a woman, a boy, and a sick person. Abu Dawud said: Tariq b. Shihab had seen the Prophet (ﷺ) but not heard anything from him",
     "grade": "Sahih (Al-Albani) · Sahih (Muhammad Muhyi Al-Din Abdul Hamid) · Isnaad Sahih (Zubair Ali Zai)",
-    "arabicFrom": "HadeethEnc.com",
+    "arabicFrom": "fawazahmed0/hadith-api",
     "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
   },
   "bukhari:444": {
@@ -1535,10 +1612,12 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
     "translationFrom": "HadeethEnc.com"
   },
   "bukhari:597": {
-    "arabic": "حَدَّثَنَا أَبُو نُعَيْمٍ، وَمُوسَى بْنُ إِسْمَاعِيلَ، قَالاَ حَدَّثَنَا هَمَّامٌ، عَنْ قَتَادَةَ، عَنْ أَنَسٍ، عَنِ النَّبِيِّ صلى الله عليه وسلم قَالَ ‏\"‏ مَنْ نَسِيَ صَلاَةً فَلْيُصَلِّ إِذَا ذَكَرَهَا، لاَ كَفَّارَةَ لَهَا إِلاَّ ذَلِكَ ‏\"‏‏.‏ ‏{‏وَأَقِمِ الصَّلاَةَ لِذِكْرِي‏}‏ قَالَ مُوسَى قَالَ هَمَّامٌ سَمِعْتُهُ يَقُولُ بَعْدُ ‏{‏وَأَقِمِ الصَّلاَةَ لِذِكْرِي‏}‏‏.‏وَقَالَ حَبَّانُ حَدَّثَنَا هَمَّامٌ، حَدَّثَنَا قَتَادَةُ، حَدَّثَنَا أَنَسٌ، عَنِ النَّبِيِّ صلى الله عليه وسلم نَحْوَهُ‏.‏",
-    "translation": "Narrated Anas:The Prophet (ﷺ) said, \"If anyone forgets a prayer he should pray that prayer when he remembers it. There is no expiation except to pray the same.\" Then he recited: \"Establish prayer for My (i.e. Allah's) remembrance",
-    "arabicFrom": "fawazahmed0/hadith-api",
-    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+    "arabic": "عن أنس بن مالك رضي الله عنه عن النبي صلى الله عليه وسلم قال: «مَنْ نَسِيَ صَلَاةً فَلْيُصَلِّ إِذَا ذَكَرَهَا، لَا كَفَّارَةَ لَهَا إِلَّا ذَلِكَ: {وَأَقِمِ الصَّلاةَ لِذِكْرِي} [طه: 14]».",
+    "translation": "Anas ibn Mālik (may Allah be pleased with him) reported: The Prophet (may Allah's peace and blessings be upon him) said: \"Whoever forgets a prayer should perform it as soon as he remembers it; there is no expiation for it except that: {and establish prayer to remember me.} [Surat Tā-ha: 14]\"",
+    "attribution": "Agreed upon",
+    "grade": "Authentic",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
   },
   "bukhari:1090": {
     "arabic": "حَدَّثَنَا عَبْدُ اللَّهِ بْنُ مُحَمَّدٍ، قَالَ حَدَّثَنَا سُفْيَانُ، عَنِ الزُّهْرِيِّ، عَنْ عُرْوَةَ، عَنْ عَائِشَةَ ـ رضى الله عنها ـ قَالَتِ الصَّلاَةُ أَوَّلُ مَا فُرِضَتْ رَكْعَتَيْنِ فَأُقِرَّتْ صَلاَةُ السَّفَرِ، وَأُتِمَّتْ صَلاَةُ الْحَضَرِ‏.‏ قَالَ الزُّهْرِيُّ فَقُلْتُ لِعُرْوَةَ مَا بَالُ عَائِشَةَ تُتِمُّ قَالَ تَأَوَّلَتْ مَا تَأَوَّلَ عُثْمَانُ‏.‏",

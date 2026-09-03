@@ -1,4 +1,5 @@
 import { ADHAN } from './adhan';
+import { ASR_PAGE, DHUHR_PAGE, FAJR_PAGE, ISHA_PAGE, MAGHRIB_PAGE } from './daily-prayers';
 import { FASTING_ALONE } from './fasting-alone';
 import { A_PARTNER_ALREADY } from './a-partner-already';
 import { AL_FATIHAH } from './al-fatihah';
@@ -121,6 +122,13 @@ export const LEARN_TOPICS: Reference[] = [
   WITR,
   ISTIKHARA,
   TAWBA_PRAYER,
+  /* 3 Sep 2026 — the five daily prayers' own pages. surface: 'pray', so
+     they answer to the Every-prayer rows, never to the Learn shelves. */
+  FAJR_PAGE,
+  DHUHR_PAGE,
+  ASR_PAGE,
+  MAGHRIB_PAGE,
+  ISHA_PAGE,
 ];
 
 export {

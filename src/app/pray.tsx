@@ -165,7 +165,11 @@ export default function PrayScreen() {
         {DAILY_PRAYERS.map((prayer) => (
           <PressableLink
             key={prayer.id}
-            href={{ pathname: '/guide/[id]', params: { id: prayer.id } }}
+            /* To the prayer's PAGE — what it is and what it is worth — with
+               the guide as that page's own framed door. A reference row
+               opens a reference; the chosen prayers below already do
+               (Iyad, 3 Sep). */
+            href={{ pathname: '/reference/[id]', params: { id: prayer.id } }}
             accessibilityLabel={`${prayer.title}. ${prayer.when}. ${prayer.rakahs} ${t(
               'pray.fard',
             )} ${t('count.rakahs')}. ${t('pray.sunnah')}: ${sunnahPhrase(prayer, t)}. ${t(

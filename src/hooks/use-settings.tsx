@@ -14,7 +14,16 @@ import type { MosqueFit } from '@/lib/mosque-fit';
 import type { HomePlace } from '@/lib/home-place';
 import { PRAYER_IDS } from '@/lib/prayer-times';
 import { DEFAULT_RECITER, isReciterId, type ReciterId } from '@/content/quran/recitation';
-import { createContext, use, useCallback, useEffect, useMemo, useState, type ReactNode } from 'react';
+import {
+  createContext,
+  use,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type ReactNode,
+} from 'react';
 
 /**
  * What the user has chosen to change about how the app behaves.
@@ -419,6 +428,27 @@ const Context = createContext<SettingsContext | null>(null);
 export function SettingsProvider({ children }: { children: ReactNode }) {
   const [settings, setSettings] = useState<Settings>(DEFAULTS);
   const [loaded, setLoaded] = useState(false);
+  /*
+    ⚠️ Nothing may be written before the stored settings are read back.
+
+    Every setter below persists the WHOLE object, because that is what makes a
+    write atomic. The cost is that a write issued before hydration persists
+    `DEFAULTS` plus one field — and `DEFAULTS` has `onboarded: false`. So a
+    single early write silently threw away the onboarding answers, the ticked
+    lessons, the pinned duʿas and the reciter, and the app asked its owner to
+    introduce himself again on the NEXT launch, which is why this looked like
+    an update wiping the app rather than a race (Iyad, 3 Sep, after it had
+    happened several times).
+
+    `useToday` was the caller: it writes `home` on the first location fix, and
+    on a cold start that fix can beat the storage read. It is guarded at its
+    own call site too, but the guard belongs here as well — the next automatic
+    write should not have to remember.
+
+    A ref, not `loaded`: the setters are `useCallback`s that must not be
+    rebuilt when it flips, and this is read at call time.
+  */
+  const hydrated = useRef(false);
 
   useEffect(() => {
     let active = true;
@@ -430,11 +460,23 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
         // A read failure just means the defaults stand.
       })
       .finally(() => {
-        if (active) setLoaded(true);
+        if (!active) return;
+        hydrated.current = true;
+        setLoaded(true);
       });
     return () => {
       active = false;
     };
+  }, []);
+
+  /*
+    The only path to storage. A change made before hydration still applies to
+    state — the screen the user is looking at stays honest — and is then
+    replaced by what hydration reads back, which is the right winner.
+  */
+  const persist = useCallback((next: Settings) => {
+    if (!hydrated.current) return;
+    void AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(next));
   }, []);
 
   const toggle = useCallback((key: 'transliteration' | 'translation' | 'keepAwake') => {
@@ -442,18 +484,18 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
       const next = { ...current, [key]: !current[key] };
       // Fire and forget: the UI already reflects `next`, and a failed write
       // costs the user one preference, not correctness.
-      void AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+      persist(next);
       return next;
     });
-  }, []);
+  }, [persist]);
 
   const set = useCallback(<K extends keyof Settings>(key: K, value: Settings[K]) => {
     setSettings((current) => {
       const next = { ...current, [key]: value };
-      void AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+      persist(next);
       return next;
     });
-  }, []);
+  }, [persist]);
 
   /**
    * Onboarding finishes with four values that have to land together. Four
@@ -471,10 +513,10 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
       if (done.has(key)) done.delete(key);
       else done.add(key);
       const next = { ...current, completedLessons: [...done] };
-      void AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+      persist(next);
       return next;
     });
-  }, []);
+  }, [persist]);
 
   /**
    * Add-only, and it returns the same object when the key is already there —
@@ -484,10 +526,10 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
     setSettings((current) => {
       if (current.completedLessons.includes(key)) return current;
       const next = { ...current, completedLessons: [...current.completedLessons, key] };
-      void AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+      persist(next);
       return next;
     });
-  }, []);
+  }, [persist]);
 
   const markLessons = useCallback((keys: readonly string[], done: boolean) => {
     setSettings((current) => {
@@ -498,10 +540,10 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
       }
       if (set.size === current.completedLessons.length) return current;
       const next = { ...current, completedLessons: [...set] };
-      void AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+      persist(next);
       return next;
     });
-  }, []);
+  }, [persist]);
 
   /**
    * Pinning is append-at-the-end and silently ignores the eleventh.
@@ -522,18 +564,18 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
             ? pinned
             : [...pinned, id],
       };
-      void AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+      persist(next);
       return next;
     });
-  }, []);
+  }, [persist]);
 
   const setMany = useCallback((values: Partial<Settings>) => {
     setSettings((current) => {
       const next = { ...current, ...values };
-      void AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+      persist(next);
       return next;
     });
-  }, []);
+  }, [persist]);
 
   const value = useMemo(
     () => ({ ...settings, toggle, set, setMany, toggleLesson, completeLesson, markLessons, togglePinned, loaded }),

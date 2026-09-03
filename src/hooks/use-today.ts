@@ -93,7 +93,7 @@ export function useToday(): TodayItem | undefined {
   const { next } = useCurriculum();
   const { coords } = useLocation();
   const { today } = usePrayerTimes();
-  const { home, awaySince, setMany } = useSettings();
+  const { home, awaySince, setMany, loaded: settingsLoaded } = useSettings();
   const { firsts } = useObservations();
   const reading = useReadingInProgress();
 
@@ -102,11 +102,21 @@ export function useToday(): TodayItem | undefined {
     because it is a side effect of being somewhere, not something a render
     should compute — and `nextPlaceState` returns undefined on almost every
     call, so almost every render writes nothing.
+
+    ⚠️ Not until the stored settings are in. Before that `home` is DEFAULTS'
+    `null`, which is the one input that makes `nextPlaceState` always write —
+    it reads a null home as "the first fix ever" and claims wherever the phone
+    is. On a cold start a cached location fix can beat the storage read, so
+    this effect wrote `{ ...DEFAULTS, home }` over a real store and took
+    `onboarded` with it. The provider now refuses to persist before hydration
+    as well; this guard is the one that stops the wrong VALUE being computed
+    in the first place.
   */
   useEffect(() => {
+    if (!settingsLoaded) return;
     const update = nextPlaceState({ home, awaySince }, coords, Date.now());
     if (update) setMany(update);
-  }, [home, awaySince, coords, setMany]);
+  }, [settingsLoaded, home, awaySince, coords, setMany]);
 
   return useMemo(() => {
     const now = new Date();

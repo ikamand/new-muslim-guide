@@ -1481,3 +1481,33 @@ Two pages, model-written over checked citations: `learn/your-mother.ts` and
 Sahih al-Bukhari 2073's wording under the number 2072. The citation was right
 and the displayed text was not. It now shows Al-Miqdam's narration, which is
 what 2072 is and what the sentence above it claims.
+
+## Added 4 September 2026 — "What you owe", the remaining four
+
+Model-written English over checked citations. What a qualified reader needs
+to clear on each:
+
+- **The best of you** (`learn/your-partner.ts`). Tirmidhi 3895 as the page's
+  standard, printed sahih on Al-Albani's grading while the corpus records two
+  sahih, one hasan sahih and one hasan. The reading of 30:21 as making rest,
+  affection and mercy the stated purpose of a marriage. 4:19's "perhaps you
+  dislike a thing" applied to a marriage going cold. And 2:228's clause on
+  mutual rights, which the page uses for reciprocity while saying openly that
+  it sits inside a passage about the waiting period after divorce.
+- **Your children** (`learn/your-children.ts`). Muslim 2318a read as making
+  affection the thing asked for rather than an extra. Muslim 2629 for
+  daughters as a protection from the Fire, with the page's claim about the
+  society it was said in. Muslim 1659a read as putting the man's own position
+  to him rather than ruling on the boy's conduct. Bukhari 2587 read as naming
+  favouritism a wrong done to the other children. 42:49's ordering of
+  daughters before sons in a note.
+- **Whoever works for you** (`learn/whoever-works-for-you.ts`). The central
+  question is whether Bukhari 30, which concerns a man who owned another, may
+  be taught as the standard for anyone who works for you. The page takes that
+  step deliberately and says it in the text. It says nothing about slavery
+  itself. Also Ibn Majah 2443 printed sahih, and Bukhari 2227 read as placing
+  unpaid wages beside a broken oath.
+- **Your neighbour** (`learn/your-neighbour.ts`). Bukhari 6015, Muslim 46 as
+  the floor, Bukhari 2259 for the nearer door, and 4:36. The page states that
+  none of these texts asks the neighbour's religion and so it does not either.
+  That is a deliberate silence and worth confirming.

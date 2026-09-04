@@ -3191,3 +3191,40 @@ from 103 to 109. That is the honest count, and the earlier one was not.
 
 ⚠️ Both new pages await scholarly review; `docs/scholarly-review.md` carries
 their entry. Ships by OTA.
+
+---
+
+## 4 Sep 2026 — What you owe: the remaining four ✅ ⚠️ review-gated
+
+The pilot's format held, so the unit is complete: `your-partner`,
+`your-children`, `whoever-works-for-you` and `your-neighbour` join the mother
+and the animals. `COMMISSIONED` is empty again. The lessons are ordered
+outward rather than by importance, from the person you came from, to the one
+you chose, to the ones who depend on you, to the ones you pay, to the ones
+next door, and finally to what cannot ask at all.
+
+Twelve narrations added, each opened in the corpus by its own number:
+Tirmidhi 3895 (best to his wives, sahih per Al-Albani), Muslim 2318a, 2629,
+1659a and 46, Bukhari 30, 2227, 2587, 2259 and 6015, Ibn Majah 2443 (wages
+before the sweat dries, sahih), with 2:228, 4:19, 4:36, 30:21 and 42:49.
+Two took HadeethEnc's wording and both were read against the collection
+before being trusted, which is now the habit rather than an exception.
+
+Three judgements on the record, each written into the page that makes them.
+**Mercy is the hero of the children page rather than the daughters
+narration**, only because Muslim 2629 runs past a thousand characters of
+Arabic and would render as a wall; it keeps the section directly beneath.
+**Sahih al-Bukhari 30 is about a man who owned another man**, and the page
+says so rather than quietly reading it as an employment contract; what
+carries across is the instruction about a gap in power. **2:228's clause on
+mutual rights sits inside a passage about the waiting period after divorce**,
+and the page says that too, so a reader who looks it up finds no surprise.
+
+Also corrected: the animals page's header claimed the strictest of four
+gradings was used for Abu Dawud 4941. It was not, and it now says what is
+true, that three graders say sahih, one calls the chain hasan, and the page
+prints sahih with the grader named.
+
+Verified with eyes on web, light, 390: all four pages, the unit screen and
+the tier. All checks green. Ships by OTA. ⚠️ All six pages await scholarly
+review; `docs/scholarly-review.md` carries them.

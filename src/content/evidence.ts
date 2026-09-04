@@ -5,22 +5,22 @@
  * here is lost the next time it runs, and one that needs making belongs
  * upstream, where the text is published.
  *
- * 128 Qur'an passages and 171 narrations. Every character came over
+ * 132 Qur'an passages and 181 narrations. Every character came over
  * the wire from a published text rather than from memory, which is the only
  * way a file like this could exist under this project's rules about Arabic.
  *
  * ## Where each line came from
  *
  * No one source has all of it, so each field is taken from the first that
- * does, and says so on the text itself. Of the 171 narrations here:
- * 62 were confirmed against a second, separately edited publisher;
- * 62 carry HadeethEnc's own translation, 109 carry Darussalam's, and
+ * does, and says so on the text itself. Of the 181 narrations here:
+ * 64 were confirmed against a second, separately edited publisher;
+ * 64 carry HadeethEnc's own translation, 117 carry Darussalam's, and
  * 0 have Arabic and no translation at all.
  *
  * ⚠️ **The Darussalam translations are not ours to relicense.** They reach
  * this file through a public-domain dedication that covers the compiler's work
  * and not the translation inside it. What makes that defensible here is scale
- * and purpose — 109 narrations out of some thirty thousand, each quoted under
+ * and purpose — 117 narrations out of some thirty thousand, each quoted under
  * the instruction it supports, in an app that is free and never sold. It is a
  * quotation, not a republication, and it is Iyad's decision on the record.
  *
@@ -388,6 +388,36 @@ export const QURAN_TEXT: Record<string, EvidenceText> = {
     "arabicFrom": "QuranEnc.com",
     "translationFrom": "QuranEnc.com"
   },
+  "30:21": {
+    "arabic": "وَمِنۡ ءَايَٰتِهِۦٓ أَنۡ خَلَقَ لَكُم مِّنۡ أَنفُسِكُمۡ أَزۡوَٰجٗا لِّتَسۡكُنُوٓاْ إِلَيۡهَا وَجَعَلَ بَيۡنَكُم مَّوَدَّةٗ وَرَحۡمَةًۚ إِنَّ فِي ذَٰلِكَ لَأٓيَٰتٖ لِّقَوۡمٖ يَتَفَكَّرُونَ",
+    "translation": "And of His signs is that He created for you from yourselves mates that you may find tranquility in them; and He placed between you affection and mercy. Indeed in that are signs for a people who give thought.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "4:19": {
+    "arabic": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُواْ لَا يَحِلُّ لَكُمۡ أَن تَرِثُواْ ٱلنِّسَآءَ كَرۡهٗاۖ وَلَا تَعۡضُلُوهُنَّ لِتَذۡهَبُواْ بِبَعۡضِ مَآ ءَاتَيۡتُمُوهُنَّ إِلَّآ أَن يَأۡتِينَ بِفَٰحِشَةٖ مُّبَيِّنَةٖۚ وَعَاشِرُوهُنَّ بِٱلۡمَعۡرُوفِۚ فَإِن كَرِهۡتُمُوهُنَّ فَعَسَىٰٓ أَن تَكۡرَهُواْ شَيۡـٔٗا وَيَجۡعَلَ ٱللَّهُ فِيهِ خَيۡرٗا كَثِيرٗا",
+    "translation": "O you who have believed, it is not lawful for you to inherit women by compulsion. And do not make difficulties for them in order to take [back] part of what you gave them unless they commit a clear immorality [i.e., adultery]. And live with them in kindness. For if you dislike them - perhaps you dislike a thing and Allāh makes therein much good.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "2:228": {
+    "arabic": "وَٱلۡمُطَلَّقَٰتُ يَتَرَبَّصۡنَ بِأَنفُسِهِنَّ ثَلَٰثَةَ قُرُوٓءٖۚ وَلَا يَحِلُّ لَهُنَّ أَن يَكۡتُمۡنَ مَا خَلَقَ ٱللَّهُ فِيٓ أَرۡحَامِهِنَّ إِن كُنَّ يُؤۡمِنَّ بِٱللَّهِ وَٱلۡيَوۡمِ ٱلۡأٓخِرِۚ وَبُعُولَتُهُنَّ أَحَقُّ بِرَدِّهِنَّ فِي ذَٰلِكَ إِنۡ أَرَادُوٓاْ إِصۡلَٰحٗاۚ وَلَهُنَّ مِثۡلُ ٱلَّذِي عَلَيۡهِنَّ بِٱلۡمَعۡرُوفِۚ وَلِلرِّجَالِ عَلَيۡهِنَّ دَرَجَةٞۗ وَٱللَّهُ عَزِيزٌ حَكِيمٌ",
+    "translation": "Divorced women remain in waiting [i.e., do not remarry] for three periods, and it is not lawful for them to conceal what Allāh has created in their wombs if they believe in Allāh and the Last Day. And their husbands have more right to take them back in this [period] if they want reconciliation. And due to them [i.e., the wives] is similar to what is expected of them, according to what is reasonable. But the men [i.e., husbands] have a degree over them [in responsibility and authority]. And Allāh is Exalted in Might and Wise.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "42:49": {
+    "arabic": "لِّلَّهِ مُلۡكُ ٱلسَّمَٰوَٰتِ وَٱلۡأَرۡضِۚ يَخۡلُقُ مَا يَشَآءُۚ يَهَبُ لِمَن يَشَآءُ إِنَٰثٗا وَيَهَبُ لِمَن يَشَآءُ ٱلذُّكُورَ",
+    "translation": "To Allāh belongs the dominion of the heavens and the earth; He creates what He wills. He gives to whom He wills female [children], and He gives to whom He wills males.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "4:36": {
+    "arabic": "۞ وَٱعۡبُدُواْ ٱللَّهَ وَلَا تُشۡرِكُواْ بِهِۦ شَيۡـٔٗاۖ وَبِٱلۡوَٰلِدَيۡنِ إِحۡسَٰنٗا وَبِذِي ٱلۡقُرۡبَىٰ وَٱلۡيَتَٰمَىٰ وَٱلۡمَسَٰكِينِ وَٱلۡجَارِ ذِي ٱلۡقُرۡبَىٰ وَٱلۡجَارِ ٱلۡجُنُبِ وَٱلصَّاحِبِ بِٱلۡجَنۢبِ وَٱبۡنِ ٱلسَّبِيلِ وَمَا مَلَكَتۡ أَيۡمَٰنُكُمۡۗ إِنَّ ٱللَّهَ لَا يُحِبُّ مَن كَانَ مُخۡتَالٗا فَخُورًا",
+    "translation": "Worship Allāh and associate nothing with Him, and to parents do good, and to relatives, orphans, the needy, the near neighbor, the neighbor farther away, the companion at your side, the traveler, and those whom your right hands possess. Indeed, Allāh does not like those who are self-deluding and boastful,",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
   "6:38": {
     "arabic": "وَمَا مِن دَآبَّةٖ فِي ٱلۡأَرۡضِ وَلَا طَٰٓئِرٖ يَطِيرُ بِجَنَاحَيۡهِ إِلَّآ أُمَمٌ أَمۡثَالُكُمۚ مَّا فَرَّطۡنَا فِي ٱلۡكِتَٰبِ مِن شَيۡءٖۚ ثُمَّ إِلَىٰ رَبِّهِمۡ يُحۡشَرُونَ",
     "translation": "And there is no creature on [or within] the earth or bird that flies with its wings except [that they are] communities like you. We have not neglected in the Register a thing. Then unto their Lord they will be gathered.",
@@ -487,12 +517,6 @@ export const QURAN_TEXT: Record<string, EvidenceText> = {
   "31:15": {
     "arabic": "وَإِن جَٰهَدَاكَ عَلَىٰٓ أَن تُشۡرِكَ بِي مَا لَيۡسَ لَكَ بِهِۦ عِلۡمٞ فَلَا تُطِعۡهُمَاۖ وَصَاحِبۡهُمَا فِي ٱلدُّنۡيَا مَعۡرُوفٗاۖ وَٱتَّبِعۡ سَبِيلَ مَنۡ أَنَابَ إِلَيَّۚ ثُمَّ إِلَيَّ مَرۡجِعُكُمۡ فَأُنَبِّئُكُم بِمَا كُنتُمۡ تَعۡمَلُونَ",
     "translation": "But if they endeavor to make you associate with Me that of which you have no knowledge, do not obey them but accompany them in [this] world with appropriate kindness and follow the way of those who turn back to Me [in repentance]. Then to Me will be your return, and I will inform you about what you used to do.",
-    "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
-  },
-  "30:21": {
-    "arabic": "وَمِنۡ ءَايَٰتِهِۦٓ أَنۡ خَلَقَ لَكُم مِّنۡ أَنفُسِكُمۡ أَزۡوَٰجٗا لِّتَسۡكُنُوٓاْ إِلَيۡهَا وَجَعَلَ بَيۡنَكُم مَّوَدَّةٗ وَرَحۡمَةًۚ إِنَّ فِي ذَٰلِكَ لَأٓيَٰتٖ لِّقَوۡمٖ يَتَفَكَّرُونَ",
-    "translation": "And of His signs is that He created for you from yourselves mates that you may find tranquility in them; and He placed between you affection and mercy. Indeed in that are signs for a people who give thought.",
     "arabicFrom": "QuranEnc.com",
     "translationFrom": "QuranEnc.com"
   },
@@ -1544,6 +1568,78 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
     "arabicFrom": "fawazahmed0/hadith-api",
     "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
   },
+  "tirmidhi:3895": {
+    "arabic": "حَدَّثَنَا مُحَمَّدُ بْنُ يَحْيَى، قَالَ حَدَّثَنَا مُحَمَّدُ بْنُ يُوسُفَ، قَالَ حَدَّثَنَا سُفْيَانُ، عَنْ هِشَامِ بْنِ عُرْوَةَ، عَنْ أَبِيهِ، عَنْ عَائِشَةَ، قَالَتْ قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏ \"‏ خَيْرُكُمْ خَيْرُكُمْ لأَهْلِهِ وَأَنَا خَيْرُكُمْ لأَهْلِي وَإِذَا مَاتَ صَاحِبُكُمْ فَدَعُوهُ ‏\"‏ ‏.‏ قَالَ أَبُو عِيسَى هَذَا حَدِيثٌ حَسَنٌ غَرِيبٌ صَحِيحٌ مِنْ حَدِيثِ الثَّوْرِيِّ مَا أَقَلَّ مَنْ رَوَاهُ عَنِ الثَّوْرِيِّ ‏.‏ وَرُوِيَ هَذَا عَنْ هِشَامِ بْنِ عُرْوَةَ عَنْ أَبِيهِ عَنِ النَّبِيِّ صلى الله عليه وسلم مُرْسَلٌ ‏.‏",
+    "translation": "Narrated 'Aishah:that the Messenger of Allah (ﷺ) said: \"The best of you is the best to his wives, and I am the best of you to my wives, and when your companion dies, leave him alone",
+    "grade": "Sahih (Ahmad Muhammad Shakir) · Sahih (Al-Albani) · Hasan Sahih (Bashar Awad Maarouf) · Hasan (Zubair Ali Zai)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "muslim:2318a": {
+    "arabic": "وَحَدَّثَنِي عَمْرٌو النَّاقِدُ، وَابْنُ أَبِي عُمَرَ، جَمِيعًا عَنْ سُفْيَانَ، قَالَ عَمْرٌو حَدَّثَنَا سُفْيَانُ، بْنُ عُيَيْنَةَ عَنِ الزُّهْرِيِّ، عَنْ أَبِي سَلَمَةَ، عَنْ أَبِي هُرَيْرَةَ، أَنَّ الأَقْرَعَ بْنَ حَابِسٍ، أَبْصَرَ النَّبِيَّ صلى الله عليه وسلم يُقَبِّلُ الْحَسَنَ فَقَالَ إِنَّ لِي عَشَرَةً مِنَ الْوَلَدِ مَا قَبَّلْتُ وَاحِدًا مِنْهُمْ فَقَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏ \"‏ إِنَّهُ مَنْ لاَ يَرْحَمْ لاَ يُرْحَمْ ‏\"‏ ‏.‏",
+    "translation": "Abu Huraira reported that al-Aqra' b. Habis saw Allah's Apostle (ﷺ) kissing Hasan. He said:I have ten children, but I have never kissed any one of them, whereupon Allah's Messenger (ﷺ) said: He who does not show mercy (towards his children), no mercy would be shown to him",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "muslim:2629": {
+    "arabic": "حَدَّثَنَا مُحَمَّدُ بْنُ عَبْدِ اللَّهِ بْنِ قُهْزَاذَ، حَدَّثَنَا سَلَمَةُ بْنُ سُلَيْمَانَ، أَخْبَرَنَا عَبْدُ اللَّهِ، أَخْبَرَنَا مَعْمَرٌ، عَنِ ابْنِ شِهَابٍ، حَدَّثَنِي عَبْدُ اللَّهِ بْنُ أَبِي بَكْرِ بْنِ حَزْمٍ، عَنْ عُرْوَةَ، عَنْ عَائِشَةَ، ح وَحَدَّثَنِي عَبْدُ اللَّهِ بْنُ عَبْدِ الرَّحْمَنِ بْنِ بَهْرَامَ، وَأَبُو بَكْرِ بْنُ إِسْحَاقَ - وَاللَّفْظُ لَهُمَا - قَالاَ أَخْبَرَنَا أَبُو الْيَمَانِ، أَخْبَرَنَا شُعَيْبٌ، عَنِ الزُّهْرِيِّ، حَدَّثَنِي عَبْدُ اللَّهِ بْنُ أَبِي بَكْرٍ، أَنَّأَخْبَرَهُ أَنَّ عَائِشَةَ زَوْجَ النَّبِيِّ صلى الله عليه وسلم قَالَتْ جَاءَتْنِي امْرَأَةٌ وَمَعَهَا ابْنَتَانِ لَهَا فَسَأَلَتْنِي فَلَمْ تَجِدْ عِنْدِي شَيْئًا غَيْرَ تَمْرَةٍ وَاحِدَةٍ فَأَعْطَيْتُهَا إِيَّاهَا فَأَخَذَتْهَا فَقَسَمَتْهَا بَيْنَ ابْنَتَيْهَا وَلَمْ تَأْكُلْ مِنْهَا شَيْئًا ثُمَّ قَامَتْ فَخَرَجَتْ وَابْنَتَاهَا فَدَخَلَ عَلَىَّ النَّبِيُّ صلى الله عليه وسلم فَحَدَّثْتُهُ حَدِيثَهَا فَقَالَ النَّبِيُّ صلى الله عليه وسلم ‏ \"‏ مَنِ ابْتُلِيَ مِنَ الْبَنَاتِ بِشَىْءٍ فَأَحْسَنَ إِلَيْهِنَّ كُنَّ لَهُ سِتْرًا مِنَ النَّارِ ‏\"‏ ‏.‏",
+    "translation": "A'isha, the wife of Allah's Apostle (ﷺ), said:A woman came to me along with her two daughters. She asked me for (charity) but she found nothing with me except one date, so I gave her that. She accepted it and then divided it between her two daughters and herself ate nothing out of that. She then got up and went out, and so did her two daughters. (In the meanwhile) Allah's Apostle (ﷺ) visited me and I narrated to him her story. Thereupon Allah's Apostle (ﷺ) said: He who is involved (in the responsibility) of (bringing up) daughters, and he accords benevolent treatment towards them, there would be protection for him against Hell-Fire",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "muslim:1659a": {
+    "arabic": "حَدَّثَنَا أَبُو كَامِلٍ الْجَحْدَرِيُّ، حَدَّثَنَا عَبْدُ الْوَاحِدِ، - يَعْنِي ابْنَ زِيَادٍ - حَدَّثَنَا الأَعْمَشُ، عَنْ إِبْرَاهِيمَ التَّيْمِيِّ، عَنْ أَبِيهِ، قَالَ قَالَ أَبُو مَسْعُودٍ الْبَدْرِيُّ كُنْتُ أَضْرِبُ غُلاَمًا لِي بِالسَّوْطِ فَسَمِعْتُ صَوْتًا مِنْ خَلْفِي ‏\"‏ اعْلَمْ أَبَا مَسْعُودٍ ‏\"‏ ‏.‏ فَلَمْ أَفْهَمِ الصَّوْتَ مِنَ الْغَضَبِ - قَالَ - فَلَمَّا دَنَا مِنِّي إِذَا هُوَ رَسُولُ اللَّهِ صلى الله عليه وسلم فَإِذَا هُوَ يَقُولُ ‏\"‏ اعْلَمْ أَبَا مَسْعُودٍ اعْلَمْ أَبَا مَسْعُودٍ ‏\"‏ ‏.‏ قَالَ فَأَلْقَيْتُ السَّوْطَ مِنْ يَدِي فَقَالَ ‏\"‏ اعْلَمْ أَبَا مَسْعُودٍ أَنَّ اللَّهَ أَقْدَرُ عَلَيْكَ مِنْكَ عَلَى هَذَا الْغُلاَمِ ‏\"‏ ‏.‏ قَالَ فَقُلْتُ لاَ أَضْرِبُ مَمْلُوكًا بَعْدَهُ أَبَدًا ‏.‏",
+    "translation": "Abu Mas'ud al-Badri reported:I was beating my slave with a whip when I heard a voice behind me: Understand, Abu Masud; but I did not recognise the voice due to intense anger. He (Abu Mas'ud) reported: As he came near me (I found) that he was the Messenger of Allah (ﷺ) and he was saying: Bear in mind, Abu Mas'ud; bear in mind. Abu Mas'ud. He (Aba Maslad) said: threw the whip from my hand. Thereupon he (the Holy Prophet) said: Bear in mind, Abu Mas'ud; verily Allah has more dominance upon you than you have upon your slave. I (then) said: I would never beat my servant in future",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:2587": {
+    "arabic": "حَدَّثَنَا حَامِدُ بْنُ عُمَرَ، حَدَّثَنَا أَبُو عَوَانَةَ، عَنْ حُصَيْنٍ، عَنْ عَامِرٍ، قَالَ سَمِعْتُ النُّعْمَانَ بْنَ بَشِيرٍ ـ رضى الله عنهما ـ وَهُوَ عَلَى الْمِنْبَرِ يَقُولُ أَعْطَانِي أَبِي عَطِيَّةً، فَقَالَتْ عَمْرَةُ بِنْتُ رَوَاحَةَ لاَ أَرْضَى حَتَّى تُشْهِدَ رَسُولَ اللَّهِ صلى الله عليه وسلم‏.‏ فَأَتَى رَسُولَ اللَّهِ صلى الله عليه وسلم فَقَالَ إِنِّي أَعْطَيْتُ ابْنِي مِنْ عَمْرَةَ بِنْتِ رَوَاحَةَ عَطِيَّةً، فَأَمَرَتْنِي أَنْ أُشْهِدَكَ يَا رَسُولَ اللَّهِ‏.‏ قَالَ ‏\"‏ أَعْطَيْتَ سَائِرَ وَلَدِكَ مِثْلَ هَذَا ‏\"‏‏.‏ قَالَ لاَ‏.‏ قَالَ ‏\"‏ فَاتَّقُوا اللَّهَ، وَاعْدِلُوا بَيْنَ أَوْلاَدِكُمْ ‏\"‏‏.‏ قَالَ فَرَجَعَ فَرَدَّ عَطِيَّتَهُ‏.‏",
+    "translation": "Narrated 'Amir:I heard An-Nu`man bin Bashir on the pulpit saying, \"My father gave me a gift but `Amra bint Rawaha (my mother) said that she would not agree to it unless he made Allah's Messenger (ﷺ) as a witness to it. So, my father went to Allah's Messenger (ﷺ) and said, 'I have given a gift to my son from `Amra bint Rawaha, but she ordered me to make you as a witness to it, O Allah's Messenger (ﷺ)!' Allah's Messenger (ﷺ) asked, 'Have you given (the like of it) to everyone of your sons?' He replied in the negative. Allah's Messenger (ﷺ) said, 'Be afraid of Allah, and be just to your children.' My father then returned and took back his gift",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:30": {
+    "arabic": "عن المعرور بن سويد، قال: رأيت أبا ذر رضي الله عنه وعليه حلة وعلى غلامه مثلها، فسألته عن ذلك، فذكر أنه قد سابَّ رجلا ًعلى عهد رسول الله صلى الله عليه وسلم فَعَيَّره بأمه، فقال النبي صلى الله عليه وسلم : «إنك امْرُؤٌ فيك جاهلية هم إِخْوَانُكُمْ وخَوَلُكُمْ جعلهم الله تحت أيديكم، فمن كان أخوه تحت يده، فليُطعمه مما يأكل، وليُلْبِسْهُ مما يلبس، ولا تُكَلِّفُوهُمْ مَا يَغْلِبُهُمْ، فَإِنْ كَلَّفْتُمُوهُمْ فَأَعِينُوهُمْ ».",
+    "translation": "Al-Ma‘rūr ibn Suwayd reported: I saw Abu Tharr (may Allah be pleased with him) wearing a nice clothes, and his slave was wearing a similarly nice clothes also. I asked him about this and he said that he had exchanged harsh words with a person during the lifetime of the Messenger of Allah (may Allah's peace and blessings be upon him) and insulted him by making an offensive reference to his mother. That person came to the Messenger of Allah (may Allah's peace and blessings be upon him) and made mention of that (abuse) to him. Then the Messenger of Allah (may Allah's peace and blessings be upon him) said: \"You are a person who has remnants of the ignorant pre-Islamic manners. Your slaves are your brothers and servants whom Allah has placed under your authority. He who has his brother under his authority should feed him from whatever he eats, dress him with whatever he wears, and not assign burdensome and difficult tasks to them that are beyond their capacity. If you do this then help them.\"",
+    "attribution": "Narrated by Bukhari & Muslim",
+    "grade": "Authentic hadith",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "ibn-majah:2443": {
+    "arabic": "حَدَّثَنَا الْعَبَّاسُ بْنُ الْوَلِيدِ الدِّمَشْقِيُّ، حَدَّثَنَا وَهْبُ بْنُ سَعِيدِ بْنِ عَطِيَّةَ السُّلَمِيُّ، حَدَّثَنَا عَبْدُ الرَّحْمَنِ بْنُ زَيْدِ بْنِ أَسْلَمَ، عَنْ أَبِيهِ، عَنْ عَبْدِ اللَّهِ بْنِ عُمَرَ، قَالَ قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏ \"‏ أَعْطُوا الأَجِيرَ أَجْرَهُ قَبْلَ أَنْ يَجِفَّ عَرَقُهُ ‏\"‏ ‏.‏",
+    "translation": "It was narrated from 'Abdullah bin 'Umar that the Messenger of Allah (ﷺ) said:“Give the worker his wages before his sweat dries.”",
+    "grade": "Sahih (Al-Albani) · Sahih (Muhammad Fouad Abd al-Baqi) · Sahih (Zubair Ali Zai)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:2227": {
+    "arabic": "عَنْ أَبِي هُرَيْرَةَ رَضِيَ اللَّهُ عَنْهُ عَنِ النَّبِيِّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ قَالَ: «قَالَ اللَّهُ تَعَالَى: ثَلاَثَةٌ أَنَا خَصْمُهُمْ يَوْمَ القِيَامَةِ: رَجُلٌ أَعْطَى بِي ثُمَّ غَدَرَ، وَرَجُلٌ بَاعَ حُرًّا فَأَكَلَ ثَمَنَهُ، وَرَجُلٌ اسْتَأْجَرَ أَجِيرًا فَاسْتَوْفَى مِنْهُ وَلَمْ يُعْطِهِ أَجْرَهُ».",
+    "translation": "Abu Hurayrah (may Allah be pleased with him) reported that the Prophet (ﷺ) said: \"Allah Almighty said: There are three I will be hostile to them on the Day of Judgment: a man who gave a promise in My Name and then broke it; a man who sold a free person as a slave and devoured his price; and a man who hired a worker and took the full work from him, but did not pay him his wages.\"",
+    "attribution": "Narrated by Al-Bukhāri",
+    "grade": "Authentic",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "bukhari:6015": {
+    "arabic": "حَدَّثَنَا مُحَمَّدُ بْنُ مِنْهَالٍ، حَدَّثَنَا يَزِيدُ بْنُ زُرَيْعٍ، حَدَّثَنَا عُمَرُ بْنُ مُحَمَّدٍ، عَنْ أَبِيهِ، عَنِ ابْنِ عُمَرَ ـ رضى الله عنهما ـ قَالَ قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏ \"‏ مَا زَالَ جِبْرِيلُ يُوصِينِي بِالْجَارِ حَتَّى ظَنَنْتُ أَنَّهُ سَيُوَرِّثُهُ ‏\"‏‏.‏",
+    "translation": "Narrates Ibn `Umar:Allah's Apostle said, Gabriel kept on recommending me about treating the neighbors in a kind and polite manner, so much so that I thought that he would order (me) to make them (my) heirs",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "muslim:46": {
+    "arabic": "حَدَّثَنَا يَحْيَى بْنُ أَيُّوبَ، وَقُتَيْبَةُ بْنُ سَعِيدٍ، وَعَلِيُّ بْنُ حُجْرٍ، جَمِيعًا عَنْ إِسْمَاعِيلَ بْنِ جَعْفَرٍ، - قَالَ ابْنُ أَيُّوبَ حَدَّثَنَا إِسْمَاعِيلُ، - قَالَ أَخْبَرَنِي الْعَلاَءُ، عَنْ أَبِيهِ، عَنْ أَبِي هُرَيْرَةَ، أَنَّ رَسُولَ اللَّهِ صلى الله عليه وسلم قَالَ ‏ \"‏ لاَ يَدْخُلُ الْجَنَّةَ مَنْ لاَ يَأْمَنُ جَارُهُ بَوَائِقَهُ ‏\"‏ ‏.‏",
+    "translation": "It is narrated on the authority of Abu Huraira that the Messenger of Allah (may peace and blessing be upon him) observed:He will not enter Paradise whose neighbour is not secure from his wrongful conduct",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:2259": {
+    "arabic": "حَدَّثَنَا حَجَّاجٌ، حَدَّثَنَا شُعْبَةُ، ح وَحَدَّثَنِي عَلِيُّ بْنُ عَبْدِ اللَّهِ، حَدَّثَنَا شَبَابَةُ، حَدَّثَنَا شُعْبَةُ، حَدَّثَنَا أَبُو عِمْرَانَ، قَالَ سَمِعْتُ طَلْحَةَ بْنَ عَبْدِ اللَّهِ، عَنْ عَائِشَةَ ـ رضى الله عنها ـ قُلْتُ يَا رَسُولَ اللَّهِ، إِنَّ لِي جَارَيْنِ، فَإِلَى أَيِّهِمَا أُهْدِي قَالَ ‏ \"‏ إِلَى أَقْرَبِهِمَا مِنْكِ بَابًا ‏\"‏‏.‏",
+    "translation": "Narrated Aisha:I said, \"O Allah's Messenger (ﷺ)! I have two neighbors and would like to know to which of them I should give presents.\" He replied, \"To the one whose door is nearer to you",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
   "abu-dawud:4941": {
     "arabic": "حَدَّثَنَا أَبُو بَكْرِ بْنُ أَبِي شَيْبَةَ، وَمُسَدَّدٌ، - الْمَعْنَى - قَالاَ حَدَّثَنَا سُفْيَانُ، عَنْ عَمْرٍو، عَنْ أَبِي قَابُوسَ، مَوْلًى لِعَبْدِ اللَّهِ بْنِ عَمْرٍو عَنْ عَبْدِ اللَّهِ بْنِ عَمْرٍو، يَبْلُغُ بِهِ النَّبِيَّ صلى الله عليه وسلم ‏ \"‏ الرَّاحِمُونَ يَرْحَمُهُمُ الرَّحْمَنُ ارْحَمُوا أَهْلَ الأَرْضِ يَرْحَمْكُمْ مَنْ فِي السَّمَاءِ ‏\"‏ ‏.‏ لَمْ يَقُلْ مُسَدَّدٌ مَوْلَى عَبْدِ اللَّهِ بْنِ عَمْرٍو وَقَالَ قَالَ النَّبِيُّ صلى الله عليه وسلم ‏.‏",
     "translation": "Narrated Abdullah ibn Amr ibn al-'As: The Prophet (ﷺ) said: The Compassionate One has mercy on those who are merciful. If you show mercy to those who are on the earth, He Who is in the heaven will show mercy to you. Musaddad did not say: The client of 'Adb Allah b. 'Amr. He said: The Prophet (ﷺ) said",
@@ -1643,13 +1739,6 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
     "arabic": "حَدَّثَنَا قُتَيْبَةُ بْنُ سَعِيدٍ، حَدَّثَنَا اللَّيْثُ، عَنْ يَزِيدَ بْنِ أَبِي حَبِيبٍ، عَنْ أَبِي أَفْلَحَ الْهَمْدَانِيِّ، عَنْ عَبْدِ اللَّهِ بْنِ زُرَيْرٍ، - يَعْنِي الْغَافِقِيَّ - أَنَّهُ سَمِعَ عَلِيَّ بْنَ أَبِي طَالِبٍ، - رضى الله عنه - يَقُولُ إِنَّ نَبِيَّ اللَّهِ صلى الله عليه وسلم أَخَذَ حَرِيرًا فَجَعَلَهُ فِي يَمِينِهِ وَأَخَذَ ذَهَبًا فَجَعَلَهُ فِي شِمَالِهِ ثُمَّ قَالَ ‏ \"‏ إِنَّ هَذَيْنِ حَرَامٌ عَلَى ذُكُورِ أُمَّتِي ‏\"‏ ‏.‏",
     "translation": "Narrated Ali ibn AbuTalib: The Prophet of Allah (ﷺ) took silk and held it in his right hand, and took gold and held it in his left hand and said: both of these are prohibited to the males of my community",
     "grade": "Sahih (Al-Albani) · Sahih (Muhammad Muhyi Al-Din Abdul Hamid) · Sahih (Zubair Ali Zai)",
-    "arabicFrom": "fawazahmed0/hadith-api",
-    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
-  },
-  "tirmidhi:3895": {
-    "arabic": "حَدَّثَنَا مُحَمَّدُ بْنُ يَحْيَى، قَالَ حَدَّثَنَا مُحَمَّدُ بْنُ يُوسُفَ، قَالَ حَدَّثَنَا سُفْيَانُ، عَنْ هِشَامِ بْنِ عُرْوَةَ، عَنْ أَبِيهِ، عَنْ عَائِشَةَ، قَالَتْ قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏ \"‏ خَيْرُكُمْ خَيْرُكُمْ لأَهْلِهِ وَأَنَا خَيْرُكُمْ لأَهْلِي وَإِذَا مَاتَ صَاحِبُكُمْ فَدَعُوهُ ‏\"‏ ‏.‏ قَالَ أَبُو عِيسَى هَذَا حَدِيثٌ حَسَنٌ غَرِيبٌ صَحِيحٌ مِنْ حَدِيثِ الثَّوْرِيِّ مَا أَقَلَّ مَنْ رَوَاهُ عَنِ الثَّوْرِيِّ ‏.‏ وَرُوِيَ هَذَا عَنْ هِشَامِ بْنِ عُرْوَةَ عَنْ أَبِيهِ عَنِ النَّبِيِّ صلى الله عليه وسلم مُرْسَلٌ ‏.‏",
-    "translation": "Narrated 'Aishah:that the Messenger of Allah (ﷺ) said: \"The best of you is the best to his wives, and I am the best of you to my wives, and when your companion dies, leave him alone",
-    "grade": "Sahih (Ahmad Muhammad Shakir) · Sahih (Al-Albani) · Hasan Sahih (Bashar Awad Maarouf) · Hasan (Zubair Ali Zai)",
     "arabicFrom": "fawazahmed0/hadith-api",
     "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
   },

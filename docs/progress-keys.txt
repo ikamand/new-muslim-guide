@@ -233,8 +233,12 @@ reference:what-is-the-quran
 reference:which-dhikr
 reference:who-is-allah
 reference:who-is-muhammad
+reference:whoever-works-for-you
 reference:why-people-differ
 reference:witr
 reference:work
+reference:your-children
 reference:your-mother
 reference:your-name
+reference:your-neighbour
+reference:your-partner

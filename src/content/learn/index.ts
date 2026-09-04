@@ -48,6 +48,10 @@ import { VOLUNTARY_FASTING } from './voluntary-fasting';
 import { WORK } from './work';
 import { YOUR_NAME } from './your-name';
 import { YOUR_MOTHER } from './your-mother';
+import { YOUR_CHILDREN } from './your-children';
+import { YOUR_NEIGHBOUR } from './your-neighbour';
+import { YOUR_PARTNER } from './your-partner';
+import { WHOEVER_WORKS_FOR_YOU } from './whoever-works-for-you';
 import { ref, type ContentRef } from '../model';
 import type { Reference } from '../types';
 
@@ -111,6 +115,10 @@ export const LEARN_TOPICS: Reference[] = [
   WHO_IS_MUHAMMAD,
   HOW_IT_BEGAN,
   YOUR_MOTHER,
+  YOUR_PARTNER,
+  YOUR_CHILDREN,
+  WHOEVER_WORKS_FOR_YOU,
+  YOUR_NEIGHBOUR,
   ANIMALS_AND_LAND,
   WHAT_IS_THE_QURAN,
   SUNNAH,
@@ -267,6 +275,10 @@ export const TOPIC_GROUPS: readonly { id: TopicGroupId; topics: readonly Content
       ref('reference', 'teaching-someone'),
       /* What is owed to a person, and to what cannot ask. */
       ref('reference', 'your-mother'),
+      ref('reference', 'your-partner'),
+      ref('reference', 'your-children'),
+      ref('reference', 'whoever-works-for-you'),
+      ref('reference', 'your-neighbour'),
       ref('reference', 'animals-and-land'),
       /* The questions a convert's family asks, filed with the other pages
          about being a Muslim among people who are not. */

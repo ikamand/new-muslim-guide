@@ -17,8 +17,9 @@ import type { Reference } from '../types';
  * International) and each narration in the hadith corpus (`.cache/hadith`)
  * by its own number, English and Arabic both. Abu Dawud 4941 is outside the
  * two Sahihs and carries its grading printed, per the app's precedent for
- * the graded sunan. Four graders are recorded on it in the corpus and the
- * strictest reading is used.
+ * the graded sunan. The corpus records four graders on it, three saying
+ * sahih and one calling the chain hasan, so the page prints sahih with the
+ * grader named rather than asserting a grading of its own.
  *
  * ## Two deliberate absences
  *

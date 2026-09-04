@@ -396,28 +396,66 @@ const searchWindows = (arabic) => {
  * may abridge a long narration at either end. What does hold when it is the
  * same hadith is that a decent run of consecutive words appears in both.
  *
- * 60 characters of skeleton is roughly ten words — long enough that a
- * coincidental match between two unrelated narrations is not a realistic
- * worry, short enough to survive one publisher trimming a clause.
+ * 60 characters of skeleton is roughly ten words.
+ *
+ * ## The opening is not evidence, and once printed a wrong hadith
+ *
+ * This function used to slide its window from position 0, and its comment said
+ * a coincidental match between two unrelated narrations was not a realistic
+ * worry. It happened. Sahih al-Bukhari 5971 — the man told "your mother" three
+ * times — was matched to an unrelated narration about defending your property,
+ * and the app printed that under the number, in Arabic and in English, because
+ * the two share a 60-character opening: the narrator's name, then "a man came
+ * to the Messenger of Allah and said". That is boilerplate, it is at the head
+ * of thousands of narrations, and it is the least distinctive text in the
+ * corpus. So the window now starts a third of the way in, which is the same
+ * reasoning `searchWindows` above already applies: distinctiveness lives past
+ * the opening.
+ *
+ * Rejecting a true match costs nothing here. The narration itself was fetched
+ * by number from the collection and is unaffected; only the preferred
+ * translation falls back to the primary. Accepting a false one prints the
+ * wrong hadith. The two errors are not the same size.
  */
 const SHARED_RUN = 60;
+
+/** Where the window may start: past the formulaic opening of the shorter text. */
+const OPENING_SHARE = 0.35;
 
 const sameNarration = (ours, theirs) => {
   if (!ours || !theirs) return false;
   if (theirs.includes(ours) || ours.includes(theirs)) return true;
   const [shorter, longer] = ours.length <= theirs.length ? [ours, theirs] : [theirs, ours];
   if (shorter.length < SHARED_RUN) return false;
-  for (let at = 0; at + SHARED_RUN <= shorter.length; at += 10) {
+  const from = Math.floor(shorter.length * OPENING_SHARE);
+  for (let at = from; at + SHARED_RUN <= shorter.length; at += 10) {
     if (longer.includes(shorter.slice(at, at + SHARED_RUN))) return true;
   }
   return false;
 };
+
+/**
+ * Citations where HadeethEnc's own text must not be used, with the reason.
+ *
+ * A string test cannot separate two narrations that really do share most of
+ * their wording, and near-duplicates sit next to each other by design in these
+ * collections. Where that has been found by reading, it is recorded here
+ * rather than left for the next person to find again.
+ */
+const HADEETHENC_MISMATCHES = new Map([
+  [
+    'bukhari:2072',
+    "Sahih al-Bukhari 2072 is Al-Miqdam's — nobody eats better than what his own hands earned. HadeethEnc's search lands on the next narration, 2073, which is Abu Hurayrah's and says only that Dawud ate from his own labour. The two share that clause, which is why the match passes.",
+  ],
+]);
 
 /* ------- Hadith: resolved by number, translated by whoever has it ------- */
 
 console.log(`Hadith — resolving ${hadithCites.size} citations`);
 
 const hadith = {};
+/** Citations where the register above suppressed a HadeethEnc match. */
+const mismatchesApplied = [];
 const report = [];
 
 for (const [key, source] of hadithCites) {
@@ -557,6 +595,17 @@ for (const [key, source] of hadithCites) {
       }
       await sleep(80);
     }
+  }
+
+  /*
+    A match that reading has already shown to be a near-duplicate is not a
+    match. Recorded above with its reason, and reported below rather than
+    dropped silently.
+  */
+  const knownMismatch = HADEETHENC_MISMATCHES.get(key);
+  if (knownMismatch) {
+    mismatchesApplied.push({ key, reason: knownMismatch });
+    hadeethEncHit = undefined;
   }
 
   if (hadeethEncHit) {
@@ -761,6 +810,25 @@ the same narration than the other.
 
 It does **not** mean the narration is the right evidence for the claim it sits
 under. That is substance and stays with a reviewer.
+
+The window that decides this starts a third of the way into the shorter text.
+Two unrelated narrations share their opening, the narrator and then "a man came
+to the Messenger of Allah and said", and comparing from position zero once
+printed the wrong hadith under Sahih al-Bukhari 5971. A comparison that fails
+costs the preferred translation; one that passes wrongly costs the text.
+${
+  mismatchesApplied.length === 0
+    ? ''
+    : `
+## Suppressed matches (${mismatchesApplied.length})
+
+Near-duplicate narrations a string comparison cannot separate, found by reading
+and recorded in the generator so they stay found. The text shown for these
+comes from the collection itself.
+
+${mismatchesApplied.map((m) => `- \`${m.key}\` — ${m.reason}`).join('\n')}
+`
+}
 
 ${
   missing.length === 0

@@ -268,6 +268,25 @@ export const CURRICULUM: readonly Tier[] = [
         /* One lesson plus doors — allowlisted below the 2-lesson floor. This
            is where "the meaning of what you already say" and the sīrah land
            when they are written. */
+        /*
+          4 Sep 2026. Rights, not virtues: each lesson is one party in the
+          reader's life and what is owed them, with the text under it. Sits
+          in this tier because it is the material a convert and a person
+          raised Muslim meet on identical terms, which is what the tier is
+          for. Two written as the pilot and deliberately the least alike of
+          the six; four commissioned.
+        */
+        id: 'what-you-owe',
+        lessons: [
+          step(ref('reference', 'your-mother'), 'learning'),
+          step(ref('reference', 'animals-and-land'), 'learning'),
+          step(ref('reference', 'your-partner'), 'learning'),
+          step(ref('reference', 'your-children'), 'learning'),
+          step(ref('reference', 'whoever-works-for-you'), 'learning'),
+          step(ref('reference', 'your-neighbour'), 'learning'),
+        ],
+      },
+      {
         id: 'practices',
         lessons: [
           step(ref('reference', 'small-sunnahs'), 'practice'),
@@ -292,6 +311,12 @@ export const COMMISSIONED: readonly string[] = [
   'reference:was-it-spread-by-the-sword',
   'reference:is-allah-a-different-god',
   'reference:why-cant-you-eat-that',
+  /* The rest of the what-you-owe unit, 4 Sep 2026. Two pages written as the
+     pilot so the format could be looked at before the other four. */
+  'reference:your-partner',
+  'reference:your-children',
+  'reference:whoever-works-for-you',
+  'reference:your-neighbour',
 ];
 
 /** Units allowed outside the 2–6 lesson band, with the reason on record. */

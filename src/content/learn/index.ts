@@ -1,4 +1,5 @@
 import { ADHAN } from './adhan';
+import { ANIMALS_AND_LAND } from './animals-and-land';
 import { ASR_PAGE, DHUHR_PAGE, FAJR_PAGE, ISHA_PAGE, MAGHRIB_PAGE } from './daily-prayers';
 import { FASTING_ALONE } from './fasting-alone';
 import { A_PARTNER_ALREADY } from './a-partner-already';
@@ -46,6 +47,7 @@ import { ISTIKHARA, QIYAM_AL_LAYL, TAHAJJUD, TAWBA_PRAYER, WITR } from './volunt
 import { VOLUNTARY_FASTING } from './voluntary-fasting';
 import { WORK } from './work';
 import { YOUR_NAME } from './your-name';
+import { YOUR_MOTHER } from './your-mother';
 import { ref, type ContentRef } from '../model';
 import type { Reference } from '../types';
 
@@ -108,6 +110,8 @@ export const LEARN_TOPICS: Reference[] = [
   WHO_IS_ALLAH,
   WHO_IS_MUHAMMAD,
   HOW_IT_BEGAN,
+  YOUR_MOTHER,
+  ANIMALS_AND_LAND,
   WHAT_IS_THE_QURAN,
   SUNNAH,
   BEFORE_PRAYER,
@@ -261,6 +265,9 @@ export const TOPIC_GROUPS: readonly { id: TopicGroupId; topics: readonly Content
       ref('reference', 'manners'),
       ref('reference', 'small-sunnahs'),
       ref('reference', 'teaching-someone'),
+      /* What is owed to a person, and to what cannot ask. */
+      ref('reference', 'your-mother'),
+      ref('reference', 'animals-and-land'),
       /* The questions a convert's family asks, filed with the other pages
          about being a Muslim among people who are not. */
       ref('reference', 'isnt-islam-violent'),

@@ -178,6 +178,7 @@ reference:a-partner-already
 reference:adhan
 reference:al-fatihah
 reference:anger
+reference:animals-and-land
 reference:arrogance
 reference:asr
 reference:before-prayer
@@ -235,4 +236,5 @@ reference:who-is-muhammad
 reference:why-people-differ
 reference:witr
 reference:work
+reference:your-mother
 reference:your-name

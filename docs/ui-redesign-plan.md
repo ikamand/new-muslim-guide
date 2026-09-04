@@ -3124,3 +3124,70 @@ on the mat, not lessons, and `how-prayer-works` is the one lesson about all
 five. Recommended and held: make it a `door` on *How to pray*. Doors are
 `ContentRef`s and `routeFor` has no case for a screen, so it is a small code
 change, not a one-liner.
+
+---
+
+## 4 Sep 2026 — What you owe: pilot, and a wrong hadith found on screen ✅ ⚠️
+
+Iyad's brief, and a correction of mine. Asked what Going deeper should carry
+for Muslims who did not convert, the answer proposed was the meaning of the
+words of the prayer. He rejected it: the app already teaches the prayer, and
+what he meant was akhlaq. Not lying, not stealing, being humane, work, the
+mother's place, and how a man treats his wife and children. He was right, and
+the app's coverage proves it: four vices in `interior-life`, one summary page
+of manners, and nothing at all on what is owed to a person.
+
+**Built as rights, not virtues.** A list of good qualities is a poster.
+A list of people is something a reader can act on this afternoon. New unit
+`what-you-owe` in the deeper tier, six lessons, of which two written as the
+pilot and deliberately the least alike of the set: `learn/your-mother.ts`
+(a person you love) and `learn/animals-and-land.ts` (what cannot ask). The
+other four hold their places in `COMMISSIONED`: your partner, your children,
+whoever works for you, your neighbour. Lying and stealing are the tongue and
+the hand and belong beside the four vices, not here.
+
+The evidence base is unusually strong and was the reason for the shape. The
+HadeethEnc mirror's largest category is Praiseworthy Morals at 83 graded
+narrations, with Blameworthy Morals at 47, and every record carries a
+published grading and a published explanation.
+
+### The bug, which is the important half
+
+The mother page shipped its first render printing **the wrong hadith**. Under
+"Sahih al-Bukhari 5971" it showed, in Arabic and in English, an unrelated
+narration about defending your property from a thief. Found by looking at the
+screen, which is the only way it could have been found: `tsc`, `style:check`,
+`content:audit`, `content:verify` and `evidence` were all green, and the
+evidence report marked the citation cross-checked against a second publisher.
+
+`sameNarration` in `scripts/generate-evidence.mjs` slid its comparison window
+from position zero, and its own comment said a coincidental match between two
+unrelated narrations was not a realistic worry. The two texts share sixty
+characters of opening: the narrator's name, then "a man came to the Messenger
+of Allah and said". That is boilerplate at the head of thousands of
+narrations. The match passed, and the generator then preferred HadeethEnc's
+wording, so both the Arabic and the English on screen were a different hadith
+under a right-looking number.
+
+**Fixed three ways.** The window now starts a third of the way into the
+shorter text, on the same reasoning `searchWindows` already used:
+distinctiveness lives past the opening. A false negative costs the preferred
+translation and nothing else, because the narration itself is fetched by
+number; a false positive costs the text. That change alone rejects five
+previously accepted matches, which now fall back to the collection's own
+wording.
+
+A sweep of all 66 HadeethEnc-sourced narrations against the collections then
+found **a second, older instance on a shipped page**: `learn/work.ts` cited
+Bukhari 2072, Al-Miqdam's "nobody has eaten better than what his own hands
+earned", and printed Bukhari 2073, which is Abu Hurayrah's and says only that
+Dawud ate from his own labour. The two genuinely share that clause, so no
+string rule separates them. It is recorded in a `HADEETHENC_MISMATCHES`
+register in the generator with the reason, and the evidence report grew a
+"Suppressed matches" section that prints it.
+
+Cross-checked narrations fall from 68 to 62 and Darussalam translations rise
+from 103 to 109. That is the honest count, and the earlier one was not.
+
+⚠️ Both new pages await scholarly review; `docs/scholarly-review.md` carries
+their entry. Ships by OTA.

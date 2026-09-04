@@ -126,6 +126,8 @@ const REFERENCES: Readonly<Record<string, Cadence>> = {
   'who-is-allah': 'once',
   'who-is-muhammad': 'once',
   'how-it-began': 'once',
+  'your-mother': 'once',
+  'animals-and-land': 'once',
   'isnt-islam-violent': 'once',
   'what-about-jesus': 'once',
   'what-is-the-quran': 'once',

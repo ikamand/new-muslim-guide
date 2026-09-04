@@ -1006,6 +1006,9 @@ export const EN = {
   'curriculum.unit.interior-life': 'The interior life',
   'curriculum.unit.interior-life.purpose':
     'Anger, envy, showing off, arrogance, and their cures.',
+  'curriculum.unit.what-you-owe': 'What you owe',
+  'curriculum.unit.what-you-owe.purpose':
+    'Your mother, your family, whoever works for you, and what cannot ask.',
   'curriculum.unit.practices': 'Practices to take on',
   'curriculum.unit.practices.purpose':
     'Small sunnahs that become yours over the years.',
@@ -1025,6 +1028,7 @@ export const EN = {
   'curriculum.short.when-its-hard': 'Hard days',
   'curriculum.short.prayers-you-choose': 'Chosen',
   'curriculum.short.interior-life': 'The heart',
+  'curriculum.short.what-you-owe': 'Owed',
   'curriculum.short.practices': 'Practices',
 
   'learn.browse': 'Browse by situation',

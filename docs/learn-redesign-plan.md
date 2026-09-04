@@ -86,13 +86,14 @@ untouched: they are the instrument followed on the mat, not lessons.
 | 5 | **The year** | islamic-calendar · ramadan · fasting-alone · eid · voluntary-fasting · pillar:zakat *(label: Zakat — door: the /zakat calculator)* |
 | 6 | **When it's hard** | repentance · if-you-stopped · patience-and-gratitude |
 
-### Tier 3 — Going deeper (3 units, 10 lessons + doors)
+### Tier 3 — Going deeper (4 units, 13 lessons + 4 commissioned + doors)
 
 | # | Unit | Lessons, in order |
 |---|---|---|
 | 1 | **Prayers you choose** | witr · tahajjud · qiyam-al-layl · istikhara · tawba-prayer |
 | 2 | **The interior life** | anger · showing-off · arrogance · envy |
-| 3 | **Practices to take on** | small-sunnahs · which-dhikr *(3 Sep: the Qur'an is the best dhikr unless a dhikr belongs to that moment, with the app's own sittings and cards as the examples)* — doors: the 99 names (collection:quranic-names, one-a-day) · Qurʾan memorisation (→ Qurʾan tab). Where meaning-of-what-you-say and the sīrah land when written. |
+| 3 | **What you owe** | your-mother · animals-and-land · *your-partner · your-children · whoever-works-for-you · your-neighbour (commissioned, 4 Sep — two written as the pilot)* |
+| 4 | **Practices to take on** | small-sunnahs · which-dhikr *(3 Sep: the Qur'an is the best dhikr unless a dhikr belongs to that moment, with the app's own sittings and cards as the examples)* — doors: the 99 names (collection:quranic-names, one-a-day) · Qurʾan memorisation (→ Qurʾan tab). Where meaning-of-what-you-say and the sīrah land when written. |
 
 ⚠️ Unit 1 partially reverses the 26 Aug decision that the voluntary prayers
 live only in the `/pray` chooser (`src/content/learn/index.ts:337`). The

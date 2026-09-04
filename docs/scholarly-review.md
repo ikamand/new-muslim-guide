@@ -1454,3 +1454,30 @@ the reader's own family is the audience. What a qualified reader needs to clear:
   17:81; Bukhari 3934 for the calendar's epoch. "Mecca surrendered rather than
   fought" and "Mecca sent armies more than once" are `general` sources and
   rest on the biographies, not on the corpus.
+
+## Added 4 September 2026 — "What you owe" (pilot)
+
+Two pages, model-written over checked citations: `learn/your-mother.ts` and
+`learn/animals-and-land.ts`. What a qualified reader needs to clear:
+
+- **Your mother, three times.** Bukhari 5971 and Muslim 2548a for the man told
+  "your mother" three times before "your father". The reading of 31:14 and
+  46:15 as describing rather than commanding, and the claim that what is owed
+  is a debt for something already done. The gloss on 17:23 as setting the bar
+  at a syllable, and on 17:24's "wing of humility" as being about tone of
+  voice. And the limit in 29:8: the page says the refusal covers the thing
+  asked and not the relationship, which is a reading and needs checking.
+- **The animals and the land.** Abu Dawud 4941 as the hero, printed with its
+  grading (sahih, Al-Albani; the corpus records four graders and the page uses
+  the strictest reading). Bukhari 2363 for the dog and the closing "a reward
+  for serving any living thing". Bukhari 3482 for the cat, and the page's
+  reading that nothing in the account says she was cruel beyond neglect.
+  Bukhari 2320 for planting, with the note that what is taken without
+  permission still counts. 2:205 for corruption in the land, and 6:38 for
+  creatures being communities. Deliberately absent: slaughter and hunting, and
+  any modern environmental argument built on these texts.
+
+**Also corrected, in already-reviewed content:** `learn/work.ts` was printing
+Sahih al-Bukhari 2073's wording under the number 2072. The citation was right
+and the displayed text was not. It now shows Al-Miqdam's narration, which is
+what 2072 is and what the sentence above it claims.

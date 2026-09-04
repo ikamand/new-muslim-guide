@@ -13,10 +13,12 @@ import { FAMILY } from './family';
 import { FOOD } from './food';
 import { HALAL_AND_HARAM } from './halal-and-haram';
 import { HOW_PRAYER_WORKS } from './how-prayer-works';
+import { HOW_IT_BEGAN } from './how-it-began';
 import { LIFE_BEFORE } from './life-before';
 import { MARRIAGE_SHAPE } from './marriage-shape';
 import { MINIMUM_PRAYER } from './minimum-prayer';
 import { IF_YOU_STOPPED } from './if-you-stopped';
+import { ISNT_ISLAM_VIOLENT } from './isnt-islam-violent';
 import { ISLAMIC_CALENDAR } from './islamic-calendar';
 import { JANAZAH } from './janazah';
 import { JUMUAH } from './jumuah';
@@ -34,6 +36,7 @@ import { WHICH_DHIKR } from './which-dhikr';
 import { SUNNAH } from './sunnah';
 import { TEACHING_SOMEONE } from './teaching-someone';
 import { WHAT_BREAKS_PRAYER } from './what-breaks-prayer';
+import { WHAT_ABOUT_JESUS } from './what-about-jesus';
 import { WHAT_IS_ISLAM } from './what-is-islam';
 import { WHAT_IS_THE_QURAN } from './what-is-the-quran';
 import { WHO_IS_ALLAH } from './who-is-allah';
@@ -100,8 +103,11 @@ export const LEARN_TOPICS: Reference[] = [
   /* 3 Sep 2026 — the question a convert with ten minutes asks. */
   WHICH_DHIKR,
   TEACHING_SOMEONE,
+  ISNT_ISLAM_VIOLENT,
+  WHAT_ABOUT_JESUS,
   WHO_IS_ALLAH,
   WHO_IS_MUHAMMAD,
+  HOW_IT_BEGAN,
   WHAT_IS_THE_QURAN,
   SUNNAH,
   BEFORE_PRAYER,
@@ -217,6 +223,8 @@ export const TOPIC_GROUPS: readonly { id: TopicGroupId; topics: readonly Content
       ref('reference', 'rulings'),
       ref('reference', 'who-is-allah'),
       ref('reference', 'who-is-muhammad'),
+      /* The origin story in one sitting, beside the man it is about. */
+      ref('reference', 'how-it-began'),
       ref('reference', 'what-is-the-quran'),
       ref('reference', 'sunnah'),
       /* Why four schools. The page that makes the 50 `differs` notes legible. */
@@ -253,6 +261,10 @@ export const TOPIC_GROUPS: readonly { id: TopicGroupId; topics: readonly Content
       ref('reference', 'manners'),
       ref('reference', 'small-sunnahs'),
       ref('reference', 'teaching-someone'),
+      /* The questions a convert's family asks, filed with the other pages
+         about being a Muslim among people who are not. */
+      ref('reference', 'isnt-islam-violent'),
+      ref('reference', 'what-about-jesus'),
     ],
   },
   {

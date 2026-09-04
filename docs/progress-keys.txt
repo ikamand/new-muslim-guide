@@ -193,10 +193,12 @@ reference:family
 reference:fasting-alone
 reference:food
 reference:halal-and-haram
+reference:how-it-began
 reference:how-prayer-works
 reference:if-you-stopped
 reference:isha
 reference:islamic-calendar
+reference:isnt-islam-violent
 reference:istikhara
 reference:janazah
 reference:jumuah
@@ -223,6 +225,7 @@ reference:tawba-prayer
 reference:teaching-someone
 reference:travelling
 reference:voluntary-fasting
+reference:what-about-jesus
 reference:what-breaks-prayer
 reference:what-is-islam
 reference:what-is-the-quran

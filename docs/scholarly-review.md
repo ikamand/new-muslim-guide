@@ -1423,3 +1423,34 @@ Model-written over checked citations. What a qualified reader needs to clear:
   Friday salawat are each a dhikr with its own time. The hero verse is
   39:23, with 15:9 beside it; the page reads "the best of speech" and "the
   Reminder" as the Qur'an's names for itself.
+
+## Added 3 September 2026 — "Questions you'll be asked" (pilot) and "How it began"
+
+Three pages, model-written over checked citations: `learn/isnt-islam-violent.ts`,
+`learn/what-about-jesus.ts` and `learn/how-it-began.ts`. Each is the answer a
+convert gives a parent or a colleague. The first two must answer and never
+compare, because the app stores refuse inflammatory religious commentary and
+the reader's own family is the audience. What a qualified reader needs to clear:
+
+- **Isn't Islam violent?** The gloss on 17:33's "except by right" as "with
+  lawful cause and never by private decision"; that the Meccan years passed
+  without fighting and 22:39 is the permission; that Bukhari 3015 (women and
+  children) is the basis of the rules of war; the suggested wording in the
+  last section. Jihad is not explained (Tirmidhi's "strives against himself"
+  needs a grading ruling first) and Bukhari 10 was left out because its
+  wording is about Muslims.
+- **What about Jesus?** That belief in him is a condition of being Muslim
+  (2:136); the reading of 5:75's "ate food" as "were human"; 4:157–158 stated
+  as "not killed, not crucified, raised"; 6:164 for "no soul carries another's
+  burden"; Bukhari 3435 offered as the answer to "then how are you saved";
+  Bukhari 3442 and 3443 (nearest to Jesus, the prophets are paternal
+  brothers). Deliberately absent: the return of Jesus (Bukhari 3448) and 61:6.
+- **How it began.** The chronology and ages from Bukhari 3902 (forty, thirteen
+  years, ten years, sixty-three) with 610 and 632 derived from them; Bukhari 3
+  read as "three times the angel pressed him" and Khadijah's reassurance
+  paraphrased; Bukhari 3905 for Abyssinia and Ibn Ad-Daghina; 8:30 and 9:40
+  with Bukhari 3653 for the cave; Bukhari 428 for the mosque land given, not
+  sold; 22:39–40 as the permission to fight; Bukhari 4287 for the idols and
+  17:81; Bukhari 3934 for the calendar's epoch. "Mecca surrendered rather than
+  fought" and "Mecca sent armies more than once" are `general` sources and
+  rest on the biographies, not on the corpus.

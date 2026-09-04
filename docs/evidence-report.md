@@ -5,11 +5,11 @@ supplied each line of it.
 
 | | |
 |---|---|
-| Qur'an passages | 98 of 98 |
-| Narrations | 155 of 155 |
-| Confirmed against a second publisher | 64 |
-| Translation from HadeethEnc (published terms) | 64 |
-| Translation from Darussalam (quoted) | 91 |
+| Qur'an passages | 122 of 122 |
+| Narrations | 166 of 166 |
+| Confirmed against a second publisher | 67 |
+| Translation from HadeethEnc (published terms) | 67 |
+| Translation from Darussalam (quoted) | 99 |
 | Arabic with no translation | 0 |
 | Nothing found | 0 |
 
@@ -122,8 +122,19 @@ under. That is substance and stays with a reviewer.
 | `tirmidhi:2910` | HadeethEnc.com | HadeethEnc.com | HadeethEnc 6275 |
 | `bukhari:3461` | HadeethEnc.com | HadeethEnc.com | HadeethEnc 3686 |
 | `bukhari:5027` | HadeethEnc.com | HadeethEnc.com | HadeethEnc 5913 |
+| `bukhari:3015` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
+| `bukhari:3435` | HadeethEnc.com | HadeethEnc.com | HadeethEnc 3417 |
+| `bukhari:3442` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
+| `bukhari:3443` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
 | `bukhari:3559` | HadeethEnc.com | HadeethEnc.com | HadeethEnc 5803 |
 | `bukhari:631` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
+| `bukhari:3902` | HadeethEnc.com | HadeethEnc.com | HadeethEnc 10975 |
+| `bukhari:3` | HadeethEnc.com | HadeethEnc.com | HadeethEnc 66303 |
+| `bukhari:3905` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
+| `bukhari:3653` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
+| `bukhari:428` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
+| `bukhari:4287` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
+| `bukhari:3934` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
 | `bukhari:6018` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
 | `bukhari:5376` | HadeethEnc.com | HadeethEnc.com | HadeethEnc 58120 |
 | `bukhari:6324` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |

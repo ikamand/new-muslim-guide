@@ -3062,3 +3062,65 @@ the Duʿa tab keeps a clock and the Qur'an tab does not. Tirmidhi 2926,
 which two of the fatwas lean on, is graded weak by three of four graders in
 the corpus and was left out. `practices` left `SMALL_UNITS` with its second
 lesson. The salawat page proposed alongside it is not written.
+
+---
+
+## 3 Sep 2026 — Questions you'll be asked: pilot ✅ ⚠️ review-gated
+
+Iyad proposed widening the audience to non-Muslims curious about Islam,
+with the history of how it grew and the common misconceptions. Researched,
+declined as an audience, accepted as content: the convert already needs
+exactly this. Both Cambridge conversion reports describe converts cut off
+from family and asked these questions at the table, and `teaching-someone`
+teaches "I don't know" without ever giving the answers. Seekers arrive
+through marriage, friendship and reading, not app stores; the realistic
+reach is a convert handing over the phone. Two costs named: Apple 1.1.1 and
+1.1.5 ("inflammatory religious commentary or inaccurate or misleading
+quotations of religious texts") and Google Play's hate-speech policy, so the
+pages answer and never compare; and nothing here can be checked by
+`content:verify` or `evidence` beyond the texts themselves, so every page
+lands on the scholarly pile. "Strongest religion" was dropped as a frame —
+Pew has Islam fastest-growing 2010–2020 by births and youth, with net
+switching at 3% or less everywhere it measured.
+
+**Placement, decided with Iyad:** not Going deeper ("depth in what you
+already do"). A new unit `being-asked` in *The life that follows* ("for the
+questions life brings"), after *People*, which is full at six. Six pages
+proposed; two written as the pilot so the format could be looked at before
+the other four: `learn/isnt-islam-violent.ts` and `learn/what-about-jesus.ts`.
+The four others hold their places in the unit and in `COMMISSIONED`
+(`why-do-women-cover`, `was-it-spread-by-the-sword`,
+`is-allah-a-different-god`, `why-cant-you-eat-that`); "Do you worship
+Muhammad?" was dropped because `who-is-muhammad` already opens on it. Plus
+`learn/how-it-began.ts`, the origin story in one sitting, sixth lesson of
+*Who you follow* beside "Who is Muhammad ﷺ?"; the long sīrah in episodes
+still lands in Going deeper, as the curriculum notes.
+
+**Shape of a page:** the quick-fact block carries the one sentence to say
+aloud (the emphasis row), the numbered sections carry the texts, and the
+last section is the wording. Every verse was read in the Qur'an mirror and
+every narration in the corpus by its own number before it was cited
+(Bukhari 3, 428, 3015, 3435, 3442, 3443, 3653, 3902, 3905, 3934, 4287).
+Deliberate absences are on the record in each file's header: jihad
+(Tirmidhi, grading needs the reviewer), Bukhari 10 (its wording is about
+Muslims), the return of Jesus (Bukhari 3448, "break the cross", for the
+reviewer to place first), 61:6 (turns an answer into an argument), 5:3
+(prints in full and opens with the food prohibitions), and everything only
+the sīrah works carry. On `how-it-began` the hero is the cave and pulls
+above the numbered story, so the first heading reads "Who was he before
+that night?" to make the order deliberate.
+
+Verified with eyes on web, light, 390: all three pages, the unit screen
+(two rows; the four commissioned lessons hidden as unresolved), the tier
+screen. `tsc`, `style:check`, `content:audit`, `content:verify` and
+`evidence` green; `i18n:manifest` regenerated. Ships by OTA. ⚠️ All three
+pages await scholarly review; `docs/scholarly-review.md` carries their
+entry.
+
+**Every prayer, asked the same day:** the chooser at `/pray` is the first
+row of the Learn tab's reference shelf (`src/app/(tabs)/learn.tsx:376`) and
+not a curriculum lesson, by design — the guides are the instrument followed
+on the mat, not lessons, and `how-prayer-works` is the one lesson about all
+five. Recommended and held: make it a `door` on *How to pray*. Doors are
+`ContentRef`s and `routeFor` has no case for a screen, so it is a small code
+change, not a one-liner.

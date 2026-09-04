@@ -107,6 +107,10 @@ export const CURRICULUM: readonly Tier[] = [
         lessons: [
           step(ref('reference', 'who-is-allah'), 'foundation'),
           step(ref('reference', 'who-is-muhammad'), 'foundation'),
+          /* The origin story in one sitting. The long sīrah, in episodes, is
+             a Going-deeper collection when it is written; this is the four
+             minutes a convert needs in week one. */
+          step(ref('reference', 'how-it-began'), 'foundation'),
           step(ref('reference', 'what-is-the-quran'), 'foundation'),
           step(ref('reference', 'sunnah'), 'foundation'),
           /* The five categories sit here, not in year two, because they change
@@ -182,6 +186,25 @@ export const CURRICULUM: readonly Tier[] = [
           step(ref('reference', 'a-partner-already'), 'learning'),
           step(ref('reference', 'teaching-someone'), 'learning'),
           step(ref('reference', 'janazah'), 'learning'),
+        ],
+      },
+      {
+        /*
+          3 Sep 2026. The questions a convert's parent or colleague asks at
+          the table, each page one answer to say aloud and the texts under
+          it. Sits after People because teaching-someone teaches "I don't
+          know"; this unit is the handful of questions for which that is not
+          enough. Two written as the pilot; four commissioned, so the audit
+          reports them as work rather than typos.
+        */
+        id: 'being-asked',
+        lessons: [
+          step(ref('reference', 'isnt-islam-violent'), 'learning'),
+          step(ref('reference', 'what-about-jesus'), 'learning'),
+          step(ref('reference', 'why-do-women-cover'), 'learning'),
+          step(ref('reference', 'was-it-spread-by-the-sword'), 'learning'),
+          step(ref('reference', 'is-allah-a-different-god'), 'learning'),
+          step(ref('reference', 'why-cant-you-eat-that'), 'learning'),
         ],
       },
       {
@@ -262,7 +285,14 @@ export const CURRICULUM: readonly Tier[] = [
  * commissioned work. Empty since 31 Aug — how-prayer-works was written, and
  * the audit's stale-commission check forced this line to say so.
  */
-export const COMMISSIONED: readonly string[] = [];
+export const COMMISSIONED: readonly string[] = [
+  /* The rest of the being-asked unit, 3 Sep 2026. Two pages were written as
+     the pilot so the format could be looked at before the other four. */
+  'reference:why-do-women-cover',
+  'reference:was-it-spread-by-the-sword',
+  'reference:is-allah-a-different-god',
+  'reference:why-cant-you-eat-that',
+];
 
 /** Units allowed outside the 2–6 lesson band, with the reason on record. */
 export const SMALL_UNITS: readonly string[] = [

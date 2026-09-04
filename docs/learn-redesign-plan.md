@@ -57,12 +57,12 @@ Decisions made 30 Aug, Iyad's answers on the record:
 must be written from sources and reviewed before it ships — it is the only
 new religious content this plan commissions.
 
-### Tier 1 — Your first weeks (6 units, 27 lessons)
+### Tier 1 — Your first weeks (6 units, 28 lessons)
 
 | # | Unit | Lessons, in order |
 |---|---|---|
 | 1 | **Becoming Muslim** | guide:shahada · what-is-islam · pillar:salah *(label: The Five Pillars)* · article:allah *(label: The Six Articles)* · your-name · life-before |
-| 2 | **Who you follow** | who-is-allah · who-is-muhammad · what-is-the-quran · sunnah · rulings *(the five categories — placed here because it changes how every later "should" is read)* — door: collection:quranic-names |
+| 2 | **Who you follow** | who-is-allah · who-is-muhammad · how-it-began *(3 Sep: the origin story in one sitting)* · what-is-the-quran · sunnah · rulings *(the five categories — placed here because it changes how every later "should" is read)* — door: collection:quranic-names |
 | 3 | **How to pray** | guide:wudu · guide:ghusl *(label: The full wash)* · before-prayer · **how-prayer-works ⚠️ NEW** · minimum-prayer · al-fatihah |
 | 4 | **When it goes wrong** | what-breaks-prayer · lost-count · missed |
 | 5 | **Praying with others** | adhan · behind-an-imam · mosque · jumuah |
@@ -75,15 +75,16 @@ every prayer is a count: 2 · 4 · 4 · 3 · 4, aloud or silent. It replaces the
 per-prayer journey steps (`pray-fajr`, `pray-maghrib`). The five guides stay
 untouched: they are the instrument followed on the mat, not lessons.
 
-### Tier 2 — The life that follows (5 units, 21 lessons)
+### Tier 2 — The life that follows (6 units, 23 lessons + 4 commissioned)
 
 | # | Unit | Lessons, in order |
 |---|---|---|
 | 1 | **Eating, wearing, earning** | halal-and-haram · food · clothing · work |
 | 2 | **People** | family · manners · marriage-shape · a-partner-already · teaching-someone · janazah |
-| 3 | **Meeting other Muslims** | why-people-differ · being-corrected *(2 lessons — deliberately thin; this is the unit new material joins)* |
-| 4 | **The year** | islamic-calendar · ramadan · fasting-alone · eid · voluntary-fasting · pillar:zakat *(label: Zakat — door: the /zakat calculator)* |
-| 5 | **When it's hard** | repentance · if-you-stopped · patience-and-gratitude |
+| 3 | **Questions you'll be asked** | isnt-islam-violent · what-about-jesus · *why-do-women-cover · was-it-spread-by-the-sword · is-allah-a-different-god · why-cant-you-eat-that (commissioned, 3 Sep — two written as the pilot)* |
+| 4 | **Meeting other Muslims** | why-people-differ · being-corrected *(2 lessons — deliberately thin; this is the unit new material joins)* |
+| 5 | **The year** | islamic-calendar · ramadan · fasting-alone · eid · voluntary-fasting · pillar:zakat *(label: Zakat — door: the /zakat calculator)* |
+| 6 | **When it's hard** | repentance · if-you-stopped · patience-and-gratitude |
 
 ### Tier 3 — Going deeper (3 units, 10 lessons + doors)
 

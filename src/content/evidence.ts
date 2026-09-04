@@ -5,22 +5,22 @@
  * here is lost the next time it runs, and one that needs making belongs
  * upstream, where the text is published.
  *
- * 98 Qur'an passages and 155 narrations. Every character came over
+ * 122 Qur'an passages and 166 narrations. Every character came over
  * the wire from a published text rather than from memory, which is the only
  * way a file like this could exist under this project's rules about Arabic.
  *
  * ## Where each line came from
  *
  * No one source has all of it, so each field is taken from the first that
- * does, and says so on the text itself. Of the 155 narrations here:
- * 64 were confirmed against a second, separately edited publisher;
- * 64 carry HadeethEnc's own translation, 91 carry Darussalam's, and
+ * does, and says so on the text itself. Of the 166 narrations here:
+ * 67 were confirmed against a second, separately edited publisher;
+ * 67 carry HadeethEnc's own translation, 99 carry Darussalam's, and
  * 0 have Arabic and no translation at all.
  *
  * ⚠️ **The Darussalam translations are not ours to relicense.** They reach
  * this file through a public-domain dedication that covers the compiler's work
  * and not the translation inside it. What makes that defensible here is scale
- * and purpose — 91 narrations out of some thirty thousand, each quoted under
+ * and purpose — 99 narrations out of some thirty thousand, each quoted under
  * the instruction it supports, in an app that is free and never sold. It is a
  * quotation, not a republication, and it is Iyad's decision on the record.
  *
@@ -184,6 +184,108 @@ export const QURAN_TEXT: Record<string, EvidenceText> = {
     "arabicFrom": "QuranEnc.com",
     "translationFrom": "QuranEnc.com"
   },
+  "5:32": {
+    "arabic": "مِنۡ أَجۡلِ ذَٰلِكَ كَتَبۡنَا عَلَىٰ بَنِيٓ إِسۡرَٰٓءِيلَ أَنَّهُۥ مَن قَتَلَ نَفۡسَۢا بِغَيۡرِ نَفۡسٍ أَوۡ فَسَادٖ فِي ٱلۡأَرۡضِ فَكَأَنَّمَا قَتَلَ ٱلنَّاسَ جَمِيعٗا وَمَنۡ أَحۡيَاهَا فَكَأَنَّمَآ أَحۡيَا ٱلنَّاسَ جَمِيعٗاۚ وَلَقَدۡ جَآءَتۡهُمۡ رُسُلُنَا بِٱلۡبَيِّنَٰتِ ثُمَّ إِنَّ كَثِيرٗا مِّنۡهُم بَعۡدَ ذَٰلِكَ فِي ٱلۡأَرۡضِ لَمُسۡرِفُونَ",
+    "translation": "Because of that, We decreed upon the Children of Israel that whoever kills a soul unless for a soul or for corruption [done] in the land - it is as if he had slain mankind entirely. And whoever saves one - it is as if he had saved mankind entirely. And Our messengers had certainly come to them with clear proofs. Then indeed many of them, [even] after that, throughout the land, were transgressors.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "17:33": {
+    "arabic": "وَلَا تَقۡتُلُواْ ٱلنَّفۡسَ ٱلَّتِي حَرَّمَ ٱللَّهُ إِلَّا بِٱلۡحَقِّۗ وَمَن قُتِلَ مَظۡلُومٗا فَقَدۡ جَعَلۡنَا لِوَلِيِّهِۦ سُلۡطَٰنٗا فَلَا يُسۡرِف فِّي ٱلۡقَتۡلِۖ إِنَّهُۥ كَانَ مَنصُورٗا",
+    "translation": "And do not kill the soul [i.e., person] which Allāh has forbidden, except by right. And whoever is killed unjustly - We have given his heir authority, but let him not exceed limits in [the matter of] taking life. Indeed, he has been supported [by the law].",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "4:93": {
+    "arabic": "وَمَن يَقۡتُلۡ مُؤۡمِنٗا مُّتَعَمِّدٗا فَجَزَآؤُهُۥ جَهَنَّمُ خَٰلِدٗا فِيهَا وَغَضِبَ ٱللَّهُ عَلَيۡهِ وَلَعَنَهُۥ وَأَعَدَّ لَهُۥ عَذَابًا عَظِيمٗا",
+    "translation": "But whoever kills a believer intentionally - his recompense is Hell, wherein he will abide eternally, and Allāh has become angry with him and has cursed him and has prepared for him a great punishment.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "22:39": {
+    "arabic": "أُذِنَ لِلَّذِينَ يُقَٰتَلُونَ بِأَنَّهُمۡ ظُلِمُواْۚ وَإِنَّ ٱللَّهَ عَلَىٰ نَصۡرِهِمۡ لَقَدِيرٌ",
+    "translation": "Permission [to fight] has been given to those who are being fought, because they were wronged. And indeed, Allāh is competent to give them victory.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "2:190": {
+    "arabic": "وَقَٰتِلُواْ فِي سَبِيلِ ٱللَّهِ ٱلَّذِينَ يُقَٰتِلُونَكُمۡ وَلَا تَعۡتَدُوٓاْۚ إِنَّ ٱللَّهَ لَا يُحِبُّ ٱلۡمُعۡتَدِينَ",
+    "translation": "Fight in the way of Allāh those who fight against you but do not transgress. Indeed, Allāh does not like transgressors.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "60:8": {
+    "arabic": "لَّا يَنۡهَىٰكُمُ ٱللَّهُ عَنِ ٱلَّذِينَ لَمۡ يُقَٰتِلُوكُمۡ فِي ٱلدِّينِ وَلَمۡ يُخۡرِجُوكُم مِّن دِيَٰرِكُمۡ أَن تَبَرُّوهُمۡ وَتُقۡسِطُوٓاْ إِلَيۡهِمۡۚ إِنَّ ٱللَّهَ يُحِبُّ ٱلۡمُقۡسِطِينَ",
+    "translation": "Allāh does not forbid you from those who do not fight you because of religion and do not expel you from your homes - from being righteous toward them and acting justly toward them. Indeed, Allāh loves those who act justly.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "5:8": {
+    "arabic": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُواْ كُونُواْ قَوَّٰمِينَ لِلَّهِ شُهَدَآءَ بِٱلۡقِسۡطِۖ وَلَا يَجۡرِمَنَّكُمۡ شَنَـَٔانُ قَوۡمٍ عَلَىٰٓ أَلَّا تَعۡدِلُواْۚ ٱعۡدِلُواْ هُوَ أَقۡرَبُ لِلتَّقۡوَىٰۖ وَٱتَّقُواْ ٱللَّهَۚ إِنَّ ٱللَّهَ خَبِيرُۢ بِمَا تَعۡمَلُونَ",
+    "translation": "O you who have believed, be persistently standing firm for Allāh, witnesses in justice, and do not let the hatred of a people prevent you from being just. Be just; that is nearer to righteousness. And fear Allāh; indeed, Allāh is [fully] Aware of what you do.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "41:34": {
+    "arabic": "وَلَا تَسۡتَوِي ٱلۡحَسَنَةُ وَلَا ٱلسَّيِّئَةُۚ ٱدۡفَعۡ بِٱلَّتِي هِيَ أَحۡسَنُ فَإِذَا ٱلَّذِي بَيۡنَكَ وَبَيۡنَهُۥ عَدَٰوَةٞ كَأَنَّهُۥ وَلِيٌّ حَمِيمٞ",
+    "translation": "And not equal are the good deed and the bad. Repel [evil] by that [deed] which is better; and thereupon, the one whom between you and him is enmity [will become] as though he was a devoted friend.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "3:45": {
+    "arabic": "إِذۡ قَالَتِ ٱلۡمَلَٰٓئِكَةُ يَٰمَرۡيَمُ إِنَّ ٱللَّهَ يُبَشِّرُكِ بِكَلِمَةٖ مِّنۡهُ ٱسۡمُهُ ٱلۡمَسِيحُ عِيسَى ٱبۡنُ مَرۡيَمَ وَجِيهٗا فِي ٱلدُّنۡيَا وَٱلۡأٓخِرَةِ وَمِنَ ٱلۡمُقَرَّبِينَ",
+    "translation": "[And mention] when the angels said, \"O Mary, indeed Allāh gives you good tidings of a word from Him, whose name will be the Messiah, Jesus, the son of Mary - distinguished in this world and the Hereafter and among those brought near [to Allāh].",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "3:47": {
+    "arabic": "قَالَتۡ رَبِّ أَنَّىٰ يَكُونُ لِي وَلَدٞ وَلَمۡ يَمۡسَسۡنِي بَشَرٞۖ قَالَ كَذَٰلِكِ ٱللَّهُ يَخۡلُقُ مَا يَشَآءُۚ إِذَا قَضَىٰٓ أَمۡرٗا فَإِنَّمَا يَقُولُ لَهُۥ كُن فَيَكُونُ",
+    "translation": "She said, \"My Lord, how will I have a child when no man has touched me?\" [The angel] said, \"Such is Allāh; He creates what He wills. When He decrees a matter, He only says to it, 'Be,' and it is.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "2:136": {
+    "arabic": "قُولُوٓاْ ءَامَنَّا بِٱللَّهِ وَمَآ أُنزِلَ إِلَيۡنَا وَمَآ أُنزِلَ إِلَىٰٓ إِبۡرَٰهِـۧمَ وَإِسۡمَٰعِيلَ وَإِسۡحَٰقَ وَيَعۡقُوبَ وَٱلۡأَسۡبَاطِ وَمَآ أُوتِيَ مُوسَىٰ وَعِيسَىٰ وَمَآ أُوتِيَ ٱلنَّبِيُّونَ مِن رَّبِّهِمۡ لَا نُفَرِّقُ بَيۡنَ أَحَدٖ مِّنۡهُمۡ وَنَحۡنُ لَهُۥ مُسۡلِمُونَ",
+    "translation": "Say, [O believers], \"We have believed in Allāh and what has been revealed to us and what has been revealed to Abraham and Ishmael and Isaac and Jacob and the Descendants [al-Asbāṭ] and what was given to Moses and Jesus and what was given to the prophets from their Lord. We make no distinction between any of them, and we are Muslims [in submission] to Him.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "4:171": {
+    "arabic": "يَٰٓأَهۡلَ ٱلۡكِتَٰبِ لَا تَغۡلُواْ فِي دِينِكُمۡ وَلَا تَقُولُواْ عَلَى ٱللَّهِ إِلَّا ٱلۡحَقَّۚ إِنَّمَا ٱلۡمَسِيحُ عِيسَى ٱبۡنُ مَرۡيَمَ رَسُولُ ٱللَّهِ وَكَلِمَتُهُۥٓ أَلۡقَىٰهَآ إِلَىٰ مَرۡيَمَ وَرُوحٞ مِّنۡهُۖ فَـَٔامِنُواْ بِٱللَّهِ وَرُسُلِهِۦۖ وَلَا تَقُولُواْ ثَلَٰثَةٌۚ ٱنتَهُواْ خَيۡرٗا لَّكُمۡۚ إِنَّمَا ٱللَّهُ إِلَٰهٞ وَٰحِدٞۖ سُبۡحَٰنَهُۥٓ أَن يَكُونَ لَهُۥ وَلَدٞۘ لَّهُۥ مَا فِي ٱلسَّمَٰوَٰتِ وَمَا فِي ٱلۡأَرۡضِۗ وَكَفَىٰ بِٱللَّهِ وَكِيلٗا",
+    "translation": "O People of the Scripture, do not commit excess in your religion or say about Allāh except the truth. The Messiah, Jesus the son of Mary, was but a messenger of Allāh and His word which He directed to Mary and a soul [created at a command] from Him. So believe in Allāh and His messengers. And do not say, \"Three\"; desist - it is better for you. Indeed, Allāh is but one God. Exalted is He above having a son. To Him belongs whatever is in the heavens and whatever is on the earth. And sufficient is Allāh as Disposer of affairs.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "5:75": {
+    "arabic": "مَّا ٱلۡمَسِيحُ ٱبۡنُ مَرۡيَمَ إِلَّا رَسُولٞ قَدۡ خَلَتۡ مِن قَبۡلِهِ ٱلرُّسُلُ وَأُمُّهُۥ صِدِّيقَةٞۖ كَانَا يَأۡكُلَانِ ٱلطَّعَامَۗ ٱنظُرۡ كَيۡفَ نُبَيِّنُ لَهُمُ ٱلۡأٓيَٰتِ ثُمَّ ٱنظُرۡ أَنَّىٰ يُؤۡفَكُونَ",
+    "translation": "The Messiah, son of Mary, was not but a messenger; [other] messengers have passed on before him. And his mother was a supporter of truth. They both used to eat food. Look how We make clear to them the signs; then look how they are deluded.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "3:59": {
+    "arabic": "إِنَّ مَثَلَ عِيسَىٰ عِندَ ٱللَّهِ كَمَثَلِ ءَادَمَۖ خَلَقَهُۥ مِن تُرَابٖ ثُمَّ قَالَ لَهُۥ كُن فَيَكُونُ",
+    "translation": "Indeed, the example of Jesus to Allāh is like that of Adam. He created him from dust; then He said to him, \"Be,\" and he was.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "4:157-158": {
+    "arabic": "وَقَوۡلِهِمۡ إِنَّا قَتَلۡنَا ٱلۡمَسِيحَ عِيسَى ٱبۡنَ مَرۡيَمَ رَسُولَ ٱللَّهِ وَمَا قَتَلُوهُ وَمَا صَلَبُوهُ وَلَٰكِن شُبِّهَ لَهُمۡۚ وَإِنَّ ٱلَّذِينَ ٱخۡتَلَفُواْ فِيهِ لَفِي شَكّٖ مِّنۡهُۚ مَا لَهُم بِهِۦ مِنۡ عِلۡمٍ إِلَّا ٱتِّبَاعَ ٱلظَّنِّۚ وَمَا قَتَلُوهُ يَقِينَۢا بَل رَّفَعَهُ ٱللَّهُ إِلَيۡهِۚ وَكَانَ ٱللَّهُ عَزِيزًا حَكِيمٗا",
+    "translation": "And [for] their saying, \"Indeed, we have killed the Messiah, Jesus the son of Mary, the messenger of Allāh.\" And they did not kill him, nor did they crucify him; but [another] was made to resemble him to them. And indeed, those who differ over it are in doubt about it. They have no knowledge of it except the following of assumption. And they did not kill him, for certain. Rather, Allāh raised him to Himself. And ever is Allāh Exalted in Might and Wise.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "6:164": {
+    "arabic": "قُلۡ أَغَيۡرَ ٱللَّهِ أَبۡغِي رَبّٗا وَهُوَ رَبُّ كُلِّ شَيۡءٖۚ وَلَا تَكۡسِبُ كُلُّ نَفۡسٍ إِلَّا عَلَيۡهَاۚ وَلَا تَزِرُ وَازِرَةٞ وِزۡرَ أُخۡرَىٰۚ ثُمَّ إِلَىٰ رَبِّكُم مَّرۡجِعُكُمۡ فَيُنَبِّئُكُم بِمَا كُنتُمۡ فِيهِ تَخۡتَلِفُونَ",
+    "translation": "Say, \"Is it other than Allāh I should desire as a lord while He is the Lord of all things? And every soul earns not [blame] except against itself, and no bearer of burdens will bear the burden of another. Then to your Lord is your return, and He will inform you concerning that over which you used to differ.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "109:6": {
+    "arabic": "لَكُمۡ دِينُكُمۡ وَلِيَ دِينِ",
+    "translation": "For you is your religion, and for me is my religion.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
   "42:11": {
     "arabic": "فَاطِرُ ٱلسَّمَٰوَٰتِ وَٱلۡأَرۡضِۚ جَعَلَ لَكُم مِّنۡ أَنفُسِكُمۡ أَزۡوَٰجٗا وَمِنَ ٱلۡأَنۡعَٰمِ أَزۡوَٰجٗا يَذۡرَؤُكُمۡ فِيهِۚ لَيۡسَ كَمِثۡلِهِۦ شَيۡءٞۖ وَهُوَ ٱلسَّمِيعُ ٱلۡبَصِيرُ",
     "translation": "[He is] Creator of the heavens and the earth. He has made for you from yourselves, mates, and among the cattle, mates; He multiplies you thereby. There is nothing like unto Him, and He is the Hearing, the Seeing.",
@@ -217,6 +319,48 @@ export const QURAN_TEXT: Record<string, EvidenceText> = {
   "4:80": {
     "arabic": "مَّن يُطِعِ ٱلرَّسُولَ فَقَدۡ أَطَاعَ ٱللَّهَۖ وَمَن تَوَلَّىٰ فَمَآ أَرۡسَلۡنَٰكَ عَلَيۡهِمۡ حَفِيظٗا",
     "translation": "He who obeys the Messenger has obeyed Allāh; but those who turn away - We have not sent you over them as a guardian.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "2:127": {
+    "arabic": "وَإِذۡ يَرۡفَعُ إِبۡرَٰهِـۧمُ ٱلۡقَوَاعِدَ مِنَ ٱلۡبَيۡتِ وَإِسۡمَٰعِيلُ رَبَّنَا تَقَبَّلۡ مِنَّآۖ إِنَّكَ أَنتَ ٱلسَّمِيعُ ٱلۡعَلِيمُ",
+    "translation": "And [mention] when Abraham was raising the foundations of the House and [with him] Ishmael, [saying], \"Our Lord, accept [this] from us. Indeed, You are the Hearing, the Knowing.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "93:6-8": {
+    "arabic": "أَلَمۡ يَجِدۡكَ يَتِيمٗا فَـَٔاوَىٰ وَوَجَدَكَ ضَآلّٗا فَهَدَىٰ وَوَجَدَكَ عَآئِلٗا فَأَغۡنَىٰ",
+    "translation": "Did He not find you an orphan and give [you] refuge? And He found you lost and guided [you], And He found you poor and made [you] self-sufficient.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "96:1-5": {
+    "arabic": "ٱقۡرَأۡ بِٱسۡمِ رَبِّكَ ٱلَّذِي خَلَقَ خَلَقَ ٱلۡإِنسَٰنَ مِنۡ عَلَقٍ ٱقۡرَأۡ وَرَبُّكَ ٱلۡأَكۡرَمُ ٱلَّذِي عَلَّمَ بِٱلۡقَلَمِ عَلَّمَ ٱلۡإِنسَٰنَ مَا لَمۡ يَعۡلَمۡ",
+    "translation": "Recite in the name of your Lord who created – Created man from a clinging substance. Recite, and your Lord is the most Generous - Who taught by the pen – Taught man that which he knew not.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "8:30": {
+    "arabic": "وَإِذۡ يَمۡكُرُ بِكَ ٱلَّذِينَ كَفَرُواْ لِيُثۡبِتُوكَ أَوۡ يَقۡتُلُوكَ أَوۡ يُخۡرِجُوكَۚ وَيَمۡكُرُونَ وَيَمۡكُرُ ٱللَّهُۖ وَٱللَّهُ خَيۡرُ ٱلۡمَٰكِرِينَ",
+    "translation": "And [remember, O Muḥammad], when those who disbelieved plotted against you to restrain you or kill you or evict you [from Makkah]. But they plan, and Allāh plans. And Allāh is the best of planners.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "9:40": {
+    "arabic": "إِلَّا تَنصُرُوهُ فَقَدۡ نَصَرَهُ ٱللَّهُ إِذۡ أَخۡرَجَهُ ٱلَّذِينَ كَفَرُواْ ثَانِيَ ٱثۡنَيۡنِ إِذۡ هُمَا فِي ٱلۡغَارِ إِذۡ يَقُولُ لِصَٰحِبِهِۦ لَا تَحۡزَنۡ إِنَّ ٱللَّهَ مَعَنَاۖ فَأَنزَلَ ٱللَّهُ سَكِينَتَهُۥ عَلَيۡهِ وَأَيَّدَهُۥ بِجُنُودٖ لَّمۡ تَرَوۡهَا وَجَعَلَ كَلِمَةَ ٱلَّذِينَ كَفَرُواْ ٱلسُّفۡلَىٰۗ وَكَلِمَةُ ٱللَّهِ هِيَ ٱلۡعُلۡيَاۗ وَٱللَّهُ عَزِيزٌ حَكِيمٌ",
+    "translation": "If you do not aid him [i.e., the Prophet (ﷺ)] - Allāh has already aided him when those who disbelieved had driven him out [of Makkah] as one of two, when they were in the cave and he [i.e., Muḥammad (ﷺ)] said to his companion, \"Do not grieve; indeed Allāh is with us.\" And Allāh sent down His tranquility upon him and supported him with soldiers [i.e., angels] you did not see and made the word of those who disbelieved the lowest, while the word of Allāh - that is the highest. And Allāh is Exalted in Might and Wise.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "22:39-40": {
+    "arabic": "أُذِنَ لِلَّذِينَ يُقَٰتَلُونَ بِأَنَّهُمۡ ظُلِمُواْۚ وَإِنَّ ٱللَّهَ عَلَىٰ نَصۡرِهِمۡ لَقَدِيرٌ ٱلَّذِينَ أُخۡرِجُواْ مِن دِيَٰرِهِم بِغَيۡرِ حَقٍّ إِلَّآ أَن يَقُولُواْ رَبُّنَا ٱللَّهُۗ وَلَوۡلَا دَفۡعُ ٱللَّهِ ٱلنَّاسَ بَعۡضَهُم بِبَعۡضٖ لَّهُدِّمَتۡ صَوَٰمِعُ وَبِيَعٞ وَصَلَوَٰتٞ وَمَسَٰجِدُ يُذۡكَرُ فِيهَا ٱسۡمُ ٱللَّهِ كَثِيرٗاۗ وَلَيَنصُرَنَّ ٱللَّهُ مَن يَنصُرُهُۥٓۚ إِنَّ ٱللَّهَ لَقَوِيٌّ عَزِيزٌ",
+    "translation": "Permission [to fight] has been given to those who are being fought, because they were wronged. And indeed, Allāh is competent to give them victory. [They are] those who have been evicted from their homes without right - only because they say, \"Our Lord is Allāh.\" And were it not that Allāh checks the people, some by means of others, there would have been demolished monasteries, churches, synagogues, and mosques in which the name of Allāh is much mentioned [i.e., praised]. And Allāh will surely support those who support Him [i.e., His cause]. Indeed, Allāh is Powerful and Exalted in Might.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "110:1-2": {
+    "arabic": "إِذَا جَآءَ نَصۡرُ ٱللَّهِ وَٱلۡفَتۡحُ وَرَأَيۡتَ ٱلنَّاسَ يَدۡخُلُونَ فِي دِينِ ٱللَّهِ أَفۡوَاجٗا",
+    "translation": "When the victory of Allāh has come and the conquest, And you see the people entering into the religion of Allāh in multitudes,",
     "arabicFrom": "QuranEnc.com",
     "translationFrom": "QuranEnc.com"
   },
@@ -1274,6 +1418,32 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
     "arabicFrom": "HadeethEnc.com",
     "translationFrom": "HadeethEnc.com"
   },
+  "bukhari:3015": {
+    "arabic": "حَدَّثَنَا إِسْحَاقُ بْنُ إِبْرَاهِيمَ، قَالَ قُلْتُ لأَبِي أُسَامَةَ حَدَّثَكُمْ عُبَيْدُ اللَّهِ، عَنْ نَافِعٍ، عَنِ ابْنِ عُمَرَ ـ رضى الله عنهما ـ قَالَ وُجِدَتِ امْرَأَةٌ مَقْتُولَةً فِي بَعْضِ مَغَازِي رَسُولِ اللَّهِ صلى الله عليه وسلم، فَنَهَى رَسُولُ اللَّهِ صلى الله عليه وسلم عَنْ قَتْلِ النِّسَاءِ وَالصِّبْيَانِ‏.‏",
+    "translation": "Narrated Ibn `Umar:During some of the Ghazawat of Allah's Messenger (ﷺ) a woman was found killed, so Allah's Messenger (ﷺ) forbade the killing of women and children",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:3435": {
+    "arabic": "عَنْ عُبَادَةَ رَضِيَ اللَّهُ عَنْهُ عَنِ النَّبِيِّ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ قَالَ: «مَنْ شَهِدَ أَنْ لَا إِلَهَ إِلَّا اللهُ وَحْدَهُ لَا شَرِيكَ لَهُ، وَأَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ، وَأَنَّ عِيسَى عَبْدُ اللهِ وَرَسُولُهُ وَكَلِمَتُهُ أَلْقَاهَا إِلَى مَرْيَمَ وَرُوحٌ مِنْهُ، وَالْجَنَّةُ حَقٌّ، وَالنَّارُ حَقٌّ، أَدْخَلَهُ اللهُ الْجَنَّةَ عَلَى مَا كَانَ مِنَ الْعَمَلِ».",
+    "translation": "‘Ubādah (may Allah be pleased with him) reported that the Prophet (may Allah's peace and blessings be upon him) said: \"Whoever bears witness that there is no god but Allah alone with no partner and that Muhammad is His slave and Messenger; that ‘Isa (Jesus) is the slave and Messenger of Allah, and His word which He communicated to Maryam (Mary), and a spirit from Him; and that Paradise is true and Hellfire is true, Allah will  certainly admit him into Paradise, regardless of the deeds which he has done.\"",
+    "attribution": "Agreed upon",
+    "grade": "Authentic",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "bukhari:3442": {
+    "arabic": "حَدَّثَنَا أَبُو الْيَمَانِ، أَخْبَرَنَا شُعَيْبٌ، عَنِ الزُّهْرِيِّ، قَالَ أَخْبَرَنِي أَبُو سَلَمَةَ، أَنَّ أَبَا هُرَيْرَةَ ـ رضى الله عَنْهُ ـ قَالَ سَمِعْتُ رَسُولَ اللَّهِ صلى الله عليه وسلم يَقُولُ ‏ \"‏ أَنَا أَوْلَى النَّاسِ بِابْنِ مَرْيَمَ، وَالأَنْبِيَاءُ أَوْلاَدُ عَلاَّتٍ، لَيْسَ بَيْنِي وَبَيْنَهُ نَبِيٌّ ‏\"‏‏.‏",
+    "translation": "Narrated Abu Huraira:I heard Allah's Messenger (ﷺ) saying, \"I am the nearest of all the people to the son of Mary, and all the prophets are paternal brothers, and there has been no prophet between me and him (i.e. Jesus)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:3443": {
+    "arabic": "حَدَّثَنَا مُحَمَّدُ بْنُ سِنَانٍ، حَدَّثَنَا فُلَيْحُ بْنُ سُلَيْمَانَ، حَدَّثَنَا هِلاَلُ بْنُ عَلِيٍّ، عَنْ عَبْدِ الرَّحْمَنِ بْنِ أَبِي عَمْرَةَ، عَنْ أَبِي هُرَيْرَةَ، قَالَ قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏ \"‏ أَنَا أَوْلَى النَّاسِ بِعِيسَى ابْنِ مَرْيَمَ فِي الدُّنْيَا وَالآخِرَةِ، وَالأَنْبِيَاءُ إِخْوَةٌ لِعَلاَّتٍ، أُمَّهَاتُهُمْ شَتَّى، وَدِينُهُمْ وَاحِدٌ ‏\"‏‏.‏ وَقَالَ إِبْرَاهِيمُ بْنُ طَهْمَانَ عَنْ مُوسَى بْنِ عُقْبَةَ، عَنْ صَفْوَانَ بْنِ سُلَيْمٍ، عَنْ عَطَاءِ بْنِ يَسَارٍ، عَنْ أَبِي هُرَيْرَةَ ـ رضى الله عنه ـ قَالَ قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم‏.‏",
+    "translation": "Narrated Abu Huraira:Allah's Messenger (ﷺ) said, \"Both in this world and in the Hereafter, I am the nearest of all the people to Jesus, the son of Mary. The prophets are paternal brothers; their mothers are different, but their religion is one",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
   "bukhari:3559": {
     "arabic": "عن عبد الله بن عمرو رضي الله عنهما قال: لَمْ يَكُنِ النَّبِيُّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ فَاحِشًا وَلَا مُتَفَحِّشًا، وَكَانَ يَقُولُ: «إِنَّ مِنْ خِيَارِكُمْ أَحْسَنَكُمْ أَخْلَاقًا».",
     "translation": "‘Abdullāh ibn ‘Amr (may Allah be pleased with him) reported: The Prophet (may Allah's peace and blessings be upon him) was neither obscene, nor would he use obscene language, and he used to say: \"Verily, the best of you are those who have the best manners.\"",
@@ -1285,6 +1455,52 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
   "bukhari:631": {
     "arabic": "حَدَّثَنَا مُحَمَّدُ بْنُ الْمُثَنَّى، قَالَ حَدَّثَنَا عَبْدُ الْوَهَّابِ، قَالَ حَدَّثَنَا أَيُّوبُ، عَنْ أَبِي قِلاَبَةَ، قَالَ حَدَّثَنَا مَالِكٌ، أَتَيْنَا إِلَى النَّبِيِّ صلى الله عليه وسلم وَنَحْنُ شَبَبَةٌ مُتَقَارِبُونَ، فَأَقَمْنَا عِنْدَهُ عِشْرِينَ يَوْمًا وَلَيْلَةً، وَكَانَ رَسُولُ اللَّهِ صلى الله عليه وسلم رَحِيمًا رَفِيقًا، فَلَمَّا ظَنَّ أَنَّا قَدِ اشْتَهَيْنَا أَهْلَنَا أَوْ قَدِ اشْتَقْنَا سَأَلَنَا عَمَّنْ تَرَكْنَا بَعْدَنَا فَأَخْبَرْنَاهُ قَالَ ‏ \"‏ ارْجِعُوا إِلَى أَهْلِيكُمْ فَأَقِيمُوا فِيهِمْ وَعَلِّمُوهُمْ وَمُرُوهُمْ ـ وَذَكَرَ أَشْيَاءَ أَحْفَظُهَا أَوْ لاَ أَحْفَظُهَا ـ وَصَلُّوا كَمَا رَأَيْتُمُونِي أُصَلِّي، فَإِذَا حَضَرَتِ الصَّلاَةُ فَلْيُؤَذِّنْ لَكُمْ أَحَدُكُمْ وَلْيَؤُمَّكُمْ أَكْبَرُكُمْ ‏\"‏‏.‏",
     "translation": "Narrated Malik:We came to the Prophet (ﷺ) and stayed with him for twenty days and nights. We were all young and of about the same age. The Prophet (ﷺ) was very kind and merciful. When he realized our longing for our families, he asked about our homes and the people there and we told him. Then he asked us to go back to our families and stay with them and teach them (the religion) and to order them to do good things. He also mentioned some other things which I have (remembered or [??] ) forgotten. The Prophet (ﷺ) then added, \"Pray as you have seen me praying and when it is the time for the prayer one of you should pronounce the Adhan and the oldest of you should lead the prayer",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:3902": {
+    "arabic": "عن ابن عباس رضي الله عنهما قال: «بُعِث رسولُ الله صلى الله عليه وسلم لِأَربعين سَنَة، فَمَكَثَ بِمكة ثلاثَ عشرة سنة يوحَى إليه، ثم أُمِرَ بالهِجْرة فَهاجَر عشر سِنِين، ومات وهو ابنُ ثَلاثٍ وستِّين».",
+    "translation": "Ibn ‘Abbās (may Allah be pleased with him) reported: The Messenger of Allah (may Allah’s peace ‎and blessings be upon him) was sent as a Messenger of Allah at the age of forty. Then he ‎stayed in Makkah for thirteen years receiving the divine revelation. Afterwards, he was ‎commanded to emigrate (to Madīnah where he lived) for ten years, and he died at the age ‎of sixty-three.",
+    "attribution": "Narrated by Bukhari & Muslim",
+    "grade": "Authentic hadith",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "bukhari:3": {
+    "arabic": "عَنْ عَائِشَةَ أُمِّ المُؤْمِنِينَ رَضِيَ اللَّهُ عَنْها أَنَّهَا قَالَتْ: أَوَّلُ مَا بُدِئَ بِهِ رَسُولُ اللَّهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ مِنَ الوَحْيِ الرُّؤْيَا الصَّالِحَةُ فِي النَّوْمِ، فَكَانَ لاَ يَرَى رُؤْيَا إِلَّا جَاءَتْ مِثْلَ فَلَقِ الصُّبْحِ، ثُمَّ حُبِّبَ إِلَيْهِ الخَلاَءُ، وَكَانَ يَخْلُو بِغَارِ حِرَاءٍ فَيَتَحَنَّثُ فِيهِ -وَهُوَ التَّعَبُّدُ- اللَّيَالِيَ ذَوَاتِ العَدَدِ قَبْلَ أَنْ يَنْزِعَ إِلَى أَهْلِهِ، وَيَتَزَوَّدُ لِذَلِكَ، ثُمَّ يَرْجِعُ إِلَى خَدِيجَةَ فَيَتَزَوَّدُ لِمِثْلِهَا، حَتَّى جَاءَهُ الحَقُّ وَهُوَ فِي غَارِ حِرَاءٍ، فَجَاءَهُ المَلَكُ فَقَالَ: اقْرَأْ، قَالَ: «مَا أَنَا بِقَارِئٍ» قَالَ: «فَأَخَذَنِي فَغَطَّنِي حَتَّى بَلَغَ مِنِّي الجَهْدَ ثُمَّ أَرْسَلَنِي، فَقَالَ: اقْرَأْ، قُلْتُ: مَا أَنَا بِقَارِئٍ، فَأَخَذَنِي فَغَطَّنِي الثَّانِيَةَ حَتَّى بَلَغَ مِنِّي الجَهْدَ ثُمَّ أَرْسَلَنِي، فَقَالَ: اقْرَأْ، فَقُلْتُ: مَا أَنَا بِقَارِئٍ، فَأَخَذَنِي فَغَطَّنِي الثَّالِثَةَ ثُمَّ أَرْسَلَنِي، فَقَالَ: {اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ  خَلَقَ الإِنْسَانَ مِنْ عَلَقٍ  اقْرَأْ وَرَبُّكَ الأَكْرَمُ}»، [العلق:1-3] فَرَجَعَ بِهَا رَسُولُ اللَّهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ يَرْجُفُ فُؤَادُهُ، فَدَخَلَ عَلَى خَدِيجَةَ بِنْتِ خُوَيْلِدٍ رَضِيَ اللَّهُ عَنْهَا، فَقَالَ: «زَمِّلُونِي، زَمِّلُونِي» فَزَمَّلُوهُ حَتَّى ذَهَبَ عَنْهُ الرَّوْعُ، فَقَالَ لِخَدِيجَةَ وَأَخْبَرَهَا الخَبَرَ: «لَقَدْ خَشِيتُ عَلَى نَفْسِي» فَقَالَتْ خَدِيجَةُ: كَلَّا وَاللَّهِ مَا يُخْزِيكَ اللَّهُ أَبَدًا، إِنَّكَ لَتَصِلُ الرَّحِمَ، وَتَحْمِلُ الكَلَّ، وَتَكْسِبُ المَعْدُومَ، وَتَقْرِي الضَّيْفَ، وَتُعِينُ عَلَى نَوَائِبِ الحَقِّ، فَانْطَلَقَتْ بِهِ خَدِيجَةُ حَتَّى أَتَتْ بِهِ وَرَقَةَ بْنَ نَوْفَلِ بْنِ أَسَدِ بْنِ عَبْدِ العُزَّى، ابْنَ عَمِّ خَدِيجَةَ، وَكَانَ امْرَأً تَنَصَّرَ فِي الجَاهِلِيَّةِ، وَكَانَ يَكْتُبُ الكِتَابَ العِبْرَانِيَّ، فَيَكْتُبُ مِنَ الإِنْجِيلِ بِالعِبْرَانِيَّةِ مَا شَاءَ اللَّهُ أَنْ يَكْتُبَ، وَكَانَ شَيْخًا كَبِيرًا قَدْ عَمِيَ، فَقَالَتْ لَهُ خَدِيجَةُ: يَا ابْنَ عَمِّ، اسْمَعْ مِنَ ابْنِ أَخِيكَ، فَقَالَ لَهُ وَرَقَةُ: يَا ابْنَ أَخِي، مَاذَا تَرَى؟ فَأَخْبَرَهُ رَسُولُ اللَّهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ خَبَرَ مَا رَأَى، فَقَالَ لَهُ وَرَقَةُ: هَذَا النَّامُوسُ الَّذِي نَزَّلَ اللَّهُ عَلَى مُوسَى، يَا لَيْتَنِي فِيهَا جَذَعًا، لَيْتَنِي أَكُونُ حَيًّا إِذْ يُخْرِجُكَ قَوْمُكَ، فَقَالَ رَسُولُ اللَّهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ: «أَوَ مُخْرِجِيَّ هُمْ؟»، قَالَ: نَعَمْ، لَمْ يَأْتِ رَجُلٌ قَطُّ بِمِثْلِ مَا جِئْتَ بِهِ إِلَّا عُودِيَ، وَإِنْ يُدْرِكْنِي يَوْمُكَ أَنْصُرْكَ نَصْرًا مُؤَزَّرًا. ثُمَّ لَمْ يَنْشَبْ وَرَقَةُ أَنْ تُوُفِّيَ، وَفَتَرَ الوَحْيُ.",
+    "translation": "‘Ā’ishah, Mother of the Believers, (may Allah be pleased with her) reported: The first thing the Messenger of Allah (may Allah's peace and blessings be upon him) started to experience from the revelation was the good vision in his sleep. He never saw a vision except that it came true like the break of dawn. Then seclusion was endeared to him, and he used to retreat to the Cave of Hirā’, where he would engage in Tahannuth-which is worship—for several nights before returning to his family and taking provisions for this. He would then go back to Khadījah to take provisions again for a similar number of nights until the truth came to him while he was in the Cave of Hirā’. The Angel came to him and said: Read! He said: \"I do not know how to read.\" He said: \"He took hold of me and pressed me forcefully until I could no longer bear it and then released me, saying: Read! I said: I do not know how to read. He took hold of me and pressed me forcefully for the second time until I could no longer bear it and then released me, saying: Read! I said: I do not know how to read. He took hold of me and pressed me forcefully for the third time and then released me, saying: {Read in the name of your Lord Who created, created man from a clinging clot. Read, and your Lord is the Most Generous.}\" [Surat al-‘Alaq: 1-3] The Messenger of Allah (may Allah's peace and blessings be upon him) returned with these while his heart was trembling. He entered upon Khadījah bint Khuwaylid (may Allah be pleased with her) and said: \"Cover me! Cover me!\" They covered him until the shock of fear was gone from him. Then he informed Khadījah of what had happened and said to her: \"Indeed, I feared for myself.\" Khadījah said: No, by Allah, Allah will never fail you. Verily, you maintain kinship ties, help those in need, support the destitute, provide the guests with food and shelter, and assist those affected by calamities. Khadījah took him to her cousin Waraqah ibn Nawfal ibn Asad ibn ‘Abdul-‘Uzza, who had embraced Christianity in the pre-Islamic period and used to write the Scripture in Hebrew. He would write from the Gospel in Hebrew as much as Allah wished him to write. He was an old man and had lost his eyesight. Khadījah said to him: O my cousin, listen to what your nephew has to say. Waraqah said to him: O my nephew, what have you seen? The Messenger of Allah (may Allah's peace and blessings be upon him) informed him of what he had seen. Waraqah said to him: This is the same Nāmūs (i.e., the angel) whom Allah had sent to Moses. I wish I were young and could live until the time when your people would drive you out. The Messenger of Allah (may Allah's peace and blessings be upon him) said: \"Would they drive me out?\" Waraqah said: Yes. No one has ever come with something like what you have brought without being treated with hostility. If I should live until that day, I would support you strongly. Soon after, Waraqah passed away, and the revelation paused.",
+    "attribution": "Agreed upon",
+    "grade": "Authentic",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "bukhari:3905": {
+    "arabic": "حَدَّثَنَا يَحْيَى بْنُ بُكَيْرٍ، حَدَّثَنَا اللَّيْثُ، عَنْ عُقَيْلٍ، قَالَ ابْنُ شِهَابٍ فَأَخْبَرَنِي عُرْوَةُ بْنُ الزُّبَيْرِ، أَنَّ عَائِشَةَ ـ رضى الله عنها ـ زَوْجَ النَّبِيِّ صلى الله عليه وسلم قَالَتْ لَمْ أَعْقِلْ أَبَوَىَّ قَطُّ إِلاَّ وَهُمَا يَدِينَانِ الدِّينَ، وَلَمْ يَمُرَّ عَلَيْنَا يَوْمٌ إِلاَّ يَأْتِينَا فِيهِ رَسُولُ اللَّهِ صلى الله عليه وسلم طَرَفَىِ النَّهَارِ بُكْرَةً وَعَشِيَّةً، فَلَمَّا ابْتُلِيَ الْمُسْلِمُونُ خَرَجَ أَبُو بَكْرٍ مُهَاجِرًا نَحْوَ أَرْضِ الْحَبَشَةِ، حَتَّى بَلَغَ بَرْكَ الْغِمَادِ لَقِيَهُ ابْنُ الدَّغِنَةِ وَهْوَ سَيِّدُ الْقَارَةِ‏.‏ فَقَالَ أَيْنَ تُرِيدُ يَا أَبَا بَكْرٍ فَقَالَ أَبُو بَكْرٍ أَخْرَجَنِي قَوْمِي، فَأُرِيدُ أَنْ أَسِيحَ فِي الأَرْضِ وَأَعْبُدَ رَبِّي‏.‏ قَالَ ابْنُ الدَّغِنَةِ فَإِنَّ مِثْلَكَ يَا أَبَا بَكْرٍ لاَ يَخْرُجُ وَلاَ يُخْرَجُ، إِنَّكَ تَكْسِبُ الْمَعْدُومَ، وَتَصِلُ الرَّحِمَ وَتَحْمِلُ الْكَلَّ، وَتَقْرِي الضَّيْفَ، وَتُعِينُ عَلَى نَوَائِبِ الْحَقِّ، فَأَنَا لَكَ جَارٌ، ارْجِعْ وَاعْبُدْ رَبَّكَ بِبَلَدِكَ‏.‏ فَرَجَعَ وَارْتَحَلَ مَعَهُ ابْنُ الدَّغِنَةِ، فَطَافَ ابْنُ الدَّغِنَةِ عَشِيَّةً فِي أَشْرَافِ قُرَيْشٍ، فَقَالَ لَهُمْ إِنَّ أَبَا بَكْرٍ لاَ يَخْرُجُ مِثْلُهُ وَلاَ يُخْرَجُ، أَتُخْرِجُونَ رَجُلاً يَكْسِبُ الْمَعْدُومَ، وَيَصِلُ الرَّحِمَ، وَيَحْمِلُ الْكَلَّ، وَيَقْرِي الضَّيْفَ، وَيُعِينُ عَلَى نَوَائِبِ الْحَقِّ فَلَمْ تُكَذِّبْ قُرَيْشٌ بِجِوَارِ ابْنِ الدَّغِنَةِ، وَقَالُوا لاِبْنِ الدَّغِنَةِ مُرْ أَبَا بَكْرٍ فَلْيَعْبُدْ رَبَّهُ فِي دَارِهِ، فَلْيُصَلِّ فِيهَا وَلْيَقْرَأْ مَا شَاءَ، وَلاَ يُؤْذِينَا بِذَلِكَ، وَلاَ يَسْتَعْلِنْ بِهِ، فَإِنَّا نَخْشَى أَنْ يَفْتِنَ نِسَاءَنَا وَأَبْنَاءَنَا‏.‏ فَقَالَ ذَلِكَ ابْنُ الدَّغِنَةِ لأَبِي بَكْرٍ، فَلَبِثَ أَبُو بَكْرٍ بِذَلِكَ يَعْبُدُ رَبَّهُ فِي دَارِهِ، وَلاَ يَسْتَعْلِنُ بِصَلاَتِهِ، وَلاَ يَقْرَأُ فِي غَيْرِ دَارِهِ، ثُمَّ بَدَا لأَبِي بَكْرٍ فَابْتَنَى مَسْجِدًا بِفِنَاءِ دَارِهِ وَكَانَ يُصَلِّي فِيهِ وَيَقْرَأُ الْقُرْآنَ، فَيَنْقَذِفُ عَلَيْهِ نِسَاءُ الْمُشْرِكِينَ وَأَبْنَاؤُهُمْ، وَهُمْ يَعْجَبُونَ مِنْهُ، وَيَنْظُرُونَ إِلَيْهِ، وَكَانَ أَبُو بَكْرٍ رَجُلاً بَكَّاءً، لاَ يَمْلِكُ عَيْنَيْهِ إِذَا قَرَأَ الْقُرْآنَ، وَأَفْزَعَ ذَلِكَ أَشْرَافَ قُرَيْشٍ مِنَ الْمُشْرِكِينَ، فَأَرْسَلُوا إِلَى ابْنِ الدَّغِنَةِ، فَقَدِمَ عَلَيْهِمْ‏.‏ فَقَالُوا إِنَّا كُنَّا أَجَرْنَا أَبَا بَكْرٍ بِجِوَارِكَ، عَلَى أَنْ يَعْبُدَ رَبَّهُ فِي دَارِهِ، فَقَدْ جَاوَزَ ذَلِكَ، فَابْتَنَى مَسْجِدًا بِفِنَاءِ دَارِهِ، فَأَعْلَنَ بِالصَّلاَةِ وَالْقِرَاءَةِ فِيهِ، وَإِنَّا قَدْ خَشِينَا أَنْ يَفْتِنَ نِسَاءَنَا وَأَبْنَاءَنَا فَانْهَهُ، فَإِنْ أَحَبَّ أَنْ يَقْتَصِرَ عَلَى أَنْ يَعْبُدَ رَبَّهُ فِي دَارِهِ فَعَلَ، وَإِنْ أَبَى إِلاَّ أَنْ يُعْلِنَ بِذَلِكَ فَسَلْهُ أَنْ يَرُدَّ إِلَيْكَ ذِمَّتَكَ، فَإِنَّا قَدْ كَرِهْنَا أَنْ نُخْفِرَكَ، وَلَسْنَا مُقِرِّينَ لأَبِي بَكْرٍ الاِسْتِعْلاَنَ‏.‏ قَالَتْ عَائِشَةُ فَأَتَى ابْنُ الدَّغِنَةِ إِلَى أَبِي بَكْرٍ فَقَالَ قَدْ عَلِمْتَ الَّذِي عَاقَدْتُ لَكَ عَلَيْهِ، فَإِمَّا أَنْ تَقْتَصِرَ عَلَى ذَلِكَ، وَإِمَّا أَنْ تَرْجِعَ إِلَىَّ ذِمَّتِي، فَإِنِّي لاَ أُحِبُّ أَنْ تَسْمَعَ الْعَرَبُ أَنِّي أُخْفِرْتُ فِي رَجُلٍ عَقَدْتُ لَهُ‏.‏ فَقَالَ أَبُو بَكْرٍ فَإِنِّي أَرُدُّ إِلَيْكَ جِوَارَكَ وَأَرْضَى بِجِوَارِ اللَّهِ عَزَّ وَجَلَّ‏.‏ وَالنَّبِيُّ صلى الله عليه وسلم يَوْمَئِذٍ بِمَكَّةَ، فَقَالَ النَّبِيُّ صلى الله عليه وسلم لِلْمُسْلِمِينَ ‏\"‏ إِنِّي أُرِيتُ دَارَ هِجْرَتِكُمْ ذَاتَ نَخْلٍ بَيْنَ لاَبَتَيْنِ ‏\"‏‏.‏ وَهُمَا الْحَرَّتَانِ، فَهَاجَرَ مَنْ هَاجَرَ قِبَلَ الْمَدِينَةِ، وَرَجَعَ عَامَّةُ مَنْ كَانَ هَاجَرَ بِأَرْضِ الْحَبَشَةِ إِلَى الْمَدِينَةِ، وَتَجَهَّزَ أَبُو بَكْرٍ قِبَلَ الْمَدِينَةِ، فَقَالَ لَهُ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏\"‏ عَلَى رِسْلِكَ، فَإِنِّي أَرْجُو أَنْ يُؤْذَنَ لِي ‏\"‏‏.‏ فَقَالَ أَبُو بَكْرٍ وَهَلْ تَرْجُو ذَلِكَ بِأَبِي أَنْتَ قَالَ ‏\"‏ نَعَمْ ‏\"‏‏.‏ فَحَبَسَ أَبُو بَكْرٍ نَفْسَهُ عَلَى رَسُولِ اللَّهِ صلى الله عليه وسلم لِيَصْحَبَهُ، وَعَلَفَ رَاحِلَتَيْنِ كَانَتَا عِنْدَهُ وَرَقَ السَّمُرِ وَهْوَ الْخَبَطُ أَرْبَعَةَ أَشْهُرٍ‏.‏ قَالَ ابْنُ شِهَابٍ قَالَ عُرْوَةُ قَالَتْ عَائِشَةُ فَبَيْنَمَا نَحْنُ يَوْمًا جُلُوسٌ فِي بَيْتِ أَبِي بَكْرٍ فِي نَحْرِ الظَّهِيرَةِ قَالَ قَائِلٌ لأَبِي بَكْرٍ هَذَا رَسُولُ اللَّهِ صلى الله عليه وسلم مُتَقَنِّعًا ـ فِي سَاعَةٍ لَمْ يَكُنْ يَأْتِينَا فِيهَا ـ فَقَالَ أَبُو بَكْرٍ فِدَاءٌ لَهُ أَبِي وَأُمِّي، وَاللَّهِ مَا جَاءَ بِهِ فِي هَذِهِ السَّاعَةِ إِلاَّ أَمْرٌ‏.‏ قَالَتْ فَجَاءَ رَسُولُ اللَّهِ صلى الله عليه وسلم فَاسْتَأْذَنَ، فَأُذِنَ لَهُ فَدَخَلَ، فَقَالَ النَّبِيُّ صلى الله عليه وسلم لأَبِي بَكْرٍ ‏\"‏ أَخْرِجْ مَنْ عِنْدَكَ ‏\"‏‏.‏ فَقَالَ أَبُو بَكْرٍ إِنَّمَا هُمْ أَهْلُكَ بِأَبِي أَنْتَ يَا رَسُولَ اللَّهِ‏.‏ قَالَ ‏\"‏ فَإِنِّي قَدْ أُذِنَ لِي فِي الْخُرُوجِ ‏\"‏‏.‏ فَقَالَ أَبُو بَكْرٍ الصَّحَابَةُ بِأَبِي أَنْتَ يَا رَسُولَ اللَّهِ‏.‏ قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏\"‏ نَعَمْ ‏\"‏‏.‏ قَالَ أَبُو بَكْرٍ فَخُذْ بِأَبِي أَنْتَ يَا رَسُولَ اللَّهِ إِحْدَى رَاحِلَتَىَّ هَاتَيْنِ‏.‏ قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏\"‏ بِالثَّمَنِ ‏\"‏‏.‏ قَالَتْ عَائِشَةُ فَجَهَّزْنَاهُمَا أَحَثَّ الْجَهَازِ، وَصَنَعْنَا لَهُمَا سُفْرَةً فِي جِرَابٍ، فَقَطَعَتْ أَسْمَاءُ بِنْتُ أَبِي بَكْرٍ قِطْعَةً مَنْ نِطَاقِهَا فَرَبَطَتْ بِهِ عَلَى فَمِ الْجِرَابِ، فَبِذَلِكَ سُمِّيَتْ ذَاتَ النِّطَاقِ ـ قَالَتْ ـ ثُمَّ لَحِقَ رَسُولُ اللَّهِ صلى الله عليه وسلم وَأَبُو بَكْرٍ بِغَارٍ فِي جَبَلِ ثَوْرٍ فَكَمَنَا فِيهِ ثَلاَثَ لَيَالٍ، يَبِيتُ عِنْدَهُمَا عَبْدُ اللَّهِ بْنُ أَبِي بَكْرٍ وَهْوَ غُلاَمٌ شَابٌّ ثَقِفٌ لَقِنٌ، فَيُدْلِجُ مِنْ عِنْدِهِمَا بِسَحَرٍ، فَيُصْبِحُ مَعَ قُرَيْشٍ بِمَكَّةَ كَبَائِتٍ، فَلاَ يَسْمَعُ أَمْرًا يُكْتَادَانِ بِهِ إِلاَّ وَعَاهُ، حَتَّى يَأْتِيَهُمَا بِخَبَرِ ذَلِكَ حِينَ يَخْتَلِطُ الظَّلاَمُ، وَيَرْعَى عَلَيْهِمَا عَامِرُ بْنُ فُهَيْرَةَ مَوْلَى أَبِي بَكْرٍ مِنْحَةً مِنْ غَنَمٍ، فَيُرِيحُهَا عَلَيْهِمَا حِينَ يَذْهَبُ سَاعَةٌ مِنَ الْعِشَاءِ، فَيَبِيتَانِ فِي رِسْلٍ وَهْوَ لَبَنُ مِنْحَتِهِمَا وَرَضِيفِهِمَا، حَتَّى يَنْعِقَ بِهَا عَامِرُ بْنُ فُهَيْرَةَ بِغَلَسٍ، يَفْعَلُ ذَلِكَ فِي كُلِّ لَيْلَةٍ مِنْ تِلْكَ اللَّيَالِي الثَّلاَثِ، وَاسْتَأْجَرَ رَسُولُ اللَّهِ صلى الله عليه وسلم وَأَبُو بَكْرٍ رَجُلاً مِنْ بَنِي الدِّيلِ، وَهْوَ مِنْ بَنِي عَبْدِ بْنِ عَدِيٍّ هَادِيًا خِرِّيتًا ـ وَالْخِرِّيتُ الْمَاهِرُ بِالْهِدَايَةِ ـ قَدْ غَمَسَ حِلْفًا فِي آلِ الْعَاصِ بْنِ وَائِلٍ السَّهْمِيِّ، وَهْوَ عَلَى دِينِ كُفَّارِ قُرَيْشٍ فَأَمِنَاهُ، فَدَفَعَا إِلَيْهِ رَاحِلَتَيْهِمَا، وَوَاعَدَاهُ غَارَ ثَوْرٍ بَعْدَ ثَلاَثِ لَيَالٍ بِرَاحِلَتَيْهِمَا صُبْحَ ثَلاَثٍ، وَانْطَلَقَ مَعَهُمَا عَامِرُ بْنُ فُهَيْرَةَ وَالدَّلِيلُ فَأَخَذَ بِهِمْ طَرِيقَ السَّوَاحِلِ‏.‏",
+    "translation": "Narrated 'Aisha: (the wife of the Prophet) I never remembered my parents believing in any religion other than the true religion (i.e. Islam), and (I don't remember) a single day passing without our being visited by Allah's Messenger (ﷺ) in the morning and in the evening. When the Muslims were put to test (i.e. troubled by the pagans), Abu Bakr set out migrating to the land of Ethiopia, and when he reached Bark-al-Ghimad, Ibn Ad-Daghina, the chief of the tribe of Qara, met him and said, \"O Abu Bakr! Where are you going?\" Abu Bakr replied, \"My people have turned me out (of my country), so I want to wander on the earth and worship my Lord.\" Ibn Ad-Daghina said, \"O Abu Bakr! A man like you should not leave his home-land, nor should he be driven out, because you help the destitute earn their livings, and you keep good relations with your Kith and kin, help the weak and poor, entertain guests generously, and help the calamity-stricken persons. Therefore I am your protector. Go back and worship your Lord in your town.\" So Abu Bakr returned and Ibn Ad-Daghina accompanied him. In the evening Ibn Ad-Daghina visited the nobles of Quraish and said to them. \"A man like Abu Bakr should not leave his homeland, nor should he be driven out. Do you (i.e. Quraish) drive out a man who helps the destitute earn their living, keeps good relations with his Kith and kin, helps the weak and poor, entertains guests generously and helps the calamity-stricken persons?\" So the people of Quraish could not refuse Ibn Ad-Daghina's protection, and they said to Ibn Ad-Daghina, \"Let Abu Bakr worship his Lord in his house. He can pray and recite there whatever he likes, but he should not hurt us with it, and should not do it publicly, because we are afraid that he may affect our women and children.\" Ibn Ad-Daghina told Abu Bakr of all that. Abu Bakr stayed in that state, worshipping his Lord in his house. He did not pray publicly, nor did he recite Quran outside his house. Then a thought occurred to Abu Bakr to build a mosque in front of his house, and there he used to pray and recite the Quran. The women and children of the pagans began to gather around him in great number. They used to wonder at him and look at him. Abu Bakr was a man who used to weep too much, and he could not help weeping on reciting the Quran. That situation scared the nobles of the pagans of Quraish, so they sent for Ibn Ad-Daghina. When he came to them, they said, \"We accepted your protection of Abu Bakr on condition that he should worship his Lord in his house, but he has violated the conditions and he has built a mosque in front of his house where he prays and recites the Quran publicly. We are now afraid that he may affect our women and children unfavorably. So, prevent him from that. If he likes to confine the worship of his Lord to his house, he may do so, but if he insists on doing that openly, ask him to release you from your obligation to protect him, for we dislike to break our pact with you, but we deny Abu Bakr the right to announce his act publicly.\" Ibn Ad-Daghina went to Abu- Bakr and said, (\"O Abu Bakr!) You know well what contract I have made on your behalf; now, you are either to abide by it, or else release me from my obligation of protecting you, because I do not want the 'Arabs hear that my people have dishonored a contract I have made on behalf of another man.\" Abu Bakr replied, \"I release you from your pact to protect me, and am pleased with the protection from Allah.\" At that time the Prophet (ﷺ) was in Mecca, and he said to the Muslims, \"In a dream I have been shown your migration place, a land of date palm trees, between two mountains, the two stony tracts.\" So, some people migrated to Medina, and most of those people who had previously migrated to the land of Ethiopia, returned to Medina. Abu Bakr also prepared to leave for Medina, but Allah's Messenger (ﷺ) said to him, \"Wait for a while, because I hope that I will be allowed to migrate also.\" Abu Bakr said, \"Do you indeed expect this? Let my father be sacrificed for you!\" The Prophet (ﷺ) said, \"Yes.\" So Abu Bakr did not migrate for the sake of Allah's Messenger (ﷺ) in order to accompany him. He fed two she-camels he possessed with the leaves of As-Samur tree that fell on being struck by a stick for four months. One day, while we were sitting in Abu Bakr's house at noon, someone said to Abu Bakr, \"This is Allah's Messenger (ﷺ) with his head covered coming at a time at which he never used to visit us before.\" Abu Bakr said, \"May my parents be sacrificed for him. By Allah, he has not come at this hour except for a great necessity.\" So Allah's Messenger (ﷺ) came and asked permission to enter, and he was allowed to enter. When he entered, he said to Abu Bakr. \"Tell everyone who is present with you to go away.\" Abu Bakr replied, \"There are none but your family. May my father be sacrificed for you, O Allah's Messenger (ﷺ)!\" The Prophet (ﷺ) said, \"I have been given permission to migrate.\" Abu Bakr said, \"Shall I accompany you? May my father be sacrificed for you, O Allah's Messenger (ﷺ)!\" Allah's Messenger (ﷺ) said, \"Yes.\" Abu Bakr said, \"O Allah's Messenger (ﷺ)! May my father be sacrificed for you, take one of these two she-camels of mine.\" Allah's Messenger (ﷺ) replied, \"(I will accept it) with payment.\" So we prepared the baggage quickly and put some journey food in a leather bag for them. Asma, Abu Bakr's daughter, cut a piece from her waist belt and tied the mouth of the leather bag with it, and for that reason she was named Dhat-un-Nitaqain (i.e. the owner of two belts). Then Allah's Messenger (ﷺ) and Abu Bakr reached a cave on the mountain of Thaur and stayed there for three nights. 'Abdullah bin Abi Bakr who was intelligent and a sagacious youth, used to stay (with them) overnight. He used to leave them before day break so that in the morning he would be with Quraish as if he had spent the night in Mecca. He would keep in mind any plot made against them, and when it became dark he would (go and) inform them of it. 'Amir bin Fuhaira, the freed slave of Abu Bakr, used to bring the milch sheep (of his master, Abu Bakr) to them a little while after nightfall in order to rest the sheep there. So they always had fresh milk at night, the milk of their sheep, and the milk which they warmed by throwing heated stones in it. 'Amir bin Fuhaira would then call the herd away when it was still dark (before daybreak). He did the same in each of those three nights. Allah's Messenger (ﷺ) and Abu Bakr had hired a man from the tribe of Bani Ad-Dail from the family of Bani Abd bin Adi as an expert guide, and he was in alliance with the family of Al-'As bin Wail As-Sahmi and he was on the religion of the infidels of Quraish. The Prophet (ﷺ) and Abu Bakr trusted him and gave him their two she-camels and took his promise to bring their two she camels to the cave of the mountain of Thaur in the morning after three nights later. And (when they set out), 'Amir bin Fuhaira and the guide went along with them and the guide led them along the sea-shore",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:3653": {
+    "arabic": "حَدَّثَنَا مُحَمَّدُ بْنُ سِنَانٍ، حَدَّثَنَا هَمَّامٌ، عَنْ ثَابِتٍ، عَنْ أَنَسٍ، عَنْ أَبِي بَكْرٍ ـ رضى الله عنه ـ قَالَ قُلْتُ لِلنَّبِيِّ صلى الله عليه وسلم وَأَنَا فِي الْغَارِ لَوْ أَنَّ أَحَدَهُمْ نَظَرَ تَحْتَ قَدَمَيْهِ لأَبْصَرَنَا‏.‏ فَقَالَ ‏ \"‏ مَا ظَنُّكَ يَا أَبَا بَكْرٍ بِاثْنَيْنِ اللَّهُ ثَالِثُهُمَا ‏\"‏‏.‏",
+    "translation": "Narrated Abu Bakr:I said to the Prophet (ﷺ) while I was in the Cave. \"If any of them should look under his feet, he would see us.\" He said, \"O Abu Bakr! What do you think of two (persons) the third of whom is Allah?",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:428": {
+    "arabic": "حَدَّثَنَا مُسَدَّدٌ، قَالَ حَدَّثَنَا عَبْدُ الْوَارِثِ، عَنْ أَبِي التَّيَّاحِ، عَنْ أَنَسٍ، قَالَ قَدِمَ النَّبِيُّ صلى الله عليه وسلم الْمَدِينَةَ فَنَزَلَ أَعْلَى الْمَدِينَةِ، فِي حَىٍّ يُقَالُ لَهُمْ بَنُو عَمْرِو بْنِ عَوْفٍ‏.‏ فَأَقَامَ النَّبِيُّ صلى الله عليه وسلم فِيهِمْ أَرْبَعَ عَشْرَةَ لَيْلَةً، ثُمَّ أَرْسَلَ إِلَى بَنِي النَّجَّارِ فَجَاءُوا مُتَقَلِّدِي السُّيُوفِ، كَأَنِّي أَنْظُرُ إِلَى النَّبِيِّ صلى الله عليه وسلم عَلَى رَاحِلَتِهِ، وَأَبُو بَكْرٍ رِدْفُهُ، وَمَلأُ بَنِي النَّجَّارِ حَوْلَهُ، حَتَّى أَلْقَى بِفِنَاءِ أَبِي أَيُّوبَ، وَكَانَ يُحِبُّ أَنْ يُصَلِّيَ حَيْثُ أَدْرَكَتْهُ الصَّلاَةُ، وَيُصَلِّي فِي مَرَابِضِ الْغَنَمِ، وَأَنَّهُ أَمَرَ بِبِنَاءِ الْمَسْجِدِ، فَأَرْسَلَ إِلَى مَلإٍ مِنْ بَنِي النَّجَّارِ فَقَالَ ‏\"‏ يَا بَنِي النَّجَّارِ ثَامِنُونِي بِحَائِطِكُمْ هَذَا ‏\"‏‏.‏ قَالُوا لاَ وَاللَّهِ، لاَ نَطْلُبُ ثَمَنَهُ إِلاَّ إِلَى اللَّهِ‏.‏ فَقَالَ أَنَسٌ فَكَانَ فِيهِ مَا أَقُولُ لَكُمْ، قُبُورُ الْمُشْرِكِينَ، وَفِيهِ خَرِبٌ، وَفِيهِ نَخْلٌ، فَأَمَرَ النَّبِيُّ صلى الله عليه وسلم بِقُبُورِ الْمُشْرِكِينَ فَنُبِشَتْ، ثُمَّ بِالْخَرِبِ فَسُوِّيَتْ، وَبِالنَّخْلِ فَقُطِعَ، فَصَفُّوا النَّخْلَ قِبْلَةَ الْمَسْجِدِ، وَجَعَلُوا عِضَادَتَيْهِ الْحِجَارَةَ، وَجَعَلُوا يَنْقُلُونَ الصَّخْرَ، وَهُمْ يَرْتَجِزُونَ، وَالنَّبِيُّ صلى الله عليه وسلم مَعَهُمْ وَهُوَ يَقُولُ ‏\"‏ اللَّهُمَّ لاَ خَيْرَ إِلاَّ خَيْرُ الآخِرَهْ فَاغْفِرْ لِلأَنْصَارِ وَالْمُهَاجِرَهْ ‏\"‏",
+    "translation": "Narrated Anas:When the Prophet (ﷺ) arrived in Medina he dismounted at `Awali-il-Medina amongst a tribe called Banu `Amr bin `Auf. He stayed there For fourteen nights. Then he sent for Bani An-Najjar and they came armed with their swords. As if I am looking (just now) as the Prophet (ﷺ) was sitting over his Rahila (Mount) with Abu Bakr riding behind him and all Banu An-Najjar around him till he dismounted at the courtyard of Abu Aiyub's house. The Prophet (ﷺ) loved to pray wherever the time for the prayer was due even at sheep-folds. Later on he ordered that a mosque should be built and sent for some people of Banu-An-Najjar and said, \"O Banu An-Najjar! Suggest to me the price of this (walled) piece of land of yours.\" They replied, \"No! By Allah! We do not demand its price except from Allah.\" Anas added: There were graves of pagans in it and some of it was unleveled and there were some date-palm trees in it. The Prophet (ﷺ) ordered that the graves of the pagans be dug out and the unleveled land be levelled and the date-palm trees be cut down . (So all that was done). They aligned these cut date-palm trees towards the Qibla of the mosque (as a wall) and they also built two stone side-walls (of the mosque). His companions brought the stones while reciting some poetic verses. The Prophet (ﷺ) was with them and he kept on saying, \"There is no goodness except that of the Hereafter, O Allah! So please forgive the Ansars and the emigrants",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:4287": {
+    "arabic": "حَدَّثَنَا صَدَقَةُ بْنُ الْفَضْلِ، أَخْبَرَنَا ابْنُ عُيَيْنَةَ، عَنِ ابْنِ أَبِي نَجِيحٍ، عَنْ مُجَاهِدٍ، عَنْ أَبِي مَعْمَرٍ، عَنْ عَبْدِ اللَّهِ ـ رضى الله عنه ـ قَالَ دَخَلَ النَّبِيُّ صلى الله عليه وسلم مَكَّةَ يَوْمَ الْفَتْحِ وَحَوْلَ الْبَيْتِ سِتُّونَ وَثَلاَثُمِائَةِ نُصُبٍ، فَجَعَلَ يَطْعُنُهَا بِعُودٍ فِي يَدِهِ وَيَقُولُ ‏ \"‏ جَاءَ الْحَقُّ وَزَهَقَ الْبَاطِلُ، جَاءَ الْحَقُّ، وَمَا يُبْدِئُ الْبَاطِلُ وَمَا يُعِيدُ ‏\"‏‏.‏",
+    "translation": "Narrated `Abdullah:When the Prophet (ﷺ) entered Mecca on the day of the Conquest, there were 360 idols around the Ka`ba. The Prophet (ﷺ) started striking them with a stick he had in his hand and was saying, \"Truth has come and Falsehood will neither start nor will it reappear",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:3934": {
+    "arabic": "حَدَّثَنَا عَبْدُ اللَّهِ بْنُ مَسْلَمَةَ، حَدَّثَنَا عَبْدُ الْعَزِيزِ، عَنْ أَبِيهِ، عَنْ سَهْلِ بْنِ سَعْدٍ، قَالَ مَا عَدُّوا مِنْ مَبْعَثِ النَّبِيِّ صلى الله عليه وسلم وَلاَ مِنْ وَفَاتِهِ، مَا عَدُّوا إِلاَّ مِنْ مَقْدَمِهِ الْمَدِينَةَ‏.‏",
+    "translation": "Narrated Sahl bin Sa`d:The Prophet's companions did not take as a starting date for the Muslim calendar, the day, the Prophet (ﷺ) had been sent as an Apostle or the day of his death, but the day of his arrival at Medina",
     "arabicFrom": "fawazahmed0/hadith-api",
     "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
   },

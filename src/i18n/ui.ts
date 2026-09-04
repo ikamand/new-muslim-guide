@@ -989,6 +989,9 @@ export const EN = {
   'curriculum.unit.people': 'People',
   'curriculum.unit.people.purpose':
     'Family, manners, marriage, and the day someone dies.',
+  'curriculum.unit.being-asked': 'Questions you’ll be asked',
+  'curriculum.unit.being-asked.purpose':
+    'What family and colleagues ask, and what to say back.',
   'curriculum.unit.meeting-muslims': 'Meeting other Muslims',
   'curriculum.unit.meeting-muslims.purpose':
     'Why confident people tell you opposite things.',
@@ -1016,6 +1019,7 @@ export const EN = {
   'curriculum.short.everyday-words': 'Words',
   'curriculum.short.eating-wearing-earning': 'Halal',
   'curriculum.short.people': 'People',
+  'curriculum.short.being-asked': 'Asked',
   'curriculum.short.meeting-muslims': 'Muslims',
   'curriculum.short.the-year': 'The year',
   'curriculum.short.when-its-hard': 'Hard days',

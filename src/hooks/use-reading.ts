@@ -14,9 +14,10 @@ import { localiseCatalogEntry } from '@/i18n/localise';
  * when a lesson page unmounted unfinished; this narrows it to the one entry
  * worth offering back — the most recently abandoned, still unfinished,
  * still resolvable, and recent enough that "you were reading" is true rather
- * than an accusation. Both carry-on surfaces (Today's slot and the row on
- * Learn) read this one hook, so they cannot disagree about what the reader
- * was doing.
+ * than an accusation. Today's carry-on slot is the one surface that offers
+ * it back (Learn stopped on 4 Sep: its page shows the book's order, and a
+ * second mark for "where you were" confused the one reader it was built
+ * for); the unit screen's per-row bookmark reads the raw log instead.
  */
 
 export type ReadingInProgress = {

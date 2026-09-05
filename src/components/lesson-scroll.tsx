@@ -37,11 +37,22 @@ import { useTheme } from '@/hooks/use-theme';
  * fail to send. The failure mode that killed the exact-bottom version cannot
  * reach a 200px window.
  *
- * ⚠️ **This over-counts on purpose — the opposite trade from the tap.**
- * Somebody who flings to the bottom to see how long the page is gets the mark.
- * Iyad chose that over a bookkeeping button: the tick is undoable in the
- * journey's stage list, and `observations` still records opens and finishes
- * separately, so nothing downstream mistakes the mark for competence.
+ * ## Reaching the end is not enough — the reader has to have been here
+ *
+ * The slack version over-counted on purpose, and the cost landed on 4 Sep:
+ * a page short enough to fit the screen ticked itself THE MOMENT IT OPENED
+ * (the layout path below, with nothing to scroll), and a fling to see how
+ * long an article was ticked it too. Iyad browsed two whole chapters that
+ * way, the ledger recorded them as read, and the Learn tab then parked his
+ * pen three chapters on from where he actually was. Every count on that tab
+ * is a view of this one mark, so once it lies nothing downstream can be
+ * right.
+ *
+ * So the mark now needs two things: the end reached, as before, AND the page
+ * open for `DWELL_MS`. Opening a page stops being finishing it; a fling and
+ * a glance land nothing. The other direction is still recoverable without a
+ * bookkeeping button: the next-lesson button in `lesson-end.tsx` marks on
+ * tap, and the unit screen's circle marks by hand.
  *
  * ## The mark waits for storage
  *
@@ -67,6 +78,8 @@ export function LessonScroll({ lessonKey, children, ...scroll }: LessonScrollPro
   const offset = useRef(0);
   /** State rather than a ref so the effect below re-runs when the end is reached. */
   const [reachedEnd, setReachedEnd] = useState(false);
+  /** True once the page has been open for `DWELL_MS` — the other half of the mark. */
+  const [dwelt, setDwelt] = useState(false);
   const marked = useRef(false);
   const settle = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   /** The deepest the reader has been, as the bar's own fraction. */
@@ -109,6 +122,12 @@ export function LessonScroll({ lessonKey, children, ...scroll }: LessonScrollPro
 
   useEffect(() => () => clearTimeout(settle.current), []);
 
+  /* The dwell clock starts at mount and runs once; leaving early clears it. */
+  useEffect(() => {
+    const timer = setTimeout(() => setDwelt(true), DWELL_MS);
+    return () => clearTimeout(timer);
+  }, []);
+
   /*
     Leaving partway is worth remembering — it is the whole "You were reading"
     signal on Today and Learn. Recorded once, on unmount, never per scroll
@@ -135,13 +154,15 @@ export function LessonScroll({ lessonKey, children, ...scroll }: LessonScrollPro
       it records, and without the guard it recorded every read twice, 3ms
       apart. Observed on 29 Aug, not reasoned about.
     */
-    if (marked.current || !reachedEnd || !settingsLoaded || !observationsLoaded) return;
+    if (marked.current || !reachedEnd || !dwelt || !settingsLoaded || !observationsLoaded) {
+      return;
+    }
     marked.current = true;
     completeLesson(lessonKey);
     /* Records a date every read-through — competence is a question about
        dates, and a second reading is real evidence. See `lib/competence.ts`. */
     finish(lessonKey);
-  }, [reachedEnd, settingsLoaded, observationsLoaded, lessonKey, completeLesson, finish]);
+  }, [reachedEnd, dwelt, settingsLoaded, observationsLoaded, lessonKey, completeLesson, finish]);
 
   const onScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     const { contentOffset, contentSize, layoutMeasurement } = event.nativeEvent;
@@ -194,6 +215,14 @@ const END_SLACK = 200;
 
 /** Long enough for a second layout pass, short enough to beat any reader. */
 const SETTLE_MS = 500;
+
+/**
+ * How long a page must have been open before reaching its end can mark it.
+ * The shortest lesson in the curriculum is two minutes; twenty seconds is
+ * well under a real reading of it and well over a fling, an open-and-back,
+ * or a page that fitted the screen and never scrolled.
+ */
+const DWELL_MS = 20_000;
 
 const styles = StyleSheet.create({
   frame: {

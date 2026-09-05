@@ -3228,3 +3228,69 @@ prints sahih with the grader named.
 Verified with eyes on web, light, 390: all four pages, the unit screen and
 the tier. All checks green. Ships by OTA. ⚠️ All six pages await scholarly
 review; `docs/scholarly-review.md` carries them.
+
+---
+
+## 4 Sep 2026 — The contents page: Learn says where you are ✅
+
+Iyad's device review of the written page, in his words: "I don't know where
+I'm at, which section I'm reading, why I'm reading one section without
+finishing the previous one." The audit (artifact "The Pen and the Ribbon")
+found three causes and none was the drawing:
+
+1. **The ledger was partly fiction.** `lesson-scroll.tsx` marked a lesson
+   when the viewport came within 200px of the end — including the layout
+   path, so a page that fitted the screen ticked itself on open, and a fling
+   ticked too. He had browsed two chapters of tier two; the app recorded them
+   as read.
+2. **A hidden flag reordered the book.** `openTierIndex` started the "next"
+   scan at tier two for `on-my-own` confidence and wrapped tier one last, so
+   19 unread foundation lessons could never claim the pen. His pen sat in
+   `being-asked` — the only unit in the curriculum with unwritten pages (2 of
+   6 resolve) — while Where you begin was half-read above it. The arithmetic
+   confirmed it: tier two read 10 of 23, and its first two chapters hold
+   4 + 6.
+3. **The chapter had no address.** The block never named its tier; the only
+   join to the arcade was a gold dot on a 20px arch.
+
+First proposal — the pen and a second "ribbon" mark for where you were
+(artifact "Where the Pen Rests") — rejected by Iyad as still confusing; the
+qalam grammar itself was the problem for a new reader. Five directions drawn
+in the app's own tokens (artifact "Five Ways to Say Next": one line,
+contents, just-read/now/then, the magnified arch, in words). He chose
+**Contents** and, seeing it, had to ask what the end-marks meant — which
+settled the done mark: the malachite check, the one the shahada line already
+used. He then named the levels — **Part · Chapter · Lesson** — and reshaped
+the arcade rows to two lines (kicker with chevron, name with arches) for
+small screens, moved *Your firsts* from a bare row under the shahada to a
+door at the foot beside *What you already know* (both about the reader, not
+the book), and removed the opening line, which opened lesson 1 of chapter 1.
+
+**Built:** `lesson-scroll.tsx` — the mark needs the end reached AND
+`DWELL_MS` (20s) open; opening a page is no longer finishing it. The
+next-lesson tap and the unit screen's circle still mark by hand.
+`use-curriculum.ts` — book order, tier one first, always; `openTierIndex`
+deleted from `curriculum.ts` and confidence no longer touches the curriculum
+(Today's prayer card still reads it). `learn.tsx` rewritten: `ContentsBlock`
+(head "PART 1 · YOUR FIRST WEEKS" / chapter / "Lesson 3 of 6"; rosette
+numerals, `Rosette tone="accent"` on the next line; outline check on read
+lines; "Next · 2 min →" in lapis; later lines quiet and faded, still
+pressable), `BookMap` two-line rows ("PART 1 · 9 OF 28 READ", or
+"PART 3 · 17 LESSONS" for an unstarted part), `Doors`. `progress.tsx` tier
+labels carry "Part n ·"; its strings say chapter, not unit.
+
+**Removed:** the opening line, the firsts row at the top, `QalamLine`,
+`InkedLine`, `SketchedLine`, `EndMark`, the reading-bookmark special case on
+the pen (`useReadingInProgress` now serves Today alone), and the strings
+"Being written now" (a new reader could take it to mean the app was
+unfinished), "The opening line", "Written", "Carry on where you left off".
+
+**Held, and why:** the shahada hero still shows above the frame until the
+shahada is said, so that one reader sees Becoming Muslim twice — once loud,
+once as row 1 "Next". Deliberate: it is the one person the tab should be
+loud with. The unit screen keeps its per-row bookmark (raw log, no horizon).
+
+Verified with eyes on web at 390, light and dark, seeded with the state from
+his screenshot (9 of 28 · 10 of 23 · 4 of 17): the pen lands on The Five
+Pillars in Where you begin. `expo export --platform web` renders all 25
+routes. Ships by OTA.

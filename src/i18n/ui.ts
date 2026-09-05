@@ -198,8 +198,13 @@ export const EN = {
   'firsts.note.add': 'Add a line about it, if you want one',
   'firsts.note.placeholder': 'How it was',
   'firsts.note.keep': 'Keep',
-  /* No arrow in the string — the row draws its own, and it drew both. */
-  'firsts.open': 'Your firsts',
+  /*
+    The door at the foot of the Learn tab's frame (4 Sep), beside What you
+    already know: the intro's first sentence, so the door and the screen
+    cannot say different things — and one line at 390, where the longer
+    "in the order they did" wrapped. No arrow in the string — the row draws it.
+  */
+  'firsts.meta': 'Things that happen once.',
   'firsts.ask': 'Was that your first?',
   'firsts.askNo': 'Not yet',
   'first.prayer-alone': 'Prayed on your own',
@@ -219,7 +224,6 @@ export const EN = {
   'learn.where.kicker': 'Where you are',
   'learn.where.left': 'Left in this chapter',
   'learn.where.done': 'You have been through the whole path.',
-  'learn.shahada.line': 'The shahada · read the words again',
   'today.firstAsk': 'It is Friday tomorrow',
   'today.zakat': 'It is Ramadan',
   'today.zakat.why': 'Many people work theirs out this month. It is not due now. It is due when a year has passed on your own wealth.',
@@ -875,21 +879,23 @@ export const EN = {
   'learn.progress': 'What you already know',
   'learn.progress.meta': 'Tell the app what you already know.',
   /*
-    The written-page Learn tab (2 Sep) — the manuscript grammar made literal.
-    "Book" is the screen's own metaphor: finished lessons are ink, unread
-    ones are blank ruled lines, and the tiers are the whole book's map.
+    The Learn tab's book has three levels, and since 4 Sep they carry the
+    three words every reader learned at school: part (the three tiers),
+    chapter (the sixteen units), lesson (the sixty-eight pages). "Being
+    written now" went with the manuscript lines it labelled — a new reader
+    took it to mean the app itself was unfinished.
   */
-  'learn.openingLine': 'The opening line',
-  'learn.writingNow': 'Being written now',
+  'learn.part': 'Part {n}',
+  'learn.part.read': '{done} of {total} read',
+  'learn.lesson.of': 'Lesson {n} of {total}',
   'learn.wholeBook': 'The whole book',
-  'learn.book.written': 'Written',
   'progress.intro':
     'Tell the app what you can already do. It stays on this phone, and nothing is ever locked either way.',
-  'progress.units': 'The path, unit by unit',
+  'progress.units': 'The book, chapter by chapter',
   'progress.units.help':
-    'Tick off whole units you already know. Each one opens for lesson-by-lesson marks.',
-  'progress.markUnit': 'Mark every lesson in this unit as done',
-  'progress.unmarkUnit': 'Mark every lesson in this unit as not done',
+    'Tick off whole chapters you already know. Each one opens for lesson-by-lesson marks.',
+  'progress.markUnit': 'Mark every lesson in this chapter as done',
+  'progress.unmarkUnit': 'Mark every lesson in this chapter as not done',
 
   /*
     The end of a lesson. This block held four more strings — "Done — next",
@@ -909,7 +915,6 @@ export const EN = {
     The full names do not fit six across a phone, and truncating them to
     "Learning to…" would be worse than choosing the short form deliberately.
   */
-  'journey.carryOn': 'Carry on where you left off',
   /*
     Not "Start" any more: since the stages sort by the reader's priorities,
     this one can sit third, and a stage called Start in the middle of the row

@@ -4,14 +4,12 @@ import { resolveRef, type CatalogEntry } from '@/content';
 import {
   CURRICULUM,
   isLessonDone,
-  openTierIndex,
   stepKey,
   type JourneyStep,
   type TierId,
   type Unit,
 } from '@/content/curriculum';
 import { localiseCatalogEntry } from '@/i18n/localise';
-import { usePrayerConfidence } from '@/hooks/use-competence';
 import { useLocale } from '@/hooks/use-locale';
 import { useSettings } from '@/hooks/use-settings';
 
@@ -41,14 +39,8 @@ export type ResolvedTier = {
 export type CurriculumState = {
   tiers: readonly ResolvedTier[];
   /**
-   * Where confidence says to start — 0-based into `tiers`. All confidence
-   * decides now: a starting point, never an order and never a gate.
-   */
-  openTierIndex: number;
-  /**
-   * The next thing to do: the first unfinished lesson scanning from the open
-   * tier forward, wrapping to the earlier tiers only once everything from
-   * there on is done. Undefined when every lesson everywhere is done.
+   * The next thing to do: the first unfinished lesson in book order, tier
+   * one first. Undefined when every lesson everywhere is done.
    */
   next: ResolvedLesson | undefined;
   /** Which tier and unit `next` sits in. -1 when there is no next. */
@@ -80,7 +72,6 @@ export type CurriculumState = {
  */
 export function useCurriculum(): CurriculumState {
   const { completedLessons } = useSettings();
-  const confidence = usePrayerConfidence();
   const { locale } = useLocale();
 
   return useMemo(() => {
@@ -127,22 +118,25 @@ export function useCurriculum(): CurriculumState {
       } satisfies ResolvedTier;
     });
 
-    const open = openTierIndex(confidence);
-
     /*
-      Scan from the open tier forward, then wrap to the start. The wrap is
-      what keeps an on-my-own reader's unread tier-one lessons reachable
-      without being pushed: they come back as "next" only once everything
-      from tier two onward is done.
+      Book order, tier one first — always.
+
+      Until 4 Sep the scan started at the tier prayer confidence "opened"
+      (`on-my-own` → tier two) and wrapped to tier one last, so somebody the
+      app had promoted could have nineteen unread foundation lessons that no
+      surface ever offered. Iyad met exactly that: his pen parked three
+      chapters into tier two, the only chapter in the book with unwritten
+      pages, while Where you begin sat half-read above it. Confidence answers
+      "does this person need the prayer walkthrough" — Today's prayer card
+      still asks it — not "where are they in the book". One order, no wrap.
     */
     let next: ResolvedLesson | undefined;
     let nextTierIndex = -1;
     let nextUnitIndex = -1;
-    const order = [...tiers.keys()].map((i) => (i + open) % tiers.length);
-    for (const tierIndex of order) {
-      const unitIndex = tiers[tierIndex].units.findIndex((unit) => unit.next);
+    for (const [tierIndex, tier] of tiers.entries()) {
+      const unitIndex = tier.units.findIndex((unit) => unit.next);
       if (unitIndex !== -1) {
-        next = tiers[tierIndex].units[unitIndex].next;
+        next = tier.units[unitIndex].next;
         nextTierIndex = tierIndex;
         nextUnitIndex = unitIndex;
         break;
@@ -161,7 +155,6 @@ export function useCurriculum(): CurriculumState {
 
     return {
       tiers,
-      openTierIndex: open,
       next,
       nextTierIndex,
       nextUnitIndex,
@@ -169,5 +162,5 @@ export function useCurriculum(): CurriculumState {
       total: flat.length,
       after,
     };
-  }, [completedLessons, confidence, locale]);
+  }, [completedLessons, locale]);
 }

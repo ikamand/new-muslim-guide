@@ -22,9 +22,10 @@
  * follow, then prayer. The old counter-argument ("someone who converted last
  * night must pray tonight") is served by Today's prayer card, which opens the
  * right prayer directly; the curriculum can afford to teach in order because
- * the urgent path does not run through it. Confidence no longer reorders
- * anything — it decides which tier sits open (`openTierIndex`) and where
- * "Continue" starts.
+ * the urgent path does not run through it. Since 4 Sep confidence touches
+ * the curriculum not at all: it used to pick the tier "Continue" started in,
+ * and that quietly hid a whole tier of unread lessons from a reader the app
+ * had promoted (the reasoning rides in `use-curriculum.ts`).
  *
  * ## A unit can name a page before it exists
  *
@@ -34,8 +35,6 @@
  * declared in `COMMISSIONED` below — naming what should exist is how a gap
  * stays countable; an unresolved ref nobody declared is a typo.
  */
-
-import type { PrayerConfidence } from '@/lib/onboarding';
 
 import { ref, type ContentRef } from './model';
 
@@ -343,19 +342,6 @@ export const SHAHADA_KEY = stepKey(ref('guide', 'shahada'));
  */
 export function isLessonDone(key: string, completedLessons: readonly string[]): boolean {
   return completedLessons.includes(key);
-}
-
-/**
- * Which tier sits open on the Learn tab, 0-based into `CURRICULUM`.
- *
- * Both learner rungs open the first tier, because both are still inside its
- * material; `on-my-own` is past the mechanics and opens the second. This is
- * the whole of what confidence now decides — a starting point, never an
- * order and never a gate. Promotion stays as `lib/competence.ts` has it:
- * observed, one-way, silent.
- */
-export function openTierIndex(confidence: PrayerConfidence): number {
-  return confidence === 'on-my-own' ? 1 : 0;
 }
 
 /**

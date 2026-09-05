@@ -171,20 +171,35 @@ export function Shelf({ label, count }: { label: string; count?: number }) {
  * inside it: font resolution inside `react-native-svg` is unreliable across
  * platforms, and this way the numeral takes the app's own type scale.
  */
-export function Rosette({ label, size = 26 }: { label: string; size?: number }) {
+export function Rosette({
+  label,
+  size = 26,
+  tone = 'gold',
+}: {
+  label: string;
+  size?: number;
+  /**
+   * `accent` for the one rosette in a series that marks where the reader is
+   * — the Learn tab's next lesson. Lapis because that line is the pressable
+   * one, and gold is never a control.
+   */
+  tone?: 'gold' | 'accent';
+}) {
   const theme = useTheme();
+  const ink = tone === 'accent' ? theme.accent : theme.gold;
+  const ring = tone === 'accent' ? theme.accent : theme.goldSoft;
 
   return (
     <View style={[styles.rosette, { width: size, height: size }]}>
       <Svg width={size} height={size} viewBox="0 0 30 30" fill="none" style={StyleSheet.absoluteFill}>
-        <Circle cx="15" cy="15" r="11" stroke={theme.gold} strokeWidth={0.9} />
-        <Circle cx="15" cy="15" r="8.1" stroke={theme.goldSoft} strokeWidth={0.6} />
-        <Path d="M15 1.4 L16.8 5.6 L13.2 5.6 Z" fill={theme.gold} />
-        <Path d="M15 28.6 L16.8 24.4 L13.2 24.4 Z" fill={theme.gold} />
-        <Path d="M1.4 15 L5.6 16.8 L5.6 13.2 Z" fill={theme.gold} />
-        <Path d="M28.6 15 L24.4 16.8 L24.4 13.2 Z" fill={theme.gold} />
+        <Circle cx="15" cy="15" r="11" stroke={ink} strokeWidth={0.9} />
+        <Circle cx="15" cy="15" r="8.1" stroke={ring} strokeWidth={0.6} />
+        <Path d="M15 1.4 L16.8 5.6 L13.2 5.6 Z" fill={ink} />
+        <Path d="M15 28.6 L16.8 24.4 L13.2 24.4 Z" fill={ink} />
+        <Path d="M1.4 15 L5.6 16.8 L5.6 13.2 Z" fill={ink} />
+        <Path d="M28.6 15 L24.4 16.8 L24.4 13.2 Z" fill={ink} />
       </Svg>
-      <ThemedText type="caption" themeColor="gold">
+      <ThemedText type="caption" themeColor={tone === 'accent' ? 'accent' : 'gold'}>
         {label}
       </ThemedText>
     </View>

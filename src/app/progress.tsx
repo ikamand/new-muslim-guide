@@ -202,10 +202,13 @@ export default function ProgressScreen() {
           <ThemedText type="small" themeColor="textSecondary">
             {t('progress.units.help')}
           </ThemedText>
-          {tiers.map((tier) => (
+          {tiers.map((tier, index) => (
             <View key={tier.id}>
+              {/* The same three words as the Learn tab: part, chapter, lesson. */}
               <ThemedText type="caption" themeColor="gold" style={styles.tierLabel}>
-                {t(`curriculum.tier.${tier.id}` as UIKey)}
+                {`${t('learn.part').replace('{n}', String(index + 1))} · ${t(
+                  `curriculum.tier.${tier.id}` as UIKey,
+                )}`}
               </ThemedText>
               {tier.units.map((unit) => (
                 <UnitRow key={unit.id} unit={unit} />

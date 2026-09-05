@@ -88,9 +88,8 @@ export default function ReciterScreen() {
               style={({ pressed }) => [
                 styles.row,
                 {
-                  backgroundColor: chosen ? theme.accentMuted : theme.backgroundElement,
-                  borderColor: chosen ? theme.accent : theme.border,
-                  opacity: pressed ? 0.7 : 1,
+                  borderBottomColor: theme.goldSoft,
+                  backgroundColor: pressed ? theme.backgroundSelected : 'transparent',
                 },
               ]}>
               <View style={styles.rowText}>
@@ -141,14 +140,14 @@ const styles = StyleSheet.create({
   list: {
     gap: Spacing.two,
   },
+  /* Ruled rows, like the ʿAsr setting: a list of answers with one tick, not eight cards (5 Sep 2026). */
   row: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: Spacing.three,
     minHeight: 64,
-    padding: Spacing.three,
-    borderRadius: Radius.medium,
-    borderWidth: StyleSheet.hairlineWidth,
+    paddingVertical: Spacing.three,
+    borderBottomWidth: StyleSheet.hairlineWidth,
   },
   rowText: {
     flex: 1,

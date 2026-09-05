@@ -1,3 +1,4 @@
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { StyleSheet, View } from 'react-native';
 
 import { PressableLink } from '@/components/pressable-link';
@@ -63,6 +64,18 @@ export function DailyCollectionCard() {
         across them by hand is the sort of eyeballing the Arabic rungs exist to
         prevent.
       */}
+      {/*
+        The row used to be the only door on Today with no name on it and no
+        chevron: "Al-Khāliq · The Creator, The Maker" with nothing to say it
+        was a name of Allah, changed daily, or that it opened anywhere. The
+        collection's own title is the kicker (5 Sep 2026).
+      */}
+      <View style={styles.kickerLine}>
+        <ThemedText type="caption" themeColor="gold" style={styles.kicker}>
+          {collection.title}
+        </ThemedText>
+        <Ionicons name="chevron-forward" size={14} color={theme.gold} />
+      </View>
       <View style={styles.line}>
         <ThemedText type="small" themeColor="textSecondary" numberOfLines={2} style={styles.latin}>
           <ThemedText type="smallBold">{entry.title}</ThemedText>
@@ -94,6 +107,16 @@ const styles = StyleSheet.create({
       padding, plain footprint.
     */
     paddingVertical: Spacing.two,
+  },
+  kickerLine: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingBottom: Spacing.one,
+  },
+  kicker: {
+    letterSpacing: 1.2,
+    textTransform: 'uppercase',
   },
   line: {
     flexDirection: 'row',

@@ -131,7 +131,7 @@ export default function AwqatSettingsScreen() {
           accessibilityRole="button"
           accessibilityState={{ expanded: methodOpen }}
           style={styles.row}>
-          <ThemedText type="default" numberOfLines={1} style={styles.disclosureLabel}>
+          <ThemedText type="default" numberOfLines={2} style={styles.disclosureLabel}>
             {currentMethodLabel}
           </ThemedText>
           <Ionicons

@@ -95,6 +95,17 @@ export default function UnitScreen() {
   const { tiers, next } = useCurriculum();
 
   const unit = tiers.flatMap((tier) => tier.units).find((entry) => entry.id === id);
+  /* Its address — Part 1 · Your first weeks · Chapter 3 of 6 — so the page knows where it is, as Learn does. */
+  const tierIndex = tiers.findIndex((tier) => tier.units.some((entry) => entry.id === id));
+  const tier = tierIndex >= 0 ? tiers[tierIndex] : undefined;
+  const address =
+    tier && unit
+      ? t('unit.address')
+          .replace('{part}', t('learn.part').replace('{n}', String(tierIndex + 1)))
+          .replace('{tier}', t(`curriculum.tier.${tier.id}` as UIKey))
+          .replace('{n}', String(tier.units.indexOf(unit) + 1))
+          .replace('{total}', String(tier.units.length))
+      : '';
 
   // An unknown unit id — a stale deep link, a typo — shows the tab's intro
   // rather than an error. There is nothing here a user could have done wrong.
@@ -114,6 +125,11 @@ export default function UnitScreen() {
     <>
       <Stack.Screen options={{ title: t(`curriculum.unit.${unit.id}` as UIKey) }} />
       <ScrollView contentContainerStyle={styles.content}>
+        {address ? (
+          <ThemedText type="caption" themeColor="gold" style={styles.address}>
+            {address}
+          </ThemedText>
+        ) : null}
         <ThemedText type="default" themeColor="textSecondary">
           {t(`curriculum.unit.${unit.id}.purpose` as UIKey)}
         </ThemedText>
@@ -175,6 +191,10 @@ function ContinueLabel({ step }: { step: ResolvedLesson }) {
 }
 
 const styles = StyleSheet.create({
+  address: {
+    letterSpacing: 1.2,
+    textTransform: 'uppercase',
+  },
   content: {
     padding: Spacing.four,
     paddingBottom: Spacing.six,

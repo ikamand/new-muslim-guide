@@ -69,7 +69,7 @@ export default function TierScreen() {
           */
           const meta = `${t('journey.progress')
             .replace('{done}', String(unit.done))
-            .replace('{total}', String(unit.total))} — ${t(
+            .replace('{total}', String(unit.total))} · ${t(
             `curriculum.unit.${unit.id}.purpose` as UIKey,
           )}`;
           return (

@@ -79,7 +79,7 @@ export default function DuaBookScreen() {
               </ThemedText>
             </View>
             <ThemedText type="caption" themeColor="textSecondary">
-              {occasion.lines.length}
+              {occasion.lines.length} {t('count.lines')}
             </ThemedText>
             {/*
               The star sits on the row as well as on the occasion's own page,

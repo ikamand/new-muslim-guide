@@ -65,6 +65,10 @@ export const EN = {
   'kind.dua': 'Duʿa',
   'kind.phrase': 'Phrase',
   'kind.collection': 'Collection',
+  'count.lines': 'lines',
+  /* The chapter page's address, in the words Iyad chose on Learn: Part · Chapter · Lesson. */
+  'unit.address': '{part} · {tier} · Chapter {n} of {total}',
+  'learn.mapLegend': 'An arch fills as its chapter is read. The gold dot is where you are.',
 
   'ask.open': 'Ask a question',
   'ask.placeholder': 'Ask a question…',
@@ -396,7 +400,8 @@ export const EN = {
     `learn/voluntary-fasting.ts`, which promises the app will not date
     ʿAshuraʾ or ʿArafah.
   */
-  'awqat.title': 'Awqat',
+  /* The feature is Awqat in the plan; the page says what a convert can read. */
+  'awqat.title': 'Prayer times',
   'awqat.previous': 'Previous month',
   'awqat.next': 'Next month',
   'awqat.col.fajr': 'Fajr',

@@ -77,7 +77,7 @@ export default function AwqatScreen() {
     method choice is resolved — so this table can never print a different
     convention than the card above it.
   */
-  const { profile } = usePrayerTimes();
+  const { profile, timezoneSuspect } = usePrayerTimes();
 
   /*
     Which month is showing, as (year, 0-based month). Stepped by whole months
@@ -165,6 +165,14 @@ export default function AwqatScreen() {
               {t('place.timesFor')} {placeLabel(place)}
             </ThemedText>
           )}
+          {/* The same warning Today's card shows; a month of wrong times is worse than one. */}
+          {timezoneSuspect && (
+            <View style={[styles.warning, { borderLeftColor: theme.vermilion }]}>
+              <ThemedText type="small" themeColor="textSecondary">
+                {t('times.clockSuspect')}
+              </ThemedText>
+            </View>
+          )}
         </View>
         <Pressable
           onPress={() => step(1)}
@@ -228,6 +236,12 @@ export default function AwqatScreen() {
 }
 
 const styles = StyleSheet.create({
+  warning: {
+    borderLeftWidth: 3,
+    paddingLeft: Spacing.three,
+    marginTop: Spacing.two,
+    alignSelf: 'stretch',
+  },
   /*
     Slimmer sides than the app's usual 24: this is a table, the columns need
     the width, and a printed jadwal runs close to its edges too.

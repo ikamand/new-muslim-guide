@@ -2,7 +2,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { BookArch, GirihBand } from '@/components/illustrations';
+import { BookArch, GirihBand, HeadpieceMark } from '@/components/illustrations';
 import { Frame, JadwalRow, Rosette, Shelf, Unwan } from '@/components/jadwal';
 import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
@@ -305,6 +305,10 @@ function BookMap({
           </PressableLink>
         );
       })}
+      {/* He asked what the end-marks meant once already; say it once, quietly. */}
+      <ThemedText type="caption" themeColor="textSecondary" style={styles.mapLegend}>
+        {t('learn.mapLegend')}
+      </ThemedText>
     </View>
   );
 }
@@ -428,7 +432,12 @@ export default function LearnScreen() {
     <SafeAreaView style={[styles.safeArea, { backgroundColor: theme.background }]} edges={['top']}>
       <ScrollView contentContainerStyle={styles.content}>
         <View style={styles.header}>
-          <Unwan title={t('learn.title')} subtitle={t('learn.intro')} />
+          {/* The headpiece the Qur'an and Duʿa tabs wear: Learn is a book too. Today is the day, and stays bare. */}
+          <Unwan
+            title={t('learn.title')}
+            subtitle={t('learn.intro')}
+            headpiece={<HeadpieceMark color={theme.gold} trackColor={theme.goldSoft} />}
+          />
         </View>
 
         {!shahadaDone && (
@@ -483,6 +492,9 @@ export default function LearnScreen() {
 }
 
 const styles = StyleSheet.create({
+  mapLegend: {
+    paddingTop: Spacing.two,
+  },
   safeArea: {
     flex: 1,
   },

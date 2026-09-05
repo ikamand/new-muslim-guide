@@ -241,7 +241,7 @@ export default function AskScreen() {
                 key={item.key}
                 href={item.href}
                 accessibilityLabel={`${item.title}. ${item.description}`}
-                style={[styles.result, { borderColor: theme.border }]}
+                style={[styles.result, { borderBottomColor: theme.goldSoft }]}
                 pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
                 <View style={styles.resultText}>
                   {/*
@@ -261,7 +261,7 @@ export default function AskScreen() {
                     </ThemedText>
                   ) : null}
                 </View>
-                <Ionicons name="chevron-forward" size={18} color={theme.textSecondary} />
+                <Ionicons name="chevron-forward" size={18} color={theme.gold} />
               </PressableLink>
             ))
           )}
@@ -320,13 +320,13 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
     marginBottom: Spacing.one,
   },
+  /* A ruled row, not a card: the sheet is a list on the page, in the jadwal grammar (5 Sep 2026). */
   result: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: Spacing.three,
-    padding: Spacing.three,
-    borderRadius: Radius.medium,
-    borderWidth: StyleSheet.hairlineWidth,
+    paddingVertical: Spacing.three,
+    borderBottomWidth: StyleSheet.hairlineWidth,
   },
   resultText: {
     flex: 1,

@@ -3492,3 +3492,37 @@ Abu Dawud 1269); Al-Fatihah's frame on web in both themes; the evidence
 sheet on Fajr step 2; `content:verify` clean. One known imperfection: Bukhari
 13 is printed with two chains and the second still sits inside the matn.
 OTA.
+
+---
+
+## 5 Sep 2026 — The grammar seam: nine screens brought to the page ✅
+
+The audit's second list — screens still wearing the pre-August card grammar,
+and doors without names — built together:
+
+- **Ask** is ruled rows under its question kickers, not twenty-five bordered
+  cards; the chevron is gold like every other row's.
+- **Reciter** is a list of answers with one tick, like the ʿAsr setting, not
+  eight rounded cards.
+- **Learn wears the headpiece** the Qur'an and Duʿa tabs wear: it is a book.
+  Today stays bare; it is the day.
+- **The book map says what its marks mean**, once, in a caption: an arch
+  fills as its chapter is read; the gold dot is where you are.
+- **The chapter page has an address** — "Part 1 · Your first weeks · Chapter
+  3 of 6" — in the words Iyad chose for Learn.
+- **The name of Allah on Today** has a kicker (the collection's own title)
+  and a chevron; it was the only door on the tab with neither.
+- **The month table is titled Prayer times**, as the settings already were.
+  Awqat stays the feature's name in the plan; a convert cannot read it. The
+  table also carries Today's clock-drift warning.
+- **Small things:** the Hisn index counts say "16 lines"; the tier rows
+  join count and purpose with · rather than an em-dash; the method row in
+  the times settings wraps instead of truncating "Muslim W…".
+
+**Left alone, on purpose:** the "Todav" descender is web-only (the label box
+is 10px tall with overflow hidden in the web tab bar; native never clips)
+and a line-height on the label was rejected by `style:check` as a local
+size. The 320-wide times row and the Hisn navigation titles that truncate
+are noted in the audit and not built.
+
+Verified on web at 390. OTA.

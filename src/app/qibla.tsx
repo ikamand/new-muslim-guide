@@ -5,6 +5,7 @@ import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import Animated, { Easing, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 
 import { Glyph } from '@/components/illustrations';
+import { LocationAsk } from '@/components/location-ask';
 import { ThemedText } from '@/components/themed-text';
 import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
@@ -75,7 +76,7 @@ export default function QiblaScreen() {
   const theme = useTheme();
   const { t } = useLocale();
   const location = useLocation();
-  const { coords, status, fixedAt, request } = location;
+  const { coords, fixedAt, request } = location;
   /*
     Captured once on mount rather than read during render, exactly as
     `use-competence` does: two renders of the same component must not disagree,
@@ -162,34 +163,14 @@ export default function QiblaScreen() {
     /*
       The one screen in the app that is nothing but the location, so the ask
       lives here — it used to send people to a different tab to grant it,
-      which is a button's job. While the answer is still coming, say so and
-      offer nothing to press.
+      which is a button's job. Since 5 Sep 2026 it is the same ask as every
+      other screen that needs a location; this one used to have an icon tile
+      and centred prose of its own.
     */
-    const waiting = status === 'locating' || status === 'ready';
-
     return (
-      <ScrollView contentContainerStyle={[styles.content, styles.empty]}>
+      <ScrollView contentContainerStyle={styles.content}>
         <Stack.Screen options={{ title: t('qibla.title') }} />
-        <View style={[styles.emptyMark, { backgroundColor: theme.accentMuted }]}>
-          <Glyph name="kaaba" color={theme.accent} size={30} />
-        </View>
-        <ThemedText type="default" themeColor="textSecondary" style={styles.emptyBody}>
-          {waiting ? t('qibla.locating') : t('qibla.needLocation')}
-        </ThemedText>
-        {!waiting && (
-          <Pressable
-            onPress={() => void request()}
-            accessibilityRole="button"
-            accessibilityLabel={t('times.useLocation')}
-            style={({ pressed }) => [
-              styles.grant,
-              { backgroundColor: theme.accent, opacity: pressed ? 0.85 : 1 },
-            ]}>
-            <ThemedText type="smallBold" themeColor="textOnAccent">
-              {t('times.useLocation')}
-            </ThemedText>
-          </Pressable>
-        )}
+        <LocationAsk title={t('qibla.needTitle')} why={t('qibla.needLocation')} />
       </ScrollView>
     );
   }
@@ -327,29 +308,6 @@ const styles = StyleSheet.create({
   needleKaaba: {
     position: 'absolute',
     top: 8,
-  },
-  empty: {
-    flexGrow: 1,
-    justifyContent: 'center',
-    gap: Spacing.three,
-  },
-  emptyMark: {
-    width: 56,
-    height: 56,
-    borderRadius: Radius.medium,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  emptyBody: {
-    textAlign: 'center',
-    maxWidth: 300,
-  },
-  grant: {
-    minHeight: 48,
-    paddingHorizontal: Spacing.four,
-    borderRadius: Radius.small,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   hub: {
     width: 12,

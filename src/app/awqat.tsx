@@ -4,12 +4,14 @@ import { useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 
 import { DoubleRule, QuietRow, Rubric } from '@/components/jadwal';
+import { LocationAsk } from '@/components/location-ask';
 import { ThemedText } from '@/components/themed-text';
 import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { useLocation } from '@/hooks/use-location';
 import { usePrayerTimes } from '@/hooks/use-prayer-times';
 import { buildMonth, formatClock, hijriSpan, type MonthDay } from '@/lib/awqat-month';
+import { placeLabel } from '@/lib/places';
 import { PRAYER_IDS } from '@/lib/prayer-times';
 import { useTheme } from '@/hooks/use-theme';
 import type { UIKey } from '@/i18n/ui';
@@ -69,7 +71,7 @@ function DayRow({ day, locale }: { day: MonthDay; locale: string }) {
 export default function AwqatScreen() {
   const theme = useTheme();
   const { locale, t } = useLocale();
-  const { coords } = useLocation();
+  const { coords, source, place } = useLocation();
   /*
     The profile comes from the same hook the card uses — the one place a
     method choice is resolved — so this table can never print a different
@@ -88,12 +90,11 @@ export default function AwqatScreen() {
   });
 
   if (!coords || !profile) {
+    /* Was "Working out today's times…" for ever, with nothing to press. */
     return (
       <ScrollView contentContainerStyle={styles.content}>
         <Stack.Screen options={{ title: t('awqat.title') }} />
-        <ThemedText type="small" themeColor="textSecondary">
-          {t('times.working')}
-        </ThemedText>
+        <LocationAsk />
       </ScrollView>
     );
   }
@@ -153,6 +154,17 @@ export default function AwqatScreen() {
           <ThemedText type="small" themeColor="textSecondary" style={styles.centred}>
             {hijriLine}
           </ThemedText>
+          {/*
+            A table of times with no place on it cannot be checked by the
+            person reading it. Named only when the place was chosen from the
+            list: a live fix has no name the app could print without sending
+            the coordinates somewhere to ask.
+          */}
+          {source === 'place' && place && (
+            <ThemedText type="caption" themeColor="gold" style={styles.centred}>
+              {t('place.timesFor')} {placeLabel(place)}
+            </ThemedText>
+          )}
         </View>
         <Pressable
           onPress={() => step(1)}

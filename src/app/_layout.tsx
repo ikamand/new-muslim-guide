@@ -137,6 +137,8 @@ function RootStack() {
         fourth screen pushed onto the stack says the opposite.
       */}
       <Stack.Screen name="reciter" options={{ presentation: 'modal', title: '' }} />
+      {/* The same shape as reciter: a detour that comes straight back. Titled inside. */}
+      <Stack.Screen name="choose-place" options={{ presentation: 'modal', title: '' }} />
       {/*
         A modal for the same reason the reciter is one: asking a question is a
         detour from whatever screen you were on, and it returns you there. It

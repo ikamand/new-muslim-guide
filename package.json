@@ -86,6 +86,7 @@
     "postinstall": "patch-package",
     "awqat:fit": "npx tsx scripts/awqat-fit-check.ts",
     "compass:check": "npx tsx scripts/compass-check.ts",
+    "places:fetch": "node scripts/fetch-places.mjs",
     "quran:corpus": "node scripts/fetch-quran-corpus.mjs",
     "hadeethenc:corpus": "node scripts/fetch-hadeethenc-corpus.mjs"
   },

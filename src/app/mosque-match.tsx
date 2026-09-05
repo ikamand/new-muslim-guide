@@ -3,6 +3,7 @@ import { useMemo, useRef, useState } from 'react';
 import { Keyboard, Pressable, ScrollView, StyleSheet, TextInput, View } from 'react-native';
 
 import { Unwan } from '@/components/jadwal';
+import { LocationAsk } from '@/components/location-ask';
 import { INPUT_TEXT, ThemedText } from '@/components/themed-text';
 import { BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
@@ -79,12 +80,11 @@ export default function MosqueMatchScreen() {
   }, [coords]);
 
   if (!coords) {
+    /* Was "Working out today's times…" for ever, with nothing to press. */
     return (
       <ScrollView contentContainerStyle={styles.content}>
         <Stack.Screen options={{ title: t('mosque.title') }} />
-        <ThemedText type="small" themeColor="textSecondary">
-          {t('times.working')}
-        </ThemedText>
+        <LocationAsk />
       </ScrollView>
     );
   }

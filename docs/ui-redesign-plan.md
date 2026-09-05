@@ -3358,3 +3358,60 @@ never steps more than 4°.
 no-heading path rotated to the bearing and every route rendering. The
 constants are a first guess at real magnetometer noise and are one place to
 tune if the needle is still lively or now feels slow. Ships by OTA.
+
+---
+
+## 5 Sep 2026 — One location ask, and a city you can choose ✅
+
+From the September audit (artifact "The September Audit"): Awqat, its
+settings and Match your mosque showed "Working out today's times…" for ever
+without a location, with nothing to press, and Today and Qibla each asked in
+a design of their own. Iyad asked whether to prompt for a manual location as
+well as the button; the answer, and his decision: yes, but as a city chosen
+from a list on the phone, not a name typed into a geocoder.
+
+**Why not `geocodeAsync`.** The Expo 57 docs: it needs the network and, on
+Android, location permission anyway, and it sends the typed name to Apple or
+Google. The reader who types a city instead of granting location is usually
+doing it for privacy, and some of this app's readers are not out to their
+families; prayer times are also the worship path, which must work with the
+radio off. A bundled list keeps "used on this device and never sent
+anywhere" literally true.
+
+**Built:**
+- `components/location-ask.tsx` — the ask, once: title, the reason and the
+  limit, the lapis button, and a quiet row "Or choose a city". Used by
+  Today's card, Qibla, Awqat, Awqat settings and Match your mosque. Qibla's
+  icon tile and centred prose are gone.
+- `scripts/fetch-places.mjs` → `content/places.json` — GeoNames
+  `cities15000` cut to places over 50,000 people: 12,379 rows, 548 KB, with
+  region names only where a country's names collide (US, CA, AU, BR, IN, CN,
+  RU, MX, GB, DE) and the ASCII name where it differs, so "Munich" finds
+  München. CC BY 4.0, credited on Sources from `PLACES_SOURCE`.
+- `lib/places.ts` — prefix search on the phone, largest first; `placeLabel`
+  ("Leeds, England, United Kingdom") and `placeShort` ("Leeds, England") for
+  rows that also hold a control — the long form truncated "Change" to "Cha…"
+  on the settings row.
+- `app/choose-place.tsx` — a modal like Reciter: type, tap, back. Shows the
+  city in use and, only when the phone can take over, "Use my phone's
+  location instead".
+- `hooks/use-location.tsx` — a chosen place, stored beside the last fix.
+  Precedence in words: the phone now; then the city chosen; then wherever the
+  phone last was. A live fix beats a chosen city so a traveller sees where
+  they landed; a chosen city beats a stored fix because it was said on
+  purpose. `isUnverified` is false for a chosen city. The card refuses a
+  stored fix as before (times from another country are worse than an ask)
+  and draws a chosen city.
+- The place is named where times are shown for it — the Awqat month head in
+  gold, a quiet "Times for Leeds, England · Change" row on Today's card and
+  on the settings page — because a table of times with no place cannot be
+  checked by the person reading it. A live fix stays unnamed: naming it
+  would mean sending the coordinates somewhere to ask.
+
+**Verified on web at 390:** the five asks; choosing Leeds from Awqat and
+seeing Today, Awqat, settings and Qibla follow; Munich found from "mun";
+dark. All 40 routes export. Ships by OTA — the list is an asset.
+
+**What this commits to:** 548 KB more bundle, and a CC BY credit. Somebody
+outside every listed city picks the nearest and gets times a minute or two
+out; the screen names the city so they can see that.

@@ -9,6 +9,7 @@ import { MaxContentWidth, Spacing } from '@/constants/theme';
 import { Teaching } from '@/constants/teaching';
 import { useLocale } from '@/hooks/use-locale';
 import { useTheme } from '@/hooks/use-theme';
+import { PLACES_SOURCE } from '@/lib/places';
 
 /**
  * Every publisher whose words or voice the app carries.
@@ -97,6 +98,16 @@ export default function SourcesScreen() {
             detail={voice.detail}
           />
         ))}
+      </Group>
+
+      {/* CC BY 4.0 asks to be named; the city list is the one dataset here that is not a text. */}
+      <Group title={t('sources.places')}>
+        <Credit
+          first
+          name={PLACES_SOURCE.name}
+          where={`${PLACES_SOURCE.where} · ${PLACES_SOURCE.licence}`}
+          detail={t('sources.places.detail')}
+        />
       </Group>
 
       <ThemedText type="small" themeColor="textSecondary" style={styles.footnote}>

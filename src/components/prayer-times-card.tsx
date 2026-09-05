@@ -3,7 +3,8 @@ import { Modal, Pressable, StyleSheet, View } from 'react-native';
 
 import { AwqatArch } from '@/components/awqat-arch';
 import { CompassRose, Glyph, JadwalMark } from '@/components/illustrations';
-import { DoubleRule } from '@/components/jadwal';
+import { DoubleRule, QuietRow } from '@/components/jadwal';
+import { LocationAsk } from '@/components/location-ask';
 import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
 import { Radius, Spacing } from '@/constants/theme';
@@ -20,6 +21,7 @@ import {
   type PrayerTime,
 } from '@/lib/prayer-times';
 import { useTheme } from '@/hooks/use-theme';
+import { placeShort } from '@/lib/places';
 
 function Shell({ children }: { children: React.ReactNode }) {
   const theme = useTheme();
@@ -44,31 +46,10 @@ export type PrayerTimesCardProps = { action?: React.ReactNode };
  * this device" is the whole positioning of the app, and this is the one moment
  * a user is actually wondering about it.
  */
-function NeedsLocation({ status }: { status: 'denied' | 'unavailable' }) {
-  const theme = useTheme();
-  const { t } = useLocale();
-  const { request } = useLocation();
-
+function NeedsLocation() {
   return (
     <Shell>
-      <ThemedText type="cardTitle">
-        {t('times.needLocation')}
-      </ThemedText>
-      <ThemedText type="small" themeColor="textSecondary">
-        {status === 'denied' ? t('times.needLocation.why') : t('times.locationOff')}
-      </ThemedText>
-      {status === 'denied' && (
-        <Pressable
-          onPress={() => void request()}
-          style={({ pressed }) => [
-            styles.button,
-            { backgroundColor: theme.accent, opacity: pressed ? 0.85 : 1 },
-          ]}>
-          <ThemedText type="smallBold" themeColor="textOnAccent">
-            {t('times.useLocation')}
-          </ThemedText>
-        </Pressable>
-      )}
+      <LocationAsk />
     </Shell>
   );
 }
@@ -275,7 +256,7 @@ function WindowsSheet({
 export function PrayerTimesCard({ action }: PrayerTimesCardProps) {
   const theme = useTheme();
   const { locale, t } = useLocale();
-  const { status, coords } = useLocation();
+  const { status, coords, source, place } = useLocation();
   const { today, next, timezoneSuspect } = usePrayerTimes();
   const [windowsOpen, setWindowsOpen] = useState(false);
   const { awqatMosque } = useSettings();
@@ -286,8 +267,14 @@ export function PrayerTimesCard({ action }: PrayerTimesCardProps) {
   // so a screen reader still hears where the tap lands.
   const monthWord = new Intl.DateTimeFormat(locale, { month: 'long' }).format(new Date());
 
-  if (status === 'denied' || status === 'unavailable') {
-    return <NeedsLocation status={status} />;
+  /*
+    Refused or unavailable, and no city chosen: ask. A stored fix does not
+    count here — times from wherever the phone last was could be for another
+    country, so the card would rather ask than guess. A chosen city is the
+    reader's own answer and is drawn.
+  */
+  if ((status === 'denied' || status === 'unavailable') && source !== 'place') {
+    return <NeedsLocation />;
   }
 
   if (!coords || !today || !next) {
@@ -447,6 +434,15 @@ export function PrayerTimesCard({ action }: PrayerTimesCardProps) {
         </View>
       )}
 
+      {/* Times for a chosen city say which city, and where to change it. */}
+      {source === 'place' && place && (
+        <QuietRow
+          href="/choose-place"
+          label={`${t('place.timesFor')} ${placeShort(place)}`}
+          value={t('place.change')}
+        />
+      )}
+
       <WindowsSheet
         visible={windowsOpen}
         onClose={() => setWindowsOpen(false)}
@@ -502,13 +498,6 @@ const styles = StyleSheet.create({
       read as floating high (Iyad, 2 Sep).
     */
     paddingTop: Spacing.five,
-  },
-  button: {
-    alignSelf: 'flex-start',
-    paddingVertical: Spacing.two,
-    paddingHorizontal: Spacing.three,
-    borderRadius: Radius.small,
-    marginTop: Spacing.one,
   },
   nextLabel: {
     textTransform: 'uppercase',

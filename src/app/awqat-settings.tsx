@@ -4,6 +4,8 @@ import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Madhab } from 'adhan';
 
+import { QuietRow } from '@/components/jadwal';
+import { LocationAsk } from '@/components/location-ask';
 import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
 import { BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
@@ -11,6 +13,7 @@ import { useLocale } from '@/hooks/use-locale';
 import { useLocation } from '@/hooks/use-location';
 import { usePrayerTimes } from '@/hooks/use-prayer-times';
 import { useSettings } from '@/hooks/use-settings';
+import { placeShort } from '@/lib/places';
 import { inferProfile, METHODS } from '@/lib/prayer-times';
 import { useTheme } from '@/hooks/use-theme';
 
@@ -32,17 +35,16 @@ export default function AwqatSettingsScreen() {
   const theme = useTheme();
   const { t } = useLocale();
   const { awqatMethod, awqatHanafiAsr, awqatMosque, set, setMany } = useSettings();
-  const { coords } = useLocation();
+  const { coords, source, place } = useLocation();
   const { profile } = usePrayerTimes();
   const [methodOpen, setMethodOpen] = useState(false);
 
   if (!profile || !coords) {
+    /* Was "Working out today's times…" for ever, with nothing to press. */
     return (
       <ScrollView contentContainerStyle={styles.content}>
         <Stack.Screen options={{ title: t('settings.times') }} />
-        <ThemedText type="small" themeColor="textSecondary">
-          {t('times.working')}
-        </ThemedText>
+        <LocationAsk />
       </ScrollView>
     );
   }
@@ -74,6 +76,14 @@ export default function AwqatSettingsScreen() {
       <ThemedText type="small" themeColor="textSecondary">
         {t('times.followLocal')}
       </ThemedText>
+      {source === 'place' && place && (
+        <QuietRow
+          href="/choose-place"
+          label={`${t('place.timesFor')} ${placeShort(place)}`}
+          value={t('place.change')}
+          strong
+        />
+      )}
 
       {/*
         The headline, and the answer for most people who open this page:

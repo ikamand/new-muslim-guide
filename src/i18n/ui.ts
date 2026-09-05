@@ -290,6 +290,20 @@ export const EN = {
   'times.locationOff':
     'Location services are turned off, so the times can’t be worked out. Turn them on in your phone’s settings and come back.',
   'times.useLocation': 'Use my location',
+  /*
+    The second door on every location ask: a city from the list on the phone.
+    Nothing typed here goes anywhere — see `scripts/fetch-places.mjs`.
+  */
+  'place.choose': 'Or choose a city',
+  'place.title': 'Choose a city',
+  'place.intro':
+    'Times and the qibla will be worked out for the city you pick. The list is on this phone, and what you type is not sent anywhere.',
+  'place.placeholder': 'City name',
+  'place.current': 'Using',
+  'place.usePhone': 'Use my phone’s location instead',
+  'place.none': 'No city by that name in the list. Try the nearest larger town.',
+  'place.timesFor': 'Times for',
+  'place.change': 'Change',
   /* Three states nobody had translated, found by `npm run nav:check`. */
   'settings.footnote': 'The Arabic always stays, because it is what you actually say. Everything on this device stays on this device.',
   'guide.missing': 'That guide doesn’t exist.',
@@ -313,6 +327,7 @@ export const EN = {
   */
   'qibla.bearing': '{deg}° from north',
   'qibla.where': 'The Kaʿbah is {point} of you. If the arrow is jumping about, face that way using anything you trust: a map, the sun, a neighbour.',
+  'qibla.needTitle': 'The qibla needs to know where you are',
   'qibla.needLocation': 'The qibla is worked out from where you are, so it needs your location. It is used on this device and never sent anywhere.',
   'qibla.locating': 'Finding your location…',
   'qibla.noCompass': 'This phone isn’t reporting a compass heading, so the arrow is pointing at the raw bearing rather than at the Kaʿbah. Use the number above.',
@@ -1064,6 +1079,8 @@ export const EN = {
   'sources.quran.translation': 'The translation printed under it',
   'sources.texts': 'Quoted in the lessons',
   'sources.voices': 'Recitation',
+  'sources.places': 'Places',
+  'sources.places.detail': 'The city list behind “Choose a city”, searched on this phone',
   'sources.footnote':
     'Nothing here is edited. Where a publisher asks to be named, this is where they are named.',
   'settings.audience.man': 'Men',

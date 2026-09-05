@@ -12,6 +12,7 @@ import {
 } from 'react';
 import { AppState } from 'react-native';
 
+import type { Place } from '@/lib/places';
 import type { LatLon } from '@/lib/prayer-times';
 
 /**
@@ -24,6 +25,17 @@ import type { LatLon } from '@/lib/prayer-times';
  * The position is re-read every time the app comes back to the foreground,
  * because someone who flies to another country has to see that country's
  * times, and a cached fix from last week would silently be wrong for them.
+ *
+ * ## A chosen city
+ *
+ * Someone who will not grant location — and some of this app's readers have
+ * good reasons not to — can choose a city from the bundled list instead
+ * (`lib/places.ts`). The choice is stored on the device like everything else,
+ * and it is the fallback, not the override: a live fix from the phone always
+ * wins, because the person who chose Leeds and then flew to Cairo needs
+ * Cairo's times. It outranks a stored fix, because a city somebody picked on
+ * purpose is a better answer than wherever the phone last happened to be.
+ * Iyad's decision, 5 Sep 2026.
  */
 
 export type LocationStatus =
@@ -36,9 +48,19 @@ export type LocationStatus =
   /** Location services are off device-wide, or the fix failed. */
   | 'unavailable';
 
+/** Where the coordinates on screen came from. */
+export type LocationSource =
+  /** A live read from the phone, this launch. */
+  | 'device'
+  /** The last live read, from a previous launch, while a fresh one is awaited or refused. */
+  | 'stored'
+  /** A city the reader chose from the list. */
+  | 'place';
+
 type StoredFix = LatLon & { at: number };
 
 const STORAGE_KEY = 'last-known-fix';
+const PLACE_KEY = 'chosen-place';
 
 function distanceKm(a: LatLon, b: LatLon): number {
   const toRad = (deg: number) => (deg * Math.PI) / 180;
@@ -71,14 +93,45 @@ function parseStored(raw: string | null): StoredFix | null {
   }
 }
 
+function parsePlace(raw: string | null): Place | null {
+  if (!raw) return null;
+  try {
+    const parsed: unknown = JSON.parse(raw);
+    if (typeof parsed !== 'object' || parsed === null) return null;
+    const place = parsed as Partial<Record<keyof Place, unknown>>;
+    if (
+      typeof place.name !== 'string' ||
+      typeof place.country !== 'string' ||
+      typeof place.latitude !== 'number' ||
+      typeof place.longitude !== 'number'
+    ) {
+      return null;
+    }
+    return {
+      name: place.name,
+      country: place.country,
+      region: typeof place.region === 'string' ? place.region : '',
+      latitude: place.latitude,
+      longitude: place.longitude,
+    };
+  } catch {
+    return null;
+  }
+}
+
 type LocationContextValue = {
   coords: LatLon | null;
   status: LocationStatus;
+  /** Where `coords` came from; null when there are none. */
+  source: LocationSource | null;
+  /** The city the reader chose, whether or not it is what `coords` shows right now. */
+  place: Place | null;
   /** True while a stored fix is on screen and a fresh one is still coming. */
   isStale: boolean;
   /** When the fix on screen was taken, for a stored one. Null for a live read. */
   fixedAt: number | null;
   request: () => Promise<void>;
+  choosePlace: (place: Place | null) => void;
 };
 
 /**
@@ -91,6 +144,9 @@ type LocationContextValue = {
  * cannot produce one — so the number on screen is about wherever the reader was
  * the last time the app could tell.
  *
+ * A chosen city is never unverified: the reader named it, and it is where
+ * they said they are until they say otherwise.
+ *
  * ⚠️ It matters here more than on the prayer times, which simply refuse to draw
  * without a live fix. A qibla drawn from a fix in another city is a confident
  * arrow pointing the wrong way, and somebody prays facing it.
@@ -98,17 +154,20 @@ type LocationContextValue = {
 export function isUnverified(value: {
   isStale: boolean;
   status: LocationStatus;
+  source: LocationSource | null;
 }): boolean {
+  if (value.source === 'place') return false;
   return value.isStale && (value.status === 'denied' || value.status === 'unavailable');
 }
 
 const Context = createContext<LocationContextValue | null>(null);
 
 export function LocationProvider({ children }: { children: ReactNode }) {
-  const [coords, setCoords] = useState<LatLon | null>(null);
+  const [deviceCoords, setDeviceCoords] = useState<LatLon | null>(null);
   const [status, setStatus] = useState<LocationStatus>('locating');
-  const [isStale, setIsStale] = useState(false);
-  const [fixedAt, setFixedAt] = useState<number | null>(null);
+  const [deviceStale, setDeviceStale] = useState(false);
+  const [deviceFixedAt, setDeviceFixedAt] = useState<number | null>(null);
+  const [place, setPlace] = useState<Place | null>(null);
   const inFlight = useRef(false);
 
   const refresh = useCallback(async () => {
@@ -136,15 +195,15 @@ export function LocationProvider({ children }: { children: ReactNode }) {
         longitude: fix.coords.longitude,
       };
 
-      setCoords((current) => {
+      setDeviceCoords((current) => {
         // Ignore jitter: recomputing for a 30-metre change would churn the
         // screen without changing a single displayed minute.
         if (current && distanceKm(current, next) < 1) return current;
         return next;
       });
       setStatus('ready');
-      setIsStale(false);
-      setFixedAt(null);
+      setDeviceStale(false);
+      setDeviceFixedAt(null);
       void AsyncStorage.setItem(STORAGE_KEY, JSON.stringify({ ...next, at: Date.now() }));
     } catch {
       setStatus((current) => (current === 'ready' ? current : 'unavailable'));
@@ -163,18 +222,27 @@ export function LocationProvider({ children }: { children: ReactNode }) {
     await refresh();
   }, [refresh]);
 
+  const choosePlace = useCallback((next: Place | null) => {
+    setPlace(next);
+    if (next) void AsyncStorage.setItem(PLACE_KEY, JSON.stringify(next));
+    else void AsyncStorage.removeItem(PLACE_KEY);
+  }, []);
+
   // Show the last known fix immediately so a cold launch isn't a spinner, then
-  // let the live read replace it.
+  // let the live read replace it. The chosen city loads beside it.
   useEffect(() => {
     let active = true;
 
-    AsyncStorage.getItem(STORAGE_KEY)
-      .then((raw) => {
-        const stored = parseStored(raw);
-        if (!active || !stored) return;
-        setCoords({ latitude: stored.latitude, longitude: stored.longitude });
-        setIsStale(true);
-        setFixedAt(stored.at);
+    Promise.all([AsyncStorage.getItem(STORAGE_KEY), AsyncStorage.getItem(PLACE_KEY)])
+      .then(([rawFix, rawPlace]) => {
+        if (!active) return;
+        const chosen = parsePlace(rawPlace);
+        if (chosen) setPlace(chosen);
+        const stored = parseStored(rawFix);
+        if (!stored) return;
+        setDeviceCoords({ latitude: stored.latitude, longitude: stored.longitude });
+        setDeviceStale(true);
+        setDeviceFixedAt(stored.at);
       })
       .catch(() => {
         // No stored fix just means we wait for the live one.
@@ -197,10 +265,49 @@ export function LocationProvider({ children }: { children: ReactNode }) {
     return () => subscription.remove();
   }, [refresh]);
 
-  const value = useMemo(
-    () => ({ coords, status, isStale, fixedAt, request }),
-    [coords, status, isStale, fixedAt, request],
-  );
+  const value = useMemo<LocationContextValue>(() => {
+    /*
+      Precedence, in words: the phone now; then the city the reader chose;
+      then wherever the phone last was. A live fix beats a chosen city so a
+      traveller sees where they landed; a chosen city beats a stored fix
+      because it was said on purpose.
+    */
+    const live = status === 'ready' && deviceCoords && !deviceStale;
+    if (live) {
+      return {
+        coords: deviceCoords,
+        status,
+        source: 'device',
+        place,
+        isStale: false,
+        fixedAt: null,
+        request,
+        choosePlace,
+      };
+    }
+    if (place) {
+      return {
+        coords: { latitude: place.latitude, longitude: place.longitude },
+        status,
+        source: 'place',
+        place,
+        isStale: false,
+        fixedAt: null,
+        request,
+        choosePlace,
+      };
+    }
+    return {
+      coords: deviceCoords,
+      status,
+      source: deviceCoords ? 'stored' : null,
+      place,
+      isStale: deviceStale,
+      fixedAt: deviceFixedAt,
+      request,
+      choosePlace,
+    };
+  }, [deviceCoords, status, deviceStale, deviceFixedAt, place, request, choosePlace]);
 
   return <Context value={value}>{children}</Context>;
 }

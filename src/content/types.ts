@@ -15,7 +15,7 @@ import type { ContentMeta, ContentNote, ContentRef } from './model';
 import type { ProviderId } from './providers';
 import type { Source } from './sources';
 
-/** Drives the posture illustration and the "you are here" cue. */
+/** Names the position in the step's kicker, and drives the "you are here" cue. */
 export type Posture =
   | 'standing'
   | 'takbir'

@@ -734,7 +734,14 @@ should not have.**
 
 ### 1.11 The posture diagrams — a drawing teaches a ruling
 
-**NEW — 29 August 2026. Drawn by a model and cleared by nobody.**
+**CLOSED — 4 September 2026. Nothing left to review: the drawings are gone.**
+Iyad removed `PostureDiagram` by his own 29 Aug rule (large, clear and
+accurate, or absent) — a front-on silhouette could not show right over left
+or where the gaze falls, and it pushed the recitation below the fold. The
+record below stands as what a future set of posture pictures would have to
+answer; it now applies to nothing on the screen.
+
+**Was: NEW — 29 August 2026. Drawn by a model and cleared by nobody.**
 
 - **File** `src/components/illustrations.tsx`, `PostureDiagram`
 - **What changed** The nine cartoon PNGs were removed on Iyad's instruction and

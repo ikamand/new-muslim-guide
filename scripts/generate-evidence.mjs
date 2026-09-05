@@ -61,10 +61,9 @@ const load = (p) => import(join(root, p));
  * unsourced cards missed a whole directory the first time. A new content file
  * is picked up here the day it lands.
  *
- * Skipped: anything containing a Metro `require`. `audio.ts` and
- * `prayer-images.ts` resolve asset paths at bundle time, which Node cannot do
- * and which is exactly why `index.ts` cannot be imported here either. None of
- * the three carries a citation.
+ * Skipped: anything containing a Metro `require`. `audio.ts` resolves asset
+ * paths at bundle time, which Node cannot do and which is exactly why
+ * `index.ts` cannot be imported here either. Neither carries a citation.
  */
 async function loadContentModules() {
   const dir = join(root, 'src/content');

@@ -3,7 +3,7 @@ import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 import { useRef, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 
-import { PostureDiagram, RakahProgress } from '@/components/illustrations';
+import { RakahProgress } from '@/components/illustrations';
 import { PressableLink } from '@/components/pressable-link';
 import { RecitationCard } from '@/components/recitation-card';
 import { ContentNoteCard } from '@/components/content-note';
@@ -21,12 +21,13 @@ import { useSettings } from '@/hooks/use-settings';
 import { useTheme } from '@/hooks/use-theme';
 
 /**
- * The name of a position, for a screen reader.
+ * The name of a position — the step's kicker.
  *
- * It used to be what everyone saw — printed in a pill, in English, on every
- * step, in an app that translates everything else. It is now the accessible
- * name of `PostureFigure`, which is the job it was always better suited to:
- * sighted readers get the shape, and a reader who cannot see it gets the word.
+ * Since 4 Sep 2026 this is the whole of how a step says what the body does,
+ * beside the instruction itself: the posture drawings that sat under the
+ * words are gone (see the header of `illustrations.tsx` for the three
+ * decisions that ended there). The kicker was always translated and always
+ * read aloud; it just used to have a picture it was captioning.
  */
 const POSTURE_KEY: Record<Posture, UIKey> = {
   standing: 'posture.standing',
@@ -95,25 +96,6 @@ export default function GuideScreen() {
   const step = guide.steps[index];
   /** 0 for anything without rakʿahs — wudu, ghusl, the shahada. */
   const totalRakahs = guide.steps.reduce((most, s) => Math.max(most, s.rakah ?? 0), 0);
-  /*
-    The diagram appears only when the body MOVES.
-
-    Four standing steps in a row used to repeat the same picture, and the
-    repeat cost the one thing a recite step is for: the figure took half the
-    screen and pushed the words below the fold. When the posture is the same
-    as the step before, the reader's body already knows it — the kicker still
-    names it, the screen reader still hears it, and the words lead.
-
-    One asymmetry: `sitting` straight after `tashahhud` is not a movement —
-    the body stays put and a finger lowers — so it draws nothing, while
-    `tashahhud` after `sitting` is precisely when the finger diagram earns
-    its place.
-  */
-  const previousPosture = index > 0 ? guide.steps[index - 1].posture : undefined;
-  const postureChanged =
-    step.posture !== undefined &&
-    step.posture !== previousPosture &&
-    !(step.posture === 'sitting' && previousPosture === 'tashahhud');
   const isFirst = index === 0;
   const isLast = index === guide.steps.length - 1;
   const progress = (index + 1) / guide.steps.length;
@@ -211,31 +193,6 @@ export default function GuideScreen() {
         <ThemedText type="default" style={styles.instruction}>
           {step.instruction}
         </ThemedText>
-
-        {/*
-          The position, under the words that describe it.
-
-          Someone on a mat reads what to do and then looks at what it should
-          look like, so the picture goes where the eye lands next — but only
-          on the step where the position is new (see `postureChanged` above).
-          `POSTURE_KEY` still names it, for a screen reader and for anyone who
-          wants the word. `PostureDiagram` skips `washing` itself: a tap glyph
-          repeated on every wudu step taught nothing.
-        */}
-        {step.posture && step.posture !== 'washing' && postureChanged && (
-          /*
-            The one fill this screen keeps: an illustration needs a ground of
-            its own, and the posture PNGs are composited against this colour
-            in both themes.
-          */
-          <View style={[styles.posture, { backgroundColor: theme.backgroundElement }]}>
-            <PostureDiagram
-              posture={step.posture}
-              color={theme.accent}
-              surface={theme.backgroundElement}
-            />
-          </View>
-        )}
 
         {step.says && <RecitationCard recitation={step.says} />}
 
@@ -405,13 +362,6 @@ const styles = StyleSheet.create({
    * not — a portrait image at full width would be 500pt tall and push the
    * citations off the screen.
    */
-  posture: {
-    alignSelf: 'stretch',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: Spacing.three,
-    borderRadius: Radius.medium,
-  },
   headText: {
     flex: 1,
     gap: Spacing.one,

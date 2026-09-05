@@ -3294,3 +3294,35 @@ Verified with eyes on web at 390, light and dark, seeded with the state from
 his screenshot (9 of 28 · 10 of 23 · 4 of 17): the pen lands on The Five
 Pillars in Where you begin. `expo export --platform web` renders all 25
 routes. Ships by OTA.
+
+---
+
+## 4 Sep 2026 — The posture drawings are gone, by the 29 Aug rule ✅
+
+Iyad, on the Fajr guide's step 2 and 3 screenshots: "these drawings are super
+basic and don't show user in any way how to pray. i think they should be
+removed completely." He is right, and by his own standard from 29 Aug — a
+posture drawing is *large, clear and accurate in the app's own line, or absent
+until one is*. `PostureDiagram` was the drawn answer to that rule and fails
+it: a front-on silhouette cannot show right hand over left forearm (the whole
+ruling of step 3), cannot show where the gaze falls, and the two postures a
+picture teaches better than words — rukūʿ and sujūd — need the side view. What
+the block did carry was the screen: in both screenshots the Arabic sat below
+the fold, cut off under the Next bar, on the one screen whose job is the words.
+
+**Removed:** `PostureFigure` and `PostureDiagram` from `illustrations.tsx`
+(whose header now records all three decisions and their end), the diagram
+block and `postureChanged` logic from `guide/[id].tsx`, `content/prayer-images.ts`
+(the `require` map, empty since 29 Aug) and `content/drawn-postures.ts` (its
+script-readable shadow), and the "Posture illustrations — n/10 drawn" section
+of `content:audit`. The step's kicker — HANDS RAISED, STANDING — still names
+the position, translated and read aloud; it was captioning a picture and now
+stands alone beside the instruction.
+
+**The rule reverts to having no exception**: nothing in `illustrations.tsx`
+is a body. If posture pictures ever return they are content — photographs or
+commissioned side-view drawings, reviewed as a ruling is — and the old
+pipeline's shape is one `git show` away. Not something to draw in code again.
+
+Verified with eyes on web at 390: Fajr steps 2 and 3, the recitation now above
+the fold. `expo export` renders all routes. Ships by OTA.

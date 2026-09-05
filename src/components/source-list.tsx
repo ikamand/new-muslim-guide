@@ -175,6 +175,17 @@ function EvidenceBlock({
           {footnote.join(' · ')}
         </ThemedText>
       )}
+      {/*
+        The chain of transmission, where the publisher printed one. It used
+        to open the quotation in the verse rung — three lines of names before
+        the words — and now closes it in the note rung, so the reader meets
+        the words first and the provenance is still on the page.
+      */}
+      {text.isnad && (
+        <ThemedText type="arabicNote" themeColor="textSecondary" style={styles.evidenceIsnad}>
+          {text.isnad}
+        </ThemedText>
+      )}
     </View>
   );
 }
@@ -349,6 +360,10 @@ const styles = StyleSheet.create({
     paddingVertical: Spacing.two,
     gap: Spacing.two,
     borderRadius: Radius.small,
+  },
+  evidenceIsnad: {
+    textAlign: 'right',
+    writingDirection: 'rtl',
   },
   evidenceArabic: {
     /* size and face: the `arabicQuote` rung */

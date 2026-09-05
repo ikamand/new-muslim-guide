@@ -279,6 +279,7 @@ function Section({
         <TeachingSource
           variant="hero"
           arabic={heroEntry.text.arabic}
+          isnad={heroEntry.text.isnad}
           translation={heroEntry.text.translation}
           reference={formatSource(heroEntry.source)}
         />

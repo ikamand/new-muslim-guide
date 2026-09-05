@@ -9,84 +9,52 @@ these are suggestions to check, never citations to paste.
 
   The testimony of faith  (recitations.ts)
     لَا إِلَٰهَ إِلَّا اللَّهُ مُحَمَّدٌ رَسُولُ اللَّهِ
-      hadeethenc 66052  اتخذ خاتمًا من فضَّةٍ نقشه: محمَّدٌ رسول الله
-      hadeethenc 8345  يجمع الله الناس الأولين والآخرين في صعيد واحد، يسمعهم الداعي وينفذهم ا
-      hadeethenc 66360  بأبي أنت يا نبي الله، لا يجمع الله عليك موتتين، أما الموتة التي كتبت ع
+      search failed — Unexpected end of JSON input
   Phrase — As-salāmu ʿalaykum  (phrases.ts)
     السَّلَامُ عَلَيْكُمْ
-      hadeethenc 10945  صليت مع النبي صلى الله عليه وسلم، فكان يسلم عن يمينه: السلام عليكم ورح
-      hadeethenc 3587  جاء رجل إلى النبي صلى الله عليه وسلم فقال: السلام عليكم، فرد عليه ثم ج
-      hadeethenc 66100  كان رسول الله صلى الله عليه وسلم إذا أتى بابَ قومٍ لم يستقبل الباب من 
+      search failed — Unexpected end of JSON input
   Phrase — Jazāka-llāhu khayran  (phrases.ts)
     جَزَاكَ اللَّهُ خَيْرًا
-      hadeethenc 3298  عجبا لأمر المؤمن، إن أمره كله خير، وليس ذاك لأحد إلا للمؤمن
-      hadeethenc 66069  لا ‌يَتَمَنَّيَنَّ أحدُكم الموتَ من ضرٍّ أصابه
-      hadeethenc 65560  صلى رسول الله صلى الله عليه وسلم على جنازة، فحفظت من دعائه
+      search failed — Unexpected end of JSON input
   Phrase — Bāraka-llāhu fīk  (phrases.ts)
     بَارَكَ اللَّهُ فِيكَ
-      hadeethenc 10957  ما رفعك يا أبا حذيم؟
-      hadeethenc 65951  بارك الله لك، وبارك عليك، ‌وجمع ‌بينكما ‌في خير
-      hadeethenc 66011  مَن أطعمه الله طعامًا فليقل: اللهم بارك لنا فيه، وارزقنا خيرًا منه
+      search failed — Unexpected end of JSON input
   Phrase — Al-ḥamdu li-llāh  (phrases.ts)
     الْحَمْدُ لِلَّهِ
-      hadeethenc 65004  الطهور شطر الإيمان، والحمد لله تملأ الميزان، وسبحان الله والحمد لله تم
-      hadeethenc 66526  الطهور شطر الإيمان، والحمد لله تملأ الميزان، وسبحان الله والحمد لله تم
-      hadeethenc 3567  أفضل الذكر: لا إله إلا الله، وأفضل الدعاء: الحمد لله
+      search failed — Unexpected end of JSON input
   Phrase — In shāʾa-llāh  (phrases.ts)
     إِنْ شَاءَ اللَّهُ
-      hadeethenc 65800  حاصر النبي صلى الله عليه وسلم أهل الطائف فلم يفتحها
-      hadeethenc 65933  مَن حَلَفَ على يمينٍ فقال: إن ‌شاء ‌الله. فقد استثنى، فلا ‌حنث عليه
-      hadeethenc 65511  كان رسول الله صلى الله عليه وسلم إذا أفطر قال: ذهب الظمأ وابتلت العروق
+      search failed — Unexpected end of JSON input
   Phrase — Mā shāʾa-llāh  (phrases.ts)
     مَا شَاءَ اللَّهُ
-      hadeethenc 3352  لا تقولوا: ما شاء الله وشاء فلان، ولكن قولوا: ما شاء الله ثم شاء فلان
-      hadeethenc 5928  أن رجلا أتى النبي صلى الله عليه وسلم، فكلمه في بعض الأمر، فقال: ما شاء
-      hadeethenc 11280  كان رسول الله صلى الله عليه وسلم يصلي الضحى أربعا، ويزيد ما شاء الله
+      search failed — Unexpected end of JSON input
   Phrase — Subḥāna-llāh  (phrases.ts)
     سُبْحَانَ اللَّهِ
-      hadeethenc 5507  كلمتان خفيفتان على اللسان، ثقيلتان في الميزان، حبيبتان إلى الرحمن
-      hadeethenc 11234  صلى بنا المغيرة بن شعبة فنهض في الركعتين، قلنا: سبحان الله، قال: سبحان
-      hadeethenc 5477  الْبَاقِيَاتُ الصَّالِحَاتُ لَا إلَهَ إلَّا اللَّهُ وَسُبْحَانَ اللَّه
+      search failed — Unexpected end of JSON input
   Phrase — Astaghfiru-llāh  (phrases.ts)
     أَسْتَغْفِرُ اللَّهَ
-      hadeethenc 10947  اللهم أنت السلام، ومنك السلام، تباركت ذا الجلال والإكرام
-      hadeethenc 10576  من قال: أستغفر الله الذي لا إله إلا هو الحي القيوم وأتوب إليه، غفرت ذن
-      hadeethenc 4826  كانَ رسولُ اللهِ صلى الله عليه وسلم يُكْثِرُ أَنْ يَقُولَ في رُكُوعِهِ
+      search failed — Unexpected end of JSON input
   Phrase — Innā li-llāhi wa innā ilayhi rājiʿūn  (phrases.ts)
     إِنَّا لِلَّهِ وَإِنَّا إِلَيْهِ رَاجِعُونَ
-      hadeethenc 65332  لما أخرج النبي صلى الله عليه وسلم من مكة قال أبو بكر: أخرجوا نبيَّهم
-      hadeethenc 65772  ما من مسلم تصيبه مصيبة فيقول ما أمره الله: إنا لله وإنا إليه راجعون ال
-      hadeethenc 4313  للَّهُ أَفْرَحُ بِتَوْبَةِ عَبْدِهِ مِنْ أَحَدِكُمْ، سَقَطَ عَلَى بَعِ
+      search failed — Unexpected end of JSON input
   Phrase — Ṣalla-llāhu ʿalayhi wa sallam  (phrases.ts)
     صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ
-      hadeethenc 66000  أن جارًا لرسول الله صلى الله عليه وسلم ‌فارسيًّا كان طيبَ المَرَق
-      hadeethenc 66321  السُّفْلُ أرفق
-      hadeethenc 66182  أن رسول الله صلى الله عليه وسلم سئل عن الرقاب أيها أفضل؟
+      search failed — Unexpected end of JSON input
   Phrase — Raḍiya-llāhu ʿanhu  (phrases.ts)
     رَضِيَ اللَّهُ عَنْهُ
-      hadeethenc 66170  مَن أعمر أرضًا ليست لأحدٍ فهو أحق
-      hadeethenc 65838  مَن أصبح منكم اليوم صائمًا؟
-      hadeethenc 4300  سَقَيْتُ النبيَّ صلى الله عليه وسلم مِنْ زَمْزَمَ، فَشَرِبَ وهو قَائِم
+      search failed — Unexpected end of JSON input
   Phrase — Akhī · Ukhtī  (phrases.ts)
     أَخِي · أُخْتِي
-      hadeethenc 5919  نهى رسول الله صلى الله عليه وسلم أن يبيع حاضر لباد، ولا تناجشوا، ولا ي
-      hadeethenc 6077  إنها لو لم تكن ربيبتي في حجري، ما حلت لي؛ إنها لابنة أخي من الرضاعة، أ
-      hadeethenc 65985  ابن ‌أخت القوم ‌منهم
+      search failed — Unexpected end of JSON input
   Phrase — ʿĪd Mubārak  (phrases.ts)
     عِيد مُبَارَك
-      hadeethenc 65763  كان رسول الله صلى الله عليه وسلم يقرأ في العيدين وفي الجمعة بسبح والغا
-      hadeethenc 7200  أمرنا رسول الله صلى الله عليه وسلم أن نخرج في العيدين الْعَوَاتِقَ وَذ
-      hadeethenc 65495  شهران لا ينقصان، شهرا عيد: رمضان وذو الحجة
+      search failed — Unexpected end of JSON input
   Phrase — Taqabbala-llāhu minnā wa minkum  (phrases.ts)
     تَقَبَّلَ اللَّهُ مِنَّا وَمِنْكُمْ
-      hadeethenc 10573  قدم علينا أبو جمعة الأنصاري، قال: كنا مع رسول الله صلى الله عليه وسلم 
-      hadeethenc 65300  إن الله عز وجل أنزل: ومن لم يحكم بما أنزل الله فأولئك هم الكافرون
-      hadeethenc 66360  بأبي أنت يا نبي الله، لا يجمع الله عليك موتتين، أما الموتة التي كتبت ع
+      search failed — Unexpected end of JSON input
   Becoming Muslim — Say it  (guides)
     لَا إِلَٰهَ إِلَّا اللَّهُ مُحَمَّدٌ رَسُولُ اللَّهِ
-      hadeethenc 66052  اتخذ خاتمًا من فضَّةٍ نقشه: محمَّدٌ رسول الله
-      hadeethenc 8345  يجمع الله الناس الأولين والآخرين في صعيد واحد، يسمعهم الداعي وينفذهم ا
-      hadeethenc 66360  بأبي أنت يا نبي الله، لا يجمع الله عليك موتتين، أما الموتة التي كتبت ع
+      search failed — Unexpected end of JSON input
 
 11 text(s) cite a verse that commands the act without wording it.
 Not compared, on purpose — and each still needs a citation for its wording:

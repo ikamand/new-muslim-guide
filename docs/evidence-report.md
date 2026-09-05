@@ -11,6 +11,8 @@ supplied each line of it.
 | Translation from HadeethEnc (published terms) | 64 |
 | Translation from Darussalam (quoted) | 117 |
 | Arabic with no translation | 0 |
+| Chain of transmission moved to the foot | 115 |
+| Chain kept in place (no anchor to cut on) | 2 |
 | Nothing found | 0 |
 
 ## What "confirmed" means here
@@ -28,6 +30,19 @@ the same narration than the other.
 
 It does **not** mean the narration is the right evidence for the claim it sits
 under. That is substance and stays with a reviewer.
+
+## The chain, and where it went
+
+The primary prints each narration as the collection prints it, opening with
+the isnad. On screen that put three lines of names in the verse rung before
+the Prophet ﷺ said anything (the September audit, 5 Sep 2026). Where the
+text opens with a transmission verb and the Prophet ﷺ is named, the chain up
+to the last "from so-and-so" before that is moved to `isnad` and shown at
+the foot of the block in the note rung; the companion who reports the words
+stays at the head. Nothing is deleted. A narration the rule cannot anchor on
+is left whole and listed below.
+- bukhari:350 — the Prophet ﷺ is never named
+- bukhari:1090 — the Prophet ﷺ is never named
 
 The window that decides this starts a third of the way into the shorter text.
 Two unrelated narrations share their opening, the narrator and then "a man came

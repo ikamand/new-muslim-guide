@@ -168,12 +168,15 @@ export function TeachingAside({
  */
 export function TeachingSource({
   arabic,
+  isnad,
   translation,
   reference,
   variant = 'quote',
   style,
 }: {
   arabic: string;
+  /** The chain of transmission the publisher printed before the words; see `EvidenceText`. */
+  isnad?: string;
   /**
    * Absent where no publisher's English may be carried for this narration —
    * see `EvidenceText`. The Arabic still prints; a missing translation is not
@@ -225,6 +228,16 @@ export function TeachingSource({
           {reference.toUpperCase()}
         </ThemedText>
       </View>
+      {/*
+        The chain, after the words and in the note rung. It opened the block
+        in the lead rung until 5 Sep 2026 — three lines of names before the
+        Prophet ﷺ said anything, on the page whose job is the words.
+      */}
+      {isnad ? (
+        <ThemedText type="arabicNote" themeColor="textSecondary" style={styles.arabic}>
+          {isnad}
+        </ThemedText>
+      ) : null}
     </View>
   );
 }

@@ -416,6 +416,77 @@ const searchWindows = (arabic) => {
  * translation falls back to the primary. Accepting a false one prints the
  * wrong hadith. The two errors are not the same size.
  */
+/**
+ * The matn, and the chain in front of it.
+ *
+ * The primary prints what the collection prints, and a collection opens
+ * every narration with its isnad: "so-and-so told us, from so-and-so, from
+ * so-and-so" — three lines of names in the largest Arabic rung on the page
+ * before the Prophet ﷺ says anything. 110 of the 117 texts the primary
+ * supplied did that (the September audit, 5 Sep 2026). HadeethEnc prints the
+ * matn alone, which is why it is preferred where it has the narration; this
+ * does the same for the rest.
+ *
+ * The cut is conservative and mechanical. It applies only to a text that
+ * OPENS with a transmission verb — ḥaddathanā, akhbaranā, ḥaddathanī — and it
+ * keeps the last "ʿan so-and-so" before the Prophet ﷺ is first named, so the
+ * companion who reports the words stays on screen: "from ʿUbādah ibn
+ * aṣ-Ṣāmit, that the Messenger of Allah ﷺ said…". A narration that never
+ * names the Prophet — a companion's own statement — is left whole and listed
+ * in the report, because the rule has nothing to anchor on and guessing would
+ * be editing. The chain that was cut is kept beside the text as `isnad`, so
+ * nothing is lost and the sheet can still show it.
+ */
+/*
+  The tests run on a skeleton — every harakah, shadda, tatweel and bidi mark
+  stripped — because the corpus writes "ḥaddathanā" with its marks in an
+  order no regex should have to know. `skeleton` keeps a map from each
+  skeleton index back to the original, so the cut lands on the real text.
+*/
+const ARABIC_MARK = /[\u0610-\u061A\u064B-\u065F\u0670\u06D6-\u06ED\u0640\u200E\u200F\u202A-\u202E]/;
+function bareWithMap(text) {
+  let plain = '';
+  const back = [];
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+    if (ARABIC_MARK.test(ch)) continue;
+    plain += ch;
+    back.push(i);
+  }
+  back.push(text.length);
+  return { plain, back };
+}
+const TRANSMISSION_OPENER = /^(?:و)?(?:حدثنا|حدثني|أخبرنا|أخبرني|اخبرنا|اخبرني)/;
+const PROPHET_NAMED = /(?:رسول\s+الله|النبي|صلى الله عليه وسلم|ﷺ)/;
+const REPORTER_CONNECTOR = /(?:^|[\s،,])(عن|سمعت|سمع)\s/g;
+const TRANSMISSION_VERB = /(?:^|[\s،,])((?:و)?(?:حدثنا|حدثني|أخبرنا|أخبرني))\s/g;
+
+function splitIsnad(arabic) {
+  const text = String(arabic).trim();
+  const { plain, back } = bareWithMap(text);
+  if (!TRANSMISSION_OPENER.test(plain)) return { matn: text };
+  const named = PROPHET_NAMED.exec(plain);
+  if (!named) return { matn: text, unsplit: 'the Prophet ﷺ is never named' };
+  const head = plain.slice(0, named.index);
+  /*
+    The last reporter before the Prophet ﷺ is named — but not the "ʿan" that
+    introduces the Prophet himself ("ʿan an-Nabī"), which is adjacent to the
+    name and would cut the companion off with the chain.
+  */
+  const adjacent = (m) => m.index + m[0].length >= named.index - 1;
+  let cut = -1;
+  for (const m of head.matchAll(REPORTER_CONNECTOR)) if (!adjacent(m)) cut = m.index + m[0].indexOf(m[1]);
+  if (cut < 0) {
+    for (const m of head.matchAll(TRANSMISSION_VERB)) if (!adjacent(m)) cut = m.index + m[0].indexOf(m[1]);
+  }
+  if (cut <= 0) return { matn: text, unsplit: 'no reporter found before the Prophet ﷺ is named' };
+  const at = back[cut];
+  const isnad = text.slice(0, at).trim().replace(/[،,]\s*$/, '');
+  const matn = text.slice(at).trim();
+  if (isnad.split(/\s+/).length < 2 || matn.split(/\s+/).length < 4) return { matn: text, unsplit: 'nothing to cut' };
+  return { matn, isnad };
+}
+
 const SHARED_RUN = 60;
 
 /** Where the window may start: past the formulaic opening of the shorter text. */
@@ -684,8 +755,22 @@ for (const [key, source] of hadithCites) {
     continue;
   }
 
+  /* The primary prints the chain; the screen shows the words. See `splitIsnad`. */
+  let isnad;
+  if (arabicFrom !== 'HadeethEnc.com') {
+    const split = splitIsnad(arabic);
+    if (split.isnad) {
+      arabic = split.matn;
+      isnad = split.isnad;
+      entry.isnadCut = true;
+    } else if (split.unsplit) {
+      entry.isnadKept = split.unsplit;
+    }
+  }
+
   hadith[key] = {
     arabic,
+    ...(isnad ? { isnad } : {}),
     ...(translation ? { translation } : {}),
     ...(attribution ? { attribution } : {}),
     ...(grade ? { grade } : {}),
@@ -749,7 +834,10 @@ const file = `/**
  */
 
 export type EvidenceText = {
+  /** The words: the matn. Where the publisher printed the chain first, it is in \`isnad\`. */
   arabic: string;
+  /** The chain of transmission the publisher printed before \`arabic\`, kept whole. */
+  isnad?: string;
   /** Absent where no source published a translation this app may carry. */
   translation?: string;
   /** "Narrated by Al-Bukhāri". */
@@ -792,6 +880,8 @@ supplied each line of it.
 | Translation from HadeethEnc (published terms) | ${clean} |
 | Translation from Darussalam (quoted) | ${darussalam} |
 | Arabic with no translation | ${arabicOnly} |
+| Chain of transmission moved to the foot | ${report.filter((e) => e.isnadCut).length} |
+| Chain kept in place (no anchor to cut on) | ${report.filter((e) => e.isnadKept).length} |
 | Nothing found | ${missing.length} |
 
 ## What "confirmed" means here
@@ -809,6 +899,18 @@ the same narration than the other.
 
 It does **not** mean the narration is the right evidence for the claim it sits
 under. That is substance and stays with a reviewer.
+
+## The chain, and where it went
+
+The primary prints each narration as the collection prints it, opening with
+the isnad. On screen that put three lines of names in the verse rung before
+the Prophet ﷺ said anything (the September audit, 5 Sep 2026). Where the
+text opens with a transmission verb and the Prophet ﷺ is named, the chain up
+to the last "from so-and-so" before that is moved to \`isnad\` and shown at
+the foot of the block in the note rung; the companion who reports the words
+stays at the head. Nothing is deleted. A narration the rule cannot anchor on
+is left whole and listed below.
+${report.filter((e) => e.isnadKept).map((e) => `- ${e.key} — ${e.isnadKept}`).join('\n') || '- none'}
 
 The window that decides this starts a third of the way into the shorter text.
 Two unrelated narrations share their opening, the narrator and then "a man came

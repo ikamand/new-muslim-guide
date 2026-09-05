@@ -3456,3 +3456,39 @@ Verified on web: adhkar/morning step 1, wudu steps 1 and 10, Today without
 location, Ask, the Qur'an list, help/prayer, the after-prayer page, the pray
 chooser's citation, Fajr's bow. `tsc`, `style:check`, `hisn:check`,
 `adhkar:check` clean. OTA.
+
+---
+
+## 5 Sep 2026 — The matn on the page, the chain at its foot ✅
+
+The September audit's first finding: 110 of the 117 narrations the hadith
+corpus supplied opened with the isnad — "ḥaddathanā ʿAlī ibn ʿAbdillāh, qāla
+ḥaddathanā Sufyān…" — in the largest Arabic rung on the teaching page, so
+Al-Fatihah's framed answer was six lines of names and then the eleven words
+the ruling rests on. HadeethEnc prints the matn alone, which is why it was
+already preferred where it had the narration; the other 117 came from the
+corpus as printed.
+
+**Built, in `scripts/generate-evidence.mjs`:** `splitIsnad`. On a text that
+opens with a transmission verb (ḥaddathanā, akhbaranā, ḥaddathanī), cut at
+the last "ʿan so-and-so" before the Prophet ﷺ is first named — so the
+companion who reports the words stays at the head: "from ʿUbādah ibn
+aṣ-Ṣāmit, that the Messenger of Allah ﷺ said…". The tests run on a
+skeleton with every harakah, shadda and bidi mark stripped, mapped back to
+the real text for the cut. Nothing is deleted: the chain goes to a new
+`isnad` field on `EvidenceText`, and the evidence block and the framed hero
+print it after the words in the note rung. A narration that never names the
+Prophet ﷺ is left whole and listed in `docs/evidence-report.md`: 115 cut,
+2 kept (Bukhari 350 and 1090, both companions' own reports).
+
+**Not a change to any source text.** The publisher's text is printed in
+full, in two parts, with the publisher still named on it. The English is
+untouched — Darussalam's "Narrated X:" opening is one line and reads as the
+name-line it is.
+
+**Verified:** twelve cuts read by eye (Muslim 538a, Bukhari 6193, Abu Dawud
+1422, Bukhari 73, 555, 1923, 1089, 13, Ibn Majah 2443, Bukhari 185, 3934,
+Abu Dawud 1269); Al-Fatihah's frame on web in both themes; the evidence
+sheet on Fajr step 2; `content:verify` clean. One known imperfection: Bukhari
+13 is printed with two chains and the second still sits inside the matn.
+OTA.

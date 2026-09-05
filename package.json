@@ -85,6 +85,7 @@
     "nav:check": "node scripts/navigation-check.mjs",
     "postinstall": "patch-package",
     "awqat:fit": "npx tsx scripts/awqat-fit-check.ts",
+    "compass:check": "npx tsx scripts/compass-check.ts",
     "quran:corpus": "node scripts/fetch-quran-corpus.mjs",
     "hadeethenc:corpus": "node scripts/fetch-hadeethenc-corpus.mjs"
   },

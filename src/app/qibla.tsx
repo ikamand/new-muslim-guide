@@ -2,6 +2,7 @@ import * as Location from 'expo-location';
 import { Stack } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import Animated, { Easing, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 
 import { Glyph } from '@/components/illustrations';
 import { ThemedText } from '@/components/themed-text';
@@ -10,6 +11,7 @@ import { useLocale } from '@/hooks/use-locale';
 import { isUnverified, useLocation } from '@/hooks/use-location';
 import { useTheme } from '@/hooks/use-theme';
 import type { UIKey } from '@/i18n/ui';
+import { settleHeading, shortestTurn } from '@/lib/compass';
 import { qiblaBearing } from '@/lib/prayer-times';
 
 /**
@@ -37,6 +39,16 @@ import { qiblaBearing } from '@/lib/prayer-times';
  *
  * `isUnverified` is the test, and it is deliberately narrower than `isStale` —
  * see the note on it in `use-location.tsx`.
+ *
+ * ## Why the needle is not React state
+ *
+ * It was, and every compass reading — twenty a second — re-rendered the
+ * whole screen and drew the sensor's noise straight onto the needle, which
+ * twitched while the phone lay still (Iyad, 5 Sep 2026: "it does jitter and
+ * swing"). Now each reading is settled by `settleHeading` and written to a
+ * shared value that only the needle's transform reads, so the screen renders
+ * when something a reader can see changes: the first reading arriving, or the
+ * calibration level crossing the line.
  */
 
 /** iOS reports 0–3; below 2 the reading can be tens of degrees out. */
@@ -70,20 +82,50 @@ export default function QiblaScreen() {
     and nothing here needs to notice a day ticking over.
   */
   const [now] = useState(() => Date.now());
-  const [heading, setHeading] = useState<number | null>(null);
+  const [hasHeading, setHasHeading] = useState(false);
   const [accuracy, setAccuracy] = useState<number>(0);
+  /*
+    The needle's rotation, in degrees clockwise from up. Bearing minus the
+    settled heading — kept off React state on purpose; see the header.
+
+    Unwrapped: it counts on past 360 rather than snapping back to 0, because
+    the value is animated between readings, and an animation from 359 to 1
+    would take the long way round the dial.
+  */
+  const rotation = useSharedValue(0);
+  const bearing = coords ? qiblaBearing(coords) : 0;
 
   useEffect(() => {
     if (!coords) return;
 
     let subscription: Location.LocationSubscription | undefined;
     let active = true;
+    let settled: number | null = null;
+    let shown = rotation.value;
+    let lastAt = 0;
 
     Location.watchHeadingAsync((reading) => {
       if (!active) return;
       // `trueHeading` is -1 without location permission; magnetic north is the
       // only thing left then, and it can be over ten degrees out.
-      setHeading(reading.trueHeading >= 0 ? reading.trueHeading : reading.magHeading);
+      const raw = reading.trueHeading >= 0 ? reading.trueHeading : reading.magHeading;
+      // The reading carries no timestamp, so arrival time stands in for it.
+      const at = Date.now();
+      const gap = lastAt ? at - lastAt : 0;
+      settled = settleHeading(settled, raw, gap);
+      lastAt = at;
+      shown += shortestTurn(shown, bearing - settled);
+      /*
+        Glide to the new position over the interval the sensor is actually
+        reporting at, so a phone that delivers five readings a second draws
+        a turn as motion rather than as five jumps. Capped so a stall in the
+        sensor does not become a slow-motion needle when it wakes.
+      */
+      rotation.value = withTiming(shown, {
+        duration: Math.min(Math.max(gap, 40), 200),
+        easing: Easing.linear,
+      });
+      setHasHeading(true);
       setAccuracy(reading.accuracy);
     })
       .then((sub) => {
@@ -91,14 +133,30 @@ export default function QiblaScreen() {
         else sub.remove();
       })
       .catch(() => {
-        if (active) setHeading(null);
+        if (active) setHasHeading(false);
       });
 
     return () => {
       active = false;
       subscription?.remove();
     };
-  }, [coords]);
+  }, [coords, bearing, rotation]);
+
+  /*
+    No compass: the arrow shows the bearing itself, as the note under the
+    dial has always claimed. Left at zero it pointed north whatever the
+    number above said — caught on the web build, which never has a compass.
+  */
+  useEffect(() => {
+    if (coords && !hasHeading) rotation.value = bearing;
+  }, [coords, hasHeading, bearing, rotation]);
+
+  const needleStyle = useAnimatedStyle(() => ({
+    transform: [{ rotate: `${rotation.value}deg` }],
+  }));
+  const kaabaStyle = useAnimatedStyle(() => ({
+    transform: [{ rotate: `${-rotation.value}deg` }],
+  }));
 
   if (!coords) {
     /*
@@ -136,9 +194,7 @@ export default function QiblaScreen() {
     );
   }
 
-  const bearing = qiblaBearing(coords);
-  const rotation = heading === null ? 0 : bearing - heading;
-  const unreliable = heading !== null && accuracy < TRUSTWORTHY_ACCURACY;
+  const unreliable = hasHeading && accuracy < TRUSTWORTHY_ACCURACY;
   const unverified = isUnverified(location);
 
   return (
@@ -193,7 +249,7 @@ export default function QiblaScreen() {
           styles.dial,
           { backgroundColor: theme.backgroundElement, borderColor: theme.goldSoft },
         ]}>
-        <View style={[styles.needle, { transform: [{ rotate: `${rotation}deg` }] }]}>
+        <Animated.View style={[styles.needle, needleStyle]}>
           <View style={[styles.needleStem, { backgroundColor: theme.border }]} />
           <View style={[styles.needleHead, { borderBottomColor: theme.accent }]} />
           {/*
@@ -201,14 +257,14 @@ export default function QiblaScreen() {
             stays upright while the arrow swings — the arrow does not point
             somewhere abstract, it points at a building.
           */}
-          <View style={[styles.needleKaaba, { transform: [{ rotate: `${-rotation}deg` }] }]}>
+          <Animated.View style={[styles.needleKaaba, kaabaStyle]}>
             <Glyph name="kaaba" color={theme.accent} size={22} />
-          </View>
-        </View>
+          </Animated.View>
+        </Animated.View>
         <View style={[styles.hub, { backgroundColor: theme.accent }]} />
       </View>
 
-      {heading === null && (
+      {!hasHeading && (
         <ThemedText type="small" themeColor="textSecondary" style={styles.note}>
           {t('qibla.noCompass')}
         </ThemedText>

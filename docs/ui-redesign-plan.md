@@ -3326,3 +3326,35 @@ pipeline's shape is one `git show` away. Not something to draw in code again.
 
 Verified with eyes on web at 390: Fajr steps 2 and 3, the recitation now above
 the fold. `expo export` renders all routes. Ships by OTA.
+
+---
+
+## 5 Sep 2026 — The qibla needle settles ✅
+
+Iyad, on the compass: "the needle does not settle and keeps jumping … it does
+need to be a lot smoother." The cause was in `qibla.tsx`: every reading from
+`watchHeadingAsync` — twenty-odd a second — was written to React state and
+drawn raw, so the needle showed the magnetometer's noise and the whole screen
+re-rendered with it.
+
+**Built:** `src/lib/compass.ts` — `settleHeading`, a first-order low-pass on
+the circle (359° → 1° is a two-degree step, not a spin), paced by the clock
+rather than the reading count, with a time constant that slides from 1200ms
+when the reading is within a few degrees of the needle (noise, eased) to
+250ms when it is fifteen or more away (a real turn, followed). The needle is
+a Reanimated shared value driven straight from the sensor callback, gliding
+between readings over the sensor's own interval; React state now changes only
+when the first reading arrives or the calibration level crosses the line.
+With no compass at all the needle now shows the bearing, as the note under
+the dial has always claimed — it was pinned north.
+
+**Check:** `npm run compass:check` feeds the filter a synthetic compass and
+fails if it does not settle. Its numbers, for the record: ±6° noise at 20Hz
+leaves the needle wandering under 1.9° (2.6px per degree at the tip); a
+quarter turn is within 10° in 550ms and within 2° in 1.8s; crossing north
+never steps more than 4°.
+
+**Not verified:** on a phone. Web has no compass, so what was seen is the
+no-heading path rotated to the bearing and every route rendering. The
+constants are a first guess at real magnetometer noise and are one place to
+tune if the needle is still lively or now feels slow. Ships by OTA.

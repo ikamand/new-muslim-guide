@@ -1,4 +1,3 @@
-import { ref } from './model';
 import { hadith } from './sources';
 import type { Pillar } from './types';
 
@@ -35,7 +34,6 @@ export const IMAN_PILLARS: Pillar[] = [
     summary: 'That Allah is one, without partner, and that nothing else deserves worship.',
     detail:
       'The other five sit inside this one. It is not only accepting that God exists. It is accepting that He is one, that nothing shares His authority, and that worship is owed to Him alone. Everything you say in prayer is a restatement of it.',
-    teaches: ref('guide', 'fajr'),
     meta: {
       category: 'belief',
       difficulty: 'foundational',

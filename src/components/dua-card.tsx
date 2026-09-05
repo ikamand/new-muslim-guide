@@ -85,7 +85,7 @@ export function DuaCard() {
       <ThemedText type="cardTitle">{occasion.english || occasion.arabic}</ThemedText>
 
       <ThemedText type="arabicLead" style={styles.arabic} numberOfLines={long ? 3 : undefined}>
-        <MarkedText text={line.arabic} spans={line.emphasis} colour={theme.accent} />
+        <MarkedText text={line.arabic} spans={line.emphasis} colour={theme.gold} />
       </ThemedText>
 
       {line.english ? (
@@ -93,7 +93,7 @@ export function DuaCard() {
           type="small"
           themeColor="textSecondary"
           numberOfLines={long ? 3 : undefined}>
-          <MarkedText text={line.english} spans={line.emphasis} colour={theme.accent} bold />
+          <MarkedText text={line.english} spans={line.emphasis} colour={theme.gold} bold />
         </ThemedText>
       ) : null}
 

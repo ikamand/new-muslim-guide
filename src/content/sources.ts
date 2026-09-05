@@ -43,7 +43,7 @@ export const HADITH_COLLECTIONS = {
   bukhari: { name: 'Sahih al-Bukhari', authenticThroughout: true, sunnahSlug: 'bukhari' },
   muslim: { name: 'Sahih Muslim', authenticThroughout: true, sunnahSlug: 'muslim' },
   'abu-dawud': { name: 'Sunan Abi Dawud', authenticThroughout: false, sunnahSlug: 'abudawud' },
-  tirmidhi: { name: 'Jami` at-Tirmidhi', authenticThroughout: false, sunnahSlug: 'tirmidhi' },
+  tirmidhi: { name: 'Jāmiʿ at-Tirmidhi', authenticThroughout: false, sunnahSlug: 'tirmidhi' },
   nasai: { name: 'Sunan an-Nasa`i', authenticThroughout: false, sunnahSlug: 'nasai' },
   'ibn-majah': { name: 'Sunan Ibn Majah', authenticThroughout: false, sunnahSlug: 'ibnmajah' },
   ahmad: { name: 'Musnad Ahmad', authenticThroughout: false, sunnahSlug: 'ahmad' },

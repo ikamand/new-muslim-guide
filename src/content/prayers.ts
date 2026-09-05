@@ -103,7 +103,7 @@ type PrayerSpec = {
    * "whoever prays twelve rakʿahs voluntarily in a day, other than the
    * obligatory, Allah builds him a house in Paradise". That narration states
    * the number and says nothing about which prayers; the breakdown across the
-   * five is **Jami` at-Tirmidhi 414** — two before Fajr, four before Dhuhr and
+   * five is **Jāmiʿ at-Tirmidhi 414** — two before Fajr, four before Dhuhr and
    * two after, two after Maghrib, two after Isha. Both read from the
    * collections on 22 Aug 2026. `pray.tsx` carries the caveat on Tirmidhi's
    * chain.

@@ -50,8 +50,6 @@ export function AskBar() {
       <ThemedText type="small" themeColor="textSecondary" style={styles.placeholder}>
         {t('ask.placeholder')}
       </ThemedText>
-      <View style={[styles.divider, { backgroundColor: theme.goldSoft }]} />
-      <Ionicons name="scan-outline" size={18} color={theme.textSecondary} />
     </PressableLink>
   );
 }
@@ -77,10 +75,5 @@ const styles = StyleSheet.create({
   },
   placeholder: {
     flex: 1,
-  },
-  divider: {
-    width: StyleSheet.hairlineWidth,
-    alignSelf: 'stretch',
-    marginVertical: Spacing.two,
   },
 });

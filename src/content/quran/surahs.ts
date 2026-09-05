@@ -36,7 +36,37 @@ export { JUZ30_SOURCE } from './juz30';
  * Al-Fatiha, then backwards through juz 30. Not shortest-first, which the data
  * contradicts — 110 and 103 are both shorter than 114.
  */
-export const LEARNING_ORDER: readonly Surah[] = [AL_FATIHA, ...[...JUZ_30].reverse()];
+/**
+ * The names as this app writes them.
+ *
+ * `juz30.ts` is generated and carries api.quran.com's labels, which mix three
+ * transliteration conventions in one list — a straight apostrophe for ʿayn in
+ * "Al-'Asr" where every other screen writes ʿAsr, a doubled vowel in
+ * "Ad-Duhaa", and title case that stops halfway through "The Small
+ * kindnesses". A name is not a quotation, so it is corrected here, by hand,
+ * with the generated file left exactly as it came over the wire. Only
+ * spelling and capitalisation change; no name or meaning is re-translated.
+ */
+const HOUSE_NAMES: Readonly<Record<number, Partial<Pick<Surah, 'name' | 'meaning'>>>> = {
+  79: { name: 'An-Naziʿat', meaning: 'Those Who Drag Forth' },
+  80: { name: 'ʿAbasa' },
+  86: { meaning: 'The Nightcomer' },
+  87: { name: 'Al-Aʿla' },
+  93: { name: 'Ad-Duha' },
+  96: { name: 'Al-ʿAlaq' },
+  100: { name: 'Al-ʿAdiyat' },
+  101: { name: 'Al-Qariʿah' },
+  102: { meaning: 'The Rivalry in World Increase' },
+  103: { name: 'Al-ʿAsr' },
+  107: { name: 'Al-Maʿun', meaning: 'The Small Kindnesses' },
+};
+
+function housed(surah: Surah): Surah {
+  const fix = HOUSE_NAMES[surah.number];
+  return fix ? { ...surah, ...fix } : surah;
+}
+
+export const LEARNING_ORDER: readonly Surah[] = [AL_FATIHA, ...[...JUZ_30].reverse()].map(housed);
 
 export function getSurah(number: number): Surah | undefined {
   return LEARNING_ORDER.find((surah) => surah.number === number);

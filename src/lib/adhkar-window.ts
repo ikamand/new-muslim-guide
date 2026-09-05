@@ -64,17 +64,32 @@ export type WindowState = {
 };
 
 /**
+ * Without prayer times, the clock is the only thing the app has. These spans
+ * sit inside the unions below for anywhere people live, so the offer is never
+ * outside a window a reader would recognise — it is just less precise about
+ * the edges. Until 5 Sep 2026 no times meant no sitting, and Today showed a
+ * different card with a different name for the same thing.
+ */
+function clockWindow(now: Date): WindowState {
+  const hour = now.getHours();
+  if (hour >= 5 && hour < 11) return { window: 'morning' };
+  if (hour >= 16 && hour < 21) return { window: 'evening' };
+  if (hour >= 21 || hour < 4) return { window: 'night' };
+  return { window: null };
+}
+
+/**
  * The window `now` falls in, or `null` when none is open.
  *
  * `null` is a real answer, not a failure: mid-morning through to ʿAsr belongs
  * to no sitting, and roughly half the waking day is like that. The screen
  * shows what you are learning instead of inventing a session for the hour.
  *
- * Returns `null` with no times at all, which is what happens before location
- * is granted. The tab has to work in that state, so it must not be special.
+ * With no times at all — before location is granted — falls back to the
+ * clock, above. The tab has to work in that state, so it must not be special.
  */
 export function windowAt(today: DayTimes | null, now: Date): WindowState {
-  if (!today) return { window: null };
+  if (!today) return clockWindow(now);
 
   const at = (id: string) => today.prayers.find((prayer) => prayer.id === id);
   const fajr = at('fajr');

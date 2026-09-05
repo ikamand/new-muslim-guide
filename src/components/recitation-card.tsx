@@ -72,8 +72,9 @@ export function RecitationCard({
         </>
       )}
 
+      {/* textSecondary, not accent: lapis is the pressable colour and this is not pressable. */}
       {recitation.times && (
-        <ThemedText type="small" themeColor="accent">
+        <ThemedText type="small" themeColor="textSecondary">
           {recitation.times}
         </ThemedText>
       )}

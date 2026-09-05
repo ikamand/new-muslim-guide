@@ -207,29 +207,6 @@ export default function AskScreen() {
           contentContainerStyle={styles.content}
           keyboardShouldPersistTaps="handled"
           keyboardDismissMode="on-drag">
-          {/*
-            Present so the placement can be judged, deliberately not pressable
-            so nobody gets a dead tap. The marker comes off with the scanner.
-          */}
-          <View
-            style={[
-              styles.scanRow,
-              { backgroundColor: theme.backgroundElement, borderColor: theme.goldSoft },
-            ]}>
-            <Ionicons name="scan-outline" size={22} color={theme.textSecondary} />
-            <View style={styles.scanText}>
-              <ThemedText type="smallBold">{t('ask.scan')}</ThemedText>
-              <ThemedText type="caption" themeColor="textSecondary">
-                {t('ask.scanDescription')}
-              </ThemedText>
-            </View>
-            <View style={[styles.pill, { backgroundColor: theme.accentMuted }]}>
-              <ThemedText type="caption" themeColor="accent">
-                {t('ask.soon')}
-              </ThemedText>
-            </View>
-          </View>
-
           <ThemedText
             type="smallBold"
             themeColor="textSecondary"
@@ -337,24 +314,6 @@ const styles = StyleSheet.create({
     padding: Spacing.four,
     paddingTop: Spacing.two,
     gap: Spacing.two,
-  },
-  scanRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: Spacing.three,
-    padding: Spacing.three,
-    borderRadius: Radius.medium,
-    borderWidth: StyleSheet.hairlineWidth,
-    marginBottom: Spacing.three,
-  },
-  scanText: {
-    flex: 1,
-    gap: 2,
-  },
-  pill: {
-    paddingHorizontal: Spacing.two,
-    paddingVertical: Spacing.one,
-    borderRadius: 999,
   },
   sectionTitle: {
     textTransform: 'uppercase',

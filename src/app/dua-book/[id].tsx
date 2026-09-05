@@ -161,11 +161,11 @@ export default function DuaBookOccasionScreen() {
           <ThemedText
             type={step.line.kind === 'quoted' ? 'arabicLead' : 'arabicQuote'}
             style={styles.arabic}>
-            <MarkedText text={step.arabic} spans={step.emphasis} colour={theme.accent} />
+            <MarkedText text={step.arabic} spans={step.emphasis} colour={theme.gold} />
           </ThemedText>
           {step.english ? (
             <ThemedText type="default" themeColor="textSecondary">
-              <MarkedText text={step.english} spans={step.emphasis} colour={theme.accent} bold />
+              <MarkedText text={step.english} spans={step.emphasis} colour={theme.gold} bold />
             </ThemedText>
           ) : null}
         </View>

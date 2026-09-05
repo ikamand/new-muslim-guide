@@ -6,9 +6,14 @@ import { Text, type TextStyle } from 'react-native';
  * Hisn al-Muslim brackets a wording that some narrations of a hadith carry and
  * the base one does not — `[بِسْمِ اللَّهِ]` opening the duʿa for the bathroom,
  * `[ثلاثاً]` after a dhikr. Those brackets are stripped from the text on
- * Iyad's instruction, and the accent colour takes over the job they were
+ * Iyad's instruction, and a colour takes over the job they were
  * doing: without it the app would fold an optional addition silently into the
  * duʿa, which is a change to what the text says rather than to how it looks.
+ *
+ * The colour is gold, since 5 Sep 2026. It was lapis — the app's one pressable
+ * colour — and bold lapis in the middle of an English sentence read as a link
+ * that did nothing. Gold is illumination and never a control, and a wording
+ * some narrations carry is closer to a rubric than to a door.
  *
  * ⚠️ A bare `Text`, never a `ThemedText`, for the marked run. React Native
  * nests text styles, but `ThemedText` always applies a `type`, defaulting to a

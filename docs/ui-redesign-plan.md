@@ -3415,3 +3415,44 @@ dark. All 40 routes export. Ships by OTA — the list is an asset.
 **What this commits to:** 548 KB more bundle, and a CC BY credit. Somebody
 outside every listed city picks the nearest and gets times a minute or two
 out; the screen names the city so they can see that.
+
+---
+
+## 5 Sep 2026 — The audit sweep: content placement and the palette's own rules ✅
+
+Nine small findings from the September audit, each against a rule already
+written down, built together and verified on web:
+
+- **The morning sitting no longer opens on the compiler's preface.** Line
+  1269191 of Hisn was `recited: false`, which the reader drew as step 1 of 26
+  with "Something to do. Tap to continue" under it. It is now `omit`, like the
+  (ثلاث مرات) label row, and the caption on real instructions reads "Do
+  this, then continue".
+- **Wudu's nullifiers moved from step 1 to step 10.** Three notes about what
+  breaks wudu sat under "Intend", at the tap; they now sit under "Finish",
+  after "You are now ready to pray", where the reader can use them.
+- **Jāmiʿ at-Tirmidhi** — `sources.ts` carried a backtick for the ʿayn and
+  every citation line printed it.
+- **Surah names to one convention**, in `HOUSE_NAMES` in `quran/surahs.ts`
+  rather than in the generated file: ʿayn as ʿ (Al-ʿAsr, Al-Maʿun, ʿAbasa…),
+  Ad-Duha, and three meanings with their capitalisation finished. Spelling
+  only; nothing re-translated.
+- **Lapis only on what is pressable.** "Three times" and "Once to the right,
+  then once to the left" under the guide's recitations were accent and not
+  tappable; they are textSecondary. Hisn's bracketed alternatives were bold
+  lapis inside English sentences and read as links; they are gold, which the
+  palette defines as never a control.
+- **One chevron.** help/[topic] used → in lapis where every row in the app
+  uses › in gold; the Pillars "The app teaches this" pill says › too.
+- **The scanner is gone from the bar** ("Ask a question…") and the "Soon"
+  card from the sheet. It ships when it exists.
+- **One card for a sitting on Today.** Without prayer times `windowAt`
+  returned no window, so Today showed the duʿa card ("Adhkār of sleep", no
+  button) where with times it showed the session card ("Before sleep · 17 to
+  say · Start"). It now falls back to the clock — 5–11 morning, 16–21 evening,
+  21–4 night — spans inside the unions the times would give anywhere.
+
+Verified on web: adhkar/morning step 1, wudu steps 1 and 10, Today without
+location, Ask, the Qur'an list, help/prayer, the after-prayer page, the pray
+chooser's citation, Fajr's bow. `tsc`, `style:check`, `hisn:check`,
+`adhkar:check` clean. OTA.

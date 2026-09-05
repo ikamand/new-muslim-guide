@@ -215,7 +215,7 @@ export default function AdhkarSessionScreen() {
             <ThemedText
               type={step.line.kind === 'quoted' ? 'arabicLead' : 'arabicQuote'}
               style={styles.arabic}>
-              <MarkedText text={arabic} spans={emphasis} colour={theme.accent} />
+              <MarkedText text={arabic} spans={emphasis} colour={theme.gold} />
             </ThemedText>
             {/*
               The book's own evening substitution, shown beside the morning
@@ -248,7 +248,7 @@ export default function AdhkarSessionScreen() {
                   <View style={[styles.dividerRule, { backgroundColor: theme.goldSoft }]} />
                 </View>
                 <ThemedText type="default" themeColor="textSecondary">
-                  <MarkedText text={english} spans={emphasis} colour={theme.accent} bold />
+                  <MarkedText text={english} spans={emphasis} colour={theme.gold} bold />
                 </ThemedText>
               </>
             ) : null}

@@ -48,7 +48,7 @@ export default function HelpTopicScreen() {
                 {link.description}
               </ThemedText>
             </View>
-            <Ionicons name="arrow-forward" size={18} color={theme.accent} />
+            <Ionicons name="chevron-forward" size={18} color={theme.gold} />
           </PressableLink>
         ))}
       </ScrollView>

@@ -12,7 +12,7 @@ import type { Guide } from './types';
  * al-Bukhari 159 carries the order and the three washings; `Abdullah ibn
  * Zayd's in Bukhari 185 carries wiping the head forward and back; `Abdullah
  * ibn `Amr's in Sunan Abi Dawud 135 carries the ears, index fingers inside and
- * thumbs behind, which is exactly what this guide says; and Jami` at-Tirmidhi
+ * thumbs behind, which is exactly what this guide says; and Jāmiʿ at-Tirmidhi
  * 788 carries going between the fingers. What is left model-written is the
  * English prose, not the method.
  *
@@ -94,92 +94,6 @@ export const WUDU: Guide = {
           bookName: "Ablutions (Wudu')",
           inBookReference: 'Book 4, Hadith 80',
         }),
-      ],
-      notes: [
-        note(
-          'agreed',
-          'What certainly breaks it: anything that leaves you from the front or the back, such as using the toilet or passing wind, and losing awareness, whether through sleep deep enough that you would not have noticed, fainting, or anything else that takes your senses away.',
-          {
-            sources: [
-              quran(5, 6, { surahName: "Al-Ma'idah" }),
-              hadith('bukhari', '135', {
-                book: 4,
-                bookName: "Ablutions (Wudu')",
-                inBookReference: 'Book 4, Hadith 1',
-              }),
-              hadith('abu-dawud', '203', {
-                book: 1,
-                bookName: 'Purification (Kitab Al-Taharah)',
-                inBookReference: 'Book 1, Hadith 203',
-                grading: 'hasan',
-                gradedBy: 'Al-Albani',
-              }),
-            ],
-            additionalExplanation:
-              'Bukhari 135 is the Prophet\'s ﷺ words that the prayer of someone who breaks their wudu is not accepted until they wash again. Abu Huraira, asked what breaking it meant, answered: passing wind. On sleep the wording is "the eyes are the drawstring of the backside, so whoever sleeps should perform wudu". Schools qualify that by how deeply and in what position, but all four agree that heavy sleep ends it. All four also agree that losing your senses another way, whether fainting, anaesthetic or being drunk, ends it too. That is why this note names losing your senses, and not only sleep.',
-          },
-        ),
-        note(
-          'differs',
-          'Two more are handled differently by the schools: touching your own private parts, and skin contact with the opposite sex. If one of those happens and you are unsure, washing again takes a minute and settles it.',
-          {
-            sources: [
-              quran(5, 6, { surahName: "Al-Ma'idah" }),
-              hadith('tirmidhi', '82', {
-                book: 1,
-                bookName: 'The Book on Purification',
-                inBookReference: 'Book 1, Hadith 82',
-                grading: 'sahih',
-                gradedBy: 'Darussalam',
-              }),
-              hadith('tirmidhi', '85', {
-                book: 1,
-                bookName: 'The Book on Purification',
-                inBookReference: 'Book 1, Hadith 85',
-                grading: 'sahih',
-                gradedBy: 'Darussalam',
-              }),
-              hadith('abu-dawud', '178', {
-                book: 1,
-                bookName: 'Purification (Kitab Al-Taharah)',
-                inBookReference: 'Book 1, Hadith 178',
-                grading: 'sahih',
-                gradedBy: 'Al-Albani',
-              }),
-              // Where the four positions below were read, rather than
-              // assembled. It states each as a school's and names who else
-              // holds it, which is what an attribution needs behind it.
-              scholarly({
-                work: 'Encyclopedia of Fiqh, Nullifiers of Ablution',
-                author: 'Dorar al-Saniyyah',
-                url: 'https://dorar.net/en/feqhia/44',
-              }),
-            ],
-            positions: [
-              {
-                school: 'Hanafi',
-                position: 'Neither of the two breaks wudu on its own.',
-              },
-              {
-                school: 'Maliki',
-                position:
-                  'Both break it where there is desire: the private parts touched deliberately with the palm, and contact with the opposite sex accompanied by desire.',
-              },
-              {
-                school: 'Shafi`i',
-                position:
-                  'Both break it regardless of intention: the private parts touched with the palm and no barrier, and skin contact with an adult of the opposite sex who is not a close relative.',
-              },
-              {
-                school: 'Hanbali',
-                position:
-                  'Touching the private parts breaks it; contact with the opposite sex breaks it where there is desire.',
-              },
-            ],
-            additionalExplanation:
-              'The split is not carelessness. It is two authentic narrations pointing different ways. Busrah bint Safwan reports "whoever touches his penis should not pray until he performs wudu"; Talq ibn `Ali reports the Prophet ﷺ answering "is it anything other than a piece of him?" Tirmidhi grades both sound and records that the second is the position of the scholars of Kufa. On the opposite sex, the verse says "or you have touched women", and the argument is over whether that word means intercourse or ordinary contact; `A\'isha reports that the Prophet ﷺ kissed her and prayed without washing again.',
-          },
-        ),
       ],
     },
     {
@@ -324,6 +238,94 @@ export const WUDU: Guide = {
             sources: [quran(5, 6, { surahName: "Al-Ma'idah" })],
             additionalExplanation:
               'Schools differ over what else is strictly required beyond those four. The intention, keeping to the order, and washing without long pauses in between are each treated as a requirement in some schools and as a recommendation in others. Teaching the full method sidesteps the question entirely, which is why this guide does. Knowing the shorter version matters on the day you have half a bottle of water and a prayer to catch.',
+          },
+        ),
+        /*
+          Moved here from the intention step (5 Sep 2026): what breaks wudu
+          is the thing to know once it is done, not while the tap is running.
+        */
+        note(
+          'agreed',
+          'What certainly breaks it: anything that leaves you from the front or the back, such as using the toilet or passing wind, and losing awareness, whether through sleep deep enough that you would not have noticed, fainting, or anything else that takes your senses away.',
+          {
+            sources: [
+              quran(5, 6, { surahName: "Al-Ma'idah" }),
+              hadith('bukhari', '135', {
+                book: 4,
+                bookName: "Ablutions (Wudu')",
+                inBookReference: 'Book 4, Hadith 1',
+              }),
+              hadith('abu-dawud', '203', {
+                book: 1,
+                bookName: 'Purification (Kitab Al-Taharah)',
+                inBookReference: 'Book 1, Hadith 203',
+                grading: 'hasan',
+                gradedBy: 'Al-Albani',
+              }),
+            ],
+            additionalExplanation:
+              'Bukhari 135 is the Prophet\'s ﷺ words that the prayer of someone who breaks their wudu is not accepted until they wash again. Abu Huraira, asked what breaking it meant, answered: passing wind. On sleep the wording is "the eyes are the drawstring of the backside, so whoever sleeps should perform wudu". Schools qualify that by how deeply and in what position, but all four agree that heavy sleep ends it. All four also agree that losing your senses another way, whether fainting, anaesthetic or being drunk, ends it too. That is why this note names losing your senses, and not only sleep.',
+          },
+        ),
+        note(
+          'differs',
+          'Two more are handled differently by the schools: touching your own private parts, and skin contact with the opposite sex. If one of those happens and you are unsure, washing again takes a minute and settles it.',
+          {
+            sources: [
+              quran(5, 6, { surahName: "Al-Ma'idah" }),
+              hadith('tirmidhi', '82', {
+                book: 1,
+                bookName: 'The Book on Purification',
+                inBookReference: 'Book 1, Hadith 82',
+                grading: 'sahih',
+                gradedBy: 'Darussalam',
+              }),
+              hadith('tirmidhi', '85', {
+                book: 1,
+                bookName: 'The Book on Purification',
+                inBookReference: 'Book 1, Hadith 85',
+                grading: 'sahih',
+                gradedBy: 'Darussalam',
+              }),
+              hadith('abu-dawud', '178', {
+                book: 1,
+                bookName: 'Purification (Kitab Al-Taharah)',
+                inBookReference: 'Book 1, Hadith 178',
+                grading: 'sahih',
+                gradedBy: 'Al-Albani',
+              }),
+              // Where the four positions below were read, rather than
+              // assembled. It states each as a school's and names who else
+              // holds it, which is what an attribution needs behind it.
+              scholarly({
+                work: 'Encyclopedia of Fiqh, Nullifiers of Ablution',
+                author: 'Dorar al-Saniyyah',
+                url: 'https://dorar.net/en/feqhia/44',
+              }),
+            ],
+            positions: [
+              {
+                school: 'Hanafi',
+                position: 'Neither of the two breaks wudu on its own.',
+              },
+              {
+                school: 'Maliki',
+                position:
+                  'Both break it where there is desire: the private parts touched deliberately with the palm, and contact with the opposite sex accompanied by desire.',
+              },
+              {
+                school: 'Shafi`i',
+                position:
+                  'Both break it regardless of intention: the private parts touched with the palm and no barrier, and skin contact with an adult of the opposite sex who is not a close relative.',
+              },
+              {
+                school: 'Hanbali',
+                position:
+                  'Touching the private parts breaks it; contact with the opposite sex breaks it where there is desire.',
+              },
+            ],
+            additionalExplanation:
+              'The split is not carelessness. It is two authentic narrations pointing different ways. Busrah bint Safwan reports "whoever touches his penis should not pray until he performs wudu"; Talq ibn `Ali reports the Prophet ﷺ answering "is it anything other than a piece of him?" Tirmidhi grades both sound and records that the second is the position of the scholars of Kufa. On the opposite sex, the verse says "or you have touched women", and the argument is over whether that word means intercourse or ordinary contact; `A\'isha reports that the Prophet ﷺ kissed her and prayed without washing again.',
           },
         ),
       ],

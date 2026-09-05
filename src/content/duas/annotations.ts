@@ -174,8 +174,14 @@ export type HisnAnnotation = {
  */
 export const HISN_ANNOTATIONS: Readonly<Record<number, HisnAnnotation>> = {
   // Morning and evening adhkār
+  /*
+    Was `recited: false`, which the reader rendered as step 1 of 26 with
+    "something to do" under it — and there is nothing to do; it is the
+    compiler's praise before his book begins, not a line of it. Omitted from
+    both screens, the way the (ثلاث مرات) label row is (5 Sep 2026).
+  */
   1269191: {
-    recited: false,
+    omit: true,
     reason: "the compiler's own opening praise, before the adhkār begin",
   },
   // The book prints the three Quls, then a row saying (ثلاثَ مرَّاتٍ). The count

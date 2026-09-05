@@ -3,7 +3,7 @@ import { useMemo, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, TextInput, View } from 'react-native';
 
 import { Rule } from '@/components/jadwal';
-import { ThemedText } from '@/components/themed-text';
+import { INPUT_TEXT, ThemedText } from '@/components/themed-text';
 import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { useLocation } from '@/hooks/use-location';
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   input: {
-    fontSize: 17,
+    ...INPUT_TEXT,
     paddingVertical: Spacing.two + Spacing.one,
     paddingHorizontal: Spacing.three,
     borderWidth: StyleSheet.hairlineWidth,

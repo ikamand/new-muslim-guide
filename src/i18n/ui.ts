@@ -66,12 +66,9 @@ export const EN = {
   'kind.phrase': 'Phrase',
   'kind.collection': 'Collection',
 
-  'ask.open': 'Ask a question or scan a label',
-  'ask.placeholder': 'Ask or scan…',
+  'ask.open': 'Ask a question',
+  'ask.placeholder': 'Ask a question…',
   'ask.close': 'Close',
-  'ask.scan': 'Scan a label',
-  'ask.scanDescription': 'Point the camera at an ingredient list',
-  'ask.soon': 'Soon',
   'ask.starters': 'Common questions',
   'ask.results': 'Answers',
   'ask.emptyTitle': 'Nothing here answers that yet',
@@ -495,7 +492,7 @@ export const EN = {
   'adhkar.pinFull': 'Ten is the most you can pin. Unpin one to add another.',
   'adhkar.tapToCount': 'Tap anywhere to count',
   'adhkar.swipeOn': 'Tap to move on',
-  'adhkar.instruction': 'Something to do. Tap to continue',
+  'adhkar.instruction': 'Do this, then continue',
   'adhkar.inTheEvening': 'In the evening, say instead:',
   'adhkar.previous': 'Previous',
   'adhkar.next': 'Next',
@@ -695,7 +692,7 @@ export const EN = {
   'iman.intro':
     'The five pillars are what you do. These six are what you believe while doing it. You already accepted them when you said the shahada. This page is only putting names to them, and nothing here is something you need to memorise.',
   'pillars.testimony': 'The testimony',
-  'pillars.taughtHere': 'The app teaches this →',
+  'pillars.taughtHere': 'The app teaches this ›',
   'iman.title': 'The Six Articles of Faith',
 
   'qibla.title': 'Qibla',

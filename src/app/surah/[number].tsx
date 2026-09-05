@@ -531,10 +531,13 @@ export default function SurahScreen() {
         style={({ pressed }) => [
           styles.reciter,
           {
-            /* A control keeps its fill; only the edge joins the gold family. */
-            backgroundColor: theme.backgroundElement,
-            borderColor: theme.goldSoft,
-            opacity: pressed ? 0.7 : 1,
+            /*
+              A ruled row, not a filled card (5 Sep 2026): it is a setting
+              shown where the thought happens, and settings are rows. The
+              fill it had was the last card on the page.
+            */
+            borderBottomColor: theme.goldSoft,
+            backgroundColor: pressed ? theme.backgroundSelected : 'transparent',
           },
         ]}>
         <Ionicons name="mic-outline" size={18} color={theme.textSecondary} />
@@ -544,7 +547,7 @@ export default function SurahScreen() {
           </ThemedText>
           <ThemedText type="smallBold">{reciter.name}</ThemedText>
         </View>
-        <Ionicons name="chevron-forward" size={18} color={theme.textSecondary} />
+        <Ionicons name="chevron-forward" size={18} color={theme.gold} />
       </Pressable>
 
       {/*
@@ -949,9 +952,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: Spacing.three,
     minHeight: 56,
-    paddingHorizontal: Spacing.three,
-    borderRadius: Radius.medium,
-    borderWidth: StyleSheet.hairlineWidth,
+    borderBottomWidth: StyleSheet.hairlineWidth,
   },
   reciterText: {
     flex: 1,

@@ -533,3 +533,9 @@ got quoted deserves to be met head-on rather than edited out.
   obviously the exact data point 2 of Part 5 says not to keep. If ever done:
   question text only, no device identifier, no session, opt-in, and said out
   loud on screen.
+  **Decided 5 Sep 2026, exactly on those terms and one step further** —
+  opt-in from the empty card only, four fields, nothing kept on the phone,
+  deleted after a weekly read. The local miss log is removed in the same
+  work. See `docs/ui-redesign-plan.md`, "5 Sep 2026 — Community Q&A:
+  considered, not building", and
+  `docs/superpowers/plans/2026-09-05-question-gap-report.md`.

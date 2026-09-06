@@ -3526,3 +3526,112 @@ size. The 320-wide times row and the Hisn navigation titles that truncate
 are noted in the audit and not built.
 
 Verified on web at 390. OTA.
+
+---
+
+## 5 Sep 2026 — Community Q&A: considered, not building. The question-gap report instead
+
+Iyad proposed a community Q&A: questions, answers, categories, likes and
+bookmarks, anonymous posting, AI pre-moderation, a human moderation queue,
+verified contributors, questions attached to lessons, a beta rollout. The
+want behind it is real and already on the record — the 1am question in a
+convert's own words (`docs/quote-dont-answer.md`), and the feeling of seeing
+that other new Muslims ask the same awkward things.
+
+Argued over four rounds, with the brief "push back until we agree". What
+decided it, in the order it was conceded:
+
+- **An open forum turns the author of a book into the operator of a venue.**
+  A book can be finished; a venue never is. The empty room at launch, the
+  answerers being the exact voices the app routes around, and a public
+  contradiction of the app's one-clear-way on the first hand-position answer
+  were the three that could not be moderated away.
+- **"Community answers clearly separated from verified guidance" is a
+  label, and labels do not survive reading.** A frightened person three
+  weeks in believes the answer that sounds like a person. Separation is a
+  legal defence, not a product one.
+- **AI moderation does not reduce the load that matters.** In a Muslim Q&A
+  nearly every answer is a religious claim, so "escalate religious claims"
+  escalates the whole feed to one person. The number that sizes the feature
+  is minutes per day, forever, not what a model can screen.
+- **Questions as the community layer, answers curated** survived one round
+  and then fell to its own count: a public "asked by 812 people" on a
+  sin-adjacent question is the app voting on a norm, and it is empty at
+  launch anyway. What is valuable in a question is its voice, and the voice
+  is the part a family member recognises. Editorial, not community.
+- **Experiences as user content** reintroduce every problem removed.
+  Convert voices are a real gap in the app; the answer is five consented,
+  edited stories from people Iyad knows, if wanted. Not UGC.
+
+**The observation that closed it** was already in the code.
+`src/lib/observations.ts:107` stores missed searches "as typed, because the
+point is the exact phrasing. That makes it the most personal thing in this
+file — somebody's 1am question in their own words". It is on the phone, in
+plain storage, shown nowhere and read by nothing. The phone, not the server,
+is the threat model for a convert who is not out to their family.
+
+**What is being built:** a question-gap report. Full plan in
+[`docs/superpowers/plans/2026-09-05-question-gap-report.md`](superpowers/plans/2026-09-05-question-gap-report.md).
+
+- One optional line on the ask sheet's existing empty card, and nowhere
+  else: "Tell us what you were looking for." It appears only after the
+  offline search has returned nothing.
+- Anonymous. Sent: the text, the app language, the app version, the UTC
+  day. Not sent, not stored: any identifier, a time of day, location,
+  settings, search history. Not kept on the phone: the submission, and the
+  local miss log goes with it.
+- Nothing public. No questions, answers, counts, profiles, likes, replies,
+  feed. No accounts. No local history.
+- The disclosure, fixed: *We don't ask for your name or an account, and
+  nothing you write here is kept on this phone. Please don't include
+  anything that could identify you. What you write is sent to us with your
+  app language and version, is read by a person, and may be used to improve
+  the app.*
+- **Crisis resources** appear above Send when the text matches a
+  deterministic, offline, whole-word phrase list that a person has read.
+  Not a model, never described as one. **They never block the send**; after
+  a crisis-matched send, the resources show again instead of the thank-you.
+  Iyad's call, and the better one: a card that takes the button away reads
+  as "even this app won't take my words".
+- **Failure is one attempt, no queue, no retry.** Offline, timed out, or
+  refused all say "This wasn't sent" in place with the words kept.
+- **Retention:** 14 days hard, as a property of the write (KV expiry), with
+  a weekly check that fails if anything older exists. Read weekly, sorted
+  into page / search alias / directory referral, then deleted. No backups.
+- **Rate limit without identity:** a burst limit per IP at the edge (nothing
+  stored by us) and a global cap of 500 a day. The agreed "five per IP per
+  day" was dropped on reading the Cloudflare docs — the binding's window is
+  10 or 60 seconds only, and a daily per-IP limit would mean storing an
+  IP-derived key. Recorded in the plan's Global Constraints.
+- **No promises.** No reply, no notification, no page. Not a support,
+  emergency, advice or communication service. The screen says so.
+- **The worker lives in its own private repository**,
+  `new-muslim-guide-submissions`, from day one — `package.json`, `app.json`
+  and `.gitignore` are all fingerprint inputs and developer-only changes have
+  orphaned builds three times. The contract is `/v1/submissions`, frozen,
+  and written identically in both repos (`docs/submissions-contract.md`).
+
+**What this removes:** the local missed-search log
+(`observations.ts` `misses`, `recordMiss`, `searchMissed`, the debounce in
+`ask.tsx`) and the sentence in `build-order.md` Phase 8 that promised to seed
+aliases from it. The seed is now the submission stream. Also removed before
+it existed: the word "community" from anything this app says about itself.
+
+**What it commits to, once:** the app's first outbound request, so the
+privacy label and `settings.footnote` change; a standing reviewer, because
+answers are pages; a weekly reading habit; and a hosting provider whose own
+edge handling we do not control, said plainly rather than promised away.
+
+**Held, and where:** the human-support directory (a help topic; required by
+the card as its "needs a person" answer, and the same open question as the
+refusal card's "which human"); consented convert stories as editorial;
+which crisis organisations to name — Iyad's decision, not answered here.
+
+**Order:** the reciter first (still the only release gate). Then Phase 0 of
+the plan, removing the miss log, which ships alone by OTA and stands on its
+own. Then the directory and crisis resources as content. Then the worker,
+then the client. `quote-dont-answer.md` Phases 0–1 are recommended before the
+client because they reduce how many readers reach the empty card at all.
+
+Ships: the app side by OTA; the worker by its own repo's deploy. No native
+build.

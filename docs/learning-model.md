@@ -33,6 +33,11 @@ The app is **three hours long.**
 Measured over `CATALOG` and `JOURNEY` with a script; the journey figure counts
 distinct steps, since Al-Fatihah and Fajr each appear in two stages.
 
+The journey was replaced by the curriculum on 31 Aug 2026 (`b4713d2`), so
+`plan:check` now measures `CURRICULUM` instead. The figures above stay as what
+the journey measured when this was written; the script's ledger carries them
+forward (36 → 72 lessons, 123 → 257 minutes at 5 Sep 2026).
+
 Three hours is not a criticism of the writing. The writing is the best thing in
 the repository — `learn/work.ts:41` handles riba in four sentences without
 frightening anybody, and `learn/family.ts:62` answers "do I have to tell them?"
@@ -105,7 +110,8 @@ And `completedLessons` is barely populated. **Only guides mark themselves
 done** — `guide/[id].tsx:125`, on Finish. Five of the 36 journey lessons are
 guides. The other 31 — every reference, pillar, article, phrase and duʿa — can
 be marked done in exactly one place: a checkbox on `/journey/[stage]`
-(`journey/[stage].tsx:61`).
+(`journey/[stage].tsx:61`; since 31 Aug 2026 the circle on `/unit/[id]`, and
+reading marks a lesson too — Phase 5 of the build order records it).
 
 The consequence: **reading a lesson from the Learn tab does not advance the
 journey.** Someone can read "What is Islam?" three times from Learn and Today
@@ -139,7 +145,9 @@ invisible until somebody dies."
 `journey.ts:38` gets closest — `Requirement` is `foundation | practice |
 learning | seasonal`, which is nearly the right idea. Its own doc comment says
 it "changes how the step is presented and how loudly progress is counted."
-Presentation only. It decides nothing about placement or persistence.
+Presentation only. It decides nothing about placement or persistence. (Since
+31 Aug 2026 it lives at `curriculum.ts:49`, the journey having gone; the
+comment there reads "Presentation only — it never gates", the same scope.)
 
 ### 2.5 (A consequence) Today's test for "deadline" is drawn too tight
 

@@ -182,7 +182,9 @@ a shape in time, which is what lets screens place content written after them.*
   use for editorial judgements about the same generated rows.
 - **It decides placement, not presentation.** That is the whole difference from
   `Requirement` in `journey.ts:38`, whose own comment scopes it to how a step
-  "is presented". All six rules, because the placement *is* the feature:
+  "is presented" (moved to `curriculum.ts:49` on 31 Aug 2026 with the
+  journey's deletion; the comment there says the same — "Presentation only —
+  it never gates"). All six rules, because the placement *is* the feature:
   - `once` — appears in Learn; leaves Today permanently once met.
   - `until-fluent` — drives Today's primary action while it is needed, then
     collapses to a link. This is what turns "Pray now Fajr · 23 steps" into
@@ -436,6 +438,10 @@ watches a great deal and records almost none of it.*
 - **Reading a lesson must advance the journey.** Today, 31 of 36 lessons can be
   marked done only by a checkbox at `journey/[stage].tsx:61`, so reading "What
   is Islam?" three times from Learn leaves the app certain you never started.
+  **Done 31 Aug 2026** (`b4713d2`): `LessonEnd` marks a lesson as it is read,
+  and the checkbox's successor — the circle on `/unit/[id]`,
+  `unit/[id].tsx:62` — is a correction, not the only door. The `plan:check`
+  citation was repointed there.
 - **Log every Ask search that returned nothing.** The highest-value untapped
   signal in the repository. Every failed search is a content gap with a name on
   it, and Phase 8 consumes this log.

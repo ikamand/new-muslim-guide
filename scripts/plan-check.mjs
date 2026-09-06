@@ -97,20 +97,48 @@ const CLAIMS = [
     shape: the confidence answer no longer picks an entry stage, it orders
     the whole journey. The claim the documents make (onboarding's second
     fact decides what comes first) is still true and still lives here.
+
+    ⚠️ Then it stopped being true, and this check went dark for five days.
+    `b4713d2` (Finish the Learn re-thread, 31 Aug 2026) deleted the journey
+    — `journey.ts`, `journey/[stage].tsx`, its hook and both order tables —
+    and the curriculum took its place. The claims kept reporting; the
+    measurements below imported the dead file and crashed before anyone
+    read them. Settled 5 Sep 2026, per claim:
+
+    - `Requirement` survived the move and lives in `curriculum.ts` with the
+      same scope ("Presentation only — it never gates"). Repointed.
+    - `STAGE_ORDER` and its `'teach-me'` row are DROPPED, not repointed.
+      The curriculum has one universal order (its header, "One universal
+      order", Iyad 30 Aug), and since 4 Sep confidence touches it not at
+      all. What these two carried — the second onboarding answer decides
+      what comes first — is no longer true of Learn. It is true of Today's
+      prayer card, which the curriculum's header names as where the urgent
+      path runs, and `competence.ts` still seeds from the answer.
+      `docs/learn-redesign-plan.md` §8 "What this removes" is the record
+      that the tables existed, and lists the premise as removed with them.
+    - The stage screen's checkbox became the circle on `/unit/[id]` — the
+      same call, on the screen the redesign plan says replaces
+      `/journey/[stage]`. Repointed. It is now a correction rather than
+      the only way to mark a lesson: `LessonEnd` marks on reading, which is
+      Phase 5's "reading must advance the journey", done.
+    - `ShahadaCard` became `ShahadaHero` on 1 Sep (`7e1cae7`), and it no
+      longer reads `shahadaState`: the answer writes the ledger and the tab
+      reads the ledger (`curriculum.ts`, above `isLessonDone`). The second
+      claim now points at that read.
+    - The rest merely drifted past ±6 under the week's commits to
+      `welcome.tsx`, `use-settings.tsx` and `guide/[id].tsx`.
   */
-  ['src/app/(tabs)/learn.tsx', 241, 'function ShahadaCard'],
-  ['src/app/(tabs)/learn.tsx', 247, "shahadaState === 'recently'"],
-  ['src/content/journey.ts', 38, 'export type Requirement'],
-  ['src/content/journey.ts', 178, 'const STAGE_ORDER'],
-  ['src/content/journey.ts', 179, "'teach-me': ["],
-  ['src/app/welcome.tsx', 230, 'continueDisabled={said === null}'],
-  ['src/app/welcome.tsx', 258, 'continueDisabled={prays === null}'],
-  ['src/app/welcome.tsx', 112, 'shahadaState: null'],
+  ['src/app/(tabs)/learn.tsx', 86, 'function ShahadaHero'],
+  ['src/app/(tabs)/learn.tsx', 428, 'isLessonDone(SHAHADA_KEY, completedLessons)'],
+  ['src/content/curriculum.ts', 49, 'export type Requirement'],
+  ['src/app/welcome.tsx', 244, 'continueDisabled={said === null}'],
+  ['src/app/welcome.tsx', 272, 'continueDisabled={prays === null}'],
+  ['src/app/welcome.tsx', 129, 'shahadaState: null'],
   ['src/hooks/use-help.ts', 120, 'const LEADING'],
-  ['src/hooks/use-settings.tsx', 63, 'shahadaState: ShahadaState | null'],
-  ['src/hooks/use-settings.tsx', 78, 'completedLessons: readonly string[]'],
-  ['src/app/guide/[id].tsx', 146, 'toggleLesson(key)'],
-  ['src/app/journey/[stage].tsx', 61, 'toggleLesson(step.key)'],
+  ['src/hooks/use-settings.tsx', 76, 'shahadaState: ShahadaState | null'],
+  ['src/hooks/use-settings.tsx', 128, 'completedLessons: readonly string[]'],
+  ['src/app/guide/[id].tsx', 128, 'toggleLesson(key)'],
+  ['src/app/unit/[id].tsx', 62, 'toggleLesson(step.key)'],
   ['src/app/(tabs)/index.tsx', 64, 'keeps a streak'],
   /*
     Moved into `prayer-times-card.tsx` in spirit: Phase 4 found that the card
@@ -118,7 +146,8 @@ const CLAIMS = [
     NOT carry a Friday candidate. The line still exists here and is still what
     the documents cite.
   */
-  ['src/app/(tabs)/index.tsx', 151, 'Friday is the one that matters'],
+  /* 151 → 174 under Today's seam and spacing commits of 30 Aug – 3 Sep 2026. */
+  ['src/app/(tabs)/index.tsx', 174, 'Friday is the one that matters'],
   /*
     Still cited, and the citation now points at the CORRECTION rather than the
     claim. Phase 5 found that "I farted" no longer returns nothing — it returns
@@ -128,7 +157,8 @@ const CLAIMS = [
   ['src/app/ask.tsx', 44, 'I farted'],
   ['src/content/model.ts', 182, 'export type ScholarlyPosition'],
   /* 418 → 452 when the recite.* strings landed above it, 30 Aug 2026. */
-  ['src/i18n/ui.ts', 452, 'quran.tapToHide'],
+  /* 452 → 542 under the `ui.ts` commits of 3–5 Sep 2026. */
+  ['src/i18n/ui.ts', 542, 'quran.tapToHide'],
   ['src/content/references.ts', 522, 'Friday midday is the busiest hour'],
   ['src/content/references.ts', 565, 'join the line where you are'],
   ['src/content/learn/halal-and-haram.ts', 38, 'Do I need permission for ordinary things?'],
@@ -173,23 +203,46 @@ const measure = (label, actual, claimed) => {
 };
 
 const { CATALOG, resolveRef } = await import('../src/content/catalog.ts');
-const { JOURNEY, stepKey } = await import('../src/content/journey.ts');
+const { CURRICULUM, stepKey } = await import('../src/content/curriculum.ts');
 
-// Journey: distinct steps and their total estimated minutes.
+/*
+  The path: distinct lessons and their total estimated minutes.
+
+  Measured over `JOURNEY` until `b4713d2` (31 Aug 2026) deleted it, and the
+  import of a file that no longer existed is what took this script down for
+  five days — a crash here, after the claims had printed, is a check nobody
+  reads. Repointed at `CURRICULUM` 5 Sep 2026: the same question, how long is
+  the path, asked of the successor — tier → unit → lesson instead of
+  stage → step. The documents' 36 and 123 stay as what the journey measured
+  when the research was done, as the catalogue's 69 does; the ledger from
+  there is below.
+*/
 const seen = new Map();
-for (const stage of JOURNEY) {
-  for (const step of stage.steps) {
-    const key = stepKey(step.ref);
-    if (!seen.has(key)) seen.set(key, step);
+for (const tier of CURRICULUM) {
+  for (const unit of tier.units) {
+    for (const lesson of unit.lessons) {
+      const key = stepKey(lesson.ref);
+      if (!seen.has(key)) seen.set(key, lesson);
+    }
   }
 }
-let journeyMinutes = 0;
-for (const step of seen.values()) {
-  const entry = resolveRef(step.ref);
-  journeyMinutes += entry?.meta?.estimatedMinutes ?? 0;
+let pathMinutes = 0;
+for (const lesson of seen.values()) {
+  const entry = resolveRef(lesson.ref);
+  pathMinutes += entry?.meta?.estimatedMinutes ?? 0;
 }
-measure('journey: distinct lessons', seen.size, 36);
-measure('journey: total estimated minutes', journeyMinutes, 123);
+/*
+  36 → 72: the curriculum names every teaching page — the journey had let 22
+  land without learning their names, which `uncurriculed` in `curriculum.ts`
+  now fails on — plus the units written since, being-asked and what-you-owe.
+  Four of the 72 are COMMISSIONED and unresolved. They are counted as the
+  journey's steps were, by ref, so a commissioned page holds its place in
+  the number as it does in the sequence; the minutes count only the 68 that
+  resolve.
+*/
+measure('curriculum: distinct lessons', seen.size, 72);
+/* 123 → 257 for the same reason; an unwritten page contributes 0. */
+measure('curriculum: total estimated minutes', pathMinutes, 257);
 
 // The catalogue, excluding the duʿa book.
 const teaching = CATALOG.filter((e) => e.kind !== 'hisn');
@@ -208,35 +261,62 @@ const teachingMinutes = teaching.reduce((n, e) => n + (e.meta?.estimatedMinutes 
 /* 85 → 88: Phase 13's three tier-three pages. */
 /* 88 → 92: the four vices — anger, showing-off, arrogance, envy. */
 /* 92 → 93: `fasting-alone`, the one page docs/ramadan-mode.md adds. */
-measure('catalogue: non-hisn entries', teaching.length, 93);
+/*
+  93 → 109, reconciled 5 Sep 2026 against a checkout of `41f87f3` (the last
+  time this ledger was written) after the journey crash above hid five days
+  of growth. Sixteen pages, each named so the arithmetic can be re-done:
+  `how-prayer-works` (b4713d2, 31 Aug); `how-it-began`, `isnt-islam-violent`
+  and `what-about-jesus` (f11eb2d, 3 Sep); `which-dhikr` (1e9f8f1, 3 Sep);
+  the five daily prayers as reference pages, `fajr` to `isha` (5541a32,
+  3 Sep); and the six of What you owe — `your-mother`, `your-partner`,
+  `your-children`, `whoever-works-for-you`, `your-neighbour`,
+  `animals-and-land` (728c4df and 6592525, 3–4 Sep).
+*/
+measure('catalogue: non-hisn entries', teaching.length, 109);
 /*
   186 became 206 on 28 Aug 2026: the ninety-nine names declare 20 minutes.
   The 69 pages the plan measured are unchanged; a 70th was added beside them.
 */
 /* 291 → 310: the four vices declare 4, 5, 5 and 5 minutes. */
 /* 310 → 314: fasting-alone's four minutes. */
-measure('catalogue: total estimated minutes', teachingMinutes, 314);
+/*
+  314 → 372, the sixteen above: how-prayer-works 4; how-it-began 5 and the
+  two being-asked pages 4 each; which-dhikr 4; the five prayers 3, 3, 3, 2
+  and 3; What you owe 4, 4, 4, 4, 3 and 4.
+*/
+measure('catalogue: total estimated minutes', teachingMinutes, 372);
 measure('catalogue: hisn occasions', CATALOG.length - teaching.length, 132);
 
 const priority = (n) => teaching.filter((e) => e.meta?.beginnerPriority === n).length;
 /* All five of Phase 9's pages are tier one, so all five land here. */
-measure('entries at beginner priority 1–2', priority(1) + priority(2), 32);
+/* 32 → 39: how-prayer-works at 1; how-it-began and the five prayers at 2. */
+measure('entries at beginner priority 1–2', priority(1) + priority(2), 39);
 /* Tier three is where 4–5 lives, so all three land here. */
-measure('entries at beginner priority 4–5', priority(4) + priority(5), 9);
+/* 9 → 16: which-dhikr and the six of What you owe, all at 4. */
+measure('entries at beginner priority 4–5', priority(4) + priority(5), 16);
 measure(
   'entries carrying beginnerPriority or difficulty',
   teaching.filter((e) => e.meta?.beginnerPriority || e.meta?.difficulty).length,
   /* 52 → 53: the names collection carries meta. */
   /* 71 → 75: the four vices each carry both. */
   /* 75 → 76: fasting-alone, 30 Aug 2026. */
-  76,
+  /* 76 → 92: the sixteen pages of 31 Aug – 4 Sep each carry both. */
+  92,
 );
 
-// Journey lessons that are guides — the only kind that self-completes.
+/*
+  Lessons that are guides — once the only kind that self-completed.
+
+  5 → 3 with the curriculum: shahada, wudu and ghusl stay; `pray-fajr` and
+  `pray-maghrib` left the path (`docs/learn-redesign-plan.md` §8), because
+  the ten prayer walkthroughs are instruments followed on the mat, not
+  lessons — `uncurriculed` in `curriculum.ts` lists them by name as
+  deliberately elsewhere.
+*/
 measure(
-  'journey lessons that are guides',
+  'curriculum lessons that are guides',
   [...seen.values()].filter((s) => s.ref.kind === 'guide').length,
-  5,
+  3,
 );
 
 // `differs` notes across the whole catalogue.

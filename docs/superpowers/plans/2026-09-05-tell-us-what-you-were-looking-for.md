@@ -645,8 +645,9 @@ paths into the design plan entry).
   ⏳ Deletion at 14 days: by KV expiry set at write, and `retention` would
   fail if it did not hold; the first empirical confirmation comes when a
   stored key ages past its expiry. Nothing has been stored long enough yet.
-- ⏳ Workers Logs off in the dashboard: set in config and deployed; the
-  dashboard look is Iyad's.
+- ✅ Workers Logs off in the dashboard: Iyad opened the Worker's
+  Observability tab on 5 Sep 2026 and it read "Workers Observability is
+  Disabled" (free plan).
 - ⏳ Crisis resources and the directory read by a person: Iyad's, and the US
   911 line waits on it.
 - ⚠️ Local miss log gone on device: skipped as unverifiable on a release

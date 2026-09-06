@@ -3843,8 +3843,9 @@ preview build, driven from the Mac with the worker read on the other side.
 - **Not possible on a release build:** forcing a timeout, and reading
   stored state. Both covered by the checks and the web drive, and said so.
 
-**Still Iyad's before a store release:** the dashboard look at Workers
-Logs, reading the crisis list and the directory (and adding US 911), and
-the store data declarations. The test submissions from today were closed
+**Confirmed by Iyad the same evening:** the Worker's Observability tab in
+the Cloudflare dashboard reads "Workers Observability is Disabled".
+**Still Iyad's before a store release:** reading the crisis list and the
+directory (and adding US 911), and the store data declarations. The test submissions from today were closed
 and discarded, so the first real week starts on an empty store and an empty
 ledger.

@@ -3629,15 +3629,20 @@ edge handling we do not control, said plainly rather than promised away.
 submission gets exactly one of four decisions — **Create content / Already
 covered / Needs qualified human help / Discard** — in a text file, in one
 sitting; a script refuses to close a week with any block undecided. A
-ledger in the private server repo keeps the week, decision, category,
-canonical question, and for the first two decisions the original wording
-with identifying detail removed — because how a new Muslim phrases a
-question is the insight, and it is never published. ⚠️ That last column
-amends the "raw deleted after the batch" rule agreed earlier in the day,
-knowingly. A page born from the ledger says so in its header and the ledger
-points back; a check fails when they disagree. AI may later group and flag
-inside the review file and can never write a decision, because the closing
-script reads decisions only from the file Iyad edited. No dashboard in v1.
+ledger in the private server repo keeps **metadata only** — week,
+submission id, decision, category, the resulting page or alias reference,
+status — and no user wording, de-identified or otherwise. For a few hours
+it was going to keep a de-identified original for two of the four
+decisions; Iyad reversed that the same evening, and the reversal is the
+last word: raw text lives only in the 14-day server store and the review
+file, and a phrasing worth keeping as a search alias is one Iyad types
+deliberately during review, never one a script copies. A `create` decision
+is captured the same way — as a `COMMISSIONED` entry in the app repo, in
+his words, at review time — so the gap outlives the text. A page born from
+the ledger says so in its header and the ledger points back; a check fails
+when they disagree. AI may later group and flag inside the review file and
+can never write a decision, because the closing script reads decisions only
+from the file Iyad edited. No dashboard in v1. **Plan locked 5 Sep 2026.**
 
 **Held, and where:** the human-support directory (a help topic; required by
 the card as its "needs a person" answer, and the same open question as the

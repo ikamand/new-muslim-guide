@@ -70,24 +70,28 @@ and its "Final decisions / edge cases" were agreed in conversation on 5 Sep
   and ordering the review file. **AI never answers a question, never
   attaches a religious answer, and never decides an outcome.** There is no
   field in any script for it to do so.
-- **Original wording is preserved through review and never published.** The
-  batch script does not alter the text; it flags. How a new Muslim phrases a
-  question is the insight, and a paraphrase loses it. Raw wording reaches a
-  reader only as a search alias or as a canonical question Iyad rewrote.
-- **The ledger is the product of review**, kept in the private server repo,
-  never in the app repo or on any device. It carries, per decided item, the
-  week, the decision, a category, the canonical question Iyad wrote, and —
-  for **Create content** and **Already covered** only — the original wording
-  with any identifying detail removed by him at review time. **Needs
-  qualified human help** and **Discard** keep the category and nothing
-  else. ⚠️ **This changes a locked decision.** The agreed plan said raw
-  submissions are deleted after the batch and nothing survives but pages and
-  aliases. Now a de-identified original wording survives in the ledger for
-  the two outcomes where phrasing is the value. Iyad asked for it on 5 Sep
-  2026 knowing the retention rule; the 14-day rule still governs the server
-  store in full, and the disclosure's "may be used to improve the app"
-  already covers it. If this ever feels wrong, the ledger column is the one
-  thing to delete.
+- **Original wording is preserved through review, never published, and
+  does not outlive the 14-day window.** The batch script does not alter the
+  text; it flags. How a new Muslim phrases a question is the insight, so
+  Iyad reads it verbatim — and then it is gone with the batch. Raw wording
+  reaches a reader only if Iyad deliberately types it as a search alias
+  during review; no script copies it anywhere.
+- **The ledger is metadata only.** Kept in the private server repo, never in
+  the app repo or on any device. Per decided item: week, submission id,
+  decision, category, the resulting page or alias reference, and status.
+  **No user wording, de-identified or otherwise, and no canonical
+  rewrite.** For a few hours on 5 Sep 2026 this plan had the ledger keep a
+  de-identified original for two of the four outcomes; Iyad reversed that
+  the same evening so the privacy model agreed at the start of the day
+  stands intact: raw text exists only in the 14-day server store and the
+  review file, and the permanent record cannot leak what it does not hold.
+  Kept here rather than edited out, per the repo's habit with corrections.
+- **What a `create` decision must capture, then, is captured in the app
+  repo, in Iyad's words, at review time** — a `COMMISSIONED` entry in
+  `src/content/curriculum.ts:309`, the list that already exists for pages
+  that should exist and do not. The ledger's outcome points at that id.
+  Without this the raw text expires before the page is written and the
+  decision would be "create something" with no memory of what.
 - **A page born from submissions says so.** Its source file header carries
   the ledger ids it came from, and the ledger's row points at the page.
   Both directions, so "which gaps led to new material" is a grep, not a
@@ -362,18 +366,19 @@ JSON), `ledger/gaps.csv` (committed), `ledger/categories.mjs` (committed)
   > how do i pray without my parents noticing
   decision:
   category:
-  canonical:
+  outcome:
   ```
   `decision` takes exactly one of `create`, `covered`, `human`, `discard`.
-  `category` takes one id from `ledger/categories.mjs`. `canonical` is the
-  question in Iyad's words, required for `create` and `covered`, ignored
-  otherwise. The quoted line is the original, untouched; Iyad edits it in
-  place to remove identifying detail before `close` copies it.
-- `ledger/gaps.csv` columns:
-  `week, id, decision, category, canonical, original, outcome, status`.
-  `original` is filled only for `create` and `covered`. `outcome` is a page
-  id (`learn/<file>` or `reference/<id>`), an alias key, or `directory`;
-  empty until done. `status` is `open` or `done`.
+  `category` takes one id from `ledger/categories.mjs`. `outcome` is
+  required for `create` (the `COMMISSIONED` id Iyad added to the app repo
+  during review, e.g. `reference:praying-privately`) and for `covered` (the
+  page id the search should have found, or the alias key Iyad typed into
+  `src/lib/search-words.ts` during review); ignored otherwise. The quoted
+  line is the original, read by Iyad and **never copied by `close`**.
+- `ledger/gaps.csv` columns: `week, id, decision, category, outcome, status`.
+  Nothing else, ever. `outcome` is a page id (`learn/<file>` or
+  `reference:<id>`), an alias key, or `directory`. `status` is `open` or
+  `done`.
 - `ledger/categories.mjs`: a short fixed list, seeded from the ten
   `HELP_TOPICS` ids in the app (`src/content/help.ts:73`) so the ledger's
   categories are the app's own map, plus `family`, `work-money`, `identity`,
@@ -391,14 +396,16 @@ JSON), `ledger/gaps.csv` (committed), `ledger/categories.mjs` (committed)
   for today, so a half-reviewed file is never overwritten.
 - [ ] **Step 2: Iyad reviews**, in a text editor, in one sitting. Every
   block gets a decision. The four decisions and what each means:
-  - `create` — the app should answer this and does not. A canonical
-    question is written now; a page or section is written later through the
-    normal content pipeline. Ledger row opens with `status: open`.
+  - `create` — the app should answer this and does not. Iyad adds a
+    `COMMISSIONED` entry to `src/content/curriculum.ts` now, in his own
+    words, and writes its id on the `outcome` line; the page is written
+    later through the normal content pipeline. Ledger row opens with
+    `status: open`.
   - `covered` — the app already answers it and the search did not find it.
-    The canonical question and the original wording become a search alias
-    in `src/lib/search-words.ts` (the alias layer that already exists), and
-    `scripts/search-check.mjs` gets the original wording as an expectation.
-    Ledger row opens with `outcome` = the alias key.
+    If Iyad judges the phrasing worth keeping, **he types it** as an alias
+    in `src/lib/search-words.ts` (the alias layer that already exists) and
+    as an expectation in `scripts/search-check.mjs`, now, during review.
+    Nothing copies it for him. `outcome` is the alias key or the page id.
   - `human` — a personal circumstance, a fatwa-level question, or anything
     only a qualified person should answer. Category only. Nothing else is
     kept, and the count under this decision is the evidence for the
@@ -407,8 +414,9 @@ JSON), `ledger/gaps.csv` (committed), `ledger/categories.mjs` (committed)
     nothing else kept.
 - [ ] **Step 3: `close`** parses the review file, **fails if any block has
   no decision, an unknown decision, an unknown category, or a `create` or
-  `covered` block with no canonical**, appends one row per block to
-  `ledger/gaps.csv`, deletes exactly the KV keys the review file came from,
+  `covered` block with no outcome**, appends one row per block to
+  `ledger/gaps.csv` — six columns, and it has no code path that reads the
+  quoted text at all — deletes exactly the KV keys the review file came from,
   deletes the review file, and prints a one-line summary: counts by decision
   and by category for the week. Commit the ledger.
 - [ ] **Step 4: `retention`** lists `sub/` keys and fails (exit 1) if any
@@ -430,7 +438,7 @@ JSON), `ledger/gaps.csv` (committed), `ledger/categories.mjs` (committed)
 **AI, later, and only here.** If the weekly batch outgrows one sitting, a
 model may be added to `pull` to group similar submissions under one heading
 and to add a `pii?` flag. It writes into the review file's `flags` line and
-nowhere else. It cannot fill `decision`, `category` or `canonical`, because
+nowhere else. It cannot fill `decision`, `category` or `outcome`, because
 `close` reads those from the file Iyad edited and there is no path from a
 model to that file. That absence is the rule; do not add the path.
 
@@ -617,16 +625,16 @@ paths into the design plan entry).
   then read and decide every block in one sitting, then `npm run close`,
   then commit the ledger. `pull` runs `retention` itself.
 - [ ] **A `create` row becomes a page** through the normal pipeline —
-  written in English in `src/content/`, `content:verify`, `evidence` where
-  cited, `style:check`, `i18n:manifest`, the scholarly reviewer — like any
-  other page. Its source file header carries one line:
+  written in English in `src/content/`, from the `COMMISSIONED` entry Iyad
+  made at review time, `content:verify`, `evidence` where cited,
+  `style:check`, `i18n:manifest`, the scholarly reviewer — like any other
+  page. Its source file header carries one line:
   `Origin: "Tell us what you were looking for", ledger 2026-W40 #03, #11`.
-  The ledger row gets `outcome` = the page id and `status: done`, and
+  The ledger row gets `status: done`, and
   `npm run ledger-check -- --app ../new-muslim-guide` passes.
-- [ ] **A `covered` row becomes an alias** in `src/lib/search-words.ts` and
-  an expectation in `scripts/search-check.mjs`, both carrying the original
-  wording. `npm run search:check` must pass with the new line. Row gets
-  `status: done`.
+- [ ] **A `covered` row's alias was already typed by Iyad during review**,
+  or deliberately not. `npm run search:check` must pass with any new line.
+  Row gets `status: done` when the alias is committed in the app repo.
 - [ ] **Reading the ledger is the curriculum signal.** `close` prints the
   week's counts by category and decision; a month of those is the answer to
   "what are new Muslims actually struggling with", and a category that keeps
@@ -646,10 +654,14 @@ paths into the design plan entry).
   the change recorded in Global Constraints), no local history (0.1),
   separate repo + `/v1` contract in both repos (2.1), launch criteria (4.2).
   Added 5 Sep 2026: the four review outcomes and Iyad as sole decider
-  (Global Constraints, 2.3), original wording preserved through review and
-  never published (2.3), the ledger as the category / gap record (2.3,
-  4.3), provenance from ledger to page and back with a check (2.3 Step 5,
-  4.3), no dashboard (2.3), naming without "report" (title, 3.3, 3.4).
+  (Global Constraints, 2.3), original wording read verbatim during review
+  and gone with the batch (2.3), the ledger as a metadata-only category /
+  gap record — six columns, no wording (Global Constraints, 2.3), aliases
+  typed by Iyad and never copied by a script (2.3 Step 2), `create`
+  captured as a `COMMISSIONED` entry in the app repo at review time (Global
+  Constraints, 2.3), provenance from ledger to page and back with a check
+  (2.3 Step 5, 4.3), no dashboard (2.3), naming without "report" (title,
+  3.3, 3.4). **Locked 5 Sep 2026** after Iyad's final change.
 - **Placeholders:** the worker host and KV namespace id are filled in at
   Task 2.2 deploy time and are the only blanks. The crisis organisations
   are named in Task 1.1 and verified there before they are typed.

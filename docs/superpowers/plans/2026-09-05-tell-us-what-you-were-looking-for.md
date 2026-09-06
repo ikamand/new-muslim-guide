@@ -239,13 +239,13 @@ words that the design forbids, and it currently feeds nothing.
 
 Repo: `new-muslim-guide-submissions`, private. Nothing in this repo changes.
 
-### Task 2.1: The contract, written down in both repos
+### Task 2.1: The contract, written down in both repos ✅ built 5 Sep 2026
 
 **Files:**
 - Create (server repo): `CONTRACT.md`
 - Create (this repo): `docs/submissions-contract.md` — byte-identical
 
-- [ ] **Step 1: Write the contract:**
+- [x] **Step 1: Write the contract:**
   ```
   POST https://<worker-host>/v1/submissions
   Content-Type: application/json
@@ -261,10 +261,10 @@ Repo: `new-muslim-guide-submissions`, private. Nothing in this repo changes.
   Never stored: IP, headers, time of day, any identifier.
   /v1 is frozen. A change is /v2 beside it; /v1 is never removed while any build that calls it may be installed.
   ```
-- [ ] **Step 2: Commit in both repos.** This repo:
+- [x] **Step 2: Commit in both repos.** This repo:
   `Record the submissions API contract`.
 
-### Task 2.2: The worker
+### Task 2.2: The worker ✅ built and deployed 5 Sep 2026 — `https://new-muslim-guide-submissions.ikamand.workers.dev`, KV namespace `af7e6b0f…`, both bindings live on the account's plan. Three things changed from the text below, each recorded in the worker's own header: **validation runs before the burst limit** (a malformed body never costs a reader their send, and the contract says so in both repos); a Content-Length guard refuses bodies over 8 KB before parsing; and `src/env.d.ts` is kept by hand because `wrangler types`, like `wrangler dev` local, cannot run on macOS 12. The smoke test asserts a refusal somewhere in ten rapid sends, not an exact third-send 429, because the binding is per-location and eventually consistent by Cloudflare's own description. **Dashboard confirmation that Workers Logs is off is still Iyad's** (Task 4.2).
 
 **Files (server repo):**
 - Create: `wrangler.jsonc`, `src/worker.ts`, `package.json` (wrangler ≥ 4.36
@@ -275,7 +275,7 @@ Repo: `new-muslim-guide-submissions`, private. Nothing in this repo changes.
 - Consumes: the contract above.
 - Produces: the deployed URL, pasted into `src/lib/submit-gap.ts` (Task 3.1).
 
-- [ ] **Step 1: Config.**
+- [x] **Step 1: Config.**
   ```jsonc
   {
     "name": "new-muslim-guide-submissions",
@@ -290,7 +290,7 @@ Repo: `new-muslim-guide-submissions`, private. Nothing in this repo changes.
   https://developers.cloudflare.com/workers/runtime-apis/bindings/rate-limit/
   on the day — the wrangler configuration page did not carry it when read
   (5 Sep 2026); the binding page did.
-- [ ] **Step 2: The handler.** One route; everything else 404 with empty body.
+- [x] **Step 2: The handler.** One route; everything else 404 with empty body.
   ```ts
   const LIMITS = { text: 1000, locale: 8, appVersion: 16, dailyCap: 500, ttl: 14 * 24 * 3600 };
   const CORS = { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'POST', 'Access-Control-Allow-Headers': 'content-type' };
@@ -335,7 +335,7 @@ Repo: `new-muslim-guide-submissions`, private. Nothing in this repo changes.
   The daily counter is a KV read-then-write and KV is eventually consistent,
   so the cap is approximate. It is a circuit breaker, not accounting.
   `cf-connecting-ip` is read for the binding's key and never stored.
-- [ ] **Step 3: Smoke test** (`test/smoke.test.mjs`, `node --test`, against
+- [x] **Step 3: Smoke test** (`test/smoke.test.mjs`, `node --test`, against
   `wrangler dev` on `http://127.0.0.1:8787`):
   - good body → 204 and empty body
   - `{}` → 400; `{ text: "" , ...}` → 400; not JSON → 400
@@ -345,11 +345,11 @@ Repo: `new-muslim-guide-submissions`, private. Nothing in this repo changes.
   - after the good send, `wrangler kv key list --prefix sub/` shows one key
     and its value parses to exactly the keys `text, locale, appVersion, day`,
     with `day` matching `/^\d{4}-\d{2}-\d{2}$/`
-- [ ] **Step 4: Deploy**, then run the same smoke test against the deployed
+- [x] **Step 4: Deploy**, then run the same smoke test against the deployed
   URL. In the dashboard confirm the Worker shows observability disabled.
-- [ ] **Step 5: Commit** (server repo) `Add the /v1/submissions worker`.
+- [x] **Step 5: Commit** (server repo) `Add the /v1/submissions worker`.
 
-### Task 2.3: The review loop — pull, decide, close — and the ledger
+### Task 2.3: The review loop — pull, decide, close — and the ledger ✅ built 5 Sep 2026 and exercised end to end against the deployment: 12 pulled (crisis-flagged first, dup flagged), decided, closed, store empty, retention green, `ledger-check` fails on a fake row and passes clean. The ledger was reset to its header afterwards; smoke submissions are not gaps.
 
 The whole review tooling for v1. Two scripts, one text file Iyad edits, one
 CSV that grows. No dashboard, no web page, no database beyond KV.
@@ -386,7 +386,7 @@ JSON), `ledger/gaps.csv` (committed), `ledger/categories.mjs` (committed)
   `belief`, `other`. Iyad adds one when a week shows the list is missing
   something; the script refuses an id not in the list.
 
-- [ ] **Step 1: `pull`** runs `retention` first, then lists every `sub/`
+- [x] **Step 1: `pull`** runs `retention` first, then lists every `sub/`
   key, fetches each value, and writes the review file above with every
   submission's **text verbatim**. It does not paraphrase, trim, or strip.
   It flags: `crisis` (whole-word match against the app repo's
@@ -395,7 +395,7 @@ JSON), `ledger/gaps.csv` (committed), `ledger/categories.mjs` (committed)
   item in the batch, which is the only grouping v1 does). Crisis-flagged
   items are printed first. Refuses to run if a review file already exists
   for today, so a half-reviewed file is never overwritten.
-- [ ] **Step 2: Iyad reviews**, in a text editor, in one sitting. Every
+- [x] **Step 2: Iyad reviews**, in a text editor, in one sitting. Every
   block gets a decision. The four decisions and what each means:
   - `create` — the app should answer this and does not. Iyad adds a
     `COMMISSIONED` entry to `src/content/curriculum.ts` now, in his own
@@ -413,23 +413,23 @@ JSON), `ledger/gaps.csv` (committed), `ledger/categories.mjs` (committed)
     directory page's importance.
   - `discard` — spam, abuse, empty, not a question. Category `other`,
     nothing else kept.
-- [ ] **Step 3: `close`** parses the review file, **fails if any block has
+- [x] **Step 3: `close`** parses the review file, **fails if any block has
   no decision, an unknown decision, an unknown category, or a `create` or
   `covered` block with no outcome**, appends one row per block to
   `ledger/gaps.csv` — six columns, and it has no code path that reads the
   quoted text at all — deletes exactly the KV keys the review file came from,
   deletes the review file, and prints a one-line summary: counts by decision
   and by category for the week. Commit the ledger.
-- [ ] **Step 4: `retention`** lists `sub/` keys and fails (exit 1) if any
+- [x] **Step 4: `retention`** lists `sub/` keys and fails (exit 1) if any
   key's `<day>` segment is older than 14 days, proving the TTL holds rather
   than assuming it. Also fails if a review file older than 7 days exists in
   `.cache/`, so review cannot silently stall with raw text sitting on disk.
-- [ ] **Step 5: `ledger-check --app <path>`** fails if any row with `status:
+- [x] **Step 5: `ledger-check --app <path>`** fails if any row with `status:
   done` and `decision: create` names an `outcome` file that does not exist
   in the app repo or does not contain that row's ledger id. This is the
   provenance rule as a check: a page born from submissions says so in its
   header (the app-side half is Task 4.3), and the ledger points at the page.
-- [ ] **Step 6: Test by hand:** send three (one containing a crisis phrase,
+- [x] **Step 6: Test by hand:** send three (one containing a crisis phrase,
   two identical), `pull` (crisis first, `dup` flagged, text verbatim),
   decide all three, `close` (three rows, keys gone, file gone, summary
   printed), `retention` passes, `close` again refuses (no file). Edit a
@@ -635,7 +635,9 @@ paths into the design plan entry).
   made at review time, `content:verify`, `evidence` where cited,
   `style:check`, `i18n:manifest`, the scholarly reviewer — like any other
   page. Its source file header carries one line:
-  `Origin: "Tell us what you were looking for", ledger 2026-W40 #03, #11`.
+  `Origin: "Tell us what you were looking for", submissions 00880490, 24a0af70`
+  — the first eight characters of each ledger row's `id`, which is what
+  `ledger-check` looks for.
   The ledger row gets `status: done`, and
   `npm run ledger-check -- --app ../new-muslim-guide` passes.
 - [ ] **A `covered` row's alias was already typed by Iyad during review**,

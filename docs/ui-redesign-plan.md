@@ -3736,3 +3736,48 @@ mode green; strict mode's uncited count went 144 → 145 because this page
 deliberately cites nothing), `i18n:manifest`, `expo export --platform web`
 green. `nav:check` fails on `recite-spike.tsx:142`, untouched here and
 failing before. Ships by OTA.
+
+
+---
+
+## 5 Sep 2026 — The worker is live, in its own repository ✅
+
+Phase 2 of the "Tell us what you were looking for" plan.
+`github.com/ikamand/new-muslim-guide-submissions`, private, cloned beside
+this repo; the app repo's `package.json`, `app.json` and `.gitignore` are
+untouched, which was the point of the second repository.
+
+**Live:** `https://new-muslim-guide-submissions.ikamand.workers.dev`,
+`POST /v1/submissions`. Four fields into KV with a 14-day expiry set at
+write, a status code and an empty body back, Workers Logs off. Verified
+against the deployment: the stored value has exactly `text, locale,
+appVersion, day`, the day has no time, the key expires in 14 days, and the
+daily counter exists. Smoke test 5/5.
+
+**Two decisions made on the way**, both in the worker's header and the
+contract in both repos. Validation runs before the burst limit, so a
+malformed body never costs a reader the send that follows. And the smoke
+test asserts that a burst of ten rapid sends contains a refusal rather than
+that the third is refused, because Cloudflare describes the binding as
+per-location, eventually consistent and "intentionally designed to not be
+used as an accurate accounting system". It is a circuit breaker, and the
+test says so.
+
+**The weekly loop works.** `pull` wrote twelve submissions verbatim into
+one file, crisis-flagged first and duplicates flagged; `close` refused
+nothing because every block was decided, appended twelve metadata rows,
+deleted the twelve keys and the file; `retention` passed on an empty
+store; `ledger-check` failed on a planted row naming a page that does not
+exist and passed once it was removed. The ledger was reset to its header:
+smoke submissions are not gaps.
+
+**Still Iyad's:** confirming in the Cloudflare dashboard that the Worker
+shows observability off, which the config sets and no command reads back.
+
+**This Mac's limit, recorded:** macOS 12.6 is below the Workers runtime's
+floor, so `wrangler dev` runs `--remote` and `wrangler types` cannot run;
+`src/env.d.ts` declares the two bindings by hand and changes with
+`wrangler.jsonc`.
+
+Ships: the worker by its own repo's `npm run deploy`. Nothing in the app
+changed except `docs/submissions-contract.md`.

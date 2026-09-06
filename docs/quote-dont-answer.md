@@ -538,4 +538,4 @@ got quoted deserves to be met head-on rather than edited out.
   deleted after a weekly read. The local miss log is removed in the same
   work. See `docs/ui-redesign-plan.md`, "5 Sep 2026 — Community Q&A:
   considered, not building", and
-  `docs/superpowers/plans/2026-09-05-question-gap-report.md`.
+  `docs/superpowers/plans/2026-09-05-tell-us-what-you-were-looking-for.md`.

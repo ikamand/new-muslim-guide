@@ -3529,7 +3529,7 @@ Verified on web at 390. OTA.
 
 ---
 
-## 5 Sep 2026 — Community Q&A: considered, not building. The question-gap report instead
+## 5 Sep 2026 — Community Q&A: considered, not building. "Tell us what you were looking for" instead
 
 Iyad proposed a community Q&A: questions, answers, categories, likes and
 bookmarks, anonymous posting, AI pre-moderation, a human moderation queue,
@@ -3570,8 +3570,11 @@ file — somebody's 1am question in their own words". It is on the phone, in
 plain storage, shown nowhere and read by nothing. The phone, not the server,
 is the threat model for a convert who is not out to their family.
 
-**What is being built:** a question-gap report. Full plan in
-[`docs/superpowers/plans/2026-09-05-question-gap-report.md`](superpowers/plans/2026-09-05-question-gap-report.md).
+**What is being built:** one line, "Tell us what you were looking for" —
+a content-gap feedback mechanism, not a religious-advice or support service,
+and not called anything else (Iyad ruled out "report", for the reader and
+for us, the same evening). Full plan in
+[`docs/superpowers/plans/2026-09-05-tell-us-what-you-were-looking-for.md`](superpowers/plans/2026-09-05-tell-us-what-you-were-looking-for.md).
 
 - One optional line on the ask sheet's existing empty card, and nowhere
   else: "Tell us what you were looking for." It appears only after the
@@ -3621,6 +3624,20 @@ it existed: the word "community" from anything this app says about itself.
 privacy label and `settings.footnote` change; a standing reviewer, because
 answers are pages; a weekly reading habit; and a hosting provider whose own
 edge handling we do not control, said plainly rather than promised away.
+
+**The review, added the same evening.** Iyad is the reviewer. Every
+submission gets exactly one of four decisions — **Create content / Already
+covered / Needs qualified human help / Discard** — in a text file, in one
+sitting; a script refuses to close a week with any block undecided. A
+ledger in the private server repo keeps the week, decision, category,
+canonical question, and for the first two decisions the original wording
+with identifying detail removed — because how a new Muslim phrases a
+question is the insight, and it is never published. ⚠️ That last column
+amends the "raw deleted after the batch" rule agreed earlier in the day,
+knowingly. A page born from the ledger says so in its header and the ledger
+points back; a check fails when they disagree. AI may later group and flag
+inside the review file and can never write a decision, because the closing
+script reads decisions only from the file Iyad edited. No dashboard in v1.
 
 **Held, and where:** the human-support directory (a help topic; required by
 the card as its "needs a person" answer, and the same open question as the

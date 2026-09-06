@@ -1,4 +1,10 @@
-# Question-gap report — Implementation Plan
+# "Tell us what you were looking for" — Implementation Plan
+
+*Renamed 5 Sep 2026. This was "Question-gap report" for a few hours; Iyad
+ruled the word "report" out, for the reader and for us. The feature is called
+by its own line, "Tell us what you were looking for", and internally the
+component is `LookingFor`. It is a content-gap feedback mechanism, not a
+religious-advice or support service, and not a communication channel.*
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
@@ -12,7 +18,11 @@ card posts one JSON body to `POST /v1/submissions` on a Cloudflare Worker that
 lives in its own private repository. The worker stores four fields in KV with a
 14-day expiry and answers with a status code only. A deterministic, offline,
 whole-word phrase list shows crisis resources above Send and never blocks it.
-Weekly, a script pulls the batch, you read it, and the script deletes it.
+Weekly, a script pulls the batch into one text file, Iyad reads it and gives
+every item one of four decisions, and a second script records the decisions
+in a ledger and deletes the batch. The ledger, not the batch, is what
+accumulates: which gaps new Muslims actually hit, and which pages came from
+them.
 
 **Tech Stack:** Expo SDK 57 / React Native (app, OTA). Cloudflare Workers +
 KV + the rate-limit binding (server, separate repo `new-muslim-guide-submissions`,
@@ -46,6 +56,42 @@ and its "Final decisions / edge cases" were agreed in conversation on 5 Sep
   same commit as a change to the fields sent.
 - **Content that ships unreviewed is marked ⚠️ in its source file.** The
   crisis resources and the directory are content, and gate the feature.
+- **The boundaries, locked (Iyad, 5 Sep 2026):** no public questions, no
+  answers shown to anyone, no profiles, likes, replies, counts, notifications,
+  and no user-to-user communication of any kind. No admin dashboard in v1:
+  the review tooling is two scripts and a text file, sized for one reviewer.
+- **Naming:** the reader sees "Tell us what you were looking for" and nothing
+  else names the feature. The word "report" appears nowhere — not in a
+  string, a file name, a component, a commit message or a doc.
+- **The reviewer is Iyad, and every final decision is his.** The review has
+  exactly four outcomes and no others: **Create content**, **Already
+  covered**, **Needs qualified human help**, **Discard**. AI may later help
+  by grouping similar submissions, flagging likely spam or personal detail,
+  and ordering the review file. **AI never answers a question, never
+  attaches a religious answer, and never decides an outcome.** There is no
+  field in any script for it to do so.
+- **Original wording is preserved through review and never published.** The
+  batch script does not alter the text; it flags. How a new Muslim phrases a
+  question is the insight, and a paraphrase loses it. Raw wording reaches a
+  reader only as a search alias or as a canonical question Iyad rewrote.
+- **The ledger is the product of review**, kept in the private server repo,
+  never in the app repo or on any device. It carries, per decided item, the
+  week, the decision, a category, the canonical question Iyad wrote, and —
+  for **Create content** and **Already covered** only — the original wording
+  with any identifying detail removed by him at review time. **Needs
+  qualified human help** and **Discard** keep the category and nothing
+  else. ⚠️ **This changes a locked decision.** The agreed plan said raw
+  submissions are deleted after the batch and nothing survives but pages and
+  aliases. Now a de-identified original wording survives in the ledger for
+  the two outcomes where phrasing is the value. Iyad asked for it on 5 Sep
+  2026 knowing the retention rule; the 14-day rule still governs the server
+  store in full, and the disclosure's "may be used to improve the app"
+  already covers it. If this ever feels wrong, the ledger column is the one
+  thing to delete.
+- **A page born from submissions says so.** Its source file header carries
+  the ledger ids it came from, and the ledger's row points at the page.
+  Both directions, so "which gaps led to new material" is a grep, not a
+  memory. A check fails when the two disagree (Task 2.3).
 - **Ordering outside this plan:** the reciter is still the only release gate
   and nothing here moves it. Phase 0 here ships alone. Phases 0–1 of
   `docs/quote-dont-answer.md` (aliases, the eval) are recommended before
@@ -87,7 +133,7 @@ words that the design forbids, and it currently feeds nothing.
   seeding from misses (`:46-56`)
 - Modify: `docs/build-order.md:582` — the bullet "Seed it from Phase 5's
   failed-search log" becomes "Seed it from the submission stream
-  (`docs/superpowers/plans/2026-09-05-question-gap-report.md`); the local
+  (`docs/superpowers/plans/2026-09-05-tell-us-what-you-were-looking-for.md`); the local
   log was removed 5 Sep 2026 because a reader's own words must not persist
   on the phone."
 
@@ -118,7 +164,7 @@ words that the design forbids, and it currently feeds nothing.
   observations value. Screenshot the empty card.
 - [ ] **Step 7: Fingerprint, commit, OTA.**
   `npx eas fingerprint:compare --build-id <id from eas build:list --platform android --limit 1 --json>`
-  must report no difference. Commit `Remove the local missed-search log`,
+  must show no difference. Commit `Remove the local missed-search log`,
   push, `npm run update:preview`.
 
 ---
@@ -298,28 +344,95 @@ Repo: `new-muslim-guide-submissions`, private. Nothing in this repo changes.
   URL. In the dashboard confirm the Worker shows observability disabled.
 - [ ] **Step 5: Commit** (server repo) `Add the /v1/submissions worker`.
 
-### Task 2.3: Pull, purge, retention check
+### Task 2.3: The review loop — pull, decide, close — and the ledger
 
-**Files (server repo):** `scripts/pull.mjs`, `scripts/purge.mjs`,
-`scripts/retention.mjs`, `scripts/kv.mjs` (shared: shells out to
-`wrangler kv key list/get/delete --remote`, parses JSON)
+The whole review tooling for v1. Two scripts, one text file Iyad edits, one
+CSV that grows. No dashboard, no web page, no database beyond KV.
 
-- [ ] **Step 1: `pull`** lists every `sub/` key, fetches each value, writes
-  `.cache/submissions-<today>.json` (an array; the server repo's
-  `.gitignore` carries `.cache/` — that file is not a fingerprint input in
-  the server repo, and the app repo's `.gitignore` is untouched). Prints the
-  count, and prints crisis-matched items first. It takes `--phrases <path>`
-  pointing at the app repo's `src/content/crisis.ts` so there is one list,
-  never a copy in the server repo that can drift.
-- [ ] **Step 2: `purge`** reads the last pulled file's keys and deletes
-  exactly those, then deletes the local file. Run after the reading session,
-  never before. Refuses to run if no pulled file exists.
-- [ ] **Step 3: `retention`** lists `sub/` keys and fails (exit 1) if any
-  key's `<day>` segment is older than 14 days. This proves the TTL holds
-  rather than assuming it. Run weekly before `pull`.
-- [ ] **Step 4: Test by hand:** send three, `pull` (three items, one
-  crisis-matched first if a phrase was used), `purge`, `list` shows none,
-  `retention` passes. Commit `Add pull, purge and retention scripts`.
+**Files (server repo):** `scripts/pull.mjs`, `scripts/close.mjs`,
+`scripts/retention.mjs`, `scripts/ledger-check.mjs`, `scripts/kv.mjs`
+(shared: shells out to `wrangler kv key list/get/delete --remote`, parses
+JSON), `ledger/gaps.csv` (committed), `ledger/categories.mjs` (committed)
+
+**Interfaces:**
+- The review file, `.cache/review-<YYYY-MM-DD>.md`, one block per
+  submission, written by `pull`, edited by Iyad, read by `close`:
+  ```
+  ## 03  [2026-09-28]  en  1.0.0     flags: crisis
+  > how do i pray without my parents noticing
+  decision:
+  category:
+  canonical:
+  ```
+  `decision` takes exactly one of `create`, `covered`, `human`, `discard`.
+  `category` takes one id from `ledger/categories.mjs`. `canonical` is the
+  question in Iyad's words, required for `create` and `covered`, ignored
+  otherwise. The quoted line is the original, untouched; Iyad edits it in
+  place to remove identifying detail before `close` copies it.
+- `ledger/gaps.csv` columns:
+  `week, id, decision, category, canonical, original, outcome, status`.
+  `original` is filled only for `create` and `covered`. `outcome` is a page
+  id (`learn/<file>` or `reference/<id>`), an alias key, or `directory`;
+  empty until done. `status` is `open` or `done`.
+- `ledger/categories.mjs`: a short fixed list, seeded from the ten
+  `HELP_TOPICS` ids in the app (`src/content/help.ts:73`) so the ledger's
+  categories are the app's own map, plus `family`, `work-money`, `identity`,
+  `belief`, `other`. Iyad adds one when a week shows the list is missing
+  something; the script refuses an id not in the list.
+
+- [ ] **Step 1: `pull`** runs `retention` first, then lists every `sub/`
+  key, fetches each value, and writes the review file above with every
+  submission's **text verbatim**. It does not paraphrase, trim, or strip.
+  It flags: `crisis` (whole-word match against the app repo's
+  `src/content/crisis.ts`, passed as `--phrases <path>` so there is one
+  list), `long` (over 400 characters), and `dup` (identical text to another
+  item in the batch, which is the only grouping v1 does). Crisis-flagged
+  items are printed first. Refuses to run if a review file already exists
+  for today, so a half-reviewed file is never overwritten.
+- [ ] **Step 2: Iyad reviews**, in a text editor, in one sitting. Every
+  block gets a decision. The four decisions and what each means:
+  - `create` — the app should answer this and does not. A canonical
+    question is written now; a page or section is written later through the
+    normal content pipeline. Ledger row opens with `status: open`.
+  - `covered` — the app already answers it and the search did not find it.
+    The canonical question and the original wording become a search alias
+    in `src/lib/search-words.ts` (the alias layer that already exists), and
+    `scripts/search-check.mjs` gets the original wording as an expectation.
+    Ledger row opens with `outcome` = the alias key.
+  - `human` — a personal circumstance, a fatwa-level question, or anything
+    only a qualified person should answer. Category only. Nothing else is
+    kept, and the count under this decision is the evidence for the
+    directory page's importance.
+  - `discard` — spam, abuse, empty, not a question. Category `other`,
+    nothing else kept.
+- [ ] **Step 3: `close`** parses the review file, **fails if any block has
+  no decision, an unknown decision, an unknown category, or a `create` or
+  `covered` block with no canonical**, appends one row per block to
+  `ledger/gaps.csv`, deletes exactly the KV keys the review file came from,
+  deletes the review file, and prints a one-line summary: counts by decision
+  and by category for the week. Commit the ledger.
+- [ ] **Step 4: `retention`** lists `sub/` keys and fails (exit 1) if any
+  key's `<day>` segment is older than 14 days, proving the TTL holds rather
+  than assuming it. Also fails if a review file older than 7 days exists in
+  `.cache/`, so review cannot silently stall with raw text sitting on disk.
+- [ ] **Step 5: `ledger-check --app <path>`** fails if any row with `status:
+  done` and `decision: create` names an `outcome` file that does not exist
+  in the app repo or does not contain that row's ledger id. This is the
+  provenance rule as a check: a page born from submissions says so in its
+  header (the app-side half is Task 4.3), and the ledger points at the page.
+- [ ] **Step 6: Test by hand:** send three (one containing a crisis phrase,
+  two identical), `pull` (crisis first, `dup` flagged, text verbatim),
+  decide all three, `close` (three rows, keys gone, file gone, summary
+  printed), `retention` passes, `close` again refuses (no file). Edit a
+  row to `done` with a fake outcome and confirm `ledger-check` fails.
+  Commit `Add the review loop and the ledger`.
+
+**AI, later, and only here.** If the weekly batch outgrows one sitting, a
+model may be added to `pull` to group similar submissions under one heading
+and to add a `pii?` flag. It writes into the review file's `flags` line and
+nowhere else. It cannot fill `decision`, `category` or `canonical`, because
+`close` reads those from the file Iyad edited and there is no path from a
+model to that file. That absence is the rule; do not add the path.
 
 ---
 
@@ -382,17 +495,17 @@ check, commit. Ships together by OTA at the end of Phase 4.
   it is not.
 - [ ] **Step 3: Run the check** — passes. Commit `Add the crisis matcher`.
 
-### Task 3.3: `GapReport`
+### Task 3.3: `LookingFor`
 
 **Files:**
-- Create: `src/components/gap-report.tsx`
+- Create: `src/components/looking-for.tsx`
 
 **Interfaces:**
 - Consumes: `submitGap`, `matchesCrisis`, `CRISIS_RESOURCES`, `useLocale`
   (`locale`, `t`), `expo-constants` (`Constants.expoConfig?.version ??
   'unknown'` — `expoConfig` is nullable per the SDK 57 docs), theme tokens
   and `ThemedText` rungs only (no local `fontSize`).
-- Produces: `export function GapReport({ query }: { query: string })`
+- Produces: `export function LookingFor({ query }: { query: string })`
 
 State machine (`useState<'offer' | 'open' | 'sending' | 'sent' | 'failed'>`):
 
@@ -433,19 +546,20 @@ disabled by it. Nothing in this component persists; unmount discards all.
 - [ ] **Step 3: Verify on web** at 390, both themes, every state, by
   driving it with the endpoint URL temporarily pointed at (a) the real
   worker, (b) `https://127.0.0.1:9` for the failure state. Screenshot each.
-  Commit `Add the question-gap report component`.
+  Commit `Add the "Tell us what you were looking for" line`.
 
 ### Task 3.4: Wire it into the empty card, and tell the truth in Settings
 
 **Files:**
-- Modify: `src/app/ask.tsx:218-236` — render `<GapReport query={trimmed} />`
+- Modify: `src/app/ask.tsx:218-236` — render `<LookingFor query={trimmed} />`
   inside `styles.empty`, after the browse link
 - Modify: `src/i18n/ui.ts:309` — `settings.footnote` currently ends
   "Everything on this device stays on this device." Change to: "Everything on
   this device stays on this device, except what you choose to send us from
   the ask sheet."
 - Modify: `src/app/ask.tsx` docstring — one paragraph: the empty card now
-  carries the report line, what it sends, and that nothing is kept locally
+  carries the "Tell us what you were looking for" line, what it sends, and
+  that nothing is kept locally
 
 - [ ] **Step 1: Wire and reword.** `npm run i18n:manifest`;
   `npm run style:check`; `npm run search:check`.
@@ -453,8 +567,8 @@ disabled by it. Nothing in this component persists; unmount discards all.
   console (`console.log(JSON.stringify(body))` added locally and removed
   before commit): exactly three keys, and the disclosure's claims hold.
 - [ ] **Step 3: Verify with eyes** on web: the empty card with the offer
-  line; open; sent; failed; crisis. Commit `Ask sheet: report a question the
-  app cannot answer`.
+  line; open; sent; failed; crisis. Commit `Ask sheet: tell us what you were
+  looking for`.
 
 ---
 
@@ -493,16 +607,31 @@ paths into the design plan entry).
 - [ ] App Store and Play data declarations updated to "other user content,
   not linked to identity" — operational, before the store submission that
   carries this OTA's runtime.
-- [ ] `npx eas fingerprint:compare` against the installed build reports no
+- [ ] `npx eas fingerprint:compare` against the installed build shows no
   difference; then `npm run update:preview`.
 
 ### Task 4.3: Operations, written down once
 
-- [ ] Weekly: `npm run retention && npm run pull -- --phrases ../new-muslim-guide/src/content/crisis.ts`;
-  read in one sitting; sort into page / alias / directory; `npm run purge`.
-- [ ] Every page that comes out of the stream goes through
-  `content:verify`, `evidence` where cited, `style:check`, `i18n:manifest`,
-  and the reviewer, like any other page.
+- [ ] **Weekly, in the server repo:**
+  `npm run pull -- --phrases ../new-muslim-guide/src/content/crisis.ts`,
+  then read and decide every block in one sitting, then `npm run close`,
+  then commit the ledger. `pull` runs `retention` itself.
+- [ ] **A `create` row becomes a page** through the normal pipeline —
+  written in English in `src/content/`, `content:verify`, `evidence` where
+  cited, `style:check`, `i18n:manifest`, the scholarly reviewer — like any
+  other page. Its source file header carries one line:
+  `Origin: "Tell us what you were looking for", ledger 2026-W40 #03, #11`.
+  The ledger row gets `outcome` = the page id and `status: done`, and
+  `npm run ledger-check -- --app ../new-muslim-guide` passes.
+- [ ] **A `covered` row becomes an alias** in `src/lib/search-words.ts` and
+  an expectation in `scripts/search-check.mjs`, both carrying the original
+  wording. `npm run search:check` must pass with the new line. Row gets
+  `status: done`.
+- [ ] **Reading the ledger is the curriculum signal.** `close` prints the
+  week's counts by category and decision; a month of those is the answer to
+  "what are new Muslims actually struggling with", and a category that keeps
+  producing `human` rows is a category the directory page must serve better.
+  No dashboard: `grep` and the CSV are the tool until they are not enough.
 - [ ] Nothing is promised to anyone. No reply, no notification, no page.
 
 ---
@@ -511,14 +640,20 @@ paths into the design plan entry).
 
 - **Spec coverage:** placement (3.4), disclosure (3.3 Step 1), collected /
   not collected (2.1, 2.2), flow into review (2.3, 4.3), AI only in the
-  batch and not at launch (4.3 — none used), crisis deterministic and
+  batch, only into `flags`, not at launch (2.3), crisis deterministic and
   non-blocking (3.2, 3.3), retention 14 days + check (2.2, 2.3), failure
   state with no retry (3.1, 3.3), rate limit without identity (2.2, with
   the change recorded in Global Constraints), no local history (0.1),
   separate repo + `/v1` contract in both repos (2.1), launch criteria (4.2).
+  Added 5 Sep 2026: the four review outcomes and Iyad as sole decider
+  (Global Constraints, 2.3), original wording preserved through review and
+  never published (2.3), the ledger as the category / gap record (2.3,
+  4.3), provenance from ledger to page and back with a check (2.3 Step 5,
+  4.3), no dashboard (2.3), naming without "report" (title, 3.3, 3.4).
 - **Placeholders:** the worker host and KV namespace id are filled in at
-  Task 2.2 deploy time and are the only blanks. The crisis organisations are
-  deliberately Iyad's decision (Task 1.1).
+  Task 2.2 deploy time and are the only blanks. The crisis organisations
+  are named in Task 1.1 and verified there before they are typed.
 - **Types:** `GapSubmission`, `GapResult`, `submitGap`, `matchesCrisis`,
-  `CRISIS_PHRASES`, `CRISIS_RESOURCES`, `GapReport({ query })` are used with
+  `CRISIS_PHRASES`, `CRISIS_RESOURCES`, `LookingFor({ query })`, the review
+  file's four decision words and the ledger's eight columns are used with
   the same names throughout.

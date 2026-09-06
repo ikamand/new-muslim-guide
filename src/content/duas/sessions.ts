@@ -248,6 +248,28 @@ export function occasionFor(session: AdhkarSession): HisnOccasion | undefined {
 }
 
 /**
+ * The sitting that reads a line of the book, for a link into the counter.
+ *
+ * Most occasions have no sitting, and the answer is undefined: the book page
+ * is where such a line lives. Sleep has one. Morning-and-evening has two over
+ * one occasion, so the line decides where it can — a line the book marks for
+ * one sitting opens in that sitting whatever the hour, because the other
+ * hides it (`linesForOccasion`) and would open on line 1 instead. An unmarked
+ * line is said at both, and `preferred` — the sitting the clock is in, or the
+ * next one, from `sittingToOffer` in `lib/adhkar-window.ts` — breaks the tie.
+ */
+export function sessionForLine(
+  occasionId: number,
+  lineId: number,
+  preferred: 'morning' | 'evening',
+): AdhkarSession | undefined {
+  const candidates = ADHKAR_SESSIONS.filter((session) => session.occasion === occasionId);
+  if (candidates.length <= 1) return candidates[0];
+  const sitting = annotationFor(lineId)?.time ?? preferred;
+  return candidates.find((session) => session.sitting === sitting) ?? candidates[0];
+}
+
+/**
  * The conjunction joining the two sittings in the book's shared heading.
  *
  * Named rather than written inline because `arabicNameFor` and

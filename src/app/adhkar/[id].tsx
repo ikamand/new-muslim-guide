@@ -53,7 +53,7 @@ const SESSION_TITLE: Record<string, UIKey> = {
 export default function AdhkarSessionScreen() {
   const theme = useTheme();
   const { t } = useLocale();
-  const { id } = useLocalSearchParams<{ id: string }>();
+  const { id, line } = useLocalSearchParams<{ id: string; line?: string }>();
   const { sittingDone } = useObservations();
 
   const session = sessionById(id);
@@ -61,7 +61,17 @@ export default function AdhkarSessionScreen() {
 
   const steps = useMemo(() => (session ? stepsFor(session) : []), [session]);
 
-  const [index, setIndex] = useState(0);
+  /*
+    Opened at a line when a link names one — the Today card, pointing at the
+    dhikr it showed. The book's row id, not a position: a sitting hides the
+    rows marked for the other one, so positions differ between the two and
+    from the book. A line this sitting does not read falls back to the start
+    rather than to a neighbour, for the reason `resolvePick` gives.
+  */
+  const [index, setIndex] = useState(() => {
+    const at = steps.findIndex((step) => step.line.id === Number(line));
+    return at === -1 ? 0 : at;
+  });
   const [count, setCount] = useState(0);
 
   if (!session || !occasion) {

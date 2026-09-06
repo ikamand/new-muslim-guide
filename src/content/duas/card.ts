@@ -53,9 +53,10 @@ export type CardPick = {
  * Words worth saying on any day of any year.
  *
  * Each is a standalone line — not a narration about one — and each carries a
- * count the book states in its own prose. Four is deliberate: enough that the
- * card is not the same every week, few enough that every entry can be checked
- * by a person in one sitting.
+ * count the book states in its own prose. Three: enough that the card is not
+ * the same every day, few enough that every entry can be checked by a person
+ * in one sitting. (Four until 5 Sep 2026 — the note inside the list says
+ * which went and why.)
  */
 /**
  * ⚠️ EVERY PICK IS AN EXPLICIT LINE, READ BEFORE IT WAS WRITTEN DOWN.
@@ -86,7 +87,17 @@ type Pick = { occasion: number; line: number };
 /** Words worth saying on any day of any year, each with a count the book states. */
 const ALWAYS: readonly Pick[] = [
   { occasion: 1269190, line: 21 }, // سبحان الله وبحمده — ×100
-  { occasion: 1269190, line: 23 }, // لا إله إلا الله وحده لا شريك له — ×100
+  /*
+    Line 23 — لا إله إلا الله وحده لا شريك له, ×100 — was here until 5 Sep
+    2026. The book marks it (مائةَ مرَّةٍ إذا أصبحَ), a hundred times in the
+    MORNING, and `annotations.ts` hides it from the evening sitting for that
+    reason — but this pool is served at any hour, and the card told Iyad to
+    say it at half past four in the afternoon. Dropped rather than gated:
+    `pickForNow` has no prayer times, and three lines that are always right
+    beat four with a clock-dependent exception. The morning sitting still
+    reads it in its place. `narration-check` now fails on any evergreen pick
+    the book marks for one sitting.
+  */
   { occasion: 1269190, line: 26 }, // أستغفر الله وأتوب إليه — ×100
   { occasion: 1269190, line: 28 }, // اللهم صل وسلم على نبينا محمد — ×10
 ];

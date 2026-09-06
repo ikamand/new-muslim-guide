@@ -5,8 +5,10 @@ import { PressableLink } from '@/components/pressable-link';
 import { Rubric } from '@/components/jadwal';
 import { ThemedText } from '@/components/themed-text';
 import { pickForNow, resolvePick, type CardReason } from '@/content/duas/card';
+import { sessionForLine } from '@/content/duas/sessions';
 import { Spacing } from '@/constants/theme';
 import { useHijriToday } from '@/hooks/use-hijri';
+import { sittingToOffer } from '@/lib/adhkar-window';
 import { useLocale } from '@/hooks/use-locale';
 import { usePrayerTimes } from '@/hooks/use-prayer-times';
 import { useTheme } from '@/hooks/use-theme';
@@ -59,9 +61,23 @@ export function DuaCard() {
   const { occasion, line } = resolved;
   const long = line.arabic.length > CLAMP_AT || (line.english?.length ?? 0) > CLAMP_AT;
 
+  /*
+    Into the sitting, at this line — not the book page.
+
+    The card showed a dhikr marked × 100 and opened a page of twenty-nine
+    lines with no counter, where the reader then had to find it (Iyad, 5 Sep
+    2026). Where a sitting reads this occasion the link opens that sitting on
+    this very line, counter and arrows included. The book page remains the
+    destination for the occasions no sitting reads.
+  */
+  const session = sessionForLine(occasion.id, line.id, sittingToOffer(today, new Date()));
+  const href = session
+    ? { pathname: '/adhkar/[id]' as const, params: { id: session.id, line: String(line.id) } }
+    : { pathname: '/dua-book/[id]' as const, params: { id: String(occasion.id) } };
+
   return (
     <PressableLink
-      href={{ pathname: '/dua-book/[id]', params: { id: String(occasion.id) } }}
+      href={href}
       style={[styles.card, { borderColor: theme.goldSoft }]}
       pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
       <View style={styles.head}>

@@ -121,6 +121,20 @@ for (let day = 0; day < 366; day += 1) {
           `annotated recited:false — ${HISN_ANNOTATIONS[resolved.line.id].reason}`);
         continue;
       }
+      /*
+        The evergreen pool is served at any hour, so nothing in it may be a
+        line the book marks for one sitting. Line 1269255 — a hundred times
+        `إذا أصبحَ`, in the morning — sat in it until 5 Sep 2026, and the card
+        offered it at half past four in the afternoon. `annotations.ts`
+        already knows which lines those are; this makes the card ask.
+      */
+      const sitting = HISN_ANNOTATIONS[resolved.line.id]?.time;
+      if (pick.reason === 'always' && sitting) {
+        failures += 1;
+        console.error(`\n✗ the evergreen pool holds line ${resolved.line.id}, which the ` +
+          `book marks for the ${sitting} sitting — ${HISN_ANNOTATIONS[resolved.line.id].reason}`);
+        continue;
+      }
       const hits = markersIn(resolved.line.arabic);
       if (hits.length > 0) report(`card pick ${key} (${pick.reason})`, resolved, hits);
     }

@@ -157,3 +157,24 @@ export function windowAt(today: DayTimes | null, now: Date): WindowState {
 
   return { window: null };
 }
+
+/**
+ * Which of the two daily sittings to open when a link has to choose.
+ *
+ * The live one, if morning or evening is open. Otherwise the NEXT one: a
+ * dhikr tapped between Dhuhr and ʿAsr opens in the evening sitting it is
+ * about to belong to, and one tapped after ʿIshāʾ opens in tomorrow's
+ * morning. Without prayer times the clock decides, on spans that sit inside
+ * the ones `clockWindow` uses.
+ */
+export function sittingToOffer(today: DayTimes | null, now: Date): 'morning' | 'evening' {
+  const { window } = windowAt(today, now);
+  if (window === 'morning' || window === 'evening') return window;
+  if (window === 'night') return 'morning';
+
+  const dhuhr = today?.prayers.find((prayer) => prayer.id === 'dhuhr')?.time;
+  const isha = today?.prayers.find((prayer) => prayer.id === 'isha')?.time;
+  if (dhuhr && isha) return now < dhuhr || now >= isha ? 'morning' : 'evening';
+  const hour = now.getHours();
+  return hour < 12 || hour >= 21 ? 'morning' : 'evening';
+}

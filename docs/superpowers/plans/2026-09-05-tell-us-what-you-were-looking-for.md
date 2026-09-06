@@ -123,7 +123,7 @@ and its "Final decisions / edge cases" were agreed in conversation on 5 Sep
 Ships alone, first, by OTA. It is the on-device history of a reader's own
 words that the design forbids, and it currently feeds nothing.
 
-### Task 0.1: Delete the miss log
+### Task 0.1: Delete the miss log ✅ built 5 Sep 2026, commit `4675977`, OTA on runtime `57541e46…` — Step 6 (on-device check) awaits Iyad's phone
 
 **Files:**
 - Modify: `src/lib/observations.ts:62` (`MAX_MISSES`), `:95-107` (the
@@ -147,18 +147,18 @@ words that the design forbids, and it currently feeds nothing.
   5 Sep 2026: `grep -rn "misses\|searchMissed" src` hits only these three
   files).
 
-- [ ] **Step 1: Remove the field, the constant, the recorder and the parser
+- [x] **Step 1: Remove the field, the constant, the recorder and the parser
   branch** from `observations.ts`. Stored `misses` from older installs are
   dropped on the next write because the parser no longer copies them; no
   migration code.
-- [ ] **Step 2: Remove `searchMissed`** from the hook's type, callback, `api`
+- [x] **Step 2: Remove `searchMissed`** from the hook's type, callback, `api`
   object and dependency array.
-- [ ] **Step 3: Remove the effect, both constants and the import** from
+- [x] **Step 3: Remove the effect, both constants and the import** from
   `ask.tsx`, and rewrite the docstring: the corrected paragraph about "I
   farted" stays (it is about ranking), the sentences about the miss log and
   Phase 8 seeding go.
-- [ ] **Step 4: Update `build-order.md:582`** as above.
-- [ ] **Step 5: Verify.** `npx tsc --noEmit`; `npx expo export --platform
+- [x] **Step 4: Update `build-order.md:582`** as above.
+- [x] **Step 5: Verify.** `npx tsc --noEmit`; `npx expo export --platform
   web`; `npm run search:check`; `grep -rn "misses\|searchMissed\|recordMiss"
   src docs/build-order.md` returns nothing.
 - [ ] **Step 6: Verify on the Android preview build.** Type a query that
@@ -166,7 +166,7 @@ words that the design forbids, and it currently feeds nothing.
   `adb shell run-as com.newmuslimguide.app cat databases/RKStorage` (or the
   AsyncStorage file the build uses) and confirm no `misses` key in the
   observations value. Screenshot the empty card.
-- [ ] **Step 7: Fingerprint, commit, OTA.**
+- [x] **Step 7: Fingerprint, commit, OTA.**
   `npx eas fingerprint:compare --build-id <id from eas build:list --platform android --limit 1 --json>`
   must show no difference. Commit `Remove the local missed-search log`,
   push, `npm run update:preview`.

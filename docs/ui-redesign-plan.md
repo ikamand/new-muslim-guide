@@ -3661,3 +3661,25 @@ client because they reduce how many readers reach the empty card at all.
 
 Ships: the app side by OTA; the worker by its own repo's deploy. No native
 build.
+
+---
+
+## 5 Sep 2026 — The local missed-search log is gone ✅
+
+Phase 0 of the "Tell us what you were looking for" plan, shipped alone as
+agreed. `misses`, `MAX_MISSES`, `recordMiss` and `searchMissed` removed from
+`observations.ts`, `use-observations.tsx` and `ask.tsx`; the parser drops
+any stored misses on an older install's next write; the debounced effect
+and both its constants leave the sheet. `ask.tsx`'s docstring and
+`build-order.md` Phase 8 now say the alias seed is the submission stream.
+`plan-check.mjs`'s "I farted" claim repointed from `ask.tsx:44` to `:31`
+because the deletion moved it.
+
+`tsc`, eslint, `style:check` and `expo export --platform web` green;
+`search:check` 14/15 and `plan:check` failing exactly as before this change
+("dua before sleeping" and `journey.ts`, both pre-existing, neither touched).
+Fingerprint compared against the installed preview build
+(`7fbbf295`) and equal, so the OTA reaches it: commit `4675977`, update
+group `cf8ced9f`. **Still open:** the on-device check that no `misses` key
+survives after a failed search — needs Iyad's phone on adb.
+

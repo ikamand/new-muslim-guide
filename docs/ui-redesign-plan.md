@@ -3781,3 +3781,41 @@ floor, so `wrangler dev` runs `--remote` and `wrangler types` cannot run;
 
 Ships: the worker by its own repo's `npm run deploy`. Nothing in the app
 changed except `docs/submissions-contract.md`.
+
+
+---
+
+## 5 Sep 2026 — "Tell us what you were looking for" is on the ask sheet ✅
+
+Phase 3 of the plan. The first thing in this app that leaves the phone, and
+it does so only by a tap, only after the search has returned nothing.
+
+**What it is.** One line under the empty card's browse button. Tap it and
+the field opens with the search prefilled, the fixed disclosure under it,
+Send under that. Five states: offer, open, sending, sent, failed. Failed
+says "This wasn't sent" in place and keeps the words, with Send back. Sent
+says "Thank you. Someone will read this." A new search is a fresh mount
+(`key={trimmed}`), so it is back at the offer. Nothing persists; closing
+the sheet discards all of it.
+
+**The crisis card.** If the text matches the phrase list in
+`content/crisis.ts` — a list, not a model, folded for case, whitespace and
+curly apostrophes — the resources render above Send in a painted box,
+each row tappable to call or open. Send stays. After a crisis-matched send
+the resources show again instead of the thank-you. Editing the words is the
+only way the card leaves.
+
+**What goes.** Exactly `text`, `locale`, `appVersion`, to the worker's
+`/v1/submissions`, one attempt, eight-second cap, no retry, no storage. The
+Settings footnote now says "except what you choose to send us from the ask
+sheet", and "Who can I talk to?" carries the sentence about the line in the
+same commit the line arrived.
+
+**Verified with eyes on web at 390**, driven through every state: offer,
+open, crisis, failed (the request aborted at the browser), sent (a real
+send, stored by the worker), and sent-after-crisis, in light; offer, open
+and crisis in dark. `tsc`, eslint, `style:check`, `submit:check` (9/9,
+no network: a fake fetch plays 204, 429, 500, a thrown error and a hang),
+`crisis:check` (14/14, the list's own examples), `search:check` unchanged,
+`i18n:manifest`, `expo export --platform web` green. Ships by OTA to preview
+for Phase 4's hand matrix on the phone.

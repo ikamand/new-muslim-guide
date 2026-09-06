@@ -450,7 +450,7 @@ model to that file. That absence is the rule; do not add the path.
 Every task: `npx tsc --noEmit`, `npx expo export --platform web`, the task's
 check, commit. Ships together by OTA at the end of Phase 4.
 
-### Task 3.1: `submitGap`
+### Task 3.1: `submitGap` ✅ built 5 Sep 2026 — `npm run submit:check` 9/9
 
 **Files:**
 - Create: `src/lib/submit-gap.ts`
@@ -470,7 +470,7 @@ check, commit. Ships together by OTA at the end of Phase 4.
   ): Promise<GapResult>;
   ```
 
-- [ ] **Step 1: Write the check first** (`scripts/submit-check.mjs`, same
+- [x] **Step 1: Write the check first** (`scripts/submit-check.mjs`, same
   shape as `scripts/search-check.mjs`): a fake `fetch` that (a) resolves
   `{ status: 204 }` → expect `'sent'`; (b) resolves `{ status: 429 }` →
   `'failed'`; (c) rejects with `TypeError('Network request failed')` →
@@ -478,13 +478,13 @@ check, commit. Ships together by OTA at the end of Phase 4.
   within 200 ms and the fake's `signal.aborted` is true; (e) asserts the
   request body sent in (a) parses to exactly `{ text, locale, appVersion }`
   and nothing else. Run it: fails because the module does not exist.
-- [ ] **Step 2: Implement.** `AbortController`, `setTimeout(abort,
+- [x] **Step 2: Implement.** `AbortController`, `setTimeout(abort,
   timeoutMs ?? 8000)`, `method: 'POST'`, JSON body, `status === 204` →
   `'sent'`, everything else including thrown errors → `'failed'`. Clear the
   timer in `finally`. No storage, no logging.
-- [ ] **Step 3: Run the check** — passes. Commit `Add submitGap`.
+- [x] **Step 3: Run the check** — passes. Commit `Add submitGap`.
 
-### Task 3.2: The crisis matcher
+### Task 3.2: The crisis matcher ✅ built 5 Sep 2026 — `npm run crisis:check` 14/14; it also straightens curly apostrophes, because iOS types “don’t” and the list is written "don't" (mirrored in the server's `pull.mjs`)
 
 **Files:**
 - Create: `src/lib/crisis.ts`
@@ -494,17 +494,17 @@ check, commit. Ships together by OTA at the end of Phase 4.
 - Consumes: `CRISIS_PHRASES` from `src/content/crisis.ts` (Task 1.1)
 - Produces: `export function matchesCrisis(text: string): boolean`
 
-- [ ] **Step 1: Write the check first.** Reads the example sentences from
+- [x] **Step 1: Write the check first.** Reads the example sentences from
   the comment block at the top of `crisis.ts` (positives and negatives),
   asserts each; additionally asserts `matchesCrisis('my diet')` is false
   and that a phrase followed by punctuation matches. Run: fails.
-- [ ] **Step 2: Implement.** Lowercase, collapse whitespace, then for each
+- [x] **Step 2: Implement.** Lowercase, collapse whitespace, then for each
   phrase test `new RegExp(`(^|\\W)${escape(phrase)}(\\W|$)`)`. No stemming,
   no fuzziness, no model. Docstring says in one sentence what it is and what
   it is not.
-- [ ] **Step 3: Run the check** — passes. Commit `Add the crisis matcher`.
+- [x] **Step 3: Run the check** — passes. Commit `Add the crisis matcher`.
 
-### Task 3.3: `LookingFor`
+### Task 3.3: `LookingFor` ✅ built 5 Sep 2026 — one change from the table below: the reset on a query change is a remount (`key={trimmed}` in the sheet), not an effect, because the lint rule forbids setState in an effect and a fresh mount is the honest shape anyway
 
 **Files:**
 - Create: `src/components/looking-for.tsx`
@@ -532,7 +532,7 @@ line** in `sent` when the sent text matched. It is not dismissible; editing
 the text so it no longer matches is the only way it leaves. Send is never
 disabled by it. Nothing in this component persists; unmount discards all.
 
-- [ ] **Step 1: Strings** in `src/i18n/ui.ts` beside `ask.emptyBody`
+- [x] **Step 1: Strings** in `src/i18n/ui.ts` beside `ask.emptyBody`
   (`:78-80`):
   ```ts
   'ask.gap.offer': 'Tell us what you were looking for',
@@ -547,17 +547,17 @@ disabled by it. Nothing in this component persists; unmount discards all.
   ```
   `ask.gap.disclosure` is the fixed wording from the agreed plan. If Task 3.1's
   body ever gains a field, this string changes in the same commit.
-- [ ] **Step 2: Build the component** to the table above. Layout: flush
+- [x] **Step 2: Build the component** to the table above. Layout: flush
   joins, no negative margins (memory: spacing rule). The disclosure is
   `type="small"` `themeColor="textSecondary"`. The crisis card is a painted
   box in `theme.backgroundSelected` with the resources as rows: name, how,
   and a `Linking.openURL` on tap where a url or phone exists.
-- [ ] **Step 3: Verify on web** at 390, both themes, every state, by
+- [x] **Step 3: Verify on web** at 390, both themes, every state, by
   driving it with the endpoint URL temporarily pointed at (a) the real
   worker, (b) `https://127.0.0.1:9` for the failure state. Screenshot each.
   Commit `Add the "Tell us what you were looking for" line`.
 
-### Task 3.4: Wire it into the empty card, and tell the truth in Settings
+### Task 3.4: Wire it into the empty card, and tell the truth in Settings ✅ built 5 Sep 2026 — the line renders only when the search field holds text, since an empty field has no question to send
 
 **Files:**
 - Modify: `src/app/ask.tsx:218-236` — render `<LookingFor query={trimmed} />`
@@ -575,12 +575,12 @@ disabled by it. Nothing in this component persists; unmount discards all.
   those later to decide what to write next." The page must not describe the
   line before it exists (its comment says so).
 
-- [ ] **Step 1: Wire and reword.** `npm run i18n:manifest`;
+- [x] **Step 1: Wire and reword.** `npm run i18n:manifest`;
   `npm run style:check`; `npm run search:check`.
-- [ ] **Step 2: Verify the request body** by reading it in `wrangler dev`'s
+- [x] **Step 2: Verify the request body** by reading it in `wrangler dev`'s
   console (`console.log(JSON.stringify(body))` added locally and removed
   before commit): exactly three keys, and the disclosure's claims hold.
-- [ ] **Step 3: Verify with eyes** on web: the empty card with the offer
+- [x] **Step 3: Verify with eyes** on web: the empty card with the offer
   line; open; sent; failed; crisis. Commit `Ask sheet: tell us what you were
   looking for`.
 

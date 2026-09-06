@@ -79,6 +79,21 @@ export const EN = {
   'ask.emptyBody':
     'Only questions that have been written up and checked can be answered here. This one has not been yet.',
   'ask.browse': 'Browse everything',
+  /*
+    "Tell us what you were looking for" — the one line that leaves the phone,
+    by choice. The disclosure is fixed wording (5 Sep 2026): every clause maps
+    to what `lib/submit-gap.ts` actually sends, and if the fields change the
+    sentence changes in the same commit.
+  */
+  'ask.gap.offer': 'Tell us what you were looking for',
+  'ask.gap.disclosure':
+    'We don’t ask for your name or an account, and nothing you write here is kept on this phone. Please don’t include anything that could identify you. What you write is sent to us with your app language and version, is read by a person, and may be used to improve the app.',
+  'ask.gap.send': 'Send',
+  'ask.gap.sending': 'Sending…',
+  'ask.gap.sent': 'Thank you. Someone will read this.',
+  'ask.gap.failed': 'This wasn’t sent. Your words are still here, and you can try again.',
+  'ask.gap.crisisTitle': 'Nobody reads this quickly',
+  'ask.gap.crisisBody': 'If you are in danger or thinking of harming yourself, these people can help now.',
   'home.help': 'Something’s come up',
   'home.helpElse': 'Something else',
 
@@ -307,7 +322,7 @@ export const EN = {
   'place.timesFor': 'Times for',
   'place.change': 'Change',
   /* Three states nobody had translated, found by `npm run nav:check`. */
-  'settings.footnote': 'The Arabic always stays, because it is what you actually say. Everything on this device stays on this device.',
+  'settings.footnote': 'The Arabic always stays, because it is what you actually say. Everything on this device stays on this device, except what you choose to send us from the ask sheet.',
   'guide.missing': 'That guide doesn’t exist.',
   /* The written page's chrome — the two-inks law. ("The answer", the matn
      frame's label, went on 3 Sep: the frame shows the question instead.) */

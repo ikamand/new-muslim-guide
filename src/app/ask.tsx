@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { LookingFor } from '@/components/looking-for';
 import { PressableLink } from '@/components/pressable-link';
 import { INPUT_TEXT, ThemedText } from '@/components/themed-text';
 import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
@@ -42,6 +43,14 @@ import { buildIndex, search } from '@/lib/search';
  * nothing. A reader's own 1am question must not persist on a device somebody
  * else may pick up. The signal now comes from the reader choosing to send it:
  * docs/superpowers/plans/2026-09-05-tell-us-what-you-were-looking-for.md.
+ *
+ * ## The one line that leaves the phone
+ *
+ * The empty card carries "Tell us what you were looking for" (`LookingFor`).
+ * Only after the search has returned nothing, only by a tap, and the whole
+ * of what goes is the text, the app language and the app version — the
+ * disclosure under the field says so in the same words. Nothing about it is
+ * kept on the phone; closing the sheet discards it.
  *
  * The alias layer is still the fix: the phrasings a person actually uses,
  * generated at build time, committed as data, matched offline. Search keys are
@@ -205,6 +214,8 @@ export default function AskScreen() {
                   {t('ask.browse')}
                 </ThemedText>
               </PressableLink>
+              {/* Keyed on the query: a new search is a fresh mount, back at the offer. */}
+              {trimmed.length > 0 && <LookingFor key={trimmed} query={trimmed} />}
             </View>
           ) : (
             results.map((item) => (

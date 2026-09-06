@@ -65,11 +65,11 @@ export const WHO_CAN_I_TALK_TO: Reference = {
     {
       id: 'this-app',
       heading: 'What can this app do, and what can it not?',
-      /* Phase 3 of the plan adds one sentence here about "Tell us what you were
-         looking for" in the same commit that puts the line on the ask sheet.
-         Not before: a page must not describe a line the reader cannot see. */
+      /* The sentence about "Tell us what you were looking for" arrived in the
+         same commit as the line itself (5 Sep 2026), not before: a page must
+         not describe a line the reader cannot see. */
       body:
-        'It can teach you what it already holds, with the radio off. It cannot answer back, and nobody at this app reads anything as it arrives or replies to it, so it is not a way to reach anyone. For that, the people above are real.',
+        'It can teach you what it already holds, with the radio off. It cannot answer back. When the search finds nothing, you can tell us what you were looking for, and a person reads those later to decide what to write next. Nobody reads them as they arrive and nobody replies, so it is not a way to reach anyone. For that, the people above are real.',
     },
   ],
 };

@@ -585,8 +585,12 @@ answers it.*
   this: "Istikhara" lands because a guide is called that, "how do I decide" does
   not, and "I farted" does not — though `wudu.ts` answers it outright, filed
   under "nullifiers", which nobody types.
-- **Seed it from Phase 5's failed-search log.** Real misses beat imagined ones.
-  That dependency is why this phase sits after Observation rather than beside it.
+- **Seed it from the submission stream** —
+  `docs/superpowers/plans/2026-09-05-tell-us-what-you-were-looking-for.md`.
+  This said "from Phase 5's failed-search log"; that local log was removed on
+  5 Sep 2026, because a reader's own words must not persist on the phone. Real
+  misses still beat imagined ones; they now arrive only when the reader chooses
+  to send them.
 - **Search keys are not religious content.** They need a proofread, not a
   scholar. That distinction is what makes this phase cheap relative to Stage D.
 - **Then the help chips retire into the sheet.** Both already read from

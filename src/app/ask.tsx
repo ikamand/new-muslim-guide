@@ -1,6 +1,6 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useRouter } from 'expo-router';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -9,22 +9,9 @@ import { INPUT_TEXT, ThemedText } from '@/components/themed-text';
 import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useHelpTopics } from '@/hooks/use-help';
 import { useLocale } from '@/hooks/use-locale';
-import { useObservations } from '@/hooks/use-observations';
 import { useTheme } from '@/hooks/use-theme';
 import type { UIKey } from '@/i18n/ui';
 import { buildIndex, search } from '@/lib/search';
-
-/**
- * How long a query has to sit still before a miss counts.
- *
- * The field searches on every keystroke, so without this "tayammum" typed at
- * normal speed logs eight misses and one hit — and seven of those are somebody
- * spelling rather than somebody asking.
- */
-const MISS_AFTER_MS = 1000;
-
-/** Below this it is a letter or two, not a question. */
-const MIN_MISS_LENGTH = 3;
 
 /**
  * The sheet behind the ask bar.
@@ -47,12 +34,14 @@ const MIN_MISS_LENGTH = 3;
  * with a section of "Praying while travelling"; the answer it wants is in
  * `wudu.ts` under the word "nullifiers", which nobody types.
  *
- * That is a worse failure than a blank, not a better one, and it is invisible
- * to the miss log Phase 5 added: a search only counts as missed when it
- * returns NOTHING, so the two examples the plan named are exactly the two
- * cases that log cannot see. Phase 8 seeds the alias layer from real misses
- * and will need a second signal for bad matches — a result nobody taps is not
- * the same as no result, and only one of the two is being recorded.
+ * That is a worse failure than a blank, not a better one, and no log can see
+ * it — a result nobody taps is not the same as no result.
+ *
+ * **The local miss log is gone (5 Sep 2026).** Until then every search that
+ * returned nothing was stored on the phone as typed, shown nowhere, read by
+ * nothing. A reader's own 1am question must not persist on a device somebody
+ * else may pick up. The signal now comes from the reader choosing to send it:
+ * docs/superpowers/plans/2026-09-05-tell-us-what-you-were-looking-for.md.
  *
  * The alias layer is still the fix: the phrasings a person actually uses,
  * generated at build time, committed as data, matched offline. Search keys are
@@ -81,7 +70,6 @@ export default function AskScreen() {
   const router = useRouter();
   const { locale, t } = useLocale();
   const [query, setQuery] = useState('');
-  const { searchMissed } = useObservations();
   const topics = useHelpTopics();
 
   /*
@@ -150,23 +138,6 @@ export default function AskScreen() {
       href: hit.href,
     }));
   }, [starters, index, trimmed]);
-
-  /*
-    A search that found nothing is a content gap with a name on it.
-
-    Debounced, and that is the whole difficulty: this field searches on every
-    keystroke, so "tayammum" typed slowly would log eight misses ending in one
-    hit — seven of which are somebody spelling, not somebody asking. A second
-    of stillness is the difference between a half-typed word and a question.
-
-    Recorded only when the reader typed enough to mean something, and never
-    when something WAS found. Phase 8 builds the alias layer from these.
-  */
-  useEffect(() => {
-    if (trimmed.length < MIN_MISS_LENGTH || results.length > 0) return;
-    const timer = setTimeout(() => searchMissed(trimmed), MISS_AFTER_MS);
-    return () => clearTimeout(timer);
-  }, [trimmed, results.length, searchMissed]);
 
   return (
     <SafeAreaView style={[styles.safeArea, { backgroundColor: theme.background }]} edges={['top']}>

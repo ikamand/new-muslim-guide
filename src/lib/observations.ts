@@ -52,15 +52,6 @@ import { migrateProgressKey } from '@/content/progress-keys';
 
 const KEY = 'observations';
 
-/**
- * How many failed searches to keep.
- *
- * A cap rather than a sweep by age: what Phase 8 needs from this is the
- * PHRASINGS people use, and a phrase somebody tried six months ago is as
- * useful as one from this morning. Oldest out when full.
- */
-export const MAX_MISSES = 200;
-
 export type Finish = {
   /** The first time. Never moves — see `recordFinished`. */
   first: number;
@@ -93,18 +84,15 @@ export type Observations = {
   sittings: Record<string, number>;
   /** Surah numbers played to the end, and when. */
   surahs: Record<string, number>;
-  /**
-   * Searches that returned nothing, most recent last.
-   *
-   * The highest-value untapped signal in the app: every one is a content gap
-   * with a name on it, in the reader's own words. Phase 8 builds the alias
-   * layer from real misses rather than imagined ones.
-   *
-   * ⚠️ Stored as typed, because the point is the exact phrasing. That makes it
-   * the most personal thing in this file — somebody's 1am question in their own
-   * words — which is another reason nothing here leaves the device.
-   */
-  misses: readonly { query: string; at: number }[];
+  /*
+    There is deliberately no record of failed searches here. One existed until
+    5 Sep 2026 — every miss stored as typed, "the most personal thing in this
+    file". It was shown nowhere and read by nothing, and a reader's own words
+    must not persist on a phone somebody else may pick up. The parser below
+    drops any `misses` an older install still holds on the next write. What
+    replaces it is opt-in and leaves the device:
+    docs/superpowers/plans/2026-09-05-tell-us-what-you-were-looking-for.md.
+  */
   /**
    * Firsts that have happened → when. See `content/firsts.ts` for the rules.
    *
@@ -154,7 +142,6 @@ export const EMPTY: Observations = {
   finished: {},
   sittings: {},
   surahs: {},
-  misses: [],
   firsts: {},
   reading: {},
   notes: {},
@@ -268,17 +255,6 @@ export function parse(raw: string | null): Observations {
     finished: finishes(stored.finished),
     sittings: times(stored.sittings),
     surahs: times(stored.surahs),
-    misses: Array.isArray(stored.misses)
-      ? stored.misses
-          .filter(
-            (entry): entry is { query: string; at: number } =>
-              isRecord(entry) &&
-              typeof entry.query === 'string' &&
-              typeof entry.at === 'number' &&
-              Number.isFinite(entry.at),
-          )
-          .slice(-MAX_MISSES)
-      : [],
     firsts: times(stored.firsts),
     reading: readings(stored.reading),
     notes: isRecord(stored.notes)
@@ -353,20 +329,6 @@ export function recordSitting(value: Observations, id: string, at: number): Obse
 
 export function recordSurah(value: Observations, number: number, at: number): Observations {
   return { ...value, surahs: { ...value.surahs, [String(number)]: at } };
-}
-
-/**
- * A search that found nothing.
- *
- * The same query twice is one gap, not two — somebody retyping a phrase that
- * did not work is not new information, and letting it repeat would fill the
- * cap with one person's frustration.
- */
-export function recordMiss(value: Observations, query: string, at: number): Observations {
-  const trimmed = query.trim();
-  if (!trimmed) return value;
-  const without = value.misses.filter((entry) => entry.query !== trimmed);
-  return { ...value, misses: [...without, { query: trimmed, at }].slice(-MAX_MISSES) };
 }
 
 /**

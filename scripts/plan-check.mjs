@@ -154,7 +154,8 @@ const CLAIMS = [
     the wrong thing, which the miss log cannot see. The documents' sentence
     about it is wrong and the file says so at this line.
   */
-  ['src/app/ask.tsx', 44, 'I farted'],
+  /* 44 → 31 when the local miss log left ask.tsx, 5 Sep 2026. */
+  ['src/app/ask.tsx', 31, 'I farted'],
   ['src/content/model.ts', 182, 'export type ScholarlyPosition'],
   /* 418 → 452 when the recite.* strings landed above it, 30 Aug 2026. */
   /* 452 → 542 under the `ui.ts` commits of 3–5 Sep 2026. */

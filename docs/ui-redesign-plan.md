@@ -3625,7 +3625,11 @@ edge handling we do not control, said plainly rather than promised away.
 **Held, and where:** the human-support directory (a help topic; required by
 the card as its "needs a person" answer, and the same open question as the
 refusal card's "which human"); consented convert stories as editorial;
-which crisis organisations to name — Iyad's decision, not answered here.
+which crisis organisations to name — **decided the same day**: emergency
+services first, 988 for the US, Samaritans for the UK and Ireland, Find A
+Helpline for every other country, and Naseeha as optional Muslim-informed
+support, each to be independently verified on the day it is written and
+never hard-coded unverified (plan, Task 1.1).
 
 **Order:** the reciter first (still the only release gate). Then Phase 0 of
 the plan, removing the miss log, which ships alone by OTA and stands on its

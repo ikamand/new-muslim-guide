@@ -144,12 +144,25 @@ words that the design forbids, and it currently feeds nothing.
   its own line with no generated additions; a comment block at the top
   carries four positive and four negative example sentences the check script
   will assert (Task 3.2).
-- [ ] **Step 2: Write the resources.** Named organisations for a person in
-  danger or thinking of harming themselves, by region, each checked as real
-  and current by opening its site on the day it is written. ⚠️ header until
-  a person has read it. **Which organisations is Iyad's call** — it is the
-  same open question as the refusal card's "which human", and this plan does
-  not answer it.
+- [ ] **Step 2: Write the resources.** Decided by Iyad, 5 Sep 2026, in this
+  order:
+  1. Local emergency services — first, for anyone in immediate danger.
+  2. **988** Suicide & Crisis Lifeline — United States.
+  3. **Samaritans** — United Kingdom and Ireland.
+  4. **Find A Helpline** — every other country, as the directory that
+     resolves to a local line.
+  5. **Naseeha** — optional, Muslim-informed peer support; listed after the
+     crisis lines, never instead of them.
+
+  **Before any of these is typed into `crisis.ts`, verify each one
+  independently on the day**: that it currently operates, its contact method
+  (number, text, chat, and the exact digits or URL), its geographic
+  coverage, its hours, and that it is suitable for a crisis referral rather
+  than general counselling. Open the organisation's own site, not a
+  directory quoting it. Record the date checked and the URL read in a
+  comment beside each entry. **Do not hard-code anything unverified** — a
+  wrong crisis number is the one content error in this app worse than a
+  wrong ruling. ⚠️ header until a person has read the finished list.
 - [ ] **Step 3: `npm run style:check`** — reader text obeys the register.
 - [ ] **Step 4: Commit** `Add crisis resources and phrase list ⚠️ unreviewed`.
 

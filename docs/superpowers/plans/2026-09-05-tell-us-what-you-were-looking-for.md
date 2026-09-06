@@ -123,7 +123,7 @@ and its "Final decisions / edge cases" were agreed in conversation on 5 Sep
 Ships alone, first, by OTA. It is the on-device history of a reader's own
 words that the design forbids, and it currently feeds nothing.
 
-### Task 0.1: Delete the miss log ✅ built 5 Sep 2026, commit `4675977`, OTA on runtime `57541e46…` — Step 6 (on-device check) awaits Iyad's phone
+### Task 0.1: Delete the miss log ✅ built 5 Sep 2026, commit `4675977`, OTA on runtime `57541e46…` — Step 6: OTA landing verified over adb; storage read impossible on a release build, skipped
 
 **Files:**
 - Modify: `src/lib/observations.ts:62` (`MAX_MISSES`), `:95-107` (the
@@ -161,7 +161,8 @@ words that the design forbids, and it currently feeds nothing.
 - [x] **Step 5: Verify.** `npx tsc --noEmit`; `npx expo export --platform
   web`; `npm run search:check`; `grep -rn "misses\|searchMissed\|recordMiss"
   src docs/build-order.md` returns nothing.
-- [ ] **Step 6: Verify on the Android preview build.** Type a query that
+- [x] **Step 6 — partly, 5 Sep 2026.** The OTA landing was verified over adb: two forced relaunches, the updates log answered `CheckCompleteUnavailable` both times, and `eas update:list` shows `cf8ced9f` as the newest on preview for that runtime, so the phone runs it. The storage read was **not possible**: the preview build is a release build and `run-as` answers `package not debuggable`. Skipped as unverifiable on that binary, not verified; the parser's behaviour is deterministic and typechecked. If a development build is ever on the phone, this step can be finished as written below.
+  Original step: **Verify on the Android preview build.** Type a query that
   returns nothing, wait two seconds, background the app, then
   `adb shell run-as com.newmuslimguide.app cat databases/RKStorage` (or the
   AsyncStorage file the build uses) and confirm no `misses` key in the

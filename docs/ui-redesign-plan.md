@@ -3680,6 +3680,12 @@ because the deletion moved it.
 ("dua before sleeping" and `journey.ts`, both pre-existing, neither touched).
 Fingerprint compared against the installed preview build
 (`7fbbf295`) and equal, so the OTA reaches it: commit `4675977`, update
-group `cf8ced9f`. **Still open:** the on-device check that no `misses` key
-survives after a failed search — needs Iyad's phone on adb.
+group `cf8ced9f`. **On the phone, same evening:** two forced relaunches over
+adb, the updates log answered "no update available" both times, and
+`cf8ced9f` is the newest on the branch, so the phone runs it. The read of
+stored state was not possible — the preview build is a release build and
+`run-as` refuses (`package not debuggable`). Recorded as skipped, not
+verified; the parser is deterministic and typechecked. The Mac's own `adb`
+was a 32-bit binary macOS 12 cannot run; a current one was fetched into the
+session scratchpad rather than replacing the SDK's.
 

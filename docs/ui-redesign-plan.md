@@ -3819,3 +3819,32 @@ no network: a fake fetch plays 204, 429, 500, a thrown error and a hang),
 `crisis:check` (14/14, the list's own examples), `search:check` unchanged,
 `i18n:manifest`, `expo export --platform web` green. Ships by OTA to preview
 for Phase 4's hand matrix on the phone.
+
+
+---
+
+## 5 Sep 2026 — The hand matrix, run on the phone over adb ✅
+
+Phase 4 of the "Tell us what you were looking for" plan, on Iyad's Android
+preview build, driven from the Mac with the worker read on the other side.
+
+- **Good send:** thank-you on screen; the worker stored the four fields.
+- **Airplane mode:** "This wasn't sent" in place, words kept, Send back;
+  and with the radio still off, "wudu" returned the guide and its steps.
+- **Crisis phrase:** the card above Send, Send still working, the
+  resources shown again after the send, the text stored. The 988 row
+  opened the dialler with the number filled in and no call placed; the
+  Find A Helpline row opened its site in Chrome.
+- **A new search** brought the offer line back.
+- **Burst:** three sends about ten seconds apart were all accepted. The
+  rate-limit binding refuses floods (the ten-rapid-send smoke test) and not
+  a trickle; it is a circuit breaker, and the daily cap of 500 is the real
+  bound. Recorded as observed.
+- **Not possible on a release build:** forcing a timeout, and reading
+  stored state. Both covered by the checks and the web drive, and said so.
+
+**Still Iyad's before a store release:** the dashboard look at Workers
+Logs, reading the crisis list and the directory (and adding US 911), and
+the store data declarations. The test submissions from today were closed
+and discarded, so the first real week starts on an empty store and an empty
+ledger.

@@ -588,7 +588,37 @@ disabled by it. Nothing in this component persists; unmount discards all.
 
 ## Phase 4 — Verification and launch
 
-### Task 4.1: The hand matrix on the Android preview build
+### Task 4.1: The hand matrix on the Android preview build ✅ run 5 Sep 2026, over adb, on Iyad's preview build (dark theme), with the worker read on the other side
+
+Results, row by row. Screenshots were taken and looked at for each; they
+live only in the session's scratchpad.
+
+- **Good send:** the phone showed "Thank you. Someone will read this."; the
+  worker stored `{"text":"zzqq phone matrix good send","locale":"en","appVersion":"1.0.0","day":"2026-09-06"}` — four fields, no time.
+- **Airplane mode:** "This wasn't sent. Your words are still here, and you
+  can try again." in place, text kept, Send back. Nothing reached the worker.
+- **Timeout:** not reproducible on a release build (no way to point the URL
+  at a blackhole). Covered by `submit:check`'s hang case (aborted at the cap,
+  `failed`) and by the web drive's aborted request. Recorded as such, not as
+  verified on device.
+- **Burst:** three sends about ten seconds apart, each after a query change,
+  **all three accepted and stored.** The binding did not refuse a trickle of
+  three in a minute, though it refused inside the ten-rapid-send smoke test.
+  It is a flood breaker, per Cloudflare's own description, and the daily cap
+  of 500 is the real bound. The plan already called it a circuit breaker;
+  this is what that means in practice.
+- **Crisis phrase:** the card rendered above Send with all five resources;
+  Send still worked; after the send the resources showed instead of the
+  thank-you; the worker stored the text. Tapping the 988 row opened the
+  dialler with 988 filled in and no call placed; tapping the Find A Helpline
+  row opened findahelpline.com in Chrome.
+- **Query changed after sent:** the offer line came back (a fresh mount).
+- **Stored state:** not readable on a release build (`run-as` refuses).
+  Skipped as unverifiable, as in Phase 0; the component has no storage call.
+- **Offline search:** with the radio off, "wudu" returned the guide and its
+  steps.
+
+Original rows:
 
 Each row gets a screenshot in the commit message's PR-less log (paste
 paths into the design plan entry).
@@ -607,7 +637,27 @@ paths into the design plan entry).
 - [ ] The offline search itself still returns results for the
   `search:check` set on device with the radio off.
 
-### Task 4.2: Launch criteria (all must be true)
+### Task 4.2: Launch criteria (all must be true) — state on 5 Sep 2026
+
+- ✅ Disclosure matches the request body: the worker stored exactly the three
+  fields plus the day, from the phone and from the web build.
+- ✅ Endpoint accepts and refuses: smoke test 5/5 against the deployment.
+  ⏳ Deletion at 14 days: by KV expiry set at write, and `retention` would
+  fail if it did not hold; the first empirical confirmation comes when a
+  stored key ages past its expiry. Nothing has been stored long enough yet.
+- ⏳ Workers Logs off in the dashboard: set in config and deployed; the
+  dashboard look is Iyad's.
+- ⏳ Crisis resources and the directory read by a person: Iyad's, and the US
+  911 line waits on it.
+- ⚠️ Local miss log gone on device: skipped as unverifiable on a release
+  build (Phase 0); deterministic in code.
+- ✅ Failure states: airplane mode on device; timeout by check and web drive.
+- ✅ Offline search and empty card on device.
+- ⏳ Store data declarations: Iyad's, before the store submission that carries
+  this runtime.
+- ✅ Fingerprint compared and equal; OTA published (`a821de98`).
+
+Original list:
 
 - [ ] Disclosure matches the request body — Task 3.4 Step 2.
 - [ ] Endpoint accepts / refuses / deletes at 14 days — Task 2.2 Step 4 and

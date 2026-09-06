@@ -3689,3 +3689,50 @@ verified; the parser is deterministic and typechecked. The Mac's own `adb`
 was a 32-bit binary macOS 12 cannot run; a current one was fetched into the
 session scratchpad rather than replacing the SDK's.
 
+
+---
+
+## 5 Sep 2026 — Who can I talk to? The crisis list and the directory ✅ ⚠️ awaiting Iyad's read
+
+Phase 1 of the "Tell us what you were looking for" plan. Two files, and the
+registrations that make a page reachable.
+
+**`src/content/crisis.ts`.** Forty whole-word phrases the ask sheet will
+match offline (Phase 3), and five resources in Iyad's order: emergency
+services, 988, Samaritans, Find A Helpline, Naseeha. Every entry was read
+on the organisation's own site on the day and the comment beside it names
+the page and quotes it: 988 "24 hours a day, 7 days a week, across the
+United States and its territories"; Samaritans 116 123 "free to call from
+both landlines and mobiles", Ireland included, email closing in 2026 so
+only the number prints; Find A Helpline "verified helplines in 175+
+countries", by ThroughLine; Naseeha 1-866-627-3342, "24/7", "Muslim youth
+and adults alike", Mississauga, with its own instruction to call 911. The
+emergency line prints 999 (nhs.uk), 112 (europa.eu) and 911 for Canada
+(Naseeha's page). **911 for the United States is not printed:** 911.gov,
+fcc.gov, usa.gov and nhtsa.gov all refused an automated request, and
+988lifeline.org and samhsa.gov do not state it. Iyad adds it when he reads
+the list. That is his rule applied to the letter, and the reason the file
+says which page to re-read when a number changes.
+
+**`src/content/learn/who-can-i-talk-to.ts`.** Three sections: a person for a
+question (the imam at a nearby mosque, after any prayer that is not Friday
+midday), a person for a hard night (the helplines, read from `crisis.ts` so
+a number changes once), and what this app can and cannot do. No citations;
+nothing on it is a ruling. Placed in the curriculum's `when-its-hard` unit
+(now four lessons), the Learn tab's `hard` group, cadence `on-event`, and
+an eleventh help topic, `support`, "Who can I talk to?", which also lists
+the mosque page and "If you stopped for a while". Convert-support
+organisations by country are a named absence in the file header: each one
+needs opening on the day, and which to name is Iyad's call.
+
+One correction on the way: the third section first described the "Tell us
+what you were looking for" line, which does not exist until Phase 3. A page
+must not describe a line the reader cannot see, so the sentence comes back
+in the commit that adds the line; the plan's Task 3.4 says so.
+
+Verified with eyes on web at 390, light and dark: the page top to bottom,
+the help topic. `tsc`, `style:check` (69 pages), `content:audit` (default
+mode green; strict mode's uncited count went 144 → 145 because this page
+deliberately cites nothing), `i18n:manifest`, `expo export --platform web`
+green. `nav:check` fails on `recite-spike.tsx:142`, untouched here and
+failing before. Ships by OTA.

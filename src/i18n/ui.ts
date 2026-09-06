@@ -276,6 +276,7 @@ export const EN = {
   'help.topic.people': 'How do I tell people?',
   'help.topic.ramadan': 'What happens in Ramadan?',
   'help.topic.new': 'I’ve just become Muslim',
+  'help.topic.support': 'Who can I talk to?',
 
   /**
    * The prayer times card. These were written into the component in English

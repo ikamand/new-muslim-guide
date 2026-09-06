@@ -3,7 +3,7 @@
  *
  * A new Muslim does not know that what they want is called `tahara`, or that
  * the answer to "can I eat this" is filed under a topic named after a legal
- * category. They know they have a question. These are the ten shapes those
+ * category. They know they have a question. These are the eleven shapes those
  * questions actually take, each one a list of pointers into content that
  * already exists.
  *
@@ -45,6 +45,7 @@ export const HELP_TOPIC_IDS = [
   'people',
   'ramadan',
   'new',
+  'support',
 ] as const;
 
 export type HelpTopicId = (typeof HELP_TOPIC_IDS)[number];
@@ -62,7 +63,7 @@ const content = (kind: ContentRef['kind'], id: string): HelpEntry => ({
 const screen = (name: HelpScreen): HelpEntry => ({ kind: 'screen', screen: name });
 
 /**
- * The ten questions.
+ * The eleven questions (ten until 5 Sep 2026, when "Who can I talk to?" joined).
  *
  * Ordered as a beginner meets them rather than alphabetically. Two of them earn
  * their place by being the questions nobody asks out loud: "when something goes
@@ -145,6 +146,15 @@ export const HELP_TOPICS: readonly HelpTopic[] = [
       content('reference', 'who-is-muhammad'),
       content('pillar', 'salah'),
       content('article', 'allah'),
+    ],
+  },
+  {
+    /* The eleventh question, 5 Sep 2026: who to ask, and who to call. */
+    id: 'support',
+    entries: [
+      content('reference', 'who-can-i-talk-to'),
+      content('reference', 'mosque'),
+      content('reference', 'if-you-stopped'),
     ],
   },
 ];

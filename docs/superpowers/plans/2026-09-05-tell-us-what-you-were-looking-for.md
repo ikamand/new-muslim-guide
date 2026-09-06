@@ -176,7 +176,7 @@ words that the design forbids, and it currently feeds nothing.
 
 ## Phase 1 — Content that gates the feature (no code beyond data files)
 
-### Task 1.1: Crisis resources and the phrase list
+### Task 1.1: Crisis resources and the phrase list ✅ built 5 Sep 2026 — ⚠️ awaiting Iyad's read; US 911 deliberately not printed until he confirms it (see the file's comment)
 
 **Files:**
 - Create: `src/content/crisis.ts`
@@ -190,12 +190,12 @@ words that the design forbids, and it currently feeds nothing.
   export const CRISIS_RESOURCES: readonly CrisisResource[];
   ```
 
-- [ ] **Step 1: Write the phrase list.** Short. False positives are cheap
+- [x] **Step 1: Write the phrase list.** Short. False positives are cheap
   (they show a card the reader can ignore), so lean generous. Each phrase on
   its own line with no generated additions; a comment block at the top
   carries four positive and four negative example sentences the check script
   will assert (Task 3.2).
-- [ ] **Step 2: Write the resources.** Decided by Iyad, 5 Sep 2026, in this
+- [x] **Step 2: Write the resources.** Decided by Iyad, 5 Sep 2026, in this
   order:
   1. Local emergency services — first, for anyone in immediate danger.
   2. **988** Suicide & Crisis Lifeline — United States.
@@ -214,10 +214,10 @@ words that the design forbids, and it currently feeds nothing.
   comment beside each entry. **Do not hard-code anything unverified** — a
   wrong crisis number is the one content error in this app worse than a
   wrong ruling. ⚠️ header until a person has read the finished list.
-- [ ] **Step 3: `npm run style:check`** — reader text obeys the register.
-- [ ] **Step 4: Commit** `Add crisis resources and phrase list ⚠️ unreviewed`.
+- [x] **Step 3: `npm run style:check`** — reader text obeys the register.
+- [x] **Step 4: Commit** `Add crisis resources and phrase list ⚠️ unreviewed`.
 
-### Task 1.2: The human-support directory as a help topic
+### Task 1.2: The human-support directory as a help topic ✅ built 5 Sep 2026 as `src/content/learn/who-can-i-talk-to.ts` (`reference:who-can-i-talk-to`), help topic `support`, curriculum unit `when-its-hard`, Learn group `hard`, cadence `on-event` — ⚠️ awaiting Iyad's read
 
 **Files:**
 - Create: `src/content/learn/where-to-ask-a-person.ts` (or the reference
@@ -225,12 +225,12 @@ words that the design forbids, and it currently feeds nothing.
   entry it points at, then match it)
 - Modify: `src/content/help.ts:73` — add the topic to `HELP_TOPICS`
 
-- [ ] **Step 1: Write the page.** Convert-support organisations by country,
+- [x] **Step 1: Write the page.** Convert-support organisations by country,
   how to find a mosque that welcomes new Muslims, and what to say when you
   walk in. Every organisation opened and checked on the day. ⚠️ header.
-- [ ] **Step 2: Wire it** as a help topic; run `npm run nav:check`,
+- [x] **Step 2: Wire it** as a help topic; run `npm run nav:check`,
   `npm run style:check`, `npm run i18n:manifest`.
-- [ ] **Step 3: Verify with eyes** on web at 390 wide, both themes, and
+- [x] **Step 3: Verify with eyes** on web at 390 wide, both themes, and
   commit `Add the human-support directory ⚠️ unreviewed`.
 
 ---
@@ -569,6 +569,11 @@ disabled by it. Nothing in this component persists; unmount discards all.
 - Modify: `src/app/ask.tsx` docstring — one paragraph: the empty card now
   carries the "Tell us what you were looking for" line, what it sends, and
   that nothing is kept locally
+- Modify: `src/content/learn/who-can-i-talk-to.ts`, section `this-app` — add
+  the sentence about the line in this same commit: "When the search finds
+  nothing, you can tell us what you were looking for, and a person reads
+  those later to decide what to write next." The page must not describe the
+  line before it exists (its comment says so).
 
 - [ ] **Step 1: Wire and reword.** `npm run i18n:manifest`;
   `npm run style:check`; `npm run search:check`.

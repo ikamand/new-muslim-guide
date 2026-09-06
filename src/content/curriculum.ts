@@ -231,6 +231,8 @@ export const CURRICULUM: readonly Tier[] = [
           step(ref('reference', 'repentance'), 'learning'),
           step(ref('reference', 'if-you-stopped'), 'learning'),
           step(ref('reference', 'patience-and-gratitude'), 'learning'),
+          /* 5 Sep 2026: a person for a question, a person for a hard night. */
+          step(ref('reference', 'who-can-i-talk-to'), 'learning'),
         ],
       },
     ],

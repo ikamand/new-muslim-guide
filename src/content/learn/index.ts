@@ -42,6 +42,7 @@ import { WHAT_IS_ISLAM } from './what-is-islam';
 import { WHAT_IS_THE_QURAN } from './what-is-the-quran';
 import { WHO_IS_ALLAH } from './who-is-allah';
 import { WHO_IS_MUHAMMAD } from './who-is-muhammad';
+import { WHO_CAN_I_TALK_TO } from './who-can-i-talk-to';
 import { WHY_PEOPLE_DIFFER } from './why-people-differ';
 import { ISTIKHARA, QIYAM_AL_LAYL, TAHAJJUD, TAWBA_PRAYER, WITR } from './voluntary-prayers';
 import { VOLUNTARY_FASTING } from './voluntary-fasting';
@@ -91,6 +92,10 @@ export const LEARN_TOPICS: Reference[] = [
   /* The pilot of two: an event with a room, and one with nobody in it. */
   JANAZAH,
   IF_YOU_STOPPED,
+  /* 5 Sep 2026: the human-support directory — a person for a question, and
+     a person for a hard night. The "needs a person" answer the ask sheet's
+     "Tell us what you were looking for" line points at. */
+  WHO_CAN_I_TALK_TO,
   BEHIND_AN_IMAM,
   EID,
   VOLUNTARY_FASTING,
@@ -293,6 +298,9 @@ export const TOPIC_GROUPS: readonly { id: TopicGroupId; topics: readonly Content
       /* The month somebody quietly stopped. `repentance` covers the theology;
          this is the shape of a convert relapse, which is a different page. */
       ref('reference', 'if-you-stopped'),
+      /* Who to ask, and who to call. Read from the same list the ask sheet's
+         crisis card uses, so a number changes once. */
+      ref('reference', 'who-can-i-talk-to'),
       ref('reference', 'being-corrected'),
       ref('reference', 'patience-and-gratitude'),
       /* The four interior vices. Each page carries its own cure rather than

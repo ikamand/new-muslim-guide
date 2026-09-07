@@ -3894,3 +3894,40 @@ replaced by `transform` strings and `aria-hidden`). **Not yet seen on a
 device**: whether 13% gold on parchment renders at all on a phone panel, and
 whether a masked pattern this size costs the tabs anything on scroll. Ships
 by OTA.
+
+## 6 Sep 2026 — The four doors redrawn, and the bar becomes a pill ✅ ⚠️ device look pending
+
+Iyad sent a reference tab bar — a bordered pill on the night ground, a
+lantern, an open book, a rehl, a misbaha, gold on the active door with a
+short rule under its label, serif labels — and asked for icons "that would
+look like these". Canvas "The Four Doors" showed the redrawn marks beside the
+current set at 96 and 24, in the app's bar as it was, and in the reference's
+pill. Asked which, he chose the pill.
+
+**Built:**
+- `illustrations.tsx` — `LanternMark` (was `NicheMark`), `OpenBookMark`
+  (was `ArcadeMark`), `RehlMark` and `MisbahaMark` redrawn. Same 24-grid,
+  house stroke. `active` fills the lantern's niche and the imam bead. The
+  first rehl read as a bow tie because the legs met the spine; each board is
+  now one piece from the leaf's edge through the crossing.
+- `pill-tab-bar.tsx` — replaces the navigator's bar via `tabBar`. Bordered
+  pill on `backgroundElement`, marks at 28, `tabLabel` under each, a 28 × 3
+  gold rule under the active one. Press handling is the navigator's own
+  (`tabPress` with `canPreventDefault`, then `navigate`).
+- `themed-text.tsx` — a `tabLabel` rung: Literata 14/18. First use of the
+  heading face below 24.
+
+**The rule this bends, on the record:** gold is never a control. The active
+door is gold. Iyad decided this with the rule in front of him (the canvas
+note said it plainly); the reasoning kept in `pill-tab-bar.tsx` is that the
+bar is the page's edge, not a control on the page, and "where you are" is
+illumination. `theme.ts` now names the single exception. Nothing else
+pressable may take gold.
+
+**Removed:** the flat hairline-top bar, accent-as-active on the tabs, the
+`tabBarStyle`/tint options that drove it.
+
+**Not yet seen on a device:** the pill's height against the home indicator,
+and the marks at 28 on a real panel. `BottomTabInset` (50/80) still pads the
+tabs' scroll content; with the pill in the navigator's own flow that is air,
+not a fix, and it may want trimming once seen. Ships by OTA.

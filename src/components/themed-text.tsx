@@ -87,6 +87,7 @@ export type ThemedTextProps = TextProps & {
     | 'sectionTitle'
     | 'subtitle'
     | 'title'
+    | 'tabLabel'
     | 'arabicName'
     | 'arabicNote'
     | 'arabicQuote'
@@ -240,5 +241,17 @@ const styles = StyleSheet.create({
     fontFamily: HeadingFont,
     fontSize: 36,
     lineHeight: 42,
+  },
+  /*
+    The tab bar's label, since 6 Sep 2026: Literata at the `small` size, the
+    one place the heading face is set this small. The reference Iyad chose
+    labels its doors in a serif; the system face read as chrome under marks
+    this considered. Tight leading because it sits under an icon, not in a
+    paragraph. No `fontWeight`: the file IS the 600.
+  */
+  tabLabel: {
+    fontFamily: HeadingFont,
+    fontSize: 14,
+    lineHeight: 18,
   },
 });

@@ -1,31 +1,23 @@
 import { Tabs } from 'expo-router/tabs';
 
-import { ArcadeMark, MisbahaMark, NicheMark, RehlMark } from '@/components/illustrations';
+import { LanternMark, MisbahaMark, OpenBookMark, RehlMark } from '@/components/illustrations';
+import { PillTabBar } from '@/components/pill-tab-bar';
 import { useLocale } from '@/hooks/use-locale';
-import { useTheme } from '@/hooks/use-theme';
 
 /*
   The four doors wear the app's own marks — the "objects of practice" set
-  from the Four Doors sheet, Iyad's pick (31 Aug 2026): a niche, an arcade,
-  a rehl, a misbaha. They replaced the last four stock Ionicons in the app;
-  the drawings live in `illustrations.tsx` beside every other mark.
+  Iyad picked on 31 Aug 2026 and had redrawn after a reference on 6 Sep: a
+  lantern, an open book, a rehl, a misbaha. The drawings live in
+  `illustrations.tsx` beside every other mark. The bar itself is
+  `PillTabBar` since the same day — the reference's pill, gold on the door
+  you are in; its header records why gold, of all colours, is allowed there.
 */
 
 export default function TabsLayout() {
-  const theme = useTheme();
   const { t } = useLocale();
 
   return (
-    <Tabs
-      screenOptions={{
-        headerShown: false,
-        tabBarActiveTintColor: theme.accent,
-        tabBarInactiveTintColor: theme.textSecondary,
-        tabBarStyle: {
-          backgroundColor: theme.background,
-          borderTopColor: theme.border,
-        },
-      }}>
+    <Tabs tabBar={(props) => <PillTabBar {...props} />} screenOptions={{ headerShown: false }}>
       {/*
         Named for the day rather than for one act on it. The tab still opens on
         the prayer times and the button that starts the next prayer — salah is
@@ -37,14 +29,14 @@ export default function TabsLayout() {
         name="index"
         options={{
           title: t('tab.today'),
-          tabBarIcon: ({ color, size }) => <NicheMark color={color} size={size} />,
+          tabBarIcon: ({ color, size, focused }) => <LanternMark color={color} size={size} active={focused} />,
         }}
       />
       <Tabs.Screen
         name="learn"
         options={{
           title: t('tab.learn'),
-          tabBarIcon: ({ color, size }) => <ArcadeMark color={color} size={size} />,
+          tabBarIcon: ({ color, size }) => <OpenBookMark color={color} size={size} />,
         }}
       />
       {/*
@@ -75,7 +67,7 @@ export default function TabsLayout() {
         name="duas"
         options={{
           title: t('tab.duas'),
-          tabBarIcon: ({ color, size }) => <MisbahaMark color={color} size={size} />,
+          tabBarIcon: ({ color, size, focused }) => <MisbahaMark color={color} size={size} active={focused} />,
         }}
       />
       {/*

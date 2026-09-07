@@ -23,7 +23,9 @@ import { Platform } from 'react-native';
  *   - **lapis** (`accent`, `action`) — structure, and the one thing on a
  *     screen that is pressable.
  *   - **gold** — illumination ONLY: rules, rosettes, ʿunwān panels, the head
- *     of a section. Never a control. If gold is tappable, this is wrong.
+ *     of a section. Never a control. If gold is tappable, this is wrong —
+ *     with ONE exception, Iyad's (6 Sep 2026): the tab bar's active door,
+ *     see `pill-tab-bar.tsx`. Nothing else pressable may take it.
  *   - **goldSoft** — the hairline weight of the same, for a rule that
  *     separates rather than announces.
  *   - **vermilion** — rubric. Why a card chose what it chose, a stop mark, a
@@ -110,10 +112,11 @@ export const ArabicFont = 'Amiri';
  *
  * Literata — a bookish serif built for long-form reading, which is the right
  * register for an app that is mostly quiet instruction. It carries the three
- * heading rungs only (`sectionTitle`, `subtitle`, `title` in
- * `themed-text.tsx`): headings are the app's voice, body copy is its
- * legibility, and buttons and cards stay in the system face because chrome
- * should not be literary.
+ * heading rungs (`sectionTitle`, `subtitle`, `title` in `themed-text.tsx`)
+ * and, since 6 Sep 2026, the tab bar's `tabLabel`: headings are the app's
+ * voice, body copy is its legibility, and buttons and cards stay in the
+ * system face because chrome should not be literary — the four doors being
+ * the one piece of chrome that names the book's parts.
  *
  * The name includes the weight because that is how a static-instance TTF
  * registers: there is no bold axis to ask for, this file IS the 600.

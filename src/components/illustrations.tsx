@@ -1336,96 +1336,106 @@ export function JadwalMark({ color, size = 22 }: { color: string; size?: number 
 
 /*
   ── The four doors ─────────────────────────────────────────────────────────
-  The tab bar's marks, chosen by Iyad from the "Four Doors" options sheet
-  (31 Aug 2026) — the "objects of practice" set: four things from the
-  physical world of worship, no two silhouettes alike. They replaced the
-  last stock Ionicons in the app (moon, book, bookmarks, sun). All on the
-  24 grid at the house stroke; the tab bar supplies colour and size, so
-  active/inactive stays a tint change and nothing else about the bar moves.
+  The tab bar's marks. First set chosen by Iyad from the "Four Doors" sheet
+  (31 Aug 2026) — a niche, an arcade, a rehl, a misbaha — replacing the last
+  stock Ionicons in the app. Redrawn 6 Sep 2026 after a reference he sent:
+  the same four objects, drawn with more of themselves — the niche became a
+  lantern with dome and plinth, the arcade an open book, the rehl carries its
+  mushaf with page lines, the misbaha gained its imam bead and tassel. Canvas
+  "The Four Doors" holds the comparison. `active` fills the one detail the
+  reference filled on the selected tab: the lantern's niche, the imam bead.
 
-  ⚠️ Being on the same grid is not the same as being the same size, and the
-  first cut of these was not. Measured as ink rather than as viewBox, the
-  four came out 15.9, 11.6, 16.3 and 19.3 units tall: the arcade was 40%
-  shorter than the misbaha and read as a smaller icon in the bar (Iyad,
-  3 Sep). They now share an optical block — ink from y≈3.5 to y≈20.25,
-  about 16.5 tall — and the two architectural marks share a ground line at
-  20.25. Redraw anything here and measure the ink, not the box.
+  ⚠️ Being on the same grid is not the same as being the same size (the first
+  set came out 15.9 to 19.3 units of ink and read as different icons; Iyad,
+  3 Sep). These four run from y≈1.5/4.8/5.5/2.9 to y≈21 — closer, not equal.
+  Redraw anything here and measure the ink, not the box.
 */
 
-/** Today: a mihrab niche with the gold moment inside — the Awqat card as a mark. */
-export function NicheMark({ color, size = 24 }: { color: ColorValue; size?: number }) {
+/** Today: a mihrab lantern — finial, dome, cornice, columns, the niche, a plinth. */
+export function LanternMark({ color, size = 24, active = false }: { color: ColorValue; size?: number; active?: boolean }) {
   return (
     <Svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <Circle cx={12} cy={2.4} r={0.9} fill={color} />
       <G stroke={color} strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
-        <Path d="M2.75 20.25 H21.25" />
-        <Path d="M5.5 20.25 V11.2 C5.5 6.1 8.2 3.9 12 3.9 C15.8 3.9 18.5 6.1 18.5 11.2 V20.25" />
+        <Path d="M12 3.3 V4.6" />
+        <Path d="M7.4 9.4 C7.4 6.2 9.4 4.6 12 4.6 C14.6 4.6 16.6 6.2 16.6 9.4" />
+        <Path d="M6 9.4 H18" />
+        <Path d="M7.2 9.4 V18.4" />
+        <Path d="M16.8 9.4 V18.4" />
+        <Path d="M5.2 18.4 H18.8" />
+        <Path d="M4.2 20.8 H19.8" />
+        <Path
+          d="M9.6 18.4 V13.8 C9.6 11.4 10.6 10.4 12 10.4 C13.4 10.4 14.4 11.4 14.4 13.8 V18.4"
+          fill={active ? color : 'none'}
+        />
       </G>
-      <Circle cx={12} cy={9.3} r={1.7} fill={color} />
     </Svg>
   );
 }
 
-/** Learn: three arches on one baseline, the one you are inside marked — the StagePath as a door. */
-export function ArcadeMark({ color, size = 24 }: { color: ColorValue; size?: number }) {
+/** Learn: an open book — two leaves, the spine, page lines, and the thickness of its pages. */
+export function OpenBookMark({ color, size = 24 }: { color: ColorValue; size?: number }) {
   return (
     <Svg width={size} height={size} viewBox="0 0 24 24" fill="none">
       <G stroke={color} strokeWidth={1.4} strokeLinecap="round" strokeLinejoin="round">
-        <Path d="M2.75 20.25 H21.25" />
-        <Path d="M2.75 20.25 V13.8 Q2.75 9.4 5 9.4 Q7.25 9.4 7.25 13.8 V20.25" />
-        <Path d="M9 20.25 V11.4 Q9 4.6 12 4.6 Q15 4.6 15 11.4 V20.25" />
-        <Path d="M16.75 20.25 V13.8 Q16.75 9.4 19 9.4 Q21.25 9.4 21.25 13.8 V20.25" />
+        <Path d="M3 6.4 C7 5.5 10.2 6 12 7.8 C13.8 6 17 5.5 21 6.4 V17.4 C17 16.5 13.8 17 12 18.8 C10.2 17 7 16.5 3 17.4 Z" />
+        <Path d="M12 7.8 V18.8" />
+        <Path d="M3 17.4 V19.2 C7 18.3 10.2 18.8 12 20.6 C13.8 18.8 17 18.3 21 19.2 V17.4" />
+        <Path d="M5.6 9.6 C7.4 9.4 9.2 9.7 10.2 10.5" />
+        <Path d="M5.6 12.4 C7.4 12.2 9.2 12.5 10.2 13.3" />
+        <Path d="M18.4 9.6 C16.6 9.4 14.8 9.7 13.8 10.5" />
+        <Path d="M18.4 12.4 C16.6 12.2 14.8 12.5 13.8 13.3" />
       </G>
-      <Circle cx={12} cy={14.2} r={1.3} fill={color} />
     </Svg>
   );
 }
 
-/** Qur'an: a rehl — the folding stand holding an open mushaf. */
+/**
+ * Qur'an: a rehl with the open mushaf resting on it.
+ *
+ * Each board is ONE piece, from the leaf's outer edge down through the
+ * crossing — drawn as two parts, the legs met the spine and the whole thing
+ * read as a bow tie.
+ */
 export function RehlMark({ color, size = 24 }: { color: ColorValue; size?: number }) {
   return (
     <Svg width={size} height={size} viewBox="0 0 24 24" fill="none">
       <G stroke={color} strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
-        <Path d="M4.8 20.25 L19.2 8.9" />
-        <Path d="M19.2 20.25 L4.8 8.9" />
-        <Path d="M12 5.6 C10.2 3.9 7.6 3.6 5.4 4.2 L5.4 8.8 C7.6 8.2 10.2 8.5 12 10.2 C13.8 8.5 16.4 8.2 18.6 8.8 L18.6 4.2 C16.4 3.6 13.8 3.9 12 5.6 Z" />
-        <Path d="M12 5.6 V10.2" strokeWidth={1} />
+        <Path d="M3.8 4.8 L12 9 L20.2 4.8" />
+        <Path d="M3.8 4.8 V7.6 L12 11.8 L20.2 7.6 V4.8" />
+        <Path d="M12 9 V11.8" />
+        <Path d="M6.6 7 L10 8.7" />
+        <Path d="M14 8.7 L17.4 7" />
+        <Path d="M3.8 7.6 L19.4 21" />
+        <Path d="M20.2 7.6 L4.6 21" />
       </G>
     </Svg>
   );
 }
 
-/** Du'a: the misbaha — the loop of beads with its tassel. */
-export function MisbahaMark({ color, size = 24 }: { color: ColorValue; size?: number }) {
+/** Du'a: the misbaha — nine beads on the loop, the imam bead where it closes, a three-strand tassel. */
+export function MisbahaMark({ color, size = 24, active = false }: { color: ColorValue; size?: number; active?: boolean }) {
+  /* Twelve places on the loop, the bottom three left for the imam bead. */
+  const beads = [0, 1, 2, 3, 4, 8, 9, 10, 11].map((i) => {
+    const angle = -Math.PI / 2 + (i * Math.PI) / 6;
+    return { cx: 12 + 5.4 * Math.cos(angle), cy: 9.4 + 5.4 * Math.sin(angle) };
+  });
   return (
     <Svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      {/* 1.4 like the niche and the arcade: at 1.3 on the narrowest of the
-          four marks the loop read lighter than the rest of the bar. */}
       <G stroke={color} strokeWidth={1.4} strokeLinecap="round" strokeLinejoin="round">
-        <Circle cx={12} cy={4.7} r={1.25} />
-        <Circle cx={15.7} cy={5.75} r={1.25} />
-        <Circle cx={17.98} cy={8.57} r={1.25} />
-        <Circle cx={17.98} cy={12.03} r={1.25} />
-        <Circle cx={15.7} cy={14.84} r={1.25} />
-        <Circle cx={8.3} cy={14.84} r={1.25} />
-        <Circle cx={6.02} cy={12.03} r={1.25} />
-        <Circle cx={6.02} cy={8.57} r={1.25} />
-        <Circle cx={8.3} cy={5.75} r={1.25} />
-        <Path d="M12 15.9 V18" />
+        {beads.map(({ cx, cy }, index) => (
+          <Circle key={index} cx={cx} cy={cy} r={1.15} />
+        ))}
+        <Rect x={10.9} y={13.6} width={2.2} height={3.4} rx={1.1} fill={active ? color : 'none'} />
+        <Path d="M12 17 V18.4" />
+        <Path d="M12 18.9 L10.4 22.2" />
+        <Path d="M12 18.9 V22.2" />
+        <Path d="M12 18.9 L13.6 22.2" />
       </G>
-      <Circle cx={12} cy={19.05} r={1.05} fill={color} />
+      <Circle cx={12} cy={18.7} r={0.8} fill={color} />
     </Svg>
   );
 }
-
-/*
-  ── The counting card's marks ──────────────────────────────────────────────
-  From the "Counting Card" artifact, Iyad's cut (2 Sep 2026): the sitting
-  screen crowns each card with a KIND medallion — the khatim for a Qur'an
-  verse (on the tinted card, which is Qur'an-only), a small fortress for a
-  line from Hisn al-Muslim, the Fortress of the Muslim — and divides the
-  Arabic from its meaning with an illuminated rosette. The colour and the
-  crown tell the same truth twice.
-*/
 
 /** The khatim in a ring — a Qur'an verse's medallion. */
 export function KhatimMark({ color, size = 30 }: { color: ColorValue; size?: number }) {

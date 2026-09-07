@@ -4,6 +4,7 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Svg, { Circle, G, Path, Rect } from 'react-native-svg';
 
+import { GirihVeil } from '@/components/girih-veil';
 import { HeadpieceMark } from '@/components/illustrations';
 import { Frame, MushafRosette, Rubric, Unwan } from '@/components/jadwal';
 import { PressableLink } from '@/components/pressable-link';
@@ -62,6 +63,7 @@ export default function QuranScreen() {
 
   return (
     <SafeAreaView style={[styles.safeArea, { backgroundColor: theme.background }]} edges={['top']}>
+      <GirihVeil />
       <ScrollView contentContainerStyle={styles.content}>
         {/* The ʿunwān every other tab opens with — this one was the odd
             page out, left-aligned with no rules (Iyad's four-tab review). */}

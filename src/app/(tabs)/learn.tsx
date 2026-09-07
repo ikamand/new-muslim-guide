@@ -2,6 +2,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { GirihVeil } from '@/components/girih-veil';
 import { BookArch, GirihBand, HeadpieceMark } from '@/components/illustrations';
 import { Frame, JadwalRow, Rosette, Shelf, Unwan } from '@/components/jadwal';
 import { PressableLink } from '@/components/pressable-link';
@@ -430,6 +431,7 @@ export default function LearnScreen() {
 
   return (
     <SafeAreaView style={[styles.safeArea, { backgroundColor: theme.background }]} edges={['top']}>
+      <GirihVeil />
       <ScrollView contentContainerStyle={styles.content}>
         <View style={styles.header}>
           {/* The headpiece the Qur'an and Duʿa tabs wear: Learn is a book too. Today is the day, and stays bare. */}

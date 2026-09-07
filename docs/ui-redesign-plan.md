@@ -3849,3 +3849,48 @@ the Cloudflare dashboard reads "Workers Observability is Disabled".
 directory (and adding US 911), and the store data declarations. The test submissions from today were closed
 and discarded, so the first real week starts on an empty store and an empty
 ledger.
+
+---
+
+## 6 Sep 2026 — The girih veil: one wall behind the four tabs ✅ ⚠️ device look pending
+
+Iyad's ask, from the ChatGPT mocks with AI sunsets in every header: "how
+would you make something that would look beautiful without adding the same
+type of images". Three rounds on the canvas "The Sarlawh" got here.
+
+**Round one, rejected:** a boxed illuminated panel (sarlawh) at the chapter
+head, gilding outward from a numbered medallion as lessons were read. His
+verdict: "this could be so much better than containing that design inside a
+box". Right — the box was the mocks' grammar, not the app's.
+
+**Round two, four directions**, all with the rule *the girih is architecture
+the page sits in front of, never an object on it*: A the Veil (full-bleed,
+fading from below), B the Frieze (one star-row band, gilding as progress),
+C Light through the lattice (large scale, lit from a corner), D the Margin
+(a mushaf border down the left edge). He chose A.
+
+**Round three, four ways to keep the words clean over A:** A1 the Clearing
+(gone before the title), A2 the Halo (mist behind the words), A3 Tone on
+tone (deeper ground, lines in the tone between), A4 the Lapis wall (night
+ground in both themes). He chose **A3**, then brought the lines down twice
+(30%, then 50%) and moved them onto the rules' gold.
+
+**Built:** `src/components/girih-veil.tsx` — his traced pattern
+(header-pattern.svg, a 156.96 × 104 tile, 22 KB of path, kept verbatim),
+drawn as LINES ONLY by painting the gold token and masking the tiles out;
+13% by day, 15% by lamplight; scale 1.35; fading out over 300 px from the
+top. Mounted absolutely inside each tab's SafeAreaView, behind the
+ScrollView, so it runs under the status bar and the page scrolls over it.
+**Nothing else changed**, at his explicit instruction: the Unwan keeps its
+headpiece medallion, the tone band from the canvas was NOT built, no string,
+rule, spacing or colour moved. The diff is one file and four mounts.
+
+**Scope, his call:** the four tabs only. Stack screens paint a native header
+and would need `headerTransparent` first — a styling change, held.
+
+**Verified** on web at 390, both themes, all four tabs, console clean (two
+props — `translateY`, `importantForAccessibility` — warned on web and were
+replaced by `transform` strings and `aria-hidden`). **Not yet seen on a
+device**: whether 13% gold on parchment renders at all on a phone panel, and
+whether a masked pattern this size costs the tabs anything on scroll. Ships
+by OTA.

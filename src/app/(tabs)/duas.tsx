@@ -3,6 +3,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useMemo, useState } from 'react';
 import Svg, { Circle, Path } from 'react-native-svg';
 
+import { GirihVeil } from '@/components/girih-veil';
 import { PressableLink } from '@/components/pressable-link';
 import {
   AdhkarSessionCard,
@@ -79,6 +80,7 @@ export default function DuasScreen() {
 
   return (
     <SafeAreaView style={[styles.safeArea, { backgroundColor: theme.background }]} edges={['top']}>
+      <GirihVeil />
       <ScrollView contentContainerStyle={styles.content}>
         {/*
           The ʿunwān, now with its illumination: the medallion-and-tendrils

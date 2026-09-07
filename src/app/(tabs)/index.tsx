@@ -3,6 +3,7 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { AskBar } from '@/components/ask-bar';
+import { GirihVeil } from '@/components/girih-veil';
 import { Action, JadwalRow, QuietRow, Unwan } from '@/components/jadwal';
 import { DailyCollectionCard } from '@/components/daily-collection-card';
 import { AdhkarSessionCard, useLiveSession } from '@/components/adhkar-session-card';
@@ -259,6 +260,7 @@ export default function TodayScreen() {
 
   return (
     <SafeAreaView style={[styles.safeArea, { backgroundColor: theme.background }]} edges={['top']}>
+      <GirihVeil />
       <ScrollView contentContainerStyle={styles.content}>
         <Header />
 

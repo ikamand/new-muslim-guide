@@ -5,22 +5,22 @@
  * here is lost the next time it runs, and one that needs making belongs
  * upstream, where the text is published.
  *
- * 163 Qur'an passages and 195 narrations. Every character came over
+ * 175 Qur'an passages and 203 narrations. Every character came over
  * the wire from a published text rather than from memory, which is the only
  * way a file like this could exist under this project's rules about Arabic.
  *
  * ## Where each line came from
  *
  * No one source has all of it, so each field is taken from the first that
- * does, and says so on the text itself. Of the 195 narrations here:
- * 66 were confirmed against a second, separately edited publisher;
- * 66 carry HadeethEnc's own translation, 129 carry Darussalam's, and
+ * does, and says so on the text itself. Of the 203 narrations here:
+ * 69 were confirmed against a second, separately edited publisher;
+ * 69 carry HadeethEnc's own translation, 134 carry Darussalam's, and
  * 0 have Arabic and no translation at all.
  *
  * ⚠️ **The Darussalam translations are not ours to relicense.** They reach
  * this file through a public-domain dedication that covers the compiler's work
  * and not the translation inside it. What makes that defensible here is scale
- * and purpose — 129 narrations out of some thirty thousand, each quoted under
+ * and purpose — 134 narrations out of some thirty thousand, each quoted under
  * the instruction it supports, in an app that is free and never sold. It is a
  * quotation, not a republication, and it is Iyad's decision on the record.
  *
@@ -694,6 +694,78 @@ export const QURAN_TEXT: Record<string, EvidenceText> = {
   "5:48": {
     "arabic": "وَأَنزَلۡنَآ إِلَيۡكَ ٱلۡكِتَٰبَ بِٱلۡحَقِّ مُصَدِّقٗا لِّمَا بَيۡنَ يَدَيۡهِ مِنَ ٱلۡكِتَٰبِ وَمُهَيۡمِنًا عَلَيۡهِۖ فَٱحۡكُم بَيۡنَهُم بِمَآ أَنزَلَ ٱللَّهُۖ وَلَا تَتَّبِعۡ أَهۡوَآءَهُمۡ عَمَّا جَآءَكَ مِنَ ٱلۡحَقِّۚ لِكُلّٖ جَعَلۡنَا مِنكُمۡ شِرۡعَةٗ وَمِنۡهَاجٗاۚ وَلَوۡ شَآءَ ٱللَّهُ لَجَعَلَكُمۡ أُمَّةٗ وَٰحِدَةٗ وَلَٰكِن لِّيَبۡلُوَكُمۡ فِي مَآ ءَاتَىٰكُمۡۖ فَٱسۡتَبِقُواْ ٱلۡخَيۡرَٰتِۚ إِلَى ٱللَّهِ مَرۡجِعُكُمۡ جَمِيعٗا فَيُنَبِّئُكُم بِمَا كُنتُمۡ فِيهِ تَخۡتَلِفُونَ",
     "translation": "And We have revealed to you, [O Muḥammad], the Book [i.e., the Qur’ān] in truth, confirming that which preceded it of the Scripture and as a criterion over it. So judge between them by what Allāh has revealed and do not follow their inclinations away from what has come to you of the truth. To each of you We prescribed a law and a method. Had Allāh willed, He would have made you one nation [united in religion], but [He intended] to test you in what He has given you; so race to [all that is] good. To Allāh is your return all together, and He will [then] inform you concerning that over which you used to differ.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "3:185": {
+    "arabic": "كُلُّ نَفۡسٖ ذَآئِقَةُ ٱلۡمَوۡتِۗ وَإِنَّمَا تُوَفَّوۡنَ أُجُورَكُمۡ يَوۡمَ ٱلۡقِيَٰمَةِۖ فَمَن زُحۡزِحَ عَنِ ٱلنَّارِ وَأُدۡخِلَ ٱلۡجَنَّةَ فَقَدۡ فَازَۗ وَمَا ٱلۡحَيَوٰةُ ٱلدُّنۡيَآ إِلَّا مَتَٰعُ ٱلۡغُرُورِ",
+    "translation": "Every soul will taste death, and you will only be given your [full] compensation on the Day of Resurrection. So he who is drawn away from the Fire and admitted to Paradise has attained [his desire]. And what is the life of this world except the enjoyment of delusion.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "23:99-100": {
+    "arabic": "حَتَّىٰٓ إِذَا جَآءَ أَحَدَهُمُ ٱلۡمَوۡتُ قَالَ رَبِّ ٱرۡجِعُونِ لَعَلِّيٓ أَعۡمَلُ صَٰلِحٗا فِيمَا تَرَكۡتُۚ كَلَّآۚ إِنَّهَا كَلِمَةٌ هُوَ قَآئِلُهَاۖ وَمِن وَرَآئِهِم بَرۡزَخٌ إِلَىٰ يَوۡمِ يُبۡعَثُونَ",
+    "translation": "[For such is the state of the disbelievers] until, when death comes to one of them, he says, \"My Lord, send me back That I might do righteousness in that which I left behind.\" No! It is only a word he is saying; and behind them is a barrier until the Day they are resurrected.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "36:78-79": {
+    "arabic": "وَضَرَبَ لَنَا مَثَلٗا وَنَسِيَ خَلۡقَهُۥۖ قَالَ مَن يُحۡيِ ٱلۡعِظَٰمَ وَهِيَ رَمِيمٞ قُلۡ يُحۡيِيهَا ٱلَّذِيٓ أَنشَأَهَآ أَوَّلَ مَرَّةٖۖ وَهُوَ بِكُلِّ خَلۡقٍ عَلِيمٌ",
+    "translation": "And he presents for Us an example and forgets his [own] creation. He says, \"Who will give life to bones while they are disintegrated?\" Say, \"He will give them life who produced them the first time; and He is, of all creation, Knowing.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "99:7-8": {
+    "arabic": "فَمَن يَعۡمَلۡ مِثۡقَالَ ذَرَّةٍ خَيۡرٗا يَرَهُۥ وَمَن يَعۡمَلۡ مِثۡقَالَ ذَرَّةٖ شَرّٗا يَرَهُۥ",
+    "translation": "So whoever does an atom's weight of good will see it, And whoever does an atom's weight of evil will see it.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "17:13-14": {
+    "arabic": "وَكُلَّ إِنسَٰنٍ أَلۡزَمۡنَٰهُ طَٰٓئِرَهُۥ فِي عُنُقِهِۦۖ وَنُخۡرِجُ لَهُۥ يَوۡمَ ٱلۡقِيَٰمَةِ كِتَٰبٗا يَلۡقَىٰهُ مَنشُورًا ٱقۡرَأۡ كِتَٰبَكَ كَفَىٰ بِنَفۡسِكَ ٱلۡيَوۡمَ عَلَيۡكَ حَسِيبٗا",
+    "translation": "And [for] every person We have imposed his fate upon his neck, and We will produce for him on the Day of Resurrection a record which he will encounter spread open. [It will be said], \"Read your record. Sufficient is yourself against you this Day as accountant.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "21:47": {
+    "arabic": "وَنَضَعُ ٱلۡمَوَٰزِينَ ٱلۡقِسۡطَ لِيَوۡمِ ٱلۡقِيَٰمَةِ فَلَا تُظۡلَمُ نَفۡسٞ شَيۡـٔٗاۖ وَإِن كَانَ مِثۡقَالَ حَبَّةٖ مِّنۡ خَرۡدَلٍ أَتَيۡنَا بِهَاۗ وَكَفَىٰ بِنَا حَٰسِبِينَ",
+    "translation": "And We place the scales of justice for the Day of Resurrection, so no soul will be treated unjustly at all. And if there is [even] the weight of a mustard seed, We will bring it forth. And sufficient are We as accountant.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "32:17": {
+    "arabic": "فَلَا تَعۡلَمُ نَفۡسٞ مَّآ أُخۡفِيَ لَهُم مِّن قُرَّةِ أَعۡيُنٖ جَزَآءَۢ بِمَا كَانُواْ يَعۡمَلُونَ",
+    "translation": "And no soul knows what has been hidden for them of comfort for eyes [i.e., satisfaction] as reward for what they used to do.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "57:22": {
+    "arabic": "مَآ أَصَابَ مِن مُّصِيبَةٖ فِي ٱلۡأَرۡضِ وَلَا فِيٓ أَنفُسِكُمۡ إِلَّا فِي كِتَٰبٖ مِّن قَبۡلِ أَن نَّبۡرَأَهَآۚ إِنَّ ذَٰلِكَ عَلَى ٱللَّهِ يَسِيرٞ",
+    "translation": "No disaster strikes upon the earth or among yourselves except that it is in a register before We bring it into being - indeed that, for Allāh, is easy -",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "54:49": {
+    "arabic": "إِنَّا كُلَّ شَيۡءٍ خَلَقۡنَٰهُ بِقَدَرٖ",
+    "translation": "Indeed, all things We created with predestination.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "91:7-10": {
+    "arabic": "وَنَفۡسٖ وَمَا سَوَّىٰهَا فَأَلۡهَمَهَا فُجُورَهَا وَتَقۡوَىٰهَا قَدۡ أَفۡلَحَ مَن زَكَّىٰهَا وَقَدۡ خَابَ مَن دَسَّىٰهَا",
+    "translation": "And [by] the soul and He who proportioned it And inspired it [with discernment of] its wickedness and its righteousness, He has succeeded who purifies it, And he has failed who instills it [with corruption].",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "6:148": {
+    "arabic": "سَيَقُولُ ٱلَّذِينَ أَشۡرَكُواْ لَوۡ شَآءَ ٱللَّهُ مَآ أَشۡرَكۡنَا وَلَآ ءَابَآؤُنَا وَلَا حَرَّمۡنَا مِن شَيۡءٖۚ كَذَٰلِكَ كَذَّبَ ٱلَّذِينَ مِن قَبۡلِهِمۡ حَتَّىٰ ذَاقُواْ بَأۡسَنَاۗ قُلۡ هَلۡ عِندَكُم مِّنۡ عِلۡمٖ فَتُخۡرِجُوهُ لَنَآۖ إِن تَتَّبِعُونَ إِلَّا ٱلظَّنَّ وَإِنۡ أَنتُمۡ إِلَّا تَخۡرُصُونَ",
+    "translation": "Those who associated [others] with Allāh will say, \"If Allāh had willed, we would not have associated [anything] and neither would our fathers, nor would we have prohibited anything.\" Likewise did those before deny until they tasted Our punishment. Say, \"Do you have any knowledge that you can produce for us? You follow not except assumption, and you are not but misjudging.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "57:23": {
+    "arabic": "لِّكَيۡلَا تَأۡسَوۡاْ عَلَىٰ مَا فَاتَكُمۡ وَلَا تَفۡرَحُواْ بِمَآ ءَاتَىٰكُمۡۗ وَٱللَّهُ لَا يُحِبُّ كُلَّ مُخۡتَالٖ فَخُورٍ",
+    "translation": "In order that you not despair over what has eluded you and not exult [in pride] over what He has given you. And Allāh does not like everyone self-deluded and boastful -",
     "arabicFrom": "QuranEnc.com",
     "translationFrom": "QuranEnc.com"
   },
@@ -2054,6 +2126,66 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
     "arabic": "عَنْ أَبِي هُرَيْرَةَ، أَنَّ رَسُولَ اللَّهِ صلى الله عليه وسلم قَالَ ‏ \"‏ الْمَلاَئِكَةُ تُصَلِّي عَلَى أَحَدِكُمْ مَا دَامَ فِي مُصَلاَّهُ الَّذِي صَلَّى فِيهِ، مَا لَمْ يُحْدِثْ، تَقُولُ اللَّهُمَّ اغْفِرْ لَهُ اللَّهُمَّ ارْحَمْهُ ‏\"‏‏.‏",
     "isnad": "حَدَّثَنَا عَبْدُ اللَّهِ بْنُ يُوسُفَ، قَالَ أَخْبَرَنَا مَالِكٌ، عَنْ أَبِي الزِّنَادِ، عَنِ الأَعْرَجِ",
     "translation": "Narrated Abu Huraira:Allah's Messenger (ﷺ) said, \"The angels keep on asking Allah's forgiveness for anyone of you, as long as he is at his Musalla (praying place) and he does not pass wind (Hadath). They say, 'O Allah! Forgive him, O Allah! be Merciful to him",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:1338": {
+    "arabic": "عَنْ أَنَسٍ ـ رضى الله عنه ـ عَنِ النَّبِيِّ صلى الله عليه وسلم قَالَ ‏ \"‏ الْعَبْدُ إِذَا وُضِعَ فِي قَبْرِهِ، وَتُوُلِّيَ وَذَهَبَ أَصْحَابُهُ حَتَّى إِنَّهُ لَيَسْمَعُ قَرْعَ نِعَالِهِمْ، أَتَاهُ مَلَكَانِ فَأَقْعَدَاهُ فَيَقُولاَنِ لَهُ مَا كُنْتَ تَقُولُ فِي هَذَا الرَّجُلِ مُحَمَّدٍ صلى الله عليه وسلم فَيَقُولُ أَشْهَدُ أَنَّهُ عَبْدُ اللَّهِ وَرَسُولُهُ‏.‏ فَيُقَالُ انْظُرْ إِلَى مَقْعَدِكَ مِنَ النَّارِ، أَبْدَلَكَ اللَّهُ بِهِ مَقْعَدًا مِنَ الْجَنَّةِ ـ قَالَ النَّبِيُّ صلى الله عليه وسلم فَيَرَاهُمَا جَمِيعًا ـ وَأَمَّا الْكَافِرُ ـ أَوِ الْمُنَافِقُ ـ فَيَقُولُ لاَ أَدْرِي، كُنْتُ أَقُولُ مَا يَقُولُ النَّاسُ‏.‏ فَيُقَالُ لاَ دَرَيْتَ وَلاَ تَلَيْتَ‏.‏ ثُمَّ يُضْرَبُ بِمِطْرَقَةٍ مِنْ حَدِيدٍ ضَرْبَةً بَيْنَ أُذُنَيْهِ، فَيَصِيحُ صَيْحَةً يَسْمَعُهَا مَنْ يَلِيهِ إِلاَّ الثَّقَلَيْنِ ‏\"‏‏.‏",
+    "isnad": "حَدَّثَنَا عَيَّاشٌ، حَدَّثَنَا عَبْدُ الأَعْلَى، حَدَّثَنَا سَعِيدٌ، قَالَ وَقَالَ لِي خَلِيفَةُ حَدَّثَنَا ابْنُ زُرَيْعٍ، حَدَّثَنَا سَعِيدٌ، عَنْ قَتَادَةَ",
+    "translation": "Narrated Anas:The Prophet (ﷺ) said, \"When a human being is laid in his grave and his companions return and he even hears their foot steps, two angels come to him and make him sit and ask him: What did you use to say about this man, Muhammad ? He will say: I testify that he is Allah's slave and His Apostle. Then it will be said to him, 'Look at your place in the Hell-Fire. Allah has given you a place in Paradise instead of it.' \" The Prophet (ﷺ) added, \"The dead person will see both his places. But a non-believer or a hypocrite will say to the angels, 'I do not know, but I used to say what the people used to say! It will be said to him, 'Neither did you know nor did you take the guidance (by reciting the Qur'an).' Then he will be hit with an iron hammer between his two ears, and he will cry and that cry will be heard by whatever approaches him except human beings and jinns",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "muslim:1631": {
+    "arabic": "عَنْ أَبِي هُرَيْرَةَ رضي الله عنه أَنَّ رَسُولَ اللهِ صلى الله عليه وسلم قَالَ: «إِذَا مَاتَ الْإِنْسَانُ انْقَطَعَ عَنْهُ عَمَلُهُ إِلَّا مِنْ ثَلَاثَةٍ: إِلَّا مِنْ صَدَقَةٍ جَارِيَةٍ، أَوْ عِلْمٍ يُنْتَفَعُ بِهِ، أَوْ وَلَدٍ صَالِحٍ يَدْعُو لَهُ».",
+    "translation": "Abu Hurayrah (may Allah be pleased with him) reported: The Messenger of Allah (may Allah's peace and blessings be upon him) said: \"When a person dies, his deeds come to an end except for three things: ongoing charity, beneficial knowledge, or a pious child who supplicates for him.\"",
+    "attribution": "Narrated by Muslim",
+    "grade": "Authentic",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "bukhari:6463": {
+    "arabic": "عَنْ أَبِي هُرَيْرَةَ ـ رضى الله عنه ـ قَالَ قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏\"‏ لَنْ يُنَجِّيَ أَحَدًا مِنْكُمْ عَمَلُهُ ‏\"‏‏.‏ قَالُوا وَلاَ أَنْتَ يَا رَسُولَ اللَّهِ قَالَ ‏\"‏ وَلاَ أَنَا، إِلاَّ أَنْ يَتَغَمَّدَنِي اللَّهُ بِرَحْمَةٍ، سَدِّدُوا وَقَارِبُوا، وَاغْدُوا وَرُوحُوا، وَشَىْءٌ مِنَ الدُّلْجَةِ‏.‏ وَالْقَصْدَ الْقَصْدَ تَبْلُغُوا ‏\"‏‏.‏",
+    "isnad": "حَدَّثَنَا آدَمُ، حَدَّثَنَا ابْنُ أَبِي ذِئْبٍ، عَنْ سَعِيدٍ الْمَقْبُرِيِّ",
+    "translation": "Narrated Abu Huraira:Allah's Messenger (ﷺ) said, \"The deeds of anyone of you will not save you (from the (Hell) Fire).\" They said, \"Even you (will not be saved by your deeds), O Allah's Messenger (ﷺ)?\" He said, \"No, even I (will not be saved) unless and until Allah bestows His Mercy on me. Therefore, do good deeds properly, sincerely and moderately, and worship Allah in the forenoon and in the afternoon and during a part of the night, and always adopt a middle, moderate, regular course whereby you will reach your target (Paradise)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:3244": {
+    "arabic": "عَنْ أَبِي هُرَيْرَةَ ـ رضى الله عنه ـ قَالَ قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏\"‏ قَالَ اللَّهُ أَعْدَدْتُ لِعِبَادِي الصَّالِحِينَ مَا لاَ عَيْنَ رَأَتْ، وَلاَ أُذُنَ سَمِعَتْ، وَلاَ خَطَرَ عَلَى قَلْبِ بَشَرٍ، فَاقْرَءُوا إِنْ شِئْتُمْ ‏{‏فَلاَ تَعْلَمُ نَفْسٌ مَا أُخْفِيَ لَهُمْ مِنْ قُرَّةِ أَعْيُنٍ ‏}‏‏\"‏‏.‏",
+    "isnad": "حَدَّثَنَا الْحُمَيْدِيُّ، حَدَّثَنَا سُفْيَانُ، حَدَّثَنَا أَبُو الزِّنَادِ، عَنِ الأَعْرَجِ",
+    "translation": "Narrated Abu Huraira:Allah's Messenger (ﷺ) said, \"Allah said, \"I have prepared for My Pious slaves things which have never been seen by an eye, or heard by an ear, or imagined by a human being.\" If you wish, you can recite this Verse from the Holy Qur'an:--\"No soul knows what is kept hidden for them, of joy as a reward for what they used to do",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:7404": {
+    "arabic": "عَنْ أَبِي هُرَيْرَةَ، عَنِ النَّبِيِّ صلى الله عليه وسلم قَالَ ‏ \"‏ لَمَّا خَلَقَ اللَّهُ الْخَلْقَ كَتَبَ فِي كِتَابِهِ ـ هُوَ يَكْتُبُ عَلَى نَفْسِهِ، وَهْوَ وَضْعٌ عِنْدَهُ عَلَى الْعَرْشِ ـ إِنَّ رَحْمَتِي تَغْلِبُ غَضَبِي ‏\"‏‏.‏",
+    "isnad": "حَدَّثَنَا عَبْدَانُ، عَنْ أَبِي حَمْزَةَ، عَنِ الأَعْمَشِ، عَنْ أَبِي صَالِحٍ",
+    "translation": "Narrated Abu Huraira:The Prophet (ﷺ) said, \"When Allah created the Creation, He wrote in His Book--and He wrote (that) about Himself, and it is placed with Him on the Throne--'Verily My Mercy overcomes My Anger",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "tirmidhi:2516": {
+    "arabic": "عن ابن عباس رضي الله عنهما قال: كُنْتُ خَلْفَ رَسُولِ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ يَوْمًا، فَقَالَ: «يَا غُلَامُ، إِنِّي أُعَلِّمُكَ كَلِمَاتٍ، احْفَظِ اللهَ يَحْفَظْكَ، احْفَظِ اللهَ تَجِدْهُ تُجَاهَكَ، إِذَا سَأَلْتَ فَاسْأَلِ اللهَ، وَإِذَا اسْتَعَنْتَ فَاسْتَعِنْ بِاللهِ، وَاعْلَمْ أَنَّ الْأُمَّةَ لَوِ اجْتَمَعَتْ عَلَى أَنْ يَنْفَعُوكَ بِشَيْءٍ، لَمْ يَنْفَعُوكَ إِلَّا بِشَيْءٍ قَدْ كَتَبَهُ اللهُ لَكَ، وَلَوِ اجْتَمَعُوا عَلَى أَنْ يَضُرُّوكَ بِشَيْءٍ، لَمْ يَضُرُّوكَ إِلَّا بِشَيْءٍ قَدْ كَتَبَهُ اللهُ عَلَيْكَ، رُفِعَتِ الْأَقْلَامُ وَجَفَّتِ الصُّحُفُ».",
+    "translation": "Ibn ‘Abbās (may Allah be pleased with him) reported: One day, I was riding behind the Prophet (peace and blessings of Allah be upon him), and he said: \"O boy, I shall teach you some words: Be mindful of Allah, and Allah will protect you. Be mindful of Allah, and you will find Him before you. If you ask, ask Allah; if you seek help, seek help from Allah. And know that if the Ummah were to gather together to benefit you with anything, they would not benefit you except with what Allah had already prescribed for you. And if they were to gather together to harm you with anything, they would not harm you except with what Allah had already prescribed against you. The pens have been lifted, and the scrolls have dried.\"",
+    "attribution": "Narrated by At-Tirmidhi",
+    "grade": "Sahih (Ahmad Muhammad Shakir) · Sahih (Al-Albani) · Hasan Sahih (Bashar Awad Maarouf) · Isnaad Hasan (Zubair Ali Zai)",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "muslim:2664": {
+    "arabic": "عَنْ أَبِي هُرَيْرَةَ رضي الله عنه قَالَ: قَالَ رَسُولُ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ: «الْمُؤْمِنُ الْقَوِيُّ، خَيْرٌ وَأَحَبُّ إِلَى اللهِ مِنَ الْمُؤْمِنِ الضَّعِيفِ، وَفِي كُلٍّ خَيْرٌ، احْرِصْ عَلَى مَا يَنْفَعُكَ، وَاسْتَعِنْ بِاللهِ وَلَا تَعْجَزْ، وَإِنْ أَصَابَكَ شَيْءٌ، فَلَا تَقُلْ لَوْ أَنِّي فَعَلْتُ كَانَ كَذَا وَكَذَا، وَلَكِنْ قُلْ قَدَرُ اللهِ وَمَا شَاءَ فَعَلَ، فَإِنَّ (لَوْ) تَفْتَحُ عَمَلَ الشَّيْطَانِ».",
+    "translation": "Abu Hurayrah (may Allah be pleased with him) reported that the Messenger of Allah (may Allah's peace and blessings be upon him) said: \"The strong believer is better and dearer to Allah than the weak believer, and there is good in both. Adhere to whatever brings you benefit, seek the help of Allah, and do not feel helpless. If something befalls you, do not say: 'Had I done such-and-such, it would have been such-and-such;' rather, say: 'Allah has decreed, and whatever He wills, He does.' Indeed, 'if' opens the way before the devil to act.\"",
+    "attribution": "Narrated by Muslim",
+    "grade": "Authentic",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "tirmidhi:2517": {
+    "arabic": "سَمِعْتُ أَنَسَ بْنَ مَالِكٍ، يَقُولُ قَالَ رَجُلٌ يَا رَسُولَ اللَّهِ أَعْقِلُهَا وَأَتَوَكَّلُ أَوْ أُطْلِقُهَا وَأَتَوَكَّلُ قَالَ ‏ \"‏ اعْقِلْهَا وَتَوَكَّلْ ‏\"‏ ‏.‏ قَالَ عَمْرُو بْنُ عَلِيٍّ قَالَ يَحْيَى وَهَذَا عِنْدِي حَدِيثٌ مُنْكَرٌ ‏.‏ قَالَ أَبُو عِيسَى وَهَذَا حَدِيثٌ غَرِيبٌ مِنْ حَدِيثِ أَنَسٍ لاَ نَعْرِفُهُ إِلاَّ مِنْ هَذَا الْوَجْهِ وَقَدْ رُوِيَ عَنْ عَمْرِو بْنِ أُمَيَّةَ الضَّمْرِيِّ عَنِ النَّبِيِّ صلى الله عليه وسلم نَحْوُ هَذَا ‏.‏",
+    "isnad": "حَدَّثَنَا أَبُو حَفْصٍ، عَمْرُو بْنُ عَلِيٍّ حَدَّثَنَا يَحْيَى بْنُ سَعِيدٍ الْقَطَّانُ، حَدَّثَنَا الْمُغِيرَةُ بْنُ أَبِي قُرَّةَ السَّدُوسِيُّ، قَالَ",
+    "translation": "Anas bin Malik narrated that a man said:\"O Messenger of Allah! Shall I tie it and rely(upon Allah), or leave it loose and rely(upon Allah)?\" He said: \"Tie it and rely(upon Allah).\" Other chains report similar narrations",
+    "grade": "Hasan (Ahmad Muhammad Shakir) · Hasan (Al-Albani) · Hasan (Zubair Ali Zai)",
     "arabicFrom": "fawazahmed0/hadith-api",
     "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
   },

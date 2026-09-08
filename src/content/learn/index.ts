@@ -48,6 +48,8 @@ import { SINCERITY } from './sincerity';
 import { ANGELS } from './angels';
 import { THE_PROPHETS } from './the-prophets';
 import { THE_REVEALED_BOOKS } from './the-revealed-books';
+import { AFTER_DEATH } from './after-death';
+import { QADR } from './qadr';
 import { WAS_IT_SPREAD_BY_THE_SWORD } from './was-it-spread-by-the-sword';
 import { WHY_CANT_YOU_EAT_THAT } from './why-cant-you-eat-that';
 import { WHY_DO_WOMEN_COVER } from './why-do-women-cover';
@@ -161,6 +163,9 @@ export const LEARN_TOPICS: Reference[] = [
   ANGELS,
   THE_PROPHETS,
   THE_REVEALED_BOOKS,
+  /* The two held for last, the same day in the end. */
+  AFTER_DEATH,
+  QADR,
   AL_FATIHAH,
   WHAT_BREAKS_PRAYER,
   HALAL_AND_HARAM,
@@ -284,6 +289,8 @@ export const TOPIC_GROUPS: readonly { id: TopicGroupId; topics: readonly Content
       ref('reference', 'angels'),
       ref('reference', 'the-prophets'),
       ref('reference', 'the-revealed-books'),
+      ref('reference', 'after-death'),
+      ref('reference', 'qadr'),
       /* Why four schools. The page that makes the 50 `differs` notes legible. */
       ref('reference', 'why-people-differ'),
       /*

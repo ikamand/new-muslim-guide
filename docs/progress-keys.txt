@@ -178,6 +178,7 @@ pillar:shahada
 pillar:zakat
 reference:a-partner-already
 reference:adhan
+reference:after-death
 reference:al-fatihah
 reference:angels
 reference:anger
@@ -220,6 +221,7 @@ reference:missed
 reference:mosque
 reference:patience-and-gratitude
 reference:periods
+reference:qadr
 reference:qiyam-al-layl
 reference:ramadan
 reference:repentance

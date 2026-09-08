@@ -108,6 +108,8 @@ const REFERENCES: Readonly<Record<string, Cadence>> = {
   'angels': 'once',
   'the-prophets': 'once',
   'the-revealed-books': 'once',
+  'after-death': 'once',
+  'qadr': 'once',
   adhan: 'once',
   rulings: 'once',
   /* Weekly, and the calendar is the only trigger the app has for it. */

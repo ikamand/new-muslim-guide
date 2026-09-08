@@ -275,7 +275,7 @@ export const CURRICULUM: readonly Tier[] = [
           article except the first, because who-is-allah is in Book 1 and
           the ninety-nine names are the deeper study, so the door stands
           where that lesson would. After-death and qadr are the two held
-          pages, written last and declared in COMMISSIONED until then.
+          pages, written last, on the same day in the end.
         */
         id: 'what-you-believe',
         lessons: [
@@ -358,11 +358,8 @@ export const CURRICULUM: readonly Tier[] = [
  * the audit's stale-commission check forced this line to say so.
  */
 export const COMMISSIONED: readonly string[] = [
-  /* 8 Sep 2026: the two creed pages held until last, because they carry the
-     narrations with the most specific wording (docs/curriculum-update-plan.md,
-     Phase 6). The three beside them are written. */
-  'reference:after-death',
-  'reference:qadr',
+  /* Empty again since 8 Sep 2026: after-death and qadr, the two creed pages
+     held for last, are written. */
 ];
 
 /**

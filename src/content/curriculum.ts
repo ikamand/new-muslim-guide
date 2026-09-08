@@ -351,6 +351,23 @@ export const SHAHADA_KEY = stepKey(ref('guide', 'shahada'));
  * installs from before this change) — and this predicate is a plain lookup.
  * One writable truth; nothing can disagree with it.
  */
+/**
+ * The curriculum's own step for a lesson key, or nothing if the key is not a
+ * lesson. For the four list-lessons this is where the beginner's name and line
+ * live (`labelKey`, `descriptionKey`); a screen that prints a lesson from its
+ * key alone — Today's "you were reading" card — has to look here or it prints
+ * the target's title, which for the Six Articles is "Belief in Allah".
+ */
+export function lessonFor(key: string): JourneyStep | undefined {
+  for (const tier of CURRICULUM) {
+    for (const unit of tier.units) {
+      const found = unit.lessons.find((lesson) => stepKey(lesson.ref) === key);
+      if (found) return found;
+    }
+  }
+  return undefined;
+}
+
 export function isLessonDone(key: string, completedLessons: readonly string[]): boolean {
   return completedLessons.includes(key);
 }

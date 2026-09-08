@@ -2,6 +2,7 @@ import type { Href } from 'expo-router';
 import { useEffect, useMemo } from 'react';
 
 import { resolveRef } from '@/content';
+import { lessonFor } from '@/content/curriculum';
 import { FIRSTS } from '@/content/firsts';
 import { arcFor } from '@/content/ramadan-arc';
 import { seasonFor } from '@/content/seasons';
@@ -281,11 +282,15 @@ export function useToday(): TodayItem | undefined {
       library on Learn never has to move a card to say it.
     */
     if (reading) {
+      /* A half-read lesson is named as the chapter names it, not as its target does. */
+      const lesson = lessonFor(reading.key);
       return {
         key: reading.key,
         reason: 'today.reading',
-        title: reading.entry.title,
-        description: reading.entry.shortDescription,
+        title: lesson?.labelKey ? t(lesson.labelKey as UIKey) : reading.entry.title,
+        description: lesson?.descriptionKey
+          ? t(lesson.descriptionKey as UIKey)
+          : reading.entry.shortDescription,
         minutes: reading.entry.meta?.estimatedMinutes,
         href: routeFor(reading.entry),
       };

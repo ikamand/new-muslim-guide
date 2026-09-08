@@ -186,6 +186,7 @@ reference:asr
 reference:before-prayer
 reference:behind-an-imam
 reference:being-corrected
+reference:building-consistency
 reference:clothing
 reference:dhuhr
 reference:dua-and-dhikr
@@ -196,6 +197,7 @@ reference:family
 reference:family-doesnt-accept
 reference:fasting-alone
 reference:food
+reference:hajj-and-umrah
 reference:halal-and-haram
 reference:how-it-began
 reference:how-prayer-works
@@ -223,6 +225,7 @@ reference:repentance
 reference:rulings
 reference:seated
 reference:showing-off
+reference:sincerity
 reference:small-sunnahs
 reference:sunnah
 reference:tahajjud
@@ -236,6 +239,7 @@ reference:what-breaks-prayer
 reference:what-is-islam
 reference:what-is-the-quran
 reference:what-to-say
+reference:where-rulings-come-from
 reference:which-dhikr
 reference:who-can-i-talk-to
 reference:who-is-allah

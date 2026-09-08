@@ -180,6 +180,9 @@ export const PILLARS: Pillar[] = [
     arabic: 'الْحَجّ',
     transliteration: 'Al-ḥajj',
     summary: 'The pilgrimage to Mecca, once in a lifetime, for those able to make it.',
+    // The Hajj-and-Umrah lesson, as the fasting pillar teaches Ramadan: this
+    // record stays the two-minute introduction, that page is the follow-up.
+    teaches: ref('reference', 'hajj-and-umrah'),
     detail:
       'Hajj happens on fixed days of the Islamic year and is required once, and only if you can afford it and are physically able. Most Muslims go later in life, if at all. Nothing about it is expected of you now.',
     meta: {

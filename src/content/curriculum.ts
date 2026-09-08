@@ -125,6 +125,9 @@ export const CURRICULUM: readonly Tier[] = [
           step(ref('reference', 'how-it-began'), 'foundation'),
           step(ref('reference', 'what-is-the-quran'), 'foundation'),
           step(ref('reference', 'sunnah'), 'foundation'),
+          /* 8 Sep 2026: the route a ruling travels, before the five kinds it
+             comes in. */
+          step(ref('reference', 'where-rulings-come-from'), 'foundation'),
           /* The five categories sit here, not in year two, because they change
              how every later "should" in the app is read. */
           step(ref('reference', 'rulings'), 'foundation'),
@@ -237,6 +240,9 @@ export const CURRICULUM: readonly Tier[] = [
           step(ref('reference', 'ramadan'), 'seasonal'),
           step(ref('reference', 'fasting-alone'), 'seasonal'),
           step(ref('reference', 'eid'), 'seasonal'),
+          /* 8 Sep 2026: one page for both pilgrimages, the follow-up to the
+             Hajj pillar. Nothing is expected of a beginner now, and it says so. */
+          step(ref('reference', 'hajj-and-umrah'), 'learning'),
           step(ref('reference', 'voluntary-fasting'), 'learning'),
           step(ref('pillar', 'zakat'), 'seasonal', 'journey.lesson.zakat'),
         ],
@@ -245,6 +251,9 @@ export const CURRICULUM: readonly Tier[] = [
         id: 'when-its-hard',
         lessons: [
           step(ref('reference', 'repentance'), 'learning'),
+          /* 8 Sep 2026: prevention before cure. The person who needs this is
+             in week three; Book 3 would have reached them a year late. */
+          step(ref('reference', 'building-consistency'), 'learning'),
           step(ref('reference', 'if-you-stopped'), 'learning'),
           step(ref('reference', 'patience-and-gratitude'), 'learning'),
           /* 8 Sep 2026: after the family knows, and did not take it well. The
@@ -278,6 +287,8 @@ export const CURRICULUM: readonly Tier[] = [
       {
         id: 'interior-life',
         lessons: [
+          /* 8 Sep 2026: the thing to aim at, before the four to avoid. */
+          step(ref('reference', 'sincerity'), 'learning'),
           step(ref('reference', 'anger'), 'learning'),
           step(ref('reference', 'showing-off'), 'learning'),
           step(ref('reference', 'arrogance'), 'learning'),

@@ -41,6 +41,10 @@ import { TEACHING_SOMEONE } from './teaching-someone';
 import { WHAT_BREAKS_PRAYER } from './what-breaks-prayer';
 import { WHAT_ABOUT_JESUS } from './what-about-jesus';
 import { WHAT_TO_SAY } from './what-to-say';
+import { WHERE_RULINGS_COME_FROM } from './where-rulings-come-from';
+import { HAJJ_AND_UMRAH } from './hajj-and-umrah';
+import { BUILDING_CONSISTENCY } from './building-consistency';
+import { SINCERITY } from './sincerity';
 import { WAS_IT_SPREAD_BY_THE_SWORD } from './was-it-spread-by-the-sword';
 import { WHY_CANT_YOU_EAT_THAT } from './why-cant-you-eat-that';
 import { WHY_DO_WOMEN_COVER } from './why-do-women-cover';
@@ -144,6 +148,11 @@ export const LEARN_TOPICS: Reference[] = [
   /* 8 Sep 2026 — the curriculum update's pilot pair, the two least alike. */
   WHAT_TO_SAY,
   FAMILY_DOESNT_ACCEPT,
+  /* 8 Sep 2026 — the four low-risk pages that followed the pilot. */
+  WHERE_RULINGS_COME_FROM,
+  HAJJ_AND_UMRAH,
+  BUILDING_CONSISTENCY,
+  SINCERITY,
   AL_FATIHAH,
   WHAT_BREAKS_PRAYER,
   HALAL_AND_HARAM,
@@ -253,6 +262,8 @@ export const TOPIC_GROUPS: readonly { id: TopicGroupId; topics: readonly Content
       ref('reference', 'what-is-islam'),
       ref('reference', 'life-before'),
       ref('reference', 'your-name'),
+      /* The route a ruling travels, then the five kinds it comes in. */
+      ref('reference', 'where-rulings-come-from'),
       ref('reference', 'rulings'),
       ref('reference', 'who-is-allah'),
       ref('reference', 'who-is-muhammad'),
@@ -315,6 +326,8 @@ export const TOPIC_GROUPS: readonly { id: TopicGroupId; topics: readonly Content
     id: 'hard',
     topics: [
       ref('reference', 'repentance'),
+      /* Small and steady, before the page about having stopped. */
+      ref('reference', 'building-consistency'),
       /* The month somebody quietly stopped. `repentance` covers the theology;
          this is the shape of a convert relapse, which is a different page. */
       ref('reference', 'if-you-stopped'),
@@ -329,6 +342,8 @@ export const TOPIC_GROUPS: readonly { id: TopicGroupId; topics: readonly Content
       /* The four interior vices. Each page carries its own cure rather than
          pairing off into four more pages: nobody treats envy by reading a
          separate article about contentment. */
+      /* The thing to aim at, then the four to avoid. */
+      ref('reference', 'sincerity'),
       ref('reference', 'anger'),
       ref('reference', 'showing-off'),
       ref('reference', 'arrogance'),
@@ -343,6 +358,7 @@ export const TOPIC_GROUPS: readonly { id: TopicGroupId; topics: readonly Content
       ref('reference', 'fasting-alone'),
       ref('reference', 'voluntary-fasting'),
       ref('reference', 'eid'),
+      ref('reference', 'hajj-and-umrah'),
       ref('reference', 'islamic-calendar'),
     ],
   },

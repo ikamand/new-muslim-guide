@@ -5,22 +5,22 @@
  * here is lost the next time it runs, and one that needs making belongs
  * upstream, where the text is published.
  *
- * 142 Qur'an passages and 188 narrations. Every character came over
+ * 145 Qur'an passages and 193 narrations. Every character came over
  * the wire from a published text rather than from memory, which is the only
  * way a file like this could exist under this project's rules about Arabic.
  *
  * ## Where each line came from
  *
  * No one source has all of it, so each field is taken from the first that
- * does, and says so on the text itself. Of the 188 narrations here:
+ * does, and says so on the text itself. Of the 193 narrations here:
  * 65 were confirmed against a second, separately edited publisher;
- * 65 carry HadeethEnc's own translation, 123 carry Darussalam's, and
+ * 65 carry HadeethEnc's own translation, 128 carry Darussalam's, and
  * 0 have Arabic and no translation at all.
  *
  * ⚠️ **The Darussalam translations are not ours to relicense.** They reach
  * this file through a public-domain dedication that covers the compiler's work
  * and not the translation inside it. What makes that defensible here is scale
- * and purpose — 123 narrations out of some thirty thousand, each quoted under
+ * and purpose — 128 narrations out of some thirty thousand, each quoted under
  * the instruction it supports, in an app that is free and never sold. It is a
  * quotation, not a republication, and it is Iyad's decision on the record.
  *
@@ -565,6 +565,30 @@ export const QURAN_TEXT: Record<string, EvidenceText> = {
     "arabicFrom": "QuranEnc.com",
     "translationFrom": "QuranEnc.com"
   },
+  "4:59": {
+    "arabic": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوٓاْ أَطِيعُواْ ٱللَّهَ وَأَطِيعُواْ ٱلرَّسُولَ وَأُوْلِي ٱلۡأَمۡرِ مِنكُمۡۖ فَإِن تَنَٰزَعۡتُمۡ فِي شَيۡءٖ فَرُدُّوهُ إِلَى ٱللَّهِ وَٱلرَّسُولِ إِن كُنتُمۡ تُؤۡمِنُونَ بِٱللَّهِ وَٱلۡيَوۡمِ ٱلۡأٓخِرِۚ ذَٰلِكَ خَيۡرٞ وَأَحۡسَنُ تَأۡوِيلًا",
+    "translation": "O you who have believed, obey Allāh and obey the Messenger and those in authority among you. And if you disagree over anything, refer it to Allāh and the Messenger, if you should believe in Allāh and the Last Day. That is the best [way] and best in result.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "3:97": {
+    "arabic": "فِيهِ ءَايَٰتُۢ بَيِّنَٰتٞ مَّقَامُ إِبۡرَٰهِيمَۖ وَمَن دَخَلَهُۥ كَانَ ءَامِنٗاۗ وَلِلَّهِ عَلَى ٱلنَّاسِ حِجُّ ٱلۡبَيۡتِ مَنِ ٱسۡتَطَاعَ إِلَيۡهِ سَبِيلٗاۚ وَمَن كَفَرَ فَإِنَّ ٱللَّهَ غَنِيٌّ عَنِ ٱلۡعَٰلَمِينَ",
+    "translation": "In it are clear signs [such as] the standing place of Abraham. And whoever enters it [i.e., the Ḥaram] shall be safe. And [due] to Allāh from the people is a pilgrimage to the House - for whoever is able to find thereto a way. But whoever disbelieves [i.e., refuses] - then indeed, Allāh is free from need of the worlds.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "2:196": {
+    "arabic": "وَأَتِمُّواْ ٱلۡحَجَّ وَٱلۡعُمۡرَةَ لِلَّهِۚ فَإِنۡ أُحۡصِرۡتُمۡ فَمَا ٱسۡتَيۡسَرَ مِنَ ٱلۡهَدۡيِۖ وَلَا تَحۡلِقُواْ رُءُوسَكُمۡ حَتَّىٰ يَبۡلُغَ ٱلۡهَدۡيُ مَحِلَّهُۥۚ فَمَن كَانَ مِنكُم مَّرِيضًا أَوۡ بِهِۦٓ أَذٗى مِّن رَّأۡسِهِۦ فَفِدۡيَةٞ مِّن صِيَامٍ أَوۡ صَدَقَةٍ أَوۡ نُسُكٖۚ فَإِذَآ أَمِنتُمۡ فَمَن تَمَتَّعَ بِٱلۡعُمۡرَةِ إِلَى ٱلۡحَجِّ فَمَا ٱسۡتَيۡسَرَ مِنَ ٱلۡهَدۡيِۚ فَمَن لَّمۡ يَجِدۡ فَصِيَامُ ثَلَٰثَةِ أَيَّامٖ فِي ٱلۡحَجِّ وَسَبۡعَةٍ إِذَا رَجَعۡتُمۡۗ تِلۡكَ عَشَرَةٞ كَامِلَةٞۗ ذَٰلِكَ لِمَن لَّمۡ يَكُنۡ أَهۡلُهُۥ حَاضِرِي ٱلۡمَسۡجِدِ ٱلۡحَرَامِۚ وَٱتَّقُواْ ٱللَّهَ وَٱعۡلَمُوٓاْ أَنَّ ٱللَّهَ شَدِيدُ ٱلۡعِقَابِ",
+    "translation": "And complete the ḥajj and ʿumrah for Allāh. But if you are prevented, then [offer] what can be obtained with ease of sacrificial animals. And do not shave your heads until the sacrificial animal has reached its place of slaughter. And whoever among you is ill or has an ailment of the head [making shaving necessary must offer] a ransom of fasting [three days] or charity or sacrifice. And when you are secure, then whoever performs ʿumrah [during the ḥajj months] followed by ḥajj [offers] what can be obtained with ease of sacrificial animals. And whoever cannot find [or afford such an animal] - then a fast of three days during ḥajj and of seven when you have returned [home]. Those are ten complete [days]. This is for those whose family is not in the area of al-Masjid al-Ḥarām. And fear Allāh and know that Allāh is severe in penalty.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "98:5": {
+    "arabic": "وَمَآ أُمِرُوٓاْ إِلَّا لِيَعۡبُدُواْ ٱللَّهَ مُخۡلِصِينَ لَهُ ٱلدِّينَ حُنَفَآءَ وَيُقِيمُواْ ٱلصَّلَوٰةَ وَيُؤۡتُواْ ٱلزَّكَوٰةَۚ وَذَٰلِكَ دِينُ ٱلۡقَيِّمَةِ",
+    "translation": "And they were not commanded except to worship Allāh, [being] sincere to Him in religion, inclining to truth, and to establish prayer and to give zakāh. And that is the correct religion.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
   "7:157": {
     "arabic": "ٱلَّذِينَ يَتَّبِعُونَ ٱلرَّسُولَ ٱلنَّبِيَّ ٱلۡأُمِّيَّ ٱلَّذِي يَجِدُونَهُۥ مَكۡتُوبًا عِندَهُمۡ فِي ٱلتَّوۡرَىٰةِ وَٱلۡإِنجِيلِ يَأۡمُرُهُم بِٱلۡمَعۡرُوفِ وَيَنۡهَىٰهُمۡ عَنِ ٱلۡمُنكَرِ وَيُحِلُّ لَهُمُ ٱلطَّيِّبَٰتِ وَيُحَرِّمُ عَلَيۡهِمُ ٱلۡخَبَٰٓئِثَ وَيَضَعُ عَنۡهُمۡ إِصۡرَهُمۡ وَٱلۡأَغۡلَٰلَ ٱلَّتِي كَانَتۡ عَلَيۡهِمۡۚ فَٱلَّذِينَ ءَامَنُواْ بِهِۦ وَعَزَّرُوهُ وَنَصَرُوهُ وَٱتَّبَعُواْ ٱلنُّورَ ٱلَّذِيٓ أُنزِلَ مَعَهُۥٓ أُوْلَٰٓئِكَ هُمُ ٱلۡمُفۡلِحُونَ",
     "translation": "Those who follow the Messenger, the unlettered prophet, whom they find written [i.e., described] in what they have of the Torah and the Gospel, who enjoins upon them what is right and prohibits them from what is wrong and makes lawful for them what is good and forbids them from what is evil and relieves them of their burden and the shackles which were upon them. So they who have believed in him, honored him, supported him and followed the light which was sent down with him - it is those who will be the successful.",
@@ -676,12 +700,6 @@ export const QURAN_TEXT: Record<string, EvidenceText> = {
   "4:101": {
     "arabic": "وَإِذَا ضَرَبۡتُمۡ فِي ٱلۡأَرۡضِ فَلَيۡسَ عَلَيۡكُمۡ جُنَاحٌ أَن تَقۡصُرُواْ مِنَ ٱلصَّلَوٰةِ إِنۡ خِفۡتُمۡ أَن يَفۡتِنَكُمُ ٱلَّذِينَ كَفَرُوٓاْۚ إِنَّ ٱلۡكَٰفِرِينَ كَانُواْ لَكُمۡ عَدُوّٗا مُّبِينٗا",
     "translation": "And when you travel throughout the land, there is no blame upon you for shortening the prayer, [especially] if you fear that those who disbelieve may disrupt [or attack] you. Indeed, the disbelievers are ever to you a clear enemy.",
-    "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
-  },
-  "3:97": {
-    "arabic": "فِيهِ ءَايَٰتُۢ بَيِّنَٰتٞ مَّقَامُ إِبۡرَٰهِيمَۖ وَمَن دَخَلَهُۥ كَانَ ءَامِنٗاۗ وَلِلَّهِ عَلَى ٱلنَّاسِ حِجُّ ٱلۡبَيۡتِ مَنِ ٱسۡتَطَاعَ إِلَيۡهِ سَبِيلٗاۚ وَمَن كَفَرَ فَإِنَّ ٱللَّهَ غَنِيٌّ عَنِ ٱلۡعَٰلَمِينَ",
-    "translation": "In it are clear signs [such as] the standing place of Abraham. And whoever enters it [i.e., the Ḥaram] shall be safe. And [due] to Allāh from the people is a pilgrimage to the House - for whoever is able to find thereto a way. But whoever disbelieves [i.e., refuses] - then indeed, Allāh is free from need of the worlds.",
     "arabicFrom": "QuranEnc.com",
     "translationFrom": "QuranEnc.com"
   },
@@ -1871,6 +1889,41 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
     "arabic": "عَنْ أَسْمَاءَ بِنْتِ أَبِي بَكْرٍ ـ رضى الله عنهما ـ قَالَتْ قَدِمَتْ عَلَىَّ أُمِّي وَهْىَ مُشْرِكَةٌ، فِي عَهْدِ رَسُولِ اللَّهِ صلى الله عليه وسلم، فَاسْتَفْتَيْتُ رَسُولَ اللَّهِ صلى الله عليه وسلم قُلْتُ ‏{‏إِنَّ أُمِّي قَدِمَتْ‏}‏ وَهْىَ رَاغِبَةٌ، أَفَأَصِلُ أُمِّي قَالَ ‏ \"‏ نَعَمْ صِلِي أُمَّكِ ‏\"‏‏.‏",
     "isnad": "حَدَّثَنَا عُبَيْدُ بْنُ إِسْمَاعِيلَ، حَدَّثَنَا أَبُو أُسَامَةَ، عَنْ هِشَامٍ، عَنْ أَبِيهِ",
     "translation": "Narrated Asma' bint Abu Bakr:My mother came to me during the lifetime of Allah's Messenger (ﷺ) and she was a pagan. I said to Allah's Apostle (seeking his verdict), \"My mother has come to me and she desires to receive a reward from me, shall I keep good relations with her?\" The Prophet (ﷺ) said, \"Yes, keep good relation with her",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:1521": {
+    "arabic": "سَمِعْتُ أَبَا هُرَيْرَةَ ـ رضى الله عنه ـ قَالَ سَمِعْتُ النَّبِيَّ صلى الله عليه وسلم يَقُولُ ‏ \"‏ مَنْ حَجَّ لِلَّهِ فَلَمْ يَرْفُثْ وَلَمْ يَفْسُقْ رَجَعَ كَيَوْمِ وَلَدَتْهُ أُمُّهُ ‏\"‏‏.‏",
+    "isnad": "حَدَّثَنَا آدَمُ، حَدَّثَنَا شُعْبَةُ، حَدَّثَنَا سَيَّارٌ أَبُو الْحَكَمِ، قَالَ سَمِعْتُ أَبَا حَازِمٍ، قَالَ",
+    "translation": "Narrated Abu Huraira:The Prophet (ﷺ) said, \"Whoever performs Hajj for Allah's pleasure and does not have sexual relations with his wife, and does not do evil or sins then he will return (after Hajj free from all sins) as if he were born anew",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "muslim:1349": {
+    "arabic": "عَنْ أَبِي هُرَيْرَةَ، أَنَّ رَسُولَ اللَّهِ صلى الله عليه وسلم قَالَ ‏ \"‏ الْعُمْرَةُ إِلَى الْعُمْرَةِ كَفَّارَةٌ لِمَا بَيْنَهُمَا وَالْحَجُّ الْمَبْرُورُ لَيْسَ لَهُ جَزَاءٌ إِلاَّ الْجَنَّةُ ‏\"‏ ‏.‏",
+    "isnad": "حَدَّثَنَا يَحْيَى بْنُ يَحْيَى، قَالَ قَرَأْتُ عَلَى مَالِكٍ عَنْ سُمَىٍّ، مَوْلَى أَبِي بَكْرِ بْنِ عَبْدِ الرَّحْمَنِ عَنْ أَبِي صَالِحٍ السَّمَّانِ",
+    "translation": "Abu Huraira (Allah be pleased with him) reported Allah's Messenger (ﷺ) as saying:An Umra is an expiation for the sins committed between it and the next, and Hajj which is accepted will receive no other reward than Paradise",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:6464": {
+    "arabic": "عَنْ عَائِشَةَ، أَنَّ رَسُولَ اللَّهِ صلى الله عليه وسلم قَالَ ‏ \"‏ سَدِّدُوا وَقَارِبُوا، وَاعْلَمُوا أَنْ لَنْ يُدْخِلَ أَحَدَكُمْ عَمَلُهُ الْجَنَّةَ، وَأَنَّ أَحَبَّ الأَعْمَالِ أَدْوَمُهَا إِلَى اللَّهِ، وَإِنْ قَلَّ ‏\"‏",
+    "isnad": "حَدَّثَنَا عَبْدُ الْعَزِيزِ بْنُ عَبْدِ اللَّهِ، حَدَّثَنَا سُلَيْمَانُ، عَنْ مُوسَى بْنِ عُقْبَةَ، عَنْ أَبِي سَلَمَةَ بْنِ عَبْدِ الرَّحْمَنِ",
+    "translation": "Narrated `Aisha:Allah's Messenger (ﷺ) said, \"Do good deeds properly, sincerely and moderately and know that your deeds will not make you enter Paradise, and that the most beloved deed to Allah is the most regular and constant even if it were little",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:1970": {
+    "arabic": "عَنْ أَبِي سَلَمَةَ، أَنَّ عَائِشَةَ ـ رضى الله عنها ـ حَدَّثَتْهُ قَالَتْ، لَمْ يَكُنِ النَّبِيُّ صلى الله عليه وسلم يَصُومُ شَهْرًا أَكْثَرَ مِنْ شَعْبَانَ، فَإِنَّهُ كَانَ يَصُومُ شَعْبَانَ كُلَّهُ، وَكَانَ يَقُولُ ‏ \"‏ خُذُوا مِنَ الْعَمَلِ مَا تُطِيقُونَ، فَإِنَّ اللَّهَ لاَ يَمَلُّ حَتَّى تَمَلُّوا، وَأَحَبُّ الصَّلاَةِ إِلَى النَّبِيِّ صلى الله عليه وسلم مَا دُووِمَ عَلَيْهِ، وَإِنْ قَلَّتْ ‏\"‏ وَكَانَ إِذَا صَلَّى صَلاَةً دَاوَمَ عَلَيْهَا‏.‏",
+    "isnad": "حَدَّثَنَا مُعَاذُ بْنُ فَضَالَةَ، حَدَّثَنَا هِشَامٌ، عَنْ يَحْيَى",
+    "translation": "Narrated `Aisha:The Prophet (ﷺ) never fasted in any month more than in the month of Sha'ban. He used to say, \"Do those deeds which you can do easily, as Allah will not get tired (of giving rewards) till you get bored and tired (of performing religious deeds).\" The most beloved prayer to the Prophet (ﷺ) was the one that was done regularly (throughout the life) even if it were little. And whenever the Prophet (ﷺ) offered a prayer he used to offer it regularly",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:56": {
+    "arabic": "عَنْ سَعْدِ بْنِ أَبِي وَقَّاصٍ أَنَّهُ أَخْبَرَهُ أَنَّ رَسُولَ اللَّهِ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ قَالَ \"إِنَّكَ لَنْ تُنْفِقَ نَفَقَةً تَبْتَغِي بِهَا وَجْهَ اللَّهِ إِلَّا أُجِرْتَ عَلَيْهَا حَتَّى مَا تَجْعَلُ فِي فَمِ امْرَأَتِكَ",
+    "isnad": "حَدَّثَنَا الْحَكَمُ بْنُ نَافِعٍ قَالَ أَخْبَرَنَا شُعَيْبٌ عَنْ الزُّهْرِيِّ قَالَ حَدَّثَنِي عَامِرُ بْنُ سَعْدٍ",
+    "translation": "Narrated Sa'd bin Abi Waqqas: Allah's Messenger (ﷺ) said, \"You will be rewarded for whatever you spend for Allah's sake even if it were a morsel which you put in your wife's mouth",
     "arabicFrom": "fawazahmed0/hadith-api",
     "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
   },

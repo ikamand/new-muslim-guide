@@ -101,6 +101,10 @@ const REFERENCES: Readonly<Record<string, Cadence>> = {
   /* The pattern, needed until it is not — like the guides it explains. */
   'how-prayer-works': 'until-fluent',
   'what-to-say': 'until-fluent', // The prayer's words gathered; the page's job ends when they are known.
+  'where-rulings-come-from': 'once',
+  'hajj-and-umrah': 'once', // The lesson is read once; the pilgrim's duʿas are on-event in Hisn.
+  'building-consistency': 'once',
+  'sincerity': 'once',
   adhan: 'once',
   rulings: 'once',
   /* Weekly, and the calendar is the only trigger the app has for it. */

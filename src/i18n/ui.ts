@@ -1040,7 +1040,7 @@ export const EN = {
     'Why confident people tell you opposite things.',
   'curriculum.unit.the-year': 'The year',
   'curriculum.unit.the-year.purpose':
-    'Ramadan, the Eids, zakat, and the calendar they follow.',
+    'Ramadan, the Eids, zakat, Hajj, and the calendar they follow.',
   'curriculum.unit.when-its-hard': 'When it’s hard',
   'curriculum.unit.when-its-hard.purpose': 'Coming back is part of the path.',
   'curriculum.unit.prayers-you-choose': 'Prayers you choose',
@@ -1048,7 +1048,7 @@ export const EN = {
     'The night prayers, and the ones for a moment.',
   'curriculum.unit.interior-life': 'The interior life',
   'curriculum.unit.interior-life.purpose':
-    'Anger, envy, showing off, arrogance, and their cures.',
+    'Sincerity first, then anger, envy, showing off and arrogance, and their cures.',
   'curriculum.unit.what-you-owe': 'What you owe',
   'curriculum.unit.what-you-owe.purpose':
     'Your mother, your family, whoever works for you, and what cannot ask.',

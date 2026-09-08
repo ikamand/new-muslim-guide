@@ -1,6 +1,6 @@
 # Curriculum update — the agreed changes
 
-**Status:** locked 7 Sep 2026. Phase 1 and the Phase 2 pilot built 8 Sep; the rest not yet. Iyad's proposal, audited against
+**Status:** locked 7 Sep 2026. Phases 1–4 built 8 Sep; the creed chapter and the three held pages not yet. Iyad's proposal, audited against
 every lesson it named, then agreed item by item. This document is the
 record of what was decided and why; `docs/learn-redesign-plan.md` §3 is the
 map it amends. When a decision here changes, change it here.
@@ -122,8 +122,10 @@ when-its-hard 6, interior-life 5, what-you-believe 5 + door, practices 2.
    words are recorded) and the family page. Both screenshotted in both
    themes with their chapter screens; the band widened to 2–7 in the same
    commit. **Awaiting Iyad's eyes before the rest.**
-3. **Phase 2–4, the low-risk pages** — Where rulings come from · Hajj and
-   Umrah · Building consistency · Sincerity.
+3. ✅ **Phase 2–4, the low-risk pages**, built 8 Sep 2026 — Where rulings
+   come from · Hajj and Umrah · Building consistency · Sincerity. Each
+   screenshotted in both themes; the Hajj pillar now doors to its page; the
+   Year and Interior-life chapter summaries name the new lessons.
 4. **Phase 5** — the creed chapter: Angels, Prophets, Books, then the two
    held pages below.
 5. **Phase 6, held until last** — Intimacy · What happens after death · Qadr

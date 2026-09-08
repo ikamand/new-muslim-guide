@@ -92,7 +92,7 @@ export const HOW_PRAYER_WORKS: Reference = {
       id: 'learning-it',
       heading: 'How do I actually learn it?',
       body:
-        'By praying, with the guide open. Pick the next prayer of the day, follow it step by step on the mat, and let the pattern teach itself. After a week the guide is confirming what your body already knows. No one learns the prayer from a page and then performs it. Everyone learns it by doing it imperfectly first.\n\nOn a night when even that feels like too much, the least you can do is enough. That has its own page, and it is short.',
+        'By praying, with the guide open. Pick the next prayer of the day, follow it step by step on the mat, and let the pattern teach itself. After a week the guide is confirming what your body already knows. No one learns the prayer from a page and then performs it. Everyone learns it by doing it imperfectly first.\n\nAnd not knowing all of it yet is not a reason to wait. There is a page on exactly that, and it is short.',
     },
   ],
 };

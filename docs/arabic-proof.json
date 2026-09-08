@@ -81,6 +81,24 @@
   "kind": "term"
  },
  {
+  "where": "Phrase — Allāhu akbar",
+  "arabic": "اللَّهُ أَكْبَرُ",
+  "translit": "Allāhu akbar",
+  "english": "Allah is the greatest.",
+  "source": "",
+  "file": "phrases.ts",
+  "kind": "term"
+ },
+ {
+  "where": "Phrase — Allāhu aʿlam",
+  "arabic": "اللَّهُ أَعْلَمُ",
+  "translit": "Allāhu aʿlam",
+  "english": "Allah knows best.",
+  "source": "",
+  "file": "phrases.ts",
+  "kind": "term"
+ },
+ {
   "where": "Phrase — Astaghfiru-llāh",
   "arabic": "أَسْتَغْفِرُ اللَّهَ",
   "translit": "Astaghfiru-llāh",
@@ -1323,20 +1341,11 @@
   "kind": "quotation"
  },
  {
-  "where": "Duʿas from the Qur’an — Ibrāhīm — For a safe city",
-  "arabic": "وَإِذۡ قَالَ إِبۡرَٰهِـۧمُ رَبِّ ٱجۡعَلۡ هَٰذَا بَلَدًا ءَامِنٗا وَٱرۡزُقۡ أَهۡلَهُۥ مِنَ ٱلثَّمَرَٰتِ مَنۡ ءَامَنَ مِنۡهُم بِٱللَّهِ وَٱلۡيَوۡمِ ٱلۡأٓخِرِۚ قَالَ وَمَن كَفَرَ فَأُمَتِّعُهُۥ قَلِيلٗا ثُمَّ أَضۡطَرُّهُۥٓ إِلَىٰ عَذَابِ ٱلنَّارِۖ وَبِئۡسَ ٱلۡمَصِيرُ",
+  "where": "Duʿas from the Qur’an — Nūḥ — Refuge from asking wrongly",
+  "arabic": "قَالَ رَبِّ إِنِّيٓ أَعُوذُ بِكَ أَنۡ أَسۡـَٔلَكَ مَا لَيۡسَ لِي بِهِۦ عِلۡمٞۖ وَإِلَّا تَغۡفِرۡ لِي وَتَرۡحَمۡنِيٓ أَكُن مِّنَ ٱلۡخَٰسِرِينَ",
   "translit": "",
-  "english": "Ibrāhīm — For a safe city",
-  "source": "Qur’an 2:126",
-  "file": "collections/quranic-duas.ts",
-  "kind": "quotation"
- },
- {
-  "where": "Duʿas from the Qur’an — Ibrāhīm — Building the House",
-  "arabic": "وَإِذۡ يَرۡفَعُ إِبۡرَٰهِـۧمُ ٱلۡقَوَاعِدَ مِنَ ٱلۡبَيۡتِ وَإِسۡمَٰعِيلُ رَبَّنَا تَقَبَّلۡ مِنَّآۖ إِنَّكَ أَنتَ ٱلسَّمِيعُ ٱلۡعَلِيمُ",
-  "translit": "",
-  "english": "Ibrāhīm — Building the House",
-  "source": "Qur’an 2:127",
+  "english": "Nūḥ — Refuge from asking wrongly",
+  "source": "Qur’an 11:47",
   "file": "collections/quranic-duas.ts",
   "kind": "quotation"
  },
@@ -1377,15 +1386,6 @@
   "kind": "quotation"
  },
  {
-  "where": "Duʿas from the Qur’an — Yūsuf — At the end of the story",
-  "arabic": "۞ رَبِّ قَدۡ ءَاتَيۡتَنِي مِنَ ٱلۡمُلۡكِ وَعَلَّمۡتَنِي مِن تَأۡوِيلِ ٱلۡأَحَادِيثِۚ فَاطِرَ ٱلسَّمَٰوَٰتِ وَٱلۡأَرۡضِ أَنتَ وَلِيِّۦ فِي ٱلدُّنۡيَا وَٱلۡأٓخِرَةِۖ تَوَفَّنِي مُسۡلِمٗا وَأَلۡحِقۡنِي بِٱلصَّٰلِحِينَ",
-  "translit": "",
-  "english": "Yūsuf — At the end of the story",
-  "source": "Qur’an 12:101",
-  "file": "collections/quranic-duas.ts",
-  "kind": "quotation"
- },
- {
   "where": "Duʿas from the Qur’an — Mūsā — Before speaking to Pharaoh",
   "arabic": "قَالَ رَبِّ ٱشۡرَحۡ لِي صَدۡرِي",
   "translit": "",
@@ -1413,20 +1413,20 @@
   "kind": "quotation"
  },
  {
-  "where": "Duʿas from the Qur’an — Mūsā — Alone and with nothing",
-  "arabic": "فَسَقَىٰ لَهُمَا ثُمَّ تَوَلَّىٰٓ إِلَى ٱلظِّلِّ فَقَالَ رَبِّ إِنِّي لِمَآ أَنزَلۡتَ إِلَيَّ مِنۡ خَيۡرٖ فَقِيرٞ",
-  "translit": "",
-  "english": "Mūsā — Alone and with nothing",
-  "source": "Qur’an 28:24",
-  "file": "collections/quranic-duas.ts",
-  "kind": "quotation"
- },
- {
   "where": "Duʿas from the Qur’an — Mūsā — For himself and his brother",
   "arabic": "قَالَ رَبِّ ٱغۡفِرۡ لِي وَلِأَخِي وَأَدۡخِلۡنَا فِي رَحۡمَتِكَۖ وَأَنتَ أَرۡحَمُ ٱلرَّٰحِمِينَ",
   "translit": "",
   "english": "Mūsā — For himself and his brother",
   "source": "Qur’an 7:151",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duʿas from the Qur’an — The believers with Mūsā — Under an oppressor",
+  "arabic": "فَقَالُواْ عَلَى ٱللَّهِ تَوَكَّلۡنَا رَبَّنَا لَا تَجۡعَلۡنَا فِتۡنَةٗ لِّلۡقَوۡمِ ٱلظَّٰلِمِينَ وَنَجِّنَا بِرَحۡمَتِكَ مِنَ ٱلۡقَوۡمِ ٱلۡكَٰفِرِينَ",
+  "translit": "",
+  "english": "The believers with Mūsā — Under an oppressor",
+  "source": "Qur’an 10:85-86",
   "file": "collections/quranic-duas.ts",
   "kind": "quotation"
  },
@@ -1467,29 +1467,11 @@
   "kind": "quotation"
  },
  {
-  "where": "Duʿas from the Qur’an — Sulaymān — To be grateful",
-  "arabic": "فَتَبَسَّمَ ضَاحِكٗا مِّن قَوۡلِهَا وَقَالَ رَبِّ أَوۡزِعۡنِيٓ أَنۡ أَشۡكُرَ نِعۡمَتَكَ ٱلَّتِيٓ أَنۡعَمۡتَ عَلَيَّ وَعَلَىٰ وَٰلِدَيَّ وَأَنۡ أَعۡمَلَ صَٰلِحٗا تَرۡضَىٰهُ وَأَدۡخِلۡنِي بِرَحۡمَتِكَ فِي عِبَادِكَ ٱلصَّٰلِحِينَ",
+  "where": "Duʿas from the Qur’an — Those who stood with Ṭālūt — Facing Jālūt",
+  "arabic": "وَلَمَّا بَرَزُواْ لِجَالُوتَ وَجُنُودِهِۦ قَالُواْ رَبَّنَآ أَفۡرِغۡ عَلَيۡنَا صَبۡرٗا وَثَبِّتۡ أَقۡدَامَنَا وَٱنصُرۡنَا عَلَى ٱلۡقَوۡمِ ٱلۡكَٰفِرِينَ",
   "translit": "",
-  "english": "Sulaymān — To be grateful",
-  "source": "Qur’an 27:19",
-  "file": "collections/quranic-duas.ts",
-  "kind": "quotation"
- },
- {
-  "where": "Duʿas from the Qur’an — Lūṭ — To be saved from what people do",
-  "arabic": "رَبِّ نَجِّنِي وَأَهۡلِي مِمَّا يَعۡمَلُونَ",
-  "translit": "",
-  "english": "Lūṭ — To be saved from what people do",
-  "source": "Qur’an 26:169",
-  "file": "collections/quranic-duas.ts",
-  "kind": "quotation"
- },
- {
-  "where": "Duʿas from the Qur’an — Shuʿayb — For a just decision",
-  "arabic": "قَدِ ٱفۡتَرَيۡنَا عَلَى ٱللَّهِ كَذِبًا إِنۡ عُدۡنَا فِي مِلَّتِكُم بَعۡدَ إِذۡ نَجَّىٰنَا ٱللَّهُ مِنۡهَاۚ وَمَا يَكُونُ لَنَآ أَن نَّعُودَ فِيهَآ إِلَّآ أَن يَشَآءَ ٱللَّهُ رَبُّنَاۚ وَسِعَ رَبُّنَا كُلَّ شَيۡءٍ عِلۡمًاۚ عَلَى ٱللَّهِ تَوَكَّلۡنَاۚ رَبَّنَا ٱفۡتَحۡ بَيۡنَنَا وَبَيۡنَ قَوۡمِنَا بِٱلۡحَقِّ وَأَنتَ خَيۡرُ ٱلۡفَٰتِحِينَ",
-  "translit": "",
-  "english": "Shuʿayb — For a just decision",
-  "source": "Qur’an 7:89",
+  "english": "Those who stood with Ṭālūt — Facing Jālūt",
+  "source": "Qur’an 2:250",
   "file": "collections/quranic-duas.ts",
   "kind": "quotation"
  },
@@ -1530,6 +1512,33 @@
   "kind": "quotation"
  },
  {
+  "where": "Duʿas from the Qur’an — The Prophet ﷺ — A true entry and a true exit",
+  "arabic": "وَقُل رَّبِّ أَدۡخِلۡنِي مُدۡخَلَ صِدۡقٖ وَأَخۡرِجۡنِي مُخۡرَجَ صِدۡقٖ وَٱجۡعَل لِّي مِن لَّدُنكَ سُلۡطَٰنٗا نَّصِيرٗا",
+  "translit": "",
+  "english": "The Prophet ﷺ — A true entry and a true exit",
+  "source": "Qur’an 17:80",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duʿas from the Qur’an — The Prophet ﷺ — Allah is enough for me",
+  "arabic": "فَإِن تَوَلَّوۡاْ فَقُلۡ حَسۡبِيَ ٱللَّهُ لَآ إِلَٰهَ إِلَّا هُوَۖ عَلَيۡهِ تَوَكَّلۡتُۖ وَهُوَ رَبُّ ٱلۡعَرۡشِ ٱلۡعَظِيمِ",
+  "translit": "",
+  "english": "The Prophet ﷺ — Allah is enough for me",
+  "source": "Qur’an 9:129",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duʿas from the Qur’an — The Prophet ﷺ — Refuge from the whispers",
+  "arabic": "وَقُل رَّبِّ أَعُوذُ بِكَ مِنۡ هَمَزَٰتِ ٱلشَّيَٰطِينِ وَأَعُوذُ بِكَ رَبِّ أَن يَحۡضُرُونِ",
+  "translit": "",
+  "english": "The Prophet ﷺ — Refuge from the whispers",
+  "source": "Qur’an 23:97-98",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
   "where": "Duʿas from the Qur’an — The believers — Good in both lives",
   "arabic": "وَمِنۡهُم مَّن يَقُولُ رَبَّنَآ ءَاتِنَا فِي ٱلدُّنۡيَا حَسَنَةٗ وَفِي ٱلۡأٓخِرَةِ حَسَنَةٗ وَقِنَا عَذَابَ ٱلنَّارِ",
   "translit": "",
@@ -1557,11 +1566,29 @@
   "kind": "quotation"
  },
  {
+  "where": "Duʿas from the Qur’an — The believers — We have believed — forgive us",
+  "arabic": "ٱلَّذِينَ يَقُولُونَ رَبَّنَآ إِنَّنَآ ءَامَنَّا فَٱغۡفِرۡ لَنَا ذُنُوبَنَا وَقِنَا عَذَابَ ٱلنَّارِ",
+  "translit": "",
+  "english": "The believers — We have believed — forgive us",
+  "source": "Qur’an 3:16",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
   "where": "Duʿas from the Qur’an — The believers — For steadfastness",
   "arabic": "وَمَا كَانَ قَوۡلَهُمۡ إِلَّآ أَن قَالُواْ رَبَّنَا ٱغۡفِرۡ لَنَا ذُنُوبَنَا وَإِسۡرَافَنَا فِيٓ أَمۡرِنَا وَثَبِّتۡ أَقۡدَامَنَا وَٱنصُرۡنَا عَلَى ٱلۡقَوۡمِ ٱلۡكَٰفِرِينَ",
   "translit": "",
   "english": "The believers — For steadfastness",
   "source": "Qur’an 3:147",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duʿas from the Qur’an — Those who reflect — Standing, sitting, and lying down",
+  "arabic": "ٱلَّذِينَ يَذۡكُرُونَ ٱللَّهَ قِيَٰمٗا وَقُعُودٗا وَعَلَىٰ جُنُوبِهِمۡ وَيَتَفَكَّرُونَ فِي خَلۡقِ ٱلسَّمَٰوَٰتِ وَٱلۡأَرۡضِ رَبَّنَا مَا خَلَقۡتَ هَٰذَا بَٰطِلٗا سُبۡحَٰنَكَ فَقِنَا عَذَابَ ٱلنَّارِ رَبَّنَآ إِنَّكَ مَن تُدۡخِلِ ٱلنَّارَ فَقَدۡ أَخۡزَيۡتَهُۥۖ وَمَا لِلظَّٰلِمِينَ مِنۡ أَنصَارٖ رَّبَّنَآ إِنَّنَا سَمِعۡنَا مُنَادِيٗا يُنَادِي لِلۡإِيمَٰنِ أَنۡ ءَامِنُواْ بِرَبِّكُمۡ فَـَٔامَنَّاۚ رَبَّنَا فَٱغۡفِرۡ لَنَا ذُنُوبَنَا وَكَفِّرۡ عَنَّا سَيِّـَٔاتِنَا وَتَوَفَّنَا مَعَ ٱلۡأَبۡرَارِ رَبَّنَا وَءَاتِنَا مَا وَعَدتَّنَا عَلَىٰ رُسُلِكَ وَلَا تُخۡزِنَا يَوۡمَ ٱلۡقِيَٰمَةِۖ إِنَّكَ لَا تُخۡلِفُ ٱلۡمِيعَادَ",
+  "translit": "",
+  "english": "Those who reflect — Standing, sitting, and lying down",
+  "source": "Qur’an 3:191-194",
   "file": "collections/quranic-duas.ts",
   "kind": "quotation"
  },

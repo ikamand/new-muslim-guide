@@ -157,6 +157,8 @@ hisn:1269777
 hisn:1269781
 phrase:akhi
 phrase:alhamdulillah
+phrase:allahu-akbar
+phrase:allahu-alam
 phrase:astaghfirullah
 phrase:baraka
 phrase:barakallahu-eid

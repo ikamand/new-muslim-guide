@@ -830,7 +830,7 @@ export function Glyph({ name, color, size = 22 }: { name: GlyphName; color: stri
         rather than a decorative rosette, and it stays non-figurative like
         everything else on this tab.
       */}
-      {/* The least you can do: one arch of the mihrab, not the full set. */}
+      {/* When you don’t know everything yet: one arch of the mihrab, not the full set. */}
       {name === 'minimum-prayer' && (
         <G {...stroke}>
           <Path d="M8 20v-8a4 4 0 0 1 8 0v8" />

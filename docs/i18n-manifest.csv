@@ -369,7 +369,7 @@ How it began — Why does the calendar start there?,"His companions did not coun
 How prayer works — How do I actually learn it?,How do I actually learn it?
 How prayer works — How do I actually learn it?,"By praying, with the guide open. Pick the next prayer of the day, follow it step by step on the mat, and let the pattern teach itself. After a week the guide is confirming what your body already knows. No one learns the prayer from a page and then performs it. Everyone learns it by doing it imperfectly first.
 
-On a night when even that feels like too much, the least you can do is enough. That has its own page, and it is short."
+And not knowing all of it yet is not a reason to wait. There is a page on exactly that, and it is short."
 How prayer works — So what changes between the five?,So what changes between the five?
 How prayer works — So what changes between the five?,"Only the count, and whether you hear the recitation:"
 How prayer works — So what changes between the five?,"The Every prayer screen keeps this table one tap away, with the sunnah prayers before and after each one. You never need to hold it in your memory."
@@ -416,7 +416,7 @@ If you stopped for a while — Do I have to tell anyone?,Do I have to tell anyon
 If you stopped for a while — Do I have to tell anyone?,"No. Not a friend, not an imam, not a group chat. There is no confession in Islam and nothing here needs a witness. If you want to tell somebody because carrying it alone is heavy, that is a good reason. But it is your reason, not a requirement."
 If you stopped for a while — How do I actually come back?,How do I actually come back?
 If you stopped for a while — How do I actually come back?,"You pray the next prayer. That is all. Not a plan, not a fresh start on Monday, not catching up on everything first. Just the next one, whenever it is, even if it is in twenty minutes and you do it badly."
-If you stopped for a while — How do I actually come back?,"If the full prayer feels like too much tonight, this app has a page on the least you can do. Use it. A short prayer tonight beats a perfect one you keep postponing."
+If you stopped for a while — How do I actually come back?,"If the full prayer feels like too much tonight, this app has a page on praying before you know everything. Use it. A short prayer tonight beats a perfect one you keep postponing."
 If you stopped for a while — What about all the prayers I missed?,What about all the prayers I missed?
 If you stopped for a while — What about all the prayers I missed?,"They are a separate question from whether you are back, and they are not a debt you have to clear before you are allowed to start. Deal with the next prayer first. The app has a page on missed prayers for when you want to think about the rest, and it will keep."
 If you stopped for a while — What about all the prayers I missed?,Anybody who tells you to count up months of missed prayers before praying tonight has the order backwards.
@@ -541,6 +541,9 @@ Phrase: Akhī · Ukhtī,My brother · my sister.
 Phrase: Akhī · Ukhtī,"How people will address you, including people who have just met you. It is ordinary, not familiar."
 Phrase: Al-ḥamdu li-llāh,All praise is for Allah.
 Phrase: Al-ḥamdu li-llāh,"After good news, after eating, after sneezing, and as the normal answer to “how are you?”"
+Phrase: Allāhu akbar,"Opens every prayer and every call to it. Also said in ordinary life at anything striking, good or bad, the way subḥāna-llāh is."
+Phrase: Allāhu aʿlam,Allah knows best.
+Phrase: Allāhu aʿlam,Ends an answer the speaker is not certain of. Scholars say it after a ruling; everyone says it after a guess. It is a useful thing to be able to say yourself.
 Phrase: As-salāmu ʿalaykum,Peace be upon you.
 Phrase: As-salāmu ʿalaykum,"The greeting, arriving or passing. Said to you before almost anything else."
 Phrase: As-salāmu ʿalaykum,"Wa ʿalaykumu s-salām, and peace be upon you. Always answer it."
@@ -668,7 +671,7 @@ Recitation: Seeking refuge,"I seek refuge in Allah from Satan, the rejected."
 Recitation: The istikhara duʿa,"O Allah, I consult You for Your knowledge, and I seek strength from You for Your power, and I ask You of Your great bounty. Indeed, You are capable and I am not, and You know and I do not, and You are the All-Knower of the unseen. O Allah, if You know that this matter is good for me in my religion, my livelihood, and the outcome of my affairs, then decree it for me, make it easy for me, and then bless it for me. And if You know this matter is evil concerning my religion, my livelihood or the outcome of my affairs, then turn it away from me, and turn me away from it, and decree for me what is good wherever it may be, and make me content"
 Recitation: The opening supplication,"Glory be to You, O Allah, and praise. Blessed is Your name, exalted is Your majesty, and there is no god but You."
 Recitation: The salawat,"O Allah, send prayers upon Muhammad and the family of Muhammad, as You sent prayers upon Abraham and the family of Abraham. You are indeed Praiseworthy, Glorious. O Allah, bless Muhammad and the family of Muhammad, as You blessed Abraham and the family of Abraham. You are indeed Praiseworthy, Glorious."
-Recitation: The takbir,Allah is the greatest.
+Recitation: The takbir; Phrase: Allāhu akbar,Allah is the greatest.
 Recitation: The tashahhud,"All greetings, prayers and good things are for Allah. Peace be upon you, O Prophet, and the mercy of Allah and His blessings. Peace be upon us and upon the righteous servants of Allah. I bear witness that there is no god but Allah, and I bear witness that Muhammad is His servant and His messenger."
 Recitation: The taslim,"Peace be upon you, and the mercy of Allah."
 Recitation: The taslim,"Once to the right, then once to the left"
@@ -754,8 +757,6 @@ Reference: The best of you,The best of you
 Reference: The best of you,What a husband and a wife owe each other
 Reference: The call to prayer,The call to prayer
 Reference: The call to prayer,"What the adhan is, and what to do when you hear it"
-Reference: The least you can do,The least you can do
-Reference: The least you can do,"A short, plain prayer is a prayer"
 Reference: The Muslim year,The Muslim year
 Reference: The Muslim year,"Why the dates move, and what falls where"
 Reference: The prayer after a sin,The prayer after a sin
@@ -790,6 +791,8 @@ Reference: When someone dies,When someone dies
 Reference: When someone dies,"The funeral prayer, and what happens around it"
 Reference: When you are angry,When you are angry
 Reference: When you are angry,The one piece of advice he ﷺ gave three times over
+Reference: When you don’t know everything yet,When you don’t know everything yet
+Reference: When you don’t know everything yet,"A short, plain prayer is a prayer"
 Reference: When you get it wrong,When you get it wrong
 Reference: When you get it wrong,"Repentance, and why it is not a big ceremony"
 Reference: Which dhikr is best?,"The Qur’an, unless a dhikr belongs to that moment"
@@ -896,18 +899,6 @@ The call to prayer — What am I hearing?,"The adhan is the announcement that a 
 It is not a summons you are late for, and it is not a countdown. It marks the opening of a window, and the window is usually hours long."
 The call to prayer — Why did it happen twice?,Why did it happen twice?
 The call to prayer — Why did it happen twice?,"The adhan announces the time. A second, shorter call, the iqamah, is given immediately before a congregation actually starts praying. If you are in a mosque and hear a second call a few minutes after the first, that is people standing up to pray, not a mistake."
-The least you can do — Is a short prayer still a prayer?,Is a short prayer still a prayer?
-The least you can do — Is a short prayer still a prayer?,"Yes. The guides in this app walk you through a prayer at its fullest: every position, every word, in order. That is what to aim at, but it is not the bar. A prayer done briefly and plainly, with the essentials in place, is a prayer. It is not half a prayer, and it does not need making up later.
-
-Reading ""23 steps"" on a night when you have four minutes and no confidence can make praying feel out of reach. It is not."
-The least you can do — Is a short prayer still a prayer?,"On a hard day, the least is the right amount."
-The least you can do — Is it better to rush it or pray it late?,Is it better to rush it or pray it late?
-The least you can do — Is it better to rush it or pray it late?,"The prayer has fixed times, and the time is part of it. Given the choice between a short prayer inside its window and a careful one after the window has closed, pray the short one. The full shape will come later. The time will not come back."
-The least you can do — What actually has to be there?,What actually has to be there?
-The least you can do — What actually has to be there?,"A man once prayed in the mosque and the Prophet ﷺ told him three times to go back and pray, because he had not prayed. The man asked to be taught, and what he was taught is the shortest description of a prayer there is."
-The least you can do — What actually has to be there?,"The word doing the work is ""settle"". Rushing is the one thing that narration corrects, and it corrects it three times."
-The least you can do — What if I only know Al-Fatihah?,What if I only know Al-Fatihah?
-The least you can do — What if I only know Al-Fatihah?,"Then you have what you need. Al-Fatihah is the part the prayer cannot do without, and anything after it is extra rather than necessary. If you are still learning the words, read them from the screen. No one has to know them by heart before they are allowed to start."
 The Muslim year — How does this affect my week?,How does this affect my week?
 The Muslim year — How does this affect my week?,"For most of the year, not at all. You will pick the date up from the people around you and never need to work it out. It only matters at the two ends of Ramadan, and there it is announced locally rather than calculated in advance, so mosques in the same city can start the month, or the Eid, a day apart. That is normal and not worth worrying about."
 The Muslim year — How does this affect my week?,"Whether a month begins by sighting the moon locally or by astronomical calculation is a live question, and communities in the same country sometimes start Ramadan on different days."
@@ -1145,6 +1136,18 @@ When you are angry — What does this look like for me now?,"A relative will say
 When you are angry — What does this look like for me now?; Thinking you are better — What does this look like for me now?; Wanting what someone else has — What does this look like for me now?; Doing it to be seen — What does this look like for me now?; Patience and gratitude — What does this look like for me now?,What does this look like for me now?
 When you are angry — Why is this the advice he kept repeating?,Why is this the advice he kept repeating?
 When you are angry — Why is this the advice he kept repeating?,"A man came to the Prophet ﷺ asking for advice and was told: do not become angry. He asked again, and got the same answer. He asked a third time, and heard the same again. It is one of the shortest instructions in the hadith collections, and it was given to somebody who wanted a whole programme, because anger is the point at which most people lose everything else they have learned."
+When you don’t know everything yet — Can I pray before I know all of it?,Can I pray before I know all of it?
+When you don’t know everything yet — Can I pray before I know all of it?,"Yes. The guides in this app walk you through a prayer at its fullest: every position, every word, in order. That is what to aim at, but it is not the bar. A prayer done briefly and plainly, with the essentials in place, is a prayer. It is not half a prayer, and it does not need making up later.
+
+Reading ""23 steps"" on a night when you have four minutes and no confidence can make praying feel out of reach. It is not."
+When you don’t know everything yet — Can I pray before I know all of it?,"On a hard day, the least is the right amount."
+When you don’t know everything yet — Is it better to rush it or pray it late?,Is it better to rush it or pray it late?
+When you don’t know everything yet — Is it better to rush it or pray it late?,"The prayer has fixed times, and the time is part of it. Given the choice between a short prayer inside its window and a careful one after the window has closed, pray the short one. The full shape will come later. The time will not come back."
+When you don’t know everything yet — What actually has to be there?,What actually has to be there?
+When you don’t know everything yet — What actually has to be there?,"A man once prayed in the mosque and the Prophet ﷺ told him three times to go back and pray, because he had not prayed. The man asked to be taught, and what he was taught is the shortest description of a prayer there is."
+When you don’t know everything yet — What actually has to be there?,"The word doing the work is ""settle"". Rushing is the one thing that narration corrects, and it corrects it three times."
+When you don’t know everything yet — What if I only know Al-Fatihah?,What if I only know Al-Fatihah?
+When you don’t know everything yet — What if I only know Al-Fatihah?,"Then you have what you need. Al-Fatihah is the part the prayer cannot do without, and anything after it is extra rather than necessary. If you are still learning the words, read them from the screen. No one has to know them by heart before they are allowed to start."
 When you get it wrong — How is it received?,How is it received?
 When you get it wrong — How is it received?,The Prophet ﷺ described God as more pleased with a person’s repentance than someone would be who lost their camel in the desert and then found it. The image is not of a grudging pardon. It is relief and delight.
 When you get it wrong — Is it too late for me?,Is it too late for me?

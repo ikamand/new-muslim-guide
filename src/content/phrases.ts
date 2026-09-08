@@ -16,12 +16,17 @@
  * what "cites nothing" is worth running against a file whose own comment says
  * nothing here can be cited — that comment was true of twelve of the fourteen.
  *
+ * 7 Sep 2026: sixteen, with Allāhu akbar and Allāhu aʿlam (Iyad's curriculum
+ * update). The takbir is not written here at all — it is `Recitations.takbir`,
+ * text and citation both, because it already lives there with its audio.
+ *
  * Written for the ear, not the page. Someone meets these as sounds in a
  * conversation, so the transliteration leads and the Arabic sits beside it —
  * the reverse of everywhere else in the app, where the Arabic is the thing
  * being said and the transliteration is the crutch.
  */
 import type { ContentMeta } from './model';
+import { Recitations } from './recitations';
 import { quran } from './sources';
 
 export type Phrase = {
@@ -99,6 +104,32 @@ export const PHRASES: Phrase[] = [
     arabic: 'سُبْحَانَ اللَّهِ',
     meaning: 'Glory be to Allah.',
     when: 'Astonishment, at something beautiful or something terrible.',
+  },
+  {
+    id: 'allahu-akbar',
+    said: Recitations.takbir.transliteration,
+    /* The Arabic is the takbir's, stored once in `recitations.ts` with its
+       citation, because a text that appears twice has to live in one place. */
+    arabic: Recitations.takbir.arabic,
+    meaning: Recitations.takbir.translation,
+    when: 'Opens every prayer and every call to it. Also said in ordinary life at anything striking, good or bad, the way subḥāna-llāh is.',
+    // Bukhari 795 is the takbir's own citation, borrowed with the text: it is
+    // where the takbir falls in the prayer, which is what `when` claims.
+    meta: {
+      category: 'salah',
+      difficulty: 'foundational',
+      estimatedMinutes: 1,
+      beginnerPriority: 1,
+      tags: ['first-day', 'vocabulary'],
+      sources: Recitations.takbir.sources,
+    },
+  },
+  {
+    id: 'allahu-alam',
+    said: 'Allāhu aʿlam',
+    arabic: 'اللَّهُ أَعْلَمُ',
+    meaning: 'Allah knows best.',
+    when: 'Ends an answer the speaker is not certain of. Scholars say it after a ruling; everyone says it after a guess. It is a useful thing to be able to say yourself.',
   },
   {
     id: 'astaghfirullah',

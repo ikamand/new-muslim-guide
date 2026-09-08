@@ -59,7 +59,7 @@ export const IF_YOU_STOPPED: Reference = {
       notes: [
         note(
           'practical',
-          'If the full prayer feels like too much tonight, this app has a page on the least you can do. Use it. A short prayer tonight beats a perfect one you keep postponing.',
+          'If the full prayer feels like too much tonight, this app has a page on praying before you know everything. Use it. A short prayer tonight beats a perfect one you keep postponing.',
         ),
       ],
     },

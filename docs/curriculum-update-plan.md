@@ -114,7 +114,9 @@ when-its-hard 6, interior-life 5, what-you-believe 5 + door, practices 2.
 
 ## Build order — the pilot rule applies
 
-1. **Phase 1** — the rename and its five references; the two phrases.
+1. ✅ **Phase 1**, built 7 Sep 2026 — the rename and its references (two of
+   the five named were by id, not title, and needed no change); the two
+   phrases. Both pages screenshotted in both themes.
 2. **Phase 2 pilot** — What to say in prayer (the one page with a layout
    risk: about nine sections each carrying a recitation card) and the family
    page. The two most unalike new pages. **Stop for Iyad's eyes.**

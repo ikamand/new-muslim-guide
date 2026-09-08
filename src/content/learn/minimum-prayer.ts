@@ -12,6 +12,12 @@ import type { Reference } from '../types';
  * meet tonight, and the honest answer — that a short, plain prayer is a
  * prayer — is the difference between praying badly and not praying.
  *
+ * Renamed 7 Sep 2026 (Iyad): the title was "The least you can do", and read
+ * as the minimum Islam expects. The page's message is that you can begin
+ * praying while you are still learning, so the title now says that, and the
+ * first heading asks the question the title answers. Substance, subtitle and
+ * citations are unchanged; the id stays `minimum-prayer`.
+ *
  * Every element named here is from Bukhari 757, the narration of the man who
  * prayed badly, in which the Prophet ﷺ is asked to teach the prayer and lists
  * exactly these. Nothing is added to that list and nothing is left out of it.
@@ -19,7 +25,7 @@ import type { Reference } from '../types';
 export const MINIMUM_PRAYER: Reference = {
   id: 'minimum-prayer',
   surface: 'learn',
-  title: 'The least you can do',
+  title: 'When you don’t know everything yet',
   subtitle: 'A short, plain prayer is a prayer',
   meta: {
     category: 'salah',
@@ -39,7 +45,7 @@ export const MINIMUM_PRAYER: Reference = {
   sections: [
     {
       id: 'counts',
-      heading: 'Is a short prayer still a prayer?',
+      heading: 'Can I pray before I know all of it?',
       body:
         'Yes. The guides in this app walk you through a prayer at its fullest: every position, every word, in order. That is what to aim at, but it is not the bar. A prayer done briefly and plainly, with the essentials in place, is a prayer. It is not half a prayer, and it does not need making up later.\n\nReading "23 steps" on a night when you have four minutes and no confidence can make praying feel out of reach. It is not.',
       notes: [

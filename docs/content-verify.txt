@@ -4,7 +4,7 @@ Qur’an texts checked against QuranEnc — 33
   33 match the published text, word for word.
   Nothing drifted.
 
-16 texts carry no source. Searching HadeethEnc for candidates —
+18 texts carry no source. Searching HadeethEnc for candidates —
 these are suggestions to check, never citations to paste.
 
   The testimony of faith  (recitations.ts)
@@ -47,6 +47,16 @@ these are suggestions to check, never citations to paste.
       hadeethenc 5507  كلمتان خفيفتان على اللسان، ثقيلتان في الميزان، حبيبتان إلى الرحمن
       hadeethenc 11234  صلى بنا المغيرة بن شعبة فنهض في الركعتين، قلنا: سبحان الله، قال: سبحان
       hadeethenc 5477  الْبَاقِيَاتُ الصَّالِحَاتُ لَا إلَهَ إلَّا اللَّهُ وَسُبْحَانَ اللَّه
+  Phrase — Allāhu akbar  (phrases.ts)
+    اللَّهُ أَكْبَرُ
+      hadeethenc 65086  إذا قال المؤذن: الله أكبر الله أكبر، فقال أحدكم: الله أكبر الله أكبر
+      hadeethenc 10615  إنها لرؤيا حق إن شاء الله، فقم مع بلال فألق عليه ما رأيت، فليؤذن به، ف
+      hadeethenc 65389  كنت أؤذن لرسول الله صلى الله عليه وسلم
+  Phrase — Allāhu aʿlam  (phrases.ts)
+    اللَّهُ أَعْلَمُ
+      hadeethenc 8934  يا أيها الناس، من عَلِم شيئا فَلْيَقُلْ به، ومن لم يَعْلَم، فَلْيَقُلْ
+      hadeethenc 65742  كان رسول الله صلى الله عليه وسلم إذا سلم قام النساء حين يقضي تسليمه
+      hadeethenc 65281  نزلت هذه الآية: {حافظوا على الصلوات وصلاة العصر}، فقرأناها ما شاء الله
   Phrase — Astaghfiru-llāh  (phrases.ts)
     أَسْتَغْفِرُ اللَّهَ
       hadeethenc 10947  اللهم أنت السلام، ومنك السلام، تباركت ذا الجلال والإكرام

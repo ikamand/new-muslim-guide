@@ -145,6 +145,12 @@ is worth more than a shorter document.
 
 ## PRIORITY 1 — must review before any public religious release
 
+> **8 Sep 2026.** The twelve pages of the curriculum update have their own
+> ranked list, `docs/curriculum-review-pile.md`, written for one sitting.
+> Its first four items (the mistake-after-prayer page, intimacy, after-death,
+> qadr) belong in this priority; the rest sit lower. Nothing there is
+> cleared yet.
+
 Wrong answers here change how someone worships.
 
 ### 1.1 The shahada without witnesses

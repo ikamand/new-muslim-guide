@@ -27,6 +27,14 @@ import type { Reference } from '../types';
  *   its sequential 3289; the number printed is the collection's own, which
  *   is what the evidence script resolves by.
  *
+ * ## Corrected 8 Sep 2026, the day it was written
+ *
+ * The first draft said Umrah is "never required", flatly. The Hanafi and
+ * Maliki schools hold it recommended; the Shafiʿi and Hanbali hold it
+ * required once in a lifetime for whoever is able. The page now carries
+ * that as a `differs` note with the four positions, ⚠️ from the author's
+ * understanding and not checked against a fiqh text: the reviewer must.
+ *
  * ## What was left out, on purpose
  *
  * Whether Hajj must be made the first year one is able, or may be delayed,
@@ -52,7 +60,7 @@ export const HAJJ_AND_UMRAH: Reference = {
   },
   quickFacts: [
     { label: 'Hajj', value: 'Once in a lifetime, on fixed days, if you are able', emphasis: true },
-    { label: 'Umrah', value: 'Any time of year, a few hours, never required' },
+    { label: 'Umrah', value: 'Any time of year, and a few hours' },
     { label: 'For you now', value: 'Nothing. Most Muslims go years after they begin' },
   ],
   sections: [
@@ -92,7 +100,7 @@ export const HAJJ_AND_UMRAH: Reference = {
       id: 'umrah',
       heading: 'What is Umrah?',
       body:
-        'The smaller pilgrimage: the same journey to the same House, without the fixed days and the standing at ʿArafah that make Hajj what it is. It takes a few hours, it can be made in any month, and it is never required. Many people make it in Ramadan, or on the way to or from Hajj itself. The Qur’an names both together, and the Prophet ﷺ said that one Umrah to the next wipes out what lies between them, and that an accepted Hajj has no reward but Paradise.',
+        'The smaller pilgrimage: the same journey to the same House, without the fixed days and the standing at ʿArafah that make Hajj what it is. It takes a few hours and it can be made in any month. Many people make it in Ramadan, or on the way to or from Hajj itself. The Qur’an names both together, and the Prophet ﷺ said that one Umrah to the next wipes out what lies between them, and that an accepted Hajj has no reward but Paradise.',
       sources: [
         quran(2, 196, { surahName: 'Al-Baqarah' }),
         hadith('muslim', '1349', {
@@ -101,12 +109,28 @@ export const HAJJ_AND_UMRAH: Reference = {
           inBookReference: 'Book 15, Hadith 493',
         }),
       ],
+      notes: [
+        note(
+          'differs',
+          'Whether Umrah is required once in a lifetime, as Hajj is, or only recommended, is a difference between the schools.',
+          {
+            additionalExplanation:
+              'Either way it is not expected of you now, and the practical answer is the same: go when you are able, and go with people who know the way.',
+            positions: [
+              { school: 'Hanafi', position: 'Recommended, not required.' },
+              { school: 'Maliki', position: 'Recommended, not required.' },
+              { school: 'Shafi`i', position: 'Required once in a lifetime for whoever is able, like Hajj.' },
+              { school: 'Hanbali', position: 'Required once in a lifetime for whoever is able, like Hajj.' },
+            ],
+          },
+        ),
+      ],
     },
     {
       id: 'difference',
       heading: 'What is the difference, in one line?',
       body:
-        'Hajj is the pilgrimage with the fixed days and the standing at ʿArafah, owed once in a lifetime to anyone who can make it. Umrah is the short form, in any month, for anyone who wants to. You will meet people who have made Umrah several times and Hajj never, and that is ordinary.',
+        'Hajj is the pilgrimage with the fixed days and the standing at ʿArafah, owed once in a lifetime to anyone who can make it. Umrah is the short form, in any month. You will meet people who have made Umrah several times and Hajj never, and that is ordinary.',
       notes: [
         note(
           'practical',

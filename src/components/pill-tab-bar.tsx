@@ -74,7 +74,18 @@ export function PillTabBar({ state, descriptors, navigation, insets }: BottomTab
               onLongPress={() => navigation.emit({ type: 'tabLongPress', target: route.key })}
               style={({ pressed }) => [styles.door, pressed && !focused && styles.doorPressed]}>
               {options.tabBarIcon?.({ focused, color, size: ICON })}
-              <ThemedText type="tabLabel" style={{ color }}>
+              {/*
+                The label spans the whole door and centres itself, rather than
+                shrink-wrapping: a Literata box measured a glyph short cut
+                "Today" to "Toda" on Iyad's phone (7 Sep). One line, and the
+                system's font scaling capped, so four doors still fit a
+                320-wide screen at the largest accessibility sizes.
+              */}
+              <ThemedText
+                type="tabLabel"
+                numberOfLines={1}
+                maxFontSizeMultiplier={1.2}
+                style={[styles.label, { color }]}>
                 {label}
               </ThemedText>
               <View style={[styles.rule, focused && { backgroundColor: theme.gold }]} />
@@ -86,8 +97,8 @@ export function PillTabBar({ state, descriptors, navigation, insets }: BottomTab
   );
 }
 
-/** 28, not the navigator's 24: the pill gives the marks room, and the reference draws them large. */
-const ICON = 28;
+/** The navigator's own 24: at 28 the bar stood too tall on the phone (Iyad, 7 Sep). */
+const ICON = 24;
 
 const styles = StyleSheet.create({
   bar: {
@@ -99,21 +110,27 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: Radius.large,
   },
+  /* 8 + 24 + 2 + 18 + 2 + 2 + 8: a 64-point pill, down from 83. */
   door: {
     flex: 1,
     alignItems: 'center',
-    gap: Spacing.one,
-    paddingTop: Spacing.three,
+    gap: Spacing.half,
+    paddingTop: Spacing.two,
     paddingBottom: Spacing.two,
+    paddingHorizontal: Spacing.half,
+  },
+  label: {
+    alignSelf: 'stretch',
+    textAlign: 'center',
   },
   doorPressed: {
     opacity: 0.6,
   },
   /* Drawn for every door so nothing moves when the gold arrives; transparent until it does. */
   rule: {
-    width: 28,
-    height: 3,
-    borderRadius: 2,
+    width: 24,
+    height: 2,
+    borderRadius: 1,
     marginTop: Spacing.half,
     backgroundColor: 'transparent',
   },

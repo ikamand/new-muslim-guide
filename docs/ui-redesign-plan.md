@@ -3931,3 +3931,9 @@ pressable may take gold.
 and the marks at 28 on a real panel. `BottomTabInset` (50/80) still pads the
 tabs' scroll content; with the pill in the navigator's own flow that is air,
 not a fix, and it may want trimming once seen. Ships by OTA.
+
+**Corrected 7 Sep, from the phone.** The first pill stood 83 points tall and
+clipped its labels to "Toda" / "Learı": a Literata box shrink-wrapped a glyph
+short. The label now spans its door and centres, one line, font scaling
+capped at 1.2×; the marks are back at the navigator's 24, the pill is 64.
+Checked on web at 320 and 390.

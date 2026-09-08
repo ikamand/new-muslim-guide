@@ -85,6 +85,20 @@ function RootStack() {
     SplashScreen.hideAsync();
   }, [loaded, onboarded, router, fontsLoaded, fontsError]);
 
+  /*
+    Render nothing until the fonts are in, not just hold the splash.
+
+    The tree used to mount under the splash before Literata had loaded, so
+    every heading and tab label was measured once with the system face, and
+    Android caches that measurement per string. A tab label was re-measured
+    only when its colour changed — the first tap on a tab after a cold start —
+    and Literata sits two points lower in the same line than the fallback, so
+    the title stepped down and then never moved again (Iyad, 7 Sep 2026).
+    Same gate as the splash, so this costs no visible time; `fontsError`
+    still lets the app through on the platform faces.
+  */
+  if (!(fontsLoaded || fontsError)) return null;
+
   return (
     <Stack
       screenOptions={{

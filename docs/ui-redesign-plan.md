@@ -3937,3 +3937,30 @@ clipped its labels to "Toda" / "Learı": a Literata box shrink-wrapped a glyph
 short. The label now spans its door and centres, one line, font scaling
 capped at 1.2×; the marks are back at the navigator's 24, the pill is 64.
 Checked on web at 320 and 390.
+
+---
+
+## 7 Sep 2026 — Questions you'll be asked: the remaining four ✅ ⚠️ review-gated
+
+Iyad asked for the curriculum outline, the outline showed four lines with no
+page behind them, and he said build them. Written to the pilot's shape:
+`is-allah-a-different-god`, `was-it-spread-by-the-sword`,
+`why-do-women-cover`, `why-cant-you-eat-that`. `COMMISSIONED` is empty
+again; the unit reads 6/6 in the audit.
+
+**One thing to know about their placement.** Each overlaps a page that
+already exists — `who-is-allah` already answers the word in a line, `food`
+carries the rulings on the table, `clothing` the ruling on dress and the
+face. These four are deliberately NOT restatements: they are what the
+convert SAYS to the person asking, and each defers the ruling to the page
+that owns it through `relatedContent` and a `general` source that names it.
+If that split ever stops feeling right, the pages to fold are these four,
+not the four they lean on.
+
+Verified: `tsc`, `style:check`, `content:audit`, `evidence` (all six new
+narrations resolved to the intended texts — Arabic read for each), and
+`content:verify` (no new failures; its eleven standing "commands, not words"
+lines are the taʿawwudh, unchanged). `i18n:manifest` regenerated. Web at
+390, both themes: all four heroes render with their verse. Not read on a
+device. ⚠️ Every page awaits scholarly review; `docs/scholarly-review.md`
+carries the entry. Ships by OTA.

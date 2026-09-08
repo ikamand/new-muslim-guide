@@ -1518,3 +1518,48 @@ to clear on each:
   the floor, Bukhari 2259 for the nearer door, and 4:36. The page states that
   none of these texts asks the neighbour's religion and so it does not either.
   That is a deliberate silence and worth confirming.
+
+## Added 7 September 2026 — "Questions you'll be asked", the remaining four
+
+Model-written English over checked citations: `learn/is-allah-a-different-god.ts`,
+`learn/was-it-spread-by-the-sword.ts`, `learn/why-do-women-cover.ts` and
+`learn/why-cant-you-eat-that.ts`. Same brief as the pilot: each is what a
+convert says to a parent or a colleague, answers and never compares. What a
+qualified reader needs to clear:
+
+- **Is Allah a different god?** 29:46 offered as the sentence for the
+  conversation and 2:136 for "no distinction"; 112:1–4 and 2:163 as "the whole
+  of the difference"; 42:11 with a `general` note that Arabic-speaking Jews and
+  Christians use the word; 21:25 and 2:133 for the same God sending every
+  prophet; 42:15 as the closing line. Deliberately absent: 2:62 and 5:69
+  (their meaning is a scholarly question) and 3:64 (an invitation, not an
+  answer). No narration on the page.
+- **Was Islam spread by the sword?** 2:256, 10:99 and 88:21–22 as the hero;
+  22:39–40 read as protecting monasteries, churches, synagogues and mosques;
+  60:8; 16:125; Sahih Muslim 19 (Muʿadh sent to Yemen, printed number, the
+  first variant) read as invitation in sequence; Bukhari 6124 for "make things
+  easy, give good news, do not drive away"; 18:29. Two sentences rest on
+  history and say so: Egypt and Syria largely Christian for centuries after
+  the conquests, and Indonesia reached by trade. A historian should sign the
+  wording. Deliberately absent: Bukhari 3162 and the jizya.
+- **Why do women cover?** 24:30 before 24:31, and 33:59 read as giving the
+  reason "known, and not harassed"; 7:26; Bukhari 4758 and 4759 for the
+  emigrant women's response (4759 renders with its chain, since the Prophet ﷺ
+  is not named in it). Two sentences are rulings and need the eye most: that
+  the commonly taught form leaves the face and hands showing, deferring the
+  face to `clothing`'s differs note; and that a convert taking covering up in
+  steps is "ordinary, not a failing" — pastoral, and the page says so, but it
+  is a sentence that changes how someone practises. Abu Dawud 4104 left out on
+  grading.
+- **Why can't you eat that?** 2:173 read with weight on "only" and on the
+  necessity clause; 5:90; 2:168; Sahih Muslim 2003 (printed number, first
+  variant, which carries the addiction clause) and Bukhari 5598 for every
+  intoxicant; 5:87 and 7:32 against over-forbidding; 5:5 for the food of the
+  People of the Scripture, with the meat question deferred to `food`.
+  Deliberately absent: 5:3 (runs past the question) and alcohol cooked into
+  food (scholars differ; belongs on `food` with sources).
+
+All four cite by numbers opened in the corpus; `evidence` resolved every one
+and cross-checked Muslim 2003 against HadeethEnc 58259. That proves the texts
+are what the collections print, not that each is the right evidence for the
+sentence above it.

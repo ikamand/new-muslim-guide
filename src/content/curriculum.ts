@@ -309,12 +309,8 @@ export const CURRICULUM: readonly Tier[] = [
  * the audit's stale-commission check forced this line to say so.
  */
 export const COMMISSIONED: readonly string[] = [
-  /* The rest of the being-asked unit, 3 Sep 2026. Two pages were written as
-     the pilot so the format could be looked at before the other four. */
-  'reference:why-do-women-cover',
-  'reference:was-it-spread-by-the-sword',
-  'reference:is-allah-a-different-god',
-  'reference:why-cant-you-eat-that',
+  /* Empty again since 7 Sep 2026: the four being-asked pages the 3 Sep pilot
+     held places for are written. */
 ];
 
 /** Units allowed outside the 2–6 lesson band, with the reason on record. */

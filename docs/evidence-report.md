@@ -5,14 +5,14 @@ supplied each line of it.
 
 | | |
 |---|---|
-| Qur'an passages | 132 of 132 |
-| Narrations | 181 of 181 |
-| Confirmed against a second publisher | 64 |
-| Translation from HadeethEnc (published terms) | 64 |
-| Translation from Darussalam (quoted) | 117 |
+| Qur'an passages | 141 of 141 |
+| Narrations | 187 of 187 |
+| Confirmed against a second publisher | 65 |
+| Translation from HadeethEnc (published terms) | 65 |
+| Translation from Darussalam (quoted) | 122 |
 | Arabic with no translation | 0 |
-| Chain of transmission moved to the foot | 115 |
-| Chain kept in place (no anchor to cut on) | 2 |
+| Chain of transmission moved to the foot | 118 |
+| Chain kept in place (no anchor to cut on) | 3 |
 | Nothing found | 0 |
 
 ## What "confirmed" means here
@@ -42,6 +42,7 @@ the foot of the block in the note rung; the companion who reports the words
 stays at the head. Nothing is deleted. A narration the rule cannot anchor on
 is left whole and listed below.
 - bukhari:350 — the Prophet ﷺ is never named
+- bukhari:4759 — the Prophet ﷺ is never named
 - bukhari:1090 — the Prophet ﷺ is never named
 
 The window that decides this starts a third of the way into the shorter text.
@@ -156,6 +157,12 @@ comes from the collection itself.
 | `bukhari:3435` | HadeethEnc.com | HadeethEnc.com | HadeethEnc 3417 |
 | `bukhari:3442` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
 | `bukhari:3443` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
+| `muslim:19` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
+| `bukhari:6124` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
+| `bukhari:4758` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
+| `bukhari:4759` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
+| `muslim:2003` | HadeethEnc.com | HadeethEnc.com | HadeethEnc 58259 |
+| `bukhari:5598` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
 | `bukhari:3559` | HadeethEnc.com | HadeethEnc.com | HadeethEnc 5803 |
 | `bukhari:631` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
 | `bukhari:3902` | HadeethEnc.com | HadeethEnc.com | HadeethEnc 10975 |

@@ -197,6 +197,7 @@ reference:halal-and-haram
 reference:how-it-began
 reference:how-prayer-works
 reference:if-you-stopped
+reference:is-allah-a-different-god
 reference:isha
 reference:islamic-calendar
 reference:isnt-islam-violent
@@ -226,6 +227,7 @@ reference:tawba-prayer
 reference:teaching-someone
 reference:travelling
 reference:voluntary-fasting
+reference:was-it-spread-by-the-sword
 reference:what-about-jesus
 reference:what-breaks-prayer
 reference:what-is-islam
@@ -235,6 +237,8 @@ reference:who-can-i-talk-to
 reference:who-is-allah
 reference:who-is-muhammad
 reference:whoever-works-for-you
+reference:why-cant-you-eat-that
+reference:why-do-women-cover
 reference:why-people-differ
 reference:witr
 reference:work

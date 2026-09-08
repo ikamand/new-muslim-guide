@@ -20,6 +20,7 @@ import { MARRIAGE_SHAPE } from './marriage-shape';
 import { MINIMUM_PRAYER } from './minimum-prayer';
 import { IF_YOU_STOPPED } from './if-you-stopped';
 import { ISNT_ISLAM_VIOLENT } from './isnt-islam-violent';
+import { IS_ALLAH_A_DIFFERENT_GOD } from './is-allah-a-different-god';
 import { ISLAMIC_CALENDAR } from './islamic-calendar';
 import { JANAZAH } from './janazah';
 import { JUMUAH } from './jumuah';
@@ -38,6 +39,9 @@ import { SUNNAH } from './sunnah';
 import { TEACHING_SOMEONE } from './teaching-someone';
 import { WHAT_BREAKS_PRAYER } from './what-breaks-prayer';
 import { WHAT_ABOUT_JESUS } from './what-about-jesus';
+import { WAS_IT_SPREAD_BY_THE_SWORD } from './was-it-spread-by-the-sword';
+import { WHY_CANT_YOU_EAT_THAT } from './why-cant-you-eat-that';
+import { WHY_DO_WOMEN_COVER } from './why-do-women-cover';
 import { WHAT_IS_ISLAM } from './what-is-islam';
 import { WHAT_IS_THE_QURAN } from './what-is-the-quran';
 import { WHO_IS_ALLAH } from './who-is-allah';
@@ -116,6 +120,11 @@ export const LEARN_TOPICS: Reference[] = [
   TEACHING_SOMEONE,
   ISNT_ISLAM_VIOLENT,
   WHAT_ABOUT_JESUS,
+  /* 7 Sep 2026 — the four the pilot held places for. */
+  IS_ALLAH_A_DIFFERENT_GOD,
+  WAS_IT_SPREAD_BY_THE_SWORD,
+  WHY_DO_WOMEN_COVER,
+  WHY_CANT_YOU_EAT_THAT,
   WHO_IS_ALLAH,
   WHO_IS_MUHAMMAD,
   HOW_IT_BEGAN,
@@ -289,6 +298,10 @@ export const TOPIC_GROUPS: readonly { id: TopicGroupId; topics: readonly Content
          about being a Muslim among people who are not. */
       ref('reference', 'isnt-islam-violent'),
       ref('reference', 'what-about-jesus'),
+      ref('reference', 'is-allah-a-different-god'),
+      ref('reference', 'was-it-spread-by-the-sword'),
+      ref('reference', 'why-do-women-cover'),
+      ref('reference', 'why-cant-you-eat-that'),
     ],
   },
   {

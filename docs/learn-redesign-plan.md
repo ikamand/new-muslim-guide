@@ -53,6 +53,11 @@ Decisions made 30 Aug, Iyad's answers on the record:
 
 ## 3. The curriculum map
 
+> **Amended 7 Sep 2026** by `docs/curriculum-update-plan.md`: twelve new
+> pages, one rename, a new Book 3 creed chapter, and the band widened to 2–7.
+> Read that document for the current shape; the tables below are the 30 Aug
+> baseline.
+
 ⚠️ Every unit assignment below is proposed, not decided. One page is NEW and
 must be written from sources and reviewed before it ships — it is the only
 new religious content this plan commissions.

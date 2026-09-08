@@ -105,6 +105,9 @@ const REFERENCES: Readonly<Record<string, Cadence>> = {
   'hajj-and-umrah': 'once', // The lesson is read once; the pilgrim's duʿas are on-event in Hisn.
   'building-consistency': 'once',
   'sincerity': 'once',
+  'angels': 'once',
+  'the-prophets': 'once',
+  'the-revealed-books': 'once',
   adhan: 'once',
   rulings: 'once',
   /* Weekly, and the calendar is the only trigger the app has for it. */
@@ -217,6 +220,8 @@ const PHRASES: Readonly<Record<string, Cadence>> = {
   inshaallah: 'until-fluent',
   mashaallah: 'until-fluent',
   subhanallah: 'until-fluent',
+  'allahu-akbar': 'until-fluent', // 8 Sep 2026, with the takbir it borrows.
+  'allahu-alam': 'until-fluent',
   astaghfirullah: 'until-fluent',
   'inna-lillah': 'on-event', // Said on hearing of a death or a loss.
   sallallahu: 'until-fluent',

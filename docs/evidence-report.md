@@ -5,13 +5,13 @@ supplied each line of it.
 
 | | |
 |---|---|
-| Qur'an passages | 145 of 145 |
-| Narrations | 193 of 193 |
-| Confirmed against a second publisher | 65 |
-| Translation from HadeethEnc (published terms) | 65 |
-| Translation from Darussalam (quoted) | 128 |
+| Qur'an passages | 163 of 163 |
+| Narrations | 195 of 195 |
+| Confirmed against a second publisher | 66 |
+| Translation from HadeethEnc (published terms) | 66 |
+| Translation from Darussalam (quoted) | 129 |
 | Arabic with no translation | 0 |
-| Chain of transmission moved to the foot | 124 |
+| Chain of transmission moved to the foot | 125 |
 | Chain kept in place (no anchor to cut on) | 3 |
 | Nothing found | 0 |
 
@@ -198,6 +198,9 @@ comes from the collection itself.
 | `bukhari:6464` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
 | `bukhari:1970` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
 | `bukhari:56` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
+| `muslim:2996` | HadeethEnc.com | HadeethEnc.com | HadeethEnc 8264 |
+| `bukhari:555` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
+| `bukhari:445` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
 | `muslim:537a` | HadeethEnc.com | HadeethEnc.com | HadeethEnc 10650 |
 | `bukhari:1200` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
 | `bukhari:403` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
@@ -237,7 +240,6 @@ comes from the collection itself.
 | `bukhari:528` | HadeethEnc.com | HadeethEnc.com | HadeethEnc 4968 |
 | `abu-dawud:1269` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
 | `muslim:634a` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
-| `bukhari:555` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
 | `bukhari:553` | HadeethEnc.com | HadeethEnc.com | HadeethEnc 6261 |
 | `muslim:728a` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
 | `muslim:656a` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |

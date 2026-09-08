@@ -45,6 +45,9 @@ import { WHERE_RULINGS_COME_FROM } from './where-rulings-come-from';
 import { HAJJ_AND_UMRAH } from './hajj-and-umrah';
 import { BUILDING_CONSISTENCY } from './building-consistency';
 import { SINCERITY } from './sincerity';
+import { ANGELS } from './angels';
+import { THE_PROPHETS } from './the-prophets';
+import { THE_REVEALED_BOOKS } from './the-revealed-books';
 import { WAS_IT_SPREAD_BY_THE_SWORD } from './was-it-spread-by-the-sword';
 import { WHY_CANT_YOU_EAT_THAT } from './why-cant-you-eat-that';
 import { WHY_DO_WOMEN_COVER } from './why-do-women-cover';
@@ -153,6 +156,11 @@ export const LEARN_TOPICS: Reference[] = [
   HAJJ_AND_UMRAH,
   BUILDING_CONSISTENCY,
   SINCERITY,
+  /* 8 Sep 2026 — the creed chapter's first three; after-death and qadr are
+     commissioned and follow. */
+  ANGELS,
+  THE_PROPHETS,
+  THE_REVEALED_BOOKS,
   AL_FATIHAH,
   WHAT_BREAKS_PRAYER,
   HALAL_AND_HARAM,
@@ -271,6 +279,11 @@ export const TOPIC_GROUPS: readonly { id: TopicGroupId; topics: readonly Content
       ref('reference', 'how-it-began'),
       ref('reference', 'what-is-the-quran'),
       ref('reference', 'sunnah'),
+      /* The six articles taken slowly: the deeper creed pages, after the
+         foundations and before the schools. */
+      ref('reference', 'angels'),
+      ref('reference', 'the-prophets'),
+      ref('reference', 'the-revealed-books'),
       /* Why four schools. The page that makes the 50 `differs` notes legible. */
       ref('reference', 'why-people-differ'),
       /*

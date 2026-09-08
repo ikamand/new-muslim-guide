@@ -179,6 +179,7 @@ pillar:zakat
 reference:a-partner-already
 reference:adhan
 reference:al-fatihah
+reference:angels
 reference:anger
 reference:animals-and-land
 reference:arrogance
@@ -231,6 +232,8 @@ reference:sunnah
 reference:tahajjud
 reference:tawba-prayer
 reference:teaching-someone
+reference:the-prophets
+reference:the-revealed-books
 reference:travelling
 reference:voluntary-fasting
 reference:was-it-spread-by-the-sword

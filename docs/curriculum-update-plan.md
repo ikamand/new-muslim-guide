@@ -1,6 +1,6 @@
 # Curriculum update — the agreed changes
 
-**Status:** locked 7 Sep 2026. Phases 1–4 built 8 Sep; the creed chapter and the three held pages not yet. Iyad's proposal, audited against
+**Status:** locked 7 Sep 2026. Phases 1–5 built 8 Sep; the four held pages (after-death, qadr, intimacy, the mistake page) not yet. Iyad's proposal, audited against
 every lesson it named, then agreed item by item. This document is the
 record of what was decided and why; `docs/learn-redesign-plan.md` §3 is the
 map it amends. When a decision here changes, change it here.
@@ -126,8 +126,12 @@ when-its-hard 6, interior-life 5, what-you-believe 5 + door, practices 2.
    come from · Hajj and Umrah · Building consistency · Sincerity. Each
    screenshotted in both themes; the Hajj pillar now doors to its page; the
    Year and Interior-life chapter summaries name the new lessons.
-4. **Phase 5** — the creed chapter: Angels, Prophets, Books, then the two
-   held pages below.
+4. ✅ **Phase 5**, built 8 Sep 2026 — the chapter "What you believe more
+   deeply" opens Book 3 with Angels, The prophets and The revealed books,
+   the Names door, and after-death and qadr declared in `COMMISSIONED` so
+   the audit counts them as work. Screenshotted in both themes with the
+   chapter and tier screens. Also fixed here: the two Phase 1 phrases had
+   no cadence row and the audit had been failing on them since.
 5. **Phase 6, held until last** — Intimacy · What happens after death · Qadr
    · I made a mistake and finished praying.
 6. **Then the review pile**: one ranked bullet list of every new page and its

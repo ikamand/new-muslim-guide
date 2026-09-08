@@ -1043,6 +1043,9 @@ export const EN = {
     'Ramadan, the Eids, zakat, Hajj, and the calendar they follow.',
   'curriculum.unit.when-its-hard': 'When it’s hard',
   'curriculum.unit.when-its-hard.purpose': 'Coming back is part of the path.',
+  'curriculum.unit.what-you-believe': 'What you believe more deeply',
+  'curriculum.unit.what-you-believe.purpose':
+    'The six articles of faith, taken slowly.',
   'curriculum.unit.prayers-you-choose': 'Prayers you choose',
   'curriculum.unit.prayers-you-choose.purpose':
     'The night prayers, and the ones for a moment.',
@@ -1069,6 +1072,7 @@ export const EN = {
   'curriculum.short.meeting-muslims': 'Muslims',
   'curriculum.short.the-year': 'The year',
   'curriculum.short.when-its-hard': 'Hard days',
+  'curriculum.short.what-you-believe': 'Creed',
   'curriculum.short.prayers-you-choose': 'Chosen',
   'curriculum.short.interior-life': 'The heart',
   'curriculum.short.what-you-owe': 'Owed',

@@ -5,22 +5,22 @@
  * here is lost the next time it runs, and one that needs making belongs
  * upstream, where the text is published.
  *
- * 145 Qur'an passages and 193 narrations. Every character came over
+ * 163 Qur'an passages and 195 narrations. Every character came over
  * the wire from a published text rather than from memory, which is the only
  * way a file like this could exist under this project's rules about Arabic.
  *
  * ## Where each line came from
  *
  * No one source has all of it, so each field is taken from the first that
- * does, and says so on the text itself. Of the 193 narrations here:
- * 65 were confirmed against a second, separately edited publisher;
- * 65 carry HadeethEnc's own translation, 128 carry Darussalam's, and
+ * does, and says so on the text itself. Of the 195 narrations here:
+ * 66 were confirmed against a second, separately edited publisher;
+ * 66 carry HadeethEnc's own translation, 129 carry Darussalam's, and
  * 0 have Arabic and no translation at all.
  *
  * ⚠️ **The Darussalam translations are not ours to relicense.** They reach
  * this file through a public-domain dedication that covers the compiler's work
  * and not the translation inside it. What makes that defensible here is scale
- * and purpose — 128 narrations out of some thirty thousand, each quoted under
+ * and purpose — 129 narrations out of some thirty thousand, each quoted under
  * the instruction it supports, in an app that is free and never sold. It is a
  * quotation, not a republication, and it is Iyad's decision on the record.
  *
@@ -586,6 +586,114 @@ export const QURAN_TEXT: Record<string, EvidenceText> = {
   "98:5": {
     "arabic": "وَمَآ أُمِرُوٓاْ إِلَّا لِيَعۡبُدُواْ ٱللَّهَ مُخۡلِصِينَ لَهُ ٱلدِّينَ حُنَفَآءَ وَيُقِيمُواْ ٱلصَّلَوٰةَ وَيُؤۡتُواْ ٱلزَّكَوٰةَۚ وَذَٰلِكَ دِينُ ٱلۡقَيِّمَةِ",
     "translation": "And they were not commanded except to worship Allāh, [being] sincere to Him in religion, inclining to truth, and to establish prayer and to give zakāh. And that is the correct religion.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "66:6": {
+    "arabic": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُواْ قُوٓاْ أَنفُسَكُمۡ وَأَهۡلِيكُمۡ نَارٗا وَقُودُهَا ٱلنَّاسُ وَٱلۡحِجَارَةُ عَلَيۡهَا مَلَٰٓئِكَةٌ غِلَاظٞ شِدَادٞ لَّا يَعۡصُونَ ٱللَّهَ مَآ أَمَرَهُمۡ وَيَفۡعَلُونَ مَا يُؤۡمَرُونَ",
+    "translation": "O you who have believed, protect yourselves and your families from a Fire whose fuel is people and stones, over which are [appointed] angels, harsh and severe; they do not disobey Allāh in what He commands them but do what they are commanded.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "2:97-98": {
+    "arabic": "قُلۡ مَن كَانَ عَدُوّٗا لِّـجِبۡرِيلَ فَإِنَّهُۥ نَزَّلَهُۥ عَلَىٰ قَلۡبِكَ بِإِذۡنِ ٱللَّهِ مُصَدِّقٗا لِّمَا بَيۡنَ يَدَيۡهِ وَهُدٗى وَبُشۡرَىٰ لِلۡمُؤۡمِنِينَ مَن كَانَ عَدُوّٗا لِّلَّهِ وَمَلَٰٓئِكَتِهِۦ وَرُسُلِهِۦ وَجِبۡرِيلَ وَمِيكَىٰلَ فَإِنَّ ٱللَّهَ عَدُوّٞ لِّلۡكَٰفِرِينَ",
+    "translation": "Say, \"Whoever is an enemy to Gabriel - it is [none but] he who has brought it [i.e., the Qur’ān] down upon your heart, [O Muḥammad], by permission of Allāh, confirming that which was before it and as guidance and good tidings for the believers.\" Whoever is an enemy to Allāh and His angels and His messengers and Gabriel and Michael - then indeed, Allāh is an enemy to the disbelievers.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "32:11": {
+    "arabic": "۞ قُلۡ يَتَوَفَّىٰكُم مَّلَكُ ٱلۡمَوۡتِ ٱلَّذِي وُكِّلَ بِكُمۡ ثُمَّ إِلَىٰ رَبِّكُمۡ تُرۡجَعُونَ",
+    "translation": "Say, \"The angel of death who has been entrusted with you will take you. Then to your Lord you will be returned.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "82:10-12": {
+    "arabic": "وَإِنَّ عَلَيۡكُمۡ لَحَٰفِظِينَ كِرَامٗا كَٰتِبِينَ يَعۡلَمُونَ مَا تَفۡعَلُونَ",
+    "translation": "And indeed, [appointed] over you are keepers, Noble and recording; They know whatever you do.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "3:80": {
+    "arabic": "وَلَا يَأۡمُرَكُمۡ أَن تَتَّخِذُواْ ٱلۡمَلَٰٓئِكَةَ وَٱلنَّبِيِّـۧنَ أَرۡبَابًاۚ أَيَأۡمُرُكُم بِٱلۡكُفۡرِ بَعۡدَ إِذۡ أَنتُم مُّسۡلِمُونَ",
+    "translation": "Nor could he order you to take the angels and prophets as lords. Would he order you to disbelief after you had been Muslims?",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "18:110": {
+    "arabic": "قُلۡ إِنَّمَآ أَنَا۠ بَشَرٞ مِّثۡلُكُمۡ يُوحَىٰٓ إِلَيَّ أَنَّمَآ إِلَٰهُكُمۡ إِلَٰهٞ وَٰحِدٞۖ فَمَن كَانَ يَرۡجُواْ لِقَآءَ رَبِّهِۦ فَلۡيَعۡمَلۡ عَمَلٗا صَٰلِحٗا وَلَا يُشۡرِكۡ بِعِبَادَةِ رَبِّهِۦٓ أَحَدَۢا",
+    "translation": "Say, \"I am only a man like you, to whom has been revealed that your god is one God. So whoever would hope for the meeting with his Lord - let him do righteous work and not associate in the worship of his Lord anyone.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "16:36": {
+    "arabic": "وَلَقَدۡ بَعَثۡنَا فِي كُلِّ أُمَّةٖ رَّسُولًا أَنِ ٱعۡبُدُواْ ٱللَّهَ وَٱجۡتَنِبُواْ ٱلطَّٰغُوتَۖ فَمِنۡهُم مَّنۡ هَدَى ٱللَّهُ وَمِنۡهُم مَّنۡ حَقَّتۡ عَلَيۡهِ ٱلضَّلَٰلَةُۚ فَسِيرُواْ فِي ٱلۡأَرۡضِ فَٱنظُرُواْ كَيۡفَ كَانَ عَٰقِبَةُ ٱلۡمُكَذِّبِينَ",
+    "translation": "And We certainly sent into every nation a messenger, [saying], \"Worship Allāh and avoid ṭāghūt.\" And among them were those whom Allāh guided, and among them were those upon whom error was [deservedly] decreed. So proceed [i.e., travel] through the earth and observe how was the end of the deniers.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "35:24": {
+    "arabic": "إِنَّآ أَرۡسَلۡنَٰكَ بِٱلۡحَقِّ بَشِيرٗا وَنَذِيرٗاۚ وَإِن مِّنۡ أُمَّةٍ إِلَّا خَلَا فِيهَا نَذِيرٞ",
+    "translation": "Indeed, We have sent you with the truth as a bringer of good tidings and a warner. And there was no nation but that there had passed within it a warner.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "42:13": {
+    "arabic": "۞ شَرَعَ لَكُم مِّنَ ٱلدِّينِ مَا وَصَّىٰ بِهِۦ نُوحٗا وَٱلَّذِيٓ أَوۡحَيۡنَآ إِلَيۡكَ وَمَا وَصَّيۡنَا بِهِۦٓ إِبۡرَٰهِيمَ وَمُوسَىٰ وَعِيسَىٰٓۖ أَنۡ أَقِيمُواْ ٱلدِّينَ وَلَا تَتَفَرَّقُواْ فِيهِۚ كَبُرَ عَلَى ٱلۡمُشۡرِكِينَ مَا تَدۡعُوهُمۡ إِلَيۡهِۚ ٱللَّهُ يَجۡتَبِيٓ إِلَيۡهِ مَن يَشَآءُ وَيَهۡدِيٓ إِلَيۡهِ مَن يُنِيبُ",
+    "translation": "He has ordained for you of religion what He enjoined upon Noah and that which We have revealed to you, [O Muḥammad], and what We enjoined upon Abraham and Moses and Jesus - to establish the religion and not be divided therein. Difficult for those who associate others with Allāh is that to which you invite them. Allāh chooses for Himself whom He wills and guides to Himself whoever turns back [to Him].",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "4:125": {
+    "arabic": "وَمَنۡ أَحۡسَنُ دِينٗا مِّمَّنۡ أَسۡلَمَ وَجۡهَهُۥ لِلَّهِ وَهُوَ مُحۡسِنٞ وَٱتَّبَعَ مِلَّةَ إِبۡرَٰهِيمَ حَنِيفٗاۗ وَٱتَّخَذَ ٱللَّهُ إِبۡرَٰهِيمَ خَلِيلٗا",
+    "translation": "And who is better in religion than one who submits himself to Allāh while being a doer of good and follows the religion of Abraham, inclining toward truth? And Allāh took Abraham as an intimate friend.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "2:285": {
+    "arabic": "ءَامَنَ ٱلرَّسُولُ بِمَآ أُنزِلَ إِلَيۡهِ مِن رَّبِّهِۦ وَٱلۡمُؤۡمِنُونَۚ كُلٌّ ءَامَنَ بِٱللَّهِ وَمَلَٰٓئِكَتِهِۦ وَكُتُبِهِۦ وَرُسُلِهِۦ لَا نُفَرِّقُ بَيۡنَ أَحَدٖ مِّن رُّسُلِهِۦۚ وَقَالُواْ سَمِعۡنَا وَأَطَعۡنَاۖ غُفۡرَانَكَ رَبَّنَا وَإِلَيۡكَ ٱلۡمَصِيرُ",
+    "translation": "The Messenger has believed in what was revealed to him from his Lord, and [so have] the believers. All of them have believed in Allāh and His angels and His books and His messengers, [saying], \"We make no distinction between any of His messengers.\" And they say, \"We hear and we obey. [We seek] Your forgiveness, our Lord, and to You is the [final] destination.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "4:136": {
+    "arabic": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوٓاْ ءَامِنُواْ بِٱللَّهِ وَرَسُولِهِۦ وَٱلۡكِتَٰبِ ٱلَّذِي نَزَّلَ عَلَىٰ رَسُولِهِۦ وَٱلۡكِتَٰبِ ٱلَّذِيٓ أَنزَلَ مِن قَبۡلُۚ وَمَن يَكۡفُرۡ بِٱللَّهِ وَمَلَٰٓئِكَتِهِۦ وَكُتُبِهِۦ وَرُسُلِهِۦ وَٱلۡيَوۡمِ ٱلۡأٓخِرِ فَقَدۡ ضَلَّ ضَلَٰلَۢا بَعِيدًا",
+    "translation": "O you who have believed, believe in Allāh and His Messenger and the Book that He sent down upon His Messenger and the Scripture which He sent down before. And whoever disbelieves in Allāh, His angels, His books, His messengers, and the Last Day has certainly gone far astray.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "87:19": {
+    "arabic": "صُحُفِ إِبۡرَٰهِيمَ وَمُوسَىٰ",
+    "translation": "The scriptures of Abraham and Moses.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "5:44": {
+    "arabic": "إِنَّآ أَنزَلۡنَا ٱلتَّوۡرَىٰةَ فِيهَا هُدٗى وَنُورٞۚ يَحۡكُمُ بِهَا ٱلنَّبِيُّونَ ٱلَّذِينَ أَسۡلَمُواْ لِلَّذِينَ هَادُواْ وَٱلرَّبَّٰنِيُّونَ وَٱلۡأَحۡبَارُ بِمَا ٱسۡتُحۡفِظُواْ مِن كِتَٰبِ ٱللَّهِ وَكَانُواْ عَلَيۡهِ شُهَدَآءَۚ فَلَا تَخۡشَوُاْ ٱلنَّاسَ وَٱخۡشَوۡنِ وَلَا تَشۡتَرُواْ بِـَٔايَٰتِي ثَمَنٗا قَلِيلٗاۚ وَمَن لَّمۡ يَحۡكُم بِمَآ أَنزَلَ ٱللَّهُ فَأُوْلَٰٓئِكَ هُمُ ٱلۡكَٰفِرُونَ",
+    "translation": "Indeed, We sent down the Torah, in which was guidance and light. The prophets who submitted [to Allāh] judged by it for the Jews, as did the rabbis and scholars by that with which they were entrusted of the Scripture of Allāh, and they were witnesses thereto. So do not fear the people but fear Me, and do not exchange My verses for a small price [i.e., worldly gain]. And whoever does not judge by what Allāh has revealed - then it is those who are the disbelievers.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "4:163": {
+    "arabic": "۞ إِنَّآ أَوۡحَيۡنَآ إِلَيۡكَ كَمَآ أَوۡحَيۡنَآ إِلَىٰ نُوحٖ وَٱلنَّبِيِّـۧنَ مِنۢ بَعۡدِهِۦۚ وَأَوۡحَيۡنَآ إِلَىٰٓ إِبۡرَٰهِيمَ وَإِسۡمَٰعِيلَ وَإِسۡحَٰقَ وَيَعۡقُوبَ وَٱلۡأَسۡبَاطِ وَعِيسَىٰ وَأَيُّوبَ وَيُونُسَ وَهَٰرُونَ وَسُلَيۡمَٰنَۚ وَءَاتَيۡنَا دَاوُۥدَ زَبُورٗا",
+    "translation": "Indeed, We have revealed to you, [O Muḥammad], as We revealed to Noah and the prophets after him. And We revealed to Abraham, Ishmael, Isaac, Jacob, the Descendants, Jesus, Job, Jonah, Aaron, and Solomon; and to David We gave the book [of Psalms].",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "5:46": {
+    "arabic": "وَقَفَّيۡنَا عَلَىٰٓ ءَاثَٰرِهِم بِعِيسَى ٱبۡنِ مَرۡيَمَ مُصَدِّقٗا لِّمَا بَيۡنَ يَدَيۡهِ مِنَ ٱلتَّوۡرَىٰةِۖ وَءَاتَيۡنَٰهُ ٱلۡإِنجِيلَ فِيهِ هُدٗى وَنُورٞ وَمُصَدِّقٗا لِّمَا بَيۡنَ يَدَيۡهِ مِنَ ٱلتَّوۡرَىٰةِ وَهُدٗى وَمَوۡعِظَةٗ لِّلۡمُتَّقِينَ",
+    "translation": "And We sent, following in their footsteps, Jesus, the son of Mary, confirming that which came before him in the Torah; and We gave him the Gospel, in which was guidance and light and confirming that which preceded it of the Torah as guidance and instruction for the righteous.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "2:79": {
+    "arabic": "فَوَيۡلٞ لِّلَّذِينَ يَكۡتُبُونَ ٱلۡكِتَٰبَ بِأَيۡدِيهِمۡ ثُمَّ يَقُولُونَ هَٰذَا مِنۡ عِندِ ٱللَّهِ لِيَشۡتَرُواْ بِهِۦ ثَمَنٗا قَلِيلٗاۖ فَوَيۡلٞ لَّهُم مِّمَّا كَتَبَتۡ أَيۡدِيهِمۡ وَوَيۡلٞ لَّهُم مِّمَّا يَكۡسِبُونَ",
+    "translation": "So woe to those who write the \"scripture\" with their own hands, then say, \"This is from Allāh,\" in order to exchange it for a small price. Woe to them for what their hands have written and woe to them for what they earn.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "5:48": {
+    "arabic": "وَأَنزَلۡنَآ إِلَيۡكَ ٱلۡكِتَٰبَ بِٱلۡحَقِّ مُصَدِّقٗا لِّمَا بَيۡنَ يَدَيۡهِ مِنَ ٱلۡكِتَٰبِ وَمُهَيۡمِنًا عَلَيۡهِۖ فَٱحۡكُم بَيۡنَهُم بِمَآ أَنزَلَ ٱللَّهُۖ وَلَا تَتَّبِعۡ أَهۡوَآءَهُمۡ عَمَّا جَآءَكَ مِنَ ٱلۡحَقِّۚ لِكُلّٖ جَعَلۡنَا مِنكُمۡ شِرۡعَةٗ وَمِنۡهَاجٗاۚ وَلَوۡ شَآءَ ٱللَّهُ لَجَعَلَكُمۡ أُمَّةٗ وَٰحِدَةٗ وَلَٰكِن لِّيَبۡلُوَكُمۡ فِي مَآ ءَاتَىٰكُمۡۖ فَٱسۡتَبِقُواْ ٱلۡخَيۡرَٰتِۚ إِلَى ٱللَّهِ مَرۡجِعُكُمۡ جَمِيعٗا فَيُنَبِّئُكُم بِمَا كُنتُمۡ فِيهِ تَخۡتَلِفُونَ",
+    "translation": "And We have revealed to you, [O Muḥammad], the Book [i.e., the Qur’ān] in truth, confirming that which preceded it of the Scripture and as a criterion over it. So judge between them by what Allāh has revealed and do not follow their inclinations away from what has come to you of the truth. To each of you We prescribed a law and a method. Had Allāh willed, He would have made you one nation [united in religion], but [He intended] to test you in what He has given you; so race to [all that is] good. To Allāh is your return all together, and He will [then] inform you concerning that over which you used to differ.",
     "arabicFrom": "QuranEnc.com",
     "translationFrom": "QuranEnc.com"
   },
@@ -1927,6 +2035,28 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
     "arabicFrom": "fawazahmed0/hadith-api",
     "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
   },
+  "muslim:2996": {
+    "arabic": "عن عائشة رضي الله عنه قالت: قال رسول الله صلى الله عليه وسلم : «خُلقت الملائكة من نور، وخُلق الجَانُّ من مَارِجٍ من نار، وخُلق آدم مما وُصِفَ لكم».",
+    "translation": "‘Ā'ishah (may Allah be pleased with her) reported that the Prophet (may Allah's peace and blessings be upon him) said: \"Angels were created from light, Jinn were created from a smokeless flame of fire, and Adam was created from what was described to you (in the Qur'an).\"",
+    "attribution": "Narrated by Muslim",
+    "grade": "Authentic hadith",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "bukhari:555": {
+    "arabic": "عَنْ أَبِي هُرَيْرَةَ، أَنَّ رَسُولَ اللَّهِ صلى الله عليه وسلم قَالَ ‏ \"‏ يَتَعَاقَبُونَ فِيكُمْ مَلاَئِكَةٌ بِاللَّيْلِ وَمَلاَئِكَةٌ بِالنَّهَارِ، وَيَجْتَمِعُونَ فِي صَلاَةِ الْفَجْرِ وَصَلاَةِ الْعَصْرِ، ثُمَّ يَعْرُجُ الَّذِينَ بَاتُوا فِيكُمْ، فَيَسْأَلُهُمْ وَهْوَ أَعْلَمُ بِهِمْ كَيْفَ تَرَكْتُمْ عِبَادِي فَيَقُولُونَ تَرَكْنَاهُمْ وَهُمْ يُصَلُّونَ، وَأَتَيْنَاهُمْ وَهُمْ يُصَلُّونَ ‏\"‏‏.‏",
+    "isnad": "حَدَّثَنَا عَبْدُ اللَّهِ بْنُ يُوسُفَ، قَالَ حَدَّثَنَا مَالِكٌ، عَنْ أَبِي الزِّنَادِ، عَنِ الأَعْرَجِ",
+    "translation": "Narrated Abu Huraira:Allah's Messenger (ﷺ) said, \"Angels come to you in succession by night and day and all of them get together at the time of the Fajr and `Asr prayers. Those who have passed the night with you (or stayed with you) ascend (to the Heaven) and Allah asks them, though He knows everything about you, well, \"In what state did you leave my slaves?\" The angels reply: \"When we left them they were praying and when we reached them, they were praying",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:445": {
+    "arabic": "عَنْ أَبِي هُرَيْرَةَ، أَنَّ رَسُولَ اللَّهِ صلى الله عليه وسلم قَالَ ‏ \"‏ الْمَلاَئِكَةُ تُصَلِّي عَلَى أَحَدِكُمْ مَا دَامَ فِي مُصَلاَّهُ الَّذِي صَلَّى فِيهِ، مَا لَمْ يُحْدِثْ، تَقُولُ اللَّهُمَّ اغْفِرْ لَهُ اللَّهُمَّ ارْحَمْهُ ‏\"‏‏.‏",
+    "isnad": "حَدَّثَنَا عَبْدُ اللَّهِ بْنُ يُوسُفَ، قَالَ أَخْبَرَنَا مَالِكٌ، عَنْ أَبِي الزِّنَادِ، عَنِ الأَعْرَجِ",
+    "translation": "Narrated Abu Huraira:Allah's Messenger (ﷺ) said, \"The angels keep on asking Allah's forgiveness for anyone of you, as long as he is at his Musalla (praying place) and he does not pass wind (Hadath). They say, 'O Allah! Forgive him, O Allah! be Merciful to him",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
   "muslim:537a": {
     "arabic": "عن معاوية بن الحَكم السُّلَمي رضي الله عنه قال: بَيْنَا أنا أُصلِّي مع رسول الله صلى الله عليه وسلم ، إذ عَطَس رجُل من القوم، فقلت: يَرْحَمُكَ الله، فَرَمَانِي القوم بأبْصَارهم، فقلت: وَاثُكْلَ أُمِّيَاهْ، ما شَأنُكُم تنظرون إليَّ؟، فجعلوا يضربون بأيْدِيهم على أفْخَاذِهم، فلما رأيتهم يُصَمِّتُونَنِي لكنِّي سَكَتُّ، فلما صلَّى رسول الله صلى الله عليه وسلم ، فَبِأَبِي هو وأمِّي، ما رأيت معَلِّما قَبْلَه ولا بَعده أحْسَن تَعليما منه، فوالله، ما كَهَرَنِي وَلَا ضَرَبني وَلَا شَتَمَنِي، قال: «إن هذه الصلاة لا يَصلح فيها شيء من كلام الناس، إنما هو التَّسبيح والتَّكبير وقراءة القرآن»، أو كما قال رسول الله صلى الله عليه وسلم قلت: يا رسول الله، إنِّي حديث عَهد بِجَاهلية، وقد جاء الله بالإسلام، وإن مِنَّا رجَالا يَأتون الكُهَّان، قال: «فلا تَأْتِهِم» قال: ومِنَّا رجَال يَتَطَيَّرُونَ، قال: ذَاك شَيء يَجِدونه في صُدورهم، فلا يَصُدَّنَّهُمْ -قال ابن الصَّبَّاحِ: فلا يَصُدَّنَّكُم- قال قلت: ومِنَّا رجال يَخُطُّونَ، قال: «كان نَبِي من الأنبياء يَخُطُّ، فمن وافق خَطَه فَذَاك»، قال: وكانت لي جَارية تَرعى غَنَما لي قِبَل أُحُدٍ والْجَوَّانِيَّةِ، فَاطَّلَعْتُ ذات يوم فإذا الذِّيب قد ذهب بِشَاة من غَنَمِهَا، وأنا رجُلٌ من بَني آدم، آسَف كما يَأْسَفُونَ؛ لكني صَكَكْتُهَا صَكَّة، فَأَتَيْت رسول الله صلى الله عليه وسلم فَعظَّم ذلك عليَّ، قلت: يا رسول الله أفلا أُعْتِقُهَا؟ قال: «ائْتِنِي بها»، فَأَتَيْتُهُ بها، فقال لها: «أَيْن الله؟» قالت: في السَّماء، قال: «من أنا؟»، قالت: أنت رسول الله، قال: «أَعْتِقْهَا، فَإِنها مُؤْمِنَةٌ».",
     "translation": "Mu‘āwiyah ibn al-Hakam As-Sulami (may Allah be pleased with him) reported: While I was praying with the Messenger of Allah (may Allah's peace and blessings be upon him) a man sneezed, so I said: \"May Allah have mercy upon you.\" People looked at me disapprovingly, so I said: \"May my mother lose me, why do you stare at me?\" They began to strike their thighs with their hands, and when I saw them urging me to be silent I said nothing. When the Messenger of Allah (may Allah's peace and blessings be upon him) finished the prayer – and may my father and mother be sacrificed for him! I have never seen a mentor before him nor after him who gave better instruction than him. By Allah, he neither scolded me, nor beat me, nor insulted me, rather he said: ‘In prayer, nothing of people's ordinary speech is allowed. Only Tasbīh, Takbīr, and recitation of the Qur'an are allowed.\" Or he said something similar to that. Then I said: \"O Messenger of Allah, I have recently abandoned the beliefs of the pre-Islamic era, and Allah has brought Islam to us, and there are men among us who go to diviners.\" He said: \"Do not go to them.\" I said: \"There are men who believe in omens.\" He said: \"That is something which they find in their hearts, but let it not prevent them (from doing whatever they intend to do) (Ibn As-Sabbāh said: let it not prevent you).\" I said: \"Among us are men who draw lines.\" He said: \"There was a prophet who used to draw lines, so if their lines are as his, then that will be good.\" He (Mu‘āwiyah) added: \"I had a bondmaid who tended sheep for me by the side of Uhud and Al-Jawwāniyyah. One day, I happened to pass that way and found that a wolf had snatched a ewe from her flock. As a normal human being, I got angry and gave her a slap. Then I came to the Messenger of Allah (may Allah's peace and blessings be upon him) who considered my act of slapping her grievous, so I said: 'O Messenger of Allah, should I emancipate her?' He said: 'Bring her to me.' So I brought her to him, and he said to her: 'Where is Allah?' She said: 'He is in the heaven.' He said: 'Who am I?' She said: 'You are the Messenger of Allah.' He said: 'Set her free, for she is a believing woman.'\"",
@@ -2215,13 +2345,6 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
     "arabic": "عَنْ أَبِيهِ، قَالَ سَمِعْتُ رَسُولَ اللَّهِ صلى الله عليه وسلم يَقُولُ ‏ \"‏ لَنْ يَلِجَ النَّارَ أَحَدٌ صَلَّى قَبْلَ طُلُوعِ الشَّمْسِ وَقَبْلَ غُرُوبِهَا ‏\"‏ ‏.‏ يَعْنِي الْفَجْرَ وَالْعَصْرَ ‏.‏ فَقَالَ لَهُ رَجُلٌ مِنْ أَهْلِ الْبَصْرَةِ آنْتَ سَمِعْتَ هَذَا مِنْ رَسُولِ اللَّهِ صلى الله عليه وسلم قَالَ نَعَمْ ‏.‏ قَالَ الرَّجُلُ وَأَنَا أَشْهَدُ أَنِّي سَمِعْتُهُ مِنْ رَسُولِ اللَّهِ صلى الله عليه وسلم سَمِعَتْهُ أُذُنَاىَ وَوَعَاهُ قَلْبِي ‏.‏",
     "isnad": "وَحَدَّثَنَا أَبُو بَكْرِ بْنُ أَبِي شَيْبَةَ، وَأَبُو كُرَيْبٍ وَإِسْحَاقُ بْنُ إِبْرَاهِيمَ جَمِيعًا عَنْ وَكِيعٍ، - قَالَ أَبُو كُرَيْبٍ حَدَّثَنَا وَكِيعٌ، - عَنِ ابْنِ أَبِي خَالِدٍ، وَمِسْعَرٍ، وَالْبَخْتَرِيِّ بْنِ الْمُخْتَارِ، سَمِعُوهُ مِنْ أَبِي بَكْرِ بْنِ عُمَارَةَ بْنِ رُؤَيْبَةَ",
     "translation": "Umara b. Ruwaiba is reported to have said on the authority of his father:I heard the Messenger of Allah (ﷺ) saying: He who observes prayer before the rising of the sun and its setting, i.e. the dawn prayer and the afternoon prayer, would not enter the (Hell) fire. A person belonging to Basra said to him: Did you yourself hear it from the Messenger of Allah (ﷺ)? He said: Yes. The person (from Basra) said: I bear witness that I heard it from the Messenger of Allah (ﷺ); my ears heard it and my heart retained it",
-    "arabicFrom": "fawazahmed0/hadith-api",
-    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
-  },
-  "bukhari:555": {
-    "arabic": "عَنْ أَبِي هُرَيْرَةَ، أَنَّ رَسُولَ اللَّهِ صلى الله عليه وسلم قَالَ ‏ \"‏ يَتَعَاقَبُونَ فِيكُمْ مَلاَئِكَةٌ بِاللَّيْلِ وَمَلاَئِكَةٌ بِالنَّهَارِ، وَيَجْتَمِعُونَ فِي صَلاَةِ الْفَجْرِ وَصَلاَةِ الْعَصْرِ، ثُمَّ يَعْرُجُ الَّذِينَ بَاتُوا فِيكُمْ، فَيَسْأَلُهُمْ وَهْوَ أَعْلَمُ بِهِمْ كَيْفَ تَرَكْتُمْ عِبَادِي فَيَقُولُونَ تَرَكْنَاهُمْ وَهُمْ يُصَلُّونَ، وَأَتَيْنَاهُمْ وَهُمْ يُصَلُّونَ ‏\"‏‏.‏",
-    "isnad": "حَدَّثَنَا عَبْدُ اللَّهِ بْنُ يُوسُفَ، قَالَ حَدَّثَنَا مَالِكٌ، عَنْ أَبِي الزِّنَادِ، عَنِ الأَعْرَجِ",
-    "translation": "Narrated Abu Huraira:Allah's Messenger (ﷺ) said, \"Angels come to you in succession by night and day and all of them get together at the time of the Fajr and `Asr prayers. Those who have passed the night with you (or stayed with you) ascend (to the Heaven) and Allah asks them, though He knows everything about you, well, \"In what state did you leave my slaves?\" The angels reply: \"When we left them they were praying and when we reached them, they were praying",
     "arabicFrom": "fawazahmed0/hadith-api",
     "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
   },

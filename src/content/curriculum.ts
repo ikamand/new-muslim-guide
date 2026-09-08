@@ -270,6 +270,25 @@ export const CURRICULUM: readonly Tier[] = [
     units: [
       {
         /*
+          8 Sep 2026, Iyad's curriculum update: the six articles, taken
+          slowly, opening Book 3 as the creed opened Book 1. One page per
+          article except the first, because who-is-allah is in Book 1 and
+          the ninety-nine names are the deeper study, so the door stands
+          where that lesson would. After-death and qadr are the two held
+          pages, written last and declared in COMMISSIONED until then.
+        */
+        id: 'what-you-believe',
+        lessons: [
+          step(ref('reference', 'angels'), 'learning'),
+          step(ref('reference', 'the-prophets'), 'learning'),
+          step(ref('reference', 'the-revealed-books'), 'learning'),
+          step(ref('reference', 'after-death'), 'learning'),
+          step(ref('reference', 'qadr'), 'learning'),
+        ],
+        doors: [ref('collection', 'quranic-names')],
+      },
+      {
+        /*
           Partially reverses the 26 Aug chooser-only decision, deliberately
           and on the record (plan §3): the chooser at /pray remains the
           side-by-side comparison; this unit is the path through the same five
@@ -339,8 +358,11 @@ export const CURRICULUM: readonly Tier[] = [
  * the audit's stale-commission check forced this line to say so.
  */
 export const COMMISSIONED: readonly string[] = [
-  /* Empty again since 7 Sep 2026: the four being-asked pages the 3 Sep pilot
-     held places for are written. */
+  /* 8 Sep 2026: the two creed pages held until last, because they carry the
+     narrations with the most specific wording (docs/curriculum-update-plan.md,
+     Phase 6). The three beside them are written. */
+  'reference:after-death',
+  'reference:qadr',
 ];
 
 /**

@@ -299,8 +299,9 @@ export function useToday(): TodayItem | undefined {
       return {
         key: next.key,
         reason: 'today.continue',
-        title: next.labelKey ? next.entry.title : next.entry.title,
-        description: next.entry.shortDescription,
+        /* The curriculum's own name and line for a list-lesson, as the chapter screen shows them. */
+        title: next.labelKey ? t(next.labelKey as UIKey) : next.entry.title,
+        description: next.descriptionKey ? t(next.descriptionKey as UIKey) : next.entry.shortDescription,
         minutes: next.entry.meta?.estimatedMinutes,
         href: routeFor(next.entry),
       };

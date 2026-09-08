@@ -981,6 +981,11 @@ export const EN = {
   'journey.lesson.pray-fajr': 'Praying Fajr, step by step',
   'journey.lesson.pray-maghrib': 'Praying Maghrib, step by step',
   'journey.lesson.everyday-duas': 'Everyday duʿas',
+  /* The line under the four list-lessons, which otherwise print their target's own summary. */
+  'journey.lesson.five-pillars.about': 'Five obligations that shape a Muslim’s life',
+  'journey.lesson.six-articles.about': 'What Muslims believe',
+  'journey.lesson.phrases.about': 'The words you will hear, and what to say back',
+  'journey.lesson.everyday-duas.about': 'Short words for fixed points in the day, said by heart',
   'journey.lesson.hereafter': 'The Hereafter',
   'journey.lesson.fasting': 'Fasting',
   'journey.lesson.zakat': 'Zakat',

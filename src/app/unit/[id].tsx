@@ -32,6 +32,9 @@ function LessonRow({ step }: { step: ResolvedLesson }) {
   const { reading } = useObservations();
 
   const label = step.labelKey ? t(step.labelKey as UIKey) : step.entry.title;
+  const description = step.descriptionKey
+    ? t(step.descriptionKey as UIKey)
+    : step.entry.shortDescription;
 
   /*
     The bookmark, permanent. The carry-on slot forgets a half-read page after
@@ -47,13 +50,13 @@ function LessonRow({ step }: { step: ResolvedLesson }) {
     <View style={[styles.row, { borderBottomColor: theme.goldSoft }]}>
       <PressableLink
         href={routeFor(step.entry)}
-        accessibilityLabel={`${label}. ${step.entry.shortDescription}`}
+        accessibilityLabel={`${label}. ${description}`}
         style={styles.rowMain}
         pressedStyle={{ opacity: 0.6 }}>
         <View style={styles.rowText}>
           <ThemedText type="smallBold">{label}</ThemedText>
           <ThemedText type="small" themeColor="textSecondary">
-            {step.entry.shortDescription}
+            {description}
           </ThemedText>
         </View>
       </PressableLink>

@@ -56,6 +56,13 @@ export type JourneyStep = {
    * curriculum can call it what a beginner would call it.
    */
   labelKey?: string;
+  /**
+   * The same override for the line under the name. Without it the chapter
+   * screen prints the target's own summary — for a pillar that is ONE pillar's
+   * summary, for a phrasebook it is the first phrase, and for the Hisn
+   * sitting it was the text of the waking duʿa (Iyad's outline, 7 Sep 2026).
+   */
+  descriptionKey?: string;
 };
 
 /** A stable key for progress, unique across kinds. */
@@ -84,7 +91,13 @@ const step = (
   reference: ContentRef,
   requirement: Requirement,
   labelKey?: string,
-): JourneyStep => ({ ref: reference, requirement, ...(labelKey ? { labelKey } : {}) });
+  descriptionKey?: string,
+): JourneyStep => ({
+  ref: reference,
+  requirement,
+  ...(labelKey ? { labelKey } : {}),
+  ...(descriptionKey ? { descriptionKey } : {}),
+});
 
 export const CURRICULUM: readonly Tier[] = [
   {
@@ -95,8 +108,8 @@ export const CURRICULUM: readonly Tier[] = [
         lessons: [
           step(ref('guide', 'shahada'), 'foundation'),
           step(ref('reference', 'what-is-islam'), 'foundation'),
-          step(ref('pillar', 'salah'), 'foundation', 'journey.lesson.five-pillars'),
-          step(ref('article', 'allah'), 'foundation', 'journey.lesson.six-articles'),
+          step(ref('pillar', 'salah'), 'foundation', 'journey.lesson.five-pillars', 'journey.lesson.five-pillars.about'),
+          step(ref('article', 'allah'), 'foundation', 'journey.lesson.six-articles', 'journey.lesson.six-articles.about'),
           step(ref('reference', 'your-name'), 'foundation'),
           step(ref('reference', 'life-before'), 'foundation'),
         ],
@@ -157,9 +170,9 @@ export const CURRICULUM: readonly Tier[] = [
       {
         id: 'everyday-words',
         lessons: [
-          step(ref('phrase', 'salam'), 'practice', 'journey.lesson.phrases'),
+          step(ref('phrase', 'salam'), 'practice', 'journey.lesson.phrases', 'journey.lesson.phrases.about'),
           step(ref('reference', 'dua-and-dhikr'), 'practice'),
-          step(ref('hisn', '1268971'), 'practice', 'journey.lesson.everyday-duas'),
+          step(ref('hisn', '1268971'), 'practice', 'journey.lesson.everyday-duas', 'journey.lesson.everyday-duas.about'),
         ],
       },
     ],

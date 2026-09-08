@@ -11,6 +11,7 @@ import { CLOTHING } from './clothing';
 import { DUA_AND_DHIKR } from './dua-and-dhikr';
 import { EID } from './eid';
 import { FAMILY } from './family';
+import { FAMILY_DOESNT_ACCEPT } from './family-doesnt-accept';
 import { FOOD } from './food';
 import { HALAL_AND_HARAM } from './halal-and-haram';
 import { HOW_PRAYER_WORKS } from './how-prayer-works';
@@ -39,6 +40,7 @@ import { SUNNAH } from './sunnah';
 import { TEACHING_SOMEONE } from './teaching-someone';
 import { WHAT_BREAKS_PRAYER } from './what-breaks-prayer';
 import { WHAT_ABOUT_JESUS } from './what-about-jesus';
+import { WHAT_TO_SAY } from './what-to-say';
 import { WAS_IT_SPREAD_BY_THE_SWORD } from './was-it-spread-by-the-sword';
 import { WHY_CANT_YOU_EAT_THAT } from './why-cant-you-eat-that';
 import { WHY_DO_WOMEN_COVER } from './why-do-women-cover';
@@ -139,6 +141,9 @@ export const LEARN_TOPICS: Reference[] = [
   BEFORE_PRAYER,
   /* 31 Aug 2026 — the one page the Learn re-thread commissions. */
   HOW_PRAYER_WORKS,
+  /* 8 Sep 2026 — the curriculum update's pilot pair, the two least alike. */
+  WHAT_TO_SAY,
+  FAMILY_DOESNT_ACCEPT,
   AL_FATIHAH,
   WHAT_BREAKS_PRAYER,
   HALAL_AND_HARAM,
@@ -226,6 +231,8 @@ export const TOPIC_GROUPS: readonly { id: TopicGroupId; topics: readonly Content
       ref('guide', 'wudu'),
       ref('reference', 'before-prayer'),
       ref('reference', 'how-prayer-works'),
+      /* The words, gathered, beside the page that explains the shape. */
+      ref('reference', 'what-to-say'),
       // The prayers are reached through the chooser rather than as five cards
       // or as Fajr standing in for all of them — see `src/app/pray.tsx`. The
       // Learn tab renders that entry itself; it is not a `ContentRef` because
@@ -316,6 +323,9 @@ export const TOPIC_GROUPS: readonly { id: TopicGroupId; topics: readonly Content
       ref('reference', 'who-can-i-talk-to'),
       ref('reference', 'being-corrected'),
       ref('reference', 'patience-and-gratitude'),
+      /* After the family knows. Filed with the hard weeks, not with the
+         family page, because that is when it is opened. */
+      ref('reference', 'family-doesnt-accept'),
       /* The four interior vices. Each page carries its own cure rather than
          pairing off into four more pages: nobody treats envy by reading a
          separate article about contentment. */

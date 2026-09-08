@@ -193,6 +193,7 @@ reference:eid
 reference:envy
 reference:fajr
 reference:family
+reference:family-doesnt-accept
 reference:fasting-alone
 reference:food
 reference:halal-and-haram
@@ -234,6 +235,7 @@ reference:what-about-jesus
 reference:what-breaks-prayer
 reference:what-is-islam
 reference:what-is-the-quran
+reference:what-to-say
 reference:which-dhikr
 reference:who-can-i-talk-to
 reference:who-is-allah

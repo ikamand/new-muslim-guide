@@ -1,6 +1,6 @@
 # Curriculum update — the agreed changes
 
-**Status:** locked 7 Sep 2026, not built. Iyad's proposal, audited against
+**Status:** locked 7 Sep 2026. Phase 1 and the Phase 2 pilot built 8 Sep; the rest not yet. Iyad's proposal, audited against
 every lesson it named, then agreed item by item. This document is the
 record of what was decided and why; `docs/learn-redesign-plan.md` §3 is the
 map it amends. When a decision here changes, change it here.
@@ -117,9 +117,11 @@ when-its-hard 6, interior-life 5, what-you-believe 5 + door, practices 2.
 1. ✅ **Phase 1**, built 7 Sep 2026 — the rename and its references (two of
    the five named were by id, not title, and needed no change); the two
    phrases. Both pages screenshotted in both themes.
-2. **Phase 2 pilot** — What to say in prayer (the one page with a layout
-   risk: about nine sections each carrying a recitation card) and the family
-   page. The two most unalike new pages. **Stop for Iyad's eyes.**
+2. ✅ **Phase 2 pilot**, built 8 Sep 2026 — What to say in prayer (eleven
+   sections, ten recitation cards, no practice links until the prayer's own
+   words are recorded) and the family page. Both screenshotted in both
+   themes with their chapter screens; the band widened to 2–7 in the same
+   commit. **Awaiting Iyad's eyes before the rest.**
 3. **Phase 2–4, the low-risk pages** — Where rulings come from · Hajj and
    Umrah · Building consistency · Sincerity.
 4. **Phase 5** — the creed chapter: Angels, Prophets, Books, then the two

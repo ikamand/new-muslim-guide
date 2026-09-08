@@ -143,8 +143,8 @@ for (const tier of CURRICULUM) {
   for (const unit of tier.units) {
     const resolved = unit.lessons.filter((lesson) => resolveRef(lesson.ref)).length;
     const size =
-      (resolved < 2 || resolved > 6) && !SMALL_UNITS.includes(unit.id)
-        ? '  ⚠️ outside the 2–6 band'
+      (resolved < 2 || resolved > 7) && !SMALL_UNITS.includes(unit.id)
+        ? '  ⚠️ outside the 2–7 band'
         : '';
     say(`  ${pad(`${tier.id}/${unit.id}`, 38)} ${resolved}/${unit.lessons.length}${size}`);
   }

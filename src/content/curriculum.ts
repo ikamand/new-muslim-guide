@@ -146,6 +146,9 @@ export const CURRICULUM: readonly Tier[] = [
             leans on `minimum-prayer` beside it.
           */
           step(ref('reference', 'how-prayer-works'), 'practice'),
+          /* 8 Sep 2026: the words themselves, gathered. Every text is rendered
+             from `recitations.ts`; the page adds only where each falls. */
+          step(ref('reference', 'what-to-say'), 'practice'),
           step(ref('reference', 'minimum-prayer'), 'practice'),
           step(ref('reference', 'al-fatihah'), 'practice'),
         ],
@@ -244,6 +247,9 @@ export const CURRICULUM: readonly Tier[] = [
           step(ref('reference', 'repentance'), 'learning'),
           step(ref('reference', 'if-you-stopped'), 'learning'),
           step(ref('reference', 'patience-and-gratitude'), 'learning'),
+          /* 8 Sep 2026: after the family knows, and did not take it well. The
+             family page stops at telling them; this one starts there. */
+          step(ref('reference', 'family-doesnt-accept'), 'learning'),
           /* 5 Sep 2026: a person for a question, a person for a hard night. */
           step(ref('reference', 'who-can-i-talk-to'), 'learning'),
         ],
@@ -326,7 +332,14 @@ export const COMMISSIONED: readonly string[] = [
      held places for are written. */
 ];
 
-/** Units allowed outside the 2–6 lesson band, with the reason on record. */
+/**
+ * Units allowed outside the 2–7 lesson band, with the reason on record.
+ *
+ * The band was 2–6 until 8 Sep 2026. The curriculum update takes four units
+ * to seven, and allowlisting four exceptions would have turned the check
+ * into a list of reasons to ignore it, so the band widened instead
+ * (`docs/curriculum-update-plan.md`, decisions).
+ */
 export const SMALL_UNITS: readonly string[] = [
   /* 'practices' left this list on 3 Sep 2026 with its second lesson. */
 ];

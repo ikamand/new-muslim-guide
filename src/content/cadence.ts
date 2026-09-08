@@ -100,6 +100,7 @@ const REFERENCES: Readonly<Record<string, Cadence>> = {
   'minimum-prayer': 'until-fluent',
   /* The pattern, needed until it is not — like the guides it explains. */
   'how-prayer-works': 'until-fluent',
+  'what-to-say': 'until-fluent', // The prayer's words gathered; the page's job ends when they are known.
   adhan: 'once',
   rulings: 'once',
   /* Weekly, and the calendar is the only trigger the app has for it. */
@@ -107,6 +108,7 @@ const REFERENCES: Readonly<Record<string, Cadence>> = {
   /* Both invisible until they happen — nobody browses to either. */
   janazah: 'on-event',
   'if-you-stopped': 'on-event',
+  'family-doesnt-accept': 'on-event', // The week the family knows. Not a shelf to browse.
   'who-can-i-talk-to': 'on-event', // Who to ask, who to call. Reached from Help and Ask, not browsed to.
   /* Phase 11's remaining six. Two are read once; four wait for the day. */
   'behind-an-imam': 'until-fluent',

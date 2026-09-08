@@ -5,22 +5,22 @@
  * here is lost the next time it runs, and one that needs making belongs
  * upstream, where the text is published.
  *
- * 141 Qur'an passages and 187 narrations. Every character came over
+ * 142 Qur'an passages and 188 narrations. Every character came over
  * the wire from a published text rather than from memory, which is the only
  * way a file like this could exist under this project's rules about Arabic.
  *
  * ## Where each line came from
  *
  * No one source has all of it, so each field is taken from the first that
- * does, and says so on the text itself. Of the 187 narrations here:
+ * does, and says so on the text itself. Of the 188 narrations here:
  * 65 were confirmed against a second, separately edited publisher;
- * 65 carry HadeethEnc's own translation, 122 carry Darussalam's, and
+ * 65 carry HadeethEnc's own translation, 123 carry Darussalam's, and
  * 0 have Arabic and no translation at all.
  *
  * ⚠️ **The Darussalam translations are not ours to relicense.** They reach
  * this file through a public-domain dedication that covers the compiler's work
  * and not the translation inside it. What makes that defensible here is scale
- * and purpose — 122 narrations out of some thirty thousand, each quoted under
+ * and purpose — 123 narrations out of some thirty thousand, each quoted under
  * the instruction it supports, in an app that is free and never sold. It is a
  * quotation, not a republication, and it is Iyad's decision on the record.
  *
@@ -553,6 +553,18 @@ export const QURAN_TEXT: Record<string, EvidenceText> = {
     "arabicFrom": "QuranEnc.com",
     "translationFrom": "QuranEnc.com"
   },
+  "31:15": {
+    "arabic": "وَإِن جَٰهَدَاكَ عَلَىٰٓ أَن تُشۡرِكَ بِي مَا لَيۡسَ لَكَ بِهِۦ عِلۡمٞ فَلَا تُطِعۡهُمَاۖ وَصَاحِبۡهُمَا فِي ٱلدُّنۡيَا مَعۡرُوفٗاۖ وَٱتَّبِعۡ سَبِيلَ مَنۡ أَنَابَ إِلَيَّۚ ثُمَّ إِلَيَّ مَرۡجِعُكُمۡ فَأُنَبِّئُكُم بِمَا كُنتُمۡ تَعۡمَلُونَ",
+    "translation": "But if they endeavor to make you associate with Me that of which you have no knowledge, do not obey them but accompany them in [this] world with appropriate kindness and follow the way of those who turn back to Me [in repentance]. Then to Me will be your return, and I will inform you about what you used to do.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "28:56": {
+    "arabic": "إِنَّكَ لَا تَهۡدِي مَنۡ أَحۡبَبۡتَ وَلَٰكِنَّ ٱللَّهَ يَهۡدِي مَن يَشَآءُۚ وَهُوَ أَعۡلَمُ بِٱلۡمُهۡتَدِينَ",
+    "translation": "Indeed, [O Muḥammad], you do not guide whom you like, but Allāh guides whom He wills. And He is most knowing of the [rightly] guided.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
   "7:157": {
     "arabic": "ٱلَّذِينَ يَتَّبِعُونَ ٱلرَّسُولَ ٱلنَّبِيَّ ٱلۡأُمِّيَّ ٱلَّذِي يَجِدُونَهُۥ مَكۡتُوبًا عِندَهُمۡ فِي ٱلتَّوۡرَىٰةِ وَٱلۡإِنجِيلِ يَأۡمُرُهُم بِٱلۡمَعۡرُوفِ وَيَنۡهَىٰهُمۡ عَنِ ٱلۡمُنكَرِ وَيُحِلُّ لَهُمُ ٱلطَّيِّبَٰتِ وَيُحَرِّمُ عَلَيۡهِمُ ٱلۡخَبَٰٓئِثَ وَيَضَعُ عَنۡهُمۡ إِصۡرَهُمۡ وَٱلۡأَغۡلَٰلَ ٱلَّتِي كَانَتۡ عَلَيۡهِمۡۚ فَٱلَّذِينَ ءَامَنُواْ بِهِۦ وَعَزَّرُوهُ وَنَصَرُوهُ وَٱتَّبَعُواْ ٱلنُّورَ ٱلَّذِيٓ أُنزِلَ مَعَهُۥٓ أُوْلَٰٓئِكَ هُمُ ٱلۡمُفۡلِحُونَ",
     "translation": "Those who follow the Messenger, the unlettered prophet, whom they find written [i.e., described] in what they have of the Torah and the Gospel, who enjoins upon them what is right and prohibits them from what is wrong and makes lawful for them what is good and forbids them from what is evil and relieves them of their burden and the shackles which were upon them. So they who have believed in him, honored him, supported him and followed the light which was sent down with him - it is those who will be the successful.",
@@ -568,12 +580,6 @@ export const QURAN_TEXT: Record<string, EvidenceText> = {
   "17:23": {
     "arabic": "۞ وَقَضَىٰ رَبُّكَ أَلَّا تَعۡبُدُوٓاْ إِلَّآ إِيَّاهُ وَبِٱلۡوَٰلِدَيۡنِ إِحۡسَٰنًاۚ إِمَّا يَبۡلُغَنَّ عِندَكَ ٱلۡكِبَرَ أَحَدُهُمَآ أَوۡ كِلَاهُمَا فَلَا تَقُل لَّهُمَآ أُفّٖ وَلَا تَنۡهَرۡهُمَا وَقُل لَّهُمَا قَوۡلٗا كَرِيمٗا",
     "translation": "And your Lord has decreed that you worship not except Him, and to parents, good treatment. Whether one or both of them reach old age [while] with you, say not to them [so much as], \"uff,\" and do not repel them but speak to them a noble word.",
-    "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
-  },
-  "31:15": {
-    "arabic": "وَإِن جَٰهَدَاكَ عَلَىٰٓ أَن تُشۡرِكَ بِي مَا لَيۡسَ لَكَ بِهِۦ عِلۡمٞ فَلَا تُطِعۡهُمَاۖ وَصَاحِبۡهُمَا فِي ٱلدُّنۡيَا مَعۡرُوفٗاۖ وَٱتَّبِعۡ سَبِيلَ مَنۡ أَنَابَ إِلَيَّۚ ثُمَّ إِلَيَّ مَرۡجِعُكُمۡ فَأُنَبِّئُكُم بِمَا كُنتُمۡ تَعۡمَلُونَ",
-    "translation": "But if they endeavor to make you associate with Me that of which you have no knowledge, do not obey them but accompany them in [this] world with appropriate kindness and follow the way of those who turn back to Me [in repentance]. Then to Me will be your return, and I will inform you about what you used to do.",
     "arabicFrom": "QuranEnc.com",
     "translationFrom": "QuranEnc.com"
   },
@@ -1858,6 +1864,13 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
     "arabic": "عَنْ حُذَيْفَةَ، قَالَ كَانَ النَّبِيُّ صلى الله عليه وسلم إِذَا أَرَادَ أَنْ يَنَامَ قَالَ ‏\"‏ بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا ‏\"‏‏.‏ وَإِذَا اسْتَيْقَظَ مِنْ مَنَامِهِ قَالَ ‏\"‏ الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا، وَإِلَيْهِ النُّشُورُ ‏\"‏‏.‏",
     "isnad": "حَدَّثَنَا أَبُو نُعَيْمٍ، حَدَّثَنَا سُفْيَانُ، عَنْ عَبْدِ الْمَلِكِ بْنِ عُمَيْرٍ، عَنْ رِبْعِيِّ بْنِ حِرَاشٍ",
     "translation": "Narrated Hudhaifa:Whenever the Prophet (ﷺ) intended to go to bed, he would recite: \"Bismika Allahumma amutu wa ahya (With Your name, O Allah, I die and I live).\" And when he woke up from his sleep, he would say: \"Al-hamdu lil-lahil-ladhi ahyana ba'da ma amatana; wa ilaihi an-nushur (All the Praises are for Allah Who has made us alive after He made us die (sleep) and unto Him is the Resurrection",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:2620": {
+    "arabic": "عَنْ أَسْمَاءَ بِنْتِ أَبِي بَكْرٍ ـ رضى الله عنهما ـ قَالَتْ قَدِمَتْ عَلَىَّ أُمِّي وَهْىَ مُشْرِكَةٌ، فِي عَهْدِ رَسُولِ اللَّهِ صلى الله عليه وسلم، فَاسْتَفْتَيْتُ رَسُولَ اللَّهِ صلى الله عليه وسلم قُلْتُ ‏{‏إِنَّ أُمِّي قَدِمَتْ‏}‏ وَهْىَ رَاغِبَةٌ، أَفَأَصِلُ أُمِّي قَالَ ‏ \"‏ نَعَمْ صِلِي أُمَّكِ ‏\"‏‏.‏",
+    "isnad": "حَدَّثَنَا عُبَيْدُ بْنُ إِسْمَاعِيلَ، حَدَّثَنَا أَبُو أُسَامَةَ، عَنْ هِشَامٍ، عَنْ أَبِيهِ",
+    "translation": "Narrated Asma' bint Abu Bakr:My mother came to me during the lifetime of Allah's Messenger (ﷺ) and she was a pagan. I said to Allah's Apostle (seeking his verdict), \"My mother has come to me and she desires to receive a reward from me, shall I keep good relations with her?\" The Prophet (ﷺ) said, \"Yes, keep good relation with her",
     "arabicFrom": "fawazahmed0/hadith-api",
     "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
   },

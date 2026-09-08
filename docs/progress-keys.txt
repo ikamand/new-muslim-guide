@@ -204,6 +204,7 @@ reference:halal-and-haram
 reference:how-it-began
 reference:how-prayer-works
 reference:if-you-stopped
+reference:intimacy
 reference:is-allah-a-different-god
 reference:isha
 reference:islamic-calendar
@@ -224,6 +225,7 @@ reference:periods
 reference:qadr
 reference:qiyam-al-layl
 reference:ramadan
+reference:realised-after
 reference:repentance
 reference:rulings
 reference:seated

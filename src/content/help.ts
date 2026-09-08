@@ -95,6 +95,7 @@ export const HELP_TOPICS: readonly HelpTopic[] = [
     entries: [
       content('reference', 'missed'),
       content('reference', 'lost-count'),
+      content('reference', 'realised-after'),
       content('reference', 'seated'),
       content('reference', 'travelling'),
       content('reference', 'periods'),

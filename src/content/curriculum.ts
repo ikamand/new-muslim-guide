@@ -162,6 +162,9 @@ export const CURRICULUM: readonly Tier[] = [
           step(ref('reference', 'what-breaks-prayer'), 'practice'),
           step(ref('reference', 'lost-count'), 'practice'),
           step(ref('reference', 'missed'), 'practice'),
+          /* 8 Sep 2026: the mistake noticed afterwards. Surface `pray`, like
+             the two above, so the help sheet's mistakes list reaches it too. */
+          step(ref('reference', 'realised-after'), 'practice'),
         ],
       },
       {
@@ -202,6 +205,8 @@ export const CURRICULUM: readonly Tier[] = [
           step(ref('reference', 'manners'), 'practice'),
           step(ref('reference', 'marriage-shape'), 'learning'),
           step(ref('reference', 'a-partner-already'), 'learning'),
+          /* 8 Sep 2026: inside marriage, in private, and the wash after. */
+          step(ref('reference', 'intimacy'), 'learning'),
           step(ref('reference', 'teaching-someone'), 'learning'),
           step(ref('reference', 'janazah'), 'learning'),
         ],

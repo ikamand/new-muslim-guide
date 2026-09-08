@@ -110,6 +110,8 @@ const REFERENCES: Readonly<Record<string, Cadence>> = {
   'the-revealed-books': 'once',
   'after-death': 'once',
   'qadr': 'once',
+  'intimacy': 'once',
+  'realised-after': 'on-event', // The evening it happens. Reached from Help's mistakes list.
   adhan: 'once',
   rulings: 'once',
   /* Weekly, and the calendar is the only trigger the app has for it. */

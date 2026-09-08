@@ -1,6 +1,6 @@
 # Curriculum update — the agreed changes
 
-**Status:** locked 7 Sep 2026. Phases 1–5 built 8 Sep; after-death and qadr built 8 Sep; intimacy and the mistake page not yet. Iyad's proposal, audited against
+**Status:** locked 7 Sep 2026, fully built 8 Sep 2026. What remains is the one-sitting review of every new page, from the ranked list below. Iyad's proposal, audited against
 every lesson it named, then agreed item by item. This document is the
 record of what was decided and why; `docs/learn-redesign-plan.md` §3 is the
 map it amends. When a decision here changes, change it here.
@@ -135,8 +135,10 @@ when-its-hard 6, interior-life 5, what-you-believe 5 + door, practices 2.
 5. **Phase 6, held until last** — ✅ What happens after death and Qadr,
    built 8 Sep 2026, completing the creed chapter at five lessons. The
    after-death page's hero is its first section, because a hero renders at
-   the top wherever it sits and the arc has to read in order. Still to
-   build: Intimacy · I made a mistake and finished praying.
+   the top wherever it sits and the arc has to read in order. ✅ Intimacy
+   and I made a mistake and finished praying, built the same day; the
+   mistake page is surface `pray` and sits in the help sheet's mistakes
+   list as well as the chapter. All twelve pages are built.
 6. **Then the review pile**: one ranked bullet list of every new page and its
    sensitive claims, for one sitting.
 

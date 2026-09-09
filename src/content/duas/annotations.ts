@@ -128,6 +128,23 @@ export type HisnAnnotation = {
    */
   rewrite?: readonly { from: string; to: string }[];
   /**
+   * The book's marginal instruction, printed inside the row: a count, a
+   * sitting, an occasion — `(ثلاثَ مرَّاتٍ)`, `(إذا أصبحَ)`, "after each prayer".
+   *
+   * Cut out of the words on every screen, because inside them it asked the
+   * reader to say "three times" aloud — and in Ayat al-Kursi it sat inside a
+   * verse of the Qur'an. The count itself is chrome (`repeat`, from the
+   * generator); a label that says more than a count is shown under the
+   * translation, in the book's English, so nothing is lost and nothing is
+   * composed.
+   *
+   * ⚠️ VERBATIM substrings of the row, including the space or comma before
+   * them, sliced out by a script and re-checked by `npm run narration:check`.
+   * The Arabic is checked against the row as the book prints it, before any
+   * `rewrite`.
+   */
+  label?: { arabic: string; english: string };
+  /**
    * Extra spans to pick out in the accent colour, beyond the ones the book
    * bracketed.
    *
@@ -193,10 +210,26 @@ export const HISN_ANNOTATIONS: Readonly<Record<number, HisnAnnotation>> = {
 
   // …and the six the book marks for one sitting or the other. Transcribed
   // from the parenthesis printed in the line, or from its own footnote.
-  1269255: { time: 'morning', reason: 'the line says (مائةَ مرَّةٍ إذا أصبحَ)' },
-  1269257: { time: 'morning', reason: 'the line says (ثلاثَ مرَّاتٍ إذا أصبحَ)' },
-  1269259: { time: 'morning', reason: 'the line says (إذا أصبحَ)' },
-  1269263: { time: 'evening', reason: 'the line says (ثلاثَ مرَّاتٍ إذا أمسى)' },
+  1269255: {
+    time: 'morning',
+    reason: 'the line says (مائةَ مرَّةٍ إذا أصبحَ)',
+    label: { arabic: " (مائةَ مرَّةٍ إذا أصبحَ)", english: " (100 times in the morning)" },
+  },
+  1269257: {
+    time: 'morning',
+    reason: 'the line says (ثلاثَ مرَّاتٍ إذا أصبحَ)',
+    label: { arabic: " (ثلاثَ مرَّاتٍ إذا أصبحَ)", english: " (Three times in the morning)" },
+  },
+  1269259: {
+    time: 'morning',
+    reason: 'the line says (إذا أصبحَ)',
+    label: { arabic: " (إذا أصبحَ)", english: " (in the morning)" },
+  },
+  1269263: {
+    time: 'evening',
+    reason: 'the line says (ثلاثَ مرَّاتٍ إذا أمسى)',
+    label: { arabic: " (ثلاثَ مرَّاتٍ إذا أمسى)", english: " (Three times in the evening)" },
+  },
 
   /*
     ⚠️ EDITORIAL, not transcribed — the only entry in this file that is not
@@ -212,12 +245,26 @@ export const HISN_ANNOTATIONS: Readonly<Record<number, HisnAnnotation>> = {
   1269252: {
     time: 'evening',
     reason: 'duplicate of the ×100 line in the morning, which is morning-only',
+    /*
+      The generator read no count from "(ten times) or (once when tired)",
+      so the reader showed it once with both alternatives inside the words.
+      Ten is the count; the alternative is the label under it.
+    */
+    repeat: 10,
+    label: {
+      arabic: " (عشرَ مرَّات)، أَوْ (مرَّةً واحدةً عندَ الكَسَلِ)",
+      english: " (Ten times) or (once when feeling lazy)",
+    },
   },
 
   // Adhkār of sleep
   1269268: { recited: false, reason: 'an instruction: join the palms and blow into them' },
   1269283: { recited: true, continues: true, reason: 'the last words of Sūrat an-Nās' },
-  1269284: { recited: false, reason: 'an instruction: wipe over the body afterwards' },
+  1269284: {
+    recited: false,
+    reason: 'an instruction: wipe over the body afterwards',
+    label: { arabic: " (يفعلُ ذلك ثلاثَ مرَّاتٍ)", english: " (This is to be done three times)" },
+  },
   1269289: { recited: true, continues: true, reason: 'al-Baqarah 286, under 285 above it' },
   1269309: {
     recited: false,
@@ -225,14 +272,93 @@ export const HISN_ANNOTATIONS: Readonly<Record<number, HisnAnnotation>> = {
   },
 
   // Adhkār after the prayer
+  /*
+    Was a `rewrite` (الصُّبْحِ → الفَجْرِ, Iyad's instruction) with the tail
+    picked out in gold. The tail is the book's label, not the dhikr, so it is
+    now cut out and shown under the translation in English — which already
+    says "Fajr". Nothing Arabic is altered any more, and the rewrite went with
+    it (8 Sep 2026).
+  */
   1269178: {
     reason:
       'ten times after Maghrib and Fajr; the count and the occasion are prose at the end of the row',
     repeat: 10,
-    rewrite: [{ from: "الصُّبْحِ", to: "الفَجْرِ" }],
-    emphasis: ["عَشْرَ مَرّاتٍ بَعْدَ صَلاةِ الْمَغْرِبِ وَالفَجْرِ"],
+    label: {
+      arabic: " عَشْرَ مَرّاتٍ بَعْدَ صَلاةِ الْمَغْرِبِ وَالصُّبْحِ",
+      english: " This is to be said ten times after the Maghrib and Fajr prayers",
+    },
   },
   1269173: { omit: true, reason: 'a label on the rows above, not a step of its own' },
+  /*
+    The book's own marginal instructions, printed inside the row. Ayat
+    al-Kursi ended with "after each prayer" INSIDE the verse, and the last
+    duʿa asked the reader to say "after the greeting of peace of the Fajr
+    prayer" as part of its words (Iyad, 8 Sep 2026).
+  */
+  1269175: {
+    reason: 'the label "after each prayer" was printed inside the verse',
+    label: { arabic: " عَقِبَ كلِّ صَلاَةٍ", english: " after each prayer" },
+  },
+  1269180: {
+    reason: 'the label "after Fajr" was printed as the last words of the duʿa',
+    label: {
+      arabic: " بَعْدَ السّلامِ مِنْ صَلاَةِ الفَجْرِ",
+      english: ", after the greeting of peace of the Fajr prayer",
+    },
+  },
+  /*
+    The istighfār is said three times and the line after it once. As one row
+    under the book's (ثَلاَثَاً) the reader was told to say both three times
+    — the same fault 1269152 below had, with the same fix.
+  */
+  1269150: {
+    reason: 'two dhikr in one row, with the count for the first printed between them',
+    parts: [
+      { arabic: "أَسْتَغْفِرُ اللَّهَ", english: "I seek Allah’s forgiveness", repeat: 3 },
+      {
+        arabic: "اللَّهُمَّ أَنْتَ السَّلاَمُ، وَمِنْكَ السَّلاَمُ، تَبَارَكْتَ يَا ذَا الْجَلاَلِ وَالْإِكْرَامِ",
+        english: "O Allah, You are the Source of Peace and from You comes all peace. Blessed are You, the Owner of Majesty and Honor",
+      },
+    ],
+  },
+
+  /*
+    The count labels the book prints beside a dhikr — `(ثلاثَ مرَّاتٍ)`,
+    `(Three times)`. Each is cut out of the words: the count is read into
+    `repeat` by the generator and shown as chrome, so inside the text it only
+    asked the reader to say "three times" aloud. Where the label says more
+    than a count — a sitting, "a day", "or once when tired" — the English is
+    shown under the translation instead. All sliced from the row by a script.
+  */
+  // Morning and evening
+  1269223: { label: { arabic: " (أربعَ مَرَّاتٍ)", english: " (Four times)" } },
+  1269229: { label: { arabic: " (ثلاثَ مرَّاتٍ)", english: " (Three times)" } },
+  1269231: { label: { arabic: " (سَبْعَ مَرّاتٍ)", english: " (seven times)" } },
+  1269237: { label: { arabic: " (ثلاثَ مرَّاتٍ)", english: " (Three times)" } },
+  1269239: { label: { arabic: " (ثلاثَ مرَّاتٍ)", english: " (Three times)" } },
+  1269250: { label: { arabic: " (مائة مرَّةٍ)", english: " (100 times)" } },
+  1269261: { label: { arabic: " (مِائَةَ مَرَّةٍ فِي الْيَوْمِ)", english: " (100 times a day)" } },
+  1269265: { label: { arabic: " (عشرَ مرَّاتٍ)", english: " (Ten times)" } },
+  // Sleep
+  /*
+    Three dhikr in one row with the counts between them, and the generator
+    read no count at all — so the reader showed all three as one card, said
+    once. Note the takbīr is thirty-FOUR here, unlike after the prayer.
+  */
+  1269301: {
+    reason: 'three dhikr in one row: tasbīh ×33, tahmīd ×33, takbīr ×34',
+    parts: [
+      { arabic: "سُبْحَانَ اللَّهِ", english: "Glory be to Allah", repeat: 33 },
+      { arabic: "وَالْحَمْدُ لِلَّهِ", english: "praise be to Allah", repeat: 33 },
+      { arabic: "وَاللَّهُ أَكْبَرُ", english: "and Allah is the Greatest", repeat: 34 },
+    ],
+  },
+  // Elsewhere in the book — the remaining rows that print a count
+  1269321: { label: { arabic: " (ثلاثاً)", english: " (three times)" } },
+  1269323: { label: { arabic: " (ثَلاَثَ مَرَّاتٍ)", english: " (three times)" } },
+  1269365: { label: { arabic: " (ثلاثَ مرَّاتٍ)", english: " (three times)" } },
+  1269389: { label: { arabic: " (ثلاثاً)", english: " (three times)" } },
+  1269418: { label: { arabic: " (سبع مرات)", english: " (seven times)" } },
   /*
     Two rows where the book puts several dhikr in one, with the count printed
     between them. Each part below is a VERBATIM substring of the row — cut out

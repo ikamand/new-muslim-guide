@@ -90,8 +90,14 @@ export default function AdhkarSessionScreen() {
     something to do, and a counter on it would be the app inventing a
     repetition the book never states.
   */
-  const { instruction, eveningForms, arabic, english, emphasis } = step;
+  const { instruction, eveningForms, arabic, english, emphasis, label } = step;
   const target = instruction ? 1 : step.repeat;
+  /*
+    Nothing to count on a line said once: the circle shows the way on, as it
+    does for an instruction, and the caption says "Once". "0 of 1" was a
+    counter for nothing (Iyad, 8 Sep 2026).
+  */
+  const counted = !instruction && target > 1;
   const last = index === steps.length - 1;
 
   /*
@@ -262,6 +268,16 @@ export default function AdhkarSessionScreen() {
                 </ThemedText>
               </>
             ) : null}
+            {/*
+              The book's instruction on the row — "after each prayer", "100
+              times a day" — in the book's English, under the words rather
+              than inside them. Gold: a rubric about the text, never the text.
+            */}
+            {label ? (
+              <ThemedText type="small" themeColor="gold">
+                {label}
+              </ThemedText>
+            ) : null}
 
             {/* Why the line is said — rendered only when a reviewed narration
                 exists in the annotations; see HisnAnnotation.virtue. */}
@@ -346,7 +362,7 @@ export default function AdhkarSessionScreen() {
                 stroke={theme.goldSoft}
                 strokeWidth={3}
               />
-              {!instruction && count > 0 ? (
+              {counted && count > 0 ? (
                 <Circle
                   cx={RING_SIZE / 2}
                   cy={RING_SIZE / 2}
@@ -358,20 +374,20 @@ export default function AdhkarSessionScreen() {
                 />
               ) : null}
             </Svg>
+            {/*
+              The count alone, large. The target is the caption under the
+              instrument, in the book's own words — "3 times" — because that
+              is an instruction, where "0 of 3" was two numbers to add up.
+            */}
             <View style={[styles.circle, { backgroundColor: theme.action }]}>
-              {instruction ? (
+              {counted ? (
+                <ThemedText type="subtitle" themeColor="onAction" style={styles.circleCount}>
+                  {count}
+                </ThemedText>
+              ) : (
                 <ThemedText type="subtitle" themeColor="onAction">
                   ›
                 </ThemedText>
-              ) : (
-                <>
-                  <ThemedText type="cardTitle" themeColor="onAction" style={styles.circleCount}>
-                    {count}
-                  </ThemedText>
-                  <ThemedText type="caption" themeColor="onAction" style={styles.circleOf}>
-                    {`of ${target}`}
-                  </ThemedText>
-                </>
               )}
             </View>
           </Pressable>
@@ -388,11 +404,13 @@ export default function AdhkarSessionScreen() {
           </Pressable>
         </View>
 
-        {instruction ? (
-          <ThemedText type="caption" themeColor="textSecondary" style={styles.hint}>
-            {t('adhkar.instruction')}
-          </ThemedText>
-        ) : null}
+        <ThemedText type="caption" themeColor="textSecondary" style={styles.hint}>
+          {instruction
+            ? t('adhkar.instruction')
+            : counted
+              ? t('adhkar.times').replace('{n}', String(target))
+              : t('adhkar.once')}
+        </ThemedText>
       </View>
     </View>
   );
@@ -467,7 +485,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   circleCount: { fontVariant: ['tabular-nums'] },
-  circleOf: { opacity: 0.8 },
   nav: {
     flexDirection: 'row',
     alignItems: 'center',

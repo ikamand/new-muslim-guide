@@ -89,6 +89,12 @@ export type AdhkarStep = {
   arabic: string;
   english: string;
   emphasis?: readonly string[];
+  /**
+   * The book's instruction on the row, in English, when it says more than the
+   * count — "100 times a day", "after each prayer". A count alone is carried
+   * by `repeat` and would only be said twice. See `HisnAnnotation.label`.
+   */
+  label?: string;
   repeat: number;
   /** Something to do rather than something to say. Never counted. */
   instruction: boolean;
@@ -156,14 +162,27 @@ export function stepsForOccasion(
     }
 
     /*
-      ⚠️ The one place the book's own wording is altered — `الصُّبْحِ` to
-      `الفَجْرِ`, on Iyad's instruction. Applied here rather than in `hisn.ts`
-      so the generated file stays exactly what came over the wire and the
-      change is visible in one hand-edited entry.
+      The book's label on the row — its count, its sitting, its occasion —
+      is cut out of the words FIRST, so the label is checked against the row
+      as printed. What is left is tidied only at the seam: the space or comma
+      the cut opened before a full stop, and a doubled stop where the label
+      followed one. Nothing is added.
+    */
+    const cut = note?.label
+      ? { arabic: withoutLabel(line.arabic, note.label.arabic), english: withoutLabel(line.english, note.label.english) }
+      : { arabic: line.arabic, english: line.english };
+
+    /*
+      ⚠️ Where the book's own wording is altered. Unused since 8 Sep 2026 —
+      the one rewrite (`الصُّبْحِ` → `الفَجْرِ`) was made moot when its row's
+      label moved out of the Arabic — but kept, because the check that prints
+      every rewrite is what keeps the next one visible. Applied here rather
+      than in `hisn.ts` so the generated file stays exactly what came over
+      the wire.
     */
     const rewritten = (note?.rewrite ?? []).reduce(
       (text, { from, to }) => text.replace(from, to),
-      line.arabic,
+      cut.arabic,
     );
     const marked = [...(line.emphasis ?? []), ...(note?.emphasis ?? [])];
 
@@ -173,7 +192,8 @@ export function stepsForOccasion(
         key: String(line.id),
         line,
         arabic: rewritten,
-        english: line.english,
+        english: cut.english,
+        label: note?.label ? captionFor(note.label.english) : undefined,
         emphasis: marked.length > 0 ? marked : undefined,
         repeat: note?.repeat ?? line.repeat ?? 1,
         instruction: note?.recited === false,
@@ -205,6 +225,38 @@ export function stepsForOccasion(
   }
 
   return steps;
+}
+
+/** The row with its label cut out and the seam closed. */
+function withoutLabel(text: string, label: string): string {
+  return text
+    .replace(label, '')
+    .replace(/\s+([.،,])/g, '$1')
+    .replace(/\.\s*\./g, '.')
+    .trim();
+}
+
+/**
+ * A label that only restates the count, which `repeat` already carries.
+ *
+ * "(Three times)", "(seven times)", "(100 times)". Shown under the words as
+ * well as on the counter it would say the same thing twice; a label with
+ * anything more in it — a sitting, "a day", an alternative — is kept.
+ */
+export function isCountOnly(label: string): boolean {
+  return /^[\s,(]*[\w-]+\s+times[\s).]*$/i.test(label);
+}
+
+/**
+ * What a label reads as on screen: the book's English without the comma
+ * that joined it to the words or the brackets that set it apart from them —
+ * "(Ten times) or (once when feeling lazy)" reads as a sentence once it is
+ * no longer inside one. Words are never touched.
+ */
+export function captionFor(label: string): string | undefined {
+  if (isCountOnly(label)) return undefined;
+  const bare = label.replace(/[()]/g, '').replace(/\s+/g, ' ').replace(/^[\s,]+|[\s.]+$/g, '');
+  return bare.charAt(0).toUpperCase() + bare.slice(1);
 }
 
 /**

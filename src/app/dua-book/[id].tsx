@@ -168,6 +168,12 @@ export default function DuaBookOccasionScreen() {
               <MarkedText text={step.english} spans={step.emphasis} colour={theme.gold} bold />
             </ThemedText>
           ) : null}
+          {/* The book's instruction on the row, out of the words — see `HisnAnnotation.label`. */}
+          {step.label ? (
+            <ThemedText type="small" themeColor="gold">
+              {step.label}
+            </ThemedText>
+          ) : null}
         </View>
       ))}
     </LessonScroll>

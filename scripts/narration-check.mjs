@@ -31,7 +31,7 @@
  */
 import { HISN } from '../src/content/duas/hisn.ts';
 import { HISN_ANNOTATIONS } from '../src/content/duas/annotations.ts';
-import { ADHKAR_SESSIONS, linesFor, stepsFor } from '../src/content/duas/sessions.ts';
+import { ADHKAR_SESSIONS, isCountOnly, linesFor, stepsFor, stepsForOccasion } from '../src/content/duas/sessions.ts';
 import { pickForNow, resolvePick } from '../src/content/duas/card.ts';
 
 /**
@@ -249,6 +249,54 @@ for (const [key, note] of Object.entries(HISN_ANNOTATIONS)) {
     }
   }
 }
+
+/*
+  7. Every label must be VERBATIM text of its row, and once cut, no step may
+     still carry a printed count inside its words.
+
+     `withoutLabel` is a string replace, and a replace that misses is a
+     no-op — the label would simply stay inside the duʿa and nothing would
+     say so. Twenty-one of the first twenty-two labels written for this file
+     arrived with their combining marks re-ordered by a terminal round trip:
+     same length, same look, not in the row. So the second half checks the
+     OUTCOME rather than the entry — a step whose Arabic still holds the
+     generator's `repeatText`, or any bracketed count, has a label that did
+     not land.
+*/
+let labels = 0;
+const captions = [];
+for (const [key, note] of Object.entries(HISN_ANNOTATIONS)) {
+  if (!note.label) continue;
+  labels += 1;
+  const entry = byId.get(Number(key));
+  if (!entry) continue;
+  if (!entry.line.arabic.includes(note.label.arabic)) {
+    failures += 1;
+    console.error(`\n✗ line ${key}: the label's Arabic is not in the row`);
+    console.error(`    ${note.label.arabic}`);
+  }
+  if (!entry.line.english.includes(note.label.english)) {
+    failures += 1;
+    console.error(`\n✗ line ${key}: the label's English is not in the row`);
+    console.error(`    ${note.label.english}`);
+  }
+  if (!isCountOnly(note.label.english)) captions.push(`${key} "${note.label.english.trim()}"`);
+}
+
+const COUNT_IN_WORDS = /[(\[][^()\[\]]*(?:مرَّ|مرات|مَرَّ|مرة|ثلاث|أربع|سبع|عشر|مائة|مِائَة)[^()\[\]]*[)\]]/;
+for (const occasion of HISN) {
+  for (const step of stepsForOccasion(occasion)) {
+    const printed = step.line.repeatText;
+    if ((printed && step.arabic.includes(printed)) || COUNT_IN_WORDS.test(step.arabic)) {
+      failures += 1;
+      console.error(`\n✗ occasion ${occasion.id}, step ${step.key}: a printed count is still inside the words`);
+      console.error(`    ${step.arabic.slice(-80)}`);
+      console.error('    Cut it with `label` (or `parts`) in annotations.ts.');
+    }
+  }
+}
+console.log(`${labels} labels cut from the words; ${captions.length} shown as captions:`);
+captions.forEach((c) => console.log(`    ${c}`));
 
 console.log(`${counted} counted lines, ${cardLines} distinct card lines, ` +
   `${partStrings} part strings, ${rewrites} rewrite(s) of the book's wording, ` +

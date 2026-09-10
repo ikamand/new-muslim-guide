@@ -98,25 +98,43 @@ const get = async (url) => {
   in illness). An external list was consulted only as a signal of what is
   actually said; every character still comes from QuranEnc.
 
+  Revised 9 Sep 2026 against quran.com/duas, at Iyad's request. Its 101
+  topical pages cite 139 passages; only the ones that are a supplication in
+  the speaker's mouth came in, not verses ABOUT a topic (Āyat al-Kursī, the
+  fasting rulings, the day-and-night signs, the dhikr commands). Four entries
+  that were two cards of one duʿa became one card (2:127–128, 3:8–9,
+  14:40–41, 26:83–85), the same reason 20:25–28 did. Two of the 2 Sep cuts
+  came back — Mūsā 28:24 and Sulaymān 27:19 — because quran.com files them
+  under fifteen and eleven topics respectively and gives 28:24 a page of its
+  own, which is exactly the "what is actually said" signal the axe asked for.
+  Lūṭ, Shuʿayb, Yūsuf 12:101 and Ibrāhīm 2:126 stay out.
+
   `a` may be a single ayah or a [from, to] range of consecutive ayahs — the
   duʿa of 3:191–194 is one supplication across four verses, and slicing it
   into four cards would ask a reader to say a quarter of it. Whole ayahs,
   joined in order, nothing sliced.
 */
 const DUAS = [
+  { id: 'angels-knowledge', who: 'The angels', s: 2, a: 32, note: 'We know only what You taught us' },
   { id: 'adam', who: 'Ādam', s: 7, a: 23, note: 'After the mistake' },
   { id: 'nuh', who: 'Nūḥ', s: 71, a: 28, note: 'For his parents and the believers' },
   { id: 'nuh-refuge', who: 'Nūḥ', s: 11, a: 47, note: 'Refuge from asking wrongly' },
-  { id: 'ibrahim-muslims', who: 'Ibrāhīm', s: 2, a: 128, note: 'For his descendants' },
-  { id: 'ibrahim-prayer', who: 'Ibrāhīm', s: 14, a: 40, note: 'To be kept in prayer' },
-  { id: 'ibrahim-forgive', who: 'Ibrāhīm', s: 14, a: 41, note: 'For his parents' },
-  { id: 'ibrahim-wisdom', who: 'Ibrāhīm', s: 26, a: 83, note: 'For wisdom and good company' },
+  { id: 'ibrahim-muslims', who: 'Ibrāhīm', s: 2, a: [127, 128], note: 'Raising the House' },
+  { id: 'ibrahim-child', who: 'Ibrāhīm', s: 37, a: 100, note: 'For a righteous child' },
+  { id: 'ibrahim-prayer', who: 'Ibrāhīm', s: 14, a: [40, 41], note: 'To be kept in prayer, and for his parents' },
+  { id: 'ibrahim-wisdom', who: 'Ibrāhīm', s: 26, a: [83, 85], note: 'For wisdom and good company' },
+  { id: 'ibrahim-heart', who: 'Ibrāhīm', s: 26, a: [87, 89], note: 'A sound heart' },
+  { id: 'musa-wronged', who: 'Mūsā', s: 28, a: 16, note: 'I have wronged myself' },
+  { id: 'musa-save', who: 'Mūsā', s: 28, a: 21, note: 'Save me from the wrongdoers' },
+  { id: 'musa-need', who: 'Mūsā', s: 28, a: 24, note: 'In need of whatever good You send' },
   // One supplication across four verses — 20:28 is its purpose clause ("that
   // they may understand my speech"), so the three earlier cards were three
   // quarters of a duʿa, each missing the reason for the rest.
   { id: 'musa-chest', who: 'Mūsā', s: 20, a: [25, 28], note: 'Before speaking to Pharaoh' },
   { id: 'musa-forgive', who: 'Mūsā', s: 7, a: 151, note: 'For himself and his brother' },
+  { id: 'magicians', who: 'The magicians who believed', s: 7, a: 126, note: 'Patience, and to die a Muslim' },
   { id: 'musa-people', who: 'The believers with Mūsā', s: 10, a: [85, 86], note: 'Under an oppressor' },
+  { id: 'sulayman-gratitude', who: 'Sulaymān', s: 27, a: 19, note: 'To be grateful' },
   { id: 'zakariyya-offspring', who: 'Zakariyyā', s: 3, a: 38, note: 'For a child' },
   { id: 'zakariyya-alone', who: 'Zakariyyā', s: 21, a: 89, note: 'Do not leave me alone' },
   { id: 'ayyub', who: 'Ayyūb', s: 21, a: 83, note: 'In illness' },
@@ -129,15 +147,21 @@ const DUAS = [
   { id: 'muhammad-entry', who: 'The Prophet ﷺ', s: 17, a: 80, note: 'A true entry and a true exit' },
   { id: 'muhammad-enough', who: 'The Prophet ﷺ', s: 9, a: 129, note: 'Allah is enough for me' },
   { id: 'muhammad-refuge', who: 'The Prophet ﷺ', s: 23, a: [97, 98], note: 'Refuge from the whispers' },
+  { id: 'patient-loss', who: 'The patient', s: 2, a: 156, note: 'When loss strikes' },
   { id: 'believers-both', who: 'The believers', s: 2, a: 201, note: 'Good in both lives' },
   { id: 'believers-burden', who: 'The believers', s: 2, a: 286, note: 'Do not burden us' },
-  { id: 'believers-hearts', who: 'The believers', s: 3, a: 8, note: 'Do not let our hearts deviate' },
+  { id: 'believers-hearts', who: 'The believers', s: 3, a: [8, 9], note: 'Do not let our hearts deviate' },
   { id: 'believers-forgive', who: 'The believers', s: 3, a: 16, note: 'We have believed — forgive us' },
   { id: 'believers-patience', who: 'The believers', s: 3, a: 147, note: 'For steadfastness' },
   { id: 'believers-reflect', who: 'Those who reflect', s: 3, a: [191, 194], note: 'Standing, sitting, and lying down' },
+  { id: 'child-parents', who: 'The believer', s: 17, a: 24, note: 'For parents' },
   { id: 'cave', who: 'The young men of the cave', s: 18, a: 10, note: 'Taking shelter' },
+  { id: 'servants-hell', who: 'The servants of the Most Merciful', s: 25, a: [65, 66], note: 'Turn Hell away from us' },
   { id: 'servants', who: 'The servants of the Most Merciful', s: 25, a: 74, note: 'For family' },
+  { id: 'throne-bearers', who: 'The angels who carry the Throne', s: 40, a: [7, 9], note: 'For the believers' },
+  { id: 'at-forty', who: 'The servant at forty', s: 46, a: 15, note: 'Gratitude, parents, and children' },
   { id: 'later-believers', who: 'Those who came after', s: 59, a: 10, note: 'For those before us' },
+  { id: 'believers-light', who: 'The believers on the Day', s: 66, a: 8, note: 'Perfect our light' },
 ];
 
 console.log(`The duʿas of the Qur'an — ${DUAS.length} references, from QuranEnc\n`);

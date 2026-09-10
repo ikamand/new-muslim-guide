@@ -597,7 +597,8 @@ The four "Recite Al-Fatiha" steps — 5, 13, 22 and 29 across the prayers — se
 people to `/practice`. That was right when the practice screen was the best
 Al-Fatiha screen the app had. It isn't any more: the surah plays straight
 through gaplessly, plays any single ayah, covers a line to test it, offers eight
-reciters and remembers when you know it.
+reciters and remembers when you know it. (Cover was removed 10 Sep 2026 — see
+the surah screen note below; the sentence is kept as it was written.)
 
 So `RecitationCard` routes through `surahForRecitation` — a map, not a check for
 the string `'fatiha'`, because the moment a second surah is recorded for the
@@ -2798,6 +2799,17 @@ target, still present while covered so checking-by-ear works. The frame
 earns ornament from state that already existed: corners (`GirihStar`) when
 `hidden.length > 0` or known, midpoint stars + cartouche wash when the
 reader marks it known. `listTop` now measured on the frame wrapper.
+
+**Cover removed, 10 Sep 2026 — Iyad's call.** Tapping an ayah now opens it
+word by word (`WordGrid`, Imlaei, each word with transliteration and gloss
+from `words.ts`), the same gesture as on a dua card. The reasoning, from the
+conversation: the recite follower listens and confirms each word actually
+said, which tests memory harder than hiding text does, and the cover was
+holding the only gesture an ayah has. What was lost is the silent self-test
+(recite needs a voice and, once, a model download). Consequences in code:
+`hidden`, the ruled-paper drawing, `quran.tapToHide`/`hide`/`reveal` are
+gone; `surahDone` fires when `follow.complete` rather than when the last
+ayah was covered; the frame's corner stars now arrive only with "known".
 
 **Corrected en route:** the artifact claimed covering all ayahs records the
 surah as known — wrong; it records a recitation (`surahDone`, review

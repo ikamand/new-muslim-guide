@@ -8,7 +8,9 @@ import { GirihStar } from '@/components/illustrations';
 import { MushafRosette } from '@/components/jadwal';
 import { ReciteControls, ReciteOpenRow, ReciterTurnPlayer } from '@/components/recite-follow';
 import { ThemedText } from '@/components/themed-text';
+import { WordGrid } from '@/components/word-grid';
 import { ayahTransliteration, ayahWordTransliterations, getSurah, JUZ30_SOURCE } from '@/content/quran/surahs';
+import { ayahWords } from '@/content/quran/words';
 import { ayahSource, keepAyah } from '@/content/quran/ayah-audio';
 import { getReciter, reciterCredit } from '@/content/quran/recitation';
 import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
@@ -22,18 +24,22 @@ import { useTheme } from '@/hooks/use-theme';
 import type { UIKey } from '@/i18n/ui';
 
 /**
- * One surah, to read and then to recite from memory.
+ * One surah, to read, to understand, and then to recite from memory.
  *
- * ## Hide the text
+ * ## Open the words
  *
- * The whole screen turns on one control. Reading an ayah over and over does
- * not commit it — covering it and finding out whether it is there does, and
- * that is the drill every hifz teacher runs and no reading app offers.
+ * Tap an ayah and it opens as a row of words, each with its transliteration
+ * and its meaning under it; tap again and it is a line. The same gesture as
+ * on a dua card, so tapping Arabic means one thing everywhere in the app.
  *
- * So the Arabic can be hidden per ayah, not all at once: you cover the line
- * you are working on, recite it, and reveal it to check, while the ones you
- * have not reached stay visible. Covering the whole surah would be a test
- * rather than a practice.
+ * Until 10 Sep 2026 the tap COVERED the ayah — blank ruled paper, recite it,
+ * tap to check — the drill every hifz teacher runs. Iyad removed it: the
+ * recite follower now listens and confirms each word actually said, which
+ * tests memory harder than hiding text does, and the cover was holding the
+ * only gesture an ayah has. What was lost is the silent self-test — recite
+ * needs a voice and, once, a model download — and that was his call, on the
+ * record. The surah now counts as recited when the follower reaches its end,
+ * where covering the last ayah used to count.
  *
  * ## The translation is secondary here, and that is deliberate
  *
@@ -96,7 +102,8 @@ export default function SurahScreen() {
   const surah = getSurah(Number(number));
   const reciter = getReciter(reciterId);
 
-  const [hidden, setHidden] = useState<readonly number[]>([]);
+  /* Which ayahs are open as words. Per visit, not remembered. */
+  const [open, setOpen] = useState<readonly number[]>([]);
   const [loop, setLoop] = useState(false);
   /**
    * What is running, or nothing.
@@ -169,6 +176,11 @@ export default function SurahScreen() {
   );
   const follow = useReciteFollow(surah?.ayahs ?? [], followStrings, stopPlayback);
   const highlightActive = follow.open && (follow.state === 'listening' || follow.complete);
+  /* Recorded here, above the missing-surah return, because a hook must run
+     on every render; the explanation sits with `toggleWords` below. */
+  useEffect(() => {
+    if (follow.complete && surah) surahDone(surah.number);
+  }, [follow.complete, surah, surahDone]);
   /* The classroom (Phase 6): repeat after the reciter, one ayah at a time.
      Shares the bar, the models and the mic machinery with follow; only one
      of the two modes runs at a time. */
@@ -384,26 +396,18 @@ export default function SurahScreen() {
   };
 
   /*
-    Covering every ayah is somebody reciting the whole surah from memory.
-
-    That is the one honest signal this screen produces. Marking a surah
-    "memorised" is a claim; covering all of it and working through is the act
-    itself, and it is what `observations.surahs` needs so the Qur'an tab can
-    offer back whichever surah has gone longest without being recited.
-
-    Recorded on the last one to be covered rather than on some later
-    completion, because there is no later completion — the reader reveals them
-    again as they check, and a moment when all of them were hidden is the only
-    moment the whole surah was held at once.
+    The follower reaching the end of the surah is somebody having recited the
+    whole of it. That is the one honest signal this screen produces — marking
+    a surah "memorised" is a claim; saying it through, heard, is the act — and
+    it is what `observations.surahs` needs so the Qur'an tab can offer back
+    whichever surah has gone longest without being recited. Covering the last
+    ayah used to record this; the cover is gone and the follower records it,
+    in the effect beside `highlightActive` above.
   */
-  const cover = (ayah: number) =>
-    setHidden((current) => {
-      const next = current.includes(ayah)
-        ? current.filter((n) => n !== ayah)
-        : [...current, ayah];
-      if (next.length === surah.ayahs.length) surahDone(surah.number);
-      return next;
-    });
+  const toggleWords = (ayah: number) =>
+    setOpen((current) =>
+      current.includes(ayah) ? current.filter((n) => n !== ayah) : [...current, ayah],
+    );
 
   return (
     <View style={styles.screen}>
@@ -443,7 +447,7 @@ export default function SurahScreen() {
         </View>
       </View>
       <ThemedText type="small" themeColor="textSecondary" style={styles.centred}>
-        {t('quran.tapToHide')}
+        {t('quran.tapWords')}
       </ThemedText>
 
       {/*
@@ -566,11 +570,11 @@ export default function SurahScreen() {
       )}
 
       {/*
-        The frame that earns its gold. Plain while nothing is held; the
-        corner stars arrive when ayahs start being covered from memory; the
-        midpoint stars complete it — with the cartouche's wash — when the
-        reader marks the surah known. All three states are drawn from state
-        the screen already keeps; nothing new is recorded.
+        The frame that earns its gold. Plain until the reader marks the surah
+        known; then the corner stars and the midpoint stars complete it, with
+        the cartouche's wash. Drawn from state the screen already keeps;
+        nothing new is recorded. (The corners used to arrive as ayahs were
+        covered; the cover is gone, so they arrive with the rest.)
 
         `listTop` is measured here, on the frame wrapper, because the list
         now sits inside the frame and its own layout.y would be relative to
@@ -586,7 +590,7 @@ export default function SurahScreen() {
           <View style={[styles.mframeIn, { borderColor: theme.goldSoft }]}>
             <View style={styles.list}>
         {surah.ayahs.map((ayah, position) => {
-          const isHidden = hidden.includes(ayah.number);
+          const words = ayahWords(surah.number, ayah.number);
           const transliterated = ayahTransliteration(surah.number, ayah.number);
           const isCurrent = currentAyah === ayah.number;
           const sounding = isCurrent && status.playing;
@@ -604,6 +608,10 @@ export default function SurahScreen() {
              word the ear confirmed, vermilion a word the reader moved past —
              the register Phase 6 allows this opt-in mode and no more. */
           const classroomAyah = classroom.active && classroom.ayahIndex === position;
+          /* A live session paints the line word by word itself; the grid
+             yields to it and comes back when the session ends. */
+          const isOpen =
+            !!words && open.includes(ayah.number) && !highlightActive && !classroomAyah;
           const classroomStyle = (w: number) => {
             const wordState = classroom.wordStates.get(w);
             if (wordState === 'confirmed') return { color: theme.malachite };
@@ -618,11 +626,11 @@ export default function SurahScreen() {
             /*
               A View, not a Pressable.
 
-              The play control is a button and the cover toggle is a button,
-              and the first draft nested one inside the other — which is
-              invalid on web and wrong everywhere: tapping play would also
-              cover the ayah you were about to listen to. So the card holds
-              two separate targets, and the text is the one that covers.
+              The play control is a button and the text is a button (it opens
+              the words), and the first draft nested one inside the other —
+              which is invalid on web and wrong everywhere: tapping play would
+              also open the ayah you were about to listen to. So the card
+              holds two separate targets.
             */
             <View
               key={ayah.number}
@@ -646,35 +654,16 @@ export default function SurahScreen() {
                 },
               ]}>
               <Pressable
-                onPress={() => cover(ayah.number)}
+                onPress={() => toggleWords(ayah.number)}
+                disabled={!words}
                 accessibilityRole="button"
-                accessibilityLabel={
-                  isHidden
-                    ? t('quran.reveal').replace('{n}', String(ayah.number))
-                    : t('quran.hide').replace('{n}', String(ayah.number))
-                }
+                accessibilityLabel={t(isOpen ? 'collection.wordsHide' : 'collection.wordsShow')}
                 style={({ pressed }) => [styles.ayahText, { opacity: pressed ? 0.6 : 1 }]}>
-                {isHidden ? (
-                  /*
-                    Blank ruled paper, the rosette holding the ayah's place —
-                    the language Learn speaks for an unwritten lesson, said
-                    the other way round: paper where the text lives in you,
-                    not on the screen. The rule's length roughly echoes the
-                    line's, which is part of what you are learning; covering
-                    an ayah still doesn't make everything below it jump.
-                  */
-                  <View style={styles.coveredLine}>
-                    <MushafRosette label={String(ayah.number)} filled size={28} />
-                    <View
-                      style={[
-                        styles.coveredRule,
-                        {
-                          backgroundColor: theme.goldSoft,
-                          width: `${Math.max(28, Math.min(84, Math.round(ayah.arabic.length * 1.4)))}%`,
-                        },
-                      ]}
-                    />
-                  </View>
+                {isOpen && words ? (
+                  /* The same words the line shows, Imlaei like the line, with
+                     the ayah's number closing the row as the rosette closes
+                     the line. */
+                  <WordGrid ayahs={[{ number: ayah.number, words }]} script="imlaei" numbered />
                 ) : (
                   /*
                     The marker rides INSIDE the text at the ayah's end, where
@@ -708,13 +697,15 @@ export default function SurahScreen() {
 
               {/*
                 The Latin lines and the play control share the card's foot —
-                the play button is a SIBLING of the cover target, never a
-                child, and it stays through a covered state so the reader can
-                listen while checking themselves.
+                the play button is a SIBLING of the text's target, never a
+                child. The transliteration line steps aside while the words
+                are open, since each word then carries its own; the
+                translation stays, because the sentence still says what the
+                glosses only spell.
               */}
               <View style={styles.ayahFoot}>
                 <View style={styles.footLines}>
-                  {transliteration && !isHidden && transliterated ? (
+                  {transliteration && !isOpen && transliterated ? (
                     (highlightActive || classroomAyah) &&
                     translitWords &&
                     translitWords.length === arabicWords.length ? (
@@ -741,7 +732,7 @@ export default function SurahScreen() {
                       </ThemedText>
                     )
                   ) : null}
-                  {translation && !isHidden ? (
+                  {translation ? (
                     <ThemedText type="small" themeColor="textSecondary">
                       {ayah.translation}
                     </ThemedText>
@@ -782,7 +773,7 @@ export default function SurahScreen() {
             </View>
           </View>
         </View>
-        {(hidden.length > 0 || known) && (
+        {known && (
           <>
             <View style={[styles.corner, styles.cornerTL]}>
               <GirihStar filled size={13} color={theme.gold} trackColor={theme.gold} />
@@ -983,16 +974,6 @@ const styles = StyleSheet.create({
   */
   inlineRosette: {
     transform: [{ translateY: 6 }],
-  },
-  coveredLine: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    gap: Spacing.two,
-    minHeight: 58,
-  },
-  coveredRule: {
-    height: 1,
   },
   /** Latin, so it never takes the Arabic face. */
   transliteration: {

@@ -1,9 +1,9 @@
 import { StyleSheet, View } from 'react-native';
 
+import { MushafRosette } from '@/components/jadwal';
 import { ThemedText } from '@/components/themed-text';
 import { Spacing } from '@/constants/theme';
 import type { AyahWord } from '@/content/quran/words';
-import { useTheme } from '@/hooks/use-theme';
 
 /**
  * An ayah, or a run of them, as a row of words — each with its gloss and its
@@ -36,11 +36,16 @@ import { useTheme } from '@/hooks/use-theme';
  */
 export function WordGrid({
   ayahs,
+  script = 'uthmani',
+  numbered = false,
 }: {
   ayahs: readonly { number: number; words: readonly AyahWord[] }[];
+  /** Which form of each word to set: the line above decides, so the two agree. */
+  script?: 'uthmani' | 'imlaei';
+  /** Close every row with its ayah number, even a lone one. */
+  numbered?: boolean;
 }) {
-  const theme = useTheme();
-  const several = ayahs.length > 1;
+  const several = numbered || ayahs.length > 1;
   return (
     <View style={styles.grid}>
       {ayahs.map((ayah) => (
@@ -48,7 +53,7 @@ export function WordGrid({
           {ayah.words.map((word, index) => (
             <View key={index} style={styles.cell}>
               <ThemedText type="arabicQuote" style={styles.arabic}>
-                {word.ar}
+                {script === 'imlaei' ? word.im : word.ar}
               </ThemedText>
               <ThemedText type="caption" themeColor="textSecondary" style={styles.transliteration}>
                 {word.tr}
@@ -59,10 +64,9 @@ export function WordGrid({
             </View>
           ))}
           {several ? (
+            /* The mushaf's own marker, as the surah screen sets it inline. */
             <View style={[styles.cell, styles.marker]}>
-              <ThemedText type="caption" style={{ color: theme.gold }}>
-                {ayah.number}
-              </ThemedText>
+              <MushafRosette label={String(ayah.number)} size={28} />
             </View>
           ) : null}
         </View>

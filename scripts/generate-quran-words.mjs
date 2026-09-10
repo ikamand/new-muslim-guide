@@ -8,11 +8,10 @@
  * ## Why only these ayahs
  *
  * The cache holds the whole Qur'an. The bundle should hold what a screen can
- * open: a word view is reached by tapping the Arabic on a dua card, so the
- * duas' verses are here, and Al-Fatihah because every reader prays it. Juz 30
- * is 564 more ayahs, about 400 KB of gloss nothing renders yet; it joins this
- * list on the day the surah screen opens a word view, by adding its surahs to
- * `WHOLE_SURAHS` below.
+ * open: a word view is reached by tapping the Arabic on a dua card or on an
+ * ayah of the surah screen, so the duas' verses are here and so is every
+ * surah that screen lists — Al-Fatihah and juz 30. Since 10 Sep 2026, when
+ * the surah screen's tap stopped covering an ayah and started opening it.
  *
  * ## What a word is
  *
@@ -37,8 +36,9 @@ import { QURANIC_DUAS } from '../src/content/collections/quranic-duas.ts';
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const cache = join(root, '.cache/quran/words');
 
-/** Surahs shown whole, every ayah. */
+/** Surahs shown whole, every ayah: Al-Fatihah and juz 30, the surah screen's list. */
 const WHOLE_SURAHS = [1];
+for (let n = 78; n <= 114; n += 1) WHOLE_SURAHS.push(n);
 
 /* Every ayah wanted, as "s:a", in mushaf order. */
 const wanted = new Set();
@@ -82,10 +82,11 @@ for (const key of keys) {
     .filter((w) => w.char_type_name === 'word')
     .map((w) => {
       const ar = w.text_uthmani?.trim();
+      const im = w.text_imlaei?.trim();
       const en = w.translation?.text?.trim();
       const tr = w.transliteration?.text?.trim();
-      if (!ar || !en || !tr) throw new Error(`${key} word ${w.position}: missing text, gloss or transliteration`);
-      return { ar, en, tr };
+      if (!ar || !im || !en || !tr) throw new Error(`${key} word ${w.position}: missing text, gloss or transliteration`);
+      return { ar, im, en, tr };
     });
   if (row.length === 0) throw new Error(`${key}: no words`);
   words[key] = row;
@@ -113,8 +114,10 @@ export const WORDS_SOURCE = {
 } as const;
 
 export type AyahWord = {
-  /** The word, Uthmani. */
+  /** The word, Uthmani — the script the dua cards set. */
   ar: string;
+  /** The same word, Imlaei — the script the surah screen sets. */
+  im: string;
   /** Its English gloss. */
   en: string;
   /** Its transliteration. */

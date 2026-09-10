@@ -4,6 +4,7 @@ import { ThemedText } from '@/components/themed-text';
 import { AUDIO_SOURCE_BY_ID, SOURCES, type AudioSource } from '@/content/audio-sources';
 import { RECITERS } from '@/content/quran/recitation';
 import { JUZ30_SOURCE } from '@/content/quran/surahs';
+import { WORDS_SOURCE } from '@/content/quran/words';
 import { creditedTextSources } from '@/content/text-sources';
 import { MaxContentWidth, Spacing } from '@/constants/theme';
 import { Teaching } from '@/constants/teaching';
@@ -74,6 +75,7 @@ export default function SourcesScreen() {
       <Group title={t('sources.quran')}>
         <Credit first name={JUZ30_SOURCE.arabic} detail={t('sources.quran.arabic')} />
         <Credit name={JUZ30_SOURCE.translation} detail={t('sources.quran.translation')} />
+        <Credit name={WORDS_SOURCE.name} where={WORDS_SOURCE.where} detail={t('sources.quran.words')} />
       </Group>
 
       <Group title={t('sources.texts')}>

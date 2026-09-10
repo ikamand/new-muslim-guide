@@ -1,8 +1,12 @@
 import { Stack, useLocalSearchParams } from 'expo-router';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { useState } from 'react';
+import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
+import { WordGrid } from '@/components/word-grid';
 import { getCollection } from '@/content/collections';
+import { ayahWords, type AyahWord } from '@/content/quran/words';
+import type { CollectionEntry } from '@/content/types';
 import { MaxContentWidth, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { useTheme } from '@/hooks/use-theme';
@@ -34,11 +38,36 @@ import { useTheme } from '@/hooks/use-theme';
  * something you read. Dressing an unreviewed line as a recitation makes a
  * claim the app cannot support.
  */
+/**
+ * The word-by-word rows for an entry, where the app has them for EVERY ayah
+ * it cites — or nothing. Half a dua as words and half as a line would be a
+ * puzzle, so an entry is either openable or it is not. Driven by the data,
+ * not by which collection this is: any entry citing ayahs that
+ * `words.ts` carries gets the affordance, and one citing ayahs it does not
+ * carry shows as it always did.
+ */
+function wordRows(entry: CollectionEntry) {
+  const rows: { number: number; words: readonly AyahWord[] }[] = [];
+  for (const source of entry.sources ?? []) {
+    if (source.kind !== 'quran') return undefined;
+    const [from, to] = typeof source.ayah === 'number' ? [source.ayah, source.ayah] : source.ayah;
+    for (let n = from; n <= to; n += 1) {
+      const words = ayahWords(source.surah, n);
+      if (!words) return undefined;
+      rows.push({ number: n, words });
+    }
+  }
+  return rows.length > 0 ? rows : undefined;
+}
+
 export default function CollectionScreen() {
   const theme = useTheme();
   const { t } = useLocale();
   const { id } = useLocalSearchParams<{ id: string }>();
   const collection = getCollection(id);
+  /* Which entries are open as words. Per screen, not remembered: opening a
+     dua word by word is a moment of study, not a setting. */
+  const [open, setOpen] = useState<readonly string[]>([]);
 
   if (!collection) {
     return (
@@ -63,6 +92,13 @@ export default function CollectionScreen() {
       <ThemedText type="default" themeColor="textSecondary" style={styles.subtitle}>
         {collection.subtitle}
       </ThemedText>
+
+      {/* One line, once, and only where something on the page will answer it. */}
+      {collection.entries.some((entry) => wordRows(entry)) ? (
+        <ThemedText type="small" themeColor="textSecondary">
+          {t('collection.tapWords')}
+        </ThemedText>
+      ) : null}
 
       {collection.entries.map((entry, index) => (
         <View
@@ -110,16 +146,47 @@ export default function CollectionScreen() {
             a line before the meaning.
           */}
           {entry.arabic ? (
-            <View style={styles.words}>
-              <ThemedText type="arabicLead" style={styles.arabic}>
-                {entry.arabic}
-              </ThemedText>
-              {entry.transliteration ? (
-                <ThemedText type="small" themeColor="textSecondary" style={styles.transliteration}>
-                  {entry.transliteration}
-                </ThemedText>
-              ) : null}
-            </View>
+            /*
+              Where the words are known, the Arabic is a button that opens
+              the line as words and closes it again. A Pressable around the
+              text and nothing else — the card itself is a plain View, so no
+              button ever sits inside another. Where they are not known, the
+              same block renders with no press target and no hint of one.
+            */
+            (() => {
+              const rows = wordRows(entry);
+              const isOpen = open.includes(entry.id);
+              const block = (
+                <View style={styles.words}>
+                  {rows && isOpen ? (
+                    <WordGrid ayahs={rows} />
+                  ) : (
+                    <ThemedText type="arabicLead" style={styles.arabic}>
+                      {entry.arabic}
+                    </ThemedText>
+                  )}
+                  {entry.transliteration && !isOpen ? (
+                    <ThemedText type="small" themeColor="textSecondary" style={styles.transliteration}>
+                      {entry.transliteration}
+                    </ThemedText>
+                  ) : null}
+                </View>
+              );
+              if (!rows) return block;
+              return (
+                <Pressable
+                  onPress={() =>
+                    setOpen((current) =>
+                      isOpen ? current.filter((x) => x !== entry.id) : [...current, entry.id],
+                    )
+                  }
+                  accessibilityRole="button"
+                  accessibilityLabel={t(isOpen ? 'collection.wordsHide' : 'collection.wordsShow')}
+                  style={({ pressed }) => ({ opacity: pressed ? 0.6 : 1 })}>
+                  {block}
+                </Pressable>
+              );
+            })()
           ) : null}
 
           {entry.arabic ? (

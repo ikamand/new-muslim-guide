@@ -532,6 +532,9 @@ export const EN = {
   'duaBook.showAll': 'Show every occasion',
   'duaBook.missing': 'That occasion is not in the book.',
   'collection.missing': 'That collection is not in the app.',
+  'collection.tapWords': 'Tap the Arabic to read it word by word.',
+  'collection.wordsShow': 'Show word by word',
+  'collection.wordsHide': 'Show as one line',
 
   /*
     The memorisation tab.
@@ -1106,6 +1109,7 @@ export const EN = {
   'sources.quran': 'The Qur’an',
   'sources.quran.arabic': 'The Arabic of every surah you can read and memorise',
   'sources.quran.translation': 'The translation printed under it',
+  'sources.quran.words': 'The word-by-word gloss and transliteration',
   'sources.texts': 'Quoted in the lessons',
   'sources.voices': 'Recitation',
   'sources.places': 'Places',

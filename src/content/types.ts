@@ -336,6 +336,16 @@ export type Reference = {
  */
 export type CollectionEntry = {
   id: string;
+  /**
+   * The heading this entry sits under, where a collection is grouped.
+   *
+   * On the entry rather than as a nested list so that every consumer of
+   * `entries` — search, the daily pick, the Learn references — keeps reading
+   * one flat, ordered array. The screen prints a heading wherever the section
+   * changes from the entry before, so the order of the entries IS the order
+   * of the sections, and a collection with no sections sets none.
+   */
+  section?: string;
   /** What the entry is called. "Ar-Raḥmān", "The year of sorrow". */
   title: string;
   /** The Arabic, where the entry is an Arabic text. Never transliterated by us. */

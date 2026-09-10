@@ -5,7 +5,7 @@
  * here is lost the next time it runs, and one that needs making belongs
  * upstream, where the text is published.
  *
- * 184 Qur'an passages and 208 narrations. Every character came over
+ * 205 Qur'an passages and 208 narrations. Every character came over
  * the wire from a published text rather than from memory, which is the only
  * way a file like this could exist under this project's rules about Arabic.
  *
@@ -913,177 +913,9 @@ export const QURAN_TEXT: Record<string, EvidenceText> = {
     "arabicFrom": "QuranEnc.com",
     "translationFrom": "QuranEnc.com"
   },
-  "2:32": {
-    "arabic": "قَالُواْ سُبۡحَٰنَكَ لَا عِلۡمَ لَنَآ إِلَّا مَا عَلَّمۡتَنَآۖ إِنَّكَ أَنتَ ٱلۡعَلِيمُ ٱلۡحَكِيمُ",
-    "translation": "They said, \"Exalted are You; we have no knowledge except what You have taught us. Indeed, it is You who is the Knowing, the Wise.\"",
-    "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
-  },
-  "7:23": {
-    "arabic": "قَالَا رَبَّنَا ظَلَمۡنَآ أَنفُسَنَا وَإِن لَّمۡ تَغۡفِرۡ لَنَا وَتَرۡحَمۡنَا لَنَكُونَنَّ مِنَ ٱلۡخَٰسِرِينَ",
-    "translation": "They said, \"Our Lord, we have wronged ourselves, and if You do not forgive us and have mercy upon us, we will surely be among the losers.\"",
-    "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
-  },
-  "71:28": {
-    "arabic": "رَّبِّ ٱغۡفِرۡ لِي وَلِوَٰلِدَيَّ وَلِمَن دَخَلَ بَيۡتِيَ مُؤۡمِنٗا وَلِلۡمُؤۡمِنِينَ وَٱلۡمُؤۡمِنَٰتِۖ وَلَا تَزِدِ ٱلظَّٰلِمِينَ إِلَّا تَبَارَۢا",
-    "translation": "My Lord, forgive me and my parents and whoever enters my house a believer and the believing men and believing women. And do not increase the wrongdoers except in destruction.\"",
-    "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
-  },
-  "11:47": {
-    "arabic": "قَالَ رَبِّ إِنِّيٓ أَعُوذُ بِكَ أَنۡ أَسۡـَٔلَكَ مَا لَيۡسَ لِي بِهِۦ عِلۡمٞۖ وَإِلَّا تَغۡفِرۡ لِي وَتَرۡحَمۡنِيٓ أَكُن مِّنَ ٱلۡخَٰسِرِينَ",
-    "translation": "[Noah] said, \"My Lord, I seek refuge in You from asking that of which I have no knowledge. And unless You forgive me and have mercy upon me, I will be among the losers.\"",
-    "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
-  },
   "2:127-128": {
     "arabic": "وَإِذۡ يَرۡفَعُ إِبۡرَٰهِـۧمُ ٱلۡقَوَاعِدَ مِنَ ٱلۡبَيۡتِ وَإِسۡمَٰعِيلُ رَبَّنَا تَقَبَّلۡ مِنَّآۖ إِنَّكَ أَنتَ ٱلسَّمِيعُ ٱلۡعَلِيمُ رَبَّنَا وَٱجۡعَلۡنَا مُسۡلِمَيۡنِ لَكَ وَمِن ذُرِّيَّتِنَآ أُمَّةٗ مُّسۡلِمَةٗ لَّكَ وَأَرِنَا مَنَاسِكَنَا وَتُبۡ عَلَيۡنَآۖ إِنَّكَ أَنتَ ٱلتَّوَّابُ ٱلرَّحِيمُ",
     "translation": "And [mention] when Abraham was raising the foundations of the House and [with him] Ishmael, [saying], \"Our Lord, accept [this] from us. Indeed, You are the Hearing, the Knowing. Our Lord, and make us Muslims [in submission] to You and from our descendants a Muslim nation [in submission] to You. And show us our rites [of worship] and accept our repentance. Indeed, You are the Accepting of Repentance, the Merciful.",
-    "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
-  },
-  "37:100": {
-    "arabic": "رَبِّ هَبۡ لِي مِنَ ٱلصَّٰلِحِينَ",
-    "translation": "My Lord, grant me [a child] from among the righteous.\"",
-    "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
-  },
-  "14:40-41": {
-    "arabic": "رَبِّ ٱجۡعَلۡنِي مُقِيمَ ٱلصَّلَوٰةِ وَمِن ذُرِّيَّتِيۚ رَبَّنَا وَتَقَبَّلۡ دُعَآءِ رَبَّنَا ٱغۡفِرۡ لِي وَلِوَٰلِدَيَّ وَلِلۡمُؤۡمِنِينَ يَوۡمَ يَقُومُ ٱلۡحِسَابُ",
-    "translation": "My Lord, make me an establisher of prayer, and [many] from my descendants. Our Lord, and accept my supplication. Our Lord, forgive me and my parents and the believers the Day the account is established.\"",
-    "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
-  },
-  "26:83-85": {
-    "arabic": "رَبِّ هَبۡ لِي حُكۡمٗا وَأَلۡحِقۡنِي بِٱلصَّٰلِحِينَ وَٱجۡعَل لِّي لِسَانَ صِدۡقٖ فِي ٱلۡأٓخِرِينَ وَٱجۡعَلۡنِي مِن وَرَثَةِ جَنَّةِ ٱلنَّعِيمِ",
-    "translation": "[And he said], \"My Lord, grant me authority and join me with the righteous. And grant me a mention [i.e., reputation] of honor among later generations. And place me among the inheritors of the Garden of Pleasure.",
-    "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
-  },
-  "26:87-89": {
-    "arabic": "وَلَا تُخۡزِنِي يَوۡمَ يُبۡعَثُونَ يَوۡمَ لَا يَنفَعُ مَالٞ وَلَا بَنُونَ إِلَّا مَنۡ أَتَى ٱللَّهَ بِقَلۡبٖ سَلِيمٖ",
-    "translation": "And do not disgrace me on the Day they are [all] resurrected - The Day when there will not benefit [anyone] wealth or children But only one who comes to Allāh with a sound heart.\"",
-    "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
-  },
-  "28:16": {
-    "arabic": "قَالَ رَبِّ إِنِّي ظَلَمۡتُ نَفۡسِي فَٱغۡفِرۡ لِي فَغَفَرَ لَهُۥٓۚ إِنَّهُۥ هُوَ ٱلۡغَفُورُ ٱلرَّحِيمُ",
-    "translation": "He said, \"My Lord, indeed I have wronged myself, so forgive me,\" and He forgave him. Indeed, He is the Forgiving, the Merciful.",
-    "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
-  },
-  "28:21": {
-    "arabic": "فَخَرَجَ مِنۡهَا خَآئِفٗا يَتَرَقَّبُۖ قَالَ رَبِّ نَجِّنِي مِنَ ٱلۡقَوۡمِ ٱلظَّٰلِمِينَ",
-    "translation": "So he left it, fearful and anticipating [apprehension]. He said, \"My Lord, save me from the wrongdoing people.\"",
-    "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
-  },
-  "28:24": {
-    "arabic": "فَسَقَىٰ لَهُمَا ثُمَّ تَوَلَّىٰٓ إِلَى ٱلظِّلِّ فَقَالَ رَبِّ إِنِّي لِمَآ أَنزَلۡتَ إِلَيَّ مِنۡ خَيۡرٖ فَقِيرٞ",
-    "translation": "So he watered [their flocks] for them; then he went back to the shade and said, \"My Lord, indeed I am, for whatever good You would send down to me, in need.\"",
-    "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
-  },
-  "20:25-28": {
-    "arabic": "قَالَ رَبِّ ٱشۡرَحۡ لِي صَدۡرِي وَيَسِّرۡ لِيٓ أَمۡرِي وَٱحۡلُلۡ عُقۡدَةٗ مِّن لِّسَانِي يَفۡقَهُواْ قَوۡلِي",
-    "translation": "[Moses] said, \"My Lord, expand [i.e., relax] for me my breast [with assurance] And ease for me my task And untie the knot from my tongue That they may understand my speech.",
-    "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
-  },
-  "7:151": {
-    "arabic": "قَالَ رَبِّ ٱغۡفِرۡ لِي وَلِأَخِي وَأَدۡخِلۡنَا فِي رَحۡمَتِكَۖ وَأَنتَ أَرۡحَمُ ٱلرَّٰحِمِينَ",
-    "translation": "[Moses] said, \"My Lord, forgive me and my brother and admit us into Your mercy, for You are the most merciful of the merciful.\"",
-    "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
-  },
-  "7:126": {
-    "arabic": "وَمَا تَنقِمُ مِنَّآ إِلَّآ أَنۡ ءَامَنَّا بِـَٔايَٰتِ رَبِّنَا لَمَّا جَآءَتۡنَاۚ رَبَّنَآ أَفۡرِغۡ عَلَيۡنَا صَبۡرٗا وَتَوَفَّنَا مُسۡلِمِينَ",
-    "translation": "And you do not resent us except because we believed in the signs of our Lord when they came to us. Our Lord, pour upon us patience and let us die as Muslims [in submission to You].\"",
-    "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
-  },
-  "10:85-86": {
-    "arabic": "فَقَالُواْ عَلَى ٱللَّهِ تَوَكَّلۡنَا رَبَّنَا لَا تَجۡعَلۡنَا فِتۡنَةٗ لِّلۡقَوۡمِ ٱلظَّٰلِمِينَ وَنَجِّنَا بِرَحۡمَتِكَ مِنَ ٱلۡقَوۡمِ ٱلۡكَٰفِرِينَ",
-    "translation": "So they said, \"Upon Allāh do we rely. Our Lord, make us not [objects of] trial for the wrongdoing people And save us by Your mercy from the disbelieving people.\"",
-    "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
-  },
-  "27:19": {
-    "arabic": "فَتَبَسَّمَ ضَاحِكٗا مِّن قَوۡلِهَا وَقَالَ رَبِّ أَوۡزِعۡنِيٓ أَنۡ أَشۡكُرَ نِعۡمَتَكَ ٱلَّتِيٓ أَنۡعَمۡتَ عَلَيَّ وَعَلَىٰ وَٰلِدَيَّ وَأَنۡ أَعۡمَلَ صَٰلِحٗا تَرۡضَىٰهُ وَأَدۡخِلۡنِي بِرَحۡمَتِكَ فِي عِبَادِكَ ٱلصَّٰلِحِينَ",
-    "translation": "So [Solomon] smiled, amused at her speech, and said, \"My Lord, enable me to be grateful for Your favor which You have bestowed upon me and upon my parents and to do righteousness of which You approve. And admit me by Your mercy into [the ranks of] Your righteous servants.\"",
-    "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
-  },
-  "3:38": {
-    "arabic": "هُنَالِكَ دَعَا زَكَرِيَّا رَبَّهُۥۖ قَالَ رَبِّ هَبۡ لِي مِن لَّدُنكَ ذُرِّيَّةٗ طَيِّبَةًۖ إِنَّكَ سَمِيعُ ٱلدُّعَآءِ",
-    "translation": "At that, Zechariah called upon his Lord, saying, \"My Lord, grant me from Yourself a good offspring. Indeed, You are the Hearer of supplication.\"",
-    "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
-  },
-  "21:89": {
-    "arabic": "وَزَكَرِيَّآ إِذۡ نَادَىٰ رَبَّهُۥ رَبِّ لَا تَذَرۡنِي فَرۡدٗا وَأَنتَ خَيۡرُ ٱلۡوَٰرِثِينَ",
-    "translation": "And [mention] Zechariah, when he called to his Lord, \"My Lord, do not leave me alone [with no heir], while You are the best of inheritors.\"",
-    "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
-  },
-  "21:83": {
-    "arabic": "۞ وَأَيُّوبَ إِذۡ نَادَىٰ رَبَّهُۥٓ أَنِّي مَسَّنِيَ ٱلضُّرُّ وَأَنتَ أَرۡحَمُ ٱلرَّٰحِمِينَ",
-    "translation": "And [mention] Job, when he called to his Lord, \"Indeed, adversity has touched me, and You are the most merciful of the merciful.\"",
-    "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
-  },
-  "21:87": {
-    "arabic": "وَذَا ٱلنُّونِ إِذ ذَّهَبَ مُغَٰضِبٗا فَظَنَّ أَن لَّن نَّقۡدِرَ عَلَيۡهِ فَنَادَىٰ فِي ٱلظُّلُمَٰتِ أَن لَّآ إِلَٰهَ إِلَّآ أَنتَ سُبۡحَٰنَكَ إِنِّي كُنتُ مِنَ ٱلظَّٰلِمِينَ",
-    "translation": "And [mention] the man of the fish [i.e., Jonah], when he went off in anger and thought that We would not decree [anything] upon him. And he called out within the darknesses, \"There is no deity except You; exalted are You. Indeed, I have been of the wrongdoers.\"",
-    "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
-  },
-  "2:250": {
-    "arabic": "وَلَمَّا بَرَزُواْ لِجَالُوتَ وَجُنُودِهِۦ قَالُواْ رَبَّنَآ أَفۡرِغۡ عَلَيۡنَا صَبۡرٗا وَثَبِّتۡ أَقۡدَامَنَا وَٱنصُرۡنَا عَلَى ٱلۡقَوۡمِ ٱلۡكَٰفِرِينَ",
-    "translation": "And when they went forth to [face] Goliath and his soldiers, they said, \"Our Lord, pour upon us patience and plant firmly our feet and give us victory over the disbelieving people.\"",
-    "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
-  },
-  "3:35": {
-    "arabic": "إِذۡ قَالَتِ ٱمۡرَأَتُ عِمۡرَٰنَ رَبِّ إِنِّي نَذَرۡتُ لَكَ مَا فِي بَطۡنِي مُحَرَّرٗا فَتَقَبَّلۡ مِنِّيٓۖ إِنَّكَ أَنتَ ٱلسَّمِيعُ ٱلۡعَلِيمُ",
-    "translation": "[Mention, O Muḥammad], when the wife of ʿImrān said, \"My Lord, indeed I have pledged to You what is in my womb, consecrated [for Your service], so accept this from me. Indeed, You are the Hearing, the Knowing.\"",
-    "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
-  },
-  "66:11": {
-    "arabic": "وَضَرَبَ ٱللَّهُ مَثَلٗا لِّلَّذِينَ ءَامَنُواْ ٱمۡرَأَتَ فِرۡعَوۡنَ إِذۡ قَالَتۡ رَبِّ ٱبۡنِ لِي عِندَكَ بَيۡتٗا فِي ٱلۡجَنَّةِ وَنَجِّنِي مِن فِرۡعَوۡنَ وَعَمَلِهِۦ وَنَجِّنِي مِنَ ٱلۡقَوۡمِ ٱلظَّٰلِمِينَ",
-    "translation": "And Allāh presents an example of those who believed: the wife of Pharaoh, when she said, \"My Lord, build for me near You a house in Paradise and save me from Pharaoh and his deeds and save me from the wrongdoing people.\"",
-    "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
-  },
-  "20:114": {
-    "arabic": "فَتَعَٰلَى ٱللَّهُ ٱلۡمَلِكُ ٱلۡحَقُّۗ وَلَا تَعۡجَلۡ بِٱلۡقُرۡءَانِ مِن قَبۡلِ أَن يُقۡضَىٰٓ إِلَيۡكَ وَحۡيُهُۥۖ وَقُل رَّبِّ زِدۡنِي عِلۡمٗا",
-    "translation": "So high [above all] is Allāh, the Sovereign, the Truth. And, [O Muḥammad], do not hasten with [recitation of] the Qur’ān before its revelation is completed to you, and say, \"My Lord, increase me in knowledge.\"",
-    "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
-  },
-  "23:118": {
-    "arabic": "وَقُل رَّبِّ ٱغۡفِرۡ وَٱرۡحَمۡ وَأَنتَ خَيۡرُ ٱلرَّٰحِمِينَ",
-    "translation": "And, [O Muḥammad], say, \"My Lord, forgive and have mercy, and You are the best of the merciful.\"",
-    "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
-  },
-  "17:80": {
-    "arabic": "وَقُل رَّبِّ أَدۡخِلۡنِي مُدۡخَلَ صِدۡقٖ وَأَخۡرِجۡنِي مُخۡرَجَ صِدۡقٖ وَٱجۡعَل لِّي مِن لَّدُنكَ سُلۡطَٰنٗا نَّصِيرٗا",
-    "translation": "And say, \"My Lord, cause me to enter a sound entrance and to exit a sound exit and grant me from Yourself a supporting authority.\"",
-    "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
-  },
-  "9:129": {
-    "arabic": "فَإِن تَوَلَّوۡاْ فَقُلۡ حَسۡبِيَ ٱللَّهُ لَآ إِلَٰهَ إِلَّا هُوَۖ عَلَيۡهِ تَوَكَّلۡتُۖ وَهُوَ رَبُّ ٱلۡعَرۡشِ ٱلۡعَظِيمِ",
-    "translation": "But if they turn away, [O Muḥammad], say, \"Sufficient for me is Allāh; there is no deity except Him. On Him I have relied, and He is the Lord of the Great Throne.\"",
-    "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
-  },
-  "23:97-98": {
-    "arabic": "وَقُل رَّبِّ أَعُوذُ بِكَ مِنۡ هَمَزَٰتِ ٱلشَّيَٰطِينِ وَأَعُوذُ بِكَ رَبِّ أَن يَحۡضُرُونِ",
-    "translation": "And say, \"My Lord, I seek refuge in You from the incitements of the devils, And I seek refuge in You, my Lord, lest they be present with me.\"",
     "arabicFrom": "QuranEnc.com",
     "translationFrom": "QuranEnc.com"
   },
@@ -1093,27 +925,9 @@ export const QURAN_TEXT: Record<string, EvidenceText> = {
     "arabicFrom": "QuranEnc.com",
     "translationFrom": "QuranEnc.com"
   },
-  "3:8-9": {
-    "arabic": "رَبَّنَا لَا تُزِغۡ قُلُوبَنَا بَعۡدَ إِذۡ هَدَيۡتَنَا وَهَبۡ لَنَا مِن لَّدُنكَ رَحۡمَةًۚ إِنَّكَ أَنتَ ٱلۡوَهَّابُ رَبَّنَآ إِنَّكَ جَامِعُ ٱلنَّاسِ لِيَوۡمٖ لَّا رَيۡبَ فِيهِۚ إِنَّ ٱللَّهَ لَا يُخۡلِفُ ٱلۡمِيعَادَ",
-    "translation": "[Who say], \"Our Lord, let not our hearts deviate after You have guided us and grant us from Yourself mercy. Indeed, You are the Bestower. Our Lord, surely You will gather the people for a Day about which there is no doubt. Indeed, Allāh does not fail in His promise.\"",
-    "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
-  },
-  "3:16": {
-    "arabic": "ٱلَّذِينَ يَقُولُونَ رَبَّنَآ إِنَّنَآ ءَامَنَّا فَٱغۡفِرۡ لَنَا ذُنُوبَنَا وَقِنَا عَذَابَ ٱلنَّارِ",
-    "translation": "Those who say, 'Our Lord, indeed we have believed, so forgive us our sins and protect us from the punishment of the Fire,' \"",
-    "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
-  },
-  "3:147": {
-    "arabic": "وَمَا كَانَ قَوۡلَهُمۡ إِلَّآ أَن قَالُواْ رَبَّنَا ٱغۡفِرۡ لَنَا ذُنُوبَنَا وَإِسۡرَافَنَا فِيٓ أَمۡرِنَا وَثَبِّتۡ أَقۡدَامَنَا وَٱنصُرۡنَا عَلَى ٱلۡقَوۡمِ ٱلۡكَٰفِرِينَ",
-    "translation": "And their words were not but that they said, \"Our Lord, forgive us our sins and the excess [committed] in our affairs and plant firmly our feet and give us victory over the disbelieving people.\"",
-    "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
-  },
-  "3:191-194": {
-    "arabic": "ٱلَّذِينَ يَذۡكُرُونَ ٱللَّهَ قِيَٰمٗا وَقُعُودٗا وَعَلَىٰ جُنُوبِهِمۡ وَيَتَفَكَّرُونَ فِي خَلۡقِ ٱلسَّمَٰوَٰتِ وَٱلۡأَرۡضِ رَبَّنَا مَا خَلَقۡتَ هَٰذَا بَٰطِلٗا سُبۡحَٰنَكَ فَقِنَا عَذَابَ ٱلنَّارِ رَبَّنَآ إِنَّكَ مَن تُدۡخِلِ ٱلنَّارَ فَقَدۡ أَخۡزَيۡتَهُۥۖ وَمَا لِلظَّٰلِمِينَ مِنۡ أَنصَارٖ رَّبَّنَآ إِنَّنَا سَمِعۡنَا مُنَادِيٗا يُنَادِي لِلۡإِيمَٰنِ أَنۡ ءَامِنُواْ بِرَبِّكُمۡ فَـَٔامَنَّاۚ رَبَّنَا فَٱغۡفِرۡ لَنَا ذُنُوبَنَا وَكَفِّرۡ عَنَّا سَيِّـَٔاتِنَا وَتَوَفَّنَا مَعَ ٱلۡأَبۡرَارِ رَبَّنَا وَءَاتِنَا مَا وَعَدتَّنَا عَلَىٰ رُسُلِكَ وَلَا تُخۡزِنَا يَوۡمَ ٱلۡقِيَٰمَةِۖ إِنَّكَ لَا تُخۡلِفُ ٱلۡمِيعَادَ",
-    "translation": "Who remember Allāh while standing or sitting or [lying] on their sides and give thought to the creation of the heavens and the earth, [saying], \"Our Lord, You did not create this aimlessly; exalted are You [above such a thing]; then protect us from the punishment of the Fire. Our Lord, indeed whoever You admit to the Fire - You have disgraced him, and for the wrongdoers there are no helpers. Our Lord, indeed we have heard a caller [i.e., Prophet Muḥammad (ﷺ)] calling to faith, [saying], 'Believe in your Lord,' and we have believed. Our Lord, so forgive us our sins and remove from us our misdeeds and cause us to die among the righteous. Our Lord, and grant us what You promised us through Your messengers and do not disgrace us on the Day of Resurrection. Indeed, You do not fail in [Your] promise.\"",
+  "7:23": {
+    "arabic": "قَالَا رَبَّنَا ظَلَمۡنَآ أَنفُسَنَا وَإِن لَّمۡ تَغۡفِرۡ لَنَا وَتَرۡحَمۡنَا لَنَكُونَنَّ مِنَ ٱلۡخَٰسِرِينَ",
+    "translation": "They said, \"Our Lord, we have wronged ourselves, and if You do not forgive us and have mercy upon us, we will surely be among the losers.\"",
     "arabicFrom": "QuranEnc.com",
     "translationFrom": "QuranEnc.com"
   },
@@ -1123,15 +937,141 @@ export const QURAN_TEXT: Record<string, EvidenceText> = {
     "arabicFrom": "QuranEnc.com",
     "translationFrom": "QuranEnc.com"
   },
-  "18:10": {
-    "arabic": "إِذۡ أَوَى ٱلۡفِتۡيَةُ إِلَى ٱلۡكَهۡفِ فَقَالُواْ رَبَّنَآ ءَاتِنَا مِن لَّدُنكَ رَحۡمَةٗ وَهَيِّئۡ لَنَا مِنۡ أَمۡرِنَا رَشَدٗا",
-    "translation": "[Mention] when the youths retreated to the cave and said, \"Our Lord, grant us from Yourself mercy and prepare for us from our affair right guidance.\"",
+  "21:87": {
+    "arabic": "وَذَا ٱلنُّونِ إِذ ذَّهَبَ مُغَٰضِبٗا فَظَنَّ أَن لَّن نَّقۡدِرَ عَلَيۡهِ فَنَادَىٰ فِي ٱلظُّلُمَٰتِ أَن لَّآ إِلَٰهَ إِلَّآ أَنتَ سُبۡحَٰنَكَ إِنِّي كُنتُ مِنَ ٱلظَّٰلِمِينَ",
+    "translation": "And [mention] the man of the fish [i.e., Jonah], when he went off in anger and thought that We would not decree [anything] upon him. And he called out within the darknesses, \"There is no deity except You; exalted are You. Indeed, I have been of the wrongdoers.\"",
     "arabicFrom": "QuranEnc.com",
     "translationFrom": "QuranEnc.com"
   },
-  "25:65-66": {
-    "arabic": "وَٱلَّذِينَ يَقُولُونَ رَبَّنَا ٱصۡرِفۡ عَنَّا عَذَابَ جَهَنَّمَۖ إِنَّ عَذَابَهَا كَانَ غَرَامًا إِنَّهَا سَآءَتۡ مُسۡتَقَرّٗا وَمُقَامٗا",
-    "translation": "And those who say, \"Our Lord, avert from us the punishment of Hell. Indeed, its punishment is ever adhering; Indeed, it is evil as a settlement and residence.\"",
+  "23:118": {
+    "arabic": "وَقُل رَّبِّ ٱغۡفِرۡ وَٱرۡحَمۡ وَأَنتَ خَيۡرُ ٱلرَّٰحِمِينَ",
+    "translation": "And, [O Muḥammad], say, \"My Lord, forgive and have mercy, and You are the best of the merciful.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "28:24": {
+    "arabic": "فَسَقَىٰ لَهُمَا ثُمَّ تَوَلَّىٰٓ إِلَى ٱلظِّلِّ فَقَالَ رَبِّ إِنِّي لِمَآ أَنزَلۡتَ إِلَيَّ مِنۡ خَيۡرٖ فَقِيرٞ",
+    "translation": "So he watered [their flocks] for them; then he went back to the shade and said, \"My Lord, indeed I am, for whatever good You would send down to me, in need.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "37:100": {
+    "arabic": "رَبِّ هَبۡ لِي مِنَ ٱلصَّٰلِحِينَ",
+    "translation": "My Lord, grant me [a child] from among the righteous.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "3:38": {
+    "arabic": "هُنَالِكَ دَعَا زَكَرِيَّا رَبَّهُۥۖ قَالَ رَبِّ هَبۡ لِي مِن لَّدُنكَ ذُرِّيَّةٗ طَيِّبَةًۖ إِنَّكَ سَمِيعُ ٱلدُّعَآءِ",
+    "translation": "At that, Zechariah called upon his Lord, saying, \"My Lord, grant me from Yourself a good offspring. Indeed, You are the Hearer of supplication.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "3:52-53": {
+    "arabic": "۞ فَلَمَّآ أَحَسَّ عِيسَىٰ مِنۡهُمُ ٱلۡكُفۡرَ قَالَ مَنۡ أَنصَارِيٓ إِلَى ٱللَّهِۖ قَالَ ٱلۡحَوَارِيُّونَ نَحۡنُ أَنصَارُ ٱللَّهِ ءَامَنَّا بِٱللَّهِ وَٱشۡهَدۡ بِأَنَّا مُسۡلِمُونَ رَبَّنَآ ءَامَنَّا بِمَآ أَنزَلۡتَ وَٱتَّبَعۡنَا ٱلرَّسُولَ فَٱكۡتُبۡنَا مَعَ ٱلشَّٰهِدِينَ",
+    "translation": "But when Jesus felt [persistence in] disbelief from them, he said, \"Who are my supporters for [the cause of] Allāh?\" The disciples said, \"We are supporters for Allāh. We have believed in Allāh and testify that we are Muslims [submitting to Him]. Our Lord, we have believed in what You revealed and have followed the messenger [i.e., Jesus], so register us among the witnesses [to truth].\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "5:25": {
+    "arabic": "قَالَ رَبِّ إِنِّي لَآ أَمۡلِكُ إِلَّا نَفۡسِي وَأَخِيۖ فَٱفۡرُقۡ بَيۡنَنَا وَبَيۡنَ ٱلۡقَوۡمِ ٱلۡفَٰسِقِينَ",
+    "translation": "[Moses] said, \"My Lord, indeed I do not possess [i.e., control] except myself and my brother, so part us from the defiantly disobedient people.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "5:114": {
+    "arabic": "قَالَ عِيسَى ٱبۡنُ مَرۡيَمَ ٱللَّهُمَّ رَبَّنَآ أَنزِلۡ عَلَيۡنَا مَآئِدَةٗ مِّنَ ٱلسَّمَآءِ تَكُونُ لَنَا عِيدٗا لِّأَوَّلِنَا وَءَاخِرِنَا وَءَايَةٗ مِّنكَۖ وَٱرۡزُقۡنَا وَأَنتَ خَيۡرُ ٱلرَّٰزِقِينَ",
+    "translation": "Said Jesus, the son of Mary, \"O Allāh, our Lord, send down to us a table [spread with food] from the heaven to be for us a festival for the first of us and the last of us and a sign from You. And provide for us, and You are the best of providers.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "7:89": {
+    "arabic": "قَدِ ٱفۡتَرَيۡنَا عَلَى ٱللَّهِ كَذِبًا إِنۡ عُدۡنَا فِي مِلَّتِكُم بَعۡدَ إِذۡ نَجَّىٰنَا ٱللَّهُ مِنۡهَاۚ وَمَا يَكُونُ لَنَآ أَن نَّعُودَ فِيهَآ إِلَّآ أَن يَشَآءَ ٱللَّهُ رَبُّنَاۚ وَسِعَ رَبُّنَا كُلَّ شَيۡءٍ عِلۡمًاۚ عَلَى ٱللَّهِ تَوَكَّلۡنَاۚ رَبَّنَا ٱفۡتَحۡ بَيۡنَنَا وَبَيۡنَ قَوۡمِنَا بِٱلۡحَقِّ وَأَنتَ خَيۡرُ ٱلۡفَٰتِحِينَ",
+    "translation": "We would have invented against Allāh a lie if we returned to your religion after Allāh had saved us from it. And it is not for us to return to it except that Allāh, our Lord, should will. Our Lord has encompassed all things in knowledge. Upon Allāh we have relied. Our Lord, decide between us and our people in truth, and You are the best of those who give decision.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "11:41": {
+    "arabic": "۞ وَقَالَ ٱرۡكَبُواْ فِيهَا بِسۡمِ ٱللَّهِ مَجۡر۪ىٰهَا وَمُرۡسَىٰهَآۚ إِنَّ رَبِّي لَغَفُورٞ رَّحِيمٞ",
+    "translation": "And [Noah] said, \"Embark therein; in the name of Allāh [are] its course and its anchorage. Indeed, my Lord is Forgiving and Merciful.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "11:47": {
+    "arabic": "قَالَ رَبِّ إِنِّيٓ أَعُوذُ بِكَ أَنۡ أَسۡـَٔلَكَ مَا لَيۡسَ لِي بِهِۦ عِلۡمٞۖ وَإِلَّا تَغۡفِرۡ لِي وَتَرۡحَمۡنِيٓ أَكُن مِّنَ ٱلۡخَٰسِرِينَ",
+    "translation": "[Noah] said, \"My Lord, I seek refuge in You from asking that of which I have no knowledge. And unless You forgive me and have mercy upon me, I will be among the losers.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "17:80": {
+    "arabic": "وَقُل رَّبِّ أَدۡخِلۡنِي مُدۡخَلَ صِدۡقٖ وَأَخۡرِجۡنِي مُخۡرَجَ صِدۡقٖ وَٱجۡعَل لِّي مِن لَّدُنكَ سُلۡطَٰنٗا نَّصِيرٗا",
+    "translation": "And say, \"My Lord, cause me to enter a sound entrance and to exit a sound exit and grant me from Yourself a supporting authority.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "20:29-32": {
+    "arabic": "وَٱجۡعَل لِّي وَزِيرٗا مِّنۡ أَهۡلِي هَٰرُونَ أَخِي ٱشۡدُدۡ بِهِۦٓ أَزۡرِي وَأَشۡرِكۡهُ فِيٓ أَمۡرِي",
+    "translation": "And appoint for me a minister [i.e., assistant] from my family - Aaron, my brother. Increase through him my strength And let him share my task",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "21:89": {
+    "arabic": "وَزَكَرِيَّآ إِذۡ نَادَىٰ رَبَّهُۥ رَبِّ لَا تَذَرۡنِي فَرۡدٗا وَأَنتَ خَيۡرُ ٱلۡوَٰرِثِينَ",
+    "translation": "And [mention] Zechariah, when he called to his Lord, \"My Lord, do not leave me alone [with no heir], while You are the best of inheritors.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "21:112": {
+    "arabic": "قَٰلَ رَبِّ ٱحۡكُم بِٱلۡحَقِّۗ وَرَبُّنَا ٱلرَّحۡمَٰنُ ٱلۡمُسۡتَعَانُ عَلَىٰ مَا تَصِفُونَ",
+    "translation": "[The Prophet (ﷺ)] has said, \"My Lord, judge [between us] in truth. And our Lord is the Most Merciful, the one whose help is sought against that which you describe.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "23:28-29": {
+    "arabic": "فَإِذَا ٱسۡتَوَيۡتَ أَنتَ وَمَن مَّعَكَ عَلَى ٱلۡفُلۡكِ فَقُلِ ٱلۡحَمۡدُ لِلَّهِ ٱلَّذِي نَجَّىٰنَا مِنَ ٱلۡقَوۡمِ ٱلظَّٰلِمِينَ وَقُل رَّبِّ أَنزِلۡنِي مُنزَلٗا مُّبَارَكٗا وَأَنتَ خَيۡرُ ٱلۡمُنزِلِينَ",
+    "translation": "And when you have boarded the ship, you and those with you, then say, 'Praise to Allāh who has saved us from the wrongdoing people.' And say, 'My Lord, let me land at a blessed landing place, and You are the best to accommodate [us].'\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "26:169": {
+    "arabic": "رَبِّ نَجِّنِي وَأَهۡلِي مِمَّا يَعۡمَلُونَ",
+    "translation": "My Lord, save me and my family from [the consequence of] what they do.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "71:28": {
+    "arabic": "رَّبِّ ٱغۡفِرۡ لِي وَلِوَٰلِدَيَّ وَلِمَن دَخَلَ بَيۡتِيَ مُؤۡمِنٗا وَلِلۡمُؤۡمِنِينَ وَٱلۡمُؤۡمِنَٰتِۖ وَلَا تَزِدِ ٱلظَّٰلِمِينَ إِلَّا تَبَارَۢا",
+    "translation": "My Lord, forgive me and my parents and whoever enters my house a believer and the believing men and believing women. And do not increase the wrongdoers except in destruction.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "3:16": {
+    "arabic": "ٱلَّذِينَ يَقُولُونَ رَبَّنَآ إِنَّنَآ ءَامَنَّا فَٱغۡفِرۡ لَنَا ذُنُوبَنَا وَقِنَا عَذَابَ ٱلنَّارِ",
+    "translation": "Those who say, 'Our Lord, indeed we have believed, so forgive us our sins and protect us from the punishment of the Fire,' \"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "3:35": {
+    "arabic": "إِذۡ قَالَتِ ٱمۡرَأَتُ عِمۡرَٰنَ رَبِّ إِنِّي نَذَرۡتُ لَكَ مَا فِي بَطۡنِي مُحَرَّرٗا فَتَقَبَّلۡ مِنِّيٓۖ إِنَّكَ أَنتَ ٱلسَّمِيعُ ٱلۡعَلِيمُ",
+    "translation": "[Mention, O Muḥammad], when the wife of ʿImrān said, \"My Lord, indeed I have pledged to You what is in my womb, consecrated [for Your service], so accept this from me. Indeed, You are the Hearing, the Knowing.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "5:83-84": {
+    "arabic": "وَإِذَا سَمِعُواْ مَآ أُنزِلَ إِلَى ٱلرَّسُولِ تَرَىٰٓ أَعۡيُنَهُمۡ تَفِيضُ مِنَ ٱلدَّمۡعِ مِمَّا عَرَفُواْ مِنَ ٱلۡحَقِّۖ يَقُولُونَ رَبَّنَآ ءَامَنَّا فَٱكۡتُبۡنَا مَعَ ٱلشَّٰهِدِينَ وَمَا لَنَا لَا نُؤۡمِنُ بِٱللَّهِ وَمَا جَآءَنَا مِنَ ٱلۡحَقِّ وَنَطۡمَعُ أَن يُدۡخِلَنَا رَبُّنَا مَعَ ٱلۡقَوۡمِ ٱلصَّٰلِحِينَ",
+    "translation": "And when they hear what has been revealed to the Messenger, you see their eyes overflowing with tears because of what they have recognized of the truth. They say, \"Our Lord, we have believed, so register us among the witnesses. And why should we not believe in Allāh and what has come to us of the truth? And we aspire that our Lord will admit us [to Paradise] with the righteous people.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "14:40-41": {
+    "arabic": "رَبِّ ٱجۡعَلۡنِي مُقِيمَ ٱلصَّلَوٰةِ وَمِن ذُرِّيَّتِيۚ رَبَّنَا وَتَقَبَّلۡ دُعَآءِ رَبَّنَا ٱغۡفِرۡ لِي وَلِوَٰلِدَيَّ وَلِلۡمُؤۡمِنِينَ يَوۡمَ يَقُومُ ٱلۡحِسَابُ",
+    "translation": "My Lord, make me an establisher of prayer, and [many] from my descendants. Our Lord, and accept my supplication. Our Lord, forgive me and my parents and the believers the Day the account is established.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "19:4-5": {
+    "arabic": "قَالَ رَبِّ إِنِّي وَهَنَ ٱلۡعَظۡمُ مِنِّي وَٱشۡتَعَلَ ٱلرَّأۡسُ شَيۡبٗا وَلَمۡ أَكُنۢ بِدُعَآئِكَ رَبِّ شَقِيّٗا وَإِنِّي خِفۡتُ ٱلۡمَوَٰلِيَ مِن وَرَآءِي وَكَانَتِ ٱمۡرَأَتِي عَاقِرٗا فَهَبۡ لِي مِن لَّدُنكَ وَلِيّٗا",
+    "translation": "He said, \"My Lord, indeed my bones have weakened, and my head has filled with white, and never have I been in my supplication to You, my Lord, unhappy [i.e., disappointed]. And indeed, I fear the successors after me, and my wife has been barren, so give me from Yourself an heir",
     "arabicFrom": "QuranEnc.com",
     "translationFrom": "QuranEnc.com"
   },
@@ -1150,6 +1090,192 @@ export const QURAN_TEXT: Record<string, EvidenceText> = {
   "59:10": {
     "arabic": "وَٱلَّذِينَ جَآءُو مِنۢ بَعۡدِهِمۡ يَقُولُونَ رَبَّنَا ٱغۡفِرۡ لَنَا وَلِإِخۡوَٰنِنَا ٱلَّذِينَ سَبَقُونَا بِٱلۡإِيمَٰنِ وَلَا تَجۡعَلۡ فِي قُلُوبِنَا غِلّٗا لِّلَّذِينَ ءَامَنُواْ رَبَّنَآ إِنَّكَ رَءُوفٞ رَّحِيمٌ",
     "translation": "And [there is a share for] those who come after them, saying, \"Our Lord, forgive us and our brothers who preceded us in faith and put not in our hearts [any] resentment toward those who have believed. Our Lord, indeed You are Kind and Merciful.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "7:151": {
+    "arabic": "قَالَ رَبِّ ٱغۡفِرۡ لِي وَلِأَخِي وَأَدۡخِلۡنَا فِي رَحۡمَتِكَۖ وَأَنتَ أَرۡحَمُ ٱلرَّٰحِمِينَ",
+    "translation": "[Moses] said, \"My Lord, forgive me and my brother and admit us into Your mercy, for You are the most merciful of the merciful.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "7:155-156": {
+    "arabic": "وَٱخۡتَارَ مُوسَىٰ قَوۡمَهُۥ سَبۡعِينَ رَجُلٗا لِّمِيقَٰتِنَاۖ فَلَمَّآ أَخَذَتۡهُمُ ٱلرَّجۡفَةُ قَالَ رَبِّ لَوۡ شِئۡتَ أَهۡلَكۡتَهُم مِّن قَبۡلُ وَإِيَّٰيَۖ أَتُهۡلِكُنَا بِمَا فَعَلَ ٱلسُّفَهَآءُ مِنَّآۖ إِنۡ هِيَ إِلَّا فِتۡنَتُكَ تُضِلُّ بِهَا مَن تَشَآءُ وَتَهۡدِي مَن تَشَآءُۖ أَنتَ وَلِيُّنَا فَٱغۡفِرۡ لَنَا وَٱرۡحَمۡنَاۖ وَأَنتَ خَيۡرُ ٱلۡغَٰفِرِينَ ۞ وَٱكۡتُبۡ لَنَا فِي هَٰذِهِ ٱلدُّنۡيَا حَسَنَةٗ وَفِي ٱلۡأٓخِرَةِ إِنَّا هُدۡنَآ إِلَيۡكَۚ قَالَ عَذَابِيٓ أُصِيبُ بِهِۦ مَنۡ أَشَآءُۖ وَرَحۡمَتِي وَسِعَتۡ كُلَّ شَيۡءٖۚ فَسَأَكۡتُبُهَا لِلَّذِينَ يَتَّقُونَ وَيُؤۡتُونَ ٱلزَّكَوٰةَ وَٱلَّذِينَ هُم بِـَٔايَٰتِنَا يُؤۡمِنُونَ",
+    "translation": "And Moses chose from his people seventy men for Our appointment. And when the earthquake seized them, he said, \"My Lord, if You had willed, You could have destroyed them before and me [as well]. Would You destroy us for what the foolish among us have done? This is not but Your trial by which You send astray whom You will and guide whom You will. You are our Protector, so forgive us and have mercy upon us; and You are the best of forgivers. And decree for us in this world [that which is] good and [also] in the Hereafter; indeed, we have turned back to You.\" [Allāh] said, \"My punishment - I afflict with it whom I will, but My mercy encompasses all things.\" So I will decree it [especially] for those who fear Me and give zakāh and those who believe in Our verses-",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "28:16": {
+    "arabic": "قَالَ رَبِّ إِنِّي ظَلَمۡتُ نَفۡسِي فَٱغۡفِرۡ لِي فَغَفَرَ لَهُۥٓۚ إِنَّهُۥ هُوَ ٱلۡغَفُورُ ٱلرَّحِيمُ",
+    "translation": "He said, \"My Lord, indeed I have wronged myself, so forgive me,\" and He forgave him. Indeed, He is the Forgiving, the Merciful.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "60:4-5": {
+    "arabic": "قَدۡ كَانَتۡ لَكُمۡ أُسۡوَةٌ حَسَنَةٞ فِيٓ إِبۡرَٰهِيمَ وَٱلَّذِينَ مَعَهُۥٓ إِذۡ قَالُواْ لِقَوۡمِهِمۡ إِنَّا بُرَءَٰٓؤُاْ مِنكُمۡ وَمِمَّا تَعۡبُدُونَ مِن دُونِ ٱللَّهِ كَفَرۡنَا بِكُمۡ وَبَدَا بَيۡنَنَا وَبَيۡنَكُمُ ٱلۡعَدَٰوَةُ وَٱلۡبَغۡضَآءُ أَبَدًا حَتَّىٰ تُؤۡمِنُواْ بِٱللَّهِ وَحۡدَهُۥٓ إِلَّا قَوۡلَ إِبۡرَٰهِيمَ لِأَبِيهِ لَأَسۡتَغۡفِرَنَّ لَكَ وَمَآ أَمۡلِكُ لَكَ مِنَ ٱللَّهِ مِن شَيۡءٖۖ رَّبَّنَا عَلَيۡكَ تَوَكَّلۡنَا وَإِلَيۡكَ أَنَبۡنَا وَإِلَيۡكَ ٱلۡمَصِيرُ رَبَّنَا لَا تَجۡعَلۡنَا فِتۡنَةٗ لِّلَّذِينَ كَفَرُواْ وَٱغۡفِرۡ لَنَا رَبَّنَآۖ إِنَّكَ أَنتَ ٱلۡعَزِيزُ ٱلۡحَكِيمُ",
+    "translation": "There has already been for you an excellent pattern in Abraham and those with him, when they said to their people, \"Indeed, we are disassociated from you and from whatever you worship other than Allāh. We have denied you, and there has appeared between us and you animosity and hatred forever until you believe in Allāh alone\" - except for the saying of Abraham to his father, \"I will surely ask forgiveness for you, but I have not [power to do] for you anything against Allāh. Our Lord, upon You we have relied, and to You we have returned, and to You is the destination. Our Lord, make us not [objects of] torment for the disbelievers and forgive us, our Lord. Indeed, it is You who is the Exalted in Might, the Wise.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "2:32": {
+    "arabic": "قَالُواْ سُبۡحَٰنَكَ لَا عِلۡمَ لَنَآ إِلَّا مَا عَلَّمۡتَنَآۖ إِنَّكَ أَنتَ ٱلۡعَلِيمُ ٱلۡحَكِيمُ",
+    "translation": "They said, \"Exalted are You; we have no knowledge except what You have taught us. Indeed, it is You who is the Knowing, the Wise.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "3:8-9": {
+    "arabic": "رَبَّنَا لَا تُزِغۡ قُلُوبَنَا بَعۡدَ إِذۡ هَدَيۡتَنَا وَهَبۡ لَنَا مِن لَّدُنكَ رَحۡمَةًۚ إِنَّكَ أَنتَ ٱلۡوَهَّابُ رَبَّنَآ إِنَّكَ جَامِعُ ٱلنَّاسِ لِيَوۡمٖ لَّا رَيۡبَ فِيهِۚ إِنَّ ٱللَّهَ لَا يُخۡلِفُ ٱلۡمِيعَادَ",
+    "translation": "[Who say], \"Our Lord, let not our hearts deviate after You have guided us and grant us from Yourself mercy. Indeed, You are the Bestower. Our Lord, surely You will gather the people for a Day about which there is no doubt. Indeed, Allāh does not fail in His promise.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "18:10": {
+    "arabic": "إِذۡ أَوَى ٱلۡفِتۡيَةُ إِلَى ٱلۡكَهۡفِ فَقَالُواْ رَبَّنَآ ءَاتِنَا مِن لَّدُنكَ رَحۡمَةٗ وَهَيِّئۡ لَنَا مِنۡ أَمۡرِنَا رَشَدٗا",
+    "translation": "[Mention] when the youths retreated to the cave and said, \"Our Lord, grant us from Yourself mercy and prepare for us from our affair right guidance.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "20:25-28": {
+    "arabic": "قَالَ رَبِّ ٱشۡرَحۡ لِي صَدۡرِي وَيَسِّرۡ لِيٓ أَمۡرِي وَٱحۡلُلۡ عُقۡدَةٗ مِّن لِّسَانِي يَفۡقَهُواْ قَوۡلِي",
+    "translation": "[Moses] said, \"My Lord, expand [i.e., relax] for me my breast [with assurance] And ease for me my task And untie the knot from my tongue That they may understand my speech.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "20:114": {
+    "arabic": "فَتَعَٰلَى ٱللَّهُ ٱلۡمَلِكُ ٱلۡحَقُّۗ وَلَا تَعۡجَلۡ بِٱلۡقُرۡءَانِ مِن قَبۡلِ أَن يُقۡضَىٰٓ إِلَيۡكَ وَحۡيُهُۥۖ وَقُل رَّبِّ زِدۡنِي عِلۡمٗا",
+    "translation": "So high [above all] is Allāh, the Sovereign, the Truth. And, [O Muḥammad], do not hasten with [recitation of] the Qur’ān before its revelation is completed to you, and say, \"My Lord, increase me in knowledge.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "26:78-85": {
+    "arabic": "ٱلَّذِي خَلَقَنِي فَهُوَ يَهۡدِينِ وَٱلَّذِي هُوَ يُطۡعِمُنِي وَيَسۡقِينِ وَإِذَا مَرِضۡتُ فَهُوَ يَشۡفِينِ وَٱلَّذِي يُمِيتُنِي ثُمَّ يُحۡيِينِ وَٱلَّذِيٓ أَطۡمَعُ أَن يَغۡفِرَ لِي خَطِيٓـَٔتِي يَوۡمَ ٱلدِّينِ رَبِّ هَبۡ لِي حُكۡمٗا وَأَلۡحِقۡنِي بِٱلصَّٰلِحِينَ وَٱجۡعَل لِّي لِسَانَ صِدۡقٖ فِي ٱلۡأٓخِرِينَ وَٱجۡعَلۡنِي مِن وَرَثَةِ جَنَّةِ ٱلنَّعِيمِ",
+    "translation": "Who created me, and He [it is who] guides me. And it is He who feeds me and gives me drink. And when I am ill, it is He who cures me And who will cause me to die and then bring me to life And who I aspire that He will forgive me my sin on the Day of Recompense.\" [And he said], \"My Lord, grant me authority and join me with the righteous. And grant me a mention [i.e., reputation] of honor among later generations. And place me among the inheritors of the Garden of Pleasure.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "26:87-89": {
+    "arabic": "وَلَا تُخۡزِنِي يَوۡمَ يُبۡعَثُونَ يَوۡمَ لَا يَنفَعُ مَالٞ وَلَا بَنُونَ إِلَّا مَنۡ أَتَى ٱللَّهَ بِقَلۡبٖ سَلِيمٖ",
+    "translation": "And do not disgrace me on the Day they are [all] resurrected - The Day when there will not benefit [anyone] wealth or children But only one who comes to Allāh with a sound heart.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "27:19": {
+    "arabic": "فَتَبَسَّمَ ضَاحِكٗا مِّن قَوۡلِهَا وَقَالَ رَبِّ أَوۡزِعۡنِيٓ أَنۡ أَشۡكُرَ نِعۡمَتَكَ ٱلَّتِيٓ أَنۡعَمۡتَ عَلَيَّ وَعَلَىٰ وَٰلِدَيَّ وَأَنۡ أَعۡمَلَ صَٰلِحٗا تَرۡضَىٰهُ وَأَدۡخِلۡنِي بِرَحۡمَتِكَ فِي عِبَادِكَ ٱلصَّٰلِحِينَ",
+    "translation": "So [Solomon] smiled, amused at her speech, and said, \"My Lord, enable me to be grateful for Your favor which You have bestowed upon me and upon my parents and to do righteousness of which You approve. And admit me by Your mercy into [the ranks of] Your righteous servants.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "2:250": {
+    "arabic": "وَلَمَّا بَرَزُواْ لِجَالُوتَ وَجُنُودِهِۦ قَالُواْ رَبَّنَآ أَفۡرِغۡ عَلَيۡنَا صَبۡرٗا وَثَبِّتۡ أَقۡدَامَنَا وَٱنصُرۡنَا عَلَى ٱلۡقَوۡمِ ٱلۡكَٰفِرِينَ",
+    "translation": "And when they went forth to [face] Goliath and his soldiers, they said, \"Our Lord, pour upon us patience and plant firmly our feet and give us victory over the disbelieving people.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "7:126": {
+    "arabic": "وَمَا تَنقِمُ مِنَّآ إِلَّآ أَنۡ ءَامَنَّا بِـَٔايَٰتِ رَبِّنَا لَمَّا جَآءَتۡنَاۚ رَبَّنَآ أَفۡرِغۡ عَلَيۡنَا صَبۡرٗا وَتَوَفَّنَا مُسۡلِمِينَ",
+    "translation": "And you do not resent us except because we believed in the signs of our Lord when they came to us. Our Lord, pour upon us patience and let us die as Muslims [in submission to You].\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "10:85-86": {
+    "arabic": "فَقَالُواْ عَلَى ٱللَّهِ تَوَكَّلۡنَا رَبَّنَا لَا تَجۡعَلۡنَا فِتۡنَةٗ لِّلۡقَوۡمِ ٱلظَّٰلِمِينَ وَنَجِّنَا بِرَحۡمَتِكَ مِنَ ٱلۡقَوۡمِ ٱلۡكَٰفِرِينَ",
+    "translation": "So they said, \"Upon Allāh do we rely. Our Lord, make us not [objects of] trial for the wrongdoing people And save us by Your mercy from the disbelieving people.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "21:83": {
+    "arabic": "۞ وَأَيُّوبَ إِذۡ نَادَىٰ رَبَّهُۥٓ أَنِّي مَسَّنِيَ ٱلضُّرُّ وَأَنتَ أَرۡحَمُ ٱلرَّٰحِمِينَ",
+    "translation": "And [mention] Job, when he called to his Lord, \"Indeed, adversity has touched me, and You are the most merciful of the merciful.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "23:93-94": {
+    "arabic": "قُل رَّبِّ إِمَّا تُرِيَنِّي مَا يُوعَدُونَ رَبِّ فَلَا تَجۡعَلۡنِي فِي ٱلۡقَوۡمِ ٱلظَّٰلِمِينَ",
+    "translation": "Say, [O Muḥammad], \"My Lord, if You should show me that which they are promised, My Lord, then do not place me among the wrongdoing people.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "23:97-98": {
+    "arabic": "وَقُل رَّبِّ أَعُوذُ بِكَ مِنۡ هَمَزَٰتِ ٱلشَّيَٰطِينِ وَأَعُوذُ بِكَ رَبِّ أَن يَحۡضُرُونِ",
+    "translation": "And say, \"My Lord, I seek refuge in You from the incitements of the devils, And I seek refuge in You, my Lord, lest they be present with me.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "28:21": {
+    "arabic": "فَخَرَجَ مِنۡهَا خَآئِفٗا يَتَرَقَّبُۖ قَالَ رَبِّ نَجِّنِي مِنَ ٱلۡقَوۡمِ ٱلظَّٰلِمِينَ",
+    "translation": "So he left it, fearful and anticipating [apprehension]. He said, \"My Lord, save me from the wrongdoing people.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "29:30": {
+    "arabic": "قَالَ رَبِّ ٱنصُرۡنِي عَلَى ٱلۡقَوۡمِ ٱلۡمُفۡسِدِينَ",
+    "translation": "He said, \"My Lord, support me against the corrupting people.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "43:13-14": {
+    "arabic": "لِتَسۡتَوُۥاْ عَلَىٰ ظُهُورِهِۦ ثُمَّ تَذۡكُرُواْ نِعۡمَةَ رَبِّكُمۡ إِذَا ٱسۡتَوَيۡتُمۡ عَلَيۡهِ وَتَقُولُواْ سُبۡحَٰنَ ٱلَّذِي سَخَّرَ لَنَا هَٰذَا وَمَا كُنَّا لَهُۥ مُقۡرِنِينَ وَإِنَّآ إِلَىٰ رَبِّنَا لَمُنقَلِبُونَ",
+    "translation": "That you may settle yourselves upon their backs and then remember the favor of your Lord when you have settled upon them and say, \"Exalted is He who has subjected this to us, and we could not have [otherwise] subdued it. And indeed we, to our Lord, will [surely] return.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "54:10": {
+    "arabic": "فَدَعَا رَبَّهُۥٓ أَنِّي مَغۡلُوبٞ فَٱنتَصِرۡ",
+    "translation": "So he invoked his Lord, \"Indeed, I am overpowered, so help.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "66:11": {
+    "arabic": "وَضَرَبَ ٱللَّهُ مَثَلٗا لِّلَّذِينَ ءَامَنُواْ ٱمۡرَأَتَ فِرۡعَوۡنَ إِذۡ قَالَتۡ رَبِّ ٱبۡنِ لِي عِندَكَ بَيۡتٗا فِي ٱلۡجَنَّةِ وَنَجِّنِي مِن فِرۡعَوۡنَ وَعَمَلِهِۦ وَنَجِّنِي مِنَ ٱلۡقَوۡمِ ٱلظَّٰلِمِينَ",
+    "translation": "And Allāh presents an example of those who believed: the wife of Pharaoh, when she said, \"My Lord, build for me near You a house in Paradise and save me from Pharaoh and his deeds and save me from the wrongdoing people.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "113:1-5": {
+    "arabic": "قُلۡ أَعُوذُ بِرَبِّ ٱلۡفَلَقِ مِن شَرِّ مَا خَلَقَ وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ وَمِن شَرِّ ٱلنَّفَّٰثَٰتِ فِي ٱلۡعُقَدِ وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ",
+    "translation": "Say, \"I seek refuge in the Lord of daybreak From the evil of that which He created And from the evil of darkness when it settles And from the evil of the blowers in knots And from the evil of an envier when he envies.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "114:1-6": {
+    "arabic": "قُلۡ أَعُوذُ بِرَبِّ ٱلنَّاسِ مَلِكِ ٱلنَّاسِ إِلَٰهِ ٱلنَّاسِ مِن شَرِّ ٱلۡوَسۡوَاسِ ٱلۡخَنَّاسِ ٱلَّذِي يُوَسۡوِسُ فِي صُدُورِ ٱلنَّاسِ مِنَ ٱلۡجِنَّةِ وَٱلنَّاسِ",
+    "translation": "Say, \"I seek refuge in the Lord of mankind, The Sovereign of mankind, The God of mankind, From the evil of the retreating whisperer - Who whispers [evil] into the breasts of mankind - From among the jinn and mankind.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "2:126": {
+    "arabic": "وَإِذۡ قَالَ إِبۡرَٰهِـۧمُ رَبِّ ٱجۡعَلۡ هَٰذَا بَلَدًا ءَامِنٗا وَٱرۡزُقۡ أَهۡلَهُۥ مِنَ ٱلثَّمَرَٰتِ مَنۡ ءَامَنَ مِنۡهُم بِٱللَّهِ وَٱلۡيَوۡمِ ٱلۡأٓخِرِۚ قَالَ وَمَن كَفَرَ فَأُمَتِّعُهُۥ قَلِيلٗا ثُمَّ أَضۡطَرُّهُۥٓ إِلَىٰ عَذَابِ ٱلنَّارِۖ وَبِئۡسَ ٱلۡمَصِيرُ",
+    "translation": "And [mention] when Abraham said, \"My Lord, make this a secure city and provide its people with fruits - whoever of them believes in Allāh and the Last Day.\" [Allāh] said, \"And whoever disbelieves - I will grant him enjoyment for a little; then I will force him to the punishment of the Fire, and wretched is the destination.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "3:26-27": {
+    "arabic": "قُلِ ٱللَّهُمَّ مَٰلِكَ ٱلۡمُلۡكِ تُؤۡتِي ٱلۡمُلۡكَ مَن تَشَآءُ وَتَنزِعُ ٱلۡمُلۡكَ مِمَّن تَشَآءُ وَتُعِزُّ مَن تَشَآءُ وَتُذِلُّ مَن تَشَآءُۖ بِيَدِكَ ٱلۡخَيۡرُۖ إِنَّكَ عَلَىٰ كُلِّ شَيۡءٖ قَدِيرٞ تُولِجُ ٱلَّيۡلَ فِي ٱلنَّهَارِ وَتُولِجُ ٱلنَّهَارَ فِي ٱلَّيۡلِۖ وَتُخۡرِجُ ٱلۡحَيَّ مِنَ ٱلۡمَيِّتِ وَتُخۡرِجُ ٱلۡمَيِّتَ مِنَ ٱلۡحَيِّۖ وَتَرۡزُقُ مَن تَشَآءُ بِغَيۡرِ حِسَابٖ",
+    "translation": "Say, \"O Allāh, Owner of Sovereignty, You give sovereignty to whom You will and You take sovereignty away from whom You will. You honor whom You will and You humble whom You will. In Your hand is [all] good. Indeed, You are over all things competent. You cause the night to enter the day, and You cause the day to enter the night; and You bring the living out of the dead, and You bring the dead out of the living. And You give provision to whom You will without account [i.e., limit or measure].\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "14:37-38": {
+    "arabic": "رَّبَّنَآ إِنِّيٓ أَسۡكَنتُ مِن ذُرِّيَّتِي بِوَادٍ غَيۡرِ ذِي زَرۡعٍ عِندَ بَيۡتِكَ ٱلۡمُحَرَّمِ رَبَّنَا لِيُقِيمُواْ ٱلصَّلَوٰةَ فَٱجۡعَلۡ أَفۡـِٔدَةٗ مِّنَ ٱلنَّاسِ تَهۡوِيٓ إِلَيۡهِمۡ وَٱرۡزُقۡهُم مِّنَ ٱلثَّمَرَٰتِ لَعَلَّهُمۡ يَشۡكُرُونَ رَبَّنَآ إِنَّكَ تَعۡلَمُ مَا نُخۡفِي وَمَا نُعۡلِنُۗ وَمَا يَخۡفَىٰ عَلَى ٱللَّهِ مِن شَيۡءٖ فِي ٱلۡأَرۡضِ وَلَا فِي ٱلسَّمَآءِ",
+    "translation": "Our Lord, I have settled some of my descendants in an uncultivated valley near Your sacred House, our Lord, that they may establish prayer. So make hearts among the people incline toward them and provide for them from the fruits that they might be grateful. Our Lord, indeed You know what we conceal and what we declare, and nothing is hidden from Allāh on the earth or in the heaven.",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "3:191-194": {
+    "arabic": "ٱلَّذِينَ يَذۡكُرُونَ ٱللَّهَ قِيَٰمٗا وَقُعُودٗا وَعَلَىٰ جُنُوبِهِمۡ وَيَتَفَكَّرُونَ فِي خَلۡقِ ٱلسَّمَٰوَٰتِ وَٱلۡأَرۡضِ رَبَّنَا مَا خَلَقۡتَ هَٰذَا بَٰطِلٗا سُبۡحَٰنَكَ فَقِنَا عَذَابَ ٱلنَّارِ رَبَّنَآ إِنَّكَ مَن تُدۡخِلِ ٱلنَّارَ فَقَدۡ أَخۡزَيۡتَهُۥۖ وَمَا لِلظَّٰلِمِينَ مِنۡ أَنصَارٖ رَّبَّنَآ إِنَّنَا سَمِعۡنَا مُنَادِيٗا يُنَادِي لِلۡإِيمَٰنِ أَنۡ ءَامِنُواْ بِرَبِّكُمۡ فَـَٔامَنَّاۚ رَبَّنَا فَٱغۡفِرۡ لَنَا ذُنُوبَنَا وَكَفِّرۡ عَنَّا سَيِّـَٔاتِنَا وَتَوَفَّنَا مَعَ ٱلۡأَبۡرَارِ رَبَّنَا وَءَاتِنَا مَا وَعَدتَّنَا عَلَىٰ رُسُلِكَ وَلَا تُخۡزِنَا يَوۡمَ ٱلۡقِيَٰمَةِۖ إِنَّكَ لَا تُخۡلِفُ ٱلۡمِيعَادَ",
+    "translation": "Who remember Allāh while standing or sitting or [lying] on their sides and give thought to the creation of the heavens and the earth, [saying], \"Our Lord, You did not create this aimlessly; exalted are You [above such a thing]; then protect us from the punishment of the Fire. Our Lord, indeed whoever You admit to the Fire - You have disgraced him, and for the wrongdoers there are no helpers. Our Lord, indeed we have heard a caller [i.e., Prophet Muḥammad (ﷺ)] calling to faith, [saying], 'Believe in your Lord,' and we have believed. Our Lord, so forgive us our sins and remove from us our misdeeds and cause us to die among the righteous. Our Lord, and grant us what You promised us through Your messengers and do not disgrace us on the Day of Resurrection. Indeed, You do not fail in [Your] promise.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "12:101": {
+    "arabic": "۞ رَبِّ قَدۡ ءَاتَيۡتَنِي مِنَ ٱلۡمُلۡكِ وَعَلَّمۡتَنِي مِن تَأۡوِيلِ ٱلۡأَحَادِيثِۚ فَاطِرَ ٱلسَّمَٰوَٰتِ وَٱلۡأَرۡضِ أَنتَ وَلِيِّۦ فِي ٱلدُّنۡيَا وَٱلۡأٓخِرَةِۖ تَوَفَّنِي مُسۡلِمٗا وَأَلۡحِقۡنِي بِٱلصَّٰلِحِينَ",
+    "translation": "My Lord, You have given me [something] of sovereignty and taught me of the interpretation of dreams. Creator of the heavens and earth, You are my protector in this world and the Hereafter. Cause me to die a Muslim and join me with the righteous.\"",
+    "arabicFrom": "QuranEnc.com",
+    "translationFrom": "QuranEnc.com"
+  },
+  "25:65-66": {
+    "arabic": "وَٱلَّذِينَ يَقُولُونَ رَبَّنَا ٱصۡرِفۡ عَنَّا عَذَابَ جَهَنَّمَۖ إِنَّ عَذَابَهَا كَانَ غَرَامًا إِنَّهَا سَآءَتۡ مُسۡتَقَرّٗا وَمُقَامٗا",
+    "translation": "And those who say, \"Our Lord, avert from us the punishment of Hell. Indeed, its punishment is ever adhering; Indeed, it is evil as a settlement and residence.\"",
     "arabicFrom": "QuranEnc.com",
     "translationFrom": "QuranEnc.com"
   },

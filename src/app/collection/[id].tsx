@@ -69,6 +69,21 @@ export default function CollectionScreen() {
           key={entry.id}
           style={[styles.card, { borderBottomColor: theme.goldSoft }]}>
           {/*
+            A heading wherever the section changes from the entry before. The
+            data decides where the breaks fall; this screen only notices them,
+            which keeps it ignorant of which collection it is showing. It sits
+            INSIDE the section's first card so the card's own padding is the
+            join — a heading between cards would sit in the list's gap, and
+            the gap is the same size either side of it. The ordinal runs on
+            through, because a reader who stops halfway needs one number, not
+            a section and a number.
+          */}
+          {entry.section && entry.section !== collection.entries[index - 1]?.section ? (
+            <ThemedText type="sectionTitle" style={styles.section}>
+              {entry.section}
+            </ThemedText>
+          ) : null}
+          {/*
             The ordinal, because a collection is ORDERED and the order is part
             of what it is — the sīrah in sequence, the names as the list has
             them. A reader who stops halfway needs to know where halfway was.
@@ -142,6 +157,11 @@ const styles = StyleSheet.create({
     padding: Spacing.four,
   },
   subtitle: {
+    marginBottom: Spacing.one,
+  },
+  /* Air below the heading only: above it the card's padding and the rule of
+     the card before already make the break. */
+  section: {
     marginBottom: Spacing.one,
   },
   /* Arabic and its transliteration read as one block, not two rows. */

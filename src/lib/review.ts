@@ -42,34 +42,39 @@ import type { Observations } from '@/lib/observations';
 export type Review = {
   /** The surah to offer. */
   surah: number;
-  /** True when the app has never seen this one recited. */
-  neverRecited: boolean;
 };
 
 /**
- * The one worth revisiting, from the surahs somebody says they hold.
+ * The one worth revisiting, from the surahs somebody says they hold AND has
+ * recited here at least once: the one recited longest ago.
  *
- * Never recited beats long ago, because a surah marked memorised that the app
- * has never seen recited is the one most likely to have quietly gone.
+ * ## Why "never recited" is not a reason any more
  *
- * `undefined` when nothing is held yet — the tab shows nothing rather than
+ * Until 10 Sep 2026 a surah marked known but never heard by the follower came
+ * first, on the theory that it was the one most likely to have quietly gone.
+ * What that produced on the screen was the opposite of this file's promise:
+ * mark Al-Fatihah known and, in the same second, the tab said "you have
+ * marked this one, but not recited it here yet". That is a task, handed over
+ * the moment the reader made their first claim, and for anybody who declines
+ * the recognition download it was a line they could never clear. Iyad's
+ * audit, 10 Sep 2026.
+ *
+ * So the only thing that can put a surah here is a recitation the follower
+ * actually heard. Time orders them and nothing else does. The cost, on the
+ * record: there is no nudge toward reciting a surah for the first time.
+ *
+ * `undefined` when nothing qualifies — the tab shows nothing rather than
  * inventing a task for somebody who has not started.
  */
 export function reviewFor(
   memorised: readonly number[],
   value: Observations,
 ): Review | undefined {
-  if (memorised.length === 0) return undefined;
+  const recited = memorised.filter((surah) => value.surahs[String(surah)] !== undefined);
+  if (recited.length === 0) return undefined;
 
-  const never = memorised.filter((surah) => !value.surahs[String(surah)]);
-  if (never.length > 0) {
-    /* Lowest number first: the short ones at the end of the muṣḥaf are learned
-       first, so this is the earliest thing they took on. */
-    return { surah: Math.min(...never), neverRecited: true };
-  }
-
-  const oldest = [...memorised].sort(
+  const oldest = [...recited].sort(
     (a, b) => (value.surahs[String(a)] ?? 0) - (value.surahs[String(b)] ?? 0),
   )[0];
-  return { surah: oldest, neverRecited: false };
+  return { surah: oldest };
 }

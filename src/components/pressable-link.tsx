@@ -53,6 +53,14 @@ export type PressableLinkProps = {
    * look at the rendered attributes.
    */
   accessibilityLabel?: string;
+  /**
+   * Replace the current screen instead of pushing over it.
+   *
+   * For a link between siblings: the next surah from a surah's foot. Pushing
+   * would make Back walk the reader through every page they came along,
+   * when what they left was the list.
+   */
+  replace?: boolean;
 };
 
 export function PressableLink({
@@ -61,11 +69,12 @@ export function PressableLink({
   style,
   pressedStyle,
   accessibilityLabel,
+  replace = false,
 }: PressableLinkProps) {
   const [pressed, setPressed] = useState(false);
 
   return (
-    <Link href={href} asChild>
+    <Link href={href} asChild replace={replace}>
       <Pressable
         accessibilityRole="link"
         accessibilityLabel={accessibilityLabel}

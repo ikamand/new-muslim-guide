@@ -48,6 +48,8 @@ export function routeForHelpScreen(screen: HelpScreen): Href {
       return '/phrases';
     case 'practice':
       return '/practice';
+    case 'quran':
+      return '/(tabs)/quran';
   }
 }
 

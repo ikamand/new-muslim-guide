@@ -18,11 +18,12 @@ import { RECITE_DOWNLOAD_MB } from '@/lib/recite-session';
  * Iyad's redesign, 30 Aug 2026: the highlight lives in the surah screen's
  * own ayah cards (the reader reads the text they already read, and it
  * lights under their voice), so the little one-ayah verse display this
- * component used to carry is deleted. What remains is two faces of one
- * controller: `ReciteOpenRow`, the quiet in-flow row that opens the
- * feature, and `ReciteControls`, the bar the screen PINS above its scroll
- * — his amendment: the controls must not disappear while the page follows
- * the recitation downward.
+ * component used to carry is deleted. What remains is `ReciteControls`, the
+ * bar the screen PINS above its scroll — his amendment: the controls must
+ * not disappear while the page follows the recitation downward. The quiet
+ * in-flow row that used to open it (`ReciteOpenRow`) went on 10 Sep 2026:
+ * the surah screen opens the bar from a button beside "Play the surah", so
+ * the two ways of meeting a surah stand together.
  *
  * Since 2 Sep 2026 the bar fronts TWO modes of one machinery: follow (the
  * five rules bind — nothing here can express a score or a "wrong") and the
@@ -30,32 +31,6 @@ import { RECITE_DOWNLOAD_MB } from '@/lib/recite-session';
  * are allowed; the amendment and its measured scope live in
  * docs/recite-with-me.md).
  */
-
-export function ReciteOpenRow({ follow }: { follow: ReciteFollowController }) {
-  const theme = useTheme();
-  const { t } = useLocale();
-  if (!follow.available || follow.open) return null;
-  return (
-    <Pressable
-      onPress={follow.openControls}
-      accessibilityRole="button"
-      style={({ pressed }) => [
-        styles.row,
-        {
-          backgroundColor: theme.backgroundElement,
-          borderColor: theme.goldSoft,
-          opacity: pressed ? 0.7 : 1,
-        },
-      ]}
-    >
-      <Ionicons name="ear-outline" size={18} color={theme.textSecondary} />
-      <ThemedText type="smallBold" style={styles.rowTitle}>
-        {t('recite.title')}
-      </ThemedText>
-      <Ionicons name="chevron-forward" size={18} color={theme.textSecondary} />
-    </Pressable>
-  );
-}
 
 export function ReciteControls({
   follow,
@@ -376,14 +351,6 @@ function KeepAwakeWhileListening() {
 }
 
 const styles = StyleSheet.create({
-  row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: Spacing.two,
-    padding: Spacing.three,
-    borderWidth: 1,
-    borderRadius: Radius.medium,
-  },
   rowTitle: { flex: 1 },
   bar: {
     borderBottomWidth: 1,

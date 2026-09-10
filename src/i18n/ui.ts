@@ -179,7 +179,13 @@ export const EN = {
   */
   'quran.review.kicker': 'Worth reciting again',
   'quran.review.stale': 'It has been a while since you recited this one.',
-  'quran.review.never': 'You have marked this one, but not recited it here yet.',
+  /*
+    The door the slot holds before anything is known (10 Sep 2026). A fact
+    about the surah, so it can stand there for a month without becoming a
+    reproach.
+  */
+  'quran.start.kicker': 'Start here',
+  'quran.start.why': 'Recited in every rakʿah of every prayer.',
   'zakat.title': 'Working out zakat',
   'zakat.intro': 'Zakat is 2.5% of the wealth you have held for a lunar year, once it passes a threshold. This works out the sum for the three things nobody disputes. It is not a ruling on what you owe.',
   'zakat.currency': 'Currency',
@@ -548,8 +554,12 @@ export const EN = {
   'quran.intro': 'Al-Fatihah and Juz ʿAmma, the short surahs most often recited in prayer.',
   /* A state, not a task — and the surah screen's own words for it. */
   'quran.progress': '{done} of {total} known by heart',
-  /* The fihrist's one red line: why 114 follows 1. */
-  'quran.order': 'then juz 30, backwards',
+  /* The fihrist's one red line: why 114 follows 1. The same name the intro
+     uses, on purpose: a beginner does not know Juz ʿAmma and juz 30 are one
+     thing, and the screen should not ask them to. */
+  'quran.order': 'then Juz ʿAmma, backwards',
+  /* The foot of a surah: the one after it in the learning order. */
+  'quran.next': 'Next',
   /* A mushaf header's third fact, beside name and size. */
   'quran.place.makkah': 'Makkan',
   'quran.place.madinah': 'Medinan',
@@ -562,7 +572,11 @@ export const EN = {
   'quran.surahNumber': 'Surah {n}',
   'quran.covered': 'covered, tap to check',
   'quran.missing': 'That surah isn’t here.',
-  'quran.tapWords': 'Tap any ayah to read it word by word.',
+  /* A rubric inside the frame until the reader has opened words once, then
+     never again: the gesture explains itself after the first time. */
+  'quran.tapWords': 'Tap an ayah to open its words',
+  /* The pinned bar while the surah plays: the lit ayah, then the modifiers. */
+  'quran.listen.playing': 'Playing ayah {a} of {total}',
   'quran.playFrom': 'Play from ayah {n}',
   'quran.audioUnavailable': 'The recitation isn’t loading. Check your connection. The text is still here to read.',
   'reciter.title': 'Reciter',

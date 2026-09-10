@@ -3976,3 +3976,78 @@ lines are the taʿawwudh, unchanged). `i18n:manifest` regenerated. Web at
 390, both themes: all four heroes render with their verse. Not read on a
 device. ⚠️ Every page awaits scholarly review; `docs/scholarly-review.md`
 carries the entry. Ships by OTA.
+
+---
+
+## 10 Sep 2026 — The Qur'an tab, audited and re-threaded ✅
+
+Iyad asked for an audit of the tab as it stood, read the findings, and said
+build all of them. Looked at on web at 390, both themes, in the empty,
+partly-known, playing, words-open and next-surah states; the recite pair
+button is native-only and has not been seen. Not seen on a device.
+
+**Findings that changed the code, and what each removes**
+
+- **The empty state was a scoreboard reading zero.** "0 of 38 known by
+  heart" under 38 hollow stars, with the one reassuring sentence at the foot
+  of 38 rows. At zero the band's caption is now that sentence
+  (`quran.progress.help`), the foot is empty, and the slot the review row
+  will hold carries a door: "Start here", Al-Fatihah, "Recited in every
+  rakʿah of every prayer." A fact about the surah, so it can stand for a
+  month without becoming a reproach. Count and colophon return with the
+  first star. `(tabs)/quran.tsx`. Removed: the zero line and the foot at zero.
+- **The review slot contradicted its own design.** Marking Al-Fatihah known
+  made the tab say, in the same second, "you have marked this one, but not
+  recited it here yet" — a task, and one a reader who declined the model
+  download could never clear. `reviewFor` no longer has a never-recited
+  branch: only a recitation the follower heard can fill the slot, ordered by
+  age. `lib/review.ts`; `quran.review.never` deleted. Removed: the nudge
+  toward a first recitation. On the record as the cost.
+- **Half the surah's first screen was controls.** Cartouche, a permanent
+  hint line, Play, Repeat, Slower, the reciter row, the recite row. Now:
+  cartouche, one pair of verbs (Play the surah beside Recite with me where
+  the device can listen), the reciter row, the frame. The first ayah begins
+  where the eye lands. Removed: the static Repeat and Slower, the hint line,
+  `ReciteOpenRow` (deleted from `recite-follow.tsx`).
+- **Repeat and Slower were out of reach when needed.** The page scrolls
+  with playback, so by ayah 20 the modifiers were twenty ayahs up. New
+  `components/listen-bar.tsx`, pinned above the scroll while anything plays,
+  in the recite bar's exact clothes: "Playing ayah n of N", Stop, Repeat,
+  Slower, and the stalled message, which is about the ayah that is not
+  arriving and now sits where the reader is. Starting either mode stops the
+  other, so the two bars never stack.
+- **The instruction line became a rubric that retires itself.** "Tap an
+  ayah to open its words" sits inside the frame at its head, vermilion, as
+  the fihrist sets its own rubric, and goes the first time the gesture is
+  used, anywhere, for good. One bit in settings, `wordsOpened`, set once and
+  never unset. The dua pages still carry their own line; folding them onto
+  the same bit is one call each, left for a later pass.
+- **Two names for one thing.** The rubric said "juz 30", the intro
+  "Juz ʿAmma". Both say Juz ʿAmma now (`quran.order`).
+- **Vermilion did two jobs.** The order rubric and the review kicker were
+  both uppercase red. The slot's kicker is gold now, the colour Learn gives
+  its doors; red is wayfinding inside the frame and nothing else on the page.
+- **"Where do I start with the Qur'an?" went nowhere near the tab.** A
+  `quran` help screen routes to `/(tabs)/quran`, first in the topic, titled
+  and described in the tab's own words. `content/help.ts`,
+  `lib/content-routes.ts`, `hooks/use-help.ts`.
+- **No next surah.** A foot row under "I know this one": kicker "Next", the
+  name, Arabic name, meaning and size, set as the fihrist sets a row. It
+  REPLACES the screen (`PressableLink` grew a `replace` prop), so Back still
+  returns to the list however far along the order somebody has walked.
+  Verified on web: history length unchanged across the tap. An-Naba has no
+  foot.
+- **The transliteration broke mid-word at a hyphen** ("la-ḍ- / ḍālīn").
+  Hyphens in the joined line are set as U+2011 at render; the stored text is
+  untouched and the line still wraps at spaces. Per-word lines are unaffected.
+
+**Observed, not built.** The Saheeh International cut leaves dangling
+dashes and unclosed quotes per ayah ("Lord of the worlds -"). That is the
+translation's own punctuation and not ours to edit; a different resource
+from QuranEnc's 74 would be a content decision for Iyad. ⚠️ The inline
+rosette still orphans onto its own line in Al-Fatihah 7 on web; the seat is
+already marked device-pending above and stays so.
+
+Verified: `tsc`, `expo lint` (four standing errors, none in touched files),
+`style:check`, `i18n:manifest` (English only; UI strings are not in the
+sheet), `expo export --platform web`. Ships by OTA.

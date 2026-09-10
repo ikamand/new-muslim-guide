@@ -5,11 +5,19 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import { GirihStar } from '@/components/illustrations';
-import { MushafRosette } from '@/components/jadwal';
-import { ReciteControls, ReciteOpenRow, ReciterTurnPlayer } from '@/components/recite-follow';
-import { ThemedText } from '@/components/themed-text';
+import { MushafRosette, Rubric } from '@/components/jadwal';
+import { ListenBar } from '@/components/listen-bar';
+import { PressableLink } from '@/components/pressable-link';
+import { ReciteControls, ReciterTurnPlayer } from '@/components/recite-follow';
+import { ARABIC_NAME_TRIM, ThemedText } from '@/components/themed-text';
 import { WordGrid } from '@/components/word-grid';
-import { ayahTransliteration, ayahWordTransliterations, getSurah, JUZ30_SOURCE } from '@/content/quran/surahs';
+import {
+  ayahTransliteration,
+  ayahWordTransliterations,
+  getSurah,
+  JUZ30_SOURCE,
+  LEARNING_ORDER,
+} from '@/content/quran/surahs';
 import { ayahWords } from '@/content/quran/words';
 import { ayahSource, keepAyah } from '@/content/quran/ayah-audio';
 import { getReciter, reciterCredit } from '@/content/quran/recitation';
@@ -40,6 +48,19 @@ import type { UIKey } from '@/i18n/ui';
  * needs a voice and, once, a model download — and that was his call, on the
  * record. The surah now counts as recited when the follower reaches its end,
  * where covering the last ayah used to count.
+ *
+ * ## Three verbs, one place (10 Sep 2026)
+ *
+ * Listen, recite, and say you know it. Until Iyad's audit they sat in three
+ * places in three styles: a filled button at the top, a ruled row in the
+ * middle, an outlined button at the foot, with Repeat and Slower and a line
+ * of instruction between them, so that half the first screen was controls.
+ * Now the top is the cartouche, one pair of verbs (Play the surah beside
+ * Recite with me, where the device can listen) and the reciter row; the
+ * modifiers live in a bar pinned above the scroll while the surah plays,
+ * where the recite bar already was; the instruction is a rubric inside the
+ * frame that retires itself the first time it is followed; and the foot
+ * holds "I know this one" and the door to the next surah in the order.
  *
  * ## The translation is secondary here, and that is deliberate
  *
@@ -90,11 +111,24 @@ import type { UIKey } from '@/i18n/ui';
  *  rate `practice.tsx` uses, so one surah does not sound like two apps. */
 const SLOW_RATE = 0.75;
 
+/**
+ * A transliterated line with its hyphens made unbreakable.
+ *
+ * "wa la-ḍ-ḍālīn" is one word with joins drawn in; a line that breaks at a
+ * hyphen shows "la-ḍ-" on one line and "ḍālīn" on the next, which reads as
+ * two words to somebody who has only these letters to go by. U+2011 is the
+ * hyphen that does not break, and the line still wraps at every space. The
+ * stored text is untouched; this is how it is set, not what it says.
+ */
+function unbreakable(line: string): string {
+  return line.replace(/-/g, '‑');
+}
+
 export default function SurahScreen() {
   const theme = useTheme();
   const { t } = useLocale();
   const router = useRouter();
-  const { transliteration, translation, reciter: reciterId } = useSettings();
+  const { transliteration, translation, reciter: reciterId, wordsOpened, set } = useSettings();
   const { number } = useLocalSearchParams<{ number: string }>();
   const { isMemorised, toggle } = useMemorised();
   const { surahDone } = useObservations();
@@ -404,16 +438,37 @@ export default function SurahScreen() {
     ayah used to record this; the cover is gone and the follower records it,
     in the effect beside `highlightActive` above.
   */
-  const toggleWords = (ayah: number) =>
+  const toggleWords = (ayah: number) => {
+    /* The first time the gesture is used, its instruction has done its job. */
+    if (!wordsOpened) set('wordsOpened', true);
     setOpen((current) =>
       current.includes(ayah) ? current.filter((n) => n !== ayah) : [...current, ayah],
     );
+  };
+
+  /* The surah after this one in the learning order, for the foot. */
+  const position = LEARNING_ORDER.findIndex((s) => s.number === surah.number);
+  const next = position >= 0 ? LEARNING_ORDER[position + 1] : undefined;
 
   return (
     <View style={styles.screen}>
       {/* Pinned above the scroll, per Iyad: the controls must not disappear
-          while the page follows the recitation downward. */}
+          while the page follows the recitation downward. Listening gets the
+          same bar for the same reason; starting either stops the other, so
+          the two never stack. */}
       <ReciteControls follow={follow} classroom={classroom} />
+      {running ? (
+        <ListenBar
+          ayah={currentAyah ?? 1}
+          total={ayahs.length}
+          loop={loop}
+          slow={slow}
+          stalled={stalled}
+          onStop={stop}
+          onToggleLoop={() => setLoop((was) => !was)}
+          onToggleSlow={() => setSlow((was) => !was)}
+        />
+      ) : null}
       {/* The reciter's turn, as sound. Mounted only while it IS his turn —
           the key replays the clip on "once more", and unmounting closes his
           voice before the mic ever opens. */}
@@ -446,27 +501,22 @@ export default function SurahScreen() {
           </ThemedText>
         </View>
       </View>
-      <ThemedText type="small" themeColor="textSecondary" style={styles.centred}>
-        {t('quran.tapWords')}
-      </ThemedText>
-
       {/*
-        Repeat is a screen-wide setting rather than per row, because it is a
-        mode you are in — you turn it on, then work through the surah one ayah
-        at a time without reaching for it again.
+        The two ways to meet the surah, side by side: hear it, or be heard
+        saying it. Play is primary, because listening straight through is
+        how most people meet a surah before they try to hold any of it.
+        Recite is the same size and the muted shade: a peer, not an
+        afterthought, and not on web, where the device cannot listen. Repeat
+        and Slower are not here: they describe a mode, and they appear in the
+        pinned bar the moment the mode exists.
       */}
-      <View style={styles.controls}>
-        {/*
-          The whole surah, from the top. Primary, because listening straight
-          through is how most people meet a surah before they try to hold any
-          of it.
-        */}
+      <View style={styles.verbs}>
         <Pressable
           onPress={toggleSurah}
           accessibilityRole="button"
           accessibilityLabel={t(mode === 'surah' ? 'quran.stop' : 'quran.playSurah')}
           style={({ pressed }) => [
-            styles.playSurah,
+            styles.verb,
             { backgroundColor: theme.accent, opacity: pressed ? 0.85 : 1 },
           ]}>
           <Ionicons
@@ -479,43 +529,25 @@ export default function SurahScreen() {
           </ThemedText>
         </Pressable>
 
-        <Pressable
-          onPress={() => setLoop((was) => !was)}
-          accessibilityRole="switch"
-          accessibilityState={{ checked: loop }}
-          style={[
-            styles.loop,
-            {
-              backgroundColor: loop ? theme.accentMuted : 'transparent',
-              borderColor: loop ? theme.accent : theme.border,
-            },
-          ]}>
-          <Ionicons name="repeat" size={16} color={loop ? theme.accent : theme.textSecondary} />
-          <ThemedText type="smallBold" themeColor={loop ? 'accent' : 'textSecondary'}>
-            {t('practice.repeat')}
-          </ThemedText>
-        </Pressable>
-
-        <Pressable
-          onPress={() => setSlow((was) => !was)}
-          accessibilityRole="switch"
-          accessibilityState={{ checked: slow }}
-          style={[
-            styles.loop,
-            {
-              backgroundColor: slow ? theme.accentMuted : 'transparent',
-              borderColor: slow ? theme.accent : theme.border,
-            },
-          ]}>
-          <Ionicons
-            name="play-back-outline"
-            size={16}
-            color={slow ? theme.accent : theme.textSecondary}
-          />
-          <ThemedText type="smallBold" themeColor={slow ? 'accent' : 'textSecondary'}>
-            {t('practice.slower')}
-          </ThemedText>
-        </Pressable>
+        {follow.available ? (
+          <Pressable
+            onPress={follow.open ? follow.close : follow.openControls}
+            accessibilityRole="button"
+            accessibilityState={{ expanded: follow.open }}
+            accessibilityLabel={t('recite.title')}
+            style={({ pressed }) => [
+              styles.verb,
+              {
+                backgroundColor: pressed ? theme.backgroundSelected : theme.accentMuted,
+                borderColor: follow.open ? theme.accent : theme.accentMuted,
+              },
+            ]}>
+            <Ionicons name="ear-outline" size={16} color={theme.accent} />
+            <ThemedText type="smallBold" themeColor="accent">
+              {t('recite.title')}
+            </ThemedText>
+          </Pressable>
+        ) : null}
       </View>
 
       {/*
@@ -555,21 +587,6 @@ export default function SurahScreen() {
       </Pressable>
 
       {/*
-        The listening half. Hearing the surah is the row above; being heard
-        reciting it is this one — the highlight lives in the ayah cards, and
-        this row just opens the pinned controls. Nothing on web.
-      */}
-      <ReciteOpenRow follow={follow} />
-
-      {stalled && (
-        <View style={[styles.stalled, { borderLeftColor: theme.border }]}>
-          <ThemedText type="small" themeColor="textSecondary">
-            {t('quran.audioUnavailable')}
-          </ThemedText>
-        </View>
-      )}
-
-      {/*
         The frame that earns its gold. Plain until the reader marks the surah
         known; then the corner stars and the midpoint stars complete it, with
         the cartouche's wash. Drawn from state the screen already keeps;
@@ -588,6 +605,16 @@ export default function SurahScreen() {
         }}>
         <View style={[styles.mframe, { borderColor: theme.gold }]}>
           <View style={[styles.mframeIn, { borderColor: theme.goldSoft }]}>
+            {/*
+              The one instruction the page needs, as the fihrist sets its
+              own: a rubric inside the frame. Shown until the reader has
+              opened an ayah's words once, anywhere, and then never again.
+            */}
+            {!wordsOpened && (
+              <View style={[styles.rubric, { borderBottomColor: theme.goldSoft }]}>
+                <Rubric label={t('quran.tapWords')} />
+              </View>
+            )}
             <View style={styles.list}>
         {surah.ayahs.map((ayah, position) => {
           const words = ayahWords(surah.number, ayah.number);
@@ -728,7 +755,7 @@ export default function SurahScreen() {
                       </ThemedText>
                     ) : (
                       <ThemedText type="small" themeColor="textSecondary" style={styles.transliteration}>
-                        {transliterated}
+                        {unbreakable(transliterated)}
                       </ThemedText>
                     )
                   ) : null}
@@ -823,6 +850,37 @@ export default function SurahScreen() {
         </ThemedText>
       </Pressable>
 
+      {/*
+        The next surah in the learning order, set as the fihrist sets a row:
+        name, Arabic name, meaning and size. It replaces this screen rather
+        than stacking on it, so Back still returns to the list however far
+        along the order somebody has walked. An-Naba, the last, has no foot.
+      */}
+      {next ? (
+        <PressableLink
+          href={{ pathname: '/surah/[number]', params: { number: String(next.number) } }}
+          replace
+          accessibilityLabel={`${t('quran.next')}: ${next.name}, ${next.meaning}, ${next.ayahs.length} ${t('count.ayahs')}`}
+          style={[styles.next, { borderTopColor: theme.goldSoft, borderBottomColor: theme.goldSoft }]}
+          pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
+          <View style={styles.nextText}>
+            <ThemedText type="caption" themeColor="gold" style={styles.kicker}>
+              {t('quran.next')}
+            </ThemedText>
+            <View style={styles.nextNames}>
+              <ThemedText type="cardTitle">{next.name}</ThemedText>
+              <ThemedText type="arabicName" style={styles.nextArabic}>
+                {next.nameArabic}
+              </ThemedText>
+            </View>
+            <ThemedText type="small" themeColor="textSecondary">
+              {next.meaning} · {next.ayahs.length} {t('count.ayahs')}
+            </ThemedText>
+          </View>
+          <Ionicons name="chevron-forward" size={18} color={theme.textSecondary} />
+        </PressableLink>
+      ) : null}
+
       <ThemedText type="caption" themeColor="textSecondary">
         {JUZ30_SOURCE.arabic} · {JUZ30_SOURCE.translation}
       </ThemedText>
@@ -905,38 +963,51 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  controls: {
+  /* The pair of verbs: equal halves, one row, never wrapping. */
+  verbs: {
     flexDirection: 'row',
-    flexWrap: 'wrap',
     gap: Spacing.two,
   },
-  /*
-    Its own row, with repeat and slower sharing the one below.
-
-    Three controls in a line wrap on a narrow phone, and what wrapped was
-    "Slower" — stranded alone under the other two, which read as an
-    afterthought rather than a pair of modifiers. Giving the primary action the
-    full width says the right thing about it and makes the wrap deliberate
-    instead of accidental.
-  */
-  playSurah: {
+  verb: {
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    flexBasis: '100%',
     gap: Spacing.two,
-    minHeight: 44,
+    minHeight: 48,
     paddingHorizontal: Spacing.three,
     borderRadius: Radius.small,
+    /* Painted in the pair's own colour until the recite bar is open, when
+       it takes the accent as its edge: the button that opened the bar. */
+    borderWidth: 1,
+    borderColor: 'transparent',
   },
-  loop: {
+  /* The rubric's seat at the frame's head, ruled off from the first ayah. */
+  rubric: {
+    paddingVertical: Spacing.two,
+    paddingHorizontal: Spacing.three,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+  kicker: { textTransform: 'uppercase', letterSpacing: 1 },
+  next: {
     flexDirection: 'row',
     alignItems: 'center',
+    gap: Spacing.three,
+    minHeight: 64,
+    paddingVertical: Spacing.three,
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+  nextText: { flex: 1, gap: Spacing.one },
+  nextNames: {
+    flexDirection: 'row',
+    alignItems: 'baseline',
+    justifyContent: 'space-between',
     gap: Spacing.two,
-    minHeight: 40,
-    paddingHorizontal: Spacing.three,
-    borderRadius: Radius.small,
-    borderWidth: StyleSheet.hairlineWidth,
+  },
+  nextArabic: {
+    /* size and face: the `arabicName` rung; the trim's story lives with it */
+    ...ARABIC_NAME_TRIM,
   },
   reciter: {
     flexDirection: 'row',
@@ -948,12 +1019,6 @@ const styles = StyleSheet.create({
   reciterText: {
     flex: 1,
     gap: 1,
-  },
-  /** The same left rule the app uses when it is talking about itself. */
-  stalled: {
-    borderLeftWidth: 3,
-    paddingLeft: Spacing.three,
-    paddingVertical: Spacing.one,
   },
   ayahText: {
     gap: Spacing.two,

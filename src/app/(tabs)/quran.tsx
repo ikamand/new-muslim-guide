@@ -52,6 +52,17 @@ import { useTheme } from '@/hooks/use-theme';
  * fact, not a nag. No streak, no daily target, no notice when somebody
  * stops. Someone three weeks into Islam does not need an app that is
  * disappointed in them.
+ *
+ * ## The first month (10 Sep 2026)
+ *
+ * Before anything is known the band's caption was "0 of 38", which is a
+ * scoreboard reading zero, and the one sentence that explains the count sat
+ * at the foot of 38 rows where a first-week reader never arrives. Now, at
+ * zero, the caption IS that sentence and the foot is empty; the count and
+ * the colophon take their places the day the first star fills. And the slot
+ * the review row will one day hold carries a door instead: "Start here",
+ * Al-Fatihah, with the one fact that makes it first. A fact about the surah,
+ * so it can stand there for a month without becoming a reproach.
  */
 export default function QuranScreen() {
   const theme = useTheme();
@@ -60,6 +71,15 @@ export default function QuranScreen() {
   const observations = useObservations();
   const review = reviewFor(memorised, observations);
   const reviewSurah = review ? LEARNING_ORDER.find((s) => s.number === review.surah) : undefined;
+  /* The first row of the order, which is the answer to "where do I start". */
+  const first = LEARNING_ORDER[0];
+  const starting = count === 0;
+  /* What the slot under the band holds: the review, or at zero the door. */
+  const slot = reviewSurah
+    ? { kicker: 'quran.review.kicker' as const, why: 'quran.review.stale' as const, surah: reviewSurah }
+    : starting && first
+      ? { kicker: 'quran.start.kicker' as const, why: 'quran.start.why' as const, surah: first }
+      : undefined;
 
   return (
     <SafeAreaView style={[styles.safeArea, { backgroundColor: theme.background }]} edges={['top']}>
@@ -82,37 +102,47 @@ export default function QuranScreen() {
         <View>
           <View style={[styles.progress, { borderBottomColor: theme.goldSoft }]}>
             <WoundStrand known={isMemorised} />
-            {/* The count is the band's caption, nothing more — the
-                reassurance sentence now closes the frame instead. */}
+            {/* The count is the band's caption, nothing more; at zero the
+                caption is the reassurance instead, because "0 of 38" is a
+                score and the sentence is what a first-week reader needs. */}
             <ThemedText type="caption" themeColor="textSecondary" style={styles.bandCount}>
-              {t('quran.progress')
-                .replace('{done}', String(count))
-                .replace('{total}', String(LEARNING_ORDER.length))}
+              {starting
+                ? t('quran.progress.help')
+                : t('quran.progress')
+                    .replace('{done}', String(count))
+                    .replace('{total}', String(LEARNING_ORDER.length))}
             </ThemedText>
           </View>
 
           {/*
-            One surah worth reciting again — and never a queue.
+            One slot, two tenants, never both.
 
+            Before anything is known it is a door: "Start here", the first
+            surah of the order and the one fact that puts it first. After
+            that it is one surah worth reciting again — and never a queue.
             `lib/review.ts` explains the whole design: the schedule is
-            invisible, the slot is always filled and never late, and the
-            sentence is about the surah rather than about the reader. This
-            screen must never grow a count of what is "due"; that is a
+            invisible, the sentence is about the surah rather than about the
+            reader, and only a recitation the follower heard can fill it.
+            This screen must never grow a count of what is "due"; that is a
             backlog, and a backlog is a streak wearing different clothes.
+
+            The kicker is gold, the colour Learn gives its doors: a
+            suggestion. Vermilion is kept for the rubric inside the frame,
+            which is wayfinding, so red keeps meaning one thing on this page.
           */}
-          {review ? (
+          {slot ? (
             <PressableLink
-              href={{ pathname: '/surah/[number]', params: { number: String(review.surah) } }}
-              accessibilityLabel={`${t('quran.review.kicker')}: ${reviewSurah?.name ?? ''}`}
+              href={{ pathname: '/surah/[number]', params: { number: String(slot.surah.number) } }}
+              accessibilityLabel={`${t(slot.kicker)}: ${slot.surah.name}. ${t(slot.why)}`}
               style={[styles.review, { borderBottomColor: theme.goldSoft }]}
               pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
               <View style={styles.reviewText}>
-                <ThemedText type="caption" themeColor="vermilion" style={styles.kicker}>
-                  {t('quran.review.kicker')}
+                <ThemedText type="caption" themeColor="gold" style={styles.kicker}>
+                  {t(slot.kicker)}
                 </ThemedText>
-                <ThemedText type="cardTitle">{reviewSurah?.name}</ThemedText>
+                <ThemedText type="cardTitle">{slot.surah.name}</ThemedText>
                 <ThemedText type="small" themeColor="textSecondary">
-                  {t(review.neverRecited ? 'quran.review.never' : 'quran.review.stale')}
+                  {t(slot.why)}
                 </ThemedText>
               </View>
               <Ionicons name="chevron-forward" size={18} color={theme.textSecondary} />
@@ -183,11 +213,15 @@ export default function QuranScreen() {
             The one sentence of honesty, at the table's foot — the position
             Awqat gives its Hijri note. As preamble it was one more strip
             between the reader and the fihrist; as a colophon it is the last
-            word, which is what reassurance should be.
+            word, which is what reassurance should be. At zero it has already
+            been said under the band, so the foot stays empty rather than
+            saying it twice.
           */}
-          <ThemedText type="small" themeColor="textSecondary" style={styles.footNote}>
-            {t('quran.progress.help')}
-          </ThemedText>
+          {!starting && (
+            <ThemedText type="small" themeColor="textSecondary" style={styles.footNote}>
+              {t('quran.progress.help')}
+            </ThemedText>
+          )}
         </View>
       </ScrollView>
     </SafeAreaView>

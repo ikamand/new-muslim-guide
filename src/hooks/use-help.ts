@@ -51,6 +51,8 @@ const SCREEN_TEXT: Record<HelpScreen, { title: UIKey; description: UIKey }> = {
   duas: { title: 'learn.duas.title', description: 'learn.duas.subtitle' },
   phrases: { title: 'learn.phrases.title', description: 'learn.phrases.subtitle' },
   practice: { title: 'learn.practice.title', description: 'learn.practice.subtitle' },
+  /* The tab describes itself in its own words; help does not write a third set. */
+  quran: { title: 'quran.title', description: 'quran.intro' },
 };
 
 /**

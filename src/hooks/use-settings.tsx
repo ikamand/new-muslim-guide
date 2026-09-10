@@ -179,6 +179,15 @@ export type Settings = {
    * shortcut.
    */
   pinnedDuas: readonly string[];
+  /**
+   * Whether the reader has ever opened an ayah word by word.
+   *
+   * The surah screen carries one line of instruction for that gesture, and
+   * the gesture explains itself the first time it is used. So the line shows
+   * until this flips, and never again: an instruction that stays on screen
+   * after it has been followed is furniture. One bit, set once, never unset.
+   */
+  wordsOpened: boolean;
 };
 
 /** See `pinnedDuas`. */
@@ -208,6 +217,7 @@ const DEFAULTS: Settings = {
   jumuahNote: false,
   reciter: DEFAULT_RECITER,
   pinnedDuas: [],
+  wordsOpened: false,
 };
 
 /** Unchanged from when this held only display settings, so nobody's choices reset. */
@@ -357,6 +367,7 @@ function parseStored(raw: string | null): Settings {
             .filter((entry): entry is string => typeof entry === 'string')
             .slice(0, MAX_PINNED)
         : [],
+      wordsOpened: stored.wordsOpened === true,
     };
   } catch {
     return DEFAULTS;

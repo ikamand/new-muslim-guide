@@ -27,7 +27,7 @@ import type { ContentRef } from './model';
 import { ref } from './model';
 
 /** A screen the app already has, named so `src/lib/content-routes.ts` can route it. */
-export const HELP_SCREENS = ['duas', 'phrases', 'practice'] as const;
+export const HELP_SCREENS = ['duas', 'phrases', 'practice', 'quran'] as const;
 export type HelpScreen = (typeof HELP_SCREENS)[number];
 
 export type HelpEntry =
@@ -104,7 +104,14 @@ export const HELP_TOPICS: readonly HelpTopic[] = [
   },
   {
     id: 'quran',
+    /*
+      The question is "where do I start", and until 10 Sep 2026 the answer
+      was two articles and a screen that hides itself. The tab is where
+      starting happens: Al-Fatihah first, then the short surahs in the order
+      they are learned, so it goes first.
+    */
     entries: [
+      screen('quran'),
       content('reference', 'what-is-the-quran'),
       content('reference', 'al-fatihah'),
       screen('practice'),

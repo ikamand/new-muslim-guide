@@ -111,9 +111,10 @@ const DUAS = [
   { id: 'ibrahim-prayer', who: 'Ibrāhīm', s: 14, a: 40, note: 'To be kept in prayer' },
   { id: 'ibrahim-forgive', who: 'Ibrāhīm', s: 14, a: 41, note: 'For his parents' },
   { id: 'ibrahim-wisdom', who: 'Ibrāhīm', s: 26, a: 83, note: 'For wisdom and good company' },
-  { id: 'musa-chest', who: 'Mūsā', s: 20, a: 25, note: 'Before speaking to Pharaoh' },
-  { id: 'musa-task', who: 'Mūsā', s: 20, a: 26, note: 'Make my task easy' },
-  { id: 'musa-tongue', who: 'Mūsā', s: 20, a: 27, note: 'Untie the knot from my tongue' },
+  // One supplication across four verses — 20:28 is its purpose clause ("that
+  // they may understand my speech"), so the three earlier cards were three
+  // quarters of a duʿa, each missing the reason for the rest.
+  { id: 'musa-chest', who: 'Mūsā', s: 20, a: [25, 28], note: 'Before speaking to Pharaoh' },
   { id: 'musa-forgive', who: 'Mūsā', s: 7, a: 151, note: 'For himself and his brother' },
   { id: 'musa-people', who: 'The believers with Mūsā', s: 10, a: [85, 86], note: 'Under an oppressor' },
   { id: 'zakariyya-offspring', who: 'Zakariyyā', s: 3, a: 38, note: 'For a child' },

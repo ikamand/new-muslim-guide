@@ -5,7 +5,7 @@
  * here is lost the next time it runs, and one that needs making belongs
  * upstream, where the text is published.
  *
- * 176 Qur'an passages and 208 narrations. Every character came over
+ * 174 Qur'an passages and 208 narrations. Every character came over
  * the wire from a published text rather than from memory, which is the only
  * way a file like this could exist under this project's rules about Arabic.
  *
@@ -955,21 +955,9 @@ export const QURAN_TEXT: Record<string, EvidenceText> = {
     "arabicFrom": "QuranEnc.com",
     "translationFrom": "QuranEnc.com"
   },
-  "20:25": {
-    "arabic": "قَالَ رَبِّ ٱشۡرَحۡ لِي صَدۡرِي",
-    "translation": "[Moses] said, \"My Lord, expand [i.e., relax] for me my breast [with assurance]",
-    "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
-  },
-  "20:26": {
-    "arabic": "وَيَسِّرۡ لِيٓ أَمۡرِي",
-    "translation": "And ease for me my task",
-    "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
-  },
-  "20:27": {
-    "arabic": "وَٱحۡلُلۡ عُقۡدَةٗ مِّن لِّسَانِي",
-    "translation": "And untie the knot from my tongue",
+  "20:25-28": {
+    "arabic": "قَالَ رَبِّ ٱشۡرَحۡ لِي صَدۡرِي وَيَسِّرۡ لِيٓ أَمۡرِي وَٱحۡلُلۡ عُقۡدَةٗ مِّن لِّسَانِي يَفۡقَهُواْ قَوۡلِي",
+    "translation": "[Moses] said, \"My Lord, expand [i.e., relax] for me my breast [with assurance] And ease for me my task And untie the knot from my tongue That they may understand my speech.",
     "arabicFrom": "QuranEnc.com",
     "translationFrom": "QuranEnc.com"
   },

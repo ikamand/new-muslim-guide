@@ -1387,28 +1387,10 @@
  },
  {
   "where": "Duʿas from the Qur’an — Mūsā — Before speaking to Pharaoh",
-  "arabic": "قَالَ رَبِّ ٱشۡرَحۡ لِي صَدۡرِي",
+  "arabic": "قَالَ رَبِّ ٱشۡرَحۡ لِي صَدۡرِي وَيَسِّرۡ لِيٓ أَمۡرِي وَٱحۡلُلۡ عُقۡدَةٗ مِّن لِّسَانِي يَفۡقَهُواْ قَوۡلِي",
   "translit": "",
   "english": "Mūsā — Before speaking to Pharaoh",
-  "source": "Qur’an 20:25",
-  "file": "collections/quranic-duas.ts",
-  "kind": "quotation"
- },
- {
-  "where": "Duʿas from the Qur’an — Mūsā — Make my task easy",
-  "arabic": "وَيَسِّرۡ لِيٓ أَمۡرِي",
-  "translit": "",
-  "english": "Mūsā — Make my task easy",
-  "source": "Qur’an 20:26",
-  "file": "collections/quranic-duas.ts",
-  "kind": "quotation"
- },
- {
-  "where": "Duʿas from the Qur’an — Mūsā — Untie the knot from my tongue",
-  "arabic": "وَٱحۡلُلۡ عُقۡدَةٗ مِّن لِّسَانِي",
-  "translit": "",
-  "english": "Mūsā — Untie the knot from my tongue",
-  "source": "Qur’an 20:27",
+  "source": "Qur’an 20:25-28",
   "file": "collections/quranic-duas.ts",
   "kind": "quotation"
  },

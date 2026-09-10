@@ -5,7 +5,7 @@ supplied each line of it.
 
 | | |
 |---|---|
-| Qur'an passages | 205 of 205 |
+| Qur'an passages | 249 of 249 |
 | Narrations | 208 of 208 |
 | Confirmed against a second publisher | 70 |
 | Translation from HadeethEnc (published terms) | 70 |

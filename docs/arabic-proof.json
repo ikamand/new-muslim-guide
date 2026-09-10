@@ -1332,11 +1332,65 @@
   "kind": "quotation"
  },
  {
+  "where": "Duas from the Qur’an — The angels — We know only what You taught us",
+  "arabic": "قَالُواْ سُبۡحَٰنَكَ لَا عِلۡمَ لَنَآ إِلَّا مَا عَلَّمۡتَنَآۖ إِنَّكَ أَنتَ ٱلۡعَلِيمُ ٱلۡحَكِيمُ",
+  "translit": "",
+  "english": "The angels — We know only what You taught us",
+  "source": "Qur’an 2:32",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — On magic — It was not Sulaymān who disbelieved",
+  "arabic": "وَٱتَّبَعُواْ مَا تَتۡلُواْ ٱلشَّيَٰطِينُ عَلَىٰ مُلۡكِ سُلَيۡمَٰنَۖ وَمَا كَفَرَ سُلَيۡمَٰنُ وَلَٰكِنَّ ٱلشَّيَٰطِينَ كَفَرُواْ يُعَلِّمُونَ ٱلنَّاسَ ٱلسِّحۡرَ وَمَآ أُنزِلَ عَلَى ٱلۡمَلَكَيۡنِ بِبَابِلَ هَٰرُوتَ وَمَٰرُوتَۚ وَمَا يُعَلِّمَانِ مِنۡ أَحَدٍ حَتَّىٰ يَقُولَآ إِنَّمَا نَحۡنُ فِتۡنَةٞ فَلَا تَكۡفُرۡۖ فَيَتَعَلَّمُونَ مِنۡهُمَا مَا يُفَرِّقُونَ بِهِۦ بَيۡنَ ٱلۡمَرۡءِ وَزَوۡجِهِۦۚ وَمَا هُم بِضَآرِّينَ بِهِۦ مِنۡ أَحَدٍ إِلَّا بِإِذۡنِ ٱللَّهِۚ وَيَتَعَلَّمُونَ مَا يَضُرُّهُمۡ وَلَا يَنفَعُهُمۡۚ وَلَقَدۡ عَلِمُواْ لَمَنِ ٱشۡتَرَىٰهُ مَا لَهُۥ فِي ٱلۡأٓخِرَةِ مِنۡ خَلَٰقٖۚ وَلَبِئۡسَ مَا شَرَوۡاْ بِهِۦٓ أَنفُسَهُمۡۚ لَوۡ كَانُواْ يَعۡلَمُونَ",
+  "translit": "",
+  "english": "On magic — It was not Sulaymān who disbelieved",
+  "source": "Qur’an 2:102",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — Ibrāhīm — For Mecca",
+  "arabic": "وَإِذۡ قَالَ إِبۡرَٰهِـۧمُ رَبِّ ٱجۡعَلۡ هَٰذَا بَلَدًا ءَامِنٗا وَٱرۡزُقۡ أَهۡلَهُۥ مِنَ ٱلثَّمَرَٰتِ مَنۡ ءَامَنَ مِنۡهُم بِٱللَّهِ وَٱلۡيَوۡمِ ٱلۡأٓخِرِۚ قَالَ وَمَن كَفَرَ فَأُمَتِّعُهُۥ قَلِيلٗا ثُمَّ أَضۡطَرُّهُۥٓ إِلَىٰ عَذَابِ ٱلنَّارِۖ وَبِئۡسَ ٱلۡمَصِيرُ",
+  "translit": "",
+  "english": "Ibrāhīm — For Mecca",
+  "source": "Qur’an 2:126",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
   "where": "Duas from the Qur’an — Ibrāhīm and Ismāʿīl — Raising the House",
   "arabic": "وَإِذۡ يَرۡفَعُ إِبۡرَٰهِـۧمُ ٱلۡقَوَاعِدَ مِنَ ٱلۡبَيۡتِ وَإِسۡمَٰعِيلُ رَبَّنَا تَقَبَّلۡ مِنَّآۖ إِنَّكَ أَنتَ ٱلسَّمِيعُ ٱلۡعَلِيمُ رَبَّنَا وَٱجۡعَلۡنَا مُسۡلِمَيۡنِ لَكَ وَمِن ذُرِّيَّتِنَآ أُمَّةٗ مُّسۡلِمَةٗ لَّكَ وَأَرِنَا مَنَاسِكَنَا وَتُبۡ عَلَيۡنَآۖ إِنَّكَ أَنتَ ٱلتَّوَّابُ ٱلرَّحِيمُ",
   "translit": "",
   "english": "Ibrāhīm and Ismāʿīl — Raising the House",
   "source": "Qur’an 2:127-128",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — Ibrāhīm and Ismāʿīl — Raising the House, and for a messenger",
+  "arabic": "وَإِذۡ يَرۡفَعُ إِبۡرَٰهِـۧمُ ٱلۡقَوَاعِدَ مِنَ ٱلۡبَيۡتِ وَإِسۡمَٰعِيلُ رَبَّنَا تَقَبَّلۡ مِنَّآۖ إِنَّكَ أَنتَ ٱلسَّمِيعُ ٱلۡعَلِيمُ رَبَّنَا وَٱجۡعَلۡنَا مُسۡلِمَيۡنِ لَكَ وَمِن ذُرِّيَّتِنَآ أُمَّةٗ مُّسۡلِمَةٗ لَّكَ وَأَرِنَا مَنَاسِكَنَا وَتُبۡ عَلَيۡنَآۖ إِنَّكَ أَنتَ ٱلتَّوَّابُ ٱلرَّحِيمُ رَبَّنَا وَٱبۡعَثۡ فِيهِمۡ رَسُولٗا مِّنۡهُمۡ يَتۡلُواْ عَلَيۡهِمۡ ءَايَٰتِكَ وَيُعَلِّمُهُمُ ٱلۡكِتَٰبَ وَٱلۡحِكۡمَةَ وَيُزَكِّيهِمۡۖ إِنَّكَ أَنتَ ٱلۡعَزِيزُ ٱلۡحَكِيمُ",
+  "translit": "",
+  "english": "Ibrāhīm and Ismāʿīl — Raising the House, and for a messenger",
+  "source": "Qur’an 2:127-129",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — The patient — Tested, and what they say",
+  "arabic": "وَلَنَبۡلُوَنَّكُم بِشَيۡءٖ مِّنَ ٱلۡخَوۡفِ وَٱلۡجُوعِ وَنَقۡصٖ مِّنَ ٱلۡأَمۡوَٰلِ وَٱلۡأَنفُسِ وَٱلثَّمَرَٰتِۗ وَبَشِّرِ ٱلصَّٰبِرِينَ ٱلَّذِينَ إِذَآ أَصَٰبَتۡهُم مُّصِيبَةٞ قَالُوٓاْ إِنَّا لِلَّهِ وَإِنَّآ إِلَيۡهِ رَٰجِعُونَ",
+  "translit": "",
+  "english": "The patient — Tested, and what they say",
+  "source": "Qur’an 2:155-156",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — The patient — When loss strikes",
+  "arabic": "ٱلَّذِينَ إِذَآ أَصَٰبَتۡهُم مُّصِيبَةٞ قَالُوٓاْ إِنَّا لِلَّهِ وَإِنَّآ إِلَيۡهِ رَٰجِعُونَ",
+  "translit": "",
+  "english": "The patient — When loss strikes",
+  "source": "Qur’an 2:156",
   "file": "collections/quranic-duas.ts",
   "kind": "quotation"
  },
@@ -1350,56 +1404,83 @@
   "kind": "quotation"
  },
  {
-  "where": "Duas from the Qur’an — Ādam — After the mistake",
-  "arabic": "قَالَا رَبَّنَا ظَلَمۡنَآ أَنفُسَنَا وَإِن لَّمۡ تَغۡفِرۡ لَنَا وَتَرۡحَمۡنَا لَنَكُونَنَّ مِنَ ٱلۡخَٰسِرِينَ",
+  "where": "Duas from the Qur’an — Those who stood with Ṭālūt — Facing Jālūt",
+  "arabic": "وَلَمَّا بَرَزُواْ لِجَالُوتَ وَجُنُودِهِۦ قَالُواْ رَبَّنَآ أَفۡرِغۡ عَلَيۡنَا صَبۡرٗا وَثَبِّتۡ أَقۡدَامَنَا وَٱنصُرۡنَا عَلَى ٱلۡقَوۡمِ ٱلۡكَٰفِرِينَ",
   "translit": "",
-  "english": "Ādam — After the mistake",
-  "source": "Qur’an 7:23",
+  "english": "Those who stood with Ṭālūt — Facing Jālūt",
+  "source": "Qur’an 2:250",
   "file": "collections/quranic-duas.ts",
   "kind": "quotation"
  },
  {
-  "where": "Duas from the Qur’an — The believer — For parents",
-  "arabic": "وَٱخۡفِضۡ لَهُمَا جَنَاحَ ٱلذُّلِّ مِنَ ٱلرَّحۡمَةِ وَقُل رَّبِّ ٱرۡحَمۡهُمَا كَمَا رَبَّيَانِي صَغِيرٗا",
+  "where": "Duas from the Qur’an — Āyat al-Kursī — The verse of the Throne",
+  "arabic": "ٱللَّهُ لَآ إِلَٰهَ إِلَّا هُوَ ٱلۡحَيُّ ٱلۡقَيُّومُۚ لَا تَأۡخُذُهُۥ سِنَةٞ وَلَا نَوۡمٞۚ لَّهُۥ مَا فِي ٱلسَّمَٰوَٰتِ وَمَا فِي ٱلۡأَرۡضِۗ مَن ذَا ٱلَّذِي يَشۡفَعُ عِندَهُۥٓ إِلَّا بِإِذۡنِهِۦۚ يَعۡلَمُ مَا بَيۡنَ أَيۡدِيهِمۡ وَمَا خَلۡفَهُمۡۖ وَلَا يُحِيطُونَ بِشَيۡءٖ مِّنۡ عِلۡمِهِۦٓ إِلَّا بِمَا شَآءَۚ وَسِعَ كُرۡسِيُّهُ ٱلسَّمَٰوَٰتِ وَٱلۡأَرۡضَۖ وَلَا يَـُٔودُهُۥ حِفۡظُهُمَاۚ وَهُوَ ٱلۡعَلِيُّ ٱلۡعَظِيمُ",
   "translit": "",
-  "english": "The believer — For parents",
-  "source": "Qur’an 17:24",
+  "english": "Āyat al-Kursī — The verse of the Throne",
+  "source": "Qur’an 2:255",
   "file": "collections/quranic-duas.ts",
   "kind": "quotation"
  },
  {
-  "where": "Duas from the Qur’an — Yūnus — From inside the darkness",
-  "arabic": "وَذَا ٱلنُّونِ إِذ ذَّهَبَ مُغَٰضِبٗا فَظَنَّ أَن لَّن نَّقۡدِرَ عَلَيۡهِ فَنَادَىٰ فِي ٱلظُّلُمَٰتِ أَن لَّآ إِلَٰهَ إِلَّآ أَنتَ سُبۡحَٰنَكَ إِنِّي كُنتُ مِنَ ٱلظَّٰلِمِينَ",
+  "where": "Duas from the Qur’an — The Messenger and the believers — We hear and we obey",
+  "arabic": "ءَامَنَ ٱلرَّسُولُ بِمَآ أُنزِلَ إِلَيۡهِ مِن رَّبِّهِۦ وَٱلۡمُؤۡمِنُونَۚ كُلٌّ ءَامَنَ بِٱللَّهِ وَمَلَٰٓئِكَتِهِۦ وَكُتُبِهِۦ وَرُسُلِهِۦ لَا نُفَرِّقُ بَيۡنَ أَحَدٖ مِّن رُّسُلِهِۦۚ وَقَالُواْ سَمِعۡنَا وَأَطَعۡنَاۖ غُفۡرَانَكَ رَبَّنَا وَإِلَيۡكَ ٱلۡمَصِيرُ",
   "translit": "",
-  "english": "Yūnus — From inside the darkness",
-  "source": "Qur’an 21:87",
+  "english": "The Messenger and the believers — We hear and we obey",
+  "source": "Qur’an 2:285",
   "file": "collections/quranic-duas.ts",
   "kind": "quotation"
  },
  {
-  "where": "Duas from the Qur’an — The Prophet ﷺ — Forgive and have mercy",
-  "arabic": "وَقُل رَّبِّ ٱغۡفِرۡ وَٱرۡحَمۡ وَأَنتَ خَيۡرُ ٱلرَّٰحِمِينَ",
+  "where": "Duas from the Qur’an — The end of Al-Baqarah — Two verses said at night",
+  "arabic": "ءَامَنَ ٱلرَّسُولُ بِمَآ أُنزِلَ إِلَيۡهِ مِن رَّبِّهِۦ وَٱلۡمُؤۡمِنُونَۚ كُلٌّ ءَامَنَ بِٱللَّهِ وَمَلَٰٓئِكَتِهِۦ وَكُتُبِهِۦ وَرُسُلِهِۦ لَا نُفَرِّقُ بَيۡنَ أَحَدٖ مِّن رُّسُلِهِۦۚ وَقَالُواْ سَمِعۡنَا وَأَطَعۡنَاۖ غُفۡرَانَكَ رَبَّنَا وَإِلَيۡكَ ٱلۡمَصِيرُ لَا يُكَلِّفُ ٱللَّهُ نَفۡسًا إِلَّا وُسۡعَهَاۚ لَهَا مَا كَسَبَتۡ وَعَلَيۡهَا مَا ٱكۡتَسَبَتۡۗ رَبَّنَا لَا تُؤَاخِذۡنَآ إِن نَّسِينَآ أَوۡ أَخۡطَأۡنَاۚ رَبَّنَا وَلَا تَحۡمِلۡ عَلَيۡنَآ إِصۡرٗا كَمَا حَمَلۡتَهُۥ عَلَى ٱلَّذِينَ مِن قَبۡلِنَاۚ رَبَّنَا وَلَا تُحَمِّلۡنَا مَا لَا طَاقَةَ لَنَا بِهِۦۖ وَٱعۡفُ عَنَّا وَٱغۡفِرۡ لَنَا وَٱرۡحَمۡنَآۚ أَنتَ مَوۡلَىٰنَا فَٱنصُرۡنَا عَلَى ٱلۡقَوۡمِ ٱلۡكَٰفِرِينَ",
   "translit": "",
-  "english": "The Prophet ﷺ — Forgive and have mercy",
-  "source": "Qur’an 23:118",
+  "english": "The end of Al-Baqarah — Two verses said at night",
+  "source": "Qur’an 2:285-286",
   "file": "collections/quranic-duas.ts",
   "kind": "quotation"
  },
  {
-  "where": "Duas from the Qur’an — Mūsā — In need of whatever good You send",
-  "arabic": "فَسَقَىٰ لَهُمَا ثُمَّ تَوَلَّىٰٓ إِلَى ٱلظِّلِّ فَقَالَ رَبِّ إِنِّي لِمَآ أَنزَلۡتَ إِلَيَّ مِنۡ خَيۡرٖ فَقِيرٞ",
+  "where": "Duas from the Qur’an — The believers — Do not burden us",
+  "arabic": "لَا يُكَلِّفُ ٱللَّهُ نَفۡسًا إِلَّا وُسۡعَهَاۚ لَهَا مَا كَسَبَتۡ وَعَلَيۡهَا مَا ٱكۡتَسَبَتۡۗ رَبَّنَا لَا تُؤَاخِذۡنَآ إِن نَّسِينَآ أَوۡ أَخۡطَأۡنَاۚ رَبَّنَا وَلَا تَحۡمِلۡ عَلَيۡنَآ إِصۡرٗا كَمَا حَمَلۡتَهُۥ عَلَى ٱلَّذِينَ مِن قَبۡلِنَاۚ رَبَّنَا وَلَا تُحَمِّلۡنَا مَا لَا طَاقَةَ لَنَا بِهِۦۖ وَٱعۡفُ عَنَّا وَٱغۡفِرۡ لَنَا وَٱرۡحَمۡنَآۚ أَنتَ مَوۡلَىٰنَا فَٱنصُرۡنَا عَلَى ٱلۡقَوۡمِ ٱلۡكَٰفِرِينَ",
   "translit": "",
-  "english": "Mūsā — In need of whatever good You send",
-  "source": "Qur’an 28:24",
+  "english": "The believers — Do not burden us",
+  "source": "Qur’an 2:286",
   "file": "collections/quranic-duas.ts",
   "kind": "quotation"
  },
  {
-  "where": "Duas from the Qur’an — Ibrāhīm — For a righteous child",
-  "arabic": "رَبِّ هَبۡ لِي مِنَ ٱلصَّٰلِحِينَ",
+  "where": "Duas from the Qur’an — The believers — Do not let our hearts deviate",
+  "arabic": "رَبَّنَا لَا تُزِغۡ قُلُوبَنَا بَعۡدَ إِذۡ هَدَيۡتَنَا وَهَبۡ لَنَا مِن لَّدُنكَ رَحۡمَةًۚ إِنَّكَ أَنتَ ٱلۡوَهَّابُ رَبَّنَآ إِنَّكَ جَامِعُ ٱلنَّاسِ لِيَوۡمٖ لَّا رَيۡبَ فِيهِۚ إِنَّ ٱللَّهَ لَا يُخۡلِفُ ٱلۡمِيعَادَ",
   "translit": "",
-  "english": "Ibrāhīm — For a righteous child",
-  "source": "Qur’an 37:100",
+  "english": "The believers — Do not let our hearts deviate",
+  "source": "Qur’an 3:8-9",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — The believers — We have believed — forgive us",
+  "arabic": "ٱلَّذِينَ يَقُولُونَ رَبَّنَآ إِنَّنَآ ءَامَنَّا فَٱغۡفِرۡ لَنَا ذُنُوبَنَا وَقِنَا عَذَابَ ٱلنَّارِ",
+  "translit": "",
+  "english": "The believers — We have believed — forgive us",
+  "source": "Qur’an 3:16",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — The Prophet ﷺ — Owner of all sovereignty",
+  "arabic": "قُلِ ٱللَّهُمَّ مَٰلِكَ ٱلۡمُلۡكِ تُؤۡتِي ٱلۡمُلۡكَ مَن تَشَآءُ وَتَنزِعُ ٱلۡمُلۡكَ مِمَّن تَشَآءُ وَتُعِزُّ مَن تَشَآءُ وَتُذِلُّ مَن تَشَآءُۖ بِيَدِكَ ٱلۡخَيۡرُۖ إِنَّكَ عَلَىٰ كُلِّ شَيۡءٖ قَدِيرٞ تُولِجُ ٱلَّيۡلَ فِي ٱلنَّهَارِ وَتُولِجُ ٱلنَّهَارَ فِي ٱلَّيۡلِۖ وَتُخۡرِجُ ٱلۡحَيَّ مِنَ ٱلۡمَيِّتِ وَتُخۡرِجُ ٱلۡمَيِّتَ مِنَ ٱلۡحَيِّۖ وَتَرۡزُقُ مَن تَشَآءُ بِغَيۡرِ حِسَابٖ",
+  "translit": "",
+  "english": "The Prophet ﷺ — Owner of all sovereignty",
+  "source": "Qur’an 3:26-27",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — The mother of Maryam — Dedicating her child",
+  "arabic": "إِذۡ قَالَتِ ٱمۡرَأَتُ عِمۡرَٰنَ رَبِّ إِنِّي نَذَرۡتُ لَكَ مَا فِي بَطۡنِي مُحَرَّرٗا فَتَقَبَّلۡ مِنِّيٓۖ إِنَّكَ أَنتَ ٱلسَّمِيعُ ٱلۡعَلِيمُ",
+  "translit": "",
+  "english": "The mother of Maryam — Dedicating her child",
+  "source": "Qur’an 3:35",
   "file": "collections/quranic-duas.ts",
   "kind": "quotation"
  },
@@ -1422,11 +1503,29 @@
   "kind": "quotation"
  },
  {
+  "where": "Duas from the Qur’an — Those who reflect — Standing, sitting, and lying down",
+  "arabic": "ٱلَّذِينَ يَذۡكُرُونَ ٱللَّهَ قِيَٰمٗا وَقُعُودٗا وَعَلَىٰ جُنُوبِهِمۡ وَيَتَفَكَّرُونَ فِي خَلۡقِ ٱلسَّمَٰوَٰتِ وَٱلۡأَرۡضِ رَبَّنَا مَا خَلَقۡتَ هَٰذَا بَٰطِلٗا سُبۡحَٰنَكَ فَقِنَا عَذَابَ ٱلنَّارِ رَبَّنَآ إِنَّكَ مَن تُدۡخِلِ ٱلنَّارَ فَقَدۡ أَخۡزَيۡتَهُۥۖ وَمَا لِلظَّٰلِمِينَ مِنۡ أَنصَارٖ رَّبَّنَآ إِنَّنَا سَمِعۡنَا مُنَادِيٗا يُنَادِي لِلۡإِيمَٰنِ أَنۡ ءَامِنُواْ بِرَبِّكُمۡ فَـَٔامَنَّاۚ رَبَّنَا فَٱغۡفِرۡ لَنَا ذُنُوبَنَا وَكَفِّرۡ عَنَّا سَيِّـَٔاتِنَا وَتَوَفَّنَا مَعَ ٱلۡأَبۡرَارِ رَبَّنَا وَءَاتِنَا مَا وَعَدتَّنَا عَلَىٰ رُسُلِكَ وَلَا تُخۡزِنَا يَوۡمَ ٱلۡقِيَٰمَةِۖ إِنَّكَ لَا تُخۡلِفُ ٱلۡمِيعَادَ",
+  "translit": "",
+  "english": "Those who reflect — Standing, sitting, and lying down",
+  "source": "Qur’an 3:191-194",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
   "where": "Duas from the Qur’an — Mūsā — Part us from the disobedient",
   "arabic": "قَالَ رَبِّ إِنِّي لَآ أَمۡلِكُ إِلَّا نَفۡسِي وَأَخِيۖ فَٱفۡرُقۡ بَيۡنَنَا وَبَيۡنَ ٱلۡقَوۡمِ ٱلۡفَٰسِقِينَ",
   "translit": "",
   "english": "Mūsā — Part us from the disobedient",
   "source": "Qur’an 5:25",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — Those who wept at the revelation — We have believed",
+  "arabic": "وَإِذَا سَمِعُواْ مَآ أُنزِلَ إِلَى ٱلرَّسُولِ تَرَىٰٓ أَعۡيُنَهُمۡ تَفِيضُ مِنَ ٱلدَّمۡعِ مِمَّا عَرَفُواْ مِنَ ٱلۡحَقِّۖ يَقُولُونَ رَبَّنَآ ءَامَنَّا فَٱكۡتُبۡنَا مَعَ ٱلشَّٰهِدِينَ وَمَا لَنَا لَا نُؤۡمِنُ بِٱللَّهِ وَمَا جَآءَنَا مِنَ ٱلۡحَقِّ وَنَطۡمَعُ أَن يُدۡخِلَنَا رَبُّنَا مَعَ ٱلۡقَوۡمِ ٱلصَّٰلِحِينَ",
+  "translit": "",
+  "english": "Those who wept at the revelation — We have believed",
+  "source": "Qur’an 5:83-84",
   "file": "collections/quranic-duas.ts",
   "kind": "quotation"
  },
@@ -1440,11 +1539,128 @@
   "kind": "quotation"
  },
  {
+  "where": "Duas from the Qur’an — ʿĪsā — They are Your servants",
+  "arabic": "إِن تُعَذِّبۡهُمۡ فَإِنَّهُمۡ عِبَادُكَۖ وَإِن تَغۡفِرۡ لَهُمۡ فَإِنَّكَ أَنتَ ٱلۡعَزِيزُ ٱلۡحَكِيمُ",
+  "translit": "",
+  "english": "ʿĪsā — They are Your servants",
+  "source": "Qur’an 5:118",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — Ibrāhīm — I have turned my face",
+  "arabic": "إِنِّي وَجَّهۡتُ وَجۡهِيَ لِلَّذِي فَطَرَ ٱلسَّمَٰوَٰتِ وَٱلۡأَرۡضَ حَنِيفٗاۖ وَمَآ أَنَا۠ مِنَ ٱلۡمُشۡرِكِينَ",
+  "translit": "",
+  "english": "Ibrāhīm — I have turned my face",
+  "source": "Qur’an 6:79",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — Ismāʿīl, Al-Yasaʿ, Yūnus and Lūṭ — Preferred over the worlds",
+  "arabic": "وَإِسۡمَٰعِيلَ وَٱلۡيَسَعَ وَيُونُسَ وَلُوطٗاۚ وَكُلّٗا فَضَّلۡنَا عَلَى ٱلۡعَٰلَمِينَ",
+  "translit": "",
+  "english": "Ismāʿīl, Al-Yasaʿ, Yūnus and Lūṭ — Preferred over the worlds",
+  "source": "Qur’an 6:86",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — The Prophet ﷺ — My prayer and my life are for Allah",
+  "arabic": "قُلۡ إِنَّ صَلَاتِي وَنُسُكِي وَمَحۡيَايَ وَمَمَاتِي لِلَّهِ رَبِّ ٱلۡعَٰلَمِينَ",
+  "translit": "",
+  "english": "The Prophet ﷺ — My prayer and my life are for Allah",
+  "source": "Qur’an 6:162",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — Ādam — After the mistake",
+  "arabic": "قَالَا رَبَّنَا ظَلَمۡنَآ أَنفُسَنَا وَإِن لَّمۡ تَغۡفِرۡ لَنَا وَتَرۡحَمۡنَا لَنَكُونَنَّ مِنَ ٱلۡخَٰسِرِينَ",
+  "translit": "",
+  "english": "Ādam — After the mistake",
+  "source": "Qur’an 7:23",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — The people of Paradise — Praise to Allah who guided us",
+  "arabic": "وَنَزَعۡنَا مَا فِي صُدُورِهِم مِّنۡ غِلّٖ تَجۡرِي مِن تَحۡتِهِمُ ٱلۡأَنۡهَٰرُۖ وَقَالُواْ ٱلۡحَمۡدُ لِلَّهِ ٱلَّذِي هَدَىٰنَا لِهَٰذَا وَمَا كُنَّا لِنَهۡتَدِيَ لَوۡلَآ أَنۡ هَدَىٰنَا ٱللَّهُۖ لَقَدۡ جَآءَتۡ رُسُلُ رَبِّنَا بِٱلۡحَقِّۖ وَنُودُوٓاْ أَن تِلۡكُمُ ٱلۡجَنَّةُ أُورِثۡتُمُوهَا بِمَا كُنتُمۡ تَعۡمَلُونَ",
+  "translit": "",
+  "english": "The people of Paradise — Praise to Allah who guided us",
+  "source": "Qur’an 7:43",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
   "where": "Duas from the Qur’an — Shuʿayb — Decide between us in truth",
   "arabic": "قَدِ ٱفۡتَرَيۡنَا عَلَى ٱللَّهِ كَذِبًا إِنۡ عُدۡنَا فِي مِلَّتِكُم بَعۡدَ إِذۡ نَجَّىٰنَا ٱللَّهُ مِنۡهَاۚ وَمَا يَكُونُ لَنَآ أَن نَّعُودَ فِيهَآ إِلَّآ أَن يَشَآءَ ٱللَّهُ رَبُّنَاۚ وَسِعَ رَبُّنَا كُلَّ شَيۡءٍ عِلۡمًاۚ عَلَى ٱللَّهِ تَوَكَّلۡنَاۚ رَبَّنَا ٱفۡتَحۡ بَيۡنَنَا وَبَيۡنَ قَوۡمِنَا بِٱلۡحَقِّ وَأَنتَ خَيۡرُ ٱلۡفَٰتِحِينَ",
   "translit": "",
   "english": "Shuʿayb — Decide between us in truth",
   "source": "Qur’an 7:89",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — The magicians — They fell in prostration",
+  "arabic": "۞ وَأَوۡحَيۡنَآ إِلَىٰ مُوسَىٰٓ أَنۡ أَلۡقِ عَصَاكَۖ فَإِذَا هِيَ تَلۡقَفُ مَا يَأۡفِكُونَ فَوَقَعَ ٱلۡحَقُّ وَبَطَلَ مَا كَانُواْ يَعۡمَلُونَ فَغُلِبُواْ هُنَالِكَ وَٱنقَلَبُواْ صَٰغِرِينَ وَأُلۡقِيَ ٱلسَّحَرَةُ سَٰجِدِينَ قَالُوٓاْ ءَامَنَّا بِرَبِّ ٱلۡعَٰلَمِينَ رَبِّ مُوسَىٰ وَهَٰرُونَ",
+  "translit": "",
+  "english": "The magicians — They fell in prostration",
+  "source": "Qur’an 7:117-122",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — The magicians who believed — Patience, and to die a Muslim",
+  "arabic": "وَمَا تَنقِمُ مِنَّآ إِلَّآ أَنۡ ءَامَنَّا بِـَٔايَٰتِ رَبِّنَا لَمَّا جَآءَتۡنَاۚ رَبَّنَآ أَفۡرِغۡ عَلَيۡنَا صَبۡرٗا وَتَوَفَّنَا مُسۡلِمِينَ",
+  "translit": "",
+  "english": "The magicians who believed — Patience, and to die a Muslim",
+  "source": "Qur’an 7:126",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — Mūsā — For himself and his brother",
+  "arabic": "قَالَ رَبِّ ٱغۡفِرۡ لِي وَلِأَخِي وَأَدۡخِلۡنَا فِي رَحۡمَتِكَۖ وَأَنتَ أَرۡحَمُ ٱلرَّٰحِمِينَ",
+  "translit": "",
+  "english": "Mūsā — For himself and his brother",
+  "source": "Qur’an 7:151",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — Mūsā — After the earthquake",
+  "arabic": "وَٱخۡتَارَ مُوسَىٰ قَوۡمَهُۥ سَبۡعِينَ رَجُلٗا لِّمِيقَٰتِنَاۖ فَلَمَّآ أَخَذَتۡهُمُ ٱلرَّجۡفَةُ قَالَ رَبِّ لَوۡ شِئۡتَ أَهۡلَكۡتَهُم مِّن قَبۡلُ وَإِيَّٰيَۖ أَتُهۡلِكُنَا بِمَا فَعَلَ ٱلسُّفَهَآءُ مِنَّآۖ إِنۡ هِيَ إِلَّا فِتۡنَتُكَ تُضِلُّ بِهَا مَن تَشَآءُ وَتَهۡدِي مَن تَشَآءُۖ أَنتَ وَلِيُّنَا فَٱغۡفِرۡ لَنَا وَٱرۡحَمۡنَاۖ وَأَنتَ خَيۡرُ ٱلۡغَٰفِرِينَ ۞ وَٱكۡتُبۡ لَنَا فِي هَٰذِهِ ٱلدُّنۡيَا حَسَنَةٗ وَفِي ٱلۡأٓخِرَةِ إِنَّا هُدۡنَآ إِلَيۡكَۚ قَالَ عَذَابِيٓ أُصِيبُ بِهِۦ مَنۡ أَشَآءُۖ وَرَحۡمَتِي وَسِعَتۡ كُلَّ شَيۡءٖۚ فَسَأَكۡتُبُهَا لِلَّذِينَ يَتَّقُونَ وَيُؤۡتُونَ ٱلزَّكَوٰةَ وَٱلَّذِينَ هُم بِـَٔايَٰتِنَا يُؤۡمِنُونَ",
+  "translit": "",
+  "english": "Mūsā — After the earthquake",
+  "source": "Qur’an 7:155-156",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — The Qur’an — A healing for what is in the breasts",
+  "arabic": "يَٰٓأَيُّهَا ٱلنَّاسُ قَدۡ جَآءَتۡكُم مَّوۡعِظَةٞ مِّن رَّبِّكُمۡ وَشِفَآءٞ لِّمَا فِي ٱلصُّدُورِ وَهُدٗى وَرَحۡمَةٞ لِّلۡمُؤۡمِنِينَ",
+  "translit": "",
+  "english": "The Qur’an — A healing for what is in the breasts",
+  "source": "Qur’an 10:57",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — Mūsā — Allah will expose its worthlessness",
+  "arabic": "فَلَمَّآ أَلۡقَوۡاْ قَالَ مُوسَىٰ مَا جِئۡتُم بِهِ ٱلسِّحۡرُۖ إِنَّ ٱللَّهَ سَيُبۡطِلُهُۥٓ إِنَّ ٱللَّهَ لَا يُصۡلِحُ عَمَلَ ٱلۡمُفۡسِدِينَ وَيُحِقُّ ٱللَّهُ ٱلۡحَقَّ بِكَلِمَٰتِهِۦ وَلَوۡ كَرِهَ ٱلۡمُجۡرِمُونَ",
+  "translit": "",
+  "english": "Mūsā — Allah will expose its worthlessness",
+  "source": "Qur’an 10:81-82",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — The believers with Mūsā — Under an oppressor",
+  "arabic": "فَقَالُواْ عَلَى ٱللَّهِ تَوَكَّلۡنَا رَبَّنَا لَا تَجۡعَلۡنَا فِتۡنَةٗ لِّلۡقَوۡمِ ٱلظَّٰلِمِينَ وَنَجِّنَا بِرَحۡمَتِكَ مِنَ ٱلۡقَوۡمِ ٱلۡكَٰفِرِينَ",
+  "translit": "",
+  "english": "The believers with Mūsā — Under an oppressor",
+  "source": "Qur’an 10:85-86",
   "file": "collections/quranic-duas.ts",
   "kind": "quotation"
  },
@@ -1467,6 +1683,132 @@
   "kind": "quotation"
  },
  {
+  "where": "Duas from the Qur’an — Hūd — Ask forgiveness, and He sends rain",
+  "arabic": "وَيَٰقَوۡمِ ٱسۡتَغۡفِرُواْ رَبَّكُمۡ ثُمَّ تُوبُوٓاْ إِلَيۡهِ يُرۡسِلِ ٱلسَّمَآءَ عَلَيۡكُم مِّدۡرَارٗا وَيَزِدۡكُمۡ قُوَّةً إِلَىٰ قُوَّتِكُمۡ وَلَا تَتَوَلَّوۡاْ مُجۡرِمِينَ",
+  "translit": "",
+  "english": "Hūd — Ask forgiveness, and He sends rain",
+  "source": "Qur’an 11:52",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — Hūd — I have relied upon Allah",
+  "arabic": "إِنِّي تَوَكَّلۡتُ عَلَى ٱللَّهِ رَبِّي وَرَبِّكُمۚ مَّا مِن دَآبَّةٍ إِلَّا هُوَ ءَاخِذُۢ بِنَاصِيَتِهَآۚ إِنَّ رَبِّي عَلَىٰ صِرَٰطٖ مُّسۡتَقِيمٖ",
+  "translit": "",
+  "english": "Hūd — I have relied upon Allah",
+  "source": "Qur’an 11:56",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — Ṣāliḥ — Worship Allah and ask His forgiveness",
+  "arabic": "۞ وَإِلَىٰ ثَمُودَ أَخَاهُمۡ صَٰلِحٗاۚ قَالَ يَٰقَوۡمِ ٱعۡبُدُواْ ٱللَّهَ مَا لَكُم مِّنۡ إِلَٰهٍ غَيۡرُهُۥۖ هُوَ أَنشَأَكُم مِّنَ ٱلۡأَرۡضِ وَٱسۡتَعۡمَرَكُمۡ فِيهَا فَٱسۡتَغۡفِرُوهُ ثُمَّ تُوبُوٓاْ إِلَيۡهِۚ إِنَّ رَبِّي قَرِيبٞ مُّجِيبٞ",
+  "translit": "",
+  "english": "Ṣāliḥ — Worship Allah and ask His forgiveness",
+  "source": "Qur’an 11:61",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — The wife of Ibrāhīm — Good tidings of Isḥāq",
+  "arabic": "وَٱمۡرَأَتُهُۥ قَآئِمَةٞ فَضَحِكَتۡ فَبَشَّرۡنَٰهَا بِإِسۡحَٰقَ وَمِن وَرَآءِ إِسۡحَٰقَ يَعۡقُوبَ قَالَتۡ يَٰوَيۡلَتَىٰٓ ءَأَلِدُ وَأَنَا۠ عَجُوزٞ وَهَٰذَا بَعۡلِي شَيۡخًاۖ إِنَّ هَٰذَا لَشَيۡءٌ عَجِيبٞ قَالُوٓاْ أَتَعۡجَبِينَ مِنۡ أَمۡرِ ٱللَّهِۖ رَحۡمَتُ ٱللَّهِ وَبَرَكَٰتُهُۥ عَلَيۡكُمۡ أَهۡلَ ٱلۡبَيۡتِۚ إِنَّهُۥ حَمِيدٞ مَّجِيدٞ",
+  "translit": "",
+  "english": "The wife of Ibrāhīm — Good tidings of Isḥāq",
+  "source": "Qur’an 11:71-73",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — Shuʿayb — I only intend reform",
+  "arabic": "قَالَ يَٰقَوۡمِ أَرَءَيۡتُمۡ إِن كُنتُ عَلَىٰ بَيِّنَةٖ مِّن رَّبِّي وَرَزَقَنِي مِنۡهُ رِزۡقًا حَسَنٗاۚ وَمَآ أُرِيدُ أَنۡ أُخَالِفَكُمۡ إِلَىٰ مَآ أَنۡهَىٰكُمۡ عَنۡهُۚ إِنۡ أُرِيدُ إِلَّا ٱلۡإِصۡلَٰحَ مَا ٱسۡتَطَعۡتُۚ وَمَا تَوۡفِيقِيٓ إِلَّا بِٱللَّهِۚ عَلَيۡهِ تَوَكَّلۡتُ وَإِلَيۡهِ أُنِيبُ",
+  "translit": "",
+  "english": "Shuʿayb — I only intend reform",
+  "source": "Qur’an 11:88",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — Yaʿqūb — Patience is most fitting",
+  "arabic": "وَجَآءُو عَلَىٰ قَمِيصِهِۦ بِدَمٖ كَذِبٖۚ قَالَ بَلۡ سَوَّلَتۡ لَكُمۡ أَنفُسُكُمۡ أَمۡرٗاۖ فَصَبۡرٞ جَمِيلٞۖ وَٱللَّهُ ٱلۡمُسۡتَعَانُ عَلَىٰ مَا تَصِفُونَ",
+  "translit": "",
+  "english": "Yaʿqūb — Patience is most fitting",
+  "source": "Qur’an 12:18",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — Yaʿqūb — Upon Him I have relied",
+  "arabic": "وَقَالَ يَٰبَنِيَّ لَا تَدۡخُلُواْ مِنۢ بَابٖ وَٰحِدٖ وَٱدۡخُلُواْ مِنۡ أَبۡوَٰبٖ مُّتَفَرِّقَةٖۖ وَمَآ أُغۡنِي عَنكُم مِّنَ ٱللَّهِ مِن شَيۡءٍۖ إِنِ ٱلۡحُكۡمُ إِلَّا لِلَّهِۖ عَلَيۡهِ تَوَكَّلۡتُۖ وَعَلَيۡهِ فَلۡيَتَوَكَّلِ ٱلۡمُتَوَكِّلُونَ",
+  "translit": "",
+  "english": "Yaʿqūb — Upon Him I have relied",
+  "source": "Qur’an 12:67",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — Yaʿqūb — Perhaps Allah will bring them to me",
+  "arabic": "قَالَ بَلۡ سَوَّلَتۡ لَكُمۡ أَنفُسُكُمۡ أَمۡرٗاۖ فَصَبۡرٞ جَمِيلٌۖ عَسَى ٱللَّهُ أَن يَأۡتِيَنِي بِهِمۡ جَمِيعًاۚ إِنَّهُۥ هُوَ ٱلۡعَلِيمُ ٱلۡحَكِيمُ",
+  "translit": "",
+  "english": "Yaʿqūb — Perhaps Allah will bring them to me",
+  "source": "Qur’an 12:83",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — Yaʿqūb — I complain only to Allah",
+  "arabic": "قَالَ إِنَّمَآ أَشۡكُواْ بَثِّي وَحُزۡنِيٓ إِلَى ٱللَّهِ وَأَعۡلَمُ مِنَ ٱللَّهِ مَا لَا تَعۡلَمُونَ",
+  "translit": "",
+  "english": "Yaʿqūb — I complain only to Allah",
+  "source": "Qur’an 12:86",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — Yūsuf — Let me die a Muslim",
+  "arabic": "۞ رَبِّ قَدۡ ءَاتَيۡتَنِي مِنَ ٱلۡمُلۡكِ وَعَلَّمۡتَنِي مِن تَأۡوِيلِ ٱلۡأَحَادِيثِۚ فَاطِرَ ٱلسَّمَٰوَٰتِ وَٱلۡأَرۡضِ أَنتَ وَلِيِّۦ فِي ٱلدُّنۡيَا وَٱلۡأٓخِرَةِۖ تَوَفَّنِي مُسۡلِمٗا وَأَلۡحِقۡنِي بِٱلصَّٰلِحِينَ",
+  "translit": "",
+  "english": "Yūsuf — Let me die a Muslim",
+  "source": "Qur’an 12:101",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — Ibrāhīm — For Mecca, and for those he settled by the House",
+  "arabic": "وَإِذۡ قَالَ إِبۡرَٰهِيمُ رَبِّ ٱجۡعَلۡ هَٰذَا ٱلۡبَلَدَ ءَامِنٗا وَٱجۡنُبۡنِي وَبَنِيَّ أَن نَّعۡبُدَ ٱلۡأَصۡنَامَ رَبِّ إِنَّهُنَّ أَضۡلَلۡنَ كَثِيرٗا مِّنَ ٱلنَّاسِۖ فَمَن تَبِعَنِي فَإِنَّهُۥ مِنِّيۖ وَمَنۡ عَصَانِي فَإِنَّكَ غَفُورٞ رَّحِيمٞ رَّبَّنَآ إِنِّيٓ أَسۡكَنتُ مِن ذُرِّيَّتِي بِوَادٍ غَيۡرِ ذِي زَرۡعٍ عِندَ بَيۡتِكَ ٱلۡمُحَرَّمِ رَبَّنَا لِيُقِيمُواْ ٱلصَّلَوٰةَ فَٱجۡعَلۡ أَفۡـِٔدَةٗ مِّنَ ٱلنَّاسِ تَهۡوِيٓ إِلَيۡهِمۡ وَٱرۡزُقۡهُم مِّنَ ٱلثَّمَرَٰتِ لَعَلَّهُمۡ يَشۡكُرُونَ رَبَّنَآ إِنَّكَ تَعۡلَمُ مَا نُخۡفِي وَمَا نُعۡلِنُۗ وَمَا يَخۡفَىٰ عَلَى ٱللَّهِ مِن شَيۡءٖ فِي ٱلۡأَرۡضِ وَلَا فِي ٱلسَّمَآءِ",
+  "translit": "",
+  "english": "Ibrāhīm — For Mecca, and for those he settled by the House",
+  "source": "Qur’an 14:35-38",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — Ibrāhīm — For those he settled by the House",
+  "arabic": "رَّبَّنَآ إِنِّيٓ أَسۡكَنتُ مِن ذُرِّيَّتِي بِوَادٍ غَيۡرِ ذِي زَرۡعٍ عِندَ بَيۡتِكَ ٱلۡمُحَرَّمِ رَبَّنَا لِيُقِيمُواْ ٱلصَّلَوٰةَ فَٱجۡعَلۡ أَفۡـِٔدَةٗ مِّنَ ٱلنَّاسِ تَهۡوِيٓ إِلَيۡهِمۡ وَٱرۡزُقۡهُم مِّنَ ٱلثَّمَرَٰتِ لَعَلَّهُمۡ يَشۡكُرُونَ رَبَّنَآ إِنَّكَ تَعۡلَمُ مَا نُخۡفِي وَمَا نُعۡلِنُۗ وَمَا يَخۡفَىٰ عَلَى ٱللَّهِ مِن شَيۡءٖ فِي ٱلۡأَرۡضِ وَلَا فِي ٱلسَّمَآءِ",
+  "translit": "",
+  "english": "Ibrāhīm — For those he settled by the House",
+  "source": "Qur’an 14:37-38",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — Ibrāhīm — To be kept in prayer, and for his parents",
+  "arabic": "رَبِّ ٱجۡعَلۡنِي مُقِيمَ ٱلصَّلَوٰةِ وَمِن ذُرِّيَّتِيۚ رَبَّنَا وَتَقَبَّلۡ دُعَآءِ رَبَّنَا ٱغۡفِرۡ لِي وَلِوَٰلِدَيَّ وَلِلۡمُؤۡمِنِينَ يَوۡمَ يَقُومُ ٱلۡحِسَابُ",
+  "translit": "",
+  "english": "Ibrāhīm — To be kept in prayer, and for his parents",
+  "source": "Qur’an 14:40-41",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — The believer — For parents",
+  "arabic": "وَٱخۡفِضۡ لَهُمَا جَنَاحَ ٱلذُّلِّ مِنَ ٱلرَّحۡمَةِ وَقُل رَّبِّ ٱرۡحَمۡهُمَا كَمَا رَبَّيَانِي صَغِيرٗا",
+  "translit": "",
+  "english": "The believer — For parents",
+  "source": "Qur’an 17:24",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
   "where": "Duas from the Qur’an — The Prophet ﷺ — A true entry and a true exit",
   "arabic": "وَقُل رَّبِّ أَدۡخِلۡنِي مُدۡخَلَ صِدۡقٖ وَأَخۡرِجۡنِي مُخۡرَجَ صِدۡقٖ وَٱجۡعَل لِّي مِن لَّدُنكَ سُلۡطَٰنٗا نَّصِيرٗا",
   "translit": "",
@@ -1476,11 +1818,137 @@
   "kind": "quotation"
  },
  {
+  "where": "Duas from the Qur’an — The Qur’an — A healing and a mercy",
+  "arabic": "وَنُنَزِّلُ مِنَ ٱلۡقُرۡءَانِ مَا هُوَ شِفَآءٞ وَرَحۡمَةٞ لِّلۡمُؤۡمِنِينَ وَلَا يَزِيدُ ٱلظَّٰلِمِينَ إِلَّا خَسَارٗا",
+  "translit": "",
+  "english": "The Qur’an — A healing and a mercy",
+  "source": "Qur’an 17:82",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — The young men of the cave — Taking shelter",
+  "arabic": "إِذۡ أَوَى ٱلۡفِتۡيَةُ إِلَى ٱلۡكَهۡفِ فَقَالُواْ رَبَّنَآ ءَاتِنَا مِن لَّدُنكَ رَحۡمَةٗ وَهَيِّئۡ لَنَا مِنۡ أَمۡرِنَا رَشَدٗا",
+  "translit": "",
+  "english": "The young men of the cave — Taking shelter",
+  "source": "Qur’an 18:10",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — The Prophet ﷺ — If Allah wills",
+  "arabic": "إِلَّآ أَن يَشَآءَ ٱللَّهُۚ وَٱذۡكُر رَّبَّكَ إِذَا نَسِيتَ وَقُلۡ عَسَىٰٓ أَن يَهۡدِيَنِ رَبِّي لِأَقۡرَبَ مِنۡ هَٰذَا رَشَدٗا",
+  "translit": "",
+  "english": "The Prophet ﷺ — If Allah wills",
+  "source": "Qur’an 18:24",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — Zakariyyā — My bones have weakened",
+  "arabic": "قَالَ رَبِّ إِنِّي وَهَنَ ٱلۡعَظۡمُ مِنِّي وَٱشۡتَعَلَ ٱلرَّأۡسُ شَيۡبٗا وَلَمۡ أَكُنۢ بِدُعَآئِكَ رَبِّ شَقِيّٗا وَإِنِّي خِفۡتُ ٱلۡمَوَٰلِيَ مِن وَرَآءِي وَكَانَتِ ٱمۡرَأَتِي عَاقِرٗا فَهَبۡ لِي مِن لَّدُنكَ وَلِيّٗا",
+  "translit": "",
+  "english": "Zakariyyā — My bones have weakened",
+  "source": "Qur’an 19:4-5",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — Yaḥyā — His birth and his childhood",
+  "arabic": "يَٰزَكَرِيَّآ إِنَّا نُبَشِّرُكَ بِغُلَٰمٍ ٱسۡمُهُۥ يَحۡيَىٰ لَمۡ نَجۡعَل لَّهُۥ مِن قَبۡلُ سَمِيّٗا قَالَ رَبِّ أَنَّىٰ يَكُونُ لِي غُلَٰمٞ وَكَانَتِ ٱمۡرَأَتِي عَاقِرٗا وَقَدۡ بَلَغۡتُ مِنَ ٱلۡكِبَرِ عِتِيّٗا قَالَ كَذَٰلِكَ قَالَ رَبُّكَ هُوَ عَلَيَّ هَيِّنٞ وَقَدۡ خَلَقۡتُكَ مِن قَبۡلُ وَلَمۡ تَكُ شَيۡـٔٗا قَالَ رَبِّ ٱجۡعَل لِّيٓ ءَايَةٗۖ قَالَ ءَايَتُكَ أَلَّا تُكَلِّمَ ٱلنَّاسَ ثَلَٰثَ لَيَالٖ سَوِيّٗا فَخَرَجَ عَلَىٰ قَوۡمِهِۦ مِنَ ٱلۡمِحۡرَابِ فَأَوۡحَىٰٓ إِلَيۡهِمۡ أَن سَبِّحُواْ بُكۡرَةٗ وَعَشِيّٗا يَٰيَحۡيَىٰ خُذِ ٱلۡكِتَٰبَ بِقُوَّةٖۖ وَءَاتَيۡنَٰهُ ٱلۡحُكۡمَ صَبِيّٗا وَحَنَانٗا مِّن لَّدُنَّا وَزَكَوٰةٗۖ وَكَانَ تَقِيّٗا وَبَرَّۢا بِوَٰلِدَيۡهِ وَلَمۡ يَكُن جَبَّارًا عَصِيّٗا وَسَلَٰمٌ عَلَيۡهِ يَوۡمَ وُلِدَ وَيَوۡمَ يَمُوتُ وَيَوۡمَ يُبۡعَثُ حَيّٗا",
+  "translit": "",
+  "english": "Yaḥyā — His birth and his childhood",
+  "source": "Qur’an 19:7-15",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — Idrīs — Raised to a high station",
+  "arabic": "وَٱذۡكُرۡ فِي ٱلۡكِتَٰبِ إِدۡرِيسَۚ إِنَّهُۥ كَانَ صِدِّيقٗا نَّبِيّٗا وَرَفَعۡنَٰهُ مَكَانًا عَلِيًّا",
+  "translit": "",
+  "english": "Idrīs — Raised to a high station",
+  "source": "Qur’an 19:56-57",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — Mūsā — Before speaking to Pharaoh",
+  "arabic": "قَالَ رَبِّ ٱشۡرَحۡ لِي صَدۡرِي وَيَسِّرۡ لِيٓ أَمۡرِي وَٱحۡلُلۡ عُقۡدَةٗ مِّن لِّسَانِي يَفۡقَهُواْ قَوۡلِي",
+  "translit": "",
+  "english": "Mūsā — Before speaking to Pharaoh",
+  "source": "Qur’an 20:25-28",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
   "where": "Duas from the Qur’an — Mūsā — For Hārūn",
   "arabic": "وَٱجۡعَل لِّي وَزِيرٗا مِّنۡ أَهۡلِي هَٰرُونَ أَخِي ٱشۡدُدۡ بِهِۦٓ أَزۡرِي وَأَشۡرِكۡهُ فِيٓ أَمۡرِي",
   "translit": "",
   "english": "Mūsā — For Hārūn",
   "source": "Qur’an 20:29-32",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — Mūsā — Throw what is in your right hand",
+  "arabic": "وَأَلۡقِ مَا فِي يَمِينِكَ تَلۡقَفۡ مَا صَنَعُوٓاْۖ إِنَّمَا صَنَعُواْ كَيۡدُ سَٰحِرٖۖ وَلَا يُفۡلِحُ ٱلسَّاحِرُ حَيۡثُ أَتَىٰ",
+  "translit": "",
+  "english": "Mūsā — Throw what is in your right hand",
+  "source": "Qur’an 20:69",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — The Prophet ﷺ — Increase me in knowledge",
+  "arabic": "فَتَعَٰلَى ٱللَّهُ ٱلۡمَلِكُ ٱلۡحَقُّۗ وَلَا تَعۡجَلۡ بِٱلۡقُرۡءَانِ مِن قَبۡلِ أَن يُقۡضَىٰٓ إِلَيۡكَ وَحۡيُهُۥۖ وَقُل رَّبِّ زِدۡنِي عِلۡمٗا",
+  "translit": "",
+  "english": "The Prophet ﷺ — Increase me in knowledge",
+  "source": "Qur’an 20:114",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — Ayyūb — In illness",
+  "arabic": "۞ وَأَيُّوبَ إِذۡ نَادَىٰ رَبَّهُۥٓ أَنِّي مَسَّنِيَ ٱلضُّرُّ وَأَنتَ أَرۡحَمُ ٱلرَّٰحِمِينَ",
+  "translit": "",
+  "english": "Ayyūb — In illness",
+  "source": "Qur’an 21:83",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — Ayyūb — In illness, and the answer",
+  "arabic": "۞ وَأَيُّوبَ إِذۡ نَادَىٰ رَبَّهُۥٓ أَنِّي مَسَّنِيَ ٱلضُّرُّ وَأَنتَ أَرۡحَمُ ٱلرَّٰحِمِينَ فَٱسۡتَجَبۡنَا لَهُۥ فَكَشَفۡنَا مَا بِهِۦ مِن ضُرّٖۖ وَءَاتَيۡنَٰهُ أَهۡلَهُۥ وَمِثۡلَهُم مَّعَهُمۡ رَحۡمَةٗ مِّنۡ عِندِنَا وَذِكۡرَىٰ لِلۡعَٰبِدِينَ",
+  "translit": "",
+  "english": "Ayyūb — In illness, and the answer",
+  "source": "Qur’an 21:83-84",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — Ismāʿīl, Idrīs and Dhul-Kifl — Of the patient",
+  "arabic": "وَإِسۡمَٰعِيلَ وَإِدۡرِيسَ وَذَا ٱلۡكِفۡلِۖ كُلّٞ مِّنَ ٱلصَّٰبِرِينَ",
+  "translit": "",
+  "english": "Ismāʿīl, Idrīs and Dhul-Kifl — Of the patient",
+  "source": "Qur’an 21:85",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — Ismāʿīl, Idrīs and Dhul-Kifl — Of the patient, admitted to mercy",
+  "arabic": "وَإِسۡمَٰعِيلَ وَإِدۡرِيسَ وَذَا ٱلۡكِفۡلِۖ كُلّٞ مِّنَ ٱلصَّٰبِرِينَ وَأَدۡخَلۡنَٰهُمۡ فِي رَحۡمَتِنَآۖ إِنَّهُم مِّنَ ٱلصَّٰلِحِينَ",
+  "translit": "",
+  "english": "Ismāʿīl, Idrīs and Dhul-Kifl — Of the patient, admitted to mercy",
+  "source": "Qur’an 21:85-86",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — Yūnus — From inside the darkness",
+  "arabic": "وَذَا ٱلنُّونِ إِذ ذَّهَبَ مُغَٰضِبٗا فَظَنَّ أَن لَّن نَّقۡدِرَ عَلَيۡهِ فَنَادَىٰ فِي ٱلظُّلُمَٰتِ أَن لَّآ إِلَٰهَ إِلَّآ أَنتَ سُبۡحَٰنَكَ إِنِّي كُنتُ مِنَ ٱلظَّٰلِمِينَ",
+  "translit": "",
+  "english": "Yūnus — From inside the darkness",
+  "source": "Qur’an 21:87",
   "file": "collections/quranic-duas.ts",
   "kind": "quotation"
  },
@@ -1512,276 +1980,6 @@
   "kind": "quotation"
  },
  {
-  "where": "Duas from the Qur’an — Lūṭ — Save me and my family",
-  "arabic": "رَبِّ نَجِّنِي وَأَهۡلِي مِمَّا يَعۡمَلُونَ",
-  "translit": "",
-  "english": "Lūṭ — Save me and my family",
-  "source": "Qur’an 26:169",
-  "file": "collections/quranic-duas.ts",
-  "kind": "quotation"
- },
- {
-  "where": "Duas from the Qur’an — Nūḥ — For his parents and the believers",
-  "arabic": "رَّبِّ ٱغۡفِرۡ لِي وَلِوَٰلِدَيَّ وَلِمَن دَخَلَ بَيۡتِيَ مُؤۡمِنٗا وَلِلۡمُؤۡمِنِينَ وَٱلۡمُؤۡمِنَٰتِۖ وَلَا تَزِدِ ٱلظَّٰلِمِينَ إِلَّا تَبَارَۢا",
-  "translit": "",
-  "english": "Nūḥ — For his parents and the believers",
-  "source": "Qur’an 71:28",
-  "file": "collections/quranic-duas.ts",
-  "kind": "quotation"
- },
- {
-  "where": "Duas from the Qur’an — The believers — We have believed — forgive us",
-  "arabic": "ٱلَّذِينَ يَقُولُونَ رَبَّنَآ إِنَّنَآ ءَامَنَّا فَٱغۡفِرۡ لَنَا ذُنُوبَنَا وَقِنَا عَذَابَ ٱلنَّارِ",
-  "translit": "",
-  "english": "The believers — We have believed — forgive us",
-  "source": "Qur’an 3:16",
-  "file": "collections/quranic-duas.ts",
-  "kind": "quotation"
- },
- {
-  "where": "Duas from the Qur’an — The mother of Maryam — Dedicating her child",
-  "arabic": "إِذۡ قَالَتِ ٱمۡرَأَتُ عِمۡرَٰنَ رَبِّ إِنِّي نَذَرۡتُ لَكَ مَا فِي بَطۡنِي مُحَرَّرٗا فَتَقَبَّلۡ مِنِّيٓۖ إِنَّكَ أَنتَ ٱلسَّمِيعُ ٱلۡعَلِيمُ",
-  "translit": "",
-  "english": "The mother of Maryam — Dedicating her child",
-  "source": "Qur’an 3:35",
-  "file": "collections/quranic-duas.ts",
-  "kind": "quotation"
- },
- {
-  "where": "Duas from the Qur’an — Those who wept at the revelation — We have believed",
-  "arabic": "وَإِذَا سَمِعُواْ مَآ أُنزِلَ إِلَى ٱلرَّسُولِ تَرَىٰٓ أَعۡيُنَهُمۡ تَفِيضُ مِنَ ٱلدَّمۡعِ مِمَّا عَرَفُواْ مِنَ ٱلۡحَقِّۖ يَقُولُونَ رَبَّنَآ ءَامَنَّا فَٱكۡتُبۡنَا مَعَ ٱلشَّٰهِدِينَ وَمَا لَنَا لَا نُؤۡمِنُ بِٱللَّهِ وَمَا جَآءَنَا مِنَ ٱلۡحَقِّ وَنَطۡمَعُ أَن يُدۡخِلَنَا رَبُّنَا مَعَ ٱلۡقَوۡمِ ٱلصَّٰلِحِينَ",
-  "translit": "",
-  "english": "Those who wept at the revelation — We have believed",
-  "source": "Qur’an 5:83-84",
-  "file": "collections/quranic-duas.ts",
-  "kind": "quotation"
- },
- {
-  "where": "Duas from the Qur’an — Ibrāhīm — To be kept in prayer, and for his parents",
-  "arabic": "رَبِّ ٱجۡعَلۡنِي مُقِيمَ ٱلصَّلَوٰةِ وَمِن ذُرِّيَّتِيۚ رَبَّنَا وَتَقَبَّلۡ دُعَآءِ رَبَّنَا ٱغۡفِرۡ لِي وَلِوَٰلِدَيَّ وَلِلۡمُؤۡمِنِينَ يَوۡمَ يَقُومُ ٱلۡحِسَابُ",
-  "translit": "",
-  "english": "Ibrāhīm — To be kept in prayer, and for his parents",
-  "source": "Qur’an 14:40-41",
-  "file": "collections/quranic-duas.ts",
-  "kind": "quotation"
- },
- {
-  "where": "Duas from the Qur’an — Zakariyyā — My bones have weakened",
-  "arabic": "قَالَ رَبِّ إِنِّي وَهَنَ ٱلۡعَظۡمُ مِنِّي وَٱشۡتَعَلَ ٱلرَّأۡسُ شَيۡبٗا وَلَمۡ أَكُنۢ بِدُعَآئِكَ رَبِّ شَقِيّٗا وَإِنِّي خِفۡتُ ٱلۡمَوَٰلِيَ مِن وَرَآءِي وَكَانَتِ ٱمۡرَأَتِي عَاقِرٗا فَهَبۡ لِي مِن لَّدُنكَ وَلِيّٗا",
-  "translit": "",
-  "english": "Zakariyyā — My bones have weakened",
-  "source": "Qur’an 19:4-5",
-  "file": "collections/quranic-duas.ts",
-  "kind": "quotation"
- },
- {
-  "where": "Duas from the Qur’an — The servants of the Most Merciful — For family",
-  "arabic": "وَٱلَّذِينَ يَقُولُونَ رَبَّنَا هَبۡ لَنَا مِنۡ أَزۡوَٰجِنَا وَذُرِّيَّٰتِنَا قُرَّةَ أَعۡيُنٖ وَٱجۡعَلۡنَا لِلۡمُتَّقِينَ إِمَامًا",
-  "translit": "",
-  "english": "The servants of the Most Merciful — For family",
-  "source": "Qur’an 25:74",
-  "file": "collections/quranic-duas.ts",
-  "kind": "quotation"
- },
- {
-  "where": "Duas from the Qur’an — The angels who carry the Throne — For the believers",
-  "arabic": "ٱلَّذِينَ يَحۡمِلُونَ ٱلۡعَرۡشَ وَمَنۡ حَوۡلَهُۥ يُسَبِّحُونَ بِحَمۡدِ رَبِّهِمۡ وَيُؤۡمِنُونَ بِهِۦ وَيَسۡتَغۡفِرُونَ لِلَّذِينَ ءَامَنُواْۖ رَبَّنَا وَسِعۡتَ كُلَّ شَيۡءٖ رَّحۡمَةٗ وَعِلۡمٗا فَٱغۡفِرۡ لِلَّذِينَ تَابُواْ وَٱتَّبَعُواْ سَبِيلَكَ وَقِهِمۡ عَذَابَ ٱلۡجَحِيمِ رَبَّنَا وَأَدۡخِلۡهُمۡ جَنَّٰتِ عَدۡنٍ ٱلَّتِي وَعَدتَّهُمۡ وَمَن صَلَحَ مِنۡ ءَابَآئِهِمۡ وَأَزۡوَٰجِهِمۡ وَذُرِّيَّٰتِهِمۡۚ إِنَّكَ أَنتَ ٱلۡعَزِيزُ ٱلۡحَكِيمُ وَقِهِمُ ٱلسَّيِّـَٔاتِۚ وَمَن تَقِ ٱلسَّيِّـَٔاتِ يَوۡمَئِذٖ فَقَدۡ رَحِمۡتَهُۥۚ وَذَٰلِكَ هُوَ ٱلۡفَوۡزُ ٱلۡعَظِيمُ",
-  "translit": "",
-  "english": "The angels who carry the Throne — For the believers",
-  "source": "Qur’an 40:7-9",
-  "file": "collections/quranic-duas.ts",
-  "kind": "quotation"
- },
- {
-  "where": "Duas from the Qur’an — The servant at forty — Gratitude, parents, and children",
-  "arabic": "وَوَصَّيۡنَا ٱلۡإِنسَٰنَ بِوَٰلِدَيۡهِ إِحۡسَٰنًاۖ حَمَلَتۡهُ أُمُّهُۥ كُرۡهٗا وَوَضَعَتۡهُ كُرۡهٗاۖ وَحَمۡلُهُۥ وَفِصَٰلُهُۥ ثَلَٰثُونَ شَهۡرًاۚ حَتَّىٰٓ إِذَا بَلَغَ أَشُدَّهُۥ وَبَلَغَ أَرۡبَعِينَ سَنَةٗ قَالَ رَبِّ أَوۡزِعۡنِيٓ أَنۡ أَشۡكُرَ نِعۡمَتَكَ ٱلَّتِيٓ أَنۡعَمۡتَ عَلَيَّ وَعَلَىٰ وَٰلِدَيَّ وَأَنۡ أَعۡمَلَ صَٰلِحٗا تَرۡضَىٰهُ وَأَصۡلِحۡ لِي فِي ذُرِّيَّتِيٓۖ إِنِّي تُبۡتُ إِلَيۡكَ وَإِنِّي مِنَ ٱلۡمُسۡلِمِينَ",
-  "translit": "",
-  "english": "The servant at forty — Gratitude, parents, and children",
-  "source": "Qur’an 46:15",
-  "file": "collections/quranic-duas.ts",
-  "kind": "quotation"
- },
- {
-  "where": "Duas from the Qur’an — Those who came after — For those before us",
-  "arabic": "وَٱلَّذِينَ جَآءُو مِنۢ بَعۡدِهِمۡ يَقُولُونَ رَبَّنَا ٱغۡفِرۡ لَنَا وَلِإِخۡوَٰنِنَا ٱلَّذِينَ سَبَقُونَا بِٱلۡإِيمَٰنِ وَلَا تَجۡعَلۡ فِي قُلُوبِنَا غِلّٗا لِّلَّذِينَ ءَامَنُواْ رَبَّنَآ إِنَّكَ رَءُوفٞ رَّحِيمٌ",
-  "translit": "",
-  "english": "Those who came after — For those before us",
-  "source": "Qur’an 59:10",
-  "file": "collections/quranic-duas.ts",
-  "kind": "quotation"
- },
- {
-  "where": "Duas from the Qur’an — The believers on the Day — Perfect our light",
-  "arabic": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُواْ تُوبُوٓاْ إِلَى ٱللَّهِ تَوۡبَةٗ نَّصُوحًا عَسَىٰ رَبُّكُمۡ أَن يُكَفِّرَ عَنكُمۡ سَيِّـَٔاتِكُمۡ وَيُدۡخِلَكُمۡ جَنَّٰتٖ تَجۡرِي مِن تَحۡتِهَا ٱلۡأَنۡهَٰرُ يَوۡمَ لَا يُخۡزِي ٱللَّهُ ٱلنَّبِيَّ وَٱلَّذِينَ ءَامَنُواْ مَعَهُۥۖ نُورُهُمۡ يَسۡعَىٰ بَيۡنَ أَيۡدِيهِمۡ وَبِأَيۡمَٰنِهِمۡ يَقُولُونَ رَبَّنَآ أَتۡمِمۡ لَنَا نُورَنَا وَٱغۡفِرۡ لَنَآۖ إِنَّكَ عَلَىٰ كُلِّ شَيۡءٖ قَدِيرٞ",
-  "translit": "",
-  "english": "The believers on the Day — Perfect our light",
-  "source": "Qur’an 66:8",
-  "file": "collections/quranic-duas.ts",
-  "kind": "quotation"
- },
- {
-  "where": "Duas from the Qur’an — Mūsā — For himself and his brother",
-  "arabic": "قَالَ رَبِّ ٱغۡفِرۡ لِي وَلِأَخِي وَأَدۡخِلۡنَا فِي رَحۡمَتِكَۖ وَأَنتَ أَرۡحَمُ ٱلرَّٰحِمِينَ",
-  "translit": "",
-  "english": "Mūsā — For himself and his brother",
-  "source": "Qur’an 7:151",
-  "file": "collections/quranic-duas.ts",
-  "kind": "quotation"
- },
- {
-  "where": "Duas from the Qur’an — Mūsā — After the earthquake",
-  "arabic": "وَٱخۡتَارَ مُوسَىٰ قَوۡمَهُۥ سَبۡعِينَ رَجُلٗا لِّمِيقَٰتِنَاۖ فَلَمَّآ أَخَذَتۡهُمُ ٱلرَّجۡفَةُ قَالَ رَبِّ لَوۡ شِئۡتَ أَهۡلَكۡتَهُم مِّن قَبۡلُ وَإِيَّٰيَۖ أَتُهۡلِكُنَا بِمَا فَعَلَ ٱلسُّفَهَآءُ مِنَّآۖ إِنۡ هِيَ إِلَّا فِتۡنَتُكَ تُضِلُّ بِهَا مَن تَشَآءُ وَتَهۡدِي مَن تَشَآءُۖ أَنتَ وَلِيُّنَا فَٱغۡفِرۡ لَنَا وَٱرۡحَمۡنَاۖ وَأَنتَ خَيۡرُ ٱلۡغَٰفِرِينَ ۞ وَٱكۡتُبۡ لَنَا فِي هَٰذِهِ ٱلدُّنۡيَا حَسَنَةٗ وَفِي ٱلۡأٓخِرَةِ إِنَّا هُدۡنَآ إِلَيۡكَۚ قَالَ عَذَابِيٓ أُصِيبُ بِهِۦ مَنۡ أَشَآءُۖ وَرَحۡمَتِي وَسِعَتۡ كُلَّ شَيۡءٖۚ فَسَأَكۡتُبُهَا لِلَّذِينَ يَتَّقُونَ وَيُؤۡتُونَ ٱلزَّكَوٰةَ وَٱلَّذِينَ هُم بِـَٔايَٰتِنَا يُؤۡمِنُونَ",
-  "translit": "",
-  "english": "Mūsā — After the earthquake",
-  "source": "Qur’an 7:155-156",
-  "file": "collections/quranic-duas.ts",
-  "kind": "quotation"
- },
- {
-  "where": "Duas from the Qur’an — Mūsā — I have wronged myself",
-  "arabic": "قَالَ رَبِّ إِنِّي ظَلَمۡتُ نَفۡسِي فَٱغۡفِرۡ لِي فَغَفَرَ لَهُۥٓۚ إِنَّهُۥ هُوَ ٱلۡغَفُورُ ٱلرَّحِيمُ",
-  "translit": "",
-  "english": "Mūsā — I have wronged myself",
-  "source": "Qur’an 28:16",
-  "file": "collections/quranic-duas.ts",
-  "kind": "quotation"
- },
- {
-  "where": "Duas from the Qur’an — Ibrāhīm and those with him — Upon You we rely",
-  "arabic": "قَدۡ كَانَتۡ لَكُمۡ أُسۡوَةٌ حَسَنَةٞ فِيٓ إِبۡرَٰهِيمَ وَٱلَّذِينَ مَعَهُۥٓ إِذۡ قَالُواْ لِقَوۡمِهِمۡ إِنَّا بُرَءَٰٓؤُاْ مِنكُمۡ وَمِمَّا تَعۡبُدُونَ مِن دُونِ ٱللَّهِ كَفَرۡنَا بِكُمۡ وَبَدَا بَيۡنَنَا وَبَيۡنَكُمُ ٱلۡعَدَٰوَةُ وَٱلۡبَغۡضَآءُ أَبَدًا حَتَّىٰ تُؤۡمِنُواْ بِٱللَّهِ وَحۡدَهُۥٓ إِلَّا قَوۡلَ إِبۡرَٰهِيمَ لِأَبِيهِ لَأَسۡتَغۡفِرَنَّ لَكَ وَمَآ أَمۡلِكُ لَكَ مِنَ ٱللَّهِ مِن شَيۡءٖۖ رَّبَّنَا عَلَيۡكَ تَوَكَّلۡنَا وَإِلَيۡكَ أَنَبۡنَا وَإِلَيۡكَ ٱلۡمَصِيرُ رَبَّنَا لَا تَجۡعَلۡنَا فِتۡنَةٗ لِّلَّذِينَ كَفَرُواْ وَٱغۡفِرۡ لَنَا رَبَّنَآۖ إِنَّكَ أَنتَ ٱلۡعَزِيزُ ٱلۡحَكِيمُ",
-  "translit": "",
-  "english": "Ibrāhīm and those with him — Upon You we rely",
-  "source": "Qur’an 60:4-5",
-  "file": "collections/quranic-duas.ts",
-  "kind": "quotation"
- },
- {
-  "where": "Duas from the Qur’an — The angels — We know only what You taught us",
-  "arabic": "قَالُواْ سُبۡحَٰنَكَ لَا عِلۡمَ لَنَآ إِلَّا مَا عَلَّمۡتَنَآۖ إِنَّكَ أَنتَ ٱلۡعَلِيمُ ٱلۡحَكِيمُ",
-  "translit": "",
-  "english": "The angels — We know only what You taught us",
-  "source": "Qur’an 2:32",
-  "file": "collections/quranic-duas.ts",
-  "kind": "quotation"
- },
- {
-  "where": "Duas from the Qur’an — The believers — Do not let our hearts deviate",
-  "arabic": "رَبَّنَا لَا تُزِغۡ قُلُوبَنَا بَعۡدَ إِذۡ هَدَيۡتَنَا وَهَبۡ لَنَا مِن لَّدُنكَ رَحۡمَةًۚ إِنَّكَ أَنتَ ٱلۡوَهَّابُ رَبَّنَآ إِنَّكَ جَامِعُ ٱلنَّاسِ لِيَوۡمٖ لَّا رَيۡبَ فِيهِۚ إِنَّ ٱللَّهَ لَا يُخۡلِفُ ٱلۡمِيعَادَ",
-  "translit": "",
-  "english": "The believers — Do not let our hearts deviate",
-  "source": "Qur’an 3:8-9",
-  "file": "collections/quranic-duas.ts",
-  "kind": "quotation"
- },
- {
-  "where": "Duas from the Qur’an — The young men of the cave — Taking shelter",
-  "arabic": "إِذۡ أَوَى ٱلۡفِتۡيَةُ إِلَى ٱلۡكَهۡفِ فَقَالُواْ رَبَّنَآ ءَاتِنَا مِن لَّدُنكَ رَحۡمَةٗ وَهَيِّئۡ لَنَا مِنۡ أَمۡرِنَا رَشَدٗا",
-  "translit": "",
-  "english": "The young men of the cave — Taking shelter",
-  "source": "Qur’an 18:10",
-  "file": "collections/quranic-duas.ts",
-  "kind": "quotation"
- },
- {
-  "where": "Duas from the Qur’an — Mūsā — Before speaking to Pharaoh",
-  "arabic": "قَالَ رَبِّ ٱشۡرَحۡ لِي صَدۡرِي وَيَسِّرۡ لِيٓ أَمۡرِي وَٱحۡلُلۡ عُقۡدَةٗ مِّن لِّسَانِي يَفۡقَهُواْ قَوۡلِي",
-  "translit": "",
-  "english": "Mūsā — Before speaking to Pharaoh",
-  "source": "Qur’an 20:25-28",
-  "file": "collections/quranic-duas.ts",
-  "kind": "quotation"
- },
- {
-  "where": "Duas from the Qur’an — The Prophet ﷺ — Increase me in knowledge",
-  "arabic": "فَتَعَٰلَى ٱللَّهُ ٱلۡمَلِكُ ٱلۡحَقُّۗ وَلَا تَعۡجَلۡ بِٱلۡقُرۡءَانِ مِن قَبۡلِ أَن يُقۡضَىٰٓ إِلَيۡكَ وَحۡيُهُۥۖ وَقُل رَّبِّ زِدۡنِي عِلۡمٗا",
-  "translit": "",
-  "english": "The Prophet ﷺ — Increase me in knowledge",
-  "source": "Qur’an 20:114",
-  "file": "collections/quranic-duas.ts",
-  "kind": "quotation"
- },
- {
-  "where": "Duas from the Qur’an — Ibrāhīm — Who created me and guides me",
-  "arabic": "ٱلَّذِي خَلَقَنِي فَهُوَ يَهۡدِينِ وَٱلَّذِي هُوَ يُطۡعِمُنِي وَيَسۡقِينِ وَإِذَا مَرِضۡتُ فَهُوَ يَشۡفِينِ وَٱلَّذِي يُمِيتُنِي ثُمَّ يُحۡيِينِ وَٱلَّذِيٓ أَطۡمَعُ أَن يَغۡفِرَ لِي خَطِيٓـَٔتِي يَوۡمَ ٱلدِّينِ رَبِّ هَبۡ لِي حُكۡمٗا وَأَلۡحِقۡنِي بِٱلصَّٰلِحِينَ وَٱجۡعَل لِّي لِسَانَ صِدۡقٖ فِي ٱلۡأٓخِرِينَ وَٱجۡعَلۡنِي مِن وَرَثَةِ جَنَّةِ ٱلنَّعِيمِ",
-  "translit": "",
-  "english": "Ibrāhīm — Who created me and guides me",
-  "source": "Qur’an 26:78-85",
-  "file": "collections/quranic-duas.ts",
-  "kind": "quotation"
- },
- {
-  "where": "Duas from the Qur’an — Ibrāhīm — A sound heart",
-  "arabic": "وَلَا تُخۡزِنِي يَوۡمَ يُبۡعَثُونَ يَوۡمَ لَا يَنفَعُ مَالٞ وَلَا بَنُونَ إِلَّا مَنۡ أَتَى ٱللَّهَ بِقَلۡبٖ سَلِيمٖ",
-  "translit": "",
-  "english": "Ibrāhīm — A sound heart",
-  "source": "Qur’an 26:87-89",
-  "file": "collections/quranic-duas.ts",
-  "kind": "quotation"
- },
- {
-  "where": "Duas from the Qur’an — Sulaymān — To be grateful",
-  "arabic": "فَتَبَسَّمَ ضَاحِكٗا مِّن قَوۡلِهَا وَقَالَ رَبِّ أَوۡزِعۡنِيٓ أَنۡ أَشۡكُرَ نِعۡمَتَكَ ٱلَّتِيٓ أَنۡعَمۡتَ عَلَيَّ وَعَلَىٰ وَٰلِدَيَّ وَأَنۡ أَعۡمَلَ صَٰلِحٗا تَرۡضَىٰهُ وَأَدۡخِلۡنِي بِرَحۡمَتِكَ فِي عِبَادِكَ ٱلصَّٰلِحِينَ",
-  "translit": "",
-  "english": "Sulaymān — To be grateful",
-  "source": "Qur’an 27:19",
-  "file": "collections/quranic-duas.ts",
-  "kind": "quotation"
- },
- {
-  "where": "Duas from the Qur’an — The patient — When loss strikes",
-  "arabic": "ٱلَّذِينَ إِذَآ أَصَٰبَتۡهُم مُّصِيبَةٞ قَالُوٓاْ إِنَّا لِلَّهِ وَإِنَّآ إِلَيۡهِ رَٰجِعُونَ",
-  "translit": "",
-  "english": "The patient — When loss strikes",
-  "source": "Qur’an 2:156",
-  "file": "collections/quranic-duas.ts",
-  "kind": "quotation"
- },
- {
-  "where": "Duas from the Qur’an — Those who stood with Ṭālūt — Facing Jālūt",
-  "arabic": "وَلَمَّا بَرَزُواْ لِجَالُوتَ وَجُنُودِهِۦ قَالُواْ رَبَّنَآ أَفۡرِغۡ عَلَيۡنَا صَبۡرٗا وَثَبِّتۡ أَقۡدَامَنَا وَٱنصُرۡنَا عَلَى ٱلۡقَوۡمِ ٱلۡكَٰفِرِينَ",
-  "translit": "",
-  "english": "Those who stood with Ṭālūt — Facing Jālūt",
-  "source": "Qur’an 2:250",
-  "file": "collections/quranic-duas.ts",
-  "kind": "quotation"
- },
- {
-  "where": "Duas from the Qur’an — The believers — Do not burden us",
-  "arabic": "لَا يُكَلِّفُ ٱللَّهُ نَفۡسًا إِلَّا وُسۡعَهَاۚ لَهَا مَا كَسَبَتۡ وَعَلَيۡهَا مَا ٱكۡتَسَبَتۡۗ رَبَّنَا لَا تُؤَاخِذۡنَآ إِن نَّسِينَآ أَوۡ أَخۡطَأۡنَاۚ رَبَّنَا وَلَا تَحۡمِلۡ عَلَيۡنَآ إِصۡرٗا كَمَا حَمَلۡتَهُۥ عَلَى ٱلَّذِينَ مِن قَبۡلِنَاۚ رَبَّنَا وَلَا تُحَمِّلۡنَا مَا لَا طَاقَةَ لَنَا بِهِۦۖ وَٱعۡفُ عَنَّا وَٱغۡفِرۡ لَنَا وَٱرۡحَمۡنَآۚ أَنتَ مَوۡلَىٰنَا فَٱنصُرۡنَا عَلَى ٱلۡقَوۡمِ ٱلۡكَٰفِرِينَ",
-  "translit": "",
-  "english": "The believers — Do not burden us",
-  "source": "Qur’an 2:286",
-  "file": "collections/quranic-duas.ts",
-  "kind": "quotation"
- },
- {
-  "where": "Duas from the Qur’an — The magicians who believed — Patience, and to die a Muslim",
-  "arabic": "وَمَا تَنقِمُ مِنَّآ إِلَّآ أَنۡ ءَامَنَّا بِـَٔايَٰتِ رَبِّنَا لَمَّا جَآءَتۡنَاۚ رَبَّنَآ أَفۡرِغۡ عَلَيۡنَا صَبۡرٗا وَتَوَفَّنَا مُسۡلِمِينَ",
-  "translit": "",
-  "english": "The magicians who believed — Patience, and to die a Muslim",
-  "source": "Qur’an 7:126",
-  "file": "collections/quranic-duas.ts",
-  "kind": "quotation"
- },
- {
-  "where": "Duas from the Qur’an — The believers with Mūsā — Under an oppressor",
-  "arabic": "فَقَالُواْ عَلَى ٱللَّهِ تَوَكَّلۡنَا رَبَّنَا لَا تَجۡعَلۡنَا فِتۡنَةٗ لِّلۡقَوۡمِ ٱلظَّٰلِمِينَ وَنَجِّنَا بِرَحۡمَتِكَ مِنَ ٱلۡقَوۡمِ ٱلۡكَٰفِرِينَ",
-  "translit": "",
-  "english": "The believers with Mūsā — Under an oppressor",
-  "source": "Qur’an 10:85-86",
-  "file": "collections/quranic-duas.ts",
-  "kind": "quotation"
- },
- {
-  "where": "Duas from the Qur’an — Ayyūb — In illness",
-  "arabic": "۞ وَأَيُّوبَ إِذۡ نَادَىٰ رَبَّهُۥٓ أَنِّي مَسَّنِيَ ٱلضُّرُّ وَأَنتَ أَرۡحَمُ ٱلرَّٰحِمِينَ",
-  "translit": "",
-  "english": "Ayyūb — In illness",
-  "source": "Qur’an 21:83",
-  "file": "collections/quranic-duas.ts",
-  "kind": "quotation"
- },
- {
   "where": "Duas from the Qur’an — The Prophet ﷺ — Not among the wrongdoers",
   "arabic": "قُل رَّبِّ إِمَّا تُرِيَنِّي مَا يُوعَدُونَ رَبِّ فَلَا تَجۡعَلۡنِي فِي ٱلۡقَوۡمِ ٱلظَّٰلِمِينَ",
   "translit": "",
@@ -1800,11 +1998,146 @@
   "kind": "quotation"
  },
  {
+  "where": "Duas from the Qur’an — The Prophet ﷺ — Forgive and have mercy",
+  "arabic": "وَقُل رَّبِّ ٱغۡفِرۡ وَٱرۡحَمۡ وَأَنتَ خَيۡرُ ٱلرَّٰحِمِينَ",
+  "translit": "",
+  "english": "The Prophet ﷺ — Forgive and have mercy",
+  "source": "Qur’an 23:118",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — The servants of the Most Merciful — Turn Hell away from us",
+  "arabic": "وَٱلَّذِينَ يَقُولُونَ رَبَّنَا ٱصۡرِفۡ عَنَّا عَذَابَ جَهَنَّمَۖ إِنَّ عَذَابَهَا كَانَ غَرَامًا إِنَّهَا سَآءَتۡ مُسۡتَقَرّٗا وَمُقَامٗا",
+  "translit": "",
+  "english": "The servants of the Most Merciful — Turn Hell away from us",
+  "source": "Qur’an 25:65-66",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — The servants of the Most Merciful — For family",
+  "arabic": "وَٱلَّذِينَ يَقُولُونَ رَبَّنَا هَبۡ لَنَا مِنۡ أَزۡوَٰجِنَا وَذُرِّيَّٰتِنَا قُرَّةَ أَعۡيُنٖ وَٱجۡعَلۡنَا لِلۡمُتَّقِينَ إِمَامًا",
+  "translit": "",
+  "english": "The servants of the Most Merciful — For family",
+  "source": "Qur’an 25:74",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — Ibrāhīm — Who created me and guides me",
+  "arabic": "ٱلَّذِي خَلَقَنِي فَهُوَ يَهۡدِينِ وَٱلَّذِي هُوَ يُطۡعِمُنِي وَيَسۡقِينِ وَإِذَا مَرِضۡتُ فَهُوَ يَشۡفِينِ وَٱلَّذِي يُمِيتُنِي ثُمَّ يُحۡيِينِ وَٱلَّذِيٓ أَطۡمَعُ أَن يَغۡفِرَ لِي خَطِيٓـَٔتِي يَوۡمَ ٱلدِّينِ رَبِّ هَبۡ لِي حُكۡمٗا وَأَلۡحِقۡنِي بِٱلصَّٰلِحِينَ وَٱجۡعَل لِّي لِسَانَ صِدۡقٖ فِي ٱلۡأٓخِرِينَ وَٱجۡعَلۡنِي مِن وَرَثَةِ جَنَّةِ ٱلنَّعِيمِ",
+  "translit": "",
+  "english": "Ibrāhīm — Who created me and guides me",
+  "source": "Qur’an 26:78-85",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — Ibrāhīm — When I am ill, He cures me",
+  "arabic": "وَإِذَا مَرِضۡتُ فَهُوَ يَشۡفِينِ",
+  "translit": "",
+  "english": "Ibrāhīm — When I am ill, He cures me",
+  "source": "Qur’an 26:80",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — Ibrāhīm — A sound heart",
+  "arabic": "وَلَا تُخۡزِنِي يَوۡمَ يُبۡعَثُونَ يَوۡمَ لَا يَنفَعُ مَالٞ وَلَا بَنُونَ إِلَّا مَنۡ أَتَى ٱللَّهَ بِقَلۡبٖ سَلِيمٖ",
+  "translit": "",
+  "english": "Ibrāhīm — A sound heart",
+  "source": "Qur’an 26:87-89",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — Ṣāliḥ — To Thamūd, and the she-camel",
+  "arabic": "إِذۡ قَالَ لَهُمۡ أَخُوهُمۡ صَٰلِحٌ أَلَا تَتَّقُونَ إِنِّي لَكُمۡ رَسُولٌ أَمِينٞ فَٱتَّقُواْ ٱللَّهَ وَأَطِيعُونِ وَمَآ أَسۡـَٔلُكُمۡ عَلَيۡهِ مِنۡ أَجۡرٍۖ إِنۡ أَجۡرِيَ إِلَّا عَلَىٰ رَبِّ ٱلۡعَٰلَمِينَ أَتُتۡرَكُونَ فِي مَا هَٰهُنَآ ءَامِنِينَ فِي جَنَّٰتٖ وَعُيُونٖ وَزُرُوعٖ وَنَخۡلٖ طَلۡعُهَا هَضِيمٞ وَتَنۡحِتُونَ مِنَ ٱلۡجِبَالِ بُيُوتٗا فَٰرِهِينَ فَٱتَّقُواْ ٱللَّهَ وَأَطِيعُونِ وَلَا تُطِيعُوٓاْ أَمۡرَ ٱلۡمُسۡرِفِينَ ٱلَّذِينَ يُفۡسِدُونَ فِي ٱلۡأَرۡضِ وَلَا يُصۡلِحُونَ قَالُوٓاْ إِنَّمَآ أَنتَ مِنَ ٱلۡمُسَحَّرِينَ مَآ أَنتَ إِلَّا بَشَرٞ مِّثۡلُنَا فَأۡتِ بِـَٔايَةٍ إِن كُنتَ مِنَ ٱلصَّٰدِقِينَ قَالَ هَٰذِهِۦ نَاقَةٞ لَّهَا شِرۡبٞ وَلَكُمۡ شِرۡبُ يَوۡمٖ مَّعۡلُومٖ وَلَا تَمَسُّوهَا بِسُوٓءٖ فَيَأۡخُذَكُمۡ عَذَابُ يَوۡمٍ عَظِيمٖ فَعَقَرُوهَا فَأَصۡبَحُواْ نَٰدِمِينَ فَأَخَذَهُمُ ٱلۡعَذَابُۚ إِنَّ فِي ذَٰلِكَ لَأٓيَةٗۖ وَمَا كَانَ أَكۡثَرُهُم مُّؤۡمِنِينَ وَإِنَّ رَبَّكَ لَهُوَ ٱلۡعَزِيزُ ٱلرَّحِيمُ",
+  "translit": "",
+  "english": "Ṣāliḥ — To Thamūd, and the she-camel",
+  "source": "Qur’an 26:142-159",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — Lūṭ — Save me and my family",
+  "arabic": "رَبِّ نَجِّنِي وَأَهۡلِي مِمَّا يَعۡمَلُونَ",
+  "translit": "",
+  "english": "Lūṭ — Save me and my family",
+  "source": "Qur’an 26:169",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — Dāwūd and Sulaymān — Praise to Allah who favoured us",
+  "arabic": "وَلَقَدۡ ءَاتَيۡنَا دَاوُۥدَ وَسُلَيۡمَٰنَ عِلۡمٗاۖ وَقَالَا ٱلۡحَمۡدُ لِلَّهِ ٱلَّذِي فَضَّلَنَا عَلَىٰ كَثِيرٖ مِّنۡ عِبَادِهِ ٱلۡمُؤۡمِنِينَ",
+  "translit": "",
+  "english": "Dāwūd and Sulaymān — Praise to Allah who favoured us",
+  "source": "Qur’an 27:15",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — Sulaymān — To be grateful",
+  "arabic": "فَتَبَسَّمَ ضَاحِكٗا مِّن قَوۡلِهَا وَقَالَ رَبِّ أَوۡزِعۡنِيٓ أَنۡ أَشۡكُرَ نِعۡمَتَكَ ٱلَّتِيٓ أَنۡعَمۡتَ عَلَيَّ وَعَلَىٰ وَٰلِدَيَّ وَأَنۡ أَعۡمَلَ صَٰلِحٗا تَرۡضَىٰهُ وَأَدۡخِلۡنِي بِرَحۡمَتِكَ فِي عِبَادِكَ ٱلصَّٰلِحِينَ",
+  "translit": "",
+  "english": "Sulaymān — To be grateful",
+  "source": "Qur’an 27:19",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — Sulaymān — This is from the favour of my Lord",
+  "arabic": "قَالَ ٱلَّذِي عِندَهُۥ عِلۡمٞ مِّنَ ٱلۡكِتَٰبِ أَنَا۠ ءَاتِيكَ بِهِۦ قَبۡلَ أَن يَرۡتَدَّ إِلَيۡكَ طَرۡفُكَۚ فَلَمَّا رَءَاهُ مُسۡتَقِرًّا عِندَهُۥ قَالَ هَٰذَا مِن فَضۡلِ رَبِّي لِيَبۡلُوَنِيٓ ءَأَشۡكُرُ أَمۡ أَكۡفُرُۖ وَمَن شَكَرَ فَإِنَّمَا يَشۡكُرُ لِنَفۡسِهِۦۖ وَمَن كَفَرَ فَإِنَّ رَبِّي غَنِيّٞ كَرِيمٞ",
+  "translit": "",
+  "english": "Sulaymān — This is from the favour of my Lord",
+  "source": "Qur’an 27:40",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — Mūsā — I have wronged myself",
+  "arabic": "قَالَ رَبِّ إِنِّي ظَلَمۡتُ نَفۡسِي فَٱغۡفِرۡ لِي فَغَفَرَ لَهُۥٓۚ إِنَّهُۥ هُوَ ٱلۡغَفُورُ ٱلرَّحِيمُ",
+  "translit": "",
+  "english": "Mūsā — I have wronged myself",
+  "source": "Qur’an 28:16",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — Mūsā — Never an assistant to the criminals",
+  "arabic": "قَالَ رَبِّ بِمَآ أَنۡعَمۡتَ عَلَيَّ فَلَنۡ أَكُونَ ظَهِيرٗا لِّلۡمُجۡرِمِينَ",
+  "translit": "",
+  "english": "Mūsā — Never an assistant to the criminals",
+  "source": "Qur’an 28:17",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
   "where": "Duas from the Qur’an — Mūsā — Save me from the wrongdoers",
   "arabic": "فَخَرَجَ مِنۡهَا خَآئِفٗا يَتَرَقَّبُۖ قَالَ رَبِّ نَجِّنِي مِنَ ٱلۡقَوۡمِ ٱلظَّٰلِمِينَ",
   "translit": "",
   "english": "Mūsā — Save me from the wrongdoers",
   "source": "Qur’an 28:21",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — Mūsā — Perhaps my Lord will guide me",
+  "arabic": "وَلَمَّا تَوَجَّهَ تِلۡقَآءَ مَدۡيَنَ قَالَ عَسَىٰ رَبِّيٓ أَن يَهۡدِيَنِي سَوَآءَ ٱلسَّبِيلِ",
+  "translit": "",
+  "english": "Mūsā — Perhaps my Lord will guide me",
+  "source": "Qur’an 28:22",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — Mūsā — In need of whatever good You send",
+  "arabic": "فَسَقَىٰ لَهُمَا ثُمَّ تَوَلَّىٰٓ إِلَى ٱلظِّلِّ فَقَالَ رَبِّ إِنِّي لِمَآ أَنزَلۡتَ إِلَيَّ مِنۡ خَيۡرٖ فَقِيرٞ",
+  "translit": "",
+  "english": "Mūsā — In need of whatever good You send",
+  "source": "Qur’an 28:24",
   "file": "collections/quranic-duas.ts",
   "kind": "quotation"
  },
@@ -1818,11 +2151,74 @@
   "kind": "quotation"
  },
  {
+  "where": "Duas from the Qur’an — Ibrāhīm — For a righteous child",
+  "arabic": "رَبِّ هَبۡ لِي مِنَ ٱلصَّٰلِحِينَ",
+  "translit": "",
+  "english": "Ibrāhīm — For a righteous child",
+  "source": "Qur’an 37:100",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — Isḥāq — Good tidings, and a blessing",
+  "arabic": "وَبَشَّرۡنَٰهُ بِإِسۡحَٰقَ نَبِيّٗا مِّنَ ٱلصَّٰلِحِينَ وَبَٰرَكۡنَا عَلَيۡهِ وَعَلَىٰٓ إِسۡحَٰقَۚ وَمِن ذُرِّيَّتِهِمَا مُحۡسِنٞ وَظَالِمٞ لِّنَفۡسِهِۦ مُبِينٞ",
+  "translit": "",
+  "english": "Isḥāq — Good tidings, and a blessing",
+  "source": "Qur’an 37:112-113",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — Ilyās — To his people",
+  "arabic": "وَإِنَّ إِلۡيَاسَ لَمِنَ ٱلۡمُرۡسَلِينَ إِذۡ قَالَ لِقَوۡمِهِۦٓ أَلَا تَتَّقُونَ أَتَدۡعُونَ بَعۡلٗا وَتَذَرُونَ أَحۡسَنَ ٱلۡخَٰلِقِينَ ٱللَّهَ رَبَّكُمۡ وَرَبَّ ءَابَآئِكُمُ ٱلۡأَوَّلِينَ فَكَذَّبُوهُ فَإِنَّهُمۡ لَمُحۡضَرُونَ إِلَّا عِبَادَ ٱللَّهِ ٱلۡمُخۡلَصِينَ وَتَرَكۡنَا عَلَيۡهِ فِي ٱلۡأٓخِرِينَ سَلَٰمٌ عَلَىٰٓ إِلۡ يَاسِينَ إِنَّا كَذَٰلِكَ نَجۡزِي ٱلۡمُحۡسِنِينَ إِنَّهُۥ مِنۡ عِبَادِنَا ٱلۡمُؤۡمِنِينَ",
+  "translit": "",
+  "english": "Ilyās — To his people",
+  "source": "Qur’an 37:123-132",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — Ayyūb — Satan has touched me with hardship",
+  "arabic": "وَٱذۡكُرۡ عَبۡدَنَآ أَيُّوبَ إِذۡ نَادَىٰ رَبَّهُۥٓ أَنِّي مَسَّنِيَ ٱلشَّيۡطَٰنُ بِنُصۡبٖ وَعَذَابٍ ٱرۡكُضۡ بِرِجۡلِكَۖ هَٰذَا مُغۡتَسَلُۢ بَارِدٞ وَشَرَابٞ وَوَهَبۡنَا لَهُۥٓ أَهۡلَهُۥ وَمِثۡلَهُم مَّعَهُمۡ رَحۡمَةٗ مِّنَّا وَذِكۡرَىٰ لِأُوْلِي ٱلۡأَلۡبَٰبِ وَخُذۡ بِيَدِكَ ضِغۡثٗا فَٱضۡرِب بِّهِۦ وَلَا تَحۡنَثۡۗ إِنَّا وَجَدۡنَٰهُ صَابِرٗاۚ نِّعۡمَ ٱلۡعَبۡدُ إِنَّهُۥٓ أَوَّابٞ",
+  "translit": "",
+  "english": "Ayyūb — Satan has touched me with hardship",
+  "source": "Qur’an 38:41-44",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — Ismāʿīl, Al-Yasaʿ and Dhul-Kifl — Among the outstanding",
+  "arabic": "وَٱذۡكُرۡ إِسۡمَٰعِيلَ وَٱلۡيَسَعَ وَذَا ٱلۡكِفۡلِۖ وَكُلّٞ مِّنَ ٱلۡأَخۡيَارِ",
+  "translit": "",
+  "english": "Ismāʿīl, Al-Yasaʿ and Dhul-Kifl — Among the outstanding",
+  "source": "Qur’an 38:48",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — The angels who carry the Throne — For the believers",
+  "arabic": "ٱلَّذِينَ يَحۡمِلُونَ ٱلۡعَرۡشَ وَمَنۡ حَوۡلَهُۥ يُسَبِّحُونَ بِحَمۡدِ رَبِّهِمۡ وَيُؤۡمِنُونَ بِهِۦ وَيَسۡتَغۡفِرُونَ لِلَّذِينَ ءَامَنُواْۖ رَبَّنَا وَسِعۡتَ كُلَّ شَيۡءٖ رَّحۡمَةٗ وَعِلۡمٗا فَٱغۡفِرۡ لِلَّذِينَ تَابُواْ وَٱتَّبَعُواْ سَبِيلَكَ وَقِهِمۡ عَذَابَ ٱلۡجَحِيمِ رَبَّنَا وَأَدۡخِلۡهُمۡ جَنَّٰتِ عَدۡنٍ ٱلَّتِي وَعَدتَّهُمۡ وَمَن صَلَحَ مِنۡ ءَابَآئِهِمۡ وَأَزۡوَٰجِهِمۡ وَذُرِّيَّٰتِهِمۡۚ إِنَّكَ أَنتَ ٱلۡعَزِيزُ ٱلۡحَكِيمُ وَقِهِمُ ٱلسَّيِّـَٔاتِۚ وَمَن تَقِ ٱلسَّيِّـَٔاتِ يَوۡمَئِذٖ فَقَدۡ رَحِمۡتَهُۥۚ وَذَٰلِكَ هُوَ ٱلۡفَوۡزُ ٱلۡعَظِيمُ",
+  "translit": "",
+  "english": "The angels who carry the Throne — For the believers",
+  "source": "Qur’an 40:7-9",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
   "where": "Duas from the Qur’an — The traveller — Setting out",
   "arabic": "لِتَسۡتَوُۥاْ عَلَىٰ ظُهُورِهِۦ ثُمَّ تَذۡكُرُواْ نِعۡمَةَ رَبِّكُمۡ إِذَا ٱسۡتَوَيۡتُمۡ عَلَيۡهِ وَتَقُولُواْ سُبۡحَٰنَ ٱلَّذِي سَخَّرَ لَنَا هَٰذَا وَمَا كُنَّا لَهُۥ مُقۡرِنِينَ وَإِنَّآ إِلَىٰ رَبِّنَا لَمُنقَلِبُونَ",
   "translit": "",
   "english": "The traveller — Setting out",
   "source": "Qur’an 43:13-14",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — The servant at forty — Gratitude, parents, and children",
+  "arabic": "وَوَصَّيۡنَا ٱلۡإِنسَٰنَ بِوَٰلِدَيۡهِ إِحۡسَٰنًاۖ حَمَلَتۡهُ أُمُّهُۥ كُرۡهٗا وَوَضَعَتۡهُ كُرۡهٗاۖ وَحَمۡلُهُۥ وَفِصَٰلُهُۥ ثَلَٰثُونَ شَهۡرًاۚ حَتَّىٰٓ إِذَا بَلَغَ أَشُدَّهُۥ وَبَلَغَ أَرۡبَعِينَ سَنَةٗ قَالَ رَبِّ أَوۡزِعۡنِيٓ أَنۡ أَشۡكُرَ نِعۡمَتَكَ ٱلَّتِيٓ أَنۡعَمۡتَ عَلَيَّ وَعَلَىٰ وَٰلِدَيَّ وَأَنۡ أَعۡمَلَ صَٰلِحٗا تَرۡضَىٰهُ وَأَصۡلِحۡ لِي فِي ذُرِّيَّتِيٓۖ إِنِّي تُبۡتُ إِلَيۡكَ وَإِنِّي مِنَ ٱلۡمُسۡلِمِينَ",
+  "translit": "",
+  "english": "The servant at forty — Gratitude, parents, and children",
+  "source": "Qur’an 46:15",
   "file": "collections/quranic-duas.ts",
   "kind": "quotation"
  },
@@ -1836,11 +2232,83 @@
   "kind": "quotation"
  },
  {
+  "where": "Duas from the Qur’an — Those who came after — For those before us",
+  "arabic": "وَٱلَّذِينَ جَآءُو مِنۢ بَعۡدِهِمۡ يَقُولُونَ رَبَّنَا ٱغۡفِرۡ لَنَا وَلِإِخۡوَٰنِنَا ٱلَّذِينَ سَبَقُونَا بِٱلۡإِيمَٰنِ وَلَا تَجۡعَلۡ فِي قُلُوبِنَا غِلّٗا لِّلَّذِينَ ءَامَنُواْ رَبَّنَآ إِنَّكَ رَءُوفٞ رَّحِيمٌ",
+  "translit": "",
+  "english": "Those who came after — For those before us",
+  "source": "Qur’an 59:10",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — Ibrāhīm and those with him — Upon You we rely",
+  "arabic": "قَدۡ كَانَتۡ لَكُمۡ أُسۡوَةٌ حَسَنَةٞ فِيٓ إِبۡرَٰهِيمَ وَٱلَّذِينَ مَعَهُۥٓ إِذۡ قَالُواْ لِقَوۡمِهِمۡ إِنَّا بُرَءَٰٓؤُاْ مِنكُمۡ وَمِمَّا تَعۡبُدُونَ مِن دُونِ ٱللَّهِ كَفَرۡنَا بِكُمۡ وَبَدَا بَيۡنَنَا وَبَيۡنَكُمُ ٱلۡعَدَٰوَةُ وَٱلۡبَغۡضَآءُ أَبَدًا حَتَّىٰ تُؤۡمِنُواْ بِٱللَّهِ وَحۡدَهُۥٓ إِلَّا قَوۡلَ إِبۡرَٰهِيمَ لِأَبِيهِ لَأَسۡتَغۡفِرَنَّ لَكَ وَمَآ أَمۡلِكُ لَكَ مِنَ ٱللَّهِ مِن شَيۡءٖۖ رَّبَّنَا عَلَيۡكَ تَوَكَّلۡنَا وَإِلَيۡكَ أَنَبۡنَا وَإِلَيۡكَ ٱلۡمَصِيرُ رَبَّنَا لَا تَجۡعَلۡنَا فِتۡنَةٗ لِّلَّذِينَ كَفَرُواْ وَٱغۡفِرۡ لَنَا رَبَّنَآۖ إِنَّكَ أَنتَ ٱلۡعَزِيزُ ٱلۡحَكِيمُ",
+  "translit": "",
+  "english": "Ibrāhīm and those with him — Upon You we rely",
+  "source": "Qur’an 60:4-5",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — Whoever relies on Allah — He is sufficient",
+  "arabic": "وَيَرۡزُقۡهُ مِنۡ حَيۡثُ لَا يَحۡتَسِبُۚ وَمَن يَتَوَكَّلۡ عَلَى ٱللَّهِ فَهُوَ حَسۡبُهُۥٓۚ إِنَّ ٱللَّهَ بَٰلِغُ أَمۡرِهِۦۚ قَدۡ جَعَلَ ٱللَّهُ لِكُلِّ شَيۡءٖ قَدۡرٗا",
+  "translit": "",
+  "english": "Whoever relies on Allah — He is sufficient",
+  "source": "Qur’an 65:3",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — The believers on the Day — Perfect our light",
+  "arabic": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُواْ تُوبُوٓاْ إِلَى ٱللَّهِ تَوۡبَةٗ نَّصُوحًا عَسَىٰ رَبُّكُمۡ أَن يُكَفِّرَ عَنكُمۡ سَيِّـَٔاتِكُمۡ وَيُدۡخِلَكُمۡ جَنَّٰتٖ تَجۡرِي مِن تَحۡتِهَا ٱلۡأَنۡهَٰرُ يَوۡمَ لَا يُخۡزِي ٱللَّهُ ٱلنَّبِيَّ وَٱلَّذِينَ ءَامَنُواْ مَعَهُۥۖ نُورُهُمۡ يَسۡعَىٰ بَيۡنَ أَيۡدِيهِمۡ وَبِأَيۡمَٰنِهِمۡ يَقُولُونَ رَبَّنَآ أَتۡمِمۡ لَنَا نُورَنَا وَٱغۡفِرۡ لَنَآۖ إِنَّكَ عَلَىٰ كُلِّ شَيۡءٖ قَدِيرٞ",
+  "translit": "",
+  "english": "The believers on the Day — Perfect our light",
+  "source": "Qur’an 66:8",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
   "where": "Duas from the Qur’an — The wife of Pharaoh — For a house in Paradise",
   "arabic": "وَضَرَبَ ٱللَّهُ مَثَلٗا لِّلَّذِينَ ءَامَنُواْ ٱمۡرَأَتَ فِرۡعَوۡنَ إِذۡ قَالَتۡ رَبِّ ٱبۡنِ لِي عِندَكَ بَيۡتٗا فِي ٱلۡجَنَّةِ وَنَجِّنِي مِن فِرۡعَوۡنَ وَعَمَلِهِۦ وَنَجِّنِي مِنَ ٱلۡقَوۡمِ ٱلظَّٰلِمِينَ",
   "translit": "",
   "english": "The wife of Pharaoh — For a house in Paradise",
   "source": "Qur’an 66:11",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — The Prophet ﷺ — Their eyes would almost make you slip",
+  "arabic": "وَإِن يَكَادُ ٱلَّذِينَ كَفَرُواْ لَيُزۡلِقُونَكَ بِأَبۡصَٰرِهِمۡ لَمَّا سَمِعُواْ ٱلذِّكۡرَ وَيَقُولُونَ إِنَّهُۥ لَمَجۡنُونٞ وَمَا هُوَ إِلَّا ذِكۡرٞ لِّلۡعَٰلَمِينَ",
+  "translit": "",
+  "english": "The Prophet ﷺ — Their eyes would almost make you slip",
+  "source": "Qur’an 68:51-52",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — Nūḥ — Ask forgiveness, and He sends rain",
+  "arabic": "فَقُلۡتُ ٱسۡتَغۡفِرُواْ رَبَّكُمۡ إِنَّهُۥ كَانَ غَفَّارٗا يُرۡسِلِ ٱلسَّمَآءَ عَلَيۡكُم مِّدۡرَارٗا وَيُمۡدِدۡكُم بِأَمۡوَٰلٖ وَبَنِينَ وَيَجۡعَل لَّكُمۡ جَنَّٰتٖ وَيَجۡعَل لَّكُمۡ أَنۡهَٰرٗا",
+  "translit": "",
+  "english": "Nūḥ — Ask forgiveness, and He sends rain",
+  "source": "Qur’an 71:10-12",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — Nūḥ — For his parents and the believers",
+  "arabic": "رَّبِّ ٱغۡفِرۡ لِي وَلِوَٰلِدَيَّ وَلِمَن دَخَلَ بَيۡتِيَ مُؤۡمِنٗا وَلِلۡمُؤۡمِنِينَ وَٱلۡمُؤۡمِنَٰتِۖ وَلَا تَزِدِ ٱلظَّٰلِمِينَ إِلَّا تَبَارَۢا",
+  "translit": "",
+  "english": "Nūḥ — For his parents and the believers",
+  "source": "Qur’an 71:28",
+  "file": "collections/quranic-duas.ts",
+  "kind": "quotation"
+ },
+ {
+  "where": "Duas from the Qur’an — Al-Ikhlas — Say: He is Allah, One",
+  "arabic": "قُلۡ هُوَ ٱللَّهُ أَحَدٌ ٱللَّهُ ٱلصَّمَدُ لَمۡ يَلِدۡ وَلَمۡ يُولَدۡ وَلَمۡ يَكُن لَّهُۥ كُفُوًا أَحَدُۢ",
+  "translit": "",
+  "english": "Al-Ikhlas — Say: He is Allah, One",
+  "source": "Qur’an 112:1-4",
   "file": "collections/quranic-duas.ts",
   "kind": "quotation"
  },
@@ -1859,60 +2327,6 @@
   "translit": "",
   "english": "Whoever seeks refuge — An-Nas",
   "source": "Qur’an 114:1-6",
-  "file": "collections/quranic-duas.ts",
-  "kind": "quotation"
- },
- {
-  "where": "Duas from the Qur’an — Ibrāhīm — For Mecca",
-  "arabic": "وَإِذۡ قَالَ إِبۡرَٰهِـۧمُ رَبِّ ٱجۡعَلۡ هَٰذَا بَلَدًا ءَامِنٗا وَٱرۡزُقۡ أَهۡلَهُۥ مِنَ ٱلثَّمَرَٰتِ مَنۡ ءَامَنَ مِنۡهُم بِٱللَّهِ وَٱلۡيَوۡمِ ٱلۡأٓخِرِۚ قَالَ وَمَن كَفَرَ فَأُمَتِّعُهُۥ قَلِيلٗا ثُمَّ أَضۡطَرُّهُۥٓ إِلَىٰ عَذَابِ ٱلنَّارِۖ وَبِئۡسَ ٱلۡمَصِيرُ",
-  "translit": "",
-  "english": "Ibrāhīm — For Mecca",
-  "source": "Qur’an 2:126",
-  "file": "collections/quranic-duas.ts",
-  "kind": "quotation"
- },
- {
-  "where": "Duas from the Qur’an — The Prophet ﷺ — Owner of all sovereignty",
-  "arabic": "قُلِ ٱللَّهُمَّ مَٰلِكَ ٱلۡمُلۡكِ تُؤۡتِي ٱلۡمُلۡكَ مَن تَشَآءُ وَتَنزِعُ ٱلۡمُلۡكَ مِمَّن تَشَآءُ وَتُعِزُّ مَن تَشَآءُ وَتُذِلُّ مَن تَشَآءُۖ بِيَدِكَ ٱلۡخَيۡرُۖ إِنَّكَ عَلَىٰ كُلِّ شَيۡءٖ قَدِيرٞ تُولِجُ ٱلَّيۡلَ فِي ٱلنَّهَارِ وَتُولِجُ ٱلنَّهَارَ فِي ٱلَّيۡلِۖ وَتُخۡرِجُ ٱلۡحَيَّ مِنَ ٱلۡمَيِّتِ وَتُخۡرِجُ ٱلۡمَيِّتَ مِنَ ٱلۡحَيِّۖ وَتَرۡزُقُ مَن تَشَآءُ بِغَيۡرِ حِسَابٖ",
-  "translit": "",
-  "english": "The Prophet ﷺ — Owner of all sovereignty",
-  "source": "Qur’an 3:26-27",
-  "file": "collections/quranic-duas.ts",
-  "kind": "quotation"
- },
- {
-  "where": "Duas from the Qur’an — Ibrāhīm — For those he settled by the House",
-  "arabic": "رَّبَّنَآ إِنِّيٓ أَسۡكَنتُ مِن ذُرِّيَّتِي بِوَادٍ غَيۡرِ ذِي زَرۡعٍ عِندَ بَيۡتِكَ ٱلۡمُحَرَّمِ رَبَّنَا لِيُقِيمُواْ ٱلصَّلَوٰةَ فَٱجۡعَلۡ أَفۡـِٔدَةٗ مِّنَ ٱلنَّاسِ تَهۡوِيٓ إِلَيۡهِمۡ وَٱرۡزُقۡهُم مِّنَ ٱلثَّمَرَٰتِ لَعَلَّهُمۡ يَشۡكُرُونَ رَبَّنَآ إِنَّكَ تَعۡلَمُ مَا نُخۡفِي وَمَا نُعۡلِنُۗ وَمَا يَخۡفَىٰ عَلَى ٱللَّهِ مِن شَيۡءٖ فِي ٱلۡأَرۡضِ وَلَا فِي ٱلسَّمَآءِ",
-  "translit": "",
-  "english": "Ibrāhīm — For those he settled by the House",
-  "source": "Qur’an 14:37-38",
-  "file": "collections/quranic-duas.ts",
-  "kind": "quotation"
- },
- {
-  "where": "Duas from the Qur’an — Those who reflect — Standing, sitting, and lying down",
-  "arabic": "ٱلَّذِينَ يَذۡكُرُونَ ٱللَّهَ قِيَٰمٗا وَقُعُودٗا وَعَلَىٰ جُنُوبِهِمۡ وَيَتَفَكَّرُونَ فِي خَلۡقِ ٱلسَّمَٰوَٰتِ وَٱلۡأَرۡضِ رَبَّنَا مَا خَلَقۡتَ هَٰذَا بَٰطِلٗا سُبۡحَٰنَكَ فَقِنَا عَذَابَ ٱلنَّارِ رَبَّنَآ إِنَّكَ مَن تُدۡخِلِ ٱلنَّارَ فَقَدۡ أَخۡزَيۡتَهُۥۖ وَمَا لِلظَّٰلِمِينَ مِنۡ أَنصَارٖ رَّبَّنَآ إِنَّنَا سَمِعۡنَا مُنَادِيٗا يُنَادِي لِلۡإِيمَٰنِ أَنۡ ءَامِنُواْ بِرَبِّكُمۡ فَـَٔامَنَّاۚ رَبَّنَا فَٱغۡفِرۡ لَنَا ذُنُوبَنَا وَكَفِّرۡ عَنَّا سَيِّـَٔاتِنَا وَتَوَفَّنَا مَعَ ٱلۡأَبۡرَارِ رَبَّنَا وَءَاتِنَا مَا وَعَدتَّنَا عَلَىٰ رُسُلِكَ وَلَا تُخۡزِنَا يَوۡمَ ٱلۡقِيَٰمَةِۖ إِنَّكَ لَا تُخۡلِفُ ٱلۡمِيعَادَ",
-  "translit": "",
-  "english": "Those who reflect — Standing, sitting, and lying down",
-  "source": "Qur’an 3:191-194",
-  "file": "collections/quranic-duas.ts",
-  "kind": "quotation"
- },
- {
-  "where": "Duas from the Qur’an — Yūsuf — Let me die a Muslim",
-  "arabic": "۞ رَبِّ قَدۡ ءَاتَيۡتَنِي مِنَ ٱلۡمُلۡكِ وَعَلَّمۡتَنِي مِن تَأۡوِيلِ ٱلۡأَحَادِيثِۚ فَاطِرَ ٱلسَّمَٰوَٰتِ وَٱلۡأَرۡضِ أَنتَ وَلِيِّۦ فِي ٱلدُّنۡيَا وَٱلۡأٓخِرَةِۖ تَوَفَّنِي مُسۡلِمٗا وَأَلۡحِقۡنِي بِٱلصَّٰلِحِينَ",
-  "translit": "",
-  "english": "Yūsuf — Let me die a Muslim",
-  "source": "Qur’an 12:101",
-  "file": "collections/quranic-duas.ts",
-  "kind": "quotation"
- },
- {
-  "where": "Duas from the Qur’an — The servants of the Most Merciful — Turn Hell away from us",
-  "arabic": "وَٱلَّذِينَ يَقُولُونَ رَبَّنَا ٱصۡرِفۡ عَنَّا عَذَابَ جَهَنَّمَۖ إِنَّ عَذَابَهَا كَانَ غَرَامًا إِنَّهَا سَآءَتۡ مُسۡتَقَرّٗا وَمُقَامٗا",
-  "translit": "",
-  "english": "The servants of the Most Merciful — Turn Hell away from us",
-  "source": "Qur’an 25:65-66",
   "file": "collections/quranic-duas.ts",
   "kind": "quotation"
  },

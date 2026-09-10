@@ -80,198 +80,366 @@ const get = async (url) => {
 };
 
 /**
- * Whose supplication, and where.
+ * Whose words, and what they ask.
  *
- * `who` is the attribution the Qur'an itself makes, and it is what the entry
- * is called — "The dua of Yūnus" rather than a title invented for it.
+ * `who` is the attribution the Qur'an itself makes; `note` is a label for the
+ * row, in the app's words. The site prints none — a verse, its translation
+ * and its reference — and a row needs a name. Verses that are not
+ * supplications are on the site's pages too (Āyat al-Kursī under ruqyah, the
+ * story of Ṣāliḥ under his name) and are named for what they are.
  */
+const WHO = {
+  '1:1-7': ['Every Muslim, in every prayer', 'Guide us to the straight path'],
+  '2:32': ['The angels', 'We know only what You taught us'],
+  '2:102': ['On magic', 'It was not Sulaymān who disbelieved'],
+  '2:126': ['Ibrāhīm', 'For Mecca'],
+  '2:127-128': ['Ibrāhīm and Ismāʿīl', 'Raising the House'],
+  '2:127-129': ['Ibrāhīm and Ismāʿīl', 'Raising the House, and for a messenger'],
+  '2:155-156': ['The patient', 'Tested, and what they say'],
+  '2:156': ['The patient', 'When loss strikes'],
+  '2:201': ['The believers', 'Good in both lives'],
+  '2:250': ['Those who stood with Ṭālūt', 'Facing Jālūt'],
+  '2:255': ['Āyat al-Kursī', 'The verse of the Throne'],
+  '2:285': ['The Messenger and the believers', 'We hear and we obey'],
+  '2:285-286': ['The end of Al-Baqarah', 'Two verses said at night'],
+  '2:286': ['The believers', 'Do not burden us'],
+  '3:8-9': ['The believers', 'Do not let our hearts deviate'],
+  '3:16': ['The believers', 'We have believed — forgive us'],
+  '3:26-27': ['The Prophet ﷺ', 'Owner of all sovereignty'],
+  '3:35': ['The mother of Maryam', 'Dedicating her child'],
+  '3:38': ['Zakariyyā', 'For a child'],
+  '3:52-53': ['The disciples of ʿĪsā', 'Register us among the witnesses'],
+  '3:191-194': ['Those who reflect', 'Standing, sitting, and lying down'],
+  '5:25': ['Mūsā', 'Part us from the disobedient'],
+  '5:83-84': ['Those who wept at the revelation', 'We have believed'],
+  '5:114': ['ʿĪsā', 'For a table from heaven'],
+  '5:118': ['ʿĪsā', 'They are Your servants'],
+  '6:79': ['Ibrāhīm', 'I have turned my face'],
+  '6:86': ['Ismāʿīl, Al-Yasaʿ, Yūnus and Lūṭ', 'Preferred over the worlds'],
+  '6:162': ['The Prophet ﷺ', 'My prayer and my life are for Allah'],
+  '7:23': ['Ādam', 'After the mistake'],
+  '7:43': ['The people of Paradise', 'Praise to Allah who guided us'],
+  '7:89': ['Shuʿayb', 'Decide between us in truth'],
+  '7:117-122': ['The magicians', 'They fell in prostration'],
+  '7:126': ['The magicians who believed', 'Patience, and to die a Muslim'],
+  '7:151': ['Mūsā', 'For himself and his brother'],
+  '7:155-156': ['Mūsā', 'After the earthquake'],
+  '10:57': ['The Qur’an', 'A healing for what is in the breasts'],
+  '10:81-82': ['Mūsā', 'Allah will expose its worthlessness'],
+  '10:85-86': ['The believers with Mūsā', 'Under an oppressor'],
+  '11:41': ['Nūḥ', 'Boarding the ark'],
+  '11:47': ['Nūḥ', 'Refuge from asking wrongly'],
+  '11:52': ['Hūd', 'Ask forgiveness, and He sends rain'],
+  '11:56': ['Hūd', 'I have relied upon Allah'],
+  '11:61': ['Ṣāliḥ', 'Worship Allah and ask His forgiveness'],
+  '11:71-73': ['The wife of Ibrāhīm', 'Good tidings of Isḥāq'],
+  '11:88': ['Shuʿayb', 'I only intend reform'],
+  '12:18': ['Yaʿqūb', 'Patience is most fitting'],
+  '12:67': ['Yaʿqūb', 'Upon Him I have relied'],
+  '12:83': ['Yaʿqūb', 'Perhaps Allah will bring them to me'],
+  '12:86': ['Yaʿqūb', 'I complain only to Allah'],
+  '12:101': ['Yūsuf', 'Let me die a Muslim'],
+  '14:35-38': ['Ibrāhīm', 'For Mecca, and for those he settled by the House'],
+  '14:37-38': ['Ibrāhīm', 'For those he settled by the House'],
+  '14:40-41': ['Ibrāhīm', 'To be kept in prayer, and for his parents'],
+  '17:24': ['The believer', 'For parents'],
+  '17:80': ['The Prophet ﷺ', 'A true entry and a true exit'],
+  '17:82': ['The Qur’an', 'A healing and a mercy'],
+  '18:10': ['The young men of the cave', 'Taking shelter'],
+  '18:24': ['The Prophet ﷺ', 'If Allah wills'],
+  '19:4-5': ['Zakariyyā', 'My bones have weakened'],
+  '19:7-15': ['Yaḥyā', 'His birth and his childhood'],
+  '19:56-57': ['Idrīs', 'Raised to a high station'],
+  '20:25-28': ['Mūsā', 'Before speaking to Pharaoh'],
+  '20:29-32': ['Mūsā', 'For Hārūn'],
+  '20:69': ['Mūsā', 'Throw what is in your right hand'],
+  '20:114': ['The Prophet ﷺ', 'Increase me in knowledge'],
+  '21:83': ['Ayyūb', 'In illness'],
+  '21:83-84': ['Ayyūb', 'In illness, and the answer'],
+  '21:85': ['Ismāʿīl, Idrīs and Dhul-Kifl', 'Of the patient'],
+  '21:85-86': ['Ismāʿīl, Idrīs and Dhul-Kifl', 'Of the patient, admitted to mercy'],
+  '21:87': ['Yūnus', 'From inside the darkness'],
+  '21:89': ['Zakariyyā', 'Do not leave me alone'],
+  '21:112': ['The Prophet ﷺ', 'Judge in truth'],
+  '23:28-29': ['Nūḥ', 'A blessed landing'],
+  '23:93-94': ['The Prophet ﷺ', 'Not among the wrongdoers'],
+  '23:97-98': ['The Prophet ﷺ', 'Refuge from the whispers'],
+  '23:118': ['The Prophet ﷺ', 'Forgive and have mercy'],
+  '25:65-66': ['The servants of the Most Merciful', 'Turn Hell away from us'],
+  '25:74': ['The servants of the Most Merciful', 'For family'],
+  '26:78-85': ['Ibrāhīm', 'Who created me and guides me'],
+  '26:80': ['Ibrāhīm', 'When I am ill, He cures me'],
+  '26:87-89': ['Ibrāhīm', 'A sound heart'],
+  '26:142-159': ['Ṣāliḥ', 'To Thamūd, and the she-camel'],
+  '26:169': ['Lūṭ', 'Save me and my family'],
+  '27:15': ['Dāwūd and Sulaymān', 'Praise to Allah who favoured us'],
+  '27:19': ['Sulaymān', 'To be grateful'],
+  '27:40': ['Sulaymān', 'This is from the favour of my Lord'],
+  '28:16': ['Mūsā', 'I have wronged myself'],
+  '28:17': ['Mūsā', 'Never an assistant to the criminals'],
+  '28:21': ['Mūsā', 'Save me from the wrongdoers'],
+  '28:22': ['Mūsā', 'Perhaps my Lord will guide me'],
+  '28:24': ['Mūsā', 'In need of whatever good You send'],
+  '29:30': ['Lūṭ', 'Against the corrupters'],
+  '37:100': ['Ibrāhīm', 'For a righteous child'],
+  '37:112-113': ['Isḥāq', 'Good tidings, and a blessing'],
+  '37:123-132': ['Ilyās', 'To his people'],
+  '38:41-44': ['Ayyūb', 'Satan has touched me with hardship'],
+  '38:48': ['Ismāʿīl, Al-Yasaʿ and Dhul-Kifl', 'Among the outstanding'],
+  '40:7-9': ['The angels who carry the Throne', 'For the believers'],
+  '43:13-14': ['The traveller', 'Setting out'],
+  '46:15': ['The servant at forty', 'Gratitude, parents, and children'],
+  '54:10': ['Nūḥ', 'Overpowered, so help'],
+  '59:10': ['Those who came after', 'For those before us'],
+  '60:4-5': ['Ibrāhīm and those with him', 'Upon You we rely'],
+  '65:3': ['Whoever relies on Allah', 'He is sufficient'],
+  '66:8': ['The believers on the Day', 'Perfect our light'],
+  '66:11': ['The wife of Pharaoh', 'For a house in Paradise'],
+  '68:51-52': ['The Prophet ﷺ', 'Their eyes would almost make you slip'],
+  '71:10-12': ['Nūḥ', 'Ask forgiveness, and He sends rain'],
+  '71:28': ['Nūḥ', 'For his parents and the believers'],
+  '112:1-4': ['Al-Ikhlas', 'Say: He is Allah, One'],
+  '113:1-5': ['Whoever seeks refuge', 'Al-Falaq'],
+  '114:1-6': ['Whoever seeks refuge', 'An-Nas'],
+};
+
 /*
-  Revised 9 Sep 2026, Iyad's call: the collection follows quran.com/duas.
+  Revised 10 Sep 2026, Iyad's call: the collection is quran.com/duas, pages
+  and all.
 
-  Its 101 topical pages cite 139 passages, and the same verse sits on many of
-  them (28:24 is on fifteen). What is copied is the STRUCTURE — the category
-  names, their order, and which category lists a verse on the most pages —
-  and every text still comes from QuranEnc, never from the site. Each passage
-  is placed once, in the category quran.com files it under most often, ties
-  going to the earlier category. Within a section the order is the mushaf's,
-  so Al-Fatihah opens Essentials without anyone deciding that it should.
+  The first pass (9 Sep) copied the site's eight section names and placed
+  each verse once under the section that listed it most. It felt nothing
+  like the site, and Iyad said so: the site's unit is a PAGE with a purpose
+  in its title — "Duas for New Muslims", "Duas for Fear", "Rabbana Duas" —
+  and the same verse sits on several pages because three people arrive with
+  three questions. Placing each verse once removed exactly that.
 
-  Sixty-six of the 139 came in. What stayed out, and why:
-  - Verses ABOUT a topic rather than words said to Allah: Āyat al-Kursī, the
-    fasting rulings, Laylat al-Qadr, the day-and-night signs, the dhikr
-    commands, the ruqyah verses, and the "Prophet X in the Quran" pages that
-    carry a mention and no supplication (6:86, 38:48, 19:56–57, 21:85).
-  - Words said to people, not to Allah: Yaʿqūb to his sons (12:18, 83, 86),
-    Hūd's and Shuʿayb's speeches (11:56, 11:88), Sulaymān's thanks (27:15,
-    27:40), the magicians' declaration (7:117–122), Yūsuf's vow (28:17).
-  - Hopes rather than requests: 18:24, 28:22.
-  - Overlaps, where the site lists a verse both alone and inside a range
-    (21:83 and 21:83–84; 2:127–128 and 2:127–129; 2:156 and 2:155–156): the
-    range on the most pages is kept.
-  - The whole "Worship & Reflection" category, which held no supplication at
-    all once the above was applied.
-  Kept though quran.com lacks her: the mother of Maryam, 3:35, under Family.
+  So `SITE` below is the site's structure, verbatim: its sections in its
+  order, their descriptions, their 96 pages with their titles, descriptions
+  and verse lists in page order. What is copied is the STRUCTURE; every
+  text still comes from QuranEnc. Two departures, both his:
+  - "Worship & Reflection" is out — five pages of verses about Ramadan,
+    Laylat al-Qadr, day and night and dhikr, none of them a supplication.
+  - The mother of Maryam, 3:35, is in — on "Duas for Righteous Offspring and
+    Pregnancy", the page her words belong to. The site lacks her.
 
-  `a` may be a single ayah or a [from, to] range of consecutive ayahs — the
-  dua of 3:191–194 is one supplication across four verses, and slicing it
-  into four cards would ask a reader to say a quarter of it. Whole ayahs,
-  joined in order, nothing sliced.
+  Each passage is one ENTRY, once, however many pages list it: search finds
+  it once, the daily pick sees it once. A page is a list of entry ids.
+  Twenty-nine of the pages hold one or two verses; they are as thin here as
+  they are there. Overlapping ranges the site lists separately (21:83 and
+  21:83–84) stay separate, because the pages that carry them differ.
+
+  `a` may be a single ayah or a [from, to] range of consecutive ayahs. Whole
+  ayahs, joined in order, nothing sliced — deciding where a dua starts is an
+  editorial act on a Qur'an text, and the framing is what tells a reader
+  whose words these are.
 */
-const SECTIONS = [
+const SITE = [
   {
-    title: 'Essentials',
-    duas: [
-      { id: 'fatihah', who: 'Every Muslim, in every prayer', s: 1, a: [1, 7], note: 'Guide us to the straight path' },
-      { id: 'ibrahim-muslims', who: 'Ibrāhīm and Ismāʿīl', s: 2, a: [127, 128], note: 'Raising the House' },
-      { id: 'believers-both', who: 'The believers', s: 2, a: 201, note: 'Good in both lives' },
-      { id: 'adam', who: 'Ādam', s: 7, a: 23, note: 'After the mistake' },
-      { id: 'child-parents', who: 'The believer', s: 17, a: 24, note: 'For parents' },
-      { id: 'yunus', who: 'Yūnus', s: 21, a: 87, note: 'From inside the darkness' },
-      { id: 'muhammad-mercy', who: 'The Prophet ﷺ', s: 23, a: 118, note: 'Forgive and have mercy' },
-      { id: 'musa-need', who: 'Mūsā', s: 28, a: 24, note: 'In need of whatever good You send' },
-      { id: 'ibrahim-child', who: 'Ibrāhīm', s: 37, a: 100, note: 'For a righteous child' },
+    title: "Essentials",
+    description: "Short, common, and easy-to-start duas from the Quran.",
+    pages: [
+      { id: "acceptance", title: "Duas for Acceptance of Good Deeds", description: "Duas from the Quran for the acceptance of good deeds, steadfast prayer, gratitude, and righteousness.", refs: [[2, 127, 128], [14, 40, 41], [27, 19], [46, 15]] },
+      { id: "confidence", title: "Duas for Confidence", description: "Duas from the Quran for courage, clarity, safety, guidance, and help in times of need.", refs: [[20, 25, 28], [28, 21], [28, 22], [28, 24]] },
+      { id: "daily-life", title: "Duas from the Quran for Daily Life", description: "A practical list of duas from the Quran for everyday needs, family, hardship, gratitude, and provision.", refs: [[2, 201], [17, 24], [20, 114], [23, 97, 98], [25, 74], [28, 24], [46, 15]] },
+      { id: "everyday-duas", title: "Short Duas from the Quran for Daily Recitation and Memorization", description: "Short duas from the Quran for daily recitation, memorization, children, and everyday needs.", refs: [[1, 1, 7], [2, 201], [7, 23], [20, 114], [21, 87], [23, 118], [28, 24], [17, 24], [37, 100]] },
+      { id: "arabic-english-transliteration", title: "Quran Duas in Arabic, English, and Transliteration", description: "A selection of short duas from the Quran presented with references for Arabic, translation, and transliteration.", refs: [[2, 201], [20, 114], [21, 87], [23, 118], [28, 24], [37, 100]] },
+      { id: "new-muslims", title: "Duas for New Muslims", description: "Short duas from the Quran for new Muslims seeking guidance, forgiveness, knowledge, and steadfast faith.", refs: [[1, 1, 7], [3, 8, 9], [7, 23], [20, 114], [23, 118], [59, 10]] },
+      { id: "powerful-duas", title: "Powerful Duas from the Quran", description: "A broad collection of concise and meaningful duas from the Quran by theme.", refs: [[2, 201], [7, 23], [21, 87], [25, 74]] },
+      { id: "rabbana", title: "Rabbana Duas from the Quran", description: "A collection of duas beginning with Rabbana (Our Lord!) across the Quran.", refs: [[2, 127, 128], [2, 201], [2, 250], [2, 285], [2, 286], [3, 8, 9], [3, 16], [3, 191, 194], [5, 83, 84], [7, 23], [7, 89], [7, 126], [10, 85, 86], [14, 37, 38], [14, 40, 41], [18, 10], [25, 65, 66], [25, 74], [40, 7, 9], [59, 10], [60, 4, 5], [66, 8]] },
+      { id: "topics", title: "Duas from the Quran by Topic", description: "A topic-based index of duas from the Quran for guidance, forgiveness, family, hardship, protection, and need.", refs: [[1, 1, 7], [2, 201], [7, 23], [21, 87], [25, 74], [28, 24], [59, 10]] },
     ],
   },
   {
-    title: 'Prophetic Duas',
-    duas: [
-      { id: 'zakariyya-offspring', who: 'Zakariyyā', s: 3, a: 38, note: 'For a child' },
-      { id: 'disciples', who: 'The disciples of ʿĪsā', s: 3, a: [52, 53], note: 'Register us among the witnesses' },
-      { id: 'musa-part', who: 'Mūsā', s: 5, a: 25, note: 'Part us from the disobedient' },
-      { id: 'isa-table', who: 'ʿĪsā', s: 5, a: 114, note: 'For a table from heaven' },
-      { id: 'shuayb', who: 'Shuʿayb', s: 7, a: 89, note: 'Decide between us in truth' },
-      { id: 'nuh-ark', who: 'Nūḥ', s: 11, a: 41, note: 'Boarding the ark' },
-      { id: 'nuh-refuge', who: 'Nūḥ', s: 11, a: 47, note: 'Refuge from asking wrongly' },
-      { id: 'muhammad-entry', who: 'The Prophet ﷺ', s: 17, a: 80, note: 'A true entry and a true exit' },
-      { id: 'musa-harun', who: 'Mūsā', s: 20, a: [29, 32], note: 'For Hārūn' },
-      { id: 'zakariyya-alone', who: 'Zakariyyā', s: 21, a: 89, note: 'Do not leave me alone' },
-      { id: 'muhammad-judge', who: 'The Prophet ﷺ', s: 21, a: 112, note: 'Judge in truth' },
-      { id: 'nuh-landing', who: 'Nūḥ', s: 23, a: [28, 29], note: 'A blessed landing' },
-      { id: 'lut-family', who: 'Lūṭ', s: 26, a: 169, note: 'Save me and my family' },
-      { id: 'nuh', who: 'Nūḥ', s: 71, a: 28, note: 'For his parents and the believers' },
+    title: "Prophetic Duas",
+    description: "Duas connected to Prophets and their moments in the Quran.",
+    pages: [
+      { id: "adam-hawwa", title: "Dua of Prophet Adam and Hawwa", description: "The dua from the Quran of Prophet Adam and Hawwa after their mistake, asking Allah for forgiveness and mercy.", refs: [[7, 23]] },
+      { id: "prophet-al-yasa", title: "Prophet Al-Yasa in the Quran", description: "Quran references to Al-Yasa among the righteous.", refs: [[6, 86], [38, 48]] },
+      { id: "prophet-ayyub-illness", title: "Prophet Ayyub's Illness and Dua in the Quran", description: "Quran passages recounting Ayyub's appeal during illness and Allah's merciful response.", refs: [[21, 83, 84], [38, 41, 44]] },
+      { id: "prophet-dhul-kifl", title: "Prophet Dhul-Kifl in the Quran", description: "Quran references to Dhul-Kifl among the patient and righteous.", refs: [[21, 85, 86], [38, 48]] },
+      { id: "prophet-idris", title: "Prophet Idris in the Quran", description: "Quran passages describing Idris as truthful, elevated, patient, and righteous.", refs: [[19, 56, 57], [21, 85]] },
+      { id: "prophet-ilyas", title: "Prophet Ilyas in the Quran", description: "Quran passages recounting Ilyas's call to worship Allah alone and honoring him among the righteous.", refs: [[37, 123, 132]] },
+      { id: "prophet-ishaq", title: "Prophet Ishaq in the Quran", description: "Quran passages announcing Ishaq as a gift from Allah and describing blessings upon his descendants.", refs: [[11, 71, 73], [37, 112, 113]] },
+      { id: "prophet-salih", title: "Prophet Salih in the Quran", description: "Quran passages recounting Salih's call to repentance, his warning, and the response of his people.", refs: [[11, 61], [26, 142, 159]] },
+      { id: "prophet-yahya", title: "Prophet Yahya in the Quran", description: "Quran passages connecting Zakariya's prayer for a child with the birth and qualities of Yahya.", refs: [[3, 38], [19, 7, 15]] },
+      { id: "prophet-ayyub", title: "Dua of Prophet Ayyub", description: "The dua from the Quran of Ayyub during illness and hardship.", refs: [[21, 83]] },
+      { id: "prophet-dawud", title: "Dawud and Sulayman's Gratitude in the Quran", description: "A Quran passage in which Dawud and Sulayman thank Allah for the knowledge and favor He granted them.", refs: [[27, 15]] },
+      { id: "prophet-harun", title: "Musa's Dua for Harun", description: "Musa's dua from the Quran asking Allah to strengthen him through his brother Harun.", refs: [[20, 29, 32]] },
+      { id: "prophet-hud", title: "Prophet Hud's Declaration of Trust in Allah", description: "Hud's declaration from the Quran of trust in Allah in the face of denial and hostility.", refs: [[11, 56]] },
+      { id: "prophet-ibrahim", title: "Duas of Prophet Ibrahim", description: "A collection of Prophet Ibrahim's duas from the Quran for Makkah, offspring, prayer, acceptance, forgiveness, and the Hereafter.", refs: [[2, 126], [2, 127, 128], [14, 35, 38], [14, 40, 41], [26, 78, 85], [26, 87, 89], [37, 100], [60, 4, 5]] },
+      { id: "prophet-isa", title: "Duas Connected to Prophet Isa", description: "Duas from the Quran connected to Prophet Isa, his disciples, and his community.", refs: [[3, 52, 53], [5, 114], [5, 118]] },
+      { id: "prophet-ismail", title: "Dua of Ibrahim and Ismail at the Ka'bah", description: "The supplications of Ibrahim and Ismail while raising the foundations of the Ka'bah, asking for acceptance and guidance.", refs: [[2, 127, 129]] },
+      { id: "prophet-lut", title: "Duas of Prophet Lut", description: "Lut's dua from the Quran asking Allah for help against a corrupt people.", refs: [[26, 169], [29, 30]] },
+      { id: "prophet-muhammad", title: "Duas of Prophet Muhammad in the Quran", description: "Duas from the Quran taught to Prophet Muhammad for truth, knowledge, protection, judgment, and mercy.", refs: [[17, 80], [20, 114], [21, 112], [23, 97, 98], [23, 118]] },
+      { id: "prophet-musa", title: "Duas of Prophet Musa", description: "A collection of Prophet Musa's duas from the Quran for forgiveness, clarity, safety, guidance, and need.", refs: [[5, 25], [7, 151], [7, 155, 156], [20, 25, 28], [28, 16], [28, 17], [28, 21], [28, 22], [28, 24]] },
+      { id: "prophet-nuh", title: "Duas of Prophet Nuh", description: "Duas of Nuh from the Quran for safe passage, rescue, forgiveness, and mercy for believers.", refs: [[11, 41], [23, 28, 29], [54, 10], [11, 47], [71, 28]] },
+      { id: "prophet-nuh-forgiveness", title: "Duas of Nuh for Forgiveness", description: "Nuh's duas from the Quran for forgiveness and mercy for himself, his family, and the believers.", refs: [[11, 47], [71, 28]] },
+      { id: "prophets", title: "Duas of the Prophets in the Quran", description: "A collection of duas from the Quran associated with prophets, including Adam, Nuh, Ibrahim, Musa, Yunus, Zakariya, Ayyub, and Sulayman.", refs: [[7, 23], [11, 47], [71, 28], [2, 127, 128], [14, 40, 41], [20, 25, 28], [28, 24], [21, 87], [21, 89], [21, 83], [27, 19]] },
+      { id: "prophet-shuayb", title: "Duas and Trust of Prophet Shuayb", description: "Shuayb's duas from the Quran and declarations of trust, asking Allah to judge with truth.", refs: [[7, 89], [11, 88]] },
+      { id: "prophet-sulayman", title: "Duas and Gratitude of Prophet Sulayman", description: "Quran passages and supplications of Sulayman concerning knowledge, gratitude, and Allah's favor.", refs: [[27, 15], [27, 19], [27, 40]] },
+      { id: "prophet-yaqub", title: "Prophet Yaqub's Patience and Duas", description: "Quran passages on Yaqub's patience, grief, hope, and reliance upon Allah.", refs: [[12, 18], [12, 67], [12, 83], [12, 86]] },
+      { id: "prophet-yunus", title: "Dua of Prophet Yunus", description: "The dua from the Quran of Prophet Yunus in distress: La ilaha illa Anta subhanaka inni kuntu minaz-zalimin.", refs: [[21, 87]] },
+      { id: "prophet-yusuf", title: "Dua of Prophet Yusuf", description: "Yusuf's dua from the Quran to die as a Muslim and be joined with the righteous.", refs: [[12, 101]] },
+      { id: "prophet-zakariya", title: "Duas of Prophet Zakariya", description: "Zakariya's duas from the Quran for a righteous child despite his old age.", refs: [[3, 38], [19, 4, 5], [21, 89]] },
     ],
   },
   {
-    title: 'Family & Community',
-    duas: [
-      { id: 'believers-forgive', who: 'The believers', s: 3, a: 16, note: 'We have believed — forgive us' },
-      { id: 'maryam-mother', who: 'The mother of Maryam', s: 3, a: 35, note: 'Dedicating her child' },
-      { id: 'wept', who: 'Those who wept at the revelation', s: 5, a: [83, 84], note: 'We have believed' },
-      { id: 'ibrahim-prayer', who: 'Ibrāhīm', s: 14, a: [40, 41], note: 'To be kept in prayer, and for his parents' },
-      { id: 'zakariyya-bones', who: 'Zakariyyā', s: 19, a: [4, 5], note: 'My bones have weakened' },
-      { id: 'servants', who: 'The servants of the Most Merciful', s: 25, a: 74, note: 'For family' },
-      { id: 'throne-bearers', who: 'The angels who carry the Throne', s: 40, a: [7, 9], note: 'For the believers' },
-      { id: 'at-forty', who: 'The servant at forty', s: 46, a: 15, note: 'Gratitude, parents, and children' },
-      { id: 'later-believers', who: 'Those who came after', s: 59, a: 10, note: 'For those before us' },
-      { id: 'believers-light', who: 'The believers on the Day', s: 66, a: 8, note: 'Perfect our light' },
+    title: "Family & Community",
+    description: "Duas for parents, children, family, believers, and loved ones.",
+    pages: [
+      { id: "believers", title: "Duas for the Believers", description: "Duas from the Quran for fellow believers, asking for forgiveness, mercy, protection, and hearts free from resentment.", refs: [[3, 16], [5, 83, 84], [14, 40, 41], [40, 7, 9], [59, 10], [66, 8], [71, 28]] },
+      { id: "children", title: "Duas for Children in the Quran", description: "A collection of duas from the Quran for children and descendants, including duas of Ibrahim, Zakariya, and the servants of Ar-Rahman.", refs: [[2, 127, 128], [3, 38], [14, 37, 38], [14, 40, 41], [19, 4, 5], [21, 89], [25, 74], [37, 100], [46, 15]] },
+      { id: "family", title: "Duas for Family, Marriage, and Spouses", description: "Duas from the Quran for family, marriage, spouses, children, and peaceful homes rooted in righteousness.", refs: [[2, 127, 128], [14, 40, 41], [17, 24], [25, 74], [40, 7, 9], [46, 15], [2, 201]] },
+      { id: "friends-loved-ones", title: "Duas for Friends and Loved Ones", description: "Duas from the Quran for the forgiveness, mercy, and wellbeing of friends, loved ones, and fellow believers.", refs: [[3, 16], [14, 40, 41], [40, 7, 9], [59, 10]] },
+      { id: "parents", title: "Duas for Parents and Deceased Parents in the Quran", description: "A Quran-based guide to duas for parents and deceased parents, including mercy, forgiveness, gratitude, and righteousness.", refs: [[14, 40, 41], [17, 24], [27, 19], [46, 15], [71, 28]] },
+      { id: "peace", title: "Duas for Peace", description: "Duas from the Quran for wellbeing in this life and the Hereafter, righteous family life, and hearts free from resentment.", refs: [[2, 201], [25, 74], [59, 10]] },
+      { id: "pious-spouse", title: "Duas for a Pious Spouse", description: "Duas from the Quran for a righteous spouse, steadfast prayer, and a family rooted in piety.", refs: [[14, 40, 41], [25, 74]] },
+      { id: "righteous-believers", title: "Duas of the Righteous Believers in the Quran", description: "A collection of duas made by righteous believers beyond the prophets.", refs: [[3, 8, 9], [3, 16], [3, 191, 194], [5, 83, 84], [18, 10], [25, 65, 66], [25, 74], [40, 7, 9], [59, 10], [66, 8]] },
+      { id: "righteous-offspring", title: "Duas for Righteous Offspring and Pregnancy", description: "Duas from the Quran for righteous offspring, pregnancy, and future generations, without making medical claims.", refs: [[3, 38], [21, 89], [37, 100], [46, 15], [25, 74], [19, 4, 5]] },
+      { id: "ummah", title: "Duas for the Ummah", description: "Duas from the Quran for the worldwide Muslim community, asking for forgiveness, mercy, protection, and unity among believers.", refs: [[3, 16], [5, 83, 84], [10, 85, 86], [40, 7, 9], [59, 10], [66, 8]] },
+      { id: "unity", title: "Duas for Unity", description: "Duas from the Quran for mercy, brotherhood, and hearts free from resentment toward fellow believers.", refs: [[40, 7, 9], [59, 10]] },
     ],
   },
   {
-    title: 'Forgiveness & Mercy',
-    duas: [
-      { id: 'musa-forgive', who: 'Mūsā', s: 7, a: 151, note: 'For himself and his brother' },
-      { id: 'musa-earthquake', who: 'Mūsā', s: 7, a: [155, 156], note: 'After the earthquake' },
-      { id: 'musa-wronged', who: 'Mūsā', s: 28, a: 16, note: 'I have wronged myself' },
-      { id: 'ibrahim-company', who: 'Ibrāhīm and those with him', s: 60, a: [4, 5], note: 'Upon You we rely' },
+    title: "Forgiveness & Mercy",
+    description: "Duas for repentance, pardon, and Allah's mercy.",
+    pages: [
+      { id: "forgiveness", title: "Duas for Forgiveness", description: "A collection of duas from the Quran for seeking Allah's forgiveness, including duas from Adam, believers, and righteous servants.", refs: [[2, 285], [2, 286], [3, 16], [3, 191, 194], [7, 23], [7, 151], [7, 155, 156], [11, 47], [14, 40, 41], [23, 118], [28, 16], [40, 7, 9], [59, 10], [60, 4, 5], [71, 28]] },
+      { id: "forgiveness-of-sins", title: "Duas for Forgiveness of Sins", description: "Duas from the Quran for repentance, forgiveness of sins, protection from punishment, and Allah's mercy.", refs: [[2, 286], [3, 16], [3, 191, 194], [7, 23], [23, 118], [59, 10], [66, 8]] },
+      { id: "mercy", title: "Duas for Allah's Mercy", description: "A collection of duas from the Quran focused on asking Allah for mercy.", refs: [[7, 23], [7, 151], [7, 155, 156], [18, 10], [21, 83], [23, 118], [40, 7, 9]] },
+      { id: "repentance", title: "Duas for Tawbah and Repentance", description: "Duas from the Quran and passages about returning to Allah after sin, seeking forgiveness, and remaining steadfast in repentance.", refs: [[7, 23], [7, 151], [7, 155, 156], [11, 47], [28, 16], [46, 15], [60, 4, 5]] },
     ],
   },
   {
-    title: 'Guidance & Knowledge',
-    duas: [
-      { id: 'angels-knowledge', who: 'The angels', s: 2, a: 32, note: 'We know only what You taught us' },
-      { id: 'believers-hearts', who: 'The believers', s: 3, a: [8, 9], note: 'Do not let our hearts deviate' },
-      { id: 'cave', who: 'The young men of the cave', s: 18, a: 10, note: 'Taking shelter' },
-      { id: 'musa-chest', who: 'Mūsā', s: 20, a: [25, 28], note: 'Before speaking to Pharaoh' },
-      { id: 'muhammad-knowledge', who: 'The Prophet ﷺ', s: 20, a: 114, note: 'Increase me in knowledge' },
-      { id: 'ibrahim-wisdom', who: 'Ibrāhīm', s: 26, a: [78, 85], note: 'Who created me and guides me' },
-      { id: 'ibrahim-heart', who: 'Ibrāhīm', s: 26, a: [87, 89], note: 'A sound heart' },
-      { id: 'sulayman-gratitude', who: 'Sulaymān', s: 27, a: 19, note: 'To be grateful' },
+    title: "Guidance & Knowledge",
+    description: "Duas for guidance, wisdom, knowledge, and righteous character.",
+    pages: [
+      { id: "benefit-from-quran", title: "Duas for Learning, Memorizing, and Benefiting from the Quran", description: "Duas from the Quran for learning, memorizing, understanding, and benefiting from Allah's Book.", refs: [[1, 1, 7], [3, 8, 9], [18, 24], [20, 114], [2, 32]] },
+      { id: "character", title: "Duas for Beautiful Character", description: "Duas from the Quran for gratitude, righteous deeds, family righteousness, repentance, forgiveness, and hearts free from resentment.", refs: [[25, 74], [27, 19], [46, 15], [59, 10]] },
+      { id: "exam-success", title: "Duas for Exam Success", description: "Duas from the Quran for students seeking guidance, knowledge, clarity, and help in times of need.", refs: [[3, 8, 9], [20, 25, 28], [20, 114], [28, 24]] },
+      { id: "guidance", title: "Duas for Guidance and the Straight Path", description: "A practical guide to duas from the Quran for guidance, the straight path, and steadfastness after receiving guidance.", refs: [[1, 1, 7], [3, 8, 9], [18, 10], [18, 24], [28, 22]] },
+      { id: "heart", title: "Duas for the Heart and a Clean Heart", description: "Duas from the Quran for steadfast guidance, a sound and clean heart, forgiveness, and freedom from resentment.", refs: [[3, 8, 9], [26, 87, 89], [59, 10]] },
+      { id: "humility", title: "Duas for Humility", description: "Duas from the Quran expressing repentance, need, and dependence upon Allah.", refs: [[7, 23], [18, 10], [23, 118], [28, 24]] },
+      { id: "knowledge", title: "Duas for Knowledge", description: "Duas from the Quran for knowledge and clarity, including Rabbi zidni ilma.", refs: [[2, 32], [20, 25, 28], [20, 114]] },
+      { id: "righteousness", title: "Duas for Righteousness and Good Deeds", description: "Duas from the Quran for gratitude, righteous deeds, a sound heart, righteous offspring, and companionship with the righteous.", refs: [[25, 74], [26, 78, 85], [26, 87, 89], [27, 19], [37, 100], [46, 15]] },
+      { id: "sincerity", title: "Quran Verses and Duas for Sincerity", description: "Quran verses and supplications about sincere worship, accepted deeds, gratitude, and righteous action.", refs: [[2, 127, 128], [6, 79], [6, 162], [27, 19]] },
+      { id: "studying", title: "Duas for Studying", description: "Duas from the Quran for students seeking knowledge, clear speech, remembrance, and reliance upon Allah.", refs: [[18, 24], [20, 25, 28], [20, 114]] },
+      { id: "wisdom", title: "Duas for Wisdom", description: "Duas from the Quran and passages concerning knowledge, sound judgment, gratitude, and righteous action.", refs: [[2, 32], [20, 114], [26, 78, 85], [26, 87, 89], [27, 19]] },
     ],
   },
   {
-    title: 'Protection & Hardship',
-    duas: [
-      { id: 'patient-loss', who: 'The patient', s: 2, a: 156, note: 'When loss strikes' },
-      { id: 'talut-company', who: 'Those who stood with Ṭālūt', s: 2, a: 250, note: 'Facing Jālūt' },
-      { id: 'believers-burden', who: 'The believers', s: 2, a: 286, note: 'Do not burden us' },
-      { id: 'magicians', who: 'The magicians who believed', s: 7, a: 126, note: 'Patience, and to die a Muslim' },
-      { id: 'musa-people', who: 'The believers with Mūsā', s: 10, a: [85, 86], note: 'Under an oppressor' },
-      { id: 'ayyub', who: 'Ayyūb', s: 21, a: 83, note: 'In illness' },
-      { id: 'muhammad-wrongdoers', who: 'The Prophet ﷺ', s: 23, a: [93, 94], note: 'Not among the wrongdoers' },
-      { id: 'muhammad-refuge', who: 'The Prophet ﷺ', s: 23, a: [97, 98], note: 'Refuge from the whispers' },
-      { id: 'musa-save', who: 'Mūsā', s: 28, a: 21, note: 'Save me from the wrongdoers' },
-      { id: 'lut-corrupters', who: 'Lūṭ', s: 29, a: 30, note: 'Against the corrupters' },
-      { id: 'traveller', who: 'The traveller', s: 43, a: [13, 14], note: 'Setting out' },
-      { id: 'nuh-overpowered', who: 'Nūḥ', s: 54, a: 10, note: 'Overpowered, so help' },
-      { id: 'asiyah', who: 'The wife of Pharaoh', s: 66, a: 11, note: 'For a house in Paradise' },
-      { id: 'falaq', who: 'Whoever seeks refuge', s: 113, a: [1, 5], note: 'Al-Falaq' },
-      { id: 'nas', who: 'Whoever seeks refuge', s: 114, a: [1, 6], note: 'An-Nas' },
+    title: "Protection & Hardship",
+    description: "Duas for protection, patience, relief, healing, and difficulty.",
+    pages: [
+      { id: "anxiety", title: "Duas and Quran Passages for Stress, Depression and Anxiety", description: "Duas from the Quran and passages for emotional hardship, patience, clarity, and seeking refuge from harmful whispers.", refs: [[2, 286], [12, 18], [12, 83], [12, 86], [20, 25, 28], [21, 87], [23, 97, 98]] },
+      { id: "black-magic-protection", title: "Quran Verses and Duas for Ruqyah Protection", description: "Duas from the Quran for seeking Allah's protection from sorcery, harmful whispers, and every form of evil.", refs: [[1, 1, 7], [112, 1, 4], [113, 1, 5], [2, 102], [2, 255], [2, 285, 286], [7, 117, 122], [10, 81, 82], [20, 69], [17, 82], [10, 57], [68, 51, 52]] },
+      { id: "enemies", title: "Duas Against Enemies and Harmful People", description: "Duas from the Quran for protection, justice, steadfastness, and rescue from harmful people.", refs: [[2, 250], [10, 85, 86], [28, 21], [29, 30]] },
+      { id: "evil-eye", title: "Quran Verses for Protection from the Evil Eye", description: "Duas from the Quran for seeking refuge in Allah from envy, harmful forces, and evil, without presenting a separate evil-eye formula.", refs: [[113, 1, 5], [114, 1, 6]] },
+      { id: "fear", title: "Duas for Fear", description: "Duas from the Quran and passages for fear, vulnerability, safety, and reliance upon Allah.", refs: [[23, 93, 94], [28, 21], [10, 85, 86], [28, 22]] },
+      { id: "hardship", title: "Duas and Quran Passages for Hardship, Sadness, and Grief", description: "Duas and Quran passages for hardship, sadness, grief, patience, relief, and turning to Allah in difficulty.", refs: [[2, 250], [2, 286], [7, 126], [12, 18], [12, 83], [12, 86], [21, 83], [21, 87], [28, 24], [2, 156]] },
+      { id: "health", title: "Quran Reflections on Healing and Health", description: "Reflections from the Quran on wellbeing, healing, forgiveness, and dependence upon Allah, without claiming specific cures.", refs: [[26, 78, 85]] },
+      { id: "heart-healing", title: "Duas for Diseases of the Heart", description: "Duas from the Quran for steadfast hearts, mercy during illness, forgiveness, and spiritual healing, without medical claims.", refs: [[3, 8, 9], [21, 83], [26, 87, 89], [59, 10]] },
+      { id: "oppression", title: "Duas Against Oppression", description: "Duas from the Quran for those facing oppression, asking Allah for rescue, justice, and support.", refs: [[10, 85, 86], [28, 21], [29, 30], [54, 10]] },
+      { id: "pain-sickness", title: "Duas and Quran Passages for Pain and Sickness (Shifa)", description: "Duas from the Quran and passages concerning illness, hardship, mercy, and Allah's healing.", refs: [[21, 83], [26, 78, 85], [26, 80]] },
+      { id: "palestine", title: "Duas for Palestine and the Oppressed", description: "Duas from the Quran for oppressed believers, asking Allah for steadfastness, rescue, forgiveness, mercy, and unity.", refs: [[2, 250], [10, 85, 86], [40, 7, 9], [59, 10]] },
+      { id: "patience", title: "Duas and Quran Passages for Patience", description: "Duas from the Quran and passages on patience, steadfastness, trust in Allah, and dignified endurance during hardship.", refs: [[2, 250], [7, 126], [12, 18], [12, 83]] },
+      { id: "protection", title: "Duas for Protection from Evil and Shaytan", description: "A collection of duas from the Quran for protection from evil, Shaytan, harm, danger, and spiritual whispers.", refs: [[10, 85, 86], [23, 93, 94], [23, 97, 98], [28, 21], [29, 30], [66, 11]] },
+      { id: "relief", title: "Duas for Relief", description: "Duas from the Quran for ease, mercy, clarity, forgiveness, and help during difficulty.", refs: [[2, 286], [20, 25, 28], [21, 83], [21, 87], [28, 24]] },
+      { id: "safety", title: "Duas for Safety", description: "Duas from the Quran for safety, rescue from harm, and reliance upon Allah during danger and uncertainty.", refs: [[2, 126], [10, 85, 86], [28, 21], [66, 11]] },
+      { id: "steadfastness", title: "Duas for Steadfastness", description: "Duas from the Quran and passages on steadfast faith, patience, and trust in Allah after receiving guidance.", refs: [[3, 8, 9], [7, 126]] },
+      { id: "strength", title: "Duas for Strength", description: "Duas from the Quran for courage, patience, steadfastness, ease, and clarity.", refs: [[2, 250], [7, 126], [20, 25, 28]] },
+      { id: "travel", title: "Quran Verses and Duas for Travel and Journey Safety", description: "Quran verses and duas for travel and journey safety, including safe passage, gratitude, remembrance when boarding, and reliance upon Allah.", refs: [[11, 41], [43, 13, 14], [28, 21]] },
+      { id: "victory", title: "Duas for Victory", description: "Duas from the Quran for steadfastness, justice, rescue, and Allah's help against wrongdoing.", refs: [[2, 250], [29, 30], [54, 10]] },
+      { id: "waswas", title: "Duas for Waswas and Whispers", description: "Duas from the Quran for refuge from harmful whispers and for hearts that remain firm after guidance.", refs: [[3, 8, 9], [23, 97, 98]] },
     ],
   },
   {
-    title: 'Provision & Gratitude',
-    duas: [
-      { id: 'ibrahim-makkah', who: 'Ibrāhīm', s: 2, a: 126, note: 'For Mecca' },
-      { id: 'muhammad-sovereignty', who: 'The Prophet ﷺ', s: 3, a: [26, 27], note: 'Owner of all sovereignty' },
-      { id: 'ibrahim-house', who: 'Ibrāhīm', s: 14, a: [37, 38], note: 'For those he settled by the House' },
+    title: "Provision & Gratitude",
+    description: "Duas for rizq, provision, gratitude, and Makkah.",
+    pages: [
+      { id: "gratitude", title: "Duas and Quran Passages for Gratitude", description: "A collection of duas and passages from the Quran for thanking Allah.", refs: [[7, 43], [27, 15], [27, 19], [27, 40], [46, 15]] },
+      { id: "hajj-umrah", title: "Duas for Hajj & Umrah", description: "Duas from the Quran associated with Makkah and pilgrimage, asking for security, acceptance, family wellbeing, prayer, and goodness in the Hereafter.", refs: [[2, 126], [2, 127, 128], [2, 201], [14, 37, 38], [14, 40, 41]] },
+      { id: "provision-wealth", title: "Quran Verses and Duas for Provision (Rizq) and Wealth", description: "Quran verses and supplications for provision, need, sovereignty, and reliance upon Allah.", refs: [[2, 201], [2, 126], [3, 26, 27], [14, 37, 38], [2, 286], [28, 24], [65, 3]] },
+      { id: "rabbi-inni-lima-anzalta", title: "Dua of Musa for Rizq and Need", description: "Musa's dua from the Quran expressing need and complete dependence upon Allah's provision.", refs: [[28, 24]] },
+      { id: "rain", title: "Quran Reflections on Rain and Blessings", description: "Quran verses connecting repentance and seeking forgiveness with rain, provision, and renewed strength.", refs: [[11, 52], [71, 10, 12]] },
+      { id: "success-barakah", title: "Duas for Success and Barakah", description: "Duas from the Quran for success and barakah through acceptance, gratitude, righteous deeds, provision, and goodness in this life and the Hereafter.", refs: [[2, 127, 128], [2, 201], [27, 19], [28, 24], [46, 15], [3, 191, 194]] },
+      { id: "work-career", title: "Duas for Work and Career", description: "Duas from the Quran relevant to work and livelihood, asking for clarity, provision, gratitude, and righteous action.", refs: [[20, 25, 28], [27, 19], [28, 24], [46, 15]] },
     ],
   },
   {
-    title: 'Hereafter',
-    duas: [
-      { id: 'believers-reflect', who: 'Those who reflect', s: 3, a: [191, 194], note: 'Standing, sitting, and lying down' },
-      { id: 'yusuf', who: 'Yūsuf', s: 12, a: 101, note: 'Let me die a Muslim' },
-      { id: 'servants-hell', who: 'The servants of the Most Merciful', s: 25, a: [65, 66], note: 'Turn Hell away from us' },
+    title: "Hereafter",
+    description: "Duas for Jannah, a good ending, and protection from Hellfire.",
+    pages: [
+      { id: "deceased", title: "Duas for the Dead", description: "Duas from the Quran for forgiveness and mercy that include parents, earlier believers, and the wider community of faith.", refs: [[14, 40, 41], [59, 10], [71, 28]] },
+      { id: "good-ending", title: "Duas for a Good Ending", description: "A guide to duas from the Quran for asking Allah to end life upon Islam and join the righteous.", refs: [[3, 191, 194], [7, 126], [12, 101]] },
+      { id: "hereafter", title: "Duas for the Hereafter", description: "A collection of duas from the Quran asking for success in the next life.", refs: [[2, 201], [3, 191, 194], [12, 101], [25, 65, 66], [26, 78, 85], [26, 87, 89], [40, 7, 9], [66, 8]] },
+      { id: "jannah", title: "Duas for Jannah", description: "Duas from the Quran asking Allah for Paradise, protection from Hellfire, forgiveness, and companionship with the righteous.", refs: [[3, 191, 194], [26, 78, 85], [26, 87, 89], [40, 7, 9], [66, 11]] },
+      { id: "protection-from-hellfire", title: "Duas for Protection from Hellfire", description: "Duas from the Quran seeking protection from punishment and Hellfire.", refs: [[2, 201], [3, 16], [3, 191, 194], [25, 65, 66], [40, 7, 9]] },
+      { id: "when-someone-dies", title: "Quran Passages and Duas for When Someone Dies", description: "Quran passages and supplications for patience after loss, mercy for parents, and forgiveness for believers who came before us.", refs: [[2, 155, 156], [14, 40, 41], [59, 10]] },
     ],
   },
 ];
-const DUAS = SECTIONS.flatMap((section) => section.duas.map((dua) => ({ ...dua, section: section.title })));
 
-console.log(`The duas of the Qur'an — ${DUAS.length} references in ${SECTIONS.length} sections, from QuranEnc\n`);
+/* 3:35 — see the header. Appended, so the site's own order is untouched. */
+SITE.find((s) => s.title === 'Family & Community')
+  .pages.find((p) => p.id === 'righteous-offspring')
+  .refs.push([3, 35]);
+
+const keyOf = ([s, a, b]) => (b && b !== a ? `${s}:${a}-${b}` : `${s}:${a}`);
+const idOf = ([s, a, b]) => (b && b !== a ? `q${s}-${a}-${b}` : `q${s}-${a}`);
+
+/* Every passage, once, in mushaf order. */
+const passages = new Map();
+for (const section of SITE) {
+  for (const page of section.pages) {
+    for (const r of page.refs) passages.set(keyOf(r), r);
+  }
+}
+const refs = [...passages.values()].sort((x, y) => x[0] - y[0] || x[1] - y[1] || (x[2] ?? x[1]) - (y[2] ?? y[1]));
+for (const r of refs) {
+  if (!WHO[keyOf(r)]) throw new Error(`${keyOf(r)} has no attribution in WHO`);
+}
+for (const key of Object.keys(WHO)) {
+  if (!passages.has(key)) throw new Error(`WHO names ${key}, which no page lists`);
+}
+
+const pageCount = SITE.reduce((n, s) => n + s.pages.length, 0);
+console.log(`The duas of the Qur'an — ${refs.length} passages on ${pageCount} pages in ${SITE.length} sections, from QuranEnc\n`);
 
 const entries = [];
-for (const dua of DUAS) {
-  const [from, to] = Array.isArray(dua.a) ? dua.a : [dua.a, dua.a];
+for (const r of refs) {
+  const [s, from, to = from] = r;
+  const [who, note] = WHO[keyOf(r)];
   const arabicParts = [];
   const englishParts = [];
   for (let n = from; n <= to; n += 1) {
-    const cached = corpus?.get(`${dua.s}:${n}`);
+    const cached = corpus?.get(`${s}:${n}`);
     const verse = cached
       ? { arabic_text: cached.ar, translation: cached.en }
-      : await get(
-          `https://quranenc.com/api/v1/translation/aya/english_saheeh/${dua.s}/${n}`,
-        );
+      : await get(`https://quranenc.com/api/v1/translation/aya/english_saheeh/${s}/${n}`);
     if (!verse?.arabic_text || !verse?.translation) {
-      throw new Error(`${dua.id}: ${dua.s}:${n} did not resolve`);
+      throw new Error(`${keyOf(r)}: ${s}:${n} did not resolve`);
     }
     arabicParts.push(verse.arabic_text.trim());
     englishParts.push(verse.translation.replace(/\[\d+\]/g, '').replace(/\s+/g, ' ').trim());
   }
-  /*
-    The whole ayah, framing and all — and for a range, whole consecutive
-    ayahs joined in order. Slicing the supplication out of its verse would
-    mean deciding where a dua starts, which is an editorial act on a Qur'an
-    text — and the framing ("And [mention] when Abraham said…") is exactly
-    what tells a reader whose words these are.
-  */
-  const ref = from === to ? `${dua.s}:${from}` : `${dua.s}:${from}–${to}`;
+  const ref = from === to ? `${s}:${from}` : `${s}:${from}–${to}`;
   entries.push({
-    id: dua.id,
-    section: dua.section,
-    title: `${dua.who} — ${dua.note}`,
+    id: idOf(r),
+    title: `${who} — ${note}`,
     arabic: arabicParts.join(' '),
     translation: englishParts.join(' '),
-    s: dua.s,
+    s,
     from,
     to,
     ref,
   });
-  console.log(`  ${ref.padStart(9)}  ${dua.section.padEnd(22)} ${dua.who}`);
+  console.log(`  ${ref.padStart(10)}  ${who}`);
 }
 
-const lines = entries.map((entry) => `  {
+const entryLines = entries.map((entry) => `  {
     id: ${JSON.stringify(entry.id)},
-    section: ${JSON.stringify(entry.section)},
     title: ${JSON.stringify(entry.title)},
     arabic: ${JSON.stringify(entry.arabic)},
     translation: ${JSON.stringify(entry.translation)},
@@ -279,8 +447,18 @@ const lines = entries.map((entry) => `  {
     sources: [quran(${entry.s}, ${entry.from === entry.to ? entry.from : `[${entry.from}, ${entry.to}]`})],
   },`);
 
+const pageLines = SITE.flatMap((section) =>
+  section.pages.map((page) => `  {
+    id: ${JSON.stringify(page.id)},
+    section: ${JSON.stringify(section.title)},
+    title: ${JSON.stringify(page.title)},
+    description: ${JSON.stringify(page.description)},
+    entries: [${page.refs.map((r) => JSON.stringify(idOf(r))).join(', ')}],
+  },`),
+);
+
 const file = `/**
- * The duas the Qur'an puts in people's mouths.
+ * The duas the Qur'an puts in people's mouths, as quran.com/duas arranges them.
  *
  * GENERATED by \`npm run collection:duas\`. Do not edit by hand.
  *
@@ -291,10 +469,9 @@ const file = `/**
  * on a Qur'an text, and the framing is what tells a reader whose words these
  * are.
  *
- * The sections and their order follow quran.com/duas, and each passage sits
- * in the section that site files it under most often. The structure is
- * copied; the text is not — see the generator's header for what was left
- * out and why.
+ * The pages, their sections, titles, descriptions and order are quran.com's.
+ * Each passage is one entry, once; a page lists entry ids. The generator's
+ * header records the two departures from the site and why.
  *
  * ⚠️ Hisn al-Muslim, already in this app, is hadith-centred. This is the body
  * of supplication it does not carry.
@@ -305,21 +482,24 @@ import type { Collection } from '../types';
 export const QURANIC_DUAS: Collection = {
   id: 'quranic-duas',
   title: 'Duas from the Qur’an',
-  subtitle: 'The words the Qur’an gives to the prophets, and to everyone after them.',
+  subtitle: 'The words the Qur’an gives to the prophets, and to everyone after them, by need.',
   provider: 'quranenc',
   meta: {
     category: 'quran',
     difficulty: 'building',
-    estimatedMinutes: 15,
+    estimatedMinutes: 25,
     beginnerPriority: 3,
     tags: ['arabic'],
     relatedContent: [{ kind: 'reference', id: 'dua-and-dhikr' }],
   },
   entries: [
-${lines.join('\n')}
+${entryLines.join('\n')}
+  ],
+  pages: [
+${pageLines.join('\n')}
   ],
 };
 `;
 
 writeFileSync(join(root, 'src/content/collections/quranic-duas.ts'), file);
-console.log(`\nWrote ${entries.length} duas to src/content/collections/quranic-duas.ts`);
+console.log(`\nWrote ${entries.length} passages and ${pageCount} pages to src/content/collections/quranic-duas.ts`);

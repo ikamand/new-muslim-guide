@@ -336,16 +336,6 @@ export type Reference = {
  */
 export type CollectionEntry = {
   id: string;
-  /**
-   * The heading this entry sits under, where a collection is grouped.
-   *
-   * On the entry rather than as a nested list so that every consumer of
-   * `entries` — search, the daily pick, the Learn references — keeps reading
-   * one flat, ordered array. The screen prints a heading wherever the section
-   * changes from the entry before, so the order of the entries IS the order
-   * of the sections, and a collection with no sections sets none.
-   */
-  section?: string;
   /** What the entry is called. "Ar-Raḥmān", "The year of sorrow". */
   title: string;
   /** The Arabic, where the entry is an Arabic text. Never transliterated by us. */
@@ -407,4 +397,29 @@ export type Collection = {
   arabicFrom?: ProviderId;
   meta?: ContentMeta;
   entries: readonly CollectionEntry[];
+  /**
+   * A second way in, where the collection has one: named pages, each a short
+   * list of entries under a purpose, grouped into sections.
+   *
+   * The Qur'an duas are the case. Their site of origin is not a list of 112
+   * verses; it is ninety-odd pages called "Duas for New Muslims", "Duas for
+   * Fear", "Rabbana Duas", and the same verse sits on several of them because
+   * three people arrive with three questions. `entries` still holds each
+   * text ONCE — search indexes it once, the daily pick sees it once — and a
+   * page is a list of entry ids in the page's own order. A collection with
+   * no pages renders as the flat, numbered list it always was.
+   */
+  pages?: readonly CollectionPage[];
+};
+
+/** One named page of a collection: a purpose, and the entries under it. */
+export type CollectionPage = {
+  id: string;
+  /** The heading it is grouped under on the index. */
+  section: string;
+  title: string;
+  /** One line under the title, on the index. */
+  description: string;
+  /** Entry ids from the collection's `entries`, in this page's order. */
+  entries: readonly string[];
 };

@@ -6,7 +6,7 @@ import type { Reference } from '../types';
 export const DUA_AND_DHIKR: Reference = {
   id: 'dua-and-dhikr',
   surface: 'learn',
-  title: 'Duʿa and dhikr',
+  title: 'Dua and dhikr',
   subtitle: 'Talking to God outside the prayer',
   meta: {
     category: 'belief',
@@ -17,21 +17,21 @@ export const DUA_AND_DHIKR: Reference = {
     relatedContent: [ref('hisn', '1268971'), ref('reference', 'what-is-the-quran')],
   },
   quickFacts: [
-    { label: 'Duʿa', value: 'Asking, in any language and in your own words' },
+    { label: 'Dua', value: 'Asking, in any language and in your own words' },
     { label: 'Dhikr', value: 'Remembering, in short phrases, repeated' },
-    { label: 'Where to start', value: 'The duʿas of an ordinary day', href: '/duas' },
+    { label: 'Where to start', value: 'The duas of an ordinary day', href: '/duas' },
   ],
   sections: [
     {
       id: 'dua',
-      heading: 'What is duʿa?',
+      heading: 'What is dua?',
       body:
-        'Duʿa is simply asking God for something. It has no set form, no required language and no appointed time. The Qur’an says He is near and answers the one who calls. You can make duʿa in English, in your own words, in the car, and it is the same duʿa.',
+        'Dua is simply asking God for something. It has no set form, no required language and no appointed time. The Qur’an says He is near and answers the one who calls. You can make dua in English, in your own words, in the car, and it is the same dua.',
       sources: [quran(2, 186, { surahName: 'Al-Baqarah' })],
       notes: [
         note(
           'agreed',
-          'You do not need Arabic for this. The memorised duʿas are worth learning because they are the Prophet’s ﷺ wording, not because your own words would be rejected.',
+          'You do not need Arabic for this. The memorised duas are worth learning because they are the Prophet’s ﷺ wording, not because your own words would be rejected.',
         ),
       ],
     },
@@ -65,7 +65,7 @@ export const DUA_AND_DHIKR: Reference = {
       id: 'start',
       heading: 'Where do I start?',
       body:
-        'Pick one phrase and one moment, such as waking up or the walk to work. The Duʿa tab has short ones with the Arabic, how it sounds, and what it means. The shortest is a single word. Starting there is not a compromise.',
+        'Pick one phrase and one moment, such as waking up or the walk to work. The Dua tab has short ones with the Arabic, how it sounds, and what it means. The shortest is a single word. Starting there is not a compromise.',
     },
   ],
 };

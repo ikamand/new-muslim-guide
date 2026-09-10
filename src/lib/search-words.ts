@@ -29,9 +29,9 @@ export const STOPWORDS: ReadonlySet<string> = new Set([
   'there', 'here', 'been', 'being', 'get', 'got', 'make', 'made',
   /*
     Added in Phase 8. People say "someone" and "something" constantly in a
-    typed question — and the duʿa book is full of titles like "Supplication for
+    typed question — and the dua book is full of titles like "Supplication for
     SOMEONE wearing a new garment", so "what do I say when someone dies" came
-    back with the garment duʿa on a title hit. They carry no subject, which is
+    back with the garment dua on a title hit. They carry no subject, which is
     exactly what this list is for.
   */
   'someone', 'something', 'anyone', 'anything', 'else', 'just',
@@ -125,7 +125,7 @@ const GROUPS: readonly (readonly string[])[] = [
   ['quran', "qur'an", 'koran', 'recite', 'recitation', 'reading', 'read'],
   ['arabic', 'transliteration', 'pronounce', 'pronunciation'],
 
-  /* What the duʿa book calls itself, and what people call it. */
+  /* What the dua book calls itself, and what people call it. */
   /* Not 'prayer'. That is the third time a common word was added to a group
      and made things worse — after 'wash' for wudu and 'fajr' for fasting. A
      synonym has to be specific or it costs more than it buys. */
@@ -144,7 +144,7 @@ const GROUPS: readonly (readonly string[])[] = [
  *
  * Keyed twice: once by the word as written, and once by its transliteration
  * key. Without the second, looking synonyms up was itself spelling-sensitive —
- * "dua" reached the duʿa book through "supplication" and "duaa" reached
+ * "dua" reached the dua book through "supplication" and "duaa" reached
  * nothing, which is the same one-letter cliff this file exists to remove.
  */
 const EXPANSIONS: ReadonlyMap<string, readonly string[]> = (() => {

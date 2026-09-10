@@ -126,7 +126,7 @@ export type ContentTag =
  * today — so anything pointing at content has to carry both.
  */
 /**
- * `hisn` replaced `dua` on 27 Aug 2026. The nine duʿas the app owned were
+ * `hisn` replaced `dua` on 27 Aug 2026. The nine duas the app owned were
  * deleted — every one of their occasions is in Hisn al-Muslim — so the entity
  * a reference points at is now the book's occasion, keyed by IslamHouse's own
  * row id. Referring to content by what it IS rather than by which screen used

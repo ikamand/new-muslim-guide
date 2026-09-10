@@ -83,10 +83,10 @@ export const WHICH_DHIKR: Reference = {
       body:
         'When a dhikr belongs to that moment. Some remembrances have a time or a place of their own, and in that time they come before the Qur’an. The reason is simple: the Qur’an can be read at any hour, and a timed dhikr cannot. Miss its moment and it is gone. The Prophet ﷺ sought forgiveness three times the instant he finished a prayer, and told people to send more prayers on him on a Friday than on other days. Those are the moments. The app already holds most of them.',
       bullets: [
-        '**After the prayer.** The short adhkar the Prophet ﷺ said as soon as he had given salam. The After the prayer sitting on the Duʿa tab holds them.',
-        '**When the adhan is called.** Repeating the caller, then the duʿa after it. The call to prayer page explains it.',
+        '**After the prayer.** The short adhkar the Prophet ﷺ said as soon as he had given salam. The After the prayer sitting on the Dua tab holds them.',
+        '**When the adhan is called.** Repeating the caller, then the dua after it. The call to prayer page explains it.',
         '**Bowing and prostrating.** The tasbih you already say in every prayer is dhikr in its own place.',
-        '**Morning, evening and before sleep.** The three sittings on the Duʿa tab, at the hours the book gives them.',
+        '**Morning, evening and before sleep.** The three sittings on the Dua tab, at the hours the book gives them.',
         '**Friday.** More prayers on the Prophet ﷺ than on any other day. The Friday card on Today picks one for you.',
       ],
       sources: [
@@ -112,7 +112,7 @@ export const WHICH_DHIKR: Reference = {
       notes: [
         note(
           'practical',
-          'The duʿa book has an occasion on the merit of these four phrases, in the book’s own wording. It is one of the doors below.',
+          'The dua book has an occasion on the merit of these four phrases, in the book’s own wording. It is one of the doors below.',
         ),
       ],
     },

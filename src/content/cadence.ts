@@ -23,7 +23,7 @@
  *
  * ## What this is a judgement about, and what it is not
  *
- * Placement. Nothing here says a text is authentic, that a duʿa should be
+ * Placement. Nothing here says a text is authentic, that a dua should be
  * recited, or that a ruling is right. It says where the app should put a page
  * and for how long — the same class of decision as `moments.ts`, which marks
  * itself "REVIEW REQUIRED — placement, not doctrine, but still a judgement".
@@ -43,7 +43,7 @@
  *   most days; `on-event` would hide it entirely.
  * - **Hajj's supplications are `on-event`, not `yearly`.** Hajj returns every
  *   year in the calendar and once in a lifetime in a life, and the person
- *   holding the phone is the second one. The Day of ʿArafah duʿa goes with
+ *   holding the phone is the second one. The Day of ʿArafah dua goes with
  *   them, because the wording Hisn prints there is the pilgrim's.
  * - **`periods` is `on-event` though it recurs monthly.** The test is whether
  *   it should sit on a shelf being browsed, and it should not.
@@ -102,7 +102,7 @@ const REFERENCES: Readonly<Record<string, Cadence>> = {
   'how-prayer-works': 'until-fluent',
   'what-to-say': 'until-fluent', // The prayer's words gathered; the page's job ends when they are known.
   'where-rulings-come-from': 'once',
-  'hajj-and-umrah': 'once', // The lesson is read once; the pilgrim's duʿas are on-event in Hisn.
+  'hajj-and-umrah': 'once', // The lesson is read once; the pilgrim's duas are on-event in Hisn.
   'building-consistency': 'once',
   'sincerity': 'once',
   'angels': 'once',
@@ -404,10 +404,10 @@ const COLLECTIONS: Readonly<Record<string, Cadence>> = {
     NOT `daily`, deliberately.
 
     `dailyEntry` alternates between the collections whose cadence is `daily`,
-    so a second one would mean a name one day and a duʿa the next — and the 99
+    so a second one would mean a name one day and a dua the next — and the 99
     names would take 198 days to come round instead of 99. One daily practice
-    is a practice; two is a rota. These live on the Duʿa tab, which is where
-    somebody goes looking for a duʿa.
+    is a practice; two is a rota. These live on the Dua tab, which is where
+    somebody goes looking for a dua.
   */
   'quranic-duas': 'once',
 };

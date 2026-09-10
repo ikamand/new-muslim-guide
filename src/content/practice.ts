@@ -121,7 +121,7 @@ export function getPracticeClipCount(): number {
  * ## Why this gate exists
  *
  * This screen is "practise the words of the prayer" — the takbir, the opening
- * duʿa, the tashahhud, the salawat. That is a real job and nothing else does
+ * dua, the tashahhud, the salawat. That is a real job and nothing else does
  * it. But twenty of its twenty-seven clips are uncommissioned, so the only
  * thing actually on it is Al-Fatiha, which now lives in the Qur'an tab as a
  * surah that plays gaplessly, plays any single ayah, covers a line to test

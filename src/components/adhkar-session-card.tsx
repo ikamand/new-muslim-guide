@@ -21,7 +21,7 @@ import { formatTime } from '@/lib/prayer-times';
  *
  * Here rather than in `content/duas/sessions.ts` because it returns a `UIKey`,
  * and content must not import the i18n layer — the dependency would run in a
- * circle. Exported because the Duʿa tab's rows need the same answer this card
+ * circle. Exported because the Dua tab's rows need the same answer this card
  * does, and two tables would be two chances to disagree.
  */
 export function sessionLabelKey(session: AdhkarSession): UIKey {
@@ -51,11 +51,11 @@ export function sessionMeta(
 }
 
 /**
- * The adhkār sitting the clock is in — on the Duʿa tab, and now on Today.
+ * The adhkār sitting the clock is in — on the Dua tab, and now on Today.
  *
  * One component in two places rather than two that look alike, on exactly the
  * reasoning `DuaCard` already states: the pair that look alike are the pair
- * that drift. It began as `SessionHero` inside the Duʿa tab and moved here the
+ * that drift. It began as `SessionHero` inside the Dua tab and moved here the
  * day Today needed it too.
  *
  * ## It says how long is LEFT, not what already happened
@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   /*
-    The rail still marks the live sitting among the others on the Duʿa tab,
+    The rail still marks the live sitting among the others on the Dua tab,
     but in gold and in the margin: a mark beside the text rather than a
     coloured edge on a card. Illumination is exactly this job.
   */

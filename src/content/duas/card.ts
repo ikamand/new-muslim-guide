@@ -1,20 +1,20 @@
 /**
  * What to put in front of someone right now.
  *
- * One card, on Today and at the top of the Duʿa tab, answering "what should I
+ * One card, on Today and at the top of the Dua tab, answering "what should I
  * be saying?" from what the app already knows: the hour, the Islamic month,
  * the day of the week, and where the sun is.
  *
  * ## Placement is not a ruling
  *
- * Nothing here asserts that a duʿa is *required* at a time — only that it is
+ * Nothing here asserts that a dua is *required* at a time — only that it is
  * the one worth showing. That is the same line `seasons.ts` draws: "which
  * lesson is worth reading this month, with the claims left where they are,
  * under their own citations."
  *
  * ⚠️ REVIEW REQUIRED on the placements themselves, which are judgements even
  * though none is a ruling. Whether salawat belongs on Friday, and whether the
- * fasting duʿas should surface all through Ramadan or only near Maghrib, are
+ * fasting duas should surface all through Ramadan or only near Maghrib, are
  * the kind of thing a reviewer should agree with rather than inherit from me.
  *
  * ## Months, never days — inherited from `seasons.ts`
@@ -62,7 +62,7 @@ export type CardPick = {
  * ⚠️ EVERY PICK IS AN EXPLICIT LINE, READ BEFORE IT WAS WRITTEN DOWN.
  *
  * The first version named an occasion and let the card take its first
- * `quoted` line. That put this on screen as the duʿa before eating:
+ * `quoted` line. That put this on screen as the dua before eating:
  *
  *   إِذَا أَكَلَ أَحَدُكُمْ طَعَاماً فَلْيَقُلْ بِسْمِ اللَّهِ
  *   "When one of you eats food, let him say: In the name of Allah"
@@ -73,7 +73,7 @@ export type CardPick = {
  * every entry below is a line someone opened and read.
  *
  * Two intended picks were dropped for having no usable line at all: the
- * before-eating occasion states its duʿa only inside `مَنْ أَطْعَمَهُ اللَّهُ
+ * before-eating occasion states its dua only inside `مَنْ أَطْعَمَهُ اللَّهُ
  * الطَّعَامَ فَلْيَقُلْ:`, and the fasting-with-food-present occasion is a
  * single narration. Extracting the words from inside a narration is a
  * judgement about religious text, so those fall through to the evergreen pool
@@ -116,7 +116,7 @@ const TALBIYAH: Pick = { occasion: 1269679, line: 0 };
  *
  * Only three of the six day-moments are things an hour really tells you.
  * Nothing about three in the afternoon says anybody is travelling, and
- * showing the duʿa for setting off to someone at their desk is the card being
+ * showing the dua for setting off to someone at their desk is the card being
  * confidently wrong.
  */
 const BY_MOMENT: Readonly<Record<string, Pick>> = {
@@ -145,7 +145,7 @@ export function pickForNow({
   const seed = dayNumber(now);
 
   /*
-    The ninety minutes before sunset in Ramadan. Narrow on purpose: the duʿa
+    The ninety minutes before sunset in Ramadan. Narrow on purpose: the dua
     for breaking the fast is worth having ready as the light goes and worth
     nothing at eleven in the morning. Outside that window Ramadan falls
     through — the occasion for sitting in front of food you are not eating is

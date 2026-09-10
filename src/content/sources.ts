@@ -16,7 +16,7 @@
  * claim is honest; a fabricated citation is worse than nothing, because it
  * survives review by looking right. Everything here was verified by opening
  * the page — the first pass at this file cited Sahih al-Bukhari 6087 for the
- * duʿa before sleeping, and 6087 is about smiling and the expiation for
+ * dua before sleeping, and 6087 is about smiling and the expiation for
  * breaking a fast. It looked entirely plausible.
  *
  * If the wording came from somewhere you cannot name, leave `sources` off and
@@ -77,12 +77,12 @@ export type Attribution = Madhhab | 'the majority' | 'a minority' | 'contemporar
  *
  * This is the distinction the audit was missing. A blanket "no weak
  * narrations" rule is not how Sunni hadith scholarship works, and applying one
- * made the app fail on a duʿa wording carried by three of the six books while
+ * made the app fail on a dua wording carried by three of the six books while
  * saying nothing about an unsourced claim next to it.
  *
  * `ruling`   — an obligation, a prohibition, or a point of creed. The strict
  *              case: a weak narration cannot carry it.
- * `practice` — the wording of a recommended act: a duʿa, a dhikr, a phrase.
+ * `practice` — the wording of a recommended act: a dua, a dhikr, a phrase.
  * `virtue`   — the reward or merit of an act established elsewhere.
  * `context`  — history, background, or colour, claiming nothing.
  *
@@ -304,7 +304,7 @@ export function sourceUrl(source: Source): string | undefined {
  * `needs-grading` — from a collection that carries weak narrations, with no
  *                   grading recorded. Unknown rather than bad.
  * `sufficient`    — everything else, including a weak narration cited for a
- *                   duʿa wording, a virtue, or historical context, which is
+ *                   dua wording, a virtue, or historical context, which is
  *                   reported with its grading rather than hidden or dropped.
  *
  * Nothing here upgrades a grading. A weak narration stays weak in the data and

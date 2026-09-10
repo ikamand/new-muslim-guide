@@ -235,7 +235,7 @@ function TodayRow({ item }: { item: TodayItem }) {
 }
 
 /**
- * The words for right now: the open adhkār sitting, or a duʿa.
+ * The words for right now: the open adhkār sitting, or a dua.
  *
  * One slot rather than two cards stacked. Both are "words to say" and showing
  * both at once made Today read as a list of everything rather than an answer
@@ -281,9 +281,9 @@ export default function TodayScreen() {
         {/*
           One words slot, not two cards.
 
-          The adhkār sitting when the clock is inside one, the duʿa card
+          The adhkār sitting when the clock is inside one, the dua card
           otherwise. `lib/adhkar-window.ts` has computed the live sitting from
-          real prayer times all along and rendered it only on the Duʿa tab —
+          real prayer times all along and rendered it only on the Dua tab —
           so the morning adhkār, seven minutes somebody says every day of their
           life, was the one daily thing Today never mentioned.
         */}
@@ -343,7 +343,7 @@ const styles = StyleSheet.create({
       ʿunwān's rule at Spacing.three from the top. Today already opened at 16
       and the other three opened at 48 — 24 of content padding plus 24 of
       header padding — so the rule jumped down a notch on three tabs out of
-      four. The sides were 24 here and on Duʿa against 16 on Learn and
+      four. The sides were 24 here and on Dua against 16 on Learn and
       Qur'an, which made the same rule two widths. Both are one number now.
     */
     paddingHorizontal: Spacing.three,

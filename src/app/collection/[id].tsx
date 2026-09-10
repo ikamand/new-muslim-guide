@@ -14,7 +14,7 @@ import { useTheme } from '@/hooks/use-theme';
  *
  * There is no switch on `id` here and there must never be one. The whole point
  * of `collection` being a `ContentKind` is that five bodies of content —
- * the 99 names, the duʿas the Qur'an puts in the mouths of the prophets, the
+ * the 99 names, the duas the Qur'an puts in the mouths of the prophets, the
  * sīrah in episodes, the vices and their opposites, the small sunnahs — cost
  * one screen between them rather than five. The moment this file branches on
  * which set it has, that saving is gone and the fifth collection looks

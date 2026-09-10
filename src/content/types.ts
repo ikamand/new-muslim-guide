@@ -230,11 +230,11 @@ export type ReferenceSection = {
    * A text the section is actually about, printed rather than described.
    *
    * The istikhara page is why this exists. Its "The words" section described
-   * the duʿa in prose and left the words themselves in the citation drawer
+   * the dua in prose and left the words themselves in the citation drawer
    * underneath — so the most important thing on the page was the part nobody
    * opened. A section whose subject IS a form of words should print it.
    *
-   * Rendered by the same `RecitationCard` the prayer steps use, so a duʿa
+   * Rendered by the same `RecitationCard` the prayer steps use, so a dua
    * looks the same wherever it is met.
    */
   says?: Recitation;
@@ -323,7 +323,7 @@ export type Reference = {
  * One entry in a collection. Short, and the same shape whatever the set is.
  *
  * The five bodies of content `docs/build-order.md` adds are the same object
- * seen five times — the 99 names, the duʿas the Qur'an puts in the mouths of
+ * seen five times — the 99 names, the duas the Qur'an puts in the mouths of
  * the prophets, the sīrah in episodes, the vices and their opposites, and the
  * small sunnahs. Every one of them is an ordered list of short entries with a
  * name, sometimes an Arabic text, and something said about it.

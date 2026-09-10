@@ -64,7 +64,7 @@ export const BUILDING_CONSISTENCY: Reference = {
       id: 'burnout',
       heading: 'Why do people burn out in the first month?',
       body:
-        'Because the first month is when everything arrives at once. Five prayers, a new way of washing, new words, new food, a mosque, and forty duʿas you have just found out exist. Taking all of it on in week one, keeping it for three weeks, and dropping most of it in week four is the most common shape of a convert’s first year, and it ends with a person deciding they are bad at being Muslim. They are not. They tried to carry the whole religion up the stairs in one trip.',
+        'Because the first month is when everything arrives at once. Five prayers, a new way of washing, new words, new food, a mosque, and forty duas you have just found out exist. Taking all of it on in week one, keeping it for three weeks, and dropping most of it in week four is the most common shape of a convert’s first year, and it ends with a person deciding they are bad at being Muslim. They are not. They tried to carry the whole religion up the stairs in one trip.',
       sources: [
         general(
           'Orientation, not a ruling. The shape described is what convert-support sources report; the remedy below is the narration above, applied.',
@@ -75,7 +75,7 @@ export const BUILDING_CONSISTENCY: Reference = {
       id: 'start',
       heading: 'What do I actually start with?',
       body:
-        'The five prayers. They are the spine, they are obligatory, and everything else hangs off them. Get those to the point where a day without them feels wrong before you add anything. Then one thing: a duʿa on waking, a short surah after Al-Fatihah, the siwak before prayer. Keep it until you no longer have to remember it. Then one more.\n\nThe Prophet ﷺ told people to take on what they could keep up, because Allah does not tire of rewarding until you tire of doing.',
+        'The five prayers. They are the spine, they are obligatory, and everything else hangs off them. Get those to the point where a day without them feels wrong before you add anything. Then one thing: a dua on waking, a short surah after Al-Fatihah, the siwak before prayer. Keep it until you no longer have to remember it. Then one more.\n\nThe Prophet ﷺ told people to take on what they could keep up, because Allah does not tire of rewarding until you tire of doing.',
       sources: [hadith('bukhari', '1970')],
       notes: [
         note(

@@ -97,7 +97,7 @@ const TOO_SHORT = 20;
  * Whether `candidate` is the text `reference` prints.
  *
  * Two rules, because imports are two shapes. A narration arrives at full
- * length and matches on a shared run. A duʿa arrives as the words somebody
+ * length and matches on a shared run. A dua arrives as the words somebody
  * actually says, quoted out of a longer narration that surrounds it with an
  * isnad and a story — so it must be CONTAINED, which is strictly stronger than
  * a shared run, not a loosening of it.
@@ -127,9 +127,9 @@ const COMPOSITE_COVERAGE = 0.8;
  * Whether a text is the reference's wording, stitched.
  *
  * The case that forced this, and it is the ordinary case rather than an edge
- * one: Muslim 2723 gives the evening duʿa in two runs with the narrator's own
+ * one: Muslim 2723 gives the evening dua in two runs with the narrator's own
  * aside between them — `قَالَ أُرَاهُ قَالَ فِيهِنَّ`, "I think he said in them".
- * A duʿa feed prints what a person actually says, so it closes that gap, and
+ * A dua feed prints what a person actually says, so it closes that gap, and
  * the result is not a contiguous span of the narration it is quoting.
  *
  * Calling that a wrong text would be the very mistake this script is built to
@@ -183,12 +183,12 @@ function isComposite(ours, theirs) {
 const FIXTURES = {
   /* Bukhari 1, the matn only — printed and continuous numbering agree here. */
   bukhari1: 'إِنَّمَا الْأَعْمَالُ بِالنِّيَّاتِ، وَإِنَّمَا لِكُلِّ امْرِئٍ مَا نَوَى، فَمَنْ كَانَتْ هِجْرَتُهُ إِلَى دُنْيَا يُصِيبُهَا',
-  /* The duʿa after wudu. Muslim prints it at 234; it is continuous 553. */
+  /* The dua after wudu. Muslim prints it at 234; it is continuous 553. */
   wuduDua: 'أَشْهَدُ أَنْ لاَ إِلَهَ إِلاَّ اللَّهُ وَأَنَّ مُحَمَّدًا عَبْدُ اللَّهِ وَرَسُولُهُ',
   /* Continuous 234 is a narration about rain. Nothing to do with wudu. */
   rain: 'أَصْبَحَ مِنَ النَّاسِ شَاكِرٌ وَمِنْهُمْ كَافِرٌ قَالُوا هَذِهِ رَحْمَةُ اللَّهِ',
   /*
-    The evening duʿa as Muslim prints it in the SECOND chain under 2723 — this
+    The evening dua as Muslim prints it in the SECOND chain under 2723 — this
     wording is in `2723.02` and not in `2723.01`. A resolver that takes a base
     number to mean its first variant refuses this at a number that is correct.
   */
@@ -257,7 +257,7 @@ function selfTest() {
   check('empty is refused', textIsAt('', FIXTURES.rain).verdict === 'too-short');
   check('a bare term is refused', textIsAt('الْحَمْدُ لِلَّهِ', FIXTURES.rain).verdict === 'too-short');
 
-  // 8. A short duʿa quoted out of a long narration matches by containment.
+  // 8. A short dua quoted out of a long narration matches by containment.
   check('short text matches by containment',
     textIsAt(FIXTURES.wuduDua, `فلان وفلان ${FIXTURES.wuduDua} قال ذلك`).how === 'contained');
 
@@ -315,7 +315,7 @@ function selfTest() {
 /**
  * The collections a text may be cited to, as a rule rather than as a filter.
  *
- * This is an allowlist and that is the whole point. The evaluation found a duʿa
+ * This is an allowlist and that is the whole point. The evaluation found a dua
  * in one API sourced to a Naqshbandi shaykh, and the instinct is to write a
  * list of the chains and shaykhs to reject — which cannot work, because the
  * second one is by definition the one not on the list. So nothing passes
@@ -361,7 +361,7 @@ function collectionIndex(collection) {
 
     Muslim groups the chains of one hadith as `2723.01`, `.02`, `.03`, and a
     citation of "Muslim 2723" means the hadith rather than the chain — the
-    wording a duʿa book quotes is routinely in the second or third. Resolving
+    wording a dua book quotes is routinely in the second or third. Resolving
     the base to `.01` alone reports the other two as a wrong text at a right
     number, which is the same shape of silent error as reading the wrong
     numbering: a real narration, correctly cited, refused.
@@ -711,16 +711,16 @@ function report(results) {
 /**
  * The two cases this gate exists to tell apart, run by `--demo`.
  *
- * Both are Muslim 234. One is the duʿa the collection prints at that number
+ * Both are Muslim 234. One is the dua the collection prints at that number
  * and passes; the other is the narration sitting at continuous index 234 — a
  * hadith about rain — and fails as a numbering error rather than as a wrong
  * text. A gate that flagged both, or neither, would be no use.
  */
 const DEMO = [
   { id: 'bukhari 1, its own matn', arabic: FIXTURES.bukhari1, source: { kind: 'hadith', collection: 'bukhari', reference: '1' } },
-  { id: 'the duʿa after wudu, cited as Muslim prints it', arabic: FIXTURES.wuduDua, source: { kind: 'hadith', collection: 'muslim', reference: '234' } },
+  { id: 'the dua after wudu, cited as Muslim prints it', arabic: FIXTURES.wuduDua, source: { kind: 'hadith', collection: 'muslim', reference: '234' } },
   { id: 'a narration read at continuous 234', arabic: FIXTURES.rain, source: { kind: 'hadith', collection: 'muslim', reference: '234' } },
-  { id: 'a duʿa sourced to a shaykh', arabic: FIXTURES.wuduDua, source: 'From the awrad of a Naqshbandi shaykh' },
+  { id: 'a dua sourced to a shaykh', arabic: FIXTURES.wuduDua, source: 'From the awrad of a Naqshbandi shaykh' },
   { id: 'wording that is in the second chain under one number', arabic: FIXTURES.eveningVariant, source: { kind: 'hadith', collection: 'muslim', reference: '2723' } },
 ];
 

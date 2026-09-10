@@ -96,7 +96,7 @@ export const PERIODS: Reference = {
       id: 'still-yours',
       heading: 'What can I still do?',
       body:
-        'Everything else stays open to you. You can make duʿa in your own words, say dhikr, listen to the Qur’an, go on learning, and sit with people who are praying.',
+        'Everything else stays open to you. You can make dua in your own words, say dhikr, listen to the Qur’an, go on learning, and sit with people who are praying.',
       note: 'You are not unclean and you are not excluded. The rest from prayer is a concession you have been given, not a punishment or a mark against you.',
     },
     {
@@ -104,7 +104,7 @@ export const PERIODS: Reference = {
       heading: 'Why do people tell me different things?',
       body:
         'One question here is genuinely open and two are not, and it saves a lot of confusion to know which is which. Reciting the Qur’an during a period is the open one: scholars divide on it, and you will meet people certain of opposite answers. Holding a printed muṣḥaf is not open in the same way, because all four schools say not to. Nor is sitting in the prayer hall of a mosque, which all four treat as somewhere not to stay through a period, though several allow walking through.',
-      note: 'None of this touches what the last section said. Listening, duʿa, dhikr and learning are open on every account, and nobody who tells you one of these is being difficult with you.',
+      note: 'None of this touches what the last section said. Listening, dua, dhikr and learning are open on every account, and nobody who tells you one of these is being difficult with you.',
       notes: [
         note(
           'differs',

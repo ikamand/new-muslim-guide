@@ -4,7 +4,7 @@
  * Run: `npm run i18n:manifest`   Check only: `npm run i18n:manifest -- --check`
  *
  * This is what a translator works from, so it is read out of `src/content/`
- * rather than kept by hand. Add a duʿa and its rows appear; change an English
+ * rather than kept by hand. Add a dua and its rows appear; change an English
  * sentence and its row shows the new wording with the old translations still
  * beside it, which is exactly when a translator needs to be told.
  *

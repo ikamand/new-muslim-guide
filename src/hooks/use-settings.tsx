@@ -166,10 +166,10 @@ export type Settings = {
    */
   reciter: ReciterId;
   /**
-   * Duʿas the reader has pinned to the top of the Duʿa tab, by id.
+   * Duas the reader has pinned to the top of the Dua tab, by id.
    *
    * A shortcut, not a record of progress and not a favourites list. What it
-   * buys is that the two or three duʿas someone is working on sit above a book
+   * buys is that the two or three duas someone is working on sit above a book
    * of 132 instead of inside it. Nothing reads it as "learned" — the app
    * cannot know that, and asking would be handing someone a decision they did
    * not come for.
@@ -417,7 +417,7 @@ type SettingsContext = Settings & {
    * this decides inside the updater, like everything else here.
    */
   markLessons: (keys: readonly string[], done: boolean) => void;
-  /** Pins a duʿa to the top of the Duʿa tab, or unpins it. */
+  /** Pins a dua to the top of the Dua tab, or unpins it. */
   togglePinned: (id: string) => void;
   /** False until the stored value has been read — the splash waits on this. */
   loaded: boolean;
@@ -435,7 +435,7 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
     write atomic. The cost is that a write issued before hydration persists
     `DEFAULTS` plus one field — and `DEFAULTS` has `onboarded: false`. So a
     single early write silently threw away the onboarding answers, the ticked
-    lessons, the pinned duʿas and the reciter, and the app asked its owner to
+    lessons, the pinned duas and the reciter, and the app asked its owner to
     introduce himself again on the NEXT launch, which is why this looked like
     an update wiping the app rather than a race (Iyad, 3 Sep, after it had
     happened several times).

@@ -69,7 +69,7 @@ type Suggestion = {
   title: string;
   /** The second line. Empty falls back to `topic` rather than leaving a gap. */
   description: string;
-  /** "Guide", "Duʿa" — what kind of thing this is. */
+  /** "Guide", "Dua" — what kind of thing this is. */
   topic: string;
   href: Parameters<typeof PressableLink>[0]['href'];
 };
@@ -122,7 +122,7 @@ export default function AskScreen() {
     not by widening this any further.
   */
   /*
-    Typed, it searches everything: the 78 catalogue entries, the 132 duʿa
+    Typed, it searches everything: the 78 catalogue entries, the 132 dua
     occasions, and — the point of this — the 286 prayer and wudu steps and 101
     reference sections underneath them.
 

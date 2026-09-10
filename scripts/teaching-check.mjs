@@ -158,6 +158,9 @@ const SPELLINGS = [
   ['Muḥarram', 'Muharram'],
   ['Shawwāl', 'Shawwal'],
   ['ʿĀshūrāʾ', 'ʿAshuraʾ'],
+  ['duʿa', 'dua'],
+  ['Duʿa', 'Dua'],
+  ['du’a', 'dua'],
 ];
 
 const PROSE_RULES = [
@@ -295,7 +298,7 @@ for (const page of pages) {
 
   /*
     And a recitation must not also appear inside a narration printed on the
-    same page. Bukhari 3293 IS the istikhara duʿa with its chain attached, so a
+    same page. Bukhari 3293 IS the istikhara dua with its chain attached, so a
     page printing both said the same words twice, once as a thousand characters
     of narration and once as the thing to recite.
   */

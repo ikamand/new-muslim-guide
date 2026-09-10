@@ -4,11 +4,11 @@ import { Text, type TextStyle } from 'react-native';
  * Text with the words the book had in square brackets picked out.
  *
  * Hisn al-Muslim brackets a wording that some narrations of a hadith carry and
- * the base one does not — `[بِسْمِ اللَّهِ]` opening the duʿa for the bathroom,
+ * the base one does not — `[بِسْمِ اللَّهِ]` opening the dua for the bathroom,
  * `[ثلاثاً]` after a dhikr. Those brackets are stripped from the text on
  * Iyad's instruction, and a colour takes over the job they were
  * doing: without it the app would fold an optional addition silently into the
- * duʿa, which is a change to what the text says rather than to how it looks.
+ * dua, which is a change to what the text says rather than to how it looks.
  *
  * The colour is gold, since 5 Sep 2026. It was lapis — the app's one pressable
  * colour — and bold lapis in the middle of an English sentence read as a link
@@ -18,7 +18,7 @@ import { Text, type TextStyle } from 'react-native';
  * ⚠️ A bare `Text`, never a `ThemedText`, for the marked run. React Native
  * nests text styles, but `ThemedText` always applies a `type`, defaulting to a
  * Latin rung — so nesting one inside an Arabic line reset the marked words to
- * 17px Latin metrics and rendered them a third of the size of the duʿa around
+ * 17px Latin metrics and rendered them a third of the size of the dua around
  * them. Only colour and weight belong here; the rest must be inherited.
  *
  * ⚠️ Arabic is coloured but not bolded. `_layout.tsx` loads Amiri-Regular

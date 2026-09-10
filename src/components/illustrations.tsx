@@ -730,7 +730,7 @@ export function Glyph({ name, color, size = 22 }: { name: GlyphName; color: stri
         need not take on.
       */}
 
-      {/* The moments of a day, for the duʿa screen's spine. */}
+      {/* The moments of a day, for the dua screen's spine. */}
       {name === 'sunrise' && (
         <G {...stroke}>
           <Path d="M3 18h18" />
@@ -1413,7 +1413,7 @@ export function RehlMark({ color, size = 24 }: { color: ColorValue; size?: numbe
   );
 }
 
-/** Du'a: the misbaha — nine beads on the loop, the imam bead where it closes, a three-strand tassel. */
+/** Dua: the misbaha — nine beads on the loop, the imam bead where it closes, a three-strand tassel. */
 export function MisbahaMark({ color, size = 24, active = false }: { color: ColorValue; size?: number; active?: boolean }) {
   /* Twelve places on the loop, the bottom three left for the imam bead. */
   const beads = [0, 1, 2, 3, 4, 8, 9, 10, 11].map((i) => {

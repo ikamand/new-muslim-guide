@@ -20,7 +20,7 @@
  *
  * So the obligation moves to one page that names every publisher in one place.
  * That is not a weaker discharge of it than a line in a collapsed drawer under
- * the third duʿa on a page — nobody has ever found a licence credit there.
+ * the third dua on a page — nobody has ever found a licence credit there.
  *
  * ## Nothing here is a list of what the app happens to contain
  *

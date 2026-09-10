@@ -289,7 +289,7 @@ export function JadwalRow({
    * Why the row is here, in a word.
    *
    * Gold, not vermilion. The first build made this a `Rubric` and Today then
-   * carried two reds — the duʿa's reason and this — which is exactly the
+   * carried two reds — the dua's reason and this — which is exactly the
    * dilution the rubric rule exists to prevent. Red stays for the card that
    * chose something and for a caution; a row saying which shelf it came from
    * is illumination.

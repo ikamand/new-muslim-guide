@@ -55,11 +55,11 @@ export default function TabsLayout() {
       {/*
         Hisn al-Muslim is a book, not a topic, and a book gets a tab — the same
         judgement the Qur'an tab already carries. It also keeps Today obeying
-        its own rule: Today holds what has a deadline, and a duʿa for putting
+        its own rule: Today holds what has a deadline, and a dua for putting
         on clothes has none.
 
         The tab opens on the day rather than on an index, because a convert
-        does not know a duʿa for putting on clothes EXISTS and will never
+        does not know a dua for putting on clothes EXISTS and will never
         scroll to it. An index is a tool for somebody who already knows the
         name of what they want.
       */}

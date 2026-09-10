@@ -64,7 +64,7 @@ const WEIGHT: Record<Field, number> = {
 /**
  * How much a whole body of content is worth against a typed QUESTION.
  *
- * ## The duʿa book was winning arguments it should not have been in
+ * ## The dua book was winning arguments it should not have been in
  *
  * Hisn al-Muslim is 132 occasions, each titled "Supplication for …", and every
  * one of those titles is built from the exact words people type. Indexing them
@@ -82,13 +82,13 @@ const WEIGHT: Record<Field, number> = {
  * ## A weight, not a filter
  *
  * The book still ranks and still wins when somebody asks for what it holds —
- * "duʿa for rain" finds the duʿa for rain. It is scaled so it cannot outrank a
+ * "dua for rain" finds the dua for rain. It is scaled so it cannot outrank a
  * page of the same relevance, because somebody typing a question wants an
  * explanation, and the book is where you go once you know what you want.
  * Nothing is hidden and nothing is filtered.
  *
  * ⚠️ **0.75 was measured, not chosen.** The first attempt used 0.6 and broke
- * `search:check`: "duʿa before sleeping" fell below the night-prayer
+ * `search:check`: "dua before sleeping" fell below the night-prayer
  * references, which is precisely a query that WANTS the book. Every value from
  * 0.7 to 0.85 passes both that suite and the Phase 8 question set; 0.75 sits
  * in the middle of the range that works rather than at either edge of it.
@@ -105,7 +105,7 @@ export type SearchResult = {
   title: string;
   /** The line underneath: the sentence that answers, where there is one. */
   snippet: string;
-  /** "Guide", "Step in Wudu", "Duʿa" — what kind of thing this is. */
+  /** "Guide", "Step in Wudu", "Dua" — what kind of thing this is. */
   context: string;
   href: Href;
   score: number;
@@ -372,7 +372,7 @@ export function buildIndex(locale: Locale, label: (kind: string) => string): rea
       collection whose 99 entries cannot be searched is a shelf with a label
       and no way in — someone looking for "Ar-Raḥmān" does not know it lives
       under "The names of Allah". The Arabic is searchable and never rendered
-      on this Latin rung, the same rule the duʿa book follows below.
+      on this Latin rung, the same rule the dua book follows below.
 
       No branch on WHICH collection: every one is indexed the same way, which
       is the claim `types.ts` makes about this kind.
@@ -399,8 +399,8 @@ export function buildIndex(locale: Locale, label: (kind: string) => string): rea
   }
 
   /*
-    The duʿa book. 132 occasions the catalogue does not carry — it holds only
-    the 9 duʿas woven into guides. The Arabic is indexed and never displayed on
+    The dua book. 132 occasions the catalogue does not carry — it holds only
+    the 9 duas woven into guides. The Arabic is indexed and never displayed on
     a Latin rung; Amiri is the only face this app sets Arabic in.
   */
   for (const occasion of HISN) {

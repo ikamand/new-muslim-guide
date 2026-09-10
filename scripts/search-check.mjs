@@ -36,7 +36,7 @@ const LABELS = {
   reference: 'Reference',
   pillar: 'Pillar',
   article: 'Article',
-  dua: 'Duʿa',
+  dua: 'Dua',
   phrase: 'Phrase',
   step: 'Step in',
   section: 'In',

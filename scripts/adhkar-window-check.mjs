@@ -3,7 +3,7 @@
  *
  * `npm run adhkar:check`. No network, no device, no clock.
  *
- * The window logic is the one part of the duʿa tab that cannot be checked by
+ * The window logic is the one part of the dua tab that cannot be checked by
  * looking at a screen: it has to be right at instants nobody is awake for, on
  * days nobody will test.
  *

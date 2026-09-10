@@ -130,7 +130,7 @@ function spliceEvening(arabic, forms) {
   Hisn al-Muslim wraps quoted speech in ((…)) and Qur'an in ﴿…﴾. Those marks
   are mechanical and checkable, so they are what this records.
 
-  They do NOT mark "this is a duʿa to say". 237 lines carry ((…)) and some of
+  They do NOT mark "this is a dua to say". 237 lines carry ((…)) and some of
   them are hadith matn about the VIRTUE of dhikr — "whoever sits in a gathering
   and does not remember Allah…" — which is a narration, not words to recite.
   Telling those apart is a judgement about religious content, and this script
@@ -177,7 +177,7 @@ function strip(raw, field, where) {
 
   This used to `set` on the split_group, so a line with several footnotes kept
   only whichever came last. Group 144 has three — [103] and [104] give the
-  EVENING wording of the duʿa, [105] is the citation — and the citation won, so
+  EVENING wording of the dua, [105] is the citation — and the citation won, so
   the app printed "we have reached the morning" in the evening sitting with no
   hint that the book had said otherwise. Three of the five morning-worded lines
   lost their evening form that way.
@@ -308,8 +308,8 @@ const header = `/**
  * this is the one removal that changes what the book is SAYING rather than how
  * it looks. ${wordBrackets.before} of them held words, not a footnote number,
  * and the book uses them for a wording some narrations of a hadith carry and
- * the base one does not — \`[بِسْمِ اللَّهِ]\` opens the bathroom duʿa that way.
- * Without them the app presents an optional addition as part of the duʿa. He
+ * the base one does not — \`[بِسْمِ اللَّهِ]\` opens the bathroom dua that way.
+ * Without them the app presents an optional addition as part of the dua. He
  * was told and decided; it is recorded here because a reader of this file
  * cannot otherwise tell that anything was ever marked.
  *
@@ -333,7 +333,7 @@ const header = `/**
  * \`docs/scholarly-review.md\` the app has ever had, and that pile is what gates
  * a public release. The machinery lands first; a reviewer decides what ships.
  *
- * ⚠️ The nine duʿas the app already shows live in \`src/content/duas.ts\` with
+ * ⚠️ The nine duas the app already shows live in \`src/content/duas.ts\` with
  * checked citations and, in one case, bundled audio. They are NOT merged here.
  *
  * ⚠️ \`npm run arabic\` reads this file directly — it has to, because the sheet
@@ -345,7 +345,7 @@ const header = `/**
  * \`docs/i18n-manifest.csv\` and must never be machine-translated. When French
  * and Spanish come back, fetch them the same way this English was fetched:
  * \`transes=fr\` on the same endpoint returns the publisher's own translation.
- * A model translating a duʿa is the same class of error as a model writing
+ * A model translating a dua is the same class of error as a model writing
  * one.
  */
 `;
@@ -360,7 +360,7 @@ const body = `export type HisnLine = {
    * supplications AND narrations about the virtue of dhikr, which are not
    * words to recite. \`quran\` is ﴿…﴾. Everything else is \`prose\`.
    *
-   * Deciding which \`quoted\` lines are duʿas a reader should say is a
+   * Deciding which \`quoted\` lines are duas a reader should say is a
    * judgement about religious content, and it belongs to a reviewer.
    */
   kind: 'quoted' | 'quran' | 'prose';
@@ -404,7 +404,7 @@ const body = `export type HisnLine = {
    * base one does not — \`[بِسْمِ اللَّهِ]\`, \`[ثلاثاً]\`, \`[i.e., footstool]\`.
    * Removing them was Iyad's call; carrying the strings here is what lets a
    * screen still show that those words were marked, instead of silently
-   * folding an optional addition into the duʿa.
+   * folding an optional addition into the dua.
    *
    * Cleaned exactly as the line is, so each is a substring of \`arabic\` or
    * \`english\` and a renderer can split on it.

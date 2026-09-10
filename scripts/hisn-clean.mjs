@@ -25,12 +25,12 @@
  * ## ⚠️ The trap: not every square bracket is a footnote marker
  *
  * 908 bracket pairs in the book contain only digits. 52 contain WORDS, and
- * they are supplication text — `[بِسْمِ اللَّهِ]` opens the duʿa for entering
+ * they are supplication text — `[بِسْمِ اللَّهِ]` opens the dua for entering
  * the bathroom, and elsewhere a whole clause:
  *
  *     [اللَّهُمَّ اجْعَلْ لِي نُوراً فِي قَبْرِي... وَنُوراً فِي عِظَامِي]
  *
- * A blanket `\[[^\]]*\]` strip deletes words from duʿas. The rule is `\[\d+\]`
+ * A blanket `\[[^\]]*\]` strip deletes words from duas. The rule is `\[\d+\]`
  * and nothing looser, and `assertOnlyMarkersRemoved` exists to prove it stayed
  * that way.
  *
@@ -62,7 +62,7 @@ const ARABIC_MARKS = /\(\(|\)\)|[«»﴿﴾]/g;
  * Removed on Iyad's instruction, 27 Aug 2026, after the consequence was put to
  * him: the book uses these for a wording carried by some narrations of a
  * hadith and not the base one, so dropping them presents an optional addition
- * as part of the duʿa. He decided. The WORDS are untouched — only the two
+ * as part of the dua. He decided. The WORDS are untouched — only the two
  * characters go — and `assertBracketContentsSurvive` proves that on every run.
  */
 const BRACKETS = /[[\]]/g;

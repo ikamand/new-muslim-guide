@@ -224,7 +224,7 @@ function strandRows(total: number): [number, number, number] {
  * the strand over years, an illumination the reader lays themselves. The
  * beads are eight-point stars, not circles — the star is this tab's mark,
  * shared with the fihrist rosettes below; the thread carries the misbaha
- * feeling on its own. Duʿa holds the day's short strand, this tab the long
+ * feeling on its own. Dua holds the day's short strand, this tab the long
  * strand of the book (Iyad's ask, 2 Sep: "match the feeling").
  *
  * Display-only: at bead size these are not honest tap targets, and the

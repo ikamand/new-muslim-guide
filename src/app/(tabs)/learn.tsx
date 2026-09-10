@@ -434,7 +434,7 @@ export default function LearnScreen() {
       <GirihVeil />
       <ScrollView contentContainerStyle={styles.content}>
         <View style={styles.header}>
-          {/* The headpiece the Qur'an and Duʿa tabs wear: Learn is a book too. Today is the day, and stays bare. */}
+          {/* The headpiece the Qur'an and Dua tabs wear: Learn is a book too. Today is the day, and stays bare. */}
           <Unwan
             title={t('learn.title')}
             subtitle={t('learn.intro')}

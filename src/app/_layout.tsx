@@ -139,7 +139,7 @@ function RootStack() {
         name="phrases"
         options={{ title: 'What people say to you', headerBackTitle: 'Learn' }}
       />
-      <Stack.Screen name="dua-book/index" options={{ title: 'Every occasion', headerBackTitle: 'Duʿa' }} />
+      <Stack.Screen name="dua-book/index" options={{ title: 'Every occasion', headerBackTitle: 'Dua' }} />
       <Stack.Screen name="dua-book/[id]" options={{ title: '', headerBackTitle: 'Back' }} />
       <Stack.Screen name="practice" options={{ title: 'Practice', headerBackTitle: 'Learn' }} />
       <Stack.Screen name="pray" options={{ title: '', headerBackTitle: 'Learn' }} />

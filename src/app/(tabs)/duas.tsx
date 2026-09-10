@@ -30,7 +30,7 @@ import { windowAt } from '@/lib/adhkar-window';
 import type { UIKey } from '@/i18n/ui';
 
 /**
- * The duʿa tab — the misbaha and the fortress.
+ * The dua tab — the misbaha and the fortress.
  *
  * ## The two natures (2 Sep, from the "Misbaha and the Fortress" artifact)
  *
@@ -38,7 +38,7 @@ import type { UIKey } from '@/i18n/ui';
  * sittings said at fixed points in the day are BEADS ON ONE STRAND — the
  * instrument this practice is counted on, and the tab's own icon — with the
  * open sitting's bead gold and full, and its card beneath. The library —
- * Hisn al-Muslim and the Qur'an duʿas — is the fortress: two rows wearing
+ * Hisn al-Muslim and the Qur'an duas — is the fortress: two rows wearing
  * the marks the counting screen already draws.
  *
  * ## What the strand replaced
@@ -51,7 +51,7 @@ import type { UIKey } from '@/i18n/ui';
  * ## One hero, everything else is a row — still the law
  *
  * Exactly one thing is ever opened up: the live session, or — for the seven
- * to thirteen hours a day that belong to no sitting — one pinned duʿa. In
+ * to thirteen hours a day that belong to no sitting — one pinned dua. In
  * the dead zone no bead is gold and the strand just sits quiet; no location
  * is the same state, not an error.
  */
@@ -126,7 +126,7 @@ export default function DuasScreen() {
           {/*
             The fortress: the two ways into everything else, wearing the
             marks the counting screen's crowns already draw — the gate for
-            the book named after one, the seal for the Qur'an duʿas.
+            the book named after one, the seal for the Qur'an duas.
           */}
           <Shelf label={t('duas.group.else')} />
           <View>
@@ -302,7 +302,7 @@ function Row({
             {label}
           </ThemedText>
           {/*
-            A count means "a set of this many"; a chevron means "one duʿa". Two
+            A count means "a set of this many"; a chevron means "one dua". Two
             different things, so they do not get the same mark.
           */}
           {chevron ? (

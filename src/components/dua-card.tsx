@@ -15,7 +15,7 @@ import { useTheme } from '@/hooks/use-theme';
 import type { UIKey } from '@/i18n/ui';
 
 /**
- * One duʿa, chosen for right now, on both Today and the Duʿa tab.
+ * One dua, chosen for right now, on both Today and the Dua tab.
  *
  * One component in two places rather than two that look alike, because the
  * pair that look alike are the pair that drift.
@@ -27,7 +27,7 @@ import type { UIKey } from '@/i18n/ui';
  * reason on it reads as the app paying attention — and if the reason is wrong,
  * it is visibly wrong instead of quietly wrong.
  *
- * ## Long duʿas are cut, not squeezed
+ * ## Long duas are cut, not squeezed
  *
  * Some of these run to a paragraph. Rather than shrink the type or let a card
  * grow to half a screen, a long one clamps and offers the whole thing on its

@@ -39,7 +39,7 @@ export function evidenceFor(source: Source): EvidenceText | undefined {
  *
  * The app has carried structured provenance on its content for a while and
  * showed almost none of it: a `ContentNote` rendered its sources, and a step,
- * a reference section and a duʿa — which is where most of the citations
+ * a reference section and a dua — which is where most of the citations
  * actually live — rendered none. So the grading on a narration existed in the
  * data, was checked against the collection page, and then reached nobody.
  *

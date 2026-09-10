@@ -144,7 +144,7 @@ const skeleton = (text) =>
  * Deliberately structural rather than a list of the places citations live:
  * that list was wrong twice. Sources sit on steps, on the `says` inside a
  * step, on reference sections, on catalog entries, on recitations and on
- * duʿas, and the next one added would have been missed again. Anything shaped
+ * duas, and the next one added would have been missed again. Anything shaped
  * like a source is a source, wherever it turns up.
  */
 function collectSources(node, found = [], seen = new Set()) {
@@ -194,7 +194,7 @@ console.log(
 
 /*
   The local corpus first — `.cache/quran/saheeh.json`, written by
-  `npm run quran:corpus` — with the live API as fallback. The duʿas
+  `npm run quran:corpus` — with the live API as fallback. The duas
   generator got this treatment when a QuranEnc outage stalled it mid-run
   (2 Sep); this generator hit the identical 524 wall a day later while
   regenerating for the prayer pages. Same cure, same reasoning:

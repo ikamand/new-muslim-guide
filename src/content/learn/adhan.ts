@@ -44,7 +44,7 @@ export const ADHAN: Reference = {
       heading: 'Am I supposed to say something back?',
       promote: 'hero',
       body:
-        'The usual thing is to quietly repeat what the caller says, line by line, while the adhan is being called, and then to say a short duʿa afterwards. Neither is obligatory, and neither is complicated.',
+        'The usual thing is to quietly repeat what the caller says, line by line, while the adhan is being called, and then to say a short dua afterwards. Neither is obligatory, and neither is complicated.',
       sources: [hadith('bukhari', '611')],
       notes: [
         note(

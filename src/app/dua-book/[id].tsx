@@ -31,7 +31,7 @@ import { useTheme } from '@/hooks/use-theme';
  * IslamHouse prints a footnote under most lines. It is Arabic citation prose —
  * `أخرجه البخاري، 1/ 45، برقم 142` — and a person who has just become Muslim
  * cannot read it, cannot use it, and is reading past a paragraph of apparatus
- * to reach the next duʿa. So the screen leaves it out.
+ * to reach the next dua. So the screen leaves it out.
  *
  * ⚠️ It is left OUT OF THE SCREEN, not out of the data. `footnote` is still on
  * every line in `hisn.ts`, because it is the provenance a reviewer works from
@@ -102,7 +102,7 @@ export default function DuaBookOccasionScreen() {
   return (
     /*
       Reading an occasion to the end marks `hisn:<id>` — for most occasions an
-      inert key, but for the everyday-duʿas curriculum step (hisn:1268971) it
+      inert key, but for the everyday-duas curriculum step (hisn:1268971) it
       is what lets reading complete the step, which only a checkbox could do
       before. No LessonEnd here: the book is browsed, not walked in order.
     */

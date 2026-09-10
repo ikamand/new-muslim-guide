@@ -5,7 +5,7 @@
  *
  * ## The failure this exists for
  *
- * The Duʿa card shipped showing, as the duʿa before eating:
+ * The Dua card shipped showing, as the dua before eating:
  *
  *   إِذَا أَكَلَ أَحَدُكُمْ طَعَاماً فَلْيَقُلْ بِسْمِ اللَّهِ
  *   "When one of you eats food, let him say: In the name of Allah"
@@ -17,7 +17,7 @@
  * ## Why `kind` cannot do this job
  *
  * Hisn al-Muslim wraps quoted speech in ((…)), and it uses the same marks for
- * a duʿa and for a narration quoting one. Both come out `quoted`. The
+ * a dua and for a narration quoting one. Both come out `quoted`. The
  * distinction is in the GRAMMAR — an isnad opener, a conditional frame, a
  * third-person `فَلْيَقُلْ`, a reward clause — so that is what this reads.
  *
@@ -255,7 +255,7 @@ for (const [key, note] of Object.entries(HISN_ANNOTATIONS)) {
      still carry a printed count inside its words.
 
      `withoutLabel` is a string replace, and a replace that misses is a
-     no-op — the label would simply stay inside the duʿa and nothing would
+     no-op — the label would simply stay inside the dua and nothing would
      say so. Twenty-one of the first twenty-two labels written for this file
      arrived with their combining marks re-ordered by a terminal round trip:
      same length, same look, not in the row. So the second half checks the

@@ -16,17 +16,17 @@ import { useTheme } from '@/hooks/use-theme';
  *
  * ## An index is the wrong shape, and it is still needed
  *
- * The Duʿa tab opens on a day rather than a list, because a convert does not
- * know a duʿa for putting on clothes exists and will never scroll to it. That
+ * The Dua tab opens on a day rather than a list, because a convert does not
+ * know a dua for putting on clothes exists and will never scroll to it. That
  * argument has not changed and this screen does not contradict it — it sits
- * one tap underneath the day, for the other question: *is there a duʿa for
+ * one tap underneath the day, for the other question: *is there a dua for
  * ____?* Somebody arrives here already knowing what they are looking for,
  * which is exactly when an index is the right tool.
  *
  * ## What is deliberately not claimed
  *
  * The book's 132 occasions are shown in the book's own order, and nothing here
- * calls a line a duʿa. Some of what Hisn al-Muslim quotes is narration about
+ * calls a line a dua. Some of what Hisn al-Muslim quotes is narration about
  * the virtue of dhikr rather than words to recite, and telling those apart is
  * a reviewer's judgement, not a screen's. See `content/duas/hisn.ts`.
  *
@@ -83,7 +83,7 @@ export default function DuaBookScreen() {
             </ThemedText>
             {/*
               The star sits on the row as well as on the occasion's own page,
-              because someone scanning the index for the duʿa they use every
+              because someone scanning the index for the dua they use every
               day should not have to open it to keep it.
             */}
             <PinStar id={occasion.id} size={19} />

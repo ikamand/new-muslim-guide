@@ -52,7 +52,7 @@ export const EN = {
   /**
    * What a search result IS, shown under its title.
    *
-   * The sheet returns guides, references, duʿas and phrases side by side, and
+   * The sheet returns guides, references, duas and phrases side by side, and
    * "10 steps" versus "3 minutes" is a different promise. A reader deciding
    * whether to tap needs to know which kind of thing they are about to open.
    */
@@ -62,7 +62,7 @@ export const EN = {
   'kind.reference': 'Reference',
   'kind.pillar': 'Pillar',
   'kind.article': 'Article',
-  'kind.dua': 'Duʿa',
+  'kind.dua': 'Dua',
   'kind.phrase': 'Phrase',
   'kind.collection': 'Collection',
   'count.lines': 'lines',
@@ -443,7 +443,7 @@ export const EN = {
   'count.steps': 'steps',
   'count.sections': 'sections',
   'count.phrases': 'phrases',
-  'count.duas': 'duʿas',
+  'count.duas': 'duas',
   'count.clips': 'clips',
   /** The pieces a long text is learned in — the unit you loop twenty times. */
   'count.parts': 'parts to learn',
@@ -476,7 +476,7 @@ export const EN = {
   'attribution.contemporary scholarship': 'Contemporary scholarship',
   'tab.learn': 'Learn',
   'tab.quran': 'Qur’an',
-  'tab.duas': 'Duʿa',
+  'tab.duas': 'Dua',
   'adhkar.window.morning': 'Morning adhkar',
   'adhkar.window.evening': 'Evening adhkar',
   'adhkar.window.night': 'Before sleep',
@@ -498,16 +498,16 @@ export const EN = {
   'adhkar.bead.sleep': 'Sleep',
   /* The fortress shelf — echoes the intro's "almost anything else". */
   'duas.group.else': 'For everything else',
-  'adhkar.pinned': 'Pinned duʿas',
+  'adhkar.pinned': 'Pinned duas',
   'card.iftar': 'Breaking your fast soon',
   'card.fasting': 'While you are fasting',
   'card.friday': 'It is Friday',
   'card.hajj': 'The days of Hajj',
   'card.moment': 'For about now',
   'card.always': 'Always worth saying',
-  'card.seeWhole': 'See the whole duʿa →',
+  'card.seeWhole': 'See the whole dua →',
   'card.times': '× {n}',
-  'adhkar.everyday': 'Everyday duʿas',
+  'adhkar.everyday': 'Everyday duas',
   'adhkar.pin': 'Pin to the top',
   'adhkar.unpin': 'Unpin',
   'adhkar.pinFull': 'Ten is the most you can pin. Unpin one to add another.',
@@ -672,7 +672,7 @@ export const EN = {
   'phrases.youSay': 'You say:',
   'learn.phrases.title': 'What people say to you',
   'learn.phrases.subtitle': 'The phrases you will hear, and how to answer them',
-  'duas.title': 'Everyday duʿas',
+  'duas.title': 'Everyday duas',
   /*
     The moments of a day. Named the way a person describes their own morning
     rather than as categories — "Getting up", not "Morning adhkar".
@@ -688,8 +688,8 @@ export const EN = {
     six-moment day screen and was already attached to nothing.
   */
   'duas.intro':
-    'Short sets of words said at fixed points in the day, and a duʿa for almost anything else.',
-  'learn.duas.title': 'Everyday duʿas',
+    'Short sets of words said at fixed points in the day, and a dua for almost anything else.',
+  'learn.duas.title': 'Everyday duas',
   'learn.duas.subtitle': 'Waking, eating, leaving the house, sleeping',
   'learn.practice.title': 'Practice the recitations',
   'learn.practice.subtitle': 'Hear them line by line, and repeat until they hold',
@@ -982,7 +982,7 @@ export const EN = {
   'journey.lesson.how-to-pray': 'How to pray',
   'journey.lesson.pray-fajr': 'Praying Fajr, step by step',
   'journey.lesson.pray-maghrib': 'Praying Maghrib, step by step',
-  'journey.lesson.everyday-duas': 'Everyday duʿas',
+  'journey.lesson.everyday-duas': 'Everyday duas',
   /* The line under the four list-lessons, which otherwise print their target's own summary. */
   'journey.lesson.five-pillars.about': 'Five obligations that shape a Muslim’s life',
   'journey.lesson.six-articles.about': 'What Muslims believe',

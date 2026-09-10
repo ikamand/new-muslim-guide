@@ -16,7 +16,7 @@ import type { Reference } from '../types';
  *
  * The ghusl guide already holds when the wash is due, with Bukhari 291 and
  * Muslim 348a; this page cites 291 once and sends the reader there for the
- * method. The duʿa before intimacy is in Hisn al-Muslim (occasion 1269543)
+ * method. The dua before intimacy is in Hisn al-Muslim (occasion 1269543)
  * and is linked, not copied. `marriage-shape.ts` and `your-partner.ts` are
  * linked for what marriage is and what spouses owe each other.
  *
@@ -127,7 +127,7 @@ export const INTIMACY: Reference = {
       id: 'after',
       heading: 'What do I do afterwards?',
       body:
-        'The full wash, ghusl, before you next pray. Intercourse makes it due whether or not anything was released, and wudu on its own does not lift the state. If you are going to sleep first, the Prophet ﷺ would wash and make wudu before lying down, and do the ghusl later. There are also words to say beforehand, asking Allah to keep Shayṭān from the two of you and from what He gives you; they are in the duʿa book.',
+        'The full wash, ghusl, before you next pray. Intercourse makes it due whether or not anything was released, and wudu on its own does not lift the state. If you are going to sleep first, the Prophet ﷺ would wash and make wudu before lying down, and do the ghusl later. There are also words to say beforehand, asking Allah to keep Shayṭān from the two of you and from what He gives you; they are in the dua book.',
       sources: [
         hadith('bukhari', '291'),
         hadith('bukhari', '288', {

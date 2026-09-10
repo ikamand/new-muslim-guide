@@ -40,7 +40,7 @@ import { useTheme } from '@/hooks/use-theme';
  * them, this screen shows the occasion exactly as `/dua-book` does and simply
  * presents it better. It puts a counter only on lines where the BOOK states a
  * count, which is read off its own prose and cross-checked against IslamHouse's
- * English. No line is asserted to be a duʿa by this screen.
+ * English. No line is asserted to be a dua by this screen.
  */
 /** Each sitting is named for itself. */
 const SESSION_TITLE: Record<string, UIKey> = {
@@ -141,7 +141,7 @@ export default function AdhkarSessionScreen() {
 
     Counting used to be the only way forward, so a line marked ×100 could not
     be left without a hundred taps — which reads exactly as "I tap and it does
-    not go to the next duʿa", because it does not. And there was no way back at
+    not go to the next dua", because it does not. And there was no way back at
     all, so a mistap cost you the line you were on with no way to return to it.
   */
   const advance = () => {
@@ -445,7 +445,7 @@ const styles = StyleSheet.create({
     borderWidth: 1.5,
     padding: Spacing.three,
   },
-  /* The scroll container fills the card so a short duʿa is still all target;
+  /* The scroll container fills the card so a short dua is still all target;
      top padding keeps the first line clear of the crown chip. */
   cardScroll: { flexGrow: 1, paddingTop: Spacing.four },
   /* Centred while shorter than the card; a long text top-aligns and scrolls. */

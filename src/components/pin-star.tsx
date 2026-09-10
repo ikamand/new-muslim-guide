@@ -7,9 +7,9 @@ import { MAX_PINNED, useSettings } from '@/hooks/use-settings';
 import { useTheme } from '@/hooks/use-theme';
 
 /**
- * The star that pins an occasion to the top of the Duʿa tab.
+ * The star that pins an occasion to the top of the Dua tab.
  *
- * Pinning used to be a labelled button on one screen holding nine duʿas, which
+ * Pinning used to be a labelled button on one screen holding nine duas, which
  * made it look like a property of those nine rather than something you can do
  * to anything in the book. A star on every occasion says what it is without a
  * word of explanation, and works the same in a row and on a page.

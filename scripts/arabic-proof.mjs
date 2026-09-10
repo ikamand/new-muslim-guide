@@ -115,7 +115,7 @@ for (const [label, list] of [['Pillar', PILLARS], ['Article of faith', IMAN_PILL
   Collections.
 
   Driven off `COLLECTIONS` rather than named file by file, because this sheet
-  collects from a hand-written list and that is exactly how the duʿa book went
+  collects from a hand-written list and that is exactly how the dua book went
   missing from it — for one commit it reported 54 Arabic strings while the app
   displayed 372. A collection added tomorrow appears here without anyone
   remembering this line exists.

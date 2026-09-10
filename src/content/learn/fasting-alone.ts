@@ -66,7 +66,7 @@ export const FASTING_ALONE: Reference = {
       id: 'iftar-alone',
       heading: 'Is breaking the fast alone still Ramadan?',
       body:
-        'An iftar for one, a date, a glass of water and a plate you made yourself in a quiet kitchen, is a full iftar, seen by the One you kept the fast for. The duʿa for breaking the fast is in the Duʿa tab, and the moment is yours either way.\n\nIt is still worth saying that this is the loneliest recurring moment of a Ramadan kept alone, and it does not have to stay that way.',
+        'An iftar for one, a date, a glass of water and a plate you made yourself in a quiet kitchen, is a full iftar, seen by the One you kept the fast for. The dua for breaking the fast is in the Dua tab, and the moment is yours either way.\n\nIt is still worth saying that this is the loneliest recurring moment of a Ramadan kept alone, and it does not have to stay that way.',
     },
     {
       id: 'mosque',

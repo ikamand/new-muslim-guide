@@ -140,7 +140,7 @@ type PrayerSpec = {
    *
    * `buildPrayer` derives every prayer from two facts — rakʿah count, and
    * whether the Qur'an is recited aloud. Istikhara has a third: it ends with a
-   * duʿa that is the whole reason for praying it, and a script that stopped at
+   * dua that is the whole reason for praying it, and a script that stopped at
    * the taslim would leave out the thing somebody came for.
    *
    * Optional, and one generated step rather than a hand-written script, so the
@@ -637,7 +637,7 @@ function rakahSteps(rakah: number, spec: PrayerSpec): Step[] {
           title: 'Then ask',
           posture: 'sitting',
           instruction:
-            'The prayer is finished. Still sitting, say the duʿa, and where it says “this matter”, name the thing you are deciding.',
+            'The prayer is finished. Still sitting, say the dua, and where it says “this matter”, name the thing you are deciding.',
           says: spec.closingDua,
           note: `That is ${spec.title} complete.`,
         });

@@ -56,7 +56,7 @@ export type TextType = NonNullable<ThemedTextProps['type']>;
  * Arabic box's top sticks up past everything visible, and the row carries an
  * invisible blank band. Nobody sees it until the row is pressed: the
  * highlight paints the real box, and the band shows up as dead space at the
- * top (Iyad's held-press screenshots, 31 Aug — Qur'an and Duʿa rows).
+ * top (Iyad's held-press screenshots, 31 Aug — Qur'an and Dua rows).
  *
  * One constant, applied wherever a name shares a row with Latin, so the eye
  * that tunes it tunes every row at once. Top takes more than bottom because
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
     fontSize: 22,
     lineHeight: 44,
   },
-  /** The text a screen is about: a duʿa, a hero verse, a pillar. */
+  /** The text a screen is about: a dua, a hero verse, a pillar. */
   arabicLead: {
     fontFamily: ArabicFont,
     fontSize: 26,

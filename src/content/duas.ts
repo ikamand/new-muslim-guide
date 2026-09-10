@@ -1,12 +1,12 @@
 /**
- * Where in an ordinary day a duʿa belongs.
+ * Where in an ordinary day a dua belongs.
  *
  * ## What used to be here
  *
- * Nine duʿas the app owned outright, with hand-checked citations, beginner
+ * Nine duas the app owned outright, with hand-checked citations, beginner
  * notes and their own screen. They are gone, deleted on Iyad's instruction:
  * every one of those occasions is in Hisn al-Muslim, the Arabic matched to the
- * punctuation, and two copies of the same duʿas is how a codebase grows a
+ * punctuation, and two copies of the same duas is how a codebase grows a
  * second one that drifts. Search already indexed the book's 132 occasions
  * alongside them, so nothing became unfindable.
  *
@@ -20,7 +20,7 @@
  * The vocabulary of the day. `moments.ts` maps the book's occasions onto these
  * six, the book screen filters by them, and the tab's card reads the hour
  * table to decide what to put in front of someone. That is placement, not
- * content — no duʿa lives here any more.
+ * content — no dua lives here any more.
  */
 
 export const DAY_MOMENTS = [
@@ -42,7 +42,7 @@ export type DayMoment = (typeof DAY_MOMENTS)[number];
  * them at once instead of deriving them from arithmetic.
  *
  * `washing` is not on it, and that is not an oversight: going to the bathroom
- * has no hour. Its duʿas are reached from the day screen, where the whole day
+ * has no hour. Its duas are reached from the day screen, where the whole day
  * is visible, rather than from a card that claims this is the moment for them.
  */
 export const MOMENT_BY_HOUR: readonly DayMoment[] = [

@@ -11,7 +11,7 @@
  * ## What is NOT claimed
  *
  * Only that an occasion belongs to a part of the day. Nothing here says a line
- * is a duʿa to recite, nothing promotes the book's text onto a teaching
+ * is a dua to recite, nothing promotes the book's text onto a teaching
  * surface, and the day screen still teaches only the nine supplications the
  * app owns and has had checked. This map is navigation.
  *
@@ -19,9 +19,9 @@
  *
  * 132 occasions, and roughly forty fit a day. The rest are the prayer's own
  * words, hajj, illness, death, weather, and the things people say to each
- * other — none of which has an hour. `DayMoment` is optional on a duʿa for the
+ * other — none of which has an hour. `DayMoment` is optional on a dua for the
  * same reason: a thing that does not belong to a moment should not be forced
- * into one, because a duʿa filed under the wrong moment is worse than one
+ * into one, because a dua filed under the wrong moment is worse than one
  * filed nowhere. It is unfindable AND wrong.
  *
  * ⚠️ REVIEW REQUIRED — placement, not doctrine, but still a judgement. Whether

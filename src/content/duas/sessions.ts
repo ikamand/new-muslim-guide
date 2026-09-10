@@ -126,7 +126,7 @@ export function stepsFor(session: AdhkarSession): readonly AdhkarStep[] {
  * row reading `(ثلاثَ مرَّاتٍ)`; `annotations.ts` has carried that count onto
  * the three above it since it was written, but only the reader was asking. The
  * book screen printed the orphaned row as a card of its own containing the
- * complete sentence "Three times." — a duʿa card that is not a duʿa, telling
+ * complete sentence "Three times." — a dua card that is not a dua, telling
  * a reader to say something three times without saying what.
  *
  * The rules were never session-specific; only the sitting filter is. So they
@@ -383,7 +383,7 @@ export function sharedHeadingSplits(): boolean {
 /**
  * The book's own title, for the row that opens it.
  *
- * ⚠️ Unreviewed, and the one Arabic string on the duʿa tab that was not copied
+ * ⚠️ Unreviewed, and the one Arabic string on the dua tab that was not copied
  * out of the data: `hisn.ts` is generated per-occasion and carries no title for
  * the book the occasions came from. It is a NAME rather than a quotation —
  * asking for a citation for the title of a book is a category error — but it

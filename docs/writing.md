@@ -35,7 +35,7 @@ citation stays exactly where it was; only the English moves.
   words a beginner can read.
 - **One spelling per name.** Running prose uses Dhuhr, ʿAsr, ʿIsha,
   Al-Fatihah, Mecca, salam, khutbah, adhan, janazah, takbir, iqamah,
-  Muharram, Shawwal, ʿAshuraʾ. The check lists the variants it fails on.
+  Muharram, Shawwal, ʿAshuraʾ, dua. The check lists the variants it fails on.
   Transliterations of recited text (`said`, `transliteration`) keep their
   macrons because they are pronunciation guides; a taught term presented
   as vocabulary (Kibr, Riyāʾ, Walī) keeps its diacritics too.

@@ -65,7 +65,7 @@ if (lost.length > 0) {
   Hisn prints the three Quls and then a bare row reading `(ثلاثَ مرَّاتٍ).` —
   the count for the rows above it, not a text of its own. `/dua-book/[id]`
   rendered it as a card whose whole content was the sentence "Three times.",
-  which is a duʿa card that is not a duʿa. `annotations.ts` had already moved
+  which is a dua card that is not a dua. `annotations.ts` had already moved
   that count onto the three Quls; only the reader was asking.
 
   Both screens now derive from `stepsForOccasion`, so this walks every occasion
@@ -116,7 +116,7 @@ if (missing.length > 0) {
 
 const distinct = new Set(names.map(([, name]) => name));
 if (distinct.size !== names.length) {
-  console.error('\n✗ two sittings share an Arabic name; the duʿa tab would show it twice.');
+  console.error('\n✗ two sittings share an Arabic name; the dua tab would show it twice.');
   failed = true;
 }
 

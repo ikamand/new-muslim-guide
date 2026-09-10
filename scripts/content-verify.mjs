@@ -10,7 +10,7 @@
  * history has one, a shadda that had drifted onto an alif.
  *
  * It never edits anything. Every Arabic string in this app is either a Qur'an
- * text, a narration, or the words of a duʿa, and a script that rewrites those
+ * text, a narration, or the words of a dua, and a script that rewrites those
  * because a comparison came out unequal is a worse idea than the drift it is
  * fixing. It reports, and a person decides.
  *

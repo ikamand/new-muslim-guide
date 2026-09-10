@@ -12,9 +12,9 @@ import type { Recitation, RecitationVerse } from './types';
  * ⚠️ EVERY citation below was checked against sunnah.com by opening the page
  * and matching the Arabic. Five of the seven that were here before were wrong:
  *
- *   - the duʿa before sleeping cited Bukhari 6087, which is about smiling and
+ *   - the dua before sleeping cited Bukhari 6087, which is about smiling and
  *     the expiation for breaking a fast in Ramadan
- *   - the duʿa on waking cited Bukhari 6075, also Kitab al-Adab
+ *   - the dua on waking cited Bukhari 6075, also Kitab al-Adab
  *     (both are in fact Bukhari 6324, which carries the two together in
  *     exactly this wording)
  *   - leaving the house cited Abu Dawud 5097; it is 5095
@@ -28,7 +28,7 @@ import type { Recitation, RecitationVerse } from './types';
  * carrying the hasan-graded alternative. Neither is presented as the other.
  *
  * An earlier pass compared this against Tirmidhi 3458 and Ibn Majah 3285 and
- * called them "the same duʿa graded hasan". They are not — 3458 and 3285 are a
+ * called them "the same dua graded hasan". They are not — 3458 and 3285 are a
  * DIFFERENT text. 3457 and 3283 are the same text, and both are weak.
  *
  * ⚠️ The prayer recitations no longer carry nothing. Every one of them was
@@ -43,7 +43,7 @@ import type { Recitation, RecitationVerse } from './types';
  * Every citation in the app — not only in this file — was then cross-checked
  * mechanically against sunnah.com: in-book reference, grading, and grading
  * authority, sixty-six narrations. One was wrong, and it was in here: the
- * travel duʿa's in-book reference was Book 15, Hadith 75 and the page says 479.
+ * travel dua's in-book reference was Book 15, Hadith 75 and the page says 479.
  *
  * One of those nearly went the wrong way. The shahada after wudu matches
  * Muslim 234b exactly, but not 234a and not Abu Dawud 169 — each is one word
@@ -380,7 +380,7 @@ export const Recitations = {
     translation: 'In the name of Allah.',
     /**
      * The same two words serve the meal in `duas.ts`; the citation for that
-     * occasion sits on the duʿa, because a source belongs to the claim it
+     * occasion sits on the dua, because a source belongs to the claim it
      * supports rather than to the words.
      */
     sources: [
@@ -403,7 +403,7 @@ export const Recitations = {
 
 
   /**
-   * The istikhara duʿa, said after the two rakʿahs.
+   * The istikhara dua, said after the two rakʿahs.
    *
    * ⚠️ COPIED, NOT COMPOSED, and the seam is worth knowing about. Every
    * publisher of Sahih al-Bukhari 3293 prints the narrator's alternative
@@ -411,7 +411,7 @@ export const Recitations = {
    * immediate and future affairs" — because Jabir was unsure which the
    * Prophet ﷺ said. A text carrying both is a narration; a text carrying
    * neither is a splice. This prints `وَعَاقِبَةِ أَمْرِي` throughout, which is
-   * the wording the narration gives first and the one the printed duʿa
+   * the wording the narration gives first and the one the printed dua
    * collections carry.
    *
    * Iyad's decision, 22 Aug 2026: both mean the same thing, choose one.
@@ -426,7 +426,7 @@ export const Recitations = {
    * should teach, not whether it was copied correctly.
    */
   istikhara: {
-    title: 'The istikhara duʿa',
+    title: 'The istikhara dua',
     arabic:
       "اللَّهُمَّ إِنِّي أَسْتَخِيرُكَ بِعِلْمِكَ وَأَسْتَقْدِرُكَ بِقُدْرَتِكَ، وَأَسْأَلُكَ مِنْ فَضْلِكَ الْعَظِيمِ، فَإِنَّكَ تَقْدِرُ وَلَا أَقْدِرُ، وَتَعْلَمُ وَلَا أَعْلَمُ، وَأَنْتَ عَلَّامُ الْغُيُوبِ، اللَّهُمَّ إِنْ كُنْتَ تَعْلَمُ أَنَّ هَذَا الْأَمْرَ خَيْرٌ لِي فِي دِينِي، وَمَعَاشِي، وَعَاقِبَةِ أَمْرِي، فَاقْدُرْهُ لِي وَيَسِّرْهُ لِي ثُمَّ بَارِكْ لِي فِيهِ، وَإِنْ كُنْتَ تَعْلَمُ أَنَّ هَذَا الْأَمْرَ شَرٌّ لِي فِي دِينِي وَمَعَاشِي وَعَاقِبَةِ أَمْرِي، فَاصْرِفْهُ عَنِّي وَاصْرِفْنِي عَنْهُ، وَاقْدُرْ لِي الْخَيْرَ حَيْثُ كَانَ، ثُمَّ أَرْضِنِي",
     transliteration:

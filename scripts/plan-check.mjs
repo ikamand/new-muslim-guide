@@ -245,7 +245,7 @@ measure('curriculum: distinct lessons', seen.size, 72);
 /* 123 → 257 for the same reason; an unwritten page contributes 0. */
 measure('curriculum: total estimated minutes', pathMinutes, 257);
 
-// The catalogue, excluding the duʿa book.
+// The catalogue, excluding the dua book.
 const teaching = CATALOG.filter((e) => e.kind !== 'hisn');
 const teachingMinutes = teaching.reduce((n, e) => n + (e.meta?.estimatedMinutes ?? 0), 0);
 /*
@@ -255,7 +255,7 @@ const teachingMinutes = teaching.reduce((n, e) => n + (e.meta?.estimatedMinutes 
   beside them.
 */
 /* 70 → 75: Phase 9's five tier-one pages. */
-/* 75 → 76: Phase 10's Qur'anic duʿas are a catalogue entry of their own. */
+/* 75 → 76: Phase 10's Qur'anic duas are a catalogue entry of their own. */
 /* 76 → 77: Phase 11's Jumuʿah page. */
 /* 77 → 79: Phase 11's pilot of two. */
 /* 79 → 85: Phase 11's remaining six. */
@@ -365,7 +365,7 @@ const kindFiles = execSync(
 ).trim();
 /* 9 → 11: `learn/index.ts` and the names collection both name `collection`. */
 /* 11 → 12: `use-today.ts` now resolves refs by kind for its candidates. */
-/* 12 → 14: the duʿa collection, and the Duʿa tab now reads COLLECTIONS. */
+/* 12 → 14: the dua collection, and the Dua tab now reads COLLECTIONS. */
 /* 14 → 15: `use-reading.ts` (30a8023, the app remembers what you were
    reading) resolves the remembered place by kind. */
 measure('files naming a ContentKind value', Number(kindFiles), 15);
@@ -459,7 +459,7 @@ const keywords = (t) =>
 const NOT_A_PLAN_ITEM = [
   [/yaqeen|ispu|seekersguidance|mishkah|rahiq|my deen|being muslim|beyond the shahada|virtualmosque|convert build their knowledge/i,
    'an external research citation, not work to do'],
-  [/entries the metadata rates|entries rated|total estimated|distinct lessons|non-duʿa teaching|hisn occasions|catalogue/i,
+  [/entries the metadata rates|entries rated|total estimated|distinct lessons|non-dua teaching|hisn occasions|catalogue/i,
    'a measurement, checked in section 2 instead'],
   [/^(bukhari|abu dawud|tirmidhi|muslim|collection|api|verdict|reason|rejected|kept, untouched|the job|what|when|removed|by)$/i,
    'a table header or a bare collection name'],

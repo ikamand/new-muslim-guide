@@ -30,7 +30,7 @@ import { migrateProgressKey } from '@/content/progress-keys';
  *
  * `display-settings` writes by serialising the whole settings object on every
  * change — see `toggleLesson`. Observations accumulate, and joining that key
- * would mean rewriting somebody's reminders, reciter and pinned duʿas every
+ * would mean rewriting somebody's reminders, reciter and pinned duas every
  * time they finish reading a page. Four reasons, and the first is decisive:
  *
  * 1. **Write frequency.** Settings change a few times a year. Observations

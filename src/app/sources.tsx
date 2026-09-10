@@ -22,7 +22,7 @@ import { PLACES_SOURCE } from '@/lib/places';
  * were citing a website rather than Bukhari. It came off; the obligation it
  * discharged had to land somewhere, and this is somewhere better — a person
  * looking for it can find it, which was never true of a line inside a
- * collapsed drawer under the third duʿa on a page.
+ * collapsed drawer under the third dua on a page.
  *
  * ## Nothing here is typed by hand
  *

@@ -60,7 +60,7 @@ export type JourneyStep = {
    * The same override for the line under the name. Without it the chapter
    * screen prints the target's own summary — for a pillar that is ONE pillar's
    * summary, for a phrasebook it is the first phrase, and for the Hisn
-   * sitting it was the text of the waking duʿa (Iyad's outline, 7 Sep 2026).
+   * sitting it was the text of the waking dua (Iyad's outline, 7 Sep 2026).
    */
   descriptionKey?: string;
 };
@@ -461,7 +461,7 @@ export function uncurriculed(
     'guide:tawba',
     'guide:qiyam',
     'guide:witr',
-    // The Qur'anic duʿas live on the Duʿa tab and in the library.
+    // The Qur'anic duas live on the Dua tab and in the library.
     'collection:quranic-duas',
   ]) {
     claimed.add(elsewhere);

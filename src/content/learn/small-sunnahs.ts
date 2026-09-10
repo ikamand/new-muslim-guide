@@ -8,7 +8,7 @@ import type { Reference } from '../types';
  * ⚠️ A PAGE, not a collection — a deliberate departure from
  * `docs/build-order.md`, which says every tier-three item is a `collection`
  * instance. The words for most of these are already in this app: Hisn
- * al-Muslim carries the duʿa on waking, on leaving the house, on eating, each
+ * al-Muslim carries the dua on waking, on leaving the house, on eating, each
  * fetched from its publisher with the book's own text. Building a collection
  * would put a second copy of those words in a second place, which is exactly
  * what `learn/adhan.ts` refused to do for the same reason. One text, one
@@ -40,7 +40,7 @@ export const SMALL_SUNNAHS: Reference = {
       id: 'what',
       heading: 'What are they?',
       body:
-        'Small habits the Prophet ﷺ kept, which Muslims take on gradually over years. Starting with the right side. Cleaning your teeth. A short duʿa on waking, on leaving the house, before eating. None of them is required, none is difficult, and together they turn ordinary parts of a day into something deliberate.\n\nThey are the part of the religion that is least discussed with converts and most visible in people who have been Muslim a long time.',
+        'Small habits the Prophet ﷺ kept, which Muslims take on gradually over years. Starting with the right side. Cleaning your teeth. A short dua on waking, on leaving the house, before eating. None of them is required, none is difficult, and together they turn ordinary parts of a day into something deliberate.\n\nThey are the part of the religion that is least discussed with converts and most visible in people who have been Muslim a long time.',
     },
     {
       id: 'right',
@@ -58,13 +58,13 @@ export const SMALL_SUNNAHS: Reference = {
     },
     {
       id: 'duas',
-      heading: 'What about the little duʿas?',
+      heading: 'What about the little duas?',
       body:
-        'They are already in this app, in the duʿa book, in the book’s own wording: waking, leaving the house, entering and leaving the bathroom, before and after eating, entering a mosque. They are not repeated here. In the book they can be searched, pinned, and read in Arabic and English together.',
+        'They are already in this app, in the dua book, in the book’s own wording: waking, leaving the house, entering and leaving the bathroom, before and after eating, entering a mosque. They are not repeated here. In the book they can be searched, pinned, and read in Arabic and English together.',
       notes: [
         note(
           'practical',
-          'The duʿa tab has them grouped by moment. Take one, use it for a fortnight until you stop having to look, and only then take another.',
+          'The dua tab has them grouped by moment. Take one, use it for a fortnight until you stop having to look, and only then take another.',
         ),
       ],
     },

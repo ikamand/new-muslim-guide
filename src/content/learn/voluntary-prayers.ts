@@ -105,7 +105,7 @@ export const ISTIKHARA: Reference = {
   },
   quickFacts: [
     { label: 'When', value: 'Any time you have a real decision to make' },
-    { label: 'How many', value: 'Two rakʿahs, then the duʿa' },
+    { label: 'How many', value: 'Two rakʿahs, then the dua' },
     { label: 'A sign?', value: 'No. It does not promise a dream or a feeling', emphasis: true },
     { label: 'How', value: 'Pray two rakʿahs', href: '/guide/istikhara' },
   ],
@@ -114,13 +114,13 @@ export const ISTIKHARA: Reference = {
       id: 'what',
       heading: 'What is istikhara?',
       /*
-        No promotion here. "What do I say?" below already prints the duʿa
-        through `says`, and Bukhari 3293 IS that duʿa with its chain attached —
+        No promotion here. "What do I say?" below already prints the dua
+        through `says`, and Bukhari 3293 IS that dua with its chain attached —
         promoting it would put the same words on the page twice, once as a
         thousand characters of narration and once as the thing to recite.
       */
       body:
-        'Two rakʿahs and a duʿa, prayed when you have a decision to make. Jabir reported that the Prophet ﷺ taught it for every matter the way he taught a surah of the Qur’an, which tells you how ordinary it was meant to be, and how often.',
+        'Two rakʿahs and a dua, prayed when you have a decision to make. Jabir reported that the Prophet ﷺ taught it for every matter the way he taught a surah of the Qur’an, which tells you how ordinary it was meant to be, and how often.',
       },
     {
       id: 'words',
@@ -134,9 +134,9 @@ export const ISTIKHARA: Reference = {
       id: 'no-dream',
       heading: 'What sign should I expect?',
       body:
-        'This is the part people are told wrong. The duʿa asks God, if the thing is good for you, to bring it about and make it easy, and if it is bad for you, to turn it away and turn you away from it. It does not promise a sign, a dream or a feeling. You pray, and then you decide, and what follows is the answer.',
+        'This is the part people are told wrong. The dua asks God, if the thing is good for you, to bring it about and make it easy, and if it is bad for you, to turn it away and turn you away from it. It does not promise a sign, a dream or a feeling. You pray, and then you decide, and what follows is the answer.',
       sources: [
-        general('The duʿa says what it asks for, and it does not ask for a sign. Waiting for one is an addition people make rather than something the prayer contains.'),
+        general('The dua says what it asks for, and it does not ask for a sign. Waiting for one is an addition people make rather than something the prayer contains.'),
       ],
       note: 'You still have to think, ask people who know, and weigh it up. Istikhara goes alongside that, not instead of it.',
     },
@@ -145,7 +145,7 @@ export const ISTIKHARA: Reference = {
       heading: 'What can I ask about?',
       body:
         'Any time except the times when prayer is held off, and about anything you genuinely have a choice in: a job, a move, a marriage, something smaller. Not about whether to do something already settled as right or wrong; there is nothing to ask about there.',
-      sources: [general('Ordinary explanation of scope, following from what the duʿa asks.')],
+      sources: [general('Ordinary explanation of scope, following from what the dua asks.')],
     },
   ],
 };
@@ -277,7 +277,7 @@ export const QIYAM_AL_LAYL: Reference = {
  * of the night. The generated guide teaches one because one is complete on its
  * own and is the least that can go wrong; the page states the range.
  *
- * The qunut duʿa is deliberately absent. It is real, it is another Arabic text
+ * The qunut dua is deliberately absent. It is real, it is another Arabic text
  * needing a verified source, and a witr without it is valid.
  */
 export const WITR: Reference = {

@@ -99,7 +99,7 @@ export type HisnAnnotation = {
    * The book sometimes prints several dhikr in one row with the counts between
    * them — `سُبْحَانَ اللَّهِ، وَالْحَمْدُ لِلَّهِ، وَاللَّهُ أَكْبَرُ (ثلاثاً وثلاثين) …`.
    * Left whole it asks a reader to say all of it thirty-three times and shows
-   * "(thirty-three times)" inside the duʿa as though it were part of the words.
+   * "(thirty-three times)" inside the dua as though it were part of the words.
    *
    * Each part names its own text rather than a marker to cut at, because the
    * English cannot be cut at the same points: IslamHouse prints a
@@ -148,7 +148,7 @@ export type HisnAnnotation = {
    * Extra spans to pick out in the accent colour, beyond the ones the book
    * bracketed.
    *
-   * For text that is instruction rather than duʿa — "ten times after the
+   * For text that is instruction rather than dua — "ten times after the
    * Maghrib and Fajr prayers" trails the end of a line and reads as part of
    * the words until it is marked.
    */
@@ -159,7 +159,7 @@ export type HisnAnnotation = {
    * Different from `recited: false`, which shows the row as an instruction
    * because it tells the reader to do something. A row like `(ثلاثَ مرَّاتٍ)`
    * tells them nothing once its count sits on the three sūrahs it belonged to
-   * — as its own card it read as a duʿa whose entire text was "Three times."
+   * — as its own card it read as a dua whose entire text was "Three times."
    */
   omit?: boolean;
   /**
@@ -292,7 +292,7 @@ export const HISN_ANNOTATIONS: Readonly<Record<number, HisnAnnotation>> = {
   /*
     The book's own marginal instructions, printed inside the row. Ayat
     al-Kursi ended with "after each prayer" INSIDE the verse, and the last
-    duʿa asked the reader to say "after the greeting of peace of the Fajr
+    dua asked the reader to say "after the greeting of peace of the Fajr
     prayer" as part of its words (Iyad, 8 Sep 2026).
   */
   1269175: {
@@ -300,7 +300,7 @@ export const HISN_ANNOTATIONS: Readonly<Record<number, HisnAnnotation>> = {
     label: { arabic: " عَقِبَ كلِّ صَلاَةٍ", english: " after each prayer" },
   },
   1269180: {
-    reason: 'the label "after Fajr" was printed as the last words of the duʿa',
+    reason: 'the label "after Fajr" was printed as the last words of the dua',
     label: {
       arabic: " بَعْدَ السّلامِ مِنْ صَلاَةِ الفَجْرِ",
       english: ", after the greeting of peace of the Fajr prayer",

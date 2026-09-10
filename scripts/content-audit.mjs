@@ -14,9 +14,9 @@
  * non-zero for the things that are faults: a fabricated narration, a weak one
  * carrying a ruling, and a `relatedContent` pointer that resolves to nothing.
  *
- * A weak narration cited for a duʿa wording, a virtue or historical context is
+ * A weak narration cited for a dua wording, a virtue or historical context is
  * reported with its grading rather than blocked. Grading it and using it are
- * two different questions, and conflating them made this script fail on a duʿa
+ * two different questions, and conflating them made this script fail on a dua
  * that three of the six books carry.
  */
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
@@ -201,11 +201,11 @@ const narrations = allSources.filter(({ source }) => source.kind === 'hadith');
  *
  * The previous version failed the build on any narration graded weak, wherever
  * it appeared. That is not how Sunni hadith scholarship works and it was making
- * the app fail on a duʿa wording carried by three of the six books, while
+ * the app fail on a dua wording carried by three of the six books, while
  * saying nothing about the unsourced claims sitting next to it.
  *
  * What still fails: a fabricated narration anywhere, and a weak one carrying a
- * ruling. What is reported instead: weak narrations used for a duʿa wording, a
+ * ruling. What is reported instead: weak narrations used for a dua wording, a
  * virtue or historical context — with the grading shown every time, never
  * quietly upgraded — and narrations from a mixed collection with no grading
  * recorded at all.
@@ -237,7 +237,7 @@ if (byVerdict['below-bar'].length) {
   byVerdict['below-bar'].forEach(line);
   say('  A weak narration cannot establish an obligation, a prohibition or a');
   say('  point of creed. Either find a stronger one, or if it is really being');
-  say('  cited for a duʿa wording or a virtue, say so with `role`.');
+  say('  cited for a dua wording or a virtue, say so with `role`.');
 }
 
 if (byVerdict['needs-grading'].length) {
@@ -407,7 +407,7 @@ if (byVerdict.unusable.length) {
 if (byVerdict['below-bar'].length) {
   failures.push(
     `${byVerdict['below-bar'].length} weak narration(s) carrying a ruling — find a ` +
-      'stronger source, or set `role` if it is really a duʿa wording or a virtue',
+      'stronger source, or set `role` if it is really a dua wording or a virtue',
   );
 }
 if (dangling.length) failures.push(`${dangling.length} broken relatedContent pointer(s)`);

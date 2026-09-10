@@ -43,7 +43,7 @@ function schoolLabel(school: Attribution, t: (key: UIKey) => string): string {
  * side effect. The URLs are stored on every source and ready for it.
  *
  * The citation list itself moved to `source-list.tsx` unchanged, because a
- * step, a reference section and a duʿa all needed the same block and there
+ * step, a reference section and a dua all needed the same block and there
  * must be one of it rather than four.
  */
 export function ContentNoteCard({ entry }: { entry: ContentNote }) {

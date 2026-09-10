@@ -12,7 +12,7 @@ import { useTheme } from '@/hooks/use-theme';
  *
  * ## A coda, not a card
  *
- * It shipped as a card and was wrong. Directly under the duʿa card, dressed
+ * It shipped as a card and was wrong. Directly under the dua card, dressed
  * identically — kicker, title, right-aligned Arabic, supporting line — the two
  * read as one thing repeated, and Today grew a fourth box on a screen whose
  * whole problem is that it has too many.

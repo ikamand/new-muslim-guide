@@ -25,7 +25,7 @@
  *
  * Run: node scripts/generate-transliterations.mjs   (network)
  */
-import { writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -40,6 +40,24 @@ const get = async (url) => {
   return response.json();
 };
 
+/*
+  Cache first, since 10 Sep 2026: `npm run quran:words:corpus` mirrors every
+  chapter's word stream into `.cache/quran/words/`, and the endpoint below is
+  retired with no shutdown date. A chapter in the cache is read from there;
+  one that is not still goes to the network, so this script keeps working
+  either way and says which it did.
+*/
+const cache = join(root, '.cache/quran/words');
+const chapterWords = async (n) => {
+  const file = join(cache, `${n}.json`);
+  if (existsSync(file)) return { verses: JSON.parse(readFileSync(file, 'utf8')), from: 'cache' };
+  const data = await get(
+    `https://api.quran.com/api/v4/verses/by_chapter/${n}` +
+      `?words=true&word_fields=text_imlaei&fields=text_imlaei&per_page=300`,
+  );
+  return { verses: data.verses, from: 'network' };
+};
+
 const surahNumbers = [1];
 for (let n = FIRST; n <= LAST; n += 1) surahNumbers.push(n);
 
@@ -49,12 +67,9 @@ let ayahs = 0;
 let mismatches = 0;
 
 for (const n of surahNumbers) {
-  const data = await get(
-    `https://api.quran.com/api/v4/verses/by_chapter/${n}` +
-      `?words=true&word_fields=text_imlaei&fields=text_imlaei&per_page=300`,
-  );
+  const { verses, from } = await chapterWords(n);
   const surah = {};
-  for (const verse of data.verses) {
+  for (const verse of verses) {
     const words = verse.words
       .filter((word) => word.char_type_name === 'word')
       .map((word) => word.transliteration?.text ?? '');
@@ -70,7 +85,7 @@ for (const n of surahNumbers) {
     ayahs += 1;
   }
   bySurah[n] = surah;
-  process.stdout.write(`  ${n} — ${Object.keys(surah).length} ayahs\n`);
+  process.stdout.write(`  ${n} — ${Object.keys(surah).length} ayahs (${from})\n`);
 }
 
 const file = `/**

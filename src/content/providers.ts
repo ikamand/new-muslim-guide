@@ -54,7 +54,8 @@ export type ProviderId =
   | 'fitrahive'
   | 'ninetynine'
   | 'aladhan'
-  | 'tarteel';
+  | 'tarteel'
+  | 'quranfoundation';
 
 export type Provider = {
   /** What to call it in a report. */
@@ -106,8 +107,11 @@ export const PROVIDERS: Readonly<Record<ProviderId, Provider>> = {
   quranenc: {
     name: 'QuranEnc',
     where: 'quranenc.com/api/v1',
-    supplies: 'Juz 30 — 564 ayahs — and every Qur’an text checked by `content:verify`.',
-    fetchedBy: 'npm run quran:juz30',
+    supplies:
+      'The Qur’an duas collection, the names of Allah, every Qur’an text in `evidence.ts`, ' +
+      'and the corpus every Qur’an text in the app is checked against by `content:verify`. ' +
+      'Not juz 30, which this row once claimed: that comes from Quran Foundation.',
+    fetchedBy: 'npm run quran:corpus',
     verification:
       'Every Arabic string in the app that carries a Qur’an citation is compared ' +
       'against it on a consonantal skeleton. The app writes Imlaei and QuranEnc ' +
@@ -241,6 +245,28 @@ export const PROVIDERS: Readonly<Record<ProviderId, Provider>> = {
       'disambiguates a number read in the wrong numbering. ' +
       '⚠️ Thin: 97 records, 71 with any number, 5 with a sub-number.',
     licence: 'MIT.',
+  },
+  quranfoundation: {
+    name: 'Quran Foundation (Quran.com)',
+    where: 'api.quran.com/api/v4',
+    supplies:
+      'Juz 30 and Al-Fatihah — Imlaei Arabic and Saheeh International — and, word by word, ' +
+      'the transliteration of those and the gloss and transliteration of every ayah the app ' +
+      'opens as a row of words.',
+    fetchedBy: 'npm run quran:words:corpus',
+    verification:
+      'The ayah text is compared against QuranEnc by `content:verify`, which is the second ' +
+      'publisher. The word-level gloss and transliteration have no second publisher and are ' +
+      'trusted: each word’s three fields come from one token of the same stream, so they ' +
+      'cannot be misaligned with each other. The transliteration generator refuses any ayah ' +
+      'whose word count differs from the Arabic it will light up under; the word view ' +
+      'renders the API’s own words, so it has no count to disagree with.',
+    obligation:
+      'quran.com’s site terms allow personal, non-commercial use and publish no terms for ' +
+      'the API. The gloss’s author is listed by the API as “Unknown”, so the app credits ' +
+      '“Quran.com” and names no author it cannot source. The endpoint is retired in favour ' +
+      'of a credentialed host; the whole Qur’an is mirrored in `.cache/quran/words/` and ' +
+      '`~/Documents/islamic-data/` so nothing here depends on it staying up.',
   },
 };
 

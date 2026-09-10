@@ -88,6 +88,8 @@
     "compass:check": "npx tsx scripts/compass-check.ts",
     "places:fetch": "node scripts/fetch-places.mjs",
     "quran:corpus": "node scripts/fetch-quran-corpus.mjs",
+    "quran:words:corpus": "node scripts/fetch-quran-words.mjs",
+    "quran:words": "node --import ./scripts/ts-resolve.mjs scripts/generate-quran-words.mjs",
     "hadeethenc:corpus": "node scripts/fetch-hadeethenc-corpus.mjs",
     "submit:check": "node --import ./scripts/ts-resolve.mjs scripts/submit-check.mjs",
     "crisis:check": "node --import ./scripts/ts-resolve.mjs scripts/crisis-check.mjs"

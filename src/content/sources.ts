@@ -100,6 +100,19 @@ export type QuranSource = {
   /** Optional, for display. The reference alone is unambiguous without it. */
   surahName?: string;
   /**
+   * The span of words actually quoted, where the app quotes part of an ayah:
+   * the first word of the first ayah and the last word of the last, in the
+   * Quran Foundation word numbering that `words.ts` uses.
+   *
+   * Absent means the whole ayah, or the whole run of them. Present, it is a
+   * cut a PUBLISHER made — quran.com/duas starts 2:127 at "Our Lord, accept
+   * from us" and drops the narration before it — copied rather than chosen,
+   * so a citation says exactly what is on the screen and the word view can
+   * open the same words the line shows. `content:verify` compares on
+   * `includes`, so a quoted part still verifies against the whole.
+   */
+  words?: readonly [number, number];
+  /**
    * True where the verse COMMANDS the act rather than supplying its wording.
    *
    * The taʿawwudh is the case that forced this field. Qur'an 16:98 says

@@ -109,6 +109,12 @@ export function hasWordView(entry: CollectionEntry): boolean {
   return wordRows(entry) !== undefined;
 }
 
+/**
+ * The words the line actually shows. Where the citation quotes part of an
+ * ayah (`words` on the source — a cut its publisher made), the first ayah
+ * starts and the last ayah stops where the line does, so the word view never
+ * opens words the reader was not shown.
+ */
 function wordRows(entry: CollectionEntry) {
   const rows: { number: number; words: readonly AyahWord[] }[] = [];
   for (const source of entry.sources ?? []) {
@@ -117,7 +123,9 @@ function wordRows(entry: CollectionEntry) {
     for (let n = from; n <= to; n += 1) {
       const words = ayahWords(source.surah, n);
       if (!words) return undefined;
-      rows.push({ number: n, words });
+      const start = n === from && source.words ? source.words[0] - 1 : 0;
+      const end = n === to && source.words ? source.words[1] : words.length;
+      rows.push({ number: n, words: words.slice(start, end) });
     }
   }
   return rows.length > 0 ? rows : undefined;

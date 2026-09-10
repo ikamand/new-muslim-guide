@@ -62,6 +62,20 @@ const corpus = existsSync(corpusPath)
   : null;
 if (corpus) console.log(`Using local corpus (${corpus.size} ayahs); QuranEnc is the fallback.\n`);
 
+/* The API's word count for an ayah, from the `.cache/quran/words/` mirror —
+   the numbering CUT is written in. Needed only for cut ayahs. */
+const wordChapters = new Map();
+const apiWordCount = (s, n) => {
+  if (!wordChapters.has(s)) {
+    const file = join(root, `.cache/quran/words/${s}.json`);
+    if (!existsSync(file)) throw new Error(`.cache/quran/words/${s}.json is missing — run \`npm run quran:words:corpus\``);
+    wordChapters.set(s, new Map(JSON.parse(readFileSync(file, 'utf8')).map((v) => [v.verse_number, v.words.filter((w) => w.char_type_name === 'word').length])));
+  }
+  const count = wordChapters.get(s).get(n);
+  if (!count) throw new Error(`${s}:${n} is not in the words cache`);
+  return count;
+};
+
 /* Three tries with a pause — QuranEnc's edge throws the occasional 524, and
    one hiccup should not abort a 37-request run. */
 const get = async (url) => {
@@ -201,6 +215,178 @@ const WHO = {
   '112:1-4': ['Al-Ikhlas', 'Say: He is Allah, One'],
   '113:1-5': ['Whoever seeks refuge', 'Al-Falaq'],
   '114:1-6': ['Whoever seeks refuge', 'An-Nas'],
+};
+
+/**
+ * Where the site starts and stops inside an ayah.
+ *
+ * quran.com/duas does not print whole ayahs. 2:127 begins at "Our Lord,
+ * accept from us"; the narration before it — "And when Abraham was raising
+ * the foundations of the House" — is not on the page. Iyad saw the app print
+ * the whole verse beside the site's cut and asked why, 10 Sep 2026.
+ *
+ * The app's rule was that deciding where a dua begins is an editorial act on
+ * a Qur'an text. It still is — and here the site made it, and published it,
+ * so copying the cut is copying a decision rather than making one. `CUT` is
+ * read off the site's rendered pages: the first and last word each page
+ * shows of a verse, in the API's word numbering. Nine verses are cut
+ * differently on different pages (2:286 is whole on three pages and starts
+ * at "Our Lord" on five); the narrowest cut is taken, because the narrower
+ * one is the dua itself and the wider one is a page that wanted its framing.
+ * 67 of 256 rendered ayahs are cut; the rest are whole.
+ *
+ * `EN` is the same cut in Saheeh International's words, by hand: the phrase
+ * the sliced text starts at and, where the site stops early, the phrase it
+ * ends at. Each is asserted to occur exactly once in the ayah's translation,
+ * so a phrase that drifts fails the build rather than slicing the wrong
+ * place. A cut translation opens or closes with an ellipsis, as the site's
+ * does, so a reader knows the ayah goes on.
+ *
+ * The Arabic is sliced from QuranEnc's own text by word index, after the
+ * mushaf's section marker (۞) is dropped from the split — it is not a word,
+ * and the count of every cut ayah is asserted equal to the API's before any
+ * slice is taken. The marker is dropped from every entry, cut or not: it
+ * marks a hizb, which a dua card is not showing.
+ */
+const CUT = {
+  '2:32': [2, 12],
+  '2:126': [4, 18],
+  '2:127': [8, 14],
+  '2:155': [11, 12],
+  '2:156': [6, 10],
+  '2:201': [4, 14],
+  '2:250': [6, 15],
+  '2:285': [22, 27],
+  '2:286': [13, 49],
+  '3:16': [3, 11],
+  '3:26': [2, 25],
+  '3:38': [6, 15],
+  '3:191': [13, 21],
+  '5:25': [2, 13],
+  '5:83': [17, 21],
+  '6:162': [2, 9],
+  '7:23': [2, 12],
+  '7:43': [12, 23],
+  '7:89': [34, 42],
+  '7:126': [11, 16],
+  '7:151': [2, 11],
+  '7:155': [34, 41],
+  '7:156': [1, 11],
+  '10:85': [2, 10],
+  '11:41': [4, 11],
+  '11:47': [2, 19],
+  '11:88': [28, 35],
+  '12:18': [12, 18],
+  '12:67': [19, 27],
+  '12:83': [7, 18],
+  '12:86': [2, 13],
+  '12:101': [10, 21],
+  '14:35': [4, 13],
+  '17:24': [8, 12],
+  '17:80': [2, 14],
+  '18:10': [7, 16],
+  '18:24': [10, 17],
+  '19:4': [2, 14],
+  '20:25': [2, 5],
+  '20:114': [15, 17],
+  '21:83': [5, 10],
+  '21:87': [15, 23],
+  '21:89': [5, 11],
+  '21:112': [2, 10],
+  '23:28': [9, 15],
+  '23:93': [2, 6],
+  '23:97': [2, 7],
+  '23:118': [2, 7],
+  '25:65': [3, 11],
+  '25:74': [3, 13],
+  '27:15': [7, 15],
+  '27:19': [6, 24],
+  '27:40': [20, 38],
+  '28:16': [2, 7],
+  '28:17': [2, 9],
+  '28:21': [6, 10],
+  '28:22': [6, 11],
+  '28:24': [8, 15],
+  '29:30': [2, 6],
+  '40:7': [14, 27],
+  '43:13': [12, 20],
+  '46:15': [22, 45],
+  '54:10': [3, 5],
+  '59:10': [6, 23],
+  '60:4': [46, 52],
+  '65:3': [6, 21],
+  '66:8': [35, 45],
+  '66:11': [10, 24],
+};
+const EN = {
+  '2:32': ["Exalted are You"],
+  '2:126': ["My Lord, make this a secure city", "and the Last Day"],
+  '2:127': ["Our Lord, accept"],
+  '2:155': ["but give good tidings"],
+  '2:156': ["Indeed we belong to All\u0101h"],
+  '2:201': ["Our Lord, give us"],
+  '2:250': ["Our Lord, pour upon us"],
+  '2:285': ["We hear and we obey"],
+  '2:286': ["Our Lord, do not impose blame"],
+  '3:16': ["Our Lord, indeed we have believed"],
+  '3:26': ["O All\u0101h, Owner of Sovereignty"],
+  '3:38': ["My Lord, grant me from Yourself"],
+  '3:191': ["Our Lord, You did not create this aimlessly"],
+  '5:25': ["My Lord, indeed I do not possess"],
+  '5:83': ["Our Lord, we have believed, so register"],
+  '6:162': ["Indeed, my prayer"],
+  '7:23': ["Our Lord, we have wronged ourselves"],
+  '7:43': ["Praise to All\u0101h, who has guided us to this", "if All\u0101h had not guided us"],
+  '7:89': ["Our Lord, decide between us"],
+  '7:126': ["Our Lord, pour upon us patience"],
+  '7:151': ["My Lord, forgive me and my brother"],
+  '7:155': ["You are our Protector, so forgive us"],
+  '7:156': [null, "we have turned back to You"],
+  '10:85': ["Upon All\u0101h do we rely"],
+  '11:41': ["in the name of All\u0101h"],
+  '11:47': ["My Lord, I seek refuge in You from asking"],
+  '11:88': ["And my success is not but through All\u0101h"],
+  '12:18': ["so patience is most fitting"],
+  '12:67': ["The decision is only for All\u0101h"],
+  '12:83': ["so patience is most fitting"],
+  '12:86': ["I only complain"],
+  '12:101': ["Creator of the heavens and earth"],
+  '14:35': ["My Lord, make this city"],
+  '17:24': ["My Lord, have mercy upon them"],
+  '17:80': ["My Lord, cause me to enter"],
+  '18:10': ["Our Lord, grant us from Yourself mercy"],
+  '18:24': ["Perhaps my Lord will guide me"],
+  '19:4': ["My Lord, indeed my bones"],
+  '20:25': ["My Lord, expand"],
+  '20:114': ["My Lord, increase me in knowledge"],
+  '21:83': ["Indeed, adversity has touched me"],
+  '21:87': ["There is no deity except You"],
+  '21:89': ["My Lord, do not leave me alone"],
+  '21:112': ["My Lord, judge"],
+  '23:28': ["Praise to All\u0101h who has saved us"],
+  '23:93': ["My Lord, if You should show me"],
+  '23:97': ["My Lord, I seek refuge in You from the incitements"],
+  '23:118': ["My Lord, forgive and have mercy"],
+  '25:65': ["Our Lord, avert from us"],
+  '25:74': ["Our Lord, grant us from among our wives"],
+  '27:15': ["Praise [is due] to All\u0101h, who has favored us"],
+  '27:19': ["My Lord, enable me to be grateful"],
+  '27:40': ["This is from the favor of my Lord"],
+  '28:16': ["My Lord, indeed I have wronged myself", "so forgive me"],
+  '28:17': ["My Lord, for the favor"],
+  '28:21': ["My Lord, save me"],
+  '28:22': ["Perhaps my Lord will guide me to the sound way"],
+  '28:24': ["My Lord, indeed I am"],
+  '29:30': ["My Lord, support me"],
+  '40:7': ["Our Lord, You have encompassed"],
+  '43:13': ["Exalted is He who has subjected"],
+  '46:15': ["My Lord, enable me to be grateful"],
+  '54:10': ["Indeed, I am overpowered"],
+  '59:10': ["Our Lord, forgive us and our brothers"],
+  '60:4': ["Our Lord, upon You we have relied"],
+  '65:3': ["And whoever relies upon All\u0101h"],
+  '66:8': ["Our Lord, perfect for us our light"],
+  '66:11': ["My Lord, build for me"],
 };
 
 /*
@@ -413,6 +599,7 @@ for (const r of refs) {
   const [who, note] = WHO[keyOf(r)];
   const arabicParts = [];
   const englishParts = [];
+  let words;
   for (let n = from; n <= to; n += 1) {
     const cached = corpus?.get(`${s}:${n}`);
     const verse = cached
@@ -421,8 +608,45 @@ for (const r of refs) {
     if (!verse?.arabic_text || !verse?.translation) {
       throw new Error(`${keyOf(r)}: ${s}:${n} did not resolve`);
     }
-    arabicParts.push(verse.arabic_text.trim());
-    englishParts.push(verse.translation.replace(/\[\d+\]/g, '').replace(/\s+/g, ' ').trim());
+    /* The section marker is a mushaf's furniture, not a word — see CUT. */
+    const arabicWords = verse.arabic_text.trim().split(/\s+/).filter((w) => w !== '۞');
+    let english = verse.translation.replace(/\[\d+\]/g, '').replace(/\s+/g, ' ').trim();
+    const cut = CUT[`${s}:${n}`];
+    /* Only the ends of the run can be cut: the first ayah's start, the last ayah's end. */
+    const cutStart = cut && n === from ? cut[0] : 1;
+    const cutEnd = cut && n === to ? cut[1] : arabicWords.length;
+    if (cut) {
+      const apiCount = apiWordCount(s, n);
+      if (arabicWords.length !== apiCount) {
+        throw new Error(`${s}:${n}: QuranEnc splits into ${arabicWords.length} words, the API into ${apiCount} — refusing to slice`);
+      }
+      const [startPhrase, endPhrase] = EN[`${s}:${n}`];
+      if (n === from && startPhrase) {
+        const at = english.indexOf(startPhrase);
+        if (at < 0 || english.indexOf(startPhrase, at + 1) >= 0) {
+          throw new Error(`${s}:${n}: "${startPhrase}" is not found exactly once in the translation`);
+        }
+        english = `… ${english.slice(at)}`;
+      }
+      if (n === to && endPhrase) {
+        const at = english.indexOf(endPhrase);
+        if (at < 0 || english.indexOf(endPhrase, at + 1) >= 0) {
+          throw new Error(`${s}:${n}: "${endPhrase}" is not found exactly once in the translation`);
+        }
+        english = `${english.slice(0, at + endPhrase.length)} …`;
+      }
+    }
+    arabicParts.push(arabicWords.slice(cutStart - 1, cutEnd).join(' '));
+    englishParts.push(english);
+    if (n === from && cutStart !== 1) words = [cutStart, 0];
+    if (n === to && (cutEnd !== arabicWords.length || words)) {
+      /* `to` is in the API's numbering, which the word view slices by, so the
+         last ayah's count is asserted against it even when it is not cut. */
+      if (arabicWords.length !== apiWordCount(s, n)) {
+        throw new Error(`${s}:${n}: QuranEnc splits into ${arabicWords.length} words, the API into ${apiWordCount(s, n)} — refusing to span`);
+      }
+      words = [words?.[0] ?? 1, cutEnd];
+    }
   }
   const ref = from === to ? `${s}:${from}` : `${s}:${from}–${to}`;
   entries.push({
@@ -434,6 +658,7 @@ for (const r of refs) {
     from,
     to,
     ref,
+    words,
   });
   console.log(`  ${ref.padStart(10)}  ${who}`);
 }
@@ -444,7 +669,7 @@ const entryLines = entries.map((entry) => `  {
     arabic: ${JSON.stringify(entry.arabic)},
     translation: ${JSON.stringify(entry.translation)},
     note: ${JSON.stringify(`Qur’an ${entry.ref}`)},
-    sources: [quran(${entry.s}, ${entry.from === entry.to ? entry.from : `[${entry.from}, ${entry.to}]`})],
+    sources: [quran(${entry.s}, ${entry.from === entry.to ? entry.from : `[${entry.from}, ${entry.to}]`}${entry.words ? `, { words: [${entry.words[0]}, ${entry.words[1]}] }` : ''})],
   },`);
 
 const pageLines = SITE.flatMap((section) =>

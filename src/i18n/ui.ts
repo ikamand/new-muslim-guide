@@ -407,11 +407,6 @@ export const EN = {
   'windows.close': 'Close',
   'windows.intro':
     'Each prayer has a span, not a moment. Anywhere inside its window counts.',
-  'windows.fajr': 'until sunrise',
-  'windows.dhuhr': 'until ʿAsr begins',
-  'windows.asr': 'until Maghrib',
-  'windows.maghrib': 'until ʿIsha begins',
-  'windows.isha': 'until the middle of the night',
   'windows.note':
     'Praying early in the window is better. If one closes before you have prayed, see “I missed a prayer” under help.',
 
@@ -456,28 +451,31 @@ export const EN = {
   'awqat.day.nextFajr': 'Next morning · Fajr',
   'awqat.day.left': '{left} left',
   'awqat.day.nextIn': 'next · {countdown}',
-  'awqat.day.morning': 'Morning adhkar',
-  'awqat.day.evening': 'Evening adhkar',
   'awqat.day.fromHere': 'From here',
-  'awqat.day.month': 'This month',
-  'awqat.day.qibla': 'Qibla',
-  'awqat.day.qibla.meta': '{point} from here',
+  'awqat.day.month': 'Monthly prayer calendar',
   'awqat.day.reminders': 'Reminders',
+  /* A count, never the names: five names wrapped, and the switches are one tap away. */
   'awqat.day.reminders.off': 'Off',
-  'awqat.day.reminders.on': '{prayers}, {lead}',
-  'awqat.day.method': 'How the times are worked out',
-  'awqat.day.learn': 'Learn',
+  'awqat.day.reminders.some': '{n} of 5 · {lead}',
+  'awqat.day.reminders.all': 'All five · {lead}',
+  'awqat.day.lead.atTime': 'at the time',
+  'awqat.day.lead.before': '{n} minutes before',
+  'awqat.day.method': 'Calculation method',
   /*
-    ⚠️ REVIEW REQUIRED — the three pauses are rulings. The wording says
-    "extra prayers" on purpose: the five, and a missed one, are never held
-    off in the position the app teaches. Numbers live in lib/prayer-times.ts.
+    ⚠️ REVIEW REQUIRED — the three bands are rulings. "Forbidden" is Iyad's
+    call (11 Sep 2026): the texts forbid, and a softer word would misstate
+    them. "Voluntary" stays, because the five prayers and a missed one are
+    never forbidden in the position the app teaches, and a convert who has
+    overslept must not read "praying is forbidden" and not pray. The two
+    spans tied to the reader's own prayer are stated as such: the app
+    cannot know when somebody prayed. Numbers live in lib/prayer-times.ts.
   */
-  'awqat.pause.sunrise': 'No extra prayers until the sun is up',
-  'awqat.pause.noon': 'No extra prayers while the sun is at its height',
-  'awqat.pause.sunset': 'No extra prayers as the sun goes down',
-  'awqat.pause.about': 'about {n} min',
+  'awqat.pause.title': 'Voluntary prayer is forbidden',
+  'awqat.pause.sunrise': 'from your Fajr until {time}',
+  'awqat.pause.noon': '{from} – {to}, as the sun stands at its height',
+  'awqat.pause.sunset': 'from your ʿAsr until Maghrib, {time}',
   'awqat.pause.note':
-    'The five prayers, and a missed one, are never held off. Only extra prayers pause at these three times.',
+    'The five prayers, and a missed one, are never forbidden. Only voluntary prayer is, at these three times.',
   'awqat.projected':
     'The Hijri column follows the Umm al-Qura projection. The sacred dates, Ramadan, the Eids, ʿAshuraʾ and ʿArafah, are settled by the moon being sighted, so they are not printed here. Your mosque will know them in the week beforehand.',
 
@@ -820,7 +818,14 @@ export const EN = {
     'A match made today can drift with the seasons if the mosque follows something unusual. If the app and the board disagree next month, match again. It takes a minute.',
   'mosque.active': 'Matched to your mosque',
   'mosque.clear': 'Back to this phone’s own times',
-  'settings.reminders': 'Prayer reminders',
+  'settings.reminders': 'Reminders',
+  'settings.reminders.open': 'Prayer times, Friday, Ramadan and adhkar',
+  'reminders.title': 'Reminders',
+  /* The page's groups, in the order the week wakes you. */
+  'reminders.prayers': 'Prayer times',
+  'reminders.friday': 'Friday',
+  'reminders.ramadan': 'Ramadan',
+  'reminders.adhkar': 'Adhkar',
   'settings.reminders.help':
     'A quiet notification before each prayer. Nothing is sent anywhere. Your phone works the times out and sets its own alarms.',
   'settings.reminders.lead': 'How far ahead',
@@ -832,9 +837,9 @@ export const EN = {
     The windows. Each is an offer at a moment opening — none of them can
     express an absence, because none of them knows one.
   */
-  'settings.suhoor': 'During Ramadan: wake me before Fajr for suhoor',
-  'settings.adhkarNote': 'Morning adhkār: a note when the window opens',
-  'settings.jumuahNote': 'Jumuʿah: a note on Thursday evening',
+  'reminders.suhoor': 'Wake me before Fajr for suhoor',
+  'reminders.adhkarNote': 'A note when the morning window opens',
+  'reminders.jumuahNote': 'A note on Thursday evening',
   'reminder.now': 'It is time to pray.',
   'reminder.soon': 'In {n} minutes.',
   'settings.duringPrayer': 'During prayer',

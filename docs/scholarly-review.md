@@ -805,9 +805,13 @@ nothing here ships a public release unreviewed.**
      with a cause goes ahead, and a missed prayer is made up when remembered,
      consistent with the Missing a prayer page. The Hanafi position is the
      differs note. Is the attribution to each school stated correctly?
-  3. **The wording.** "Held off" and "extra prayers" throughout, never
-     "forbidden". Is "no extra prayers" on a band an acceptable rendering of
-     nahy about nafl, or too soft?
+  3. **The wording.** "Voluntary prayer is forbidden", with the span printed
+     ("from your Fajr until 7:03 AM", "1:02 – 1:07 PM", "from your ʿAsr
+     until Maghrib"). "Forbidden" is Iyad's call (11 Sep 2026), reversing
+     the first draft's "held off"; "voluntary" is kept so a convert who has
+     overslept never reads "praying is forbidden". Is "voluntary" the right
+     English for nafl here, and are the two "from your …" spans stated
+     acceptably given the app cannot know when the reader prayed?
   4. **The reason** as printed under "Why these times?": the horns of a
      devil and those who worship the sun, from Bukhari 3273 with HadeethEnc's
      explanation. Is a beginner's page the place for it?

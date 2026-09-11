@@ -9,10 +9,7 @@ import { ThemedText } from '@/components/themed-text';
 import { Recitations } from '@/content/recitations';
 
 import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
-import { useReminders } from '@/hooks/use-reminders';
 import { useSettings, type Audience } from '@/hooks/use-settings';
-import { PRAYER_IDS, PRAYER_LABEL } from '@/lib/prayer-times';
-import { LEAD_CHOICES } from '@/lib/reminders';
 import { deleteVoice, savedVoices, type SavedVoice } from '@/content/quran/offline';
 import { deleteReciteModels, reciteModelBytes } from '@/lib/recite-session';
 import { RECITERS } from '@/content/quran/recitation';
@@ -172,140 +169,6 @@ function AudienceGroup() {
           )}
         </Pressable>
       ))}
-    </View>
-  );
-}
-
-/**
- * Prayer reminders.
- *
- * Every prayer is off until someone turns it on, and the permission prompt
- * comes at that moment rather than on launch — a prompt before anyone has
- * asked for anything is how an app gets refused once and permanently.
- *
- * The lead time only appears once at least one prayer is on. It is a setting
- * about a thing that is not happening yet otherwise.
- */
-function RemindersGroup() {
-  const theme = useTheme();
-  const { t } = useLocale();
-  const { reminders, toggle, toggleFlag, flags, setLead, granted, anyOn } = useReminders();
-
-  const leadLabel = (minutes: number) =>
-    minutes === 0
-      ? t('settings.reminders.atTime')
-      : t('settings.reminders.minutesBefore').replace('{n}', String(minutes));
-
-  return (
-    <View style={styles.section}>
-      <ThemedText type="smallBold" themeColor="textSecondary" style={styles.sectionTitle}>
-        {t('settings.reminders')}
-      </ThemedText>
-      <ThemedText type="small" themeColor="textSecondary">
-        {t('settings.reminders.help')}
-      </ThemedText>
-
-      {granted === false && (
-        <View style={[styles.notice, { borderLeftColor: theme.accent }]}>
-          <ThemedText type="small" themeColor="textSecondary">
-            {t('settings.reminders.denied')}
-          </ThemedText>
-        </View>
-      )}
-
-      <View
-        style={[styles.group, { borderColor: theme.goldSoft }]}>
-        {PRAYER_IDS.map((id, index) => (
-          <View
-            key={id}
-            style={[
-              styles.row,
-              index < PRAYER_IDS.length - 1 && {
-                borderBottomWidth: StyleSheet.hairlineWidth,
-                borderBottomColor: theme.border,
-              },
-            ]}>
-            <ThemedText type="default">{PRAYER_LABEL[id]}</ThemedText>
-            <Switch
-              value={reminders.prayers[id]}
-              onValueChange={() => void toggle(id)}
-              trackColor={{ false: theme.backgroundSelected, true: theme.accent }}
-              thumbColor={theme.background}
-            />
-          </View>
-        ))}
-      </View>
-
-      {anyOn && (
-        <>
-          <ThemedText type="smallBold" themeColor="textSecondary" style={styles.sectionTitle}>
-            {t('settings.reminders.lead')}
-          </ThemedText>
-          <View
-            style={[
-              styles.group,
-              { borderColor: theme.goldSoft },
-            ]}>
-            {LEAD_CHOICES.map((minutes, index) => (
-              <Pressable
-                key={minutes}
-                onPress={() => setLead(minutes)}
-                accessibilityRole="radio"
-                accessibilityState={{ selected: reminders.leadMinutes === minutes }}
-                style={[
-                  styles.row,
-                  index < LEAD_CHOICES.length - 1 && {
-                    borderBottomWidth: StyleSheet.hairlineWidth,
-                    borderBottomColor: theme.border,
-                  },
-                ]}>
-                <ThemedText type="default">{leadLabel(minutes)}</ThemedText>
-                {reminders.leadMinutes === minutes && (
-                  <ThemedText type="smallBold" themeColor="accent">
-                    ✓
-                  </ThemedText>
-                )}
-              </Pressable>
-            ))}
-          </View>
-        </>
-      )}
-
-      {/*
-        The windows — the suhoor wake-up (docs/ramadan-mode.md R3, dormant
-        outside the month but always in this same place, so a changed mind
-        can always find it) and the two notes from build-order.md. Offers at
-        a moment opening; none of them can notice an absence.
-      */}
-      <View
-        style={[styles.group, { borderColor: theme.goldSoft }]}>
-        {(
-          [
-            ['suhoorWakeUp', 'settings.suhoor'],
-            ['adhkarNote', 'settings.adhkarNote'],
-            ['jumuahNote', 'settings.jumuahNote'],
-          ] as const
-        ).map(([flag, label], index) => (
-          <View
-            key={flag}
-            style={[
-              styles.row,
-              index < 2 && {
-                borderBottomWidth: StyleSheet.hairlineWidth,
-                borderBottomColor: theme.border,
-              },
-            ]}>
-            <ThemedText type="default" style={styles.flagLabel}>
-              {t(label)}
-            </ThemedText>
-            <Switch
-              value={flags[flag]}
-              onValueChange={() => void toggleFlag(flag)}
-              trackColor={{ true: theme.accent }}
-            />
-          </View>
-        ))}
-      </View>
     </View>
   );
 }
@@ -480,6 +343,37 @@ function PrayerTimesGroup() {
   );
 }
 
+/**
+ * The reminders, as a door.
+ *
+ * The five switches, the lead time and the three notes (Friday, Ramadan,
+ * adhkar) lived here as a group and made this screen long again; Iyad's
+ * call, 11 Sep 2026: they move to `/reminders`, reached from here and from
+ * the day page's Reminders door. Same shape as the prayer-times door above.
+ */
+function RemindersGroup() {
+  const theme = useTheme();
+  const { t } = useLocale();
+
+  return (
+    <View style={styles.section}>
+      <ThemedText type="smallBold" themeColor="textSecondary" style={styles.sectionTitle}>
+        {t('settings.reminders')}
+      </ThemedText>
+      <PressableLink
+        href="/reminders"
+        accessibilityLabel={t('settings.reminders')}
+        style={[styles.group, styles.row, { borderColor: theme.goldSoft }]}
+        pressedStyle={{ opacity: 0.6 }}>
+        <ThemedText type="default">{t('settings.reminders.open')}</ThemedText>
+        <ThemedText type="smallBold" themeColor="gold">
+          ›
+        </ThemedText>
+      </PressableLink>
+    </View>
+  );
+}
+
 export default function SettingsScreen() {
   const theme = useTheme();
   const { t } = useLocale();
@@ -581,7 +475,6 @@ const styles = StyleSheet.create({
     paddingVertical: Spacing.three,
     paddingHorizontal: Spacing.three,
   },
-  flagLabel: { flex: 1, paddingRight: Spacing.two },
   storageText: {
     flex: 1,
     gap: 2,

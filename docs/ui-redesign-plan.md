@@ -4108,3 +4108,47 @@ Verified: `tsc`, `expo lint` (the standing four, none in touched files),
 `style:check`, `content:audit`, `evidence`, `i18n:manifest`,
 `expo export --platform web`, screenshots of every changed screen in both
 themes. Ships by OTA.
+
+---
+
+## 11 Sep 2026 — The day page, Iyad's pass ✅ ⚠️ review-gated
+
+Iyad's notes from the phone, all built, with two refinements of his and
+one push-back accepted.
+
+- **One line per prayer.** The captions ("until sunrise") went: the span
+  already ends at 6:48 and the row beneath says 6:48. The two moment rows
+  stay, because "Fajr ends" and "ʿIsha ends" are the facts a convert does
+  not know. The tint now covers the whole row, spine included.
+- **The adhkar brackets went.** Not tappable, read as a distraction; the
+  Today tab offers the live sitting and the Dua tab holds both. The margin
+  lane went with them.
+- **The arch's grammar on the line.** A passed mark sinks to the hairline
+  gold, the lit one wears the arch's breathing ring (same values, same
+  reduce-motion rule), the ones to come stay gold; the spine is gold as far
+  as the day has come and hairline after, segment by segment.
+- **"Forbidden", with the span.** Iyad: the texts forbid, and a religion is
+  not sugar-coated. The push-back he accepted: "voluntary" stays in every
+  sentence, because the five and a missed one are never forbidden and a
+  convert who has overslept must not read "praying is forbidden" and not
+  pray. Bands read "Voluntary prayer is forbidden" over "from your Fajr
+  until 7:03 AM", "1:02 – 1:07 PM, as the sun stands at its height", "from
+  your ʿAsr until Maghrib, 7:23 PM"; a band lights only for its sun-bound
+  part. The lesson's title and wording follow; its id does not change.
+  §1.12 of the review queue records the reversal.
+- **Doors.** "Monthly prayer calendar"; Reminders reads a count ("3 of 5 ·
+  10 minutes before", "All five · at the time", "Off"), never the names;
+  "Calculation method · ISNA" with "worked out on this phone" left to the
+  calculation page; Every prayer wears the five-columns glyph and the same
+  anatomy as the doors above it. The Qibla door became the compass rose in
+  the header beside the back arrow, as it sits in the card's spandrel.
+- **A reminders page.** `app/reminders.tsx`: the five switches with the lead
+  time, then Friday, Ramadan and Adhkar, in the order the week wakes you.
+  Moved from Settings, which keeps one door to it, as it keeps one to the
+  calculation method. Nothing changes about permissions or what leaves the
+  device; the prompt still arrives at the first switch.
+
+Verified: `tsc`, `expo lint` (the standing four), `style:check`,
+`content:audit`, `i18n:manifest`; screenshots at 10:30, 17:30 and 22:00 in
+both themes, the reminders page, Settings, the lesson. Not seen on a device.
+Ships by OTA.

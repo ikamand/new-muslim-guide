@@ -31,15 +31,18 @@ import type { Reference } from '../types';
  *
  * ## Words
  *
- * "Held off" and "extra prayers" throughout, never "forbidden times": the
- * ruling is about voluntary prayer, and a red word on a beginner's screen
- * with no sentence under it is the register this app refuses. The day page
- * draws the three sun-bound times as quiet bands and links here.
+ * "Forbidden", not "held off": Iyad's call, 11 Sep 2026, reversing the
+ * first draft's softer word. The texts forbid, and a religion is not
+ * sugar-coated. "Voluntary" stays in every sentence, because the five
+ * prayers and a missed one are never forbidden in the position the app
+ * teaches, and a convert who has overslept must not read "praying is
+ * forbidden" and not pray. The day page draws the three sun-bound times
+ * as bands and links here. The id keeps its first name.
  */
 export const HELD_OFF_TIMES: Reference = {
   id: 'held-off-times',
   surface: 'pray',
-  title: 'When extra prayers are held off',
+  title: 'When voluntary prayer is forbidden',
   subtitle: 'Three times of day, and what they never affect',
   meta: {
     category: 'salah',
@@ -54,17 +57,17 @@ export const HELD_OFF_TIMES: Reference = {
     ],
   },
   quickFacts: [
-    { label: 'Which prayers', value: 'Extra ones only', emphasis: true },
-    { label: 'The five', value: 'Never held off' },
+    { label: 'Which prayers', value: 'Voluntary ones only', emphasis: true },
+    { label: 'The five', value: 'Never forbidden' },
     { label: 'A missed prayer', value: 'Pray it when you remember' },
   ],
   sections: [
     {
       id: 'three',
-      heading: 'When are extra prayers held off?',
+      heading: 'When is voluntary prayer forbidden?',
       promote: 'hero',
       body:
-        'Three times a day, all tied to the sun. The Prophet ﷺ named them together, and the prayer-times page in this app draws them on the day.',
+        'Three times a day, all tied to the sun. The Prophet ﷺ named them together, and the prayer-times page in this app marks them on the day.',
       bullets: [
         '**As the sun rises**, from the moment it appears until it is fully up. About a quarter of an hour.',
         '**When the sun is at its height**, the few minutes before Dhuhr enters.',
@@ -74,7 +77,7 @@ export const HELD_OFF_TIMES: Reference = {
       notes: [
         note(
           'practical',
-          'These are about extra prayers, the ones you choose to add. Nothing here stops you praying one of the five.',
+          'These are about voluntary prayers, the ones you choose to add. Nothing here stops you praying one of the five.',
         ),
       ],
     },
@@ -87,7 +90,7 @@ export const HELD_OFF_TIMES: Reference = {
       notes: [
         note(
           'differs',
-          'Schools differ on whether a missed prayer may be made up at the three sun-bound times themselves, and on which extra prayers with a reason may go ahead.',
+          'Schools differ on whether a missed prayer may be made up at the three sun-bound times themselves, and on which voluntary prayers with a reason may go ahead.',
           {
             sources: [
               scholarly({
@@ -112,12 +115,12 @@ export const HELD_OFF_TIMES: Reference = {
               {
                 school: 'Hanafi',
                 position:
-                  'At the three sun-bound times no prayer is offered, not even a missed one; the day’s own ʿAsr is the exception as the sun sets. After Fajr and after ʿAsr, extra prayers are held off but a missed prayer may be made up.',
+                  'At the three sun-bound times no prayer is offered, not even a missed one; the day’s own ʿAsr is the exception as the sun sets. After Fajr and after ʿAsr, voluntary prayer is forbidden but a missed prayer may be made up.',
               },
               {
                 school: 'Shafi`i',
                 position:
-                  'Any prayer with a reason goes ahead at all of these times: a missed prayer, the funeral prayer, the two rakʿahs after tawaf, greeting the mosque. Only extra prayers with no particular reason are held off. Hanbali scholars hold the same in one of two views, and it is the view of Ibn Taymiyyah, Ibn Bāz and Ibn ʿUthaymīn.',
+                  'Any prayer with a reason goes ahead at all of these times: a missed prayer, the funeral prayer, the two rakʿahs after tawaf, greeting the mosque. Only voluntary prayer with no particular reason is forbidden. Hanbali scholars hold the same in one of two views, and it is the view of Ibn Taymiyyah, Ibn Bāz and Ibn ʿUthaymīn.',
               },
             ],
           },
@@ -128,7 +131,7 @@ export const HELD_OFF_TIMES: Reference = {
       id: 'after',
       heading: 'Why is there no sunnah after Fajr and ʿAsr?',
       body:
-        'Because of two more spans, tied to your own prayer rather than to the sun. Once you have prayed Fajr, extra prayers are held off until the sun is up; once you have prayed ʿAsr, until it has set. That is why the Every prayer page shows no sunnah after those two, and why the early morning and the late afternoon are the quiet stretches of the day.',
+        'Because of two more spans, tied to your own prayer rather than to the sun. Once you have prayed Fajr, voluntary prayer is forbidden until the sun is up; once you have prayed ʿAsr, until it has set. That is why the Every prayer page shows no sunnah after those two, and why the early morning and the late afternoon are the quiet stretches of the day.',
       sources: [hadith('bukhari', '586')],
     },
     {

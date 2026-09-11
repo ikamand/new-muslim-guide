@@ -268,7 +268,7 @@ it covers, or leave the flag with a dated note of what was changed. A page
 whose header still says "unreviewed for substance" is a page nobody has
 read, and the flag is the only thing that says so.
 
-## When extra prayers are held off — `learn/held-off-times.ts`
+## When voluntary prayer is forbidden — `learn/held-off-times.ts`
 
 Added 10 Sep 2026, after the prayer-times audit. Book 1 · When it goes
 wrong · after "Missing a prayer". Every section is a ruling; the full item

@@ -1,11 +1,22 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Stack, useLocalSearchParams, type Href } from 'expo-router';
-import type { ReactNode } from 'react';
+import { useEffect, type ReactNode } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
+import Animated, {
+  Easing,
+  cancelAnimation,
+  useAnimatedStyle,
+  useReducedMotion,
+  useSharedValue,
+  withRepeat,
+  withSequence,
+  withTiming,
+  type SharedValue,
+} from 'react-native-reanimated';
 import Svg, { Defs, Line, Pattern, Rect } from 'react-native-svg';
 
 import { CompassRose, Glyph, JadwalMark } from '@/components/illustrations';
-import { DoubleRule, JadwalRow, Shelf } from '@/components/jadwal';
+import { DoubleRule, Shelf } from '@/components/jadwal';
 import { LocationAsk } from '@/components/location-ask';
 import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
@@ -17,7 +28,6 @@ import { useSettings } from '@/hooks/use-settings';
 import { useTheme } from '@/hooks/use-theme';
 import type { UIKey } from '@/i18n/ui';
 import { buildMonth, hijriSpan, type MonthDay } from '@/lib/awqat-month';
-import { compassPoint } from '@/lib/compass';
 import { hijriDate } from '@/lib/hijri';
 import { placeShort } from '@/lib/places';
 import {
@@ -26,11 +36,9 @@ import {
   formatDuration,
   formatTime,
   pausesOf,
-  qiblaBearing,
   windowEnd,
   METHODS,
   PRAYER_IDS,
-  PRAYER_LABEL,
   type DayTimes,
   type Pause,
   type PrayerId,
@@ -53,27 +61,34 @@ import {
  * windows — that Fajr expires at sunrise, that Dhuhr lasts until ʿAsr
  * enters. Boards and apps print start times only; the ends are what born
  * Muslims absorb and nobody writes down. Sunrise and the middle of the night
- * as moments, since they close a window each. The open window lit, with its
- * time left. The two adhkar sittings as brackets in the margin, on the same
- * spans `lib/adhkar-window.ts` offers them. Tomorrow's Fajr at the foot,
+ * as moments, since they close a window each. Tomorrow's Fajr at the foot,
  * because that is the number people check at night.
  *
- * ## The three pauses
+ * The line wears the arch's own grammar (Iyad, 11 Sep 2026): a passed mark
+ * sinks to the hairline gold, the lit one wears the ring that breathes on
+ * the arch, the ones to come stay gold; and the spine is the thread the app
+ * uses everywhere, gold as far as the day has come and hairline after. What
+ * went that day: the caption under each prayer ("until sunrise", said again
+ * by the span and by the row beneath), and the two adhkar brackets in the
+ * margin, which could not be tapped and read as a distraction.
  *
- * ⚠️ REVIEW REQUIRED. Three hatched bands, one sentence, and never a red
- * word: the times when extra prayer is held off. The ruling, its evidence
- * and its numbers live in `lib/prayer-times.ts` (`pausesOf`) and in the
- * lesson `learn/held-off-times.ts`; this screen only draws them. The bands
- * say "about 15 min" and never print a clock time for an edge, so the
- * reviewer's number moves nothing else. The two spans tied to the reader's
- * own prayer are deliberately not drawn: the app cannot know when somebody
- * prayed and does not ask.
+ * ## The three bands
+ *
+ * ⚠️ REVIEW REQUIRED. The times when voluntary prayer is forbidden, as
+ * hatched bands in the line with their spans printed like the prayers'.
+ * "Forbidden" is Iyad's word (11 Sep); "voluntary" stays because the five
+ * and a missed one never are. The ruling, its evidence and its numbers live
+ * in `lib/prayer-times.ts` (`pausesOf`) and in `learn/held-off-times.ts`;
+ * this screen only draws them. The two spans that begin at the reader's own
+ * Fajr and ʿAsr are stated as such — the app cannot know when somebody
+ * prayed and does not ask — and a band lights only for its sun-bound part.
  *
  * ## Any date
  *
  * `?date=YYYY-MM-DD` opens another day, which is how every row of the
- * monthly jadwal became a door. A day that is not today has no lit row and
- * no countdowns: those are facts about now, and there is no now to speak of.
+ * monthly jadwal became a door. A day that is not today has no lit row, no
+ * countdowns and no gold on the thread: those are facts about now, and
+ * there is no now to speak of.
  */
 
 /** "2026-09-24" → local midnight, or null for anything that is not a date. */
@@ -102,46 +117,62 @@ function daysBetween(from: Date, to: Date): number {
 
 /*
   ── The line's anatomy ────────────────────────────────────────────────────
-  Three columns: the margin lane (where a sitting's bracket hangs), the
-  spine (a hairline with the day's marks on paper discs), and the hours.
+  Two columns: the spine (the thread, with the day's marks on paper discs)
+  and the hours. The marks sit at MARK_Y from the row's top; the thread
+  above a mark and below it can be gold or hairline independently, so the
+  gold stops exactly at the last mark the day has reached.
 */
-const LANE = 22;
 const SPINE = 34;
+const MARK_Y = 28;
 const DISC = 26;
 const DISC_LIT = 30;
-/** The rotated label's length along the lane. */
-const BRACKET_LABEL = 176;
 
-/** One row of the line: something in the spine, something in the hours. */
+type Edge = {
+  /** The thread from the row's top down to its mark has been travelled. */
+  topGold: boolean;
+  /** The thread from the mark down to the next row has been travelled. */
+  bottomGold: boolean;
+  /** The foot: nothing hangs below its mark. */
+  last: boolean;
+};
+
+/** One row of the line: something on the spine, something in the hours. */
 function Row({
   mark,
+  edge,
   children,
   tinted,
   muted,
   thin,
-  last,
 }: {
   mark: ReactNode;
+  edge: Edge;
   children: ReactNode;
   tinted?: boolean;
   muted?: boolean;
-  /** A moment rather than a span: sunrise, the middle of the night. */
+  /** A moment or a band rather than a span. */
   thin?: boolean;
-  /** The foot: the spine stops at its mark. */
-  last?: boolean;
 }) {
   const theme = useTheme();
   return (
-    <View style={styles.row}>
-      <View style={styles.lane} />
+    <View style={[styles.row, tinted && { backgroundColor: theme.backgroundSelected }]}>
       <View style={styles.spine}>
         <View
           style={[
-            styles.spineLine,
-            { backgroundColor: theme.goldSoft },
-            last && styles.spineLineLast,
+            styles.thread,
+            styles.threadTop,
+            { backgroundColor: edge.topGold ? theme.gold : theme.goldSoft },
           ]}
         />
+        {edge.last ? null : (
+          <View
+            style={[
+              styles.thread,
+              styles.threadBottom,
+              { backgroundColor: edge.bottomGold ? theme.gold : theme.goldSoft },
+            ]}
+          />
+        )}
         {mark}
       </View>
       <View
@@ -149,7 +180,6 @@ function Row({
           styles.hours,
           thin ? styles.hoursThin : null,
           { borderBottomColor: theme.goldSoft },
-          tinted && { backgroundColor: theme.backgroundSelected },
           muted && styles.muted,
         ]}>
         {children}
@@ -158,10 +188,25 @@ function Row({
   );
 }
 
-/** A prayer's mark on the spine: its day-glyph on a paper disc, ringed when lit. */
-function Disc({ id, lit, muted }: { id: PrayerId; lit: boolean; muted: boolean }) {
+/**
+ * A prayer's mark: its day-glyph on a paper disc, in the arch's three
+ * states — sunk to the hairline once passed, ringed and breathing while
+ * lit, gold while still to come.
+ */
+function Disc({
+  id,
+  state,
+  breath,
+}: {
+  id: PrayerId;
+  state: 'passed' | 'lit' | 'coming';
+  /** The arch's breathing value; only the lit disc reads it. */
+  breath: SharedValue<number>;
+}) {
   const theme = useTheme();
-  const size = lit ? DISC_LIT : DISC;
+  const ring = useAnimatedStyle(() => ({ opacity: breath.value }));
+  const size = state === 'lit' ? DISC_LIT : DISC;
+  const colour = state === 'passed' ? theme.goldSoft : theme.gold;
   return (
     <View
       style={[
@@ -171,20 +216,22 @@ function Disc({ id, lit, muted }: { id: PrayerId; lit: boolean; muted: boolean }
           height: size,
           borderRadius: size / 2,
           left: (SPINE - size) / 2,
-          top: lit ? 14 : 16,
+          top: MARK_Y - size / 2,
           backgroundColor: theme.background,
-          borderColor: theme.gold,
-          borderWidth: lit ? 1.2 : 0,
         },
-        muted && styles.muted,
       ]}>
-      <Glyph name={id} size={18} color={lit ? theme.gold : theme.textSecondary} />
+      {state === 'lit' ? (
+        <Animated.View
+          style={[styles.ring, { borderRadius: size / 2, borderColor: theme.gold }, ring]}
+        />
+      ) : null}
+      <Glyph name={id} size={18} color={colour} />
     </View>
   );
 }
 
 /** A moment's mark: a small ring on the spine, or a filled dot at the foot. */
-function Tick({ filled }: { filled?: boolean }) {
+function Tick({ passed, filled }: { passed: boolean; filled?: boolean }) {
   const theme = useTheme();
   return (
     <View
@@ -192,8 +239,9 @@ function Tick({ filled }: { filled?: boolean }) {
         styles.tick,
         {
           left: (SPINE - 7) / 2,
+          top: MARK_Y - 3.5,
           backgroundColor: filled ? theme.goldSoft : theme.background,
-          borderColor: theme.gold,
+          borderColor: passed ? theme.goldSoft : theme.gold,
           borderWidth: filled ? 0 : 1,
         },
       ]}
@@ -202,32 +250,7 @@ function Tick({ filled }: { filled?: boolean }) {
 }
 
 /**
- * A sitting's bracket, hung in the margin beside the rows it spans.
- *
- * Absolute inside the group it belongs to, so it grows and shrinks with the
- * rows; the label is rotated to read up the page, on a paper patch so the
- * bracket's line passes behind it.
- */
-function Bracket({ label, live }: { label: string; live: boolean }) {
-  const theme = useTheme();
-  const colour = live ? theme.gold : theme.goldSoft;
-  return (
-    <View style={styles.bracket} pointerEvents="none">
-      <View style={[styles.bracketLine, { borderColor: colour }]} />
-      <View style={styles.bracketLabelSeat} pointerEvents="none">
-        <ThemedText
-          type="caption"
-          style={[styles.bracketLabel, { color: colour, backgroundColor: theme.background }]}
-          numberOfLines={1}>
-          {label}
-        </ThemedText>
-      </View>
-    </View>
-  );
-}
-
-/**
- * The hatch behind a pause: diagonal hairlines in the rule's own colour, so
+ * The hatch behind a band: diagonal hairlines in the rule's own colour, so
  * the band reads as "not a window" without a fill or a word in red.
  */
 function Hatch({ id }: { id: string }) {
@@ -280,17 +303,32 @@ function Door({
   );
 }
 
-/** "Fajr, ʿAsr and ʿIsha" — the labels of what is on, joined as a sentence would. */
-function joinLabels(labels: string[]): string {
-  if (labels.length <= 1) return labels.join('');
-  return `${labels.slice(0, -1).join(', ')} and ${labels[labels.length - 1]}`;
+/**
+ * The qibla, in the header beside the back arrow — the same compass rose
+ * the Today card wears in its spandrel, so the two doors to one screen look
+ * like one door (Iyad, 11 Sep 2026).
+ */
+function HeaderQibla() {
+  const theme = useTheme();
+  const { t } = useLocale();
+  return (
+    <PressableLink
+      href="/qibla"
+      accessibilityLabel={t('qibla.title')}
+      style={styles.headerQibla}
+      pressedStyle={{ opacity: 0.5 }}>
+      <CompassRose color={theme.gold} />
+    </PressableLink>
+  );
 }
 
-/** The first projected white day on or after `from`, this month or next. */
+/** The first projected white day on or after `from`, in a month's days. */
 function nextWhiteDay(days: MonthDay[], from: Date): MonthDay | undefined {
   const start = new Date(from.getFullYear(), from.getMonth(), from.getDate());
   return days.find((day) => day.isWhiteDay && day.date.getTime() >= start.getTime());
 }
+
+type Entry = { key: string; at: Date; render: (edge: Edge) => ReactNode };
 
 export default function AwqatDayScreen() {
   const theme = useTheme();
@@ -299,6 +337,24 @@ export default function AwqatDayScreen() {
   const { profile, next, timezoneSuspect } = usePrayerTimes();
   const { reminders, awqatMosque } = useSettings();
   const { date: param } = useLocalSearchParams<{ date?: string }>();
+  const reducedMotion = useReducedMotion();
+
+  /*
+    The lit mark breathes, exactly as it does on the arch: one value, ~5s a
+    cycle, cancelled on unmount and never started under reduce-motion.
+  */
+  const breath = useSharedValue(1);
+  useEffect(() => {
+    if (reducedMotion) return;
+    breath.value = withRepeat(
+      withSequence(
+        withTiming(0.55, { duration: 2600, easing: Easing.inOut(Easing.sin) }),
+        withTiming(1, { duration: 2600, easing: Easing.inOut(Easing.sin) }),
+      ),
+      -1,
+    );
+    return () => cancelAnimation(breath);
+  }, [breath, reducedMotion]);
 
   if (!coords || !profile || !next) {
     return (
@@ -321,7 +377,7 @@ export default function AwqatDayScreen() {
     new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1),
     profile,
   );
-  const pauses = pausesOf(day);
+  const [sunrisePause, noonPause, sunsetPause] = pausesOf(day);
   const at = (id: PrayerId) => day.prayers.find((prayer) => prayer.id === id)!;
 
   /* Live states exist only today; another day has no now. */
@@ -332,16 +388,8 @@ export default function AwqatDayScreen() {
     : null;
   const litId = isToday ? (openId ?? (next.isTomorrow ? null : next.id)) : null;
   const closed = (id: PrayerId) => isToday && windowEnd(day, id).getTime() <= now.getTime();
+  const reached = (time: Date) => isToday && time.getTime() <= now.getTime();
   const pauseLive = (pause: Pause) => isToday && now >= pause.from && now < pause.to;
-
-  /*
-    The sittings, on the spans the Dua tab offers them: morning Fajr→Dhuhr,
-    evening ʿAsr→ʿIsha. The same union `lib/adhkar-window.ts` explains; drawn
-    here from the day's own times so the bracket can never span different
-    rows than the tab's window.
-  */
-  const morningLive = isToday && now >= at('fajr').time && now < at('dhuhr').time;
-  const eveningLive = isToday && now >= at('asr').time && now < at('isha').time;
 
   const hijri = hijriDate(date);
   const dayLine = new Intl.DateTimeFormat(locale, { day: 'numeric', month: 'long' }).format(date);
@@ -354,7 +402,7 @@ export default function AwqatDayScreen() {
     .filter(Boolean)
     .join(' · ');
 
-  /* The month door's line: the Hijri span, and when the white days fall. */
+  /* The calendar door's line: the Hijri span, and when the white days fall. */
   const thisMonth = buildMonth(coords, date.getFullYear(), date.getMonth(), profile, now);
   const span = hijriSpan(thisMonth.days);
   const monthName = (month: number) => t(`hijri.month.${month}` as UIKey);
@@ -380,109 +428,155 @@ export default function AwqatDayScreen() {
           : t('awqat.whiteDays.when.days').replace('{n}', String(whiteIn));
   const monthMeta = [spanLine, whiteLine].filter(Boolean).join(' · ');
 
-  const onPrayers = PRAYER_IDS.filter((id) => reminders.prayers[id]).map((id) => PRAYER_LABEL[id]);
+  /* A count, never the names: the switches are one tap away. */
+  const onCount = PRAYER_IDS.filter((id) => reminders.prayers[id]).length;
+  const lead =
+    reminders.leadMinutes === 0
+      ? t('awqat.day.lead.atTime')
+      : t('awqat.day.lead.before').replace('{n}', String(reminders.leadMinutes));
   const remindersMeta =
-    onPrayers.length === 0
+    onCount === 0
       ? t('awqat.day.reminders.off')
-      : t('awqat.day.reminders.on')
-          .replace('{prayers}', joinLabels(onPrayers))
-          .replace(
-            '{lead}',
-            reminders.leadMinutes === 0
-              ? t('settings.reminders.atTime')
-              : t('settings.reminders.minutesBefore').replace('{n}', String(reminders.leadMinutes)),
-          );
+      : onCount === PRAYER_IDS.length
+        ? t('awqat.day.reminders.all').replace('{lead}', lead)
+        : t('awqat.day.reminders.some').replace('{n}', String(onCount)).replace('{lead}', lead);
 
+  /* The selection alone; where it comes from is the calculation page's first line. */
   const methodMeta = awqatMosque
     ? `${t('mosque.active')} · ${METHODS[awqatMosque.methodId]?.label ?? awqatMosque.methodId}`
-    : `${profile.label} · ${t('times.onThisPhone')}`;
+    : profile.label;
 
-  const qiblaMeta = t('awqat.day.qibla.meta').replace(
-    '{point}',
-    t(`qibla.point.${compassPoint(qiblaBearing(coords))}` as UIKey),
-  );
-
-  /* One prayer's span on the line. */
-  const prayerRow = (id: PrayerId) => {
+  /*
+    The line, in time order. Each entry carries the instant its mark stands
+    for, so the thread can be gold down to the last mark the day has reached
+    and hairline from there on.
+  */
+  const prayerEntry = (id: PrayerId): Entry => {
     const prayer = at(id);
     const ends = windowEnd(day, id);
     const lit = litId === id;
     const open = openId === id;
-    return (
-      <Row
-        key={id}
-        mark={<Disc id={id} lit={lit} muted={closed(id) && !lit} />}
-        tinted={lit}
-        muted={closed(id) && !lit}>
-        <View style={styles.hoursText}>
-          <ThemedText type="cardTitle" themeColor={lit ? 'gold' : 'text'}>
+    const state = lit ? 'lit' : closed(id) ? 'passed' : 'coming';
+    return {
+      key: id,
+      at: prayer.time,
+      render: (edge) => (
+        <Row
+          key={id}
+          edge={edge}
+          mark={<Disc id={id} state={state} breath={breath} />}
+          tinted={lit}
+          muted={state === 'passed'}>
+          <ThemedText type="cardTitle" themeColor={lit ? 'gold' : 'text'} style={styles.name}>
             {prayer.label}
           </ThemedText>
-          <ThemedText type="small" themeColor="textSecondary">
-            {t(`windows.${id}` as UIKey)}
-          </ThemedText>
-        </View>
-        <View style={styles.hoursSpan}>
-          <ThemedText
-            type={lit ? 'smallBold' : 'small'}
-            themeColor={lit ? 'gold' : 'text'}
-            style={styles.tabular}
-            numberOfLines={1}>
-            {formatTime(prayer.time)} – {formatTime(ends)}
-          </ThemedText>
-          {open ? (
-            <ThemedText type="caption" themeColor="gold">
-              {t('awqat.day.left').replace('{left}', formatDuration(ends.getTime() - now.getTime()))}
+          <View style={styles.hoursSpan}>
+            <ThemedText
+              type={lit ? 'smallBold' : 'small'}
+              themeColor={lit ? 'gold' : 'text'}
+              style={styles.tabular}
+              numberOfLines={1}>
+              {formatTime(prayer.time)} – {formatTime(ends)}
             </ThemedText>
-          ) : lit ? (
-            <ThemedText type="caption" themeColor="gold">
-              {t('awqat.day.nextIn').replace(
-                '{countdown}',
-                formatCountdown(prayer.time.getTime() - now.getTime()),
-              )}
-            </ThemedText>
-          ) : null}
-        </View>
-      </Row>
-    );
+            {open ? (
+              <ThemedText type="caption" themeColor="gold">
+                {t('awqat.day.left').replace(
+                  '{left}',
+                  formatDuration(ends.getTime() - now.getTime()),
+                )}
+              </ThemedText>
+            ) : lit ? (
+              <ThemedText type="caption" themeColor="gold">
+                {t('awqat.day.nextIn').replace(
+                  '{countdown}',
+                  formatCountdown(prayer.time.getTime() - now.getTime()),
+                )}
+              </ThemedText>
+            ) : null}
+          </View>
+        </Row>
+      ),
+    };
   };
 
-  /* A moment on the line: a label and a time, ruled like the rest. */
-  const momentRow = (key: string, label: string, time: Date, last = false) => (
-    <Row key={key} mark={<Tick filled={last} />} thin last={last}>
-      <ThemedText type="small" themeColor="textSecondary" style={styles.momentLabel}>
-        {label}
-      </ThemedText>
-      <ThemedText type="small" themeColor="textSecondary" style={styles.tabular}>
-        {formatTime(time)}
-      </ThemedText>
-    </Row>
-  );
-
-  /* A pause on the line: hatched, one plain sentence, "about n min". */
-  const pauseRow = (pause: Pause) => {
-    const live = pauseLive(pause);
-    return (
-      <Row key={`pause-${pause.id}`} mark={null} thin>
-        <Hatch id={pause.id} />
-        <ThemedText
-          type="caption"
-          themeColor={live ? 'gold' : 'textSecondary'}
-          style={styles.pauseText}>
-          {t(`awqat.pause.${pause.id}` as UIKey)}
+  const momentEntry = (key: string, label: string, time: Date, foot = false): Entry => ({
+    key,
+    at: time,
+    render: (edge) => (
+      <Row key={key} edge={edge} mark={<Tick passed={reached(time)} filled={foot} />} thin>
+        <ThemedText type="small" themeColor="textSecondary" style={styles.momentLabel}>
+          {label}
         </ThemedText>
-        <ThemedText type="caption" themeColor={live ? 'gold' : 'textSecondary'} style={styles.tabular}>
-          {t('awqat.pause.about').replace('{n}', String(pause.minutes))}
+        <ThemedText type="small" themeColor="textSecondary" style={styles.tabular}>
+          {formatTime(time)}
         </ThemedText>
       </Row>
-    );
-  };
+    ),
+  });
 
-  const [sunrisePause, noonPause, sunsetPause] = pauses;
+  /* A band: hatched, "Voluntary prayer is forbidden", and its span beneath. */
+  const pauseEntry = (pause: Pause, spanText: string): Entry => ({
+    key: `pause-${pause.id}`,
+    at: pause.from,
+    render: (edge) => {
+      const live = pauseLive(pause);
+      return (
+        <Row key={`pause-${pause.id}`} edge={edge} mark={null} thin>
+          <Hatch id={pause.id} />
+          <View style={styles.pauseText}>
+            <ThemedText type="caption" themeColor={live ? 'gold' : 'text'}>
+              {t('awqat.pause.title')}
+            </ThemedText>
+            <ThemedText
+              type="caption"
+              themeColor={live ? 'gold' : 'textSecondary'}
+              style={styles.tabular}>
+              {spanText}
+            </ThemedText>
+          </View>
+        </Row>
+      );
+    },
+  });
+
+  const entries: Entry[] = [
+    prayerEntry('fajr'),
+    momentEntry('sunrise', t('awqat.day.sunrise'), day.sunrise),
+    pauseEntry(
+      sunrisePause,
+      t('awqat.pause.sunrise').replace('{time}', formatTime(sunrisePause.to)),
+    ),
+    pauseEntry(
+      noonPause,
+      t('awqat.pause.noon')
+        .replace('{from}', formatTime(noonPause.from))
+        .replace('{to}', formatTime(noonPause.to)),
+    ),
+    prayerEntry('dhuhr'),
+    prayerEntry('asr'),
+    pauseEntry(
+      sunsetPause,
+      t('awqat.pause.sunset').replace('{time}', formatTime(at('maghrib').time)),
+    ),
+    prayerEntry('maghrib'),
+    prayerEntry('isha'),
+    momentEntry('midnight', t('awqat.day.midnight'), day.middleOfNight),
+    momentEntry(
+      'tomorrow',
+      t(isToday ? 'awqat.day.tomorrowFajr' : 'awqat.day.nextFajr'),
+      following.prayers[0].time,
+      true,
+    ),
+  ];
 
   return (
     <>
-      <Stack.Screen options={{ title: t(isToday ? 'awqat.day.title' : 'awqat.title') }} />
+      <Stack.Screen
+        options={{
+          title: t(isToday ? 'awqat.day.title' : 'awqat.title'),
+          headerRight: () => <HeaderQibla />,
+        }}
+      />
       <ScrollView contentContainerStyle={styles.content}>
         <DoubleRule />
         <View style={styles.head}>
@@ -508,35 +602,19 @@ export default function AwqatDayScreen() {
           </View>
         )}
 
-        {/* The line. Groups exist only to hang a sitting's bracket beside its rows. */}
         <View style={styles.line}>
-          <View>
-            <Bracket label={t('awqat.day.morning')} live={morningLive} />
-            {prayerRow('fajr')}
-            {momentRow('sunrise', t('awqat.day.sunrise'), day.sunrise)}
-            {pauseRow(sunrisePause)}
-            {pauseRow(noonPause)}
-            {prayerRow('dhuhr')}
-          </View>
-          <View>
-            <Bracket label={t('awqat.day.evening')} live={eveningLive} />
-            {prayerRow('asr')}
-            {pauseRow(sunsetPause)}
-            {prayerRow('maghrib')}
-            {prayerRow('isha')}
-          </View>
-          {momentRow('midnight', t('awqat.day.midnight'), day.middleOfNight)}
-          {momentRow(
-            'tomorrow',
-            t(isToday ? 'awqat.day.tomorrowFajr' : 'awqat.day.nextFajr'),
-            following.prayers[0].time,
-            true,
+          {entries.map((entry, index) =>
+            entry.render({
+              topGold: reached(entry.at),
+              bottomGold: index + 1 < entries.length && reached(entries[index + 1].at),
+              last: index === entries.length - 1,
+            }),
           )}
         </View>
 
         {/*
-          The pauses explained once, under the line, and the way to the
-          lesson that carries the ruling. ⚠️ Review-gated with the bands.
+          The bands explained once, under the line, and the way to the lesson
+          that carries the ruling. ⚠️ Review-gated with the bands.
         */}
         <PressableLink
           href={{ pathname: '/reference/[id]', params: { id: 'held-off-times' } }}
@@ -557,13 +635,7 @@ export default function AwqatDayScreen() {
           meta={monthMeta}
         />
         <Door
-          href="/qibla"
-          mark={<CompassRose color={theme.gold} />}
-          title={t('awqat.day.qibla')}
-          meta={qiblaMeta}
-        />
-        <Door
-          href="/settings"
+          href="/reminders"
           mark={<Ionicons name="notifications-outline" size={22} color={theme.gold} />}
           title={t('awqat.day.reminders')}
           meta={remindersMeta}
@@ -574,13 +646,12 @@ export default function AwqatDayScreen() {
           title={t('awqat.day.method')}
           meta={methodMeta}
         />
-        {/* The lesson, still one tap away, no longer THE tap. */}
-        <JadwalRow
+        {/* The lesson, still one tap away, no longer THE tap. Five columns for five prayers. */}
+        <Door
           href="/pray"
-          kicker={t('awqat.day.learn')}
+          mark={<Glyph name="pillars" size={22} color={theme.gold} />}
           title={t('learn.everyPrayer.title')}
           meta={t('learn.everyPrayer.subtitle')}
-          trailing={<Ionicons name="chevron-forward" size={14} color={theme.gold} />}
         />
 
         <ThemedText type="small" themeColor="textSecondary" style={styles.foot}>
@@ -603,6 +674,12 @@ const styles = StyleSheet.create({
     maxWidth: MaxContentWidth,
     alignSelf: 'center',
   },
+  headerQibla: {
+    width: 44,
+    height: 44,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   head: {
     paddingVertical: Spacing.three,
     gap: Spacing.one,
@@ -622,36 +699,44 @@ const styles = StyleSheet.create({
   line: {
     paddingTop: Spacing.two,
   },
+  /* The tint covers the spine and the hours together, the full row. */
   row: {
     flexDirection: 'row',
     alignItems: 'stretch',
-  },
-  lane: {
-    width: LANE,
+    borderRadius: Radius.rule,
   },
   spine: {
     width: SPINE,
     position: 'relative',
   },
-  spineLine: {
+  thread: {
     position: 'absolute',
     left: SPINE / 2,
-    top: 0,
-    bottom: 0,
     width: StyleSheet.hairlineWidth,
   },
-  spineLineLast: {
-    bottom: undefined,
-    height: 22,
+  threadTop: {
+    top: 0,
+    height: MARK_Y,
+  },
+  threadBottom: {
+    top: MARK_Y,
+    bottom: 0,
   },
   disc: {
     position: 'absolute',
     alignItems: 'center',
     justifyContent: 'center',
   },
+  ring: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    borderWidth: 1.2,
+  },
   tick: {
     position: 'absolute',
-    top: 17,
     width: 7,
     height: 7,
     borderRadius: 4,
@@ -662,11 +747,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'flex-start',
     gap: Spacing.three,
-    paddingVertical: Spacing.three - 4,
+    paddingVertical: Spacing.three,
     paddingLeft: Spacing.two,
     paddingRight: Spacing.two,
     borderBottomWidth: StyleSheet.hairlineWidth,
-    borderRadius: Radius.rule,
     position: 'relative',
     overflow: 'hidden',
   },
@@ -674,9 +758,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: Spacing.two + 2,
   },
-  hoursText: {
+  name: {
     flex: 1,
-    gap: Spacing.half,
   },
   hoursSpan: {
     alignItems: 'flex-end',
@@ -694,56 +777,14 @@ const styles = StyleSheet.create({
   },
   pauseText: {
     flex: 1,
-  },
-  bracket: {
-    position: 'absolute',
-    left: 0,
-    top: 14,
-    bottom: 14,
-    width: LANE,
-    zIndex: 1,
-  },
-  bracketLine: {
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    left: 9,
-    width: 6,
-    borderWidth: 1.5,
-    borderRightWidth: 0,
-    borderTopLeftRadius: 3,
-    borderBottomLeftRadius: 3,
-  },
-  /*
-    The label's seat: a wide, short box centred on the lane and turned on
-    its side. The SEAT rotates, not the text — RN lays the text out inside
-    the seat's own width first, and a text rotated inside a 22px column was
-    measured at 22px and truncated to one letter (web, 10 Sep 2026).
-  */
-  bracketLabelSeat: {
-    position: 'absolute',
-    width: BRACKET_LABEL,
-    height: 20,
-    left: (LANE - BRACKET_LABEL) / 2,
-    top: '50%',
-    alignItems: 'center',
-    justifyContent: 'center',
-    /* Centred on its own height by a translate, not a margin: the spacing
-       rule keeps negative margins out of joins, and this is a seat, not a join. */
-    transform: [{ translateY: -10 }, { rotate: '-90deg' }],
-  },
-  bracketLabel: {
-    textAlign: 'center',
-    textTransform: 'uppercase',
-    letterSpacing: 1.6,
-    paddingHorizontal: Spacing.one,
+    gap: Spacing.half,
   },
   pauseNote: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: Spacing.three,
     paddingVertical: Spacing.three,
-    paddingLeft: LANE + SPINE,
+    paddingLeft: SPINE,
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
   pauseNoteText: {

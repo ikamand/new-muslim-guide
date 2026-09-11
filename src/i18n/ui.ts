@@ -306,7 +306,11 @@ export const EN = {
    */
   'times.next': 'Next',
   'times.nextTomorrow': 'Next, tomorrow',
-  'times.endsAtSunrise': 'ends at sunrise,',
+  /* The arch while a window is open (10 Sep 2026): the prayer you can pray
+     now, when its window closes, and what follows. */
+  'times.now': 'Now',
+  'times.until': 'until {time}',
+  'times.leftThen': '{left} left, then {next}',
   'times.needLocation': 'Prayer times need to know where you are',
   'times.needLocation.why':
     'The times are worked out from the position of the sun where you are standing. Your location is used on this device and never sent anywhere. There is no server to send it to.',
@@ -400,9 +404,7 @@ export const EN = {
     schools differ on the permissible end, and a qualified reviewer decides
     whether that sentence needs saying here.
   */
-  'windows.open': 'When each prayer can be prayed',
   'windows.close': 'Close',
-  'windows.title': 'The five windows',
   'windows.intro':
     'Each prayer has a span, not a moment. Anywhere inside its window counts.',
   'windows.fajr': 'until sunrise',
@@ -434,6 +436,48 @@ export const EN = {
   'awqat.col.hijri': 'Hijri',
   'awqat.whiteDays': 'The white days',
   'awqat.whiteDays.detail': 'Three sunnah fasting days mid-month',
+  /* The month's upcoming strip: only what arithmetic can honestly claim. */
+  'awqat.in.today': 'Today',
+  'awqat.in.tomorrow': 'Tomorrow',
+  'awqat.in.days': 'In {n} days',
+  'awqat.friday': 'Friday',
+  'awqat.friday.meta': 'Jumuah at Dhuhr, if you pray it at the mosque',
+  'awqat.whiteDays.meta': '{dates} · three sunnah fasts',
+  'awqat.whiteDays.when.today': 'the white days today',
+  'awqat.whiteDays.when.tomorrow': 'the white days tomorrow',
+  'awqat.whiteDays.when.days': 'the white days in {n} days',
+  /* The day page: the arch unrolled, one tap from the Today card. */
+  'awqat.day.open': 'Today’s prayer times, in full',
+  'awqat.day.openFor': 'Prayer times for {date}, in full',
+  'awqat.day.title': 'Today',
+  'awqat.day.sunrise': 'Sunrise · Fajr ends',
+  'awqat.day.midnight': 'Middle of the night · ʿIsha ends',
+  'awqat.day.tomorrowFajr': 'Tomorrow · Fajr',
+  'awqat.day.nextFajr': 'Next morning · Fajr',
+  'awqat.day.left': '{left} left',
+  'awqat.day.nextIn': 'next · {countdown}',
+  'awqat.day.morning': 'Morning adhkar',
+  'awqat.day.evening': 'Evening adhkar',
+  'awqat.day.fromHere': 'From here',
+  'awqat.day.month': 'This month',
+  'awqat.day.qibla': 'Qibla',
+  'awqat.day.qibla.meta': '{point} from here',
+  'awqat.day.reminders': 'Reminders',
+  'awqat.day.reminders.off': 'Off',
+  'awqat.day.reminders.on': '{prayers}, {lead}',
+  'awqat.day.method': 'How the times are worked out',
+  'awqat.day.learn': 'Learn',
+  /*
+    ⚠️ REVIEW REQUIRED — the three pauses are rulings. The wording says
+    "extra prayers" on purpose: the five, and a missed one, are never held
+    off in the position the app teaches. Numbers live in lib/prayer-times.ts.
+  */
+  'awqat.pause.sunrise': 'No extra prayers until the sun is up',
+  'awqat.pause.noon': 'No extra prayers while the sun is at its height',
+  'awqat.pause.sunset': 'No extra prayers as the sun goes down',
+  'awqat.pause.about': 'about {n} min',
+  'awqat.pause.note':
+    'The five prayers, and a missed one, are never held off. Only extra prayers pause at these three times.',
   'awqat.projected':
     'The Hijri column follows the Umm al-Qura projection. The sacred dates, Ramadan, the Eids, ʿAshuraʾ and ʿArafah, are settled by the moon being sighted, so they are not printed here. Your mosque will know them in the week beforehand.',
 

@@ -98,6 +98,8 @@ const REFERENCES: Readonly<Record<string, Cadence>> = {
   'life-before': 'once',
   'your-name': 'once',
   'minimum-prayer': 'until-fluent',
+  /* Read once; the day page carries the three times every day after. */
+  'held-off-times': 'once',
   /* The pattern, needed until it is not — like the guides it explains. */
   'how-prayer-works': 'until-fluent',
   'what-to-say': 'until-fluent', // The prayer's words gathered; the page's job ends when they are known.

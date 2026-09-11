@@ -15,3 +15,11 @@ Remove an item when it is done; do not leave it ticked.
   the page's third quick fact back to saying the words have recordings (it
   points at Al-Fatihah's surah for now, because that is the one text with
   audio). Added 8 Sep 2026.
+
+## Content gaps found while building
+
+- **A Duha page.** The prayer-times day page now draws the pause after
+  sunrise, and Duha begins exactly where it ends; the app has no page that
+  says so. One short reference page beside Prayed by choice, citing what
+  the corpus can place. Added 10 Sep 2026.
+

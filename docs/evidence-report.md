@@ -6,12 +6,12 @@ supplied each line of it.
 | | |
 |---|---|
 | Qur'an passages | 249 of 249 |
-| Narrations | 208 of 208 |
-| Confirmed against a second publisher | 70 |
-| Translation from HadeethEnc (published terms) | 70 |
-| Translation from Darussalam (quoted) | 138 |
+| Narrations | 211 of 211 |
+| Confirmed against a second publisher | 72 |
+| Translation from HadeethEnc (published terms) | 72 |
+| Translation from Darussalam (quoted) | 139 |
 | Arabic with no translation | 0 |
-| Chain of transmission moved to the foot | 134 |
+| Chain of transmission moved to the foot | 135 |
 | Chain kept in place (no anchor to cut on) | 3 |
 | Nothing found | 0 |
 
@@ -117,6 +117,10 @@ comes from the collection itself.
 | `bukhari:50` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
 | `muslim:8a` | HadeethEnc.com | HadeethEnc.com | HadeethEnc 4563 |
 | `bukhari:39` | HadeethEnc.com | HadeethEnc.com | HadeethEnc 5795 |
+| `muslim:831` | HadeethEnc.com | HadeethEnc.com | HadeethEnc 10604 |
+| `bukhari:597` | HadeethEnc.com | HadeethEnc.com | HadeethEnc 65088 |
+| `bukhari:586` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
+| `bukhari:3273` | HadeethEnc.com | HadeethEnc.com | HadeethEnc 10562 |
 | `bukhari:6193` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
 | `bukhari:757` | HadeethEnc.com | HadeethEnc.com | HadeethEnc 3185 |
 | `bukhari:611` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
@@ -261,7 +265,6 @@ comes from the collection itself.
 | `muslim:656a` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
 | `abu-dawud:1067` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
 | `bukhari:444` | HadeethEnc.com | HadeethEnc.com | HadeethEnc 65091 |
-| `bukhari:597` | HadeethEnc.com | HadeethEnc.com | HadeethEnc 65088 |
 | `bukhari:1090` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
 | `muslim:703a` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
 | `bukhari:1089` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |

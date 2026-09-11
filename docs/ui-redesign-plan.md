@@ -4051,3 +4051,60 @@ already marked device-pending above and stays so.
 Verified: `tsc`, `expo lint` (four standing errors, none in touched files),
 `style:check`, `i18n:manifest` (English only; UI strings are not in the
 sheet), `expo export --platform web`. Ships by OTA.
+
+---
+
+## 10 Sep 2026 — Awqat, one tap: the card tells the truth, the day is a page ✅ ⚠️ review-gated
+
+Built from the "Awqat, One Tap" canvas after Iyad's audit and the research
+on the three held-off times (claude.ai/code/artifact/b10078bd-7cfb-4a58-8efe-0f7a0ea28a5f).
+Looked at on web at 390, both themes, today and another date. Not seen on
+a device.
+
+- **The arch names the open window.** While a window is open the niche
+  reads "Now · ʿIsha · until 12:30 AM · 2 hr 34 min left, then Fajr"; between
+  windows it reads "Next" as before. `findCurrentPrayer` already computed
+  this to gate the button, so the arch, the ring, the tinted cell and the
+  button now all name one prayer. Cells dim when their WINDOW closes, not
+  when their start passes: ʿAsr no longer sat greyed out under "Pray ʿAsr".
+  `prayer-times-card.tsx`; `formatDuration` joins `formatCountdown` in
+  `lib/prayer-times.ts`.
+- **One tap, one page.** The niche and the times row both open
+  `app/awqat-day.tsx`: the arch unrolled into a ruled line — every prayer as
+  a span with its end, sunrise and the middle of the night as moments, the
+  open window lit with its time left, the two adhkar sittings as brackets
+  in the margin (the same Fajr→Dhuhr and ʿAsr→ʿIsha spans the Dua tab
+  offers), tomorrow's Fajr at the foot. Under a shelf, the doors: the
+  month, qibla (bearing as a compass point, `compassPoint` moved to
+  `lib/compass.ts`), reminders as set, the calculation method, and Every
+  prayer as a quiet Learn row. `?date=` opens any day. Removed: the windows
+  modal (`WindowsSheet`), the `/pray` deep link from the row, the calendar
+  spandrel; the compass stays.
+- **The month is enterable.** Every jadwal row opens the day page for its
+  date, and the month that holds today carries an upcoming strip: the next
+  Friday and the projected white days with a day count and dates. No
+  moon-boundary dates; the fasting lesson's promise stands. The sticky
+  column header's index moves with the strip.
+- **The three pauses, review-gated.** `pausesOf` in `lib/prayer-times.ts`
+  computes them from the day's own times with three reviewer-set numbers
+  (`PAUSE_*`, ⚠️ flagged); the day page draws them as hatched bands with
+  "No extra prayers …" and "about n min", never a clock edge and never a
+  red word, and one sentence under the line links to the lesson. The two
+  spans tied to the reader's own prayer are not drawn: the app cannot know
+  when somebody prayed.
+- **The lesson.** `learn/held-off-times.ts`, "When extra prayers are held
+  off", in the praying group, Book 1 · When it goes wrong after Missing a
+  prayer, cadence once. Muslim 831, Bukhari 586, 3273 and 597, all opened in
+  the corpus and resolved by `npm run evidence`. The Istikhara page's "the
+  times when prayer is held off" now has the page it leaned on, via
+  `relatedContent`. Review: `docs/scholarly-review.md` §1.12 and the
+  curriculum pile.
+
+**Observed, not built.** A Duha page (docs/todo.md). The rotated sitting
+labels were measured at the lane's width and truncated to one letter on
+web until the seat, not the text, was rotated; worth a look on a device.
+
+Verified: `tsc`, `expo lint` (the standing four, none in touched files),
+`style:check`, `content:audit`, `evidence`, `i18n:manifest`,
+`expo export --platform web`, screenshots of every changed screen in both
+themes. Ships by OTA.

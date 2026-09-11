@@ -771,6 +771,49 @@ answer; it now applies to nothing on the screen.
 
 ---
 
+### 1.12 The three times when extra prayer is held off
+
+**NEW — 10 September 2026. Built after Iyad asked for the research first;
+nothing here ships a public release unreviewed.**
+
+- **File** `src/content/learn/held-off-times.ts` (the lesson),
+  `src/lib/prayer-times.ts` (`pausesOf` and the three `PAUSE_*` numbers),
+  `src/app/awqat-day.tsx` (the bands), `src/i18n/ui.ts` (`awqat.pause.*`).
+- **Claim** Extra prayer is held off at three times tied to the sun: as it
+  rises until it is fully up, at its height until it passes, as it draws
+  near to setting until it has set. The five prayers, and a missed prayer,
+  are never held off. After one's own Fajr and ʿAsr, extra prayer is held
+  off until sunrise and until sunset.
+- **Evidence, each opened in the corpus by the collection's own number**
+  Sahih Muslim 831 (ʿUqbah ibn ʿĀmir, the three times); Sahih al-Bukhari
+  586 (Abu Saʿīd, after Fajr and after ʿAsr); Sahih al-Bukhari 3273 (Ibn
+  ʿUmar, the delay and the reason); Sahih al-Bukhari 597 (a forgotten
+  prayer is prayed when remembered). `npm run evidence` resolved all four
+  and cross-checked Muslim 831 and Bukhari 3273 against HadeethEnc.
+- **Deliberately absent** Abu Dawud 1083 (the Friday exception at the sun's
+  height): mursal by Abu Dawud's own note, weak by al-Albani. Tirmidhi 868
+  (the Makkah exception): sahih, but not a beginner's concern.
+- **What the reviewer decides**
+  1. **The three numbers.** `PAUSE_AFTER_SUNRISE_MIN = 15` (scholars give
+     twelve to twenty; a quarter of an hour is the common figure),
+     `PAUSE_BEFORE_NOON_MIN = 5` (HadeethEnc's gloss on Muslim 831 says about
+     five), `PAUSE_BEFORE_SUNSET_MIN = 15` (the Hanafi school ties this to
+     the sun yellowing, twenty to thirty minutes; others leave it as "drawing
+     near"). The page prints "about n min" and no clock time for an edge.
+  2. **The scope the app teaches.** The lesson takes the Shafiʿi, Hanbali
+     and Maliki position, and that of Ibn Bāz and Ibn ʿUthaymīn: any prayer
+     with a cause goes ahead, and a missed prayer is made up when remembered,
+     consistent with the Missing a prayer page. The Hanafi position is the
+     differs note. Is the attribution to each school stated correctly?
+  3. **The wording.** "Held off" and "extra prayers" throughout, never
+     "forbidden". Is "no extra prayers" on a band an acceptable rendering of
+     nahy about nafl, or too soft?
+  4. **The reason** as printed under "Why these times?": the horns of a
+     devil and those who worship the sun, from Bukhari 3273 with HadeethEnc's
+     explanation. Is a beginner's page the place for it?
+- **Not drawn, on purpose** The two spans tied to the reader's own prayer.
+  The app cannot know when somebody prayed and does not ask.
+
 ## PRIORITY 2 — should review
 
 Real questions, but a wrong answer here misinforms rather than invalidates.

@@ -448,13 +448,85 @@ export function formatTime(time: Date): string {
   return time.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' });
 }
 
-/** "in 47 min" / "in 3 hr 12 min" — deliberately not a ticking second counter. */
-export function formatCountdown(ms: number): string {
+/** "47 min" / "3 hr 12 min" — a span, deliberately never a ticking second counter. */
+export function formatDuration(ms: number): string {
   const totalMinutes = Math.max(0, Math.round(ms / 60000));
   const hours = Math.floor(totalMinutes / 60);
   const minutes = totalMinutes % 60;
 
-  if (hours === 0) return `in ${minutes} min`;
-  if (minutes === 0) return `in ${hours} hr`;
-  return `in ${hours} hr ${minutes} min`;
+  if (hours === 0) return `${minutes} min`;
+  if (minutes === 0) return `${hours} hr`;
+  return `${hours} hr ${minutes} min`;
+}
+
+/** "in 47 min" / "in 3 hr 12 min" — the same span, as a countdown to a start. */
+export function formatCountdown(ms: number): string {
+  return `in ${formatDuration(ms)}`;
+}
+
+/*
+  ── The three pauses ───────────────────────────────────────────────────────
+
+  The three times of day when extra prayer is held off, as the day page
+  draws them. ʿUqbah ibn ʿĀmir: the Prophet ﷺ forbade praying, and burying
+  the dead, when the sun begins to rise until it is fully up, when it stands
+  at its height until it passes, and when it draws near to setting until it
+  sets (Sahih Muslim 831, opened in the corpus 10 Sep 2026). The five
+  prayers and a missed one are never affected in the position the app
+  teaches; `learn/held-off-times.ts` carries the ruling and its evidence.
+
+  ⚠️ REVIEW REQUIRED — the three numbers below are the app's reading of "a
+  spear's length", "at its height" and "draws near to setting", and they
+  are rulings, not astronomy. Scholars put the first at twelve to twenty
+  minutes (a quarter of an hour is the common figure); the second at a few
+  minutes; the third the Hanafi school ties to the sun yellowing, twenty to
+  thirty minutes before sunset, and others leave as "drawing near". A
+  qualified reviewer sets them; nothing here ships a public release
+  unreviewed. The page draws them as soft bands ("about 15 min") and never
+  prints a clock time for an edge, so a change here moves nothing else.
+
+  Deliberately NOT here: the two spans tied to the reader's own prayer
+  (after praying Fajr until sunrise, after praying ʿAsr until sunset). The
+  app cannot know when somebody prayed and does not ask, so those live in
+  the lesson and not on a line.
+*/
+export const PAUSE_AFTER_SUNRISE_MIN = 15;
+export const PAUSE_BEFORE_NOON_MIN = 5;
+export const PAUSE_BEFORE_SUNSET_MIN = 15;
+
+export type PauseId = 'sunrise' | 'noon' | 'sunset';
+
+export type Pause = {
+  id: PauseId;
+  from: Date;
+  to: Date;
+  /** Its length in whole minutes, the number the page prints as "about". */
+  minutes: number;
+};
+
+/** The three pauses of a day, from its own times. */
+export function pausesOf(day: DayTimes): Pause[] {
+  const at = (prayerId: PrayerId) => day.prayers.find((prayer) => prayer.id === prayerId)!.time;
+  const minus = (time: Date, minutes: number) => new Date(time.getTime() - minutes * 60000);
+  const plus = (time: Date, minutes: number) => new Date(time.getTime() + minutes * 60000);
+  return [
+    {
+      id: 'sunrise',
+      from: day.sunrise,
+      to: plus(day.sunrise, PAUSE_AFTER_SUNRISE_MIN),
+      minutes: PAUSE_AFTER_SUNRISE_MIN,
+    },
+    {
+      id: 'noon',
+      from: minus(at('dhuhr'), PAUSE_BEFORE_NOON_MIN),
+      to: at('dhuhr'),
+      minutes: PAUSE_BEFORE_NOON_MIN,
+    },
+    {
+      id: 'sunset',
+      from: minus(at('maghrib'), PAUSE_BEFORE_SUNSET_MIN),
+      to: at('maghrib'),
+      minutes: PAUSE_BEFORE_SUNSET_MIN,
+    },
+  ];
 }

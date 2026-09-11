@@ -14,6 +14,7 @@ import { FAMILY } from './family';
 import { FAMILY_DOESNT_ACCEPT } from './family-doesnt-accept';
 import { FOOD } from './food';
 import { HALAL_AND_HARAM } from './halal-and-haram';
+import { HELD_OFF_TIMES } from './held-off-times';
 import { HOW_PRAYER_WORKS } from './how-prayer-works';
 import { HOW_IT_BEGAN } from './how-it-began';
 import { LIFE_BEFORE } from './life-before';
@@ -98,6 +99,8 @@ import type { Reference } from '../types';
  */
 export const LEARN_TOPICS: Reference[] = [
   WHAT_IS_ISLAM,
+  /* 10 Sep 2026 — the sentence the Istikhara page leaned on, kept. */
+  HELD_OFF_TIMES,
   /* Phase 9, 28 Aug 2026 — the five tier-one gaps. */
   LIFE_BEFORE,
   YOUR_NAME,
@@ -269,6 +272,8 @@ export const TOPIC_GROUPS: readonly { id: TopicGroupId; topics: readonly Content
       ref('reference', 'adhan'),
       ref('reference', 'behind-an-imam'),
       ref('reference', 'what-breaks-prayer'),
+      /* The three times of day extra prayer is held off, beside what breaks it. */
+      ref('reference', 'held-off-times'),
       ref('reference', 'dua-and-dhikr'),
       ref('reference', 'which-dhikr'),
       ref('collection', 'quranic-duas'),

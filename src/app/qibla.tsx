@@ -12,7 +12,7 @@ import { useLocale } from '@/hooks/use-locale';
 import { isUnverified, useLocation } from '@/hooks/use-location';
 import { useTheme } from '@/hooks/use-theme';
 import type { UIKey } from '@/i18n/ui';
-import { settleHeading, shortestTurn } from '@/lib/compass';
+import { compassPoint, settleHeading, shortestTurn } from '@/lib/compass';
 import { qiblaBearing } from '@/lib/prayer-times';
 
 /**
@@ -54,14 +54,6 @@ import { qiblaBearing } from '@/lib/prayer-times';
 
 /** iOS reports 0–3; below 2 the reading can be tens of degrees out. */
 const TRUSTWORTHY_ACCURACY = 2;
-
-function compassPoint(degrees: number): string {
-  const points = [
-    'north', 'north-east', 'east', 'south-east',
-    'south', 'south-west', 'west', 'north-west',
-  ];
-  return points[Math.round(degrees / 45) % 8];
-}
 
 /** "yesterday", "3 days ago" — never a clock time, which implies a precision we do not have. */
 function whenFixed(fixedAt: number | null, now: number, t: (key: UIKey) => string): string {

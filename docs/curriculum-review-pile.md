@@ -267,3 +267,22 @@ Each cleared item: remove the ⚠️ line from the page's header comment that
 it covers, or leave the flag with a dated note of what was changed. A page
 whose header still says "unreviewed for substance" is a page nobody has
 read, and the flag is the only thing that says so.
+
+## When extra prayers are held off — `learn/held-off-times.ts`
+
+Added 10 Sep 2026, after the prayer-times audit. Book 1 · When it goes
+wrong · after "Missing a prayer". Every section is a ruling; the full item
+is `docs/scholarly-review.md` §1.12.
+
+- **The three times** from Sahih Muslim 831, with "about a quarter of an
+  hour" for the first. Is the gloss right?
+- **"The five, and a missed one, are never held off"**: Bukhari 597,
+  extended to the sun-bound times by the majority position. The differs
+  note prints Hanafi against Shafiʿi, with Hanbali and the contemporary
+  view folded into the second. ⚠️ Positions written from the fatwas cited,
+  not from a fiqh text.
+- **The after-Fajr and after-ʿAsr spans**: Bukhari 586. Stated as the
+  reason the Every prayer page shows no sunnah after those two.
+- **The reason**: Bukhari 3273, "between the two horns of a devil". Check
+  the paraphrase, and whether the page should carry it at all.
+

@@ -27,6 +27,21 @@
  * the needle does not settle.
  */
 
+/**
+ * A bearing as one of the eight points, for a sentence: "north-east".
+ *
+ * The key into `qibla.point.*`. Lived inside the qibla screen until the day
+ * page needed the same word for its Qibla door (10 Sep 2026); one function,
+ * so the two can never round differently.
+ */
+export function compassPoint(degrees: number): string {
+  const points = [
+    'north', 'north-east', 'east', 'south-east',
+    'south', 'south-west', 'west', 'north-west',
+  ];
+  return points[Math.round((((degrees % 360) + 360) % 360) / 45) % 8];
+}
+
 /** The signed short-way difference from `from` to `to`, in (-180, 180]. */
 export function shortestTurn(from: number, to: number): number {
   return ((to - from + 540) % 360) - 180;

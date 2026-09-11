@@ -162,6 +162,9 @@ export const CURRICULUM: readonly Tier[] = [
           step(ref('reference', 'what-breaks-prayer'), 'practice'),
           step(ref('reference', 'lost-count'), 'practice'),
           step(ref('reference', 'missed'), 'practice'),
+          /* 10 Sep 2026: the three times of day extra prayer is held off — the
+             question "can I pray now?", which the day page draws and this answers. */
+          step(ref('reference', 'held-off-times'), 'practice'),
           /* 8 Sep 2026: the mistake noticed afterwards. Surface `pray`, like
              the two above, so the help sheet's mistakes list reaches it too. */
           step(ref('reference', 'realised-after'), 'practice'),

@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { Modal, Pressable, StyleSheet, View } from 'react-native';
+import { Pressable, StyleSheet, View } from 'react-native';
 
 import { AwqatArch } from '@/components/awqat-arch';
-import { CompassRose, Glyph, JadwalMark } from '@/components/illustrations';
-import { DoubleRule, QuietRow } from '@/components/jadwal';
+import { CompassRose, Glyph } from '@/components/illustrations';
+import { QuietRow } from '@/components/jadwal';
 import { LocationAsk } from '@/components/location-ask';
 import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
@@ -14,10 +14,9 @@ import { usePrayerTimes } from '@/hooks/use-prayer-times';
 import { useSettings } from '@/hooks/use-settings';
 import {
   formatCountdown,
+  formatDuration,
   formatTime,
   windowEnd,
-  type DayTimes,
-  type NextPrayer,
   type PrayerTime,
 } from '@/lib/prayer-times';
 import { useTheme } from '@/hooks/use-theme';
@@ -56,15 +55,24 @@ function NeedsLocation() {
 
 function TimeCell({
   prayer,
-  isNext,
-  passed,
+  lit,
+  closed,
   jumuah,
 }: {
   prayer: PrayerTime;
-  isNext: boolean;
-  /** The prayer's time has gone by. Muted — never ticked: weight says "the
-      time passed", a checkmark would claim "you prayed it". */
-  passed: boolean;
+  /**
+   * The prayer the arch names: the one whose window is open, or, between
+   * windows, the next one. Tint and gold follow the headline, so the arch,
+   * the row and the button can never name three different prayers.
+   */
+  lit: boolean;
+  /**
+   * The prayer's WINDOW has closed. Muted, never ticked: weight says "the
+   * time passed", a checkmark would claim "you prayed it". Until 10 Sep 2026
+   * this dimmed at the START time, which showed ʿAsr as over while its
+   * window was open and the button said Pray ʿAsr (Iyad's audit).
+   */
+  closed: boolean;
   /** True for Dhuhr on a Friday. */
   jumuah?: boolean;
 }) {
@@ -72,7 +80,7 @@ function TimeCell({
 
   return (
     /*
-      The next prayer gets the quiet selected ground — the colour this app
+      The lit prayer gets the quiet selected ground — the colour this app
       already uses for "the thing you are on" — where it used to be gold text
       alone, which under-marked the one cell the eye is looking for. The
       day-glyph above each label is the arch's information written out: the
@@ -82,13 +90,13 @@ function TimeCell({
     <View
       style={[
         styles.cell,
-        isNext && { backgroundColor: theme.backgroundSelected },
-        passed && !isNext && styles.cellPassed,
+        lit && { backgroundColor: theme.backgroundSelected },
+        closed && !lit && styles.cellPassed,
       ]}>
       <Glyph
         name={prayer.id}
         size={16}
-        color={isNext ? theme.gold : theme.textSecondary}
+        color={lit ? theme.gold : theme.textSecondary}
       />
       <View style={styles.cellLabel}>
         {/*
@@ -97,7 +105,7 @@ function TimeCell({
           wrong register for somebody three weeks in. This is information.
         */}
         {jumuah && <View style={[styles.jumuahDot, { backgroundColor: theme.accent }]} />}
-        <ThemedText type="small" themeColor={isNext ? 'gold' : 'textSecondary'}>
+        <ThemedText type="small" themeColor={lit ? 'gold' : 'textSecondary'}>
           {prayer.label}
         </ThemedText>
       </View>
@@ -108,7 +116,7 @@ function TimeCell({
       */}
       <ThemedText
         type="small"
-        themeColor={isNext ? 'gold' : 'text'}
+        themeColor={lit ? 'gold' : 'text'}
         style={styles.cellTime}
         numberOfLines={1}>
         {formatTime(prayer.time)}
@@ -154,118 +162,39 @@ function JumuahNote() {
 }
 
 /**
- * The windows sheet — what tapping the niche opens.
+ * The Awqat card.
  *
- * Five spans, not five moments. A convert doesn't know prayers HAVE windows:
- * that Fajr expires at sunrise, that Dhuhr lasts until ʿAsr enters. Boards
- * and apps print start times only; the ends are what born Muslims absorb and
- * nobody writes down. This sheet is that gap, written down.
+ * ## The arch tells the truth about now (10 Sep 2026)
  *
- * ⚠️ REVIEW REQUIRED — the window ends are rulings, not astronomy. Fajr→
- * sunrise and Dhuhr→ʿAsr are settled; ʿAsr→Maghrib is the permissible span
- * taught as one clear way (the preferred-time detail is left to a lesson);
- * ʿIshāʾ→the middle of the night states the preferred end, and the middle of
- * the night is computed in the fiqh sense (halfway from sunset to Fajr), not
- * 00:00. The wording lives in `ui.ts` beside `times.endsAtSunrise`, which
- * set the precedent. None of it ships a public release unreviewed.
+ * Until Iyad's audit the niche always named the NEXT start, so at five in
+ * the afternoon it said "Next, Maghrib" while the button beneath said "Pray
+ * ʿAsr": two prayers named, no sentence joining them. The one live fact for
+ * somebody on a mat is the window that is open and when it closes, and
+ * `findCurrentPrayer` already computed it to gate the button. Now the same
+ * four lines are about NOW while a window is open — the prayer, when it
+ * closes in gold, how long is left and what follows — and about NEXT only
+ * between windows, when nothing can be prayed yet. The ring on the arch,
+ * the tinted cell and the button all follow the same prayer.
  *
- * The ends themselves come from `windowEnd` in `lib/prayer-times.ts`, which
- * also gates Today's pray button — one mapping, so the span the sheet prints
- * and the span the button obeys cannot drift apart.
+ * ## One tap, one page
+ *
+ * The niche used to open a modal of the five windows, and the times row
+ * opened Every prayer, a lesson about rakʿahs that already lives on Learn.
+ * Both taps now open the day page (`app/awqat-day.tsx`): the arch unrolled,
+ * every prayer as a span, sunrise and the middle of the night as moments,
+ * the sittings, tomorrow's Fajr, and the doors that used to be an icon, a
+ * settings row and a lesson. The calendar spandrel went with them; the
+ * compass stays, because qibla is a mid-motion need.
  */
-function WindowsSheet({
-  visible,
-  onClose,
-  today,
-  next,
-}: {
-  visible: boolean;
-  onClose: () => void;
-  today: DayTimes;
-  next: NextPrayer;
-}) {
-  const theme = useTheme();
-  const { t } = useLocale();
-
-  const windows: { prayer: PrayerTime; ends: Date }[] = today.prayers.map((prayer) => ({
-    prayer,
-    ends: windowEnd(today, prayer.id),
-  }));
-
-  const now = new Date(next.time.getTime() - next.msUntil);
-
-  return (
-    <Modal visible={visible} transparent animationType="fade" onRequestClose={onClose}>
-      {/* The backdrop is the close control; the sheet itself swallows taps. */}
-      <Pressable
-        style={[styles.backdrop, { backgroundColor: theme.scrim }]}
-        onPress={onClose}
-        accessibilityLabel={t('windows.close')}>
-        <Pressable style={[styles.sheet, { backgroundColor: theme.background }]} onPress={() => {}}>
-          <DoubleRule />
-          <View style={styles.sheetBody}>
-            <ThemedText type="sectionTitle" style={styles.sheetTitle}>
-              {t('windows.title')}
-            </ThemedText>
-            <ThemedText type="small" themeColor="textSecondary">
-              {t('windows.intro')}
-            </ThemedText>
-
-            <View style={styles.sheetRows}>
-              {windows.map(({ prayer, ends }) => {
-                const open = now >= prayer.time && now < ends;
-                const passed = now >= ends;
-                return (
-                  <View
-                    key={prayer.id}
-                    style={[styles.windowRow, { borderBottomColor: theme.goldSoft }]}>
-                    <ThemedText
-                      type={open ? 'smallBold' : 'small'}
-                      themeColor={open ? 'gold' : passed ? 'textSecondary' : 'text'}
-                      style={styles.windowName}>
-                      {prayer.label}
-                    </ThemedText>
-                    <View style={styles.windowSpan}>
-                      <ThemedText
-                        type={open ? 'smallBold' : 'small'}
-                        themeColor={open ? 'gold' : passed ? 'textSecondary' : 'text'}
-                        style={styles.tabular}>
-                        {formatTime(prayer.time)} – {formatTime(ends)}
-                      </ThemedText>
-                      <ThemedText type="caption" themeColor="textSecondary">
-                        {t(`windows.${prayer.id}`)}
-                        {open ? ` · ${formatCountdown(ends.getTime() - now.getTime())}` : ''}
-                      </ThemedText>
-                    </View>
-                  </View>
-                );
-              })}
-            </View>
-
-            <ThemedText type="small" themeColor="textSecondary">
-              {t('windows.note')}
-            </ThemedText>
-          </View>
-          <DoubleRule />
-        </Pressable>
-      </Pressable>
-    </Modal>
-  );
-}
-
 export function PrayerTimesCard({ action }: PrayerTimesCardProps) {
   const theme = useTheme();
-  const { locale, t } = useLocale();
+  const { t } = useLocale();
   const { status, coords, source, place } = useLocation();
-  const { today, next, timezoneSuspect } = usePrayerTimes();
-  const [windowsOpen, setWindowsOpen] = useState(false);
+  const { today, next, current, timezoneSuspect } = usePrayerTimes();
   const { awqatMosque } = useSettings();
   // 5 is Friday in every locale — `getDay` is not localised, which is what
   // makes it safe to compare against a number here.
   const isFriday = new Date().getDay() === 5;
-  // The month's own name rides in the calendar mark's accessibility label,
-  // so a screen reader still hears where the tap lands.
-  const monthWord = new Intl.DateTimeFormat(locale, { month: 'long' }).format(new Date());
 
   /*
     Refused or unavailable, and no city chosen: ask. A stored fix does not
@@ -287,78 +216,80 @@ export function PrayerTimesCard({ action }: PrayerTimesCardProps) {
     );
   }
 
+  /* The instant the hook computed against, so every state below agrees. */
+  const now = new Date(next.time.getTime() - next.msUntil);
+  /* The prayer the arch names, and the ring, the tint and the button with it. */
+  const litId = current ? current.id : next.isTomorrow ? null : next.id;
+
   return (
     <Shell>
       {/*
         The niche — the Awqat arch, with the day drawn on its outline (see
         `awqat-arch.tsx` for why the arch and the old DayArc are one thing
-        now). The next prayer sits inside it, the time in gold: one
-        illuminated fact per card. The whole niche is one tap target, and it
-        opens the windows sheet — the marks are an instrument, and an
-        instrument you can't query is decoration. Five 3-pixel dots could
-        never each be a target for a thumb mid-motion; the arch can.
-      */}
-      <Pressable
-        onPress={() => setWindowsOpen(true)}
-        accessibilityRole="button"
-        accessibilityLabel={t('windows.open')}
-        style={({ pressed }) => [styles.niche, { opacity: pressed ? 0.75 : 1 }]}>
-        <AwqatArch
-          times={today}
-          nextId={next.isTomorrow ? null : next.id}
-          now={new Date(next.time.getTime() - next.msUntil)}
-        />
-        <View style={styles.nicheIn}>
-          <ThemedText type="caption" themeColor="textSecondary" style={styles.nextLabel}>
-            {next.isTomorrow ? t('times.nextTomorrow') : t('times.next')}
-          </ThemedText>
-          {/*
-            Full-width box, centred text — not for layout, for the font race:
-            "Asr" rendered as "As" on Iyad's phone and healed on restart,
-            which is the signature of text measured before Literata loaded
-            and clipped when the wider face swapped in. A box wider than any
-            word leaves the race nothing to eat, whichever way it lands.
-          */}
-          <ThemedText type="subtitle" style={styles.nextName}>
-            {next.label}
-          </ThemedText>
-          <ThemedText type="cardTitle" themeColor="gold" style={styles.nextTime}>
-            {formatTime(next.time)}
-          </ThemedText>
-          {/*
-            Sunrise closes Fajr's window, so it is worth a line while Fajr is
-            next and is noise for the other twenty hours of the day. Its OWN
-            line: joined to the countdown with a separator it ran nearly the
-            niche's full width and crowded the arch's legs (Iyad, 2 Sep).
-          */}
-          <ThemedText type="small" themeColor="textSecondary">
-            {formatCountdown(next.msUntil)}
-          </ThemedText>
-          {next.id === 'fajr' && (
-            <ThemedText type="small" themeColor="textSecondary">
-              {`${t('times.endsAtSunrise')} ${formatTime(today.sunrise)}`}
-            </ThemedText>
-          )}
-        </View>
-      </Pressable>
-
-      {/*
-        The spandrels. The corners around an arch are where an illuminated
-        page puts its small ornaments, and these two are ornaments that go
-        somewhere: the jadwal mark to the month's timetable, the compass
-        rose to the qibla. They replaced a quiet text row at the card's foot
-        ("August › / Qibla ›") — one row shorter, and the links now sit in
-        space the arch was already leaving empty. Drawn AFTER the niche so
-        they stack above it: siblings, never children, because a link inside
-        the windows-sheet button is a button inside a button.
+        now). The prayer inside it is the open window, or the next start
+        between windows; the time in gold: one illuminated fact per card. The
+        whole niche is one tap target and opens the day page.
       */}
       <PressableLink
-        href="/awqat"
-        accessibilityLabel={`${t('awqat.title')} · ${monthWord}`}
-        style={[styles.spandrel, styles.spandrelLeft]}
-        pressedStyle={{ opacity: 0.5 }}>
-        <JadwalMark color={theme.gold} />
+        href="/awqat-day"
+        accessibilityLabel={t('awqat.day.open')}
+        style={styles.niche}
+        pressedStyle={{ opacity: 0.75 }}>
+        <AwqatArch times={today} nextId={litId} now={now} />
+        <View style={styles.nicheIn}>
+          {current ? (
+            <>
+              <ThemedText type="caption" themeColor="textSecondary" style={styles.nextLabel}>
+                {t('times.now')}
+              </ThemedText>
+              {/*
+                Full-width box, centred text — not for layout, for the font
+                race: "Asr" rendered as "As" on Iyad's phone and healed on
+                restart, the signature of text measured before Literata
+                loaded. A box wider than any word leaves the race nothing to
+                eat, whichever way it lands.
+              */}
+              <ThemedText type="subtitle" style={styles.nextName}>
+                {current.label}
+              </ThemedText>
+              <ThemedText type="cardTitle" themeColor="gold" style={styles.nextTime}>
+                {t('times.until').replace('{time}', formatTime(current.windowEnds))}
+              </ThemedText>
+              <ThemedText type="small" themeColor="textSecondary">
+                {t('times.leftThen')
+                  .replace('{left}', formatDuration(current.windowEnds.getTime() - now.getTime()))
+                  .replace('{next}', next.label)}
+              </ThemedText>
+            </>
+          ) : (
+            <>
+              <ThemedText type="caption" themeColor="textSecondary" style={styles.nextLabel}>
+                {next.isTomorrow ? t('times.nextTomorrow') : t('times.next')}
+              </ThemedText>
+              <ThemedText type="subtitle" style={styles.nextName}>
+                {next.label}
+              </ThemedText>
+              <ThemedText type="cardTitle" themeColor="gold" style={styles.nextTime}>
+                {formatTime(next.time)}
+              </ThemedText>
+              <ThemedText type="small" themeColor="textSecondary">
+                {formatCountdown(next.msUntil)}
+              </ThemedText>
+            </>
+          )}
+        </View>
       </PressableLink>
+
+      {/*
+        The spandrel. The corners around an arch are where an illuminated
+        page puts its small ornaments, and this one is an ornament that goes
+        somewhere: the compass rose to the qibla. Its twin, the jadwal mark
+        to the month, retired on 10 Sep 2026 into a labelled row on the day
+        page — the best timetable in the app was behind a 16px mark nobody
+        could name. Drawn AFTER the niche so it stacks above it: a sibling,
+        never a child, because a link inside the niche's link is a button
+        inside a button.
+      */}
       <PressableLink
         href="/qibla"
         accessibilityLabel={t('qibla.title')}
@@ -380,25 +311,21 @@ export function PrayerTimesCard({ action }: PrayerTimesCardProps) {
       <View style={[styles.divider, { backgroundColor: theme.goldSoft }]} />
 
       {/*
-        The whole row opens Every prayer — the rakʿah counts, the rawatib,
-        aloud or silent, and the prayers beyond the five. Iyad's call, 31 Aug:
-        this deep link REPLACED two proposed lines on the card itself (rawatib
-        under the next prayer, witr after ʿIshaʾ), so the card's face changes
-        by nothing and the information is one tap away where a prayer-minded
-        person already looks. The cells stay visually quiet on purpose — the
-        row is the target, not any one time.
+        The whole row opens the day page, the same destination as the niche:
+        one tap on the times gives the times in full. The cells stay visually
+        quiet on purpose — the row is the target, not any one time.
       */}
       <PressableLink
-        href="/pray"
-        accessibilityLabel={t('learn.everyPrayer.title')}
+        href="/awqat-day"
+        accessibilityLabel={t('awqat.day.open')}
         style={styles.row}
         pressedStyle={{ opacity: 0.6 }}>
         {today.prayers.map((prayer) => (
           <TimeCell
             key={prayer.id}
             prayer={prayer}
-            isNext={prayer.id === next.id && !next.isTomorrow}
-            passed={prayer.time.getTime() < next.time.getTime() - next.msUntil}
+            lit={prayer.id === litId}
+            closed={windowEnd(today, prayer.id).getTime() <= now.getTime()}
             jumuah={isFriday && prayer.id === 'dhuhr'}
           />
         ))}
@@ -442,13 +369,6 @@ export function PrayerTimesCard({ action }: PrayerTimesCardProps) {
           value={t('place.change')}
         />
       )}
-
-      <WindowsSheet
-        visible={windowsOpen}
-        onClose={() => setWindowsOpen(false)}
-        today={today}
-        next={next}
-      />
     </Shell>
   );
 }
@@ -520,10 +440,9 @@ const styles = StyleSheet.create({
     gap: Spacing.one,
   },
   /*
-    44pt targets in the arch's empty corners, the drawn mark centred. Above
-    the niche in stacking order (they render after it), so the corner taps
-    are theirs and everything else on the niche still opens the windows
-    sheet.
+    A 44pt target in the arch's empty corner, the drawn mark centred. Above
+    the niche in stacking order (it renders after it), so the corner tap is
+    its own and everything else on the niche still opens the day page.
   */
   spandrel: {
     position: 'absolute',
@@ -534,48 +453,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     zIndex: 2,
   },
-  spandrelLeft: {
-    left: Spacing.one,
-  },
   spandrelRight: {
     right: Spacing.one,
-  },
-  backdrop: {
-    flex: 1,
-    justifyContent: 'flex-end',
-  },
-  sheet: {
-    paddingTop: Spacing.three,
-    paddingBottom: Spacing.six,
-    paddingHorizontal: Spacing.four,
-  },
-  sheetBody: {
-    paddingVertical: Spacing.four,
-    gap: Spacing.three,
-  },
-  sheetTitle: {
-    textAlign: 'center',
-  },
-  sheetRows: {
-    marginTop: Spacing.two,
-  },
-  windowRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
-    gap: Spacing.three,
-    paddingVertical: Spacing.three,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-  },
-  windowName: {
-    minWidth: 72,
-  },
-  windowSpan: {
-    alignItems: 'flex-end',
-    gap: 2,
-  },
-  tabular: {
-    fontVariant: ['tabular-nums'],
   },
   row: {
     flexDirection: 'row',

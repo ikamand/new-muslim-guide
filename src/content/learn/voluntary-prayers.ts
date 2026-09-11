@@ -101,7 +101,7 @@ export const ISTIKHARA: Reference = {
     difficulty: 'building',
     estimatedMinutes: 3,
     beginnerPriority: 3,
-    relatedContent: [ref('guide', 'istikhara'), ref('reference', 'dua-and-dhikr')],
+    relatedContent: [ref('guide', 'istikhara'), ref('reference', 'dua-and-dhikr'), ref('reference', 'held-off-times')],
   },
   quickFacts: [
     { label: 'When', value: 'Any time you have a real decision to make' },

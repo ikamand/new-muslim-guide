@@ -5,22 +5,22 @@
  * here is lost the next time it runs, and one that needs making belongs
  * upstream, where the text is published.
  *
- * 249 Qur'an passages and 208 narrations. Every character came over
+ * 249 Qur'an passages and 211 narrations. Every character came over
  * the wire from a published text rather than from memory, which is the only
  * way a file like this could exist under this project's rules about Arabic.
  *
  * ## Where each line came from
  *
  * No one source has all of it, so each field is taken from the first that
- * does, and says so on the text itself. Of the 208 narrations here:
- * 70 were confirmed against a second, separately edited publisher;
- * 70 carry HadeethEnc's own translation, 138 carry Darussalam's, and
+ * does, and says so on the text itself. Of the 211 narrations here:
+ * 72 were confirmed against a second, separately edited publisher;
+ * 72 carry HadeethEnc's own translation, 139 carry Darussalam's, and
  * 0 have Arabic and no translation at all.
  *
  * ⚠️ **The Darussalam translations are not ours to relicense.** They reach
  * this file through a public-domain dedication that covers the compiler's work
  * and not the translation inside it. What makes that defensible here is scale
- * and purpose — 138 narrations out of some thirty thousand, each quoted under
+ * and purpose — 139 narrations out of some thirty thousand, each quoted under
  * the instruction it supports, in an app that is free and never sold. It is a
  * quotation, not a republication, and it is Iyad's decision on the record.
  *
@@ -1956,6 +1956,37 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
     "arabicFrom": "HadeethEnc.com",
     "translationFrom": "HadeethEnc.com"
   },
+  "muslim:831": {
+    "arabic": "عَنْ عُقْبَةَ بْنَ عَامِرٍ الْجُهَنِيَّ رضي الله عنه قَالَ: ثَلَاثُ سَاعَاتٍ كَانَ رَسُولُ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ يَنْهَانَا أَنْ نُصَلِّيَ فِيهِنَّ، أَوْ أَنْ نَقْبُرَ فِيهِنَّ مَوْتَانَا: حِينَ تَطْلُعُ الشَّمْسُ بَازِغَةً حَتَّى تَرْتَفِعَ، وَحِينَ يَقُومُ قَائِمُ الظَّهِيرَةِ حَتَّى تَمِيلَ الشَّمْسُ، وَحِينَ تَضَيَّفُ الشَّمْسُ لِلْغُرُوبِ حَتَّى تَغْرُبَ.",
+    "translation": "‘Uqbah ibn ‘Āmir al-Juhani (may Allah be pleased with him) reported: Three hours the Messenger of Allah (may Allah's peace and blessings be upon him) used to forbid us from praying or burying our deceased ones in them: when the sun begins to rise until it has fully risen; when the sun is at its zenith until it begins to decline; and when the sun starts setting until it has fully set.",
+    "attribution": "Narrated by Muslim",
+    "grade": "Authentic",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "bukhari:597": {
+    "arabic": "عن أنس بن مالك رضي الله عنه عن النبي صلى الله عليه وسلم قال: «مَنْ نَسِيَ صَلَاةً فَلْيُصَلِّ إِذَا ذَكَرَهَا، لَا كَفَّارَةَ لَهَا إِلَّا ذَلِكَ: {وَأَقِمِ الصَّلاةَ لِذِكْرِي} [طه: 14]».",
+    "translation": "Anas ibn Mālik (may Allah be pleased with him) reported: The Prophet (may Allah's peace and blessings be upon him) said: \"Whoever forgets a prayer should perform it as soon as he remembers it; there is no expiation for it except that: {and establish prayer to remember me.} [Surat Tā-ha: 14]\"",
+    "attribution": "Agreed upon",
+    "grade": "Authentic",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "bukhari:586": {
+    "arabic": "سَمِعَ أَبَا سَعِيدٍ الْخُدْرِيَّ، يَقُولُ سَمِعْتُ رَسُولَ اللَّهِ صلى الله عليه وسلم يَقُولُ ‏ \"‏ لاَ صَلاَةَ بَعْدَ الصُّبْحِ حَتَّى تَرْتَفِعَ الشَّمْسُ، وَلاَ صَلاَةَ بَعْدَ الْعَصْرِ حَتَّى تَغِيبَ الشَّمْسُ ‏\"‏‏.‏",
+    "isnad": "حَدَّثَنَا عَبْدُ الْعَزِيزِ بْنُ عَبْدِ اللَّهِ، قَالَ حَدَّثَنَا إِبْرَاهِيمُ بْنُ سَعْدٍ، عَنْ صَالِحٍ، عَنِ ابْنِ شِهَابٍ، قَالَ أَخْبَرَنِي عَطَاءُ بْنُ يَزِيدَ الْجُنْدَعِيُّ، أَنَّهُ",
+    "translation": "Narrated Abu Sa`id Al-Khudri:I heard Allah's Messenger (ﷺ) saying, \"There is no prayer after the morning prayer till the sun rises, and there is no prayer after the `Asr prayer till the sun sets",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:3273": {
+    "arabic": "عن ابن عمر رضي الله عنهما قال: قال رسول الله صلى الله عليه وسلم : «إذا طلعَ حاجبُ الشمس فدَعُوا الصلاةَ حتى تَبْرُزَ، وإذا غاب حاجبُ الشمس فدَعُوا الصلاةَ حتى تغيبَ، ولا تَحَيَّنُوا بصلاتِكم طُلُوعَ الشمسِ ولا غروبَها، فإنَّها تطلُعُ بيْن قَرْنَيْ شيطان، أو الشيطان».",
+    "translation": "Ibn ‘Umar (may Allah be pleased with him) reported that the Messenger of Allah (may Allah’s peace and blessings be upon him) said: \"When the edge of the sun rises, avoid prayer until it becomes prominent; and if the edge of the sun disappears, avoid prayer until it sets. And do not offer your prayer at the time of sunrise or sunset, for it rises between two horns of a devil – or the devil.\"",
+    "attribution": "Narrated by Bukhari & Muslim",
+    "grade": "Authentic hadith",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
   "bukhari:6193": {
     "arabic": "أَخْبَرَنِي عَبْدُ الْحَمِيدِ بْنُ جُبَيْرِ بْنِ شَيْبَةَ، قَالَ جَلَسْتُ إِلَى سَعِيدِ بْنِ الْمُسَيَّبِ فَحَدَّثَنِي أَنَّ جَدَّهُ حَزْنًا قَدِمَ عَلَى النَّبِيِّ صلى الله عليه وسلم‏.‏ فَقَالَ ‏\"‏ مَا اسْمُكَ ‏\"‏‏.‏ قَالَ اسْمِي حَزْنٌ‏.‏ قَالَ ‏\"‏ بَلْ أَنْتَ سَهْلٌ ‏\"‏‏.‏ قَالَ مَا أَنَا بِمُغَيِّرٍ اسْمًا سَمَّانِيهِ أَبِي‏.‏ قَالَ ابْنُ الْمُسَيَّبِ فَمَا زَالَتْ فِينَا الْحُزُونَةُ بَعْدُ‏.‏",
     "isnad": "حَدَّثَنَا إِبْرَاهِيمُ بْنُ مُوسَى، حَدَّثَنَا هِشَامٌ، أَنَّ ابْنَ جُرَيْجٍ، أَخْبَرَهُمْ قَالَ",
@@ -3017,14 +3048,6 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
   "bukhari:444": {
     "arabic": "عَنْ ‌أَبِي قَتَادَةَ السَّلَمِيِّ رضي الله عنه أَنَّ رَسُولَ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ قَالَ: «إِذَا دَخَلَ أَحَدُكُمُ الْمَسْجِدَ فَلْيَرْكَعْ رَكْعَتَيْنِ قَبْلَ أَنْ يَجْلِسَ».",
     "translation": "Abu Qatādah as-Salami (may Allah be pleased with him) reported: The Messenger of Allah (may Allah’s peace and blessings be upon him) said: \"When anyone of you enters the mosque, let him offer two Rak‘ahs before he sits down.\"",
-    "attribution": "Agreed upon",
-    "grade": "Authentic",
-    "arabicFrom": "HadeethEnc.com",
-    "translationFrom": "HadeethEnc.com"
-  },
-  "bukhari:597": {
-    "arabic": "عن أنس بن مالك رضي الله عنه عن النبي صلى الله عليه وسلم قال: «مَنْ نَسِيَ صَلَاةً فَلْيُصَلِّ إِذَا ذَكَرَهَا، لَا كَفَّارَةَ لَهَا إِلَّا ذَلِكَ: {وَأَقِمِ الصَّلاةَ لِذِكْرِي} [طه: 14]».",
-    "translation": "Anas ibn Mālik (may Allah be pleased with him) reported: The Prophet (may Allah's peace and blessings be upon him) said: \"Whoever forgets a prayer should perform it as soon as he remembers it; there is no expiation for it except that: {and establish prayer to remember me.} [Surat Tā-ha: 14]\"",
     "attribution": "Agreed upon",
     "grade": "Authentic",
     "arabicFrom": "HadeethEnc.com",

@@ -3,8 +3,9 @@ import { Stack } from 'expo-router';
 import { useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 
-import { DoubleRule, QuietRow, Rubric } from '@/components/jadwal';
+import { DoubleRule, JadwalRow, QuietRow, Rubric } from '@/components/jadwal';
 import { LocationAsk } from '@/components/location-ask';
+import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
 import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
@@ -40,16 +41,37 @@ function monthName(t: (key: UIKey) => string, month: number): string {
   return t(`hijri.month.${month}` as UIKey);
 }
 
-function DayRow({ day, locale }: { day: MonthDay; locale: string }) {
+/** "2026-09-24", the day page's parameter, from local calendar parts. */
+function isoDay(date: Date): string {
+  const two = (n: number) => String(n).padStart(2, '0');
+  return `${date.getFullYear()}-${two(date.getMonth() + 1)}-${two(date.getDate())}`;
+}
+
+/** Whole local days from `from` to `to`. */
+function daysBetween(from: Date, to: Date): number {
+  const a = new Date(from.getFullYear(), from.getMonth(), from.getDate());
+  const b = new Date(to.getFullYear(), to.getMonth(), to.getDate());
+  return Math.round((b.getTime() - a.getTime()) / 86400000);
+}
+
+/**
+ * Every row is a door to that day's page (10 Sep 2026): the jadwal you
+ * read became a calendar you can enter, and the row is the target, as the
+ * fihrist's rows are. Nothing is added to the row to say so.
+ */
+function DayRow({ day, locale, label }: { day: MonthDay; locale: string; label: string }) {
   const theme = useTheme();
 
   return (
-    <View
+    <PressableLink
+      href={{ pathname: '/awqat-day', params: { date: isoDay(day.date) } }}
+      accessibilityLabel={label}
       style={[
         styles.dayRow,
         { borderBottomColor: theme.goldSoft },
         day.isToday && { backgroundColor: theme.backgroundSelected },
-      ]}>
+      ]}
+      pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
       <ThemedText
         type={day.isFriday ? 'smallBold' : 'small'}
         themeColor={day.isFriday ? 'gold' : 'text'}
@@ -64,7 +86,7 @@ function DayRow({ day, locale }: { day: MonthDay; locale: string }) {
       <ThemedText type="caption" themeColor="textSecondary" style={styles.hijriCell}>
         {day.hijri ? String(day.hijri.day) : ''}
       </ThemedText>
-    </View>
+    </PressableLink>
   );
 }
 
@@ -120,18 +142,60 @@ export default function AwqatScreen() {
   /* The white days as one row above their first day, not three labels. */
   const firstWhiteIndex = month.days.findIndex((day) => day.isWhiteDay);
 
+  /*
+    What is coming, before the table — only for the month that holds today,
+    and only what arithmetic can honestly claim: the next Friday, and the
+    projected white days with a day count. No moon-boundary dates; the
+    fasting lesson's promise stands. (10 Sep 2026, from the audit's mock.)
+  */
+  const today = new Date();
+  const showingNow = shown.year === today.getFullYear() && shown.month === today.getMonth();
+  const inWords = (days: number) =>
+    days === 0
+      ? t('awqat.in.today')
+      : days === 1
+        ? t('awqat.in.tomorrow')
+        : t('awqat.in.days').replace('{n}', String(days));
+  const untilFriday = (5 - today.getDay() + 7) % 7;
+  const start = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+  const nextWhite =
+    month.days.find((day) => day.isWhiteDay && day.date.getTime() >= start.getTime()) ??
+    buildMonth(coords, shown.year, shown.month + 1, profile, today).days.find(
+      (day) => day.isWhiteDay,
+    );
+  const whiteDates = (first: Date) => {
+    const three = [0, 1, 2].map(
+      (offset) => new Date(first.getFullYear(), first.getMonth(), first.getDate() + offset),
+    );
+    const monthLong = new Intl.DateTimeFormat(locale, { month: 'long' });
+    const sameMonth = three.every((day) => day.getMonth() === first.getMonth());
+    const parts = sameMonth
+      ? three.map((day) => String(day.getDate()))
+      : three.map((day) => `${day.getDate()} ${monthLong.format(day)}`);
+    const joined = `${parts.slice(0, -1).join(', ')} and ${parts[parts.length - 1]}`;
+    return sameMonth ? `${joined} ${monthLong.format(first)}` : joined;
+  };
+  const dayLabel = (day: MonthDay) =>
+    t('awqat.day.openFor').replace(
+      '{date}',
+      new Intl.DateTimeFormat(locale, { weekday: 'long', day: 'numeric', month: 'long' }).format(
+        day.date,
+      ),
+    );
+
   return (
     <>
       <Stack.Screen options={{ title: t('awqat.title') }} />
       {/*
-        The column header is child 3 and STICKS: the month stepper scrolls
+        The column header is child 3 (4 under the upcoming strip) and STICKS: the month stepper scrolls
         away and the labels stop at the top, so day 27 still says which
         column is ʿAsr. A printed jadwal never loses its header row either —
         the reader's thumb just couldn't hold it. Iyad's ask, 31 Aug. The
         row carries the page background for this: while stuck, day rows
         scroll beneath it.
       */}
-      <ScrollView contentContainerStyle={styles.content} stickyHeaderIndices={[3]}>
+      {/* The column header's index moves by one when the upcoming strip is drawn. */}
+      <ScrollView contentContainerStyle={styles.content} stickyHeaderIndices={[showingNow ? 4 : 3]}>
       {/*
         The month steppers flank the name — ‹ September 2026 › — inside the
         ʿunwān itself, the way a bound calendar turns pages. A separate nav
@@ -185,6 +249,28 @@ export default function AwqatScreen() {
       </View>
       <DoubleRule />
 
+      {/* Upcoming: a row each, kicker as the day count, the page that explains it as the door. */}
+      {showingNow ? (
+        <View>
+          <JadwalRow
+            href={{ pathname: '/reference/[id]', params: { id: 'jumuah' } }}
+            kicker={inWords(untilFriday)}
+            title={t('awqat.friday')}
+            meta={t('awqat.friday.meta')}
+            trailing={<Ionicons name="chevron-forward" size={14} color={theme.gold} />}
+          />
+          {nextWhite ? (
+            <JadwalRow
+              href={{ pathname: '/reference/[id]', params: { id: 'voluntary-fasting' } }}
+              kicker={inWords(daysBetween(today, nextWhite.date))}
+              title={t('awqat.whiteDays')}
+              meta={t('awqat.whiteDays.meta').replace('{dates}', whiteDates(nextWhite.date))}
+              trailing={<Ionicons name="chevron-forward" size={14} color={theme.gold} />}
+            />
+          ) : null}
+        </View>
+      ) : null}
+
       {/*
         Two Views, not one, and the split is load-bearing: this outer View is
         the sticky child, and on native RN wraps a sticky child in its own
@@ -218,7 +304,7 @@ export default function AwqatScreen() {
               />
             </View>
           )}
-          <DayRow day={day} locale={locale} />
+          <DayRow day={day} locale={locale} label={dayLabel(day)} />
         </View>
       ))}
 

@@ -430,7 +430,8 @@ export const EN = {
   'awqat.col.isha': 'ʿIsha',
   'awqat.col.hijri': 'Hijri',
   'awqat.whiteDays': 'The white days',
-  'awqat.whiteDays.detail': 'Three sunnah fasting days mid-month',
+  /* The legend under the table: what a gold Hijri number means. */
+  'awqat.whiteDays.legend': 'Hijri 13, 14 and 15, in gold, are the white days: three sunnah fasts',
   /* The month's upcoming strip: only what arithmetic can honestly claim. */
   'awqat.in.today': 'Today',
   'awqat.in.tomorrow': 'Tomorrow',

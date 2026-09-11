@@ -4152,3 +4152,11 @@ Verified: `tsc`, `expo lint` (the standing four), `style:check`,
 `content:audit`, `i18n:manifest`; screenshots at 10:30, 17:30 and 22:00 in
 both themes, the reminders page, Settings, the lesson. Not seen on a device.
 Ships by OTA.
+
+**Corrected 11 Sep, from the phone.** The white days read as running from
+the 13th to the end of the month: the rubric row sat above the first white
+day and read as a heading over every row beneath it. The three rows now
+carry their Hijri number in gold, the rubric row is gone, and one legend
+under the table says what the gold means and opens the fasting lesson. The
+arithmetic was right throughout (13 to 15, Umm al-Qura); the presentation
+was not.

@@ -3,7 +3,7 @@ import { Stack } from 'expo-router';
 import { useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 
-import { DoubleRule, JadwalRow, QuietRow, Rubric } from '@/components/jadwal';
+import { DoubleRule, JadwalRow, QuietRow } from '@/components/jadwal';
 import { LocationAsk } from '@/components/location-ask';
 import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
@@ -29,8 +29,8 @@ import type { UIKey } from '@/i18n/ui';
  *
  * ## What it marks, and what it refuses to
  *
- * The white days get a rubric row, linking to the fasting lesson that already
- * teaches them. The named moon-boundary days — 1 Ramadan, the Eids, ʿĀshūrāʾ,
+ * The white days, 13 to 15, carry their Hijri number in gold, with a legend
+ * under the table that links to the fasting lesson. The named moon-boundary days — 1 Ramadan, the Eids, ʿĀshūrāʾ,
  * ʿArafah — are deliberately absent: `learn/voluntary-fasting.ts` promises in
  * shipped, reviewed words that this app will not date them, and a monthly
  * table that quietly did would break that promise. See `awqat-month.ts`.
@@ -83,7 +83,16 @@ function DayRow({ day, locale, label }: { day: MonthDay; locale: string; label: 
           {formatClock(prayer.time, locale)}
         </ThemedText>
       ))}
-      <ThemedText type="caption" themeColor="textSecondary" style={styles.hijriCell}>
+      {/*
+        A white day's Hijri number in gold: the mark on the day itself. It
+        replaced a rubric row above the first white day (Iyad, 11 Sep 2026),
+        which read as a heading over every row beneath it, so 13 through the
+        end of the month all looked like white days.
+      */}
+      <ThemedText
+        type="caption"
+        themeColor={day.isWhiteDay ? 'gold' : 'textSecondary'}
+        style={[styles.hijriCell, day.isWhiteDay && styles.hijriWhite]}>
         {day.hijri ? String(day.hijri.day) : ''}
       </ThemedText>
     </PressableLink>
@@ -138,9 +147,6 @@ export default function AwqatScreen() {
       const moved = new Date(year, current + delta, 1);
       return { year: moved.getFullYear(), month: moved.getMonth() };
     });
-
-  /* The white days as one row above their first day, not three labels. */
-  const firstWhiteIndex = month.days.findIndex((day) => day.isWhiteDay);
 
   /*
     What is coming, before the table — only for the month that holds today,
@@ -293,20 +299,15 @@ export default function AwqatScreen() {
         </View>
       </View>
 
-      {month.days.map((day, index) => (
-        <View key={day.date.getTime()}>
-          {index === firstWhiteIndex && (
-            <View style={[styles.eventRow, { borderBottomColor: theme.goldSoft }]}>
-              <Rubric label={t('awqat.whiteDays')} align="left" />
-              <QuietRow
-                href={{ pathname: '/reference/[id]', params: { id: 'voluntary-fasting' } }}
-                label={t('awqat.whiteDays.detail')}
-              />
-            </View>
-          )}
-          <DayRow day={day} locale={locale} label={dayLabel(day)} />
-        </View>
+      {month.days.map((day) => (
+        <DayRow key={day.date.getTime()} day={day} locale={locale} label={dayLabel(day)} />
       ))}
+
+      {/* What the gold Hijri numbers mean, and the lesson that teaches the fast. */}
+      <QuietRow
+        href={{ pathname: '/reference/[id]', params: { id: 'voluntary-fasting' } }}
+        label={t('awqat.whiteDays.legend')}
+      />
 
       {/*
         The one sentence of honesty the whole table needs: the Hijri column is
@@ -376,14 +377,13 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontVariant: ['tabular-nums'],
   },
+  hijriWhite: {
+    fontWeight: '700',
+  },
   hijriCell: {
     width: 30,
     textAlign: 'right',
     fontVariant: ['tabular-nums'],
-  },
-  eventRow: {
-    paddingVertical: Spacing.two,
-    borderBottomWidth: StyleSheet.hairlineWidth,
   },
   foot: {
     paddingTop: Spacing.four,

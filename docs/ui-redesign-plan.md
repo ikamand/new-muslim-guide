@@ -4048,6 +4048,16 @@ from QuranEnc's 74 would be a content decision for Iyad. ⚠️ The inline
 rosette still orphans onto its own line in Al-Fatihah 7 on web; the seat is
 already marked device-pending above and stays so.
 
+**Decided, 11 Sep 2026.** Iyad chose Talal Itani's ClearQuran, the Allah
+edition, as the English under every ayah on the surah pages and in the
+Qur'an duas; Saheeh International left with its dangling dash. He asked for
+it believing Itani wrote the word-by-word gloss; he did not (quran.com names
+no author, and the wording is corpus.quran.com's), and Iyad kept the gloss
+knowing the two differ ("the Gracious" under "the Most Gracious"). The
+prayer-step Al-Fatihah in `recitations.ts` and the Qur'an lines in
+`evidence.ts` were outside what he asked for and still say what they said.
+`scripts/fetch-quran-itani.mjs` carries the terms and the cross-check.
+
 Verified: `tsc`, `expo lint` (four standing errors, none in touched files),
 `style:check`, `i18n:manifest` (English only; UI strings are not in the
 sheet), `expo export --platform web`. Ships by OTA.

@@ -2,7 +2,8 @@
  * Generates `src/content/quran/juz30.ts` and `fatiha.ts` from the Quran
  * Foundation API.
  *
- * Run: `node scripts/generate-juz30.mjs`  (needs a network connection)
+ * Run: `npm run quran:juz30`  (needs a network connection for the Arabic, and
+ * `npm run quran:itani:corpus` once, for the English)
  *
  * ## Why Al-Fatiha comes out of the same script but not the same file
  *
@@ -28,19 +29,22 @@
  * - `text_imlaei` — the simplified script, which is what the rest of the app
  *   already sets. The API also serves Uthmani; taking that would change the
  *   script style of the whole app through the back door.
- * - Translation 20, Saheeh International. Chosen for consistency: it is the
- *   same translation QuranEnc serves as `english_saheeh`, which is what
- *   `content:verify` already compares against.
+ * - The English is Talal Itani's ClearQuran, Allah edition, read from
+ *   `.cache/quran/itani-allah.json` — Iyad's choice, 11 Sep 2026, replacing
+ *   Saheeh International (translation 20 of this API, carried since 22 Aug).
+ *   He wanted the sentence under an ayah and the word gloss above it to read
+ *   as one voice; they cannot quite, because the gloss has no named author
+ *   and Itani publishes nothing at word level, and he has accepted the gap.
+ *   `fetch-quran-itani.mjs` records the terms and the cross-check.
  * - No transliteration. Settled deliberately — a Latin line under the ayah is
  *   read *instead of* the Arabic, and people end up memorising English letters
  *   and still cannot open a mushaf. The audio does that job better.
  *
- * ⚠️ LICENCE UNRESOLVED. Saheeh International is a copyrighted translation
- * distributed by these APIs without published reuse terms. The attribution is
- * recorded in the generated file, and this needs settling in the same
- * conversation as the IslamHouse one before the app ships publicly.
+ * The translation ships under CC BY-ND 4.0 with the credit the generated
+ * file prints. The Arabic's API publishes no terms, which Iyad has decided to
+ * build on; that decision is on the record in `providers.ts`.
  */
-import { writeFileSync, mkdirSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -48,31 +52,24 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 
 const FIRST = 78;
 const LAST = 114;
-const TRANSLATION = 20;
+
+/* The English, one record per ayah, from the publisher's own verse-by-verse
+   file. Missing means the mirror was never fetched, not that the ayah has no
+   translation, and the run stops rather than writing an empty string. */
+const itaniPath = join(root, '.cache/quran/itani-allah.json');
+if (!existsSync(itaniPath)) throw new Error('.cache/quran/itani-allah.json is missing — run `npm run quran:itani:corpus` first');
+const itani = new Map(JSON.parse(readFileSync(itaniPath, 'utf8')).map((v) => [`${v.s}:${v.a}`, v.en]));
+const english = (s, a) => {
+  const text = itani.get(`${s}:${a}`);
+  if (!text) throw new Error(`${s}:${a} has no English in the ClearQuran mirror`);
+  return text;
+};
 
 const get = async (url) => {
   const response = await fetch(url, { headers: { 'user-agent': 'new-muslim-guide/juz30' } });
   if (!response.ok) throw new Error(`${response.status} ${url}`);
   return response.json();
 };
-
-/**
- * The translation as prose.
- *
- * Footnote markers come through as `<sup foot_note=197829>1</sup>`, and
- * stripping tags alone leaves the digit welded to the word before it — "He is
- * Allāh, [who is] One,1". The whole element goes, contents included.
- *
- * The footnotes themselves are dropped rather than carried. They are long,
- * they are a different reading experience, and a memorisation screen is not
- * where somebody stops to read a paragraph about the meaning of ar-Rahmān.
- */
-const strip = (html) =>
-  html
-    .replace(/<sup[^>]*>.*?<\/sup>/g, '')
-    .replace(/<[^>]*>/g, '')
-    .replace(/\s+/g, ' ')
-    .trim();
 
 console.log(`Fetching surah 1 and surahs ${FIRST}–${LAST}…`);
 
@@ -83,7 +80,7 @@ const fetchSurah = async (n) => {
   const info = meta.get(n);
   const data = await get(
     `https://api.quran.com/api/v4/verses/by_chapter/${n}` +
-      `?fields=text_imlaei&translations=${TRANSLATION}&per_page=300`,
+      '?fields=text_imlaei&per_page=300',
   );
   process.stdout.write(`  ${n} ${info.name_simple} — ${data.verses.length}\n`);
   return {
@@ -99,7 +96,7 @@ const fetchSurah = async (n) => {
     ayahs: data.verses.map((verse) => ({
       number: verse.verse_number,
       arabic: verse.text_imlaei,
-      translation: strip(verse.translations?.[0]?.text ?? ''),
+      translation: english(n, verse.verse_number),
     })),
   };
 };
@@ -143,8 +140,9 @@ const file = `/**
  * needs making belongs upstream, where the text is published.
  *
  * ${surahs.length} surahs, ${total} ayahs. Every character of Arabic came over the wire from
- * api.quran.com rather than from memory, which is the only way a file this
- * size could exist under this project's rules about Arabic text.
+ * api.quran.com, and every word of English from ClearQuran's own verse-by-verse
+ * file, rather than from memory — the only way a file this size could exist
+ * under this project's rules about Arabic text.
  *
  * The Arabic is Imlaei — the simplified script the rest of the app already
  * sets. The API also serves Uthmani, and taking that would have changed the
@@ -154,9 +152,10 @@ const file = `/**
  * read *instead of* the Arabic, and someone who learns that way memorises
  * English letters and still cannot open a mushaf. Recitation does that job.
  *
- * ⚠️ LICENCE UNRESOLVED — see the attribution below. Neither the translation
- * nor the API publishes reuse terms, and this needs settling before the app
- * ships publicly.
+ * The translation is Talal Itani's, the Allah edition of ClearQuran, under
+ * CC BY-ND 4.0 with the credit below. Iyad's choice, 11 Sep 2026, replacing
+ * Saheeh International. The Arabic's API publishes no terms; \`providers.ts\`
+ * records the decision to build on it.
  *
  * ⚠️ REVIEW REQUIRED — the text is published and unedited, and nobody
  * qualified has yet read this file back against a mushaf.
@@ -165,7 +164,7 @@ const file = `/**
 /** Where the text and the translation came from. A licence obligation. */
 export const JUZ30_SOURCE = {
   arabic: 'Imlaei text from api.quran.com (Quran Foundation)',
-  translation: 'Saheeh International',
+  translation: 'Translation by Talal Itani, ClearQuran.com',
   fetched: ${JSON.stringify(new Date().toISOString().slice(0, 10))},
 } as const;
 
@@ -213,8 +212,8 @@ const fatihaFile = `/**
  * Same source, same script and same translation as \`juz30.ts\`, so the two
  * read as one book rather than as two imports.
  *
- * ⚠️ LICENCE UNRESOLVED and ⚠️ REVIEW REQUIRED — both exactly as recorded in
- * the header of \`juz30.ts\`.
+ * ⚠️ REVIEW REQUIRED, and the translation's terms — both exactly as recorded
+ * in the header of \`juz30.ts\`.
  */
 
 import type { Surah } from './juz30';

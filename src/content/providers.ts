@@ -55,7 +55,8 @@ export type ProviderId =
   | 'ninetynine'
   | 'aladhan'
   | 'tarteel'
-  | 'quranfoundation';
+  | 'quranfoundation'
+  | 'clearquran';
 
 export type Provider = {
   /** What to call it in a report. */
@@ -108,7 +109,8 @@ export const PROVIDERS: Readonly<Record<ProviderId, Provider>> = {
     name: 'QuranEnc',
     where: 'quranenc.com/api/v1',
     supplies:
-      'The Qur’an duas collection, the names of Allah, every Qur’an text in `evidence.ts`, ' +
+      'The Arabic of the Qur’an duas collection (its English is ClearQuran’s since 11 Sep ' +
+      '2026), the names of Allah, every Qur’an text in `evidence.ts`, ' +
       'and the corpus every Qur’an text in the app is checked against by `content:verify`. ' +
       'Not juz 30, which this row once claimed: that comes from Quran Foundation.',
     fetchedBy: 'npm run quran:corpus',
@@ -250,7 +252,8 @@ export const PROVIDERS: Readonly<Record<ProviderId, Provider>> = {
     name: 'Quran Foundation (Quran.com)',
     where: 'api.quran.com/api/v4',
     supplies:
-      'Juz 30 and Al-Fatihah — Imlaei Arabic and Saheeh International — and, word by word, ' +
+      'Juz 30 and Al-Fatihah — the Imlaei Arabic; the English under it was Saheeh ' +
+      'International until 11 Sep 2026 and is ClearQuran’s now — and, word by word, ' +
       'the transliteration of those and the gloss and transliteration of every ayah the app ' +
       'opens as a row of words.',
     fetchedBy: 'npm run quran:words:corpus',
@@ -267,6 +270,29 @@ export const PROVIDERS: Readonly<Record<ProviderId, Provider>> = {
       '“Quran.com” and names no author it cannot source. The endpoint is retired in favour ' +
       'of a credentialed host; the whole Qur’an is mirrored in `.cache/quran/words/` and ' +
       '`~/Documents/islamic-data/` so nothing here depends on it staying up.',
+  },
+  clearquran: {
+    name: 'ClearQuran (Talal Itani)',
+    where: 'clearquran.com',
+    supplies:
+      'The English under every ayah of juz 30 and Al-Fatihah on the surah pages, and of the ' +
+      'Qur’an duas collection. The Allah edition — the same translation is also published ' +
+      'writing “God”. Iyad’s choice, 11 Sep 2026, replacing Saheeh International, so that the ' +
+      'Qur’an tab and the duas read in one voice. Not the word-by-word gloss: that has no ' +
+      'named author and he chose to keep it, knowing the two differ in wording.',
+    fetchedBy: 'npm run quran:itani:corpus',
+    verification:
+      'The publisher’s own verse-by-verse file, 6,236 ayahs, counted surah by surah against ' +
+      'the Quran Foundation mirror and compared verse by verse against the jsDelivr copy of ' +
+      'the God edition with the divine name normalised. Thirteen ayahs differ — typos the ' +
+      'publisher has since fixed, none on a surah page — listed in ' +
+      '`.cache/quran/itani-allah-diff.txt`.',
+    licence:
+      'CC BY-ND 4.0 per clearquran.com/download, read 11 Sep 2026; the readme inside the ' +
+      'zip, dated 2015, says Attribution-NonCommercial-NoDerivs.',
+    obligation:
+      'Credit “Translation by Talal Itani, ClearQuran.com”, which the surah page and the ' +
+      'sources page print, and the text verbatim — which is how the app quotes anyway.',
   },
 };
 

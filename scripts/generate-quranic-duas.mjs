@@ -35,10 +35,13 @@
  * ## What is checked
  *
  * Every entry is fetched from QuranEnc and the run fails if a reference does
- * not resolve. Arabic and English both come from the same publisher and the
- * same verse, so they cannot drift apart, and no text is sliced: the whole
- * ayah ships, framing and all. `content:verify` re-checks the Arabic against
- * QuranEnc on every run after this one.
+ * not resolve. The Arabic is QuranEnc's. The English is Talal Itani's
+ * ClearQuran, Allah edition, from `.cache/quran/itani-allah.json` — since
+ * 11 Sep 2026, Iyad's choice, so that this collection and the Qur'an tab read
+ * in one voice; Saheeh International's was the English before that. Two
+ * publishers matched by verse number, and the run fails if either lacks the
+ * verse. `content:verify` re-checks the Arabic against QuranEnc on every run
+ * after this one.
  */
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
@@ -61,6 +64,12 @@ const corpus = existsSync(corpusPath)
     )
   : null;
 if (corpus) console.log(`Using local corpus (${corpus.size} ayahs); QuranEnc is the fallback.\n`);
+
+/* The English — one record per ayah from the publisher's own file, no
+   fallback: a missing mirror is a missing step, not a reason to fetch. */
+const itaniPath = join(root, '.cache/quran/itani-allah.json');
+if (!existsSync(itaniPath)) throw new Error('.cache/quran/itani-allah.json is missing — run `npm run quran:itani:corpus` first');
+const itani = new Map(JSON.parse(readFileSync(itaniPath, 'utf8')).map((v) => [`${v.s}:${v.a}`, v.en]));
 
 /* The API's word count for an ayah, from the `.cache/quran/words/` mirror —
    the numbering CUT is written in. Needed only for cut ayahs. */
@@ -235,7 +244,7 @@ const WHO = {
  * one is the dua itself and the wider one is a page that wanted its framing.
  * 67 of 256 rendered ayahs are cut; the rest are whole.
  *
- * `EN` is the same cut in Saheeh International's words, by hand: the phrase
+ * `EN` is the same cut in Itani's words, by hand: the phrase
  * the sliced text starts at and, where the site stops early, the phrase it
  * ends at. Each is asserted to occur exactly once in the ayah's translation,
  * so a phrase that drifts fails the build rather than slicing the wrong
@@ -319,74 +328,74 @@ const CUT = {
   '66:11': [10, 24],
 };
 const EN = {
-  '2:32': ["Exalted are You"],
-  '2:126': ["My Lord, make this a secure city", "and the Last Day"],
-  '2:127': ["Our Lord, accept"],
-  '2:155': ["but give good tidings"],
-  '2:156': ["Indeed we belong to All\u0101h"],
-  '2:201': ["Our Lord, give us"],
-  '2:250': ["Our Lord, pour upon us"],
-  '2:285': ["We hear and we obey"],
-  '2:286': ["Our Lord, do not impose blame"],
-  '3:16': ["Our Lord, indeed we have believed"],
-  '3:26': ["O All\u0101h, Owner of Sovereignty"],
-  '3:38': ["My Lord, grant me from Yourself"],
-  '3:191': ["Our Lord, You did not create this aimlessly"],
-  '5:25': ["My Lord, indeed I do not possess"],
-  '5:83': ["Our Lord, we have believed, so register"],
-  '6:162': ["Indeed, my prayer"],
-  '7:23': ["Our Lord, we have wronged ourselves"],
-  '7:43': ["Praise to All\u0101h, who has guided us to this", "if All\u0101h had not guided us"],
-  '7:89': ["Our Lord, decide between us"],
-  '7:126': ["Our Lord, pour upon us patience"],
-  '7:151': ["My Lord, forgive me and my brother"],
-  '7:155': ["You are our Protector, so forgive us"],
-  '7:156': [null, "we have turned back to You"],
-  '10:85': ["Upon All\u0101h do we rely"],
-  '11:41': ["in the name of All\u0101h"],
-  '11:47': ["My Lord, I seek refuge in You from asking"],
-  '11:88': ["And my success is not but through All\u0101h"],
-  '12:18': ["so patience is most fitting"],
-  '12:67': ["The decision is only for All\u0101h"],
-  '12:83': ["so patience is most fitting"],
-  '12:86': ["I only complain"],
-  '12:101': ["Creator of the heavens and earth"],
-  '14:35': ["My Lord, make this city"],
-  '17:24': ["My Lord, have mercy upon them"],
-  '17:80': ["My Lord, cause me to enter"],
-  '18:10': ["Our Lord, grant us from Yourself mercy"],
-  '18:24': ["Perhaps my Lord will guide me"],
-  '19:4': ["My Lord, indeed my bones"],
-  '20:25': ["My Lord, expand"],
-  '20:114': ["My Lord, increase me in knowledge"],
-  '21:83': ["Indeed, adversity has touched me"],
-  '21:87': ["There is no deity except You"],
-  '21:89': ["My Lord, do not leave me alone"],
-  '21:112': ["My Lord, judge"],
-  '23:28': ["Praise to All\u0101h who has saved us"],
-  '23:93': ["My Lord, if You should show me"],
-  '23:97': ["My Lord, I seek refuge in You from the incitements"],
-  '23:118': ["My Lord, forgive and have mercy"],
-  '25:65': ["Our Lord, avert from us"],
-  '25:74': ["Our Lord, grant us from among our wives"],
-  '27:15': ["Praise [is due] to All\u0101h, who has favored us"],
-  '27:19': ["My Lord, enable me to be grateful"],
-  '27:40': ["This is from the favor of my Lord"],
-  '28:16': ["My Lord, indeed I have wronged myself", "so forgive me"],
-  '28:17': ["My Lord, for the favor"],
-  '28:21': ["My Lord, save me"],
-  '28:22': ["Perhaps my Lord will guide me to the sound way"],
-  '28:24': ["My Lord, indeed I am"],
-  '29:30': ["My Lord, support me"],
-  '40:7': ["Our Lord, You have encompassed"],
-  '43:13': ["Exalted is He who has subjected"],
-  '46:15': ["My Lord, enable me to be grateful"],
-  '54:10': ["Indeed, I am overpowered"],
-  '59:10': ["Our Lord, forgive us and our brothers"],
-  '60:4': ["Our Lord, upon You we have relied"],
-  '65:3': ["And whoever relies upon All\u0101h"],
-  '66:8': ["Our Lord, perfect for us our light"],
-  '66:11': ["My Lord, build for me"],
+  '2:32': ['Glory be to You'],
+  '2:126': ['O My Lord, make this a peaceful land', 'and the Last Day'],
+  '2:127': ['Our Lord, accept'],
+  '2:155': ['But give good news'],
+  '2:156': ['To Allah we belong'],
+  '2:201': ['Our Lord, give us'],
+  '2:250': ['Our Lord, pour down patience'],
+  '2:285': ['We hear and we obey'],
+  '2:286': ['Our Lord, do not condemn us'],
+  '3:16': ['Our Lord, we have believed'],
+  '3:26': ['O Allah, Owner of Sovereignty'],
+  '3:38': ['My Lord, bestow on me'],
+  '3:191': ['Our Lord, You did not create this in vain'],
+  '5:25': ['My Lord! I have control'],
+  '5:83': ['Our Lord, we have believed, so count us'],
+  '6:162': ['My prayer and my worship'],
+  '7:23': ['Our Lord, we have done wrong'],
+  '7:43': ['Praise be to Allah, who has guided us to this', 'we would never be guided'],
+  '7:89': ['Our Lord, decide between us'],
+  '7:126': ['Our Lord! Pour out patience'],
+  '7:151': ['My Lord, forgive me and my brother'],
+  '7:155': ['You are our Protector, so forgive us'],
+  '7:156': [null, 'We have turned to You'],
+  '10:85': ['In Allah we have put our trust'],
+  '11:41': ['In the name of Allah'],
+  '11:47': ['O My Lord, I seek refuge with You'],
+  '11:88': ['My success lies only with Allah'],
+  '12:18': ['But patience is beautiful'],
+  '12:67': ['The decision rests only with Allah'],
+  '12:83': ['Patience is a virtue'],
+  '12:86': ['I only complain'],
+  '12:101': ['Initiator of the heavens and the earth'],
+  '14:35': ['O my Lord, make this land'],
+  '17:24': ['My Lord, have mercy on them'],
+  '17:80': ['My Lord, lead me in'],
+  '18:10': ['Our Lord, give us mercy from Yourself'],
+  '18:24': ['Perhaps my Lord will guide me'],
+  '19:4': ['My Lord, my bones'],
+  '20:25': ['My Lord, put my heart'],
+  '20:114': ['My Lord, increase me in knowledge'],
+  '21:83': ['Great harm has afflicted me'],
+  '21:87': ['There is no god but You'],
+  '21:89': ['My Lord, do not leave me alone'],
+  '21:112': ['My Lord, judge'],
+  '23:28': ['Praise be to Allah, who has saved us'],
+  '23:93': ['My Lord, if You would show me'],
+  '23:97': ['My Lord, I seek refuge with You'],
+  '23:118': ['My Lord, forgive and have mercy'],
+  '25:65': ['Our Lord, avert from us'],
+  '25:74': ['Our Lord, grant us delight'],
+  '27:15': ['Praise Allah, who has favored us'],
+  '27:19': ['My Lord, direct me to be thankful'],
+  '27:40': ['This is from the grace of my Lord'],
+  '28:16': ['My Lord, I have wronged myself', 'so forgive me'],
+  '28:17': ['My Lord, in as much as'],
+  '28:21': ['My Lord, deliver me'],
+  '28:22': ['Perhaps my Lord will guide me to the right way'],
+  '28:24': ['My Lord, I am in dire need'],
+  '29:30': ['My Lord, help me'],
+  '40:7': ['Our Lord, You have encompassed'],
+  '43:13': ['Glory be to Him Who placed'],
+  '46:15': ['Lord, enable me to appreciate'],
+  '54:10': ['I am overwhelmed'],
+  '59:10': ['Our Lord, forgive us'],
+  '60:4': ['Our Lord, in You we trust'],
+  '65:3': ['Whoever relies on Allah'],
+  '66:8': ['Our Lord, complete our light for us'],
+  '66:11': ['My Lord, build for me'],
 };
 
 /*
@@ -591,7 +600,7 @@ for (const key of Object.keys(WHO)) {
 }
 
 const pageCount = SITE.reduce((n, s) => n + s.pages.length, 0);
-console.log(`The duas of the Qur'an — ${refs.length} passages on ${pageCount} pages in ${SITE.length} sections, from QuranEnc\n`);
+console.log(`The duas of the Qur'an — ${refs.length} passages on ${pageCount} pages in ${SITE.length} sections; Arabic from QuranEnc, English from ClearQuran\n`);
 
 const entries = [];
 for (const r of refs) {
@@ -603,14 +612,16 @@ for (const r of refs) {
   for (let n = from; n <= to; n += 1) {
     const cached = corpus?.get(`${s}:${n}`);
     const verse = cached
-      ? { arabic_text: cached.ar, translation: cached.en }
+      ? { arabic_text: cached.ar }
       : await get(`https://quranenc.com/api/v1/translation/aya/english_saheeh/${s}/${n}`);
-    if (!verse?.arabic_text || !verse?.translation) {
+    if (!verse?.arabic_text) {
       throw new Error(`${keyOf(r)}: ${s}:${n} did not resolve`);
     }
+    const itaniEnglish = itani.get(`${s}:${n}`);
+    if (!itaniEnglish) throw new Error(`${keyOf(r)}: ${s}:${n} has no English in the ClearQuran mirror`);
     /* The section marker is a mushaf's furniture, not a word — see CUT. */
     const arabicWords = verse.arabic_text.trim().split(/\s+/).filter((w) => w !== '۞');
-    let english = verse.translation.replace(/\[\d+\]/g, '').replace(/\s+/g, ' ').trim();
+    let english = itaniEnglish;
     const cut = CUT[`${s}:${n}`];
     /* Only the ends of the run can be cut: the first ayah's start, the last ayah's end. */
     const cutStart = cut && n === from ? cut[0] : 1;
@@ -687,12 +698,11 @@ const file = `/**
  *
  * GENERATED by \`npm run collection:duas\`. Do not edit by hand.
  *
- * Every character — Arabic and English — came over the wire from QuranEnc's
- * Saheeh International edition, and both come from the SAME verse, so they
- * cannot drift apart. No text is sliced: the whole ayah ships, framing and
- * all, because deciding where a supplication begins would be an editorial act
- * on a Qur'an text, and the framing is what tells a reader whose words these
- * are.
+ * Every character came over the wire: the Arabic from QuranEnc, the English
+ * from Talal Itani's ClearQuran (the Allah edition), matched by verse number
+ * and cut by the same word count, so they cannot drift apart. Where a text is
+ * sliced, the cut is quran.com's own, copied from its page and not decided
+ * here; the generator's header says how.
  *
  * The pages, their sections, titles, descriptions and order are quran.com's.
  * Each passage is one entry, once; a page lists entry ids. The generator's
@@ -708,7 +718,8 @@ export const QURANIC_DUAS: Collection = {
   id: 'quranic-duas',
   title: 'Duas from the Qur’an',
   subtitle: 'The words the Qur’an gives to the prophets, and to everyone after them, by need.',
-  provider: 'quranenc',
+  provider: 'clearquran',
+  arabicFrom: 'quranenc',
   meta: {
     category: 'quran',
     difficulty: 'building',

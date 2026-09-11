@@ -1,5 +1,5 @@
 import { Stack } from 'expo-router';
-import { Pressable, ScrollView, StyleSheet, Switch, View } from 'react-native';
+import { Linking, Platform, Pressable, ScrollView, StyleSheet, Switch, View } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { MaxContentWidth, Spacing } from '@/constants/theme';
@@ -75,6 +75,29 @@ export default function RemindersScreen() {
               {t('settings.reminders.denied')}
             </ThemedText>
           </View>
+        )}
+        {/*
+          The one thing a permission cannot fix. The app now asks Android for
+          exact alarms (app.json, 11 Sep 2026), so a reminder is no longer
+          deferred by the system; a phone that puts the app to sleep can
+          still hold it, and only the reader can change that.
+        */}
+        {Platform.OS === 'android' && (
+          <Pressable
+            onPress={() => void Linking.openSettings()}
+            accessibilityRole="button"
+            accessibilityLabel={t('reminders.battery.open')}
+            style={({ pressed }) => [
+              styles.notice,
+              { borderLeftColor: theme.goldSoft, opacity: pressed ? 0.6 : 1 },
+            ]}>
+            <ThemedText type="small" themeColor="textSecondary">
+              {t('reminders.battery')}
+            </ThemedText>
+            <ThemedText type="smallBold" themeColor="accent">
+              {t('reminders.battery.open')}
+            </ThemedText>
+          </Pressable>
         )}
       </View>
 
@@ -175,6 +198,7 @@ const styles = StyleSheet.create({
     borderLeftWidth: 3,
     paddingLeft: Spacing.three,
     paddingVertical: Spacing.one,
+    gap: Spacing.one,
   },
   group: {
     borderTopWidth: StyleSheet.hairlineWidth,

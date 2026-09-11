@@ -4160,3 +4160,32 @@ carry their Hijri number in gold, the rubric row is gone, and one legend
 under the table says what the gold means and opens the fasting lesson. The
 arithmetic was right throughout (13 to 15, Umm al-Qura); the presentation
 was not.
+
+---
+
+## 11 Sep 2026 — Reminders arrive on time: exact alarms ⚠️ native build
+
+Iyad: reminders arrived when he opened the app, not at the prayer. The
+planner never schedules the past and every reminder is a date trigger; the
+cause was the library's fallback. On Android 12 and later
+`ExpoSchedulingDelegate` asks for an exact alarm only when
+`canScheduleExactAlarms()` is true and otherwise sets an inexact one, and the
+app declared no exact-alarm permission, so Android deferred every reminder
+and a sleeping app got them all at once on the next open.
+
+**Iyad's call: `USE_EXACT_ALARM`**, declared in `app.json` beside
+`SCHEDULE_EXACT_ALARM` (which covers Android 12, where the first does not
+exist). Granted automatically, no setting for the reader to find. What it
+commits him to, on the record: Google Play restricts `USE_EXACT_ALARM` to
+apps whose core function is alarms or reminders and reviews its use; a
+prayer-times app is the textbook case, and the fallback if Play objects is
+to drop it and keep `SCHEDULE_EXACT_ALARM` with a row that opens the
+"Alarms & reminders" setting.
+
+The reminders page gained one Android-only row: if reminders arrive late,
+allow the app to run in the background, opening the app's settings. No
+permission stops a phone putting the app to sleep.
+
+**This is a native change.** A permission is manifest, so it needs a full
+`eas build`; an OTA will not carry it, and the fingerprint policy will stop
+old builds being offered updates once it ships. Not testable on web.

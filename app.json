@@ -25,7 +25,9 @@
       "predictiveBackGestureEnabled": false,
       "package": "com.newmuslimguide.app",
       "permissions": [
-        "android.permission.RECORD_AUDIO"
+        "android.permission.RECORD_AUDIO",
+        "android.permission.USE_EXACT_ALARM",
+        "android.permission.SCHEDULE_EXACT_ALARM"
       ]
     },
     "web": {

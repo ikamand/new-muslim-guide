@@ -832,6 +832,15 @@ export const EN = {
   'settings.reminders.lead': 'How far ahead',
   'settings.reminders.atTime': 'At the time',
   'settings.reminders.minutesBefore': '{n} minutes before',
+  /*
+    Android only. No permission stops a phone putting the app to sleep, and
+    Samsung's does so aggressively; a reminder held until the app next runs
+    is what Iyad saw on 11 Sep 2026. The row opens the app's own settings,
+    where the battery option lives on every maker's phone.
+  */
+  'reminders.battery':
+    'If reminders arrive late on this phone, allow the app to run in the background in its battery settings.',
+  'reminders.battery.open': 'Open app settings',
   'settings.reminders.denied':
     'Notifications are turned off for this app. Turn them on in your phone’s settings, then come back.',
   /*

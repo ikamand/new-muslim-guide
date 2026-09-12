@@ -3,7 +3,8 @@ import { AppState } from 'react-native';
 
 import { useLocale } from '@/hooks/use-locale';
 import { useLocation } from '@/hooks/use-location';
-import { useSettings } from '@/hooks/use-settings';
+import { useSettings, type Settings } from '@/hooks/use-settings';
+import type { UIKey } from '@/i18n/ui';
 import { hijriDate } from '@/lib/hijri';
 import {
   cancelAll,
@@ -13,7 +14,7 @@ import {
   type ScheduledItem,
 } from '@/lib/notifications';
 import { useAwqatProfile } from '@/hooks/use-awqat-profile';
-import { PRAYER_LABEL, type PrayerId } from '@/lib/prayer-times';
+import { PRAYER_IDS, PRAYER_LABEL, type PrayerId } from '@/lib/prayer-times';
 import {
   planAdhkarNotes,
   planJumuahNotes,
@@ -43,6 +44,43 @@ import {
  */
 
 const PENDING_CAP = 60;
+
+/**
+ * The reminders in one line, for a door: "Off", "3 of 5 · 10 minutes before",
+ * "All five · at the time". A count, never the names — five names wrapped
+ * on the day page, and the switches are one tap away.
+ */
+export function describeReminders(
+  reminders: Settings['reminders'],
+  t: (key: UIKey) => string,
+): string {
+  const count = countReminders(reminders, t);
+  const lead = describeLead(reminders, t);
+  return lead ? `${count} · ${lead}` : count;
+}
+
+/** "Off", "3 of 5", "All five": the count alone, for a legend with no room. */
+export function countReminders(
+  reminders: Settings['reminders'],
+  t: (key: UIKey) => string,
+): string {
+  const onCount = PRAYER_IDS.filter((id) => reminders.prayers[id]).length;
+  if (onCount === 0) return t('awqat.day.reminders.off');
+  return onCount === PRAYER_IDS.length
+    ? t('awqat.day.reminders.all')
+    : t('awqat.day.reminders.some').replace('{n}', String(onCount));
+}
+
+/** "10 minutes before" or "at the time", or nothing while no prayer is on. */
+export function describeLead(
+  reminders: Settings['reminders'],
+  t: (key: UIKey) => string,
+): string | null {
+  if (!PRAYER_IDS.some((id) => reminders.prayers[id])) return null;
+  return reminders.leadMinutes === 0
+    ? t('awqat.day.lead.atTime')
+    : t('awqat.day.lead.before').replace('{n}', String(reminders.leadMinutes));
+}
 
 /** True while any switch that schedules anything is on. */
 function anythingOn(settings: {

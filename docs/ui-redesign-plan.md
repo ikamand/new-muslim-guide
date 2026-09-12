@@ -4236,3 +4236,38 @@ Iyad's three questions from the phone, all built:
 
 Verified on web at 390 (light): the reading section and the page's order.
 Ships by OTA once the exact-alarm build is installed.
+
+---
+
+## 11 Sep 2026 — Settings as panels, saved audio as a sheet ✅
+
+Three directions drawn on "Settings, Three Ways"
+(claude.ai/code/artifact/7408ef0d-8a79-4f86-9d2b-78fb2ad5bddf): a fihrist of
+doors, framed panels, and tiles in the manuscript's grammar. Iyad asked for
+a recommendation and took it: **B, the panels, with one change**.
+
+- **Every section is a framed panel** in the app's own double rule, the
+  fihrist's and the surah page's, with its name set INTO the top rule beside
+  its mark and its current state after it: "Under the Arabic · both on",
+  "Prayer times · ISNA", "Reminders · 3 of 5". Air between panels, no
+  uppercase captions floating over rows. Every control stays on the page.
+  Rejected: the fihrist (one tap more for every switch) and the tiles (the
+  one form the app has nowhere else).
+- **Saved audio is a door and a sheet.** The only section that was a list of
+  many things. The door reads "7 voices, and the listening models" with the
+  total in the legend; behind it `app/saved-audio.tsx`, presented with
+  `presentation: 'modal'` because it is a task, not a place: come, clear
+  space, swipe away. A routed screen, not a hand-built modal, so it has a
+  header, its own scrolling, the Android back button and the swipe-down.
+  Absent entirely while nothing is saved. Iyad's idea, the sheet.
+- **"Under the Arabic"**, not "Reading the Arabic" and not "Qur'an": the
+  switches decide what appears beneath every Arabic line in the app, and the
+  preview is a prayer word.
+- **One reminders summary** for Settings and the day page,
+  `describeReminders` in `use-reminders.ts`, split into the count for a
+  legend and the lead for a row.
+
+Verified on web at 390, both themes, with three reminders seeded; the
+saved-audio sheet only in its empty state, since web saves nothing. Not seen
+on a device: the sheet's presentation on Android, and the storage rows with
+real voices. Ships by OTA once the exact-alarm build is installed.

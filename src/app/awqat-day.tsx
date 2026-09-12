@@ -24,6 +24,7 @@ import { BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/th
 import { useLocale } from '@/hooks/use-locale';
 import { useLocation } from '@/hooks/use-location';
 import { usePrayerTimes } from '@/hooks/use-prayer-times';
+import { describeReminders } from '@/hooks/use-reminders';
 import { useSettings } from '@/hooks/use-settings';
 import { useTheme } from '@/hooks/use-theme';
 import type { UIKey } from '@/i18n/ui';
@@ -38,7 +39,6 @@ import {
   pausesOf,
   windowEnd,
   METHODS,
-  PRAYER_IDS,
   type DayTimes,
   type Pause,
   type PrayerId,
@@ -429,17 +429,7 @@ export default function AwqatDayScreen() {
   const monthMeta = [spanLine, whiteLine].filter(Boolean).join(' · ');
 
   /* A count, never the names: the switches are one tap away. */
-  const onCount = PRAYER_IDS.filter((id) => reminders.prayers[id]).length;
-  const lead =
-    reminders.leadMinutes === 0
-      ? t('awqat.day.lead.atTime')
-      : t('awqat.day.lead.before').replace('{n}', String(reminders.leadMinutes));
-  const remindersMeta =
-    onCount === 0
-      ? t('awqat.day.reminders.off')
-      : onCount === PRAYER_IDS.length
-        ? t('awqat.day.reminders.all').replace('{lead}', lead)
-        : t('awqat.day.reminders.some').replace('{n}', String(onCount)).replace('{lead}', lead);
+  const remindersMeta = describeReminders(reminders, t);
 
   /* The selection alone; where it comes from is the calculation page's first line. */
   const methodMeta = awqatMosque

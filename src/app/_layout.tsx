@@ -151,6 +151,8 @@ function RootStack() {
         fourth screen pushed onto the stack says the opposite.
       */}
       <Stack.Screen name="reciter" options={{ presentation: 'modal', title: '' }} />
+      {/* Saved audio is a task, not a place: a sheet over Settings, closed by a swipe. */}
+      <Stack.Screen name="saved-audio" options={{ presentation: 'modal', title: '' }} />
       {/* The same shape as reciter: a detour that comes straight back. Titled inside. */}
       <Stack.Screen name="choose-place" options={{ presentation: 'modal', title: '' }} />
       {/*

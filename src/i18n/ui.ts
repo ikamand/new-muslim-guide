@@ -457,8 +457,8 @@ export const EN = {
   'awqat.day.reminders': 'Reminders',
   /* A count, never the names: five names wrapped, and the switches are one tap away. */
   'awqat.day.reminders.off': 'Off',
-  'awqat.day.reminders.some': '{n} of 5 · {lead}',
-  'awqat.day.reminders.all': 'All five · {lead}',
+  'awqat.day.reminders.some': '{n} of 5',
+  'awqat.day.reminders.all': 'All five',
   'awqat.day.lead.atTime': 'at the time',
   'awqat.day.lead.before': '{n} minutes before',
   'awqat.day.method': 'Calculation method',
@@ -782,8 +782,12 @@ export const EN = {
   'settings.language': 'Language',
   'settings.display': 'Display',
   /* The switches and the card that shows what they do, as one section. */
-  'settings.reading': 'Reading the Arabic',
+  'settings.reading': 'Under the Arabic',
   'settings.preview': 'How the words will look',
+  /* The legend's state after the panel's name. */
+  'settings.state.bothOn': 'both on',
+  'settings.state.oneOn': '{which} on',
+  'settings.state.bothOff': 'both off',
   'settings.transliteration': 'Transliteration',
   'settings.translation': 'Translation',
   'settings.transliteration.help': 'The Arabic spelled out in English letters',
@@ -958,6 +962,12 @@ export const EN = {
   'settings.storage': 'Saved audio',
   'settings.storage.help': 'Surahs save themselves the first time you play them, so they work without a signal afterwards. Delete a voice here to get the space back, and playing it again saves it again.',
   'settings.storage.files': 'ayahs',
+  /* The door on Settings, and the sheet's empty state. */
+  'settings.storage.voice': '1 voice',
+  'settings.storage.voices': '{n} voices',
+  'settings.storage.andModels': '{voices}, and the listening models',
+  'settings.storage.open.help': 'Delete a voice to get the space back',
+  'settings.storage.empty': 'Nothing saved yet. Play a surah and it will be here.',
   'settings.storage.delete': 'Delete',
   'settings.onboarding': 'Getting started',
   'settings.onboarding.help':

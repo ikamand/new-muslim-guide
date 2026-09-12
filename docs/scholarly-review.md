@@ -1152,7 +1152,9 @@ softened, because the app was stating it as though a narration said so.**
 - **File** `src/content/recitations.ts`
 - **Status** The Arabic is now verified against the collection page for all
   twenty-three texts. The English beside each one is the app's own and has been
-  checked by nobody.
+  checked by nobody — except Al-Fatihah's, which since 11 September 2026 is
+  Talal Itani's ClearQuran, the same seven lines the surah page prints (see
+  2.14). Twenty-two remain the app's own.
 - **Reviewer** These are said in every prayer. Read them as translations, not as
   prose.
 
@@ -1300,6 +1302,30 @@ four-item list of what breaks the prayer, and the wudu paragraph in
 `before-prayer`.
 
 ---
+
+### 2.14 The Qur'an's English is one translator's, and he is one man
+
+- **Files** `src/content/quran/juz30.ts` and `fatiha.ts`,
+  `src/content/collections/quranic-duas.ts`, `src/content/evidence.ts`
+  (`QURAN_TEXT`), and Al-Fatihah in `src/content/recitations.ts`
+- **Status** Since 11 September 2026 every Qur'an ayah the app prints in English
+  is Talal Itani's ClearQuran, Allah edition: 571 ayahs on the surah pages, 112
+  dua passages, 249 evidence texts under the teaching pages, and the seven lines
+  of Al-Fatihah on the prayer step. It replaced Saheeh International, which a
+  board reviewed and IslamHouse ships. Itani's is one person's work, praised for
+  plain English and signed off by no board. Iyad chose it for readability and
+  because it is the only readable modern translation with published reuse
+  terms. The text is the publisher's own verse-by-verse file, unedited, and
+  cross-checked against a second copy of the same translation; nothing was
+  typed. The 67 dua excerpts were cut in his words by the model, each anchored
+  to a phrase that occurs exactly once in the verse; where a passage begins
+  after a quotation opens or ends before it closes, the stranded mark is
+  dropped and the words are untouched.
+- **Reviewer** One question, answered once, clears 940 texts: is ClearQuran's
+  rendering acceptable as this app's Qur'an English? If particular verses are
+  not, name them. Then the 67 cut points in `quranic-duas.ts`: read where each
+  English excerpt starts and stops against its Arabic, because that mapping is
+  a reading, not a lookup.
 
 ## What the third pass changed rather than queued
 

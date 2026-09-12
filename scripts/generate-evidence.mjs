@@ -29,7 +29,9 @@
  *   Translation  HadeethEnc first: its terms are published. Otherwise
  *                fawazahmed0's, which is Darussalam's and is flagged as such.
  *   Grading      fawazahmed0 — four graders per narration where it has them
- *   Qur'an       QuranEnc, both halves
+ *   Qur'an       Arabic from QuranEnc; English from ClearQuran (Talal Itani,
+ *                Allah edition) since 11 Sep 2026, so a verse under a
+ *                teaching page reads as it does on the surah page
  *
  * ## What is checked rather than trusted
  *
@@ -209,8 +211,14 @@ const quranCorpus = corpusExists(corpusPath)
     )
   : undefined;
 
+/* The English — the same mirror the surah pages and the duas read, and no
+   fallback: a missing mirror is a missing step. `npm run quran:itani:corpus`. */
+const itaniPath = new URL('../.cache/quran/itani-allah.json', import.meta.url);
+if (!corpusExists(itaniPath)) throw new Error('.cache/quran/itani-allah.json is missing — run `npm run quran:itani:corpus` first');
+const itani = new Map(JSON.parse(readCorpusSync(itaniPath, 'utf8')).map((v) => [`${v.s}:${v.a}`, v.en]));
+
 console.log(
-  `Qur'an — ${quranCites.size} passages from ${quranCorpus ? 'the local corpus (QuranEnc mirror)' : 'QuranEnc live'}`,
+  `Qur'an — ${quranCites.size} passages; Arabic from ${quranCorpus ? 'the local corpus (QuranEnc mirror)' : 'QuranEnc live'}, English from the ClearQuran mirror`,
 );
 const quran = {};
 for (const [key, source] of quranCites) {
@@ -220,20 +228,19 @@ for (const [key, source] of quranCites) {
   for (let n = first; n <= last; n += 1) {
     const cached = quranCorpus?.get(`${source.surah}:${n}`);
     const data = cached
-      ? { result: { arabic_text: cached.ar, translation: cached.en } }
+      ? { result: { arabic_text: cached.ar } }
       : await get(
           `https://quranenc.com/api/v1/translation/aya/english_saheeh/${source.surah}/${n}`,
         );
-    parts.push({ arabic: data.result.arabic_text, translation: data.result.translation });
+    const english = itani.get(`${source.surah}:${n}`);
+    if (!english) throw new Error(`${source.surah}:${n} has no English in the ClearQuran mirror`);
+    parts.push({ arabic: data.result.arabic_text, translation: english });
   }
   quran[key] = {
     arabic: parts.map((p) => p.arabic).join(' '),
-    // Footnote markers come through as bracketed digits in this translation.
-    translation: parts
-      .map((p) => p.translation.replace(/\[\d+\]/g, '').replace(/\s+/g, ' ').trim())
-      .join(' '),
+    translation: parts.map((p) => p.translation.replace(/\s+/g, ' ').trim()).join(' '),
     arabicFrom: 'QuranEnc.com',
-    translationFrom: 'QuranEnc.com',
+    translationFrom: 'ClearQuran.com',
   };
 }
 console.log(`  ${Object.keys(quran).length} written\n`);

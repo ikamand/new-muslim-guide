@@ -57,1497 +57,1497 @@ export type EvidenceText = {
 export const QURAN_TEXT: Record<string, EvidenceText> = {
   "5:6": {
     "arabic": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوٓاْ إِذَا قُمۡتُمۡ إِلَى ٱلصَّلَوٰةِ فَٱغۡسِلُواْ وُجُوهَكُمۡ وَأَيۡدِيَكُمۡ إِلَى ٱلۡمَرَافِقِ وَٱمۡسَحُواْ بِرُءُوسِكُمۡ وَأَرۡجُلَكُمۡ إِلَى ٱلۡكَعۡبَيۡنِۚ وَإِن كُنتُمۡ جُنُبٗا فَٱطَّهَّرُواْۚ وَإِن كُنتُم مَّرۡضَىٰٓ أَوۡ عَلَىٰ سَفَرٍ أَوۡ جَآءَ أَحَدٞ مِّنكُم مِّنَ ٱلۡغَآئِطِ أَوۡ لَٰمَسۡتُمُ ٱلنِّسَآءَ فَلَمۡ تَجِدُواْ مَآءٗ فَتَيَمَّمُواْ صَعِيدٗا طَيِّبٗا فَٱمۡسَحُواْ بِوُجُوهِكُمۡ وَأَيۡدِيكُم مِّنۡهُۚ مَا يُرِيدُ ٱللَّهُ لِيَجۡعَلَ عَلَيۡكُم مِّنۡ حَرَجٖ وَلَٰكِن يُرِيدُ لِيُطَهِّرَكُمۡ وَلِيُتِمَّ نِعۡمَتَهُۥ عَلَيۡكُمۡ لَعَلَّكُمۡ تَشۡكُرُونَ",
-    "translation": "O you who have believed, when you rise to [perform] prayer, wash your faces and your forearms to the elbows and wipe over your heads and wash your feet to the ankles. And if you are in a state of janābah, then purify yourselves. But if you are ill or on a journey or one of you comes from the place of relieving himself or you have contacted women and do not find water, then seek clean earth and wipe over your faces and hands with it. Allāh does not intend to make difficulty for you, but He intends to purify you and complete His favor upon you that you may be grateful.",
+    "translation": "O you who believe! When you rise to pray, wash your faces and your hands and arms to the elbows, and wipe your heads, and your feet to the ankles. If you had intercourse, then purify yourselves. If you are ill, or travelling, or one of you returns from the toilet, or you had contact with women, and could not find water, then use some clean sand and wipe your faces and hands with it. Allah does not intend to burden you, but He intends to purify you, and to complete His blessing upon you, that you may be thankful.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "2:222": {
     "arabic": "وَيَسۡـَٔلُونَكَ عَنِ ٱلۡمَحِيضِۖ قُلۡ هُوَ أَذٗى فَٱعۡتَزِلُواْ ٱلنِّسَآءَ فِي ٱلۡمَحِيضِ وَلَا تَقۡرَبُوهُنَّ حَتَّىٰ يَطۡهُرۡنَۖ فَإِذَا تَطَهَّرۡنَ فَأۡتُوهُنَّ مِنۡ حَيۡثُ أَمَرَكُمُ ٱللَّهُۚ إِنَّ ٱللَّهَ يُحِبُّ ٱلتَّوَّٰبِينَ وَيُحِبُّ ٱلۡمُتَطَهِّرِينَ",
-    "translation": "And they ask you about menstruation. Say, \"It is harm, so keep away from wives during menstruation. And do not approach them until they are pure. And when they have purified themselves, then come to them from where Allāh has ordained for you. Indeed, Allāh loves those who are constantly repentant and loves those who purify themselves.\"",
+    "translation": "And they ask you about menstruation: say, “It is harmful, so keep away from women during menstruation. And do not approach them until they have become pure. Once they have become pure, approach them in the way Allah has directed you.” Allah loves the repentant, and He loves those who keep clean.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "2:144": {
     "arabic": "قَدۡ نَرَىٰ تَقَلُّبَ وَجۡهِكَ فِي ٱلسَّمَآءِۖ فَلَنُوَلِّيَنَّكَ قِبۡلَةٗ تَرۡضَىٰهَاۚ فَوَلِّ وَجۡهَكَ شَطۡرَ ٱلۡمَسۡجِدِ ٱلۡحَرَامِۚ وَحَيۡثُ مَا كُنتُمۡ فَوَلُّواْ وُجُوهَكُمۡ شَطۡرَهُۥۗ وَإِنَّ ٱلَّذِينَ أُوتُواْ ٱلۡكِتَٰبَ لَيَعۡلَمُونَ أَنَّهُ ٱلۡحَقُّ مِن رَّبِّهِمۡۗ وَمَا ٱللَّهُ بِغَٰفِلٍ عَمَّا يَعۡمَلُونَ",
-    "translation": "We have certainly seen the turning of your face, [O Muḥammad], toward the heaven, and We will surely turn you to a qiblah with which you will be pleased. So turn your face [i.e., yourself] toward al-Masjid al-Ḥarām. And wherever you [believers] are, turn your faces [i.e., yourselves] toward it [in prayer]. Indeed, those who have been given the Scripture [i.e., the Jews and the Christians] well know that it is the truth from their Lord. And Allāh is not unaware of what they do.",
+    "translation": "We have seen your face turned towards the heaven. So We will turn you towards a direction that will satisfy you. So turn your face towards the Sacred Mosque. And wherever you may be, turn your faces towards it. Those who were given the Book know that it is the Truth from their Lord; and Allah is not unaware of what they do.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "112:1-4": {
     "arabic": "قُلۡ هُوَ ٱللَّهُ أَحَدٌ ٱللَّهُ ٱلصَّمَدُ لَمۡ يَلِدۡ وَلَمۡ يُولَدۡ وَلَمۡ يَكُن لَّهُۥ كُفُوًا أَحَدُۢ",
-    "translation": "Say, \"He is Allāh, [who is] One, Allāh, the Eternal Refuge. He neither begets nor is born, Nor is there to Him any equivalent.\"",
+    "translation": "Say, “He is Allah, the One. Allah, the Absolute. He begets not, nor was He begotten. And there is nothing comparable to Him.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "16:98": {
     "arabic": "فَإِذَا قَرَأۡتَ ٱلۡقُرۡءَانَ فَٱسۡتَعِذۡ بِٱللَّهِ مِنَ ٱلشَّيۡطَٰنِ ٱلرَّجِيمِ",
-    "translation": "So when you recite the Qur’ān, [first] seek refuge in Allāh from Satan, the expelled [from His mercy].",
+    "translation": "When you read the Quran, seek refuge with Allah from Satan the outcast.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "1:1-7": {
     "arabic": "بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ ٱلۡحَمۡدُ لِلَّهِ رَبِّ ٱلۡعَٰلَمِينَ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ مَٰلِكِ يَوۡمِ ٱلدِّينِ إِيَّاكَ نَعۡبُدُ وَإِيَّاكَ نَسۡتَعِينُ ٱهۡدِنَا ٱلصِّرَٰطَ ٱلۡمُسۡتَقِيمَ صِرَٰطَ ٱلَّذِينَ أَنۡعَمۡتَ عَلَيۡهِمۡ غَيۡرِ ٱلۡمَغۡضُوبِ عَلَيۡهِمۡ وَلَا ٱلضَّآلِّينَ",
-    "translation": "In the name of Allāh, the Entirely Merciful, the Especially Merciful. [All] praise is [due] to Allāh, Lord of the worlds - The Entirely Merciful, the Especially Merciful, Sovereign of the Day of Recompense. It is You we worship and You we ask for help. Guide us to the straight path - The path of those upon whom You have bestowed favor, not of those who have earned [Your] anger or of those who are astray.",
+    "translation": "In the name of Allah, the Gracious, the Merciful. Praise be to Allah, Lord of the Worlds. The Most Gracious, the Most Merciful. Master of the Day of Judgment. It is You we worship, and upon You we call for help. Guide us to the straight path. The path of those You have blessed, not of those against whom there is anger, nor of those who are misguided.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "3:19": {
     "arabic": "إِنَّ ٱلدِّينَ عِندَ ٱللَّهِ ٱلۡإِسۡلَٰمُۗ وَمَا ٱخۡتَلَفَ ٱلَّذِينَ أُوتُواْ ٱلۡكِتَٰبَ إِلَّا مِنۢ بَعۡدِ مَا جَآءَهُمُ ٱلۡعِلۡمُ بَغۡيَۢا بَيۡنَهُمۡۗ وَمَن يَكۡفُرۡ بِـَٔايَٰتِ ٱللَّهِ فَإِنَّ ٱللَّهَ سَرِيعُ ٱلۡحِسَابِ",
-    "translation": "Indeed, the religion in the sight of Allāh is Islām. And those who were given the Scripture did not differ except after knowledge had come to them - out of jealous animosity between themselves. And whoever disbelieves in the verses of Allāh, then indeed, Allāh is swift in [taking] account.",
+    "translation": "Religion with Allah is Islam. Those to whom the Scripture was given differed only after knowledge came to them, out of envy among themselves. Whoever rejects the signs of Allah—Allah is quick to take account.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "51:56": {
     "arabic": "وَمَا خَلَقۡتُ ٱلۡجِنَّ وَٱلۡإِنسَ إِلَّا لِيَعۡبُدُونِ",
-    "translation": "And I did not create the jinn and mankind except to worship Me.",
+    "translation": "I did not create the jinn and the humans except to worship Me.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "2:286": {
     "arabic": "لَا يُكَلِّفُ ٱللَّهُ نَفۡسًا إِلَّا وُسۡعَهَاۚ لَهَا مَا كَسَبَتۡ وَعَلَيۡهَا مَا ٱكۡتَسَبَتۡۗ رَبَّنَا لَا تُؤَاخِذۡنَآ إِن نَّسِينَآ أَوۡ أَخۡطَأۡنَاۚ رَبَّنَا وَلَا تَحۡمِلۡ عَلَيۡنَآ إِصۡرٗا كَمَا حَمَلۡتَهُۥ عَلَى ٱلَّذِينَ مِن قَبۡلِنَاۚ رَبَّنَا وَلَا تُحَمِّلۡنَا مَا لَا طَاقَةَ لَنَا بِهِۦۖ وَٱعۡفُ عَنَّا وَٱغۡفِرۡ لَنَا وَٱرۡحَمۡنَآۚ أَنتَ مَوۡلَىٰنَا فَٱنصُرۡنَا عَلَى ٱلۡقَوۡمِ ٱلۡكَٰفِرِينَ",
-    "translation": "Allāh does not charge a soul except [with that within] its capacity. It will have [the consequence of] what [good] it has gained, and it will bear [the consequence of] what [evil] it has earned. \"Our Lord, do not impose blame upon us if we have forgotten or erred. Our Lord, and lay not upon us a burden like that which You laid upon those before us. Our Lord, and burden us not with that which we have no ability to bear. And pardon us; and forgive us; and have mercy upon us. You are our protector, so give us victory over the disbelieving people.\"",
+    "translation": "Allah does not burden any soul beyond its capacity. To its credit is what it earns, and against it is what it commits. “Our Lord, do not condemn us if we forget or make a mistake. Our Lord, do not burden us as You have burdened those before us. Our Lord, do not burden us with more than we have strength to bear; and pardon us, and forgive us, and have mercy on us. You are our Lord and Master, so help us against the disbelieving people.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "2:256": {
     "arabic": "لَآ إِكۡرَاهَ فِي ٱلدِّينِۖ قَد تَّبَيَّنَ ٱلرُّشۡدُ مِنَ ٱلۡغَيِّۚ فَمَن يَكۡفُرۡ بِٱلطَّٰغُوتِ وَيُؤۡمِنۢ بِٱللَّهِ فَقَدِ ٱسۡتَمۡسَكَ بِٱلۡعُرۡوَةِ ٱلۡوُثۡقَىٰ لَا ٱنفِصَامَ لَهَاۗ وَٱللَّهُ سَمِيعٌ عَلِيمٌ",
-    "translation": "There shall be no compulsion in [acceptance of] the religion. The right course has become distinct from the wrong. So whoever disbelieves in ṭāghūt and believes in Allāh has grasped the most trustworthy handhold with no break in it. And Allāh is Hearing and Knowing.",
+    "translation": "There shall be no compulsion in religion; the right way has become distinct from the wrong way. Whoever renounces evil and believes in Allah has grasped the most trustworthy handle; which does not break. Allah is Hearing and Knowing.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "25:70": {
     "arabic": "إِلَّا مَن تَابَ وَءَامَنَ وَعَمِلَ عَمَلٗا صَٰلِحٗا فَأُوْلَٰٓئِكَ يُبَدِّلُ ٱللَّهُ سَيِّـَٔاتِهِمۡ حَسَنَٰتٖۗ وَكَانَ ٱللَّهُ غَفُورٗا رَّحِيمٗا",
-    "translation": "Except for those who repent, believe and do righteous work. For them Allāh will replace their evil deeds with good. And ever is Allāh Forgiving and Merciful.",
+    "translation": "Except for those who repent, and believe, and do good deeds. These—Allah will replace their bad deeds with good deeds. Allah is ever Forgiving and Merciful.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "39:53": {
     "arabic": "۞ قُلۡ يَٰعِبَادِيَ ٱلَّذِينَ أَسۡرَفُواْ عَلَىٰٓ أَنفُسِهِمۡ لَا تَقۡنَطُواْ مِن رَّحۡمَةِ ٱللَّهِۚ إِنَّ ٱللَّهَ يَغۡفِرُ ٱلذُّنُوبَ جَمِيعًاۚ إِنَّهُۥ هُوَ ٱلۡغَفُورُ ٱلرَّحِيمُ",
-    "translation": "Say, \"O My servants who have transgressed against themselves [by sinning], do not despair of the mercy of Allāh. Indeed, Allāh forgives all sins. Indeed, it is He who is the Forgiving, the Merciful.\"",
+    "translation": "Say, “O My servants who have transgressed against themselves: do not despair of Allah’s mercy, for Allah forgives all sins. He is indeed the Forgiver, the Clement.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "33:5": {
     "arabic": "ٱدۡعُوهُمۡ لِأٓبَآئِهِمۡ هُوَ أَقۡسَطُ عِندَ ٱللَّهِۚ فَإِن لَّمۡ تَعۡلَمُوٓاْ ءَابَآءَهُمۡ فَإِخۡوَٰنُكُمۡ فِي ٱلدِّينِ وَمَوَٰلِيكُمۡۚ وَلَيۡسَ عَلَيۡكُمۡ جُنَاحٞ فِيمَآ أَخۡطَأۡتُم بِهِۦ وَلَٰكِن مَّا تَعَمَّدَتۡ قُلُوبُكُمۡۚ وَكَانَ ٱللَّهُ غَفُورٗا رَّحِيمًا",
-    "translation": "Call them by [the names of] their fathers; it is more just in the sight of Allāh. But if you do not know their fathers - then they are [still] your brothers in religion and those entrusted to you. And there is no blame upon you for that in which you have erred but [only for] what your hearts intended. And ever is Allāh Forgiving and Merciful.",
+    "translation": "Call them after their fathers; that is more equitable with Allah. But if you do not know their fathers, then your brethren in faith and your friends. There is no blame on you if you err therein, barring what your hearts premeditates. Allah is Forgiving and Merciful.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "4:103": {
     "arabic": "فَإِذَا قَضَيۡتُمُ ٱلصَّلَوٰةَ فَٱذۡكُرُواْ ٱللَّهَ قِيَٰمٗا وَقُعُودٗا وَعَلَىٰ جُنُوبِكُمۡۚ فَإِذَا ٱطۡمَأۡنَنتُمۡ فَأَقِيمُواْ ٱلصَّلَوٰةَۚ إِنَّ ٱلصَّلَوٰةَ كَانَتۡ عَلَى ٱلۡمُؤۡمِنِينَ كِتَٰبٗا مَّوۡقُوتٗا",
-    "translation": "And when you have completed the prayer, remember Allāh standing, sitting, or [lying] on your sides. But when you become secure, re-establish [regular] prayer. Indeed, prayer has been decreed upon the believers a decree of specified times.",
+    "translation": "When you have completed the prayer, remember Allah, standing, or sitting, or on your sides. And when you feel secure, perform the prayer. The prayer is obligatory for believers at specific times.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "2:29": {
     "arabic": "هُوَ ٱلَّذِي خَلَقَ لَكُم مَّا فِي ٱلۡأَرۡضِ جَمِيعٗا ثُمَّ ٱسۡتَوَىٰٓ إِلَى ٱلسَّمَآءِ فَسَوَّىٰهُنَّ سَبۡعَ سَمَٰوَٰتٖۚ وَهُوَ بِكُلِّ شَيۡءٍ عَلِيمٞ",
-    "translation": "It is He who created for you all of that which is on the earth. Then He directed Himself to the heaven, [His being above all creation], and made them seven heavens, and He is Knowing of all things.",
+    "translation": "It is He who created for you everything on earth, then turned to the heaven, and made them seven heavens. And He is aware of all things.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "62:9": {
     "arabic": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوٓاْ إِذَا نُودِيَ لِلصَّلَوٰةِ مِن يَوۡمِ ٱلۡجُمُعَةِ فَٱسۡعَوۡاْ إِلَىٰ ذِكۡرِ ٱللَّهِ وَذَرُواْ ٱلۡبَيۡعَۚ ذَٰلِكُمۡ خَيۡرٞ لَّكُمۡ إِن كُنتُمۡ تَعۡلَمُونَ",
-    "translation": "O you who have believed, when [the adhān] is called for the prayer on the day of Jumuʿah [Friday], then proceed to the remembrance of Allāh and leave trade. That is better for you, if you only knew.",
+    "translation": "O you who believe! When the call is made for prayer on Congregation Day, hasten to the remembrance of Allah, and drop all business. That is better for you, if you only knew.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "2:156": {
     "arabic": "ٱلَّذِينَ إِذَآ أَصَٰبَتۡهُم مُّصِيبَةٞ قَالُوٓاْ إِنَّا لِلَّهِ وَإِنَّآ إِلَيۡهِ رَٰجِعُونَ",
-    "translation": "Who, when disaster strikes them, say, \"Indeed we belong to Allāh, and indeed to Him we will return.\"",
+    "translation": "Those who, when a calamity afflicts them, say, “To Allah we belong, and to Him we will return.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "2:183": {
     "arabic": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُواْ كُتِبَ عَلَيۡكُمُ ٱلصِّيَامُ كَمَا كُتِبَ عَلَى ٱلَّذِينَ مِن قَبۡلِكُمۡ لَعَلَّكُمۡ تَتَّقُونَ",
-    "translation": "O you who have believed, decreed upon you is fasting as it was decreed upon those before you that you may become righteous -",
+    "translation": "O you who believe! Fasting is prescribed for you, as it was prescribed for those before you, that you may become righteous.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "16:125": {
     "arabic": "ٱدۡعُ إِلَىٰ سَبِيلِ رَبِّكَ بِٱلۡحِكۡمَةِ وَٱلۡمَوۡعِظَةِ ٱلۡحَسَنَةِۖ وَجَٰدِلۡهُم بِٱلَّتِي هِيَ أَحۡسَنُۚ إِنَّ رَبَّكَ هُوَ أَعۡلَمُ بِمَن ضَلَّ عَن سَبِيلِهِۦ وَهُوَ أَعۡلَمُ بِٱلۡمُهۡتَدِينَ",
-    "translation": "Invite to the way of your Lord with wisdom and good instruction, and argue with them in a way that is best. Indeed, your Lord is most knowing of who has strayed from His way, and He is most knowing of who is [rightly] guided.",
+    "translation": "Invite to the way of your Lord with wisdom and good advice, and debate with them in the most dignified manner. Your Lord is aware of those who stray from His path, and He is aware of those who are guided.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "29:46": {
     "arabic": "۞ وَلَا تُجَٰدِلُوٓاْ أَهۡلَ ٱلۡكِتَٰبِ إِلَّا بِٱلَّتِي هِيَ أَحۡسَنُ إِلَّا ٱلَّذِينَ ظَلَمُواْ مِنۡهُمۡۖ وَقُولُوٓاْ ءَامَنَّا بِٱلَّذِيٓ أُنزِلَ إِلَيۡنَا وَأُنزِلَ إِلَيۡكُمۡ وَإِلَٰهُنَا وَإِلَٰهُكُمۡ وَٰحِدٞ وَنَحۡنُ لَهُۥ مُسۡلِمُونَ",
-    "translation": "And do not argue with the People of the Scripture except in a way that is best, except for those who commit injustice among them, and say, \"We believe in that which has been revealed to us and revealed to you. And our God and your God is one; and we are Muslims [in submission] to Him.\"",
+    "translation": "And do not argue with the People of the Scripture except in the best manner possible, except those who do wrong among them. And say, “We believe in what was revealed to us, and in what was revealed to you; and our God and your God is One; and to Him we are submissive.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "39:23": {
     "arabic": "ٱللَّهُ نَزَّلَ أَحۡسَنَ ٱلۡحَدِيثِ كِتَٰبٗا مُّتَشَٰبِهٗا مَّثَانِيَ تَقۡشَعِرُّ مِنۡهُ جُلُودُ ٱلَّذِينَ يَخۡشَوۡنَ رَبَّهُمۡ ثُمَّ تَلِينُ جُلُودُهُمۡ وَقُلُوبُهُمۡ إِلَىٰ ذِكۡرِ ٱللَّهِۚ ذَٰلِكَ هُدَى ٱللَّهِ يَهۡدِي بِهِۦ مَن يَشَآءُۚ وَمَن يُضۡلِلِ ٱللَّهُ فَمَا لَهُۥ مِنۡ هَادٍ",
-    "translation": "Allāh has sent down the best statement: a consistent Book wherein is reiteration. The skins shiver therefrom of those who fear their Lord; then their skins and their hearts relax at the remembrance [i.e., mention] of Allāh. That is the guidance of Allāh by which He guides whom He wills. And one whom Allāh sends astray - for him there is no guide.",
+    "translation": "Allah has sent down the best of narrations: a Scripture consistent and paired. The skins of those who reverence their Lord shiver from it, then their skins and their hearts soften up to the remembrance of Allah. Such is Allah’s guidance; He guides with it whomever He wills. But whomever Allah leaves astray, for him there is no guide.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "15:9": {
     "arabic": "إِنَّا نَحۡنُ نَزَّلۡنَا ٱلذِّكۡرَ وَإِنَّا لَهُۥ لَحَٰفِظُونَ",
-    "translation": "Indeed, it is We who sent down the message [i.e., the Qur’ān], and indeed, We will be its guardian.",
+    "translation": "Surely We revealed the Message, and We will surely preserve it.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "5:32": {
     "arabic": "مِنۡ أَجۡلِ ذَٰلِكَ كَتَبۡنَا عَلَىٰ بَنِيٓ إِسۡرَٰٓءِيلَ أَنَّهُۥ مَن قَتَلَ نَفۡسَۢا بِغَيۡرِ نَفۡسٍ أَوۡ فَسَادٖ فِي ٱلۡأَرۡضِ فَكَأَنَّمَا قَتَلَ ٱلنَّاسَ جَمِيعٗا وَمَنۡ أَحۡيَاهَا فَكَأَنَّمَآ أَحۡيَا ٱلنَّاسَ جَمِيعٗاۚ وَلَقَدۡ جَآءَتۡهُمۡ رُسُلُنَا بِٱلۡبَيِّنَٰتِ ثُمَّ إِنَّ كَثِيرٗا مِّنۡهُم بَعۡدَ ذَٰلِكَ فِي ٱلۡأَرۡضِ لَمُسۡرِفُونَ",
-    "translation": "Because of that, We decreed upon the Children of Israel that whoever kills a soul unless for a soul or for corruption [done] in the land - it is as if he had slain mankind entirely. And whoever saves one - it is as if he had saved mankind entirely. And Our messengers had certainly come to them with clear proofs. Then indeed many of them, [even] after that, throughout the land, were transgressors.",
+    "translation": "Because of that We ordained for the Children of Israel: that whoever kills a person—unless it is for murder or corruption on earth—it is as if he killed the whole of mankind; and whoever saves it, it is as if he saved the whole of mankind. Our messengers came to them with clarifications, but even after that, many of them continue to commit excesses in the land.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "17:33": {
     "arabic": "وَلَا تَقۡتُلُواْ ٱلنَّفۡسَ ٱلَّتِي حَرَّمَ ٱللَّهُ إِلَّا بِٱلۡحَقِّۗ وَمَن قُتِلَ مَظۡلُومٗا فَقَدۡ جَعَلۡنَا لِوَلِيِّهِۦ سُلۡطَٰنٗا فَلَا يُسۡرِف فِّي ٱلۡقَتۡلِۖ إِنَّهُۥ كَانَ مَنصُورٗا",
-    "translation": "And do not kill the soul [i.e., person] which Allāh has forbidden, except by right. And whoever is killed unjustly - We have given his heir authority, but let him not exceed limits in [the matter of] taking life. Indeed, he has been supported [by the law].",
+    "translation": "And do not kill the soul which Allah has made sacred, except in the course of justice. If someone is killed unjustly, We have given his next of kin certain authority. But he should not be excessive in killing, for he will be supported.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "4:93": {
     "arabic": "وَمَن يَقۡتُلۡ مُؤۡمِنٗا مُّتَعَمِّدٗا فَجَزَآؤُهُۥ جَهَنَّمُ خَٰلِدٗا فِيهَا وَغَضِبَ ٱللَّهُ عَلَيۡهِ وَلَعَنَهُۥ وَأَعَدَّ لَهُۥ عَذَابًا عَظِيمٗا",
-    "translation": "But whoever kills a believer intentionally - his recompense is Hell, wherein he will abide eternally, and Allāh has become angry with him and has cursed him and has prepared for him a great punishment.",
+    "translation": "Whoever kills a believer deliberately, the penalty for him is Hell, where he will remain forever. And Allah will be angry with him, and will curse him, and will prepare for him a terrible punishment.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "22:39": {
     "arabic": "أُذِنَ لِلَّذِينَ يُقَٰتَلُونَ بِأَنَّهُمۡ ظُلِمُواْۚ وَإِنَّ ٱللَّهَ عَلَىٰ نَصۡرِهِمۡ لَقَدِيرٌ",
-    "translation": "Permission [to fight] has been given to those who are being fought, because they were wronged. And indeed, Allāh is competent to give them victory.",
+    "translation": "Permission is given to those who are fought against, and Allah is Able to give them victory.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "2:190": {
     "arabic": "وَقَٰتِلُواْ فِي سَبِيلِ ٱللَّهِ ٱلَّذِينَ يُقَٰتِلُونَكُمۡ وَلَا تَعۡتَدُوٓاْۚ إِنَّ ٱللَّهَ لَا يُحِبُّ ٱلۡمُعۡتَدِينَ",
-    "translation": "Fight in the way of Allāh those who fight against you but do not transgress. Indeed, Allāh does not like transgressors.",
+    "translation": "And fight in the cause of Allah those who fight you, but do not commit aggression; Allah does not love the aggressors.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "60:8": {
     "arabic": "لَّا يَنۡهَىٰكُمُ ٱللَّهُ عَنِ ٱلَّذِينَ لَمۡ يُقَٰتِلُوكُمۡ فِي ٱلدِّينِ وَلَمۡ يُخۡرِجُوكُم مِّن دِيَٰرِكُمۡ أَن تَبَرُّوهُمۡ وَتُقۡسِطُوٓاْ إِلَيۡهِمۡۚ إِنَّ ٱللَّهَ يُحِبُّ ٱلۡمُقۡسِطِينَ",
-    "translation": "Allāh does not forbid you from those who do not fight you because of religion and do not expel you from your homes - from being righteous toward them and acting justly toward them. Indeed, Allāh loves those who act justly.",
+    "translation": "As for those who have not fought against you for your religion, nor expelled you from your homes, Allah does not prohibit you from dealing with them kindly and equitably. Allah loves the equitable.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "5:8": {
     "arabic": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُواْ كُونُواْ قَوَّٰمِينَ لِلَّهِ شُهَدَآءَ بِٱلۡقِسۡطِۖ وَلَا يَجۡرِمَنَّكُمۡ شَنَـَٔانُ قَوۡمٍ عَلَىٰٓ أَلَّا تَعۡدِلُواْۚ ٱعۡدِلُواْ هُوَ أَقۡرَبُ لِلتَّقۡوَىٰۖ وَٱتَّقُواْ ٱللَّهَۚ إِنَّ ٱللَّهَ خَبِيرُۢ بِمَا تَعۡمَلُونَ",
-    "translation": "O you who have believed, be persistently standing firm for Allāh, witnesses in justice, and do not let the hatred of a people prevent you from being just. Be just; that is nearer to righteousness. And fear Allāh; indeed, Allāh is [fully] Aware of what you do.",
+    "translation": "O you who believe! Be upright to Allah, witnessing with justice; and let not the hatred of a certain people prevent you from acting justly. Adhere to justice, for that is nearer to piety; and fear Allah. Allah is informed of what you do.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "41:34": {
     "arabic": "وَلَا تَسۡتَوِي ٱلۡحَسَنَةُ وَلَا ٱلسَّيِّئَةُۚ ٱدۡفَعۡ بِٱلَّتِي هِيَ أَحۡسَنُ فَإِذَا ٱلَّذِي بَيۡنَكَ وَبَيۡنَهُۥ عَدَٰوَةٞ كَأَنَّهُۥ وَلِيٌّ حَمِيمٞ",
-    "translation": "And not equal are the good deed and the bad. Repel [evil] by that [deed] which is better; and thereupon, the one whom between you and him is enmity [will become] as though he was a devoted friend.",
+    "translation": "Good and evil are not equal. Repel evil with good, and the person who was your enemy becomes like an intimate friend.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "3:45": {
     "arabic": "إِذۡ قَالَتِ ٱلۡمَلَٰٓئِكَةُ يَٰمَرۡيَمُ إِنَّ ٱللَّهَ يُبَشِّرُكِ بِكَلِمَةٖ مِّنۡهُ ٱسۡمُهُ ٱلۡمَسِيحُ عِيسَى ٱبۡنُ مَرۡيَمَ وَجِيهٗا فِي ٱلدُّنۡيَا وَٱلۡأٓخِرَةِ وَمِنَ ٱلۡمُقَرَّبِينَ",
-    "translation": "[And mention] when the angels said, \"O Mary, indeed Allāh gives you good tidings of a word from Him, whose name will be the Messiah, Jesus, the son of Mary - distinguished in this world and the Hereafter and among those brought near [to Allāh].",
+    "translation": "The Angels said, “O Mary, Allah gives you good news of a Word from Him. His name is the Messiah, Jesus, son of Mary, well-esteemed in this world and the next, and one of the nearest.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "3:47": {
     "arabic": "قَالَتۡ رَبِّ أَنَّىٰ يَكُونُ لِي وَلَدٞ وَلَمۡ يَمۡسَسۡنِي بَشَرٞۖ قَالَ كَذَٰلِكِ ٱللَّهُ يَخۡلُقُ مَا يَشَآءُۚ إِذَا قَضَىٰٓ أَمۡرٗا فَإِنَّمَا يَقُولُ لَهُۥ كُن فَيَكُونُ",
-    "translation": "She said, \"My Lord, how will I have a child when no man has touched me?\" [The angel] said, \"Such is Allāh; He creates what He wills. When He decrees a matter, He only says to it, 'Be,' and it is.",
+    "translation": "She said, “My Lord, how can I have a child, when no man has touched me?” He said, “It will be so. Allah creates whatever He wills. To have anything done, He only says to it, ‘Be,’ and it is.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "2:136": {
     "arabic": "قُولُوٓاْ ءَامَنَّا بِٱللَّهِ وَمَآ أُنزِلَ إِلَيۡنَا وَمَآ أُنزِلَ إِلَىٰٓ إِبۡرَٰهِـۧمَ وَإِسۡمَٰعِيلَ وَإِسۡحَٰقَ وَيَعۡقُوبَ وَٱلۡأَسۡبَاطِ وَمَآ أُوتِيَ مُوسَىٰ وَعِيسَىٰ وَمَآ أُوتِيَ ٱلنَّبِيُّونَ مِن رَّبِّهِمۡ لَا نُفَرِّقُ بَيۡنَ أَحَدٖ مِّنۡهُمۡ وَنَحۡنُ لَهُۥ مُسۡلِمُونَ",
-    "translation": "Say, [O believers], \"We have believed in Allāh and what has been revealed to us and what has been revealed to Abraham and Ishmael and Isaac and Jacob and the Descendants [al-Asbāṭ] and what was given to Moses and Jesus and what was given to the prophets from their Lord. We make no distinction between any of them, and we are Muslims [in submission] to Him.\"",
+    "translation": "Say, “We believe in Allah; and in what was revealed to us; and in what was revealed to Abraham, and Ishmael, and Isaac, and Jacob, and the Patriarchs; and in what was given to Moses and Jesus; and in what was given to the prophets—from their Lord. We make no distinction between any of them, and to Him we surrender.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "4:171": {
     "arabic": "يَٰٓأَهۡلَ ٱلۡكِتَٰبِ لَا تَغۡلُواْ فِي دِينِكُمۡ وَلَا تَقُولُواْ عَلَى ٱللَّهِ إِلَّا ٱلۡحَقَّۚ إِنَّمَا ٱلۡمَسِيحُ عِيسَى ٱبۡنُ مَرۡيَمَ رَسُولُ ٱللَّهِ وَكَلِمَتُهُۥٓ أَلۡقَىٰهَآ إِلَىٰ مَرۡيَمَ وَرُوحٞ مِّنۡهُۖ فَـَٔامِنُواْ بِٱللَّهِ وَرُسُلِهِۦۖ وَلَا تَقُولُواْ ثَلَٰثَةٌۚ ٱنتَهُواْ خَيۡرٗا لَّكُمۡۚ إِنَّمَا ٱللَّهُ إِلَٰهٞ وَٰحِدٞۖ سُبۡحَٰنَهُۥٓ أَن يَكُونَ لَهُۥ وَلَدٞۘ لَّهُۥ مَا فِي ٱلسَّمَٰوَٰتِ وَمَا فِي ٱلۡأَرۡضِۗ وَكَفَىٰ بِٱللَّهِ وَكِيلٗا",
-    "translation": "O People of the Scripture, do not commit excess in your religion or say about Allāh except the truth. The Messiah, Jesus the son of Mary, was but a messenger of Allāh and His word which He directed to Mary and a soul [created at a command] from Him. So believe in Allāh and His messengers. And do not say, \"Three\"; desist - it is better for you. Indeed, Allāh is but one God. Exalted is He above having a son. To Him belongs whatever is in the heavens and whatever is on the earth. And sufficient is Allāh as Disposer of affairs.",
+    "translation": "O People of the Scripture! Do not exaggerate in your religion, and do not say about Allah except the truth. The Messiah, Jesus, the son of Mary, is the Messenger of Allah, and His Word that He conveyed to Mary, and a Spirit from Him. So believe in Allah and His messengers, and do not say, “Three.” Refrain—it is better for you. Allah is only one God. Glory be to Him—that He should have a son. To Him belongs everything in the heavens and the earth, and Allah is a sufficient Protector.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "5:75": {
     "arabic": "مَّا ٱلۡمَسِيحُ ٱبۡنُ مَرۡيَمَ إِلَّا رَسُولٞ قَدۡ خَلَتۡ مِن قَبۡلِهِ ٱلرُّسُلُ وَأُمُّهُۥ صِدِّيقَةٞۖ كَانَا يَأۡكُلَانِ ٱلطَّعَامَۗ ٱنظُرۡ كَيۡفَ نُبَيِّنُ لَهُمُ ٱلۡأٓيَٰتِ ثُمَّ ٱنظُرۡ أَنَّىٰ يُؤۡفَكُونَ",
-    "translation": "The Messiah, son of Mary, was not but a messenger; [other] messengers have passed on before him. And his mother was a supporter of truth. They both used to eat food. Look how We make clear to them the signs; then look how they are deluded.",
+    "translation": "The Messiah son of Mary was only a messenger, before whom other Messengers had passed away, and his mother was a woman of truth. They both used to eat food. Note how We make clear the revelations to them; then note how deluded they are.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "3:59": {
     "arabic": "إِنَّ مَثَلَ عِيسَىٰ عِندَ ٱللَّهِ كَمَثَلِ ءَادَمَۖ خَلَقَهُۥ مِن تُرَابٖ ثُمَّ قَالَ لَهُۥ كُن فَيَكُونُ",
-    "translation": "Indeed, the example of Jesus to Allāh is like that of Adam. He created him from dust; then He said to him, \"Be,\" and he was.",
+    "translation": "The likeness of Jesus in Allah’s sight is that of Adam: He created him from dust, then said to him, “Be,” and he was.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "4:157-158": {
     "arabic": "وَقَوۡلِهِمۡ إِنَّا قَتَلۡنَا ٱلۡمَسِيحَ عِيسَى ٱبۡنَ مَرۡيَمَ رَسُولَ ٱللَّهِ وَمَا قَتَلُوهُ وَمَا صَلَبُوهُ وَلَٰكِن شُبِّهَ لَهُمۡۚ وَإِنَّ ٱلَّذِينَ ٱخۡتَلَفُواْ فِيهِ لَفِي شَكّٖ مِّنۡهُۚ مَا لَهُم بِهِۦ مِنۡ عِلۡمٍ إِلَّا ٱتِّبَاعَ ٱلظَّنِّۚ وَمَا قَتَلُوهُ يَقِينَۢا بَل رَّفَعَهُ ٱللَّهُ إِلَيۡهِۚ وَكَانَ ٱللَّهُ عَزِيزًا حَكِيمٗا",
-    "translation": "And [for] their saying, \"Indeed, we have killed the Messiah, Jesus the son of Mary, the messenger of Allāh.\" And they did not kill him, nor did they crucify him; but [another] was made to resemble him to them. And indeed, those who differ over it are in doubt about it. They have no knowledge of it except the following of assumption. And they did not kill him, for certain. Rather, Allāh raised him to Himself. And ever is Allāh Exalted in Might and Wise.",
+    "translation": "And for their saying, “We have killed the Messiah, Jesus, the son of Mary, the Messenger of Allah.” In fact, they did not kill him, nor did they crucify him, but it appeared to them as if they did. Indeed, those who differ about him are in doubt about it. They have no knowledge of it, except the following of assumptions. Certainly, they did not kill him. Rather, Allah raised him up to Himself. Allah is Mighty and Wise.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "6:164": {
     "arabic": "قُلۡ أَغَيۡرَ ٱللَّهِ أَبۡغِي رَبّٗا وَهُوَ رَبُّ كُلِّ شَيۡءٖۚ وَلَا تَكۡسِبُ كُلُّ نَفۡسٍ إِلَّا عَلَيۡهَاۚ وَلَا تَزِرُ وَازِرَةٞ وِزۡرَ أُخۡرَىٰۚ ثُمَّ إِلَىٰ رَبِّكُم مَّرۡجِعُكُمۡ فَيُنَبِّئُكُم بِمَا كُنتُمۡ فِيهِ تَخۡتَلِفُونَ",
-    "translation": "Say, \"Is it other than Allāh I should desire as a lord while He is the Lord of all things? And every soul earns not [blame] except against itself, and no bearer of burdens will bear the burden of another. Then to your Lord is your return, and He will inform you concerning that over which you used to differ.\"",
+    "translation": "Say, “Am I to seek a Lord other than Allah, when He is the Lord of all things?” No soul gets except what it is due, and no soul bears the burdens of another. Then to your Lord is your return, then He will inform you regarding your disputes.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "109:6": {
     "arabic": "لَكُمۡ دِينُكُمۡ وَلِيَ دِينِ",
-    "translation": "For you is your religion, and for me is my religion.\"",
+    "translation": "You have your way, and I have my way.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "2:163": {
     "arabic": "وَإِلَٰهُكُمۡ إِلَٰهٞ وَٰحِدٞۖ لَّآ إِلَٰهَ إِلَّا هُوَ ٱلرَّحۡمَٰنُ ٱلرَّحِيمُ",
-    "translation": "And your god is one God. There is no deity [worthy of worship] except Him, the Entirely Merciful, the Especially Merciful.",
+    "translation": "Your God is one God. There is no god but He, the Benevolent, the Compassionate.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "42:11": {
     "arabic": "فَاطِرُ ٱلسَّمَٰوَٰتِ وَٱلۡأَرۡضِۚ جَعَلَ لَكُم مِّنۡ أَنفُسِكُمۡ أَزۡوَٰجٗا وَمِنَ ٱلۡأَنۡعَٰمِ أَزۡوَٰجٗا يَذۡرَؤُكُمۡ فِيهِۚ لَيۡسَ كَمِثۡلِهِۦ شَيۡءٞۖ وَهُوَ ٱلسَّمِيعُ ٱلۡبَصِيرُ",
-    "translation": "[He is] Creator of the heavens and the earth. He has made for you from yourselves, mates, and among the cattle, mates; He multiplies you thereby. There is nothing like unto Him, and He is the Hearing, the Seeing.",
+    "translation": "Originator of the heavens and the earth. He made for you mates from among yourselves, and pairs of animals, by means of which He multiplies you. There is nothing like Him. He is the Hearing, the Seeing.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "21:25": {
     "arabic": "وَمَآ أَرۡسَلۡنَا مِن قَبۡلِكَ مِن رَّسُولٍ إِلَّا نُوحِيٓ إِلَيۡهِ أَنَّهُۥ لَآ إِلَٰهَ إِلَّآ أَنَا۠ فَٱعۡبُدُونِ",
-    "translation": "And We sent not before you any messenger except We revealed to him that, \"There is no deity except Me, so worship Me.\"",
+    "translation": "We never sent a messenger before you without inspiring him that: “There is no god but I, so worship Me.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "2:133": {
     "arabic": "أَمۡ كُنتُمۡ شُهَدَآءَ إِذۡ حَضَرَ يَعۡقُوبَ ٱلۡمَوۡتُ إِذۡ قَالَ لِبَنِيهِ مَا تَعۡبُدُونَ مِنۢ بَعۡدِيۖ قَالُواْ نَعۡبُدُ إِلَٰهَكَ وَإِلَٰهَ ءَابَآئِكَ إِبۡرَٰهِـۧمَ وَإِسۡمَٰعِيلَ وَإِسۡحَٰقَ إِلَٰهٗا وَٰحِدٗا وَنَحۡنُ لَهُۥ مُسۡلِمُونَ",
-    "translation": "Or were you witnesses when death approached Jacob, when he said to his sons, \"What will you worship after me?\" They said, \"We will worship your God and the God of your fathers, Abraham and Ishmael and Isaac - one God. And we are Muslims [in submission] to Him.\"",
+    "translation": "Or were you witnesses when death approached Jacob, and he said to his sons, “What will you worship after Me?” They said, “We will worship your God, and the God of your fathers, Abraham, Ishmael, and Isaac; One God; and to Him we submit.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "42:15": {
     "arabic": "فَلِذَٰلِكَ فَٱدۡعُۖ وَٱسۡتَقِمۡ كَمَآ أُمِرۡتَۖ وَلَا تَتَّبِعۡ أَهۡوَآءَهُمۡۖ وَقُلۡ ءَامَنتُ بِمَآ أَنزَلَ ٱللَّهُ مِن كِتَٰبٖۖ وَأُمِرۡتُ لِأَعۡدِلَ بَيۡنَكُمُۖ ٱللَّهُ رَبُّنَا وَرَبُّكُمۡۖ لَنَآ أَعۡمَٰلُنَا وَلَكُمۡ أَعۡمَٰلُكُمۡۖ لَا حُجَّةَ بَيۡنَنَا وَبَيۡنَكُمُۖ ٱللَّهُ يَجۡمَعُ بَيۡنَنَاۖ وَإِلَيۡهِ ٱلۡمَصِيرُ",
-    "translation": "So to that [religion of Allāh] invite, [O Muḥammad], and remain on a right course as you are commanded and do not follow their inclinations but say, \"I have believed in what Allāh has revealed of scripture [i.e., the Qur’ān], and I have been commanded to do justice among you. Allāh is our Lord and your Lord. For us are our deeds, and for you your deeds. There is no [need for] argument between us and you. Allāh will bring us together, and to Him is the [final] destination.\"",
+    "translation": "To this go on inviting, and be upright as you were commanded, and do not follow their inclinations, and say, “I believe in whatever Book Allah has sent down, and I was commanded to judge between you equitably. Allah is our Lord and your Lord. We have our deeds, and you have your deeds. Let there be no quarrel between us and you. Allah will bring us together, and to Him is the ultimate return.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "10:99": {
     "arabic": "وَلَوۡ شَآءَ رَبُّكَ لَأٓمَنَ مَن فِي ٱلۡأَرۡضِ كُلُّهُمۡ جَمِيعًاۚ أَفَأَنتَ تُكۡرِهُ ٱلنَّاسَ حَتَّىٰ يَكُونُواْ مُؤۡمِنِينَ",
-    "translation": "And had your Lord willed, those on earth would have believed - all of them entirely. Then, [O Muḥammad], would you compel the people in order that they become believers?",
+    "translation": "Had your Lord willed, everyone on earth would have believed. Will you compel people to become believers?",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "88:21-22": {
     "arabic": "فَذَكِّرۡ إِنَّمَآ أَنتَ مُذَكِّرٞ لَّسۡتَ عَلَيۡهِم بِمُصَيۡطِرٍ",
-    "translation": "So remind, [O Muḥammad]; you are only a reminder. You are not over them a controller.",
+    "translation": "So remind. You are only a reminder. You have no control over them.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "22:39-40": {
     "arabic": "أُذِنَ لِلَّذِينَ يُقَٰتَلُونَ بِأَنَّهُمۡ ظُلِمُواْۚ وَإِنَّ ٱللَّهَ عَلَىٰ نَصۡرِهِمۡ لَقَدِيرٌ ٱلَّذِينَ أُخۡرِجُواْ مِن دِيَٰرِهِم بِغَيۡرِ حَقٍّ إِلَّآ أَن يَقُولُواْ رَبُّنَا ٱللَّهُۗ وَلَوۡلَا دَفۡعُ ٱللَّهِ ٱلنَّاسَ بَعۡضَهُم بِبَعۡضٖ لَّهُدِّمَتۡ صَوَٰمِعُ وَبِيَعٞ وَصَلَوَٰتٞ وَمَسَٰجِدُ يُذۡكَرُ فِيهَا ٱسۡمُ ٱللَّهِ كَثِيرٗاۗ وَلَيَنصُرَنَّ ٱللَّهُ مَن يَنصُرُهُۥٓۚ إِنَّ ٱللَّهَ لَقَوِيٌّ عَزِيزٌ",
-    "translation": "Permission [to fight] has been given to those who are being fought, because they were wronged. And indeed, Allāh is competent to give them victory. [They are] those who have been evicted from their homes without right - only because they say, \"Our Lord is Allāh.\" And were it not that Allāh checks the people, some by means of others, there would have been demolished monasteries, churches, synagogues, and mosques in which the name of Allāh is much mentioned [i.e., praised]. And Allāh will surely support those who support Him [i.e., His cause]. Indeed, Allāh is Powerful and Exalted in Might.",
+    "translation": "Permission is given to those who are fought against, and Allah is Able to give them victory. Those who were unjustly evicted from their homes, merely for saying, “Our Lord is Allah.” Were it not that Allah repels people by means of others: monasteries, churches, synagogues, and mosques—where the name of Allah is mentioned much—would have been demolished. Allah supports whoever supports Him. Allah is Strong and Mighty.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "18:29": {
     "arabic": "وَقُلِ ٱلۡحَقُّ مِن رَّبِّكُمۡۖ فَمَن شَآءَ فَلۡيُؤۡمِن وَمَن شَآءَ فَلۡيَكۡفُرۡۚ إِنَّآ أَعۡتَدۡنَا لِلظَّٰلِمِينَ نَارًا أَحَاطَ بِهِمۡ سُرَادِقُهَاۚ وَإِن يَسۡتَغِيثُواْ يُغَاثُواْ بِمَآءٖ كَٱلۡمُهۡلِ يَشۡوِي ٱلۡوُجُوهَۚ بِئۡسَ ٱلشَّرَابُ وَسَآءَتۡ مُرۡتَفَقًا",
-    "translation": "And say, \"The truth is from your Lord, so whoever wills - let him believe; and whoever wills - let him disbelieve.\" Indeed, We have prepared for the wrongdoers a fire whose walls will surround them. And if they call for relief, they will be relieved with water like murky oil, which scalds [their] faces. Wretched is the drink, and evil is the resting place.",
+    "translation": "And say, “The truth is from your Lord. Whoever wills—let him believe. And whoever wills—let him disbelieve”. We have prepared for the unjust a Fire, whose curtains will hem them in. And when they cry for relief, they will be relieved with water like molten brass, which scalds the faces. What a miserable drink, and what a terrible place.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "24:30": {
     "arabic": "قُل لِّلۡمُؤۡمِنِينَ يَغُضُّواْ مِنۡ أَبۡصَٰرِهِمۡ وَيَحۡفَظُواْ فُرُوجَهُمۡۚ ذَٰلِكَ أَزۡكَىٰ لَهُمۡۚ إِنَّ ٱللَّهَ خَبِيرُۢ بِمَا يَصۡنَعُونَ",
-    "translation": "Tell the believing men to reduce [some] of their vision and guard their private parts. That is purer for them. Indeed, Allāh is [fully] Aware of what they do.",
+    "translation": "Tell the believing men to restrain their looks, and to guard their privates. That is purer for them. Allah is cognizant of what they do.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "24:31": {
     "arabic": "وَقُل لِّلۡمُؤۡمِنَٰتِ يَغۡضُضۡنَ مِنۡ أَبۡصَٰرِهِنَّ وَيَحۡفَظۡنَ فُرُوجَهُنَّ وَلَا يُبۡدِينَ زِينَتَهُنَّ إِلَّا مَا ظَهَرَ مِنۡهَاۖ وَلۡيَضۡرِبۡنَ بِخُمُرِهِنَّ عَلَىٰ جُيُوبِهِنَّۖ وَلَا يُبۡدِينَ زِينَتَهُنَّ إِلَّا لِبُعُولَتِهِنَّ أَوۡ ءَابَآئِهِنَّ أَوۡ ءَابَآءِ بُعُولَتِهِنَّ أَوۡ أَبۡنَآئِهِنَّ أَوۡ أَبۡنَآءِ بُعُولَتِهِنَّ أَوۡ إِخۡوَٰنِهِنَّ أَوۡ بَنِيٓ إِخۡوَٰنِهِنَّ أَوۡ بَنِيٓ أَخَوَٰتِهِنَّ أَوۡ نِسَآئِهِنَّ أَوۡ مَا مَلَكَتۡ أَيۡمَٰنُهُنَّ أَوِ ٱلتَّٰبِعِينَ غَيۡرِ أُوْلِي ٱلۡإِرۡبَةِ مِنَ ٱلرِّجَالِ أَوِ ٱلطِّفۡلِ ٱلَّذِينَ لَمۡ يَظۡهَرُواْ عَلَىٰ عَوۡرَٰتِ ٱلنِّسَآءِۖ وَلَا يَضۡرِبۡنَ بِأَرۡجُلِهِنَّ لِيُعۡلَمَ مَا يُخۡفِينَ مِن زِينَتِهِنَّۚ وَتُوبُوٓاْ إِلَى ٱللَّهِ جَمِيعًا أَيُّهَ ٱلۡمُؤۡمِنُونَ لَعَلَّكُمۡ تُفۡلِحُونَ",
-    "translation": "And tell the believing women to reduce [some] of their vision and guard their private parts and not expose their adornment except that which [necessarily] appears thereof and to wrap [a portion of] their headcovers over their chests and not expose their adornment [i.e., beauty] except to their husbands, their fathers, their husbands' fathers, their sons, their husbands' sons, their brothers, their brothers' sons, their sisters' sons, their women, that which their right hands possess [i.e., slaves], or those male attendants having no physical desire, or children who are not yet aware of the private aspects of women. And let them not stamp their feet to make known what they conceal of their adornment. And turn to Allāh in repentance, all of you, O believers, that you might succeed.",
+    "translation": "And tell the believing women to restrain their looks, and to guard their privates, and not display their beauty except what is apparent thereof, and to draw their coverings over their breasts, and not expose their beauty except to their husbands, their fathers, their husbands' fathers, their sons, their husbands' sons, their brothers, their brothers' sons, their sisters' sons, their women, what their right hands possess, their male attendants who have no sexual desires, or children who are not yet aware of the nakedness of women. And they should not strike their feet to draw attention to their hidden beauty. And repent to Allah, all of you believers, so that you may succeed.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "33:59": {
     "arabic": "يَٰٓأَيُّهَا ٱلنَّبِيُّ قُل لِّأَزۡوَٰجِكَ وَبَنَاتِكَ وَنِسَآءِ ٱلۡمُؤۡمِنِينَ يُدۡنِينَ عَلَيۡهِنَّ مِن جَلَٰبِيبِهِنَّۚ ذَٰلِكَ أَدۡنَىٰٓ أَن يُعۡرَفۡنَ فَلَا يُؤۡذَيۡنَۗ وَكَانَ ٱللَّهُ غَفُورٗا رَّحِيمٗا",
-    "translation": "O Prophet, tell your wives and your daughters and the women of the believers to bring down over themselves [part] of their outer garments. That is more suitable that they will be known and not be abused. And ever is Allāh Forgiving and Merciful.",
+    "translation": "O Prophet! Tell your wives, and your daughters, and the women of the believers, to lengthen their garments. That is more proper, so they will be recognized and not harassed. Allah is Forgiving and Merciful.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "7:26": {
     "arabic": "يَٰبَنِيٓ ءَادَمَ قَدۡ أَنزَلۡنَا عَلَيۡكُمۡ لِبَاسٗا يُوَٰرِي سَوۡءَٰتِكُمۡ وَرِيشٗاۖ وَلِبَاسُ ٱلتَّقۡوَىٰ ذَٰلِكَ خَيۡرٞۚ ذَٰلِكَ مِنۡ ءَايَٰتِ ٱللَّهِ لَعَلَّهُمۡ يَذَّكَّرُونَ",
-    "translation": "O children of Adam, We have bestowed upon you clothing to conceal your private parts and as adornment. But the clothing of righteousness - that is best. That is from the signs of Allāh that perhaps they will remember.",
+    "translation": "O children of Adam! We have provided you with clothing to cover your bodies, and for luxury. But the clothing of piety—that is best. These are some of Allah’s revelations, so that they may take heed.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "2:173": {
     "arabic": "إِنَّمَا حَرَّمَ عَلَيۡكُمُ ٱلۡمَيۡتَةَ وَٱلدَّمَ وَلَحۡمَ ٱلۡخِنزِيرِ وَمَآ أُهِلَّ بِهِۦ لِغَيۡرِ ٱللَّهِۖ فَمَنِ ٱضۡطُرَّ غَيۡرَ بَاغٖ وَلَا عَادٖ فَلَآ إِثۡمَ عَلَيۡهِۚ إِنَّ ٱللَّهَ غَفُورٞ رَّحِيمٌ",
-    "translation": "He has only forbidden to you dead animals, blood, the flesh of swine, and that which has been dedicated to other than Allāh. But whoever is forced [by necessity], neither desiring [it] nor transgressing [its limit], there is no sin upon him. Indeed, Allāh is Forgiving and Merciful.",
+    "translation": "He has forbidden you carrion, and blood, and the flesh of swine, and what was dedicated to other than Allah. But if anyone is compelled, without desiring or exceeding, he commits no sin. Allah is Forgiving and Merciful.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "5:90": {
     "arabic": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوٓاْ إِنَّمَا ٱلۡخَمۡرُ وَٱلۡمَيۡسِرُ وَٱلۡأَنصَابُ وَٱلۡأَزۡلَٰمُ رِجۡسٞ مِّنۡ عَمَلِ ٱلشَّيۡطَٰنِ فَٱجۡتَنِبُوهُ لَعَلَّكُمۡ تُفۡلِحُونَ",
-    "translation": "O you who have believed, indeed, intoxicants, gambling, [sacrificing on] stone alters [to other than Allāh], and divining arrows are but defilement from the work of Satan, so avoid it that you may be successful.",
+    "translation": "O you who believe! Intoxicants, gambling, idolatry, and divination are abominations of Satan’s doing. Avoid them, so that you may prosper.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "2:168": {
     "arabic": "يَٰٓأَيُّهَا ٱلنَّاسُ كُلُواْ مِمَّا فِي ٱلۡأَرۡضِ حَلَٰلٗا طَيِّبٗا وَلَا تَتَّبِعُواْ خُطُوَٰتِ ٱلشَّيۡطَٰنِۚ إِنَّهُۥ لَكُمۡ عَدُوّٞ مُّبِينٌ",
-    "translation": "O mankind, eat from whatever is on earth [that is] lawful and good and do not follow the footsteps of Satan. Indeed, he is to you a clear enemy.",
+    "translation": "O people! Eat of what is lawful and good on earth, and do not follow the footsteps of Satan. He is to you an open enemy.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "5:87": {
     "arabic": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُواْ لَا تُحَرِّمُواْ طَيِّبَٰتِ مَآ أَحَلَّ ٱللَّهُ لَكُمۡ وَلَا تَعۡتَدُوٓاْۚ إِنَّ ٱللَّهَ لَا يُحِبُّ ٱلۡمُعۡتَدِينَ",
-    "translation": "O you who have believed, do not prohibit the good things which Allāh has made lawful to you and do not transgress. Indeed, Allāh does not like transgressors.",
+    "translation": "O you who believe! Do not prohibit the good things Allah has permitted for you, and do not commit aggression. Allah does not love the aggressors.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "7:32": {
     "arabic": "قُلۡ مَنۡ حَرَّمَ زِينَةَ ٱللَّهِ ٱلَّتِيٓ أَخۡرَجَ لِعِبَادِهِۦ وَٱلطَّيِّبَٰتِ مِنَ ٱلرِّزۡقِۚ قُلۡ هِيَ لِلَّذِينَ ءَامَنُواْ فِي ٱلۡحَيَوٰةِ ٱلدُّنۡيَا خَالِصَةٗ يَوۡمَ ٱلۡقِيَٰمَةِۗ كَذَٰلِكَ نُفَصِّلُ ٱلۡأٓيَٰتِ لِقَوۡمٖ يَعۡلَمُونَ",
-    "translation": "Say, \"Who has forbidden the adornment of [i.e., from] Allāh which He has produced for His servants and the good [lawful] things of provision?\" Say, \"They are for those who believed during the life of this world, exclusively [for them] on the Day of Resurrection.\" Thus do We detail the verses for a people who know.",
+    "translation": "Say, “Who forbade Allah’s finery which He has produced for His servants, and the delights of livelihood?” Say, “They are for those who believe, in this present world, but exclusively theirs on the Day of Resurrection.” We thus detail the revelations for people who know.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "5:5": {
     "arabic": "ٱلۡيَوۡمَ أُحِلَّ لَكُمُ ٱلطَّيِّبَٰتُۖ وَطَعَامُ ٱلَّذِينَ أُوتُواْ ٱلۡكِتَٰبَ حِلّٞ لَّكُمۡ وَطَعَامُكُمۡ حِلّٞ لَّهُمۡۖ وَٱلۡمُحۡصَنَٰتُ مِنَ ٱلۡمُؤۡمِنَٰتِ وَٱلۡمُحۡصَنَٰتُ مِنَ ٱلَّذِينَ أُوتُواْ ٱلۡكِتَٰبَ مِن قَبۡلِكُمۡ إِذَآ ءَاتَيۡتُمُوهُنَّ أُجُورَهُنَّ مُحۡصِنِينَ غَيۡرَ مُسَٰفِحِينَ وَلَا مُتَّخِذِيٓ أَخۡدَانٖۗ وَمَن يَكۡفُرۡ بِٱلۡإِيمَٰنِ فَقَدۡ حَبِطَ عَمَلُهُۥ وَهُوَ فِي ٱلۡأٓخِرَةِ مِنَ ٱلۡخَٰسِرِينَ",
-    "translation": "This day [all] good foods have been made lawful, and the food of those who were given the Scripture is lawful for you and your food is lawful for them. And [lawful in marriage are] chaste women from among the believers and chaste women from among those who were given the Scripture before you, when you have given them their due compensation, desiring chastity, not unlawful sexual intercourse or taking [secret] lovers. And whoever denies the faith - his work has become worthless, and he, in the Hereafter, will be among the losers.",
+    "translation": "Today all good things are made lawful for you. And the food of those given the Scripture is lawful for you, and your food is lawful for them. So are chaste believing women, and chaste women from the people who were given the Scripture before you, provided you give them their dowries, and take them in marriage, not in adultery, nor as mistresses. But whoever rejects faith, his work will be in vain, and in the Hereafter he will be among the losers.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "7:180": {
     "arabic": "وَلِلَّهِ ٱلۡأَسۡمَآءُ ٱلۡحُسۡنَىٰ فَٱدۡعُوهُ بِهَاۖ وَذَرُواْ ٱلَّذِينَ يُلۡحِدُونَ فِيٓ أَسۡمَٰٓئِهِۦۚ سَيُجۡزَوۡنَ مَا كَانُواْ يَعۡمَلُونَ",
-    "translation": "And to Allāh belong the best names, so invoke Him by them. And leave [the company of] those who practice deviation concerning His names. They will be recompensed for what they have been doing.",
+    "translation": "To Allah belong the Most Beautiful Names, so call Him by them, and disregard those who blaspheme His names. They will be repaid for what they used to do.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "33:40": {
     "arabic": "مَّا كَانَ مُحَمَّدٌ أَبَآ أَحَدٖ مِّن رِّجَالِكُمۡ وَلَٰكِن رَّسُولَ ٱللَّهِ وَخَاتَمَ ٱلنَّبِيِّـۧنَۗ وَكَانَ ٱللَّهُ بِكُلِّ شَيۡءٍ عَلِيمٗا",
-    "translation": "Muḥammad is not the father of [any] one of your men, but [he is] the Messenger of Allāh and seal [i.e., last] of the prophets. And ever is Allāh, of all things, Knowing.",
+    "translation": "Muhammad is not the father of any of your men; but he is the Messenger of Allah, and the seal of the prophets. Allah is Cognizant of everything.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "68:4": {
     "arabic": "وَإِنَّكَ لَعَلَىٰ خُلُقٍ عَظِيمٖ",
-    "translation": "And indeed, you are of a great moral character.",
+    "translation": "And you are of a great moral character.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "33:21": {
     "arabic": "لَّقَدۡ كَانَ لَكُمۡ فِي رَسُولِ ٱللَّهِ أُسۡوَةٌ حَسَنَةٞ لِّمَن كَانَ يَرۡجُواْ ٱللَّهَ وَٱلۡيَوۡمَ ٱلۡأٓخِرَ وَذَكَرَ ٱللَّهَ كَثِيرٗا",
-    "translation": "There has certainly been for you in the Messenger of Allāh an excellent pattern for anyone whose hope is in Allāh and the Last Day and [who] remembers Allāh often.",
+    "translation": "You have an excellent example in the Messenger of Allah; for anyone who seeks Allah and the Last Day, and remembers Allah frequently.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "4:80": {
     "arabic": "مَّن يُطِعِ ٱلرَّسُولَ فَقَدۡ أَطَاعَ ٱللَّهَۖ وَمَن تَوَلَّىٰ فَمَآ أَرۡسَلۡنَٰكَ عَلَيۡهِمۡ حَفِيظٗا",
-    "translation": "He who obeys the Messenger has obeyed Allāh; but those who turn away - We have not sent you over them as a guardian.",
+    "translation": "Whoever obeys the Messenger is obeying Allah. And whoever turns away—We did not send you as a watcher over them.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "2:127": {
     "arabic": "وَإِذۡ يَرۡفَعُ إِبۡرَٰهِـۧمُ ٱلۡقَوَاعِدَ مِنَ ٱلۡبَيۡتِ وَإِسۡمَٰعِيلُ رَبَّنَا تَقَبَّلۡ مِنَّآۖ إِنَّكَ أَنتَ ٱلسَّمِيعُ ٱلۡعَلِيمُ",
-    "translation": "And [mention] when Abraham was raising the foundations of the House and [with him] Ishmael, [saying], \"Our Lord, accept [this] from us. Indeed, You are the Hearing, the Knowing.",
+    "translation": "As Abraham raises the foundations of the House, together with Ishmael, “Our Lord, accept it from us, You are the Hearer, the Knower.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "93:6-8": {
     "arabic": "أَلَمۡ يَجِدۡكَ يَتِيمٗا فَـَٔاوَىٰ وَوَجَدَكَ ضَآلّٗا فَهَدَىٰ وَوَجَدَكَ عَآئِلٗا فَأَغۡنَىٰ",
-    "translation": "Did He not find you an orphan and give [you] refuge? And He found you lost and guided [you], And He found you poor and made [you] self-sufficient.",
+    "translation": "Did He not find you orphaned, and sheltered you? And found you wandering, and guided you? And found you in need, and enriched you?",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "96:1-5": {
     "arabic": "ٱقۡرَأۡ بِٱسۡمِ رَبِّكَ ٱلَّذِي خَلَقَ خَلَقَ ٱلۡإِنسَٰنَ مِنۡ عَلَقٍ ٱقۡرَأۡ وَرَبُّكَ ٱلۡأَكۡرَمُ ٱلَّذِي عَلَّمَ بِٱلۡقَلَمِ عَلَّمَ ٱلۡإِنسَٰنَ مَا لَمۡ يَعۡلَمۡ",
-    "translation": "Recite in the name of your Lord who created – Created man from a clinging substance. Recite, and your Lord is the most Generous - Who taught by the pen – Taught man that which he knew not.",
+    "translation": "Read: In the Name of your Lord who created. Created man from a clot. Read: And your Lord is the Most Generous. He who taught by the pen. Taught man what he never knew.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "8:30": {
     "arabic": "وَإِذۡ يَمۡكُرُ بِكَ ٱلَّذِينَ كَفَرُواْ لِيُثۡبِتُوكَ أَوۡ يَقۡتُلُوكَ أَوۡ يُخۡرِجُوكَۚ وَيَمۡكُرُونَ وَيَمۡكُرُ ٱللَّهُۖ وَٱللَّهُ خَيۡرُ ٱلۡمَٰكِرِينَ",
-    "translation": "And [remember, O Muḥammad], when those who disbelieved plotted against you to restrain you or kill you or evict you [from Makkah]. But they plan, and Allāh plans. And Allāh is the best of planners.",
+    "translation": "When the disbelievers plotted against you, to imprison you, or kill you, or expel you. They planned, and Allah planned, but Allah is the Best of planners.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "9:40": {
     "arabic": "إِلَّا تَنصُرُوهُ فَقَدۡ نَصَرَهُ ٱللَّهُ إِذۡ أَخۡرَجَهُ ٱلَّذِينَ كَفَرُواْ ثَانِيَ ٱثۡنَيۡنِ إِذۡ هُمَا فِي ٱلۡغَارِ إِذۡ يَقُولُ لِصَٰحِبِهِۦ لَا تَحۡزَنۡ إِنَّ ٱللَّهَ مَعَنَاۖ فَأَنزَلَ ٱللَّهُ سَكِينَتَهُۥ عَلَيۡهِ وَأَيَّدَهُۥ بِجُنُودٖ لَّمۡ تَرَوۡهَا وَجَعَلَ كَلِمَةَ ٱلَّذِينَ كَفَرُواْ ٱلسُّفۡلَىٰۗ وَكَلِمَةُ ٱللَّهِ هِيَ ٱلۡعُلۡيَاۗ وَٱللَّهُ عَزِيزٌ حَكِيمٌ",
-    "translation": "If you do not aid him [i.e., the Prophet (ﷺ)] - Allāh has already aided him when those who disbelieved had driven him out [of Makkah] as one of two, when they were in the cave and he [i.e., Muḥammad (ﷺ)] said to his companion, \"Do not grieve; indeed Allāh is with us.\" And Allāh sent down His tranquility upon him and supported him with soldiers [i.e., angels] you did not see and made the word of those who disbelieved the lowest, while the word of Allāh - that is the highest. And Allāh is Exalted in Might and Wise.",
+    "translation": "If you do not help him, Allah has already helped him, when those who disbelieved expelled him, and he was the second of two in the cave. He said to his friend, “Do not worry, Allah is with us.” And Allah made His tranquility descend upon him, and supported him with forces you did not see, and made the word of those who disbelieved the lowest, while the Word of Allah is the Highest. Allah is Mighty and Wise.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "110:1-2": {
     "arabic": "إِذَا جَآءَ نَصۡرُ ٱللَّهِ وَٱلۡفَتۡحُ وَرَأَيۡتَ ٱلنَّاسَ يَدۡخُلُونَ فِي دِينِ ٱللَّهِ أَفۡوَاجٗا",
-    "translation": "When the victory of Allāh has come and the conquest, And you see the people entering into the religion of Allāh in multitudes,",
+    "translation": "When there comes Allah’s victory, and conquest. And you see the people entering Allah’s religion in multitudes.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "31:14": {
     "arabic": "وَوَصَّيۡنَا ٱلۡإِنسَٰنَ بِوَٰلِدَيۡهِ حَمَلَتۡهُ أُمُّهُۥ وَهۡنًا عَلَىٰ وَهۡنٖ وَفِصَٰلُهُۥ فِي عَامَيۡنِ أَنِ ٱشۡكُرۡ لِي وَلِوَٰلِدَيۡكَ إِلَيَّ ٱلۡمَصِيرُ",
-    "translation": "And We have enjoined upon man [care] for his parents. His mother carried him, [increasing her] in weakness upon weakness, and his weaning is in two years. Be grateful to Me and to your parents; to Me is the [final] destination.",
+    "translation": "We have entrusted the human being with the care of his parents. His mother carried him through hardship upon hardship, weaning him in two years. So give thanks to Me, and to your parents. To Me is the destination.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "46:15": {
     "arabic": "وَوَصَّيۡنَا ٱلۡإِنسَٰنَ بِوَٰلِدَيۡهِ إِحۡسَٰنًاۖ حَمَلَتۡهُ أُمُّهُۥ كُرۡهٗا وَوَضَعَتۡهُ كُرۡهٗاۖ وَحَمۡلُهُۥ وَفِصَٰلُهُۥ ثَلَٰثُونَ شَهۡرًاۚ حَتَّىٰٓ إِذَا بَلَغَ أَشُدَّهُۥ وَبَلَغَ أَرۡبَعِينَ سَنَةٗ قَالَ رَبِّ أَوۡزِعۡنِيٓ أَنۡ أَشۡكُرَ نِعۡمَتَكَ ٱلَّتِيٓ أَنۡعَمۡتَ عَلَيَّ وَعَلَىٰ وَٰلِدَيَّ وَأَنۡ أَعۡمَلَ صَٰلِحٗا تَرۡضَىٰهُ وَأَصۡلِحۡ لِي فِي ذُرِّيَّتِيٓۖ إِنِّي تُبۡتُ إِلَيۡكَ وَإِنِّي مِنَ ٱلۡمُسۡلِمِينَ",
-    "translation": "And We have enjoined upon man, to his parents, good treatment. His mother carried him with hardship and gave birth to him with hardship, and his gestation and weaning [period] is thirty months. [He grows] until, when he reaches maturity and reaches [the age of] forty years, he says, \"My Lord, enable me to be grateful for Your favor which You have bestowed upon me and upon my parents and to work righteousness of which You will approve and make righteous for me my offspring. Indeed, I have repented to You, and indeed, I am of the Muslims.\"",
+    "translation": "We have enjoined upon man kindness to his parents. His mother carried him with difficulty, and delivered him with difficulty. His bearing and weaning takes thirty months. Until, when he has attained his maturity, and has reached forty years, he says, “Lord, enable me to appreciate the blessings You have bestowed upon me and upon my parents, and to act with righteousness, pleasing You. And improve my children for me. I have sincerely repented to You, and I am of those who have surrendered.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "17:23-24": {
     "arabic": "۞ وَقَضَىٰ رَبُّكَ أَلَّا تَعۡبُدُوٓاْ إِلَّآ إِيَّاهُ وَبِٱلۡوَٰلِدَيۡنِ إِحۡسَٰنًاۚ إِمَّا يَبۡلُغَنَّ عِندَكَ ٱلۡكِبَرَ أَحَدُهُمَآ أَوۡ كِلَاهُمَا فَلَا تَقُل لَّهُمَآ أُفّٖ وَلَا تَنۡهَرۡهُمَا وَقُل لَّهُمَا قَوۡلٗا كَرِيمٗا وَٱخۡفِضۡ لَهُمَا جَنَاحَ ٱلذُّلِّ مِنَ ٱلرَّحۡمَةِ وَقُل رَّبِّ ٱرۡحَمۡهُمَا كَمَا رَبَّيَانِي صَغِيرٗا",
-    "translation": "And your Lord has decreed that you worship not except Him, and to parents, good treatment. Whether one or both of them reach old age [while] with you, say not to them [so much as], \"uff,\" and do not repel them but speak to them a noble word. And lower to them the wing of humility out of mercy and say, \"My Lord, have mercy upon them as they brought me up [when I was] small.\"",
+    "translation": "Your Lord has commanded that you worship none but Him, and that you be good to your parents. If either of them or both of them reach old age with you, do not say to them a word of disrespect, nor scold them, but say to them kind words. And lower to them the wing of humility, out of mercy, and say, “My Lord, have mercy on them, as they raised me when I was a child.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "29:8": {
     "arabic": "وَوَصَّيۡنَا ٱلۡإِنسَٰنَ بِوَٰلِدَيۡهِ حُسۡنٗاۖ وَإِن جَٰهَدَاكَ لِتُشۡرِكَ بِي مَا لَيۡسَ لَكَ بِهِۦ عِلۡمٞ فَلَا تُطِعۡهُمَآۚ إِلَيَّ مَرۡجِعُكُمۡ فَأُنَبِّئُكُم بِمَا كُنتُمۡ تَعۡمَلُونَ",
-    "translation": "And We have enjoined upon man goodness to parents. But if they endeavor to make you associate with Me that of which you have no knowledge, do not obey them. To Me is your return, and I will inform you about what you used to do.",
+    "translation": "We have advised the human being to be good to his parents. But if they urge you to associate with Me something you have no knowledge of, do not obey them. To Me is your return; and I will inform you of what you used to do.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "30:21": {
     "arabic": "وَمِنۡ ءَايَٰتِهِۦٓ أَنۡ خَلَقَ لَكُم مِّنۡ أَنفُسِكُمۡ أَزۡوَٰجٗا لِّتَسۡكُنُوٓاْ إِلَيۡهَا وَجَعَلَ بَيۡنَكُم مَّوَدَّةٗ وَرَحۡمَةًۚ إِنَّ فِي ذَٰلِكَ لَأٓيَٰتٖ لِّقَوۡمٖ يَتَفَكَّرُونَ",
-    "translation": "And of His signs is that He created for you from yourselves mates that you may find tranquility in them; and He placed between you affection and mercy. Indeed in that are signs for a people who give thought.",
+    "translation": "And of His signs is that He created for you mates from among yourselves, so that you may find tranquility in them; and He planted love and compassion between you. In this are signs for people who reflect.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "4:19": {
     "arabic": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُواْ لَا يَحِلُّ لَكُمۡ أَن تَرِثُواْ ٱلنِّسَآءَ كَرۡهٗاۖ وَلَا تَعۡضُلُوهُنَّ لِتَذۡهَبُواْ بِبَعۡضِ مَآ ءَاتَيۡتُمُوهُنَّ إِلَّآ أَن يَأۡتِينَ بِفَٰحِشَةٖ مُّبَيِّنَةٖۚ وَعَاشِرُوهُنَّ بِٱلۡمَعۡرُوفِۚ فَإِن كَرِهۡتُمُوهُنَّ فَعَسَىٰٓ أَن تَكۡرَهُواْ شَيۡـٔٗا وَيَجۡعَلَ ٱللَّهُ فِيهِ خَيۡرٗا كَثِيرٗا",
-    "translation": "O you who have believed, it is not lawful for you to inherit women by compulsion. And do not make difficulties for them in order to take [back] part of what you gave them unless they commit a clear immorality [i.e., adultery]. And live with them in kindness. For if you dislike them - perhaps you dislike a thing and Allāh makes therein much good.",
+    "translation": "O you who believe! It is not permitted for you to inherit women against their will. And do not coerce them in order to take away some of what you had given them, unless they commit a proven adultery. And live with them in kindness. If you dislike them, it may be that you dislike something in which Allah has placed much good.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "2:228": {
     "arabic": "وَٱلۡمُطَلَّقَٰتُ يَتَرَبَّصۡنَ بِأَنفُسِهِنَّ ثَلَٰثَةَ قُرُوٓءٖۚ وَلَا يَحِلُّ لَهُنَّ أَن يَكۡتُمۡنَ مَا خَلَقَ ٱللَّهُ فِيٓ أَرۡحَامِهِنَّ إِن كُنَّ يُؤۡمِنَّ بِٱللَّهِ وَٱلۡيَوۡمِ ٱلۡأٓخِرِۚ وَبُعُولَتُهُنَّ أَحَقُّ بِرَدِّهِنَّ فِي ذَٰلِكَ إِنۡ أَرَادُوٓاْ إِصۡلَٰحٗاۚ وَلَهُنَّ مِثۡلُ ٱلَّذِي عَلَيۡهِنَّ بِٱلۡمَعۡرُوفِۚ وَلِلرِّجَالِ عَلَيۡهِنَّ دَرَجَةٞۗ وَٱللَّهُ عَزِيزٌ حَكِيمٌ",
-    "translation": "Divorced women remain in waiting [i.e., do not remarry] for three periods, and it is not lawful for them to conceal what Allāh has created in their wombs if they believe in Allāh and the Last Day. And their husbands have more right to take them back in this [period] if they want reconciliation. And due to them [i.e., the wives] is similar to what is expected of them, according to what is reasonable. But the men [i.e., husbands] have a degree over them [in responsibility and authority]. And Allāh is Exalted in Might and Wise.",
+    "translation": "Divorced women shall wait by themselves for three periods. And it is not lawful for them to conceal what Allah has created in their wombs, if they believe in Allah and the Last Day. Meanwhile, their husbands have the better right to take them back, if they desire reconciliation. And women have rights similar to their obligations, according to what is fair. But men have a degree over them. Allah is Mighty and Wise.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "42:49": {
     "arabic": "لِّلَّهِ مُلۡكُ ٱلسَّمَٰوَٰتِ وَٱلۡأَرۡضِۚ يَخۡلُقُ مَا يَشَآءُۚ يَهَبُ لِمَن يَشَآءُ إِنَٰثٗا وَيَهَبُ لِمَن يَشَآءُ ٱلذُّكُورَ",
-    "translation": "To Allāh belongs the dominion of the heavens and the earth; He creates what He wills. He gives to whom He wills female [children], and He gives to whom He wills males.",
+    "translation": "To Allah belongs the dominion of the heavens and the earth. He creates whatever He wills. He grants daughters to whomever He wills, and He grants sons to whomever He wills.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "4:36": {
     "arabic": "۞ وَٱعۡبُدُواْ ٱللَّهَ وَلَا تُشۡرِكُواْ بِهِۦ شَيۡـٔٗاۖ وَبِٱلۡوَٰلِدَيۡنِ إِحۡسَٰنٗا وَبِذِي ٱلۡقُرۡبَىٰ وَٱلۡيَتَٰمَىٰ وَٱلۡمَسَٰكِينِ وَٱلۡجَارِ ذِي ٱلۡقُرۡبَىٰ وَٱلۡجَارِ ٱلۡجُنُبِ وَٱلصَّاحِبِ بِٱلۡجَنۢبِ وَٱبۡنِ ٱلسَّبِيلِ وَمَا مَلَكَتۡ أَيۡمَٰنُكُمۡۗ إِنَّ ٱللَّهَ لَا يُحِبُّ مَن كَانَ مُخۡتَالٗا فَخُورًا",
-    "translation": "Worship Allāh and associate nothing with Him, and to parents do good, and to relatives, orphans, the needy, the near neighbor, the neighbor farther away, the companion at your side, the traveler, and those whom your right hands possess. Indeed, Allāh does not like those who are self-deluding and boastful,",
+    "translation": "Worship Allah, and ascribe no partners to Him, and be good to the parents, and the relatives, and the orphans, and the poor, and the neighbor next door, and the distant neighbor, and the close associate, and the traveler, and your servants. Allah does not love the arrogant showoff.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "6:38": {
     "arabic": "وَمَا مِن دَآبَّةٖ فِي ٱلۡأَرۡضِ وَلَا طَٰٓئِرٖ يَطِيرُ بِجَنَاحَيۡهِ إِلَّآ أُمَمٌ أَمۡثَالُكُمۚ مَّا فَرَّطۡنَا فِي ٱلۡكِتَٰبِ مِن شَيۡءٖۚ ثُمَّ إِلَىٰ رَبِّهِمۡ يُحۡشَرُونَ",
-    "translation": "And there is no creature on [or within] the earth or bird that flies with its wings except [that they are] communities like you. We have not neglected in the Register a thing. Then unto their Lord they will be gathered.",
+    "translation": "There is no animal on land, nor a bird flying with its wings, but are communities like you. We neglected nothing in the Scripture. Then to their Lord they will be gathered.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "2:205": {
     "arabic": "وَإِذَا تَوَلَّىٰ سَعَىٰ فِي ٱلۡأَرۡضِ لِيُفۡسِدَ فِيهَا وَيُهۡلِكَ ٱلۡحَرۡثَ وَٱلنَّسۡلَۚ وَٱللَّهُ لَا يُحِبُّ ٱلۡفَسَادَ",
-    "translation": "And when he goes away, he strives throughout the land to cause corruption therein and destroy crops and animals. And Allāh does not like corruption.",
+    "translation": "When he gains power, he strives to spread corruption on earth, destroying properties and lives. Allah does not like corruption.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "2:2": {
     "arabic": "ذَٰلِكَ ٱلۡكِتَٰبُ لَا رَيۡبَۛ فِيهِۛ هُدٗى لِّلۡمُتَّقِينَ",
-    "translation": "This is the Book about which there is no doubt, a guidance for those conscious of Allāh -",
+    "translation": "This is the Book in which there is no doubt, a guide for the righteous.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "59:7": {
     "arabic": "مَّآ أَفَآءَ ٱللَّهُ عَلَىٰ رَسُولِهِۦ مِنۡ أَهۡلِ ٱلۡقُرَىٰ فَلِلَّهِ وَلِلرَّسُولِ وَلِذِي ٱلۡقُرۡبَىٰ وَٱلۡيَتَٰمَىٰ وَٱلۡمَسَٰكِينِ وَٱبۡنِ ٱلسَّبِيلِ كَيۡ لَا يَكُونَ دُولَةَۢ بَيۡنَ ٱلۡأَغۡنِيَآءِ مِنكُمۡۚ وَمَآ ءَاتَىٰكُمُ ٱلرَّسُولُ فَخُذُوهُ وَمَا نَهَىٰكُمۡ عَنۡهُ فَٱنتَهُواْۚ وَٱتَّقُواْ ٱللَّهَۖ إِنَّ ٱللَّهَ شَدِيدُ ٱلۡعِقَابِ",
-    "translation": "And what Allāh restored to His Messenger from the people of the towns - it is for Allāh and for the Messenger and for [his] near relatives and orphans and the needy and the [stranded] traveler - so that it will not be a perpetual distribution among the rich from among you. And whatever the Messenger has given you - take; and what he has forbidden you - refrain from. And fear Allāh; indeed, Allāh is severe in penalty.",
+    "translation": "Whatever Allah restored to His Messenger from the inhabitants of the villages belongs to Allah, and to the Messenger, and to the relatives, and to the orphans, and to the poor, and to the wayfarer; so that it may not circulate solely between the wealthy among you. Whatever the Messenger gives you, accept it; and whatever he forbids you, abstain from it. And fear Allah. Allah is severe in punishment.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "7:31": {
     "arabic": "۞ يَٰبَنِيٓ ءَادَمَ خُذُواْ زِينَتَكُمۡ عِندَ كُلِّ مَسۡجِدٖ وَكُلُواْ وَٱشۡرَبُواْ وَلَا تُسۡرِفُوٓاْۚ إِنَّهُۥ لَا يُحِبُّ ٱلۡمُسۡرِفِينَ",
-    "translation": "O children of Adam, take your adornment [i.e., wear your clothing] at every masjid, and eat and drink, but be not excessive. Indeed, He likes not those who commit excess.",
+    "translation": "O Children of Adam! Dress properly at every place of worship, and eat and drink, but do not be excessive. He does not love the excessive.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "31:15": {
     "arabic": "وَإِن جَٰهَدَاكَ عَلَىٰٓ أَن تُشۡرِكَ بِي مَا لَيۡسَ لَكَ بِهِۦ عِلۡمٞ فَلَا تُطِعۡهُمَاۖ وَصَاحِبۡهُمَا فِي ٱلدُّنۡيَا مَعۡرُوفٗاۖ وَٱتَّبِعۡ سَبِيلَ مَنۡ أَنَابَ إِلَيَّۚ ثُمَّ إِلَيَّ مَرۡجِعُكُمۡ فَأُنَبِّئُكُم بِمَا كُنتُمۡ تَعۡمَلُونَ",
-    "translation": "But if they endeavor to make you associate with Me that of which you have no knowledge, do not obey them but accompany them in [this] world with appropriate kindness and follow the way of those who turn back to Me [in repentance]. Then to Me will be your return, and I will inform you about what you used to do.",
+    "translation": "But if they strive to have you associate with Me something of which you have no knowledge, do not obey them. But keep them company in this life, in kindness, and follow the path of him who turns to Me. Then to Me is your return; and I will inform you of what you used to do.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "28:56": {
     "arabic": "إِنَّكَ لَا تَهۡدِي مَنۡ أَحۡبَبۡتَ وَلَٰكِنَّ ٱللَّهَ يَهۡدِي مَن يَشَآءُۚ وَهُوَ أَعۡلَمُ بِٱلۡمُهۡتَدِينَ",
-    "translation": "Indeed, [O Muḥammad], you do not guide whom you like, but Allāh guides whom He wills. And He is most knowing of the [rightly] guided.",
+    "translation": "You cannot guide whom you love, but Allah guides whom He wills, and He knows best those who are guided.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "4:59": {
     "arabic": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوٓاْ أَطِيعُواْ ٱللَّهَ وَأَطِيعُواْ ٱلرَّسُولَ وَأُوْلِي ٱلۡأَمۡرِ مِنكُمۡۖ فَإِن تَنَٰزَعۡتُمۡ فِي شَيۡءٖ فَرُدُّوهُ إِلَى ٱللَّهِ وَٱلرَّسُولِ إِن كُنتُمۡ تُؤۡمِنُونَ بِٱللَّهِ وَٱلۡيَوۡمِ ٱلۡأٓخِرِۚ ذَٰلِكَ خَيۡرٞ وَأَحۡسَنُ تَأۡوِيلًا",
-    "translation": "O you who have believed, obey Allāh and obey the Messenger and those in authority among you. And if you disagree over anything, refer it to Allāh and the Messenger, if you should believe in Allāh and the Last Day. That is the best [way] and best in result.",
+    "translation": "O you who believe! Obey Allah and obey the Messenger and those in authority among you. And if you dispute over anything, refer it to Allah and the Messenger, if you believe in Allah and the Last Day. That is best, and a most excellent determination.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "3:97": {
     "arabic": "فِيهِ ءَايَٰتُۢ بَيِّنَٰتٞ مَّقَامُ إِبۡرَٰهِيمَۖ وَمَن دَخَلَهُۥ كَانَ ءَامِنٗاۗ وَلِلَّهِ عَلَى ٱلنَّاسِ حِجُّ ٱلۡبَيۡتِ مَنِ ٱسۡتَطَاعَ إِلَيۡهِ سَبِيلٗاۚ وَمَن كَفَرَ فَإِنَّ ٱللَّهَ غَنِيٌّ عَنِ ٱلۡعَٰلَمِينَ",
-    "translation": "In it are clear signs [such as] the standing place of Abraham. And whoever enters it [i.e., the Ḥaram] shall be safe. And [due] to Allāh from the people is a pilgrimage to the House - for whoever is able to find thereto a way. But whoever disbelieves [i.e., refuses] - then indeed, Allāh is free from need of the worlds.",
+    "translation": "In it are evident signs; the Station of Abraham. Whoever enters it attains security. Pilgrimage to the House is a duty to Allah for all who can make the journey. But as for those who refuse—Allah is Independent of the worlds.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "2:196": {
     "arabic": "وَأَتِمُّواْ ٱلۡحَجَّ وَٱلۡعُمۡرَةَ لِلَّهِۚ فَإِنۡ أُحۡصِرۡتُمۡ فَمَا ٱسۡتَيۡسَرَ مِنَ ٱلۡهَدۡيِۖ وَلَا تَحۡلِقُواْ رُءُوسَكُمۡ حَتَّىٰ يَبۡلُغَ ٱلۡهَدۡيُ مَحِلَّهُۥۚ فَمَن كَانَ مِنكُم مَّرِيضًا أَوۡ بِهِۦٓ أَذٗى مِّن رَّأۡسِهِۦ فَفِدۡيَةٞ مِّن صِيَامٍ أَوۡ صَدَقَةٍ أَوۡ نُسُكٖۚ فَإِذَآ أَمِنتُمۡ فَمَن تَمَتَّعَ بِٱلۡعُمۡرَةِ إِلَى ٱلۡحَجِّ فَمَا ٱسۡتَيۡسَرَ مِنَ ٱلۡهَدۡيِۚ فَمَن لَّمۡ يَجِدۡ فَصِيَامُ ثَلَٰثَةِ أَيَّامٖ فِي ٱلۡحَجِّ وَسَبۡعَةٍ إِذَا رَجَعۡتُمۡۗ تِلۡكَ عَشَرَةٞ كَامِلَةٞۗ ذَٰلِكَ لِمَن لَّمۡ يَكُنۡ أَهۡلُهُۥ حَاضِرِي ٱلۡمَسۡجِدِ ٱلۡحَرَامِۚ وَٱتَّقُواْ ٱللَّهَ وَٱعۡلَمُوٓاْ أَنَّ ٱللَّهَ شَدِيدُ ٱلۡعِقَابِ",
-    "translation": "And complete the ḥajj and ʿumrah for Allāh. But if you are prevented, then [offer] what can be obtained with ease of sacrificial animals. And do not shave your heads until the sacrificial animal has reached its place of slaughter. And whoever among you is ill or has an ailment of the head [making shaving necessary must offer] a ransom of fasting [three days] or charity or sacrifice. And when you are secure, then whoever performs ʿumrah [during the ḥajj months] followed by ḥajj [offers] what can be obtained with ease of sacrificial animals. And whoever cannot find [or afford such an animal] - then a fast of three days during ḥajj and of seven when you have returned [home]. Those are ten complete [days]. This is for those whose family is not in the area of al-Masjid al-Ḥarām. And fear Allāh and know that Allāh is severe in penalty.",
+    "translation": "And carry out the Hajj and the Umrah for Allah. But if you are prevented, then whatever is feasible of offerings. And do not shave your heads until the offering has reached its destination. Whoever of you is sick, or has an injury of the head, then redemption of fasting, or charity, or worship. When you are secure: whoever continues the Umrah until the Hajj, then whatever is feasible of offering. But if he lacks the means, then fasting for three days during the Hajj and seven when you have returned, making ten in all. This is for he whose household is not present at the Sacred Mosque. And remain conscious of Allah, and know that Allah is stern in retribution.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "98:5": {
     "arabic": "وَمَآ أُمِرُوٓاْ إِلَّا لِيَعۡبُدُواْ ٱللَّهَ مُخۡلِصِينَ لَهُ ٱلدِّينَ حُنَفَآءَ وَيُقِيمُواْ ٱلصَّلَوٰةَ وَيُؤۡتُواْ ٱلزَّكَوٰةَۚ وَذَٰلِكَ دِينُ ٱلۡقَيِّمَةِ",
-    "translation": "And they were not commanded except to worship Allāh, [being] sincere to Him in religion, inclining to truth, and to establish prayer and to give zakāh. And that is the correct religion.",
+    "translation": "They were commanded only to worship Allah, devoting their faith to Him alone, and to practice regular prayer, and to give alms. That is the upright religion.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "66:6": {
     "arabic": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُواْ قُوٓاْ أَنفُسَكُمۡ وَأَهۡلِيكُمۡ نَارٗا وَقُودُهَا ٱلنَّاسُ وَٱلۡحِجَارَةُ عَلَيۡهَا مَلَٰٓئِكَةٌ غِلَاظٞ شِدَادٞ لَّا يَعۡصُونَ ٱللَّهَ مَآ أَمَرَهُمۡ وَيَفۡعَلُونَ مَا يُؤۡمَرُونَ",
-    "translation": "O you who have believed, protect yourselves and your families from a Fire whose fuel is people and stones, over which are [appointed] angels, harsh and severe; they do not disobey Allāh in what He commands them but do what they are commanded.",
+    "translation": "O you who believe! Protect yourselves and your families from a Fire, whose fuel is people and stones. Over it are angels, fierce and powerful. They never disobey Allah in anything He commands them, and they carry out whatever they are commanded.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "2:97-98": {
     "arabic": "قُلۡ مَن كَانَ عَدُوّٗا لِّـجِبۡرِيلَ فَإِنَّهُۥ نَزَّلَهُۥ عَلَىٰ قَلۡبِكَ بِإِذۡنِ ٱللَّهِ مُصَدِّقٗا لِّمَا بَيۡنَ يَدَيۡهِ وَهُدٗى وَبُشۡرَىٰ لِلۡمُؤۡمِنِينَ مَن كَانَ عَدُوّٗا لِّلَّهِ وَمَلَٰٓئِكَتِهِۦ وَرُسُلِهِۦ وَجِبۡرِيلَ وَمِيكَىٰلَ فَإِنَّ ٱللَّهَ عَدُوّٞ لِّلۡكَٰفِرِينَ",
-    "translation": "Say, \"Whoever is an enemy to Gabriel - it is [none but] he who has brought it [i.e., the Qur’ān] down upon your heart, [O Muḥammad], by permission of Allāh, confirming that which was before it and as guidance and good tidings for the believers.\" Whoever is an enemy to Allāh and His angels and His messengers and Gabriel and Michael - then indeed, Allāh is an enemy to the disbelievers.",
+    "translation": "Say, “Whoever is hostile to Gabriel—it is he who revealed it to your heart by Allah’s leave, confirming what preceded it, and guidance and good news for the believers.” Whoever is hostile to Allah, and His angels, and His messengers, and Gabriel, and Michael—Allah is hostile to the faithless.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "32:11": {
     "arabic": "۞ قُلۡ يَتَوَفَّىٰكُم مَّلَكُ ٱلۡمَوۡتِ ٱلَّذِي وُكِّلَ بِكُمۡ ثُمَّ إِلَىٰ رَبِّكُمۡ تُرۡجَعُونَ",
-    "translation": "Say, \"The angel of death who has been entrusted with you will take you. Then to your Lord you will be returned.\"",
+    "translation": "Say, “The angel of death put in charge of you will reclaim you. Then to your Lord you will be returned.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "82:10-12": {
     "arabic": "وَإِنَّ عَلَيۡكُمۡ لَحَٰفِظِينَ كِرَامٗا كَٰتِبِينَ يَعۡلَمُونَ مَا تَفۡعَلُونَ",
-    "translation": "And indeed, [appointed] over you are keepers, Noble and recording; They know whatever you do.",
+    "translation": "Though over you are watchers. Honest recorders. They know everything you do.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "3:80": {
     "arabic": "وَلَا يَأۡمُرَكُمۡ أَن تَتَّخِذُواْ ٱلۡمَلَٰٓئِكَةَ وَٱلنَّبِيِّـۧنَ أَرۡبَابًاۚ أَيَأۡمُرُكُم بِٱلۡكُفۡرِ بَعۡدَ إِذۡ أَنتُم مُّسۡلِمُونَ",
-    "translation": "Nor could he order you to take the angels and prophets as lords. Would he order you to disbelief after you had been Muslims?",
+    "translation": "Nor would he command you to take the angels and the prophets as lords. Would he command you to infidelity after you have submitted?",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "18:110": {
     "arabic": "قُلۡ إِنَّمَآ أَنَا۠ بَشَرٞ مِّثۡلُكُمۡ يُوحَىٰٓ إِلَيَّ أَنَّمَآ إِلَٰهُكُمۡ إِلَٰهٞ وَٰحِدٞۖ فَمَن كَانَ يَرۡجُواْ لِقَآءَ رَبِّهِۦ فَلۡيَعۡمَلۡ عَمَلٗا صَٰلِحٗا وَلَا يُشۡرِكۡ بِعِبَادَةِ رَبِّهِۦٓ أَحَدَۢا",
-    "translation": "Say, \"I am only a man like you, to whom has been revealed that your god is one God. So whoever would hope for the meeting with his Lord - let him do righteous work and not associate in the worship of his Lord anyone.\"",
+    "translation": "Say, “I am only a human being like you, being inspired that your god is One God. Whoever hopes to meet his Lord, let him work righteousness, and never associate anyone with the service of his Lord.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "16:36": {
     "arabic": "وَلَقَدۡ بَعَثۡنَا فِي كُلِّ أُمَّةٖ رَّسُولًا أَنِ ٱعۡبُدُواْ ٱللَّهَ وَٱجۡتَنِبُواْ ٱلطَّٰغُوتَۖ فَمِنۡهُم مَّنۡ هَدَى ٱللَّهُ وَمِنۡهُم مَّنۡ حَقَّتۡ عَلَيۡهِ ٱلضَّلَٰلَةُۚ فَسِيرُواْ فِي ٱلۡأَرۡضِ فَٱنظُرُواْ كَيۡفَ كَانَ عَٰقِبَةُ ٱلۡمُكَذِّبِينَ",
-    "translation": "And We certainly sent into every nation a messenger, [saying], \"Worship Allāh and avoid ṭāghūt.\" And among them were those whom Allāh guided, and among them were those upon whom error was [deservedly] decreed. So proceed [i.e., travel] through the earth and observe how was the end of the deniers.",
+    "translation": "To every community We sent a messenger: “Worship Allah, and avoid idolatry.” Some of them Allah guided, while others deserved misguidance. So travel through the earth, and see what the fate of the deniers was.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "35:24": {
     "arabic": "إِنَّآ أَرۡسَلۡنَٰكَ بِٱلۡحَقِّ بَشِيرٗا وَنَذِيرٗاۚ وَإِن مِّنۡ أُمَّةٍ إِلَّا خَلَا فِيهَا نَذِيرٞ",
-    "translation": "Indeed, We have sent you with the truth as a bringer of good tidings and a warner. And there was no nation but that there had passed within it a warner.",
+    "translation": "We sent you with the truth; a bearer of good news, and a warner. There is no community but a warner has passed through it.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "42:13": {
     "arabic": "۞ شَرَعَ لَكُم مِّنَ ٱلدِّينِ مَا وَصَّىٰ بِهِۦ نُوحٗا وَٱلَّذِيٓ أَوۡحَيۡنَآ إِلَيۡكَ وَمَا وَصَّيۡنَا بِهِۦٓ إِبۡرَٰهِيمَ وَمُوسَىٰ وَعِيسَىٰٓۖ أَنۡ أَقِيمُواْ ٱلدِّينَ وَلَا تَتَفَرَّقُواْ فِيهِۚ كَبُرَ عَلَى ٱلۡمُشۡرِكِينَ مَا تَدۡعُوهُمۡ إِلَيۡهِۚ ٱللَّهُ يَجۡتَبِيٓ إِلَيۡهِ مَن يَشَآءُ وَيَهۡدِيٓ إِلَيۡهِ مَن يُنِيبُ",
-    "translation": "He has ordained for you of religion what He enjoined upon Noah and that which We have revealed to you, [O Muḥammad], and what We enjoined upon Abraham and Moses and Jesus - to establish the religion and not be divided therein. Difficult for those who associate others with Allāh is that to which you invite them. Allāh chooses for Himself whom He wills and guides to Himself whoever turns back [to Him].",
+    "translation": "He prescribed for you the same religion He enjoined upon Noah, and what We inspired to you, and what We enjoined upon Abraham, and Moses, and Jesus: “You shall uphold the religion, and be not divided therein.” As for the idolaters, what you call them to is outrageous to them. Allah chooses to Himself whom He wills, and He guides to Himself whoever repents.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "4:125": {
     "arabic": "وَمَنۡ أَحۡسَنُ دِينٗا مِّمَّنۡ أَسۡلَمَ وَجۡهَهُۥ لِلَّهِ وَهُوَ مُحۡسِنٞ وَٱتَّبَعَ مِلَّةَ إِبۡرَٰهِيمَ حَنِيفٗاۗ وَٱتَّخَذَ ٱللَّهُ إِبۡرَٰهِيمَ خَلِيلٗا",
-    "translation": "And who is better in religion than one who submits himself to Allāh while being a doer of good and follows the religion of Abraham, inclining toward truth? And Allāh took Abraham as an intimate friend.",
+    "translation": "And who is better in religion than he who submits himself wholly to Allah, and is a doer of good, and follows the faith of Abraham the Monotheist? Allah has chosen Abraham for a friend.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "2:285": {
     "arabic": "ءَامَنَ ٱلرَّسُولُ بِمَآ أُنزِلَ إِلَيۡهِ مِن رَّبِّهِۦ وَٱلۡمُؤۡمِنُونَۚ كُلٌّ ءَامَنَ بِٱللَّهِ وَمَلَٰٓئِكَتِهِۦ وَكُتُبِهِۦ وَرُسُلِهِۦ لَا نُفَرِّقُ بَيۡنَ أَحَدٖ مِّن رُّسُلِهِۦۚ وَقَالُواْ سَمِعۡنَا وَأَطَعۡنَاۖ غُفۡرَانَكَ رَبَّنَا وَإِلَيۡكَ ٱلۡمَصِيرُ",
-    "translation": "The Messenger has believed in what was revealed to him from his Lord, and [so have] the believers. All of them have believed in Allāh and His angels and His books and His messengers, [saying], \"We make no distinction between any of His messengers.\" And they say, \"We hear and we obey. [We seek] Your forgiveness, our Lord, and to You is the [final] destination.\"",
+    "translation": "The Messenger has believed in what was revealed to him from his Lord, as did the believers. They all have believed in Allah, and His angels, and His scriptures, and His messengers: “We make no distinction between any of His messengers.” And they say, “We hear and we obey. Your forgiveness, our Lord. To you is the destiny.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "4:136": {
     "arabic": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوٓاْ ءَامِنُواْ بِٱللَّهِ وَرَسُولِهِۦ وَٱلۡكِتَٰبِ ٱلَّذِي نَزَّلَ عَلَىٰ رَسُولِهِۦ وَٱلۡكِتَٰبِ ٱلَّذِيٓ أَنزَلَ مِن قَبۡلُۚ وَمَن يَكۡفُرۡ بِٱللَّهِ وَمَلَٰٓئِكَتِهِۦ وَكُتُبِهِۦ وَرُسُلِهِۦ وَٱلۡيَوۡمِ ٱلۡأٓخِرِ فَقَدۡ ضَلَّ ضَلَٰلَۢا بَعِيدًا",
-    "translation": "O you who have believed, believe in Allāh and His Messenger and the Book that He sent down upon His Messenger and the Scripture which He sent down before. And whoever disbelieves in Allāh, His angels, His books, His messengers, and the Last Day has certainly gone far astray.",
+    "translation": "O you who believe! Believe in Allah and His messenger, and the Book He sent down to His messenger, and the Book He sent down before. Whoever rejects Allah, His angels, His Books, His messengers, and the Last Day, has strayed far in error.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "87:19": {
     "arabic": "صُحُفِ إِبۡرَٰهِيمَ وَمُوسَىٰ",
-    "translation": "The scriptures of Abraham and Moses.",
+    "translation": "The Scriptures of Abraham and Moses.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "5:44": {
     "arabic": "إِنَّآ أَنزَلۡنَا ٱلتَّوۡرَىٰةَ فِيهَا هُدٗى وَنُورٞۚ يَحۡكُمُ بِهَا ٱلنَّبِيُّونَ ٱلَّذِينَ أَسۡلَمُواْ لِلَّذِينَ هَادُواْ وَٱلرَّبَّٰنِيُّونَ وَٱلۡأَحۡبَارُ بِمَا ٱسۡتُحۡفِظُواْ مِن كِتَٰبِ ٱللَّهِ وَكَانُواْ عَلَيۡهِ شُهَدَآءَۚ فَلَا تَخۡشَوُاْ ٱلنَّاسَ وَٱخۡشَوۡنِ وَلَا تَشۡتَرُواْ بِـَٔايَٰتِي ثَمَنٗا قَلِيلٗاۚ وَمَن لَّمۡ يَحۡكُم بِمَآ أَنزَلَ ٱللَّهُ فَأُوْلَٰٓئِكَ هُمُ ٱلۡكَٰفِرُونَ",
-    "translation": "Indeed, We sent down the Torah, in which was guidance and light. The prophets who submitted [to Allāh] judged by it for the Jews, as did the rabbis and scholars by that with which they were entrusted of the Scripture of Allāh, and they were witnesses thereto. So do not fear the people but fear Me, and do not exchange My verses for a small price [i.e., worldly gain]. And whoever does not judge by what Allāh has revealed - then it is those who are the disbelievers.",
+    "translation": "We have revealed the Torah, wherein is guidance and light. The submissive prophets ruled the Jews according to it, so did the rabbis and the scholars, as they were required to protect Allah’s Book, and were witnesses to it. So do not fear people, but fear Me. And do not sell My revelations for a cheap price. Those who do not rule according to what Allah revealed are the unbelievers.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "4:163": {
     "arabic": "۞ إِنَّآ أَوۡحَيۡنَآ إِلَيۡكَ كَمَآ أَوۡحَيۡنَآ إِلَىٰ نُوحٖ وَٱلنَّبِيِّـۧنَ مِنۢ بَعۡدِهِۦۚ وَأَوۡحَيۡنَآ إِلَىٰٓ إِبۡرَٰهِيمَ وَإِسۡمَٰعِيلَ وَإِسۡحَٰقَ وَيَعۡقُوبَ وَٱلۡأَسۡبَاطِ وَعِيسَىٰ وَأَيُّوبَ وَيُونُسَ وَهَٰرُونَ وَسُلَيۡمَٰنَۚ وَءَاتَيۡنَا دَاوُۥدَ زَبُورٗا",
-    "translation": "Indeed, We have revealed to you, [O Muḥammad], as We revealed to Noah and the prophets after him. And We revealed to Abraham, Ishmael, Isaac, Jacob, the Descendants, Jesus, Job, Jonah, Aaron, and Solomon; and to David We gave the book [of Psalms].",
+    "translation": "We have inspired you, as We had inspired Noah and the prophets after him. And We inspired Abraham, and Ishmael, and Isaac, and Jacob, and the Patriarchs, and Jesus, and Job, and Jonah, and Aaron, and Solomon. And We gave David the Psalms.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "5:46": {
     "arabic": "وَقَفَّيۡنَا عَلَىٰٓ ءَاثَٰرِهِم بِعِيسَى ٱبۡنِ مَرۡيَمَ مُصَدِّقٗا لِّمَا بَيۡنَ يَدَيۡهِ مِنَ ٱلتَّوۡرَىٰةِۖ وَءَاتَيۡنَٰهُ ٱلۡإِنجِيلَ فِيهِ هُدٗى وَنُورٞ وَمُصَدِّقٗا لِّمَا بَيۡنَ يَدَيۡهِ مِنَ ٱلتَّوۡرَىٰةِ وَهُدٗى وَمَوۡعِظَةٗ لِّلۡمُتَّقِينَ",
-    "translation": "And We sent, following in their footsteps, Jesus, the son of Mary, confirming that which came before him in the Torah; and We gave him the Gospel, in which was guidance and light and confirming that which preceded it of the Torah as guidance and instruction for the righteous.",
+    "translation": "In their footsteps, We sent Jesus son of Mary, fulfilling the Torah that preceded him; and We gave him the Gospel, wherein is guidance and light, and confirming the Torah that preceded him, and guidance and counsel for the righteous.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "2:79": {
     "arabic": "فَوَيۡلٞ لِّلَّذِينَ يَكۡتُبُونَ ٱلۡكِتَٰبَ بِأَيۡدِيهِمۡ ثُمَّ يَقُولُونَ هَٰذَا مِنۡ عِندِ ٱللَّهِ لِيَشۡتَرُواْ بِهِۦ ثَمَنٗا قَلِيلٗاۖ فَوَيۡلٞ لَّهُم مِّمَّا كَتَبَتۡ أَيۡدِيهِمۡ وَوَيۡلٞ لَّهُم مِّمَّا يَكۡسِبُونَ",
-    "translation": "So woe to those who write the \"scripture\" with their own hands, then say, \"This is from Allāh,\" in order to exchange it for a small price. Woe to them for what their hands have written and woe to them for what they earn.",
+    "translation": "So woe to those who write the Scripture with their own hands, and then say, “This is from Allah,” that they may exchange it for a little price. Woe to them for what their hands have written, and woe to them for what they earn.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "5:48": {
     "arabic": "وَأَنزَلۡنَآ إِلَيۡكَ ٱلۡكِتَٰبَ بِٱلۡحَقِّ مُصَدِّقٗا لِّمَا بَيۡنَ يَدَيۡهِ مِنَ ٱلۡكِتَٰبِ وَمُهَيۡمِنًا عَلَيۡهِۖ فَٱحۡكُم بَيۡنَهُم بِمَآ أَنزَلَ ٱللَّهُۖ وَلَا تَتَّبِعۡ أَهۡوَآءَهُمۡ عَمَّا جَآءَكَ مِنَ ٱلۡحَقِّۚ لِكُلّٖ جَعَلۡنَا مِنكُمۡ شِرۡعَةٗ وَمِنۡهَاجٗاۚ وَلَوۡ شَآءَ ٱللَّهُ لَجَعَلَكُمۡ أُمَّةٗ وَٰحِدَةٗ وَلَٰكِن لِّيَبۡلُوَكُمۡ فِي مَآ ءَاتَىٰكُمۡۖ فَٱسۡتَبِقُواْ ٱلۡخَيۡرَٰتِۚ إِلَى ٱللَّهِ مَرۡجِعُكُمۡ جَمِيعٗا فَيُنَبِّئُكُم بِمَا كُنتُمۡ فِيهِ تَخۡتَلِفُونَ",
-    "translation": "And We have revealed to you, [O Muḥammad], the Book [i.e., the Qur’ān] in truth, confirming that which preceded it of the Scripture and as a criterion over it. So judge between them by what Allāh has revealed and do not follow their inclinations away from what has come to you of the truth. To each of you We prescribed a law and a method. Had Allāh willed, He would have made you one nation [united in religion], but [He intended] to test you in what He has given you; so race to [all that is] good. To Allāh is your return all together, and He will [then] inform you concerning that over which you used to differ.",
+    "translation": "And We revealed to you the Book, with truth, confirming the Scripture that preceded it, and superseding it. So judge between them according to what Allah revealed, and do not follow their desires if they differ from the truth that has come to you. For each of you We have assigned a law and a method. Had Allah willed, He could have made you a single nation, but He tests you through what He has given you. So compete in righteousness. To Allah is your return, all of you; then He will inform you of what you had disputed.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "3:185": {
     "arabic": "كُلُّ نَفۡسٖ ذَآئِقَةُ ٱلۡمَوۡتِۗ وَإِنَّمَا تُوَفَّوۡنَ أُجُورَكُمۡ يَوۡمَ ٱلۡقِيَٰمَةِۖ فَمَن زُحۡزِحَ عَنِ ٱلنَّارِ وَأُدۡخِلَ ٱلۡجَنَّةَ فَقَدۡ فَازَۗ وَمَا ٱلۡحَيَوٰةُ ٱلدُّنۡيَآ إِلَّا مَتَٰعُ ٱلۡغُرُورِ",
-    "translation": "Every soul will taste death, and you will only be given your [full] compensation on the Day of Resurrection. So he who is drawn away from the Fire and admitted to Paradise has attained [his desire]. And what is the life of this world except the enjoyment of delusion.",
+    "translation": "Every soul will have a taste of death, and you will receive your recompense on the Day of Resurrection. Whoever is swayed from the Fire, and admitted to Paradise, has won. The life of this world is merely enjoyment of delusion.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "23:99-100": {
     "arabic": "حَتَّىٰٓ إِذَا جَآءَ أَحَدَهُمُ ٱلۡمَوۡتُ قَالَ رَبِّ ٱرۡجِعُونِ لَعَلِّيٓ أَعۡمَلُ صَٰلِحٗا فِيمَا تَرَكۡتُۚ كَلَّآۚ إِنَّهَا كَلِمَةٌ هُوَ قَآئِلُهَاۖ وَمِن وَرَآئِهِم بَرۡزَخٌ إِلَىٰ يَوۡمِ يُبۡعَثُونَ",
-    "translation": "[For such is the state of the disbelievers] until, when death comes to one of them, he says, \"My Lord, send me back That I might do righteousness in that which I left behind.\" No! It is only a word he is saying; and behind them is a barrier until the Day they are resurrected.",
+    "translation": "Until, when death comes to one of them, he says, “My Lord, send me back. That I may do right in what I have neglected.” By no means! It is just a word that he utters. And behind them is a barrier, until the Day they are resurrected.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "36:78-79": {
     "arabic": "وَضَرَبَ لَنَا مَثَلٗا وَنَسِيَ خَلۡقَهُۥۖ قَالَ مَن يُحۡيِ ٱلۡعِظَٰمَ وَهِيَ رَمِيمٞ قُلۡ يُحۡيِيهَا ٱلَّذِيٓ أَنشَأَهَآ أَوَّلَ مَرَّةٖۖ وَهُوَ بِكُلِّ خَلۡقٍ عَلِيمٌ",
-    "translation": "And he presents for Us an example and forgets his [own] creation. He says, \"Who will give life to bones while they are disintegrated?\" Say, \"He will give them life who produced them the first time; and He is, of all creation, Knowing.\"",
+    "translation": "And he produces arguments against Us, and he forgets his own creation. He says, “Who will revive the bones when they have decayed?” Say, “He who initiated them in the first instance will revive them. He has knowledge of every creation.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "99:7-8": {
     "arabic": "فَمَن يَعۡمَلۡ مِثۡقَالَ ذَرَّةٍ خَيۡرٗا يَرَهُۥ وَمَن يَعۡمَلۡ مِثۡقَالَ ذَرَّةٖ شَرّٗا يَرَهُۥ",
-    "translation": "So whoever does an atom's weight of good will see it, And whoever does an atom's weight of evil will see it.",
+    "translation": "Whoever has done an atom's weight of good will see it. And whoever has done an atom's weight of evil will see it.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "17:13-14": {
     "arabic": "وَكُلَّ إِنسَٰنٍ أَلۡزَمۡنَٰهُ طَٰٓئِرَهُۥ فِي عُنُقِهِۦۖ وَنُخۡرِجُ لَهُۥ يَوۡمَ ٱلۡقِيَٰمَةِ كِتَٰبٗا يَلۡقَىٰهُ مَنشُورًا ٱقۡرَأۡ كِتَٰبَكَ كَفَىٰ بِنَفۡسِكَ ٱلۡيَوۡمَ عَلَيۡكَ حَسِيبٗا",
-    "translation": "And [for] every person We have imposed his fate upon his neck, and We will produce for him on the Day of Resurrection a record which he will encounter spread open. [It will be said], \"Read your record. Sufficient is yourself against you this Day as accountant.\"",
+    "translation": "For every person We have attached his fate to his neck. And on the Day of Resurrection, We will bring out for him a book which he will find spread open. “Read your book; today there will be none but yourself to call you to account.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "21:47": {
     "arabic": "وَنَضَعُ ٱلۡمَوَٰزِينَ ٱلۡقِسۡطَ لِيَوۡمِ ٱلۡقِيَٰمَةِ فَلَا تُظۡلَمُ نَفۡسٞ شَيۡـٔٗاۖ وَإِن كَانَ مِثۡقَالَ حَبَّةٖ مِّنۡ خَرۡدَلٍ أَتَيۡنَا بِهَاۗ وَكَفَىٰ بِنَا حَٰسِبِينَ",
-    "translation": "And We place the scales of justice for the Day of Resurrection, so no soul will be treated unjustly at all. And if there is [even] the weight of a mustard seed, We will bring it forth. And sufficient are We as accountant.",
+    "translation": "We will set up the scales of justice for the Day of Resurrection, so that no soul will suffer the least injustice. And even if it be the weight of a mustard-seed, We will bring it up. Sufficient are We as Reckoners.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "32:17": {
     "arabic": "فَلَا تَعۡلَمُ نَفۡسٞ مَّآ أُخۡفِيَ لَهُم مِّن قُرَّةِ أَعۡيُنٖ جَزَآءَۢ بِمَا كَانُواْ يَعۡمَلُونَ",
-    "translation": "And no soul knows what has been hidden for them of comfort for eyes [i.e., satisfaction] as reward for what they used to do.",
+    "translation": "No soul knows what eye’s delight awaits them—a reward for what they used to do.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "57:22": {
     "arabic": "مَآ أَصَابَ مِن مُّصِيبَةٖ فِي ٱلۡأَرۡضِ وَلَا فِيٓ أَنفُسِكُمۡ إِلَّا فِي كِتَٰبٖ مِّن قَبۡلِ أَن نَّبۡرَأَهَآۚ إِنَّ ذَٰلِكَ عَلَى ٱللَّهِ يَسِيرٞ",
-    "translation": "No disaster strikes upon the earth or among yourselves except that it is in a register before We bring it into being - indeed that, for Allāh, is easy -",
+    "translation": "No calamity occurs on earth, or in your souls, but it is in a Book, even before We make it happen. That is easy for Allah.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "54:49": {
     "arabic": "إِنَّا كُلَّ شَيۡءٍ خَلَقۡنَٰهُ بِقَدَرٖ",
-    "translation": "Indeed, all things We created with predestination.",
+    "translation": "Everything We created is precisely measured.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "91:7-10": {
     "arabic": "وَنَفۡسٖ وَمَا سَوَّىٰهَا فَأَلۡهَمَهَا فُجُورَهَا وَتَقۡوَىٰهَا قَدۡ أَفۡلَحَ مَن زَكَّىٰهَا وَقَدۡ خَابَ مَن دَسَّىٰهَا",
-    "translation": "And [by] the soul and He who proportioned it And inspired it [with discernment of] its wickedness and its righteousness, He has succeeded who purifies it, And he has failed who instills it [with corruption].",
+    "translation": "And the soul and He who proportioned it. And inspired it with its wickedness and its righteousness. Successful is he who purifies it. Failing is he who corrupts it.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "6:148": {
     "arabic": "سَيَقُولُ ٱلَّذِينَ أَشۡرَكُواْ لَوۡ شَآءَ ٱللَّهُ مَآ أَشۡرَكۡنَا وَلَآ ءَابَآؤُنَا وَلَا حَرَّمۡنَا مِن شَيۡءٖۚ كَذَٰلِكَ كَذَّبَ ٱلَّذِينَ مِن قَبۡلِهِمۡ حَتَّىٰ ذَاقُواْ بَأۡسَنَاۗ قُلۡ هَلۡ عِندَكُم مِّنۡ عِلۡمٖ فَتُخۡرِجُوهُ لَنَآۖ إِن تَتَّبِعُونَ إِلَّا ٱلظَّنَّ وَإِنۡ أَنتُمۡ إِلَّا تَخۡرُصُونَ",
-    "translation": "Those who associated [others] with Allāh will say, \"If Allāh had willed, we would not have associated [anything] and neither would our fathers, nor would we have prohibited anything.\" Likewise did those before deny until they tasted Our punishment. Say, \"Do you have any knowledge that you can produce for us? You follow not except assumption, and you are not but misjudging.\"",
+    "translation": "The polytheists will say, “Had Allah willed, we would not have practiced idolatry, nor would have our forefathers, nor would we have prohibited anything.” Likewise those before them lied, until they tasted Our might. Say, “Do you have any knowledge that you can produce for us? You follow nothing but conjecture, and you only guess.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "57:23": {
     "arabic": "لِّكَيۡلَا تَأۡسَوۡاْ عَلَىٰ مَا فَاتَكُمۡ وَلَا تَفۡرَحُواْ بِمَآ ءَاتَىٰكُمۡۗ وَٱللَّهُ لَا يُحِبُّ كُلَّ مُخۡتَالٖ فَخُورٍ",
-    "translation": "In order that you not despair over what has eluded you and not exult [in pride] over what He has given you. And Allāh does not like everyone self-deluded and boastful -",
+    "translation": "That you may not sorrow over what eludes you, nor exult over what He has given you. Allah does not love the proud snob.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "2:187": {
     "arabic": "أُحِلَّ لَكُمۡ لَيۡلَةَ ٱلصِّيَامِ ٱلرَّفَثُ إِلَىٰ نِسَآئِكُمۡۚ هُنَّ لِبَاسٞ لَّكُمۡ وَأَنتُمۡ لِبَاسٞ لَّهُنَّۗ عَلِمَ ٱللَّهُ أَنَّكُمۡ كُنتُمۡ تَخۡتَانُونَ أَنفُسَكُمۡ فَتَابَ عَلَيۡكُمۡ وَعَفَا عَنكُمۡۖ فَٱلۡـَٰٔنَ بَٰشِرُوهُنَّ وَٱبۡتَغُواْ مَا كَتَبَ ٱللَّهُ لَكُمۡۚ وَكُلُواْ وَٱشۡرَبُواْ حَتَّىٰ يَتَبَيَّنَ لَكُمُ ٱلۡخَيۡطُ ٱلۡأَبۡيَضُ مِنَ ٱلۡخَيۡطِ ٱلۡأَسۡوَدِ مِنَ ٱلۡفَجۡرِۖ ثُمَّ أَتِمُّواْ ٱلصِّيَامَ إِلَى ٱلَّيۡلِۚ وَلَا تُبَٰشِرُوهُنَّ وَأَنتُمۡ عَٰكِفُونَ فِي ٱلۡمَسَٰجِدِۗ تِلۡكَ حُدُودُ ٱللَّهِ فَلَا تَقۡرَبُوهَاۗ كَذَٰلِكَ يُبَيِّنُ ٱللَّهُ ءَايَٰتِهِۦ لِلنَّاسِ لَعَلَّهُمۡ يَتَّقُونَ",
-    "translation": "It has been made permissible for you the night preceding fasting to go to your wives [for sexual relations]. They are a clothing for you and you are a clothing for them. Allāh knows that you used to deceive yourselves, so He accepted your repentance and forgave you. So now, have relations with them and seek that which Allāh has decreed for you [i.e., offspring]. And eat and drink until the white thread of dawn becomes distinct to you from the black thread [of night]. Then complete the fast until the night [i.e., sunset]. And do not have relations with them as long as you are staying for worship in the mosques. These are the limits [set by] Allāh, so do not approach them. Thus does Allāh make clear His verses [i.e., ordinances] to the people that they may become righteous.",
+    "translation": "Permitted for you is intercourse with your wives on the night of the fast. They are a garment for you, and you are a garment for them. Allah knows that you used to betray yourselves, but He turned to you and pardoned you. So approach them now, and seek what Allah has ordained for you, and eat and drink until the white streak of dawn can be distinguished from the black streak. Then complete the fast until nightfall. But do not approach them while you are in retreat at the mosques. These are the limits of Allah, so do not come near them. Allah thus clarifies His revelations to the people, that they may attain piety.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "23:5-6": {
     "arabic": "وَٱلَّذِينَ هُمۡ لِفُرُوجِهِمۡ حَٰفِظُونَ إِلَّا عَلَىٰٓ أَزۡوَٰجِهِمۡ أَوۡ مَا مَلَكَتۡ أَيۡمَٰنُهُمۡ فَإِنَّهُمۡ غَيۡرُ مَلُومِينَ",
-    "translation": "And they who guard their private parts Except from their wives or those their right hands possess, for indeed, they will not be blamed -",
+    "translation": "Those who safeguard their chastity. Except from their spouses, or their dependents—for then they are free from blame.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "7:157": {
     "arabic": "ٱلَّذِينَ يَتَّبِعُونَ ٱلرَّسُولَ ٱلنَّبِيَّ ٱلۡأُمِّيَّ ٱلَّذِي يَجِدُونَهُۥ مَكۡتُوبًا عِندَهُمۡ فِي ٱلتَّوۡرَىٰةِ وَٱلۡإِنجِيلِ يَأۡمُرُهُم بِٱلۡمَعۡرُوفِ وَيَنۡهَىٰهُمۡ عَنِ ٱلۡمُنكَرِ وَيُحِلُّ لَهُمُ ٱلطَّيِّبَٰتِ وَيُحَرِّمُ عَلَيۡهِمُ ٱلۡخَبَٰٓئِثَ وَيَضَعُ عَنۡهُمۡ إِصۡرَهُمۡ وَٱلۡأَغۡلَٰلَ ٱلَّتِي كَانَتۡ عَلَيۡهِمۡۚ فَٱلَّذِينَ ءَامَنُواْ بِهِۦ وَعَزَّرُوهُ وَنَصَرُوهُ وَٱتَّبَعُواْ ٱلنُّورَ ٱلَّذِيٓ أُنزِلَ مَعَهُۥٓ أُوْلَٰٓئِكَ هُمُ ٱلۡمُفۡلِحُونَ",
-    "translation": "Those who follow the Messenger, the unlettered prophet, whom they find written [i.e., described] in what they have of the Torah and the Gospel, who enjoins upon them what is right and prohibits them from what is wrong and makes lawful for them what is good and forbids them from what is evil and relieves them of their burden and the shackles which were upon them. So they who have believed in him, honored him, supported him and followed the light which was sent down with him - it is those who will be the successful.",
+    "translation": "Those who follow the Messenger, the Unlettered Prophet, whom they find mentioned in the Torah and the Gospel in their possession. He directs them to righteousness, and deters them from evil, and allows for them all good things, and prohibits for them wickedness, and unloads the burdens and the shackles that are upon them. Those who believe in him, and respect him, and support him, and follow the light that came down with him—these are the successful.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "5:3": {
     "arabic": "حُرِّمَتۡ عَلَيۡكُمُ ٱلۡمَيۡتَةُ وَٱلدَّمُ وَلَحۡمُ ٱلۡخِنزِيرِ وَمَآ أُهِلَّ لِغَيۡرِ ٱللَّهِ بِهِۦ وَٱلۡمُنۡخَنِقَةُ وَٱلۡمَوۡقُوذَةُ وَٱلۡمُتَرَدِّيَةُ وَٱلنَّطِيحَةُ وَمَآ أَكَلَ ٱلسَّبُعُ إِلَّا مَا ذَكَّيۡتُمۡ وَمَا ذُبِحَ عَلَى ٱلنُّصُبِ وَأَن تَسۡتَقۡسِمُواْ بِٱلۡأَزۡلَٰمِۚ ذَٰلِكُمۡ فِسۡقٌۗ ٱلۡيَوۡمَ يَئِسَ ٱلَّذِينَ كَفَرُواْ مِن دِينِكُمۡ فَلَا تَخۡشَوۡهُمۡ وَٱخۡشَوۡنِۚ ٱلۡيَوۡمَ أَكۡمَلۡتُ لَكُمۡ دِينَكُمۡ وَأَتۡمَمۡتُ عَلَيۡكُمۡ نِعۡمَتِي وَرَضِيتُ لَكُمُ ٱلۡإِسۡلَٰمَ دِينٗاۚ فَمَنِ ٱضۡطُرَّ فِي مَخۡمَصَةٍ غَيۡرَ مُتَجَانِفٖ لِّإِثۡمٖ فَإِنَّ ٱللَّهَ غَفُورٞ رَّحِيمٞ",
-    "translation": "Prohibited to you are dead animals, blood, the flesh of swine, and that which has been dedicated to other than Allāh, and [those animals] killed by strangling or by a violent blow or by a head-long fall or by the goring of horns, and those from which a wild animal has eaten, except what you [are able to] slaughter [before its death], and those which are sacrificed on stone altars, and [prohibited is] that you seek decision through divining arrows. That is grave disobedience. This day those who disbelieve have despaired of [defeating] your religion; so fear them not, but fear Me. This day I have perfected for you your religion and completed My favor upon you and have approved for you Islām as religion. But whoever is forced by severe hunger with no inclination to sin - then indeed, Allāh is Forgiving and Merciful.",
+    "translation": "Prohibited for you are carrion, blood, the flesh of swine, and animals dedicated to other than Allah; also the flesh of animals strangled, killed violently, killed by a fall, gored to death, mangled by wild animals—except what you rescue, and animals sacrificed on altars; and the practice of drawing lots. For it is immoral. Today, those who disbelieve have despaired of your religion, so do not fear them, but fear Me. Today I have perfected your religion for you, and have completed My favor upon you, and have approved Islam as a religion for you. But whoever is compelled by hunger, with no intent of wrongdoing—Allah is Forgiving and Merciful.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "17:23": {
     "arabic": "۞ وَقَضَىٰ رَبُّكَ أَلَّا تَعۡبُدُوٓاْ إِلَّآ إِيَّاهُ وَبِٱلۡوَٰلِدَيۡنِ إِحۡسَٰنًاۚ إِمَّا يَبۡلُغَنَّ عِندَكَ ٱلۡكِبَرَ أَحَدُهُمَآ أَوۡ كِلَاهُمَا فَلَا تَقُل لَّهُمَآ أُفّٖ وَلَا تَنۡهَرۡهُمَا وَقُل لَّهُمَا قَوۡلٗا كَرِيمٗا",
-    "translation": "And your Lord has decreed that you worship not except Him, and to parents, good treatment. Whether one or both of them reach old age [while] with you, say not to them [so much as], \"uff,\" and do not repel them but speak to them a noble word.",
+    "translation": "Your Lord has commanded that you worship none but Him, and that you be good to your parents. If either of them or both of them reach old age with you, do not say to them a word of disrespect, nor scold them, but say to them kind words.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "62:10": {
     "arabic": "فَإِذَا قُضِيَتِ ٱلصَّلَوٰةُ فَٱنتَشِرُواْ فِي ٱلۡأَرۡضِ وَٱبۡتَغُواْ مِن فَضۡلِ ٱللَّهِ وَٱذۡكُرُواْ ٱللَّهَ كَثِيرٗا لَّعَلَّكُمۡ تُفۡلِحُونَ",
-    "translation": "And when the prayer has been concluded, disperse within the land and seek from the bounty of Allāh, and remember Allāh often that you may succeed.",
+    "translation": "Then, when the prayer is concluded, disperse through the land, and seek Allah’s bounty, and remember Allah much, so that you may prosper.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "2:275": {
     "arabic": "ٱلَّذِينَ يَأۡكُلُونَ ٱلرِّبَوٰاْ لَا يَقُومُونَ إِلَّا كَمَا يَقُومُ ٱلَّذِي يَتَخَبَّطُهُ ٱلشَّيۡطَٰنُ مِنَ ٱلۡمَسِّۚ ذَٰلِكَ بِأَنَّهُمۡ قَالُوٓاْ إِنَّمَا ٱلۡبَيۡعُ مِثۡلُ ٱلرِّبَوٰاْۗ وَأَحَلَّ ٱللَّهُ ٱلۡبَيۡعَ وَحَرَّمَ ٱلرِّبَوٰاْۚ فَمَن جَآءَهُۥ مَوۡعِظَةٞ مِّن رَّبِّهِۦ فَٱنتَهَىٰ فَلَهُۥ مَا سَلَفَ وَأَمۡرُهُۥٓ إِلَى ٱللَّهِۖ وَمَنۡ عَادَ فَأُوْلَٰٓئِكَ أَصۡحَٰبُ ٱلنَّارِۖ هُمۡ فِيهَا خَٰلِدُونَ",
-    "translation": "Those who consume interest cannot stand [on the Day of Resurrection] except as one stands who is being beaten by Satan into insanity. That is because they say, \"Trade is [just] like interest.\" But Allāh has permitted trade and has forbidden interest. So whoever has received an admonition from his Lord and desists may have what is past, and his affair rests with Allāh. But whoever returns [to dealing in interest or usury] - those are the companions of the Fire; they will abide eternally therein.",
+    "translation": "Those who swallow usury will not rise, except as someone driven mad by Satan's touch. That is because they say, “Commerce is like usury.” But Allah has permitted commerce, and has forbidden usury. Whoever, on receiving advice from his Lord, refrains, may keep his past earnings, and his case rests with Allah. But whoever resumes—these are the dwellers of the Fire, wherein they will abide forever.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "49:11": {
     "arabic": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُواْ لَا يَسۡخَرۡ قَوۡمٞ مِّن قَوۡمٍ عَسَىٰٓ أَن يَكُونُواْ خَيۡرٗا مِّنۡهُمۡ وَلَا نِسَآءٞ مِّن نِّسَآءٍ عَسَىٰٓ أَن يَكُنَّ خَيۡرٗا مِّنۡهُنَّۖ وَلَا تَلۡمِزُوٓاْ أَنفُسَكُمۡ وَلَا تَنَابَزُواْ بِٱلۡأَلۡقَٰبِۖ بِئۡسَ ٱلِٱسۡمُ ٱلۡفُسُوقُ بَعۡدَ ٱلۡإِيمَٰنِۚ وَمَن لَّمۡ يَتُبۡ فَأُوْلَٰٓئِكَ هُمُ ٱلظَّٰلِمُونَ",
-    "translation": "O you who have believed, let not a people ridicule [another] people; perhaps they may be better than them; nor let women ridicule [other] women; perhaps they may be better than them. And do not insult one another and do not call each other by [offensive] nicknames. Wretched is the name [i.e., mention] of disobedience after [one's] faith. And whoever does not repent - then it is those who are the wrongdoers.",
+    "translation": "O you who believe! No people shall ridicule other people, for they may be better than they. Nor shall any women ridicule other women, for they may be better than they. Nor shall you slander one another, nor shall you insult one another with names. Evil is the return to wickedness after having attained faith. Whoever does not repent—these are the wrongdoers.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "49:12": {
     "arabic": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُواْ ٱجۡتَنِبُواْ كَثِيرٗا مِّنَ ٱلظَّنِّ إِنَّ بَعۡضَ ٱلظَّنِّ إِثۡمٞۖ وَلَا تَجَسَّسُواْ وَلَا يَغۡتَب بَّعۡضُكُم بَعۡضًاۚ أَيُحِبُّ أَحَدُكُمۡ أَن يَأۡكُلَ لَحۡمَ أَخِيهِ مَيۡتٗا فَكَرِهۡتُمُوهُۚ وَٱتَّقُواْ ٱللَّهَۚ إِنَّ ٱللَّهَ تَوَّابٞ رَّحِيمٞ",
-    "translation": "O you who have believed, avoid much [negative] assumption. Indeed, some assumption is sin. And do not spy or backbite each other. Would one of you like to eat the flesh of his brother when dead? You would detest it. And fear Allāh; indeed, Allāh is Accepting of Repentance and Merciful.",
+    "translation": "O you who believe! Avoid most suspicion—some suspicion is sinful. And do not spy on one another, nor backbite one another. Would any of you like to eat the flesh of his dead brother? You would detest it. So remain mindful of Allah. Allah is Most Relenting, Most Merciful.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "2:186": {
     "arabic": "وَإِذَا سَأَلَكَ عِبَادِي عَنِّي فَإِنِّي قَرِيبٌۖ أُجِيبُ دَعۡوَةَ ٱلدَّاعِ إِذَا دَعَانِۖ فَلۡيَسۡتَجِيبُواْ لِي وَلۡيُؤۡمِنُواْ بِي لَعَلَّهُمۡ يَرۡشُدُونَ",
-    "translation": "And when My servants ask you, [O Muḥammad], concerning Me - indeed I am near. I respond to the invocation of the supplicant when he calls upon Me. So let them respond to Me [by obedience] and believe in Me that they may be [rightly] guided.",
+    "translation": "And when My servants ask you about Me, I Am near; I answer the call of the caller when he calls on Me. So let them answer Me, and have faith in Me, that they may be rightly guided.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "13:28": {
     "arabic": "ٱلَّذِينَ ءَامَنُواْ وَتَطۡمَئِنُّ قُلُوبُهُم بِذِكۡرِ ٱللَّهِۗ أَلَا بِذِكۡرِ ٱللَّهِ تَطۡمَئِنُّ ٱلۡقُلُوبُ",
-    "translation": "Those who have believed and whose hearts are assured by the remembrance of Allāh. Unquestionably, by the remembrance of Allāh hearts are assured.\"",
+    "translation": "Those who believe, and whose hearts find comfort in the remembrance of Allah. Surely, it is in the remembrance of Allah that hearts find comfort.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "66:8": {
     "arabic": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُواْ تُوبُوٓاْ إِلَى ٱللَّهِ تَوۡبَةٗ نَّصُوحًا عَسَىٰ رَبُّكُمۡ أَن يُكَفِّرَ عَنكُمۡ سَيِّـَٔاتِكُمۡ وَيُدۡخِلَكُمۡ جَنَّٰتٖ تَجۡرِي مِن تَحۡتِهَا ٱلۡأَنۡهَٰرُ يَوۡمَ لَا يُخۡزِي ٱللَّهُ ٱلنَّبِيَّ وَٱلَّذِينَ ءَامَنُواْ مَعَهُۥۖ نُورُهُمۡ يَسۡعَىٰ بَيۡنَ أَيۡدِيهِمۡ وَبِأَيۡمَٰنِهِمۡ يَقُولُونَ رَبَّنَآ أَتۡمِمۡ لَنَا نُورَنَا وَٱغۡفِرۡ لَنَآۖ إِنَّكَ عَلَىٰ كُلِّ شَيۡءٖ قَدِيرٞ",
-    "translation": "O you who have believed, repent to Allāh with sincere repentance. Perhaps your Lord will remove from you your misdeeds and admit you into gardens beneath which rivers flow [on] the Day when Allāh will not disgrace the Prophet and those who believed with him. Their light will proceed before them and on their right; they will say, \"Our Lord, perfect for us our light and forgive us. Indeed, You are over all things competent.\"",
+    "translation": "O you who believe! Repent to Allah with sincere repentance. Perhaps your Lord will remit your sins, and admit you into gardens beneath which rivers flow, on the Day when Allah will not disappoint the Prophet and those who believed with him. Their light streaming before them, and to their right, they will say, “Our Lord, complete our light for us, and forgive us; You are capable of all things.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "2:153": {
     "arabic": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُواْ ٱسۡتَعِينُواْ بِٱلصَّبۡرِ وَٱلصَّلَوٰةِۚ إِنَّ ٱللَّهَ مَعَ ٱلصَّٰبِرِينَ",
-    "translation": "O you who have believed, seek help through patience and prayer. Indeed, Allāh is with the patient.",
+    "translation": "O you who believe! Seek help through patience and prayers. Allah is with the steadfast.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "14:7": {
     "arabic": "وَإِذۡ تَأَذَّنَ رَبُّكُمۡ لَئِن شَكَرۡتُمۡ لَأَزِيدَنَّكُمۡۖ وَلَئِن كَفَرۡتُمۡ إِنَّ عَذَابِي لَشَدِيدٞ",
-    "translation": "And [remember] when your Lord proclaimed, 'If you are grateful, I will surely increase you [in favor]; but if you deny, indeed, My punishment is severe.'\"",
+    "translation": "And when your Lord proclaimed: “If you give thanks, I will grant you increase; but if you are ungrateful, My punishment is severe.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "9:36": {
     "arabic": "إِنَّ عِدَّةَ ٱلشُّهُورِ عِندَ ٱللَّهِ ٱثۡنَا عَشَرَ شَهۡرٗا فِي كِتَٰبِ ٱللَّهِ يَوۡمَ خَلَقَ ٱلسَّمَٰوَٰتِ وَٱلۡأَرۡضَ مِنۡهَآ أَرۡبَعَةٌ حُرُمٞۚ ذَٰلِكَ ٱلدِّينُ ٱلۡقَيِّمُۚ فَلَا تَظۡلِمُواْ فِيهِنَّ أَنفُسَكُمۡۚ وَقَٰتِلُواْ ٱلۡمُشۡرِكِينَ كَآفَّةٗ كَمَا يُقَٰتِلُونَكُمۡ كَآفَّةٗۚ وَٱعۡلَمُوٓاْ أَنَّ ٱللَّهَ مَعَ ٱلۡمُتَّقِينَ",
-    "translation": "Indeed, the number of months with Allāh is twelve [lunar] months in the register of Allāh [from] the day He created the heavens and the earth; of these, four are sacred. That is the correct religion [i.e., way], so do not wrong yourselves during them. And fight against the disbelievers collectively as they fight against you collectively. And know that Allāh is with the righteous [who fear Him].",
+    "translation": "The number of months, according to Allah, is twelve months—in the decree of Allah—since the Day He created the heavens and the earth, of which four are sacred. This is the correct religion. So do not wrong yourselves during them. And fight the polytheists collectively, as they fight you collectively, and know that Allah is with the righteous.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "2:185": {
     "arabic": "شَهۡرُ رَمَضَانَ ٱلَّذِيٓ أُنزِلَ فِيهِ ٱلۡقُرۡءَانُ هُدٗى لِّلنَّاسِ وَبَيِّنَٰتٖ مِّنَ ٱلۡهُدَىٰ وَٱلۡفُرۡقَانِۚ فَمَن شَهِدَ مِنكُمُ ٱلشَّهۡرَ فَلۡيَصُمۡهُۖ وَمَن كَانَ مَرِيضًا أَوۡ عَلَىٰ سَفَرٖ فَعِدَّةٞ مِّنۡ أَيَّامٍ أُخَرَۗ يُرِيدُ ٱللَّهُ بِكُمُ ٱلۡيُسۡرَ وَلَا يُرِيدُ بِكُمُ ٱلۡعُسۡرَ وَلِتُكۡمِلُواْ ٱلۡعِدَّةَ وَلِتُكَبِّرُواْ ٱللَّهَ عَلَىٰ مَا هَدَىٰكُمۡ وَلَعَلَّكُمۡ تَشۡكُرُونَ",
-    "translation": "The month of Ramaḍān [is that] in which was revealed the Qur’ān, a guidance for the people and clear proofs of guidance and criterion. So whoever sights [the crescent of] the month, let him fast it; and whoever is ill or on a journey - then an equal number of other days. Allāh intends for you ease and does not intend for you hardship and [wants] for you to complete the period and to glorify Allāh for that [to] which He has guided you; and perhaps you will be grateful.",
+    "translation": "Ramadan is the month in which the Quran was revealed. Guidance for humanity, and clear portents of guidance, and the Criterion. Whoever of you witnesses the month, shall fast it. But whoever is sick, or on a journey, then a number of other days. Allah desires ease for you, and does not desire hardship for you, that you may complete the number, and celebrate Allah for having guided you, so that you may be thankful.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "2:184": {
     "arabic": "أَيَّامٗا مَّعۡدُودَٰتٖۚ فَمَن كَانَ مِنكُم مَّرِيضًا أَوۡ عَلَىٰ سَفَرٖ فَعِدَّةٞ مِّنۡ أَيَّامٍ أُخَرَۚ وَعَلَى ٱلَّذِينَ يُطِيقُونَهُۥ فِدۡيَةٞ طَعَامُ مِسۡكِينٖۖ فَمَن تَطَوَّعَ خَيۡرٗا فَهُوَ خَيۡرٞ لَّهُۥۚ وَأَن تَصُومُواْ خَيۡرٞ لَّكُمۡ إِن كُنتُمۡ تَعۡلَمُونَ",
-    "translation": "[Fasting for] a limited number of days. So whoever among you is ill or on a journey [during them] - then an equal number of other days [are to be made up]. And upon those who are able [to fast, but with hardship] - a ransom [as substitute] of feeding a poor person [each day]. And whoever volunteers good [i.e., excess] - it is better for him. But to fast is best for you, if you only knew.",
+    "translation": "For a specified number of days. But whoever among you is sick, or on a journey, then a number of other days. For those who are able: a ransom of feeding a needy person. But whoever volunteers goodness, it is better for him. But to fast is best for you, if you only knew.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "97:1-5": {
     "arabic": "إِنَّآ أَنزَلۡنَٰهُ فِي لَيۡلَةِ ٱلۡقَدۡرِ وَمَآ أَدۡرَىٰكَ مَا لَيۡلَةُ ٱلۡقَدۡرِ لَيۡلَةُ ٱلۡقَدۡرِ خَيۡرٞ مِّنۡ أَلۡفِ شَهۡرٖ تَنَزَّلُ ٱلۡمَلَٰٓئِكَةُ وَٱلرُّوحُ فِيهَا بِإِذۡنِ رَبِّهِم مِّن كُلِّ أَمۡرٖ سَلَٰمٌ هِيَ حَتَّىٰ مَطۡلَعِ ٱلۡفَجۡرِ",
-    "translation": "Indeed, We sent it [i.e., the Qur’ān] down during the Night of Decree. And what can make you know what is the Night of Decree? The Night of Decree is better than a thousand months. The angels and the Spirit [i.e., Gabriel] descend therein by permission of their Lord for every matter. Peace it is until the emergence of dawn.",
+    "translation": "We sent it down on the Night of Decree. But what will convey to you what the Night of Decree is? The Night of Decree is better than a thousand months. In it descend the angels and the Spirit, by the leave of their Lord, with every command. Peace it is; until the rise of dawn.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "17:79": {
     "arabic": "وَمِنَ ٱلَّيۡلِ فَتَهَجَّدۡ بِهِۦ نَافِلَةٗ لَّكَ عَسَىٰٓ أَن يَبۡعَثَكَ رَبُّكَ مَقَامٗا مَّحۡمُودٗا",
-    "translation": "And from [part of] the night, pray with it [i.e., recitation of the Qur’ān] as additional [worship] for you; it is expected that your Lord will resurrect you to a praised station.",
+    "translation": "And keep vigil with it during parts of the night, as an extra prayer. Perhaps your Lord will raise you to a laudable position.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "4:101": {
     "arabic": "وَإِذَا ضَرَبۡتُمۡ فِي ٱلۡأَرۡضِ فَلَيۡسَ عَلَيۡكُمۡ جُنَاحٌ أَن تَقۡصُرُواْ مِنَ ٱلصَّلَوٰةِ إِنۡ خِفۡتُمۡ أَن يَفۡتِنَكُمُ ٱلَّذِينَ كَفَرُوٓاْۚ إِنَّ ٱلۡكَٰفِرِينَ كَانُواْ لَكُمۡ عَدُوّٗا مُّبِينٗا",
-    "translation": "And when you travel throughout the land, there is no blame upon you for shortening the prayer, [especially] if you fear that those who disbelieve may disrupt [or attack] you. Indeed, the disbelievers are ever to you a clear enemy.",
+    "translation": "When you travel in the land, there is no blame on you for shortening the prayers, if you fear that the disbelievers may harm you. The disbelievers are your manifest enemies.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "4:86": {
     "arabic": "وَإِذَا حُيِّيتُم بِتَحِيَّةٖ فَحَيُّواْ بِأَحۡسَنَ مِنۡهَآ أَوۡ رُدُّوهَآۗ إِنَّ ٱللَّهَ كَانَ عَلَىٰ كُلِّ شَيۡءٍ حَسِيبًا",
-    "translation": "And when you are greeted with a greeting, greet [in return] with one better than it or [at least] return it [in a like manner]. Indeed Allāh is ever, over all things, an Accountant.",
+    "translation": "When you are greeted with a greeting, respond with a better greeting, or return it. Allah keeps count of everything.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "59:22": {
     "arabic": "هُوَ ٱللَّهُ ٱلَّذِي لَآ إِلَٰهَ إِلَّا هُوَۖ عَٰلِمُ ٱلۡغَيۡبِ وَٱلشَّهَٰدَةِۖ هُوَ ٱلرَّحۡمَٰنُ ٱلرَّحِيمُ",
-    "translation": "He is Allāh, other than whom there is no deity, Knower of the unseen and the witnessed. He is the Entirely Merciful, the Especially Merciful.",
+    "translation": "He is Allah. There is no god but He, the Knower of secrets and declarations. He is the Compassionate, the Merciful.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "59:23": {
     "arabic": "هُوَ ٱللَّهُ ٱلَّذِي لَآ إِلَٰهَ إِلَّا هُوَ ٱلۡمَلِكُ ٱلۡقُدُّوسُ ٱلسَّلَٰمُ ٱلۡمُؤۡمِنُ ٱلۡمُهَيۡمِنُ ٱلۡعَزِيزُ ٱلۡجَبَّارُ ٱلۡمُتَكَبِّرُۚ سُبۡحَٰنَ ٱللَّهِ عَمَّا يُشۡرِكُونَ",
-    "translation": "He is Allāh, other than whom there is no deity, the Sovereign, the Pure, the Perfection, the Grantor of Security, the Overseer, the Exalted in Might, the Compeller, the Superior. Exalted is Allāh above whatever they associate with Him.",
+    "translation": "He is Allah; besides Whom there is no god; the Sovereign, the Holy, the Peace-Giver, the Faith-Giver, the Overseer, the Almighty, the Omnipotent, the Overwhelming. Glory be to Allah, beyond what they associate.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "59:24": {
     "arabic": "هُوَ ٱللَّهُ ٱلۡخَٰلِقُ ٱلۡبَارِئُ ٱلۡمُصَوِّرُۖ لَهُ ٱلۡأَسۡمَآءُ ٱلۡحُسۡنَىٰۚ يُسَبِّحُ لَهُۥ مَا فِي ٱلسَّمَٰوَٰتِ وَٱلۡأَرۡضِۖ وَهُوَ ٱلۡعَزِيزُ ٱلۡحَكِيمُ",
-    "translation": "He is Allāh, the Creator, the Producer, the Fashioner; to Him belong the best names. Whatever is in the heavens and earth is exalting Him. And He is the Exalted in Might, the Wise.",
+    "translation": "He is Allah; the Creator, the Maker, the Designer. His are the Most Beautiful Names. Whatever is in the heavens and the earth glorifies Him. He is the Majestic, the Wise.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "2:32": {
     "arabic": "قَالُواْ سُبۡحَٰنَكَ لَا عِلۡمَ لَنَآ إِلَّا مَا عَلَّمۡتَنَآۖ إِنَّكَ أَنتَ ٱلۡعَلِيمُ ٱلۡحَكِيمُ",
-    "translation": "They said, \"Exalted are You; we have no knowledge except what You have taught us. Indeed, it is You who is the Knowing, the Wise.\"",
+    "translation": "They said, “Glory be to You! We have no knowledge except what You have taught us. It is you who are the Knowledgeable, the Wise.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "2:102": {
     "arabic": "وَٱتَّبَعُواْ مَا تَتۡلُواْ ٱلشَّيَٰطِينُ عَلَىٰ مُلۡكِ سُلَيۡمَٰنَۖ وَمَا كَفَرَ سُلَيۡمَٰنُ وَلَٰكِنَّ ٱلشَّيَٰطِينَ كَفَرُواْ يُعَلِّمُونَ ٱلنَّاسَ ٱلسِّحۡرَ وَمَآ أُنزِلَ عَلَى ٱلۡمَلَكَيۡنِ بِبَابِلَ هَٰرُوتَ وَمَٰرُوتَۚ وَمَا يُعَلِّمَانِ مِنۡ أَحَدٍ حَتَّىٰ يَقُولَآ إِنَّمَا نَحۡنُ فِتۡنَةٞ فَلَا تَكۡفُرۡۖ فَيَتَعَلَّمُونَ مِنۡهُمَا مَا يُفَرِّقُونَ بِهِۦ بَيۡنَ ٱلۡمَرۡءِ وَزَوۡجِهِۦۚ وَمَا هُم بِضَآرِّينَ بِهِۦ مِنۡ أَحَدٍ إِلَّا بِإِذۡنِ ٱللَّهِۚ وَيَتَعَلَّمُونَ مَا يَضُرُّهُمۡ وَلَا يَنفَعُهُمۡۚ وَلَقَدۡ عَلِمُواْ لَمَنِ ٱشۡتَرَىٰهُ مَا لَهُۥ فِي ٱلۡأٓخِرَةِ مِنۡ خَلَٰقٖۚ وَلَبِئۡسَ مَا شَرَوۡاْ بِهِۦٓ أَنفُسَهُمۡۚ لَوۡ كَانُواْ يَعۡلَمُونَ",
-    "translation": "And they followed [instead] what the devils had recited during the reign of Solomon. It was not Solomon who disbelieved, but the devils disbelieved, teaching people magic and that which was revealed to the two angels at Babylon, Hārūt and Mārūt. But they [i.e., the two angels] do not teach anyone unless they say, \"We are a trial, so do not disbelieve [by practicing magic].\" And [yet] they learn from them that by which they cause separation between a man and his wife. But they do not harm anyone through it except by permission of Allāh. And they [i.e., people] learn what harms them and does not benefit them. But they [i.e., the Children of Israel] certainly knew that whoever purchased it [i.e., magic] would not have in the Hereafter any share. And wretched is that for which they sold themselves, if they only knew.",
+    "translation": "And they followed what the devils taught during the reign of Solomon. It was not Solomon who disbelieved, but it was the devils who disbelieved. They taught the people witchcraft and what was revealed in Babylon to the two angels Harut and Marut. They did not teach anybody until they had said, “We are a test, so do not lose faith.” But they learned from them the means to cause separation between man and his wife. But they cannot harm anyone except with Allah's permission. And they learned what would harm them and not benefit them. Yet they knew that whoever deals in it will have no share in the Hereafter. Miserable is what they sold their souls for, if they only knew.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "2:126": {
     "arabic": "وَإِذۡ قَالَ إِبۡرَٰهِـۧمُ رَبِّ ٱجۡعَلۡ هَٰذَا بَلَدًا ءَامِنٗا وَٱرۡزُقۡ أَهۡلَهُۥ مِنَ ٱلثَّمَرَٰتِ مَنۡ ءَامَنَ مِنۡهُم بِٱللَّهِ وَٱلۡيَوۡمِ ٱلۡأٓخِرِۚ قَالَ وَمَن كَفَرَ فَأُمَتِّعُهُۥ قَلِيلٗا ثُمَّ أَضۡطَرُّهُۥٓ إِلَىٰ عَذَابِ ٱلنَّارِۖ وَبِئۡسَ ٱلۡمَصِيرُ",
-    "translation": "And [mention] when Abraham said, \"My Lord, make this a secure city and provide its people with fruits - whoever of them believes in Allāh and the Last Day.\" [Allāh] said, \"And whoever disbelieves - I will grant him enjoyment for a little; then I will force him to the punishment of the Fire, and wretched is the destination.\"",
+    "translation": "When Abraham said, “O My Lord, make this a peaceful land, and provide its people with fruits—whoever of them believes in Allah and the Last Day.” He said, “And whoever disbelieves, I will give him a little enjoyment, then I will consign him to the punishment of the Fire; how miserable the destiny!”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "2:127-128": {
     "arabic": "وَإِذۡ يَرۡفَعُ إِبۡرَٰهِـۧمُ ٱلۡقَوَاعِدَ مِنَ ٱلۡبَيۡتِ وَإِسۡمَٰعِيلُ رَبَّنَا تَقَبَّلۡ مِنَّآۖ إِنَّكَ أَنتَ ٱلسَّمِيعُ ٱلۡعَلِيمُ رَبَّنَا وَٱجۡعَلۡنَا مُسۡلِمَيۡنِ لَكَ وَمِن ذُرِّيَّتِنَآ أُمَّةٗ مُّسۡلِمَةٗ لَّكَ وَأَرِنَا مَنَاسِكَنَا وَتُبۡ عَلَيۡنَآۖ إِنَّكَ أَنتَ ٱلتَّوَّابُ ٱلرَّحِيمُ",
-    "translation": "And [mention] when Abraham was raising the foundations of the House and [with him] Ishmael, [saying], \"Our Lord, accept [this] from us. Indeed, You are the Hearing, the Knowing. Our Lord, and make us Muslims [in submission] to You and from our descendants a Muslim nation [in submission] to You. And show us our rites [of worship] and accept our repentance. Indeed, You are the Accepting of Repentance, the Merciful.",
+    "translation": "As Abraham raises the foundations of the House, together with Ishmael, “Our Lord, accept it from us, You are the Hearer, the Knower. Our Lord, and make us submissive to You, and from our descendants a community submissive to You. And show us our rites, and accept our repentance. You are the Acceptor of Repentance, the Merciful.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "2:127-129": {
     "arabic": "وَإِذۡ يَرۡفَعُ إِبۡرَٰهِـۧمُ ٱلۡقَوَاعِدَ مِنَ ٱلۡبَيۡتِ وَإِسۡمَٰعِيلُ رَبَّنَا تَقَبَّلۡ مِنَّآۖ إِنَّكَ أَنتَ ٱلسَّمِيعُ ٱلۡعَلِيمُ رَبَّنَا وَٱجۡعَلۡنَا مُسۡلِمَيۡنِ لَكَ وَمِن ذُرِّيَّتِنَآ أُمَّةٗ مُّسۡلِمَةٗ لَّكَ وَأَرِنَا مَنَاسِكَنَا وَتُبۡ عَلَيۡنَآۖ إِنَّكَ أَنتَ ٱلتَّوَّابُ ٱلرَّحِيمُ رَبَّنَا وَٱبۡعَثۡ فِيهِمۡ رَسُولٗا مِّنۡهُمۡ يَتۡلُواْ عَلَيۡهِمۡ ءَايَٰتِكَ وَيُعَلِّمُهُمُ ٱلۡكِتَٰبَ وَٱلۡحِكۡمَةَ وَيُزَكِّيهِمۡۖ إِنَّكَ أَنتَ ٱلۡعَزِيزُ ٱلۡحَكِيمُ",
-    "translation": "And [mention] when Abraham was raising the foundations of the House and [with him] Ishmael, [saying], \"Our Lord, accept [this] from us. Indeed, You are the Hearing, the Knowing. Our Lord, and make us Muslims [in submission] to You and from our descendants a Muslim nation [in submission] to You. And show us our rites [of worship] and accept our repentance. Indeed, You are the Accepting of Repentance, the Merciful. Our Lord, and send among them a messenger from themselves who will recite to them Your verses and teach them the Book and wisdom and purify them. Indeed, You are the Exalted in Might, the Wise.\"",
+    "translation": "As Abraham raises the foundations of the House, together with Ishmael, “Our Lord, accept it from us, You are the Hearer, the Knower. Our Lord, and make us submissive to You, and from our descendants a community submissive to You. And show us our rites, and accept our repentance. You are the Acceptor of Repentance, the Merciful. Our Lord, and raise up among them a messenger, of themselves, who will recite to them Your revelations, and teach them the Book and wisdom, and purify them. You are the Almighty, the Wise.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "2:155-156": {
     "arabic": "وَلَنَبۡلُوَنَّكُم بِشَيۡءٖ مِّنَ ٱلۡخَوۡفِ وَٱلۡجُوعِ وَنَقۡصٖ مِّنَ ٱلۡأَمۡوَٰلِ وَٱلۡأَنفُسِ وَٱلثَّمَرَٰتِۗ وَبَشِّرِ ٱلصَّٰبِرِينَ ٱلَّذِينَ إِذَآ أَصَٰبَتۡهُم مُّصِيبَةٞ قَالُوٓاْ إِنَّا لِلَّهِ وَإِنَّآ إِلَيۡهِ رَٰجِعُونَ",
-    "translation": "And We will surely test you with something of fear and hunger and a loss of wealth and lives and fruits, but give good tidings to the patient, Who, when disaster strikes them, say, \"Indeed we belong to Allāh, and indeed to Him we will return.\"",
+    "translation": "We will certainly test you with some fear and hunger, and some loss of possessions and lives and crops. But give good news to the steadfast. Those who, when a calamity afflicts them, say, “To Allah we belong, and to Him we will return.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "2:201": {
     "arabic": "وَمِنۡهُم مَّن يَقُولُ رَبَّنَآ ءَاتِنَا فِي ٱلدُّنۡيَا حَسَنَةٗ وَفِي ٱلۡأٓخِرَةِ حَسَنَةٗ وَقِنَا عَذَابَ ٱلنَّارِ",
-    "translation": "But among them is he who says, \"Our Lord, give us in this world [that which is] good and in the Hereafter [that which is] good and protect us from the punishment of the Fire.\"",
+    "translation": "And among them is he who says, “Our Lord, give us goodness in this world, and goodness in the Hereafter, and protect us from the torment of the Fire.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "2:250": {
     "arabic": "وَلَمَّا بَرَزُواْ لِجَالُوتَ وَجُنُودِهِۦ قَالُواْ رَبَّنَآ أَفۡرِغۡ عَلَيۡنَا صَبۡرٗا وَثَبِّتۡ أَقۡدَامَنَا وَٱنصُرۡنَا عَلَى ٱلۡقَوۡمِ ٱلۡكَٰفِرِينَ",
-    "translation": "And when they went forth to [face] Goliath and his soldiers, they said, \"Our Lord, pour upon us patience and plant firmly our feet and give us victory over the disbelieving people.\"",
+    "translation": "And when they confronted Goliath and his troops, they said, “Our Lord, pour down patience on us, and strengthen our foothold, and support us against the faithless people.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "2:255": {
     "arabic": "ٱللَّهُ لَآ إِلَٰهَ إِلَّا هُوَ ٱلۡحَيُّ ٱلۡقَيُّومُۚ لَا تَأۡخُذُهُۥ سِنَةٞ وَلَا نَوۡمٞۚ لَّهُۥ مَا فِي ٱلسَّمَٰوَٰتِ وَمَا فِي ٱلۡأَرۡضِۗ مَن ذَا ٱلَّذِي يَشۡفَعُ عِندَهُۥٓ إِلَّا بِإِذۡنِهِۦۚ يَعۡلَمُ مَا بَيۡنَ أَيۡدِيهِمۡ وَمَا خَلۡفَهُمۡۖ وَلَا يُحِيطُونَ بِشَيۡءٖ مِّنۡ عِلۡمِهِۦٓ إِلَّا بِمَا شَآءَۚ وَسِعَ كُرۡسِيُّهُ ٱلسَّمَٰوَٰتِ وَٱلۡأَرۡضَۖ وَلَا يَـُٔودُهُۥ حِفۡظُهُمَاۚ وَهُوَ ٱلۡعَلِيُّ ٱلۡعَظِيمُ",
-    "translation": "Allāh - there is no deity except Him, the Ever-Living, the Self-Sustaining. Neither drowsiness overtakes Him nor sleep. To Him belongs whatever is in the heavens and whatever is on the earth. Who is it that can intercede with Him except by His permission? He knows what is [presently] before them and what will be after them, and they encompass not a thing of His knowledge except for what He wills. His Kursī extends over the heavens and the earth, and their preservation tires Him not. And He is the Most High, the Most Great.",
+    "translation": "Allah! There is no god except He, the Living, the Everlasting. Neither slumber overtakes Him, nor sleep. To Him belongs everything in the heavens and everything on earth. Who is he that can intercede with Him except with His permission? He knows what is before them, and what is behind them; and they cannot grasp any of His knowledge, except as He wills. His Throne extends over the heavens and the earth, and their preservation does not burden Him. He is the Most High, the Great.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "2:285-286": {
     "arabic": "ءَامَنَ ٱلرَّسُولُ بِمَآ أُنزِلَ إِلَيۡهِ مِن رَّبِّهِۦ وَٱلۡمُؤۡمِنُونَۚ كُلٌّ ءَامَنَ بِٱللَّهِ وَمَلَٰٓئِكَتِهِۦ وَكُتُبِهِۦ وَرُسُلِهِۦ لَا نُفَرِّقُ بَيۡنَ أَحَدٖ مِّن رُّسُلِهِۦۚ وَقَالُواْ سَمِعۡنَا وَأَطَعۡنَاۖ غُفۡرَانَكَ رَبَّنَا وَإِلَيۡكَ ٱلۡمَصِيرُ لَا يُكَلِّفُ ٱللَّهُ نَفۡسًا إِلَّا وُسۡعَهَاۚ لَهَا مَا كَسَبَتۡ وَعَلَيۡهَا مَا ٱكۡتَسَبَتۡۗ رَبَّنَا لَا تُؤَاخِذۡنَآ إِن نَّسِينَآ أَوۡ أَخۡطَأۡنَاۚ رَبَّنَا وَلَا تَحۡمِلۡ عَلَيۡنَآ إِصۡرٗا كَمَا حَمَلۡتَهُۥ عَلَى ٱلَّذِينَ مِن قَبۡلِنَاۚ رَبَّنَا وَلَا تُحَمِّلۡنَا مَا لَا طَاقَةَ لَنَا بِهِۦۖ وَٱعۡفُ عَنَّا وَٱغۡفِرۡ لَنَا وَٱرۡحَمۡنَآۚ أَنتَ مَوۡلَىٰنَا فَٱنصُرۡنَا عَلَى ٱلۡقَوۡمِ ٱلۡكَٰفِرِينَ",
-    "translation": "The Messenger has believed in what was revealed to him from his Lord, and [so have] the believers. All of them have believed in Allāh and His angels and His books and His messengers, [saying], \"We make no distinction between any of His messengers.\" And they say, \"We hear and we obey. [We seek] Your forgiveness, our Lord, and to You is the [final] destination.\" Allāh does not charge a soul except [with that within] its capacity. It will have [the consequence of] what [good] it has gained, and it will bear [the consequence of] what [evil] it has earned. \"Our Lord, do not impose blame upon us if we have forgotten or erred. Our Lord, and lay not upon us a burden like that which You laid upon those before us. Our Lord, and burden us not with that which we have no ability to bear. And pardon us; and forgive us; and have mercy upon us. You are our protector, so give us victory over the disbelieving people.\"",
+    "translation": "The Messenger has believed in what was revealed to him from his Lord, as did the believers. They all have believed in Allah, and His angels, and His scriptures, and His messengers: “We make no distinction between any of His messengers.” And they say, “We hear and we obey. Your forgiveness, our Lord. To you is the destiny.” Allah does not burden any soul beyond its capacity. To its credit is what it earns, and against it is what it commits. “Our Lord, do not condemn us if we forget or make a mistake. Our Lord, do not burden us as You have burdened those before us. Our Lord, do not burden us with more than we have strength to bear; and pardon us, and forgive us, and have mercy on us. You are our Lord and Master, so help us against the disbelieving people.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "3:8-9": {
     "arabic": "رَبَّنَا لَا تُزِغۡ قُلُوبَنَا بَعۡدَ إِذۡ هَدَيۡتَنَا وَهَبۡ لَنَا مِن لَّدُنكَ رَحۡمَةًۚ إِنَّكَ أَنتَ ٱلۡوَهَّابُ رَبَّنَآ إِنَّكَ جَامِعُ ٱلنَّاسِ لِيَوۡمٖ لَّا رَيۡبَ فِيهِۚ إِنَّ ٱللَّهَ لَا يُخۡلِفُ ٱلۡمِيعَادَ",
-    "translation": "[Who say], \"Our Lord, let not our hearts deviate after You have guided us and grant us from Yourself mercy. Indeed, You are the Bestower. Our Lord, surely You will gather the people for a Day about which there is no doubt. Indeed, Allāh does not fail in His promise.\"",
+    "translation": "“Our Lord, do not cause our hearts to swerve after You have guided us, and bestow on us mercy from Your presence; You are the Giver.” “Our Lord, You will gather the people for a Day in which there is no doubt.” Allah will never break His promise.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "3:16": {
     "arabic": "ٱلَّذِينَ يَقُولُونَ رَبَّنَآ إِنَّنَآ ءَامَنَّا فَٱغۡفِرۡ لَنَا ذُنُوبَنَا وَقِنَا عَذَابَ ٱلنَّارِ",
-    "translation": "Those who say, 'Our Lord, indeed we have believed, so forgive us our sins and protect us from the punishment of the Fire,' \"",
+    "translation": "Those who say, “Our Lord, we have believed, so forgive us our sins, and save us from the suffering of the Fire.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "3:26-27": {
     "arabic": "قُلِ ٱللَّهُمَّ مَٰلِكَ ٱلۡمُلۡكِ تُؤۡتِي ٱلۡمُلۡكَ مَن تَشَآءُ وَتَنزِعُ ٱلۡمُلۡكَ مِمَّن تَشَآءُ وَتُعِزُّ مَن تَشَآءُ وَتُذِلُّ مَن تَشَآءُۖ بِيَدِكَ ٱلۡخَيۡرُۖ إِنَّكَ عَلَىٰ كُلِّ شَيۡءٖ قَدِيرٞ تُولِجُ ٱلَّيۡلَ فِي ٱلنَّهَارِ وَتُولِجُ ٱلنَّهَارَ فِي ٱلَّيۡلِۖ وَتُخۡرِجُ ٱلۡحَيَّ مِنَ ٱلۡمَيِّتِ وَتُخۡرِجُ ٱلۡمَيِّتَ مِنَ ٱلۡحَيِّۖ وَتَرۡزُقُ مَن تَشَآءُ بِغَيۡرِ حِسَابٖ",
-    "translation": "Say, \"O Allāh, Owner of Sovereignty, You give sovereignty to whom You will and You take sovereignty away from whom You will. You honor whom You will and You humble whom You will. In Your hand is [all] good. Indeed, You are over all things competent. You cause the night to enter the day, and You cause the day to enter the night; and You bring the living out of the dead, and You bring the dead out of the living. And You give provision to whom You will without account [i.e., limit or measure].\"",
+    "translation": "Say, “O Allah, Owner of Sovereignty. You grant sovereignty to whom You will, and You strip sovereignty from whom you will. You honor whom you will, and You humiliate whom you will. In Your hand is all goodness. You are Capable of all things.” “You merge the night into the day, and You merge the day into the night; and you bring the living out of the dead, and You bring the dead out of the living; and You provide for whom you will without measure.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "3:35": {
     "arabic": "إِذۡ قَالَتِ ٱمۡرَأَتُ عِمۡرَٰنَ رَبِّ إِنِّي نَذَرۡتُ لَكَ مَا فِي بَطۡنِي مُحَرَّرٗا فَتَقَبَّلۡ مِنِّيٓۖ إِنَّكَ أَنتَ ٱلسَّمِيعُ ٱلۡعَلِيمُ",
-    "translation": "[Mention, O Muḥammad], when the wife of ʿImrān said, \"My Lord, indeed I have pledged to You what is in my womb, consecrated [for Your service], so accept this from me. Indeed, You are the Hearing, the Knowing.\"",
+    "translation": "The wife of Imran said, “My Lord, I have vowed to You what is in my womb, dedicated, so accept from me; You are the Hearer and Knower.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "3:38": {
     "arabic": "هُنَالِكَ دَعَا زَكَرِيَّا رَبَّهُۥۖ قَالَ رَبِّ هَبۡ لِي مِن لَّدُنكَ ذُرِّيَّةٗ طَيِّبَةًۖ إِنَّكَ سَمِيعُ ٱلدُّعَآءِ",
-    "translation": "At that, Zechariah called upon his Lord, saying, \"My Lord, grant me from Yourself a good offspring. Indeed, You are the Hearer of supplication.\"",
+    "translation": "Thereupon Zechariah prayed to his Lord; he said, “My Lord, bestow on me good offspring from Your presence; You are the Hearer of Prayers.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "3:52-53": {
     "arabic": "۞ فَلَمَّآ أَحَسَّ عِيسَىٰ مِنۡهُمُ ٱلۡكُفۡرَ قَالَ مَنۡ أَنصَارِيٓ إِلَى ٱللَّهِۖ قَالَ ٱلۡحَوَارِيُّونَ نَحۡنُ أَنصَارُ ٱللَّهِ ءَامَنَّا بِٱللَّهِ وَٱشۡهَدۡ بِأَنَّا مُسۡلِمُونَ رَبَّنَآ ءَامَنَّا بِمَآ أَنزَلۡتَ وَٱتَّبَعۡنَا ٱلرَّسُولَ فَٱكۡتُبۡنَا مَعَ ٱلشَّٰهِدِينَ",
-    "translation": "But when Jesus felt [persistence in] disbelief from them, he said, \"Who are my supporters for [the cause of] Allāh?\" The disciples said, \"We are supporters for Allāh. We have believed in Allāh and testify that we are Muslims [submitting to Him]. Our Lord, we have believed in what You revealed and have followed the messenger [i.e., Jesus], so register us among the witnesses [to truth].\"",
+    "translation": "When Jesus sensed disbelief on their part, he said, “Who are my allies towards Allah?” The disciples said, “We are Allah’s allies; we have believed in Allah, and bear witness that we submit.” “Our Lord, we have believed in what You have revealed, and we have followed the Messenger, so count us among the witnesses.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "3:191-194": {
     "arabic": "ٱلَّذِينَ يَذۡكُرُونَ ٱللَّهَ قِيَٰمٗا وَقُعُودٗا وَعَلَىٰ جُنُوبِهِمۡ وَيَتَفَكَّرُونَ فِي خَلۡقِ ٱلسَّمَٰوَٰتِ وَٱلۡأَرۡضِ رَبَّنَا مَا خَلَقۡتَ هَٰذَا بَٰطِلٗا سُبۡحَٰنَكَ فَقِنَا عَذَابَ ٱلنَّارِ رَبَّنَآ إِنَّكَ مَن تُدۡخِلِ ٱلنَّارَ فَقَدۡ أَخۡزَيۡتَهُۥۖ وَمَا لِلظَّٰلِمِينَ مِنۡ أَنصَارٖ رَّبَّنَآ إِنَّنَا سَمِعۡنَا مُنَادِيٗا يُنَادِي لِلۡإِيمَٰنِ أَنۡ ءَامِنُواْ بِرَبِّكُمۡ فَـَٔامَنَّاۚ رَبَّنَا فَٱغۡفِرۡ لَنَا ذُنُوبَنَا وَكَفِّرۡ عَنَّا سَيِّـَٔاتِنَا وَتَوَفَّنَا مَعَ ٱلۡأَبۡرَارِ رَبَّنَا وَءَاتِنَا مَا وَعَدتَّنَا عَلَىٰ رُسُلِكَ وَلَا تُخۡزِنَا يَوۡمَ ٱلۡقِيَٰمَةِۖ إِنَّكَ لَا تُخۡلِفُ ٱلۡمِيعَادَ",
-    "translation": "Who remember Allāh while standing or sitting or [lying] on their sides and give thought to the creation of the heavens and the earth, [saying], \"Our Lord, You did not create this aimlessly; exalted are You [above such a thing]; then protect us from the punishment of the Fire. Our Lord, indeed whoever You admit to the Fire - You have disgraced him, and for the wrongdoers there are no helpers. Our Lord, indeed we have heard a caller [i.e., Prophet Muḥammad (ﷺ)] calling to faith, [saying], 'Believe in your Lord,' and we have believed. Our Lord, so forgive us our sins and remove from us our misdeeds and cause us to die among the righteous. Our Lord, and grant us what You promised us through Your messengers and do not disgrace us on the Day of Resurrection. Indeed, You do not fail in [Your] promise.\"",
+    "translation": "Those who remember Allah while standing, and sitting, and on their sides; and they reflect upon the creation of the heavens and the earth: “Our Lord, You did not create this in vain, glory to You, so protect us from the punishment of the Fire.” “Our Lord, whomever You commit to the Fire, You have disgraced. The wrongdoers will have no helpers.” “Our Lord, we have heard a caller calling to the faith: `Believe in your Lord,' and we have believed. Our Lord! Forgive us our sins, and remit our misdeeds, and make us die in the company of the virtuous.” “Our Lord, and give us what You have promised us through Your messengers, and do not disgrace us on the Day of Resurrection. Surely You never break a promise.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "5:25": {
     "arabic": "قَالَ رَبِّ إِنِّي لَآ أَمۡلِكُ إِلَّا نَفۡسِي وَأَخِيۖ فَٱفۡرُقۡ بَيۡنَنَا وَبَيۡنَ ٱلۡقَوۡمِ ٱلۡفَٰسِقِينَ",
-    "translation": "[Moses] said, \"My Lord, indeed I do not possess [i.e., control] except myself and my brother, so part us from the defiantly disobedient people.\"",
+    "translation": "He said, “My Lord! I have control only over myself and my brother, so separate between us and between the wicked people.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "5:83-84": {
     "arabic": "وَإِذَا سَمِعُواْ مَآ أُنزِلَ إِلَى ٱلرَّسُولِ تَرَىٰٓ أَعۡيُنَهُمۡ تَفِيضُ مِنَ ٱلدَّمۡعِ مِمَّا عَرَفُواْ مِنَ ٱلۡحَقِّۖ يَقُولُونَ رَبَّنَآ ءَامَنَّا فَٱكۡتُبۡنَا مَعَ ٱلشَّٰهِدِينَ وَمَا لَنَا لَا نُؤۡمِنُ بِٱللَّهِ وَمَا جَآءَنَا مِنَ ٱلۡحَقِّ وَنَطۡمَعُ أَن يُدۡخِلَنَا رَبُّنَا مَعَ ٱلۡقَوۡمِ ٱلصَّٰلِحِينَ",
-    "translation": "And when they hear what has been revealed to the Messenger, you see their eyes overflowing with tears because of what they have recognized of the truth. They say, \"Our Lord, we have believed, so register us among the witnesses. And why should we not believe in Allāh and what has come to us of the truth? And we aspire that our Lord will admit us [to Paradise] with the righteous people.\"",
+    "translation": "And when they hear what was revealed to the Messenger, you see their eyes overflowing with tears, as they recognize the truth in it. They say, “Our Lord, we have believed, so count us among the witnesses.” “And why should we not believe in Allah, and in the truth that has come to us, and hope that our Lord will include us among the righteous people?”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "5:114": {
     "arabic": "قَالَ عِيسَى ٱبۡنُ مَرۡيَمَ ٱللَّهُمَّ رَبَّنَآ أَنزِلۡ عَلَيۡنَا مَآئِدَةٗ مِّنَ ٱلسَّمَآءِ تَكُونُ لَنَا عِيدٗا لِّأَوَّلِنَا وَءَاخِرِنَا وَءَايَةٗ مِّنكَۖ وَٱرۡزُقۡنَا وَأَنتَ خَيۡرُ ٱلرَّٰزِقِينَ",
-    "translation": "Said Jesus, the son of Mary, \"O Allāh, our Lord, send down to us a table [spread with food] from the heaven to be for us a festival for the first of us and the last of us and a sign from You. And provide for us, and You are the best of providers.\"",
+    "translation": "Jesus son of Mary said, “O Allah, our Lord, send down for us a table from heaven, to be a festival for us, for the first of us, and the last of us, and a sign from You; and provide for us; You are the Best of providers.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "5:118": {
     "arabic": "إِن تُعَذِّبۡهُمۡ فَإِنَّهُمۡ عِبَادُكَۖ وَإِن تَغۡفِرۡ لَهُمۡ فَإِنَّكَ أَنتَ ٱلۡعَزِيزُ ٱلۡحَكِيمُ",
-    "translation": "If You should punish them - indeed they are Your servants; but if You forgive them - indeed it is You who is the Exalted in Might, the Wise.\"",
+    "translation": "If You punish them, they are Your servants; but if You forgive them, You are the Mighty and Wise.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "6:79": {
     "arabic": "إِنِّي وَجَّهۡتُ وَجۡهِيَ لِلَّذِي فَطَرَ ٱلسَّمَٰوَٰتِ وَٱلۡأَرۡضَ حَنِيفٗاۖ وَمَآ أَنَا۠ مِنَ ٱلۡمُشۡرِكِينَ",
-    "translation": "Indeed, I have turned my face [i.e., self] toward He who created the heavens and the earth, inclining toward truth, and I am not of those who associate others with Allāh.\"",
+    "translation": "I have directed my attention towards Him Who created the heavens and the earth—a monotheist—and I am not of the idolaters.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "6:86": {
     "arabic": "وَإِسۡمَٰعِيلَ وَٱلۡيَسَعَ وَيُونُسَ وَلُوطٗاۚ وَكُلّٗا فَضَّلۡنَا عَلَى ٱلۡعَٰلَمِينَ",
-    "translation": "And Ishmael and Elisha and Jonah and Lot - and all [of them] We preferred over the worlds.",
+    "translation": "And Ishmael, and Elijah, and Jonah, and Lot—We favored each one of them over all other people.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "6:162": {
     "arabic": "قُلۡ إِنَّ صَلَاتِي وَنُسُكِي وَمَحۡيَايَ وَمَمَاتِي لِلَّهِ رَبِّ ٱلۡعَٰلَمِينَ",
-    "translation": "Say, \"Indeed, my prayer, my rites of sacrifice, my living and my dying are for Allāh, Lord of the worlds.",
+    "translation": "Say, “My prayer and my worship, and my life and my death, are devoted to Allah, the Lord of the Worlds.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "7:23": {
     "arabic": "قَالَا رَبَّنَا ظَلَمۡنَآ أَنفُسَنَا وَإِن لَّمۡ تَغۡفِرۡ لَنَا وَتَرۡحَمۡنَا لَنَكُونَنَّ مِنَ ٱلۡخَٰسِرِينَ",
-    "translation": "They said, \"Our Lord, we have wronged ourselves, and if You do not forgive us and have mercy upon us, we will surely be among the losers.\"",
+    "translation": "They said, “Our Lord, we have done wrong to ourselves. Unless You forgive us, and have mercy on us, we will be among the losers.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "7:43": {
     "arabic": "وَنَزَعۡنَا مَا فِي صُدُورِهِم مِّنۡ غِلّٖ تَجۡرِي مِن تَحۡتِهِمُ ٱلۡأَنۡهَٰرُۖ وَقَالُواْ ٱلۡحَمۡدُ لِلَّهِ ٱلَّذِي هَدَىٰنَا لِهَٰذَا وَمَا كُنَّا لِنَهۡتَدِيَ لَوۡلَآ أَنۡ هَدَىٰنَا ٱللَّهُۖ لَقَدۡ جَآءَتۡ رُسُلُ رَبِّنَا بِٱلۡحَقِّۖ وَنُودُوٓاْ أَن تِلۡكُمُ ٱلۡجَنَّةُ أُورِثۡتُمُوهَا بِمَا كُنتُمۡ تَعۡمَلُونَ",
-    "translation": "And We will have removed whatever is within their breasts of resentment, [while] flowing beneath them are rivers. And they will say, \"Praise to Allāh, who has guided us to this; and we would never have been guided if Allāh had not guided us. Certainly the messengers of our Lord had come with the truth.\" And they will be called, \"This is Paradise, which you have been made to inherit for what you used to do.\"",
+    "translation": "We will remove whatever rancor is in their hearts. Rivers will flow beneath them. And they will say, “Praise be to Allah, who has guided us to this. Had Allah not guided us, we would never be guided. The messengers of our Lord did come with the truth.” And it will be proclaimed to them, “This is the Garden you are made to inherit, on account of what you used to do.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "7:89": {
     "arabic": "قَدِ ٱفۡتَرَيۡنَا عَلَى ٱللَّهِ كَذِبًا إِنۡ عُدۡنَا فِي مِلَّتِكُم بَعۡدَ إِذۡ نَجَّىٰنَا ٱللَّهُ مِنۡهَاۚ وَمَا يَكُونُ لَنَآ أَن نَّعُودَ فِيهَآ إِلَّآ أَن يَشَآءَ ٱللَّهُ رَبُّنَاۚ وَسِعَ رَبُّنَا كُلَّ شَيۡءٍ عِلۡمًاۚ عَلَى ٱللَّهِ تَوَكَّلۡنَاۚ رَبَّنَا ٱفۡتَحۡ بَيۡنَنَا وَبَيۡنَ قَوۡمِنَا بِٱلۡحَقِّ وَأَنتَ خَيۡرُ ٱلۡفَٰتِحِينَ",
-    "translation": "We would have invented against Allāh a lie if we returned to your religion after Allāh had saved us from it. And it is not for us to return to it except that Allāh, our Lord, should will. Our Lord has encompassed all things in knowledge. Upon Allāh we have relied. Our Lord, decide between us and our people in truth, and You are the best of those who give decision.\"",
+    "translation": "“We would be fabricating falsehood against Allah, if we were to return to your religion, after Allah has saved us from it. It is not for us to return to it, unless Allah, our Lord, wills. Our Lord embraces all things in knowledge. In Allah we place our trust. Our Lord, decide between us and our people in truth, for You are the Best of Deciders.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "7:117-122": {
     "arabic": "۞ وَأَوۡحَيۡنَآ إِلَىٰ مُوسَىٰٓ أَنۡ أَلۡقِ عَصَاكَۖ فَإِذَا هِيَ تَلۡقَفُ مَا يَأۡفِكُونَ فَوَقَعَ ٱلۡحَقُّ وَبَطَلَ مَا كَانُواْ يَعۡمَلُونَ فَغُلِبُواْ هُنَالِكَ وَٱنقَلَبُواْ صَٰغِرِينَ وَأُلۡقِيَ ٱلسَّحَرَةُ سَٰجِدِينَ قَالُوٓاْ ءَامَنَّا بِرَبِّ ٱلۡعَٰلَمِينَ رَبِّ مُوسَىٰ وَهَٰرُونَ",
-    "translation": "And We inspired to Moses, \"Throw your staff,\" and at once it devoured what they were falsifying. So the truth was established, and abolished was what they were doing. And they [i.e., Pharaoh and his people] were overcome right there and became debased. And the magicians fell down in prostration [to Allāh]. They said, \"We have believed in the Lord of the worlds, The Lord of Moses and Aaron.\"",
+    "translation": "And We inspired Moses: “Throw your staff.” And at once, it swallowed what they were faking. So the truth came to pass, and what they were producing came to nothing. There they were defeated, and utterly reduced. And the magicians fell to their knees. They said, “We have believed in the Lord of the Worlds.” “The Lord of Moses and Aaron.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "7:126": {
     "arabic": "وَمَا تَنقِمُ مِنَّآ إِلَّآ أَنۡ ءَامَنَّا بِـَٔايَٰتِ رَبِّنَا لَمَّا جَآءَتۡنَاۚ رَبَّنَآ أَفۡرِغۡ عَلَيۡنَا صَبۡرٗا وَتَوَفَّنَا مُسۡلِمِينَ",
-    "translation": "And you do not resent us except because we believed in the signs of our Lord when they came to us. Our Lord, pour upon us patience and let us die as Muslims [in submission to You].\"",
+    "translation": "“You are taking vengeance on us only because we have believed in the signs of our Lord when they have come to us.” “Our Lord! Pour out patience upon us, and receive our souls in submission.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "7:151": {
     "arabic": "قَالَ رَبِّ ٱغۡفِرۡ لِي وَلِأَخِي وَأَدۡخِلۡنَا فِي رَحۡمَتِكَۖ وَأَنتَ أَرۡحَمُ ٱلرَّٰحِمِينَ",
-    "translation": "[Moses] said, \"My Lord, forgive me and my brother and admit us into Your mercy, for You are the most merciful of the merciful.\"",
+    "translation": "He said, “My Lord, forgive me and my brother, and admit us into Your mercy; for you are the Most Merciful of the merciful.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "7:155-156": {
     "arabic": "وَٱخۡتَارَ مُوسَىٰ قَوۡمَهُۥ سَبۡعِينَ رَجُلٗا لِّمِيقَٰتِنَاۖ فَلَمَّآ أَخَذَتۡهُمُ ٱلرَّجۡفَةُ قَالَ رَبِّ لَوۡ شِئۡتَ أَهۡلَكۡتَهُم مِّن قَبۡلُ وَإِيَّٰيَۖ أَتُهۡلِكُنَا بِمَا فَعَلَ ٱلسُّفَهَآءُ مِنَّآۖ إِنۡ هِيَ إِلَّا فِتۡنَتُكَ تُضِلُّ بِهَا مَن تَشَآءُ وَتَهۡدِي مَن تَشَآءُۖ أَنتَ وَلِيُّنَا فَٱغۡفِرۡ لَنَا وَٱرۡحَمۡنَاۖ وَأَنتَ خَيۡرُ ٱلۡغَٰفِرِينَ ۞ وَٱكۡتُبۡ لَنَا فِي هَٰذِهِ ٱلدُّنۡيَا حَسَنَةٗ وَفِي ٱلۡأٓخِرَةِ إِنَّا هُدۡنَآ إِلَيۡكَۚ قَالَ عَذَابِيٓ أُصِيبُ بِهِۦ مَنۡ أَشَآءُۖ وَرَحۡمَتِي وَسِعَتۡ كُلَّ شَيۡءٖۚ فَسَأَكۡتُبُهَا لِلَّذِينَ يَتَّقُونَ وَيُؤۡتُونَ ٱلزَّكَوٰةَ وَٱلَّذِينَ هُم بِـَٔايَٰتِنَا يُؤۡمِنُونَ",
-    "translation": "And Moses chose from his people seventy men for Our appointment. And when the earthquake seized them, he said, \"My Lord, if You had willed, You could have destroyed them before and me [as well]. Would You destroy us for what the foolish among us have done? This is not but Your trial by which You send astray whom You will and guide whom You will. You are our Protector, so forgive us and have mercy upon us; and You are the best of forgivers. And decree for us in this world [that which is] good and [also] in the Hereafter; indeed, we have turned back to You.\" [Allāh] said, \"My punishment - I afflict with it whom I will, but My mercy encompasses all things.\" So I will decree it [especially] for those who fear Me and give zakāh and those who believe in Our verses-",
+    "translation": "And Moses chose from his people seventy men for Our appointment. When the tremor shook them, he said, “My Lord, had You willed, You could have destroyed them before, and me too. Will you destroy us for what the fools among us have done? This is but Your test—with it You misguide whomever You will, and guide whomever You will. You are our Protector, so forgive us, and have mercy on us. You are the Best of Forgivers.” “And inscribe for us goodness in this world, and in the Hereafter. We have turned to You.” He said, “My punishment—I inflict it upon whomever I will, but My mercy encompasses all things. I will specify it for those who act righteously and practice regular charity, and those who believe in Our signs.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "10:57": {
     "arabic": "يَٰٓأَيُّهَا ٱلنَّاسُ قَدۡ جَآءَتۡكُم مَّوۡعِظَةٞ مِّن رَّبِّكُمۡ وَشِفَآءٞ لِّمَا فِي ٱلصُّدُورِ وَهُدٗى وَرَحۡمَةٞ لِّلۡمُؤۡمِنِينَ",
-    "translation": "O mankind, there has come to you instruction from your Lord and healing for what is in the breasts and guidance and mercy for the believers.",
+    "translation": "O people! There has come to you advice from your Lord, and healing for what is in the hearts, and guidance and mercy for the believers.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "10:81-82": {
     "arabic": "فَلَمَّآ أَلۡقَوۡاْ قَالَ مُوسَىٰ مَا جِئۡتُم بِهِ ٱلسِّحۡرُۖ إِنَّ ٱللَّهَ سَيُبۡطِلُهُۥٓ إِنَّ ٱللَّهَ لَا يُصۡلِحُ عَمَلَ ٱلۡمُفۡسِدِينَ وَيُحِقُّ ٱللَّهُ ٱلۡحَقَّ بِكَلِمَٰتِهِۦ وَلَوۡ كَرِهَ ٱلۡمُجۡرِمُونَ",
-    "translation": "And when they had thrown, Moses said, \"What you have brought is [only] magic. Indeed, Allāh will expose its worthlessness. Indeed, Allāh does not amend the work of corrupters. And Allāh will establish the truth by His words, even if the criminals dislike it.\"",
+    "translation": "And when they threw, Moses said, “What you produced is sorcery, and Allah will make it fail. Allah does not foster the efforts of the corrupt.” “And Allah upholds the truth with His words, even though the sinners detest it.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "10:85-86": {
     "arabic": "فَقَالُواْ عَلَى ٱللَّهِ تَوَكَّلۡنَا رَبَّنَا لَا تَجۡعَلۡنَا فِتۡنَةٗ لِّلۡقَوۡمِ ٱلظَّٰلِمِينَ وَنَجِّنَا بِرَحۡمَتِكَ مِنَ ٱلۡقَوۡمِ ٱلۡكَٰفِرِينَ",
-    "translation": "So they said, \"Upon Allāh do we rely. Our Lord, make us not [objects of] trial for the wrongdoing people And save us by Your mercy from the disbelieving people.\"",
+    "translation": "They said, “In Allah we have put our trust. Our Lord, do not make us victims of the oppressive people.” “And deliver us, by Your mercy, from the disbelieving people.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "11:41": {
     "arabic": "۞ وَقَالَ ٱرۡكَبُواْ فِيهَا بِسۡمِ ٱللَّهِ مَجۡر۪ىٰهَا وَمُرۡسَىٰهَآۚ إِنَّ رَبِّي لَغَفُورٞ رَّحِيمٞ",
-    "translation": "And [Noah] said, \"Embark therein; in the name of Allāh [are] its course and its anchorage. Indeed, my Lord is Forgiving and Merciful.\"",
+    "translation": "He said, “Embark in it. In the name of Allah shall be its sailing and its anchorage. My Lord is indeed Forgiving and Merciful.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "11:47": {
     "arabic": "قَالَ رَبِّ إِنِّيٓ أَعُوذُ بِكَ أَنۡ أَسۡـَٔلَكَ مَا لَيۡسَ لِي بِهِۦ عِلۡمٞۖ وَإِلَّا تَغۡفِرۡ لِي وَتَرۡحَمۡنِيٓ أَكُن مِّنَ ٱلۡخَٰسِرِينَ",
-    "translation": "[Noah] said, \"My Lord, I seek refuge in You from asking that of which I have no knowledge. And unless You forgive me and have mercy upon me, I will be among the losers.\"",
+    "translation": "He said, “O My Lord, I seek refuge with You, from asking You about what I have no knowledge of. Unless You forgive me, and have mercy on me, I will be one of the losers.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "11:52": {
     "arabic": "وَيَٰقَوۡمِ ٱسۡتَغۡفِرُواْ رَبَّكُمۡ ثُمَّ تُوبُوٓاْ إِلَيۡهِ يُرۡسِلِ ٱلسَّمَآءَ عَلَيۡكُم مِّدۡرَارٗا وَيَزِدۡكُمۡ قُوَّةً إِلَىٰ قُوَّتِكُمۡ وَلَا تَتَوَلَّوۡاْ مُجۡرِمِينَ",
-    "translation": "And O my people, ask forgiveness of your Lord and then repent to Him. He will send [rain from] the sky upon you in showers and increase you in strength [added] to your strength. And do not turn away, [being] criminals.\"",
+    "translation": "“O my people, ask forgiveness from your Lord, and repent to Him. He will release the sky pouring down upon you, and will add strength to your strength. And do not turn away and be wicked.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "11:56": {
     "arabic": "إِنِّي تَوَكَّلۡتُ عَلَى ٱللَّهِ رَبِّي وَرَبِّكُمۚ مَّا مِن دَآبَّةٍ إِلَّا هُوَ ءَاخِذُۢ بِنَاصِيَتِهَآۚ إِنَّ رَبِّي عَلَىٰ صِرَٰطٖ مُّسۡتَقِيمٖ",
-    "translation": "Indeed, I have relied upon Allāh, my Lord and your Lord. There is no creature but that He holds it by its forelock [i.e., controls it]. Indeed, my Lord is on a path [that is] straight.",
+    "translation": "I have placed my trust in Allah, my Lord and your Lord. There is not a creature but He holds it by the forelock. My Lord is on a straight path.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "11:61": {
     "arabic": "۞ وَإِلَىٰ ثَمُودَ أَخَاهُمۡ صَٰلِحٗاۚ قَالَ يَٰقَوۡمِ ٱعۡبُدُواْ ٱللَّهَ مَا لَكُم مِّنۡ إِلَٰهٍ غَيۡرُهُۥۖ هُوَ أَنشَأَكُم مِّنَ ٱلۡأَرۡضِ وَٱسۡتَعۡمَرَكُمۡ فِيهَا فَٱسۡتَغۡفِرُوهُ ثُمَّ تُوبُوٓاْ إِلَيۡهِۚ إِنَّ رَبِّي قَرِيبٞ مُّجِيبٞ",
-    "translation": "And to Thamūd [We sent] their brother Ṣāliḥ. He said, \"O my people, worship Allāh; you have no deity other than Him. He has produced you from the earth and settled you in it, so ask forgiveness of Him and then repent to Him. Indeed, my Lord is near and responsive.\"",
+    "translation": "And to Thamood, their brother Saleh. He said, “O my people, worship Allah, you have no god other than Him. He initiated you from the earth, and settled you in it. So seek His forgiveness, and repent to Him. My Lord is Near and Responsive.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "11:71-73": {
     "arabic": "وَٱمۡرَأَتُهُۥ قَآئِمَةٞ فَضَحِكَتۡ فَبَشَّرۡنَٰهَا بِإِسۡحَٰقَ وَمِن وَرَآءِ إِسۡحَٰقَ يَعۡقُوبَ قَالَتۡ يَٰوَيۡلَتَىٰٓ ءَأَلِدُ وَأَنَا۠ عَجُوزٞ وَهَٰذَا بَعۡلِي شَيۡخًاۖ إِنَّ هَٰذَا لَشَيۡءٌ عَجِيبٞ قَالُوٓاْ أَتَعۡجَبِينَ مِنۡ أَمۡرِ ٱللَّهِۖ رَحۡمَتُ ٱللَّهِ وَبَرَكَٰتُهُۥ عَلَيۡكُمۡ أَهۡلَ ٱلۡبَيۡتِۚ إِنَّهُۥ حَمِيدٞ مَّجِيدٞ",
-    "translation": "And his wife was standing, and she smiled. Then We gave her good tidings of Isaac and after Isaac, Jacob. She said, \"Woe to me! Shall I give birth while I am an old woman and this, my husband, is an old man? Indeed, this is an amazing thing!\" They said, \"Are you amazed at the decree of Allāh? May the mercy of Allāh and His blessings be upon you, people of the house. Indeed, He is Praiseworthy and Honorable.\"",
+    "translation": "His wife was standing by, so she laughed. And We gave her good news of Isaac; and after Isaac, Jacob. She said, “Alas for me. Shall I give birth, when I am an old woman, and this, my husband, is an old man? This is truly a strange thing.” They said, “Do you marvel at the decree of Allah? The mercy and blessings of Allah are upon you, O people of the house. He is Praiseworthy and Glorious.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "11:88": {
     "arabic": "قَالَ يَٰقَوۡمِ أَرَءَيۡتُمۡ إِن كُنتُ عَلَىٰ بَيِّنَةٖ مِّن رَّبِّي وَرَزَقَنِي مِنۡهُ رِزۡقًا حَسَنٗاۚ وَمَآ أُرِيدُ أَنۡ أُخَالِفَكُمۡ إِلَىٰ مَآ أَنۡهَىٰكُمۡ عَنۡهُۚ إِنۡ أُرِيدُ إِلَّا ٱلۡإِصۡلَٰحَ مَا ٱسۡتَطَعۡتُۚ وَمَا تَوۡفِيقِيٓ إِلَّا بِٱللَّهِۚ عَلَيۡهِ تَوَكَّلۡتُ وَإِلَيۡهِ أُنِيبُ",
-    "translation": "He said, \"O my people, have you considered: if I am upon clear evidence from my Lord and He has provided me with a good provision from Him...? And I do not intend to differ from you in that which I have forbidden you; I only intend reform as much as I am able. And my success is not but through Allāh. Upon Him I have relied, and to Him I return.",
+    "translation": "He said, “O my people, have you considered? What if I have clear evidence from my Lord, and He has given me good livelihood from Himself? I have no desire to do what I forbid you from doing. I desire nothing but reform, as far as I can. My success lies only with Allah. In Him I trust, and to Him I turn.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "12:18": {
     "arabic": "وَجَآءُو عَلَىٰ قَمِيصِهِۦ بِدَمٖ كَذِبٖۚ قَالَ بَلۡ سَوَّلَتۡ لَكُمۡ أَنفُسُكُمۡ أَمۡرٗاۖ فَصَبۡرٞ جَمِيلٞۖ وَٱللَّهُ ٱلۡمُسۡتَعَانُ عَلَىٰ مَا تَصِفُونَ",
-    "translation": "And they brought upon his shirt false blood. [Jacob] said, \"Rather, your souls have enticed you to something, so patience is most fitting. And Allāh is the one sought for help against that which you describe.\"",
+    "translation": "And they brought his shirt, with fake blood on it. He said, “Your souls enticed you to do something. But patience is beautiful, and Allah is my Help against what you describe.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "12:67": {
     "arabic": "وَقَالَ يَٰبَنِيَّ لَا تَدۡخُلُواْ مِنۢ بَابٖ وَٰحِدٖ وَٱدۡخُلُواْ مِنۡ أَبۡوَٰبٖ مُّتَفَرِّقَةٖۖ وَمَآ أُغۡنِي عَنكُم مِّنَ ٱللَّهِ مِن شَيۡءٍۖ إِنِ ٱلۡحُكۡمُ إِلَّا لِلَّهِۖ عَلَيۡهِ تَوَكَّلۡتُۖ وَعَلَيۡهِ فَلۡيَتَوَكَّلِ ٱلۡمُتَوَكِّلُونَ",
-    "translation": "And he said, \"O my sons, do not enter from one gate but enter from different gates; and I cannot avail you against [the decree of] Allāh at all. The decision is only for Allāh; upon Him I have relied, and upon Him let those who would rely [indeed] rely.\"",
+    "translation": "And he said, “O my sons, do not enter by one gate, but enter by different gates. I cannot avail you anything against Allah. The decision rests only with Allah. On Him I rely, and on Him let the reliant rely.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "12:83": {
     "arabic": "قَالَ بَلۡ سَوَّلَتۡ لَكُمۡ أَنفُسُكُمۡ أَمۡرٗاۖ فَصَبۡرٞ جَمِيلٌۖ عَسَى ٱللَّهُ أَن يَأۡتِيَنِي بِهِمۡ جَمِيعًاۚ إِنَّهُۥ هُوَ ٱلۡعَلِيمُ ٱلۡحَكِيمُ",
-    "translation": "[Jacob] said, \"Rather, your souls have enticed you to something, so patience is most fitting. Perhaps Allāh will bring them to me all together. Indeed, it is He who is the Knowing, the Wise.\"",
+    "translation": "He said, “Rather, your souls have contrived something for you. Patience is a virtue. Perhaps Allah will bring them all back to me. He is the Knowing, the Wise.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "12:86": {
     "arabic": "قَالَ إِنَّمَآ أَشۡكُواْ بَثِّي وَحُزۡنِيٓ إِلَى ٱللَّهِ وَأَعۡلَمُ مِنَ ٱللَّهِ مَا لَا تَعۡلَمُونَ",
-    "translation": "He said, \"I only complain of my suffering and my grief to Allāh, and I know from Allāh that which you do not know.",
+    "translation": "He said, “I only complain of my grief and sorrow to Allah, and I know from Allah what you do not know.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "12:101": {
     "arabic": "۞ رَبِّ قَدۡ ءَاتَيۡتَنِي مِنَ ٱلۡمُلۡكِ وَعَلَّمۡتَنِي مِن تَأۡوِيلِ ٱلۡأَحَادِيثِۚ فَاطِرَ ٱلسَّمَٰوَٰتِ وَٱلۡأَرۡضِ أَنتَ وَلِيِّۦ فِي ٱلدُّنۡيَا وَٱلۡأٓخِرَةِۖ تَوَفَّنِي مُسۡلِمٗا وَأَلۡحِقۡنِي بِٱلصَّٰلِحِينَ",
-    "translation": "My Lord, You have given me [something] of sovereignty and taught me of the interpretation of dreams. Creator of the heavens and earth, You are my protector in this world and the Hereafter. Cause me to die a Muslim and join me with the righteous.\"",
+    "translation": "“My Lord, You have given me some authority, and taught me some interpretation of events. Initiator of the heavens and the earth; You are my Protector in this life and in the Hereafter. Receive my soul in submission, and unite me with the righteous.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "14:35-38": {
     "arabic": "وَإِذۡ قَالَ إِبۡرَٰهِيمُ رَبِّ ٱجۡعَلۡ هَٰذَا ٱلۡبَلَدَ ءَامِنٗا وَٱجۡنُبۡنِي وَبَنِيَّ أَن نَّعۡبُدَ ٱلۡأَصۡنَامَ رَبِّ إِنَّهُنَّ أَضۡلَلۡنَ كَثِيرٗا مِّنَ ٱلنَّاسِۖ فَمَن تَبِعَنِي فَإِنَّهُۥ مِنِّيۖ وَمَنۡ عَصَانِي فَإِنَّكَ غَفُورٞ رَّحِيمٞ رَّبَّنَآ إِنِّيٓ أَسۡكَنتُ مِن ذُرِّيَّتِي بِوَادٍ غَيۡرِ ذِي زَرۡعٍ عِندَ بَيۡتِكَ ٱلۡمُحَرَّمِ رَبَّنَا لِيُقِيمُواْ ٱلصَّلَوٰةَ فَٱجۡعَلۡ أَفۡـِٔدَةٗ مِّنَ ٱلنَّاسِ تَهۡوِيٓ إِلَيۡهِمۡ وَٱرۡزُقۡهُم مِّنَ ٱلثَّمَرَٰتِ لَعَلَّهُمۡ يَشۡكُرُونَ رَبَّنَآ إِنَّكَ تَعۡلَمُ مَا نُخۡفِي وَمَا نُعۡلِنُۗ وَمَا يَخۡفَىٰ عَلَى ٱللَّهِ مِن شَيۡءٖ فِي ٱلۡأَرۡضِ وَلَا فِي ٱلسَّمَآءِ",
-    "translation": "And [mention, O Muḥammad], when Abraham said, \"My Lord, make this city [i.e., Makkah] secure and keep me and my sons away from worshipping idols. My Lord, indeed they have led astray many among the people. So whoever follows me - then he is of me; and whoever disobeys me - indeed, You are [yet] Forgiving and Merciful. Our Lord, I have settled some of my descendants in an uncultivated valley near Your sacred House, our Lord, that they may establish prayer. So make hearts among the people incline toward them and provide for them from the fruits that they might be grateful. Our Lord, indeed You know what we conceal and what we declare, and nothing is hidden from Allāh on the earth or in the heaven.",
+    "translation": "Recall that Abraham said, “O my Lord, make this land peaceful, and keep me and my sons from worshiping idols.” “My Lord, they have led many people astray. Whoever follows me belongs with me; and whoever disobeys me—You are Forgiving and Merciful. “Our Lord, I have settled some of my offspring in a valley of no vegetation, by Your Sacred House, our Lord, so that they may perform the prayers. So make the hearts of some people incline towards them, and provide them with fruits, that they may be thankful.” “Our Lord, You know what we conceal and what we reveal. And nothing is hidden from Allah, on earth or in the heaven.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "14:37-38": {
     "arabic": "رَّبَّنَآ إِنِّيٓ أَسۡكَنتُ مِن ذُرِّيَّتِي بِوَادٍ غَيۡرِ ذِي زَرۡعٍ عِندَ بَيۡتِكَ ٱلۡمُحَرَّمِ رَبَّنَا لِيُقِيمُواْ ٱلصَّلَوٰةَ فَٱجۡعَلۡ أَفۡـِٔدَةٗ مِّنَ ٱلنَّاسِ تَهۡوِيٓ إِلَيۡهِمۡ وَٱرۡزُقۡهُم مِّنَ ٱلثَّمَرَٰتِ لَعَلَّهُمۡ يَشۡكُرُونَ رَبَّنَآ إِنَّكَ تَعۡلَمُ مَا نُخۡفِي وَمَا نُعۡلِنُۗ وَمَا يَخۡفَىٰ عَلَى ٱللَّهِ مِن شَيۡءٖ فِي ٱلۡأَرۡضِ وَلَا فِي ٱلسَّمَآءِ",
-    "translation": "Our Lord, I have settled some of my descendants in an uncultivated valley near Your sacred House, our Lord, that they may establish prayer. So make hearts among the people incline toward them and provide for them from the fruits that they might be grateful. Our Lord, indeed You know what we conceal and what we declare, and nothing is hidden from Allāh on the earth or in the heaven.",
+    "translation": "“Our Lord, I have settled some of my offspring in a valley of no vegetation, by Your Sacred House, our Lord, so that they may perform the prayers. So make the hearts of some people incline towards them, and provide them with fruits, that they may be thankful.” “Our Lord, You know what we conceal and what we reveal. And nothing is hidden from Allah, on earth or in the heaven.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "14:40-41": {
     "arabic": "رَبِّ ٱجۡعَلۡنِي مُقِيمَ ٱلصَّلَوٰةِ وَمِن ذُرِّيَّتِيۚ رَبَّنَا وَتَقَبَّلۡ دُعَآءِ رَبَّنَا ٱغۡفِرۡ لِي وَلِوَٰلِدَيَّ وَلِلۡمُؤۡمِنِينَ يَوۡمَ يَقُومُ ٱلۡحِسَابُ",
-    "translation": "My Lord, make me an establisher of prayer, and [many] from my descendants. Our Lord, and accept my supplication. Our Lord, forgive me and my parents and the believers the Day the account is established.\"",
+    "translation": "“My Lord, make me one who performs the prayer, and from my offspring. Our Lord, accept my supplication.” “Our Lord, forgive me, and my parents, and the believers, on the Day the Reckoning takes place.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "17:24": {
     "arabic": "وَٱخۡفِضۡ لَهُمَا جَنَاحَ ٱلذُّلِّ مِنَ ٱلرَّحۡمَةِ وَقُل رَّبِّ ٱرۡحَمۡهُمَا كَمَا رَبَّيَانِي صَغِيرٗا",
-    "translation": "And lower to them the wing of humility out of mercy and say, \"My Lord, have mercy upon them as they brought me up [when I was] small.\"",
+    "translation": "And lower to them the wing of humility, out of mercy, and say, “My Lord, have mercy on them, as they raised me when I was a child.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "17:80": {
     "arabic": "وَقُل رَّبِّ أَدۡخِلۡنِي مُدۡخَلَ صِدۡقٖ وَأَخۡرِجۡنِي مُخۡرَجَ صِدۡقٖ وَٱجۡعَل لِّي مِن لَّدُنكَ سُلۡطَٰنٗا نَّصِيرٗا",
-    "translation": "And say, \"My Lord, cause me to enter a sound entrance and to exit a sound exit and grant me from Yourself a supporting authority.\"",
+    "translation": "And say, “My Lord, lead me in through an entry of truth, and lead me out through an exit of truth, and grant me from You a supporting power.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "17:82": {
     "arabic": "وَنُنَزِّلُ مِنَ ٱلۡقُرۡءَانِ مَا هُوَ شِفَآءٞ وَرَحۡمَةٞ لِّلۡمُؤۡمِنِينَ وَلَا يَزِيدُ ٱلظَّٰلِمِينَ إِلَّا خَسَارٗا",
-    "translation": "And We send down of the Qur’ān that which is healing and mercy for the believers, but it does not increase the wrongdoers except in loss.",
+    "translation": "We send down in the Quran healing and mercy for the believers, but it increases the wrongdoers only in loss.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "18:10": {
     "arabic": "إِذۡ أَوَى ٱلۡفِتۡيَةُ إِلَى ٱلۡكَهۡفِ فَقَالُواْ رَبَّنَآ ءَاتِنَا مِن لَّدُنكَ رَحۡمَةٗ وَهَيِّئۡ لَنَا مِنۡ أَمۡرِنَا رَشَدٗا",
-    "translation": "[Mention] when the youths retreated to the cave and said, \"Our Lord, grant us from Yourself mercy and prepare for us from our affair right guidance.\"",
+    "translation": "When the youths took shelter in the cave, they said, “Our Lord, give us mercy from Yourself, and bless our affair with guidance.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "18:24": {
     "arabic": "إِلَّآ أَن يَشَآءَ ٱللَّهُۚ وَٱذۡكُر رَّبَّكَ إِذَا نَسِيتَ وَقُلۡ عَسَىٰٓ أَن يَهۡدِيَنِ رَبِّي لِأَقۡرَبَ مِنۡ هَٰذَا رَشَدٗا",
-    "translation": "Except [when adding], \"If Allāh wills.\" And remember your Lord when you forget [it] and say, \"Perhaps my Lord will guide me to what is nearer than this to right conduct.\"",
+    "translation": "Without saying, “If Allah wills.” And remember your Lord if you forget, and say, “Perhaps my Lord will guide me to nearer than this in integrity.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "19:4-5": {
     "arabic": "قَالَ رَبِّ إِنِّي وَهَنَ ٱلۡعَظۡمُ مِنِّي وَٱشۡتَعَلَ ٱلرَّأۡسُ شَيۡبٗا وَلَمۡ أَكُنۢ بِدُعَآئِكَ رَبِّ شَقِيّٗا وَإِنِّي خِفۡتُ ٱلۡمَوَٰلِيَ مِن وَرَآءِي وَكَانَتِ ٱمۡرَأَتِي عَاقِرٗا فَهَبۡ لِي مِن لَّدُنكَ وَلِيّٗا",
-    "translation": "He said, \"My Lord, indeed my bones have weakened, and my head has filled with white, and never have I been in my supplication to You, my Lord, unhappy [i.e., disappointed]. And indeed, I fear the successors after me, and my wife has been barren, so give me from Yourself an heir",
+    "translation": "He said, “My Lord, my bones have become feeble, and my hair is aflame with gray, and never, Lord, have I been disappointed in my prayer to you. “And I fear for my dependents after me, and my wife is barren. So grant me, from Yourself, an heir.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "19:7-15": {
     "arabic": "يَٰزَكَرِيَّآ إِنَّا نُبَشِّرُكَ بِغُلَٰمٍ ٱسۡمُهُۥ يَحۡيَىٰ لَمۡ نَجۡعَل لَّهُۥ مِن قَبۡلُ سَمِيّٗا قَالَ رَبِّ أَنَّىٰ يَكُونُ لِي غُلَٰمٞ وَكَانَتِ ٱمۡرَأَتِي عَاقِرٗا وَقَدۡ بَلَغۡتُ مِنَ ٱلۡكِبَرِ عِتِيّٗا قَالَ كَذَٰلِكَ قَالَ رَبُّكَ هُوَ عَلَيَّ هَيِّنٞ وَقَدۡ خَلَقۡتُكَ مِن قَبۡلُ وَلَمۡ تَكُ شَيۡـٔٗا قَالَ رَبِّ ٱجۡعَل لِّيٓ ءَايَةٗۖ قَالَ ءَايَتُكَ أَلَّا تُكَلِّمَ ٱلنَّاسَ ثَلَٰثَ لَيَالٖ سَوِيّٗا فَخَرَجَ عَلَىٰ قَوۡمِهِۦ مِنَ ٱلۡمِحۡرَابِ فَأَوۡحَىٰٓ إِلَيۡهِمۡ أَن سَبِّحُواْ بُكۡرَةٗ وَعَشِيّٗا يَٰيَحۡيَىٰ خُذِ ٱلۡكِتَٰبَ بِقُوَّةٖۖ وَءَاتَيۡنَٰهُ ٱلۡحُكۡمَ صَبِيّٗا وَحَنَانٗا مِّن لَّدُنَّا وَزَكَوٰةٗۖ وَكَانَ تَقِيّٗا وَبَرَّۢا بِوَٰلِدَيۡهِ وَلَمۡ يَكُن جَبَّارًا عَصِيّٗا وَسَلَٰمٌ عَلَيۡهِ يَوۡمَ وُلِدَ وَيَوۡمَ يَمُوتُ وَيَوۡمَ يُبۡعَثُ حَيّٗا",
-    "translation": "[He was told], \"O Zechariah, indeed We give you good tidings of a boy whose name will be John. We have not assigned to any before [this] name.\" He said, \"My Lord, how will I have a boy when my wife has been barren and I have reached extreme old age?\" [An angel] said, \"Thus [it will be]; your Lord says, 'It is easy for Me, for I created you before, while you were nothing.'\" [Zechariah] said, \"My Lord, make for me a sign.\" He said, \"Your sign is that you will not speak to the people for three nights, [being] sound.\" So he came out to his people from the prayer chamber and signaled to them to exalt [Allāh] in the morning and afternoon. [Allāh said], \"O John, take the Scripture [i.e., adhere to it] with determination.\" And We gave him judgement [while yet] a boy And affection from Us and purity, and he was fearing of Allāh And dutiful to his parents, and he was not a disobedient tyrant. And peace be upon him the day he was born and the day he dies and the day he is raised alive.",
+    "translation": "“O Zechariah, We give you good news of a son, whose name is John, a name We have never given before.” He said, “My Lord, how can I have a son, when my wife is barren, and I have become decrepit with old age?” He said, “It will be so, your Lord says, ‘it is easy for me, and I created you before, when you were nothing.’” He said, “My Lord, give me a sign.” He said, “Your sign is that you will not speak to the people for three nights straight.” And he came out to his people, from the sanctuary, and signaled to them to praise morning and evening. “O John, hold on to the Scripture firmly,” and We gave him wisdom in his youth. And tenderness from Us, and innocence. He was devout. And kind to his parents; and he was not a disobedient tyrant. And peace be upon him the day he was born, and the day he dies, and the Day he is raised alive.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "19:56-57": {
     "arabic": "وَٱذۡكُرۡ فِي ٱلۡكِتَٰبِ إِدۡرِيسَۚ إِنَّهُۥ كَانَ صِدِّيقٗا نَّبِيّٗا وَرَفَعۡنَٰهُ مَكَانًا عَلِيًّا",
-    "translation": "And mention in the Book, Idrees. Indeed, he was a man of truth and a prophet. And We raised him to a high station.",
+    "translation": "And mention in the Scripture Enoch. He was a man of truth, a prophet. And We raised him to a high position.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "20:25-28": {
     "arabic": "قَالَ رَبِّ ٱشۡرَحۡ لِي صَدۡرِي وَيَسِّرۡ لِيٓ أَمۡرِي وَٱحۡلُلۡ عُقۡدَةٗ مِّن لِّسَانِي يَفۡقَهُواْ قَوۡلِي",
-    "translation": "[Moses] said, \"My Lord, expand [i.e., relax] for me my breast [with assurance] And ease for me my task And untie the knot from my tongue That they may understand my speech.",
+    "translation": "He said, “My Lord, put my heart at peace for me. And ease my task for me. And untie the knot from my tongue. So they can understand my speech.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "20:29-32": {
     "arabic": "وَٱجۡعَل لِّي وَزِيرٗا مِّنۡ أَهۡلِي هَٰرُونَ أَخِي ٱشۡدُدۡ بِهِۦٓ أَزۡرِي وَأَشۡرِكۡهُ فِيٓ أَمۡرِي",
-    "translation": "And appoint for me a minister [i.e., assistant] from my family - Aaron, my brother. Increase through him my strength And let him share my task",
+    "translation": "And appoint an assistant for me, from my family. Aaron, my brother. Strengthen me with him. And have him share in my mission.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "20:69": {
     "arabic": "وَأَلۡقِ مَا فِي يَمِينِكَ تَلۡقَفۡ مَا صَنَعُوٓاْۖ إِنَّمَا صَنَعُواْ كَيۡدُ سَٰحِرٖۖ وَلَا يُفۡلِحُ ٱلسَّاحِرُ حَيۡثُ أَتَىٰ",
-    "translation": "And throw what is in your right hand; it will swallow up what they have crafted. What they have crafted is but the trick of a magician, and the magician will not succeed wherever he is.\"",
+    "translation": "Now throw down what is in your right hand—it will swallow what they have crafted. What they have crafted is only a magician’s trickery. But the magician will not succeed, no matter what he does.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "20:114": {
     "arabic": "فَتَعَٰلَى ٱللَّهُ ٱلۡمَلِكُ ٱلۡحَقُّۗ وَلَا تَعۡجَلۡ بِٱلۡقُرۡءَانِ مِن قَبۡلِ أَن يُقۡضَىٰٓ إِلَيۡكَ وَحۡيُهُۥۖ وَقُل رَّبِّ زِدۡنِي عِلۡمٗا",
-    "translation": "So high [above all] is Allāh, the Sovereign, the Truth. And, [O Muḥammad], do not hasten with [recitation of] the Qur’ān before its revelation is completed to you, and say, \"My Lord, increase me in knowledge.\"",
+    "translation": "Exalted is Allah, the True King. Do not be hasty with the Quran before its inspiration to you is concluded, and say, “My Lord, increase me in knowledge.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "21:83": {
     "arabic": "۞ وَأَيُّوبَ إِذۡ نَادَىٰ رَبَّهُۥٓ أَنِّي مَسَّنِيَ ٱلضُّرُّ وَأَنتَ أَرۡحَمُ ٱلرَّٰحِمِينَ",
-    "translation": "And [mention] Job, when he called to his Lord, \"Indeed, adversity has touched me, and You are the most merciful of the merciful.\"",
+    "translation": "And Job, when he cried out to his Lord: “Great harm has afflicted me, and you are the Most Merciful of the merciful.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "21:83-84": {
     "arabic": "۞ وَأَيُّوبَ إِذۡ نَادَىٰ رَبَّهُۥٓ أَنِّي مَسَّنِيَ ٱلضُّرُّ وَأَنتَ أَرۡحَمُ ٱلرَّٰحِمِينَ فَٱسۡتَجَبۡنَا لَهُۥ فَكَشَفۡنَا مَا بِهِۦ مِن ضُرّٖۖ وَءَاتَيۡنَٰهُ أَهۡلَهُۥ وَمِثۡلَهُم مَّعَهُمۡ رَحۡمَةٗ مِّنۡ عِندِنَا وَذِكۡرَىٰ لِلۡعَٰبِدِينَ",
-    "translation": "And [mention] Job, when he called to his Lord, \"Indeed, adversity has touched me, and You are the most merciful of the merciful.\" So We responded to him and removed what afflicted him of adversity. And We gave him [back] his family and the like thereof with them as mercy from Us and a reminder for the worshippers [of Allāh].",
+    "translation": "And Job, when he cried out to his Lord: “Great harm has afflicted me, and you are the Most Merciful of the merciful.” So We answered him, lifted his suffering, and restored his family to him, and their like with them—a mercy from Us, and a reminder for the worshipers.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "21:85": {
     "arabic": "وَإِسۡمَٰعِيلَ وَإِدۡرِيسَ وَذَا ٱلۡكِفۡلِۖ كُلّٞ مِّنَ ٱلصَّٰبِرِينَ",
-    "translation": "And [mention] Ishmael and Idrees and Dhul-Kifl; all were of the patient.",
+    "translation": "And Ishmael, and Enoch, and Ezekiel; each was one of the steadfast.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "21:85-86": {
     "arabic": "وَإِسۡمَٰعِيلَ وَإِدۡرِيسَ وَذَا ٱلۡكِفۡلِۖ كُلّٞ مِّنَ ٱلصَّٰبِرِينَ وَأَدۡخَلۡنَٰهُمۡ فِي رَحۡمَتِنَآۖ إِنَّهُم مِّنَ ٱلصَّٰلِحِينَ",
-    "translation": "And [mention] Ishmael and Idrees and Dhul-Kifl; all were of the patient. And We admitted them into Our mercy. Indeed, they were of the righteous.",
+    "translation": "And Ishmael, and Enoch, and Ezekiel; each was one of the steadfast. And We admitted them into Our mercy. They were among the righteous.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "21:87": {
     "arabic": "وَذَا ٱلنُّونِ إِذ ذَّهَبَ مُغَٰضِبٗا فَظَنَّ أَن لَّن نَّقۡدِرَ عَلَيۡهِ فَنَادَىٰ فِي ٱلظُّلُمَٰتِ أَن لَّآ إِلَٰهَ إِلَّآ أَنتَ سُبۡحَٰنَكَ إِنِّي كُنتُ مِنَ ٱلظَّٰلِمِينَ",
-    "translation": "And [mention] the man of the fish [i.e., Jonah], when he went off in anger and thought that We would not decree [anything] upon him. And he called out within the darknesses, \"There is no deity except You; exalted are You. Indeed, I have been of the wrongdoers.\"",
+    "translation": "And Jonah, when he stormed out in fury, thinking We had no power over him. But then He cried out in the darkness, “There is no god but You! Glory to You! I was one of the wrongdoers!”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "21:89": {
     "arabic": "وَزَكَرِيَّآ إِذۡ نَادَىٰ رَبَّهُۥ رَبِّ لَا تَذَرۡنِي فَرۡدٗا وَأَنتَ خَيۡرُ ٱلۡوَٰرِثِينَ",
-    "translation": "And [mention] Zechariah, when he called to his Lord, \"My Lord, do not leave me alone [with no heir], while You are the best of inheritors.\"",
+    "translation": "And Zechariah, when he called out to his Lord, “My Lord, do not leave me alone, even though you are the Best of heirs.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "21:112": {
     "arabic": "قَٰلَ رَبِّ ٱحۡكُم بِٱلۡحَقِّۗ وَرَبُّنَا ٱلرَّحۡمَٰنُ ٱلۡمُسۡتَعَانُ عَلَىٰ مَا تَصِفُونَ",
-    "translation": "[The Prophet (ﷺ)] has said, \"My Lord, judge [between us] in truth. And our Lord is the Most Merciful, the one whose help is sought against that which you describe.\"",
+    "translation": "He said, “My Lord, judge with justice.” And, “Our Lord is the Gracious, Whose help is sought against what you allege.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "23:28-29": {
     "arabic": "فَإِذَا ٱسۡتَوَيۡتَ أَنتَ وَمَن مَّعَكَ عَلَى ٱلۡفُلۡكِ فَقُلِ ٱلۡحَمۡدُ لِلَّهِ ٱلَّذِي نَجَّىٰنَا مِنَ ٱلۡقَوۡمِ ٱلظَّٰلِمِينَ وَقُل رَّبِّ أَنزِلۡنِي مُنزَلٗا مُّبَارَكٗا وَأَنتَ خَيۡرُ ٱلۡمُنزِلِينَ",
-    "translation": "And when you have boarded the ship, you and those with you, then say, 'Praise to Allāh who has saved us from the wrongdoing people.' And say, 'My Lord, let me land at a blessed landing place, and You are the best to accommodate [us].'\"",
+    "translation": "Then, when you and those with you are settled in the Ark, say, “Praise be to Allah, who has saved us from the wrongdoing people.” And say, “My Lord, land me with a blessed landing, as you are the best of transporters.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "23:93-94": {
     "arabic": "قُل رَّبِّ إِمَّا تُرِيَنِّي مَا يُوعَدُونَ رَبِّ فَلَا تَجۡعَلۡنِي فِي ٱلۡقَوۡمِ ٱلظَّٰلِمِينَ",
-    "translation": "Say, [O Muḥammad], \"My Lord, if You should show me that which they are promised, My Lord, then do not place me among the wrongdoing people.\"",
+    "translation": "Say, “My Lord, if You would show me what they are promised. My Lord, do not place me among the wicked people.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "23:97-98": {
     "arabic": "وَقُل رَّبِّ أَعُوذُ بِكَ مِنۡ هَمَزَٰتِ ٱلشَّيَٰطِينِ وَأَعُوذُ بِكَ رَبِّ أَن يَحۡضُرُونِ",
-    "translation": "And say, \"My Lord, I seek refuge in You from the incitements of the devils, And I seek refuge in You, my Lord, lest they be present with me.\"",
+    "translation": "And say, “My Lord, I seek refuge with You from the urgings of the devils. And I seek refuge with You, my Lord, lest they become present.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "23:118": {
     "arabic": "وَقُل رَّبِّ ٱغۡفِرۡ وَٱرۡحَمۡ وَأَنتَ خَيۡرُ ٱلرَّٰحِمِينَ",
-    "translation": "And, [O Muḥammad], say, \"My Lord, forgive and have mercy, and You are the best of the merciful.\"",
+    "translation": "And say, “My Lord, forgive and have mercy, for You are the Best of the merciful.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "25:65-66": {
     "arabic": "وَٱلَّذِينَ يَقُولُونَ رَبَّنَا ٱصۡرِفۡ عَنَّا عَذَابَ جَهَنَّمَۖ إِنَّ عَذَابَهَا كَانَ غَرَامًا إِنَّهَا سَآءَتۡ مُسۡتَقَرّٗا وَمُقَامٗا",
-    "translation": "And those who say, \"Our Lord, avert from us the punishment of Hell. Indeed, its punishment is ever adhering; Indeed, it is evil as a settlement and residence.\"",
+    "translation": "And those who say, ‘‘Our Lord, avert from us the suffering of Hell, for its suffering is continuous. It is indeed a miserable residence and destination.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "25:74": {
     "arabic": "وَٱلَّذِينَ يَقُولُونَ رَبَّنَا هَبۡ لَنَا مِنۡ أَزۡوَٰجِنَا وَذُرِّيَّٰتِنَا قُرَّةَ أَعۡيُنٖ وَٱجۡعَلۡنَا لِلۡمُتَّقِينَ إِمَامًا",
-    "translation": "And those who say, \"Our Lord, grant us from among our wives and offspring comfort to our eyes and make us a leader [i.e., example] for the righteous.\"",
+    "translation": "And those who say, “Our Lord, grant us delight in our spouses and our children, and make us a good example for the righteous.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "26:78-85": {
     "arabic": "ٱلَّذِي خَلَقَنِي فَهُوَ يَهۡدِينِ وَٱلَّذِي هُوَ يُطۡعِمُنِي وَيَسۡقِينِ وَإِذَا مَرِضۡتُ فَهُوَ يَشۡفِينِ وَٱلَّذِي يُمِيتُنِي ثُمَّ يُحۡيِينِ وَٱلَّذِيٓ أَطۡمَعُ أَن يَغۡفِرَ لِي خَطِيٓـَٔتِي يَوۡمَ ٱلدِّينِ رَبِّ هَبۡ لِي حُكۡمٗا وَأَلۡحِقۡنِي بِٱلصَّٰلِحِينَ وَٱجۡعَل لِّي لِسَانَ صِدۡقٖ فِي ٱلۡأٓخِرِينَ وَٱجۡعَلۡنِي مِن وَرَثَةِ جَنَّةِ ٱلنَّعِيمِ",
-    "translation": "Who created me, and He [it is who] guides me. And it is He who feeds me and gives me drink. And when I am ill, it is He who cures me And who will cause me to die and then bring me to life And who I aspire that He will forgive me my sin on the Day of Recompense.\" [And he said], \"My Lord, grant me authority and join me with the righteous. And grant me a mention [i.e., reputation] of honor among later generations. And place me among the inheritors of the Garden of Pleasure.",
+    "translation": "He who created me, and guides me. He who feeds me, and waters me. And when I get sick, He heals me. He who makes me die, and then revives me. He who, I hope, will forgive my sins on the Day of the Reckoning.” “My Lord! Grant me wisdom, and include me with the righteous. And give me a reputation of truth among the others. And make me of the inheritors of the Garden of Bliss.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "26:80": {
     "arabic": "وَإِذَا مَرِضۡتُ فَهُوَ يَشۡفِينِ",
-    "translation": "And when I am ill, it is He who cures me",
+    "translation": "And when I get sick, He heals me.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "26:87-89": {
     "arabic": "وَلَا تُخۡزِنِي يَوۡمَ يُبۡعَثُونَ يَوۡمَ لَا يَنفَعُ مَالٞ وَلَا بَنُونَ إِلَّا مَنۡ أَتَى ٱللَّهَ بِقَلۡبٖ سَلِيمٖ",
-    "translation": "And do not disgrace me on the Day they are [all] resurrected - The Day when there will not benefit [anyone] wealth or children But only one who comes to Allāh with a sound heart.\"",
+    "translation": "And do not disgrace me on the Day they are resurrected. The Day when neither wealth nor children will help. Except for him who comes to Allah with a sound heart.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "26:142-159": {
     "arabic": "إِذۡ قَالَ لَهُمۡ أَخُوهُمۡ صَٰلِحٌ أَلَا تَتَّقُونَ إِنِّي لَكُمۡ رَسُولٌ أَمِينٞ فَٱتَّقُواْ ٱللَّهَ وَأَطِيعُونِ وَمَآ أَسۡـَٔلُكُمۡ عَلَيۡهِ مِنۡ أَجۡرٍۖ إِنۡ أَجۡرِيَ إِلَّا عَلَىٰ رَبِّ ٱلۡعَٰلَمِينَ أَتُتۡرَكُونَ فِي مَا هَٰهُنَآ ءَامِنِينَ فِي جَنَّٰتٖ وَعُيُونٖ وَزُرُوعٖ وَنَخۡلٖ طَلۡعُهَا هَضِيمٞ وَتَنۡحِتُونَ مِنَ ٱلۡجِبَالِ بُيُوتٗا فَٰرِهِينَ فَٱتَّقُواْ ٱللَّهَ وَأَطِيعُونِ وَلَا تُطِيعُوٓاْ أَمۡرَ ٱلۡمُسۡرِفِينَ ٱلَّذِينَ يُفۡسِدُونَ فِي ٱلۡأَرۡضِ وَلَا يُصۡلِحُونَ قَالُوٓاْ إِنَّمَآ أَنتَ مِنَ ٱلۡمُسَحَّرِينَ مَآ أَنتَ إِلَّا بَشَرٞ مِّثۡلُنَا فَأۡتِ بِـَٔايَةٍ إِن كُنتَ مِنَ ٱلصَّٰدِقِينَ قَالَ هَٰذِهِۦ نَاقَةٞ لَّهَا شِرۡبٞ وَلَكُمۡ شِرۡبُ يَوۡمٖ مَّعۡلُومٖ وَلَا تَمَسُّوهَا بِسُوٓءٖ فَيَأۡخُذَكُمۡ عَذَابُ يَوۡمٍ عَظِيمٖ فَعَقَرُوهَا فَأَصۡبَحُواْ نَٰدِمِينَ فَأَخَذَهُمُ ٱلۡعَذَابُۚ إِنَّ فِي ذَٰلِكَ لَأٓيَةٗۖ وَمَا كَانَ أَكۡثَرُهُم مُّؤۡمِنِينَ وَإِنَّ رَبَّكَ لَهُوَ ٱلۡعَزِيزُ ٱلرَّحِيمُ",
-    "translation": "When their brother Ṣāliḥ said to them, \"Will you not fear Allāh? Indeed, I am to you a trustworthy messenger. So fear Allāh and obey me. And I do not ask you for it any payment. My payment is only from the Lord of the worlds. Will you be left in what is here, secure [from death], Within gardens and springs And fields of crops and palm trees with softened fruit? And you carve out of the mountains, homes, with skill. So fear Allāh and obey me. And do not obey the order of the transgressors, Who cause corruption in the land and do not amend.\" They said, \"You are only of those affected by magic. You are but a man like ourselves, so bring a sign, if you should be of the truthful.\" He said, \"This is a she-camel. For her is a [time of] drink, and for you is a [time of] drink, [each] on a known day. And do not touch her with harm, lest you be seized by the punishment of a terrible day.\" But they hamstrung her and so became regretful. And the punishment seized them. Indeed in that is a sign, but most of them were not to be believers. And indeed, your Lord - He is the Exalted in Might, the Merciful.",
+    "translation": "When their brother Saleh said to them, “Do you not fear? I am to you a faithful messenger. So fear Allah, and obey me. I ask of you no payment for it. My payment is only from the Lord of the Worlds. Will you be left secure in what is here? In gardens and springs? And fields, and palm-trees whose fruits are delicious? And you skillfully carve houses in the mountains? So fear Allah, and obey me. And do not obey the command of the extravagant. Who spread turmoil on earth, and do not reform.” They said, “You are surely one of the bewitched. You are nothing but a man like us. So bring us a sign, if you are truthful. He said, “This is a she-camel; she has her turn of drinking, and you have your turn of drinking—on a specified day. And do not touch her with harm, lest the punishment of a great day seizes you.” But they slaughtered her, and became full of remorse. So the punishment overtook them. Surely in this is a sign, but most of them are not believers. Your Lord is the Almighty, the Merciful.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "26:169": {
     "arabic": "رَبِّ نَجِّنِي وَأَهۡلِي مِمَّا يَعۡمَلُونَ",
-    "translation": "My Lord, save me and my family from [the consequence of] what they do.\"",
+    "translation": "“My Lord, save me and my family from what they do.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "27:15": {
     "arabic": "وَلَقَدۡ ءَاتَيۡنَا دَاوُۥدَ وَسُلَيۡمَٰنَ عِلۡمٗاۖ وَقَالَا ٱلۡحَمۡدُ لِلَّهِ ٱلَّذِي فَضَّلَنَا عَلَىٰ كَثِيرٖ مِّنۡ عِبَادِهِ ٱلۡمُؤۡمِنِينَ",
-    "translation": "And We had certainly given to David and Solomon knowledge, and they said, \"Praise [is due] to Allāh, who has favored us over many of His believing servants.\"",
+    "translation": "And We gave David and Solomon knowledge. They said, “Praise Allah, who has favored us over many of His believing servants.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "27:19": {
     "arabic": "فَتَبَسَّمَ ضَاحِكٗا مِّن قَوۡلِهَا وَقَالَ رَبِّ أَوۡزِعۡنِيٓ أَنۡ أَشۡكُرَ نِعۡمَتَكَ ٱلَّتِيٓ أَنۡعَمۡتَ عَلَيَّ وَعَلَىٰ وَٰلِدَيَّ وَأَنۡ أَعۡمَلَ صَٰلِحٗا تَرۡضَىٰهُ وَأَدۡخِلۡنِي بِرَحۡمَتِكَ فِي عِبَادِكَ ٱلصَّٰلِحِينَ",
-    "translation": "So [Solomon] smiled, amused at her speech, and said, \"My Lord, enable me to be grateful for Your favor which You have bestowed upon me and upon my parents and to do righteousness of which You approve. And admit me by Your mercy into [the ranks of] Your righteous servants.\"",
+    "translation": "He smiled and laughed at her words, and said, “My Lord, direct me to be thankful for the blessings you have bestowed upon me and upon my parents, and to do good works that please You. And admit me, by Your grace, into the company of Your virtuous servants.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "27:40": {
     "arabic": "قَالَ ٱلَّذِي عِندَهُۥ عِلۡمٞ مِّنَ ٱلۡكِتَٰبِ أَنَا۠ ءَاتِيكَ بِهِۦ قَبۡلَ أَن يَرۡتَدَّ إِلَيۡكَ طَرۡفُكَۚ فَلَمَّا رَءَاهُ مُسۡتَقِرًّا عِندَهُۥ قَالَ هَٰذَا مِن فَضۡلِ رَبِّي لِيَبۡلُوَنِيٓ ءَأَشۡكُرُ أَمۡ أَكۡفُرُۖ وَمَن شَكَرَ فَإِنَّمَا يَشۡكُرُ لِنَفۡسِهِۦۖ وَمَن كَفَرَ فَإِنَّ رَبِّي غَنِيّٞ كَرِيمٞ",
-    "translation": "Said one who had knowledge from the Scripture, \"I will bring it to you before your glance returns to you.\" And when [Solomon] saw it placed before him, he said, \"This is from the favor of my Lord to test me whether I will be grateful or ungrateful. And whoever is grateful - his gratitude is only for [the benefit of] himself. And whoever is ungrateful - then indeed, my Lord is Free of need and Generous.\"",
+    "translation": "He who had knowledge from the Book said, “I will bring it to you before your glance returns to you.” And when he saw it settled before him, he said, “This is from the grace of my Lord, to test me, whether I am grateful or ungrateful. He who is grateful, his gratitude is to his own credit; but he who is ungrateful—my Lord is Independent and Generous.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "28:16": {
     "arabic": "قَالَ رَبِّ إِنِّي ظَلَمۡتُ نَفۡسِي فَٱغۡفِرۡ لِي فَغَفَرَ لَهُۥٓۚ إِنَّهُۥ هُوَ ٱلۡغَفُورُ ٱلرَّحِيمُ",
-    "translation": "He said, \"My Lord, indeed I have wronged myself, so forgive me,\" and He forgave him. Indeed, He is the Forgiving, the Merciful.",
+    "translation": "He said, “My Lord, I have wronged myself, so forgive me.” So He forgave him. He is the Forgiver, the Merciful.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "28:17": {
     "arabic": "قَالَ رَبِّ بِمَآ أَنۡعَمۡتَ عَلَيَّ فَلَنۡ أَكُونَ ظَهِيرٗا لِّلۡمُجۡرِمِينَ",
-    "translation": "He said, \"My Lord, for the favor You bestowed upon me, I will never be an assistant to the criminals.\"",
+    "translation": "He said, “My Lord, in as much as you have favored me, I will never be a supporter of the criminals.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "28:21": {
     "arabic": "فَخَرَجَ مِنۡهَا خَآئِفٗا يَتَرَقَّبُۖ قَالَ رَبِّ نَجِّنِي مِنَ ٱلۡقَوۡمِ ٱلظَّٰلِمِينَ",
-    "translation": "So he left it, fearful and anticipating [apprehension]. He said, \"My Lord, save me from the wrongdoing people.\"",
+    "translation": "So he left, fearful and vigilant. He said, “My Lord, deliver me from the wrongdoing people.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "28:22": {
     "arabic": "وَلَمَّا تَوَجَّهَ تِلۡقَآءَ مَدۡيَنَ قَالَ عَسَىٰ رَبِّيٓ أَن يَهۡدِيَنِي سَوَآءَ ٱلسَّبِيلِ",
-    "translation": "And when he directed himself toward Madyan, he said, \"Perhaps my Lord will guide me to the sound way.\"",
+    "translation": "As he headed towards Median, he said, “Perhaps my Lord will guide me to the right way.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "28:24": {
     "arabic": "فَسَقَىٰ لَهُمَا ثُمَّ تَوَلَّىٰٓ إِلَى ٱلظِّلِّ فَقَالَ رَبِّ إِنِّي لِمَآ أَنزَلۡتَ إِلَيَّ مِنۡ خَيۡرٖ فَقِيرٞ",
-    "translation": "So he watered [their flocks] for them; then he went back to the shade and said, \"My Lord, indeed I am, for whatever good You would send down to me, in need.\"",
+    "translation": "So he drew water for them, and then withdrew to the shade, and said, “My Lord, I am in dire need of whatever good you might send down to me.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "29:30": {
     "arabic": "قَالَ رَبِّ ٱنصُرۡنِي عَلَى ٱلۡقَوۡمِ ٱلۡمُفۡسِدِينَ",
-    "translation": "He said, \"My Lord, support me against the corrupting people.\"",
+    "translation": "He said, “My Lord, help me against the people of corruption.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "37:100": {
     "arabic": "رَبِّ هَبۡ لِي مِنَ ٱلصَّٰلِحِينَ",
-    "translation": "My Lord, grant me [a child] from among the righteous.\"",
+    "translation": "“My Lord, give me one of the righteous.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "37:112-113": {
     "arabic": "وَبَشَّرۡنَٰهُ بِإِسۡحَٰقَ نَبِيّٗا مِّنَ ٱلصَّٰلِحِينَ وَبَٰرَكۡنَا عَلَيۡهِ وَعَلَىٰٓ إِسۡحَٰقَۚ وَمِن ذُرِّيَّتِهِمَا مُحۡسِنٞ وَظَالِمٞ لِّنَفۡسِهِۦ مُبِينٞ",
-    "translation": "And We gave him good tidings of Isaac, a prophet from among the righteous. And We blessed him and Isaac. But among their descendants is the doer of good and the clearly unjust to himself [i.e., sinner].",
+    "translation": "And We gave him good news of Isaac, a prophet, one of the righteous. And We blessed him, and Isaac. But among their descendants are some who are righteous, and some who are clearly unjust to themselves.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "37:123-132": {
     "arabic": "وَإِنَّ إِلۡيَاسَ لَمِنَ ٱلۡمُرۡسَلِينَ إِذۡ قَالَ لِقَوۡمِهِۦٓ أَلَا تَتَّقُونَ أَتَدۡعُونَ بَعۡلٗا وَتَذَرُونَ أَحۡسَنَ ٱلۡخَٰلِقِينَ ٱللَّهَ رَبَّكُمۡ وَرَبَّ ءَابَآئِكُمُ ٱلۡأَوَّلِينَ فَكَذَّبُوهُ فَإِنَّهُمۡ لَمُحۡضَرُونَ إِلَّا عِبَادَ ٱللَّهِ ٱلۡمُخۡلَصِينَ وَتَرَكۡنَا عَلَيۡهِ فِي ٱلۡأٓخِرِينَ سَلَٰمٌ عَلَىٰٓ إِلۡ يَاسِينَ إِنَّا كَذَٰلِكَ نَجۡزِي ٱلۡمُحۡسِنِينَ إِنَّهُۥ مِنۡ عِبَادِنَا ٱلۡمُؤۡمِنِينَ",
-    "translation": "And indeed, Elias was from among the messengers, When he said to his people, \"Will you not fear Allāh? Do you call upon Baʿl and leave the best of creators - Allāh, your Lord and the Lord of your first forefathers?\" And they denied him, so indeed, they will be brought [for punishment], Except the chosen servants of Allāh. And We left for him [favorable mention] among later generations: \"Peace upon Elias.\" Indeed, We thus reward the doers of good. Indeed, he was of Our believing servants.",
+    "translation": "Also Elijah was one of the messengers. He said to his people, “Do you not fear? Do you call on Baal, and forsake the Best of creators? Allah is your Lord, and the Lord of your ancestors.” But they called him a liar, and thus they will be brought forward. Except for Allah’s sincere servants. And We left with him for later generations. Peace be upon the House of Elijah. Thus We reward the virtuous. He was one of Our believing servants.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "38:41-44": {
     "arabic": "وَٱذۡكُرۡ عَبۡدَنَآ أَيُّوبَ إِذۡ نَادَىٰ رَبَّهُۥٓ أَنِّي مَسَّنِيَ ٱلشَّيۡطَٰنُ بِنُصۡبٖ وَعَذَابٍ ٱرۡكُضۡ بِرِجۡلِكَۖ هَٰذَا مُغۡتَسَلُۢ بَارِدٞ وَشَرَابٞ وَوَهَبۡنَا لَهُۥٓ أَهۡلَهُۥ وَمِثۡلَهُم مَّعَهُمۡ رَحۡمَةٗ مِّنَّا وَذِكۡرَىٰ لِأُوْلِي ٱلۡأَلۡبَٰبِ وَخُذۡ بِيَدِكَ ضِغۡثٗا فَٱضۡرِب بِّهِۦ وَلَا تَحۡنَثۡۗ إِنَّا وَجَدۡنَٰهُ صَابِرٗاۚ نِّعۡمَ ٱلۡعَبۡدُ إِنَّهُۥٓ أَوَّابٞ",
-    "translation": "And remember Our servant Job, when he called to his Lord, \"Indeed, Satan has touched me with hardship and torment.\" [So he was told], \"Strike [the ground] with your foot; this is a [spring for a] cool bath and drink.\" And We granted him his family and a like [number] with them as mercy from Us and a reminder for those of understanding. [We said], \"And take in your hand a bunch [of grass] and strike with it and do not break your oath.\" Indeed, We found him patient, an excellent servant. Indeed, he was one repeatedly turning back [to Allāh].",
+    "translation": "And mention Our servant Job, when he called out to his Lord, “Satan has afflicted me with hardship and pain.” “Stamp with your foot—here is cool water to wash with, and to drink.” And We restored his family for him, and their like with them; as a mercy from Us, and a lesson for those who possess insight. “Take with your hand a bundle, and strike with it, and do not break your oath.” We found him patient. What an excellent servant! He was obedient.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "38:48": {
     "arabic": "وَٱذۡكُرۡ إِسۡمَٰعِيلَ وَٱلۡيَسَعَ وَذَا ٱلۡكِفۡلِۖ وَكُلّٞ مِّنَ ٱلۡأَخۡيَارِ",
-    "translation": "And remember Ishmael, Elisha and Dhul-Kifl, and all are among the outstanding.",
+    "translation": "And mention Ishmael, Elisha, and Ezekiel; all are among the outstanding.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "40:7-9": {
     "arabic": "ٱلَّذِينَ يَحۡمِلُونَ ٱلۡعَرۡشَ وَمَنۡ حَوۡلَهُۥ يُسَبِّحُونَ بِحَمۡدِ رَبِّهِمۡ وَيُؤۡمِنُونَ بِهِۦ وَيَسۡتَغۡفِرُونَ لِلَّذِينَ ءَامَنُواْۖ رَبَّنَا وَسِعۡتَ كُلَّ شَيۡءٖ رَّحۡمَةٗ وَعِلۡمٗا فَٱغۡفِرۡ لِلَّذِينَ تَابُواْ وَٱتَّبَعُواْ سَبِيلَكَ وَقِهِمۡ عَذَابَ ٱلۡجَحِيمِ رَبَّنَا وَأَدۡخِلۡهُمۡ جَنَّٰتِ عَدۡنٍ ٱلَّتِي وَعَدتَّهُمۡ وَمَن صَلَحَ مِنۡ ءَابَآئِهِمۡ وَأَزۡوَٰجِهِمۡ وَذُرِّيَّٰتِهِمۡۚ إِنَّكَ أَنتَ ٱلۡعَزِيزُ ٱلۡحَكِيمُ وَقِهِمُ ٱلسَّيِّـَٔاتِۚ وَمَن تَقِ ٱلسَّيِّـَٔاتِ يَوۡمَئِذٖ فَقَدۡ رَحِمۡتَهُۥۚ وَذَٰلِكَ هُوَ ٱلۡفَوۡزُ ٱلۡعَظِيمُ",
-    "translation": "Those [angels] who carry the Throne and those around it exalt [Allāh] with praise of their Lord and believe in Him and ask forgiveness for those who have believed, [saying], \"Our Lord, You have encompassed all things in mercy and knowledge, so forgive those who have repented and followed Your way and protect them from the punishment of Hellfire. Our Lord, and admit them to gardens of perpetual residence which You have promised them and whoever was righteous among their forefathers, their spouses and their offspring. Indeed, it is You who is the Exalted in Might, the Wise. And protect them from the evil consequences [of their deeds]. And he whom You protect from evil consequences that Day - You will have given him mercy. And that is the great attainment.\"",
+    "translation": "Those who carry the Throne, and those around it, glorify their Lord with praise, and believe in Him, and ask for forgiveness for those who believe: “Our Lord, You have encompassed everything in mercy and knowledge; so forgive those who repent and follow Your path, and protect them from the agony of the Blaze. And admit them, Our Lord, into the Gardens of Eternity, which You have promised them, and the righteous among their parents, and their spouses, and their offspring. You are indeed the Almighty, the Most Wise. And shield them from the evil deeds. Whomever You shield from the evil deeds, on that Day, You have had mercy on him. That is the supreme achievement.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "43:13-14": {
     "arabic": "لِتَسۡتَوُۥاْ عَلَىٰ ظُهُورِهِۦ ثُمَّ تَذۡكُرُواْ نِعۡمَةَ رَبِّكُمۡ إِذَا ٱسۡتَوَيۡتُمۡ عَلَيۡهِ وَتَقُولُواْ سُبۡحَٰنَ ٱلَّذِي سَخَّرَ لَنَا هَٰذَا وَمَا كُنَّا لَهُۥ مُقۡرِنِينَ وَإِنَّآ إِلَىٰ رَبِّنَا لَمُنقَلِبُونَ",
-    "translation": "That you may settle yourselves upon their backs and then remember the favor of your Lord when you have settled upon them and say, \"Exalted is He who has subjected this to us, and we could not have [otherwise] subdued it. And indeed we, to our Lord, will [surely] return.\"",
+    "translation": "That you may mount their backs, and remember the favor of your Lord as you sit firmly upon them, and say, “Glory be to Him Who placed these at our service; surely we could not have done it by ourselves. And surely, to our Lord we will return.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "54:10": {
     "arabic": "فَدَعَا رَبَّهُۥٓ أَنِّي مَغۡلُوبٞ فَٱنتَصِرۡ",
-    "translation": "So he invoked his Lord, \"Indeed, I am overpowered, so help.\"",
+    "translation": "So he appealed to his Lord, “I am overwhelmed, so help me.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "59:10": {
     "arabic": "وَٱلَّذِينَ جَآءُو مِنۢ بَعۡدِهِمۡ يَقُولُونَ رَبَّنَا ٱغۡفِرۡ لَنَا وَلِإِخۡوَٰنِنَا ٱلَّذِينَ سَبَقُونَا بِٱلۡإِيمَٰنِ وَلَا تَجۡعَلۡ فِي قُلُوبِنَا غِلّٗا لِّلَّذِينَ ءَامَنُواْ رَبَّنَآ إِنَّكَ رَءُوفٞ رَّحِيمٌ",
-    "translation": "And [there is a share for] those who come after them, saying, \"Our Lord, forgive us and our brothers who preceded us in faith and put not in our hearts [any] resentment toward those who have believed. Our Lord, indeed You are Kind and Merciful.\"",
+    "translation": "And those who came after them, saying, “Our Lord, forgive us, and our brethren who preceded us in faith, and leave no malice in our hearts towards those who believe. Our Lord, You are Clement and Merciful.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "60:4-5": {
     "arabic": "قَدۡ كَانَتۡ لَكُمۡ أُسۡوَةٌ حَسَنَةٞ فِيٓ إِبۡرَٰهِيمَ وَٱلَّذِينَ مَعَهُۥٓ إِذۡ قَالُواْ لِقَوۡمِهِمۡ إِنَّا بُرَءَٰٓؤُاْ مِنكُمۡ وَمِمَّا تَعۡبُدُونَ مِن دُونِ ٱللَّهِ كَفَرۡنَا بِكُمۡ وَبَدَا بَيۡنَنَا وَبَيۡنَكُمُ ٱلۡعَدَٰوَةُ وَٱلۡبَغۡضَآءُ أَبَدًا حَتَّىٰ تُؤۡمِنُواْ بِٱللَّهِ وَحۡدَهُۥٓ إِلَّا قَوۡلَ إِبۡرَٰهِيمَ لِأَبِيهِ لَأَسۡتَغۡفِرَنَّ لَكَ وَمَآ أَمۡلِكُ لَكَ مِنَ ٱللَّهِ مِن شَيۡءٖۖ رَّبَّنَا عَلَيۡكَ تَوَكَّلۡنَا وَإِلَيۡكَ أَنَبۡنَا وَإِلَيۡكَ ٱلۡمَصِيرُ رَبَّنَا لَا تَجۡعَلۡنَا فِتۡنَةٗ لِّلَّذِينَ كَفَرُواْ وَٱغۡفِرۡ لَنَا رَبَّنَآۖ إِنَّكَ أَنتَ ٱلۡعَزِيزُ ٱلۡحَكِيمُ",
-    "translation": "There has already been for you an excellent pattern in Abraham and those with him, when they said to their people, \"Indeed, we are disassociated from you and from whatever you worship other than Allāh. We have denied you, and there has appeared between us and you animosity and hatred forever until you believe in Allāh alone\" - except for the saying of Abraham to his father, \"I will surely ask forgiveness for you, but I have not [power to do] for you anything against Allāh. Our Lord, upon You we have relied, and to You we have returned, and to You is the destination. Our Lord, make us not [objects of] torment for the disbelievers and forgive us, our Lord. Indeed, it is You who is the Exalted in Might, the Wise.\"",
+    "translation": "You have had an excellent example in Abraham and those with him; when they said to their people, “We are quit of you, and what you worship apart from Allah. We denounce you. Enmity and hatred has surfaced between us and you, forever, until you believe in Allah alone.” Except for the words of Abraham to his father, “I will ask forgiveness for you, though I have no power from Allah to do anything for you.” “Our Lord, in You we trust, and to You we repent, and to You is the ultimate resort. Our Lord, do not make us a target for those who disbelieve, and forgive us, our Lord. You are indeed the Mighty and Wise.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "65:3": {
     "arabic": "وَيَرۡزُقۡهُ مِنۡ حَيۡثُ لَا يَحۡتَسِبُۚ وَمَن يَتَوَكَّلۡ عَلَى ٱللَّهِ فَهُوَ حَسۡبُهُۥٓۚ إِنَّ ٱللَّهَ بَٰلِغُ أَمۡرِهِۦۚ قَدۡ جَعَلَ ٱللَّهُ لِكُلِّ شَيۡءٖ قَدۡرٗا",
-    "translation": "And will provide for him from where he does not expect. And whoever relies upon Allāh - then He is sufficient for him. Indeed, Allāh will accomplish His purpose. Allāh has already set for everything a [decreed] extent.",
+    "translation": "And will provide for him from where he never expected. Whoever relies on Allah—He will suffice him. Allah will accomplish His purpose. Allah has set a measure to all things.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "66:11": {
     "arabic": "وَضَرَبَ ٱللَّهُ مَثَلٗا لِّلَّذِينَ ءَامَنُواْ ٱمۡرَأَتَ فِرۡعَوۡنَ إِذۡ قَالَتۡ رَبِّ ٱبۡنِ لِي عِندَكَ بَيۡتٗا فِي ٱلۡجَنَّةِ وَنَجِّنِي مِن فِرۡعَوۡنَ وَعَمَلِهِۦ وَنَجِّنِي مِنَ ٱلۡقَوۡمِ ٱلظَّٰلِمِينَ",
-    "translation": "And Allāh presents an example of those who believed: the wife of Pharaoh, when she said, \"My Lord, build for me near You a house in Paradise and save me from Pharaoh and his deeds and save me from the wrongdoing people.\"",
+    "translation": "And Allah illustrates an example of those who believe: the wife of Pharaoh, when she said, “My Lord, build for me, with you, a house in Paradise, and save me from Pharaoh and his works, and save me from the wrongdoing people.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "68:51-52": {
     "arabic": "وَإِن يَكَادُ ٱلَّذِينَ كَفَرُواْ لَيُزۡلِقُونَكَ بِأَبۡصَٰرِهِمۡ لَمَّا سَمِعُواْ ٱلذِّكۡرَ وَيَقُولُونَ إِنَّهُۥ لَمَجۡنُونٞ وَمَا هُوَ إِلَّا ذِكۡرٞ لِّلۡعَٰلَمِينَ",
-    "translation": "And indeed, those who disbelieve would almost make you slip with their eyes [i.e., looks] when they hear the message, and they say, \"Indeed, he is mad.\" But it is not except a reminder to the worlds.",
+    "translation": "Those who disbelieve almost stab you with their glances when they hear the message, and say, “He is crazy!” But it is no less than a reminder to all the Worlds.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "71:10-12": {
     "arabic": "فَقُلۡتُ ٱسۡتَغۡفِرُواْ رَبَّكُمۡ إِنَّهُۥ كَانَ غَفَّارٗا يُرۡسِلِ ٱلسَّمَآءَ عَلَيۡكُم مِّدۡرَارٗا وَيُمۡدِدۡكُم بِأَمۡوَٰلٖ وَبَنِينَ وَيَجۡعَل لَّكُمۡ جَنَّٰتٖ وَيَجۡعَل لَّكُمۡ أَنۡهَٰرٗا",
-    "translation": "And said, 'Ask forgiveness of your Lord. Indeed, He is ever a Perpetual Forgiver. He will send [rain from] the sky upon you in [continuing] showers And give you increase in wealth and children and provide for you gardens and provide for you rivers.",
+    "translation": "I said, ‘Ask your Lord for forgiveness; He is Forgiving. He will let loose the sky upon you in torrents. And provide you with wealth and children, and allot for you gardens, and allot for you rivers.",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "71:28": {
     "arabic": "رَّبِّ ٱغۡفِرۡ لِي وَلِوَٰلِدَيَّ وَلِمَن دَخَلَ بَيۡتِيَ مُؤۡمِنٗا وَلِلۡمُؤۡمِنِينَ وَٱلۡمُؤۡمِنَٰتِۖ وَلَا تَزِدِ ٱلظَّٰلِمِينَ إِلَّا تَبَارَۢا",
-    "translation": "My Lord, forgive me and my parents and whoever enters my house a believer and the believing men and believing women. And do not increase the wrongdoers except in destruction.\"",
+    "translation": "My Lord! Forgive me and my parents, and anyone who enters my home in faith, and all the believing men and believing women; and do not increase the wrongdoers except in perdition.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "113:1-5": {
     "arabic": "قُلۡ أَعُوذُ بِرَبِّ ٱلۡفَلَقِ مِن شَرِّ مَا خَلَقَ وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ وَمِن شَرِّ ٱلنَّفَّٰثَٰتِ فِي ٱلۡعُقَدِ وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ",
-    "translation": "Say, \"I seek refuge in the Lord of daybreak From the evil of that which He created And from the evil of darkness when it settles And from the evil of the blowers in knots And from the evil of an envier when he envies.\"",
+    "translation": "Say, “I take refuge with the Lord of Daybreak. From the evil of what He created. And from the evil of the darkness as it gathers. And from the evil of those who practice sorcery. And from the evil of an envious when he envies.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "114:1-6": {
     "arabic": "قُلۡ أَعُوذُ بِرَبِّ ٱلنَّاسِ مَلِكِ ٱلنَّاسِ إِلَٰهِ ٱلنَّاسِ مِن شَرِّ ٱلۡوَسۡوَاسِ ٱلۡخَنَّاسِ ٱلَّذِي يُوَسۡوِسُ فِي صُدُورِ ٱلنَّاسِ مِنَ ٱلۡجِنَّةِ وَٱلنَّاسِ",
-    "translation": "Say, \"I seek refuge in the Lord of mankind, The Sovereign of mankind, The God of mankind, From the evil of the retreating whisperer - Who whispers [evil] into the breasts of mankind - From among the jinn and mankind.\"",
+    "translation": "Say, “I seek refuge in the Lord of mankind. The King of mankind. The God of mankind. From the evil of the sneaky whisperer. Who whispers into the hearts of people. From among jinn and among people.”",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   },
   "undefined:undefined": {
     "arabic": "",
     "translation": "",
     "arabicFrom": "QuranEnc.com",
-    "translationFrom": "QuranEnc.com"
+    "translationFrom": "ClearQuran.com"
   }
 };
 

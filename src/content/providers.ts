@@ -110,7 +110,8 @@ export const PROVIDERS: Readonly<Record<ProviderId, Provider>> = {
     where: 'quranenc.com/api/v1',
     supplies:
       'The Arabic of the Qur’an duas collection (its English is ClearQuran’s since 11 Sep ' +
-      '2026), the names of Allah, every Qur’an text in `evidence.ts`, ' +
+      '2026), the names of Allah, the Arabic of every Qur’an text in `evidence.ts` (its ' +
+      'English is ClearQuran’s too), ' +
       'and the corpus every Qur’an text in the app is checked against by `content:verify`. ' +
       'Not juz 30, which this row once claimed: that comes from Quran Foundation.',
     fetchedBy: 'npm run quran:corpus',
@@ -259,15 +260,19 @@ export const PROVIDERS: Readonly<Record<ProviderId, Provider>> = {
     fetchedBy: 'npm run quran:words:corpus',
     verification:
       'The ayah text is compared against QuranEnc by `content:verify`, which is the second ' +
-      'publisher. The word-level gloss and transliteration have no second publisher and are ' +
-      'trusted: each word’s three fields come from one token of the same stream, so they ' +
+      'publisher. The word-level gloss and transliteration match the Quranic Arabic Corpus ' +
+      '(corpus.quran.com, Kais Dukes) word for word on every ayah sampled across the mushaf ' +
+      'on 11 Sep 2026 — 70 ayahs for the gloss, 38 for the transliteration — which is the ' +
+      'second publisher the API itself does not name. Beyond that they are trusted: each ' +
+      'word’s three fields come from one token of the same stream, so they ' +
       'cannot be misaligned with each other. The transliteration generator refuses any ayah ' +
       'whose word count differs from the Arabic it will light up under; the word view ' +
       'renders the API’s own words, so it has no count to disagree with.',
     obligation:
       'quran.com’s site terms allow personal, non-commercial use and publish no terms for ' +
-      'the API. The gloss’s author is listed by the API as “Unknown”, so the app credits ' +
-      '“Quran.com” and names no author it cannot source. The endpoint is retired in favour ' +
+      'the API. The gloss’s author is listed by the API as “Unknown”; it is the Quranic ' +
+      'Arabic Corpus’s, so the app credits Kais Dukes’s corpus, which publishes under the ' +
+      'GNU public license, and names Quran.com as the host. The endpoint is retired in favour ' +
       'of a credentialed host; the whole Qur’an is mirrored in `.cache/quran/words/` and ' +
       '`~/Documents/islamic-data/` so nothing here depends on it staying up.',
   },
@@ -275,8 +280,9 @@ export const PROVIDERS: Readonly<Record<ProviderId, Provider>> = {
     name: 'ClearQuran (Talal Itani)',
     where: 'clearquran.com',
     supplies:
-      'The English under every ayah of juz 30 and Al-Fatihah on the surah pages, and of the ' +
-      'Qur’an duas collection. The Allah edition — the same translation is also published ' +
+      'The English of every Qur’an ayah the app prints: juz 30 and Al-Fatihah on the surah ' +
+      'pages, the Qur’an duas collection, the Qur’an texts in `evidence.ts` under the ' +
+      'teaching pages, and Al-Fatihah on the prayer step. The Allah edition — the same translation is also published ' +
       'writing “God”. Iyad’s choice, 11 Sep 2026, replacing Saheeh International, so that the ' +
       'Qur’an tab and the duas read in one voice. Not the word-by-word gloss: that has no ' +
       'named author and he chose to keep it, knowing the two differ in wording.',

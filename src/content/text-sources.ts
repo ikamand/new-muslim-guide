@@ -58,6 +58,13 @@ export const TEXT_SOURCES: Readonly<Record<string, TextSource>> = {
     obligation:
       'No terms published that could be found. Named here on the same footing as the rest rather than on a licence that was never stated.',
   },
+  'ClearQuran.com': {
+    where: 'clearquran.com',
+    licence:
+      'CC BY-ND 4.0, per the download page; the readme inside the verse-by-verse zip says Attribution-NonCommercial-NoDerivs.',
+    obligation:
+      'Credit “Translation by Talal Itani, ClearQuran.com”, and the text verbatim. The Allah edition, chosen by Iyad on 11 Sep 2026 so every Qur’an English in the app is one translator’s.',
+  },
   'HadeethEnc.com': {
     where: 'hadeethenc.com',
     licence: 'No modification, addition or deletion, and the publisher named.',

@@ -102,14 +102,17 @@ const file = `/**
  * stream, so the three cannot be shown against the wrong word. ${keys.length}
  * ayahs, ${count} words, read from the \`.cache/quran/words/\` mirror.
  *
- * ⚠️ The gloss's author is unstated by its publisher — see \`providers.ts\`,
- * \`quranfoundation\`. Credit it as "Quran.com" and no more.
+ * The gloss and the transliteration are the Quranic Arabic Corpus's (Kais
+ * Dukes, corpus.quran.com). The API lists no author for either, but both match
+ * the corpus word for word on every ayah sampled across the mushaf on 11 Sep
+ * 2026 — 70 ayahs for the gloss, 38 for the transliteration. \`providers.ts\`,
+ * \`quranfoundation\`, records the sample.
  */
 
 /** Where the words came from. A licence obligation. */
 export const WORDS_SOURCE = {
-  name: 'Quran.com (Quran Foundation)',
-  where: 'api.quran.com',
+  name: 'Quranic Arabic Corpus (Kais Dukes), served by Quran.com',
+  where: 'corpus.quran.com, via api.quran.com',
   fetched: ${JSON.stringify(new Date().toISOString().slice(0, 10))},
 } as const;
 

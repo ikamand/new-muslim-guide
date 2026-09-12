@@ -38,7 +38,10 @@ import type { Recitation, RecitationVerse } from './types';
  * supplication to Abu Dawud 775, `rabbi-ghfir lī` to Abu Dawud 874, the taslim
  * to Abu Dawud 996, and the shahada after wudu to Muslim 234b. What is checked
  * is the wording and the number; the English translations beside them are still
- * the app's own and still want a qualified reader.
+ * the app's own and still want a qualified reader — except Al-Fatihah's, which
+ * since 11 Sep 2026 is Talal Itani's ClearQuran (Allah edition), copied by
+ * script from `.cache/quran/itani-allah.json`: the same seven lines the surah
+ * page and the duas print, so the prayer step cannot disagree with them.
  *
  * Every citation in the app — not only in this file — was then cross-checked
  * mechanically against sunnah.com: in-book reference, grading, and grading
@@ -56,42 +59,46 @@ import type { Recitation, RecitationVerse } from './types';
  * Held as verses rather than one block because memorising it means looping a
  * single ayah until it sticks. The whole-surah strings below are derived from
  * this, so there is still one place to correct.
+ *
+ * The English is Itani's, verbatim — see the note at the top of the file. If
+ * `npm run quran:juz30` ever prints a different Al-Fatihah, this is the copy
+ * to bring back into step.
  */
 const FATIHA_VERSES: RecitationVerse[] = [
   {
     arabic: 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ',
     transliteration: 'Bismi-llāhi-r-raḥmāni-r-raḥīm',
-    translation: 'In the name of Allah, the Most Merciful, the Most Compassionate.',
+    translation: 'In the name of Allah, the Gracious, the Merciful.',
     audioId: 'fatiha-1',
   },
   {
     arabic: 'الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ',
     transliteration: 'Al-ḥamdu li-llāhi rabbi-l-ʿālamīn',
-    translation: 'All praise is for Allah, Lord of all worlds.',
+    translation: 'Praise be to Allah, Lord of the Worlds.',
     audioId: 'fatiha-2',
   },
   {
     arabic: 'الرَّحْمَٰنِ الرَّحِيمِ',
     transliteration: 'Ar-raḥmāni-r-raḥīm',
-    translation: 'The Most Merciful, the Most Compassionate.',
+    translation: 'The Most Gracious, the Most Merciful.',
     audioId: 'fatiha-3',
   },
   {
     arabic: 'مَالِكِ يَوْمِ الدِّينِ',
     transliteration: 'Māliki yawmi-d-dīn',
-    translation: 'Master of the Day of Judgement.',
+    translation: 'Master of the Day of Judgment.',
     audioId: 'fatiha-4',
   },
   {
     arabic: 'إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ',
     transliteration: 'Iyyāka naʿbudu wa iyyāka nastaʿīn',
-    translation: 'You alone we worship, and You alone we ask for help.',
+    translation: 'It is You we worship, and upon You we call for help.',
     audioId: 'fatiha-5',
   },
   {
     arabic: 'اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ',
     transliteration: 'Ihdina-ṣ-ṣirāṭa-l-mustaqīm',
-    translation: 'Guide us along the straight path.',
+    translation: 'Guide us to the straight path.',
     audioId: 'fatiha-6',
   },
   {
@@ -99,8 +106,7 @@ const FATIHA_VERSES: RecitationVerse[] = [
       'صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ',
     transliteration:
       'Ṣirāṭa-lladhīna anʿamta ʿalayhim ghayri-l-maghḍūbi ʿalayhim wa la-ḍ-ḍāllīn',
-    translation:
-      'The path of those You have blessed, not of those who have earned Your anger, nor of those who have gone astray.',
+    translation: 'The path of those You have blessed, not of those against whom there is anger, nor of those who are misguided.',
     audioId: 'fatiha-7',
   },
 ];

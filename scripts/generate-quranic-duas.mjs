@@ -251,6 +251,17 @@ const WHO = {
  * place. A cut translation opens or closes with an ellipsis, as the site's
  * does, so a reader knows the ayah goes on.
  *
+ * A passage can strand a quotation mark: Itani opens the speaker's words where
+ * the speech begins and closes them where it ends, and a passage is an excerpt
+ * of a speech whether the verse was cut or not — a dua that starts after the
+ * opening mark ends with a closing one nothing opened, and one whose speech
+ * runs on into the next verse carries an opening one nothing closes. Sixty
+ * cards ending in a stray ” read as a typo, and Iyad asked for it gone, 11 Sep
+ * 2026. So, on the passage's joined English, a closing mark that no opening
+ * mark precedes is dropped, and an opening mark that nothing closes is
+ * dropped. Punctuation around an excerpt, the same act as the ellipsis; the
+ * words are untouched.
+ *
  * The Arabic is sliced from QuranEnc's own text by word index, after the
  * mushaf's section marker (۞) is dropped from the split — it is not a word,
  * and the count of every cut ayah is asserted equal to the API's before any
@@ -602,6 +613,23 @@ for (const key of Object.keys(WHO)) {
 const pageCount = SITE.reduce((n, s) => n + s.pages.length, 0);
 console.log(`The duas of the Qur'an — ${refs.length} passages on ${pageCount} pages in ${SITE.length} sections; Arabic from QuranEnc, English from ClearQuran\n`);
 
+/* See the note above CUT. Walks the passage's “ and ” once: a ” at depth zero
+   was opened in a verse the passage does not carry; a “ still open at the end
+   is closed in one it does not carry. Both go. */
+const unstrand = (text) => {
+  let depth = 0;
+  let out = '';
+  let lastOpen = -1;
+  for (const ch of text) {
+    if (ch === '”' && depth === 0) continue;
+    if (ch === '“') { depth += 1; lastOpen = out.length; }
+    if (ch === '”' && depth > 0) depth -= 1;
+    out += ch;
+  }
+  if (depth > 0 && lastOpen >= 0) out = out.slice(0, lastOpen) + out.slice(lastOpen + 1);
+  return out;
+};
+
 const entries = [];
 for (const r of refs) {
   const [s, from, to = from] = r;
@@ -664,7 +692,7 @@ for (const r of refs) {
     id: idOf(r),
     title: `${who} — ${note}`,
     arabic: arabicParts.join(' '),
-    translation: englishParts.join(' '),
+    translation: unstrand(englishParts.join(' ')),
     s,
     from,
     to,

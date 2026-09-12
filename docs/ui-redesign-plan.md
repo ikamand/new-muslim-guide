@@ -4058,6 +4058,18 @@ prayer-step Al-Fatihah in `recitations.ts` and the Qur'an lines in
 `evidence.ts` were outside what he asked for and still say what they said.
 `scripts/fetch-quran-itani.mjs` carries the terms and the cross-check.
 
+**Extended the same day.** Asked what I would do instead, I said finish it,
+and Iyad said do it all. The prayer-step Al-Fatihah and the 249 Qur'an texts
+under the teaching pages moved to Itani too, so one translator speaks for
+every ayah the app prints. The word gloss is now credited to the Quranic
+Arabic Corpus (Kais Dukes), which it matches word for word on 70 ayahs
+sampled across the mushaf, rather than to "Quran.com, author unstated". And
+a dua passage no longer ends in a stray closing quote: a mark opened or
+closed in a verse the passage does not carry is dropped, the words untouched.
+The paragraph above said the prayer step and the evidence were left; they
+were, for two hours. `docs/scholarly-review.md` 2.14 carries the one
+question for the reviewer.
+
 Verified: `tsc`, `expo lint` (four standing errors, none in touched files),
 `style:check`, `i18n:manifest` (English only; UI strings are not in the
 sheet), `expo export --platform web`. Ships by OTA.

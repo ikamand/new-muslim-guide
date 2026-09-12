@@ -781,6 +781,9 @@ export const EN = {
   'settings.intro': 'How the app reads, and how it behaves while you pray.',
   'settings.language': 'Language',
   'settings.display': 'Display',
+  /* The switches and the card that shows what they do, as one section. */
+  'settings.reading': 'Reading the Arabic',
+  'settings.preview': 'How the words will look',
   'settings.transliteration': 'Transliteration',
   'settings.translation': 'Translation',
   'settings.transliteration.help': 'The Arabic spelled out in English letters',
@@ -1163,7 +1166,6 @@ export const EN = {
   'learn.everyPrayer.subtitle': 'All of them side by side: rakʿahs, sunnah, and when',
   'count.lessons': 'lessons',
 
-  'settings.guidance': 'Prayer guidance for',
 
   /*
     Settings → Sources.
@@ -1187,9 +1189,6 @@ export const EN = {
   'sources.places.detail': 'The city list behind “Choose a city”, searched on this phone',
   'sources.footnote':
     'Nothing here is edited. Where a publisher asks to be named, this is where they are named.',
-  'settings.audience.man': 'Men',
-  'settings.audience.woman': 'Women',
-  'settings.audience.both': 'Show everything',
 
   'common.back': 'Back',
   'common.next': 'Next',

@@ -4211,3 +4211,28 @@ permission stops a phone putting the app to sleep.
 **This is a native change.** A permission is manifest, so it needs a full
 `eas build`; an OTA will not carry it, and the fingerprint policy will stop
 old builds being offered updates once it ships. Not testable on web.
+
+---
+
+## 11 Sep 2026 — Settings, three cuts ✅
+
+Iyad's three questions from the phone, all built:
+
+- **"Prayer guidance for" is gone.** The section hid one page, the one on
+  periods, from a man who chose Men; Women hid nothing, and onboarding never
+  asked. A section that hides one page is a decision handed to someone who
+  did not ask for one. The `audience` setting and the one gated page stay
+  as they are; nobody can set it any more, so everyone sees everything, as
+  everyone who never chose already did. Removed with it: the three strings.
+- **The switches and their preview are one section**, "Reading the Arabic":
+  transliteration, translation, then "How the words will look" and the
+  takbir card. The card used to sit three sections lower under a heading
+  typed in English rather than through the dictionary.
+- **Saved audio rows are ruled rows**, eight points of vertical padding and
+  none at the sides, with the hairline between them, like every other row
+  on the page. They were sixteen-point padded boxes, inset from the rest.
+  ⚠️ Not seen: the storage group renders only where audio has been saved,
+  and that is never on web.
+
+Verified on web at 390 (light): the reading section and the page's order.
+Ships by OTA once the exact-alarm build is installed.

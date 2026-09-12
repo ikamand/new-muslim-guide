@@ -9,7 +9,7 @@ import { ThemedText } from '@/components/themed-text';
 import { Recitations } from '@/content/recitations';
 
 import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
-import { useSettings, type Audience } from '@/hooks/use-settings';
+import { useSettings } from '@/hooks/use-settings';
 import { deleteVoice, savedVoices, type SavedVoice } from '@/content/quran/offline';
 import { deleteReciteModels, reciteModelBytes } from '@/lib/recite-session';
 import { RECITERS } from '@/content/quran/recitation';
@@ -128,52 +128,6 @@ function LanguageGroup() {
 }
 
 /**
- * Which rulings the app shows.
- *
- * Changeable, and "Show everything" is a real option rather than a fallback —
- * someone who declined the question at first run should not be nagged, and
- * someone curious about the other set is entitled to read it.
- */
-function AudienceGroup() {
-  const theme = useTheme();
-  const { t } = useLocale();
-  const { audience, set } = useSettings();
-
-  const options: { value: Audience; label: string }[] = [
-    { value: 'man', label: t('settings.audience.man') },
-    { value: 'woman', label: t('settings.audience.woman') },
-    { value: null, label: t('settings.audience.both') },
-  ];
-
-  return (
-    <View
-      style={[styles.group, { borderColor: theme.goldSoft }]}>
-      {options.map((option, index) => (
-        <Pressable
-          key={option.label}
-          onPress={() => set('audience', option.value)}
-          accessibilityRole="radio"
-          accessibilityState={{ selected: audience === option.value }}
-          style={[
-            styles.row,
-            index < options.length - 1 && {
-              borderBottomWidth: StyleSheet.hairlineWidth,
-              borderBottomColor: theme.border,
-            },
-          ]}>
-          <ThemedText type="default">{option.label}</ThemedText>
-          {audience === option.value && (
-            <ThemedText type="smallBold" themeColor="accent">
-              ✓
-            </ThemedText>
-          )}
-        </Pressable>
-      ))}
-    </View>
-  );
-}
-
-/**
  * A way back into onboarding.
  *
  * The two questions decide what the Learn tab suggests first, and someone's
@@ -263,8 +217,16 @@ function StorageGroup() {
       </ThemedText>
 
       <View style={[styles.group, { borderColor: theme.goldSoft }]}>
-        {voices.map((voice) => (
-          <View key={voice.folder} style={styles.storageRow}>
+        {voices.map((voice, index) => (
+          <View
+            key={voice.folder}
+            style={[
+              styles.storageRow,
+              (index < voices.length - 1 || reciteBytes > 0) && {
+                borderBottomWidth: StyleSheet.hairlineWidth,
+                borderBottomColor: theme.border,
+              },
+            ]}>
             <View style={styles.storageText}>
               <ThemedText type="default">{reciterNameFor(voice.folder)}</ThemedText>
               <ThemedText type="small" themeColor="textSecondary">
@@ -408,30 +370,38 @@ export default function SettingsScreen() {
           </View>
         )}
 
-        <View style={[styles.group, { borderColor: theme.goldSoft }]}>
-          <SettingRow
-            label={t('settings.transliteration')}
-            description={t('settings.transliteration.help')}
-            settingKey="transliteration"
-          />
-          <SettingRow
-            label={t('settings.translation')}
-            description={t('settings.translation.help')}
-            settingKey="translation"
-            isLast
-          />
+        {/*
+          The two switches and, directly under them, the card they change
+          (Iyad, 11 Sep 2026): the preview used to sit three sections lower
+          under a heading typed in English, so flipping a switch changed
+          nothing you could see without scrolling.
+        */}
+        <View style={styles.section}>
+          <ThemedText type="smallBold" themeColor="textSecondary" style={styles.sectionTitle}>
+            {t('settings.reading')}
+          </ThemedText>
+          <View style={[styles.group, { borderColor: theme.goldSoft }]}>
+            <SettingRow
+              label={t('settings.transliteration')}
+              description={t('settings.transliteration.help')}
+              settingKey="transliteration"
+            />
+            <SettingRow
+              label={t('settings.translation')}
+              description={t('settings.translation.help')}
+              settingKey="translation"
+              isLast
+            />
+          </View>
+          <ThemedText type="small" themeColor="textSecondary" style={styles.previewNote}>
+            {t('settings.preview')}
+          </ThemedText>
+          <RecitationCard recitation={Recitations.takbir} />
         </View>
 
         <PrayerTimesGroup />
 
         <RemindersGroup />
-
-        <View style={styles.section}>
-          <ThemedText type="smallBold" themeColor="textSecondary" style={styles.sectionTitle}>
-            {t('settings.guidance')}
-          </ThemedText>
-          <AudienceGroup />
-        </View>
 
         <View style={styles.section}>
           <ThemedText type="smallBold" themeColor="textSecondary" style={styles.sectionTitle}>
@@ -451,13 +421,6 @@ export default function SettingsScreen() {
           </View>
         </View>
 
-        <View style={styles.section}>
-          <ThemedText type="smallBold" themeColor="textSecondary" style={styles.sectionTitle}>
-            Preview
-          </ThemedText>
-          <RecitationCard recitation={Recitations.takbir} />
-        </View>
-
         <SourcesRow />
 
         <ThemedText type="small" themeColor="textSecondary" style={styles.footnote}>
@@ -468,12 +431,19 @@ export default function SettingsScreen() {
 }
 
 const styles = StyleSheet.create({
+  /*
+    The same ruled row as the rest of the page (Iyad, 11 Sep 2026): it was
+    a padded box, sixteen points on every side, so eight voices ran a screen
+    longer than they needed to and sat inset from every other row.
+  */
   storageRow: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: Spacing.three,
-    paddingVertical: Spacing.three,
-    paddingHorizontal: Spacing.three,
+    paddingVertical: Spacing.two,
+  },
+  previewNote: {
+    paddingTop: Spacing.two,
   },
   storageText: {
     flex: 1,

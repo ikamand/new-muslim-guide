@@ -5,7 +5,6 @@
 
 import '@/global.css';
 
-import { Platform } from 'react-native';
 
 /**
  * The palette, named for pigments, with one job each.
@@ -146,5 +145,12 @@ export const Radius = {
   large: 24,
 } as const;
 
-export const BottomTabInset = Platform.select({ ios: 50, android: 80 }) ?? 0;
+/*
+  There is no bottom tab inset any more. The tab bar used to float over the
+  tabs' content and each tab padded its scroll by 50 (iOS) or 80 (Android)
+  to clear it; the pill bar of 6 Sep 2026 sits in the navigator's own flow,
+  so the content already ends above it and the inset was a blank band under
+  every tab, and under four pushed pages that have no bar at all (Iyad, 11
+  Sep 2026). If a floating bar ever returns, the inset returns with it.
+*/
 export const MaxContentWidth = 800;

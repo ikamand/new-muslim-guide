@@ -10,7 +10,7 @@ import { Frame, MushafRosette, Rubric, Unwan } from '@/components/jadwal';
 import { PressableLink } from '@/components/pressable-link';
 import { ARABIC_NAME_TRIM, ThemedText } from '@/components/themed-text';
 import { LEARNING_ORDER } from '@/content/quran/surahs';
-import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
+import { MaxContentWidth, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { useMemorised } from '@/hooks/use-memorised';
 import { useObservations } from '@/hooks/use-observations';
@@ -365,7 +365,7 @@ const styles = StyleSheet.create({
     /* Spacing.three, the measure every tab opens on — see `(tabs)/index.tsx`. */
     paddingTop: Spacing.three,
     paddingHorizontal: Spacing.three,
-    paddingBottom: BottomTabInset + Spacing.four,
+    paddingBottom: Spacing.four,
     width: '100%',
     maxWidth: MaxContentWidth,
     alignSelf: 'center',

@@ -7,7 +7,7 @@ import { DoubleRule, JadwalRow, QuietRow } from '@/components/jadwal';
 import { LocationAsk } from '@/components/location-ask';
 import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
-import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
+import { MaxContentWidth, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { useLocation } from '@/hooks/use-location';
 import { usePrayerTimes } from '@/hooks/use-prayer-times';
@@ -336,7 +336,7 @@ const styles = StyleSheet.create({
   content: {
     paddingVertical: Spacing.four,
     paddingHorizontal: Spacing.three,
-    paddingBottom: BottomTabInset + Spacing.four,
+    paddingBottom: Spacing.six,
     width: '100%',
     maxWidth: MaxContentWidth,
     alignSelf: 'center',

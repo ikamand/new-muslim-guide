@@ -19,7 +19,7 @@ import {
   SHAHADA_GUIDE,
 } from '@/content';
 import { isLessonDone, SHAHADA_KEY } from '@/content/curriculum';
-import { BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
+import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import {
   useCurriculum,
   type ResolvedLesson,
@@ -510,7 +510,7 @@ const styles = StyleSheet.create({
     /* Spacing.three, the measure every tab opens on — see `(tabs)/index.tsx`. */
     paddingTop: Spacing.three,
     paddingHorizontal: Spacing.three,
-    paddingBottom: BottomTabInset + Spacing.four,
+    paddingBottom: Spacing.four,
     width: '100%',
     maxWidth: MaxContentWidth,
     alignSelf: 'center',

@@ -5,7 +5,7 @@ import { Keyboard, Pressable, ScrollView, StyleSheet, TextInput, View } from 're
 import { Unwan } from '@/components/jadwal';
 import { LocationAsk } from '@/components/location-ask';
 import { INPUT_TEXT, ThemedText } from '@/components/themed-text';
-import { BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
+import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { useLocation } from '@/hooks/use-location';
 import { useSettings } from '@/hooks/use-settings';
@@ -210,7 +210,7 @@ export default function MosqueMatchScreen() {
 const styles = StyleSheet.create({
   content: {
     padding: Spacing.four,
-    paddingBottom: BottomTabInset + Spacing.four,
+    paddingBottom: Spacing.six,
     width: '100%',
     maxWidth: MaxContentWidth,
     alignSelf: 'center',

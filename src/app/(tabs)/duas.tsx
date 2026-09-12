@@ -21,7 +21,7 @@ import {
   sessionForWindow,
   type AdhkarSession,
 } from '@/content/duas/sessions';
-import { BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
+import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { usePrayerTimes } from '@/hooks/use-prayer-times';
 import { useSettings } from '@/hooks/use-settings';
@@ -346,7 +346,7 @@ const styles = StyleSheet.create({
       `Spacing.six`, which is 64 against the 74 iOS needs and the 104 Android
       does.
     */
-    paddingBottom: BottomTabInset + Spacing.four,
+    paddingBottom: Spacing.four,
     /* Card joins only — the ruled rows live in the flush group below. */
     gap: Spacing.two,
     width: '100%',

@@ -8,7 +8,7 @@ import { QuietRow } from '@/components/jadwal';
 import { LocationAsk } from '@/components/location-ask';
 import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
-import { BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
+import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { useLocation } from '@/hooks/use-location';
 import { usePrayerTimes } from '@/hooks/use-prayer-times';
@@ -209,7 +209,7 @@ export default function AwqatSettingsScreen() {
 const styles = StyleSheet.create({
   content: {
     padding: Spacing.four,
-    paddingBottom: BottomTabInset + Spacing.four,
+    paddingBottom: Spacing.six,
     gap: Spacing.two,
     width: '100%',
     maxWidth: MaxContentWidth,

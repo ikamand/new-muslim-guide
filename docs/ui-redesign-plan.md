@@ -4271,3 +4271,13 @@ Verified on web at 390, both themes, with three reminders seeded; the
 saved-audio sheet only in its empty state, since web saves nothing. Not seen
 on a device: the sheet's presentation on Android, and the storage rows with
 real voices. Ships by OTA once the exact-alarm build is installed.
+
+**Corrected 11 Sep, from the phone: the blank band under every tab.** The
+note above said it might want trimming once seen; it did. `BottomTabInset`
+(50/80) padded every tab's scroll content to clear a bar that no longer
+floats, and four pushed pages (the month, the day, the calculation page,
+the mosque match) carried it with no bar beneath them at all. Gone from all
+eight screens and from `constants/theme.ts`; the tabs end at `Spacing.four`
+above the pill, the pushed pages at `Spacing.six` like every other pushed
+page. Looked at on web: Today, Qur'an, Learn and the month, scrolled to the
+end. Ships by OTA.

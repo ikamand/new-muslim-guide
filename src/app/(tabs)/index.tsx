@@ -13,7 +13,7 @@ import { PrayerTimesCard } from '@/components/prayer-times-card';
 import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
 import { PRAYERS, WUDU, type Guide } from '@/content';
-import { BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
+import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useHijriToday } from '@/hooks/use-hijri';
 import { useLocale } from '@/hooks/use-locale';
 import { usePrayerTimes } from '@/hooks/use-prayer-times';
@@ -348,7 +348,7 @@ const styles = StyleSheet.create({
     */
     paddingHorizontal: Spacing.three,
     paddingTop: Spacing.three,
-    paddingBottom: BottomTabInset + Spacing.two,
+    paddingBottom: Spacing.four,
     gap: Spacing.two,
     width: '100%',
     maxWidth: MaxContentWidth,

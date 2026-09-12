@@ -225,12 +225,16 @@ export default function SettingsScreen() {
     <ScrollView
       style={{ backgroundColor: theme.background }}
       contentContainerStyle={styles.content}>
-      {/* The native header carries no title — the page names itself below. */}
-      <Stack.Screen options={{ title: '' }} />
-      <View style={styles.header}>
-        <ThemedText type="subtitle">{t('settings.title')}</ThemedText>
-        <ThemedText type="default" themeColor="textSecondary">{t('settings.intro')}</ThemedText>
-      </View>
+      {/*
+        The native header carries the title, as on every other pushed page.
+        It used to carry none and the page named itself below, which left an
+        empty bar and a further 24 points of padding above a second title:
+        a blank third of a screen before anything (Iyad, 11 Sep 2026).
+      */}
+      <Stack.Screen options={{ title: t('settings.title') }} />
+      <ThemedText type="default" themeColor="textSecondary">
+        {t('settings.intro')}
+      </ThemedText>
 
       <Panel
         mark={<Glyph name="phrases" size={18} color={theme.gold} />}
@@ -358,10 +362,6 @@ const styles = StyleSheet.create({
     width: '100%',
     maxWidth: MaxContentWidth,
     alignSelf: 'center',
-  },
-  header: {
-    gap: Spacing.two,
-    paddingTop: Spacing.four,
   },
   /* The frame: the fihrist's double rule, with room above for the legend. */
   panelWrap: {

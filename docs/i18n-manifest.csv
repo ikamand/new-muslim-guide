@@ -8,15 +8,6 @@ Al-Fatihah — What is Al-Fatihah?,What is Al-Fatihah?
 Al-Fatihah — What is Al-Fatihah?,"The opening chapter of the Qur’an, seven short verses. Its name means ""The Opening"". It is the most repeated passage in the world: every Muslim says it in every unit of every prayer, which for most people is seventeen times a day."
 Al-Fatihah — Why does every prayer need it?,Why does every prayer need it?
 Al-Fatihah — Why does every prayer need it?,"Because without it there is no prayer. The Prophet ﷺ said that whoever does not recite Al-Fatihah in their prayer, their prayer is invalid. Of everything a new Muslim could memorise, this is the one that changes what they are able to do today."
-Asking God to choose — What can I ask about?,What can I ask about?
-Asking God to choose — What can I ask about?,"Any time except the times when prayer is held off, and about anything you genuinely have a choice in: a job, a move, a marriage, something smaller. Not about whether to do something already settled as right or wrong; there is nothing to ask about there."
-Asking God to choose — What do I say?,What do I say?
-Asking God to choose — What do I say?,"Said after the two rakʿahs. Where it says “this matter”, name the thing you are deciding."
-Asking God to choose — What is istikhara?,What is istikhara?
-Asking God to choose — What is istikhara?,"Two rakʿahs and a dua, prayed when you have a decision to make. Jabir reported that the Prophet ﷺ taught it for every matter the way he taught a surah of the Qur’an, which tells you how ordinary it was meant to be, and how often."
-Asking God to choose — What sign should I expect?,What sign should I expect?
-Asking God to choose — What sign should I expect?,"This is the part people are told wrong. The dua asks God, if the thing is good for you, to bring it about and make it easy, and if it is bad for you, to turn it away and turn you away from it. It does not promise a sign, a dream or a feeling. You pray, and then you decide, and what follows is the answer."
-Asking God to choose — What sign should I expect?,"You still have to think, ask people who know, and weigh it up. Istikhara goes alongside that, not instead of it."
 Becoming Muslim — Know what you are saying,Know what you are saying
 Becoming Muslim — Know what you are saying,"Becoming Muslim is one sentence, said and meant. Before you say it, be clear on both halves: that worship belongs to Allah alone and nothing shares that with Him, and that Muhammad ﷺ was sent by Him to convey how."
 Becoming Muslim — Know what you are saying,"It has to be meant. Saying the words to please someone else, or to marry, does not make a person Muslim."
@@ -338,18 +329,18 @@ Guide: Fajr,"2 rakʿah · Dawn, before sunrise"
 Guide: Fajr; Reference: Fajr,Fajr
 Guide: Ghusl,Ghusl
 Guide: Ghusl,"The full wash, and when you need it"
-Guide: Istikhara,Istikhara
 Guide: Istikhara,2 rakʿah · Ask Allah to choose when you have a decision to make
+Guide: Istikhara; Reference: Istikhara,Istikhara
 Guide: Maghrib,3 rakʿah · Just after sunset
 Guide: Maghrib; Reference: Maghrib,Maghrib
-Guide: Qiyam al-Layl,Qiyam al-Layl
 Guide: Qiyam al-Layl,"2 rakʿah · Any part of the night, before you sleep"
-Guide: Tahajjud,Tahajjud
+Guide: Qiyam al-Layl; Reference: Qiyam al-Layl,Qiyam al-Layl
 Guide: Tahajjud,2 rakʿah · The last third of the night
+Guide: Tahajjud; Reference: Tahajjud,Tahajjud
 Guide: Tayammum,Tayammum
 Guide: Tayammum,When you cannot use water
-Guide: The prayer of repentance,The prayer of repentance
 Guide: The prayer of repentance,2 rakʿah · Ask Allah for forgiveness
+Guide: The prayer of repentance; Reference: The prayer of repentance,The prayer of repentance
 Guide: Witr,"1 rakʿah · To close the night, after any night prayer"
 Guide: Witr; Reference: Witr,Witr
 Guide: Wudu,Wudu
@@ -515,6 +506,15 @@ Istikhara — Face the qibla and intend,"Stand facing the qibla, feet roughly sh
 Istikhara — Then ask,Then ask
 Istikhara — Then ask,"The prayer is finished. Still sitting, say the dua, and where it says “this matter”, name the thing you are deciding."
 Istikhara — Then ask,That is Istikhara complete.
+Istikhara — What can I ask about?,What can I ask about?
+Istikhara — What can I ask about?,"Any time except the times when prayer is held off, and about anything you genuinely have a choice in: a job, a move, a marriage, something smaller. Not about whether to do something already settled as right or wrong; there is nothing to ask about there."
+Istikhara — What do I say?,What do I say?
+Istikhara — What do I say?,"Said after the two rakʿahs. Where it says “this matter”, name the thing you are deciding."
+Istikhara — What is istikhara?,What is istikhara?
+Istikhara — What is istikhara?,"Two rakʿahs and a dua, prayed when you have a decision to make. Jabir reported that the Prophet ﷺ taught it for every matter the way he taught a surah of the Qur’an, which tells you how ordinary it was meant to be, and how often."
+Istikhara — What sign should I expect?,What sign should I expect?
+Istikhara — What sign should I expect?,"This is the part people are told wrong. The dua asks God, if the thing is good for you, to bring it about and make it easy, and if it is bad for you, to turn it away and turn you away from it. It does not promise a sign, a dream or a feeling. You pray, and then you decide, and what follows is the answer."
+Istikhara — What sign should I expect?,"You still have to think, ask people who know, and weigh it up. Istikhara goes alongside that, not instead of it."
 Losing count in prayer — I have lost count. What now?,I have lost count. What now?
 Losing count in prayer — I have lost count. What now?,"If you cannot remember whether you are on the second or third rakʿah, assume the smaller one, the number you are certain of, and carry on from there."
 Losing count in prayer — I have lost count. What now?,Do not start the prayer again. Restarting is the common instinct and it is not the answer.
@@ -634,15 +634,6 @@ Phrase: Taqabbala-llāhu minnā wa minkum,"Around Eid and after Ramadan, about t
 Phrase: ʿĪd Mubārak,A blessed Eid.
 Phrase: ʿĪd Mubārak,On either of the two Eids.
 Phrase: ʿĪd Mubārak,Say it back.
-Praying at night — How do I actually start?,How do I actually start?
-Praying at night — How do I actually start?,Set an alarm twenty minutes before Fajr rather than for the middle of the night. You are already going to be awake for Fajr; this is standing up a little earlier. Starting there is why people keep it.
-Praying at night — How little counts?,How little counts?
-Praying at night — How little counts?,"There is no minimum to reach and no number to work up to. Two rakʿahs, on one night, is the thing itself. People who pray it for decades mostly pray a little, often, which is the pattern the Prophet ﷺ described as the deeds God loves most, the small ones kept up."
-Praying at night — How little counts?,"It is the same prayer you already know. Nothing about the movements or the words changes. Only the time, and that you chose to be there."
-Praying at night — What if I have not slept?,What if I have not slept?
-Praying at night — What if I have not slept?,"Tahajjud is prayed after waking, which is what separates it from simply staying up late. If you have not slept, you are praying qiyam al-layl, which is also good, also voluntary, and not what this word means."
-Praying at night — What is tahajjud?,What is tahajjud?
-Praying at night — What is tahajjud?,"A prayer in the last part of the night, after you have slept and before Fajr. The Qur’an tells the Prophet ﷺ to keep part of the night for it as something additional, and that word matters: it is not owed. Nobody is behind for not praying it."
 Praying behind an imam — Do I still recite?,Do I still recite?
 Praying behind an imam — Do I still recite?,"In the prayers recited aloud, Fajr, Maghrib and ʿIsha, the imam recites and you listen. In the silent ones you recite quietly to yourself as usual. Either way, you say the same things in bowing and prostration that you would say alone."
 Praying behind an imam — Do I still recite?,Whether you also read Al-Fatihah quietly behind the imam in a prayer recited aloud is a point on which the schools genuinely differ. Follow what the mosque you are in does.
@@ -701,7 +692,16 @@ Qadr — What do I do with it day to day?,"Applied for a job: prepare properly, 
 Qadr — What does divine decree mean?,What does divine decree mean?
 Qadr — What does divine decree mean?,"That nothing takes Allah by surprise. Before anything happens, He knew it, it was written, He willed that it come to be, and He created it. The Qur’an says that no disaster strikes on earth or in yourselves except that it is in a register before it is brought into being, and that everything was created with measure. That is the belief in full. It is a statement about Allah, not a theory about you."
 Qiyam al-Layl — Face the qibla and intend,"Stand facing the qibla, feet roughly shoulder-width apart, and intend in your heart that you are praying Qiyam al-Layl."
+Qiyam al-Layl — How do I finish?,How do I finish?
+Qiyam al-Layl — How do I finish?,"Whatever you pray at night, end it with witr, a single rakʿah that makes the night’s total odd. It is what closes the night prayer."
+Qiyam al-Layl — How is it different from tahajjud?,How is it different from tahajjud?
+Qiyam al-Layl — How is it different from tahajjud?,"Whether you slept. Pray at night before sleeping and it is qiyam al-layl; sleep first, wake, and pray, and that is tahajjud. Both are voluntary, both are the same movements, and nobody is doing the lesser one."
+Qiyam al-Layl — How is it different from tahajjud?,"This is the whole difference. If you are unsure which you prayed, it does not affect whether it counted."
 Qiyam al-Layl — Turn to your left,That is Qiyam al-Layl complete.
+Qiyam al-Layl — What is qiyam al-layl?,What is qiyam al-layl?
+Qiyam al-Layl — What is qiyam al-layl?,"Praying at night, before you have slept. Any amount, any part of the night after Isha. It is the same prayer you already know: two rakʿahs at a time, as many times as you want."
+Qiyam al-Layl — Where will I hear the word?,Where will I hear the word?
+Qiyam al-Layl — Where will I hear the word?,"In Ramadan, mosques announce “qiyam” for the long night prayers in the last ten nights. Taraweeh is the same family of prayer. You are welcome at it, you can leave when you need to, and nobody is counting your rakʿahs."
 Ramadan — What are suhoor and iftar?,What are suhoor and iftar?
 Ramadan — What are suhoor and iftar?,"Suhoor is the meal before dawn. The Prophet ﷺ said to take it, because there is blessing in it, and skipping it makes a long day much harder. Iftar is breaking the fast at sunset, traditionally with dates and water, and he taught not to delay it once the sun is down."
 Ramadan — What does the fast involve?,What does the fast involve?
@@ -765,8 +765,6 @@ Reciter: Mohamed Siddiq El-Minshawi,"Gentle and very evenly paced, which makes t
 Reciter: Saad Al-Ghamdi,Soft and steady. Many people find this the easiest one to listen to for a long stretch.
 Reference: Al-Fatihah,Al-Fatihah
 Reference: Al-Fatihah,The one thing the prayer cannot do without
-Reference: Asking God to choose,Asking God to choose
-Reference: Asking God to choose,"Istikhara, and what it does not do"
 Reference: Building consistency,Building consistency
 Reference: Building consistency,"Small and steady, and why bursts do not last"
 Reference: Clothing,Clothing
@@ -813,6 +811,7 @@ Reference: Is Allah a different god?,Is Allah a different god?
 Reference: Is Allah a different god?,What to say when someone thinks you changed gods
 Reference: Isn’t Islam violent?,Isn’t Islam violent?
 Reference: Isn’t Islam violent?,What to say when the news is the question
+Reference: Istikhara,"Asking God to choose, and what it does not do"
 Reference: Losing count in prayer,Losing count in prayer
 Reference: Losing count in prayer,What to do when you are not sure where you are
 Reference: Maghrib,"The sunset prayer, and the day closed"
@@ -826,8 +825,6 @@ Reference: Patience and gratitude,Patience and gratitude
 Reference: Patience and gratitude,The two halves of getting through a life
 Reference: Periods and prayer,Periods and prayer
 Reference: Periods and prayer,"What changes, and what does not"
-Reference: Praying at night,Praying at night
-Reference: Praying at night,"Tahajjud, and how small it is allowed to be"
 Reference: Praying behind an imam,Praying behind an imam
 Reference: Praying behind an imam,What changes when you are not praying alone
 Reference: Praying when you cannot stand,Praying when you cannot stand
@@ -836,12 +833,12 @@ Reference: Praying while travelling,Praying while travelling
 Reference: Praying while travelling,Shortening and combining on a journey
 Reference: Qadr,Qadr
 Reference: Qadr,"Divine decree, your choices, and how both are true"
+Reference: Qiyam al-Layl,"Standing at night, and how it differs from tahajjud"
 Reference: Ramadan,Ramadan
 Reference: Ramadan,"What happens, and what is asked of you"
 Reference: Sincerity,Sincerity
 Reference: Sincerity,"Ikhlāṣ, and who you are doing it for"
-Reference: Standing at night,Standing at night
-Reference: Standing at night,"Qiyam al-Layl, and how it differs from tahajjud"
+Reference: Tahajjud,"Praying at night, and how small it is allowed to be"
 Reference: The angels,The angels
 Reference: The angels,"What they are, which ones you will hear named, and what they do near you"
 Reference: The animals and the land,The animals and the land
@@ -852,8 +849,7 @@ Reference: The call to prayer,The call to prayer
 Reference: The call to prayer,"What the adhan is, and what to do when you hear it"
 Reference: The Muslim year,The Muslim year
 Reference: The Muslim year,"Why the dates move, and what falls where"
-Reference: The prayer after a sin,The prayer after a sin
-Reference: The prayer after a sin,"Two rakʿahs, and what they are for"
+Reference: The prayer of repentance,"Two rakʿahs, and what they are for"
 Reference: The prophets,The prophets
 Reference: The prophets,"One message, many messengers, and the last of them"
 Reference: The revealed books,The revealed books
@@ -960,17 +956,17 @@ Six Articles — Belief in the messengers,"Many of them will already be familiar
 Six Articles — Belief in the revealed books,Belief in the revealed books
 Six Articles — Belief in the revealed books,"That Allah sent scripture to guide people, and that the Qur’an is the last of it."
 Six Articles — Belief in the revealed books,"The Qur’an names earlier revelations, among them the Tawrat given to Musa and the Injil given to ʿIsa. Believing in them means believing Allah sent them. It does not mean the texts other faiths read today are those revelations as they were sent."
-Standing at night — How do I finish?,How do I finish?
-Standing at night — How do I finish?,"Whatever you pray at night, end it with witr, a single rakʿah that makes the night’s total odd. It is what closes the night prayer."
-Standing at night — How is it different from tahajjud?,How is it different from tahajjud?
-Standing at night — How is it different from tahajjud?,"Whether you slept. Pray at night before sleeping and it is qiyam al-layl; sleep first, wake, and pray, and that is tahajjud. Both are voluntary, both are the same movements, and nobody is doing the lesser one."
-Standing at night — How is it different from tahajjud?,"This is the whole difference. If you are unsure which you prayed, it does not affect whether it counted."
-Standing at night — What is qiyam al-layl?,What is qiyam al-layl?
-Standing at night — What is qiyam al-layl?,"Praying at night, before you have slept. Any amount, any part of the night after Isha. It is the same prayer you already know: two rakʿahs at a time, as many times as you want."
-Standing at night — Where will I hear the word?,Where will I hear the word?
-Standing at night — Where will I hear the word?,"In Ramadan, mosques announce “qiyam” for the long night prayers in the last ten nights. Taraweeh is the same family of prayer. You are welcome at it, you can leave when you need to, and nobody is counting your rakʿahs."
 Tahajjud — Face the qibla and intend,"Stand facing the qibla, feet roughly shoulder-width apart, and intend in your heart that you are praying Tahajjud."
+Tahajjud — How do I actually start?,How do I actually start?
+Tahajjud — How do I actually start?,Set an alarm twenty minutes before Fajr rather than for the middle of the night. You are already going to be awake for Fajr; this is standing up a little earlier. Starting there is why people keep it.
+Tahajjud — How little counts?,How little counts?
+Tahajjud — How little counts?,"There is no minimum to reach and no number to work up to. Two rakʿahs, on one night, is the thing itself. People who pray it for decades mostly pray a little, often, which is the pattern the Prophet ﷺ described as the deeds God loves most, the small ones kept up."
+Tahajjud — How little counts?,"It is the same prayer you already know. Nothing about the movements or the words changes. Only the time, and that you chose to be there."
 Tahajjud — Turn to your left,That is Tahajjud complete.
+Tahajjud — What if I have not slept?,What if I have not slept?
+Tahajjud — What if I have not slept?,"Tahajjud is prayed after waking, which is what separates it from simply staying up late. If you have not slept, you are praying qiyam al-layl, which is also good, also voluntary, and not what this word means."
+Tahajjud — What is tahajjud?,What is tahajjud?
+Tahajjud — What is tahajjud?,"A prayer in the last part of the night, after you have slept and before Fajr. The Qur’an tells the Prophet ﷺ to keep part of the night for it as something additional, and that word matters: it is not owed. Nobody is behind for not praying it."
 Tayammum — Intend,"Intend in your heart that you are purifying yourself for prayer, in place of using water."
 Tayammum — Touch the ground,Touch the ground
 Tayammum — Touch the ground,"Place both palms flat on a clean natural surface: earth, sand, stone, or dust settled on something. Lift them and shake off any excess."
@@ -1044,13 +1040,13 @@ The Muslim year — Which months ask anything of me?,Which months ask anything o
 The Muslim year — Which months ask anything of me?,"Only one thing in the year is obligatory, and that is Ramadan, which has a page of its own. Four other things are worth knowing about, because you will hear all four mentioned, and none of them is required. The fast of ʿAshuraʾ, on the tenth of Muharram, which the Prophet ﷺ kept and which became voluntary once Ramadan was prescribed. Fasting in Shaʿban, which he did more than in any month except Ramadan. Six fasts spread through Shawwal, after Ramadan. And the first ten days of Dhul-Hijjah, which he described as the best days of the year for doing good."
 The Muslim year — Why does the date move every year?,Why does the date move every year?
 The Muslim year — Why does the date move every year?,"Because the year is made of twelve lunar months, each beginning with a new moon, and that makes it about eleven days shorter than the solar year. So Ramadan and the two Eids arrive about eleven days earlier each year rather than falling on fixed dates. Over a lifetime they pass through every season."
-The prayer after a sin — Do I have to pray it to be forgiven?,Do I have to pray it to be forgiven?
-The prayer after a sin — Do I have to pray it to be forgiven?,"You are forgiven by turning back to God and meaning it. There is no ceremony and nothing to perform. This prayer is something you may do, not a step you have missed. It exists because doing something with your body often helps when saying it in your head does not."
-The prayer after a sin — Do I have to pray it to be forgiven?,"There is no limit, and no shame in praying it often. Somebody who prays it twice in a week has not failed twice. They have turned back twice."
-The prayer after a sin — What is it for?,What is it for?
-The prayer after a sin — What is it for?,"Abu Bakr reported that the Prophet ﷺ said no one does something wrong, then gets up and purifies himself, then prays, then asks God’s forgiveness, except that God forgives him. Wudu, two rakʿahs, and asking. Nothing more is needed."
+The prayer of repentance — Do I have to pray it to be forgiven?,Do I have to pray it to be forgiven?
+The prayer of repentance — Do I have to pray it to be forgiven?,"You are forgiven by turning back to God and meaning it. There is no ceremony and nothing to perform. This prayer is something you may do, not a step you have missed. It exists because doing something with your body often helps when saying it in your head does not."
+The prayer of repentance — Do I have to pray it to be forgiven?,"There is no limit, and no shame in praying it often. Somebody who prays it twice in a week has not failed twice. They have turned back twice."
 The prayer of repentance — Face the qibla and intend,"Stand facing the qibla, feet roughly shoulder-width apart, and intend in your heart that you are praying The prayer of repentance."
 The prayer of repentance — Turn to your left,That is The prayer of repentance complete.
+The prayer of repentance — What is it for?,What is it for?
+The prayer of repentance — What is it for?,"Abu Bakr reported that the Prophet ﷺ said no one does something wrong, then gets up and purifies himself, then prays, then asks God’s forgiveness, except that God forgives him. Wudu, two rakʿahs, and asking. Nothing more is needed."
 The prophets — Can I believe in some and not others?,Can I believe in some and not others?
 The prophets — Can I believe in some and not others?,"No, and this is the part that surprises people who came from another faith. Believing in the prophets means all of them, as men Allah sent, without ranking one people’s prophet above another’s. The Qur’an puts the words in the believers’ mouths: we make no distinction between any of His messengers. You do not give up Musa or ʿIsa by becoming Muslim. You keep them, and you stop being asked to choose."
 The prophets — Did they teach different religions?,Did they teach different religions?

@@ -30,8 +30,17 @@ import type { Reference } from '../types';
 export const TAHAJJUD: Reference = {
   id: 'tahajjud',
   surface: 'learn',
-  title: 'Praying at night',
-  subtitle: 'Tahajjud, and how small it is allowed to be',
+  /*
+    Titled with the name since 12 Sep 2026, as the chooser rows and Today's
+    card already were; the English gloss moved into the subtitle. A header is
+    what you read after tapping, and "Praying at night" under a row that said
+    "Tahajjud" read as a wrong turn (Iyad, on the phone). And this title
+    against "Standing at night" were near-synonyms, hiding the one fact that
+    separates the two prayers. Same on the other three below; witr was the
+    model.
+  */
+  title: 'Tahajjud',
+  subtitle: 'Praying at night, and how small it is allowed to be',
   meta: {
     category: 'salah',
     difficulty: 'building',
@@ -94,8 +103,8 @@ export const TAHAJJUD: Reference = {
 export const ISTIKHARA: Reference = {
   id: 'istikhara',
   surface: 'learn',
-  title: 'Asking God to choose',
-  subtitle: 'Istikhara, and what it does not do',
+  title: 'Istikhara',
+  subtitle: 'Asking God to choose, and what it does not do',
   meta: {
     category: 'salah',
     difficulty: 'building',
@@ -160,7 +169,7 @@ export const ISTIKHARA: Reference = {
 export const TAWBA_PRAYER: Reference = {
   id: 'tawba-prayer',
   surface: 'learn',
-  title: 'The prayer after a sin',
+  title: 'The prayer of repentance',
   subtitle: 'Two rakʿahs, and what they are for',
   meta: {
     category: 'salah',
@@ -212,8 +221,8 @@ export const TAWBA_PRAYER: Reference = {
 export const QIYAM_AL_LAYL: Reference = {
   id: 'qiyam-al-layl',
   surface: 'learn',
-  title: 'Standing at night',
-  subtitle: 'Qiyam al-Layl, and how it differs from tahajjud',
+  title: 'Qiyam al-Layl',
+  subtitle: 'Standing at night, and how it differs from tahajjud',
   meta: {
     category: 'salah',
     difficulty: 'building',

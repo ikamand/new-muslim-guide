@@ -229,6 +229,15 @@ export function useToday(): TodayItem | undefined {
       span from ʿIshāʾ to Fajr, split in three. A fact about the sky, and the
       only thing the app can honestly say about the night — whether anybody has
       prayed witr yet is not its business.
+
+      The PAGE, not the walkthrough. Every other door to a voluntary prayer
+      has opened the reference since the inversion of 25 Aug (the plan, "The
+      inversion"), with the generated guide one tap down behind the page's
+      own "How". This card was built three days later against the guide and
+      was the one door that never got it: at 4am it opened a twenty-three-step
+      stepper for a prayer the reader already prays five times a day, and
+      skipped the page's first sentence, that nobody is behind for not
+      praying it. Iyad caught it on the phone, 12 Sep 2026.
     */
     const isha = today?.prayers.find((prayer) => prayer.id === 'isha')?.time;
     const fajr = today?.prayers.find((prayer) => prayer.id === 'fajr')?.time;
@@ -260,11 +269,11 @@ export function useToday(): TodayItem | undefined {
           span.from.getTime() + ((span.to.getTime() - span.from.getTime()) * 2) / 3,
         );
         if (now >= lastThird && now < span.to) {
-          const tahajjud = resolveRef({ kind: 'guide', id: 'tahajjud' });
+          const tahajjud = resolveRef({ kind: 'reference', id: 'tahajjud' });
           if (tahajjud) {
             const entry = localiseCatalogEntry(tahajjud, locale);
             return {
-              key: 'guide:tahajjud',
+              key: 'reference:tahajjud',
               reason: 'today.lastThird',
               title: entry.title,
               description: entry.shortDescription,

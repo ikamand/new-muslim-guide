@@ -250,9 +250,10 @@ export default function PrayScreen() {
           have is why they would stand up. The generated guide is one tap
           further in, behind a button on the page this opens.
 
-          The row is named for the prayer rather than for the page — somebody
-          who heard "tahajjud" is looking for tahajjud, and cannot find it
-          under "Praying at night".
+          The row is named for the prayer — somebody who heard "tahajjud" is
+          looking for tahajjud. Since 12 Sep 2026 the page is too; until then
+          it was "Praying at night", and a header that does not repeat what
+          was tapped read as a wrong turn.
         */}
         <View>
         {VOLUNTARY_PRAYERS.map((prayer) => (

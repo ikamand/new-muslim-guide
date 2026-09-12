@@ -1663,6 +1663,15 @@ stops being the wall you hit first.
 - The footer link to "what these prayers are for" is then pointing at the place
   the rows already go. **Delete it.**
 
+**Correction, 12 Sep.** One door never got the inversion. Today's *last third
+of the night* card, built 28 Aug in the ranked "worth today" slot, resolved
+`guide:tahajjud`, so at 4am it opened the twenty-three-step walkthrough — the
+exact wall the table above retires — and skipped the page's first sentence,
+that nobody is behind for not praying it. Iyad caught it on the phone. Now
+`reference:tahajjud` at `src/hooks/use-today.ts:272`, like the chooser, the
+curriculum and the Ramadan arc; the guide stays one tap down behind the page's
+own "How". Witr and qiyam were checked and were never offered on Today at all.
+
 ### ✅ Built — the istikhara duʿa is on the page
 
 Iyad's point, and the sharpest one of the day: *"istikhara has the istikhara
@@ -2130,6 +2139,23 @@ only valid one — someone who reads "the last third" as a requirement, decides
 they cannot manage it, and drops the prayer has been taught the opposite of
 what the page says. Iyad's wording stands; the note belongs on the reviewer's
 list, and the page body should keep saying that any time after sleeping counts.
+
+**Reversed, 12 Sep — the pages carry the names too.** Iyad, on the phone: a row
+that says "Tahajjud" opening a header that says "Praying at night", and "Qiyam
+al-Layl" opening "Standing at night", is "weird to have two different titles".
+The argument above held for the row and missed the header: the header is the
+thing read *after* tapping, and when it does not repeat what was tapped it
+reads as a wrong turn. Worse, "Praying at night" and "Standing at night" are
+near-synonyms in English, which hid the one fact that separates the two
+prayers — the very risk the ⚠️ note at *Qiyam al-Layl added* names. So the
+witr pattern on all four: the title is the name, the gloss moves into the
+subtitle. `src/content/learn/voluntary-prayers.ts:42` *Tahajjud* / "Praying at
+night, and how small it is allowed to be"; `:224` *Qiyam al-Layl* / "Standing
+at night, and how it differs from tahajjud"; `:106` *Istikhara* / "Asking God
+to choose, and what it does not do"; `:172` the repentance prayer takes the
+row's label, "The prayer of repentance", subtitle unchanged. The row labels in
+the table above are untouched. No French or Spanish had been written for any
+of the four titles, so the i18n manifest was the only regeneration.
 
 ### Drawn, 25 Aug — three decisions the mockup made
 

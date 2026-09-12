@@ -131,8 +131,10 @@ type PrayerSpec = {
    *
    * A row is scanned by somebody who HEARD a word and is trying to find it —
    * "tahajjud", "istikhara" — so the row leads with the name. The reference
-   * page it opens can afford the better title ("Praying at night"). Row and
-   * page want different names, and this is the row's.
+   * page it opens used to take a more evocative title ("Praying at night");
+   * since 12 Sep 2026 it carries the name too, with the gloss in its
+   * subtitle, because a header that does not repeat what was tapped reads as
+   * a wrong turn. This is still the row's own phrasing ("Praying Tahajjud").
    */
   listTitle?: string;
   /**

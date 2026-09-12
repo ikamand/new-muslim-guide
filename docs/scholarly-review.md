@@ -806,11 +806,14 @@ nothing here ships a public release unreviewed.**
      consistent with the Missing a prayer page. The Hanafi position is the
      differs note. Is the attribution to each school stated correctly?
   3. **The wording.** "Voluntary prayer is forbidden", with the span printed
-     ("from your Fajr until 7:03 AM", "1:02 – 1:07 PM", "from your ʿAsr
-     until Maghrib"). "Forbidden" is Iyad's call (11 Sep 2026), reversing
-     the first draft's "held off"; "voluntary" is kept so a convert who has
-     overslept never reads "praying is forbidden". Is "voluntary" the right
-     English for nafl here, and are the two "from your …" spans stated
+     ("after praying Fajr, until 7:03 AM", "1:02 – 1:07 PM", "after praying
+     ʿAsr, until Maghrib at 7:22 PM"). "Forbidden" is
+     Iyad's call (11 Sep 2026), reversing the first draft's "held off";
+     "voluntary" is kept so a convert who has overslept never reads
+     "praying is forbidden". The first draft said "from your Fajr", and on
+     the phone it read as the Fajr time (12 Sep); the caption now follows
+     the lesson's sentence, "once you have prayed Fajr". Is "voluntary" the
+     right English for nafl here, and are the two prayer-bound spans stated
      acceptably given the app cannot know when the reader prayed?
   4. **The reason** as printed under "Why these times?": the horns of a
      devil and those who worship the sun, from Bukhari 3273 with HadeethEnc's

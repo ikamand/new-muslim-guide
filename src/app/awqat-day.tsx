@@ -80,8 +80,11 @@ import {
  * and a missed one never are. The ruling, its evidence and its numbers live
  * in `lib/prayer-times.ts` (`pausesOf`) and in `learn/held-off-times.ts`;
  * this screen only draws them. The two spans that begin at the reader's own
- * Fajr and ʿAsr are stated as such — the app cannot know when somebody
- * prayed and does not ask — and a band lights only for its sun-bound part.
+ * Fajr and ʿAsr are stated as such, "after praying Fajr" — the app
+ * cannot know when somebody prayed and does not ask — and a band lights
+ * only for its sun-bound part. The sunrise band sits under Fajr rather than
+ * under Sunrise since 12 Sep, because the list is an order, not a scale,
+ * and its row has to begin where its sentence does.
  *
  * ## Any date
  *
@@ -531,11 +534,20 @@ export default function AwqatDayScreen() {
 
   const entries: Entry[] = [
     prayerEntry('fajr'),
-    momentEntry('sunrise', t('awqat.day.sunrise'), day.sunrise),
+    /*
+      Under Fajr, above Sunrise. The list is drawn in this order, not to
+      time scale, so a row's place is the only "when" it has — and this
+      band's sentence begins at the reader's Fajr, not at sunrise. Sitting
+      under the Sunrise row it said "from sunrise" with its position and
+      "from Fajr" with its words, and the position won (Iyad, 12 Sep 2026).
+      Its `at` is still sunrise, so the thread and the gold light only the
+      sun-bound quarter hour the app can actually know.
+    */
     pauseEntry(
       sunrisePause,
       t('awqat.pause.sunrise').replace('{time}', formatTime(sunrisePause.to)),
     ),
+    momentEntry('sunrise', t('awqat.day.sunrise'), day.sunrise),
     pauseEntry(
       noonPause,
       t('awqat.pause.noon')

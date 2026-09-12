@@ -470,11 +470,22 @@ export const EN = {
     overslept must not read "praying is forbidden" and not pray. The two
     spans tied to the reader's own prayer are stated as such: the app
     cannot know when somebody prayed. Numbers live in lib/prayer-times.ts.
+
+    "After praying Fajr", not "from your Fajr" (Iyad, 12 Sep 2026).
+    The first draft let "your" carry the whole meaning — the Fajr you PRAYED
+    — and nobody hears that: on the phone it read as the Fajr time, and
+    "from your ʿAsr until Maghrib" as the ʿAsr window's last minute. The
+    span begins when the prayer has been prayed (Bukhari 586: no prayer
+    after the morning prayer till the sun rises, none after ʿAsr till it
+    sets), and the caption now says so in the lesson's own words. "After
+    praying" rather than "after you have prayed" because the ʿAsr caption
+    with the longer form wrapped at 390px and stranded "PM" on a line of its
+    own; the shorter form says the same thing on one line.
   */
   'awqat.pause.title': 'Voluntary prayer is forbidden',
-  'awqat.pause.sunrise': 'from your Fajr until {time}',
+  'awqat.pause.sunrise': 'after praying Fajr, until {time}',
   'awqat.pause.noon': '{from} – {to}, as the sun stands at its height',
-  'awqat.pause.sunset': 'from your ʿAsr until Maghrib, {time}',
+  'awqat.pause.sunset': 'after praying ʿAsr, until Maghrib at {time}',
   'awqat.pause.note':
     'The five prayers, and a missed one, are never forbidden. Only voluntary prayer is, at these three times.',
   'awqat.projected':

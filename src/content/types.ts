@@ -183,6 +183,15 @@ export type Pillar = {
 };
 
 /**
+ * One mark on a drawn timeline, one per bullet (see `ReferenceSection.timeline`).
+ *
+ * The marks are counts, not decoration: `start` opens the line; `pairs` is
+ * prayer two rakʿahs at a time; `closing` is shafʿ and witr, two then one;
+ * `earlier` is that same closing prayed before sleep, drawn off the line.
+ */
+export type TimelineMark = 'start' | 'pairs' | 'closing' | 'earlier';
+
+/**
  * A reference topic — headed answers, not a sequence you follow.
  *
  * Distinct from a `Guide` because nobody works through this holding a phone
@@ -209,6 +218,13 @@ export type ReferenceSection = {
    * A leading `**bold**` marks the lead-in.
    */
   bullets?: readonly string[];
+  /**
+   * Draw `bullets` as a timeline, one mark per bullet, in order. The words
+   * stay the bullets', so nothing is written twice and a screen reader reads
+   * the same sentences. Ignored unless there are exactly as many marks as
+   * bullets, and `npm run night:check` fails if they differ.
+   */
+  timeline?: readonly TimelineMark[];
   /**
    * Print this section's first citation on the page rather than only in the
    * drawer beneath it.

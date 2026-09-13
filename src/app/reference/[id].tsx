@@ -16,6 +16,7 @@ import {
   TeachingHeading,
   TeachingSource,
 } from '@/components/teaching';
+import { TeachingTimeline } from '@/components/teaching/timeline';
 import { ThemedText } from '@/components/themed-text';
 import { TranslationGap } from '@/components/translation-gap';
 import { formatSource, getReference, resolveNotes, resolveRef, type ReferenceSection, type Source } from '@/content';
@@ -285,11 +286,15 @@ function Section({
         />
       )}
 
-      {bullets.map((text, index) => (
-        <TeachingBullet key={text} last={index === bullets.length - 1 && trailing === 'bullets'}>
-          <TeachingBulletText text={text} />
-        </TeachingBullet>
-      ))}
+      {section.timeline && section.timeline.length === bullets.length ? (
+        <TeachingTimeline items={bullets} marks={section.timeline} last={trailing === 'bullets'} />
+      ) : (
+        bullets.map((text, index) => (
+          <TeachingBullet key={text} last={index === bullets.length - 1 && trailing === 'bullets'}>
+            <TeachingBulletText text={text} />
+          </TeachingBullet>
+        ))
+      )}
 
       {section.says && (
         <View style={trailing === 'says' && styles.endsSection}>

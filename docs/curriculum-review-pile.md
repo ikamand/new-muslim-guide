@@ -336,6 +336,10 @@ worship-changing first.
   the Prophet ﷺ, no longer argued from.
 - **Recitation**: the night guides now say "quietly or aloud in a low voice,
   whichever helps you focus" (Abu Dawud 1437; Ibn Baz in IslamQA 67618).
+- **The drawn order** on the night-prayer page: pairs of dots for night
+  prayer, two-then-one for shafʿ and witr, the outline for praying them
+  before sleep. A drawing that teaches a count is content (CLAUDE.md); check
+  the marks say what the bullets say.
 
 ### Taraweeh — `learn/taraweeh.ts`, new
 

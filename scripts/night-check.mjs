@@ -350,6 +350,35 @@ if (!firstFast) {
   console.log('  witr guide: shafʿ, then witr, 38 steps');
 }
 
+/*
+  The night drawn as a timeline (Iyad, 13 Sep 2026): one mark per bullet,
+  marks from the known set, and the night-prayer page's order section drawn
+  start → pairs → closing → earlier. A mark list that drifts from its bullets
+  would draw the wrong count beside a sentence, which is a ruling on screen.
+*/
+{
+  const Learn = await import('../src/content/learn/index.ts');
+  const MARKS = new Set(['start', 'pairs', 'closing', 'earlier']);
+  const pages = Object.values(Learn).filter((value) => value && Array.isArray(value.sections));
+  for (const page of pages) {
+    for (const section of page.sections) {
+      if (!section.timeline) continue;
+      const bullets = section.bullets ?? [];
+      if (section.timeline.length !== bullets.length) {
+        fail(`${page.id}.${section.id}: ${section.timeline.length} timeline marks for ${bullets.length} bullets`);
+      }
+      for (const mark of section.timeline) {
+        if (!MARKS.has(mark)) fail(`${page.id}.${section.id}: unknown timeline mark "${mark}"`);
+      }
+    }
+  }
+  const order = Learn.QIYAM_AL_LAYL.sections.find((section) => section.id === 'order');
+  if (order?.timeline?.join(',') !== 'start,pairs,closing,earlier') {
+    fail(`qiyam-al-layl.order: timeline is ${order?.timeline?.join(',') ?? 'missing'}`);
+  }
+  console.log('  night order: drawn as start, pairs, closing, earlier');
+}
+
 if (failures > 0) {
   console.error(`\n${failures} failure(s).`);
   process.exit(1);

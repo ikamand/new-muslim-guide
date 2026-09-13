@@ -277,6 +277,7 @@ export const QIYAM_AL_LAYL: Reference = {
         '**Last, shafʿ and witr**: two rakʿahs, then one, before Fajr.',
         '**Not sure you will wake?** Pray shafʿ and witr before you sleep. If you then wake, pray in twos and do not pray witr again.',
       ],
+      timeline: ['start', 'pairs', 'closing', 'earlier'],
       sources: [
         hadith('bukhari', '1180', { grading: 'sahih', role: 'practice' }),
         hadith('bukhari', '990', { grading: 'sahih', role: 'practice' }),

@@ -806,8 +806,8 @@ nothing here ships a public release unreviewed.**
      consistent with the Missing a prayer page. The Hanafi position is the
      differs note. Is the attribution to each school stated correctly?
   3. **The wording.** "Voluntary prayer is forbidden", with the span printed
-     ("after praying Fajr, until 7:03 AM", "1:02 – 1:07 PM", "after praying
-     ʿAsr, until Maghrib at 7:22 PM"). "Forbidden" is
+     ("from when you pray Fajr until 7:03 AM", "1:02 – 1:07 PM", "from when
+     you pray ʿAsr until Maghrib"). "Forbidden" is
      Iyad's call (11 Sep 2026), reversing the first draft's "held off";
      "voluntary" is kept so a convert who has overslept never reads
      "praying is forbidden". The first draft said "from your Fajr", and on

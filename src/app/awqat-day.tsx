@@ -80,7 +80,7 @@ import {
  * and a missed one never are. The ruling, its evidence and its numbers live
  * in `lib/prayer-times.ts` (`pausesOf`) and in `learn/held-off-times.ts`;
  * this screen only draws them. The two spans that begin at the reader's own
- * Fajr and ʿAsr are stated as such, "after praying Fajr" — the app
+ * Fajr and ʿAsr are stated as such, "from when you pray Fajr" — the app
  * cannot know when somebody prayed and does not ask — and a band lights
  * only for its sun-bound part. The sunrise band sits under Fajr rather than
  * under Sunrise since 12 Sep, because the list is an order, not a scale,
@@ -556,10 +556,9 @@ export default function AwqatDayScreen() {
     ),
     prayerEntry('dhuhr'),
     prayerEntry('asr'),
-    pauseEntry(
-      sunsetPause,
-      t('awqat.pause.sunset').replace('{time}', formatTime(at('maghrib').time)),
-    ),
+    /* No {time}: the Maghrib row below carries it, and naming it here cost
+       a wrapped line at 360px. See the note in ui.ts. */
+    pauseEntry(sunsetPause, t('awqat.pause.sunset')),
     prayerEntry('maghrib'),
     prayerEntry('isha'),
     momentEntry('midnight', t('awqat.day.midnight'), day.middleOfNight),

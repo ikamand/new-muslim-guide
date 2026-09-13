@@ -142,7 +142,7 @@ export const TAWBA_PRAYER: Reference = {
  * said qiyam al-layl was prayer BEFORE sleeping and tahajjud prayer after.
  * Qiyam al-layl is the umbrella term for any voluntary prayer at night after
  * Isha, before sleep or after it (IslamWeb 138716, IslamQA 305489), and
- * tahajjud is that prayer after sleep in the word's strict sense, while most
+ * tahajjud is that prayer after sleep in the word's strict sense, while many
  * jurists use it for night prayer at any time (IslamQA 143240, citing
  * al-Mawsuʿah al-Fiqhiyyah). Iyad named the page, and put the fact that
  * matters into one sentence: qiyam becomes tahajjud if you sleep first.
@@ -161,7 +161,13 @@ export const TAWBA_PRAYER: Reference = {
  *
  * ⚠️ REVIEW REQUIRED — model-written English over opened sources. What a
  * reviewer owns: whether "qiyam becomes tahajjud if you sleep first" should
- * lead, given that most jurists use the two words for the same thing.
+ * lead, given that many jurists use the two words for the same thing.
+ *
+ * 13 Sep 2026: "Where does witr go?" became "What comes first?", the order of
+ * the night in four lines (docs/night-prayers-accuracy.md Part 2). Iyad's
+ * understanding was shafʿ and witr first, then qiyam, then tahajjud. The
+ * sources put shafʿ and witr LAST, as the end of the one night prayer, with
+ * early witr for someone who might not wake.
  */
 export const QIYAM_AL_LAYL: Reference = {
   id: 'qiyam-al-layl',
@@ -212,7 +218,6 @@ export const QIYAM_AL_LAYL: Reference = {
         scholarly({
           work: 'The difference between tahajjud and qiyam al-layl',
           author: 'Islam Question & Answer, fatwa 143240',
-          school: 'the majority',
           url: 'https://islamqa.info/en/answers/143240',
         }),
       ],
@@ -263,14 +268,26 @@ export const QIYAM_AL_LAYL: Reference = {
       sources: [hadith('bukhari', '6465', { grading: 'sahih', role: 'virtue' })],
     },
     {
-      id: 'witr',
-      heading: 'Where does witr go?',
-      body:
-        'At the end, to close your night prayer. If you are not sure you will wake, pray witr before you sleep, and if you then wake, pray two at a time without praying witr again. A night has only one witr.',
+      id: 'order',
+      heading: 'What comes first?',
+      body: 'One night prayer, with a fixed ending.',
+      bullets: [
+        '**After Isha**, its two sunnah rakʿahs.',
+        '**Then your night prayer**, two rakʿahs at a time, as much as you like. After sleeping it is tahajjud, and in Ramadan it is taraweeh.',
+        '**Last, shafʿ and witr**: two rakʿahs, then one, before Fajr.',
+        '**Not sure you will wake?** Pray shafʿ and witr before you sleep. If you then wake, pray in twos and do not pray witr again.',
+      ],
       sources: [
-        hadith('muslim', '755', { grading: 'sahih', role: 'practice' }),
+        hadith('bukhari', '1180', { grading: 'sahih', role: 'practice' }),
         hadith('bukhari', '990', { grading: 'sahih', role: 'practice' }),
+        hadith('bukhari', '998', { grading: 'sahih', role: 'practice' }),
+        hadith('muslim', '755', { grading: 'sahih', role: 'practice' }),
         hadith('abu-dawud', '1439', { grading: 'sahih', role: 'practice' }),
+        scholarly({
+          work: 'Shafʿ and witr are part of qiyam al-layl',
+          author: 'IslamWeb, fatwa 416554',
+          url: 'https://www.islamweb.net/ar/fatwa/416554/',
+        }),
       ],
     },
     {

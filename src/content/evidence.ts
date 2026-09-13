@@ -3024,11 +3024,11 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
     "arabicFrom": "fawazahmed0/hadith-api",
     "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
   },
-  "muslim:755": {
-    "arabic": "عن جابر رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم : «من خاف أن لا يقوم من آخِرِ الليل فليوتر أوله، ومن طَمِعَ أن يقوم آخره فليوتر آخر الليل، فإن صلاة آخر الليل مشهودة، وذلك أفضل».",
-    "translation": "Jābir (may Allah be pleased with him) reported that the Messenger of Allah (may Allah's peace and blessings be upon him) said: \"If anyone fears that he will not wake up at the end of the night, let him offer Witr prayer at the beginning of the night; and anyone expects to wake up at the end of the night, let him offer Witr prayer at the end of the night. Indeed, prayer at the end of the night is witnessed (by the angels) and that is better.\"",
-    "attribution": "Narrated by Muslim",
-    "grade": "Authentic hadith",
+  "bukhari:1180": {
+    "arabic": "عَنِ ابْنِ عُمَرَ رَضِيَ اللَّهُ عَنْهُمَا قَالَ: حَفِظْتُ مِنَ النَّبِيِّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ عَشْرَ رَكَعَاتٍ: رَكْعَتَيْنِ قَبْلَ الظُّهْرِ، وَرَكْعَتَيْنِ بَعْدَهَا، وَرَكْعَتَيْنِ بَعْدَ المَغْرِبِ فِي بَيْتِهِ، وَرَكْعَتَيْنِ بَعْدَ العِشَاءِ فِي بَيْتِهِ، وَرَكْعَتَيْنِ قَبْلَ صَلاَةِ الصُّبْحِ، وَكَانَتْ سَاعَةً لاَ يُدْخَلُ عَلَى النَّبِيِّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ فِيهَا، حَدَّثَتْنِي حَفْصَةُ أَنَّهُ كَانَ إِذَا أَذَّنَ المُؤَذِّنُ وَطَلَعَ الفَجْرُ صَلَّى رَكْعَتَيْنِ، وَفِي لَفْظٍ: أَنَّ النَّبِيَّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ كَانَ يُصَلِّي بَعْدَ الْجُمُعَةِ رَكْعَتَيْنِ.",
+    "translation": "Ibn ‘Umar (may Allah be pleased with him and his father) reported: I memorized from the Prophet (may Allah's peace and blessings be upon him) ten Rak‘ahs (units of prayer): two Rak‘ahs before Zhuhr and two Rak‘ahs after it, two Rak‘ahs after Maghrib at his home, two Rak‘ahs after ‘Ishā’ at his home, and two Rak‘ahs before the Fajr prayer, an hour when none was allowed to enter upon the Prophet (may Allah's peace and blessings be upon him). Hafsah told me that after the muezzin would make Adhān (call to prayer) and after the break of dawn, the Prophet (may Allah's peace and blessings be upon him) used to offer two Rak‘ahs. Another wording reads: The Prophet (may Allah's peace and blessings be upon him) used to offer two Rak‘ahs after the Friday prayer.",
+    "attribution": "Al-Bukhari and Muslim with all its versions",
+    "grade": "Authentic",
     "arabicFrom": "HadeethEnc.com",
     "translationFrom": "HadeethEnc.com"
   },
@@ -3039,13 +3039,6 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
     "arabicFrom": "fawazahmed0/hadith-api",
     "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
   },
-  "bukhari:2009": {
-    "arabic": "عَنْ أَبِي هُرَيْرَةَ ـ رضى الله عنه ـ أَنَّ رَسُولَ اللَّهِ صلى الله عليه وسلم قَالَ ‏ \"‏ مَنْ قَامَ رَمَضَانَ إِيمَانًا وَاحْتِسَابًا غُفِرَ لَهُ مَا تَقَدَّمَ مِنْ ذَنْبِهِ ‏\"‏‏.‏ قَالَ ابْنُ شِهَابٍ فَتُوُفِّيَ رَسُولُ اللَّهِ صلى الله عليه وسلم وَالأَمْرُ عَلَى ذَلِكَ، ثُمَّ كَانَ الأَمْرُ عَلَى ذَلِكَ فِي خِلاَفَةِ أَبِي بَكْرٍ وَصَدْرًا مِنْ خِلاَفَةِ عُمَرَ ـ رضى الله عنهما.‏",
-    "isnad": "حَدَّثَنَا عَبْدُ اللَّهِ بْنُ يُوسُفَ، أَخْبَرَنَا مَالِكٌ، عَنِ ابْنِ شِهَابٍ، عَنْ حُمَيْدِ بْنِ عَبْدِ الرَّحْمَنِ",
-    "translation": "Narrated Abu Huraira: Allah's Messenger (ﷺ) said, \"Whoever prayed at night the whole month of Ramadan out of sincere Faith and hoping for a reward from Allah, then all his previous sins will be forgiven.\" Ibn Shihab (a sub-narrator) said, \"Allah's Messenger (ﷺ) died and the people continued observing that (i.e. Nawafil offered individually, not in congregation), and it remained as it was during the Caliphate of Abu Bakr and in the early days of 'Umar's Caliphate",
-    "arabicFrom": "fawazahmed0/hadith-api",
-    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
-  },
   "bukhari:998": {
     "arabic": "عَنْ عَبْدِ اللَّهِ، عَنِ النَّبِيِّ صلى الله عليه وسلم قَالَ ‏ \"‏ اجْعَلُوا آخِرَ صَلاَتِكُمْ بِاللَّيْلِ وِتْرًا ‏\"‏‏.‏",
     "isnad": "حَدَّثَنَا مُسَدَّدٌ، قَالَ حَدَّثَنَا يَحْيَى بْنُ سَعِيدٍ، عَنْ عُبَيْدِ اللَّهِ، حَدَّثَنِي نَافِعٌ",
@@ -3053,13 +3046,20 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
     "arabicFrom": "fawazahmed0/hadith-api",
     "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
   },
-  "bukhari:1180": {
-    "arabic": "عَنِ ابْنِ عُمَرَ رَضِيَ اللَّهُ عَنْهُمَا قَالَ: حَفِظْتُ مِنَ النَّبِيِّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ عَشْرَ رَكَعَاتٍ: رَكْعَتَيْنِ قَبْلَ الظُّهْرِ، وَرَكْعَتَيْنِ بَعْدَهَا، وَرَكْعَتَيْنِ بَعْدَ المَغْرِبِ فِي بَيْتِهِ، وَرَكْعَتَيْنِ بَعْدَ العِشَاءِ فِي بَيْتِهِ، وَرَكْعَتَيْنِ قَبْلَ صَلاَةِ الصُّبْحِ، وَكَانَتْ سَاعَةً لاَ يُدْخَلُ عَلَى النَّبِيِّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ فِيهَا، حَدَّثَتْنِي حَفْصَةُ أَنَّهُ كَانَ إِذَا أَذَّنَ المُؤَذِّنُ وَطَلَعَ الفَجْرُ صَلَّى رَكْعَتَيْنِ، وَفِي لَفْظٍ: أَنَّ النَّبِيَّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ كَانَ يُصَلِّي بَعْدَ الْجُمُعَةِ رَكْعَتَيْنِ.",
-    "translation": "Ibn ‘Umar (may Allah be pleased with him and his father) reported: I memorized from the Prophet (may Allah's peace and blessings be upon him) ten Rak‘ahs (units of prayer): two Rak‘ahs before Zhuhr and two Rak‘ahs after it, two Rak‘ahs after Maghrib at his home, two Rak‘ahs after ‘Ishā’ at his home, and two Rak‘ahs before the Fajr prayer, an hour when none was allowed to enter upon the Prophet (may Allah's peace and blessings be upon him). Hafsah told me that after the muezzin would make Adhān (call to prayer) and after the break of dawn, the Prophet (may Allah's peace and blessings be upon him) used to offer two Rak‘ahs. Another wording reads: The Prophet (may Allah's peace and blessings be upon him) used to offer two Rak‘ahs after the Friday prayer.",
-    "attribution": "Al-Bukhari and Muslim with all its versions",
-    "grade": "Authentic",
+  "muslim:755": {
+    "arabic": "عن جابر رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم : «من خاف أن لا يقوم من آخِرِ الليل فليوتر أوله، ومن طَمِعَ أن يقوم آخره فليوتر آخر الليل، فإن صلاة آخر الليل مشهودة، وذلك أفضل».",
+    "translation": "Jābir (may Allah be pleased with him) reported that the Messenger of Allah (may Allah's peace and blessings be upon him) said: \"If anyone fears that he will not wake up at the end of the night, let him offer Witr prayer at the beginning of the night; and anyone expects to wake up at the end of the night, let him offer Witr prayer at the end of the night. Indeed, prayer at the end of the night is witnessed (by the angels) and that is better.\"",
+    "attribution": "Narrated by Muslim",
+    "grade": "Authentic hadith",
     "arabicFrom": "HadeethEnc.com",
     "translationFrom": "HadeethEnc.com"
+  },
+  "bukhari:2009": {
+    "arabic": "عَنْ أَبِي هُرَيْرَةَ ـ رضى الله عنه ـ أَنَّ رَسُولَ اللَّهِ صلى الله عليه وسلم قَالَ ‏ \"‏ مَنْ قَامَ رَمَضَانَ إِيمَانًا وَاحْتِسَابًا غُفِرَ لَهُ مَا تَقَدَّمَ مِنْ ذَنْبِهِ ‏\"‏‏.‏ قَالَ ابْنُ شِهَابٍ فَتُوُفِّيَ رَسُولُ اللَّهِ صلى الله عليه وسلم وَالأَمْرُ عَلَى ذَلِكَ، ثُمَّ كَانَ الأَمْرُ عَلَى ذَلِكَ فِي خِلاَفَةِ أَبِي بَكْرٍ وَصَدْرًا مِنْ خِلاَفَةِ عُمَرَ ـ رضى الله عنهما.‏",
+    "isnad": "حَدَّثَنَا عَبْدُ اللَّهِ بْنُ يُوسُفَ، أَخْبَرَنَا مَالِكٌ، عَنِ ابْنِ شِهَابٍ، عَنْ حُمَيْدِ بْنِ عَبْدِ الرَّحْمَنِ",
+    "translation": "Narrated Abu Huraira: Allah's Messenger (ﷺ) said, \"Whoever prayed at night the whole month of Ramadan out of sincere Faith and hoping for a reward from Allah, then all his previous sins will be forgiven.\" Ibn Shihab (a sub-narrator) said, \"Allah's Messenger (ﷺ) died and the people continued observing that (i.e. Nawafil offered individually, not in congregation), and it remained as it was during the Caliphate of Abu Bakr and in the early days of 'Umar's Caliphate",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
   },
   "abu-dawud:1434": {
     "arabic": "عَنْ أَبِي قَتَادَةَ، أَنَّ النَّبِيَّ صلى الله عليه وسلم قَالَ لأَبِي بَكْرٍ ‏\"‏ مَتَى تُوتِرُ ‏\"‏ قَالَ أُوتِرُ مِنْ أَوَّلِ اللَّيْلِ ‏.‏ وَقَالَ لِعُمَرَ ‏\"‏ مَتَى تُوتِرُ ‏\"‏ ‏.‏ قَالَ آخِرَ اللَّيْلِ ‏.‏ فَقَالَ لأَبِي بَكْرٍ ‏\"‏ أَخَذَ هَذَا بِالْحَزْمِ ‏\"‏ ‏.‏ وَقَالَ لِعُمَرَ ‏\"‏ أَخَذَ هَذَا بِالْقُوَّةِ ‏\"‏ ‏.‏",

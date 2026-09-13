@@ -1705,6 +1705,22 @@ begins at Maghrib. Qiyam and tahajjud follow as on every night, and between
 Maghrib and ʿIsha the day's card stays. `night:check` covers the table, the
 night's date, and the first, tenth and eleventh nights of 1448.
 
+**Corrected the same evening.** Iyad: *"tarawih prayer is not only for first
+10 days. it's every day in ramadan. tahajjud runs as usual but tarawih
+replaces qyam al-layl."* The ten-night window came from the old 17:00 row,
+which explained tarawih before somebody's first one; carried over into a card
+for the night itself, it said tarawih stops after the tenth night. Now every
+night of Ramadan, from ʿIsha to the last third, in place of witr and qiyam
+al-layl: tarawih is the night prayer in Ramadan, it starts straight after
+ʿIsha, and witr is commonly prayed at its end. Tahajjud keeps the last third.
+`night:check` now covers the first, fifteenth (after ʿIsha, past the middle,
+in the last third) and twenty-ninth nights, and the night of Eid.
+
+Seen on the screen, not in the check: at 00:30 the card still said *"Tonight,
+at the mosque"* over the title *Qiyam al-Layl*, true at 20:00 and false by
+midnight, and the word taraweeh appeared nowhere on it. The kicker is now
+*"Taraweeh tonight"*, which names what somebody heard and holds all night.
+
 ### ✅ Built — the istikhara duʿa is on the page
 
 Iyad's point, and the sharpest one of the day: *"istikhara has the istikhara

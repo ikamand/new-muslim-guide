@@ -205,11 +205,13 @@ for (const date of ['2026-09-13', '2026-06-21', '2026-12-21', '2026-03-07', '202
 }
 
 /*
-  Tarāwīḥ, after ʿIshāʾ (Iyad, 13 Sep 2026). Its row is in the Ramadan arc and
-  the night asks for it by part and by the night's own Islamic date. Before,
-  it started at 17:00 by the clock, and the date turned at midnight, so the
-  first night of tarāwīḥ, the evening before the first fast, showed the
-  before-Ramadan card instead.
+  Tarāwīḥ (Iyad, 13 Sep 2026): every night of Ramadan, from ʿIshāʾ to the last
+  third, in place of witr and qiyam al-layl; tahajjud keeps the last third. Its
+  row is in the Ramadan arc and the night asks for it by part and by the
+  night's own Islamic date. Before, it started at 17:00 by the clock on the
+  first ten nights only, and the date turned at midnight, so the first night
+  of tarāwīḥ, the evening before the first fast, showed the before-Ramadan
+  card instead.
 */
 for (let month = 1; month <= 12; month += 1) {
   for (let day = 1; day <= 30; day += 1) {
@@ -217,7 +219,7 @@ for (let month = 1; month <= 12; month += 1) {
     if (byDay?.during) fail(`arcFor ${month}/${day}: offered the night row "${byDay.id}" by day`);
     for (const part of ['witr', 'qiyam', 'tahajjud']) {
       const row = arcForNight({ month, day }, part);
-      const expected = month === 9 && day <= 10 && part === 'witr';
+      const expected = month === 9 && part !== 'tahajjud';
       if (Boolean(row) !== expected || (row && row.id !== 'tarawih')) {
         fail(`arcForNight ${month}/${day} ${part}: got ${row?.id ?? 'nothing'}`);
       }
@@ -251,32 +253,44 @@ if (!firstFast) {
     counted from civil day n and tested the eleventh night as the tenth.
   */
   const nightEvening = (n) => civil(n - 2);
+  let eid;
+  for (let offset = 27; offset <= 31 && !eid; offset += 1) {
+    const date = hijriDate(civil(offset));
+    if (date?.month === 10 && date.day === 1) eid = civil(offset);
+  }
+  if (!eid) fail('no 1 Shawwal 1448 found within 31 days of the first fast');
+  // The night of Eid: the first night after Ramadan's last.
+  const eidNight = eid && new Date(eid.getFullYear(), eid.getMonth(), eid.getDate() - 1, 12);
+
+  const plus = (date, minutes) => new Date(date.getTime() + minutes * MINUTE);
+  const afterIsha = (day) => plus(timeOf(day, 'isha'), 5);
   const cases = [
-    // [night of Ramadan, minutes after that evening's ʿIshāʾ, expected, why]
-    [1, 5, true, 'the first night, the evening before the first fast'],
-    [1, -5, false, 'before ʿIshāʾ on the first night'],
-    [0, 5, false, 'the night before the first night'],
-    [10, 5, true, 'the tenth night'],
-    [11, 5, false, 'the eleventh night'],
+    // [evening, an instant in that night, expected, why]
+    [nightEvening(1), afterIsha, true, 'the first night, the evening before the first fast'],
+    [nightEvening(1), (day) => plus(timeOf(day, 'isha'), -5), false, 'the first night, before ʿIshāʾ'],
+    [nightEvening(0), afterIsha, false, 'the night before the first night'],
+    [nightEvening(15), afterIsha, true, 'the fifteenth night, after ʿIshāʾ'],
+    [nightEvening(15), (day) => plus(day.middleOfNight, 5), true, 'the fifteenth night past the middle, where qiyam would be'],
+    [nightEvening(15), (day) => plus(day.lastThirdOfNight, 5), false, 'the fifteenth night in the last third, which stays tahajjud'],
+    [nightEvening(29), afterIsha, true, 'the twenty-ninth night'],
+    ...(eidNight ? [[eidNight, afterIsha, false, 'the night of Eid']] : []),
   ];
-  for (const [n, offset, expected, why] of cases) {
-    const isha = timeOf(computeDay(place, nightEvening(n), profile), 'isha');
-    const now = new Date(isha.getTime() + offset * MINUTE);
+  for (const [evening, instant, expected, why] of cases) {
+    const now = instant(computeDay(place, evening, profile));
     if (tarawihAt(now) !== expected) {
       fail(`tarāwīḥ ${expected ? 'missing' : 'shown'} on ${why} (${now.toDateString()} ${clock(now)})`);
     }
   }
-  // Past the middle of a tarāwīḥ night, qiyam as usual.
-  const third = computeNight(place, new Date(timeOf(computeDay(place, nightEvening(3), profile), 'isha').getTime() + 5 * MINUTE), profile);
-  const pastMiddle = new Date(third.evening.middleOfNight.getTime() + 5 * MINUTE);
-  if (tarawihAt(pastMiddle)) fail(`tarāwīḥ still shown past the middle of the third night (${clock(pastMiddle)})`);
 
-  const eve = computeDay(place, civil(-1), profile);
-  console.log(`  tarāwīḥ 1448: first night ${civil(-1).toDateString()}, from ʿIshāʾ ${clock(timeOf(eve, 'isha'))} to ${clock(eve.middleOfNight)}`);
+  const eve = computeDay(place, nightEvening(1), profile);
+  console.log(
+    `  tarāwīḥ 1448: first night ${nightEvening(1).toDateString()}, ʿIshāʾ ${clock(timeOf(eve, 'isha'))} ` +
+      `to the last third at ${clock(eve.lastThirdOfNight)}; night of Eid ${eidNight ? eidNight.toDateString() : 'not found'}`,
+  );
 }
 
 if (failures > 0) {
   console.error(`\n${failures} failure(s).`);
   process.exit(1);
 }
-console.log('\n✓ Every minute of every night: witr from ʿIshāʾ, qiyam from the middle, tahajjud for the whole last third, measured from Maghrib; tarāwīḥ after ʿIshāʾ on Ramadan\'s first ten nights.');
+console.log('\n✓ Every minute of every night: witr from ʿIshāʾ, qiyam from the middle, tahajjud for the whole last third, measured from Maghrib; tarāwīḥ from ʿIshāʾ to the last third, every night of Ramadan.');

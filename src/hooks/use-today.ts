@@ -174,8 +174,9 @@ export function useToday(): TodayItem | undefined {
     const nightPrayer = night ? nightPrayerAt(night.evening, night.morning, now) : null;
     if (night && nightPrayer) {
       /*
-        Ramadan's first ten nights put tarāwīḥ in witr's part of the night,
-        after ʿIshāʾ (Iyad, 13 Sep 2026; the row is in `ramadan-arc.ts`).
+        Every night of Ramadan, tarāwīḥ takes the night from ʿIshāʾ to the
+        last third, in place of witr and qiyam al-layl, and tahajjud keeps the
+        last third (Iyad, 13 Sep 2026; the row is in `ramadan-arc.ts`).
         Dated by the night rather than the civil calendar: the night begins
         at Maghrib, so the evening before the first fast is already the first
         night of Ramadan, and the first night of tarāwīḥ.

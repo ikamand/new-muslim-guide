@@ -33,13 +33,14 @@ import { ref } from './model';
  *
  * ## A row for the night
  *
- * Tarāwīḥ is prayed after ʿIshāʾ, so its row names a part of the night rather
- * than an hour (Iyad, 13 Sep 2026). It used to start at 17:00 by the clock,
- * which in summer is hours before ʿIshāʾ. `arcFor` never returns such a row;
- * the night asks `arcForNight`, with the night's own Islamic date from
- * `hijriOfNight`, because a night carries the next day's date. A calculated
- * first night can still be a night off the sighted one, which is the day
- * either way these windows already accept.
+ * Tarāwīḥ is prayed after ʿIshāʾ, every night of the month, so its row names
+ * parts of the night rather than an hour (Iyad, 13 Sep 2026). It used to start
+ * at 17:00 by the clock, which in summer is hours before ʿIshāʾ, and only on
+ * the first ten nights. `arcFor` never returns such a row; the night asks
+ * `arcForNight`, with the night's own Islamic date from `hijriOfNight`, because
+ * a night carries the next day's date. A calculated first or last night can
+ * still be a night off the sighted one, which is the day either way these
+ * windows already accept.
  */
 
 export type ArcRow = {
@@ -50,10 +51,10 @@ export type ArcRow = {
   fromDay?: number;
   toDay?: number;
   /**
-   * The part of the night this row takes over, in place of what `lib/night.ts`
-   * would offer there. A row with one is for the night only.
+   * The parts of the night this row takes over, in place of what `lib/night.ts`
+   * would offer there. A row with any is for the night only.
    */
-  during?: 'witr' | 'qiyam' | 'tahajjud';
+  during?: readonly ('witr' | 'qiyam' | 'tahajjud')[];
   /** The content this moment is worth. Absent means the row is the zakat screen. */
   ref?: ContentRef;
   /** The kicker line on Today, via `t()`. */
@@ -69,16 +70,16 @@ export type ArcRow = {
 /** Most specific first — the first match wins, like `SEASONS`. */
 export const RAMADAN_ARC: readonly ArcRow[] = [
   /*
-    The first ten nights, after ʿIshāʾ: tarāwīḥ. It takes witr's part of the
-    night, ʿIshāʾ to the middle, because tarāwīḥ is prayed in that stretch and
-    witr is commonly prayed with the imam at its end. Qiyam and tahajjud follow
-    as on every night.
+    Every night of Ramadan, after ʿIshāʾ: tarāwīḥ. It replaces qiyam al-layl,
+    because in Ramadan it is the night prayer, and takes witr's stretch before
+    it, because it is prayed straight after ʿIshāʾ and witr is commonly prayed
+    with the imam at its end. So from ʿIshāʾ to the last third; tahajjud keeps
+    the last third as on every night (Iyad, 13 Sep 2026).
   */
   {
     id: 'tarawih',
     month: 9,
-    toDay: 10,
-    during: 'witr',
+    during: ['witr', 'qiyam'],
     ref: ref('reference', 'qiyam-al-layl'),
     reason: 'arc.tarawih',
   },
@@ -132,5 +133,5 @@ export function arcForNight(
   date: { month: number; day: number },
   part: 'witr' | 'qiyam' | 'tahajjud',
 ): ArcRow | undefined {
-  return RAMADAN_ARC.find((row) => row.during === part && covers(row, date));
+  return RAMADAN_ARC.find((row) => !!row.during?.includes(part) && covers(row, date));
 }

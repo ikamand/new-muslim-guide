@@ -4,7 +4,7 @@ import { useEffect, useMemo } from 'react';
 import { resolveRef } from '@/content';
 import { lessonFor } from '@/content/curriculum';
 import { FIRSTS } from '@/content/firsts';
-import { arcFor } from '@/content/ramadan-arc';
+import { arcFor, arcForNight } from '@/content/ramadan-arc';
 import { seasonFor } from '@/content/seasons';
 import { useHijriToday } from '@/hooks/use-hijri';
 /*
@@ -22,6 +22,7 @@ import { useSettings } from '@/hooks/use-settings';
 import { localiseCatalogEntry } from '@/i18n/localise';
 import type { UIKey } from '@/i18n/ui';
 import { routeFor } from '@/lib/content-routes';
+import { hijriOfNight } from '@/lib/hijri';
 import { isAwayFromHome, nextPlaceState } from '@/lib/home-place';
 import { nightPrayerAt, type NightPrayer } from '@/lib/night';
 import { computeNight } from '@/lib/prayer-times';
@@ -152,8 +153,9 @@ export function useToday(): TodayItem | undefined {
       hours, was missing on more than sixty nights a year, every night of
       Ramadan among them.
 
-      The cost, accepted: from ʿIshāʾ to Fajr nothing else reaches this slot.
-      A half-read lesson, the Ramadan arc and the travel card wait for morning.
+      The cost, accepted: from ʿIshāʾ to Fajr nothing else reaches this slot
+      except tarāwīḥ, below. A half-read lesson, the rest of the Ramadan arc
+      and the travel card wait for morning.
 
       The PAGE, not the walkthrough. Every other door to a voluntary prayer
       has opened the reference since the inversion of 25 Aug (the plan, "The
@@ -170,18 +172,41 @@ export function useToday(): TodayItem | undefined {
     */
     const night = today && coords && profile ? computeNight(coords, now, profile) : null;
     const nightPrayer = night ? nightPrayerAt(night.evening, night.morning, now) : null;
-    const nightPage = nightPrayer
-      ? resolveRef({ kind: 'reference', id: NIGHT_PAGE[nightPrayer] })
-      : undefined;
-    if (nightPrayer && nightPage) {
-      const entry = localiseCatalogEntry(nightPage, locale);
-      return {
-        key: `reference:${NIGHT_PAGE[nightPrayer]}`,
-        reason: NIGHT_REASON[nightPrayer],
-        title: entry.title,
-        description: entry.shortDescription,
-        href: routeFor(nightPage),
-      };
+    if (night && nightPrayer) {
+      /*
+        Ramadan's first ten nights put tarāwīḥ in witr's part of the night,
+        after ʿIshāʾ (Iyad, 13 Sep 2026; the row is in `ramadan-arc.ts`).
+        Dated by the night rather than the civil calendar: the night begins
+        at Maghrib, so the evening before the first fast is already the first
+        night of Ramadan, and the first night of tarāwīḥ.
+      */
+      const maghrib = night.evening.prayers.find((prayer) => prayer.id === 'maghrib')?.time;
+      const nightDate = maghrib ? hijriOfNight(maghrib) : null;
+      const arcNight = nightDate ? arcForNight(nightDate, nightPrayer) : undefined;
+      const arcPage = arcNight?.ref ? resolveRef(arcNight.ref) : undefined;
+      if (arcNight && arcPage) {
+        const entry = localiseCatalogEntry(arcPage, locale);
+        return {
+          key: `arc:${arcNight.id}`,
+          reason: arcNight.reason,
+          title: entry.title,
+          description: entry.shortDescription,
+          minutes: entry.meta?.estimatedMinutes,
+          href: routeFor(arcPage),
+        };
+      }
+
+      const nightPage = resolveRef({ kind: 'reference', id: NIGHT_PAGE[nightPrayer] });
+      if (nightPage) {
+        const entry = localiseCatalogEntry(nightPage, locale);
+        return {
+          key: `reference:${NIGHT_PAGE[nightPrayer]}`,
+          reason: NIGHT_REASON[nightPrayer],
+          title: entry.title,
+          description: entry.shortDescription,
+          href: routeFor(nightPage),
+        };
+      }
     }
 
     /* 2. Away from home. About where the reader is, not what day it is. */
@@ -204,13 +229,13 @@ export function useToday(): TodayItem | undefined {
       3. The Ramadan arc — the season broken into moments.
 
       `ramadan-arc.ts` owns months 8 and 9: the fast in the first days,
-      tarāwīḥ in the evenings, the zakat calculator mid-month (the standing
-      month-9 zakat candidate moved there, reasoning and all), the last ten
-      nights, then Eid across the month boundary. Asked before `seasonFor`,
-      so the season's own Ramadan rows never fire; the season table keeps
-      Dhul Hijjah and Muharram.
+      tarāwīḥ (asked by the night, above), the zakat calculator mid-month
+      (the standing month-9 zakat candidate moved there, reasoning and all),
+      the last ten nights, then Eid across the month boundary. Asked before
+      `seasonFor`, so the season's own Ramadan rows never fire; the season
+      table keeps Dhul Hijjah and Muharram.
     */
-    const arc = hijri ? arcFor(hijri, now.getHours()) : undefined;
+    const arc = hijri ? arcFor(hijri) : undefined;
     if (arc) {
       if (!arc.ref) {
         return {

@@ -1695,9 +1695,15 @@ at night, end it with witr", which after a witr card is an instruction to pray
 it twice. It now says not to, on Abu Dawud 1439 ("no two witrs in one night").
 ⚠️ Joins the review pile.
 
-**Still open:** the Ramadan tarawih card starts at a clock hour (17:00) rather
-than a prayer time, and the Hijri date turns at midnight rather than Maghrib,
-so the first night of tarawih shows the "before Ramadan" card.
+**Tarawih, same day.** Iyad: *"tarawih card should appear after ishaa
+prayer."* It started at 17:00 by the clock, hours before ʿIsha in summer, and
+dated itself by the civil calendar, so the first night of tarawih (the evening
+before the first fast) showed "Ramadan is close". The arc row now names a part
+of the night instead of an hour: on Ramadan's first ten nights it takes witr's
+stretch, ʿIsha to the middle of the night, dated by the night itself, which
+begins at Maghrib. Qiyam and tahajjud follow as on every night, and between
+Maghrib and ʿIsha the day's card stays. `night:check` covers the table, the
+night's date, and the first, tenth and eleventh nights of 1448.
 
 ### ✅ Built — the istikhara duʿa is on the page
 

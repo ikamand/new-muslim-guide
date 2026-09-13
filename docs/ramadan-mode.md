@@ -73,14 +73,14 @@ prayer-times information.
 ### R2 — The arc
 
 `RAMADAN_ARC`, a table in `src/content/` shaped like `SEASONS` but finer
-inside month 8–10: each row a phase window, an optional moment of day, a ref
-into **existing reviewed content**, one line of framing. Fed to the ranked
+inside month 8–10: each row a phase window, an optional part of the night, a
+ref into **existing reviewed content**, one line of framing. Fed to the ranked
 worth-today slot as one more candidate source — not a new surface.
 
 | Window | Offer |
 |---|---|
 | Shaʿban 15+ (exists) | "Your first Ramadan is coming" + the wake-up offer (R3) |
-| Early Ramadan | The fasting sections; evenings, "tonight the mosques pray tarāwīḥ — here's what you'll see" |
+| Early Ramadan | The fasting sections; after ʿIsha on the first ten nights (13 Sep 2026, was 17:00), "tonight the mosques pray tarāwīḥ — here's what you'll see" |
 | Mid-month | Zakat al-fitr ahead; the calculator the app already promotes in Ramadan |
 | Last ten nights (exists) | The Laylat al-Qadr section |
 | Final days | Zakat al-fitr is due *before the Eid prayer*; then the Eid page, alone-section and all |

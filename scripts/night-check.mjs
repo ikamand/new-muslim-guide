@@ -21,6 +21,8 @@
  */
 import { computeDay, computeNight, inferProfile } from '../src/lib/prayer-times.ts';
 import { nightPrayerAt } from '../src/lib/night.ts';
+import { arcFor, arcForNight } from '../src/content/ramadan-arc.ts';
+import { hijriDate, hijriOfNight } from '../src/lib/hijri.ts';
 
 let failures = 0;
 const fail = (message) => {
@@ -202,8 +204,79 @@ for (const date of ['2026-09-13', '2026-06-21', '2026-12-21', '2026-03-07', '202
   );
 }
 
+/*
+  Tarāwīḥ, after ʿIshāʾ (Iyad, 13 Sep 2026). Its row is in the Ramadan arc and
+  the night asks for it by part and by the night's own Islamic date. Before,
+  it started at 17:00 by the clock, and the date turned at midnight, so the
+  first night of tarāwīḥ, the evening before the first fast, showed the
+  before-Ramadan card instead.
+*/
+for (let month = 1; month <= 12; month += 1) {
+  for (let day = 1; day <= 30; day += 1) {
+    const byDay = arcFor({ month, day });
+    if (byDay?.during) fail(`arcFor ${month}/${day}: offered the night row "${byDay.id}" by day`);
+    for (const part of ['witr', 'qiyam', 'tahajjud']) {
+      const row = arcForNight({ month, day }, part);
+      const expected = month === 9 && day <= 10 && part === 'witr';
+      if (Boolean(row) !== expected || (row && row.id !== 'tarawih')) {
+        fail(`arcForNight ${month}/${day} ${part}: got ${row?.id ?? 'nothing'}`);
+      }
+    }
+  }
+}
+
+let firstFast;
+for (let d = new Date(2027, 0, 15, 12); d < new Date(2027, 2, 15, 12); d = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 1, 12)) {
+  const date = hijriDate(d);
+  if (date?.month === 9 && date.day === 1) {
+    firstFast = d;
+    break;
+  }
+}
+if (!firstFast) {
+  fail('no 1 Ramadan 1448 found: this Node has no Umm al-Qura calendar, so the night date cannot be checked');
+} else {
+  const civil = (offset) => new Date(firstFast.getFullYear(), firstFast.getMonth(), firstFast.getDate() + offset, 12);
+  /* The card the night would show at `now`, by the same steps `useToday` takes. */
+  const tarawihAt = (now) => {
+    const night = computeNight(place, now, profile);
+    const part = night && nightPrayerAt(night.evening, night.morning, now);
+    if (!part) return false;
+    const date = hijriOfNight(timeOf(night.evening, 'maghrib'));
+    return arcForNight(date, part)?.id === 'tarawih';
+  };
+  /*
+    Night n begins on the evening of civil day n − 1 of Ramadan, so the first
+    night is the evening before the first fast. The first draft of these cases
+    counted from civil day n and tested the eleventh night as the tenth.
+  */
+  const nightEvening = (n) => civil(n - 2);
+  const cases = [
+    // [night of Ramadan, minutes after that evening's ʿIshāʾ, expected, why]
+    [1, 5, true, 'the first night, the evening before the first fast'],
+    [1, -5, false, 'before ʿIshāʾ on the first night'],
+    [0, 5, false, 'the night before the first night'],
+    [10, 5, true, 'the tenth night'],
+    [11, 5, false, 'the eleventh night'],
+  ];
+  for (const [n, offset, expected, why] of cases) {
+    const isha = timeOf(computeDay(place, nightEvening(n), profile), 'isha');
+    const now = new Date(isha.getTime() + offset * MINUTE);
+    if (tarawihAt(now) !== expected) {
+      fail(`tarāwīḥ ${expected ? 'missing' : 'shown'} on ${why} (${now.toDateString()} ${clock(now)})`);
+    }
+  }
+  // Past the middle of a tarāwīḥ night, qiyam as usual.
+  const third = computeNight(place, new Date(timeOf(computeDay(place, nightEvening(3), profile), 'isha').getTime() + 5 * MINUTE), profile);
+  const pastMiddle = new Date(third.evening.middleOfNight.getTime() + 5 * MINUTE);
+  if (tarawihAt(pastMiddle)) fail(`tarāwīḥ still shown past the middle of the third night (${clock(pastMiddle)})`);
+
+  const eve = computeDay(place, civil(-1), profile);
+  console.log(`  tarāwīḥ 1448: first night ${civil(-1).toDateString()}, from ʿIshāʾ ${clock(timeOf(eve, 'isha'))} to ${clock(eve.middleOfNight)}`);
+}
+
 if (failures > 0) {
   console.error(`\n${failures} failure(s).`);
   process.exit(1);
 }
-console.log('\n✓ Every minute of every night: witr from ʿIshāʾ, qiyam from the middle, tahajjud for the whole last third, measured from Maghrib.');
+console.log('\n✓ Every minute of every night: witr from ʿIshāʾ, qiyam from the middle, tahajjud for the whole last third, measured from Maghrib; tarāwīḥ after ʿIshāʾ on Ramadan\'s first ten nights.');

@@ -102,3 +102,21 @@ export function hijriDate(date: Date): HijriDate | null {
     return null;
   }
 }
+
+/**
+ * The Islamic date of the night that began at `maghrib`.
+ *
+ * The Islamic day begins at sunset, so a night carries the NEXT civil day's
+ * date: the evening before the first fast is already the first night of
+ * Ramadan, and the first night of tarāwīḥ. `hijriDate` reads the civil date and
+ * is a day behind from Maghrib to midnight, which the header accepts for
+ * month-long windows. Something offered for the night itself cannot accept it.
+ *
+ * Noon of the next calendar day, built from parts rather than by adding 24
+ * hours, so a clock change that night cannot land it on the wrong date.
+ */
+export function hijriOfNight(maghrib: Date): HijriDate | null {
+  return hijriDate(
+    new Date(maghrib.getFullYear(), maghrib.getMonth(), maghrib.getDate() + 1, 12),
+  );
+}

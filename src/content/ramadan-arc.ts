@@ -30,6 +30,16 @@ import { ref } from './model';
  * month by a day often enough that "Eid is today" is the one claim these rows
  * must never make — which is why the Eid rows span the month boundary and the
  * Eid page itself says to ask locally.
+ *
+ * ## A row for the night
+ *
+ * Tarāwīḥ is prayed after ʿIshāʾ, so its row names a part of the night rather
+ * than an hour (Iyad, 13 Sep 2026). It used to start at 17:00 by the clock,
+ * which in summer is hours before ʿIshāʾ. `arcFor` never returns such a row;
+ * the night asks `arcForNight`, with the night's own Islamic date from
+ * `hijriOfNight`, because a night carries the next day's date. A calculated
+ * first night can still be a night off the sighted one, which is the day
+ * either way these windows already accept.
  */
 
 export type ArcRow = {
@@ -39,8 +49,11 @@ export type ArcRow = {
   /** Inclusive day range inside that month. Absent bounds mean the whole month. */
   fromDay?: number;
   toDay?: number;
-  /** Only from this local hour onward — for offers that belong to the evening. */
-  hourFrom?: number;
+  /**
+   * The part of the night this row takes over, in place of what `lib/night.ts`
+   * would offer there. A row with one is for the night only.
+   */
+  during?: 'witr' | 'qiyam' | 'tahajjud';
   /** The content this moment is worth. Absent means the row is the zakat screen. */
   ref?: ContentRef;
   /** The kicker line on Today, via `t()`. */
@@ -55,12 +68,17 @@ export type ArcRow = {
 
 /** Most specific first — the first match wins, like `SEASONS`. */
 export const RAMADAN_ARC: readonly ArcRow[] = [
-  /* Evenings of the first nights: what tarāwīḥ is, before walking into one. */
+  /*
+    The first ten nights, after ʿIshāʾ: tarāwīḥ. It takes witr's part of the
+    night, ʿIshāʾ to the middle, because tarāwīḥ is prayed in that stretch and
+    witr is commonly prayed with the imam at its end. Qiyam and tahajjud follow
+    as on every night.
+  */
   {
     id: 'tarawih',
     month: 9,
     toDay: 10,
-    hourFrom: 17,
+    during: 'witr',
     ref: ref('reference', 'qiyam-al-layl'),
     reason: 'arc.tarawih',
   },
@@ -93,16 +111,26 @@ export const RAMADAN_ARC: readonly ArcRow[] = [
   },
 ];
 
-/** The arc row this moment falls in, if any. */
-export function arcFor(
-  date: { month: number; day: number },
-  hour: number,
-): ArcRow | undefined {
-  return RAMADAN_ARC.find(
-    (row) =>
-      row.month === date.month &&
-      date.day >= (row.fromDay ?? 1) &&
-      date.day <= (row.toDay ?? 30) &&
-      hour >= (row.hourFrom ?? 0),
+function covers(row: ArcRow, date: { month: number; day: number }): boolean {
+  return (
+    row.month === date.month &&
+    date.day >= (row.fromDay ?? 1) &&
+    date.day <= (row.toDay ?? 30)
   );
+}
+
+/** The arc row this day falls in, if any. Never a row for the night. */
+export function arcFor(date: { month: number; day: number }): ArcRow | undefined {
+  return RAMADAN_ARC.find((row) => !row.during && covers(row, date));
+}
+
+/**
+ * The arc row that takes over this part of the night, if any. `date` is the
+ * night's own Islamic date, from `hijriOfNight`, not the civil day's.
+ */
+export function arcForNight(
+  date: { month: number; day: number },
+  part: 'witr' | 'qiyam' | 'tahajjud',
+): ArcRow | undefined {
+  return RAMADAN_ARC.find((row) => row.during === part && covers(row, date));
 }

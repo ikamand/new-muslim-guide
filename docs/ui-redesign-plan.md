@@ -4140,6 +4140,12 @@ a device.
   red word, and one sentence under the line links to the lesson. The two
   spans tied to the reader's own prayer are not drawn: the app cannot know
   when somebody prayed.
+  **Correction, 12 Sep.** Two things above no longer hold. The bands are a
+  flat fill in `backgroundElement`, not a hatch: on Iyad's Android phone the
+  hatch layer covered only the top of a two-line band, and its lines ran
+  through the words. And the captions now print the prayer-bound spans with
+  a clock edge, "from when you pray Fajr until 7:04 AM" and "from when you
+  pray ʿAsr until Maghrib"; see the note above `awqat.pause.*` in `ui.ts`.
 - **The lesson.** `learn/held-off-times.ts`, "When extra prayers are held
   off", in the praying group, Book 1 · When it goes wrong after Missing a
   prayer, cadence once. Muslim 831, Bukhari 586, 3273 and 597, all opened in

@@ -13,7 +13,6 @@ import Animated, {
   withTiming,
   type SharedValue,
 } from 'react-native-reanimated';
-import Svg, { Defs, Line, Pattern, Rect } from 'react-native-svg';
 
 import { CompassRose, Glyph, JadwalMark } from '@/components/illustrations';
 import { DoubleRule, Shelf } from '@/components/jadwal';
@@ -75,7 +74,7 @@ import {
  * ## The three bands
  *
  * ⚠️ REVIEW REQUIRED. The times when voluntary prayer is forbidden, as
- * hatched bands in the line with their spans printed like the prayers'.
+ * filled bands in the line with their spans printed like the prayers'.
  * "Forbidden" is Iyad's word (11 Sep); "voluntary" stays because the five
  * and a missed one never are. The ruling, its evidence and its numbers live
  * in `lib/prayer-times.ts` (`pausesOf`) and in `learn/held-off-times.ts`;
@@ -147,6 +146,7 @@ function Row({
   tinted,
   muted,
   thin,
+  band,
 }: {
   mark: ReactNode;
   edge: Edge;
@@ -155,6 +155,24 @@ function Row({
   muted?: boolean;
   /** A moment or a band rather than a span. */
   thin?: boolean;
+  /**
+   * A forbidden band: the hours box painted in the app's quiet surface.
+   *
+   * It was a hatch until 12 Sep 2026 — diagonal gold hairlines on an SVG
+   * layer laid over the box. On Iyad's Android phone that layer covered only
+   * the top part of a two-line band, leaving the caption on bare ground. On
+   * web it measured full height, so the cause is reasoned rather than seen:
+   * the layer sized itself from percentage props before the caption's second
+   * line settled. The lines also ran through the words. A background is the
+   * box's own paint, so it cannot come up short, and there is no layer.
+   *
+   * `backgroundElement`, the surface inputs, the tab bar and the listen bar
+   * already sit on. Not `backgroundSelected`: that is the lit prayer on this
+   * same list, and the noon band sits directly above Dhuhr, so the two
+   * would merge into one block at midday. The spine column stays unpainted,
+   * so the thread runs through on the page's own ground.
+   */
+  band?: boolean;
 }) {
   const theme = useTheme();
   return (
@@ -182,6 +200,7 @@ function Row({
         style={[
           styles.hours,
           thin ? styles.hoursThin : null,
+          band && { backgroundColor: theme.backgroundElement },
           { borderBottomColor: theme.goldSoft },
           muted && styles.muted,
         ]}>
@@ -249,29 +268,6 @@ function Tick({ passed, filled }: { passed: boolean; filled?: boolean }) {
         },
       ]}
     />
-  );
-}
-
-/**
- * The hatch behind a band: diagonal hairlines in the rule's own colour, so
- * the band reads as "not a window" without a fill or a word in red.
- */
-function Hatch({ id }: { id: string }) {
-  const theme = useTheme();
-  return (
-    <Svg style={StyleSheet.absoluteFill} width="100%" height="100%" pointerEvents="none">
-      <Defs>
-        <Pattern
-          id={`hatch-${id}`}
-          patternUnits="userSpaceOnUse"
-          width={7}
-          height={7}
-          patternTransform="rotate(45)">
-          <Line x1={0} y1={0} x2={0} y2={7} stroke={theme.goldSoft} strokeWidth={1} />
-        </Pattern>
-      </Defs>
-      <Rect width="100%" height="100%" fill={`url(#hatch-${id})`} />
-    </Svg>
   );
 }
 
@@ -507,15 +503,14 @@ export default function AwqatDayScreen() {
     ),
   });
 
-  /* A band: hatched, "Voluntary prayer is forbidden", and its span beneath. */
+  /* A band: filled, "Voluntary prayer is forbidden", and its span beneath. */
   const pauseEntry = (pause: Pause, spanText: string): Entry => ({
     key: `pause-${pause.id}`,
     at: pause.from,
     render: (edge) => {
       const live = pauseLive(pause);
       return (
-        <Row key={`pause-${pause.id}`} edge={edge} mark={null} thin>
-          <Hatch id={pause.id} />
+        <Row key={`pause-${pause.id}`} edge={edge} mark={null} thin band>
           <View style={styles.pauseText}>
             <ThemedText type="caption" themeColor={live ? 'gold' : 'text'}>
               {t('awqat.pause.title')}

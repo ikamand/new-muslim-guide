@@ -23,3 +23,13 @@ Remove an item when it is done; do not leave it ticked.
   says so. One short reference page beside Prayed by choice, citing what
   the corpus can place. Added 10 Sep 2026.
 
+## Before another language returns
+
+- **Translate bullets and quick facts.** `localiseReference` in
+  `src/i18n/localise.ts` translates a section's heading, body and notes, and
+  `scripts/i18n-manifest.mjs` collects the same, but neither touches
+  `bullets` or `quickFacts`. Nobody sees it while English is the only
+  language; the day French or Spanish comes back, every list on a reference
+  page would stay English without `TranslationGap` saying so. Add both to
+  the two files together. Added 13 Sep 2026.
+

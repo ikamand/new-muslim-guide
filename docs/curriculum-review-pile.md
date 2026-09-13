@@ -304,31 +304,37 @@ worship-changing first.
   to show at 1am, and should the page say that delaying past the middle
   needs a reason?
 
-### Witr — `learn/voluntary-prayers.ts` (WITR), `prayers.ts` (the witr spec)
+### Shafʿ and Witr — `learn/voluntary-prayers.ts` (WITR), `prayers.ts` (the witr spec)
 
+- "Is shafʿ the sunnah after Isha?": no (IslamWeb 18778; Bukhari 1180).
 - **Three, as two then one**, which the page and the guide now teach. One on
   its own "still counts, but most scholars dislike it" (IslamWeb 92752).
-  Separating the two and the one is the majority view (IslamWeb 415267) and
+  Separating the two and the one is the majority view (IslamWeb 58212) and
   Ibn ʿUmar's practice (Bukhari 991).
 - **The Hanafi note**: three together, sitting after the second, qunut
   before bowing (SeekersGuidance, Faraz Rabbani), and "Pray it with them"
   (IslamQA 66613). Right for someone who otherwise follows the guide?
 - **"Do I have to?"** now reads "For most scholars no. The Hanafi school says
   yes."
-- **Before or after qiyam or tahajjud, and never twice**: Muslim 755, Bukhari
-  1178, Abu Dawud 1439, IslamWeb 2165.
+- "When": always last, before sleep if you might not wake
+  (Muslim 755, Abu Dawud 1434, IslamWeb 2165).
+- **"What if I prayed witr and then wake up?"**: pray in twos and do not
+  pray witr again (Abu Dawud 1439, IslamWeb 2165).
 - **A missed witr**: "Pray it when you wake up, or whenever you remember"
   (Abu Dawud 1431, Tirmidhi 465). Whether it is made up as an even number
   in the day is left out.
-- **Surahs**: the guide's note names Al-Aʿla, Al-Kafirun and Al-Ikhlas
-  (Nasaʾi 1699). The qunut is not a step in the guide.
+- "What do I recite?": Al-Aʿla, Al-Kafirun, Al-Ikhlas (Nasaʾi 1699), with
+  Al-Falaq and An-Nas as a note (SeekersGuidance, Shafiʿi).
+- "What is the qunut?": a beginner does not need it; mosques differ on
+  timing and on before or after bowing (Dar al-Iftaa 15984; Abu Dawud
+  1425). The qunut is not a step in the guide.
 
 ### Qiyam prayer / Tahajjud — `learn/voluntary-prayers.ts` (QIYAM_AL_LAYL)
 
 - **The definition that leads**: "When you sleep first. Qiyam al-layl prayed
   after waking from sleep is tahajjud", followed by "Many scholars use the
   word for any prayer at night" (IslamQA 143240, IslamWeb 138716). Iyad's
-  framing. Is that order right when most jurists use the two words for the
+  framing. Is that order right when many jurists use the two words for the
   same thing?
 - **Time**: after Isha until Fajr, best in the last third and after sleep
   (IslamQA 305489, Bukhari 1145).
@@ -336,6 +342,10 @@ worship-changing first.
   the Prophet ﷺ, no longer argued from.
 - **Recitation**: the night guides now say "quietly or aloud in a low voice,
   whichever helps you focus" (Abu Dawud 1437; Ibn Baz in IslamQA 67618).
+- **"What comes first?"** states the order: ʿIsha's two sunnah rakʿahs, then
+  night prayer, then shafʿ and witr last, or before sleep if you might not
+  wake (Bukhari 1180, 990, 998, Muslim 755, Abu Dawud 1439, IslamWeb
+  416554). Check the order is right.
 - **The drawn order** on the night-prayer page: pairs of dots for night
   prayer, two-then-one for shafʿ and witr, the outline for praying them
   before sleep. A drawing that teaches a count is content (CLAUDE.md); check
@@ -349,7 +359,13 @@ worship-changing first.
   ruling, not stated by it. The most practical ruling on the page.
 - **"Both are sound"** about eight and twenty rakʿahs (IslamQA 9036), a live
   argument in many communities.
-- **Witr with the imam when you will pray again later**: add a rakʿah after
-  his salam, or keep the witr and do not repeat it (IslamQA 232790).
+- **Witr with the imam when you will pray again later**: pray witr with him
+  and do not repeat it later (IslamQA 232790, Abu Dawud 1439). A plain note
+  says people also stand after his last salam and add a rakʿah (Ibn Baz in
+  IslamQA 65702; IslamWeb 491695).
+- **Women**: home is better in principle, and the mosque is good when it
+  helps her pray (IslamQA 222751).
+- **Finishing the Qur'an** over the month: recommended, not required
+  (IslamQA 66504).
 - **Leaving early**: allowed, but staying to the end is recorded as the whole
   night (Abu Dawud 1375, Tirmidhi 806; IslamQA 153247).

@@ -66,6 +66,8 @@ const EXPECTATIONS = [
   { query: 'qiyam', wants: 'reference:qiyam-al-layl', because: 'one page since 13 Sep 2026, and it must answer to both names' },
   { query: 'taraweeh', wants: 'reference:taraweeh', because: 'the obvious case must not regress' },
   { query: 'tarawih', wants: 'reference:taraweeh', because: 'people spell it several ways' },
+  { query: 'shafa', wants: 'reference:witr', because: 'Shafʿ and Witr since 13 Sep 2026, typed without the ʿ' },
+  { query: 'witr', wants: 'reference:witr', because: 'the obvious case must not regress' },
   { query: 'tayammum', wants: 'guide:tayammum', because: 'the obvious case must not regress' },
   { query: 'lost count', wants: '', because: 'phrased the way a person in the middle of it would' },
   { query: 'missed a prayer', wants: 'section:', because: 'the answer is a section, not a page' },

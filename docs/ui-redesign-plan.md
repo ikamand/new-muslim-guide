@@ -1741,6 +1741,8 @@ to do all of it. Three decisions recorded here because they undo earlier ones:
   "Taraweeh tonight" above a page titled Taraweeh said the word twice.
 - **The order of the night is drawn**, not listed: a thread with marks that
   are the rakʿahs (TeachingTimeline). The bullets stay the words.
+- **Witr became Shafʿ and Witr** (page and guide, id unchanged), and the
+  night-prayer page states the order: shafʿ and witr last.
 
 ### ✅ Built — the istikhara duʿa is on the page
 

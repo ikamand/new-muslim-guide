@@ -106,6 +106,8 @@ const GROUPS: readonly (readonly string[])[] = [
   ['fast', 'fasting', 'sawm', 'ramadan', 'iftar', 'suhoor'],
   /* Taraweeh, spelled the ways people spell it. */
   ['taraweeh', 'tarawih', 'taraweh', 'tarawee'],
+  /* Shafʿ, typed the ways people type it without the ʿ. */
+  ['shafʿ', 'shaf', 'shafa', 'shafaa'],
 
   /* Everyday life. */
   ['home', 'house', 'apartment', 'flat'],

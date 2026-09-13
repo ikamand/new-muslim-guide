@@ -555,3 +555,13 @@ after the second without the salam, with the qunut before bowing in the
 third; pray it with them.* (✓ SeekersGuidance, ✓ IslamQA 66613)
 
 The build plan is `docs/superpowers/plans/2026-09-13-shaf-and-witr.md`.
+
+## Built
+
+- d230f94: the guide renamed, two named units.
+- 83fc646: Taraweeh gained women, finishing the Qur'an, the imam's witr.
+- 5fb5c31: the Witr page becomes Shafʿ and Witr.
+- 83eb4df: the night-prayer page states the order.
+- 421f15d and 13a1b89: the order drawn as a timeline, and its thread fix.
+- This commit: shafʿ findable in search; the review pile and to-do list
+  brought up to date.

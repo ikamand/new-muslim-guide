@@ -51,6 +51,7 @@ import { routeFor } from '@/lib/content-routes';
  */
 const WEEK_AND_YEAR: readonly ContentRef[] = [
   ref('reference', 'jumuah'),
+  ref('reference', 'taraweeh'),
   ref('reference', 'eid'),
   ref('reference', 'janazah'),
 ];

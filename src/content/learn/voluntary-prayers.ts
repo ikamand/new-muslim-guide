@@ -173,7 +173,7 @@ export const QIYAM_AL_LAYL: Reference = {
     difficulty: 'building',
     estimatedMinutes: 3,
     beginnerPriority: 3,
-    relatedContent: [ref('guide', 'qiyam'), ref('reference', 'witr'), ref('reference', 'dua-and-dhikr')],
+    relatedContent: [ref('guide', 'qiyam'), ref('reference', 'witr'), ref('reference', 'taraweeh')],
   },
   quickFacts: [
     { label: 'When', value: 'After Isha until Fajr. Best in the last third of the night' },

@@ -5,22 +5,22 @@
  * here is lost the next time it runs, and one that needs making belongs
  * upstream, where the text is published.
  *
- * 249 Qur'an passages and 223 narrations. Every character came over
+ * 249 Qur'an passages and 229 narrations. Every character came over
  * the wire from a published text rather than from memory, which is the only
  * way a file like this could exist under this project's rules about Arabic.
  *
  * ## Where each line came from
  *
  * No one source has all of it, so each field is taken from the first that
- * does, and says so on the text itself. Of the 223 narrations here:
- * 76 were confirmed against a second, separately edited publisher;
- * 76 carry HadeethEnc's own translation, 147 carry Darussalam's, and
+ * does, and says so on the text itself. Of the 229 narrations here:
+ * 77 were confirmed against a second, separately edited publisher;
+ * 77 carry HadeethEnc's own translation, 152 carry Darussalam's, and
  * 0 have Arabic and no translation at all.
  *
  * ⚠️ **The Darussalam translations are not ours to relicense.** They reach
  * this file through a public-domain dedication that covers the compiler's work
  * and not the translation inside it. What makes that defensible here is scale
- * and purpose — 147 narrations out of some thirty thousand, each quoted under
+ * and purpose — 152 narrations out of some thirty thousand, each quoted under
  * the instruction it supports, in an app that is free and never sold. It is a
  * quotation, not a republication, and it is Iyad's decision on the record.
  *
@@ -2942,6 +2942,58 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
     "arabicFrom": "HadeethEnc.com",
     "translationFrom": "HadeethEnc.com"
   },
+  "bukhari:37": {
+    "arabic": "عَنْ أَبِي هُرَيْرَةَ، أَنَّ رَسُولَ اللَّهِ صلى الله عليه وسلم قَالَ ‏ \"‏ مَنْ قَامَ رَمَضَانَ إِيمَانًا وَاحْتِسَابًا غُفِرَ لَهُ مَا تَقَدَّمَ مِنْ ذَنْبِهِ ‏\"‏‏.‏",
+    "isnad": "حَدَّثَنَا إِسْمَاعِيلُ، قَالَ حَدَّثَنِي مَالِكٌ، عَنِ ابْنِ شِهَابٍ، عَنْ حُمَيْدِ بْنِ عَبْدِ الرَّحْمَنِ",
+    "translation": "Narrated Abu Huraira: Allah's Messenger (ﷺ) said: \"Whoever establishes prayers during the nights of Ramadan faithfully out of sincere faith and hoping to attain Allah's rewards (not for showing off), all his past sins will be forgiven",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:1147": {
+    "arabic": "عن أبي سَلمة بن عبد الرحمن، أنه أخْبَره: أنه سَأل عائشة رضي الله عنها ، كيف كانت صلاة رسول الله صلى الله عليه وسلم في رمضان؟ فقالت: «ما كان رسول الله صلى الله عليه وسلم يَزيد في رمضان ولا في غَيره على إحدى عَشرة ركعة يصلِّي أربعا، فلا تَسَل عن حُسْنِهِنَّ وَطُولِهِنَّ، ثم يصلِّي أربعا، فلا تَسَل عن حُسْنِهِنَّ وَطُولِهِنَّ، ثم يصلَّي ثلاثا». قالت عائشة: فقلت يا رسول الله: أتنام قبل أن توتر؟ فقال: «يا عائشة إن عَيْنَيَّ تَنَامَانِ ولا يَنام قَلْبِي»",
+    "translation": "Abu Salamah ibn ‘Abdur-Rahmān (may Allah have mercy upon him) reported that he asked ‘Ā'ishah (may Allah be pleased with her) how the Prophet's prayer was in Ramadan. She said: \"Neither in Ramadan, nor in any other month, did the Messenger of Allah (may Allah's peace and blessings be upon him) exceed the eleven Rak‘ahs of prayer. He would pray four – and do not ask about their beauty and length; then he would pray another four, and do not ask about their beauty and length either, then he would pray three.\" ‘Ā'ishah then added: \"I asked him: 'O Messenger of Allah, do you sleep before performing the Witr prayer?' he said: 'O ‘Ā'ishah, indeed, my eyes sleep but my heart does not sleep.'\"",
+    "attribution": "Narrated by Bukhari & Muslim",
+    "grade": "Authentic hadith",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "abu-dawud:1375": {
+    "arabic": "عَنْ أَبِي ذَرٍّ، قَالَ صُمْنَا مَعَ رَسُولِ اللَّهِ صلى الله عليه وسلم رَمَضَانَ فَلَمْ يَقُمْ بِنَا شَيْئًا مِنَ الشَّهْرِ حَتَّى بَقِيَ سَبْعٌ فَقَامَ بِنَا حَتَّى ذَهَبَ ثُلُثُ اللَّيْلِ فَلَمَّا كَانَتِ السَّادِسَةُ لَمْ يَقُمْ بِنَا فَلَمَّا كَانَتِ الْخَامِسَةُ قَامَ بِنَا حَتَّى ذَهَبَ شَطْرُ اللَّيْلِ فَقُلْتُ يَا رَسُولَ اللَّهِ لَوْ نَفَّلْتَنَا قِيَامَ هَذِهِ اللَّيْلَةِ ‏.‏ قَالَ فَقَالَ ‏ \"‏ إِنَّ الرَّجُلَ إِذَا صَلَّى مَعَ الإِمَامِ حَتَّى يَنْصَرِفَ حُسِبَ لَهُ قِيَامُ لَيْلَةٍ ‏\"‏ ‏.‏ قَالَ فَلَمَّا كَانَتِ الرَّابِعَةُ لَمْ يَقُمْ فَلَمَّا كَانَتِ الثَّالِثَةُ جَمَعَ أَهْلَهُ وَنِسَاءَهُ وَالنَّاسَ فَقَامَ بِنَا حَتَّى خَشِينَا أَنْ يَفُوتَنَا الْفَلاَحُ ‏.‏ قَالَ قُلْتُ مَا الْفَلاَحُ قَالَ السُّحُورُ ثُمَّ لَمْ يَقُمْ بِنَا بَقِيَّةَ الشَّهْرِ ‏.‏",
+    "isnad": "حَدَّثَنَا مُسَدَّدٌ، حَدَّثَنَا يَزِيدُ بْنُ زُرَيْعٍ، أَخْبَرَنَا دَاوُدُ بْنُ أَبِي هِنْدٍ، عَنِ الْوَلِيدِ بْنِ عَبْدِ الرَّحْمَنِ، عَنْ جُبَيْرِ بْنِ نُفَيْرٍ",
+    "translation": "Narrated AbuDharr: We fasted with the Messenger of Allah (ﷺ) during Ramadan, but he did not make us get up at night for prayer at any time during the month till seven nights remained; then he made us get up for prayer till a third of the night had passed. When the sixth remaining night came, he did not make us get up for prayer. When the fifth remaining night came, he made us stand in prayer till a half of the night had gone. So I said: Messenger of Allah, I wish you had led us in supererogatory prayers during the whole of tonight. He said: When a man prays with an imam till he goes he is reckoned as having spent a whole night in prayer. On the fourth remaining night he did not make us get up. When the third remaining night came, he gathered his family, his wives, and the people and prayed with us till we were afraid we should miss the falah (success). I said: What is falah? He said: The meal before daybreak. Then he did not make us get up for prayer during the remainder of the month",
+    "grade": "Sahih (Al-Albani) · Sahih (Muhammad Muhyi Al-Din Abdul Hamid) · Sahih (Shuaib Al Arnaut) · Isnaad Sahih (Zubair Ali Zai)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "tirmidhi:806": {
+    "arabic": "عَنْ أَبِي ذَرٍّ، قَالَ صُمْنَا مَعَ رَسُولِ اللَّهِ صلى الله عليه وسلم فَلَمْ يُصَلِّ بِنَا حَتَّى بَقِيَ سَبْعٌ مِنَ الشَّهْرِ فَقَامَ بِنَا حَتَّى ذَهَبَ ثُلُثُ اللَّيْلِ ثُمَّ لَمْ يَقُمْ بِنَا فِي السَّادِسَةِ وَقَامَ بِنَا فِي الْخَامِسَةِ حَتَّى ذَهَبَ شَطْرُ اللَّيْلِ فَقُلْنَا لَهُ يَا رَسُولَ اللَّهِ لَوْ نَفَّلْتَنَا بَقِيَّةَ لَيْلَتِنَا هَذِهِ فَقَالَ ‏ \"‏ إِنَّهُ مَنْ قَامَ مَعَ الإِمَامِ حَتَّى يَنْصَرِفَ كُتِبَ لَهُ قِيَامُ لَيْلَةٍ ‏\"‏ ‏.‏ ثُمَّ لَمْ يُصَلِّ بِنَا حَتَّى بَقِيَ ثَلاَثٌ مِنَ الشَّهْرِ وَصَلَّى بِنَا فِي الثَّالِثَةِ وَدَعَا أَهْلَهُ وَنِسَاءَهُ فَقَامَ بِنَا حَتَّى تَخَوَّفْنَا الْفَلاَحَ ‏.‏ قُلْتُ لَهُ وَمَا الْفَلاَحُ قَالَ السُّحُورُ ‏.‏ قَالَ أَبُو عِيسَى هَذَا حَدِيثٌ حَسَنٌ صَحِيحٌ ‏.‏ وَاخْتَلَفَ أَهْلُ الْعِلْمِ فِي قِيَامِ رَمَضَانَ فَرَأَى بَعْضُهُمْ أَنْ يُصَلِّيَ إِحْدَى وَأَرْبَعِينَ رَكْعَةً مَعَ الْوِتْرِ ‏.‏ وَهُوَ قَوْلُ أَهْلِ الْمَدِينَةِ وَالْعَمَلُ عَلَى هَذَا عِنْدَهُمْ بِالْمَدِينَةِ ‏.‏ وَأَكْثَرُ أَهْلِ الْعِلْمِ عَلَى مَا رُوِيَ عَنْ عُمَرَ وَعَلِيٍّ وَغَيْرِهِمَا مِنْ أَصْحَابِ النَّبِيِّ صلى الله عليه وسلم عِشْرِينَ رَكْعَةً ‏.‏ وَهُوَ قَوْلُ سُفْيَانَ الثَّوْرِيِّ وَابْنِ الْمُبَارَكِ وَالشَّافِعِيِّ ‏.‏ وَقَالَ الشَّافِعِيُّ وَهَكَذَا أَدْرَكْتُ بِبَلَدِنَا بِمَكَّةَ يُصَلُّونَ عِشْرِينَ رَكْعَةً ‏.‏ وَقَالَ أَحْمَدُ رُوِيَ فِي هَذَا أَلْوَانٌ ‏.‏ وَلَمْ يَقْضِ فِيهِ بِشَيْءٍ ‏.‏ وَقَالَ إِسْحَاقُ بَلْ نَخْتَارُ إِحْدَى وَأَرْبَعِينَ رَكْعَةً عَلَى مَا رُوِيَ عَنْ أُبَىِّ بْنِ كَعْبٍ ‏.‏ وَاخْتَارَ ابْنُ الْمُبَارَكِ وَأَحْمَدُ وَإِسْحَاقُ الصَّلاَةَ مَعَ الإِمَامِ فِي شَهْرِ رَمَضَانَ ‏.‏ وَاخْتَارَ الشَّافِعِيُّ أَنْ يُصَلِّيَ الرَّجُلُ وَحْدَهُ إِذَا كَانَ قَارِئًا ‏.‏ وَفِي الْبَابِ عَنْ عَائِشَةَ وَالنُّعْمَانِ بْنِ بَشِيرٍ وَابْنِ عَبَّاسٍ ‏.‏",
+    "isnad": "حَدَّثَنَا هَنَّادٌ، حَدَّثَنَا مُحَمَّدُ بْنُ الْفُضَيْلِ، عَنْ دَاوُدَ بْنِ أَبِي هِنْدٍ، عَنِ الْوَلِيدِ بْنِ عَبْدِ الرَّحْمَنِ الْجُرَشِيِّ، عَنْ جُبَيْرِ بْنِ نُفَيْرٍ",
+    "translation": "Abu Dharr narrated:\"We fasted with the Prophet, so he did not pray (the night prayer) with us until seven (nights) of the month remained. Then he (pbuh) led us in prayer until a third of the night had gone, then he did not lead us in prayer on the sixth. Then he led us in prayer on the fifth until half of the night had gone. We said to him: 'O Messenger of Allah! Wouldn't you lead us in prayer for the remainder of the night?' He said: 'Indeed, whoever stands (praying) with the Imam until he finished, then it is recorded for him that he prayed the whole night.; Then he did not lead us in prayer until three (nights) of the month remained. Then he led us in prayer on the third and he called his family and his women to pray with us until we feared missing the Falah\" I (Jubair bin Nufair) said to him: \"What is the Falah\" He said: \"The Suhur",
+    "grade": "Sahih (Ahmad Muhammad Shakir) · Sahih (Al-Albani) · Hasan Sahih (Bashar Awad Maarouf) · Isnaad Sahih (Zubair Ali Zai)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "abu-dawud:1439": {
+    "arabic": "عن قيس بن طلق، قال: زارنا طلْق بن علي في يوم من رمضان، وأَمْسى عندنا، وأفطر، ثم قام بنا الليلة، وأَوْتَرَ بنا، ثم انحدر إلى مسجده، فصلى بأصحابه، حتى إذا بقي الوتر قَدَّمَ رجلا، فقال: أَوْتِرْ بأصحابك، فإني سمعت النبي صلى الله عليه وسلم يقول: «لا وِتْرَانِ في ليلة».",
+    "translation": "Qays ibn Talq reported: Talq ibn ‘Ali visited us one day during Ramadan. He stayed with us until the evening and broke his fast with us. Then he led us in voluntary night prayer and the Witr prayer. Afterwards he went to his mosque and led his companions in prayer. When only the Witr prayer was remaining, he asked another man to step forward and said: ‘Lead your companions in the Witr prayer, because I heard the Messenger of Allah (may Allah's peace and blessings be upon him) saying: \"There should not be two Witr prayers during one night.\"",
+    "attribution": "Narrated by At-Termedhy - An-Nasaa’i - Narrated by Abu Daoud - Narrated by Ahmad",
+    "grade": "Sahih (Al-Albani) · Sahih (Muhammad Muhyi Al-Din Abdul Hamid) · Isnaad Sahih (Zubair Ali Zai)",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "bukhari:2012": {
+    "arabic": "عَنِ ابْنِ شِهَابٍ، أَخْبَرَنِي عُرْوَةُ، أَنَّ عَائِشَةَ ـ رضى الله عنها ـ أَخْبَرَتْهُ أَنَّ رَسُولَ اللَّهِ صلى الله عليه وسلم خَرَجَ لَيْلَةً مِنْ جَوْفِ اللَّيْلِ، فَصَلَّى فِي الْمَسْجِدِ، وَصَلَّى رِجَالٌ بِصَلاَتِهِ، فَأَصْبَحَ النَّاسُ فَتَحَدَّثُوا، فَاجْتَمَعَ أَكْثَرُ مِنْهُمْ، فَصَلَّوْا مَعَهُ، فَأَصْبَحَ النَّاسُ فَتَحَدَّثُوا، فَكَثُرَ أَهْلُ الْمَسْجِدِ مِنَ اللَّيْلَةِ الثَّالِثَةِ، فَخَرَجَ رَسُولُ اللَّهِ صلى الله عليه وسلم فَصَلَّى، فَصَلَّوْا بِصَلاَتِهِ، فَلَمَّا كَانَتِ اللَّيْلَةُ الرَّابِعَةُ عَجَزَ الْمَسْجِدُ عَنْ أَهْلِهِ، حَتَّى خَرَجَ لِصَلاَةِ الصُّبْحِ، فَلَمَّا قَضَى الْفَجْرَ أَقْبَلَ عَلَى النَّاسِ، فَتَشَهَّدَ ثُمَّ قَالَ ‏ \"‏ أَمَّا بَعْدُ، فَإِنَّهُ لَمْ يَخْفَ عَلَىَّ مَكَانُكُمْ، وَلَكِنِّي خَشِيتُ أَنْ تُفْتَرَضَ عَلَيْكُمْ فَتَعْجِزُوا عَنْهَا ‏\"‏‏.‏ فَتُوُفِّيَ رَسُولُ اللَّهِ صلى الله عليه وسلم وَالأَمْرُ عَلَى ذَلِكَ",
+    "isnad": "حَدَّثَنَا يَحْيَى بْنُ بُكَيْرٍ، حَدَّثَنَا اللَّيْثُ، عَنْ عُقَيْلٍ",
+    "translation": "Narrated 'Urwa:That he was informed by `Aisha, \"Allah's Messenger (ﷺ) went out in the middle of the night and prayed in the mosque and some men prayed behind him. In the morning, the people spoke about it and then a large number of them gathered and prayed behind him (on the second night). In the next morning the people again talked about it and on the third night the mosque was full with a large number of people. Allah's Messenger (ﷺ) came out and the people prayed behind him. On the fourth night the Mosque was overwhelmed with people and could not accommodate them, but the Prophet (ﷺ) came out (only) for the morning prayer. When the morning prayer was finished he recited Tashah-hud and (addressing the people) said, \"Amma ba'du, your presence was not hidden from me but I was afraid lest the night prayer (Qiyam) should be enjoined on you and you might not be able to carry it on.\" So, Allah's Apostle died and the situation remained like that (i.e. people prayed individually)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:2010": {
+    "arabic": "وَعَنِ ابْنِ شِهَابٍ، عَنْ عُرْوَةَ بْنِ الزُّبَيْرِ، عَنْ عَبْدِ الرَّحْمَنِ بْنِ عَبْدٍ الْقَارِيِّ، أَنَّهُ قَالَ خَرَجْتُ مَعَ عُمَرَ بْنِ الْخَطَّابِ ـ رضى الله عنه ـ لَيْلَةً فِي رَمَضَانَ، إِلَى الْمَسْجِدِ، فَإِذَا النَّاسُ أَوْزَاعٌ مُتَفَرِّقُونَ يُصَلِّي الرَّجُلُ لِنَفْسِهِ، وَيُصَلِّي الرَّجُلُ فَيُصَلِّي بِصَلاَتِهِ الرَّهْطُ فَقَالَ عُمَرُ إِنِّي أَرَى لَوْ جَمَعْتُ هَؤُلاَءِ عَلَى قَارِئٍ وَاحِدٍ لَكَانَ أَمْثَلَ‏.‏ ثُمَّ عَزَمَ فَجَمَعَهُمْ عَلَى أُبَىِّ بْنِ كَعْبٍ، ثُمَّ خَرَجْتُ مَعَهُ لَيْلَةً أُخْرَى، وَالنَّاسُ يُصَلُّونَ بِصَلاَةِ قَارِئِهِمْ، قَالَ عُمَرُ نِعْمَ الْبِدْعَةُ هَذِهِ، وَالَّتِي يَنَامُونَ عَنْهَا أَفْضَلُ مِنَ الَّتِي يَقُومُونَ‏.‏ يُرِيدُ آخِرَ اللَّيْلِ، وَكَانَ النَّاسُ يَقُومُونَ أَوَّلَهُ‏.‏",
+    "translation": "Abdur Rahman bin 'Abdul Qari said, \"I went out in the company of 'Umar bin Al-Khattab one night in Ramadan to the mosque and found the people praying in different groups. A man praying alone or a man praying with a little group behind him. So, 'Umar said, 'In my opinion I would better collect these (people) under the leadership of one Qari (Reciter) (i.e. let them pray in congregation!)'. So, he made up his mind to congregate them behind Ubai bin Ka'b. Then on another night I went again in his company and the people were praying behind their reciter. On that, 'Umar remarked, 'What an excellent Bid'a (i.e. innovation in religion) this is; but the prayer which they do not perform, but sleep at its time is better than the one they are offering.' He meant the prayer in the last part of the night. (In those days) people used to pray in the early part of the night",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
   "muslim:749": {
     "arabic": "عَنِ ابْنِ عُمَرَ، أَنَّ رَجُلاً، سَأَلَ رَسُولَ اللَّهِ صلى الله عليه وسلم عَنْ صَلاَةِ اللَّيْلِ فَقَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏ \"‏ صَلاَةُ اللَّيْلِ مَثْنَى مَثْنَى فَإِذَا خَشِيَ أَحَدُكُمُ الصُّبْحَ صَلَّى رَكْعَةً وَاحِدَةً تُوتِرُ لَهُ مَا قَدْ صَلَّى ‏\"‏ ‏.‏",
     "isnad": "وَحَدَّثَنَا يَحْيَى بْنُ يَحْيَى، قَالَ قَرَأْتُ عَلَى مَالِكٍ عَنْ نَافِعٍ، وَعَبْدِ اللَّهِ بْنِ دِينَارٍ",
@@ -2965,6 +3017,13 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
     "arabicFrom": "HadeethEnc.com",
     "translationFrom": "HadeethEnc.com"
   },
+  "bukhari:6465": {
+    "arabic": "عَنْ عَائِشَةَ ـ رضى الله عنها ـ أَنَّهَا قَالَتْ سُئِلَ النَّبِيُّ صلى الله عليه وسلم أَىُّ الأَعْمَالِ أَحَبُّ إِلَى اللَّهِ قَالَ ‏\"‏ أَدْوَمُهَا وَإِنْ قَلَّ ‏\"‏‏.‏ وَقَالَ ‏\"‏ اكْلَفُوا مِنَ الأَعْمَالِ مَا تُطِيقُونَ ‏\"‏‏.‏",
+    "isnad": "حَدَّثَنِي مُحَمَّدُ بْنُ عَرْعَرَةَ، حَدَّثَنَا شُعْبَةُ، عَنْ سَعْدِ بْنِ إِبْرَاهِيمَ، عَنْ أَبِي سَلَمَةَ",
+    "translation": "Narrated `Aisha:The Prophet (ﷺ) was asked, \"What deeds are loved most by Allah?\" He said, \"The most regular constant deeds even though they may be few.\" He added, 'Don't take upon yourselves, except the deeds which are within your ability",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
   "muslim:755": {
     "arabic": "عن جابر رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم : «من خاف أن لا يقوم من آخِرِ الليل فليوتر أوله، ومن طَمِعَ أن يقوم آخره فليوتر آخر الليل، فإن صلاة آخر الليل مشهودة، وذلك أفضل».",
     "translation": "Jābir (may Allah be pleased with him) reported that the Messenger of Allah (may Allah's peace and blessings be upon him) said: \"If anyone fears that he will not wake up at the end of the night, let him offer Witr prayer at the beginning of the night; and anyone expects to wake up at the end of the night, let him offer Witr prayer at the end of the night. Indeed, prayer at the end of the night is witnessed (by the angels) and that is better.\"",
@@ -2973,27 +3032,12 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
     "arabicFrom": "HadeethEnc.com",
     "translationFrom": "HadeethEnc.com"
   },
-  "bukhari:6465": {
-    "arabic": "عَنْ عَائِشَةَ ـ رضى الله عنها ـ أَنَّهَا قَالَتْ سُئِلَ النَّبِيُّ صلى الله عليه وسلم أَىُّ الأَعْمَالِ أَحَبُّ إِلَى اللَّهِ قَالَ ‏\"‏ أَدْوَمُهَا وَإِنْ قَلَّ ‏\"‏‏.‏ وَقَالَ ‏\"‏ اكْلَفُوا مِنَ الأَعْمَالِ مَا تُطِيقُونَ ‏\"‏‏.‏",
-    "isnad": "حَدَّثَنِي مُحَمَّدُ بْنُ عَرْعَرَةَ، حَدَّثَنَا شُعْبَةُ، عَنْ سَعْدِ بْنِ إِبْرَاهِيمَ، عَنْ أَبِي سَلَمَةَ",
-    "translation": "Narrated `Aisha:The Prophet (ﷺ) was asked, \"What deeds are loved most by Allah?\" He said, \"The most regular constant deeds even though they may be few.\" He added, 'Don't take upon yourselves, except the deeds which are within your ability",
-    "arabicFrom": "fawazahmed0/hadith-api",
-    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
-  },
   "bukhari:990": {
     "arabic": "عَنِ ابْنِ عُمَرَ، أَنَّ رَجُلاً، سَأَلَ رَسُولَ اللَّهِ صلى الله عليه وسلم عَنْ صَلاَةِ اللَّيْلِ فَقَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏ \"‏ صَلاَةُ اللَّيْلِ مَثْنَى مَثْنَى، فَإِذَا خَشِيَ أَحَدُكُمُ الصُّبْحَ صَلَّى رَكْعَةً وَاحِدَةً، تُوتِرُ لَهُ مَا قَدْ صَلَّى ‏\"‏‏.‏",
     "isnad": "حَدَّثَنَا عَبْدُ اللَّهِ بْنُ يُوسُفَ، قَالَ أَخْبَرَنَا مَالِكٌ، عَنْ نَافِعٍ، وَعَبْدِ اللَّهِ بْنِ دِينَارٍ",
     "translation": "Narrated Ibn `Umar: Once a person asked Allah's Messenger (ﷺ) about the night prayer. Allah's Apostle (ﷺ) replied, \"The night prayer is offered as two Rak`at followed by two Rak`at and so on and if anyone is afraid of the approaching dawn (Fajr prayer) he should pray one Rak`ah and this will be a Witr for all the Rak`at which he has prayed before",
     "arabicFrom": "fawazahmed0/hadith-api",
     "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
-  },
-  "abu-dawud:1439": {
-    "arabic": "عن قيس بن طلق، قال: زارنا طلْق بن علي في يوم من رمضان، وأَمْسى عندنا، وأفطر، ثم قام بنا الليلة، وأَوْتَرَ بنا، ثم انحدر إلى مسجده، فصلى بأصحابه، حتى إذا بقي الوتر قَدَّمَ رجلا، فقال: أَوْتِرْ بأصحابك، فإني سمعت النبي صلى الله عليه وسلم يقول: «لا وِتْرَانِ في ليلة».",
-    "translation": "Qays ibn Talq reported: Talq ibn ‘Ali visited us one day during Ramadan. He stayed with us until the evening and broke his fast with us. Then he led us in voluntary night prayer and the Witr prayer. Afterwards he went to his mosque and led his companions in prayer. When only the Witr prayer was remaining, he asked another man to step forward and said: ‘Lead your companions in the Witr prayer, because I heard the Messenger of Allah (may Allah's peace and blessings be upon him) saying: \"There should not be two Witr prayers during one night.\"",
-    "attribution": "Narrated by At-Termedhy - An-Nasaa’i - Narrated by Abu Daoud - Narrated by Ahmad",
-    "grade": "Sahih (Al-Albani) · Sahih (Muhammad Muhyi Al-Din Abdul Hamid) · Isnaad Sahih (Zubair Ali Zai)",
-    "arabicFrom": "HadeethEnc.com",
-    "translationFrom": "HadeethEnc.com"
   },
   "bukhari:2009": {
     "arabic": "عَنْ أَبِي هُرَيْرَةَ ـ رضى الله عنه ـ أَنَّ رَسُولَ اللَّهِ صلى الله عليه وسلم قَالَ ‏ \"‏ مَنْ قَامَ رَمَضَانَ إِيمَانًا وَاحْتِسَابًا غُفِرَ لَهُ مَا تَقَدَّمَ مِنْ ذَنْبِهِ ‏\"‏‏.‏ قَالَ ابْنُ شِهَابٍ فَتُوُفِّيَ رَسُولُ اللَّهِ صلى الله عليه وسلم وَالأَمْرُ عَلَى ذَلِكَ، ثُمَّ كَانَ الأَمْرُ عَلَى ذَلِكَ فِي خِلاَفَةِ أَبِي بَكْرٍ وَصَدْرًا مِنْ خِلاَفَةِ عُمَرَ ـ رضى الله عنهما.‏",

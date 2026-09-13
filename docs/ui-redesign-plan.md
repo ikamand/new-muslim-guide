@@ -1736,6 +1736,9 @@ to do all of it. Three decisions recorded here because they undo earlier ones:
   not true: qiyam al-layl is the umbrella term, and tahajjud is that prayer
   after sleep. Today still offers the middle of the night and the last third
   as separate moments; both open the one page.
+- **Taraweeh has its own page**, in the week-and-year band beside Friday and
+  Eid. The Ramadan card opens it, and its kicker became "A night in Ramadan":
+  "Taraweeh tonight" above a page titled Taraweeh said the word twice.
 
 ### ✅ Built — the istikhara duʿa is on the page
 

@@ -63,6 +63,7 @@ import { WHO_IS_MUHAMMAD } from './who-is-muhammad';
 import { WHO_CAN_I_TALK_TO } from './who-can-i-talk-to';
 import { WHY_PEOPLE_DIFFER } from './why-people-differ';
 import { ISTIKHARA, QIYAM_AL_LAYL, TAWBA_PRAYER, WITR } from './voluntary-prayers';
+import { TARAWEEH } from './taraweeh';
 import { VOLUNTARY_FASTING } from './voluntary-fasting';
 import { WORK } from './work';
 import { YOUR_NAME } from './your-name';
@@ -187,6 +188,7 @@ export const LEARN_TOPICS: Reference[] = [
   PATIENCE_AND_GRATITUDE,
   ISLAMIC_CALENDAR,
   RAMADAN,
+  TARAWEEH,
   QIYAM_AL_LAYL,
   WITR,
   ISTIKHARA,
@@ -201,7 +203,7 @@ export const LEARN_TOPICS: Reference[] = [
 ];
 
 export {
-  ISTIKHARA, QIYAM_AL_LAYL, TAWBA_PRAYER, WITR,
+  ISTIKHARA, QIYAM_AL_LAYL, TARAWEEH, TAWBA_PRAYER, WITR,
   AL_FATIHAH, BEFORE_PRAYER, CLOTHING, DUA_AND_DHIKR, FAMILY, FOOD,
   HALAL_AND_HARAM, ISLAMIC_CALENDAR, MANNERS, PATIENCE_AND_GRATITUDE, RAMADAN,
   REPENTANCE, SUNNAH, WHAT_BREAKS_PRAYER, WHAT_IS_ISLAM, WHAT_IS_THE_QURAN,

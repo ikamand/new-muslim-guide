@@ -47,7 +47,7 @@ export const RAMADAN: Reference = {
     estimatedMinutes: 6,
     beginnerPriority: 3,
     tags: ['ramadan', 'health'],
-    relatedContent: [ref('pillar', 'sawm'), ref('reference', 'mosque')],
+    relatedContent: [ref('pillar', 'sawm'), ref('reference', 'taraweeh'), ref('reference', 'mosque')],
   },
   quickFacts: [
     { label: 'When', value: 'The ninth month, moving about 11 days earlier each year' },

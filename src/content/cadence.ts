@@ -169,6 +169,7 @@ const REFERENCES: Readonly<Record<string, Cadence>> = {
   'patience-and-gratitude': 'once',
   'islamic-calendar': 'once',
   ramadan: 'yearly',
+  taraweeh: 'yearly',
   'fasting-alone': 'yearly',
   'qiyam-al-layl': 'once',
   witr: 'once',

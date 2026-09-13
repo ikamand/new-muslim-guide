@@ -246,6 +246,7 @@ export const CURRICULUM: readonly Tier[] = [
         lessons: [
           step(ref('reference', 'islamic-calendar'), 'seasonal'),
           step(ref('reference', 'ramadan'), 'seasonal'),
+          step(ref('reference', 'taraweeh'), 'seasonal'),
           step(ref('reference', 'fasting-alone'), 'seasonal'),
           step(ref('reference', 'eid'), 'seasonal'),
           /* 8 Sep 2026: one page for both pilgrimages, the follow-up to the

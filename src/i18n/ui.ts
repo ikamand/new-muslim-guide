@@ -114,13 +114,13 @@ export const EN = {
   'arc.before': 'Ramadan is close',
   'arc.early': 'Ramadan, the first days',
   /*
-    Names the prayer, because somebody who heard "taraweeh" is looking for
-    that word and the card's title is the page's, Qiyam al-Layl. It was
-    "Tonight, at the mosque" while the card ran from 17:00 to ʿIsha; since
-    13 Sep 2026 it runs from ʿIsha to the last third, and at 00:30 the mosque
-    has long finished.
+    Why the card is here, in words true all night and all month. It was
+    "Tonight, at the mosque" while the card ran from 17:00 to ʿIsha, which is
+    false by midnight, then "Taraweeh tonight" while the card opened Qiyam
+    al-Layl. Since 13 Sep 2026 it opens a page titled Taraweeh, so the name is
+    the title's job.
   */
-  'arc.tarawih': 'Taraweeh tonight',
+  'arc.tarawih': 'A night in Ramadan',
   'arc.eid': 'Eid is close',
   /*
     The fast line on Today, month 9 and late Shaʿban only. Times, never day

@@ -78,6 +78,25 @@ the audio gate.
     the last third open the same page under different kickers, and
     `reference:tahajjud` and `guide:tahajjud` migrate in `progress-keys.ts`.
     `search:check` asserts both names find it.
+- §8, taraweeh: **done**, as its own page, "Taraweeh". Today's Ramadan card
+  opens it under "A night in Ramadan", and it sits in the Pray tab's week and
+  year band and the Ramadan chapter.
+  - What it is: Bukhari 37, and a confirmed sunnah (✓ IslamQA 38922).
+  - When: after ʿIsha and its sunnah until just before dawn (✓ IslamQA
+    162318, quoting al-Mawsuʿah 25/281); from the sighting night, never on
+    the night of Eid (✓ IslamQA 50547).
+  - Arriving late: join intending ʿIsha and finish after the salam (✓ Ibn
+    Baz, IslamQA 37829). A schools note says the Hanafi school does not
+    accept an obligatory prayer behind a taraweeh imam (✓ SeekersGuidance,
+    Yusuf Weltch), so there you pray ʿIsha separately first. "Separately
+    first" is this document's inference from that ruling; the page it cites
+    does not spell out the latecomer's alternative.
+  - How many: eight or twenty (Bukhari 1147; ✓ IslamQA 9036).
+  - Leaving early: permitted, but staying with the imam to the end is
+    recorded as the whole night (Abu Dawud 1375, Tirmidhi 806; ✓ IslamQA
+    153247).
+  - Witr and qunut: ✓ IslamQA 232790, ✓ Dar al-Iftaa 15984.
+  - Why together: Bukhari 2012 and 2010.
   - The night guides (witr, qiyam, tahajjud) say "quietly or aloud", citing
     Abu Dawud 1437; istikhara and tawba keep "quietly". The seven guides with
     no `units` or `night` were compared step for step against the previous

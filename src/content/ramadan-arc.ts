@@ -80,7 +80,8 @@ export const RAMADAN_ARC: readonly ArcRow[] = [
     id: 'tarawih',
     month: 9,
     during: ['witr', 'qiyam'],
-    ref: ref('reference', 'qiyam-al-layl'),
+    // The Taraweeh page since 13 Sep 2026; it opened Qiyam al-Layl before there was one.
+    ref: ref('reference', 'taraweeh'),
     reason: 'arc.tarawih',
   },
   /* The first days: the fast itself. */

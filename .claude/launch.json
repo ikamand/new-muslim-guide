@@ -10,7 +10,7 @@
     {
       "name": "web",
       "runtimeExecutable": "node",
-      "runtimeArgs": ["/Users/iMac/Documents/new-muslim-guide/.claude/dev-web.mjs"],
+      "runtimeArgs": ["-e", "import(require('node:os').homedir() + '/Documents/new-muslim-guide/.claude/dev-web.mjs')"],
       "port": 8081
     }
   ]

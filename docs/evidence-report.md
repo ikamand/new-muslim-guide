@@ -6,13 +6,13 @@ supplied each line of it.
 | | |
 |---|---|
 | Qur'an passages | 249 of 249 |
-| Narrations | 229 of 229 |
-| Confirmed against a second publisher | 77 |
-| Translation from HadeethEnc (published terms) | 77 |
-| Translation from Darussalam (quoted) | 152 |
+| Narrations | 231 of 231 |
+| Confirmed against a second publisher | 78 |
+| Translation from HadeethEnc (published terms) | 78 |
+| Translation from Darussalam (quoted) | 153 |
 | Arabic with no translation | 0 |
-| Chain of transmission moved to the foot | 145 |
-| Chain kept in place (no anchor to cut on) | 4 |
+| Chain of transmission moved to the foot | 147 |
+| Chain kept in place (no anchor to cut on) | 3 |
 | Nothing found | 0 |
 
 ## What "confirmed" means here
@@ -43,7 +43,6 @@ stays at the head. Nothing is deleted. A narration the rule cannot anchor on
 is left whole and listed below.
 - bukhari:350 — the Prophet ﷺ is never named
 - bukhari:4759 — the Prophet ﷺ is never named
-- bukhari:1178 — the Prophet ﷺ is never named
 - bukhari:1090 — the Prophet ﷺ is never named
 
 The window that decides this starts a third of the way into the shorter text.
@@ -266,8 +265,10 @@ comes from the collection itself.
 | `bukhari:990` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
 | `bukhari:2009` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
 | `bukhari:998` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
+| `bukhari:1180` | HadeethEnc.com | HadeethEnc.com | HadeethEnc 3062 |
+| `abu-dawud:1434` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
 | `abu-dawud:1422` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
-| `bukhari:1178` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
+| `abu-dawud:1425` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
 | `abu-dawud:1431` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
 | `tirmidhi:465` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
 | `abu-dawud:he65063` | HadeethEnc.com | HadeethEnc.com | HadeethEnc 65063 |

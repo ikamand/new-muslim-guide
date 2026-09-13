@@ -5,22 +5,22 @@
  * here is lost the next time it runs, and one that needs making belongs
  * upstream, where the text is published.
  *
- * 249 Qur'an passages and 229 narrations. Every character came over
+ * 249 Qur'an passages and 231 narrations. Every character came over
  * the wire from a published text rather than from memory, which is the only
  * way a file like this could exist under this project's rules about Arabic.
  *
  * ## Where each line came from
  *
  * No one source has all of it, so each field is taken from the first that
- * does, and says so on the text itself. Of the 229 narrations here:
- * 77 were confirmed against a second, separately edited publisher;
- * 77 carry HadeethEnc's own translation, 152 carry Darussalam's, and
+ * does, and says so on the text itself. Of the 231 narrations here:
+ * 78 were confirmed against a second, separately edited publisher;
+ * 78 carry HadeethEnc's own translation, 153 carry Darussalam's, and
  * 0 have Arabic and no translation at all.
  *
  * ⚠️ **The Darussalam translations are not ours to relicense.** They reach
  * this file through a public-domain dedication that covers the compiler's work
  * and not the translation inside it. What makes that defensible here is scale
- * and purpose — 152 narrations out of some thirty thousand, each quoted under
+ * and purpose — 153 narrations out of some thirty thousand, each quoted under
  * the instruction it supports, in an app that is free and never sold. It is a
  * quotation, not a republication, and it is Iyad's decision on the record.
  *
@@ -3053,6 +3053,22 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
     "arabicFrom": "fawazahmed0/hadith-api",
     "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
   },
+  "bukhari:1180": {
+    "arabic": "عَنِ ابْنِ عُمَرَ رَضِيَ اللَّهُ عَنْهُمَا قَالَ: حَفِظْتُ مِنَ النَّبِيِّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ عَشْرَ رَكَعَاتٍ: رَكْعَتَيْنِ قَبْلَ الظُّهْرِ، وَرَكْعَتَيْنِ بَعْدَهَا، وَرَكْعَتَيْنِ بَعْدَ المَغْرِبِ فِي بَيْتِهِ، وَرَكْعَتَيْنِ بَعْدَ العِشَاءِ فِي بَيْتِهِ، وَرَكْعَتَيْنِ قَبْلَ صَلاَةِ الصُّبْحِ، وَكَانَتْ سَاعَةً لاَ يُدْخَلُ عَلَى النَّبِيِّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ فِيهَا، حَدَّثَتْنِي حَفْصَةُ أَنَّهُ كَانَ إِذَا أَذَّنَ المُؤَذِّنُ وَطَلَعَ الفَجْرُ صَلَّى رَكْعَتَيْنِ، وَفِي لَفْظٍ: أَنَّ النَّبِيَّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ كَانَ يُصَلِّي بَعْدَ الْجُمُعَةِ رَكْعَتَيْنِ.",
+    "translation": "Ibn ‘Umar (may Allah be pleased with him and his father) reported: I memorized from the Prophet (may Allah's peace and blessings be upon him) ten Rak‘ahs (units of prayer): two Rak‘ahs before Zhuhr and two Rak‘ahs after it, two Rak‘ahs after Maghrib at his home, two Rak‘ahs after ‘Ishā’ at his home, and two Rak‘ahs before the Fajr prayer, an hour when none was allowed to enter upon the Prophet (may Allah's peace and blessings be upon him). Hafsah told me that after the muezzin would make Adhān (call to prayer) and after the break of dawn, the Prophet (may Allah's peace and blessings be upon him) used to offer two Rak‘ahs. Another wording reads: The Prophet (may Allah's peace and blessings be upon him) used to offer two Rak‘ahs after the Friday prayer.",
+    "attribution": "Al-Bukhari and Muslim with all its versions",
+    "grade": "Authentic",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "abu-dawud:1434": {
+    "arabic": "عَنْ أَبِي قَتَادَةَ، أَنَّ النَّبِيَّ صلى الله عليه وسلم قَالَ لأَبِي بَكْرٍ ‏\"‏ مَتَى تُوتِرُ ‏\"‏ قَالَ أُوتِرُ مِنْ أَوَّلِ اللَّيْلِ ‏.‏ وَقَالَ لِعُمَرَ ‏\"‏ مَتَى تُوتِرُ ‏\"‏ ‏.‏ قَالَ آخِرَ اللَّيْلِ ‏.‏ فَقَالَ لأَبِي بَكْرٍ ‏\"‏ أَخَذَ هَذَا بِالْحَزْمِ ‏\"‏ ‏.‏ وَقَالَ لِعُمَرَ ‏\"‏ أَخَذَ هَذَا بِالْقُوَّةِ ‏\"‏ ‏.‏",
+    "isnad": "حَدَّثَنَا مُحَمَّدُ بْنُ أَحْمَدَ بْنِ أَبِي خَلَفٍ، حَدَّثَنَا أَبُو زَكَرِيَّا، يَحْيَى بْنُ إِسْحَاقَ السَّيْلَحِينِيُّ حَدَّثَنَا حَمَّادُ بْنُ سَلَمَةَ، عَنْ ثَابِتٍ، عَنْ عَبْدِ اللَّهِ بْنِ رَبَاحٍ",
+    "translation": "Narrated AbuQatadah: The Prophet (ﷺ) asked AbuBakr: When do you observe the witr? He replied: I observe the witr prayer in the early hours of the night. The Prophet (ﷺ) asked Umar: When do you observe the witr? He replied: At the end of the night. He then said to AbuBakr: This has followed it with care; and he said to Umar: He has followed it with strength",
+    "grade": "Sahih (Al-Albani) · Sahih (Muhammad Muhyi Al-Din Abdul Hamid) · Hasan (Shuaib Al Arnaut) · Hasan (Zubair Ali Zai)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
   "abu-dawud:1422": {
     "arabic": "عَنْ أَبِي أَيُّوبَ الأَنْصَارِيِّ، قَالَ قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏ \"‏ الْوِتْرُ حَقٌّ عَلَى كُلِّ مُسْلِمٍ فَمَنْ أَحَبَّ أَنْ يُوتِرَ بِخَمْسٍ فَلْيَفْعَلْ وَمَنْ أَحَبَّ أَنْ يُوتِرَ بِثَلاَثٍ فَلْيَفْعَلْ وَمَنْ أَحَبَّ أَنْ يُوتِرَ بِوَاحِدَةٍ فَلْيَفْعَلْ ‏\"‏ ‏.‏",
     "isnad": "حَدَّثَنَا عَبْدُ الرَّحْمَنِ بْنُ الْمُبَارَكِ، حَدَّثَنِي قُرَيْشُ بْنُ حَيَّانَ الْعِجْلِيُّ، حَدَّثَنَا بَكْرُ بْنُ وَائِلٍ، عَنِ الزُّهْرِيِّ، عَنْ عَطَاءِ بْنِ يَزِيدَ اللَّيْثِيِّ",
@@ -3061,9 +3077,11 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
     "arabicFrom": "fawazahmed0/hadith-api",
     "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
   },
-  "bukhari:1178": {
-    "arabic": "حَدَّثَنَا مُسْلِمُ بْنُ إِبْرَاهِيمَ، أَخْبَرَنَا شُعْبَةُ، حَدَّثَنَا عَبَّاسٌ الْجُرَيْرِيُّ ـ هُوَ ابْنُ فَرُّوخَ ـ عَنْ أَبِي عُثْمَانَ النَّهْدِيِّ، عَنْ أَبِي هُرَيْرَةَ، رضى الله عنه قَالَ أَوْصَانِي خَلِيلِي بِثَلاَثٍ لاَ أَدَعُهُنَّ حَتَّى أَمُوتَ صَوْمِ ثَلاَثَةِ أَيَّامٍ مِنْ كُلِّ شَهْرٍ، وَصَلاَةِ الضُّحَى، وَنَوْمٍ عَلَى وِتْرٍ‏.‏",
-    "translation": "Narrated Abu Huraira:My friend (the Prophet) advised me to do three things and I shall not leave them till I die, these are: To fast three days every month, to offer the Duha prayer, and to offer witr before sleeping",
+  "abu-dawud:1425": {
+    "arabic": "عَنْ أَبِي الْحَوْرَاءِ، قَالَ قَالَ الْحَسَنُ بْنُ عَلِيٍّ رضى الله عنهما عَلَّمَنِي رَسُولُ اللَّهِ صلى الله عليه وسلم كَلِمَاتٍ أَقُولُهُنَّ فِي الْوِتْرِ قَالَ ابْنُ جَوَّاسٍ فِي قُنُوتِ الْوِتْرِ ‏ \"‏ اللَّهُمَّ اهْدِنِي فِيمَنْ هَدَيْتَ وَعَافِنِي فِيمَنْ عَافَيْتَ وَتَوَلَّنِي فِيمَنْ تَوَلَّيْتَ وَبَارِكْ لِي فِيمَا أَعْطَيْتَ وَقِنِي شَرَّ مَا قَضَيْتَ إِنَّكَ تَقْضِي وَلاَ يُقْضَى عَلَيْكَ وَإِنَّهُ لاَ يَذِلُّ مَنْ وَالَيْتَ وَلاَ يَعِزُّ مَنْ عَادَيْتَ تَبَارَكْتَ رَبَّنَا وَتَعَالَيْتَ ‏\"‏ ‏.‏",
+    "isnad": "حَدَّثَنَا قُتَيْبَةُ بْنُ سَعِيدٍ، وَأَحْمَدُ بْنُ جَوَّاسٍ الْحَنَفِيُّ، قَالاَ حَدَّثَنَا أَبُو الأَحْوَصِ، عَنْ أَبِي إِسْحَاقَ، عَنْ بُرَيْدِ بْنِ أَبِي مَرْيَمَ",
+    "translation": "Narrated Al-Hasan ibn Ali: The Messenger of Allah (ﷺ) taught me some words that I say during the witr. (The version of Ibn Jawwas has: I say them in the supplication of the witr.) They were: \"O Allah, guide me among those Thou hast guided, grant me security among those Thou hast granted security, take me into Thy charge among those Thou hast taken into Thy charge, bless me in what Thou hast given, guard me from the evil of what Thou hast decreed, for Thou dost decree, and nothing is decreed for Thee. He whom Thou befriendest is not humbled. Blessed and Exalted art Thou, our Lord",
+    "grade": "Sahih (Al-Albani) · Sahih (Muhammad Muhyi Al-Din Abdul Hamid) · Sahih (Zubair Ali Zai)",
     "arabicFrom": "fawazahmed0/hadith-api",
     "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
   },

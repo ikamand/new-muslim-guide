@@ -291,63 +291,45 @@ export const QIYAM_AL_LAYL: Reference = {
 };
 
 /**
- * Witr.
+ * Shafʿ and Witr.
  *
- * The one voluntary prayer whose shape a beginner gets wrong unaided: it is
- * odd, and it closes the night.
+ * ⚠️ REVIEW REQUIRED — model-written English over opened sources.
  *
- * ⚠️ REVIEW REQUIRED — model-written English over citations read from the
- * collections. Rewritten 13 Sep 2026 after the audit in
- * `docs/night-prayers-accuracy.md` (§2, §5, §6):
+ * Named "Witr" until 13 Sep 2026. Iyad renamed it after the second research
+ * pass (docs/night-prayers-accuracy.md Part 2). Shafʿ is the even rakʿahs
+ * prayed straight before witr (IslamWeb 18778), the two together close the
+ * night prayer (IslamWeb 416554), and the app had called all three "witr"
+ * without once saying the word shafʿ.
  *
- * - It taught one rakʿah as the path. It now teaches three, two then one, as
- *   the guide does. One with nothing before it is disliked by most scholars
- *   (IslamWeb 92752) and not valid for the Hanafis (SeekersGuidance), and it
- *   is not what a beginner sees beside them. Separating the two and the one is
- *   the majority position (IslamWeb 415267) and Ibn ʿUmar's practice
- *   (Bukhari 991).
- * - Its hero was Muslim 752, whose printed English says "at the end of the
- *   prayer" where the Arabic says "the end of the night". Bukhari 998 replaces
- *   it.
- * - "What if I sleep through it?" was answered with Bukhari 990, which says
- *   nothing about it. Abu Dawud 1431 answers it.
- * - Witr may come before qiyam or tahajjud, or after (Iyad, with IslamWeb
- *   2165): early for someone unsure of waking, at the end for someone who will
- *   wake (Muslim 755), and never twice (Abu Dawud 1439).
+ * What the page teaches, in order: what they are; that shafʿ is not the
+ * sunnah of Isha; when (last if you will wake, before sleep if you might
+ * not); how (two, salam, one), with the Hanafi way as the page's one red
+ * note; what to recite; the qunut, as something a beginner does not need
+ * yet; praying witr and then waking; sleeping through it.
  *
- * What a reviewer owns: the Hanafi note, whether "dislike" is the right word
- * to put in front of a beginner, and how making up a missed witr is taught
- * (the page says only to pray it on waking).
+ * What a reviewer owns: the Hanafi sentence; "most scholars dislike" one
+ * rakʿah on its own; and whether the qunut section says enough about the
+ * schools without naming them.
  *
- * The qunut dua is still absent. It is in the dua book; a step for it needs a
- * transliteration from a source and a recording.
+ * The qunut is not a step in the guide. Its dua is in the dua book (Hisn
+ * al-Muslim, occasion 1269331); a step needs a transliteration from a source
+ * and a recording.
  */
 export const WITR: Reference = {
   id: 'witr',
   surface: 'learn',
-  title: 'Witr',
-  subtitle: 'The odd-numbered prayer that closes the night',
+  title: 'Shafʿ and Witr',
+  subtitle: 'The even and the odd that close your night prayer',
   meta: {
     category: 'salah',
     difficulty: 'building',
-    estimatedMinutes: 3,
+    estimatedMinutes: 4,
     beginnerPriority: 3,
-    relatedContent: [ref('reference', 'qiyam-al-layl'), ref('guide', 'witr')],
+    relatedContent: [ref('guide', 'witr'), ref('reference', 'qiyam-al-layl'), ref('hisn', '1269331')],
   },
-  /*
-    All four rows earn their place here, which is why witr is one of the two
-    pages this format was piloted on. The other is `food.ts`, which gets two —
-    if the block only looks right where every row happens to apply, it is
-    structure for its own sake.
-
-    "Do I have to?" answers in the words somebody has. It said only "No", two
-    sections above a printed narration calling witr "a duty for every Muslim"
-    and without a word about the school that holds it required. It now names
-    both, in words a reader owns.
-  */
   quickFacts: [
-    { label: 'When', value: 'After Isha until Fajr' },
-    { label: 'How many', value: 'Three: two rakʿahs, then one' },
+    { label: 'When', value: 'After Isha and its sunnah, until Fajr' },
+    { label: 'How many', value: 'Two rakʿahs of shafʿ, then one of witr' },
     {
       label: 'Do I have to?',
       value: 'For most scholars no. The Hanafi school says yes',
@@ -358,26 +340,62 @@ export const WITR: Reference = {
   sections: [
     {
       id: 'what',
-      heading: 'What is witr?',
-      body: 'Witr means odd. It is an odd number of rakʿahs prayed after Isha, and it is the last prayer of your night.',
-      // The page's answer, printed rather than filed.
+      heading: 'What are shafʿ and witr?',
       promote: 'hero',
-      sources: [hadith('bukhari', '998', { grading: 'sahih', role: 'practice' })],
+      body:
+        'Shafʿ means even and witr means odd. Together they close your night prayer: two rakʿahs with a salam, then one rakʿah on its own. The Prophet ﷺ said to make witr the last prayer of your night.',
+      sources: [
+        hadith('bukhari', '998', { grading: 'sahih', role: 'practice' }),
+        scholarly({
+          work: 'Shafʿ and witr are part of qiyam al-layl',
+          author: 'IslamWeb, fatwa 416554',
+          url: 'https://www.islamweb.net/ar/fatwa/416554/',
+        }),
+      ],
     },
     {
-      id: 'how-many',
-      heading: 'How many rakʿahs?',
+      id: 'not-isha-sunnah',
+      heading: 'Is shafʿ the sunnah after Isha?',
       body:
-        'Three is what you will see most: two rakʿahs ending with the salam, then one more. The Prophet ﷺ named five, three and one, and left the choice to the person praying.',
+        'No. Isha has two sunnah rakʿahs of its own, prayed straight after it. Shafʿ is separate: the even rakʿahs you pray just before witr.',
+      sources: [
+        hadith('bukhari', '1180', { grading: 'sahih', role: 'practice' }),
+        scholarly({
+          work: 'The sunnah of Isha is not the two rakʿahs of shafʿ',
+          author: 'IslamWeb, fatwa 18778',
+          url: 'https://www.islamweb.net/ar/fatwa/18778/',
+        }),
+      ],
+    },
+    {
+      id: 'when',
+      heading: 'When do I pray them?',
       promote: 'quote',
+      body:
+        'Any time after Isha until Fajr, and always as the last prayer of your night. If you will pray qiyam or tahajjud, pray shafʿ and witr after it. If you are not sure you will wake, pray them before you sleep. Both ways are sound.',
+      sources: [
+        hadith('muslim', '755', { grading: 'sahih', role: 'practice' }),
+        hadith('abu-dawud', '1434', { grading: 'sahih', role: 'practice' }),
+        scholarly({
+          work: 'Witr may be prayed early in the night, and delaying it is better',
+          author: 'IslamWeb, fatwa 2165',
+          url: 'https://www.islamweb.net/ar/fatwa/2165/',
+        }),
+      ],
+    },
+    {
+      id: 'how',
+      heading: 'How do I pray them?',
+      body:
+        'Pray two rakʿahs and end with the salam. That is shafʿ. Then stand and pray one rakʿah and end with the salam. That is witr. The Prophet ﷺ also allowed witr of five, three or one rakʿahs.',
       sources: [
         hadith('abu-dawud', '1422', { grading: 'sahih', role: 'practice' }),
         hadith('bukhari', '991', { grading: 'sahih', role: 'practice' }),
         scholarly({
-          work: 'Praying the three-rakʿah witr prayer two rakʿahs and then one',
-          author: 'IslamWeb, fatwa 415267',
+          work: 'Separating witr from shafʿ with a salam',
+          author: 'IslamWeb, fatwa 58212',
           school: 'the majority',
-          url: 'https://www.islamweb.net/en/fatwa/415267/',
+          url: 'https://www.islamweb.net/ar/fatwa/58212/',
         }),
         scholarly({
           work: 'Performing only one rakʿah in witr prayer',
@@ -386,7 +404,7 @@ export const WITR: Reference = {
           url: 'https://islamweb.net/en/fatwa/92752/',
         }),
       ],
-      note: 'If you have already prayed at night, one rakʿah on the end is your witr. One on its own, with nothing before it, still counts, but most scholars dislike it.',
+      note: 'One rakʿah of witr on its own, with nothing before it, still counts, but most scholars dislike it.',
       notes: [
         note(
           'differs',
@@ -417,19 +435,38 @@ export const WITR: Reference = {
       ],
     },
     {
-      id: 'when',
-      heading: 'When do I pray it?',
+      id: 'recite',
+      heading: 'What do I recite?',
       body:
-        'Any time after Isha until Fajr, and it can come before your qiyam or tahajjud or after it. If you will wake to pray later in the night, leave it to the end, which is better. If you are not sure you will wake, pray it before you sleep.',
-      promote: 'quote',
+        'Al-Fatihah in every rakʿah, then a short surah. The Prophet ﷺ recited Al-Aʿla in the first rakʿah, Al-Kafirun in the second and Al-Ikhlas in the last. They are recommended, not required, so recite what you know.',
+      note: 'Some also add Al-Falaq and An-Nas after Al-Ikhlas in the last rakʿah.',
       sources: [
-        hadith('muslim', '755', { grading: 'sahih', role: 'practice' }),
-        hadith('bukhari', '1178', { grading: 'sahih', role: 'practice' }),
+        hadith('nasai', '1699', { grading: 'sahih', role: 'practice' }),
+        scholarly({
+          work: 'What is the best way to pray witr?',
+          author: 'Irshaad Sedick, SeekersGuidance',
+          school: 'Shafi`i',
+          url: 'https://seekersguidance.org/answers/prayer-shafii-fiqh/what-is-the-best-way-to-pray-witr/',
+        }),
+      ],
+    },
+    {
+      id: 'qunut',
+      heading: 'What is the qunut?',
+      body:
+        'A dua some people make in the last rakʿah of witr. You do not need to learn it to pray witr. Mosques differ on when they say it, some every night and some only in the second half of Ramadan, and on whether it comes before or after bowing.',
+      sources: [
+        hadith('abu-dawud', '1425', { grading: 'sahih', role: 'practice' }),
+        scholarly({
+          work: 'Qunut in witr and in Fajr',
+          author: 'Dar al-Iftaa al-Misriyyah, fatwa 15984',
+          url: 'https://www.dar-alifta.org/ar/fatwa/details/15984',
+        }),
       ],
     },
     {
       id: 'after',
-      heading: 'What if I prayed it and then wake up?',
+      heading: 'What if I prayed witr and then wake up?',
       body:
         'Pray as much as you like, two rakʿahs at a time, and do not pray witr again. A night has only one witr.',
       sources: [

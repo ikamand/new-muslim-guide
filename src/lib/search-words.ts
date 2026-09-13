@@ -106,8 +106,12 @@ const GROUPS: readonly (readonly string[])[] = [
   ['fast', 'fasting', 'sawm', 'ramadan', 'iftar', 'suhoor'],
   /* Taraweeh, spelled the ways people spell it. */
   ['taraweeh', 'tarawih', 'taraweh', 'tarawee'],
-  /* Shafʿ, typed the ways people type it without the ʿ. */
-  ['shafʿ', 'shaf', 'shafa', 'shafaa'],
+  /*
+    Shafʿ, typed the ways people type it without the ʿ. Not the bare "shaf":
+    a synonym only has to start a word, and "shaf" starts "Shafi`i", which put
+    every prayer's final sitting into a search for shafʿ.
+  */
+  ['shafʿ', 'shafa', 'shafaa'],
 
   /* Everyday life. */
   ['home', 'house', 'apartment', 'flat'],

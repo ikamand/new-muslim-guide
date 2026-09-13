@@ -530,3 +530,27 @@ export function pausesOf(day: DayTimes): Pause[] {
     },
   ];
 }
+
+/**
+ * The one band the day page shows at `now`, or null.
+ *
+ * Each band is shown for the stretch of the day it closes, not only while it
+ * is in force: the sunrise band from Fajr until the sun is up, the noon band
+ * from then until Dhuhr, the sunset band from ʿAsr until Maghrib (Iyad,
+ * 12 Sep 2026, from a mock of the page with one time per row). Three painted
+ * rows all day were the heaviest thing on the line after the lit prayer, so a
+ * beginner met what may not be prayed before what must.
+ *
+ * The stretches do not overlap, and each contains its own band's span, so a
+ * band that is in force is never hidden. `npm run pauses:check` walks whole
+ * days and fails if that stops being true.
+ */
+export function pauseShownAt(day: DayTimes, now: Date): Pause | null {
+  const at = (prayerId: PrayerId) => day.prayers.find((prayer) => prayer.id === prayerId)!.time;
+  const [sunrise, noon, sunset] = pausesOf(day);
+  const within = (from: Date, to: Date) => now >= from && now < to;
+  if (within(at('fajr'), sunrise.to)) return sunrise;
+  if (within(sunrise.to, noon.to)) return noon;
+  if (within(at('asr'), sunset.to)) return sunset;
+  return null;
+}

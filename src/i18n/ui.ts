@@ -500,8 +500,9 @@ export const EN = {
   'awqat.pause.sunrise': 'from when you pray Fajr until {time}',
   'awqat.pause.noon': '{from} – {to}, as the sun stands at its height',
   'awqat.pause.sunset': 'from when you pray ʿAsr until Maghrib',
+  /* "Three times of day", not "these three times": since 12 Sep the line shows one band at a time, so "these" pointed at rows that were not there. */
   'awqat.pause.note':
-    'The five prayers, and a missed one, are never forbidden. Only voluntary prayer is, at these three times.',
+    'The five prayers, and a missed one, are never forbidden. Only voluntary prayer is, at three times of day.',
   'awqat.projected':
     'The Hijri column follows the Umm al-Qura projection. The sacred dates, Ramadan, the Eids, ʿAshuraʾ and ʿArafah, are settled by the moon being sighted, so they are not printed here. Your mosque will know them in the week beforehand.',
 

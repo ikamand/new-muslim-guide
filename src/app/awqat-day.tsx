@@ -35,6 +35,7 @@ import {
   formatCountdown,
   formatDuration,
   formatTime,
+  pauseShownAt,
   pausesOf,
   windowEnd,
   METHODS,
@@ -63,6 +64,16 @@ import {
  * as moments, since they close a window each. Tomorrow's Fajr at the foot,
  * because that is the number people check at night.
  *
+ * Since 12 Sep 2026 a prayer prints its START only, as large as its name, and
+ * the open prayer alone adds "until …" and the time left. Iyad put this page
+ * beside a start-times-only app: ours knew more, theirs read faster. No end
+ * was lost. Dhuhr's is ʿAsr's start, ʿAsr's is Maghrib's, Maghrib's is
+ * ʿIsha's, and Fajr's and ʿIsha's are the two moment rows. The second number
+ * on every row repeated one already on the page, was set smaller than the
+ * name, and was pinned right so the starts never lined up. The windows are
+ * still taught: by the sentence above the line, by the two "ends" rows, and
+ * by the open prayer's own end, the only one anyone is deciding about.
+ *
  * The line wears the arch's own grammar (Iyad, 11 Sep 2026): a passed mark
  * sinks to the hairline gold, the lit one wears the ring that breathes on
  * the arch, the ones to come stay gold; and the spine is the thread the app
@@ -84,6 +95,11 @@ import {
  * only for its sun-bound part. The sunrise band sits under Fajr rather than
  * under Sunrise since 12 Sep, because the list is an order, not a scale,
  * and its row has to begin where its sentence does.
+ *
+ * One band at a time since 12 Sep 2026, and only today: `pauseShownAt` shows
+ * each for the stretch of the day it closes. What that costs: the ʿAsr band
+ * cannot be seen from the morning, and another date shows none. The footnote
+ * under the line opens the lesson, which lists all three.
  *
  * ## Any date
  *
@@ -389,6 +405,9 @@ export default function AwqatDayScreen() {
   const closed = (id: PrayerId) => isToday && windowEnd(day, id).getTime() <= now.getTime();
   const reached = (time: Date) => isToday && time.getTime() <= now.getTime();
   const pauseLive = (pause: Pause) => isToday && now >= pause.from && now < pause.to;
+  /* One band at a time, and none on another date: see `pauseShownAt`. */
+  const shownPause = isToday ? pauseShownAt(day, now) : null;
+  const shows = (pause: Pause) => shownPause?.id === pause.id;
 
   const hijri = hijriDate(date);
   const dayLine = new Intl.DateTimeFormat(locale, { day: 'numeric', month: 'long' }).format(date);
@@ -460,20 +479,26 @@ export default function AwqatDayScreen() {
             {prayer.label}
           </ThemedText>
           <View style={styles.hoursSpan}>
+            {/* The start, the size of the name. Every end is already on the page. */}
             <ThemedText
-              type={lit ? 'smallBold' : 'small'}
+              type="cardTitle"
               themeColor={lit ? 'gold' : 'text'}
               style={styles.tabular}
               numberOfLines={1}>
-              {formatTime(prayer.time)} – {formatTime(ends)}
+              {formatTime(prayer.time)}
             </ThemedText>
             {open ? (
-              <ThemedText type="caption" themeColor="gold">
-                {t('awqat.day.left').replace(
-                  '{left}',
-                  formatDuration(ends.getTime() - now.getTime()),
-                )}
-              </ThemedText>
+              <>
+                <ThemedText type="caption" themeColor="gold">
+                  {t('times.until').replace('{time}', formatTime(ends))}
+                </ThemedText>
+                <ThemedText type="caption" themeColor="gold">
+                  {t('awqat.day.left').replace(
+                    '{left}',
+                    formatDuration(ends.getTime() - now.getTime()),
+                  )}
+                </ThemedText>
+              </>
             ) : lit ? (
               <ThemedText type="caption" themeColor="gold">
                 {t('awqat.day.nextIn').replace(
@@ -538,22 +563,30 @@ export default function AwqatDayScreen() {
       Its `at` is still sunrise, so the thread and the gold light only the
       sun-bound quarter hour the app can actually know.
     */
-    pauseEntry(
-      sunrisePause,
-      t('awqat.pause.sunrise').replace('{time}', formatTime(sunrisePause.to)),
-    ),
+    ...(shows(sunrisePause)
+      ? [
+          pauseEntry(
+            sunrisePause,
+            t('awqat.pause.sunrise').replace('{time}', formatTime(sunrisePause.to)),
+          ),
+        ]
+      : []),
     momentEntry('sunrise', t('awqat.day.sunrise'), day.sunrise),
-    pauseEntry(
-      noonPause,
-      t('awqat.pause.noon')
-        .replace('{from}', formatTime(noonPause.from))
-        .replace('{to}', formatTime(noonPause.to)),
-    ),
+    ...(shows(noonPause)
+      ? [
+          pauseEntry(
+            noonPause,
+            t('awqat.pause.noon')
+              .replace('{from}', formatTime(noonPause.from))
+              .replace('{to}', formatTime(noonPause.to)),
+          ),
+        ]
+      : []),
     prayerEntry('dhuhr'),
     prayerEntry('asr'),
     /* No {time}: the Maghrib row below carries it, and naming it here cost
        a wrapped line at 360px. See the note in ui.ts. */
-    pauseEntry(sunsetPause, t('awqat.pause.sunset')),
+    ...(shows(sunsetPause) ? [pauseEntry(sunsetPause, t('awqat.pause.sunset'))] : []),
     prayerEntry('maghrib'),
     prayerEntry('isha'),
     momentEntry('midnight', t('awqat.day.midnight'), day.middleOfNight),
@@ -757,10 +790,10 @@ const styles = StyleSheet.create({
   name: {
     flex: 1,
   },
+  /* No top offset: the time is the name's own rung now, so their lines align. */
   hoursSpan: {
     alignItems: 'flex-end',
     gap: Spacing.half,
-    paddingTop: Spacing.one,
   },
   muted: {
     opacity: 0.55,

@@ -4217,6 +4217,42 @@ was not.
 
 ---
 
+## 12 Sep 2026 — The day page, one time per row ✅ ⚠️ review-gated
+
+Iyad put the day page beside a start-times-only app on his phone: ours knew
+more, theirs read faster. Mocked first as five screens at 360 points, the page
+as shipped beside the rework at four times of day
+(claude.ai/code/artifact/4b1042e1-1050-4c12-a2f7-ebe53eaced46), then built.
+
+- **One time per row.** A prayer prints its start at `cardTitle`, the size of
+  its name. The second number went because every end was already on the page:
+  Dhuhr's is ʿAsr's start, ʿAsr's is Maghrib's, Maghrib's is ʿIsha's, and
+  Fajr's and ʿIsha's are the two moment rows. It is the 11 Sep cut of "until
+  sunrise" carried one step further. The number was also set smaller than the
+  name and pinned right, so the starts never lined up in a column.
+- **The open prayer keeps its end**, as "until 12:30 AM" over "1 hr 52 min
+  left", because that is the one window anyone is deciding about.
+- **One band at a time, today only.** `pauseShownAt` in `lib/prayer-times.ts`
+  shows each band for the stretch it closes: the sunrise band from Fajr until
+  the sun is up, the noon band from then until Dhuhr, the sunset band from ʿAsr
+  until Maghrib. `npm run pauses:check` walks whole days and fails if a band in
+  force is hidden or one shows outside its stretch. This reverses the 11 Sep
+  line, where all three sat on the page all day. Cost: the ʿAsr band cannot be
+  seen from the morning, and another date shows none.
+- **The footnote** says "at three times of day", not "at these three times".
+- **Named and kept.** The band shown nearly always touches the lit prayer, so
+  two painted boxes stack. It was visible on the mock, and built as mocked.
+
+Verified: `tsc`, `style:check`, `i18n:manifest`, and `pauses:check`, which
+also failed as it should when the rule was broken two ways, hiding the
+sunrise band in force and showing the sunset band from Dhuhr. Screenshots of
+the built page in San Francisco with the clock set to 10:38 PM, 6:55 AM,
+12:40 PM and 5:45 PM, on another date, and in light at 5:45 PM, all at 360
+points; bands and row sizes measured on each. Not seen on a device. Ships by
+OTA.
+
+---
+
 ## 11 Sep 2026 — Reminders arrive on time: exact alarms ⚠️ native build
 
 Iyad: reminders arrived when he opened the app, not at the prayer. The

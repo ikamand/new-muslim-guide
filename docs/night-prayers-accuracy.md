@@ -44,6 +44,27 @@ the audio gate.
   Today and the day page name the middle of the night as the preferred end
   first, then "Its preferred time has passed"; the ʿIsha page has the section;
   `night:check` asserts the window.
+- §2, §5a, §5c, §6 and §7, witr and the night guides: **done.**
+  - The page teaches three, two then one, and the guide generates it (`units`
+    on the spec). It cites Ibn ʿUmar's practice (Bukhari 991) and the
+    majority on separating them (✓ IslamWeb 415267).
+  - One on its own "still counts, but most scholars dislike it" (✓ IslamWeb
+    92752).
+  - A schools note says how Hanafi mosques pray it (✓ SeekersGuidance,
+    Faraz Rabbani: "3 Rakas of Witr are wajib after Isha", qunut before
+    bowing), and that praying with them is fine (✓ IslamQA 66613).
+  - Bukhari 998 replaces Muslim 752 as the hero.
+  - "When" follows Muslim 755 and Bukhari 1178; "What if I prayed it and then
+    wake up?" follows Abu Dawud 1439 and IslamWeb 2165, the majority view.
+    The other view in that fatwa, opening the later prayer with one rakʿah to
+    make the earlier witr even, is recorded here and not on the page: a
+    beginner rarely meets it, and a second red note on one page is what
+    `style:check` warns against. "What if I sleep through it?" is answered
+    with Abu Dawud 1431 and Tirmidhi 465.
+  - The night guides (witr, qiyam, tahajjud) say "quietly or aloud", citing
+    Abu Dawud 1437; istikhara and tawba keep "quietly". The seven guides with
+    no `units` or `night` were compared step for step against the previous
+    build and are identical.
 
 **Review status of these pages.** `docs/scholarly-review.md` has no entry on
 witr, tahajjud, qiyam al-layl, taraweeh, qunut or when ʿIsha ends, and

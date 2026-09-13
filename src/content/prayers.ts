@@ -160,6 +160,25 @@ type PrayerSpec = {
    * On the spec rather than a map inside a component, so the two cannot drift.
    */
   referenceId?: string;
+  /**
+   * The prayer as separate units, each closed by its own taslim, where it is
+   * not one block. Witr is `[2, 1]`: two rakʿahs, the salam, then the one that
+   * makes it odd. Absent means one block of `rakahs`. Unlike
+   * `sunnahBeforeUnits`, which describes a count printed on a row, this
+   * generates the steps.
+   */
+  units?: readonly number[];
+  /** Cited on the step that opens a later unit: why it is a prayer of its own. */
+  unitSources?: readonly Source[];
+  /**
+   * A prayer of the night, whose Qur'an may be recited quietly or aloud.
+   * ʿAisha, asked how the Prophet ﷺ recited at night: "Sometimes he recited
+   * quietly and sometimes loudly" (Abu Dawud 1437).
+   */
+  night?: true;
+  /** Replaces the first surah step's note, where the prayer has a sunnah of its own. */
+  surahNote?: string;
+  surahSources?: readonly Source[];
 };
 
 /**
@@ -272,6 +291,11 @@ const RAISED_FINGER = hadith('muslim', '579a', {
  * editions. That is recorded in `docs/scholarly-review.md` §1.5a rather than
  * hidden behind a citation that looks like a library visit.
  */
+/** ʿAisha on how he recited at night: sometimes quietly, sometimes aloud. */
+const NIGHT_RECITATION = hadith('abu-dawud', '1437', { grading: 'sahih', role: 'practice' });
+
+const COUNT_WORDS = ['no', 'one', 'two', 'three', 'four'] as const;
+
 const AL_MUGHNI_HANDS = scholarly({
   work: 'Al-Mughni',
   author: 'Ibn Qudamah',
@@ -405,9 +429,23 @@ const finalSittingNote: ContentNote = note(
   },
 );
 
-function rakahSteps(rakah: number, spec: PrayerSpec): Step[] {
+/**
+ * Where a rakʿah sits in the whole prayer, for a prayer of more than one unit.
+ * `position` counts across units (witr's lone rakʿah is the third), `index` is
+ * which unit. A plain prayer is one unit, and `position` is its rakʿah.
+ */
+type Unit = { position: number; index: number; count: number };
+
+function rakahSteps(
+  rakah: number,
+  spec: PrayerSpec,
+  unit: Unit = { position: rakah, index: 0, count: 1 },
+): Step[] {
   const ordinal = ORDINALS[rakah - 1] ?? `${rakah}th`;
   const isFirst = rakah === 1;
+  /** Notes and citations go on the prayer's first rakʿah, not again on each unit's. */
+  const isFirstOfPrayer = isFirst && unit.index === 0;
+  const isLastUnit = unit.index === unit.count - 1;
   const isFinal = rakah === spec.rakahs;
   /** A short surah is added in the first two rakʿahs only. */
   const addsSurah = rakah <= 2;
@@ -422,21 +460,28 @@ function rakahSteps(rakah: number, spec: PrayerSpec): Step[] {
 
   const steps: Step[] = [];
   const step = (s: Omit<Step, 'id'> & { key: string }) =>
-    steps.push({ ...s, id: `r${rakah}-${s.key}`, rakah });
+    steps.push({ ...s, id: `r${unit.position}-${s.key}`, rakah: unit.position });
 
   if (isFirst) {
     step({
       key: 'intention',
-      title: 'Face the qibla and intend',
+      title: unit.index > 0 ? 'Stand for the last rakʿah' : 'Face the qibla and intend',
       posture: 'standing',
       instruction:
-        `Stand facing the qibla, feet roughly shoulder-width apart, and intend in your heart that you are praying ${spec.title}.`,
+        unit.index > 0
+          ? `Stand up again, facing the qibla, and intend in your heart the one rakʿah that closes ${spec.title}. It is a prayer of its own, so it opens with the takbir.`
+          : unit.count > 1
+            ? `Stand facing the qibla, feet roughly shoulder-width apart, and intend in your heart that you are praying ${spec.title}, beginning with ${COUNT_WORDS[spec.rakahs] ?? spec.rakahs} rakʿahs.`
+            : `Stand facing the qibla, feet roughly shoulder-width apart, and intend in your heart that you are praying ${spec.title}.`,
       // "Do not need to" rather than "do not": `reference:before-prayer` holds
       // this properly and carries a `differs` note on saying it aloud. Two
       // files stating the same thing one flatly and one with a difference is
       // how the app comes to contradict itself.
-      note: 'The intention is a thought, not a sentence. You do not need to say it out loud.',
-      sources: [quran(2, 144, { surahName: 'Al-Baqarah' })],
+      note:
+        unit.index > 0
+          ? undefined
+          : 'The intention is a thought, not a sentence. You do not need to say it out loud.',
+      sources: unit.index > 0 ? spec.unitSources : [quran(2, 144, { surahName: 'Al-Baqarah' })],
     });
     step({
       key: 'takbir',
@@ -448,8 +493,8 @@ function rakahSteps(rakah: number, spec: PrayerSpec): Step[] {
         'Raise both hands to about shoulder level, palms forward, and say the takbir.',
       says: Recitations.takbir,
       note: 'From this moment you are in prayer. Everything outside it waits.',
-      notes: [raisingNote],
-      sources: [RAISING_HANDS, ABU_HUMAYD],
+      notes: isFirstOfPrayer ? [raisingNote] : undefined,
+      sources: isFirstOfPrayer ? [RAISING_HANDS, ABU_HUMAYD] : undefined,
     });
     step({
       key: 'opening',
@@ -458,8 +503,8 @@ function rakahSteps(rakah: number, spec: PrayerSpec): Step[] {
       instruction:
         'Rest your right hand over your left forearm, on your chest. Then quietly, with your eyes toward the place of prostration, say:',
       says: Recitations.opening,
-      notes: [handPlacementNote],
-      sources: [RIGHT_OVER_LEFT, HANDS_ON_CHEST],
+      notes: isFirstOfPrayer ? [handPlacementNote] : undefined,
+      sources: isFirstOfPrayer ? [RIGHT_OVER_LEFT, HANDS_ON_CHEST] : undefined,
     });
     step({
       key: 'taawwudh',
@@ -494,19 +539,22 @@ function rakahSteps(rakah: number, spec: PrayerSpec): Step[] {
     posture: 'standing',
     instruction: aloud
       ? 'Recite the opening chapter of the Qur’an aloud.'
-      : 'Recite the opening chapter of the Qur’an quietly, so only you can hear it.',
+      : spec.night
+        ? 'Recite the opening chapter of the Qur’an, quietly or aloud in a low voice, whichever helps you focus.'
+        : 'Recite the opening chapter of the Qur’an quietly, so only you can hear it.',
     says: Recitations.fatiha,
-    note: isFirst
+    note: isFirstOfPrayer
       ? 'This is the one recitation the prayer cannot do without. Learn it first, a verse at a time.'
       : undefined,
     // The note states a condition of the prayer's validity, so it carries the
     // narration that states it — the same one `reference:al-fatihah` cites.
-    sources: isFirst
+    sources: isFirstOfPrayer
       ? [
           hadith('bukhari', '756', {
             ...ADHAN_BOOK,
             inBookReference: 'Book 10, Hadith 150',
           }),
+          ...(spec.night ? [NIGHT_RECITATION] : []),
         ]
       : undefined,
   });
@@ -534,10 +582,18 @@ function rakahSteps(rakah: number, spec: PrayerSpec): Step[] {
       posture: 'standing',
       instruction: aloud
         ? 'After Al-Fatihah, recite another short surah aloud. Al-Ikhlas is four verses and is where most people start:'
-        : 'After Al-Fatihah, recite another short surah quietly. Al-Ikhlas is four verses and is where most people start:',
+        : spec.night
+          ? 'After Al-Fatihah, recite another short surah, quietly or aloud. Al-Ikhlas is four verses and is where most people start:'
+          : 'After Al-Fatihah, recite another short surah quietly. Al-Ikhlas is four verses and is where most people start:',
       saysSurah: 112,
-      note: 'This part is sunnah, not required. A prayer of Al-Fatihah alone is a complete prayer, so if you do not know one yet, carry on to the bow.',
-      sources: [quran(112, [1, 4], { surahName: 'Al-Ikhlas' })],
+      note:
+        isFirstOfPrayer && spec.surahNote
+          ? spec.surahNote
+          : 'This part is sunnah, not required. A prayer of Al-Fatihah alone is a complete prayer, so if you do not know one yet, carry on to the bow.',
+      sources: [
+        quran(112, [1, 4], { surahName: 'Al-Ikhlas' }),
+        ...(isFirstOfPrayer && spec.surahSources ? spec.surahSources : []),
+      ],
     });
   }
 
@@ -548,8 +604,8 @@ function rakahSteps(rakah: number, spec: PrayerSpec): Step[] {
     instruction:
       'Raise your hands again as you say the takbir, then bow with a straight back, hands gripping your knees, eyes down. Once settled, say:',
     says: Recitations.rukuTasbih,
-    notes: isFirst ? [stillnessNote] : undefined,
-    sources: isFirst ? [ABU_HUMAYD, RAISING_HANDS, PRAYED_BADLY] : undefined,
+    notes: isFirstOfPrayer ? [stillnessNote] : undefined,
+    sources: isFirstOfPrayer ? [ABU_HUMAYD, RAISING_HANDS, PRAYED_BADLY] : undefined,
   });
   step({
     key: 'rising',
@@ -558,10 +614,10 @@ function rakahSteps(rakah: number, spec: PrayerSpec): Step[] {
     instruction:
       'Rise from bowing, raising your hands as you come up, until you are standing upright and still, saying:',
     says: Recitations.rising,
-    note: isFirst
+    note: isFirstOfPrayer
       ? 'Stand until your back has properly settled before you go down. Rushing this is the commonest fault in a new Muslim’s prayer.'
       : undefined,
-    sources: isFirst ? [ABU_HUMAYD, RAISING_HANDS] : undefined,
+    sources: isFirstOfPrayer ? [ABU_HUMAYD, RAISING_HANDS] : undefined,
   });
   step({
     key: 'sujud-1',
@@ -570,10 +626,10 @@ function rakahSteps(rakah: number, spec: PrayerSpec): Step[] {
     instruction:
       'Say the takbir and go down into prostration, with your forehead, nose, both palms, both knees and the toes of both feet touching the ground. Once settled, say:',
     says: Recitations.sujudTasbih,
-    note: isFirst
+    note: isFirstOfPrayer
       ? 'Keep your elbows off the ground and away from your sides, and your toes turned toward the qibla. The hands are not raised for this one.'
       : undefined,
-    sources: isFirst ? [SEVEN_BONES, ABU_HUMAYD] : undefined,
+    sources: isFirstOfPrayer ? [SEVEN_BONES, ABU_HUMAYD] : undefined,
   });
   step({
     key: 'sit',
@@ -582,7 +638,7 @@ function rakahSteps(rakah: number, spec: PrayerSpec): Step[] {
     instruction:
       'Say the takbir and sit up on your left foot with the right foot upright, hands on your thighs. Say:',
     says: Recitations.betweenProstrations,
-    sources: isFirst ? [ABU_HUMAYD, PRAYED_BADLY] : undefined,
+    sources: isFirstOfPrayer ? [ABU_HUMAYD, PRAYED_BADLY] : undefined,
   });
   step({
     key: 'sujud-2',
@@ -631,9 +687,13 @@ function rakahSteps(rakah: number, spec: PrayerSpec): Step[] {
         posture: 'taslim-left',
         instruction: 'Then turn your face to the left and give the same greeting again.',
         says: Recitations.taslim,
-        note: spec.closingDua ? undefined : `That is ${spec.title} complete.`,
+        note: !isLastUnit
+          ? `Those are the first ${COUNT_WORDS[spec.rakahs] ?? spec.rakahs} rakʿahs. Now stand for the last one.`
+          : spec.closingDua
+            ? undefined
+            : `That is ${spec.title} complete.`,
       });
-      if (spec.closingDua) {
+      if (spec.closingDua && isLastUnit) {
         step({
           key: 'closing-dua',
           title: 'Then ask',
@@ -654,9 +714,19 @@ function rakahSteps(rakah: number, spec: PrayerSpec): Step[] {
 
 function buildPrayer(spec: PrayerSpec): Guide {
   const steps: Step[] = [];
-  for (let rakah = 1; rakah <= spec.rakahs; rakah += 1) {
-    steps.push(...rakahSteps(rakah, spec));
-  }
+  const units = spec.units ?? [spec.rakahs];
+  let position = 0;
+  units.forEach((size, index) => {
+    const unitSpec: PrayerSpec = {
+      ...spec,
+      rakahs: size,
+      aloudRakahs: Math.min(spec.aloudRakahs, size),
+    };
+    for (let rakah = 1; rakah <= size; rakah += 1) {
+      position += 1;
+      steps.push(...rakahSteps(rakah, unitSpec, { position, index, count: units.length }));
+    }
+  });
   return {
     id: spec.id,
     title: spec.title,
@@ -710,8 +780,12 @@ export const PRAYER_SPECS: PrayerSpec[] = [
     the same movements and the same words; what differs is why you are
     standing there, which is what their reference pages carry.
 
-    None is recited aloud. A voluntary prayer in the day is silent, and these
-    are prayed alone.
+    The night prayers carry `night`, and their guides say quietly or aloud.
+    Until 13 Sep 2026 every one of these said quietly, on the reasoning that
+    "a voluntary prayer in the day is silent, and these are prayed alone".
+    These are night prayers, and praying alone does not make a recitation
+    silent (Abu Dawud 1437; Ibn Baz, IslamQA 67618). Istikhara and the prayer
+    of repentance keep quietly, which is valid at any hour.
   */
   {
     id: 'tahajjud',
@@ -720,6 +794,7 @@ export const PRAYER_SPECS: PrayerSpec[] = [
     when: 'The last third of the night',
     rakahs: 2,
     aloudRakahs: 0,
+    night: true,
     kind: 'voluntary',
     referenceId: 'tahajjud',
   },
@@ -730,28 +805,36 @@ export const PRAYER_SPECS: PrayerSpec[] = [
     when: 'Any part of the night, before you sleep',
     rakahs: 2,
     aloudRakahs: 0,
+    night: true,
     kind: 'voluntary',
     referenceId: 'qiyam-al-layl',
   },
   /*
-    Witr is one rakʿah here, and the page says it may be one, three or five.
+    Witr as three: two rakʿahs, the salam, then one (13 Sep 2026,
+    docs/night-prayers-accuracy.md §2).
 
-    Abu Dawud 1422 has the Prophet ﷺ naming all three and leaving the choice;
-    Muslim 752 states one at the end of the night. One is generated because it
-    is a complete witr on its own and the least a beginner can get wrong — and
-    because `buildPrayer` cannot yet express the structure Nasa'i 1717
-    describes for five, which is not sitting except at the last. A three-rakʿah
-    spec would generate a Maghrib-shaped prayer, sitting after the second.
+    It was one rakʿah, which the Shafiʿi and Hanbali schools hold valid, the
+    Hanafi school does not, and is not what anybody will see beside them. Two
+    then one is how Ibn ʿUmar prayed it (Bukhari 991) and fits the method the
+    rest of these guides teach. `units` expresses it without the
+    Maghrib-shaped sitting a plain three-rakʿah spec would generate. The page
+    says one on its own also counts, and how Hanafi mosques pray it.
   */
   {
     id: 'witr',
     title: 'Witr',
     listTitle: 'Praying Witr',
-    when: 'To close the night, after any night prayer',
-    rakahs: 1,
+    when: 'After ʿIsha, before you sleep or at the end of the night',
+    rakahs: 3,
+    units: [2, 1],
+    unitSources: [hadith('bukhari', '991', { role: 'practice' })],
     aloudRakahs: 0,
+    night: true,
     kind: 'voluntary',
     referenceId: 'witr',
+    surahNote:
+      'This part is sunnah, not required. In witr the Prophet ﷺ recited Al-Aʿla, Al-Kafirun and Al-Ikhlas, one in each rakʿah, and Al-Ikhlas alone is fine while you learn.',
+    surahSources: [hadith('nasai', '1699', { grading: 'sahih', role: 'practice' })],
   },
   {
     id: 'istikhara',

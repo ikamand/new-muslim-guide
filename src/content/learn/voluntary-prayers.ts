@@ -1,6 +1,6 @@
-import { ref } from '../model';
+import { note, ref } from '../model';
 import { Recitations } from '../recitations';
-import { general, hadeethEnc, hadith, quran } from '../sources';
+import { general, hadeethEnc, hadith, quran, scholarly } from '../sources';
 import type { Reference } from '../types';
 
 /**
@@ -282,32 +282,44 @@ export const QIYAM_AL_LAYL: Reference = {
 /**
  * Witr.
  *
- * The one voluntary prayer whose shape a beginner gets wrong unaided. The
- * others are all the two-rakʿah prayer they already pray five times a day;
- * this one is odd, and it comes last.
+ * The one voluntary prayer whose shape a beginner gets wrong unaided: it is
+ * odd, and it closes the night.
  *
  * ⚠️ REVIEW REQUIRED — model-written English over citations read from the
- * collections on 22 Aug 2026. What a reviewer owns: whether teaching the
- * one-rakʿah form as the app's single path is right for a beginner when most
- * people around them will pray three.
+ * collections. Rewritten 13 Sep 2026 after the audit in
+ * `docs/night-prayers-accuracy.md` (§2, §5, §6):
  *
- * The number is not invented. Abu Dawud 1422 has the Prophet ﷺ naming five,
- * three and one as the reader's choice, and Muslim 752 states one at the end
- * of the night. The generated guide teaches one because one is complete on its
- * own and is the least that can go wrong; the page states the range.
+ * - It taught one rakʿah as the path. It now teaches three, two then one, as
+ *   the guide does. One with nothing before it is disliked by most scholars
+ *   (IslamWeb 92752) and not valid for the Hanafis (SeekersGuidance), and it
+ *   is not what a beginner sees beside them. Separating the two and the one is
+ *   the majority position (IslamWeb 415267) and Ibn ʿUmar's practice
+ *   (Bukhari 991).
+ * - Its hero was Muslim 752, whose printed English says "at the end of the
+ *   prayer" where the Arabic says "the end of the night". Bukhari 998 replaces
+ *   it.
+ * - "What if I sleep through it?" was answered with Bukhari 990, which says
+ *   nothing about it. Abu Dawud 1431 answers it.
+ * - Witr may come before qiyam or tahajjud, or after (Iyad, with IslamWeb
+ *   2165): early for someone unsure of waking, at the end for someone who will
+ *   wake (Muslim 755), and never twice (Abu Dawud 1439).
  *
- * The qunut dua is deliberately absent. It is real, it is another Arabic text
- * needing a verified source, and a witr without it is valid.
+ * What a reviewer owns: the Hanafi note, whether "dislike" is the right word
+ * to put in front of a beginner, and how making up a missed witr is taught
+ * (the page says only to pray it on waking).
+ *
+ * The qunut dua is still absent. It is in the dua book; a step for it needs a
+ * transliteration from a source and a recording.
  */
 export const WITR: Reference = {
   id: 'witr',
   surface: 'learn',
   title: 'Witr',
-  subtitle: 'The odd rakʿah that closes the night',
+  subtitle: 'The odd-numbered prayer that closes the night',
   meta: {
     category: 'salah',
     difficulty: 'building',
-    estimatedMinutes: 2,
+    estimatedMinutes: 3,
     beginnerPriority: 3,
     relatedContent: [ref('reference', 'tahajjud'), ref('reference', 'qiyam-al-layl')],
   },
@@ -317,45 +329,116 @@ export const WITR: Reference = {
     if the block only looks right where every row happens to apply, it is
     structure for its own sake.
 
-    "Do I have to?" answers in the words somebody has. The ruling underneath it
-    is that witr is a strongly emphasised sunnah, and wajib to the Hanafis, but
-    a page that says that has answered a scholar's question rather than the
-    reader's.
+    "Do I have to?" answers in the words somebody has. It said only "No", two
+    sections above a printed narration calling witr "a duty for every Muslim"
+    and without a word about the school that holds it required. It now names
+    both, in words a reader owns.
   */
   quickFacts: [
-    { label: 'When', value: 'After Isha, any time until dawn' },
-    { label: 'How many', value: 'One, three or five. Any odd number, and one is enough' },
+    { label: 'When', value: 'After Isha until Fajr' },
+    { label: 'How many', value: 'Three: two rakʿahs, then one' },
     {
       label: 'Do I have to?',
-      value: 'No, but it is how the night prayer is closed',
+      value: 'For most scholars no. The Hanafi school says yes',
       emphasis: true,
     },
-    { label: 'How', value: 'Pray one rakʿah', href: '/guide/witr' },
+    { label: 'How', value: 'Pray two, then one', href: '/guide/witr' },
   ],
   sections: [
     {
       id: 'what',
-      heading: 'Why an odd number?',
-      body: 'Because that is what the word means, and it is what you finish the night on.',
+      heading: 'What is witr?',
+      body: 'Witr means odd. It is an odd number of rakʿahs prayed after Isha, and it is the last prayer of your night.',
       // The page's answer, printed rather than filed.
       promote: 'hero',
-      sources: [hadith('muslim', '752', { grading: 'sahih', role: 'practice' })],
+      sources: [hadith('bukhari', '998', { grading: 'sahih', role: 'practice' })],
     },
     {
       id: 'how-many',
-      heading: 'Is one really enough?',
+      heading: 'How many rakʿahs?',
       body:
-        'Yes. The Prophet ﷺ named five, three and one, and left the choice to the person praying, so one is a complete witr rather than a shortened version of something else. Most people pray three, and you will see that around you.',
+        'Three is what you will see most: two rakʿahs ending with the salam, then one more. The Prophet ﷺ named five, three and one, and left the choice to the person praying.',
       promote: 'quote',
-      sources: [hadith('abu-dawud', '1422', { grading: 'sahih', role: 'practice' })],
-      note: 'Start with one. It is the whole prayer, it takes a minute, and it is the version you are least likely to get wrong while you are learning.',
+      sources: [
+        hadith('abu-dawud', '1422', { grading: 'sahih', role: 'practice' }),
+        hadith('bukhari', '991', { grading: 'sahih', role: 'practice' }),
+        scholarly({
+          work: 'Praying the three-rakʿah witr prayer two rakʿahs and then one',
+          author: 'IslamWeb, fatwa 415267',
+          school: 'the majority',
+          url: 'https://www.islamweb.net/en/fatwa/415267/',
+        }),
+        scholarly({
+          work: 'Performing only one rakʿah in witr prayer',
+          author: 'IslamWeb, fatwa 92752',
+          school: 'the majority',
+          url: 'https://islamweb.net/en/fatwa/92752/',
+        }),
+      ],
+      note: 'If you have already prayed at night, one rakʿah on the end is your witr. One on its own, with nothing before it, still counts, but most scholars dislike it.',
+      notes: [
+        note(
+          'differs',
+          'At many mosques, especially Hanafi ones, witr is three rakʿahs together: a sitting after the second without the salam, then a third with the qunut before bowing. Pray it with them.',
+          {
+            sources: [
+              scholarly({
+                work: 'Details regarding witr, confirmed sunna, and non-confirmed sunna prayers',
+                author: 'Faraz Rabbani, SeekersGuidance',
+                school: 'Hanafi',
+                url: 'https://seekersguidance.org/answers/hanafi-fiqh/details-regarding-witr-confirmed-sunna-and-non-confirmed-sunna-prayers/',
+              }),
+              scholarly({
+                work: 'Should he pray behind those who pray witr with three rakʿahs and two tashahhuds?',
+                author: 'Islam Question & Answer, fatwa 66613',
+                url: 'https://islamqa.info/en/answers/66613',
+              }),
+            ],
+            positions: [
+              {
+                school: 'Hanafi',
+                position:
+                  'Witr is required: three rakʿahs after Isha with one salam, sitting for the tashahhud after the second, and the qunut in the third before bowing.',
+              },
+            ],
+          },
+        ),
+      ],
     },
     {
       id: 'when',
-      heading: 'What if I sleep through it?',
+      heading: 'When do I pray it?',
       body:
-        'Pray it before you go to bed. Leaving it to the end of the night is better, but only if you are actually going to be awake. It is meant to be the last thing you pray, not the thing you missed.',
-      sources: [hadith('bukhari', '990', { grading: 'sahih', role: 'practice' })],
+        'Any time after Isha until Fajr, and it can come before your qiyam or tahajjud or after it. If you will wake to pray later in the night, leave it to the end, which is better. If you are not sure you will wake, pray it before you sleep.',
+      promote: 'quote',
+      sources: [
+        hadith('muslim', '755', { grading: 'sahih', role: 'practice' }),
+        hadith('bukhari', '1178', { grading: 'sahih', role: 'practice' }),
+      ],
+    },
+    {
+      id: 'after',
+      heading: 'What if I prayed it and then wake up?',
+      body:
+        'Pray as much as you like, two rakʿahs at a time, and do not pray witr again. A night has only one witr.',
+      sources: [
+        hadith('abu-dawud', '1439', { grading: 'sahih', role: 'practice' }),
+        scholarly({
+          work: 'Witr may be prayed early in the night, and delaying it is better',
+          author: 'IslamWeb, fatwa 2165',
+          school: 'the majority',
+          url: 'https://www.islamweb.net/ar/fatwa/2165/',
+        }),
+      ],
+    },
+    {
+      id: 'missed',
+      heading: 'What if I sleep through it?',
+      body: 'Pray it when you wake up, or whenever you remember.',
+      sources: [
+        hadith('abu-dawud', '1431', { grading: 'sahih', role: 'practice' }),
+        hadith('tirmidhi', '465', { grading: 'sahih', role: 'practice' }),
+      ],
     },
   ],
 };

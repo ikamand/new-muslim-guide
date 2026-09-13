@@ -5,22 +5,22 @@
  * here is lost the next time it runs, and one that needs making belongs
  * upstream, where the text is published.
  *
- * 249 Qur'an passages and 213 narrations. Every character came over
+ * 249 Qur'an passages and 220 narrations. Every character came over
  * the wire from a published text rather than from memory, which is the only
  * way a file like this could exist under this project's rules about Arabic.
  *
  * ## Where each line came from
  *
  * No one source has all of it, so each field is taken from the first that
- * does, and says so on the text itself. Of the 213 narrations here:
- * 73 were confirmed against a second, separately edited publisher;
- * 73 carry HadeethEnc's own translation, 140 carry Darussalam's, and
+ * does, and says so on the text itself. Of the 220 narrations here:
+ * 74 were confirmed against a second, separately edited publisher;
+ * 74 carry HadeethEnc's own translation, 146 carry Darussalam's, and
  * 0 have Arabic and no translation at all.
  *
  * ⚠️ **The Darussalam translations are not ours to relicense.** They reach
  * this file through a public-domain dedication that covers the compiler's work
  * and not the translation inside it. What makes that defensible here is scale
- * and purpose — 140 narrations out of some thirty thousand, each quoted under
+ * and purpose — 146 narrations out of some thirty thousand, each quoted under
  * the instruction it supports, in an app that is free and never sold. It is a
  * quotation, not a republication, and it is Iyad's decision on the record.
  *
@@ -1925,6 +1925,28 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
     "arabicFrom": "fawazahmed0/hadith-api",
     "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
   },
+  "abu-dawud:1437": {
+    "arabic": "عَنْ وِتْرِ، رَسُولِ اللَّهِ صلى الله عليه وسلم قَالَتْ رُبَّمَا أَوْتَرَ أَوَّلَ اللَّيْلِ وَرُبَّمَا أَوْتَرَ مِنْ آخِرِهِ ‏.‏ قُلْتُ كَيْفَ كَانَتْ قِرَاءَتُهُ أَكَانَ يُسِرُّ بِالْقِرَاءَةِ أَمْ يَجْهَرُ قَالَتْ كُلَّ ذَلِكَ كَانَ يَفْعَلُ رُبَّمَا أَسَرَّ وَرُبَّمَا جَهَرَ وَرُبَّمَا اغْتَسَلَ فَنَامَ وَرُبَّمَا تَوَضَّأَ فَنَامَ ‏.‏ قَالَ أَبُو دَاوُدَ وَقَالَ غَيْرُ قُتَيْبَةَ تَعْنِي فِي الْجَنَابَةِ ‏.‏",
+    "isnad": "حَدَّثَنَا قُتَيْبَةُ بْنُ سَعِيدٍ، حَدَّثَنَا اللَّيْثُ بْنُ سَعْدٍ، عَنْ مُعَاوِيَةَ بْنِ صَالِحٍ، عَنْ عَبْدِ اللَّهِ بْنِ أَبِي قَيْسٍ، قَالَ سَأَلْتُ عَائِشَةَ",
+    "translation": "Abd Allah b. Abu Qais said:I asked 'Aishah about the witr observes by the Messenger of Allah (ﷺ). She replied: Sometime he observed the witr prayer in the early hours of the night, sometimes he observed it at the end of it. I asked: How did he recite the Qur'an ? Did he recite the Qur'an quietly or loudly ? She replied: He did it in any way. Sometimes he recited quietly and sometimes loudly, sometimes he took bath and then slept and sometimes he performed ablution and then slept. Abu Dawud said: The narrators other than Qutaibah said: This refer to his bath due to sexual defilement",
+    "grade": "Sahih (Al-Albani) · Sahih (Muhammad Muhyi Al-Din Abdul Hamid) · Sahih (Shuaib Al Arnaut) · Sahih (Zubair Ali Zai)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "nasai:1699": {
+    "arabic": "عَنْ أُبَىِّ بْنِ كَعْبٍ، أَنَّ رَسُولَ اللَّهِ صلى الله عليه وسلم كَانَ يُوتِرُ بِثَلاَثِ رَكَعَاتٍ كَانَ يَقْرَأُ فِي الأُولَى بِـ ‏{‏ سَبِّحِ اسْمَ رَبِّكَ الأَعْلَى ‏}‏ وَفِي الثَّانِيَةِ بِـ ‏{‏ قُلْ يَا أَيُّهَا الْكَافِرُونَ ‏}‏ وَفِي الثَّالِثَةِ بِـ ‏{‏ قُلْ هُوَ اللَّهُ أَحَدٌ ‏}‏ وَيَقْنُتُ قَبْلَ الرُّكُوعِ فَإِذَا فَرَغَ قَالَ عِنْدَ فَرَاغِهِ ‏\"‏ سُبْحَانَ الْمَلِكِ الْقُدُّوسِ ‏\"‏ ‏.‏ ثَلاَثَ مَرَّاتٍ يُطِيلُ فِي آخِرِهِنَّ ‏.‏",
+    "isnad": "أَخْبَرَنَا عَلِيُّ بْنُ مَيْمُونٍ، قَالَ حَدَّثَنَا مَخْلَدُ بْنُ يَزِيدَ، عَنْ سُفْيَانَ، عَنْ زُبَيْدٍ، عَنْ سَعِيدِ بْنِ عَبْدِ الرَّحْمَنِ بْنِ أَبْزَى، عَنْ أَبِيهِ",
+    "translation": "It was narrated from Ubayy bin Ka'b that:The Messenger of Allah (ﷺ) used to pray witr with three rak'ahs. In the first he would recite: \"Glorify the Name of Your Lord, the Most High\" in the second: \"Say: O you disbelievers!\", and in the third: \"Say: He is Allah, (the) One\". And he would say the Qunut before bowing, and when he finished he would say: Subhanal-Malikil-Quddus (Glory be to the Sovereign, the Most Holy) three times, elongating the words the last time",
+    "grade": "Sahih (Abu Ghuddah) · Sahih (Al-Albani) · Sahih (Zubair Ali Zai)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "bukhari:991": {
+    "arabic": "وَعَنْ نَافِعٍ، أَنَّ عَبْدَ اللَّهِ بْنَ عُمَرَ، كَانَ يُسَلِّمُ بَيْنَ الرَّكْعَةِ وَالرَّكْعَتَيْنِ فِي الْوِتْرِ، حَتَّى يَأْمُرَ بِبَعْضِ حَاجَتِهِ‏.‏",
+    "translation": "Nafi` told that `Abdullah bin `Umar used to say Taslim between (the first) two Rak`at and (the third) odd one in the Witr prayer, when he wanted to attend to a certain matter (during that interval between the Rak`at)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
   "bukhari:he3293": {
     "arabic": "عن جَابِرِ بْنِ عَبْدِ اللَّهِ رَضِيَ اللَّهُ عَنْهُمَا، قَالَ: كَانَ رَسُولُ اللَّهِ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ يُعَلِّمُنَا الِاسْتِخَارَةَ فِي الْأُمُورِ كَمَا يُعَلِّمُنَا السُّورَةَ مِنَ الْقُرْآنِ، يَقُولُ: «إِذَا هَمَّ أَحَدُكُمْ بِالْأَمْرِ فَلْيَرْكَعْ رَكْعَتَيْنِ مِنْ غَيْرِ الْفَرِيضَةِ، ثُمَّ لِيَقُلِ: اللَّهُمَّ إِنِّي أَسْتَخِيرُكَ بِعِلْمِكَ وَأَسْتَقْدِرُكَ بِقُدْرَتِكَ، وَأَسْأَلُكَ مِنْ فَضْلِكَ الْعَظِيمِ، فَإِنَّكَ تَقْدِرُ وَلَا أَقْدِرُ، وَتَعْلَمُ وَلَا أَعْلَمُ، وَأَنْتَ عَلَّامُ الْغُيُوبِ، اللَّهُمَّ إِنْ كُنْتَ تَعْلَمُ أَنَّ هَذَا الْأَمْرَ خَيْرٌ لِي فِي دِينِي، وَمَعَاشِي، وَعَاقِبَةِ أَمْرِي» أَوْ قَالَ: «عَاجِلِ أَمْرِي وَآجِلِهِ، فَاقْدُرْهُ لِي وَيَسِّرْهُ لِي ثُمَّ بَارِكْ لِي فِيهِ، وَإِنْ كُنْتَ تَعْلَمُ أَنَّ هَذَا الْأَمْرَ شَرٌّ لِي فِي دِينِي وَمَعَاشِي وَعَاقِبَةِ أَمْرِي» أَوْ قَالَ: «فِي عَاجِلِ أَمْرِي وَآجِلِهِ، فَاصْرِفْهُ عَنِّي وَاصْرِفْنِي عَنْهُ، وَاقْدُرْ لِي الْخَيْرَ حَيْثُ كَانَ، ثُمَّ أَرْضِنِي» قَالَ: «وَيُسَمِّي حَاجَتَه».",
     "translation": "Jābir ibn ‘Abdullah (may Allah be pleased with him and his father) reported: The Messenger of Allah (may Allah's peace and blessings be upon him) used to teach us Istikhārah (guidance-seeking prayer) in all matters, as he would teach us a Surah from the Qur’an. He would say: \"When one of you intends to do something, let him perform two Rak‘ahs other than the obligatory prayer and then say: Allāhumma inni astakhīruka bi‘ilmika, wa astaqdiruka biqudratika, wa as’aluka min fadlik al-‘azhīm, fa ’innaka taqdiru wa la aqdiru, wa ta‘lamu wa la a‘lamu, wa anta ‘allāmu al-ghuyūb. Allāhumma in kunta ta‘lamu anna hādha al-’amra khayrun li fi dīni wa ma‘āshi wa ‘āqibati amri, (or he said) ‘ājili amri wa ājilihi, faqdurhu li wa yassirhu li, thumma bārik li fīh. Wa in kunta ta‘lamu anna hādha al-’amra sharrun li fi dīni wa ma‘āshi wa ‘āqibati amri, (or he said) wa ‘ājili amri wa ājilihi, fasrifhu ‘anni, wasrifni ‘anhu, waqdur li al-khayra haythu kāna, thumma ardini. (O Allah, I consult You for Your knowledge, and I seek strength from You for Your power, and I ask You of Your great bounty. Indeed, You are capable and I am not, and You know and I do not, and You are the All-Knower of the unseen. O Allah, if You know that this matter is good for me in my religion, my livelihood, and the outcome of my affairs, (or he said), my immediate and future affairs, then decree it for me, make it easy for me, and then bless it for me. And if You know this matter is evil concerning my religion, my livelihood or the outcome of my affairs, (or he said) my immediate and future affairs, then turn it away from me, and turn me away from it, and decree for me what is good wherever it may be, and make me content).'' He said: ''And let him name his need.''",
@@ -2949,10 +2971,10 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
     "arabicFrom": "HadeethEnc.com",
     "translationFrom": "HadeethEnc.com"
   },
-  "muslim:752": {
-    "arabic": "عَنِ ابْنِ عُمَرَ، قَالَ قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏ \"‏ الْوِتْرُ رَكْعَةٌ مِنْ آخِرِ اللَّيْلِ ‏\"‏ ‏.‏",
-    "isnad": "حَدَّثَنَا شَيْبَانُ بْنُ فَرُّوخَ، حَدَّثَنَا عَبْدُ الْوَارِثِ، عَنْ أَبِي التَّيَّاحِ، قَالَ حَدَّثَنِي أَبُو مِجْلَزٍ",
-    "translation": "Ibn 'Umar reported Allah's Messenger (ﷺ) as saying:Witr is a rak'ah at the end of the prayer",
+  "bukhari:998": {
+    "arabic": "عَنْ عَبْدِ اللَّهِ، عَنِ النَّبِيِّ صلى الله عليه وسلم قَالَ ‏ \"‏ اجْعَلُوا آخِرَ صَلاَتِكُمْ بِاللَّيْلِ وِتْرًا ‏\"‏‏.‏",
+    "isnad": "حَدَّثَنَا مُسَدَّدٌ، قَالَ حَدَّثَنَا يَحْيَى بْنُ سَعِيدٍ، عَنْ عُبَيْدِ اللَّهِ، حَدَّثَنِي نَافِعٌ",
+    "translation": "Narrated `Abdullah bin `Umar:The Prophet (ﷺ) said, \"Make witr as your last prayer at night",
     "arabicFrom": "fawazahmed0/hadith-api",
     "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
   },
@@ -2961,6 +2983,36 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
     "isnad": "حَدَّثَنَا عَبْدُ الرَّحْمَنِ بْنُ الْمُبَارَكِ، حَدَّثَنِي قُرَيْشُ بْنُ حَيَّانَ الْعِجْلِيُّ، حَدَّثَنَا بَكْرُ بْنُ وَائِلٍ، عَنِ الزُّهْرِيِّ، عَنْ عَطَاءِ بْنِ يَزِيدَ اللَّيْثِيِّ",
     "translation": "Narrated AbuAyyub al-Ansari: The Prophet (ﷺ) said: The witr is a duty for every Muslim so if anyone wishes to observe it with five rak'ahs, he may do so; if anyone wishes to observe it with three, he may do so, and if anyone wishes to observe it with one, he may do so",
     "grade": "Sahih (Al-Albani) · Sahih (Muhammad Muhyi Al-Din Abdul Hamid) · Isnaad Sahih (Zubair Ali Zai)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "muslim:755": {
+    "arabic": "عن جابر رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم : «من خاف أن لا يقوم من آخِرِ الليل فليوتر أوله، ومن طَمِعَ أن يقوم آخره فليوتر آخر الليل، فإن صلاة آخر الليل مشهودة، وذلك أفضل».",
+    "translation": "Jābir (may Allah be pleased with him) reported that the Messenger of Allah (may Allah's peace and blessings be upon him) said: \"If anyone fears that he will not wake up at the end of the night, let him offer Witr prayer at the beginning of the night; and anyone expects to wake up at the end of the night, let him offer Witr prayer at the end of the night. Indeed, prayer at the end of the night is witnessed (by the angels) and that is better.\"",
+    "attribution": "Narrated by Muslim",
+    "grade": "Authentic hadith",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "bukhari:1178": {
+    "arabic": "حَدَّثَنَا مُسْلِمُ بْنُ إِبْرَاهِيمَ، أَخْبَرَنَا شُعْبَةُ، حَدَّثَنَا عَبَّاسٌ الْجُرَيْرِيُّ ـ هُوَ ابْنُ فَرُّوخَ ـ عَنْ أَبِي عُثْمَانَ النَّهْدِيِّ، عَنْ أَبِي هُرَيْرَةَ، رضى الله عنه قَالَ أَوْصَانِي خَلِيلِي بِثَلاَثٍ لاَ أَدَعُهُنَّ حَتَّى أَمُوتَ صَوْمِ ثَلاَثَةِ أَيَّامٍ مِنْ كُلِّ شَهْرٍ، وَصَلاَةِ الضُّحَى، وَنَوْمٍ عَلَى وِتْرٍ‏.‏",
+    "translation": "Narrated Abu Huraira:My friend (the Prophet) advised me to do three things and I shall not leave them till I die, these are: To fast three days every month, to offer the Duha prayer, and to offer witr before sleeping",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "abu-dawud:1431": {
+    "arabic": "عَنْ أَبِي سَعِيدٍ، قَالَ قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏ \"‏ مَنْ نَامَ عَنْ وِتْرِهِ أَوْ نَسِيَهُ فَلْيُصَلِّهِ إِذَا ذَكَرَهُ ‏\"‏ ‏.‏",
+    "isnad": "حَدَّثَنَا مُحَمَّدُ بْنُ عَوْفٍ، حَدَّثَنَا عُثْمَانُ بْنُ سَعِيدٍ، عَنْ أَبِي غَسَّانَ، مُحَمَّدِ بْنِ مُطَرِّفٍ الْمَدَنِيِّ عَنْ زَيْدِ بْنِ أَسْلَمَ، عَنْ عَطَاءِ بْنِ يَسَارٍ",
+    "translation": "Narrated AbuSa'id al-Khudri: The Prophet (ﷺ) said: If anyone oversleeps and misses the witr, or forgets it, he should pray when he remembers",
+    "grade": "Sahih (Al-Albani) · Sahih (Muhammad Muhyi Al-Din Abdul Hamid) · Isnaad Sahih (Zubair Ali Zai)",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "tirmidhi:465": {
+    "arabic": "عَنْ أَبِي سَعِيدٍ الْخُدْرِيِّ، قَالَ قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏ \"‏ مَنْ نَامَ عَنِ الْوِتْرِ أَوْ نَسِيَهُ فَلْيُصَلِّ إِذَا ذَكَرَ وَإِذَا اسْتَيْقَظَ ‏\"‏ ‏.‏",
+    "isnad": "حَدَّثَنَا مَحْمُودُ بْنُ غَيْلاَنَ، حَدَّثَنَا وَكِيعٌ، حَدَّثَنَا عَبْدُ الرَّحْمَنِ بْنُ زَيْدِ بْنِ أَسْلَمَ، عَنْ أَبِيهِ، عَنْ عَطَاءِ بْنِ يَسَارٍ",
+    "translation": "Abu Sa'eed Al-Khudri narrated that :Allah's Messenger said: \"Whoever sleeps past Al-Witr or forgets it, then let him pray it when he remembers it or when he awakens",
+    "grade": "Sahih (Ahmad Muhammad Shakir) · Sahih (Al-Albani) · Sahih (Zubair Ali Zai)",
     "arabicFrom": "fawazahmed0/hadith-api",
     "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
   },

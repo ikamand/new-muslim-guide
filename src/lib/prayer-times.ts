@@ -282,6 +282,14 @@ export type DayTimes = {
    * end of ʿIshāʾ's preferred time.
    */
   middleOfNight: Date;
+  /**
+   * Two thirds of the way from sunset to the next Fajr, where the last third
+   * of the night begins. From Maghrib, like the middle above, because the
+   * Islamic day ends at Maghrib and the night begins with it (Iyad, 13 Sep
+   * 2026). Today's card first measured it from ʿIshāʾ and opened half an hour
+   * late.
+   */
+  lastThirdOfNight: Date;
 };
 
 export function computeDay(coords: LatLon, reference: Date, profile: MethodProfile): DayTimes {
@@ -290,12 +298,42 @@ export function computeDay(coords: LatLon, reference: Date, profile: MethodProfi
     localDay(reference),
     buildParams(coords, profile),
   );
+  const sunnah = new SunnahTimes(times);
 
   return {
     prayers: PRAYER_IDS.map((id) => ({ id, label: PRAYER_LABEL[id], time: times[id] })),
     sunrise: times.sunrise,
-    middleOfNight: new SunnahTimes(times).middleOfTheNight,
+    middleOfNight: sunnah.middleOfTheNight,
+    lastThirdOfNight: sunnah.lastThirdOfTheNight,
   };
+}
+
+/**
+ * The night `now` is inside, as the two days it spans: `evening`, whose
+ * Maghrib opens it, and `morning`, whose Fajr closes it. Null between Fajr and
+ * Maghrib, when there is no night to be in.
+ *
+ * A day is not a night. At 03:00 the night under way began at YESTERDAY's
+ * Maghrib, which `computeDay(now)` does not hold, and at 22:00 it ends at
+ * TOMORROW's Fajr. Today's card once reached the other day by adding 24 hours
+ * of milliseconds, which the header says lands on the wrong date twice a year;
+ * the neighbour is computed from calendar parts instead.
+ */
+export function computeNight(
+  coords: LatLon,
+  now: Date,
+  profile: MethodProfile,
+): { evening: DayTimes; morning: DayTimes } | null {
+  const today = computeDay(coords, now, profile);
+  const at = (prayerId: PrayerId) => today.prayers.find((prayer) => prayer.id === prayerId)!.time;
+
+  if (now.getTime() < at('fajr').getTime()) {
+    return { evening: computeDay(coords, localDay(now, -1), profile), morning: today };
+  }
+  if (now.getTime() >= at('maghrib').getTime()) {
+    return { evening: today, morning: computeDay(coords, localDay(now, 1), profile) };
+  }
+  return null;
 }
 
 export type NextPrayer = PrayerTime & {

@@ -1672,6 +1672,33 @@ that nobody is behind for not praying it. Iyad caught it on the phone. Now
 curriculum and the Ramadan arc; the guide stays one tap down behind the page's
 own "How". Witr and qiyam were checked and were never offered on Today at all.
 
+**13 Sep, Iyad: the whole night on Today.** Tahajjud in the last third of
+every night; before it qiyam al-layl; before that witr, from ʿIsha. Two faults
+in the 28 Aug card came out of it. It measured the night from ʿIsha, but the
+Islamic day ends at Maghrib, so the last third opened about half an hour late
+(San Francisco, 13 Sep, on the app's own ISNA method: 02:36 against 02:12;
+21 Jun 02:13 against 01:42). And it ranked fourth, under the
+Ramadan arc, the seasons and the Thursday question, which are true all day and
+so held the slot all night. The card was missing on more than sixty nights a
+year, every night of Ramadan among them.
+
+Now `src/lib/night.ts` splits the night at the boundaries the Awqat day page
+already prints (ʿIsha, the middle of the night, the last third) and Today asks
+it before anything else. Witr runs to the middle rather than a moment past
+ʿIsha, because its page says to pray it before bed. `npm run night:check`
+walks every minute of the night. **The cost, accepted:** from ʿIsha to Fajr
+nothing else reaches the slot; a half-read lesson, the Ramadan arc and the
+travel card wait for morning.
+
+**One content change followed.** The qiyam page closed with "whatever you pray
+at night, end it with witr", which after a witr card is an instruction to pray
+it twice. It now says not to, on Abu Dawud 1439 ("no two witrs in one night").
+⚠️ Joins the review pile.
+
+**Still open:** the Ramadan tarawih card starts at a clock hour (17:00) rather
+than a prayer time, and the Hijri date turns at midnight rather than Maghrib,
+so the first night of tarawih shows the "before Ramadan" card.
+
 ### ✅ Built — the istikhara duʿa is on the page
 
 Iyad's point, and the sharpest one of the day: *"istikhara has the istikhara

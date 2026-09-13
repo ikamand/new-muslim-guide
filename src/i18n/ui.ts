@@ -250,6 +250,8 @@ export const EN = {
   'today.zakat': 'It is Ramadan',
   'today.zakat.why': 'Many people work theirs out this month. It is not due now. It is due when a year has passed on your own wealth.',
   'today.away': 'You seem to be away from home',
+  'today.afterIsha': 'After ʿIsha',
+  'today.pastMiddle': 'Past the middle of the night',
   'today.lastThird': 'The last third of the night',
   'today.continue': 'Carry on where you were',
   'today.reading': 'You were reading',

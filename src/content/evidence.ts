@@ -5,16 +5,16 @@
  * here is lost the next time it runs, and one that needs making belongs
  * upstream, where the text is published.
  *
- * 249 Qur'an passages and 211 narrations. Every character came over
+ * 249 Qur'an passages and 212 narrations. Every character came over
  * the wire from a published text rather than from memory, which is the only
  * way a file like this could exist under this project's rules about Arabic.
  *
  * ## Where each line came from
  *
  * No one source has all of it, so each field is taken from the first that
- * does, and says so on the text itself. Of the 211 narrations here:
- * 72 were confirmed against a second, separately edited publisher;
- * 72 carry HadeethEnc's own translation, 139 carry Darussalam's, and
+ * does, and says so on the text itself. Of the 212 narrations here:
+ * 73 were confirmed against a second, separately edited publisher;
+ * 73 carry HadeethEnc's own translation, 139 carry Darussalam's, and
  * 0 have Arabic and no translation at all.
  *
  * ⚠️ **The Darussalam translations are not ours to relicense.** They reach
@@ -2940,6 +2940,14 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
     "translation": "Narrated Ibn `Umar: Once a person asked Allah's Messenger (ﷺ) about the night prayer. Allah's Apostle (ﷺ) replied, \"The night prayer is offered as two Rak`at followed by two Rak`at and so on and if anyone is afraid of the approaching dawn (Fajr prayer) he should pray one Rak`ah and this will be a Witr for all the Rak`at which he has prayed before",
     "arabicFrom": "fawazahmed0/hadith-api",
     "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "abu-dawud:1439": {
+    "arabic": "عن قيس بن طلق، قال: زارنا طلْق بن علي في يوم من رمضان، وأَمْسى عندنا، وأفطر، ثم قام بنا الليلة، وأَوْتَرَ بنا، ثم انحدر إلى مسجده، فصلى بأصحابه، حتى إذا بقي الوتر قَدَّمَ رجلا، فقال: أَوْتِرْ بأصحابك، فإني سمعت النبي صلى الله عليه وسلم يقول: «لا وِتْرَانِ في ليلة».",
+    "translation": "Qays ibn Talq reported: Talq ibn ‘Ali visited us one day during Ramadan. He stayed with us until the evening and broke his fast with us. Then he led us in voluntary night prayer and the Witr prayer. Afterwards he went to his mosque and led his companions in prayer. When only the Witr prayer was remaining, he asked another man to step forward and said: ‘Lead your companions in the Witr prayer, because I heard the Messenger of Allah (may Allah's peace and blessings be upon him) saying: \"There should not be two Witr prayers during one night.\"",
+    "attribution": "Narrated by At-Termedhy - An-Nasaa’i - Narrated by Abu Daoud - Narrated by Ahmad",
+    "grade": "Sahih (Al-Albani) · Sahih (Muhammad Muhyi Al-Din Abdul Hamid) · Isnaad Sahih (Zubair Ali Zai)",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
   },
   "muslim:752": {
     "arabic": "عَنِ ابْنِ عُمَرَ، قَالَ قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏ \"‏ الْوِتْرُ رَكْعَةٌ مِنْ آخِرِ اللَّيْلِ ‏\"‏ ‏.‏",

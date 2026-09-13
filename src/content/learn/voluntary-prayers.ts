@@ -217,6 +217,13 @@ export const TAWBA_PRAYER: Reference = {
  * collections. The framing a reviewer owns: whether separating this from
  * tahajjud helps a beginner or just gives them a second thing to be unsure
  * about. The difference is one fact, and both pages have to carry it plainly.
+ *
+ * ⚠️ And the closing section, rewritten 13 Sep 2026. Today now offers witr
+ * after ʿIshāʾ and this page after the middle of the night, in that order, on
+ * Iyad's call (`lib/night.ts`). The old closing said to end whatever you pray
+ * with witr, which read after a witr card is an instruction to pray it twice.
+ * It now says not to, on Abu Dawud 1439. Whether "pray two at a time as usual"
+ * is the right thing to tell someone who prayed witr early is the reviewer's.
  */
 export const QIYAM_AL_LAYL: Reference = {
   id: 'qiyam-al-layl',
@@ -263,8 +270,11 @@ export const QIYAM_AL_LAYL: Reference = {
       id: 'close',
       heading: 'How do I finish?',
       body:
-        'Whatever you pray at night, end it with witr, a single rakʿah that makes the night’s total odd. It is what closes the night prayer.',
-      sources: [hadith('bukhari', '990', { grading: 'sahih', role: 'practice' })],
+        'End the night with witr, a single rakʿah that makes the night’s total odd. If you already prayed witr after Isha, pray two at a time as usual and do not pray it again. A night has only one witr.',
+      sources: [
+        hadith('bukhari', '990', { grading: 'sahih', role: 'practice' }),
+        hadith('abu-dawud', '1439', { grading: 'sahih', role: 'practice' }),
+      ],
     },
   ],
 };

@@ -6,9 +6,9 @@ supplied each line of it.
 | | |
 |---|---|
 | Qur'an passages | 249 of 249 |
-| Narrations | 211 of 211 |
-| Confirmed against a second publisher | 72 |
-| Translation from HadeethEnc (published terms) | 72 |
+| Narrations | 212 of 212 |
+| Confirmed against a second publisher | 73 |
+| Translation from HadeethEnc (published terms) | 73 |
 | Translation from Darussalam (quoted) | 139 |
 | Arabic with no translation | 0 |
 | Chain of transmission moved to the foot | 135 |
@@ -250,6 +250,7 @@ comes from the collection itself.
 | `muslim:783` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
 | `muslim:749` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
 | `bukhari:990` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
+| `abu-dawud:1439` | HadeethEnc.com | HadeethEnc.com | HadeethEnc 11272 |
 | `muslim:752` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
 | `abu-dawud:1422` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
 | `abu-dawud:he65063` | HadeethEnc.com | HadeethEnc.com | HadeethEnc 65063 |

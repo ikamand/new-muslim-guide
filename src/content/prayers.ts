@@ -176,6 +176,12 @@ type PrayerSpec = {
    * quietly and sometimes loudly" (Abu Dawud 1437).
    */
   night?: true;
+  /**
+   * The prayer's name inside a sentence, where the title does not read as one:
+   * "intend that you are praying the night prayer", not "… praying Qiyam
+   * prayer / Tahajjud".
+   */
+  spokenName?: string;
   /** Replaces the first surah step's note, where the prayer has a sunnah of its own. */
   surahNote?: string;
   surahSources?: readonly Source[];
@@ -469,10 +475,10 @@ function rakahSteps(
       posture: 'standing',
       instruction:
         unit.index > 0
-          ? `Stand up again, facing the qibla, and intend in your heart the one rakʿah that closes ${spec.title}. It is a prayer of its own, so it opens with the takbir.`
+          ? `Stand up again, facing the qibla, and intend in your heart the one rakʿah that closes ${spec.spokenName ?? spec.title}. It is a prayer of its own, so it opens with the takbir.`
           : unit.count > 1
-            ? `Stand facing the qibla, feet roughly shoulder-width apart, and intend in your heart that you are praying ${spec.title}, beginning with ${COUNT_WORDS[spec.rakahs] ?? spec.rakahs} rakʿahs.`
-            : `Stand facing the qibla, feet roughly shoulder-width apart, and intend in your heart that you are praying ${spec.title}.`,
+            ? `Stand facing the qibla, feet roughly shoulder-width apart, and intend in your heart that you are praying ${spec.spokenName ?? spec.title}, beginning with ${COUNT_WORDS[spec.rakahs] ?? spec.rakahs} rakʿahs.`
+            : `Stand facing the qibla, feet roughly shoulder-width apart, and intend in your heart that you are praying ${spec.spokenName ?? spec.title}.`,
       // "Do not need to" rather than "do not": `reference:before-prayer` holds
       // this properly and carries a `differs` note on saying it aloud. Two
       // files stating the same thing one flatly and one with a difference is
@@ -691,7 +697,7 @@ function rakahSteps(
           ? `Those are the first ${COUNT_WORDS[spec.rakahs] ?? spec.rakahs} rakʿahs. Now stand for the last one.`
           : spec.closingDua
             ? undefined
-            : `That is ${spec.title} complete.`,
+            : `That is ${spec.spokenName ?? spec.title} complete.`,
       });
       if (spec.closingDua && isLastUnit) {
         step({
@@ -701,7 +707,7 @@ function rakahSteps(
           instruction:
             'The prayer is finished. Still sitting, say the dua, and where it says “this matter”, name the thing you are deciding.',
           says: spec.closingDua,
-          note: `That is ${spec.title} complete.`,
+          note: `That is ${spec.spokenName ?? spec.title} complete.`,
         });
       }
     }
@@ -787,22 +793,18 @@ export const PRAYER_SPECS: PrayerSpec[] = [
     silent (Abu Dawud 1437; Ibn Baz, IslamQA 67618). Istikhara and the prayer
     of repentance keep quietly, which is valid at any hour.
   */
-  {
-    id: 'tahajjud',
-    title: 'Tahajjud',
-    listTitle: 'Praying Tahajjud',
-    when: 'The last third of the night',
-    rakahs: 2,
-    aloudRakahs: 0,
-    night: true,
-    kind: 'voluntary',
-    referenceId: 'tahajjud',
-  },
+  /*
+    Tahajjud and Qiyam al-Layl were two rows and two guides until 13 Sep 2026,
+    split on a before-sleep/after-sleep difference the sources do not support
+    (docs/night-prayers-accuracy.md §3). One prayer, one row, Iyad's name for
+    it. `guide:tahajjud` migrates to `guide:qiyam` in `progress-keys.ts`.
+  */
   {
     id: 'qiyam',
-    title: 'Qiyam al-Layl',
-    listTitle: 'Praying Qiyam al-Layl',
-    when: 'Any part of the night, before you sleep',
+    title: 'Qiyam prayer / Tahajjud',
+    listTitle: 'Qiyam prayer / Tahajjud',
+    spokenName: 'the night prayer',
+    when: 'After ʿIsha until Fajr, best in the last third',
     rakahs: 2,
     aloudRakahs: 0,
     night: true,

@@ -61,6 +61,23 @@ the audio gate.
     beginner rarely meets it, and a second red note on one page is what
     `style:check` warns against. "What if I sleep through it?" is answered
     with Abu Dawud 1431 and Tirmidhi 465.
+- §3, §4, §5b and §5d, qiyam al-layl and tahajjud: **done**, as one page and
+  one guide, "Qiyam prayer / Tahajjud" (Iyad's name).
+  - Qiyam al-layl is any voluntary prayer after ʿIsha until Fajr, before
+    sleep or after it (✓ IslamWeb 138716, ✓ IslamQA 305489). It is called
+    tahajjud when you sleep first, and many scholars use the word for any
+    night prayer (✓ IslamQA 143240).
+  - Best in the last third and after sleeping (Bukhari 1145, Muslim 755,
+    IslamQA 305489). Why pray it: Muslim 1163, Qur'an 17:79 as the command
+    to the Prophet ﷺ without the old argument from its wording, and
+    IslamQA 50070 for its ruling. "How little counts" cites Bukhari 6465 in
+    place of Muslim 783.
+  - Witr at the end, or before sleep if unsure of waking. The Ramadan words
+    come from IslamQA 109768.
+  - The Pray tab has one row, the Today cards for the middle of the night and
+    the last third open the same page under different kickers, and
+    `reference:tahajjud` and `guide:tahajjud` migrate in `progress-keys.ts`.
+    `search:check` asserts both names find it.
   - The night guides (witr, qiyam, tahajjud) say "quietly or aloud", citing
     Abu Dawud 1437; istikhara and tawba keep "quietly". The seven guides with
     no `units` or `night` were compared step for step against the previous
@@ -187,7 +204,8 @@ night, and after sleep, is better.
 **What the sources say.**
 - ✓ islamqa 143240: two views on tahajjud. "The first is that it means praying at any time of the night, which is the view of the majority of fuqaha. The second is that it is prayer after sleeping."
 - ✓ Ibn Kathir on 17:79 reports "what occurs after sleep" from ʿAlqama, al-Aswad and Ibrahim al-Nakhaʿi. So the after-sleep reading is real and old, but it is one reading.
-- ◐ Ibn Baz (fatwas/12314): tahajjud early, in the middle or at the end of the night is all good.
+- ✗ Ibn Baz (binbaz.org.sa/fatwas/12314), reported by a research pass as saying tahajjud early, in the middle or at the end of the night is all good. Re-opened on 13 Sep: the page is about women leaving the home. The second failed URL.
+- ✓ IslamQA 305489 in its place: the night prayer the texts encourage "is from after the ʿIsha prayer until dawn", whether or not sleep came before it, and after sleep is better, the last third best.
 - ✓ Muslim 755: the end of the night is the *best* time. It is not the only time.
 
 **Verdict.** The after-sleep sense is a legitimate view, stated as the only one.

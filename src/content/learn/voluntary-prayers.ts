@@ -20,78 +20,6 @@ import type { Reference } from '../types';
  */
 
 /**
- * Tahajjud.
- *
- * The hardest thing to get right here is scale. Someone three weeks in reads
- * "the night prayer" and pictures hours; the actual entry point is two rakʿahs
- * before Fajr, once, when you happen to wake. Saying that plainly is the
- * difference between a practice they start and one they admire from a distance.
- */
-export const TAHAJJUD: Reference = {
-  id: 'tahajjud',
-  surface: 'learn',
-  /*
-    Titled with the name since 12 Sep 2026, as the chooser rows and Today's
-    card already were; the English gloss moved into the subtitle. A header is
-    what you read after tapping, and "Praying at night" under a row that said
-    "Tahajjud" read as a wrong turn (Iyad, on the phone). And this title
-    against "Standing at night" were near-synonyms, hiding the one fact that
-    separates the two prayers. Same on the other three below; witr was the
-    model.
-  */
-  title: 'Tahajjud',
-  subtitle: 'Praying at night, and how small it is allowed to be',
-  meta: {
-    category: 'salah',
-    difficulty: 'building',
-    estimatedMinutes: 3,
-    beginnerPriority: 3,
-    relatedContent: [ref('guide', 'tahajjud'), ref('reference', 'dua-and-dhikr')],
-  },
-  quickFacts: [
-    { label: 'When', value: 'The last part of the night, after you have slept' },
-    { label: 'How many', value: 'Two rakʿahs. That is a whole tahajjud' },
-    { label: 'Do I have to?', value: 'No. Nobody is behind for not praying it', emphasis: true },
-    { label: 'How', value: 'Pray two rakʿahs', href: '/guide/tahajjud' },
-  ],
-  sections: [
-    {
-      id: 'what',
-      heading: 'What is tahajjud?',
-      promote: 'hero',
-      body:
-        'A prayer in the last part of the night, after you have slept and before Fajr. The Qur’an tells the Prophet ﷺ to keep part of the night for it as something additional, and that word matters: it is not owed. Nobody is behind for not praying it.',
-      sources: [quran(17, 79, { surahName: 'Al-Isra' })],
-    },
-    {
-      id: 'how-much',
-      heading: 'How little counts?',
-      promote: 'quote',
-      body:
-        'There is no minimum to reach and no number to work up to. Two rakʿahs, on one night, is the thing itself. People who pray it for decades mostly pray a little, often, which is the pattern the Prophet ﷺ described as the deeds God loves most, the small ones kept up.',
-      sources: [
-        hadith('muslim', '783', { grading: 'sahih', role: 'virtue' }),
-      ],
-      note: 'It is the same prayer you already know. Nothing about the movements or the words changes. Only the time, and that you chose to be there.',
-    },
-    {
-      id: 'sleep',
-      heading: 'What if I have not slept?',
-      body:
-        'Tahajjud is prayed after waking, which is what separates it from simply staying up late. If you have not slept, you are praying qiyam al-layl, which is also good, also voluntary, and not what this word means.',
-      sources: [general('The distinction is in the word itself: tahajjud is from a root meaning to give up sleep, so there has to be sleep to give up.')],
-    },
-    {
-      id: 'start',
-      heading: 'How do I actually start?',
-      body:
-        'Set an alarm twenty minutes before Fajr rather than for the middle of the night. You are already going to be awake for Fajr; this is standing up a little earlier. Starting there is why people keep it.',
-      sources: [general('Practical advice, not a ruling.')],
-    },
-  ],
-};
-
-/**
  * Istikhara.
  *
  * The correction this page exists to make is the dream. Almost everyone who
@@ -207,73 +135,156 @@ export const TAWBA_PRAYER: Reference = {
 };
 
 /**
- * Qiyam al-Layl.
+ * Qiyam prayer / Tahajjud.
  *
- * The app already defined this word — at the foot of the tahajjud page, to say
- * what tahajjud is NOT — and then offered nowhere to go. Somebody meets
- * "qiyam" announced at a mosque in their first Ramadan and cannot look it up.
+ * One page since 13 Sep 2026, where there were two, "Tahajjud" and "Qiyam
+ * al-Layl", split on a difference the sources do not support. The old pages
+ * said qiyam al-layl was prayer BEFORE sleeping and tahajjud prayer after.
+ * Qiyam al-layl is the umbrella term for any voluntary prayer at night after
+ * Isha, before sleep or after it (IslamWeb 138716, IslamQA 305489), and
+ * tahajjud is that prayer after sleep in the word's strict sense, while most
+ * jurists use it for night prayer at any time (IslamQA 143240, citing
+ * al-Mawsuʿah al-Fiqhiyyah). Iyad named the page, and put the fact that
+ * matters into one sentence: qiyam becomes tahajjud if you sleep first.
  *
- * ⚠️ REVIEW REQUIRED — model-written English over citations read from the
- * collections. The framing a reviewer owns: whether separating this from
- * tahajjud helps a beginner or just gives them a second thing to be unsure
- * about. The difference is one fact, and both pages have to carry it plainly.
+ * Also corrected in the merge (docs/night-prayers-accuracy.md):
+ * - the tahajjud page argued from Qur'an 17:79's "additional" that the prayer
+ *   "is not owed"; the tafsir reads the word as about the Prophet ﷺ himself
+ *   (Ibn Kathir), so the page no longer argues from it (§5d);
+ * - "the deeds God loves most, the small ones kept up" cited Muslim 783,
+ *   which rendered ʿAlqama's question to ʿAisha; Bukhari 6465 says it (§5b);
+ * - "nobody is doing the lesser one" is gone: late in the night, and after
+ *   sleep, is better (Muslim 755, IslamQA 305489) (§3).
  *
- * ⚠️ And the closing section, rewritten 13 Sep 2026. Today now offers witr
- * after ʿIshāʾ and this page after the middle of the night, in that order, on
- * Iyad's call (`lib/night.ts`). The old closing said to end whatever you pray
- * with witr, which read after a witr card is an instruction to pray it twice.
- * It now says not to, on Abu Dawud 1439. Whether "pray two at a time as usual"
- * is the right thing to tell someone who prayed witr early is the reviewer's.
+ * `reference:tahajjud` and `guide:tahajjud` migrate here in
+ * `progress-keys.ts`, so nobody's ticks are lost.
+ *
+ * ⚠️ REVIEW REQUIRED — model-written English over opened sources. What a
+ * reviewer owns: whether "qiyam becomes tahajjud if you sleep first" should
+ * lead, given that most jurists use the two words for the same thing.
  */
 export const QIYAM_AL_LAYL: Reference = {
   id: 'qiyam-al-layl',
   surface: 'learn',
-  title: 'Qiyam al-Layl',
-  subtitle: 'Standing at night, and how it differs from tahajjud',
+  title: 'Qiyam prayer / Tahajjud',
+  subtitle: 'Praying at night, and how small it is allowed to be',
   meta: {
     category: 'salah',
     difficulty: 'building',
-    estimatedMinutes: 2,
+    estimatedMinutes: 3,
     beginnerPriority: 3,
-    relatedContent: [ref('reference', 'tahajjud'), ref('reference', 'witr')],
+    relatedContent: [ref('guide', 'qiyam'), ref('reference', 'witr'), ref('reference', 'dua-and-dhikr')],
   },
   quickFacts: [
-    { label: 'When', value: 'Any part of the night, before you sleep' },
-    { label: 'How many', value: 'Two at a time, as many as you want' },
-    { label: 'Do I have to?', value: 'No, none of the night prayer is owed', emphasis: true },
+    { label: 'When', value: 'After Isha until Fajr. Best in the last third of the night' },
+    { label: 'How many', value: 'Two at a time. Two rakʿahs is already a night prayer' },
+    { label: 'Do I have to?', value: 'No. Nobody is behind for not praying it', emphasis: true },
     { label: 'How', value: 'Pray two rakʿahs', href: '/guide/qiyam' },
   ],
   sections: [
     {
       id: 'what',
-      heading: 'What is qiyam al-layl?',
+      heading: 'What is it?',
       promote: 'hero',
       body:
-        'Praying at night, before you have slept. Any amount, any part of the night after Isha. It is the same prayer you already know: two rakʿahs at a time, as many times as you want.',
-      sources: [hadith('muslim', '749', { grading: 'sahih', role: 'practice' })],
+        'Qiyam al-layl means standing at night: any voluntary prayer after Isha and before Fajr, two rakʿahs at a time, as many as you like. It is the same prayer you already know.',
+      sources: [
+        hadith('muslim', '749', { grading: 'sahih', role: 'practice' }),
+        scholarly({
+          work: 'Every prayer at night is qiyam al-layl; tahajjud is prayer after sleep',
+          author: 'IslamWeb, fatwa 138716',
+          url: 'https://www.islamweb.net/ar/fatwa/138716/',
+        }),
+        scholarly({
+          work: 'Qiyam al-layl is after Isha, whether or not sleep came first',
+          author: 'Islam Question & Answer, fatwa 305489',
+          url: 'https://islamqa.info/ar/answers/305489',
+        }),
+      ],
     },
     {
-      id: 'difference',
-      heading: 'How is it different from tahajjud?',
+      id: 'tahajjud',
+      heading: 'When is it called tahajjud?',
       body:
-        'Whether you slept. Pray at night before sleeping and it is qiyam al-layl; sleep first, wake, and pray, and that is tahajjud. Both are voluntary, both are the same movements, and nobody is doing the lesser one.',
-      note: 'This is the whole difference. If you are unsure which you prayed, it does not affect whether it counted.',
+        'When you sleep first. Qiyam al-layl prayed after waking from sleep is tahajjud. Many scholars use the word for any prayer at night, so you will hear both names for the same prayer.',
+      note: 'If you are unsure which you prayed, it does not affect whether it counted.',
+      sources: [
+        scholarly({
+          work: 'The difference between tahajjud and qiyam al-layl',
+          author: 'Islam Question & Answer, fatwa 143240',
+          school: 'the majority',
+          url: 'https://islamqa.info/en/answers/143240',
+        }),
+      ],
+    },
+    {
+      id: 'why',
+      heading: 'Why pray it?',
+      body:
+        'The Prophet ﷺ called prayer at night the best prayer after the obligatory ones, and the Qur’an tells him to keep part of the night for it as something extra. It is a confirmed sunnah, not an obligation, and nobody is behind for not praying it.',
+      sources: [
+        hadith('muslim', '1163', { grading: 'sahih', role: 'virtue' }),
+        quran(17, 79, { surahName: 'Al-Isra' }),
+        scholarly({
+          work: 'Qiyam al-layl is a confirmed sunnah',
+          author: 'Islam Question & Answer, fatwa 50070',
+          url: 'https://islamqa.info/en/answers/50070',
+        }),
+      ],
+    },
+    {
+      id: 'best',
+      heading: 'When is the best time?',
+      promote: 'quote',
+      body:
+        'The last third of the night, and after sleeping. The Prophet ﷺ said that when the last third of the night remains, our Lord asks who is calling on Him, that He may answer, and who is asking forgiveness, that He may forgive. Any time after Isha still counts.',
+      sources: [
+        hadith('bukhari', '1145', { grading: 'sahih', role: 'virtue' }),
+        scholarly({
+          work: 'Qiyam al-layl is after Isha, whether or not sleep came first',
+          author: 'Islam Question & Answer, fatwa 305489',
+          url: 'https://islamqa.info/ar/answers/305489',
+        }),
+      ],
+      notes: [
+        note(
+          'practical',
+          'To start, set an alarm twenty minutes before Fajr. You are already waking for Fajr; this is standing up a little earlier.',
+          { sources: [general('Practical advice, not a ruling.')] },
+        ),
+      ],
+    },
+    {
+      id: 'how-little',
+      heading: 'How little counts?',
+      promote: 'quote',
+      body:
+        'There is no minimum to reach and no number to work up to. Two rakʿahs, on one night, is the thing itself. The Prophet ﷺ said the deeds God loves most are the ones kept up, even if they are few.',
+      sources: [hadith('bukhari', '6465', { grading: 'sahih', role: 'virtue' })],
+    },
+    {
+      id: 'witr',
+      heading: 'Where does witr go?',
+      body:
+        'At the end, to close your night prayer. If you are not sure you will wake, pray witr before you sleep, and if you then wake, pray two at a time without praying witr again. A night has only one witr.',
+      sources: [
+        hadith('muslim', '755', { grading: 'sahih', role: 'practice' }),
+        hadith('bukhari', '990', { grading: 'sahih', role: 'practice' }),
+        hadith('abu-dawud', '1439', { grading: 'sahih', role: 'practice' }),
+      ],
     },
     {
       id: 'ramadan',
-      heading: 'Where will I hear the word?',
+      heading: 'Where will I hear these words?',
       body:
-        'In Ramadan, mosques announce “qiyam” for the long night prayers in the last ten nights. Taraweeh is the same family of prayer. You are welcome at it, you can leave when you need to, and nobody is counting your rakʿahs.',
-      sources: [general('Ordinary description of what happens at a mosque in Ramadan, not a ruling.')],
-    },
-    {
-      id: 'close',
-      heading: 'How do I finish?',
-      body:
-        'End the night with witr, a single rakʿah that makes the night’s total odd. If you already prayed witr after Isha, pray two at a time as usual and do not pray it again. A night has only one witr.',
+        'In Ramadan, the night prayer at the mosque after Isha is called taraweeh. In the last ten nights many mosques hold a second prayer late in the night and call it qiyam. It is all night prayer, and you are welcome at it.',
       sources: [
-        hadith('bukhari', '990', { grading: 'sahih', role: 'practice' }),
-        hadith('abu-dawud', '1439', { grading: 'sahih', role: 'practice' }),
+        hadith('bukhari', '2009', { grading: 'sahih', role: 'virtue' }),
+        scholarly({
+          work: 'Praying taraweeh after Isha and qiyam late in the last ten nights',
+          author: 'Islam Question & Answer, fatwa 109768',
+          url: 'https://islamqa.info/en/answers/109768',
+        }),
       ],
     },
   ],
@@ -321,7 +332,7 @@ export const WITR: Reference = {
     difficulty: 'building',
     estimatedMinutes: 3,
     beginnerPriority: 3,
-    relatedContent: [ref('reference', 'tahajjud'), ref('reference', 'qiyam-al-layl')],
+    relatedContent: [ref('reference', 'qiyam-al-layl'), ref('guide', 'witr')],
   },
   /*
     All four rows earn their place here, which is why witr is one of the two

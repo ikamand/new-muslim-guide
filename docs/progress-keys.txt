@@ -18,7 +18,6 @@ guide:istikhara
 guide:maghrib
 guide:qiyam
 guide:shahada
-guide:tahajjud
 guide:tawba
 guide:tayammum
 guide:witr
@@ -234,7 +233,6 @@ reference:showing-off
 reference:sincerity
 reference:small-sunnahs
 reference:sunnah
-reference:tahajjud
 reference:tawba-prayer
 reference:teaching-someone
 reference:the-prophets

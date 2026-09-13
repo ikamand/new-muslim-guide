@@ -305,7 +305,6 @@ export const CURRICULUM: readonly Tier[] = [
         id: 'prayers-you-choose',
         lessons: [
           step(ref('reference', 'witr'), 'practice'),
-          step(ref('reference', 'tahajjud'), 'learning'),
           step(ref('reference', 'qiyam-al-layl'), 'learning'),
           step(ref('reference', 'istikhara'), 'learning'),
           step(ref('reference', 'tawba-prayer'), 'learning'),

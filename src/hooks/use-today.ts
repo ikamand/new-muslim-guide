@@ -99,8 +99,9 @@ export type TodayItem = {
 /** The page each part of the night opens, and the few words that say why. */
 const NIGHT_PAGE: Record<NightPrayer, string> = {
   witr: 'witr',
+  /* One page for both since 13 Sep 2026, "Qiyam prayer / Tahajjud"; the kicker says which part of the night it is. */
   qiyam: 'qiyam-al-layl',
-  tahajjud: 'tahajjud',
+  tahajjud: 'qiyam-al-layl',
 };
 const NIGHT_REASON: Record<NightPrayer, UIKey> = {
   witr: 'today.afterIsha',

@@ -77,7 +77,6 @@ const GUIDES: Readonly<Record<string, Cadence>> = {
   asr: 'until-fluent',
   maghrib: 'until-fluent',
   isha: 'until-fluent',
-  tahajjud: 'until-fluent',
   qiyam: 'until-fluent',
   witr: 'until-fluent',
   istikhara: 'on-event', // You have a decision to make.
@@ -171,7 +170,6 @@ const REFERENCES: Readonly<Record<string, Cadence>> = {
   'islamic-calendar': 'once',
   ramadan: 'yearly',
   'fasting-alone': 'yearly',
-  tahajjud: 'once', // The explanation. The guide of the same name is until-fluent.
   'qiyam-al-layl': 'once',
   witr: 'once',
   istikhara: 'on-event',

@@ -1721,6 +1721,22 @@ at the mosque"* over the title *Qiyam al-Layl*, true at 20:00 and false by
 midnight, and the word taraweeh appeared nowhere on it. The kicker is now
 *"Taraweeh tonight"*, which names what somebody heard and holds all night.
 
+**The audit, 13 Sep, and what it reversed.** `docs/night-prayers-accuracy.md`
+checked every claim about these prayers against opened sources, and Iyad said
+to do all of it. Three decisions recorded here because they undo earlier ones:
+
+- **ʿIsha is valid until Fajr.** The pray button no longer hides at the middle
+  of the night; Today and the day page name the middle as the preferred end.
+- **Witr is taught as three, two then one**, replacing "one is enough". The
+  guide generates it with `units` on the spec.
+- **Tahajjud and Qiyam al-Layl are one page and one guide**, "Qiyam prayer /
+  Tahajjud" (Iyad's name). This reverses the 25 Aug addition of the qiyam
+  page above, whose own risk note said the second row would cost more than it
+  earned if the difference was not obvious. It was not obvious because it was
+  not true: qiyam al-layl is the umbrella term, and tahajjud is that prayer
+  after sleep. Today still offers the middle of the night and the last third
+  as separate moments; both open the one page.
+
 ### ✅ Built — the istikhara duʿa is on the page
 
 Iyad's point, and the sharpest one of the day: *"istikhara has the istikhara

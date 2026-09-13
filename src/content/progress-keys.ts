@@ -16,7 +16,14 @@
  * never removed, because a device that skipped ten updates still holds the
  * oldest keys.
  */
-export const PROGRESS_KEY_MIGRATIONS: Record<string, string> = {};
+export const PROGRESS_KEY_MIGRATIONS: Record<string, string> = {
+  /*
+    13 Sep 2026: Tahajjud and Qiyam al-Layl became one page and one guide,
+    "Qiyam prayer / Tahajjud" (docs/night-prayers-accuracy.md §3).
+  */
+  'reference:tahajjud': 'reference:qiyam-al-layl',
+  'guide:tahajjud': 'guide:qiyam',
+};
 
 /** The current name for a stored progress key. */
 export function migrateProgressKey(key: string): string {

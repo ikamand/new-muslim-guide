@@ -5,22 +5,22 @@
  * here is lost the next time it runs, and one that needs making belongs
  * upstream, where the text is published.
  *
- * 249 Qur'an passages and 220 narrations. Every character came over
+ * 249 Qur'an passages and 223 narrations. Every character came over
  * the wire from a published text rather than from memory, which is the only
  * way a file like this could exist under this project's rules about Arabic.
  *
  * ## Where each line came from
  *
  * No one source has all of it, so each field is taken from the first that
- * does, and says so on the text itself. Of the 220 narrations here:
- * 74 were confirmed against a second, separately edited publisher;
- * 74 carry HadeethEnc's own translation, 146 carry Darussalam's, and
+ * does, and says so on the text itself. Of the 223 narrations here:
+ * 76 were confirmed against a second, separately edited publisher;
+ * 76 carry HadeethEnc's own translation, 147 carry Darussalam's, and
  * 0 have Arabic and no translation at all.
  *
  * ⚠️ **The Darussalam translations are not ours to relicense.** They reach
  * this file through a public-domain dedication that covers the compiler's work
  * and not the translation inside it. What makes that defensible here is scale
- * and purpose — 146 narrations out of some thirty thousand, each quoted under
+ * and purpose — 147 narrations out of some thirty thousand, each quoted under
  * the instruction it supports, in an app that is free and never sold. It is a
  * quotation, not a republication, and it is Iyad's decision on the record.
  *
@@ -2942,17 +2942,41 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
     "arabicFrom": "HadeethEnc.com",
     "translationFrom": "HadeethEnc.com"
   },
-  "muslim:783": {
-    "arabic": "عَنْ عَلْقَمَةَ، قَالَ سَأَلْتُ أُمَّ الْمُؤْمِنِينَ عَائِشَةَ قَالَ قُلْتُ يَا أُمَّ الْمُؤْمِنِينَ كَيْفَ كَانَ عَمَلُ رَسُولِ اللَّهِ صلى الله عليه وسلم هَلْ كَانَ يَخُصُّ شَيْئًا مِنَ الأَيَّامِ قَالَتْ لاَ ‏.‏ كَانَ عَمَلُهُ دِيمَةً وَأَيُّكُمْ يَسْتَطِيعُ مَا كَانَ رَسُولُ اللَّهِ صلى الله عليه وسلم يَسْتَطِيعُ",
-    "isnad": "وَحَدَّثَنَا زُهَيْرُ بْنُ حَرْبٍ، وَإِسْحَاقُ بْنُ إِبْرَاهِيمَ، قَالَ زُهَيْرٌ حَدَّثَنَا جَرِيرٌ، عَنْ مَنْصُورٍ، عَنْ إِبْرَاهِيمَ",
-    "translation": "Alqama reported:I asked 'A'isha, the mother of the believers, saying O mother of the believers, how did the Messenger of Allah (ﷺ) act? Did he choose a particular act for a particular day? She said: No. He act was continuous, and who amongst you is capable of doing what the Messenger of Allah (ﷺ) did?",
-    "arabicFrom": "fawazahmed0/hadith-api",
-    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
-  },
   "muslim:749": {
     "arabic": "عَنِ ابْنِ عُمَرَ، أَنَّ رَجُلاً، سَأَلَ رَسُولَ اللَّهِ صلى الله عليه وسلم عَنْ صَلاَةِ اللَّيْلِ فَقَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏ \"‏ صَلاَةُ اللَّيْلِ مَثْنَى مَثْنَى فَإِذَا خَشِيَ أَحَدُكُمُ الصُّبْحَ صَلَّى رَكْعَةً وَاحِدَةً تُوتِرُ لَهُ مَا قَدْ صَلَّى ‏\"‏ ‏.‏",
     "isnad": "وَحَدَّثَنَا يَحْيَى بْنُ يَحْيَى، قَالَ قَرَأْتُ عَلَى مَالِكٍ عَنْ نَافِعٍ، وَعَبْدِ اللَّهِ بْنِ دِينَارٍ",
     "translation": "Ibn 'Umar reported that a person asked the Messenger of Allah (ﷺ) about the night prayer. The Messenger of Allah (ﷺ) said:Prayer during the night should consist of pairs of rak'ahs, but if one of you fears morning is near, he should pray one rak'ah which will make his prayer an odd number for him",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "muslim:1163": {
+    "arabic": "عن أبي هريرة رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم : «أفضل الصِّيام، بعد رمضان، شَهر الله المُحَّرم، وأفضل الصلاة، بعد الفَريضة، صلاة الليل».",
+    "translation": "Abu Hurayrah (may Allah be pleased with him) reported that the Messenger of Allah (may Allah's peace and blessings be upon him) said: \"The most excellent fast after Ramadan is Allah's month, Muharram, and the most excellent prayer after what is prescribed is prayer during the night.\"",
+    "attribution": "Narrated by Muslim",
+    "grade": "Authentic hadith",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "bukhari:1145": {
+    "arabic": "عن أبي هريرة رضي الله عنه: أن رسول الله صلى الله عليه وسلم قال: «يَنْزِلُ رَبُّنَا تَبَارَكَ وَتَعَالَى كُلَّ لَيْلَةٍ إِلَى السَّمَاءِ الدُّنْيَا حِينَ يَبْقَى ثُلُثُ اللَّيْلِ الْآخِرُ، يَقُولُ: «مَنْ يَدْعُونِي فَأَسْتَجِيبَ لَهُ؟ مَنْ يَسْأَلُنِي فَأُعْطِيَهُ؟ مَنْ يَسْتَغْفِرُنِي فَأَغْفِرَ لَهُ؟».",
+    "translation": "Abu Hurayrah (may Allah be pleased with him) reported: The Messenger of Allah (may Allah's peace and blessings be upon him) said: \"Our Lord, Glorified and Exalted, descends every night to the lowest heaven when the last third of the night remains and says: ‘Who supplicates Me so that I may answer him? Who asks Me so that I may give him? Who seeks forgiveness from Me so that I may forgive him?'\"",
+    "attribution": "Agreed upon",
+    "grade": "Authentic",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "muslim:755": {
+    "arabic": "عن جابر رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم : «من خاف أن لا يقوم من آخِرِ الليل فليوتر أوله، ومن طَمِعَ أن يقوم آخره فليوتر آخر الليل، فإن صلاة آخر الليل مشهودة، وذلك أفضل».",
+    "translation": "Jābir (may Allah be pleased with him) reported that the Messenger of Allah (may Allah's peace and blessings be upon him) said: \"If anyone fears that he will not wake up at the end of the night, let him offer Witr prayer at the beginning of the night; and anyone expects to wake up at the end of the night, let him offer Witr prayer at the end of the night. Indeed, prayer at the end of the night is witnessed (by the angels) and that is better.\"",
+    "attribution": "Narrated by Muslim",
+    "grade": "Authentic hadith",
+    "arabicFrom": "HadeethEnc.com",
+    "translationFrom": "HadeethEnc.com"
+  },
+  "bukhari:6465": {
+    "arabic": "عَنْ عَائِشَةَ ـ رضى الله عنها ـ أَنَّهَا قَالَتْ سُئِلَ النَّبِيُّ صلى الله عليه وسلم أَىُّ الأَعْمَالِ أَحَبُّ إِلَى اللَّهِ قَالَ ‏\"‏ أَدْوَمُهَا وَإِنْ قَلَّ ‏\"‏‏.‏ وَقَالَ ‏\"‏ اكْلَفُوا مِنَ الأَعْمَالِ مَا تُطِيقُونَ ‏\"‏‏.‏",
+    "isnad": "حَدَّثَنِي مُحَمَّدُ بْنُ عَرْعَرَةَ، حَدَّثَنَا شُعْبَةُ، عَنْ سَعْدِ بْنِ إِبْرَاهِيمَ، عَنْ أَبِي سَلَمَةَ",
+    "translation": "Narrated `Aisha:The Prophet (ﷺ) was asked, \"What deeds are loved most by Allah?\" He said, \"The most regular constant deeds even though they may be few.\" He added, 'Don't take upon yourselves, except the deeds which are within your ability",
     "arabicFrom": "fawazahmed0/hadith-api",
     "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
   },
@@ -2971,6 +2995,13 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
     "arabicFrom": "HadeethEnc.com",
     "translationFrom": "HadeethEnc.com"
   },
+  "bukhari:2009": {
+    "arabic": "عَنْ أَبِي هُرَيْرَةَ ـ رضى الله عنه ـ أَنَّ رَسُولَ اللَّهِ صلى الله عليه وسلم قَالَ ‏ \"‏ مَنْ قَامَ رَمَضَانَ إِيمَانًا وَاحْتِسَابًا غُفِرَ لَهُ مَا تَقَدَّمَ مِنْ ذَنْبِهِ ‏\"‏‏.‏ قَالَ ابْنُ شِهَابٍ فَتُوُفِّيَ رَسُولُ اللَّهِ صلى الله عليه وسلم وَالأَمْرُ عَلَى ذَلِكَ، ثُمَّ كَانَ الأَمْرُ عَلَى ذَلِكَ فِي خِلاَفَةِ أَبِي بَكْرٍ وَصَدْرًا مِنْ خِلاَفَةِ عُمَرَ ـ رضى الله عنهما.‏",
+    "isnad": "حَدَّثَنَا عَبْدُ اللَّهِ بْنُ يُوسُفَ، أَخْبَرَنَا مَالِكٌ، عَنِ ابْنِ شِهَابٍ، عَنْ حُمَيْدِ بْنِ عَبْدِ الرَّحْمَنِ",
+    "translation": "Narrated Abu Huraira: Allah's Messenger (ﷺ) said, \"Whoever prayed at night the whole month of Ramadan out of sincere Faith and hoping for a reward from Allah, then all his previous sins will be forgiven.\" Ibn Shihab (a sub-narrator) said, \"Allah's Messenger (ﷺ) died and the people continued observing that (i.e. Nawafil offered individually, not in congregation), and it remained as it was during the Caliphate of Abu Bakr and in the early days of 'Umar's Caliphate",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
   "bukhari:998": {
     "arabic": "عَنْ عَبْدِ اللَّهِ، عَنِ النَّبِيِّ صلى الله عليه وسلم قَالَ ‏ \"‏ اجْعَلُوا آخِرَ صَلاَتِكُمْ بِاللَّيْلِ وِتْرًا ‏\"‏‏.‏",
     "isnad": "حَدَّثَنَا مُسَدَّدٌ، قَالَ حَدَّثَنَا يَحْيَى بْنُ سَعِيدٍ، عَنْ عُبَيْدِ اللَّهِ، حَدَّثَنِي نَافِعٌ",
@@ -2985,14 +3016,6 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
     "grade": "Sahih (Al-Albani) · Sahih (Muhammad Muhyi Al-Din Abdul Hamid) · Isnaad Sahih (Zubair Ali Zai)",
     "arabicFrom": "fawazahmed0/hadith-api",
     "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
-  },
-  "muslim:755": {
-    "arabic": "عن جابر رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم : «من خاف أن لا يقوم من آخِرِ الليل فليوتر أوله، ومن طَمِعَ أن يقوم آخره فليوتر آخر الليل، فإن صلاة آخر الليل مشهودة، وذلك أفضل».",
-    "translation": "Jābir (may Allah be pleased with him) reported that the Messenger of Allah (may Allah's peace and blessings be upon him) said: \"If anyone fears that he will not wake up at the end of the night, let him offer Witr prayer at the beginning of the night; and anyone expects to wake up at the end of the night, let him offer Witr prayer at the end of the night. Indeed, prayer at the end of the night is witnessed (by the angels) and that is better.\"",
-    "attribution": "Narrated by Muslim",
-    "grade": "Authentic hadith",
-    "arabicFrom": "HadeethEnc.com",
-    "translationFrom": "HadeethEnc.com"
   },
   "bukhari:1178": {
     "arabic": "حَدَّثَنَا مُسْلِمُ بْنُ إِبْرَاهِيمَ، أَخْبَرَنَا شُعْبَةُ، حَدَّثَنَا عَبَّاسٌ الْجُرَيْرِيُّ ـ هُوَ ابْنُ فَرُّوخَ ـ عَنْ أَبِي عُثْمَانَ النَّهْدِيِّ، عَنْ أَبِي هُرَيْرَةَ، رضى الله عنه قَالَ أَوْصَانِي خَلِيلِي بِثَلاَثٍ لاَ أَدَعُهُنَّ حَتَّى أَمُوتَ صَوْمِ ثَلاَثَةِ أَيَّامٍ مِنْ كُلِّ شَهْرٍ، وَصَلاَةِ الضُّحَى، وَنَوْمٍ عَلَى وِتْرٍ‏.‏",

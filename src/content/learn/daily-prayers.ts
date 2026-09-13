@@ -1,5 +1,5 @@
-import { ref } from '../model';
-import { hadith } from '../sources';
+import { note, ref } from '../model';
+import { hadith, scholarly } from '../sources';
 import type { Reference } from '../types';
 
 /**
@@ -250,7 +250,7 @@ export const ISHA_PAGE: Reference = {
     relatedContent: [ref('guide', 'isha'), ref('hisn', '1269267')],
   },
   quickFacts: [
-    { label: 'When', value: 'From nightfall until the middle of the night' },
+    { label: 'When', value: 'From nightfall until Fajr. Best before the middle of the night' },
     { label: 'How many', value: 'Four rakʿahs, the first two aloud' },
     { label: 'How', value: 'Pray ʿIsha', href: '/guide/isha' },
   ],
@@ -262,6 +262,43 @@ export const ISHA_PAGE: Reference = {
       body:
         'Four rakʿahs, prayed once night has settled. Prayed in congregation, it is counted like standing half the night in prayer.',
       sources: [hadith('muslim', '656a', { grading: 'sahih', role: 'virtue' })],
+    },
+    /*
+      13 Sep 2026. The page said ʿIsha ran "until the middle of the night",
+      and the pray button hid then, so somebody awake at 1am who had not
+      prayed was told it was too late. That is the preferred end; for most
+      scholars the window runs to Fajr. docs/night-prayers-accuracy.md §1.
+    */
+    {
+      id: 'late',
+      heading: 'What if the middle of the night has passed?',
+      body:
+        'Pray it. For most scholars ʿIsha is valid until Fajr. Its preferred time ends at the middle of the night, halfway between sunset and Fajr, so pray before then when you can.',
+      sources: [
+        hadith('muslim', '612', { grading: 'sahih', role: 'ruling' }),
+        scholarly({
+          work: 'On how long the time of ʿIsha lasts',
+          author: 'IslamWeb, fatwa 228886',
+          school: 'the majority',
+          url: 'https://www.islamweb.net/ar/fatwa/228886/',
+        }),
+      ],
+      notes: [
+        note(
+          'differs',
+          'Some scholars, among them Ibn ʿUthaymin, hold that the time of ʿIsha itself ends at the middle of the night.',
+          {
+            sources: [
+              scholarly({
+                work: 'The end of the time of the ʿIshaa’ prayer',
+                author: 'IslamWeb, fatwa 136795',
+                school: 'a minority',
+                url: 'https://islamweb.net/en/fatwa/136795/the-end-of-the-time-of-the-ishaa-prayer',
+              }),
+            ],
+          },
+        ),
+      ],
     },
     {
       id: 'heavy',

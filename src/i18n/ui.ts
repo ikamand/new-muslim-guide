@@ -320,6 +320,7 @@ export const EN = {
   'times.now': 'Now',
   'times.until': 'until {time}',
   'times.leftThen': '{left} left, then {next}',
+  'times.preferredPassed': 'Its preferred time has passed',
   'times.needLocation': 'Prayer times need to know where you are',
   'times.needLocation.why':
     'The times are worked out from the position of the sun where you are standing. Your location is used on this device and never sent anywhere. There is no server to send it to.',
@@ -408,10 +409,10 @@ export const EN = {
     precedent `times.endsAtSunrise` set for a ruling that must live beside
     the times it describes. Fajr→sunrise and Dhuhr→ʿAsr are settled;
     ʿAsr→Maghrib is taught as the one clear way, leaving the preferred-time
-    detail to a lesson; ʿIsha ends at the middle of the night in the fiqh
-    sense (halfway from sunset to Fajr), which is the preferred position —
-    schools differ on the permissible end, and a qualified reviewer decides
-    whether that sentence needs saying here.
+    detail to a lesson. ʿIsha's window runs to Fajr since 13 Sep 2026, the
+    majority position; the middle of the night (halfway from sunset to Fajr)
+    is its preferred end, which Today and the day page name first, and Ibn
+    ʿUthaymin's view of its actual end. docs/night-prayers-accuracy.md §1.
   */
   'windows.close': 'Close',
   'windows.intro':
@@ -456,7 +457,8 @@ export const EN = {
   'awqat.day.openFor': 'Prayer times for {date}, in full',
   'awqat.day.title': 'Today',
   'awqat.day.sunrise': 'Sunrise · Fajr ends',
-  'awqat.day.midnight': 'Middle of the night · ʿIsha ends',
+  /* Short enough for one line at 360pt; the longer "Middle of the night · ʿIsha’s preferred time ends" wrapped. The ʿIsha row above already prints the time. */
+  'awqat.day.midnight': 'ʿIsha’s preferred time ends',
   'awqat.day.tomorrowFajr': 'Tomorrow · Fajr',
   'awqat.day.nextFajr': 'Next morning · Fajr',
   'awqat.day.left': '{left} left',

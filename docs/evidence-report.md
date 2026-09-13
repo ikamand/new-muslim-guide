@@ -6,12 +6,12 @@ supplied each line of it.
 | | |
 |---|---|
 | Qur'an passages | 249 of 249 |
-| Narrations | 212 of 212 |
+| Narrations | 213 of 213 |
 | Confirmed against a second publisher | 73 |
 | Translation from HadeethEnc (published terms) | 73 |
-| Translation from Darussalam (quoted) | 139 |
+| Translation from Darussalam (quoted) | 140 |
 | Arabic with no translation | 0 |
-| Chain of transmission moved to the foot | 135 |
+| Chain of transmission moved to the foot | 136 |
 | Chain kept in place (no anchor to cut on) | 3 |
 | Nothing found | 0 |
 
@@ -264,6 +264,7 @@ comes from the collection itself.
 | `bukhari:553` | HadeethEnc.com | HadeethEnc.com | HadeethEnc 6261 |
 | `muslim:728a` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
 | `muslim:656a` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
+| `muslim:612` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
 | `abu-dawud:1067` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |
 | `bukhari:444` | HadeethEnc.com | HadeethEnc.com | HadeethEnc 65091 |
 | `bukhari:1090` | fawazahmed0/hadith-api | Darussalam (via fawazahmed0/hadith-api) | — |

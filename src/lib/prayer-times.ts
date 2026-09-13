@@ -278,10 +278,16 @@ export type DayTimes = {
   sunrise: Date;
   /**
    * Halfway between sunset and the next Fajr — the "middle of the night" in
-   * the fiqh sense, not 00:00 on a clock. The windows sheet uses it as the
-   * end of ʿIshāʾ's preferred time.
+   * the fiqh sense, not 00:00 on a clock. Where ʿIshāʾ's preferred time ends:
+   * see `preferredEnd`.
    */
   middleOfNight: Date;
+  /**
+   * The next morning's Fajr, where ʿIshāʾ's window closes for most scholars.
+   * Computed from calendar parts like everything here, never by adding a day
+   * of milliseconds.
+   */
+  nextFajr: Date;
   /**
    * Two thirds of the way from sunset to the next Fajr, where the last third
    * of the night begins. From Maghrib, like the middle above, because the
@@ -293,17 +299,17 @@ export type DayTimes = {
 };
 
 export function computeDay(coords: LatLon, reference: Date, profile: MethodProfile): DayTimes {
-  const times = new PrayerTimes(
-    new Coordinates(coords.latitude, coords.longitude),
-    localDay(reference),
-    buildParams(coords, profile),
-  );
+  const coordinates = new Coordinates(coords.latitude, coords.longitude);
+  const params = buildParams(coords, profile);
+  const times = new PrayerTimes(coordinates, localDay(reference), params);
+  const tomorrow = new PrayerTimes(coordinates, localDay(reference, 1), params);
   const sunnah = new SunnahTimes(times);
 
   return {
     prayers: PRAYER_IDS.map((id) => ({ id, label: PRAYER_LABEL[id], time: times[id] })),
     sunrise: times.sunrise,
     middleOfNight: sunnah.middleOfTheNight,
+    nextFajr: tomorrow.fajr,
     lastThirdOfNight: sunnah.lastThirdOfTheNight,
   };
 }
@@ -393,14 +399,21 @@ export function findNextPrayer(coords: LatLon, now: Date, profile: MethodProfile
  * When `id`'s window closes, within its own day's times.
  *
  * Fajr ends at sunrise; Dhuhr, ʿAsr and Maghrib each end when the next prayer
- * enters; ʿIshāʾ ends at the middle of the night in the fiqh sense. This is
- * the one statement of those ends — the windows sheet and Today's pray button
- * both read it, so what the sheet prints and when the button shows can never
- * disagree.
+ * enters; ʿIshāʾ ends at the next Fajr. This is the one statement of those
+ * ends — the day page and Today's pray button both read it, so what the page
+ * prints and when the button shows can never disagree.
  *
- * ⚠️ The ends are rulings, not astronomy — see the review note on
- * `WindowsSheet` in `prayer-times-card.tsx`, which this mapping was lifted
- * from verbatim.
+ * ʿIshāʾ ended at the middle of the night until 13 Sep 2026. That is its
+ * PREFERRED end (Muslim 612, "its time is until half of the night has
+ * passed"), and Ibn ʿUthaymin's view of its actual end (IslamWeb fatwa
+ * 136795). For most scholars it is valid until Fajr (IslamWeb fatwa 228886),
+ * and the button hiding at the middle of the night told somebody awake at 1am,
+ * who had not prayed, that it was too late, when on either view the thing to
+ * do then is pray it. The preferred end is `preferredEnd`, and the screens
+ * name it first. `docs/night-prayers-accuracy.md` §1.
+ *
+ * ⚠️ The ends are rulings, not astronomy, and the ʿIshāʾ change is on the
+ * review pile.
  */
 export function windowEnd(day: DayTimes, id: PrayerId): Date {
   const at = (prayerId: PrayerId) => day.prayers.find((prayer) => prayer.id === prayerId)!.time;
@@ -414,27 +427,40 @@ export function windowEnd(day: DayTimes, id: PrayerId): Date {
     case 'maghrib':
       return at('isha');
     case 'isha':
-      return day.middleOfNight;
+      return day.nextFajr;
   }
+}
+
+/**
+ * Where `id`'s preferred time ends, where that is earlier than its window.
+ *
+ * Only ʿIshāʾ: the middle of the night, halfway from sunset to Fajr, while its
+ * window runs on to Fajr. See `windowEnd` for why the two are apart.
+ */
+export function preferredEnd(day: DayTimes, id: PrayerId): Date | undefined {
+  return id === 'isha' ? day.middleOfNight : undefined;
 }
 
 export type CurrentPrayer = PrayerTime & {
   /** When this prayer's window closes. */
   windowEnds: Date;
+  /** When its preferred time ends, where that is earlier: ʿIshāʾ only. */
+  preferredEnds?: Date;
 };
 
 /**
  * The prayer whose window is open at `now`, or null between windows.
  *
  * Null is a real answer, not a failure: after sunrise nothing is due until
- * Dhuhr, and after the middle of the night nothing is due until Fajr. Today's
- * pray button hides in those spans, because "Pray Dhuhr" on screen at 11am is
- * an instruction to pray a prayer whose time has not entered — invalid, and
- * exactly the kind of thing a convert would follow literally.
+ * Dhuhr. Today's pray button hides in that span, because "Pray Dhuhr" on
+ * screen at 11am is an instruction to pray a prayer whose time has not
+ * entered — invalid, and exactly the kind of thing a convert would follow
+ * literally. There is no such span at night: ʿIshāʾ is open until Fajr (see
+ * `windowEnd`).
  *
  * Yesterday is scanned as well as today because ʿIshāʾ's window crosses
  * midnight: at 00:30 the open window belongs to *yesterday's* ʿIshāʾ, whose
- * middle-of-night lands in the small hours of today. Two days are enough — a
+ * window closes at today's Fajr. Two days are enough — a
  * window that contains `now` cannot have started earlier than yesterday's
  * ʿIshāʾ. If a desynced clock puts `now` outside both days, no window matches
  * and the button simply hides, which is the safe failure.
@@ -449,7 +475,7 @@ export function findCurrentPrayer(
     for (const prayer of day.prayers) {
       const ends = windowEnd(day, prayer.id);
       if (now.getTime() >= prayer.time.getTime() && now.getTime() < ends.getTime()) {
-        return { ...prayer, windowEnds: ends };
+        return { ...prayer, windowEnds: ends, preferredEnds: preferredEnd(day, prayer.id) };
       }
     }
   }

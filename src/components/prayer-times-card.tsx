@@ -220,6 +220,10 @@ export function PrayerTimesCard({ action }: PrayerTimesCardProps) {
   const now = new Date(next.time.getTime() - next.msUntil);
   /* The prayer the arch names, and the ring, the tint and the button with it. */
   const litId = current ? current.id : next.isTomorrow ? null : next.id;
+  /* ʿIshāʾ's preferred end while it is still ahead; otherwise the window's own. */
+  const pastPreferred = !!current?.preferredEnds && now >= current.preferredEnds;
+  const shownEnd =
+    current?.preferredEnds && !pastPreferred ? current.preferredEnds : (current?.windowEnds ?? now);
 
   return (
     <Shell>
@@ -252,13 +256,22 @@ export function PrayerTimesCard({ action }: PrayerTimesCardProps) {
               <ThemedText type="subtitle" style={styles.nextName}>
                 {current.label}
               </ThemedText>
+              {/*
+                ʿIshāʾ has two ends (13 Sep 2026). Before the middle of the
+                night the card names the preferred one, which is what to aim
+                for. After it, the window's real end, Fajr, and one line saying
+                the preferred time has gone: a fact about the clock, never
+                about whether anybody prayed.
+              */}
               <ThemedText type="cardTitle" themeColor="gold" style={styles.nextTime}>
-                {t('times.until').replace('{time}', formatTime(current.windowEnds))}
+                {t('times.until').replace('{time}', formatTime(shownEnd))}
               </ThemedText>
               <ThemedText type="small" themeColor="textSecondary">
-                {t('times.leftThen')
-                  .replace('{left}', formatDuration(current.windowEnds.getTime() - now.getTime()))
-                  .replace('{next}', next.label)}
+                {pastPreferred
+                  ? t('times.preferredPassed')
+                  : t('times.leftThen')
+                      .replace('{left}', formatDuration(shownEnd.getTime() - now.getTime()))
+                      .replace('{next}', next.label)}
               </ThemedText>
             </>
           ) : (

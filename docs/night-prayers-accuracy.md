@@ -31,6 +31,20 @@ reciting aloud at night; the page is a fatwa on selling the wool of dead
 animals. The point it was cited for is supported elsewhere (§7), but it is why
 nothing below is marked ✓ unless it was opened by hand.
 
+**Status of the fixes.** Iyad, 13 Sep: *"everything you mentioned should be
+done"*, with the merged page named "Qiyam prayer / Tahajjud", and witr taught
+as prayable before qiyam or tahajjud (if unsure of waking) or after them. His
+screenshot of IslamWeb fatwa 2165 backs keeping witr first on Today: whoever
+prayed witr early and then wakes prays tahajjud and does not repeat witr, "the
+well-known correct view, the view of the majority". The optional qunut step is
+held: it needs a transliteration from a source and a recording, which adds to
+the audio gate.
+
+- §1 ʿIsha until Fajr: **done.** `windowEnd('isha')` is the next Fajr;
+  Today and the day page name the middle of the night as the preferred end
+  first, then "Its preferred time has passed"; the ʿIsha page has the section;
+  `night:check` asserts the window.
+
 **Review status of these pages.** `docs/scholarly-review.md` has no entry on
 witr, tahajjud, qiyam al-layl, taraweeh, qunut or when ʿIsha ends, and
 `docs/curriculum-review-pile.md` does not list them. The only marker is the

@@ -37,6 +37,7 @@ import {
   formatTime,
   pauseShownAt,
   pausesOf,
+  preferredEnd,
   windowEnd,
   METHODS,
   type DayTimes,
@@ -461,7 +462,10 @@ export default function AwqatDayScreen() {
   */
   const prayerEntry = (id: PrayerId): Entry => {
     const prayer = at(id);
-    const ends = windowEnd(day, id);
+    /* ʿIshāʾ names its preferred end until that passes, then Fajr, as Today's card does. */
+    const preferred = preferredEnd(day, id);
+    const pastPreferred = !!preferred && now >= preferred;
+    const ends = preferred && !pastPreferred ? preferred : windowEnd(day, id);
     const lit = litId === id;
     const open = openId === id;
     const state = lit ? 'lit' : closed(id) ? 'passed' : 'coming';
@@ -493,10 +497,12 @@ export default function AwqatDayScreen() {
                   {t('times.until').replace('{time}', formatTime(ends))}
                 </ThemedText>
                 <ThemedText type="caption" themeColor="gold">
-                  {t('awqat.day.left').replace(
-                    '{left}',
-                    formatDuration(ends.getTime() - now.getTime()),
-                  )}
+                  {pastPreferred
+                    ? t('times.preferredPassed')
+                    : t('awqat.day.left').replace(
+                        '{left}',
+                        formatDuration(ends.getTime() - now.getTime()),
+                      )}
                 </ThemedText>
               </>
             ) : lit ? (

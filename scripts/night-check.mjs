@@ -19,7 +19,7 @@
  * evening and morning are paired right across midnight and that the last third
  * is measured from Maghrib.
  */
-import { computeDay, computeNight, inferProfile } from '../src/lib/prayer-times.ts';
+import { computeDay, computeNight, findCurrentPrayer, inferProfile, windowEnd } from '../src/lib/prayer-times.ts';
 import { nightPrayerAt } from '../src/lib/night.ts';
 import { arcFor, arcForNight } from '../src/content/ramadan-arc.ts';
 import { hijriDate, hijriOfNight } from '../src/lib/hijri.ts';
@@ -202,6 +202,48 @@ for (const date of ['2026-09-13', '2026-06-21', '2026-12-21', '2026-03-07', '202
       `middle ${clock(first.evening.middleOfNight)}  last third ${clock(first.evening.lastThirdOfNight)}  ` +
       `Fajr ${clock(fajr)}`,
   );
+}
+
+/*
+  ʿIshāʾ stays open until Fajr and names the middle of the night as its
+  preferred end (13 Sep 2026, docs/night-prayers-accuracy.md §1). The pray
+  button used to hide at the middle of the night, telling somebody awake at
+  1am that it was too late.
+*/
+for (const date of ['2026-09-13', '2026-06-21', '2026-03-07']) {
+  const day = computeDay(place, new Date(`${date}T12:00:00`), profile);
+  const isha = timeOf(day, 'isha');
+  const morning = computeDay(place, new Date(day.nextFajr.getTime() + 60 * MINUTE), profile);
+  if (day.nextFajr.getTime() !== timeOf(morning, 'fajr').getTime()) {
+    fail(`${date}: nextFajr ${clock(day.nextFajr)} is not the next morning's Fajr ${clock(timeOf(morning, 'fajr'))}`);
+  }
+  if (windowEnd(day, 'isha').getTime() !== day.nextFajr.getTime()) {
+    fail(`${date}: ʿIshāʾ's window ends at ${clock(windowEnd(day, 'isha'))}, not at Fajr`);
+  }
+  const moments = [
+    ['just after ʿIshāʾ', new Date(isha.getTime() + 5 * MINUTE), false],
+    ['past the middle of the night', new Date(day.middleOfNight.getTime() + 5 * MINUTE), true],
+    ['a minute before Fajr', new Date(day.nextFajr.getTime() - MINUTE), true],
+  ];
+  for (const [label, at, preferredPassed] of moments) {
+    const current = findCurrentPrayer(place, at, profile);
+    if (current?.id !== 'isha') {
+      fail(`${date} ${label} (${clock(at)}): the open prayer is ${current?.id ?? 'none'}, not ʿIshāʾ`);
+      continue;
+    }
+    if (current.windowEnds.getTime() !== day.nextFajr.getTime()) {
+      fail(`${date} ${label}: the window ends at ${clock(current.windowEnds)}, not at Fajr`);
+    }
+    if (current.preferredEnds?.getTime() !== day.middleOfNight.getTime()) {
+      fail(`${date} ${label}: the preferred end is not the middle of the night`);
+    }
+    if ((at.getTime() >= current.preferredEnds.getTime()) !== preferredPassed) {
+      fail(`${date} ${label}: preferred time passed should be ${preferredPassed}`);
+    }
+  }
+  const atFajr = findCurrentPrayer(place, day.nextFajr, profile);
+  if (atFajr?.id !== 'fajr') fail(`${date}: at Fajr the open prayer is ${atFajr?.id ?? 'none'}, not Fajr`);
+  console.log(`  ʿIshāʾ ${date}: open ${clock(isha)} to Fajr ${clock(day.nextFajr)}, preferred until ${clock(day.middleOfNight)}`);
 }
 
 /*

@@ -5,22 +5,22 @@
  * here is lost the next time it runs, and one that needs making belongs
  * upstream, where the text is published.
  *
- * 249 Qur'an passages and 212 narrations. Every character came over
+ * 249 Qur'an passages and 213 narrations. Every character came over
  * the wire from a published text rather than from memory, which is the only
  * way a file like this could exist under this project's rules about Arabic.
  *
  * ## Where each line came from
  *
  * No one source has all of it, so each field is taken from the first that
- * does, and says so on the text itself. Of the 212 narrations here:
+ * does, and says so on the text itself. Of the 213 narrations here:
  * 73 were confirmed against a second, separately edited publisher;
- * 73 carry HadeethEnc's own translation, 139 carry Darussalam's, and
+ * 73 carry HadeethEnc's own translation, 140 carry Darussalam's, and
  * 0 have Arabic and no translation at all.
  *
  * ⚠️ **The Darussalam translations are not ours to relicense.** They reach
  * this file through a public-domain dedication that covers the compiler's work
  * and not the translation inside it. What makes that defensible here is scale
- * and purpose — 139 narrations out of some thirty thousand, each quoted under
+ * and purpose — 140 narrations out of some thirty thousand, each quoted under
  * the instruction it supports, in an app that is free and never sold. It is a
  * quotation, not a republication, and it is Iyad's decision on the record.
  *
@@ -3042,6 +3042,13 @@ export const HADITH_TEXT: Record<string, EvidenceText> = {
     "arabic": "حَدَّثَنَا عَبْدُ الرَّحْمَنِ بْنُ أَبِي عَمْرَةَ، قَالَ دَخَلَ عُثْمَانُ بْنُ عَفَّانَ الْمَسْجِدَ بَعْدَ صَلاَةِ الْمَغْرِبِ فَقَعَدَ وَحْدَهُ فَقَعَدْتُ إِلَيْهِ فَقَالَ يَا ابْنَ أَخِي سَمِعْتُ رَسُولَ اللَّهِ صلى الله عليه وسلم يَقُولُ ‏ \"‏ مَنْ صَلَّى الْعِشَاءَ فِي جَمَاعَةٍ فَكَأَنَّمَا قَامَ نِصْفَ اللَّيْلِ وَمَنْ صَلَّى الصُّبْحَ فِي جَمَاعَةٍ فَكَأَنَّمَا صَلَّى اللَّيْلَ كُلَّهُ ‏\"‏ ‏.‏",
     "isnad": "حَدَّثَنَا إِسْحَاقُ بْنُ إِبْرَاهِيمَ، أَخْبَرَنَا الْمُغِيرَةُ بْنُ سَلَمَةَ الْمَخْزُومِيُّ، حَدَّثَنَا عَبْدُ الْوَاحِدِ، - وَهُوَ ابْنُ زِيَادٍ - حَدَّثَنَا عُثْمَانُ بْنُ حَكِيمٍ",
     "translation": "Abd al-Rahman b. Abd 'Amr reported:'Uthman b. 'Affan (narrated the mosque after evening prayer and sat alone. I also sat alone with him, so he said: 0, son of my brother, I heard the Messenger of Allah (ﷺ) say: He who observed the 'Isha' prayer in congregation, it was as if he prayed up to midnight, and he who prayed the morning prayer in congregation, it was as if he prayed the whole night",
+    "arabicFrom": "fawazahmed0/hadith-api",
+    "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
+  },
+  "muslim:612": {
+    "arabic": "عَنْ عَبْدِ اللَّهِ بْنِ عَمْرٍو، أَنَّ نَبِيَّ اللَّهِ صلى الله عليه وسلم قَالَ ‏ \"‏ إِذَا صَلَّيْتُمُ الْفَجْرَ فَإِنَّهُ وَقْتٌ إِلَى أَنْ يَطْلُعَ قَرْنُ الشَّمْسِ الأَوَّلُ ثُمَّ إِذَا صَلَّيْتُمُ الظُّهْرَ فَإِنَّهُ وَقْتٌ إِلَى أَنْ يَحْضُرَ الْعَصْرُ فَإِذَا صَلَّيْتُمُ الْعَصْرَ فَإِنَّهُ وَقْتٌ إِلَى أَنْ تَصْفَرَّ الشَّمْسُ فَإِذَا صَلَّيْتُمُ الْمَغْرِبَ فَإِنَّهُ وَقْتٌ إِلَى أَنْ يَسْقُطَ الشَّفَقُ فَإِذَا صَلَّيْتُمُ الْعِشَاءَ فَإِنَّهُ وَقْتٌ إِلَى نِصْفِ اللَّيْلِ ‏\"‏ ‏.‏",
+    "isnad": "حَدَّثَنَا أَبُو غَسَّانَ الْمِسْمَعِيُّ، وَمُحَمَّدُ بْنُ الْمُثَنَّى، قَالاَ حَدَّثَنَا مُعَاذٌ، - وَهُوَ ابْنُ هِشَامٍ - حَدَّثَنِي أَبِي، عَنْ قَتَادَةَ، عَنْ أَبِي أَيُّوبَ",
+    "translation": "It was narrated from 'Abdullah bin 'Amr that the Prophet (ﷺ) said:\"When you pray Fajr, its time is until the first part of the sun appears. When you pray Zuhr, its time is until 'Asr comes. When you pray 'Asr, its time is until the sun turns yellow. When you pray Maghrib, its time is until the twilight has disappeared. When you pray 'Isha, its time is until half of the night has passed",
     "arabicFrom": "fawazahmed0/hadith-api",
     "translationFrom": "Darussalam (via fawazahmed0/hadith-api)"
   },

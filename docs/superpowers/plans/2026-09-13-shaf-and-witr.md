@@ -448,7 +448,7 @@ git commit -m "Witr page becomes Shafʿ and Witr: order, recitation, qunut"
       bullets: [
         '**After Isha**, its two sunnah rakʿahs.',
         '**Then your night prayer**, two rakʿahs at a time, as much as you like. After sleeping it is tahajjud, and in Ramadan it is taraweeh.',
-        '**Last, shafʿ and witr**: two rakʿahs, then one, to close the night.',
+        '**Last, shafʿ and witr**: two rakʿahs, then one, before Fajr.',
         '**Not sure you will wake?** Pray shafʿ and witr before you sleep. If you then wake, pray in twos and do not pray witr again.',
       ],
       sources: [
@@ -630,6 +630,310 @@ npm run update:preview
 
 ---
 
+### Task 6: The order of the night, drawn
+
+Approved by Iyad, 13 Sep 2026: "show the order as a small drawn timeline of
+the night instead of four bullets". The marks carry the counts, which is the
+lesson: stacked pairs of dots for night prayer, **●● ●** in gold for shafʿ and
+witr, the same mark in outline for praying them before sleep. The words stay
+the section's own `bullets`, so the drawing adds no text of its own, a screen
+reader reads exactly what the bullets say, and the i18n manifest is untouched.
+Depends on Task 3 (the `order` section).
+
+**Files:**
+- Modify: `src/content/types.ts` (a `TimelineMark` type; a `timeline` field on `ReferenceSection`, directly after `bullets`)
+- Create: `src/components/teaching/timeline.tsx`
+- Modify: `src/app/reference/[id].tsx:288-292` (the bullets block in `Section`)
+- Modify: `src/content/learn/voluntary-prayers.ts` (the `order` section gains `timeline`)
+- Modify: `docs/curriculum-review-pile.md`, `docs/ui-redesign-plan.md`
+- Test: `scripts/night-check.mjs` (a new block before `if (failures > 0) {`)
+
+**Interfaces:**
+- Consumes: `ReferenceSection.bullets`; `TeachingBulletText` from `src/components/teaching/index.tsx`; `ThemedText` type `default` (fontSize 16, lineHeight 26, so a mark centres at y = 13); theme tokens `accent`, `gold`, `goldSoft`, `background`.
+- Produces: `export type TimelineMark = 'start' | 'pairs' | 'closing' | 'earlier'`; `ReferenceSection.timeline?: readonly TimelineMark[]`; `export function TeachingTimeline({ items, marks, last }: { items: readonly string[]; marks: readonly TimelineMark[]; last?: boolean })`.
+
+- [ ] **Step 1: Write the failing check.** Before `if (failures > 0) {` in `scripts/night-check.mjs`:
+
+```js
+/*
+  The night drawn as a timeline (Iyad, 13 Sep 2026): one mark per bullet,
+  marks from the known set, and the night-prayer page's order section drawn
+  start → pairs → closing → earlier. A mark list that drifts from its bullets
+  would draw the wrong count beside a sentence, which is a ruling on screen.
+*/
+{
+  const Learn = await import('../src/content/learn/index.ts');
+  const MARKS = new Set(['start', 'pairs', 'closing', 'earlier']);
+  const pages = Object.values(Learn).filter((value) => value && Array.isArray(value.sections));
+  for (const page of pages) {
+    for (const section of page.sections) {
+      if (!section.timeline) continue;
+      const bullets = section.bullets ?? [];
+      if (section.timeline.length !== bullets.length) {
+        fail(`${page.id}.${section.id}: ${section.timeline.length} timeline marks for ${bullets.length} bullets`);
+      }
+      for (const mark of section.timeline) {
+        if (!MARKS.has(mark)) fail(`${page.id}.${section.id}: unknown timeline mark "${mark}"`);
+      }
+    }
+  }
+  const order = Learn.QIYAM_AL_LAYL.sections.find((section) => section.id === 'order');
+  if (order?.timeline?.join(',') !== 'start,pairs,closing,earlier') {
+    fail(`qiyam-al-layl.order: timeline is ${order?.timeline?.join(',') ?? 'missing'}`);
+  }
+  console.log('  night order: drawn as start, pairs, closing, earlier');
+}
+```
+
+- [ ] **Step 2: Run it to see it fail.**
+  Run: `npm run night:check`
+  Expected: FAIL with `qiyam-al-layl.order: timeline is missing`.
+
+- [ ] **Step 3: Add the type.** In `src/content/types.ts`, above `export type ReferenceSection`:
+
+```ts
+/**
+ * One mark on a drawn timeline, one per bullet (see `ReferenceSection.timeline`).
+ *
+ * The marks are counts, not decoration: `start` opens the line; `pairs` is
+ * prayer two rakʿahs at a time; `closing` is shafʿ and witr, two then one;
+ * `earlier` is that same closing prayed before sleep, drawn off the line.
+ */
+export type TimelineMark = 'start' | 'pairs' | 'closing' | 'earlier';
+```
+
+  And in `ReferenceSection`, directly after the `bullets` field:
+
+```ts
+  /**
+   * Draw `bullets` as a timeline, one mark per bullet, in order. The words
+   * stay the bullets', so nothing is written twice and a screen reader reads
+   * the same sentences. Ignored unless there are exactly as many marks as
+   * bullets, and `npm run night:check` fails if they differ.
+   */
+  timeline?: readonly TimelineMark[];
+```
+
+- [ ] **Step 4: Create `src/components/teaching/timeline.tsx`.** Import `Teaching` and `Spacing` from the same module `src/components/teaching/index.tsx` imports `Teaching` from (read its imports), and do not hardcode a colour: every colour comes from `useTheme()`.
+
+```tsx
+import { StyleSheet, View } from 'react-native';
+import Svg, { Circle, G, Rect } from 'react-native-svg';
+
+import { ThemedText } from '@/components/themed-text';
+import type { TimelineMark } from '@/content/types';
+import { useTheme } from '@/hooks/use-theme';
+
+import { TeachingBulletText } from './index';
+
+/** The spine's width. Marks centre on the first line of `default` text, whose lineHeight is 26. */
+const SPINE = 36;
+const MARK_Y = 13;
+
+/**
+ * Bullets drawn as the night they describe.
+ *
+ * The marks are the rakʿahs: stacked pairs for night prayer, two then one in
+ * gold for shafʿ and witr, and the same two-then-one in outline, below a
+ * hairline and off the thread, for praying them before sleep. The thread is
+ * the Awqat day page's: a hairline in goldSoft that meets each mark flush,
+ * with the mark on a disc of the page's own ground.
+ *
+ * Iyad, 13 Sep 2026 (docs/night-prayers-accuracy.md Part 2). A drawing that
+ * teaches a count is content, and is on the review pile.
+ */
+export function TeachingTimeline({
+  items,
+  marks,
+  last,
+}: {
+  items: readonly string[];
+  marks: readonly TimelineMark[];
+  last?: boolean;
+}) {
+  const theme = useTheme();
+  const lastOnThread = marks.map((mark) => mark !== 'earlier').lastIndexOf(true);
+
+  return (
+    <View>
+      {items.map((text, index) => {
+        const mark = marks[index];
+        const onThread = mark !== 'earlier';
+        const isLast = index === items.length - 1;
+        return (
+          <View
+            key={text}
+            style={[
+              styles.row,
+              isLast && last ? styles.endsSection : null,
+              !onThread ? [styles.detached, { borderTopColor: theme.goldSoft }] : null,
+            ]}>
+            <View
+              style={styles.spine}
+              accessibilityElementsHidden
+              importantForAccessibility="no-hide-descendants">
+              {onThread && index > 0 && (
+                <View style={[styles.thread, styles.threadTop, { backgroundColor: theme.goldSoft }]} />
+              )}
+              {onThread && index < lastOnThread && (
+                <View style={[styles.thread, styles.threadBottom, { backgroundColor: theme.goldSoft }]} />
+              )}
+              <View style={styles.mark}>
+                <Mark kind={mark} accent={theme.accent} gold={theme.gold} ground={theme.background} />
+              </View>
+            </View>
+            <ThemedText type="default" style={styles.text}>
+              <TeachingBulletText text={text} />
+            </ThemedText>
+          </View>
+        );
+      })}
+    </View>
+  );
+}
+
+function Mark({
+  kind,
+  accent,
+  gold,
+  ground,
+}: {
+  kind: TimelineMark;
+  accent: string;
+  gold: string;
+  ground: string;
+}) {
+  if (kind === 'start') {
+    return (
+      <Svg width={20} height={20} viewBox="0 0 20 20">
+        <Circle cx={10} cy={10} r={8} fill={ground} />
+        <Circle cx={10} cy={10} r={5.25} fill="none" stroke={accent} strokeWidth={1.5} />
+      </Svg>
+    );
+  }
+  if (kind === 'pairs') {
+    return (
+      <Svg width={20} height={34} viewBox="0 0 20 34">
+        <Rect x={3} y={4} width={14} height={28} rx={7} fill={ground} />
+        {[0, 1, 2].map((row) => (
+          <G key={row} opacity={1 - row * 0.3}>
+            <Circle cx={7} cy={10 + row * 8} r={2} fill={accent} />
+            <Circle cx={13} cy={10 + row * 8} r={2} fill={accent} />
+          </G>
+        ))}
+      </Svg>
+    );
+  }
+  const outline = kind === 'earlier';
+  return (
+    <Svg width={26} height={20} viewBox="0 0 26 20">
+      <Rect x={0} y={3} width={26} height={14} rx={7} fill={ground} />
+      {[4.5, 10.5, 20.5].map((cx) => (
+        <Circle
+          key={cx}
+          cx={cx}
+          cy={10}
+          r={2.25}
+          fill={outline ? ground : gold}
+          stroke={gold}
+          strokeWidth={outline ? 1.25 : 0}
+        />
+      ))}
+    </Svg>
+  );
+}
+
+const styles = StyleSheet.create({
+  row: {
+    flexDirection: 'row',
+    paddingBottom: Teaching.bullet.marginBottom,
+  },
+  endsSection: {
+    paddingBottom: Teaching.page.sectionGap,
+  },
+  detached: {
+    borderTopWidth: StyleSheet.hairlineWidth,
+    paddingTop: Teaching.bullet.marginBottom,
+  },
+  spine: {
+    width: SPINE,
+    position: 'relative',
+  },
+  thread: {
+    position: 'absolute',
+    left: SPINE / 2,
+    width: StyleSheet.hairlineWidth,
+  },
+  threadTop: {
+    top: 0,
+    height: MARK_Y,
+  },
+  threadBottom: {
+    top: MARK_Y,
+    bottom: 0,
+  },
+  mark: {
+    position: 'absolute',
+    top: MARK_Y - 10,
+    left: 0,
+    right: 0,
+    alignItems: 'center',
+  },
+  text: {
+    flex: 1,
+  },
+});
+```
+
+  Add the `Teaching` import line you found in Step 4's first sentence. If `theme.background` is not a token (check `src/constants/theme.ts`), use the token the reference screen paints its page with and name it in the report.
+
+- [ ] **Step 5: Render it.** In `Section` in `src/app/reference/[id].tsx`, replace the bullets block (currently `{bullets.map((text, index) => ( <TeachingBullet …> … ))}`) with:
+
+```tsx
+      {section.timeline && section.timeline.length === bullets.length ? (
+        <TeachingTimeline items={bullets} marks={section.timeline} last={trailing === 'bullets'} />
+      ) : (
+        bullets.map((text, index) => (
+          <TeachingBullet key={text} last={index === bullets.length - 1 && trailing === 'bullets'}>
+            <TeachingBulletText text={text} />
+          </TeachingBullet>
+        ))
+      )}
+```
+
+  and add `import { TeachingTimeline } from '@/components/teaching/timeline';` beside the other teaching imports.
+
+- [ ] **Step 6: Mark the section.** In `QIYAM_AL_LAYL`'s `order` section (Task 3), directly after `bullets`:
+
+```ts
+      timeline: ['start', 'pairs', 'closing', 'earlier'],
+```
+
+- [ ] **Step 7: Run the checks.**
+  Run: `npx tsc --noEmit && npm run night:check && npm run style:check && npm run nav:check`
+  Expected: `tsc` clean; `night:check` prints `night order: drawn as start, pairs, closing, earlier` and the final `✓`; `style:check` unchanged; `nav:check` shows only its pre-existing finding.
+
+- [ ] **Step 8: Look at it (controller).** 360pt, dark then light, `/reference/qiyam-al-layl`, "What comes first?". Check:
+  - the thread meets each mark flush, with no gap between rows;
+  - the marks centre on each bullet's first line;
+  - the earlier row sits below its hairline, off the thread;
+  - gold appears only on the closing marks;
+  - nothing wraps into the spine.
+  Adjust `MARK_Y`, the mark boxes or the row padding, never a local `fontSize`.
+
+- [ ] **Step 9: Record it.**
+  - Add to `docs/curriculum-review-pile.md`, "The night prayers": `- **The drawn order** on the night-prayer page: pairs of dots for night prayer, two-then-one for shafʿ and witr, the outline for praying them before sleep. A drawing that teaches a count is content (CLAUDE.md); check the marks say what the bullets say.`
+  - Add to `docs/ui-redesign-plan.md` under "The audit, 13 Sep": `- **The order of the night is drawn**, not listed: a thread with marks that are the rakʿahs (TeachingTimeline). The bullets stay the words.`
+
+- [ ] **Step 10: Commit.**
+
+```bash
+git add src/content/types.ts src/components/teaching/timeline.tsx 'src/app/reference/[id].tsx' src/content/learn/voluntary-prayers.ts scripts/night-check.mjs docs/curriculum-review-pile.md docs/ui-redesign-plan.md
+git commit -m "Night-prayer page draws the order: marks that are the rakʿahs"
+```
+
+---
+
 ## Self-review
 
 - **Spec coverage (Part 2):**
@@ -643,4 +947,5 @@ npm run update:preview
   - The minimum of two light rakʿahs is ◐, so it is not printed. The page's existing "Two rakʿahs, on one night, is the thing itself" stands on IslamQA 50070 and Bukhari 6465.
 - **Placeholder scan:** none. Every copy string and code block is final.
 - **Type consistency:** `unitNames` is defined in Task 1, Step 3 and used in Steps 4–5. `spokenName` already exists (`src/content/prayers.ts:184`). The witr guide's step ids stay `r1-…` to `r3-…`.
-- **Held, not in this plan:** the qunut guide step (a transliteration from a source and a recording); a visual timeline of the night (see the note to Iyad in conversation, not built).
+- **Held, not in this plan:** the qunut guide step (a transliteration from a source and a recording).
+- **Task 6 added 13 Sep 2026** on Iyad's approval of the drawn timeline. It consumes Task 3's `order` bullets, whose third line now ends "before Fajr" so the drawn line has an end without the drawing carrying words of its own.

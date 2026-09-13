@@ -311,13 +311,17 @@ worship-changing first.
   its own "still counts, but most scholars dislike it" (IslamWeb 92752).
   Separating the two and the one is the majority view (IslamWeb 58212) and
   Ibn ʿUmar's practice (Bukhari 991).
+- **"All three together are also called witr"**, added to "What are shafʿ and
+  witr?" so "That is witr" (the one rakʿah) and "witr of five, three or one"
+  (Abu Dawud 1422) do not read as a contradiction. Model-written.
 - **The Hanafi note**: three together, sitting after the second, qunut
   before bowing (SeekersGuidance, Faraz Rabbani), and "Pray it with them"
   (IslamQA 66613). Right for someone who otherwise follows the guide?
 - **"Do I have to?"** now reads "For most scholars no. The Hanafi school says
   yes."
-- "When": always last, before sleep if you might not wake
-  (Muslim 755, Abu Dawud 1434, IslamWeb 2165).
+- **"When"**: best last, before sleep if you might not wake (Muslim 755, Abu
+  Dawud 1434, IslamWeb 2165). In Ramadan, witr with the imam at taraweeh and
+  not repeated later, the same advice as the Taraweeh page (IslamQA 232790).
 - **"What if I prayed witr and then wake up?"**: pray in twos and do not
   pray witr again (Abu Dawud 1439, IslamWeb 2165).
 - **A missed witr**: "Pray it when you wake up, or whenever you remember"
@@ -328,6 +332,15 @@ worship-changing first.
 - "What is the qunut?": a beginner does not need it; mosques differ on
   timing and on before or after bowing (Dar al-Iftaa 15984; Abu Dawud
   1425). The qunut is not a step in the guide.
+- **The guide's intention** now reads "praying shafʿ, the two rakʿahs before
+  witr", and for the third rakʿah "one rakʿah of witr. It is a prayer of its
+  own, so it opens with the takbir." Right wording for a beginner?
+- **The guide's row** reads "After ʿIsha until Fajr, to close the night". It
+  no longer says "before you sleep or at the end of the night"; the page
+  carries that choice.
+- **The guide's surah note** now says "In shafʿ and witr" where it said "In
+  witr" (Nasaʾi 1699), so it no longer reads as three surahs in the one
+  rakʿah.
 
 ### Qiyam prayer / Tahajjud — `learn/voluntary-prayers.ts` (QIYAM_AL_LAYL)
 
@@ -346,6 +359,10 @@ worship-changing first.
   night prayer, then shafʿ and witr last, or before sleep if you might not
   wake (Bukhari 1180, 990, 998, Muslim 755, Abu Dawud 1439, IslamWeb
   416554). Check the order is right.
+- **The Hanafi note** now also sits under "What comes first?", the same
+  sentence and sources as the Shafʿ and Witr page (SeekersGuidance, Faraz
+  Rabbani; IslamQA 66613), because the section teaches and draws two rakʿahs
+  then one.
 - **The drawn order** on the night-prayer page: pairs of dots for night
   prayer, two-then-one for shafʿ and witr, the outline for praying them
   before sleep. A drawing that teaches a count is content (CLAUDE.md); check
@@ -362,7 +379,9 @@ worship-changing first.
 - **Witr with the imam when you will pray again later**: pray witr with him
   and do not repeat it later (IslamQA 232790, Abu Dawud 1439). A plain note
   says people also stand after his last salam and add a rakʿah (Ibn Baz in
-  IslamQA 65702; IslamWeb 491695).
+  IslamQA 65702; IslamWeb 491695). The note also says adding that rakʿah
+  "still counts as staying with the imam", which keeps the reward in Abu Dawud
+  1375. Check the two fatwas say so.
 - **Women**: home is better in principle, and the mosque is good when it
   helps her pray (IslamQA 222751).
 - **Finishing the Qur'an** over the month: recommended, not required

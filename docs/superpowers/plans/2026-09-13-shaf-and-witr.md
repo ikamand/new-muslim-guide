@@ -598,8 +598,12 @@ git commit -m "Taraweeh: women at home or mosque, finishing the Qur'an, the imam
 
 ```ts
   /* Shafʿ, typed the ways people type it without the ʿ. */
-  ['shafʿ', 'shaf', 'shafa', 'shafaa'],
+  ['shafʿ', 'shafa', 'shafaa'],
 ```
+
+  Built without the bare `'shaf'` (commit 8852d72): as a synonym it starts
+  "Shafi`i" and put every prayer's final sitting into a search for "shafa".
+  Do not add it back.
 
   Run `npm run search:check` again. Expected: `shafa` and `witr` pass; only the two pre-existing failures remain.
 

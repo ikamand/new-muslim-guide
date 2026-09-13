@@ -563,5 +563,10 @@ The build plan is `docs/superpowers/plans/2026-09-13-shaf-and-witr.md`.
 - 5fb5c31: the Witr page becomes Shafʿ and Witr.
 - 83eb4df: the night-prayer page states the order.
 - 421f15d and 13a1b89: the order drawn as a timeline, and its thread fix.
-- This commit: shafʿ findable in search; the review pile and to-do list
-  brought up to date.
+- 0f0c355: shafʿ findable in search; the review pile and to-do list brought
+  up to date.
+- 7acf972: the content-verify report caught up with the rename.
+- 8852d72: search leaves out the bare "shaf", which matched Shafi`i.
+- 8bc0a25: the final review's fixes. Ramadan witr said the same way
+  on both pages, the Hanafi note beside the drawn order, the guide's surah
+  note, a guard on unit names, and tighter night checks.

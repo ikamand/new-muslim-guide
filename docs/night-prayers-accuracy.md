@@ -404,3 +404,154 @@ instruction and the addition are the reviewer's.
 - The Bukhari 990 citation (§5c): Muslim 755 and Bukhari 1178.
 - The recitation reason in the guides (§7).
 - The quote marks in §11.
+
+---
+
+# Part 2 — Shafʿ, witr and the order of the night (13 Sep 2026, later)
+
+Iyad asked for the witr page to become **"Shafʿ and Witr"**, and for fresh
+research, web search included, on shafʿ and witr, qiyam al-layl, tahajjud and
+taraweeh: when each is prayed, how many rakʿahs, how, and what comes before
+what. He gave his current understanding to test, and a written summary of
+his own to compare against. The goal is his: *accurate information in a very
+simplified way for new Muslims.*
+
+Three research passes ran (shafʿ and witr in the four schools; the order of
+the night; qiyam, tahajjud and taraweeh re-checked). Everything below marked
+✓ was then opened by hand. ◐ was opened by a research pass only.
+
+**A correction to Part 1's note on failed URLs.** binbaz.org.sa loads an
+unrelated fatwa when a URL carries only the number. The same number WITH its
+Arabic slug loads the right fatwa. So fatwas/4930 and fatwas/12314 may have
+been the right numbers with no slug. Cite binbaz only by slugged URL.
+
+## The hypothesis, tested
+
+Iyad: *"shafʿ and witr goes right after ʿIsha until Fajr, then comes qiyam
+al-layl and witr if witr has not been prayed, then tahajjud if one fell
+asleep."*
+
+| Part | Verdict | Why |
+|---|---|---|
+| Shafʿ and witr can be prayed any time after ʿIsha until Fajr | **Confirmed** | ✓ Bukhari 996: he prayed witr at every part of the night. ✓ IslamWeb 2165. |
+| …and they come first, right after ʿIsha | **Not the default** | ✓ Bukhari 998 and Muslim 751.02: "Make witr the end of your night prayer." ✓ Muslim 755: early for whoever fears not waking, late for whoever will wake, "and that is preferable". Straight after ʿIsha is sound for someone who will not get up: ✓ Abu Dawud 1434, where the Prophet ﷺ calls Abu Bakr's early witr careful and ʿUmar's late witr strong. ✓ SeekersGuidance (Shafiʿi, from Mughni al-Muhtaj): "the best time for Witr is just after the Sunna rak'as that follow… 'Isha unless one intends to offer… Tahajjud". ✓ IslamWeb 22376: praying it early on purpose while sure of praying later is permitted with dislike, "as the Malikis state". |
+| Then qiyam al-layl | **Not a separate stage** | ✓ IslamWeb 416554: "qiyam al-layl is broader than shafʿ and witr, and shafʿ and witr are included in qiyam al-layl". Shafʿ and witr are the end of the night prayer. |
+| …and witr, if not yet prayed | **Confirmed** | ✓ IslamWeb 491695: pray qiyam or tahajjud after taraweeh, and do not repeat witr. |
+| Then tahajjud if one fell asleep | **Partly** | Tahajjud is the same night prayer, called so when prayed after sleep (✓ IslamWeb 138716), not a third stage after qiyam. |
+
+**Where the two sunnah rakʿahs of ʿIsha fit:** straight after ʿIsha (✓ Bukhari
+1180), and they are **not** the shafʿ (✓ IslamWeb 18778: "the regular sunnah
+of ʿIsha is something other than the two rakʿahs of shafʿ").
+
+So the accurate shape is not three stages but one night prayer with a fixed
+ending:
+
+**ʿIsha → its 2 sunnah → night prayer in pairs (any amount; tahajjud if after
+sleep; taraweeh in Ramadan) → shafʿ and witr last → Fajr.**
+
+The only choice is where shafʿ and witr go: at the end if you will wake, and
+before sleeping if you might not. If you prayed them early and then wake, pray
+in pairs and do not pray witr again.
+
+## Shafʿ
+
+- **What it is.** Shafʿ means even. ✓ IslamWeb 18778: shafʿ is "the rakʿahs a
+  person prays before witr, whether two, four or six". The common usage is
+  the two rakʿahs straight before the witr rakʿah (✓ IslamWeb 416554).
+- **In the schools** (◐ research pass; the rows marked ✓ re-opened):
+  - **Maliki.** Shafʿ is a named practice with its own ruling. ✓ IslamWeb
+    185331: the Maliki school has no sunnah after ʿIsha "except shafʿ and
+    witr". Witr is one rakʿah after a shafʿ. Joining them is disliked (✓
+    IslamWeb 58212). Surahs: Al-Aʿla and Al-Kafirun in shafʿ, then Al-Ikhlas
+    and the two muʿawwidhat in witr (◐ Mukhtasar Khalil).
+  - **Shafiʿi.** Separating is better (✓ IslamWeb 58212). The minimum
+    optimum is two with a salam, then one (✓ SeekersGuidance). Surahs:
+    Al-Aʿla, Al-Kafirun, then Al-Ikhlas, Al-Falaq and An-Nas (✓).
+  - **Hanbali.** Separating is better (✓ IslamWeb 58212). Surahs: Al-Aʿla,
+    Al-Kafirun, Al-Ikhlas (◐ Zad al-Mustaqniʿ).
+  - **Hanafi.** Three rakʿahs joined with one salam are required, and a
+    single rakʿah is not valid (✓ SeekersGuidance, IslamWeb 58212).
+- **So "two, salam, one" is the preferred form in three schools** and invalid
+  in one. Iyad's summary teaches it as "a simple method", not the only one.
+  That is accurate, and it needs the Hanafi sentence beside it.
+
+## What is new, compared with Part 1 and with Iyad's summary
+
+**Confirmed from before:** night prayer after ʿIsha until Fajr, in pairs, best
+in the last third; tahajjud named for sleep; taraweeh after ʿIsha and its
+sunnah, 8 or 20; no two witrs (✓ Abu Dawud 1439, Tirmidhi 470); witr when you
+wake (✓ Abu Dawud 1431); qunut differs by school (✓ Dar al-Iftaa 15984).
+
+**New:**
+
+1. **Shafʿ is a term the app never uses.** It is named practice in the Maliki
+   school and common usage elsewhere. The witr page and guide call all three
+   rakʿahs "witr".
+2. **The sunnah of ʿIsha is not shafʿ** (✓ IslamWeb 18778). A convert who
+   hears "two after ʿIsha" twice will merge them.
+3. **The order, stated plainly** (above). Nothing in the app says it in one
+   place.
+4. **Early witr is sound, not second-class, for someone who will not wake**
+   (✓ Abu Dawud 1434, where both ways are praised). Praying it early on
+   purpose while intending to wake is disliked (✓ IslamWeb 22376).
+5. **Taraweeh:**
+   - It is qiyam al-layl in Ramadan, and more can be prayed later without a
+     second witr (✓ IslamWeb 491695).
+   - Finishing the Qur'an is recommended, not required, and calm is better
+     (✓ IslamQA 66504).
+   - For women, home is better in principle and the mosque is good when it
+     keeps her praying (✓ IslamQA 222751). **The app's "praying it at the
+     mosque is better" is right for men only.**
+   - **Adding a rakʿah after the imam's witr** is backed by Ibn Baz: "he
+     stayed with the Imam until he finished" (✓ IslamQA 65702). ◐ IslamWeb
+     186273 prefers it for someone who will pray later. Part 1 recommended
+     dropping it for consistency; the stronger reason to keep it is that a
+     beginner will SEE people stand up after the imam's salam and wonder why.
+6. **Tahajjud: "many", not "most".** ◐ The Mawsuʿah 2/232, read by a
+   research pass, says «كثير من الفقهاء» use tahajjud for any night prayer;
+   IslamQA 143240 renders it "the majority". The page already says "many".
+   The source tag `school: 'the majority'` on 143240 and "most jurists" in the
+   file's header comment overstate it. The al-maktaba.org and shamela mirrors
+   refused a hand check (403).
+7. **The minimum night prayer is two light rakʿahs by agreement of the
+   fuqaha** (◐ Mawsuʿah 14/88; same 403).
+8. **Weak wordings to avoid:**
+   - The qunut ending with a blessing on the Prophet ﷺ is weak (✓ Nasaʾi
+     1746, all three graders Daʿif). The dua book's line has no such ending.
+   - ʿUmar's taraweeh of twenty-three is Mauquf Munkar (✓ Malik 250); the
+     report of eleven is Mauquf Sahih (✓ Malik 249). Neither is on a page.
+
+**Against Iyad's summary:**
+
+- It is accurate throughout.
+- Four points need a clause:
+  - "One rakʿah is a valid form of witr": valid in two schools and invalid in
+    one, and most dislike it alone (✓ IslamWeb 92752).
+  - "Witr is a voluntary prayer": the Hanafi school holds it required.
+  - Qunut "may be made": correct, with the timing difference.
+  - The recommended surahs: some add Al-Falaq and An-Nas in the last rakʿah.
+- It does not state the order; Part 2 does.
+
+## The simplest accurate model
+
+Six lines, each sourced, none wrong in any school except where the Hanafi
+sentence says so:
+
+1. After ʿIsha, pray its 2 sunnah rakʿahs. (✓ Bukhari 1180)
+2. Night prayer is any amount after ʿIsha until Fajr, two rakʿahs at a time.
+   It is called tahajjud if you slept first, and taraweeh in Ramadan.
+   (✓ Bukhari 990, IslamWeb 138716)
+3. Close it with shafʿ and witr: two rakʿahs, salam, then one rakʿah.
+   (✓ IslamWeb 416554, IslamWeb 58212)
+4. If you will wake, pray shafʿ and witr last. If you might not, pray them
+   before you sleep. (✓ Muslim 755, Abu Dawud 1434)
+5. If you prayed witr and then wake, pray in twos, and do not pray witr again.
+   (✓ Abu Dawud 1439, IslamWeb 2165)
+6. In Ramadan, pray witr with the imam. If you will pray again later, do not
+   repeat it. (✓ IslamWeb 491695, IslamQA 232790)
+
+Hanafi sentence: *at many mosques witr is three rakʿahs together, sitting
+after the second without the salam, with the qunut before bowing in the
+third; pray it with them.* (✓ SeekersGuidance, ✓ IslamQA 66613)
+
+The build plan is `docs/superpowers/plans/2026-09-13-shaf-and-witr.md`.

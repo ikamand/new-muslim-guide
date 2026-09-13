@@ -286,3 +286,66 @@ is `docs/scholarly-review.md` §1.12.
 - **The reason**: Bukhari 3273, "between the two horns of a devil". Check
   the paraphrase, and whether the page should carry it at all.
 
+
+## The night prayers — added 13 Sep 2026
+
+From `docs/night-prayers-accuracy.md`, which carries every source and marks
+which were opened by hand. Iyad asked for all of its findings to be fixed the
+same day. What follows is what a qualified reader still has to clear, most
+worship-changing first.
+
+### ʿIsha is valid until Fajr — `learn/daily-prayers.ts`, `lib/prayer-times.ts`
+
+- **The window.** The pray button now stays until Fajr, and the ʿIsha page
+  says "For most scholars ʿIsha is valid until Fajr", on Muslim 612 (the
+  middle of the night as its preferred end) and IslamWeb 228886 (the
+  majority). Ibn ʿUthaymin's view that it ends at the middle is a schools
+  note (IslamWeb 136795). Is "Its preferred time has passed" the right line
+  to show at 1am, and should the page say that delaying past the middle
+  needs a reason?
+
+### Witr — `learn/voluntary-prayers.ts` (WITR), `prayers.ts` (the witr spec)
+
+- **Three, as two then one**, which the page and the guide now teach. One on
+  its own "still counts, but most scholars dislike it" (IslamWeb 92752).
+  Separating the two and the one is the majority view (IslamWeb 415267) and
+  Ibn ʿUmar's practice (Bukhari 991).
+- **The Hanafi note**: three together, sitting after the second, qunut
+  before bowing (SeekersGuidance, Faraz Rabbani), and "Pray it with them"
+  (IslamQA 66613). Right for someone who otherwise follows the guide?
+- **"Do I have to?"** now reads "For most scholars no. The Hanafi school says
+  yes."
+- **Before or after qiyam or tahajjud, and never twice**: Muslim 755, Bukhari
+  1178, Abu Dawud 1439, IslamWeb 2165.
+- **A missed witr**: "Pray it when you wake up, or whenever you remember"
+  (Abu Dawud 1431, Tirmidhi 465). Whether it is made up as an even number
+  in the day is left out.
+- **Surahs**: the guide's note names Al-Aʿla, Al-Kafirun and Al-Ikhlas
+  (Nasaʾi 1699). The qunut is not a step in the guide.
+
+### Qiyam prayer / Tahajjud — `learn/voluntary-prayers.ts` (QIYAM_AL_LAYL)
+
+- **The definition that leads**: "When you sleep first. Qiyam al-layl prayed
+  after waking from sleep is tahajjud", followed by "Many scholars use the
+  word for any prayer at night" (IslamQA 143240, IslamWeb 138716). Iyad's
+  framing. Is that order right when most jurists use the two words for the
+  same thing?
+- **Time**: after Isha until Fajr, best in the last third and after sleep
+  (IslamQA 305489, Bukhari 1145).
+- **"Why pray it?"**: Muslim 1163, and Qur'an 17:79 as "something extra" for
+  the Prophet ﷺ, no longer argued from.
+- **Recitation**: the night guides now say "quietly or aloud in a low voice,
+  whichever helps you focus" (Abu Dawud 1437; Ibn Baz in IslamQA 67618).
+
+### Taraweeh — `learn/taraweeh.ts`, new
+
+- **Arriving late**: join intending Isha and finish after the salam (Ibn Baz,
+  IslamQA 37829), with a Hanafi note to pray Isha separately first
+  (SeekersGuidance, Yusuf Weltch). "Separately first" is inferred from the
+  ruling, not stated by it. The most practical ruling on the page.
+- **"Both are sound"** about eight and twenty rakʿahs (IslamQA 9036), a live
+  argument in many communities.
+- **Witr with the imam when you will pray again later**: add a rakʿah after
+  his salam, or keep the witr and do not repeat it (IslamQA 232790).
+- **Leaving early**: allowed, but staying to the end is recorded as the whole
+  night (Abu Dawud 1375, Tirmidhi 806; IslamQA 153247).

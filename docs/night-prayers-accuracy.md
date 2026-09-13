@@ -97,6 +97,20 @@ the audio gate.
     153247).
   - Witr and qunut: ✓ IslamQA 232790, ✓ Dar al-Iftaa 15984.
   - Why together: Bukhari 2012 and 2010.
+- §11, the dhikr after witr in the dua book: **quote marks done.** The Hisn
+  cleaner stripped the first and last quote mark of every quoted line,
+  assuming one quotation. On a line holding two quotations with narration
+  between, that left the inner marks the wrong way round. It now strips only
+  a line with exactly two marks, and `assertOnlyMarkersRemoved` follows the
+  same rule. The regenerated `hisn.ts` changed on 9 lines, every one of them
+  only in quote marks: no Arabic, no wording, no upstream drift. The
+  instruction inside the Arabic ("three times, raising the voice on the
+  third") and al-Daraqutni's addition are still the reviewer's.
+- **Review pile.** Every change above is listed for a qualified reader in
+  `docs/curriculum-review-pile.md`, "The night prayers", most worship-changing
+  first.
+- **Not done:** the optional qunut step in the witr guide, held for a
+  transliteration from a source and a recording.
   - The night guides (witr, qiyam, tahajjud) say "quietly or aloud", citing
     Abu Dawud 1437; istikhara and tawba keep "quietly". The seven guides with
     no `units` or `night` were compared step for step against the previous

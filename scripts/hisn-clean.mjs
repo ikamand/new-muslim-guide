@@ -110,13 +110,22 @@ function unquote(s) {
   // three times.`, and requiring the quote to end the string left the opening
   // one orphaned on 27 lines.
   let close = -1;
-  for (let i = s.length - 1; i > 0; i -= 1) {
+  let quotes = 0;
+  for (let i = 0; i < s.length; i += 1) {
     if (QUOTES.has(s[i])) {
+      quotes += 1;
       close = i;
-      break;
     }
   }
-  if (close <= 0) return s;
+  /*
+    Only a line that is ONE quotation loses its wrapper. The dhikr after witr
+    is two, with narration between: `"Glory be to the Sovereign, the Most
+    Holy," three times, … saying: "Lord of the angels and the Spirit."`.
+    Taking its first and last marks left `…Most Holy," three times, …
+    saying: "Lord…` on screen, quotes the wrong way round (13 Sep 2026,
+    docs/night-prayers-accuracy.md §11). A line like that keeps every mark.
+  */
+  if (quotes !== 2 || close <= 0) return s;
   return tidy(s.slice(1, close) + s.slice(close + 1));
 }
 
@@ -183,7 +192,14 @@ export function assertOnlyMarkersRemoved(raw, cleaned, where, field) {
   */
   if (field === 'english') {
     const open = source.search(/\S/);
-    if (open >= 0 && QUOTES.has(source[open])) {
+    /*
+      And only from a line that is one quotation: exactly two quote marks. A
+      line holding two quotations with narration between keeps all four, the
+      rule `unquote` follows since 13 Sep 2026. Counted here from the raw
+      string, not by calling `unquote`.
+    */
+    const quoteMarks = [...source].filter((ch) => QUOTES.has(ch)).length;
+    if (open >= 0 && QUOTES.has(source[open]) && quoteMarks === 2) {
       let close = -1;
       for (let i = source.length - 1; i > open; i -= 1) {
         if (QUOTES.has(source[i])) {

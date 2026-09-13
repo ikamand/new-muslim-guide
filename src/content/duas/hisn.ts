@@ -519,7 +519,7 @@ export const HISN: readonly HisnOccasion[] = [
         "id": 1269031,
         "kind": "quoted",
         "arabic": "اللَّهُمَّ اجْعَلْ لِي نُوراً فِي قَبْرِي... وَنُوراً فِي عِظَامِي وَزِدْنِي نُوراً، وَزِدْنِي نُوراً، وَزِدْنِي نُوراً وَهَبْ لِي نُوراً عَلَى نُورٍ.",
-        "english": "O Allah, grant me light in my grave... and light in my bones.\" \"And increase me in light, increase me in light, and increase me in light.\" \"And bestow upon me light upon light.",
+        "english": "\"O Allah, grant me light in my grave... and light in my bones.\" \"And increase me in light, increase me in light, and increase me in light.\" \"And bestow upon me light upon light.\"",
         "emphasis": [
           "اللَّهُمَّ اجْعَلْ لِي نُوراً فِي قَبْرِي... وَنُوراً فِي عِظَامِي",
           "وَزِدْنِي نُوراً، وَزِدْنِي نُوراً، وَزِدْنِي نُوراً",
@@ -656,7 +656,7 @@ export const HISN: readonly HisnOccasion[] = [
         "id": 1269070,
         "kind": "quoted",
         "arabic": "اللَّهُ أَكْبَرُ كَبِيرَاً، اللَّهُ أَكْبَرُ كَبِيراً، اللَّهُ أَكْبَرُ كَبِيراً، وَالْحَمْدُ لِلَّهِ كَثيراً، وَالْحَمْدُ لِلَّهِ كَثيراً، وَالْحَمْدُ لِلَّهِ كَثيراً، وَسُبْحَانَ اللَّهِ بُكْرَةً وَأَصِيلاً ثَلاثاً أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ: مِنْ نَفْخِهِ، وَنَفْثِهِ، وَهَمْزِهِ.",
-        "english": "Allah is the absolute Greatest, Allah is the absolute Greatest, Allah is the absolute Greatest; and abundant praise is due to Allah, abundant praise is due to Allah, abundant praise is due to Allah; and glory be to Allah in the morning and evening\", three times. \"I seek refuge in Allah from the Devil: from his blowing, his spitting, and his temptations.",
+        "english": "\"Allah is the absolute Greatest, Allah is the absolute Greatest, Allah is the absolute Greatest; and abundant praise is due to Allah, abundant praise is due to Allah, abundant praise is due to Allah; and glory be to Allah in the morning and evening\", three times. \"I seek refuge in Allah from the Devil: from his blowing, his spitting, and his temptations.\"",
         "footnote": "أخرجه أبو داود، 1/ 203، برقم 764، وابن ماجه، 1/ 265، برقم، 807، وأحمد، 4/ 85، برقم 16739، وقال شعيب الأرناؤوط في تحقيقه لمسند: ((حسن لغيره))، وقال عبد القادر الأرناؤوط في تخريجه للكلم الطيب لابن تيمية، برقم 78: ((وهو حديث صحيح بشواهده))، وذكره الألباني في صحيح الكلم الطيب، برقم 62، وأخرجه مسلم عن ابن عمر –رضي الله عنهما- بنحوه، وفيه قصة، 1/ 420، برقم 601."
       },
       {
@@ -877,7 +877,7 @@ export const HISN: readonly HisnOccasion[] = [
         "id": 1269122,
         "kind": "quoted",
         "arabic": "اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ، وَعَلَى آلِ مُحَمَّدٍ، كَمَا صَلَّيتَ عَلَى إِبْرَاهِيمَ، وَعَلَى آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ، اللَّهُمَّ بَارِكْ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا بَارَكْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ.",
-        "english": "Allāhumma salli ‘ala Muhammadin wa ‘ala āli Muhammadin kama sallayta ‘ala Ibrāhīma wa ‘ala āli Ibrāhīma, innaka Hamīdun Majīd. Allāhumma bārik ‘ala Muhammadin wa ‘ala āli Muhammadin kama bārakta ‘ala Ibrāhīma wa ‘ala āli Ibrāhīma, innaka Hamīdun Majīd.\" (O Allah, bestow Your peace upon Muhammad and the family of Muhammad as you bestowed Your peace upon Abraham and the family of Abraham, indeed, You are Praiseworthy and Glorious. O Allah, bless Muhammad and the family of Muhammad as You blessed Abraham and the family of Abraham, indeed, You are Praiseworthy and Glorious.",
+        "english": "\"Allāhumma salli ‘ala Muhammadin wa ‘ala āli Muhammadin kama sallayta ‘ala Ibrāhīma wa ‘ala āli Ibrāhīma, innaka Hamīdun Majīd. Allāhumma bārik ‘ala Muhammadin wa ‘ala āli Muhammadin kama bārakta ‘ala Ibrāhīma wa ‘ala āli Ibrāhīma, innaka Hamīdun Majīd.\" (O Allah, bestow Your peace upon Muhammad and the family of Muhammad as you bestowed Your peace upon Abraham and the family of Abraham, indeed, You are Praiseworthy and Glorious. O Allah, bless Muhammad and the family of Muhammad as You blessed Abraham and the family of Abraham, indeed, You are Praiseworthy and Glorious.\"",
         "footnote": "البخاري مع الفتح، 6/ 408، برقم 3370، ومسلم، برقم 406."
       },
       {
@@ -1613,7 +1613,7 @@ export const HISN: readonly HisnOccasion[] = [
         "id": 1269339,
         "kind": "quoted",
         "arabic": "سُبْحَانَ المَلِكِ القُدُّوسِ ثلاثَ مرَّاتٍ والثَّالِثَةُ يَجْهَرُ بها ويَمُدُّ بها صَوتَهُ يقولُ: رَبِّ الْمَلاَئِكَةِ وَالرُّوحِ.",
-        "english": "Glory be to the Sovereign, the Most Holy,\" three times, and he raises his voice and prolongs it in the third one, saying: \"Lord of the angels and the Spirit.",
+        "english": "\"Glory be to the Sovereign, the Most Holy,\" three times, and he raises his voice and prolongs it in the third one, saying: \"Lord of the angels and the Spirit.\"",
         "emphasis": [
           "رَبِّ الْمَلاَئِكَةِ وَالرُّوحِ",
           "Lord of the angels and the Spirit"
@@ -1907,7 +1907,7 @@ export const HISN: readonly HisnOccasion[] = [
         "id": 1269408,
         "kind": "quoted",
         "arabic": "بَارَكَ اللَّهُ لَكَ فِي الْمَوْهُوبِ لَكَ، وَشَكَرْتَ الْوَاهِبَ، وَبَلَغَ أَشُدَّهُ، وَرُزِقْتَ بِرَّهُ. وَيَرُدُّ عَلَيْهِ الْمُهَــــــنَّأُ فَيَقُولُ: بَارَكَ اللَّهُ لَكَ وَبَارَكَ عَلَيْكَ، وَجَزَاكَ اللَّهُ خَيْراً، وَرَزَقَكَ اللَّهُ مِثْلَهُ، وَأَجْزَلَ ثَوَابَكَ.",
-        "english": "May Allah bless for you what has been granted to you, and may you thank the Giver, and may he reach maturity, and may you be granted his righteousness.\" The one being congratulated responds by saying: \"May Allah bless for you and bless upon you, and may Allah reward you goodness, and may He grant you the like of it, and may He increase your reward.",
+        "english": "\"May Allah bless for you what has been granted to you, and may you thank the Giver, and may he reach maturity, and may you be granted his righteousness.\" The one being congratulated responds by saying: \"May Allah bless for you and bless upon you, and may Allah reward you goodness, and may He grant you the like of it, and may He increase your reward.\"",
         "footnote": "ذُكِرَ من كلام الحسن البصري. انظر: تحفة المودود لابن القيم، ص 20، وعزاه لابن المنذر في الأوسط. قاله النووي في الأذكار، ص349، وانظر: صحيح الأذكار للنووي، لسليم الهلالي، 2/713، وتمام التخريج في الذكر والدعاء والعلاج بالرقى للمؤلف، 1/ 416."
       }
     ]
@@ -2408,7 +2408,7 @@ export const HISN: readonly HisnOccasion[] = [
         "id": 1269522,
         "kind": "quoted",
         "arabic": "إِذَا دُعِيَ أَحَدُكُمْ فَلْيُجِبْ، فَإِنْ كَانَ صَائِماً فَلْيُصَلِّ، وَإِنْ كَانَ مُفْطِراً فَلْيَطْعَمْ، وَمَعْنَى فَلْيُصَلِّ أَيْ: فَلْيَدْعُ.",
-        "english": "If any of you is invited, let him answer the invitation. If he is fasting, let him pray (for the host); if he is not fasting, let him eat.\" The meaning of \"let him pray is: let him supplicate.",
+        "english": "\"If any of you is invited, let him answer the invitation. If he is fasting, let him pray (for the host); if he is not fasting, let him eat.\" The meaning of \"let him pray\" is: let him supplicate.",
         "footnote": "مسلم، 2/ 1054، برقم 1150."
       }
     ]
@@ -2702,7 +2702,7 @@ export const HISN: readonly HisnOccasion[] = [
         "id": 1269587,
         "kind": "quoted",
         "arabic": "بِسْمِ اللَّهِ، وَالْحَمْدُ للَّهِ سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ وَإِنَّا إِلَى رَبِّنَا لَمُنقَلِبُونَ، الْحَمْدُ لِلَّهِ، الْحَمْدُ لِلَّهِ، الْحَمْدُ لِلَّهِ، اللَّهُ أَكْبَرُ، اللَّهُ أَكْبَرُ، اللَّهُ أَكْبَرُ، سُبْحَانَكَ اللَّهُمَّ إِنِّي ظَلَمْتُ نَفْسِي فَاغْفِرْ لِي؛ فَإِنَّهُ لاَ يَغْفِرُ الذُّنُوبَ إِلاَّ أَنْتَ.",
-        "english": "In the Name of Allah, and all praise is due to Allah.\" Glory be to Him Who has subjected this for us, for we could not have done it by ourselves. It is to our Lord that we will surely return. \"Praise be to Allah; praise be to Allah; praise be to Allah. Allah is the Greatest; Allah is the Greatest; Allah is the Greatest. Glory be to You, O Allah, I have wronged myself, so forgive me, for none can forgive sins but You.",
+        "english": "\"In the Name of Allah, and all praise is due to Allah.\" Glory be to Him Who has subjected this for us, for we could not have done it by ourselves. It is to our Lord that we will surely return. \"Praise be to Allah; praise be to Allah; praise be to Allah. Allah is the Greatest; Allah is the Greatest; Allah is the Greatest. Glory be to You, O Allah, I have wronged myself, so forgive me, for none can forgive sins but You.\"",
         "footnote": "أبو داود، 3/ 34، برقم 2602، والترمذي، 5/ 501، برقم 3446، وانظر: صحيح الترمذي، 3/156، الآيتان من سورة الزخرف:13- 14."
       }
     ]
@@ -2716,7 +2716,7 @@ export const HISN: readonly HisnOccasion[] = [
         "id": 1269593,
         "kind": "prose",
         "arabic": "اللَّهُ أَكْبَرُ، اللَّهُ أَكْبَرُ، اللَّهُ أَكْبَرُ، سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ وَإِنَّا إِلَى رَبِّنَا لَمُنقَلِبُونَ اللَّهُمَّ إِنّا نَسْأَلُكَ فِي سَفَرِنَا هَذَا البِرَّ وَالتَّقْوَى، وَمِنَ الْعَمَلِ مَا تَرْضَى، اللَّهُمَّ هَوِّنْ عَلَيْنَا سَفَرَنَا هَذَا وَاطْوِ عَنَّا بُعْدَهُ، اللَّهُمَّ أَنْتَ الصَّاحِبُ فِي السَّفَرِ، وَالْخَليفَةُ فِي الْأَهْلِ، اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ وَعْثَاءِ السَّفَرِ، وَكَآبَةِ الْمَنْظَرِ، وَسُوءِ الْمُنْقَلَبِ فِي الْمَالِ وَالْأَهْلِ،",
-        "english": "Allah is the Greatest; Allah is the Greatest; Allah is the Greatest.\" Glory be to Him Who has subjected this for us, for we could not have done it by ourselves. It is to our Lord that we will surely return. \"O Allah, we ask You on this journey of ours for goodness and piety, and for deeds that are pleasing to You. O Allah, make this journey easy for us and make its distance short for us. O Allah, You are the Companion on the journey and the Successor in the family behind. O Allah, I seek refuge in You from the journey's hardships, the terrible sight, and a misfortunate return to our property and family."
+        "english": "\"Allah is the Greatest; Allah is the Greatest; Allah is the Greatest.\" Glory be to Him Who has subjected this for us, for we could not have done it by ourselves. It is to our Lord that we will surely return. \"O Allah, we ask You on this journey of ours for goodness and piety, and for deeds that are pleasing to You. O Allah, make this journey easy for us and make its distance short for us. O Allah, You are the Companion on the journey and the Successor in the family behind. O Allah, I seek refuge in You from the journey's hardships, the terrible sight, and a misfortunate return to our property and family.\""
       },
       {
         "id": 1269597,
@@ -3083,7 +3083,7 @@ export const HISN: readonly HisnOccasion[] = [
         "id": 1269689,
         "kind": "quoted",
         "arabic": "لَمَّا دَنَا النَّبِيُّ -صلى الله عليه وسلم- مِنَ الصَّفَا قَرَأَ: إِنَّ الصَّفَا وَالْمَرْوَةَ مِنْ شَعَآئِرِ اللَّهِ أَبْدَأُ بِمَا بَدَأَ اللَّهُ بِهِ فَبَدَأَ بِالصَّفَا فَرَقِيَ عَلَيْهِ حَتَّى رَأَى الْبَيْتَ، فَاسْتَقْبَلَ الْقِبْلَةَ، فَوَحَّدَ اللَّهَ وَكبَّرَهُ وَقَالَ: لاَ إِلَهَ إِلاَّ اللَّهُ وَحْدَهُ لاَ شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، لاَ إِلَهَ إِلاَّ اللَّهُ وَحْدَهُ، أَنْجَزَ وَعْدَهُ، وَنَصَرَ عَبْدَهُ، وَهَزَمَ الْأَحْزَابَ وَحْدَهُ، ثُمَّ دَعَا بَيْنَ ذلكَ. قَالَ مِثْلَ هَذَا ثَلاَثَ مَرَّاتٍ الْحَدِيثُ. وَفِيهِ: فَفَعَلَ عَلَى الْمَرْوَةِ كَمَا فَعَلَ عَلَى الصَّفَا.",
-        "english": "When the Prophet (ﷺ) came close to Safa, he recited: Indeed, Safa and Marwah mounts are among the symbols of Allah. I begin with what Allah has begun with.\" He then began with Safa and ascended it until he saw the House (Ka‘bah), then he faced the Qiblah, declared the oneness of Allah, proclaimed His greatness, and said: \"None has the right to be worshiped except Allah alone, Who has no partner. To Him belongs the dominion, to Him belongs all praise, and He is Competent over all things. None has the right to be worshiped except Allah alone. He fulfilled His promise, gave victory to His servant, and defeated the Confederates alone, then he supplicated in between. He said this three times\" the Hadīth. And in it: \"He did on Marwah what he did on Safa.",
+        "english": "\"When the Prophet (ﷺ) came close to Safa, he recited: Indeed, Safa and Marwah mounts are among the symbols of Allah. I begin with what Allah has begun with.\" He then began with Safa and ascended it until he saw the House (Ka‘bah), then he faced the Qiblah, declared the oneness of Allah, proclaimed His greatness, and said: \"None has the right to be worshiped except Allah alone, Who has no partner. To Him belongs the dominion, to Him belongs all praise, and He is Competent over all things. None has the right to be worshiped except Allah alone. He fulfilled His promise, gave victory to His servant, and defeated the Confederates alone, then he supplicated in between. He said this three times\" the Hadīth. And in it: \"He did on Marwah what he did on Safa.\"",
         "emphasis": [
           "mounts"
         ],

@@ -47,7 +47,6 @@ export function TeachingTimeline({
             key={text}
             style={[
               styles.row,
-              isLast && last ? styles.endsSection : null,
               !onThread ? [styles.detached, { borderTopColor: theme.goldSoft }] : null,
             ]}>
             <View
@@ -64,7 +63,9 @@ export function TeachingTimeline({
                 <Mark kind={mark} accent={theme.accent} gold={theme.gold} ground={theme.background} />
               </View>
             </View>
-            <ThemedText type="default" style={styles.text}>
+            <ThemedText
+              type="default"
+              style={[styles.text, isLast && last ? styles.endsSection : null]}>
               <TeachingBulletText text={text} />
             </ThemedText>
           </View>
@@ -128,7 +129,6 @@ function Mark({
 const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
-    paddingBottom: Teaching.bullet.marginBottom,
   },
   endsSection: {
     paddingBottom: Teaching.page.sectionGap,
@@ -163,5 +163,6 @@ const styles = StyleSheet.create({
   },
   text: {
     flex: 1,
+    paddingBottom: Teaching.bullet.marginBottom,
   },
 });

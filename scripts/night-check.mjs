@@ -343,7 +343,8 @@ if (!firstFast) {
   const expect = (ok, message) => { if (!ok) fail(`witr guide: ${message}`); };
   expect(guide.title === 'Shafʿ and Witr', `title is "${guide.title}"`);
   expect(guide.steps.length === 38, `${guide.steps.length} steps, expected 38`);
-  expect(step('r1-intention')?.instruction.includes('praying shafʿ'), 'the first intention does not name shafʿ');
+  expect(step('r1-intention')?.instruction.includes('praying shafʿ, the two rakʿahs before witr'), `the first intention is "${step('r1-intention')?.instruction}"`);
+  expect(step('r3-intention')?.instruction.includes('one rakʿah of witr'), `the witr intention is "${step('r3-intention')?.instruction}"`);
   expect(step('r2-taslim-left')?.note === 'That is shafʿ. Now stand for witr.', `the shafʿ closing note is "${step('r2-taslim-left')?.note}"`);
   expect(step('r3-intention')?.title === 'Stand for witr', `the third rakʿah is titled "${step('r3-intention')?.title}"`);
   expect(step('r3-taslim-left')?.note === 'That is shafʿ and witr complete.', `the last note is "${step('r3-taslim-left')?.note}"`);
@@ -357,9 +358,9 @@ if (!firstFast) {
   would draw the wrong count beside a sentence, which is a ruling on screen.
 */
 {
-  const Learn = await import('../src/content/learn/index.ts');
+  const { REFERENCES } = await import('../src/content/references.ts');
   const MARKS = new Set(['start', 'pairs', 'closing', 'earlier']);
-  const pages = Object.values(Learn).filter((value) => value && Array.isArray(value.sections));
+  const pages = REFERENCES;
   for (const page of pages) {
     for (const section of page.sections) {
       if (!section.timeline) continue;
@@ -372,7 +373,7 @@ if (!firstFast) {
       }
     }
   }
-  const order = Learn.QIYAM_AL_LAYL.sections.find((section) => section.id === 'order');
+  const order = REFERENCES.find((page) => page.id === 'qiyam-al-layl')?.sections.find((section) => section.id === 'order');
   if (order?.timeline?.join(',') !== 'start,pairs,closing,earlier') {
     fail(`qiyam-al-layl.order: timeline is ${order?.timeline?.join(',') ?? 'missing'}`);
   }

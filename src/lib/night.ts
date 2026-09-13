@@ -15,8 +15,8 @@ import type { DayTimes, PrayerId } from './prayer-times';
  * about half an hour late.
  *
  * Witr holds until the middle of the night rather than for a moment after
- * ʿIshāʾ, because its own page tells people to pray it before they go to bed,
- * and bed is mostly before the middle.
+ * ʿIshāʾ, because its own page tells anyone who might not wake to pray it
+ * before bed, and bed is mostly before the middle.
  *
  * Qiyam AFTER witr is sound as long as witr is not prayed again: in Abu Dawud
  * 1439 Talq ibn ʿAli prays witr, then leads a prayer at his mosque and hands

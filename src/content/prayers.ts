@@ -738,6 +738,10 @@ function rakahSteps(
 function buildPrayer(spec: PrayerSpec): Guide {
   const steps: Step[] = [];
   const units = spec.units ?? [spec.rakahs];
+  // A name per unit, or a step would read "Stand for undefined".
+  if (spec.unitNames && spec.unitNames.length !== units.length) {
+    throw new Error(`${spec.id}: ${spec.unitNames.length} unit names for ${units.length} units`);
+  }
   let position = 0;
   units.forEach((size, index) => {
     const unitSpec: PrayerSpec = {
@@ -857,7 +861,7 @@ export const PRAYER_SPECS: PrayerSpec[] = [
     kind: 'voluntary',
     referenceId: 'witr',
     surahNote:
-      'This part is sunnah, not required. In witr the Prophet ﷺ recited Al-Aʿla, Al-Kafirun and Al-Ikhlas, one in each rakʿah, and Al-Ikhlas alone is fine while you learn.',
+      'This part is sunnah, not required. In shafʿ and witr the Prophet ﷺ recited Al-Aʿla, Al-Kafirun and Al-Ikhlas, one in each rakʿah, and Al-Ikhlas alone is fine while you learn.',
     surahSources: [hadith('nasai', '1699', { grading: 'sahih', role: 'practice' })],
   },
   {

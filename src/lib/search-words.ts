@@ -109,7 +109,9 @@ const GROUPS: readonly (readonly string[])[] = [
   /*
     Shafʿ, typed the ways people type it without the ʿ. Not the bare "shaf":
     a synonym only has to start a word, and "shaf" starts "Shafi`i", which put
-    every prayer's final sitting into a search for shafʿ.
+    every prayer's final sitting into a search for "shafa". Typing "shaf" or
+    "shafʿ" still reaches those rows, through the typed word's own spelling
+    bridge; that is the reader's partial word, not this group.
   */
   ['shafʿ', 'shafa', 'shafaa'],
 

@@ -135,6 +135,38 @@ export const TAWBA_PRAYER: Reference = {
 };
 
 /**
+ * The Hanafi way of witr, said the same way wherever the app teaches two
+ * rakʿahs then one. docs/night-prayers-accuracy.md Part 2: that form "needs
+ * the Hanafi sentence beside it". Shared so the two pages cannot drift apart.
+ */
+const HANAFI_WITR_NOTE = note(
+  'differs',
+  'At many mosques, especially Hanafi ones, witr is three rakʿahs together: a sitting after the second without the salam, then a third with the qunut before bowing. Pray it with them.',
+  {
+    sources: [
+      scholarly({
+        work: 'Details regarding witr, confirmed sunna, and non-confirmed sunna prayers',
+        author: 'Faraz Rabbani, SeekersGuidance',
+        school: 'Hanafi',
+        url: 'https://seekersguidance.org/answers/hanafi-fiqh/details-regarding-witr-confirmed-sunna-and-non-confirmed-sunna-prayers/',
+      }),
+      scholarly({
+        work: 'Should he pray behind those who pray witr with three rakʿahs and two tashahhuds?',
+        author: 'Islam Question & Answer, fatwa 66613',
+        url: 'https://islamqa.info/en/answers/66613',
+      }),
+    ],
+    positions: [
+      {
+        school: 'Hanafi',
+        position:
+          'Witr is required: three rakʿahs after Isha with one salam, sitting for the tashahhud after the second, and the qunut in the third before bowing.',
+      },
+    ],
+  },
+);
+
+/**
  * Qiyam prayer / Tahajjud.
  *
  * One page since 13 Sep 2026, where there were two, "Tahajjud" and "Qiyam
@@ -168,6 +200,10 @@ export const TAWBA_PRAYER: Reference = {
  * understanding was shafʿ and witr first, then qiyam, then tahajjud. The
  * sources put shafʿ and witr LAST, as the end of the one night prayer, with
  * early witr for someone who might not wake.
+ *
+ * 13 Sep 2026, final review: "What comes first?" carries the Hanafi note it
+ * shares with Shafʿ and Witr, because the section teaches and draws two
+ * rakʿahs then one.
  */
 export const QIYAM_AL_LAYL: Reference = {
   id: 'qiyam-al-layl',
@@ -278,6 +314,7 @@ export const QIYAM_AL_LAYL: Reference = {
         '**Not sure you will wake?** Pray shafʿ and witr before you sleep. If you then wake, pray in twos and do not pray witr again.',
       ],
       timeline: ['start', 'pairs', 'closing', 'earlier'],
+      notes: [HANAFI_WITR_NOTE],
       sources: [
         hadith('bukhari', '1180', { grading: 'sahih', role: 'practice' }),
         hadith('bukhari', '990', { grading: 'sahih', role: 'practice' }),
@@ -320,10 +357,11 @@ export const QIYAM_AL_LAYL: Reference = {
  * without once saying the word shafʿ.
  *
  * What the page teaches, in order: what they are; that shafʿ is not the
- * sunnah of Isha; when (last if you will wake, before sleep if you might
- * not); how (two, salam, one), with the Hanafi way as the page's one red
- * note; what to recite; the qunut, as something a beginner does not need
- * yet; praying witr and then waking; sleeping through it.
+ * sunnah of Isha; when (best last if you will wake, before sleep if you might
+ * not, and with the imam in Ramadan); how (two, salam, one), with the Hanafi
+ * way as the page's one red note; what to recite; the qunut, as something a
+ * beginner does not need yet; praying witr and then waking; sleeping through
+ * it.
  *
  * What a reviewer owns: the Hanafi sentence; "most scholars dislike" one
  * rakʿah on its own; and whether the qunut section says enough about the
@@ -361,7 +399,7 @@ export const WITR: Reference = {
       heading: 'What are shafʿ and witr?',
       promote: 'hero',
       body:
-        'Shafʿ means even and witr means odd. Together they close your night prayer: two rakʿahs with a salam, then one rakʿah on its own. The Prophet ﷺ said to make witr the last prayer of your night.',
+        'Shafʿ means even and witr means odd. Together they close your night prayer: two rakʿahs with a salam, then one rakʿah on its own. All three together are also called witr, which is how you will hear it at the mosque. The Prophet ﷺ said to make witr the last prayer of your night.',
       sources: [
         hadith('bukhari', '998', { grading: 'sahih', role: 'practice' }),
         scholarly({
@@ -390,7 +428,7 @@ export const WITR: Reference = {
       heading: 'When do I pray them?',
       promote: 'quote',
       body:
-        'Any time after Isha until Fajr, and always as the last prayer of your night. If you will pray qiyam or tahajjud, pray shafʿ and witr after it. If you are not sure you will wake, pray them before you sleep. Both ways are sound.',
+        'Any time after Isha until Fajr, and best as the last prayer of your night. If you will pray qiyam or tahajjud, pray shafʿ and witr after it. If you are not sure you will wake, pray them before you sleep. Both ways are sound. In Ramadan, pray witr with the imam at taraweeh, and if you pray again later that night, do not repeat it.',
       sources: [
         hadith('muslim', '755', { grading: 'sahih', role: 'practice' }),
         hadith('abu-dawud', '1434', { grading: 'sahih', role: 'practice' }),
@@ -398,6 +436,11 @@ export const WITR: Reference = {
           work: 'Witr may be prayed early in the night, and delaying it is better',
           author: 'IslamWeb, fatwa 2165',
           url: 'https://www.islamweb.net/ar/fatwa/2165/',
+        }),
+        scholarly({
+          work: 'Witr with the imam when you will pray again later',
+          author: 'Islam Question & Answer, fatwa 232790',
+          url: 'https://islamqa.info/en/answers/232790',
         }),
       ],
     },
@@ -423,34 +466,7 @@ export const WITR: Reference = {
         }),
       ],
       note: 'One rakʿah of witr on its own, with nothing before it, still counts, but most scholars dislike it.',
-      notes: [
-        note(
-          'differs',
-          'At many mosques, especially Hanafi ones, witr is three rakʿahs together: a sitting after the second without the salam, then a third with the qunut before bowing. Pray it with them.',
-          {
-            sources: [
-              scholarly({
-                work: 'Details regarding witr, confirmed sunna, and non-confirmed sunna prayers',
-                author: 'Faraz Rabbani, SeekersGuidance',
-                school: 'Hanafi',
-                url: 'https://seekersguidance.org/answers/hanafi-fiqh/details-regarding-witr-confirmed-sunna-and-non-confirmed-sunna-prayers/',
-              }),
-              scholarly({
-                work: 'Should he pray behind those who pray witr with three rakʿahs and two tashahhuds?',
-                author: 'Islam Question & Answer, fatwa 66613',
-                url: 'https://islamqa.info/en/answers/66613',
-              }),
-            ],
-            positions: [
-              {
-                school: 'Hanafi',
-                position:
-                  'Witr is required: three rakʿahs after Isha with one salam, sitting for the tashahhud after the second, and the qunut in the third before bowing.',
-              },
-            ],
-          },
-        ),
-      ],
+      notes: [HANAFI_WITR_NOTE],
     },
     {
       id: 'recite',

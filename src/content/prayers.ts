@@ -171,6 +171,12 @@ type PrayerSpec = {
   /** Cited on the step that opens a later unit: why it is a prayer of its own. */
   unitSources?: readonly Source[];
   /**
+   * What each unit is called, where the units have names of their own. Witr
+   * is `['shafʿ', 'witr']`: the two rakʿahs are shafʿ, the one is witr
+   * (IslamWeb 18778, 416554). Lower case, because they sit inside sentences.
+   */
+  unitNames?: readonly string[];
+  /**
    * A prayer of the night, whose Qur'an may be recited quietly or aloud.
    * ʿAisha, asked how the Prophet ﷺ recited at night: "Sometimes he recited
    * quietly and sometimes loudly" (Abu Dawud 1437).
@@ -471,14 +477,23 @@ function rakahSteps(
   if (isFirst) {
     step({
       key: 'intention',
-      title: unit.index > 0 ? 'Stand for the last rakʿah' : 'Face the qibla and intend',
+      title:
+        unit.index > 0
+          ? spec.unitNames
+            ? `Stand for ${spec.unitNames[unit.index]}`
+            : 'Stand for the last rakʿah'
+          : 'Face the qibla and intend',
       posture: 'standing',
       instruction:
         unit.index > 0
-          ? `Stand up again, facing the qibla, and intend in your heart the one rakʿah that closes ${spec.spokenName ?? spec.title}. It is a prayer of its own, so it opens with the takbir.`
-          : unit.count > 1
-            ? `Stand facing the qibla, feet roughly shoulder-width apart, and intend in your heart that you are praying ${spec.spokenName ?? spec.title}, beginning with ${COUNT_WORDS[spec.rakahs] ?? spec.rakahs} rakʿahs.`
-            : `Stand facing the qibla, feet roughly shoulder-width apart, and intend in your heart that you are praying ${spec.spokenName ?? spec.title}.`,
+          ? spec.unitNames
+            ? `Stand up again, facing the qibla, and intend in your heart one rakʿah of ${spec.unitNames[unit.index]}. It is a prayer of its own, so it opens with the takbir.`
+            : `Stand up again, facing the qibla, and intend in your heart the one rakʿah that closes ${spec.spokenName ?? spec.title}. It is a prayer of its own, so it opens with the takbir.`
+          : unit.count > 1 && spec.unitNames
+            ? `Stand facing the qibla, feet roughly shoulder-width apart, and intend in your heart that you are praying ${spec.unitNames[0]}, the ${COUNT_WORDS[spec.rakahs] ?? spec.rakahs} rakʿahs before ${spec.unitNames[1]}.`
+            : unit.count > 1
+              ? `Stand facing the qibla, feet roughly shoulder-width apart, and intend in your heart that you are praying ${spec.spokenName ?? spec.title}, beginning with ${COUNT_WORDS[spec.rakahs] ?? spec.rakahs} rakʿahs.`
+              : `Stand facing the qibla, feet roughly shoulder-width apart, and intend in your heart that you are praying ${spec.spokenName ?? spec.title}.`,
       // "Do not need to" rather than "do not": `reference:before-prayer` holds
       // this properly and carries a `differs` note on saying it aloud. Two
       // files stating the same thing one flatly and one with a difference is
@@ -694,7 +709,9 @@ function rakahSteps(
         instruction: 'Then turn your face to the left and give the same greeting again.',
         says: Recitations.taslim,
         note: !isLastUnit
-          ? `Those are the first ${COUNT_WORDS[spec.rakahs] ?? spec.rakahs} rakʿahs. Now stand for the last one.`
+          ? spec.unitNames
+            ? `That is ${spec.unitNames[unit.index]}. Now stand for ${spec.unitNames[unit.index + 1]}.`
+            : `Those are the first ${COUNT_WORDS[spec.rakahs] ?? spec.rakahs} rakʿahs. Now stand for the last one.`
           : spec.closingDua
             ? undefined
             : `That is ${spec.spokenName ?? spec.title} complete.`,
@@ -821,12 +838,17 @@ export const PRAYER_SPECS: PrayerSpec[] = [
     rest of these guides teach. `units` expresses it without the
     Maghrib-shaped sitting a plain three-rakʿah spec would generate. The page
     says one on its own also counts, and how Hanafi mosques pray it.
+
+    Named shafʿ and witr since 13 Sep 2026 (Iyad; IslamWeb 18778): the two
+    rakʿahs are shafʿ and the one is witr.
   */
   {
     id: 'witr',
-    title: 'Witr',
-    listTitle: 'Praying Witr',
-    when: 'After ʿIsha, before you sleep or at the end of the night',
+    title: 'Shafʿ and Witr',
+    listTitle: 'Shafʿ and Witr',
+    spokenName: 'shafʿ and witr',
+    unitNames: ['shafʿ', 'witr'],
+    when: 'After ʿIsha until Fajr, to close the night',
     rakahs: 3,
     units: [2, 1],
     unitSources: [hadith('bukhari', '991', { role: 'practice' })],

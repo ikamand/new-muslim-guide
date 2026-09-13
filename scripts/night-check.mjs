@@ -23,6 +23,7 @@ import { computeDay, computeNight, findCurrentPrayer, inferProfile, windowEnd } 
 import { nightPrayerAt } from '../src/lib/night.ts';
 import { arcFor, arcForNight } from '../src/content/ramadan-arc.ts';
 import { hijriDate, hijriOfNight } from '../src/lib/hijri.ts';
+import { PRAYERS } from '../src/content/prayers.ts';
 
 let failures = 0;
 const fail = (message) => {
@@ -329,6 +330,24 @@ if (!firstFast) {
     `  tarāwīḥ 1448: first night ${nightEvening(1).toDateString()}, ʿIshāʾ ${clock(timeOf(eve, 'isha'))} ` +
       `to the last third at ${clock(eve.lastThirdOfNight)}; night of Eid ${eidNight ? eidNight.toDateString() : 'not found'}`,
   );
+}
+
+/*
+  The witr guide is two units named for what they are: shafʿ, two rakʿahs
+  with a salam, then witr, one rakʿah (Iyad, 13 Sep 2026;
+  docs/night-prayers-accuracy.md Part 2). It used to call all three "witr".
+*/
+{
+  const guide = PRAYERS.find((g) => g.id === 'witr');
+  const step = (id) => guide.steps.find((s) => s.id === id);
+  const expect = (ok, message) => { if (!ok) fail(`witr guide: ${message}`); };
+  expect(guide.title === 'Shafʿ and Witr', `title is "${guide.title}"`);
+  expect(guide.steps.length === 38, `${guide.steps.length} steps, expected 38`);
+  expect(step('r1-intention')?.instruction.includes('praying shafʿ'), 'the first intention does not name shafʿ');
+  expect(step('r2-taslim-left')?.note === 'That is shafʿ. Now stand for witr.', `the shafʿ closing note is "${step('r2-taslim-left')?.note}"`);
+  expect(step('r3-intention')?.title === 'Stand for witr', `the third rakʿah is titled "${step('r3-intention')?.title}"`);
+  expect(step('r3-taslim-left')?.note === 'That is shafʿ and witr complete.', `the last note is "${step('r3-taslim-left')?.note}"`);
+  console.log('  witr guide: shafʿ, then witr, 38 steps');
 }
 
 if (failures > 0) {

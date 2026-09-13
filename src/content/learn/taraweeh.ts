@@ -15,6 +15,11 @@ import type { Reference } from '../types';
  * What a reviewer owns: "Both are sound" about eight and twenty, which is a
  * live argument in many communities; the witr choice for somebody who will
  * pray again later; and the late-arrival advice, where the schools part.
+ *
+ * 13 Sep 2026: the mosque-is-better line was true for men only (IslamQA 38922
+ * says "a man"; 222751 for women); finishing the Qur'an added as recommended,
+ * not required (66504); the add-a-rakʿah option moved to a plain note,
+ * because people will see it done (Ibn Baz, 65702).
  */
 export const TARAWEEH: Reference = {
   id: 'taraweeh',
@@ -112,12 +117,18 @@ export const TARAWEEH: Reference = {
       promote: 'quote',
       body:
         'Some mosques pray eight rakʿahs and some twenty, two at a time, and then witr. Both are sound, and neither side is doing it wrong. ʿAisha said the Prophet ﷺ never prayed more than eleven, in Ramadan or any other month. Three of the four schools hold twenty, and there is no fixed number.',
+      note: 'Many mosques recite the whole Qur’an over the month. That is recommended, not required, and a calm prayer is better than a rushed one.',
       sources: [
         hadith('bukhari', '1147', { grading: 'sahih', role: 'practice' }),
         scholarly({
           work: 'The number of rakʿahs of taraweeh',
           author: 'Islam Question & Answer, fatwa 9036',
           url: 'https://islamqa.info/en/answers/9036',
+        }),
+        scholarly({
+          work: 'Is it necessary to recite the entire Qur’an in taraweeh?',
+          author: 'Islam Question & Answer, fatwa 66504',
+          url: 'https://islamqa.info/en/answers/66504',
         }),
       ],
     },
@@ -141,7 +152,8 @@ export const TARAWEEH: Reference = {
       id: 'witr',
       heading: 'What happens at witr?',
       body:
-        'The imam closes taraweeh with witr, often with the qunut, a dua in its last rakʿah. Some mosques add the qunut only in the second half of the month. If you plan to pray again later that night, either pray witr with the imam and do not repeat it, or stand up after his salam and add one rakʿah, then pray witr at the end of your night.',
+        'The imam closes taraweeh with witr, often with the qunut, a dua in its last rakʿah. Some mosques add the qunut only in the second half of the month. If you will pray again later that night, pray witr with the imam and do not repeat it later.',
+      note: 'You will also see people stand up after the imam’s last salam and add one rakʿah. That makes their prayer even, so they can pray witr at the end of their own night, and it still counts as staying with the imam.',
       sources: [
         scholarly({
           work: 'Witr with the imam when you will pray again later',
@@ -154,6 +166,16 @@ export const TARAWEEH: Reference = {
           url: 'https://www.dar-alifta.org/ar/fatwa/details/15984',
         }),
         hadith('abu-dawud', '1439', { grading: 'sahih', role: 'practice' }),
+        scholarly({
+          work: 'Can I pray witr before tahajjud?',
+          author: 'Ibn Baz, in Islam Question & Answer, fatwa 65702',
+          url: 'https://islamqa.info/en/answers/65702',
+        }),
+        scholarly({
+          work: 'Qiyam al-layl after taraweeh',
+          author: 'IslamWeb, fatwa 491695',
+          url: 'https://www.islamweb.net/ar/fatwa/491695/',
+        }),
       ],
     },
     {
@@ -161,7 +183,7 @@ export const TARAWEEH: Reference = {
       heading: 'Why is it prayed together?',
       promote: 'quote',
       body:
-        'The Prophet ﷺ led it in the mosque for a few nights, then stopped coming out, because he feared it would be made obligatory. Later ʿUmar gathered everyone behind one imam. Praying it at the mosque is better, and praying it at home still counts.',
+        'The Prophet ﷺ led it in the mosque for a few nights, then stopped coming out, because he feared it would be made obligatory. Later ʿUmar gathered everyone behind one imam. For men the mosque is better. For women home is better in principle, and the mosque is good when it helps her pray. At home it is prayed the same way, two at a time, then witr.',
       sources: [
         hadith('bukhari', '2012', { grading: 'sahih', role: 'context' }),
         hadith('bukhari', '2010', { grading: 'sahih', role: 'context' }),
@@ -169,6 +191,11 @@ export const TARAWEEH: Reference = {
           work: 'Taraweeh is a confirmed sunnah',
           author: 'Islam Question & Answer, fatwa 38922',
           url: 'https://islamqa.info/en/answers/38922',
+        }),
+        scholarly({
+          work: 'How should women pray taraweeh at home?',
+          author: 'Islam Question & Answer, fatwa 222751',
+          url: 'https://islamqa.info/en/answers/222751',
         }),
       ],
     },

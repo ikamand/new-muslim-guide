@@ -616,7 +616,7 @@ git commit -m "Taraweeh: women at home or mosque, finishing the Qur'an, the imam
 - [ ] **Step 6: Record what was built** in `docs/night-prayers-accuracy.md` Part 2, as a "Built" list naming each commit. Add one line to `docs/ui-redesign-plan.md` under "The audit, 13 Sep": `- **Witr became Shafʿ and Witr** (page and guide, id unchanged), and the night-prayer page states the order: shafʿ and witr last.`
 
 - [ ] **Step 7: Full verification.**
-  Run: `npx tsc --noEmit && npm run night:check && npm run content:audit && npm run style:check && npm run content:verify && npx expo export --platform web --output-dir "$SCRATCH/web-export"` (any scratch directory outside the repo)`
+  Run: `npx tsc --noEmit && npm run night:check && npm run content:audit && npm run style:check && npm run content:verify && npx expo export --platform web --output-dir "$SCRATCH/web-export"` (any scratch directory outside the repo)
   Expected: all clean; `expo export` renders 44 static routes; `search:check` shows only its two pre-existing failures.
 
 - [ ] **Step 8: Commit and ship.**

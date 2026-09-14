@@ -4,7 +4,7 @@ import { Linking, Platform, Pressable, ScrollView, StyleSheet, Switch, View } fr
 import { ThemedText } from '@/components/themed-text';
 import { MaxContentWidth, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
-import { useReminders } from '@/hooks/use-reminders';
+import { useReminders, type ReminderFlag } from '@/hooks/use-reminders';
 import { useTheme } from '@/hooks/use-theme';
 import type { UIKey } from '@/i18n/ui';
 import { PRAYER_IDS, PRAYER_LABEL } from '@/lib/prayer-times';
@@ -27,8 +27,9 @@ import { LEAD_CHOICES } from '@/lib/reminders';
  * ## The order
  *
  * Prayer times first, with the lead time under them, because it is what most
- * people come for. Then Friday, Ramadan and the adhkar: each is an offer at
- * a moment opening, and none of them can notice an absence.
+ * people come for. Then the night prayer's wake-up, because it is daily too,
+ * then Friday, Ramadan and the adhkar: each is an offer at a moment opening,
+ * and none of them can notice an absence.
  */
 export default function RemindersScreen() {
   const theme = useTheme();
@@ -47,7 +48,7 @@ export default function RemindersScreen() {
   );
 
   /* One switch on a ruled row; the last row in a group has nothing to separate from. */
-  const flagRow = (flag: 'suhoorWakeUp' | 'adhkarNote' | 'jumuahNote', label: UIKey) => (
+  const flagRow = (flag: ReminderFlag, label: UIKey) => (
     <View style={[styles.group, styles.row, { borderColor: theme.goldSoft }]}>
       <ThemedText type="default" style={styles.flagLabel}>
         {t(label)}
@@ -155,6 +156,11 @@ export default function RemindersScreen() {
             </View>
           </>
         )}
+      </View>
+
+      <View style={styles.section}>
+        {heading('reminders.night')}
+        {flagRow('nightWakeUp', 'reminders.nightWake')}
       </View>
 
       <View style={styles.section}>

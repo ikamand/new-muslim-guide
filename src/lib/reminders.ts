@@ -1,3 +1,4 @@
+import { NIGHT_WAKE_LEAD_MINUTES } from './night';
 import { computeDay, PRAYER_IDS, type LatLon, type MethodProfile, type PrayerId } from './prayer-times';
 
 /**
@@ -141,6 +142,33 @@ export function planSuhoor(
     const fajr = prayers.find((prayer) => prayer.id === 'fajr')?.time;
     if (!fajr) return undefined;
     return { fireAt: new Date(fajr.getTime() - SUHOOR_LEAD_MINUTES * 60_000), anchor: fajr };
+  });
+}
+
+/**
+ * The night wake-up: an hour before each Fajr, and never before the last third
+ * of the night that ends at it (`NIGHT_WAKE_LEAD_MINUTES`, `night.ts`).
+ *
+ * `skip` is injected like `planSuhoor`'s calendar, so this stays arithmetic.
+ * The caller skips Ramadan mornings while the suhoor wake-up is on, because a
+ * night gets one alarm.
+ */
+export function planNightWake(
+  coords: LatLon,
+  profile: MethodProfile,
+  from: Date,
+  skip: (day: Date) => boolean,
+  daysAhead: number = DAYS_AHEAD,
+): PlannedMoment[] {
+  return eachDay(coords, profile, from, daysAhead, (day, prayers) => {
+    if (skip(day)) return undefined;
+    const fajr = prayers.find((prayer) => prayer.id === 'fajr')?.time;
+    if (!fajr) return undefined;
+    // The night that ends at this Fajr began at the previous day's Maghrib.
+    const evening = new Date(day.getFullYear(), day.getMonth(), day.getDate() - 1);
+    const lastThird = computeDay(coords, evening, profile).lastThirdOfNight;
+    const fireAt = new Date(Math.max(fajr.getTime() - NIGHT_WAKE_LEAD_MINUTES * 60_000, lastThird.getTime()));
+    return { fireAt, anchor: fajr };
   });
 }
 

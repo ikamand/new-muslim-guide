@@ -154,6 +154,15 @@ export type Settings = {
   /** A note on Thursday evening that tomorrow is Jumuʿah. Off by default. */
   jumuahNote: boolean;
   /**
+   * Wake me an hour before Fajr for the night prayer. Off by default.
+   *
+   * Today's night card reads it as the plan for the night (13 Sep 2026): while
+   * it is on, witr's mark moves to the end of the night, because the Sunnah
+   * puts witr last for someone who will wake. It never records what anybody
+   * prayed.
+   */
+  nightWakeUp: boolean;
+  /**
    * Whose recitation plays in the Qur'an tab.
    *
    * One setting rather than one per screen, because a reader who has found a
@@ -215,6 +224,7 @@ const DEFAULTS: Settings = {
   suhoorWakeUp: false,
   adhkarNote: false,
   jumuahNote: false,
+  nightWakeUp: false,
   reciter: DEFAULT_RECITER,
   pinnedDuas: [],
   wordsOpened: false,
@@ -356,6 +366,7 @@ function parseStored(raw: string | null): Settings {
       suhoorWakeUp: typeof stored.suhoorWakeUp === 'boolean' ? stored.suhoorWakeUp : false,
       adhkarNote: typeof stored.adhkarNote === 'boolean' ? stored.adhkarNote : false,
       jumuahNote: typeof stored.jumuahNote === 'boolean' ? stored.jumuahNote : false,
+      nightWakeUp: typeof stored.nightWakeUp === 'boolean' ? stored.nightWakeUp : false,
       // A voice dropped from a later build reads as the default rather than
       // throwing, and rather than leaving a folder name that no longer resolves.
       reciter: isReciterId(stored.reciter) ? stored.reciter : DEFAULTS.reciter,

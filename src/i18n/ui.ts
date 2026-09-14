@@ -133,6 +133,13 @@ export const EN = {
     'Ramadan is close. The app can wake you before Fajr for suhoor. Change it any time, here or in Settings.',
   'suhoor.notification.title': 'Suhoor',
   'suhoor.notification.body': 'Fajr is at {time}. Time to eat something.',
+  /*
+    The night wake-up. ⚠️ Model-written, on the review pile. It never says to
+    pray witr: somebody who prayed it before sleeping would be told to pray it
+    twice. The night card it opens asks "Not prayed witr tonight?" instead.
+  */
+  'nightWake.notification.title': 'The last third of the night',
+  'nightWake.notification.body': 'Fajr is at {time}. A good time to pray, two rakʿahs at a time.',
   'adhkar.notification.title': 'Morning adhkār',
   'adhkar.notification.body': 'The window is open until sunrise.',
   'jumuah.notification.title': 'Jumuʿah tomorrow',
@@ -871,6 +878,7 @@ export const EN = {
   'reminders.friday': 'Friday',
   'reminders.ramadan': 'Ramadan',
   'reminders.adhkar': 'Adhkar',
+  'reminders.night': 'Night prayer',
   'settings.reminders.help':
     'A quiet notification before each prayer. Nothing is sent anywhere. Your phone works the times out and sets its own alarms.',
   'settings.reminders.lead': 'How far ahead',
@@ -893,6 +901,7 @@ export const EN = {
   */
   'reminders.suhoor': 'Wake me before Fajr for suhoor',
   'reminders.adhkarNote': 'A note when the morning window opens',
+  'reminders.nightWake': 'Wake me an hour before Fajr',
   'reminders.jumuahNote': 'A note on Thursday evening',
   'reminder.now': 'It is time to pray.',
   'reminder.soon': 'In {n} minutes.',

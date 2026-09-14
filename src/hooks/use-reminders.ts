@@ -19,6 +19,7 @@ import {
   planAdhkarNotes,
   planJumuahNotes,
   planReminders,
+  planNightWake,
   planSuhoor,
 } from '@/lib/reminders';
 
@@ -88,12 +89,14 @@ function anythingOn(settings: {
   suhoorWakeUp: boolean;
   adhkarNote: boolean;
   jumuahNote: boolean;
+  nightWakeUp: boolean;
 }): boolean {
   return (
     Object.values(settings.reminders.prayers).some(Boolean) ||
     settings.suhoorWakeUp ||
     settings.adhkarNote ||
-    settings.jumuahNote
+    settings.jumuahNote ||
+    settings.nightWakeUp
   );
 }
 
@@ -103,7 +106,7 @@ const timeOf = (date: Date) =>
 /** Mounted once in the root layout. Renders nothing; owns the schedule. */
 export function useReminderSync(): void {
   const { coords } = useLocation();
-  const { reminders, suhoorWakeUp, adhkarNote, jumuahNote, awqatMethod, awqatHanafiAsr, awqatMosque, loaded } =
+  const { reminders, suhoorWakeUp, adhkarNote, jumuahNote, nightWakeUp, awqatMethod, awqatHanafiAsr, awqatMosque, loaded } =
     useSettings();
   const profileFor = useAwqatProfile();
   const { locale, t } = useLocale();
@@ -118,6 +121,7 @@ export function useReminderSync(): void {
     suhoorWakeUp,
     adhkarNote,
     jumuahNote,
+    nightWakeUp,
     awqatMethod,
     awqatHanafiAsr,
     awqatMosque,
@@ -129,7 +133,7 @@ export function useReminderSync(): void {
     let active = true;
 
     const run = async () => {
-      const on = anythingOn({ reminders, suhoorWakeUp, adhkarNote, jumuahNote });
+      const on = anythingOn({ reminders, suhoorWakeUp, adhkarNote, jumuahNote, nightWakeUp });
       if (!on || !coords) {
         await cancelAll();
         return;
@@ -161,6 +165,18 @@ export function useReminderSync(): void {
             fireAt: planned.fireAt,
             title: t('suhoor.notification.title'),
             body: t('suhoor.notification.body').replace('{time}', timeOf(planned.anchor)),
+          });
+        }
+      }
+
+      if (nightWakeUp) {
+        const inRamadan = (day: Date) => hijriDate(day)?.month === 9;
+        // One alarm a night: on a Ramadan morning the suhoor wake-up, when it is on, is that alarm.
+        for (const planned of planNightWake(coords, profile, now, (day) => suhoorWakeUp && inRamadan(day))) {
+          items.push({
+            fireAt: planned.fireAt,
+            title: t('nightWake.notification.title'),
+            body: t('nightWake.notification.body').replace('{time}', timeOf(planned.anchor)),
           });
         }
       }
@@ -205,14 +221,14 @@ export function useReminderSync(): void {
       active = false;
       subscription.remove();
     };
-  }, [loaded, coords, signature, locale, reminders, suhoorWakeUp, adhkarNote, jumuahNote, profileFor, t]);
+  }, [loaded, coords, signature, locale, reminders, suhoorWakeUp, adhkarNote, jumuahNote, nightWakeUp, profileFor, t]);
 }
 
-export type ReminderFlag = 'suhoorWakeUp' | 'adhkarNote' | 'jumuahNote';
+export type ReminderFlag = 'suhoorWakeUp' | 'adhkarNote' | 'jumuahNote' | 'nightWakeUp';
 
 /** What screens use: the switches, asking for permission at the right moment. */
 export function useReminders() {
-  const { reminders, suhoorWakeUp, adhkarNote, jumuahNote, set } = useSettings();
+  const { reminders, suhoorWakeUp, adhkarNote, jumuahNote, nightWakeUp, set } = useSettings();
   const [granted, setGranted] = useState<boolean | null>(null);
 
   useEffect(() => {
@@ -225,7 +241,7 @@ export function useReminders() {
     };
   }, []);
 
-  const anyOn = anythingOn({ reminders, suhoorWakeUp, adhkarNote, jumuahNote });
+  const anyOn = anythingOn({ reminders, suhoorWakeUp, adhkarNote, jumuahNote, nightWakeUp });
 
   /** Turns a prayer's reminder on or off, asking for permission the first time. */
   const toggle = useCallback(
@@ -244,12 +260,11 @@ export function useReminders() {
     [reminders, set],
   );
 
-  /** The suhoor wake-up and the two window notes, same permission manners. */
-  const flags = { suhoorWakeUp, adhkarNote, jumuahNote };
+  /** The two wake-ups and the two window notes, same permission manners. */
+  const flags: Record<ReminderFlag, boolean> = { suhoorWakeUp, adhkarNote, jumuahNote, nightWakeUp };
   const toggleFlag = useCallback(
     async (flag: ReminderFlag) => {
-      const current =
-        flag === 'suhoorWakeUp' ? suhoorWakeUp : flag === 'adhkarNote' ? adhkarNote : jumuahNote;
+      const current = { suhoorWakeUp, adhkarNote, jumuahNote, nightWakeUp }[flag];
       const turningOn = !current;
       if (turningOn && !(await requestPermission())) {
         setGranted(false);
@@ -258,7 +273,7 @@ export function useReminders() {
       set(flag, turningOn);
       setGranted(true);
     },
-    [suhoorWakeUp, adhkarNote, jumuahNote, set],
+    [suhoorWakeUp, adhkarNote, jumuahNote, nightWakeUp, set],
   );
 
   const setLead = useCallback(

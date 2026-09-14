@@ -21,6 +21,7 @@
  */
 import { computeDay, computeNight, findCurrentPrayer, inferProfile, windowEnd } from '../src/lib/prayer-times.ts';
 import { NIGHT_WAKE_LEAD_MINUTES, nightPrayerAt, nightThread } from '../src/lib/night.ts';
+import { planNightWake } from '../src/lib/reminders.ts';
 import { arcFor, arcForNight } from '../src/content/ramadan-arc.ts';
 import { hijriDate, hijriOfNight } from '../src/lib/hijri.ts';
 import { PRAYERS } from '../src/content/prayers.ts';
@@ -473,6 +474,32 @@ if (!firstFast) {
     `  night thread: ${nights} nights walked; 13 Sep at 21:30 the moon is at ${shown ? shown.now.toFixed(3) : '?'}, ` +
       `the last third at ${shown ? stamp(shown.lastThirdAt) : '?'}, the wake-up at ${shown ? stamp(shown.wakeAt) : '?'}`,
   );
+}
+
+/*
+  The night wake-up (13 Sep 2026): one a morning, inside the last third of
+  the night that ends at that Fajr and before it, skipped exactly on the days
+  asked for, and never in the past.
+*/
+{
+  const from = new Date('2026-09-13T00:00:00');
+  const all = planNightWake(place, profile, from, () => false, 12);
+  const evenSkipped = planNightWake(place, profile, from, (day) => day.getDate() % 2 === 0, 12);
+  if (all.length !== 12) fail(`night wake-up: ${all.length} mornings planned in 12, expected 12`);
+  if (evenSkipped.some((planned) => planned.anchor.getDate() % 2 === 0)) fail('night wake-up: a skipped day still rang');
+  if (evenSkipped.length !== all.filter((planned) => planned.anchor.getDate() % 2 !== 0).length) {
+    fail(`night wake-up: skipping even dates left ${evenSkipped.length} of ${all.length}`);
+  }
+  for (const planned of all) {
+    const night = computeNight(place, new Date(planned.anchor.getTime() - MINUTE), profile);
+    if (!night) { fail(`night wake-up: no night before Fajr ${planned.anchor.toDateString()}`); continue; }
+    const lastThird = night.evening.lastThirdOfNight.getTime();
+    const expected = Math.max(planned.anchor.getTime() - NIGHT_WAKE_LEAD_MINUTES * MINUTE, lastThird);
+    if (planned.fireAt.getTime() !== expected) fail(`night wake-up ${planned.anchor.toDateString()}: rings ${clock(planned.fireAt)}, expected ${clock(new Date(expected))}`);
+    if (planned.fireAt.getTime() < lastThird || planned.fireAt >= planned.anchor) fail(`night wake-up ${planned.anchor.toDateString()}: outside the last third`);
+    if (planned.fireAt <= from) fail('night wake-up: planned in the past');
+  }
+  console.log(`  night wake-up: ${all.length} mornings planned; the night of 13 Sep rings ${all[1] ? clock(all[1].fireAt) : '?'} before Fajr ${all[1] ? clock(all[1].anchor) : '?'}`);
 }
 
 if (failures > 0) {

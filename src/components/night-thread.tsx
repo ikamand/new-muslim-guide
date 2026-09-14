@@ -90,7 +90,8 @@ export function NightThread({
   const witrX = witrFraction === undefined ? undefined : along(witrFraction);
   const witrLast = witr === 'end';
 
-  const showCaption = bellX === undefined || bellX - 12 > bandX + CAPTION_ROOM;
+  // Hidden only where the bell would cover it; a set alarm can put the bell before the band.
+  const showCaption = bellX === undefined || bellX + 12 < bandX || bellX - 12 > bandX + CAPTION_ROOM;
   const showBandTime = thread.lastThird > 0.28 && thread.lastThird < 0.72;
 
   const label = [

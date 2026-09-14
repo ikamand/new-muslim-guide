@@ -81,6 +81,7 @@ export const RAMADAN_ARC: readonly ArcRow[] = [
     month: 9,
     during: ['witr', 'qiyam'],
     // The Taraweeh page since 13 Sep 2026; it opened Qiyam al-Layl before there was one.
+    // Today's night card reads this row: the reason is its title, the ref its taraweeh link.
     ref: ref('reference', 'taraweeh'),
     reason: 'arc.tarawih',
   },

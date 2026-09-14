@@ -7,8 +7,7 @@ import { ThemedText } from '@/components/themed-text';
 import { Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { useTheme } from '@/hooks/use-theme';
-import type { WitrPlace } from '@/hooks/use-tonight';
-import type { NightThread as Thread } from '@/lib/night';
+import type { NightThread as Thread, WitrPlace } from '@/lib/night';
 import { formatTime } from '@/lib/prayer-times';
 
 /** The drawing's height, the line's height inside it, and its inset from both ends. */
@@ -28,14 +27,19 @@ const CAPTION_ROOM = 66;
  * ʿIshāʾ on the left, Fajr on the right, the last third as a soft gold band
  * (brighter once it has begun), and the part of the night already behind the
  * reader drawn in gold. On it: the moon at now, using the arch's own ʿIshāʾ
- * mark; witr's two-then-one dots, the night-prayer page's mark, placed where
- * tonight's witr goes and outlined while it is still ahead; and the bell of
- * the reader's wake-up, above the line, until it rings.
+ * mark; the bell of the alarm that will ring, above the line, until it rings;
+ * and witr's two-then-one where `tonightPlan` puts it, in the night-prayer
+ * page's own marks: filled at the end of the night, as the page draws shafʿ
+ * and witr last, and outlined before sleep, as it draws praying them earlier.
+ * In the last third with no wake-up set there is no witr mark, because the
+ * app cannot know whether it was prayed; the card asks instead.
  *
  * Approved as "The Night Thread", 13 Sep 2026. Every word is a `ThemedText`
  * rather than SVG text, because font resolution inside `react-native-svg` is
  * unreliable; the SVG carries only marks. One accessibility label reads the
  * whole drawing.
+ *
+ * ⚠️ Where witr sits is a ruling drawn on screen, and is on the review pile.
  */
 export function NightThread({
   thread,
@@ -43,7 +47,7 @@ export function NightThread({
   bellAt,
 }: {
   thread: Thread;
-  witr: WitrPlace;
+  witr?: WitrPlace;
   bellAt?: Date;
 }) {
   const theme = useTheme();
@@ -70,21 +74,28 @@ export function NightThread({
     draw witr as already passed.
   */
   const witrFraction =
-    witr === 'early'
-      ? 0.08
-      : witr === 'next'
-        ? Math.max(thread.now + 0.08, Math.min(thread.now + 0.1, thread.lastThird - 0.07))
-        : 0.95;
-  const witrX = along(witrFraction);
-  const witrAhead = witr === 'end';
+    witr === undefined
+      ? undefined
+      : witr === 'early'
+        ? 0.08
+        : witr === 'next'
+          ? Math.max(thread.now + 0.08, Math.min(thread.now + 0.1, thread.lastThird - 0.07))
+          : 0.95;
+  const witrX = witrFraction === undefined ? undefined : along(witrFraction);
+  const witrLast = witr === 'end';
 
   const showCaption = bellX === undefined || bellX - 12 > bandX + CAPTION_ROOM;
   const showBandTime = thread.lastThird > 0.28 && thread.lastThird < 0.72;
 
-  const label = t('night.thread.label')
-    .replace('{isha}', formatTime(thread.isha))
-    .replace('{third}', formatTime(thread.lastThirdAt))
-    .replace('{fajr}', formatTime(thread.fajr));
+  const label = [
+    t('night.thread.label')
+      .replace('{isha}', formatTime(thread.isha))
+      .replace('{third}', formatTime(thread.lastThirdAt))
+      .replace('{fajr}', formatTime(thread.fajr)),
+    bellAt && bellX !== undefined ? t('night.thread.bell').replace('{time}', formatTime(bellAt)) : '',
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   return (
     <View
@@ -124,20 +135,22 @@ export function NightThread({
               </G>
             ) : null}
 
-            <G>
-              <Rect x={witrX - 13} y={LINE_Y - 7} width={26} height={14} rx={7} fill={theme.background} />
-              {[-8.5, -2.5, 7.5].map((dx) => (
-                <Circle
-                  key={dx}
-                  cx={witrX + dx}
-                  cy={LINE_Y}
-                  r={2.4}
-                  fill={witrAhead ? theme.background : theme.gold}
-                  stroke={theme.gold}
-                  strokeWidth={witrAhead ? 1.25 : 0}
-                />
-              ))}
-            </G>
+            {witrX !== undefined ? (
+              <G>
+                <Rect x={witrX - 13} y={LINE_Y - 7} width={26} height={14} rx={7} fill={theme.background} />
+                {[-8.5, -2.5, 7.5].map((dx) => (
+                  <Circle
+                    key={dx}
+                    cx={witrX + dx}
+                    cy={LINE_Y}
+                    r={2.4}
+                    fill={witrLast ? theme.gold : theme.background}
+                    stroke={theme.gold}
+                    strokeWidth={witrLast ? 0 : 1.25}
+                  />
+                ))}
+              </G>
+            ) : null}
 
             <Circle cx={nowX} cy={LINE_Y} r={11} fill={theme.background} stroke={theme.gold} strokeWidth={1.3} />
             <DayMarkAt name="isha" cx={nowX} cy={LINE_Y} size={13} color={theme.gold} />

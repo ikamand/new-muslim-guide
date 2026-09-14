@@ -38,10 +38,11 @@ import {
  * state. Flipping a toggle writes settings; the sync hook notices and
  * rebuilds.
  *
- * Everything schedulable — prayer reminders, the suhoor wake-up, the adhkār
- * window note, Thursday's Jumuʿah note — flows through one plan, sorted by
- * fire time and capped at 60, under the 64 iOS allows pending. What gets cut
- * is always the furthest away, and the next foreground top-up restores it.
+ * Everything schedulable — prayer reminders, the suhoor and night wake-ups,
+ * the adhkār window note, Thursday's Jumuʿah note — flows through one plan,
+ * sorted by fire time and capped at 60, under the 64 iOS allows pending. What
+ * gets cut is always the furthest away, and the next foreground top-up
+ * restores it.
  */
 
 const PENDING_CAP = 60;

@@ -1688,7 +1688,9 @@ it before anything else. Witr runs to the middle rather than a moment past
 ʿIsha, because its page says to pray it before bed. `npm run night:check`
 walks every minute of the night. **The cost, accepted:** from ʿIsha to Fajr
 nothing else reaches the slot; a half-read lesson, the Ramadan arc and the
-travel card wait for morning.
+travel card wait for morning. (Superseded the same day by the night thread,
+below: Today now draws the whole night instead of asking which part it is
+in. The cost stands.)
 
 **One content change followed.** The qiyam page closed with "whatever you pray
 at night, end it with witr", which after a witr card is an instruction to pray
@@ -1734,8 +1736,9 @@ to do all of it. Three decisions recorded here because they undo earlier ones:
   page above, whose own risk note said the second row would cost more than it
   earned if the difference was not obvious. It was not obvious because it was
   not true: qiyam al-layl is the umbrella term, and tahajjud is that prayer
-  after sleep. Today still offers the middle of the night and the last third
-  as separate moments; both open the one page.
+  after sleep. Today then still offered the middle of the night and the last
+  third as separate moments, both opening the one page, until the night
+  thread below drew them as one line.
 - **Taraweeh has its own page**, in the week-and-year band beside Friday and
   Eid. The Ramadan card opens it, and its kicker became "A night in Ramadan":
   "Taraweeh tonight" above a page titled Taraweeh said the word twice.
@@ -1759,16 +1762,32 @@ branch so it can be tried on the phone before it reaches main.
 - **The night is drawn, not listed.** From ʿIsha to Fajr a line sits under
   the prayer card (`NightThread`): the last third as a band measured from
   Maghrib, the moon at now using the arch's own ʿIshāʾ mark, witr's
-  two-then-one where tonight's witr goes, and the wake-up bell until it rings.
+  two-then-one where tonight's witr goes, and the bell of the alarm that will
+  ring, until it rings. Witr is in the night-prayer page's own marks: filled
+  at the end of the night, outlined before sleep.
 - **One card follows the moon** (`NightCard`, `useTonight`): Before you sleep,
   A night in Ramadan, or The last third of the night. It replaces the sleep
   adhkār card and the night row at the foot of Today, with its "After ʿIsha",
-  "Past the middle" and "The last third" kickers.
-- **One switch is the plan.** "Wake me at 4:38 AM" sets a reminder an hour
-  before Fajr, never before the last third (`planNightWake`), and while it is
-  on witr moves to the end of the night. The app still never asks what anybody
-  prayed. On a Ramadan night the switch is the suhoor wake-up and the fast
-  line steps aside; one alarm a night.
+  "Past the middle" and "The last third" kickers. The adhkār of sleep stay on
+  it until Fajr, as a door in the last third.
+- **One switch is the plan.** "Wake me an hour before Fajr" is a daily alarm
+  and says so ("Every night. Tonight at 4:38 AM."), never before the last
+  third (`planNightWake`). While it is on, witr's mark moves to the end of the
+  night and the card asks "Not prayed witr yet?" rather than telling. The app
+  still never records what anybody prayed. On a night of Ramadan the switch
+  is the suhoor wake-up and the fast line steps aside; one alarm a night.
+- **Corrected after the final review, same day.** The first build drew witr
+  at the end of every last third whether or not anybody had set the wake-up,
+  in marks the reverse of the night-prayer page's. It told somebody who might
+  already have prayed witr that it "moves to the end". It dropped the adhkār
+  of sleep in the last third, worded the switch as if it were for tonight
+  only, and gave taraweeh as "with the imam", though the Taraweeh page says
+  home is better for women in principle. The decisions now live in one pure
+  function, `tonightPlan`, which `night:check` walks against the planners
+  that ring.
+- **Open, Iyad's call:** the wake-up rings an hour before Fajr, and the
+  Voluntary prayers lesson suggests starting with an alarm twenty minutes
+  before. One of them should change.
 - **Left off:** the Arabic title of the adhkār row, which squeezed narrow
   phones (Iyad's call); the adhkār screen opens on it one tap later.
 

@@ -389,29 +389,36 @@ worship-changing first.
 - **Leaving early**: allowed, but staying to the end is recorded as the whole
   night (Abu Dawud 1375, Tirmidhi 806; IslamQA 153247).
 
-### Today at night — `hooks/use-tonight.ts`, `components/night-card.tsx`, `components/night-thread.tsx`, `lib/reminders.ts` (branch `night-thread`)
+### Today at night — `lib/night.ts`, `hooks/use-tonight.ts`, `components/night-card.tsx`, `components/night-thread.tsx`, `lib/reminders.ts` (branch `night-thread`)
 
 Added 13 Sep 2026 with the approved Night Thread design. Every line below is
 model-written wording or a rule drawn on screen.
 
-- **Witr's place follows the reader's own switch, never a question.** Before
-  sleep the card offers Shafʿ and Witr "If you might not wake before Fajr"
-  (Muslim 755; Bukhari 1178). With the wake-up on, the witr row leaves the
-  card and one line says "Witr moves to the end of your night." (Muslim 755).
-  Right for someone who then sleeps through the alarm? The Shafʿ and Witr
-  page covers a missed witr.
+- **Witr's place follows the reader's own switch, and asks where the app
+  cannot know.** Before sleep the card offers Shafʿ and Witr "If you might
+  not wake before Fajr" (Muslim 755; Bukhari 1178). With the wake-up on, the
+  witr row leaves the card and one line asks "Not prayed witr yet? Leave it
+  for the end of your night." (Muslim 755). Asked rather than told, because
+  somebody who prayed witr and then turned the switch on must not be sent to
+  pray it twice. Right for someone who then sleeps through the alarm? The
+  Shafʿ and Witr page covers a missed witr.
 - **The last third of the night**: "The best part of the night to pray, two
   rakʿahs at a time." (the night-prayer page, Bukhari 1145), a "Pray in twos"
-  button, and "Not prayed witr tonight? End with shafʿ and witr".
+  button, "Not prayed witr tonight? End with shafʿ and witr", and the adhkār
+  of sleep for somebody still up.
 - **The wake-up notification**: "The last third of the night" / "Fajr is at
   {time}. A good time to pray, two rakʿahs at a time." It never mentions witr,
   so nobody who prayed it before sleeping is told to pray it twice.
 - **The wake-up time**: an hour before Fajr, never before the last third
-  begins. Is an hour the right default?
-- **A night in Ramadan**: taraweeh "With the imam, and witr with him"; the
+  begins, every night while the switch is on ("Every night. Tonight at 4:38
+  AM."). Is an hour the right default? The Voluntary prayers lesson suggests
+  starting with an alarm twenty minutes before Fajr; the two should agree.
+- **A night in Ramadan**: taraweeh "Two rakʿahs at a time, then witr", the
+  Taraweeh page's own wording, which holds at home as at the mosque; the
   suhoor wake-up takes the place of the night wake-up, one alarm a night.
 - **The drawing**: a line from ʿIsha to Fajr, the last third as a band
-  measured from Maghrib, and witr's two-then-one mark placed early on a
-  Ramadan night, just after now before sleep, or near the end when waking or
-  in the last third. A drawing that places a ruling is content; check the
-  marks say what the card says.
+  measured from Maghrib, and witr's two-then-one in the night-prayer page's
+  own marks: outlined before sleep (early on a night of Ramadan, just after
+  now otherwise), filled at the end of the night while the wake-up is on, and
+  no mark in the last third when it is off. A drawing that places a ruling
+  is content; check the marks say what the card says.

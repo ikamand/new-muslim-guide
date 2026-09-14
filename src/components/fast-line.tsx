@@ -8,7 +8,7 @@ import { useLocation } from '@/hooks/use-location';
 import { usePrayerTimes } from '@/hooks/use-prayer-times';
 import { useReminders } from '@/hooks/use-reminders';
 import { useTheme } from '@/hooks/use-theme';
-import type { TonightState } from '@/hooks/use-tonight';
+import type { Tonight } from '@/hooks/use-tonight';
 import { computeDay, inferProfile } from '@/lib/prayer-times';
 
 /**
@@ -34,7 +34,7 @@ import { computeDay, inferProfile } from '@/lib/prayer-times';
  * often enough that "day 7 of Ramadan" would sometimes be a lie — and
  * nothing here counts anything about the reader.
  */
-export function FastLine({ night }: { night?: TonightState } = {}) {
+export function FastLine({ night }: { night?: Pick<Tonight, 'state' | 'ramadan'> } = {}) {
   const theme = useTheme();
   const { t } = useLocale();
   const hijri = useHijriToday();
@@ -46,13 +46,15 @@ export function FastLine({ night }: { night?: TonightState } = {}) {
   const ramadanClose = hijri?.month === 8 && hijri.day >= 15;
   if (!inRamadan && !ramadanClose) return null;
   /*
-    Beside Today's night card (13 Sep 2026). Before Ramadan the card's own
-    wake-up switch is on screen all night, so the fortnight's offer waits for
-    the day, and it stays on the Reminders screen. In Ramadan the card carries
-    the suhoor switch and Fajr's time until the last third; from then the card
-    is the night prayer, so this line comes back for suhoor.
+    Beside Today's night card (13 Sep 2026). At night the card carries the
+    wake-up switch, so this line steps aside: before Ramadan the fortnight's
+    offer waits for the day and stays on the Reminders screen; on a night of
+    Ramadan the card carries the suhoor switch until the last third; and on
+    the night of Eid there is no fast to wake for, though the civil date is
+    still Ramadan until midnight. From the last third of a night of Ramadan
+    the card is the night prayer, so this line comes back for suhoor.
   */
-  if (night && (!inRamadan || night === 'ramadan')) return null;
+  if (night && !(night.ramadan && night.state === 'third')) return null;
 
   const fajr = today?.prayers.find((prayer) => prayer.id === 'fajr')?.time;
   const maghrib = today?.prayers.find((prayer) => prayer.id === 'maghrib')?.time;

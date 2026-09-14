@@ -3,15 +3,15 @@
  *
  * `npm run night:check`. No network, no device, no clock.
  *
- * Iyad, 13 Sep 2026: Today offers witr from ʿIshāʾ, qiyam al-layl from the
- * middle of the night, and tahajjud from the last third, every night. Nobody
- * checks that by looking at a screen at 02:01, and the first version of the
- * card was wrong in a way no screen showed: it measured the night from ʿIshāʾ
- * rather than Maghrib, so the last third opened half an hour late.
+ * Iyad, 13 Sep 2026: the night splits at ʿIshāʾ, the middle and the last
+ * third, measured from Maghrib. Nobody checks that by looking at a screen at
+ * 02:01, and the first version of the card was wrong in a way no screen
+ * showed: it measured the night from ʿIshāʾ rather than Maghrib, so the last
+ * third opened half an hour late.
  *
  * What this does NOT reach is the screen. Today draws the night from
- * `nightThread`, `nightPrayerAt` and the Ramadan arc through the `useTonight`
- * hook, which only chooses which of its three states the card shows.
+ * `nightThread` and `tonightPlan`, both walked here, through the `useTonight`
+ * hook, which only reads the clock, the Ramadan arc and two switches into them.
  *
  * Fabricated times first, for the reason `adhkar-window-check.mjs` gives: a
  * pure function is honestly tested by handing it times. Then real nights from
@@ -20,8 +20,8 @@
  * is measured from Maghrib.
  */
 import { computeDay, computeNight, findCurrentPrayer, inferProfile, windowEnd } from '../src/lib/prayer-times.ts';
-import { NIGHT_WAKE_LEAD_MINUTES, nightPrayerAt, nightThread } from '../src/lib/night.ts';
-import { planNightWake } from '../src/lib/reminders.ts';
+import { NIGHT_WAKE_LEAD_MINUTES, nightPrayerAt, nightThread, tonightPlan } from '../src/lib/night.ts';
+import { planNightWake, planSuhoor } from '../src/lib/reminders.ts';
 import { arcFor, arcForNight } from '../src/content/ramadan-arc.ts';
 import { hijriDate, hijriOfNight } from '../src/lib/hijri.ts';
 import { PRAYERS } from '../src/content/prayers.ts';
@@ -531,6 +531,106 @@ if (!firstFast) {
   console.log(
     `  night wake-up: ${all.length} mornings planned, and both clock changes; ` +
       `the night of 13 Sep rings ${all[1] ? clock(all[1].fireAt) : '?'} before Fajr ${all[1] ? clock(all[1].anchor) : '?'}`,
+  );
+}
+
+/*
+  Tonight's plan (13 Sep 2026, after the final review): witr is placed only by
+  what the reader told the app, and the bell is the alarm that will really
+  ring. The first build drew witr at the end of every last third, switch or
+  not, beside a card that said nothing of the kind.
+*/
+{
+  let combos = 0;
+  for (const part of ['before', 'third']) {
+    for (const ramadanNight of [false, true]) {
+      for (const suhoorWakeUp of [false, true]) {
+        for (const nightWakeUp of [false, true]) {
+          combos += 1;
+          const plan = tonightPlan({ part, ramadanNight, suhoorWakeUp, nightWakeUp });
+          const label =
+            `tonight, ${part}${ramadanNight ? ', Ramadan' : ''}` +
+            `${suhoorWakeUp ? ', suhoor on' : ''}${nightWakeUp ? ', night wake-up on' : ''}`;
+          const state = part === 'third' ? 'third' : ramadanNight ? 'ramadan' : 'before';
+          if (plan.state !== state) fail(`${label}: state ${plan.state}, expected ${state}`);
+          // At the end only for someone who said they will wake, and never on a night of Ramadan.
+          if ((plan.witr === 'end') !== (nightWakeUp && !ramadanNight)) fail(`${label}: witr ${plan.witr}`);
+          // With the imam, all night, on a night of Ramadan.
+          if ((plan.witr === 'early') !== ramadanNight) fail(`${label}: witr ${plan.witr}`);
+          // Nobody waking and the last third begun: no mark, because nobody knows whether it was prayed.
+          if ((plan.witr === undefined) !== (part === 'third' && !ramadanNight && !nightWakeUp)) {
+            fail(`${label}: witr ${plan.witr}`);
+          }
+          if (plan.wakeFlag !== (ramadanNight ? 'suhoorWakeUp' : 'nightWakeUp')) {
+            fail(`${label}: the card's switch is ${plan.wakeFlag}`);
+          }
+        }
+      }
+    }
+  }
+
+  /*
+    The bell against the planners that ring. `inRamadan` and the night
+    wake-up's skip are `use-reminders.ts`'s own two lines, restated because the
+    hook cannot run here.
+  */
+  const inRamadan = (day) => hijriDate(day)?.month === 9;
+  const ringing = [['an ordinary night', new Date(2026, 8, 13, 12)]];
+  if (firstFast) {
+    ringing.push([
+      'the fifteenth night of Ramadan',
+      new Date(firstFast.getFullYear(), firstFast.getMonth(), firstFast.getDate() + 13, 12),
+    ]);
+  }
+  for (const [name, evening] of ringing) {
+    const maghrib = timeOf(computeDay(place, evening, profile), 'maghrib');
+    const night = computeNight(place, maghrib, profile);
+    const fajr = timeOf(night.morning, 'fajr').getTime();
+    const ramadanNight = Boolean(arcForNight(hijriOfNight(maghrib), 'witr'));
+    for (const suhoorWakeUp of [false, true]) {
+      for (const nightWakeUp of [false, true]) {
+        const rings = [
+          ...(suhoorWakeUp ? planSuhoor(place, profile, maghrib, inRamadan, 2).map((moment) => ['suhoor', moment]) : []),
+          ...(nightWakeUp
+            ? planNightWake(place, profile, maghrib, (day) => suhoorWakeUp && inRamadan(day), 2).map((moment) => ['night', moment])
+            : []),
+        ]
+          .filter(([, moment]) => moment.anchor.getTime() === fajr)
+          .map(([kind]) => kind);
+        const { bell } = tonightPlan({ part: 'before', ramadanNight, suhoorWakeUp, nightWakeUp });
+        const switches = `suhoor ${suhoorWakeUp ? 'on' : 'off'}, night wake-up ${nightWakeUp ? 'on' : 'off'}`;
+        if (rings.length > 1) fail(`${name}, ${switches}: ${rings.join(' and ')} both ring before one Fajr`);
+        if (rings[0] !== bell) fail(`${name}, ${switches}: the bell is ${bell ?? 'none'} but ${rings[0] ?? 'nothing'} rings`);
+      }
+    }
+  }
+
+  /*
+    The card dates a night from its Maghrib (`hijriOfNight`), the planners date
+    the morning (`hijriDate` of the day). If the two ever named different
+    nights, the first night of Ramadan and the night of Eid would draw one
+    alarm and ring another.
+  */
+  let boundaryNights = 0;
+  if (firstFast) {
+    for (let offset = -3; offset <= 32; offset += 1) {
+      const evening = new Date(firstFast.getFullYear(), firstFast.getMonth(), firstFast.getDate() + offset, 12);
+      const maghrib = timeOf(computeDay(place, evening, profile), 'maghrib');
+      const byNight = Boolean(arcForNight(hijriOfNight(maghrib), 'witr'));
+      const morning = new Date(evening.getFullYear(), evening.getMonth(), evening.getDate() + 1);
+      if (byNight !== inRamadan(morning)) {
+        fail(
+          `${evening.toDateString()}: the card says ${byNight ? '' : 'not '}a night of Ramadan, ` +
+            `the planners ${inRamadan(morning) ? '' : 'not '}a morning of Ramadan`,
+        );
+      }
+      boundaryNights += 1;
+    }
+  }
+
+  console.log(
+    `  tonight: ${combos} switch and part combinations; the bell is the alarm that rings on ${ringing.length} real nights; ` +
+      `card and planners agree on ${boundaryNights} nights around Ramadan 1448`,
   );
 }
 

@@ -1,27 +1,21 @@
 import { useLiveSession } from '@/components/adhkar-session-card';
 import { sessionForWindow, type AdhkarSession } from '@/content/duas/sessions';
-import { arcForNight } from '@/content/ramadan-arc';
+import { arcForNight, type ArcRow } from '@/content/ramadan-arc';
 import { useLocation } from '@/hooks/use-location';
 import { usePrayerTimes } from '@/hooks/use-prayer-times';
 import { useSettings } from '@/hooks/use-settings';
 import { hijriOfNight } from '@/lib/hijri';
-import { nightThread, type NightThread } from '@/lib/night';
+import { nightThread, tonightPlan, type NightThread, type TonightPlan } from '@/lib/night';
 import { computeNight } from '@/lib/prayer-times';
 import { SUHOOR_LEAD_MINUTES } from '@/lib/reminders';
 
-/** Which card the night shows. */
-export type TonightState = 'before' | 'ramadan' | 'third';
-
-/** Where witr's mark sits on tonight's line. */
-export type WitrPlace = 'early' | 'next' | 'end';
-
-export type Tonight = {
+export type Tonight = TonightPlan & {
   thread: NightThread;
-  state: TonightState;
-  witr: WitrPlace;
-  /** The wake-up the card's switch sets: an hour before Fajr, or suhoor's in Ramadan. */
+  /** The Ramadan arc's row, on a night of Ramadan: the card's title and its Taraweeh link. */
+  ramadan?: ArcRow;
+  /** The wake-up the card's switch sets: an hour before Fajr, or suhoor's on a night of Ramadan. */
   wakeAt: Date;
-  /** Drawn on the line only while that switch is on. */
+  /** When the bell rings, while an alarm is set for this night. */
   bellAt?: Date;
   /** The sitting of sleep, for the card's adhkār row. */
   session: AdhkarSession | undefined;
@@ -34,21 +28,11 @@ export type Tonight = {
  * ʿIshāʾ → Fajr, and during the twenty minutes after a prayer, when the
  * after-prayer adhkār keep Today's words slot as they always have.
  *
- * ## What it decides, and from what
+ * The decisions are `tonightPlan`'s, in `lib/night.ts`, so the check can walk
+ * them. This hook only reads what they are decided from: the clock, the
+ * Ramadan arc for the night's own Islamic date, and the reader's two switches.
  *
- * - **The state.** The last third from the moment it begins, measured from
- *   Maghrib (`nightThread`). Before that, a Ramadan night when the Ramadan
- *   arc's tarāwīḥ row covers the night's own Islamic date; otherwise "before
- *   you sleep".
- * - **Where witr goes.** With the imam early on a Ramadan night. At the end
- *   of the night in the last third, or whenever the wake-up is on, because
- *   the Sunnah puts witr last for someone who will wake (Muslim 755).
- *   Otherwise just after now: before sleep, for someone who might not wake.
- * - **The bell.** The switch's own alarm: the night wake-up, or on a Ramadan
- *   night the suhoor one, drawn only while it is on.
- *
- * It reads the clock and the reader's own switch. It never reads, stores or
- * guesses what anybody prayed.
+ * ⚠️ What the card and the line say follows from here, and is on the review pile.
  */
 export function useTonight(): Tonight | null {
   const live = useLiveSession();
@@ -67,21 +51,17 @@ export function useTonight(): Tonight | null {
 
   const maghrib = night.evening.prayers.find((prayer) => prayer.id === 'maghrib')?.time;
   const date = maghrib ? hijriOfNight(maghrib) : null;
-  const ramadanNight = Boolean(date && arcForNight(date, 'witr'));
+  const ramadan = date ? arcForNight(date, 'witr') : undefined;
 
-  const state: TonightState = thread.part === 'third' ? 'third' : ramadanNight ? 'ramadan' : 'before';
-  const wakeAt = ramadanNight
-    ? new Date(thread.fajr.getTime() - SUHOOR_LEAD_MINUTES * 60_000)
-    : thread.wakeAt;
-  const waking = ramadanNight ? suhoorWakeUp : nightWakeUp;
-  const witr: WitrPlace = state === 'ramadan' ? 'early' : state === 'third' || nightWakeUp ? 'end' : 'next';
+  const plan = tonightPlan({ part: thread.part, ramadanNight: Boolean(ramadan), suhoorWakeUp, nightWakeUp });
+  const suhoorAt = new Date(thread.fajr.getTime() - SUHOOR_LEAD_MINUTES * 60_000);
 
   return {
+    ...plan,
     thread,
-    state,
-    witr,
-    wakeAt,
-    bellAt: waking ? wakeAt : undefined,
+    ramadan,
+    wakeAt: ramadan ? suhoorAt : thread.wakeAt,
+    bellAt: plan.bell === 'suhoor' ? suhoorAt : plan.bell === 'night' ? thread.wakeAt : undefined,
     session: sessionForWindow('night'),
   };
 }

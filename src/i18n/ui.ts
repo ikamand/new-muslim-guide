@@ -266,25 +266,25 @@ export const EN = {
   'today.away': 'You seem to be away from home',
   /*
     Today at night: the thread and the card that follows the moon (13 Sep
-    2026). ⚠️ Model-written, on the review pile. The card never asks what
-    anybody prayed; after the last third begins it offers witr only as
-    "Not prayed witr tonight?".
+    2026). ⚠️ Model-written, on the review pile. The card never records what
+    anybody prayed; wherever witr could end up prayed twice it asks ("Not
+    prayed witr yet?") rather than tells. The switches are daily alarms, and
+    their help says "Every night". The Ramadan title is the arc's own
+    `arc.tarawih`, the switch titles the Reminders screen's.
   */
   'night.thread.label': 'Tonight, from ʿIsha at {isha} to Fajr at {fajr}. The last third begins at {third}.',
+  'night.thread.bell': 'Your wake-up rings at {time}.',
   'night.thread.lastThird': 'Last third',
   'night.thread.isha': 'ʿIsha {time}',
   'night.thread.fajr': 'Fajr {time}',
   'night.card.before.title': 'Before you sleep',
-  'night.card.ramadan.title': 'A night in Ramadan',
   'night.card.witr': 'If you might not wake before Fajr',
-  'night.card.witr.later': 'Witr moves to the end of your night.',
-  'night.card.taraweeh': 'With the imam, and witr with him',
+  'night.card.witr.later': 'Not prayed witr yet? Leave it for the end of your night.',
+  'night.card.taraweeh': 'Two rakʿahs at a time, then witr',
   'night.card.adhkar': 'Adhkār of sleep',
   'night.card.adhkar.start': 'Start the adhkār',
-  'night.card.wake': 'Wake me at {time}',
-  'night.card.wake.help': 'For the night prayer, before Fajr',
-  'night.card.suhoor': 'Wake me for suhoor at {time}',
-  'night.card.suhoor.help': 'Suhoor ends at Fajr, {time}',
+  'night.card.wake.help': 'Every night. Tonight at {time}.',
+  'night.card.suhoor.help': 'Every night of Ramadan. Tonight at {time}.',
   'night.card.third.title': 'The last third of the night',
   'night.card.third.body': 'The best part of the night to pray, two rakʿahs at a time.',
   'night.card.third.pray': 'Pray in twos',

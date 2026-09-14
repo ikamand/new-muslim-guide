@@ -143,7 +143,8 @@ export function useToday(): TodayItem | undefined {
       2. The Ramadan arc — the season broken into moments.
 
       `ramadan-arc.ts` owns months 8 and 9: the fast in the first days,
-      tarāwīḥ (asked by the night, above), the zakat calculator mid-month
+      tarāwīḥ (which only Today's night card asks for, through `useTonight`),
+      the zakat calculator mid-month
       (the standing month-9 zakat candidate moved there, reasoning and all),
       the last ten nights, then Eid across the month boundary. Asked before
       `seasonFor`, so the season's own Ramadan rows never fire; the season

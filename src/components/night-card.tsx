@@ -15,34 +15,43 @@ import { useReminders } from '@/hooks/use-reminders';
 import { useTheme } from '@/hooks/use-theme';
 import type { Tonight } from '@/hooks/use-tonight';
 import { localiseCatalogEntry } from '@/i18n/localise';
+import { routeFor } from '@/lib/content-routes';
 import { formatTime } from '@/lib/prayer-times';
 
 /**
  * The card that follows the moon: one object for the night, under the thread.
  *
- * Three states, decided by `useTonight`:
+ * Three states, decided by `tonightPlan` (`lib/night.ts`):
  *
  * - **Before you sleep.** Shafʿ and Witr "if you might not wake before Fajr",
  *   the adhkār of sleep with their Start, and the wake-up switch. While the
- *   wake-up is on the witr row leaves and one line says where it went,
- *   because the Sunnah puts witr last for someone who will wake (Muslim 755).
- * - **A night in Ramadan.** Taraweeh, with witr prayed with the imam, the
- *   adhkār of sleep, and the suhoor wake-up — the same setting the fast line
- *   and the Reminders screen switch, so there is one alarm and one switch.
- * - **The last third of the night.** The night prayer, and "Not prayed witr
- *   tonight?" — safe whichever way the evening went.
+ *   wake-up is on the witr row leaves, and one line asks "Not prayed witr
+ *   yet?" and leaves it for the end of the night, because the Sunnah puts witr
+ *   last for someone who will wake (Muslim 755). Asked, not told: somebody who
+ *   prayed witr and then turned the switch on must not be sent to pray it twice.
+ * - **A night in Ramadan.** Taraweeh, two at a time then witr, from the
+ *   Ramadan arc's own row; the adhkār of sleep; and the suhoor wake-up, the
+ *   same setting the fast line and the Reminders screen switch.
+ * - **The last third of the night.** The night prayer, "Not prayed witr
+ *   tonight?", and the adhkār of sleep as a door for somebody still up.
  *
- * It never asks what anybody prayed. The Arabic title of the adhkār stays off
- * the row (Iyad, 13 Sep 2026): on a narrow phone it squeezed the text beside
- * it, and the adhkār screen opens on it one tap later.
+ * The switch is a daily alarm and says so ("Every night"), because an alarm
+ * somebody took to be for tonight only would ring again tomorrow.
+ *
+ * The marks are the night-prayer page's own: two-then-one outlined for
+ * praying witr before sleep, filled for shafʿ and witr at the end of the night.
+ *
+ * It never records what anybody prayed. The Arabic title of the adhkār stays
+ * off the row (Iyad, 13 Sep 2026): on a narrow phone it squeezed the text
+ * beside it, and the adhkār screen opens on it one tap later.
  *
  * ⚠️ Every line of wording here is model-written and on the review pile.
  */
 export function NightCard({ tonight }: { tonight: Tonight }) {
   const theme = useTheme();
   const { locale, t } = useLocale();
-  const { flags, toggleFlag } = useReminders();
-  const { state, thread, session } = tonight;
+  const { flags, toggleFlag, granted } = useReminders();
+  const { state, session, witr, wakeFlag, ramadan } = tonight;
 
   const titleOf = (id: string) => {
     const found = resolveRef({ kind: 'reference', id });
@@ -52,6 +61,21 @@ export function NightCard({ tonight }: { tonight: Tonight }) {
   const glyph = (kind: 'closing' | 'earlier' | 'pairs') => (
     <TimelineGlyph kind={kind} accent={theme.accent} gold={theme.gold} ground={theme.background} />
   );
+  const adhkar = session ? (
+    <>
+      <View style={styles.mark}>
+        <Svg width={22} height={22} viewBox="0 0 22 22">
+          <DayMarkAt name="isha" cx={11} cy={11} size={16} color={theme.gold} />
+        </Svg>
+      </View>
+      <View style={styles.stepText}>
+        <ThemedText type="default">{t('night.card.adhkar')}</ThemedText>
+        <ThemedText type="small" themeColor="textSecondary">
+          {sessionMeta(session, t, { long: true })}
+        </ThemedText>
+      </View>
+    </>
+  ) : null;
 
   if (state === 'third') {
     return (
@@ -70,7 +94,7 @@ export function NightCard({ tonight }: { tonight: Tonight }) {
           accessibilityLabel={`${t('night.card.third.ask')} ${t('night.card.third.witr')}`}
           style={styles.step}
           pressedStyle={{ opacity: 0.6 }}>
-          <View style={styles.mark}>{glyph('earlier')}</View>
+          <View style={styles.mark}>{glyph('closing')}</View>
           <ThemedText type="small" themeColor="textSecondary" style={styles.stepText}>
             {`${t('night.card.third.ask')} `}
             <ThemedText type="smallBold" themeColor="accent">
@@ -78,50 +102,60 @@ export function NightCard({ tonight }: { tonight: Tonight }) {
             </ThemedText>
           </ThemedText>
         </PressableLink>
+        {/* Still up: the adhkār of sleep, as a door rather than a second button. */}
+        {session ? (
+          <PressableLink
+            href={{ pathname: '/adhkar/[id]', params: { id: session.id } }}
+            accessibilityLabel={t('night.card.adhkar')}
+            style={styles.step}
+            pressedStyle={{ opacity: 0.6 }}>
+            {adhkar}
+            {chevron}
+          </PressableLink>
+        ) : null}
       </View>
     );
   }
 
-  const ramadan = state === 'ramadan';
-  const flag = ramadan ? 'suhoorWakeUp' : 'nightWakeUp';
-  const waking = flags[flag];
-  const wakeTitle = t(ramadan ? 'night.card.suhoor' : 'night.card.wake').replace(
+  const taraweeh = ramadan?.ref ? resolveRef(ramadan.ref) : undefined;
+  const taraweehTitle = taraweeh ? localiseCatalogEntry(taraweeh, locale).title : '';
+  const waking = flags[wakeFlag];
+  const suhoor = wakeFlag === 'suhoorWakeUp';
+  const wakeTitle = t(suhoor ? 'reminders.suhoor' : 'reminders.nightWake');
+  const wakeHelp = t(suhoor ? 'night.card.suhoor.help' : 'night.card.wake.help').replace(
     '{time}',
     formatTime(tonight.wakeAt),
   );
-  const wakeHelp = ramadan
-    ? t('night.card.suhoor.help').replace('{time}', formatTime(thread.fajr))
-    : t('night.card.wake.help');
 
   return (
     <View style={[styles.card, { borderBottomColor: theme.goldSoft }]}>
       <View style={[styles.rail, { backgroundColor: theme.gold }]} />
-      <ThemedText type="cardTitle">
-        {t(ramadan ? 'night.card.ramadan.title' : 'night.card.before.title')}
-      </ThemedText>
+      <ThemedText type="cardTitle">{t(ramadan ? ramadan.reason : 'night.card.before.title')}</ThemedText>
 
-      {ramadan ? (
+      {taraweeh ? (
         <PressableLink
-          href={{ pathname: '/reference/[id]', params: { id: 'taraweeh' } }}
-          accessibilityLabel={`${titleOf('taraweeh')}. ${t('night.card.taraweeh')}`}
+          href={routeFor(taraweeh)}
+          accessibilityLabel={`${taraweehTitle}. ${t('night.card.taraweeh')}`}
           style={styles.step}
           pressedStyle={{ opacity: 0.6 }}>
           <View style={styles.mark}>{glyph('pairs')}</View>
           <View style={styles.stepText}>
-            <ThemedText type="default">{titleOf('taraweeh')}</ThemedText>
+            <ThemedText type="default">{taraweehTitle}</ThemedText>
             <ThemedText type="small" themeColor="textSecondary">
               {t('night.card.taraweeh')}
             </ThemedText>
           </View>
           {chevron}
         </PressableLink>
-      ) : waking ? null : (
+      ) : null}
+
+      {witr === 'next' ? (
         <PressableLink
           href={{ pathname: '/reference/[id]', params: { id: 'witr' } }}
           accessibilityLabel={`${titleOf('witr')}. ${t('night.card.witr')}`}
           style={styles.step}
           pressedStyle={{ opacity: 0.6 }}>
-          <View style={styles.mark}>{glyph('closing')}</View>
+          <View style={styles.mark}>{glyph('earlier')}</View>
           <View style={styles.stepText}>
             <ThemedText type="default">{titleOf('witr')}</ThemedText>
             <ThemedText type="small" themeColor="textSecondary">
@@ -130,23 +164,11 @@ export function NightCard({ tonight }: { tonight: Tonight }) {
           </View>
           {chevron}
         </PressableLink>
-      )}
+      ) : null}
 
       {session ? (
         <>
-          <View style={styles.step}>
-            <View style={styles.mark}>
-              <Svg width={22} height={22} viewBox="0 0 22 22">
-                <DayMarkAt name="isha" cx={11} cy={11} size={16} color={theme.gold} />
-              </Svg>
-            </View>
-            <View style={styles.stepText}>
-              <ThemedText type="default">{t('night.card.adhkar')}</ThemedText>
-              <ThemedText type="small" themeColor="textSecondary">
-                {sessionMeta(session, t, { long: true })}
-              </ThemedText>
-            </View>
-          </View>
+          <View style={styles.step}>{adhkar}</View>
           <Action
             href={{ pathname: '/adhkar/[id]', params: { id: session.id } }}
             label={t('night.card.adhkar.start')}
@@ -163,13 +185,19 @@ export function NightCard({ tonight }: { tonight: Tonight }) {
         </View>
         <Switch
           value={waking}
-          onValueChange={() => void toggleFlag(flag)}
+          onValueChange={() => void toggleFlag(wakeFlag)}
           accessibilityLabel={wakeTitle}
           trackColor={{ false: theme.backgroundSelected, true: theme.accent }}
           thumbColor={theme.background}
         />
       </View>
-      {waking && !ramadan ? (
+      {/* The switch cannot turn on without notifications; say so where it was tapped. */}
+      {granted === false ? (
+        <ThemedText type="small" themeColor="textSecondary">
+          {t('settings.reminders.denied')}
+        </ThemedText>
+      ) : null}
+      {witr === 'end' ? (
         <ThemedText type="small" themeColor="gold">
           {t('night.card.witr.later')}
         </ThemedText>

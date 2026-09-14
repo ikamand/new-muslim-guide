@@ -11,9 +11,10 @@ import { computeDay, PRAYER_IDS, type LatLon, type MethodProfile, type PrayerId 
  * Two constraints shape the design.
  *
  * 1. **iOS caps how many notifications an app may have pending.** The cap is 64,
- *    so five prayers across twelve days sits just under it. This is why the app
- *    schedules a rolling window and tops it up on launch rather than scheduling
- *    a year of prayers once.
+ *    so five prayers across twelve days sits just under it, and the wake-ups
+ *    and notes on top of them are cut from the far end (`PENDING_CAP` in
+ *    `use-reminders.ts`). This is why the app schedules a rolling window and
+ *    tops it up on launch rather than scheduling a year of prayers once.
  *
  * 2. **Prayer times are not a fixed clock time.** Every day differs, and the
  *    difference is largest exactly where reminders matter most — Fajr in a
@@ -21,7 +22,7 @@ import { computeDay, PRAYER_IDS, type LatLon, type MethodProfile, type PrayerId 
  *    rather than repeating a daily alarm.
  */
 
-/** Twelve days × five prayers = 60, just under the 64 iOS allows to be pending. */
+/** Twelve days × five prayers = 60, just under the 64 iOS allows to be pending. Anything on top is cut from the far end. */
 export const DAYS_AHEAD = 12;
 
 export type ReminderSettings = {

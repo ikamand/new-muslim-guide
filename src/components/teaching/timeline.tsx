@@ -60,7 +60,7 @@ export function TeachingTimeline({
                 <View style={[styles.thread, styles.threadBottom, { backgroundColor: theme.goldSoft }]} />
               )}
               <View style={styles.mark}>
-                <Mark kind={mark} accent={theme.accent} gold={theme.gold} ground={theme.background} />
+                <TimelineGlyph kind={mark} accent={theme.accent} gold={theme.gold} ground={theme.background} />
               </View>
             </View>
             <ThemedText
@@ -75,7 +75,12 @@ export function TeachingTimeline({
   );
 }
 
-function Mark({
+/**
+ * One timeline mark, drawn on its own disc of the page's ground. Exported so
+ * Today's night card draws the same two-then-one and the same stacked pairs
+ * the night-prayer page does.
+ */
+export function TimelineGlyph({
   kind,
   accent,
   gold,

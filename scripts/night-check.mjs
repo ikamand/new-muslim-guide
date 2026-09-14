@@ -9,9 +9,9 @@
  * card was wrong in a way no screen showed: it measured the night from ʿIshāʾ
  * rather than Maghrib, so the last third opened half an hour late.
  *
- * What this does NOT reach is the ranking. Whether a Ramadan card or a
- * Thursday question can take the slot from the night is decided inside the
- * `useToday` hook, which puts the night first and says why.
+ * What this does NOT reach is the screen. Today draws the night from
+ * `nightThread`, `nightPrayerAt` and the Ramadan arc through the `useTonight`
+ * hook, which only chooses which of its three states the card shows.
  *
  * Fabricated times first, for the reason `adhkar-window-check.mjs` gives: a
  * pure function is honestly tested by handing it times. Then real nights from
@@ -283,7 +283,7 @@ if (!firstFast) {
   fail('no 1 Ramadan 1448 found: this Node has no Umm al-Qura calendar, so the night date cannot be checked');
 } else {
   const civil = (offset) => new Date(firstFast.getFullYear(), firstFast.getMonth(), firstFast.getDate() + offset, 12);
-  /* The card the night would show at `now`, by the same steps `useToday` takes. */
+  /* Whether tarāwīḥ holds the night at `now`, from the same arc row `useTonight` reads. */
   const tarawihAt = (now) => {
     const night = computeNight(place, now, profile);
     const part = night && nightPrayerAt(night.evening, night.morning, now);
@@ -448,6 +448,8 @@ if (!firstFast) {
     ...SHAPES,
     // The last third begins less than an hour before Fajr: the wake-up waits for it.
     { name: 'short night', fajr: 100, sunrise: 200, dhuhr: 780, asr: 1030, maghrib: 1400, isha: 1420 },
+    // ʿIshāʾ falls inside the last third (far north in summer): the whole line is gold from the start.
+    { name: 'isha inside the last third', fajr: 90, sunrise: 180, dhuhr: 790, asr: 1050, maghrib: 1350, isha: 1500, ishaInThird: true },
   ];
   for (const spec of shapes) {
     const fajrNext = 1440 + spec.fajr;
@@ -460,6 +462,12 @@ if (!firstFast) {
     };
     const morning = { prayers: [{ id: 'fajr', label: 'fajr', time: at(fajrNext) }] };
     walk(spec.name, evening, morning);
+    if (spec.ishaInThird) {
+      const atIsha = nightThread(evening, morning, at(spec.isha));
+      if (!atIsha || atIsha.lastThird !== 0 || atIsha.part !== 'third') {
+        fail(`${spec.name}: at ʿIshāʾ the last third is ${atIsha?.lastThird} and the part ${atIsha?.part}, expected 0 and third`);
+      }
+    }
   }
 
   for (const date of ['2026-09-13', '2026-06-21', '2026-12-21', '2026-03-07', '2026-10-31']) {

@@ -264,9 +264,32 @@ export const EN = {
   'today.zakat': 'It is Ramadan',
   'today.zakat.why': 'Many people work theirs out this month. It is not due now. It is due when a year has passed on your own wealth.',
   'today.away': 'You seem to be away from home',
-  'today.afterIsha': 'After ʿIsha',
-  'today.pastMiddle': 'Past the middle of the night',
-  'today.lastThird': 'The last third of the night',
+  /*
+    Today at night: the thread and the card that follows the moon (13 Sep
+    2026). ⚠️ Model-written, on the review pile. The card never asks what
+    anybody prayed; after the last third begins it offers witr only as
+    "Not prayed witr tonight?".
+  */
+  'night.thread.label': 'Tonight, from ʿIsha at {isha} to Fajr at {fajr}. The last third begins at {third}.',
+  'night.thread.lastThird': 'Last third',
+  'night.thread.isha': 'ʿIsha {time}',
+  'night.thread.fajr': 'Fajr {time}',
+  'night.card.before.title': 'Before you sleep',
+  'night.card.ramadan.title': 'A night in Ramadan',
+  'night.card.witr': 'If you might not wake before Fajr',
+  'night.card.witr.later': 'Witr moves to the end of your night.',
+  'night.card.taraweeh': 'With the imam, and witr with him',
+  'night.card.adhkar': 'Adhkār of sleep',
+  'night.card.adhkar.start': 'Start the adhkār',
+  'night.card.wake': 'Wake me at {time}',
+  'night.card.wake.help': 'For the night prayer, before Fajr',
+  'night.card.suhoor': 'Wake me for suhoor at {time}',
+  'night.card.suhoor.help': 'Suhoor ends at Fajr, {time}',
+  'night.card.third.title': 'The last third of the night',
+  'night.card.third.body': 'The best part of the night to pray, two rakʿahs at a time.',
+  'night.card.third.pray': 'Pray in twos',
+  'night.card.third.ask': 'Not prayed witr tonight?',
+  'night.card.third.witr': 'End with shafʿ and witr',
   'today.continue': 'Carry on where you were',
   'today.reading': 'You were reading',
 

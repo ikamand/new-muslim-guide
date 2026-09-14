@@ -4,7 +4,7 @@ import { useEffect, useMemo } from 'react';
 import { resolveRef } from '@/content';
 import { lessonFor } from '@/content/curriculum';
 import { FIRSTS } from '@/content/firsts';
-import { arcFor, arcForNight } from '@/content/ramadan-arc';
+import { arcFor } from '@/content/ramadan-arc';
 import { seasonFor } from '@/content/seasons';
 import { useHijriToday } from '@/hooks/use-hijri';
 /*
@@ -16,16 +16,12 @@ import { useCurriculum } from '@/hooks/use-curriculum';
 import { useLocale } from '@/hooks/use-locale';
 import { useObservations } from '@/hooks/use-observations';
 import { useLocation } from '@/hooks/use-location';
-import { usePrayerTimes } from '@/hooks/use-prayer-times';
 import { useReadingInProgress } from '@/hooks/use-reading';
 import { useSettings } from '@/hooks/use-settings';
 import { localiseCatalogEntry } from '@/i18n/localise';
 import type { UIKey } from '@/i18n/ui';
 import { routeFor } from '@/lib/content-routes';
-import { hijriOfNight } from '@/lib/hijri';
 import { isAwayFromHome, nextPlaceState } from '@/lib/home-place';
-import { nightPrayerAt, type NightPrayer } from '@/lib/night';
-import { computeNight } from '@/lib/prayer-times';
 
 /**
  * The one thing worth today, and never more than one.
@@ -48,9 +44,9 @@ import { computeNight } from '@/lib/prayer-times';
  *
  * ## Ranked by how soon it stops being true
  *
- * The night first, since 13 Sep 2026. It was fourth, under the calendar and
- * the weekday, which are true all day and so took the slot all night too; a
- * card true for three hours lost to a Thursday. Then travelling, because it is
+ * The night is no longer a candidate. Since 13 Sep 2026 Today draws it under
+ * the prayer card as the night thread and its card (`use-tonight.ts`), so it
+ * does not have to win this slot to be seen. Travelling first, because it is
  * the only one that is about where the reader IS rather than what day it is,
  * and it is wrong to bury. Then the calendar window, then the weekday. The
  * lesson last, because it will keep.
@@ -78,12 +74,10 @@ import { computeNight } from '@/lib/prayer-times';
  * a real page about what happens in the first ten minutes would earn the slot.
  *
  * **Whether you have prayed witr yet.** The app does not know and must not
- * guess. `index.tsx:43` promises it never notices an absence. What it may say
- * is what the CLOCK is doing — that ʿIshāʾ has passed, or the middle of the
- * night, or that the last third has begun — which is a fact about the sky
- * rather than about the reader. So qiyam is offered after witr's time without
- * knowing whether witr was prayed, and the qiyam page is what says not to pray
- * it twice.
+ * guess: Today promises it never notices an absence. The night card places
+ * witr from what the reader chose — the wake-up switch — and from the clock,
+ * and once the last third begins it asks only "Not prayed witr tonight?",
+ * which is safe whichever way the night went.
  */
 
 export type TodayItem = {
@@ -96,25 +90,11 @@ export type TodayItem = {
   href: Href;
 };
 
-/** The page each part of the night opens, and the few words that say why. */
-const NIGHT_PAGE: Record<NightPrayer, string> = {
-  witr: 'witr',
-  /* One page for both since 13 Sep 2026, "Qiyam prayer / Tahajjud"; the kicker says which part of the night it is. */
-  qiyam: 'qiyam-al-layl',
-  tahajjud: 'qiyam-al-layl',
-};
-const NIGHT_REASON: Record<NightPrayer, UIKey> = {
-  witr: 'today.afterIsha',
-  qiyam: 'today.pastMiddle',
-  tahajjud: 'today.lastThird',
-};
-
 export function useToday(): TodayItem | undefined {
   const { locale, t } = useLocale();
   const hijri = useHijriToday();
   const { next } = useCurriculum();
   const { coords } = useLocation();
-  const { today, profile } = usePrayerTimes();
   const { home, awaySince, setMany, loaded: settingsLoaded } = useSettings();
   const { firsts } = useObservations();
   const reading = useReadingInProgress();
@@ -143,75 +123,7 @@ export function useToday(): TodayItem | undefined {
   return useMemo(() => {
     const now = new Date();
 
-    /*
-      1. The night, every night.
-
-      Iyad, 13 Sep 2026: witr from ʿIshāʾ, qiyam al-layl from the middle of the
-      night, tahajjud from the last third. `lib/night.ts` holds where each part
-      begins and why. First because it used to be fourth, under the Ramadan
-      arc, the seasons and the Thursday question, and those are true all day,
-      so they held the slot all night: the last-third card, true for three
-      hours, was missing on more than sixty nights a year, every night of
-      Ramadan among them.
-
-      The cost, accepted: from ʿIshāʾ to Fajr nothing else reaches this slot
-      except tarāwīḥ, below. A half-read lesson, the rest of the Ramadan arc
-      and the travel card wait for morning.
-
-      The PAGE, not the walkthrough. Every other door to a voluntary prayer
-      has opened the reference since the inversion of 25 Aug (the plan, "The
-      inversion"), with the generated guide one tap down behind the page's
-      own "How". This card was built three days later against the guide and
-      was the one door that never got it: at 4am it opened a twenty-three-step
-      stepper for a prayer the reader already prays five times a day, and
-      skipped the page's first sentence, that nobody is behind for not
-      praying it. Iyad caught it on the phone, 12 Sep 2026.
-
-      `today` is read only to wait for prayer times, but it is also what
-      re-runs this on the prayer-times hook's 30-second tick, so the card
-      turns over at a boundary without the app being reopened.
-    */
-    const night = today && coords && profile ? computeNight(coords, now, profile) : null;
-    const nightPrayer = night ? nightPrayerAt(night.evening, night.morning, now) : null;
-    if (night && nightPrayer) {
-      /*
-        Every night of Ramadan, tarāwīḥ takes the night from ʿIshāʾ to the
-        last third, in place of witr and qiyam al-layl, and tahajjud keeps the
-        last third (Iyad, 13 Sep 2026; the row is in `ramadan-arc.ts`).
-        Dated by the night rather than the civil calendar: the night begins
-        at Maghrib, so the evening before the first fast is already the first
-        night of Ramadan, and the first night of tarāwīḥ.
-      */
-      const maghrib = night.evening.prayers.find((prayer) => prayer.id === 'maghrib')?.time;
-      const nightDate = maghrib ? hijriOfNight(maghrib) : null;
-      const arcNight = nightDate ? arcForNight(nightDate, nightPrayer) : undefined;
-      const arcPage = arcNight?.ref ? resolveRef(arcNight.ref) : undefined;
-      if (arcNight && arcPage) {
-        const entry = localiseCatalogEntry(arcPage, locale);
-        return {
-          key: `arc:${arcNight.id}`,
-          reason: arcNight.reason,
-          title: entry.title,
-          description: entry.shortDescription,
-          minutes: entry.meta?.estimatedMinutes,
-          href: routeFor(arcPage),
-        };
-      }
-
-      const nightPage = resolveRef({ kind: 'reference', id: NIGHT_PAGE[nightPrayer] });
-      if (nightPage) {
-        const entry = localiseCatalogEntry(nightPage, locale);
-        return {
-          key: `reference:${NIGHT_PAGE[nightPrayer]}`,
-          reason: NIGHT_REASON[nightPrayer],
-          title: entry.title,
-          description: entry.shortDescription,
-          href: routeFor(nightPage),
-        };
-      }
-    }
-
-    /* 2. Away from home. About where the reader is, not what day it is. */
+    /* 1. Away from home. About where the reader is, not what day it is. */
     if (isAwayFromHome(home, coords)) {
       const travelling = resolveRef({ kind: 'reference', id: 'travelling' });
       if (travelling) {
@@ -228,7 +140,7 @@ export function useToday(): TodayItem | undefined {
     }
 
     /*
-      3. The Ramadan arc — the season broken into moments.
+      2. The Ramadan arc — the season broken into moments.
 
       `ramadan-arc.ts` owns months 8 and 9: the fast in the first days,
       tarāwīḥ (asked by the night, above), the zakat calculator mid-month
@@ -262,7 +174,7 @@ export function useToday(): TodayItem | undefined {
       }
     }
 
-    /* 4. The calendar window — Dhul Hijjah, Muharram (Ramadan is the arc's). */
+    /* 3. The calendar window — Dhul Hijjah, Muharram (Ramadan is the arc's). */
     const season = hijri ? seasonFor(hijri) : undefined;
     if (season) {
       const found = resolveRef(season.ref);
@@ -282,7 +194,7 @@ export function useToday(): TodayItem | undefined {
     }
 
     /*
-      5. A first the app can tell the DAY of, but not the answer to.
+      4. A first the app can tell the DAY of, but not the answer to.
 
       "It is Friday tomorrow. Was that your first Jumuʿah?" — asked on the
       Thursday, so the question arrives while the answer is still ahead rather
@@ -312,7 +224,7 @@ export function useToday(): TodayItem | undefined {
     }
 
     /*
-      6. Something left half-read. Ahead of the journey's next lesson because
+      5. Something left half-read. Ahead of the journey's next lesson because
       a book somebody is midway through beats one they have not opened — and
       this is the slot that is allowed to notice what they were doing, so the
       library on Learn never has to move a card to say it.
@@ -333,7 +245,7 @@ export function useToday(): TodayItem | undefined {
     }
 
     /*
-      7. The lesson. Last, because it has no deadline — which is exactly why it
+      6. The lesson. Last, because it has no deadline — which is exactly why it
       should never have been a permanent card above the prayer times.
     */
     if (next) {
@@ -349,5 +261,5 @@ export function useToday(): TodayItem | undefined {
     }
 
     return undefined;
-  }, [hijri, next, reading, locale, coords, home, today, profile, firsts, t]);
+  }, [hijri, next, reading, locale, coords, home, firsts, t]);
 }

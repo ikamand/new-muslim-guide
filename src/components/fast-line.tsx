@@ -33,7 +33,7 @@ import { computeDay, inferProfile } from '@/lib/prayer-times';
  * often enough that "day 7 of Ramadan" would sometimes be a lie — and
  * nothing here counts anything about the reader.
  */
-export function FastLine() {
+export function FastLine({ quiet = false }: { quiet?: boolean } = {}) {
   const theme = useTheme();
   const { t } = useLocale();
   const hijri = useHijriToday();
@@ -44,6 +44,8 @@ export function FastLine() {
   const inRamadan = hijri?.month === 9;
   const ramadanClose = hijri?.month === 8 && hijri.day >= 15;
   if (!inRamadan && !ramadanClose) return null;
+  // On a Ramadan night the night card carries the suhoor wake-up and Fajr's time.
+  if (quiet) return null;
 
   const fajr = today?.prayers.find((prayer) => prayer.id === 'fajr')?.time;
   const maghrib = today?.prayers.find((prayer) => prayer.id === 'maghrib')?.time;

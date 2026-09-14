@@ -9,6 +9,8 @@ import { DayName } from '@/components/day-name';
 import { AdhkarSessionCard, useLiveSession } from '@/components/adhkar-session-card';
 import { DuaCard } from '@/components/dua-card';
 import { FastLine } from '@/components/fast-line';
+import { NightCard } from '@/components/night-card';
+import { NightThread } from '@/components/night-thread';
 import { PrayerTimesCard } from '@/components/prayer-times-card';
 import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
@@ -20,6 +22,7 @@ import { usePrayerTimes } from '@/hooks/use-prayer-times';
 import { usePrayerConfidence } from '@/hooks/use-competence';
 import { useTheme } from '@/hooks/use-theme';
 import { useToday, type TodayItem } from '@/hooks/use-today';
+import { useTonight } from '@/hooks/use-tonight';
 import { localiseGuide } from '@/i18n/localise';
 import type { UIKey } from '@/i18n/ui';
 
@@ -254,6 +257,7 @@ export default function TodayScreen() {
   const { current } = usePrayerTimes();
   const { locale, t } = useLocale();
   const item = useToday();
+  const tonight = useTonight();
 
   /* The prayer to pray NOW — null between windows, and so is the button. */
   const currentPrayer = current ? PRAYERS.find((prayer) => prayer.id === current.id) : undefined;
@@ -277,7 +281,7 @@ export default function TodayScreen() {
           The fast, during Ramadan and the fortnight before it. Renders
           nothing the other eleven months — see docs/ramadan-mode.md.
         */}
-        <FastLine />
+        <FastLine quiet={tonight?.state === 'ramadan'} />
 
         {/*
           One words slot, not two cards.
@@ -288,7 +292,18 @@ export default function TodayScreen() {
           so the morning adhkār, seven minutes somebody says every day of their
           life, was the one daily thing Today never mentioned.
         */}
-        <WordsSlot />
+        {/*
+          From ʿIshāʾ to Fajr the words slot is the night: the thread under
+          the prayer card, and the card that follows the moon (use-tonight.ts).
+        */}
+        {tonight ? (
+          <View>
+            <NightThread thread={tonight.thread} witr={tonight.witr} bellAt={tonight.bellAt} />
+            <NightCard tonight={tonight} />
+          </View>
+        ) : (
+          <WordsSlot />
+        )}
 
         {/*
           One thing worth today, chosen by a single ranked function, and

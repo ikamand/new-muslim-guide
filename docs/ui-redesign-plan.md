@@ -1785,9 +1785,22 @@ branch so it can be tried on the phone before it reaches main.
   home is better for women in principle. The decisions now live in one pure
   function, `tonightPlan`, which `night:check` walks against the planners
   that ring.
-- **Open, Iyad's call:** the wake-up rings an hour before Fajr, and the
-  Voluntary prayers lesson suggests starting with an alarm twenty minutes
-  before. One of them should change.
+- **Alarm times, the same evening.** Iyad: *"lesson should say '20 minutes
+  or more'"* and *"alarms times should be able to set the actual time like an
+  alarm clock, same for suhoor."* The lesson now says twenty minutes or more.
+  Both wake-ups still follow Fajr until somebody sets a time (an hour before,
+  45 minutes for suhoor), because Fajr moves by minutes a day and by an hour
+  at a clock change. Tapping the time on the row opens the phone's own picker
+  (the iOS wheel, the Android clock dial; steppers on the web), and "Back to
+  an hour before Fajr" undoes it. A set time rings wherever it falls between
+  ʿIsha and Fajr, before the last third too; outside that it rings at the
+  default and the row says so ("Fajr is at 5:28 AM that morning, so it rings
+  at 4:43 AM instead"), because a fixed suhoor alarm drifts past Fajr within
+  one Ramadan (8 of 29 mornings at 05:30 in San Francisco in 1448).
+  `WakeRow` is the one row on the night card, the fast line and Reminders;
+  `resolveWake` places every ring, and `night:check` walks it. The native
+  pickers come from Expo UI, already in the installed build, and were not
+  seen on a phone before shipping.
 - **Left off:** the Arabic title of the adhkār row, which squeezed narrow
   phones (Iyad's call); the adhkār screen opens on it one tap later.
 

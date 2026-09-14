@@ -2,13 +2,14 @@ import { Stack } from 'expo-router';
 import { Linking, Platform, Pressable, ScrollView, StyleSheet, Switch, View } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
+import { WakeRow } from '@/components/wake-row';
 import { MaxContentWidth, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { useReminders, type ReminderFlag } from '@/hooks/use-reminders';
 import { useTheme } from '@/hooks/use-theme';
 import type { UIKey } from '@/i18n/ui';
 import { PRAYER_IDS, PRAYER_LABEL } from '@/lib/prayer-times';
-import { LEAD_CHOICES } from '@/lib/reminders';
+import { LEAD_CHOICES, type WakeFlag } from '@/lib/reminders';
 
 /**
  * Reminders: everything the phone can wake you for, in the order the week
@@ -59,6 +60,13 @@ export default function RemindersScreen() {
         trackColor={{ false: theme.backgroundSelected, true: theme.accent }}
         thumbColor={theme.background}
       />
+    </View>
+  );
+
+  /* The two wake-ups, set like an alarm clock (`wake-row.tsx`), on the same ruled row. */
+  const wakeRow = (flag: WakeFlag) => (
+    <View style={[styles.group, styles.wakeRow, { borderColor: theme.goldSoft }]}>
+      <WakeRow flag={flag} roomy />
     </View>
   );
 
@@ -160,7 +168,7 @@ export default function RemindersScreen() {
 
       <View style={styles.section}>
         {heading('reminders.night')}
-        {flagRow('nightWakeUp', 'reminders.nightWake')}
+        {wakeRow('nightWakeUp')}
       </View>
 
       <View style={styles.section}>
@@ -172,7 +180,7 @@ export default function RemindersScreen() {
           mind can always find it (docs/ramadan-mode.md R3). */}
       <View style={styles.section}>
         {heading('reminders.ramadan')}
-        {flagRow('suhoorWakeUp', 'reminders.suhoor')}
+        {wakeRow('suhoorWakeUp')}
       </View>
 
       <View style={styles.section}>
@@ -218,4 +226,5 @@ const styles = StyleSheet.create({
     paddingVertical: Spacing.three,
   },
   flagLabel: { flex: 1, paddingRight: Spacing.two },
+  wakeRow: { paddingVertical: Spacing.three },
 });

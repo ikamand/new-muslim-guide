@@ -9,7 +9,7 @@ import {
 } from '@/lib/onboarding';
 import { SHAHADA_KEY } from '@/content/curriculum';
 import { migrateProgressKey } from '@/content/progress-keys';
-import { DEFAULT_REMINDERS, LEAD_CHOICES, type ReminderSettings } from '@/lib/reminders';
+import { DEFAULT_REMINDERS, isWakeTime, LEAD_CHOICES, type ReminderSettings, type WakeTime } from '@/lib/reminders';
 import type { MosqueFit } from '@/lib/mosque-fit';
 import type { HomePlace } from '@/lib/home-place';
 import { PRAYER_IDS } from '@/lib/prayer-times';
@@ -149,12 +149,18 @@ export type Settings = {
    * 2026: a declined offer must never close the door on a changed mind.
    */
   suhoorWakeUp: boolean;
+  /**
+   * The clock time the suhoor wake-up rings at, or null to follow Fajr (45
+   * minutes before). Iyad, 13 Sep 2026: alarm times set "like an alarm clock".
+   */
+  suhoorTime: WakeTime | null;
   /** A note when the morning adhkār window opens. Off by default. */
   adhkarNote: boolean;
   /** A note on Thursday evening that tomorrow is Jumuʿah. Off by default. */
   jumuahNote: boolean;
   /**
-   * Wake me an hour before Fajr for the night prayer. Off by default.
+   * Wake me for the night prayer, an hour before Fajr unless `nightWakeTime`
+   * sets a time. Off by default.
    *
    * Today's night card reads it as the plan for the night (13 Sep 2026): while
    * it is on, witr's mark moves to the end of the night, because the Sunnah
@@ -162,6 +168,8 @@ export type Settings = {
    * prayed.
    */
   nightWakeUp: boolean;
+  /** The clock time the night wake-up rings at, or null to follow Fajr. See `suhoorTime`. */
+  nightWakeTime: WakeTime | null;
   /**
    * Whose recitation plays in the Qur'an tab.
    *
@@ -225,6 +233,8 @@ const DEFAULTS: Settings = {
   adhkarNote: false,
   jumuahNote: false,
   nightWakeUp: false,
+  suhoorTime: null,
+  nightWakeTime: null,
   reciter: DEFAULT_RECITER,
   pinnedDuas: [],
   wordsOpened: false,
@@ -367,6 +377,9 @@ function parseStored(raw: string | null): Settings {
       adhkarNote: typeof stored.adhkarNote === 'boolean' ? stored.adhkarNote : false,
       jumuahNote: typeof stored.jumuahNote === 'boolean' ? stored.jumuahNote : false,
       nightWakeUp: typeof stored.nightWakeUp === 'boolean' ? stored.nightWakeUp : false,
+      // A malformed time follows Fajr rather than ringing at a time nobody chose.
+      suhoorTime: isWakeTime(stored.suhoorTime) ? stored.suhoorTime : null,
+      nightWakeTime: isWakeTime(stored.nightWakeTime) ? stored.nightWakeTime : null,
       // A voice dropped from a later build reads as the default rather than
       // throwing, and rather than leaving a folder name that no longer resolves.
       reciter: isReciterId(stored.reciter) ? stored.reciter : DEFAULTS.reciter,

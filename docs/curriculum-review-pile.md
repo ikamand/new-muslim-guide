@@ -389,7 +389,7 @@ worship-changing first.
 - **Leaving early**: allowed, but staying to the end is recorded as the whole
   night (Abu Dawud 1375, Tirmidhi 806; IslamQA 153247).
 
-### Today at night — `lib/night.ts`, `hooks/use-tonight.ts`, `components/night-card.tsx`, `components/night-thread.tsx`, `lib/reminders.ts` (branch `night-thread`)
+### Today at night — `lib/night.ts`, `hooks/use-tonight.ts`, `components/night-card.tsx`, `components/night-thread.tsx`, `components/wake-row.tsx`, `lib/reminders.ts` (branch `night-thread`)
 
 Added 13 Sep 2026 with the approved Night Thread design. Every line below is
 model-written wording or a rule drawn on screen.
@@ -410,9 +410,13 @@ model-written wording or a rule drawn on screen.
   {time}. A good time to pray, two rakʿahs at a time." It never mentions witr,
   so nobody who prayed it before sleeping is told to pray it twice.
 - **The wake-up time**: an hour before Fajr, never before the last third
-  begins, every night while the switch is on ("Every night. Tonight at 4:38
-  AM."). Is an hour the right default? The Voluntary prayers lesson suggests
-  starting with an alarm twenty minutes before Fajr; the two should agree.
+  begins, every night while the switch is on, unless the reader sets a clock
+  time, which rings anywhere between ʿIsha and Fajr. Before the last third
+  the notification is titled "The night prayer", not "The last third of the
+  night". A set time outside the night rings at the default, and the row says
+  "Fajr is at {fajr} that morning, so it rings at {time} instead." Is an hour
+  the right default? The Voluntary prayers lesson now says to set an alarm
+  "twenty minutes or more before Fajr" (Iyad's wording).
 - **A night in Ramadan**: taraweeh "Two rakʿahs at a time, then witr", the
   Taraweeh page's own wording, which holds at home as at the mosque; the
   suhoor wake-up takes the place of the night wake-up, one alarm a night.

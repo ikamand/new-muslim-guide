@@ -128,7 +128,6 @@ export const EN = {
   */
   'fast.suhoor': 'Suhoor ends at Fajr, {time}',
   'fast.iftar': 'Iftar at Maghrib, {time}',
-  'ramadan.wake': 'Wake me for suhoor, about 45 minutes before Fajr',
   'ramadan.wake.help':
     'Ramadan is close. The app can wake you before Fajr for suhoor. Change it any time, here or in Settings.',
   'suhoor.notification.title': 'Suhoor',
@@ -139,6 +138,7 @@ export const EN = {
     twice. The night card it opens asks "Not prayed witr tonight?" instead.
   */
   'nightWake.notification.title': 'The last third of the night',
+  'nightWake.notification.title.early': 'The night prayer',
   'nightWake.notification.body': 'Fajr is at {time}. A good time to pray, two rakʿahs at a time.',
   'adhkar.notification.title': 'Morning adhkār',
   'adhkar.notification.body': 'The window is open until sunrise.',
@@ -268,9 +268,8 @@ export const EN = {
     Today at night: the thread and the card that follows the moon (13 Sep
     2026). ⚠️ Model-written, on the review pile. The card never records what
     anybody prayed; wherever witr could end up prayed twice it asks ("Not
-    prayed witr yet?") rather than tells. The switches are daily alarms, and
-    their help says "Every night". The Ramadan title is the arc's own
-    `arc.tarawih`, the switch titles the Reminders screen's.
+    prayed witr yet?") rather than tells. The Ramadan title is the arc's own
+    `arc.tarawih`; the wake-up rows are the `wake.*` strings below.
   */
   'night.thread.label': 'Tonight, from ʿIsha at {isha} to Fajr at {fajr}. The last third begins at {third}.',
   'night.thread.bell': 'Your wake-up rings at {time}.',
@@ -283,8 +282,31 @@ export const EN = {
   'night.card.taraweeh': 'Two rakʿahs at a time, then witr',
   'night.card.adhkar': 'Adhkār of sleep',
   'night.card.adhkar.start': 'Start the adhkār',
-  'night.card.wake.help': 'Every night. Tonight at {time}.',
-  'night.card.suhoor.help': 'Every night of Ramadan. Tonight at {time}.',
+  /*
+    The two wake-up rows, on Today's night card, the fast line and Reminders:
+    set like an alarm clock since 13 Sep 2026 (Iyad). They are daily alarms
+    and say so. ⚠️ Model-written, on the review pile.
+  */
+  'wake.night.title': 'Wake me at {time}',
+  'wake.suhoor.title': 'Wake me for suhoor at {time}',
+  'wake.night.follows': 'Every night, an hour before Fajr',
+  'wake.night.set': 'Every night',
+  'wake.suhoor.follows': 'Every night of Ramadan, 45 minutes before Fajr',
+  'wake.suhoor.set': 'Every night of Ramadan',
+  'wake.moved': 'Fajr is at {fajr} that morning, so it rings at {time} instead.',
+  'wake.night.back': 'Back to an hour before Fajr',
+  'wake.suhoor.back': 'Back to 45 minutes before Fajr',
+  'wake.change': 'Change the time',
+  'wake.picker.night': 'Wake me for the night prayer',
+  'wake.picker.suhoor': 'Wake me for suhoor',
+  'wake.picker.done': 'Set',
+  'wake.picker.cancel': 'Cancel',
+  'wake.picker.hourEarlier': 'An hour earlier',
+  'wake.picker.hourLater': 'An hour later',
+  'wake.picker.minutesEarlier': 'Five minutes earlier',
+  'wake.picker.minutesLater': 'Five minutes later',
+  'wake.picker.hour': 'Hour',
+  'wake.picker.minutes': 'Minutes',
   'night.card.third.title': 'The last third of the night',
   'night.card.third.body': 'The best part of the night to pray, two rakʿahs at a time.',
   'night.card.third.pray': 'Pray in twos',
@@ -922,10 +944,7 @@ export const EN = {
     The windows. Each is an offer at a moment opening — none of them can
     express an absence, because none of them knows one.
   */
-  'reminders.suhoor': 'Wake me before Fajr for suhoor',
-  'reminders.adhkarNote': 'A note when the morning window opens',
-  'reminders.nightWake': 'Wake me an hour before Fajr',
-  'reminders.jumuahNote': 'A note on Thursday evening',
+  'reminders.adhkarNote': 'A note when the morning window opens',  'reminders.jumuahNote': 'A note on Thursday evening',
   'reminder.now': 'It is time to pray.',
   'reminder.soon': 'In {n} minutes.',
   'settings.duringPrayer': 'During prayer',

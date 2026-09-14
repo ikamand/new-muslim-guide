@@ -7,14 +7,12 @@ import { useSettings } from '@/hooks/use-settings';
 import { hijriOfNight } from '@/lib/hijri';
 import { nightThread, tonightPlan, type NightThread, type TonightPlan } from '@/lib/night';
 import { computeNight } from '@/lib/prayer-times';
-import { SUHOOR_LEAD_MINUTES } from '@/lib/reminders';
+import { resolveWake } from '@/lib/reminders';
 
 export type Tonight = TonightPlan & {
   thread: NightThread;
   /** The Ramadan arc's row, on a night of Ramadan: the card's title and its Taraweeh link. */
   ramadan?: ArcRow;
-  /** The wake-up the card's switch sets: an hour before Fajr, or suhoor's on a night of Ramadan. */
-  wakeAt: Date;
   /** When the bell rings, while an alarm is set for this night. */
   bellAt?: Date;
   /** The sitting of sleep, for the card's adhkār row. */
@@ -30,7 +28,8 @@ export type Tonight = TonightPlan & {
  *
  * The decisions are `tonightPlan`'s, in `lib/night.ts`, so the check can walk
  * them. This hook only reads what they are decided from: the clock, the
- * Ramadan arc for the night's own Islamic date, and the reader's two switches.
+ * Ramadan arc for the night's own Islamic date, and the reader's two switches
+ * and the times they are set to.
  *
  * ⚠️ What the card and the line say follows from here, and is on the review pile.
  */
@@ -38,7 +37,7 @@ export function useTonight(): Tonight | null {
   const live = useLiveSession();
   const { coords } = useLocation();
   const { today, profile } = usePrayerTimes();
-  const { nightWakeUp, suhoorWakeUp } = useSettings();
+  const { nightWakeUp, suhoorWakeUp, nightWakeTime, suhoorTime } = useSettings();
 
   // `today` is read so the prayer-times tick re-renders this at every boundary.
   if (!today || !coords || !profile) return null;
@@ -54,14 +53,20 @@ export function useTonight(): Tonight | null {
   const ramadan = date ? arcForNight(date, 'witr') : undefined;
 
   const plan = tonightPlan({ part: thread.part, ramadanNight: Boolean(ramadan), suhoorWakeUp, nightWakeUp });
-  const suhoorAt = new Date(thread.fajr.getTime() - SUHOOR_LEAD_MINUTES * 60_000);
+  // The same placement the planners ring by, so the bell sits where the alarm will.
+  const wakeNight = { isha: thread.isha, fajr: thread.fajr, lastThird: thread.lastThirdAt };
+  const bellAt =
+    plan.bell === 'suhoor'
+      ? resolveWake('suhoor', wakeNight, suhoorTime).fireAt
+      : plan.bell === 'night'
+        ? resolveWake('night', wakeNight, nightWakeTime).fireAt
+        : undefined;
 
   return {
     ...plan,
     thread,
     ramadan,
-    wakeAt: ramadan ? suhoorAt : thread.wakeAt,
-    bellAt: plan.bell === 'suhoor' ? suhoorAt : plan.bell === 'night' ? thread.wakeAt : undefined,
+    bellAt,
     session: sessionForWindow('night'),
   };
 }

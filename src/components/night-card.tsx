@@ -1,5 +1,5 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { StyleSheet, Switch, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Svg from 'react-native-svg';
 
 import { sessionMeta } from '@/components/adhkar-session-card';
@@ -8,15 +8,14 @@ import { Action } from '@/components/jadwal';
 import { PressableLink } from '@/components/pressable-link';
 import { TimelineGlyph } from '@/components/teaching/timeline';
 import { ThemedText } from '@/components/themed-text';
+import { WakeRow } from '@/components/wake-row';
 import { resolveRef } from '@/content';
 import { Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
-import { useReminders } from '@/hooks/use-reminders';
 import { useTheme } from '@/hooks/use-theme';
 import type { Tonight } from '@/hooks/use-tonight';
 import { localiseCatalogEntry } from '@/i18n/localise';
 import { routeFor } from '@/lib/content-routes';
-import { formatTime } from '@/lib/prayer-times';
 
 /**
  * The card that follows the moon: one object for the night, under the thread.
@@ -35,8 +34,9 @@ import { formatTime } from '@/lib/prayer-times';
  * - **The last third of the night.** The night prayer, "Not prayed witr
  *   tonight?", and the adhkār of sleep as a door for somebody still up.
  *
- * The switch is a daily alarm and says so ("Every night"), because an alarm
- * somebody took to be for tonight only would ring again tomorrow.
+ * The wake-up is `WakeRow`, set like an alarm clock, and it says it is daily
+ * ("Every night"), because an alarm somebody took to be for tonight only
+ * would ring again tomorrow.
  *
  * The marks are the night-prayer page's own: two-then-one outlined for
  * praying witr before sleep, filled for shafʿ and witr at the end of the night.
@@ -50,7 +50,6 @@ import { formatTime } from '@/lib/prayer-times';
 export function NightCard({ tonight }: { tonight: Tonight }) {
   const theme = useTheme();
   const { locale, t } = useLocale();
-  const { flags, toggleFlag, granted } = useReminders();
   const { state, session, witr, wakeFlag, ramadan } = tonight;
 
   const titleOf = (id: string) => {
@@ -119,13 +118,6 @@ export function NightCard({ tonight }: { tonight: Tonight }) {
 
   const taraweeh = ramadan?.ref ? resolveRef(ramadan.ref) : undefined;
   const taraweehTitle = taraweeh ? localiseCatalogEntry(taraweeh, locale).title : '';
-  const waking = flags[wakeFlag];
-  const suhoor = wakeFlag === 'suhoorWakeUp';
-  const wakeTitle = t(suhoor ? 'reminders.suhoor' : 'reminders.nightWake');
-  const wakeHelp = t(suhoor ? 'night.card.suhoor.help' : 'night.card.wake.help').replace(
-    '{time}',
-    formatTime(tonight.wakeAt),
-  );
 
   return (
     <View style={[styles.card, { borderBottomColor: theme.goldSoft }]}>
@@ -177,26 +169,8 @@ export function NightCard({ tonight }: { tonight: Tonight }) {
       ) : null}
 
       <View style={[styles.wake, { borderTopColor: theme.goldSoft }]}>
-        <View style={styles.stepText}>
-          <ThemedText type="smallBold">{wakeTitle}</ThemedText>
-          <ThemedText type="small" themeColor="textSecondary">
-            {wakeHelp}
-          </ThemedText>
-        </View>
-        <Switch
-          value={waking}
-          onValueChange={() => void toggleFlag(wakeFlag)}
-          accessibilityLabel={wakeTitle}
-          trackColor={{ false: theme.backgroundSelected, true: theme.accent }}
-          thumbColor={theme.background}
-        />
+        <WakeRow flag={wakeFlag} />
       </View>
-      {/* The switch cannot turn on without notifications; say so where it was tapped. */}
-      {granted === false ? (
-        <ThemedText type="small" themeColor="textSecondary">
-          {t('settings.reminders.denied')}
-        </ThemedText>
-      ) : null}
       {witr === 'end' ? (
         <ThemedText type="small" themeColor="gold">
           {t('night.card.witr.later')}
@@ -236,9 +210,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   wake: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: Spacing.two,
     borderTopWidth: StyleSheet.hairlineWidth,
     paddingTop: Spacing.two,
   },

@@ -21,7 +21,7 @@
  */
 import { computeDay, computeNight, findCurrentPrayer, inferProfile, windowEnd } from '../src/lib/prayer-times.ts';
 import { NIGHT_WAKE_LEAD_MINUTES, nightPrayerAt, nightThread, tonightPlan } from '../src/lib/night.ts';
-import { planNightWake, planSuhoor } from '../src/lib/reminders.ts';
+import { nextWake, planNightWake, planSuhoor, resolveWake } from '../src/lib/reminders.ts';
 import { arcFor, arcForNight } from '../src/content/ramadan-arc.ts';
 import { hijriDate, hijriOfNight } from '../src/lib/hijri.ts';
 import { PRAYERS } from '../src/content/prayers.ts';
@@ -631,6 +631,84 @@ if (!firstFast) {
   console.log(
     `  tonight: ${combos} switch and part combinations; the bell is the alarm that rings on ${ringing.length} real nights; ` +
       `card and planners agree on ${boundaryNights} nights around Ramadan 1448`,
+  );
+}
+
+/*
+  Wake-up times set like an alarm clock (Iyad, 13 Sep 2026). A set time rings
+  at that clock time wherever it falls between ʿIshāʾ and Fajr; anything else
+  rings at the default, so a fixed alarm never rings after Fajr as Fajr moves
+  earlier through the year.
+*/
+{
+  const sample = computeNight(place, new Date('2026-09-13T21:30:00'), profile);
+  const wakeNight = {
+    isha: timeOf(sample.evening, 'isha'),
+    fajr: timeOf(sample.morning, 'fajr'),
+    lastThird: sample.evening.lastThirdOfNight,
+  };
+  const nightDefault = new Date(Math.max(wakeNight.fajr.getTime() - 60 * MINUTE, wakeNight.lastThird.getTime()));
+  const suhoorDefault = new Date(wakeNight.fajr.getTime() - 45 * MINUTE);
+  const cases = [
+    ['night, following Fajr', 'night', null, nightDefault, false],
+    ['suhoor, following Fajr', 'suhoor', null, suhoorDefault, false],
+    ['night at 04:00', 'night', { hour: 4, minute: 0 }, new Date(2026, 8, 14, 4, 0), false],
+    ['night at 23:30, before midnight', 'night', { hour: 23, minute: 30 }, new Date(2026, 8, 13, 23, 30), false],
+    ['night at 01:00, before the last third', 'night', { hour: 1, minute: 0 }, new Date(2026, 8, 14, 1, 0), false],
+    ['suhoor at 05:45, after Fajr', 'suhoor', { hour: 5, minute: 45 }, suhoorDefault, true],
+    ['night at 19:00, before ʿIshāʾ', 'night', { hour: 19, minute: 0 }, nightDefault, true],
+  ];
+  for (const [label, kind, time, expected, fellBack] of cases) {
+    const wake = resolveWake(kind, wakeNight, time);
+    if (wake.fireAt.getTime() !== expected.getTime() || wake.fellBack !== fellBack) {
+      fail(
+        `wake time, ${label}: rings ${clock(wake.fireAt)}${wake.fellBack ? ' (fell back)' : ''}, ` +
+          `expected ${clock(expected)}${fellBack ? ' (fell back)' : ''}`,
+      );
+    }
+  }
+
+  // Suhoor at 05:30 through Ramadan 1448, while Fajr moves earlier past it.
+  const ramadanDays = firstFast ? (day) => hijriDate(day)?.month === 9 : () => true;
+  const ramadanFrom = firstFast
+    ? new Date(firstFast.getFullYear(), firstFast.getMonth(), firstFast.getDate() - 1)
+    : new Date(2027, 1, 7);
+  const suhoorPlan = planSuhoor(place, profile, ramadanFrom, ramadanDays, 32, { hour: 5, minute: 30 });
+  let fellBackMornings = 0;
+  for (const moment of suhoorPlan) {
+    const day = moment.anchor.toDateString();
+    if (moment.fireAt >= moment.anchor) fail(`suhoor at 05:30, ${day}: rings ${clock(moment.fireAt)}, not before Fajr ${clock(moment.anchor)}`);
+    if (moment.fellBack) {
+      fellBackMornings += 1;
+      if (moment.fireAt.getTime() !== moment.anchor.getTime() - 45 * MINUTE) {
+        fail(`suhoor at 05:30, ${day}: fell back to ${clock(moment.fireAt)}, not 45 minutes before Fajr ${clock(moment.anchor)}`);
+      }
+    } else if (moment.fireAt.getHours() !== 5 || moment.fireAt.getMinutes() !== 30) {
+      fail(`suhoor at 05:30, ${day}: rings ${clock(moment.fireAt)}`);
+    }
+  }
+  if (suhoorPlan.length < 29) fail(`suhoor at 05:30: ${suhoorPlan.length} mornings planned in Ramadan`);
+  if (fellBackMornings === 0) fail('suhoor at 05:30: never fell back, so the guard against ringing after Fajr went untested');
+
+  const from = new Date('2026-09-13T00:00:00');
+  const at430 = planNightWake(place, profile, from, () => false, 12, { hour: 4, minute: 30 });
+  for (const moment of at430) {
+    if (moment.fellBack || moment.beforeLastThird || moment.fireAt.getHours() !== 4 || moment.fireAt.getMinutes() !== 30) {
+      fail(`night wake-up at 04:30, ${moment.anchor.toDateString()}: rings ${clock(moment.fireAt)}`);
+    }
+  }
+  const at100 = planNightWake(place, profile, from, () => false, 12, { hour: 1, minute: 0 });
+  if (at100.length !== 12 || at100.some((moment) => !moment.beforeLastThird)) {
+    fail('night wake-up at 01:00: not every morning is marked as ringing before the last third');
+  }
+  const afterAlarm = nextWake(place, profile, new Date('2026-09-14T04:45:00'), 'night', null);
+  if (afterAlarm?.anchor.getDate() !== 15) {
+    fail(`the next wake-up after 14 Sep's has passed: ${afterAlarm ? afterAlarm.anchor.toDateString() : 'none'}, expected the 15th`);
+  }
+
+  console.log(
+    `  wake times: ${cases.length} set and default cases; suhoor at 05:30 falls back on ${fellBackMornings} of ` +
+      `${suhoorPlan.length} Ramadan mornings as Fajr moves past it; 04:30 and 01:00 night alarms placed`,
   );
 }
 

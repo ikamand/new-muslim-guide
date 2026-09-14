@@ -21,6 +21,9 @@ import {
   planReminders,
   planNightWake,
   planSuhoor,
+  DAYS_AHEAD,
+  type WakeFlag,
+  type WakeTime,
 } from '@/lib/reminders';
 
 /**
@@ -107,8 +110,19 @@ const timeOf = (date: Date) =>
 /** Mounted once in the root layout. Renders nothing; owns the schedule. */
 export function useReminderSync(): void {
   const { coords } = useLocation();
-  const { reminders, suhoorWakeUp, adhkarNote, jumuahNote, nightWakeUp, awqatMethod, awqatHanafiAsr, awqatMosque, loaded } =
-    useSettings();
+  const {
+    reminders,
+    suhoorWakeUp,
+    adhkarNote,
+    jumuahNote,
+    nightWakeUp,
+    suhoorTime,
+    nightWakeTime,
+    awqatMethod,
+    awqatHanafiAsr,
+    awqatMosque,
+    loaded,
+  } = useSettings();
   const profileFor = useAwqatProfile();
   const { locale, t } = useLocale();
 
@@ -123,6 +137,8 @@ export function useReminderSync(): void {
     adhkarNote,
     jumuahNote,
     nightWakeUp,
+    suhoorTime,
+    nightWakeTime,
     awqatMethod,
     awqatHanafiAsr,
     awqatMosque,
@@ -162,7 +178,7 @@ export function useReminderSync(): void {
       const inRamadan = (day: Date) => hijriDate(day)?.month === 9;
 
       if (suhoorWakeUp) {
-        for (const planned of planSuhoor(coords, profile, now, inRamadan)) {
+        for (const planned of planSuhoor(coords, profile, now, inRamadan, DAYS_AHEAD, suhoorTime)) {
           items.push({
             fireAt: planned.fireAt,
             title: t('suhoor.notification.title'),
@@ -173,10 +189,12 @@ export function useReminderSync(): void {
 
       if (nightWakeUp) {
         // One alarm a night: on a Ramadan morning the suhoor wake-up, when it is on, is that alarm.
-        for (const planned of planNightWake(coords, profile, now, (day) => suhoorWakeUp && inRamadan(day))) {
+        const skip = (day: Date) => suhoorWakeUp && inRamadan(day);
+        for (const planned of planNightWake(coords, profile, now, skip, DAYS_AHEAD, nightWakeTime)) {
           items.push({
             fireAt: planned.fireAt,
-            title: t('nightWake.notification.title'),
+            // "The last third of the night" only when it is: a set time can ring before it.
+            title: t(planned.beforeLastThird ? 'nightWake.notification.title.early' : 'nightWake.notification.title'),
             body: t('nightWake.notification.body').replace('{time}', timeOf(planned.anchor)),
           });
         }
@@ -222,14 +240,29 @@ export function useReminderSync(): void {
       active = false;
       subscription.remove();
     };
-  }, [loaded, coords, signature, locale, reminders, suhoorWakeUp, adhkarNote, jumuahNote, nightWakeUp, profileFor, t]);
+  }, [
+    loaded,
+    coords,
+    signature,
+    locale,
+    reminders,
+    suhoorWakeUp,
+    adhkarNote,
+    jumuahNote,
+    nightWakeUp,
+    suhoorTime,
+    nightWakeTime,
+    profileFor,
+    t,
+  ]);
 }
 
 export type ReminderFlag = 'suhoorWakeUp' | 'adhkarNote' | 'jumuahNote' | 'nightWakeUp';
 
 /** What screens use: the switches, asking for permission at the right moment. */
 export function useReminders() {
-  const { reminders, suhoorWakeUp, adhkarNote, jumuahNote, nightWakeUp, set } = useSettings();
+  const { reminders, suhoorWakeUp, adhkarNote, jumuahNote, nightWakeUp, suhoorTime, nightWakeTime, set } =
+    useSettings();
   const [granted, setGranted] = useState<boolean | null>(null);
 
   useEffect(() => {
@@ -282,5 +315,13 @@ export function useReminders() {
     [reminders, set],
   );
 
-  return { reminders, toggle, toggleFlag, flags, setLead, granted, anyOn };
+  /** The times the two wake-ups are set to; null follows Fajr. */
+  const wakeTimes: Record<WakeFlag, WakeTime | null> = { suhoorWakeUp: suhoorTime, nightWakeUp: nightWakeTime };
+  const setWakeTime = useCallback(
+    (flag: WakeFlag, time: WakeTime | null) =>
+      set(flag === 'suhoorWakeUp' ? 'suhoorTime' : 'nightWakeTime', time),
+    [set],
+  );
+
+  return { reminders, toggle, toggleFlag, flags, setLead, granted, anyOn, wakeTimes, setWakeTime };
 }

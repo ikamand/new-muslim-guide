@@ -124,6 +124,115 @@ function eachDay(
   return planned;
 }
 
+/** A clock time somebody picked for a wake-up, like an alarm clock. Local time. */
+export type WakeTime = { hour: number; minute: number };
+
+/** The two switches that are wake-ups, by their setting's name. */
+export type WakeFlag = 'nightWakeUp' | 'suhoorWakeUp';
+
+/** Enough of a shape check to trust a stored time. */
+export function isWakeTime(value: unknown): value is WakeTime {
+  if (typeof value !== 'object' || value === null) return false;
+  const { hour, minute } = value as Record<string, unknown>;
+  return (
+    typeof hour === 'number' &&
+    Number.isInteger(hour) &&
+    hour >= 0 &&
+    hour <= 23 &&
+    typeof minute === 'number' &&
+    Number.isInteger(minute) &&
+    minute >= 0 &&
+    minute <= 59
+  );
+}
+
+/** The three instants of one night a wake-up is placed by. */
+export type WakeNight = { isha: Date; fajr: Date; lastThird: Date };
+
+export type PlannedWake = PlannedMoment & {
+  /** A set time that did not fit inside this night, so the default rang instead. */
+  fellBack: boolean;
+  /** Rings before the last third begins, which only a set time can do. */
+  beforeLastThird: boolean;
+};
+
+/**
+ * When a wake-up rings before one Fajr.
+ *
+ * With no time set it follows Fajr: the night prayer's an hour before, and
+ * never before the last third begins (`NIGHT_WAKE_LEAD_MINUTES`, `night.ts`);
+ * suhoor's `SUHOOR_LEAD_MINUTES` before.
+ *
+ * With a time set (Iyad, 13 Sep 2026: "like an alarm clock") it rings at that
+ * clock time wherever it falls between ʿIshāʾ and Fajr, before the last third
+ * too, because qiyam al-layl is any time after ʿIshāʾ. A time outside the
+ * night rings at the default instead. That is what a fixed alarm becomes as
+ * Fajr moves earlier through the year, and a suhoor alarm after Fajr is worse
+ * than none; the row that sets it says so on the morning it happens.
+ */
+export function resolveWake(
+  kind: 'night' | 'suhoor',
+  night: WakeNight,
+  time: WakeTime | null,
+): { fireAt: Date; fellBack: boolean } {
+  const fallback =
+    kind === 'suhoor'
+      ? new Date(night.fajr.getTime() - SUHOOR_LEAD_MINUTES * 60_000)
+      : new Date(
+          Math.max(night.fajr.getTime() - NIGHT_WAKE_LEAD_MINUTES * 60_000, night.lastThird.getTime()),
+        );
+  if (!time) return { fireAt: fallback, fellBack: false };
+
+  // On Fajr's own date, or on the evening before it for a time before midnight.
+  for (const daysBack of [0, 1]) {
+    const candidate = new Date(
+      night.fajr.getFullYear(),
+      night.fajr.getMonth(),
+      night.fajr.getDate() - daysBack,
+      time.hour,
+      time.minute,
+    );
+    if (candidate >= night.isha && candidate < night.fajr) return { fireAt: candidate, fellBack: false };
+  }
+  return { fireAt: fallback, fellBack: true };
+}
+
+/** The night that ends at `day`'s Fajr, which began the evening before. */
+function nightEndingOn(coords: LatLon, profile: MethodProfile, day: Date): WakeNight | undefined {
+  const fajr = computeDay(coords, day, profile).prayers.find((prayer) => prayer.id === 'fajr')?.time;
+  const evening = computeDay(coords, new Date(day.getFullYear(), day.getMonth(), day.getDate() - 1), profile);
+  const isha = evening.prayers.find((prayer) => prayer.id === 'isha')?.time;
+  if (!fajr || !isha) return undefined;
+  return { isha, fajr, lastThird: evening.lastThirdOfNight };
+}
+
+function planWakes(
+  coords: LatLon,
+  profile: MethodProfile,
+  from: Date,
+  daysAhead: number,
+  kind: 'night' | 'suhoor',
+  time: WakeTime | null,
+  skip: (day: Date) => boolean,
+): PlannedWake[] {
+  const planned: PlannedWake[] = [];
+  for (let offset = 0; offset < daysAhead; offset += 1) {
+    const day = new Date(from.getFullYear(), from.getMonth(), from.getDate() + offset);
+    if (skip(day)) continue;
+    const night = nightEndingOn(coords, profile, day);
+    if (!night) continue;
+    const wake = resolveWake(kind, night, time);
+    // A wake-up for a moment that has already passed would fire instantly.
+    if (wake.fireAt.getTime() <= from.getTime()) continue;
+    planned.push({
+      ...wake,
+      anchor: night.fajr,
+      beforeLastThird: wake.fireAt.getTime() < night.lastThird.getTime(),
+    });
+  }
+  return planned;
+}
+
 /**
  * Wake-ups before Fajr, only on days that fall in Ramadan.
  *
@@ -137,18 +246,13 @@ export function planSuhoor(
   from: Date,
   isRamadan: (day: Date) => boolean,
   daysAhead: number = DAYS_AHEAD,
-): PlannedMoment[] {
-  return eachDay(coords, profile, from, daysAhead, (day, prayers) => {
-    if (!isRamadan(day)) return undefined;
-    const fajr = prayers.find((prayer) => prayer.id === 'fajr')?.time;
-    if (!fajr) return undefined;
-    return { fireAt: new Date(fajr.getTime() - SUHOOR_LEAD_MINUTES * 60_000), anchor: fajr };
-  });
+  time: WakeTime | null = null,
+): PlannedWake[] {
+  return planWakes(coords, profile, from, daysAhead, 'suhoor', time, (day) => !isRamadan(day));
 }
 
 /**
- * The night wake-up: an hour before each Fajr, and never before the last third
- * of the night that ends at it (`NIGHT_WAKE_LEAD_MINUTES`, `night.ts`).
+ * The night wake-up before each Fajr, placed by `resolveWake`.
  *
  * `skip` is injected like `planSuhoor`'s calendar, so this stays arithmetic.
  * The caller skips Ramadan mornings while the suhoor wake-up is on, because a
@@ -160,17 +264,23 @@ export function planNightWake(
   from: Date,
   skip: (day: Date) => boolean,
   daysAhead: number = DAYS_AHEAD,
-): PlannedMoment[] {
-  return eachDay(coords, profile, from, daysAhead, (day, prayers) => {
-    if (skip(day)) return undefined;
-    const fajr = prayers.find((prayer) => prayer.id === 'fajr')?.time;
-    if (!fajr) return undefined;
-    // The night that ends at this Fajr began at the previous day's Maghrib.
-    const evening = new Date(day.getFullYear(), day.getMonth(), day.getDate() - 1);
-    const lastThird = computeDay(coords, evening, profile).lastThirdOfNight;
-    const fireAt = new Date(Math.max(fajr.getTime() - NIGHT_WAKE_LEAD_MINUTES * 60_000, lastThird.getTime()));
-    return { fireAt, anchor: fajr };
-  });
+  time: WakeTime | null = null,
+): PlannedWake[] {
+  return planWakes(coords, profile, from, daysAhead, 'night', time, skip);
+}
+
+/**
+ * The next time a wake-up would ring, whatever the calendar says, for the row
+ * that shows and sets it: a suhoor row in Shaʿbān still shows a real time.
+ */
+export function nextWake(
+  coords: LatLon,
+  profile: MethodProfile,
+  from: Date,
+  kind: 'night' | 'suhoor',
+  time: WakeTime | null,
+): PlannedWake | undefined {
+  return planWakes(coords, profile, from, 3, kind, time, () => false)[0];
 }
 
 /** A note shortly after Fajr that the morning adhkār window is open. */

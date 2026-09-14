@@ -290,7 +290,7 @@ export const QIYAM_AL_LAYL: Reference = {
       notes: [
         note(
           'practical',
-          'To start, set an alarm twenty minutes before Fajr. You are already waking for Fajr; this is standing up a little earlier.',
+          'To start, set an alarm twenty minutes or more before Fajr. You are already waking for Fajr; this is standing up a little earlier.',
           { sources: [general('Practical advice, not a ruling.')] },
         ),
       ],

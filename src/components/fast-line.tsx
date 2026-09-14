@@ -1,12 +1,12 @@
-import { StyleSheet, Switch, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
+import { WakeRow } from '@/components/wake-row';
 import { Spacing } from '@/constants/theme';
 import { useHijriToday } from '@/hooks/use-hijri';
 import { useLocale } from '@/hooks/use-locale';
 import { useLocation } from '@/hooks/use-location';
 import { usePrayerTimes } from '@/hooks/use-prayer-times';
-import { useReminders } from '@/hooks/use-reminders';
 import { useTheme } from '@/hooks/use-theme';
 import type { Tonight } from '@/hooks/use-tonight';
 import { computeDay, inferProfile } from '@/lib/prayer-times';
@@ -40,7 +40,6 @@ export function FastLine({ night }: { night?: Pick<Tonight, 'state' | 'ramadan'>
   const hijri = useHijriToday();
   const { today } = usePrayerTimes();
   const { coords } = useLocation();
-  const { flags, toggleFlag } = useReminders();
 
   const inRamadan = hijri?.month === 9;
   const ramadanClose = hijri?.month === 8 && hijri.day >= 15;
@@ -86,16 +85,7 @@ export function FastLine({ night }: { night?: Pick<Tonight, 'state' | 'ramadan'>
           {t('ramadan.wake.help')}
         </ThemedText>
       ) : null}
-      <View style={styles.switchRow}>
-        <ThemedText type="small" themeColor="textSecondary" style={styles.switchLabel}>
-          {t('ramadan.wake')}
-        </ThemedText>
-        <Switch
-          value={flags.suhoorWakeUp}
-          onValueChange={() => void toggleFlag('suhoorWakeUp')}
-          trackColor={{ true: theme.accent }}
-        />
-      </View>
+      <WakeRow flag="suhoorWakeUp" />
     </View>
   );
 }
@@ -117,10 +107,4 @@ const styles = StyleSheet.create({
     paddingVertical: Spacing.three,
     gap: Spacing.one,
   },
-  switchRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: Spacing.two,
-  },
-  switchLabel: { flex: 1 },
 });

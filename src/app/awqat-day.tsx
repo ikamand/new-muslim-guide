@@ -1,7 +1,7 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { Stack, useLocalSearchParams, type Href } from 'expo-router';
+import { Stack, useLocalSearchParams, useRouter, type Href } from 'expo-router';
 import { useEffect, type ReactNode } from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import Animated, {
   Easing,
   cancelAnimation,
@@ -44,6 +44,7 @@ import {
   type Pause,
   type PrayerId,
 } from '@/lib/prayer-times';
+import type { AlertMode, PrayerAlert } from '@/lib/reminders';
 
 /**
  * One day of prayer times, in full — the arch unrolled.
@@ -288,6 +289,49 @@ function Tick({ passed, filled }: { passed: boolean; filled?: boolean }) {
   );
 }
 
+const BELL: Record<AlertMode, 'notifications' | 'notifications-outline' | 'notifications-off-outline'> = {
+  adhan: 'notifications',
+  sound: 'notifications-outline',
+  silent: 'notifications-outline',
+  off: 'notifications-off-outline',
+};
+
+const BELL_STATE: Record<AlertMode, UIKey> = {
+  adhan: 'alert.state.adhan',
+  sound: 'alert.state.sound',
+  silent: 'alert.state.silent',
+  off: 'alert.state.off',
+};
+
+/**
+ * The prayer's alert, beside its time, opening that prayer's page (Iyad, 14
+ * Sep 2026). Filled for the adhan, open for a notification, struck through
+ * when off, so the five bells read the day's alerts at a glance.
+ *
+ * Here and not on Today's card: the card's times row is one link to this
+ * page, and a bell inside it would be a button inside a button, in columns
+ * already full at 360 points. Lapis, because it is pressable; gold never is.
+ */
+function AlertBell({ id, alert, label }: { id: PrayerId; alert: PrayerAlert; label: string }) {
+  const theme = useTheme();
+  const { t } = useLocale();
+  const router = useRouter();
+  return (
+    <Pressable
+      onPress={() => router.push({ pathname: '/prayer-alert/[id]', params: { id } })}
+      accessibilityRole="button"
+      accessibilityLabel={t('alert.bell').replace('{prayer}', label).replace('{state}', t(BELL_STATE[alert.mode]))}
+      hitSlop={12}
+      style={({ pressed }) => [styles.bell, { opacity: pressed ? 0.5 : 1 }]}>
+      <Ionicons
+        name={BELL[alert.mode]}
+        size={20}
+        color={alert.mode === 'off' ? theme.textSecondary : theme.accent}
+      />
+    </Pressable>
+  );
+}
+
 /** A door under the shelf: a mark, a title, one line, a chevron. */
 function Door({
   href,
@@ -482,37 +526,40 @@ export default function AwqatDayScreen() {
           <ThemedText type="cardTitle" themeColor={lit ? 'gold' : 'text'} style={styles.name}>
             {prayer.label}
           </ThemedText>
-          <View style={styles.hoursSpan}>
-            {/* The start, the size of the name. Every end is already on the page. */}
-            <ThemedText
-              type="cardTitle"
-              themeColor={lit ? 'gold' : 'text'}
-              style={styles.tabular}
-              numberOfLines={1}>
-              {formatTime(prayer.time)}
-            </ThemedText>
-            {open ? (
-              <>
-                <ThemedText type="caption" themeColor="gold">
-                  {t('times.until').replace('{time}', formatTime(ends))}
-                </ThemedText>
-                <ThemedText type="caption" themeColor="gold">
-                  {pastPreferred
-                    ? t('times.preferredPassed')
-                    : t('awqat.day.left').replace(
-                        '{left}',
-                        formatDuration(ends.getTime() - now.getTime()),
-                      )}
-                </ThemedText>
-              </>
-            ) : lit ? (
-              <ThemedText type="caption" themeColor="gold">
-                {t('awqat.day.nextIn').replace(
-                  '{countdown}',
-                  formatCountdown(prayer.time.getTime() - now.getTime()),
-                )}
+          <View style={styles.timeAndBell}>
+            <View style={styles.hoursSpan}>
+              {/* The start, the size of the name. Every end is already on the page. */}
+              <ThemedText
+                type="cardTitle"
+                themeColor={lit ? 'gold' : 'text'}
+                style={styles.tabular}
+                numberOfLines={1}>
+                {formatTime(prayer.time)}
               </ThemedText>
-            ) : null}
+              {open ? (
+                <>
+                  <ThemedText type="caption" themeColor="gold">
+                    {t('times.until').replace('{time}', formatTime(ends))}
+                  </ThemedText>
+                  <ThemedText type="caption" themeColor="gold">
+                    {pastPreferred
+                      ? t('times.preferredPassed')
+                      : t('awqat.day.left').replace(
+                          '{left}',
+                          formatDuration(ends.getTime() - now.getTime()),
+                        )}
+                  </ThemedText>
+                </>
+              ) : lit ? (
+                <ThemedText type="caption" themeColor="gold">
+                  {t('awqat.day.nextIn').replace(
+                    '{countdown}',
+                    formatCountdown(prayer.time.getTime() - now.getTime()),
+                  )}
+                </ThemedText>
+              ) : null}
+            </View>
+            <AlertBell id={id} alert={reminders.alerts[id]} label={prayer.label} />
           </View>
         </Row>
       ),
@@ -527,9 +574,13 @@ export default function AwqatDayScreen() {
         <ThemedText type="small" themeColor="textSecondary" style={styles.momentLabel}>
           {label}
         </ThemedText>
-        <ThemedText type="small" themeColor="textSecondary" style={styles.tabular}>
-          {formatTime(time)}
-        </ThemedText>
+        {/* The bells' column, empty, so every time on the line keeps one right edge. */}
+        <View style={[styles.timeAndBell, styles.timeAndBellThin]}>
+          <ThemedText type="small" themeColor="textSecondary" style={styles.tabular}>
+            {formatTime(time)}
+          </ThemedText>
+          <View style={styles.bell} />
+        </View>
       </Row>
     ),
   });
@@ -792,6 +843,12 @@ const styles = StyleSheet.create({
   hoursThin: {
     alignItems: 'center',
     paddingVertical: Spacing.two + 2,
+    /*
+      Half the prayer rows' gap. It only ever shows when a label reaches its
+      time, and since the bells' column arrived "ʿIsha's preferred time ends"
+      needs it to stay on one line at 360 points (measured 14 Sep 2026).
+    */
+    gap: Spacing.two,
   },
   name: {
     flex: 1,
@@ -806,6 +863,29 @@ const styles = StyleSheet.create({
   },
   tabular: {
     fontVariant: ['tabular-nums'],
+  },
+  /*
+    A time and its bell, closer to each other than to the name: the row's
+    own gap would have taken the width "ʿIsha's preferred time ends" needs to
+    stay on one line at 360 points.
+  */
+  timeAndBell: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    gap: Spacing.two,
+  },
+  timeAndBellThin: {
+    alignItems: 'center',
+  },
+  /*
+    The height of the name's line, so the bell centres on it rather than on a
+    two-line open row. The moment rows carry the same box empty.
+  */
+  bell: {
+    width: 20,
+    height: 26,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   momentLabel: {
     flex: 1,

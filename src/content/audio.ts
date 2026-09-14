@@ -64,6 +64,26 @@
 /** A required asset is a module number in React Native, not a path. */
 type AudioModule = number;
 
+/**
+ * The opening of each adhan, for the preview button on a prayer's page, keyed
+ * by voice id in `content/adhan-voices.ts`.
+ *
+ * Written by `npm run adhan:audio`, and `npm run adhan:check` fails if a voice
+ * is missing here. The whole recordings are not in the bundle: only Android
+ * plays them, from the native module's own `res/raw`, and a copy here would
+ * ship nine megabytes to iPhones that cannot use them.
+ */
+export const ADHAN_OPENING: Partial<Record<string, AudioModule>> = {
+  majale: require('@/assets/adhan/opening/adhan_majale_opening.m4a'),
+  najar: require('@/assets/adhan/opening/adhan_najar_opening.m4a'),
+  damradash: require('@/assets/adhan/opening/adhan_damradash_opening.m4a'),
+  maghriby: require('@/assets/adhan/opening/adhan_maghriby_opening.m4a'),
+  'alafasy-fajr': require('@/assets/adhan/opening/adhan_alafasy_fajr_opening.m4a'),
+  'abdulbasit-fajr': require('@/assets/adhan/opening/adhan_abdulbasit_fajr_opening.m4a'),
+  'kuwait-fajr': require('@/assets/adhan/opening/adhan_kuwait_fajr_opening.m4a'),
+  'ummalquwain-fajr': require('@/assets/adhan/opening/adhan_ummalquwain_fajr_opening.m4a'),
+};
+
 export const AUDIO: Partial<Record<string, AudioModule>> = {
   'fatiha-1': require('@/assets/audio/fatiha-1.mp3'),
   'fatiha-2': require('@/assets/audio/fatiha-2.mp3'),

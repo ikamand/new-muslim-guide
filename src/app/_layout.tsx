@@ -162,6 +162,8 @@ function RootStack() {
         the moment the sheet opens so the keyboard is already up.
       */}
       <Stack.Screen name="ask" options={{ presentation: 'modal', headerShown: false }} />
+      {/* One prayer's alert. Titled inside, with the prayer's name. */}
+      <Stack.Screen name="prayer-alert/[id]" options={{ title: '', headerBackTitle: 'Back' }} />
       <Stack.Screen name="qibla" options={{ title: 'Qibla', headerBackTitle: 'Back' }} />
       <Stack.Screen name="sources" options={{ title: 'Sources', headerBackTitle: 'Settings' }} />
     </Stack>

@@ -51,3 +51,31 @@ true"). When an authenticated source is found and opened, cite it here.
   man and the first prophet." Nothing cited on the page says he was a
   prophet. Added 13 Sep 2026.
 
+
+## The adhan, before release
+
+Built 14 Sep 2026; the plan entry is "The adhan" in `docs/ui-redesign-plan.md`.
+
+- **Write down where the eight recordings came from.** The `adhan*` entries
+  in `src/content/audio-sources.ts` have an empty `origin`, and
+  `npm run adhan:check -- --release` fails until each has one. Kuwait and
+  Umm al-Quwain name no muezzin; if the source does, add it. Added 14 Sep 2026.
+- **Listen to the eight openings.** `assets/adhan/opening/*.m4a`. Each should
+  say the first Allāhu akbar, whole, and nothing after it. A wrong cut is one
+  number, `openingEnd` in `src/content/adhan-voices.ts`, then
+  `npm run adhan:audio`. Al Najar (4.5 s) and Alafasy (4.2 s) are short enough
+  that their first pause may be a breath inside the phrase. Added 14 Sep 2026.
+- **Try the adhan on the phone, rule by rule.** After the native build, on a
+  prayer's page, "Hear it in one minute", with the phone on vibrate, in Do Not
+  Disturb, on a call, with music playing, with headphones in and then pulled
+  out, stopped with a volume button and with Stop, and locked. The line under
+  the button says what happened each time. The volume button is the rule most
+  likely not to work. Added 14 Sep 2026.
+- **Play Console: the foreground-service declaration** for media playback,
+  with a description and a video, before the Android release. Added
+  14 Sep 2026.
+- **Keep the iOS openings off Android.** The expo-notifications `sounds`
+  option copies the eight CAF files into the Android build too, about 950 KB
+  nothing plays. An iOS-only config plugin would avoid it; the documented
+  option was used because the plugin's internals move between SDKs. Added
+  14 Sep 2026.

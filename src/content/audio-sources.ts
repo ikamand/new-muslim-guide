@@ -87,6 +87,23 @@ export const SOURCES = {
     origin: 'everyayah.com',
     obligation: 'Credit the reciter and everyayah.com wherever the audio plays.',
   },
+  /*
+    The eight adhan recordings (14 Sep 2026), one entry each, so a voice
+    dropped over rights is one voice and not eight.
+
+    ⚠️ `origin` is empty because where they came from is not written down yet:
+    Iyad downloaded them and has the source. It goes here before a public
+    release, and `npm run adhan:check -- --release` fails until it does.
+    Kuwait and Umm al-Quwain name no muezzin, so none is invented.
+  */
+  adhanMajale: { reciter: 'Hamza Al Majale', detail: 'adhan', origin: '' },
+  adhanNajar: { reciter: 'Mahmud Mustafa Al Najar', detail: 'adhan', origin: '' },
+  adhanDamradash: { reciter: 'Muhammad Al Damradash', detail: 'adhan', origin: '' },
+  adhanMaghriby: { reciter: 'Nurdin Hamza Al Maghriby', detail: 'adhan', origin: '' },
+  adhanAlafasy: { reciter: 'Mishary Rashid Alafasy', detail: 'Fajr adhan', origin: '' },
+  adhanAbdulBasit: { reciter: 'Abdul Basit Abdus Samad', detail: 'Fajr adhan', origin: '' },
+  adhanKuwait: { reciter: 'Muezzin not named', detail: 'Fajr adhan, Kuwait', origin: '' },
+  adhanUmmAlQuwain: { reciter: 'Muezzin not named', detail: 'Fajr adhan, Umm al-Quwain', origin: '' },
   commissioned: {
     reciter: 'To be commissioned',
     origin: 'Recorded for this app',
@@ -124,6 +141,16 @@ export const AUDIO_SOURCE_BY_ID: Record<string, SourceKey> = {
   'nas-4': 'husary',
   'nas-5': 'husary',
   'nas-6': 'husary',
+
+  // The adhans, by voice id in `adhan-voices.ts` behind `adhan-`.
+  'adhan-majale': 'adhanMajale',
+  'adhan-najar': 'adhanNajar',
+  'adhan-damradash': 'adhanDamradash',
+  'adhan-maghriby': 'adhanMaghriby',
+  'adhan-alafasy-fajr': 'adhanAlafasy',
+  'adhan-abdulbasit-fajr': 'adhanAbdulBasit',
+  'adhan-kuwait-fajr': 'adhanKuwait',
+  'adhan-ummalquwain-fajr': 'adhanUmmAlQuwain',
 };
 
 export function getAudioSource(audioId: string): AudioSource | undefined {

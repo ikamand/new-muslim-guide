@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  The recordings are found by name at the moment an alarm fires
+  (`getIdentifier`), which resource shrinking cannot see. Without this a release
+  build with shrinking on would strip every adhan and play nothing.
+-->
+<resources xmlns:tools="http://schemas.android.com/tools" tools:keep="@raw/adhan_*" />

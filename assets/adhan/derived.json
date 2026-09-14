@@ -1,0 +1,50 @@
+{
+  "majale": {
+    "source": "6fbac856151079a1e8b05b046a2a19e14c0405c5629841ec543974c48286718e",
+    "openingEnd": 9.9,
+    "openingSeconds": 9.9,
+    "fullSeconds": 174.7
+  },
+  "najar": {
+    "source": "365fc478deab1cc868fdc2003e4c77e259a1b9ed44ce762d63e2a497c659b1fd",
+    "openingEnd": 4.5,
+    "openingSeconds": 4.5,
+    "fullSeconds": 152.2
+  },
+  "damradash": {
+    "source": "87031b9f413611479fff443ff3a8b90c265117f5db196f0a2c1ba25ea5d97cff",
+    "openingEnd": 8,
+    "openingSeconds": 8,
+    "fullSeconds": 176
+  },
+  "maghriby": {
+    "source": "26b78496858579f904c4350c18315b9c4bf95b252875c7a2c0f40f8b5a151957",
+    "openingEnd": 13.3,
+    "openingSeconds": 13.3,
+    "fullSeconds": 185.1
+  },
+  "alafasy-fajr": {
+    "source": "23ae76424bb8a4398fc0edde11e6b3d0ff5ca80bcb1e206e691f989179a37045",
+    "openingEnd": 4.2,
+    "openingSeconds": 4.2,
+    "fullSeconds": 187.3
+  },
+  "abdulbasit-fajr": {
+    "source": "4da254fe3d44a990264b7a38c32009d2ea9671f7dcb00828df9a9bc829ba771b",
+    "openingEnd": 14,
+    "openingSeconds": 14,
+    "fullSeconds": 293.5
+  },
+  "kuwait-fajr": {
+    "source": "630e6d1a6fcdbdb3b780fc748fefdb0778235d701ef26c63a7cca5d4cc0694a2",
+    "openingEnd": 9.5,
+    "openingSeconds": 9.5,
+    "fullSeconds": 209.8
+  },
+  "ummalquwain-fajr": {
+    "source": "6b60540a3a6d02cc0bea80fb8d1c2e1f33a08221d85ddc922742e1f9241158e9",
+    "openingEnd": 15,
+    "openingSeconds": 15,
+    "fullSeconds": 190.3
+  }
+}

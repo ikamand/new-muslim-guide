@@ -1,6 +1,14 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { AppState } from 'react-native';
+import { AppState, Platform } from 'react-native';
 
+import {
+  adhanAlarmAvailable,
+  cancelAdhanAlarms,
+  replaceAdhanAlarms,
+  type AdhanAlarmInput,
+  type AdhanChannelNames,
+} from '../../modules/adhan-alarm';
+import { getVoice, openingSoundFile, rawName } from '@/content/adhan-voices';
 import { useLocale } from '@/hooks/use-locale';
 import { useLocation } from '@/hooks/use-location';
 import { useSettings, type Settings } from '@/hooks/use-settings';
@@ -16,6 +24,9 @@ import {
 import { useAwqatProfile } from '@/hooks/use-awqat-profile';
 import { PRAYER_IDS, PRAYER_LABEL, type PrayerId } from '@/lib/prayer-times';
 import {
+  alertIsOn,
+  applyAlertToAll,
+  leadOf,
   planAdhkarNotes,
   planJumuahNotes,
   planReminders,
@@ -23,6 +34,7 @@ import {
   planSuhoor,
   DAYS_AHEAD,
   wakeRingsOn,
+  type PrayerAlert,
   type WakeFlag,
   type WakeTime,
 } from '@/lib/reminders';
@@ -47,14 +59,19 @@ import {
  * sorted by fire time and capped at 60, under the 64 iOS allows pending. What
  * gets cut is always the furthest away, and the next foreground top-up
  * restores it.
+ *
+ * An adhan on Android is the one exception (14 Sep 2026). It goes to the
+ * native module in `modules/adhan-alarm`, which sets its own alarms, because a
+ * notification cannot play three minutes of audio. Android has no 64 cap, so
+ * those are not counted against it.
  */
 
 const PENDING_CAP = 60;
 
 /**
  * The reminders in one line, for a door: "Off", "3 of 5 · 10 minutes before",
- * "All five · at the time". A count, never the names — five names wrapped
- * on the day page, and the switches are one tap away.
+ * "All five · adhan at the time". A count, never the names — five names
+ * wrapped on the day page, and each prayer's page is one tap away.
  */
 export function describeReminders(
   reminders: Settings['reminders'],
@@ -70,34 +87,80 @@ export function countReminders(
   reminders: Settings['reminders'],
   t: (key: UIKey) => string,
 ): string {
-  const onCount = PRAYER_IDS.filter((id) => reminders.prayers[id]).length;
+  const onCount = PRAYER_IDS.filter((id) => alertIsOn(reminders.alerts[id])).length;
   if (onCount === 0) return t('awqat.day.reminders.off');
   return onCount === PRAYER_IDS.length
     ? t('awqat.day.reminders.all')
     : t('awqat.day.reminders.some').replace('{n}', String(onCount));
 }
 
-/** "10 minutes before" or "at the time", or nothing while no prayer is on. */
+/**
+ * "adhan at the time", "10 minutes before" or "at the time", while every
+ * prayer that is on agrees. Nothing while none is on, or while they differ:
+ * a summary of five different settings is a sentence nobody reads.
+ */
 export function describeLead(
   reminders: Settings['reminders'],
   t: (key: UIKey) => string,
 ): string | null {
-  if (!PRAYER_IDS.some((id) => reminders.prayers[id])) return null;
-  return reminders.leadMinutes === 0
+  const on = PRAYER_IDS.map((id) => reminders.alerts[id]).filter(alertIsOn);
+  if (on.length === 0) return null;
+  if (on.every((alert) => alert.mode === 'adhan')) return t('awqat.day.lead.adhan');
+  const leads = new Set(on.map(leadOf));
+  if (leads.size !== 1) return null;
+  const [lead] = [...leads];
+  return lead === 0
     ? t('awqat.day.lead.atTime')
-    : t('awqat.day.lead.before').replace('{n}', String(reminders.leadMinutes));
+    : t('awqat.day.lead.before').replace('{n}', String(lead));
+}
+
+/** One prayer in a line, for its row on Reminders: "Adhan · Al Majale", "Sound · 10 minutes before", "Off". */
+export function describeAlert(alert: PrayerAlert, t: (key: UIKey) => string): string {
+  if (alert.mode === 'off') return t('alert.state.off');
+  if (alert.mode === 'adhan') return `${t('alert.state.adhan')} · ${getVoice(alert.voice).short}`;
+  const when =
+    alert.leadMinutes === 0
+      ? t('awqat.day.lead.atTime')
+      : t('awqat.day.lead.before').replace('{n}', String(alert.leadMinutes));
+  return `${t(alert.mode === 'sound' ? 'alert.state.sound' : 'alert.state.silent')} · ${when}`;
+}
+
+/** The names Android lists for the adhan's two notifications in the app's settings. */
+export function adhanChannels(t: (key: UIKey) => string): AdhanChannelNames {
+  return { playing: t('adhan.channel.playing'), quiet: t('adhan.channel.quiet') };
+}
+
+/** One adhan for the native module, worded now, because nothing will be awake to word it when it fires. */
+export function adhanInput(
+  id: string,
+  fireAt: Date,
+  title: string,
+  alert: PrayerAlert,
+  t: (key: UIKey) => string,
+): AdhanAlarmInput {
+  return {
+    id,
+    fireAt: fireAt.getTime(),
+    sound: rawName(alert.voice),
+    title,
+    playingText: t('reminder.now'),
+    quietText: t('reminder.now'),
+    stopLabel: t('adhan.stop'),
+    playOnSilent: alert.playOnSilent,
+    playInDnd: alert.playInDnd,
+  };
 }
 
 /** True while any switch that schedules anything is on. */
 function anythingOn(settings: {
-  reminders: { prayers: Record<PrayerId, boolean> };
+  reminders: Settings['reminders'];
   suhoorWakeUp: boolean;
   adhkarNote: boolean;
   jumuahNote: boolean;
   nightWakeUp: boolean;
 }): boolean {
   return (
-    Object.values(settings.reminders.prayers).some(Boolean) ||
+    PRAYER_IDS.some((id) => alertIsOn(settings.reminders.alerts[id])) ||
     settings.suhoorWakeUp ||
     settings.adhkarNote ||
     settings.jumuahNote ||
@@ -154,6 +217,7 @@ export function useReminderSync(): void {
       const on = anythingOn({ reminders, suhoorWakeUp, adhkarNote, jumuahNote, nightWakeUp });
       if (!on || !coords) {
         await cancelAll();
+        await cancelAdhanAlarms();
         return;
       }
       if (!(await hasPermission())) return;
@@ -164,15 +228,34 @@ export function useReminderSync(): void {
       const profile = profileFor(coords);
       const now = new Date();
       const items: ScheduledItem[] = [];
+      const adhans: AdhanAlarmInput[] = [];
 
       for (const planned of planReminders(coords, profile, reminders, now)) {
+        const { alert } = planned;
+        const title = PRAYER_LABEL[planned.prayerId];
+
+        if (alert.mode === 'adhan' && adhanAlarmAvailable) {
+          adhans.push(adhanInput(planned.key, planned.fireAt, title, alert, t));
+          continue;
+        }
+
+        const lead = leadOf(alert);
         items.push({
           fireAt: planned.fireAt,
-          title: PRAYER_LABEL[planned.prayerId],
-          body:
-            reminders.leadMinutes === 0
-              ? t('reminder.now')
-              : t('reminder.soon').replace('{n}', String(reminders.leadMinutes)),
+          title,
+          body: lead === 0 ? t('reminder.now') : t('reminder.soon').replace('{n}', String(lead)),
+          /*
+            An iPhone hears the adhan's opening as the notification's sound. An
+            Android phone without the module (a build from before it, the web
+            preview) gets its own notification sound rather than silence.
+          */
+          sound:
+            alert.mode === 'silent'
+              ? null
+              : alert.mode === 'adhan' && Platform.OS === 'ios'
+                ? openingSoundFile(alert.voice)
+                : undefined,
+          timeSensitive: alert.mode === 'adhan' && alert.soundInFocus,
         });
       }
 
@@ -223,7 +306,8 @@ export function useReminderSync(): void {
 
       items.sort((a, b) => a.fireAt.getTime() - b.fireAt.getTime());
       if (!active) return;
-      await rescheduleItems(items.slice(0, PENDING_CAP), t('settings.reminders'));
+      await rescheduleItems(items.slice(0, PENDING_CAP), t('settings.reminders'), t('reminders.channel.silent'));
+      await replaceAdhanAlarms(adhans, adhanChannels(t));
     };
 
     const key = `${signature}|${coords?.latitude}|${coords?.longitude}|${locale}`;
@@ -278,20 +362,28 @@ export function useReminders() {
 
   const anyOn = anythingOn({ reminders, suhoorWakeUp, adhkarNote, jumuahNote, nightWakeUp });
 
-  /** Turns a prayer's reminder on or off, asking for permission the first time. */
-  const toggle = useCallback(
-    async (id: PrayerId) => {
-      const turningOn = !reminders.prayers[id];
-      if (turningOn && !(await requestPermission())) {
+  /**
+   * Changes one prayer's alert, asking for permission when it goes from off
+   * to anything else. False when permission was refused and nothing changed.
+   */
+  const setAlert = useCallback(
+    async (id: PrayerId, patch: Partial<PrayerAlert>): Promise<boolean> => {
+      const current = reminders.alerts[id];
+      const next = { ...current, ...patch };
+      if (!alertIsOn(current) && alertIsOn(next) && !(await requestPermission())) {
         setGranted(false);
-        return;
+        return false;
       }
-      set('reminders', {
-        ...reminders,
-        prayers: { ...reminders.prayers, [id]: turningOn },
-      });
-      setGranted(true);
+      set('reminders', { alerts: { ...reminders.alerts, [id]: next } });
+      if (alertIsOn(next)) setGranted(true);
+      return true;
     },
+    [reminders, set],
+  );
+
+  /** One prayer's choices for all five; see `applyAlertToAll` for where the voice goes. */
+  const applyToAll = useCallback(
+    (id: PrayerId) => set('reminders', applyAlertToAll(reminders, id)),
     [reminders, set],
   );
 
@@ -311,11 +403,6 @@ export function useReminders() {
     [suhoorWakeUp, adhkarNote, jumuahNote, nightWakeUp, set],
   );
 
-  const setLead = useCallback(
-    (leadMinutes: number) => set('reminders', { ...reminders, leadMinutes }),
-    [reminders, set],
-  );
-
   /** The times the two wake-ups are set to; null follows Fajr. */
   const wakeTimes: Record<WakeFlag, WakeTime | null> = { suhoorWakeUp: suhoorTime, nightWakeUp: nightWakeTime };
   const setWakeTime = useCallback(
@@ -324,5 +411,5 @@ export function useReminders() {
     [set],
   );
 
-  return { reminders, toggle, toggleFlag, flags, setLead, granted, anyOn, wakeTimes, setWakeTime };
+  return { reminders, setAlert, applyToAll, toggleFlag, flags, granted, anyOn, wakeTimes, setWakeTime };
 }

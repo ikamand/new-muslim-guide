@@ -4489,3 +4489,91 @@ eight screens and from `constants/theme.ts`; the tabs end at `Spacing.four`
 above the pill, the pushed pages at `Spacing.six` like every other pushed
 page. Looked at on web: Today, Qur'an, Learn and the month, scrolled to the
 end. Ships by OTA.
+
+---
+
+## 14 Sep 2026 — The adhan: the whole call on Android, the first Allāhu akbar on iPhone ⚠️ native build ⚠️ review-gated
+
+Iyad added eight recordings, four adhans and four Fajr adhans, and asked for
+the adhan to be chosen per prayer or for all. Researched before it was built.
+An iPhone plays a notification sound only under thirty seconds, and longer
+plays the default tone (Apple, `UNNotificationSound`), so no iPhone app can
+sound a three-minute adhan from a closed app except by keeping itself
+running: App Store guideline 2.5.4 allows background services only for their
+purpose, and the adhan silently never happens once the app is swiped away.
+Android can: an exact alarm may start a foreground service (Android's own
+exemption list), and a media-playback service plays the whole file, which is
+how Al-Azan, an open-source React Native adhan app, does it. **Iyad's call:
+Android plays the whole adhan; an iPhone plays the first Allāhu akbar.**
+
+- **A page per prayer, opened by a bell beside its time on the day page.**
+  Iyad's proposal, over one settings page for all five: Dhuhr falls at work
+  and Fajr while people sleep, so "play even on silent" is right for one and
+  wrong for the other, and one page was about twenty controls.
+  `app/prayer-alert/[id].tsx`: Adhan, Notification with sound, Silent
+  notification, Off. For the adhan, the voice (Fajr lists its four Fajr
+  recordings, then the other four under "Without the Fajr line"; no other
+  prayer is offered a Fajr recording), "Play on silent or vibrate" and "Play
+  during Do Not Disturb" on Android, both off, and "Sound during Focus" on
+  iPhone. The lead time belongs to a notification only: an adhan ten minutes
+  early says the time has come in when it has not. "Use these for all
+  prayers" copies the mode and overrides everywhere and a voice only to its
+  own kind, so Fajr's own recording is never taken away (`applyAlertToAll`).
+- **The bell is on the day page, not Today.** Today's times row is one link,
+  and a bell inside it would be a button inside a button, in columns already
+  full at 360 points. Filled for the adhan, open for a notification, struck
+  through when off; lapis, because it is pressable. The rows between prayers
+  carry the bells' column empty, so every time keeps one right edge, and
+  their label-to-time gap halved so "ʿIsha's preferred time ends" stays on one
+  line (it needs 176 points and has 177).
+- **Reminders stays the overview.** Five rows saying what each time does,
+  "Adhan · Al Najar", "Sound · 15 minutes before", "Off", each opening the
+  same page; a voice has a short name for this row, because the full one was
+  cut off at 360. The shared lead time left with the switches.
+- **What the adhan never interrupts** (agreed with Iyad, 14 Sep): a call,
+  never overridable, with the notification still coming; a phone on silent or
+  vibrate, and Do Not Disturb, each overridable per prayer. Music pauses and
+  resumes; Stop, a volume button, or headphones pulled out end it. An alarm
+  the phone delivers more than ten minutes late comes as the notification.
+  The prayer's page says what happened last time ("Last time, Dhuhr at
+  1:07 PM: stopped with a volume button"), and "Hear it in one minute" rings it
+  for real, so each rule can be tried on a phone.
+- **The native module**, `modules/adhan-alarm`, Android only: alarms kept in
+  SharedPreferences and re-armed after a reboot or an update; a receiver that
+  decides at the moment from the phone as it is; a media-playback service
+  with transient audio focus. The volume button listens for
+  `VOLUME_CHANGED_ACTION`, which Android sends but does not document, because
+  the documented route (`VolumeProvider`) stops receiving presses with the
+  screen off on Android 12 and 12L. Notifee, which Al-Azan uses, was archived
+  in April 2026.
+- **The files.** `npm run adhan:audio` (macOS, `afconvert`) writes the whole
+  recording as mono AAC into the module's `res/raw` (9.1 MB for eight) and the
+  opening as IMA4 CAF for iOS and AAC for the preview (1.4 MB).
+  `npm run adhan:check` fails on a missing or stale file, an opening past thirty
+  seconds, an iOS sound missing from app.json, a voice without a credit entry,
+  and on the schedule's rules; `-- --release` also fails while a credit has no
+  origin, which today is all eight.
+
+Verified: `tsc`, `style:check`, `adhan:check`, `night:check`, `i18n:manifest`,
+`audio:manifest --check`, `expo export --platform web`; lint's standing four,
+none in these files. The Kotlin module compiled in a prebuilt copy of the app
+(`:adhan-alarm:compileReleaseKotlin`), and the release manifest and resources
+merged and linked: the receiver, the service and the permissions are in the
+merged manifest, and all sixteen adhan files are in `res/raw`. Looked at on web
+at 360, dark then light: the day page (every time ending at 308 points, the
+bells at 316–336, measured), Fajr's and Dhuhr's pages, and Reminders before
+and after "Use these for all prayers"; the bell opens its prayer's page.
+
+**Not seen, and only a phone can show it:** the adhan playing, every
+interruption rule, the preview buttons, the Android and iPhone sections of the
+prayer's page, and the opening as an iPhone's notification sound. ⚠️ The eight
+cuts were measured from loudness, not heard. ⚠️ Where the recordings came from
+is not written down. Both are in `docs/todo.md`; the substance is on the review
+pile.
+
+**What it costs.** A full `eas build` on both platforms: a native module, new
+permissions, bundled sounds and an iOS entitlement, which EAS enables on the
+Apple account itself. Google Play asks apps targeting Android 14 to declare
+each foreground-service type with a description and a video. About 10 MB more
+on Android and 1.4 MB on iPhone, of which about 950 KB of iOS openings also
+land on Android. Every voice added later is a store build on Android.

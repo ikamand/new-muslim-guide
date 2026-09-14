@@ -525,6 +525,7 @@ export const EN = {
   'awqat.day.reminders.all': 'All five',
   'awqat.day.lead.atTime': 'at the time',
   'awqat.day.lead.before': '{n} minutes before',
+  'awqat.day.lead.adhan': 'adhan at the time',
   'awqat.day.method': 'Calculation method',
   /*
     ⚠️ REVIEW REQUIRED — the three bands are rulings. "Forbidden" is Iyad's
@@ -926,7 +927,7 @@ export const EN = {
   'reminders.adhkar': 'Adhkar',
   'reminders.night': 'Night prayer',
   'settings.reminders.help':
-    'A quiet notification before each prayer. Nothing is sent anywhere. Your phone works the times out and sets its own alarms.',
+    'An adhan or a notification for each prayer, set one prayer at a time. Nothing is sent anywhere. Your phone works the times out and sets its own alarms.',
   'settings.reminders.lead': 'How far ahead',
   'settings.reminders.atTime': 'At the time',
   'settings.reminders.minutesBefore': '{n} minutes before',
@@ -949,6 +950,59 @@ export const EN = {
   'reminders.jumuahNote': 'A note on Thursday evening',
   'reminder.now': 'It is time to pray.',
   'reminder.soon': 'In {n} minutes.',
+  'reminders.channel.silent': 'Silent prayer reminders',
+  /*
+    A prayer's own page, opened by the bell beside its time on the day page
+    and by its row on Reminders (Iyad, 14 Sep 2026).
+  */
+  'alert.when': 'When the time comes',
+  'alert.mode.adhan': 'Adhan',
+  'alert.mode.adhan.android': 'The whole adhan, at the time',
+  'alert.mode.adhan.ios': 'The first Allāhu akbar, at the time',
+  'alert.mode.sound': 'Notification with sound',
+  'alert.mode.silent': 'Silent notification',
+  'alert.mode.off': 'Off',
+  'alert.voice': 'Voice',
+  'alert.voice.fajr': 'The Fajr adhan adds one line, said twice. These four include it.',
+  'alert.voice.other': 'Without the Fajr line',
+  'alert.preview': 'Hear the opening',
+  'alert.preview.stop': 'Stop',
+  'alert.quiet': 'When the phone is quiet',
+  'alert.playOnSilent': 'Play on silent or vibrate',
+  'alert.playInDnd': 'Play during Do Not Disturb',
+  'alert.quiet.help':
+    'During a call the adhan never plays, and the notification still comes. Stop, a volume button or pulling out headphones ends it.',
+  'alert.soundInFocus': 'Sound during Focus',
+  'alert.ios.help':
+    'An iPhone plays the first Allāhu akbar. With the phone on silent, the notification comes without it.',
+  'alert.test': 'Hear it in one minute',
+  'alert.test.set': 'It rings at {time}. Lock the phone and wait.',
+  'alert.last': 'Last time, {prayer} at {time}: {what}.',
+  'alert.applyAll': 'Use these for all prayers',
+  'alert.applied': 'All five prayers now match',
+  /* The bell and the Reminders rows name a prayer's alert in a word. */
+  'alert.state.adhan': 'Adhan',
+  'alert.state.sound': 'Sound',
+  'alert.state.silent': 'Silent',
+  'alert.state.off': 'Off',
+  'alert.bell': '{prayer} alert: {state}',
+  /* The Android notification while the adhan plays, and its channels. */
+  'adhan.stop': 'Stop',
+  'adhan.channel.playing': 'Adhan',
+  'adhan.channel.quiet': 'Adhan, when it cannot play',
+  /* What happened to the last adhan, after the colon in `alert.last`. */
+  'adhan.outcome.finished': 'played to the end',
+  'adhan.outcome.stop': 'stopped with Stop',
+  'adhan.outcome.volume': 'stopped with a volume button',
+  'adhan.outcome.headphones': 'stopped when headphones came out',
+  'adhan.outcome.callStopped': 'stopped for a call',
+  'adhan.outcome.callSkipped': 'did not play during a call',
+  'adhan.outcome.otherAudio': 'stopped when another app played sound',
+  'adhan.outcome.silent': 'did not play, the phone was on silent or vibrate',
+  'adhan.outcome.dnd': 'did not play, Do Not Disturb was on',
+  'adhan.outcome.late': 'came as a notification, the phone delivered it late',
+  'adhan.outcome.refused': 'came as a notification, the phone would not start it',
+  'adhan.outcome.other': 'did not finish playing',
   'settings.duringPrayer': 'During prayer',
   'settings.keepAwake': 'Keep the screen on',
   'settings.keepAwake.help':

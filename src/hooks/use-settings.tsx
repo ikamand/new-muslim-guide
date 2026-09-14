@@ -9,10 +9,15 @@ import {
 } from '@/lib/onboarding';
 import { SHAHADA_KEY } from '@/content/curriculum';
 import { migrateProgressKey } from '@/content/progress-keys';
-import { DEFAULT_REMINDERS, isWakeTime, LEAD_CHOICES, type ReminderSettings, type WakeTime } from '@/lib/reminders';
+import {
+  DEFAULT_REMINDERS,
+  isWakeTime,
+  parseReminderSettings,
+  type ReminderSettings,
+  type WakeTime,
+} from '@/lib/reminders';
 import type { MosqueFit } from '@/lib/mosque-fit';
 import type { HomePlace } from '@/lib/home-place';
-import { PRAYER_IDS } from '@/lib/prayer-times';
 import { DEFAULT_RECITER, isReciterId, type ReciterId } from '@/content/quran/recitation';
 import {
   createContext,
@@ -138,7 +143,7 @@ export type Settings = {
   home: HomePlace | null;
   /** When the current run of being far from home began. Null when near home. */
   awaySince: number | null;
-  /** Which prayers to be reminded of, and how long before. All off by default. */
+  /** What each prayer's time does: an adhan, a notification, or nothing. All off by default. */
   reminders: ReminderSettings;
   /**
    * Wake me before Fajr for suhoor, during Ramadan only.
@@ -372,7 +377,7 @@ function parseStored(raw: string | null): Settings {
         ? stored.awaySince
         : null,
       completedLessons: [...lessons],
-      reminders: parseReminders(stored.reminders),
+      reminders: parseReminderSettings(stored.reminders),
       suhoorWakeUp: typeof stored.suhoorWakeUp === 'boolean' ? stored.suhoorWakeUp : false,
       adhkarNote: typeof stored.adhkarNote === 'boolean' ? stored.adhkarNote : false,
       jumuahNote: typeof stored.jumuahNote === 'boolean' ? stored.jumuahNote : false,
@@ -396,32 +401,6 @@ function parseStored(raw: string | null): Settings {
   } catch {
     return DEFAULTS;
   }
-}
-
-/**
- * Narrowed field by field like everything else here, because this one is nested
- * and a half-written object would otherwise schedule notifications for prayers
- * nobody asked about.
- */
-function parseReminders(raw: unknown): ReminderSettings {
-  if (typeof raw !== 'object' || raw === null) return DEFAULT_REMINDERS;
-  const stored = raw as { prayers?: unknown; leadMinutes?: unknown };
-
-  const prayers = { ...DEFAULT_REMINDERS.prayers };
-  if (typeof stored.prayers === 'object' && stored.prayers !== null) {
-    const flags = stored.prayers as Record<string, unknown>;
-    for (const id of PRAYER_IDS) {
-      if (typeof flags[id] === 'boolean') prayers[id] = flags[id];
-    }
-  }
-
-  const lead = stored.leadMinutes;
-  const leadMinutes =
-    typeof lead === 'number' && (LEAD_CHOICES as readonly number[]).includes(lead)
-      ? lead
-      : DEFAULT_REMINDERS.leadMinutes;
-
-  return { prayers, leadMinutes };
 }
 
 type SettingsContext = Settings & {

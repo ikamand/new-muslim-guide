@@ -1,15 +1,17 @@
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { Stack } from 'expo-router';
 import { Linking, Platform, Pressable, ScrollView, StyleSheet, Switch, View } from 'react-native';
 
+import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
 import { WakeRow } from '@/components/wake-row';
 import { MaxContentWidth, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
-import { useReminders, type ReminderFlag } from '@/hooks/use-reminders';
+import { describeAlert, useReminders, type ReminderFlag } from '@/hooks/use-reminders';
 import { useTheme } from '@/hooks/use-theme';
 import type { UIKey } from '@/i18n/ui';
 import { PRAYER_IDS, PRAYER_LABEL } from '@/lib/prayer-times';
-import { LEAD_CHOICES, type WakeFlag } from '@/lib/reminders';
+import type { WakeFlag } from '@/lib/reminders';
 
 /**
  * Reminders: everything the phone can wake you for, in the order the week
@@ -20,27 +22,23 @@ import { LEAD_CHOICES, type WakeFlag } from '@/lib/reminders';
  * These switches lived on Settings as one long group and made it the longest
  * screen in the app for the second time; the calculation method left for the
  * same reason on 31 Aug. Iyad's call, 11 Sep 2026: a page, reached from the
- * day page's Reminders door and from one row on Settings. Nothing here is
- * new machinery — the hook, the permission prompt and the scheduling are the
- * ones Settings used — so nothing changes about what leaves the device
- * (nothing) or when the permission is asked (at the first switch).
+ * day page's Reminders door and from one row on Settings. Nothing leaves the
+ * device, and the permission is asked at the first thing turned on.
  *
  * ## The order
  *
- * Prayer times first, with the lead time under them, because it is what most
- * people come for. Then the night prayer's wake-up, because it is daily too,
- * then Friday, Ramadan and the adhkar: each is an offer at a moment opening,
- * and none of them can notice an absence.
+ * Prayer times first, because it is what most people come for. Each prayer
+ * is a row that says what its time does and opens that prayer's own page,
+ * the same page the bell beside its time opens (14 Sep 2026). The lead time
+ * that sat under the five switches moved into those pages, because the adhan
+ * has none and each prayer may differ. Then the night prayer's wake-up,
+ * because it is daily too, then Friday, Ramadan and the adhkar: each is an
+ * offer at a moment opening, and none of them can notice an absence.
  */
 export default function RemindersScreen() {
   const theme = useTheme();
   const { t } = useLocale();
-  const { reminders, toggle, toggleFlag, flags, setLead, granted, anyOn } = useReminders();
-
-  const leadLabel = (minutes: number) =>
-    minutes === 0
-      ? t('settings.reminders.atTime')
-      : t('settings.reminders.minutesBefore').replace('{n}', String(minutes));
+  const { reminders, toggleFlag, flags, granted } = useReminders();
 
   const heading = (key: UIKey) => (
     <ThemedText type="smallBold" themeColor="textSecondary" style={styles.sectionTitle}>
@@ -113,57 +111,32 @@ export default function RemindersScreen() {
       <View style={styles.section}>
         {heading('reminders.prayers')}
         <View style={[styles.group, { borderColor: theme.goldSoft }]}>
-          {PRAYER_IDS.map((id, index) => (
-            <View
-              key={id}
-              style={[
-                styles.row,
-                index < PRAYER_IDS.length - 1 && {
-                  borderBottomWidth: StyleSheet.hairlineWidth,
-                  borderBottomColor: theme.border,
-                },
-              ]}>
-              <ThemedText type="default">{PRAYER_LABEL[id]}</ThemedText>
-              <Switch
-                value={reminders.prayers[id]}
-                onValueChange={() => void toggle(id)}
-                trackColor={{ false: theme.backgroundSelected, true: theme.accent }}
-                thumbColor={theme.background}
-              />
-            </View>
-          ))}
+          {PRAYER_IDS.map((id, index) => {
+            const state = describeAlert(reminders.alerts[id], t);
+            return (
+              <PressableLink
+                key={id}
+                href={{ pathname: '/prayer-alert/[id]', params: { id } }}
+                accessibilityLabel={`${PRAYER_LABEL[id]}. ${state}`}
+                style={[
+                  styles.row,
+                  index < PRAYER_IDS.length - 1 && {
+                    borderBottomWidth: StyleSheet.hairlineWidth,
+                    borderBottomColor: theme.border,
+                  },
+                ]}
+                pressedStyle={{ backgroundColor: theme.backgroundSelected }}>
+                <ThemedText type="default">{PRAYER_LABEL[id]}</ThemedText>
+                <View style={styles.state}>
+                  <ThemedText type="small" themeColor="textSecondary" numberOfLines={1} style={styles.stateText}>
+                    {state}
+                  </ThemedText>
+                  <Ionicons name="chevron-forward" size={18} color={theme.gold} />
+                </View>
+              </PressableLink>
+            );
+          })}
         </View>
-
-        {/* The lead time only appears once at least one prayer is on: a setting
-            about a thing that is not happening yet otherwise. */}
-        {anyOn && (
-          <>
-            {heading('settings.reminders.lead')}
-            <View style={[styles.group, { borderColor: theme.goldSoft }]}>
-              {LEAD_CHOICES.map((minutes, index) => (
-                <Pressable
-                  key={minutes}
-                  onPress={() => setLead(minutes)}
-                  accessibilityRole="radio"
-                  accessibilityState={{ selected: reminders.leadMinutes === minutes }}
-                  style={[
-                    styles.row,
-                    index < LEAD_CHOICES.length - 1 && {
-                      borderBottomWidth: StyleSheet.hairlineWidth,
-                      borderBottomColor: theme.border,
-                    },
-                  ]}>
-                  <ThemedText type="default">{leadLabel(minutes)}</ThemedText>
-                  {reminders.leadMinutes === minutes && (
-                    <ThemedText type="smallBold" themeColor="accent">
-                      ✓
-                    </ThemedText>
-                  )}
-                </Pressable>
-              ))}
-            </View>
-          </>
-        )}
       </View>
 
       <View style={styles.section}>
@@ -224,6 +197,15 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     gap: Spacing.three,
     paddingVertical: Spacing.three,
+  },
+  state: {
+    flexShrink: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.two,
+  },
+  stateText: {
+    flexShrink: 1,
   },
   flagLabel: { flex: 1, paddingRight: Spacing.two },
   wakeRow: { paddingVertical: Spacing.three },

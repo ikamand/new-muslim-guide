@@ -11,9 +11,20 @@ import { Platform } from 'react-native';
  * pending, so rescheduling clears everything and starts again. That is
  * simpler than reconciling, and reconciling would buy nothing — the times
  * shift daily anyway.
+ *
+ * The adhan on Android is not here. It plays from `modules/adhan-alarm`,
+ * which sets its own alarms, because a notification cannot play three minutes
+ * of audio.
  */
 
 const ANDROID_CHANNEL = 'prayer-reminders';
+
+/**
+ * The same reminders without a sound, for a prayer set to Silent. Android
+ * fixes a channel's sound when the channel is created, so silence is a second
+ * channel rather than a setting on the first.
+ */
+const ANDROID_SILENT_CHANNEL = 'prayer-reminders-silent';
 
 /**
  * expo-notifications does not schedule on web — calling it throws, and
@@ -27,15 +38,20 @@ const NO_SCHEDULER = Platform.OS === 'web';
 /**
  * Android 8 and later attach sound and importance to a channel rather than to
  * the notification, and a channel's settings are fixed once it is created.
- * A custom adhan will need a new channel id, not an edit to this one — and the
- * sound file itself has to be bundled in a build, which no update can do.
  */
-export async function ensureAndroidChannel(name: string): Promise<void> {
+export async function ensureAndroidChannels(name: string, silentName: string): Promise<void> {
   if (Platform.OS !== 'android') return;
 
   await Notifications.setNotificationChannelAsync(ANDROID_CHANNEL, {
     name,
     importance: Notifications.AndroidImportance.HIGH,
+    vibrationPattern: [0, 200, 150, 200],
+    lockscreenVisibility: Notifications.AndroidNotificationVisibility.PUBLIC,
+  });
+  await Notifications.setNotificationChannelAsync(ANDROID_SILENT_CHANNEL, {
+    name: silentName,
+    importance: Notifications.AndroidImportance.HIGH,
+    sound: null,
     vibrationPattern: [0, 200, 150, 200],
     lockscreenVisibility: Notifications.AndroidNotificationVisibility.PUBLIC,
   });
@@ -74,6 +90,14 @@ export type ScheduledItem = {
   fireAt: Date;
   title: string;
   body: string;
+  /**
+   * Left out: the phone's own notification sound. `null`: no sound. A file
+   * name: a sound bundled into the iOS app, which is how an iPhone hears the
+   * opening of the adhan (`openingSoundFile` in `content/adhan-voices.ts`).
+   */
+  sound?: string | null;
+  /** iPhone: deliver through a Focus. Needs the Time Sensitive entitlement in app.json. */
+  timeSensitive?: boolean;
 };
 
 /**
@@ -87,20 +111,26 @@ export type ScheduledItem = {
 export async function rescheduleItems(
   items: readonly ScheduledItem[],
   channelName: string,
+  silentChannelName: string,
 ): Promise<number> {
   if (NO_SCHEDULER) return 0;
   await Notifications.cancelAllScheduledNotificationsAsync();
   if (items.length === 0) return 0;
 
-  await ensureAndroidChannel(channelName);
+  await ensureAndroidChannels(channelName, silentChannelName);
 
   for (const item of items) {
     await Notifications.scheduleNotificationAsync({
-      content: { title: item.title, body: item.body, sound: true },
+      content: {
+        title: item.title,
+        body: item.body,
+        sound: item.sound === null ? false : (item.sound ?? true),
+        ...(item.timeSensitive ? { interruptionLevel: 'timeSensitive' as const } : null),
+      },
       trigger: {
         type: Notifications.SchedulableTriggerInputTypes.DATE,
         date: item.fireAt,
-        channelId: ANDROID_CHANNEL,
+        channelId: item.sound === null ? ANDROID_SILENT_CHANNEL : ANDROID_CHANNEL,
       },
     });
   }

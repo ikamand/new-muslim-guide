@@ -13,6 +13,9 @@
       "supportsTablet": false,
       "infoPlist": {
         "NSMicrophoneUsageDescription": "The microphone is used only while you practise reciting, so the app can follow along on screen. Nothing you say is recorded, saved, or sent anywhere."
+      },
+      "entitlements": {
+        "com.apple.developer.usernotifications.time-sensitive": true
       }
     },
     "android": {
@@ -58,7 +61,17 @@
         "expo-notifications",
         {
           "icon": "./assets/images/notification-icon.png",
-          "color": "#1F6F5C"
+          "color": "#1F6F5C",
+          "sounds": [
+            "./assets/adhan/opening/adhan_majale_opening.caf",
+            "./assets/adhan/opening/adhan_najar_opening.caf",
+            "./assets/adhan/opening/adhan_damradash_opening.caf",
+            "./assets/adhan/opening/adhan_maghriby_opening.caf",
+            "./assets/adhan/opening/adhan_alafasy_fajr_opening.caf",
+            "./assets/adhan/opening/adhan_abdulbasit_fajr_opening.caf",
+            "./assets/adhan/opening/adhan_kuwait_fajr_opening.caf",
+            "./assets/adhan/opening/adhan_ummalquwain_fajr_opening.caf"
+          ]
         }
       ],
       "expo-asset"

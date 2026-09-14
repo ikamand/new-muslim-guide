@@ -428,3 +428,28 @@ model-written wording or a rule drawn on screen.
   now otherwise), filled at the end of the night while the wake-up is on, and
   no mark in the last third when it is off. A drawing that places a ruling
   is content; check the marks say what the card says.
+
+## The adhan — added 14 Sep 2026
+
+### Choosing an adhan — `content/adhan-voices.ts`, `app/prayer-alert/[id].tsx`, `i18n/ui.ts` (`alert.*`)
+
+Model-written choices and wording. The recordings are not text the app
+wrote, but they are what it sounds five times a day.
+
+- **The recordings themselves.** Nobody qualified has listened to the eight
+  whole files. Each should be a correct adhan, and the four named "Al Fajr"
+  should carry the Fajr line while the other four do not. That split rests on
+  the file names alone.
+- **"The Fajr adhan adds one line, said twice."** Printed over the four Fajr
+  recordings. Its place, after the second ḥayya ʿalā l-falāḥ, was read in Abu
+  Dawud 500 (Abu Mahdhurah). The app does not print the line or its meaning.
+- **Fajr may use an adhan without the line.** Offered under "Without the Fajr
+  line", on Iyad's word (13 Sep) that the line is optional. Not sourced. Is
+  offering it right?
+- **The adhan never sounds before the time.** A notification may be set up to
+  30 minutes ahead; the adhan may not, because it announces that the time has
+  come in. Right?
+- **An iPhone sounds only the first Allāhu akbar**, because a notification
+  sound must be under thirty seconds. Is a call cut to its opening acceptable
+  as an alert, or should an iPhone use a plain tone? The eight cut points were
+  measured, not heard; `docs/todo.md` has the listening item.

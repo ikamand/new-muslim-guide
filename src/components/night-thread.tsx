@@ -29,7 +29,7 @@ const CAPTION_ROOM = 66;
  * reader drawn in gold. On it: the moon at now, using the arch's own ʿIshāʾ
  * mark; the bell of the alarm that will ring, above the line, until it rings;
  * and witr's two-then-one where `tonightPlan` puts it, in the night-prayer
- * page's own marks: filled at the end of the night, as the page draws shafʿ
+ * page's own marks: filled after the wake-up bell, as the page draws shafʿ
  * and witr last, and outlined before sleep, as it draws praying them earlier.
  * In the last third with no wake-up set there is no witr mark, because the
  * app cannot know whether it was prayed; the card asks instead.
@@ -80,7 +80,13 @@ export function NightThread({
         ? 0.08
         : witr === 'next'
           ? Math.max(thread.now + 0.08, Math.min(thread.now + 0.1, thread.lastThird - 0.07))
-          : 0.95;
+          : /*
+              'end' sits just after the bell, where the night prayer the
+              reader wakes for ends. The usual alarm is near Fajr, so that is
+              the end of the line; one set for 23:30 puts witr at 23:30's
+              prayer, not at dawn.
+            */
+            Math.min(0.95, bellFraction === undefined ? 0.95 : bellFraction + 0.08);
   const witrX = witrFraction === undefined ? undefined : along(witrFraction);
   const witrLast = witr === 'end';
 

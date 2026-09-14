@@ -1,3 +1,5 @@
+import { StyleSheet } from 'react-native';
+
 import type { WakeTimePickerProps } from '@/components/wake-time-sheet';
 import { useLocale } from '@/hooks/use-locale';
 import { useTheme } from '@/hooks/use-theme';
@@ -30,7 +32,8 @@ export function WakeTimePicker({ visible, initial, onConfirm, onClose }: WakeTim
   const is24Hour = !/[ap]\.?\s?m/i.test(formatTime(initial));
 
   return (
-    <Host matchContents>
+    // Out of the row's layout: a dialog has no size to give it, and in flow it would add the row's gap.
+    <Host style={styles.dialogHost}>
       <TimePickerDialog
         initialDate={initial.toISOString()}
         is24Hour={is24Hour}
@@ -43,3 +46,9 @@ export function WakeTimePicker({ visible, initial, onConfirm, onClose }: WakeTim
     </Host>
   );
 }
+
+const styles = StyleSheet.create({
+  dialogHost: {
+    position: 'absolute',
+  },
+});

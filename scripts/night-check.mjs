@@ -21,7 +21,7 @@
  */
 import { computeDay, computeNight, findCurrentPrayer, inferProfile, windowEnd } from '../src/lib/prayer-times.ts';
 import { NIGHT_WAKE_LEAD_MINUTES, nightPrayerAt, nightThread, tonightPlan } from '../src/lib/night.ts';
-import { nextWake, planNightWake, planSuhoor, resolveWake } from '../src/lib/reminders.ts';
+import { nextWake, planNightWake, planSuhoor, resolveWake, wakeRingsOn } from '../src/lib/reminders.ts';
 import { arcFor, arcForNight } from '../src/content/ramadan-arc.ts';
 import { hijriDate, hijriOfNight } from '../src/lib/hijri.ts';
 import { PRAYERS } from '../src/content/prayers.ts';
@@ -570,9 +570,9 @@ if (!firstFast) {
   }
 
   /*
-    The bell against the planners that ring. `inRamadan` and the night
-    wake-up's skip are `use-reminders.ts`'s own two lines, restated because the
-    hook cannot run here.
+    The bell against the planners that ring. `inRamadan` is
+    `use-reminders.ts`'s own line, restated because the hook cannot run here;
+    the skip is `wakeRingsOn`, which the hook and the wake-up rows share.
   */
   const inRamadan = (day) => hijriDate(day)?.month === 9;
   const ringing = [['an ordinary night', new Date(2026, 8, 13, 12)]];
@@ -592,7 +592,7 @@ if (!firstFast) {
         const rings = [
           ...(suhoorWakeUp ? planSuhoor(place, profile, maghrib, inRamadan, 2).map((moment) => ['suhoor', moment]) : []),
           ...(nightWakeUp
-            ? planNightWake(place, profile, maghrib, (day) => suhoorWakeUp && inRamadan(day), 2).map((moment) => ['night', moment])
+            ? planNightWake(place, profile, maghrib, (day) => !wakeRingsOn('nightWakeUp', inRamadan(day), suhoorWakeUp), 2).map((moment) => ['night', moment])
             : []),
         ]
           .filter(([, moment]) => moment.anchor.getTime() === fajr)
@@ -704,6 +704,20 @@ if (!firstFast) {
   const afterAlarm = nextWake(place, profile, new Date('2026-09-14T04:45:00'), 'night', null);
   if (afterAlarm?.anchor.getDate() !== 15) {
     fail(`the next wake-up after 14 Sep's has passed: ${afterAlarm ? afterAlarm.anchor.toDateString() : 'none'}, expected the 15th`);
+  }
+
+  // The rule the sync and the rows share: suhoor's only in Ramadan, one alarm a Ramadan night.
+  const ringing = [
+    ['suhoorWakeUp', true, false, true],
+    ['suhoorWakeUp', false, true, false],
+    ['nightWakeUp', true, true, false],
+    ['nightWakeUp', true, false, true],
+    ['nightWakeUp', false, true, true],
+  ];
+  for (const [flag, ramadanMorning, suhoorOn, expected] of ringing) {
+    if (wakeRingsOn(flag, ramadanMorning, suhoorOn) !== expected) {
+      fail(`wakeRingsOn ${flag}, Ramadan morning ${ramadanMorning}, suhoor ${suhoorOn}: expected ${expected}`);
+    }
   }
 
   console.log(

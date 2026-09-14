@@ -398,7 +398,9 @@ model-written wording or a rule drawn on screen.
   cannot know.** Before sleep the card offers Shafʿ and Witr "If you might
   not wake before Fajr" (Muslim 755; Bukhari 1178). With the wake-up on, the
   witr row leaves the card and one line asks "Not prayed witr yet? Leave it
-  for the end of your night." (Muslim 755). Asked rather than told, because
+  for the end of your night prayer." (Muslim 755), and the drawing puts witr
+  just after the wake-up bell, which a set alarm can place before the last
+  third. Asked rather than told, because
   somebody who prayed witr and then turned the switch on must not be sent to
   pray it twice. Right for someone who then sleeps through the alarm? The
   Shafʿ and Witr page covers a missed witr.
@@ -414,7 +416,7 @@ model-written wording or a rule drawn on screen.
   time, which rings anywhere between ʿIsha and Fajr. Before the last third
   the notification is titled "The night prayer", not "The last third of the
   night". A set time outside the night rings at the default, and the row says
-  "Fajr is at {fajr} that morning, so it rings at {time} instead." Is an hour
+  "The next Fajr is at {fajr}, so it rings at {time} instead." Is an hour
   the right default? The Voluntary prayers lesson now says to set an alarm
   "twenty minutes or more before Fajr" (Iyad's wording).
 - **A night in Ramadan**: taraweeh "Two rakʿahs at a time, then witr", the

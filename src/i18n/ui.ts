@@ -278,7 +278,7 @@ export const EN = {
   'night.thread.fajr': 'Fajr {time}',
   'night.card.before.title': 'Before you sleep',
   'night.card.witr': 'If you might not wake before Fajr',
-  'night.card.witr.later': 'Not prayed witr yet? Leave it for the end of your night.',
+  'night.card.witr.later': 'Not prayed witr yet? Leave it for the end of your night prayer.',
   'night.card.taraweeh': 'Two rakʿahs at a time, then witr',
   'night.card.adhkar': 'Adhkār of sleep',
   'night.card.adhkar.start': 'Start the adhkār',
@@ -293,7 +293,8 @@ export const EN = {
   'wake.night.set': 'Every night',
   'wake.suhoor.follows': 'Every night of Ramadan, 45 minutes before Fajr',
   'wake.suhoor.set': 'Every night of Ramadan',
-  'wake.moved': 'Fajr is at {fajr} that morning, so it rings at {time} instead.',
+  'wake.moved': 'The next Fajr is at {fajr}, so it rings at {time} instead.',
+  'wake.night.suhoorInstead': 'In Ramadan your suhoor wake-up rings instead',
   'wake.night.back': 'Back to an hour before Fajr',
   'wake.suhoor.back': 'Back to 45 minutes before Fajr',
   'wake.change': 'Change the time',
@@ -944,7 +945,8 @@ export const EN = {
     The windows. Each is an offer at a moment opening — none of them can
     express an absence, because none of them knows one.
   */
-  'reminders.adhkarNote': 'A note when the morning window opens',  'reminders.jumuahNote': 'A note on Thursday evening',
+  'reminders.adhkarNote': 'A note when the morning window opens',
+  'reminders.jumuahNote': 'A note on Thursday evening',
   'reminder.now': 'It is time to pray.',
   'reminder.soon': 'In {n} minutes.',
   'settings.duringPrayer': 'During prayer',

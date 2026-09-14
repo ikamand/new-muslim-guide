@@ -130,6 +130,18 @@ export type WakeTime = { hour: number; minute: number };
 /** The two switches that are wake-ups, by their setting's name. */
 export type WakeFlag = 'nightWakeUp' | 'suhoorWakeUp';
 
+/**
+ * Whether a wake-up rings on a morning, given whether that morning is in
+ * Ramadan: suhoor's only in Ramadan, and the night wake-up every morning
+ * except a Ramadan one while suhoor's is on, because a night gets one alarm.
+ *
+ * The notification sync and the rows that show these alarms both ask this, so
+ * a row cannot name a ring the phone will not make.
+ */
+export function wakeRingsOn(flag: WakeFlag, ramadanMorning: boolean, suhoorWakeUp: boolean): boolean {
+  return flag === 'suhoorWakeUp' ? ramadanMorning : !(suhoorWakeUp && ramadanMorning);
+}
+
 /** Enough of a shape check to trust a stored time. */
 export function isWakeTime(value: unknown): value is WakeTime {
   if (typeof value !== 'object' || value === null) return false;

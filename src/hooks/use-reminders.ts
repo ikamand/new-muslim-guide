@@ -22,6 +22,7 @@ import {
   planNightWake,
   planSuhoor,
   DAYS_AHEAD,
+  wakeRingsOn,
   type WakeFlag,
   type WakeTime,
 } from '@/lib/reminders';
@@ -189,7 +190,7 @@ export function useReminderSync(): void {
 
       if (nightWakeUp) {
         // One alarm a night: on a Ramadan morning the suhoor wake-up, when it is on, is that alarm.
-        const skip = (day: Date) => suhoorWakeUp && inRamadan(day);
+        const skip = (day: Date) => !wakeRingsOn('nightWakeUp', inRamadan(day), suhoorWakeUp);
         for (const planned of planNightWake(coords, profile, now, skip, DAYS_AHEAD, nightWakeTime)) {
           items.push({
             fireAt: planned.fireAt,

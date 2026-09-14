@@ -10,10 +10,19 @@ import { useLocation } from '@/hooks/use-location';
 import { usePrayerTimes } from '@/hooks/use-prayer-times';
 import { useReminders } from '@/hooks/use-reminders';
 import { useTheme } from '@/hooks/use-theme';
+import { hijriDate } from '@/lib/hijri';
 import { formatTime } from '@/lib/prayer-times';
-import { nextWake, type WakeFlag, type WakeTime } from '@/lib/reminders';
+import { nextWake, wakeRingsOn, type WakeFlag, type WakeTime } from '@/lib/reminders';
 
+/*
+  A clock time on a date with no clock change. The picker opens on this rather
+  than on the next ring: on a spring-forward morning 2:30 does not exist, and
+  the pickers would hand back 3:30.
+*/
 const clockOf = (time: WakeTime) => new Date(2000, 0, 1, time.hour, time.minute);
+
+/** Where the picker opens when there is no location to place the alarm by yet. */
+const NO_PLACE_TIME: WakeTime = { hour: 4, minute: 0 };
 
 /**
  * One wake-up, set like an alarm clock: its time, what it follows, its switch.
@@ -25,11 +34,13 @@ const clockOf = (time: WakeTime) => new Date(2000, 0, 1, time.hour, time.minute)
  * one, and turns the wake-up on, as setting an alarm does; the line under it
  * goes back to following Fajr.
  *
- * The time shown is the next one it will ring at (`nextWake`), placed by the
- * same function the notifications are, so the row cannot promise a time the
- * phone will not keep. When a set time falls outside that night, which a
- * fixed suhoor alarm does as Fajr moves earlier through Ramadan, the row says
- * what rings instead.
+ * The time shown is the next one it would ring at (`nextWake`), placed by the
+ * same function the notifications are, and whether that morning rings at all
+ * is `wakeRingsOn`, the rule the notification sync uses. So the row says what
+ * rings instead when a set time falls outside the night (which a fixed suhoor
+ * alarm does as Fajr moves earlier through Ramadan), and never promises a ring
+ * the phone will not make: suhoor's outside Ramadan, or the night wake-up on a
+ * Ramadan morning while suhoor's is on.
  *
  * One component on Today's night card, the fast line and Reminders, so the
  * three places these alarms are switched cannot drift apart.
@@ -47,16 +58,27 @@ export function WakeRow({ flag, roomy = false }: { flag: WakeFlag; roomy?: boole
   const suhoor = flag === 'suhoorWakeUp';
   const set = wakeTimes[flag];
   const next = coords && profile ? nextWake(coords, profile, new Date(), suhoor ? 'suhoor' : 'night', set) : undefined;
+  const morning = next
+    ? new Date(next.anchor.getFullYear(), next.anchor.getMonth(), next.anchor.getDate())
+    : undefined;
+  const rings = morning ? wakeRingsOn(flag, hijriDate(morning)?.month === 9, flags.suhoorWakeUp) : false;
 
   // The time somebody chose stays the title even on a morning it cannot ring at.
   const shown = set && (!next || next.fellBack) ? clockOf(set) : next?.fireAt;
   const timeText = shown ? formatTime(shown) : '…';
   const [before, after = ''] = t(suhoor ? 'wake.suhoor.title' : 'wake.night.title').split('{time}');
   const title = `${before}${timeText}${after}`;
+
+  const usual = t(
+    suhoor ? (set ? 'wake.suhoor.set' : 'wake.suhoor.follows') : set ? 'wake.night.set' : 'wake.night.follows',
+  );
   const help =
-    set && next?.fellBack
-      ? t('wake.moved').replace('{fajr}', formatTime(next.anchor)).replace('{time}', formatTime(next.fireAt))
-      : t(suhoor ? (set ? 'wake.suhoor.set' : 'wake.suhoor.follows') : set ? 'wake.night.set' : 'wake.night.follows');
+    next && !rings && !suhoor
+      ? t('wake.night.suhoorInstead')
+      : next && rings && set && next.fellBack
+        ? t('wake.moved').replace('{fajr}', formatTime(next.anchor)).replace('{time}', formatTime(next.fireAt))
+        : usual;
+  const opensAt = clockOf(shown ? { hour: shown.getHours(), minute: shown.getMinutes() } : NO_PLACE_TIME);
   const titleType = roomy ? 'default' : 'smallBold';
 
   return (
@@ -108,7 +130,7 @@ export function WakeRow({ flag, roomy = false }: { flag: WakeFlag; roomy?: boole
       <WakeTimePicker
         visible={picking}
         title={t(suhoor ? 'wake.picker.suhoor' : 'wake.picker.night')}
-        initial={shown ?? new Date()}
+        initial={opensAt}
         onConfirm={(time) => {
           setPicking(false);
           setWakeTime(flag, time);

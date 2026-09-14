@@ -1794,13 +1794,17 @@ branch so it can be tried on the phone before it reaches main.
   (the iOS wheel, the Android clock dial; steppers on the web), and "Back to
   an hour before Fajr" undoes it. A set time rings wherever it falls between
   ʿIsha and Fajr, before the last third too; outside that it rings at the
-  default and the row says so ("Fajr is at 5:28 AM that morning, so it rings
-  at 4:43 AM instead"), because a fixed suhoor alarm drifts past Fajr within
+  default and the row says so ("The next Fajr is at 5:28 AM, so it rings at
+  4:43 AM instead"), because a fixed suhoor alarm drifts past Fajr within
   one Ramadan (8 of 29 mornings at 05:30 in San Francisco in 1448).
   `WakeRow` is the one row on the night card, the fast line and Reminders;
   `resolveWake` places every ring, and `night:check` walks it. The native
   pickers come from Expo UI, already in the installed build, and were not
-  seen on a phone before shipping.
+  seen on a phone before shipping. Because a set alarm can ring before the
+  last third, witr's mark follows the bell and the card says to leave witr
+  for "the end of your night prayer" rather than of the night. The row never
+  names a ring the phone will not make: it asks `wakeRingsOn`, the rule the
+  notification sync uses.
 - **Left off:** the Arabic title of the adhkār row, which squeezed narrow
   phones (Iyad's call); the adhkār screen opens on it one tap later.
 

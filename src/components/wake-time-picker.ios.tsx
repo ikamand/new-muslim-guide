@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState, type ReactNode } from 'react';
 
 import { WakeTimeSheet, type WakeTimePickerProps } from '@/components/wake-time-sheet';
 import { useColorScheme } from '@/hooks/use-color-scheme';
@@ -17,30 +17,33 @@ export function WakeTimePicker({ visible, title, initial, onConfirm, onClose }: 
   const scheme = useColorScheme();
   const [date, setDate] = useState(initial);
 
-  // Reopening starts from wherever the alarm is now.
-  const opensAt = initial.getTime();
-  useEffect(() => {
-    if (visible) setDate(new Date(opensAt));
-  }, [visible, opensAt]);
-
-  if (!visible) return null;
-
   /*
-    Required here rather than imported at the top: Expo UI registers its
-    native views when its module loads, and this row sits on Today. It is in
-    the installed build (autolinked, and package.json unchanged since), but a
-    picker nobody has opened on a phone yet should not be able to take Today
-    down with it if that ever turns out wrong.
+    Reopening starts from wherever the alarm is now, adjusted while rendering
+    so the sheet's first frame already shows it. Once opened, the wheel stays
+    mounted, so it slides away with the sheet instead of vanishing first.
   */
-  const { DatePicker, Host } = require('@expo/ui/swift-ui') as SwiftUI;
-  const { datePickerStyle, labelsHidden } = require('@expo/ui/swift-ui/modifiers') as SwiftUIModifiers;
+  const [wasVisible, setWasVisible] = useState(visible);
+  const [opened, setOpened] = useState(visible);
+  if (visible !== wasVisible) {
+    setWasVisible(visible);
+    if (visible) {
+      setDate(new Date(initial.getTime()));
+      setOpened(true);
+    }
+  }
 
-  return (
-    <WakeTimeSheet
-      visible={visible}
-      title={title}
-      onClose={onClose}
-      onDone={() => onConfirm({ hour: date.getHours(), minute: date.getMinutes() })}>
+  let wheel: ReactNode = null;
+  if (opened) {
+    /*
+      Required here rather than imported at the top: Expo UI registers its
+      native views when its module loads, and this row sits on Today. It is in
+      the installed build (autolinked, and package.json unchanged since), but a
+      picker nobody has opened on a phone yet should not be able to take Today
+      down with it if that ever turns out wrong.
+    */
+    const { DatePicker, Host } = require('@expo/ui/swift-ui') as SwiftUI;
+    const { datePickerStyle, labelsHidden } = require('@expo/ui/swift-ui/modifiers') as SwiftUIModifiers;
+    wheel = (
       <Host matchContents colorScheme={scheme === 'dark' ? 'dark' : 'light'}>
         <DatePicker
           selection={date}
@@ -49,6 +52,16 @@ export function WakeTimePicker({ visible, title, initial, onConfirm, onClose }: 
           onDateChange={setDate}
         />
       </Host>
+    );
+  }
+
+  return (
+    <WakeTimeSheet
+      visible={visible}
+      title={title}
+      onClose={onClose}
+      onDone={() => onConfirm({ hour: date.getHours(), minute: date.getMinutes() })}>
+      {wheel}
     </WakeTimeSheet>
   );
 }

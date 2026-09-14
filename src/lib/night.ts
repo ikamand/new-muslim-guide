@@ -131,7 +131,7 @@ export type TonightState = 'before' | 'ramadan' | 'third';
 /**
  * Where witr's mark sits on tonight's line: `early`, with the imam at the end
  * of taraweeh; `next`, just ahead of now, before sleep; `end`, the end of the
- * night, for someone who will wake.
+ * night prayer somebody wakes for.
  */
 export type WitrPlace = 'early' | 'next' | 'end';
 
@@ -154,7 +154,8 @@ export type TonightPlan = {
  *   Ramadan it is early all night, prayed with the imam at the end of
  *   taraweeh, which the Taraweeh page advises even for someone who will pray
  *   again later. Otherwise the wake-up switch decides: on, the end of the
- *   night, because the Sunnah puts witr last for someone who will wake
+ *   night prayer they wake for, which a set alarm can place before the last
+ *   third, because the Sunnah puts witr last for someone who will wake
  *   (Muslim 755); off, just ahead of now, before sleep. Off in the last
  *   third, no mark at all. By then the app cannot know whether witr was
  *   prayed, so the card asks and the line stays silent. The first build drew

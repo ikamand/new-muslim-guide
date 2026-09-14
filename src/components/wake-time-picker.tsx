@@ -1,5 +1,5 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
@@ -23,13 +23,15 @@ export function WakeTimePicker({ visible, title, initial, onConfirm, onClose }: 
   const { t } = useLocale();
   const [time, setTime] = useState<WakeTime>({ hour: initial.getHours(), minute: initial.getMinutes() });
 
-  // Reopening starts from wherever the alarm is now.
-  const opensAt = initial.getTime();
-  useEffect(() => {
-    if (!visible) return;
-    const at = new Date(opensAt);
-    setTime({ hour: at.getHours(), minute: at.getMinutes() });
-  }, [visible, opensAt]);
+  /*
+    Reopening starts from wherever the alarm is now. Adjusted while rendering
+    rather than in an effect, so the sheet's first frame already shows it.
+  */
+  const [wasVisible, setWasVisible] = useState(visible);
+  if (visible !== wasVisible) {
+    setWasVisible(visible);
+    if (visible) setTime({ hour: initial.getHours(), minute: initial.getMinutes() });
+  }
 
   const shift = (minutes: number) =>
     setTime(({ hour, minute }) => {
@@ -61,11 +63,7 @@ export function WakeTimePicker({ visible, title, initial, onConfirm, onClose }: 
   );
 
   return (
-    <WakeTimeSheet
-      visible={visible}
-      title={title}
-      onClose={onClose}
-      onDone={() => onConfirm(time)}>
+    <WakeTimeSheet visible={visible} title={title} onClose={onClose} onDone={() => onConfirm(time)}>
       <ThemedText type="subtitle" style={styles.time}>
         {formatTime(new Date(2000, 0, 1, time.hour, time.minute))}
       </ThemedText>

@@ -135,8 +135,20 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   rmSync(work, { recursive: true, force: true });
   mkdirSync(work, { recursive: true });
 
-  const derived = {};
+  /*
+    Voice ids on the command line convert only those
+    (`npm run adhan:audio -- abdulbasit-fajr`), so moving one cut does not
+    re-encode the other seven and put seven unchanged recordings in a commit.
+  */
+  const only = process.argv.slice(2);
+  const unknown = only.filter((id) => !ADHAN_VOICES.some((voice) => voice.id === id));
+  if (unknown.length > 0) {
+    console.error(`✗ No voice with the id ${unknown.join(', ')} in src/content/adhan-voices.ts`);
+    process.exit(1);
+  }
+  const derived = only.length > 0 && existsSync(DERIVED) ? JSON.parse(readFileSync(DERIVED, 'utf8')) : {};
   for (const voice of ADHAN_VOICES) {
+    if (only.length > 0 && !only.includes(voice.id)) continue;
     const source = join(ORIGINAL_DIR, voice.original);
     if (!existsSync(source)) {
       console.error(`✗ ${voice.id}: no file at assets/adhan/original/${voice.original}`);

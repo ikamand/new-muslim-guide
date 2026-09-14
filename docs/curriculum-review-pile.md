@@ -451,5 +451,5 @@ wrote, but they are what it sounds five times a day.
   come in. Right?
 - **An iPhone sounds only the first Allāhu akbar**, because a notification
   sound must be under thirty seconds. Is a call cut to its opening acceptable
-  as an alert, or should an iPhone use a plain tone? The eight cut points were
-  measured, not heard; `docs/todo.md` has the listening item.
+  as an alert, or should an iPhone use a plain tone? Iyad heard all eight cuts
+  on 14 Sep; Abdul Basit's was moved a second later and is to be heard again.

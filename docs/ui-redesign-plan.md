@@ -4577,3 +4577,13 @@ Apple account itself. Google Play asks apps targeting Android 14 to declare
 each foreground-service type with a description and a video. About 10 MB more
 on Android and 1.4 MB on iPhone, of which about 950 KB of iOS openings also
 land on Android. Every voice added later is a store build on Android.
+
+**Corrected 14 Sep, by ear.** Iyad listened to the eight openings: seven
+right, Abdul Basit's cut about a second short. The measurement had followed a
+dip at 13.7 s that was not the end of the phrase. The last syllable swells
+again and settles into the recording's room noise only by about 14.5 s, which
+a half-second loudness scan could not see, so the cut moved from 14.0 to 15.0.
+He had asked to delete the file instead; that would have failed the whole
+bundle, because the preview requires it, and left iPhones on the default tone
+for that voice. `npm run adhan:audio` now takes voice ids, so one re-cut does
+not re-encode the other seven.

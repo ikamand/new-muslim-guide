@@ -60,11 +60,12 @@ Built 14 Sep 2026; the plan entry is "The adhan" in `docs/ui-redesign-plan.md`.
   in `src/content/audio-sources.ts` have an empty `origin`, and
   `npm run adhan:check -- --release` fails until each has one. Kuwait and
   Umm al-Quwain name no muezzin; if the source does, add it. Added 14 Sep 2026.
-- **Listen to the eight openings.** `assets/adhan/opening/*.m4a`. Each should
-  say the first Allāhu akbar, whole, and nothing after it. A wrong cut is one
-  number, `openingEnd` in `src/content/adhan-voices.ts`, then
-  `npm run adhan:audio`. Al Najar (4.5 s) and Alafasy (4.2 s) are short enough
-  that their first pause may be a breath inside the phrase. Added 14 Sep 2026.
+- **Listen to Abdul Basit's opening again.**
+  `assets/adhan/opening/adhan_abdulbasit_fajr_opening.m4a`. Iyad heard all
+  eight on 14 Sep: seven right, this one cut about a second short, now moved
+  from 14.0 s to 15.0 s. If it is still wrong, change `openingEnd` in
+  `src/content/adhan-voices.ts`, then `npm run adhan:audio -- abdulbasit-fajr`.
+  Added 14 Sep 2026.
 - **Try the adhan on the phone, rule by rule.** After the native build, on a
   prayer's page, "Hear it in one minute", with the phone on vibrate, in Do Not
   Disturb, on a call, with music playing, with headphones in and then pulled

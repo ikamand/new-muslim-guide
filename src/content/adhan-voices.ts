@@ -27,10 +27,10 @@
  * the three files each voice needs; `npm run adhan:check` fails if any is
  * missing or older than the recording and the cut that made it.
  *
- * ⚠️ The cut points below were measured from the loudness of each recording,
- * not by listening. A pause in the sound is usually the end of a phrase, and
- * not always. Each needs an ear before release: does the clip say the first
- * Allāhu akbar, complete, and nothing after it?
+ * The cut points below were measured from the loudness of each recording, then
+ * heard by Iyad on 14 Sep 2026: seven were right, and Abdul Basit's ended about
+ * a second early and was moved (see below). ⚠️ The moved cut has not been
+ * heard yet.
  *
  * ⚠️ Where each recording came from is not yet written down, so no voice here
  * can carry a credit beyond its name. See `adhan*` in `audio-sources.ts`.
@@ -63,9 +63,14 @@ export type AdhanVoice = {
 
   Measured first pauses, start–end in seconds, that each cut sits in:
   Al Majale 9.4–16.8 · Al Najar 4.0–5.4 · Al Damradash 7.5–9.3 ·
-  Al Maghriby 12.8–16.6 · Alafasy 3.7–5.5 · Abdul Basit 13.5–24 (quiet rather
-  than silent: the recording never drops to silence) · Kuwait 9.0–12.3 ·
+  Al Maghriby 12.8–16.6 · Alafasy 3.7–5.5 · Kuwait 9.0–12.3 ·
   Umm al-Quwain 14.5–17.2.
+
+  Abdul Basit's recording never drops to silence, only to its own room noise,
+  and his first cut, at 14.0, followed a dip at 13.7 that was not the end of
+  the phrase: the last syllable swells again and settles only by about 14.5.
+  Iyad heard it cut about a second short (14 Sep 2026), so it ends at 15.0,
+  with the fade inside the room noise.
 */
 export const ADHAN_VOICES = [
   {
@@ -115,7 +120,7 @@ export const ADHAN_VOICES = [
     short: 'Abdul Basit',
     kind: 'fajr',
     original: 'Abdulbasit Abdusamad - Al Fajr.mp3',
-    openingEnd: 14.0,
+    openingEnd: 15.0,
   },
   {
     id: 'kuwait-fajr',

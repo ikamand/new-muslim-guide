@@ -33,3 +33,21 @@ Remove an item when it is done; do not leave it ticked.
   page would stay English without `TranslationGap` saying so. Add both to
   the two files together. Added 13 Sep 2026.
 
+## Sources to find
+
+Kept as written in the review sitting of 13 Sep 2026 (Iyad: "these are all
+true"). When an authenticated source is found and opened, cite it here.
+
+- **Angels, staying where you prayed.** `learn/angels.ts` says "While you sit
+  in the place you prayed, before you move, they ask forgiveness for you",
+  citing Bukhari 445. The narration conditions it on staying at the place of
+  prayer and not breaking wudu, and does not say "before you move". Added
+  13 Sep 2026.
+- **Angels, one recorder on each side.** `learn/angels.ts` cites 82:10–12
+  for the recorders, which says noble keepers who record and know what you
+  do. "Seated on the right and on the left" is 50:17, which is not cited.
+  Added 13 Sep 2026.
+- **Adam, the first prophet.** `learn/the-prophets.ts` says "Adam: the first
+  man and the first prophet." Nothing cited on the page says he was a
+  prophet. Added 13 Sep 2026.
+

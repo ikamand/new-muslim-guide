@@ -20,7 +20,7 @@
  * is measured from Maghrib.
  */
 import { computeDay, computeNight, findCurrentPrayer, inferProfile, windowEnd } from '../src/lib/prayer-times.ts';
-import { nightPrayerAt } from '../src/lib/night.ts';
+import { NIGHT_WAKE_LEAD_MINUTES, nightPrayerAt, nightThread } from '../src/lib/night.ts';
 import { arcFor, arcForNight } from '../src/content/ramadan-arc.ts';
 import { hijriDate, hijriOfNight } from '../src/lib/hijri.ts';
 import { PRAYERS } from '../src/content/prayers.ts';
@@ -378,6 +378,101 @@ if (!firstFast) {
     fail(`qiyam-al-layl.order: timeline is ${order?.timeline?.join(',') ?? 'missing'}`);
   }
   console.log('  night order: drawn as start, pairs, closing, earlier');
+}
+
+/*
+  The night thread (Today at night, 13 Sep 2026): where the moon is along
+  ʿIshāʾ → Fajr, where the last third begins, and when the wake-up rings. It
+  must agree with `nightPrayerAt` minute by minute, and the wake-up must sit
+  inside the last third and before Fajr, an hour ahead wherever that fits.
+*/
+{
+  const stamp = (date) => date.toTimeString().slice(0, 5);
+  const LEAD = NIGHT_WAKE_LEAD_MINUTES * MINUTE;
+  let nights = 0;
+
+  const walk = (label, evening, morning) => {
+    nights += 1;
+    const isha = timeOf(evening, 'isha');
+    const fajr = timeOf(morning, 'fajr');
+    let previousNow = -1;
+    for (let t = isha.getTime() - 30 * MINUTE; t < fajr.getTime() + 30 * MINUTE; t += MINUTE) {
+      const now = new Date(t);
+      const thread = nightThread(evening, morning, now);
+      const inNight = t >= isha.getTime() && t < fajr.getTime();
+      if (Boolean(thread) !== inNight) {
+        fail(`${label} ${stamp(now)}: thread ${thread ? 'present' : 'missing'} ${inNight ? 'inside' : 'outside'} ʿIshāʾ → Fajr`);
+        return;
+      }
+      if (!thread) continue;
+      const prayer = nightPrayerAt(evening, morning, now);
+      if (prayer === null) {
+        fail(`${label} ${stamp(now)}: the thread shows but nightPrayerAt offers nothing`);
+        return;
+      }
+      if ((thread.part === 'third') !== (prayer === 'tahajjud')) {
+        fail(`${label} ${stamp(now)}: part ${thread.part} but nightPrayerAt says ${prayer}`);
+        return;
+      }
+      for (const key of ['now', 'lastThird', 'wake']) {
+        if (!(thread[key] >= 0 && thread[key] <= 1)) {
+          fail(`${label} ${stamp(now)}: ${key} is ${thread[key]}, outside 0..1`);
+          return;
+        }
+      }
+      if (thread.lastThird >= 1 || thread.wake >= 1 || thread.wake < thread.lastThird) {
+        fail(`${label} ${stamp(now)}: last third ${thread.lastThird}, wake ${thread.wake}`);
+        return;
+      }
+      if (thread.now < previousNow) {
+        fail(`${label} ${stamp(now)}: the moon went backwards`);
+        return;
+      }
+      previousNow = thread.now;
+      const wake = thread.wakeAt.getTime();
+      const lastThird = evening.lastThirdOfNight.getTime();
+      if (wake < lastThird || wake >= fajr.getTime()) {
+        fail(`${label}: wake-up ${stamp(thread.wakeAt)} outside the last third ${stamp(evening.lastThirdOfNight)} → Fajr ${stamp(fajr)}`);
+        return;
+      }
+      const expected = fajr.getTime() - LEAD >= lastThird ? fajr.getTime() - LEAD : lastThird;
+      if (wake !== expected) {
+        fail(`${label}: wake-up ${stamp(thread.wakeAt)}, expected ${stamp(new Date(expected))}`);
+        return;
+      }
+    }
+  };
+
+  const shapes = [
+    ...SHAPES,
+    // The last third begins less than an hour before Fajr: the wake-up waits for it.
+    { name: 'short night', fajr: 100, sunrise: 200, dhuhr: 780, asr: 1030, maghrib: 1400, isha: 1420 },
+  ];
+  for (const spec of shapes) {
+    const fajrNext = 1440 + spec.fajr;
+    const length = fajrNext - spec.maghrib;
+    const evening = {
+      prayers: ['fajr', 'dhuhr', 'asr', 'maghrib', 'isha'].map((id) => ({ id, label: id, time: at(spec[id]) })),
+      sunrise: at(spec.sunrise),
+      middleOfNight: at(spec.maghrib + length / 2),
+      lastThirdOfNight: at(spec.maghrib + (length * 2) / 3),
+    };
+    const morning = { prayers: [{ id: 'fajr', label: 'fajr', time: at(fajrNext) }] };
+    walk(spec.name, evening, morning);
+  }
+
+  for (const date of ['2026-09-13', '2026-06-21', '2026-12-21', '2026-03-07', '2026-10-31']) {
+    const day = computeDay(place, new Date(`${date}T12:00:00`), profile);
+    const night = computeNight(place, timeOf(day, 'maghrib'), profile);
+    if (night) walk(date, night.evening, night.morning);
+  }
+
+  const sample = computeNight(place, new Date('2026-09-13T21:30:00'), profile);
+  const shown = sample && nightThread(sample.evening, sample.morning, new Date('2026-09-13T21:30:00'));
+  console.log(
+    `  night thread: ${nights} nights walked; 13 Sep at 21:30 the moon is at ${shown ? shown.now.toFixed(3) : '?'}, ` +
+      `the last third at ${shown ? stamp(shown.lastThirdAt) : '?'}, the wake-up at ${shown ? stamp(shown.wakeAt) : '?'}`,
+  );
 }
 
 if (failures > 0) {

@@ -58,3 +58,67 @@ export function nightPrayerAt(evening: DayTimes, morning: DayTimes, now: Date): 
   if (now >= evening.middleOfNight && isha < evening.middleOfNight) return 'qiyam';
   return 'witr';
 }
+
+/**
+ * How long before Fajr the night wake-up rings. Never earlier than the last
+ * third: on the shortest nights the last third can begin less than an hour
+ * before Fajr, and a wake-up before it would wake somebody for the wrong part
+ * of the night.
+ */
+export const NIGHT_WAKE_LEAD_MINUTES = 60;
+
+/**
+ * Tonight, measured for the thread Today draws under the prayer card.
+ *
+ * Every fraction runs along ʿIshāʾ → Fajr, clamped to 0..1, because that is
+ * the line on screen: the part of the night in which witr and the night prayer
+ * can be prayed at all.
+ */
+export type NightThread = {
+  isha: Date;
+  fajr: Date;
+  lastThirdAt: Date;
+  /** The wake-up: an hour before Fajr, never before the last third begins. */
+  wakeAt: Date;
+  now: number;
+  lastThird: number;
+  wake: number;
+  /** `third` from the start of the last third, measured from Maghrib. */
+  part: 'before' | 'third';
+};
+
+/**
+ * Where the moon is tonight, or null outside ʿIshāʾ → Fajr.
+ *
+ * Pure, like `nightPrayerAt`, and walked by `npm run night:check`. The two
+ * agree by construction: from ʿIshāʾ on, this is non-null exactly when that
+ * is, and `part` is `third` exactly when that says `tahajjud`.
+ *
+ * Where ʿIshāʾ itself falls inside the last third, far enough from the
+ * equator in summer, `lastThird` is 0 and the whole line is gold.
+ */
+export function nightThread(evening: DayTimes, morning: DayTimes, now: Date): NightThread | null {
+  const isha = timeOf(evening, 'isha');
+  const fajr = timeOf(morning, 'fajr');
+  if (!isha || !fajr || now < isha || now >= fajr) return null;
+
+  const span = fajr.getTime() - isha.getTime();
+  if (span <= 0) return null;
+  const along = (date: Date) => Math.min(1, Math.max(0, (date.getTime() - isha.getTime()) / span));
+
+  const lastThirdAt = evening.lastThirdOfNight;
+  const wakeAt = new Date(
+    Math.max(fajr.getTime() - NIGHT_WAKE_LEAD_MINUTES * 60_000, lastThirdAt.getTime()),
+  );
+
+  return {
+    isha,
+    fajr,
+    lastThirdAt,
+    wakeAt,
+    now: along(now),
+    lastThird: along(lastThirdAt),
+    wake: along(wakeAt),
+    part: now >= lastThirdAt ? 'third' : 'before',
+  };
+}

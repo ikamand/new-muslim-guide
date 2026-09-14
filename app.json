@@ -74,7 +74,8 @@
           ]
         }
       ],
-      "expo-asset"
+      "expo-asset",
+      "./plugins/with-resize-restart"
     ],
     "experiments": {
       "typedRoutes": true,

@@ -181,6 +181,11 @@ function RootStack() {
   the tell that the surface only needed a kick). The debounce keeps a live
   drag from remounting the tree on every frame; 300ms after the width
   settles is one kick.
+
+  It did not heal Iyad's phone: the stale surface never reports the resize.
+  Since 14 Sep 2026 Android restarts the activity on a resize instead
+  (`plugins/with-resize-restart.js`, a native build). This stays for the
+  devices that do report it, such as DeX, and costs nothing where it is idle.
 */
 function useSettledWidth(): number {
   const { width } = useWindowDimensions();

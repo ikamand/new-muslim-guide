@@ -72,6 +72,12 @@ Built 14 Sep 2026; the plan entry is "The adhan" in `docs/ui-redesign-plan.md`.
   out, stopped with a volume button and with Stop, and locked. The line under
   the button says what happened each time. The volume button is the rule most
   likely not to work. Added 14 Sep 2026.
+- **Try split screen and pop-up view on the same build.** It also restarts the
+  screen on a multi-window resize (`plugins/with-resize-restart.js`). Open the
+  app in split screen and in a pop-up, drag the divider: it should reload to
+  Today at the new size, with text whole and the tabs answering. If it does,
+  the 2 Sep release gate in `docs/ui-redesign-plan.md` is closed. Added
+  14 Sep 2026.
 - **Play Console: the foreground-service declaration** for media playback,
   with a description and a video, before the Android release. Added
   14 Sep 2026.

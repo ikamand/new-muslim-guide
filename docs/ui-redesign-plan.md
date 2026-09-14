@@ -3060,7 +3060,7 @@ checked at 320 (bead labels clear, no collisions).
 
 ---
 
-## 2 Sep 2026 — ⚠️ RELEASE GATE: Android multi-window desync, undecided
+## 2 Sep 2026 — ⚠️ RELEASE GATE: Android multi-window desync, undecided → decided 14 Sep, native build
 
 Samsung pop-up/split-screen resize leaves the RN surface desynced: text
 hard-clips mid-glyph with stale measurements and the touch map goes stale,
@@ -3084,6 +3084,22 @@ orphaned until updated):
 
 Batch the chosen fix into the NEXT native build — do not ship to stores
 with this undecided. Fullscreen use is unaffected either way.
+
+**Decided and built 14 Sep 2026: option 1.** Iyad, before the adhan's native
+build: "include the fix". `plugins/with-resize-restart.js` takes
+`screenSize`, `smallestScreenSize` and `screenLayout` out of MainActivity's
+`android:configChanges`. Checked before it was written: MainActivity passes
+`null` to `super.onCreate`, which react-native-screens needs when an activity
+is recreated, and expo-splash-screen's keep-on-screen flag lives in a
+singleton that `hide()` has already cleared, so a recreated activity draws at
+once rather than waiting on a splash. Verified in a prebuilt copy of the app:
+the generated and the merged release manifests both read
+`keyboard|keyboardHidden|orientation|uiMode|assetsPaths|locale|layoutDirection`.
+The width-keyed remount in `_layout.tsx` stays, for devices that report a
+resize. ⚠️ Not seen on a phone: split screen and pop-up view should now
+reload to Today at the new size, with text whole and the tabs answering; the
+test is in `docs/todo.md`. The gate closes when that is seen. Ships in the
+same `eas build` as the adhan.
 
 ---
 

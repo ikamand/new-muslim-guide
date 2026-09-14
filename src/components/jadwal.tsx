@@ -85,11 +85,17 @@ export function Unwan({
   title,
   subtitle,
   headpiece,
+  footer,
 }: {
   title: string;
   subtitle?: string;
   /** An illuminated panel above the title — a `HeadpieceMark`, centred. */
   headpiece?: ReactNode;
+  /**
+   * A last line inside the panel, under the subtitle and before the closing
+   * rule. Today puts the day's name here, beside the date it belongs to.
+   */
+  footer?: ReactNode;
 }) {
   return (
     <View>
@@ -105,6 +111,7 @@ export function Unwan({
           </ThemedText>
         ) : null}
       </View>
+      {footer}
       <DoubleRule />
     </View>
   );

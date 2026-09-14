@@ -5,7 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { AskBar } from '@/components/ask-bar';
 import { GirihVeil } from '@/components/girih-veil';
 import { Action, JadwalRow, QuietRow, Unwan } from '@/components/jadwal';
-import { DailyCollectionCard } from '@/components/daily-collection-card';
+import { DayName } from '@/components/day-name';
 import { AdhkarSessionCard, useLiveSession } from '@/components/adhkar-session-card';
 import { DuaCard } from '@/components/dua-card';
 import { FastLine } from '@/components/fast-line';
@@ -202,6 +202,7 @@ function Header() {
             ? `${hijri.day} ${t(`hijri.month.${hijri.month}` as UIKey)} ${hijri.year} · ${weekday}`
             : weekday
         }
+        footer={<DayName />}
       />
       {/*
         Chrome rather than a card, and inside the header rather than below it,
@@ -288,8 +289,6 @@ export default function TodayScreen() {
           life, was the one daily thing Today never mentioned.
         */}
         <WordsSlot />
-
-        <DailyCollectionCard />
 
         {/*
           One thing worth today, chosen by a single ranked function, and

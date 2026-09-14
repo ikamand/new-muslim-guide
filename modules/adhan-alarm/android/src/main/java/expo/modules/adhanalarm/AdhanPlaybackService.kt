@@ -17,6 +17,7 @@ import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
 import android.os.PowerManager
+import android.os.SystemClock
 import androidx.core.app.NotificationCompat
 import androidx.core.app.ServiceCompat
 import androidx.core.content.ContextCompat
@@ -31,10 +32,14 @@ import org.json.JSONObject
  * - **A call**, or another app taking the audio: audio focus is lost.
  * - **Headphones pulled out**: Android's "becoming noisy", so the adhan never
  *   jumps from somebody's ears to the room.
- * - **A volume button**: any change to the media volume while it plays.
- *   ⚠️ This listens for `VOLUME_CHANGED_ACTION`, which Android sends but does
- *   not document. It needs trying on a phone; it cannot see a press that
- *   changes nothing, such as volume up at full volume.
+ * - **Volume down.** Volume up only makes it louder (14 Sep 2026: the first
+ *   build stopped on any volume press, which read as "it only played the
+ *   start" to somebody turning it up). ⚠️ This listens for
+ *   `VOLUME_CHANGED_ACTION`, which Android sends but does not document, and
+ *   ignores the change the adhan's own volume makes as it starts.
+ *
+ * It plays at the volume set on the prayer's page (`VolumeHold`), and gives
+ * the phone its own media volume back when it ends.
  *
  * Music and podcasts pause rather than play underneath it: the focus request
  * is transient, which asks the other app to pause and resume afterwards.
@@ -46,6 +51,11 @@ class AdhanPlaybackService : Service() {
   private var player: MediaPlayer? = null
   private var focusRequest: AudioFocusRequest? = null
   private var listening = false
+  private var volumeHold: VolumeHold? = null
+  private var startedAt = 0L
+
+  /** Volume changes before this instant are the adhan setting its own volume, not a press. */
+  private var ignoreVolumeUntil = 0L
 
   private val attributes: AudioAttributes =
     AudioAttributes.Builder()
@@ -72,7 +82,10 @@ class AdhanPlaybackService : Service() {
             val stream = intent.getIntExtra(EXTRA_STREAM, -1)
             val value = intent.getIntExtra(EXTRA_VALUE, -1)
             val previous = intent.getIntExtra(EXTRA_PREVIOUS, -1)
-            if (stream == AudioManager.STREAM_MUSIC && value != previous) finish("volume")
+            val pressedDown =
+              stream == AudioManager.STREAM_MUSIC && value in 0 until previous &&
+                SystemClock.elapsedRealtime() > ignoreVolumeUntil
+            if (pressedDown) finish("volume")
           }
         }
       }
@@ -119,6 +132,9 @@ class AdhanPlaybackService : Service() {
       finish("focus", played = false)
       return START_NOT_STICKY
     }
+    volumeHold = VolumeHold.take(audio, next.volume)
+    ignoreVolumeUntil = SystemClock.elapsedRealtime() + 1500
+    startedAt = SystemClock.elapsedRealtime()
     play(next)
     return START_NOT_STICKY
   }
@@ -235,8 +251,12 @@ class AdhanPlaybackService : Service() {
       media.release()
     }
     player = null
+    volumeHold?.restore()
+    volumeHold = null
     abandonFocus()
-    AdhanStore.recordOutcome(this, current, played, reason)
+    val seconds = if (startedAt > 0) ((SystemClock.elapsedRealtime() - startedAt) / 1000).toInt() else 0
+    startedAt = 0L
+    AdhanStore.recordOutcome(this, current, played, reason, seconds)
     ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_REMOVE)
     // Anything but Stop leaves the prayer in the shade, as any notification nobody dismissed would stay.
     if (reason != "stop") AdhanNotifications.postQuiet(this, current, alreadyAlerted = played)

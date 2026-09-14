@@ -66,12 +66,18 @@ Built 14 Sep 2026; the plan entry is "The adhan" in `docs/ui-redesign-plan.md`.
   from 14.0 s to 15.0 s. If it is still wrong, change `openingEnd` in
   `src/content/adhan-voices.ts`, then `npm run adhan:audio -- abdulbasit-fajr`.
   Added 14 Sep 2026.
-- **Try the adhan on the phone, rule by rule.** After the native build, on a
-  prayer's page, "Hear it in one minute", with the phone on vibrate, in Do Not
-  Disturb, on a call, with music playing, with headphones in and then pulled
-  out, stopped with a volume button and with Stop, and locked. The line under
-  the button says what happened each time. The volume button is the rule most
-  likely not to work. Added 14 Sep 2026.
+- **Try the adhan on the phone, rule by rule.** After the next native build,
+  on a prayer's page, "Hear it in one minute", with the phone on vibrate, in
+  Do Not Disturb, on a call, with music playing, with headphones in and then
+  pulled out, stopped with volume down and with Stop, and locked. Volume up
+  should only make it louder. The line under the button says what happened
+  and after how many seconds. Added 14 Sep 2026; the volume rule changed the
+  same day, after the first build stopped on volume up.
+- **Try what 14 Sep's second pass added, on the same build.** Short and Full
+  in a prayer's sheet each play what the alarm will play; the play button
+  beside the volume bar plays the short adhan at that volume, and the phone's
+  own media volume comes back afterwards; a Pre-Adhan reminder arrives its
+  minutes before the adhan. Added 14 Sep 2026.
 - **Try split screen and pop-up view on the same build.** It also restarts the
   screen on a multi-window resize (`plugins/with-resize-restart.js`). Open the
   app in split screen and in a pop-up, drag the divider: it should reload to

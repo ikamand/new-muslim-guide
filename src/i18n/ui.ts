@@ -526,6 +526,7 @@ export const EN = {
   'awqat.day.lead.atTime': 'at the time',
   'awqat.day.lead.before': '{n} minutes before',
   'awqat.day.lead.adhan': 'adhan at the time',
+  'awqat.day.lead.pre': 'reminder {n} minutes before',
   'awqat.day.method': 'Calculation method',
   /*
     ⚠️ REVIEW REQUIRED — the three bands are rulings. "Forbidden" is Iyad's
@@ -928,8 +929,6 @@ export const EN = {
   'reminders.night': 'Night prayer',
   'settings.reminders.help':
     'An adhan or a notification for each prayer, set one prayer at a time. Nothing is sent anywhere. Your phone works the times out and sets its own alarms.',
-  'settings.reminders.lead': 'How far ahead',
-  'settings.reminders.atTime': 'At the time',
   'settings.reminders.minutesBefore': '{n} minutes before',
   /*
     Android only. No permission stops a phone putting the app to sleep, and
@@ -955,31 +954,39 @@ export const EN = {
     A prayer's own page, opened by the bell beside its time on the day page
     and by its row on Reminders (Iyad, 14 Sep 2026).
   */
-  'alert.when': 'When the time comes',
-  'alert.mode.adhan': 'Adhan',
-  'alert.mode.adhan.android': 'The whole adhan, at the time',
-  'alert.mode.adhan.ios': 'The first Allāhu akbar, at the time',
-  'alert.mode.sound': 'Notification with sound',
-  'alert.mode.silent': 'Silent notification',
-  'alert.mode.off': 'Off',
+  'alert.panel.time': 'Alert',
   'alert.voice': 'Voice',
-  'alert.voice.fajr': 'The Fajr adhan adds one line, said twice. These four include it.',
+  'alert.voice.fajr': 'The Fajr adhan adds one line, said twice.',
+  'alert.voice.fajrGroup': 'With the Fajr line',
   'alert.voice.other': 'Without the Fajr line',
-  'alert.preview': 'Hear the opening',
+  /* The sheet a voice is chosen in. Short and Full are Android's; an iPhone has the opening only. */
+  'alert.sheet.title': 'Adhan for {prayer}',
+  'alert.sheet.ios': 'An iPhone plays the first Allāhu akbar.',
+  'alert.length.short': 'Short',
+  'alert.length.full': 'Full',
+  'alert.length.short.help': 'The first Allāhu akbar.',
+  'alert.length.full.help': 'The whole adhan.',
+  'alert.preview': 'Play',
   'alert.preview.stop': 'Stop',
+  'alert.volume': 'Adhan volume',
+  'alert.preReminder': 'Pre-Adhan reminder',
+  'alert.preReminder.off': 'Off',
+  'alert.preReminder.short': '{n} min',
   'alert.quiet': 'When the phone is quiet',
   'alert.playOnSilent': 'Play on silent or vibrate',
   'alert.playInDnd': 'Play during Do Not Disturb',
   'alert.quiet.help':
-    'During a call the adhan never plays, and the notification still comes. Stop, a volume button or pulling out headphones ends it.',
+    'During a call the adhan never plays, and the notification still comes. Stop, volume down or pulling out headphones ends it.',
   'alert.soundInFocus': 'Sound during Focus',
   'alert.ios.help':
     'An iPhone plays the first Allāhu akbar. With the phone on silent, the notification comes without it.',
   'alert.test': 'Hear it in one minute',
   'alert.test.set': 'It rings at {time}. Lock the phone and wait.',
   'alert.last': 'Last time, {prayer} at {time}: {what}.',
+  'alert.last.after': '{what} after {n} seconds',
   'alert.applyAll': 'Use these for all prayers',
   'alert.applied': 'All five prayers now match',
+  'dropdown.close': 'Close',
   /* The bell and the Reminders rows name a prayer's alert in a word. */
   'alert.state.adhan': 'Adhan',
   'alert.state.sound': 'Sound',
@@ -993,7 +1000,7 @@ export const EN = {
   /* What happened to the last adhan, after the colon in `alert.last`. */
   'adhan.outcome.finished': 'played to the end',
   'adhan.outcome.stop': 'stopped with Stop',
-  'adhan.outcome.volume': 'stopped with a volume button',
+  'adhan.outcome.volume': 'stopped with volume down',
   'adhan.outcome.headphones': 'stopped when headphones came out',
   'adhan.outcome.callStopped': 'stopped for a call',
   'adhan.outcome.callSkipped': 'did not play during a call',

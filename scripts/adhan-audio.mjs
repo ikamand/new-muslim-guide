@@ -12,9 +12,9 @@
  * - **The opening for iOS**, cut at `openingEnd` with a short fade, as IMA4 in
  *   a CAF. That is one of the four encodings Apple lists for a notification
  *   sound, and a notification sound must be under thirty seconds.
- * - **The same opening as AAC**, for the preview button, which plays inside
- *   the app on both platforms. Android cannot play IMA4 in a CAF, so the
- *   preview cannot reuse the iOS file.
+ * - **The same opening as AAC**, for the preview button on iOS, and copied
+ *   into `res/raw` as the short adhan Android can choose. Android cannot play
+ *   IMA4 in a CAF, so neither can reuse the iOS file.
  *
  * And `assets/adhan/derived.json`, which records the hash of each original and
  * the cut it was made with, so `npm run adhan:check` can tell a stale file
@@ -26,7 +26,7 @@
  */
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
-import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { copyFileSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -36,6 +36,7 @@ import {
   openingPreviewFile,
   openingSoundFile,
   rawName,
+  shortRawName,
 } from '../src/content/adhan-voices.ts';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -176,6 +177,8 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     writeWav(openingWav, opening, wav.rate);
     afconvert('-f', 'caff', '-d', 'ima4@22050', openingWav, join(OPENING_DIR, openingSoundFile(voice.id)));
     encodeAac(openingWav, join(OPENING_DIR, openingPreviewFile(voice.id)), wav.rate);
+    // The same bytes again for Android, which plays the short adhan from res/raw.
+    copyFileSync(join(OPENING_DIR, openingPreviewFile(voice.id)), join(RAW_DIR, `${shortRawName(voice.id)}.m4a`));
 
     derived[voice.id] = {
       source: sha256(source),

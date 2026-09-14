@@ -1,9 +1,9 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Stack } from 'expo-router';
-import type { ReactNode } from 'react';
 import { Pressable, ScrollView, StyleSheet, Switch, View } from 'react-native';
 
 import { Glyph } from '@/components/illustrations';
+import { Panel } from '@/components/panel';
 import { PressableLink } from '@/components/pressable-link';
 import { RecitationCard } from '@/components/recitation-card';
 import { ThemedText } from '@/components/themed-text';
@@ -106,43 +106,6 @@ function DoorRow({
       </View>
       <Ionicons name="chevron-forward" size={18} color={theme.gold} />
     </PressableLink>
-  );
-}
-
-/**
- * A framed panel: the double rule, with the section's name set into the top
- * rule beside its mark, and its current state after the name. The legend
- * sits on a patch of page colour so the rule passes behind it.
- */
-function Panel({
-  mark,
-  title,
-  state,
-  children,
-}: {
-  mark: ReactNode;
-  title: string;
-  state?: string;
-  children: ReactNode;
-}) {
-  const theme = useTheme();
-  return (
-    <View style={styles.panelWrap}>
-      <View style={[styles.panel, { borderColor: theme.gold }]}>
-        <View style={[styles.panelIn, { borderColor: theme.goldSoft }]}>{children}</View>
-      </View>
-      <View style={[styles.legend, { backgroundColor: theme.background }]}>
-        {mark}
-        <ThemedText type="caption" themeColor="gold" style={styles.legendTitle}>
-          {title}
-        </ThemedText>
-        {state ? (
-          <ThemedText type="caption" themeColor="textSecondary" numberOfLines={1}>
-            · {state}
-          </ThemedText>
-        ) : null}
-      </View>
-    </View>
   );
 }
 
@@ -362,35 +325,6 @@ const styles = StyleSheet.create({
     width: '100%',
     maxWidth: MaxContentWidth,
     alignSelf: 'center',
-  },
-  /* The frame: the fihrist's double rule, with room above for the legend. */
-  panelWrap: {
-    position: 'relative',
-  },
-  panel: {
-    borderWidth: 1,
-    padding: Spacing.one,
-  },
-  panelIn: {
-    borderWidth: StyleSheet.hairlineWidth,
-    paddingTop: Spacing.three,
-    paddingHorizontal: Spacing.three,
-    paddingBottom: Spacing.one,
-  },
-  /* Set into the top rule: half the caption's height above it, half below. */
-  legend: {
-    position: 'absolute',
-    top: -8,
-    left: Spacing.three,
-    maxWidth: '85%',
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: Spacing.two,
-    paddingHorizontal: Spacing.two,
-  },
-  legendTitle: {
-    textTransform: 'uppercase',
-    letterSpacing: 1.6,
   },
   row: {
     flexDirection: 'row',

@@ -11,6 +11,9 @@
  * opening only, cut inside the first pause (Iyad, 14 Sep 2026: "for iOS we
  * just want the first allahu akbar").
  *
+ * Android plays the opening too, for a prayer set to the short adhan (Iyad,
+ * 14 Sep 2026: short and full on Android, short only on iOS).
+ *
  * ## Fajr has its own recordings
  *
  * The Fajr adhan adds "aṣ-ṣalātu khayrun min an-nawm", twice, after the
@@ -171,6 +174,16 @@ export function defaultVoiceFor(prayerId: string): AdhanVoiceId {
  */
 export function rawName(id: AdhanVoiceId | string): string {
   return `adhan_${id.replace(/-/g, '_')}`;
+}
+
+/**
+ * The opening as an Android resource, for a prayer set to the short adhan.
+ * Android cannot play the iOS CAF, and it cannot share its name: the
+ * expo-notifications plugin copies the CAF into the app's `res/raw` as
+ * `…_opening`, and an app resource silently wins over a library's.
+ */
+export function shortRawName(id: AdhanVoiceId | string): string {
+  return `${rawName(id)}_short`;
 }
 
 /** The iOS notification sound, by the bare file name iOS looks it up by. */

@@ -4603,3 +4603,67 @@ He had asked to delete the file instead; that would have failed the whole
 bundle, because the preview requires it, and left iPhones on the default tone
 for that voice. `npm run adhan:audio` now takes voice ids, so one re-cut does
 not re-encode the other seven.
+
+---
+
+## 14 Sep 2026 — A prayer's alert, redesigned: one panel, a voice sheet, Short and Full ⚠️ native build
+
+Iyad, from the phone, on the first alert page: tapping Adhan grew a list
+under the choice instead of opening one; "Hear it in one minute" played only
+the start; he wanted the long version as well as the short, a volume bar, the
+lead time renamed "Pre-Adhan reminder" as a dropdown, and "a very simple 2
+settings is taking a full page now where it can be a lot more beautiful and
+clean."
+
+- **One panel, Settings' own grammar** (`components/panel.tsx`, now shared
+  with Settings rather than copied). Legend "Alert · 1:06 PM". Inside: Adhan,
+  Sound, Silent and Off as one segmented line (`components/segmented.tsx`);
+  for the adhan a Voice row ("Al Majale · Short ›"), the volume bar with a play
+  button, and the Pre-Adhan reminder as a dropdown (`components/dropdown.tsx`)
+  whose box says "10 min" and whose menu says "10 minutes before". A second
+  small panel holds the two quiet-phone switches. The whole page fits a
+  360×800 screen. What went: four radio rows, the inline voice list, five lead
+  rows, and every uppercase caption outside a legend.
+- **Tapping Adhan opens a sheet** (`app/adhan-voice/[id].tsx`), as choosing a
+  reciter does: tap a voice and it is chosen and the sheet closes; swipe it
+  away and nothing changes. Android has Short and Full as two sections behind
+  one switch, not two lists, because Fajr would otherwise be sixteen rows; an
+  iPhone has Short only. Each row shows its recording's length, from
+  `assets/adhan/derived.json`, and has its own play button.
+- **The Pre-Adhan reminder is its own notification.** Every alert now comes
+  at the prayer's time; the reminder comes its minutes before (`kind: 'pre'`
+  in `planReminders`). Stored settings migrate: a notification's old lead
+  becomes its reminder, an adhan never gains one, a prayer that was off stays
+  without one. On an iPhone this doubles the notifications per prayer, so the
+  64-pending cap reaches fewer days ahead when reminders are on; the next
+  launch tops it up.
+- **Android native**: the short adhan plays from `res/raw` as
+  `adhan_<voice>_short` (the CAF's `_opening` name is taken by the
+  expo-notifications copy, and an app resource silently beats a library's);
+  the adhan's volume is held on the media stream while it plays and the
+  phone's own volume comes back after (`VolumeHold`); the sheet and the volume
+  bar play through `AdhanPreview`; **volume down stops the adhan and volume up
+  only makes it louder**, because the first build stopped on any press and
+  "Hear it in one minute" read as "it only played the start" to somebody
+  turning it up. The outcome line now says how many seconds it played.
+- `npm run adhan:check` gained the short files (and that they are the
+  preview's own bytes), the reminder's timing, both migrations, and volume and
+  length held to their range.
+
+Verified: `tsc`, `adhan:check`, `style:check`, `night:check`, `i18n:manifest`,
+`audio:manifest --check`, lint on every touched file; the Kotlin compiled and
+the release resources linked with all eight short files, in a prebuilt copy.
+Looked at on web at 360, dark and light: Dhuhr with the adhan, ʿAsr with a
+sound, Fajr's sheet, the dropdown open; "Pre-Adhan reminder" measured on one
+line beside "10 min" and "30 min". Clicked through: Adhan opens the sheet,
+choosing a voice under Short closes it and the Voice row reads it, the
+dropdown sets 5 minutes, a drag on the volume bar stores 0.9. Two first
+looks were wrong and fixed before commit: the reminder's name broke onto
+three lines, and "15 minutes before" onto two inside the menu.
+
+**Not seen, and only a phone can show it:** the volume held and given back,
+Short and Full playing from the sheet, the play button beside the volume bar,
+volume down stopping and volume up not, and the reminder arriving. The web
+preview draws Android's layout; the iPhone's Focus switch was not looked at.
+All of it needs the next `eas build`; the build of this morning cannot play a
+short adhan or a preview.

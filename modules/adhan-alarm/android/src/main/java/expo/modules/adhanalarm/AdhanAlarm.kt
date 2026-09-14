@@ -22,6 +22,8 @@ data class AdhanAlarm(
   val stopLabel: String,
   val playOnSilent: Boolean,
   val playInDnd: Boolean,
+  /** A share of the media volume range; below zero leaves the phone's volume alone. */
+  val volume: Double = -1.0,
 ) {
   /** A ring somebody asked for from the prayer's page, to hear what this phone does. */
   val isTest: Boolean
@@ -38,6 +40,7 @@ data class AdhanAlarm(
       .put("stopLabel", stopLabel)
       .put("playOnSilent", playOnSilent)
       .put("playInDnd", playInDnd)
+      .put("volume", volume)
 
   companion object {
     const val TEST_PREFIX = "test:"
@@ -53,6 +56,8 @@ data class AdhanAlarm(
         stopLabel = json.getString("stopLabel"),
         playOnSilent = json.getBoolean("playOnSilent"),
         playInDnd = json.getBoolean("playInDnd"),
+        // Alarms stored by the first build have no volume, and keep the phone's.
+        volume = json.optDouble("volume", -1.0),
       )
   }
 }
@@ -103,7 +108,7 @@ object AdhanStore {
    * stop, volume, headphones, call, other-audio, silent, dnd, late, refused,
    * focus, no-sound, error, timeout, busy.
    */
-  fun recordOutcome(context: Context, alarm: AdhanAlarm, played: Boolean, reason: String) {
+  fun recordOutcome(context: Context, alarm: AdhanAlarm, played: Boolean, reason: String, seconds: Int = 0) {
     val outcome =
       JSONObject()
         .put("title", alarm.title)
@@ -111,6 +116,7 @@ object AdhanStore {
         .put("played", played)
         .put("reason", reason)
         .put("test", alarm.isTest)
+        .put("seconds", seconds)
     prefs(context).edit().putString(KEY_OUTCOME, outcome.toString()).commit()
   }
 

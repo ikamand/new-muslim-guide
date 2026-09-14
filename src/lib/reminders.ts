@@ -19,8 +19,8 @@ import { computeDay, PRAYER_IDS, type LatLon, type MethodProfile, type PrayerId 
  * Two constraints shape the design.
  *
  * 1. **iOS caps how many notifications an app may have pending.** The cap is 64,
- *    so five prayers across twelve days sits just under it, and the wake-ups
- *    and notes on top of them are cut from the far end (`PENDING_CAP` in
+ *    so five prayers across twelve days sits just under it, and the Pre-Adhan
+ *    reminders, wake-ups and notes on top of them are cut from the far end (`PENDING_CAP` in
  *    `use-reminders.ts`). This is why the app schedules a rolling window and
  *    tops it up on launch rather than scheduling a year of prayers once.
  *
@@ -37,14 +37,20 @@ export const DAYS_AHEAD = 12;
  * What a prayer's time does, chosen one prayer at a time (Iyad, 14 Sep 2026:
  * the bell beside each prayer opens that prayer's own page).
  *
- * - `adhan`: Android plays the whole recording and an iPhone the opening, as
- *   the notification's sound. Always at the time itself, never before: the
- *   adhan says the time has come in, and ten minutes early that is false.
- * - `sound`: a notification with the phone's own sound, at the lead time.
+ * - `adhan`: Android plays the recording, whole or its opening, and an
+ *   iPhone the opening, as the notification's sound.
+ * - `sound`: a notification with the phone's own sound.
  * - `silent`: the same notification without a sound.
  * - `off`: nothing.
+ *
+ * Every one of them comes at the prayer's time itself: the adhan says the
+ * time has come in, and ten minutes early that is false. A heads-up before it
+ * is the Pre-Adhan reminder, a separate notification (Iyad, 14 Sep 2026).
  */
 export type AlertMode = 'adhan' | 'sound' | 'silent' | 'off';
+
+/** Android: the whole recording, or its opening. An iPhone always plays the opening. */
+export type AdhanLength = 'short' | 'full';
 
 export const ALERT_MODES: readonly AlertMode[] = ['adhan', 'sound', 'silent', 'off'];
 
@@ -52,8 +58,14 @@ export type PrayerAlert = {
   mode: AlertMode;
   /** The recording, for `adhan`. Kept while another mode is chosen, so coming back finds it. */
   voice: AdhanVoiceId;
-  /** Minutes before the prayer, for `sound` and `silent`. The adhan ignores it. */
-  leadMinutes: number;
+  length: AdhanLength;
+  /**
+   * Android: how loud the adhan plays, as a share of the phone's media volume
+   * range, 0.1 to 1. The phone's own volume comes back when it ends.
+   */
+  volume: number;
+  /** A notification this many minutes before the prayer. 0 is none. */
+  preReminderMinutes: number;
   /** Android: play with the phone on silent or vibrate. */
   playOnSilent: boolean;
   /** Android: play during Do Not Disturb. */
@@ -66,13 +78,18 @@ export type ReminderSettings = {
   alerts: Record<PrayerId, PrayerAlert>;
 };
 
-export const LEAD_CHOICES = [0, 5, 10, 15, 30] as const;
+export const PRE_REMINDER_CHOICES = [0, 5, 10, 15, 30] as const;
+
+/** Loud enough to hear across a room, short of the top of the range. */
+export const DEFAULT_ADHAN_VOLUME = 0.6;
 
 export function defaultAlert(id: PrayerId): PrayerAlert {
   return {
     mode: 'off',
     voice: defaultVoiceFor(id),
-    leadMinutes: 10,
+    length: 'full',
+    volume: DEFAULT_ADHAN_VOLUME,
+    preReminderMinutes: 0,
     playOnSilent: false,
     playInDnd: false,
     soundInFocus: false,
@@ -91,19 +108,25 @@ export const DEFAULT_REMINDERS: ReminderSettings = {
 
 export const alertIsOn = (alert: PrayerAlert): boolean => alert.mode !== 'off';
 
-/** Minutes before the prayer an alert fires. The adhan is the time itself. */
-export const leadOf = (alert: PrayerAlert): number => (alert.mode === 'adhan' ? 0 : alert.leadMinutes);
-
 const isLead = (value: unknown): value is number =>
-  typeof value === 'number' && (LEAD_CHOICES as readonly number[]).includes(value);
+  typeof value === 'number' && (PRE_REMINDER_CHOICES as readonly number[]).includes(value);
+
+/** A stored volume held to the range and to hundredths; anything else reads as the default. */
+const readVolume = (value: unknown): number =>
+  typeof value === 'number' && Number.isFinite(value)
+    ? Math.round(Math.min(1, Math.max(0.1, value)) * 100) / 100
+    : DEFAULT_ADHAN_VOLUME;
 
 /**
  * A stored value, narrowed field by field: a half-written object would
  * otherwise schedule notifications for prayers nobody asked about.
  *
- * It also reads the shape from before 14 Sep 2026, a switch per prayer and one
- * lead time for all five. A prayer that was on becomes a notification with
- * sound at that lead, which is exactly what it was.
+ * It also reads the two shapes before this one. The oldest, a switch per
+ * prayer and one lead time for all five: a prayer that was on becomes a
+ * notification with that lead as its Pre-Adhan reminder. The first alert
+ * build (14 Sep 2026), where a notification fired at its lead time: the lead
+ * becomes the reminder for a notification, and never for an adhan, which
+ * ignored it.
  */
 export function parseReminderSettings(raw: unknown): ReminderSettings {
   if (typeof raw !== 'object' || raw === null) return DEFAULT_REMINDERS;
@@ -115,13 +138,22 @@ export function parseReminderSettings(raw: unknown): ReminderSettings {
     for (const id of PRAYER_IDS) {
       const entry = entries[id];
       if (typeof entry !== 'object' || entry === null) continue;
-      const { mode, voice, leadMinutes, playOnSilent, playInDnd, soundInFocus } = entry as Record<string, unknown>;
+      const { mode, voice, length, volume, preReminderMinutes, leadMinutes, playOnSilent, playInDnd, soundInFocus } =
+        entry as Record<string, unknown>;
       const base = defaultAlert(id);
+      const readMode = ALERT_MODES.includes(mode as AlertMode) ? (mode as AlertMode) : base.mode;
+      const wasNotification = readMode === 'sound' || readMode === 'silent';
       alerts[id] = {
-        mode: ALERT_MODES.includes(mode as AlertMode) ? (mode as AlertMode) : base.mode,
+        mode: readMode,
         // A voice dropped from a later build, or a Fajr recording stored against another prayer, reads as the default.
         voice: isAdhanVoiceId(voice) && voiceAllowedFor(id, voice) ? voice : base.voice,
-        leadMinutes: isLead(leadMinutes) ? leadMinutes : base.leadMinutes,
+        length: length === 'short' ? 'short' : 'full',
+        volume: readVolume(volume),
+        preReminderMinutes: isLead(preReminderMinutes)
+          ? preReminderMinutes
+          : preReminderMinutes === undefined && wasNotification && isLead(leadMinutes)
+            ? leadMinutes
+            : base.preReminderMinutes,
         playOnSilent: playOnSilent === true,
         playInDnd: playInDnd === true,
         soundInFocus: soundInFocus === true,
@@ -132,9 +164,10 @@ export function parseReminderSettings(raw: unknown): ReminderSettings {
 
   if (typeof stored.prayers === 'object' && stored.prayers !== null) {
     const flags = stored.prayers as Record<string, unknown>;
-    const leadMinutes = isLead(stored.leadMinutes) ? stored.leadMinutes : 10;
+    const lead = isLead(stored.leadMinutes) ? stored.leadMinutes : 10;
     for (const id of PRAYER_IDS) {
-      alerts[id] = { ...defaultAlert(id), mode: flags[id] === true ? 'sound' : 'off', leadMinutes };
+      const on = flags[id] === true;
+      alerts[id] = { ...defaultAlert(id), mode: on ? 'sound' : 'off', preReminderMinutes: on ? lead : 0 };
     }
   }
   return { alerts };
@@ -165,7 +198,8 @@ export type PlannedReminder = {
   /** Stable per prayer per day, so a reschedule replaces rather than duplicates. */
   key: string;
   prayerId: PrayerId;
-  /** When it fires: the prayer's time for an adhan, offset by the lead time otherwise. */
+  /** `alert` is the prayer's own alert, at its time; `pre` is the Pre-Adhan reminder before it. */
+  kind: 'alert' | 'pre';
   fireAt: Date;
   /** When the prayer itself begins. */
   prayerAt: Date;
@@ -199,17 +233,17 @@ export function planReminders(
       const alert = settings.alerts[prayer.id];
       if (!alertIsOn(alert)) continue;
 
-      const fireAt = new Date(prayer.time.getTime() - leadOf(alert) * 60_000);
-      // A reminder for a moment that has already passed would fire instantly.
-      if (fireAt.getTime() <= from.getTime()) continue;
-
-      planned.push({
-        key: `${day.getFullYear()}-${day.getMonth() + 1}-${day.getDate()}-${prayer.id}`,
-        prayerId: prayer.id,
-        fireAt,
-        prayerAt: prayer.time,
-        alert,
-      });
+      const key = `${day.getFullYear()}-${day.getMonth() + 1}-${day.getDate()}-${prayer.id}`;
+      // A moment that has already passed would fire instantly, so neither is planned for one.
+      if (alert.preReminderMinutes > 0) {
+        const pre = new Date(prayer.time.getTime() - alert.preReminderMinutes * 60_000);
+        if (pre.getTime() > from.getTime()) {
+          planned.push({ key: `${key}-pre`, prayerId: prayer.id, kind: 'pre', fireAt: pre, prayerAt: prayer.time, alert });
+        }
+      }
+      if (prayer.time.getTime() > from.getTime()) {
+        planned.push({ key, prayerId: prayer.id, kind: 'alert', fireAt: prayer.time, prayerAt: prayer.time, alert });
+      }
     }
   }
 

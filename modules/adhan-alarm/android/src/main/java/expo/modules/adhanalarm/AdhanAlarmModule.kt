@@ -18,6 +18,7 @@ class AlarmRecord : Record {
   @Field val stopLabel: String = ""
   @Field val playOnSilent: Boolean = false
   @Field val playInDnd: Boolean = false
+  @Field val volume: Double = -1.0
 
   fun toAlarm() =
     AdhanAlarm(
@@ -30,6 +31,7 @@ class AlarmRecord : Record {
       stopLabel = stopLabel,
       playOnSilent = playOnSilent,
       playInDnd = playInDnd,
+      volume = volume,
     )
 }
 
@@ -47,6 +49,8 @@ class AdhanAlarmModule : Module() {
     ModuleDefinition {
       Name("AdhanAlarm")
 
+      Events("onPreviewEnd")
+
       AsyncFunction("replaceAll") { alarms: List<AlarmRecord>, channels: ChannelNames ->
         AdhanNotifications.ensureChannels(context, channels.playing, channels.quiet)
         AdhanScheduler.replaceAll(context, alarms.map { it.toAlarm() })
@@ -60,6 +64,16 @@ class AdhanAlarmModule : Module() {
 
       AsyncFunction<Unit>("cancelAll") {
         AdhanScheduler.cancelAll(context)
+      }
+
+      AsyncFunction("previewStart") { sound: String, volume: Double ->
+        AdhanPreview.start(context, sound, volume) { ended ->
+          this@AdhanAlarmModule.sendEvent("onPreviewEnd", mapOf("sound" to ended))
+        }
+      }
+
+      AsyncFunction<Unit>("previewStop") {
+        AdhanPreview.stop()
       }
 
       Function<String?>("lastOutcome") {

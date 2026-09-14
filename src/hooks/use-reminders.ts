@@ -8,7 +8,7 @@ import {
   type AdhanAlarmInput,
   type AdhanChannelNames,
 } from '../../modules/adhan-alarm';
-import { getVoice, openingSoundFile, rawName } from '@/content/adhan-voices';
+import { getVoice, openingSoundFile, rawName, shortRawName } from '@/content/adhan-voices';
 import { useLocale } from '@/hooks/use-locale';
 import { useLocation } from '@/hooks/use-location';
 import { useSettings, type Settings } from '@/hooks/use-settings';
@@ -26,7 +26,6 @@ import { PRAYER_IDS, PRAYER_LABEL, type PrayerId } from '@/lib/prayer-times';
 import {
   alertIsOn,
   applyAlertToAll,
-  leadOf,
   planAdhkarNotes,
   planJumuahNotes,
   planReminders,
@@ -95,9 +94,9 @@ export function countReminders(
 }
 
 /**
- * "adhan at the time", "10 minutes before" or "at the time", while every
- * prayer that is on agrees. Nothing while none is on, or while they differ:
- * a summary of five different settings is a sentence nobody reads.
+ * "reminder 10 minutes before", "adhan at the time" or "at the time", while
+ * every prayer that is on agrees. Nothing while none is on, or while they
+ * differ: a summary of five different settings is a sentence nobody reads.
  */
 export function describeLead(
   reminders: Settings['reminders'],
@@ -105,24 +104,18 @@ export function describeLead(
 ): string | null {
   const on = PRAYER_IDS.map((id) => reminders.alerts[id]).filter(alertIsOn);
   if (on.length === 0) return null;
-  if (on.every((alert) => alert.mode === 'adhan')) return t('awqat.day.lead.adhan');
-  const leads = new Set(on.map(leadOf));
-  if (leads.size !== 1) return null;
-  const [lead] = [...leads];
-  return lead === 0
-    ? t('awqat.day.lead.atTime')
-    : t('awqat.day.lead.before').replace('{n}', String(lead));
+  const reminderMinutes = new Set(on.map((alert) => alert.preReminderMinutes));
+  if (reminderMinutes.size !== 1) return null;
+  const [minutes] = [...reminderMinutes];
+  if (minutes > 0) return t('awqat.day.lead.pre').replace('{n}', String(minutes));
+  return on.every((alert) => alert.mode === 'adhan') ? t('awqat.day.lead.adhan') : t('awqat.day.lead.atTime');
 }
 
-/** One prayer in a line, for its row on Reminders: "Adhan · Al Majale", "Sound · 10 minutes before", "Off". */
+/** One prayer in a line, for its row on Reminders: "Adhan · Al Majale", "Sound", "Off". */
 export function describeAlert(alert: PrayerAlert, t: (key: UIKey) => string): string {
   if (alert.mode === 'off') return t('alert.state.off');
   if (alert.mode === 'adhan') return `${t('alert.state.adhan')} · ${getVoice(alert.voice).short}`;
-  const when =
-    alert.leadMinutes === 0
-      ? t('awqat.day.lead.atTime')
-      : t('awqat.day.lead.before').replace('{n}', String(alert.leadMinutes));
-  return `${t(alert.mode === 'sound' ? 'alert.state.sound' : 'alert.state.silent')} · ${when}`;
+  return t(alert.mode === 'sound' ? 'alert.state.sound' : 'alert.state.silent');
 }
 
 /** The names Android lists for the adhan's two notifications in the app's settings. */
@@ -141,13 +134,14 @@ export function adhanInput(
   return {
     id,
     fireAt: fireAt.getTime(),
-    sound: rawName(alert.voice),
+    sound: alert.length === 'short' ? shortRawName(alert.voice) : rawName(alert.voice),
     title,
     playingText: t('reminder.now'),
     quietText: t('reminder.now'),
     stopLabel: t('adhan.stop'),
     playOnSilent: alert.playOnSilent,
     playInDnd: alert.playInDnd,
+    volume: alert.volume,
   };
 }
 
@@ -234,16 +228,26 @@ export function useReminderSync(): void {
         const { alert } = planned;
         const title = PRAYER_LABEL[planned.prayerId];
 
+        // The Pre-Adhan reminder: a notification, silent only when the prayer's own alert is.
+        if (planned.kind === 'pre') {
+          items.push({
+            fireAt: planned.fireAt,
+            title,
+            body: t('reminder.soon').replace('{n}', String(alert.preReminderMinutes)),
+            sound: alert.mode === 'silent' ? null : undefined,
+          });
+          continue;
+        }
+
         if (alert.mode === 'adhan' && adhanAlarmAvailable) {
           adhans.push(adhanInput(planned.key, planned.fireAt, title, alert, t));
           continue;
         }
 
-        const lead = leadOf(alert);
         items.push({
           fireAt: planned.fireAt,
           title,
-          body: lead === 0 ? t('reminder.now') : t('reminder.soon').replace('{n}', String(lead)),
+          body: t('reminder.now'),
           /*
             An iPhone hears the adhan's opening as the notification's sound. An
             Android phone without the module (a build from before it, the web

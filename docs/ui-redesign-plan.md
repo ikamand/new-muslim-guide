@@ -1744,6 +1744,38 @@ to do all of it. Three decisions recorded here because they undo earlier ones:
 - **Witr became Shafʿ and Witr** (page and guide, id unchanged), and the
   night-prayer page states the order: shafʿ and witr last.
 
+### Today at night: the night thread (branch `night-thread`, awaiting Iyad)
+
+Iyad, 13 Sep 2026, after three designs ("Tonight, Three Ways") and a combined
+one ("The Night Thread"): *"that looks gorgeous"*, *"build it"*. Built on a
+branch so it can be tried on the phone before it reaches main.
+
+- **The day's name moved into the header.** The names-of-Allah coda sat
+  between the adhkār of sleep and the night prayer and split the two things
+  somebody does before bed. It now closes the ʿunwān under the date
+  (`DayName`, `Unwan`'s new `footer`). Its Arabic is in the text colour on
+  the `arabicName` rung, not the mock's gold: the whole line is a link, and
+  gold is illumination, never a control.
+- **The night is drawn, not listed.** From ʿIsha to Fajr a line sits under
+  the prayer card (`NightThread`): the last third as a band measured from
+  Maghrib, the moon at now using the arch's own ʿIshāʾ mark, witr's
+  two-then-one where tonight's witr goes, and the wake-up bell until it rings.
+- **One card follows the moon** (`NightCard`, `useTonight`): Before you sleep,
+  A night in Ramadan, or The last third of the night. It replaces the sleep
+  adhkār card and the night row at the foot of Today, with its "After ʿIsha",
+  "Past the middle" and "The last third" kickers.
+- **One switch is the plan.** "Wake me at 4:38 AM" sets a reminder an hour
+  before Fajr, never before the last third (`planNightWake`), and while it is
+  on witr moves to the end of the night. The app still never asks what anybody
+  prayed. On a Ramadan night the switch is the suhoor wake-up and the fast
+  line steps aside; one alarm a night.
+- **Left off:** the Arabic title of the adhkār row, which squeezed narrow
+  phones (Iyad's call); the adhkār screen opens on it one tap later.
+
+What it adds: two components, one hook, one setting and its reminder, all
+walked by `npm run night:check`. What it removes: the names coda from Today's
+body, the night row and its three kicker strings.
+
 ### ✅ Built — the istikhara duʿa is on the page
 
 Iyad's point, and the sharpest one of the day: *"istikhara has the istikhara

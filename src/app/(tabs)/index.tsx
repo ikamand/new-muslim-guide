@@ -281,7 +281,7 @@ export default function TodayScreen() {
           The fast, during Ramadan and the fortnight before it. Renders
           nothing the other eleven months — see docs/ramadan-mode.md.
         */}
-        <FastLine quiet={tonight?.state === 'ramadan'} />
+        <FastLine night={tonight?.state} />
 
         {/*
           One words slot, not two cards.

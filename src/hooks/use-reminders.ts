@@ -158,8 +158,9 @@ export function useReminderSync(): void {
         });
       }
 
+      const inRamadan = (day: Date) => hijriDate(day)?.month === 9;
+
       if (suhoorWakeUp) {
-        const inRamadan = (day: Date) => hijriDate(day)?.month === 9;
         for (const planned of planSuhoor(coords, profile, now, inRamadan)) {
           items.push({
             fireAt: planned.fireAt,
@@ -170,7 +171,6 @@ export function useReminderSync(): void {
       }
 
       if (nightWakeUp) {
-        const inRamadan = (day: Date) => hijriDate(day)?.month === 9;
         // One alarm a night: on a Ramadan morning the suhoor wake-up, when it is on, is that alarm.
         for (const planned of planNightWake(coords, profile, now, (day) => suhoorWakeUp && inRamadan(day))) {
           items.push({

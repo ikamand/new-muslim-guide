@@ -63,8 +63,18 @@ export function NightThread({
   const bellFraction = bellAt ? fractionOf(bellAt) : undefined;
   const bellX = bellFraction !== undefined && thread.now < bellFraction ? along(bellFraction) : undefined;
 
+  /*
+    'next' sits just after the moon and, where there is room, before the band.
+    The floor keeps it to the moon's right in the last minutes before the last
+    third, where the band's edge would otherwise pull it behind the moon and
+    draw witr as already passed.
+  */
   const witrFraction =
-    witr === 'early' ? 0.08 : witr === 'next' ? Math.min(thread.now + 0.1, thread.lastThird - 0.07) : 0.95;
+    witr === 'early'
+      ? 0.08
+      : witr === 'next'
+        ? Math.max(thread.now + 0.08, Math.min(thread.now + 0.1, thread.lastThird - 0.07))
+        : 0.95;
   const witrX = along(witrFraction);
   const witrAhead = witr === 'end';
 

@@ -487,9 +487,29 @@ if (!firstFast) {
 /*
   The night wake-up (13 Sep 2026): one a morning, inside the last third of
   the night that ends at that Fajr and before it, skipped exactly on the days
-  asked for, and never in the past.
+  asked for, never in the past — and across both clock changes, where "the
+  day before" is 23 or 25 hours away.
 */
 {
+  const checkWake = (label, planned, from) => {
+    for (const moment of planned) {
+      const night = computeNight(place, new Date(moment.anchor.getTime() - MINUTE), profile);
+      if (!night) {
+        fail(`night wake-up ${label} ${moment.anchor.toDateString()}: no night before Fajr`);
+        continue;
+      }
+      const lastThird = night.evening.lastThirdOfNight.getTime();
+      const expected = Math.max(moment.anchor.getTime() - NIGHT_WAKE_LEAD_MINUTES * MINUTE, lastThird);
+      if (moment.fireAt.getTime() !== expected) {
+        fail(`night wake-up ${label} ${moment.anchor.toDateString()}: rings ${clock(moment.fireAt)}, expected ${clock(new Date(expected))}`);
+      }
+      if (moment.fireAt.getTime() < lastThird || moment.fireAt >= moment.anchor) {
+        fail(`night wake-up ${label} ${moment.anchor.toDateString()}: outside the last third`);
+      }
+      if (moment.fireAt <= from) fail(`night wake-up ${label}: planned in the past`);
+    }
+  };
+
   const from = new Date('2026-09-13T00:00:00');
   const all = planNightWake(place, profile, from, () => false, 12);
   const evenSkipped = planNightWake(place, profile, from, (day) => day.getDate() % 2 === 0, 12);
@@ -498,16 +518,20 @@ if (!firstFast) {
   if (evenSkipped.length !== all.filter((planned) => planned.anchor.getDate() % 2 !== 0).length) {
     fail(`night wake-up: skipping even dates left ${evenSkipped.length} of ${all.length}`);
   }
-  for (const planned of all) {
-    const night = computeNight(place, new Date(planned.anchor.getTime() - MINUTE), profile);
-    if (!night) { fail(`night wake-up: no night before Fajr ${planned.anchor.toDateString()}`); continue; }
-    const lastThird = night.evening.lastThirdOfNight.getTime();
-    const expected = Math.max(planned.anchor.getTime() - NIGHT_WAKE_LEAD_MINUTES * MINUTE, lastThird);
-    if (planned.fireAt.getTime() !== expected) fail(`night wake-up ${planned.anchor.toDateString()}: rings ${clock(planned.fireAt)}, expected ${clock(new Date(expected))}`);
-    if (planned.fireAt.getTime() < lastThird || planned.fireAt >= planned.anchor) fail(`night wake-up ${planned.anchor.toDateString()}: outside the last third`);
-    if (planned.fireAt <= from) fail('night wake-up: planned in the past');
+  checkWake('Sep', all, from);
+
+  // 1 Nov 2026 and 8 Mar 2026 are San Francisco's clock changes.
+  for (const start of ['2026-10-29T00:00:00', '2026-03-06T00:00:00']) {
+    const dstFrom = new Date(start);
+    const planned = planNightWake(place, profile, dstFrom, () => false, 5);
+    if (planned.length !== 5) fail(`night wake-up across the clock change from ${start}: ${planned.length} of 5`);
+    checkWake(start.slice(0, 10), planned, dstFrom);
   }
-  console.log(`  night wake-up: ${all.length} mornings planned; the night of 13 Sep rings ${all[1] ? clock(all[1].fireAt) : '?'} before Fajr ${all[1] ? clock(all[1].anchor) : '?'}`);
+
+  console.log(
+    `  night wake-up: ${all.length} mornings planned, and both clock changes; ` +
+      `the night of 13 Sep rings ${all[1] ? clock(all[1].fireAt) : '?'} before Fajr ${all[1] ? clock(all[1].anchor) : '?'}`,
+  );
 }
 
 if (failures > 0) {

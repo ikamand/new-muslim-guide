@@ -4864,3 +4864,16 @@ buttons, where he expected one as the adhan starts.
 Verified: `tsc`, `adhan:check`, `style:check`, `i18n:manifest`, lint on the
 touched files; `:adhan-alarm:compileReleaseKotlin` in the prebuilt copy.
 **Not seen:** the new channel on the phone.
+
+**The schedule, checked on the phone before the build** (14 Sep 2026, 9:55
+PM, the build of that morning, all five prayers on the full adhan with no
+Pre-Adhan reminder, the morning adhkār note and the Thursday note on). The
+clock was back on automatic and matched internet time. `dumpsys alarm` held
+68 alarms for the app across the next eleven days: five adhans a day, the
+morning note at Fajr plus 10 minutes, and on Thursdays the Jumuʿah note at
+Maghrib plus 45. All 68 were exact (`window=0`,
+`exactAllowReason=policy_permission`). Tomorrow's Fajr, 5:39 AM, matched the
+day page, and the times moved a minute or two a day as September's do (Fajr
+5:39 to 5:48, ʿIsha 8:30 to 8:14). All four channels were high importance;
+the app sat in the active standby bucket, with background running allowed.
+Not on the battery-optimisation allowlist, which exact alarms do not need.

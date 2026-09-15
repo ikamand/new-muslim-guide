@@ -19,7 +19,7 @@ import { Panel } from '@/components/panel';
 import { Segmented } from '@/components/segmented';
 import { ThemedText } from '@/components/themed-text';
 import { VolumeSlider } from '@/components/volume-slider';
-import { getVoice, shortRawName } from '@/content/adhan-voices';
+import { getVoice, rawName, shortRawName } from '@/content/adhan-voices';
 import { MaxContentWidth, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { usePrayerTimes } from '@/hooks/use-prayer-times';
@@ -137,8 +137,8 @@ export default function PrayerAlertScreen() {
     </View>
   );
 
-  /* The volume is heard on the short adhan: enough to judge a level without three minutes of it. */
-  const volumeSound = shortRawName(alert.voice);
+  /* The volume is heard on the adhan this prayer will play, short or full (Iyad, 14 Sep 2026); stop ends a full one. */
+  const volumeSound = alert.length === 'short' ? shortRawName(alert.voice) : rawName(alert.voice);
   const volumePlaying = previewSound === volumeSound;
   const toggleVolumePreview = async () => {
     if (volumePlaying) {

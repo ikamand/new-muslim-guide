@@ -3101,6 +3101,52 @@ reload to Today at the new size, with text whole and the tabs answering; the
 test is in `docs/todo.md`. The gate closes when that is seen. Ships in the
 same `eas build` as the adhan.
 
+**15 Sep 2026: failed on the phone. The cause is density, and a third build
+fixes it.** On build `c0c1e04c` (from `88ac85b`) Iyad opened pop-up view and
+split screen: the app reloaded to Today, as the restart intends, and the fresh
+screen was broken at once, text clipped and taps dead. So the restart happens
+and does not heal it, and both earlier fixes (the remount, the restart) were
+aimed at the wrong thing.
+
+What the phone says, read over adb (Galaxy S24 Ultra, Android 17, One UI 9):
+full screen is 420dpi; pop-up view is 321dpi at 827×1845px; split screen is
+321dpi at 1080×1189px. Samsung shrinks a multi-window app by lowering the
+window's density. The screenshots show "NEX", "1:06 P", "Sta" and cut
+descenders. React Native 0.86's `DisplayMetricsHolder` takes its density from
+`Display.getRealMetrics()`, which ignores the window (Android passes it no
+configuration) and returns 420, and `PixelUtil` converts every dp, sp and
+touch with that; react-native-screens 4.26.2 already uses the window's 321.
+The two disagree by 1.31. Also checked, and ruled out on the way: the shipped
+manifest did strip the three config changes, and Android's size buckets were
+not why the restart failed, since the restart happened.
+
+The fix, `plugins/with-window-density.js`: `MainActivity` hands React Native
+the window's own density after `onCreate`, after `onContentChanged` and after
+`onConfigurationChanged`, the three moments it re-reads the display. In full
+screen the numbers match and nothing moves. The workaround posted upstream
+(react-native #57183, open) calls `initDisplayMetrics(this)` alone, which
+still reads `getRealMetrics` and would have left this phone at 420; that is
+why it was not used. The restart plugin stays for this build so one thing
+changes at a time. ⚠️ Not seen on the phone yet. If it fails, that is three,
+and the fallback is `resizeableActivity: false` before release.
+
+Reproduced over adb on the same build, and one thing corrected. `am start
+--windowingMode 5` opens Samsung's pop-up at 321dpi: text clips, but injected
+taps on Learn and Today and a swipe scroll all worked, so the dead taps Iyad
+saw did not reproduce in pop-up and the density explains the text, not yet the
+taps. The control: `--windowingMode 6` gave a window of the same pop-up
+bounds at 420dpi, and there everything rendered whole ("NEXT", "1:06 PM",
+"How to pray") and taps worked. Same size, different density, no clipping.
+That mode is not Samsung's real split screen, which adb could not open, so
+split screen is tested by hand.
+
+Why not simply turn multi-window off (Iyad asked, 15 Sep): on a phone it
+works, but for apps targeting SDK 36, as this one does, Android 16 ignores
+`resizeableActivity` on screens of 600dp and wider, the opt-out goes away at
+SDK 37, and Samsung's Labs setting "Multi window for all apps" forces it back
+on. A Fold, a tablet or DeX would keep the clipped text with no fix behind it.
+Iyad: "lets finish the fix".
+
 ---
 
 ## 2 Sep 2026 — The reading pages: matn wa-sharḥ under the two-inks law ✅

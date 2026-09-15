@@ -75,7 +75,8 @@
         }
       ],
       "expo-asset",
-      "./plugins/with-resize-restart"
+      "./plugins/with-resize-restart",
+      "./plugins/with-window-density"
     ],
     "experiments": {
       "typedRoutes": true,

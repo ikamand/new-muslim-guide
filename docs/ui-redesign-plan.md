@@ -4980,3 +4980,23 @@ day page, and the times moved a minute or two a day as September's do (Fajr
 5:39 to 5:48, ʿIsha 8:30 to 8:14). All four channels were high importance;
 the app sat in the active standby bucket, with background running allowed.
 Not on the battery-optimisation allowlist, which exact alarms do not need.
+
+---
+
+## 15 Sep 2026 — Widgets: home screen and lock screen, Android and iPhone ⚠️ native build ⚠️ in progress
+
+Iyad: "build all widgets and all things agreed on", then "no build the iphone
+widget too". **`docs/widgets.md` is the home of this work**: what each widget
+draws, the schedule both phones read, where a tap goes, the door on the day
+page, the checks, and what is held. Agreed that day on the proposal page
+"Prayer Times Widgets" (three versions): clock times and never a countdown;
+no settings page, a door instead; the app's own day marks on the arch, with a
+passed mark dimmed rather than sunk to the hairline gold; the picker name
+"Prayer times"; hand-written SwiftUI through `@bacons/apple-targets` on iPhone,
+because Expo's widget library cannot draw the arch and fails to a blank
+widget in a release build.
+
+Warned once and decided: nothing here can compile the iPhone widget until
+Xcode 26.3 is installed, and the app has never been built for iPhone, so the
+first iOS build is the first proof. Needs from Iyad for that build: an Apple
+Developer Program membership and the Team ID.

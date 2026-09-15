@@ -78,6 +78,7 @@
     "night:check": "node --import ./scripts/ts-resolve.mjs scripts/night-check.mjs",
     "adhan:audio": "node --import ./scripts/ts-resolve.mjs scripts/adhan-audio.mjs",
     "adhan:check": "node --import ./scripts/ts-resolve.mjs scripts/adhan-check.mjs",
+    "widget:check": "node --import ./scripts/ts-resolve.mjs scripts/widget-check.mjs",
     "pauses:check": "node --import ./scripts/ts-resolve.mjs scripts/pause-shown-check.mjs",
     "align:check": "node --import ./scripts/ts-resolve.mjs scripts/align-check.mjs",
     "narration:check": "node --import ./scripts/ts-resolve.mjs scripts/narration-check.mjs",

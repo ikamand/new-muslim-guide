@@ -528,6 +528,21 @@ export const EN = {
   'awqat.day.lead.adhan': 'adhan at the time',
   'awqat.day.lead.pre': 'reminder {n} minutes before',
   'awqat.day.method': 'Calculation method',
+  /* The widgets on the home screen and lock screen, and the door to them on the day page. */
+  'widget.openApp': 'Open the app to update prayer times',
+  'widget.name.niche': 'Prayer times',
+  'widget.name.row': 'Prayer times, the day',
+  'widget.name.quiet': 'Prayer time, quiet',
+  'widget.door': 'On your home screen',
+  'widget.door.meta': 'Prayer times without opening the app',
+  'widget.sheet.niche': 'The time now, in the arch',
+  'widget.sheet.row': 'All five prayers of the day',
+  'widget.sheet.quiet': 'A mark and a time, no names',
+  'widget.sheet.add': 'Add',
+  'widget.sheet.steps.android':
+    'Touch and hold an empty part of the home screen, tap Widgets, find New Muslim Guide, and drag the one you want into place.',
+  'widget.sheet.steps.ios':
+    'Touch and hold an empty part of the home screen, tap Edit, then Add Widget, and search for New Muslim Guide.',
   /*
     ⚠️ REVIEW REQUIRED — the three bands are rulings. "Forbidden" is Iyad's
     call (11 Sep 2026): the texts forbid, and a softer word would misstate

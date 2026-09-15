@@ -108,17 +108,24 @@ object AdhanPreview {
       media.release()
     }
     player = null
-    hold?.restore()
+    val held = hold
     hold = null
-    audio?.let { manager ->
-      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-        focus?.let { manager.abandonAudioFocusRequest(it) }
-      } else {
-        @Suppress("DEPRECATION")
-        manager.abandonAudioFocus(focusListener)
+    val manager = audio
+    val request = focus
+    focus = null
+    val letGo = {
+      manager?.let {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+          request?.let { r -> it.abandonAudioFocusRequest(r) }
+        } else {
+          @Suppress("DEPRECATION")
+          it.abandonAudioFocus(focusListener)
+        }
       }
     }
-    focus = null
+    // As the alarm does: the volume and the focus come back a second after the sound stops,
+    // unless another preview has started by then and holds both (`VolumeHold.restoreLater`).
+    if (held == null) letGo() else held.restoreLater { if (sound == null) letGo() }
     val callback = onEnd
     onEnd = null
     callback?.invoke(ended)

@@ -331,9 +331,8 @@ class AdhanPlaybackService : Service() {
       media.release()
     }
     player = null
-    volumeHold?.restore()
+    val hold = volumeHold
     volumeHold = null
-    abandonFocus()
     val seconds = if (startedAt > 0) ((SystemClock.elapsedRealtime() - startedAt) / 1000).toInt() else 0
     startedAt = 0L
     // A player that failed before a sound came out played nothing, whatever the caller assumed.
@@ -343,7 +342,25 @@ class AdhanPlaybackService : Service() {
     ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_REMOVE)
     // Anything but Stop leaves the prayer in the shade, as any notification nobody dismissed would stay.
     if (reason != "stop") AdhanNotifications.postQuiet(this, current, alreadyAlerted = alerted)
-    stopSelf()
+    if (hold == null) {
+      abandonFocus()
+      stopSelf()
+      return
+    }
+    /*
+      The volume comes back a second after the sound stops (`VolumeHold.restoreLater`),
+      and focus goes with it, so music the adhan paused resumes at the phone's own
+      volume rather than jumping up a second in. The service stays until then, so
+      its process is not reclaimed with the volume still at the adhan's. A ring
+      that starts inside that second owns the focus and the service, so neither is
+      let go.
+    */
+    hold.restoreLater {
+      if (alarm == null) {
+        abandonFocus()
+        stopSelf()
+      }
+    }
   }
 
   companion object {

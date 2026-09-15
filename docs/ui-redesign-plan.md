@@ -4722,6 +4722,14 @@ preview draws Android's layout; the iPhone's Focus switch was not looked at.
 All of it needs the next `eas build`; the build of this morning cannot play a
 short adhan or a preview.
 
+**Seen on the phone, 15 Sep 2026** (build `7fecde31`, Iyad: "all 4 items are
+working as they should"). The volume held and given back, Short and Full from
+the sheet, the play button beside the volume bar at the prayer's length and
+volume, and the Pre-Adhan reminder arriving. The volume rule has changed
+since: any volume button stops it, and the volume came back a moment too soon
+over Bluetooth (both in the entry "Any volume button stops the adhan"). The
+iPhone's Focus switch is still unseen; there is no iOS build.
+
 ---
 
 ## 14 Sep 2026 — A prayer's alert, direction A: the page says what will happen ⚠️ native build
@@ -4806,6 +4814,12 @@ store reading `mode: adhan`. ʿIsha, never given a voice, opens the sheet.
 during a preview, the quiet sheet's Focus switch on an iPhone, and the
 window note. All of it needs the next `eas build`.
 
+**Seen on the phone, 15 Sep 2026** (build `7fecde31`, Iyad): Adhan, Tone,
+Adhan keeps the voice; "When the phone is quiet" opens its sheet and the row
+under it reads what was set; an adhan and a reminder arrive after the app is
+swiped away, and again after a restart; the volume follows a drag during a
+preview. The Focus switch on an iPhone is still unseen; there is no iOS build.
+
 ---
 
 ## 14 Sep 2026 — Any volume button stops the adhan, locked or not ⚠️ native build
@@ -4888,11 +4902,17 @@ the adhan is still sounding in the buds when their volume doubles. Either
 button, because the press is not what changes the level; the restore is. The
 preview has the same order (13:58:30 to 13:58:32, `AdhanPreview`).
 
-Planned, not built: `VolumeHold` gives the volume back about a second after
-the sound stops rather than at once, in the service and the preview alike,
-and a hold taken inside that second applies the pending restore first, so a
-second ring started quickly never records the adhan's 5 as the phone's own
-volume. Needs a native build; `docs/todo.md`.
+**Built, 15 Sep 2026, not yet on a phone:** `VolumeHold.restoreLater` gives
+the volume back a second after the sound stops rather than at once, in the
+service and the preview alike. Audio focus is let go at the same moment, so
+music the adhan paused resumes at the phone's own volume instead of jumping
+up a second in, and the service stays until then, so its process is not
+reclaimed with the volume still at the adhan's. A hold taken inside that
+second applies the pending restore first, so a ring started quickly never
+records the adhan's 5 as the phone's own volume, and a ring or preview that
+has started keeps its focus. Verified: `:adhan-alarm:compileReleaseKotlin` in
+the prebuilt copy, `adhan:check`. Needs the next native build, which Iyad runs
+himself.
 
 ---
 
@@ -4930,6 +4950,11 @@ buttons, where he expected one as the adhan starts.
   it ends with the quiet notice, which pops up and vibrates as a missed
   adhan's does.
 - `adhan:check` fails if a channel has no name.
+
+**Seen on the phone, 15 Sep 2026** (build `7fecde31`, Iyad): the notification
+pops up as the adhan starts; stopped with a volume button or finished, nothing
+pops up and the prayer stays in the shade; an adhan that cannot play pops up
+and vibrates. So Samsung's pop-up does follow the channel's importance.
 
 **Two things in the log that are not bugs:**
 

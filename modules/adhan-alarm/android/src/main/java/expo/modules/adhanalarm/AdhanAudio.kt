@@ -2,6 +2,8 @@ package expo.modules.adhanalarm
 
 import android.media.AudioAttributes
 import android.media.AudioManager
+import android.os.Handler
+import android.os.Looper
 import kotlin.math.roundToInt
 
 /** How every adhan sounds on this phone, the alarm's and the preview's alike. */
@@ -63,9 +65,43 @@ class VolumeHold private constructor(
     }
   }
 
+  /**
+   * Gives the volume back once the sound has certainly finished, then runs `then`.
+   *
+   * Straight after the player stops is too soon. Bluetooth plays behind the
+   * phone: on Iyad's Buds3 Pro the volume went from 5 back to 10 a tenth of a
+   * second after the stop, while the last of the adhan was still sounding, so
+   * a volume press seemed to make it louder (`dumpsys audio`, 15 Sep 2026).
+   * A second later every output is silent. Main thread only.
+   */
+  fun restoreLater(then: () -> Unit = {}) {
+    settlePending()
+    pending = this
+    pendingThen = then
+    handler.postDelayed(settle, RESTORE_DELAY_MS)
+  }
+
   companion object {
+    private const val RESTORE_DELAY_MS = 1000L
+    private val handler = Handler(Looper.getMainLooper())
+    private var pending: VolumeHold? = null
+    private var pendingThen: (() -> Unit)? = null
+    private val settle = Runnable { settlePending() }
+
+    /** A restore still waiting happens now, so a new hold reads the phone's own volume and not the last adhan's. */
+    private fun settlePending() {
+      handler.removeCallbacks(settle)
+      val hold = pending
+      val then = pendingThen
+      pending = null
+      pendingThen = null
+      hold?.restore()
+      then?.invoke()
+    }
+
     /** Null when there is nothing to hold: a volume below zero keeps the phone's, or the phone refused. */
     fun take(audio: AudioManager, volume: Double): VolumeHold? {
+      settlePending()
       if (volume < 0.0) return null
       val max = audio.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
       val target = (volume.coerceAtMost(1.0) * max).roundToInt().coerceIn(1, max)

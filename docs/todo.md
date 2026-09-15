@@ -72,27 +72,16 @@ Built 14 Sep 2026; the plan entry is "The adhan" in `docs/ui-redesign-plan.md`.
   volume log shows no press moving the level; it shows the app giving the
   media volume back (5 to 10) a tenth of a second after the player stops,
   while the Bluetooth buds are still playing the last of it. The same order
-  is in `AdhanPreview`. Planned: give the volume back about a second later,
-  in `VolumeHold`, in the service and the preview (the entry "Any volume
-  button stops the adhan" in `docs/ui-redesign-plan.md`). Then try it on the
-  next native build, on the buds and on the speaker. Added 15 Sep 2026.
-- **Try the pop-ups on the same build.** With the screen on, the adhan's
-  notification pops up as it starts. Stopping it with a volume button, or
-  letting it finish, pops up nothing, and the prayer stays in the shade. An
-  adhan that cannot play (the phone on vibrate with its switch off) pops up
-  and vibrates. Added 14 Sep 2026.
-- **Try what 14 Sep's second pass added, on the same build.** Short and Full
-  in a prayer's sheet each play what the alarm will play; the play button
-  beside the volume bar plays the length the prayer is set to at that volume,
-  dragging the bar while it plays changes it as you drag, and the phone's own
-  media volume comes back afterwards; a Pre-Adhan reminder arrives its
-  minutes before the adhan. Added 14 Sep 2026.
-- **Try direction A on the same build.** Adhan, Tone, Adhan on a prayer with a
-  voice stays on that voice; "When the phone is quiet" opens its sheet and
-  the row under it reads what was set. Then close the app by swiping it away
-  and let one adhan and one reminder come; restart the phone and let the next
-  come too. On an iPhone, turn on Sound during Focus and let the opening come
-  through a Focus. Added 14 Sep 2026.
+  is in `AdhanPreview`. Built the same day: the volume comes back a second
+  later (`VolumeHold.restoreLater`, the entry "Any volume button stops the
+  adhan" in `docs/ui-redesign-plan.md`). Try it on the next native build: a
+  volume press on the buds and on the speaker, Stop, the preview's play
+  button, and music paused by the adhan resuming at its own volume. Added
+  15 Sep 2026.
+- **On an iPhone, the adhan's opening through a Focus.** Turn on Sound during
+  Focus on a prayer's quiet sheet and let the opening come through a Focus.
+  Everything else in the 14 Sep tests passed on Android on 15 Sep; this needs
+  an iOS build, which does not exist yet. Added 14 Sep 2026.
 - **Play Console: the foreground-service declaration** for media playback,
   with a description and a video, before the Android release. Added
   14 Sep 2026.

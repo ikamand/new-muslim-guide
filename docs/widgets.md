@@ -196,6 +196,10 @@ at prebuild.
   midsummer, Mecca), the entry in force disagrees with what the card's
   functions return at that instant; if entries are not strictly increasing;
   if a mark path holds anything but M, L, C and Z; if a string is empty.
+- `npm run lock:check` fails if the lockfile cannot be installed by the npm
+  that EAS Build runs, which is older than the one on this Mac and resolves
+  peer dependencies differently. It replays that npm against the lockfile and
+  writes nothing.
 - `tsc`, `expo lint`, `style:check`, `i18n:manifest`, `expo export --platform
   web`.
 - Android: `:prayer-widget:compileReleaseKotlin` in the prebuilt copy.
@@ -227,6 +231,19 @@ from the app, the Android module, the iPhone target, the door.
 places, the arcs, and every copy Android and iPhone keep of a word or a
 colour), `:prayer-widget:compileReleaseKotlin` and `:app:processReleaseResources`
 in the prebuilt copy, and a static web render.
+
+**The first build failed before it compiled anything**, and not for anything in
+this feature's code. EAS Build runs `npm ci --include=dev` on an image carrying
+npm 10.9.8, and this Mac writes the lockfile with npm 11. The two resolve one
+dependency differently. `@bacons/apple-targets` carries its own older copy of
+`@expo/require-utils`, whose optional peer asks for TypeScript 5, and this app
+has been on TypeScript 6 since the first commit. npm 11 leaves that alone. npm
+10 wants a second TypeScript nested under it, does not find one in the
+lockfile, and stops four seconds in. The fix is one `overrides` entry in
+`package.json` pointing `@expo/require-utils` at the copy already hoisted to
+the top of the tree, which accepts TypeScript 6, so the older copy is removed
+rather than the conflict being worked around. `npm run lock:check` was shown to
+fail on the lockfile as it stood and to pass once the copy was gone.
 
 **Not checked here, and why.**
 

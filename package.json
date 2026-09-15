@@ -61,6 +61,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "lint": "expo lint",
+    "lock:check": "npx -y npm@10 ci --include=dev --dry-run --ignore-scripts --no-audit --no-fund",
     "arabic": "node --import ./scripts/ts-resolve.mjs scripts/arabic-proof.mjs",
     "icons": "node scripts/make-icons.mjs",
     "audio:manifest": "node --import ./scripts/ts-resolve.mjs scripts/audio-manifest.mjs",
@@ -101,5 +102,8 @@
     "submit:check": "node --import ./scripts/ts-resolve.mjs scripts/submit-check.mjs",
     "crisis:check": "node --import ./scripts/ts-resolve.mjs scripts/crisis-check.mjs"
   },
-  "private": true
+  "private": true,
+  "overrides": {
+    "@expo/require-utils": "^57.0.5"
+  }
 }

@@ -17,7 +17,7 @@ import android.os.Build
  * no widget placed, no alarm is set.
  */
 internal object PrayerWidgetUpdater {
-  private const val ACTION_REFRESH = "expo.modules.prayerwidget.REFRESH"
+  internal const val ACTION_REFRESH = "expo.modules.prayerwidget.REFRESH"
 
   /** Half a second past the instant, so the entry that starts then is the one in force when it redraws. */
   private const val PAST_THE_INSTANT_MS = 500L

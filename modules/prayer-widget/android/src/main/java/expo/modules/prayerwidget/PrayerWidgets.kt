@@ -49,6 +49,15 @@ class QuietPrayerWidget : PrayerWidgetProvider(PrayerWidgetKind.QUIET)
 /** The next change in the schedule, a reboot, the clock or timezone moving, or the language changing: redraw every widget. */
 class PrayerWidgetRefresh : BroadcastReceiver() {
   override fun onReceive(context: Context, intent: Intent) {
-    PrayerWidgetUpdater.updateAll(context)
+    // Only the actions this receiver is registered for. An intent with another action, or none, is not ours.
+    when (intent.action) {
+      PrayerWidgetUpdater.ACTION_REFRESH,
+      Intent.ACTION_BOOT_COMPLETED,
+      Intent.ACTION_MY_PACKAGE_REPLACED,
+      Intent.ACTION_TIME_CHANGED,
+      Intent.ACTION_TIMEZONE_CHANGED,
+      Intent.ACTION_LOCALE_CHANGED,
+      -> PrayerWidgetUpdater.updateAll(context)
+    }
   }
 }

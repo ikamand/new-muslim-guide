@@ -91,6 +91,7 @@ for (const voice of ADHAN_VOICES) {
   } else {
     if (made.source !== sha256(original)) fail(`${voice.id}: the recording changed since its files were made. Run npm run adhan:audio`);
     if (made.openingEnd !== voice.openingEnd) fail(`${voice.id}: the cut moved to ${voice.openingEnd}s but the files were made at ${made.openingEnd}s. Run npm run adhan:audio`);
+    if ((made.startAt ?? 0) !== (voice.startAt ?? 0)) fail(`${voice.id}: the recording now starts at ${voice.startAt ?? 0}s but the files were made from ${made.startAt ?? 0}s. Run npm run adhan:audio`);
     if (!(made.openingSeconds < 30)) fail(`${voice.id}: the opening is ${made.openingSeconds}s; iOS plays its own tone past 30`);
   }
 

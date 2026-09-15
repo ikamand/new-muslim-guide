@@ -7,9 +7,10 @@
   },
   "najar": {
     "source": "365fc478deab1cc868fdc2003e4c77e259a1b9ed44ce762d63e2a497c659b1fd",
+    "startAt": 1.15,
     "openingEnd": 4.5,
-    "openingSeconds": 4.5,
-    "fullSeconds": 152.2
+    "openingSeconds": 3.35,
+    "fullSeconds": 151.1
   },
   "damradash": {
     "source": "87031b9f413611479fff443ff3a8b90c265117f5db196f0a2c1ba25ea5d97cff",

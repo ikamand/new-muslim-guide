@@ -55,6 +55,12 @@ export type AdhanVoice = {
   original: string;
   /** Seconds. Where the opening clip ends: half a second into the first pause. */
   openingEnd: number;
+  /**
+   * Seconds. Where the recording starts, when it opens on the muezzin drawing
+   * breath before the first word. Left out when it opens on the word itself.
+   * `openingEnd` is still a time in the recording as downloaded.
+   */
+  startAt?: number;
 };
 
 /*
@@ -74,6 +80,17 @@ export type AdhanVoice = {
   the phrase: the last syllable swells again and settles only by about 14.5.
   Iyad heard it cut about a second short (14 Sep 2026), so it ends at 15.0,
   with the fade inside the room noise.
+
+  Al Najar opens on the muezzin's breath, which Iyad heard (15 Sep 2026). His
+  voice enters at 1.211, and what comes before it is an inhale about six
+  decibels above the room tone the recording keeps in its own pauses. So the
+  file starts at 1.15, on a zero crossing, leaving sixty milliseconds of tone
+  before the first syllable. The room tone itself stays, because it is in the
+  recording and a cut at the front cannot reach it.
+
+  Measured starts of the voice, for the ones that do not begin on it: Al Najar
+  1.21 · Umm al-Quwain 1.75 · Abdul Basit 0.96 · Kuwait 0.93. Only Al Najar is
+  trimmed; the other three are recorded here so the question is asked once.
 */
 export const ADHAN_VOICES = [
   {
@@ -91,6 +108,7 @@ export const ADHAN_VOICES = [
     kind: 'other',
     original: ' Mahmud Mustafa Al Najar - Adhan.mp3',
     openingEnd: 4.5,
+    startAt: 1.15,
   },
   {
     id: 'damradash',

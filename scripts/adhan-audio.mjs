@@ -5,6 +5,9 @@
  * ships with macOS, rather than adding an audio toolchain to the project.
  * EAS never runs this. The outputs are committed and the build uses those.
  *
+ * A voice with a `startAt` has its head cut off first, past a breath before
+ * the first word, and every file below is made from what is left.
+ *
  * For each voice in `src/content/adhan-voices.ts` it writes:
  *
  * - **The whole recording for Android**, mono AAC, into the native module's
@@ -46,6 +49,8 @@ export const RAW_DIR = join(root, 'modules/adhan-alarm/android/src/main/res/raw'
 export const DERIVED = join(root, 'assets/adhan/derived.json');
 
 const FADE_SECONDS = 0.25;
+/* Long enough that a cut into breath or room tone cannot click, short enough to go unheard. */
+const FADE_IN_SECONDS = 0.01;
 
 /** Reads a PCM WAV: afconvert writes a FLLR padding chunk, so walk the chunks. */
 function readWav(path) {
@@ -160,14 +165,24 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     const decoded = join(work, `${voice.id}-decoded.wav`);
     afconvert('-f', 'WAVE', '-d', 'LEI16', source, decoded);
     const wav = readWav(decoded);
-    const mono = toMono(wav);
+    const whole = toMono(wav);
+    /*
+      A recording that opens on the muezzin's breath starts at `startAt`, with
+      a fade in so the cut cannot click. Everything below is made from what is
+      left, while `openingEnd` stays a time in the recording as downloaded,
+      which is where its first pause was measured.
+    */
+    const from = Math.min(whole.length, Math.round((voice.startAt ?? 0) * wav.rate));
+    const mono = from > 0 ? whole.slice(from) : whole;
+    const fadeIn = Math.round(FADE_IN_SECONDS * wav.rate);
+    for (let i = 0; from > 0 && i < fadeIn && i < mono.length; i += 1) mono[i] *= i / fadeIn;
     const fullSeconds = mono.length / wav.rate;
 
     const fullWav = join(work, `${voice.id}-full.wav`);
     writeWav(fullWav, mono, wav.rate);
     encodeAac(fullWav, join(RAW_DIR, `${rawName(voice.id)}.m4a`), wav.rate);
 
-    const cut = Math.min(mono.length, Math.round(voice.openingEnd * wav.rate));
+    const cut = Math.min(mono.length, Math.round((voice.openingEnd - (voice.startAt ?? 0)) * wav.rate));
     const opening = mono.slice(0, cut);
     const fade = Math.round(FADE_SECONDS * wav.rate);
     for (let i = 0; i < fade && i < opening.length; i += 1) {
@@ -182,6 +197,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
 
     derived[voice.id] = {
       source: sha256(source),
+      startAt: voice.startAt ?? 0,
       openingEnd: voice.openingEnd,
       openingSeconds: Number((opening.length / wav.rate).toFixed(2)),
       fullSeconds: Number(fullSeconds.toFixed(1)),

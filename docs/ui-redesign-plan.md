@@ -3060,7 +3060,7 @@ checked at 320 (bead labels clear, no collisions).
 
 ---
 
-## 2 Sep 2026 — ⚠️ RELEASE GATE: Android multi-window desync, undecided → decided 14 Sep, native build
+## 2 Sep 2026 — RELEASE GATE: Android multi-window desync, undecided → decided 14 Sep → closed 15 Sep ✅
 
 Samsung pop-up/split-screen resize leaves the RN surface desynced: text
 hard-clips mid-glyph with stale measurements and the touch map goes stale,
@@ -3146,6 +3146,14 @@ works, but for apps targeting SDK 36, as this one does, Android 16 ignores
 SDK 37, and Samsung's Labs setting "Multi window for all apps" forces it back
 on. A Fold, a tablet or DeX would keep the clipped text with no fix behind it.
 Iyad: "lets finish the fix".
+
+**Closed 15 Sep 2026, seen on the phone.** Build `7fecde31` (from `5ae6631`,
+fingerprint `2e4e95b5`) installed over adb. Pop-up view, driven by adb: every
+line whole ("NOW", "until 4:35 PM", the dua with its Arabic and translation),
+Learn and Today answer, the Learn page scrolls, and full screen looks as it
+did. Split screen, by Iyad's hand: "it works and works amazing". The dead taps
+he saw before did not come back; adb never reproduced them, so they are
+recorded as gone with the density rather than explained.
 
 ---
 

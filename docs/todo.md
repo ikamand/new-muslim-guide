@@ -93,15 +93,6 @@ Built 14 Sep 2026; the plan entry is "The adhan" in `docs/ui-redesign-plan.md`.
   and let one adhan and one reminder come; restart the phone and let the next
   come too. On an iPhone, turn on Sound during Focus and let the opening come
   through a Focus. Added 14 Sep 2026.
-- **Try split screen and pop-up view on the same build.** It also restarts the
-  screen on a multi-window resize (`plugins/with-resize-restart.js`). Open the
-  app in split screen and in a pop-up, drag the divider: it should reload to
-  Today at the new size, with text whole and the tabs answering. If it does,
-  the 2 Sep release gate in `docs/ui-redesign-plan.md` is closed. Added
-  14 Sep 2026. **Failed 15 Sep** on that build: it reloaded to Today with
-  text clipped and taps dead. The cause is Samsung lowering the window's
-  density (420 to 321dpi); `plugins/with-window-density.js` fixes it in the
-  next native build. Try it again there, pop-up and split screen both.
 - **Play Console: the foreground-service declaration** for media playback,
   with a description and a video, before the Android release. Added
   14 Sep 2026.

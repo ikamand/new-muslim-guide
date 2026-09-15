@@ -4815,3 +4815,52 @@ Verified: `tsc`, `style:check`, `i18n:manifest`, `adhan:check`;
 things to watch there: whether a media card appears on the lock screen or in
 the quick panel while the adhan plays, and which of the two outcomes a locked
 press records.
+
+---
+
+## 14 Sep 2026 — The notice after an adhan no longer pops up ⚠️ native build
+
+Iyad: a notification "pill" appeared mid-adhan while he pressed the volume
+buttons, where he expected one as the adhan starts.
+
+**From the phone's log** (ʿIsha's test ring, 20:55 to 20:57 phone time):
+
+- The playing notification was posted as the adhan started (20:55:24.821)
+  and Samsung popped it up at once (`EdgeLightingManager:
+  showForNotification … isHeadUp=true`, a four-second pop-up). So the pop-up
+  at the start was there. With the screen off, as in a pocket, there is no
+  pop-up to see; the notification waits on the lock screen, as every
+  notification does.
+- The pill he saw was the notice after the adhan. When the adhan ends, the
+  service removes the playing notification and posts the prayer's notice on
+  the quiet channel, marked silent. Samsung popped that up too, at 20:56:44,
+  the instant a volume press stopped the adhan, so it read as a notification
+  arriving mid-adhan. The 8:40 PM test did the same (20:40:04 start, 20:40:09
+  notice). The silent flag stopped the sound and the vibration, not the
+  pop-up.
+
+**Fixed:**
+
+- A third channel, `adhan-after`, of low importance, for the notice after an
+  adhan that sounded. Android pops up only a notification of high
+  importance. ⚠️ That Samsung's pop-up follows the same rule is read from its
+  log, not yet seen. The app names the channel on its next sync, and the
+  service creates it itself if an adhan ends before that.
+- An adhan counts as sounded only once its player has started. Before, a
+  player that failed before any sound would have ended with the silent
+  notice, and the prayer would have passed with nothing to tell anyone. Now
+  it ends with the quiet notice, which pops up and vibrates as a missed
+  adhan's does.
+- `adhan:check` fails if a channel has no name.
+
+**Two things in the log that are not bugs:**
+
+- The two adhans stamped 8:32 PM were ʿIsha's real alarm, twice. The phone's
+  clock had been set back by hand (Date and time settings opened at 20:32 and
+  20:36), so ʿIsha came round again and the app rightly re-armed it.
+- Afterwards the phone ran about 26 minutes behind internet time. Every alarm
+  fires by the phone's clock, so while it is wrong every adhan is that late.
+
+Verified: `tsc`, `adhan:check`, `style:check`, `i18n:manifest`, lint on the
+touched files; `:adhan-alarm:compileReleaseKotlin` in the prebuilt copy.
+**Not seen:** the new channel on the phone.

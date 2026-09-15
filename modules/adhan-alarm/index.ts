@@ -32,7 +32,8 @@ export type AdhanAlarmInput = {
 };
 
 /** The names Android lists under the app's notification settings. */
-export type AdhanChannelNames = { playing: string; quiet: string };
+/** What Android lists in the app's notification settings: while it plays, when it could not, and after it played. */
+export type AdhanChannelNames = { playing: string; quiet: string; after: string };
 
 export type AdhanOutcome = {
   title: string;

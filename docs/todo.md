@@ -76,6 +76,11 @@ Built 14 Sep 2026; the plan entry is "The adhan" in `docs/ui-redesign-plan.md`.
   means the press went past the media session, which is worth reporting.
   Watch for a media card on the lock screen while it plays. Added 14 Sep
   2026; the volume rule changed twice that day.
+- **Try the pop-ups on the same build.** With the screen on, the adhan's
+  notification pops up as it starts. Stopping it with a volume button, or
+  letting it finish, pops up nothing, and the prayer stays in the shade. An
+  adhan that cannot play (the phone on vibrate with its switch off) pops up
+  and vibrates. Added 14 Sep 2026.
 - **Try what 14 Sep's second pass added, on the same build.** Short and Full
   in a prayer's sheet each play what the alarm will play; the play button
   beside the volume bar plays the length the prayer is set to at that volume,

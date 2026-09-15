@@ -39,6 +39,7 @@ class AlarmRecord : Record {
 class ChannelNames : Record {
   @Field val playing: String = "Adhan"
   @Field val quiet: String = "Prayer times"
+  @Field val after: String = "After the adhan"
 }
 
 class AdhanAlarmModule : Module() {
@@ -52,13 +53,13 @@ class AdhanAlarmModule : Module() {
       Events("onPreviewEnd")
 
       AsyncFunction("replaceAll") { alarms: List<AlarmRecord>, channels: ChannelNames ->
-        AdhanNotifications.ensureChannels(context, channels.playing, channels.quiet)
+        AdhanNotifications.ensureChannels(context, channels.playing, channels.quiet, channels.after)
         AdhanScheduler.replaceAll(context, alarms.map { it.toAlarm() })
         alarms.size
       }
 
       AsyncFunction("ringSoon") { alarm: AlarmRecord, channels: ChannelNames ->
-        AdhanNotifications.ensureChannels(context, channels.playing, channels.quiet)
+        AdhanNotifications.ensureChannels(context, channels.playing, channels.quiet, channels.after)
         AdhanScheduler.add(context, alarm.toAlarm())
       }
 

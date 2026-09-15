@@ -45,7 +45,7 @@ export const IOS_PENDING_CAP = 60;
 
 /** The names Android lists for the adhan's two notifications in the app's settings. */
 export function adhanChannels(t: Translate): AdhanChannelNames {
-  return { playing: t('adhan.channel.playing'), quiet: t('adhan.channel.quiet') };
+  return { playing: t('adhan.channel.playing'), quiet: t('adhan.channel.quiet'), after: t('adhan.channel.after') };
 }
 
 /** One adhan for the native module, worded now, because nothing will be awake to word it when it fires. */

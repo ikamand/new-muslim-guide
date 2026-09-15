@@ -62,6 +62,12 @@ class AdhanPlaybackService : Service() {
   private var session: MediaSession? = null
   private var startedAt = 0L
 
+  /**
+   * Whether any of the adhan came out. Until it has, an ending is a prayer
+   * nobody was told about, so its notice alerts as a missed adhan's does.
+   */
+  private var sounded = false
+
   /** Volume changes before this instant are the adhan setting its own volume, not a press. */
   private var ignoreVolumeUntil = 0L
 
@@ -267,7 +273,10 @@ class AdhanPlaybackService : Service() {
       media.setAudioAttributes(attributes)
       media.setWakeMode(applicationContext, PowerManager.PARTIAL_WAKE_LOCK)
       media.setDataSource(applicationContext, Uri.parse("android.resource://$packageName/$resource"))
-      media.setOnPreparedListener { it.start() }
+      media.setOnPreparedListener {
+        it.start()
+        sounded = true
+      }
       media.setOnCompletionListener { finish("finished") }
       media.setOnErrorListener { _, _, _ ->
         finish("error")
@@ -327,10 +336,13 @@ class AdhanPlaybackService : Service() {
     abandonFocus()
     val seconds = if (startedAt > 0) ((SystemClock.elapsedRealtime() - startedAt) / 1000).toInt() else 0
     startedAt = 0L
-    AdhanStore.recordOutcome(this, current, played, reason, seconds)
+    // A player that failed before a sound came out played nothing, whatever the caller assumed.
+    val alerted = played && sounded
+    sounded = false
+    AdhanStore.recordOutcome(this, current, alerted, reason, seconds)
     ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_REMOVE)
     // Anything but Stop leaves the prayer in the shade, as any notification nobody dismissed would stay.
-    if (reason != "stop") AdhanNotifications.postQuiet(this, current, alreadyAlerted = played)
+    if (reason != "stop") AdhanNotifications.postQuiet(this, current, alreadyAlerted = alerted)
     stopSelf()
   }
 

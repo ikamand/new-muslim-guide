@@ -1022,6 +1022,7 @@ export const EN = {
   'adhan.stop': 'Stop',
   'adhan.channel.playing': 'Adhan',
   'adhan.channel.quiet': 'Adhan, when it cannot play',
+  'adhan.channel.after': 'Adhan, after it has played',
   /* What happened to the last adhan, after the colon in `alert.last`. */
   'adhan.outcome.finished': 'played to the end',
   'adhan.outcome.stop': 'stopped with Stop',

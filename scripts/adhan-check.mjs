@@ -40,7 +40,7 @@ import {
   voiceAllowedFor,
 } from '../src/content/adhan-voices.ts';
 import { AUDIO_SOURCE_BY_ID, SOURCES } from '../src/content/audio-sources.ts';
-import { fitToPlatform, prayerAlertSchedule } from '../src/lib/alert-schedule.ts';
+import { adhanChannels, fitToPlatform, prayerAlertSchedule } from '../src/lib/alert-schedule.ts';
 import { computeDay, inferProfile, PRAYER_LABEL } from '../src/lib/prayer-times.ts';
 import {
   applyAlertToAll,
@@ -235,6 +235,16 @@ if (held.length > 60) fail(`an iPhone was handed ${held.length} notifications, p
 if (held[held.length - 1]?.title !== 'reminders.window.title') fail('a cut iPhone schedule does not end by asking to open the app');
 if (held.some((item, index) => index > 0 && item.fireAt < held[index - 1].fireAt)) fail('a held schedule is not nearest first');
 if (fitToPlatform(fortnight, 'android', say).length !== fortnight.length) fail('Android was cut to the iPhone cap');
+
+/*
+  The native module names three channels. A missing name reaches Kotlin as the
+  record's English default, and the notice after an adhan would sit in the
+  reader's settings untranslated.
+*/
+const channels = adhanChannels(say);
+for (const name of ['playing', 'quiet', 'after']) {
+  if (typeof channels[name] !== 'string' || channels[name] === '') fail(`the ${name} adhan channel has no name`);
+}
 
 /* "Use these for all prayers": the mode and overrides go everywhere, a voice only to its own kind. */
 const mixed = {

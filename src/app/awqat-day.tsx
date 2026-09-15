@@ -1,7 +1,7 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Stack, useLocalSearchParams, useRouter, type Href } from 'expo-router';
-import { useEffect, type ReactNode } from 'react';
-import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { useEffect, useState, type ReactNode } from 'react';
+import { Platform, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import Animated, {
   Easing,
   cancelAnimation,
@@ -19,6 +19,7 @@ import { DoubleRule, Shelf } from '@/components/jadwal';
 import { LocationAsk } from '@/components/location-ask';
 import { PressableLink } from '@/components/pressable-link';
 import { ThemedText } from '@/components/themed-text';
+import { WidgetSheet } from '@/components/widget-sheet';
 import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { useLocation } from '@/hooks/use-location';
@@ -363,6 +364,41 @@ function Door({
   );
 }
 
+/** A door that opens a sheet rather than a page: the same row, as a button. */
+function DoorButton({
+  onPress,
+  mark,
+  title,
+  meta,
+}: {
+  onPress: () => void;
+  mark: ReactNode;
+  title: string;
+  meta: string;
+}) {
+  const theme = useTheme();
+  return (
+    <Pressable
+      onPress={onPress}
+      accessibilityRole="button"
+      accessibilityLabel={`${title}. ${meta}`}
+      style={({ pressed }) => [
+        styles.door,
+        { borderBottomColor: theme.goldSoft },
+        pressed && { backgroundColor: theme.backgroundSelected },
+      ]}>
+      <View style={styles.doorMark}>{mark}</View>
+      <View style={styles.doorText}>
+        <ThemedText type="smallBold">{title}</ThemedText>
+        <ThemedText type="small" themeColor="textSecondary">
+          {meta}
+        </ThemedText>
+      </View>
+      <Ionicons name="chevron-forward" size={18} color={theme.gold} />
+    </Pressable>
+  );
+}
+
 /**
  * The qibla, in the header beside the back arrow — the same compass rose
  * the Today card wears in its spandrel, so the two doors to one screen look
@@ -397,6 +433,7 @@ export default function AwqatDayScreen() {
   const { profile, next, timezoneSuspect } = usePrayerTimes();
   const { reminders, awqatMosque } = useSettings();
   const { date: param } = useLocalSearchParams<{ date?: string }>();
+  const [widgetsOpen, setWidgetsOpen] = useState(false);
   const reducedMotion = useReducedMotion();
 
   /*
@@ -726,6 +763,15 @@ export default function AwqatDayScreen() {
           title={t('awqat.day.reminders')}
           meta={remindersMeta}
         />
+        {/* The widgets: a door rather than a settings page (docs/widgets.md). The web has no home screen. */}
+        {Platform.OS !== 'web' && (
+          <DoorButton
+            onPress={() => setWidgetsOpen(true)}
+            mark={<Ionicons name="phone-portrait-outline" size={22} color={theme.gold} />}
+            title={t('widget.door')}
+            meta={t('widget.door.meta')}
+          />
+        )}
         <Door
           href="/awqat-settings"
           mark={<Ionicons name="options-outline" size={22} color={theme.gold} />}
@@ -746,6 +792,7 @@ export default function AwqatDayScreen() {
         <ThemedText type="small" themeColor="textSecondary">
           {t('times.followLocal')}
         </ThemedText>
+        <WidgetSheet visible={widgetsOpen} onClose={() => setWidgetsOpen(false)} />
       </ScrollView>
     </>
   );

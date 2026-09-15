@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  The widget target's own Info.plist, which @bacons/apple-targets leaves alone
+  once it exists. It is what the plugin would generate for a widget (the
+  extension point) plus the app's Latin face, so the prayer's name is set in
+  Literata as it is everywhere else (docs/widgets.md).
+-->
+<plist version="1.0">
+<dict>
+	<key>NSExtension</key>
+	<dict>
+		<key>NSExtensionPointIdentifier</key>
+		<string>com.apple.widgetkit-extension</string>
+	</dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Literata_600SemiBold.ttf</string>
+	</array>
+</dict>
+</plist>

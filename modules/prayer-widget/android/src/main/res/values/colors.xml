@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Only for the moment before the app first hands the widgets their schedule,
+  which carries the colours from src/constants/theme.ts. These are theme.ts's
+  light values; npm run widget:check fails if they drift.
+-->
+<resources>
+  <color name="prayer_widget_ground">#F3ECDC</color>
+  <color name="prayer_widget_text">#221B14</color>
+  <color name="prayer_widget_text_secondary">#6B5A46</color>
+  <color name="prayer_widget_gold">#8E6A21</color>
+  <color name="prayer_widget_gold_soft">#D9C9A2</color>
+</resources>

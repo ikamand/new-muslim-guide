@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  The widget picker reads these before the app has ever run, so they cannot
+  come from the schedule. Each is the English of a key in src/i18n/ui.ts, and
+  npm run widget:check fails if the two differ.
+-->
+<resources>
+  <string name="prayer_widget_name_niche">Prayer times</string>
+  <string name="prayer_widget_name_row">Prayer times, the day</string>
+  <string name="prayer_widget_name_quiet">Prayer time, quiet</string>
+  <string name="prayer_widget_niche_description">The time now, in the arch</string>
+  <string name="prayer_widget_row_description">All five prayers of the day</string>
+  <string name="prayer_widget_quiet_description">A mark and a time, no names</string>
+  <string name="prayer_widget_open_app">Open the app to update prayer times</string>
+</resources>

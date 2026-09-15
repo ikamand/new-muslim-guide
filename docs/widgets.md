@@ -218,6 +218,36 @@ at prebuild.
 - Nothing leaves the device. No switch is needed, because a widget exists only
   when somebody places one.
 
+## Where this stands, 15 Sep 2026
+
+Built in one sitting, in this order: the schedule and its check, the bridge
+from the app, the Android module, the iPhone target, the door.
+
+**Checked here.** `tsc`, `expo lint`, `style:check`, `widget:check` (the five
+places, the arcs, and every copy Android and iPhone keep of a word or a
+colour), `:prayer-widget:compileReleaseKotlin` and `:app:processReleaseResources`
+in the prebuilt copy, and a static web render.
+
+**Not checked here, and why.**
+
+- **Every line of Swift.** This Mac has no Xcode, and the app has never been
+  built for iPhone. The first iOS build is the first proof, and it needs an
+  Apple Developer Program membership and the Team ID in app.json.
+- **Android lint.** Both local runs died inside
+  `:react-native-worklets:lintAnalyzeRelease` with lint's own crash ("this is
+  a bug in lint or one of the libraries it depends on"), before reaching this
+  module. EAS builds carrying that module have passed, so this reads as a
+  local toolchain fault rather than something the cloud build will hit. Every
+  call newer than the minimum Android is behind its own version check anyway,
+  which is what that lint would be checking.
+- **How any of it looks.** A widget can only be seen on a phone. Iyad runs the
+  build; then the widgets are added by hand and looked at over adb.
+
+**What to watch for first on the phone**: whether a widget says "Can't load
+widget", which would mean a RemoteViews call the launcher refuses; the text
+sizes at 411dp; and the tap opening the prayer's walkthrough while a window is
+open, the day page otherwise.
+
 ## Held
 
 - Live Activities and the Dynamic Island: the app starts those, so the plan

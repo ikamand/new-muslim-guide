@@ -15,7 +15,8 @@
         "NSMicrophoneUsageDescription": "The microphone is used only while you practise reciting, so the app can follow along on screen. Nothing you say is recorded, saved, or sent anywhere."
       },
       "entitlements": {
-        "com.apple.developer.usernotifications.time-sensitive": true
+        "com.apple.developer.usernotifications.time-sensitive": true,
+        "com.apple.security.application-groups": ["group.com.newmuslimguide.app"]
       }
     },
     "android": {
@@ -76,7 +77,8 @@
       ],
       "expo-asset",
       "./plugins/with-resize-restart",
-      "./plugins/with-window-density"
+      "./plugins/with-window-density",
+      "@bacons/apple-targets"
     ],
     "experiments": {
       "typedRoutes": true,

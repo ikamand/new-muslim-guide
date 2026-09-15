@@ -168,6 +168,46 @@ function dayFor(coords: LatLon, profile: MethodProfile, date: Date): WidgetDay {
   };
 }
 
+/**
+ * No place yet, so no times: the widgets draw the words to open the app, in
+ * the app's language, rather than a copy of them kept natively.
+ */
+export function emptyWidgetPayload(
+  t: (key: UIKey) => string,
+  colors: { light: WidgetPalette; dark: WidgetPalette },
+): WidgetPayload {
+  return {
+    v: 1,
+    generatedAt: Date.now(),
+    staleAt: 0,
+    strings: { openApp: t('widget.openApp') },
+    colors,
+    marks: marksForPayload(),
+    arch: archForPayload(),
+    days: [],
+    entries: [],
+  };
+}
+
+function marksForPayload(): Record<PrayerId, string> {
+  return Object.fromEntries(PRAYER_IDS.map((id) => [id, markPartsToPath(DAY_MARK_PARTS[id])])) as Record<PrayerId, string>;
+}
+
+function archForPayload(): WidgetPayload['arch'] {
+  return {
+    viewBox: WIDGET_ARCH.viewBox,
+    outer: serializeOps(toCubicOps(WIDGET_ARCH.outer)),
+    inner: serializeOps(toCubicOps(WIDGET_ARCH.inner)),
+    stroke: WIDGET_ARCH.stroke,
+    innerStroke: WIDGET_ARCH.innerStroke,
+    disc: WIDGET_ARCH.disc,
+    ring: WIDGET_ARCH.ring,
+    ringStroke: WIDGET_ARCH.ringStroke,
+    markSize: WIDGET_ARCH.markSize,
+    markStroke: WIDGET_ARCH.markStroke,
+  };
+}
+
 export function buildWidgetPayload(input: WidgetScheduleInput): WidgetPayload {
   const { coords, profile, now, fluent, t } = input;
   const span = input.days ?? DAYS_AHEAD;
@@ -214,22 +254,8 @@ export function buildWidgetPayload(input: WidgetScheduleInput): WidgetPayload {
     staleAt: stale.getTime(),
     strings: { openApp: t('widget.openApp') },
     colors: input.colors,
-    marks: Object.fromEntries(PRAYER_IDS.map((id) => [id, markPartsToPath(DAY_MARK_PARTS[id])])) as Record<
-      PrayerId,
-      string
-    >,
-    arch: {
-      viewBox: WIDGET_ARCH.viewBox,
-      outer: serializeOps(toCubicOps(WIDGET_ARCH.outer)),
-      inner: serializeOps(toCubicOps(WIDGET_ARCH.inner)),
-      stroke: WIDGET_ARCH.stroke,
-      innerStroke: WIDGET_ARCH.innerStroke,
-      disc: WIDGET_ARCH.disc,
-      ring: WIDGET_ARCH.ring,
-      ringStroke: WIDGET_ARCH.ringStroke,
-      markSize: WIDGET_ARCH.markSize,
-      markStroke: WIDGET_ARCH.markStroke,
-    },
+    marks: marksForPayload(),
+    arch: archForPayload(),
     days,
     entries,
   };

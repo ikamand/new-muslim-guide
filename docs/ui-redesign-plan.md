@@ -5000,3 +5000,15 @@ Warned once and decided: nothing here can compile the iPhone widget until
 Xcode 26.3 is installed, and the app has never been built for iPhone, so the
 first iOS build is the first proof. Needs from Iyad for that build: an Apple
 Developer Program membership and the Team ID.
+
+**Built the same day.** The schedule (`lib/widget-schedule.ts`) writes what the
+card would show at every instant it could change, twelve days ahead, with the
+arch's geometry, the day marks and the words, so both phones only draw;
+`npm run widget:check` samples the days between in five places and fails on any
+disagreement. Android: a local module with three widgets, drawn with
+RemoteViews and bitmaps, light and dark handed over together, redrawn by one
+exact alarm at each change and after a reboot, a clock change or a language
+change. iPhone: a SwiftUI target through `@bacons/apple-targets`, the same
+three plus the lock screen, reading the schedule from the app group. The door
+sits on the day page's shelf and opens a sheet: Add on Android, the steps
+elsewhere. `docs/widgets.md` carries what is checked and what cannot be.

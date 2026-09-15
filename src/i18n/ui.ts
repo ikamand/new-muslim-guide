@@ -538,6 +538,8 @@ export const EN = {
   'widget.sheet.niche': 'The time now, in the arch',
   'widget.sheet.row': 'All five prayers of the day',
   'widget.sheet.quiet': 'A mark and a time, no names',
+  /* iPhone only: the lock screen's widget, as the picker describes it. */
+  'widget.lock.description': 'The next prayer, on the lock screen',
   'widget.sheet.add': 'Add',
   'widget.sheet.steps.android':
     'Touch and hold an empty part of the home screen, tap Widgets, find New Muslim Guide, and drag the one you want into place.',

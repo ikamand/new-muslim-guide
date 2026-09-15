@@ -8,6 +8,7 @@ import { useWindowDimensions } from 'react-native';
 import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { useReminderSync } from '@/hooks/use-reminders';
+import { useWidgetSync } from '@/hooks/use-widget-sync';
 import { SettingsProvider, useSettings } from '@/hooks/use-settings';
 import { LocaleProvider } from '@/hooks/use-locale';
 import { MemorisedProvider } from '@/hooks/use-memorised';
@@ -40,6 +41,9 @@ function RootStack() {
     launch — not only in sessions where Settings happened to be opened.
   */
   useReminderSync();
+
+  /* The home-screen and lock-screen widgets' twelve days, on the reminders' triggers (docs/widgets.md). */
+  useWidgetSync();
 
   /*
     Amiri, for the Arabic.

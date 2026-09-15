@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- theme.ts's dark values, for the same moment. npm run widget:check fails if they drift. -->
+<resources>
+  <color name="prayer_widget_ground">#0B1A33</color>
+  <color name="prayer_widget_text">#F2E9D5</color>
+  <color name="prayer_widget_text_secondary">#A7BAD8</color>
+  <color name="prayer_widget_gold">#C9A253</color>
+  <color name="prayer_widget_gold_soft">#5B4E33</color>
+</resources>

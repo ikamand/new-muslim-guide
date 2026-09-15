@@ -26,6 +26,8 @@
  * sit on a circle of the original radius.
  */
 import { spawnSync } from 'node:child_process';
+import { readFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { DAY_MARK_PARTS } from '../src/constants/day-marks.ts';
@@ -63,6 +65,7 @@ if (caseArg === -1) {
     if (result.status !== 0) failed += 1;
   }
   failed += checkDrawing();
+  failed += checkNativeCopies();
   if (failed > 0) {
     console.error(`\nwidget:check — ${failed} problem group(s).`);
     process.exit(1);
@@ -189,6 +192,108 @@ function cardAt(coords, profile, at, fluent) {
     friday: at.getDay() === 5,
     cells: JSON.stringify(today.prayers.map((p) => ({ id: p.id, name: p.label, time: formatTime(p.time) }))),
   };
+}
+
+/**
+ * The few things Android must know before the app has ever run: the widget
+ * names and descriptions the picker shows, and the colours of the moment
+ * before the first schedule. Each is a copy of something with a home in
+ * JavaScript, so each is compared with that home.
+ */
+function checkNativeCopies() {
+  let problems = 0;
+  const root = join(dirname(self), '..');
+  const res = join(root, 'modules/prayer-widget/android/src/main/res');
+  const read = (path) => readFileSync(join(res, path), 'utf8');
+  const valuesOf = (xml, tag) =>
+    Object.fromEntries([...xml.matchAll(new RegExp(`<${tag} name="([^"]+)">([^<]*)</${tag}>`, 'g'))].map((m) => [m[1], m[2]]));
+
+  const strings = valuesOf(read('values/strings.xml'), 'string');
+  const expectedStrings = {
+    prayer_widget_name_niche: EN['widget.name.niche'],
+    prayer_widget_name_row: EN['widget.name.row'],
+    prayer_widget_name_quiet: EN['widget.name.quiet'],
+    prayer_widget_niche_description: EN['widget.sheet.niche'],
+    prayer_widget_row_description: EN['widget.sheet.row'],
+    prayer_widget_quiet_description: EN['widget.sheet.quiet'],
+    prayer_widget_open_app: EN['widget.openApp'],
+  };
+  for (const [name, english] of Object.entries(expectedStrings)) {
+    if (strings[name] !== english) {
+      console.error(`✗ native copies: strings.xml ${name} is ${JSON.stringify(strings[name])}, ui.ts says ${JSON.stringify(english)}`);
+      problems += 1;
+    }
+  }
+
+  // theme.ts imports a stylesheet, so it is read as text rather than imported.
+  const theme = readFileSync(join(root, 'src/constants/theme.ts'), 'utf8');
+  const block = (scheme) => theme.slice(theme.indexOf(`${scheme}: {`), theme.indexOf('}', theme.indexOf(`${scheme}: {`)));
+  const token = (scheme, key) => block(scheme).match(new RegExp(`\\b${key}: '(#[0-9A-Fa-f]{6})'`))?.[1]?.toUpperCase();
+  const colourKeys = {
+    prayer_widget_ground: 'background',
+    prayer_widget_text: 'text',
+    prayer_widget_text_secondary: 'textSecondary',
+    prayer_widget_gold: 'gold',
+    prayer_widget_gold_soft: 'goldSoft',
+  };
+  for (const [scheme, file] of [['light', 'values/colors.xml'], ['dark', 'values-night/colors.xml']]) {
+    const colours = valuesOf(read(file), 'color');
+    for (const [name, key] of Object.entries(colourKeys)) {
+      const expected = token(scheme, key);
+      if (!expected || colours[name]?.toUpperCase() !== expected) {
+        console.error(`✗ native copies: ${file} ${name} is ${colours[name]}, theme.ts ${scheme}.${key} is ${expected}`);
+        problems += 1;
+      }
+    }
+  }
+  // iPhone: the same words again, this time as Swift literals, and the one app group named in three files.
+  const swift = readFileSync(join(root, 'targets/widget/PrayerWidgets.swift'), 'utf8');
+  const expectedSwift = [
+    EN['widget.name.niche'],
+    EN['widget.sheet.niche'],
+    EN['widget.name.row'],
+    EN['widget.sheet.row'],
+    EN['widget.name.quiet'],
+    EN['widget.sheet.quiet'],
+    EN['widget.lock.description'],
+  ];
+  for (const words of expectedSwift) {
+    if (!swift.includes(`"${words}"`)) {
+      console.error(`✗ native copies: PrayerWidgets.swift does not carry ui.ts's ${JSON.stringify(words)}`);
+      problems += 1;
+    }
+  }
+  const views = readFileSync(join(root, 'targets/widget/Views.swift'), 'utf8');
+  if (!views.includes(`"${EN['widget.openApp']}"`)) {
+    console.error(`✗ native copies: Views.swift's fallback is not ui.ts's ${JSON.stringify(EN['widget.openApp'])}`);
+    problems += 1;
+  }
+
+  const group = JSON.parse(readFileSync(join(root, 'app.json'), 'utf8')).expo.ios.entitlements['com.apple.security.application-groups']?.[0];
+  const namesGroup = [
+    ['targets/widget/Schedule.swift', readFileSync(join(root, 'targets/widget/Schedule.swift'), 'utf8')],
+    ['modules/prayer-widget/ios-storage.ios.ts', readFileSync(join(root, 'modules/prayer-widget/ios-storage.ios.ts'), 'utf8')],
+  ];
+  for (const [file, text] of namesGroup) {
+    if (!group || !text.includes(`'${group}'`) && !text.includes(`"${group}"`)) {
+      console.error(`✗ native copies: ${file} does not name app.json's app group ${JSON.stringify(group)}`);
+      problems += 1;
+    }
+  }
+
+  const target = readFileSync(join(root, 'targets/widget/expo-target.config.js'), 'utf8');
+  for (const [scheme, key] of [['light', 'background'], ['dark', 'background'], ['light', 'accent'], ['dark', 'accent']]) {
+    const expected = token(scheme, key);
+    if (!expected || !target.toUpperCase().includes(expected)) {
+      console.error(`✗ native copies: expo-target.config.js does not carry theme.ts ${scheme}.${key} (${expected})`);
+      problems += 1;
+    }
+  }
+
+  if (problems === 0) {
+    console.log('✓ native copies: the pickers’ words match ui.ts on both phones, the colours match theme.ts, and one app group is named everywhere');
+  }
+  return problems;
 }
 
 function checkDrawing() {

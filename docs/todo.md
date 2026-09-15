@@ -66,16 +66,16 @@ Built 14 Sep 2026; the plan entry is "The adhan" in `docs/ui-redesign-plan.md`.
   from 14.0 s to 15.0 s. If it is still wrong, change `openingEnd` in
   `src/content/adhan-voices.ts`, then `npm run adhan:audio -- abdulbasit-fajr`.
   Added 14 Sep 2026.
-- **Try the adhan on the phone, rule by rule.** After the next native build,
-  on a prayer's page, "Hear it in one minute", with the phone on vibrate, in
-  Do Not Disturb, on a call, with music playing, with headphones in and then
-  pulled out, and stopped with Stop. Then locked, in a pocket: one press of
-  volume up should stop it, one press of volume down too, and pause on
-  earbuds, also with the volume at full. The line under the button should
-  read "stopped with a volume button"; "stopped when the volume was changed"
-  means the press went past the media session, which is worth reporting.
-  Watch for a media card on the lock screen while it plays. Added 14 Sep
-  2026; the volume rule changed twice that day.
+- **Stop the brief loud blip when a volume button ends the adhan.** Iyad,
+  15 Sep, on build `7fecde31`: a press stops it, but for a fraction of a
+  second it plays noticeably louder first, with either button. The phone's
+  volume log shows no press moving the level; it shows the app giving the
+  media volume back (5 to 10) a tenth of a second after the player stops,
+  while the Bluetooth buds are still playing the last of it. The same order
+  is in `AdhanPreview`. Planned: give the volume back about a second later,
+  in `VolumeHold`, in the service and the preview (the entry "Any volume
+  button stops the adhan" in `docs/ui-redesign-plan.md`). Then try it on the
+  next native build, on the buds and on the speaker. Added 15 Sep 2026.
 - **Try the pop-ups on the same build.** With the screen on, the adhan's
   notification pops up as it starts. Stopping it with a volume button, or
   letting it finish, pops up nothing, and the prayer stays in the shade. An

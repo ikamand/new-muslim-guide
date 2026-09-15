@@ -4870,6 +4870,30 @@ things to watch there: whether a media card appears on the lock screen or in
 the quick panel while the adhan plays, and which of the two outcomes a locked
 press records.
 
+**Seen on the phone, 15 Sep 2026** (build `7fecde31`, Iyad's hand). Vibrate,
+Do Not Disturb, a call, music playing, headphones pulled out, Stop, and
+volume up and down locked in a pocket, at full volume too: all end it as
+agreed. The line under the button reads "stopped with a volume button", so
+locked presses reach the session. No media card on the lock screen.
+
+**One new fault, and its cause read from the phone.** A volume press stops
+the adhan, but for a fraction of a second it plays noticeably louder first,
+with either button. `dumpsys audio` for the rings between 13:58 and 14:06:
+they played through Iyad's Galaxy Buds3 Pro over Bluetooth; each started by
+setting media volume from 10 to 5; no press moved the level (the session took
+them all); and each ended with the player stopped, then released, then the
+volume set back from 5 to 10 about a tenth of a second later (13:59:34.618
+stopped, 34.732 restored). Bluetooth plays behind the phone, so the last of
+the adhan is still sounding in the buds when their volume doubles. Either
+button, because the press is not what changes the level; the restore is. The
+preview has the same order (13:58:30 to 13:58:32, `AdhanPreview`).
+
+Planned, not built: `VolumeHold` gives the volume back about a second after
+the sound stops rather than at once, in the service and the preview alike,
+and a hold taken inside that second applies the pending restore first, so a
+second ring started quickly never records the adhan's 5 as the phone's own
+volume. Needs a native build; `docs/todo.md`.
+
 ---
 
 ## 14 Sep 2026 — The notice after an adhan no longer pops up ⚠️ native build

@@ -11,6 +11,9 @@ import android.media.AudioAttributes
 import android.media.AudioFocusRequest
 import android.media.AudioManager
 import android.media.MediaPlayer
+import android.media.VolumeProvider
+import android.media.session.MediaSession
+import android.media.session.PlaybackState
 import android.net.Uri
 import android.os.Build
 import android.os.Handler
@@ -32,11 +35,15 @@ import org.json.JSONObject
  * - **A call**, or another app taking the audio: audio focus is lost.
  * - **Headphones pulled out**: Android's "becoming noisy", so the adhan never
  *   jumps from somebody's ears to the room.
- * - **Volume down.** Volume up only makes it louder (14 Sep 2026: the first
- *   build stopped on any volume press, which read as "it only played the
- *   start" to somebody turning it up). ⚠️ This listens for
- *   `VOLUME_CHANGED_ACTION`, which Android sends but does not document, and
- *   ignores the change the adhan's own volume makes as it starts.
+ * - **Either volume button**, locked or not, even at full volume (Iyad,
+ *   14 Sep 2026: with the phone in a pocket in a library, nobody should have
+ *   to feel for volume down). The adhan holds a playing media session while
+ *   it sounds, so Android hands it every press; see `holdVolumeKeys`. Pause
+ *   on earbuds or a media control ends it through the same session.
+ * - **The volume changed any other way**, such as the slider in the quick
+ *   panel. ⚠️ This listens for `VOLUME_CHANGED_ACTION`, which Android sends
+ *   but does not document, and ignores the change the adhan's own volume
+ *   makes as it starts.
  *
  * It plays at the volume set on the prayer's page (`VolumeHold`), and gives
  * the phone its own media volume back when it ends.
@@ -52,6 +59,7 @@ class AdhanPlaybackService : Service() {
   private var focusRequest: AudioFocusRequest? = null
   private var listening = false
   private var volumeHold: VolumeHold? = null
+  private var session: MediaSession? = null
   private var startedAt = 0L
 
   /** Volume changes before this instant are the adhan setting its own volume, not a press. */
@@ -79,13 +87,22 @@ class AdhanPlaybackService : Service() {
         when (intent.action) {
           AudioManager.ACTION_AUDIO_BECOMING_NOISY -> finish("headphones")
           VOLUME_CHANGED -> {
-            val stream = intent.getIntExtra(EXTRA_STREAM, -1)
+            if (intent.getIntExtra(EXTRA_STREAM, -1) != AudioManager.STREAM_MUSIC) return
             val value = intent.getIntExtra(EXTRA_VALUE, -1)
             val previous = intent.getIntExtra(EXTRA_PREVIOUS, -1)
-            val pressedDown =
-              stream == AudioManager.STREAM_MUSIC && value in 0 until previous &&
-                SystemClock.elapsedRealtime() > ignoreVolumeUntil
-            if (pressedDown) finish("volume")
+            // The adhan setting its own level as it starts, however late the broadcast arrives.
+            if (SystemClock.elapsedRealtime() < ignoreVolumeUntil || volumeHold?.isOwnChange(value, previous) == true) {
+              return
+            }
+            /*
+              Android sends this only when the level moved, so any one is somebody
+              moving it. Not only a whole step: on Iyad's Galaxy S24 a press moves
+              the level by less than one, and the extras above read the same
+              before and after, which is why "volume down" once needed three
+              presses. A press normally arrives through the session instead;
+              this is the backstop if Android ever routes it past the session.
+            */
+            finish("volume-changed")
           }
         }
       }
@@ -135,6 +152,7 @@ class AdhanPlaybackService : Service() {
     volumeHold = VolumeHold.take(audio, next.volume)
     ignoreVolumeUntil = SystemClock.elapsedRealtime() + 1500
     startedAt = SystemClock.elapsedRealtime()
+    holdVolumeKeys()
     play(next)
     return START_NOT_STICKY
   }
@@ -189,6 +207,54 @@ class AdhanPlaybackService : Service() {
     focusRequest = null
   }
 
+  /**
+   * Makes every volume press, and pause on earbuds, reach the adhan.
+   *
+   * Without a session Android spent each press on the media volume instead.
+   * The Galaxy S24's own log (Android 17, 14 Sep 2026) showed every press,
+   * locked and unlocked, arriving at the media session service with
+   * "session=null" and nudging the level by less than one step. A playing
+   * session with a remote volume is handed the press as a direction
+   * instead (`MediaSessionService.dispatchAdjustVolumeLocked` in AOSP),
+   * whatever the level, even at full. The volume keys stop moving the level
+   * while it plays, which no longer matters: any press ends it.
+   *
+   * The callback is set before the volume provider, because the session
+   * delivers a volume press through its callback's handler, and drops it
+   * when there is none.
+   */
+  private fun holdVolumeKeys() {
+    val media = MediaSession(this, "adhan")
+    media.setCallback(
+      object : MediaSession.Callback() {
+        override fun onPause() = finish("pause")
+
+        override fun onStop() = finish("pause")
+      },
+      handler,
+    )
+    media.setPlaybackToRemote(
+      object : VolumeProvider(
+        VolumeProvider.VOLUME_CONTROL_RELATIVE,
+        audio.getStreamMaxVolume(AudioManager.STREAM_MUSIC),
+        audio.getStreamVolume(AudioManager.STREAM_MUSIC),
+      ) {
+        // 1 or -1 as the key goes down; 0 as it comes back up, which is the same press.
+        override fun onAdjustVolume(direction: Int) {
+          if (direction != 0) finish("volume")
+        }
+      },
+    )
+    media.setPlaybackState(
+      PlaybackState.Builder()
+        .setActions(PlaybackState.ACTION_PAUSE or PlaybackState.ACTION_PLAY_PAUSE or PlaybackState.ACTION_STOP)
+        .setState(PlaybackState.STATE_PLAYING, PlaybackState.PLAYBACK_POSITION_UNKNOWN, 1f)
+        .build(),
+    )
+    media.isActive = true
+    session = media
+  }
+
   private fun play(alarm: AdhanAlarm) {
     val resource = resources.getIdentifier(alarm.sound, "raw", packageName)
     if (resource == 0) {
@@ -234,6 +300,11 @@ class AdhanPlaybackService : Service() {
     }
     alarm = null
     handler.removeCallbacksAndMessages(null)
+    session?.let { media ->
+      media.isActive = false
+      media.release()
+    }
+    session = null
     if (listening) {
       try {
         unregisterReceiver(receiver)

@@ -69,10 +69,13 @@ Built 14 Sep 2026; the plan entry is "The adhan" in `docs/ui-redesign-plan.md`.
 - **Try the adhan on the phone, rule by rule.** After the next native build,
   on a prayer's page, "Hear it in one minute", with the phone on vibrate, in
   Do Not Disturb, on a call, with music playing, with headphones in and then
-  pulled out, stopped with volume down and with Stop, and locked. Volume up
-  should only make it louder. The line under the button says what happened
-  and after how many seconds. Added 14 Sep 2026; the volume rule changed the
-  same day, after the first build stopped on volume up.
+  pulled out, and stopped with Stop. Then locked, in a pocket: one press of
+  volume up should stop it, one press of volume down too, and pause on
+  earbuds, also with the volume at full. The line under the button should
+  read "stopped with a volume button"; "stopped when the volume was changed"
+  means the press went past the media session, which is worth reporting.
+  Watch for a media card on the lock screen while it plays. Added 14 Sep
+  2026; the volume rule changed twice that day.
 - **Try what 14 Sep's second pass added, on the same build.** Short and Full
   in a prayer's sheet each play what the alarm will play; the play button
   beside the volume bar plays the length the prayer is set to at that volume,

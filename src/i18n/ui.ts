@@ -976,7 +976,7 @@ export const EN = {
   'alert.playOnSilent': 'Play on silent or vibrate',
   'alert.playInDnd': 'Play during Do Not Disturb',
   'alert.quiet.help':
-    'During a call the adhan never plays, and the notification still comes. Stop, volume down or pulling out headphones ends it.',
+    'During a call the adhan never plays, and the notification still comes. Stop, either volume button or pulling out headphones ends it.',
   'alert.soundInFocus': 'Sound during Focus',
   'alert.ios.help':
     'An iPhone plays the first Allāhu akbar. With the phone on silent, the notification comes without it.',
@@ -1025,7 +1025,9 @@ export const EN = {
   /* What happened to the last adhan, after the colon in `alert.last`. */
   'adhan.outcome.finished': 'played to the end',
   'adhan.outcome.stop': 'stopped with Stop',
-  'adhan.outcome.volume': 'stopped with volume down',
+  'adhan.outcome.volume': 'stopped with a volume button',
+  'adhan.outcome.volumeChanged': 'stopped when the volume was changed',
+  'adhan.outcome.pause': 'stopped from headphones or a media control',
   'adhan.outcome.headphones': 'stopped when headphones came out',
   'adhan.outcome.callStopped': 'stopped for a call',
   'adhan.outcome.callSkipped': 'did not play during a call',

@@ -105,8 +105,9 @@ object AdhanStore {
 
   /**
    * `reason` is one word the prayer's page turns into a sentence: finished,
-   * stop, volume, headphones, call, other-audio, silent, dnd, late, refused,
-   * focus, no-sound, error, timeout, busy.
+   * stop, volume (a volume button), volume-changed (the level moved any other
+   * way), pause (earbuds or a media control), headphones, call, other-audio,
+   * silent, dnd, late, refused, focus, no-sound, error, timeout, busy.
    */
   fun recordOutcome(context: Context, alarm: AdhanAlarm, played: Boolean, reason: String, seconds: Int = 0) {
     val outcome =

@@ -26,6 +26,20 @@ class VolumeHold private constructor(
   private val previous: Int,
   private var applied: Int,
 ) {
+  private var announced = false
+
+  /**
+   * Whether a volume broadcast is the one this hold caused by setting the
+   * level, in the whole steps the broadcast reports. Once only, so somebody
+   * later moving the level the same way still counts.
+   */
+  fun isOwnChange(value: Int, previousValue: Int): Boolean {
+    if (announced || applied == previous) return false
+    if (value != applied || previousValue != previous) return false
+    announced = true
+    return true
+  }
+
   /** Moves the held volume while it plays, still keeping the phone's own to give back. */
   fun retarget(volume: Double) {
     val max = audio.getStreamMaxVolume(AudioManager.STREAM_MUSIC)

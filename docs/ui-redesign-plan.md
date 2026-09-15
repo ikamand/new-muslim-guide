@@ -4751,3 +4751,67 @@ store reading `mode: adhan`. ʿIsha, never given a voice, opens the sheet.
 **Not seen, and only a phone can show it:** the volume following a drag
 during a preview, the quiet sheet's Focus switch on an iPhone, and the
 window note. All of it needs the next `eas build`.
+
+---
+
+## 14 Sep 2026 — Any volume button stops the adhan, locked or not ⚠️ native build
+
+Iyad, testing that morning's build on his Galaxy S24 Ultra (Android 17):
+volume down stopped the adhan only with the phone unlocked, and locked,
+neither button did. His rule now: **any volume button stops it**, because
+with the phone in a pocket in a library nobody should have to feel for the
+right one.
+
+**A correction first.** The second-pass entry above says the first build
+stopped on volume up, which read as "it only played the start". That was an
+inference from "it only played the short version"; nothing Iyad saw showed a
+press stopping it. Kept above as written.
+
+**Found over USB, from the phone's own logs** (logcat and `dumpsys audio`,
+ʿIsha's test ring, 20:55 to 20:57 phone time):
+
+- Every press reached `MediaSessionService.dispatchVolumeKeyEvent`, locked
+  (sent by SystemUI, flags 0x1200) and unlocked (sent by the system, 0x1011),
+  and every one logged `session=null`. The app had no media session, so each
+  press moved the media volume instead.
+- Samsung moves the level by less than a step per press (800, 840, 880,
+  where 800 is step 8). `VOLUME_CHANGED_ACTION` reports whole steps, so the
+  check "the new value is below the previous one" saw 10 and 10 and did
+  nothing. The 8:40 PM test needed three presses of volume down for the same
+  reason.
+- Locked presses did move the level (880 to 1000 up, 1000 to 960 down).
+  Nothing blocked them; the check could not see them.
+
+**Built** (`AdhanPlaybackService.kt`):
+
+- **A media session while the adhan plays**, playing, with a remote relative
+  volume. AOSP's `dispatchAdjustVolumeLocked` hands a press to the playing
+  session as a direction before it touches any volume, so every press
+  arrives as `onAdjustVolume`, up or down, locked or not, at full volume
+  too. Any press ends it, and so does pause on earbuds or a media control.
+  The callback is set before the volume provider: a session delivers a
+  press through its callback's handler and drops it without one.
+- **The volume broadcast stays as a backstop, on any change.** Android sends
+  it only when the level moved, so after the adhan's own start any one is
+  somebody moving it: the quick-panel slider, or a press routed past the
+  session. It ignores the adhan's own change by the grace window and by
+  matching the whole-step change `VolumeHold` made (`isOwnChange`), so a late
+  broadcast cannot stop the adhan as it starts.
+- **One risk, read in AOSP and checked against the log.** A playing session
+  is skipped when the press's sender is another app that was the last to
+  play audio (`hasUidPlayedAudioLast`, behind a flag). Locked, the sender is
+  SystemUI. During the test nothing but the adhan played between its start
+  and its stop, so the session would have had every press; if a lock sound
+  ever plays in between, the backstop catches the press.
+- The outcome says which path stopped it: "stopped with a volume button" (the
+  session), "stopped when the volume was changed" (the backstop), "stopped
+  from headphones or a media control". The help under the quiet switches now
+  says either volume button.
+
+Verified: `tsc`, `style:check`, `i18n:manifest`, `adhan:check`;
+`:adhan-alarm:compileReleaseKotlin` in the prebuilt copy.
+
+**Not seen:** any of it on the phone. It needs the next `eas build`. Two
+things to watch there: whether a media card appears on the lock screen or in
+the quick panel while the adhan plays, and which of the two outcomes a locked
+press records.

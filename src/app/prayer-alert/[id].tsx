@@ -428,6 +428,10 @@ function outcomeKey(outcome: AdhanOutcome): UIKey {
       return 'adhan.outcome.stop';
     case 'volume':
       return 'adhan.outcome.volume';
+    case 'volume-changed':
+      return 'adhan.outcome.volumeChanged';
+    case 'pause':
+      return 'adhan.outcome.pause';
     case 'headphones':
       return 'adhan.outcome.headphones';
     case 'call':

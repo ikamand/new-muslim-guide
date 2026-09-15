@@ -25,10 +25,13 @@ const snap = (value: number) => Math.min(1, Math.max(MIN, Math.round(value / STE
 export function VolumeSlider({
   value,
   onChange,
+  onLive,
   label,
 }: {
   value: number;
   onChange: (next: number) => void;
+  /** Every step the finger crosses, before it lifts: for a preview that follows the bar. */
+  onLive?: (next: number) => void;
   /** What it sets, for a screen reader. */
   label: string;
 }) {
@@ -42,6 +45,12 @@ export function VolumeSlider({
 
   const at = (event: GestureResponderEvent) => snap((event.nativeEvent.pageX - geometry.left) / geometry.width);
 
+  const follow = (event: GestureResponderEvent) => {
+    const next = at(event);
+    if (next !== live) onLive?.(next);
+    setLive(next);
+  };
+
   const percent = Math.round((live ?? value) * 100);
 
   return (
@@ -54,13 +63,17 @@ export function VolumeSlider({
         onStartShouldSetResponder={() => true}
         onMoveShouldSetResponder={() => true}
         onResponderTerminationRequest={() => false}
-        onResponderGrant={(event) => setLive(at(event))}
-        onResponderMove={(event) => setLive(at(event))}
+        onResponderGrant={follow}
+        onResponderMove={follow}
         onResponderRelease={(event) => {
           setLive(null);
           onChange(at(event));
         }}
-        onResponderTerminate={() => setLive(null)}
+        onResponderTerminate={() => {
+          // Taken away mid-drag, nothing is saved, so whatever follows the bar goes back to the saved level.
+          setLive(null);
+          onLive?.(value);
+        }}
         accessible
         accessibilityRole="adjustable"
         accessibilityLabel={label}

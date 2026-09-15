@@ -4667,3 +4667,87 @@ volume down stopping and volume up not, and the reminder arriving. The web
 preview draws Android's layout; the iPhone's Focus switch was not looked at.
 All of it needs the next `eas build`; the build of this morning cannot play a
 short adhan or a preview.
+
+---
+
+## 14 Sep 2026 — A prayer's alert, direction A: the page says what will happen ⚠️ native build
+
+From the `/design` audit of the page above (canvas
+claude.ai/artifact/SJDDSXwK53LgR6kxEYFyeY, three directions). Iyad chose A.
+He also reported a bug: with Adhan and a voice set, tapping Sound and then
+Adhan again "resets". And he took one thing out of A: a settings page does
+not need the next prayer's time, so the heading is "Dhuhr" alone, with no
+"until ʿAsr".
+
+- **The reset, reproduced on web first.** Settings kept the voice through
+  Sound, but Adhan's segment opened the sheet instead of selecting, the sheet
+  ticked a voice only while the mode was already Adhan, and swiping it away
+  left the prayer on Sound with nothing ticked. Now `voiceChosen` on each
+  prayer's alert says a voice was once picked. Adhan takes effect on the tap
+  when it is true and opens the sheet only when it is not, and the sheet ticks
+  the kept voice whatever the mode. Stored alerts already on the adhan
+  migrate as chosen.
+- **The page** (`app/prayer-alert/[id].tsx`): the prayer's glyph in a gold
+  ring and its name in Literata, then one sentence in the lead rung saying
+  what happens, with the times in gold: "At 1:06 PM your phone plays the
+  start of the adhan. A reminder comes first, at 12:56 PM." Then one panel,
+  "Alert": Adhan, Tone, Silent, Off; for the adhan, the voice with its length
+  and duration ("Al Maghriby / Short, 0:13"), the volume with its percentage,
+  the Pre-Adhan reminder, and one row, "When the phone is quiet", naming what
+  it is set to and opening a sheet (`app/quiet-phone/[id].tsx`) that holds
+  the switches and their paragraph. For Tone and Silent the reminder is
+  called "Reminder before". "Use for all five prayers" says what it replaces.
+  **What went:** the second panel and its paragraph, the time in the legend,
+  and "Sound", now "Tone", because the adhan is a sound too.
+- **The volume follows the finger while a preview plays** (Android native:
+  `VolumeHold.retarget`, `AdhanPreview.setVolume`, `previewVolume`), and the
+  percentage moves with the bar before it is saved. The play button plays
+  the length the prayer is set to (the one-line fix, sent over the air
+  first).
+- **What each phone is handed is now a pure function with a check**
+  (`lib/alert-schedule.ts`, tested in `npm run adhan:check`). Iyad asked that
+  the adhan and the reminder come "when it should", on both platforms. The
+  check proves:
+  - an iPhone gets only the opening, never the full recording, and a
+    notification sound, never a native adhan;
+  - Android gets the native adhan, short or full at its volume, at the
+    prayer's time, with no second notification on top;
+  - a build without the module sounds the phone instead of going silent;
+  - the reminder falls its minutes before, silent only for a Silent prayer;
+  - Sound during Focus reaches the adhan's notification.
+- **Two scheduling bugs fixed on the way.**
+  - The 60-notification cap applied to Android too, which with reminders on
+    cut it to six days instead of twelve for no reason. It is iPhone-only
+    now.
+  - Without notification permission the sync returned early and left native
+    adhans armed, so an adhan could still play through a phone whose
+    notifications were turned off. No permission now clears everything, as
+    off does.
+- **An iPhone that runs out of window now says so.** When the schedule is cut,
+  the last slot is a silent "Open the app to keep them coming" a minute after
+  the last alert it holds, instead of the alerts simply stopping.
+
+**What survives the app being closed**, answered for Iyad, 14 Sep:
+- **Scheduled notifications are delivered by the system** on both platforms,
+  app running or not. That covers an iPhone's adhan opening and every
+  reminder.
+- **Android re-arms after a restart.** expo-notifications uses
+  `setExactAndAllowWhileIdle` when exact alarms are allowed (`app.json`
+  declares both permissions), and both it and the adhan module re-arm on
+  boot.
+- **Two limits no app gets around.** Android's **Force stop** in Settings
+  holds every alarm until the app is opened again; swiping the app away does
+  not. An iPhone holds 64 pending notifications, about six days with
+  reminders on and twelve without, so it needs opening within that window.
+
+Verified: `tsc`, `adhan:check` (with the new schedule tests), `style:check`,
+`night:check`, `i18n:manifest`, `audio:manifest --check`, lint (only the four
+standing errors elsewhere); `:adhan-alarm:compileReleaseKotlin` in the
+prebuilt copy. Looked at on web at 360, dark and light: Dhuhr on the adhan,
+Dhuhr on Tone, ʿIsha off, the quiet sheet, the voice sheet. Clicked through
+the reset: Adhan, Tone, Adhan leaves Dhuhr on Al Maghriby, Short, with the
+store reading `mode: adhan`. ʿIsha, never given a voice, opens the sheet.
+
+**Not seen, and only a phone can show it:** the volume following a drag
+during a preview, the quiet sheet's Focus switch on an iPhone, and the
+window note. All of it needs the next `eas build`.

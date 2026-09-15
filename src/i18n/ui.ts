@@ -984,12 +984,37 @@ export const EN = {
   'alert.test.set': 'It rings at {time}. Lock the phone and wait.',
   'alert.last': 'Last time, {prayer} at {time}: {what}.',
   'alert.last.after': '{what} after {n} seconds',
-  'alert.applyAll': 'Use these for all prayers',
+  'alert.applyAll': 'Use for all five prayers',
+  'alert.applyAll.note': 'Replaces the alerts of the other four',
   'alert.applied': 'All five prayers now match',
+  /*
+    The page says what will happen, in one sentence under the prayer's name
+    (direction A, 14 Sep 2026). {time} is set in gold where it falls.
+  */
+  'alert.says.full': 'At {time} your phone plays the full adhan.',
+  'alert.says.short': 'At {time} your phone plays the start of the adhan.',
+  'alert.says.tone': 'At {time} your phone sounds a notification.',
+  'alert.says.silent': 'At {time} a notification arrives without a sound.',
+  'alert.says.off': 'Nothing happens at {prayer}.',
+  'alert.says.pre': 'A reminder comes first, at {time}.',
+  'alert.preReminder.other': 'Reminder before',
+  'alert.volume.label': 'Volume',
+  'alert.voice.chosen': 'chosen for {prayer}',
+  'alert.preview.playing': 'Playing',
+  /* The row that opens the quiet-phone switches, naming what they are set to. */
+  'alert.quiet.stays': 'Stays quiet',
+  'alert.quiet.onSilent': 'Plays on silent or vibrate',
+  'alert.quiet.inDnd': 'Plays in Do Not Disturb',
+  'alert.quiet.both': 'Plays through both',
+  'alert.quiet.focus': 'Sounds during Focus',
+  'alert.quiet.for': 'For {prayer} only. Each prayer keeps its own.',
+  /* An iPhone holds a few days of notifications; this is the last one when it cannot hold more. */
+  'reminders.window.title': 'Prayer alerts',
+  'reminders.window.body': 'Open the app to keep them coming. An iPhone holds only a few days at a time.',
   'dropdown.close': 'Close',
   /* The bell and the Reminders rows name a prayer's alert in a word. */
   'alert.state.adhan': 'Adhan',
-  'alert.state.sound': 'Sound',
+  'alert.state.sound': 'Tone',
   'alert.state.silent': 'Silent',
   'alert.state.off': 'Off',
   'alert.bell': '{prayer} alert: {state}',

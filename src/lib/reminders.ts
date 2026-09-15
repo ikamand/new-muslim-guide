@@ -58,6 +58,12 @@ export type PrayerAlert = {
   mode: AlertMode;
   /** The recording, for `adhan`. Kept while another mode is chosen, so coming back finds it. */
   voice: AdhanVoiceId;
+  /**
+   * Whether somebody has chosen this prayer's voice. Until they have, tapping
+   * Adhan opens the voice sheet; after, it brings the kept voice straight back
+   * (14 Sep 2026: switching to Tone and back to Adhan read as a reset).
+   */
+  voiceChosen: boolean;
   length: AdhanLength;
   /**
    * Android: how loud the adhan plays, as a share of the phone's media volume
@@ -87,6 +93,7 @@ export function defaultAlert(id: PrayerId): PrayerAlert {
   return {
     mode: 'off',
     voice: defaultVoiceFor(id),
+    voiceChosen: false,
     length: 'full',
     volume: DEFAULT_ADHAN_VOLUME,
     preReminderMinutes: 0,
@@ -138,8 +145,18 @@ export function parseReminderSettings(raw: unknown): ReminderSettings {
     for (const id of PRAYER_IDS) {
       const entry = entries[id];
       if (typeof entry !== 'object' || entry === null) continue;
-      const { mode, voice, length, volume, preReminderMinutes, leadMinutes, playOnSilent, playInDnd, soundInFocus } =
-        entry as Record<string, unknown>;
+      const {
+        mode,
+        voice,
+        voiceChosen,
+        length,
+        volume,
+        preReminderMinutes,
+        leadMinutes,
+        playOnSilent,
+        playInDnd,
+        soundInFocus,
+      } = entry as Record<string, unknown>;
       const base = defaultAlert(id);
       const readMode = ALERT_MODES.includes(mode as AlertMode) ? (mode as AlertMode) : base.mode;
       const wasNotification = readMode === 'sound' || readMode === 'silent';
@@ -147,6 +164,8 @@ export function parseReminderSettings(raw: unknown): ReminderSettings {
         mode: readMode,
         // A voice dropped from a later build, or a Fajr recording stored against another prayer, reads as the default.
         voice: isAdhanVoiceId(voice) && voiceAllowedFor(id, voice) ? voice : base.voice,
+        // Saved before the flag existed, a prayer on the adhan had its voice chosen in the sheet.
+        voiceChosen: voiceChosen === true || (voiceChosen === undefined && readMode === 'adhan'),
         length: length === 'short' ? 'short' : 'full',
         volume: readVolume(volume),
         preReminderMinutes: isLead(preReminderMinutes)
@@ -189,7 +208,11 @@ export function applyAlertToAll(settings: ReminderSettings, id: PrayerId): Remin
   for (const other of PRAYER_IDS) {
     const ownKind = other === 'fajr' ? 'fajr' : 'other';
     const takesVoice = other === id || kind === ownKind;
-    alerts[other] = { ...source, voice: takesVoice ? source.voice : settings.alerts[other].voice };
+    alerts[other] = {
+      ...source,
+      voice: takesVoice ? source.voice : settings.alerts[other].voice,
+      voiceChosen: takesVoice ? source.voiceChosen : settings.alerts[other].voiceChosen,
+    };
   }
   return { alerts };
 }

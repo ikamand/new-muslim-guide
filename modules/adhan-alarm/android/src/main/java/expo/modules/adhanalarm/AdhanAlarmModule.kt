@@ -76,6 +76,10 @@ class AdhanAlarmModule : Module() {
         AdhanPreview.stop()
       }
 
+      AsyncFunction("previewVolume") { volume: Double ->
+        AdhanPreview.setVolume(volume)
+      }
+
       Function<String?>("lastOutcome") {
         AdhanStore.lastOutcome(context)
       }

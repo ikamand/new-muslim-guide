@@ -75,9 +75,16 @@ Built 14 Sep 2026; the plan entry is "The adhan" in `docs/ui-redesign-plan.md`.
   same day, after the first build stopped on volume up.
 - **Try what 14 Sep's second pass added, on the same build.** Short and Full
   in a prayer's sheet each play what the alarm will play; the play button
-  beside the volume bar plays the short adhan at that volume, and the phone's
-  own media volume comes back afterwards; a Pre-Adhan reminder arrives its
+  beside the volume bar plays the length the prayer is set to at that volume,
+  dragging the bar while it plays changes it as you drag, and the phone's own
+  media volume comes back afterwards; a Pre-Adhan reminder arrives its
   minutes before the adhan. Added 14 Sep 2026.
+- **Try direction A on the same build.** Adhan, Tone, Adhan on a prayer with a
+  voice stays on that voice; "When the phone is quiet" opens its sheet and
+  the row under it reads what was set. Then close the app by swiping it away
+  and let one adhan and one reminder come; restart the phone and let the next
+  come too. On an iPhone, turn on Sound during Focus and let the opening come
+  through a Focus. Added 14 Sep 2026.
 - **Try split screen and pop-up view on the same build.** It also restarts the
   screen on a multi-window resize (`plugins/with-resize-restart.js`). Open the
   app in split screen and in a pop-up, drag the divider: it should reload to

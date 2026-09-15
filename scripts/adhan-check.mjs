@@ -40,7 +40,8 @@ import {
   voiceAllowedFor,
 } from '../src/content/adhan-voices.ts';
 import { AUDIO_SOURCE_BY_ID, SOURCES } from '../src/content/audio-sources.ts';
-import { computeDay, inferProfile } from '../src/lib/prayer-times.ts';
+import { fitToPlatform, prayerAlertSchedule } from '../src/lib/alert-schedule.ts';
+import { computeDay, inferProfile, PRAYER_LABEL } from '../src/lib/prayer-times.ts';
 import {
   applyAlertToAll,
   DEFAULT_REMINDERS,
@@ -173,6 +174,67 @@ if (misfiled.alerts.dhuhr.preReminderMinutes !== 0) fail('a reminder outside the
 if (misfiled.alerts.dhuhr.volume !== 1) fail('a volume above the range was not held to it');
 if (misfiled.alerts.dhuhr.length !== 'full') fail('an unknown length was accepted');
 if (parseReminderSettings('not an object') !== DEFAULT_REMINDERS) fail('garbage did not read as the defaults');
+
+const kept = parseReminderSettings({
+  alerts: { dhuhr: { mode: 'adhan', voice: 'najar' }, asr: { mode: 'sound', voice: 'najar' } },
+});
+if (kept.alerts.dhuhr.voiceChosen !== true) fail('an adhan saved before voiceChosen did not count as chosen, so Adhan would reopen its sheet');
+if (kept.alerts.asr.voiceChosen !== false) fail('a Tone alert counted a voice as chosen');
+
+/* ── What each phone is handed ─────────────────────────────── */
+
+const say = (key) => key;
+const handed = (plan, id, kind) => {
+  const entry = find(id, kind);
+  return entry && plan.items.find((item) => item.fireAt.getTime() === entry.fireAt.getTime() && item.title === PRAYER_LABEL[id]);
+};
+
+const iphone = prayerAlertSchedule(planned, 'ios', false, say);
+if (iphone.adhans.length !== 0) fail('an iPhone was handed a native adhan');
+if (handed(iphone, 'dhuhr', 'alert')?.sound !== openingSoundFile('majale')) fail("an iPhone's adhan does not sound the opening of its voice");
+if (handed(iphone, 'dhuhr', 'pre')?.sound !== undefined) fail("an iPhone's Pre-Adhan reminder is not the phone's own sound");
+if (handed(iphone, 'asr', 'alert')?.sound !== undefined) fail('a Tone alert does not use the phone sound');
+if (handed(iphone, 'maghrib', 'alert')?.sound !== null) fail('a Silent alert makes a sound');
+if (iphone.items.some((item) => typeof item.sound === 'string' && !item.sound.endsWith('_opening.caf'))) {
+  fail('an iPhone was handed a sound other than an opening, which it cannot play past thirty seconds');
+}
+if (iphone.items.some((item) => item.timeSensitive)) fail('an alert went through Focus without Sound during Focus');
+const inFocus = prayerAlertSchedule(
+  planReminders(london, profile, { alerts: { ...settings.alerts, dhuhr: { ...settings.alerts.dhuhr, soundInFocus: true } } }, from, 1),
+  'ios',
+  false,
+  say,
+);
+if (!inFocus.items.some((item) => item.timeSensitive && item.fireAt.getTime() === timeOf('dhuhr'))) {
+  fail('Sound during Focus did not reach the adhan notification');
+}
+
+const android = prayerAlertSchedule(planned, 'android', true, say);
+if (android.adhans.length !== 1 || android.adhans[0].sound !== rawName('majale')) fail('Android was not handed the full adhan for Dhuhr');
+if (android.adhans[0]?.fireAt !== timeOf('dhuhr')) fail("Android's adhan is not at Dhuhr's time");
+if (android.items.some((item) => item.fireAt.getTime() === timeOf('dhuhr'))) fail('Android got a notification as well as the adhan at Dhuhr');
+if (!android.items.some((item) => item.fireAt.getTime() === timeOf('dhuhr') - 30 * 60_000)) fail("Android lost Dhuhr's Pre-Adhan reminder");
+const shortDhuhr = planReminders(london, profile, { alerts: { ...settings.alerts, dhuhr: { ...settings.alerts.dhuhr, length: 'short' } } }, from, 1);
+if (prayerAlertSchedule(shortDhuhr, 'android', true, say).adhans[0]?.sound !== shortRawName('majale')) {
+  fail('a prayer set to the short adhan was not handed the short recording');
+}
+const withoutModule = prayerAlertSchedule(planned, 'android', false, say);
+if (withoutModule.adhans.length !== 0 || handed(withoutModule, 'dhuhr', 'alert')?.sound !== undefined) {
+  fail('an Android build without the module lost the Dhuhr alert instead of sounding the phone');
+}
+
+const allOn = {
+  alerts: Object.fromEntries(
+    ['fajr', 'dhuhr', 'asr', 'maghrib', 'isha'].map((id) => [id, { ...defaultAlert(id), mode: 'adhan', preReminderMinutes: 10 }]),
+  ),
+};
+const fortnight = prayerAlertSchedule(planReminders(london, profile, allOn, from), 'ios', false, say).items;
+const held = fitToPlatform(fortnight, 'ios', say);
+if (fortnight.length <= 60) fail('the window test never reached the iPhone cap');
+if (held.length > 60) fail(`an iPhone was handed ${held.length} notifications, past what it holds`);
+if (held[held.length - 1]?.title !== 'reminders.window.title') fail('a cut iPhone schedule does not end by asking to open the app');
+if (held.some((item, index) => index > 0 && item.fireAt < held[index - 1].fireAt)) fail('a held schedule is not nearest first');
+if (fitToPlatform(fortnight, 'android', say).length !== fortnight.length) fail('Android was cut to the iPhone cap');
 
 /* "Use these for all prayers": the mode and overrides go everywhere, a voice only to its own kind. */
 const mixed = {

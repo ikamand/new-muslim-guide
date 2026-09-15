@@ -1,7 +1,7 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { AppState, Platform, Pressable, ScrollView, StyleSheet, Switch, View } from 'react-native';
+import { AppState, Platform, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 
 import {
   adhanAlarmAvailable,
@@ -9,56 +9,64 @@ import {
   lastAdhanOutcome,
   onAdhanPreviewEnd,
   ringAdhanSoon,
+  setAdhanPreviewVolume,
   startAdhanPreview,
   stopAdhanPreview,
   TEST_PREFIX,
   type AdhanOutcome,
 } from '../../../modules/adhan-alarm';
+import DERIVED from '@/assets/adhan/derived.json';
 import { Dropdown } from '@/components/dropdown';
+import { Glyph } from '@/components/illustrations';
 import { Panel } from '@/components/panel';
 import { Segmented } from '@/components/segmented';
 import { ThemedText } from '@/components/themed-text';
 import { VolumeSlider } from '@/components/volume-slider';
 import { getVoice, rawName, shortRawName } from '@/content/adhan-voices';
-import { MaxContentWidth, Spacing } from '@/constants/theme';
+import { MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { usePrayerTimes } from '@/hooks/use-prayer-times';
-import { adhanChannels, adhanInput, useReminders } from '@/hooks/use-reminders';
+import { useReminders } from '@/hooks/use-reminders';
 import { useTheme } from '@/hooks/use-theme';
 import type { UIKey } from '@/i18n/ui';
+import { adhanChannels, adhanInput } from '@/lib/alert-schedule';
 import { formatTime, PRAYER_IDS, PRAYER_LABEL } from '@/lib/prayer-times';
 import { ALERT_MODES, PRE_REMINDER_CHOICES, type AlertMode, type PrayerAlert } from '@/lib/reminders';
 
 /**
- * One prayer's alert, on one screen.
+ * One prayer's alert, on one screen that says what will happen.
  *
- * ## Why it looks like this (Iyad, 14 Sep 2026)
+ * ## Direction A (Iyad, 14 Sep 2026)
  *
- * The first version was four radio rows, then a voice list, then the lead
- * times as five more rows: a page of scrolling to set two things. Iyad: "a
- * very simple 2 settings is taking a full page now where it can be a lot more
- * beautiful and clean." So it is Settings' own panel. What the time does is
- * one segmented line; the voice is one row that opens a sheet, the way the
- * Qur'an tab chooses a reciter; the Pre-Adhan reminder is a dropdown. Only
- * the rows the chosen alert uses are drawn.
+ * Chosen from the audit canvas
+ * (claude.ai/artifact/SJDDSXwK53LgR6kxEYFyeY). The first version showed
+ * controls and left the outcome to be added up; this one opens with the
+ * prayer and one sentence saying what the phone will do at its time, then a
+ * single panel: Adhan, Tone, Silent and Off; the voice; the volume; the
+ * Pre-Adhan reminder; and one row to the quiet-phone switches, which are set
+ * once and so live on a screen of their own. What went: the second panel,
+ * its paragraph, the prayer's time in a legend, and "Sound", which the adhan
+ * is too.
  *
- * ## Why a page per prayer
+ * ## Adhan takes effect on the tap
  *
- * The choices differ by prayer. Dhuhr and ʿAsr fall in working hours and Fajr
- * is when people sleep, so "play even on silent" is right for one and wrong
- * for another. "Use these for all prayers" is the one tap that makes five
- * alike.
+ * In the first version Adhan opened the voice sheet and waited, so switching
+ * to Tone and back left the prayer on Tone with nothing ticked, which read as
+ * a reset. Now it brings back the voice the prayer kept. Only a prayer that
+ * has never had a voice chosen opens the sheet, because an adhan needs one.
  *
  * ## The platforms
  *
- * Android plays the recording from the app, short or whole, at a volume of
- * its own, and can check the phone first. An iPhone plays only the opening as
- * the notification's sound, cannot play through the silent switch, and can
- * only be let through a Focus. The web preview draws Android's layout, the
- * fuller one, because the web build exists to look at phone screens.
+ * Android plays the recording, short or full, at a volume of its own. An
+ * iPhone plays the opening as the notification's sound, and has no volume or
+ * Full. The web preview draws Android's layout, because the web build exists
+ * to look at phone screens.
  */
 
 const LAYOUT: 'ios' | 'android' = Platform.OS === 'ios' ? 'ios' : 'android';
+
+/** Written by `npm run adhan:audio`, so the lengths shown are the files' own. */
+const LENGTHS = DERIVED as Record<string, { openingSeconds: number; fullSeconds: number }>;
 
 const STATE: Record<AlertMode, UIKey> = {
   adhan: 'alert.state.adhan',
@@ -74,6 +82,11 @@ const BELL: Record<AlertMode, 'notifications' | 'notifications-outline' | 'notif
   off: 'notifications-off-outline',
 };
 
+const clock = (seconds: number) => {
+  const whole = Math.round(seconds);
+  return `${Math.floor(whole / 60)}:${String(whole % 60).padStart(2, '0')}`;
+};
+
 export default function PrayerAlertScreen() {
   const theme = useTheme();
   const { t } = useLocale();
@@ -85,6 +98,8 @@ export default function PrayerAlertScreen() {
   const [testAt, setTestAt] = useState<Date | null>(null);
   const [outcome, setOutcome] = useState<AdhanOutcome | null>(() => lastAdhanOutcome());
   const [previewSound, setPreviewSound] = useState<string | null>(null);
+  // The level under the finger, so the percentage moves with the bar before it is saved.
+  const [liveVolume, setLiveVolume] = useState<number | null>(null);
 
   // What happened to the last adhan changes while the app is away, so read it again on return.
   useEffect(() => {
@@ -110,6 +125,9 @@ export default function PrayerAlertScreen() {
   const voice = getVoice(alert.voice);
   const time = today?.prayers.find((prayer) => prayer.id === id)?.time;
   const adhan = alert.mode === 'adhan';
+  const short = LAYOUT === 'ios' || alert.length === 'short';
+  const known = LENGTHS[alert.voice];
+  const seconds = known ? (short ? known.openingSeconds : known.fullSeconds) : null;
 
   const change = (patch: Partial<PrayerAlert>) => {
     setApplied(false);
@@ -117,28 +135,37 @@ export default function PrayerAlertScreen() {
   };
 
   const openVoices = () => router.push({ pathname: '/adhan-voice/[id]', params: { id } });
+  const openQuiet = () => router.push({ pathname: '/quiet-phone/[id]', params: { id } });
 
-  /* Adhan is chosen in its sheet, with a voice; the other three take effect on the tap. */
-  const chooseMode = (mode: AlertMode) => (mode === 'adhan' ? openVoices() : change({ mode }));
+  /* Adhan takes effect like its three neighbours; only a prayer with no voice chosen yet opens the sheet. */
+  const chooseMode = (mode: AlertMode) => {
+    if (mode === 'adhan' && alert.mode !== 'adhan' && !alert.voiceChosen) {
+      openVoices();
+      return;
+    }
+    change({ mode });
+  };
 
   const ruled = { borderTopWidth: StyleSheet.hairlineWidth, borderTopColor: theme.border };
 
-  const switchRow = (key: UIKey, value: boolean, onValueChange: (next: boolean) => void, first = false) => (
-    <View style={[styles.row, !first && ruled]}>
-      <ThemedText type="default" style={styles.grow}>
-        {t(key)}
-      </ThemedText>
-      <Switch
-        value={value}
-        onValueChange={onValueChange}
-        trackColor={{ false: theme.backgroundSelected, true: theme.accent }}
-        thumbColor={theme.background}
-      />
-    </View>
-  );
+  /* The sentence under the prayer's name: what the phone does at its time, and the reminder before. */
+  const saysKey: UIKey | null =
+    alert.mode === 'off'
+      ? null
+      : adhan
+        ? short
+          ? 'alert.says.short'
+          : 'alert.says.full'
+        : alert.mode === 'sound'
+          ? 'alert.says.tone'
+          : 'alert.says.silent';
+  const reminderAt =
+    time && alert.mode !== 'off' && alert.preReminderMinutes > 0
+      ? formatTime(new Date(time.getTime() - alert.preReminderMinutes * 60_000))
+      : null;
 
-  /* The volume is heard on the adhan this prayer will play, short or full (Iyad, 14 Sep 2026); stop ends a full one. */
-  const volumeSound = alert.length === 'short' ? shortRawName(alert.voice) : rawName(alert.voice);
+  /* The volume is heard on the adhan this prayer will play, short or full; the bar moves it while it plays. */
+  const volumeSound = short ? shortRawName(alert.voice) : rawName(alert.voice);
   const volumePlaying = previewSound === volumeSound;
   const toggleVolumePreview = async () => {
     if (volumePlaying) {
@@ -166,7 +193,7 @@ export default function PrayerAlertScreen() {
 
   return (
     <ScrollView style={{ backgroundColor: theme.background }} contentContainerStyle={styles.content}>
-      <Stack.Screen options={{ title: label }} />
+      <Stack.Screen options={{ title: '' }} />
 
       {granted === false && (
         <View style={[styles.notice, { borderLeftColor: theme.accent }]}>
@@ -176,10 +203,30 @@ export default function PrayerAlertScreen() {
         </View>
       )}
 
-      <Panel
-        mark={<Ionicons name={BELL[alert.mode]} size={16} color={theme.gold} />}
-        title={t('alert.panel.time')}
-        state={time ? formatTime(time) : undefined}>
+      <View style={styles.head}>
+        <View style={[styles.disc, { borderColor: theme.gold }]}>
+          <Glyph name={id} size={22} color={theme.gold} />
+        </View>
+        <ThemedText type="subtitle">{label}</ThemedText>
+      </View>
+
+      {time ? (
+        <ThemedText type="lead">
+          {saysKey ? (
+            <Timed template={t(saysKey)} time={formatTime(time)} />
+          ) : (
+            t('alert.says.off').replace('{prayer}', label)
+          )}
+          {reminderAt ? (
+            <>
+              {' '}
+              <Timed template={t('alert.says.pre')} time={reminderAt} />
+            </>
+          ) : null}
+        </ThemedText>
+      ) : null}
+
+      <Panel mark={<Ionicons name={BELL[alert.mode]} size={16} color={theme.gold} />} title={t('alert.panel.time')}>
         <View style={styles.modes}>
           <Segmented
             options={ALERT_MODES.map((mode) => ({ value: mode, label: t(STATE[mode]) }))}
@@ -197,66 +244,92 @@ export default function PrayerAlertScreen() {
             style={({ pressed }) => [styles.row, ruled, pressed && { opacity: 0.6 }]}>
             <ThemedText type="default">{t('alert.voice')}</ThemedText>
             <View style={styles.value}>
-              <ThemedText type="default" themeColor="textSecondary" numberOfLines={1} style={styles.shrink}>
-                {LAYOUT === 'android'
-                  ? `${voice.short} · ${t(alert.length === 'short' ? 'alert.length.short' : 'alert.length.full')}`
-                  : voice.short}
-              </ThemedText>
+              <View style={styles.valueText}>
+                <ThemedText type="default" numberOfLines={1}>
+                  {voice.short}
+                </ThemedText>
+                {seconds !== null ? (
+                  <ThemedText type="caption" themeColor="textSecondary" style={styles.tabular}>
+                    {LAYOUT === 'android'
+                      ? `${t(short ? 'alert.length.short' : 'alert.length.full')}, ${clock(seconds)}`
+                      : clock(seconds)}
+                  </ThemedText>
+                ) : null}
+              </View>
               <Ionicons name="chevron-forward" size={18} color={theme.accent} />
             </View>
           </Pressable>
         )}
 
         {adhan && LAYOUT === 'android' && (
-          <View style={[styles.sliderRow, ruled]}>
-            <VolumeSlider value={alert.volume} onChange={(volume) => change({ volume })} label={t('alert.volume')} />
-            {adhanPreviewAvailable && (
-              <Pressable
-                onPress={() => void toggleVolumePreview()}
-                accessibilityRole="button"
-                accessibilityLabel={t(volumePlaying ? 'alert.preview.stop' : 'alert.preview')}
-                hitSlop={8}
-                style={({ pressed }) => [styles.play, { opacity: pressed ? 0.6 : 1 }]}>
-                <Ionicons name={volumePlaying ? 'stop-circle-outline' : 'play-circle-outline'} size={28} color={theme.accent} />
-              </Pressable>
-            )}
+          <View style={[styles.volume, ruled]}>
+            <View style={styles.volumeHead}>
+              <ThemedText type="default">{t('alert.volume.label')}</ThemedText>
+              <ThemedText type="small" themeColor="textSecondary" style={styles.tabular}>
+                {Math.round((liveVolume ?? alert.volume) * 100)}%
+              </ThemedText>
+            </View>
+            <View style={styles.sliderRow}>
+              <VolumeSlider
+                value={alert.volume}
+                onChange={(volume) => {
+                  setLiveVolume(null);
+                  change({ volume });
+                }}
+                onLive={(volume) => {
+                  setLiveVolume(volume === alert.volume ? null : volume);
+                  if (volumePlaying) void setAdhanPreviewVolume(volume);
+                }}
+                label={t('alert.volume')}
+              />
+              {adhanPreviewAvailable && (
+                <Pressable
+                  onPress={() => void toggleVolumePreview()}
+                  accessibilityRole="button"
+                  accessibilityLabel={t(volumePlaying ? 'alert.preview.stop' : 'alert.preview')}
+                  hitSlop={8}
+                  style={({ pressed }) => [styles.play, { opacity: pressed ? 0.6 : 1 }]}>
+                  <Ionicons
+                    name={volumePlaying ? 'stop-circle-outline' : 'play-circle-outline'}
+                    size={28}
+                    color={theme.accent}
+                  />
+                </Pressable>
+              )}
+            </View>
           </View>
         )}
-
-        {adhan && LAYOUT === 'ios' && switchRow('alert.soundInFocus', alert.soundInFocus, (next) => change({ soundInFocus: next }))}
 
         {alert.mode !== 'off' && (
           <View style={[styles.row, ruled]}>
             <ThemedText type="default" style={styles.grow}>
-              {t('alert.preReminder')}
+              {t(adhan ? 'alert.preReminder' : 'alert.preReminder.other')}
             </ThemedText>
             <Dropdown
-              label={t('alert.preReminder')}
+              label={t(adhan ? 'alert.preReminder' : 'alert.preReminder.other')}
               options={reminderOptions}
               value={alert.preReminderMinutes}
               onChange={(minutes) => change({ preReminderMinutes: minutes })}
             />
           </View>
         )}
+
+        {adhan && (
+          <Pressable
+            onPress={openQuiet}
+            accessibilityRole="button"
+            accessibilityLabel={`${t('alert.quiet')}: ${quietSummary(alert, t)}`}
+            style={({ pressed }) => [styles.row, ruled, pressed && { opacity: 0.6 }]}>
+            <View style={styles.labelColumn}>
+              <ThemedText type="default">{t('alert.quiet')}</ThemedText>
+              <ThemedText type="small" themeColor="textSecondary">
+                {quietSummary(alert, t)}
+              </ThemedText>
+            </View>
+            <Ionicons name="chevron-forward" size={18} color={theme.accent} />
+          </Pressable>
+        )}
       </Panel>
-
-      {adhan && LAYOUT === 'android' && (
-        <View style={styles.block}>
-          <Panel mark={<Ionicons name="moon-outline" size={16} color={theme.gold} />} title={t('alert.quiet')}>
-            {switchRow('alert.playOnSilent', alert.playOnSilent, (next) => change({ playOnSilent: next }), true)}
-            {switchRow('alert.playInDnd', alert.playInDnd, (next) => change({ playInDnd: next }))}
-          </Panel>
-          <ThemedText type="small" themeColor="textSecondary">
-            {t('alert.quiet.help')}
-          </ThemedText>
-        </View>
-      )}
-
-      {adhan && LAYOUT === 'ios' && (
-        <ThemedText type="small" themeColor="textSecondary">
-          {t('alert.ios.help')}
-        </ThemedText>
-      )}
 
       <View style={styles.actions}>
         {adhan && adhanAlarmAvailable && (
@@ -264,7 +337,12 @@ export default function PrayerAlertScreen() {
             <Pressable
               onPress={() => void ringSoon()}
               accessibilityRole="button"
-              style={({ pressed }) => ({ opacity: pressed ? 0.6 : 1 })}>
+              style={({ pressed }) => [
+                styles.button,
+                { borderColor: theme.border },
+                pressed && { backgroundColor: theme.backgroundSelected },
+              ]}>
+              <Ionicons name="timer-outline" size={20} color={theme.accent} />
               <ThemedText type="smallBold" themeColor="accent">
                 {t('alert.test')}
               </ThemedText>
@@ -293,19 +371,47 @@ export default function PrayerAlertScreen() {
           <ThemedText type="smallBold" themeColor={applied ? 'textSecondary' : 'accent'}>
             {t(applied ? 'alert.applied' : 'alert.applyAll')}
           </ThemedText>
+          {!applied && (
+            <ThemedText type="caption" themeColor="textSecondary">
+              {t('alert.applyAll.note')}
+            </ThemedText>
+          )}
         </Pressable>
       </View>
     </ScrollView>
   );
 }
 
+/** A sentence with its time set in gold, the way the app sets a prayer's time. */
+function Timed({ template, time }: { template: string; time: string }) {
+  const [before, after = ''] = template.split('{time}');
+  return (
+    <>
+      {before}
+      <ThemedText type="lead" themeColor="gold">
+        {time}
+      </ThemedText>
+      {after}
+    </>
+  );
+}
+
+/** The quiet-phone switches in a few words, for the row that opens them. */
+function quietSummary(alert: PrayerAlert, t: (key: UIKey) => string): string {
+  if (LAYOUT === 'ios') return t(alert.soundInFocus ? 'alert.quiet.focus' : 'alert.quiet.stays');
+  if (alert.playOnSilent && alert.playInDnd) return t('alert.quiet.both');
+  if (alert.playOnSilent) return t('alert.quiet.onSilent');
+  if (alert.playInDnd) return t('alert.quiet.inDnd');
+  return t('alert.quiet.stays');
+}
+
 /** The last adhan in a sentence, with how long it played when something stopped it. */
 function outcomeText(outcome: AdhanOutcome, t: (key: UIKey) => string): string {
   const what = t(outcomeKey(outcome));
-  const seconds = outcome.seconds ?? 0;
+  const played = outcome.seconds ?? 0;
   const said =
-    outcome.played && outcome.reason !== 'finished' && seconds > 0
-      ? t('alert.last.after').replace('{what}', what).replace('{n}', String(seconds))
+    outcome.played && outcome.reason !== 'finished' && played > 0
+      ? t('alert.last.after').replace('{what}', what).replace('{n}', String(played))
       : what;
   return t('alert.last')
     .replace('{prayer}', outcome.title)
@@ -344,9 +450,9 @@ function outcomeKey(outcome: AdhanOutcome): UIKey {
 const styles = StyleSheet.create({
   content: {
     paddingHorizontal: Spacing.four,
-    paddingTop: Spacing.five,
+    paddingTop: Spacing.two,
     paddingBottom: Spacing.six,
-    gap: Spacing.five,
+    gap: Spacing.four,
     width: '100%',
     maxWidth: MaxContentWidth,
     alignSelf: 'center',
@@ -355,6 +461,19 @@ const styles = StyleSheet.create({
     borderLeftWidth: 3,
     paddingLeft: Spacing.three,
     paddingVertical: Spacing.one,
+  },
+  head: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.three,
+  },
+  disc: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    borderWidth: 1.2,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   modes: {
     paddingBottom: Spacing.three,
@@ -366,23 +485,32 @@ const styles = StyleSheet.create({
     gap: Spacing.three,
     paddingVertical: Spacing.three,
   },
-  sliderRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: Spacing.two,
-    paddingVertical: Spacing.one,
-  },
   value: {
     flexShrink: 1,
     flexDirection: 'row',
     alignItems: 'center',
     gap: Spacing.one,
   },
-  shrink: {
+  valueText: {
     flexShrink: 1,
+    alignItems: 'flex-end',
   },
-  grow: {
-    flex: 1,
+  labelColumn: {
+    flexShrink: 1,
+    gap: Spacing.half,
+  },
+  volume: {
+    paddingTop: Spacing.three,
+  },
+  volumeHead: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  sliderRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.two,
   },
   play: {
     width: 44,
@@ -390,17 +518,30 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  block: {
-    gap: Spacing.two,
+  grow: {
+    flex: 1,
+  },
+  tabular: {
+    fontVariant: ['tabular-nums'],
   },
   actions: {
-    gap: Spacing.three,
+    gap: Spacing.four,
   },
   test: {
-    gap: Spacing.one,
+    gap: Spacing.two,
+  },
+  button: {
+    height: 44,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: Spacing.two,
+    borderWidth: 1,
+    borderRadius: Radius.rule,
   },
   applyAll: {
     alignSelf: 'flex-start',
-    paddingVertical: Spacing.two,
+    gap: Spacing.half,
+    paddingVertical: Spacing.one,
   },
 });

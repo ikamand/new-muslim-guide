@@ -1,28 +1,17 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { AppState, Platform } from 'react-native';
 
-import {
-  adhanAlarmAvailable,
-  cancelAdhanAlarms,
-  replaceAdhanAlarms,
-  type AdhanAlarmInput,
-  type AdhanChannelNames,
-} from '../../modules/adhan-alarm';
-import { getVoice, openingSoundFile, rawName, shortRawName } from '@/content/adhan-voices';
+import { adhanAlarmAvailable, cancelAdhanAlarms, replaceAdhanAlarms } from '../../modules/adhan-alarm';
+import { getVoice } from '@/content/adhan-voices';
+import { adhanChannels, fitToPlatform, prayerAlertSchedule } from '@/lib/alert-schedule';
 import { useLocale } from '@/hooks/use-locale';
 import { useLocation } from '@/hooks/use-location';
 import { useSettings, type Settings } from '@/hooks/use-settings';
 import type { UIKey } from '@/i18n/ui';
 import { hijriDate } from '@/lib/hijri';
-import {
-  cancelAll,
-  hasPermission,
-  requestPermission,
-  rescheduleItems,
-  type ScheduledItem,
-} from '@/lib/notifications';
+import { cancelAll, hasPermission, requestPermission, rescheduleItems } from '@/lib/notifications';
 import { useAwqatProfile } from '@/hooks/use-awqat-profile';
-import { PRAYER_IDS, PRAYER_LABEL, type PrayerId } from '@/lib/prayer-times';
+import { PRAYER_IDS, type PrayerId } from '@/lib/prayer-times';
 import {
   alertIsOn,
   applyAlertToAll,
@@ -55,17 +44,16 @@ import {
  *
  * Everything schedulable — prayer reminders, the suhoor and night wake-ups,
  * the adhkār window note, Thursday's Jumuʿah note — flows through one plan,
- * sorted by fire time and capped at 60, under the 64 iOS allows pending. What
- * gets cut is always the furthest away, and the next foreground top-up
- * restores it.
+ * sorted by fire time. On an iPhone it is capped under the 64 iOS allows
+ * pending, and what gets cut is always the furthest away, with a note asking
+ * to open the app in its place; the next foreground top-up restores it.
+ * Android is not capped (`fitToPlatform` in `lib/alert-schedule.ts`).
  *
  * An adhan on Android is the one exception (14 Sep 2026). It goes to the
  * native module in `modules/adhan-alarm`, which sets its own alarms, because a
  * notification cannot play three minutes of audio. Android has no 64 cap, so
  * those are not counted against it.
  */
-
-const PENDING_CAP = 60;
 
 /**
  * The reminders in one line, for a door: "Off", "3 of 5 · 10 minutes before",
@@ -116,33 +104,6 @@ export function describeAlert(alert: PrayerAlert, t: (key: UIKey) => string): st
   if (alert.mode === 'off') return t('alert.state.off');
   if (alert.mode === 'adhan') return `${t('alert.state.adhan')} · ${getVoice(alert.voice).short}`;
   return t(alert.mode === 'sound' ? 'alert.state.sound' : 'alert.state.silent');
-}
-
-/** The names Android lists for the adhan's two notifications in the app's settings. */
-export function adhanChannels(t: (key: UIKey) => string): AdhanChannelNames {
-  return { playing: t('adhan.channel.playing'), quiet: t('adhan.channel.quiet') };
-}
-
-/** One adhan for the native module, worded now, because nothing will be awake to word it when it fires. */
-export function adhanInput(
-  id: string,
-  fireAt: Date,
-  title: string,
-  alert: PrayerAlert,
-  t: (key: UIKey) => string,
-): AdhanAlarmInput {
-  return {
-    id,
-    fireAt: fireAt.getTime(),
-    sound: alert.length === 'short' ? shortRawName(alert.voice) : rawName(alert.voice),
-    title,
-    playingText: t('reminder.now'),
-    quietText: t('reminder.now'),
-    stopLabel: t('adhan.stop'),
-    playOnSilent: alert.playOnSilent,
-    playInDnd: alert.playInDnd,
-    volume: alert.volume,
-  };
 }
 
 /** True while any switch that schedules anything is on. */
@@ -209,59 +170,30 @@ export function useReminderSync(): void {
 
     const run = async () => {
       const on = anythingOn({ reminders, suhoorWakeUp, adhkarNote, jumuahNote, nightWakeUp });
-      if (!on || !coords) {
+      /*
+        Without permission nothing can be shown, and an adhan left scheduled
+        from before would still play through a phone whose notifications were
+        turned off. So no permission clears everything, as off does.
+      */
+      if (!on || !coords || !(await hasPermission())) {
         await cancelAll();
         await cancelAdhanAlarms();
         return;
       }
-      if (!(await hasPermission())) return;
 
       // Through the precedence hook, never `inferProfile`: a reminder firing
       // at one profile's time while the card shows another is the worst bug
       // this feature could have.
       const profile = profileFor(coords);
       const now = new Date();
-      const items: ScheduledItem[] = [];
-      const adhans: AdhanAlarmInput[] = [];
-
-      for (const planned of planReminders(coords, profile, reminders, now)) {
-        const { alert } = planned;
-        const title = PRAYER_LABEL[planned.prayerId];
-
-        // The Pre-Adhan reminder: a notification, silent only when the prayer's own alert is.
-        if (planned.kind === 'pre') {
-          items.push({
-            fireAt: planned.fireAt,
-            title,
-            body: t('reminder.soon').replace('{n}', String(alert.preReminderMinutes)),
-            sound: alert.mode === 'silent' ? null : undefined,
-          });
-          continue;
-        }
-
-        if (alert.mode === 'adhan' && adhanAlarmAvailable) {
-          adhans.push(adhanInput(planned.key, planned.fireAt, title, alert, t));
-          continue;
-        }
-
-        items.push({
-          fireAt: planned.fireAt,
-          title,
-          body: t('reminder.now'),
-          /*
-            An iPhone hears the adhan's opening as the notification's sound. An
-            Android phone without the module (a build from before it, the web
-            preview) gets its own notification sound rather than silence.
-          */
-          sound:
-            alert.mode === 'silent'
-              ? null
-              : alert.mode === 'adhan' && Platform.OS === 'ios'
-                ? openingSoundFile(alert.voice)
-                : undefined,
-          timeSensitive: alert.mode === 'adhan' && alert.soundInFocus,
-        });
-      }
+      const platform = Platform.OS === 'ios' ? 'ios' : Platform.OS === 'android' ? 'android' : 'web';
+      // What each phone is handed for the prayers: `lib/alert-schedule.ts`, checked by `npm run adhan:check`.
+      const { items, adhans } = prayerAlertSchedule(
+        planReminders(coords, profile, reminders, now),
+        platform,
+        adhanAlarmAvailable,
+        t,
+      );
 
       const inRamadan = (day: Date) => hijriDate(day)?.month === 9;
 
@@ -308,9 +240,8 @@ export function useReminderSync(): void {
         }
       }
 
-      items.sort((a, b) => a.fireAt.getTime() - b.fireAt.getTime());
       if (!active) return;
-      await rescheduleItems(items.slice(0, PENDING_CAP), t('settings.reminders'), t('reminders.channel.silent'));
+      await rescheduleItems(fitToPlatform(items, platform, t), t('settings.reminders'), t('reminders.channel.silent'));
       await replaceAdhanAlarms(adhans, adhanChannels(t));
     };
 

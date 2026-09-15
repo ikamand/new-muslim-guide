@@ -83,6 +83,19 @@ object AdhanPreview {
     handler.post { stopNow() }
   }
 
+  /** Follows the volume bar while a preview plays, so a level is judged by ear as it is set. */
+  fun setVolume(volume: Double) {
+    handler.post {
+      if (player == null) return@post
+      val current = hold
+      if (current != null) {
+        current.retarget(volume)
+      } else {
+        audio?.let { hold = VolumeHold.take(it, volume) }
+      }
+    }
+  }
+
   private fun stopNow() {
     val ended = sound ?: return
     sound = null

@@ -166,6 +166,8 @@ function RootStack() {
       <Stack.Screen name="prayer-alert/[id]" options={{ title: '', headerBackTitle: 'Back' }} />
       {/* Choosing a prayer's adhan: a sheet over its page, as choosing a reciter is. Titled inside. */}
       <Stack.Screen name="adhan-voice/[id]" options={{ presentation: 'modal', title: '' }} />
+      {/* A prayer's quiet-phone switches, set once: the same detour. Titled inside. */}
+      <Stack.Screen name="quiet-phone/[id]" options={{ presentation: 'modal', title: '' }} />
       <Stack.Screen name="qibla" options={{ title: 'Qibla', headerBackTitle: 'Back' }} />
       <Stack.Screen name="sources" options={{ title: 'Sources', headerBackTitle: 'Settings' }} />
     </Stack>

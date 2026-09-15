@@ -73,7 +73,7 @@ export default function AdhanVoiceScreen() {
 
   const choose = async (voice: AdhanVoiceId) => {
     await stopAdhanPreview();
-    const saved = await setAlert(id, { mode: 'adhan', voice, length });
+    const saved = await setAlert(id, { mode: 'adhan', voice, length, voiceChosen: true });
     if (saved && router.canGoBack()) router.back();
   };
 
@@ -87,15 +87,22 @@ export default function AdhanVoiceScreen() {
     <View style={[styles.list, { borderColor: theme.goldSoft }]}>
       {voices.map((voice, index) => {
         const voiceId = voice.id as AdhanVoiceId;
+        /* The voice the prayer keeps stays ticked while it is on Tone or Silent, so coming back finds it. */
         const selected =
-          alert.mode === 'adhan' && alert.voice === voiceId && (LAYOUT === 'ios' || alert.length === length);
+          (alert.mode === 'adhan' || alert.voiceChosen) &&
+          alert.voice === voiceId &&
+          (LAYOUT === 'ios' || alert.length === length);
         const known = LENGTHS[voiceId];
         const seconds = known ? (length === 'short' ? known.openingSeconds : known.fullSeconds) : null;
         const sound = previewSoundFor(voiceId, length);
         return (
           <View
             key={voiceId}
-            style={[styles.row, index > 0 && { borderTopWidth: StyleSheet.hairlineWidth, borderTopColor: theme.border }]}>
+            style={[
+              styles.row,
+              index > 0 && { borderTopWidth: StyleSheet.hairlineWidth, borderTopColor: theme.border },
+              selected && { backgroundColor: theme.backgroundElement },
+            ]}>
             <Pressable
               onPress={() => void choose(voiceId)}
               accessibilityRole="radio"
@@ -104,9 +111,15 @@ export default function AdhanVoiceScreen() {
               style={({ pressed }) => [styles.choice, pressed && { opacity: 0.6 }]}>
               <View style={styles.choiceText}>
                 <ThemedText type="default">{voice.name}</ThemedText>
-                {seconds !== null ? (
+                {sound !== null && playing === sound ? (
+                  <ThemedText type="small" themeColor="accent">
+                    {t('alert.preview.playing')}
+                  </ThemedText>
+                ) : seconds !== null ? (
                   <ThemedText type="small" themeColor="textSecondary" style={styles.tabular}>
-                    {clock(seconds)}
+                    {selected
+                      ? `${clock(seconds)}, ${t('alert.voice.chosen').replace('{prayer}', PRAYER_LABEL[id])}`
+                      : clock(seconds)}
                   </ThemedText>
                 ) : null}
               </View>

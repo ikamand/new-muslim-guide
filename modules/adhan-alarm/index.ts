@@ -58,6 +58,7 @@ type Native = {
   canScheduleExact(): boolean;
   previewStart?(sound: string, volume: number): Promise<void>;
   previewStop?(): Promise<void>;
+  previewVolume?(volume: number): Promise<void>;
   addListener?(event: 'onPreviewEnd', listener: (event: { sound: string }) => void): Subscription;
 };
 
@@ -110,6 +111,11 @@ export async function startAdhanPreview(sound: string, volume: number): Promise<
 
 export async function stopAdhanPreview(): Promise<void> {
   if (native?.previewStop) await native.previewStop();
+}
+
+/** Moves a playing preview to a new volume, as the bar is dragged. A build without it ignores the call. */
+export async function setAdhanPreviewVolume(volume: number): Promise<void> {
+  if (native?.previewVolume) await native.previewVolume(volume);
 }
 
 /** Called when a preview ends, by finishing, by Stop, or by another sound taking over. */

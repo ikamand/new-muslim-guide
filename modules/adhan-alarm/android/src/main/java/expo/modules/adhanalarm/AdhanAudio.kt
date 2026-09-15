@@ -24,8 +24,20 @@ object AdhanAudio {
 class VolumeHold private constructor(
   private val audio: AudioManager,
   private val previous: Int,
-  private val applied: Int,
+  private var applied: Int,
 ) {
+  /** Moves the held volume while it plays, still keeping the phone's own to give back. */
+  fun retarget(volume: Double) {
+    val max = audio.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
+    val target = (volume.coerceIn(0.0, 1.0) * max).roundToInt().coerceIn(1, max)
+    try {
+      audio.setStreamVolume(AudioManager.STREAM_MUSIC, target, 0)
+      applied = target
+    } catch (error: SecurityException) {
+      // Refused in Do Not Disturb on some phones; the level stays where it was.
+    }
+  }
+
   fun restore() {
     if (applied == previous) return
     try {

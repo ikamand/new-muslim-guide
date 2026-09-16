@@ -6,6 +6,7 @@
   android:minResizeHeight="130dp"
   android:minResizeWidth="250dp"
   android:minWidth="250dp"
+  android:previewImage="@drawable/prayer_widget_preview_row"
   android:previewLayout="@layout/prayer_widget_row_preview"
   android:resizeMode="horizontal|vertical"
   android:targetCellHeight="2"

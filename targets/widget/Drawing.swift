@@ -1,3 +1,4 @@
+import Foundation
 import SwiftUI
 
 /// A path from M, L, C and Z data, which is all `src/lib/svg-path.ts` sends.
@@ -70,58 +71,105 @@ struct Tones {
   }
 }
 
-private func round(_ width: Double) -> StrokeStyle {
+/// Round cap and join, as every stroke the app draws has.
+private func strokeStyle(_ width: Double) -> StrokeStyle {
   StrokeStyle(lineWidth: width, lineCap: .round, lineJoin: .round)
+}
+
+/// The paper disc under a mark, and the ring around the lit one.
+private func circle(at centre: CGPoint, radius: Double) -> Path {
+  let r = CGFloat(radius)
+  return Path(ellipseIn: CGRect(x: centre.x - r, y: centre.y - r, width: r * 2, height: r * 2))
+}
+
+/// A day mark at its place on the arch: the 24 grid scaled to the mark's box,
+/// and stroked after that scaling rather than before it, so the line is the 2.4
+/// viewBox units the schedule asks for and not 2.4 times 26/24.
+private func markPath(_ data: String, at centre: CGPoint, size: Double, stroke: Double) -> Path {
+  let scale = CGFloat(size) / 24
+  let place = CGAffineTransform(translationX: centre.x - CGFloat(size) / 2, y: centre.y - CGFloat(size) / 2)
+    .scaledBy(x: scale, y: scale)
+  return svgPath(data).applying(place).strokedPath(strokeStyle(stroke))
+}
+
+/// Anything drawn in the arch's viewBox, fitted to the view: scaled by the
+/// smaller axis and centred in what is left, so a viewBox that stops being
+/// square does not stretch.
+///
+/// A widget's view tree is archived and replayed out of process, where an
+/// immediate-mode drawing closure may never be asked to run, so this is a Shape
+/// and not a Canvas. What it is handed is already stroked, which is what keeps
+/// a width in the viewBox units widget-geometry.ts writes it in whatever size
+/// the widget is drawn at.
+struct ArchShape: Shape {
+  let box: [Double]
+  let drawing: Path
+
+  func path(in rect: CGRect) -> Path {
+    guard box.count == 4, box[2] > 0, box[3] > 0 else { return Path() }
+    let scale = min(rect.width / CGFloat(box[2]), rect.height / CGFloat(box[3]))
+    let fit = CGAffineTransform(
+      translationX: rect.minX + (rect.width - CGFloat(box[2]) * scale) / 2,
+      y: rect.minY + (rect.height - CGFloat(box[3]) * scale) / 2
+    )
+    .scaledBy(x: scale, y: scale)
+    .translatedBy(x: CGFloat(-box[0]), y: CGFloat(-box[1]))
+    return drawing.applying(fit)
+  }
 }
 
 /// The niche's arch: the inner line in the hairline gold, the outline in gold,
 /// and each prayer's mark on a paper disc at its place for the day. The lit
 /// prayer wears the ring; a passed mark keeps its gold and dims.
 struct ArchView: View {
-  let payload: WidgetPayload
+  let arch: WidgetPayload.Arch
+  let marks: [String: String]
   let day: WidgetPayload.Day?
   let entry: WidgetPayload.Entry?
   let palette: WidgetPayload.Palette
 
   var body: some View {
-    Canvas { context, size in
-      let arch = payload.arch
-      guard arch.viewBox.count == 4 else { return }
-      let box = arch.viewBox
-      let scale = min(size.width / box[2], size.height / box[3])
-      context.translateBy(x: (size.width - box[2] * scale) / 2, y: (size.height - box[3] * scale) / 2)
-      context.scaleBy(x: scale, y: scale)
-      context.translateBy(x: -box[0], y: -box[1])
-
-      let gold = Color(hex: palette.gold)
-      context.stroke(svgPath(arch.inner), with: .color(Color(hex: palette.goldSoft)), style: round(arch.innerStroke))
-      context.stroke(svgPath(arch.outer), with: .color(gold), style: round(arch.stroke))
-      guard let day, let entry else { return }
-
-      for id in prayerIds {
-        guard let point = day.points[id], point.count == 2 else { continue }
-        let centre = CGPoint(x: point[0], y: point[1])
-        let disc = arch.disc
-        context.fill(
-          Path(ellipseIn: CGRect(x: centre.x - disc, y: centre.y - disc, width: disc * 2, height: disc * 2)),
-          with: .color(Color(hex: palette.ground))
-        )
-        if entry.lit == id {
-          let ring = arch.ring
-          context.stroke(
-            Path(ellipseIn: CGRect(x: centre.x - ring, y: centre.y - ring, width: ring * 2, height: ring * 2)),
-            with: .color(gold),
-            style: round(arch.ringStroke)
-          )
+    let gold = Color(hex: palette.gold)
+    ZStack {
+      ArchShape(box: arch.viewBox, drawing: svgPath(arch.inner).strokedPath(strokeStyle(arch.innerStroke)))
+        .fill(Color(hex: palette.goldSoft))
+      ArchShape(box: arch.viewBox, drawing: svgPath(arch.outer).strokedPath(strokeStyle(arch.stroke)))
+        .fill(gold)
+      if let day, let entry {
+        // In this order, prayer by prayer, so a disc never lands on the mark before it.
+        ForEach(prayerIds, id: \.self) { id in
+          if let point = day.points[id], point.count == 2 {
+            let centre = CGPoint(x: point[0], y: point[1])
+            ArchShape(box: arch.viewBox, drawing: circle(at: centre, radius: arch.disc))
+              .fill(Color(hex: palette.ground))
+            if entry.lit == id {
+              ArchShape(
+                box: arch.viewBox,
+                drawing: circle(at: centre, radius: arch.ring).strokedPath(strokeStyle(arch.ringStroke))
+              )
+              .fill(gold)
+            }
+            if let data = marks[id] {
+              ArchShape(box: arch.viewBox, drawing: markPath(data, at: centre, size: arch.markSize, stroke: arch.markStroke))
+                .fill(gold)
+                .opacity(entry.passed.contains(id) ? 0.55 : 1)
+            }
+          }
         }
-        guard let data = payload.marks[id] else { continue }
-        var mark = context
-        mark.translateBy(x: centre.x - arch.markSize / 2, y: centre.y - arch.markSize / 2)
-        mark.scaleBy(x: arch.markSize / 24, y: arch.markSize / 24)
-        mark.opacity = entry.passed.contains(id) ? 0.55 : 1
-        mark.stroke(svgPath(data), with: .color(gold), style: round(arch.markStroke))
       }
     }
+  }
+}
+
+/// The mark's 24 grid mapped onto the box it is given, stroked on that grid so
+/// the 1.5 below stays 1.5 of the 24 at any size.
+struct MarkShape: Shape {
+  let data: String
+
+  func path(in rect: CGRect) -> Path {
+    let place = CGAffineTransform(translationX: rect.minX, y: rect.minY)
+      .scaledBy(x: rect.width / 24, y: rect.height / 24)
+    return svgPath(data).strokedPath(strokeStyle(1.5)).applying(place)
   }
 }
 
@@ -131,10 +179,8 @@ struct MarkView: View {
   let color: Color
 
   var body: some View {
-    Canvas { context, size in
-      guard let data else { return }
-      context.scaleBy(x: size.width / 24, y: size.height / 24)
-      context.stroke(svgPath(data), with: .color(color), style: round(1.5))
+    if let data {
+      MarkShape(data: data).fill(color)
     }
   }
 }

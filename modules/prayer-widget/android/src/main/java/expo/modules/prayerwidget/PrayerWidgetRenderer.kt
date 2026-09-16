@@ -67,13 +67,13 @@ internal object PrayerWidgetRenderer {
     val views = RemoteViews(context.packageName, R.layout.prayer_widget_niche)
     val entry = payload?.entryAt(now)
     if (payload != null) {
-      background(views, android.R.id.background, payload.light.ground, payload.dark.ground, night, cornerDp(context))
+      background(views, android.R.id.background, payload.light.ground, payload.dark.ground, night, cornerDp(context), R.drawable.prayer_widget_background)
       val day = entry?.let { payload.days.getOrNull(it.day) }
       image(
         views,
         R.id.prayer_widget_arch,
-        PrayerWidgetDrawing.arch(payload, day, entry, payload.light, ARCH_PX),
-        PrayerWidgetDrawing.arch(payload, day, entry, payload.dark, ARCH_PX),
+        { PrayerWidgetDrawing.arch(payload, day, entry, payload.light, ARCH_PX) },
+        { PrayerWidgetDrawing.arch(payload, day, entry, payload.dark, ARCH_PX) },
         night,
       )
     }
@@ -96,7 +96,7 @@ internal object PrayerWidgetRenderer {
     val entry = payload?.entryAt(now)
     val day = entry?.let { payload?.days?.getOrNull(it.day) }
     if (payload != null) {
-      background(views, android.R.id.background, payload.light.ground, payload.dark.ground, night, cornerDp(context))
+      background(views, android.R.id.background, payload.light.ground, payload.dark.ground, night, cornerDp(context), R.drawable.prayer_widget_background)
       background(views, R.id.prayer_widget_rule, payload.light.goldSoft, payload.dark.goldSoft, night, 0f)
     }
     if (payload == null || entry == null || day == null) {
@@ -125,12 +125,20 @@ internal object PrayerWidgetRenderer {
       // The lit cell on the selected ground, gold words, as the card's times row.
       text(views, ids.label, cell.name, if (lit) light.gold else light.textSecondary, if (lit) dark.gold else dark.textSecondary, night)
       text(views, ids.time, cell.time, if (lit) light.gold else light.text, if (lit) dark.gold else dark.text, night)
-      background(views, ids.cell, if (lit) light.selected else Color.TRANSPARENT, if (lit) dark.selected else Color.TRANSPARENT, night, CELL_CORNER_DP)
+      background(
+        views,
+        ids.cell,
+        if (lit) light.selected else Color.TRANSPARENT,
+        if (lit) dark.selected else Color.TRANSPARENT,
+        night,
+        CELL_CORNER_DP,
+        if (lit) R.drawable.prayer_widget_cell_lit else 0,
+      )
       image(
         views,
         ids.mark,
-        PrayerWidgetDrawing.mark(payload.marks[cell.id], if (lit) light.gold else light.textSecondary, MARK_PX),
-        PrayerWidgetDrawing.mark(payload.marks[cell.id], if (lit) dark.gold else dark.textSecondary, MARK_PX),
+        { PrayerWidgetDrawing.mark(payload.marks[cell.id], if (lit) light.gold else light.textSecondary, MARK_PX) },
+        { PrayerWidgetDrawing.mark(payload.marks[cell.id], if (lit) dark.gold else dark.textSecondary, MARK_PX) },
         night,
       )
       // A closed window steps back, glyph, name and time together; never ticked, which would claim it was prayed.
@@ -139,7 +147,7 @@ internal object PrayerWidgetRenderer {
 
     if (day.friday) {
       views.setViewVisibility(R.id.prayer_widget_friday, View.VISIBLE)
-      background(views, R.id.prayer_widget_friday, payload.light.accent, payload.dark.accent, night, 3f)
+      background(views, R.id.prayer_widget_friday, payload.light.accent, payload.dark.accent, night, 3f, R.drawable.prayer_widget_friday_dot)
     } else {
       views.setViewVisibility(R.id.prayer_widget_friday, View.GONE)
     }
@@ -154,7 +162,7 @@ internal object PrayerWidgetRenderer {
     val views = RemoteViews(context.packageName, R.layout.prayer_widget_quiet)
     val entry = payload?.entryAt(now)
     if (payload != null) {
-      background(views, android.R.id.background, payload.light.ground, payload.dark.ground, night, cornerDp(context))
+      background(views, android.R.id.background, payload.light.ground, payload.dark.ground, night, cornerDp(context), R.drawable.prayer_widget_background)
     }
     if (payload == null || entry == null) {
       openApp(context, views, payload, night, listOf(R.id.prayer_widget_mark, R.id.prayer_widget_time))
@@ -166,8 +174,8 @@ internal object PrayerWidgetRenderer {
     image(
       views,
       R.id.prayer_widget_mark,
-      PrayerWidgetDrawing.mark(payload.marks[entry.prayer], payload.light.gold, MARK_PX),
-      PrayerWidgetDrawing.mark(payload.marks[entry.prayer], payload.dark.gold, MARK_PX),
+      { PrayerWidgetDrawing.mark(payload.marks[entry.prayer], payload.light.gold, MARK_PX) },
+      { PrayerWidgetDrawing.mark(payload.marks[entry.prayer], payload.dark.gold, MARK_PX) },
       night,
     )
     text(views, R.id.prayer_widget_time, entry.time, payload.light.text, payload.dark.text, night)
@@ -201,20 +209,30 @@ internal object PrayerWidgetRenderer {
     }
   }
 
-  private fun background(views: RemoteViews, id: Int, light: Int, dark: Int, night: Boolean, cornerDp: Float) {
+  /**
+   * `rounded` is a shape whose colour `values-night` already answers for, and it
+   * is used only before Android 12, which has no way to be handed a radius: the
+   * corners would otherwise be square while every widget beside them is not.
+   * `widget:check` holds those colours to the same `theme.ts` values the payload
+   * carries, so the two cannot drift apart.
+   */
+  private fun background(views: RemoteViews, id: Int, light: Int, dark: Int, night: Boolean, cornerDp: Float, rounded: Int = 0) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
       views.setColorInt(id, "setBackgroundColor", light, dark)
       if (cornerDp > 0f) views.setViewOutlinePreferredRadius(id, cornerDp, TypedValue.COMPLEX_UNIT_DIP)
+    } else if (rounded != 0) {
+      views.setInt(id, "setBackgroundResource", rounded)
     } else {
       views.setInt(id, "setBackgroundColor", if (night) dark else light)
     }
   }
 
-  private fun image(views: RemoteViews, id: Int, light: Bitmap, dark: Bitmap, night: Boolean) {
+  /** Drawn on demand: before Android 12 only one palette is ever shown, and an arch is most of a megabyte. */
+  private fun image(views: RemoteViews, id: Int, light: () -> Bitmap, dark: () -> Bitmap, night: Boolean) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-      views.setIcon(id, "setImageIcon", Icon.createWithBitmap(light), Icon.createWithBitmap(dark))
+      views.setIcon(id, "setImageIcon", Icon.createWithBitmap(light()), Icon.createWithBitmap(dark()))
     } else {
-      views.setImageViewBitmap(id, if (night) dark else light)
+      views.setImageViewBitmap(id, if (night) dark() else light())
     }
   }
 

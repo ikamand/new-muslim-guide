@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  The dot that says a Dhuhr is Jumuah. A condition stated, never a relabelling.
+
+  Written by npm run widget:preview, from the same schedule the widgets draw.
+  Do not edit: npm run widget:check fails if this is not what the generator
+  would write now. See scripts/widget-preview.mjs for the day it shows.
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+  android:shape="oval">
+  <solid android:color="@color/prayer_widget_accent" />
+</shape>

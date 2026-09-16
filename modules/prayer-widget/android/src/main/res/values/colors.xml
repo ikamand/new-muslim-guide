@@ -10,4 +10,6 @@
   <color name="prayer_widget_text_secondary">#6B5A46</color>
   <color name="prayer_widget_gold">#8E6A21</color>
   <color name="prayer_widget_gold_soft">#D9C9A2</color>
+  <color name="prayer_widget_selected">#EDE3CC</color>
+  <color name="prayer_widget_accent">#1B3A6B</color>
 </resources>

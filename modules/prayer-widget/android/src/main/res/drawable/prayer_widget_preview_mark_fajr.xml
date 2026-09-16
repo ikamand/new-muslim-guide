@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+  android:width="24dp"
+  android:height="24dp"
+  android:viewportWidth="24"
+  android:viewportHeight="24">
+  <path
+    android:pathData="M 3.5 16.5 L 20.5 16.5 M 7.8 16.5 C 7.8 14.18 9.68 12.3 12 12.3 C 14.32 12.3 16.2 14.18 16.2 16.5 M 12 7.9 L 12 9.9 M 6.6 9.7 L 8 11.1 M 17.4 9.7 L 16 11.1"
+    android:strokeColor="@color/prayer_widget_text_secondary"
+    android:strokeWidth="1.5"
+    android:strokeLineCap="round"
+    android:strokeLineJoin="round"
+    android:fillColor="#00000000" />
+</vector>

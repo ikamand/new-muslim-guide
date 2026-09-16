@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 import WidgetKit
 
 /// The words to open the app, when there is no schedule or it has run out.
@@ -9,7 +10,7 @@ struct OpenAppText: View {
   var tone: Color = .secondary
 
   var body: some View {
-    Text(item.payload?.strings.openApp ?? "Open the app to update prayer times")
+    Text(item.openApp ?? "Open the app to update prayer times")
       .font(.system(size: 12))
       .multilineTextAlignment(.center)
       .foregroundStyle(tone)
@@ -27,11 +28,11 @@ struct NicheView: View {
   @Environment(\.colorScheme) private var scheme
 
   var body: some View {
-    let palette = item.payload.map { scheme == .dark ? $0.colors.dark : $0.colors.light }
+    let palette = item.colors.map { scheme == .dark ? $0.dark : $0.light }
     let tones = palette.map(Tones.init)
     ZStack {
-      if let payload = item.payload, let palette {
-        ArchView(payload: payload, day: item.day, entry: item.entry, palette: palette)
+      if let arch = item.arch, let palette {
+        ArchView(arch: arch, marks: item.marks, day: item.day, entry: item.entry, palette: palette)
       }
       if let entry = item.entry, let tones {
         GeometryReader { geometry in
@@ -72,10 +73,10 @@ struct RowView: View {
   @Environment(\.colorScheme) private var scheme
 
   var body: some View {
-    let palette = item.payload.map { scheme == .dark ? $0.colors.dark : $0.colors.light }
+    let palette = item.colors.map { scheme == .dark ? $0.dark : $0.light }
     let tones = palette.map(Tones.init)
     VStack(spacing: 0) {
-      if let entry = item.entry, let day = item.day, let payload = item.payload, let tones {
+      if let entry = item.entry, let day = item.day, let tones {
         HStack(alignment: .firstTextBaseline, spacing: 8) {
           Text(entry.caption.uppercased())
             .font(.system(size: 9))
@@ -101,7 +102,7 @@ struct RowView: View {
           ForEach(day.cells, id: \.id) { cell in
             let lit = entry.lit == cell.id
             VStack(spacing: 3) {
-              MarkView(data: payload.marks[cell.id], color: lit ? tones.gold : tones.secondary)
+              MarkView(data: item.marks[cell.id], color: lit ? tones.gold : tones.secondary)
                 .frame(width: 16, height: 16)
               HStack(spacing: 3) {
                 // Friday: the card's dot on Dhuhr, a condition stated rather than a relabelling.
@@ -144,12 +145,12 @@ struct QuietView: View {
   @Environment(\.colorScheme) private var scheme
 
   var body: some View {
-    let palette = item.payload.map { scheme == .dark ? $0.colors.dark : $0.colors.light }
+    let palette = item.colors.map { scheme == .dark ? $0.dark : $0.light }
     let tones = palette.map(Tones.init)
     Group {
-      if let entry = item.entry, let payload = item.payload, let tones {
+      if let entry = item.entry, let tones {
         HStack(spacing: 10) {
-          MarkView(data: payload.marks[entry.prayer], color: tones.gold)
+          MarkView(data: item.marks[entry.prayer], color: tones.gold)
             .frame(width: 22, height: 22)
           Text(entry.time)
             .font(.system(size: 15))
@@ -177,32 +178,32 @@ struct LockView: View {
   @Environment(\.widgetFamily) private var family
 
   var body: some View {
+    let openApp = item.openApp ?? "Open the app to update prayer times"
     Group {
-      if let entry = item.entry {
-        if family == .accessoryInline {
+      // Inline is one line in the system's own face, which takes neither a font nor a line limit.
+      if family == .accessoryInline {
+        Text(item.entry.map { "\($0.name) \($0.time)" } ?? openApp)
+      } else if let entry = item.entry {
+        VStack(alignment: .leading, spacing: 0) {
+          Text(entry.caption.uppercased())
+            .font(.system(size: 11))
+            .opacity(0.75)
           Text("\(entry.name) \(entry.time)")
-        } else {
-          VStack(alignment: .leading, spacing: 0) {
-            Text(entry.caption.uppercased())
-              .font(.system(size: 11))
-              .opacity(0.75)
-            Text("\(entry.name) \(entry.time)")
-              .font(.system(size: 16, weight: .bold))
-              .monospacedDigit()
+            .font(.system(size: 16, weight: .bold))
+            .monospacedDigit()
+            .lineLimit(1)
+            .minimumScaleFactor(0.7)
+          if let note = entry.note {
+            Text(note)
+              .font(.system(size: 13))
+              .opacity(0.72)
               .lineLimit(1)
-              .minimumScaleFactor(0.7)
-            if let note = entry.note {
-              Text(note)
-                .font(.system(size: 13))
-                .opacity(0.72)
-                .lineLimit(1)
-                .minimumScaleFactor(0.8)
-            }
+              .minimumScaleFactor(0.8)
           }
-          .frame(maxWidth: .infinity, alignment: .leading)
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
       } else {
-        Text(item.payload?.strings.openApp ?? "Open the app to update prayer times")
+        Text(openApp)
           .font(.system(size: 13))
           .lineLimit(2)
       }

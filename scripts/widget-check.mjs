@@ -66,6 +66,8 @@ if (caseArg === -1) {
   }
   failed += checkDrawing();
   failed += checkNativeCopies();
+  failed += checkPreviews();
+  failed += checkContract();
   if (failed > 0) {
     console.error(`\nwidget:check — ${failed} problem group(s).`);
     process.exit(1);
@@ -96,6 +98,14 @@ function runCase(place) {
     }
     if (entries.at(-1).at >= payload.staleAt) fail('an entry starts after the schedule goes stale');
     if (!payload.strings.openApp) fail('the open-the-app string is empty');
+    /*
+      Five prayers, every day. A sixth is one line in PRAYER_SPECS by design,
+      and it would ship over the air to native code that cannot grow with it:
+      Android drops an id it does not know, iPhone squeezes a sixth cell in.
+    */
+    for (const day of days) {
+      if (day.cells.length !== PRAYER_IDS.length) fail(`a day carries ${day.cells.length} prayers, not ${PRAYER_IDS.length}`);
+    }
 
     const inForce = (ms) => {
       let lo = 0;
@@ -200,6 +210,119 @@ function cardAt(coords, profile, at, fluent) {
  * before the first schedule. Each is a copy of something with a home in
  * JavaScript, so each is compared with that home.
  */
+/**
+ * Every name the two native readers ask the payload for, and the seven colours
+ * the app copies into it.
+ *
+ * This is the one thing the rest of this file could not catch. The schedule
+ * ships over the air to native code that was built months earlier, so renaming
+ * a field in `widget-schedule.ts` is a change to a contract with two compilers
+ * that will never see it. Kotlin names its keys as string literals; Swift names
+ * them as the properties of its Codable structs. Both are read out here and
+ * held against a payload actually built, so a rename fails on this machine
+ * rather than on a phone, where it looks like "no location yet".
+ */
+function checkContract() {
+  let problems = 0;
+  const root = join(dirname(self), '..');
+  const place = { latitude: 21.4225, longitude: 39.8262 };
+  const palette = Object.fromEntries(
+    ['ground', 'text', 'textSecondary', 'gold', 'goldSoft', 'selected', 'accent'].map((key) => [key, '#000000']),
+  );
+  const payload = buildWidgetPayload({
+    coords: place,
+    profile: inferProfile(place),
+    now: new Date(2026, 2, 21, 12, 30),
+    fluent: false,
+    t: (key) => EN[key],
+    colors: { light: palette, dark: palette },
+    days: 2,
+  });
+
+  /* Every key the payload writes, at any depth. A prayer's id is a key too, under marks and points. */
+  const known = new Set(PRAYER_IDS);
+  const walk = (value) => {
+    if (!value || typeof value !== 'object') return;
+    if (Array.isArray(value)) return value.forEach(walk);
+    for (const [key, inner] of Object.entries(value)) {
+      known.add(key);
+      walk(inner);
+    }
+  };
+  walk(payload);
+
+  const kotlin = readFileSync(
+    join(root, 'modules/prayer-widget/android/src/main/java/expo/modules/prayerwidget/PrayerWidgetPayload.kt'),
+    'utf8',
+  );
+  for (const [, key] of kotlin.matchAll(/\.(?:get|opt)[A-Za-z]*\("([^"]+)"\)/g)) {
+    if (!known.has(key)) {
+      console.error(`✗ contract: PrayerWidgetPayload.kt reads "${key}", which the payload does not carry`);
+      problems += 1;
+    }
+  }
+
+  /*
+    Swift names its keys by its properties, so only the structs it decodes
+    count: the timeline's own entry holds a `day` and an `arch` too, and those
+    are not keys. The payload's structs nest inside one another, so the depth is
+    counted rather than matched, which a brace in a regex gets wrong.
+  */
+  const swift = readFileSync(join(root, 'targets/widget/Schedule.swift'), 'utf8');
+  let depth = 0;
+  let decoding = null;
+  for (const line of swift.split('\n')) {
+    if (decoding === null && /\bstruct\s+\w+[^{]*\bDecodable\b/.test(line)) decoding = depth;
+    if (decoding !== null) {
+      const property = /^\s*(?:let|var)\s+(\w+)\s*:/.exec(line);
+      if (property && !known.has(property[1])) {
+        console.error(`✗ contract: Schedule.swift decodes "${property[1]}", which the payload does not carry`);
+        problems += 1;
+      }
+    }
+    depth += (line.match(/\{/g) ?? []).length - (line.match(/\}/g) ?? []).length;
+    if (decoding !== null && depth <= decoding) decoding = null;
+  }
+
+  /*
+    The seven colours the widgets are handed. theme.ts keeps an rgba() two lines
+    from these, and Color.parseColor throws on one, which would blank all three
+    Android widgets at once.
+  */
+  const sync = readFileSync(join(root, 'src/hooks/use-widget-sync.ts'), 'utf8');
+  const expectedPalette = {
+    ground: 'background',
+    text: 'text',
+    textSecondary: 'textSecondary',
+    gold: 'gold',
+    goldSoft: 'goldSoft',
+    selected: 'backgroundSelected',
+    accent: 'accent',
+  };
+  for (const [field, tokenName] of Object.entries(expectedPalette)) {
+    if (!new RegExp(`\\b${field}:\\s*colors\\.${tokenName}\\b`).test(sync)) {
+      console.error(`✗ contract: use-widget-sync.ts no longer sends ${field} as theme.ts's ${tokenName}`);
+      problems += 1;
+    }
+  }
+
+  if (problems === 0) {
+    console.log('✓ contract: both phones read only names the payload carries, and the seven colours are the seven it sends');
+  }
+  return problems;
+}
+
+/**
+ * The picker's previews are generated (`scripts/widget-preview.mjs`), so what is
+ * committed has to be what the generator would write now. Run there rather than
+ * here, because the sample day is only the same day under a pinned clock.
+ */
+function checkPreviews() {
+  const preview = join(dirname(self), 'widget-preview.mjs');
+  const result = spawnSync(process.execPath, [...process.execArgv, preview, '--check'], { stdio: 'inherit' });
+  return result.status === 0 ? 0 : 1;
+}
+
 function checkNativeCopies() {
   let problems = 0;
   const root = join(dirname(self), '..');
@@ -235,6 +358,8 @@ function checkNativeCopies() {
     prayer_widget_text_secondary: 'textSecondary',
     prayer_widget_gold: 'gold',
     prayer_widget_gold_soft: 'goldSoft',
+    prayer_widget_selected: 'backgroundSelected',
+    prayer_widget_accent: 'accent',
   };
   for (const [scheme, file] of [['light', 'values/colors.xml'], ['dark', 'values-night/colors.xml']]) {
     const colours = valuesOf(read(file), 'color');
@@ -256,6 +381,8 @@ function checkNativeCopies() {
     EN['widget.name.quiet'],
     EN['widget.sheet.quiet'],
     EN['widget.lock.description'],
+    // Its own name, because the lock screen and the niche both called themselves "Prayer times" in the picker.
+    EN['widget.name.lock'],
   ];
   for (const words of expectedSwift) {
     if (!swift.includes(`"${words}"`)) {

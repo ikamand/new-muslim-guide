@@ -17,7 +17,8 @@ import { writeIosSchedule } from './ios-storage';
 export type WidgetKind = 'niche' | 'row' | 'quiet';
 
 type Native = {
-  setSchedule(json: string): void;
+  /** A promise: the Kotlin side stores quickly but draws three widgets' bitmaps off the JavaScript thread. */
+  setSchedule(json: string): Promise<void>;
   pinSupported(): boolean;
   requestPin(kind: WidgetKind): boolean;
 };
@@ -26,8 +27,18 @@ const native = Platform.OS === 'android' ? requireOptionalNativeModule<Native>('
 
 /** The payload as JSON, or null to say there is nothing to show yet. */
 export function setWidgetSchedule(json: string | null): void {
-  if (native) native.setSchedule(json ?? '');
-  else if (Platform.OS === 'ios') writeIosSchedule(json);
+  if (native) {
+    /*
+      Nothing awaits this, and without the catch a failure to store or to redraw
+      is an unhandled rejection that a release build swallows: the widgets would
+      keep yesterday's schedule and say nothing about it.
+    */
+    native.setSchedule(json ?? '').catch((error: unknown) => {
+      console.warn('The widgets kept their previous schedule:', error);
+    });
+  } else if (Platform.OS === 'ios') {
+    writeIosSchedule(json);
+  }
 }
 
 /** Whether the app can ask this phone to place a widget: Android, on a launcher that allows it. iPhone gives apps no way to. */

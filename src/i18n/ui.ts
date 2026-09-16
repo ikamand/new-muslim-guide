@@ -533,6 +533,7 @@ export const EN = {
   'widget.name.niche': 'Prayer times',
   'widget.name.row': 'Prayer times, the day',
   'widget.name.quiet': 'Prayer time, quiet',
+  'widget.name.lock': 'Prayer times, lock screen',
   'widget.door': 'On your home screen',
   'widget.door.meta': 'Prayer times without opening the app',
   'widget.sheet.niche': 'The time now, in the arch',

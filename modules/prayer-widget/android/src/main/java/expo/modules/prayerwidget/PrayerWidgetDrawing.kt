@@ -81,7 +81,9 @@ internal object PrayerWidgetDrawing {
       canvas.translate(point[0] - arch.markSize / 2, point[1] - arch.markSize / 2)
       canvas.scale(k, k)
       // Passed marks keep their gold and dim, as the times row dims a closed cell.
-      canvas.drawPath(path(data), stroke(palette.gold, arch.markStroke, if (id in entry.passed) 140 else 255))
+      // Divided by the scale above, which multiplies stroke width as well as geometry:
+      // markStroke is a width in the arch's units, not in the mark's own 24 grid.
+      canvas.drawPath(path(data), stroke(palette.gold, arch.markStroke / k, if (id in entry.passed) 140 else 255))
       canvas.restore()
     }
     return bitmap

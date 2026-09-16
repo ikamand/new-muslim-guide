@@ -202,6 +202,19 @@ at prebuild.
   midsummer, Mecca), the entry in force disagrees with what the card's
   functions return at that instant; if entries are not strictly increasing;
   if a mark path holds anything but M, L, C and Z; if a string is empty.
+- The same check reads **every name the two natives ask the payload for**: the
+  string literals Kotlin passes to `getString` and the properties Swift's
+  `Decodable` structs declare, each held against a payload actually built. This
+  is the one thing nothing else could catch, because the schedule ships over the
+  air to native code compiled months earlier, so renaming a field is a change to
+  a contract with two compilers that will never see it. Shown to fail by
+  renaming one field, which produced a complaint from each phone.
+- It also fails if a day ever carries other than five prayers, and if the seven
+  colours the app copies into the payload stop being the seven `theme.ts` keys
+  the native side expects. A sixth prayer is one line in `PRAYER_SPECS` by
+  design, and it would reach native code that cannot grow with it.
+- `npm run widget:preview` draws the picker's entries, and `widget:check` runs
+  it again and fails if what is committed is not what it would write now.
 - `npm run lock:check` fails if the lockfile cannot be installed by the npm
   that EAS Build runs, which is older than the one on this Mac and resolves
   peer dependencies differently. It replays that npm against the lockfile and
@@ -209,9 +222,13 @@ at prebuild.
 - `tsc`, `expo lint`, `style:check`, `i18n:manifest`, `expo export --platform
   web`.
 - Android: `:prayer-widget:compileReleaseKotlin` in the prebuilt copy.
-- iPhone: nothing here can compile Swift until Xcode 26.3 is installed on this
-  Mac, and the app has never been built for iPhone. The first proof is the
-  first iOS build.
+- iPhone: `swiftc -parse targets/widget/*.swift`. **This corrects what stood
+  here, which said no line of Swift could be checked on this Mac.** The Command
+  Line Tools carry a Swift compiler (6.1.2) and no Xcode is needed to parse, so
+  the syntax is checked on every change, and a copy with a deliberate error was
+  made to prove the check can fail. What still cannot be done here is
+  type-checking against WidgetKit, which needs the iOS SDK. The first iOS build
+  remains the first proof that it runs.
 
 ---
 
@@ -253,9 +270,11 @@ fail on the lockfile as it stood and to pass once the copy was gone.
 
 **Not checked here, and why.**
 
-- **Every line of Swift.** This Mac has no Xcode, and the app has never been
-  built for iPhone. The first iOS build is the first proof, and it needs an
-  Apple Developer Program membership and the Team ID in app.json.
+- **Whether the Swift type-checks or runs.** Its syntax is checked here, which
+  the line above corrects; its types are not, because that needs the iOS SDK.
+  The app has never been built for iPhone, and the first build needs an Apple
+  Developer Program membership and the Team ID in app.json, which is the only
+  thing in this feature that cannot be finished without Iyad.
 - **Android lint.** Both local runs died inside
   `:react-native-worklets:lintAnalyzeRelease` with lint's own crash ("this is
   a bug in lint or one of the libraries it depends on"), before reaching this
@@ -274,11 +293,26 @@ Found and fixed, all of it native and all of it in this build:
 
 - **The picker showed empty boxes.** Each widget offered its live layout as its
   own preview, and those layouts carry no static content, so the quiet one was
-  a blank rectangle and the other two showed a name over nothing. Each now has
-  a preview layout of its own, naming the widget in the words the picker
-  already uses. Sample times were the other option and were not taken: they
-  would put invented prayer times and a second copy of the five prayer names in
-  front of a reader, guarded by no check.
+  a blank rectangle and the other two showed a name over nothing.
+
+  The first fix named each widget instead, which was honest and looked nothing
+  like the widget. Iyad's call, and the right one: a picker entry should look
+  like the thing it offers. What made that seem to cost something was the
+  assumption that sample data has to be typed, which would put invented prayer
+  times and a second copy of the five prayer names in a file no check guards.
+
+  It does not have to be typed. `scripts/widget-preview.mjs` computes a real
+  day through `buildWidgetPayload`, takes the names from `PRAYER_LABEL`, and
+  writes the three previews and ten vector drawables from the same path data
+  the phones are handed: Mecca on the spring equinox, Dhuhr open, the arch with
+  every mark where that day puts it. Nothing is invented and nothing is typed,
+  which is also how ʿAsr and ʿIsha keep the modifier letter that mangles when a
+  name is retyped from a terminal. `widget:check` regenerates and compares, so
+  the preview cannot drift from the widget.
+
+  Vectors rather than a raster, which settled a second item at the same time:
+  `previewImage` has existed since Android 3 and `previewLayout` only since 12,
+  so the picker was empty on older phones too. Both are written now.
 - **The corner radius was the app's own guess**, 22dp, rather than
   `system_app_widget_background_radius`, which Android 12 publishes so a widget
   matches its neighbours. One UI does not round to 22.
@@ -292,11 +326,24 @@ Found and fixed, all of it native and all of it in this build:
 - **The arch scaled by the viewBox's width alone**, which is right only while
   that box stays square, and it ships over the air.
 
-Accepted rather than fixed, and the reason is the same for all of them: they
-are invisible on Android 12 and later. No preview image below 12, where a
-raster would be a second drawing free to drift from the first; square corners
-below 12; Literata falling back to the system face below 8.0; and the arch
-bitmap drawn twice where only one is used below 12.
+- **The day marks on the arch were stroked about eight per cent too heavily**,
+  on both phones. Scaling a canvas scales the stroke with it, so a mark drawn
+  on its 24 grid inside a group scaled to `markSize` came out at 2.6 units
+  where the geometry says 2.4. The iOS audit found it; the same line was in the
+  Kotlin. One platform's finding was true of both.
+
+Four items were first set aside as invisible on Android 12 and later. Iyad
+asked for them anyway, and three were fixed: the corners and the Friday dot are
+rounded by generated shapes before Android 12, which has no way to be handed a
+radius, and only the palette that will actually be shown is drawn now rather
+than both.
+
+The fourth is not a decision. **A widget cannot use Literata below Android 8,
+by any supported route.** `RemoteViews` has no typeface setter at all, its whole
+text surface being `setTextViewText`, `setTextViewTextSize`, `setCharSequence`,
+`setCharSequenceAttr` and `setString`, and the `font` resource type begins at
+API 26. Read from the SDK's own `api-versions.xml` and `android.jar`, not
+recalled. On Android 7 the prayer's name falls back to the system face.
 
 Confirmed sound, so that it is not audited again: every call newer than the
 minimum Android sits behind its own version check, the bitmaps are far below
@@ -304,11 +351,30 @@ both the launcher's budget and the Binder limit, every id used in a layout
 exists in that layout, the app group and the iOS font's PostScript name are
 right, and the payload matches field for field in all three languages.
 
-**The iPhone's ten findings are not fixed here**, because no iOS build has ever
-run and they cost nothing to carry until one does. Two of them decide whether
-it works at all: every view is drawn with `Canvas`, which may not render inside
-a widget, and the timeline holds the whole payload in each of its ninety-odd
-entries, about 2.3 MB, against a memory ceiling.
+**The iPhone's ten findings are fixed too**, though no iOS build has ever run.
+Two of them decided whether it would work at all.
+
+Every view was drawn with `Canvas`, and a widget's view tree is archived and
+replayed out of process, which is why a `UIViewRepresentable` renders blank
+there. An immediate-mode drawing closure carries the same risk, and this file
+had said the drawing would use `Path`, so the code and its own contract
+disagreed. Both are now `Shape` types handed an already-stroked outline, which
+is what `.stroke()` does internally and is unambiguously supported.
+
+And the timeline held the whole payload in each of its ninety-odd entries,
+about 2.3 MB against a memory ceiling. Each entry now carries the one day and
+one entry it draws, roughly a kilobyte. Both palettes ride along rather than
+one resolved for the current appearance, because WidgetKit renders the same
+entry again for the other, and resolving early would freeze a widget in
+whichever scheme the app last wrote in.
+
+The rest: the lock-screen widget had called itself "Prayer times" in the picker
+alongside the niche, and now carries its own name, held to `ui.ts` by the
+check; `.never` on both reload paths meant a widget placed before the app had
+ever written a schedule would never ask again; two implicit imports, a function
+shadowing the global `round`, a property that always returned nil, content
+margins that would have inset the row's full-bleed rule, and styling on an
+inline accessory that ignores it.
 
 **What to watch for first on the phone**: whether a widget says "Can't load
 widget", which would mean a RemoteViews call the launcher refuses; the text

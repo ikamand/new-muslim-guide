@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  The lit cell behind a prayer that is open now.
+
+  Written by npm run widget:preview, from the same schedule the widgets draw.
+  Do not edit: npm run widget:check fails if this is not what the generator
+  would write now. See scripts/widget-preview.mjs for the day it shows.
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+  android:shape="rectangle">
+  <solid android:color="@color/prayer_widget_selected" />
+  <corners android:radius="10dp" />
+</shape>

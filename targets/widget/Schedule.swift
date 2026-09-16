@@ -55,7 +55,9 @@ struct WidgetPayload: Decodable {
   }
 
   struct Day: Decodable {
-    let date: String
+    /// Nothing here draws the date. Optional, because a field the producer could
+    /// one day stop writing must not blank every widget on the phone.
+    let date: String?
     let friday: Bool
     let cells: [Cell]
     let points: [String: [Double]]
@@ -64,7 +66,8 @@ struct WidgetPayload: Decodable {
   struct Entry: Decodable {
     let at: Double
     let day: Int
-    let state: String
+    /// Nothing here draws the state either, and its absence must not fail the decode.
+    let state: String?
     let prayer: String
     let lit: String?
     let caption: String
@@ -105,24 +108,48 @@ enum ScheduleStore {
   }
 }
 
+/// What one moment draws, and nothing else.
+///
+/// The schedule is twelve days of times, and the timeline holds ninety-odd
+/// moments of it at once, so an entry that carried the whole payload carried it
+/// ninety times over against the memory a widget is given. It keeps the day it
+/// draws and the words and paths it draws with.
 struct PrayerEntry: TimelineEntry {
   let date: Date
-  let payload: WidgetPayload?
   /// Nil when there is no schedule, or it has run out.
   let entry: WidgetPayload.Entry?
+  let day: WidgetPayload.Day?
+  /// Both schemes: the same entry is drawn again when the phone changes appearance.
+  let colors: WidgetPayload.Colors?
+  let marks: [String: String]
+  let arch: WidgetPayload.Arch?
+  let openApp: String?
 
-  var day: WidgetPayload.Day? {
-    guard let entry, let payload, payload.days.indices.contains(entry.day) else { return nil }
-    return payload.days[entry.day]
+  init(date: Date, payload: WidgetPayload?, entry: WidgetPayload.Entry?) {
+    self.date = date
+    self.entry = entry
+    if let entry, let payload, payload.days.indices.contains(entry.day) {
+      day = payload.days[entry.day]
+    } else {
+      day = nil
+    }
+    colors = payload?.colors
+    marks = payload?.marks ?? [:]
+    arch = payload?.arch
+    openApp = payload?.strings.openApp
   }
-
-  var palette: WidgetPayload.Palette? { nil }
 }
+
+/// How long a widget with nothing left to draw waits before asking again.
+private let askAgain: TimeInterval = 3600
 
 /// One timeline entry per change in the schedule, and one where it runs out.
 ///
-/// The policy is never: the app reloads the widgets each time it hands them a
-/// new schedule, which is every launch and every return to the foreground.
+/// The app reloads the widgets each time it hands them a new schedule, which is
+/// every launch and every return to the foreground, so a placed widget is
+/// rarely left to the policy. The one that is, is a widget placed before the app
+/// has ever written a schedule: it has nothing to draw and, on a policy of
+/// never, no way of ever asking for one.
 struct PrayerTimeline: TimelineProvider {
   func placeholder(in context: Context) -> PrayerEntry {
     PrayerEntry(date: .now, payload: nil, entry: nil)
@@ -135,8 +162,9 @@ struct PrayerTimeline: TimelineProvider {
 
   func getTimeline(in context: Context, completion: @escaping (Timeline<PrayerEntry>) -> Void) {
     let now = Date()
+    let retry = now.addingTimeInterval(askAgain)
     guard let payload = ScheduleStore.load() else {
-      completion(Timeline(entries: [PrayerEntry(date: now, payload: nil, entry: nil)], policy: .never))
+      completion(Timeline(entries: [PrayerEntry(date: now, payload: nil, entry: nil)], policy: .after(retry)))
       return
     }
     var entries = [PrayerEntry(date: now, payload: payload, entry: payload.entry(at: now))]
@@ -147,6 +175,8 @@ struct PrayerTimeline: TimelineProvider {
     if stale > now {
       entries.append(PrayerEntry(date: stale, payload: payload, entry: nil))
     }
-    completion(Timeline(entries: entries, policy: .never))
+    // The last of these entries says to open the app, so ask again then, and an
+    // hour out rather than at once for a schedule that has already run out.
+    completion(Timeline(entries: entries, policy: .after(max(stale, retry))))
   }
 }

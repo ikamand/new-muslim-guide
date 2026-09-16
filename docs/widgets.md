@@ -113,10 +113,16 @@ type WidgetPayload = {
   v: 1;
   generatedAt: number;
   staleAt: number;            // after this the widgets say to open the app
-  strings: { openApp: string; widgetNames: Record<'niche' | 'row' | 'quiet', string> };
+  strings: { openApp: string };   // the picker's own words are in strings.xml, not here
   colors: { light: WidgetPalette; dark: WidgetPalette };   // from theme.ts
   marks: Record<PrayerId, string>;   // day-mark path data, 24 grid, absolute M L C Z only
-  arch: { viewBox: [number, number, number, number]; outer: string; inner: string; stroke: number };
+  arch: {
+    viewBox: [number, number, number, number];
+    outer: string; inner: string;                     // the two arch paths
+    stroke: number; innerStroke: number;              // widths, in viewBox units
+    disc: number; ring: number; ringStroke: number;   // the paper disc under a mark, and the lit ring
+    markSize: number; markStroke: number;             // a day mark's box, and its stroke
+  };
   days: {
     date: string;             // yyyy-mm-dd, local
     friday: boolean;
@@ -259,6 +265,50 @@ fail on the lockfile as it stood and to pass once the copy was gone.
   which is what that lint would be checking.
 - **How any of it looks.** A widget can only be seen on a phone. Iyad runs the
   build; then the widgets are added by hand and looked at over adb.
+
+**Reviewed before the first build.** Three passes, because nothing here had
+been seen on a phone: the Android native code, the payload contract across all
+three languages, and the iOS target.
+
+Found and fixed, all of it native and all of it in this build:
+
+- **The picker showed empty boxes.** Each widget offered its live layout as its
+  own preview, and those layouts carry no static content, so the quiet one was
+  a blank rectangle and the other two showed a name over nothing. Each now has
+  a preview layout of its own, naming the widget in the words the picker
+  already uses. Sample times were the other option and were not taken: they
+  would put invented prayer times and a second copy of the five prayer names in
+  front of a reader, guarded by no check.
+- **The corner radius was the app's own guess**, 22dp, rather than
+  `system_app_widget_background_radius`, which Android 12 publishes so a widget
+  matches its neighbours. One UI does not round to 22.
+- **The row's declared minimum height was below its own contents**, 110dp
+  against about 116dp, which clips the times row when a launcher honours it.
+- **A failed parse left no trace.** Every exception was swallowed, so a
+  schedule whose shape the app had changed read on screen as "no location yet"
+  and said nothing to logcat, on a feature that can only be looked at over adb.
+- **Marks were read leniently where points are read strictly**, so a renamed
+  prayer would have erased all five glyphs while leaving the times in place.
+- **The arch scaled by the viewBox's width alone**, which is right only while
+  that box stays square, and it ships over the air.
+
+Accepted rather than fixed, and the reason is the same for all of them: they
+are invisible on Android 12 and later. No preview image below 12, where a
+raster would be a second drawing free to drift from the first; square corners
+below 12; Literata falling back to the system face below 8.0; and the arch
+bitmap drawn twice where only one is used below 12.
+
+Confirmed sound, so that it is not audited again: every call newer than the
+minimum Android sits behind its own version check, the bitmaps are far below
+both the launcher's budget and the Binder limit, every id used in a layout
+exists in that layout, the app group and the iOS font's PostScript name are
+right, and the payload matches field for field in all three languages.
+
+**The iPhone's ten findings are not fixed here**, because no iOS build has ever
+run and they cost nothing to carry until one does. Two of them decide whether
+it works at all: every view is drawn with `Canvas`, which may not render inside
+a widget, and the timeline holds the whole payload in each of its ninety-odd
+entries, about 2.3 MB, against a memory ceiling.
 
 **What to watch for first on the phone**: whether a widget says "Can't load
 widget", which would mean a RemoteViews call the launcher refuses; the text

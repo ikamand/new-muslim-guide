@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  What the widget picker shows (docs/widgets.md). One line, because this widget
+  is a single cell tall. The quiet one carried no static text at all, so its
+  entry in the picker was an empty box.
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@color/prayer_widget_ground"
+  android:clipToOutline="true">
+
+  <TextView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fontFamily="@font/literata_semibold"
+    android:gravity="center"
+    android:maxLines="1"
+    android:paddingStart="10dp"
+    android:paddingEnd="10dp"
+    android:text="@string/prayer_widget_name_quiet"
+    android:textColor="@color/prayer_widget_text"
+    android:textSize="13sp" />
+</FrameLayout>

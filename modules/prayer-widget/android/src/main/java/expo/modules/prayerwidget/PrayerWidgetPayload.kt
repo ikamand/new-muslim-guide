@@ -1,6 +1,7 @@
 package expo.modules.prayerwidget
 
 import android.graphics.Color
+import android.util.Log
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -86,13 +87,17 @@ internal class Payload(
             openApp = json.getJSONObject("strings").getString("openApp"),
             light = Palette(colors.getJSONObject("light")),
             dark = Palette(colors.getJSONObject("dark")),
-            marks = PRAYERS.associateWith { marks.optString(it) },
+            // Strictly, as the points below are read: a renamed prayer should reject the schedule, not quietly erase five glyphs.
+            marks = PRAYERS.associateWith { marks.getString(it) },
             arch = Arch(json.getJSONObject("arch")),
             days = json.getJSONArray("days").objects().map(::day),
             entries = json.getJSONArray("entries").objects().map(::entry),
           )
         }
       } catch (error: Exception) {
+        // The only trace a phone leaves. Without it a schedule the app has changed the shape of
+        // reads on the screen as "no location yet", and logcat says nothing at all.
+        Log.w("PrayerWidget", "The schedule could not be read", error)
         null
       }
 

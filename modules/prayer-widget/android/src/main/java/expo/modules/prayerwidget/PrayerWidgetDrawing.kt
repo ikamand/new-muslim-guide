@@ -55,7 +55,9 @@ internal object PrayerWidgetDrawing {
     val bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888)
     val canvas = Canvas(bitmap)
     val box = payload.arch.viewBox
-    val scale = size / box[2]
+    // Both axes, and centred in what is left, as the iPhone does: a viewBox that stops being square must not stretch here.
+    val scale = minOf(size / box[2], size / box[3])
+    canvas.translate((size - box[2] * scale) / 2f, (size - box[3] * scale) / 2f)
     canvas.scale(scale, scale)
     canvas.translate(-box[0], -box[1])
 

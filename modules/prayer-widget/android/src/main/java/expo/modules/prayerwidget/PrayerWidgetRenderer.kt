@@ -30,6 +30,18 @@ internal object PrayerWidgetRenderer {
   private const val CORNER_DP = 22f
   private const val CELL_CORNER_DP = 10f
 
+  /**
+   * The launcher's own corner, so the widget sits among its neighbours rather
+   * than beside them: One UI and the Pixel launcher do not round to the same
+   * radius. Android 12 publishes the value it uses; before that nothing is
+   * rounded here anyway, so the app's own figure stands.
+   */
+  private fun cornerDp(context: Context): Float {
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) return CORNER_DP
+    val resources = context.resources
+    return resources.getDimension(android.R.dimen.system_app_widget_background_radius) / resources.displayMetrics.density
+  }
+
   private class CellIds(val cell: Int, val mark: Int, val label: Int, val time: Int)
 
   private val cellIds: Map<String, CellIds> by lazy {
@@ -55,7 +67,7 @@ internal object PrayerWidgetRenderer {
     val views = RemoteViews(context.packageName, R.layout.prayer_widget_niche)
     val entry = payload?.entryAt(now)
     if (payload != null) {
-      background(views, android.R.id.background, payload.light.ground, payload.dark.ground, night, CORNER_DP)
+      background(views, android.R.id.background, payload.light.ground, payload.dark.ground, night, cornerDp(context))
       val day = entry?.let { payload.days.getOrNull(it.day) }
       image(
         views,
@@ -84,7 +96,7 @@ internal object PrayerWidgetRenderer {
     val entry = payload?.entryAt(now)
     val day = entry?.let { payload?.days?.getOrNull(it.day) }
     if (payload != null) {
-      background(views, android.R.id.background, payload.light.ground, payload.dark.ground, night, CORNER_DP)
+      background(views, android.R.id.background, payload.light.ground, payload.dark.ground, night, cornerDp(context))
       background(views, R.id.prayer_widget_rule, payload.light.goldSoft, payload.dark.goldSoft, night, 0f)
     }
     if (payload == null || entry == null || day == null) {
@@ -142,7 +154,7 @@ internal object PrayerWidgetRenderer {
     val views = RemoteViews(context.packageName, R.layout.prayer_widget_quiet)
     val entry = payload?.entryAt(now)
     if (payload != null) {
-      background(views, android.R.id.background, payload.light.ground, payload.dark.ground, night, CORNER_DP)
+      background(views, android.R.id.background, payload.light.ground, payload.dark.ground, night, cornerDp(context))
     }
     if (payload == null || entry == null) {
       openApp(context, views, payload, night, listOf(R.id.prayer_widget_mark, R.id.prayer_widget_time))
